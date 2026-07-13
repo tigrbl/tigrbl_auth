@@ -285,8 +285,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/standards/oauth2/rfc6749.py
-  - tigrbl_auth/standards/oauth2/rfc6749_token.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/authorization_framework.py
   endpoint_surface:
     current:
     - /authorize
@@ -334,8 +333,7 @@ targets:
       - /authorize
       - /token
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 6750
   id: oauth2.bearer
   family: rfc
@@ -349,7 +347,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/standards/oauth2/rfc6750.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/bearer_token_usage.py
   endpoint_surface:
     current:
     - /token
@@ -397,8 +395,7 @@ targets:
       - /userinfo
       - /introspect
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 7636
   id: oauth2.pkce
   family: rfc
@@ -412,7 +409,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/standards/oauth2/rfc7636_pkce.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/proof_key_for_code_exchange.py
   endpoint_surface:
     current:
     - /authorize
@@ -459,8 +456,7 @@ targets:
       - /authorize
       - /token
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 8414
   id: oauth2.metadata
   family: rfc
@@ -474,8 +470,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/standards/oauth2/rfc8414.py
-  - tigrbl_auth/standards/oauth2/rfc8414_metadata.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/authorization_server_metadata.py
   endpoint_surface:
     current:
     - /.well-known/oauth-authorization-server
@@ -511,8 +506,7 @@ targets:
       openapi_paths_present:
       - /.well-known/oauth-authorization-server
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 8615
   id: http.well-known
   family: rfc
@@ -526,7 +520,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/standards/http/well_known.py
+  - pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/http_standards/well_known.py
   endpoint_surface:
     current:
     - /.well-known/openid-configuration
@@ -578,8 +572,7 @@ targets:
       - /.well-known/jwks.json
       - /.well-known/oauth-protected-resource
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 7515
   id: jose.jws
   family: rfc
@@ -593,7 +586,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/standards/jose/rfc7515.py
+  - pkgs/20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose
   endpoint_surface:
     current: []
     target: []
@@ -624,8 +617,7 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 7516
   id: jose.jwe
   family: rfc
@@ -639,9 +631,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/standards/jose/rfc7516.py
-  - tigrbl_auth/standards/oidc/id_token.py
-  - tigrbl_auth/standards/oidc/discovery_metadata.py
+  - pkgs/20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose
   endpoint_surface:
     current: []
     target: []
@@ -673,8 +663,7 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 7517
   id: jose.jwk
   family: rfc
@@ -688,7 +677,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/standards/jose/rfc7517.py
+  - pkgs/20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose
   endpoint_surface:
     current:
     - /.well-known/jwks.json
@@ -724,8 +713,7 @@ targets:
       openapi_paths_present:
       - /.well-known/jwks.json
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 7518
   id: jose.jwa
   family: rfc
@@ -739,7 +727,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/standards/jose/rfc7518.py
+  - pkgs/20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose
   endpoint_surface:
     current: []
     target: []
@@ -770,8 +758,7 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 7519
   id: jose.jwt
   family: rfc
@@ -785,7 +772,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/standards/jose/rfc7519.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-jwt/src/tigrbl_auth_protocol_jwt
   endpoint_surface:
     current: []
     target: []
@@ -816,8 +803,7 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 7009
   id: oauth2.revocation
   family: rfc
@@ -831,12 +817,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - tigrbl_auth/standards/oauth2/revocation.py
-  - tigrbl_auth/api/rest/routers/revoke.py
-  - tigrbl_auth/ops/revoke.py
-  - tigrbl_auth/services/persistence.py
-  - tigrbl_auth/tables/revoked_token.py
-  - tigrbl_auth/tables/token_record.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/revocation.py
   endpoint_surface:
     current:
     - /revoke
@@ -875,8 +856,7 @@ targets:
       openapi_paths_present:
       - /revoke
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 7591
   id: oauth2.dynamic-registration
   family: rfc
@@ -890,11 +870,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - tigrbl_auth/standards/oauth2/dynamic_client_registration.py
-  - tigrbl_auth/api/rest/routers/register.py
-  - tigrbl_auth/ops/register.py
-  - tigrbl_auth/tables/client_registration.py
-  - tigrbl_auth/services/persistence.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/dynamic_client_registration.py
   endpoint_surface:
     current:
     - /register
@@ -933,8 +909,7 @@ targets:
       openapi_paths_present:
       - /register
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 7592
   id: oauth2.registration-management
   family: rfc
@@ -948,13 +923,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - tigrbl_auth/standards/oauth2/client_registration_management.py
-  - tigrbl_auth/tables/client_registration.py
-  - tigrbl_auth/services/persistence.py
-  - tigrbl_auth/api/rest/routers/register.py
-  - tigrbl_auth/ops/register.py
-  - tigrbl_auth/api/rpc/methods/client_registration.py
-  - tigrbl_auth/api/rpc/schemas/client_registration.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/client_registration_management.py
   endpoint_surface:
     current:
     - /register/{client_id}
@@ -993,8 +962,7 @@ targets:
       openapi_paths_present:
       - /register/{client_id}
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 7662
   id: oauth2.introspection
   family: rfc
@@ -1008,10 +976,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - tigrbl_auth/standards/oauth2/introspection.py
-  - tigrbl_auth/services/persistence.py
-  - tigrbl_auth/tables/token_record.py
-  - tigrbl_auth/tables/revoked_token.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/introspection.py
   endpoint_surface:
     current:
     - /introspect
@@ -1050,8 +1015,7 @@ targets:
       openapi_paths_present:
       - /introspect
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 8252
   id: oauth2.native-apps
   family: rfc
@@ -1065,11 +1029,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - tigrbl_auth/standards/oauth2/native_apps.py
-  - tigrbl_auth/tables/client.py
-  - tigrbl_auth/ops/authorize.py
-  - tigrbl_auth/ops/register.py
-  - tigrbl_auth/ops/token.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/native_apps.py
   endpoint_surface:
     current:
     - /authorize
@@ -1122,8 +1082,7 @@ targets:
       - /register
       - /register/{client_id}
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 8628
   id: oauth2.device
   family: rfc
@@ -1137,12 +1096,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - tigrbl_auth/standards/oauth2/device_authorization.py
-  - tigrbl_auth/api/rest/routers/device_authorization.py
-  - tigrbl_auth/ops/device_authorization.py
-  - tigrbl_auth/tables/device_code.py
-  - tigrbl_auth/ops/token.py
-  - tigrbl_auth/services/persistence.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/device_authorization.py
   endpoint_surface:
     current:
     - /device_authorization
@@ -1185,8 +1139,7 @@ targets:
       openapi_paths_present:
       - /device_authorization
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 8693
   id: oauth2.token-exchange
   family: rfc
@@ -1200,12 +1153,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - tigrbl_auth/standards/oauth2/token_exchange.py
-  - tigrbl_auth/ops/token.py
-  - tigrbl_auth/services/token_service.py
-  - tigrbl_auth/services/persistence.py
-  - tigrbl_auth/api/rpc/methods/token.py
-  - tigrbl_auth/api/rpc/schemas/token.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/token_exchange.py
   endpoint_surface:
     current:
     - /token/exchange
@@ -1248,8 +1196,7 @@ targets:
       openapi_paths_present:
       - /token/exchange
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 8705
   id: oauth2.mtls
   family: rfc
@@ -1263,16 +1210,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - tigrbl_auth/standards/oauth2/mtls.py
-  - tigrbl_auth/standards/oauth2/rfc9700.py
-  - tigrbl_auth/ops/token.py
-  - tigrbl_auth/standards/oauth2/token_exchange.py
-  - tigrbl_auth/services/token_service.py
-  - tigrbl_auth/ops/register.py
-  - tigrbl_auth/api/rest/schemas.py
-  - tigrbl_auth/standards/oidc/discovery_metadata.py
-  - tigrbl_auth/security/auth.py
-  - tigrbl_auth/security/deps.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/mutual_tls_client_authentication.py
   endpoint_surface:
     current:
     - /token
@@ -1318,8 +1256,7 @@ targets:
       - /token
       - /token/exchange
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 8707
   id: oauth2.resource-indicators
   family: rfc
@@ -1333,13 +1270,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - tigrbl_auth/standards/oauth2/resource_indicators.py
-  - tigrbl_auth/ops/authorize.py
-  - tigrbl_auth/ops/token.py
-  - tigrbl_auth/ops/device_authorization.py
-  - tigrbl_auth/ops/par.py
-  - tigrbl_auth/standards/oauth2/token_exchange.py
-  - tigrbl_auth/services/token_service.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/resource_indicators.py
   endpoint_surface:
     current:
     - /authorize
@@ -1392,8 +1323,7 @@ targets:
       - /par
       - /token/exchange
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 9068
   id: oauth2.jwt-access-tokens
   family: rfc
@@ -1407,11 +1337,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - tigrbl_auth/standards/oauth2/jwt_access_tokens.py
-  - tigrbl_auth/services/token_service.py
-  - tigrbl_auth/ops/login.py
-  - tigrbl_auth/ops/token.py
-  - tigrbl_auth/standards/oauth2/token_exchange.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/jwt_access_tokens.py
   endpoint_surface:
     current:
     - /login
@@ -1461,8 +1387,7 @@ targets:
       - /token
       - /token/exchange
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 9101
   id: oauth2.jar
   family: rfc
@@ -1476,10 +1401,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - tigrbl_auth/standards/oauth2/jar.py
-  - tigrbl_auth/ops/authorize.py
-  - tigrbl_auth/ops/par.py
-  - tigrbl_auth/cli
+  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/jwt_secured_authorization_requests.py
   endpoint_surface:
     current:
     - /authorize
@@ -1525,8 +1447,7 @@ targets:
       - /authorize
       - /par
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 9126
   id: oauth2.par
   family: rfc
@@ -1540,11 +1461,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - tigrbl_auth/standards/oauth2/par.py
-  - tigrbl_auth/api/rest/routers/par.py
-  - tigrbl_auth/ops/par.py
-  - tigrbl_auth/ops/authorize.py
-  - tigrbl_auth/tables/pushed_authorization_request.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/pushed_authorization_requests.py
   endpoint_surface:
     current:
     - /par
@@ -1585,8 +1502,7 @@ targets:
       openapi_paths_present:
       - /par
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 9207
   id: oauth2.issuer-identification
   family: rfc
@@ -1600,11 +1516,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - tigrbl_auth/standards/oauth2/issuer_identification.py
-  - tigrbl_auth/config/deployment.py
-  - tigrbl_auth/ops/authorize.py
-  - tigrbl_auth/standards/oidc/discovery_metadata.py
-  - tigrbl_auth/cli
+  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/issuer_identification.py
   endpoint_surface:
     current:
     - /authorize
@@ -1649,8 +1561,7 @@ targets:
       - /authorize
       - /.well-known/openid-configuration
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 9396
   id: oauth2.rar
   family: rfc
@@ -1664,10 +1575,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - tigrbl_auth/standards/oauth2/rar.py
-  - tigrbl_auth/ops/authorize.py
-  - tigrbl_auth/ops/par.py
-  - tigrbl_auth/cli
+  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/rich_authorization_requests.py
   endpoint_surface:
     current:
     - /authorize
@@ -1713,8 +1621,7 @@ targets:
       - /authorize
       - /par
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 9449
   id: oauth2.dpop
   family: rfc
@@ -1728,12 +1635,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - tigrbl_auth/standards/oauth2/dpop.py
-  - tigrbl_auth/standards/oauth2/rfc9700.py
-  - tigrbl_auth/ops/token.py
-  - tigrbl_auth/standards/oauth2/token_exchange.py
-  - tigrbl_auth/security/auth.py
-  - tigrbl_auth/security/deps.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/dpop.py
   endpoint_surface:
     current:
     - /token
@@ -1779,8 +1681,7 @@ targets:
       - /token
       - /token/exchange
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 6265
   id: http.cookies
   family: rfc
@@ -1794,12 +1695,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/standards/http/cookies.py
-  - tigrbl_auth/standards/oidc/session_mgmt.py
-  - tigrbl_auth/ops/login.py
-  - tigrbl_auth/ops/authorize.py
-  - tigrbl_auth/ops/logout.py
-  - tigrbl_auth/tables/auth_session.py
+  - pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/http_standards/cookies.py
   endpoint_surface:
     current:
     - /login
@@ -1847,8 +1743,7 @@ targets:
       - /authorize
       - /logout
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 7521
   id: oauth2.jwt-bearer-assertions
   family: rfc
@@ -1862,9 +1757,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - tigrbl_auth/standards/oauth2/assertion_framework.py
-  - tigrbl_auth/ops/token.py
-  - tigrbl_auth/cli
+  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/assertion_framework.py
   endpoint_surface:
     current:
     - /token
@@ -1900,8 +1793,7 @@ targets:
       openapi_paths_present:
       - /token
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 7523
   id: oauth2.jwt-client-auth
   family: rfc
@@ -1915,11 +1807,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - tigrbl_auth/standards/oauth2/jwt_client_auth.py
-  - tigrbl_auth/ops/token.py
-  - tigrbl_auth/ops/register.py
-  - tigrbl_auth/standards/oidc/discovery_metadata.py
-  - tigrbl_auth/cli
+  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/jwt_client_auth.py
   endpoint_surface:
     current:
     - /token
@@ -1963,8 +1851,7 @@ targets:
       - /register
       - /register/{client_id}
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 9728
   id: oauth2.protected-resource-metadata
   family: rfc
@@ -1978,7 +1865,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - tigrbl_auth/standards/oauth2/rfc9728.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/protected_resource_metadata.py
   endpoint_surface:
     current:
     - /.well-known/oauth-protected-resource
@@ -2020,8 +1907,7 @@ targets:
       openapi_paths_present:
       - /.well-known/oauth-protected-resource
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: RFC 9700
   id: oauth2.security-bcp
   family: rfc
@@ -2035,14 +1921,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - tigrbl_auth/standards/oauth2/rfc9700.py
-  - tigrbl_auth/ops/authorize.py
-  - tigrbl_auth/ops/token.py
-  - tigrbl_auth/standards/oidc/discovery.py
-  - tigrbl_auth/standards/oidc/discovery_metadata.py
-  - tigrbl_auth/cli
-  - tigrbl_auth/security/auth.py
-  - tigrbl_auth/security/deps.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/oauth_security_bcp.py
   endpoint_surface:
     current:
     - /authorize
@@ -2094,8 +1973,7 @@ targets:
       - /token
       - /.well-known/openid-configuration
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: OIDC Core 1.0
   id: oidc.core
   family: oidc
@@ -2109,8 +1987,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/standards/oidc/core.py
-  - tigrbl_auth/standards/oidc/id_token.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/core.py
   endpoint_surface:
     current: []
     target: []
@@ -2143,8 +2020,7 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: OIDC Discovery 1.0
   id: oidc.discovery
   family: oidc
@@ -2158,7 +2034,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/standards/oidc/discovery.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/discovery.py
   endpoint_surface:
     current:
     - /.well-known/openid-configuration
@@ -2200,8 +2076,7 @@ targets:
       openapi_paths_present:
       - /.well-known/openid-configuration
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: OIDC UserInfo
   id: oidc.userinfo
   family: oidc
@@ -2215,7 +2090,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - tigrbl_auth/standards/oidc/userinfo.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/userinfo.py
   endpoint_surface:
     current:
     - /userinfo
@@ -2252,8 +2127,7 @@ targets:
       openapi_paths_present:
       - /userinfo
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: OIDC Session Management
   id: oidc.session-management
   family: oidc
@@ -2267,14 +2141,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/standards/oidc/session_mgmt.py
-  - tigrbl_auth/standards/http/cookies.py
-  - tigrbl_auth/ops/login.py
-  - tigrbl_auth/ops/authorize.py
-  - tigrbl_auth/ops/logout.py
-  - tigrbl_auth/tables/auth_session.py
-  - tigrbl_auth/tables/auth_code.py
-  - tigrbl_auth/services/persistence.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/session_mgmt.py
   endpoint_surface:
     current:
     - /login
@@ -2324,8 +2191,7 @@ targets:
       - /authorize
       - /logout
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: OIDC RP-Initiated Logout
   id: oidc.rp-initiated-logout
   family: oidc
@@ -2339,12 +2205,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - tigrbl_auth/standards/oidc/rp_initiated_logout.py
-  - tigrbl_auth/api/rest/routers/logout.py
-  - tigrbl_auth/ops/logout.py
-  - tigrbl_auth/tables/logout_state.py
-  - tigrbl_auth/tables/client_registration.py
-  - tigrbl_auth/services/persistence.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/rp_initiated_logout.py
   endpoint_surface:
     current:
     - /logout
@@ -2384,8 +2245,7 @@ targets:
       openapi_paths_present:
       - /logout
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: OIDC Front-Channel Logout
   id: oidc.front-channel-logout
   family: oidc
@@ -2399,15 +2259,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - tigrbl_auth/standards/oidc/frontchannel_logout.py
-  - tigrbl_auth/standards/oidc/rp_initiated_logout.py
-  - tigrbl_auth/ops/logout.py
-  - tigrbl_auth/tables/logout_state.py
-  - tigrbl_auth/tables/client_registration.py
-  - tigrbl_auth/services/persistence.py
-  - tigrbl_auth/api/rest/shared.py
-  - tigrbl_auth/standards/oidc/discovery_metadata.py
-  - tigrbl_auth/cli
+  - pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/frontchannel_logout.py
   endpoint_surface:
     current:
     - /logout
@@ -2446,8 +2298,7 @@ targets:
       openapi_paths_present:
       - /logout
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: OIDC Back-Channel Logout
   id: oidc.back-channel-logout
   family: oidc
@@ -2461,15 +2312,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - tigrbl_auth/standards/oidc/backchannel_logout.py
-  - tigrbl_auth/standards/oidc/rp_initiated_logout.py
-  - tigrbl_auth/ops/logout.py
-  - tigrbl_auth/tables/logout_state.py
-  - tigrbl_auth/tables/client_registration.py
-  - tigrbl_auth/services/persistence.py
-  - tigrbl_auth/api/rest/shared.py
-  - tigrbl_auth/standards/oidc/discovery_metadata.py
-  - tigrbl_auth/cli
+  - pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/backchannel_logout.py
   endpoint_surface:
     current:
     - /logout
@@ -2508,8 +2351,7 @@ targets:
       openapi_paths_present:
       - /logout
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: OpenAPI 3.1 / 3.2 compatible public contract
   id: openapi.public-http
   family: contract
@@ -2523,8 +2365,7 @@ targets:
     status: generated-live-from-deployment-metadata
     profile: baseline
   owner_modules:
-  - tigrbl_auth/api/rest
-  - tigrbl_auth/api/surfaces.py
+  - pkgs/80-apis/tigrbl-auth-api-public/src/tigrbl_auth_api_public/openapi.py
   endpoint_surface:
     current: []
     target: []
@@ -2557,8 +2398,7 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: OpenRPC 1.4.x admin/control-plane contract
   id: openrpc.admin-plane
   family: contract
@@ -2572,13 +2412,7 @@ targets:
     status: implementation-backed-generated-from-rpc-registry
     profile: production
   owner_modules:
-  - tigrbl_auth/api/rpc/__init__.py
-  - tigrbl_auth/api/rpc/registry.py
-  - tigrbl_auth/api/rpc/methods
-  - tigrbl_auth/api/rpc/schemas
-  - tigrbl_auth/api/surfaces.py
-  - tigrbl_auth/cli
-  - tigrbl_auth/config/deployment.py
+  - pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/api
   endpoint_surface:
     current:
     - /rpc
@@ -2612,8 +2446,7 @@ targets:
       effective_claim: false
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: ASGI 3 application package
   id: runtime.asgi3-application
   family: runtime
@@ -2627,17 +2460,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/api/app.py
-  - tigrbl_auth/app.py
-  - tigrbl_auth/plugin.py
-  - tigrbl_auth/gateway.py
-  - tigrbl_auth/config/deployment.py
-  - tigrbl_auth/runtime/__init__.py
-  - tigrbl_auth/runtime/types.py
-  - tigrbl_auth/runtime/base.py
-  - tigrbl_auth/runtime/plan.py
-  - tigrbl_auth/runtime/registry.py
-  - tigrbl_auth/cli
+  - pkgs/80-apis/tigrbl-auth-api-public/src/tigrbl_auth_api_public/app.py
   endpoint_surface:
     current: []
     target: []
@@ -2674,8 +2497,7 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: 'Runner profile: Uvicorn'
   id: runtime.runner-uvicorn
   family: runtime
@@ -2689,13 +2511,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/api/app.py
-  - tigrbl_auth/gateway.py
-  - tigrbl_auth/cli
-  - tigrbl_auth/config/deployment.py
-  - tigrbl_auth/runtime/registry.py
-  - tigrbl_auth/runtime/plan.py
-  - tigrbl_auth/runtime/uvicorn.py
+  - pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/uvicorn.py
   endpoint_surface:
     current: []
     target: []
@@ -2732,8 +2548,7 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: 'Runner profile: Hypercorn'
   id: runtime.runner-hypercorn
   family: runtime
@@ -2747,13 +2562,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/api/app.py
-  - tigrbl_auth/gateway.py
-  - tigrbl_auth/cli
-  - tigrbl_auth/config/deployment.py
-  - tigrbl_auth/runtime/registry.py
-  - tigrbl_auth/runtime/plan.py
-  - tigrbl_auth/runtime/hypercorn.py
+  - pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/hypercorn.py
   endpoint_surface:
     current: []
     target: []
@@ -2790,8 +2599,7 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: 'Runner profile: Tigrcorn'
   id: runtime.runner-tigrcorn
   family: runtime
@@ -2805,13 +2613,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/api/app.py
-  - tigrbl_auth/gateway.py
-  - tigrbl_auth/cli
-  - tigrbl_auth/config/deployment.py
-  - tigrbl_auth/runtime/registry.py
-  - tigrbl_auth/runtime/plan.py
-  - tigrbl_auth/runtime/tigrcorn.py
+  - pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/tigrcorn.py
   endpoint_surface:
     current: []
     target: []
@@ -2848,8 +2650,7 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: CLI operator surface
   id: operator.cli-surface
   family: operator
@@ -2863,12 +2664,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/cli
-  - tigrbl_auth/services/operator_service.py
-  - tigrbl_auth/services/audit_service.py
-  - tigrbl_auth/services/client_service.py
-  - tigrbl_auth/services/identity_service.py
-  - tigrbl_auth/services/session_service.py
+  - pkgs/60-runtime/tigrbl-identity-cli/src/tigrbl_identity_cli/cli
   endpoint_surface:
     current: []
     target: []
@@ -2907,8 +2703,7 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: Bootstrap and migration lifecycle
   id: operator.bootstrap-migration
   family: operator
@@ -2922,8 +2717,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/cli
-  - tigrbl_auth/services/persistence.py
+  - pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/migrations
   endpoint_surface:
     current: []
     target: []
@@ -2957,8 +2751,7 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: Key lifecycle and JWKS publication
   id: operator.keys-jwks
   family: operator
@@ -2972,11 +2765,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/cli
-  - tigrbl_auth/api/rpc/methods/keys.py
-  - tigrbl_auth/standards/jose/rfc7517.py
-  - tigrbl_auth/services/key_management.py
-  - tigrbl_auth/services/operator_service.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/jwks_service.py
   endpoint_surface:
     current: []
     target: []
@@ -3011,8 +2800,7 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: Import/export portability
   id: operator.import-export
   family: operator
@@ -3026,9 +2814,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/cli
-  - tigrbl_auth/services/import_export_service.py
-  - tigrbl_auth/services/operator_service.py
+  - pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/portability.py
   endpoint_surface:
     current: []
     target: []
@@ -3061,8 +2847,7 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
+  discrepancies: []
 - label: Release bundle and signature verification
   id: operator.release-bundle-signing
   family: operator
@@ -3076,7 +2861,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/cli
+  - pkgs/60-runtime/tigrbl-auth-release-certification/src/tigrbl_auth_release_certification
   endpoint_surface:
     current: []
     target: []
@@ -3109,10 +2894,8 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies:
-  - owner-module-path-missing
-discrepancy_summary:
-  owner-module-path-missing: 48
+  discrepancies: []
+discrepancy_summary: {}
 truthful_status:
   fully_certifiable: false
   fully_rfc_compliant: false

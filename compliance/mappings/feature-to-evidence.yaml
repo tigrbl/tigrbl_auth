@@ -636,6 +636,7 @@ slice:rar:
 - compliance/evidence/tier3/rar/
 slice:token-exchange:
 - compliance/evidence/tier3/token-exchange/
+route:access-v1-evaluation: []
 route:account-authorized-apps:
 - compliance/evidence/tier3/oauth2-core/
 - compliance/evidence/tier3/oidc-core/
@@ -660,6 +661,7 @@ route:account-sessions:
 route:account-sessions-session-id:
 - compliance/evidence/tier3/cookies/
 - compliance/evidence/tier3/oidc-session-management/
+route:attestations-appraise: []
 route:authorize:
 - compliance/evidence/tier3/cookies/
 - compliance/evidence/tier3/issuer-identification/
@@ -671,9 +673,11 @@ route:authorize:
 - compliance/evidence/tier3/rar/
 - compliance/evidence/tier3/resource-indicators/
 - compliance/evidence/tier3/security-bcp/
+route:credential: []
 route:device-authorization:
 - compliance/evidence/tier3/device-flow/
 - compliance/evidence/tier3/resource-indicators/
+route:gnap-tx: []
 route:introspect:
 - compliance/evidence/tier3/bearer/
 - compliance/evidence/tier3/introspection/
@@ -694,6 +698,7 @@ route:par:
 - compliance/evidence/tier3/rar/
 - compliance/evidence/tier3/resource-indicators/
 - compliance/evidence/tier3/security-bcp/
+route:presentation-verify: []
 route:realms-realm-slug-well-known-jwks-json:
 - compliance/evidence/tier3/jwks/
 - compliance/evidence/tier3/well-known/
@@ -711,6 +716,9 @@ route:register-client-id:
 - compliance/evidence/tier3/oidc-rp-initiated-logout/
 route:revoke:
 - compliance/evidence/tier3/revocation/
+route:security-events-receive:
+- compliance/evidence/tier3/jwt/
+route:standards: []
 route:tenants-tenant-slug-well-known-jwks-json:
 - compliance/evidence/tier3/jwks/
 - compliance/evidence/tier3/well-known/

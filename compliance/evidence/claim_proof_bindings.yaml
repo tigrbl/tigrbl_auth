@@ -7279,6 +7279,15 @@ bindings:
   - docs/compliance/CERTIFICATION_BOUNDARY.md
   - docs/compliance/TARGET_REALITY_MATRIX.md
   security_sensitive: false
+- claim_id: route:access-v1-evaluation
+  feature_id: route:access-v1-evaluation
+  targets:
+  - AuthZEN Authorization API 1.0
+  profile: null
+  positive_tests: []
+  negative_tests: []
+  evidence_refs: []
+  security_sensitive: false
 - claim_id: route:account-authorized-apps
   feature_id: route:account-authorized-apps
   targets:
@@ -7468,6 +7477,16 @@ bindings:
   - compliance/evidence/tier3/cookies/
   - compliance/evidence/tier3/oidc-session-management/
   security_sensitive: false
+- claim_id: route:attestations-appraise
+  feature_id: route:attestations-appraise
+  targets:
+  - RFC 9711
+  - RATS
+  profile: null
+  positive_tests: []
+  negative_tests: []
+  evidence_refs: []
+  security_sensitive: false
 - claim_id: route:authorize
   feature_id: route:authorize
   targets:
@@ -7548,6 +7567,15 @@ bindings:
   - compliance/evidence/tier3/resource-indicators/
   - compliance/evidence/tier3/security-bcp/
   security_sensitive: true
+- claim_id: route:credential
+  feature_id: route:credential
+  targets:
+  - OID4VCI 1.0
+  profile: null
+  positive_tests: []
+  negative_tests: []
+  evidence_refs: []
+  security_sensitive: false
 - claim_id: route:device-authorization
   feature_id: route:device-authorization
   targets:
@@ -7570,6 +7598,15 @@ bindings:
   evidence_refs:
   - compliance/evidence/tier3/device-flow/
   - compliance/evidence/tier3/resource-indicators/
+  security_sensitive: false
+- claim_id: route:gnap-tx
+  feature_id: route:gnap-tx
+  targets:
+  - RFC 9635
+  profile: null
+  positive_tests: []
+  negative_tests: []
+  evidence_refs: []
   security_sensitive: false
 - claim_id: route:introspect
   feature_id: route:introspect
@@ -7714,6 +7751,15 @@ bindings:
   - compliance/evidence/tier3/resource-indicators/
   - compliance/evidence/tier3/security-bcp/
   security_sensitive: true
+- claim_id: route:presentation-verify
+  feature_id: route:presentation-verify
+  targets:
+  - OID4VP 1.0
+  profile: null
+  positive_tests: []
+  negative_tests: []
+  evidence_refs: []
+  security_sensitive: false
 - claim_id: route:realms-realm-slug-well-known-jwks-json
   feature_id: route:realms-realm-slug-well-known-jwks-json
   targets:
@@ -7845,6 +7891,32 @@ bindings:
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/revocation/
+  security_sensitive: false
+- claim_id: route:security-events-receive
+  feature_id: route:security-events-receive
+  targets:
+  - RFC 8417
+  profile: null
+  positive_tests:
+  - pkgs/10-concrete/tigrbl-set-concrete/tests/test_rfc8417.py
+  negative_tests:
+  - tests/negative/test_certification_attack_paths.py
+  - tests/negative/test_hardening_runtime_enforcement.py
+  - tests/conformance/hardening/test_rfc9700_security_bcp.py
+  - tests/unit/test_fapi_runtime_profile.py
+  - tests/unit/test_hardening_cluster_c.py
+  - tests/unit/test_profile_discovery_runtime.py
+  - tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
+  evidence_refs:
+  - compliance/evidence/tier3/jwt/
+  security_sensitive: true
+- claim_id: route:standards
+  feature_id: route:standards
+  targets: []
+  profile: null
+  positive_tests: []
+  negative_tests: []
+  evidence_refs: []
   security_sensitive: false
 - claim_id: route:tenants-tenant-slug-well-known-jwks-json
   feature_id: route:tenants-tenant-slug-well-known-jwks-json

@@ -79,13 +79,6 @@ _OAUTH_RFC_TARGETS = {
 }
 
 for _name in _OAUTH_RFC_MODULES:
-    if _name == "rfc8414":
-        _alias_module(
-            f"{_LEGACY_NAME}.{_name}",
-            "tigrbl_identity_storage_runtime.metadata.authorization_server_metadata",
-            "tigrbl-identity-storage-runtime",
-        )
-        continue
     _alias_module(
         f"{_LEGACY_NAME}.{_name}",
         f"tigrbl_auth_protocol_oauth.standards.{_OAUTH_RFC_TARGETS.get(_name, _name)}",

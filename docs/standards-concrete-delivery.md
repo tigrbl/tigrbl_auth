@@ -195,6 +195,25 @@ Canonical placement rule:
 - [x] The EAT verifier returns evidence-integrity verification separately from
   the reference-backed attestation appraisal decision.
 
+### Verification snapshot (2026-07-12)
+
+- [x] EAT cross-aspect contracts, bases, concrete specialization, JWT/CWT
+  envelope symmetry, provider verification, and appraisal separation are
+  implemented and covered by unit tests.
+- [x] The complete unit suite passes: 1,065 tests.
+- [x] Layer-boundary enforcement passes for the layered package tree.
+- [x] SQLite and PostgreSQL migration upgrade/downgrade/reapply portability is
+  preserved in validated-run evidence.
+- [x] Artifact-to-route, route-to-contract, and runtime-plan-to-discovery truth
+  checks pass.
+- [ ] RP state/token memory stores and DPoP replay/nonce memory stores remain
+  embedded in layer 50 and must be replaced by injected ports/providers.
+- [ ] Layer-50 imports of deployment runtime settings remain and must be moved
+  to layer-60 composition/configuration.
+- [ ] Full layer-40 capability metadata and layer-50 normative-requirement
+  coverage reporting remain incomplete; the generated state report records
+  these as open rather than claiming completion.
+
 ## Assurance vocabulary
 
 - Authentication assurance uses ACR/AMR and evidence about the authentication

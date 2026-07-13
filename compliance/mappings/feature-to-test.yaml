@@ -2525,6 +2525,7 @@ slice:token-exchange:
 - tests/interop/test_tier4_promotion_fail_closed.py
 - tests/unit/test_hardening_cluster_a.py
 - tests/unit/test_public_route_contracts.py
+route:access-v1-evaluation: []
 route:account-authorized-apps:
 - tests/conformance/baseline/test_oidc_id_token.py
 - tests/conformance/baseline/test_openid_userinfo_endpoint.py
@@ -2614,6 +2615,7 @@ route:account-sessions-session-id:
 - tests/integration/test_persistence_lifecycle_durability.py
 - tests/negative/test_cookie_and_logout_abuse_cases.py
 - tests/unit/test_session_logout_cluster_b.py
+route:attestations-appraise: []
 route:authorize:
 - tests/conformance/baseline/test_oidc_id_token.py
 - tests/conformance/baseline/test_openid_userinfo_endpoint.py
@@ -2648,6 +2650,7 @@ route:authorize:
 - tests/unit/test_rfc9207_issuer_identification.py
 - tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
 - tests/unit/test_session_logout_cluster_b.py
+route:credential: []
 route:device-authorization:
 - tests/conformance/hardening/test_rfc8628_device_authorization.py
 - tests/conformance/hardening/test_rfc8707_resource_indicators.py
@@ -2660,6 +2663,7 @@ route:device-authorization:
 - tests/unit/test_advanced_surface_contracts.py
 - tests/unit/test_hardening_cluster_a.py
 - tests/unit/test_public_route_contracts.py
+route:gnap-tx: []
 route:introspect:
 - tests/conformance/baseline/test_rfc6750_bearer_token.py
 - tests/conformance/production/test_rfc7662_introspection.py
@@ -2717,6 +2721,7 @@ route:par:
 - tests/unit/test_profile_discovery_runtime.py
 - tests/unit/test_public_route_contracts.py
 - tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
+route:presentation-verify: []
 route:realms-realm-slug-well-known-jwks-json:
 - tests/conformance/baseline/test_rfc7517_jwk.py
 - tests/conformance/production/test_rfc8615_well_known_uris.py
@@ -2775,6 +2780,9 @@ route:revoke:
 - tests/integration/test_migration_upgrade_downgrade_safety.py
 - tests/integration/test_persistence_lifecycle_durability.py
 - tests/unit/test_public_route_contracts.py
+route:security-events-receive:
+- pkgs/10-concrete/tigrbl-set-concrete/tests/test_rfc8417.py
+route:standards: []
 route:tenants-tenant-slug-well-known-jwks-json:
 - tests/conformance/baseline/test_rfc7517_jwk.py
 - tests/conformance/production/test_rfc8615_well_known_uris.py

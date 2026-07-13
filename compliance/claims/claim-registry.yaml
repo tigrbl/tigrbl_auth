@@ -7,8 +7,8 @@ generated_from:
 - tigrbl_identity_runtime.deployment
 - compliance/claims/fapi-atomic-claims.yaml
 summary:
-  claim_count: 370
-  atomic_feature_claim_count: 364
+  claim_count: 377
+  atomic_feature_claim_count: 371
   fapi_atomic_claim_count: 6
 claims:
 - id: cli-flag:access_log
@@ -3220,6 +3220,16 @@ claims:
   - WebAuthn and passkey-bound OAuth patterns
   required_flags: []
   source: compliance/targets/profiles.yaml
+- id: route:access-v1-evaluation
+  feature_id: route:access-v1-evaluation
+  kind: public-route
+  title: /access/v1/evaluation
+  description: AuthZEN access evaluation endpoint
+  scope: core
+  targets:
+  - AuthZEN Authorization API 1.0
+  required_flags: []
+  source: tigrbl_identity_server.advanced_protocols:include_advanced_protocols
 - id: route:account-authorized-apps
   feature_id: route:account-authorized-apps
   kind: public-route
@@ -3308,6 +3318,17 @@ claims:
   - OIDC Session Management
   required_flags: []
   source: tigrbl_identity_storage_runtime.account_surface:api
+- id: route:attestations-appraise
+  feature_id: route:attestations-appraise
+  kind: public-route
+  title: /attestations/appraise
+  description: Attestation evidence appraisal endpoint
+  scope: core
+  targets:
+  - RFC 9711
+  - RATS
+  required_flags: []
+  source: tigrbl_identity_server.advanced_protocols:include_advanced_protocols
 - id: route:authorize
   feature_id: route:authorize
   kind: public-route
@@ -3329,6 +3350,16 @@ claims:
   - enable_rfc6749
   - enable_oidc_core
   source: tigrbl_identity_storage_runtime.authorization:router
+- id: route:credential
+  feature_id: route:credential
+  kind: public-route
+  title: /credential
+  description: OID4VCI credential endpoint
+  scope: core
+  targets:
+  - OID4VCI 1.0
+  required_flags: []
+  source: tigrbl_identity_server.advanced_protocols:include_advanced_protocols
 - id: route:device-authorization
   feature_id: route:device-authorization
   kind: public-route
@@ -3341,6 +3372,16 @@ claims:
   required_flags:
   - enable_rfc8628
   source: tigrbl_identity_storage_runtime.device_authorization:include_device_authorization_endpoint
+- id: route:gnap-tx
+  feature_id: route:gnap-tx
+  kind: public-route
+  title: /gnap/tx
+  description: GNAP grant transaction endpoint
+  scope: core
+  targets:
+  - RFC 9635
+  required_flags: []
+  source: tigrbl_identity_server.advanced_protocols:include_advanced_protocols
 - id: route:introspect
   feature_id: route:introspect
   kind: public-route
@@ -3397,6 +3438,16 @@ claims:
   required_flags:
   - enable_rfc9126
   source: tigrbl_identity_storage_runtime.par:include_par_endpoint
+- id: route:presentation-verify
+  feature_id: route:presentation-verify
+  kind: public-route
+  title: /presentation/verify
+  description: OID4VP presentation verification endpoint
+  scope: core
+  targets:
+  - OID4VP 1.0
+  required_flags: []
+  source: tigrbl_identity_server.advanced_protocols:include_advanced_protocols
 - id: route:realms-realm-slug-well-known-jwks-json
   feature_id: route:realms-realm-slug-well-known-jwks-json
   kind: public-route
@@ -3461,6 +3512,25 @@ claims:
   required_flags:
   - enable_rfc7009
   source: tigrbl_identity_storage_runtime.revocation:include_revocation_endpoint
+- id: route:security-events-receive
+  feature_id: route:security-events-receive
+  kind: public-route
+  title: /security-events/receive
+  description: Security Event Token receiver endpoint
+  scope: core
+  targets:
+  - RFC 8417
+  required_flags: []
+  source: tigrbl_identity_server.advanced_protocols:include_advanced_protocols
+- id: route:standards
+  feature_id: route:standards
+  kind: public-route
+  title: /standards
+  description: Installed identity standards and exact revisions
+  scope: core
+  targets: []
+  required_flags: []
+  source: tigrbl_identity_server.standards_manifest:include_standards_manifest
 - id: route:tenants-tenant-slug-well-known-jwks-json
   feature_id: route:tenants-tenant-slug-well-known-jwks-json
   kind: public-route

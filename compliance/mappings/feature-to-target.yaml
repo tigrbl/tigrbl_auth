@@ -633,6 +633,8 @@ slice:rar:
 - RFC 9396
 slice:token-exchange:
 - RFC 8693
+route:access-v1-evaluation:
+- AuthZEN Authorization API 1.0
 route:account-authorized-apps:
 - OIDC Core 1.0
 - RFC 6749
@@ -657,6 +659,9 @@ route:account-sessions:
 route:account-sessions-session-id:
 - OIDC Session Management
 - RFC 6265
+route:attestations-appraise:
+- RATS
+- RFC 9711
 route:authorize:
 - OIDC Core 1.0
 - OIDC Session Management
@@ -668,9 +673,13 @@ route:authorize:
 - RFC 9207
 - RFC 9396
 - RFC 9700
+route:credential:
+- OID4VCI 1.0
 route:device-authorization:
 - RFC 8628
 - RFC 8707
+route:gnap-tx:
+- RFC 9635
 route:introspect:
 - RFC 6750
 - RFC 7662
@@ -691,6 +700,8 @@ route:par:
 - RFC 9126
 - RFC 9396
 - RFC 9700
+route:presentation-verify:
+- OID4VP 1.0
 route:realms-realm-slug-well-known-jwks-json:
 - RFC 7517
 - RFC 8615
@@ -708,6 +719,9 @@ route:register-client-id:
 - RFC 8252
 route:revoke:
 - RFC 7009
+route:security-events-receive:
+- RFC 8417
+route:standards: []
 route:tenants-tenant-slug-well-known-jwks-json:
 - RFC 7517
 - RFC 8615

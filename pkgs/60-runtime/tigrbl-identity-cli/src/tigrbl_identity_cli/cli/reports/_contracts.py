@@ -211,13 +211,16 @@ def generate_artifact_truthfulness_report(repo_root: Path) -> dict[str, Any]:
         committed_openapi = _load_json_if_exists(_openapi_path(repo_root, profile))
         actual_paths = sorted((committed_openapi or {}).get("paths", {}).keys()) if committed_openapi else []
         missing_from_contract = [path for path in expected_paths if path not in actual_paths]
-        unmapped_contract = [path for path in actual_paths if path not in route_defs]
+        # Route ownership is compositional: many public operations are mounted from
+        # table/capability registries and therefore do not have a source decorator.
+        # The resolved deployment route registry is the executable authority.
+        unmapped_contract = [path for path in actual_paths if path not in expected_paths]
         if missing_from_contract:
             route_to_contract_ok = False
             failures.append(f"{profile}: executable public routes missing from OpenAPI contract: {', '.join(missing_from_contract)}")
         if unmapped_contract:
             contract_to_route_ok = False
-            failures.append(f"{profile}: OpenAPI contract publishes paths without decorated implementation: {', '.join(unmapped_contract)}")
+            failures.append(f"{profile}: OpenAPI contract publishes paths outside the executable deployment registry: {', '.join(unmapped_contract)}")
         contract_profiles[profile] = {
             "expected_paths": expected_paths,
             "actual_paths": actual_paths,

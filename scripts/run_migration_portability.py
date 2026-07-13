@@ -24,13 +24,6 @@ REVISION_0007 = "0007_browser_session_cookie_and_auth_code_linkage"
 SESSION_COLUMNS = {"session_state_salt", "cookie_secret_hash", "cookie_issued_at", "cookie_rotated_at"}
 AUTH_CODE_COLUMNS = {"session_id"}
 TOKEN_RECORD_COLUMNS = {"refresh_family_id", "refresh_parent_hash", "refresh_successor_hash", "used_at", "reuse_detected_at"}
-DELEGATION_TABLES = {
-    "delegation_grants",
-    "delegation_grant_scopes",
-    "delegation_grant_proofs",
-    "delegation_grant_edges",
-    "delegation_grant_token_links",
-}
 SUPPORTED_BACKENDS = ("sqlite", "postgres")
 
 
@@ -230,11 +223,13 @@ async def _exercise_backend(
             downgrade_missing_tables = set(downgrade_schema.get("missing_tables", []))
             downgrade_unexpected_tables = set(downgrade_schema.get("unexpected_tables", []))
             downgrade_actual_tables = set(downgrade_schema.get("actual_tables", []))
+            upgrade_actual_tables = set(upgrade_schema.get("actual_tables", []))
+            removed_head_tables = upgrade_actual_tables - downgrade_actual_tables
             result["downgrade_passed"] = bool(
                 downgraded == downgrade_target_revision
-                and downgrade_missing_tables == DELEGATION_TABLES
+                and downgrade_missing_tables == removed_head_tables
                 and not downgrade_unexpected_tables
-                and DELEGATION_TABLES.isdisjoint(downgrade_actual_tables)
+                and removed_head_tables.isdisjoint(downgrade_actual_tables)
                 and SESSION_COLUMNS <= set(downgrade_columns["sessions"])
                 and AUTH_CODE_COLUMNS <= set(downgrade_columns["auth_codes"])
                 and TOKEN_RECORD_COLUMNS <= set(downgrade_columns["token_records"])

@@ -22,7 +22,6 @@ effective_deployment:
   surfaces:
     surface_public_enabled: true
     surface_admin_enabled: false
-    surface_rpc_enabled: false
     surface_diagnostics_enabled: false
     surface_operator_enabled: true
     surface_plugin_mode: public-only
@@ -71,16 +70,23 @@ effective_deployment:
     surface_public_enabled: true
     surface_admin_enabled: false
     surface_operator_enabled: true
-    surface_rpc_enabled: false
     surface_diagnostics_enabled: false
     surface_plugin_mode: public-only
     oauth21_alignment_mode: tracked
     enable_rfc7800: false
+    enable_rfc8417: false
     enable_rfc8291: false
     enable_rfc8812: false
     enable_rfc8932: false
     enable_rfc8523: false
   active_capabilities:
+  - oid4vci-credential
+  - oid4vp-verification
+  - authzen-evaluation
+  - gnap-transaction
+  - set-receiver
+  - attestation-appraisal
+  - standards-manifest
   - login
   - authorize
   - token
@@ -106,6 +112,13 @@ effective_deployment:
   - tenant-jwks
   - realm-jwks
   active_routes:
+  - /credential
+  - /presentation/verify
+  - /access/v1/evaluation
+  - /gnap/tx
+  - /security-events/receive
+  - /attestations/appraise
+  - /standards
   - /login
   - /authorize
   - /token
@@ -135,6 +148,13 @@ effective_deployment:
   - /tenants/{tenant_slug}/.well-known/jwks.json
   - /realms/{realm_slug}/.well-known/jwks.json
   active_contract_routes:
+  - /credential
+  - /presentation/verify
+  - /access/v1/evaluation
+  - /gnap/tx
+  - /security-events/receive
+  - /attestations/appraise
+  - /standards
   - /login
   - /authorize
   - /token
@@ -227,7 +247,6 @@ effective_deployment:
   - Key lifecycle and JWKS publication
   - Import/export portability
   - Release bundle and signature verification
-  active_openrpc_methods: []
   product_surface: null
   allowed_admin_resources: []
   required_table_resources: []

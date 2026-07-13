@@ -2,10 +2,10 @@
 
 - package: `tigrbl_auth`
 - SSOT validation passed: `True`
-- registry counts: `{'features': 575, 'profiles': 6, 'tests': 273, 'claims': 494, 'evidence': 105, 'issues': 26, 'risks': 1}`
-- current partial or absent features: `16`
+- registry counts: `{'features': 1160, 'profiles': 6, 'tests': 752, 'claims': 1766, 'evidence': 552, 'issues': 35, 'risks': 1}`
+- current partial or absent features: `336`
 - draft profiles: `0`
-- open issues: `19`
+- open issues: `25`
 - active risks: `1`
 - dirty worktree: `True`
 
@@ -27,6 +27,326 @@
 - `feat:tracked-spiffe-spire-target`: absent - Tracked SPIFFE/SPIRE target
 - `feat:trust-domain-authority-object`: absent - Trust-domain authority object
 - `feat:trust-domain-scoped-jwks-authority`: absent - Trust-domain-scoped JWKS authority
+- `feat:identity-package-suite-boundary`: absent - Identity package suite boundary
+- `feat:identity-import-namespace`: absent - Identity import namespace
+- `feat:identity-package-dag-guards`: absent - Identity package DAG guards
+- `feat:identity-core-primitives`: absent - Identity core primitives package boundary
+- `feat:identity-contract-models`: absent - Identity public contract models package boundary
+- `feat:identity-principal-taxonomy`: absent - Principals capability package boundary
+- `feat:identity-credential-taxonomy`: absent - Authn credentials capability package boundary
+- `feat:identity-policy-boundary`: absent - Authz policy capability package boundary
+- `feat:identity-jose-boundary`: absent - Identity JOSE package boundary
+- `feat:identity-oauth-boundary`: absent - Identity OAuth package boundary
+- `feat:identity-oidc-boundary`: absent - Identity OIDC package boundary
+- `feat:identity-admin-boundary`: absent - Identity Administrator capability package boundary
+- `feat:identity-storage-boundary`: absent - Identity storage package boundary
+- `feat:identity-server-composition-boundary`: absent - Identity server composition package boundary
+- `feat:identity-runtime-execution-boundary`: absent - Identity runtime execution package boundary
+- `feat:identity-operator-boundary`: absent - Identity operator package boundary
+- `feat:identity-testkit-boundary`: absent - Identity testkit package boundary
+- `feat:tigrbl-auth-facade-boundary`: absent - tigrbl-auth facade package boundary
+- `feat:identity-resource-server-boundary`: absent - Identity resource server consumer package boundary
+- `feat:identity-rp-boundary`: absent - Identity relying-party consumer package boundary
+- `feat:identity-model-account`: absent - Identity model Account
+- `feat:identity-model-admin-authority`: absent - Identity model AdminAuthority
+- `feat:identity-model-api-key-credential`: absent - Identity model ApiKeyCredential
+- `feat:identity-model-app`: absent - Identity model App
+- `feat:identity-model-app-client-link`: absent - Identity model AppClientLink
+- `feat:identity-model-app-credential-policy`: absent - Identity model AppCredentialPolicy
+- `feat:identity-model-app-owner`: absent - Identity model AppOwner
+- `feat:identity-model-app-owner-authority`: absent - Identity model AppOwnerAuthority
+- `feat:identity-model-app-principal`: absent - Identity model AppPrincipal
+- `feat:identity-model-app-registration`: absent - Identity model AppRegistration
+- `feat:identity-model-app-resource-server-link`: absent - Identity model AppResourceServerLink
+- `feat:identity-model-app-service-link`: absent - Identity model AppServiceLink
+- `feat:identity-model-audience`: absent - Identity model Audience
+- `feat:identity-model-authority-role-entitlement`: absent - Identity model AuthorityRoleEntitlement
+- `feat:identity-model-client-posture`: absent - Identity model ClientPosture
+- `feat:identity-model-client-principal`: absent - Identity model ClientPrincipal
+- `feat:identity-model-client-secret-credential`: absent - Identity model ClientSecretCredential
+- `feat:identity-model-consent-policy`: absent - Identity model ConsentPolicy
+- `feat:identity-model-credential`: absent - Identity model Credential
+- `feat:identity-model-credential-binding`: absent - Identity model CredentialBinding
+- `feat:identity-model-credential-posture`: absent - Identity model CredentialPosture
+- `feat:identity-model-credential-revocation`: absent - Identity model CredentialRevocation
+- `feat:identity-model-credential-rotation`: absent - Identity model CredentialRotation
+- `feat:identity-model-credential-status`: absent - Identity model CredentialStatus
+- `feat:identity-model-credential-verification-result`: absent - Identity model CredentialVerificationResult
+- `feat:identity-model-delegation`: absent - Identity model Delegation
+- `feat:identity-model-deployment`: absent - Identity model Deployment
+- `feat:identity-model-deployment-superuser-authority`: absent - Identity model DeploymentSuperuserAuthority
+- `feat:identity-model-developer-authority`: absent - Identity model DeveloperAuthority
+- `feat:identity-model-device-code-credential`: absent - Identity model DeviceCodeCredential
+- `feat:identity-model-device-principal`: absent - Identity model DevicePrincipal
+- `feat:identity-model-federated-subject-principal`: absent - Identity model FederatedSubjectPrincipal
+- `feat:identity-model-group`: absent - Identity model Group
+- `feat:identity-model-invitation`: absent - Identity model Invitation
+- `feat:identity-model-jwt-assertion-credential`: absent - Identity model JwtAssertionCredential
+- `feat:identity-model-machine-principal`: absent - Identity model MachinePrincipal
+- `feat:identity-model-member-authority`: absent - Identity model MemberAuthority
+- `feat:identity-model-membership`: absent - Identity model Membership
+- `feat:identity-model-membership-audit-event`: absent - Identity model MembershipAuditEvent
+- `feat:identity-model-non-human-authorization-request`: absent - Identity model NonHumanAuthorizationRequest
+- `feat:identity-model-oauth-oidc-client`: absent - Identity model OAuthOidcClient
+- `feat:identity-model-owner-authority`: absent - Identity model OwnerAuthority
+- `feat:identity-model-ownership`: absent - Identity model Ownership
+- `feat:identity-model-passkey-credential`: absent - Identity model PasskeyCredential
+- `feat:identity-model-password-credential`: absent - Identity model PasswordCredential
+- `feat:identity-model-permission`: absent - Identity model Permission
+- `feat:identity-model-principal`: absent - Identity model Principal
+- `feat:identity-model-principal-alias`: absent - Identity model PrincipalAlias
+- `feat:identity-model-protected-resource-metadata`: absent - Identity model ProtectedResourceMetadata
+- `feat:identity-model-recovery-code-credential`: absent - Identity model RecoveryCodeCredential
+- `feat:identity-model-redirect-uri-policy`: absent - Identity model RedirectUriPolicy
+- `feat:identity-model-refresh-token-credential`: absent - Identity model RefreshTokenCredential
+- `feat:identity-model-resource-identifier`: absent - Identity model ResourceIdentifier
+- `feat:identity-model-resource-indicator`: absent - Identity model ResourceIndicator
+- `feat:identity-model-resource-registration`: absent - Identity model ResourceRegistration
+- `feat:identity-model-resource-server`: absent - Identity model ResourceServer
+- `feat:identity-model-role`: absent - Identity model Role
+- `feat:identity-model-scope`: absent - Identity model Scope
+- `feat:identity-model-service`: absent - Identity model Service
+- `feat:identity-model-service-key-credential`: absent - Identity model ServiceKeyCredential
+- `feat:identity-model-service-principal`: absent - Identity model ServicePrincipal
+- `feat:identity-model-session-cookie-credential`: absent - Identity model SessionCookieCredential
+- `feat:identity-model-superuser-authority`: absent - Identity model SuperuserAuthority
+- `feat:identity-model-tenant`: absent - Identity model Tenant
+- `feat:identity-model-tenant-admin-audit-event`: absent - Identity model TenantAdminAuditEvent
+- `feat:identity-model-tenant-admin-authority`: absent - Identity model TenantAdminAuthority
+- `feat:identity-model-tenant-admin-operation`: absent - Identity model TenantAdminOperation
+- `feat:identity-model-tenant-admin-session`: absent - Identity model TenantAdminSession
+- `feat:identity-model-tenant-app-mutation`: absent - Identity model TenantAppMutation
+- `feat:identity-model-tenant-client-mutation`: absent - Identity model TenantClientMutation
+- `feat:identity-model-tenant-credential-mutation`: absent - Identity model TenantCredentialMutation
+- `feat:identity-model-tenant-membership`: absent - Identity model TenantMembership
+- `feat:identity-model-tenant-membership-mutation`: absent - Identity model TenantMembershipMutation
+- `feat:identity-model-tenant-owner-authority`: absent - Identity model TenantOwnerAuthority
+- `feat:identity-model-tenant-policy-assignment`: absent - Identity model TenantPolicyAssignment
+- `feat:identity-model-tenant-resource-server-mutation`: absent - Identity model TenantResourceServerMutation
+- `feat:identity-model-tenant-role`: absent - Identity model TenantRole
+- `feat:identity-model-tenant-service-mutation`: absent - Identity model TenantServiceMutation
+- `feat:identity-model-tenant-trust-domain-binding`: absent - Identity model TenantTrustDomainBinding
+- `feat:identity-model-tenant-user-invitation`: absent - Identity model TenantUserInvitation
+- `feat:identity-model-trust-domain`: absent - Identity model TrustDomain
+- `feat:identity-model-user-principal`: absent - Identity model UserPrincipal
+- `feat:identity-model-verifier-trust-policy`: absent - Identity model VerifierTrustPolicy
+- `feat:identity-model-web-authn-credential`: absent - Identity model WebAuthnCredential
+- `feat:identity-model-workload-attestation`: absent - Identity model WorkloadAttestation
+- `feat:identity-model-workload-principal`: absent - Identity model WorkloadPrincipal
+- `feat:identity-credential-issue-lifecycle`: absent - Credential issue lifecycle
+- `feat:identity-credential-bind-lifecycle`: absent - Credential bind lifecycle
+- `feat:identity-credential-verify-lifecycle`: absent - Credential verify lifecycle
+- `feat:identity-credential-rotate-lifecycle`: absent - Credential rotate lifecycle
+- `feat:identity-credential-revoke-lifecycle`: absent - Credential revoke lifecycle
+- `feat:identity-credential-expire-lifecycle`: absent - Credential expire lifecycle
+- `feat:identity-credential-last-used-tracking`: absent - Credential last-used tracking
+- `feat:identity-credential-redaction-semantics`: absent - Credential redaction semantics
+- `feat:identity-credential-compromise-invalidation`: absent - Credential compromise and invalidation
+- `feat:identity-credential-policy-fact-contract`: absent - Credential policy fact contract
+- `feat:identity-credential-principal-reference-boundary`: absent - Credential principal reference boundary
+- `feat:identity-credential-protocol-independence`: absent - Credential protocol independence
+- `feat:identity-credential-audit-event-lifecycle`: absent - Credential audit event lifecycle
+- `feat:identity-policy-model-policy`: absent - Policy model
+- `feat:identity-policy-model-policy-request`: absent - PolicyRequest model
+- `feat:identity-policy-model-policy-context`: absent - PolicyContext model
+- `feat:identity-policy-model-policy-decision`: absent - PolicyDecision model
+- `feat:identity-policy-model-rbac-policy`: absent - RbacPolicy model
+- `feat:identity-policy-model-abac-policy`: absent - AbacPolicy model
+- `feat:identity-policy-model-scope-policy`: absent - ScopePolicy model
+- `feat:identity-policy-model-tenant-isolation-policy`: absent - TenantIsolationPolicy model
+- `feat:identity-policy-model-delegated-admin-policy`: absent - DelegatedAdminPolicy model
+- `feat:identity-policy-model-client-exposure-policy`: absent - ClientExposurePolicy model
+- `feat:identity-policy-model-credential-use-policy`: absent - CredentialUsePolicy model
+- `feat:identity-policy-model-authorization-trace`: absent - AuthorizationTrace model
+- `feat:identity-policy-model-policy-version`: absent - PolicyVersion model
+- `feat:identity-policy-model-policy-registry`: absent - PolicyRegistry model
+- `feat:identity-policy-model-audit-policy`: absent - AuditPolicy model
+- `feat:identity-policy-decision-tenant-isolation`: absent - Tenant isolation decisioning
+- `feat:identity-policy-decision-rbac`: absent - RBAC decisioning
+- `feat:identity-policy-decision-abac`: absent - ABAC decisioning
+- `feat:identity-policy-decision-scope-authorization`: absent - Scope authorization decisioning
+- `feat:identity-policy-decision-delegation-constraints`: absent - Delegation constraint decisioning
+- `feat:identity-policy-decision-admin-authorization`: absent - Admin authorization decisioning
+- `feat:identity-policy-decision-client-exposure`: absent - Client exposure decisioning
+- `feat:identity-policy-decision-credential-use`: absent - Credential-use decisioning
+- `feat:identity-policy-decision-audit-provenance`: absent - Audit and provenance decision trace
+- `feat:identity-policy-boundary-no-credential-verification`: absent - Policy excludes credential verification
+- `feat:identity-policy-boundary-no-token-signing`: absent - Policy excludes token signing
+- `feat:identity-policy-boundary-no-oauth-grant-parsing`: absent - Policy excludes OAuth grant parsing
+- `feat:identity-policy-boundary-no-runtime-storage-server`: absent - Policy excludes runtime storage and server wiring
+- `feat:identity-consumer-rs-model-resource-metadata`: absent - Resource-server ResourceMetadata model
+- `feat:identity-consumer-rs-model-scope-requirement`: absent - Resource-server ScopeRequirement model
+- `feat:identity-consumer-rs-model-permission-requirement`: absent - Resource-server PermissionRequirement model
+- `feat:identity-consumer-rs-model-token-validator`: absent - Resource-server TokenValidator model
+- `feat:identity-consumer-rs-model-access-token-claims`: absent - Resource-server AccessTokenClaims model
+- `feat:identity-consumer-rs-model-jwks-cache`: absent - Resource-server JwksCache model
+- `feat:identity-consumer-rs-model-introspection-client`: absent - Resource-server IntrospectionClient model
+- `feat:identity-consumer-rs-model-authorization-request`: absent - Resource-server ResourceAuthorizationRequest model
+- `feat:identity-consumer-rs-model-authorization-result`: absent - Resource-server ResourceAuthorizationResult model
+- `feat:identity-consumer-rs-token-validation`: absent - Resource-server token validation
+- `feat:identity-consumer-rs-jwks-cache-behavior`: absent - Resource-server JWKS cache behavior
+- `feat:identity-consumer-rs-introspection-fallback`: absent - Resource-server introspection fallback
+- `feat:identity-consumer-rs-audience-resource-checks`: absent - Resource-server audience and resource checks
+- `feat:identity-consumer-rs-scope-permission-checks`: absent - Resource-server scope and permission checks
+- `feat:identity-consumer-rs-tenant-trust-domain-rejection`: absent - Resource-server tenant trust-domain rejection
+- `feat:identity-consumer-rp-model-relying-party`: absent - RP RelyingParty model
+- `feat:identity-consumer-rp-model-login-request`: absent - RP LoginRequest model
+- `feat:identity-consumer-rp-model-authorization-url-builder`: absent - RP AuthorizationUrlBuilder model
+- `feat:identity-consumer-rp-model-callback-handler`: absent - RP CallbackHandler model
+- `feat:identity-consumer-rp-model-state-nonce-store`: absent - RP StateNonceStore model
+- `feat:identity-consumer-rp-model-token-exchange-client`: absent - RP TokenExchangeClient model
+- `feat:identity-consumer-rp-model-id-token-validator`: absent - RP IdTokenValidator model
+- `feat:identity-consumer-rp-model-user-info-client`: absent - RP UserInfoClient model
+- `feat:identity-consumer-rp-model-logout-client`: absent - RP LogoutClient model
+- `feat:identity-consumer-rp-model-rp-session`: absent - RP RpSession model
+- `feat:identity-consumer-rp-model-rp-configuration`: absent - RP RpConfiguration model
+- `feat:identity-consumer-rp-model-discovery-client`: absent - RP DiscoveryClient model
+- `feat:identity-consumer-rp-callback-validation`: absent - RP callback validation
+- `feat:identity-consumer-rp-token-exchange-behavior`: absent - RP token exchange behavior
+- `feat:identity-consumer-rp-id-token-validation`: absent - RP ID token validation
+- `feat:identity-consumer-rp-userinfo-client-behavior`: absent - RP UserInfo client behavior
+- `feat:identity-consumer-rp-logout-client-behavior`: absent - RP logout client behavior
+- `feat:identity-consumer-consumer-flow-app-client-setup`: absent - Consumer flow app and client setup
+- `feat:identity-consumer-consumer-flow-login-initiation`: absent - Consumer flow login initiation
+- `feat:identity-consumer-consumer-flow-callback-handling`: absent - Consumer flow callback handling
+- `feat:identity-consumer-consumer-flow-userinfo-access`: absent - Consumer flow UserInfo access
+- `feat:identity-consumer-consumer-flow-protected-api-call`: absent - Consumer flow protected API call
+- `feat:identity-consumer-consumer-flow-protected-api-validation`: absent - Consumer flow protected API validation
+- `feat:identity-consumer-consumer-contract-provider-metadata`: absent - Consumer contract provider metadata
+- `feat:identity-consumer-consumer-contract-client-metadata`: absent - Consumer contract client metadata
+- `feat:identity-consumer-consumer-contract-resource-metadata`: absent - Consumer contract resource metadata
+- `feat:identity-consumer-consumer-testkit-fake-idp`: absent - Consumer testkit fake IdP
+- `feat:identity-consumer-consumer-testkit-fake-oauth-client`: absent - Consumer testkit fake OAuth client
+- `feat:identity-consumer-consumer-testkit-fake-resource-server`: absent - Consumer testkit fake resource server
+- `feat:identity-consumer-consumer-testkit-token-fixtures`: absent - Consumer testkit token fixtures
+- `feat:identity-consumer-consumer-testkit-e2e-harness`: absent - Consumer testkit end-to-end harness
+- `feat:identity-consumer-dag-resource-server-allowed-imports`: absent - Consumer DAG resource-server allowed imports
+- `feat:identity-consumer-dag-rp-allowed-imports`: absent - Consumer DAG RP allowed imports
+- `feat:identity-consumer-dag-provider-no-consumer-imports`: absent - Consumer DAG provider import isolation
+- `feat:identity-platform-flow-deployment-bootstrap`: absent - Platform deployment bootstrap flow
+- `feat:identity-platform-flow-tenant-creation`: absent - Platform tenant creation flow
+- `feat:identity-platform-flow-tenant-admin-establishment`: absent - Platform tenant admin establishment flow
+- `feat:identity-platform-flow-tenant-admin-session-start`: absent - Tenant admin session start flow
+- `feat:identity-platform-flow-tenant-admin-operation-authorization`: absent - Tenant admin operation authorization flow
+- `feat:identity-platform-flow-tenant-user-invitation`: absent - Tenant user invitation flow
+- `feat:identity-platform-flow-tenant-membership-mutation`: absent - Tenant membership mutation flow
+- `feat:identity-platform-flow-tenant-app-creation`: absent - Tenant app creation flow
+- `feat:identity-platform-flow-tenant-client-creation`: absent - Tenant client creation flow
+- `feat:identity-platform-flow-tenant-service-creation`: absent - Tenant service creation flow
+- `feat:identity-platform-flow-tenant-credential-mutation`: absent - Tenant credential mutation flow
+- `feat:identity-platform-flow-tenant-resource-server-creation`: absent - Tenant resource-server creation flow
+- `feat:identity-platform-flow-tenant-policy-assignment`: absent - Tenant policy assignment flow
+- `feat:identity-platform-flow-tenant-admin-audit-recording`: absent - Tenant admin audit recording flow
+- `feat:identity-platform-flow-runtime-assembly`: absent - Runtime assembly flow
+- `feat:identity-platform-flow-runtime-profile-loading`: absent - Runtime profile loading flow
+- `feat:identity-platform-flow-runtime-feature-flag-resolution`: absent - Runtime feature flag resolution flow
+- `feat:identity-platform-flow-runtime-config-precedence`: absent - Runtime config precedence flow
+- `feat:identity-platform-flow-runtime-runner-selection`: absent - Runtime runner selection flow
+- `feat:identity-platform-flow-runtime-lifecycle-hooks`: absent - Runtime lifecycle hook flow
+- `feat:identity-platform-flow-provider-authentication-token-issuance`: absent - Provider authentication and token issuance flow
+- `feat:identity-platform-flow-consumer-callback-to-session`: absent - Consumer callback to session flow
+- `feat:identity-platform-flow-protected-api-verifier-handoff`: absent - Protected API verifier handoff flow
+- `feat:identity-platform-flow-provider-consumer-import-isolation`: absent - Platform provider consumer import-isolation flow
+- `feat:uix-platform-admin-boundary`: partial - Platform admin UIX boundary
+- `feat:uix-tenant-admin-boundary`: partial - Tenant admin UIX boundary
+- `feat:uix-developer-boundary`: partial - Developer UIX boundary
+- `feat:uix-service-admin-boundary`: partial - Service admin UIX boundary
+- `feat:platform-admin-api-contract`: absent - Platform admin API contract
+- `feat:platform-tenant-create-contract`: absent - Platform tenant create contract
+- `feat:platform-tenant-update-contract`: absent - Platform tenant update contract
+- `feat:platform-tenant-suspend-restore-contract`: absent - Platform tenant suspend and restore contract
+- `feat:platform-tenant-delete-guardrails`: absent - Platform tenant delete guardrails
+- `feat:platform-tenant-owner-assignment`: absent - Platform tenant owner assignment
+- `feat:platform-authority-grant-revoke`: absent - Platform authority grant and revoke
+- `feat:platform-operator-role-boundary`: absent - platform support role boundary
+- `feat:platform-admin-audit-events`: absent - Platform admin audit events
+- `feat:platform-admin-api-negative-surface-tests`: absent - Platform admin API negative surface tests
+- `feat:platform-admin-uix-tenant-lifecycle`: absent - Platform admin UIX tenant lifecycle
+- `feat:platform-admin-uix-authority-assignment`: absent - Platform admin UIX authority assignment
+- `feat:tenant-admin-api-contract`: partial - Tenant admin API contract
+- `feat:tenant-admin-api-negative-surface-tests`: partial - Tenant admin API negative surface tests
+- `feat:tenant-admin-resource-allowlist-contract`: partial - Tenant admin resource allowlist contract
+- `feat:tenant-admin-rpc-method-allowlist-contract`: partial - Tenant admin RPC method allowlist contract
+- `feat:tenant-admin-identity-management`: absent - Tenant admin identity management
+- `feat:tenant-admin-admin-delegation`: absent - Tenant admin delegation
+- `feat:tenant-admin-session-management`: absent - Tenant admin session management
+- `feat:tenant-admin-operation-authorization`: absent - Tenant admin operation authorization
+- `feat:tenant-admin-audit-events`: absent - Tenant admin audit events
+- `feat:tenant-admin-jwks-management`: partial - Tenant admin JWKS management
+- `feat:tenant-admin-local-policy-config`: absent - Tenant admin local policy configuration
+- `feat:tenant-admin-cross-tenant-isolation`: absent - Tenant admin cross-tenant isolation
+- `feat:developer-api-contract`: partial - Developer API contract
+- `feat:developer-api-negative-surface-tests`: partial - Developer API negative surface tests
+- `feat:developer-api-public-registration-routes`: partial - Developer API public registration routes
+- `feat:developer-api-client-rpc-allowlist`: partial - Developer API client RPC allowlist
+- `feat:developer-app-registration`: absent - Developer app registration
+- `feat:developer-oauth-client-management`: absent - Developer OAuth client management
+- `feat:developer-client-ownership-boundary`: absent - Developer client ownership boundary
+- `feat:developer-discovery-metadata-helpers`: partial - Developer discovery metadata helpers
+- `feat:developer-audit-events`: absent - Developer audit events
+- `feat:developer-cross-surface-isolation`: absent - Developer cross-surface isolation
+- `feat:developer-uix-app-registration-workflows`: absent - Developer UIX app registration workflows
+- `feat:developer-uix-client-credential-workflows`: absent - Developer UIX client credential workflows
+- `feat:service-admin-api-contract`: partial - Service admin API contract
+- `feat:service-admin-api-negative-surface-tests`: partial - Service admin API negative surface tests
+- `feat:service-admin-resource-allowlist-contract`: partial - Service admin resource allowlist contract
+- `feat:service-admin-rpc-method-allowlist-contract`: partial - Service admin RPC method allowlist contract
+- `feat:service-admin-service-identity-management`: absent - Service admin service identity management
+- `feat:service-admin-credential-management`: absent - Service admin credential management
+- `feat:service-admin-token-inspection`: partial - Service admin token inspection
+- `feat:service-admin-validation-metadata-helpers`: partial - Service admin validation metadata helpers
+- `feat:service-admin-audit-events`: absent - Service admin audit events
+- `feat:service-admin-cross-surface-isolation`: absent - Service admin cross-surface isolation
+- `feat:service-admin-uix-service-identity-workflows`: absent - Service admin UIX service identity workflows
+- `feat:resource-validation-api-contract`: partial - Resource validation API contract
+- `feat:resource-validation-api-negative-surface-tests`: partial - Resource validation API negative surface tests
+- `feat:resource-validation-jwks-publication`: partial - Resource validation JWKS publication
+- `feat:resource-validation-introspection`: partial - Resource validation introspection
+- `feat:resource-validation-protected-resource-metadata`: partial - Resource validation protected resource metadata
+- `feat:resource-validation-tenant-discovery`: partial - Resource validation tenant discovery
+- `feat:resource-validation-resource-server-consumer-contract`: partial - Resource validation resource-server consumer contract
+- `feat:resource-validation-cross-surface-isolation`: partial - Resource validation cross-surface isolation
+- `feat:public-api-contract`: partial - Public API contract
+- `feat:public-api-negative-control-plane-tests`: partial - Public API negative control-plane tests
+- `feat:public-api-oidc-oauth-flow-contract`: partial - Public API OIDC OAuth flow contract
+- `feat:public-uix-public-api-client-boundary`: partial - Public UIX public API client boundary
+- `feat:public-uix-hosted-login-flow`: partial - Public UIX hosted login flow
+- `feat:public-uix-registration-and-recovery-flow`: partial - Public UIX registration and recovery flow
+- `feat:platform-admin-uix-composition-contract`: partial - Platform admin UIX composition contract
+- `feat:tenant-admin-uix-composition-contract`: partial - Tenant admin UIX composition contract
+- `feat:developer-uix-composition-contract`: partial - Developer UIX composition contract
+- `feat:service-admin-uix-composition-contract`: partial - Service admin UIX composition contract
+- `feat:platform-admin-uix-tenant-lifecycle-views`: absent - Platform admin UIX tenant lifecycle views
+- `feat:tenant-admin-uix-identity-jwks-views`: absent - Tenant admin UIX identity and JWKS views
+- `feat:developer-uix-client-registration-views`: absent - Developer UIX client registration views
+- `feat:service-admin-uix-machine-credential-views`: absent - Service admin UIX machine credential views
+- `feat:product-uix-cross-surface-negative-tests`: partial - Product UIX cross-surface negative tests
+- `feat:public-api-authorization-flow-contract`: partial - Public API authorization flow contract
+- `feat:public-api-token-session-contract`: partial - Public API token session contract
+- `feat:public-api-registration-recovery-contract`: partial - Public API registration recovery contract
+- `feat:public-api-discovery-jwks-contract`: partial - Public API discovery JWKS contract
+- `feat:public-api-safe-error-disclosure`: partial - Public API safe error disclosure
+- `feat:public-api-browser-security-contract`: partial - Public API browser security contract
+- `feat:public-api-public-uix-parity-tests`: partial - Public API public UIX parity tests
+- `feat:public-api-cross-surface-negative-tests`: partial - Public API cross-surface negative tests
+- `feat:resource-server-grant-enforcement`: absent - Resource server grant enforcement
+- `feat:authorization-mutation-invalidation`: absent - Authorization mutation invalidation
+- `feat:constraint-native-authorization`: absent - Constraint-native authorization
+- `feat:authorization-budgets`: absent - Authorization budgets
+- `feat:cross-issuer-trust-domains`: absent - Cross-issuer trust domains
+- `feat:credential-privacy-correlation-controls`: absent - Credential privacy correlation controls
+- `feat:future-standards-nonblocking-roadmap`: absent - Future standards nonblocking roadmap
+- `feat:package-dependency-layering-guard`: partial - Package dependency layering guard
+- `feat:storage-table-owned-ops-contract`: absent - Storage table owned operation contract
+- `feat:storage-table-owned-account-ops`: absent - Storage table owned account operations
+- `feat:storage-table-owned-oauth-ops`: absent - Storage table owned OAuth operations
+- `feat:storage-table-owned-admin-ops`: absent - Storage table owned admin operations
+- `feat:storage-table-owned-delegation-ops`: absent - Storage table owned delegation operations
+- `feat:storage-table-op-boundary-enforcement`: absent - Storage table operation boundary enforcement
+- `feat:authentication-context-vocabulary-storage`: absent - Authentication context vocabulary storage
+- `feat:authentication-context-contract-boundary`: absent - Authentication context contract boundary
+- `feat:adaptive-access-authentication-context`: absent - Adaptive access required and achieved authentication context
+- `feat:oidc-acr-amr-projection`: absent - OIDC ACR and AMR projection from canonical vocabulary
 
 ## Draft Profiles
 
@@ -35,15 +355,22 @@
 ## Certification Blockers
 
 - Tier 4 independent peer validation is not complete for the retained boundary.
+- The fill-in external handoff template package is not present for the full supported peer-profile set.
 - The peer-bundle completeness gate is not satisfied for the declared peer-profile set.
 - One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.
+- The runtime validation stack now executes real app-factory, serve-check, and HTTP surface probes in the clean-room matrix, but successful execution across the supported interpreter/profile matrix is not preserved in this container.
+- Tigrcorn is now pinned and included in the clean-room matrix for Python 3.11/3.12, but preserved independent validation artifacts remain absent.
+- Validated clean-room install matrix evidence is incomplete or missing.
 - Validated in-scope certification lane execution evidence is incomplete or missing.
-- At least one claim row is still missing a machine-derived certification proof binding.
+- Migration upgrade → downgrade → reapply portability has not been preserved for both SQLite and PostgreSQL.
+- Tier 3 evidence has not yet been explicitly rebuilt from validated-run manifests.
+- Current generated public artifacts still drift from executable reality.
+- One or more exported package capabilities still lacks end-to-end verification in the current environment.
 - Release evidence can now be built only from a clean checkout, and the current workspace is dirty.
 
 ## Delivery Tracks
 
-- Registry and proof-chain closure: Keep every current feature linked to passing tests, evidence, claims, and validation output. Current status: 16 current feature(s) remain partial or absent.
+- Registry and proof-chain closure: Keep every current feature linked to passing tests, evidence, claims, and validation output. Current status: 336 current feature(s) remain partial or absent.
 - Runtime and contract closure: Keep executable OpenAPI, OpenRPC, discovery, runner, and deployment profiles aligned with generated artifacts. Current status: Current contract snapshots are generated, but release certification still depends on preserved clean-room evidence.
 - Evidence inventory closure: Preserve validated-run manifests for the supported interpreter, profile, runner, and lane matrix. Current status: Validated clean-room and lane inventories remain certification blockers.
 - Portability closure: Preserve upgrade, downgrade, and reapply migration evidence for SQLite and PostgreSQL. Current status: Migration portability evidence remains incomplete.
@@ -52,15 +379,15 @@
 
 ## Source Marker Scan
 
-- files with marker terms: `121`
-- `tigrbl_auth/cli/boundary.py:22` "compliance/targets/partial-feature-consumption.yaml",
-- `tigrbl_auth/cli/claims.py:185` if "placeholder" in artifact:
-- `tigrbl_auth/cli/feature_surface.py:87` repo_root / "compliance" / "targets" / "partial-feature-consumption.yaml",
-- `tigrbl_auth/cli/governance.py:23` "docs/adr/ADR-0016-installable-surfaces-and-partial-feature-consumption.md",
-- `tigrbl_auth/cli/install_substrate.py:471` failures.append("dependency lock install profiles are incomplete")
-- `tigrbl_auth/cli/runtime.py:270` reasons.append("install substrate evidence is missing or incomplete")
-- `tigrbl_auth/cli/reports.py:1292` certification_state["open_gaps"].append("One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.")
-- `tigrbl_auth/cli/claim_registry.py:612` failures.append("Public route atomic claim coverage is incomplete.")
-- `tigrbl_auth/config/feature_flags.py:71` "description": "Installable surface selection and partial feature consumption.",
-- `tigrbl_auth/ops/token.py:131` _jwt = JWTCoder.default if False else None  # placeholder to keep name bound
+- files with marker terms: `164`
+- `tests/unit/test_rfc8523_jwt_client_auth.py:192` """RFC 8523: JWT replay detection placeholder."""
+- `tests/unit/test_rfc8932_dns_privacy.py:1846` All the above data may be kept in full or partial form in
+- `tests/security/planning/test_authorization_budgets_planning.py:4` @pytest.mark.skip(reason="Roadmap planning placeholder: authorization budgets.")
+- `tests/security/planning/test_constraint_native_authorization_planning.py:4` @pytest.mark.skip(reason="Roadmap planning placeholder: constraint-native authorization.")
+- `tests/security/planning/test_credential_privacy_correlation_planning.py:5` reason="Roadmap planning placeholder: credential privacy and correlation controls."
+- `tests/security/planning/test_cross_issuer_trust_domain_planning.py:4` @pytest.mark.skip(reason="Roadmap planning placeholder: cross-issuer trust domains.")
+- `tests/security/planning/test_future_standards_nonblocking_roadmap.py:4` @pytest.mark.skip(reason="Roadmap planning placeholder: future non-blocking standards.")
+- `scripts/generate_certification_gap_inventory.py:18` r"\b(TODO|FIXME|NotImplemented|placeholder|partial|incomplete)\b",
+- `scripts/generate_certification_scope.py:388` "- Production and hardening targets remain in scope, and most are now implementation-backed, but several remain evidence-incomplete, profile-bounded, or not yet independently valid
+- `scripts/generate_non_rfc_status_report.py:232` failures.append('Supported runtime-matrix evidence is still incomplete for ASGI/Uvicorn/Hypercorn/Tigrcorn certification.')
 

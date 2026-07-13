@@ -350,7 +350,7 @@ def generate_state_reports(repo_root: Path) -> dict[str, Any]:
     if not artifact_truthfulness.get("passed", False):
         certification_state["open_gaps"].append("Current generated public artifacts still drift from executable reality.")
     if not bool(current_state.get("fully_featured_package_boundary_now", False)):
-        certification_state["open_gaps"].append("One or more exported package capabilities still lacks end-to-end verification in the current environment.")
+        certification_state["open_gaps"].append("One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.")
     if not bool(current_state.get("certification_evidence_index_passed", False)):
         certification_state["open_gaps"].append("At least one claim row is still missing a machine-derived certification proof binding.")
     if not bool(current_state.get("release_evidence_clean_checkout_now", False)):

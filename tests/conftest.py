@@ -317,8 +317,10 @@ async def _runtime_engine_context(database_url: str):
 
     def _create_runtime_tables(sync_conn):
         from tigrbl_auth.tables import RestOltpTable
+        from tigrbl_identity_storage.migrations.helpers import ensure_schema
 
         _ensure_sqlite_attachment_on_connection(sync_conn, sqlite_attachments)
+        ensure_schema(sync_conn)
         RestOltpTable.metadata.create_all(bind=sync_conn, checkfirst=True)
 
     begin_ctx = raw_engine.begin()

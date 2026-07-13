@@ -1,0 +1,23 @@
+{
+  "issuer": "https://authn.example.com/tenants/tenant-a",
+  "authorization_endpoint": "https://authn.example.com/authorize",
+  "token_endpoint": "https://authn.example.com/token",
+  "jwks_uri": "https://authn.example.com/tenants/tenant-a/.well-known/jwks.json",
+  "userinfo_endpoint": "https://authn.example.com/userinfo",
+  "response_types_supported": [
+    "code"
+  ],
+  "subject_types_supported": [
+    "public"
+  ],
+  "id_token_signing_alg_values_supported": [
+    "ES256"
+  ],
+  "scopes_supported": [
+    "openid",
+    "profile",
+    "email"
+  ],
+  "tigrbl_auth_subject_namespace": "tenant-a:subjects",
+  "tigrbl_auth_signing_scope": "tenant:tenant-a"
+}

@@ -1,14 +1,13 @@
 {
   "passed": false,
   "failures": [
-    "emit OpenAPI/OpenRPC/discovery artifacts: Contracts and discovery artifacts regenerate cleanly and remain synchronized with executable reality.",
     "serve the app under supported runners: The runtime boundary declares all supported runners, but this checkpoint still requires supported-matrix readiness evidence for a full pass."
   ],
   "warnings": [],
   "summary": {
     "capability_count": 10,
-    "passed_capability_count": 8,
-    "failed_capability_count": 2,
+    "passed_capability_count": 9,
+    "failed_capability_count": 1,
     "fully_featured_package_boundary_now": false,
     "cli_metadata_single_source_passed": true,
     "required_release_verify_verb_present": true,
@@ -44,18 +43,18 @@
       "details": {
         "schema_version": 1,
         "backend": "sqlite-authoritative",
-        "state_root": "<repo>/.pytest-tmp/operator-plane-state/operator-state-0b52b544fb41f716",
-        "database_path": "<repo>/.pytest-tmp/operator-plane-state/operator-state-0b52b544fb41f716/operator_plane.sqlite3",
-        "snapshot_root": "<repo>/.pytest-tmp/operator-plane-state/operator-state-0b52b544fb41f716/snapshots",
-        "log_root": "<repo>/.pytest-tmp/operator-plane-state/operator-state-0b52b544fb41f716/logs",
+        "state_root": "<repo>/.pytest-tmp/operator-state/certification-closure/operator-state-3b460998fec862ba",
+        "database_path": "<repo>/.pytest-tmp/operator-state/certification-closure/operator-state-3b460998fec862ba/operator_plane.sqlite3",
+        "snapshot_root": "<repo>/.pytest-tmp/operator-state/certification-closure/operator-state-3b460998fec862ba/snapshots",
+        "log_root": "<repo>/.pytest-tmp/operator-state/certification-closure/operator-state-3b460998fec862ba/logs",
         "repo_mutation_dependency": false,
         "concurrency_model": "sqlite-wal-begin-immediate",
         "tenancy_enforced": true,
         "portability_schema_version": 3,
         "database_present": true,
-        "audit_log_path": "<repo>/.pytest-tmp/operator-plane-state/operator-state-0b52b544fb41f716/logs/audit-events.jsonl",
-        "transaction_log_path": "<repo>/.pytest-tmp/operator-plane-state/operator-state-0b52b544fb41f716/logs/transactions.jsonl",
-        "activity_log_path": "<repo>/.pytest-tmp/operator-plane-state/operator-state-0b52b544fb41f716/logs/activity.jsonl"
+        "audit_log_path": "<repo>/.pytest-tmp/operator-state/certification-closure/operator-state-3b460998fec862ba/logs/audit-events.jsonl",
+        "transaction_log_path": "<repo>/.pytest-tmp/operator-state/certification-closure/operator-state-3b460998fec862ba/logs/transactions.jsonl",
+        "activity_log_path": "<repo>/.pytest-tmp/operator-state/certification-closure/operator-state-3b460998fec862ba/logs/activity.jsonl"
       }
     },
     "register_manage_clients": {
@@ -114,7 +113,7 @@
       "summary": "Portability workflows export a versioned artifact and import it into a new storage-backed identity state root.",
       "evidence": [
         "tests/conformance/operator/test_cli_import_export.py",
-        "dist/feature-completeness-sandbox-dll0uebm/exports/portable-export.json"
+        "dist/feature-completeness-sandbox-bnwk7y85/exports/portable-export.json"
       ],
       "details": {
         "export_status": "exported",
@@ -124,7 +123,7 @@
     },
     "emit_contract_artifacts": {
       "label": "emit OpenAPI/OpenRPC/discovery artifacts",
-      "passed": false,
+      "passed": true,
       "summary": "Contracts and discovery artifacts regenerate cleanly and remain synchronized with executable reality.",
       "evidence": [
         "docs/compliance/contract_sync_report.md",
@@ -157,10 +156,10 @@
       "summary": "Release bundles can be materialized, signed, and verified from repository state.",
       "evidence": [
         "tests/security/test_release_bundle_signing.py",
-        "dist/feature-completeness-sandbox-dll0uebm/release-bundle"
+        "dist/feature-completeness-sandbox-bnwk7y85/release-bundle"
       ],
       "details": {
-        "bundle_dir": "dist/feature-completeness-sandbox-dll0uebm/release-bundle",
+        "bundle_dir": "dist/feature-completeness-sandbox-bnwk7y85/release-bundle",
         "sign_status": "signed-ed25519-attested",
         "release_verbs": [
           "bundle",
@@ -188,10 +187,10 @@
         ],
         "runtime_summary": {
           "runner_count": 3,
-          "ready_count": 1,
-          "missing_count": 2,
+          "ready_count": 0,
+          "missing_count": 3,
           "invalid_count": 0,
-          "application_hash_invariant": true,
+          "application_hash_invariant": false,
           "pyproject_requires_python": ">=3.10,<3.15",
           "supported_python_versions": [
             "3.10",
@@ -208,17 +207,19 @@
           ],
           "declared_ci_install_probe_complete": true,
           "execution_probes_enabled": true,
-          "surface_probe_passed": true,
-          "surface_probe_endpoint_count": 4,
-          "surface_probe_passed_count": 4,
+          "surface_probe_passed": false,
+          "surface_probe_endpoint_count": 0,
+          "surface_probe_passed_count": 0,
           "surface_probe_failed_count": 0,
-          "serve_check_passed_count": 1,
-          "execution_probe_complete": true,
-          "source_mode": "live-probe",
+          "serve_check_passed_count": 0,
+          "execution_probe_complete": false,
+          "source_mode": "validated-runs",
           "required_runtime_cell_count": 14,
           "validated_runtime_cell_count": 0,
           "validated_runtime_cell_passed_count": 0,
           "validated_runtime_matrix_green": false,
+          "validated_runtime_identity_ready_count": 0,
+          "validated_runtime_install_evidence_ready_count": 0,
           "validated_download_collection_present": false
         }
       }

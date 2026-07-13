@@ -256,6 +256,7 @@ dependencies = [
     "tigrbl-auth-plugin==0.4.0.dev2",
     "tigrbl-authz-resource-server==0.4.0.dev2",
     "tigrbl-identity-cli==0.4.0.dev2",
+    "tigrbl-identity-testkit==0.4.0.dev2",
     "tigrbl-identity-admin==0.4.0.dev2",
     "tigrbl-identity-author==0.4.0.dev2",
     "tigrbl-identity-core==0.4.0.dev2",
@@ -340,7 +341,7 @@ Repository = "https://github.com/swarmauri/swarmauri-sdk"
 Homepage = "https://github.com/swarmauri/swarmauri-sdk"
 
 [tool.pytest.ini_options]
-pythonpath = [".", "pkgs/60-runtime/tigrbl-identity-cli/src"]
+pythonpath = ["pkgs/60-runtime/tigrbl-identity-cli/src"]
 testpaths = ["tests"]
 norecursedirs = ["combined", "scripts", ".pytest_cache", "__pycache__", ".uv-cache", ".venv", "dist", ".benchmarks"]
 markers = [
@@ -472,6 +473,7 @@ tigrbl-auth-plugin = { path = "pkgs/60-runtime/tigrbl-auth-plugin", editable = t
 tigrbl-authz-resource-server-verifier = { path = "pkgs/20-providers/tigrbl-authz-resource-server-verifier", editable = true }
 tigrbl-authz-resource-server = { path = "pkgs/50-protocols/tigrbl-authz-resource-server", editable = true }
 tigrbl-identity-cli = { path = "pkgs/60-runtime/tigrbl-identity-cli", editable = true }
+tigrbl-identity-testkit = { path = "pkgs/60-runtime/tigrbl-identity-testkit", editable = true }
 tigrbl-identity-admin = { path = "pkgs/20-providers/tigrbl-identity-admin", editable = true }
 tigrbl-identity-author = { path = "pkgs/60-runtime/tigrbl-identity-author", editable = true }
 tigrbl-identity-contracts = { path = "pkgs/02-contracts/tigrbl-identity-contracts", editable = true }

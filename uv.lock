@@ -2843,6 +2843,7 @@ dependencies = [
     { name = "tigrbl-identity-server" },
     { name = "tigrbl-identity-storage" },
     { name = "tigrbl-identity-storage-runtime" },
+    { name = "tigrbl-identity-testkit" },
     { name = "tigrbl-jose-bases" },
     { name = "tigrbl-jose-concrete" },
     { name = "tigrbl-kernel" },
@@ -3191,6 +3192,7 @@ requires-dist = [
     { name = "tigrbl-identity-server", editable = "pkgs/60-runtime/tigrbl-identity-server" },
     { name = "tigrbl-identity-storage", editable = "pkgs/01-storage/tigrbl-identity-storage" },
     { name = "tigrbl-identity-storage-runtime", editable = "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime" },
+    { name = "tigrbl-identity-testkit", editable = "pkgs/60-runtime/tigrbl-identity-testkit" },
     { name = "tigrbl-jose-bases", editable = "pkgs/05-bases/tigrbl-jose-bases" },
     { name = "tigrbl-jose-concrete", editable = "pkgs/10-concrete/tigrbl-jose-concrete" },
     { name = "tigrbl-kernel", specifier = "==0.4.4.dev1" },
@@ -5782,6 +5784,11 @@ requires-dist = [
     { name = "tigrbl-security-authorization-provenance-builder", specifier = "==0.1.0" },
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
 ]
+
+[[package]]
+name = "tigrbl-identity-testkit"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/60-runtime/tigrbl-identity-testkit" }
 
 [[package]]
 name = "tigrbl-jose-bases"

@@ -1,19 +1,24 @@
 {
-  "passed": true,
-  "failures": [],
+  "passed": false,
+  "failures": [
+    "Claims missing positive proof or evidence refs: route:access-v1-evaluation, route:attestations-appraise, route:credential, route:gnap-tx, route:presentation-verify, route:standards"
+  ],
   "warnings": [],
   "summary": {
-    "claim_count": 370,
+    "claim_count": 377,
     "fapi_claim_count": 6,
-    "security_sensitive_claim_count": 40,
+    "security_sensitive_claim_count": 41,
     "partition_count": 7,
     "target_profile_bundle_count": 199,
     "clean_checkout": {
       "git_available": true,
       "clean": false,
-      "changed_path_count": 23,
+      "changed_path_count": 85,
       "changed_paths": [
+        ".ssot/reports/certification-gap-inventory.json",
+        ".ssot/reports/certification-gap-inventory.md",
         "compliance/claims/claim-registry.yaml",
+        "compliance/claims/effective-target-claims.active.yaml",
         "compliance/claims/effective-target-claims.baseline.yaml",
         "compliance/claims/effective-target-claims.fapi2-security.yaml",
         "compliance/claims/effective-target-claims.hardening.yaml",
@@ -26,30 +31,115 @@
         "compliance/evidence/effective-release-evidence.hardening.yaml",
         "compliance/evidence/effective-release-evidence.peer-claim.yaml",
         "compliance/evidence/effective-release-evidence.production.yaml",
-        "compliance/evidence/tier3/release-bundle-signing/contracts/release-bundle.json",
-        "compliance/mappings/feature-flag-to-target.yaml",
         "compliance/mappings/feature-to-evidence.yaml",
         "compliance/mappings/feature-to-target.yaml",
         "compliance/mappings/feature-to-test.yaml",
-        "compliance/mappings/flag-to-feature.yaml",
+        "compliance/mappings/module-to-boundary.yaml",
+        "compliance/mappings/target-to-module.yaml",
         "compliance/targets/certification_scope.yaml",
-        "compliance/targets/extension-targets.yaml",
+        "compliance/targets/document-authority.yaml",
+        "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/persistence.py",
+        "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/__init__.py",
+        "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/token_record/_table.py",
+        "pkgs/02-contracts/tigrbl-security-trust-contracts/src/tigrbl_security_trust_contracts/keys.py",
+        "pkgs/02-contracts/tigrbl-security-trust-contracts/src/tigrbl_security_trust_contracts/types.py",
+        "pkgs/05-bases/tigrbl-security-trust-domain-bases/src/tigrbl_security_trust_domain_bases/bases.py",
+        "pkgs/20-providers/tigrbl-authz-policy/src/tigrbl_authz_policy/governance_extension.py",
+        "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/_operator_store/records.py",
+        "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/authorization.py",
+        "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/client_registration.py",
+        "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/token_request.py",
+        "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/token_runtime.py",
+        "pkgs/40-capabilities/tigrbl-replay-protection-capability/src/tigrbl_replay_protection_capability/__init__.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/authorization_server_metadata_endpoint.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/rp_initiated_logout.py",
+        "pkgs/60-runtime/tigrbl-identity-cli/src/tigrbl_identity_cli/cli/reports/_contracts.py",
+        "pkgs/60-runtime/tigrbl-identity-cli/src/tigrbl_identity_cli/cli/reports/_feature_state.py",
+        "pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/_surfaces/public_capabilities.py",
+        "pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/rfc/__init__.py",
+        "pyproject.toml",
+        "scripts/run_migration_portability.py",
+        "specs/discovery/profiles/baseline-development/jwks.json",
+        "specs/discovery/profiles/baseline-development/oauth-authorization-server.json",
+        "specs/discovery/profiles/baseline-development/openid-configuration.json",
+        "specs/discovery/profiles/baseline/oauth-authorization-server.json",
+        "specs/discovery/profiles/baseline/openid-configuration.json",
+        "specs/discovery/profiles/fapi2-security/oauth-authorization-server.json",
+        "specs/discovery/profiles/fapi2-security/openid-configuration.json",
+        "specs/discovery/profiles/hardening/oauth-authorization-server.json",
+        "specs/discovery/profiles/hardening/openid-configuration.json",
+        "specs/discovery/profiles/peer-claim/oauth-authorization-server.json",
+        "specs/discovery/profiles/peer-claim/openid-configuration.json",
+        "specs/discovery/profiles/production/oauth-authorization-server.json",
+        "specs/discovery/profiles/production/openid-configuration.json",
+        "tests/conftest.py",
+        "uv.lock",
         "docs/strategy/all-uix-app-requirements-brief.md",
-        "docs/strategy/portfolio-website-app-requirements-brief.md"
+        "docs/strategy/portfolio-website-app-requirements-brief.md",
+        "docs/strategy/uix-pairing-briefs/40-authenticator-ceremony-api-universal-authenticator-pages-uix.md",
+        "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/_persistence_extended.py",
+        "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/_registry.py",
+        "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/token_record/_operations.py",
+        "pkgs/02-contracts/tigrbl-security-trust-contracts/src/tigrbl_security_trust_contracts/_artifact_types.py",
+        "pkgs/02-contracts/tigrbl-security-trust-contracts/src/tigrbl_security_trust_contracts/_key_requests.py",
+        "pkgs/05-bases/tigrbl-security-trust-domain-bases/src/tigrbl_security_trust_domain_bases/key_bases.py",
+        "pkgs/20-providers/tigrbl-authz-policy/src/tigrbl_authz_policy/governance_provisioning.py",
+        "pkgs/20-providers/tigrbl-authz-policy/src/tigrbl_authz_policy/governance_reviews.py",
+        "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/_authorization_inputs.py",
+        "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/_client_registration_create.py",
+        "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/_client_registration_management.py",
+        "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/_client_registration_validation.py",
+        "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/_operator_store/mutation.py",
+        "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/token_device_grant.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/_rp_logout_validation.py",
+        "pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/_surfaces/_public_capabilities_core.py",
+        "pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/_surfaces/_public_capabilities_protocols.py",
+        "pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/crypto.py",
+        "pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/oidc_discovery.py",
+        "pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/standards/http/",
+        "pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/standards/oidc/discovery_metadata.py",
+        "pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/standards/oidc/rp_initiated_logout.py",
+        "specs/discovery/profiles/baseline-development/tenants/"
       ],
-      "ignored_generated_path_count": 11,
+      "ignored_generated_path_count": 37,
       "ignored_generated_paths": [
+        "CERTIFICATION_STATUS.md",
+        "CURRENT_STATE.md",
         "compliance/claims/issue-registry.yaml",
         "compliance/claims/repository-state.yaml",
         "compliance/evidence/certification_test_partitions.json",
         "compliance/evidence/certification_test_partitions.yaml",
         "compliance/evidence/claim_proof_bindings.json",
         "compliance/evidence/claim_proof_bindings.yaml",
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/FINAL_RELEASE_STATUS_2026-03-25.json",
+        "docs/compliance/FINAL_RELEASE_STATUS_2026-03-25.md",
+        "docs/compliance/RELEASE_DECISION_RECORD.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md",
+        "docs/compliance/artifact_truthfulness_report.json",
+        "docs/compliance/artifact_truthfulness_report.md",
+        "docs/compliance/boundary_enforcement_report.json",
+        "docs/compliance/boundary_enforcement_report.md",
         "docs/compliance/certification_evidence_index.json",
         "docs/compliance/certification_evidence_index.md",
-        "docs/compliance/final_target_decision_matrix.json",
-        "docs/compliance/wrapper_hygiene_report.json",
-        "docs/compliance/wrapper_hygiene_report.md"
+        "docs/compliance/certification_state_report.json",
+        "docs/compliance/certification_state_report.md",
+        "docs/compliance/contract_sync_report.json",
+        "docs/compliance/contract_sync_report.md",
+        "docs/compliance/current_state_report.json",
+        "docs/compliance/current_state_report.md",
+        "docs/compliance/feature_completeness_report.json",
+        "docs/compliance/feature_completeness_report.md",
+        "docs/compliance/install_substrate_report.json",
+        "docs/compliance/install_substrate_report.md",
+        "docs/compliance/migration_portability_report.json",
+        "docs/compliance/migration_portability_report.md",
+        "docs/compliance/runtime_profile_report.json",
+        "docs/compliance/runtime_profile_report.md",
+        "docs/compliance/truth_chain.json",
+        "docs/compliance/truth_chain.md",
+        "docs/compliance/validated_execution_report.json",
+        "docs/compliance/validated_execution_report.md"
       ]
     }
   },
@@ -172,11 +262,13 @@
       "tests/unit/test_bootstrappable_user_defaults.py",
       "tests/unit/test_boundary_freeze_checkpoint.py",
       "tests/unit/test_bulk_schema_fields.py",
+      "tests/unit/test_capability_hierarchy.py",
       "tests/unit/test_certificate_providers.py",
       "tests/unit/test_certification_evidence_negative_proofs.py",
       "tests/unit/test_certification_gap_inventory.py",
       "tests/unit/test_certification_lane_evidence.py",
       "tests/unit/test_claim_boundary_rebaseline.py",
+      "tests/unit/test_claim_foundation_layers.py",
       "tests/unit/test_claim_object_layers.py",
       "tests/unit/test_claim_object_taxonomy.py",
       "tests/unit/test_claim_registry_alignment.py",
@@ -196,6 +288,7 @@
       "tests/unit/test_crypto.py",
       "tests/unit/test_crypto_key_dependency_boundary.py",
       "tests/unit/test_crypto_key_storage_runtime_boundary.py",
+      "tests/unit/test_cwt_standalone_claim_packages.py",
       "tests/unit/test_decision_stability_policy_versions.py",
       "tests/unit/test_delegation_attenuation_proof.py",
       "tests/unit/test_delegation_attenuation_robustness_t2.py",
@@ -208,8 +301,10 @@
       "tests/unit/test_digital_credential_providers.py",
       "tests/unit/test_dpop_key_credentials.py",
       "tests/unit/test_eat_corim_concrete.py",
+      "tests/unit/test_eat_cross_aspect_contracts.py",
       "tests/unit/test_effective_artifacts.py",
       "tests/unit/test_engine_initialization.py",
+      "tests/unit/test_extended_claim_packages.py",
       "tests/unit/test_extended_identity_contracts.py",
       "tests/unit/test_extended_provider_bases.py",
       "tests/unit/test_facade_compatibility_boundary.py",
@@ -245,6 +340,7 @@
       "tests/unit/test_key_rotation_policy_boundary.py",
       "tests/unit/test_key_rotation_policy_governance.py",
       "tests/unit/test_key_token_table_owned_lifecycle.py",
+      "tests/unit/test_layer_40_capability_boundary.py",
       "tests/unit/test_least_authority_minimality.py",
       "tests/unit/test_liveness_control_plane_robustness_t2.py",
       "tests/unit/test_mdoc_concrete.py",
@@ -262,6 +358,7 @@
       "tests/unit/test_oidc_eap_identity_assurance_contracts.py",
       "tests/unit/test_oidc_id_token.py",
       "tests/unit/test_oidc_id_token_encryption.py",
+      "tests/unit/test_oidc_standalone_claim_packages.py",
       "tests/unit/test_openapi_contract_validity.py",
       "tests/unit/test_openapi_examples.py",
       "tests/unit/test_openapi_well_known_endpoints.py",
@@ -303,6 +400,7 @@
       "tests/unit/test_release_contracts_boundary.py",
       "tests/unit/test_release_posture_plane.py",
       "tests/unit/test_remote_adapter.py",
+      "tests/unit/test_replay_layer_ownership.py",
       "tests/unit/test_repo_truth_helpers.py",
       "tests/unit/test_request_scoped_runtime_authority.py",
       "tests/unit/test_resource_server_consumer_boundary.py",
@@ -450,11 +548,13 @@
       "tests/unit/test_artifact_profile_migration_0023.py",
       "tests/unit/test_attestation_migration_0027.py",
       "tests/unit/test_certificate_migration_0031.py",
+      "tests/unit/test_claim_migration_0032.py",
       "tests/unit/test_credential_issuance_migration_0025.py",
       "tests/unit/test_credential_registry_migration_0024.py",
       "tests/unit/test_did_gnap_migration_0030.py",
       "tests/unit/test_migration_portability_evidence.py",
       "tests/unit/test_presentation_migration_0026.py",
+      "tests/unit/test_replay_migration_0033.py",
       "tests/unit/test_security_event_migration_0029.py",
       "tests/unit/test_spiffe_migration_0028.py"
     ],
@@ -9160,6 +9260,18 @@
       "security_sensitive": false
     },
     {
+      "claim_id": "route:access-v1-evaluation",
+      "feature_id": "route:access-v1-evaluation",
+      "targets": [
+        "AuthZEN Authorization API 1.0"
+      ],
+      "profile": null,
+      "positive_tests": [],
+      "negative_tests": [],
+      "evidence_refs": [],
+      "security_sensitive": false
+    },
+    {
       "claim_id": "route:account-authorized-apps",
       "feature_id": "route:account-authorized-apps",
       "targets": [
@@ -9391,6 +9503,19 @@
       "security_sensitive": false
     },
     {
+      "claim_id": "route:attestations-appraise",
+      "feature_id": "route:attestations-appraise",
+      "targets": [
+        "RFC 9711",
+        "RATS"
+      ],
+      "profile": null,
+      "positive_tests": [],
+      "negative_tests": [],
+      "evidence_refs": [],
+      "security_sensitive": false
+    },
+    {
       "claim_id": "route:authorize",
       "feature_id": "route:authorize",
       "targets": [
@@ -9477,6 +9602,18 @@
       "security_sensitive": true
     },
     {
+      "claim_id": "route:credential",
+      "feature_id": "route:credential",
+      "targets": [
+        "OID4VCI 1.0"
+      ],
+      "profile": null,
+      "positive_tests": [],
+      "negative_tests": [],
+      "evidence_refs": [],
+      "security_sensitive": false
+    },
+    {
       "claim_id": "route:device-authorization",
       "feature_id": "route:device-authorization",
       "targets": [
@@ -9502,6 +9639,18 @@
         "compliance/evidence/tier3/device-flow/",
         "compliance/evidence/tier3/resource-indicators/"
       ],
+      "security_sensitive": false
+    },
+    {
+      "claim_id": "route:gnap-tx",
+      "feature_id": "route:gnap-tx",
+      "targets": [
+        "RFC 9635"
+      ],
+      "profile": null,
+      "positive_tests": [],
+      "negative_tests": [],
+      "evidence_refs": [],
       "security_sensitive": false
     },
     {
@@ -9671,6 +9820,18 @@
       "security_sensitive": true
     },
     {
+      "claim_id": "route:presentation-verify",
+      "feature_id": "route:presentation-verify",
+      "targets": [
+        "OID4VP 1.0"
+      ],
+      "profile": null,
+      "positive_tests": [],
+      "negative_tests": [],
+      "evidence_refs": [],
+      "security_sensitive": false
+    },
+    {
       "claim_id": "route:realms-realm-slug-well-known-jwks-json",
       "feature_id": "route:realms-realm-slug-well-known-jwks-json",
       "targets": [
@@ -9826,6 +9987,40 @@
       "evidence_refs": [
         "compliance/evidence/tier3/revocation/"
       ],
+      "security_sensitive": false
+    },
+    {
+      "claim_id": "route:security-events-receive",
+      "feature_id": "route:security-events-receive",
+      "targets": [
+        "RFC 8417"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "pkgs/10-concrete/tigrbl-set-concrete/tests/test_rfc8417.py"
+      ],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py"
+      ],
+      "evidence_refs": [
+        "compliance/evidence/tier3/jwt/"
+      ],
+      "security_sensitive": true
+    },
+    {
+      "claim_id": "route:standards",
+      "feature_id": "route:standards",
+      "targets": [],
+      "profile": null,
+      "positive_tests": [],
+      "negative_tests": [],
+      "evidence_refs": [],
       "security_sensitive": false
     },
     {

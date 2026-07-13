@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass
+from typing import NamedTuple
 
 from tigrbl_capability import Capability
 from tigrbl_identity_contracts.capabilities import CapabilityMetadata
@@ -13,8 +13,7 @@ from tigrbl_identity_contracts.replay import (
 )
 
 
-@dataclass(frozen=True, slots=True)
-class ReplayCapabilityDescriptor:
+class ReplayCapabilityDescriptor(NamedTuple):
     capability_id: str = "security.replay-protection"
     version: str = "1.0"
     operations: tuple[str, ...] = ("check_and_reserve",)
@@ -86,7 +85,7 @@ class ReplayProtectionCapability(Capability):
         )
 
     def capability_report(self) -> dict[str, object]:
-        return asdict(self.describe())
+        return self.describe()._asdict()
 
 
 __all__ = ["ReplayCapabilityDescriptor", "ReplayProtectionCapability"]

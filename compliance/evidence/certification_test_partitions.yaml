@@ -116,11 +116,13 @@ partitions:
   - tests/unit/test_bootstrappable_user_defaults.py
   - tests/unit/test_boundary_freeze_checkpoint.py
   - tests/unit/test_bulk_schema_fields.py
+  - tests/unit/test_capability_hierarchy.py
   - tests/unit/test_certificate_providers.py
   - tests/unit/test_certification_evidence_negative_proofs.py
   - tests/unit/test_certification_gap_inventory.py
   - tests/unit/test_certification_lane_evidence.py
   - tests/unit/test_claim_boundary_rebaseline.py
+  - tests/unit/test_claim_foundation_layers.py
   - tests/unit/test_claim_object_layers.py
   - tests/unit/test_claim_object_taxonomy.py
   - tests/unit/test_claim_registry_alignment.py
@@ -140,6 +142,7 @@ partitions:
   - tests/unit/test_crypto.py
   - tests/unit/test_crypto_key_dependency_boundary.py
   - tests/unit/test_crypto_key_storage_runtime_boundary.py
+  - tests/unit/test_cwt_standalone_claim_packages.py
   - tests/unit/test_decision_stability_policy_versions.py
   - tests/unit/test_delegation_attenuation_proof.py
   - tests/unit/test_delegation_attenuation_robustness_t2.py
@@ -152,8 +155,10 @@ partitions:
   - tests/unit/test_digital_credential_providers.py
   - tests/unit/test_dpop_key_credentials.py
   - tests/unit/test_eat_corim_concrete.py
+  - tests/unit/test_eat_cross_aspect_contracts.py
   - tests/unit/test_effective_artifacts.py
   - tests/unit/test_engine_initialization.py
+  - tests/unit/test_extended_claim_packages.py
   - tests/unit/test_extended_identity_contracts.py
   - tests/unit/test_extended_provider_bases.py
   - tests/unit/test_facade_compatibility_boundary.py
@@ -189,6 +194,7 @@ partitions:
   - tests/unit/test_key_rotation_policy_boundary.py
   - tests/unit/test_key_rotation_policy_governance.py
   - tests/unit/test_key_token_table_owned_lifecycle.py
+  - tests/unit/test_layer_40_capability_boundary.py
   - tests/unit/test_least_authority_minimality.py
   - tests/unit/test_liveness_control_plane_robustness_t2.py
   - tests/unit/test_mdoc_concrete.py
@@ -206,6 +212,7 @@ partitions:
   - tests/unit/test_oidc_eap_identity_assurance_contracts.py
   - tests/unit/test_oidc_id_token.py
   - tests/unit/test_oidc_id_token_encryption.py
+  - tests/unit/test_oidc_standalone_claim_packages.py
   - tests/unit/test_openapi_contract_validity.py
   - tests/unit/test_openapi_examples.py
   - tests/unit/test_openapi_well_known_endpoints.py
@@ -247,6 +254,7 @@ partitions:
   - tests/unit/test_release_contracts_boundary.py
   - tests/unit/test_release_posture_plane.py
   - tests/unit/test_remote_adapter.py
+  - tests/unit/test_replay_layer_ownership.py
   - tests/unit/test_repo_truth_helpers.py
   - tests/unit/test_request_scoped_runtime_authority.py
   - tests/unit/test_resource_server_consumer_boundary.py
@@ -392,11 +400,13 @@ partitions:
   - tests/unit/test_artifact_profile_migration_0023.py
   - tests/unit/test_attestation_migration_0027.py
   - tests/unit/test_certificate_migration_0031.py
+  - tests/unit/test_claim_migration_0032.py
   - tests/unit/test_credential_issuance_migration_0025.py
   - tests/unit/test_credential_registry_migration_0024.py
   - tests/unit/test_did_gnap_migration_0030.py
   - tests/unit/test_migration_portability_evidence.py
   - tests/unit/test_presentation_migration_0026.py
+  - tests/unit/test_replay_migration_0033.py
   - tests/unit/test_security_event_migration_0029.py
   - tests/unit/test_spiffe_migration_0028.py
   interop:

@@ -1,332 +1,111 @@
 RFC 6749:
-  modules:
-  - tigrbl_auth/standards/oauth2/rfc6749.py
-  - tigrbl_auth/standards/oauth2/rfc6749_token.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/authorization_framework.py]
 RFC 6750:
-  modules:
-  - tigrbl_auth/standards/oauth2/rfc6750.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/bearer_token_usage.py]
 RFC 7636:
-  modules:
-  - tigrbl_auth/standards/oauth2/rfc7636_pkce.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/proof_key_for_code_exchange.py]
 RFC 8414:
-  modules:
-  - tigrbl_auth/standards/oauth2/rfc8414.py
-  - tigrbl_auth/standards/oauth2/rfc8414_metadata.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/authorization_server_metadata.py]
 RFC 8615:
-  modules:
-  - tigrbl_auth/standards/http/well_known.py
+  modules: [pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/http_standards/well_known.py]
 RFC 7515:
-  modules:
-  - tigrbl_auth/standards/jose/rfc7515.py
+  modules: [pkgs/20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose]
 RFC 7516:
-  modules:
-  - tigrbl_auth/standards/jose/rfc7516.py
-  - tigrbl_auth/standards/oidc/id_token.py
-  - tigrbl_auth/standards/oidc/discovery_metadata.py
+  modules: [pkgs/20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose]
 RFC 7517:
-  modules:
-  - tigrbl_auth/standards/jose/rfc7517.py
+  modules: [pkgs/20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose]
 RFC 7518:
-  modules:
-  - tigrbl_auth/standards/jose/rfc7518.py
+  modules: [pkgs/20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose]
 RFC 7519:
-  modules:
-  - tigrbl_auth/standards/jose/rfc7519.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-jwt/src/tigrbl_auth_protocol_jwt]
 OIDC Core 1.0:
-  modules:
-  - tigrbl_auth/standards/oidc/core.py
-  - tigrbl_auth/standards/oidc/id_token.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/core.py]
 OIDC Discovery 1.0:
-  modules:
-  - tigrbl_auth/standards/oidc/discovery.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/discovery.py]
 RFC 7800:
-  modules:
-  - tigrbl_auth/standards/jose/rfc7800.py
+  modules: [pkgs/20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose/standards/rfc7800.py]
   boundary: extension_quarantine
 RFC 8417:
-  modules:
-  - pkgs/10-concrete/tigrbl-set-concrete/src/tigrbl_set_concrete/__init__.py
+  modules: [pkgs/50-protocols/tigrbl-security-event-protocol-set/src/tigrbl_security_event_protocol_set]
   boundary: extension_quarantine
 RFC 8291:
-  modules:
-  - tigrbl_auth/extensions/rfc8291.py
+  modules: [pkgs/20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose]
   boundary: extension_quarantine
 RFC 8812:
-  modules:
-  - tigrbl_auth/extensions/rfc8812.py
+  modules: [pkgs/20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose/standards/rfc8812.py]
   boundary: extension_quarantine
 RFC 8932:
-  modules:
-  - tigrbl_auth/extensions/rfc8932.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-cwt/src/tigrbl_auth_protocol_cwt]
   boundary: extension_quarantine
 RFC 9728:
-  modules:
-  - tigrbl_auth/standards/oauth2/rfc9728.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/protected_resource_metadata.py]
 RFC 9700:
-  modules:
-  - tigrbl_auth/standards/oauth2/rfc9700.py
-  - tigrbl_auth/ops/authorize.py
-  - tigrbl_auth/ops/token.py
-  - tigrbl_auth/standards/oidc/discovery.py
-  - tigrbl_auth/standards/oidc/discovery_metadata.py
-  - tigrbl_auth/cli
-  - tigrbl_auth/security/auth.py
-  - tigrbl_auth/security/deps.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/oauth_security_bcp.py]
 OpenRPC 1.4.x admin/control-plane contract:
-  modules:
-  - tigrbl_auth/api/rpc/__init__.py
-  - tigrbl_auth/api/rpc/registry.py
-  - tigrbl_auth/api/rpc/methods
-  - tigrbl_auth/api/rpc/schemas
-  - tigrbl_auth/api/surfaces.py
-  - tigrbl_auth/cli
-  - tigrbl_auth/config/deployment.py
+  modules: [pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/api]
 RFC 7009:
-  modules:
-  - tigrbl_auth/standards/oauth2/revocation.py
-  - tigrbl_auth/api/rest/routers/revoke.py
-  - tigrbl_auth/ops/revoke.py
-  - tigrbl_auth/services/persistence.py
-  - tigrbl_auth/tables/revoked_token.py
-  - tigrbl_auth/tables/token_record.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/revocation.py]
 RFC 7662:
-  modules:
-  - tigrbl_auth/standards/oauth2/introspection.py
-  - tigrbl_auth/services/persistence.py
-  - tigrbl_auth/tables/token_record.py
-  - tigrbl_auth/tables/revoked_token.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/introspection.py]
 RFC 8252:
-  modules:
-  - tigrbl_auth/standards/oauth2/native_apps.py
-  - tigrbl_auth/tables/client.py
-  - tigrbl_auth/ops/authorize.py
-  - tigrbl_auth/ops/register.py
-  - tigrbl_auth/ops/token.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/native_apps.py]
 RFC 8693:
-  modules:
-  - tigrbl_auth/standards/oauth2/token_exchange.py
-  - tigrbl_auth/ops/token.py
-  - tigrbl_auth/services/token_service.py
-  - tigrbl_auth/services/persistence.py
-  - tigrbl_auth/api/rpc/methods/token.py
-  - tigrbl_auth/api/rpc/schemas/token.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/token_exchange.py]
 RFC 8705:
-  modules:
-  - tigrbl_auth/standards/oauth2/mtls.py
-  - tigrbl_auth/standards/oauth2/rfc9700.py
-  - tigrbl_auth/ops/token.py
-  - tigrbl_auth/standards/oauth2/token_exchange.py
-  - tigrbl_auth/services/token_service.py
-  - tigrbl_auth/ops/register.py
-  - tigrbl_auth/api/rest/schemas.py
-  - tigrbl_auth/standards/oidc/discovery_metadata.py
-  - tigrbl_auth/security/auth.py
-  - tigrbl_auth/security/deps.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/mutual_tls_client_authentication.py]
 RFC 9068:
-  modules:
-  - tigrbl_auth/standards/oauth2/jwt_access_tokens.py
-  - tigrbl_auth/services/token_service.py
-  - tigrbl_auth/ops/login.py
-  - tigrbl_auth/ops/token.py
-  - tigrbl_auth/standards/oauth2/token_exchange.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/jwt_access_tokens.py]
 RFC 9449:
-  modules:
-  - tigrbl_auth/standards/oauth2/dpop.py
-  - tigrbl_auth/standards/oauth2/rfc9700.py
-  - tigrbl_auth/ops/token.py
-  - tigrbl_auth/standards/oauth2/token_exchange.py
-  - tigrbl_auth/security/auth.py
-  - tigrbl_auth/security/deps.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/dpop.py]
 OpenAPI 3.1 / 3.2 compatible public contract:
-  modules:
-  - tigrbl_auth/api/rest
-  - tigrbl_auth/api/surfaces.py
+  modules: [pkgs/80-apis/tigrbl-auth-api-public/src/tigrbl_auth_api_public/openapi.py]
 RFC 7591:
-  modules:
-  - tigrbl_auth/standards/oauth2/dynamic_client_registration.py
-  - tigrbl_auth/api/rest/routers/register.py
-  - tigrbl_auth/ops/register.py
-  - tigrbl_auth/tables/client_registration.py
-  - tigrbl_auth/services/persistence.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/dynamic_client_registration.py]
 RFC 7592:
-  modules:
-  - tigrbl_auth/standards/oauth2/client_registration_management.py
-  - tigrbl_auth/tables/client_registration.py
-  - tigrbl_auth/services/persistence.py
-  - tigrbl_auth/api/rest/routers/register.py
-  - tigrbl_auth/ops/register.py
-  - tigrbl_auth/api/rpc/methods/client_registration.py
-  - tigrbl_auth/api/rpc/schemas/client_registration.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/client_registration_management.py]
 RFC 8628:
-  modules:
-  - tigrbl_auth/standards/oauth2/device_authorization.py
-  - tigrbl_auth/api/rest/routers/device_authorization.py
-  - tigrbl_auth/ops/device_authorization.py
-  - tigrbl_auth/tables/device_code.py
-  - tigrbl_auth/ops/token.py
-  - tigrbl_auth/services/persistence.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/device_authorization.py]
 RFC 8707:
-  modules:
-  - tigrbl_auth/standards/oauth2/resource_indicators.py
-  - tigrbl_auth/ops/authorize.py
-  - tigrbl_auth/ops/token.py
-  - tigrbl_auth/ops/device_authorization.py
-  - tigrbl_auth/ops/par.py
-  - tigrbl_auth/standards/oauth2/token_exchange.py
-  - tigrbl_auth/services/token_service.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/resource_indicators.py]
 RFC 9101:
-  modules:
-  - tigrbl_auth/standards/oauth2/jar.py
-  - tigrbl_auth/ops/authorize.py
-  - tigrbl_auth/ops/par.py
-  - tigrbl_auth/cli
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/jwt_secured_authorization_requests.py]
 RFC 9126:
-  modules:
-  - tigrbl_auth/standards/oauth2/par.py
-  - tigrbl_auth/api/rest/routers/par.py
-  - tigrbl_auth/ops/par.py
-  - tigrbl_auth/ops/authorize.py
-  - tigrbl_auth/tables/pushed_authorization_request.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/pushed_authorization_requests.py]
 RFC 9207:
-  modules:
-  - tigrbl_auth/standards/oauth2/issuer_identification.py
-  - tigrbl_auth/config/deployment.py
-  - tigrbl_auth/ops/authorize.py
-  - tigrbl_auth/standards/oidc/discovery_metadata.py
-  - tigrbl_auth/cli
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/issuer_identification.py]
 RFC 9396:
-  modules:
-  - tigrbl_auth/standards/oauth2/rar.py
-  - tigrbl_auth/ops/authorize.py
-  - tigrbl_auth/ops/par.py
-  - tigrbl_auth/cli
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/rich_authorization_requests.py]
 RFC 6265:
-  modules:
-  - tigrbl_auth/standards/http/cookies.py
-  - tigrbl_auth/standards/oidc/session_mgmt.py
-  - tigrbl_auth/ops/login.py
-  - tigrbl_auth/ops/authorize.py
-  - tigrbl_auth/ops/logout.py
-  - tigrbl_auth/tables/auth_session.py
+  modules: [pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/http_standards/cookies.py]
 RFC 7521:
-  modules:
-  - tigrbl_auth/standards/oauth2/assertion_framework.py
-  - tigrbl_auth/ops/token.py
-  - tigrbl_auth/cli
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/assertion_framework.py]
 RFC 7523:
-  modules:
-  - tigrbl_auth/standards/oauth2/jwt_client_auth.py
-  - tigrbl_auth/ops/token.py
-  - tigrbl_auth/ops/register.py
-  - tigrbl_auth/standards/oidc/discovery_metadata.py
-  - tigrbl_auth/cli
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/jwt_client_auth.py]
 OIDC UserInfo:
-  modules:
-  - tigrbl_auth/standards/oidc/userinfo.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/userinfo.py]
 OIDC Session Management:
-  modules:
-  - tigrbl_auth/standards/oidc/session_mgmt.py
-  - tigrbl_auth/standards/http/cookies.py
-  - tigrbl_auth/ops/login.py
-  - tigrbl_auth/ops/authorize.py
-  - tigrbl_auth/ops/logout.py
-  - tigrbl_auth/tables/auth_session.py
-  - tigrbl_auth/tables/auth_code.py
-  - tigrbl_auth/services/persistence.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/session_mgmt.py]
 OIDC RP-Initiated Logout:
-  modules:
-  - tigrbl_auth/standards/oidc/rp_initiated_logout.py
-  - tigrbl_auth/api/rest/routers/logout.py
-  - tigrbl_auth/ops/logout.py
-  - tigrbl_auth/tables/logout_state.py
-  - tigrbl_auth/tables/client_registration.py
-  - tigrbl_auth/services/persistence.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/rp_initiated_logout.py]
 OIDC Front-Channel Logout:
-  modules:
-  - tigrbl_auth/standards/oidc/frontchannel_logout.py
-  - tigrbl_auth/standards/oidc/rp_initiated_logout.py
-  - tigrbl_auth/ops/logout.py
-  - tigrbl_auth/tables/logout_state.py
-  - tigrbl_auth/tables/client_registration.py
-  - tigrbl_auth/services/persistence.py
-  - tigrbl_auth/api/rest/shared.py
-  - tigrbl_auth/standards/oidc/discovery_metadata.py
-  - tigrbl_auth/cli
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/frontchannel_logout.py]
 OIDC Back-Channel Logout:
-  modules:
-  - tigrbl_auth/standards/oidc/backchannel_logout.py
-  - tigrbl_auth/standards/oidc/rp_initiated_logout.py
-  - tigrbl_auth/ops/logout.py
-  - tigrbl_auth/tables/logout_state.py
-  - tigrbl_auth/tables/client_registration.py
-  - tigrbl_auth/services/persistence.py
-  - tigrbl_auth/api/rest/shared.py
-  - tigrbl_auth/standards/oidc/discovery_metadata.py
-  - tigrbl_auth/cli
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/backchannel_logout.py]
 ASGI 3 application package:
-  modules:
-  - tigrbl_auth/api/app.py
-  - tigrbl_auth/app.py
-  - tigrbl_auth/plugin.py
-  - tigrbl_auth/gateway.py
-  - tigrbl_auth/config/deployment.py
-  - tigrbl_auth/runtime/__init__.py
-  - tigrbl_auth/runtime/types.py
-  - tigrbl_auth/runtime/base.py
-  - tigrbl_auth/runtime/plan.py
-  - tigrbl_auth/runtime/registry.py
-  - tigrbl_auth/cli
+  modules: [pkgs/80-apis/tigrbl-auth-api-public/src/tigrbl_auth_api_public/app.py]
 'Runner profile: Uvicorn':
-  modules:
-  - tigrbl_auth/api/app.py
-  - tigrbl_auth/gateway.py
-  - tigrbl_auth/cli
-  - tigrbl_auth/config/deployment.py
-  - tigrbl_auth/runtime/registry.py
-  - tigrbl_auth/runtime/plan.py
-  - tigrbl_auth/runtime/uvicorn.py
+  modules: [pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/uvicorn.py]
 'Runner profile: Hypercorn':
-  modules:
-  - tigrbl_auth/api/app.py
-  - tigrbl_auth/gateway.py
-  - tigrbl_auth/cli
-  - tigrbl_auth/config/deployment.py
-  - tigrbl_auth/runtime/registry.py
-  - tigrbl_auth/runtime/plan.py
-  - tigrbl_auth/runtime/hypercorn.py
+  modules: [pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/hypercorn.py]
 'Runner profile: Tigrcorn':
-  modules:
-  - tigrbl_auth/api/app.py
-  - tigrbl_auth/gateway.py
-  - tigrbl_auth/cli
-  - tigrbl_auth/config/deployment.py
-  - tigrbl_auth/runtime/registry.py
-  - tigrbl_auth/runtime/plan.py
-  - tigrbl_auth/runtime/tigrcorn.py
+  modules: [pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/tigrcorn.py]
 CLI operator surface:
-  modules:
-  - tigrbl_auth/cli
-  - tigrbl_auth/services/operator_service.py
-  - tigrbl_auth/services/audit_service.py
-  - tigrbl_auth/services/client_service.py
-  - tigrbl_auth/services/identity_service.py
-  - tigrbl_auth/services/session_service.py
+  modules: [pkgs/60-runtime/tigrbl-identity-cli/src/tigrbl_identity_cli/cli]
 Bootstrap and migration lifecycle:
-  modules:
-  - tigrbl_auth/cli
-  - tigrbl_auth/services/persistence.py
+  modules: [pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/migrations]
 Key lifecycle and JWKS publication:
-  modules:
-  - tigrbl_auth/cli
-  - tigrbl_auth/api/rpc/methods/keys.py
-  - tigrbl_auth/standards/jose/rfc7517.py
-  - tigrbl_auth/services/key_management.py
-  - tigrbl_auth/services/operator_service.py
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/jwks_service.py]
 Import/export portability:
-  modules:
-  - tigrbl_auth/cli
-  - tigrbl_auth/services/import_export_service.py
-  - tigrbl_auth/services/operator_service.py
+  modules: [pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/portability.py]
 Release bundle and signature verification:
-  modules:
-  - tigrbl_auth/cli
+  modules: [pkgs/60-runtime/tigrbl-auth-release-certification/src/tigrbl_auth_release_certification]

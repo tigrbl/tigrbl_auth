@@ -1,20 +1,20 @@
 {
   "schema_version": 2,
-  "generated_at": "20260513T104129Z",
+  "generated_at": "20260713T040704Z",
   "python_version": "3.12",
   "environment_identity": {
     "python_version": "3.12",
-    "python_full_version": "3.12.5",
+    "python_full_version": "3.12.13",
     "python_tag": "py312",
     "implementation": "CPython",
-    "implementation_version": "3.12.5",
+    "implementation_version": "3.12.13",
     "executable": ".venv\\Scripts\\python.exe",
-    "platform": "Windows-10-10.0.19045-SP0",
+    "platform": "Windows-11-10.0.26200-SP0",
     "platform_system": "Windows",
-    "platform_release": "10",
-    "platform_version": "10.0.19045",
+    "platform_release": "11",
+    "platform_version": "10.0.26200",
     "machine": "AMD64",
-    "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
+    "processor": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
     "tox_env": null,
     "matrix_profile": null,
     "install_profile": "migration-portability",
@@ -91,16 +91,160 @@
       "down_revision": "0008_refresh_token_family_state",
       "module": "0009_admin_identity_bootstrap_and_password_recovery",
       "doc": "Executable DDL migration for 0009_admin_identity_bootstrap_and_password_recovery."
+    },
+    {
+      "revision": "0010_realm_namespace_tables",
+      "down_revision": "0009_admin_identity_bootstrap_and_password_recovery",
+      "module": "0010_realm_namespace_tables",
+      "doc": "Executable DDL migration for 0010_realm_namespace_tables."
+    },
+    {
+      "revision": "0011_delegation_grant_lifecycle_tables",
+      "down_revision": "0010_realm_namespace_tables",
+      "module": "0011_delegation_grant_lifecycle_tables",
+      "doc": "Executable DDL migration for DelegationGrant lifecycle tables."
+    },
+    {
+      "revision": "0012_key_version_and_token_provenance_tables",
+      "down_revision": "0011_delegation_grant_lifecycle_tables",
+      "module": "0012_key_version_and_token_provenance_tables",
+      "doc": "Executable DDL migration for key versions and token provenance."
+    },
+    {
+      "revision": "0013_contract_durable_state_tables",
+      "down_revision": "0012_key_version_and_token_provenance_tables",
+      "module": "0013_contract_durable_state_tables",
+      "doc": "Executable DDL migration for contract-backed durable state tables."
+    },
+    {
+      "revision": "0014_optional_contract_state_tables",
+      "down_revision": "0013_contract_durable_state_tables",
+      "module": "0014_optional_contract_state_tables",
+      "doc": "Executable DDL migration for optional contract state tables."
+    },
+    {
+      "revision": "0015_principal_identity_credential_tables",
+      "down_revision": "0014_optional_contract_state_tables",
+      "module": "0015_principal_identity_credential_tables",
+      "doc": "Executable DDL migration for principal, identity, and credential subtype tables."
+    },
+    {
+      "revision": "0016_crypto_key_storage_tables",
+      "down_revision": "0015_principal_identity_credential_tables",
+      "module": "0016_crypto_key_storage_tables",
+      "doc": "Executable DDL migration for generic crypto key storage tables."
+    },
+    {
+      "revision": "0017_authorization_server_table",
+      "down_revision": "0016_crypto_key_storage_tables",
+      "module": "0017_authorization_server_table",
+      "doc": "Executable DDL migration for durable authorization-server state."
+    },
+    {
+      "revision": "0018_policy_tables",
+      "down_revision": "0017_authorization_server_table",
+      "module": "0018_policy_tables",
+      "doc": "Executable DDL migration for durable policy table state."
+    },
+    {
+      "revision": "0019_federation_and_invariant_tables",
+      "down_revision": "0018_policy_tables",
+      "module": "0019_federation_and_invariant_tables",
+      "doc": "Executable DDL migration for federation and invariant table-owned state."
+    },
+    {
+      "revision": "0020_backchannel_logout_replay_table",
+      "down_revision": "0019_federation_and_invariant_tables",
+      "module": "0020_backchannel_logout_replay_table",
+      "doc": "Executable DDL migration for OIDC back-channel logout replay state."
+    },
+    {
+      "revision": "0021_authentication_challenge_table",
+      "down_revision": "0020_backchannel_logout_replay_table",
+      "module": "0021_authentication_challenge_table",
+      "doc": "Executable DDL migration for advanced-authentication challenge state."
+    },
+    {
+      "revision": "0022_authority_and_trust_graph_tables",
+      "down_revision": "0021_authentication_challenge_table",
+      "module": "0022_authority_and_trust_graph_tables",
+      "doc": "Executable DDL migration for authority and trust graph tables."
+    },
+    {
+      "revision": "0023_artifact_and_token_profile_discriminators",
+      "down_revision": "0022_authority_and_trust_graph_tables",
+      "module": "0023_artifact_and_token_profile_discriminators",
+      "doc": "Add digital-artifact and explicit token-profile discriminators."
+    },
+    {
+      "revision": "0024_credential_issuer_wallet_and_configuration",
+      "down_revision": "0023_artifact_and_token_profile_discriminators",
+      "module": "0024_credential_issuer_wallet_and_configuration",
+      "doc": "Create credential issuer, configuration, and wallet registry tables."
+    },
+    {
+      "revision": "0025_credential_issuance_and_status",
+      "down_revision": "0024_credential_issuer_wallet_and_configuration",
+      "module": "0025_credential_issuance_and_status",
+      "doc": "Create credential issuance and status lifecycle tables."
+    },
+    {
+      "revision": "0026_presentation_transaction_and_replay",
+      "down_revision": "0025_credential_issuance_and_status",
+      "module": "0026_presentation_transaction_and_replay",
+      "doc": "Create presentation transaction, consent, and replay tables."
+    },
+    {
+      "revision": "0027_attestation_and_reference_material",
+      "down_revision": "0026_presentation_transaction_and_replay",
+      "module": "0027_attestation_and_reference_material",
+      "doc": "Create attestation evidence, appraisal, and reference-material tables."
+    },
+    {
+      "revision": "0028_spiffe_svid_and_trust_bundles",
+      "down_revision": "0027_attestation_and_reference_material",
+      "module": "0028_spiffe_svid_and_trust_bundles",
+      "doc": "Create SPIFFE SVID and trust-bundle metadata tables."
+    },
+    {
+      "revision": "0029_security_event_delivery",
+      "down_revision": "0028_spiffe_svid_and_trust_bundles",
+      "module": "0029_security_event_delivery",
+      "doc": "Create security-event delivery and replay tables."
+    },
+    {
+      "revision": "0030_optional_did_and_gnap_state",
+      "down_revision": "0029_security_event_delivery",
+      "module": "0030_optional_did_and_gnap_state",
+      "doc": "Create optional DID and GNAP durable state tables."
+    },
+    {
+      "revision": "0031_certificate_trust_and_status",
+      "down_revision": "0030_optional_did_and_gnap_state",
+      "module": "0031_certificate_trust_and_status",
+      "doc": "Create certificate metadata, trust-anchor, and status-snapshot tables."
+    },
+    {
+      "revision": "0032_claim_definition_and_provenance",
+      "down_revision": "0031_certificate_trust_and_status",
+      "module": "0032_claim_definition_and_provenance",
+      "doc": "Create private-claim definition, release-policy, and provenance tables."
+    },
+    {
+      "revision": "0033_replay_reservations",
+      "down_revision": "0032_claim_definition_and_provenance",
+      "module": "0033_replay_reservations",
+      "doc": "Create protocol-neutral atomic replay reservation state."
     }
   ],
-  "head_revision": "0009_admin_identity_bootstrap_and_password_recovery",
-  "expected_head_revision": "0009_admin_identity_bootstrap_and_password_recovery",
-  "downgrade_target_revision": "0008_refresh_token_family_state",
+  "head_revision": "0033_replay_reservations",
+  "expected_head_revision": "0033_replay_reservations",
+  "downgrade_target_revision": "0032_claim_definition_and_provenance",
   "backend_results": {
     "sqlite": {
       "backend": "sqlite",
       "available": true,
-      "database_url": "sqlite+aiosqlite:///E:\\swarmauri_github\\tigrbl_auth\\dist\\migration-portability\\sqlite\\tigrbl_auth_migration_portability.db",
+      "database_url": "sqlite+aiosqlite:///D:\\Code\\GitHub\\tigrbl\\tigrbl_auth\\dist\\migration-portability\\sqlite\\tigrbl_auth_migration_portability.db",
       "passed": true,
       "upgrade_passed": true,
       "downgrade_passed": true,
@@ -159,14 +303,158 @@
           "down_revision": "0008_refresh_token_family_state",
           "module": "0009_admin_identity_bootstrap_and_password_recovery",
           "doc": "Executable DDL migration for 0009_admin_identity_bootstrap_and_password_recovery."
+        },
+        {
+          "revision": "0010_realm_namespace_tables",
+          "down_revision": "0009_admin_identity_bootstrap_and_password_recovery",
+          "module": "0010_realm_namespace_tables",
+          "doc": "Executable DDL migration for 0010_realm_namespace_tables."
+        },
+        {
+          "revision": "0011_delegation_grant_lifecycle_tables",
+          "down_revision": "0010_realm_namespace_tables",
+          "module": "0011_delegation_grant_lifecycle_tables",
+          "doc": "Executable DDL migration for DelegationGrant lifecycle tables."
+        },
+        {
+          "revision": "0012_key_version_and_token_provenance_tables",
+          "down_revision": "0011_delegation_grant_lifecycle_tables",
+          "module": "0012_key_version_and_token_provenance_tables",
+          "doc": "Executable DDL migration for key versions and token provenance."
+        },
+        {
+          "revision": "0013_contract_durable_state_tables",
+          "down_revision": "0012_key_version_and_token_provenance_tables",
+          "module": "0013_contract_durable_state_tables",
+          "doc": "Executable DDL migration for contract-backed durable state tables."
+        },
+        {
+          "revision": "0014_optional_contract_state_tables",
+          "down_revision": "0013_contract_durable_state_tables",
+          "module": "0014_optional_contract_state_tables",
+          "doc": "Executable DDL migration for optional contract state tables."
+        },
+        {
+          "revision": "0015_principal_identity_credential_tables",
+          "down_revision": "0014_optional_contract_state_tables",
+          "module": "0015_principal_identity_credential_tables",
+          "doc": "Executable DDL migration for principal, identity, and credential subtype tables."
+        },
+        {
+          "revision": "0016_crypto_key_storage_tables",
+          "down_revision": "0015_principal_identity_credential_tables",
+          "module": "0016_crypto_key_storage_tables",
+          "doc": "Executable DDL migration for generic crypto key storage tables."
+        },
+        {
+          "revision": "0017_authorization_server_table",
+          "down_revision": "0016_crypto_key_storage_tables",
+          "module": "0017_authorization_server_table",
+          "doc": "Executable DDL migration for durable authorization-server state."
+        },
+        {
+          "revision": "0018_policy_tables",
+          "down_revision": "0017_authorization_server_table",
+          "module": "0018_policy_tables",
+          "doc": "Executable DDL migration for durable policy table state."
+        },
+        {
+          "revision": "0019_federation_and_invariant_tables",
+          "down_revision": "0018_policy_tables",
+          "module": "0019_federation_and_invariant_tables",
+          "doc": "Executable DDL migration for federation and invariant table-owned state."
+        },
+        {
+          "revision": "0020_backchannel_logout_replay_table",
+          "down_revision": "0019_federation_and_invariant_tables",
+          "module": "0020_backchannel_logout_replay_table",
+          "doc": "Executable DDL migration for OIDC back-channel logout replay state."
+        },
+        {
+          "revision": "0021_authentication_challenge_table",
+          "down_revision": "0020_backchannel_logout_replay_table",
+          "module": "0021_authentication_challenge_table",
+          "doc": "Executable DDL migration for advanced-authentication challenge state."
+        },
+        {
+          "revision": "0022_authority_and_trust_graph_tables",
+          "down_revision": "0021_authentication_challenge_table",
+          "module": "0022_authority_and_trust_graph_tables",
+          "doc": "Executable DDL migration for authority and trust graph tables."
+        },
+        {
+          "revision": "0023_artifact_and_token_profile_discriminators",
+          "down_revision": "0022_authority_and_trust_graph_tables",
+          "module": "0023_artifact_and_token_profile_discriminators",
+          "doc": "Add digital-artifact and explicit token-profile discriminators."
+        },
+        {
+          "revision": "0024_credential_issuer_wallet_and_configuration",
+          "down_revision": "0023_artifact_and_token_profile_discriminators",
+          "module": "0024_credential_issuer_wallet_and_configuration",
+          "doc": "Create credential issuer, configuration, and wallet registry tables."
+        },
+        {
+          "revision": "0025_credential_issuance_and_status",
+          "down_revision": "0024_credential_issuer_wallet_and_configuration",
+          "module": "0025_credential_issuance_and_status",
+          "doc": "Create credential issuance and status lifecycle tables."
+        },
+        {
+          "revision": "0026_presentation_transaction_and_replay",
+          "down_revision": "0025_credential_issuance_and_status",
+          "module": "0026_presentation_transaction_and_replay",
+          "doc": "Create presentation transaction, consent, and replay tables."
+        },
+        {
+          "revision": "0027_attestation_and_reference_material",
+          "down_revision": "0026_presentation_transaction_and_replay",
+          "module": "0027_attestation_and_reference_material",
+          "doc": "Create attestation evidence, appraisal, and reference-material tables."
+        },
+        {
+          "revision": "0028_spiffe_svid_and_trust_bundles",
+          "down_revision": "0027_attestation_and_reference_material",
+          "module": "0028_spiffe_svid_and_trust_bundles",
+          "doc": "Create SPIFFE SVID and trust-bundle metadata tables."
+        },
+        {
+          "revision": "0029_security_event_delivery",
+          "down_revision": "0028_spiffe_svid_and_trust_bundles",
+          "module": "0029_security_event_delivery",
+          "doc": "Create security-event delivery and replay tables."
+        },
+        {
+          "revision": "0030_optional_did_and_gnap_state",
+          "down_revision": "0029_security_event_delivery",
+          "module": "0030_optional_did_and_gnap_state",
+          "doc": "Create optional DID and GNAP durable state tables."
+        },
+        {
+          "revision": "0031_certificate_trust_and_status",
+          "down_revision": "0030_optional_did_and_gnap_state",
+          "module": "0031_certificate_trust_and_status",
+          "doc": "Create certificate metadata, trust-anchor, and status-snapshot tables."
+        },
+        {
+          "revision": "0032_claim_definition_and_provenance",
+          "down_revision": "0031_certificate_trust_and_status",
+          "module": "0032_claim_definition_and_provenance",
+          "doc": "Create private-claim definition, release-policy, and provenance tables."
+        },
+        {
+          "revision": "0033_replay_reservations",
+          "down_revision": "0032_claim_definition_and_provenance",
+          "module": "0033_replay_reservations",
+          "doc": "Create protocol-neutral atomic replay reservation state."
         }
       ],
-      "expected_head_revision": "0009_admin_identity_bootstrap_and_password_recovery",
-      "downgrade_target_revision": "0008_refresh_token_family_state",
-      "downgraded_revision": "0008_refresh_token_family_state",
-      "head_revision_after_upgrade": "0009_admin_identity_bootstrap_and_password_recovery",
-      "head_revision_after_downgrade": "0008_refresh_token_family_state",
-      "head_revision_after_reapply": "0009_admin_identity_bootstrap_and_password_recovery",
+      "expected_head_revision": "0033_replay_reservations",
+      "downgrade_target_revision": "0032_claim_definition_and_provenance",
+      "downgraded_revision": "0032_claim_definition_and_provenance",
+      "head_revision_after_upgrade": "0033_replay_reservations",
+      "head_revision_after_downgrade": "0032_claim_definition_and_provenance",
+      "head_revision_after_reapply": "0033_replay_reservations",
       "upgrade_applied_revisions": [
         "0001_initial_identity_tables",
         "0002_client_and_service_tables",
@@ -176,7 +464,31 @@
         "0006_key_rotation_and_audit_tables",
         "0007_browser_session_cookie_and_auth_code_linkage",
         "0008_refresh_token_family_state",
-        "0009_admin_identity_bootstrap_and_password_recovery"
+        "0009_admin_identity_bootstrap_and_password_recovery",
+        "0010_realm_namespace_tables",
+        "0011_delegation_grant_lifecycle_tables",
+        "0012_key_version_and_token_provenance_tables",
+        "0013_contract_durable_state_tables",
+        "0014_optional_contract_state_tables",
+        "0015_principal_identity_credential_tables",
+        "0016_crypto_key_storage_tables",
+        "0017_authorization_server_table",
+        "0018_policy_tables",
+        "0019_federation_and_invariant_tables",
+        "0020_backchannel_logout_replay_table",
+        "0021_authentication_challenge_table",
+        "0022_authority_and_trust_graph_tables",
+        "0023_artifact_and_token_profile_discriminators",
+        "0024_credential_issuer_wallet_and_configuration",
+        "0025_credential_issuance_and_status",
+        "0026_presentation_transaction_and_replay",
+        "0027_attestation_and_reference_material",
+        "0028_spiffe_svid_and_trust_bundles",
+        "0029_security_event_delivery",
+        "0030_optional_did_and_gnap_state",
+        "0031_certificate_trust_and_status",
+        "0032_claim_definition_and_provenance",
+        "0033_replay_reservations"
       ],
       "reapply_applied_revisions": [
         "0001_initial_identity_tables",
@@ -187,7 +499,31 @@
         "0006_key_rotation_and_audit_tables",
         "0007_browser_session_cookie_and_auth_code_linkage",
         "0008_refresh_token_family_state",
-        "0009_admin_identity_bootstrap_and_password_recovery"
+        "0009_admin_identity_bootstrap_and_password_recovery",
+        "0010_realm_namespace_tables",
+        "0011_delegation_grant_lifecycle_tables",
+        "0012_key_version_and_token_provenance_tables",
+        "0013_contract_durable_state_tables",
+        "0014_optional_contract_state_tables",
+        "0015_principal_identity_credential_tables",
+        "0016_crypto_key_storage_tables",
+        "0017_authorization_server_table",
+        "0018_policy_tables",
+        "0019_federation_and_invariant_tables",
+        "0020_backchannel_logout_replay_table",
+        "0021_authentication_challenge_table",
+        "0022_authority_and_trust_graph_tables",
+        "0023_artifact_and_token_profile_discriminators",
+        "0024_credential_issuer_wallet_and_configuration",
+        "0025_credential_issuance_and_status",
+        "0026_presentation_transaction_and_replay",
+        "0027_attestation_and_reference_material",
+        "0028_spiffe_svid_and_trust_bundles",
+        "0029_security_event_delivery",
+        "0030_optional_did_and_gnap_state",
+        "0031_certificate_trust_and_status",
+        "0032_claim_definition_and_provenance",
+        "0033_replay_reservations"
       ],
       "applied_revisions_after_downgrade": [
         "0001_initial_identity_tables",
@@ -197,7 +533,31 @@
         "0005_session_logout_tables",
         "0006_key_rotation_and_audit_tables",
         "0007_browser_session_cookie_and_auth_code_linkage",
-        "0008_refresh_token_family_state"
+        "0008_refresh_token_family_state",
+        "0009_admin_identity_bootstrap_and_password_recovery",
+        "0010_realm_namespace_tables",
+        "0011_delegation_grant_lifecycle_tables",
+        "0012_key_version_and_token_provenance_tables",
+        "0013_contract_durable_state_tables",
+        "0014_optional_contract_state_tables",
+        "0015_principal_identity_credential_tables",
+        "0016_crypto_key_storage_tables",
+        "0017_authorization_server_table",
+        "0018_policy_tables",
+        "0019_federation_and_invariant_tables",
+        "0020_backchannel_logout_replay_table",
+        "0021_authentication_challenge_table",
+        "0022_authority_and_trust_graph_tables",
+        "0023_artifact_and_token_profile_discriminators",
+        "0024_credential_issuer_wallet_and_configuration",
+        "0025_credential_issuance_and_status",
+        "0026_presentation_transaction_and_replay",
+        "0027_attestation_and_reference_material",
+        "0028_spiffe_svid_and_trust_bundles",
+        "0029_security_event_delivery",
+        "0030_optional_did_and_gnap_state",
+        "0031_certificate_trust_and_status",
+        "0032_claim_definition_and_provenance"
       ],
       "upgrade_pending_before": [
         "0001_initial_identity_tables",
@@ -208,10 +568,66 @@
         "0006_key_rotation_and_audit_tables",
         "0007_browser_session_cookie_and_auth_code_linkage",
         "0008_refresh_token_family_state",
-        "0009_admin_identity_bootstrap_and_password_recovery"
+        "0009_admin_identity_bootstrap_and_password_recovery",
+        "0010_realm_namespace_tables",
+        "0011_delegation_grant_lifecycle_tables",
+        "0012_key_version_and_token_provenance_tables",
+        "0013_contract_durable_state_tables",
+        "0014_optional_contract_state_tables",
+        "0015_principal_identity_credential_tables",
+        "0016_crypto_key_storage_tables",
+        "0017_authorization_server_table",
+        "0018_policy_tables",
+        "0019_federation_and_invariant_tables",
+        "0020_backchannel_logout_replay_table",
+        "0021_authentication_challenge_table",
+        "0022_authority_and_trust_graph_tables",
+        "0023_artifact_and_token_profile_discriminators",
+        "0024_credential_issuer_wallet_and_configuration",
+        "0025_credential_issuance_and_status",
+        "0026_presentation_transaction_and_replay",
+        "0027_attestation_and_reference_material",
+        "0028_spiffe_svid_and_trust_bundles",
+        "0029_security_event_delivery",
+        "0030_optional_did_and_gnap_state",
+        "0031_certificate_trust_and_status",
+        "0032_claim_definition_and_provenance",
+        "0033_replay_reservations"
       ],
       "reapply_pending_before": [
-        "0009_admin_identity_bootstrap_and_password_recovery"
+        "0001_initial_identity_tables",
+        "0002_client_and_service_tables",
+        "0003_authorization_runtime_tables",
+        "0004_device_par_revocation_tables",
+        "0005_session_logout_tables",
+        "0006_key_rotation_and_audit_tables",
+        "0007_browser_session_cookie_and_auth_code_linkage",
+        "0008_refresh_token_family_state",
+        "0009_admin_identity_bootstrap_and_password_recovery",
+        "0010_realm_namespace_tables",
+        "0011_delegation_grant_lifecycle_tables",
+        "0012_key_version_and_token_provenance_tables",
+        "0013_contract_durable_state_tables",
+        "0014_optional_contract_state_tables",
+        "0015_principal_identity_credential_tables",
+        "0016_crypto_key_storage_tables",
+        "0017_authorization_server_table",
+        "0018_policy_tables",
+        "0019_federation_and_invariant_tables",
+        "0020_backchannel_logout_replay_table",
+        "0021_authentication_challenge_table",
+        "0022_authority_and_trust_graph_tables",
+        "0023_artifact_and_token_profile_discriminators",
+        "0024_credential_issuer_wallet_and_configuration",
+        "0025_credential_issuance_and_status",
+        "0026_presentation_transaction_and_replay",
+        "0027_attestation_and_reference_material",
+        "0028_spiffe_svid_and_trust_bundles",
+        "0029_security_event_delivery",
+        "0030_optional_did_and_gnap_state",
+        "0031_certificate_trust_and_status",
+        "0032_claim_definition_and_provenance",
+        "0033_replay_reservations"
       ],
       "artifacts": {
         "upgrade": "dist\\migration-portability\\sqlite\\upgrade.json",
@@ -281,14 +697,158 @@
           "down_revision": "0008_refresh_token_family_state",
           "module": "0009_admin_identity_bootstrap_and_password_recovery",
           "doc": "Executable DDL migration for 0009_admin_identity_bootstrap_and_password_recovery."
+        },
+        {
+          "revision": "0010_realm_namespace_tables",
+          "down_revision": "0009_admin_identity_bootstrap_and_password_recovery",
+          "module": "0010_realm_namespace_tables",
+          "doc": "Executable DDL migration for 0010_realm_namespace_tables."
+        },
+        {
+          "revision": "0011_delegation_grant_lifecycle_tables",
+          "down_revision": "0010_realm_namespace_tables",
+          "module": "0011_delegation_grant_lifecycle_tables",
+          "doc": "Executable DDL migration for DelegationGrant lifecycle tables."
+        },
+        {
+          "revision": "0012_key_version_and_token_provenance_tables",
+          "down_revision": "0011_delegation_grant_lifecycle_tables",
+          "module": "0012_key_version_and_token_provenance_tables",
+          "doc": "Executable DDL migration for key versions and token provenance."
+        },
+        {
+          "revision": "0013_contract_durable_state_tables",
+          "down_revision": "0012_key_version_and_token_provenance_tables",
+          "module": "0013_contract_durable_state_tables",
+          "doc": "Executable DDL migration for contract-backed durable state tables."
+        },
+        {
+          "revision": "0014_optional_contract_state_tables",
+          "down_revision": "0013_contract_durable_state_tables",
+          "module": "0014_optional_contract_state_tables",
+          "doc": "Executable DDL migration for optional contract state tables."
+        },
+        {
+          "revision": "0015_principal_identity_credential_tables",
+          "down_revision": "0014_optional_contract_state_tables",
+          "module": "0015_principal_identity_credential_tables",
+          "doc": "Executable DDL migration for principal, identity, and credential subtype tables."
+        },
+        {
+          "revision": "0016_crypto_key_storage_tables",
+          "down_revision": "0015_principal_identity_credential_tables",
+          "module": "0016_crypto_key_storage_tables",
+          "doc": "Executable DDL migration for generic crypto key storage tables."
+        },
+        {
+          "revision": "0017_authorization_server_table",
+          "down_revision": "0016_crypto_key_storage_tables",
+          "module": "0017_authorization_server_table",
+          "doc": "Executable DDL migration for durable authorization-server state."
+        },
+        {
+          "revision": "0018_policy_tables",
+          "down_revision": "0017_authorization_server_table",
+          "module": "0018_policy_tables",
+          "doc": "Executable DDL migration for durable policy table state."
+        },
+        {
+          "revision": "0019_federation_and_invariant_tables",
+          "down_revision": "0018_policy_tables",
+          "module": "0019_federation_and_invariant_tables",
+          "doc": "Executable DDL migration for federation and invariant table-owned state."
+        },
+        {
+          "revision": "0020_backchannel_logout_replay_table",
+          "down_revision": "0019_federation_and_invariant_tables",
+          "module": "0020_backchannel_logout_replay_table",
+          "doc": "Executable DDL migration for OIDC back-channel logout replay state."
+        },
+        {
+          "revision": "0021_authentication_challenge_table",
+          "down_revision": "0020_backchannel_logout_replay_table",
+          "module": "0021_authentication_challenge_table",
+          "doc": "Executable DDL migration for advanced-authentication challenge state."
+        },
+        {
+          "revision": "0022_authority_and_trust_graph_tables",
+          "down_revision": "0021_authentication_challenge_table",
+          "module": "0022_authority_and_trust_graph_tables",
+          "doc": "Executable DDL migration for authority and trust graph tables."
+        },
+        {
+          "revision": "0023_artifact_and_token_profile_discriminators",
+          "down_revision": "0022_authority_and_trust_graph_tables",
+          "module": "0023_artifact_and_token_profile_discriminators",
+          "doc": "Add digital-artifact and explicit token-profile discriminators."
+        },
+        {
+          "revision": "0024_credential_issuer_wallet_and_configuration",
+          "down_revision": "0023_artifact_and_token_profile_discriminators",
+          "module": "0024_credential_issuer_wallet_and_configuration",
+          "doc": "Create credential issuer, configuration, and wallet registry tables."
+        },
+        {
+          "revision": "0025_credential_issuance_and_status",
+          "down_revision": "0024_credential_issuer_wallet_and_configuration",
+          "module": "0025_credential_issuance_and_status",
+          "doc": "Create credential issuance and status lifecycle tables."
+        },
+        {
+          "revision": "0026_presentation_transaction_and_replay",
+          "down_revision": "0025_credential_issuance_and_status",
+          "module": "0026_presentation_transaction_and_replay",
+          "doc": "Create presentation transaction, consent, and replay tables."
+        },
+        {
+          "revision": "0027_attestation_and_reference_material",
+          "down_revision": "0026_presentation_transaction_and_replay",
+          "module": "0027_attestation_and_reference_material",
+          "doc": "Create attestation evidence, appraisal, and reference-material tables."
+        },
+        {
+          "revision": "0028_spiffe_svid_and_trust_bundles",
+          "down_revision": "0027_attestation_and_reference_material",
+          "module": "0028_spiffe_svid_and_trust_bundles",
+          "doc": "Create SPIFFE SVID and trust-bundle metadata tables."
+        },
+        {
+          "revision": "0029_security_event_delivery",
+          "down_revision": "0028_spiffe_svid_and_trust_bundles",
+          "module": "0029_security_event_delivery",
+          "doc": "Create security-event delivery and replay tables."
+        },
+        {
+          "revision": "0030_optional_did_and_gnap_state",
+          "down_revision": "0029_security_event_delivery",
+          "module": "0030_optional_did_and_gnap_state",
+          "doc": "Create optional DID and GNAP durable state tables."
+        },
+        {
+          "revision": "0031_certificate_trust_and_status",
+          "down_revision": "0030_optional_did_and_gnap_state",
+          "module": "0031_certificate_trust_and_status",
+          "doc": "Create certificate metadata, trust-anchor, and status-snapshot tables."
+        },
+        {
+          "revision": "0032_claim_definition_and_provenance",
+          "down_revision": "0031_certificate_trust_and_status",
+          "module": "0032_claim_definition_and_provenance",
+          "doc": "Create private-claim definition, release-policy, and provenance tables."
+        },
+        {
+          "revision": "0033_replay_reservations",
+          "down_revision": "0032_claim_definition_and_provenance",
+          "module": "0033_replay_reservations",
+          "doc": "Create protocol-neutral atomic replay reservation state."
         }
       ],
-      "expected_head_revision": "0009_admin_identity_bootstrap_and_password_recovery",
-      "downgrade_target_revision": "0008_refresh_token_family_state",
-      "downgraded_revision": "0008_refresh_token_family_state",
-      "head_revision_after_upgrade": "0009_admin_identity_bootstrap_and_password_recovery",
-      "head_revision_after_downgrade": "0008_refresh_token_family_state",
-      "head_revision_after_reapply": "0009_admin_identity_bootstrap_and_password_recovery",
+      "expected_head_revision": "0033_replay_reservations",
+      "downgrade_target_revision": "0032_claim_definition_and_provenance",
+      "downgraded_revision": "0032_claim_definition_and_provenance",
+      "head_revision_after_upgrade": "0033_replay_reservations",
+      "head_revision_after_downgrade": "0032_claim_definition_and_provenance",
+      "head_revision_after_reapply": "0033_replay_reservations",
       "upgrade_applied_revisions": [
         "0001_initial_identity_tables",
         "0002_client_and_service_tables",
@@ -298,7 +858,31 @@
         "0006_key_rotation_and_audit_tables",
         "0007_browser_session_cookie_and_auth_code_linkage",
         "0008_refresh_token_family_state",
-        "0009_admin_identity_bootstrap_and_password_recovery"
+        "0009_admin_identity_bootstrap_and_password_recovery",
+        "0010_realm_namespace_tables",
+        "0011_delegation_grant_lifecycle_tables",
+        "0012_key_version_and_token_provenance_tables",
+        "0013_contract_durable_state_tables",
+        "0014_optional_contract_state_tables",
+        "0015_principal_identity_credential_tables",
+        "0016_crypto_key_storage_tables",
+        "0017_authorization_server_table",
+        "0018_policy_tables",
+        "0019_federation_and_invariant_tables",
+        "0020_backchannel_logout_replay_table",
+        "0021_authentication_challenge_table",
+        "0022_authority_and_trust_graph_tables",
+        "0023_artifact_and_token_profile_discriminators",
+        "0024_credential_issuer_wallet_and_configuration",
+        "0025_credential_issuance_and_status",
+        "0026_presentation_transaction_and_replay",
+        "0027_attestation_and_reference_material",
+        "0028_spiffe_svid_and_trust_bundles",
+        "0029_security_event_delivery",
+        "0030_optional_did_and_gnap_state",
+        "0031_certificate_trust_and_status",
+        "0032_claim_definition_and_provenance",
+        "0033_replay_reservations"
       ],
       "reapply_applied_revisions": [
         "0001_initial_identity_tables",
@@ -309,7 +893,31 @@
         "0006_key_rotation_and_audit_tables",
         "0007_browser_session_cookie_and_auth_code_linkage",
         "0008_refresh_token_family_state",
-        "0009_admin_identity_bootstrap_and_password_recovery"
+        "0009_admin_identity_bootstrap_and_password_recovery",
+        "0010_realm_namespace_tables",
+        "0011_delegation_grant_lifecycle_tables",
+        "0012_key_version_and_token_provenance_tables",
+        "0013_contract_durable_state_tables",
+        "0014_optional_contract_state_tables",
+        "0015_principal_identity_credential_tables",
+        "0016_crypto_key_storage_tables",
+        "0017_authorization_server_table",
+        "0018_policy_tables",
+        "0019_federation_and_invariant_tables",
+        "0020_backchannel_logout_replay_table",
+        "0021_authentication_challenge_table",
+        "0022_authority_and_trust_graph_tables",
+        "0023_artifact_and_token_profile_discriminators",
+        "0024_credential_issuer_wallet_and_configuration",
+        "0025_credential_issuance_and_status",
+        "0026_presentation_transaction_and_replay",
+        "0027_attestation_and_reference_material",
+        "0028_spiffe_svid_and_trust_bundles",
+        "0029_security_event_delivery",
+        "0030_optional_did_and_gnap_state",
+        "0031_certificate_trust_and_status",
+        "0032_claim_definition_and_provenance",
+        "0033_replay_reservations"
       ],
       "applied_revisions_after_downgrade": [
         "0001_initial_identity_tables",
@@ -319,7 +927,31 @@
         "0005_session_logout_tables",
         "0006_key_rotation_and_audit_tables",
         "0007_browser_session_cookie_and_auth_code_linkage",
-        "0008_refresh_token_family_state"
+        "0008_refresh_token_family_state",
+        "0009_admin_identity_bootstrap_and_password_recovery",
+        "0010_realm_namespace_tables",
+        "0011_delegation_grant_lifecycle_tables",
+        "0012_key_version_and_token_provenance_tables",
+        "0013_contract_durable_state_tables",
+        "0014_optional_contract_state_tables",
+        "0015_principal_identity_credential_tables",
+        "0016_crypto_key_storage_tables",
+        "0017_authorization_server_table",
+        "0018_policy_tables",
+        "0019_federation_and_invariant_tables",
+        "0020_backchannel_logout_replay_table",
+        "0021_authentication_challenge_table",
+        "0022_authority_and_trust_graph_tables",
+        "0023_artifact_and_token_profile_discriminators",
+        "0024_credential_issuer_wallet_and_configuration",
+        "0025_credential_issuance_and_status",
+        "0026_presentation_transaction_and_replay",
+        "0027_attestation_and_reference_material",
+        "0028_spiffe_svid_and_trust_bundles",
+        "0029_security_event_delivery",
+        "0030_optional_did_and_gnap_state",
+        "0031_certificate_trust_and_status",
+        "0032_claim_definition_and_provenance"
       ],
       "upgrade_pending_before": [
         "0001_initial_identity_tables",
@@ -330,10 +962,34 @@
         "0006_key_rotation_and_audit_tables",
         "0007_browser_session_cookie_and_auth_code_linkage",
         "0008_refresh_token_family_state",
-        "0009_admin_identity_bootstrap_and_password_recovery"
+        "0009_admin_identity_bootstrap_and_password_recovery",
+        "0010_realm_namespace_tables",
+        "0011_delegation_grant_lifecycle_tables",
+        "0012_key_version_and_token_provenance_tables",
+        "0013_contract_durable_state_tables",
+        "0014_optional_contract_state_tables",
+        "0015_principal_identity_credential_tables",
+        "0016_crypto_key_storage_tables",
+        "0017_authorization_server_table",
+        "0018_policy_tables",
+        "0019_federation_and_invariant_tables",
+        "0020_backchannel_logout_replay_table",
+        "0021_authentication_challenge_table",
+        "0022_authority_and_trust_graph_tables",
+        "0023_artifact_and_token_profile_discriminators",
+        "0024_credential_issuer_wallet_and_configuration",
+        "0025_credential_issuance_and_status",
+        "0026_presentation_transaction_and_replay",
+        "0027_attestation_and_reference_material",
+        "0028_spiffe_svid_and_trust_bundles",
+        "0029_security_event_delivery",
+        "0030_optional_did_and_gnap_state",
+        "0031_certificate_trust_and_status",
+        "0032_claim_definition_and_provenance",
+        "0033_replay_reservations"
       ],
       "reapply_pending_before": [
-        "0009_admin_identity_bootstrap_and_password_recovery"
+        "0033_replay_reservations"
       ],
       "artifacts": {
         "upgrade": "dist\\migration-portability\\postgres\\upgrade.json",
@@ -342,7 +998,7 @@
       }
     }
   },
-  "pytest_report_artifact": "dist\\test-reports\\migration-portability-py312.json",
+  "pytest_report_artifact": "dist\\test-reports\\py312-migration-portability.json",
   "pytest_exit_code": 0,
   "pytest_summary": {
     "tests_collected": 2,

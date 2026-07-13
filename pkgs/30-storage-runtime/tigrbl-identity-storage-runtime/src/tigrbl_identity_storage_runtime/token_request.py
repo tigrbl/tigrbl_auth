@@ -1,25 +1,11 @@
 from __future__ import annotations
-
+from . import token_runtime as _runtime
 from .token_runtime import (
-    AuthCode,
-    AuthSession,
-    AuthorizationCodeGrantForm,
-    DEVICE_CODE_GRANT_TYPE,
-    HTTPException,
-    ISSUER,
-    InvalidRefreshTokenError,
-    InvalidTokenError,
-    JSONResponse,
-    JWT_BEARER_GRANT_TYPE,
-    OAuthPolicyViolation,
-    PRIVATE_KEY_JWT_AUTH_METHOD,
-    PasswordGrantForm,
-    RFC6749Error,
-    RefreshTokenReuseError,
-    SUPPORTED_MTLS_AUTH_METHODS,
-    UUID,
-    User,
-    ValidationError,
+    AuthCode, AuthSession, AuthorizationCodeGrantForm, DEVICE_CODE_GRANT_TYPE,
+    HTTPException, ISSUER, InvalidRefreshTokenError, InvalidTokenError, JSONResponse,
+    JWT_BEARER_GRANT_TYPE, OAuthPolicyViolation, PRIVATE_KEY_JWT_AUTH_METHOD,
+    PasswordGrantForm, RFC6749Error, RefreshTokenReuseError, SUPPORTED_MTLS_AUTH_METHODS,
+    UUID, User, ValidationError,
     _enforce_tls,
     _header,
     _json_error,
@@ -62,6 +48,15 @@ from .token_runtime import (
     verify_code_challenge,
 )
 from .token_persistence import redeem_refresh_token
+
+_IMPORTED_ISSUE_TOKEN_PAIR_RECORDS = issue_token_pair_records
+
+
+def _token_pair_issuer():
+    """Honor both the legacy module hook and the canonical runtime hook."""
+    return (issue_token_pair_records if issue_token_pair_records is not _IMPORTED_ISSUE_TOKEN_PAIR_RECORDS
+            else _runtime.issue_token_pair_records)
+
 
 async def token_request(*, request, db):
     deployment = _resolve_request_deployment(request)
@@ -209,7 +204,7 @@ async def token_request(*, request, db):
         return payload
 
     if grant_type == 'client_credentials':
-        access, refresh = await issue_token_pair_records(
+        access, refresh = await _token_pair_issuer()(
             db,
             jwt=_jwt,
             sub=str(client_id),
@@ -229,7 +224,7 @@ async def token_request(*, request, db):
         except ValidationError as exc:
             raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, exc.errors())
         user = await _pwd_backend.authenticate(db, parsed.username, parsed.password)
-        access, refresh = await issue_token_pair_records(
+        access, refresh = await _token_pair_issuer()(
             db,
             jwt=_jwt,
             sub=str(user.id),
@@ -288,7 +283,7 @@ async def token_request(*, request, db):
             )
         audience = stored_resource or request_audience
         authorization_details = auth_code_claims.pop('_authorization_details', None)
-        access, refresh = await issue_token_pair_records(
+        access, refresh = await _token_pair_issuer()(
             db,
             jwt=_jwt,
             sub=str(auth_code.user_id),
@@ -352,7 +347,7 @@ async def token_request(*, request, db):
             return JSONResponse({'error': 'invalid_grant'}, status_code=status.HTTP_400_BAD_REQUEST)
         scope = str(data.get('scope') or assertion_claims.get('scope') or '') or None
         tenant_id = str(assertion_claims.get('tid') or client.tenant_id)
-        access, refresh = await issue_token_pair_records(
+        access, refresh = await _token_pair_issuer()(
             db,
             jwt=_jwt,
             sub=subject,

@@ -1,3 +1,15 @@
+pkgs/00-primitives: certified_core
+pkgs/01-storage: certified_core
+pkgs/02-contracts: certified_core
+pkgs/05-bases: certified_core
+pkgs/10-concrete: certified_core
+pkgs/20-providers: certified_core
+pkgs/30-storage-runtime: certified_core
+pkgs/40-capabilities: certified_core
+pkgs/50-protocols: certified_core
+pkgs/60-runtime: certified_core
+pkgs/70-facade: legacy_transition
+pkgs/80-apis: certified_core
 tigrbl_auth/api: certified_core
 tigrbl_auth/ops: certified_core
 tigrbl_auth/tables: certified_core

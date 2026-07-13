@@ -14,8 +14,8 @@ Do not cut a final certified release. Publish only a truthful checkpoint/candida
 - fully_rfc_compliant_now: `False`
 - fully_non_rfc_spec_compliant_now: `False`
 - strict_independent_claims_ready: `False`
-- validated_runtime_matrix_green: `True`
-- validated_test_lanes_green: `True`
+- validated_runtime_matrix_green: `False`
+- validated_test_lanes_green: `False`
 - migration_portability_passed: `True`
 
 ## Explicitly deauthorized current-adjacent docs
