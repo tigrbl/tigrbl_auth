@@ -11,6 +11,328 @@
     }
   ],
   "paths": {
+    "/credential": {
+      "post": {
+        "operationId": "post_credential",
+        "summary": "OID4VCI credential endpoint",
+        "tags": [
+          "oid4vci"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "hardening",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        }
+      }
+    },
+    "/presentation/verify": {
+      "post": {
+        "operationId": "post_presentation_verify",
+        "summary": "OID4VP presentation verification endpoint",
+        "tags": [
+          "oid4vp"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "hardening",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        }
+      }
+    },
+    "/access/v1/evaluation": {
+      "post": {
+        "operationId": "post_access_v1_evaluation",
+        "summary": "AuthZEN access evaluation endpoint",
+        "tags": [
+          "authzen"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "hardening",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        }
+      }
+    },
+    "/gnap/tx": {
+      "post": {
+        "operationId": "post_gnap_tx",
+        "summary": "GNAP grant transaction endpoint",
+        "tags": [
+          "gnap"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "hardening",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        }
+      }
+    },
+    "/security-events/receive": {
+      "post": {
+        "operationId": "post_security_events_receive",
+        "summary": "Security Event Token receiver endpoint",
+        "tags": [
+          "set"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "hardening",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        }
+      }
+    },
+    "/attestations/appraise": {
+      "post": {
+        "operationId": "post_attestations_appraise",
+        "summary": "Attestation evidence appraisal endpoint",
+        "tags": [
+          "attestation"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "hardening",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        }
+      }
+    },
+    "/standards": {
+      "get": {
+        "operationId": "get_standards",
+        "summary": "Installed identity standards and exact revisions",
+        "tags": [
+          "standards"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "hardening",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        }
+      }
+    },
     "/login": {
       "post": {
         "operationId": "post_login",

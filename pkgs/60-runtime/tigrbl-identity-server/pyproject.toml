@@ -33,6 +33,8 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
+    "tigrbl-auth-protocol-gnap==0.4.0.dev2",
+    "tigrbl-identity-contracts==0.4.0.dev2",
     "email-validator>=2.0",
     "tigrbl==0.4.4.dev1",
     "tigrbl-authz-policy-admin-gate==0.4.0.dev2",

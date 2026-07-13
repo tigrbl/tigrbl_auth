@@ -1,14 +1,11 @@
 # Contract Sync Report
 
-- Passed: `False`
-
-## Failures
-
-- production: committed OpenRPC contract drifts from generated contract
-- hardening: committed OpenRPC contract drifts from generated contract
+- Passed: `True`
 
 ## Summary
 
-- profile_count: `3`
-- active_openapi_path_count: `18`
-- active_openrpc_method_count: `0`
+- contract_mapping_failures: `0`
+- route_mapping_failures: `0`
+- baseline_path_count: `25`
+- production_path_count: `32`
+- hardening_path_count: `35`

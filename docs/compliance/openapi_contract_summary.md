@@ -4,11 +4,18 @@
 - Version: `0.4.0.dev2`
 - Profile: `baseline`
 - Surface sets: `public-rest`
-- Path count: `18`
+- Path count: `25`
 - Schema count: `16`
 
 ## Paths
 
+- `/credential` → `post`
+- `/presentation/verify` → `post`
+- `/access/v1/evaluation` → `post`
+- `/gnap/tx` → `post`
+- `/security-events/receive` → `post`
+- `/attestations/appraise` → `post`
+- `/standards` → `get`
 - `/login` → `post`
 - `/authorize` → `get`
 - `/token` → `post`

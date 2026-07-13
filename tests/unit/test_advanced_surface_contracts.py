@@ -1,5 +1,5 @@
 from tigrbl_auth.cli.artifacts import build_openapi_contract, deployment_from_options
-from tigrbl_auth.standards.oidc.discovery_metadata import build_openid_config
+from tigrbl_auth_protocol_oidc.standards.discovery_metadata import build_openid_config
 
 
 def test_production_contract_exposes_registration_management_and_jwt_access_token_metadata():

@@ -1,11 +1,284 @@
 openapi: 3.1.0
 info:
   title: tigrbl_auth public auth server
-  version: 0.3.4
+  version: 0.4.0.dev2
   description: Generated public contract filtered by the effective deployment boundary.
 servers:
 - url: https://authn.example.com
 paths:
+  /credential:
+    post:
+      operationId: post_credential
+      summary: OID4VCI credential endpoint
+      tags:
+      - oid4vci
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResult'
+      x-required-flags: []
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
+  /presentation/verify:
+    post:
+      operationId: post_presentation_verify
+      summary: OID4VP presentation verification endpoint
+      tags:
+      - oid4vp
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResult'
+      x-required-flags: []
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
+  /access/v1/evaluation:
+    post:
+      operationId: post_access_v1_evaluation
+      summary: AuthZEN access evaluation endpoint
+      tags:
+      - authzen
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResult'
+      x-required-flags: []
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
+  /gnap/tx:
+    post:
+      operationId: post_gnap_tx
+      summary: GNAP grant transaction endpoint
+      tags:
+      - gnap
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResult'
+      x-required-flags: []
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
+  /security-events/receive:
+    post:
+      operationId: post_security_events_receive
+      summary: Security Event Token receiver endpoint
+      tags:
+      - set
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResult'
+      x-required-flags: []
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
+  /attestations/appraise:
+    post:
+      operationId: post_attestations_appraise
+      summary: Attestation evidence appraisal endpoint
+      tags:
+      - attestation
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResult'
+      x-required-flags: []
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
+  /standards:
+    get:
+      operationId: get_standards
+      summary: Installed identity standards and exact revisions
+      tags:
+      - standards
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResult'
+      x-required-flags: []
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
   /login:
     post:
       operationId: post_login
@@ -278,6 +551,584 @@ paths:
                   client_assertion: <jwt-client-assertion>
                   token_endpoint_auth_method: private_key_jwt
                   audience: https://authn.example.com/token
+  /account/profile:
+    get:
+      operationId: get_account_profile
+      summary: End-user profile self-service
+      tags:
+      - my-account
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResult'
+      x-required-flags: []
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
+    patch:
+      operationId: patch_account_profile
+      summary: End-user profile self-service
+      tags:
+      - my-account
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResult'
+      x-required-flags: []
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
+  /account/sessions:
+    get:
+      operationId: get_account_sessions
+      summary: End-user session self-service
+      tags:
+      - my-account
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResult'
+      x-required-flags: []
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
+    delete:
+      operationId: delete_account_sessions
+      summary: End-user session self-service
+      tags:
+      - my-account
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResult'
+      x-required-flags: []
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
+  /account/sessions/{session_id}:
+    get:
+      operationId: get_account_sessions_session_id
+      summary: End-user session self-service
+      tags:
+      - my-account
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResult'
+      x-required-flags: []
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
+    delete:
+      operationId: delete_account_sessions_session_id
+      summary: End-user session self-service
+      tags:
+      - my-account
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResult'
+      x-required-flags: []
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
+  /account/consents:
+    get:
+      operationId: get_account_consents
+      summary: End-user consent and authorized-app self-service
+      tags:
+      - my-account
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResult'
+      x-required-flags: []
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
+    delete:
+      operationId: delete_account_consents
+      summary: End-user consent and authorized-app self-service
+      tags:
+      - my-account
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResult'
+      x-required-flags: []
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
+  /account/consents/{consent_id}:
+    get:
+      operationId: get_account_consents_consent_id
+      summary: End-user consent and authorized-app self-service
+      tags:
+      - my-account
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResult'
+      x-required-flags: []
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
+    delete:
+      operationId: delete_account_consents_consent_id
+      summary: End-user consent and authorized-app self-service
+      tags:
+      - my-account
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResult'
+      x-required-flags: []
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
+  /account/authorized-apps:
+    get:
+      operationId: get_account_authorized_apps
+      summary: End-user consent and authorized-app self-service
+      tags:
+      - my-account
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResult'
+      x-required-flags: []
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
+    delete:
+      operationId: delete_account_authorized_apps
+      summary: End-user consent and authorized-app self-service
+      tags:
+      - my-account
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResult'
+      x-required-flags: []
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
+  /account/authorized-apps/{client_id}:
+    get:
+      operationId: get_account_authorized_apps_client_id
+      summary: End-user consent and authorized-app self-service
+      tags:
+      - my-account
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResult'
+      x-required-flags: []
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
+    delete:
+      operationId: delete_account_authorized_apps_client_id
+      summary: End-user consent and authorized-app self-service
+      tags:
+      - my-account
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResult'
+      x-required-flags: []
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
+  /account/password/change:
+    post:
+      operationId: post_account_password_change
+      summary: End-user credential self-service
+      tags:
+      - my-account
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResult'
+      x-required-flags: []
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
   /.well-known/openid-configuration:
     get:
       operationId: get__well_known_openid_configuration
@@ -319,6 +1170,102 @@ paths:
         query_bearer_disabled: true
         form_bearer_disabled: true
         jwt_access_token_profile_supported: false
+  /tenants/{tenant_slug}/.well-known/openid-configuration:
+    get:
+      operationId: get_tenants_tenant_slug__well_known_openid_configuration
+      summary: Tenant-scoped OIDC discovery document
+      tags:
+      - .well-known
+      - tenant
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscoveryDocument'
+      x-required-flags:
+      - enable_oidc_discovery
+      - enable_rfc8615
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
+      parameters:
+      - name: tenant_slug
+        in: path
+        required: true
+        schema:
+          type: string
+  /realms/{realm_slug}/.well-known/openid-configuration:
+    get:
+      operationId: get_realms_realm_slug__well_known_openid_configuration
+      summary: Realm-scoped OIDC discovery document
+      tags:
+      - .well-known
+      - realm
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscoveryDocument'
+      x-required-flags:
+      - enable_oidc_discovery
+      - enable_rfc8615
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
+      parameters:
+      - name: realm_slug
+        in: path
+        required: true
+        schema:
+          type: string
   /.well-known/oauth-authorization-server:
     get:
       operationId: get__well_known_oauth_authorization_server
@@ -401,6 +1348,102 @@ paths:
         query_bearer_disabled: true
         form_bearer_disabled: true
         jwt_access_token_profile_supported: false
+  /tenants/{tenant_slug}/.well-known/jwks.json:
+    get:
+      operationId: get_tenants_tenant_slug__well_known_jwks_json
+      summary: Tenant-scoped JSON Web Key Set
+      tags:
+      - .well-known
+      - tenant
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JwksDocument'
+      x-required-flags:
+      - enable_rfc7517
+      - enable_rfc8615
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
+      parameters:
+      - name: tenant_slug
+        in: path
+        required: true
+        schema:
+          type: string
+  /realms/{realm_slug}/.well-known/jwks.json:
+    get:
+      operationId: get_realms_realm_slug__well_known_jwks_json
+      summary: Realm-scoped JSON Web Key Set
+      tags:
+      - .well-known
+      - realm
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JwksDocument'
+      x-required-flags:
+      - enable_rfc7517
+      - enable_rfc8615
+      x-runtime-profile:
+        profile: baseline-development
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - password
+        allowed_response_types:
+        - code
+        - token
+        - id_token
+        - code token
+        - code id_token
+        - token id_token
+        - code token id_token
+        par_required: false
+        sender_constraint_required: false
+        dpop_supported: false
+        mtls_supported: false
+        resource_indicators_supported: false
+        request_objects_supported: false
+        rich_authorization_requests_supported: false
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: false
+      parameters:
+      - name: realm_slug
+        in: path
+        required: true
+        schema:
+          type: string
 components:
   securitySchemes:
     bearerAuth:
@@ -563,6 +1606,16 @@ components:
           type: string
         self_signed_tls_client_certificate_thumbprint:
           type: string
+        tls_client_auth_subject_dn:
+          type: string
+        tls_client_auth_san_dns:
+          type: string
+        tls_client_auth_san_uri:
+          type: string
+        tls_client_auth_san_ip:
+          type: string
+        tls_client_auth_san_email:
+          type: string
         post_logout_redirect_uris:
           type: array
           items:
@@ -669,7 +1722,7 @@ x-tigrbl-auth:
   runtime_style: standalone
   surface_sets:
   - public-rest
-  - admin-rpc
+  - admin-rest
   - diagnostics
   protocol_slices: []
   extensions: []
@@ -689,7 +1742,6 @@ x-tigrbl-auth:
   - OIDC Discovery 1.0
   - OIDC Session Management
   - OpenAPI 3.1 / 3.2 compatible public contract
-  - OpenRPC 1.4.x admin/control-plane contract
   - ASGI 3 application package
   - 'Runner profile: Uvicorn'
   - 'Runner profile: Hypercorn'

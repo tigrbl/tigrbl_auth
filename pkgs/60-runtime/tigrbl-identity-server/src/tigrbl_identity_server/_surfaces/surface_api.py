@@ -35,6 +35,7 @@ from tigrbl_identity_storage_runtime.token_exchange import (
 )
 from tigrbl_identity_storage_runtime.userinfo import include_oidc_userinfo
 from tigrbl_identity_server.standards_manifest import include_standards_manifest
+from tigrbl_identity_server.advanced_protocols import include_advanced_protocols
 
 from .admin_routes import *
 from .admin_routes import (
@@ -78,6 +79,18 @@ PUBLIC_ROUTER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (
 )
 
 PUBLIC_PUBLISHER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (
+    {
+        "mount_group": "advanced_protocols",
+        "capabilities": (
+            "oid4vci-credential",
+            "oid4vp-verification",
+            "authzen-evaluation",
+            "gnap-transaction",
+            "set-receiver",
+            "attestation-appraisal",
+        ),
+        "include": include_advanced_protocols,
+    },
     {
         "mount_group": "standards_manifest",
         "capabilities": ("standards-manifest",),

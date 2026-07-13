@@ -1,6 +1,9 @@
 import sys
 from pathlib import Path
 
+import pytest
+from httpx import ASGITransport, AsyncClient
+
 from tigrbl_auth import standard_version, standards_manifest
 
 sys.path.insert(
@@ -41,3 +44,45 @@ def test_standards_manifest_is_mounted_from_runtime_capability_truth() -> None:
         for route in getattr(app, "_routes", ())
     }
     assert "/standards" in paths
+
+
+@pytest.mark.anyio
+async def test_advanced_protocol_routes_are_mounted_and_fail_closed_without_components() -> (
+    None
+):
+    app = build_app(deployment=resolve_deployment(product_surface="public-api"))
+    requests = (
+        (
+            "/credential",
+            {"credential_configuration_id": "employee", "format": "dc+sd-jwt"},
+        ),
+        (
+            "/presentation/verify",
+            {
+                "holder": "holder",
+                "vp_token": "token",
+                "authorization_request": {
+                    "client_id": "verifier",
+                    "nonce": "nonce",
+                    "accepted_formats": ["dc+sd-jwt"],
+                },
+            },
+        ),
+        (
+            "/access/v1/evaluation",
+            {
+                "subject": {"type": "user", "id": "alice"},
+                "action": {"type": "action", "id": "read"},
+                "resource": {"type": "document", "id": "one"},
+            },
+        ),
+        ("/gnap/tx", {"access_token": {"access": ["read"]}, "client": "key"}),
+        ("/security-events/receive", {"set": "encoded"}),
+        ("/attestations/appraise", {"profile": "eat", "claims": {}}),
+    )
+    async with AsyncClient(
+        transport=ASGITransport(app=app), base_url="http://test"
+    ) as client:
+        for path, payload in requests:
+            response = await client.post(path, json=payload)
+            assert response.status_code == 503, (path, response.text)
