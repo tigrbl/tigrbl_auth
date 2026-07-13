@@ -12,6 +12,7 @@ from .credentials import *
 from .delegation import *
 from .federation import *
 from .principals import *
+from .principal_authentication import *
 from .protocols import *
 from .oauth import *
 from .oidc import *

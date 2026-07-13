@@ -2887,6 +2887,7 @@ dependencies = [
     { name = "tigrbl-password-reset-credential-concrete" },
     { name = "tigrbl-passwordless-credential-concrete" },
     { name = "tigrbl-platform-attestation-provider" },
+    { name = "tigrbl-principal-authentication" },
     { name = "tigrbl-protocol-artifact-processing" },
     { name = "tigrbl-public-subject-identifier-concrete" },
     { name = "tigrbl-release-contracts" },
@@ -3241,6 +3242,7 @@ requires-dist = [
     { name = "tigrbl-password-reset-credential-concrete", editable = "pkgs/10-concrete/tigrbl-password-reset-credential-concrete" },
     { name = "tigrbl-passwordless-credential-concrete", editable = "pkgs/10-concrete/tigrbl-passwordless-credential-concrete" },
     { name = "tigrbl-platform-attestation-provider", editable = "pkgs/20-providers/tigrbl-platform-attestation-provider" },
+    { name = "tigrbl-principal-authentication", editable = "pkgs/40-capabilities/tigrbl-principal-authentication" },
     { name = "tigrbl-protocol-artifact-processing", editable = "pkgs/40-capabilities/tigrbl-protocol-artifact-processing" },
     { name = "tigrbl-public-subject-identifier-concrete", editable = "pkgs/10-concrete/tigrbl-public-subject-identifier-concrete" },
     { name = "tigrbl-release-contracts", editable = "pkgs/02-contracts/tigrbl-release-contracts" },
@@ -6192,6 +6194,25 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-principal-authentication"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/40-capabilities/tigrbl-principal-authentication" }
+dependencies = [
+    { name = "tigrbl-authenticator-client-secret-local" },
+    { name = "tigrbl-authenticator-password-local" },
+    { name = "tigrbl-capability" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-authenticator-client-secret-local", specifier = "==0.1.0" },
+    { name = "tigrbl-authenticator-password-local", specifier = "==0.1.0" },
+    { name = "tigrbl-capability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-protocol-artifact-processing"
