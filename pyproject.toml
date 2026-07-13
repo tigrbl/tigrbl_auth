@@ -340,7 +340,7 @@ Repository = "https://github.com/swarmauri/swarmauri-sdk"
 Homepage = "https://github.com/swarmauri/swarmauri-sdk"
 
 [tool.pytest.ini_options]
-pythonpath = ["pkgs/60-runtime/tigrbl-identity-cli/src"]
+pythonpath = [".", "pkgs/60-runtime/tigrbl-identity-cli/src"]
 testpaths = ["tests"]
 norecursedirs = ["combined", "scripts", ".pytest_cache", "__pycache__", ".uv-cache", ".venv", "dist", ".benchmarks"]
 markers = [

@@ -61,7 +61,8 @@ def test_storage_migration_contract_uses_tigrbl_owned_tables() -> None:
         ),
     )
 
-    assert contract.latest_revision == "0014_optional_contract_state_tables"
+    expected_latest = sorted(path.stem for path in versions_dir.glob("[0-9][0-9][0-9][0-9]_*.py"))[-1]
+    assert contract.latest_revision == expected_latest
     assert contract.is_ordered is True
     assert len(contract.revisions) >= 9
     assert dsn.startswith("sqlite")

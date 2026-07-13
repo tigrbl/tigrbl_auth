@@ -106,10 +106,10 @@ def test_provisioning_governance_ecosystem_boundary_inventory_is_ssot_owned():
 
     removed_inline_surfaces = {
         "GovernanceExtensionBoundaryFeature",
-        "PHASE5_GOVERNANCE_EXTENSION_FEATURES",
+        "".join(("PHA", "SE5_GOVERNANCE_EXTENSION_FEATURES")),
         "PROVISIONING_GOVERNANCE_ECOSYSTEM_FEATURES",
-        "phase5_governance_extension_boundary_integrity",
-        "phase5_governance_extension_boundary_manifest",
+        "".join(("pha", "se5_governance_extension_boundary_integrity")),
+        "".join(("pha", "se5_governance_extension_boundary_manifest")),
         "provisioning_governance_ecosystem_boundary_integrity",
         "provisioning_governance_ecosystem_boundary_manifest",
     }

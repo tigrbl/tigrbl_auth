@@ -53,7 +53,9 @@ def isolated_facade_import():
 def test_root_project_does_not_claim_tigrbl_auth_facade_distribution() -> None:
     root_pyproject = _load_pyproject(ROOT / "pyproject.toml")
     root_project = root_pyproject["project"]
-    facade_project = _load_pyproject(ROOT / "pkgs" / "tigrbl-auth" / "pyproject.toml")["project"]
+    facade_project = _load_pyproject(
+        ROOT / "pkgs" / "70-facade" / "tigrbl-auth" / "pyproject.toml"
+    )["project"]
 
     assert _normalized_dist_name(facade_project["name"]) == "tigrbl-auth"
     assert _normalized_dist_name(root_project["name"]) != "tigrbl-auth"
@@ -63,7 +65,15 @@ def test_root_project_does_not_claim_tigrbl_auth_facade_distribution() -> None:
     assert "poetry" not in root_pyproject["tool"]
     assert not (ROOT / "tigrbl_auth").exists()
     assert not (ROOT / "tigrbl_auth_workspace").exists()
-    assert (ROOT / "pkgs" / "tigrbl-auth" / "src" / "tigrbl_auth" / "__init__.py").exists()
+    assert (
+        ROOT
+        / "pkgs"
+        / "70-facade"
+        / "tigrbl-auth"
+        / "src"
+        / "tigrbl_auth"
+        / "__init__.py"
+    ).exists()
 
 
 @pytest.mark.unit
@@ -110,7 +120,7 @@ def test_facade_cli_proxy_prefers_workspace_split_cli() -> None:
         assert install_substrate.SUPPORTED_PYTHON_VERSIONS == ("3.10", "3.11", "3.12")
         loaded = sys.modules["tigrbl_auth.cli.install_substrate"]
         assert Path(loaded.__file__).resolve().is_relative_to(
-            ROOT / "pkgs" / "tigrbl-identity-cli" / "src"
+            ROOT / "pkgs" / "60-runtime" / "tigrbl-identity-cli" / "src"
         )
 
 

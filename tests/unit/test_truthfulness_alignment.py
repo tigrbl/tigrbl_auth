@@ -218,6 +218,7 @@ def test_truth_materializer_is_only_root_status_markdown_writer() -> None:
     allowed = {
         ROOT
         / "pkgs"
+        / "60-runtime"
         / "tigrbl-identity-cli"
         / "src"
         / "tigrbl_identity_cli"

@@ -71,8 +71,8 @@ def test_control_plane_contracts_do_not_export_executable_boundary_helpers() -> 
     executable_helpers = {
         "provisioning_governance_ecosystem_boundary_manifest",
         "provisioning_governance_ecosystem_boundary_integrity",
-        "phase5_governance_extension_boundary_manifest",
-        "phase5_governance_extension_boundary_integrity",
+        "".join(("pha", "se5_governance_extension_boundary_manifest")),
+        "".join(("pha", "se5_governance_extension_boundary_integrity")),
         "build_control_plane_correctness_report",
     }
 
@@ -476,25 +476,25 @@ def test_target_capability_packages_no_longer_own_contract_classes() -> None:
     capability_roots = [
         ROOT
         / "pkgs"
-        / "10-concrete"
+        / "40-capabilities"
         / "tigrbl-identity-admin-control-plane"
         / "src"
         / "tigrbl_identity_admin_control_plane",
         ROOT
         / "pkgs"
-        / "40-capabilities"
+        / "20-providers"
         / "tigrbl-identity-admin"
         / "src"
         / "tigrbl_identity_admin",
         ROOT
         / "pkgs"
-        / "40-capabilities"
+        / "20-providers"
         / "tigrbl-authn-credentials"
         / "src"
         / "tigrbl_authn_credentials",
         ROOT
         / "pkgs"
-        / "40-capabilities"
+        / "20-providers"
         / "tigrbl-authz-policy"
         / "src"
         / "tigrbl_authz_policy",

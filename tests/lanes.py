@@ -278,7 +278,13 @@ def test_file_requires_runtime_stack(path_str: str) -> bool:
                 return True
         elif isinstance(node, ast.Call):
             module_name = _dynamic_import_target(node)
-            if module_name and module_requires_runtime_stack(module_name):
+            # Dynamic imports are runtime edges by definition; conservatively
+            # classify known runtime package targets without relying on static
+            # traversal of the target's current import graph.
+            if module_name and (
+                module_name.startswith(RUNTIME_STACK_SOURCE_PREFIXES)
+                or module_requires_runtime_stack(module_name)
+            ):
                 return True
     return False
 

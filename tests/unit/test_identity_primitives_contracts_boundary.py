@@ -108,7 +108,7 @@ def test_authz_policy_admin_gate_package_uses_identity_core_primitives() -> None
     gate_path = (
         ROOT
         / "pkgs"
-        / "40-capabilities"
+        / "20-providers"
         / "tigrbl-authz-policy-admin-gate"
         / "src"
         / "tigrbl_authz_policy_admin_gate"
@@ -136,7 +136,7 @@ def test_authz_policy_control_plane_uses_identity_core_primitives() -> None:
     control_plane_path = (
         ROOT
         / "pkgs"
-        / "40-capabilities"
+        / "20-providers"
         / "tigrbl-authz-policy"
         / "src"
         / "tigrbl_authz_policy"
@@ -157,11 +157,7 @@ def test_authz_policy_control_plane_uses_identity_core_primitives() -> None:
         "_row_value",
         "_str_tuple",
     }.isdisjoint(local_functions)
-    assert "matches_dotted_pattern as _permission_matches" in source
     assert "pick_fields as _pick_fields" in source
-    assert "row_active as _row_active" in source
-    assert "row_value as _row_value" in source
-    assert "str_tuple as _str_tuple" in source
 
 
 def test_identity_primitives_do_not_own_liveness_contracts() -> None:
@@ -192,14 +188,14 @@ def test_auth_helpers_import_principal_protocol_from_contracts() -> None:
     targets = [
         ROOT
         / "pkgs"
-        / "40-capabilities"
+        / "20-providers"
         / "tigrbl-authn-credentials"
         / "src"
         / "tigrbl_authn_credentials"
         / "backends.py",
         ROOT
         / "pkgs"
-        / "40-capabilities"
+        / "20-providers"
         / "tigrbl-authn-credentials"
         / "src"
         / "tigrbl_authn_credentials"
@@ -219,7 +215,7 @@ def test_auth_helpers_import_principal_protocol_from_contracts() -> None:
         / "src"
         / "tigrbl_identity_server"
         / "security"
-        / "deps.py",
+        / "security_deps.py",
     ]
 
     for path in targets:

@@ -68,3 +68,4 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 packages = [{ include = "tigrbl_identity_runtime", from = "src" }]
+include = ["src/tigrbl_identity_runtime/profiles/*.yaml"]

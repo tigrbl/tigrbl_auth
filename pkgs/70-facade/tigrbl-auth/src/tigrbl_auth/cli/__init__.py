@@ -41,7 +41,7 @@ def _prefer_workspace_split_cli() -> None:
     if root is None:
         return
 
-    src = root / "pkgs" / "tigrbl-identity-cli" / "src"
+    src = root / "pkgs" / "60-runtime" / "tigrbl-identity-cli" / "src"
     if not src.exists():
         return
 

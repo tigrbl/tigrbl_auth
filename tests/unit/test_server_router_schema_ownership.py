@@ -208,8 +208,10 @@ def test_admin_route_handlers_live_on_storage_table_modules(
     assert hasattr(module, "admin_router")
     missing = sorted(name for name in route_names if not hasattr(module, name))
     assert missing == []
-    missing_class_ops = sorted(name for name in route_names if not hasattr(table_class, name))
-    assert missing_class_ops == []
+    missing_handler_ops = sorted(
+        name for name in route_names if not hasattr(table_class.handlers, name)
+    )
+    assert missing_handler_ops == []
 
 
 def test_tenant_admin_route_handlers_live_above_storage_table_module() -> None:
@@ -284,15 +286,14 @@ def test_remaining_oauth_route_handlers_live_on_storage_table_modules(
     class_name: str,
     route_names: set[str],
 ) -> None:
-    module = importlib.import_module(module_name)
-    table_class = getattr(module, class_name)
+    storage_module = importlib.import_module(module_name)
+    runtime_module = importlib.import_module("tigrbl_identity_storage_runtime.token_endpoint")
 
-    assert hasattr(module, "api")
-    assert hasattr(module, "router")
-    missing = sorted(name for name in route_names if not hasattr(module, name))
+    assert hasattr(runtime_module, "router")
+    missing = sorted(name for name in route_names if not hasattr(runtime_module, name))
     assert missing == []
-    missing_class_ops = sorted(name for name in route_names if not hasattr(table_class, name))
-    assert missing_class_ops == []
+    assert not hasattr(storage_module, "api")
+    assert not hasattr(storage_module, "router")
 
 
 @pytest.mark.parametrize(
