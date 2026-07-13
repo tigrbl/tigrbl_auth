@@ -1,13 +1,28 @@
 from dataclasses import dataclass
 from typing import Mapping
 
+from tigrbl_identity_contracts.attestation import AttestationEvidence
+
 from .claims import EatClaimSetPayload
 
 
 @dataclass(frozen=True, slots=True)
-class EatEvidence:
-    claims: EatClaimSetPayload
-    protected_token: bytes | str | None = None
+class EatEvidence(AttestationEvidence):
+    """EAT specialization of neutral attestation evidence.
+
+    ``raw`` is the protected JWT/CWT serialization. Integrity verification and
+    appraisal are deliberately performed by provider layers.
+    """
+
+    @classmethod
+    def from_payload(
+        cls, payload: EatClaimSetPayload, protected_token: bytes | str | None = None
+    ) -> "EatEvidence":
+        return cls(
+            str(payload.profile.identifier),
+            dict(payload.raw_claims or {}),
+            protected_token,
+        )
 
 
 @dataclass(frozen=True, slots=True)

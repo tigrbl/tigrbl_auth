@@ -5,6 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any, Mapping, Protocol, Sequence
 
+from .tokens import VerifiedTokenEnvelope
+
 
 @dataclass(frozen=True, slots=True)
 class AttestationEvidence:
@@ -27,12 +29,38 @@ class AppraisalResult:
     claims: Mapping[str, Any] = field(default_factory=dict)
 
 
+@dataclass(frozen=True, slots=True)
+class VerifiedAttestationEvidence:
+    """Evidence whose protected envelope and profile binding were verified."""
+
+    evidence: AttestationEvidence
+    envelope: VerifiedTokenEnvelope
+
+
+@dataclass(frozen=True, slots=True)
+class EvidenceVerificationResult:
+    """Integrity result, deliberately distinct from a trust appraisal."""
+
+    verified: bool
+    reason: str
+    evidence: VerifiedAttestationEvidence | None = None
+    claims: Mapping[str | int, Any] = field(default_factory=dict)
+
+    @property
+    def trusted(self) -> bool:
+        """Compatibility view; verification alone is not an appraisal."""
+
+        return self.verified
+
+
 class AttestationAppraiser(Protocol):
     def appraise(self, evidence: AttestationEvidence, /) -> AppraisalResult: ...
 
 
 class EvidenceVerifierPort(Protocol):
-    def verify_evidence(self, evidence: AttestationEvidence, /) -> AppraisalResult: ...
+    def verify_evidence(
+        self, evidence: AttestationEvidence, /
+    ) -> EvidenceVerificationResult: ...
 
 
 class AttestationAppraiserPort(Protocol):
@@ -49,6 +77,8 @@ __all__ = [
     "AttestationAppraiserPort",
     "AttestationEvidence",
     "EvidenceVerifierPort",
+    "EvidenceVerificationResult",
     "ReferenceIntegrityManifest",
     "ReferenceMaterialProviderPort",
+    "VerifiedAttestationEvidence",
 ]

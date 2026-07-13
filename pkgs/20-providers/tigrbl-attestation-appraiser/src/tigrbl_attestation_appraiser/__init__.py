@@ -52,7 +52,7 @@ class ReferenceBackedAttestationAppraiser(AttestationAppraiserBase):
 
     def appraise(self, evidence: AttestationEvidence, /) -> AppraisalResult:
         verification = self._verifier.verify_evidence(evidence)
-        if not verification.trusted:
+        if not verification.verified:
             return AppraisalResult(
                 False, f"evidence verification failed: {verification.reason}"
             )

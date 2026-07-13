@@ -105,6 +105,7 @@ dependencies = [
     "tigrbl-identity-claims-bases==0.4.0.dev2",
     "tigrbl-digital-credential-bases==0.4.0.dev2",
     "tigrbl-attestation-bases==0.4.0.dev2",
+    "tigrbl-cose-bases==0.4.0.dev2",
     "tigrbl-security-event-bases==0.4.0.dev2",
     "tigrbl-token-bases==0.4.0.dev2",
     "tigrbl-authentication-assurance-bases==0.4.0.dev2",
@@ -405,6 +406,7 @@ tigrbl-security-provenance-bases = { path = "pkgs/05-bases/tigrbl-security-prove
 tigrbl-authz-policy-bases = { path = "pkgs/05-bases/tigrbl-authz-policy-bases", editable = true }
 tigrbl-identity-model-bases = { path = "pkgs/05-bases/tigrbl-identity-model-bases", editable = true }
 tigrbl-jose-bases = { path = "pkgs/05-bases/tigrbl-jose-bases", editable = true }
+tigrbl-cose-bases = { path = "pkgs/05-bases/tigrbl-cose-bases", editable = true }
 tigrbl-oauth-bases = { path = "pkgs/05-bases/tigrbl-oauth-bases", editable = true }
 tigrbl-oidc-bases = { path = "pkgs/05-bases/tigrbl-oidc-bases", editable = true }
 tigrbl-resource-server-bases = { path = "pkgs/05-bases/tigrbl-resource-server-bases", editable = true }

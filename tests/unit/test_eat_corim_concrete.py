@@ -13,6 +13,7 @@ from tigrbl_eat_concrete import (
     parse_eat_claims,
     validate_eat_claims,
 )
+from tigrbl_identity_contracts.attestation import AttestationEvidence
 
 
 def test_eat_is_attestation_evidence_not_identity_or_authentication_token():
@@ -27,9 +28,20 @@ def test_eat_is_attestation_evidence_not_identity_or_authentication_token():
     )
     validate_eat_claims(claims)
     evidence = parse_eat(claims.raw_claims)
+    assert isinstance(evidence, AttestationEvidence)
     assert evidence.profile == "urn:example:eat-profile"
     assert RFC_REVISION == "RFC 9711"
     assert not hasattr(evidence, "identity")
+
+
+def test_eat_evidence_keeps_claims_envelope_and_appraisal_distinct():
+    evidence = parse_eat(
+        {"eat_profile": "urn:profile", "eat_nonce": "12345678"},
+        protected_token="header.payload.signature",
+    )
+    assert evidence.claims["eat_profile"] == "urn:profile"
+    assert evidence.raw == "header.payload.signature"
+    assert not hasattr(evidence, "trusted")
 
 
 def test_eat_nonce_encoding_and_size_rules_are_distinct():

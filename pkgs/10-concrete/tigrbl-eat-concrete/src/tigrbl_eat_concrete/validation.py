@@ -1,8 +1,7 @@
 from typing import Mapping
 
-from tigrbl_identity_contracts.attestation import AttestationEvidence
-
 from .claims import EatClaimSetPayload, EatEncoding, parse_eat_claims
+from .evidence import EatEvidence
 
 
 def validate_eat_claims(claims: EatClaimSetPayload) -> None:
@@ -21,8 +20,9 @@ def validate_eat_claims(claims: EatClaimSetPayload) -> None:
 
 
 def parse_eat(
-    claims: Mapping[str | int, object], encoding: EatEncoding | None = None
-) -> AttestationEvidence:
+    claims: Mapping[str | int, object], encoding: EatEncoding | None = None,
+    *, protected_token: bytes | str | None = None,
+) -> EatEvidence:
     inferred = encoding or (
         EatEncoding.CBOR
         if any(isinstance(name, int) for name in claims)
@@ -30,7 +30,7 @@ def parse_eat(
     )
     parsed = parse_eat_claims(claims, inferred)
     validate_eat_claims(parsed)
-    return AttestationEvidence(str(parsed.profile.identifier), dict(claims))
+    return EatEvidence.from_payload(parsed, protected_token)
 
 
 __all__ = ["parse_eat", "validate_eat_claims"]

@@ -2787,6 +2787,7 @@ dependencies = [
     { name = "tigrbl-core" },
     { name = "tigrbl-corim-concrete" },
     { name = "tigrbl-corim-store-provider" },
+    { name = "tigrbl-cose-bases" },
     { name = "tigrbl-credential-profile-sd-jwt-vc" },
     { name = "tigrbl-device-identity-concrete" },
     { name = "tigrbl-did-concrete" },
@@ -3123,6 +3124,7 @@ requires-dist = [
     { name = "tigrbl-core", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-corim-concrete", editable = "pkgs/10-concrete/tigrbl-corim-concrete" },
     { name = "tigrbl-corim-store-provider", editable = "pkgs/20-providers/tigrbl-corim-store-provider" },
+    { name = "tigrbl-cose-bases", editable = "pkgs/05-bases/tigrbl-cose-bases" },
     { name = "tigrbl-credential-profile-sd-jwt-vc", editable = "pkgs/50-protocols/tigrbl-credential-profile-sd-jwt-vc" },
     { name = "tigrbl-device-identity-concrete", editable = "pkgs/10-concrete/tigrbl-device-identity-concrete" },
     { name = "tigrbl-did-concrete", editable = "pkgs/10-concrete/tigrbl-did-concrete" },
@@ -4900,6 +4902,21 @@ dependencies = [
 requires-dist = [
     { name = "tigrbl-corim-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-cose-bases"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/05-bases/tigrbl-cose-bases" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-token-bases" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-token-bases", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]

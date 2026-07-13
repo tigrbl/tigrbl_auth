@@ -24,7 +24,11 @@ def test_eat_verifier_requires_both_valid_claims_and_integrity_provider():
     evidence = _evidence()
     assert not EatVerifierProvider().verify_evidence(evidence).trusted
     verifier = EatVerifierProvider(lambda token, profile: token == "signed.eat.token")
-    assert verifier.verify_evidence(evidence).trusted
+    result = verifier.verify_evidence(evidence)
+    assert result.verified
+    assert result.evidence is not None
+    assert result.evidence.envelope.envelope.format.value == "jwt"
+    assert result.evidence.envelope.envelope.profile.value == "entity-attestation-token"
     assert not verifier.verify_evidence(
         AttestationEvidence(evidence.profile, evidence.claims, raw="bad")
     ).trusted

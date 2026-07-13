@@ -26,6 +26,30 @@ class TokenProfile(StrEnum):
     WALLET_ATTESTATION = "wallet-attestation"
 
 
+class TokenEnvelopeFormat(StrEnum):
+    """Cryptographic envelope used to protect a semantic token payload."""
+
+    JWT = "jwt"
+    CWT = "cwt"
+
+
+@dataclass(frozen=True, slots=True)
+class ProtectedTokenEnvelope:
+    serialized: str | bytes
+    format: TokenEnvelopeFormat
+    profile: TokenProfile
+
+
+@dataclass(frozen=True, slots=True)
+class VerifiedTokenEnvelope:
+    """Integrity-verified envelope; issuer trust and appraisal remain separate."""
+
+    envelope: ProtectedTokenEnvelope
+    claims: Mapping[str | int, object]
+    key_id: str | None = None
+    algorithm: str | int | None = None
+
+
 @dataclass(frozen=True, slots=True)
 class SenderConstraint:
     method: str
@@ -87,8 +111,11 @@ __all__ = [
     "ReplayValidation",
     "SenderConstraint",
     "TokenIssuerPort",
+    "TokenEnvelopeFormat",
     "TokenProfile",
+    "ProtectedTokenEnvelope",
     "TokenVerificationRequest",
     "TokenVerificationResult",
     "TokenVerifierPort",
+    "VerifiedTokenEnvelope",
 ]

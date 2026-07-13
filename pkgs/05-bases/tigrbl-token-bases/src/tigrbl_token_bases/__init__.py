@@ -3,10 +3,12 @@ from typing import Mapping
 
 from tigrbl_identity_contracts.tokens import (
     TokenIssuerPort,
+    ProtectedTokenEnvelope,
     TokenProfile,
     TokenVerificationRequest,
     TokenVerificationResult,
     TokenVerifierPort,
+    VerifiedTokenEnvelope,
 )
 
 
@@ -20,6 +22,19 @@ class ProfiledTokenIssuerBase(TokenIssuerPort, ABC):
 class ProfiledTokenVerifierBase(TokenVerifierPort, ABC):
     def verify(self, request: TokenVerificationRequest, /) -> TokenVerificationResult:
         raise NotImplementedError
+
+
+class TokenEnvelopeVerifierBase(ABC):
+    """Verify a cryptographic envelope without making an appraisal decision."""
+
+    def verify_envelope(
+        self, envelope: ProtectedTokenEnvelope, /
+    ) -> VerifiedTokenEnvelope:
+        raise NotImplementedError
+
+
+class EatTokenEnvelopeVerifierBase(TokenEnvelopeVerifierBase):
+    """Envelope verifier constrained to the EAT token profile."""
 
 
 class RichAuthorizationDetailValidatorBase(ABC):
@@ -43,4 +58,6 @@ __all__ = [
     "ProfiledTokenVerifierBase",
     "RichAuthorizationDetailValidatorBase",
     "StepUpAuthenticationEvaluatorBase",
+    "EatTokenEnvelopeVerifierBase",
+    "TokenEnvelopeVerifierBase",
 ]
