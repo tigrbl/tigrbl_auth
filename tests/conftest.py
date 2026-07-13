@@ -109,6 +109,13 @@ class _InMemoryTableStorage:
             self._bucket(model).append(payload)
             return {"item": dict(payload)}
 
+        async def read_core(request: dict[str, Any]) -> dict[str, Any] | None:
+            ident = str((request.get("path_params") or {}).get("id"))
+            for row in self._bucket(model):
+                if str(row.get("id")) == ident:
+                    return dict(row)
+            return None
+
         async def update_core(request: dict[str, Any]) -> dict[str, dict[str, Any]]:
             ident = str((request.get("path_params") or {}).get("id"))
             payload = dict(request.get("payload") or {})
@@ -125,10 +132,20 @@ class _InMemoryTableStorage:
             self._rows[model] = [row for row in bucket if not self._matches(row, filters)]
             return {"items": [dict(row) for row in removed]}
 
+        async def delete_core(request: dict[str, Any]) -> dict[str, Any] | None:
+            ident = str((request.get("path_params") or {}).get("id"))
+            bucket = self._bucket(model)
+            for index, row in enumerate(bucket):
+                if str(row.get("id")) == ident:
+                    return dict(bucket.pop(index))
+            return None
+
         return SimpleNamespace(
             list=SimpleNamespace(core=list_core),
             create=SimpleNamespace(core=create_core),
+            read=SimpleNamespace(core=read_core),
             update=SimpleNamespace(core=update_core),
+            delete=SimpleNamespace(core=delete_core),
             clear=SimpleNamespace(core=clear_core),
         )
 

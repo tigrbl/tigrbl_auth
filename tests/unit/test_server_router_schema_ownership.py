@@ -381,16 +381,13 @@ def test_moved_oauth_publishers_live_above_storage_table_modules(
     assert missing == []
     assert not hasattr(storage_module, "api")
     assert not hasattr(storage_module, "router")
+    missing_class_ops = sorted(name for name in route_names if hasattr(table_class, name))
+    assert missing_class_ops == []
     if runtime_module_name == "tigrbl_identity_storage_runtime.authorization":
-        missing_class_ops = sorted(name for name in route_names if not hasattr(table_class, name))
-        assert missing_class_ops == []
-        missing_handler_ops = sorted(name for name in route_names if not hasattr(table_class.handlers, name))
-        assert missing_handler_ops == []
-    else:
-        missing_class_ops = sorted(
-            name for name in route_names if hasattr(table_class, name)
-        )
-        assert missing_class_ops == []
+        from tigrbl_identity_storage_runtime import AuthCodeRuntimeSpec
+
+        runtime_ops = {operation.alias for operation in AuthCodeRuntimeSpec.ops}
+        assert route_names <= runtime_ops
 
 
 def test_consent_account_routes_live_above_storage_table_module() -> None:
@@ -415,8 +412,11 @@ def test_consent_account_routes_live_above_storage_table_module() -> None:
     assert not hasattr(storage_module, "account_router")
     assert sorted(name for name in route_names if not hasattr(runtime_module, name)) == []
     assert sorted(name for name in route_names if hasattr(storage_module, name)) == []
-    assert sorted(name for name in table_op_names if not hasattr(table_class, name)) == []
-    assert sorted(name for name in table_op_names if not hasattr(table_class.handlers, name)) == []
+    assert sorted(name for name in table_op_names if hasattr(table_class, name)) == []
+    from tigrbl_identity_storage_runtime import ConsentRuntimeSpec
+
+    runtime_ops = {operation.alias for operation in ConsentRuntimeSpec.ops}
+    assert table_op_names <= runtime_ops
 
 
 @pytest.mark.parametrize(

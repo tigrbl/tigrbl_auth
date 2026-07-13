@@ -18,7 +18,11 @@ async def _reserve(ctx):
 
 
 def test_runtime_operation_is_carrier_neutral_and_transactional() -> None:
-    operation = makeRuntimeOperation(alias="check_and_reserve", handler=_reserve)
+    operation = makeRuntimeOperation(
+        alias="check_and_reserve",
+        handler=_reserve,
+        arity="member",
+    )
 
     assert isinstance(operation, OpSpec)
     assert operation.alias == "check_and_reserve"
@@ -26,6 +30,7 @@ def test_runtime_operation_is_carrier_neutral_and_transactional() -> None:
     assert operation.expose_routes is False
     assert operation.expose_rpc is False
     assert operation.expose_method is True
+    assert operation.arity == "member"
     assert operation.tx_scope == "read_write"
     assert operation.handler is _reserve
 

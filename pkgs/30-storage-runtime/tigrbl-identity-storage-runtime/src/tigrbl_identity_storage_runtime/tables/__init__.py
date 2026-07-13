@@ -2,12 +2,14 @@
 
 from .attestation import *
 from .authorization import *
+from .consents import *
 from .credentials import *
 from .oidc import *
 from .oauth import *
 from .presentations import *
 from .replay import *
 from .security_events import *
+from .sessions import *
 from .workloads import *
 
 DURABLE_RUNTIME_TABLE_SPECS = (
@@ -16,6 +18,9 @@ DURABLE_RUNTIME_TABLE_SPECS = (
     TenantMembershipRuntimeSpec,
     DelegatedAdminScopeRuntimeSpec,
     BackchannelLogoutReplayRuntimeSpec,
+    AuthSessionRuntimeSpec,
+    ConsentRuntimeSpec,
+    LogoutStateRuntimeSpec,
     AuthCodeRuntimeSpec,
     ClientRegistrationRuntimeSpec,
     RevokedTokenRuntimeSpec,

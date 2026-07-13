@@ -1,10 +1,16 @@
 """OIDC durable-state aliases and executable runtime specifications."""
 
-from tigrbl_identity_storage.tables import BackchannelLogoutReplay
+from tigrbl_identity_storage.tables import BackchannelLogoutReplay, LogoutState
 
 from ..derive import deriveRuntimeTableSpec
 from ..make import makeRuntimeOperation
 from ..ops.oidc_replay import register_backchannel_logout_replay
+from ..ops.oidc_logout import (
+    ensure_logout_for_session,
+    latest_logout_for_session,
+    mark_logout_channel,
+    update_logout_metadata,
+)
 
 BackchannelLogoutReplayTable = BackchannelLogoutReplay
 BackchannelLogoutReplayRuntimeSpec = deriveRuntimeTableSpec(
@@ -17,7 +23,34 @@ BackchannelLogoutReplayRuntimeSpec = deriveRuntimeTableSpec(
     ),
 )
 
+LogoutStateTable = LogoutState
+LogoutStateRuntimeSpec = deriveRuntimeTableSpec(
+    LogoutStateTable,
+    operations=(
+        makeRuntimeOperation(
+            alias="latest_for_session",
+            handler=latest_logout_for_session,
+        ),
+        makeRuntimeOperation(
+            alias="update_metadata",
+            handler=update_logout_metadata,
+            arity="member",
+        ),
+        makeRuntimeOperation(
+            alias="mark_channel",
+            handler=mark_logout_channel,
+            arity="member",
+        ),
+        makeRuntimeOperation(
+            alias="ensure_for_session",
+            handler=ensure_logout_for_session,
+        ),
+    ),
+)
+
 __all__ = [
     "BackchannelLogoutReplayRuntimeSpec",
     "BackchannelLogoutReplayTable",
+    "LogoutStateRuntimeSpec",
+    "LogoutStateTable",
 ]

@@ -49,7 +49,7 @@ async def _call_table_core(
 ) -> object:
     """Call production Tigrbl cores and context-shaped test/runtime adapters."""
 
-    parameters = inspect.signature(core).parameters
+    parameters = inspect.signature(core, follow_wrapped=False).parameters
     if "model" in parameters:
         return await maybe_await(core(table, *positional, db))
     return await maybe_await(core(dict(context)))
@@ -87,7 +87,7 @@ async def list_table_records(
     filters = dict(filters or {})
     context = {"payload": {"filters": filters}, "db": db}
     core = table.handlers.list.core
-    parameters = inspect.signature(core).parameters
+    parameters = inspect.signature(core, follow_wrapped=False).parameters
     if "model" in parameters:
         result = await maybe_await(core(table, filters=filters, db=db))
     else:
@@ -106,6 +106,17 @@ async def first_table_record(
 ) -> Any:
     rows = await list_table_records(table, db, filters)
     return rows[0] if rows else None
+
+
+async def read_table_record(table: type, db: Any, identifier: Any) -> Any:
+    context = {"path_params": {"id": identifier}, "db": db}
+    return await _call_table_core(
+        table.handlers.read.core,
+        table=table,
+        db=db,
+        context=context,
+        positional=(identifier,),
+    )
 
 
 async def create_table_record(
@@ -164,7 +175,7 @@ async def clear_table_records(
     filters = dict(filters or {})
     context = {"payload": {"filters": filters}, "db": db}
     core = table.handlers.clear.core
-    parameters = inspect.signature(core).parameters
+    parameters = inspect.signature(core, follow_wrapped=False).parameters
     if "model" in parameters:
         return await maybe_await(core(table, filters=filters, db=db))
     return await maybe_await(core(context))
@@ -201,6 +212,7 @@ __all__ = [
     "list_table_records",
     "maybe_await",
     "payload_from_context",
+    "read_table_record",
     "record_identifier",
     "reject_sensitive_raw_fields",
     "update_table_record",

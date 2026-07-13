@@ -16,6 +16,7 @@ def makeRuntimeOperation(
     alias: str,
     handler: RuntimeStep,
     target: str = "custom",
+    arity: str = "collection",
     tx_scope: str = "read_write",
     persist: str = "default",
     request_model: object | None = None,
@@ -32,6 +33,7 @@ def makeRuntimeOperation(
     return OpSpec(
         alias=alias,
         target=target,
+        arity=arity,
         expose_routes=False,
         expose_rpc=False,
         expose_method=True,

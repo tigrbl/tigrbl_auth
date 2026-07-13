@@ -133,3 +133,22 @@ def test_oauth_state_mutations_are_not_defined_by_layer_01_tables() -> None:
             isinstance(node, (ast.AsyncFunctionDef, ast.FunctionDef))
             for node in ast.walk(tree)
         )
+
+
+def test_session_consent_logout_mutations_are_not_layer_01_operations() -> None:
+    tables = (
+        ROOT
+        / "pkgs"
+        / "01-storage"
+        / "tigrbl-identity-storage"
+        / "src"
+        / "tigrbl_identity_storage"
+        / "tables"
+    )
+    for relative in (
+        Path("auth_session/_table.py"),
+        Path("consent/_table.py"),
+        Path("logout_state/_table.py"),
+    ):
+        source = (tables / relative).read_text(encoding="utf-8")
+        assert "op_ctx" not in source

@@ -9,6 +9,12 @@ from tigrbl_identity_storage.tables.consent import Consent
 from tigrbl_identity_storage.tables.engine import get_db
 from tigrbl_identity_storage.tables.user import User, _current_principal_dependency, _not_found_uuid
 
+from .ops.consents import (
+    list_consents_for_user,
+    revoke_consent_for_user,
+    revoke_consents_for_client,
+)
+
 api = router = TigrblRouter()
 MY_ACCOUNT_TAGS = ["My Account"]
 
@@ -23,9 +29,14 @@ async def list_account_consents(
     current_user: User = Depends(_current_principal_dependency),
     db: Any = Depends(get_db),
 ) -> list[Consent]:
-    return await Consent.handlers.list_for_user.core(
-        {"user_id": current_user.id, "tenant_id": current_user.tenant_id},
-        db=db,
+    return await list_consents_for_user(
+        {
+            "payload": {
+                "user_id": current_user.id,
+                "tenant_id": current_user.tenant_id,
+            },
+            "db": db,
+        }
     )
 
 
@@ -40,13 +51,17 @@ async def revoke_account_consent(
     current_user: User = Depends(_current_principal_dependency),
     db: Any = Depends(get_db),
 ) -> Consent:
-    row = await Consent.handlers.revoke_for_user.core(
+    row = await revoke_consent_for_user(
         {
-            "id": _not_found_uuid(consent_id, field="consent"),
-            "user_id": current_user.id,
-            "tenant_id": current_user.tenant_id,
-        },
-        db=db,
+            "path_params": {
+                "id": _not_found_uuid(consent_id, field="consent"),
+            },
+            "payload": {
+                "user_id": current_user.id,
+                "tenant_id": current_user.tenant_id,
+            },
+            "db": db,
+        }
     )
     if row is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "consent not found")
@@ -63,9 +78,14 @@ async def list_account_authorized_apps(
     current_user: User = Depends(_current_principal_dependency),
     db: Any = Depends(get_db),
 ) -> list[Consent]:
-    return await Consent.handlers.list_for_user.core(
-        {"user_id": current_user.id, "tenant_id": current_user.tenant_id},
-        db=db,
+    return await list_consents_for_user(
+        {
+            "payload": {
+                "user_id": current_user.id,
+                "tenant_id": current_user.tenant_id,
+            },
+            "db": db,
+        }
     )
 
 
@@ -80,13 +100,17 @@ async def revoke_account_authorized_app(
     current_user: User = Depends(_current_principal_dependency),
     db: Any = Depends(get_db),
 ) -> list[Consent]:
-    rows = await Consent.handlers.revoke_for_client.core(
+    rows = await revoke_consents_for_client(
         {
-            "client_id": _not_found_uuid(client_id, field="client"),
-            "user_id": current_user.id,
-            "tenant_id": current_user.tenant_id,
-        },
-        db=db,
+            "path_params": {
+                "client_id": _not_found_uuid(client_id, field="client"),
+            },
+            "payload": {
+                "user_id": current_user.id,
+                "tenant_id": current_user.tenant_id,
+            },
+            "db": db,
+        }
     )
     if not rows:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "authorized app not found")
