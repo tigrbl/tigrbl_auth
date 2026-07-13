@@ -27,6 +27,7 @@ class ClaimValueType(StrEnum):
     TIMESTAMP = "timestamp"
     JSON_OBJECT = "json-object"
     JSON_VALUE = "json-value"
+    BYTES = "bytes"
 
 
 class ClaimNameKind(StrEnum):

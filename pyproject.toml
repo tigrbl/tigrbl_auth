@@ -172,6 +172,14 @@ dependencies = [
     "tigrbl-claim-authorization-code-hash-concrete==0.4.0.dev2",
     "tigrbl-claim-state-hash-concrete==0.4.0.dev2",
     "tigrbl-claim-session-id-concrete==0.4.0.dev2",
+    "tigrbl-claim-cwt-issuer-concrete==0.4.0.dev2",
+    "tigrbl-claim-cwt-subject-concrete==0.4.0.dev2",
+    "tigrbl-claim-cwt-audience-concrete==0.4.0.dev2",
+    "tigrbl-claim-cwt-expiration-concrete==0.4.0.dev2",
+    "tigrbl-claim-cwt-not-before-concrete==0.4.0.dev2",
+    "tigrbl-claim-cwt-issued-at-concrete==0.4.0.dev2",
+    "tigrbl-claim-cwt-id-concrete==0.4.0.dev2",
+    "tigrbl-auth-protocol-cwt==0.4.0.dev2",
     "tigrbl-auth-protocol-gnap==0.4.0.dev2",
     "tigrbl-auth-profile-haip==0.4.0.dev2",
     "tigrbl-security-event-protocol-set==0.4.0.dev2",
@@ -540,6 +548,14 @@ tigrbl-claim-access-token-hash-oidc-concrete = { path = "pkgs/10-concrete/tigrbl
 tigrbl-claim-authorization-code-hash-concrete = { path = "pkgs/10-concrete/tigrbl-claim-authorization-code-hash-concrete", editable = true }
 tigrbl-claim-state-hash-concrete = { path = "pkgs/10-concrete/tigrbl-claim-state-hash-concrete", editable = true }
 tigrbl-claim-session-id-concrete = { path = "pkgs/10-concrete/tigrbl-claim-session-id-concrete", editable = true }
+tigrbl-claim-cwt-issuer-concrete = { path = "pkgs/10-concrete/tigrbl-claim-cwt-issuer-concrete", editable = true }
+tigrbl-claim-cwt-subject-concrete = { path = "pkgs/10-concrete/tigrbl-claim-cwt-subject-concrete", editable = true }
+tigrbl-claim-cwt-audience-concrete = { path = "pkgs/10-concrete/tigrbl-claim-cwt-audience-concrete", editable = true }
+tigrbl-claim-cwt-expiration-concrete = { path = "pkgs/10-concrete/tigrbl-claim-cwt-expiration-concrete", editable = true }
+tigrbl-claim-cwt-not-before-concrete = { path = "pkgs/10-concrete/tigrbl-claim-cwt-not-before-concrete", editable = true }
+tigrbl-claim-cwt-issued-at-concrete = { path = "pkgs/10-concrete/tigrbl-claim-cwt-issued-at-concrete", editable = true }
+tigrbl-claim-cwt-id-concrete = { path = "pkgs/10-concrete/tigrbl-claim-cwt-id-concrete", editable = true }
+tigrbl-auth-protocol-cwt = { path = "pkgs/50-protocols/tigrbl-auth-protocol-cwt", editable = true }
 tigrbl-auth-protocol-gnap = { path = "pkgs/50-protocols/tigrbl-auth-protocol-gnap", editable = true }
 tigrbl-auth-profile-haip = { path = "pkgs/50-protocols/tigrbl-auth-profile-haip", editable = true }
 tigrbl-security-event-protocol-set = { path = "pkgs/50-protocols/tigrbl-security-event-protocol-set", editable = true }
