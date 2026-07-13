@@ -2,6 +2,12 @@
 
 from .migrations import *
 from .topology_validation import *
+from .attestation_repositories import *
+from .credential_repositories import *
+from .presentation_repositories import *
+from .repositories import *
+from .security_event_repositories import *
+from .workload_repositories import *
 
 __all__ = [
     "MigrationContract",
@@ -25,4 +31,22 @@ __all__ = [
     "observe_identity_topology",
     "validate_identity_topology_db",
     "validate_identity_topology_snapshot",
+    "AsyncRecordStore",
+    "AsyncTransactionManager",
+    "AttestationEvidenceRepository",
+    "AttestationReferenceManifestRepository",
+    "AttestationResultRepository",
+    "CredentialIssuanceTransactionRepository",
+    "CredentialOfferRepository",
+    "CredentialStatusEntryRepository",
+    "DurableRepository",
+    "PresentationConsentRepository",
+    "PresentationReplayRepository",
+    "PresentationTransactionRepository",
+    "SecurityEventDeliveryRepository",
+    "SecurityEventReplayRepository",
+    "SecurityEventRepository",
+    "SpiffeTrustBundleRepository",
+    "StorageTransactionCoordinator",
+    "SvidRecordRepository",
 ]
