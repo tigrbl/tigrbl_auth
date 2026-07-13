@@ -540,8 +540,8 @@ Standardize `credential`, `lease`, `role`, `target`, `delivery`, `renewal`, `rot
 - `docs/strategy/identity-market-roadmap.md`
 - `docs/architecture/TEMP_IDENTITY_PACKAGE_BOUNDARY_PROPOSAL.md`
 - `pkgs/01-storage/tigrbl-identity-storage/`
-- `pkgs/40-capabilities/tigrbl-authn-credentials/`
-- `pkgs/40-capabilities/tigrbl-authz-policy/`
+- `pkgs/20-providers/tigrbl-authn-credentials/`
+- `pkgs/20-providers/tigrbl-authz-policy/`
 - `pkgs/80-apis/tigrbl-auth-api-service-admin/`
 - `tests/integration/test_service_key_creation.py`
 - prior workload, attestation, certificate, token-service, agent-delegation, and entitlement-governance pairing briefs.

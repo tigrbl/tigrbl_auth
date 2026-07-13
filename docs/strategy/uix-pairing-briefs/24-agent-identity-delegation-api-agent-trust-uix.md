@@ -621,7 +621,7 @@ Guardrails include sponsor ambiguity, impersonation, authority amplification, ru
 - `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/authority/graph.py`;
 - `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/delegation_grant/`;
 - `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/authority_derivation_graph/`;
-- `pkgs/40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/delegation.py`;
+- `pkgs/20-providers/tigrbl-authz-policy/src/tigrbl_authz_policy/delegation.py`;
 - authority derivation/attenuation capabilities and tests;
 - RFC 9396 RAR, RFC 8693 token exchange, resource indicators, DPoP/mTLS, token/delegation provenance, policy, workload, attestation, audit, and security-signal foundations;
 - `tests/security/planning/test_authorization_budgets_planning.py` as planning-only evidence;

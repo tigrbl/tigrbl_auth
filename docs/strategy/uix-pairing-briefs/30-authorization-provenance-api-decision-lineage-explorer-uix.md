@@ -676,9 +676,9 @@ Faster investigation is useful only if explanations remain correct, privacy-safe
 - `.ssot/specs/SPEC-1212-policy-determinism-and-decision-stability-contract.yaml`
 - `pkgs/20-providers/tigrbl-security-authorization-provenance-builder/`
 - `pkgs/05-bases/tigrbl-security-provenance-bases/`
-- `pkgs/40-capabilities/tigrbl-authz-policy/`
-- `pkgs/40-capabilities/tigrbl-authz-policy-decision-engine/`
-- `pkgs/40-capabilities/tigrbl-authz-policy-authority-derivation-graph/`
+- `pkgs/20-providers/tigrbl-authz-policy/`
+- `pkgs/20-providers/tigrbl-authz-policy-decision-engine/`
+- `pkgs/30-storage-runtime/tigrbl-authz-policy-authority-derivation-graph/`
 - `pkgs/02-contracts/tigrbl-security-trust-contracts/`
 - `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/replay/`
 - `tests/unit/test_authorization_provenance.py`

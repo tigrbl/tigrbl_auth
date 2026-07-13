@@ -735,8 +735,8 @@ Standardize `source authority`, `proposed authority`, `clause`, `dimension`, `co
 - `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/authority/graph.py`
 - `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/authority/semantics.py`
 - `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/delegation/proofs.py`
-- `pkgs/40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/delegation.py`
-- `pkgs/40-capabilities/tigrbl-authz-policy-authority-derivation-graph/`
+- `pkgs/20-providers/tigrbl-authz-policy/src/tigrbl_authz_policy/delegation.py`
+- `pkgs/30-storage-runtime/tigrbl-authz-policy-authority-derivation-graph/`
 - `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/delegation_grant/`
 - `tests/unit/test_delegation_attenuation_proof.py`
 - `tests/unit/test_delegation_attenuation_robustness_t2.py`

@@ -50,6 +50,9 @@ jobs:
       - name: Verify current-state truth chain
         shell: bash
         run: uv run python scripts/verify_truth_chain.py --mode current-state
+      - name: Verify package layer ownership
+        shell: bash
+        run: uv run python scripts/validate_layer_boundaries.py
       - name: Run devtest lane
         shell: bash
         run: tox -e py311-devtest

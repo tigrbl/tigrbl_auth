@@ -629,7 +629,7 @@ Standardize `source authority`, `responsible subject`, `delegator`, `delegate/ac
 - `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/delegation_grant/`
 - `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/authority_derivation_graph/`
 - `pkgs/20-providers/tigrbl-security-authorization-provenance-builder/`
-- `pkgs/40-capabilities/tigrbl-authz-policy-authority-derivation-graph/`
+- `pkgs/30-storage-runtime/tigrbl-authz-policy-authority-derivation-graph/`
 - `pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/token_exchange.py`
 - `tests/security/test_delegation_provenance.py`
 - `tests/unit/test_delegation_grant_lifecycle_contract.py`

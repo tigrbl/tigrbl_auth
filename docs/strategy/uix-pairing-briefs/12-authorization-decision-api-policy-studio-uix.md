@@ -461,10 +461,10 @@ Produce:
 - `pkgs/10-concrete/tigrbl-authz-policy-obligations-concrete/`
 - `pkgs/10-concrete/tigrbl-authz-policy-attributes-mapping/`
 - `pkgs/20-providers/tigrbl-security-authorization-provenance-builder/`
-- `pkgs/40-capabilities/tigrbl-authz-policy/`
-- `pkgs/40-capabilities/tigrbl-authz-policy-decision-engine/`
-- `pkgs/40-capabilities/tigrbl-authz-policy-authority-derivation-graph/`
-- `pkgs/40-capabilities/tigrbl-identity-admin-relationship-graph/`
+- `pkgs/20-providers/tigrbl-authz-policy/`
+- `pkgs/20-providers/tigrbl-authz-policy-decision-engine/`
+- `pkgs/30-storage-runtime/tigrbl-authz-policy-authority-derivation-graph/`
+- `pkgs/20-providers/tigrbl-identity-admin-relationship-graph/`
 - `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/`
 - `docs/authorization-models-focus.md`
 - Policy, delegation, authority, graph, simulation, provenance, UIX, isolation, and monotonicity tests/SSOT records

@@ -501,7 +501,7 @@ Guardrails include false containment, cross-tenant correlation, replay side effe
 ### Repository
 
 - `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/adaptive_access.py`
-- `pkgs/40-capabilities/tigrbl-identity-admin-auth-anomaly-detector/`
+- `pkgs/20-providers/tigrbl-identity-admin-auth-anomaly-detector/`
 - `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/audit_event/`
 - credential, operator, policy, session, token, delegation, and authorization audit/provenance packages;
 - `pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/revocation.py`

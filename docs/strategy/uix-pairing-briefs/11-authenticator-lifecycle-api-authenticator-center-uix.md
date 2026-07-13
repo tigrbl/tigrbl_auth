@@ -387,8 +387,8 @@ Produce:
 - `pkgs/20-providers/tigrbl-authenticator-*/`
 - `pkgs/20-providers/tigrbl-security-auth-context-acr-basic/`
 - `pkgs/20-providers/tigrbl-security-auth-context-amr-basic/`
-- `pkgs/40-capabilities/tigrbl-authn-credentials/`
-- `pkgs/40-capabilities/tigrbl-identity-admin/src/tigrbl_identity_admin/_advanced_identity_plane/`
+- `pkgs/20-providers/tigrbl-authn-credentials/`
+- `pkgs/20-providers/tigrbl-identity-admin/src/tigrbl_identity_admin/_advanced_identity_plane/`
 - `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/authenticators.py`
 - `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/credentials/`
 - Public UIX, My Account, Tenant Admin, provider, WebAuthn, MFA, credential, and authentication-context tests

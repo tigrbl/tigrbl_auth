@@ -1,5 +1,9 @@
 # Package Dependency Layering Migration
 
+The detailed numbered-layer ownership policy and the deliberately sparse
+layer-40 capability definition are maintained in
+[`PACKAGE_LAYER_OWNERSHIP.md`](PACKAGE_LAYER_OWNERSHIP.md).
+
 This plan makes the package rename work enforceable. The target graph is directional:
 
 1. Foundational packages own identity, authn, authz, protocol, storage, runtime, server, contracts, and testkit behavior.

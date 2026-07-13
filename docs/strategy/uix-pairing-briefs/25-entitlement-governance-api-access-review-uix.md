@@ -533,7 +533,7 @@ Metrics must segment by risk and connector capability; faster bulk approval alon
 - `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/access_review_campaign/`
 - `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/access_review_item/`
 - `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/access_review_decision/`
-- `pkgs/40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/governance_extension.py`
+- `pkgs/20-providers/tigrbl-authz-policy/src/tigrbl_authz_policy/governance_extension.py`
 - `tests/unit/test_governance_extension_plane_phase5.py`
 - `tests/unit/test_provisioning_governance_ecosystem_boundary.py`
 

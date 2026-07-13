@@ -478,7 +478,7 @@ Guardrails include account-link collisions, cross-tenant disclosure, unreviewed 
 - `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/federation/`
 - `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/oidc/federation.py`
 - `pkgs/20-providers/tigrbl-security-oidc-federation-provider/`
-- `pkgs/40-capabilities/tigrbl-identity-admin-trust-federation-graph/`
+- `pkgs/30-storage-runtime/tigrbl-identity-admin-trust-federation-graph/`
 - `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/trust_federation_graph/`
 - `pkgs/20-providers/tigrbl-identity-jose/`
 - `pkgs/20-providers/tigrbl-security-token-jwks-cache/`

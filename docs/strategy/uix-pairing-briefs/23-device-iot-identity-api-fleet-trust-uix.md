@@ -624,7 +624,7 @@ Guardrails include default credentials, cloned identity, false attestation, unsa
 ### Repository
 
 - `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/principals/`;
-- `pkgs/40-capabilities/tigrbl-identity-principals/src/tigrbl_identity_principals/factories.py`;
+- `pkgs/10-concrete/tigrbl-identity-principals/src/tigrbl_identity_principals/factories.py`;
 - `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/machine_identity/`;
 - `tests/planned/identity_model/device-principal.md`;
 - `tests/security/test_machine_identity_governance.py`;

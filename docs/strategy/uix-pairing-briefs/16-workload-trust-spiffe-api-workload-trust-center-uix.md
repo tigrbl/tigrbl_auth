@@ -510,7 +510,7 @@ Guardrails include selector overmatch, cross-tenant issuance, false attestation,
 - `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/machine_identity/`
 - `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/credential_mtls_certificate/`
 - `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/authority/trust_domains.py`
-- `pkgs/40-capabilities/tigrbl-identity-admin-trust-federation-graph/`
+- `pkgs/30-storage-runtime/tigrbl-identity-admin-trust-federation-graph/`
 - `pkgs/20-providers/tigrbl-security-certificate-mtls/`
 - `pkgs/20-providers/tigrbl-security-mtls-cnf-binding-validator/`
 - OAuth token-exchange, client-credentials, resource-validation, JOSE, credential, and audit packages;

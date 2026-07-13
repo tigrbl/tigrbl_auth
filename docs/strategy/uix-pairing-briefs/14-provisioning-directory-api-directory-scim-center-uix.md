@@ -512,8 +512,8 @@ Guardrails include cross-tenant mutation, accidental account merge, unauthorized
 - `docs/scim-v2-focus.md`
 - `docs/scim-v2-vendor-coverage-matrix.md`
 - `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/governance/scim/`
-- `pkgs/40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/governance_extension.py`
-- `pkgs/40-capabilities/tigrbl-identity-principals/src/tigrbl_identity_principals/directory.py`
+- `pkgs/20-providers/tigrbl-authz-policy/src/tigrbl_authz_policy/governance_extension.py`
+- `pkgs/10-concrete/tigrbl-identity-principals/src/tigrbl_identity_principals/directory.py`
 - `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/scim_schema/`
 - `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/scim_user/`
 - `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/scim_group/`
