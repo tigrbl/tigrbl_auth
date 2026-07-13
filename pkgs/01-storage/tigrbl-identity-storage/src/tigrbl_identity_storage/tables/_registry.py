@@ -59,7 +59,7 @@ from .replay_reservation import ReplayReservation
 from .did_gnap_state import DidDocument,DidDocumentVersion,DidResolutionCache,DidService,DidVerificationMethod,GnapClientInstance,GnapContinuation,GnapGrant,GnapInteraction
 from .certificate_state import CertificateRecord,CertificateStatusSnapshot,TrustAnchor
 from .claim_state import ClaimDefinition,ClaimProvenanceRecord,ClaimReleasePolicy,ClaimSnapshot,ClaimSourceBinding
-from .auth_session import AuthSession, CredsIn, MyAccountSessionOut, TokenPair as LoginTokenPair
+from .auth_session import AuthSession, CredsIn, TokenPair as LoginTokenPair
 from .auth_code import AuthCode
 from .device_code import DeviceAuthorizationIn, DeviceAuthorizationOut, DeviceCode
 from .revoked_token import RevocationIn, RevocationOut, RevokedToken

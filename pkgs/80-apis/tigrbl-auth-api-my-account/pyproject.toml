@@ -6,7 +6,11 @@ readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
 dependencies = [
+    "pydantic==2.12.5",
     "tigrbl-auth==0.4.0.dev2",
+    "tigrbl==0.4.4.dev1",
+    "tigrbl-identity-storage==0.4.0.dev2",
+    "tigrbl-identity-storage-runtime==0.4.0.dev2",
 ]
 
 [project.urls]

@@ -121,7 +121,6 @@ def test_server_rest_router_bridges_warn_to_storage_owner(
             "tigrbl_identity_storage.tables.realm",
             {"AdminRealmOut", "AdminRealmProvisionIn", "AdminRealmUpdateIn"},
         ),
-        ("tigrbl_identity_storage.tables.auth_session", {"MyAccountSessionOut"}),
     ],
 )
 def test_table_backed_rest_schemas_live_on_table_modules(
@@ -257,14 +256,6 @@ def test_admin_auth_routes_live_in_server_runtime() -> None:
                 "change_account_password",
             },
         ),
-        (
-            "tigrbl_identity_storage.tables.auth_session",
-            "AuthSession",
-            {
-                "list_account_sessions",
-                "revoke_account_session",
-            },
-        ),
     ],
 )
 def test_my_account_route_handlers_live_on_storage_table_modules(
@@ -279,6 +270,25 @@ def test_my_account_route_handlers_live_on_storage_table_modules(
     assert missing == []
     missing_class_ops = sorted(name for name in route_names if not hasattr(table_class, name))
     assert missing_class_ops == []
+
+
+def test_my_account_session_routes_live_in_api_package() -> None:
+    api_module = importlib.import_module("tigrbl_auth_api_my_account.sessions")
+    storage_module = importlib.import_module(
+        "tigrbl_identity_storage.tables.auth_session"
+    )
+    table_class = storage_module.AuthSession
+    route_names = {"list_account_sessions", "revoke_account_session"}
+
+    assert hasattr(api_module, "api")
+    assert hasattr(api_module, "router")
+    assert hasattr(api_module, "MyAccountSessionOut")
+    assert sorted(name for name in route_names if not hasattr(api_module, name)) == []
+    assert not hasattr(storage_module, "account_api")
+    assert not hasattr(storage_module, "account_router")
+    assert not hasattr(storage_module, "MyAccountSessionOut")
+    assert sorted(name for name in route_names if hasattr(storage_module, name)) == []
+    assert sorted(name for name in route_names if hasattr(table_class, name)) == []
 
 
 @pytest.mark.parametrize(

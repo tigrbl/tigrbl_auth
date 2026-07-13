@@ -25,7 +25,7 @@ PRODUCT_SURFACE = my_account_package.PRODUCT_SURFACE
 MY_ACCOUNT_API_CONTRACT = my_account_package.MY_ACCOUNT_API_CONTRACT
 build_app = my_account_package.build_app
 
-account_session_module = import_module("tigrbl_identity_storage.tables.auth_session")
+account_session_module = import_module("tigrbl_auth_api_my_account.sessions")
 account_consent_module = import_module("tigrbl_identity_storage_runtime.account_consent")
 account_user_module = import_module("tigrbl_identity_storage.tables.user")
 

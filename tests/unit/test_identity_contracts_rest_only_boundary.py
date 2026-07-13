@@ -107,7 +107,6 @@ def test_identity_contracts_rest_schema_bridge_is_removed() -> None:
 
 def test_storage_tables_own_table_backed_rest_shapes() -> None:
     table_modules = {
-        "tigrbl_identity_storage.tables.auth_session": {"MyAccountSessionOut"},
         "tigrbl_identity_storage.tables.realm": {
             "AdminRealmOut",
             "AdminRealmProvisionIn",
@@ -132,6 +131,16 @@ def test_storage_tables_own_table_backed_rest_shapes() -> None:
         module = importlib.import_module(module_name)
         for dto_name in dto_names:
             assert hasattr(module, dto_name), f"{module_name}.{dto_name}"
+
+
+def test_my_account_api_owns_session_rest_shape() -> None:
+    api_module = importlib.import_module("tigrbl_auth_api_my_account.sessions")
+    storage_module = importlib.import_module(
+        "tigrbl_identity_storage.tables.auth_session"
+    )
+
+    assert hasattr(api_module, "MyAccountSessionOut")
+    assert not hasattr(storage_module, "MyAccountSessionOut")
 
 
 def test_table_backed_route_modules_do_not_import_contract_dtos() -> None:

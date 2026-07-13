@@ -20,9 +20,6 @@ def _ensure_runtime_bindings() -> None:
 
 
 def _attach_custom_op_schemas() -> None:
-    set_schema(AuthSession, "list_account_sessions", out=list[MyAccountSessionOut])
-    set_schema(AuthSession, "revoke_account_session", out=MyAccountMutationOut)
-
     set_schema(TokenRecord, "token", in_=None, out=TokenPair)
     set_schema(TokenRecord, "authorization_code_grant", in_=AuthorizationCodeGrantForm, out=TokenPair)
     set_schema(TokenRecord, "password_grant", in_=PasswordGrantForm, out=TokenPair)

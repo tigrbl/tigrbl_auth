@@ -57,10 +57,6 @@ TABLE_ROUTE_FUNCTION_ALLOWLIST = {
         "admin_list_identities",
         "admin_update_identity",
     },
-    "auth_session.py": {
-        "list_account_sessions",
-        "revoke_account_session",
-    },
     "auth_code.py": {
         "authorize",
     },

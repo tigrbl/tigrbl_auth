@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING, Any, Awaitable, Callable
 from tigrbl_auth.api.products import build_product_app
 from tigrbl_auth.runtime import LazyASGIApplication
 from tigrbl_auth_api_my_account.openapi import patch_my_account_openapi
+from tigrbl_auth_api_my_account.sessions import api as session_api
 
 if TYPE_CHECKING:
     from tigrbl import TigrblApp
@@ -112,7 +113,9 @@ def _default_settings() -> object:
 def build_app(settings_obj: object | None = None) -> "TigrblApp":
     if settings_obj is None:
         settings_obj = _default_settings()
-    app = patch_my_account_openapi(build_product_app(PRODUCT_SURFACE, settings_obj))
+    app = build_product_app(PRODUCT_SURFACE, settings_obj)
+    app.include_router(session_api)
+    app = patch_my_account_openapi(app)
     return MyAccountCors(app)
 
 
