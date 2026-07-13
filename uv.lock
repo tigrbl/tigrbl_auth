@@ -2689,6 +2689,7 @@ dependencies = [
     { name = "tigrbl-security-dpop-cnf-binding-validator" },
     { name = "tigrbl-security-event-bases" },
     { name = "tigrbl-security-event-protocol-set" },
+    { name = "tigrbl-security-event-replay-store" },
     { name = "tigrbl-security-events-claim-concrete" },
     { name = "tigrbl-security-key-rotation-policy-contracts" },
     { name = "tigrbl-security-mtls-cnf-binding-validator" },
@@ -2708,6 +2709,8 @@ dependencies = [
     { name = "tigrbl-service-identity-concrete" },
     { name = "tigrbl-service-key-credential-concrete" },
     { name = "tigrbl-set-concrete" },
+    { name = "tigrbl-set-receiver-provider" },
+    { name = "tigrbl-set-transmitter-provider" },
     { name = "tigrbl-spiffe-bundle-provider" },
     { name = "tigrbl-spiffe-workload-api-provider" },
     { name = "tigrbl-subject-claim-concrete" },
@@ -2974,6 +2977,7 @@ requires-dist = [
     { name = "tigrbl-security-dpop-cnf-binding-validator", editable = "pkgs/20-providers/tigrbl-security-dpop-cnf-binding-validator" },
     { name = "tigrbl-security-event-bases", editable = "pkgs/05-bases/tigrbl-security-event-bases" },
     { name = "tigrbl-security-event-protocol-set", editable = "pkgs/50-protocols/tigrbl-security-event-protocol-set" },
+    { name = "tigrbl-security-event-replay-store", editable = "pkgs/20-providers/tigrbl-security-event-replay-store" },
     { name = "tigrbl-security-events-claim-concrete", editable = "pkgs/10-concrete/tigrbl-security-events-claim-concrete" },
     { name = "tigrbl-security-key-rotation-policy-contracts", editable = "pkgs/02-contracts/tigrbl-security-key-rotation-policy-contracts" },
     { name = "tigrbl-security-mtls-cnf-binding-validator", editable = "pkgs/20-providers/tigrbl-security-mtls-cnf-binding-validator" },
@@ -2993,6 +2997,8 @@ requires-dist = [
     { name = "tigrbl-service-identity-concrete", editable = "pkgs/10-concrete/tigrbl-service-identity-concrete" },
     { name = "tigrbl-service-key-credential-concrete", editable = "pkgs/10-concrete/tigrbl-service-key-credential-concrete" },
     { name = "tigrbl-set-concrete", editable = "pkgs/10-concrete/tigrbl-set-concrete" },
+    { name = "tigrbl-set-receiver-provider", editable = "pkgs/20-providers/tigrbl-set-receiver-provider" },
+    { name = "tigrbl-set-transmitter-provider", editable = "pkgs/20-providers/tigrbl-set-transmitter-provider" },
     { name = "tigrbl-spiffe-bundle-provider", editable = "pkgs/20-providers/tigrbl-spiffe-bundle-provider" },
     { name = "tigrbl-spiffe-workload-api-provider", editable = "pkgs/20-providers/tigrbl-spiffe-workload-api-provider" },
     { name = "tigrbl-subject-claim-concrete", editable = "pkgs/10-concrete/tigrbl-subject-claim-concrete" },
@@ -5291,6 +5297,17 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-security-event-replay-store"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-security-event-replay-store" }
+dependencies = [
+    { name = "tigrbl-security-event-bases" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-security-event-bases", specifier = "==0.4.0.dev2" }]
+
+[[package]]
 name = "tigrbl-security-events-claim-concrete"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-security-events-claim-concrete" }
@@ -5574,6 +5591,40 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [{ name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-set-receiver-provider"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-set-receiver-provider" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-security-event-bases" },
+    { name = "tigrbl-set-concrete" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-event-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-set-concrete", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-set-transmitter-provider"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-set-transmitter-provider" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-security-event-bases" },
+    { name = "tigrbl-set-concrete" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-event-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-set-concrete", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-spec"
