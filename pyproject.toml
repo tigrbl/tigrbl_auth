@@ -197,6 +197,11 @@ dependencies = [
     "tigrbl-auth-protocol-oidc==0.4.0.dev2",
     "tigrbl-auth-protocol-rp==0.4.0.dev2",
     "tigrbl-authn-credentials==0.4.0.dev2",
+    "tigrbl-digital-credential-issuance==0.4.0.dev2",
+    "tigrbl-digital-credential-presentation==0.4.0.dev2",
+    "tigrbl-attestation-appraisal==0.4.0.dev2",
+    "tigrbl-security-events==0.4.0.dev2",
+    "tigrbl-workload-identity==0.4.0.dev2",
     "tigrbl-authz-policy-admin-gate==0.4.0.dev2",
     "tigrbl-authz-policy==0.4.0.dev2",
     "tigrbl-auth-plugin==0.4.0.dev2",
@@ -397,6 +402,11 @@ tigrbl-oidc-subject-strategy = { path = "pkgs/10-concrete/tigrbl-oidc-subject-st
 tigrbl-auth-protocol-oidc = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oidc", editable = true }
 tigrbl-auth-protocol-rp = { path = "pkgs/50-protocols/tigrbl-auth-protocol-rp", editable = true }
 tigrbl-authn-credentials = { path = "pkgs/40-capabilities/tigrbl-authn-credentials", editable = true }
+tigrbl-digital-credential-issuance = { path = "pkgs/40-capabilities/tigrbl-digital-credential-issuance", editable = true }
+tigrbl-digital-credential-presentation = { path = "pkgs/40-capabilities/tigrbl-digital-credential-presentation", editable = true }
+tigrbl-attestation-appraisal = { path = "pkgs/40-capabilities/tigrbl-attestation-appraisal", editable = true }
+tigrbl-security-events = { path = "pkgs/40-capabilities/tigrbl-security-events", editable = true }
+tigrbl-workload-identity = { path = "pkgs/40-capabilities/tigrbl-workload-identity", editable = true }
 tigrbl-authz-policy-admin-gate = { path = "pkgs/40-capabilities/tigrbl-authz-policy-admin-gate", editable = true }
 tigrbl-authz-policy-authority-derivation-graph = { path = "pkgs/40-capabilities/tigrbl-authz-policy-authority-derivation-graph", editable = true }
 tigrbl-authz-policy = { path = "pkgs/40-capabilities/tigrbl-authz-policy", editable = true }
