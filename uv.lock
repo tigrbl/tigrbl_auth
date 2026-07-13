@@ -2350,6 +2350,11 @@ dependencies = [
 requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
 
 [[package]]
+name = "tigrbl-auth-protocol-gnap"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-gnap" }
+
+[[package]]
 name = "tigrbl-auth-protocol-jwt"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-jwt" }
@@ -2382,6 +2387,7 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-oauth" }
 dependencies = [
     { name = "swarmauri-signing-dpop" },
+    { name = "tigrbl-auth-protocol-gnap" },
     { name = "tigrbl-authorization-scope-set-matcher-concrete" },
     { name = "tigrbl-client-id-claim-concrete" },
     { name = "tigrbl-confirmation-claim-concrete" },
@@ -2397,6 +2403,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "swarmauri-signing-dpop", specifier = "==0.1.1" },
+    { name = "tigrbl-auth-protocol-gnap", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authorization-scope-set-matcher-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-client-id-claim-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-confirmation-claim-concrete", specifier = "==0.4.0.dev2" },
@@ -2591,6 +2598,7 @@ dependencies = [
     { name = "tigrbl-auth" },
     { name = "tigrbl-auth-plugin" },
     { name = "tigrbl-auth-protocol-authzen" },
+    { name = "tigrbl-auth-protocol-gnap" },
     { name = "tigrbl-auth-protocol-jwt" },
     { name = "tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-auth-protocol-oid4vci" },
@@ -2885,6 +2893,7 @@ requires-dist = [
     { name = "tigrbl-auth", editable = "pkgs/70-facade/tigrbl-auth" },
     { name = "tigrbl-auth-plugin", editable = "pkgs/60-runtime/tigrbl-auth-plugin" },
     { name = "tigrbl-auth-protocol-authzen", editable = "pkgs/50-protocols/tigrbl-auth-protocol-authzen" },
+    { name = "tigrbl-auth-protocol-gnap", editable = "pkgs/50-protocols/tigrbl-auth-protocol-gnap" },
     { name = "tigrbl-auth-protocol-jwt", editable = "pkgs/50-protocols/tigrbl-auth-protocol-jwt" },
     { name = "tigrbl-auth-protocol-oauth", editable = "pkgs/50-protocols/tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-auth-protocol-oid4vci", editable = "pkgs/50-protocols/tigrbl-auth-protocol-oid4vci" },

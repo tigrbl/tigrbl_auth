@@ -140,6 +140,7 @@ dependencies = [
     "tigrbl-security-events-claim-concrete==0.4.0.dev2",
     "tigrbl-transaction-id-claim-concrete==0.4.0.dev2",
     "tigrbl-eat-profile-claim-concrete==0.4.0.dev2",
+    "tigrbl-auth-protocol-gnap==0.4.0.dev2",
     "tigrbl-security-event-protocol-set==0.4.0.dev2",
     "tigrbl-attestation-protocol-eat==0.4.0.dev2",
     "tigrbl-credential-profile-sd-jwt-vc==0.4.0.dev2",
@@ -474,6 +475,7 @@ tigrbl-credential-status-claim-concrete = { path = "pkgs/10-concrete/tigrbl-cred
 tigrbl-security-events-claim-concrete = { path = "pkgs/10-concrete/tigrbl-security-events-claim-concrete", editable = true }
 tigrbl-transaction-id-claim-concrete = { path = "pkgs/10-concrete/tigrbl-transaction-id-claim-concrete", editable = true }
 tigrbl-eat-profile-claim-concrete = { path = "pkgs/10-concrete/tigrbl-eat-profile-claim-concrete", editable = true }
+tigrbl-auth-protocol-gnap = { path = "pkgs/50-protocols/tigrbl-auth-protocol-gnap", editable = true }
 tigrbl-security-event-protocol-set = { path = "pkgs/50-protocols/tigrbl-security-event-protocol-set", editable = true }
 tigrbl-attestation-protocol-eat = { path = "pkgs/50-protocols/tigrbl-attestation-protocol-eat", editable = true }
 tigrbl-credential-profile-sd-jwt-vc = { path = "pkgs/50-protocols/tigrbl-credential-profile-sd-jwt-vc", editable = true }
