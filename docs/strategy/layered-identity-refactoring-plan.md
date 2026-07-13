@@ -6,21 +6,22 @@ remain authoritative for conformance claims.
 
 ## 1. Target architecture
 
-The dependency direction is:
+The ownership/composition direction is:
 
 ```text
-00 primitives
-  -> 01 durable schemas / 02 semantic contracts
-  -> 05 reusable behavioral bases
-  -> 10 deterministic concrete objects / 20 environment-backed providers
-  -> 30 durable Tigrbl table runtimes
-  -> 40 mountable and composable capabilities
-  -> 50 versioned protocols and profiles
+00 primitives -> 01 durable schemas -> 30 durable Tigrbl table runtimes ---+
+                                                                           |
+00 primitives -> 02 semantic contracts -> 05 reusable behavioral bases    |
+  -> 10 deterministic concrete objects -----------------------------------+
+  -> 20 environment-backed providers -------------------------------------+
+                                                                           |
+                                      40 mountable capabilities <----------+
+                                        -> 50 versioned protocols/profiles
   -> 60 runtime composition
   -> 70 public facade
   -> 80 HTTP/API products
-  -> 90 deployable applications
-  -> 95 distribution and deployment
+  -> 90 reusable UIX core
+  -> 95 product UIX applications and browser SDKs
 ```
 
 Required ownership rules:
@@ -66,6 +67,10 @@ Required ownership rules:
 - [x] `a8f124a5` moves OIDC back-channel logout replay mutation to layer 30.
 - [x] `91d8be07` moves authorization-code persistence, client-registration
   upsert, and token-revocation ledger operations to layer 30.
+- [x] `a50e6f68` moves session, consent, and logout-state mutations to layer 30
+  and preserves member/collection arity in runtime operation construction.
+- [x] `c7b0b5de` moves token-record persistence, rotation, family revocation, and
+  introspection to a profiled layer-30 runtime family.
 - [x] Claim primitives, contracts, bases, `ClaimType`, `ClaimValueType`,
   `ClaimNameKind`, and standalone concrete claim packages exist.
 - [x] Protocol-neutral scope matching exists as
@@ -131,11 +136,7 @@ equivalent runtime specs are active:
 
 | Layer-01 source | Symbols to migrate | Layer-30 destination |
 |---|---|---|
-| `tables/auth_session/_table.py` | `terminate`, `touch`, `get_active`, `rotate_cookie_secret`, `bind_client` | `ops/sessions.py`, `tables/sessions.py` |
-| `tables/consent/_table.py` | `list_for_user`, `revoke_for_user`, `revoke_for_client` | `ops/consents.py`, `tables/consents.py` |
-| `tables/logout_state/_table.py` | `latest_for_session`, `update_metadata`, `mark_channel`, `ensure_for_session` | `ops/oidc_logout.py`, extend `tables/oidc.py` |
 | `tables/delegation_grant/_table.py` | grant CRUD/transitions, edge linking, child deactivation, provenance, token links | `ops/delegation.py`, `tables/delegation.py` |
-| `tables/token_record/_operations.py` | `persist_issued`, `mark_rotated`, `revoke_family`, `introspect` | `ops/tokens.py`, `tables/tokens.py` |
 | `tables/device_code/_hooks.py` | approve/deny hooks | `hooks/device_code.py`, `tables/oauth.py` |
 | `tables/crypto_key/_hooks.py` | normalization, primary-version seed, enabled check | `hooks/keys.py`, `tables/keys.py` |
 | `tables/client/_table.py` | durable enable/disable/rotate operations | `ops/clients.py`, `tables/clients.py` |
@@ -146,8 +147,9 @@ equivalent runtime specs are active:
 
 Completed moves already removed executable operations from
 `attribute_policy`, `delegated_admin_scope`, `tenant_membership`,
-`backchannel_logout_replay`, `auth_code`, `client_registration`, and
-`revoked_token` table modules.
+`backchannel_logout_replay`, `auth_code`, `client_registration`,
+`revoked_token`, `auth_session`, `consent`, `logout_state`, and `token_record`
+table modules.
 
 ### Move out of storage entirely
 
@@ -503,17 +505,20 @@ errors.py         # protocol error mapping
   HTTP responses.
 - Keep API schemas aligned with actual runtime handlers and generated OpenAPI.
 
-### Layer 90 applications
+### Layer 90 UIX core
 
-- Compose installable product surfaces from layer-80 APIs and layer-60 runtime
-  configurations.
-- Contain no reusable protocol/credential/claim algorithms.
+- `pkgs/90-uix-core/uix-core` owns browser-safe, reusable React layout,
+  authentication, API-client, form, table, and feedback primitives.
+- It does not own product routes, protocol algorithms, server-side secrets, or
+  durable state.
 
-### Layer 95 deployment/distribution
+### Layer 95 product UIX
 
-- Own packaging, images, charts, environment templates, and deployment policy.
-- Validate that each application’s advertised capability/protocol set matches
-  mounted routes and configured providers.
+- `pkgs/95-ui/*` composes product-specific browser applications and SDKs from
+  layer-90 UIX primitives and layer-80 API contracts.
+- Each UIX package advertises only operations actually mounted by its paired
+  API surface. Deployment manifests remain in their existing workspace owners;
+  layer 95 is not the generic deployment/distribution layer.
 
 ## 13. Call-site migration order
 
@@ -577,3 +582,416 @@ flags. Tier-4 claims require independent interoperability evidence.
 - [ ] C12: full boundary, conformance, security-negative, migration, and
   interoperability audit.
 
+## 16. Change notation and non-negotiable invariants
+
+The file ledger below uses these actions:
+
+- **ADD**: create a new owner or proof surface.
+- **UPDATE**: retain the file and change its implementation or exports.
+- **MOVE**: copy behavior to its correct owner, migrate callers, then delete the
+  source behavior.
+- **FACADE**: retain only warning re-exports for one published release.
+- **REMOVE**: delete after all internal imports and compatibility commitments
+  are satisfied.
+
+Every moved operation must preserve the following equivalence contract:
+
+1. the same semantic operation alias and collection/member arity;
+2. the same request materialization and normalized typed input;
+3. the same pre-handler, handler, persistence, and post-handler order;
+4. the same transaction/commit/rollback boundary;
+5. the same successful result and public error envelope;
+6. the same replay, idempotency, and concurrency behavior;
+7. the same protocol binding unless a separately reviewed protocol change is
+   intentionally included.
+
+The target import graph is enforced, not merely documented:
+
+```text
+00 -> 01 -> 30 ----------------+
+                                 +-> 40 -> 50 -> 60 -> 70 -> 80 -> 90 -> 95
+00 -> 02 -> 05 -> 10 ----------+
+                 -> 20 --------+
+```
+
+Layer 20 may consume layer-01 mapped value types only when the provider is
+explicitly an adapter for that type; it must not call table handlers, `_ops`,
+sessions, or durable mutations. Durable reads and writes are injected from
+layer 30 into layer-40 capabilities. Layer 50 calls capabilities, not layer-30
+routers or persistence singletons.
+
+## 17. C3: complete the layer-01 to layer-30 durable-runtime migration
+
+### 17.1 Client records and client-secret lifecycle
+
+| Action | File | Required change |
+|---|---|---|
+| ADD | `pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/ops/clients.py` | Implement `lookup_client`, `set_client_enabled`, and `replace_client_secret_hash` using the common layer-30 table operations. The operation accepts an already-produced digest; it never hashes or verifies a secret. |
+| ADD | `pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/tables/clients.py` | Define `ClientRuntimeSpec` with aliases `lookup_client`, `enable`, `disable`, and `rotate_secret_hash`; preserve collection/member arity and read-only versus read-write transaction scope. |
+| UPDATE | `.../tables/__init__.py`, `.../ops/__init__.py` | Export and activate the client runtime family. |
+| UPDATE | `.../inventory.py` | Ensure the derived `ClientRuntimeSpec` is indexed by table and operation alias. Do not derive a second mapped class. |
+| MOVE | `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/client/_table.py` | Remove `verify_secret`, `rotate_secret`, `enable`, `disable`, `authenticate`, `op_ctx`, `_ops`, and `tigrbl_identity_jose` imports. Retain mapped fields, relationship, `_CLIENT_ID_RE`, and schema metadata. |
+| UPDATE | `.../introspection.py`, `.../token_request.py` | Replace `client.verify_secret(...)` with an injected client-secret verification port; replace direct client lookup with the layer-30 operation. |
+| UPDATE | tests and examples currently calling `Client.new(...)` | Use a provider-backed client-record factory that hashes before invoking the layer-30 create operation. Do not restore `Client.new` on the mapped model. |
+
+The replacement call chain is:
+
+```text
+layer-50 token/introspection binding
+  -> layer-40 ClientAuthenticationCapability.authenticate(request)
+  -> layer-30 lookup_client(client_id, db)
+  -> layer-20 ClientSecretLocalAuthenticator.verify(presented, stored_hash)
+  -> typed ClientAuthenticationResult
+```
+
+### 17.2 User lookup and password lifecycle
+
+| Action | File | Required change |
+|---|---|---|
+| ADD | `.../ops/identities.py` | Implement `lookup_identity_by_identifier`, `replace_password_hash`, `set_identity_enabled`, and password-reset state mutations. Reads filter active records and preserve username/email lookup semantics. |
+| ADD | `.../tables/identities.py` | Define and derive `UserRuntimeSpec`; attach aliases without HTTP bindings. |
+| MOVE | `pkgs/01-storage/.../tables/user/_table.py` | Remove request/response models, `TigrblRouter`, route imports, static route method attachment, `verify_password`, `lookup_by_identifier`, `op_ctx`, and JOSE password imports. Keep mapped columns, relationships, passive `roles`/`scopes` projections, and bootstrap identifiers. |
+| MOVE | `pkgs/01-storage/.../tables/user/_account_route.py` | Move HTTP schemas and handlers to `pkgs/80-apis/tigrbl-auth-api-my-account/src/tigrbl_auth_api_my_account/identities.py`; call the password-authentication capability and identity runtime operations. |
+| MOVE | `pkgs/01-storage/.../tables/user/_admin_identity_route.py` | Move to the appropriate tenant/platform admin API modules; delegate mutations to the identity-administration capability. |
+| UPDATE | `.../login.py`, `pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/admin_auth.py` | Replace `row.verify_password(...)` with `PasswordAuthenticationCapability.authenticate(...)`. |
+| UPDATE | bootstrap composition | Hash the initial superuser password through the configured password provider during bootstrap. `User.DEFAULT_ROWS` must not execute provider cryptography at import time. |
+| REMOVE | old route files and layer-01 route exports | Delete only after OpenAPI equivalence and UI/API integration tests pass. |
+
+### 17.3 Delegation-grant lifecycle
+
+| Action | File | Required change |
+|---|---|---|
+| ADD | `.../ops/delegation.py` | Move `_create`, `_list`, `_read`, `_update`, `_create_grant`, transitions, recursive revoke, edge deactivation, provenance persistence, and token-link operations. Replace recursive dynamically attached model calls with direct local operation calls sharing one transaction. |
+| ADD | `.../tables/delegation.py` | Define runtime specs for `DelegationGrant`, `DelegationGrantEdge`, `DelegationGrantProof`, and `DelegationGrantTokenLink`. Preserve aliases `create_grant`, `inspect_grant`, `list_grants`, `activate_grant`, `expire_grant`, `replace_grant`, `revoke_grant`, `link_edge`, `deactivate_children`, `persist_provenance`, `link_token`, and `list_for_grant`. |
+| UPDATE | `.../tables/__init__.py`, `.../ops/__init__.py` | Export and include all four specs in `DURABLE_RUNTIME_TABLE_SPECS`. |
+| MOVE | `pkgs/01-storage/.../tables/delegation_grant/_table.py` | Retain only mapped table classes, a storage-domain terminal-status invariant if needed, and the compatibility type alias. Remove helpers, operations, `op_ctx`, and runtime imports. |
+| UPDATE | delegation providers/capabilities/protocol callers | Invoke typed delegation capability operations; no caller should call attached table methods directly. |
+
+Add transaction tests proving replacement and recursive revocation are atomic,
+descendants are collapsed once, terminal grants are not re-revoked, and token
+links/provenance remain queryable.
+
+### 17.4 Device-code and crypto-key hooks
+
+| Action | File | Required change |
+|---|---|---|
+| ADD | `.../hooks/device_codes.py` | Move `approve_device_code` and `deny_device_code`; keep `HANDLER` stage, input identity rules, and default denial reason. |
+| UPDATE | `.../tables/oauth.py` | Attach hooks to a derived `DeviceCodeRuntimeSpec` and include approve/deny operations if not already materialized by the canonical table spec. |
+| REMOVE | `pkgs/01-storage/.../tables/device_code/_hooks.py` | Delete after hook-order equivalence tests pass; remove its imports/exports from `_table.py`. |
+| ADD | `.../hooks/keys.py` | Move `normalize_key_usage_policy`, `seed_primary_key_version`, and `ensure_key_enabled`; retain PRE/POST stage ordering. |
+| ADD | `.../tables/keys.py` | Derive `CryptoKeyRuntimeSpec` and `CryptoKeyVersionRuntimeSpec`; attach hooks to create/update/rotate operations. |
+| MOVE | `pkgs/01-storage/.../tables/crypto_key/_usage.py` | Move deterministic normalization to a layer-10 key-policy concrete owner if used outside persistence; otherwise keep only a storage enum/value mapping. |
+| REMOVE | `pkgs/01-storage/.../tables/crypto_key/_hooks.py` | Delete after primary-version idempotency, disabled-key rejection, and lifecycle-order tests pass. |
+
+`scrub_key_material` belongs in the layer-20 key provider/serialization boundary,
+not a durable hook. Layer 30 persists only already-separated public material and
+opaque provider references.
+
+### 17.5 Audit, engine, and generic storage helpers
+
+| Action | File | Required change |
+|---|---|---|
+| ADD/UPDATE | `.../ops/audit.py`, `.../tables/audit.py` | Own append/list/filter operations and a typed audit-recorder adapter. |
+| MOVE | `pkgs/01-storage/.../tables/audit_event/__init__.py` | Retain table export only; remove executable append/list wrappers. |
+| UPDATE | `.../ops/common.py` | Become the only local adapter around canonical Tigrbl create/read/list/update/delete cores. Keep input/output unwrapping tested and private to layer 30. |
+| REMOVE | `pkgs/01-storage/.../tables/_ops.py` | Migrate all callers, including provider packages, then delete. |
+| MOVE | `pkgs/01-storage/.../tables/engine.py` | Move engine/session construction to layer-60 composition and layer-30 initialization. Layer 01 exposes mapped metadata only. |
+| UPDATE/REMOVE | `pkgs/01-storage/.../framework.py` | Remove `TigrblApp`, `TigrblRouter`, `op_ctx`, `hook_ctx`, engine/session, and API imports. Retain a storage-safe barrel only if mapped tables still need it; otherwise import the framework owners directly and delete it. |
+| FACADE | `pkgs/01-storage/.../persistence.py`, `_persistence_extended.py` | Warn and delegate to layer-30 operations for one release; prohibit new imports; then remove. |
+
+No database migration is created for sections 17.1-17.5 unless a mapped column,
+constraint, index, or relationship changes.
+
+## 18. C4/C7: secret providers and authentication composition
+
+### 18.1 New protocol-neutral contracts and provider
+
+| Action | File/package | Required change |
+|---|---|---|
+| ADD | `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/shared_secrets.py` | Define `SecretHash`, `SecretHashingPort.hash_secret`, `SecretVerificationPort.verify_secret`, `SecretHashPolicy`, and a typed verification result/error. The contract carries encoded bytes/string without choosing bcrypt/PBKDF2. |
+| UPDATE | `.../authenticators.py` and package `__init__.py` | Reference the shared-secret ports from password/client-secret authenticator contracts and export them. |
+| UPDATE | `pkgs/05-bases/tigrbl-identity-authenticator-bases/.../mixins.py` | Make `SecretVerifierMixin` an adapter over an injected `SecretVerificationPort`, or remove it if it remains a method that only raises `NotImplementedError`. |
+| ADD | `pkgs/20-providers/tigrbl-secret-hashing-bcrypt-provider` | Add `BcryptSecretHasher` implementing hash/verify for the existing `LargeBinary(60)` representation, cost policy, malformed-hash rejection, and optional rehash-needed detection. |
+| UPDATE | `tigrbl-authenticator-password-local` | `PasswordLocalAuthenticator` injects the hasher and implements typed authenticate/verify behavior; it does not query `User`. |
+| UPDATE | `tigrbl-authenticator-client-secret-local` | `ClientSecretLocalAuthenticator` injects the hasher and implements typed verify behavior; remove OAuth-specific implementation semantics. |
+| UPDATE | `tigrbl-authn-credentials/lifecycle.py` | Stop maintaining a competing PBKDF2 storage format unless explicitly supported as a versioned migration algorithm. Split deterministic lifecycle from provider hashing; remove `CredentialLedger` as an in-memory durable substitute. |
+
+If legacy PBKDF2 hashes exist, add a layer-20 `CompositeSecretVerifier` that
+recognizes both encodings, verifies with the correct provider, and requests a
+bcrypt rehash after successful authentication. Never reinterpret one encoding
+as another.
+
+### 18.2 Authentication capabilities
+
+ADD `pkgs/40-capabilities/tigrbl-principal-authentication` with:
+
+- `PasswordAuthenticationCapability`: injected identity lookup operation and
+  `PasswordLocalAuthenticator`; operation `authenticate_password`;
+- `ClientSecretAuthenticationCapability`: injected client lookup operation and
+  `ClientSecretLocalAuthenticator`; operation `authenticate_client_secret`;
+- `ApiKeyAuthenticationCapability`: injected API/service-key lookup operations
+  and API-key provider; operation `authenticate_api_key`;
+- typed results that identify the authenticated principal and factor evidence
+  without exposing stored digests.
+
+MOVE the composition currently in
+`pkgs/20-providers/tigrbl-authn-credentials/src/tigrbl_authn_credentials/backends.py`
+to these capabilities. Remove imports of `tigrbl_identity_storage.tables`,
+`tables._ops`, `User.lookup_by_identifier`, `Client.authenticate`, and
+`tigrbl_identity_jose.key_management.verify_pw` from layer 20.
+
+| Current call | Replacement |
+|---|---|
+| `login.py: row.verify_password(password)` | `PasswordAuthenticationCapability.call("authenticate_password", request)` |
+| `admin_auth.py: user.verify_password(...)` | same capability, preserving current-password semantics |
+| `token_request.py: client.verify_secret(...)` | `ClientSecretAuthenticationCapability.call("authenticate_client_secret", request)` |
+| `introspection.py: client.verify_secret(...)` | same capability with the introspection client-auth profile |
+| `PasswordBackend._get_user_candidates -> User.lookup_by_identifier` | injected layer-30 identity lookup operation |
+| `ApiKeyBackend -> list_records/Client.authenticate` | layer-40 API-key/client-secret subcalls |
+
+## 19. C5: claims, scope, subject, and base-package cleanup
+
+### 19.1 Claims
+
+- KEEP `tigrbl_identity_core` claim classifiers and
+  `tigrbl_identity_contracts.claims` semantic objects/ports.
+- KEEP `tigrbl-identity-claims-bases` as the protocol-neutral home of
+  `ClaimBase`, `ClaimSetComposerBase`, and `ClaimsProviderBase`.
+- REQUIRE every `pkgs/10-concrete/tigrbl-claim-*-concrete` class to subclass
+  `ClaimBase` and declare canonical name, name kind, claim type, and value type.
+- ADD a generated ownership test that discovers every standalone claim package,
+  instantiates its exported claim class, rejects duplicate canonical names
+  unless an explicit protocol label differs, and proves no package imports
+  layer 50.
+- REMOVE `tigrbl-claim-access-token-hash-oidc-concrete` after its users migrate
+  to `tigrbl-claim-access-token-hash-concrete`.
+
+`tigrbl-oidc-claims-concrete` becomes a FACADE only:
+
+- MOVE `EapAcrValue`, `EapAmrValue`, and `satisfies_eap_acr` from `eap.py` to
+  OIDC/EAP profile modules at layer 50 because these are registered OIDC values,
+  not generic claim objects;
+- MOVE `parse_verified_claims` and `serialize_verified_claims` from
+  `identity_assurance.py` to `tigrbl-identity-assurance-concrete` because the
+  evidence structure is reusable below the OIDC wire profile;
+- UPDATE `tests/unit/test_protocol_neutral_reusable_ownership.py`,
+  `test_standalone_concrete_ownership.py`, package-local tests, and imports;
+- retain warning exports for one release, then REMOVE the package, root
+  dependency/source entries, package tests, and lock record.
+
+### 19.2 Scope and subject identifiers
+
+- UPDATE callers/tests to import `ScopeSetMatcher` from
+  `tigrbl-authorization-scope-set-matcher-concrete`; FACADE then REMOVE
+  `tigrbl-oauth-scope-matcher` and `DefaultScopeMatcher`.
+- UPDATE `tigrbl-security-subject-pairwise-provider` to import
+  `PairwiseSubjectIdentifierStrategy` from
+  `tigrbl-pairwise-subject-identifier-concrete`.
+- UPDATE OIDC layer-50 composition to choose public versus pairwise strategy.
+- FACADE then REMOVE `tigrbl-oidc-subject-strategy`.
+
+### 19.3 Base ownership
+
+- MOVE profiled token verification, rich-authorization validation, actor-chain
+  validation, and step-up evaluation from `tigrbl-oauth-bases` to
+  `tigrbl-token-bases`, authorization/delegation bases, and
+  `tigrbl-authentication-assurance-bases` respectively.
+- MOVE EAP/verified-claims evaluation from `tigrbl-oidc-bases` to
+  authentication-assurance and identity-claims bases.
+- retain only genuinely OAuth/OIDC-defined extension points with multiple
+  implementations; if none remain, FACADE and REMOVE both protocol-named base
+  packages.
+- update `test_concrete_layer_taxonomy.py`, import-boundary tests, root
+  `pyproject.toml`, affected package metadata, and `uv.lock`.
+
+## 20. C6: finish the EAT token/evidence/attestation chain
+
+The existing split is retained and hardened:
+
+| Layer | Owner | Required final responsibility |
+|---|---|---|
+| 02 | `tokens.py` | `ProtectedTokenEnvelope`, `VerifiedTokenEnvelope`, and explicit `TokenProfile.ENTITY_ATTESTATION_TOKEN`. |
+| 02 | `attestation/*` | Evidence, verified evidence, appraisal, reference values, endorsements, manifests, and result ports. |
+| 05 | `tigrbl-token-bases` | Protected envelope verification extension point. |
+| 05 | `tigrbl-jose-bases` / `tigrbl-cose-bases` | JWT and CWT integrity coding extension points. |
+| 05 | `tigrbl-attestation-bases` | Evidence verification and appraisal extension points. |
+| 10 | `tigrbl-eat-concrete` | Structural EAT claim parsing, submodules, profiles, detached-bundle structure, and evidence conversion only. |
+| 20 | `tigrbl-eat-verifier-provider` | Choose JWT/CWT verifier by explicit envelope/profile, resolve issuer/key/trust, verify integrity, then return `VerifiedAttestationEvidence`. |
+| 30 | attestation runtime tables | Persist protected artifact digest/locator, verification result, appraisal result, reference material, and replay state. |
+| 40 | `tigrbl-attestation-appraisal` | Subcall evidence verification, reference resolution, appraisal, and durable result recording. |
+| 50 | `tigrbl-attestation-protocol-eat` | Own exact RFC/profile versions, media types, claim labels, compatibility, feature flags, migrations, and capability bindings. |
+
+UPDATE `EatVerifierProvider`: replace the untyped
+`Callable[[bytes | str, str], bool]` with typed JWT/CWT token verifier ports;
+never build `VerifiedTokenEnvelope` from the original claims until the verifier
+returns authenticated claims. Verify expected profile, issuer, audience where
+applicable, nonce/freshness, and trust result. Negative tests cover raw
+claim-only input, missing verifier, invalid signature/MAC, wrong profile,
+untrusted issuer, stale evidence, duplicate nonce, and modified submodules.
+
+UPDATE `AttestationAppraisalCapability`: make `verify_evidence`,
+`resolve_reference_material`, `appraise`, and `record_result` separate targets
+or explicit subcalls. The appraiser accepts only `VerifiedAttestationEvidence`;
+raw evidence cannot be appraised as trusted evidence.
+
+## 21. C8: make layer-40 capabilities composable and reportable
+
+### 21.1 Common capability corrections
+
+- KEEP `CapabilityDefinition(capability_id, version)` and the single
+  `Mapping[str, CapabilityOperation]` registry.
+- KEEP construction-time `NotImplementedError` for a missing required target.
+- KEEP `CapabilityState` only for effective runtime readiness/health, not static
+  feature marketing metadata.
+- UPDATE `Capability.call` to populate/validate `capability_id` and `operation`
+  in call context, preserve deadlines, and expose a consistent typed failure.
+- UPDATE `Capability.subcall` tests for parent/child IDs, trace and tenant
+  propagation, authority narrowing, cycle rejection, and delegated results.
+- ADD a layer-60 `CapabilityRegistry`/composer that indexes capability IDs,
+  validates required operations once, and produces the effective report used
+  by protocols and APIs.
+
+### 21.2 Existing package corrections
+
+| Package | Required change |
+|---|---|
+| `tigrbl-identity-admin-control-plane` | Replace in-memory `_metadata`, `_objects`, and `_audit_events` with injected layer-30 operations. Keep `_new_id`/`_utc_now` as layer-00 imports. Split resource operations if dependencies/readiness differ. |
+| `tigrbl-digital-credential-issuance` | Replace in-memory `_configurations` with injected configuration/offer/transaction operations. Make wallet-attestation verification an optional operation and report it unavailable when unbound. |
+| `tigrbl-digital-credential-presentation` | Inject replay and consent capabilities with async-safe operations; record presentation transaction/result durably. |
+| `tigrbl-attestation-appraisal` | Use the verified-evidence chain in section 20 and durable recorder operations. |
+| `tigrbl-security-events` | Inject durable event/subscription/delivery/replay operations; transmitter and receiver remain providers. |
+| `tigrbl-workload-identity` | Expose fetch-X509-SVID, fetch-JWT-SVID, verify-SVID, resolve-bundle, and refresh operations as distinct targets. |
+| `tigrbl-replay-protection-capability` | Keep memory provider support, bind durable reservations from layer 30 when selected, and derive persistence/provider reporting from the binding. |
+| `tigrbl-protocol-artifact-processing` | Remove hard-coded ready state; derive readiness from bound operations and providers. |
+
+Every layer-40 README must state injected dependencies, operation names,
+readiness rules, non-goals, and consuming layer-50 packages.
+
+## 22. C9: normalize layer-50 specification ownership and bindings
+
+Every independently versioned specification package must contain, or explain
+why it does not need, these modules:
+
+```text
+versions.py
+features.py
+compatibility.py
+migrations.py
+claims.py
+schemas.py
+bindings.py
+errors.py
+```
+
+The live package audit requires these concrete updates:
+
+- ADD the missing standard module set to `tigrbl-auth-protocol-cwt` and
+  `tigrbl-auth-protocol-rp` where applicable.
+- ADD `compatibility.py`, `claims.py`, `schemas.py`, `bindings.py`, and
+  `errors.py` to EAT, CoRIM, HAIP, AuthZEN, GNAP, JWT, OID4VCI, OID4VP,
+  SD-JWT VC, and SET packages as required by their wire surfaces.
+- REPLACE generic generated `artifact.processing.validate` requirements with
+  explicit `ProtocolCapabilityRequirement` rows mapping each wire operation to
+  its actual layer-40 capability operation.
+- MOVE HTTP/router construction currently exported from layer-30 modules
+  (`token_endpoint`, `introspection`, `revocation`, `userinfo`, discovery,
+  logout, PAR, and token exchange) into layer-50 bindings and layer-80 mounts.
+  Layer 30 exports operations/specs only.
+- REMOVE wildcard imports such as OAuth token exchange's `import *`; export a
+  reviewed binding surface.
+- MAKE OIDC claim sets import standalone claims and identity-assurance concrete
+  behavior; make OAuth import the neutral scope matcher; make HAIP configure
+  OID4VCI/OID4VP, SD-JWT VC/mdoc, trust, wallet/key attestation, replay, and
+  holder binding through capabilities.
+- RECORD exact published/draft revision, status, superseded revisions,
+  supported features per revision, compatibility direction, and configuration
+  migration functions. Draft support is labeled draft.
+
+Protocol equivalence tests prove this chain:
+
+```text
+semantic operation -> binding spec -> runtime plan -> carrier dispatch
+                   -> same typed capability call -> protocol envelope
+```
+
+Carriers may differ in envelopes, but must not fork semantic operation identity
+or move carrier choices into handlers.
+
+## 23. C10-C12: downstream migration, removals, and closure
+
+### 23.1 Runtime, facade, APIs, and UIX
+
+| Layer | Files/packages | Required change |
+|---|---|---|
+| 60 | `tigrbl-identity-server/api/lifecycle.py` | Build providers, layer-30 runtimes, capability registry, and selected protocols in that order; fail startup on missing required targets. |
+| 60 | `tigrbl-identity-server/_surfaces/*.py` | Stop importing routers from layer 30. Import layer-80 API routers or mount layer-50 bindings. |
+| 60 | `tigrbl-identity-runtime/token_service.py` | Consume typed capability/protocol services rather than persistence helpers directly. |
+| 60 | CLI handlers | Call administration capabilities; remove direct `operator_store`, `resource_service`, and key-management mutations that bypass policy. |
+| 70 | `tigrbl-auth` | Export stable contracts/capabilities/protocol configuration. Warn with removal versions for old scope, subject, claims, persistence, and model-method paths. |
+| 80 | all `tigrbl-auth-api-*` packages | Own HTTP schemas/routes, translate request context to typed calls, mount selected layer-50 bindings, and generate OpenAPI/OpenRPC from mounted truth. |
+| 90 | `uix-core` | Update shared generated clients/types only after layer-80 contracts stabilize. |
+| 95 | product UIX packages | Update imports/endpoints and verify each package uses only its allowed layer-80 API surface. |
+
+### 23.2 Workspace-wide metadata updates
+
+Update in the same checkpoint as each package move:
+
+- root `pyproject.toml` dependencies and `[tool.uv.sources]` entries;
+- each affected package `pyproject.toml`;
+- `uv.lock`, followed by `uv lock --check`;
+- package `README.md`, `py.typed`, and stable `__init__.py` exports;
+- package-boundary/forbidden-import inventories and taxonomy tests;
+- compliance targets, feature/flag mappings, certification scope, and generated
+  evidence only when they point to live implementations/tests;
+- API OpenAPI/OpenRPC snapshots and UI generated clients when wire changes.
+
+### 23.3 Explicit removal gates
+
+REMOVE a legacy package/file only after `rg` finds no internal imports and its
+published compatibility window has elapsed. Incorrect claims such as RFC 7952
+being SET are removed immediately; no public alias preserves false attribution.
+
+The final audit proves:
+
+- layer 01 contains no `op_ctx`, `hook_ctx`, router, HTTP schema, hashing,
+  provider, engine/session construction, or table-handler calls;
+- layer 20 contains no SQL stores, repositories, table `_ops`, or direct durable
+  mutations;
+- layer 30 contains no routers, HTTP objects, protocol errors, or network/trust
+  choices;
+- layer 40 contains no in-memory substitute for state that must be durable;
+- layer 50 owns every independently versioned specification and maps explicit
+  capability requirements;
+- every JWT/CWT/SET/EAT/SD-JWT-like artifact names an expected token profile and
+  explicit issuer/key/trust resolution;
+- every required claim/identity/credential concrete class has its standalone
+  layer-10 owner;
+- migrations upgrade/downgrade, boundary/full suites pass, generated API
+  documents match runtime behavior, and compliance evidence is live.
+
+## 24. Recommended checkpoint/commit sequence
+
+1. **C3a clients and users**: runtime operations/specs, secret contracts and
+   bcrypt provider, authentication capabilities, migrated calls/tests, stripped
+   storage models.
+2. **C3b delegation/device/key/audit**: move remaining operations/hooks and
+   delete layer-01 `_ops` use.
+3. **C4 routes/runtime barrels**: move user/session/realm routes to layer 80;
+   remove runtime/API exports from layer 01.
+4. **C5 neutral reusable ownership**: claims facade, scope matcher, subject
+   strategy, OAuth/OIDC base cleanup.
+5. **C6 EAT chain**: typed token verifiers, verified evidence, appraisal
+   composition, durable recording, negative tests.
+6. **C8 capability durability/composition**: remove in-memory durable
+   substitutes and add registry/readiness/delegation proofs.
+7. **C9 protocol normalization**: complete module sets and move routers/bindings
+   out of layer 30.
+8. **C10 downstream composition**: runtime, facade, APIs, UIX clients, metadata.
+9. **C11 compatibility removal**: delete expired facades and lock/workspace
+   entries.
+10. **C12 closure audit**: full tests, migrations, carrier equivalence,
+    security negatives, interop evidence, compliance regeneration, and final
+    inventory.
+
+Each checkpoint is committed only with a clean diff, focused proof, boundary
+proof, and a recorded list of pre-existing failures not introduced by it.
