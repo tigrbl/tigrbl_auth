@@ -7,7 +7,11 @@ from tigrbl_jwt_id_claim_concrete import JwtIdClaim
 from tigrbl_not_before_claim_concrete import NotBeforeClaim
 from tigrbl_subject_claim_concrete import SubjectClaim
 
-JWT_VERSION = "RFC 7519"
+from .features import FEATURES_BY_VERSION, supports
+from .migrations import migrate_claims
+from .versions import CURRENT_VERSION, VERSION_HISTORY, JwtVersion, select_version
+
+JWT_VERSION = CURRENT_VERSION.identifier
 JWT_CLAIM_CLASSES = (
     IssuerClaim,
     SubjectClaim,
@@ -28,4 +32,15 @@ def compose_jwt_claim_set(*claims) -> ClaimSet:
     return ClaimSet(tuple(claims), "jwt", JWT_VERSION)
 
 
-__all__ = ["JWT_CLAIM_CLASSES", "JWT_VERSION", "compose_jwt_claim_set"]
+__all__ = [
+    "CURRENT_VERSION",
+    "FEATURES_BY_VERSION",
+    "JWT_CLAIM_CLASSES",
+    "JWT_VERSION",
+    "VERSION_HISTORY",
+    "JwtVersion",
+    "compose_jwt_claim_set",
+    "migrate_claims",
+    "select_version",
+    "supports",
+]
