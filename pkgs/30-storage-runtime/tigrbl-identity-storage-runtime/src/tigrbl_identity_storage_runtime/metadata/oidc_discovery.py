@@ -29,7 +29,7 @@ from tigrbl_auth_protocol_oidc.jwks_service import build_jwks_document
 from tigrbl_auth_protocol_oidc.standards.discovery_metadata import build_openid_config
 from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER, JWKS_PATH
 from tigrbl_identity_storage.tables import Realm, Tenant
-from tigrbl_identity_storage.tables._ops import first_record
+from ..ops.common import first_record
 from tigrbl_identity_storage.tables.engine import get_db
 from tigrbl_identity_storage.tables.operator_record import OperatorRecord
 

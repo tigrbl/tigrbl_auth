@@ -17,7 +17,11 @@ from tigrbl_identity_storage.tables.user._table import (
     User,
     admin_api,
 )
-from tigrbl_identity_storage.tables._ops import first_record, read_record, update_record
+from tigrbl_identity_storage_runtime.ops.common import (
+    first_record,
+    read_record,
+    update_record,
+)
 from tigrbl_identity_jose.key_management import hash_pw
 
 

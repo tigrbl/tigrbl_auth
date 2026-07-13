@@ -37,7 +37,7 @@ from tigrbl_identity_storage.framework import (
     TigrblRouter,
     status,
 )
-from tigrbl_identity_storage.tables._ops import first_handler_record, read_handler_record
+from .ops.common import first_handler_record, read_handler_record
 from tigrbl_identity_storage.tables._sync import run_async
 from tigrbl_identity_storage.tables.client import Client
 from tigrbl_identity_storage.tables.client_registration import ClientRegistration

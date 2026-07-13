@@ -25,7 +25,7 @@ from tigrbl_identity_storage.framework import (
     TigrblRouter,
     status,
 )
-from tigrbl_identity_storage.tables._ops import (
+from .ops.common import (
     create_record,
     first_record,
     read_record,

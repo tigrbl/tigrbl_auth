@@ -8,7 +8,7 @@ from .paths import (
     _write_metadata_snapshot,
 )
 from .app import operator_store_session
-from tigrbl_identity_storage.tables._ops import (
+from ..ops.common import (
     create_handler_record as _create_table_record,
     delete_handler_record as _delete_table_record,
     field as _table_field,

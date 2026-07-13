@@ -8,7 +8,7 @@ from uuid import UUID
 
 from tigrbl_identity_runtime.deployment import deployment_from_app, deployment_from_request
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_storage.tables._ops import create_record, read_record
+from .ops.common import create_record, read_record
 from tigrbl_identity_storage.tables.audit_event import AuditEvent
 
 try:  # pragma: no cover - exercised with full runtime deps installed

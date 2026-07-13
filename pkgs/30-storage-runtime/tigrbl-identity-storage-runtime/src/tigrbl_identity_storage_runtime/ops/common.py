@@ -6,6 +6,9 @@ import inspect
 from collections.abc import Awaitable, Callable, Mapping
 from typing import Any
 
+from tigrbl_identity_core.clock import utc_now
+from tigrbl_identity_core.digests import token_hash
+
 
 SENSITIVE_RAW_FIELDS = frozenset(
     {"raw_nonce", "pre_authorized_code", "presentation_disclosures", "raw_payload"}
@@ -63,6 +66,10 @@ def field_value(row: Any, key: str, default: Any = None) -> Any:
 
 def record_identifier(row: Any) -> Any:
     return field_value(row, "id")
+
+
+field = field_value
+record_id = record_identifier
 
 
 def normalize_items(result: Any) -> list[Any]:
@@ -181,6 +188,15 @@ async def clear_table_records(
     return await maybe_await(core(context))
 
 
+create_record = create_handler_record = create_table_record
+read_record = read_handler_record = read_table_record
+update_record = update_handler_record = update_table_record
+delete_record = delete_handler_record = delete_table_record
+list_records = list_handler_records = list_table_records
+first_record = first_handler_record = first_table_record
+clear_records = clear_handler_records = clear_table_records
+
+
 def create_table_handler(
     table: type,
     *,
@@ -203,17 +219,35 @@ def create_table_handler(
 __all__ = [
     "SENSITIVE_RAW_FIELDS",
     "clear_table_records",
+    "clear_handler_records",
+    "clear_records",
+    "create_handler_record",
+    "create_record",
     "create_table_handler",
     "create_table_record",
     "database_from_context",
     "delete_table_record",
+    "delete_handler_record",
+    "delete_record",
+    "field",
     "field_value",
     "first_table_record",
+    "first_handler_record",
+    "first_record",
     "list_table_records",
+    "list_handler_records",
+    "list_records",
     "maybe_await",
     "payload_from_context",
     "read_table_record",
+    "read_handler_record",
+    "read_record",
+    "record_id",
     "record_identifier",
     "reject_sensitive_raw_fields",
     "update_table_record",
+    "update_handler_record",
+    "update_record",
+    "token_hash",
+    "utc_now",
 ]

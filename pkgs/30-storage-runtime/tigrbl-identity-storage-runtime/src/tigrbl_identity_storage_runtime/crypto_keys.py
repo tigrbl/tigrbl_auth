@@ -6,7 +6,7 @@ from collections.abc import Mapping
 from typing import Any
 
 from tigrbl_identity_storage.tables import CryptoKey
-from tigrbl_identity_storage.tables._ops import create_record, first_record, update_record
+from .ops.common import create_record, first_record, update_record
 from tigrbl_security_trust_contracts import (
     AttestKeyRequest,
     DecapsulateRequest,
