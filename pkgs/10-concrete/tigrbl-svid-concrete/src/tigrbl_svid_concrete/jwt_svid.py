@@ -5,13 +5,13 @@ from .spiffe_ids import normalize_spiffe_id
 
 
 @dataclass(frozen=True, slots=True)
-class JwtSvidClaims:
+class JwtSvidClaimSetPayload:
     subject: str
     audience: tuple[str, ...]
     expiration: int
 
 
-def parse_jwt_svid_claims(claims: Mapping[str, object]) -> JwtSvidClaims:
+def parse_jwt_svid_claims(claims: Mapping[str, object]) -> JwtSvidClaimSetPayload:
     subject, audience, expiration = (
         claims.get("sub"),
         claims.get("aud"),
@@ -28,7 +28,7 @@ def parse_jwt_svid_claims(claims: Mapping[str, object]) -> JwtSvidClaims:
         raise ValueError("JWT-SVID requires a non-empty audience")
     if not isinstance(expiration, int) or isinstance(expiration, bool):
         raise ValueError("JWT-SVID requires NumericDate exp")
-    return JwtSvidClaims(subject, audience, expiration)
+    return JwtSvidClaimSetPayload(subject, audience, expiration)
 
 
-__all__ = ["JwtSvidClaims", "parse_jwt_svid_claims"]
+__all__ = ["JwtSvidClaimSetPayload", "parse_jwt_svid_claims"]

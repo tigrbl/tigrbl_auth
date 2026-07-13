@@ -1,4 +1,4 @@
-from .claims import EatClaims, EatEncoding, parse_eat_claims
+from .claims import EatClaimSetPayload, EatEncoding, parse_eat_claims
 from .evidence import EatEvidence, DetachedEatBundle, parse_detached_bundle
 from .profiles import EAT_MEDIA_TYPES, RFC_REVISION, EatProfile
 from .submodules import EatSubmodule, parse_submodules
@@ -12,7 +12,7 @@ __all__ = [
     "EAT_MEDIA_TYPES",
     "EAT_NONCE_CLAIM",
     "EAT_PROFILE_CLAIM",
-    "EatClaims",
+    "EatClaimSetPayload",
     "EatEncoding",
     "EatEvidence",
     "EatProfile",

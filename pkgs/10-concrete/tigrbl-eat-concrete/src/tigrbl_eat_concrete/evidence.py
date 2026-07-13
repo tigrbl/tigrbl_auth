@@ -1,12 +1,12 @@
 from dataclasses import dataclass
 from typing import Mapping
 
-from .claims import EatClaims
+from .claims import EatClaimSetPayload
 
 
 @dataclass(frozen=True, slots=True)
 class EatEvidence:
-    claims: EatClaims
+    claims: EatClaimSetPayload
     protected_token: bytes | str | None = None
 
 

@@ -3,7 +3,7 @@ from typing import Mapping
 
 
 @dataclass(frozen=True, slots=True)
-class SdJwtVcClaims:
+class SdJwtVcClaimSetPayload:
     credential_type: str
     issuer: str | None = None
     issued_at: int | None = None
@@ -14,7 +14,7 @@ class SdJwtVcClaims:
     type_integrity: str | None = None
 
 
-def parse_sd_jwt_vc_claims(claims: Mapping[str, object]) -> SdJwtVcClaims:
+def parse_sd_jwt_vc_claims(claims: Mapping[str, object]) -> SdJwtVcClaimSetPayload:
     credential_type = claims.get("vct")
     if not isinstance(credential_type, str) or not credential_type:
         raise ValueError("SD-JWT VC requires a non-empty vct claim")
@@ -30,7 +30,7 @@ def parse_sd_jwt_vc_claims(claims: Mapping[str, object]) -> SdJwtVcClaims:
     integrity = claims.get("vct#integrity")
     if integrity is not None and (not isinstance(integrity, str) or not integrity):
         raise ValueError("vct#integrity must be an integrity metadata string")
-    return SdJwtVcClaims(
+    return SdJwtVcClaimSetPayload(
         credential_type,
         claims.get("iss") if isinstance(claims.get("iss"), str) else None,
         claims.get("iat"),
@@ -42,4 +42,4 @@ def parse_sd_jwt_vc_claims(claims: Mapping[str, object]) -> SdJwtVcClaims:
     )
 
 
-__all__ = ["SdJwtVcClaims", "parse_sd_jwt_vc_claims"]
+__all__ = ["SdJwtVcClaimSetPayload", "parse_sd_jwt_vc_claims"]

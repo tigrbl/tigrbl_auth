@@ -12,7 +12,7 @@ class EatEncoding(StrEnum):
 
 
 @dataclass(frozen=True, slots=True)
-class EatClaims:
+class EatClaimSetPayload:
     profile: EatProfile
     encoding: EatEncoding
     nonce: tuple[bytes | str, ...] = ()
@@ -24,7 +24,7 @@ class EatClaims:
 
 def parse_eat_claims(
     claims: Mapping[str | int, object], encoding: EatEncoding
-) -> EatClaims:
+) -> EatClaimSetPayload:
     profile = claims.get("eat_profile", claims.get(265))
     nonce = claims.get("eat_nonce" if encoding is EatEncoding.JSON else 10)
     nonces = (
@@ -38,7 +38,7 @@ def parse_eat_claims(
     ueid = claims.get("ueid", claims.get(256))
     if ueid is not None and not isinstance(ueid, (bytes, str)):
         raise ValueError("ueid must be a byte or text string")
-    return EatClaims(
+    return EatClaimSetPayload(
         EatProfile(profile),
         encoding,
         nonces,
@@ -49,4 +49,4 @@ def parse_eat_claims(
     )
 
 
-__all__ = ["EatClaims", "EatEncoding", "parse_eat_claims"]
+__all__ = ["EatClaimSetPayload", "EatEncoding", "parse_eat_claims"]

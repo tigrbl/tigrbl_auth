@@ -2,10 +2,10 @@ from typing import Mapping
 
 from tigrbl_identity_contracts.attestation import AttestationEvidence
 
-from .claims import EatClaims, EatEncoding, parse_eat_claims
+from .claims import EatClaimSetPayload, EatEncoding, parse_eat_claims
 
 
-def validate_eat_claims(claims: EatClaims) -> None:
+def validate_eat_claims(claims: EatClaimSetPayload) -> None:
     for nonce in claims.nonce:
         if claims.encoding is EatEncoding.CBOR:
             if not isinstance(nonce, bytes) or not 8 <= len(nonce) <= 64:

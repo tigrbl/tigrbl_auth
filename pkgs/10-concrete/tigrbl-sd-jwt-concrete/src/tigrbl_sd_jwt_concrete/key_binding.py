@@ -3,14 +3,14 @@ from typing import Mapping
 
 
 @dataclass(frozen=True, slots=True)
-class KeyBindingClaims:
+class KeyBindingClaimSetPayload:
     audience: str | tuple[str, ...]
     nonce: str
     issued_at: int
     sd_hash: str
 
 
-def parse_key_binding_claims(claims: Mapping[str, object]) -> KeyBindingClaims:
+def parse_key_binding_claims(claims: Mapping[str, object]) -> KeyBindingClaimSetPayload:
     audience = claims.get("aud")
     if isinstance(audience, list) and all(isinstance(item, str) for item in audience):
         audience = tuple(audience)
@@ -30,7 +30,7 @@ def parse_key_binding_claims(claims: Mapping[str, object]) -> KeyBindingClaims:
         or not digest
     ):
         raise ValueError("KB-JWT requires nonce, NumericDate iat, and sd_hash")
-    return KeyBindingClaims(audience, nonce, issued_at, digest)
+    return KeyBindingClaimSetPayload(audience, nonce, issued_at, digest)
 
 
-__all__ = ["KeyBindingClaims", "parse_key_binding_claims"]
+__all__ = ["KeyBindingClaimSetPayload", "parse_key_binding_claims"]
