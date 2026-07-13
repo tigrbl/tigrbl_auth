@@ -39,13 +39,17 @@ class RBACAdministrator:
     ) -> Role:
         if not name or not permissions:
             raise ValueError("role name and permissions are required")
-        row = await _StoredRole.create_role(
-            self.db,
-            name=name,
-            tenant_id=tenant_id,
-            permissions=_str_tuple(permissions),
-            denied_permissions=_str_tuple(denied_permissions),
-            inherited_roles=_str_tuple(inherited_roles),
+        row = await _StoredRole.handlers.create_role.core(
+            {
+                "db": self.db,
+                "payload": {
+                    "name": name,
+                    "tenant_id": tenant_id,
+                    "permissions": _str_tuple(permissions),
+                    "denied_permissions": _str_tuple(denied_permissions),
+                    "inherited_roles": _str_tuple(inherited_roles),
+                },
+            }
         )
         return _role_contract(row)
 
@@ -54,12 +58,12 @@ class RBACAdministrator:
             raise ValueError("tenant_id is required for storage-backed role assignment")
         if await self._role_for(role_name, tenant_id) is None:
             raise KeyError(f"unknown role {role_name!r}")
-        await _StoredTenantMembership.assign_role(
+        await _StoredTenantMembership.handlers.assign_role.core(
             {"payload": {"tenant_id": tenant_id, "principal_id": subject, "role_name": role_name}, "db": self.db}
         )
 
     async def assignments_for(self, subject: str, tenant_id: str | None = None) -> tuple[str, ...]:
-        return await _StoredTenantMembership.role_names_for_principal(
+        return await _StoredTenantMembership.handlers.role_names_for_principal.core(
             {"payload": {"principal_id": subject, "tenant_id": tenant_id}, "db": self.db}
         )
 
@@ -88,7 +92,9 @@ class RBACAdministrator:
 
     async def _role_map_for_tenant(self, tenant_id: str | None) -> dict[str, Role]:
         roles: dict[str, Role] = {}
-        for row in await _StoredRole.list_for_tenant(self.db):
+        for row in await _StoredRole.handlers.list_for_tenant.core(
+            {"db": self.db, "payload": {"tenant_id": tenant_id}}
+        ):
             if not _row_active(row):
                 continue
             role = _role_contract(row)
@@ -106,7 +112,7 @@ class RBACAdministrator:
         denies: set[str] = set()
         matched_roles: set[str] = set()
         roles = await self._role_map_for_tenant(tenant_id)
-        for role_name in await _StoredTenantMembership.role_names_for_principal(
+        for role_name in await _StoredTenantMembership.handlers.role_names_for_principal.core(
             {"payload": {"principal_id": subject, "tenant_id": tenant_id}, "db": self.db}
         ):
             self._collect_role(role_name, roles, grants, denies, matched_roles, set())

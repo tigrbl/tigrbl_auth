@@ -4,6 +4,17 @@ import importlib.util
 from pathlib import Path
 
 import pytest
+from tigrbl_identity_storage_runtime import (
+    assign_role,
+    list_active_attribute_policies,
+    first_table_record,
+    grant_delegated_scope,
+    grant_membership,
+    list_table_records,
+    revoke_delegated_scope,
+    role_names_for_principal,
+    upsert_attribute_policy,
+)
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -11,6 +22,10 @@ ROOT = Path(__file__).resolve().parents[2]
 
 async def _op(model, operation: str, db, **payload):
     return await getattr(model, operation)({"payload": payload, "db": db})
+
+
+async def _runtime_op(operation, db, **payload):
+    return await operation({"payload": payload, "db": db})
 
 
 def test_authz_policy_store_facade_is_removed() -> None:
@@ -27,28 +42,26 @@ def test_authz_policy_store_facade_is_removed() -> None:
 
 
 @pytest.mark.asyncio
-async def test_rbac_assignment_helpers_are_table_owned(administrator_storage) -> None:
-    from tigrbl_identity_storage.tables.tenant_membership import TenantMembership
-
-    await _op(TenantMembership, "grant_membership",
+async def test_rbac_assignment_helpers_are_runtime_owned(administrator_storage) -> None:
+    await _runtime_op(grant_membership,
         administrator_storage,
         tenant_id="tenant-a",
         principal_id="alice",
         roles=("reader",),
     )
-    await _op(TenantMembership, "assign_role",
+    await _runtime_op(assign_role,
         administrator_storage,
         tenant_id="tenant-a",
         principal_id="alice",
         role_name="editor",
     )
-    await _op(TenantMembership, "grant_membership",
+    await _runtime_op(grant_membership,
         administrator_storage,
         tenant_id="tenant-b",
         principal_id="alice",
         roles=("other-tenant",),
     )
-    await _op(TenantMembership, "grant_membership",
+    await _runtime_op(grant_membership,
         administrator_storage,
         tenant_id="tenant-a",
         principal_id="bob",
@@ -56,16 +69,16 @@ async def test_rbac_assignment_helpers_are_table_owned(administrator_storage) ->
         status="revoked",
     )
 
-    assert await _op(TenantMembership, "role_names_for_principal",
+    assert await _runtime_op(role_names_for_principal,
         administrator_storage,
         principal_id="alice",
         tenant_id="tenant-a",
     ) == ("editor", "reader")
-    assert await _op(TenantMembership, "role_names_for_principal",
+    assert await _runtime_op(role_names_for_principal,
         administrator_storage,
         principal_id="alice",
     ) == ("editor", "other-tenant", "reader")
-    assert await _op(TenantMembership, "role_names_for_principal",
+    assert await _runtime_op(role_names_for_principal,
         administrator_storage,
         principal_id="bob",
         tenant_id="tenant-a",
@@ -73,10 +86,8 @@ async def test_rbac_assignment_helpers_are_table_owned(administrator_storage) ->
 
 
 @pytest.mark.asyncio
-async def test_abac_policy_condition_helpers_are_table_owned(administrator_storage) -> None:
-    from tigrbl_identity_storage.tables.attribute_policy import AttributePolicy
-
-    row, conditions = await _op(AttributePolicy, "upsert_with_conditions",
+async def test_abac_policy_condition_helpers_are_runtime_owned(administrator_storage) -> None:
+    row, conditions = await _runtime_op(upsert_attribute_policy,
         administrator_storage,
         name="tenant-risk",
         tenant_id="tenant-a",
@@ -89,7 +100,7 @@ async def test_abac_policy_condition_helpers_are_table_owned(administrator_stora
     assert row["name"] == "tenant-risk"
     assert [condition["field_name"] for condition in conditions] == ["risk"]
 
-    row, conditions = await _op(AttributePolicy, "upsert_with_conditions",
+    row, conditions = await _runtime_op(upsert_attribute_policy,
         administrator_storage,
         name="tenant-risk",
         tenant_id="tenant-a",
@@ -100,7 +111,7 @@ async def test_abac_policy_condition_helpers_are_table_owned(administrator_stora
         ),
     )
 
-    active = await _op(AttributePolicy, "list_active_with_conditions",
+    active = await _runtime_op(list_active_attribute_policies,
         administrator_storage,
         tenant_id="tenant-a",
     )
@@ -113,11 +124,10 @@ async def test_abac_policy_condition_helpers_are_table_owned(administrator_stora
 
 
 @pytest.mark.asyncio
-async def test_delegated_admin_scope_ops_remain_table_owned(administrator_storage) -> None:
-    from tigrbl_identity_storage.tables._ops import first_record, list_records
+async def test_delegated_admin_scope_ops_are_runtime_owned(administrator_storage) -> None:
     from tigrbl_identity_storage.tables.delegated_admin_scope import DelegatedAdminScope
 
-    granted = await _op(DelegatedAdminScope, "grant_scope",
+    granted = await _runtime_op(grant_delegated_scope,
         administrator_storage,
         subject="delegate",
         tenant_ids=["tenant-a"],
@@ -125,15 +135,15 @@ async def test_delegated_admin_scope_ops_remain_table_owned(administrator_storag
         visible_client_fields=["id", "name"],
         mutable_client_fields=["name"],
     )
-    looked_up = await first_record(DelegatedAdminScope, administrator_storage, {"subject": "delegate"})
+    looked_up = await first_table_record(DelegatedAdminScope, administrator_storage, {"subject": "delegate"})
 
     assert looked_up == granted
     assert [
         row["subject"]
-        for row in await list_records(DelegatedAdminScope, administrator_storage, {"status": "active"})
+        for row in await list_table_records(DelegatedAdminScope, administrator_storage, {"status": "active"})
     ] == ["delegate"]
 
-    revoked = await _op(DelegatedAdminScope, "revoke_scope", administrator_storage, subject="delegate")
+    revoked = await _runtime_op(revoke_delegated_scope, administrator_storage, subject="delegate")
 
     assert revoked["status"] == "revoked"
-    assert await list_records(DelegatedAdminScope, administrator_storage, {"status": "active"}) == []
+    assert await list_table_records(DelegatedAdminScope, administrator_storage, {"status": "active"}) == []

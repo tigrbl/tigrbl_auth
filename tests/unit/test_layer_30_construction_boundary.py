@@ -64,3 +64,27 @@ def test_layer_30_has_no_repository_or_store_abstraction_modules() -> None:
         "replay_repository.py",
     ):
         assert not (RUNTIME_SRC / removed).exists()
+
+
+def test_authorization_mutations_are_not_defined_by_layer_01_tables() -> None:
+    storage_tables = (
+        ROOT
+        / "pkgs"
+        / "01-storage"
+        / "tigrbl-identity-storage"
+        / "src"
+        / "tigrbl_identity_storage"
+        / "tables"
+    )
+    for relative in (
+        Path("tenant_membership/_table.py"),
+        Path("delegated_admin_scope/_table.py"),
+        Path("attribute_policy/_table.py"),
+    ):
+        source = (storage_tables / relative).read_text(encoding="utf-8")
+        tree = ast.parse(source)
+        assert "op_ctx" not in source
+        assert not any(
+            isinstance(node, (ast.AsyncFunctionDef, ast.FunctionDef))
+            for node in ast.walk(tree)
+        )

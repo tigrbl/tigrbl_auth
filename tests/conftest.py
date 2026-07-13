@@ -159,10 +159,30 @@ def administrator_storage(monkeypatch: pytest.MonkeyPatch):
     from tigrbl_identity_storage.tables.policy_condition import PolicyCondition
     from tigrbl_identity_storage.tables.role import Role
     from tigrbl_identity_storage.tables.tenant_membership import TenantMembership
+    from tigrbl_identity_storage_runtime import (
+        DelegatedAdminScopeRuntimeSpec,
+        AttributePolicyRuntimeSpec,
+        RoleRuntimeSpec,
+        TenantMembershipRuntimeSpec,
+        initializeIdentityRuntimeTables,
+    )
 
+    initializeIdentityRuntimeTables(
+        (
+            RoleRuntimeSpec,
+            AttributePolicyRuntimeSpec,
+            TenantMembershipRuntimeSpec,
+            DelegatedAdminScopeRuntimeSpec,
+        )
+    )
     storage = _InMemoryTableStorage()
     for model in (Role, TenantMembership, AttributePolicy, PolicyCondition, DelegatedAdminScope):
-        monkeypatch.setattr(model, "handlers", storage.handlers_for(model), raising=False)
+        runtime_handlers = model.handlers
+        test_handlers = storage.handlers_for(model)
+        for name, value in vars(runtime_handlers).items():
+            if not hasattr(test_handlers, name):
+                setattr(test_handlers, name, value)
+        monkeypatch.setattr(model, "handlers", test_handlers, raising=False)
     return storage
 
 

@@ -12,7 +12,6 @@ from tigrbl_identity_storage.framework import (
     String,
     Timestamped,
     acol,
-    op_ctx,
 )
 
 
@@ -31,31 +30,5 @@ class DelegatedAdminScope(RestOltpTable, GUIDPk, Timestamped):
     status: Mapped[str] = acol(
         storage=S(String(32), nullable=False, default="active", index=True)
     )
-
-
-
-@op_ctx(bind=DelegatedAdminScope, alias="grant_scope", target="custom", arity="collection", rest=False)
-async def grant_scope(cls, ctx):
-    from .._ops import create_record, first_record, record_id, update_record
-
-    values = dict(ctx.get("payload") or {})
-    subject = str(values.pop("subject"))
-    payload = {"subject": subject, "status": "active", **values}
-    existing = await first_record(cls, ctx["db"], {"subject": subject})
-    if existing is None:
-        return await create_record(cls, ctx["db"], payload)
-    return await update_record(cls, ctx["db"], record_id(existing), payload)
-
-
-@op_ctx(bind=DelegatedAdminScope, alias="revoke_scope", target="custom", arity="collection", rest=False)
-async def revoke_scope(cls, ctx):
-    from .._ops import first_record, record_id, update_record
-
-    subject = str((ctx.get("payload") or {}).get("subject") or "")
-    existing = await first_record(cls, ctx["db"], {"subject": subject})
-    if existing is None:
-        raise LookupError(subject)
-    return await update_record(cls, ctx["db"], record_id(existing), {"status": "revoked"})
-
 
 __all__ = ["DelegatedAdminScope"]
