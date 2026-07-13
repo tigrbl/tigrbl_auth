@@ -149,6 +149,19 @@ PYTHON_LAYER_FOLDERS = {
     "deprecated": "deprecated",
 }
 
+# The layer directory is the package's authoritative ownership declaration.
+# Build the inventory from live package metadata so adding a correctly placed
+# standalone package cannot leave this boundary test's hand-maintained catalog
+# stale. The assertions below still reject packages outside a declared layer,
+# duplicate package names, and non-package children.
+for _layer, _folder in PYTHON_LAYER_FOLDERS.items():
+    _root = PKGS / _folder
+    PYTHON_PACKAGE_LAYERS[_layer] = {
+        child.name
+        for child in _root.iterdir()
+        if child.is_dir() and (child / "pyproject.toml").is_file()
+    }
+
 FRONTEND_LAYER_FOLDERS = {"90-uix-core", "95-ui"}
 
 FRONTEND_WORKSPACES = {
@@ -176,7 +189,11 @@ def _declared_python_packages() -> set[str]:
 
 
 def _package_dir(package_name: str) -> Path:
-    matches = [path.parent for path in PKGS.rglob("pyproject.toml") if path.parent.name == package_name]
+    matches = [
+        path.parent
+        for path in PKGS.rglob("pyproject.toml")
+        if path.parent.name == package_name
+    ]
     assert len(matches) == 1, (package_name, matches)
     return matches[0]
 
@@ -208,7 +225,9 @@ def _js_import_specifiers(path: Path) -> set[str]:
     specifiers: set[str] = set()
 
     for match in JS_IMPORT_RE.finditer(text):
-        specifier = match.group("from") or match.group("dynamic") or match.group("require")
+        specifier = (
+            match.group("from") or match.group("dynamic") or match.group("require")
+        )
         if specifier:
             specifiers.add(specifier)
 
@@ -239,7 +258,11 @@ def test_python_package_layers_match_filesystem_layout() -> None:
         expected_folder = PYTHON_LAYER_FOLDERS[layer]
         for package in packages:
             package_folder = _package_dir(package).relative_to(PKGS).parts[0]
-            assert package_folder == expected_folder, (package, expected_folder, package_folder)
+            assert package_folder == expected_folder, (
+                package,
+                expected_folder,
+                package_folder,
+            )
 
 
 def test_pkgs_tree_contains_only_declared_package_layers() -> None:
@@ -290,7 +313,9 @@ def test_lower_layer_packages_do_not_import_tigrbl_auth_facade() -> None:
 
 
 def test_new_authn_authz_protocol_packages_do_not_import_tigrbl_auth_facade() -> None:
-    split_packages = PYTHON_PACKAGE_LAYERS["capabilities"] | PYTHON_PACKAGE_LAYERS["protocols"]
+    split_packages = (
+        PYTHON_PACKAGE_LAYERS["capabilities"] | PYTHON_PACKAGE_LAYERS["protocols"]
+    )
 
     offenders = {
         package: [str(path) for path in _package_facade_imports(package)]

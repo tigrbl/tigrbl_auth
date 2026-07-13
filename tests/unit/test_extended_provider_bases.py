@@ -28,8 +28,10 @@ from tigrbl_jose_bases import (
     SetCoderBase,
     WalletAttestationJwtVerifierBase,
 )
-from tigrbl_oauth_bases import ProfiledTokenVerifierBase
-from tigrbl_oidc_bases import EapAcrEvaluatorBase
+from tigrbl_authentication_assurance_bases import (
+    AuthenticationContextEvaluatorBase as EapAcrEvaluatorBase,
+)
+from tigrbl_token_bases import ProfiledTokenVerifierBase
 from tigrbl_security_event_bases import (
     SecurityEventDeliveryBase,
     SecurityEventReceiverBase,

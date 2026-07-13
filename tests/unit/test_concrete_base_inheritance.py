@@ -25,10 +25,10 @@ def test_all_concrete_implementations_inherit_05_bases() -> None:
         RuleEvaluatorBase,
     )
     from tigrbl_identity_model_bases import CredentialBase, IdentityBase
-    from tigrbl_oauth_bases import ScopeMatcherBase
+    from tigrbl_authz_policy_bases import ScopeMatcherBase
     from tigrbl_identity_claims_bases import ClaimsProviderBase
     from tigrbl_digital_credential_bases import CredentialFormatBase
-    from tigrbl_oidc_bases import SubjectIdentifierStrategyBase
+    from tigrbl_identity_model_bases import SubjectIdentifierStrategyBase
 
     groups = {
         IdentityBase: [getattr(identities, name) for name in identities.__all__],

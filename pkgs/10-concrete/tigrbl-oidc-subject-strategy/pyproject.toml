@@ -1,13 +1,11 @@
 [project]
 name = "tigrbl-oidc-subject-strategy"
 version = "0.4.0.dev2"
-description = "Concrete OIDC subject identifier strategies for the Tigrbl auth package suite."
+description = "Deprecated compatibility facade for neutral subject identifier strategies."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
 dependencies = [
-    "tigrbl-identity-contracts==0.4.0.dev2",
-    "tigrbl-oidc-bases==0.4.0.dev2",
     "tigrbl-public-subject-identifier-concrete==0.4.0.dev2",
     "tigrbl-pairwise-subject-identifier-concrete==0.4.0.dev2",
 ]

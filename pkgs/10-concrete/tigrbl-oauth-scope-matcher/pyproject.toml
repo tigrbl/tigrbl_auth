@@ -1,13 +1,11 @@
 [project]
 name = "tigrbl-oauth-scope-matcher"
 version = "0.4.0.dev2"
-description = "Concrete OAuth scope matcher for the Tigrbl auth package suite."
+description = "Deprecated compatibility facade for neutral scope-set matching."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
 dependencies = [
-    "tigrbl-identity-contracts==0.4.0.dev2",
-    "tigrbl-oauth-bases==0.4.0.dev2",
     "tigrbl-authorization-scope-set-matcher-concrete==0.4.0.dev2",
 ]
 

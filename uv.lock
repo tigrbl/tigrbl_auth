@@ -4983,16 +4983,10 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-oauth-scope-matcher" }
 dependencies = [
     { name = "tigrbl-authorization-scope-set-matcher-concrete" },
-    { name = "tigrbl-identity-contracts" },
-    { name = "tigrbl-oauth-bases" },
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "tigrbl-authorization-scope-set-matcher-concrete", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-oauth-bases", specifier = "==0.4.0.dev2" },
-]
+requires-dist = [{ name = "tigrbl-authorization-scope-set-matcher-concrete", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-oidc-bases"
@@ -5033,16 +5027,12 @@ name = "tigrbl-oidc-subject-strategy"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-oidc-subject-strategy" }
 dependencies = [
-    { name = "tigrbl-identity-contracts" },
-    { name = "tigrbl-oidc-bases" },
     { name = "tigrbl-pairwise-subject-identifier-concrete" },
     { name = "tigrbl-public-subject-identifier-concrete" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-oidc-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-pairwise-subject-identifier-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-public-subject-identifier-concrete", specifier = "==0.4.0.dev2" },
 ]

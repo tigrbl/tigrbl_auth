@@ -6,8 +6,14 @@ def _explicitly_inherits(base: type, contract: type) -> bool:
 
 
 def test_authenticator_bases_explicitly_inherit_contracts() -> None:
-    from tigrbl_identity_authenticator_bases import AuthenticatorBase, ChallengeAuthenticatorBase
-    from tigrbl_identity_contracts.authenticators import IAuthenticator, IChallengeAuthenticator
+    from tigrbl_identity_authenticator_bases import (
+        AuthenticatorBase,
+        ChallengeAuthenticatorBase,
+    )
+    from tigrbl_identity_contracts.authenticators import (
+        IAuthenticator,
+        IChallengeAuthenticator,
+    )
 
     assert _explicitly_inherits(AuthenticatorBase, IAuthenticator)
     assert _explicitly_inherits(ChallengeAuthenticatorBase, IChallengeAuthenticator)
@@ -71,7 +77,7 @@ def test_domain_bases_explicitly_inherit_identity_contracts() -> None:
         RuleEvaluatorPort,
     )
     from tigrbl_identity_model_bases import CredentialBase, IdentityBase
-    from tigrbl_oauth_bases import ScopeMatcherBase
+    from tigrbl_authz_policy_bases import ScopeMatcherBase
     from tigrbl_identity_contracts.oauth import ScopeMatcherPort
 
     pairs = (
