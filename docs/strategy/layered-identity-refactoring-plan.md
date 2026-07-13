@@ -71,6 +71,17 @@ Required ownership rules:
   and preserves member/collection arity in runtime operation construction.
 - [x] `c7b0b5de` moves token-record persistence, rotation, family revocation, and
   introspection to a profiled layer-30 runtime family.
+- [x] `6a03a8ba` and `f683cc2f` add shared-secret providers and composable
+  password/client-secret authentication capabilities.
+- [x] `89330723` routes runtime secret verification through those capabilities,
+  and `1766a361` removes client-model authentication behavior.
+- [x] `99e5b01`, `8994e5b8`, `5a7bbf1c`, and `85eb0d4f` move delegation,
+  device-code, crypto-key, and audit lifecycles into layer-30 table runtimes.
+- [x] `b5e74c46` centralizes durable handler execution in layer 30, and
+  `952eefb8` makes the deprecated persistence facade delegate through runtime
+  operation contexts.
+- [x] `fb6be510` moves My Account session DTOs and HTTP handlers to the
+  layer-80 My Account API package and leaves `AuthSession` as a mapped record.
 - [x] Claim primitives, contracts, bases, `ClaimType`, `ClaimValueType`,
   `ClaimNameKind`, and standalone concrete claim packages exist.
 - [x] Protocol-neutral scope matching exists as
