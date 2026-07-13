@@ -149,6 +149,29 @@ dependencies = [
     "tigrbl-claim-eat-submodules-concrete==0.4.0.dev2",
     "tigrbl-claim-actor-concrete==0.4.0.dev2",
     "tigrbl-claim-may-act-concrete==0.4.0.dev2",
+    "tigrbl-claim-name-concrete==0.4.0.dev2",
+    "tigrbl-claim-given-name-concrete==0.4.0.dev2",
+    "tigrbl-claim-family-name-concrete==0.4.0.dev2",
+    "tigrbl-claim-middle-name-concrete==0.4.0.dev2",
+    "tigrbl-claim-nickname-concrete==0.4.0.dev2",
+    "tigrbl-claim-preferred-username-concrete==0.4.0.dev2",
+    "tigrbl-claim-profile-uri-concrete==0.4.0.dev2",
+    "tigrbl-claim-picture-uri-concrete==0.4.0.dev2",
+    "tigrbl-claim-website-uri-concrete==0.4.0.dev2",
+    "tigrbl-claim-email-concrete==0.4.0.dev2",
+    "tigrbl-claim-email-verified-concrete==0.4.0.dev2",
+    "tigrbl-claim-gender-concrete==0.4.0.dev2",
+    "tigrbl-claim-birthdate-concrete==0.4.0.dev2",
+    "tigrbl-claim-zoneinfo-concrete==0.4.0.dev2",
+    "tigrbl-claim-locale-concrete==0.4.0.dev2",
+    "tigrbl-claim-phone-number-concrete==0.4.0.dev2",
+    "tigrbl-claim-phone-number-verified-concrete==0.4.0.dev2",
+    "tigrbl-claim-address-concrete==0.4.0.dev2",
+    "tigrbl-claim-updated-at-concrete==0.4.0.dev2",
+    "tigrbl-claim-access-token-hash-oidc-concrete==0.4.0.dev2",
+    "tigrbl-claim-authorization-code-hash-concrete==0.4.0.dev2",
+    "tigrbl-claim-state-hash-concrete==0.4.0.dev2",
+    "tigrbl-claim-session-id-concrete==0.4.0.dev2",
     "tigrbl-auth-protocol-gnap==0.4.0.dev2",
     "tigrbl-auth-profile-haip==0.4.0.dev2",
     "tigrbl-security-event-protocol-set==0.4.0.dev2",
@@ -494,6 +517,29 @@ tigrbl-claim-ueid-concrete = { path = "pkgs/10-concrete/tigrbl-claim-ueid-concre
 tigrbl-claim-eat-submodules-concrete = { path = "pkgs/10-concrete/tigrbl-claim-eat-submodules-concrete", editable = true }
 tigrbl-claim-actor-concrete = { path = "pkgs/10-concrete/tigrbl-claim-actor-concrete", editable = true }
 tigrbl-claim-may-act-concrete = { path = "pkgs/10-concrete/tigrbl-claim-may-act-concrete", editable = true }
+tigrbl-claim-name-concrete = { path = "pkgs/10-concrete/tigrbl-claim-name-concrete", editable = true }
+tigrbl-claim-given-name-concrete = { path = "pkgs/10-concrete/tigrbl-claim-given-name-concrete", editable = true }
+tigrbl-claim-family-name-concrete = { path = "pkgs/10-concrete/tigrbl-claim-family-name-concrete", editable = true }
+tigrbl-claim-middle-name-concrete = { path = "pkgs/10-concrete/tigrbl-claim-middle-name-concrete", editable = true }
+tigrbl-claim-nickname-concrete = { path = "pkgs/10-concrete/tigrbl-claim-nickname-concrete", editable = true }
+tigrbl-claim-preferred-username-concrete = { path = "pkgs/10-concrete/tigrbl-claim-preferred-username-concrete", editable = true }
+tigrbl-claim-profile-uri-concrete = { path = "pkgs/10-concrete/tigrbl-claim-profile-uri-concrete", editable = true }
+tigrbl-claim-picture-uri-concrete = { path = "pkgs/10-concrete/tigrbl-claim-picture-uri-concrete", editable = true }
+tigrbl-claim-website-uri-concrete = { path = "pkgs/10-concrete/tigrbl-claim-website-uri-concrete", editable = true }
+tigrbl-claim-email-concrete = { path = "pkgs/10-concrete/tigrbl-claim-email-concrete", editable = true }
+tigrbl-claim-email-verified-concrete = { path = "pkgs/10-concrete/tigrbl-claim-email-verified-concrete", editable = true }
+tigrbl-claim-gender-concrete = { path = "pkgs/10-concrete/tigrbl-claim-gender-concrete", editable = true }
+tigrbl-claim-birthdate-concrete = { path = "pkgs/10-concrete/tigrbl-claim-birthdate-concrete", editable = true }
+tigrbl-claim-zoneinfo-concrete = { path = "pkgs/10-concrete/tigrbl-claim-zoneinfo-concrete", editable = true }
+tigrbl-claim-locale-concrete = { path = "pkgs/10-concrete/tigrbl-claim-locale-concrete", editable = true }
+tigrbl-claim-phone-number-concrete = { path = "pkgs/10-concrete/tigrbl-claim-phone-number-concrete", editable = true }
+tigrbl-claim-phone-number-verified-concrete = { path = "pkgs/10-concrete/tigrbl-claim-phone-number-verified-concrete", editable = true }
+tigrbl-claim-address-concrete = { path = "pkgs/10-concrete/tigrbl-claim-address-concrete", editable = true }
+tigrbl-claim-updated-at-concrete = { path = "pkgs/10-concrete/tigrbl-claim-updated-at-concrete", editable = true }
+tigrbl-claim-access-token-hash-oidc-concrete = { path = "pkgs/10-concrete/tigrbl-claim-access-token-hash-oidc-concrete", editable = true }
+tigrbl-claim-authorization-code-hash-concrete = { path = "pkgs/10-concrete/tigrbl-claim-authorization-code-hash-concrete", editable = true }
+tigrbl-claim-state-hash-concrete = { path = "pkgs/10-concrete/tigrbl-claim-state-hash-concrete", editable = true }
+tigrbl-claim-session-id-concrete = { path = "pkgs/10-concrete/tigrbl-claim-session-id-concrete", editable = true }
 tigrbl-auth-protocol-gnap = { path = "pkgs/50-protocols/tigrbl-auth-protocol-gnap", editable = true }
 tigrbl-auth-profile-haip = { path = "pkgs/50-protocols/tigrbl-auth-profile-haip", editable = true }
 tigrbl-security-event-protocol-set = { path = "pkgs/50-protocols/tigrbl-security-event-protocol-set", editable = true }
