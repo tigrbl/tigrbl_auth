@@ -3,6 +3,13 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any, Callable, Mapping
 
+from .reservations import (
+    ReplayKey,
+    ReplayReservationPort,
+    ReplayReservationRequest,
+    ReplayReservationResult,
+)
+
 
 @dataclass(frozen=True, slots=True)
 class PolicyReplayCase:
@@ -63,4 +70,8 @@ __all__ = [
     "PolicyReplayCase",
     "PolicyReplayResult",
     "PolicyEvaluator",
+    "ReplayKey",
+    "ReplayReservationPort",
+    "ReplayReservationRequest",
+    "ReplayReservationResult",
 ]

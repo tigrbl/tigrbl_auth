@@ -55,6 +55,7 @@ from .presentation_state import PresentationConsent,PresentationReplay,Presentat
 from .attestation_state import AttestationAppraisalPolicy,AttestationEndorsement,AttestationEvidence,AttestationReferenceManifest,AttestationReferenceValue,AttestationResult
 from .spiffe_state import SpiffeTrustBundle,SvidRecord,TrustDomainFederation
 from .security_event_state import SecurityEvent,SecurityEventDelivery,SecurityEventReplay,SecurityEventSubscription
+from .replay_reservation import ReplayReservation
 from .did_gnap_state import DidDocument,DidDocumentVersion,DidResolutionCache,DidService,DidVerificationMethod,GnapClientInstance,GnapContinuation,GnapGrant,GnapInteraction
 from .certificate_state import CertificateRecord,CertificateStatusSnapshot,TrustAnchor
 from .claim_state import ClaimDefinition,ClaimProvenanceRecord,ClaimReleasePolicy,ClaimSnapshot,ClaimSourceBinding
@@ -207,6 +208,7 @@ _TABLE_MODELS = (
     SecurityEventSubscription,
     SecurityEventDelivery,
     SecurityEventReplay,
+    ReplayReservation,
     DidDocument,
     DidDocumentVersion,
     DidVerificationMethod,
@@ -423,6 +425,7 @@ __all__ = [
     "SecurityEventSubscription",
     "SecurityEventDelivery",
     "SecurityEventReplay",
+    "ReplayReservation",
     "DidDocument",
     "DidDocumentVersion",
     "DidVerificationMethod",

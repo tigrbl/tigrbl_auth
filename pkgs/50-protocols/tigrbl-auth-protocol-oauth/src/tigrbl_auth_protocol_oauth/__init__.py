@@ -25,10 +25,12 @@ from .protocol import (
     sha256_thumbprint,
 )
 from .versions import CURRENT_VERSION, VERSION_HISTORY, OAuthVersion, select_version
+from .capability_requirements import CAPABILITY_REQUIREMENTS
 
 __all__ = [
     "DPoPProof",
     "CURRENT_VERSION",
+    "CAPABILITY_REQUIREMENTS",
     "DeviceAuthorization",
     "InMemoryOAuthRepository",
     "OAuthClient",

@@ -74,6 +74,10 @@ CAPABILITY_PURPOSES = {
     "tigrbl-identity-admin-control-plane": (
         "coordinate administrative resource lifecycle use cases"
     ),
+    "tigrbl-replay-protection-capability": (
+        "coordinate normalized replay reservations across protocol mappings, "
+        "durable repositories, and replaceable providers"
+    ),
     "tigrbl-security-events": (
         "coordinate security-event transmission, receipt, and recording"
     ),

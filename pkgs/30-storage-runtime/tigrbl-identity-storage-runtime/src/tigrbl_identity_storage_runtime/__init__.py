@@ -6,6 +6,7 @@ from .attestation_repositories import *
 from .credential_repositories import *
 from .presentation_repositories import *
 from .repositories import *
+from .replay_repository import *
 from .security_event_repositories import *
 from .workload_repositories import *
 
@@ -45,6 +46,7 @@ __all__ = [
     "PresentationTransactionRepository",
     "SecurityEventDeliveryRepository",
     "SecurityEventReplayRepository",
+    "SqlReplayReservationRepository",
     "SecurityEventRepository",
     "SpiffeTrustBundleRepository",
     "StorageTransactionCoordinator",

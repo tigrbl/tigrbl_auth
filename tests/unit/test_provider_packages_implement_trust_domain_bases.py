@@ -45,7 +45,7 @@ COMPOSITION_PROVIDER_PACKAGES = {
     "tigrbl-authz-policy-admin-gate",
     "tigrbl-authz-policy-decision-engine",
     "tigrbl-certificate-status-provider",
-    "tigrbl-corim-store-provider",
+    "tigrbl-corim-reference-memory-provider",
     "tigrbl-did-controller-provider",
     "tigrbl-digital-credential-trust-provider",
     "tigrbl-identity-admin",

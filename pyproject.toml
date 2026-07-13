@@ -108,6 +108,7 @@ dependencies = [
     "tigrbl-cose-bases==0.4.0.dev2",
     "tigrbl-security-event-bases==0.4.0.dev2",
     "tigrbl-token-bases==0.4.0.dev2",
+    "tigrbl-replay-bases==0.4.0.dev2",
     "tigrbl-authentication-assurance-bases==0.4.0.dev2",
     "tigrbl-claim-issuer-concrete==0.4.0.dev2",
     "tigrbl-claim-subject-concrete==0.4.0.dev2",
@@ -265,6 +266,7 @@ dependencies = [
     "tigrbl-attestation-reference-provider==0.4.0.dev2",
     "tigrbl-attestation-appraiser==0.4.0.dev2",
     "tigrbl-corim-store-provider==0.4.0.dev2",
+    "tigrbl-corim-reference-memory-provider==0.4.0.dev2",
     "tigrbl-spiffe-workload-api-provider==0.4.0.dev2",
     "tigrbl-spiffe-bundle-provider==0.4.0.dev2",
     "tigrbl-svid-verifier-provider==0.4.0.dev2",
@@ -277,6 +279,8 @@ dependencies = [
     "tigrbl-mdoc-issuer-provider==0.4.0.dev2",
     "tigrbl-mdoc-verifier-provider==0.4.0.dev2",
     "tigrbl-security-event-replay-store==0.4.0.dev2",
+    "tigrbl-replay-memory-provider==0.4.0.dev2",
+    "tigrbl-replay-protection-capability==0.4.0.dev2",
     "tigrbl-set-transmitter-provider==0.4.0.dev2",
     "tigrbl-set-receiver-provider==0.4.0.dev2",
     "tigrbl-wallet-attestation-verifier==0.4.0.dev2",
@@ -485,6 +489,7 @@ tigrbl-digital-credential-bases = { path = "pkgs/05-bases/tigrbl-digital-credent
 tigrbl-attestation-bases = { path = "pkgs/05-bases/tigrbl-attestation-bases", editable = true }
 tigrbl-security-event-bases = { path = "pkgs/05-bases/tigrbl-security-event-bases", editable = true }
 tigrbl-token-bases = { path = "pkgs/05-bases/tigrbl-token-bases", editable = true }
+tigrbl-replay-bases = { path = "pkgs/05-bases/tigrbl-replay-bases", editable = true }
 tigrbl-authentication-assurance-bases = { path = "pkgs/05-bases/tigrbl-authentication-assurance-bases", editable = true }
 tigrbl-claim-issuer-concrete = { path = "pkgs/10-concrete/tigrbl-claim-issuer-concrete", editable = true }
 tigrbl-claim-subject-concrete = { path = "pkgs/10-concrete/tigrbl-claim-subject-concrete", editable = true }
@@ -611,7 +616,8 @@ tigrbl-digital-presentation-verifier = { path = "pkgs/20-providers/tigrbl-digita
 tigrbl-eat-verifier-provider = { path = "pkgs/20-providers/tigrbl-eat-verifier-provider", editable = true }
 tigrbl-attestation-reference-provider = { path = "pkgs/20-providers/tigrbl-attestation-reference-provider", editable = true }
 tigrbl-attestation-appraiser = { path = "pkgs/20-providers/tigrbl-attestation-appraiser", editable = true }
-tigrbl-corim-store-provider = { path = "pkgs/20-providers/tigrbl-corim-store-provider", editable = true }
+tigrbl-corim-store-provider = { path = "pkgs/deprecated/tigrbl-corim-store-provider", editable = true }
+tigrbl-corim-reference-memory-provider = { path = "pkgs/20-providers/tigrbl-corim-reference-memory-provider", editable = true }
 tigrbl-spiffe-workload-api-provider = { path = "pkgs/20-providers/tigrbl-spiffe-workload-api-provider", editable = true }
 tigrbl-spiffe-bundle-provider = { path = "pkgs/20-providers/tigrbl-spiffe-bundle-provider", editable = true }
 tigrbl-svid-verifier-provider = { path = "pkgs/20-providers/tigrbl-svid-verifier-provider", editable = true }
@@ -623,7 +629,9 @@ tigrbl-certificate-path-validator = { path = "pkgs/20-providers/tigrbl-certifica
 tigrbl-security-cose = { path = "pkgs/20-providers/tigrbl-security-cose", editable = true }
 tigrbl-mdoc-issuer-provider = { path = "pkgs/20-providers/tigrbl-mdoc-issuer-provider", editable = true }
 tigrbl-mdoc-verifier-provider = { path = "pkgs/20-providers/tigrbl-mdoc-verifier-provider", editable = true }
-tigrbl-security-event-replay-store = { path = "pkgs/20-providers/tigrbl-security-event-replay-store", editable = true }
+tigrbl-security-event-replay-store = { path = "pkgs/deprecated/tigrbl-security-event-replay-store", editable = true }
+tigrbl-replay-memory-provider = { path = "pkgs/20-providers/tigrbl-replay-memory-provider", editable = true }
+tigrbl-replay-protection-capability = { path = "pkgs/40-capabilities/tigrbl-replay-protection-capability", editable = true }
 tigrbl-set-transmitter-provider = { path = "pkgs/20-providers/tigrbl-set-transmitter-provider", editable = true }
 tigrbl-set-receiver-provider = { path = "pkgs/20-providers/tigrbl-set-receiver-provider", editable = true }
 tigrbl-wallet-attestation-verifier = { path = "pkgs/20-providers/tigrbl-wallet-attestation-verifier", editable = true }

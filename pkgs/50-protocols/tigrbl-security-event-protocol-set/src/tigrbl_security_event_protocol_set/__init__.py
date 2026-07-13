@@ -9,6 +9,7 @@ from tigrbl_claim_subject_concrete import SubjectClaim
 from .features import FEATURES_BY_VERSION, supports
 from .migrations import migrate_claims
 from .versions import CURRENT_VERSION, VERSION_HISTORY, SetVersion, select_version
+from .capability_requirements import CAPABILITY_REQUIREMENTS
 
 SET_CLAIM_CLASSES = (
     IssuerClaim,
@@ -31,6 +32,7 @@ def compose_set_claim_set(*claims) -> ClaimSet:
 
 __all__ = [
     "CURRENT_VERSION",
+    "CAPABILITY_REQUIREMENTS",
     "FEATURES_BY_VERSION",
     "SET_CLAIM_CLASSES",
     "VERSION_HISTORY",

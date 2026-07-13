@@ -28,12 +28,14 @@ from .provider import (
     render_login_template,
 )
 from .versions import CURRENT_VERSION, VERSION_HISTORY, OidcVersion, select_version
+from .capability_requirements import CAPABILITY_REQUIREMENTS
 
 __all__ = [
     "OIDC_EXTENSION_CLAIMS",
     "OIDC_ID_TOKEN_PROFILE_CLAIMS",
     "OIDC_USERINFO_CLAIMS",
     "CURRENT_VERSION",
+    "CAPABILITY_REQUIREMENTS",
     "FEATURES_BY_VERSION",
     "HostedLoginPage",
     "HostedLoginRequest",

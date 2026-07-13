@@ -2786,6 +2786,7 @@ dependencies = [
     { name = "tigrbl-concrete" },
     { name = "tigrbl-core" },
     { name = "tigrbl-corim-concrete" },
+    { name = "tigrbl-corim-reference-memory-provider" },
     { name = "tigrbl-corim-store-provider" },
     { name = "tigrbl-cose-bases" },
     { name = "tigrbl-credential-profile-sd-jwt-vc" },
@@ -2863,6 +2864,9 @@ dependencies = [
     { name = "tigrbl-platform-attestation-provider" },
     { name = "tigrbl-public-subject-identifier-concrete" },
     { name = "tigrbl-release-contracts" },
+    { name = "tigrbl-replay-bases" },
+    { name = "tigrbl-replay-memory-provider" },
+    { name = "tigrbl-replay-protection-capability" },
     { name = "tigrbl-resource-server-bases" },
     { name = "tigrbl-runtime" },
     { name = "tigrbl-sd-jwt-concrete" },
@@ -3123,7 +3127,8 @@ requires-dist = [
     { name = "tigrbl-concrete", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-core", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-corim-concrete", editable = "pkgs/10-concrete/tigrbl-corim-concrete" },
-    { name = "tigrbl-corim-store-provider", editable = "pkgs/20-providers/tigrbl-corim-store-provider" },
+    { name = "tigrbl-corim-reference-memory-provider", editable = "pkgs/20-providers/tigrbl-corim-reference-memory-provider" },
+    { name = "tigrbl-corim-store-provider", editable = "pkgs/deprecated/tigrbl-corim-store-provider" },
     { name = "tigrbl-cose-bases", editable = "pkgs/05-bases/tigrbl-cose-bases" },
     { name = "tigrbl-credential-profile-sd-jwt-vc", editable = "pkgs/50-protocols/tigrbl-credential-profile-sd-jwt-vc" },
     { name = "tigrbl-device-identity-concrete", editable = "pkgs/10-concrete/tigrbl-device-identity-concrete" },
@@ -3204,6 +3209,9 @@ requires-dist = [
     { name = "tigrbl-platform-attestation-provider", editable = "pkgs/20-providers/tigrbl-platform-attestation-provider" },
     { name = "tigrbl-public-subject-identifier-concrete", editable = "pkgs/10-concrete/tigrbl-public-subject-identifier-concrete" },
     { name = "tigrbl-release-contracts", editable = "pkgs/02-contracts/tigrbl-release-contracts" },
+    { name = "tigrbl-replay-bases", editable = "pkgs/05-bases/tigrbl-replay-bases" },
+    { name = "tigrbl-replay-memory-provider", editable = "pkgs/20-providers/tigrbl-replay-memory-provider" },
+    { name = "tigrbl-replay-protection-capability", editable = "pkgs/40-capabilities/tigrbl-replay-protection-capability" },
     { name = "tigrbl-resource-server-bases", editable = "pkgs/05-bases/tigrbl-resource-server-bases" },
     { name = "tigrbl-runtime", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-sd-jwt-concrete", editable = "pkgs/10-concrete/tigrbl-sd-jwt-concrete" },
@@ -3217,7 +3225,7 @@ requires-dist = [
     { name = "tigrbl-security-dpop-cnf-binding-validator", editable = "pkgs/20-providers/tigrbl-security-dpop-cnf-binding-validator" },
     { name = "tigrbl-security-event-bases", editable = "pkgs/05-bases/tigrbl-security-event-bases" },
     { name = "tigrbl-security-event-protocol-set", editable = "pkgs/50-protocols/tigrbl-security-event-protocol-set" },
-    { name = "tigrbl-security-event-replay-store", editable = "pkgs/20-providers/tigrbl-security-event-replay-store" },
+    { name = "tigrbl-security-event-replay-store", editable = "pkgs/deprecated/tigrbl-security-event-replay-store" },
     { name = "tigrbl-security-events", editable = "pkgs/40-capabilities/tigrbl-security-events" },
     { name = "tigrbl-security-key-rotation-policy-contracts", editable = "pkgs/02-contracts/tigrbl-security-key-rotation-policy-contracts" },
     { name = "tigrbl-security-mtls-cnf-binding-validator", editable = "pkgs/20-providers/tigrbl-security-mtls-cnf-binding-validator" },
@@ -4890,9 +4898,9 @@ dependencies = [
 requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
 
 [[package]]
-name = "tigrbl-corim-store-provider"
+name = "tigrbl-corim-reference-memory-provider"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/20-providers/tigrbl-corim-store-provider" }
+source = { editable = "pkgs/20-providers/tigrbl-corim-reference-memory-provider" }
 dependencies = [
     { name = "tigrbl-corim-concrete" },
     { name = "tigrbl-identity-contracts" },
@@ -4903,6 +4911,17 @@ requires-dist = [
     { name = "tigrbl-corim-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
 ]
+
+[[package]]
+name = "tigrbl-corim-store-provider"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/deprecated/tigrbl-corim-store-provider" }
+dependencies = [
+    { name = "tigrbl-corim-reference-memory-provider" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-corim-reference-memory-provider", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-cose-bases"
@@ -5677,9 +5696,11 @@ dependencies = [
     { name = "tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-auth-protocol-oidc" },
     { name = "tigrbl-authz-resource-server" },
+    { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-jose" },
     { name = "tigrbl-identity-runtime" },
     { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-replay-bases" },
     { name = "tigrbl-security-authorization-provenance-builder" },
     { name = "tigrbl-security-trust-contracts" },
 ]
@@ -5690,9 +5711,11 @@ requires-dist = [
     { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-oidc", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-resource-server", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-jose", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-replay-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-authorization-provenance-builder", specifier = "==0.1.0" },
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
 ]
@@ -6073,6 +6096,39 @@ version = "0.1.0"
 source = { editable = "pkgs/02-contracts/tigrbl-release-contracts" }
 
 [[package]]
+name = "tigrbl-replay-bases"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/05-bases/tigrbl-replay-bases" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-replay-memory-provider"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-replay-memory-provider" }
+dependencies = [
+    { name = "tigrbl-replay-bases" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-replay-bases", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-replay-protection-capability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/40-capabilities/tigrbl-replay-protection-capability" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
+
+[[package]]
 name = "tigrbl-resource-server-bases"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/05-bases/tigrbl-resource-server-bases" }
@@ -6268,13 +6324,19 @@ requires-dist = [
 [[package]]
 name = "tigrbl-security-event-replay-store"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/20-providers/tigrbl-security-event-replay-store" }
+source = { editable = "pkgs/deprecated/tigrbl-security-event-replay-store" }
 dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-replay-memory-provider" },
     { name = "tigrbl-security-event-bases" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-security-event-bases", specifier = "==0.4.0.dev2" }]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-replay-memory-provider", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-event-bases", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-security-events"

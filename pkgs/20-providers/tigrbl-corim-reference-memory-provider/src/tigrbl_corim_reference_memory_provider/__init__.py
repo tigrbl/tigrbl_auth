@@ -1,15 +1,13 @@
 from collections.abc import Mapping
 
-from tigrbl_corim_concrete import (
-    CorimTag,
-    parse_corim,
-    parse_corim_tag,
-    validate_corim_tag,
-)
+from tigrbl_corim_concrete import CorimTag, parse_corim, parse_corim_tag, validate_corim_tag
 from tigrbl_identity_contracts.attestation import ReferenceIntegrityManifest
 
 
-class InMemoryCorimStore:
+class CorimReferenceMemoryProvider:
+    provider_id = "corim-reference:memory"
+    persistence = "ephemeral-process-local"
+
     def __init__(self):
         self._tags: dict[str, CorimTag] = {}
         self._manifests: dict[str, ReferenceIntegrityManifest] = {}
@@ -37,4 +35,4 @@ class InMemoryCorimStore:
             raise LookupError(tag_identity) from exc
 
 
-__all__ = ["InMemoryCorimStore"]
+__all__ = ["CorimReferenceMemoryProvider"]

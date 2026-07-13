@@ -23,10 +23,10 @@ and independently verifiable results.
 | 10 | standalone authenticator-credential packages | One package per password, reset, API/service key, client secret, MFA/passkey/WebAuthn/passwordless, mTLS, and DPoP-key credential | Keep these distinct from issued digital credentials |
 | 10 | standalone claim packages | One `ClaimBase` subclass per registered concrete claim package | Complete claim-name coverage as additional standards revisions are implemented |
 | 10 | JOSE, SD-JWT, SD-JWT VC, mdoc, VCDM, EAT, CoRIM, SVID, DID, SET concrete packages | Deterministic parsing, validation, serialization, and format behavior | No filesystem, HTTP, database, HSM, or issuer-trust decisions |
-| 20 | credential, presentation, COSE/mdoc, wallet/key/platform attestation, EAT/RATS/CoRIM, SPIFFE/SVID, DID, SET, certificate/trust providers | Environment-backed signing, verification, resolution, storage, appraisal, delivery, and trust behavior | Vendor-specific providers remain separate when dependencies or evidence differ |
-| 30 | `tigrbl-identity-storage-runtime` | Repositories and transaction coordinators for new durable tables | Exercise every repository against production database backends |
-| 40 | digital credential issuance/presentation, attestation appraisal, security events, workload identity | Capability orchestration over neutral ports | Add operational policy and transaction coordination without leaking wire formats |
-| 50 | JWT, OAuth, OIDC, OID4VCI, OID4VP, HAIP, AuthZEN, GNAP, SET, EAT, SD-JWT VC | Independent version histories, revision feature gates, explicit migrations, and protocol/profile claim-set composition | Add normative endpoint coverage and independent interop evidence before certification |
+| 20 | credential, presentation, COSE/mdoc, wallet/key/platform attestation, EAT/RATS/CoRIM, SPIFFE/SVID, DID, SET, certificate/trust, and replaceable infrastructure providers | Environment-backed signing, verification, resolution, appraisal, delivery, trust, and explicitly named external/ephemeral storage adapters | Rename ambiguous `*-store` packages as implementation-specific providers; no canonical durable schema or transaction ownership |
+| 30 | `tigrbl-identity-storage-runtime` | Executable repositories, atomic reservations, database sessions, migrations, and transaction coordinators over layer-01 state | Add durable replay repositories and exercise every repository against production database backends |
+| 40 | digital credential issuance/presentation, attestation appraisal, security events, workload identity | Multi-component use-case orchestration over neutral ports, with delegated subimplementations and machine-readable capability descriptors | Complete capability inventory/readiness/dependency reporting without leaking wire formats |
+| 50 | JWT, OAuth, OIDC, OID4VCI, OID4VP, HAIP, AuthZEN, GNAP, SET, EAT, SD-JWT VC | Independent version histories, revision feature gates, compatibility/migrations, protocol claim-set composition, and traceable protocol-requirement-to-capability mappings | Remove embedded state-store implementations; add normative endpoint coverage and independent interop evidence before certification |
 | 60 | `tigrbl-identity-runtime` | Lazy installed-owner standards registry and exact runtime manifest | Remove older layer-50 imports of runtime settings by injecting deployment configuration |
 | 70 | `tigrbl-auth` | Stable lazy exports for runtime standards discovery | Re-export additional APIs only after owner packages stabilize |
 | 80 | public API contract | Declares standards-manifest capability and OID4VC/HAIP package consumption | Mount credential issuance, presentation, AuthZEN, GNAP, SET, and attestation routes from protocol/capability truth |
@@ -81,6 +81,119 @@ not mean every encoded payload should be retained.
   or external trust services. Layer 10 never owns a provider.
 - Layer 50 owns revision-specific required/optional membership, aliases, wire
   names, feature flags, backwards compatibility, and migrations.
+
+## Store, capability, and protocol ownership checklist
+
+Canonical placement rule:
+
+```text
+01 durable schema and lifecycle record
+02 storage/replay/capability contract
+05 reusable provider/capability base when multiple implementations exist
+20 replaceable implementation provider (memory, Redis, vendor service, HSM)
+30 executable durable repository, session, transaction, and atomic coordination
+40 mountable/composable capability and capability-set reporting
+50 versioned protocol/specification mapping onto required capabilities
+```
+
+### General store rules
+
+- [x] Layer 01 owns canonical durable tables, fields, constraints, retention
+  references, and migration state.
+- [x] Layer 02 owns representation-neutral ports rather than a database or
+  vendor API.
+- [x] Layer 20 may own an explicitly named replaceable backend provider.
+- [ ] Rename every ambiguous `*-store` layer-20 package to identify its actual
+  implementation, such as `*-memory-provider` or `*-redis-provider`.
+- [ ] Move executable SQL repositories, sessions, and transaction coordination
+  to layer 30.
+- [ ] Ensure no layer-50 protocol package silently creates production state or
+  selects a default process-local store.
+- [ ] Require atomic `check_and_reserve(namespace, key, expires_at)` semantics
+  for replay prevention; a separate read followed by write is insufficient.
+- [ ] Require explicit retention, namespace, tenant, expiry, purge, audit, and
+  availability semantics in every production store descriptor.
+
+### Replay protection delivery
+
+- [x] Layer-01 tables exist for security-event, backchannel-logout, and
+  presentation replay state.
+- [x] Neutral replay contracts exist in `tigrbl-identity-contracts`.
+- [x] Normalize the replay contract around an atomic reservation result and a
+  protocol-neutral replay namespace/key/context.
+- [x] Add a layer-05 replay base only for behavior genuinely shared by at least
+  two providers.
+- [x] Replace `tigrbl-security-event-replay-store` with
+  `tigrbl-replay-memory-provider`, retain the old distribution only as a
+  deprecated compatibility alias, and document it as
+  non-durable, single-process, and unsuitable for horizontally scaled
+  production deployments.
+- [x] Add a layer-30 SQL replay repository backed by a layer-01 table whose
+  unique digest constraint is the final concurrent duplicate arbiter.
+- [ ] Add separately packaged layer-20 Redis/vendor replay providers only when
+  their dependencies and operational semantics differ.
+- [x] Add a layer-40 `tigrbl-replay-protection-capability` package that delegates to a
+  selected provider/repository and reports operations, guarantees, namespaces,
+  persistence class, health, and limitations.
+- [x] Map SET `jti`, DPoP proof `jti`/nonce, OIDC backchannel logout token `jti`,
+  OID4VP nonce/transaction binding, and other revision-specific replay rules to
+  the layer-40 capability from their layer-50 packages.
+- [ ] Remove `StateNonceStore`, `TokenStore`, `DPoPReplayStore`, and
+  `DPoPNonceStore` as implicit production implementations inside layer 50;
+  retain only injected ports or explicitly named test fixtures.
+
+### Reference-material stores
+
+- [x] Layer-01 attestation reference-manifest/reference-value/endorsement state
+  exists.
+- [x] Layer-02 reference-material provider contracts and layer-05 bases exist.
+- [x] Replace `tigrbl-corim-store-provider` with the implementation-specific
+  `tigrbl-corim-reference-memory-provider`; retain the former only as a
+  deprecated compatibility alias.
+- [ ] Put durable CoRIM/CoMID reference-material repositories and immutable
+  publication transactions in layer 30.
+- [ ] Keep trust resolution/appraisal in layers 20/40 and keep CoRIM revision,
+  encoding, and protocol mapping in layer 50.
+
+### Capability-layer contract
+
+- [ ] Every layer-40 capability has a stable capability ID and version.
+- [ ] Every layer-40 capability reports supported operations, guarantees,
+  optional features, selected provider identities, dependencies, readiness,
+  health, limitations, and explicitly unsupported behavior.
+- [ ] Layer-40 capabilities accept normalized contracts and do not depend on
+  protocol wire names such as `jti`, `nonce`, `state`, or HTTP parameters.
+- [ ] A capability may delegate to multiple layer-20 providers and layer-30
+  repositories without exposing those implementation details to layer 50.
+- [ ] Capability mounting/composition is deterministic and its effective
+  capability set is inspectable at runtime.
+
+### Protocol-layer contract
+
+- [x] Each protocol with independent history owns a distinct layer-50 package
+  and version registry.
+- [x] Layer 50 owns revision feature flags, compatibility rules, and migrations.
+- [ ] Each normative protocol requirement maps to a stable layer-40 capability
+  operation or is explicitly reported unsupported.
+- [ ] Layer 50 reports the selected protocol revision, required capability set,
+  effective implementation coverage, and conformance evidence links.
+- [ ] Layer 50 owns wire decoding/encoding and protocol error mapping but not
+  databases, trust-anchor selection, key loading, or production state stores.
+- [ ] Layer 60 selects providers and deployment policy; layer 50 must not import
+  runtime settings to make hidden implementation choices.
+
+### EAT cross-aspect status
+
+- [x] EAT is modeled as attestation evidence containing a claim set and carried
+  in a protected JWT or CWT envelope; it is not treated as one claim.
+- [x] Token-envelope verification, verified attestation evidence, and appraisal
+  results are distinct contracts.
+- [x] Claim, claim-set, token, evidence-verification, and appraisal bases exist.
+- [x] EAT JWT and EAT CWT/COSE extension bases exist symmetrically.
+- [x] `tigrbl-eat-concrete` specializes neutral `AttestationEvidence` without
+  owning key resolution, trust selection, persistence, or appraisal.
+- [x] The EAT verifier returns evidence-integrity verification separately from
+  the reference-backed attestation appraisal decision.
 
 ## Assurance vocabulary
 
