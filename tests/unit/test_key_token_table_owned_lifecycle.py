@@ -16,9 +16,8 @@ from tigrbl_identity_storage.tables._security_ctx import (
     VERIFIER_CTX,
     stash_security_providers,
 )
-from tigrbl_identity_storage.tables.crypto_key import scrub_key_material
-from tigrbl_identity_storage.tables.crypto_key._usage import normalize_payload_key_usage
-from tigrbl_identity_storage.tables.crypto_key_version import scrub_key_version_material
+from tigrbl_identity_jose import materialize_public_key_record
+from tigrbl_identity_storage_runtime import normalize_key_usage_values
 
 
 def test_key_tables_are_storage_owned_and_exported() -> None:
@@ -39,14 +38,14 @@ def test_key_tables_are_storage_owned_and_exported() -> None:
 
 
 def test_key_usage_defaults_and_narrows_allowed_ops() -> None:
-    assert normalize_payload_key_usage(
+    assert normalize_key_usage_values(
         {"key_kind": "symmetric", "key_usages": ["kek"]}
     ) == {
         "key_kind": "symmetric",
         "key_usages": ["kek"],
         "allowed_ops": ["wrap_key", "unwrap_key"],
     }
-    assert normalize_payload_key_usage(
+    assert normalize_key_usage_values(
         {"key_kind": "symmetric", "key_usages": ["kek"], "allowed_ops": ["wrap_key"]}
     ) == {
         "key_kind": "symmetric",
@@ -62,11 +61,11 @@ def test_key_material_scrubbers_remove_private_fields() -> None:
         "public_material": {"kid": "kid-1", "kty": "PQC", "x": "pub", "d": "priv"},
     }
 
-    assert scrub_key_material(payload) == {
+    assert materialize_public_key_record(payload) == {
         "kid": "kid-1",
         "public_material": {"kid": "kid-1", "kty": "PQC", "x": "pub"},
     }
-    assert scrub_key_version_material(payload) == {
+    assert materialize_public_key_record(payload) == {
         "kid": "kid-1",
         "public_material": {"kid": "kid-1", "kty": "PQC", "x": "pub"},
     }

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from collections.abc import Iterable
 
-from tigrbl import OpSpec, TableSpec, rebind
+from tigrbl import Hook, OpSpec, TableSpec, rebind
 
 
 def runtimeOperations(spec: TableSpec) -> tuple[OpSpec, ...]:
@@ -29,6 +29,13 @@ def activateRuntimeTableSpec(spec: TableSpec) -> tuple[OpSpec, ...]:
         for operation in (*existing, *runtimeOperations(spec))
     }
     table.__tigrbl_ops__ = tuple(merged.values())
+    existing_hooks = tuple(getattr(table, "HOOKS", ()) or ())
+    merged_hooks: dict[tuple[str | None, object, object], Hook] = {}
+    for hook in (*existing_hooks, *tuple(spec.hooks)):
+        if not isinstance(hook, Hook):
+            continue
+        merged_hooks[(hook.name, hook.phase, hook.ops)] = hook
+    table.HOOKS = tuple(merged_hooks.values())
     return tuple(rebind(table))
 
 

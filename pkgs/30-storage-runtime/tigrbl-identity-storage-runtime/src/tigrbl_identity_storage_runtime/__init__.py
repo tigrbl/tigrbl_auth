@@ -3,6 +3,7 @@
 from .define import *
 from .derive import *
 from .factories import *
+from .hooks import *
 from .inventory import *
 from .initialize import *
 from .make import *

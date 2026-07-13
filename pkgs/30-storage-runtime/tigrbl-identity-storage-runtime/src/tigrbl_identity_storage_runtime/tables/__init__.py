@@ -9,6 +9,7 @@ from .delegation import *
 from .oidc import *
 from .oauth import *
 from .identities import *
+from .keys import *
 from .presentations import *
 from .replay import *
 from .security_events import *
@@ -36,6 +37,8 @@ DURABLE_RUNTIME_TABLE_SPECS = (
     DelegationGrantProofRuntimeSpec,
     DelegationGrantTokenLinkRuntimeSpec,
     DeviceCodeRuntimeSpec,
+    CryptoKeyRuntimeSpec,
+    CryptoKeyVersionRuntimeSpec,
     CredentialOfferRuntimeSpec,
     CredentialIssuanceTransactionRuntimeSpec,
     CredentialStatusEntryRuntimeSpec,

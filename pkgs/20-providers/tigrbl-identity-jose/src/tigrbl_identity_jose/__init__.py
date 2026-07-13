@@ -15,6 +15,7 @@ from .boundary import (
     validate_public_jwk,
 )
 from .jwe_policy import JWEPolicy
+from .key_material import JWK_PRIVATE_PARAMETERS, materialize_public_key_record
 from .jwt_coder import JWTCoder
 from .key_rotation_policy import (
     EffectiveKeyRotationPolicy,
@@ -52,6 +53,7 @@ __all__ = [
     "KeyRotationPolicyOverlapError",
     "KeyRotationPolicyVersion",
     "JWEPolicy",
+    "JWK_PRIVATE_PARAMETERS",
     "ML_DSA_65_ALG",
     "PQCError",
     "PQC_JWK_KTY",
@@ -62,6 +64,7 @@ __all__ = [
     "RFC_TARGETS",
     "generate_pqc_signature_keypair",
     "jwk_thumbprint",
+    "materialize_public_key_record",
     "pqc_backend_report",
     "pqc_public_jwk",
     "pqc_signing_jwk",
