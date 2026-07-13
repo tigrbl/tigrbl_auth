@@ -2339,6 +2339,17 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-auth-protocol-authzen"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-authzen" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
+
+[[package]]
 name = "tigrbl-auth-protocol-jwt"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-jwt" }
@@ -2396,6 +2407,36 @@ requires-dist = [
     { name = "tigrbl-scope-claim-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-proof-pkce", specifier = "==0.1.0" },
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+]
+
+[[package]]
+name = "tigrbl-auth-protocol-oid4vci"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-oid4vci" }
+dependencies = [
+    { name = "tigrbl-digital-credential-issuance" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-digital-credential-issuance", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-auth-protocol-oid4vp"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-oid4vp" }
+dependencies = [
+    { name = "tigrbl-digital-credential-presentation" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-digital-credential-presentation", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
@@ -2549,8 +2590,11 @@ dependencies = [
     { name = "tigrbl-audience-claim-concrete" },
     { name = "tigrbl-auth" },
     { name = "tigrbl-auth-plugin" },
+    { name = "tigrbl-auth-protocol-authzen" },
     { name = "tigrbl-auth-protocol-jwt" },
     { name = "tigrbl-auth-protocol-oauth" },
+    { name = "tigrbl-auth-protocol-oid4vci" },
+    { name = "tigrbl-auth-protocol-oid4vp" },
     { name = "tigrbl-auth-protocol-oidc" },
     { name = "tigrbl-auth-protocol-oidc-backchannel-replay-store" },
     { name = "tigrbl-auth-protocol-rp" },
@@ -2841,8 +2885,11 @@ requires-dist = [
     { name = "tigrbl-audience-claim-concrete", editable = "pkgs/10-concrete/tigrbl-audience-claim-concrete" },
     { name = "tigrbl-auth", editable = "pkgs/70-facade/tigrbl-auth" },
     { name = "tigrbl-auth-plugin", editable = "pkgs/60-runtime/tigrbl-auth-plugin" },
+    { name = "tigrbl-auth-protocol-authzen", editable = "pkgs/50-protocols/tigrbl-auth-protocol-authzen" },
     { name = "tigrbl-auth-protocol-jwt", editable = "pkgs/50-protocols/tigrbl-auth-protocol-jwt" },
     { name = "tigrbl-auth-protocol-oauth", editable = "pkgs/50-protocols/tigrbl-auth-protocol-oauth" },
+    { name = "tigrbl-auth-protocol-oid4vci", editable = "pkgs/50-protocols/tigrbl-auth-protocol-oid4vci" },
+    { name = "tigrbl-auth-protocol-oid4vp", editable = "pkgs/50-protocols/tigrbl-auth-protocol-oid4vp" },
     { name = "tigrbl-auth-protocol-oidc", editable = "pkgs/50-protocols/tigrbl-auth-protocol-oidc" },
     { name = "tigrbl-auth-protocol-oidc-backchannel-replay-store", editable = "pkgs/deprecated/tigrbl-auth-protocol-oidc-backchannel-replay-store" },
     { name = "tigrbl-auth-protocol-rp", editable = "pkgs/50-protocols/tigrbl-auth-protocol-rp" },

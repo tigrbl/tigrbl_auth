@@ -195,6 +195,9 @@ dependencies = [
     "tigrbl-auth==0.4.0.dev2",
     "tigrbl-auth-protocol-oauth==0.4.0.dev2",
     "tigrbl-auth-protocol-oidc==0.4.0.dev2",
+    "tigrbl-auth-protocol-oid4vci==0.4.0.dev2",
+    "tigrbl-auth-protocol-oid4vp==0.4.0.dev2",
+    "tigrbl-auth-protocol-authzen==0.4.0.dev2",
     "tigrbl-auth-protocol-rp==0.4.0.dev2",
     "tigrbl-authn-credentials==0.4.0.dev2",
     "tigrbl-digital-credential-issuance==0.4.0.dev2",
@@ -400,6 +403,9 @@ tigrbl-set-concrete = { path = "pkgs/10-concrete/tigrbl-set-concrete", editable 
 tigrbl-oidc-claims-concrete = { path = "pkgs/10-concrete/tigrbl-oidc-claims-concrete", editable = true }
 tigrbl-oidc-subject-strategy = { path = "pkgs/10-concrete/tigrbl-oidc-subject-strategy", editable = true }
 tigrbl-auth-protocol-oidc = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oidc", editable = true }
+tigrbl-auth-protocol-oid4vci = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oid4vci", editable = true }
+tigrbl-auth-protocol-oid4vp = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oid4vp", editable = true }
+tigrbl-auth-protocol-authzen = { path = "pkgs/50-protocols/tigrbl-auth-protocol-authzen", editable = true }
 tigrbl-auth-protocol-rp = { path = "pkgs/50-protocols/tigrbl-auth-protocol-rp", editable = true }
 tigrbl-authn-credentials = { path = "pkgs/40-capabilities/tigrbl-authn-credentials", editable = true }
 tigrbl-digital-credential-issuance = { path = "pkgs/40-capabilities/tigrbl-digital-credential-issuance", editable = true }
