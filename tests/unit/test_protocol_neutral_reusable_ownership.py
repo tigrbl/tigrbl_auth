@@ -11,10 +11,18 @@ from tigrbl_oidc_subject_strategy import PairwiseSubjectStrategy
 
 
 def test_protocol_packages_compose_protocol_neutral_concretes() -> None:
-    assert ScopeSetMatcher.__module__ == "tigrbl_authorization_scope_set_matcher_concrete"
-    assert LocalClaimsProvider.__module__ == "tigrbl_local_claims_provider_concrete"
-    assert PublicSubjectIdentifierStrategy.__module__ == "tigrbl_public_subject_identifier_concrete"
-    assert PairwiseSubjectIdentifierStrategy.__module__ == "tigrbl_pairwise_subject_identifier_concrete"
+    assert (
+        ScopeSetMatcher.__module__ == "tigrbl_authorization_scope_set_matcher_concrete"
+    )
+    assert LocalClaimsProvider.__module__ == "tigrbl_security_claims_provider_local"
+    assert (
+        PublicSubjectIdentifierStrategy.__module__
+        == "tigrbl_public_subject_identifier_concrete"
+    )
+    assert (
+        PairwiseSubjectIdentifierStrategy.__module__
+        == "tigrbl_pairwise_subject_identifier_concrete"
+    )
     assert parse_verified_claims.__module__ == "tigrbl_identity_assurance_concrete"
 
 

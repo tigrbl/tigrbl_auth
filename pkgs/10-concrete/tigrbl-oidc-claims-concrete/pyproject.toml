@@ -1,14 +1,11 @@
 [project]
 name = "tigrbl-oidc-claims-concrete"
 version = "0.4.0.dev2"
-description = "Concrete local OIDC claims provider for the Tigrbl auth package suite."
+description = "Deprecated compatibility facade for protocol-neutral claim components."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
 dependencies = [
-    "tigrbl-identity-contracts==0.4.0.dev2",
-    "tigrbl-oidc-bases==0.4.0.dev2",
-    "tigrbl-local-claims-provider-concrete==0.4.0.dev2",
     "tigrbl-eap-acr-concrete==0.4.0.dev2",
     "tigrbl-identity-assurance-concrete==0.4.0.dev2",
 ]

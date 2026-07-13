@@ -3,6 +3,7 @@ import json
 from dataclasses import dataclass
 from typing import Mapping
 
+from tigrbl_digital_credential_bases import CredentialFormatBase
 from tigrbl_sd_jwt_concrete import SdJwtSerialization, parse_sd_jwt_serialization
 
 DRAFT_REVISION = "draft-ietf-oauth-sd-jwt-vc-17"
@@ -23,7 +24,8 @@ def _decode_object(segment: str) -> Mapping[str, object]:
 
 
 @dataclass(frozen=True, slots=True)
-class SdJwtVc:
+class SdJwtVc(CredentialFormatBase):
+    format_identifier = "dc+sd-jwt"
     serialization: SdJwtSerialization
     header: Mapping[str, object]
     claims: Mapping[str, object]

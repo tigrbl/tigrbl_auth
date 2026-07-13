@@ -14,8 +14,6 @@ STATUS: Final[str] = "frontchannel-logout-fanout-runtime"
 _DEFAULT_MAX_RETRIES: Final[int] = 3
 
 
-
-
 OWNER = StandardOwner(
     label="OIDC Front-Channel Logout",
     title="OpenID Connect Front-Channel Logout",
@@ -47,7 +45,11 @@ def _persistence():
     async def mark_logout_channel_async(logout_id, **kwargs):
         async with storage_session() as db:
             return await LogoutState.handlers.mark_channel.core(
-                {"path_params": {"id": logout_id}, "payload": {"logout_id": logout_id, **kwargs}, "db": db}
+                {
+                    "path_params": {"id": logout_id},
+                    "payload": {"logout_id": logout_id, **kwargs},
+                    "db": db,
+                }
             )
 
     return SimpleNamespace(
@@ -76,7 +78,9 @@ async def build_frontchannel_descriptor(
     if include_sid:
         params["sid"] = sid
     joiner = "&" if "?" in str(logout_uri) else "?"
-    redirect_uri = f"{logout_uri}{joiner}{urlencode(params)}" if params else str(logout_uri)
+    redirect_uri = (
+        f"{logout_uri}{joiner}{urlencode(params)}" if params else str(logout_uri)
+    )
     return {
         "client_id": str(client_id),
         "logout_uri": str(logout_uri),
@@ -97,10 +101,14 @@ async def build_frontchannel_descriptor(
 
 
 async def mark_frontchannel_complete(logout_id: UUID):
-    return await _persistence().mark_logout_channel_async(logout_id, channel="frontchannel", status="complete")
+    return await _persistence().mark_logout_channel_async(
+        logout_id, channel="frontchannel", status="complete"
+    )
 
 
-async def mark_frontchannel_failed(logout_id: UUID, *, error: str | None = None, retry_after_seconds: int | None = None):
+async def mark_frontchannel_failed(
+    logout_id: UUID, *, error: str | None = None, retry_after_seconds: int | None = None
+):
     return await _persistence().mark_logout_channel_async(
         logout_id,
         channel="frontchannel",
@@ -122,7 +130,9 @@ def validate_frontchannel_request(
         raise ValueError("frontchannel issuer mismatch")
     if expected_sid is not None and str(payload.get("sid") or "") != str(expected_sid):
         raise ValueError("frontchannel sid mismatch")
-    if expected_logout_id is not None and str(payload.get("logout_id") or "") != str(expected_logout_id):
+    if expected_logout_id is not None and str(payload.get("logout_id") or "") != str(
+        expected_logout_id
+    ):
         raise ValueError("frontchannel logout_id mismatch")
     return payload
 

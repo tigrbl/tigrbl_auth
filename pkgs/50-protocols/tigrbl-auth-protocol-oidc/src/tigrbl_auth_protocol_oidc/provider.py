@@ -73,7 +73,9 @@ class OidcProviderRuntime:
     def sessions(self) -> Mapping[str, OidcSession]:
         return dict(self._sessions)
 
-    def render_hosted_login(self, request: HostedLoginRequest, branding: TenantBranding) -> HostedLoginPage:
+    def render_hosted_login(
+        self, request: HostedLoginRequest, branding: TenantBranding
+    ) -> HostedLoginPage:
         self._require_redirect_uri(request.client_id, request.redirect_uri)
         if request.tenant_id != branding.tenant_id:
             raise OidcProviderError("tenant branding mismatch")
@@ -132,17 +134,26 @@ class OidcProviderRuntime:
 
     def build_logout_plan(self, request: LogoutRequest) -> LogoutPlan:
         session = self.require_active_session(request.session_id)
-        if session.tenant_id != request.tenant_id or session.client_id != request.client_id:
+        if (
+            session.tenant_id != request.tenant_id
+            or session.client_id != request.client_id
+        ):
             raise OidcProviderError("logout request does not match OIDC session")
         if request.post_logout_redirect_uri is not None:
-            self._require_redirect_uri(request.client_id, request.post_logout_redirect_uri)
+            self._require_redirect_uri(
+                request.client_id, request.post_logout_redirect_uri
+            )
         logged_out = replace(session, status=OidcSessionStatus.LOGGED_OUT)
         self._sessions[session.session_id] = logged_out
         return LogoutPlan(
             session_id=session.session_id,
             status=logged_out.status,
-            frontchannel_notifications=tuple(self.frontchannel_logout_uris.get(request.client_id, ())),
-            backchannel_notifications=tuple(self.backchannel_logout_uris.get(request.client_id, ())),
+            frontchannel_notifications=tuple(
+                self.frontchannel_logout_uris.get(request.client_id, ())
+            ),
+            backchannel_notifications=tuple(
+                self.backchannel_logout_uris.get(request.client_id, ())
+            ),
             redirect_uri=request.post_logout_redirect_uri,
             state=request.state,
         )

@@ -33,7 +33,9 @@ OWNER = StandardOwner(
 
 
 def _persistence():
-    from tigrbl_identity_storage.tables.backchannel_logout_replay import BackchannelLogoutReplay
+    from tigrbl_identity_storage.tables.backchannel_logout_replay import (
+        BackchannelLogoutReplay,
+    )
     from tigrbl_identity_storage.tables.client_registration import ClientRegistration
     from tigrbl_identity_storage.tables.engine import storage_session
     from tigrbl_identity_storage.tables.logout_state import LogoutState
@@ -52,10 +54,16 @@ def _persistence():
     async def mark_logout_channel_async(logout_id, **kwargs):
         async with storage_session() as db:
             return await LogoutState.handlers.mark_channel.core(
-                {"path_params": {"id": logout_id}, "payload": {"logout_id": logout_id, **kwargs}, "db": db}
+                {
+                    "path_params": {"id": logout_id},
+                    "payload": {"logout_id": logout_id, **kwargs},
+                    "db": db,
+                }
             )
 
-    async def register_backchannel_replay_async(*, jti, issuer, client_id, expires_at, now):
+    async def register_backchannel_replay_async(
+        *, jti, issuer, client_id, expires_at, now
+    ):
         async with storage_session() as db:
             return await BackchannelLogoutReplay.handlers.register.core(
                 {
@@ -95,11 +103,21 @@ def _encode_checkpoint_logout_token(claims: dict[str, Any]) -> str:
     header = {"alg": "HS256", "typ": "logout+jwt"}
     signing_input = ".".join(
         (
-            _b64url(json.dumps(header, separators=(",", ":"), sort_keys=True).encode("utf-8")),
-            _b64url(json.dumps(claims, separators=(",", ":"), sort_keys=True).encode("utf-8")),
+            _b64url(
+                json.dumps(header, separators=(",", ":"), sort_keys=True).encode(
+                    "utf-8"
+                )
+            ),
+            _b64url(
+                json.dumps(claims, separators=(",", ":"), sort_keys=True).encode(
+                    "utf-8"
+                )
+            ),
         )
     )
-    secret = str(getattr(settings, "jwt_secret", "capability-backchannel-secret")).encode("utf-8")
+    secret = str(
+        getattr(settings, "jwt_secret", "capability-backchannel-secret")
+    ).encode("utf-8")
     signature = hmac.new(secret, signing_input.encode("ascii"), hashlib.sha256).digest()
     return f"{signing_input}.{_b64url(signature)}"
 
@@ -109,7 +127,9 @@ def _decode_checkpoint_logout_token(token: str) -> dict[str, Any]:
     if len(parts) != 3:
         raise ValueError("malformed logout token")
     signing_input = f"{parts[0]}.{parts[1]}"
-    secret = str(getattr(settings, "jwt_secret", "capability-backchannel-secret")).encode("utf-8")
+    secret = str(
+        getattr(settings, "jwt_secret", "capability-backchannel-secret")
+    ).encode("utf-8")
     expected = hmac.new(secret, signing_input.encode("ascii"), hashlib.sha256).digest()
     if not hmac.compare_digest(expected, _b64url_decode(parts[2])):
         raise ValueError("logout token signature mismatch")
@@ -119,7 +139,9 @@ def _decode_checkpoint_logout_token(token: str) -> dict[str, Any]:
     return payload
 
 
-async def _mint_logout_token(*, claims: dict[str, Any], issuer: str, audience: str) -> str:
+async def _mint_logout_token(
+    *, claims: dict[str, Any], issuer: str, audience: str
+) -> str:
     """Mint a self-contained logout token.
 
     Back-channel logout validation must remain functional in dependency-complete
@@ -131,7 +153,14 @@ async def _mint_logout_token(*, claims: dict[str, Any], issuer: str, audience: s
     return _encode_checkpoint_logout_token(claims)
 
 
-async def build_backchannel_descriptor(*, client_id: UUID, sid: str, sub: str, iss: str | None = None, logout_id: UUID | None = None) -> dict[str, object] | None:
+async def build_backchannel_descriptor(
+    *,
+    client_id: UUID,
+    sid: str,
+    sub: str,
+    iss: str | None = None,
+    logout_id: UUID | None = None,
+) -> dict[str, object] | None:
     registration = await _persistence().get_client_registration_async(client_id)
     metadata = dict(getattr(registration, "registration_metadata", {}) or {})
     logout_uri = metadata.get("backchannel_logout_uri")
@@ -149,7 +178,9 @@ async def build_backchannel_descriptor(*, client_id: UUID, sid: str, sub: str, i
     }
     if include_sid:
         claims["sid"] = sid
-    logout_token = await _mint_logout_token(claims=claims, issuer=issuer, audience=str(client_id))
+    logout_token = await _mint_logout_token(
+        claims=claims, issuer=issuer, audience=str(client_id)
+    )
     return {
         "client_id": str(client_id),
         "logout_uri": str(logout_uri),
@@ -181,7 +212,12 @@ async def validate_backchannel_logout_token(
         claims = _decode_checkpoint_logout_token(logout_token)
     except Exception:
         jwt_coder = _jwt_coder_cls().default()
-        claims = await jwt_coder.async_decode(logout_token, verify_exp=True, audience=str(client_id), issuer=effective_issuer)
+        claims = await jwt_coder.async_decode(
+            logout_token,
+            verify_exp=True,
+            audience=str(client_id),
+            issuer=effective_issuer,
+        )
     claims = dict(claims)
     if claims.get("iss") not in {None, effective_issuer}:
         raise ValueError("logout token issuer mismatch")
@@ -203,12 +239,19 @@ async def validate_backchannel_logout_token(
         if exp_dt <= current:
             raise ValueError("logout token expired")
     iat = claims.get("iat")
-    if iat is not None and abs(int(current.timestamp()) - int(iat)) > _ALLOWED_CLOCK_SKEW + 300:
+    if (
+        iat is not None
+        and abs(int(current.timestamp()) - int(iat)) > _ALLOWED_CLOCK_SKEW + 300
+    ):
         raise ValueError("logout token stale")
     jti = str(claims.get("jti") or "").strip()
     if not jti:
         raise ValueError("logout token missing jti")
-    expiry = datetime.fromtimestamp(int(exp), tz=timezone.utc) if exp is not None else current + timedelta(minutes=5)
+    expiry = (
+        datetime.fromtimestamp(int(exp), tz=timezone.utc)
+        if exp is not None
+        else current + timedelta(minutes=5)
+    )
     await _persistence().register_backchannel_replay_async(
         jti=jti,
         issuer=effective_issuer,
@@ -220,10 +263,14 @@ async def validate_backchannel_logout_token(
 
 
 async def mark_backchannel_complete(logout_id: UUID):
-    return await _persistence().mark_logout_channel_async(logout_id, channel="backchannel", status="complete")
+    return await _persistence().mark_logout_channel_async(
+        logout_id, channel="backchannel", status="complete"
+    )
 
 
-async def mark_backchannel_failed(logout_id: UUID, *, error: str | None = None, retry_after_seconds: int | None = None):
+async def mark_backchannel_failed(
+    logout_id: UUID, *, error: str | None = None, retry_after_seconds: int | None = None
+):
     return await _persistence().mark_logout_channel_async(
         logout_id,
         channel="backchannel",

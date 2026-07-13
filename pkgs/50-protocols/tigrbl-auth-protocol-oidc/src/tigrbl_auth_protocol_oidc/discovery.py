@@ -27,8 +27,13 @@ except Exception:  # pragma: no cover - dependency-light fallback
 
     from tigrbl_identity_runtime.deployment import resolve_deployment
     from tigrbl_identity_runtime.settings import settings
-    from tigrbl_auth_protocol_oidc.standards.discovery_metadata import build_openid_config
-    from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER, JWKS_PATH
+    from tigrbl_auth_protocol_oidc.standards.discovery_metadata import (
+        build_openid_config,
+    )
+    from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import (
+        ISSUER,
+        JWKS_PATH,
+    )
 
     api = None
     router = None
@@ -39,7 +44,9 @@ except Exception:  # pragma: no cover - dependency-light fallback
         profile: str | None = None,
         flag_overrides: dict[str, Any] | None = None,
     ) -> str:
-        deployment = resolve_deployment(settings_obj or settings, profile=profile, flag_overrides=flag_overrides)
+        deployment = resolve_deployment(
+            settings_obj or settings, profile=profile, flag_overrides=flag_overrides
+        )
         return json.dumps(deployment.to_manifest(), sort_keys=True)
 
     def _build_openid_config(
@@ -48,7 +55,9 @@ except Exception:  # pragma: no cover - dependency-light fallback
         profile: str | None = None,
         flag_overrides: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
-        return build_openid_config(settings_obj or settings, profile=profile, flag_overrides=flag_overrides)
+        return build_openid_config(
+            settings_obj or settings, profile=profile, flag_overrides=flag_overrides
+        )
 
     @lru_cache(maxsize=8)
     def _cached_openid_config(sig: str) -> dict[str, Any]:
@@ -59,6 +68,7 @@ except Exception:  # pragma: no cover - dependency-light fallback
 
     def include_oidc_discovery(app) -> None:
         return None
+
 
 __all__ = [
     "api",

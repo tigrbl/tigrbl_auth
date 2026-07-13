@@ -198,9 +198,13 @@ async def rotate_rsa_jwt_key() -> str:
         if not isinstance(item, dict):
             continue
         prev_id = str(item.get("kid") or "")
-        if prev_id and all(str(cached.get("kid")) != prev_id for cached in _rotation_jwks_cache):
+        if prev_id and all(
+            str(cached.get("kid")) != prev_id for cached in _rotation_jwks_cache
+        ):
             _rotation_jwks_cache.append(item)
-    if previous_kid and all(str(cached.get("kid")) != previous_kid for cached in _rotation_jwks_cache):
+    if previous_kid and all(
+        str(cached.get("kid")) != previous_kid for cached in _rotation_jwks_cache
+    ):
         try:
             previous_jwk = await kp.get_public_jwk(previous_kid)
         except Exception:
@@ -220,7 +224,9 @@ async def rotate_rsa_jwt_key() -> str:
     global _service_cache
     _service_cache = None
     try:  # refresh discovery metadata if available
-        from tigrbl_auth_protocol_oidc.standards.discovery import refresh_discovery_cache
+        from tigrbl_auth_protocol_oidc.standards.discovery import (
+            refresh_discovery_cache,
+        )
 
         refresh_discovery_cache()
     except Exception:  # pragma: no cover - best effort

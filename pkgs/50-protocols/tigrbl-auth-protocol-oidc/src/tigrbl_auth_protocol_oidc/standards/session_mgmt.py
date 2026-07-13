@@ -21,7 +21,10 @@ from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from urllib.parse import urlparse
 from uuid import UUID
 
-from tigrbl_identity_runtime.deployment import deployment_from_request, resolve_deployment
+from tigrbl_identity_runtime.deployment import (
+    deployment_from_request,
+    resolve_deployment,
+)
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_runtime.http_standards.cookies import (
     extract_session_cookie,
@@ -32,8 +35,6 @@ from tigrbl_identity_runtime.http_standards.cookies import (
 )
 
 STATUS: Final[str] = "browser-session-runtime"
-
-
 
 
 OWNER = StandardOwner(
@@ -98,7 +99,14 @@ def session_client_origin(redirect_uri: str | None) -> str:
     return _origin(redirect_uri)
 
 
-def compute_session_state(*, client_id: str, redirect_uri: str, session_id: UUID | str, salt: str, issuer: str | None = None) -> str:
+def compute_session_state(
+    *,
+    client_id: str,
+    redirect_uri: str,
+    session_id: UUID | str,
+    salt: str,
+    issuer: str | None = None,
+) -> str:
     origin = _origin(redirect_uri)
     payload = f"{client_id} {origin} {session_id} {salt} {issuer or settings.issuer}"
     return f"{sha256(payload.encode('utf-8')).hexdigest()}.{salt}"
@@ -183,7 +191,14 @@ def validate_session_state(
     )
 
 
-async def create_browser_session(*, user_id: UUID, tenant_id: UUID, username: str, client_id: UUID | None = None, expires_at: datetime | None = None):
+async def create_browser_session(
+    *,
+    user_id: UUID,
+    tenant_id: UUID,
+    username: str,
+    client_id: UUID | None = None,
+    expires_at: datetime | None = None,
+):
     persistence = _persistence()
     secret = new_session_cookie_secret()
     salt = new_session_state_salt()
@@ -200,7 +215,11 @@ async def create_browser_session(*, user_id: UUID, tenant_id: UUID, username: st
 
 
 async def resolve_browser_session(request, *, deployment=None):
-    deployment = deployment if deployment is not None else deployment_from_request(request, settings)
+    deployment = (
+        deployment
+        if deployment is not None
+        else deployment_from_request(request, settings)
+    )
     if not deployment.flag_enabled("enable_oidc_session_management"):
         return None
     parsed = parse_session_cookie_value(extract_session_cookie(request))
@@ -211,14 +230,18 @@ async def resolve_browser_session(request, *, deployment=None):
     if row is None:
         return None
     if parsed.secret:
-        if not row.cookie_secret_hash or row.cookie_secret_hash != hash_cookie_secret(parsed.secret):
+        if not row.cookie_secret_hash or row.cookie_secret_hash != hash_cookie_secret(
+            parsed.secret
+        ):
             return None
     await persistence.touch_session_async(row.id)
     return row
 
 
 async def bind_browser_session_client(session_id: UUID, *, client_id: UUID | None):
-    return await _persistence().bind_session_client_async(session_id, client_id=client_id)
+    return await _persistence().bind_session_client_async(
+        session_id, client_id=client_id
+    )
 
 
 async def maybe_rotate_browser_session_cookie(session_row):
@@ -226,21 +249,32 @@ async def maybe_rotate_browser_session_cookie(session_row):
         return None
     renewal_seconds = max(int(settings.session_cookie_renewal_seconds), 60)
     now = datetime.now(timezone.utc)
-    rotated_at = _utc(getattr(session_row, 'cookie_rotated_at', None)) or _utc(getattr(session_row, 'cookie_issued_at', None))
+    rotated_at = _utc(getattr(session_row, "cookie_rotated_at", None)) or _utc(
+        getattr(session_row, "cookie_issued_at", None)
+    )
     if rotated_at is None or (now - rotated_at).total_seconds() >= renewal_seconds:
         secret = new_session_cookie_secret()
-        await _persistence().rotate_session_cookie_secret_async(session_row.id, cookie_secret_hash=hash_cookie_secret(secret))
+        await _persistence().rotate_session_cookie_secret_async(
+            session_row.id, cookie_secret_hash=hash_cookie_secret(secret)
+        )
         return secret
     return None
 
 
-def session_state_for_client(session_row, *, client_id: str, redirect_uri: str, deployment=None, issuer: str | None = None) -> str | None:
+def session_state_for_client(
+    session_row,
+    *,
+    client_id: str,
+    redirect_uri: str,
+    deployment=None,
+    issuer: str | None = None,
+) -> str | None:
     if session_row is None:
         return None
     deployment = deployment if deployment is not None else resolve_deployment(settings)
     if not deployment.flag_enabled("enable_oidc_session_management"):
         return None
-    salt = getattr(session_row, 'session_state_salt', None) or new_session_state_salt()
+    salt = getattr(session_row, "session_state_salt", None) or new_session_state_salt()
     return compute_session_state(
         client_id=client_id,
         redirect_uri=redirect_uri,
@@ -272,7 +306,7 @@ def validate_session_state_for_client(
         client_id=client_id,
         redirect_uri=redirect_uri,
         session_id=session_row.id,
-        salt=getattr(session_row, 'session_state_salt', None),
+        salt=getattr(session_row, "session_state_salt", None),
         issuer=issuer or getattr(deployment, "issuer", None),
     )
 
@@ -287,7 +321,11 @@ async def terminate_browser_session(session_id: UUID, **kwargs):
 
 def describe(*, request=None, deployment=None) -> dict[str, object]:
     if deployment is None:
-        deployment = deployment_from_request(request, settings) if request is not None else resolve_deployment(settings)
+        deployment = (
+            deployment_from_request(request, settings)
+            if request is not None
+            else resolve_deployment(settings)
+        )
     return describe_owner(
         OWNER,
         cookie_name=settings.session_cookie_name,
@@ -297,7 +335,9 @@ def describe(*, request=None, deployment=None) -> dict[str, object]:
         session_state_origin_bound=True,
         auth_code_linkage_supported=True,
         check_session_iframe_claimed=False,
-        cross_site_logout_enabled=deployment.flag_enabled("enable_oidc_frontchannel_logout"),
+        cross_site_logout_enabled=deployment.flag_enabled(
+            "enable_oidc_frontchannel_logout"
+        ),
     )
 
 

@@ -1,20 +1,40 @@
 from __future__ import annotations
 
-from tigrbl_identity_contracts.oidc import ClaimsRequest, ClaimsResult
-from tigrbl_oidc_claims_concrete import LocalClaimsProvider
+from typing import Any, Mapping
+
+from tigrbl_identity_contracts.claims import ClaimsRequest, ClaimsResult
+from tigrbl_identity_claims_bases import ClaimsProviderBase
 from tigrbl_security_trust_contracts import CapabilityMap
-from tigrbl_security_trust_domain_bases import ClaimsProviderBase
 
 
-class LocalSecurityClaimsProvider(ClaimsProviderBase):
-    def __init__(self, provider: LocalClaimsProvider | None = None) -> None:
-        self._provider = provider or LocalClaimsProvider()
+class LocalClaimsProvider(ClaimsProviderBase):
+    """Resolve claims from caller-supplied local identity records.
 
+    This is environment-backed behavior and therefore belongs to layer 20.
+    It deliberately emits ordinary claims only; verified claims require an
+    assurance provider with evidence and framework metadata.
+    """
+
+    async def claims(self, request: ClaimsRequest, /) -> ClaimsResult:
+        source: Mapping[str, Any] = {}
+        if request.user is not None:
+            source = dict(getattr(request.user, "model_dump", lambda: {})())
+        claims: dict[str, Any] = {"sub": request.subject}
+        for descriptor in request.requested_claims:
+            if descriptor.name in source:
+                claims[descriptor.name] = source[descriptor.name]
+        if "profile" in request.scopes:
+            for field in ("name", "given_name", "family_name", "preferred_username"):
+                if field in source:
+                    claims.setdefault(field, source[field])
+        if "email" in request.scopes and "email" in source:
+            claims.setdefault("email", source["email"])
+        return ClaimsResult(claims=claims)
+
+
+class LocalSecurityClaimsProvider(LocalClaimsProvider):
     def supports(self) -> CapabilityMap:
         return CapabilityMap(ops={"claims": ("local",)}, features=("oidc-claims",))
 
-    async def claims(self, request: ClaimsRequest) -> ClaimsResult:
-        return await self._provider.claims(request)
 
-
-__all__ = ["LocalSecurityClaimsProvider"]
+__all__ = ["LocalClaimsProvider", "LocalSecurityClaimsProvider"]

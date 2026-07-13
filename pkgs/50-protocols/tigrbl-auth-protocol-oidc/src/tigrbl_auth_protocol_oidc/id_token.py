@@ -38,7 +38,9 @@ if _CANONICAL is not None:  # pragma: no cover - covered indirectly in tests
     def _sync_to_canonical() -> None:
         root_facade = sys.modules.get("tigrbl_auth.oidc_id_token")
         root_path = getattr(root_facade, "_RSA_KEY_PATH", None)
-        next_path = root_path or globals().get("_RSA_KEY_PATH", _CANONICAL._RSA_KEY_PATH)
+        next_path = root_path or globals().get(
+            "_RSA_KEY_PATH", _CANONICAL._RSA_KEY_PATH
+        )
         if next_path != _CANONICAL._RSA_KEY_PATH:
             _CANONICAL._RSA_KEY_PATH = next_path
             _CANONICAL._service_cache = None
@@ -78,7 +80,9 @@ if _CANONICAL is not None:  # pragma: no cover - covered indirectly in tests
     ) -> dict[str, Any]:
         _sync_to_canonical()
         try:
-            return await _CANONICAL.verify_id_token(token, issuer=issuer, audience=audience)
+            return await _CANONICAL.verify_id_token(
+                token, issuer=issuer, audience=audience
+            )
         finally:
             _sync_from_canonical()
 
@@ -103,7 +107,9 @@ if _CANONICAL is not None:  # pragma: no cover - covered indirectly in tests
             _sync_from_canonical()
 
 else:  # pragma: no cover - dependency-light fallback
-    _RSA_KEY_PATH = pathlib.Path(os.getenv("JWT_RS256_KEY_PATH", "runtime_secrets/jwt_rs256.kid"))
+    _RSA_KEY_PATH = pathlib.Path(
+        os.getenv("JWT_RS256_KEY_PATH", "runtime_secrets/jwt_rs256.kid")
+    )
     _service_cache = None
 
     @lru_cache(maxsize=1)
@@ -137,16 +143,26 @@ else:  # pragma: no cover - dependency-light fallback
             claims.update(extra)  # type: ignore[arg-type]
         token = encode_jwt(**claims)
         if settings.enable_id_token_encryption:
-            token = await encrypt_jwe(token, {"kty": "oct", "k": settings.id_token_encryption_key.encode()})
+            token = await encrypt_jwe(
+                token, {"kty": "oct", "k": settings.id_token_encryption_key.encode()}
+            )
         return token
 
-    async def verify_id_token(token: str, *, issuer: str, audience: Iterable[str] | str) -> dict[str, Any]:
+    async def verify_id_token(
+        token: str, *, issuer: str, audience: Iterable[str] | str
+    ) -> dict[str, Any]:
         if settings.enable_id_token_encryption:
-            token = await decrypt_jwe(token, {"kty": "oct", "k": settings.id_token_encryption_key.encode()})
+            token = await decrypt_jwe(
+                token, {"kty": "oct", "k": settings.id_token_encryption_key.encode()}
+            )
         claims = decode_jwt(token)
         if claims.get("iss") != issuer:
             raise InvalidTokenError("invalid issuer")
-        expected_audiences = {audience} if isinstance(audience, str) else {str(item) for item in audience}
+        expected_audiences = (
+            {audience}
+            if isinstance(audience, str)
+            else {str(item) for item in audience}
+        )
         aud_claim = claims.get("aud")
         if isinstance(aud_claim, str):
             actual_audiences = {aud_claim}
@@ -162,7 +178,11 @@ else:  # pragma: no cover - dependency-light fallback
         return None
 
     async def ensure_rsa_jwt_key() -> tuple[str, bytes, bytes]:
-        kid = _RSA_KEY_PATH.read_text().strip() if _RSA_KEY_PATH.exists() else "checkpoint-hs256"
+        kid = (
+            _RSA_KEY_PATH.read_text().strip()
+            if _RSA_KEY_PATH.exists()
+            else "checkpoint-hs256"
+        )
         material = settings.jwt_secret.encode("utf-8")
         return kid, material, material
 

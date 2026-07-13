@@ -12,13 +12,17 @@ from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from urllib.parse import urlparse
 from uuid import UUID
 
-from tigrbl_identity_runtime.deployment import deployment_from_request, resolve_deployment
+from tigrbl_identity_runtime.deployment import (
+    deployment_from_request,
+    resolve_deployment,
+)
 from tigrbl_identity_runtime.settings import settings
 
 try:  # dependency-light import path for checkpoint evidence generation
     from http import HTTPStatus as status
     from tigrbl.runtime.status import HTTPException
 except Exception:  # pragma: no cover - exercised in dependency-light tests
+
     class _FallbackStatus:
         HTTP_400_BAD_REQUEST = 400
         HTTP_401_UNAUTHORIZED = 401
@@ -33,8 +37,6 @@ except Exception:  # pragma: no cover - exercised in dependency-light tests
     status = _FallbackStatus()
 
 STATUS: Final[str] = "rp-initiated-logout-runtime"
-
-
 
 
 OWNER = StandardOwner(
@@ -70,19 +72,29 @@ def _persistence():
 
     async def get_latest_logout_for_session_async(session_id):
         async with storage_session() as db:
-            return await LogoutState.handlers.latest_for_session.core({"payload": {"session_id": session_id}, "db": db})
+            return await LogoutState.handlers.latest_for_session.core(
+                {"payload": {"session_id": session_id}, "db": db}
+            )
 
     async def terminate_session_async(session_id, **kwargs):
         async with storage_session() as db:
-            session = await AuthSession.handlers.terminate.core({"path_params": {"id": session_id}, "payload": kwargs, "db": db})
+            session = await AuthSession.handlers.terminate.core(
+                {"path_params": {"id": session_id}, "payload": kwargs, "db": db}
+            )
             if session is None:
                 return None
-            return await LogoutState.handlers.ensure_for_session.core({"payload": {"session_id": session_id, **kwargs}, "db": db})
+            return await LogoutState.handlers.ensure_for_session.core(
+                {"payload": {"session_id": session_id, **kwargs}, "db": db}
+            )
 
     async def update_logout_metadata_async(logout_id, **kwargs):
         async with storage_session() as db:
             return await LogoutState.handlers.update_metadata.core(
-                {"path_params": {"id": logout_id}, "payload": {"logout_id": logout_id, **kwargs}, "db": db}
+                {
+                    "path_params": {"id": logout_id},
+                    "payload": {"logout_id": logout_id, **kwargs},
+                    "db": db,
+                }
             )
 
     return SimpleNamespace(
@@ -95,13 +107,17 @@ def _persistence():
 
 
 def _frontchannel_builder():
-    from tigrbl_auth_protocol_oidc.standards.frontchannel_logout import build_frontchannel_descriptor
+    from tigrbl_auth_protocol_oidc.standards.frontchannel_logout import (
+        build_frontchannel_descriptor,
+    )
 
     return build_frontchannel_descriptor
 
 
 def _backchannel_builder():
-    from tigrbl_auth_protocol_oidc.standards.backchannel_logout import build_backchannel_descriptor
+    from tigrbl_auth_protocol_oidc.standards.backchannel_logout import (
+        build_backchannel_descriptor,
+    )
 
     return build_backchannel_descriptor
 
@@ -123,7 +139,7 @@ def _normalized_uris(value: Any) -> list[str]:
 
 
 def _normalize_uuid(value: Any) -> UUID | None:
-    if value in {None, '', False}:
+    if value in {None, "", False}:
         return None
     if isinstance(value, UUID):
         return value
@@ -136,50 +152,71 @@ def _normalize_uuid(value: Any) -> UUID | None:
 def _audiences(claims: dict[str, Any] | None) -> list[str]:
     if not claims:
         return []
-    aud = claims.get('aud')
+    aud = claims.get("aud")
     if aud is None:
         return []
     if isinstance(aud, (list, tuple, set)):
-        return [str(item) for item in aud if item not in {None, ''}]
-    return [str(aud)] if aud not in {None, ''} else []
+        return [str(item) for item in aud if item not in {None, ""}]
+    return [str(aud)] if aud not in {None, ""} else []
 
 
 def _unsafe_decode_jwt_claims(token: str) -> dict[str, Any]:
     try:
-        parts = str(token).split('.')
+        parts = str(token).split(".")
         if len(parts) != 3:
             return {}
-        padded = parts[1] + '=' * (-len(parts[1]) % 4)
-        return dict(json.loads(base64.urlsafe_b64decode(padded).decode('utf-8')))
+        padded = parts[1] + "=" * (-len(parts[1]) % 4)
+        return dict(json.loads(base64.urlsafe_b64decode(padded).decode("utf-8")))
     except Exception:
         return {}
 
 
 def _require_https_if_present(uri: str) -> None:
     parsed = urlparse(uri)
-    if parsed.scheme != 'https':
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, 'post_logout_redirect_uri must use https')
+    if parsed.scheme != "https":
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST, "post_logout_redirect_uri must use https"
+        )
 
 
 def assert_logout_session_active(session_row) -> None:
     if session_row is None:
         return None
-    state = str(getattr(session_row, 'session_state', 'active') or 'active').lower()
-    if getattr(session_row, 'ended_at', None) is not None or state in {'terminated', 'expired', 'ended', 'revoked'}:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, {'error': 'expired_session'})
+    state = str(getattr(session_row, "session_state", "active") or "active").lower()
+    if getattr(session_row, "ended_at", None) is not None or state in {
+        "terminated",
+        "expired",
+        "ended",
+        "revoked",
+    }:
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "expired_session"})
 
 
-async def validate_post_logout_redirect_uri(*, client_id: UUID | None, post_logout_redirect_uri: str | None) -> str | None:
+async def validate_post_logout_redirect_uri(
+    *, client_id: UUID | None, post_logout_redirect_uri: str | None
+) -> str | None:
     if not post_logout_redirect_uri:
         return None
     _require_https_if_present(post_logout_redirect_uri)
     if client_id is None:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, {'error': 'invalid_client', 'error_description': 'client_id required when post_logout_redirect_uri is supplied'})
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST,
+            {
+                "error": "invalid_client",
+                "error_description": "client_id required when post_logout_redirect_uri is supplied",
+            },
+        )
     registration = await _persistence().get_client_registration_async(client_id)
-    metadata = dict(getattr(registration, 'registration_metadata', {}) or {})
-    allowed = _normalized_uris(metadata.get('post_logout_redirect_uris'))
+    metadata = dict(getattr(registration, "registration_metadata", {}) or {})
+    allowed = _normalized_uris(metadata.get("post_logout_redirect_uris"))
     if post_logout_redirect_uri not in allowed:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, {'error': 'invalid_request', 'error_description': 'unregistered post_logout_redirect_uri'})
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST,
+            {
+                "error": "invalid_request",
+                "error_description": "unregistered post_logout_redirect_uri",
+            },
+        )
     return post_logout_redirect_uri
 
 
@@ -202,36 +239,99 @@ async def validate_id_token_hint(
                 effective_client_id = parsed
                 break
     if effective_client_id is None:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, {'error': 'invalid_id_token_hint', 'error_description': 'unable to derive client_id from id_token_hint'})
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST,
+            {
+                "error": "invalid_id_token_hint",
+                "error_description": "unable to derive client_id from id_token_hint",
+            },
+        )
     try:
-        claims = dict(await _verify_id_token_hint(id_token_hint, issuer=effective_issuer, audience=str(effective_client_id)))
+        claims = dict(
+            await _verify_id_token_hint(
+                id_token_hint,
+                issuer=effective_issuer,
+                audience=str(effective_client_id),
+            )
+        )
     except Exception as exc:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, {'error': 'invalid_id_token_hint'}) from exc
-    if str(claims.get('iss') or '') != effective_issuer:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, {'error': 'invalid_id_token_hint', 'error_description': 'issuer mismatch'})
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST, {"error": "invalid_id_token_hint"}
+        ) from exc
+    if str(claims.get("iss") or "") != effective_issuer:
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST,
+            {"error": "invalid_id_token_hint", "error_description": "issuer mismatch"},
+        )
     audiences = _audiences(claims)
     if str(effective_client_id) not in audiences:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, {'error': 'invalid_id_token_hint', 'error_description': 'audience mismatch'})
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST,
+            {
+                "error": "invalid_id_token_hint",
+                "error_description": "audience mismatch",
+            },
+        )
     expected_session_id = _normalize_uuid(session_id)
     if expected_session_id is not None:
-        sid = _normalize_uuid(claims.get('sid'))
+        sid = _normalize_uuid(claims.get("sid"))
         if sid is not None and sid != expected_session_id:
-            raise HTTPException(status.HTTP_400_BAD_REQUEST, {'error': 'invalid_id_token_hint', 'error_description': 'sid mismatch'})
+            raise HTTPException(
+                status.HTTP_400_BAD_REQUEST,
+                {"error": "invalid_id_token_hint", "error_description": "sid mismatch"},
+            )
     return claims
 
 
-def resolve_logout_client_id(*, requested_client_id: UUID | str | None, session_row=None, hint_claims: dict[str, Any] | None = None) -> UUID | None:
+def resolve_logout_client_id(
+    *,
+    requested_client_id: UUID | str | None,
+    session_row=None,
+    hint_claims: dict[str, Any] | None = None,
+) -> UUID | None:
     requested = _normalize_uuid(requested_client_id)
-    session_client = _normalize_uuid(getattr(session_row, 'client_id', None)) if session_row is not None else None
-    hint_candidates = {_normalize_uuid(audience) for audience in _audiences(hint_claims)}
+    session_client = (
+        _normalize_uuid(getattr(session_row, "client_id", None))
+        if session_row is not None
+        else None
+    )
+    hint_candidates = {
+        _normalize_uuid(audience) for audience in _audiences(hint_claims)
+    }
     hint_candidates.discard(None)
 
-    if requested is not None and session_client is not None and requested != session_client:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, {'error': 'invalid_client', 'error_description': 'requested client does not own the session'})
+    if (
+        requested is not None
+        and session_client is not None
+        and requested != session_client
+    ):
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST,
+            {
+                "error": "invalid_client",
+                "error_description": "requested client does not own the session",
+            },
+        )
     if requested is not None and hint_candidates and requested not in hint_candidates:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, {'error': 'invalid_client', 'error_description': 'requested client does not match id_token_hint'})
-    if session_client is not None and hint_candidates and session_client not in hint_candidates:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, {'error': 'invalid_client', 'error_description': 'session client does not match id_token_hint'})
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST,
+            {
+                "error": "invalid_client",
+                "error_description": "requested client does not match id_token_hint",
+            },
+        )
+    if (
+        session_client is not None
+        and hint_candidates
+        and session_client not in hint_candidates
+    ):
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST,
+            {
+                "error": "invalid_client",
+                "error_description": "session client does not match id_token_hint",
+            },
+        )
 
     if requested is not None:
         return requested
@@ -251,14 +351,20 @@ async def validate_logout_request(
     issuer: str | None = None,
 ) -> LogoutRequestContext:
     assert_logout_session_active(session_row)
-    prevalidated_client_id = _normalize_uuid(requested_client_id) or _normalize_uuid(getattr(session_row, 'client_id', None))
+    prevalidated_client_id = _normalize_uuid(requested_client_id) or _normalize_uuid(
+        getattr(session_row, "client_id", None)
+    )
     hint_claims = await validate_id_token_hint(
         id_token_hint=id_token_hint,
         client_id=prevalidated_client_id,
-        session_id=getattr(session_row, 'id', None),
+        session_id=getattr(session_row, "id", None),
         issuer=issuer,
     )
-    client_id = resolve_logout_client_id(requested_client_id=requested_client_id, session_row=session_row, hint_claims=hint_claims)
+    client_id = resolve_logout_client_id(
+        requested_client_id=requested_client_id,
+        session_row=session_row,
+        hint_claims=hint_claims,
+    )
     redirect_uri = await validate_post_logout_redirect_uri(
         client_id=client_id,
         post_logout_redirect_uri=post_logout_redirect_uri,
@@ -276,7 +382,7 @@ async def build_logout_plan(
     client_id: UUID | None,
     post_logout_redirect_uri: str | None,
     state: str | None,
-    reason: str = 'logout',
+    reason: str = "logout",
     metadata: dict[str, Any] | None = None,
     deployment=None,
 ):
@@ -285,35 +391,52 @@ async def build_logout_plan(
     now = datetime.now(timezone.utc).replace(microsecond=0)
     existing = await persistence.get_latest_logout_for_session_async(session_row.id)
     if existing is not None:
-        existing_meta = dict(getattr(existing, 'logout_metadata', {}) or {})
-        if post_logout_redirect_uri and 'post_logout_redirect_uri' not in existing_meta:
-            existing_meta['post_logout_redirect_uri'] = post_logout_redirect_uri
-        if state and 'state' not in existing_meta:
-            existing_meta['state'] = state
-        existing_meta['replay_count'] = int(existing_meta.get('replay_count', 0)) + 1
-        existing_meta['replayed_at'] = now.isoformat()
+        existing_meta = dict(getattr(existing, "logout_metadata", {}) or {})
+        if post_logout_redirect_uri and "post_logout_redirect_uri" not in existing_meta:
+            existing_meta["post_logout_redirect_uri"] = post_logout_redirect_uri
+        if state and "state" not in existing_meta:
+            existing_meta["state"] = state
+        existing_meta["replay_count"] = int(existing_meta.get("replay_count", 0)) + 1
+        existing_meta["replayed_at"] = now.isoformat()
         if metadata:
             existing_meta.update(metadata)
-        if existing_meta != dict(getattr(existing, 'logout_metadata', {}) or {}):
-            existing = await persistence.update_logout_metadata_async(existing.id, metadata=existing_meta) or existing
+        if existing_meta != dict(getattr(existing, "logout_metadata", {}) or {}):
+            existing = (
+                await persistence.update_logout_metadata_async(
+                    existing.id, metadata=existing_meta
+                )
+                or existing
+            )
         return existing
 
-    front_required = bool(client_id and deployment.flag_enabled('enable_oidc_frontchannel_logout'))
-    back_required = bool(client_id and deployment.flag_enabled('enable_oidc_backchannel_logout'))
+    front_required = bool(
+        client_id and deployment.flag_enabled("enable_oidc_frontchannel_logout")
+    )
+    back_required = bool(
+        client_id and deployment.flag_enabled("enable_oidc_backchannel_logout")
+    )
     combined_meta = {
-        'post_logout_redirect_uri': post_logout_redirect_uri,
-        'state': state,
-        'client_id': str(client_id) if client_id is not None else None,
-        'request_validated_at': now.isoformat(),
-        'replay_count': 0,
-        'frontchannel_delivery': {'status': 'pending' if front_required else 'not_configured', 'attempts': 0, 'max_retries': 3},
-        'backchannel_delivery': {'status': 'pending' if back_required else 'not_configured', 'attempts': 0, 'max_retries': 3},
+        "post_logout_redirect_uri": post_logout_redirect_uri,
+        "state": state,
+        "client_id": str(client_id) if client_id is not None else None,
+        "request_validated_at": now.isoformat(),
+        "replay_count": 0,
+        "frontchannel_delivery": {
+            "status": "pending" if front_required else "not_configured",
+            "attempts": 0,
+            "max_retries": 3,
+        },
+        "backchannel_delivery": {
+            "status": "pending" if back_required else "not_configured",
+            "attempts": 0,
+            "max_retries": 3,
+        },
     }
     if metadata:
         combined_meta.update(metadata)
     logout = await persistence.terminate_session_async(
         session_row.id,
-        initiated_by='rp_logout',
+        initiated_by="rp_logout",
         reason=reason,
         frontchannel_required=front_required,
         backchannel_required=back_required,
@@ -339,17 +462,26 @@ async def build_logout_plan(
             logout_id=logout.id,
         )
     plan_meta = dict(logout.logout_metadata or {})
-    plan_meta.update({
-        'post_logout_redirect_uri': post_logout_redirect_uri,
-        'state': state,
-        'frontchannel': frontchannel,
-        'backchannel': backchannel,
-        'frontchannel_delivery': (frontchannel or {}).get('delivery') if isinstance(frontchannel, dict) else {'status': 'not_configured', 'attempts': 0, 'max_retries': 3},
-        'backchannel_delivery': (backchannel or {}).get('delivery') if isinstance(backchannel, dict) else {'status': 'not_configured', 'attempts': 0, 'max_retries': 3},
-        'idempotent_replay_protection': True,
-        'replay_count': 0,
-    })
-    return await persistence.update_logout_metadata_async(logout.id, metadata=plan_meta) or logout
+    plan_meta.update(
+        {
+            "post_logout_redirect_uri": post_logout_redirect_uri,
+            "state": state,
+            "frontchannel": frontchannel,
+            "backchannel": backchannel,
+            "frontchannel_delivery": (frontchannel or {}).get("delivery")
+            if isinstance(frontchannel, dict)
+            else {"status": "not_configured", "attempts": 0, "max_retries": 3},
+            "backchannel_delivery": (backchannel or {}).get("delivery")
+            if isinstance(backchannel, dict)
+            else {"status": "not_configured", "attempts": 0, "max_retries": 3},
+            "idempotent_replay_protection": True,
+            "replay_count": 0,
+        }
+    )
+    return (
+        await persistence.update_logout_metadata_async(logout.id, metadata=plan_meta)
+        or logout
+    )
 
 
 def describe(*, request=None, deployment=None) -> dict[str, object]:
@@ -360,21 +492,33 @@ def describe(*, request=None, deployment=None) -> dict[str, object]:
         id_token_hint_validation_supported=True,
         post_logout_redirect_uri_validation_supported=True,
         idempotent_replay_protection=True,
-        frontchannel_logout_supported=bool(getattr(deployment, "flag_enabled", lambda *_: True)("enable_oidc_frontchannel_logout")) if deployment is not None else True,
-        backchannel_logout_supported=bool(getattr(deployment, "flag_enabled", lambda *_: True)("enable_oidc_backchannel_logout")) if deployment is not None else True,
+        frontchannel_logout_supported=bool(
+            getattr(deployment, "flag_enabled", lambda *_: True)(
+                "enable_oidc_frontchannel_logout"
+            )
+        )
+        if deployment is not None
+        else True,
+        backchannel_logout_supported=bool(
+            getattr(deployment, "flag_enabled", lambda *_: True)(
+                "enable_oidc_backchannel_logout"
+            )
+        )
+        if deployment is not None
+        else True,
     )
 
 
 __all__ = [
-    'STATUS',
-    'LogoutRequestContext',
-    'StandardOwner',
-    'OWNER',
-    'assert_logout_session_active',
-    'build_logout_plan',
-    'describe',
-    'resolve_logout_client_id',
-    'validate_id_token_hint',
-    'validate_logout_request',
-    'validate_post_logout_redirect_uri',
+    "STATUS",
+    "LogoutRequestContext",
+    "StandardOwner",
+    "OWNER",
+    "assert_logout_session_active",
+    "build_logout_plan",
+    "describe",
+    "resolve_logout_client_id",
+    "validate_id_token_hint",
+    "validate_logout_request",
+    "validate_post_logout_redirect_uri",
 ]

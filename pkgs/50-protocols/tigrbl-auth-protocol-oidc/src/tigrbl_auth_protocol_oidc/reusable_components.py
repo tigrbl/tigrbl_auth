@@ -5,7 +5,7 @@ from tigrbl_identity_assurance_concrete import (
     parse_verified_claims,
     serialize_verified_claims,
 )
-from tigrbl_local_claims_provider_concrete import LocalClaimsProvider
+from tigrbl_security_claims_provider_local import LocalClaimsProvider
 from tigrbl_pairwise_subject_identifier_concrete import (
     PairwiseSubjectIdentifierStrategy,
 )

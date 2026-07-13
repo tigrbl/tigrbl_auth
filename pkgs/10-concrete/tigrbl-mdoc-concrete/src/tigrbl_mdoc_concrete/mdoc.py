@@ -1,11 +1,14 @@
 from dataclasses import dataclass
 from typing import Mapping
 
+from tigrbl_digital_credential_bases import CredentialFormatBase
+
 from .issuer_signed import IssuerSigned, parse_issuer_signed
 
 
 @dataclass(frozen=True, slots=True)
-class Mdoc:
+class Mdoc(CredentialFormatBase):
+    format_identifier = "mso_mdoc"
     doc_type: str
     issuer_signed: IssuerSigned
     device_signed: Mapping[str, object] | None = None

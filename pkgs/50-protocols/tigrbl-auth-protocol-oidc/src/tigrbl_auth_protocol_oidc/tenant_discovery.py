@@ -9,9 +9,13 @@ from tigrbl_identity_contracts.authority import (
     TenantTrustDomainAuthority,
 )
 
-TENANT_OPENID_CONFIGURATION_PATH = "/tenants/{tenant_slug}/.well-known/openid-configuration"
+TENANT_OPENID_CONFIGURATION_PATH = (
+    "/tenants/{tenant_slug}/.well-known/openid-configuration"
+)
 TENANT_JWKS_PATH = "/tenants/{tenant_slug}/.well-known/jwks.json"
-REALM_OPENID_CONFIGURATION_PATH = "/realms/{realm_slug}/.well-known/openid-configuration"
+REALM_OPENID_CONFIGURATION_PATH = (
+    "/realms/{realm_slug}/.well-known/openid-configuration"
+)
 REALM_JWKS_PATH = "/realms/{realm_slug}/.well-known/jwks.json"
 
 
@@ -46,13 +50,13 @@ def _deployment_value(deployment: object, name: str, default: str | None = None)
     return str(value)
 
 
-def resolve_tenant_trust_domain_authority(deployment: object, tenant_slug: str) -> TenantTrustDomainAuthority:
+def resolve_tenant_trust_domain_authority(
+    deployment: object, tenant_slug: str
+) -> TenantTrustDomainAuthority:
     root_issuer = _deployment_value(deployment, "issuer")
     issuer = tenant_issuer(root_issuer, tenant_slug)
     jwks_path = tenant_jwks_path(tenant_slug)
-    protected_resource_identifier = (
-        f"{_deployment_value(deployment, 'protected_resource_identifier', root_issuer).rstrip('/')}/tenants/{tenant_slug}"
-    )
+    protected_resource_identifier = f"{_deployment_value(deployment, 'protected_resource_identifier', root_issuer).rstrip('/')}/tenants/{tenant_slug}"
     return TenantTrustDomainAuthority(
         tenant_slug=tenant_slug,
         issuer=issuer,
@@ -66,13 +70,13 @@ def resolve_tenant_trust_domain_authority(deployment: object, tenant_slug: str) 
     )
 
 
-def resolve_realm_trust_domain_authority(deployment: object, realm_slug: str) -> RealmTrustDomainAuthority:
+def resolve_realm_trust_domain_authority(
+    deployment: object, realm_slug: str
+) -> RealmTrustDomainAuthority:
     root_issuer = _deployment_value(deployment, "issuer")
     issuer = realm_issuer(root_issuer, realm_slug)
     jwks_path = realm_jwks_path(realm_slug)
-    protected_resource_identifier = (
-        f"{_deployment_value(deployment, 'protected_resource_identifier', root_issuer).rstrip('/')}/realms/{realm_slug}"
-    )
+    protected_resource_identifier = f"{_deployment_value(deployment, 'protected_resource_identifier', root_issuer).rstrip('/')}/realms/{realm_slug}"
     return RealmTrustDomainAuthority(
         realm_slug=realm_slug,
         issuer=issuer,
@@ -94,7 +98,9 @@ def tenant_trust_domain_authority_from_root_issuer(
 ) -> TenantTrustDomainAuthority:
     issuer = tenant_issuer(root_issuer, tenant_slug)
     jwks_path = tenant_jwks_path(tenant_slug)
-    resource_base = protected_resource_identifier or f"{str(root_issuer).rstrip('/')}/resource"
+    resource_base = (
+        protected_resource_identifier or f"{str(root_issuer).rstrip('/')}/resource"
+    )
     resource = f"{str(resource_base).rstrip('/')}/tenants/{tenant_slug}"
     return TenantTrustDomainAuthority(
         tenant_slug=tenant_slug,
@@ -120,7 +126,9 @@ def tenant_deployment(deployment: object, tenant_slug: str) -> object:
     except TypeError:
         values = dict(getattr(deployment, "__dict__", {}))
         values["issuer"] = authority.issuer
-        values["protected_resource_identifier"] = authority.protected_resource_identifier
+        values["protected_resource_identifier"] = (
+            authority.protected_resource_identifier
+        )
         return SimpleNamespace(**values)
 
 
@@ -135,7 +143,9 @@ def realm_deployment(deployment: object, realm_slug: str) -> object:
     except TypeError:
         values = dict(getattr(deployment, "__dict__", {}))
         values["issuer"] = authority.issuer
-        values["protected_resource_identifier"] = authority.protected_resource_identifier
+        values["protected_resource_identifier"] = (
+            authority.protected_resource_identifier
+        )
         return SimpleNamespace(**values)
 
 
@@ -151,7 +161,9 @@ def build_tenant_openid_config(deployment: object, tenant_slug: str) -> dict[str
         "userinfo_endpoint": f"{base}/userinfo",
         "response_types_supported": ["code"],
         "subject_types_supported": ["public"],
-        "id_token_signing_alg_values_supported": list(getattr(deployment, "id_token_algs", ("ES256",))),
+        "id_token_signing_alg_values_supported": list(
+            getattr(deployment, "id_token_algs", ("ES256",))
+        ),
         "scopes_supported": ["openid", "profile", "email"],
         "tigrbl_auth_subject_namespace": authority.subject_namespace,
         "tigrbl_auth_signing_scope": authority.signing_scope,
@@ -170,18 +182,24 @@ def build_realm_openid_config(deployment: object, realm_slug: str) -> dict[str, 
         "userinfo_endpoint": f"{base}/userinfo",
         "response_types_supported": ["code"],
         "subject_types_supported": ["public"],
-        "id_token_signing_alg_values_supported": list(getattr(deployment, "id_token_algs", ("ES256",))),
+        "id_token_signing_alg_values_supported": list(
+            getattr(deployment, "id_token_algs", ("ES256",))
+        ),
         "scopes_supported": ["openid", "profile", "email"],
         "tigrbl_auth_subject_namespace": authority.subject_namespace,
         "tigrbl_auth_signing_scope": authority.signing_scope,
     }
 
 
-def require_tenant_issuer(payload: Mapping[str, Any], *, root_issuer: str, tenant_slug: str) -> None:
+def require_tenant_issuer(
+    payload: Mapping[str, Any], *, root_issuer: str, tenant_slug: str
+) -> None:
     authority = tenant_trust_domain_authority_from_root_issuer(root_issuer, tenant_slug)
     actual = str(payload.get("iss") or "")
     if actual not in set(authority.accepted_issuers):
-        raise ValueError(f"tenant token issuer mismatch: expected {authority.issuer!r}, got {actual!r}")
+        raise ValueError(
+            f"tenant token issuer mismatch: expected {authority.issuer!r}, got {actual!r}"
+        )
 
 
 __all__ = [

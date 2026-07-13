@@ -80,7 +80,6 @@ dependencies = [
     "tigrbl-mfa-factor-concrete==0.4.0.dev2",
     "tigrbl-mtls-certificate-credential-concrete==0.4.0.dev2",
     "tigrbl-dpop-key-credential-concrete==0.4.0.dev2",
-    "tigrbl-local-claims-provider-concrete==0.4.0.dev2",
     "tigrbl-sd-jwt-vc-concrete==0.4.0.dev2",
     "tigrbl-jose-concrete==0.4.0.dev2",
     "tigrbl-sd-jwt-concrete==0.4.0.dev2",
@@ -503,7 +502,6 @@ tigrbl-passwordless-credential-concrete = { path = "pkgs/10-concrete/tigrbl-pass
 tigrbl-mfa-factor-concrete = { path = "pkgs/10-concrete/tigrbl-mfa-factor-concrete", editable = true }
 tigrbl-mtls-certificate-credential-concrete = { path = "pkgs/10-concrete/tigrbl-mtls-certificate-credential-concrete", editable = true }
 tigrbl-dpop-key-credential-concrete = { path = "pkgs/10-concrete/tigrbl-dpop-key-credential-concrete", editable = true }
-tigrbl-local-claims-provider-concrete = { path = "pkgs/10-concrete/tigrbl-local-claims-provider-concrete", editable = true }
 tigrbl-sd-jwt-vc-concrete = { path = "pkgs/10-concrete/tigrbl-sd-jwt-vc-concrete", editable = true }
 tigrbl-mdoc-concrete = { path = "pkgs/10-concrete/tigrbl-mdoc-concrete", editable = true }
 tigrbl-vcdm-concrete = { path = "pkgs/10-concrete/tigrbl-vcdm-concrete", editable = true }

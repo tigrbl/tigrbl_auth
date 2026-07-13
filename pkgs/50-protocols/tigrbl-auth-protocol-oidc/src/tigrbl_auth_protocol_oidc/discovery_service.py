@@ -30,7 +30,9 @@ def show_discovery(repo_root: Path, *, profile: str | None = None) -> dict[str, 
     return {"profile": directory.name, "documents": documents}
 
 
-def validate_discovery(repo_root: Path, *, profile: str | None = None) -> dict[str, Any]:
+def validate_discovery(
+    repo_root: Path, *, profile: str | None = None
+) -> dict[str, Any]:
     payload = show_discovery(repo_root, profile=profile)
     docs = payload["documents"]
     return {
@@ -41,9 +43,13 @@ def validate_discovery(repo_root: Path, *, profile: str | None = None) -> dict[s
     }
 
 
-def publish_discovery(context: OperationContext, *, output_dir: Path | None = None) -> ArtifactResult:
+def publish_discovery(
+    context: OperationContext, *, output_dir: Path | None = None
+) -> ArtifactResult:
     directory = _profile_dir(context.repo_root, context.profile)
-    output_dir = output_dir or (context.repo_root / "dist" / "discovery" / directory.name)
+    output_dir = output_dir or (
+        context.repo_root / "dist" / "discovery" / directory.name
+    )
     output_dir.mkdir(parents=True, exist_ok=True)
     docs = {}
     for path in sorted(directory.glob("*.json")):
@@ -52,10 +58,22 @@ def publish_discovery(context: OperationContext, *, output_dir: Path | None = No
         docs[path.name] = validate_checksum(target)
     manifest = output_dir / "manifest.json"
     write_structured(manifest, {"profile": directory.name, "documents": docs})
-    return ArtifactResult(command=context.command, resource=context.resource, status="published", path=display_path(output_dir, context.repo_root), checksum=validate_checksum(manifest), summary={"profile": directory.name, "documents": len(docs)})
+    return ArtifactResult(
+        command=context.command,
+        resource=context.resource,
+        status="published",
+        path=display_path(output_dir, context.repo_root),
+        checksum=validate_checksum(manifest),
+        summary={"profile": directory.name, "documents": len(docs)},
+    )
 
 
-def diff_discovery(repo_root: Path, *, left_profile: str | None = None, right_profile: str | None = None) -> dict[str, Any]:
+def diff_discovery(
+    repo_root: Path,
+    *,
+    left_profile: str | None = None,
+    right_profile: str | None = None,
+) -> dict[str, Any]:
     left = show_discovery(repo_root, profile=left_profile)
     right = show_discovery(repo_root, profile=right_profile)
     left_docs = left["documents"]
@@ -63,11 +81,29 @@ def diff_discovery(repo_root: Path, *, left_profile: str | None = None, right_pr
     keys = sorted(set(left_docs) | set(right_docs))
     diffs: dict[str, Any] = {}
     for key in keys:
-        left_text = json.dumps(left_docs.get(key), indent=2, sort_keys=True).splitlines()
-        right_text = json.dumps(right_docs.get(key), indent=2, sort_keys=True).splitlines()
+        left_text = json.dumps(
+            left_docs.get(key), indent=2, sort_keys=True
+        ).splitlines()
+        right_text = json.dumps(
+            right_docs.get(key), indent=2, sort_keys=True
+        ).splitlines()
         if left_text != right_text:
-            diffs[key] = list(difflib.unified_diff(left_text, right_text, fromfile=f"{left['profile']}/{key}", tofile=f"{right['profile']}/{key}", lineterm=""))
-    return {"left_profile": left["profile"], "right_profile": right["profile"], "document_count": len(keys), "changed": sorted(diffs.keys()), "diffs": diffs}
+            diffs[key] = list(
+                difflib.unified_diff(
+                    left_text,
+                    right_text,
+                    fromfile=f"{left['profile']}/{key}",
+                    tofile=f"{right['profile']}/{key}",
+                    lineterm="",
+                )
+            )
+    return {
+        "left_profile": left["profile"],
+        "right_profile": right["profile"],
+        "document_count": len(keys),
+        "changed": sorted(diffs.keys()),
+        "diffs": diffs,
+    }
 
 
 __all__ = [

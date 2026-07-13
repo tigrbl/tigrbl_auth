@@ -43,7 +43,7 @@ dependencies = [
     "tigrbl-identity-storage==0.4.0.dev2",
     "tigrbl-eap-acr-concrete==0.4.0.dev2",
     "tigrbl-identity-assurance-concrete==0.4.0.dev2",
-    "tigrbl-local-claims-provider-concrete==0.4.0.dev2",
+    "tigrbl-security-claims-provider-local==0.1.0",
     "tigrbl-public-subject-identifier-concrete==0.4.0.dev2",
     "tigrbl-pairwise-subject-identifier-concrete==0.4.0.dev2",
     "tigrbl-authentication-time-claim-concrete==0.4.0.dev2",
