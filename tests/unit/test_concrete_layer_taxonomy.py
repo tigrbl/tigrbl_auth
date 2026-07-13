@@ -119,6 +119,10 @@ def test_concrete_packages_do_not_own_stateful_service_vocabulary() -> None:
         "Repository",
         "Store",
     )
+    deterministic_graph_values = {
+        "AuthorityDerivationGraph",
+        "TrustFederationGraph",
+    }
     offenders: list[str] = []
     for package_name in sorted(CONCRETE_PACKAGE_SHAPES):
         for path in sorted((CONCRETE_ROOT / package_name / "src").rglob("*.py")):
@@ -127,7 +131,8 @@ def test_concrete_packages_do_not_own_stateful_service_vocabulary() -> None:
                 if (
                     isinstance(node, ast.ClassDef)
                     and node.name.endswith(forbidden_class_suffixes)
-                    and node.name != "ConciseTrustStore"
+                    and node.name
+                    not in {"ConciseTrustStore", *deterministic_graph_values}
                 ):
                     offenders.append(
                         f"{path.relative_to(ROOT).as_posix()}:{node.lineno}:{node.name}"

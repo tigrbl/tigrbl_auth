@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from tigrbl_authz_policy_authority_derivation_graph import (
+from tigrbl_authority_graph_concrete import (
     AuthorityClosure,
     AuthorityDerivationGraph,
     AuthorityEdge,

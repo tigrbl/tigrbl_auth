@@ -8,6 +8,9 @@ from tigrbl_identity_admin_auth_anomaly_detector import AuthAnomalyDetector as C
 from tigrbl_identity_admin_relationship_graph import RelationshipGraph as CanonicalRelationshipGraph
 from tigrbl_identity_admin_trust_federation_graph import (
     TrustFederationGraph as CanonicalTrustFederationGraph,
+    TrustFederationGraphEdgeRuntimeSpec,
+    TrustFederationGraphNodeRuntimeSpec,
+    TrustFederationGraphRuntimeSpec,
 )
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_storage.tables import Federation as CanonicalFederation
@@ -20,7 +23,6 @@ from tigrbl_identity_storage.tables import (
     TrustFederationGraphNode,
 )
 from tigrbl_auth.services.advanced_identity_plane import (
-    AccessDecisionRequest,
     AdaptiveContext,
     AdvancedAuthenticatorRegistry,
     AuthAnomalyDetector,
@@ -135,9 +137,9 @@ def test_federation_surface_exports_storage_table_registry() -> None:
 
 def test_device_and_workload_identities_support_lifecycle_rotation_and_cross_cloud_trust_paths():
     assert TrustFederationGraph is CanonicalTrustFederationGraph
-    assert TrustFederationGraph.graph_table is TrustFederationGraphTable
-    assert TrustFederationGraph.node_table is TrustFederationGraphNode
-    assert TrustFederationGraph.edge_table is TrustFederationGraphEdge
+    assert TrustFederationGraphRuntimeSpec.model is TrustFederationGraphTable
+    assert TrustFederationGraphNodeRuntimeSpec.model is TrustFederationGraphNode
+    assert TrustFederationGraphEdgeRuntimeSpec.model is TrustFederationGraphEdge
 
     identities = DeviceWorkloadIdentityRegistry()
     trust_graph = TrustFederationGraph()

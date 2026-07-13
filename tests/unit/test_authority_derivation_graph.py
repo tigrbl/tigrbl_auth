@@ -11,6 +11,9 @@ from tigrbl_identity_storage.tables import (
 )
 from tigrbl_authz_policy_authority_derivation_graph import (
     AuthorityDerivationGraph,
+    AuthorityDerivationGraphEdgeRuntimeSpec,
+    AuthorityDerivationGraphNodeRuntimeSpec,
+    AuthorityDerivationGraphRuntimeSpec,
     AuthorityEdge,
     AuthorityNode,
     AuthorityScope,
@@ -48,9 +51,9 @@ def _graph() -> AuthorityDerivationGraph:
 def test_authority_derivation_graph_t0_exports_facade_identity() -> None:
     assert FacadeGraph is AuthorityDerivationGraph
     assert PolicyGraph is AuthorityDerivationGraph
-    assert AuthorityDerivationGraph.graph_table is AuthorityDerivationGraphTable
-    assert AuthorityDerivationGraph.node_table is AuthorityDerivationGraphNode
-    assert AuthorityDerivationGraph.edge_table is AuthorityDerivationGraphEdge
+    assert AuthorityDerivationGraphRuntimeSpec.model is AuthorityDerivationGraphTable
+    assert AuthorityDerivationGraphNodeRuntimeSpec.model is AuthorityDerivationGraphNode
+    assert AuthorityDerivationGraphEdgeRuntimeSpec.model is AuthorityDerivationGraphEdge
 
 
 def test_authority_derivation_graph_t1_derives_paths_and_reachability() -> None:

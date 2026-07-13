@@ -1,14 +1,14 @@
 [project]
 name = "tigrbl-identity-admin-trust-federation-graph"
 version = "0.4.0.dev2"
-description = "Storage-backed identity trust federation graph runtime."
+description = "Durable trust-federation graph table operations and runtime specifications."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
 dependencies = [
-    "tigrbl-identity-identities-concrete==0.4.0.dev2",
-    "tigrbl-identity-contracts==0.4.0.dev2",
+    "tigrbl-trust-federation-graph-concrete==0.4.0.dev2",
     "tigrbl-identity-storage==0.4.0.dev2",
+    "tigrbl-identity-storage-runtime==0.4.0.dev2",
 ]
 
 [build-system]

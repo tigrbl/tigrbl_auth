@@ -97,6 +97,7 @@ dependencies = [
     "tigrbl-identity-admin-policy-registry==0.4.0.dev2",
     "tigrbl-identity-admin-relationship-graph==0.4.0.dev2",
     "tigrbl-identity-admin-trust-federation-graph==0.4.0.dev2",
+    "tigrbl-trust-federation-graph-concrete==0.4.0.dev2",
     "tigrbl-auth-protocol-oidc-backchannel-replay-store==0.4.0.dev2",
     "tigrbl-oauth-scope-matcher==0.4.0.dev2",
     "tigrbl-set-concrete==0.4.0.dev2",
@@ -197,6 +198,7 @@ dependencies = [
     "tigrbl-capability==0.4.0.dev2",
     "tigrbl-default-capability==0.4.0.dev2",
     "tigrbl-authz-policy-authority-derivation-graph==0.4.0.dev2",
+    "tigrbl-authority-graph-concrete==0.4.0.dev2",
     "tigrbl-authz-policy-decision-engine==0.4.0.dev2",
     "tigrbl-authz-policy-invariant-registry==0.4.0.dev2",
     "tigrbl-release-contracts==0.1.0",
@@ -468,6 +470,7 @@ tigrbl-security-events = { path = "pkgs/40-capabilities/tigrbl-security-events",
 tigrbl-workload-identity = { path = "pkgs/40-capabilities/tigrbl-workload-identity", editable = true }
 tigrbl-authz-policy-admin-gate = { path = "pkgs/20-providers/tigrbl-authz-policy-admin-gate", editable = true }
 tigrbl-authz-policy-authority-derivation-graph = { path = "pkgs/30-storage-runtime/tigrbl-authz-policy-authority-derivation-graph", editable = true }
+tigrbl-authority-graph-concrete = { path = "pkgs/10-concrete/tigrbl-authority-graph-concrete", editable = true }
 tigrbl-authz-policy = { path = "pkgs/20-providers/tigrbl-authz-policy", editable = true }
 tigrbl-authz-policy-decision-engine = { path = "pkgs/20-providers/tigrbl-authz-policy-decision-engine", editable = true }
 tigrbl-authz-policy-invariant-registry = { path = "pkgs/deprecated/tigrbl-authz-policy-invariant-registry", editable = true }
@@ -617,6 +620,7 @@ tigrbl-identity-admin-federation-registry = { path = "pkgs/deprecated/tigrbl-ide
 tigrbl-identity-admin-policy-registry = { path = "pkgs/deprecated/tigrbl-identity-admin-policy-registry", editable = true }
 tigrbl-identity-admin-relationship-graph = { path = "pkgs/20-providers/tigrbl-identity-admin-relationship-graph", editable = true }
 tigrbl-identity-admin-trust-federation-graph = { path = "pkgs/30-storage-runtime/tigrbl-identity-admin-trust-federation-graph", editable = true }
+tigrbl-trust-federation-graph-concrete = { path = "pkgs/10-concrete/tigrbl-trust-federation-graph-concrete", editable = true }
 tigrbl-identity-core = { path = "pkgs/00-primitives/tigrbl-identity-core", editable = true }
 tigrbl-identity-credentials = { path = "pkgs/deprecated/tigrbl-identity-credentials", editable = true }
 tigrbl-identity-jose = { path = "pkgs/20-providers/tigrbl-identity-jose", editable = true }

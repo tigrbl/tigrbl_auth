@@ -51,7 +51,7 @@ dependencies = [
     "tigrbl-auth-protocol-oidc==0.4.0.dev2",
     "tigrbl-identity-principals==0.4.0.dev2",
     "tigrbl-identity-operator==0.4.0.dev2",
-    "tigrbl-authz-policy-authority-derivation-graph==0.4.0.dev2",
+    "tigrbl-authority-graph-concrete==0.4.0.dev2",
     "tigrbl-authz-policy-invariant-registry==0.4.0.dev2",
     "tigrbl-authz-policy==0.4.0.dev2",
     "tigrbl-authz-resource-server==0.4.0.dev2",

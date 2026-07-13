@@ -3,4 +3,4 @@
 from __future__ import annotations
 # ruff: noqa: F403,F405
 
-from tigrbl_authz_policy_authority_derivation_graph import *
+from tigrbl_authority_graph_concrete import *

@@ -43,17 +43,21 @@ def test_graph_edge_uniqueness_is_edge_key_scoped_not_src_dst_kind() -> None:
         assert ("graph_id", "node_key") in _unique_columns(model)
 
 
-def test_authority_and_trust_graph_packages_bind_to_concrete_storage_tables() -> None:
+def test_graph_algorithms_are_storage_neutral_and_layer_30_specs_bind_tables() -> None:
     tables = importlib.import_module("tigrbl_identity_storage.tables")
+    authority_concrete = importlib.import_module("tigrbl_authority_graph_concrete")
+    trust_concrete = importlib.import_module("tigrbl_trust_federation_graph_concrete")
     authority = importlib.import_module("tigrbl_authz_policy_authority_derivation_graph")
     trust = importlib.import_module("tigrbl_identity_admin_trust_federation_graph")
 
-    assert authority.AuthorityDerivationGraph.graph_table is tables.AuthorityDerivationGraph
-    assert authority.AuthorityDerivationGraph.node_table is tables.AuthorityDerivationGraphNode
-    assert authority.AuthorityDerivationGraph.edge_table is tables.AuthorityDerivationGraphEdge
-    assert trust.TrustFederationGraph.graph_table is tables.TrustFederationGraph
-    assert trust.TrustFederationGraph.node_table is tables.TrustFederationGraphNode
-    assert trust.TrustFederationGraph.edge_table is tables.TrustFederationGraphEdge
+    assert not hasattr(authority_concrete.AuthorityDerivationGraph, "graph_table")
+    assert not hasattr(trust_concrete.TrustFederationGraph, "graph_table")
+    assert authority.AuthorityDerivationGraphRuntimeSpec.model is tables.AuthorityDerivationGraph
+    assert authority.AuthorityDerivationGraphNodeRuntimeSpec.model is tables.AuthorityDerivationGraphNode
+    assert authority.AuthorityDerivationGraphEdgeRuntimeSpec.model is tables.AuthorityDerivationGraphEdge
+    assert trust.TrustFederationGraphRuntimeSpec.model is tables.TrustFederationGraph
+    assert trust.TrustFederationGraphNodeRuntimeSpec.model is tables.TrustFederationGraphNode
+    assert trust.TrustFederationGraphEdgeRuntimeSpec.model is tables.TrustFederationGraphEdge
 
 
 def test_graph_storage_does_not_introduce_repository_wrappers() -> None:
