@@ -1,0 +1,14 @@
+[project]
+name = "tigrbl-security-cose"
+version = "0.4.0.dev2"
+description = "Backend-composed COSE signing and verification provider."
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = []
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tigrbl_security_cose", from = "src" }]

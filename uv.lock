@@ -2648,6 +2648,8 @@ dependencies = [
     { name = "tigrbl-local-claims-provider-concrete" },
     { name = "tigrbl-machine-identity-concrete" },
     { name = "tigrbl-mdoc-concrete" },
+    { name = "tigrbl-mdoc-issuer-provider" },
+    { name = "tigrbl-mdoc-verifier-provider" },
     { name = "tigrbl-mfa-credential-concrete" },
     { name = "tigrbl-mfa-factor-concrete" },
     { name = "tigrbl-msisdn-claim-concrete" },
@@ -2683,6 +2685,7 @@ dependencies = [
     { name = "tigrbl-security-authorization-provenance-builder" },
     { name = "tigrbl-security-certificate-mtls" },
     { name = "tigrbl-security-claims-provider-local" },
+    { name = "tigrbl-security-cose" },
     { name = "tigrbl-security-dpop-cnf-binding-validator" },
     { name = "tigrbl-security-event-bases" },
     { name = "tigrbl-security-event-protocol-set" },
@@ -2930,6 +2933,8 @@ requires-dist = [
     { name = "tigrbl-local-claims-provider-concrete", editable = "pkgs/10-concrete/tigrbl-local-claims-provider-concrete" },
     { name = "tigrbl-machine-identity-concrete", editable = "pkgs/10-concrete/tigrbl-machine-identity-concrete" },
     { name = "tigrbl-mdoc-concrete", editable = "pkgs/10-concrete/tigrbl-mdoc-concrete" },
+    { name = "tigrbl-mdoc-issuer-provider", editable = "pkgs/20-providers/tigrbl-mdoc-issuer-provider" },
+    { name = "tigrbl-mdoc-verifier-provider", editable = "pkgs/20-providers/tigrbl-mdoc-verifier-provider" },
     { name = "tigrbl-mfa-credential-concrete", editable = "pkgs/10-concrete/tigrbl-mfa-credential-concrete" },
     { name = "tigrbl-mfa-factor-concrete", editable = "pkgs/10-concrete/tigrbl-mfa-factor-concrete" },
     { name = "tigrbl-msisdn-claim-concrete", editable = "pkgs/10-concrete/tigrbl-msisdn-claim-concrete" },
@@ -2965,6 +2970,7 @@ requires-dist = [
     { name = "tigrbl-security-authorization-provenance-builder", editable = "pkgs/20-providers/tigrbl-security-authorization-provenance-builder" },
     { name = "tigrbl-security-certificate-mtls", editable = "pkgs/20-providers/tigrbl-security-certificate-mtls" },
     { name = "tigrbl-security-claims-provider-local", editable = "pkgs/20-providers/tigrbl-security-claims-provider-local" },
+    { name = "tigrbl-security-cose", editable = "pkgs/20-providers/tigrbl-security-cose" },
     { name = "tigrbl-security-dpop-cnf-binding-validator", editable = "pkgs/20-providers/tigrbl-security-dpop-cnf-binding-validator" },
     { name = "tigrbl-security-event-bases", editable = "pkgs/05-bases/tigrbl-security-event-bases" },
     { name = "tigrbl-security-event-protocol-set", editable = "pkgs/50-protocols/tigrbl-security-event-protocol-set" },
@@ -4694,6 +4700,42 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-mdoc-concrete" }
 
 [[package]]
+name = "tigrbl-mdoc-issuer-provider"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-mdoc-issuer-provider" }
+dependencies = [
+    { name = "tigrbl-digital-credential-bases" },
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-mdoc-concrete" },
+    { name = "tigrbl-security-cose" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-digital-credential-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-mdoc-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-cose", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-mdoc-verifier-provider"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-mdoc-verifier-provider" }
+dependencies = [
+    { name = "tigrbl-digital-credential-bases" },
+    { name = "tigrbl-mdoc-concrete" },
+    { name = "tigrbl-security-cose" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-digital-credential-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-mdoc-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-cose", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-mfa-credential-concrete"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-mfa-credential-concrete" }
@@ -5187,6 +5229,11 @@ requires-dist = [
     { name = "tigrbl-oidc-claims-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-trust-domain-bases", specifier = "==0.1.0" },
 ]
+
+[[package]]
+name = "tigrbl-security-cose"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-security-cose" }
 
 [[package]]
 name = "tigrbl-security-dpop-cnf-binding-validator"
