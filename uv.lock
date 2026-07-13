@@ -2701,8 +2701,11 @@ dependencies = [
     { name = "tigrbl-service-identity-concrete" },
     { name = "tigrbl-service-key-credential-concrete" },
     { name = "tigrbl-set-concrete" },
+    { name = "tigrbl-spiffe-bundle-provider" },
+    { name = "tigrbl-spiffe-workload-api-provider" },
     { name = "tigrbl-subject-claim-concrete" },
     { name = "tigrbl-svid-concrete" },
+    { name = "tigrbl-svid-verifier-provider" },
     { name = "tigrbl-title-claim-concrete" },
     { name = "tigrbl-token-bases" },
     { name = "tigrbl-transaction-id-claim-concrete" },
@@ -2975,8 +2978,11 @@ requires-dist = [
     { name = "tigrbl-service-identity-concrete", editable = "pkgs/10-concrete/tigrbl-service-identity-concrete" },
     { name = "tigrbl-service-key-credential-concrete", editable = "pkgs/10-concrete/tigrbl-service-key-credential-concrete" },
     { name = "tigrbl-set-concrete", editable = "pkgs/10-concrete/tigrbl-set-concrete" },
+    { name = "tigrbl-spiffe-bundle-provider", editable = "pkgs/20-providers/tigrbl-spiffe-bundle-provider" },
+    { name = "tigrbl-spiffe-workload-api-provider", editable = "pkgs/20-providers/tigrbl-spiffe-workload-api-provider" },
     { name = "tigrbl-subject-claim-concrete", editable = "pkgs/10-concrete/tigrbl-subject-claim-concrete" },
     { name = "tigrbl-svid-concrete", editable = "pkgs/10-concrete/tigrbl-svid-concrete" },
+    { name = "tigrbl-svid-verifier-provider", editable = "pkgs/20-providers/tigrbl-svid-verifier-provider" },
     { name = "tigrbl-title-claim-concrete", editable = "pkgs/10-concrete/tigrbl-title-claim-concrete" },
     { name = "tigrbl-token-bases", editable = "pkgs/05-bases/tigrbl-token-bases" },
     { name = "tigrbl-transaction-id-claim-concrete", editable = "pkgs/10-concrete/tigrbl-transaction-id-claim-concrete" },
@@ -5468,6 +5474,38 @@ wheels = [
 ]
 
 [[package]]
+name = "tigrbl-spiffe-bundle-provider"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-spiffe-bundle-provider" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-security-trust-domain-bases" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-domain-bases", specifier = "==0.1.0" },
+]
+
+[[package]]
+name = "tigrbl-spiffe-workload-api-provider"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-spiffe-workload-api-provider" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-security-trust-domain-bases" },
+    { name = "tigrbl-svid-concrete" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-domain-bases", specifier = "==0.1.0" },
+    { name = "tigrbl-svid-concrete", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-subject-claim-concrete"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-subject-claim-concrete" }
@@ -5495,6 +5533,23 @@ dependencies = [
 requires-dist = [
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-jose-concrete", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-svid-verifier-provider"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-svid-verifier-provider" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-security-trust-domain-bases" },
+    { name = "tigrbl-svid-concrete" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-domain-bases", specifier = "==0.1.0" },
+    { name = "tigrbl-svid-concrete", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
