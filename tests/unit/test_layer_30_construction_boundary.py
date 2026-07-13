@@ -109,3 +109,27 @@ def test_oidc_replay_mutation_is_not_defined_by_layer_01_table() -> None:
         isinstance(node, (ast.AsyncFunctionDef, ast.FunctionDef))
         for node in ast.walk(tree)
     )
+
+
+def test_oauth_state_mutations_are_not_defined_by_layer_01_tables() -> None:
+    tables = (
+        ROOT
+        / "pkgs"
+        / "01-storage"
+        / "tigrbl-identity-storage"
+        / "src"
+        / "tigrbl_identity_storage"
+        / "tables"
+    )
+    for relative in (
+        Path("auth_code/_table.py"),
+        Path("client_registration/_table.py"),
+        Path("revoked_token/_table.py"),
+    ):
+        source = (tables / relative).read_text(encoding="utf-8")
+        tree = ast.parse(source)
+        assert "op_ctx" not in source
+        assert not any(
+            isinstance(node, (ast.AsyncFunctionDef, ast.FunctionDef))
+            for node in ast.walk(tree)
+        )

@@ -3,8 +3,6 @@
 from __future__ import annotations
 
 import datetime as dt
-from typing import Any
-
 from tigrbl_identity_storage.framework import (
     ForeignKeySpec,
     GUIDPk,
@@ -20,10 +18,7 @@ from tigrbl_identity_storage.framework import (
     UUID,
     UserColumn,
     acol,
-    op_ctx,
 )
-
-from .._ops import create_record
 
 
 class AuthCode(RestOltpTable, GUIDPk, Timestamped, UserColumn, TenantColumn):
@@ -42,31 +37,5 @@ class AuthCode(RestOltpTable, GUIDPk, Timestamped, UserColumn, TenantColumn):
     scope: Mapped[str | None] = acol(storage=S(String, nullable=True))
     expires_at: Mapped[dt.datetime] = acol(storage=S(TZDateTime, nullable=False))
     claims: Mapped[dict | None] = acol(storage=S(JSON, nullable=True))
-
-
-def _payload(ctx: dict[str, Any]) -> dict[str, Any]:
-    value = ctx.get("payload") or ctx.get("p") or {}
-    return dict(value) if isinstance(value, dict) else {}
-
-
-def _db(ctx: dict[str, Any]) -> Any:
-    return ctx.get("db") or ctx.get("session")
-
-
-def _create_response_schema(table: type) -> type:
-    return table.schemas.create.out
-
-
-@op_ctx(
-    bind=AuthCode,
-    alias="authorize",
-    target="custom",
-    arity="collection",
-    rest=False,
-    response_schema=_create_response_schema,
-)
-async def authorize(cls: type[AuthCode], ctx: dict[str, Any]) -> AuthCode:
-    return await create_record(cls, _db(ctx), _payload(ctx))
-
 
 __all__ = ["AuthCode"]
