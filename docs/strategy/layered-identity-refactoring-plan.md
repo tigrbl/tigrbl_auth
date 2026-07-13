@@ -82,6 +82,9 @@ Required ownership rules:
   operation contexts.
 - [x] `fb6be510` moves My Account session DTOs and HTTP handlers to the
   layer-80 My Account API package and leaves `AuthSession` as a mapped record.
+- [x] `25815389` moves the remaining My Account profile, credential, consent,
+  and route-composition HTTP surfaces into the layer-80 product; layer 30 now
+  retains only the durable consent operations consumed by those routes.
 - [x] Claim primitives, contracts, bases, `ClaimType`, `ClaimValueType`,
   `ClaimNameKind`, and standalone concrete claim packages exist.
 - [x] Protocol-neutral scope matching exists as
