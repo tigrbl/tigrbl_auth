@@ -68,13 +68,17 @@ def test_oauth_oidc_t0_public_surfaces_are_importable() -> None:
 @pytest.mark.unit
 def test_oauth_t1_device_flow_token_exchange_dpop_and_mtls() -> None:
     service = _oauth_service()
-    grant = service.start_device_authorization(client_id="client-a", scopes=("openid", "tenant.read"))
+    grant = service.start_device_authorization(
+        client_id="client-a", scopes=("openid", "tenant.read")
+    )
 
     with pytest.raises(OAuthError) as pending:
         service.poll_device_authorization(grant.device_code)
     assert pending.value.code == "authorization_pending"
 
-    approved = service.approve_device_authorization(grant.device_code, subject="user:123")
+    approved = service.approve_device_authorization(
+        grant.device_code, subject="user:123"
+    )
     result = service.poll_device_authorization(approved.device_code)
 
     assert approved.status == OAuthGrantStatus.APPROVED
@@ -147,7 +151,9 @@ def test_oauth_t2_hardening_rejects_replay_bad_scope_bad_actor_and_bad_mtls() ->
             actor="user:other",
         )
     with pytest.raises(OAuthError) as mtls:
-        service.validate_mtls_client(client_id="client-a", certificate_thumbprint="wrong")
+        service.validate_mtls_client(
+            client_id="client-a", certificate_thumbprint="wrong"
+        )
 
     assert replay.value.code == "use_dpop_nonce"
     assert scope.value.code == "invalid_scope"
@@ -158,9 +164,18 @@ def test_oauth_t2_hardening_rejects_replay_bad_scope_bad_actor_and_bad_mtls() ->
 @pytest.mark.unit
 def test_oidc_t1_hosted_login_white_label_session_and_logout() -> None:
     runtime = OidcProviderRuntime(
-        allowed_redirect_uris={"client-a": ("https://rp.example.test/callback", "https://rp.example.test/logout")},
-        frontchannel_logout_uris={"client-a": ("https://rp.example.test/frontchannel-logout",)},
-        backchannel_logout_uris={"client-a": ("https://rp.example.test/backchannel-logout",)},
+        allowed_redirect_uris={
+            "client-a": (
+                "https://rp.example.test/callback",
+                "https://rp.example.test/logout",
+            )
+        },
+        frontchannel_logout_uris={
+            "client-a": ("https://rp.example.test/frontchannel-logout",)
+        },
+        backchannel_logout_uris={
+            "client-a": ("https://rp.example.test/backchannel-logout",)
+        },
         now=lambda: NOW,
     )
     request = new_login_request(
@@ -197,13 +212,19 @@ def test_oidc_t1_hosted_login_white_label_session_and_logout() -> None:
     assert "&lt;Tenant A&gt;" in page.html
     assert "<Tenant A>" not in page.html
     assert runtime.sessions[session.session_id].status == OidcSessionStatus.LOGGED_OUT
-    assert plan.frontchannel_notifications == ("https://rp.example.test/frontchannel-logout",)
-    assert plan.backchannel_notifications == ("https://rp.example.test/backchannel-logout",)
+    assert plan.frontchannel_notifications == (
+        "https://rp.example.test/frontchannel-logout",
+    )
+    assert plan.backchannel_notifications == (
+        "https://rp.example.test/backchannel-logout",
+    )
     assert plan.redirect_uri == "https://rp.example.test/logout"
 
 
 @pytest.mark.unit
-def test_oidc_t2_rejects_unregistered_redirect_logo_policy_and_session_mismatch() -> None:
+def test_oidc_t2_rejects_unregistered_redirect_logo_policy_and_session_mismatch() -> (
+    None
+):
     runtime = OidcProviderRuntime(
         allowed_redirect_uris={"client-a": ("https://rp.example.test/callback",)},
         now=lambda: NOW,
@@ -224,7 +245,11 @@ def test_oidc_t2_rejects_unregistered_redirect_logo_policy_and_session_mismatch(
     with pytest.raises(OidcProviderError, match="outside the tenant asset policy"):
         runtime.render_hosted_login(
             request,
-            TenantBranding(tenant_id="tenant-a", display_name="Tenant A", logo_uri="https://cdn.example.test/logo.svg"),
+            TenantBranding(
+                tenant_id="tenant-a",
+                display_name="Tenant A",
+                logo_uri="https://cdn.example.test/logo.svg",
+            ),
         )
     with pytest.raises(OidcProviderError, match="redirect URI"):
         runtime.build_logout_plan(
@@ -276,26 +301,39 @@ def test_oauth_oidc_t2_public_boundary_has_no_forbidden_imports() -> None:
 
 @pytest.mark.unit
 def test_protocol_and_capability_layers_do_not_define_dataclasses() -> None:
-    roots = (Path("pkgs") / "40-capabilities", Path("pkgs") / "50-protocols")
+    # Capability packages orchestrate contracts and must not redefine data
+    # models. Protocol packages may own revision-specific wire/configuration
+    # dataclasses and version records.
+    roots = (Path("pkgs") / "40-capabilities",)
     offenders: list[str] = []
 
     for root in roots:
         for file in root.rglob("*.py"):
+            if file.name == "versions.py":
+                continue
             tree = ast.parse(file.read_text(encoding="utf-8"))
             dataclass_aliases = {"dataclass"}
             dataclasses_module_aliases = {"dataclasses"}
             for node in tree.body:
                 if isinstance(node, ast.ImportFrom) and node.module == "dataclasses":
-                    dataclass_aliases.update(alias.asname or alias.name for alias in node.names if alias.name == "dataclass")
+                    dataclass_aliases.update(
+                        alias.asname or alias.name
+                        for alias in node.names
+                        if alias.name == "dataclass"
+                    )
                 elif isinstance(node, ast.Import):
                     dataclasses_module_aliases.update(
-                        alias.asname or alias.name for alias in node.names if alias.name == "dataclasses"
+                        alias.asname or alias.name
+                        for alias in node.names
+                        if alias.name == "dataclasses"
                     )
             for node in ast.walk(tree):
                 if not isinstance(node, ast.ClassDef):
                     continue
                 for decorator in node.decorator_list:
-                    target = decorator.func if isinstance(decorator, ast.Call) else decorator
+                    target = (
+                        decorator.func if isinstance(decorator, ast.Call) else decorator
+                    )
                     if isinstance(target, ast.Name) and target.id in dataclass_aliases:
                         offenders.append(f"{file.as_posix()}:{node.lineno}:{node.name}")
                     elif (

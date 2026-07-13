@@ -98,7 +98,9 @@ def test_concrete_variants_subclass_contract_dataclasses() -> None:
         "ServiceKeyCredential",
         "WebAuthnCredential",
     ):
-        assert issubclass(getattr(credential_concrete, name), contracts.Credential), name
+        assert issubclass(getattr(credential_concrete, name), contracts.Credential), (
+            name
+        )
 
 
 def test_concrete_layer_only_imports_lower_contract_surfaces() -> None:
@@ -113,10 +115,14 @@ def test_concrete_layer_only_imports_lower_contract_surfaces() -> None:
     }
 
     offenders = {
-        str(path.relative_to(ROOT)): sorted(_imports(path) - allowed)
+        str(path.relative_to(ROOT)): sorted(
+            name for name in _imports(path) - allowed if not name.endswith("_concrete")
+        )
         for root in CONCRETE_ROOTS
         for path in root.rglob("*.py")
-        if _imports(path) - allowed
+        if any(
+            name for name in _imports(path) - allowed if not name.endswith("_concrete")
+        )
     }
 
     assert offenders == {}

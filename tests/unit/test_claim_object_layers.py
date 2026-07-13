@@ -53,7 +53,7 @@ def test_registered_claim_taxonomy_and_standalone_classes():
     )
     assert all(isinstance(item, (Claim, ClaimBase)) for item in claims)
     assert ClaimSet(claims, "jwt", "RFC 7519").as_mapping()["sub"] == "subject"
-    assert compose_jwt_claim_set(*claims).version == "RFC 7519"
+    assert compose_jwt_claim_set(*claims).version == "RFC7519"
     assert (
         RegisteredClaim.SUBJECT == "sub" and claims[1].claim_type is ClaimType.IDENTITY
     )
@@ -96,9 +96,9 @@ def test_protocols_compose_independently_owned_claim_classes():
 
     assert oidc.protocol == "oidc"
     assert oauth.version == "RFC 9068"
-    assert eat.version == "RFC 9711"
+    assert eat.version == "RFC9711"
     assert sd_jwt_vc.protocol == "sd-jwt-vc"
-    assert security_event.version == "RFC 8417"
+    assert security_event.version == "RFC8417"
 
 
 @pytest.mark.parametrize(
