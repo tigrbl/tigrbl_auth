@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import tests.unit.formal_auth_helpers  # noqa: F401
 
-from tigrbl_authz_policy_rules_concrete import (
+from tigrbl_authz_policy_authority_derivation_graph import (
     AuthorityDerivationGraph,
     AuthorityEdge,
     AuthorityNode,
@@ -14,7 +14,10 @@ from tigrbl_authz_policy_rules_concrete import (
 
 def test_least_authority_diff_t1_attributes_excess_authority() -> None:
     graph = AuthorityDerivationGraph(
-        nodes=(AuthorityNode("subject:alice", "subject"), AuthorityNode("authority:client", "authority")),
+        nodes=(
+            AuthorityNode("subject:alice", "subject"),
+            AuthorityNode("authority:client", "authority"),
+        ),
         edges=(
             AuthorityEdge(
                 "edge:wide",

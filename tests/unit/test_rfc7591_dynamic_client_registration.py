@@ -7,11 +7,13 @@ import pytest
 import pytest_asyncio
 
 from tigrbl_auth import rfc7591
-from tigrbl_identity_storage.tables.client_registration import router
+from tigrbl_identity_storage_runtime.client_registration import router
 from tigrbl import TigrblApp
 from tigrbl_auth.tables import get_db
 
-register_router_module = importlib.import_module("tigrbl_identity_storage.tables.client_registration")
+register_router_module = importlib.import_module(
+    "tigrbl_identity_storage_runtime.client_registration"
+)
 
 
 @pytest_asyncio.fixture()
@@ -19,9 +21,15 @@ async def registration_client(db_session, monkeypatch):
     app = TigrblApp()
     app.include_router(router)
     app.router.dependency_overrides[get_db] = lambda: db_session
-    monkeypatch.setattr(register_router_module, "_sync_client_registration", lambda *args, **kwargs: None)
+    monkeypatch.setattr(
+        register_router_module,
+        "_sync_client_registration",
+        lambda *args, **kwargs: None,
+    )
     transport = httpx.ASGITransport(app=app)
-    async with httpx.AsyncClient(transport=transport, base_url="https://test") as client:
+    async with httpx.AsyncClient(
+        transport=transport, base_url="https://test"
+    ) as client:
         yield client
 
 
@@ -40,5 +48,5 @@ async def test_register_client_via_server(registration_client):
             "redirect_uris": ["https://a.example/cb"],
         },
     )
-    assert resp.status_code == 200
+    assert resp.status_code == 200, resp.text
     assert resp.json()["client_id"]

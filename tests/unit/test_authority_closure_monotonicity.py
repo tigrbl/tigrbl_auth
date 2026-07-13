@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import tests.unit.formal_auth_helpers  # noqa: F401
 
-from tigrbl_authz_policy_rules_concrete import (
+from tigrbl_authz_policy_authority_derivation_graph import (
     AuthorityDerivationGraph,
     AuthorityEdge,
     AuthorityMutationKind,
@@ -15,7 +15,10 @@ from tigrbl_authz_policy_rules_concrete import (
 
 def test_authority_closure_t1_computes_effective_scopes_and_provenance() -> None:
     graph = AuthorityDerivationGraph(
-        nodes=(AuthorityNode("subject:bob", "subject"), AuthorityNode("authority:client", "authority")),
+        nodes=(
+            AuthorityNode("subject:bob", "subject"),
+            AuthorityNode("authority:client", "authority"),
+        ),
         edges=(
             AuthorityEdge(
                 "edge:client-read",
@@ -30,21 +33,47 @@ def test_authority_closure_t1_computes_effective_scopes_and_provenance() -> None
     closure = compute_authority_closure(graph, "subject:bob")
 
     assert tuple(scope.action for scope in closure.scopes) == ("client.read",)
-    assert closure.provenance[("tenant-a", "", "client.read", "*")] == ("edge:client-read",)
+    assert closure.provenance[("tenant-a", "", "client.read", "*")] == (
+        "edge:client-read",
+    )
 
 
 def test_authority_monotonicity_t1_detects_revoke_expansion() -> None:
     before_graph = AuthorityDerivationGraph(
-        nodes=(AuthorityNode("subject:bob", "subject"), AuthorityNode("authority:client", "authority")),
+        nodes=(
+            AuthorityNode("subject:bob", "subject"),
+            AuthorityNode("authority:client", "authority"),
+        ),
         edges=(
-            AuthorityEdge("edge:read", "subject:bob", "authority:client", "grant", (AuthorityScope("tenant-a", "client.read"),)),
+            AuthorityEdge(
+                "edge:read",
+                "subject:bob",
+                "authority:client",
+                "grant",
+                (AuthorityScope("tenant-a", "client.read"),),
+            ),
         ),
     )
     after_graph = AuthorityDerivationGraph(
-        nodes=(AuthorityNode("subject:bob", "subject"), AuthorityNode("authority:client", "authority")),
+        nodes=(
+            AuthorityNode("subject:bob", "subject"),
+            AuthorityNode("authority:client", "authority"),
+        ),
         edges=(
-            AuthorityEdge("edge:read", "subject:bob", "authority:client", "grant", (AuthorityScope("tenant-a", "client.read"),)),
-            AuthorityEdge("edge:write", "subject:bob", "authority:client", "grant", (AuthorityScope("tenant-a", "client.write"),)),
+            AuthorityEdge(
+                "edge:read",
+                "subject:bob",
+                "authority:client",
+                "grant",
+                (AuthorityScope("tenant-a", "client.read"),),
+            ),
+            AuthorityEdge(
+                "edge:write",
+                "subject:bob",
+                "authority:client",
+                "grant",
+                (AuthorityScope("tenant-a", "client.write"),),
+            ),
         ),
     )
 
