@@ -9,7 +9,6 @@ from typing import Any
 from uuid import UUID
 
 from tigrbl_identity_storage.tables._ops import delete_record, list_records, record_id, token_hash
-from tigrbl_identity_storage.tables.audit_event import append_audit_event, append_audit_event_async
 from tigrbl_identity_storage.tables._sync import run_async
 from tigrbl_identity_storage.tables.auth_session import AuthSession
 from tigrbl_identity_storage.tables.client_registration import ClientRegistration

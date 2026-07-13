@@ -228,8 +228,6 @@ def introspect_token(token):
 
 
 __all__ = [
-    "append_audit_event",
-    "append_audit_event_async",
     "bind_session_client",
     "bind_session_client_async",
     "create_session",

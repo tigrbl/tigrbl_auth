@@ -1,6 +1,7 @@
 """Derived executable specifications grouped by durable table family."""
 
 from .attestation import *
+from .audit import *
 from .authorization import *
 from .clients import *
 from .consents import *
@@ -19,6 +20,7 @@ from .workloads import *
 
 DURABLE_RUNTIME_TABLE_SPECS = (
     AttributePolicyRuntimeSpec,
+    AuditEventRuntimeSpec,
     RoleRuntimeSpec,
     TenantMembershipRuntimeSpec,
     DelegatedAdminScopeRuntimeSpec,

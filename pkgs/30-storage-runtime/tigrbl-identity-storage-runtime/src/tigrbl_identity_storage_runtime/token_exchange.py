@@ -66,11 +66,7 @@ except Exception:  # pragma: no cover - dependency-light fallback for checkpoint
 
     status = _FallbackStatus()
 
-try:  # pragma: no cover
-    from tigrbl_identity_storage.tables.audit_event import append_audit_event_async
-except Exception:  # pragma: no cover - dependency-light fallback
-    async def append_audit_event_async(**kwargs):
-        return None
+from .ops.audit import append_audit_event_async
 
 from .token_persistence import upsert_token_record_async
 

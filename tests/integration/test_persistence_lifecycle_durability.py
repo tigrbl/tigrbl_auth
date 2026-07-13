@@ -7,7 +7,11 @@ import pytest
 from sqlalchemy import select
 
 from tigrbl_identity_jose.key_management import hash_pw
-from tigrbl_identity_storage.tables.audit_event import append_audit_event_async
+from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
+from tigrbl_identity_storage_runtime import (
+    append_audit_event_async,
+    initializeIdentityRuntimeTables,
+)
 from tigrbl_identity_storage.persistence import (
     create_session_async,
     get_active_session_async,
@@ -34,6 +38,11 @@ from tigrbl_auth.tables import AuditEvent, AuthSession, Client, ClientRegistrati
 pytestmark = [pytest.mark.integration, pytest.mark.asyncio]
 
 
+@pytest.fixture(scope="module", autouse=True)
+def _activate_durable_runtime_operations():
+    initializeIdentityRuntimeTables()
+
+
 async def _identity_triplet(db_session):
     suffix = uuid4().hex[:8]
     tenant = Tenant(slug=f"tenant-{suffix}", name=f"Tenant {suffix}", email=f"tenant-{suffix}@example.com")
@@ -49,11 +58,11 @@ async def _identity_triplet(db_session):
     db_session.add(user)
     await db_session.commit()
 
-    client = Client.new(
+    client = Client(
+        id=uuid4(),
         tenant_id=tenant.id,
-        client_id=str(uuid4()),
-        client_secret="super-secret",
-        redirects=["https://client.example/callback"],
+        client_secret_hash=BcryptSecretHasher().hash_secret("super-secret").encoded,
+        redirect_uris="https://client.example/callback",
     )
     db_session.add(client)
     await db_session.commit()

@@ -18,7 +18,7 @@ from tigrbl_identity_storage.persistence import (
     revoke_token,
     revoke_token_async,
 )
-from tigrbl_identity_storage.tables.audit_event import append_audit_event_async
+from .ops.audit import append_audit_event_async
 from tigrbl_identity_storage.tables.revoked_token import RevocationOut
 
 RFC7009_SPEC_URL = "https://www.rfc-editor.org/rfc/rfc7009"

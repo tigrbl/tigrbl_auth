@@ -15,7 +15,7 @@ from tigrbl_identity_runtime.http_standards.cookies import (
 )
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_storage.framework import Depends, HTTPException, JSONResponse, RedirectResponse, TigrblApp, TigrblRouter, status
-from tigrbl_identity_storage.tables.audit_event import append_audit_event_async
+from .ops.audit import append_audit_event_async
 from tigrbl_identity_storage.persistence import get_session_async
 from tigrbl_identity_storage.tables.engine import get_db
 
@@ -110,6 +110,7 @@ async def logout_request(*, request, db):
             },
         )
         await append_audit_event_async(
+            db=db,
             tenant_id=session.tenant_id,
             actor_user_id=session.user_id,
             actor_client_id=client_id,

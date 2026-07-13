@@ -1,6 +1,7 @@
 """Carrier-neutral durable table operations."""
 
 from .attestation import *
+from .audit import *
 from .authorization import *
 from .common import *
 from .clients import *
