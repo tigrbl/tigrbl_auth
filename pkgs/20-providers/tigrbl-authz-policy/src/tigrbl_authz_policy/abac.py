@@ -48,17 +48,16 @@ class ABACAdministrator:
         if not name or not permission or not required_attributes:
             raise ValueError("policy name, permission, and attributes are required")
         row, conditions = await _StoredAttributePolicy.upsert_with_conditions(
-            self.db,
-            name=name,
-            tenant_id=tenant_id,
-            client_id=client_id,
-            permission=permission,
-            effect=effect,
-            required_attributes=dict(required_attributes),
-            dynamic_conditions=(
+            {"payload": {"name": name,
+            "tenant_id": tenant_id,
+            "client_id": client_id,
+            "permission": permission,
+            "effect": effect,
+            "required_attributes": dict(required_attributes),
+            "dynamic_conditions": tuple(
                 {"field_name": condition.field, "operator": condition.operator, "expected": condition.expected}
                 for condition in dynamic_conditions
-            ),
+            )}, "db": self.db}
         )
         return _attribute_policy_contract(row, conditions)
 
@@ -98,7 +97,9 @@ class ABACAdministrator:
     async def list_policies(self) -> tuple[AttributePolicy, ...]:
         return tuple(
             _attribute_policy_contract(row, conditions)
-            for row, conditions in await _StoredAttributePolicy.list_active_with_conditions(self.db)
+            for row, conditions in await _StoredAttributePolicy.list_active_with_conditions(
+                {"payload": {"tenant_id": None}, "db": self.db}
+            )
         )
 
     async def summary(self) -> dict[str, Any]:

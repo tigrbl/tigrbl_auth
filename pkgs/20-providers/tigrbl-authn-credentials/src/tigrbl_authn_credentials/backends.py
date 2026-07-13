@@ -28,7 +28,9 @@ def _active(row: Any) -> bool:
 
 class PasswordBackend:
     async def _get_user_candidates(self, db: Any, identifier: str) -> list[User]:
-        row = await User.lookup_by_identifier(db, identifier=identifier)
+        row = await User.lookup_by_identifier(
+            {"payload": {"identifier": identifier}, "db": db}
+        )
         return [row] if row is not None and _active(row) else []
 
     async def authenticate(self, db: Any, identifier: str, password: str) -> User:
@@ -109,7 +111,9 @@ class ApiKeyBackend:
             svc_row.touch()
             return service_identity, "service_identity"
 
-        client = await Client.authenticate(db, client_secret=api_key)
+        client = await Client.authenticate(
+            {"payload": {"client_secret": api_key}, "db": db}
+        )
         if client is not None:
             return client, "client"
 

@@ -46,18 +46,19 @@ class DelegatedAdministrator:
         service_identity_permissions: Iterable[str] = (),
     ) -> DelegatedAdminScope:
         row = await _StoredDelegatedAdminScope.grant_scope(
-            self.db,
-            subject=subject,
-            tenant_ids=list(_str_tuple(tenant_ids)),
-            permissions=list(_str_tuple(permissions)),
-            visible_client_fields=list(_str_tuple(visible_client_fields)),
-            mutable_client_fields=list(_str_tuple(mutable_client_fields)),
-            service_identity_permissions=list(_str_tuple(service_identity_permissions)),
+            {"payload": {"subject": subject,
+            "tenant_ids": list(_str_tuple(tenant_ids)),
+            "permissions": list(_str_tuple(permissions)),
+            "visible_client_fields": list(_str_tuple(visible_client_fields)),
+            "mutable_client_fields": list(_str_tuple(mutable_client_fields)),
+            "service_identity_permissions": list(_str_tuple(service_identity_permissions))}, "db": self.db}
         )
         return _delegated_scope_contract(row)
 
     async def revoke_scope(self, subject: str) -> DelegatedAdminScope | None:
-        row = await _StoredDelegatedAdminScope.revoke_scope(self.db, subject=subject)
+        row = await _StoredDelegatedAdminScope.revoke_scope(
+            {"payload": {"subject": subject}, "db": self.db}
+        )
         return _delegated_scope_contract(row) if row is not None else None
 
     async def scope_for(self, subject: str) -> DelegatedAdminScope | None:

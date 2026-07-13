@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import uuid
 import datetime as dt
+from typing import Any
 
 from tigrbl_identity_storage.framework import (
     UserBase,
@@ -23,6 +24,7 @@ from tigrbl_identity_storage.framework import (
     acol,
     ColumnSpec,
     constr,
+    op_ctx,
 )
 
 from tigrbl_identity_jose.key_management import hash_pw
@@ -208,19 +210,6 @@ class User(UserBase, Bootstrappable):
 
     tenant = relationship("Tenant", back_populates="users")
 
-    @classmethod
-    async def lookup_by_identifier(cls, db, *, identifier: str):
-        from .._ops import field, list_records
-
-        if not identifier:
-            return None
-        for row in await list_records(cls, db):
-            if not bool(field(row, "is_active", True)):
-                continue
-            if identifier in {field(row, "username"), field(row, "email")}:
-                return row
-        return None
-
     def verify_password(self, plain: str) -> bool:
         from tigrbl_identity_jose.key_management import verify_pw
 
@@ -259,6 +248,21 @@ class User(UserBase, Bootstrappable):
             "is_active": True,
         }
     ]
+
+
+@op_ctx(bind=User, alias="lookup_by_identifier", target="custom", arity="collection", rest=False)
+async def lookup_by_identifier(cls: type[User], ctx: dict[str, Any]):
+    from .._ops import field, list_records
+
+    identifier = str((ctx.get("payload") or {}).get("identifier") or "")
+    if not identifier:
+        return None
+    for row in await list_records(cls, ctx["db"]):
+        if not bool(field(row, "is_active", True)):
+            continue
+        if identifier in {field(row, "username"), field(row, "email")}:
+            return row
+    return None
 
 
 admin_api = admin_router = TigrblRouter()

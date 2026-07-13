@@ -49,6 +49,10 @@ class _FakeTableHandlers:
         return None
 
 
+async def _op(model, operation: str, db, **payload):
+    return await getattr(model, operation)({"payload": payload, "db": db})
+
+
 def test_delegation_lifecycle_dtos_are_contract_owned() -> None:
     authz_lifecycle = importlib.import_module("tigrbl_authz_policy.delegation")
     contracts = importlib.import_module("tigrbl_identity_contracts.delegation")
@@ -169,24 +173,24 @@ def test_delegation_grant_table_owns_lifecycle_and_association_ops(monkeypatch: 
     monkeypatch.setattr(storage_tables.DelegationGrantTokenLink, "handlers", token_link_handlers)
 
     async def scenario() -> None:
-        state_grant = await storage_tables.DelegationGrant.create_grant(
+        state_grant = await _op(storage_tables.DelegationGrant, "create_grant",
             object(),
             delegator_subject="alice",
             delegate_subject="erin",
         )
-        parent = await storage_tables.DelegationGrant.create_grant(
+        parent = await _op(storage_tables.DelegationGrant, "create_grant",
             object(),
             delegator_subject="alice",
             delegate_subject="bob",
             tenant_id=uuid4(),
         )
-        child = await storage_tables.DelegationGrant.create_grant(
+        child = await _op(storage_tables.DelegationGrant, "create_grant",
             object(),
             delegator_subject="bob",
             delegate_subject="carol",
             parent_grant_id=parent["id"],
         )
-        await storage_tables.DelegationGrantEdge.link_edge(
+        await _op(storage_tables.DelegationGrantEdge, "link_edge",
             object(),
             parent_grant_id=parent["id"],
             child_grant_id=child["id"],
@@ -194,28 +198,28 @@ def test_delegation_grant_table_owns_lifecycle_and_association_ops(monkeypatch: 
             delegate_subject="carol",
         )
 
-        inspected = await storage_tables.DelegationGrant.inspect_grant(object(), grant_id=parent["id"])
-        active = await storage_tables.DelegationGrant.activate_grant(object(), grant_id=state_grant["id"])
+        inspected = await _op(storage_tables.DelegationGrant, "inspect_grant", object(), grant_id=parent["id"])
+        active = await _op(storage_tables.DelegationGrant, "activate_grant", object(), grant_id=state_grant["id"])
         active_status = active["status"]
-        expired = await storage_tables.DelegationGrant.expire_grant(object(), grant_id=state_grant["id"])
-        replacement = await storage_tables.DelegationGrant.replace_grant(
+        expired = await _op(storage_tables.DelegationGrant, "expire_grant", object(), grant_id=state_grant["id"])
+        replacement = await _op(storage_tables.DelegationGrant, "replace_grant",
             object(),
             grant_id=child["id"],
             delegate_subject="dave",
         )
-        revoked = await storage_tables.DelegationGrant.revoke_grant(
+        revoked = await _op(storage_tables.DelegationGrant, "revoke_grant",
             object(),
             grant_id=parent["id"],
             revoked_by="admin",
             reason="cleanup",
             collapse_descendants=True,
         )
-        grants = await storage_tables.DelegationGrant.list_grants(
+        grants = await _op(storage_tables.DelegationGrant, "list_grants",
             object(),
             delegator_subject="alice",
             delegate_subject="bob",
         )
-        proof = await storage_tables.DelegationGrantProof.persist_provenance(
+        proof = await _op(storage_tables.DelegationGrantProof, "persist_provenance",
             object(),
             grant_id=parent["id"],
             source_scope_hash="source",
@@ -223,13 +227,13 @@ def test_delegation_grant_table_owns_lifecycle_and_association_ops(monkeypatch: 
             attenuation_result=True,
             proof_hash="proof:1",
         )
-        token_link = await storage_tables.DelegationGrantTokenLink.link_token(
+        token_link = await _op(storage_tables.DelegationGrantTokenLink, "link_token",
             object(),
             grant_id=parent["id"],
             token_hash="token:hash",
             subject="bob",
         )
-        token_links = await storage_tables.DelegationGrantTokenLink.list_for_grant(object(), grant_id=parent["id"])
+        token_links = await _op(storage_tables.DelegationGrantTokenLink, "list_for_grant", object(), grant_id=parent["id"])
 
         assert inspected is parent
         assert active_status == "active"

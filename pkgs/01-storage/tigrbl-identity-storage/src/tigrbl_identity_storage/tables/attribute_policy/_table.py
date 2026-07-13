@@ -12,6 +12,7 @@ from tigrbl_identity_storage.framework import (
     String,
     Timestamped,
     acol,
+    op_ctx,
 )
 
 
@@ -37,64 +38,38 @@ class AttributePolicy(RestOltpTable, GUIDPk, Timestamped):
         storage=S(String(32), nullable=False, default="active", index=True)
     )
 
-    @classmethod
-    async def upsert_with_conditions(
-        cls,
-        db,
-        *,
-        name: str,
-        tenant_id: str | None,
-        permission: str,
-        required_attributes: dict,
-        dynamic_conditions=(),
-    ):
-        from .._ops import (
-            create_record,
-            clear_records,
-            first_record,
-            record_id,
-            update_record,
-        )
-        from ..policy_condition import PolicyCondition
 
-        existing = await first_record(cls, db, {"name": name, "tenant_id": tenant_id})
-        payload = {
-            "name": name,
-            "tenant_id": tenant_id,
-            "permission": permission,
-            "required_attributes": dict(required_attributes),
-            "status": "active",
-        }
-        row = (
-            await create_record(cls, db, payload)
-            if existing is None
-            else await update_record(cls, db, record_id(existing), payload)
-        )
-        policy_id = record_id(row)
-        await clear_records(PolicyCondition, db, {"policy_id": policy_id})
-        conditions = [
-            await create_record(
-                PolicyCondition,
-                db,
-                {"policy_id": policy_id, **dict(condition)},
-            )
-            for condition in dynamic_conditions
-        ]
-        return row, conditions
 
-    @classmethod
-    async def list_active_with_conditions(cls, db, *, tenant_id: str | None):
-        from .._ops import list_records, record_id
-        from ..policy_condition import PolicyCondition
+@op_ctx(bind=AttributePolicy, alias="upsert_with_conditions", target="custom", arity="collection", rest=False)
+async def upsert_with_conditions(cls, ctx):
+    from .._ops import create_record, clear_records, first_record, record_id, update_record
+    from ..policy_condition import PolicyCondition
 
-        rows = await list_records(cls, db, {"tenant_id": tenant_id, "status": "active"})
-        return [
-            (
-                row,
-                await list_records(PolicyCondition, db, {"policy_id": record_id(row)}),
-            )
-            for row in rows
-        ]
+    values = dict(ctx.get("payload") or {})
+    db = ctx["db"]
+    existing = await first_record(cls, db, {"name": values["name"], "tenant_id": values.get("tenant_id")})
+    payload = {
+        "name": values["name"], "tenant_id": values.get("tenant_id"),
+        "permission": values["permission"],
+        "required_attributes": dict(values.get("required_attributes") or {}),
+        "status": "active",
+    }
+    row = await create_record(cls, db, payload) if existing is None else await update_record(cls, db, record_id(existing), payload)
+    policy_id = record_id(row)
+    await clear_records(PolicyCondition, db, {"policy_id": policy_id})
+    conditions = [await create_record(PolicyCondition, db, {"policy_id": policy_id, **dict(condition)}) for condition in values.get("dynamic_conditions", ())]
+    return row, conditions
+
+
+@op_ctx(bind=AttributePolicy, alias="list_active_with_conditions", target="custom", arity="collection", rest=False)
+async def list_active_with_conditions(cls, ctx):
+    from .._ops import list_records, record_id
+    from ..policy_condition import PolicyCondition
+
+    db = ctx["db"]
+    tenant_id = (ctx.get("payload") or {}).get("tenant_id")
+    rows = await list_records(cls, db, {"tenant_id": tenant_id, "status": "active"})
+    return [(row, await list_records(PolicyCondition, db, {"policy_id": record_id(row)})) for row in rows]
 
 
 __all__ = ["AttributePolicy"]

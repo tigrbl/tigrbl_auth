@@ -55,17 +55,12 @@ class RBACAdministrator:
         if await self._role_for(role_name, tenant_id) is None:
             raise KeyError(f"unknown role {role_name!r}")
         await _StoredTenantMembership.assign_role(
-            self.db,
-            tenant_id=tenant_id,
-            principal_id=subject,
-            role_name=role_name,
+            {"payload": {"tenant_id": tenant_id, "principal_id": subject, "role_name": role_name}, "db": self.db}
         )
 
     async def assignments_for(self, subject: str, tenant_id: str | None = None) -> tuple[str, ...]:
         return await _StoredTenantMembership.role_names_for_principal(
-            self.db,
-            principal_id=subject,
-            tenant_id=tenant_id,
+            {"payload": {"principal_id": subject, "tenant_id": tenant_id}, "db": self.db}
         )
 
     async def list_roles(self, tenant_id: str | None = None) -> tuple[Role, ...]:
@@ -112,9 +107,7 @@ class RBACAdministrator:
         matched_roles: set[str] = set()
         roles = await self._role_map_for_tenant(tenant_id)
         for role_name in await _StoredTenantMembership.role_names_for_principal(
-            self.db,
-            principal_id=subject,
-            tenant_id=tenant_id,
+            {"payload": {"principal_id": subject, "tenant_id": tenant_id}, "db": self.db}
         ):
             self._collect_role(role_name, roles, grants, denies, matched_roles, set())
         return grants, denies, tuple(sorted(matched_roles))

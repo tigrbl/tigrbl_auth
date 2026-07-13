@@ -17,12 +17,26 @@ DELEGATION_TABLE = (
 )
 
 
-def _class_methods(class_name: str) -> set[str]:
+def _bound_ops(class_name: str) -> set[str]:
     module = ast.parse(DELEGATION_TABLE.read_text(encoding="utf-8"))
+    aliases: set[str] = set()
     for node in module.body:
-        if isinstance(node, ast.ClassDef) and node.name == class_name:
-            return {item.name for item in node.body if isinstance(item, (ast.FunctionDef, ast.AsyncFunctionDef))}
-    raise AssertionError(f"{class_name} not found in {DELEGATION_TABLE}")
+        if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            continue
+        for decorator in node.decorator_list:
+            if not isinstance(decorator, ast.Call):
+                continue
+            keywords = {item.arg: item.value for item in decorator.keywords}
+            bind = keywords.get("bind")
+            alias = keywords.get("alias")
+            if (
+                isinstance(bind, ast.Name)
+                and bind.id == class_name
+                and isinstance(alias, ast.Constant)
+                and isinstance(alias.value, str)
+            ):
+                aliases.add(alias.value)
+    return aliases
 
 
 def test_delegation_storage_tables_own_grant_and_provenance_ops() -> None:
@@ -34,6 +48,6 @@ def test_delegation_storage_tables_own_grant_and_provenance_ops() -> None:
         "list_grants",
         "replace_grant",
         "revoke_grant",
-    } <= _class_methods("DelegationGrant")
-    assert {"persist_provenance"} <= _class_methods("DelegationGrantProof")
-    assert {"link_token", "list_for_grant"} <= _class_methods("DelegationGrantTokenLink")
+    } <= _bound_ops("DelegationGrant")
+    assert {"persist_provenance"} <= _bound_ops("DelegationGrantProof")
+    assert {"link_token", "list_for_grant"} <= _bound_ops("DelegationGrantTokenLink")

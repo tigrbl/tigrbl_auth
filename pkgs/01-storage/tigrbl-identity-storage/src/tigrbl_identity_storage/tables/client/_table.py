@@ -16,6 +16,7 @@ from tigrbl_identity_storage.framework import (
     IO,
     S,
     acol,
+    op_ctx,
 )
 from tigrbl_identity_jose.key_management import hash_pw, verify_pw
 
@@ -39,20 +40,6 @@ class Client(ClientBase):
             storage=S(String, nullable=False, default="code"), field=F(), io=IO()
         )
     )
-
-    @classmethod
-    async def authenticate(cls, db, *, client_secret: str):
-        from .._ops import field, list_records
-
-        if not client_secret:
-            return None
-        for row in await list_records(cls, db):
-            if not bool(field(row, "is_active", True)):
-                continue
-            verifier = getattr(row, "verify_secret", None)
-            if callable(verifier) and verifier(client_secret):
-                return row
-        return None
 
     def verify_secret(self, plain: str) -> bool:
         return verify_pw(plain, self.client_secret_hash)
@@ -78,6 +65,22 @@ class Client(ClientBase):
         return await update_record(
             type(self), db, record_id(self), {"is_active": False}
         )
+
+
+@op_ctx(bind=Client, alias="authenticate", target="custom", arity="collection", rest=False)
+async def authenticate(cls: type[Client], ctx: dict[str, Any]):
+    from .._ops import field, list_records
+
+    client_secret = str((ctx.get("payload") or {}).get("client_secret") or "")
+    if not client_secret:
+        return None
+    for row in await list_records(cls, ctx["db"]):
+        if not bool(field(row, "is_active", True)):
+            continue
+        verifier = getattr(row, "verify_secret", None)
+        if callable(verifier) and verifier(client_secret):
+            return row
+    return None
 
 
 __all__ = ["Client", "_CLIENT_ID_RE"]

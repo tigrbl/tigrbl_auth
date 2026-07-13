@@ -470,7 +470,9 @@ class TestApiKeyBackend:
         inactive_client, raw_secret = self.create_mock_client(mock_data_factory, is_active=False)
         self.client_rows = [inactive_client, active_client]
 
-        row = await Client.authenticate(self.mock_db, client_secret=raw_secret)
+        row = await Client.authenticate(
+            {"payload": {"client_secret": raw_secret}, "db": self.mock_db}
+        )
 
         assert row == active_client
 
