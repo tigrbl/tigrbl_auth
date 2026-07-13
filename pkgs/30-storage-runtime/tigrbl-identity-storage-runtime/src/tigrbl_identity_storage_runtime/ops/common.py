@@ -145,6 +145,17 @@ async def update_table_record(
     return result.get("item", result) if isinstance(result, Mapping) else result
 
 
+async def delete_table_record(table: type, db: Any, identifier: Any) -> Any:
+    context = {"path_params": {"id": identifier}, "db": db}
+    return await _call_table_core(
+        table.handlers.delete.core,
+        table=table,
+        db=db,
+        context=context,
+        positional=(identifier,),
+    )
+
+
 async def clear_table_records(
     table: type,
     db: Any,
@@ -184,6 +195,7 @@ __all__ = [
     "create_table_handler",
     "create_table_record",
     "database_from_context",
+    "delete_table_record",
     "field_value",
     "first_table_record",
     "list_table_records",

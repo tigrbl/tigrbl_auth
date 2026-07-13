@@ -88,3 +88,24 @@ def test_authorization_mutations_are_not_defined_by_layer_01_tables() -> None:
             isinstance(node, (ast.AsyncFunctionDef, ast.FunctionDef))
             for node in ast.walk(tree)
         )
+
+
+def test_oidc_replay_mutation_is_not_defined_by_layer_01_table() -> None:
+    table = (
+        ROOT
+        / "pkgs"
+        / "01-storage"
+        / "tigrbl-identity-storage"
+        / "src"
+        / "tigrbl_identity_storage"
+        / "tables"
+        / "backchannel_logout_replay"
+        / "_table.py"
+    )
+    source = table.read_text(encoding="utf-8")
+    tree = ast.parse(source)
+    assert "op_ctx" not in source
+    assert not any(
+        isinstance(node, (ast.AsyncFunctionDef, ast.FunctionDef))
+        for node in ast.walk(tree)
+    )
