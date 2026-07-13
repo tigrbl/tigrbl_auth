@@ -17,6 +17,7 @@ from tigrbl_identity_storage.tables import (
     User,
 )
 from tigrbl_identity_jose.key_management import hash_pw
+from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
 
 
 @pytest.mark.unit
@@ -35,80 +36,56 @@ class TestTenantModel:
 class TestClientModel:
     """Test OAuth Client model functionality."""
 
-    def test_invalid_client_id_format_raises_error(self):
-        """Test that invalid client_id formats raise ValueError."""
-        tenant_id = uuid.uuid4()
-
-        invalid_client_ids = [
-            "short",  # Too short (< 8 chars)
-            "a" * 65,  # Too long (> 64 chars)
-            "invalid@id",  # Invalid characters
-            "has spaces",  # Spaces not allowed
-            "has.dots",  # Dots not allowed
-            "",  # Empty string
-        ]
-
-        for client_id in invalid_client_ids:
-            with pytest.raises(ValueError, match="invalid client_id format"):
-                Client.new(
-                    tenant_id=tenant_id,
-                    client_id=client_id,
-                    client_secret="test-secret",
-                    redirects=["https://example.com/callback"],
-                )
+    def test_client_record_has_no_secret_issuing_constructor(self):
+        """Secret issuance is provider behavior, not storage-model behavior."""
+        assert not hasattr(Client, "new")
 
 
 @pytest.mark.unit
 class TestUserModel:
     """Test User model functionality."""
 
-    def test_user_new_method_basic(self):
-        """Test creating a user using the new() class method."""
+    def test_user_record_basic_construction(self):
+        """The durable record accepts already-materialized storage values."""
         tenant_id = uuid.uuid4()
         username = "testuser"
         email = "test@example.com"
-        password = "TestPassword123!"
-
-        user = User.new(
-            tenant_id=tenant_id, username=username, email=email, password=password
-        )
+        user = User(tenant_id=tenant_id, username=username, email=email)
 
         assert user.tenant_id == tenant_id
         assert user.username == username
         assert user.email == email
 
-    def test_user_password_verification_with_hash(self):
-        """Test user password verification."""
+    def test_user_password_verification_is_provider_owned(self):
+        """Password verification is not behavior on the durable record."""
         tenant_id = uuid.uuid4()
         password = "TestPassword123!"
 
-        user = User.new(
+        user = User(
             tenant_id=tenant_id,
             username="testuser",
             email="test@example.com",
-            password=password,
         )
-        # Set password hash manually since User.new doesn't set it
         user.password_hash = hash_pw(password)
 
-        # Test correct password verification
-        assert user.verify_password(password) is True
+        verifier = BcryptSecretHasher()
+        assert not hasattr(user, "verify_password")
+        assert verifier.verify_secret(password, user.password_hash).verified
+        assert not verifier.verify_secret("wrong-password", user.password_hash).verified
 
-        # Test incorrect password verification
-        assert user.verify_password("wrong-password") is False
-
-    def test_user_password_verification_with_none_hash(self):
-        """Test user password verification when password_hash is None."""
-        user = User.new(
+    def test_password_provider_rejects_none_hash(self):
+        """The provider rejects records without password material."""
+        user = User(
             tenant_id=uuid.uuid4(),
             username="testuser",
             email="test@example.com",
-            password="TestPassword123!",
         )
         user.password_hash = None
 
-        # Should return False when no password hash is set
-        assert user.verify_password("TestPassword123!") is False
+        assert not BcryptSecretHasher().verify_secret(
+            "TestPassword123!",
+            user.password_hash,
+        ).verified
 
 
 @pytest.mark.unit

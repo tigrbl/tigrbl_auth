@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from tigrbl import TigrblRouter
 from tigrbl_identity_storage.framework import Depends, HTTPException, JSONResponse, RedirectResponse, Request, Response, status
 
 from tigrbl_identity_storage.tables.engine import get_db
@@ -15,14 +16,16 @@ from tigrbl_identity_storage.tables.user._table import (
     AdminSessionOut,
     CredsIn,
     User,
-    admin_api,
 )
 from tigrbl_identity_storage_runtime.ops.common import (
     first_record,
     read_record,
     update_record,
 )
-from tigrbl_identity_jose.key_management import hash_pw
+from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
+
+
+admin_api = admin_router = TigrblRouter()
 
 
 def _admin_session_payload(
@@ -156,7 +159,9 @@ async def admin_change_password(
     if payload is None:
         payload = AdminPasswordChangeIn.model_validate(await request.json() or {})
     session_row, user = await _resolve_admin_session_and_user(request, db)
-    if not user.verify_password(payload.current_password):
+    hasher = BcryptSecretHasher()
+    verification = hasher.verify_secret(payload.current_password, user.password_hash)
+    if not verification.verified:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "invalid current password")
     row = await read_record(User, db, user.id)
     if row is None:
@@ -166,7 +171,7 @@ async def admin_change_password(
         db,
         row.id,
         {
-            "password_hash": hash_pw(payload.new_password),
+            "password_hash": hasher.hash_secret(payload.new_password).encoded,
             "must_change_password": False,
             "password_reset_token_hash": None,
             "password_reset_expires_at": None,
@@ -176,6 +181,8 @@ async def admin_change_password(
 
 
 __all__ = [
+    "admin_api",
+    "admin_router",
     "admin_change_password",
     "admin_forgot_password",
     "admin_login",

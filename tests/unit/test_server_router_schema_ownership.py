@@ -235,7 +235,8 @@ def test_admin_auth_routes_live_in_server_runtime() -> None:
         "admin_reset_password",
         "admin_session",
     }
-    assert runtime_module.admin_api is storage_module.admin_api
+    assert runtime_module.admin_api is runtime_module.admin_router
+    assert runtime_module.admin_api is not storage_module.admin_api
     assert sorted(name for name in route_names if not hasattr(runtime_module, name)) == []
     assert sorted(name for name in route_names if hasattr(storage_module, name)) == []
 

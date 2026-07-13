@@ -183,13 +183,6 @@ class User(UserBase, Bootstrappable):
 
     tenant = relationship("Tenant", back_populates="users")
 
-    def verify_password(self, plain: str) -> bool:
-        from tigrbl_identity_jose.key_management import verify_pw
-
-        if self.password_hash is None:
-            return False
-        return verify_pw(plain, self.password_hash)
-
     @property
     def roles(self) -> tuple[str, ...]:
         roles: list[str] = []
