@@ -2,7 +2,7 @@
 name="tigrbl-credential-profile-sd-jwt-vc"
 version="0.4.0.dev2"
 requires-python=">=3.10,<3.15"
-dependencies=["tigrbl-identity-contracts==0.4.0.dev2","tigrbl-credential-type-claim-concrete==0.4.0.dev2","tigrbl-credential-status-claim-concrete==0.4.0.dev2"]
+dependencies=["tigrbl-identity-contracts==0.4.0.dev2","tigrbl-claim-credential-type-concrete==0.4.0.dev2","tigrbl-claim-credential-status-concrete==0.4.0.dev2"]
 [build-system]
 requires=["poetry-core>=1.0.0"]
 build-backend="poetry.core.masonry.api"

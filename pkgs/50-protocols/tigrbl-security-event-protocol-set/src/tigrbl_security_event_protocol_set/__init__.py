@@ -1,10 +1,10 @@
 from tigrbl_identity_contracts.claims import ClaimSet
-from tigrbl_audience_claim_concrete import AudienceClaim
-from tigrbl_issued_at_claim_concrete import IssuedAtClaim
-from tigrbl_issuer_claim_concrete import IssuerClaim
-from tigrbl_jwt_id_claim_concrete import JwtIdClaim
-from tigrbl_security_events_claim_concrete import SecurityEventsClaim
-from tigrbl_subject_claim_concrete import SubjectClaim
+from tigrbl_claim_audience_concrete import AudienceClaim
+from tigrbl_claim_issued_at_concrete import IssuedAtClaim
+from tigrbl_claim_issuer_concrete import IssuerClaim
+from tigrbl_claim_jwt_id_concrete import JwtIdClaim
+from tigrbl_claim_security_events_concrete import SecurityEventsClaim
+from tigrbl_claim_subject_concrete import SubjectClaim
 
 from .features import FEATURES_BY_VERSION, supports
 from .migrations import migrate_claims

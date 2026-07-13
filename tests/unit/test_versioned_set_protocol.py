@@ -1,16 +1,16 @@
 import pytest
 
-from tigrbl_audience_claim_concrete import AudienceClaim
-from tigrbl_issued_at_claim_concrete import IssuedAtClaim
-from tigrbl_issuer_claim_concrete import IssuerClaim
-from tigrbl_jwt_id_claim_concrete import JwtIdClaim
+from tigrbl_claim_audience_concrete import AudienceClaim
+from tigrbl_claim_issued_at_concrete import IssuedAtClaim
+from tigrbl_claim_issuer_concrete import IssuerClaim
+from tigrbl_claim_jwt_id_concrete import JwtIdClaim
 from tigrbl_security_event_protocol_set import (
     CURRENT_VERSION,
     compose_set_claim_set,
     migrate_claims,
     supports,
 )
-from tigrbl_security_events_claim_concrete import SecurityEventsClaim
+from tigrbl_claim_security_events_concrete import SecurityEventsClaim
 
 
 def test_set_owns_rfc_8417_version_and_features() -> None:

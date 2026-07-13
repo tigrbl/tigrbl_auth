@@ -1,6 +1,6 @@
 from tigrbl_identity_contracts.claims import ClaimSet
-from tigrbl_credential_status_claim_concrete import CredentialStatusClaim
-from tigrbl_credential_type_claim_concrete import CredentialTypeClaim
+from tigrbl_claim_credential_status_concrete import CredentialStatusClaim
+from tigrbl_claim_credential_type_concrete import CredentialTypeClaim
 
 from .features import FEATURES_BY_VERSION, supports
 from .migrations import migrate_claims

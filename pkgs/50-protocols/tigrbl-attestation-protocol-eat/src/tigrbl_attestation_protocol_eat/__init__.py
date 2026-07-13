@@ -1,6 +1,6 @@
 from tigrbl_identity_contracts.claims import ClaimSet
-from tigrbl_eat_profile_claim_concrete import EatProfileClaim
-from tigrbl_nonce_claim_concrete import NonceClaim
+from tigrbl_claim_eat_profile_concrete import EatProfileClaim
+from tigrbl_claim_nonce_concrete import NonceClaim
 
 from .features import FEATURES_BY_VERSION, supports
 from .migrations import migrate_claims
