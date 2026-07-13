@@ -6,12 +6,7 @@ from ._table import *
 from ._hooks import *
 
 for _name in dir(_table):
-    if not _name.startswith("__") and _name not in {
-        "persist_issued",
-        "mark_rotated",
-        "revoke_family",
-        "introspect",
-    }:
+    if not _name.startswith("__"):
         globals().setdefault(_name, getattr(_table, _name))
 
 try:

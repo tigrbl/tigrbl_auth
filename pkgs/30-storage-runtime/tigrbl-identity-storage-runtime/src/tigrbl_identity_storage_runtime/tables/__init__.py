@@ -10,6 +10,7 @@ from .presentations import *
 from .replay import *
 from .security_events import *
 from .sessions import *
+from .tokens import *
 from .workloads import *
 
 DURABLE_RUNTIME_TABLE_SPECS = (
@@ -21,6 +22,7 @@ DURABLE_RUNTIME_TABLE_SPECS = (
     AuthSessionRuntimeSpec,
     ConsentRuntimeSpec,
     LogoutStateRuntimeSpec,
+    TokenRecordRuntimeSpec,
     AuthCodeRuntimeSpec,
     ClientRegistrationRuntimeSpec,
     RevokedTokenRuntimeSpec,

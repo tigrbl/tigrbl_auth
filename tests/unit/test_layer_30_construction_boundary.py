@@ -152,3 +152,18 @@ def test_session_consent_logout_mutations_are_not_layer_01_operations() -> None:
     ):
         source = (tables / relative).read_text(encoding="utf-8")
         assert "op_ctx" not in source
+
+
+def test_token_record_lifecycle_is_not_defined_by_layer_01() -> None:
+    package = (
+        ROOT
+        / "pkgs"
+        / "01-storage"
+        / "tigrbl-identity-storage"
+        / "src"
+        / "tigrbl_identity_storage"
+        / "tables"
+        / "token_record"
+    )
+    assert not (package / "_operations.py").exists()
+    assert "op_ctx" not in (package / "_table.py").read_text(encoding="utf-8")

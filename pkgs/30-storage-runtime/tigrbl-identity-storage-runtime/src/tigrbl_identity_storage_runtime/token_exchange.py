@@ -72,11 +72,7 @@ except Exception:  # pragma: no cover - dependency-light fallback
     async def append_audit_event_async(**kwargs):
         return None
 
-try:  # pragma: no cover
-    from tigrbl_identity_storage.persistence import upsert_token_record_async
-except Exception:  # pragma: no cover - dependency-light fallback
-    async def upsert_token_record_async(*args, **kwargs):
-        return None
+from .token_persistence import upsert_token_record_async
 
 
 RFC8693_SPEC_URL: Final[str] = 'https://www.rfc-editor.org/rfc/rfc8693'

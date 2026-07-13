@@ -12,4 +12,5 @@ from .presentations import *
 from .replay import *
 from .security_events import *
 from .sessions import *
+from .tokens import *
 from .workloads import *
