@@ -6,6 +6,7 @@ from .common import *
 from .clients import *
 from .consents import *
 from .delegation import *
+from .device_codes import *
 from .credentials import *
 from .oidc_replay import *
 from .oidc_logout import *

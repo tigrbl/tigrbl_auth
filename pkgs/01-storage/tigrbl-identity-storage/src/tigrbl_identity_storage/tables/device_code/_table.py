@@ -68,13 +68,8 @@ class DeviceCode(RestOltpTable, GUIDPk, Timestamped):
     )
 
 
-from ._hooks import approve_device_code, deny_device_code  # noqa: E402
-
-
 __all__ = [
     "DeviceAuthorizationIn",
     "DeviceAuthorizationOut",
     "DeviceCode",
-    "approve_device_code",
-    "deny_device_code",
 ]

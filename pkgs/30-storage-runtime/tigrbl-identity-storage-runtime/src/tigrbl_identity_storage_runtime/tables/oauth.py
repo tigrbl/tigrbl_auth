@@ -1,6 +1,11 @@
 """OAuth durable-state aliases and executable runtime specifications."""
 
-from tigrbl_identity_storage.tables import AuthCode, ClientRegistration, RevokedToken
+from tigrbl_identity_storage.tables import (
+    AuthCode,
+    ClientRegistration,
+    DeviceCode,
+    RevokedToken,
+)
 
 from ..derive import deriveRuntimeTableSpec
 from ..make import makeRuntimeOperation
@@ -10,6 +15,7 @@ from ..ops.oauth_state import (
     record_revoked_token_hash,
     upsert_client_registration,
 )
+from ..ops.device_codes import approve_device_code, deny_device_code
 
 AuthCodeTable = AuthCode
 AuthCodeRuntimeSpec = deriveRuntimeTableSpec(
@@ -31,6 +37,15 @@ ClientRegistrationRuntimeSpec = deriveRuntimeTableSpec(
     ),
 )
 
+DeviceCodeTable = DeviceCode
+DeviceCodeRuntimeSpec = deriveRuntimeTableSpec(
+    DeviceCodeTable,
+    operations=(
+        makeRuntimeOperation(alias="approve", handler=approve_device_code),
+        makeRuntimeOperation(alias="deny", handler=deny_device_code),
+    ),
+)
+
 RevokedTokenTable = RevokedToken
 RevokedTokenRuntimeSpec = deriveRuntimeTableSpec(
     RevokedTokenTable,
@@ -45,6 +60,8 @@ __all__ = [
     "AuthCodeTable",
     "ClientRegistrationRuntimeSpec",
     "ClientRegistrationTable",
+    "DeviceCodeRuntimeSpec",
+    "DeviceCodeTable",
     "RevokedTokenRuntimeSpec",
     "RevokedTokenTable",
 ]

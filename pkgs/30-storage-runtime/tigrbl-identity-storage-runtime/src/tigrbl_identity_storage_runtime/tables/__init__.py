@@ -35,6 +35,7 @@ DURABLE_RUNTIME_TABLE_SPECS = (
     DelegationGrantEdgeRuntimeSpec,
     DelegationGrantProofRuntimeSpec,
     DelegationGrantTokenLinkRuntimeSpec,
+    DeviceCodeRuntimeSpec,
     CredentialOfferRuntimeSpec,
     CredentialIssuanceTransactionRuntimeSpec,
     CredentialStatusEntryRuntimeSpec,
