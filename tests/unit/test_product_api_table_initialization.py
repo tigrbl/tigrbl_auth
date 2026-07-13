@@ -74,7 +74,15 @@ async def test_product_api_table_initialization_t2_startup_uses_mounted_surface_
     async def _noop(*args: object, **kwargs: object) -> None:
         return None
 
+    def _activate_runtime_tables() -> None:
+        calls.append("storage-runtime")
+
     monkeypatch.setattr(lifecycle, "apply_all_async", _noop)
+    monkeypatch.setattr(
+        lifecycle,
+        "initializeIdentityRuntimeTables",
+        _activate_runtime_tables,
+    )
     monkeypatch.setattr(lifecycle, "ensure_default_superuser_async", _noop)
     SimpleNamespace(
         state=SimpleNamespace(tigrbl_auth_surface_router=ProductSurfaceRouter())
@@ -84,4 +92,4 @@ async def test_product_api_table_initialization_t2_startup_uses_mounted_surface_
 
     await lifecycle._startup()
 
-    assert calls == ["product-surface"]
+    assert calls == ["storage-runtime", "product-surface"]
