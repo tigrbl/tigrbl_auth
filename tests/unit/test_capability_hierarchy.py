@@ -110,6 +110,16 @@ def test_capability_supports_explicit_binding_calls_and_delegated_subcalls() -> 
     assert nested.delegated is True
     assert nested.capability_id == "test.child"
 
+    with pytest.raises(RuntimeError, match="delegation cycle"):
+        asyncio.run(
+            parent.subcall(
+                parent,
+                "execute",
+                3,
+                context=CapabilityCallContext(call_id="cyclic-call"),
+            )
+        )
+
 
 def test_default_capability_discloses_every_opinionated_default() -> None:
     capability = DefaultCapability(_metadata("test.default"))

@@ -97,12 +97,19 @@ class Capability(CapabilityBase):
         context: CapabilityCallContext,
         **kwargs: object,
     ) -> CapabilityCallResult:
+        target_capability_id = capability.emit_capability_metadata().capability_id
+        delegation_chain = context.delegation_chain + (
+            self._capability_metadata.capability_id,
+        )
+        if target_capability_id in delegation_chain:
+            raise RuntimeError("capability delegation cycle detected")
         child = replace(
             context,
             parent_call_id=context.call_id,
             call_id=uuid4().hex,
-            capability_id=capability.emit_capability_metadata().capability_id,
+            capability_id=target_capability_id,
             operation=operation,
+            delegation_chain=delegation_chain,
         )
         return await capability.call(operation, *args, context=child, **kwargs)
 

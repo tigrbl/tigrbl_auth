@@ -24,6 +24,7 @@ from .adaptive_access import *
 from .assurance import *
 from .authorization_scopes import *
 from .claims import *
+from .capabilities import *
 from .subject_identifiers import *
 from .credential_artifacts import *
 from .attestation import *

@@ -10,8 +10,8 @@ release phases and a package does not need to exist in every layer.
 | `00-primitives` | dependency-light values and deterministic utilities | domain implementations or integrations |
 | `01-storage` | storage schemas and persistence primitives | application workflows |
 | `02-contracts` | protocols, ports, enums, and transport-neutral contract values | concrete implementations |
-| `05-bases` | reusable abstract bases and mixins implementing contract structure | deployable provider behavior |
-| `10-concrete` | first concrete domain implementations | external integrations or application workflows |
+| `05-bases` | reusable abstract bases and mixins implementing contract structure, including `CapabilityBase` | deployable provider behavior |
+| `10-concrete` | first concrete domain implementations, including ordered generic capability implementations | external integrations or application workflows |
 | `20-providers` | concrete providers, algorithms, adapters, factories, and integrations | multi-provider application workflows |
 | `30-storage-runtime` | composed repositories, persistence services, and storage-backed runtimes | protocol or product composition |
 | `40-capabilities` | complete multi-component application use cases | single implementations, integrations, persistence, protocols, or app construction |
@@ -25,6 +25,19 @@ release phases and a package does not need to exist in every layer.
 Layer 40 is optional and deliberately sparse. A package belongs there only if
 removing it would eliminate a complete use case that coordinates multiple
 layer-20 providers and/or layer-30 storage runtimes.
+
+Every layer-40 capability follows this ordered inheritance chain:
+
+```text
+02 contract -> 05 CapabilityBase -> 10.1 Capability -> 10.2 DefaultCapability -> 40 specialization
+```
+
+`Capability` is the neutral generic implementation. It supplies explicit
+attribute, callable, state, binding, call, delegated-subcall, context, and
+metadata machinery without selecting providers or applying implicit settings.
+`DefaultCapability` is a separate opinionated generic. Every default it applies
+must appear in `CapabilityMetadata.effective_defaults`. A layer-40 capability
+may inherit either layer-10 generic, but never inherits layers 02 or 05 directly.
 
 A layer-40 package may:
 
@@ -80,6 +93,7 @@ The validator checks live package metadata and Python ASTs. It rejects:
 - prohibited layer-40 manifest dependencies;
 - prohibited imports, including type-checking and function-local imports;
 - direct inheritance from layers 00, 01, 02, or 05;
+- layer-40 packages without a layer-10.1 or layer-10.2 dependency and base;
 - unregistered layer-40 packages;
 - stale capability registrations.
 

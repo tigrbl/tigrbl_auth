@@ -24,6 +24,10 @@ def test_layer_40_contains_only_registered_multi_component_use_cases() -> None:
         "tigrbl-identity-admin-control-plane": (
             "coordinate administrative resource lifecycle use cases"
         ),
+        "tigrbl-replay-protection-capability": (
+            "coordinate normalized replay reservations across protocol mappings, "
+            "durable repositories, and replaceable providers"
+        ),
         "tigrbl-security-events": (
             "coordinate security-event transmission, receipt, and recording"
         ),

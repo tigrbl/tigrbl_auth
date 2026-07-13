@@ -58,6 +58,9 @@ CAPABILITY_FORBIDDEN_LAYERS = frozenset(
 CAPABILITY_FORBIDDEN_BASE_LAYERS = frozenset(
     {"00-primitives", "01-storage", "02-contracts", "05-bases"}
 )
+CAPABILITY_IMPLEMENTATION_ROOTS = frozenset(
+    {"tigrbl_capability", "tigrbl_default_capability"}
+)
 
 # Layer 40 is intentionally sparse and opt-in.  Each entry names the complete
 # use case that would disappear if the orchestration package were removed.
@@ -270,6 +273,22 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
             continue
 
         manifest = package.path / "pyproject.toml"
+        has_capability_implementation = False
+        if "tigrbl-capability" not in package.dependencies and (
+            "tigrbl-default-capability" not in package.dependencies
+        ):
+            violations.append(
+                Violation(
+                    kind="missing-capability-implementation-dependency",
+                    package=package.distribution,
+                    package_layer=package.layer,
+                    target="tigrbl-capability",
+                    target_layer="10-concrete",
+                    path=manifest.relative_to(root).as_posix(),
+                    line=None,
+                    detail="layer-40 capabilities inherit layer-10.1 Capability or layer-10.2 DefaultCapability",
+                )
+            )
         for dependency in package.dependencies:
             target = by_distribution.get(dependency)
             if target is None or target.layer not in CAPABILITY_FORBIDDEN_LAYERS:
@@ -337,6 +356,8 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
                     continue
                 for base in node.bases:
                     import_root = _base_root(base, imports)
+                    if import_root in CAPABILITY_IMPLEMENTATION_ROOTS:
+                        has_capability_implementation = True
                     target = by_import_root.get(import_root or "")
                     if target is None or target.layer not in CAPABILITY_FORBIDDEN_BASE_LAYERS:
                         continue
@@ -355,6 +376,20 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
                             ),
                         )
                     )
+
+        if not has_capability_implementation:
+            violations.append(
+                Violation(
+                    kind="missing-capability-inheritance",
+                    package=package.distribution,
+                    package_layer=package.layer,
+                    target="Capability",
+                    target_layer="10-concrete",
+                    path=package.path.relative_to(root).as_posix(),
+                    line=None,
+                    detail="no class inherits layer-10.1 Capability or layer-10.2 DefaultCapability",
+                )
+            )
 
     return tuple(
         sorted(
@@ -378,6 +413,9 @@ def report(violations: tuple[Violation, ...]) -> dict[str, object]:
             "forbidden_target_layers": sorted(CAPABILITY_FORBIDDEN_LAYERS),
             "forbidden_inheritance_layers": sorted(
                 CAPABILITY_FORBIDDEN_BASE_LAYERS
+            ),
+            "required_implementation_roots": sorted(
+                CAPABILITY_IMPLEMENTATION_ROOTS
             ),
         },
         "capability_purposes": dict(sorted(CAPABILITY_PURPOSES.items())),
