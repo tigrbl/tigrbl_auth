@@ -2593,6 +2593,8 @@ dependencies = [
     { name = "tigrbl-credential-type-claim-concrete" },
     { name = "tigrbl-device-identity-concrete" },
     { name = "tigrbl-did-concrete" },
+    { name = "tigrbl-did-controller-provider" },
+    { name = "tigrbl-did-resolver-provider" },
     { name = "tigrbl-digital-credential-bases" },
     { name = "tigrbl-digital-credential-issuer-local" },
     { name = "tigrbl-digital-credential-status-provider" },
@@ -2866,6 +2868,8 @@ requires-dist = [
     { name = "tigrbl-credential-type-claim-concrete", editable = "pkgs/10-concrete/tigrbl-credential-type-claim-concrete" },
     { name = "tigrbl-device-identity-concrete", editable = "pkgs/10-concrete/tigrbl-device-identity-concrete" },
     { name = "tigrbl-did-concrete", editable = "pkgs/10-concrete/tigrbl-did-concrete" },
+    { name = "tigrbl-did-controller-provider", editable = "pkgs/20-providers/tigrbl-did-controller-provider" },
+    { name = "tigrbl-did-resolver-provider", editable = "pkgs/20-providers/tigrbl-did-resolver-provider" },
     { name = "tigrbl-digital-credential-bases", editable = "pkgs/05-bases/tigrbl-digital-credential-bases" },
     { name = "tigrbl-digital-credential-issuer-local", editable = "pkgs/20-providers/tigrbl-digital-credential-issuer-local" },
     { name = "tigrbl-digital-credential-status-provider", editable = "pkgs/20-providers/tigrbl-digital-credential-status-provider" },
@@ -3803,6 +3807,38 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-did-controller-provider"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-did-controller-provider" }
+dependencies = [
+    { name = "tigrbl-did-concrete" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-did-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-did-resolver-provider"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-did-resolver-provider" }
+dependencies = [
+    { name = "tigrbl-did-concrete" },
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-security-trust-domain-bases" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-did-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-domain-bases", specifier = "==0.1.0" },
+]
 
 [[package]]
 name = "tigrbl-digital-credential-bases"

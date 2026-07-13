@@ -218,6 +218,8 @@ dependencies = [
     "tigrbl-spiffe-workload-api-provider==0.4.0.dev2",
     "tigrbl-spiffe-bundle-provider==0.4.0.dev2",
     "tigrbl-svid-verifier-provider==0.4.0.dev2",
+    "tigrbl-did-resolver-provider==0.4.0.dev2",
+    "tigrbl-did-controller-provider==0.4.0.dev2",
     "tigrbl-identity-oauth==0.4.0.dev2",
     "tigrbl-identity-oidc==0.4.0.dev2",
     "tigrbl-identity-principals==0.4.0.dev2",
@@ -501,6 +503,8 @@ tigrbl-corim-store-provider = { path = "pkgs/20-providers/tigrbl-corim-store-pro
 tigrbl-spiffe-workload-api-provider = { path = "pkgs/20-providers/tigrbl-spiffe-workload-api-provider", editable = true }
 tigrbl-spiffe-bundle-provider = { path = "pkgs/20-providers/tigrbl-spiffe-bundle-provider", editable = true }
 tigrbl-svid-verifier-provider = { path = "pkgs/20-providers/tigrbl-svid-verifier-provider", editable = true }
+tigrbl-did-resolver-provider = { path = "pkgs/20-providers/tigrbl-did-resolver-provider", editable = true }
+tigrbl-did-controller-provider = { path = "pkgs/20-providers/tigrbl-did-controller-provider", editable = true }
 tigrbl-identity-oauth = { path = "pkgs/deprecated/tigrbl-identity-oauth", editable = true }
 tigrbl-identity-oidc = { path = "pkgs/deprecated/tigrbl-identity-oidc", editable = true }
 tigrbl-identity-principals = { path = "pkgs/40-capabilities/tigrbl-identity-principals", editable = true }
