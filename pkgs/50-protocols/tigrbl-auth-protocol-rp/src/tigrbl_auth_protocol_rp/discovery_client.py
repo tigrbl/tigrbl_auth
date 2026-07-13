@@ -26,7 +26,7 @@ except Exception:  # pragma: no cover - dependency-light fallback
     from typing import Any
 
     from tigrbl_identity_runtime.deployment import resolve_deployment
-    from tigrbl_identity_runtime.settings import settings
+    from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
     from tigrbl_auth_protocol_oidc.standards.discovery_metadata import build_openid_config
     from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER, JWKS_PATH
 

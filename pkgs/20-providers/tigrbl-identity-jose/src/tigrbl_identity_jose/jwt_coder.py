@@ -224,5 +224,16 @@ class JWTCoder(JwtCoderBase):
             )
         )
 
+    def refresh(self, refresh_token: str) -> Tuple[str, str]:
+        payload = self.decode(refresh_token)
+        if payload.get("typ") != "refresh":
+            raise ValueError("token is not a refresh token")
+        claims = {
+            key: value
+            for key, value in payload.items()
+            if key not in {"iat", "exp", "typ", "jti"}
+        }
+        return self.sign_pair(**claims)
+
 
 __all__ = ["InvalidTokenError", "JWTCoder"]

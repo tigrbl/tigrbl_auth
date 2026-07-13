@@ -1,5 +1,5 @@
 {
-  "generated_at": "20260713T044540Z",
+  "generated_at": "20260713T054358Z",
   "passed": true,
   "summary": {
     "static_manifest_passed": true,
@@ -27,11 +27,11 @@
     "tox_envs_declare_install_probe": true,
     "workspace_sources_present": false,
     "workspace_sources_declared": true,
-    "first_party_workspace_source_count": 250,
+    "first_party_workspace_source_count": 252,
     "forbidden_workspace_source_count": 0,
     "forbidden_dependency_reference_count": 0,
-    "base_dependency_count": 284,
-    "base_exact_pinned_dependency_count": 284,
+    "base_dependency_count": 286,
+    "base_exact_pinned_dependency_count": 286,
     "dependency_source": "pyproject.toml",
     "native_uv_lock_present": true,
     "install_profile_count": 14,
@@ -247,6 +247,7 @@
       "tigrbl-auth-profile-haip==0.4.0.dev2",
       "tigrbl-security-event-protocol-set==0.4.0.dev2",
       "tigrbl-attestation-protocol-eat==0.4.0.dev2",
+      "tigrbl-attestation-protocol-corim==0.4.0.dev2",
       "tigrbl-credential-profile-sd-jwt-vc==0.4.0.dev2",
       "tigrbl-authorization-scope-set-matcher-concrete==0.4.0.dev2",
       "tigrbl-public-subject-identifier-concrete==0.4.0.dev2",
@@ -345,6 +346,7 @@
       "tigrbl-security-event-replay-store==0.4.0.dev2",
       "tigrbl-replay-memory-provider==0.4.0.dev2",
       "tigrbl-replay-protection-capability==0.4.0.dev2",
+      "tigrbl-protocol-artifact-processing==0.4.0.dev2",
       "tigrbl-set-transmitter-provider==0.4.0.dev2",
       "tigrbl-set-receiver-provider==0.4.0.dev2",
       "tigrbl-wallet-attestation-verifier==0.4.0.dev2",
@@ -396,12 +398,12 @@
     },
     "workspace_sources_present": false,
     "workspace_sources_declared": true,
-    "first_party_workspace_source_count": 250,
+    "first_party_workspace_source_count": 252,
     "forbidden_workspace_source_count": 0,
     "forbidden_workspace_sources": {},
     "forbidden_dependency_references": [],
-    "exact_pinned_dependency_count": 284,
-    "dependency_count": 284
+    "exact_pinned_dependency_count": 286,
+    "dependency_count": 286
   },
   "extras_consistency": {
     "passed": true,

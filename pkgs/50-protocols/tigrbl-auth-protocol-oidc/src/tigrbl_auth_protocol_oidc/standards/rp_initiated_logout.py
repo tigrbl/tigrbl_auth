@@ -16,7 +16,7 @@ from tigrbl_identity_runtime.deployment import (
     deployment_from_request,
     resolve_deployment,
 )
-from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
 
 try:  # dependency-light import path for checkpoint evidence generation
     from http import HTTPStatus as status

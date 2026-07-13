@@ -115,12 +115,16 @@ def facade_package_root(repo_root: Path) -> Path:
 
 
 def load_public_capabilities(repo_root: Path) -> list[dict[str, Any]]:
-    return list(
-        literal_assignment(
-            runtime_package_root(repo_root) / "_surfaces/public_capabilities.py",
-            "PUBLIC_CAPABILITIES",
-        )
+    surfaces = runtime_package_root(repo_root) / "_surfaces"
+    protocols = literal_assignment(
+        surfaces / "_public_capabilities_protocols.py",
+        "PROTOCOL_PUBLIC_CAPABILITIES",
     )
+    core = literal_assignment(
+        surfaces / "_public_capabilities_core.py",
+        "CORE_PUBLIC_CAPABILITIES",
+    )
+    return list(protocols) + list(core)
 
 
 def load_diagnostics_capabilities(repo_root: Path) -> list[dict[str, Any]]:

@@ -14,12 +14,14 @@ from tigrbl_auth.cli.artifacts import build_openapi_contract, deployment_from_op
 from tigrbl_auth.config.settings import settings
 from tigrbl_auth.standards.oauth2.dpop import (
     clear_runtime_state,
+    configure_state_providers,
     issue_nonce,
     jwk_from_public_key,
     jwk_thumbprint,
     make_proof,
     verify_proof,
 )
+from tigrbl_replay_memory_provider import MemoryReplayCheckProvider, MemorySingleUseNonceProvider
 from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import (
     authenticate_mtls_client,
     presented_certificate_thumbprint,
@@ -87,6 +89,9 @@ def test_mtls_registration_auth_and_request_binding_helpers(monkeypatch: pytest.
 
 def test_dpop_fallback_round_trip_nonce_ath_and_replay(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(settings, "enable_rfc9449", True)
+    configure_state_providers(
+        replay=MemoryReplayCheckProvider(), nonce=MemorySingleUseNonceProvider()
+    )
     clear_runtime_state()
     keyref = _ed25519_keyref()
     jkt = jwk_thumbprint(jwk_from_public_key(keyref.public))
@@ -115,6 +120,9 @@ def test_dpop_fallback_round_trip_nonce_ath_and_replay(monkeypatch: pytest.Monke
 
 def test_dpop_rejects_ath_mismatch(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(settings, "enable_rfc9449", True)
+    configure_state_providers(
+        replay=MemoryReplayCheckProvider(), nonce=MemorySingleUseNonceProvider()
+    )
     clear_runtime_state()
     keyref = _ed25519_keyref()
     proof = make_proof(keyref, "GET", "https://rs.example.com/userinfo", access_token="token-a")

@@ -20,7 +20,7 @@ try:
 except ModuleNotFoundError:  # pragma: no cover - dependency-light fallback
     pyjwt = None
 
-from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
 from tigrbl_identity_core.errors import InvalidTokenError
 from tigrbl_auth_protocol_oauth.jwtoken import JWTCoder
 

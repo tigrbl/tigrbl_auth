@@ -1,4 +1,8 @@
-from tigrbl_auth.standards.oidc.session_mgmt import compute_session_state, describe, validate_session_state
+from tigrbl_auth_protocol_oidc.standards.session_mgmt import (
+    compute_session_state,
+    describe,
+    validate_session_state,
+)
 
 
 

@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any, Mapping
 
 from tigrbl_identity_runtime.deployment import ResolvedDeployment
-from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
 
 from .security_profile import (
     DEVICE_CODE_GRANT_TYPE,

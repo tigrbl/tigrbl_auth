@@ -7,7 +7,7 @@ from typing import Final, Mapping, Sequence
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from urllib.parse import parse_qs, urlparse
 
-from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
 
 STATUS: Final[str] = 'authorization-response-issuer-runtime'
 RFC9207_SPEC_URL: Final[str] = 'https://www.rfc-editor.org/rfc/rfc9207'

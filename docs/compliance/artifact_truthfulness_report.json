@@ -10,7 +10,7 @@
     "runtime_plan_to_discovery_sync_passed": true,
     "runner_contract_hash_invariance_passed": true,
     "authoritative_current_doc_stale_ref_count": 0,
-    "historical_doc_stale_ref_count": 166,
+    "historical_doc_stale_ref_count": 161,
     "openapi_profile_count_checked": 5,
     "discovery_profile_count_checked": 5
   },
@@ -713,8 +713,7 @@
         ],
         "tigrbl_auth/oidc_discovery.py": [
           "docs/architecture/MIGRATION_COMPLETION_REPORT.md",
-          "docs/architecture/MIGRATION_MOVE_PLAN.md",
-          "docs/compliance/certification_evidence_index.md"
+          "docs/architecture/MIGRATION_MOVE_PLAN.md"
         ],
         "tigrbl_auth/oidc_id_token.py": [
           "docs/architecture/MIGRATION_COMPLETION_REPORT.md",
@@ -881,8 +880,7 @@
           "docs/compliance/INDEPENDENT_PACKAGE_REVIEW_2026-03-27.md"
         ],
         "tigrbl_auth/crypto.py": [
-          "docs/architecture/MIGRATION_MOVE_PLAN.md",
-          "docs/compliance/certification_evidence_index.md"
+          "docs/architecture/MIGRATION_MOVE_PLAN.md"
         ],
         "tigrbl_auth/services/auth_backends.py": [
           "docs/architecture/MIGRATION_MOVE_PLAN.md"
@@ -921,17 +919,6 @@
         "tigrbl_auth/config/feature_flags.py": [
           "docs/compliance/CERTIFIABLE_DELIVERY_PLAN_2026-03-27.md",
           "docs/compliance/INDEPENDENT_PACKAGE_REVIEW_2026-03-27.md"
-        ],
-        "tigrbl_auth/rfc/__init__.py": [
-          "docs/compliance/certification_evidence_index.md"
-        ],
-        "tigrbl_auth/standards/oidc/discovery_metadata.py": [
-          "docs/compliance/certification_evidence_index.md",
-          "docs/compliance/RUNTIME_HTTP_SURFACE_CHECKPOINT_2026-03-26.md"
-        ],
-        "tigrbl_auth/standards/oidc/rp_initiated_logout.py": [
-          "docs/compliance/certification_evidence_index.md",
-          "docs/compliance/request_scoped_runtime_authority_phase1.md"
         ],
         "tigrbl_auth/rfc/rfc9396.py": [
           "docs/compliance/CERTIFICATION_LANES_CHECKPOINT_2026-03-26.md"
@@ -1027,6 +1014,9 @@
         "tigrbl_auth/ops/register.py": [
           "docs/compliance/request_scoped_runtime_authority_phase1.md"
         ],
+        "tigrbl_auth/standards/oidc/rp_initiated_logout.py": [
+          "docs/compliance/request_scoped_runtime_authority_phase1.md"
+        ],
         "tigrbl_auth/standards/oidc/session_mgmt.py": [
           "docs/compliance/request_scoped_runtime_authority_phase1.md"
         ],
@@ -1040,6 +1030,9 @@
           "docs/compliance/RUNTIME_HTTP_SURFACE_CHECKPOINT_2026-03-26.md"
         ],
         "tigrbl_auth/standards/oauth2/rfc8414_metadata.py": [
+          "docs/compliance/RUNTIME_HTTP_SURFACE_CHECKPOINT_2026-03-26.md"
+        ],
+        "tigrbl_auth/standards/oidc/discovery_metadata.py": [
           "docs/compliance/RUNTIME_HTTP_SURFACE_CHECKPOINT_2026-03-26.md"
         ],
         "tigrbl_auth/cli/artifacts.py": [

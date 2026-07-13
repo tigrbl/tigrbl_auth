@@ -62,6 +62,21 @@ def build_app(
     resolved_settings = settings_obj if settings_obj is not None else _load_default_settings()
     resolved_deployment = deployment or resolve_deployment(resolved_settings)
 
+    from tigrbl_identity_contracts.protocol_configuration import (
+        ProtocolSettingsOverlay,
+        bind_protocol_settings,
+    )
+
+    protocol_settings = ProtocolSettingsOverlay(resolved_settings, _load_default_settings())
+    bind_protocol_settings(protocol_settings)
+
+    from tigrbl_auth_protocol_oauth.standards.dpop import configure_state_providers
+    from tigrbl_replay_memory_provider import MemoryReplayCheckProvider, MemorySingleUseNonceProvider
+
+    configure_state_providers(
+        replay=MemoryReplayCheckProvider(), nonce=MemorySingleUseNonceProvider()
+    )
+
     from tigrbl import TigrblApp
 
     from tigrbl_identity_server.api.lifecycle import register_lifecycle

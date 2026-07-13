@@ -3,7 +3,7 @@ from __future__ import annotations
 import inspect
 import time
 from collections.abc import Mapping
-from dataclasses import replace
+from dataclasses import asdict, replace
 from uuid import uuid4
 
 from tigrbl_capability_bases import CapabilityBase
@@ -54,6 +54,16 @@ class Capability(CapabilityBase):
 
     def state(self) -> CapabilityState:
         return self._capability_state
+
+    def capability_report(self) -> dict[str, object]:
+        """Return the complete, operator-inspectable effective capability set."""
+        report: dict[str, object] = dict(asdict(self._capability_metadata))
+        report["state"] = asdict(self._capability_state)
+        report["bound_operations"] = tuple(sorted(self._capability_bindings))
+        report["delegated_operations"] = tuple(
+            sorted(name for name, (_, delegated) in self._capability_bindings.items() if delegated)
+        )
+        return report
 
     def bind(
         self, operation: str, target: CapabilityCallable, *, delegated: bool = False

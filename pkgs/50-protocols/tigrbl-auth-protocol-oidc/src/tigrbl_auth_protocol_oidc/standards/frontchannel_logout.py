@@ -2,13 +2,12 @@
 
 from __future__ import annotations
 
-from types import SimpleNamespace
 from typing import Any, Final
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from urllib.parse import urlencode
 from uuid import UUID
 
-from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
 
 STATUS: Final[str] = "frontchannel-logout-fanout-runtime"
 _DEFAULT_MAX_RETRIES: Final[int] = 3
@@ -27,35 +26,9 @@ OWNER = StandardOwner(
 
 
 def _persistence():
-    from tigrbl_identity_storage.tables.client_registration import ClientRegistration
-    from tigrbl_identity_storage.tables.engine import storage_session
-    from tigrbl_identity_storage.tables.logout_state import LogoutState
+    from tigrbl_identity_storage_runtime.oidc_persistence import oidc_persistence
 
-    async def get_client_registration_async(client_id):
-        async with storage_session() as db:
-            result = await ClientRegistration.handlers.list.core(
-                {"payload": {"filters": {"client_id": client_id}}, "db": db}
-            )
-        if isinstance(result, dict) and isinstance(result.get("items"), list):
-            rows = result["items"]
-        else:
-            rows = result if isinstance(result, list) else []
-        return rows[0] if rows else None
-
-    async def mark_logout_channel_async(logout_id, **kwargs):
-        async with storage_session() as db:
-            return await LogoutState.handlers.mark_channel.core(
-                {
-                    "path_params": {"id": logout_id},
-                    "payload": {"logout_id": logout_id, **kwargs},
-                    "db": db,
-                }
-            )
-
-    return SimpleNamespace(
-        get_client_registration_async=get_client_registration_async,
-        mark_logout_channel_async=mark_logout_channel_async,
-    )
+    return oidc_persistence
 
 
 async def build_frontchannel_descriptor(

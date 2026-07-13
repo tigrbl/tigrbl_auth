@@ -11,7 +11,7 @@ import time
 import warnings
 from typing import Any, Iterable
 
-from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
 from tigrbl_identity_core.errors import InvalidTokenError
 from tigrbl_auth_protocol_oauth.standards.json_web_token import encode_jwt
 from tigrbl_auth_protocol_oauth.standards.jwt_client_auth import validate_client_jwt_bearer

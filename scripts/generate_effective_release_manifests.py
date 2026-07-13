@@ -25,6 +25,8 @@ from tigrbl_auth.cli.metadata import (
     render_cli_conformance_markdown,
     render_cli_markdown,
 )
+from tigrbl_identity_contracts.protocol_configuration import bind_protocol_settings
+from tigrbl_identity_runtime.settings import settings
 
 
 def _write_cli_artifacts(repo_root: Path) -> None:
@@ -70,6 +72,7 @@ def _write_discovery_reference(repo_root: Path) -> None:
 
 
 def main() -> int:
+    bind_protocol_settings(settings)
     repo_root = ROOT
     _write_cli_artifacts(repo_root)
     active = deployment_from_options()

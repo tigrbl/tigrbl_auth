@@ -77,6 +77,10 @@ CAPABILITY_PURPOSES = {
     "tigrbl-identity-admin-control-plane": (
         "coordinate administrative resource lifecycle use cases"
     ),
+    "tigrbl-protocol-artifact-processing": (
+        "coordinate protocol-neutral artifact decoding, validation, encoding, "
+        "and error normalization through replaceable processors"
+    ),
     "tigrbl-replay-protection-capability": (
         "coordinate normalized replay reservations across protocol mappings, "
         "durable repositories, and replaceable providers"

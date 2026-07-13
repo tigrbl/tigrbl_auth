@@ -5,9 +5,12 @@ from typing import Any, Callable, Mapping
 
 from .reservations import (
     ReplayKey,
+    ReplayCheckPort,
     ReplayReservationPort,
     ReplayReservationRequest,
     ReplayReservationResult,
+    ReplayStoreDescriptor,
+    SingleUseNoncePort,
 )
 
 
@@ -71,7 +74,10 @@ __all__ = [
     "PolicyReplayResult",
     "PolicyEvaluator",
     "ReplayKey",
+    "ReplayCheckPort",
     "ReplayReservationPort",
     "ReplayReservationRequest",
     "ReplayReservationResult",
+    "ReplayStoreDescriptor",
+    "SingleUseNoncePort",
 ]

@@ -11,7 +11,7 @@ from typing import Any, Final, Iterable
 
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
 
-from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
 from tigrbl_identity_core.errors import InvalidTokenError
 from tigrbl_auth_protocol_oauth.standards.json_web_token import decode_jwt
 

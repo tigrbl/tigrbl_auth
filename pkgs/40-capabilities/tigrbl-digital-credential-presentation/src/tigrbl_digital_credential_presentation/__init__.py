@@ -42,7 +42,7 @@ class DigitalCredentialPresentationCapability(Capability):
         if not self._consent(holder, request):
             return PresentationResult(False, errors=("holder consent is absent",))
         binding = request.binding
-        replay_key = binding.transaction_id or binding.nonce
+        replay_key = binding.replay_value
         if not self._replay(binding.audience, replay_key):
             return PresentationResult(False, errors=("presentation replay detected",))
         return self._verifier.verify(encoded_presentation, request)

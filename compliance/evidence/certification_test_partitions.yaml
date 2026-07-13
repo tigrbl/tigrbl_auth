@@ -137,6 +137,8 @@ partitions:
   - tests/unit/test_contract_generation_live.py
   - tests/unit/test_contract_payloads_deferred_upstream.py
   - tests/unit/test_control_plane_correctness_properties.py
+  - tests/unit/test_corim_durable_repository.py
+  - tests/unit/test_corim_protocol_versioning.py
   - tests/unit/test_cose_mdoc_providers.py
   - tests/unit/test_credentials_lifecycle_boundary.py
   - tests/unit/test_crypto.py
@@ -240,7 +242,9 @@ partitions:
   - tests/unit/test_product_api_table_initialization.py
   - tests/unit/test_profile_discovery_runtime.py
   - tests/unit/test_protected_resource_verifier_contract.py
+  - tests/unit/test_protocol_capability_reports.py
   - tests/unit/test_protocol_neutral_reusable_ownership.py
+  - tests/unit/test_protocol_state_provider_boundaries.py
   - tests/unit/test_provenance_naming_guard.py
   - tests/unit/test_provider_base_inheritance.py
   - tests/unit/test_provider_packages_implement_trust_domain_bases.py

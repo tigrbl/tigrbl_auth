@@ -8,6 +8,7 @@ from tigrbl_auth_protocol_oid4vp import CAPABILITY_REQUIREMENTS as OID4VP_REQUIR
 from tigrbl_auth_protocol_oidc import CAPABILITY_REQUIREMENTS as OIDC_REQUIREMENTS
 from tigrbl_identity_contracts.replay import ReplayKey, ReplayReservationRequest
 from tigrbl_identity_storage.tables import ReplayReservation
+from tigrbl_identity_storage_runtime import SqlReplayReservationRepository
 from tigrbl_replay_memory_provider import MemoryReplayProvider
 from tigrbl_replay_protection_capability import ReplayProtectionCapability
 from tigrbl_security_event_protocol_set import CAPABILITY_REQUIREMENTS as SET_REQUIREMENTS
@@ -23,6 +24,18 @@ def _request(value: str = "same") -> ReplayReservationRequest:
 def test_layer_01_owns_protocol_neutral_durable_replay_state():
     assert ReplayReservation.__tablename__ == "replay_reservations"
     assert ReplayReservation.__table__.c.key_digest.unique is True
+
+
+def test_durable_replay_store_descriptor_is_operationally_explicit():
+    descriptor = SqlReplayReservationRepository.descriptor
+    assert descriptor.atomic_reservation is True
+    assert descriptor.namespaces
+    assert descriptor.tenant_isolation
+    assert descriptor.expiry
+    assert descriptor.retention
+    assert descriptor.purge
+    assert descriptor.audit
+    assert descriptor.availability
 
 
 def test_memory_provider_atomically_rejects_concurrent_duplicates():

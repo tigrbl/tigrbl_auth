@@ -13,7 +13,7 @@ from __future__ import annotations
 from typing import Any, Dict, List, Optional, Union
 from tigrbl import TigrblApp
 
-from tigrbl_identity_runtime import settings as runtime_cfg
+from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
 from tigrbl_auth_protocol_oauth.jwtoken import JWTCoder
 from tigrbl_auth_protocol_oauth.standards.json_web_token import decode_jwt, encode_jwt
 from tigrbl_identity_contracts.protocols import TokenType
@@ -28,7 +28,7 @@ def include_rfc8693(app: TigrblApp) -> None:
 
     from tigrbl_identity_storage_runtime.token_exchange import api
 
-    if runtime_cfg.settings.enable_rfc8693 and not any(
+    if settings.enable_rfc8693 and not any(
         (getattr(route, "path", None) or getattr(route, "path_template", None))
         == "/token/exchange"
         for route in app.router.routes
@@ -173,7 +173,7 @@ def validate_token_exchange_request(
         RuntimeError: If RFC 8693 support is disabled
         ValueError: If validation fails
     """
-    if not runtime_cfg.settings.enable_rfc8693:
+    if not settings.enable_rfc8693:
         raise RuntimeError("RFC 8693 support disabled")
 
     request = TokenExchangeRequest(
@@ -246,7 +246,7 @@ def exchange_token(
         RuntimeError: If RFC 8693 support is disabled
         ValueError: If token exchange fails
     """
-    if not runtime_cfg.settings.enable_rfc8693:
+    if not settings.enable_rfc8693:
         raise RuntimeError("RFC 8693 support disabled")
 
     # Validate subject token

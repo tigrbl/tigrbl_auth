@@ -187,6 +187,7 @@ dependencies = [
     "tigrbl-auth-profile-haip==0.4.0.dev2",
     "tigrbl-security-event-protocol-set==0.4.0.dev2",
     "tigrbl-attestation-protocol-eat==0.4.0.dev2",
+    "tigrbl-attestation-protocol-corim==0.4.0.dev2",
     "tigrbl-credential-profile-sd-jwt-vc==0.4.0.dev2",
     "tigrbl-authorization-scope-set-matcher-concrete==0.4.0.dev2",
     "tigrbl-public-subject-identifier-concrete==0.4.0.dev2",
@@ -285,6 +286,7 @@ dependencies = [
     "tigrbl-security-event-replay-store==0.4.0.dev2",
     "tigrbl-replay-memory-provider==0.4.0.dev2",
     "tigrbl-replay-protection-capability==0.4.0.dev2",
+    "tigrbl-protocol-artifact-processing==0.4.0.dev2",
     "tigrbl-set-transmitter-provider==0.4.0.dev2",
     "tigrbl-set-receiver-provider==0.4.0.dev2",
     "tigrbl-wallet-attestation-verifier==0.4.0.dev2",
@@ -573,6 +575,7 @@ tigrbl-auth-protocol-gnap = { path = "pkgs/50-protocols/tigrbl-auth-protocol-gna
 tigrbl-auth-profile-haip = { path = "pkgs/50-protocols/tigrbl-auth-profile-haip", editable = true }
 tigrbl-security-event-protocol-set = { path = "pkgs/50-protocols/tigrbl-security-event-protocol-set", editable = true }
 tigrbl-attestation-protocol-eat = { path = "pkgs/50-protocols/tigrbl-attestation-protocol-eat", editable = true }
+tigrbl-attestation-protocol-corim = { path = "pkgs/50-protocols/tigrbl-attestation-protocol-corim", editable = true }
 tigrbl-credential-profile-sd-jwt-vc = { path = "pkgs/50-protocols/tigrbl-credential-profile-sd-jwt-vc", editable = true }
 tigrbl-authorization-scope-set-matcher-concrete = { path = "pkgs/10-concrete/tigrbl-authorization-scope-set-matcher-concrete", editable = true }
 tigrbl-public-subject-identifier-concrete = { path = "pkgs/10-concrete/tigrbl-public-subject-identifier-concrete", editable = true }
@@ -640,6 +643,7 @@ tigrbl-mdoc-verifier-provider = { path = "pkgs/20-providers/tigrbl-mdoc-verifier
 tigrbl-security-event-replay-store = { path = "pkgs/deprecated/tigrbl-security-event-replay-store", editable = true }
 tigrbl-replay-memory-provider = { path = "pkgs/20-providers/tigrbl-replay-memory-provider", editable = true }
 tigrbl-replay-protection-capability = { path = "pkgs/40-capabilities/tigrbl-replay-protection-capability", editable = true }
+tigrbl-protocol-artifact-processing = { path = "pkgs/40-capabilities/tigrbl-protocol-artifact-processing", editable = true }
 tigrbl-set-transmitter-provider = { path = "pkgs/20-providers/tigrbl-set-transmitter-provider", editable = true }
 tigrbl-set-receiver-provider = { path = "pkgs/20-providers/tigrbl-set-receiver-provider", editable = true }
 tigrbl-wallet-attestation-verifier = { path = "pkgs/20-providers/tigrbl-wallet-attestation-verifier", editable = true }

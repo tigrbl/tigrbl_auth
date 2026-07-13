@@ -34,6 +34,7 @@ from tigrbl_auth_protocol_rp import (  # noqa: E402
     validate_browser_storage_policy,
     validate_id_token_claims,
 )
+from tigrbl_replay_memory_provider import MemoryRPSessionProvider, MemoryRPStateProvider
 
 
 def _rp(*, secret: str | None = "secret") -> RelyingParty:
@@ -45,7 +46,9 @@ def _rp(*, secret: str | None = "secret") -> RelyingParty:
             redirect_uri="https://rp.example.test/callback",
             post_logout_redirect_uri="https://rp.example.test/logout",
             scopes=("openid", "profile", "email"),
-        )
+        ),
+        state_store=MemoryRPStateProvider(),
+        session_store=MemoryRPSessionProvider(),
     )
 
 
@@ -195,7 +198,11 @@ def test_rp_t2_pkce_verifier_rejects_invalid_values_and_login_url_fails_closed()
     with pytest.raises(ValueError, match="between 43 and 128"):
         PkceVerifier.generate(42)
     with pytest.raises(ValueError, match="invalid PKCE code_verifier"):
-        RelyingParty(_rp().config, state_store=BadStateStore()).build_authorization_url(
+        RelyingParty(
+            _rp().config,
+            state_store=BadStateStore(),
+            session_store=MemoryRPSessionProvider(),
+        ).build_authorization_url(
             "https://issuer.example.test/authorize"
         )
 

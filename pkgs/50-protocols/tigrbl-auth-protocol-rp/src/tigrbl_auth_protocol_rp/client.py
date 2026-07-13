@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import secrets
 from typing import Any, Callable, Mapping
 from urllib.parse import parse_qs, urlencode, urlparse
 
@@ -9,6 +8,8 @@ from tigrbl_identity_contracts.rp import (
     LoginRequest,
     RPConfiguration,
     RPSession,
+    RPSessionPort,
+    RPStatePort,
 )
 from tigrbl_identity_contracts.protocols import BrowserStoragePolicy
 
@@ -17,34 +18,6 @@ from .pkce import PkceVerifier, make_pkce_verifier, pkce_s256_challenge
 
 class RPError(RuntimeError):
     pass
-
-
-class StateNonceStore:
-    def __init__(self) -> None:
-        self._items: dict[str, LoginRequest] = {}
-        self._consumed: set[str] = set()
-
-    def create(self, *, redirect_uri: str, scope: tuple[str, ...]) -> LoginRequest:
-        pkce = PkceVerifier.generate()
-        request = LoginRequest(
-            state=secrets.token_urlsafe(24),
-            nonce=secrets.token_urlsafe(24),
-            code_verifier=pkce.value,
-            redirect_uri=redirect_uri,
-            scope=tuple(scope),
-        )
-        self._items[request.state] = request
-        return request
-
-    def consume(self, state: str) -> LoginRequest:
-        if state in self._consumed:
-            raise RPError("callback state was already consumed")
-        try:
-            request = self._items.pop(state)
-        except KeyError as exc:
-            raise RPError("unknown callback state") from exc
-        self._consumed.add(state)
-        return request
 
 
 class BrowserMemorySession:
@@ -123,25 +96,11 @@ class UserInfoClient:
         return dict(self.fetch(endpoint, access_token))
 
 
-class TokenStore:
-    def __init__(self) -> None:
-        self._sessions: dict[str, RPSession] = {}
-
-    def save(self, session_id: str, session: RPSession) -> None:
-        self._sessions[session_id] = session
-
-    def get(self, session_id: str) -> RPSession:
-        try:
-            return self._sessions[session_id]
-        except KeyError as exc:
-            raise RPError("unknown RP session") from exc
-
-
 class RelyingParty:
-    def __init__(self, config: RPConfiguration, *, state_store: StateNonceStore | None = None) -> None:
+    def __init__(self, config: RPConfiguration, *, state_store: RPStatePort, session_store: RPSessionPort) -> None:
         self.config = config
-        self.state_store = state_store or StateNonceStore()
-        self.token_store = TokenStore()
+        self.state_store = state_store
+        self.token_store = session_store
 
     def build_authorization_url(self, authorization_endpoint: str) -> tuple[str, LoginRequest]:
         login = self.state_store.create(redirect_uri=self.config.redirect_uri, scope=self.config.scopes)
@@ -169,7 +128,10 @@ class RelyingParty:
         return CallbackResult(code=code, state=state, iss=(values.get("iss") or [None])[0])
 
     def validate_callback(self, callback: CallbackResult) -> LoginRequest:
-        return self.state_store.consume(callback.state)
+        try:
+            return self.state_store.consume(callback.state)
+        except (KeyError, ValueError) as exc:
+            raise RPError(str(exc)) from exc
 
     def build_logout_url(self, end_session_endpoint: str, *, id_token_hint: str, state: str | None = None) -> str:
         params = {
@@ -288,8 +250,6 @@ __all__ = [
     "RPError",
     "RPSession",
     "RelyingParty",
-    "StateNonceStore",
-    "TokenStore",
     "UserInfoClient",
     "assert_browser_no_client_secret",
     "example_app_manifest",

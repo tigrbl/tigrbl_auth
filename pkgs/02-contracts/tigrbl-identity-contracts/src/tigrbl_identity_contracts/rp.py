@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import Protocol, runtime_checkable
 
 
 @dataclass(frozen=True, slots=True)
@@ -43,9 +44,27 @@ class RPSession:
     refresh_token: str | None = None
 
 
+@runtime_checkable
+class RPStatePort(Protocol):
+    """Atomic, single-use storage for an RP authorization request."""
+
+    def create(self, *, redirect_uri: str, scope: tuple[str, ...]) -> LoginRequest: ...
+    def consume(self, state: str) -> LoginRequest: ...
+
+
+@runtime_checkable
+class RPSessionPort(Protocol):
+    """Storage boundary for an RP token/session result."""
+
+    def save(self, session_id: str, session: RPSession) -> None: ...
+    def get(self, session_id: str) -> RPSession: ...
+
+
 __all__ = [
     "CallbackResult",
     "LoginRequest",
     "RPConfiguration",
+    "RPSessionPort",
+    "RPStatePort",
     "RPSession",
 ]

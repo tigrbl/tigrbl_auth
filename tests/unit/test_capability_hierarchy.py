@@ -147,11 +147,23 @@ def test_every_layer_40_capability_inherits_10_1_and_binds_declared_operations()
     capability_ids = set()
     for capability in capabilities:
         metadata = capability.emit_capability_metadata()
+        report = capability.capability_report()
         assert capability.__class__.__bases__ == (Capability,)
         assert isinstance(capability, ICapability)
         assert metadata.capability_id
         assert metadata.version
         assert set(capability.callables()) == set(metadata.operations)
+        assert report["capability_id"] == metadata.capability_id
+        assert report["version"] == metadata.version
+        assert report["operations"] == metadata.operations
+        assert "guarantees" in report
+        assert "optional_features" in report
+        assert "dependencies" in report
+        assert "ready" in report
+        assert "healthy" in report
+        assert "limitations" in report
+        assert "unsupported" in report
+        assert report["bound_operations"] == tuple(sorted(metadata.operations))
         capability_ids.add(metadata.capability_id)
 
     assert len(capability_ids) == len(capabilities)

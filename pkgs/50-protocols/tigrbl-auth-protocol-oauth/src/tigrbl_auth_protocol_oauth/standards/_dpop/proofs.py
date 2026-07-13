@@ -6,17 +6,13 @@ import time
 from typing import Any
 
 from tigrbl_identity_core.standards import describe_owner
-from tigrbl_identity_runtime.settings import settings
-from tigrbl_security_trust_contracts import DPoPProofClaims
+from tigrbl_identity_contracts.replay import ReplayCheckPort, SingleUseNoncePort
+from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
+from tigrbl_security_trust_contracts import DPoPNonceRecord, DPoPProofClaims
 
 from .primitives import (
-    DEFAULT_NONCE_STORE,
-    DEFAULT_REPLAY_STORE,
     OWNER,
     RFC9449_SPEC_URL,
-    DPoPNonceRecord,
-    DPoPNonceStore,
-    DPoPReplayStore,
     Ed25519PublicKey,
     StandardOwner,
     _ALG_VALUE,
@@ -33,6 +29,29 @@ from .primitives import (
     jwk_from_public_key,
     jwk_thumbprint,
 )
+
+_REPLAY_PROVIDER: ReplayCheckPort | None = None
+_NONCE_PROVIDER: SingleUseNoncePort | None = None
+
+
+def configure_state_providers(*, replay: ReplayCheckPort, nonce: SingleUseNoncePort) -> None:
+    """Inject deployment-selected state providers; layer 50 creates no store."""
+    global _REPLAY_PROVIDER, _NONCE_PROVIDER
+    _REPLAY_PROVIDER, _NONCE_PROVIDER = replay, nonce
+
+
+def _replay(store: ReplayCheckPort | None = None) -> ReplayCheckPort:
+    selected = store or _REPLAY_PROVIDER
+    if selected is None:
+        raise RuntimeError("DPoP replay provider is not configured")
+    return selected
+
+
+def _nonce(store: SingleUseNoncePort | None = None) -> SingleUseNoncePort:
+    selected = store or _NONCE_PROVIDER
+    if selected is None:
+        raise RuntimeError("DPoP nonce provider is not configured")
+    return selected
 
 def _segments(proof: str) -> tuple[dict[str, Any], dict[str, Any]]:
     parts = str(proof).split(".")
@@ -214,25 +233,25 @@ makeProof = make_proof
 create_proof = make_proof
 
 
-def issue_nonce(*, ttl_s: int = _ALLOWED_SKEW, store: DPoPNonceStore | None = None) -> str:
-    return (store or DEFAULT_NONCE_STORE).issue(ttl_s=ttl_s)
+def issue_nonce(*, ttl_s: int = _ALLOWED_SKEW, store: SingleUseNoncePort | None = None) -> str:
+    return _nonce(store).issue(ttl_s=ttl_s)
 
 
-def register_nonce(nonce: str, *, ttl_s: int = _ALLOWED_SKEW, store: DPoPNonceStore | None = None) -> str:
-    return (store or DEFAULT_NONCE_STORE).register(nonce, ttl_s=ttl_s)
+def register_nonce(nonce: str, *, ttl_s: int = _ALLOWED_SKEW, store: SingleUseNoncePort | None = None) -> str:
+    return _nonce(store).register(nonce, ttl_s=ttl_s)
 
 
-def consume_nonce(nonce: str, *, store: DPoPNonceStore | None = None, now: int | None = None) -> bool:
-    return (store or DEFAULT_NONCE_STORE).consume(nonce, now=now)
+def consume_nonce(nonce: str, *, store: SingleUseNoncePort | None = None, now: int | None = None) -> bool:
+    return _nonce(store).consume(nonce, now=now)
 
 
-def replay_store_snapshot(store: DPoPReplayStore | None = None) -> dict[str, int]:
-    return (store or DEFAULT_REPLAY_STORE).snapshot()
+def replay_store_snapshot(store: ReplayCheckPort | None = None) -> dict[str, int]:
+    return dict(_replay(store).snapshot())
 
 
 def clear_runtime_state() -> None:
-    DEFAULT_REPLAY_STORE.clear()
-    DEFAULT_NONCE_STORE.clear()
+    _replay().clear()
+    _nonce().clear()
 
 
 def verify_proof(
@@ -245,8 +264,8 @@ def verify_proof(
     expected_nonce: str | None = None,
     require_nonce: bool = False,
     enabled: bool | None = None,
-    replay_store: DPoPReplayStore | None = None,
-    nonce_store: DPoPNonceStore | None = None,
+    replay_store: ReplayCheckPort | None = None,
+    nonce_store: SingleUseNoncePort | None = None,
 ) -> str:
     if enabled is None:
         enabled = settings.enable_rfc9449
@@ -273,13 +292,13 @@ def verify_proof(
     if expected_nonce is not None:
         if claims.nonce != expected_nonce:
             raise ValueError(f"nonce mismatch: {RFC9449_SPEC_URL}")
-        store = nonce_store or DEFAULT_NONCE_STORE
+        store = _nonce(nonce_store)
         if not store.consume(expected_nonce):
             raise ValueError(f"invalid or expired nonce: {RFC9449_SPEC_URL}")
     elif require_nonce and not claims.nonce:
         raise ValueError(f"nonce required: {RFC9449_SPEC_URL}")
     replay_key = ":".join((claims.jkt, claims.jti, claims.htm, claims.htu, claims.ath or ""))
-    if (replay_store or DEFAULT_REPLAY_STORE).check_and_store(
+    if _replay(replay_store).check_and_store(
         replay_key,
         now=claims.iat,
         ttl_s=_ALLOWED_SKEW,
@@ -302,9 +321,8 @@ def describe() -> dict[str, object]:
 __all__ = [
     "RFC9449_SPEC_URL",
     "DPoPNonceRecord",
-    "DPoPNonceStore",
     "DPoPProofClaims",
-    "DPoPReplayStore",
+    "configure_state_providers",
     "StandardOwner",
     "OWNER",
     "access_token_hash",

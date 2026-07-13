@@ -2190,6 +2190,21 @@ dependencies = [
 requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
 
 [[package]]
+name = "tigrbl-attestation-protocol-corim"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/50-protocols/tigrbl-attestation-protocol-corim" }
+dependencies = [
+    { name = "tigrbl-corim-concrete" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-corim-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-attestation-protocol-eat"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-attestation-protocol-eat" }
@@ -2667,6 +2682,7 @@ dependencies = [
     { name = "tigrbl-attestation-appraisal" },
     { name = "tigrbl-attestation-appraiser" },
     { name = "tigrbl-attestation-bases" },
+    { name = "tigrbl-attestation-protocol-corim" },
     { name = "tigrbl-attestation-protocol-eat" },
     { name = "tigrbl-attestation-reference-provider" },
     { name = "tigrbl-auth" },
@@ -2870,6 +2886,7 @@ dependencies = [
     { name = "tigrbl-password-reset-credential-concrete" },
     { name = "tigrbl-passwordless-credential-concrete" },
     { name = "tigrbl-platform-attestation-provider" },
+    { name = "tigrbl-protocol-artifact-processing" },
     { name = "tigrbl-public-subject-identifier-concrete" },
     { name = "tigrbl-release-contracts" },
     { name = "tigrbl-replay-bases" },
@@ -3012,6 +3029,7 @@ requires-dist = [
     { name = "tigrbl-attestation-appraisal", editable = "pkgs/40-capabilities/tigrbl-attestation-appraisal" },
     { name = "tigrbl-attestation-appraiser", editable = "pkgs/20-providers/tigrbl-attestation-appraiser" },
     { name = "tigrbl-attestation-bases", editable = "pkgs/05-bases/tigrbl-attestation-bases" },
+    { name = "tigrbl-attestation-protocol-corim", editable = "pkgs/50-protocols/tigrbl-attestation-protocol-corim" },
     { name = "tigrbl-attestation-protocol-eat", editable = "pkgs/50-protocols/tigrbl-attestation-protocol-eat" },
     { name = "tigrbl-attestation-reference-provider", editable = "pkgs/20-providers/tigrbl-attestation-reference-provider" },
     { name = "tigrbl-auth", editable = "pkgs/70-facade/tigrbl-auth" },
@@ -3219,6 +3237,7 @@ requires-dist = [
     { name = "tigrbl-password-reset-credential-concrete", editable = "pkgs/10-concrete/tigrbl-password-reset-credential-concrete" },
     { name = "tigrbl-passwordless-credential-concrete", editable = "pkgs/10-concrete/tigrbl-passwordless-credential-concrete" },
     { name = "tigrbl-platform-attestation-provider", editable = "pkgs/20-providers/tigrbl-platform-attestation-provider" },
+    { name = "tigrbl-protocol-artifact-processing", editable = "pkgs/40-capabilities/tigrbl-protocol-artifact-processing" },
     { name = "tigrbl-public-subject-identifier-concrete", editable = "pkgs/10-concrete/tigrbl-public-subject-identifier-concrete" },
     { name = "tigrbl-release-contracts", editable = "pkgs/02-contracts/tigrbl-release-contracts" },
     { name = "tigrbl-replay-bases", editable = "pkgs/05-bases/tigrbl-replay-bases" },
@@ -5718,6 +5737,7 @@ dependencies = [
     { name = "tigrbl-core" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-storage-runtime" },
+    { name = "tigrbl-replay-memory-provider" },
 ]
 
 [package.metadata]
@@ -5729,6 +5749,7 @@ requires-dist = [
     { name = "tigrbl-core", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage-runtime", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-replay-memory-provider", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
@@ -6146,6 +6167,21 @@ dependencies = [
 requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
 
 [[package]]
+name = "tigrbl-protocol-artifact-processing"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/40-capabilities/tigrbl-protocol-artifact-processing" }
+dependencies = [
+    { name = "tigrbl-capability" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-capability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-public-subject-identifier-concrete"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-public-subject-identifier-concrete" }
@@ -6181,11 +6217,19 @@ name = "tigrbl-replay-memory-provider"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/20-providers/tigrbl-replay-memory-provider" }
 dependencies = [
+    { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-replay-bases" },
+    { name = "tigrbl-security-proof-pkce" },
+    { name = "tigrbl-security-trust-contracts" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-replay-bases", specifier = "==0.4.0.dev2" }]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-replay-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-proof-pkce", specifier = "==0.1.0" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+]
 
 [[package]]
 name = "tigrbl-replay-protection-capability"

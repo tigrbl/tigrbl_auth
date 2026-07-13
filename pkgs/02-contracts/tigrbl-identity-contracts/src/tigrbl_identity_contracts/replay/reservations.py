@@ -40,15 +40,50 @@ class ReplayReservationResult:
     provider_id: str = ""
 
 
+@dataclass(frozen=True, slots=True)
+class ReplayStoreDescriptor:
+    provider_id: str
+    persistence: str
+    atomic_reservation: bool
+    namespaces: tuple[str, ...]
+    tenant_isolation: str
+    expiry: str
+    retention: str
+    purge: str
+    audit: str
+    availability: str
+
+
 class ReplayReservationPort(Protocol):
     async def check_and_reserve(
         self, request: ReplayReservationRequest, /
     ) -> ReplayReservationResult: ...
 
 
+class ReplayCheckPort(Protocol):
+    """Synchronous atomic replay boundary for synchronous protocol decoders."""
+
+    def check_and_store(self, key: str, *, now: int | None = None, ttl_s: int) -> bool: ...
+    def snapshot(self) -> Mapping[str, int]: ...
+    def clear(self) -> None: ...
+
+
+class SingleUseNoncePort(Protocol):
+    """Synchronous single-use nonce boundary."""
+
+    def issue(self, *, ttl_s: int) -> str: ...
+    def register(self, nonce: str, *, ttl_s: int) -> str: ...
+    def consume(self, nonce: str, *, now: int | None = None) -> bool: ...
+    def snapshot(self) -> Mapping[str, object]: ...
+    def clear(self) -> None: ...
+
+
 __all__ = [
     "ReplayKey",
+    "ReplayCheckPort",
     "ReplayReservationPort",
     "ReplayReservationRequest",
     "ReplayReservationResult",
+    "ReplayStoreDescriptor",
+    "SingleUseNoncePort",
 ]

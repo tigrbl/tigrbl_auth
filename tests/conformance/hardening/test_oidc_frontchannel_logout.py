@@ -1,7 +1,7 @@
 import asyncio
 from uuid import uuid4
 
-from tigrbl_auth.standards.oidc import frontchannel_logout
+from tigrbl_auth_protocol_oidc.standards import frontchannel_logout
 
 
 class _Registration:

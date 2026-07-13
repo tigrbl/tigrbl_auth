@@ -9,7 +9,7 @@ from datetime import datetime, timezone
 from typing import Final, Literal
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
 
-from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
 
 try:  # pragma: no cover - exercised when full runtime deps are installed
     from tigrbl.types import BaseModel

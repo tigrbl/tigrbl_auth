@@ -9,6 +9,8 @@ if str(ROOT) not in sys.path:
 
 from tigrbl_auth.cli.artifacts import deployment_from_options, write_discovery_artifacts
 from tigrbl_auth.config.deployment import VALID_PROFILES
+from tigrbl_identity_contracts.protocol_configuration import bind_protocol_settings
+from tigrbl_identity_runtime.settings import settings
 
 
 PROFILES = VALID_PROFILES
@@ -42,6 +44,7 @@ def write_discovery_reference(repo_root: Path) -> None:
 
 
 def main() -> int:
+    bind_protocol_settings(settings)
     for profile_name in PROFILES:
         deployment = deployment_from_options(profile=profile_name)
         write_discovery_artifacts(ROOT, deployment, profile_label=profile_name)

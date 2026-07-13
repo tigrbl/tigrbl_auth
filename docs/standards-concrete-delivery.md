@@ -103,15 +103,15 @@ Canonical placement rule:
 - [x] Layer 02 owns representation-neutral ports rather than a database or
   vendor API.
 - [x] Layer 20 may own an explicitly named replaceable backend provider.
-- [ ] Rename every ambiguous `*-store` layer-20 package to identify its actual
+- [x] Rename every ambiguous `*-store` layer-20 package to identify its actual
   implementation, such as `*-memory-provider` or `*-redis-provider`.
-- [ ] Move executable SQL repositories, sessions, and transaction coordination
+- [x] Move executable SQL repositories, sessions, and transaction coordination
   to layer 30.
-- [ ] Ensure no layer-50 protocol package silently creates production state or
+- [x] Ensure no layer-50 protocol package silently creates production state or
   selects a default process-local store.
-- [ ] Require atomic `check_and_reserve(namespace, key, expires_at)` semantics
+- [x] Require atomic `check_and_reserve(namespace, key, expires_at)` semantics
   for replay prevention; a separate read followed by write is insufficient.
-- [ ] Require explicit retention, namespace, tenant, expiry, purge, audit, and
+- [x] Require explicit retention, namespace, tenant, expiry, purge, audit, and
   availability semantics in every production store descriptor.
 
 ### Replay protection delivery
@@ -130,15 +130,17 @@ Canonical placement rule:
   production deployments.
 - [x] Add a layer-30 SQL replay repository backed by a layer-01 table whose
   unique digest constraint is the final concurrent duplicate arbiter.
-- [ ] Add separately packaged layer-20 Redis/vendor replay providers only when
+- [x] Add separately packaged layer-20 Redis/vendor replay providers only when
   their dependencies and operational semantics differ.
+  No Redis/vendor backend is selected in this delivery, so no speculative
+  provider package is created; the rule is enforced by provider boundaries.
 - [x] Add a layer-40 `tigrbl-replay-protection-capability` package that delegates to a
   selected provider/repository and reports operations, guarantees, namespaces,
   persistence class, health, and limitations.
 - [x] Map SET `jti`, DPoP proof `jti`/nonce, OIDC backchannel logout token `jti`,
   OID4VP nonce/transaction binding, and other revision-specific replay rules to
   the layer-40 capability from their layer-50 packages.
-- [ ] Remove `StateNonceStore`, `TokenStore`, `DPoPReplayStore`, and
+- [x] Remove `StateNonceStore`, `TokenStore`, `DPoPReplayStore`, and
   `DPoPNonceStore` as implicit production implementations inside layer 50;
   retain only injected ports or explicitly named test fixtures.
 
@@ -150,22 +152,22 @@ Canonical placement rule:
 - [x] Replace `tigrbl-corim-store-provider` with the implementation-specific
   `tigrbl-corim-reference-memory-provider`; retain the former only as a
   deprecated compatibility alias.
-- [ ] Put durable CoRIM/CoMID reference-material repositories and immutable
+- [x] Put durable CoRIM/CoMID reference-material repositories and immutable
   publication transactions in layer 30.
-- [ ] Keep trust resolution/appraisal in layers 20/40 and keep CoRIM revision,
+- [x] Keep trust resolution/appraisal in layers 20/40 and keep CoRIM revision,
   encoding, and protocol mapping in layer 50.
 
 ### Capability-layer contract
 
-- [ ] Every layer-40 capability has a stable capability ID and version.
-- [ ] Every layer-40 capability reports supported operations, guarantees,
+- [x] Every layer-40 capability has a stable capability ID and version.
+- [x] Every layer-40 capability reports supported operations, guarantees,
   optional features, selected provider identities, dependencies, readiness,
   health, limitations, and explicitly unsupported behavior.
-- [ ] Layer-40 capabilities accept normalized contracts and do not depend on
+- [x] Layer-40 capabilities accept normalized contracts and do not depend on
   protocol wire names such as `jti`, `nonce`, `state`, or HTTP parameters.
-- [ ] A capability may delegate to multiple layer-20 providers and layer-30
+- [x] A capability may delegate to multiple layer-20 providers and layer-30
   repositories without exposing those implementation details to layer 50.
-- [ ] Capability mounting/composition is deterministic and its effective
+- [x] Capability mounting/composition is deterministic and its effective
   capability set is inspectable at runtime.
 
 ### Protocol-layer contract
@@ -173,13 +175,13 @@ Canonical placement rule:
 - [x] Each protocol with independent history owns a distinct layer-50 package
   and version registry.
 - [x] Layer 50 owns revision feature flags, compatibility rules, and migrations.
-- [ ] Each normative protocol requirement maps to a stable layer-40 capability
+- [x] Each normative protocol requirement maps to a stable layer-40 capability
   operation or is explicitly reported unsupported.
-- [ ] Layer 50 reports the selected protocol revision, required capability set,
+- [x] Layer 50 reports the selected protocol revision, required capability set,
   effective implementation coverage, and conformance evidence links.
-- [ ] Layer 50 owns wire decoding/encoding and protocol error mapping but not
+- [x] Layer 50 owns wire decoding/encoding and protocol error mapping but not
   databases, trust-anchor selection, key loading, or production state stores.
-- [ ] Layer 60 selects providers and deployment policy; layer 50 must not import
+- [x] Layer 60 selects providers and deployment policy; layer 50 must not import
   runtime settings to make hidden implementation choices.
 
 ### EAT cross-aspect status
@@ -200,19 +202,24 @@ Canonical placement rule:
 - [x] EAT cross-aspect contracts, bases, concrete specialization, JWT/CWT
   envelope symmetry, provider verification, and appraisal separation are
   implemented and covered by unit tests.
-- [x] The complete unit suite passes: 1,065 tests.
+- [x] The complete unit suite passes: 1,078 tests.
 - [x] Layer-boundary enforcement passes for the layered package tree.
 - [x] SQLite and PostgreSQL migration upgrade/downgrade/reapply portability is
   preserved in validated-run evidence.
 - [x] Artifact-to-route, route-to-contract, and runtime-plan-to-discovery truth
   checks pass.
-- [ ] RP state/token memory stores and DPoP replay/nonce memory stores remain
-  embedded in layer 50 and must be replaced by injected ports/providers.
-- [ ] Layer-50 imports of deployment runtime settings remain and must be moved
-  to layer-60 composition/configuration.
-- [ ] Full layer-40 capability metadata and layer-50 normative-requirement
-  coverage reporting remain incomplete; the generated state report records
-  these as open rather than claiming completion.
+- [x] RP state/token memory stores and DPoP replay/nonce memory stores are
+  injected through neutral ports; explicit process-local implementations live
+  in `tigrbl-replay-memory-provider`, and layer 60 selects them deliberately.
+- [x] Layer-50 protocol packages consume the neutral injected protocol-settings
+  proxy; layer 60 binds deployment settings and no layer-50 module imports the
+  runtime settings module.
+- [x] Layer-40 capability metadata is complete and operator-inspectable through
+  the shared capability report, including bindings and delegated operations.
+- [x] Every versioned layer-50 protocol/profile reports its selected revision,
+  feature-derived normative requirements, stable capability mappings,
+  effective coverage, explicit unsupported behavior, and conformance evidence
+  links.
 
 ## Assurance vocabulary
 

@@ -8,7 +8,7 @@ from typing import Any, Final, Iterable
 
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
 
-from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
 from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import SUPPORTED_MTLS_AUTH_METHODS
 from tigrbl_auth_protocol_oauth.standards.json_web_token import decode_jwt, encode_jwt
 from tigrbl_auth_protocol_oauth.standards.assertion_framework import (

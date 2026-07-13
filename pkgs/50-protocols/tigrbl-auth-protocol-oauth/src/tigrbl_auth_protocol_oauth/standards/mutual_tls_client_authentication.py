@@ -20,7 +20,7 @@ from tigrbl_security_trust_contracts import MTLSClientAuthentication
 from cryptography import x509
 from cryptography.hazmat.primitives import serialization
 
-from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
 from tigrbl_identity_core.errors import InvalidTokenError
 from tigrbl_auth_protocol_oauth.standards._mtls_identity import (
     certificate_matches_registered_identity,

@@ -85,7 +85,9 @@ class ReplayProtectionCapability(Capability):
         )
 
     def capability_report(self) -> dict[str, object]:
-        return self.describe()._asdict()
+        report = super().capability_report()
+        report.update(self.describe()._asdict())
+        return report
 
 
 __all__ = ["ReplayCapabilityDescriptor", "ReplayProtectionCapability"]

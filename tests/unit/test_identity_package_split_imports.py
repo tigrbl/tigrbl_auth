@@ -393,7 +393,14 @@ def test_oidc_backchannel_logout_uses_storage_replay_table() -> None:
         "replay_store": "table:BackchannelLogoutReplay"
     }
     assert tables.TABLE_MODEL_BY_NAME["BackchannelLogoutReplay"] is tables.BackchannelLogoutReplay
-    assert "BackchannelLogoutReplay.handlers.register" in source
+    assert "BackchannelLogoutReplay.handlers.register" not in source
+    persistence_source = (
+        _package_path("tigrbl-identity-storage-runtime")
+        / "src"
+        / "tigrbl_identity_storage_runtime"
+        / "oidc_persistence.py"
+    ).read_text(encoding="utf-8")
+    assert "BackchannelLogoutReplay.handlers.register" in persistence_source
     assert "_REPLAY_STORE" not in source
     assert "tigrbl_auth_protocol_oidc_backchannel_replay_store" not in source
 

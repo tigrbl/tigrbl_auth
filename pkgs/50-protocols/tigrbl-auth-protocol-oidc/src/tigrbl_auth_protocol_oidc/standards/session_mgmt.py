@@ -13,7 +13,6 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 from hashlib import sha256
-from types import SimpleNamespace
 from typing import Final
 
 from tigrbl_identity_contracts.oidc import SessionStateValidation
@@ -25,7 +24,7 @@ from tigrbl_identity_runtime.deployment import (
     deployment_from_request,
     resolve_deployment,
 )
-from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
 from tigrbl_identity_runtime.http_standards.cookies import (
     extract_session_cookie,
     hash_cookie_secret,
@@ -52,32 +51,9 @@ OWNER = StandardOwner(
 
 
 def _persistence():
-    from tigrbl_identity_storage.persistence import (
-        bind_session_client_async,
-        create_session_async,
-        get_active_session_async,
-        get_session_async,
-        rotate_session_cookie_secret_async,
-        touch_session_async,
-    )
-    from tigrbl_identity_storage.tables.auth_session import AuthSession
-    from tigrbl_identity_storage.tables.engine import storage_session
+    from tigrbl_identity_storage_runtime.oidc_persistence import oidc_persistence
 
-    async def terminate_session_async(session_id, **kwargs):
-        async with storage_session() as db:
-            return await AuthSession.handlers.terminate.core(
-                {"path_params": {"id": session_id}, "payload": kwargs, "db": db}
-            )
-
-    return SimpleNamespace(
-        bind_session_client_async=bind_session_client_async,
-        create_session_async=create_session_async,
-        get_active_session_async=get_active_session_async,
-        get_session_async=get_session_async,
-        rotate_session_cookie_secret_async=rotate_session_cookie_secret_async,
-        terminate_session_async=terminate_session_async,
-        touch_session_async=touch_session_async,
-    )
+    return oidc_persistence
 
 
 def _utc(value: datetime | None) -> datetime | None:

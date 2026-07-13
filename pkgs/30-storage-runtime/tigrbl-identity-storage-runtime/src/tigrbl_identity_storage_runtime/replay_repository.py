@@ -7,7 +7,7 @@ from typing import Any
 
 from sqlalchemy.exc import IntegrityError
 
-from tigrbl_identity_contracts.replay import ReplayReservationRequest, ReplayReservationResult
+from tigrbl_identity_contracts.replay import ReplayReservationRequest, ReplayReservationResult, ReplayStoreDescriptor
 from tigrbl_identity_storage.tables.replay_reservation import ReplayReservation
 from tigrbl_identity_storage.tables.engine import storage_session
 from tigrbl_replay_bases import ReplayReservationBase
@@ -24,6 +24,18 @@ class SqlReplayReservationRepository(ReplayReservationBase):
 
     provider_id = "replay:sql"
     persistence = "durable"
+    descriptor = ReplayStoreDescriptor(
+        provider_id=provider_id,
+        persistence=persistence,
+        atomic_reservation=True,
+        namespaces=("*",),
+        tenant_isolation="key-scoped optional tenant identifier",
+        expiry="required timezone-aware expires_at",
+        retention="until expires_at plus operator purge interval",
+        purge="expired rows are replaceable; scheduled purge is operator-owned",
+        audit="reservation result exposes provider and digest; database audit is deployment-owned",
+        availability="database transaction and unique-constraint availability",
+    )
 
     async def check_and_reserve(
         self, request: ReplayReservationRequest, /

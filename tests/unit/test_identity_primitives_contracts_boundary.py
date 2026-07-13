@@ -195,13 +195,6 @@ def test_auth_helpers_import_principal_protocol_from_contracts() -> None:
         / "backends.py",
         ROOT
         / "pkgs"
-        / "20-providers"
-        / "tigrbl-authn-credentials"
-        / "src"
-        / "tigrbl_authn_credentials"
-        / "authenticators.py",
-        ROOT
-        / "pkgs"
         / "60-runtime"
         / "tigrbl-identity-server"
         / "src"
@@ -222,6 +215,18 @@ def test_auth_helpers_import_principal_protocol_from_contracts() -> None:
         source = path.read_text(encoding="utf-8")
         assert "from tigrbl_identity_core.typing import Principal" not in source
         assert "from tigrbl_identity_contracts.principals import PrincipalLike" in source
+
+    removed_composition = (
+        ROOT
+        / "pkgs"
+        / "20-providers"
+        / "tigrbl-authn-credentials"
+        / "src"
+        / "tigrbl_authn_credentials"
+        / "authenticators.py"
+    ).read_text(encoding="utf-8")
+    assert "Removed runtime composition surface" in removed_composition
+    assert "tigrbl_identity_contracts.principals" not in removed_composition
 
 
 def test_identity_primitives_import_dag_clean_room() -> None:

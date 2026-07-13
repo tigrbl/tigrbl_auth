@@ -4,25 +4,9 @@ from __future__ import annotations
 
 
 async def build_jwks_document() -> dict:
-    from tigrbl_auth_protocol_oidc.standards.id_token import (
-        ensure_rsa_jwt_key,
-        rotation_jwks_cache,
-        rsa_key_provider,
-    )
-    from tigrbl_identity_jose.key_management import (
-        _ensure_key as ensure_ed25519_key,
-        _provider as ed25519_provider,
-    )
+    from tigrbl_identity_jose.jwks_publication import build_combined_jwks_document
 
-    await ensure_rsa_jwt_key()
-    await ensure_ed25519_key()
-    rsa = await rsa_key_provider().jwks()
-    ed = await ed25519_provider().jwks()
-    combined = {
-        k.get("kid"): k
-        for k in [*rotation_jwks_cache(), *rsa.get("keys", []), *ed.get("keys", [])]
-    }
-    return {"keys": list(combined.values())}
+    return await build_combined_jwks_document()
 
 
 __all__ = ["build_jwks_document"]

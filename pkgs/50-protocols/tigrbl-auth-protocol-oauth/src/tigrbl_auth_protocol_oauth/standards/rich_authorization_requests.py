@@ -8,7 +8,7 @@ from tigrbl_identity_contracts.oauth import AuthorizationDetailsBinding
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from urllib.parse import urlparse
 
-from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
 from tigrbl_auth_protocol_oauth.standards.resource_indicators import select_resource_indicator
 
 try:  # pragma: no cover - exercised when the full runtime stack is installed

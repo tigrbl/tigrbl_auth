@@ -343,7 +343,11 @@ def test_installable_resource_validation_api_imports_facade_metadata_modules() -
         package = importlib.import_module("tigrbl_auth_api_resource_validation")
 
         assert metadata.CAPABILITIES_METADATA_PATH == "/metadata/capabilities"
-        assert contract.build_protected_resource_verifier_contract().fail_closed is True
+        from tigrbl_identity_runtime.deployment import resolve_deployment
+
+        assert contract.build_protected_resource_verifier_contract(
+            deployment=resolve_deployment()
+        ).fail_closed is True
         assert package.PRODUCT_SURFACE == "resource-validation-api"
 
 

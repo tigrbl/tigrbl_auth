@@ -4,20 +4,20 @@ from __future__ import annotations
 
 from tigrbl_identity_contracts.oauth import ProtectedResourceVerifierContract
 from tigrbl_identity_runtime.deployment import ResolvedDeployment, deployment_from_request, resolve_deployment
-from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
 from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import runtime_security_profile
 
 ML_DSA_65_ALG = "ML-DSA-65"
 
 
-def _pqc_jose_enabled() -> bool:
-    configured = str(getattr(settings, "jwt_signing_alg", "") or "").replace("_", "-").upper()
-    return bool(getattr(settings, "enable_pqc_jose", False)) or configured in {"ML-DSA-65", "MLDSA65"}
+def _pqc_jose_enabled(settings_obj: object | None) -> bool:
+    configured = str(getattr(settings_obj, "jwt_signing_alg", "") or "").replace("_", "-").upper()
+    return bool(getattr(settings_obj, "enable_pqc_jose", False)) or configured in {"ML-DSA-65", "MLDSA65"}
 
 
-def _allowed_token_algs() -> tuple[str, ...]:
+def _allowed_token_algs(settings_obj: object | None) -> tuple[str, ...]:
     algs = ["RS256", "ES256", "EdDSA"]
-    if _pqc_jose_enabled():
+    if _pqc_jose_enabled(settings_obj):
         algs.append(ML_DSA_65_ALG)
     return tuple(algs)
 
@@ -25,10 +25,14 @@ def _allowed_token_algs() -> tuple[str, ...]:
 def build_protected_resource_verifier_contract(
     deployment: ResolvedDeployment | None = None,
 ) -> ProtectedResourceVerifierContract:
-    active_deployment = deployment or resolve_deployment(settings)
+    settings_obj = None if deployment is not None else settings
+    active_deployment = deployment or resolve_deployment(settings_obj)
     policy = runtime_security_profile(active_deployment)
-    issuer = str(active_deployment.issuer or settings.issuer).rstrip("/")
-    resource = str(active_deployment.protected_resource_identifier or settings.protected_resource_identifier)
+    issuer = str(active_deployment.issuer or getattr(settings_obj, "issuer", "")).rstrip("/")
+    resource = str(
+        active_deployment.protected_resource_identifier
+        or getattr(settings_obj, "protected_resource_identifier", "")
+    )
 
     modes: list[str] = ["bearer"]
     if policy.dpop_supported:
@@ -49,7 +53,7 @@ def build_protected_resource_verifier_contract(
         resource=resource,
         accepted_audiences=(resource,),
         accepted_token_classes=("access_token",),
-        allowed_algs=_allowed_token_algs(),
+        allowed_algs=_allowed_token_algs(settings_obj),
         jwks_uri=f"{issuer}/.well-known/jwks.json",
         introspection_endpoint=f"{issuer}/introspect",
         sender_constraint_modes=tuple(dict.fromkeys(modes)),

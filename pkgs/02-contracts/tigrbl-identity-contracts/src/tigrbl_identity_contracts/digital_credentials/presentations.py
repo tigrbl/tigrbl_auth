@@ -21,6 +21,11 @@ class TransactionBinding:
     audience: str
     transaction_id: str | None = None
 
+    @property
+    def replay_value(self) -> str:
+        """Normalized replay value independent of the originating wire name."""
+        return self.transaction_id or self.nonce
+
 
 @dataclass(frozen=True, slots=True)
 class PresentationRequest:

@@ -47,6 +47,7 @@ DEPRECATED_DIST_TO_IMPORT_ROOT = {
 }
 
 DEPRECATED_MODULE_CANONICAL_IMPORT_ROOT = {
+    "tigrbl_identity_credentials/authenticators.py": "tigrbl_identity_server.security.auth",
     "tigrbl_identity_credentials/_operator_store.py": "tigrbl_identity_storage_runtime.operator_store",
     "tigrbl_identity_credentials/_token_service/__init__.py": "tigrbl_identity_runtime.token_service",
     "tigrbl_identity_credentials/_token_service/coder.py": "tigrbl_identity_jose.jwt_coder",
