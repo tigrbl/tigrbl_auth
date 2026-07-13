@@ -229,6 +229,9 @@ dependencies = [
     "tigrbl-security-event-replay-store==0.4.0.dev2",
     "tigrbl-set-transmitter-provider==0.4.0.dev2",
     "tigrbl-set-receiver-provider==0.4.0.dev2",
+    "tigrbl-wallet-attestation-verifier==0.4.0.dev2",
+    "tigrbl-key-attestation-verifier==0.4.0.dev2",
+    "tigrbl-platform-attestation-provider==0.4.0.dev2",
     "tigrbl-identity-oauth==0.4.0.dev2",
     "tigrbl-identity-oidc==0.4.0.dev2",
     "tigrbl-identity-principals==0.4.0.dev2",
@@ -523,6 +526,9 @@ tigrbl-mdoc-verifier-provider = { path = "pkgs/20-providers/tigrbl-mdoc-verifier
 tigrbl-security-event-replay-store = { path = "pkgs/20-providers/tigrbl-security-event-replay-store", editable = true }
 tigrbl-set-transmitter-provider = { path = "pkgs/20-providers/tigrbl-set-transmitter-provider", editable = true }
 tigrbl-set-receiver-provider = { path = "pkgs/20-providers/tigrbl-set-receiver-provider", editable = true }
+tigrbl-wallet-attestation-verifier = { path = "pkgs/20-providers/tigrbl-wallet-attestation-verifier", editable = true }
+tigrbl-key-attestation-verifier = { path = "pkgs/20-providers/tigrbl-key-attestation-verifier", editable = true }
+tigrbl-platform-attestation-provider = { path = "pkgs/20-providers/tigrbl-platform-attestation-provider", editable = true }
 tigrbl-identity-oauth = { path = "pkgs/deprecated/tigrbl-identity-oauth", editable = true }
 tigrbl-identity-oidc = { path = "pkgs/deprecated/tigrbl-identity-oidc", editable = true }
 tigrbl-identity-principals = { path = "pkgs/40-capabilities/tigrbl-identity-principals", editable = true }

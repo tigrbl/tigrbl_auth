@@ -2645,6 +2645,7 @@ dependencies = [
     { name = "tigrbl-jose-concrete" },
     { name = "tigrbl-jwt-id-claim-concrete" },
     { name = "tigrbl-kernel" },
+    { name = "tigrbl-key-attestation-verifier" },
     { name = "tigrbl-local-claims-provider-concrete" },
     { name = "tigrbl-machine-identity-concrete" },
     { name = "tigrbl-mdoc-concrete" },
@@ -2672,6 +2673,7 @@ dependencies = [
     { name = "tigrbl-password-reset-credential-concrete" },
     { name = "tigrbl-passwordless-credential-concrete" },
     { name = "tigrbl-place-of-birth-claim-concrete" },
+    { name = "tigrbl-platform-attestation-provider" },
     { name = "tigrbl-public-subject-identifier-concrete" },
     { name = "tigrbl-release-contracts" },
     { name = "tigrbl-resource-server-bases" },
@@ -2724,6 +2726,7 @@ dependencies = [
     { name = "tigrbl-user-identity-concrete" },
     { name = "tigrbl-vcdm-concrete" },
     { name = "tigrbl-verified-claims-claim-concrete" },
+    { name = "tigrbl-wallet-attestation-verifier" },
     { name = "tigrbl-webauthn-credential-concrete" },
     { name = "tigrbl-workload-identity-concrete" },
     { name = "tomli", marker = "python_full_version < '3.11'" },
@@ -2933,6 +2936,7 @@ requires-dist = [
     { name = "tigrbl-jose-concrete", editable = "pkgs/10-concrete/tigrbl-jose-concrete" },
     { name = "tigrbl-jwt-id-claim-concrete", editable = "pkgs/10-concrete/tigrbl-jwt-id-claim-concrete" },
     { name = "tigrbl-kernel", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-key-attestation-verifier", editable = "pkgs/20-providers/tigrbl-key-attestation-verifier" },
     { name = "tigrbl-local-claims-provider-concrete", editable = "pkgs/10-concrete/tigrbl-local-claims-provider-concrete" },
     { name = "tigrbl-machine-identity-concrete", editable = "pkgs/10-concrete/tigrbl-machine-identity-concrete" },
     { name = "tigrbl-mdoc-concrete", editable = "pkgs/10-concrete/tigrbl-mdoc-concrete" },
@@ -2960,6 +2964,7 @@ requires-dist = [
     { name = "tigrbl-password-reset-credential-concrete", editable = "pkgs/10-concrete/tigrbl-password-reset-credential-concrete" },
     { name = "tigrbl-passwordless-credential-concrete", editable = "pkgs/10-concrete/tigrbl-passwordless-credential-concrete" },
     { name = "tigrbl-place-of-birth-claim-concrete", editable = "pkgs/10-concrete/tigrbl-place-of-birth-claim-concrete" },
+    { name = "tigrbl-platform-attestation-provider", editable = "pkgs/20-providers/tigrbl-platform-attestation-provider" },
     { name = "tigrbl-public-subject-identifier-concrete", editable = "pkgs/10-concrete/tigrbl-public-subject-identifier-concrete" },
     { name = "tigrbl-release-contracts", editable = "pkgs/02-contracts/tigrbl-release-contracts" },
     { name = "tigrbl-resource-server-bases", editable = "pkgs/05-bases/tigrbl-resource-server-bases" },
@@ -3012,6 +3017,7 @@ requires-dist = [
     { name = "tigrbl-user-identity-concrete", editable = "pkgs/10-concrete/tigrbl-user-identity-concrete" },
     { name = "tigrbl-vcdm-concrete", editable = "pkgs/10-concrete/tigrbl-vcdm-concrete" },
     { name = "tigrbl-verified-claims-claim-concrete", editable = "pkgs/10-concrete/tigrbl-verified-claims-claim-concrete" },
+    { name = "tigrbl-wallet-attestation-verifier", editable = "pkgs/20-providers/tigrbl-wallet-attestation-verifier" },
     { name = "tigrbl-webauthn-credential-concrete", editable = "pkgs/10-concrete/tigrbl-webauthn-credential-concrete" },
     { name = "tigrbl-workload-identity-concrete", editable = "pkgs/10-concrete/tigrbl-workload-identity-concrete" },
     { name = "tomli", marker = "python_full_version < '3.11'", specifier = "==2.4.0" },
@@ -4671,6 +4677,17 @@ wheels = [
 ]
 
 [[package]]
+name = "tigrbl-key-attestation-verifier"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-key-attestation-verifier" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
+
+[[package]]
 name = "tigrbl-local-claims-provider-concrete"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-local-claims-provider-concrete" }
@@ -5060,6 +5077,17 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [{ name = "tigrbl-identity-claims-bases", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-platform-attestation-provider"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-platform-attestation-provider" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-public-subject-identifier-concrete"
@@ -5812,6 +5840,17 @@ requires-dist = [
     { name = "tigrbl-identity-claims-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
 ]
+
+[[package]]
+name = "tigrbl-wallet-attestation-verifier"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-wallet-attestation-verifier" }
+dependencies = [
+    { name = "tigrbl-digital-credential-bases" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-digital-credential-bases", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-webauthn-credential-concrete"
