@@ -2580,6 +2580,8 @@ dependencies = [
     { name = "tigrbl-birth-given-name-claim-concrete" },
     { name = "tigrbl-birth-middle-name-claim-concrete" },
     { name = "tigrbl-canon" },
+    { name = "tigrbl-certificate-path-validator" },
+    { name = "tigrbl-certificate-status-provider" },
     { name = "tigrbl-client-id-claim-concrete" },
     { name = "tigrbl-client-identity-concrete" },
     { name = "tigrbl-client-secret-credential-concrete" },
@@ -2711,6 +2713,7 @@ dependencies = [
     { name = "tigrbl-title-claim-concrete" },
     { name = "tigrbl-token-bases" },
     { name = "tigrbl-transaction-id-claim-concrete" },
+    { name = "tigrbl-trust-anchor-provider" },
     { name = "tigrbl-typing" },
     { name = "tigrbl-user-identity-concrete" },
     { name = "tigrbl-vcdm-concrete" },
@@ -2855,6 +2858,8 @@ requires-dist = [
     { name = "tigrbl-birth-given-name-claim-concrete", editable = "pkgs/10-concrete/tigrbl-birth-given-name-claim-concrete" },
     { name = "tigrbl-birth-middle-name-claim-concrete", editable = "pkgs/10-concrete/tigrbl-birth-middle-name-claim-concrete" },
     { name = "tigrbl-canon", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-certificate-path-validator", editable = "pkgs/20-providers/tigrbl-certificate-path-validator" },
+    { name = "tigrbl-certificate-status-provider", editable = "pkgs/20-providers/tigrbl-certificate-status-provider" },
     { name = "tigrbl-client-id-claim-concrete", editable = "pkgs/10-concrete/tigrbl-client-id-claim-concrete" },
     { name = "tigrbl-client-identity-concrete", editable = "pkgs/10-concrete/tigrbl-client-identity-concrete" },
     { name = "tigrbl-client-secret-credential-concrete", editable = "pkgs/10-concrete/tigrbl-client-secret-credential-concrete" },
@@ -2990,6 +2995,7 @@ requires-dist = [
     { name = "tigrbl-title-claim-concrete", editable = "pkgs/10-concrete/tigrbl-title-claim-concrete" },
     { name = "tigrbl-token-bases", editable = "pkgs/05-bases/tigrbl-token-bases" },
     { name = "tigrbl-transaction-id-claim-concrete", editable = "pkgs/10-concrete/tigrbl-transaction-id-claim-concrete" },
+    { name = "tigrbl-trust-anchor-provider", editable = "pkgs/20-providers/tigrbl-trust-anchor-provider" },
     { name = "tigrbl-typing", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-user-identity-concrete", editable = "pkgs/10-concrete/tigrbl-user-identity-concrete" },
     { name = "tigrbl-vcdm-concrete", editable = "pkgs/10-concrete/tigrbl-vcdm-concrete" },
@@ -3608,6 +3614,32 @@ sdist = { url = "https://files.pythonhosted.org/packages/ae/5b/eca889096a19d0f52
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f9/6a/45b8bfd98362ba492c2ef90a40b86fed5d2d3fb586eae0c032e837231283/tigrbl_canon-0.4.4.dev1-py3-none-any.whl", hash = "sha256:d99e0ef04459149561499b632969c190e48a101c0c126a8e1dd6558ae9c7826e", size = 90590, upload-time = "2026-06-19T17:15:08.564Z" },
 ]
+
+[[package]]
+name = "tigrbl-certificate-path-validator"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-certificate-path-validator" }
+dependencies = [
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-security-trust-domain-bases" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-security-trust-domain-bases", specifier = "==0.1.0" },
+]
+
+[[package]]
+name = "tigrbl-certificate-status-provider"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-certificate-status-provider" }
+dependencies = [
+    { name = "tigrbl-security-trust-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" }]
 
 [[package]]
 name = "tigrbl-client-id-claim-concrete"
@@ -5624,6 +5656,17 @@ requires-dist = [
     { name = "tigrbl-identity-claims-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
 ]
+
+[[package]]
+name = "tigrbl-trust-anchor-provider"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-trust-anchor-provider" }
+dependencies = [
+    { name = "tigrbl-security-trust-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" }]
 
 [[package]]
 name = "tigrbl-typing"

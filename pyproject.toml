@@ -220,6 +220,9 @@ dependencies = [
     "tigrbl-svid-verifier-provider==0.4.0.dev2",
     "tigrbl-did-resolver-provider==0.4.0.dev2",
     "tigrbl-did-controller-provider==0.4.0.dev2",
+    "tigrbl-trust-anchor-provider==0.4.0.dev2",
+    "tigrbl-certificate-status-provider==0.4.0.dev2",
+    "tigrbl-certificate-path-validator==0.4.0.dev2",
     "tigrbl-identity-oauth==0.4.0.dev2",
     "tigrbl-identity-oidc==0.4.0.dev2",
     "tigrbl-identity-principals==0.4.0.dev2",
@@ -505,6 +508,9 @@ tigrbl-spiffe-bundle-provider = { path = "pkgs/20-providers/tigrbl-spiffe-bundle
 tigrbl-svid-verifier-provider = { path = "pkgs/20-providers/tigrbl-svid-verifier-provider", editable = true }
 tigrbl-did-resolver-provider = { path = "pkgs/20-providers/tigrbl-did-resolver-provider", editable = true }
 tigrbl-did-controller-provider = { path = "pkgs/20-providers/tigrbl-did-controller-provider", editable = true }
+tigrbl-trust-anchor-provider = { path = "pkgs/20-providers/tigrbl-trust-anchor-provider", editable = true }
+tigrbl-certificate-status-provider = { path = "pkgs/20-providers/tigrbl-certificate-status-provider", editable = true }
+tigrbl-certificate-path-validator = { path = "pkgs/20-providers/tigrbl-certificate-path-validator", editable = true }
 tigrbl-identity-oauth = { path = "pkgs/deprecated/tigrbl-identity-oauth", editable = true }
 tigrbl-identity-oidc = { path = "pkgs/deprecated/tigrbl-identity-oidc", editable = true }
 tigrbl-identity-principals = { path = "pkgs/40-capabilities/tigrbl-identity-principals", editable = true }
