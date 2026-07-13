@@ -26,6 +26,7 @@ from .authorization_scopes import *
 from .claims import *
 from .capabilities import *
 from .subject_identifiers import *
+from .shared_secrets import *
 from .credential_artifacts import *
 from .attestation import *
 from .workload_identity import *

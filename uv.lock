@@ -2897,6 +2897,7 @@ dependencies = [
     { name = "tigrbl-runtime" },
     { name = "tigrbl-sd-jwt-concrete" },
     { name = "tigrbl-sd-jwt-vc-concrete" },
+    { name = "tigrbl-secret-hashing-bcrypt-provider" },
     { name = "tigrbl-security-auth-context-acr-basic" },
     { name = "tigrbl-security-auth-context-amr-basic" },
     { name = "tigrbl-security-authorization-provenance-builder" },
@@ -3250,6 +3251,7 @@ requires-dist = [
     { name = "tigrbl-runtime", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-sd-jwt-concrete", editable = "pkgs/10-concrete/tigrbl-sd-jwt-concrete" },
     { name = "tigrbl-sd-jwt-vc-concrete", editable = "pkgs/10-concrete/tigrbl-sd-jwt-vc-concrete" },
+    { name = "tigrbl-secret-hashing-bcrypt-provider", editable = "pkgs/20-providers/tigrbl-secret-hashing-bcrypt-provider" },
     { name = "tigrbl-security-auth-context-acr-basic", editable = "pkgs/20-providers/tigrbl-security-auth-context-acr-basic" },
     { name = "tigrbl-security-auth-context-amr-basic", editable = "pkgs/20-providers/tigrbl-security-auth-context-amr-basic" },
     { name = "tigrbl-security-authorization-provenance-builder", editable = "pkgs/20-providers/tigrbl-security-authorization-provenance-builder" },
@@ -3347,12 +3349,14 @@ source = { editable = "pkgs/20-providers/tigrbl-authenticator-client-secret-loca
 dependencies = [
     { name = "tigrbl-identity-authenticator-bases" },
     { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-secret-hashing-bcrypt-provider" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl-identity-authenticator-bases", specifier = "==0.1.0" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-secret-hashing-bcrypt-provider", specifier = "==0.1.0" },
 ]
 
 [[package]]
@@ -3422,12 +3426,14 @@ source = { editable = "pkgs/20-providers/tigrbl-authenticator-password-local" }
 dependencies = [
     { name = "tigrbl-identity-authenticator-bases" },
     { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-secret-hashing-bcrypt-provider" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl-identity-authenticator-bases", specifier = "==0.1.0" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-secret-hashing-bcrypt-provider", specifier = "==0.1.0" },
 ]
 
 [[package]]
@@ -6319,6 +6325,21 @@ dependencies = [
 requires-dist = [
     { name = "tigrbl-digital-credential-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-sd-jwt-concrete", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-secret-hashing-bcrypt-provider"
+version = "0.1.0"
+source = { editable = "pkgs/20-providers/tigrbl-secret-hashing-bcrypt-provider" }
+dependencies = [
+    { name = "bcrypt" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "bcrypt", specifier = "==5.0.0" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]

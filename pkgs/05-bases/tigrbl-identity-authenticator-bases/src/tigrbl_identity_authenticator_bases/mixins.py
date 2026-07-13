@@ -10,6 +10,10 @@ from tigrbl_identity_contracts.authenticators import (
     AuthenticatorProperty,
 )
 from tigrbl_identity_contracts.credentials import CredentialKind
+from tigrbl_identity_contracts.shared_secrets import (
+    SecretHash,
+    SecretVerificationPort,
+)
 from tigrbl_security_trust_contracts import AmrValue
 
 
@@ -82,8 +86,14 @@ class ChallengeLifecycleMixin:
 
 
 class SecretVerifierMixin:
-    def verify_secret(self, presented: str | bytes, expected: Any) -> bool:
-        raise NotImplementedError
+    secret_verifier: SecretVerificationPort
+
+    def verify_secret(
+        self,
+        presented: str | bytes,
+        expected: SecretHash | bytes | str | None,
+    ) -> bool:
+        return self.secret_verifier.verify_secret(presented, expected).verified
 
 
 class OtpVerifierMixin:

@@ -232,6 +232,7 @@ dependencies = [
     "tigrbl-authenticator-api-key-local==0.1.0",
     "tigrbl-authenticator-service-key-local==0.1.0",
     "tigrbl-authenticator-client-secret-local==0.1.0",
+    "tigrbl-secret-hashing-bcrypt-provider==0.1.0",
     "tigrbl-authenticator-session-local==0.1.0",
     "tigrbl-authenticator-otp-local==0.1.0",
     "tigrbl-authenticator-recovery-code-local==0.1.0",
@@ -442,6 +443,7 @@ tigrbl-authenticator-password-local = { path = "pkgs/20-providers/tigrbl-authent
 tigrbl-authenticator-api-key-local = { path = "pkgs/20-providers/tigrbl-authenticator-api-key-local", editable = true }
 tigrbl-authenticator-service-key-local = { path = "pkgs/20-providers/tigrbl-authenticator-service-key-local", editable = true }
 tigrbl-authenticator-client-secret-local = { path = "pkgs/20-providers/tigrbl-authenticator-client-secret-local", editable = true }
+tigrbl-secret-hashing-bcrypt-provider = { path = "pkgs/20-providers/tigrbl-secret-hashing-bcrypt-provider", editable = true }
 tigrbl-authenticator-session-local = { path = "pkgs/20-providers/tigrbl-authenticator-session-local", editable = true }
 tigrbl-authenticator-otp-local = { path = "pkgs/20-providers/tigrbl-authenticator-otp-local", editable = true }
 tigrbl-authenticator-recovery-code-local = { path = "pkgs/20-providers/tigrbl-authenticator-recovery-code-local", editable = true }

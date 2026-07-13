@@ -2,10 +2,12 @@
 
 from .attestation import *
 from .authorization import *
+from .clients import *
 from .consents import *
 from .credentials import *
 from .oidc import *
 from .oauth import *
+from .identities import *
 from .presentations import *
 from .replay import *
 from .security_events import *
@@ -26,6 +28,8 @@ DURABLE_RUNTIME_TABLE_SPECS = (
     AuthCodeRuntimeSpec,
     ClientRegistrationRuntimeSpec,
     RevokedTokenRuntimeSpec,
+    ClientRuntimeSpec,
+    UserRuntimeSpec,
     CredentialOfferRuntimeSpec,
     CredentialIssuanceTransactionRuntimeSpec,
     CredentialStatusEntryRuntimeSpec,
