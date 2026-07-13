@@ -41,7 +41,7 @@ OIDC_EXTENSION_CLAIMS = (
 
 
 def compose_oidc_claim_set(*claims) -> ClaimSet:
-    return ClaimSet(tuple(claims), "oidc", "1.0")
+    return ClaimSet(tuple(claims), "oidc", "1.0-errata2")
 
 
 __all__ = ["OIDC_EXTENSION_CLAIMS", "compose_oidc_claim_set"]
