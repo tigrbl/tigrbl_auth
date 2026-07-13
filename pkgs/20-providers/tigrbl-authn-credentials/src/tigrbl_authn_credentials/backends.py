@@ -9,7 +9,6 @@ from tigrbl_identity_jose.key_management import verify_pw
 from tigrbl_identity_contracts.principals import PrincipalLike
 from tigrbl_identity_storage.tables._ops import field, list_records
 from tigrbl_identity_storage.tables import (
-    Client,
     CredentialApiKey,
     CredentialServiceKey,
     User,
@@ -110,12 +109,6 @@ class ApiKeyBackend:
                 raise AuthError("service identity is inactive")
             svc_row.touch()
             return service_identity, "service_identity"
-
-        client = await Client.authenticate(
-            {"payload": {"client_secret": api_key}, "db": db}
-        )
-        if client is not None:
-            return client, "client"
 
         raise AuthError("API key invalid, revoked, or expired")
 

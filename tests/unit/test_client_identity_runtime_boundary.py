@@ -123,3 +123,6 @@ def test_client_and_identity_runtime_operation_identity() -> None:
     assert client_ops["lookup_client"].tx_scope == "read_only"
     assert client_ops["enable"].arity == "member"
     assert set(identity_ops) == {"lookup_by_identifier", "replace_password_hash", "set_enabled"}
+    assert not hasattr(Client, "verify_secret")
+    assert not hasattr(Client, "authenticate")
+    assert not hasattr(Client, "rotate_secret")

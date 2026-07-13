@@ -199,7 +199,6 @@ class TestApiKeyBackend:
         self.mock_db = AsyncMock()
         self.api_key_rows = []
         self.service_key_rows = []
-        self.client_rows = []
 
     @pytest.fixture(autouse=True)
     def _patch_key_handlers(self, monkeypatch):
@@ -209,14 +208,8 @@ class TestApiKeyBackend:
         async def _service_key_list_core(ctx):
             return list(self.service_key_rows)
 
-        async def _client_list_core(ctx):
-            return list(self.client_rows)
-
         monkeypatch.setattr(CredentialApiKey.handlers.list, "core", _api_key_list_core)
         monkeypatch.setattr(CredentialServiceKey.handlers.list, "core", _service_key_list_core)
-        from tigrbl_identity_storage.tables import Client
-
-        monkeypatch.setattr(Client.handlers.list, "core", _client_list_core)
 
     def create_mock_user(self, mock_data_factory, **overrides):
         """Create a mock user using data factory for consistency."""
@@ -423,58 +416,14 @@ class TestApiKeyBackend:
         mock_service_key.touch.assert_called_once()
 
     @pytest.mark.asyncio
-    async def test_authenticate_with_valid_client_key(self, mock_data_factory):
-        """Authenticate using a Client's API key."""
-        client, raw_secret = self.create_mock_client(mock_data_factory)
-        self.client_rows = [client]
-        client.verify_secret = MagicMock(wraps=client.verify_secret)
-
-        principal, key_type = await self.backend.authenticate(
-            self.mock_db, raw_secret
-        )
-
-        assert principal == client
-        assert key_type == "client"
-        client.verify_secret.assert_called_once_with(raw_secret)
-
-    @pytest.mark.asyncio
-    async def test_authenticate_with_invalid_client_secret(self, mock_data_factory):
-        """Invalid secret for a Client should raise AuthError."""
-        client, raw_secret = self.create_mock_client(mock_data_factory)
-        self.client_rows = [client]
-        client.verify_secret = MagicMock(wraps=client.verify_secret)
-
-        with pytest.raises(AuthError) as exc_info:
-            await self.backend.authenticate(self.mock_db, "wrong-secret")
-
-        assert exc_info.value.reason == "API key invalid, revoked, or expired"
-        client.verify_secret.assert_called_once_with("wrong-secret")
-
-    @pytest.mark.asyncio
-    async def test_authenticate_with_inactive_client(self, mock_data_factory):
-        """Inactive clients should not authenticate."""
-        client, raw_secret = self.create_mock_client(mock_data_factory, is_active=False)
-        self.client_rows = [client]
+    async def test_client_secret_is_not_accepted_as_an_api_key(self, mock_data_factory):
+        """Client-secret authentication requires its explicit capability and client id."""
+        _client, raw_secret = self.create_mock_client(mock_data_factory)
 
         with pytest.raises(AuthError) as exc_info:
             await self.backend.authenticate(self.mock_db, raw_secret)
 
         assert exc_info.value.reason == "API key invalid, revoked, or expired"
-
-    @pytest.mark.asyncio
-    async def test_client_authenticate_filters_inactive_clients(self, mock_data_factory):
-        """Client table-owned authentication returns only active clients."""
-        from tigrbl_identity_storage.tables import Client
-
-        active_client, _ = self.create_mock_client(mock_data_factory, is_active=True)
-        inactive_client, raw_secret = self.create_mock_client(mock_data_factory, is_active=False)
-        self.client_rows = [inactive_client, active_client]
-
-        row = await Client.authenticate(
-            {"payload": {"client_secret": raw_secret}, "db": self.mock_db}
-        )
-
-        assert row == active_client
 
     @pytest.mark.asyncio
     async def test_get_key_row_filters_expired_keys(self, mock_data_factory):
