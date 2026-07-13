@@ -3,14 +3,13 @@ package: tigrbl_auth
 generated_from:
 - compliance/targets/*.yaml
 - tigrbl_auth.config.surfaces
-- tigrbl_identity_server.rpc.registry
 - tigrbl_identity_cli.cli.metadata
 - tigrbl_identity_runtime.deployment
 summary:
-  feature_count: 404
+  feature_count: 364
   tracked_core_target_count: 48
   tracked_extension_target_count: 5
-  settings_backed_flag_count: 68
+  settings_backed_flag_count: 67
 features:
 - id: cli-flag:access_log
   kind: cli-flag
@@ -377,7 +376,7 @@ features:
 - id: cli-flag:log_level
   kind: cli-flag
   title: --log-level
-  description: Operator log level for serve plans.
+  description: Log level for serve plans.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -664,7 +663,7 @@ features:
 - id: cli-flag:tenant
   kind: cli-flag
   title: --tenant
-  description: Tenant identifier for multi-tenant operators.
+  description: Tenant identifier for multi-tenant commands.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -718,7 +717,7 @@ features:
 - id: cli-flag:trace
   kind: cli-flag
   title: --trace
-  description: Emit trace-oriented operator details.
+  description: Emit trace-oriented execution details.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -772,7 +771,7 @@ features:
 - id: cli-flag:verbose
   kind: cli-flag
   title: --verbose, -v
-  description: Increase operator verbosity; may be repeated.
+  description: Increase CLI verbosity; may be repeated.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -877,7 +876,7 @@ features:
 - id: cli-verb:client.create
   kind: cli-verb
   title: client create
-  description: Create a durable operator-plane client record.
+  description: Create a storage-backed client record.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -886,7 +885,7 @@ features:
 - id: cli-verb:client.delete
   kind: cli-verb
   title: client delete
-  description: Delete a durable operator-plane client record.
+  description: Delete a storage-backed client record.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -913,7 +912,7 @@ features:
 - id: cli-verb:client.get
   kind: cli-verb
   title: client get
-  description: Return a single durable operator-plane client record.
+  description: Return a single storage-backed client record.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -922,7 +921,7 @@ features:
 - id: cli-verb:client.list
   kind: cli-verb
   title: client list
-  description: List durable operator-plane client records.
+  description: List storage-backed client records.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -931,7 +930,7 @@ features:
 - id: cli-verb:client.rotate-secret
   kind: cli-verb
   title: client rotate-secret
-  description: Rotate durable operator-plane client secret material.
+  description: Rotate storage-backed client secret material.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -940,7 +939,7 @@ features:
 - id: cli-verb:client.update
   kind: cli-verb
   title: client update
-  description: Update a durable operator-plane client record.
+  description: Update a storage-backed client record.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1040,7 +1039,7 @@ features:
 - id: cli-verb:export.run
   kind: cli-verb
   title: export run
-  description: Export durable operator-plane state to a portable artifact.
+  description: Export storage-backed identity state to a portable artifact.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1050,7 +1049,7 @@ features:
 - id: cli-verb:export.status
   kind: cli-verb
   title: export status
-  description: Show the last durable operator-plane export status.
+  description: Show the last storage-backed export status.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1060,7 +1059,7 @@ features:
 - id: cli-verb:export.validate
   kind: cli-verb
   title: export validate
-  description: Validate export configuration and current operator state.
+  description: Validate export configuration and current storage-backed identity state.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1070,7 +1069,7 @@ features:
 - id: cli-verb:flow.create
   kind: cli-verb
   title: flow create
-  description: Create a durable operator-plane flow record.
+  description: Create a storage-backed flow record.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1079,7 +1078,7 @@ features:
 - id: cli-verb:flow.delete
   kind: cli-verb
   title: flow delete
-  description: Delete a durable operator-plane flow record.
+  description: Delete a storage-backed flow record.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1106,7 +1105,7 @@ features:
 - id: cli-verb:flow.get
   kind: cli-verb
   title: flow get
-  description: Return a single durable operator-plane flow record.
+  description: Return a single storage-backed flow record.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1115,7 +1114,7 @@ features:
 - id: cli-verb:flow.list
   kind: cli-verb
   title: flow list
-  description: List durable operator-plane flow records.
+  description: List storage-backed flow records.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1124,7 +1123,7 @@ features:
 - id: cli-verb:flow.update
   kind: cli-verb
   title: flow update
-  description: Update a durable operator-plane flow record.
+  description: Update a storage-backed flow record.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1142,7 +1141,7 @@ features:
 - id: cli-verb:identity.create
   kind: cli-verb
   title: identity create
-  description: Create a durable operator-plane identity record.
+  description: Create a storage-backed identity record.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1151,7 +1150,7 @@ features:
 - id: cli-verb:identity.delete
   kind: cli-verb
   title: identity delete
-  description: Delete a durable operator-plane identity record.
+  description: Delete a storage-backed identity record.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1160,7 +1159,7 @@ features:
 - id: cli-verb:identity.get
   kind: cli-verb
   title: identity get
-  description: Return a single durable operator-plane identity record.
+  description: Return a single storage-backed identity record.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1169,7 +1168,7 @@ features:
 - id: cli-verb:identity.list
   kind: cli-verb
   title: identity list
-  description: List durable operator-plane identity records.
+  description: List storage-backed identity records.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1187,7 +1186,7 @@ features:
 - id: cli-verb:identity.set-password
   kind: cli-verb
   title: identity set-password
-  description: Set or rotate a durable operator-plane identity password hash.
+  description: Set or rotate a storage-backed identity password hash.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1205,7 +1204,7 @@ features:
 - id: cli-verb:identity.update
   kind: cli-verb
   title: identity update
-  description: Update a durable operator-plane identity record.
+  description: Update a storage-backed identity record.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1214,7 +1213,7 @@ features:
 - id: cli-verb:import.run
   kind: cli-verb
   title: import run
-  description: Import durable operator-plane state from a portable artifact.
+  description: Import storage-backed identity state from a portable artifact.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1224,7 +1223,7 @@ features:
 - id: cli-verb:import.status
   kind: cli-verb
   title: import status
-  description: Show the last durable operator-plane import status.
+  description: Show the last storage-backed import status.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1244,7 +1243,7 @@ features:
 - id: cli-verb:keys.delete
   kind: cli-verb
   title: keys delete
-  description: Delete a durable operator-plane key record.
+  description: Delete a storage-backed key record.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1254,7 +1253,7 @@ features:
 - id: cli-verb:keys.export
   kind: cli-verb
   title: keys export
-  description: Export durable operator-plane key metadata to a JSON or YAML file.
+  description: Export storage-backed key metadata to a JSON or YAML file.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1264,7 +1263,7 @@ features:
 - id: cli-verb:keys.generate
   kind: cli-verb
   title: keys generate
-  description: Generate durable operator-plane key metadata and optional JWKS publication.
+  description: Generate storage-backed key metadata and optional JWKS publication.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1274,7 +1273,7 @@ features:
 - id: cli-verb:keys.get
   kind: cli-verb
   title: keys get
-  description: Return a single durable operator-plane key record.
+  description: Return a single storage-backed key record.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1284,7 +1283,7 @@ features:
 - id: cli-verb:keys.import
   kind: cli-verb
   title: keys import
-  description: Import durable operator-plane key metadata from a JSON or YAML file.
+  description: Import storage-backed key metadata from a JSON or YAML file.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1294,7 +1293,7 @@ features:
 - id: cli-verb:keys.list
   kind: cli-verb
   title: keys list
-  description: List durable operator-plane key records.
+  description: List storage-backed key records.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1304,7 +1303,7 @@ features:
 - id: cli-verb:keys.publish-jwks
   kind: cli-verb
   title: keys publish-jwks
-  description: Publish the current durable operator-plane JWKS document.
+  description: Publish the current storage-backed JWKS document.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1314,7 +1313,7 @@ features:
 - id: cli-verb:keys.retire
   kind: cli-verb
   title: keys retire
-  description: Mark a durable operator-plane key retired.
+  description: Mark a storage-backed key retired.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1437,7 +1436,7 @@ features:
 - id: cli-verb:session.get
   kind: cli-verb
   title: session get
-  description: Return a single durable operator-plane session record.
+  description: Return a single storage-backed session record.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1446,7 +1445,7 @@ features:
 - id: cli-verb:session.list
   kind: cli-verb
   title: session list
-  description: List durable operator-plane session records.
+  description: List storage-backed session records.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1455,7 +1454,7 @@ features:
 - id: cli-verb:session.revoke
   kind: cli-verb
   title: session revoke
-  description: Mark a durable operator-plane session revoked.
+  description: Mark a storage-backed session revoked.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1464,7 +1463,7 @@ features:
 - id: cli-verb:session.revoke-all
   kind: cli-verb
   title: session revoke-all
-  description: Mark all durable operator-plane sessions revoked.
+  description: Mark all storage-backed sessions revoked.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1517,7 +1516,7 @@ features:
 - id: cli-verb:tenant.create
   kind: cli-verb
   title: tenant create
-  description: Create a durable operator-plane tenant record.
+  description: Create a storage-backed tenant record.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1526,7 +1525,7 @@ features:
 - id: cli-verb:tenant.delete
   kind: cli-verb
   title: tenant delete
-  description: Delete a durable operator-plane tenant record.
+  description: Delete a storage-backed tenant record.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1553,7 +1552,7 @@ features:
 - id: cli-verb:tenant.get
   kind: cli-verb
   title: tenant get
-  description: Return a single durable operator-plane tenant record.
+  description: Return a single storage-backed tenant record.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1562,7 +1561,7 @@ features:
 - id: cli-verb:tenant.list
   kind: cli-verb
   title: tenant list
-  description: List durable operator-plane tenant records.
+  description: List storage-backed tenant records.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1571,7 +1570,7 @@ features:
 - id: cli-verb:tenant.update
   kind: cli-verb
   title: tenant update
-  description: Update a durable operator-plane tenant record.
+  description: Update a storage-backed tenant record.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1580,7 +1579,7 @@ features:
 - id: cli-verb:token.exchange
   kind: cli-verb
   title: token exchange
-  description: Create a derived durable operator-plane token exchange record.
+  description: Create a derived storage-backed token exchange record.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1589,7 +1588,7 @@ features:
 - id: cli-verb:token.get
   kind: cli-verb
   title: token get
-  description: Return a single durable operator-plane token record.
+  description: Return a single storage-backed token record.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1607,7 +1606,7 @@ features:
 - id: cli-verb:token.list
   kind: cli-verb
   title: token list
-  description: List durable operator-plane token records.
+  description: List storage-backed token records.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1616,7 +1615,7 @@ features:
 - id: cli-verb:token.revoke
   kind: cli-verb
   title: token revoke
-  description: Mark a durable operator-plane token revoked.
+  description: Mark a storage-backed token revoked.
   source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
@@ -1675,357 +1674,6 @@ features:
   required_flags:
   - enable_rfc8291
   boundary: extension_quarantine
-- id: rpc:audit.export
-  kind: openrpc-method
-  title: audit.export
-  description: Export durable audit events.
-  source: tigrbl_auth/api/rpc/methods/audit.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:audit.list
-  kind: openrpc-method
-  title: audit.list
-  description: List durable audit events.
-  source: tigrbl_auth/api/rpc/methods/audit.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:claims.lint
-  kind: openrpc-method
-  title: claims.lint
-  description: Run claims lint against the governance plane.
-  source: tigrbl_auth/api/rpc/methods/governance.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:claims.show
-  kind: openrpc-method
-  title: claims.show
-  description: Return effective claims for the active deployment profile.
-  source: tigrbl_auth/api/rpc/methods/governance.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:client.list
-  kind: openrpc-method
-  title: client.list
-  description: List OAuth/OIDC clients in the admin plane.
-  source: tigrbl_auth/api/rpc/methods/directory.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:client.registration.delete
-  kind: openrpc-method
-  title: client.registration.delete
-  description: Delete a durable client-registration record.
-  source: tigrbl_auth/api/rpc/methods/client_registration.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:client.registration.list
-  kind: openrpc-method
-  title: client.registration.list
-  description: List durable client-registration records.
-  source: tigrbl_auth/api/rpc/methods/client_registration.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:client.registration.show
-  kind: openrpc-method
-  title: client.registration.show
-  description: Show a durable client-registration record.
-  source: tigrbl_auth/api/rpc/methods/client_registration.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:client.registration.upsert
-  kind: openrpc-method
-  title: client.registration.upsert
-  description: Create or update a durable client-registration record.
-  source: tigrbl_auth/api/rpc/methods/client_registration.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:client.show
-  kind: openrpc-method
-  title: client.show
-  description: Show a client in the admin plane.
-  source: tigrbl_auth/api/rpc/methods/directory.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:consent.list
-  kind: openrpc-method
-  title: consent.list
-  description: List durable consent records.
-  source: tigrbl_auth/api/rpc/methods/consent.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:consent.revoke
-  kind: openrpc-method
-  title: consent.revoke
-  description: Revoke a durable consent record.
-  source: tigrbl_auth/api/rpc/methods/consent.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:consent.show
-  kind: openrpc-method
-  title: consent.show
-  description: Show a durable consent record.
-  source: tigrbl_auth/api/rpc/methods/consent.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:discovery.show
-  kind: openrpc-method
-  title: discovery.show
-  description: Show effective OIDC discovery metadata for the deployment.
-  source: tigrbl_auth/api/rpc/methods/governance.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:evidence.status
-  kind: openrpc-method
-  title: evidence.status
-  description: Summarize evidence-plane status.
-  source: tigrbl_auth/api/rpc/methods/governance.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:flow.list
-  kind: openrpc-method
-  title: flow.list
-  description: List effective protocol flow slices for the current deployment.
-  source: tigrbl_auth/api/rpc/methods/governance.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:gate.run
-  kind: openrpc-method
-  title: gate.run
-  description: Run a named release gate.
-  source: tigrbl_auth/api/rpc/methods/governance.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:identity.list
-  kind: openrpc-method
-  title: identity.list
-  description: List identities in the admin plane.
-  source: tigrbl_auth/api/rpc/methods/directory.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:identity.show
-  kind: openrpc-method
-  title: identity.show
-  description: Show an identity in the admin plane.
-  source: tigrbl_auth/api/rpc/methods/directory.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:jwks.show
-  kind: openrpc-method
-  title: jwks.show
-  description: Show the effective JWKS document.
-  source: tigrbl_auth/api/rpc/methods/keys.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:keys.list
-  kind: openrpc-method
-  title: keys.list
-  description: List durable service keys and key-rotation history.
-  source: tigrbl_auth/api/rpc/methods/keys.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:keys.rotate
-  kind: openrpc-method
-  title: keys.rotate
-  description: Rotate the signing key and persist a key-rotation event.
-  source: tigrbl_auth/api/rpc/methods/keys.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:profile.show
-  kind: openrpc-method
-  title: profile.show
-  description: Show the effective deployment/profile posture.
-  source: tigrbl_auth/api/rpc/methods/profile.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:release.bundle
-  kind: openrpc-method
-  title: release.bundle
-  description: Build a release bundle.
-  source: tigrbl_auth/api/rpc/methods/governance.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:rpc.discover
-  kind: openrpc-method
-  title: rpc.discover
-  description: Return the active implementation-backed RPC method catalog.
-  source: tigrbl_auth/api/rpc/methods/governance.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:session.list
-  kind: openrpc-method
-  title: session.list
-  description: List durable browser and auth sessions.
-  source: tigrbl_auth/api/rpc/methods/session.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:session.show
-  kind: openrpc-method
-  title: session.show
-  description: Show a durable session and its latest logout state.
-  source: tigrbl_auth/api/rpc/methods/session.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:session.terminate
-  kind: openrpc-method
-  title: session.terminate
-  description: Terminate a durable session and persist logout state.
-  source: tigrbl_auth/api/rpc/methods/session.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:target.list
-  kind: openrpc-method
-  title: target.list
-  description: List certification-scope targets.
-  source: tigrbl_auth/api/rpc/methods/profile.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:target.show
-  kind: openrpc-method
-  title: target.show
-  description: Show a certification-scope target.
-  source: tigrbl_auth/api/rpc/methods/profile.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:tenant.keys.create
-  kind: openrpc-method
-  title: tenant.keys.create
-  description: Create a tenant JWKS key record.
-  source: tigrbl_auth/api/rpc/methods/keys.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:tenant.keys.delete
-  kind: openrpc-method
-  title: tenant.keys.delete
-  description: Delete a tenant JWKS key record.
-  source: tigrbl_auth/api/rpc/methods/keys.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:tenant.keys.seed
-  kind: openrpc-method
-  title: tenant.keys.seed
-  description: Seed a publishable tenant JWKS key.
-  source: tigrbl_auth/api/rpc/methods/keys.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:tenant.keys.update
-  kind: openrpc-method
-  title: tenant.keys.update
-  description: Update a tenant JWKS key record.
-  source: tigrbl_auth/api/rpc/methods/keys.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:tenant.list
-  kind: openrpc-method
-  title: tenant.list
-  description: List tenants in the admin plane.
-  source: tigrbl_auth/api/rpc/methods/directory.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:tenant.show
-  kind: openrpc-method
-  title: tenant.show
-  description: Show a tenant in the admin plane.
-  source: tigrbl_auth/api/rpc/methods/directory.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:token.exchange
-  kind: openrpc-method
-  title: token.exchange
-  description: Create a durable token exchange record.
-  source: tigrbl_auth/api/rpc/methods/token.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:token.inspect
-  kind: openrpc-method
-  title: token.inspect
-  description: Inspect token posture and current introspection state.
-  source: tigrbl_auth/api/rpc/methods/token.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
-- id: rpc:token.list
-  kind: openrpc-method
-  title: token.list
-  description: List durable token records.
-  source: tigrbl_auth/api/rpc/methods/token.py
-  scope: core
-  targets:
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags: []
 - id: profile:baseline
   kind: profile
   title: baseline
@@ -2651,7 +2299,7 @@ features:
   kind: public-route
   title: /account/authorized-apps
   description: End-user consent and authorized-app self-service
-  source: tigrbl_identity_server.rest.routers.my_account:api
+  source: tigrbl_identity_storage_runtime.account_surface:api
   scope: core
   targets:
   - OIDC Core 1.0
@@ -2666,7 +2314,7 @@ features:
   kind: public-route
   title: /account/authorized-apps/{client_id}
   description: End-user consent and authorized-app self-service
-  source: tigrbl_identity_server.rest.routers.my_account:api
+  source: tigrbl_identity_storage_runtime.account_surface:api
   scope: core
   targets:
   - OIDC Core 1.0
@@ -2681,7 +2329,7 @@ features:
   kind: public-route
   title: /account/consents
   description: End-user consent and authorized-app self-service
-  source: tigrbl_identity_server.rest.routers.my_account:api
+  source: tigrbl_identity_storage_runtime.account_surface:api
   scope: core
   targets:
   - OIDC Core 1.0
@@ -2696,7 +2344,7 @@ features:
   kind: public-route
   title: /account/consents/{consent_id}
   description: End-user consent and authorized-app self-service
-  source: tigrbl_identity_server.rest.routers.my_account:api
+  source: tigrbl_identity_storage_runtime.account_surface:api
   scope: core
   targets:
   - OIDC Core 1.0
@@ -2711,7 +2359,7 @@ features:
   kind: public-route
   title: /account/password/change
   description: End-user credential self-service
-  source: tigrbl_identity_server.rest.routers.my_account:api
+  source: tigrbl_identity_storage_runtime.account_surface:api
   scope: core
   targets:
   - RFC 6749
@@ -2724,7 +2372,7 @@ features:
   kind: public-route
   title: /account/profile
   description: End-user profile self-service
-  source: tigrbl_identity_server.rest.routers.my_account:api
+  source: tigrbl_identity_storage_runtime.account_surface:api
   scope: core
   targets:
   - OIDC Core 1.0
@@ -2740,7 +2388,7 @@ features:
   kind: public-route
   title: /account/sessions
   description: End-user session self-service
-  source: tigrbl_identity_server.rest.routers.my_account:api
+  source: tigrbl_identity_storage_runtime.account_surface:api
   scope: core
   targets:
   - RFC 6265
@@ -2755,7 +2403,7 @@ features:
   kind: public-route
   title: /account/sessions/{session_id}
   description: End-user session self-service
-  source: tigrbl_identity_server.rest.routers.my_account:api
+  source: tigrbl_identity_storage_runtime.account_surface:api
   scope: core
   targets:
   - RFC 6265
@@ -2770,7 +2418,7 @@ features:
   kind: public-route
   title: /authorize
   description: Authorization endpoint
-  source: tigrbl_identity_server.rest.routers.authorize:api
+  source: tigrbl_identity_storage_runtime.authorization:router
   scope: core
   targets:
   - RFC 6749
@@ -2794,7 +2442,7 @@ features:
   kind: public-route
   title: /device_authorization
   description: Device authorization endpoint
-  source: tigrbl_identity_server.rest.routers.device_authorization:api
+  source: tigrbl_identity_storage_runtime.device_authorization:include_device_authorization_endpoint
   scope: core
   targets:
   - RFC 8628
@@ -2809,7 +2457,7 @@ features:
   kind: public-route
   title: /introspect
   description: Token introspection endpoint
-  source: tigrbl_auth_protocol_oauth.standards.introspection:include_introspection_endpoint
+  source: tigrbl_identity_storage_runtime.introspection:include_introspection_endpoint
   scope: core
   targets:
   - RFC 7662
@@ -2824,7 +2472,7 @@ features:
   kind: public-route
   title: /login
   description: Password login helper
-  source: tigrbl_identity_server.rest.routers.login:api
+  source: tigrbl_identity_storage_runtime.login:router
   scope: core
   targets:
   - RFC 6749
@@ -2841,7 +2489,7 @@ features:
   kind: public-route
   title: /logout
   description: OIDC RP-initiated logout endpoint
-  source: tigrbl_identity_server.rest.routers.logout:api
+  source: tigrbl_identity_storage_runtime.logout:include_logout_endpoint
   scope: core
   targets:
   - RFC 6265
@@ -2860,7 +2508,7 @@ features:
   kind: public-route
   title: /par
   description: Pushed authorization request endpoint
-  source: tigrbl_identity_server.rest.routers.par:api
+  source: tigrbl_identity_storage_runtime.par:include_par_endpoint
   scope: core
   targets:
   - RFC 9126
@@ -2878,7 +2526,7 @@ features:
   kind: public-route
   title: /realms/{realm_slug}/.well-known/jwks.json
   description: Realm-scoped JSON Web Key Set
-  source: tigrbl_auth_protocol_oidc.standards.discovery:include_jwks
+  source: tigrbl_identity_storage_runtime.metadata.oidc_discovery:include_jwks
   scope: core
   targets:
   - RFC 7517
@@ -2894,7 +2542,7 @@ features:
   kind: public-route
   title: /realms/{realm_slug}/.well-known/openid-configuration
   description: Realm-scoped OIDC discovery document
-  source: tigrbl_auth_protocol_oidc.standards.discovery:include_openid_configuration
+  source: tigrbl_identity_storage_runtime.metadata.oidc_discovery:include_openid_configuration
   scope: core
   targets:
   - OIDC Discovery 1.0
@@ -2911,7 +2559,7 @@ features:
   kind: public-route
   title: /register
   description: Dynamic client registration endpoint
-  source: tigrbl_identity_server.rest.routers.register:api
+  source: tigrbl_identity_storage_runtime.client_registration:include_client_registration_endpoint
   scope: core
   targets:
   - RFC 7591
@@ -2927,7 +2575,7 @@ features:
   kind: public-route
   title: /register/{client_id}
   description: Dynamic client registration management endpoint
-  source: tigrbl_identity_server.rest.routers.register:api
+  source: tigrbl_identity_storage_runtime.client_registration:include_client_registration_endpoint
   scope: core
   targets:
   - RFC 7592
@@ -2945,7 +2593,7 @@ features:
   kind: public-route
   title: /revoke
   description: Token revocation endpoint
-  source: tigrbl_identity_server.rest.routers.revoke:api
+  source: tigrbl_identity_storage_runtime.revocation:include_revocation_endpoint
   scope: core
   targets:
   - RFC 7009
@@ -2959,7 +2607,7 @@ features:
   kind: public-route
   title: /tenants/{tenant_slug}/.well-known/jwks.json
   description: Tenant-scoped JSON Web Key Set
-  source: tigrbl_auth_protocol_oidc.standards.discovery:include_jwks
+  source: tigrbl_identity_storage_runtime.metadata.oidc_discovery:include_jwks
   scope: core
   targets:
   - RFC 7517
@@ -2975,7 +2623,7 @@ features:
   kind: public-route
   title: /tenants/{tenant_slug}/.well-known/openid-configuration
   description: Tenant-scoped OIDC discovery document
-  source: tigrbl_auth_protocol_oidc.standards.discovery:include_openid_configuration
+  source: tigrbl_identity_storage_runtime.metadata.oidc_discovery:include_openid_configuration
   scope: core
   targets:
   - OIDC Discovery 1.0
@@ -2992,7 +2640,7 @@ features:
   kind: public-route
   title: /token
   description: Token endpoint
-  source: tigrbl_identity_server.rest.routers.token:api
+  source: tigrbl_identity_storage.tables.token_record:api
   scope: core
   targets:
   - RFC 6749
@@ -3009,7 +2657,7 @@ features:
   kind: public-route
   title: /token/exchange
   description: Token exchange endpoint
-  source: tigrbl_auth_protocol_oauth.standards.token_exchange:include_token_exchange_endpoint
+  source: tigrbl_identity_storage_runtime.token_exchange:include_token_exchange_endpoint
   scope: core
   targets:
   - RFC 8693
@@ -3027,7 +2675,7 @@ features:
   kind: public-route
   title: /userinfo
   description: OIDC UserInfo endpoint
-  source: tigrbl_auth_protocol_oidc.standards.userinfo:include_oidc_userinfo
+  source: tigrbl_identity_storage_runtime.userinfo:include_oidc_userinfo
   scope: core
   targets:
   - OIDC UserInfo
@@ -3042,7 +2690,7 @@ features:
   kind: public-route
   title: /.well-known/jwks.json
   description: JSON Web Key Set
-  source: tigrbl_auth_protocol_oidc.standards.discovery:include_jwks
+  source: tigrbl_identity_storage_runtime.metadata.oidc_discovery:include_jwks
   scope: core
   targets:
   - RFC 7517
@@ -3058,7 +2706,7 @@ features:
   kind: public-route
   title: /.well-known/oauth-authorization-server
   description: OAuth authorization server metadata
-  source: tigrbl_auth_protocol_oauth.standards.rfc8414:include_rfc8414
+  source: tigrbl_identity_storage_runtime.metadata.authorization_server_metadata:include_rfc8414
   scope: core
   targets:
   - RFC 8414
@@ -3074,7 +2722,7 @@ features:
   kind: public-route
   title: /.well-known/oauth-protected-resource
   description: OAuth protected resource metadata
-  source: tigrbl_auth_protocol_oauth.standards.rfc9728:include_rfc9728
+  source: tigrbl_identity_storage_runtime.metadata.protected_resource_metadata:include_rfc9728
   scope: core
   targets:
   - RFC 9728
@@ -3090,7 +2738,7 @@ features:
   kind: public-route
   title: /.well-known/openid-configuration
   description: OIDC discovery document
-  source: tigrbl_auth_protocol_oidc.standards.discovery:include_openid_configuration
+  source: tigrbl_identity_storage_runtime.metadata.oidc_discovery:include_openid_configuration
   scope: core
   targets:
   - OIDC Discovery 1.0
@@ -3389,16 +3037,6 @@ features:
   - CLI operator surface
   required_flags:
   - enable_rfc7800
-- id: flag:enable_rfc8417
-  kind: setting-flag
-  title: enable_rfc8417
-  description: Settings-backed governance flag enable_rfc8417
-  source: tigrbl_identity_runtime.settings
-  scope: extension
-  targets:
-  - CLI operator surface
-  required_flags:
-  - enable_rfc8417
 - id: flag:enable_rfc8252
   kind: setting-flag
   title: enable_rfc8252
@@ -3429,6 +3067,16 @@ features:
   - CLI operator surface
   required_flags:
   - enable_rfc8414
+- id: flag:enable_rfc8417
+  kind: setting-flag
+  title: enable_rfc8417
+  description: Settings-backed governance flag enable_rfc8417
+  source: tigrbl_identity_runtime.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc8417
 - id: flag:enable_rfc8523
   kind: setting-flag
   title: enable_rfc8523
@@ -3808,18 +3456,6 @@ features:
   - OpenRPC 1.4.x admin/control-plane contract
   required_flags:
   - surface_public_enabled
-- id: flag:surface_rpc_enabled
-  kind: setting-flag
-  title: surface_rpc_enabled
-  description: Settings-backed governance flag surface_rpc_enabled
-  source: tigrbl_identity_runtime.settings
-  scope: core
-  targets:
-  - CLI operator surface
-  - OpenAPI 3.1 / 3.2 compatible public contract
-  - OpenRPC 1.4.x admin/control-plane contract
-  required_flags:
-  - surface_rpc_enabled
 - id: target:asgi-3-application-package
   kind: target
   title: ASGI 3 application package
@@ -4129,9 +3765,7 @@ features:
   scope: core
   targets:
   - OpenRPC 1.4.x admin/control-plane contract
-  required_flags:
-  - surface_admin_enabled
-  - surface_rpc_enabled
+  required_flags: []
   profiles:
   - production
   - hardening
@@ -4396,16 +4030,6 @@ features:
   - RFC 7800
   required_flags: []
   profiles: []
-- id: target:rfc-7952
-  kind: target
-  title: RFC 8417
-  description: Security Event Token (SET)
-  source: compliance/targets/extension-targets.yaml
-  scope: extension
-  targets:
-  - RFC 8417
-  required_flags: []
-  profiles: []
 - id: target:rfc-8252
   kind: target
   title: RFC 8252
@@ -4447,6 +4071,16 @@ features:
   - production
   - hardening
   - peer-claim
+- id: target:rfc-8417
+  kind: target
+  title: RFC 8417
+  description: Security Event Token (SET)
+  source: compliance/targets/extension-targets.yaml
+  scope: extension
+  targets:
+  - RFC 8417
+  required_flags: []
+  profiles: []
 - id: target:rfc-8615
   kind: target
   title: RFC 8615

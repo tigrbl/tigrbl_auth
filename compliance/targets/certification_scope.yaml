@@ -169,6 +169,7 @@ deferred_targets:
   reason: Outside the default OAuth 2.0 / OIDC auth-server certification boundary.
   modules:
   - pkgs/10-concrete/tigrbl-set-concrete/src/tigrbl_set_concrete/__init__.py
+  - pkgs/50-protocols/tigrbl-security-event-protocol-set/src/tigrbl_security_event_protocol_set/__init__.py
 - label: RFC 8291
   kind: extension-quarantine
   reason: Web Push is not part of the certified auth-core boundary.

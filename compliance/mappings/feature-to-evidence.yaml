@@ -394,84 +394,6 @@ extension:webauthn-passkeys:
 - compliance/evidence/tier3/jose/
 extension:webpush:
 - compliance/evidence/tier3/jwe/
-rpc:audit.export:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:audit.list:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:claims.lint:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:claims.show:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:client.list:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:client.registration.delete:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:client.registration.list:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:client.registration.show:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:client.registration.upsert:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:client.show:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:consent.list:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:consent.revoke:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:consent.show:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:discovery.show:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:evidence.status:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:flow.list:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:gate.run:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:identity.list:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:identity.show:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:jwks.show:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:keys.list:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:keys.rotate:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:profile.show:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:release.bundle:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:rpc.discover:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:session.list:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:session.show:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:session.terminate:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:target.list:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:target.show:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:tenant.keys.create:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:tenant.keys.delete:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:tenant.keys.seed:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:tenant.keys.update:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:tenant.list:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:tenant.show:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:token.exchange:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:token.inspect:
-- compliance/evidence/tier3/contracts/openrpc/
-rpc:token.list:
-- compliance/evidence/tier3/contracts/openrpc/
 profile:baseline:
 - compliance/evidence/tier3/assertion-framework/
 - compliance/evidence/tier3/bearer/
@@ -885,13 +807,13 @@ flag:enable_rfc7662:
 - compliance/evidence/tier3/cli-operator-surface/
 flag:enable_rfc7800:
 - compliance/evidence/tier3/cli-operator-surface/
-flag:enable_rfc8417:
-- compliance/evidence/tier3/cli-operator-surface/
 flag:enable_rfc8252:
 - compliance/evidence/tier3/cli-operator-surface/
 flag:enable_rfc8291:
 - compliance/evidence/tier3/cli-operator-surface/
 flag:enable_rfc8414:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc8417:
 - compliance/evidence/tier3/cli-operator-surface/
 flag:enable_rfc8523:
 - compliance/evidence/tier3/cli-operator-surface/
@@ -993,10 +915,6 @@ flag:surface_public_enabled:
 - compliance/evidence/tier3/cli-operator-surface/
 - compliance/evidence/tier3/contracts/openapi/
 - compliance/evidence/tier3/contracts/openrpc/
-flag:surface_rpc_enabled:
-- compliance/evidence/tier3/cli-operator-surface/
-- compliance/evidence/tier3/contracts/openapi/
-- compliance/evidence/tier3/contracts/openrpc/
 target:asgi-3-application-package:
 - compliance/evidence/tier3/asgi-application/
 target:bootstrap-and-migration-lifecycle:
@@ -1089,14 +1007,14 @@ target:rfc-7662:
 - compliance/evidence/tier3/introspection/
 target:rfc-7800:
 - compliance/evidence/tier3/dpop/
-target:rfc-7952:
-- compliance/evidence/tier3/jwt/
 target:rfc-8252:
 - compliance/evidence/tier3/native-apps/
 target:rfc-8291:
 - compliance/evidence/tier3/jwe/
 target:rfc-8414:
 - compliance/evidence/tier3/discovery/
+target:rfc-8417:
+- compliance/evidence/tier3/jwt/
 target:rfc-8615:
 - compliance/evidence/tier3/well-known/
 target:rfc-8628:

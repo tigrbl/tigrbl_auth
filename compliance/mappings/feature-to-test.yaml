@@ -1989,162 +1989,6 @@ extension:webauthn-passkeys:
 - tests/unit/test_rfc8812_webauthn_algorithms.py
 extension:webpush:
 - tests/unit/test_rfc8291_webpush_encryption.py
-rpc:audit.export:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:audit.list:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:claims.lint:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:claims.show:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:client.list:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:client.registration.delete:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:client.registration.list:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:client.registration.show:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:client.registration.upsert:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:client.show:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:consent.list:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:consent.revoke:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:consent.show:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:discovery.show:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:evidence.status:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:flow.list:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:gate.run:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:identity.list:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:identity.show:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:jwks.show:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:keys.list:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:keys.rotate:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:profile.show:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:release.bundle:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:rpc.discover:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:session.list:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:session.show:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:session.terminate:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:target.list:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:target.show:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:tenant.keys.create:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:tenant.keys.delete:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:tenant.keys.seed:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:tenant.keys.update:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:tenant.list:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:tenant.show:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:token.exchange:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:token.inspect:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
-rpc:token.list:
-- tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_rpc_registry_live.py
 profile:baseline:
 - tests/conformance/baseline/test_oidc_id_token.py
 - tests/conformance/baseline/test_openid_configuration.py
@@ -3356,17 +3200,6 @@ flag:enable_rfc7800:
 - tests/unit/test_cli_surface_checkpoint.py
 - tests/unit/test_operator_service_layer.py
 - tests/unit/test_runtime_launcher.py
-flag:enable_rfc8417:
-- tests/conformance/operator/test_cli_bootstrap_migrate.py
-- tests/conformance/operator/test_cli_import_export.py
-- tests/conformance/operator/test_cli_keys_lifecycle.py
-- tests/conformance/operator/test_cli_resource_lifecycle.py
-- tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
-- tests/unit/test_cli_contract.py
-- tests/unit/test_cli_surface_checkpoint.py
-- tests/unit/test_operator_service_layer.py
-- tests/unit/test_runtime_launcher.py
 flag:enable_rfc8252:
 - tests/conformance/operator/test_cli_bootstrap_migrate.py
 - tests/conformance/operator/test_cli_import_export.py
@@ -3390,6 +3223,17 @@ flag:enable_rfc8291:
 - tests/unit/test_operator_service_layer.py
 - tests/unit/test_runtime_launcher.py
 flag:enable_rfc8414:
+- tests/conformance/operator/test_cli_bootstrap_migrate.py
+- tests/conformance/operator/test_cli_import_export.py
+- tests/conformance/operator/test_cli_keys_lifecycle.py
+- tests/conformance/operator/test_cli_resource_lifecycle.py
+- tests/conformance/operator/test_cli_serve_runtime.py
+- tests/unit/test_claim_boundary_rebaseline.py
+- tests/unit/test_cli_contract.py
+- tests/unit/test_cli_surface_checkpoint.py
+- tests/unit/test_operator_service_layer.py
+- tests/unit/test_runtime_launcher.py
+flag:enable_rfc8417:
 - tests/conformance/operator/test_cli_bootstrap_migrate.py
 - tests/conformance/operator/test_cli_import_export.py
 - tests/conformance/operator/test_cli_keys_lifecycle.py
@@ -3773,21 +3617,6 @@ flag:surface_public_enabled:
 - tests/unit/test_operator_service_layer.py
 - tests/unit/test_rpc_registry_live.py
 - tests/unit/test_runtime_launcher.py
-flag:surface_rpc_enabled:
-- tests/conformance/operator/test_cli_bootstrap_migrate.py
-- tests/conformance/operator/test_cli_import_export.py
-- tests/conformance/operator/test_cli_keys_lifecycle.py
-- tests/conformance/operator/test_cli_resource_lifecycle.py
-- tests/conformance/operator/test_cli_serve_runtime.py
-- tests/e2e/test_release_gate_catalog.py
-- tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_claim_boundary_rebaseline.py
-- tests/unit/test_cli_contract.py
-- tests/unit/test_cli_surface_checkpoint.py
-- tests/unit/test_contract_generation_live.py
-- tests/unit/test_operator_service_layer.py
-- tests/unit/test_rpc_registry_live.py
-- tests/unit/test_runtime_launcher.py
 target:asgi-3-application-package:
 - tests/conformance/operator/test_cli_serve_runtime.py
 - tests/integration/test_profile_surface_and_contract_alignment.py
@@ -3991,8 +3820,6 @@ target:rfc-7662:
 - tests/unit/test_public_route_contracts.py
 target:rfc-7800:
 - tests/unit/test_rfc7800_proof_of_possession.py
-target:rfc-7952:
-- pkgs/10-concrete/tigrbl-set-concrete/tests/test_rfc8417.py
 target:rfc-8252:
 - tests/conformance/production/test_rfc8252_native_apps.py
 - tests/interop/test_peer_counterpart_catalog.py
@@ -4004,6 +3831,8 @@ target:rfc-8291:
 target:rfc-8414:
 - tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py
 - tests/integration/test_rfc8414_metadata.py
+target:rfc-8417:
+- pkgs/10-concrete/tigrbl-set-concrete/tests/test_rfc8417.py
 target:rfc-8615:
 - tests/conformance/production/test_rfc8615_well_known_uris.py
 - tests/integration/test_profile_surface_and_contract_alignment.py

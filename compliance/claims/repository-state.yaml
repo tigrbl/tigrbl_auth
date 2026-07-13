@@ -89,7 +89,6 @@ repository_state:
   claim_registry_canonical_complete: true
   fapi2_security_profile_declared_complete: true
   public_route_atomic_claims_complete: true
-  openrpc_atomic_claims_complete: true
   cli_atomic_claims_complete: true
   core_targets_missing_from_feature_map: 0
   extension_targets_missing_from_feature_map: 0

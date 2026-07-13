@@ -14,5 +14,8 @@ issues:
     set.
   - One or more supported peer profiles have incomplete or invalid preserved external
     evidence bundles.
+  - Current generated public artifacts still drift from executable reality.
+  - One or more operator-visible package capabilities still lacks end-to-end verification
+    in the current environment.
   - Release evidence can now be built only from a clean checkout, and the current
     workspace is dirty.

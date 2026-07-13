@@ -394,84 +394,6 @@ extension:webauthn-passkeys:
 - RFC 8812
 extension:webpush:
 - RFC 8291
-rpc:audit.export:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:audit.list:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:claims.lint:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:claims.show:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:client.list:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:client.registration.delete:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:client.registration.list:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:client.registration.show:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:client.registration.upsert:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:client.show:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:consent.list:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:consent.revoke:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:consent.show:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:discovery.show:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:evidence.status:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:flow.list:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:gate.run:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:identity.list:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:identity.show:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:jwks.show:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:keys.list:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:keys.rotate:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:profile.show:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:release.bundle:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:rpc.discover:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:session.list:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:session.show:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:session.terminate:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:target.list:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:target.show:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:tenant.keys.create:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:tenant.keys.delete:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:tenant.keys.seed:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:tenant.keys.update:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:tenant.list:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:tenant.show:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:token.exchange:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:token.inspect:
-- OpenRPC 1.4.x admin/control-plane contract
-rpc:token.list:
-- OpenRPC 1.4.x admin/control-plane contract
 profile:baseline:
 - OIDC Back-Channel Logout
 - OIDC Core 1.0
@@ -882,13 +804,13 @@ flag:enable_rfc7662:
 - CLI operator surface
 flag:enable_rfc7800:
 - CLI operator surface
-flag:enable_rfc8417:
-- CLI operator surface
 flag:enable_rfc8252:
 - CLI operator surface
 flag:enable_rfc8291:
 - CLI operator surface
 flag:enable_rfc8414:
+- CLI operator surface
+flag:enable_rfc8417:
 - CLI operator surface
 flag:enable_rfc8523:
 - CLI operator surface
@@ -989,10 +911,6 @@ flag:surface_public_enabled:
 - CLI operator surface
 - OpenAPI 3.1 / 3.2 compatible public contract
 - OpenRPC 1.4.x admin/control-plane contract
-flag:surface_rpc_enabled:
-- CLI operator surface
-- OpenAPI 3.1 / 3.2 compatible public contract
-- OpenRPC 1.4.x admin/control-plane contract
 target:asgi-3-application-package:
 - ASGI 3 application package
 target:bootstrap-and-migration-lifecycle:
@@ -1075,14 +993,14 @@ target:rfc-7662:
 - RFC 7662
 target:rfc-7800:
 - RFC 7800
-target:rfc-7952:
-- RFC 8417
 target:rfc-8252:
 - RFC 8252
 target:rfc-8291:
 - RFC 8291
 target:rfc-8414:
 - RFC 8414
+target:rfc-8417:
+- RFC 8417
 target:rfc-8615:
 - RFC 8615
 target:rfc-8628:

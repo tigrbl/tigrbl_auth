@@ -2345,7 +2345,7 @@
     "partial_deferred": [],
     "out_of_scope": [
       "RFC 7800",
-      "RFC 7952",
+      "RFC 8417",
       "RFC 8291",
       "RFC 8812",
       "RFC 8932",
@@ -2384,12 +2384,12 @@
       }
     },
     {
-      "target": "RFC 7952",
+      "target": "RFC 8417",
       "status": "out-of-scope",
       "kind": "extension-quarantine",
       "reason": "Outside the default OAuth 2.0 / OIDC auth-server certification boundary.",
       "implemented_module": [
-        "tigrbl_auth/extensions/rfc7952.py"
+        "pkgs/50-protocols/tigrbl-security-event-protocol-set/src/tigrbl_security_event_protocol_set/__init__.py"
       ],
       "ssot_entity_cells": {
         "admin_api": [
