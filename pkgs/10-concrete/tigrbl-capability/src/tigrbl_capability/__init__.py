@@ -4,9 +4,10 @@ import inspect
 import time
 from collections.abc import Mapping
 from dataclasses import asdict, replace
-from uuid import uuid4
 
 from tigrbl_capability_bases import CapabilityBase
+from tigrbl_identity_core.clock import utc_now_iso
+from tigrbl_identity_core.primitives import new_opaque_id, new_prefixed_id
 from tigrbl_identity_contracts.capabilities import (
     CapabilityCallContext,
     CapabilityCallable,
@@ -85,7 +86,7 @@ class Capability(CapabilityBase):
             target, delegated = self._capability_bindings[operation]
         except KeyError as exc:
             raise LookupError(f"unbound capability operation: {operation}") from exc
-        active = context or CapabilityCallContext(call_id=uuid4().hex)
+        active = context or CapabilityCallContext(call_id=new_opaque_id())
         if active.deadline is not None and time.time() > active.deadline:
             raise TimeoutError("capability call deadline exceeded")
         value = target(*args, **kwargs)
@@ -116,7 +117,7 @@ class Capability(CapabilityBase):
         child = replace(
             context,
             parent_call_id=context.call_id,
-            call_id=uuid4().hex,
+            call_id=new_opaque_id(),
             capability_id=target_capability_id,
             operation=operation,
             delegation_chain=delegation_chain,
@@ -124,4 +125,4 @@ class Capability(CapabilityBase):
         return await capability.call(operation, *args, context=child, **kwargs)
 
 
-__all__ = ["Capability"]
+__all__ = ["Capability", "new_prefixed_id", "utc_now_iso"]

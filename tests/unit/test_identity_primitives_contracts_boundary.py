@@ -32,6 +32,10 @@ def test_identity_primitives_exports_public_values() -> None:
     assert str(core.new_principal_id())
     assert str(core.new_client_id())
     assert str(core.new_credential_id())
+    assert len(core.new_opaque_id()) == 32
+    prefixed_id = core.new_prefixed_id("audit")
+    assert prefixed_id.startswith("audit:")
+    assert len(prefixed_id.removeprefix("audit:")) == 32
     assert core.TenantRef(core.TenantId("tenant-1")).id == "tenant-1"
     assert core.pick_fields({"a": 1, "b": 2}, ("b", "missing")) == {"b": 2}
     assert core.row_value({"tenant_id": "tenant-1"}, "tenant_id") == "tenant-1"
@@ -52,6 +56,16 @@ def test_identity_primitives_error_taxonomy_and_clock_values() -> None:
     assert core.utc_now(frozen) == frozen.now()
     assert core.utc_now_iso(frozen) == "2026-01-02T03:04:05+00:00"
     assert core.parse_time("2026-01-02T03:04:05Z") == datetime(2026, 1, 2, 3, 4, 5, tzinfo=timezone.utc)
+
+
+def test_prefixed_identity_rejects_invalid_prefixes() -> None:
+    import pytest
+    import tigrbl_identity_core as core
+
+    with pytest.raises(ValueError):
+        core.new_prefixed_id("")
+    with pytest.raises(ValueError):
+        core.new_prefixed_id("invalid:prefix")
 
 
 def test_identity_primitives_export_version_range_helpers() -> None:

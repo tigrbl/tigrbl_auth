@@ -32,6 +32,21 @@ Audience = NewType("Audience", str)
 ScopeValue = NewType("ScopeValue", str)
 
 
+def new_opaque_id() -> str:
+    """Return an opaque, URL-safe UUID value without representation punctuation."""
+
+    return uuid4().hex
+
+
+def new_prefixed_id(prefix: str) -> str:
+    """Return an opaque identifier in the repository's ``prefix:value`` form."""
+
+    normalized = prefix.strip()
+    if not normalized or ":" in normalized:
+        raise ValueError("identifier prefix must be non-empty and must not contain ':'")
+    return f"{normalized}:{new_opaque_id()}"
+
+
 def new_tenant_id() -> TenantId:
     return TenantId(str(uuid4()))
 
@@ -168,6 +183,8 @@ __all__ = [
     "TenantRef",
     "new_client_id",
     "new_credential_id",
+    "new_opaque_id",
+    "new_prefixed_id",
     "new_principal_id",
     "new_realm_id",
     "new_tenant_id",

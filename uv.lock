@@ -3818,12 +3818,14 @@ source = { editable = "pkgs/10-concrete/tigrbl-capability" }
 dependencies = [
     { name = "tigrbl-capability-bases" },
     { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl-capability-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
