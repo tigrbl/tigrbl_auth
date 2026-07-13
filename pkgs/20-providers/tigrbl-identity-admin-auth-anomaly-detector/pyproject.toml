@@ -1,7 +1,7 @@
 [project]
 name = "tigrbl-identity-admin-auth-anomaly-detector"
 version = "0.4.0.dev2"
-description = "Identity administration authentication anomaly detection capability."
+description = "Concrete authentication anomaly detection provider."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"

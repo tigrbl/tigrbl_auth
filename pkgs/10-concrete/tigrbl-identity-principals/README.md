@@ -8,7 +8,7 @@ tigrbl-identity-principals owns durable identity subjects, principal constructio
 
 - Package: `tigrbl-identity-principals`
 - Import root: `tigrbl_identity_principals`
-- Component kind: Capability package
+- Component kind: Concrete domain package
 - Use it to construct human and nonhuman principals, memberships, aliases, and in-memory principal directories.
 - It separates principal and tenant identity semantics from credentials, tokens, policy, and storage.
 - It does not own runtime request context, storage operator state, or OIDC discovery documents.
@@ -56,7 +56,7 @@ directory.add_membership(membership)
 
 - [PyPI package](https://pypi.org/project/tigrbl-identity-principals/)
 - [Source repository](https://github.com/tigrbl/tigrbl_auth)
-- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/40-capabilities/tigrbl-identity-principals)
+- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/10-concrete/tigrbl-identity-principals)
 - [SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 
 ## Governance

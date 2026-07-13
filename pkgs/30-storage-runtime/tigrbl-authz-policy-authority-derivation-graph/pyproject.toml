@@ -1,7 +1,7 @@
 [project]
 name = "tigrbl-authz-policy-authority-derivation-graph"
 version = "0.4.0.dev2"
-description = "Authorization authority derivation graph capability for the Tigrbl identity package suite."
+description = "Storage-backed authorization authority derivation graph runtime."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"

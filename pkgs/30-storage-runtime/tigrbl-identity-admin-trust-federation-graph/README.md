@@ -1,3 +1,3 @@
 # tigrbl-identity-admin-trust-federation-graph
 
-Identity administration capability for trust federation graph evaluation.
+Storage-runtime composition for identity trust federation graph evaluation.

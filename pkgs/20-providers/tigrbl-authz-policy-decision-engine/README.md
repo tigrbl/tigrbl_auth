@@ -1,3 +1,3 @@
 # tigrbl-authz-policy-decision-engine
 
-Authorization capability for policy decisions and decision traces.
+Concrete provider for authorization policy decisions and decision traces.

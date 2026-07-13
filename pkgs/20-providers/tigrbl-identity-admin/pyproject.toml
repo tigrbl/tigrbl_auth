@@ -47,7 +47,7 @@ dependencies = [
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"
 Repository = "https://github.com/tigrbl/tigrbl_auth"
-Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/40-capabilities/tigrbl-identity-admin"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/20-providers/tigrbl-identity-admin"
 SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
 PyPI = "https://pypi.org/project/tigrbl-identity-admin/"
 

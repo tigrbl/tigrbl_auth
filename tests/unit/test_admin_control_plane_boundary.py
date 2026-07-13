@@ -146,8 +146,8 @@ def test_admin_t2_public_boundary_has_no_forbidden_imports() -> None:
         Path("pkgs/40-capabilities/tigrbl-identity-admin-control-plane/src/tigrbl_identity_admin_control_plane/__init__.py"),
         Path("pkgs/40-capabilities/tigrbl-identity-admin-control-plane/src/tigrbl_identity_admin_control_plane/models.py"),
         Path("pkgs/40-capabilities/tigrbl-identity-admin-control-plane/src/tigrbl_identity_admin_control_plane/service.py"),
-        Path("pkgs/40-capabilities/tigrbl-identity-admin/src/tigrbl_identity_admin/__init__.py"),
-        Path("pkgs/40-capabilities/tigrbl-identity-admin/src/tigrbl_identity_admin/control_plane.py"),
+        Path("pkgs/20-providers/tigrbl-identity-admin/src/tigrbl_identity_admin/__init__.py"),
+        Path("pkgs/20-providers/tigrbl-identity-admin/src/tigrbl_identity_admin/control_plane.py"),
     ]
     forbidden = {
         "tigrbl_auth",

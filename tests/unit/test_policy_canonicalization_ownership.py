@@ -32,8 +32,8 @@ def test_policy_provenance_builders_are_concrete_backed() -> None:
 def test_authz_policy_no_longer_defines_canonicalization_helpers() -> None:
     helper_names = {"_normalize", "canonical_json", "canonical_hash"}
     for relative_path in (
-        "pkgs/40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/provenance.py",
-        "pkgs/40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/assurance.py",
+        "pkgs/20-providers/tigrbl-authz-policy/src/tigrbl_authz_policy/provenance.py",
+        "pkgs/20-providers/tigrbl-authz-policy/src/tigrbl_authz_policy/assurance.py",
     ):
         tree = ast.parse((ROOT / relative_path).read_text(encoding="utf-8"))
         defined = {

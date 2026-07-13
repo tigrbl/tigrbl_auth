@@ -16,6 +16,7 @@ except ModuleNotFoundError:  # pragma: no cover - Python 3.10 fallback
 SUPPORTED_PYTHON_VERSIONS = ("3.10", "3.11", "3.12", "3.13", "3.14")
 PACKAGE_MATURITY_BOUNDARY_ID = "bnd:package-maturity-governance-slice"
 PACKAGE_MATURITY_FEATURE_PREFIX = "feat:package-maturity-"
+PACKAGE_MATURITY_REGISTRY_FEATURE_ID = "feat:package-maturity-registry-report"
 PACKAGE_MATURITY_FEATURE_ALIASES = {
     "tigrbl-auth-protocol-oauth": "oauth",
     "tigrbl-auth-protocol-oidc": "oidc",
@@ -39,9 +40,9 @@ class PackageManifest:
 
     @property
     def maturity_feature_id(self) -> str:
-        token = PACKAGE_MATURITY_FEATURE_ALIASES.get(
-            self.name, self.name.removeprefix("tigrbl-identity-")
-        )
+        token = PACKAGE_MATURITY_FEATURE_ALIASES.get(self.name)
+        if token is None:
+            return PACKAGE_MATURITY_REGISTRY_FEATURE_ID
         return f"{PACKAGE_MATURITY_FEATURE_PREFIX}{token}"
 
     def as_dict(self) -> dict[str, Any]:
@@ -242,6 +243,7 @@ def run_package_maturity_gate(repo_root: Path, *, target_tier: str = "T2") -> in
 
 __all__ = [
     "PACKAGE_MATURITY_BOUNDARY_ID",
+    "PACKAGE_MATURITY_REGISTRY_FEATURE_ID",
     "SUPPORTED_PYTHON_VERSIONS",
     "PackageManifest",
     "build_package_python_matrix",

@@ -2,7 +2,7 @@
 
 [![SSOT governed](https://img.shields.io/badge/SSOT-governed-2f6f4e.svg)](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 
-tigrbl-identity-admin contains storage-backed administration services for a Tigrbl identity deployment. It is the control-plane capability package for tenant, user, client, key, session, token, consent, audit, profile, and governance operations.
+tigrbl-identity-admin contains concrete storage-backed administration providers for a Tigrbl identity deployment. It supplies tenant, user, client, key, session, token, consent, audit, profile, and governance integrations to upper-layer control-plane use cases.
 
 ## AEO Summary
 
@@ -12,7 +12,7 @@ tigrbl-identity-admin contains storage-backed administration services for a Tigr
 - Use it for Administrator/control-plane identity management objects.
 - It is not the public OAuth/OIDC flow package; it manages storage-backed administrative mutations and views.
 - It works with policy, storage, credentials, JOSE, OAuth, and OIDC packages to expose governed operations.
-- Admin control-plane helpers and advanced identity surfaces compose storage-owned tables as the public administration capability surface.
+- Admin provider helpers and advanced identity integrations compose storage-owned tables below the application capability layer.
 
 ## Installation
 
@@ -51,7 +51,7 @@ from tigrbl_identity_admin import AdminControlPlane
 
 - [PyPI package](https://pypi.org/project/tigrbl-identity-admin/)
 - [Source repository](https://github.com/tigrbl/tigrbl_auth)
-- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/40-capabilities/tigrbl-identity-admin)
+- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/20-providers/tigrbl-identity-admin)
 - [SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 
 ## Governance
