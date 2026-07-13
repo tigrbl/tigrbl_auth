@@ -10,6 +10,8 @@ sys.path.insert(
     ),
 )
 from tigrbl_auth_api_public import PUBLIC_API_CONTRACT  # noqa: E402
+from tigrbl_identity_runtime.deployment import resolve_deployment
+from tigrbl_identity_server.api.app import build_app
 
 
 def test_runtime_manifest_exposes_exact_protocol_owner_versions() -> None:
@@ -28,3 +30,14 @@ def test_public_api_contract_consumes_runtime_protocol_truth() -> None:
     assert "tigrbl-auth-protocol-oid4vci" in PUBLIC_API_CONTRACT.consumed_packages
     assert "tigrbl-auth-protocol-oid4vp" in PUBLIC_API_CONTRACT.consumed_packages
     assert "tigrbl-auth-profile-haip" in PUBLIC_API_CONTRACT.consumed_packages
+
+
+def test_standards_manifest_is_mounted_from_runtime_capability_truth() -> None:
+    deployment = resolve_deployment(product_surface="public-api")
+    assert deployment.capability_enabled("standards-manifest")
+    app = build_app(deployment=deployment)
+    paths = {
+        getattr(route, "path", None) or getattr(route, "path_template", None)
+        for route in getattr(app, "_routes", ())
+    }
+    assert "/standards" in paths

@@ -10,17 +10,31 @@ from tigrbl_identity_storage_runtime.account_surface import api as my_account_ap
 from tigrbl_identity_storage_runtime.authorization import router as authorize_router
 from tigrbl_identity_storage_runtime.login import router as login_router
 from tigrbl_identity_storage_runtime.token_endpoint import router as token_router
-from tigrbl_identity_storage_runtime.client_registration import include_client_registration_endpoint
-from tigrbl_identity_storage_runtime.device_authorization import include_device_authorization_endpoint
+from tigrbl_identity_storage_runtime.client_registration import (
+    include_client_registration_endpoint,
+)
+from tigrbl_identity_storage_runtime.device_authorization import (
+    include_device_authorization_endpoint,
+)
 from tigrbl_identity_storage_runtime.introspection import include_introspection_endpoint
 from tigrbl_identity_storage_runtime.logout import include_logout_endpoint
-from tigrbl_identity_storage_runtime.metadata.authorization_server_metadata import include_rfc8414
-from tigrbl_identity_storage_runtime.metadata.oidc_discovery import include_jwks, include_openid_configuration
-from tigrbl_identity_storage_runtime.metadata.protected_resource_metadata import include_rfc9728
+from tigrbl_identity_storage_runtime.metadata.authorization_server_metadata import (
+    include_rfc8414,
+)
+from tigrbl_identity_storage_runtime.metadata.oidc_discovery import (
+    include_jwks,
+    include_openid_configuration,
+)
+from tigrbl_identity_storage_runtime.metadata.protected_resource_metadata import (
+    include_rfc9728,
+)
 from tigrbl_identity_storage_runtime.par import include_par_endpoint
 from tigrbl_identity_storage_runtime.revocation import include_revocation_endpoint
-from tigrbl_identity_storage_runtime.token_exchange import include_token_exchange_endpoint
+from tigrbl_identity_storage_runtime.token_exchange import (
+    include_token_exchange_endpoint,
+)
 from tigrbl_identity_storage_runtime.userinfo import include_oidc_userinfo
+from tigrbl_identity_server.standards_manifest import include_standards_manifest
 
 from .admin_routes import *
 from .admin_routes import (
@@ -64,6 +78,11 @@ PUBLIC_ROUTER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (
 )
 
 PUBLIC_PUBLISHER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (
+    {
+        "mount_group": "standards_manifest",
+        "capabilities": ("standards-manifest",),
+        "include": include_standards_manifest,
+    },
     {
         "mount_group": "register",
         "capabilities": ("register", "register-management"),
@@ -173,7 +192,9 @@ def build_surface_api(
     return build_public_router(settings_obj, deployment=deployment)
 
 
-PublicRouter = build_public_router(deployment=resolve_deployment(plugin_mode="public-only"))
+PublicRouter = build_public_router(
+    deployment=resolve_deployment(plugin_mode="public-only")
+)
 surface_api = PublicRouter
 
 

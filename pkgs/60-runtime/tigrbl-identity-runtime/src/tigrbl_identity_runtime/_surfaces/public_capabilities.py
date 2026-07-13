@@ -7,6 +7,21 @@ from .schema import *
 
 PUBLIC_CAPABILITIES: Final[tuple[dict[str, Any], ...]] = (
     {
+        "capability": "standards-manifest",
+        "kind": "publisher",
+        "surface_set": "public-rest",
+        "mount_group": "standards_manifest",
+        "paths": ("/standards",),
+        "methods": ("get",),
+        "flags": (),
+        "summary": "Installed identity standards and exact revisions",
+        "tags": ("standards",),
+        "publisher_ref": "tigrbl_identity_server.standards_manifest:include_standards_manifest",
+        "targets": (),
+        "contract_visible": True,
+        "discovery_visible": False,
+    },
+    {
         "capability": "login",
         "kind": "publisher",
         "surface_set": "public-rest",
@@ -397,4 +412,3 @@ PUBLIC_CAPABILITIES: Final[tuple[dict[str, Any], ...]] = (
         "discovery_visible": True,
     },
 )
-
