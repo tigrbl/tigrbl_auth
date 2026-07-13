@@ -6,14 +6,9 @@ from .factories import *
 from .inventory import *
 from .make import *
 from .migrations import *
+from .ops import *
+from .tables import *
 from .topology_validation import *
-from .attestation_repositories import *
-from .credential_repositories import *
-from .presentation_repositories import *
-from .repositories import *
-from .replay_repository import *
-from .security_event_repositories import *
-from .workload_repositories import *
 
 __all__ = [
     "makeRuntimeOperation",
@@ -48,26 +43,22 @@ __all__ = [
     "observe_identity_topology",
     "validate_identity_topology_db",
     "validate_identity_topology_snapshot",
-    "AsyncRecordStore",
-    "AsyncTransactionManager",
-    "AttestationEvidenceRepository",
-    "AttestationReferenceManifestRepository",
-    "AttestationReferenceValueRepository",
-    "AttestationEndorsementRepository",
-    "CorimReferenceMaterialRepository",
-    "AttestationResultRepository",
-    "CredentialIssuanceTransactionRepository",
-    "CredentialOfferRepository",
-    "CredentialStatusEntryRepository",
-    "DurableRepository",
-    "PresentationConsentRepository",
-    "PresentationReplayRepository",
-    "PresentationTransactionRepository",
-    "SecurityEventDeliveryRepository",
-    "SecurityEventReplayRepository",
-    "SqlReplayReservationRepository",
-    "SecurityEventRepository",
-    "SpiffeTrustBundleRepository",
-    "StorageTransactionCoordinator",
-    "SvidRecordRepository",
+    "CredentialOfferRuntimeSpec",
+    "CredentialIssuanceTransactionRuntimeSpec",
+    "CredentialStatusEntryRuntimeSpec",
+    "PresentationTransactionRuntimeSpec",
+    "PresentationConsentRuntimeSpec",
+    "PresentationReplayRuntimeSpec",
+    "AttestationEvidenceRuntimeSpec",
+    "AttestationResultRuntimeSpec",
+    "AttestationReferenceManifestRuntimeSpec",
+    "SecurityEventRuntimeSpec",
+    "SecurityEventDeliveryRuntimeSpec",
+    "SecurityEventReplayRuntimeSpec",
+    "SvidRecordRuntimeSpec",
+    "SpiffeTrustBundleRuntimeSpec",
+    "ReplayReservationRuntimeSpec",
+    "DURABLE_REPLAY_DESCRIPTOR",
+    "check_and_reserve",
+    "publish_reference_material",
 ]

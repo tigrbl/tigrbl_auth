@@ -41,3 +41,26 @@ def test_new_table_runtime_construction_surface_has_no_higher_layer_imports() ->
         assert not any(
             module.startswith(forbidden_prefixes) for module in imports
         ), file
+
+
+def test_layer_30_has_no_repository_or_store_abstraction_modules() -> None:
+    forbidden_suffixes = ("Repository", "Store", "UnitOfWork")
+    for file in RUNTIME_SRC.rglob("*.py"):
+        tree = ast.parse(file.read_text(encoding="utf-8"))
+        class_names = {
+            node.name for node in ast.walk(tree) if isinstance(node, ast.ClassDef)
+        }
+        assert not any(
+            name.endswith(forbidden_suffixes) for name in class_names
+        ), file
+
+    for removed in (
+        "repositories.py",
+        "credential_repositories.py",
+        "presentation_repositories.py",
+        "attestation_repositories.py",
+        "security_event_repositories.py",
+        "workload_repositories.py",
+        "replay_repository.py",
+    ):
+        assert not (RUNTIME_SRC / removed).exists()

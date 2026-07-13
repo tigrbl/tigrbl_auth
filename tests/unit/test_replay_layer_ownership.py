@@ -8,7 +8,10 @@ from tigrbl_auth_protocol_oid4vp import CAPABILITY_REQUIREMENTS as OID4VP_REQUIR
 from tigrbl_auth_protocol_oidc import CAPABILITY_REQUIREMENTS as OIDC_REQUIREMENTS
 from tigrbl_identity_contracts.replay import ReplayKey, ReplayReservationRequest
 from tigrbl_identity_storage.tables import ReplayReservation
-from tigrbl_identity_storage_runtime import SqlReplayReservationRepository
+from tigrbl_identity_storage_runtime import (
+    DURABLE_REPLAY_DESCRIPTOR,
+    ReplayReservationRuntimeSpec,
+)
 from tigrbl_replay_memory_provider import MemoryReplayProvider
 from tigrbl_replay_protection_capability import ReplayProtectionCapability
 from tigrbl_security_event_protocol_set import CAPABILITY_REQUIREMENTS as SET_REQUIREMENTS
@@ -27,7 +30,7 @@ def test_layer_01_owns_protocol_neutral_durable_replay_state():
 
 
 def test_durable_replay_store_descriptor_is_operationally_explicit():
-    descriptor = SqlReplayReservationRepository.descriptor
+    descriptor = DURABLE_REPLAY_DESCRIPTOR
     assert descriptor.atomic_reservation is True
     assert descriptor.namespaces
     assert descriptor.tenant_isolation
@@ -36,6 +39,18 @@ def test_durable_replay_store_descriptor_is_operationally_explicit():
     assert descriptor.purge
     assert descriptor.audit
     assert descriptor.availability
+
+
+def test_durable_replay_is_exposed_as_a_table_operation():
+    operation = next(
+        item
+        for item in ReplayReservationRuntimeSpec.ops
+        if item.alias == "check_and_reserve"
+    )
+    assert ReplayReservationRuntimeSpec.model is ReplayReservation
+    assert operation.tx_scope == "read_write"
+    assert operation.bindings == ()
+    assert operation.handler is operation.core
 
 
 def test_memory_provider_atomically_rejects_concurrent_duplicates():
