@@ -211,6 +211,10 @@ dependencies = [
     "tigrbl-digital-credential-status-provider==0.4.0.dev2",
     "tigrbl-digital-credential-trust-provider==0.4.0.dev2",
     "tigrbl-digital-presentation-verifier==0.4.0.dev2",
+    "tigrbl-eat-verifier-provider==0.4.0.dev2",
+    "tigrbl-attestation-reference-provider==0.4.0.dev2",
+    "tigrbl-attestation-appraiser==0.4.0.dev2",
+    "tigrbl-corim-store-provider==0.4.0.dev2",
     "tigrbl-identity-oauth==0.4.0.dev2",
     "tigrbl-identity-oidc==0.4.0.dev2",
     "tigrbl-identity-principals==0.4.0.dev2",
@@ -487,6 +491,10 @@ tigrbl-digital-credential-issuer-local = { path = "pkgs/20-providers/tigrbl-digi
 tigrbl-digital-credential-status-provider = { path = "pkgs/20-providers/tigrbl-digital-credential-status-provider", editable = true }
 tigrbl-digital-credential-trust-provider = { path = "pkgs/20-providers/tigrbl-digital-credential-trust-provider", editable = true }
 tigrbl-digital-presentation-verifier = { path = "pkgs/20-providers/tigrbl-digital-presentation-verifier", editable = true }
+tigrbl-eat-verifier-provider = { path = "pkgs/20-providers/tigrbl-eat-verifier-provider", editable = true }
+tigrbl-attestation-reference-provider = { path = "pkgs/20-providers/tigrbl-attestation-reference-provider", editable = true }
+tigrbl-attestation-appraiser = { path = "pkgs/20-providers/tigrbl-attestation-appraiser", editable = true }
+tigrbl-corim-store-provider = { path = "pkgs/20-providers/tigrbl-corim-store-provider", editable = true }
 tigrbl-identity-oauth = { path = "pkgs/deprecated/tigrbl-identity-oauth", editable = true }
 tigrbl-identity-oidc = { path = "pkgs/deprecated/tigrbl-identity-oidc", editable = true }
 tigrbl-identity-principals = { path = "pkgs/40-capabilities/tigrbl-identity-principals", editable = true }

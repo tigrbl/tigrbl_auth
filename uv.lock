@@ -2175,6 +2175,17 @@ wheels = [
 ]
 
 [[package]]
+name = "tigrbl-attestation-appraiser"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-attestation-appraiser" }
+dependencies = [
+    { name = "tigrbl-attestation-bases" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-attestation-bases", specifier = "==0.4.0.dev2" }]
+
+[[package]]
 name = "tigrbl-attestation-bases"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/05-bases/tigrbl-attestation-bases" }
@@ -2201,6 +2212,17 @@ requires-dist = [
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-nonce-claim-concrete", specifier = "==0.4.0.dev2" },
 ]
+
+[[package]]
+name = "tigrbl-attestation-reference-provider"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-attestation-reference-provider" }
+dependencies = [
+    { name = "tigrbl-attestation-bases" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-attestation-bases", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-audience-claim-concrete"
@@ -2508,8 +2530,10 @@ dependencies = [
     { name = "tigrbl-also-known-as-claim-concrete" },
     { name = "tigrbl-api-key-credential-concrete" },
     { name = "tigrbl-atoms" },
+    { name = "tigrbl-attestation-appraiser" },
     { name = "tigrbl-attestation-bases" },
     { name = "tigrbl-attestation-protocol-eat" },
+    { name = "tigrbl-attestation-reference-provider" },
     { name = "tigrbl-audience-claim-concrete" },
     { name = "tigrbl-auth" },
     { name = "tigrbl-auth-plugin" },
@@ -2563,6 +2587,7 @@ dependencies = [
     { name = "tigrbl-confirmation-claim-concrete" },
     { name = "tigrbl-core" },
     { name = "tigrbl-corim-concrete" },
+    { name = "tigrbl-corim-store-provider" },
     { name = "tigrbl-credential-profile-sd-jwt-vc" },
     { name = "tigrbl-credential-status-claim-concrete" },
     { name = "tigrbl-credential-type-claim-concrete" },
@@ -2577,6 +2602,7 @@ dependencies = [
     { name = "tigrbl-eap-acr-concrete" },
     { name = "tigrbl-eat-concrete" },
     { name = "tigrbl-eat-profile-claim-concrete" },
+    { name = "tigrbl-eat-verifier-provider" },
     { name = "tigrbl-expiration-claim-concrete" },
     { name = "tigrbl-identity-admin" },
     { name = "tigrbl-identity-admin-advanced-authenticator-registry" },
@@ -2774,8 +2800,10 @@ requires-dist = [
     { name = "tigrbl-also-known-as-claim-concrete", editable = "pkgs/10-concrete/tigrbl-also-known-as-claim-concrete" },
     { name = "tigrbl-api-key-credential-concrete", editable = "pkgs/10-concrete/tigrbl-api-key-credential-concrete" },
     { name = "tigrbl-atoms", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-attestation-appraiser", editable = "pkgs/20-providers/tigrbl-attestation-appraiser" },
     { name = "tigrbl-attestation-bases", editable = "pkgs/05-bases/tigrbl-attestation-bases" },
     { name = "tigrbl-attestation-protocol-eat", editable = "pkgs/50-protocols/tigrbl-attestation-protocol-eat" },
+    { name = "tigrbl-attestation-reference-provider", editable = "pkgs/20-providers/tigrbl-attestation-reference-provider" },
     { name = "tigrbl-audience-claim-concrete", editable = "pkgs/10-concrete/tigrbl-audience-claim-concrete" },
     { name = "tigrbl-auth", editable = "pkgs/70-facade/tigrbl-auth" },
     { name = "tigrbl-auth-plugin", editable = "pkgs/60-runtime/tigrbl-auth-plugin" },
@@ -2829,6 +2857,7 @@ requires-dist = [
     { name = "tigrbl-confirmation-claim-concrete", editable = "pkgs/10-concrete/tigrbl-confirmation-claim-concrete" },
     { name = "tigrbl-core", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-corim-concrete", editable = "pkgs/10-concrete/tigrbl-corim-concrete" },
+    { name = "tigrbl-corim-store-provider", editable = "pkgs/20-providers/tigrbl-corim-store-provider" },
     { name = "tigrbl-credential-profile-sd-jwt-vc", editable = "pkgs/50-protocols/tigrbl-credential-profile-sd-jwt-vc" },
     { name = "tigrbl-credential-status-claim-concrete", editable = "pkgs/10-concrete/tigrbl-credential-status-claim-concrete" },
     { name = "tigrbl-credential-type-claim-concrete", editable = "pkgs/10-concrete/tigrbl-credential-type-claim-concrete" },
@@ -2843,6 +2872,7 @@ requires-dist = [
     { name = "tigrbl-eap-acr-concrete", editable = "pkgs/10-concrete/tigrbl-eap-acr-concrete" },
     { name = "tigrbl-eat-concrete", editable = "pkgs/10-concrete/tigrbl-eat-concrete" },
     { name = "tigrbl-eat-profile-claim-concrete", editable = "pkgs/10-concrete/tigrbl-eat-profile-claim-concrete" },
+    { name = "tigrbl-eat-verifier-provider", editable = "pkgs/20-providers/tigrbl-eat-verifier-provider" },
     { name = "tigrbl-expiration-claim-concrete", editable = "pkgs/10-concrete/tigrbl-expiration-claim-concrete" },
     { name = "tigrbl-identity-admin", editable = "pkgs/40-capabilities/tigrbl-identity-admin" },
     { name = "tigrbl-identity-admin-advanced-authenticator-registry", editable = "pkgs/deprecated/tigrbl-identity-admin-advanced-authenticator-registry" },
@@ -3681,6 +3711,21 @@ dependencies = [
 requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
 
 [[package]]
+name = "tigrbl-corim-store-provider"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-corim-store-provider" }
+dependencies = [
+    { name = "tigrbl-corim-concrete" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-corim-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-credential-profile-sd-jwt-vc"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-credential-profile-sd-jwt-vc" }
@@ -3860,6 +3905,21 @@ dependencies = [
 requires-dist = [
     { name = "tigrbl-identity-claims-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-eat-verifier-provider"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-eat-verifier-provider" }
+dependencies = [
+    { name = "tigrbl-attestation-bases" },
+    { name = "tigrbl-eat-concrete" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-attestation-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-eat-concrete", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
