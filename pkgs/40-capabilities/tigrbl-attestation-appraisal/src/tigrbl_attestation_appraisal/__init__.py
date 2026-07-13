@@ -1,7 +1,7 @@
 from collections.abc import Callable
 
 from tigrbl_capability import Capability
-from tigrbl_identity_contracts.capabilities import CapabilityMetadata
+from tigrbl_identity_contracts.capabilities import CapabilityDefinition, CapabilityOperation
 from tigrbl_identity_contracts.attestation import (
     AppraisalResult,
     AttestationAppraiserPort,
@@ -18,17 +18,19 @@ class AttestationAppraisalCapability(Capability):
         recorder: ResultRecorder | None = None,
     ):
         super().__init__(
-            CapabilityMetadata(
+            CapabilityDefinition(
                 capability_id="attestation.appraisal",
                 version="1.0",
-                operations=("appraise",),
-                guarantees=("appraisal-before-recording",),
-                dependencies=(type(appraiser).__name__,),
-            )
+            ),
+            operations={
+                "appraise": CapabilityOperation(
+                    target=self.appraise,
+                    delegated=True,
+                ),
+            },
         )
         self._appraiser = appraiser
         self._recorder = recorder
-        self.bind("appraise", self.appraise, delegated=True)
 
     def appraise(self, evidence: AttestationEvidence) -> AppraisalResult:
         result = self._appraiser.appraise(evidence)

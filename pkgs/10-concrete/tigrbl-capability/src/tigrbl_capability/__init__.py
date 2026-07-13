@@ -12,8 +12,10 @@ from tigrbl_identity_contracts.capabilities import (
     CapabilityCallContext,
     CapabilityCallable,
     CapabilityCallResult,
-    CapabilityMetadata,
+    CapabilityDefinition,
+    CapabilityOperation,
     CapabilityState,
+    CapabilityStateProvider,
     ICapability,
 )
 
@@ -23,57 +25,94 @@ class Capability(CapabilityBase):
 
     def __init__(
         self,
-        metadata: CapabilityMetadata,
+        definition: CapabilityDefinition,
         /,
         *,
+        operations: Mapping[str, CapabilityOperation],
         attributes: Mapping[str, object] | None = None,
-        state: CapabilityState | None = None,
+        state: CapabilityState | CapabilityStateProvider | None = None,
     ) -> None:
-        if not metadata.capability_id.strip():
+        if not definition.capability_id.strip():
             raise ValueError("capability_id is required")
-        if not metadata.version.strip():
+        if not definition.version.strip():
             raise ValueError("capability version is required")
-        if not metadata.operations:
+        if not operations:
             raise ValueError("at least one capability operation is required")
-        if len(set(metadata.operations)) != len(metadata.operations):
-            raise ValueError("capability operations must be unique")
-        self._capability_metadata = metadata
+        normalized_operations: dict[str, CapabilityOperation] = {}
+        for name, operation in operations.items():
+            if not name.strip():
+                raise ValueError("capability operation name is required")
+            if not isinstance(operation, CapabilityOperation):
+                raise TypeError(f"invalid capability operation: {name}")
+            if operation.target is not None and not callable(operation.target):
+                raise TypeError(f"capability operation target must be callable: {name}")
+            if operation.required and operation.target is None:
+                raise NotImplementedError(
+                    f"required capability operation is not implemented: {name}"
+                )
+            normalized_operations[name] = operation
+        self._capability_definition = definition
+        self._capability_operations = normalized_operations
         self._capability_attributes = dict(attributes or {})
-        self._capability_state = state if state is not None else CapabilityState()
-        self._capability_bindings: dict[str, tuple[CapabilityCallable, bool]] = {}
+        if state is None:
+            self._capability_state_provider: CapabilityStateProvider = CapabilityState
+        elif isinstance(state, CapabilityState):
+            self._capability_state_provider = lambda state=state: state
+        elif callable(state):
+            self._capability_state_provider = state
+        else:
+            raise TypeError("capability state must be a CapabilityState or state provider")
 
-    def emit_capability_metadata(self) -> CapabilityMetadata:
-        return self._capability_metadata
+    def definition(self) -> CapabilityDefinition:
+        return self._capability_definition
+
+    def operations(self) -> Mapping[str, CapabilityOperation]:
+        return dict(self._capability_operations)
 
     def attributes(self) -> Mapping[str, object]:
         return dict(self._capability_attributes)
 
     def callables(self) -> Mapping[str, CapabilityCallable]:
         return {
-            name: binding[0] for name, binding in self._capability_bindings.items()
+            name: operation.target
+            for name, operation in self._capability_operations.items()
+            if operation.target is not None
         }
 
     def state(self) -> CapabilityState:
-        return self._capability_state
+        state = self._capability_state_provider()
+        if not isinstance(state, CapabilityState):
+            raise TypeError("capability state provider must return CapabilityState")
+        return state
 
     def capability_report(self) -> dict[str, object]:
         """Return the complete, operator-inspectable effective capability set."""
-        report: dict[str, object] = dict(asdict(self._capability_metadata))
-        report["state"] = asdict(self._capability_state)
-        report["bound_operations"] = tuple(sorted(self._capability_bindings))
+        report: dict[str, object] = dict(asdict(self._capability_definition))
+        report["operations"] = tuple(self._capability_operations)
+        report["bound_operations"] = tuple(sorted(self.callables()))
         report["delegated_operations"] = tuple(
-            sorted(name for name, (_, delegated) in self._capability_bindings.items() if delegated)
+            sorted(
+                name
+                for name, operation in self._capability_operations.items()
+                if operation.target is not None and operation.delegated
+            )
         )
+        report["optional_operations"] = tuple(
+            sorted(
+                name
+                for name, operation in self._capability_operations.items()
+                if not operation.required
+            )
+        )
+        report["unavailable_optional_operations"] = tuple(
+            sorted(
+                name
+                for name, operation in self._capability_operations.items()
+                if not operation.required and operation.target is None
+            )
+        )
+        report["state"] = asdict(self.state())
         return report
-
-    def bind(
-        self, operation: str, target: CapabilityCallable, *, delegated: bool = False
-    ) -> None:
-        if operation not in self._capability_metadata.operations:
-            raise KeyError(f"undeclared capability operation: {operation}")
-        if not callable(target):
-            raise TypeError("capability binding target must be callable")
-        self._capability_bindings[operation] = (target, delegated)
 
     async def call(
         self,
@@ -83,9 +122,12 @@ class Capability(CapabilityBase):
         **kwargs: object,
     ) -> CapabilityCallResult:
         try:
-            target, delegated = self._capability_bindings[operation]
+            operation_definition = self._capability_operations[operation]
         except KeyError as exc:
-            raise LookupError(f"unbound capability operation: {operation}") from exc
+            raise KeyError(f"unknown capability operation: {operation}") from exc
+        target = operation_definition.target
+        if target is None:
+            raise LookupError(f"unbound optional capability operation: {operation}")
         active = context or CapabilityCallContext(call_id=new_opaque_id())
         if active.deadline is not None and time.time() > active.deadline:
             raise TimeoutError("capability call deadline exceeded")
@@ -94,10 +136,10 @@ class Capability(CapabilityBase):
             value = await value
         return CapabilityCallResult(
             value=value,
-            capability_id=self._capability_metadata.capability_id,
+            capability_id=self._capability_definition.capability_id,
             operation=operation,
             call_id=active.call_id,
-            delegated=delegated,
+            delegated=operation_definition.delegated,
         )
 
     async def subcall(
@@ -108,9 +150,9 @@ class Capability(CapabilityBase):
         context: CapabilityCallContext,
         **kwargs: object,
     ) -> CapabilityCallResult:
-        target_capability_id = capability.emit_capability_metadata().capability_id
+        target_capability_id = capability.definition().capability_id
         delegation_chain = context.delegation_chain + (
-            self._capability_metadata.capability_id,
+            self._capability_definition.capability_id,
         )
         if target_capability_id in delegation_chain:
             raise RuntimeError("capability delegation cycle detected")

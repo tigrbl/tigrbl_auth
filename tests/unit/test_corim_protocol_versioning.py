@@ -27,4 +27,4 @@ def test_corim_protocol_maps_wire_requirements_to_normalized_capabilities() -> N
         "attestation.reference-material",
         "attestation.appraisal",
     }
-    assert "trust-anchor-selection" in report["unsupported"]
+    assert "unsupported" not in report

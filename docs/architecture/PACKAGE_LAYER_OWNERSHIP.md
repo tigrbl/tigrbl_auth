@@ -29,15 +29,20 @@ layer-20 providers and/or layer-30 storage runtimes.
 Every layer-40 capability follows this ordered inheritance chain:
 
 ```text
-02 contract -> 05 CapabilityBase -> 10.1 Capability -> 10.2 DefaultCapability -> 40 specialization
+02 ICapability -> 05 CapabilityBase -> 10 Capability -> 40 specialization
 ```
 
+`CapabilityDefinition` owns only the stable capability ID and contract version.
+`CapabilityOperation` is the single source for an operation's target, required
+status, and delegation status. `CapabilityState` reports the mounted instance's
+current readiness, health, status, and diagnostic details.
+
 `Capability` is the neutral generic implementation. It supplies explicit
-attribute, callable, state, binding, call, delegated-subcall, context, and
-metadata machinery without selecting providers or applying implicit settings.
-`DefaultCapability` is a separate opinionated generic. Every default it applies
-must appear in `CapabilityMetadata.effective_defaults`. A layer-40 capability
-may inherit either layer-10 generic, but never inherits layers 02 or 05 directly.
+definition, operation-registry, attribute, live-state, call, delegated-subcall,
+context, and reporting machinery without selecting providers or applying
+implicit settings. `DefaultCapability` is an optional layer-10 subclass whose
+only default is a documented ready/healthy state. A layer-40 capability may
+inherit either layer-10 generic, but never inherits layers 02 or 05 directly.
 
 A layer-40 package may:
 

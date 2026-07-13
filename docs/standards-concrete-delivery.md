@@ -25,7 +25,7 @@ and independently verifiable results.
 | 10 | JOSE, SD-JWT, SD-JWT VC, mdoc, VCDM, EAT, CoRIM, SVID, DID, SET concrete packages | Deterministic parsing, validation, serialization, and format behavior | No filesystem, HTTP, database, HSM, or issuer-trust decisions |
 | 20 | credential, presentation, COSE/mdoc, wallet/key/platform attestation, EAT/RATS/CoRIM, SPIFFE/SVID, DID, SET, certificate/trust, and replaceable infrastructure providers | Environment-backed signing, verification, resolution, appraisal, delivery, trust, and explicitly named external/ephemeral storage adapters | Rename ambiguous `*-store` packages as implementation-specific providers; no canonical durable schema or transaction ownership |
 | 30 | `tigrbl-identity-storage-runtime` | Executable repositories, atomic reservations, database sessions, migrations, and transaction coordinators over layer-01 state | Add durable replay repositories and exercise every repository against production database backends |
-| 40 | digital credential issuance/presentation, attestation appraisal, security events, workload identity | Multi-component use-case orchestration over neutral ports, with delegated subimplementations and machine-readable capability descriptors | Complete capability inventory/readiness/dependency reporting without leaking wire formats |
+| 40 | digital credential issuance/presentation, attestation appraisal, security events, workload identity | Multi-component use-case orchestration over neutral ports, with delegated subimplementations and machine-readable capability descriptors | Complete operation, binding, readiness, and health reporting without leaking wire formats |
 | 50 | JWT, OAuth, OIDC, OID4VCI, OID4VP, HAIP, AuthZEN, GNAP, SET, EAT, SD-JWT VC | Independent version histories, revision feature gates, compatibility/migrations, protocol claim-set composition, and traceable protocol-requirement-to-capability mappings | Remove embedded state-store implementations; add normative endpoint coverage and independent interop evidence before certification |
 | 60 | `tigrbl-identity-runtime` | Lazy installed-owner standards registry and exact runtime manifest | Remove older layer-50 imports of runtime settings by injecting deployment configuration |
 | 70 | `tigrbl-auth` | Stable lazy exports for runtime standards discovery | Re-export additional APIs only after owner packages stabilize |
@@ -135,8 +135,8 @@ Canonical placement rule:
   No Redis/vendor backend is selected in this delivery, so no speculative
   provider package is created; the rule is enforced by provider boundaries.
 - [x] Add a layer-40 `tigrbl-replay-protection-capability` package that delegates to a
-  selected provider/repository and reports operations, guarantees, namespaces,
-  persistence class, health, and limitations.
+  selected provider/repository and reports operations, bindings, namespaces,
+  provider identity, persistence class, readiness, and health.
 - [x] Map SET `jti`, DPoP proof `jti`/nonce, OIDC backchannel logout token `jti`,
   OID4VP nonce/transaction binding, and other revision-specific replay rules to
   the layer-40 capability from their layer-50 packages.
@@ -160,9 +160,9 @@ Canonical placement rule:
 ### Capability-layer contract
 
 - [x] Every layer-40 capability has a stable capability ID and version.
-- [x] Every layer-40 capability reports supported operations, guarantees,
-  optional features, selected provider identities, dependencies, readiness,
-  health, limitations, and explicitly unsupported behavior.
+- [x] Every layer-40 capability uses one first-class operation registry and
+  reports its operations, effective targets, delegated operations, readiness,
+  health, and live state from that registry and its state provider.
 - [x] Layer-40 capabilities accept normalized contracts and do not depend on
   protocol wire names such as `jti`, `nonce`, `state`, or HTTP parameters.
 - [x] A capability may delegate to multiple layer-20 providers and layer-30
@@ -175,8 +175,8 @@ Canonical placement rule:
 - [x] Each protocol with independent history owns a distinct layer-50 package
   and version registry.
 - [x] Layer 50 owns revision feature flags, compatibility rules, and migrations.
-- [x] Each normative protocol requirement maps to a stable layer-40 capability
-  operation or is explicitly reported unsupported.
+- [x] Each implemented normative protocol requirement maps to a stable layer-40
+  capability operation.
 - [x] Layer 50 reports the selected protocol revision, required capability set,
   effective implementation coverage, and conformance evidence links.
 - [x] Layer 50 owns wire decoding/encoding and protocol error mapping but not
@@ -218,8 +218,7 @@ Canonical placement rule:
   the shared capability report, including bindings and delegated operations.
 - [x] Every versioned layer-50 protocol/profile reports its selected revision,
   feature-derived normative requirements, stable capability mappings,
-  effective coverage, explicit unsupported behavior, and conformance evidence
-  links.
+  effective coverage, and conformance evidence links.
 
 ## Assurance vocabulary
 

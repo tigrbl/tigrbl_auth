@@ -7,7 +7,8 @@ from tigrbl_identity_contracts.capabilities import (
     CapabilityCallContext,
     CapabilityCallable,
     CapabilityCallResult,
-    CapabilityMetadata,
+    CapabilityDefinition,
+    CapabilityOperation,
     CapabilityState,
     ICapability,
 )
@@ -15,7 +16,10 @@ from tigrbl_identity_contracts.capabilities import (
 
 class CapabilityBase(ICapability, ABC):
     @abstractmethod
-    def emit_capability_metadata(self) -> CapabilityMetadata: ...
+    def definition(self) -> CapabilityDefinition: ...
+
+    @abstractmethod
+    def operations(self) -> Mapping[str, CapabilityOperation]: ...
 
     @abstractmethod
     def attributes(self) -> Mapping[str, object]: ...
@@ -25,11 +29,6 @@ class CapabilityBase(ICapability, ABC):
 
     @abstractmethod
     def state(self) -> CapabilityState: ...
-
-    @abstractmethod
-    def bind(
-        self, operation: str, target: CapabilityCallable, *, delegated: bool = False
-    ) -> None: ...
 
     @abstractmethod
     async def call(

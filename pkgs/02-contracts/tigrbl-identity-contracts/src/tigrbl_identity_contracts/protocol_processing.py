@@ -61,7 +61,6 @@ def build_protocol_capability_report(
             item.requirement_id: f"{item.capability_id}.{item.operation}" for item in requirements
         },
         "evidence_links": tuple(evidence_links),
-        "unsupported": (),
     }
 
 

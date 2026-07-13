@@ -50,7 +50,7 @@ def test_memory_provider_atomically_rejects_concurrent_duplicates():
     asyncio.run(scenario())
 
 
-def test_layer_40_capability_reports_provider_guarantees_and_limitations():
+def test_layer_40_capability_reports_provider_identity_and_persistence():
     capability = ReplayProtectionCapability(
         MemoryReplayProvider(), namespaces=("set:event-jti",)
     )
@@ -59,7 +59,8 @@ def test_layer_40_capability_reports_provider_guarantees_and_limitations():
     assert report["operations"] == ("check_and_reserve",)
     assert report["provider_id"] == "replay:memory"
     assert report["persistence"] == "ephemeral-process-local"
-    assert "not-shared-across-workers" in report["limitations"]
+    assert "guarantees" not in report
+    assert "limitations" not in report
 
 
 def test_layer_50_maps_wire_requirements_to_replay_capability():

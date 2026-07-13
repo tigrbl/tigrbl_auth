@@ -1,7 +1,7 @@
 from collections.abc import Callable
 
 from tigrbl_capability import Capability
-from tigrbl_identity_contracts.capabilities import CapabilityMetadata
+from tigrbl_identity_contracts.capabilities import CapabilityDefinition, CapabilityOperation
 from tigrbl_identity_contracts.digital_credentials import (
     PresentationRequest,
     PresentationResult,
@@ -20,18 +20,17 @@ class DigitalCredentialPresentationCapability(Capability):
         consent_checker: ConsentChecker,
     ):
         super().__init__(
-            CapabilityMetadata(
+            CapabilityDefinition(
                 capability_id="digital-credential.presentation",
                 version="1.0",
-                operations=("present",),
-                guarantees=("consent-before-verification", "replay-check-before-verification"),
-                dependencies=(type(verifier).__name__,),
-            )
+            ),
+            operations={
+                "present": CapabilityOperation(target=self.present, delegated=True),
+            },
         )
         self._verifier = verifier
         self._replay = replay_consumer
         self._consent = consent_checker
-        self.bind("present", self.present, delegated=True)
 
     def present(
         self,

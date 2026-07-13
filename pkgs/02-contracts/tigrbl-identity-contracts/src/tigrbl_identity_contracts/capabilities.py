@@ -7,23 +7,20 @@ from dataclasses import dataclass, field
 from typing import Protocol, TypeAlias, runtime_checkable
 
 
+CapabilityCallable: TypeAlias = Callable[..., object | Awaitable[object]]
+
+
 @dataclass(frozen=True, slots=True)
-class CapabilityMetadata:
+class CapabilityDefinition:
     capability_id: str
     version: str
-    operations: tuple[str, ...]
-    guarantees: tuple[str, ...] = ()
-    optional_features: tuple[str, ...] = ()
-    required_capabilities: tuple[str, ...] = ()
-    dependencies: tuple[str, ...] = ()
-    namespaces: tuple[str, ...] = ()
-    persistence: str | None = None
-    ready: bool | None = None
-    healthy: bool | None = None
-    limitations: tuple[str, ...] = ()
-    unsupported: tuple[str, ...] = ()
-    implementation: str = "generic"
-    effective_defaults: Mapping[str, object] = field(default_factory=dict)
+
+
+@dataclass(frozen=True, slots=True)
+class CapabilityOperation:
+    target: CapabilityCallable | None
+    required: bool = True
+    delegated: bool = False
 
 
 @dataclass(frozen=True, slots=True)
@@ -32,6 +29,9 @@ class CapabilityState:
     healthy: bool | None = None
     status: str | None = None
     details: Mapping[str, object] = field(default_factory=dict)
+
+
+CapabilityStateProvider: TypeAlias = Callable[[], CapabilityState]
 
 
 @dataclass(frozen=True, slots=True)
@@ -60,22 +60,17 @@ class CapabilityCallResult:
     delegated: bool = False
 
 
-CapabilityCallable: TypeAlias = Callable[..., object | Awaitable[object]]
-
-
 @runtime_checkable
 class ICapability(Protocol):
-    def emit_capability_metadata(self) -> CapabilityMetadata: ...
+    def definition(self) -> CapabilityDefinition: ...
+
+    def operations(self) -> Mapping[str, CapabilityOperation]: ...
 
     def attributes(self) -> Mapping[str, object]: ...
 
     def callables(self) -> Mapping[str, CapabilityCallable]: ...
 
     def state(self) -> CapabilityState: ...
-
-    def bind(
-        self, operation: str, target: CapabilityCallable, *, delegated: bool = False
-    ) -> None: ...
 
     async def call(
         self,
@@ -111,8 +106,10 @@ __all__ = [
     "CapabilityCallContext",
     "CapabilityCallable",
     "CapabilityCallResult",
-    "CapabilityMetadata",
+    "CapabilityDefinition",
+    "CapabilityOperation",
     "CapabilityState",
+    "CapabilityStateProvider",
     "ICapability",
     "ProtocolCapabilityRequirement",
 ]

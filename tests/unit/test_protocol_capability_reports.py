@@ -35,7 +35,7 @@ def test_protocol_artifact_capability_is_normalized_and_fully_reported() -> None
     assert report["capability_id"] == "artifact.processing"
     assert report["operations"] == ("decode", "validate", "encode", "map_error")
     assert report["delegated_operations"] == tuple(sorted(report["operations"]))
-    assert "trust-selection" in report["unsupported"]
+    assert "unsupported" not in report
 
 
 def test_each_versioned_protocol_reports_revision_requirements_coverage_and_evidence() -> None:
@@ -49,6 +49,7 @@ def test_each_versioned_protocol_reports_revision_requirements_coverage_and_evid
         assert report["requirements"]
         assert report["effective_coverage"]
         assert report["evidence_links"]
+        assert "unsupported" not in report
         requirement_ids = {item.requirement_id for item in report["requirements"]}
         assert requirement_ids == set(report["effective_coverage"])
         assert all(item.capability_id for item in report["requirements"])

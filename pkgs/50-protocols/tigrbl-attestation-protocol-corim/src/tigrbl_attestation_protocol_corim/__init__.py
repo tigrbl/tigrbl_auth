@@ -37,9 +37,6 @@ def capability_report() -> dict[str, object]:
         extra_requirements=CAPABILITY_REQUIREMENTS,
     )
     report["status"] = CURRENT_VERSION.status
-    report["unsupported"] = (
-        "trust-anchor-selection", "key-loading", "appraisal-policy-selection"
-    )
     return report
 
 

@@ -1,7 +1,7 @@
 from collections.abc import Callable
 
 from tigrbl_capability import Capability
-from tigrbl_identity_contracts.capabilities import CapabilityMetadata
+from tigrbl_identity_contracts.capabilities import CapabilityDefinition, CapabilityOperation
 from tigrbl_identity_contracts.security_events import (
     SecurityEvent,
     SecurityEventReceiverPort,
@@ -19,20 +19,18 @@ class SecurityEventsCapability(Capability):
         recorder: EventRecorder | None = None,
     ):
         super().__init__(
-            CapabilityMetadata(
+            CapabilityDefinition(
                 capability_id="security-events.delivery",
                 version="1.0",
-                operations=("transmit", "receive"),
-                guarantees=("record-after-success",),
-                optional_features=("event-recording",),
-                dependencies=(type(transmitter).__name__, type(receiver).__name__),
-            )
+            ),
+            operations={
+                "transmit": CapabilityOperation(target=self.transmit, delegated=True),
+                "receive": CapabilityOperation(target=self.receive, delegated=True),
+            },
         )
         self._transmitter = transmitter
         self._receiver = receiver
         self._recorder = recorder
-        self.bind("transmit", self.transmit, delegated=True)
-        self.bind("receive", self.receive, delegated=True)
 
     def transmit(self, event: SecurityEvent, subscriber: str) -> str:
         encoded = self._transmitter.transmit(event, subscriber)

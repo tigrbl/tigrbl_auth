@@ -1,5 +1,5 @@
 from tigrbl_capability import Capability
-from tigrbl_identity_contracts.capabilities import CapabilityMetadata
+from tigrbl_identity_contracts.capabilities import CapabilityDefinition, CapabilityOperation
 from tigrbl_identity_contracts.workloads import (
     SpiffeId,
     SvidProviderPort,
@@ -10,18 +10,23 @@ from tigrbl_identity_contracts.workloads import (
 class WorkloadIdentityCapability(Capability):
     def __init__(self, provider: SvidProviderPort, verifier: SvidVerifierPort):
         super().__init__(
-            CapabilityMetadata(
+            CapabilityDefinition(
                 capability_id="workload-identity.spiffe",
                 version="1.0",
-                operations=("x509_identity", "jwt_identity"),
-                guarantees=("verified-identity-only",),
-                dependencies=(type(provider).__name__, type(verifier).__name__),
-            )
+            ),
+            operations={
+                "x509_identity": CapabilityOperation(
+                    target=self.x509_identity,
+                    delegated=True,
+                ),
+                "jwt_identity": CapabilityOperation(
+                    target=self.jwt_identity,
+                    delegated=True,
+                ),
+            },
         )
         self._provider = provider
         self._verifier = verifier
-        self.bind("x509_identity", self.x509_identity, delegated=True)
-        self.bind("jwt_identity", self.jwt_identity, delegated=True)
 
     def x509_identity(self) -> SpiffeId:
         svid = self._provider.fetch_svid()

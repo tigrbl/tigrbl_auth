@@ -1,35 +1,33 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from dataclasses import replace
 
 from tigrbl_capability import Capability
-from tigrbl_identity_contracts.capabilities import CapabilityMetadata, CapabilityState
+from tigrbl_identity_contracts.capabilities import (
+    CapabilityDefinition,
+    CapabilityOperation,
+    CapabilityState,
+    CapabilityStateProvider,
+)
 
 
 class DefaultCapability(Capability):
-    DEFAULTS: Mapping[str, object] = {
-        "ready": True,
-        "healthy": True,
-        "binding_policy": "explicit-only",
-    }
+    DEFAULT_STATE = CapabilityState(ready=True, healthy=True, status="ready")
 
-    def __init__(self, metadata: CapabilityMetadata, /) -> None:
-        effective_defaults = dict(self.DEFAULTS)
-        effective_defaults.update(metadata.effective_defaults)
+    def __init__(
+        self,
+        definition: CapabilityDefinition,
+        /,
+        *,
+        operations: Mapping[str, CapabilityOperation],
+        attributes: Mapping[str, object] | None = None,
+        state: CapabilityState | CapabilityStateProvider | None = None,
+    ) -> None:
         super().__init__(
-            replace(
-                metadata,
-                ready=metadata.ready if metadata.ready is not None else True,
-                healthy=metadata.healthy if metadata.healthy is not None else True,
-                implementation="default-generic",
-                effective_defaults=effective_defaults,
-            ),
-            state=CapabilityState(
-                ready=metadata.ready if metadata.ready is not None else True,
-                healthy=metadata.healthy if metadata.healthy is not None else True,
-                status="ready",
-            ),
+            definition,
+            operations=operations,
+            attributes=attributes,
+            state=state if state is not None else self.DEFAULT_STATE,
         )
 
 

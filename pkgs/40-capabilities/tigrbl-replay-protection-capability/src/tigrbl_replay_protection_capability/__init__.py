@@ -5,7 +5,11 @@ from __future__ import annotations
 from typing import NamedTuple
 
 from tigrbl_capability import Capability
-from tigrbl_identity_contracts.capabilities import CapabilityMetadata
+from tigrbl_identity_contracts.capabilities import (
+    CapabilityDefinition,
+    CapabilityOperation,
+    CapabilityState,
+)
 from tigrbl_identity_contracts.replay import (
     ReplayReservationPort,
     ReplayReservationRequest,
@@ -14,16 +18,9 @@ from tigrbl_identity_contracts.replay import (
 
 
 class ReplayCapabilityDescriptor(NamedTuple):
-    capability_id: str = "security.replay-protection"
-    version: str = "1.0"
-    operations: tuple[str, ...] = ("check_and_reserve",)
-    guarantees: tuple[str, ...] = ("atomic-reservation", "expiry")
     namespaces: tuple[str, ...] = ()
     provider_id: str = ""
     persistence: str = "unknown"
-    ready: bool = True
-    healthy: bool = True
-    limitations: tuple[str, ...] = ()
 
 
 class ReplayProtectionCapability(Capability):
@@ -39,29 +36,26 @@ class ReplayProtectionCapability(Capability):
     ) -> None:
         self._provider = provider
         self._namespaces = tuple(sorted(set(namespaces)))
-        persistence = str(getattr(provider, "persistence", "unknown"))
-        limitations = (
-            ("state-lost-on-restart", "not-shared-across-workers")
-            if persistence == "ephemeral-process-local"
-            else ()
-        )
         super().__init__(
-            CapabilityMetadata(
+            CapabilityDefinition(
                 capability_id=self.capability_id,
                 version=self.version,
-                operations=("check_and_reserve",),
-                guarantees=("atomic-reservation", "expiry"),
-                namespaces=self._namespaces,
-                dependencies=(
-                    str(getattr(provider, "provider_id", type(provider).__name__)),
+            ),
+            operations={
+                "check_and_reserve": CapabilityOperation(
+                    target=self.check_and_reserve,
+                    delegated=True,
                 ),
-                persistence=persistence,
-                ready=True,
-                healthy=True,
-                limitations=limitations,
-            )
+            },
+            state=self._state,
         )
-        self.bind("check_and_reserve", self.check_and_reserve, delegated=True)
+
+    def _state(self) -> CapabilityState:
+        return CapabilityState(
+            ready=bool(getattr(self._provider, "ready", True)),
+            healthy=bool(getattr(self._provider, "healthy", True)),
+            status=str(getattr(self._provider, "status", "ready")),
+        )
 
     async def check_and_reserve(
         self, request: ReplayReservationRequest, /
@@ -72,16 +66,10 @@ class ReplayProtectionCapability(Capability):
 
     def describe(self) -> ReplayCapabilityDescriptor:
         persistence = str(getattr(self._provider, "persistence", "unknown"))
-        limitations = (
-            ("state-lost-on-restart", "not-shared-across-workers")
-            if persistence == "ephemeral-process-local"
-            else ()
-        )
         return ReplayCapabilityDescriptor(
             namespaces=self._namespaces,
             provider_id=str(getattr(self._provider, "provider_id", type(self._provider).__name__)),
             persistence=persistence,
-            limitations=limitations,
         )
 
     def capability_report(self) -> dict[str, object]:
