@@ -12,7 +12,18 @@ from .assembly import (
     testkit_provider_runtime_profile,
 )
 from .base import LazyASGIApplication, RunnerAdapter
-from .registry import get_runner_adapter, iter_runner_adapters, registered_runner_names, runner_registry_manifest
+from .registry import (
+    get_runner_adapter,
+    iter_runner_adapters,
+    registered_runner_names,
+    runner_registry_manifest,
+)
+from .standards import (
+    STANDARD_OWNER_MODULES,
+    RuntimeStandard,
+    standard_version,
+    standards_manifest,
+)
 
 __all__ = [
     "CONFIG_PRECEDENCE",
@@ -20,6 +31,8 @@ __all__ = [
     "ReadinessDiagnostic",
     "ReadinessStatus",
     "RunnerAdapter",
+    "STANDARD_OWNER_MODULES",
+    "RuntimeStandard",
     "RuntimeProfile",
     "RuntimePlan",
     "build_runtime_hash_matrix",
@@ -32,6 +45,8 @@ __all__ = [
     "resolve_config",
     "resolve_feature_flags",
     "runner_registry_manifest",
+    "standard_version",
+    "standards_manifest",
     "testkit_provider_runtime_profile",
 ]
 

@@ -31,6 +31,7 @@ PUBLIC_API_CONTRACT = PublicApiContract(
         "oauth-authorization-server-metadata",
         "jwks",
         "tenant-jwks",
+        "standards-manifest",
     ),
     production_capabilities=(
         "login",
@@ -48,6 +49,7 @@ PUBLIC_API_CONTRACT = PublicApiContract(
         "oauth-protected-resource-metadata",
         "jwks",
         "tenant-jwks",
+        "standards-manifest",
     ),
     forbidden_route_prefixes=(
         "/admin",
@@ -59,9 +61,7 @@ PUBLIC_API_CONTRACT = PublicApiContract(
         "/tenant/",
         "/diagnostics",
     ),
-    forbidden_exact_routes=(
-        "/tenant",
-    ),
+    forbidden_exact_routes=("/tenant",),
     consumed_packages=(
         "tigrbl-auth",
         "tigrbl-identity-server",
@@ -69,6 +69,9 @@ PUBLIC_API_CONTRACT = PublicApiContract(
         "tigrbl-auth-protocol-oauth",
         "tigrbl-auth-protocol-oidc",
         "tigrbl-identity-jose",
+        "tigrbl-auth-protocol-oid4vci",
+        "tigrbl-auth-protocol-oid4vp",
+        "tigrbl-auth-profile-haip",
     ),
 )
 

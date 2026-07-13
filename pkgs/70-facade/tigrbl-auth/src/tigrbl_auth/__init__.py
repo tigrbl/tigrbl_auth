@@ -56,6 +56,7 @@ def _install_http_status_aliases() -> None:
         if not hasattr(_HTTPStatus, alias):
             setattr(_HTTPStatus, alias, int(item))
 
+
 _install_tomllib_alias()
 _install_http_status_aliases()
 
@@ -78,6 +79,10 @@ _MODULE_EXPORTS = {
 }
 
 _SYMBOL_EXPORTS = {
+    "STANDARD_OWNER_MODULES": ("tigrbl_identity_runtime", "STANDARD_OWNER_MODULES"),
+    "RuntimeStandard": ("tigrbl_identity_runtime", "RuntimeStandard"),
+    "standard_version": ("tigrbl_identity_runtime", "standard_version"),
+    "standards_manifest": ("tigrbl_identity_runtime", "standards_manifest"),
     "encode_jwt": ("tigrbl_auth_protocol_oauth.standards.json_web_token", "encode_jwt"),
     "decode_jwt": ("tigrbl_auth_protocol_oauth.standards.json_web_token", "decode_jwt"),
     "encrypt_jwe": ("tigrbl_auth.standards.jose.rfc7516", "encrypt_jwe"),
@@ -86,9 +91,18 @@ _SYMBOL_EXPORTS = {
     "verify_jws": ("tigrbl_auth.standards.jose.rfc7515", "verify_jws"),
     "load_signing_jwk": ("tigrbl_auth.standards.jose.rfc7517", "load_signing_jwk"),
     "load_public_jwk": ("tigrbl_auth.standards.jose.rfc7517", "load_public_jwk"),
-    "load_pqc_signing_jwk": ("tigrbl_auth.standards.jose.rfc7517", "load_pqc_signing_jwk"),
-    "load_pqc_public_jwk": ("tigrbl_auth.standards.jose.rfc7517", "load_pqc_public_jwk"),
-    "supported_algorithms": ("tigrbl_auth.standards.jose.rfc7518", "supported_algorithms"),
+    "load_pqc_signing_jwk": (
+        "tigrbl_auth.standards.jose.rfc7517",
+        "load_pqc_signing_jwk",
+    ),
+    "load_pqc_public_jwk": (
+        "tigrbl_auth.standards.jose.rfc7517",
+        "load_pqc_public_jwk",
+    ),
+    "supported_algorithms": (
+        "tigrbl_auth.standards.jose.rfc7518",
+        "supported_algorithms",
+    ),
     "RFC7520_SPEC_URL": ("tigrbl_auth.rfc.rfc7520", "RFC7520_SPEC_URL"),
     "jws_then_jwe": ("tigrbl_auth.rfc.rfc7520", "jws_then_jwe"),
     "jwe_then_jws": ("tigrbl_auth.rfc.rfc7520", "jwe_then_jws"),
@@ -104,12 +118,30 @@ _SYMBOL_EXPORTS = {
         "tigrbl_auth_protocol_oauth.standards.proof_key_for_code_exchange",
         "verify_code_challenge",
     ),
-    "RFC8628_SPEC_URL": ("tigrbl_auth_protocol_oauth.standards.device_authorization", "RFC8628_SPEC_URL"),
-    "generate_user_code": ("tigrbl_auth_protocol_oauth.standards.device_authorization", "generate_user_code"),
-    "validate_user_code": ("tigrbl_auth_protocol_oauth.standards.device_authorization", "validate_user_code"),
-    "generate_device_code": ("tigrbl_auth_protocol_oauth.standards.device_authorization", "generate_device_code"),
-    "RFC9207_SPEC_URL": ("tigrbl_auth_protocol_oauth.standards.issuer_identification", "RFC9207_SPEC_URL"),
-    "extract_issuer": ("tigrbl_auth_protocol_oauth.standards.issuer_identification", "extract_issuer"),
+    "RFC8628_SPEC_URL": (
+        "tigrbl_auth_protocol_oauth.standards.device_authorization",
+        "RFC8628_SPEC_URL",
+    ),
+    "generate_user_code": (
+        "tigrbl_auth_protocol_oauth.standards.device_authorization",
+        "generate_user_code",
+    ),
+    "validate_user_code": (
+        "tigrbl_auth_protocol_oauth.standards.device_authorization",
+        "validate_user_code",
+    ),
+    "generate_device_code": (
+        "tigrbl_auth_protocol_oauth.standards.device_authorization",
+        "generate_device_code",
+    ),
+    "RFC9207_SPEC_URL": (
+        "tigrbl_auth_protocol_oauth.standards.issuer_identification",
+        "RFC9207_SPEC_URL",
+    ),
+    "extract_issuer": (
+        "tigrbl_auth_protocol_oauth.standards.issuer_identification",
+        "extract_issuer",
+    ),
     "AuthorizationDetail": (
         "tigrbl_auth_protocol_oauth.standards.rich_authorization_requests",
         "AuthorizationDetail",
