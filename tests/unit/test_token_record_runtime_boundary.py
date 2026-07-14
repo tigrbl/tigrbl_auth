@@ -11,6 +11,7 @@ from tigrbl_identity_storage_runtime import (
     introspect_token_record,
     mark_refresh_token_rotated,
     persist_issued_token,
+    read_token_record,
     revoke_refresh_token_family,
 )
 
@@ -51,6 +52,14 @@ async def test_profiled_token_lifecycle_is_runtime_owned(
     )
     assert access["token_profile"] == "oauth-access-token"
     assert access["sender_constraint_kind"] == "dpop"
+    stored = await read_token_record(
+        {
+            "payload": {"token_hash": "access-digest"},
+            "db": administrator_storage,
+        }
+    )
+    assert stored["token_hash"] == "access-digest"
+    assert stored.get("last_introspected_at") is None
     introspected = await introspect_token_record(
         {
             "payload": {"token_hash": "access-digest"},
@@ -135,6 +144,7 @@ def test_token_record_runtime_spec_preserves_operation_identity() -> None:
         if operation.extra.get("owner_layer") == "30-storage-runtime"
     }
     assert set(operations) == {
+        "get_by_hash",
         "introspect",
         "mark_rotated",
         "persist_issued",

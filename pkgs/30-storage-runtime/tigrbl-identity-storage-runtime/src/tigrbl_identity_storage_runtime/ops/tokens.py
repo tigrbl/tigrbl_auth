@@ -149,6 +149,22 @@ async def persist_issued_token(ctx: Mapping[str, Any]) -> Any:
     )
 
 
+async def read_token_record(ctx: Mapping[str, Any]) -> Any:
+    """Read one token record by a supplied digest without mutating lifecycle state."""
+
+    from tigrbl_identity_storage.tables import TokenRecord
+
+    payload = payload_from_context(ctx)
+    digest = payload.get("token_hash")
+    if not digest:
+        raise ValueError("token_hash is required")
+    return await first_table_record(
+        TokenRecord,
+        database_from_context(ctx),
+        {"token_hash": digest},
+    )
+
+
 async def mark_refresh_token_rotated(ctx: Mapping[str, Any]) -> Any:
     from tigrbl_identity_storage.tables import TokenRecord
 
@@ -280,5 +296,6 @@ __all__ = [
     "introspect_token_record",
     "mark_refresh_token_rotated",
     "persist_issued_token",
+    "read_token_record",
     "revoke_refresh_token_family",
 ]
