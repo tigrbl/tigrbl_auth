@@ -87,6 +87,14 @@ Required ownership rules:
 - [x] `3b3916aa` moves API/service-key digest calculation and constant-time
   comparison into their layer-20 authenticator providers; layer 30 now owns
   lookup/touch durability only.
+- [x] `d82f4d05` removes import-time Tigrbl binding from layer 01 and leaves
+  runtime table activation to the explicit layer-30 initializer.
+- [x] `3b2bb72e` moves OAuth and OIDC wire schemas out of mapped storage
+  records, deletes the storage OpenAPI/schema mutator surfaces, and makes the
+  versioned protocol packages their canonical owners.
+- [x] `a0a3e431` removes the last storage-side token helper and PAR lifecycle
+  methods; layer 01 now contains mapped state and migrations without runtime
+  operations, hooks, HTTP models, providers, or ambient binding.
 - [x] `99e5b01`, `8994e5b8`, `5a7bbf1c`, and `85eb0d4f` move delegation,
   device-code, crypto-key, and audit lifecycles into layer-30 table runtimes.
 - [x] `b5e74c46` centralizes durable handler execution in layer 30, and
@@ -622,7 +630,7 @@ flags. Tier-4 claims require independent interoperability evidence.
 - [x] C0: capability operation definition correction.
 - [x] C1: layer-30 Tigrbl construction/activation foundation.
 - [x] C2: graph algorithm/runtime split.
-- [ ] C3: finish all durable operations/hooks out of layer 01.
+- [x] C3: finish all durable operations/hooks out of layer 01.
 - [ ] C4: remove route/runtime/provider imports from layer 01 and move routers
   to layer 80.
 - [x] C5: finish claim package/facade cleanup and remove protocol-specific
@@ -1032,11 +1040,10 @@ The final audit proves:
    storage models.
 2. **C3b delegation/device/key/audit**: move remaining operations/hooks and
    delete layer-01 `_ops` use.
-3. **C4 routes/runtime barrels**: My Account, identity, realm, and tenant HTTP
-   ownership is complete. Next move admin-auth DTO ownership out of `User`,
-   migrate `User.lookup_by_identifier`/`op_ctx` to the identity table runtime,
-   move bootstrap password materialization to provider/runtime composition,
-   then remove remaining runtime/API exports from layer 01.
+3. **C4 routes/runtime barrels**: My Account, identity, realm, tenant, and
+   protocol-schema ownership is complete. Next add the missing OAuth
+   capability seam, move token/introspection/revocation/PAR/registration and
+   related HTTP bindings out of layer 30, and mount them from layer 80.
 4. **C5 neutral reusable ownership**: claims facade, scope matcher, subject
    strategy, OAuth/OIDC base cleanup.
 5. **C6 EAT chain**: typed token verifiers, verified evidence, appraisal
