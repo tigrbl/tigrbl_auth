@@ -85,6 +85,12 @@ Required ownership rules:
 - [x] `25815389` moves the remaining My Account profile, credential, consent,
   and route-composition HTTP surfaces into the layer-80 product; layer 30 now
   retains only the durable consent operations consumed by those routes.
+- [x] `525f8223` separates admin-auth routing from the `User` storage record and
+  moves password verification/hashing on that path to the bcrypt provider.
+- [x] `7fa813a3` moves identity-administration DTOs and routes to the layer-80
+  platform-admin product while preserving admin-gate behavior.
+- [x] `9a8be20d` moves realm-administration DTOs and routes to that same product,
+  leaving `Realm` as a mapped record and bootstrap definition.
 - [x] Claim primitives, contracts, bases, `ClaimType`, `ClaimValueType`,
   `ClaimNameKind`, and standalone concrete claim packages exist.
 - [x] Protocol-neutral scope matching exists as
