@@ -192,6 +192,14 @@ Required ownership rules:
   moves request validation, session termination planning, fan-out observation,
   audit, redirect, and cookie behavior to layer 60, and removes logout routing
   from layer 30.
+- [x] `46822cdc` adds the standalone layer-80 interactive session-login API,
+  moves login authentication/session/token/cookie/audit orchestration to layer
+  60, assigns the public `CredsIn` schema to its API owner, and removes login
+  routing from layer 30.
+- [x] `fd512899` adds and mounts the standalone layer-80 RFC 8628 device
+  authorization carrier, moves request-scoped issuer, durable device-code and
+  audit composition to layer 60, and removes device-authorization routing from
+  layer 30.
 
 ## 3. Layer 00: primitives
 
@@ -683,8 +691,8 @@ flags. Tier-4 claims require independent interoperability evidence.
   to layer 80.
   RFC 7662 introspection, RFC 7009 revocation, RFC 9126 PAR, and RFC 7591/7592
   client registration/management, token, and authorization are complete;
-  UserInfo and logout are also complete. Login, device authorization,
-  discovery, and token-exchange carriers remain.
+  UserInfo, logout, login, and device authorization are also complete.
+  Discovery and token-exchange carriers remain.
 - [x] C5: finish claim package/facade cleanup and remove protocol-specific
   deterministic package names.
 - [x] C6: finish EAT token/evidence/appraisal/provider verification chain.
@@ -1101,9 +1109,10 @@ The final audit proves:
    Token and authorization now have standalone layer-80 carriers and layer-60
    runtime composition; UserInfo now also has descriptive layer-50 ownership,
    layer-60 runtime composition, and a standalone layer-80 carrier; logout now
-   follows the same layer-60/80 split. Next move login, device authorization,
-   discovery, token-exchange, and related HTTP bindings out of layer 30 and
-   mount them from layer 80.
+   follows the same layer-60/80 split. Login and RFC 8628 device authorization
+   now also have standalone layer-80 carriers. Next move discovery,
+   token-exchange, and related HTTP bindings out of layer 30 and mount them
+   from layer 80.
 4. **C5 neutral reusable ownership**: claims facade, scope matcher, subject
    strategy, OAuth/OIDC base cleanup.
 5. **C6 EAT chain**: typed token verifiers, verified evidence, appraisal
