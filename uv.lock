@@ -2935,6 +2935,7 @@ dependencies = [
     { name = "tigrbl-svid-concrete" },
     { name = "tigrbl-svid-verifier-provider" },
     { name = "tigrbl-token-bases" },
+    { name = "tigrbl-token-introspection-capability" },
     { name = "tigrbl-trust-anchor-provider" },
     { name = "tigrbl-trust-federation-graph-concrete" },
     { name = "tigrbl-typing" },
@@ -3284,6 +3285,7 @@ requires-dist = [
     { name = "tigrbl-svid-concrete", editable = "pkgs/10-concrete/tigrbl-svid-concrete" },
     { name = "tigrbl-svid-verifier-provider", editable = "pkgs/20-providers/tigrbl-svid-verifier-provider" },
     { name = "tigrbl-token-bases", editable = "pkgs/05-bases/tigrbl-token-bases" },
+    { name = "tigrbl-token-introspection-capability", editable = "pkgs/40-capabilities/tigrbl-token-introspection-capability" },
     { name = "tigrbl-trust-anchor-provider", editable = "pkgs/20-providers/tigrbl-trust-anchor-provider" },
     { name = "tigrbl-trust-federation-graph-concrete", editable = "pkgs/10-concrete/tigrbl-trust-federation-graph-concrete" },
     { name = "tigrbl-typing", specifier = "==0.4.4.dev1" },
@@ -6851,6 +6853,21 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-token-introspection-capability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/40-capabilities/tigrbl-token-introspection-capability" }
+dependencies = [
+    { name = "tigrbl-capability" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-capability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-trust-anchor-provider"

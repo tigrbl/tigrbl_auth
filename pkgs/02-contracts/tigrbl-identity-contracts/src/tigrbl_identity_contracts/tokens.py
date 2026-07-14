@@ -89,6 +89,24 @@ class TokenVerificationResult:
     replay: ReplayValidation | None = None
 
 
+@dataclass(frozen=True, slots=True)
+class TokenIntrospectionRequest:
+    token: str
+    expected_profile: TokenProfile | None = None
+
+    def __post_init__(self) -> None:
+        if not self.token:
+            raise ValueError("token is required for introspection")
+
+
+@dataclass(frozen=True, slots=True)
+class TokenIntrospectionResult:
+    active: bool
+    claims: Mapping[str, object] = field(default_factory=dict)
+    profile: TokenProfile | None = None
+    reason: str | None = None
+
+
 class TokenIssuerPort(Protocol):
     def issue(
         self, profile: TokenProfile, claims: Mapping[str | int, object], /
@@ -111,6 +129,8 @@ __all__ = [
     "ReplayValidation",
     "SenderConstraint",
     "TokenIssuerPort",
+    "TokenIntrospectionRequest",
+    "TokenIntrospectionResult",
     "TokenEnvelopeFormat",
     "TokenProfile",
     "ProtectedTokenEnvelope",

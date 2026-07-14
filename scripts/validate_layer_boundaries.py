@@ -91,6 +91,9 @@ CAPABILITY_PURPOSES = {
     "tigrbl-security-events": (
         "coordinate security-event transmission, receipt, and recording"
     ),
+    "tigrbl-token-introspection-capability": (
+        "coordinate protocol-neutral token-state lookup and profile validation"
+    ),
     "tigrbl-workload-identity": (
         "coordinate workload credential retrieval and identity verification"
     ),
