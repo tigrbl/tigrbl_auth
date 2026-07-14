@@ -5,8 +5,14 @@ from __future__ import annotations
 from urllib.parse import parse_qs
 
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_storage.framework import HTTPException, Request, TigrblApp, TigrblRouter, status
-from tigrbl_identity_storage.persistence import (
+from tigrbl_identity_storage.framework import (
+    HTTPException,
+    Request,
+    TigrblApp,
+    TigrblRouter,
+    status,
+)
+from .token_lifecycle import (
     is_revoked,
     is_revoked_async,
     is_token_revoked,
@@ -30,7 +36,9 @@ api = router = TigrblRouter()
 @api.route(CANONICAL_REVOCATION_PATH, methods=["POST"], response_model=RevocationOut)
 async def revoke(request: Request) -> dict[str, bool]:
     if not settings.enable_rfc7009:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, f"RFC 7009 disabled: {RFC7009_SPEC_URL}")
+        raise HTTPException(
+            status.HTTP_404_NOT_FOUND, f"RFC 7009 disabled: {RFC7009_SPEC_URL}"
+        )
     body = getattr(request, "body", b"") or b""
     form_data = parse_qs(body.decode("utf-8"), keep_blank_values=True)
     token = (form_data.get("token") or [None])[0]
@@ -38,7 +46,9 @@ async def revoke(request: Request) -> dict[str, bool]:
     if not token:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "token parameter required")
 
-    await revoke_token_async(token, token_type_hint=token_type_hint, reason="revoked_via_endpoint")
+    await revoke_token_async(
+        token, token_type_hint=token_type_hint, reason="revoked_via_endpoint"
+    )
     await append_audit_event_async(
         event_type="token.revoked",
         target_type="token",
@@ -50,7 +60,8 @@ async def revoke(request: Request) -> dict[str, bool]:
 
 def include_revocation_endpoint(app: TigrblApp) -> None:
     if settings.enable_rfc7009 and not any(
-        (getattr(route, "path", None) or getattr(route, "path_template", None)) == CANONICAL_REVOCATION_PATH
+        (getattr(route, "path", None) or getattr(route, "path_template", None))
+        == CANONICAL_REVOCATION_PATH
         for route in app.router.routes
     ):
         app.include_router(api)

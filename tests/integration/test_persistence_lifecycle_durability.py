@@ -10,21 +10,21 @@ from tigrbl_identity_jose.key_management import hash_pw
 from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
 from tigrbl_identity_storage_runtime import (
     append_audit_event_async,
-    initializeIdentityRuntimeTables,
-)
-from tigrbl_identity_storage.persistence import (
     create_session_async,
     get_active_session_async,
     get_session_async,
     get_token_record_async,
-    is_token_revoked_async,
     introspect_token_async,
-    record_consent_async,
-    revoke_consent_async,
+    is_token_revoked_async,
+    initializeIdentityRuntimeTables,
     revoke_token_async,
     rotate_session_cookie_secret_async,
     touch_session_async,
     upsert_token_record_async,
+)
+from tigrbl_identity_storage.persistence import (
+    record_consent_async,
+    revoke_consent_async,
 )
 from tigrbl_auth.services.token_service import (
     JWTCoder,
@@ -32,7 +32,16 @@ from tigrbl_auth.services.token_service import (
     issue_persisted_token_pair,
     redeem_refresh_token,
 )
-from tigrbl_auth.tables import AuditEvent, AuthSession, Client, ClientRegistration, Consent, LogoutState, Tenant, User
+from tigrbl_auth.tables import (
+    AuditEvent,
+    AuthSession,
+    Client,
+    ClientRegistration,
+    Consent,
+    LogoutState,
+    Tenant,
+    User,
+)
 
 
 pytestmark = [pytest.mark.integration, pytest.mark.asyncio]
@@ -45,7 +54,11 @@ def _activate_durable_runtime_operations():
 
 async def _identity_triplet(db_session):
     suffix = uuid4().hex[:8]
-    tenant = Tenant(slug=f"tenant-{suffix}", name=f"Tenant {suffix}", email=f"tenant-{suffix}@example.com")
+    tenant = Tenant(
+        slug=f"tenant-{suffix}",
+        name=f"Tenant {suffix}",
+        email=f"tenant-{suffix}@example.com",
+    )
     db_session.add(tenant)
     await db_session.commit()
 
@@ -84,14 +97,18 @@ async def test_token_revocation_and_introspection_state_is_durable(db_session):
         "exp": int((now + timedelta(minutes=30)).timestamp()),
     }
 
-    digest = await upsert_token_record_async(token, claims, token_kind="access", token_type_hint="access_token")
+    digest = await upsert_token_record_async(
+        token, claims, token_kind="access", token_type_hint="access_token"
+    )
     assert digest
 
     active_payload = await introspect_token_async(token)
     assert active_payload["active"] is True
     assert active_payload["sub"] == str(user.id)
 
-    await revoke_token_async(token, token_type_hint="access_token", reason="capability-durability")
+    await revoke_token_async(
+        token, token_type_hint="access_token", reason="capability-durability"
+    )
     assert await is_token_revoked_async(token) is True
 
     inactive_payload = await introspect_token_async(token)
@@ -113,7 +130,9 @@ async def test_session_logout_consent_and_audit_roundtrip_is_durable(db_session)
     assert session.id is not None
 
     await touch_session_async(session.id)
-    await rotate_session_cookie_secret_async(session.id, cookie_secret_hash="cookie-hash-2")
+    await rotate_session_cookie_secret_async(
+        session.id, cookie_secret_hash="cookie-hash-2"
+    )
     persisted_session = await get_session_async(session.id)
     assert persisted_session is not None
     assert persisted_session.cookie_secret_hash == "cookie-hash-2"
@@ -157,10 +176,18 @@ async def test_session_logout_consent_and_audit_roundtrip_is_durable(db_session)
     assert logout.status == "pending"
 
     await LogoutState.handlers.mark_channel.core(
-        {"path_params": {"id": logout.id}, "payload": {"logout_id": logout.id, "channel": "frontchannel"}, "db": db_session}
+        {
+            "path_params": {"id": logout.id},
+            "payload": {"logout_id": logout.id, "channel": "frontchannel"},
+            "db": db_session,
+        }
     )
     await LogoutState.handlers.mark_channel.core(
-        {"path_params": {"id": logout.id}, "payload": {"logout_id": logout.id, "channel": "backchannel"}, "db": db_session}
+        {
+            "path_params": {"id": logout.id},
+            "payload": {"logout_id": logout.id, "channel": "backchannel"},
+            "db": db_session,
+        }
     )
     latest_logout = await LogoutState.handlers.latest_for_session.core(
         {"payload": {"session_id": session.id}, "db": db_session}
@@ -184,8 +211,12 @@ async def test_session_logout_consent_and_audit_roundtrip_is_durable(db_session)
     assert event.id is not None
 
     db_session.expire_all()
-    saved_consent = await db_session.scalar(select(Consent).where(Consent.id == consent.id))
-    saved_audit = await db_session.scalar(select(AuditEvent).where(AuditEvent.id == event.id))
+    saved_consent = await db_session.scalar(
+        select(Consent).where(Consent.id == consent.id)
+    )
+    saved_audit = await db_session.scalar(
+        select(AuditEvent).where(AuditEvent.id == event.id)
+    )
     assert saved_consent is not None and saved_consent.state == "revoked"
     assert saved_audit is not None and saved_audit.event_type == "session.logout"
 
@@ -207,7 +238,8 @@ async def test_client_registration_metadata_roundtrip_is_durable(db_session):
                 "software_id": "capability-client",
                 "software_version": "9.0",
                 "registration_access_token_hash": "rat-hash",
-                "registration_client_uri": "https://issuer.example/register/" + str(client.id),
+                "registration_client_uri": "https://issuer.example/register/"
+                + str(client.id),
             },
             "db": db_session,
         }
@@ -220,10 +252,15 @@ async def test_client_registration_metadata_roundtrip_is_durable(db_session):
     persisted = result["items"][0] if isinstance(result, dict) else result[0]
     assert persisted is not None
     assert persisted.software_id == "capability-client"
-    assert persisted.registration_metadata["token_endpoint_auth_method"] == "client_secret_basic"
+    assert (
+        persisted.registration_metadata["token_endpoint_auth_method"]
+        == "client_secret_basic"
+    )
 
 
-async def test_refresh_token_rotation_and_reuse_rejection_is_durable(db_session, test_db_engine):
+async def test_refresh_token_rotation_and_reuse_rejection_is_durable(
+    db_session, test_db_engine
+):
     tenant, user, client = await _identity_triplet(db_session)
     jwt = await JWTCoder.async_default()
 
@@ -270,7 +307,9 @@ async def test_refresh_token_rotation_and_reuse_rejection_is_durable(db_session,
         await dispose_result
 
 
-async def test_issue_persisted_token_pair_retains_authorization_trace_and_delegation_provenance(db_session):
+async def test_issue_persisted_token_pair_retains_authorization_trace_and_delegation_provenance(
+    db_session,
+):
     tenant, user, client = await _identity_triplet(db_session)
     jwt = await JWTCoder.async_default()
     authorization_trace = {
@@ -309,7 +348,14 @@ async def test_issue_persisted_token_pair_retains_authorization_trace_and_delega
     refresh_record = await get_token_record_async(refresh_token)
     assert access_record is not None
     assert refresh_record is not None
-    assert access_record.claims["authorization_trace"]["decision_key"] == "decision-key-1"
+    assert (
+        access_record.claims["authorization_trace"]["decision_key"] == "decision-key-1"
+    )
     assert access_record.claims["delegation_provenance"]["lineage_id"] == "lineage-1"
-    assert refresh_record.claims["authorization_trace"]["request_hash"] == "request-hash-1"
-    assert refresh_record.claims["delegation_provenance"]["edge"]["decision_key"] == "decision-key-1"
+    assert (
+        refresh_record.claims["authorization_trace"]["request_hash"] == "request-hash-1"
+    )
+    assert (
+        refresh_record.claims["delegation_provenance"]["edge"]["decision_key"]
+        == "decision-key-1"
+    )

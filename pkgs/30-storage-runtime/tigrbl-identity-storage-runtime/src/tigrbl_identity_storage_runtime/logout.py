@@ -5,18 +5,32 @@ from pathlib import Path
 from urllib.parse import parse_qs
 from uuid import UUID
 
-from tigrbl_auth_protocol_oidc.standards.rp_initiated_logout import build_logout_plan, validate_logout_request
+from tigrbl_auth_protocol_oidc.standards.rp_initiated_logout import (
+    build_logout_plan,
+    validate_logout_request,
+)
 from tigrbl_auth_protocol_oidc.standards.session_mgmt import resolve_browser_session
-from tigrbl_identity_runtime.deployment import deployment_from_app, deployment_from_request
+from tigrbl_identity_runtime.deployment import (
+    deployment_from_app,
+    deployment_from_request,
+)
 from tigrbl_identity_runtime.http_standards.cookies import (
     clear_session_cookie,
     describe_runtime_policy,
     parse_session_cookie_value,
 )
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_storage.framework import Depends, HTTPException, JSONResponse, RedirectResponse, TigrblApp, TigrblRouter, status
+from tigrbl_identity_storage.framework import (
+    Depends,
+    HTTPException,
+    JSONResponse,
+    RedirectResponse,
+    TigrblApp,
+    TigrblRouter,
+    status,
+)
 from .ops.audit import append_audit_event_async
-from tigrbl_identity_storage.persistence import get_session_async
+from .session_lifecycle import get_session_async
 from tigrbl_identity_storage.tables.engine import get_db
 
 
@@ -55,7 +69,9 @@ def _body_params(body: bytes) -> dict[str, str]:
 
 def _cookie_session_id(request) -> UUID | None:
     try:
-        cookie_value = (getattr(request, "cookies", None) or {}).get(settings.session_cookie_name)
+        cookie_value = (getattr(request, "cookies", None) or {}).get(
+            settings.session_cookie_name
+        )
         parsed = parse_session_cookie_value(cookie_value)
         return parsed.session_id if parsed is not None else None
     except Exception:
@@ -65,7 +81,9 @@ def _cookie_session_id(request) -> UUID | None:
 async def logout_request(*, request, db):
     deployment = deployment_from_request(request, settings)
     if not deployment.flag_enabled("enable_oidc_rp_initiated_logout"):
-        return JSONResponse({"error": "logout disabled"}, status_code=status.HTTP_404_NOT_FOUND)
+        return JSONResponse(
+            {"error": "logout disabled"}, status_code=status.HTTP_404_NOT_FOUND
+        )
 
     params = _query_params(request)
     if not params:
@@ -81,7 +99,9 @@ async def logout_request(*, request, db):
     if session is None:
         cookie_session_id = _cookie_session_id(request)
         if cookie_session_id is not None:
-            raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_session_cookie"})
+            raise HTTPException(
+                status.HTTP_400_BAD_REQUEST, {"error": "invalid_session_cookie"}
+            )
 
     context = await validate_logout_request(
         requested_client_id=params.get("client_id"),
@@ -119,21 +139,33 @@ async def logout_request(*, request, db):
             target_type="session",
             target_id=str(session.id),
             details={
-                "logout_id": str(getattr(logout_record, "id", "")) if logout_record is not None else None,
-                "frontchannel_required": bool(getattr(logout_record, "frontchannel_required", False))
+                "logout_id": str(getattr(logout_record, "id", ""))
+                if logout_record is not None
+                else None,
+                "frontchannel_required": bool(
+                    getattr(logout_record, "frontchannel_required", False)
+                )
                 if logout_record is not None
                 else False,
-                "backchannel_required": bool(getattr(logout_record, "backchannel_required", False))
+                "backchannel_required": bool(
+                    getattr(logout_record, "backchannel_required", False)
+                )
                 if logout_record is not None
                 else False,
             },
         )
 
-    metadata = dict(getattr(logout_record, "logout_metadata", {}) or {}) if logout_record is not None else {}
+    metadata = (
+        dict(getattr(logout_record, "logout_metadata", {}) or {})
+        if logout_record is not None
+        else {}
+    )
     payload = {
         "status": "logged_out" if session is not None else "no_active_session",
         "session_id": str(session.id) if session is not None else None,
-        "logout_id": str(getattr(logout_record, "id", "")) if logout_record is not None else None,
+        "logout_id": str(getattr(logout_record, "id", ""))
+        if logout_record is not None
+        else None,
         "post_logout_redirect_uri": redirect_uri,
         "state": params.get("state"),
         "cookie_cleared": True,
@@ -180,7 +212,9 @@ async def logout(request, db=Depends(get_db)):
             "logout_id": headers.get("x-tigrbl-auth-logout-id"),
             "session_id": headers.get("x-tigrbl-auth-session-id"),
         }
-    observe_logout_response(_repo_root(), session_id=payload.get("session_id"), details=payload)
+    observe_logout_response(
+        _repo_root(), session_id=payload.get("session_id"), details=payload
+    )
     return result
 
 

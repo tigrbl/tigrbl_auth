@@ -45,12 +45,12 @@ from tigrbl_identity_storage.tables.engine import get_db
 from tigrbl_principal_authentication import ClientSecretAuthenticationCapability
 
 from .ops.clients import lookup_client
-from tigrbl_identity_storage.persistence import (
+from .token_lifecycle import (
     reset_token_state as _reset_token_state,
     reset_token_state_async as _reset_token_state_async,
 )
 from tigrbl_identity_storage.tables.token_record import IntrospectOut
-from tigrbl_identity_storage.persistence import (
+from .token_lifecycle import (
     introspect_token_async as _introspect_token_async,
     remove_token_record_async,
     upsert_token_record_async as _record_token_async,
@@ -93,7 +93,9 @@ def _optional_registration_unavailable(exc: Exception) -> bool:
     ) or ("does not exist" in message and ("relation" in message or "table" in message))
 
 
-async def _load_client(db: Any, client_id: str) -> tuple[Client | None, ClientRegistration | None]:
+async def _load_client(
+    db: Any, client_id: str
+) -> tuple[Client | None, ClientRegistration | None]:
     try:
         client_key: UUID | str = UUID(str(client_id))
     except ValueError:
@@ -102,24 +104,36 @@ async def _load_client(db: Any, client_id: str) -> tuple[Client | None, ClientRe
     registration = None
     if client is not None:
         try:
-            registration = await first_handler_record(ClientRegistration, db, {"client_id": client.id})
+            registration = await first_handler_record(
+                ClientRegistration, db, {"client_id": client.id}
+            )
         except Exception as exc:
             if not _optional_registration_unavailable(exc):
                 raise
     return client, registration
 
 
-def _registered_token_endpoint_auth_method(registration: ClientRegistration | None) -> str:
-    raw_metadata = getattr(registration, "registration_metadata", None) if registration is not None else None
+def _registered_token_endpoint_auth_method(
+    registration: ClientRegistration | None,
+) -> str:
+    raw_metadata = (
+        getattr(registration, "registration_metadata", None)
+        if registration is not None
+        else None
+    )
     metadata = raw_metadata if isinstance(raw_metadata, dict) else {}
-    return str(metadata.get("token_endpoint_auth_method") or DEFAULT_TOKEN_ENDPOINT_AUTH_METHOD)
+    return str(
+        metadata.get("token_endpoint_auth_method") or DEFAULT_TOKEN_ENDPOINT_AUTH_METHOD
+    )
 
 
 def _introspect_token(token: str) -> Dict[str, Any]:
     return run_async(_introspect_token_async(token))
 
 
-def _record_token(token: str, claims: Dict[str, Any], token_kind: str | None = None) -> str:
+def _record_token(
+    token: str, claims: Dict[str, Any], token_kind: str | None = None
+) -> str:
     return run_async(_record_token_async(token, claims, token_kind=token_kind))
 
 
@@ -160,7 +174,9 @@ async def _authorize_introspection_caller(
             decoded = base64.b64decode(auth.split()[1]).decode()
             client_id, client_secret = decoded.split(":", 1)
         except Exception as exc:
-            raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client") from exc
+            raise HTTPException(
+                int(_HTTPStatus.UNAUTHORIZED), "invalid_client"
+            ) from exc
     else:
         client_id = str(form_data.get("client_id") or "").strip() or None
         client_secret = str(form_data.get("client_secret") or "").strip() or None
@@ -174,22 +190,35 @@ async def _authorize_introspection_caller(
                 client_id=None,
             )
         except ValueError as exc:
-            raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client") from exc
+            raise HTTPException(
+                int(_HTTPStatus.UNAUTHORIZED), "invalid_client"
+            ) from exc
         client_id = str(claims.get("iss") or "").strip() or None
 
     if not client_id:
-        raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "authenticated caller required")
+        raise HTTPException(
+            int(_HTTPStatus.UNAUTHORIZED), "authenticated caller required"
+        )
 
     client, registration = await _load_client(db, str(client_id))
     if client is None:
         raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client")
 
     registered_auth_method = _registered_token_endpoint_auth_method(registration)
-    raw_registration_metadata = getattr(registration, "registration_metadata", None) if registration is not None else None
-    registration_metadata = raw_registration_metadata if isinstance(raw_registration_metadata, dict) else {}
+    raw_registration_metadata = (
+        getattr(registration, "registration_metadata", None)
+        if registration is not None
+        else None
+    )
+    registration_metadata = (
+        raw_registration_metadata if isinstance(raw_registration_metadata, dict) else {}
+    )
 
     if client_assertion:
-        if PRIVATE_KEY_JWT_AUTH_METHOD not in allowed_auth_methods or registered_auth_method != PRIVATE_KEY_JWT_AUTH_METHOD:
+        if (
+            PRIVATE_KEY_JWT_AUTH_METHOD not in allowed_auth_methods
+            or registered_auth_method != PRIVATE_KEY_JWT_AUTH_METHOD
+        ):
             raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client")
         try:
             authenticate_client_assertion(
@@ -200,7 +229,9 @@ async def _authorize_introspection_caller(
                 token_endpoint_auth_method=registered_auth_method,
             )
         except ValueError as exc:
-            raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client") from exc
+            raise HTTPException(
+                int(_HTTPStatus.UNAUTHORIZED), "invalid_client"
+            ) from exc
         return None
 
     if registered_auth_method in SUPPORTED_MTLS_AUTH_METHODS:
@@ -214,14 +245,20 @@ async def _authorize_introspection_caller(
                 token_endpoint_auth_method=registered_auth_method,
             )
         except ValueError as exc:
-            raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client") from exc
+            raise HTTPException(
+                int(_HTTPStatus.UNAUTHORIZED), "invalid_client"
+            ) from exc
         return None
 
     if registered_auth_method == "client_secret_post":
         if registered_auth_method not in allowed_auth_methods or not client_secret:
             raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client")
     elif registered_auth_method == "client_secret_basic":
-        if registered_auth_method not in allowed_auth_methods or not auth.startswith("Basic ") or not client_secret:
+        if (
+            registered_auth_method not in allowed_auth_methods
+            or not auth.startswith("Basic ")
+            or not client_secret
+        ):
             raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client")
     else:
         raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client")
@@ -309,7 +346,9 @@ async def _request_form_data(request: Request) -> dict[str, Any]:
         body = b""
     return {
         key: values[-1] if isinstance(values, list) and values else values
-        for key, values in parse_qs(bytes(body).decode("utf-8"), keep_blank_values=True).items()
+        for key, values in parse_qs(
+            bytes(body).decode("utf-8"), keep_blank_values=True
+        ).items()
     }
 
 
@@ -321,7 +360,11 @@ async def introspect(request: Request, db: AsyncSession = Depends(get_db)):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "introspection disabled")
     form_data = await _request_form_data(request)
     token_value = form_data.get("token")
-    token = token_value[-1] if isinstance(token_value, list) and token_value else token_value
+    token = (
+        token_value[-1]
+        if isinstance(token_value, list) and token_value
+        else token_value
+    )
     if not token:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "token parameter required")
     await _authorize_introspection_caller(request, form_data, db)

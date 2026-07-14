@@ -209,15 +209,21 @@ def test_split_package_metadata_declares_independent_import_roots() -> None:
 
 def test_email_schema_packages_declare_email_validator_dependency() -> None:
     for dist_name in ("tigrbl-identity-server",):
-        metadata = tomllib.loads((_package_path(dist_name) / "pyproject.toml").read_text(encoding="utf-8"))
+        metadata = tomllib.loads(
+            (_package_path(dist_name) / "pyproject.toml").read_text(encoding="utf-8")
+        )
         dependencies = set(metadata["project"].get("dependencies", []))
 
-        assert any(item.startswith("email-validator") for item in dependencies), dist_name
+        assert any(item.startswith("email-validator") for item in dependencies), (
+            dist_name
+        )
 
 
 def test_identity_server_declares_tigrbl_framework_dependency() -> None:
     metadata = tomllib.loads(
-        (_package_path("tigrbl-identity-server") / "pyproject.toml").read_text(encoding="utf-8")
+        (_package_path("tigrbl-identity-server") / "pyproject.toml").read_text(
+            encoding="utf-8"
+        )
     )
 
     dependencies = set(metadata["project"].get("dependencies", []))
@@ -227,11 +233,17 @@ def test_identity_server_declares_tigrbl_framework_dependency() -> None:
 
 def test_oauth_protocol_declares_security_proof_dependencies() -> None:
     metadata = tomllib.loads(
-        (_package_path("tigrbl-auth-protocol-oauth") / "pyproject.toml").read_text(encoding="utf-8")
+        (_package_path("tigrbl-auth-protocol-oauth") / "pyproject.toml").read_text(
+            encoding="utf-8"
+        )
     )
 
-    assert "swarmauri_signing_dpop==0.1.1" in set(metadata["project"].get("dependencies", []))
-    assert "tigrbl-security-proof-pkce==0.1.0" in set(metadata["project"].get("dependencies", []))
+    assert "swarmauri_signing_dpop==0.1.1" in set(
+        metadata["project"].get("dependencies", [])
+    )
+    assert "tigrbl-security-proof-pkce==0.1.0" in set(
+        metadata["project"].get("dependencies", [])
+    )
 
 
 def test_runtime_token_service_exports_async_runtime_helper() -> None:
@@ -284,9 +296,7 @@ def test_authn_credentials_no_longer_owns_token_or_session_service_modules() -> 
     _install_package_src_paths()
 
     credentials_root = (
-        _package_path("tigrbl-authn-credentials")
-        / "src"
-        / "tigrbl_authn_credentials"
+        _package_path("tigrbl-authn-credentials") / "src" / "tigrbl_authn_credentials"
     )
 
     assert not (credentials_root / "token_service.py").exists()
@@ -348,7 +358,9 @@ def test_credentials_async_token_paths_use_async_persistence_hooks() -> None:
 def test_oauth_revocation_exports_async_runtime_hooks() -> None:
     _install_package_src_paths()
 
-    split_module = importlib.import_module("tigrbl_auth_protocol_oauth.standards.revocation")
+    split_module = importlib.import_module(
+        "tigrbl_auth_protocol_oauth.standards.revocation"
+    )
     runtime_source = (
         _package_path("tigrbl-identity-jose")
         / "src"
@@ -359,13 +371,18 @@ def test_oauth_revocation_exports_async_runtime_hooks() -> None:
     assert inspect.iscoroutinefunction(split_module.revoke_token_async)
     assert inspect.iscoroutinefunction(split_module.is_revoked_async)
     assert inspect.iscoroutinefunction(split_module.reset_revocations_async)
-    assert "from tigrbl_auth_protocol_oauth.standards.revocation import is_revoked, is_revoked_async" in runtime_source
+    assert (
+        "from tigrbl_auth_protocol_oauth.standards.revocation import is_revoked, is_revoked_async"
+        in runtime_source
+    )
 
 
 def test_oauth_introspection_exports_async_runtime_hooks() -> None:
     _install_package_src_paths()
 
-    split_module = importlib.import_module("tigrbl_auth_protocol_oauth.standards.introspection")
+    split_module = importlib.import_module(
+        "tigrbl_auth_protocol_oauth.standards.introspection"
+    )
     runtime_source = (
         _package_path("tigrbl-identity-jose")
         / "src"
@@ -383,7 +400,9 @@ def test_oauth_introspection_exports_async_runtime_hooks() -> None:
 def test_oidc_backchannel_logout_uses_storage_replay_table() -> None:
     _install_package_src_paths()
 
-    backchannel_logout = importlib.import_module("tigrbl_auth_protocol_oidc.standards.backchannel_logout")
+    backchannel_logout = importlib.import_module(
+        "tigrbl_auth_protocol_oidc.standards.backchannel_logout"
+    )
     tables = importlib.import_module("tigrbl_identity_storage.tables")
     source = (
         _package_path("tigrbl-auth-protocol-oidc")
@@ -396,7 +415,10 @@ def test_oidc_backchannel_logout_uses_storage_replay_table() -> None:
     assert backchannel_logout.replay_store_snapshot() == {
         "replay_store": "table:BackchannelLogoutReplay"
     }
-    assert tables.TABLE_MODEL_BY_NAME["BackchannelLogoutReplay"] is tables.BackchannelLogoutReplay
+    assert (
+        tables.TABLE_MODEL_BY_NAME["BackchannelLogoutReplay"]
+        is tables.BackchannelLogoutReplay
+    )
     assert "BackchannelLogoutReplay.handlers.register" not in source
     persistence_source = (
         _package_path("tigrbl-identity-storage-runtime")
@@ -404,7 +426,8 @@ def test_oidc_backchannel_logout_uses_storage_replay_table() -> None:
         / "tigrbl_identity_storage_runtime"
         / "oidc_persistence.py"
     ).read_text(encoding="utf-8")
-    assert "BackchannelLogoutReplay.handlers.register" in persistence_source
+    assert "register_backchannel_logout_replay" in persistence_source
+    assert "BackchannelLogoutReplay.handlers.register" not in persistence_source
     assert "_REPLAY_STORE" not in source
     assert "tigrbl_auth_protocol_oidc_backchannel_replay_store" not in source
 
@@ -435,7 +458,9 @@ def test_authorize_routes_use_opaque_browser_session_resolver() -> None:
     assert not route_paths["protocol"].exists()
     assert not route_paths["protocol_op"].exists()
 
-    runtime_authorization_source = route_paths["runtime_authorization"].read_text(encoding="utf-8")
+    runtime_authorization_source = route_paths["runtime_authorization"].read_text(
+        encoding="utf-8"
+    )
 
     assert not route_paths["storage_authorize_ops"].exists()
     assert "authorize_request" in runtime_authorization_source

@@ -6,11 +6,14 @@ from uuid import uuid4
 
 from tigrbl_auth.api.rest.schemas import DynamicClientRegistrationIn
 import tigrbl_identity_storage_runtime.par as par_ops
-import tigrbl_identity_storage_runtime.client_registration as register_ops
+import tigrbl_identity_storage_runtime._client_registration_create as register_ops
 import tigrbl_identity_storage_runtime.device_authorization as device_auth_ops
 import tigrbl_identity_storage_runtime.logout as logout_ops
 from tigrbl_auth_protocol_oidc.standards import rp_initiated_logout as rp_logout
-from tigrbl_auth_protocol_oidc.standards.session_mgmt import compute_session_state, session_state_for_client
+from tigrbl_auth_protocol_oidc.standards.session_mgmt import (
+    compute_session_state,
+    session_state_for_client,
+)
 
 
 def test_session_state_hash_changes_with_effective_issuer() -> None:
@@ -56,7 +59,12 @@ def test_session_state_for_client_uses_request_scoped_deployment_issuer() -> Non
 
 def test_build_logout_plan_uses_deployment_issuer_for_fanout(monkeypatch) -> None:
     session_row = SimpleNamespace(id=uuid4(), user_id=uuid4())
-    logout_row = SimpleNamespace(id=uuid4(), logout_metadata={}, frontchannel_required=True, backchannel_required=True)
+    logout_row = SimpleNamespace(
+        id=uuid4(),
+        logout_metadata={},
+        frontchannel_required=True,
+        backchannel_required=True,
+    )
     observed: dict[str, object] = {}
 
     class _Persistence:
@@ -68,7 +76,9 @@ def test_build_logout_plan_uses_deployment_issuer_for_fanout(monkeypatch) -> Non
             assert session_id == session_row.id
             return logout_row
 
-        async def update_logout_metadata_async(self, logout_id, *, metadata=None, status=None):
+        async def update_logout_metadata_async(
+            self, logout_id, *, metadata=None, status=None
+        ):
             assert logout_id == logout_row.id
             logout_row.logout_metadata = dict(metadata or {})
             return logout_row
@@ -82,7 +92,9 @@ def test_build_logout_plan_uses_deployment_issuer_for_fanout(monkeypatch) -> Non
         return {"delivery": {"status": "pending", "attempts": 0, "max_retries": 3}}
 
     monkeypatch.setattr(rp_logout, "_persistence", lambda: _Persistence())
-    monkeypatch.setattr(rp_logout, "_frontchannel_builder", lambda: _frontchannel_builder)
+    monkeypatch.setattr(
+        rp_logout, "_frontchannel_builder", lambda: _frontchannel_builder
+    )
     monkeypatch.setattr(rp_logout, "_backchannel_builder", lambda: _backchannel_builder)
 
     deployment = SimpleNamespace(
@@ -103,7 +115,9 @@ def test_build_logout_plan_uses_deployment_issuer_for_fanout(monkeypatch) -> Non
     assert observed["back_iss"] == "https://tenant-a.example.com"
 
 
-def test_logout_request_uses_request_scoped_deployment_for_issuer_binding(monkeypatch) -> None:
+def test_logout_request_uses_request_scoped_deployment_for_issuer_binding(
+    monkeypatch,
+) -> None:
     deployment = SimpleNamespace(
         issuer="https://tenant-a.example.com",
         flag_enabled=lambda name: name == "enable_oidc_rp_initiated_logout",
@@ -135,12 +149,22 @@ def test_logout_request_uses_request_scoped_deployment_for_issuer_binding(monkey
     async def _append_audit_event_async(**kwargs):
         observed["audit_event"] = kwargs["event_type"]
 
-    monkeypatch.setattr(logout_ops, "deployment_from_request", lambda request, fallback_settings: deployment)
+    monkeypatch.setattr(
+        logout_ops,
+        "deployment_from_request",
+        lambda request, fallback_settings: deployment,
+    )
     monkeypatch.setattr(logout_ops, "resolve_browser_session", _resolve_browser_session)
     monkeypatch.setattr(logout_ops, "validate_logout_request", _validate_logout_request)
     monkeypatch.setattr(logout_ops, "build_logout_plan", _build_logout_plan)
-    monkeypatch.setattr(logout_ops, "append_audit_event_async", _append_audit_event_async)
-    monkeypatch.setattr(logout_ops, "clear_session_cookie", lambda response: response.headers.__setitem__("x-test-cookie-cleared", "1"))
+    monkeypatch.setattr(
+        logout_ops, "append_audit_event_async", _append_audit_event_async
+    )
+    monkeypatch.setattr(
+        logout_ops,
+        "clear_session_cookie",
+        lambda response: response.headers.__setitem__("x-test-cookie-cleared", "1"),
+    )
 
     request = SimpleNamespace(
         app=SimpleNamespace(state=SimpleNamespace(tigrbl_auth_deployment=deployment)),
@@ -157,7 +181,9 @@ def test_logout_request_uses_request_scoped_deployment_for_issuer_binding(monkey
     assert response.headers["x-test-cookie-cleared"] == "1"
 
 
-def test_register_client_uses_request_scoped_registration_client_uri(monkeypatch) -> None:
+def test_register_client_uses_request_scoped_registration_client_uri(
+    monkeypatch,
+) -> None:
     tenant_id = uuid4()
     deployment = SimpleNamespace(issuer="https://tenant-a.example.com")
 
@@ -185,10 +211,15 @@ def test_register_client_uses_request_scoped_registration_client_uri(monkeypatch
             return None
 
     async def _validated_registration_payload(**kwargs):
-        return SimpleNamespace(id=tenant_id), {"native_application": False, "pkce_required": False}
+        return SimpleNamespace(id=tenant_id), {
+            "native_application": False,
+            "pkce_required": False,
+        }
 
     async def _create_record(model, db, payload):
         if model is _FakeClient:
+            return SimpleNamespace(**payload)
+        if model is register_ops.AuditEvent:
             return SimpleNamespace(**payload)
         return SimpleNamespace(
             id=uuid4(),
@@ -198,16 +229,31 @@ def test_register_client_uses_request_scoped_registration_client_uri(monkeypatch
         )
 
     async def _registration_response(**kwargs):
-        return {"registration_client_uri": kwargs["registration"].registration_client_uri}
+        return {
+            "registration_client_uri": kwargs["registration"].registration_client_uri
+        }
 
     monkeypatch.setattr(register_ops, "Client", _FakeClient)
-    monkeypatch.setattr(register_ops, "deployment_from_request", lambda request, fallback_settings: deployment)
-    monkeypatch.setattr(register_ops, "_validated_registration_payload", _validated_registration_payload)
+    monkeypatch.setattr(
+        register_ops,
+        "deployment_from_request",
+        lambda request, fallback_settings: deployment,
+    )
+    monkeypatch.setattr(
+        register_ops, "_validated_registration_payload", _validated_registration_payload
+    )
     monkeypatch.setattr(register_ops, "create_record", _create_record)
     monkeypatch.setattr(register_ops, "_registration_response", _registration_response)
-    monkeypatch.setattr(register_ops.AuditEvent, "record", lambda db, **kwargs: asyncio.sleep(0))
-    monkeypatch.setattr(register_ops.secrets, "token_urlsafe", lambda length: "token-value")
-    monkeypatch.setattr(register_ops, "runtime_security_profile", lambda deployment: SimpleNamespace(fapi_mode=False, allowed_client_auth_methods=()))
+    monkeypatch.setattr(
+        register_ops.secrets, "token_urlsafe", lambda length: "token-value"
+    )
+    monkeypatch.setattr(
+        register_ops,
+        "runtime_security_profile",
+        lambda deployment: SimpleNamespace(
+            fapi_mode=False, allowed_client_auth_methods=()
+        ),
+    )
 
     payload = DynamicClientRegistrationIn(
         tenant_slug="tenant-a",
@@ -215,12 +261,18 @@ def test_register_client_uses_request_scoped_registration_client_uri(monkeypatch
     )
     result = asyncio.run(
         register_ops.register_client(
-            request=SimpleNamespace(app=SimpleNamespace(state=SimpleNamespace(tigrbl_auth_deployment=deployment))),
+            request=SimpleNamespace(
+                app=SimpleNamespace(
+                    state=SimpleNamespace(tigrbl_auth_deployment=deployment)
+                )
+            ),
             db=_DB(),
             payload=payload,
         )
     )
-    assert result["registration_client_uri"].startswith("https://tenant-a.example.com/register/")
+    assert result["registration_client_uri"].startswith(
+        "https://tenant-a.example.com/register/"
+    )
 
 
 def test_device_authorization_uses_request_scoped_verification_uri(monkeypatch) -> None:
@@ -239,24 +291,38 @@ def test_device_authorization_uses_request_scoped_verification_uri(monkeypatch) 
     async def _create_record(model, db, payload):
         return SimpleNamespace(id=payload.get("device_code"), **payload)
 
-    monkeypatch.setattr(device_auth_ops, "deployment_from_request", lambda request, fallback_settings: deployment)
-    monkeypatch.setattr(device_auth_ops, "generate_device_code", lambda: "device-code-1")
+    monkeypatch.setattr(
+        device_auth_ops,
+        "deployment_from_request",
+        lambda request, fallback_settings: deployment,
+    )
+    monkeypatch.setattr(
+        device_auth_ops, "generate_device_code", lambda: "device-code-1"
+    )
     monkeypatch.setattr(device_auth_ops, "generate_user_code", lambda: "USER-CODE")
     monkeypatch.setattr(device_auth_ops, "read_record", _read_record)
     monkeypatch.setattr(device_auth_ops, "create_record", _create_record)
-    monkeypatch.setattr(device_auth_ops.AuditEvent, "record", lambda db, **kwargs: asyncio.sleep(0))
 
     request = SimpleNamespace(
         app=SimpleNamespace(state=SimpleNamespace(tigrbl_auth_deployment=deployment)),
         body=b"client_id=00000000-0000-0000-0000-000000000001&scope=openid",
     )
-    result = asyncio.run(device_auth_ops.device_authorization_request(request=request, db=_DB()))
+    result = asyncio.run(
+        device_auth_ops.device_authorization_request(request=request, db=_DB())
+    )
     assert result["verification_uri"] == "https://tenant-a.example.com/device"
-    assert result["verification_uri_complete"] == "https://tenant-a.example.com/device?user_code=USER-CODE"
+    assert (
+        result["verification_uri_complete"]
+        == "https://tenant-a.example.com/device?user_code=USER-CODE"
+    )
 
 
-def test_normalized_par_params_uses_request_scoped_issuer_for_request_object_audience(monkeypatch) -> None:
-    deployment = SimpleNamespace(issuer="https://tenant-a.example.com", flag_enabled=lambda name: True)
+def test_normalized_par_params_uses_request_scoped_issuer_for_request_object_audience(
+    monkeypatch,
+) -> None:
+    deployment = SimpleNamespace(
+        issuer="https://tenant-a.example.com", flag_enabled=lambda name: True
+    )
     observed: dict[str, object] = {}
 
     async def _parse_request_object(token, **kwargs):

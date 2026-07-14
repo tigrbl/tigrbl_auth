@@ -1,10 +1,13 @@
-"""Durable OIDC session/logout repository composition owned by layer 30."""
+"""Durable OIDC session/logout operation composition owned by layer 30."""
 
 from __future__ import annotations
 
 from types import SimpleNamespace
 
-from tigrbl_identity_storage.persistence import (
+from tigrbl_identity_storage.tables.client_registration import ClientRegistration
+from tigrbl_identity_storage.tables.engine import storage_session
+
+from .session_lifecycle import (
     bind_session_client_async,
     create_session_async,
     get_active_session_async,
@@ -12,50 +15,47 @@ from tigrbl_identity_storage.persistence import (
     rotate_session_cookie_secret_async,
     touch_session_async,
 )
-from tigrbl_identity_storage.tables.auth_session import AuthSession
-from tigrbl_identity_storage.tables.backchannel_logout_replay import BackchannelLogoutReplay
-from tigrbl_identity_storage.tables.client_registration import ClientRegistration
-from tigrbl_identity_storage.tables.engine import storage_session
-from tigrbl_identity_storage.tables.logout_state import LogoutState
 
-
-def _items(result):
-    if isinstance(result, dict) and isinstance(result.get("items"), list):
-        return result["items"]
-    return result if isinstance(result, list) else []
+from .ops.common import first_table_record
+from .ops.oidc_logout import (
+    ensure_logout_for_session,
+    latest_logout_for_session,
+    mark_logout_channel,
+    update_logout_metadata,
+)
+from .ops.oidc_replay import register_backchannel_logout_replay
+from .ops.sessions import terminate_session
 
 
 async def get_client_registration_async(client_id):
     async with storage_session() as db:
-        result = await ClientRegistration.handlers.list.core(
-            {"payload": {"filters": {"client_id": client_id}}, "db": db}
+        return await first_table_record(
+            ClientRegistration, db, {"client_id": client_id}
         )
-    rows = _items(result)
-    return rows[0] if rows else None
 
 
 async def get_latest_logout_for_session_async(session_id):
     async with storage_session() as db:
-        return await LogoutState.handlers.latest_for_session.core(
+        return await latest_logout_for_session(
             {"payload": {"session_id": session_id}, "db": db}
         )
 
 
 async def terminate_session_async(session_id, **kwargs):
     async with storage_session() as db:
-        session = await AuthSession.handlers.terminate.core(
+        session = await terminate_session(
             {"path_params": {"id": session_id}, "payload": kwargs, "db": db}
         )
         if session is None:
             return None
-        return await LogoutState.handlers.ensure_for_session.core(
+        return await ensure_logout_for_session(
             {"payload": {"session_id": session_id, **kwargs}, "db": db}
         )
 
 
 async def update_logout_metadata_async(logout_id, **kwargs):
     async with storage_session() as db:
-        return await LogoutState.handlers.update_metadata.core(
+        return await update_logout_metadata(
             {
                 "path_params": {"id": logout_id},
                 "payload": {"logout_id": logout_id, **kwargs},
@@ -66,7 +66,7 @@ async def update_logout_metadata_async(logout_id, **kwargs):
 
 async def mark_logout_channel_async(logout_id, **kwargs):
     async with storage_session() as db:
-        return await LogoutState.handlers.mark_channel.core(
+        return await mark_logout_channel(
             {
                 "path_params": {"id": logout_id},
                 "payload": {"logout_id": logout_id, **kwargs},
@@ -77,11 +77,14 @@ async def mark_logout_channel_async(logout_id, **kwargs):
 
 async def register_backchannel_replay_async(*, jti, issuer, client_id, expires_at, now):
     async with storage_session() as db:
-        return await BackchannelLogoutReplay.handlers.register.core(
+        return await register_backchannel_logout_replay(
             {
                 "payload": {
-                    "jti": jti, "issuer": issuer, "client_id": str(client_id),
-                    "expires_at": expires_at, "now": now,
+                    "jti": jti,
+                    "issuer": issuer,
+                    "client_id": str(client_id),
+                    "expires_at": expires_at,
+                    "now": now,
                 },
                 "db": db,
             }
