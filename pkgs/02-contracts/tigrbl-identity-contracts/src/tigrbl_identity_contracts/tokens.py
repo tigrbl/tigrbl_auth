@@ -138,6 +138,7 @@ class TokenPairIssueRequest:
     confirmation: Mapping[str, object] | None = None
     refresh_family_id: str | None = None
     refresh_parent_token: str | None = None
+    token_type: str = "bearer"
     extra_claims: Mapping[str, object] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
@@ -156,6 +157,7 @@ class RefreshTokenRedemptionRequest:
     """Ephemeral input for rotating one client-bound refresh token."""
 
     refresh_token: str
+    tenant_id: str
     client_id: str
     certificate_thumbprint: str | None = None
     requested_audience: str | None = None
@@ -164,6 +166,8 @@ class RefreshTokenRedemptionRequest:
     def __post_init__(self) -> None:
         if not self.refresh_token:
             raise ValueError("refresh_token is required")
+        if not self.tenant_id:
+            raise ValueError("tenant_id is required")
         if not self.client_id:
             raise ValueError("client_id is required")
 

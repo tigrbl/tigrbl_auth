@@ -32,6 +32,7 @@ def _issue_request() -> TokenPairIssueRequest:
 def _refresh_request() -> RefreshTokenRedemptionRequest:
     return RefreshTokenRedemptionRequest(
         refresh_token="refresh-1",
+        tenant_id="tenant-1",
         client_id="client-1",
         requested_audience="https://resource.example",
         token_type="DPoP",

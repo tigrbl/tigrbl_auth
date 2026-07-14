@@ -126,6 +126,7 @@ class TokenIssuanceCapability(Capability):
                 "event_type": "token.refresh.rotated",
                 "target_type": "token",
                 "target_id": request.client_id,
+                "tenant_id": request.tenant_id,
                 "actor_client_id": request.client_id,
                 "details": {
                     "audience": request.requested_audience,

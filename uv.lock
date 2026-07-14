@@ -5875,6 +5875,7 @@ dependencies = [
     { name = "tigrbl-replay-memory-provider" },
     { name = "tigrbl-secret-hashing-bcrypt-provider" },
     { name = "tigrbl-token-introspection-capability" },
+    { name = "tigrbl-token-issuance-capability" },
     { name = "tigrbl-token-revocation-capability" },
 ]
 
@@ -5898,6 +5899,7 @@ requires-dist = [
     { name = "tigrbl-replay-memory-provider", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-secret-hashing-bcrypt-provider", specifier = "==0.1.0" },
     { name = "tigrbl-token-introspection-capability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-token-issuance-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-token-revocation-capability", specifier = "==0.4.0.dev2" },
 ]
 

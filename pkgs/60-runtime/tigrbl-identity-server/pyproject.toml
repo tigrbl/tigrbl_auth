@@ -47,6 +47,7 @@ dependencies = [
     "tigrbl-identity-storage-runtime==0.4.0.dev2",
     "tigrbl-principal-authentication==0.4.0.dev2",
     "tigrbl-token-introspection-capability==0.4.0.dev2",
+    "tigrbl-token-issuance-capability==0.4.0.dev2",
     "tigrbl-token-revocation-capability==0.4.0.dev2",
     "tigrbl-pushed-authorization-capability==0.4.0.dev2",
     "tigrbl-client-registration-capability==0.4.0.dev2",
