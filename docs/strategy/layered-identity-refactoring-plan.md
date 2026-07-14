@@ -75,6 +75,18 @@ Required ownership rules:
   password/client-secret authentication capabilities.
 - [x] `89330723` routes runtime secret verification through those capabilities,
   and `1766a361` removes client-model authentication behavior.
+- [x] `1ac3ad73` adds provider-backed API/service-key authentication to the
+  principal-authentication capability and composes it in layer 60 without an
+  active dependency on the legacy layer-20 backend.
+- [x] `73bf9b2c` removes the competing PBKDF2 encoding and in-memory
+  `CredentialLedger`; lifecycle transformations delegate secret hashing to the
+  bcrypt provider and leave durability to layers 01 and 30.
+- [x] `cc5ae88b` routes OAuth password-grant authentication through the
+  password capability, preserves RFC 6749 `invalid_grant` behavior, and removes
+  `_pwd_backend` from active runtime composition.
+- [x] `3b3916aa` moves API/service-key digest calculation and constant-time
+  comparison into their layer-20 authenticator providers; layer 30 now owns
+  lookup/touch durability only.
 - [x] `99e5b01`, `8994e5b8`, `5a7bbf1c`, and `85eb0d4f` move delegation,
   device-code, crypto-key, and audit lifecycles into layer-30 table runtimes.
 - [x] `b5e74c46` centralizes durable handler execution in layer 30, and
@@ -616,7 +628,7 @@ flags. Tier-4 claims require independent interoperability evidence.
 - [x] C5: finish claim package/facade cleanup and remove protocol-specific
   deterministic package names.
 - [x] C6: finish EAT token/evidence/appraisal/provider verification chain.
-- [ ] C7: normalize bases and provider ownership, including password/client
+- [x] C7: normalize bases and provider ownership, including password/client
   secret services.
 - [ ] C8: make every layer-40 feature composable, delegated, and reportable.
 - [ ] C9: complete per-specification layer-50 version/feature/compatibility and
