@@ -296,10 +296,10 @@ def test_remaining_oauth_route_handlers_live_on_storage_table_modules(
             {"authorize"},
         ),
         (
-            "tigrbl_identity_storage_runtime.client_registration",
+            "tigrbl_identity_server.client_registration_surface",
             "tigrbl_identity_storage.tables.client_registration",
             "ClientRegistration",
-            {"register", "register_get", "register_put", "register_delete"},
+            set(),
         ),
         (
             "tigrbl_identity_storage_runtime.device_authorization",
@@ -341,6 +341,7 @@ def test_moved_oauth_publishers_live_above_storage_table_modules(
     if runtime_module_name in {
         "tigrbl_identity_storage_runtime.authorization",
         "tigrbl_identity_storage_runtime.login",
+        "tigrbl_identity_server.client_registration_surface",
         "tigrbl_identity_server.par_surface",
     }:
         assert not hasattr(runtime_module, "api")

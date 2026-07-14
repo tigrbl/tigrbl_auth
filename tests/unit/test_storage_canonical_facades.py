@@ -330,12 +330,14 @@ def test_executable_client_registration_publisher_lives_above_storage() -> None:
     for module_name in old_modules:
         assert importlib.util.find_spec(module_name) is None
 
-    runtime = importlib.import_module("tigrbl_identity_storage_runtime.client_registration")
+    runtime = importlib.import_module("tigrbl_identity_server.client_registration_surface")
     storage = importlib.import_module("tigrbl_identity_storage.tables.client_registration")
 
-    assert runtime.api is runtime.router
+    assert not hasattr(runtime, "api")
+    carrier = importlib.import_module("tigrbl_auth_api_oauth_registration")
+    assert callable(carrier.build_client_registration_router)
     assert runtime.include_client_registration_endpoint.__module__ == (
-        "tigrbl_identity_storage_runtime.client_registration"
+        "tigrbl_identity_server.client_registration_surface"
     )
     assert not hasattr(storage, "api")
     assert not hasattr(storage, "router")

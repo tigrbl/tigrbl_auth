@@ -36,6 +36,7 @@ dependencies = [
     "tigrbl-auth-api-oauth-introspection==0.4.0.dev2",
     "tigrbl-auth-api-oauth-revocation==0.4.0.dev2",
     "tigrbl-auth-api-oauth-par==0.4.0.dev2",
+    "tigrbl-auth-api-oauth-registration==0.4.0.dev2",
     "tigrbl-auth-protocol-oauth==0.4.0.dev2",
     "tigrbl-auth-protocol-gnap==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
@@ -48,6 +49,7 @@ dependencies = [
     "tigrbl-token-introspection-capability==0.4.0.dev2",
     "tigrbl-token-revocation-capability==0.4.0.dev2",
     "tigrbl-pushed-authorization-capability==0.4.0.dev2",
+    "tigrbl-client-registration-capability==0.4.0.dev2",
     "tigrbl-replay-memory-provider==0.4.0.dev2",
     "tigrbl-secret-hashing-bcrypt-provider==0.1.0",
 ]

@@ -66,12 +66,6 @@ TABLE_ROUTE_FUNCTION_ALLOWLIST = {
         "revoke_account_authorized_app",
         "revoke_account_consent",
     },
-    "client_registration.py": {
-        "register",
-        "register_delete",
-        "register_get",
-        "register_put",
-    },
     "device_code.py": {
         "device_authorization",
     },

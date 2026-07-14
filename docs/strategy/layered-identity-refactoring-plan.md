@@ -659,9 +659,9 @@ flags. Tier-4 claims require independent interoperability evidence.
 - [x] C3: finish all durable operations/hooks out of layer 01.
 - [ ] C4: remove route/runtime/provider imports from layer 01 and move routers
   to layer 80.
-  RFC 7662 introspection, RFC 7009 revocation, and RFC 9126 PAR are complete;
-  token, registration, authorization, userinfo, logout, discovery, and
-  token-exchange carriers remain.
+  RFC 7662 introspection, RFC 7009 revocation, RFC 9126 PAR, and RFC 7591/7592
+  client registration/management are complete; token, authorization,
+  userinfo, logout, discovery, and token-exchange carriers remain.
 - [x] C5: finish claim package/facade cleanup and remove protocol-specific
   deterministic package names.
 - [x] C6: finish EAT token/evidence/appraisal/provider verification chain.
@@ -1072,9 +1072,11 @@ The final audit proves:
 3. **C4 routes/runtime barrels**: My Account, identity, realm, tenant, and
    protocol-schema ownership is complete. Introspection, revocation, and PAR
    now have explicit capability seams, protocol mappings, runtime composition,
-   and layer-80 carriers. Next move token, registration, authorization,
-   userinfo, logout, discovery, token-exchange, and related HTTP bindings out
-   of layer 30 and mount them from layer 80.
+   and layer-80 carriers. RFC 7591/7592 registration now also uses a durable
+   layer-30 aggregate, a reportable lifecycle capability, explicit protocol
+   requirements, runtime security composition, and a layer-80 carrier. Next
+   move token, authorization, userinfo, logout, discovery, token-exchange, and
+   related HTTP bindings out of layer 30 and mount them from layer 80.
 4. **C5 neutral reusable ownership**: claims facade, scope matcher, subject
    strategy, OAuth/OIDC base cleanup.
 5. **C6 EAT chain**: typed token verifiers, verified evidence, appraisal

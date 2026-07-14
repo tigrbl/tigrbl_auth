@@ -3487,7 +3487,7 @@ claims:
   - OIDC RP-Initiated Logout
   required_flags:
   - enable_rfc7591
-  source: tigrbl_identity_storage_runtime.client_registration:include_client_registration_endpoint
+  source: tigrbl_identity_server.client_registration_surface:include_client_registration_endpoint
 - id: route:register-client-id
   feature_id: route:register-client-id
   kind: public-route
@@ -3500,7 +3500,7 @@ claims:
   - OIDC RP-Initiated Logout
   required_flags:
   - enable_rfc7592
-  source: tigrbl_identity_storage_runtime.client_registration:include_client_registration_endpoint
+  source: tigrbl_identity_server.client_registration_surface:include_client_registration_endpoint
 - id: route:revoke
   feature_id: route:revoke
   kind: public-route

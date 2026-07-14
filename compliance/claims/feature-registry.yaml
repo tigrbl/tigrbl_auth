@@ -2625,7 +2625,7 @@ features:
   kind: public-route
   title: /register
   description: Dynamic client registration endpoint
-  source: tigrbl_identity_storage_runtime.client_registration:include_client_registration_endpoint
+  source: tigrbl_identity_server.client_registration_surface:include_client_registration_endpoint
   scope: core
   targets:
   - RFC 7591
@@ -2641,7 +2641,7 @@ features:
   kind: public-route
   title: /register/{client_id}
   description: Dynamic client registration management endpoint
-  source: tigrbl_identity_storage_runtime.client_registration:include_client_registration_endpoint
+  source: tigrbl_identity_server.client_registration_surface:include_client_registration_endpoint
   scope: core
   targets:
   - RFC 7592

@@ -6,7 +6,7 @@ from uuid import uuid4
 
 from tigrbl_auth.api.rest.schemas import DynamicClientRegistrationIn
 import tigrbl_identity_server.par_surface as par_ops
-import tigrbl_identity_storage_runtime._client_registration_create as register_ops
+import tigrbl_identity_server.client_registration_surface as register_ops
 import tigrbl_identity_storage_runtime.device_authorization as device_auth_ops
 import tigrbl_identity_storage_runtime.logout as logout_ops
 from tigrbl_auth_protocol_oidc.standards import rp_initiated_logout as rp_logout
@@ -185,20 +185,10 @@ def test_register_client_uses_request_scoped_registration_client_uri(
     monkeypatch,
 ) -> None:
     tenant_id = uuid4()
-    deployment = SimpleNamespace(issuer="https://tenant-a.example.com")
-
-    class _FakeClient:
-        def __init__(self, tenant_id, client_id, client_secret, redirects):
-            self.tenant_id = tenant_id
-            self.id = client_id
-            self.client_secret_hash = f"hash:{client_secret}".encode()
-            self.redirect_uris = " ".join(redirects)
-            self.grant_types = ""
-            self.response_types = ""
-
-        @staticmethod
-        def new(tenant_id, client_id, client_secret, redirects):
-            return _FakeClient(tenant_id, client_id, client_secret, redirects)
+    deployment = SimpleNamespace(
+        issuer="https://tenant-a.example.com",
+        flag_enabled=lambda name: name in {"enable_rfc7591", "enable_rfc7592"},
+    )
 
     class _DB:
         def add(self, obj):
@@ -216,34 +206,45 @@ def test_register_client_uses_request_scoped_registration_client_uri(
             "pkce_required": False,
         }
 
-    async def _create_record(model, db, payload):
-        if model is _FakeClient:
-            return SimpleNamespace(**payload)
-        if model is register_ops.AuditEvent:
-            return SimpleNamespace(**payload)
-        return SimpleNamespace(
-            id=uuid4(),
-            registration_metadata=payload["registration_metadata"],
-            registration_client_uri=payload["registration_client_uri"],
-            issued_at=None,
-        )
+    observed: dict[str, object] = {}
 
-    async def _registration_response(**kwargs):
-        return {
-            "registration_client_uri": kwargs["registration"].registration_client_uri
-        }
+    class _Service:
+        async def register(self, request):
+            observed["request"] = request
+            return SimpleNamespace(
+                client_id=request.client_id,
+                tenant_id=request.tenant_id,
+                registration_id=str(uuid4()),
+                redirect_uris=request.redirect_uris,
+                grant_types=request.grant_types,
+                response_types=request.response_types,
+                metadata=request.metadata,
+                contacts=request.contacts,
+                software_id=request.software_id,
+                software_version=request.software_version,
+                registration_access_token_hash=(
+                    request.registration_access_token_hash
+                ),
+                registration_client_uri=request.registration_client_uri,
+                issued_at=None,
+            )
 
-    monkeypatch.setattr(register_ops, "Client", _FakeClient)
     monkeypatch.setattr(
         register_ops,
-        "deployment_from_request",
-        lambda request, fallback_settings: deployment,
+        "_deployment",
+        lambda request: deployment,
     )
     monkeypatch.setattr(
         register_ops, "_validated_registration_payload", _validated_registration_payload
     )
-    monkeypatch.setattr(register_ops, "create_record", _create_record)
-    monkeypatch.setattr(register_ops, "_registration_response", _registration_response)
+    monkeypatch.setattr(register_ops, "_rfc7591_service", lambda request, db: _Service())
+    monkeypatch.setattr(
+        register_ops,
+        "_registration_response",
+        lambda record, **kwargs: {
+            "registration_client_uri": record.registration_client_uri
+        },
+    )
     monkeypatch.setattr(
         register_ops.secrets, "token_urlsafe", lambda length: "token-value"
     )
@@ -273,6 +274,9 @@ def test_register_client_uses_request_scoped_registration_client_uri(
     assert result["registration_client_uri"].startswith(
         "https://tenant-a.example.com/register/"
     )
+    assert observed["request"].registration_client_uri == result[
+        "registration_client_uri"
+    ]
 
 
 def test_device_authorization_uses_request_scoped_verification_uri(monkeypatch) -> None:

@@ -1,4 +1,4 @@
-"""Deprecated compatibility module for `tigrbl_identity_storage_runtime.client_registration`."""
+"""Deprecated compatibility module for the registration runtime surface."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ from importlib import import_module as _import_module
 import warnings as _warnings
 
 _DEPRECATED_MODULE = "tigrbl_identity_oauth.ops._register"
-_CANONICAL_MODULE = "tigrbl_identity_storage_runtime.client_registration"
+_CANONICAL_MODULE = "tigrbl_identity_server.client_registration_surface"
 
 _warnings.warn(
     f"{_DEPRECATED_MODULE} is deprecated; import {_CANONICAL_MODULE} instead.",
