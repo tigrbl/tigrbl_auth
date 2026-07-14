@@ -18,7 +18,6 @@ from tigrbl_identity_contracts.principal_authentication import RecordAuthenticat
 
 
 RecordLookup: TypeAlias = Callable[[Mapping[str, Any]], object | Awaitable[object]]
-KeyDigest: TypeAlias = Callable[[str], str]
 KeyLookup: TypeAlias = Callable[[object, str], object | Awaitable[object]]
 PrincipalResolver: TypeAlias = Callable[[object, object], object | Awaitable[object]]
 CredentialTouch: TypeAlias = Callable[[object, object], object | Awaitable[object]]
@@ -141,7 +140,6 @@ class ApiKeyAuthenticationCapability(Capability):
     def __init__(
         self,
         *,
-        digest_key: KeyDigest,
         find_api_keys: KeyLookup,
         find_service_keys: KeyLookup,
         resolve_user: PrincipalResolver,
@@ -149,7 +147,6 @@ class ApiKeyAuthenticationCapability(Capability):
         api_key_authenticator: ApiKeyLocalAuthenticator | None = None,
         service_key_authenticator: ServiceKeyLocalAuthenticator | None = None,
     ) -> None:
-        self._digest_key = digest_key
         self._find_api_keys = find_api_keys
         self._find_service_keys = find_service_keys
         self._resolve_user = resolve_user
@@ -211,7 +208,7 @@ class ApiKeyAuthenticationCapability(Capability):
         api_key: str,
         db: object,
     ) -> RecordAuthenticationResult:
-        digest = self._digest_key(api_key)
+        digest = self._api_key_authenticator.digest_key(api_key)
         api_key_record = self._valid_key(
             await _resolve(self._find_api_keys(db, digest))
         )
@@ -233,7 +230,12 @@ class ApiKeyAuthenticationCapability(Capability):
             )
 
         service_key_record = self._valid_key(
-            await _resolve(self._find_service_keys(db, digest))
+            await _resolve(
+                self._find_service_keys(
+                    db,
+                    self._service_key_authenticator.digest_key(api_key),
+                )
+            )
         )
         if service_key_record is not None:
             principal = self._service_principal(service_key_record)
@@ -262,7 +264,6 @@ __all__ = [
     "ApiKeyAuthenticationCapability",
     "ClientSecretAuthenticationCapability",
     "CredentialTouch",
-    "KeyDigest",
     "KeyLookup",
     "PasswordAuthenticationCapability",
     "PrincipalResolver",

@@ -3,7 +3,9 @@ from __future__ import annotations
 import pytest
 
 from tigrbl_authenticator_client_secret_local import ClientSecretLocalAuthenticator
+from tigrbl_authenticator_api_key_local import ApiKeyLocalAuthenticator
 from tigrbl_authenticator_password_local import PasswordLocalAuthenticator
+from tigrbl_authenticator_service_key_local import ServiceKeyLocalAuthenticator
 from tigrbl_identity_contracts.shared_secrets import SecretHash
 from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
 
@@ -40,3 +42,16 @@ def test_local_authenticators_delegate_to_secret_provider() -> None:
     assert password.verify_secret("shared-secret", encoded)
     assert client.verify_secret("shared-secret", encoded.encoded)
     assert not password.verify_secret("wrong", encoded)
+
+
+def test_api_and_service_key_authenticators_own_digest_verification() -> None:
+    api_key = ApiKeyLocalAuthenticator()
+    service_key = ServiceKeyLocalAuthenticator()
+
+    api_digest = api_key.digest_key("api-secret")
+    service_digest = service_key.digest_key("service-secret")
+
+    assert api_key.matches_digest("api-secret", api_digest)
+    assert not api_key.matches_digest("wrong", api_digest)
+    assert service_key.matches_digest("service-secret", service_digest)
+    assert not service_key.matches_digest("wrong", service_digest)

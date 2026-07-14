@@ -45,12 +45,7 @@ async def mark_credential_used(db: Any, key_row: Any) -> None:
         await maybe_await(touch())
 
 
-def digest_api_key(raw_key: str) -> str:
-    return CredentialApiKey.digest_of(raw_key)
-
-
 __all__ = [
-    "digest_api_key",
     "find_api_keys",
     "find_password_principals",
     "find_service_keys",

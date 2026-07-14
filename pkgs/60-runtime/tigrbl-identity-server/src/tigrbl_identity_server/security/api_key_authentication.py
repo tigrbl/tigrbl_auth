@@ -6,7 +6,6 @@ from typing import Any
 
 from tigrbl_identity_contracts.principals import PrincipalLike
 from tigrbl_identity_storage_runtime.ops.authentication_credentials import (
-    digest_api_key,
     find_api_keys,
     find_service_keys,
     mark_credential_used,
@@ -16,7 +15,6 @@ from tigrbl_principal_authentication import ApiKeyAuthenticationCapability
 
 
 api_key_authentication = ApiKeyAuthenticationCapability(
-    digest_key=digest_api_key,
     find_api_keys=find_api_keys,
     find_service_keys=find_service_keys,
     resolve_user=resolve_user_principal,
