@@ -2331,6 +2331,21 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-auth-api-oauth-revocation"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/80-apis/tigrbl-auth-api-oauth-revocation" }
+dependencies = [
+    { name = "tigrbl" },
+    { name = "tigrbl-auth-protocol-oauth" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-auth-plugin"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/60-runtime/tigrbl-auth-plugin" }
@@ -2712,6 +2727,7 @@ dependencies = [
     { name = "tigrbl-attestation-reference-provider" },
     { name = "tigrbl-auth" },
     { name = "tigrbl-auth-api-oauth-introspection" },
+    { name = "tigrbl-auth-api-oauth-revocation" },
     { name = "tigrbl-auth-plugin" },
     { name = "tigrbl-auth-profile-haip" },
     { name = "tigrbl-auth-protocol-authzen" },
@@ -3060,6 +3076,7 @@ requires-dist = [
     { name = "tigrbl-attestation-reference-provider", editable = "pkgs/20-providers/tigrbl-attestation-reference-provider" },
     { name = "tigrbl-auth", editable = "pkgs/70-facade/tigrbl-auth" },
     { name = "tigrbl-auth-api-oauth-introspection", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-introspection" },
+    { name = "tigrbl-auth-api-oauth-revocation", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-revocation" },
     { name = "tigrbl-auth-plugin", editable = "pkgs/60-runtime/tigrbl-auth-plugin" },
     { name = "tigrbl-auth-profile-haip", editable = "pkgs/50-protocols/tigrbl-auth-profile-haip" },
     { name = "tigrbl-auth-protocol-authzen", editable = "pkgs/50-protocols/tigrbl-auth-protocol-authzen" },
