@@ -6,7 +6,7 @@ from uuid import uuid4
 import pytest
 
 from tigrbl_auth.config.deployment import resolve_deployment
-import tigrbl_identity_storage_runtime.introspection as introspection_module
+import tigrbl_identity_server.introspection_surface as introspection_module
 from tigrbl_auth.standards.oauth2.resource_verifier_contract import build_protected_resource_verifier_contract
 from tigrbl_identity_storage_runtime.metadata.protected_resource_metadata import (
     build_protected_resource_metadata,
@@ -57,11 +57,11 @@ async def test_introspection_rejects_basic_auth_when_verifier_contract_requires_
         return _Client(), SimpleNamespace(registration_metadata={})
 
     monkeypatch.setattr(introspection_module, "_load_client", _load_client)
-    monkeypatch.setattr(introspection_module, "_registered_token_endpoint_auth_method", lambda registration: "client_secret_basic")
+    monkeypatch.setattr(introspection_module, "_registered_auth_method", lambda registration: "client_secret_basic")
 
     request = _request_with_headers({"Authorization": basic})
     with pytest.raises(introspection_module.HTTPException) as exc_info:
-        await introspection_module._authorize_introspection_caller(request, {"token": "tok"}, db=None)
+        await introspection_module.authorize_introspection_caller(request, {"token": "tok"}, db=None)
     assert exc_info.value.status_code == 401
 
 
@@ -84,8 +84,19 @@ async def test_introspection_accepts_basic_auth_when_verifier_contract_allows_it
 
     monkeypatch.setattr(introspection_module, "_protected_resource_verifier_contract", lambda request: contract)
     monkeypatch.setattr(introspection_module, "_load_client", _load_client)
-    monkeypatch.setattr(introspection_module, "_registered_token_endpoint_auth_method", lambda registration: "client_secret_basic")
+    monkeypatch.setattr(introspection_module, "_registered_auth_method", lambda registration: "client_secret_basic")
     monkeypatch.setattr(introspection_module.base64, "b64decode", lambda value: f"{client_id}:{secret}".encode())
 
     request = _request_with_headers({"Authorization": basic})
-    await introspection_module._authorize_introspection_caller(request, {"token": "tok"}, db=None)
+    monkeypatch.setattr(
+        introspection_module,
+        "client_secret_authentication",
+        SimpleNamespace(
+            verify_client_record=lambda client, provided: SimpleNamespace(
+                authenticated=provided == secret
+            )
+        ),
+    )
+    await introspection_module.authorize_introspection_caller(
+        request, {"token": "tok"}, db=None
+    )

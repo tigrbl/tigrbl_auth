@@ -5,6 +5,7 @@ from httpx import AsyncClient, BasicAuth
 from uuid import uuid4
 
 from sqlalchemy.ext.asyncio import AsyncSession
+from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
 
 from tigrbl_auth.tables import Client, Tenant
 from tigrbl_auth.standards.oauth2.introspection import register_token_async, reset_tokens_async
@@ -19,11 +20,13 @@ async def _create_tenant_and_client(db_session: AsyncSession) -> Client:
     )
     db_session.add(tenant)
     await db_session.commit()
-    client = Client.new(
+    client = Client(
+        id=uuid4(),
         tenant_id=tenant.id,
-        client_id=str(uuid4()),
-        client_secret="introspect-secret",
-        redirects=["https://client.example/callback"],
+        client_secret_hash=BcryptSecretHasher()
+        .hash_secret("introspect-secret")
+        .encoded,
+        redirect_uris="https://client.example/callback",
     )
     db_session.add(client)
     await db_session.commit()

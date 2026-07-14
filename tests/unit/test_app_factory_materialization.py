@@ -54,7 +54,7 @@ def test_install_substrate_report_tracks_extras_consistency() -> None:
     ]
 
 
-def test_introspection_module_uses_runtime_router_when_dependencies_are_installed() -> None:
+def test_introspection_protocol_module_exports_service_not_runtime_router() -> None:
     pytest.importorskip("sqlalchemy")
     pytest.importorskip("tigrbl")
 
@@ -63,5 +63,8 @@ def test_introspection_module_uses_runtime_router_when_dependencies_are_installe
     module = importlib.reload(importlib.import_module("tigrbl_auth_protocol_oauth.standards.introspection"))
 
     assert not hasattr(module, "api")
-    assert module.introspect_token.__module__ == "tigrbl_identity_storage_runtime.introspection"
-    assert module.include_introspection_endpoint.__module__ == "tigrbl_identity_storage_runtime.introspection"
+    assert not hasattr(module, "introspect_token")
+    assert not hasattr(module, "include_introspection_endpoint")
+    assert module.RFC7662IntrospectionService.__module__ == (
+        "tigrbl_auth_protocol_oauth.standards.introspection"
+    )

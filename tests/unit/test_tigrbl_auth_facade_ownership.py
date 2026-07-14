@@ -62,7 +62,6 @@ FACADE_MODULES = {
     "tigrbl_auth.standards.jose.rfc7517": "tigrbl_identity_jose.standards.rfc7517",
     "tigrbl_auth.standards.jose.rfc7518": "tigrbl_identity_jose.standards.rfc7518",
     "tigrbl_auth.standards.oauth2.dpop": "tigrbl_auth_protocol_oauth.standards.dpop",
-    "tigrbl_auth.standards.oauth2.introspection": "tigrbl_identity_storage_runtime.introspection",
     "tigrbl_auth.standards.oauth2.rfc9700": "tigrbl_auth_protocol_oauth.standards.oauth_security_bcp",
     "tigrbl_auth.standards.oauth2.resource_verifier_contract": "tigrbl_auth_protocol_oauth.standards.resource_verifier_contract",
     "tigrbl_auth.standards.oauth2.token_exchange": "tigrbl_identity_storage_runtime.token_exchange",
@@ -80,7 +79,11 @@ FACADE_MODULES = {
     "tigrbl_auth.migrations.runtime": "tigrbl_identity_storage_runtime.migrations.runtime",
 }
 
-EXECUTABLE_FACADE_MODULES: dict[str, str] = {}
+EXECUTABLE_FACADE_MODULES: dict[str, str] = {
+    "tigrbl_auth.standards.oauth2.introspection": (
+        "compatibility composition over layer 30, 50, 60, and 80 owners"
+    ),
+}
 
 INSTALLED_FACADE_MODULES = {
     key: FACADE_MODULES[key]
@@ -198,8 +201,12 @@ def test_legacy_facade_modules_alias_canonical_module_objects() -> None:
             assert legacy is canonical
 
 
-def test_no_legacy_executable_facades_remain() -> None:
-    assert EXECUTABLE_FACADE_MODULES == {}
+def test_only_cross_layer_introspection_compatibility_facade_remains() -> None:
+    assert EXECUTABLE_FACADE_MODULES == {
+        "tigrbl_auth.standards.oauth2.introspection": (
+            "compatibility composition over layer 30, 50, 60, and 80 owners"
+        ),
+    }
 
 
 def test_legacy_facade_ops_are_not_supported() -> None:

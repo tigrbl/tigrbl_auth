@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from tigrbl_auth_protocol_oauth.standards.rfc7662 import (
+from tigrbl_auth_protocol_oauth.standards.introspection import (
     RFC7662IntrospectionService,
 )
 from tigrbl_identity_storage_runtime.token_lifecycle import introspect_token_async

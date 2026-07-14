@@ -10,7 +10,7 @@ from urllib.parse import parse_qs
 from tigrbl import Depends, Request, TigrblApp, TigrblRouter
 from tigrbl.runtime.status import HTTPException, status
 from tigrbl_auth_protocol_oauth.schemas import IntrospectOut
-from tigrbl_auth_protocol_oauth.standards.rfc7662 import (
+from tigrbl_auth_protocol_oauth.standards.introspection import (
     IntrospectionDisabledError,
     RFC7662IntrospectionService,
 )

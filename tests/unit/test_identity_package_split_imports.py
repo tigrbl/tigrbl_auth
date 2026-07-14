@@ -375,7 +375,7 @@ def test_oauth_revocation_exports_async_runtime_hooks() -> None:
     )
 
 
-def test_oauth_introspection_exports_async_runtime_hooks() -> None:
+def test_oauth_introspection_exports_protocol_service_only() -> None:
     _install_package_src_paths()
 
     split_module = importlib.import_module(
@@ -388,9 +388,10 @@ def test_oauth_introspection_exports_async_runtime_hooks() -> None:
         / "jwt_runtime.py"
     ).read_text(encoding="utf-8")
 
-    assert inspect.iscoroutinefunction(split_module.register_token_async)
-    assert inspect.iscoroutinefunction(split_module.introspect_token_async)
-    assert inspect.iscoroutinefunction(split_module.reset_tokens_async)
+    assert hasattr(split_module, "RFC7662IntrospectionService")
+    assert not hasattr(split_module, "register_token_async")
+    assert not hasattr(split_module, "introspect_token_async")
+    assert not hasattr(split_module, "reset_tokens_async")
     assert "standards.introspection" not in runtime_source
     assert "register_token" not in runtime_source
 

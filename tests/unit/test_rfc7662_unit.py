@@ -1,48 +1,52 @@
-"""Tests for OAuth 2.0 Token Introspection (RFC 7662)."""
+"""Unit tests for the RFC 7662 protocol service."""
 
 import pytest
 
-from tigrbl_auth import rfc7662
-from tigrbl_auth.config.settings import settings
-
-RFC_7662 = "RFC 7662"
-
-
-def setup_function() -> None:
-    rfc7662.reset_tokens()
+from tigrbl_auth_protocol_oauth.standards.introspection import (
+    IntrospectionDisabledError,
+    RFC7662IntrospectionService,
+)
+from tigrbl_token_introspection_capability import TokenIntrospectionCapability
 
 
-def test_introspect_active_token(monkeypatch):
-    """RFC 7662 requires active tokens to return claims including active=True."""
-    monkeypatch.setattr(settings, "enable_rfc7662", True)
-    rfc7662.register_token("tok123", {"sub": "alice"})
-    result = rfc7662.introspect_token("tok123")
-    assert result["active"] is True
-    assert result["sub"] == "alice"
-
-
-def test_introspect_stale_authorization_snapshot_is_inactive(monkeypatch):
-    monkeypatch.setattr(settings, "enable_rfc7662", True)
-    rfc7662.register_token(
-        "stale-authz",
-        {"sub": "alice", "authz_version": 1, "current_authz_version": 2},
+def _service(payload: dict[str, object], *, enabled: bool = True):
+    return RFC7662IntrospectionService(
+        TokenIntrospectionCapability(lambda token: payload),
+        enabled=enabled,
     )
 
-    result = rfc7662.introspect_token("stale-authz")
+
+@pytest.mark.asyncio
+async def test_introspect_active_token():
+    result = await _service({"active": True, "sub": "alice"}).introspect(
+        "tok123"
+    )
+    assert result == {"active": True, "sub": "alice"}
+
+
+@pytest.mark.asyncio
+async def test_introspect_stale_authorization_snapshot_is_inactive():
+    result = await _service(
+        {
+            "active": True,
+            "sub": "alice",
+            "authz_version": 1,
+            "current_authz_version": 2,
+        }
+    ).introspect("stale-authz")
 
     assert result["active"] is False
     assert result["inactive_reason"] == "authorization_snapshot_stale"
 
 
-def test_introspect_inactive_token(monkeypatch):
-    """RFC 7662 mandates inactive tokens return only active=False."""
-    monkeypatch.setattr(settings, "enable_rfc7662", True)
-    result = rfc7662.introspect_token("missing")
-    assert result == {"active": False}
+@pytest.mark.asyncio
+async def test_introspect_inactive_token():
+    assert await _service({"active": False}).introspect("missing") == {
+        "active": False
+    }
 
 
-def test_introspection_disabled(monkeypatch):
-    """The feature can be toggled off via settings.enable_rfc7662."""
-    monkeypatch.setattr(settings, "enable_rfc7662", False)
-    with pytest.raises(RuntimeError):
-        rfc7662.introspect_token("tok123")
+@pytest.mark.asyncio
+async def test_introspection_disabled():
+    with pytest.raises(IntrospectionDisabledError):
+        await _service({"active": True}, enabled=False).introspect("tok123")

@@ -3,7 +3,7 @@ from __future__ import annotations
 import pytest
 
 from tigrbl_auth_protocol_oauth import CAPABILITY_REQUIREMENTS
-from tigrbl_auth_protocol_oauth.standards.rfc7662 import (
+from tigrbl_auth_protocol_oauth.standards.introspection import (
     IntrospectionDisabledError,
     RFC7662IntrospectionService,
 )

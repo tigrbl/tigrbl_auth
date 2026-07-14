@@ -8,7 +8,7 @@ from tigrbl_auth_api_oauth_introspection.binding import (
     _request_form_data,
     build_introspection_router,
 )
-from tigrbl_auth_protocol_oauth.standards.rfc7662 import (
+from tigrbl_auth_protocol_oauth.standards.introspection import (
     RFC7662IntrospectionService,
 )
 from tigrbl_token_introspection_capability import TokenIntrospectionCapability

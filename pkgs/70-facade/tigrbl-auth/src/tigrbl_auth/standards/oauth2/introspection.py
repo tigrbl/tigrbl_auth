@@ -1,13 +1,53 @@
-"""Compatibility facade for `tigrbl_identity_storage_runtime.introspection`."""
+"""Legacy RFC 7662 convenience surface over split owners."""
 
 from __future__ import annotations
 
-from tigrbl_auth._split_imports import alias_module as _alias_module
+from typing import Any
 
-_module = _alias_module(
-    __name__,
-    "tigrbl_identity_storage_runtime.introspection",
-    "tigrbl-identity-storage-runtime",
+from tigrbl_auth_protocol_oauth.standards._introspection_activity import (
+    apply_introspection_activity_constraints,
+)
+from tigrbl_auth_protocol_oauth.standards.introspection import RFC7662_SPEC_URL
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_server.introspection_surface import (
+    _protected_resource_verifier_contract,
+    include_introspection_endpoint,
+    include_rfc7662,
+)
+from tigrbl_identity_storage_runtime.introspection import (
+    introspect_token as _introspect_token,
+    introspect_token_async as _introspect_token_async,
+    register_token,
+    register_token_async,
+    reset_tokens,
+    reset_tokens_async,
+    unregister_token,
 )
 
-globals().update(_module.__dict__)
+
+def introspect_token(token: str) -> dict[str, Any]:
+    if not settings.enable_rfc7662:
+        raise RuntimeError(f"RFC 7662 support is disabled: {RFC7662_SPEC_URL}")
+    return apply_introspection_activity_constraints(_introspect_token(token))
+
+
+async def introspect_token_async(token: str) -> dict[str, Any]:
+    if not settings.enable_rfc7662:
+        raise RuntimeError(f"RFC 7662 support is disabled: {RFC7662_SPEC_URL}")
+    payload = await _introspect_token_async(token)
+    return apply_introspection_activity_constraints(payload)
+
+
+__all__ = [
+    "RFC7662_SPEC_URL",
+    "_protected_resource_verifier_contract",
+    "include_introspection_endpoint",
+    "include_rfc7662",
+    "introspect_token",
+    "introspect_token_async",
+    "register_token",
+    "register_token_async",
+    "reset_tokens",
+    "reset_tokens_async",
+    "unregister_token",
+]

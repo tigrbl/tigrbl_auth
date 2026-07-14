@@ -382,15 +382,18 @@ def test_executable_introspection_publisher_lives_above_storage() -> None:
         assert importlib.util.find_spec(module_name) is None
 
     runtime = importlib.import_module("tigrbl_identity_storage_runtime.introspection")
+    carrier = importlib.import_module("tigrbl_identity_server.introspection_surface")
     storage = importlib.import_module("tigrbl_identity_storage.tables.token_record")
 
-    assert runtime.api is runtime.router
-    assert runtime.include_introspection_endpoint.__module__ == (
-        "tigrbl_identity_storage_runtime.introspection"
+    assert not hasattr(runtime, "api")
+    assert not hasattr(runtime, "router")
+    assert not hasattr(runtime, "include_introspection_endpoint")
+    assert carrier.include_introspection_endpoint.__module__ == (
+        "tigrbl_identity_server.introspection_surface"
     )
     assert importlib.util.find_spec("tigrbl_identity_storage.tables.token_record._ops") is None
     assert runtime.introspect_token_async.__module__ == (
-        "tigrbl_identity_storage_runtime.introspection"
+        "tigrbl_identity_storage_runtime.token_lifecycle"
     )
     assert not hasattr(storage, "introspect")
     assert not hasattr(storage, "include_introspection_endpoint")

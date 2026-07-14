@@ -192,7 +192,7 @@ PROTOCOL_PUBLIC_CAPABILITIES: Final[tuple[dict[str, Any], ...]] = (
         "flags": ("enable_rfc7662",),
         "summary": "Token introspection endpoint",
         "tags": ("oauth2",),
-        "publisher_ref": "tigrbl_identity_storage_runtime.introspection:include_introspection_endpoint",
+        "publisher_ref": "tigrbl_identity_server.introspection_surface:include_introspection_endpoint",
         "targets": ("RFC 7662", "RFC 6750"),
         "contract_visible": True,
         "discovery_visible": True,
