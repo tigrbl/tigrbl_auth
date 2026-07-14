@@ -78,5 +78,6 @@ __all__ = [
     "register_dpop_nonce",
     "DURABLE_REPLAY_DESCRIPTOR",
     "check_and_reserve",
+    "make_attestation_appraisal_recorder",
     "publish_reference_material",
 ]

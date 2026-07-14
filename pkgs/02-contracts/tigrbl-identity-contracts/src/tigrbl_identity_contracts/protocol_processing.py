@@ -24,9 +24,15 @@ class ArtifactProcessingResult:
 
 
 class ArtifactProcessorPort(Protocol):
-    def decode(self, request: ArtifactProcessingRequest, /) -> ArtifactProcessingResult: ...
-    def validate(self, request: ArtifactProcessingRequest, /) -> ArtifactProcessingResult: ...
-    def encode(self, request: ArtifactProcessingRequest, /) -> ArtifactProcessingResult: ...
+    def decode(
+        self, request: ArtifactProcessingRequest, /
+    ) -> ArtifactProcessingResult: ...
+    def validate(
+        self, request: ArtifactProcessingRequest, /
+    ) -> ArtifactProcessingResult: ...
+    def encode(
+        self, request: ArtifactProcessingRequest, /
+    ) -> ArtifactProcessingResult: ...
     def map_error(self, error: object, /) -> ArtifactProcessingResult: ...
 
 
@@ -37,34 +43,44 @@ def build_protocol_capability_report(
     features: tuple[str, ...],
     evidence_links: tuple[str, ...] = (),
     extra_requirements: tuple[ProtocolCapabilityRequirement, ...] = (),
+    include_default_artifact_requirements: bool = True,
 ) -> dict[str, object]:
-    generated = tuple(
-        ProtocolCapabilityRequirement(
-            protocol=protocol,
-            revision=revision,
-            requirement_id=f"{protocol}:{feature}",
-            wire_element=feature,
-            capability_id="artifact.processing",
-            operation="validate",
-            normalized_namespace=f"protocol-artifact:{protocol}",
+    generated = (
+        tuple(
+            ProtocolCapabilityRequirement(
+                protocol=protocol,
+                revision=revision,
+                requirement_id=f"{protocol}:{feature}",
+                wire_element=feature,
+                capability_id="artifact.processing",
+                operation="validate",
+                normalized_namespace=f"protocol-artifact:{protocol}",
+            )
+            for feature in sorted(set(features))
         )
-        for feature in sorted(set(features))
+        if include_default_artifact_requirements
+        else ()
     )
     requirements = generated + tuple(extra_requirements)
     return {
         "protocol": protocol,
         "selected_revision": revision,
         "features": tuple(sorted(set(features))),
-        "required_capabilities": tuple(sorted({item.capability_id for item in requirements})),
+        "required_capabilities": tuple(
+            sorted({item.capability_id for item in requirements})
+        ),
         "requirements": requirements,
         "effective_coverage": {
-            item.requirement_id: f"{item.capability_id}.{item.operation}" for item in requirements
+            item.requirement_id: f"{item.capability_id}.{item.operation}"
+            for item in requirements
         },
         "evidence_links": tuple(evidence_links),
     }
 
 
 __all__ = [
-    "ArtifactProcessingRequest", "ArtifactProcessingResult", "ArtifactProcessorPort",
+    "ArtifactProcessingRequest",
+    "ArtifactProcessingResult",
+    "ArtifactProcessorPort",
     "build_protocol_capability_report",
 ]

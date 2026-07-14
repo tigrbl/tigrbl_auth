@@ -1,3 +1,4 @@
+import asyncio
 from datetime import datetime, timezone
 
 from tigrbl_attestation_appraisal import AttestationAppraisalCapability
@@ -108,7 +109,7 @@ def test_attestation_capability_records_appraisal_outcome():
         _Appraiser(),
         recorder=lambda evidence, result: records.append(result),
     )
-    assert capability.appraise(AttestationEvidence("profile", {})).trusted
+    assert asyncio.run(capability.appraise(AttestationEvidence("profile", {}))).trusted
     assert records[0].reason == "approved"
 
 

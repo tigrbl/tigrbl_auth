@@ -30,6 +30,18 @@ from tigrbl_identity_storage_runtime import (
     SecurityEventRuntimeSpec,
     SpiffeTrustBundleRuntimeSpec,
     SvidRecordRuntimeSpec,
+    make_attestation_appraisal_recorder,
+)
+from tigrbl_identity_contracts.attestation import (
+    AppraisalResult,
+    AttestationEvidence as AttestationEvidenceContract,
+    VerifiedAttestationEvidence,
+)
+from tigrbl_identity_contracts.tokens import (
+    ProtectedTokenEnvelope,
+    TokenEnvelopeFormat,
+    TokenProfile,
+    VerifiedTokenEnvelope,
 )
 
 
@@ -82,4 +94,53 @@ def test_table_operation_refuses_sensitive_raw_values_before_persistence() -> No
         "raw_payload",
     ):
         with pytest.raises(ValueError, match="sensitive raw fields"):
-            asyncio.run(operation.handler({"payload": {field: "secret"}, "db": object()}))
+            asyncio.run(
+                operation.handler({"payload": {field: "secret"}, "db": object()})
+            )
+
+
+def test_attestation_recorder_adapts_verified_evidence_to_durable_operations(
+    monkeypatch,
+) -> None:
+    from tigrbl_identity_storage_runtime.ops import attestation as operations
+
+    recorded = []
+
+    async def capture_evidence(ctx):
+        recorded.append(("evidence", ctx))
+        return ctx["payload"]
+
+    async def capture_result(ctx):
+        recorded.append(("result", ctx))
+        return ctx["payload"]
+
+    monkeypatch.setattr(operations, "record_attestation_evidence", capture_evidence)
+    monkeypatch.setattr(operations, "record_attestation_result", capture_result)
+    envelope = ProtectedTokenEnvelope(
+        "signed.eat.token",
+        TokenEnvelopeFormat.JWT,
+        TokenProfile.ENTITY_ATTESTATION_TOKEN,
+    )
+    evidence = AttestationEvidenceContract(
+        "urn:example:eat-profile", {"eat_profile": "urn:example:eat-profile"}
+    )
+    verified = VerifiedAttestationEvidence(
+        evidence, VerifiedTokenEnvelope(envelope, evidence.claims)
+    )
+    recorder = make_attestation_appraisal_recorder(
+        db="db",
+        evidence_id="eat-1",
+        artifact_locator="vault://eat/1",
+        evidence_digest="sha256:abc",
+        issuer="https://attester.example",
+        policy_id="policy-1",
+    )
+
+    result = asyncio.run(
+        recorder(verified, AppraisalResult(True, "approved", {"risk": "low"}))
+    )
+
+    assert result["evidence_id"] == "eat-1"
+    assert [kind for kind, _ in recorded] == ["evidence", "result"]
+    assert recorded[0][1]["payload"]["format"] == "jwt"
+    assert recorded[1][1]["payload"]["result_claims"] == {"risk": "low"}

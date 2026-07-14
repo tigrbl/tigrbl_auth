@@ -1,7 +1,11 @@
+import inspect
 from collections.abc import Callable
 
 from tigrbl_capability import Capability
-from tigrbl_identity_contracts.capabilities import CapabilityDefinition, CapabilityOperation
+from tigrbl_identity_contracts.capabilities import (
+    CapabilityDefinition,
+    CapabilityOperation,
+)
 from tigrbl_identity_contracts.attestation import (
     AppraisalResult,
     AttestationAppraiserPort,
@@ -71,16 +75,19 @@ class AttestationAppraisalCapability(Capability):
             raise LookupError("reference material provider is not configured")
         return self._reference_provider.resolve_manifest(tag_identity)
 
-    def record_result(
+    async def record_result(
         self,
         evidence: VerifiedAttestationEvidence,
         result: AppraisalResult,
     ) -> object:
         if self._recorder is None:
             raise LookupError("attestation result recorder is not configured")
-        return self._recorder(evidence, result)
+        recorded = self._recorder(evidence, result)
+        if inspect.isawaitable(recorded):
+            recorded = await recorded
+        return recorded
 
-    def appraise(self, evidence: AttestationEvidence) -> AppraisalResult:
+    async def appraise(self, evidence: AttestationEvidence) -> AppraisalResult:
         verification = self.verify_evidence(evidence)
         if not verification.verified or verification.evidence is None:
             return AppraisalResult(
@@ -88,7 +95,7 @@ class AttestationAppraisalCapability(Capability):
             )
         result = self._appraiser.appraise(verification.evidence)
         if self._recorder is not None:
-            self.record_result(verification.evidence, result)
+            await self.record_result(verification.evidence, result)
         return result
 
 

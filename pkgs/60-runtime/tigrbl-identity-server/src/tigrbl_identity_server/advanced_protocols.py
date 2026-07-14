@@ -154,7 +154,7 @@ async def appraise_attestation(request: Request) -> object:
             status.HTTP_400_BAD_REQUEST, "profile and claims are required"
         )
     evidence = AttestationEvidence(profile, dict(claims), raw)
-    return _jsonable(_component(request, "attestation").appraise(evidence))
+    return _jsonable(await _component(request, "attestation").appraise(evidence))
 
 
 def include_advanced_protocols(app: TigrblApp) -> None:

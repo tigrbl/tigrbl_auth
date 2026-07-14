@@ -25,6 +25,49 @@ record_attestation_evidence = create_table_handler(AttestationEvidence)
 record_attestation_result = create_table_handler(AttestationResult)
 
 
+def make_attestation_appraisal_recorder(
+    *,
+    db: Any,
+    evidence_id: str,
+    artifact_locator: str,
+    evidence_digest: str,
+    issuer: str | None = None,
+    policy_id: str | None = None,
+):
+    """Bind caller-owned durable state to the capability recorder signature."""
+
+    async def record(verified_evidence: Any, appraisal_result: Any) -> Any:
+        evidence = verified_evidence.evidence
+        envelope = verified_evidence.envelope.envelope
+        await record_attestation_evidence(
+            {
+                "payload": {
+                    "evidence_id": evidence_id,
+                    "profile": evidence.profile,
+                    "format": envelope.format.value,
+                    "issuer": issuer,
+                    "artifact_locator": artifact_locator,
+                    "evidence_digest": evidence_digest,
+                },
+                "db": db,
+            }
+        )
+        return await record_attestation_result(
+            {
+                "payload": {
+                    "evidence_id": evidence_id,
+                    "policy_id": policy_id,
+                    "trusted": appraisal_result.trusted,
+                    "reason": appraisal_result.reason,
+                    "result_claims": dict(appraisal_result.claims),
+                },
+                "db": db,
+            }
+        )
+
+    return record
+
+
 async def publish_reference_material(ctx: Mapping[str, Any]) -> Mapping[str, object]:
     """Stage a manifest and its material in one caller-owned transaction."""
 
@@ -80,6 +123,7 @@ async def publish_reference_material(ctx: Mapping[str, Any]) -> Mapping[str, obj
 
 
 __all__ = [
+    "make_attestation_appraisal_recorder",
     "publish_reference_material",
     "record_attestation_evidence",
     "record_attestation_result",
