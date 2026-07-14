@@ -26,6 +26,7 @@ from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication impor
 from tigrbl_auth_protocol_oauth.standards.resource_verifier_contract import (
     protected_resource_verifier_contract_from_request,
 )
+from tigrbl_auth_protocol_oauth.schemas import IntrospectOut
 from tigrbl_identity_runtime.deployment import deployment_from_request
 from tigrbl_identity_runtime.settings import settings
 from tigrbl import (
@@ -48,7 +49,6 @@ from .token_lifecycle import (
     reset_token_state as _reset_token_state,
     reset_token_state_async as _reset_token_state_async,
 )
-from tigrbl_identity_storage.tables.token_record import IntrospectOut
 from .token_lifecycle import (
     introspect_token_async as _introspect_token_async,
     remove_token_record_async,

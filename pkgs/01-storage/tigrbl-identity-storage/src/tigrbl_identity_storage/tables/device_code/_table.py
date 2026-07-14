@@ -7,7 +7,6 @@ import uuid
 
 from tigrbl_identity_storage.framework import (
     RestOltpTable,
-    BaseModel,
     Timestamped,
     S,
     acol,
@@ -20,22 +19,6 @@ from tigrbl_identity_storage.framework import (
     TZDateTime,
     GUIDPk,
 )
-
-
-class DeviceAuthorizationIn(BaseModel):
-    client_id: str
-    scope: str | None = None
-    audience: str | None = None
-    resource: list[str] | None = None
-
-
-class DeviceAuthorizationOut(BaseModel):
-    device_code: str
-    user_code: str
-    verification_uri: str
-    verification_uri_complete: str
-    expires_in: int
-    interval: int
 
 
 class DeviceCode(RestOltpTable, GUIDPk, Timestamped):
@@ -68,8 +51,4 @@ class DeviceCode(RestOltpTable, GUIDPk, Timestamped):
     )
 
 
-__all__ = [
-    "DeviceAuthorizationIn",
-    "DeviceAuthorizationOut",
-    "DeviceCode",
-]
+__all__ = ["DeviceCode"]

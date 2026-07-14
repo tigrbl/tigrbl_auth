@@ -58,6 +58,11 @@ from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
 )
 from tigrbl_auth_protocol_oauth.standards._rfc9700.security_profile import assert_token_request_allowed
 from tigrbl_auth_protocol_oauth.standards.proof_key_for_code_exchange import verify_code_challenge
+from tigrbl_auth_protocol_oauth.schemas import (
+    AuthorizationCodeGrantForm,
+    PasswordGrantForm,
+    TokenPair,
+)
 
 try:  # pragma: no cover - exercised with full runtime deps installed
     from tigrbl import JSONResponse as _FrameworkJSONResponse
@@ -90,28 +95,6 @@ except Exception:  # pragma: no cover - dependency-light fallback for checkpoint
             self.content = dict(self)
 
     status = _FallbackStatus()
-
-try:  # pragma: no cover
-    from tigrbl_identity_storage.tables.token_record import AuthorizationCodeGrantForm, PasswordGrantForm, TokenPair
-except Exception:  # pragma: no cover - dependency-light fallback
-    from pydantic import BaseModel
-
-    class AuthorizationCodeGrantForm(BaseModel):
-        client_id: str
-        code: str
-        redirect_uri: str
-        code_verifier: str | None = None
-
-    class PasswordGrantForm(BaseModel):
-        username: str
-        password: str
-        client_id: str | None = None
-
-    class TokenPair(BaseModel):
-        access_token: str
-        refresh_token: str | None = None
-        id_token: str | None = None
-        token_type: str = 'bearer'
 
 try:  # pragma: no cover
     from tigrbl_identity_server.rest.shared import _jwt, _require_tls, allowed_grant_types

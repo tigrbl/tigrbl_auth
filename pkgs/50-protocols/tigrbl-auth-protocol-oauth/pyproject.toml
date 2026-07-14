@@ -35,6 +35,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
+    "pydantic[email]==2.12.5",
     "tigrbl-auth-protocol-gnap==0.4.0.dev2",
     "swarmauri_signing_dpop==0.1.1",
     "tigrbl-identity-contracts==0.4.0.dev2",

@@ -4,10 +4,8 @@ from __future__ import annotations
 
 import datetime as dt
 import uuid
-from typing import Any
 
 from tigrbl_identity_storage.framework import (
-    BaseModel,
     Boolean,
     ForeignKeySpec,
     GUIDPk,
@@ -21,27 +19,6 @@ from tigrbl_identity_storage.framework import (
     Timestamped,
     acol,
 )
-
-
-class LogoutIn(BaseModel):
-    id_token_hint: str | None = None
-    post_logout_redirect_uri: str | None = None
-    state: str | None = None
-    sid: str | None = None
-    client_id: str | None = None
-
-
-class LogoutOut(BaseModel):
-    status: str
-    session_id: str | None = None
-    logout_id: str | None = None
-    post_logout_redirect_uri: str | None = None
-    state: str | None = None
-    cookie_cleared: bool = True
-    cookie_policy: dict[str, Any] | None = None
-    frontchannel_logout: dict[str, Any] | None = None
-    backchannel_logout: dict[str, Any] | None = None
-    replay_protected: bool = True
 
 
 class LogoutState(RestOltpTable, GUIDPk, Timestamped):
@@ -87,4 +64,4 @@ class LogoutState(RestOltpTable, GUIDPk, Timestamped):
     logout_metadata: Mapped[dict | None] = acol(storage=S(JSON, nullable=True))
 
 
-__all__ = ["LogoutIn", "LogoutOut", "LogoutState"]
+__all__ = ["LogoutState"]

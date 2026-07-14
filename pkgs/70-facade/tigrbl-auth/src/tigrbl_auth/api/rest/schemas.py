@@ -11,7 +11,7 @@ from tigrbl_identity_server.admin_auth import (
     AdminSessionOut,
     CredsIn,
 )
-from tigrbl_identity_storage.schemas import (
+from tigrbl_auth_protocol_oauth.schemas import (
     AuthorizationCodeGrantForm,
     DeviceAuthorizationIn,
     DeviceAuthorizationOut,
@@ -19,8 +19,6 @@ from tigrbl_identity_storage.schemas import (
     DynamicClientRegistrationManagementIn,
     DynamicClientRegistrationOut,
     IntrospectOut,
-    LogoutIn,
-    LogoutOut,
     PasswordGrantForm,
     PushedAuthorizationRequestIn,
     PushedAuthorizationResponse,
@@ -29,13 +27,14 @@ from tigrbl_identity_storage.schemas import (
     RevocationOut,
     TokenPair,
 )
+from tigrbl_auth_protocol_oidc.schemas import LogoutIn, LogoutOut
 
 LoginTokenPair = TokenPair
 
 
 warnings.warn(
-    "tigrbl_auth.api.rest.schemas is deprecated; import REST schemas from the owning "
-    "the owning API/runtime modules.",
+    "tigrbl_auth.api.rest.schemas is deprecated; import wire schemas from the "
+    "owning protocol or API package.",
     DeprecationWarning,
     stacklevel=2,
 )

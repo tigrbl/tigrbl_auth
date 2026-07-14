@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import importlib
-from types import SimpleNamespace
 from pathlib import Path
 
 import pytest
@@ -18,7 +17,9 @@ STORAGE_SRC = (
 )
 
 
-def test_custom_op_schemas_are_reachable_from_tigrbl_table_schema_namespace() -> None:
+def test_protocol_wire_schemas_are_not_owned_by_storage_tables() -> None:
+    from tigrbl_auth_protocol_oauth import schemas as oauth_schemas
+    from tigrbl_auth_protocol_oidc import schemas as oidc_schemas
     from tigrbl_identity_storage.tables import (
         AuthSession,
         ClientRegistration,
@@ -28,44 +29,40 @@ def test_custom_op_schemas_are_reachable_from_tigrbl_table_schema_namespace() ->
         RevokedToken,
         TokenRecord,
     )
-    from tigrbl_identity_storage.tables.client_registration import (
-        DynamicClientRegistrationIn,
-        DynamicClientRegistrationManagementIn,
-        DynamicClientRegistrationOut,
-    )
-    from tigrbl_identity_storage.tables.device_code import DeviceAuthorizationIn, DeviceAuthorizationOut
-    from tigrbl_identity_storage.tables.logout_state import LogoutIn, LogoutOut
-    from tigrbl_identity_storage.tables.pushed_authorization_request import (
-        PushedAuthorizationRequestIn,
-        PushedAuthorizationResponse,
-    )
-    from tigrbl_identity_storage.tables.revoked_token import RevocationIn, RevocationOut
-    from tigrbl_identity_storage.tables.token_record import (
-        IntrospectOut,
-        RefreshIn,
-        TokenPair,
-    )
-    from tigrbl_identity_storage.tables.auth_session import CredsIn, TokenPair as LoginTokenPair
-    from tigrbl_identity_storage_runtime.login import login
 
-    assert not hasattr(AuthSession.schemas, "login")
-    assert CredsIn.__name__ == "CredsIn"
-    assert "CredsIn" in str(login.__annotations__.get("creds"))
-    assert LoginTokenPair.__name__ == "TokenPair"
-    assert TokenRecord.schemas.token.out is TokenPair
-    assert TokenRecord.schemas.refresh.in_ is RefreshIn
-    assert TokenRecord.schemas.introspect.out is IntrospectOut
-    assert ClientRegistration.schemas.register.in_ is DynamicClientRegistrationIn
-    assert ClientRegistration.schemas.register.out is DynamicClientRegistrationOut
-    assert ClientRegistration.schemas.register_put.in_ is DynamicClientRegistrationManagementIn
-    assert DeviceCode.schemas.device_authorization.in_ is DeviceAuthorizationIn
-    assert DeviceCode.schemas.device_authorization.out is DeviceAuthorizationOut
-    assert PushedAuthorizationRequest.schemas.par.in_ is PushedAuthorizationRequestIn
-    assert PushedAuthorizationRequest.schemas.par.out is PushedAuthorizationResponse
-    assert RevokedToken.schemas.revoke.in_ is RevocationIn
-    assert RevokedToken.schemas.revoke.out is RevocationOut
-    assert LogoutState.schemas.logout.in_ is LogoutIn
-    assert LogoutState.schemas.logout.out is LogoutOut
+    assert oauth_schemas.TokenPair.__module__ == oauth_schemas.__name__
+    assert oauth_schemas.DynamicClientRegistrationIn.__module__ == oauth_schemas.__name__
+    assert oauth_schemas.DeviceAuthorizationOut.__module__ == oauth_schemas.__name__
+    assert oauth_schemas.PushedAuthorizationResponse.__module__ == oauth_schemas.__name__
+    assert oauth_schemas.RevocationOut.__module__ == oauth_schemas.__name__
+    assert oidc_schemas.LogoutIn.__module__ == oidc_schemas.__name__
+
+    custom_operations = {
+        AuthSession: ("login",),
+        TokenRecord: ("token", "refresh", "introspect"),
+        ClientRegistration: ("register", "register_put"),
+        DeviceCode: ("device_authorization",),
+        PushedAuthorizationRequest: ("par",),
+        RevokedToken: ("revoke",),
+        LogoutState: ("logout",),
+    }
+    for table, operation_names in custom_operations.items():
+        for operation_name in operation_names:
+            assert not hasattr(table.schemas, operation_name)
+
+    storage_modules = (
+        "auth_session",
+        "client_registration",
+        "device_code",
+        "logout_state",
+        "pushed_authorization_request",
+        "revoked_token",
+        "token_record",
+    )
+    forbidden_schema_names = set(oauth_schemas.__all__) | set(oidc_schemas.__all__) | {"CredsIn"}
+    for module_name in storage_modules:
+        module = importlib.import_module(f"tigrbl_identity_storage.tables.{module_name}")
+        assert forbidden_schema_names.isdisjoint(vars(module))
 
 
 def test_admin_auth_schemas_are_owned_by_the_server_runtime() -> None:
@@ -100,42 +97,13 @@ def test_storage_tables_export_table_inventory_without_schema_namespaces() -> No
         exec("from tigrbl_identity_storage.tables import RoleSchemas", {})
 
 
-def test_storage_schema_registry_reflects_only_materialized_table_schemas() -> None:
-    storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
-    storage_schemas = importlib.import_module("tigrbl_identity_storage.schemas")
-    schema_registry = importlib.import_module("tigrbl_identity_storage.schema_registry")
-
-    for name in storage_tables.TABLE_MODEL_BY_NAME:
-        exported = getattr(storage_tables, name)
-        if getattr(exported, "__table__", None) is None:
-            continue
-        for op_name in dir(exported.schemas):
-            if op_name.startswith("_"):
-                continue
-            op_schema = getattr(exported.schemas, op_name)
-            for direction in ("in_", "out"):
-                schema = getattr(op_schema, direction, None)
-                if schema is None or not hasattr(schema, "model_json_schema"):
-                    continue
-                schema_name = schema.__name__
-                schema_alias = getattr(storage_schemas, schema_name)
-
-                assert schema_name in storage_schemas.__all__
-                assert schema_registry.OPENAPI_SCHEMA_REGISTRY[schema_name] is schema_alias
-                assert (
-                    schema_registry.TABLE_SCHEMA_BINDINGS[(name, op_name, direction.removesuffix("_"))]
-                    is schema
-                )
-                assert schema_alias.model_json_schema() == schema.model_json_schema()
-
-    # Importing layer 01 no longer binds every mapped table merely to generate
-    # CRUD schemas. Runtime/API composition materializes selected tables later.
-    assert not hasattr(storage_schemas, "RoleCreateRequest")
-    assert not hasattr(storage_tables.Role.schemas, "create")
+def test_storage_package_has_no_openapi_schema_registry() -> None:
+    assert importlib.util.find_spec("tigrbl_identity_storage.schemas") is None
+    assert importlib.util.find_spec("tigrbl_identity_storage.schema_registry") is None
 
 
-def test_table_schema_alias_exports_cover_router_openapi_components() -> None:
-    storage_schemas = importlib.import_module("tigrbl_identity_storage.schemas")
+def test_protocol_schema_owner_covers_mounted_token_component() -> None:
+    from tigrbl_auth_protocol_oauth.schemas import TokenPair
     from tigrbl_identity_runtime.deployment import resolve_deployment
     from tigrbl_identity_server.surfaces import build_public_router
 
@@ -144,43 +112,8 @@ def test_table_schema_alias_exports_cover_router_openapi_components() -> None:
     )
 
     component_names = set(surface_api.openapi().get("components", {}).get("schemas", {}))
-    external_api_components = {"AdminSessionOut"}
-    missing = sorted(
-        name
-        for name in component_names
-        if not hasattr(storage_schemas, name) and name not in external_api_components
-    )
-
-    assert missing == []
     assert "AdminSessionOut" in component_names
-    assert storage_schemas.CredentialServiceKeyCreateRequest.__name__ in component_names
-    assert storage_schemas.TokenPair.__name__ in component_names
-
-
-def test_schema_registry_rejects_conflicting_duplicate_openapi_names() -> None:
-    from tigrbl_identity_storage.schema_registry import (
-        SchemaRegistryError,
-        _build_schema_indexes,
-    )
-
-    DuplicateA = type(
-        "DuplicateSchema",
-        (),
-        {"model_json_schema": classmethod(lambda cls: {"title": "DuplicateSchema", "type": "object"})},
-    )
-    DuplicateB = type(
-        "DuplicateSchema",
-        (),
-        {"model_json_schema": classmethod(lambda cls: {"title": "DuplicateSchema", "type": "string"})},
-    )
-    FakeTable = type(
-        "FakeTable",
-        (),
-        {"schemas": SimpleNamespace(create=SimpleNamespace(in_=DuplicateA, out=DuplicateB))},
-    )
-
-    with pytest.raises(SchemaRegistryError):
-        _build_schema_indexes((FakeTable,))
+    assert TokenPair.__name__ in component_names
 
 
 def test_storage_package_does_not_import_identity_contract_schemas() -> None:
@@ -232,7 +165,6 @@ def test_storage_table_helpers_are_nested_under_table_owners() -> None:
         path.relative_to(ROOT).as_posix()
         for path in tables_root.glob("_*.py")
         if path.name != "_ops.py"
-        and path.name != "_schema_ctx.py"
         and path.name.startswith(flat_helper_prefixes)
     ]
 

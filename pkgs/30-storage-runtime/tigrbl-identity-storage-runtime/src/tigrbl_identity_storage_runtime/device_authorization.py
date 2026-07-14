@@ -54,10 +54,11 @@ from tigrbl_auth_protocol_oauth.standards.device_authorization import (
     generate_user_code,
 )
 from tigrbl_auth_protocol_oauth.standards.resource_indicators import select_resource_indicator
+from tigrbl_auth_protocol_oauth.schemas import DeviceAuthorizationOut
 
 try:  # pragma: no cover
     from tigrbl_identity_storage.tables.client import Client
-    from tigrbl_identity_storage.tables.device_code import DeviceAuthorizationOut, DeviceCode
+    from tigrbl_identity_storage.tables.device_code import DeviceCode
 except Exception:  # pragma: no cover - placeholders for dependency-light tests
     class Client:  # type: ignore[override]
         id = object()
@@ -67,10 +68,6 @@ except Exception:  # pragma: no cover - placeholders for dependency-light tests
             for key, value in kwargs.items():
                 setattr(self, key, value)
             self.id = kwargs.get('id') or kwargs.get('device_code')
-
-    class DeviceAuthorizationOut:  # type: ignore[override]
-        pass
-
 
 api = router = TigrblRouter()
 

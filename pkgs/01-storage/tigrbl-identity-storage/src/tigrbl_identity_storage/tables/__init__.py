@@ -7,31 +7,6 @@ TABLE_MODELS = _TABLE_MODELS
 TABLE_MODEL_BY_NAME = {model.__name__: model for model in TABLE_MODELS}
 TABLE_MODEL_BY_TABLENAME = {model.__tablename__: model for model in TABLE_MODELS}
 
-
-def _attach_custom_op_schemas() -> None:
-    set_schema(TokenRecord, "token", in_=None, out=TokenPair)
-    set_schema(TokenRecord, "authorization_code_grant", in_=AuthorizationCodeGrantForm, out=TokenPair)
-    set_schema(TokenRecord, "password_grant", in_=PasswordGrantForm, out=TokenPair)
-    set_schema(TokenRecord, "refresh", in_=RefreshIn, out=TokenPair)
-    set_schema(TokenRecord, "introspect", out=IntrospectOut)
-
-    set_schema(ClientRegistration, "register", in_=DynamicClientRegistrationIn, out=DynamicClientRegistrationOut)
-    set_schema(ClientRegistration, "register_get", out=DynamicClientRegistrationOut)
-    set_schema(
-        ClientRegistration,
-        "register_put",
-        in_=DynamicClientRegistrationManagementIn,
-        out=DynamicClientRegistrationOut,
-    )
-    set_schema(ClientRegistration, "register_delete", out=dict)
-
-    set_schema(DeviceCode, "device_authorization", in_=DeviceAuthorizationIn, out=DeviceAuthorizationOut)
-    set_schema(PushedAuthorizationRequest, "par", in_=PushedAuthorizationRequestIn, out=PushedAuthorizationResponse)
-    set_schema(RevokedToken, "revoke", in_=RevocationIn, out=RevocationOut)
-    set_schema(LogoutState, "logout", in_=LogoutIn, out=LogoutOut)
-
-_attach_custom_op_schemas()
-
 __all__ = [
     "RestOltpTable",
     "TABLE_MODELS",

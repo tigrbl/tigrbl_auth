@@ -12,6 +12,7 @@ from .claim_sets import (
 )
 from .features import FEATURES_BY_VERSION, supports
 from .migrations import migrate_client_metadata
+from .schemas import LogoutIn, LogoutOut
 from .provider import (
     HostedLoginPage,
     HostedLoginRequest,
@@ -40,6 +41,8 @@ __all__ = [
     "HostedLoginPage",
     "HostedLoginRequest",
     "LoginThemeAssetPolicy",
+    "LogoutIn",
+    "LogoutOut",
     "LogoutPlan",
     "LogoutRequest",
     "OidcProviderError",

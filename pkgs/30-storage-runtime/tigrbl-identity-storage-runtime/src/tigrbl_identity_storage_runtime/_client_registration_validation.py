@@ -6,12 +6,12 @@ from pathlib import Path
 from urllib.parse import urlparse
 from uuid import UUID, uuid4
 
-from tigrbl_identity_storage.tables.client_registration import (
-    ClientRegistration,
+from tigrbl_auth_protocol_oauth.schemas import (
     DynamicClientRegistrationIn,
     DynamicClientRegistrationManagementIn,
     DynamicClientRegistrationOut,
 )
+from tigrbl_identity_storage.tables.client_registration import ClientRegistration
 from tigrbl_identity_runtime.deployment import (
     deployment_from_app,
     deployment_from_request,

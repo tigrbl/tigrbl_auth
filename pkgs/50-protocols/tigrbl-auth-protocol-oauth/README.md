@@ -33,9 +33,13 @@ client = OAuthClient(client_id="client-a", redirect_uris=("https://app.example/c
 ## Package Boundary
 
 - OAuth authorization and token protocol behavior
+- `schemas.py` owns OAuth token, introspection, revocation, device authorization,
+  PAR, and dynamic-client-registration wire models.
 - PKCE, PAR, RAR, JAR, device authorization, token exchange, DPoP, mTLS, and resource indicators
 - Dynamic client registration and registration management protocol behavior
 - Provider-facing OAuth wire validation below API front-door assembly
+- Durable records and mutations remain in layers 01 and 30; this package does
+  not attach protocol schemas to mapped storage classes.
 
 ## Related Packages
 

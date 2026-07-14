@@ -3,11 +3,9 @@
 from __future__ import annotations
 
 import datetime as dt
-from typing import Optional
 
 from tigrbl_identity_storage.framework import (
     RestOltpTable,
-    BaseModel,
     TenantColumn,
     Timestamped,
     UserColumn,
@@ -20,23 +18,7 @@ from tigrbl_identity_storage.framework import (
     ForeignKeySpec,
     PgUUID,
     UUID,
-    Field,
-    constr,
 )
-
-_password = constr(min_length=8, max_length=256)
-
-
-class CredsIn(BaseModel):
-    identifier: constr(strip_whitespace=True, min_length=3, max_length=120)
-    password: _password
-
-
-class TokenPair(BaseModel):
-    access_token: str
-    refresh_token: Optional[str] = None
-    token_type: str = Field(default="bearer")
-    id_token: Optional[str] = None
 
 
 class AuthSession(RestOltpTable, GUIDPk, Timestamped, UserColumn, TenantColumn):
@@ -60,8 +42,4 @@ class AuthSession(RestOltpTable, GUIDPk, Timestamped, UserColumn, TenantColumn):
     ended_at: Mapped[dt.datetime | None] = acol(storage=S(TZDateTime, nullable=True, index=True))
     logout_reason: Mapped[str | None] = acol(storage=S(String(128), nullable=True))
 
-__all__ = [
-    "AuthSession",
-    "CredsIn",
-    "TokenPair",
-]
+__all__ = ["AuthSession"]

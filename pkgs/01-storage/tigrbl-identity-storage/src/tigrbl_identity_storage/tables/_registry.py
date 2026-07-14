@@ -7,12 +7,7 @@ from .realm import Realm
 from .tenant import Tenant
 from .user import User
 from .client import Client, _CLIENT_ID_RE
-from .client_registration import (
-    ClientRegistration,
-    DynamicClientRegistrationIn,
-    DynamicClientRegistrationManagementIn,
-    DynamicClientRegistrationOut,
-)
+from .client_registration import ClientRegistration
 from .authorization_server import AuthorizationServer
 from .principal import Principal
 from .service_identity import ServiceIdentity
@@ -44,18 +39,11 @@ from .replay_reservation import ReplayReservation
 from .did_gnap_state import DidDocument,DidDocumentVersion,DidResolutionCache,DidService,DidVerificationMethod,GnapClientInstance,GnapContinuation,GnapGrant,GnapInteraction
 from .certificate_state import CertificateRecord,CertificateStatusSnapshot,TrustAnchor
 from .claim_state import ClaimDefinition,ClaimProvenanceRecord,ClaimReleasePolicy,ClaimSnapshot,ClaimSourceBinding
-from .auth_session import AuthSession, CredsIn, TokenPair as LoginTokenPair
+from .auth_session import AuthSession
 from .auth_code import AuthCode
-from .device_code import DeviceAuthorizationIn, DeviceAuthorizationOut, DeviceCode
-from .revoked_token import RevocationIn, RevocationOut, RevokedToken
-from .token_record import (
-    AuthorizationCodeGrantForm,
-    IntrospectOut,
-    PasswordGrantForm,
-    RefreshIn,
-    TokenPair,
-    TokenRecord,
-)
+from .device_code import DeviceCode
+from .revoked_token import RevokedToken
+from .token_record import TokenRecord
 from .delegation_grant import (
     DelegationGrant,
     DelegationGrantEdge,
@@ -64,14 +52,10 @@ from .delegation_grant import (
     DelegationGrantScope,
     DelegationGrantTokenLink,
 )
-from .pushed_authorization_request import (
-    PushedAuthorizationRequest,
-    PushedAuthorizationRequestIn,
-    PushedAuthorizationResponse,
-)
+from .pushed_authorization_request import PushedAuthorizationRequest
 from .consent import Consent
 from .audit_event import AuditEvent
-from .logout_state import LogoutIn, LogoutOut, LogoutState
+from .logout_state import LogoutState
 from .backchannel_logout_replay import BackchannelLogoutReplay
 from .authentication_challenge import AuthenticationChallenge
 from .dpop_nonce import DpopNonce
@@ -134,7 +118,6 @@ from .operator_record import OperatorRecord
 from .operator_transaction import OperatorTransaction
 from .operator_audit_event import OperatorAuditEvent
 from .operator_activity import OperatorActivity
-from ._schema_ctx import set_schema
 
 
 _TABLE_MODELS = (

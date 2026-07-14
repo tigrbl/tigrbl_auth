@@ -5,11 +5,9 @@ from __future__ import annotations
 import datetime as dt
 import uuid
 from datetime import datetime, timedelta, timezone
-from typing import Any
 
 from tigrbl_identity_storage.framework import (
     RestOltpTable,
-    BaseModel,
     Timestamped,
     S,
     acol,
@@ -24,25 +22,6 @@ from tigrbl_identity_storage.framework import (
 )
 
 DEFAULT_PAR_EXPIRY = 90
-
-
-class PushedAuthorizationRequestIn(BaseModel):
-    client_id: str
-    request: str | None = None
-    response_type: str | None = None
-    redirect_uri: str | None = None
-    scope: str | None = None
-    state: str | None = None
-    nonce: str | None = None
-    code_challenge: str | None = None
-    code_challenge_method: str | None = None
-    resource: list[str] | None = None
-    authorization_details: list[dict[str, Any]] | None = None
-
-
-class PushedAuthorizationResponse(BaseModel):
-    request_uri: str
-    expires_in: int
 
 
 def _utc(value: datetime | None) -> datetime | None:
@@ -106,6 +85,4 @@ class PushedAuthorizationRequest(RestOltpTable, GUIDPk, Timestamped):
 __all__ = [
     "DEFAULT_PAR_EXPIRY",
     "PushedAuthorizationRequest",
-    "PushedAuthorizationRequestIn",
-    "PushedAuthorizationResponse",
 ]

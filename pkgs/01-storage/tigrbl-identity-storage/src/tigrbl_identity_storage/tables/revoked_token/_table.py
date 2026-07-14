@@ -6,7 +6,6 @@ import datetime as dt
 import uuid
 from tigrbl_identity_storage.framework import (
     RestOltpTable,
-    BaseModel,
     Timestamped,
     S,
     acol,
@@ -17,15 +16,6 @@ from tigrbl_identity_storage.framework import (
     PgUUID,
     ForeignKeySpec,
 )
-
-
-class RevocationIn(BaseModel):
-    token: str
-    token_type_hint: str | None = None
-
-
-class RevocationOut(BaseModel):
-    revoked: bool = True
 
 
 class RevokedToken(RestOltpTable, GUIDPk, Timestamped):
@@ -46,4 +36,4 @@ class RevokedToken(RestOltpTable, GUIDPk, Timestamped):
     expires_at: Mapped[dt.datetime | None] = acol(storage=S(TZDateTime, nullable=True, index=True))
 
 
-__all__ = ["RevocationIn", "RevocationOut", "RevokedToken"]
+__all__ = ["RevokedToken"]

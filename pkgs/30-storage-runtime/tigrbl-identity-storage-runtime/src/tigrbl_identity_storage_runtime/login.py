@@ -4,15 +4,23 @@ import secrets
 from datetime import datetime, timedelta, timezone
 from typing import Any
 
+from pydantic import BaseModel, constr
 from tigrbl import Depends, JSONResponse, Request, TigrblRouter
 from tigrbl.runtime.status import HTTPException
-from tigrbl_identity_storage.tables.auth_session import CredsIn, TokenPair
+from tigrbl_auth_protocol_oauth.schemas import TokenPair
 from .engine import get_db
 from tigrbl_principal_authentication import PasswordAuthenticationCapability
 
 from .ops.identities import lookup_identity_by_identifier
 
 router = TigrblRouter()
+
+
+class CredsIn(BaseModel):
+    identifier: constr(strip_whitespace=True, min_length=3, max_length=120)
+    password: constr(min_length=8, max_length=256)
+
+
 password_authentication = PasswordAuthenticationCapability(
     lookup_identity_by_identifier
 )

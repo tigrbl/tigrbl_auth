@@ -34,7 +34,6 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
-    "email-validator>=2.0",
     "tigrbl==0.4.4.dev1",
     "tigrbl-core==0.4.4.dev1",
     "tigrbl-identity-core==0.4.0.dev2",

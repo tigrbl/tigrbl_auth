@@ -33,8 +33,11 @@ runtime = OidcProviderRuntime(branding=TenantBrandingRegistry())
 
 - OpenID Provider metadata and discovery behavior
 - ID Token, UserInfo, claims, `acr`, `amr`, session, and logout protocol behavior
+- `schemas.py` owns OIDC logout request and response wire models.
 - Provider-facing OIDC wire validation below API front-door assembly
 - OIDC behavior layered on OAuth protocol foundations
+- Durable session/logout records remain in layers 01 and 30; this package does
+  not attach OIDC schemas to mapped storage classes.
 
 ## Related Packages
 

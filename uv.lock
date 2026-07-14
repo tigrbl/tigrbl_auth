@@ -2420,6 +2420,7 @@ name = "tigrbl-auth-protocol-oauth"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-oauth" }
 dependencies = [
+    { name = "pydantic", extra = ["email"] },
     { name = "swarmauri-signing-dpop" },
     { name = "tigrbl-auth-protocol-gnap" },
     { name = "tigrbl-authorization-scope-set-matcher-concrete" },
@@ -2444,6 +2445,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "pydantic", extras = ["email"], specifier = "==2.12.5" },
     { name = "swarmauri-signing-dpop", specifier = "==0.1.1" },
     { name = "tigrbl-auth-protocol-gnap", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authorization-scope-set-matcher-concrete", specifier = "==0.4.0.dev2" },
@@ -2501,6 +2503,7 @@ name = "tigrbl-auth-protocol-oidc"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-oidc" }
 dependencies = [
+    { name = "pydantic" },
     { name = "tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-authn-credentials" },
     { name = "tigrbl-claim-access-token-hash-concrete" },
@@ -2556,6 +2559,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "pydantic", specifier = "==2.12.5" },
     { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authn-credentials", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-claim-access-token-hash-concrete", specifier = "==0.4.0.dev2" },
@@ -5775,7 +5779,6 @@ name = "tigrbl-identity-storage"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage" }
 dependencies = [
-    { name = "email-validator" },
     { name = "tigrbl" },
     { name = "tigrbl-core" },
     { name = "tigrbl-identity-core" },
@@ -5784,7 +5787,6 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "email-validator", specifier = ">=2.0" },
     { name = "tigrbl", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-core", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
@@ -5796,6 +5798,7 @@ name = "tigrbl-identity-storage-runtime"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime" }
 dependencies = [
+    { name = "pydantic" },
     { name = "tigrbl" },
     { name = "tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-auth-protocol-oidc" },
@@ -5813,6 +5816,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "pydantic", specifier = "==2.12.5" },
     { name = "tigrbl", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-oidc", specifier = "==0.4.0.dev2" },

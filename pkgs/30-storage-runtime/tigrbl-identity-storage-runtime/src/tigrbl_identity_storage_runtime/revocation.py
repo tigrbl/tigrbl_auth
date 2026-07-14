@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from urllib.parse import parse_qs
 
+from tigrbl_auth_protocol_oauth.schemas import RevocationOut
 from tigrbl_identity_runtime.settings import settings
 from tigrbl import (
     Request,
@@ -24,7 +25,6 @@ from .token_lifecycle import (
     revoke_token_async,
 )
 from .ops.audit import append_audit_event_async
-from tigrbl_identity_storage.tables.revoked_token import RevocationOut
 
 RFC7009_SPEC_URL = "https://www.rfc-editor.org/rfc/rfc7009"
 CANONICAL_REVOCATION_PATH = "/revoke"

@@ -28,6 +28,7 @@ from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication impor
     presented_certificate_pem,
 )
 from tigrbl_auth_protocol_oauth.standards.dpop import verify_proof_async
+from tigrbl_auth_protocol_oauth.schemas import PushedAuthorizationResponse
 from tigrbl_identity_storage_runtime.dpop_state import check_and_store_dpop_replay, consume_dpop_nonce
 
 try:  # pragma: no cover - exercised with the full runtime stack installed
@@ -70,10 +71,7 @@ except Exception:  # pragma: no cover - dependency-light fallback for checkpoint
 try:  # pragma: no cover - exercised with the full runtime stack installed
     from tigrbl_identity_storage.tables.client import Client
     from tigrbl_identity_storage.tables.client_registration import ClientRegistration
-    from tigrbl_identity_storage.tables.pushed_authorization_request import (
-        PushedAuthorizationRequest,
-        PushedAuthorizationResponse,
-    )
+    from tigrbl_identity_storage.tables.pushed_authorization_request import PushedAuthorizationRequest
 except Exception:  # pragma: no cover - dependency-light placeholders
     class Client:  # type: ignore[override]
         id = object()
@@ -93,9 +91,6 @@ except Exception:  # pragma: no cover - dependency-light placeholders
             self.expires_in = 90
             self.expires_at = None
             self.consumed_at = None
-
-    class PushedAuthorizationResponse:  # type: ignore[override]
-        pass
 
 api = router = TigrblRouter()
 

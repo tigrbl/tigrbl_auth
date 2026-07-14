@@ -58,11 +58,11 @@ def test_server_has_no_rest_schema_bucket_module() -> None:
         importlib.import_module("tigrbl_identity_server.routers.schemas")
 
 
-def test_rest_schema_facade_points_to_table_owned_schemas() -> None:
+def test_rest_schema_facade_points_to_protocol_and_api_owned_schemas() -> None:
     with pytest.warns(DeprecationWarning):
         schemas = importlib.reload(importlib.import_module("tigrbl_auth.api.rest.schemas"))
+    from tigrbl_auth_protocol_oauth.schemas import TokenPair
     from tigrbl_identity_server.admin_auth import CredsIn
-    from tigrbl_identity_storage.schemas import TokenPair
 
     assert schemas.CredsIn is CredsIn
     assert schemas.TokenPair is TokenPair
