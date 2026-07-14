@@ -7,6 +7,7 @@ from .clients import *
 from .consents import *
 from .credentials import *
 from .delegation import *
+from .dpop import *
 from .oidc import *
 from .oauth import *
 from .identities import *
@@ -56,6 +57,8 @@ DURABLE_RUNTIME_TABLE_SPECS = (
     SvidRecordRuntimeSpec,
     SpiffeTrustBundleRuntimeSpec,
     ReplayReservationRuntimeSpec,
+    DpopReplayRuntimeSpec,
+    DpopNonceRuntimeSpec,
 )
 
 __all__ = [

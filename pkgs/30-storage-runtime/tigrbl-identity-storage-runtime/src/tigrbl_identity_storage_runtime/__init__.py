@@ -2,6 +2,7 @@
 
 from .define import *
 from .derive import *
+from .dpop_state import *
 from .factories import *
 from .hooks import *
 from .inventory import *
@@ -67,6 +68,14 @@ __all__ = [
     "SvidRecordRuntimeSpec",
     "SpiffeTrustBundleRuntimeSpec",
     "ReplayReservationRuntimeSpec",
+    "DpopReplayRuntimeSpec",
+    "DpopNonceRuntimeSpec",
+    "makeDpopReplayRuntimeSpec",
+    "makeDpopNonceRuntimeSpec",
+    "check_and_store_dpop_replay",
+    "consume_dpop_nonce",
+    "issue_dpop_nonce",
+    "register_dpop_nonce",
     "DURABLE_REPLAY_DESCRIPTOR",
     "check_and_reserve",
     "publish_reference_material",

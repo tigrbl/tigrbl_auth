@@ -4,16 +4,11 @@ from pathlib import Path
 
 import pytest
 
-from tigrbl_auth_protocol_oauth.standards.dpop import (
-    configure_state_providers,
-    issue_nonce,
-)
+from tigrbl_auth_protocol_oauth.standards.dpop import issue_nonce
 from tigrbl_auth_protocol_rp import RPConfiguration, RelyingParty
 from tigrbl_replay_memory_provider import (
-    MemoryReplayCheckProvider,
     MemoryRPSessionProvider,
     MemoryRPStateProvider,
-    MemorySingleUseNonceProvider,
 )
 
 
@@ -106,8 +101,8 @@ def test_rp_requires_explicit_state_and_session_providers() -> None:
     assert rp.build_authorization_url("https://issuer.example/authorize")[1].state
 
 
-def test_dpop_state_is_explicitly_provider_configured() -> None:
-    configure_state_providers(
-        replay=MemoryReplayCheckProvider(), nonce=MemorySingleUseNonceProvider()
-    )
-    assert issue_nonce()
+def test_dpop_state_requires_an_explicit_operation() -> None:
+    with pytest.raises(RuntimeError, match="injected DPoP table-backed operation"):
+        issue_nonce()
+
+    assert issue_nonce(issuer=lambda *, ttl_s: f"nonce-{ttl_s}") == "nonce-300"

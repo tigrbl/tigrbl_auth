@@ -152,6 +152,8 @@ __all__ = [
     "LogoutState",
     "BackchannelLogoutReplay",
     "AuthenticationChallenge",
+    "DpopReplay",
+    "DpopNonce",
     "KeyRotationEvent",
     "KeyRotationPolicy",
     "TenantMembership",

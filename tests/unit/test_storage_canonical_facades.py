@@ -48,6 +48,8 @@ TABLE_MODULE_EXPORTS = {
     "credential_service_key": ("CredentialServiceKey",),
     "credential_webauthn_passkey": ("CredentialWebAuthnPasskey",),
     "device_code": ("DeviceCode",),
+    "dpop_nonce": ("DpopNonce",),
+    "dpop_replay": ("DpopReplay",),
     "delegated_admin_scope": ("DelegatedAdminScope",),
     "delegation_grant": (
         "DelegationGrant",

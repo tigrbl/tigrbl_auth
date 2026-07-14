@@ -20,6 +20,8 @@ def test_registry_state_has_storage_tables_without_runtime_repositories() -> Non
         "InvariantViolation",
         "BackchannelLogoutReplay",
         "AuthenticationChallenge",
+        "DpopReplay",
+        "DpopNonce",
         "AuthorityDerivationGraph",
         "AuthorityDerivationGraphNode",
         "AuthorityDerivationGraphEdge",
@@ -34,6 +36,8 @@ def test_registry_state_has_storage_tables_without_runtime_repositories() -> Non
     assert not hasattr(runtime, "StoragePolicyRepository")
     assert not hasattr(runtime, "StorageFederationRepository")
     assert not hasattr(runtime, "StorageInvariantRepository")
+    assert not hasattr(runtime, "DpopReplayTableStore")
+    assert not hasattr(runtime, "DpopNonceTableStore")
 
 
 def test_registry_tables_are_in_migration_chain() -> None:
@@ -87,6 +91,52 @@ def test_authority_and_trust_graph_tables_are_in_migration_chain() -> None:
         "TrustFederationGraph",
         "TrustFederationGraphNode",
         "TrustFederationGraphEdge",
+    )
+
+
+def test_dpop_replay_and_nonce_tables_are_in_migration_chain() -> None:
+    migration = importlib.import_module(
+        "tigrbl_identity_storage.migrations.versions.0034_dpop_replay_nonce_tables"
+    )
+
+    assert migration.down_revision == "0033_replay_reservations"
+    assert tuple(table.__name__ for table in migration.TABLES) == (
+        "DpopReplay",
+        "DpopNonce",
+    )
+
+
+def test_dpop_table_factories_live_in_storage_runtime() -> None:
+    import tigrbl_identity_storage.tables as storage
+    from tigrbl_identity_storage.tables import DpopNonce, DpopReplay
+    from tigrbl_identity_storage_runtime.tables.dpop import (
+        DpopNonceRuntimeSpec,
+        DpopReplayRuntimeSpec,
+        makeDpopNonceRuntimeSpec,
+        makeDpopReplayRuntimeSpec,
+    )
+
+    for legacy_name in (
+        "defineDpopNonceTableSpec",
+        "defineDpopReplayTableSpec",
+        "deriveDpopNonceTable",
+        "deriveDpopReplayTable",
+        "makeDpopNonceTable",
+        "makeDpopReplayTable",
+        "makeInMemoryDpopNonceTable",
+        "makeInMemoryDpopReplayTable",
+    ):
+        assert not hasattr(storage, legacy_name)
+
+    assert DpopReplayRuntimeSpec.model is DpopReplay
+    assert DpopNonceRuntimeSpec.model is DpopNonce
+    assert makeDpopReplayRuntimeSpec().model is DpopReplay
+    assert makeDpopNonceRuntimeSpec().model is DpopNonce
+    assert {operation.alias for operation in DpopReplayRuntimeSpec.ops}.issuperset(
+        {"check_and_store", "snapshot", "purge_expired", "clear"}
+    )
+    assert {operation.alias for operation in DpopNonceRuntimeSpec.ops}.issuperset(
+        {"issue", "register", "consume", "snapshot", "purge_expired", "clear"}
     )
 
 

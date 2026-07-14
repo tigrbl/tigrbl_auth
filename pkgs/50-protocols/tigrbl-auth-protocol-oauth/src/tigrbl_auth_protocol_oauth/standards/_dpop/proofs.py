@@ -3,10 +3,10 @@ from __future__ import annotations
 import json
 import secrets
 import time
+import inspect
 from typing import Any
 
 from tigrbl_identity_core.standards import describe_owner
-from tigrbl_identity_contracts.replay import ReplayCheckPort, SingleUseNoncePort
 from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
 from tigrbl_security_trust_contracts import DPoPNonceRecord, DPoPProofClaims
 
@@ -29,29 +29,6 @@ from .primitives import (
     jwk_from_public_key,
     jwk_thumbprint,
 )
-
-_REPLAY_PROVIDER: ReplayCheckPort | None = None
-_NONCE_PROVIDER: SingleUseNoncePort | None = None
-
-
-def configure_state_providers(*, replay: ReplayCheckPort, nonce: SingleUseNoncePort) -> None:
-    """Inject deployment-selected state providers; layer 50 creates no store."""
-    global _REPLAY_PROVIDER, _NONCE_PROVIDER
-    _REPLAY_PROVIDER, _NONCE_PROVIDER = replay, nonce
-
-
-def _replay(store: ReplayCheckPort | None = None) -> ReplayCheckPort:
-    selected = store or _REPLAY_PROVIDER
-    if selected is None:
-        raise RuntimeError("DPoP replay provider is not configured")
-    return selected
-
-
-def _nonce(store: SingleUseNoncePort | None = None) -> SingleUseNoncePort:
-    selected = store or _NONCE_PROVIDER
-    if selected is None:
-        raise RuntimeError("DPoP nonce provider is not configured")
-    return selected
 
 def _segments(proof: str) -> tuple[dict[str, Any], dict[str, Any]]:
     parts = str(proof).split(".")
@@ -164,6 +141,74 @@ def _verify_signature_requirements(proof: str, method: str, url: str, *, max_ske
     return _verify_fallback_signature(proof, method, url, max_skew_s=max_skew_s)
 
 
+async def _verify_signature_requirements_async(
+    proof: str,
+    method: str,
+    url: str,
+    *,
+    max_skew_s: int = _ALLOWED_SKEW,
+) -> bool:
+    if _SIGNER is not None:
+        try:
+            verified = bool(
+                await _SIGNER.verify_bytes(
+                    b"",
+                    [{"sig": proof}],
+                    require={
+                        "htm": method.upper(),
+                        "htu": url,
+                        "algs": [_ALG_VALUE],
+                        "max_skew_s": max_skew_s,
+                    },
+                )
+            )
+            if verified:
+                return True
+        except Exception:
+            pass
+    return _verify_fallback_signature(proof, method, url, max_skew_s=max_skew_s)
+
+
+async def _maybe_await(value: Any) -> Any:
+    if inspect.isawaitable(value):
+        return await value
+    return value
+
+
+async def _verify_signature_requirements_async(
+    proof: str,
+    method: str,
+    url: str,
+    *,
+    max_skew_s: int = _ALLOWED_SKEW,
+) -> bool:
+    if _SIGNER is not None:
+        try:
+            verified = bool(
+                await _SIGNER.verify_bytes(
+                    b"",
+                    [{"sig": proof}],
+                    require={
+                        "htm": method.upper(),
+                        "htu": url,
+                        "algs": [_ALG_VALUE],
+                        "max_skew_s": max_skew_s,
+                    },
+                )
+            )
+            if verified:
+                return True
+        except Exception:
+            pass
+    return _verify_fallback_signature(proof, method, url, max_skew_s=max_skew_s)
+
+
+async def _maybe_await(value: Any) -> Any:
+    if inspect.isawaitable(value):
+        return await value
+    return value
+
+
 def make_proof(
     keyref: Any,
     method: str,
@@ -233,25 +278,42 @@ makeProof = make_proof
 create_proof = make_proof
 
 
-def issue_nonce(*, ttl_s: int = _ALLOWED_SKEW, store: SingleUseNoncePort | None = None) -> str:
-    return _nonce(store).issue(ttl_s=ttl_s)
+def _require_callable(fn: Any | None, purpose: str) -> Any:
+    if not callable(fn):
+        raise RuntimeError(f"{purpose} requires an injected DPoP table-backed operation")
+    return fn
 
 
-def register_nonce(nonce: str, *, ttl_s: int = _ALLOWED_SKEW, store: SingleUseNoncePort | None = None) -> str:
-    return _nonce(store).register(nonce, ttl_s=ttl_s)
+def issue_nonce(*, ttl_s: int = _ALLOWED_SKEW, issuer: Any | None = None) -> str:
+    return _require_callable(issuer, "issue_nonce")(ttl_s=ttl_s)
 
 
-def consume_nonce(nonce: str, *, store: SingleUseNoncePort | None = None, now: int | None = None) -> bool:
-    return _nonce(store).consume(nonce, now=now)
+async def issue_nonce_async(*, ttl_s: int = _ALLOWED_SKEW, issuer: Any | None = None) -> str:
+    return await _maybe_await(_require_callable(issuer, "issue_nonce_async")(ttl_s=ttl_s))
 
 
-def replay_store_snapshot(store: ReplayCheckPort | None = None) -> dict[str, int]:
-    return dict(_replay(store).snapshot())
+def register_nonce(nonce: str, *, ttl_s: int = _ALLOWED_SKEW, registrar: Any | None = None) -> str:
+    return _require_callable(registrar, "register_nonce")(nonce, ttl_s=ttl_s)
 
 
-def clear_runtime_state() -> None:
-    _replay().clear()
-    _nonce().clear()
+async def register_nonce_async(nonce: str, *, ttl_s: int = _ALLOWED_SKEW, registrar: Any | None = None) -> str:
+    return await _maybe_await(_require_callable(registrar, "register_nonce_async")(nonce, ttl_s=ttl_s))
+
+
+def consume_nonce(nonce: str, *, consumer: Any | None = None, now: int | None = None) -> bool:
+    return _require_callable(consumer, "consume_nonce")(nonce, now=now)
+
+
+async def consume_nonce_async(nonce: str, *, consumer: Any | None = None, now: int | None = None) -> bool:
+    return await _maybe_await(_require_callable(consumer, "consume_nonce_async")(nonce, now=now))
+
+
+def replay_table_snapshot(snapshotter: Any | None = None) -> dict[str, int]:
+    return _require_callable(snapshotter, "replay_table_snapshot")()
+
+
+async def replay_table_snapshot_async(snapshotter: Any | None = None) -> dict[str, int]:
+    return await _maybe_await(_require_callable(snapshotter, "replay_table_snapshot_async")())
 
 
 def verify_proof(
@@ -264,8 +326,8 @@ def verify_proof(
     expected_nonce: str | None = None,
     require_nonce: bool = False,
     enabled: bool | None = None,
-    replay_store: ReplayCheckPort | None = None,
-    nonce_store: SingleUseNoncePort | None = None,
+    replay_checker: Any | None = None,
+    nonce_consumer: Any | None = None,
 ) -> str:
     if enabled is None:
         enabled = settings.enable_rfc9449
@@ -292,17 +354,64 @@ def verify_proof(
     if expected_nonce is not None:
         if claims.nonce != expected_nonce:
             raise ValueError(f"nonce mismatch: {RFC9449_SPEC_URL}")
-        store = _nonce(nonce_store)
-        if not store.consume(expected_nonce):
+        consumer = _require_callable(nonce_consumer, "expected_nonce validation")
+        if not consumer(expected_nonce):
             raise ValueError(f"invalid or expired nonce: {RFC9449_SPEC_URL}")
     elif require_nonce and not claims.nonce:
         raise ValueError(f"nonce required: {RFC9449_SPEC_URL}")
-    replay_key = ":".join((claims.jkt, claims.jti, claims.htm, claims.htu, claims.ath or ""))
-    if _replay(replay_store).check_and_store(
-        replay_key,
-        now=claims.iat,
-        ttl_s=_ALLOWED_SKEW,
-    ):
+    checker = _require_callable(replay_checker, "verify_proof")
+    if checker(claims, ttl_s=_ALLOWED_SKEW):
+        raise ValueError(f"replayed DPoP proof: {RFC9449_SPEC_URL}")
+    return claims.jkt
+
+
+async def verify_proof_async(
+    proof: str,
+    method: str,
+    url: str,
+    *,
+    jkt: str | None = None,
+    access_token: str | None = None,
+    expected_nonce: str | None = None,
+    require_nonce: bool = False,
+    enabled: bool | None = None,
+    replay_checker: Any | None = None,
+    nonce_consumer: Any | None = None,
+) -> str:
+    if enabled is None:
+        enabled = settings.enable_rfc9449
+    if not enabled:
+        return ""
+    claims = proof_claims(proof)
+    if claims.htm != method.upper():
+        raise ValueError(f"htm mismatch: {RFC9449_SPEC_URL}")
+    if claims.htu != url:
+        raise ValueError(f"htu mismatch: {RFC9449_SPEC_URL}")
+    if claims.iat is None:
+        raise ValueError(f"missing iat in DPoP proof: {RFC9449_SPEC_URL}")
+    if abs(int(time.time()) - int(claims.iat)) > _ALLOWED_SKEW:
+        raise ValueError(f"stale DPoP proof: {RFC9449_SPEC_URL}")
+    valid = await _verify_signature_requirements_async(proof, method, url)
+    if not valid:
+        raise ValueError(f"invalid DPoP proof: {RFC9449_SPEC_URL}")
+    if jkt and claims.jkt != jkt:
+        raise ValueError(f"jkt mismatch: {RFC9449_SPEC_URL}")
+    if access_token is not None:
+        expected_ath = ath_for_access_token(access_token)
+        if claims.ath != expected_ath:
+            raise ValueError(f"ath mismatch: {RFC9449_SPEC_URL}")
+    if expected_nonce is not None:
+        if claims.nonce != expected_nonce:
+            raise ValueError(f"nonce mismatch: {RFC9449_SPEC_URL}")
+        consumer = _require_callable(nonce_consumer, "expected_nonce validation")
+        if not await _maybe_await(consumer(expected_nonce)):
+            raise ValueError(f"invalid or expired nonce: {RFC9449_SPEC_URL}")
+    elif require_nonce and not claims.nonce:
+        raise ValueError(f"nonce required: {RFC9449_SPEC_URL}")
+
+    checker = _require_callable(replay_checker, "verify_proof_async")
+    replayed = await _maybe_await(checker(claims, ttl_s=_ALLOWED_SKEW))
+    if replayed:
         raise ValueError(f"replayed DPoP proof: {RFC9449_SPEC_URL}")
     return claims.jkt
 
@@ -322,23 +431,26 @@ __all__ = [
     "RFC9449_SPEC_URL",
     "DPoPNonceRecord",
     "DPoPProofClaims",
-    "configure_state_providers",
     "StandardOwner",
     "OWNER",
     "access_token_hash",
     "ath_for_access_token",
-    "clear_runtime_state",
     "consume_nonce",
+    "consume_nonce_async",
     "create_proof",
     "decode_proof",
     "describe",
     "issue_nonce",
+    "issue_nonce_async",
     "jwk_from_public_key",
     "jwk_thumbprint",
     "makeProof",
     "make_proof",
     "proof_claims",
     "register_nonce",
-    "replay_store_snapshot",
+    "register_nonce_async",
+    "replay_table_snapshot",
+    "replay_table_snapshot_async",
+    "verify_proof_async",
     "verify_proof",
 ]

@@ -40,13 +40,68 @@ def validate_sender_constraint(
     deployment: ResolvedDeployment,
     *,
     dpop_proof: str | None = None,
+    replay_checker: Any | None = None,
+    nonce_consumer: Any | None = None,
 ) -> SenderConstraintResult:
     policy = runtime_security_profile(deployment)
     cert_thumbprint = client_certificate_thumbprint_from_request(request)
     if dpop_proof and policy.dpop_supported:
         from tigrbl_auth_protocol_oauth.standards.dpop import verify_proof
 
-        jkt = verify_proof(dpop_proof, getattr(request, "method", "POST"), str(getattr(request, "url", "")))
+        jkt = verify_proof(
+            dpop_proof,
+            getattr(request, "method", "POST"),
+            str(getattr(request, "url", "")),
+            replay_checker=replay_checker,
+            nonce_consumer=nonce_consumer,
+        )
+        return SenderConstraintResult(
+            mechanism="dpop",
+            token_type="DPoP",
+            confirmation_claim={"jkt": jkt},
+            jkt=jkt,
+        )
+    if cert_thumbprint and policy.mtls_supported:
+        return SenderConstraintResult(
+            mechanism="mtls",
+            token_type="bearer",
+            confirmation_claim={"x5t#S256": cert_thumbprint},
+            cert_thumbprint=cert_thumbprint,
+        )
+    if policy.sender_constraint_required:
+        allowed: list[str] = []
+        if policy.dpop_supported:
+            allowed.append("DPoP proof")
+        if policy.mtls_supported:
+            allowed.append("mutual-TLS certificate thumbprint")
+        detail = " or ".join(allowed) if allowed else "sender-constrained token proof"
+        raise OAuthPolicyViolation(
+            "invalid_request",
+            f"hardening, FAPI, and peer profiles require {detail} at the token issuance boundary",
+        )
+    return SenderConstraintResult()
+
+
+async def validate_sender_constraint_async(
+    request: Any,
+    deployment: ResolvedDeployment,
+    *,
+    dpop_proof: str | None = None,
+    replay_checker: Any | None = None,
+    nonce_consumer: Any | None = None,
+) -> SenderConstraintResult:
+    policy = runtime_security_profile(deployment)
+    cert_thumbprint = client_certificate_thumbprint_from_request(request)
+    if dpop_proof and policy.dpop_supported:
+        from tigrbl_auth_protocol_oauth.standards.dpop import verify_proof_async
+
+        jkt = await verify_proof_async(
+            dpop_proof,
+            getattr(request, "method", "POST"),
+            str(getattr(request, "url", "")),
+            replay_checker=replay_checker,
+            nonce_consumer=nonce_consumer,
+        )
         return SenderConstraintResult(
             mechanism="dpop",
             token_type="DPoP",
@@ -81,6 +136,8 @@ def verify_access_token_sender_constraint(
     *,
     access_token: str | None = None,
     dpop_proof: str | None = None,
+    replay_checker: Any | None = None,
+    nonce_consumer: Any | None = None,
 ) -> SenderConstraintResult:
     """Validate sender-constrained access-token presentation on resource paths.
 
@@ -116,6 +173,88 @@ def verify_access_token_sender_constraint(
                 str(getattr(request, "url", "")),
                 jkt=str(jkt),
                 access_token=access_token,
+                replay_checker=replay_checker,
+                nonce_consumer=nonce_consumer,
+            )
+        except ValueError as exc:
+            raise OAuthPolicyViolation("invalid_token", str(exc), status_code=401) from exc
+        return SenderConstraintResult(
+            mechanism="dpop",
+            token_type="DPoP",
+            confirmation_claim={"jkt": verified_jkt},
+            jkt=verified_jkt,
+        )
+
+    if dpop_proof:
+        raise OAuthPolicyViolation(
+            "invalid_token",
+            "unexpected DPoP proof for non-DPoP access token",
+            status_code=401,
+        )
+
+    if x5t:
+        if not policy.mtls_supported:
+            raise OAuthPolicyViolation(
+                "invalid_token",
+                "certificate-bound token presented while mTLS support is disabled",
+                status_code=401,
+            )
+        from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import validate_request_certificate_binding
+        from tigrbl_identity_core.errors import InvalidTokenError
+
+        try:
+            cert_thumbprint = validate_request_certificate_binding(token_payload, request)
+        except InvalidTokenError as exc:
+            raise OAuthPolicyViolation("invalid_token", str(exc), status_code=401) from exc
+        return SenderConstraintResult(
+            mechanism="mtls",
+            token_type="bearer",
+            confirmation_claim={"x5t#S256": str(x5t)},
+            cert_thumbprint=cert_thumbprint,
+        )
+
+    return SenderConstraintResult()
+
+
+async def verify_access_token_sender_constraint_async(
+    request: Any,
+    token_payload: Mapping[str, Any],
+    deployment: ResolvedDeployment,
+    *,
+    access_token: str | None = None,
+    dpop_proof: str | None = None,
+    replay_checker: Any | None = None,
+    nonce_consumer: Any | None = None,
+) -> SenderConstraintResult:
+    policy = runtime_security_profile(deployment)
+    cnf = token_payload.get("cnf") if isinstance(token_payload.get("cnf"), Mapping) else {}
+    jkt = cnf.get("jkt")
+    x5t = cnf.get("x5t#S256")
+
+    if jkt:
+        if not policy.dpop_supported:
+            raise OAuthPolicyViolation(
+                "invalid_token",
+                "DPoP-bound token presented while DPoP support is disabled",
+                status_code=401,
+            )
+        if not dpop_proof:
+            raise OAuthPolicyViolation(
+                "invalid_token",
+                "missing DPoP proof for DPoP-bound access token",
+                status_code=401,
+            )
+        from tigrbl_auth_protocol_oauth.standards.dpop import verify_proof_async
+
+        try:
+            verified_jkt = await verify_proof_async(
+                dpop_proof,
+                getattr(request, "method", "GET"),
+                str(getattr(request, "url", "")),
+                jkt=str(jkt),
+                access_token=access_token,
+                replay_checker=replay_checker,
+                nonce_consumer=nonce_consumer,
             )
         except ValueError as exc:
             raise OAuthPolicyViolation("invalid_token", str(exc), status_code=401) from exc
@@ -203,6 +342,8 @@ __all__ = [
     "dpop_proof_from_request",
     "client_certificate_thumbprint_from_request",
     "validate_sender_constraint",
+    "validate_sender_constraint_async",
     "verify_access_token_sender_constraint",
+    "verify_access_token_sender_constraint_async",
     "discovery_policy_metadata",
 ]

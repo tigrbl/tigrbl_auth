@@ -25,12 +25,6 @@ from tigrbl_identity_runtime.settings import settings as _protocol_test_settings
 
 bind_protocol_settings(_protocol_test_settings)
 
-from tigrbl_auth_protocol_oauth.standards.dpop import configure_state_providers
-from tigrbl_replay_memory_provider import MemoryReplayCheckProvider, MemorySingleUseNonceProvider
-
-configure_state_providers(
-    replay=MemoryReplayCheckProvider(), nonce=MemorySingleUseNonceProvider()
-)
 import pytest_asyncio
 from httpx import AsyncClient
 from tests.lanes import (

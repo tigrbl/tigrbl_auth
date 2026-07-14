@@ -32,6 +32,8 @@ _SUBMODULES = (
     "delegation_grant",
     "delegated_admin_scope",
     "device_code",
+    "dpop_nonce",
+    "dpop_replay",
     "engine",
     "entitlement",
     "entitlement_assignment",

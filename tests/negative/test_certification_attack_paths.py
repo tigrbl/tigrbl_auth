@@ -8,9 +8,14 @@ from cryptography.hazmat.primitives.asymmetric import ed25519
 
 from tigrbl_auth.config.deployment import resolve_deployment
 from tigrbl_auth.errors import InvalidTokenError
-from tigrbl_auth.standards.oauth2.dpop import clear_runtime_state, jwk_from_public_key, jwk_thumbprint, make_proof
-from tigrbl_auth.standards.oauth2.issuer_identification import IssuerIdentificationError, extract_issuer_from_redirect_uri
-from tigrbl_auth.standards.oauth2.jwt_access_tokens import validate_jwt_access_token_claims
+from tigrbl_auth.standards.oauth2.dpop import jwk_from_public_key, jwk_thumbprint, make_proof
+from tigrbl_auth_protocol_oauth.standards.issuer_identification import (
+    IssuerIdentificationError,
+    extract_issuer_from_redirect_uri,
+)
+from tigrbl_auth_protocol_oauth.standards.jwt_access_tokens import (
+    validate_jwt_access_token_claims,
+)
 from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
     OAuthPolicyViolation,
     assert_authorization_request_allowed,
@@ -96,7 +101,14 @@ def test_wrong_issuer_mix_up_redirect_is_rejected() -> None:
 
 
 def test_sender_constrained_bearer_replay_and_wrong_key_fail_closed() -> None:
-    clear_runtime_state()
+    seen: set[tuple[str, str, str, str, str | None]] = set()
+
+    def replay_checker(claims, *, ttl_s: int = 300) -> bool:
+        key = (claims.jkt, claims.jti, claims.htm, claims.htu, claims.ath)
+        replayed = key in seen
+        seen.add(key)
+        return replayed
+
     deployment = resolve_deployment(None, profile="fapi2-security")
     request = SimpleNamespace(method="GET", url="https://rs.example.com/resource", headers={})
 
@@ -114,6 +126,7 @@ def test_sender_constrained_bearer_replay_and_wrong_key_fail_closed() -> None:
         deployment,
         access_token=access_token,
         dpop_proof=proof_a,
+        replay_checker=replay_checker,
     ).jkt == jkt_a
 
     with pytest.raises(OAuthPolicyViolation):
@@ -123,6 +136,7 @@ def test_sender_constrained_bearer_replay_and_wrong_key_fail_closed() -> None:
             deployment,
             access_token=access_token,
             dpop_proof=proof_a,
+            replay_checker=replay_checker,
         )
 
     with pytest.raises(OAuthPolicyViolation):
@@ -132,4 +146,5 @@ def test_sender_constrained_bearer_replay_and_wrong_key_fail_closed() -> None:
             deployment,
             access_token=access_token,
             dpop_proof=proof_b,
+            replay_checker=replay_checker,
         )
