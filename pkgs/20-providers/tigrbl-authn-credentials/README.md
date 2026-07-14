@@ -26,17 +26,21 @@ uv add tigrbl-authn-credentials
 ```python
 from tigrbl_authn_credentials import CredentialKind, create_password_credential, verify_credential
 
-credential = create_password_credential("subject:alice", secret="correct horse battery staple")
+credential = create_password_credential("subject:alice", "correct horse battery staple")
 assert credential.kind is CredentialKind.PASSWORD
 assert verify_credential(credential, "correct horse battery staple")
 ```
 
 ## Package Boundary
 
-- Credential proof and verification
-- Credential lifecycle, rotation, revocation, and audit events
+- Credential proof and provider-backed verification
+- Pure credential construction, rotation, and revocation transformations
 - Authentication session material below protocol/front-door assembly
 - API keys, service keys, passkeys, MFA factors, and password-reset material as authentication credentials
+
+This package does not define a secret-hash encoding and does not provide an
+in-memory credential ledger. Shared-secret hashing is delegated to the bcrypt
+provider; durable credential and audit state belongs to layers 01 and 30.
 
 ## Related Packages
 

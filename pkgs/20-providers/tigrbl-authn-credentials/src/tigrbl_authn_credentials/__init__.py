@@ -2,13 +2,12 @@
 
 from __future__ import annotations
 
+from tigrbl_identity_contracts.audit.credentials import CredentialAuditEvent
+from tigrbl_identity_contracts.credentials import CredentialAuditAction, CredentialError
+
 from .lifecycle import (
     Credential,
-    CredentialAuditAction,
-    CredentialAuditEvent,
-    CredentialError,
     CredentialKind,
-    CredentialLedger,
     CredentialStateError,
     CredentialStatus,
     CredentialVerificationError,
@@ -44,7 +43,6 @@ __all__ = [
     "CredentialAuditEvent",
     "CredentialError",
     "CredentialKind",
-    "CredentialLedger",
     "CredentialStateError",
     "CredentialStatus",
     "CredentialVerificationError",

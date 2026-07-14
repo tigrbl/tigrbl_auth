@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
 import hmac
 import secrets
 from dataclasses import replace
@@ -10,11 +9,8 @@ from datetime import datetime, timedelta, timezone
 from typing import Any, Mapping
 from uuid import uuid4
 
-from tigrbl_identity_contracts.audit.credentials import CredentialAuditEvent
 from tigrbl_identity_contracts.credentials import (
     Credential,
-    CredentialAuditAction,
-    CredentialError,
     CredentialKind,
     CredentialStateError,
     CredentialStatus,
@@ -32,8 +28,10 @@ from tigrbl_identity_credentials_concrete import (
     PasswordResetCredential,
     ServiceKeyCredential,
 )
+from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
 
 UTC = timezone.utc
+_SECRET_HASHER = BcryptSecretHasher()
 
 
 def new_credential_id() -> str:
@@ -44,30 +42,15 @@ def utc_now() -> datetime:
     return datetime.now(UTC)
 
 
-def hash_secret(secret: str, *, salt: str | None = None, iterations: int = 120_000) -> str:
-    if not secret:
-        raise ValueError("secret is required")
-    active_salt = salt or secrets.token_hex(16)
-    digest = hashlib.pbkdf2_hmac(
-        "sha256",
-        secret.encode("utf-8"),
-        active_salt.encode("utf-8"),
-        iterations,
-    ).hex()
-    return f"pbkdf2_sha256${iterations}${active_salt}${digest}"
+def hash_secret(secret: str) -> str:
+    """Hash through the configured provider; no lifecycle-owned format exists."""
+
+    encoded = _SECRET_HASHER.hash_secret(secret).encoded
+    return encoded.decode("utf-8") if isinstance(encoded, bytes) else encoded
 
 
 def verify_secret(secret: str, encoded: str | None) -> bool:
-    if not encoded:
-        return False
-    try:
-        algorithm, iterations_raw, salt, expected = encoded.split("$", 3)
-    except ValueError:
-        return False
-    if algorithm != "pbkdf2_sha256":
-        return False
-    actual = hash_secret(secret, salt=salt, iterations=int(iterations_raw)).split("$", 3)[3]
-    return hmac.compare_digest(actual, expected)
+    return _SECRET_HASHER.verify_secret(secret, encoded).verified
 
 
 def issue_shared_secret(
@@ -241,80 +224,6 @@ def consume_one_time_credential(credential: Credential, presented_secret: str) -
     return replace(credential, status=CredentialStatus.CONSUMED)
 
 
-class CredentialLedger:
-    def __init__(
-        self,
-        *,
-        credentials: dict[str, Credential] | None = None,
-        audit_events: list[CredentialAuditEvent] | None = None,
-    ) -> None:
-        self.credentials = credentials or {}
-        self.audit_events = audit_events or []
-
-    def record(
-        self,
-        credential: Credential,
-        action: CredentialAuditAction | str,
-        *,
-        outcome: str = "ok",
-        reason: str | None = None,
-        actor: str | None = None,
-    ) -> CredentialAuditEvent:
-        event = CredentialAuditEvent(
-            id=str(uuid4()),
-            credential_id=credential.id,
-            principal_id=credential.principal_id,
-            action=CredentialAuditAction(action),
-            occurred_at=utc_now(),
-            actor=actor,
-            outcome=outcome,
-            reason=reason,
-        )
-        self.audit_events.append(event)
-        return event
-
-    def add(self, credential: Credential) -> Credential:
-        if credential.id in self.credentials:
-            raise ValueError(f"credential already exists: {credential.id}")
-        self.credentials[credential.id] = credential
-        self.record(credential, CredentialAuditAction.CREATED)
-        return credential
-
-    def verify(self, credential_id: str, presented_secret: str) -> bool:
-        credential = self.credentials[credential_id]
-        try:
-            ok = verify_credential(credential, presented_secret)
-        except CredentialError as exc:
-            self.record(
-                credential,
-                CredentialAuditAction.FAILED,
-                outcome="denied",
-                reason=str(exc),
-            )
-            raise
-        self.record(
-            credential,
-            CredentialAuditAction.VERIFIED if ok else CredentialAuditAction.FAILED,
-            outcome="ok" if ok else "denied",
-        )
-        return ok
-
-    def rotate(self, credential_id: str, *, new_secret: str | None = None) -> IssuedCredential:
-        current = self.credentials[credential_id]
-        issued = rotate_credential(current, new_secret=new_secret)
-        self.credentials[current.id] = current.with_status(CredentialStatus.ROTATED)
-        self.credentials[issued.credential.id] = issued.credential
-        self.record(current, CredentialAuditAction.ROTATED)
-        self.record(issued.credential, CredentialAuditAction.CREATED)
-        return issued
-
-    def revoke(self, credential_id: str, *, reason: str | None = None) -> Credential:
-        revoked = revoke_credential(self.credentials[credential_id], reason=reason)
-        self.credentials[credential_id] = revoked
-        self.record(revoked, CredentialAuditAction.REVOKED, reason=reason)
-        return revoked
-
-
 def create_dpop_key_credential(
     principal_id: str,
     *,
@@ -354,7 +263,6 @@ def create_mtls_certificate_credential(
 
 
 __all__ = [
-    "CredentialLedger",
     "consume_one_time_credential",
     "create_api_key_credential",
     "create_client_secret_credential",

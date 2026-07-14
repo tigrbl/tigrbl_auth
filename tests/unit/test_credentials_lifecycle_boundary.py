@@ -73,31 +73,45 @@ def test_credentials_t1_password_reset_and_passkey_behaviors() -> None:
         credentials.consume_one_time_credential(passkey, "credential-id")
 
 
-def test_credentials_t2_rotation_revocation_and_audit_events() -> None:
+def test_credentials_t2_rotation_and_revocation_are_pure_transformations() -> None:
     import pytest
     import tigrbl_authn_credentials as credentials
 
-    ledger = credentials.CredentialLedger()
     issued = credentials.create_api_key_credential("p1")
-    ledger.add(issued.credential)
-    assert ledger.verify(issued.credential.id, issued.secret or "") is True
-
-    rotated = ledger.rotate(issued.credential.id, new_secret="new-secret")
-    assert ledger.credentials[issued.credential.id].status is credentials.CredentialStatus.ROTATED
+    rotated = credentials.rotate_credential(
+        issued.credential,
+        new_secret="new-secret",
+    )
     assert rotated.credential.rotated_from == issued.credential.id
-    assert ledger.verify(rotated.credential.id, "new-secret") is True
+    assert credentials.verify_credential(rotated.credential, "new-secret") is True
 
-    revoked = ledger.revoke(rotated.credential.id, reason="compromised")
+    revoked = credentials.revoke_credential(
+        rotated.credential,
+        reason="compromised",
+    )
     assert revoked.status is credentials.CredentialStatus.REVOKED
     with pytest.raises(credentials.CredentialStateError):
-        ledger.verify(revoked.id, "new-secret")
+        credentials.verify_credential(revoked, "new-secret")
 
-    actions = [event.action for event in ledger.audit_events]
-    assert credentials.CredentialAuditAction.CREATED in actions
-    assert credentials.CredentialAuditAction.VERIFIED in actions
-    assert credentials.CredentialAuditAction.ROTATED in actions
-    assert credentials.CredentialAuditAction.REVOKED in actions
-    assert credentials.CredentialAuditAction.FAILED in actions
+    assert issued.credential.status is credentials.CredentialStatus.ACTIVE
+    assert not hasattr(credentials, "CredentialLedger")
+
+
+def test_credentials_do_not_own_a_secret_hash_format_or_durable_ledger() -> None:
+    lifecycle_path = (
+        ROOT
+        / "pkgs"
+        / "20-providers"
+        / "tigrbl-authn-credentials"
+        / "src"
+        / "tigrbl_authn_credentials"
+        / "lifecycle.py"
+    )
+    source = lifecycle_path.read_text(encoding="utf-8")
+
+    assert "pbkdf2" not in source.lower()
+    assert "class CredentialLedger" not in source
+    assert "BcryptSecretHasher" in source
 
 
 def test_credentials_t2_public_surface_import_dag_stays_clean() -> None:
