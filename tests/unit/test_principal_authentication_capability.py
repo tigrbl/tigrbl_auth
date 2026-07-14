@@ -79,7 +79,7 @@ async def test_client_secret_capability_supports_lookup_and_loaded_record() -> N
 
 
 def test_token_and_introspection_callers_use_capability_not_model_method() -> None:
-    from tigrbl_identity_storage_runtime import introspection, token_request
+    from tigrbl_identity_server import introspection_surface, token_request
 
     hasher = BcryptSecretHasher()
     record = {
@@ -91,7 +91,7 @@ def test_token_and_introspection_callers_use_capability_not_model_method() -> No
         record,
         "correct",
     ).authenticated
-    assert introspection.client_secret_authentication.verify_client_record(
+    assert introspection_surface.client_secret_authentication.verify_client_record(
         record,
         "wrong",
     ).authenticated is False
@@ -224,10 +224,10 @@ def test_server_api_key_authentication_uses_capability_composition() -> None:
     token_runtime = (
         __import__("pathlib").Path(__file__).resolve().parents[2]
         / "pkgs"
-        / "30-storage-runtime"
-        / "tigrbl-identity-storage-runtime"
+        / "60-runtime"
+        / "tigrbl-identity-server"
         / "src"
-        / "tigrbl_identity_storage_runtime"
+        / "tigrbl_identity_server"
         / "token_runtime.py"
     ).read_text(encoding="utf-8")
     assert "_pwd_backend" not in token_runtime

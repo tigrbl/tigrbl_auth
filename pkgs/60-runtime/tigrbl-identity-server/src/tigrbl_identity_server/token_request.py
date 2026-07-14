@@ -30,7 +30,6 @@ from .token_runtime import (
     enforce_authorization_code_grant,
     enforce_grant_type,
     enforce_password_grant,
-    handle_device_code_grant,
     issue_token_pair_records,
     mint_id_token,
     oidc_hash,
@@ -46,10 +45,16 @@ from .token_runtime import (
     verify_code_challenge,
 )
 from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import validate_sender_constraint_async
+from tigrbl_identity_contracts.tokens import (
+    RefreshTokenRedemptionRequest,
+    TokenPairIssueRequest,
+)
 from tigrbl_identity_storage_runtime.dpop_state import check_and_store_dpop_replay, consume_dpop_nonce
-from .token_persistence import redeem_refresh_token
 from tigrbl_principal_authentication import ClientSecretAuthenticationCapability
-from .ops.clients import lookup_client
+from tigrbl_identity_storage_runtime.ops.clients import lookup_client
+
+from .security.token_issuance import build_rfc6749_token_endpoint_service
+from .token_device_grant import handle_device_code_grant
 
 _IMPORTED_ISSUE_TOKEN_PAIR_RECORDS = issue_token_pair_records
 client_secret_authentication = ClientSecretAuthenticationCapability(lookup_client)
@@ -196,6 +201,56 @@ async def token_request(*, request, db):
     except ValueError:
         return _json_error('invalid_dpop_proof', status_code=status.HTTP_400_BAD_REQUEST)
 
+    token_service = build_rfc6749_token_endpoint_service(
+        db=db,
+        token_coder=_jwt,
+    )
+
+    async def _issue_pair(
+        _db,
+        *,
+        jwt,
+        sub: str,
+        tid: str,
+        client_id: str,
+        cert_thumbprint: str | None = None,
+        **claims,
+    ) -> tuple[str, str | None]:
+        legacy_issuer = _token_pair_issuer()
+        if legacy_issuer is not _IMPORTED_ISSUE_TOKEN_PAIR_RECORDS:
+            return await legacy_issuer(
+                _db,
+                jwt=jwt,
+                sub=sub,
+                tid=tid,
+                client_id=client_id,
+                cert_thumbprint=cert_thumbprint,
+                **claims,
+            )
+        issuer = str(claims.pop('issuer', None) or deployment.issuer or ISSUER)
+        scope = claims.pop('scope', None)
+        audience = claims.pop('audience', None)
+        confirmation = claims.pop('cnf', None)
+        issued = await token_service.issue(
+            TokenPairIssueRequest(
+                subject=sub,
+                tenant_id=tid,
+                client_id=client_id,
+                issuer=issuer,
+                scope=str(scope) if scope is not None else None,
+                audience=audience,
+                certificate_thumbprint=cert_thumbprint,
+                confirmation=(
+                    dict(confirmation)
+                    if isinstance(confirmation, dict)
+                    else None
+                ),
+                token_type=sender_constraint.token_type,
+                extra_claims=claims,
+            )
+        )
+        return issued.access_token, issued.refresh_token
+
     def _jwt_kwargs(*, scope: str | None = None, audience: str | None = None, extra: dict | None = None) -> dict:
         payload: dict = {'issuer': str(deployment.issuer or ISSUER)}
         if scope:
@@ -214,7 +269,7 @@ async def token_request(*, request, db):
         return payload
 
     if grant_type == 'client_credentials':
-        access, refresh = await _token_pair_issuer()(
+        access, refresh = await _issue_pair(
             db,
             jwt=_jwt,
             sub=str(client_id),
@@ -236,7 +291,7 @@ async def token_request(*, request, db):
         user = await authenticate_password(parsed.username, parsed.password, db)
         if user is None:
             return JSONResponse({'error': 'invalid_grant'}, status_code=status.HTTP_400_BAD_REQUEST)
-        access, refresh = await _token_pair_issuer()(
+        access, refresh = await _issue_pair(
             db,
             jwt=_jwt,
             sub=str(user.id),
@@ -295,7 +350,7 @@ async def token_request(*, request, db):
             )
         audience = stored_resource or request_audience
         authorization_details = auth_code_claims.pop('_authorization_details', None)
-        access, refresh = await _token_pair_issuer()(
+        access, refresh = await _issue_pair(
             db,
             jwt=_jwt,
             sub=str(auth_code.user_id),
@@ -335,19 +390,25 @@ async def token_request(*, request, db):
         if not refresh_token:
             return _json_error('invalid_request', status_code=status.HTTP_400_BAD_REQUEST, description='refresh_token is required')
         try:
-            payload = await redeem_refresh_token(
-                jwt=_jwt,
+            issued = await token_service.refresh(
+                RefreshTokenRedemptionRequest(
                 refresh_token=refresh_token,
+                tenant_id=str(client.tenant_id),
                 client_id=str(client.id),
-                cert_thumbprint=sender_constraint.cert_thumbprint,
+                certificate_thumbprint=sender_constraint.cert_thumbprint,
                 requested_audience=request_audience,
                 token_type=sender_constraint.token_type,
+                )
             )
         except RefreshTokenReuseError as exc:
             return _json_error('invalid_grant', status_code=status.HTTP_400_BAD_REQUEST, description=str(exc))
         except InvalidRefreshTokenError as exc:
             return _json_error('invalid_grant', status_code=status.HTTP_400_BAD_REQUEST, description=str(exc))
-        return payload
+        return _token_pair_payload(
+            issued.access_token,
+            issued.refresh_token,
+            token_type=issued.token_type,
+        )
 
     if grant_type == JWT_BEARER_GRANT_TYPE:
         try:
@@ -359,7 +420,7 @@ async def token_request(*, request, db):
             return JSONResponse({'error': 'invalid_grant'}, status_code=status.HTTP_400_BAD_REQUEST)
         scope = str(data.get('scope') or assertion_claims.get('scope') or '') or None
         tenant_id = str(assertion_claims.get('tid') or client.tenant_id)
-        access, refresh = await _token_pair_issuer()(
+        access, refresh = await _issue_pair(
             db,
             jwt=_jwt,
             sub=subject,
@@ -404,5 +465,6 @@ async def token_request(*, request, db):
             request_audience=request_audience,
             resource=resource,
             jwt_kwargs=_jwt_kwargs,
+            issue_token_pair=_issue_pair,
         )
     return _json_error('unsupported_grant_type', status_code=status.HTTP_400_BAD_REQUEST)

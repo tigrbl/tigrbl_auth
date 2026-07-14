@@ -419,8 +419,8 @@ def test_executable_auth_flow_composition_lives_above_storage() -> None:
     for module_name in old_modules:
         assert importlib.util.find_spec(module_name) is None
 
-    authz_surface = importlib.import_module("tigrbl_identity_storage_runtime.authz_surface")
-    auth_flows = importlib.import_module("tigrbl_identity_storage_runtime.auth_flows")
+    authz_surface = importlib.import_module("tigrbl_identity_server.authz_surface")
+    auth_flows = importlib.import_module("tigrbl_identity_server.auth_flows")
     authorization = importlib.import_module("tigrbl_identity_storage_runtime.authorization")
 
     assert not hasattr(authz_surface, "api")

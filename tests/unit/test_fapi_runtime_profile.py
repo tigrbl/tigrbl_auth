@@ -4,6 +4,7 @@ from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace
 from urllib.parse import urlencode
 from uuid import uuid4
+from unittest.mock import AsyncMock
 
 import pytest
 
@@ -11,7 +12,7 @@ from tigrbl_auth.api.rest.schemas import DynamicClientRegistrationIn
 from tigrbl_auth.cli.artifacts import deployment_from_options
 import tigrbl_identity_server.par_surface as par_ops
 import tigrbl_identity_server.client_registration_surface as register_ops
-import tigrbl_identity_storage_runtime.token_request as token_ops
+import tigrbl_identity_server.token_request as token_ops
 from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
     OAuthPolicyViolation,
     assert_authorization_request_allowed,
@@ -82,7 +83,7 @@ def _patch_token_handler_records(
     user: object | None = None,
 ) -> None:
     async def _read_handler_record(model, db, ident):
-        if model is token_ops.Client:
+        if model is token_ops._runtime.Client:
             return client
         if model is token_ops.AuthCode:
             return auth_code
@@ -91,7 +92,7 @@ def _patch_token_handler_records(
         return None
 
     async def _first_handler_record(model, db, filters):
-        if model is token_ops.ClientRegistration:
+        if model is token_ops._runtime.ClientRegistration:
             return registration
         return None
 
@@ -99,7 +100,8 @@ def _patch_token_handler_records(
         return None
 
     monkeypatch.setattr(token_ops, "read_handler_record", _read_handler_record)
-    monkeypatch.setattr(token_ops, "first_handler_record", _first_handler_record)
+    monkeypatch.setattr(token_ops._runtime, "read_handler_record", _read_handler_record)
+    monkeypatch.setattr(token_ops._runtime, "first_handler_record", _first_handler_record)
     monkeypatch.setattr(token_ops, "delete_handler_record", _delete_handler_record)
 
 
@@ -249,8 +251,8 @@ async def test_fapi_registration_rejects_shared_secret_auth(monkeypatch: pytest.
 
 @pytest.mark.asyncio
 async def test_fapi_token_request_rejects_shared_secret_auth(monkeypatch: pytest.MonkeyPatch):
-    monkeypatch.setattr(token_ops, "_require_tls", lambda request: None)
-    monkeypatch.setattr(token_ops, "resolve_deployment", lambda _settings: _fapi_deployment())
+    monkeypatch.setattr(token_ops, "_enforce_tls", lambda request, deployment: None)
+    monkeypatch.setattr(token_ops, "_resolve_request_deployment", lambda request: _fapi_deployment())
     client = SimpleNamespace(id=uuid4(), tenant_id=uuid4(), verify_secret=lambda secret: True)
     registration = SimpleNamespace(registration_metadata={"token_endpoint_auth_method": "client_secret_basic"})
     _patch_token_handler_records(monkeypatch, client=client, registration=registration)
@@ -266,8 +268,8 @@ async def test_fapi_token_request_rejects_shared_secret_auth(monkeypatch: pytest
 
 @pytest.mark.asyncio
 async def test_fapi_private_key_jwt_uses_issuer_as_assertion_audience(monkeypatch: pytest.MonkeyPatch):
-    monkeypatch.setattr(token_ops, "_require_tls", lambda request: None)
-    monkeypatch.setattr(token_ops, "resolve_deployment", lambda _settings: _fapi_deployment())
+    monkeypatch.setattr(token_ops, "_enforce_tls", lambda request, deployment: None)
+    monkeypatch.setattr(token_ops, "_resolve_request_deployment", lambda request: _fapi_deployment())
     monkeypatch.setattr(token_ops, "assert_token_request_allowed", lambda data, deployment: None)
     captured: dict[str, object] = {}
 
@@ -280,7 +282,7 @@ async def test_fapi_private_key_jwt_uses_issuer_as_assertion_audience(monkeypatc
         return ("access-token", "refresh-token")
 
     monkeypatch.setattr(token_ops, "authenticate_client_assertion", _authenticate)
-    monkeypatch.setattr(token_ops, "validate_sender_constraint", lambda *args, **kwargs: _SenderConstraint(mechanism="dpop", jkt="jkt-1"))
+    monkeypatch.setattr(token_ops, "validate_sender_constraint_async", AsyncMock(return_value=_SenderConstraint(mechanism="dpop", jkt="jkt-1")))
     monkeypatch.setattr(token_ops, "issue_token_pair_records", _issue_pair)
 
     client = SimpleNamespace(id=uuid4(), tenant_id=uuid4())
@@ -306,9 +308,9 @@ async def test_fapi_private_key_jwt_uses_issuer_as_assertion_audience(monkeypatc
 
 @pytest.mark.asyncio
 async def test_fapi_authorization_code_requires_sender_key_continuity(monkeypatch: pytest.MonkeyPatch):
-    monkeypatch.setattr(token_ops, "_require_tls", lambda request: None)
-    monkeypatch.setattr(token_ops, "resolve_deployment", lambda _settings: _fapi_deployment())
-    monkeypatch.setattr(token_ops, "validate_sender_constraint", lambda *args, **kwargs: _SenderConstraint(mechanism="dpop", jkt="jkt-live"))
+    monkeypatch.setattr(token_ops, "_enforce_tls", lambda request, deployment: None)
+    monkeypatch.setattr(token_ops, "_resolve_request_deployment", lambda request: _fapi_deployment())
+    monkeypatch.setattr(token_ops, "validate_sender_constraint_async", AsyncMock(return_value=_SenderConstraint(mechanism="dpop", jkt="jkt-live")))
     monkeypatch.setattr(token_ops, "verify_code_challenge", lambda verifier, challenge: True)
 
     async def _issue_pair(db, **kwargs):

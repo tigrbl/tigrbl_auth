@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace
 from urllib.parse import urlencode
+from unittest.mock import AsyncMock
 
 import pytest
 
@@ -20,7 +21,8 @@ from tigrbl_auth_protocol_oauth.standards.resource_indicators import (
     select_resource_indicator,
 )
 import tigrbl_identity_storage_runtime.token_exchange as token_exchange_mod
-import tigrbl_identity_storage_runtime.token_request as token_ops
+import tigrbl_identity_server.token_request as token_ops
+import tigrbl_identity_server.token_device_grant as device_ops
 
 from tigrbl_identity_storage_runtime.token_exchange import (
     HTTPException,
@@ -134,16 +136,21 @@ class _FakeDB:
 
 def _patch_token_handler_records(monkeypatch, *, client, registration=None, device_code=None):
     updates = {}
+    monkeypatch.setattr(
+        token_ops.client_secret_authentication,
+        'verify_client_record',
+        lambda record, secret: SimpleNamespace(authenticated=True),
+    )
 
     async def _read_handler_record(model, db, ident):
-        if model is token_ops.Client:
+        if model is token_ops._runtime.Client:
             return client
         return None
 
     async def _first_handler_record(model, db, filters):
-        if model is token_ops.ClientRegistration:
+        if model is token_ops._runtime.ClientRegistration:
             return registration
-        if model is token_ops.DeviceCode:
+        if model is device_ops.DeviceCode:
             return device_code
         return None
 
@@ -155,8 +162,10 @@ def _patch_token_handler_records(monkeypatch, *, client, registration=None, devi
         return device_code
 
     monkeypatch.setattr(token_ops, 'read_handler_record', _read_handler_record)
-    monkeypatch.setattr(token_ops, 'first_handler_record', _first_handler_record)
-    monkeypatch.setattr(token_ops, 'update_handler_record', _update_handler_record)
+    monkeypatch.setattr(token_ops._runtime, 'read_handler_record', _read_handler_record)
+    monkeypatch.setattr(token_ops._runtime, 'first_handler_record', _first_handler_record)
+    monkeypatch.setattr(device_ops, 'first_handler_record', _first_handler_record)
+    monkeypatch.setattr(device_ops, 'update_handler_record', _update_handler_record)
     return updates
 
 
@@ -200,16 +209,16 @@ async def test_device_code_poll_slow_down(monkeypatch) -> None:
     )
     db = _FakeDB(client, None, row)
     updates = _patch_token_handler_records(monkeypatch, client=client, device_code=row)
-    monkeypatch.setattr(token_ops, '_require_tls', lambda request: None)
-    monkeypatch.setattr(token_ops, 'resolve_deployment', lambda _settings: _FakeDeployment())
+    monkeypatch.setattr(token_ops, '_enforce_tls', lambda request, deployment: None)
+    monkeypatch.setattr(token_ops, '_resolve_request_deployment', lambda request: _FakeDeployment())
     monkeypatch.setattr(token_ops, 'assert_token_request_allowed', lambda data, deployment: None)
-    monkeypatch.setattr(token_ops, 'validate_sender_constraint', lambda *args, **kwargs: _FakeSenderConstraint())
+    monkeypatch.setattr(token_ops, 'validate_sender_constraint_async', AsyncMock(return_value=_FakeSenderConstraint()))
     captured = {}
 
     async def _audit(db, **kwargs):
         captured.update(kwargs)
 
-    monkeypatch.setattr(token_ops, 'append_audit_event_record', _audit)
+    monkeypatch.setattr(device_ops, 'append_audit_event_record', _audit)
     request = _FakeRequest({'grant_type': token_ops.DEVICE_CODE_GRANT_TYPE, 'client_id': 'client-1', 'client_secret': 'secret', 'device_code': 'device-code-1'})
     response = await token_ops.token_request(request=request, db=db)
     assert response.status_code == 400
@@ -226,10 +235,10 @@ async def test_device_code_poll_slow_down(monkeypatch) -> None:
 @pytest.mark.asyncio
 @pytest.mark.unit
 async def test_device_code_poll_denied_and_expired(monkeypatch) -> None:
-    monkeypatch.setattr(token_ops, '_require_tls', lambda request: None)
-    monkeypatch.setattr(token_ops, 'resolve_deployment', lambda _settings: _FakeDeployment())
+    monkeypatch.setattr(token_ops, '_enforce_tls', lambda request, deployment: None)
+    monkeypatch.setattr(token_ops, '_resolve_request_deployment', lambda request: _FakeDeployment())
     monkeypatch.setattr(token_ops, 'assert_token_request_allowed', lambda data, deployment: None)
-    monkeypatch.setattr(token_ops, 'validate_sender_constraint', lambda *args, **kwargs: _FakeSenderConstraint())
+    monkeypatch.setattr(token_ops, 'validate_sender_constraint_async', AsyncMock(return_value=_FakeSenderConstraint()))
 
     client = SimpleNamespace(id='client-1', tenant_id='tenant-1', verify_secret=lambda secret: True)
     denied_row = SimpleNamespace(
@@ -275,14 +284,14 @@ async def test_device_code_poll_denied_and_expired(monkeypatch) -> None:
     rows_by_code = {denied_row.device_code: denied_row, expired_row.device_code: expired_row}
 
     async def _read_handler_record(model, db, ident):
-        if model is token_ops.Client:
+        if model is token_ops._runtime.Client:
             return client
         return None
 
     async def _first_handler_record(model, db, filters):
-        if model is token_ops.ClientRegistration:
+        if model is token_ops._runtime.ClientRegistration:
             return None
-        if model is token_ops.DeviceCode:
+        if model is device_ops.DeviceCode:
             return rows_by_code.get(filters.get('device_code'))
         return None
 
@@ -295,8 +304,15 @@ async def test_device_code_poll_denied_and_expired(monkeypatch) -> None:
         return None
 
     monkeypatch.setattr(token_ops, 'read_handler_record', _read_handler_record)
-    monkeypatch.setattr(token_ops, 'first_handler_record', _first_handler_record)
-    monkeypatch.setattr(token_ops, 'update_handler_record', _update_handler_record)
+    monkeypatch.setattr(token_ops._runtime, 'read_handler_record', _read_handler_record)
+    monkeypatch.setattr(token_ops._runtime, 'first_handler_record', _first_handler_record)
+    monkeypatch.setattr(device_ops, 'first_handler_record', _first_handler_record)
+    monkeypatch.setattr(device_ops, 'update_handler_record', _update_handler_record)
+    monkeypatch.setattr(
+        token_ops.client_secret_authentication,
+        'verify_client_record',
+        lambda record, secret: SimpleNamespace(authenticated=True),
+    )
     denied_request = _FakeRequest({'grant_type': token_ops.DEVICE_CODE_GRANT_TYPE, 'client_id': 'client-1', 'client_secret': 'secret', 'device_code': 'device-code-2'})
     expired_request = _FakeRequest({'grant_type': token_ops.DEVICE_CODE_GRANT_TYPE, 'client_id': 'client-1', 'client_secret': 'secret', 'device_code': 'device-code-3'})
     denied_response = await token_ops.token_request(request=denied_request, db=denied_db)
@@ -350,6 +366,9 @@ async def test_token_exchange_runtime_emits_lineage_audit(monkeypatch) -> None:
     async def _audit(**kwargs):
         captured.update(kwargs)
 
+    async def _persist_token(*args, **kwargs):
+        return "token-digest"
+
     class _JWT:
         async def async_decode(self, token, verify_exp=True):
             if token == 'actor-token':
@@ -361,6 +380,7 @@ async def test_token_exchange_runtime_emits_lineage_audit(monkeypatch) -> None:
 
     monkeypatch.setattr(token_exchange_mod, '_jwt_coder', lambda: _JWT())
     monkeypatch.setattr(token_exchange_mod, 'append_audit_event_async', _audit)
+    monkeypatch.setattr(token_exchange_mod, 'upsert_token_record_async', _persist_token)
     request = _FakeRequest(
         body=urlencode(
             {

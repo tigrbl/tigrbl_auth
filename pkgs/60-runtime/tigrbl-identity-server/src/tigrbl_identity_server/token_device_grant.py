@@ -1,11 +1,28 @@
-'Device authorization grant execution.'
+"""Device authorization grant execution."""
 from __future__ import annotations
 
+from datetime import datetime, timezone
+from typing import Any
+
+from tigrbl_auth_protocol_oauth.standards.device_authorization import (
+    DEVICE_CODE_EXPIRES_IN,
+    DEVICE_CODE_INTERVAL,
+    next_device_poll_interval,
+    poll_too_frequently,
+)
+from tigrbl_identity_server.security.handler_records import (
+    append_audit_event_record,
+    first_handler_record,
+    update_handler_record,
+)
+from tigrbl_identity_storage.tables.device_code import DeviceCode
+
 from .token_runtime import (
-    Any, DEVICE_CODE_EXPIRES_IN, DeviceCode, JSONResponse,
-    _json_error, _jwt, _token_pair_payload, append_audit_event_record,
-    datetime, first_handler_record, issue_token_pair_records, next_device_poll_interval,
-    poll_too_frequently, status, timezone, update_handler_record,
+    JSONResponse,
+    _json_error,
+    _jwt,
+    _token_pair_payload,
+    status,
 )
 
 async def handle_device_code_grant(
@@ -17,6 +34,7 @@ async def handle_device_code_grant(
     request_audience: str | None,
     resource: str | None,
     jwt_kwargs: Any,
+    issue_token_pair: Any,
 ) -> Any:
     device_code = data.get('device_code')
     if not device_code:
@@ -75,7 +93,7 @@ async def handle_device_code_grant(
         )
         return _json_error('authorization_pending', status_code=status.HTTP_400_BAD_REQUEST)
     effective_audience = request_audience or getattr(row, 'audience', None) or getattr(row, 'resource', None)
-    access, refresh = await issue_token_pair_records(
+    access, refresh = await issue_token_pair(
         db,
         jwt=_jwt,
         sub=str(row.user_id),

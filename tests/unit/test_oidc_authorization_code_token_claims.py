@@ -3,12 +3,13 @@ from __future__ import annotations
 import uuid
 from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace
+from unittest.mock import AsyncMock
 
 import pytest
 
 from tigrbl.requests import Request
 from tigrbl_auth.rfc.rfc7636_pkce import makeCodeChallenge, makeCodeVerifier
-import tigrbl_identity_storage_runtime.token_request as token_endpoint
+import tigrbl_identity_server.token_request as token_endpoint
 
 
 @pytest.mark.unit
@@ -84,13 +85,13 @@ async def test_authorization_code_exchange_mints_session_bound_id_token_claims(m
     monkeypatch.setattr(token_endpoint, "_resource_selection", lambda _resources, _audience: None)
     monkeypatch.setattr(
         token_endpoint,
-        "validate_sender_constraint",
-        lambda *_args, **_kwargs: SimpleNamespace(
+        "validate_sender_constraint_async",
+        AsyncMock(return_value=SimpleNamespace(
             token_type="bearer",
             cert_thumbprint=None,
             confirmation_claim=None,
             jkt=None,
-        ),
+        )),
     )
     monkeypatch.setattr(token_endpoint, "issue_token_pair_records", fake_issue_token_pair_records)
     monkeypatch.setattr(token_endpoint, "read_handler_record", fake_read_handler_record)

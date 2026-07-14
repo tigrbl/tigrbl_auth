@@ -2378,6 +2378,21 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-auth-api-oauth-token"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/80-apis/tigrbl-auth-api-oauth-token" }
+dependencies = [
+    { name = "tigrbl" },
+    { name = "tigrbl-auth-protocol-oauth" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-auth-plugin"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/60-runtime/tigrbl-auth-plugin" }
@@ -2768,6 +2783,7 @@ dependencies = [
     { name = "tigrbl-auth-api-oauth-par" },
     { name = "tigrbl-auth-api-oauth-registration" },
     { name = "tigrbl-auth-api-oauth-revocation" },
+    { name = "tigrbl-auth-api-oauth-token" },
     { name = "tigrbl-auth-plugin" },
     { name = "tigrbl-auth-profile-haip" },
     { name = "tigrbl-auth-protocol-authzen" },
@@ -3122,6 +3138,7 @@ requires-dist = [
     { name = "tigrbl-auth-api-oauth-par", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-par" },
     { name = "tigrbl-auth-api-oauth-registration", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-registration" },
     { name = "tigrbl-auth-api-oauth-revocation", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-revocation" },
+    { name = "tigrbl-auth-api-oauth-token", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-token" },
     { name = "tigrbl-auth-plugin", editable = "pkgs/60-runtime/tigrbl-auth-plugin" },
     { name = "tigrbl-auth-profile-haip", editable = "pkgs/50-protocols/tigrbl-auth-profile-haip" },
     { name = "tigrbl-auth-protocol-authzen", editable = "pkgs/50-protocols/tigrbl-auth-protocol-authzen" },
@@ -5863,6 +5880,7 @@ dependencies = [
     { name = "tigrbl-auth-api-oauth-par" },
     { name = "tigrbl-auth-api-oauth-registration" },
     { name = "tigrbl-auth-api-oauth-revocation" },
+    { name = "tigrbl-auth-api-oauth-token" },
     { name = "tigrbl-auth-protocol-gnap" },
     { name = "tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-authz-policy-admin-gate" },
@@ -5887,6 +5905,7 @@ requires-dist = [
     { name = "tigrbl-auth-api-oauth-par", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oauth-registration", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oauth-revocation", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-api-oauth-token", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-gnap", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy-admin-gate", specifier = "==0.4.0.dev2" },

@@ -255,29 +255,20 @@ def test_my_account_session_routes_live_in_api_package() -> None:
     assert sorted(name for name in route_names if hasattr(table_class, name)) == []
 
 
-@pytest.mark.parametrize(
-    ("module_name", "class_name", "route_names"),
-    [
-        (
-            "tigrbl_identity_storage.tables.token_record",
-            "TokenRecord",
-            {"token"},
-        ),
-    ],
-)
-def test_remaining_oauth_route_handlers_live_on_storage_table_modules(
-    module_name: str,
-    class_name: str,
-    route_names: set[str],
-) -> None:
-    storage_module = importlib.import_module(module_name)
-    runtime_module = importlib.import_module("tigrbl_identity_storage_runtime.token_endpoint")
+def test_token_endpoint_carrier_and_runtime_live_above_storage() -> None:
+    storage_module = importlib.import_module(
+        "tigrbl_identity_storage.tables.token_record"
+    )
+    carrier_module = importlib.import_module("tigrbl_auth_api_oauth_token")
+    runtime_module = importlib.import_module("tigrbl_identity_server.token_surface")
 
+    assert hasattr(carrier_module, "build_token_router")
     assert hasattr(runtime_module, "router")
-    missing = sorted(name for name in route_names if not hasattr(runtime_module, name))
-    assert missing == []
+    assert hasattr(runtime_module, "token_request")
     assert not hasattr(storage_module, "api")
     assert not hasattr(storage_module, "router")
+    with pytest.raises(ModuleNotFoundError):
+        importlib.import_module("tigrbl_identity_storage_runtime.token_endpoint")
 
 
 @pytest.mark.parametrize(

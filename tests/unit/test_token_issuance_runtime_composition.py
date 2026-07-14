@@ -13,6 +13,12 @@ from tigrbl_identity_core.errors import (
     InvalidRefreshTokenError,
     RefreshTokenReuseError,
 )
+from tigrbl_identity_storage.tables import TokenRecord
+from tigrbl_identity_storage_runtime import (
+    TokenRecordRuntimeSpec,
+    initializeIdentityRuntimeTables,
+    read_token_record,
+)
 from tigrbl_identity_server.security import token_issuance as runtime
 
 
@@ -70,6 +76,16 @@ def _refresh_record(**changes):
     }
     record.update(changes)
     return record
+
+
+def _activate_token_storage(monkeypatch, storage) -> None:
+    initializeIdentityRuntimeTables((TokenRecordRuntimeSpec,))
+    runtime_handlers = TokenRecord.handlers
+    handlers = storage.handlers_for(TokenRecord)
+    for name, value in vars(runtime_handlers).items():
+        if not hasattr(handlers, name):
+            setattr(handlers, name, value)
+    monkeypatch.setattr(TokenRecord, "handlers", handlers, raising=False)
 
 
 @pytest.mark.asyncio
@@ -259,3 +275,64 @@ async def test_refresh_rejects_audience_widening(monkeypatch) -> None:
                 requested_audience="https://unrelated.example",
             ),
         )
+
+
+@pytest.mark.asyncio
+async def test_capability_issues_and_rotates_through_real_tigrbl_aliases(
+    monkeypatch,
+    administrator_storage,
+) -> None:
+    _activate_token_storage(monkeypatch, administrator_storage)
+
+    async def ignore_audit(ctx):
+        return None
+
+    monkeypatch.setattr(runtime, "append_audit_event_record", ignore_audit)
+    capability = runtime.build_token_issuance_capability(
+        db=administrator_storage,
+        token_coder=_Coder(),
+    )
+    first = (
+        await capability.call(
+            "issue_token_pair",
+            TokenPairIssueRequest(
+                subject="subject-1",
+                tenant_id="tenant-1",
+                client_id="client-1",
+                issuer="https://issuer.example",
+                scope="openid profile",
+                audience="https://resource-a.example",
+            ),
+        )
+    ).value
+    assert first.refresh_token is not None
+
+    refreshed = (
+        await capability.call(
+            "redeem_refresh_token",
+            RefreshTokenRedemptionRequest(
+                refresh_token=first.refresh_token,
+                tenant_id="tenant-1",
+                client_id="client-1",
+                requested_audience="https://resource-a.example",
+            ),
+        )
+    ).value
+    assert refreshed.refresh_token is not None
+
+    original = await read_token_record(
+        {
+            "payload": {"token_hash": token_hash(first.refresh_token)},
+            "db": administrator_storage,
+        }
+    )
+    successor = await read_token_record(
+        {
+            "payload": {"token_hash": token_hash(refreshed.refresh_token)},
+            "db": administrator_storage,
+        }
+    )
+    assert original["active"] is False
+    assert original["refresh_successor_hash"] == successor["token_hash"]
+    assert successor["refresh_parent_hash"] == original["token_hash"]
+    assert successor["refresh_family_id"] == original["refresh_family_id"]

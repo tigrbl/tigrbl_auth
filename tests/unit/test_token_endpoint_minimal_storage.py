@@ -5,7 +5,7 @@ from types import SimpleNamespace
 import pytest
 
 import tigrbl_identity_storage_runtime.token_persistence as token_persistence
-import tigrbl_identity_storage_runtime.token_runtime as token_runtime
+import tigrbl_identity_server.token_runtime as token_runtime
 from tigrbl_identity_server.security import handler_records
 
 

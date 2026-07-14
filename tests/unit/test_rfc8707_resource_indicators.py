@@ -14,10 +14,8 @@ from httpx import ASGITransport, AsyncClient
 
 from tigrbl_identity_runtime.settings import settings
 from tigrbl import TigrblApp
-from tigrbl_identity_storage_runtime.auth_flows import router
-from tigrbl_identity_server.rest.shared import _jwt
+from tigrbl_identity_server.auth_flows import router
 from tigrbl_identity_storage_runtime.engine import get_db
-from tigrbl_identity_storage.tables import Client
 from tigrbl_identity_jose.jwt_coder import JWTCoder
 from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
 
@@ -56,12 +54,12 @@ def token_issue_stub(monkeypatch):
     async def _first_handler_record(model, db, filters):
         return None
 
-    monkeypatch.setattr("tigrbl_identity_storage_runtime.token_runtime.read_handler_record", _read_handler_record)
-    monkeypatch.setattr("tigrbl_identity_storage_runtime.token_runtime.first_handler_record", _first_handler_record)
-    monkeypatch.setattr("tigrbl_identity_storage_runtime.token_runtime.issue_token_pair_records", _fake_issue_token_pair_records)
-    monkeypatch.setattr("tigrbl_identity_storage_runtime.token_runtime._require_tls", lambda request, deployment=None: None)
+    monkeypatch.setattr("tigrbl_identity_server.token_runtime.read_handler_record", _read_handler_record)
+    monkeypatch.setattr("tigrbl_identity_server.token_runtime.first_handler_record", _first_handler_record)
+    monkeypatch.setattr("tigrbl_identity_server.token_runtime.issue_token_pair_records", _fake_issue_token_pair_records)
+    monkeypatch.setattr("tigrbl_identity_server.token_runtime._require_tls", lambda request, deployment=None: None)
     monkeypatch.setattr(JWTCoder, "async_decode", _fake_decode)
-    yield
+    yield issued
 
 
 @pytest_asyncio.fixture()
@@ -76,18 +74,15 @@ async def token_client():
 
 @pytest.mark.unit
 @pytest.mark.asyncio
-async def test_token_includes_aud_when_resource_provided(monkeypatch, token_client):
+async def test_token_includes_aud_when_resource_provided(
+    monkeypatch, token_client, token_issue_stub
+):
     """RFC 8707 §2: resource parameter indicates the target resource."""
     mock_user = MagicMock(id="user", tenant_id="tenant")
     monkeypatch.setattr(settings, "rfc8707_enabled", True)
     monkeypatch.setattr(
-        "tigrbl_identity_storage_runtime.token_request.authenticate_password",
+        "tigrbl_identity_server.token_request.authenticate_password",
         AsyncMock(return_value=mock_user),
-    )
-    monkeypatch.setattr(
-        Client.handlers.read,
-        "core",
-        AsyncMock(return_value=DummyClient()),
     )
     resp = await token_client.post(
         "/token",
@@ -101,7 +96,7 @@ async def test_token_includes_aud_when_resource_provided(monkeypatch, token_clie
         },
     )
     assert resp.status_code == status.HTTP_200_OK
-    payload = await _jwt.async_decode(resp.json()["access_token"])
+    payload = token_issue_stub[resp.json()["access_token"]]
     assert payload["aud"] == "https://rs.example"
 
 
@@ -111,10 +106,9 @@ async def test_invalid_resource_returns_error(monkeypatch, token_client):
     """RFC 8707 §2: invalid resource value results in 'invalid_target'."""
     monkeypatch.setattr(settings, "rfc8707_enabled", True)
     monkeypatch.setattr(
-        "tigrbl_identity_storage_runtime.token_request.authenticate_password",
+        "tigrbl_identity_server.token_request.authenticate_password",
         AsyncMock(side_effect=AssertionError("password backend should not be reached for invalid resource")),
     )
-    monkeypatch.setattr(Client.handlers.read, "core", AsyncMock(return_value=DummyClient()))
     resp = await token_client.post(
         "/token",
         data={
@@ -132,18 +126,15 @@ async def test_invalid_resource_returns_error(monkeypatch, token_client):
 
 @pytest.mark.unit
 @pytest.mark.asyncio
-async def test_multiple_resources_uses_first(monkeypatch, token_client):
+async def test_multiple_resources_uses_first(
+    monkeypatch, token_client, token_issue_stub
+):
     """RFC 8707 §2: first valid resource is used as audience."""
     mock_user = MagicMock(id="user", tenant_id="tenant")
     monkeypatch.setattr(settings, "rfc8707_enabled", True)
     monkeypatch.setattr(
-        "tigrbl_identity_storage_runtime.token_request.authenticate_password",
+        "tigrbl_identity_server.token_request.authenticate_password",
         AsyncMock(return_value=mock_user),
-    )
-    monkeypatch.setattr(
-        Client.handlers.read,
-        "core",
-        AsyncMock(return_value=DummyClient()),
     )
     resp = await token_client.post(
         "/token",
@@ -157,7 +148,7 @@ async def test_multiple_resources_uses_first(monkeypatch, token_client):
         },
     )
     assert resp.status_code == status.HTTP_200_OK
-    payload = await _jwt.async_decode(resp.json()["access_token"])
+    payload = token_issue_stub[resp.json()["access_token"]]
     assert payload["aud"] == "https://rs.example"
 
 
@@ -167,10 +158,9 @@ async def test_multiple_resources_with_invalid_returns_error(monkeypatch, token_
     """RFC 8707 §2: any invalid resource causes 'invalid_target'."""
     monkeypatch.setattr(settings, "rfc8707_enabled", True)
     monkeypatch.setattr(
-        "tigrbl_identity_storage_runtime.token_request.authenticate_password",
+        "tigrbl_identity_server.token_request.authenticate_password",
         AsyncMock(side_effect=AssertionError("password backend should not be reached for invalid resource")),
     )
-    monkeypatch.setattr(Client.handlers.read, "core", AsyncMock(return_value=DummyClient()))
     resp = await token_client.post(
         "/token",
         data={
@@ -188,18 +178,15 @@ async def test_multiple_resources_with_invalid_returns_error(monkeypatch, token_
 
 @pytest.mark.unit
 @pytest.mark.asyncio
-async def test_feature_flag_disables_resource(monkeypatch, token_client):
+async def test_feature_flag_disables_resource(
+    monkeypatch, token_client, token_issue_stub
+):
     """When disabled, resource parameter is ignored."""
     mock_user = MagicMock(id="user", tenant_id="tenant")
     monkeypatch.setattr(settings, "rfc8707_enabled", False)
     monkeypatch.setattr(
-        "tigrbl_identity_storage_runtime.token_request.authenticate_password",
+        "tigrbl_identity_server.token_request.authenticate_password",
         AsyncMock(return_value=mock_user),
-    )
-    monkeypatch.setattr(
-        Client.handlers.read,
-        "core",
-        AsyncMock(return_value=DummyClient()),
     )
     resp = await token_client.post(
         "/token",
@@ -213,7 +200,7 @@ async def test_feature_flag_disables_resource(monkeypatch, token_client):
         },
     )
     assert resp.status_code == status.HTTP_200_OK
-    payload = await _jwt.async_decode(resp.json()["access_token"])
+    payload = token_issue_stub[resp.json()["access_token"]]
     assert "aud" not in payload
 
 

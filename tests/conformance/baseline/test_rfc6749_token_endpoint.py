@@ -8,7 +8,7 @@ from unittest.mock import AsyncMock
 
 from tigrbl_identity_storage_runtime.engine import get_db
 from tigrbl import TigrblApp
-from tigrbl_identity_storage_runtime.auth_flows import router
+from tigrbl_identity_server.auth_flows import router
 from tigrbl_identity_runtime.deployment import resolve_deployment
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
@@ -41,15 +41,15 @@ async def client(monkeypatch):
     app.include_router(router)
     app.router.dependency_overrides[get_db] = _override_db
     monkeypatch.setattr(
-        "tigrbl_identity_storage_runtime.token_runtime.read_handler_record",
+        "tigrbl_identity_server.token_runtime.read_handler_record",
         AsyncMock(return_value=DummyClient()),
     )
     monkeypatch.setattr(
-        "tigrbl_identity_storage_runtime.token_runtime.first_handler_record",
+        "tigrbl_identity_server.token_runtime.first_handler_record",
         AsyncMock(return_value=None),
     )
     monkeypatch.setattr(
-        "tigrbl_identity_storage_runtime.token_runtime.issue_token_pair_records",
+        "tigrbl_identity_server.token_runtime.issue_token_pair_records",
         AsyncMock(return_value=("access-token", "refresh-token")),
     )
     transport = ASGITransport(app=app)

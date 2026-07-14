@@ -25,11 +25,7 @@ from tigrbl_auth_protocol_oauth.standards.assertion_framework import (
     validate_assertion_grant_request,
 )
 from tigrbl_auth_protocol_oauth.standards.device_authorization import (
-    DEVICE_CODE_EXPIRES_IN,
     DEVICE_CODE_GRANT_TYPE,
-    DEVICE_CODE_INTERVAL,
-    next_device_poll_interval,
-    poll_too_frequently,
 )
 from tigrbl_auth_protocol_oauth.standards.resource_indicators import select_resource_indicator
 from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER
@@ -123,7 +119,6 @@ from tigrbl_identity_server.security.handler_records import (
     first_handler_record,
     issue_token_pair_records,
     read_handler_record,
-    update_handler_record,
 )
 
 try:  # pragma: no cover
@@ -273,8 +268,6 @@ def _token_pair_payload(access: str, refresh: str | None, *, token_type: str, id
     return TokenPair(access_token=access, refresh_token=refresh, id_token=id_token, token_type=token_type).model_dump(exclude_none=True)
 
 
-from .token_device_grant import handle_device_code_grant
-
 __all__ = [
     "AuthCode",
     "AuthSession",
@@ -319,7 +312,6 @@ __all__ = [
     "enforce_authorization_code_grant",
     "enforce_grant_type",
     "enforce_password_grant",
-    "handle_device_code_grant",
     "inspect",
     "issue_token_pair_records",
     "mint_id_token",
