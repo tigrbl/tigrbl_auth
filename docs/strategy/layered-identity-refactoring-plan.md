@@ -170,6 +170,20 @@ Required ownership rules:
 - [x] `7c4f59b3` adds and mounts the standalone layer-80 RFC 9126 carrier,
   deletes the layer-30 HTTP module, preserves JAR/RAR/resource/FAPI/DPoP/mTLS
   behavior, and prevents client authentication secrets from being persisted.
+- [x] `d4253f99`, `ee718380`, and `89bf7bd5` add the durable client-registration
+  aggregate, map RFC 7591/7592 to its reportable capability, and move the
+  registration/management carrier above storage.
+- [x] `c7d1acd0`, `d9248dae`, and `2bb9d2de` add the typed token-issuance
+  capability seam, durable profiled-token lookup, and request-scoped layer-60
+  issuance/refresh composition with binding, rotation, lineage, reuse-family
+  revocation, and audit behavior.
+- [x] `bafebb28` adds and mounts the standalone layer-80 OAuth token carrier,
+  removes token routing from layer 30, and preserves grant/profile behavior in
+  runtime composition.
+- [x] `dfe0546d` adds and mounts the standalone layer-80 OAuth/OIDC
+  authorization carrier, moves authorization orchestration and PAR/JAR input
+  resolution to layer 60, preserves repeated resource parameters, and removes
+  authorization routing from layer 30.
 
 ## 3. Layer 00: primitives
 
@@ -660,8 +674,9 @@ flags. Tier-4 claims require independent interoperability evidence.
 - [ ] C4: remove route/runtime/provider imports from layer 01 and move routers
   to layer 80.
   RFC 7662 introspection, RFC 7009 revocation, RFC 9126 PAR, and RFC 7591/7592
-  client registration/management are complete; token, authorization,
-  userinfo, logout, discovery, and token-exchange carriers remain.
+  client registration/management, token, and authorization are complete;
+  login, device authorization, userinfo, logout, discovery, and token-exchange
+  carriers remain.
 - [x] C5: finish claim package/facade cleanup and remove protocol-specific
   deterministic package names.
 - [x] C6: finish EAT token/evidence/appraisal/provider verification chain.
@@ -1075,8 +1090,10 @@ The final audit proves:
    and layer-80 carriers. RFC 7591/7592 registration now also uses a durable
    layer-30 aggregate, a reportable lifecycle capability, explicit protocol
    requirements, runtime security composition, and a layer-80 carrier. Next
-   move token, authorization, userinfo, logout, discovery, token-exchange, and
-   related HTTP bindings out of layer 30 and mount them from layer 80.
+   Token and authorization now have standalone layer-80 carriers and layer-60
+   runtime composition. Next move login, device authorization, userinfo,
+   logout, discovery, token-exchange, and related HTTP bindings out of layer 30
+   and mount them from layer 80.
 4. **C5 neutral reusable ownership**: claims facade, scope matcher, subject
    strategy, OAuth/OIDC base cleanup.
 5. **C6 EAT chain**: typed token verifiers, verified evidence, appraisal
