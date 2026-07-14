@@ -252,7 +252,7 @@ PROTOCOL_PUBLIC_CAPABILITIES: Final[tuple[dict[str, Any], ...]] = (
         "flags": ("enable_oidc_rp_initiated_logout",),
         "summary": "OIDC RP-initiated logout endpoint",
         "tags": ("oidc",),
-        "publisher_ref": "tigrbl_identity_storage_runtime.logout:include_logout_endpoint",
+        "publisher_ref": "tigrbl_identity_server.logout_surface:include_logout_endpoint",
         "targets": (
             "RFC 6265",
             "OIDC Session Management",

@@ -305,7 +305,7 @@ def test_token_endpoint_carrier_and_runtime_live_above_storage() -> None:
             set(),
         ),
         (
-            "tigrbl_identity_storage_runtime.logout",
+            "tigrbl_identity_server.logout_surface",
             "tigrbl_identity_storage.tables.logout_state",
             "LogoutState",
             {"logout"},

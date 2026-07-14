@@ -2404,6 +2404,17 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-auth-api-oidc-logout"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/80-apis/tigrbl-auth-api-oidc-logout" }
+dependencies = [
+    { name = "tigrbl" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl", specifier = "==0.4.4.dev1" }]
+
+[[package]]
 name = "tigrbl-auth-api-oidc-userinfo"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/80-apis/tigrbl-auth-api-oidc-userinfo" }
@@ -2807,6 +2818,7 @@ dependencies = [
     { name = "tigrbl-auth-api-oauth-registration" },
     { name = "tigrbl-auth-api-oauth-revocation" },
     { name = "tigrbl-auth-api-oauth-token" },
+    { name = "tigrbl-auth-api-oidc-logout" },
     { name = "tigrbl-auth-api-oidc-userinfo" },
     { name = "tigrbl-auth-plugin" },
     { name = "tigrbl-auth-profile-haip" },
@@ -3164,6 +3176,7 @@ requires-dist = [
     { name = "tigrbl-auth-api-oauth-registration", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-registration" },
     { name = "tigrbl-auth-api-oauth-revocation", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-revocation" },
     { name = "tigrbl-auth-api-oauth-token", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-token" },
+    { name = "tigrbl-auth-api-oidc-logout", editable = "pkgs/80-apis/tigrbl-auth-api-oidc-logout" },
     { name = "tigrbl-auth-api-oidc-userinfo", editable = "pkgs/80-apis/tigrbl-auth-api-oidc-userinfo" },
     { name = "tigrbl-auth-plugin", editable = "pkgs/60-runtime/tigrbl-auth-plugin" },
     { name = "tigrbl-auth-profile-haip", editable = "pkgs/50-protocols/tigrbl-auth-profile-haip" },
@@ -5908,6 +5921,7 @@ dependencies = [
     { name = "tigrbl-auth-api-oauth-registration" },
     { name = "tigrbl-auth-api-oauth-revocation" },
     { name = "tigrbl-auth-api-oauth-token" },
+    { name = "tigrbl-auth-api-oidc-logout" },
     { name = "tigrbl-auth-api-oidc-userinfo" },
     { name = "tigrbl-auth-protocol-gnap" },
     { name = "tigrbl-auth-protocol-oauth" },
@@ -5935,6 +5949,7 @@ requires-dist = [
     { name = "tigrbl-auth-api-oauth-registration", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oauth-revocation", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oauth-token", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-api-oidc-logout", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oidc-userinfo", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-gnap", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },

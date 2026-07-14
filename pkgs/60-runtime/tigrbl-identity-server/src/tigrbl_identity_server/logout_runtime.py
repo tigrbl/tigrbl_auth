@@ -10,30 +10,17 @@ from tigrbl_auth_protocol_oidc.standards.rp_initiated_logout import (
     validate_logout_request,
 )
 from tigrbl_auth_protocol_oidc.standards.session_mgmt import resolve_browser_session
-from tigrbl_identity_runtime.deployment import (
-    deployment_from_app,
-    deployment_from_request,
-)
+from tigrbl_identity_runtime.deployment import deployment_from_request
 from tigrbl_identity_runtime.http_standards.cookies import (
     clear_session_cookie,
     describe_runtime_policy,
     parse_session_cookie_value,
 )
 from tigrbl_identity_runtime.settings import settings
-from tigrbl import (
-    Depends,
-    JSONResponse,
-    RedirectResponse,
-    TigrblApp,
-    TigrblRouter,
-)
+from tigrbl import JSONResponse, RedirectResponse
 from tigrbl.runtime.status import HTTPException, status
-from .ops.audit import append_audit_event_async
-from .session_lifecycle import get_session_async
-from .engine import get_db
-
-
-api = router = TigrblRouter()
+from tigrbl_identity_storage_runtime.ops.audit import append_audit_event_async
+from tigrbl_identity_storage_runtime.session_lifecycle import get_session_async
 
 
 def _append_state(uri: str, state: str | None) -> str:
@@ -192,8 +179,7 @@ def _repo_root() -> Path:
     return Path(__file__).resolve().parents[5]
 
 
-@api.route("/logout", methods=["GET", "POST"], response_model=None)
-async def logout(request, db=Depends(get_db)):
+async def logout(request, db):
     result = await logout_request(request=request, db=db)
     from tigrbl_identity_storage_runtime.session_service import observe_logout_response
 
@@ -217,24 +203,7 @@ async def logout(request, db=Depends(get_db)):
     return result
 
 
-def include_logout_endpoint(app: TigrblApp) -> None:
-    deployment = deployment_from_app(app, settings)
-    path = "/logout"
-    if deployment.route_enabled(path) and not any(
-        (getattr(route, "path", None) or getattr(route, "path_template", None)) == path
-        for route in app.router.routes
-    ):
-        app.include_router(api)
-
-
-include_oidc_rp_initiated_logout = include_logout_endpoint
-
-
 __all__ = [
-    "api",
-    "router",
     "logout",
     "logout_request",
-    "include_logout_endpoint",
-    "include_oidc_rp_initiated_logout",
 ]

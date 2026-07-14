@@ -314,11 +314,15 @@ def test_executable_device_authorization_publisher_lives_above_storage() -> None
 def test_executable_logout_publisher_lives_above_storage() -> None:
     assert importlib.util.find_spec("tigrbl_identity_storage.tables.logout_state._op") is None
 
-    runtime = importlib.import_module("tigrbl_identity_storage_runtime.logout")
+    runtime = importlib.import_module("tigrbl_identity_server.logout_surface")
     storage = importlib.import_module("tigrbl_identity_storage.tables.logout_state")
 
     assert runtime.api is runtime.router
-    assert runtime.include_logout_endpoint.__module__ == "tigrbl_identity_storage_runtime.logout"
+    assert runtime.include_logout_endpoint.__module__ == (
+        "tigrbl_identity_server.logout_surface"
+    )
+    with pytest.raises(ModuleNotFoundError):
+        importlib.import_module("tigrbl_identity_storage_runtime.logout")
     assert not hasattr(storage, "api")
     assert not hasattr(storage, "router")
 

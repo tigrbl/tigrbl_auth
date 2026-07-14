@@ -292,6 +292,7 @@ dependencies = [
     "tigrbl-client-registration-capability==0.4.0.dev2",
     "tigrbl-auth-api-oauth-authorization==0.4.0.dev2",
     "tigrbl-auth-api-oidc-userinfo==0.4.0.dev2",
+    "tigrbl-auth-api-oidc-logout==0.4.0.dev2",
     "tigrbl-auth-api-oauth-introspection==0.4.0.dev2",
     "tigrbl-auth-api-oauth-revocation==0.4.0.dev2",
     "tigrbl-auth-api-oauth-par==0.4.0.dev2",
@@ -659,6 +660,7 @@ tigrbl-pushed-authorization-capability = { path = "pkgs/40-capabilities/tigrbl-p
 tigrbl-client-registration-capability = { path = "pkgs/40-capabilities/tigrbl-client-registration-capability", editable = true }
 tigrbl-auth-api-oauth-authorization = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-authorization", editable = true }
 tigrbl-auth-api-oidc-userinfo = { path = "pkgs/80-apis/tigrbl-auth-api-oidc-userinfo", editable = true }
+tigrbl-auth-api-oidc-logout = { path = "pkgs/80-apis/tigrbl-auth-api-oidc-logout", editable = true }
 tigrbl-auth-api-oauth-introspection = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-introspection", editable = true }
 tigrbl-auth-api-oauth-revocation = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-revocation", editable = true }
 tigrbl-auth-api-oauth-par = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-par", editable = true }
