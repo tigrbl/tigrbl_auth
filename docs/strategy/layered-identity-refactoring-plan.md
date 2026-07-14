@@ -91,6 +91,15 @@ Required ownership rules:
   platform-admin product while preserving admin-gate behavior.
 - [x] `9a8be20d` moves realm-administration DTOs and routes to that same product,
   leaving `Realm` as a mapped record and bootstrap definition.
+- [x] `bcf1f18` moves tenant-administration DTOs, payload projection, and HTTP
+  handlers to the layer-80 platform-admin product; deletes the duplicate
+  layer-30 router; removes tenant HTTP schemas from layer 01; and leaves
+  `Tenant` as mapped durable state plus bootstrap rows.
+- [x] `f1b2b043` reconciles the upstream DPoP work with the layered design:
+  layer 01 owns nonce/replay schemas and migration `0034`, layer 30 owns
+  executable table specifications and durable operations, and layer 50 accepts
+  explicitly injected replay/nonce operations instead of configuring a global
+  in-memory store.
 - [x] Claim primitives, contracts, bases, `ClaimType`, `ClaimValueType`,
   `ClaimNameKind`, and standalone concrete claim packages exist.
 - [x] Protocol-neutral scope matching exists as
@@ -996,8 +1005,11 @@ The final audit proves:
    storage models.
 2. **C3b delegation/device/key/audit**: move remaining operations/hooks and
    delete layer-01 `_ops` use.
-3. **C4 routes/runtime barrels**: move user/session/realm routes to layer 80;
-   remove runtime/API exports from layer 01.
+3. **C4 routes/runtime barrels**: My Account, identity, realm, and tenant HTTP
+   ownership is complete. Next move admin-auth DTO ownership out of `User`,
+   migrate `User.lookup_by_identifier`/`op_ctx` to the identity table runtime,
+   move bootstrap password materialization to provider/runtime composition,
+   then remove remaining runtime/API exports from layer 01.
 4. **C5 neutral reusable ownership**: claims facade, scope matcher, subject
    strategy, OAuth/OIDC base cleanup.
 5. **C6 EAT chain**: typed token verifiers, verified evidence, appraisal
