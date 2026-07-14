@@ -7,7 +7,6 @@ from uuid import uuid4
 
 from tigrbl_identity_core.errors import InvalidRefreshTokenError, RefreshTokenReuseError
 from tigrbl_identity_core.digests import token_hash
-from tigrbl_identity_storage.tables.token_record._hooks import normalize_refresh_audience
 from tigrbl_identity_storage.tables import TokenRecord
 from .ops.common import (
     delete_table_record,
@@ -27,6 +26,18 @@ class TokenCoder(Protocol):
     async def async_sign_pair(self, **kwargs: Any) -> tuple[str, str]: ...
 
     async def async_decode(self, token: str, **kwargs: Any) -> dict[str, Any]: ...
+
+
+def normalize_refresh_audience(value: Any) -> str | list[str] | None:
+    """Normalize a decoded refresh-token audience for token reissuance."""
+
+    if value is None or value == "":
+        return None
+    if isinstance(value, (str, list)):
+        return value
+    if isinstance(value, tuple):
+        return list(value)
+    return str(value)
 
 
 async def upsert_token_record_async(

@@ -328,13 +328,11 @@ def test_credentials_async_token_paths_use_async_persistence_hooks() -> None:
         / "tigrbl_identity_jose"
         / "jwt_runtime.py"
     ).read_text(encoding="utf-8")
-    storage_token_hooks_source = (
-        _package_path("tigrbl-identity-storage")
+    token_persistence_source = (
+        _package_path("tigrbl-identity-storage-runtime")
         / "src"
-        / "tigrbl_identity_storage"
-        / "tables"
-        / "token_record"
-        / "_hooks.py"
+        / "tigrbl_identity_storage_runtime"
+        / "token_persistence.py"
     ).read_text(encoding="utf-8")
     server_handler_source = (
         _package_path("tigrbl-identity-server")
@@ -351,7 +349,7 @@ def test_credentials_async_token_paths_use_async_persistence_hooks() -> None:
     assert "standards.introspection" not in runtime_source
     assert "register_token" not in runtime_source
     assert '"is_revoked_async": is_revoked_async' in runtime_source
-    assert "normalize_refresh_audience" in storage_token_hooks_source
+    assert "normalize_refresh_audience" in token_persistence_source
     assert "persist_token=False" in server_handler_source
 
 

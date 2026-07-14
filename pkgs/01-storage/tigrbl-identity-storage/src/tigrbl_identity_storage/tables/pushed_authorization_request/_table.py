@@ -24,12 +24,6 @@ from tigrbl_identity_storage.framework import (
 DEFAULT_PAR_EXPIRY = 90
 
 
-def _utc(value: datetime | None) -> datetime | None:
-    if value is None:
-        return None
-    return value if value.tzinfo is not None else value.replace(tzinfo=timezone.utc)
-
-
 def _default_request_uri() -> str:
     return f"urn:ietf:params:oauth:request_uri:{uuid.uuid4()}"
 
@@ -57,29 +51,6 @@ class PushedAuthorizationRequest(RestOltpTable, GUIDPk, Timestamped):
     expires_in: Mapped[int] = acol(storage=S(Integer, nullable=False, default=_default_expires_in))
     expires_at: Mapped[dt.datetime] = acol(storage=S(TZDateTime, nullable=False, default=_default_expires_at))
     consumed_at: Mapped[dt.datetime | None] = acol(storage=S(TZDateTime, nullable=True, index=True))
-
-
-    @property
-    def one_time_use(self) -> bool:
-        return True
-
-    def is_expired(self, *, now: datetime | None = None) -> bool:
-        current = _utc(now) or datetime.now(tz=timezone.utc)
-        expires_at = _utc(self.expires_at)
-        return expires_at is not None and expires_at <= current
-
-    def is_consumed(self) -> bool:
-        return _utc(self.consumed_at) is not None
-
-    def client_bound(self, client_id: uuid.UUID | str | None) -> bool:
-        if self.client_id is None or client_id in {None, ''}:
-            return True
-        return str(self.client_id) == str(client_id)
-
-    def consume(self, *, now: datetime | None = None) -> datetime:
-        consumed_at = _utc(now) or datetime.now(tz=timezone.utc)
-        self.consumed_at = consumed_at
-        return consumed_at
 
 
 __all__ = [
