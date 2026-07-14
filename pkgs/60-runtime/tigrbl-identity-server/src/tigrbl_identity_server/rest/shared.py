@@ -9,7 +9,6 @@ from tigrbl.requests import Request
 from tigrbl.runtime.status import HTTPException
 
 from tigrbl_identity_jose.jwt_coder import JWTCoder
-from tigrbl_authn_credentials.backends import PasswordBackend
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
 from tigrbl_auth_protocol_oidc.standards.frontchannel_logout import mark_frontchannel_complete
@@ -78,8 +77,6 @@ class _LazyRuntimeProxy:
 
 
 _jwt = _LazyRuntimeProxy(JWTCoder.default)
-_pwd_backend = _LazyRuntimeProxy(PasswordBackend)
-
 _ALLOWED_GRANT_TYPES = {"password", "authorization_code", "client_credentials", "refresh_token"}
 if settings.enable_rfc8628:
     _ALLOWED_GRANT_TYPES.add("urn:ietf:params:oauth:grant-type:device_code")

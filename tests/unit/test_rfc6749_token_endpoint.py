@@ -11,6 +11,7 @@ from tigrbl import TigrblApp
 from tigrbl_identity_storage_runtime.auth_flows import router
 from tigrbl_identity_runtime.deployment import resolve_deployment
 from tigrbl_identity_runtime.settings import settings
+from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
 
 CLIENT_ID = "00000000-0000-0000-0000-000000000000"
 AUTH = BasicAuth(CLIENT_ID, "secret")
@@ -19,9 +20,8 @@ AUTH = BasicAuth(CLIENT_ID, "secret")
 class DummyClient:
     id = CLIENT_ID
     tenant_id = "tenant"
-
-    def verify_secret(self, secret: str) -> bool:  # pragma: no cover - trivial
-        return secret == "secret"
+    is_active = True
+    client_secret_hash = BcryptSecretHasher(rounds=4).hash_secret("secret").encoded
 
 
 class DummyDB:
@@ -102,6 +102,32 @@ async def test_password_grant_requires_username_and_password(
     resp = await client.post("/token", data=data, auth=AUTH)
     assert resp.status_code == status.HTTP_400_BAD_REQUEST
     assert resp.json()["error"] == "invalid_request"
+
+
+@pytest.mark.unit
+@pytest.mark.asyncio
+async def test_password_grant_rejects_failed_capability_authentication(
+    client,
+    enable_rfc6749,
+    monkeypatch,
+):
+    monkeypatch.setattr(
+        "tigrbl_identity_storage_runtime.token_request.authenticate_password",
+        AsyncMock(return_value=None),
+    )
+
+    resp = await client.post(
+        "/token",
+        data={
+            "grant_type": "password",
+            "username": "user",
+            "password": "wrong",
+        },
+        auth=AUTH,
+    )
+
+    assert resp.status_code == status.HTTP_400_BAD_REQUEST
+    assert resp.json()["error"] == "invalid_grant"
 
 
 @pytest.mark.unit

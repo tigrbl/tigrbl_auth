@@ -63,7 +63,11 @@ class PasswordAuthenticationCapability(Capability):
             self._lookup_identity({"payload": {"identifier": identifier}, "db": db})
         )
         encoded = _field(record, "password_hash") if record is not None else None
-        if record is None or not self._authenticator.verify_secret(password, encoded):
+        if (
+            record is None
+            or not bool(_field(record, "is_active", True))
+            or not self._authenticator.verify_secret(password, encoded)
+        ):
             return RecordAuthenticationResult(False, reason="invalid credentials")
         subject_id = str(_field(record, "id", "")) or None
         return RecordAuthenticationResult(

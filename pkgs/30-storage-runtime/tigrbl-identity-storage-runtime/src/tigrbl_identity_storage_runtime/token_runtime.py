@@ -114,7 +114,8 @@ except Exception:  # pragma: no cover - dependency-light fallback
         token_type: str = 'bearer'
 
 try:  # pragma: no cover
-    from tigrbl_identity_server.rest.shared import _jwt, _pwd_backend, _require_tls, allowed_grant_types
+    from tigrbl_identity_server.rest.shared import _jwt, _require_tls, allowed_grant_types
+    from tigrbl_identity_server.security.password_authentication import authenticate_password
 except Exception:  # pragma: no cover - dependency-light fallback
     _jwt = JWTCoder.default if False else None  # placeholder to keep name bound
 
@@ -122,12 +123,10 @@ except Exception:  # pragma: no cover - dependency-light fallback
         async def async_sign_pair(self, **kwargs):
             raise RuntimeError('runtime JWT service unavailable in dependency-light mode')
 
-    class _MissingPasswordBackend:
-        async def authenticate(self, db, username, password):
-            raise RuntimeError('password backend unavailable in dependency-light mode')
-
     _jwt = _MissingJWT()
-    _pwd_backend = _MissingPasswordBackend()
+
+    async def authenticate_password(identifier, password, db):
+        raise RuntimeError('password authentication capability unavailable in dependency-light mode')
 
     def _require_tls(request):
         return None
@@ -319,7 +318,7 @@ __all__ = [
     "_jwt",
     "_load_client",
     "_parse_request_form",
-    "_pwd_backend",
+    "authenticate_password",
     "_registered_token_endpoint_auth_method",
     "_resolve_request_deployment",
     "_resource_selection",

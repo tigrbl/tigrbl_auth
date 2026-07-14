@@ -12,7 +12,7 @@ from .token_runtime import (
     _jwt,
     _load_client,
     _parse_request_form,
-    _pwd_backend,
+    authenticate_password,
     _registered_token_endpoint_auth_method,
     _resolve_request_deployment,
     _resource_selection,
@@ -233,7 +233,9 @@ async def token_request(*, request, db):
             return JSONResponse({'error': str(exc)}, status_code=status.HTTP_400_BAD_REQUEST)
         except ValidationError as exc:
             raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, exc.errors())
-        user = await _pwd_backend.authenticate(db, parsed.username, parsed.password)
+        user = await authenticate_password(parsed.username, parsed.password, db)
+        if user is None:
+            return JSONResponse({'error': 'invalid_grant'}, status_code=status.HTTP_400_BAD_REQUEST)
         access, refresh = await _token_pair_issuer()(
             db,
             jwt=_jwt,

@@ -19,6 +19,7 @@ from tigrbl_identity_server.rest.shared import _jwt
 from tigrbl_identity_storage_runtime.engine import get_db
 from tigrbl_identity_storage.tables import Client
 from tigrbl_identity_jose.jwt_coder import JWTCoder
+from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
 
 
 CLIENT_ID = "00000000-0000-0000-0000-000000000000"
@@ -27,9 +28,8 @@ CLIENT_ID = "00000000-0000-0000-0000-000000000000"
 class DummyClient:
     id = CLIENT_ID
     tenant_id = "tenant"
-
-    def verify_secret(self, secret: str) -> bool:  # pragma: no cover - trivial
-        return secret == "secret"
+    is_active = True
+    client_secret_hash = BcryptSecretHasher(rounds=4).hash_secret("secret").encoded
 
 
 @pytest.fixture(autouse=True)
@@ -81,7 +81,7 @@ async def test_token_includes_aud_when_resource_provided(monkeypatch, token_clie
     mock_user = MagicMock(id="user", tenant_id="tenant")
     monkeypatch.setattr(settings, "rfc8707_enabled", True)
     monkeypatch.setattr(
-        "tigrbl_identity_storage_runtime.token_runtime._pwd_backend.authenticate",
+        "tigrbl_identity_storage_runtime.token_request.authenticate_password",
         AsyncMock(return_value=mock_user),
     )
     monkeypatch.setattr(
@@ -111,7 +111,7 @@ async def test_invalid_resource_returns_error(monkeypatch, token_client):
     """RFC 8707 §2: invalid resource value results in 'invalid_target'."""
     monkeypatch.setattr(settings, "rfc8707_enabled", True)
     monkeypatch.setattr(
-        "tigrbl_identity_storage_runtime.token_runtime._pwd_backend.authenticate",
+        "tigrbl_identity_storage_runtime.token_request.authenticate_password",
         AsyncMock(side_effect=AssertionError("password backend should not be reached for invalid resource")),
     )
     monkeypatch.setattr(Client.handlers.read, "core", AsyncMock(return_value=DummyClient()))
@@ -137,7 +137,7 @@ async def test_multiple_resources_uses_first(monkeypatch, token_client):
     mock_user = MagicMock(id="user", tenant_id="tenant")
     monkeypatch.setattr(settings, "rfc8707_enabled", True)
     monkeypatch.setattr(
-        "tigrbl_identity_storage_runtime.token_runtime._pwd_backend.authenticate",
+        "tigrbl_identity_storage_runtime.token_request.authenticate_password",
         AsyncMock(return_value=mock_user),
     )
     monkeypatch.setattr(
@@ -167,7 +167,7 @@ async def test_multiple_resources_with_invalid_returns_error(monkeypatch, token_
     """RFC 8707 §2: any invalid resource causes 'invalid_target'."""
     monkeypatch.setattr(settings, "rfc8707_enabled", True)
     monkeypatch.setattr(
-        "tigrbl_identity_storage_runtime.token_runtime._pwd_backend.authenticate",
+        "tigrbl_identity_storage_runtime.token_request.authenticate_password",
         AsyncMock(side_effect=AssertionError("password backend should not be reached for invalid resource")),
     )
     monkeypatch.setattr(Client.handlers.read, "core", AsyncMock(return_value=DummyClient()))
@@ -193,7 +193,7 @@ async def test_feature_flag_disables_resource(monkeypatch, token_client):
     mock_user = MagicMock(id="user", tenant_id="tenant")
     monkeypatch.setattr(settings, "rfc8707_enabled", False)
     monkeypatch.setattr(
-        "tigrbl_identity_storage_runtime.token_runtime._pwd_backend.authenticate",
+        "tigrbl_identity_storage_runtime.token_request.authenticate_password",
         AsyncMock(return_value=mock_user),
     )
     monkeypatch.setattr(

@@ -2,7 +2,6 @@
 
 from tigrbl_identity_server.rest.shared import (
     _jwt,
-    _pwd_backend,
     _require_tls,
     _front_channel_logout,
     _back_channel_logout,
@@ -11,7 +10,6 @@ from tigrbl_identity_server.rest.shared import (
 
 __all__ = [
     "_jwt",
-    "_pwd_backend",
     "_require_tls",
     "_front_channel_logout",
     "_back_channel_logout",

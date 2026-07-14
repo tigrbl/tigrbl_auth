@@ -207,7 +207,7 @@ def test_server_api_key_authentication_uses_capability_composition() -> None:
         ApiKeyAuthenticationCapability,
     )
 
-    for module_name in ("auth.py", "security_deps.py"):
+    for module_name in ("auth.py", "security_deps.py", "../rest/shared.py"):
         path = (
             __import__("pathlib").Path(__file__).resolve().parents[2]
             / "pkgs"
@@ -221,3 +221,14 @@ def test_server_api_key_authentication_uses_capability_composition() -> None:
         assert "tigrbl_authn_credentials.backends" not in path.read_text(
             encoding="utf-8"
         )
+
+    token_runtime = (
+        __import__("pathlib").Path(__file__).resolve().parents[2]
+        / "pkgs"
+        / "30-storage-runtime"
+        / "tigrbl-identity-storage-runtime"
+        / "src"
+        / "tigrbl_identity_storage_runtime"
+        / "token_runtime.py"
+    ).read_text(encoding="utf-8")
+    assert "_pwd_backend" not in token_runtime

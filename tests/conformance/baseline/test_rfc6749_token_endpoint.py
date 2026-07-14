@@ -11,6 +11,7 @@ from tigrbl import TigrblApp
 from tigrbl_identity_storage_runtime.auth_flows import router
 from tigrbl_identity_runtime.deployment import resolve_deployment
 from tigrbl_identity_runtime.settings import settings
+from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
 
 CLIENT_ID = "00000000-0000-0000-0000-000000000000"
 AUTH = BasicAuth(CLIENT_ID, "secret")
@@ -19,9 +20,8 @@ AUTH = BasicAuth(CLIENT_ID, "secret")
 class DummyClient:
     id = CLIENT_ID
     tenant_id = "tenant"
-
-    def verify_secret(self, secret: str) -> bool:  # pragma: no cover - trivial
-        return secret == "secret"
+    is_active = True
+    client_secret_hash = BcryptSecretHasher(rounds=4).hash_secret("secret").encoded
 
 
 class DummyDB:
