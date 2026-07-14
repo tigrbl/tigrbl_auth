@@ -17,6 +17,133 @@ from .common import (
 )
 
 
+async def _registration_aggregate(db: Any, client_id: Any) -> dict[str, Any] | None:
+    from tigrbl_identity_storage.tables import Client, ClientRegistration
+
+    client = await first_table_record(Client, db, {"id": client_id})
+    registration = await first_table_record(
+        ClientRegistration,
+        db,
+        {"client_id": client_id},
+    )
+    if client is None or registration is None:
+        return None
+    return {"client": client, "registration": registration}
+
+
+async def create_client_registration(ctx: Mapping[str, Any]) -> dict[str, Any]:
+    """Create the canonical client and registration rows as one aggregate."""
+
+    from tigrbl_identity_storage.tables import Client, ClientRegistration
+
+    db = database_from_context(ctx)
+    payload = dict(payload_from_context(ctx))
+    client_id = payload["client_id"]
+    if await _registration_aggregate(db, client_id) is not None:
+        raise ValueError("client registration already exists")
+    client = await create_table_record(
+        Client,
+        db,
+        {
+            "id": client_id,
+            "tenant_id": payload["tenant_id"],
+            "client_secret_hash": payload["client_secret_hash"],
+            "redirect_uris": " ".join(payload["redirect_uris"]),
+            "grant_types": " ".join(payload.get("grant_types") or ("authorization_code",)),
+            "response_types": " ".join(payload.get("response_types") or ("code",)),
+        },
+    )
+    registration = await create_table_record(
+        ClientRegistration,
+        db,
+        {
+            "client_id": field_value(client, "id"),
+            "tenant_id": payload["tenant_id"],
+            "registration_metadata": dict(payload.get("metadata") or {}),
+            "contacts": list(payload.get("contacts") or ()),
+            "software_id": payload.get("software_id"),
+            "software_version": payload.get("software_version"),
+            "registration_access_token_hash": payload.get(
+                "registration_access_token_hash"
+            ),
+            "registration_client_uri": payload.get("registration_client_uri"),
+        },
+    )
+    return {"client": client, "registration": registration}
+
+
+async def read_client_registration(ctx: Mapping[str, Any]) -> dict[str, Any] | None:
+    """Read the canonical client-registration aggregate by client identifier."""
+
+    payload = payload_from_context(ctx)
+    return await _registration_aggregate(
+        database_from_context(ctx),
+        payload["client_id"],
+    )
+
+
+async def update_client_registration(ctx: Mapping[str, Any]) -> dict[str, Any]:
+    """Replace mutable client and registration metadata without rotating secrets."""
+
+    from tigrbl_identity_storage.tables import Client, ClientRegistration
+
+    db = database_from_context(ctx)
+    payload = dict(payload_from_context(ctx))
+    aggregate = await _registration_aggregate(db, payload["client_id"])
+    if aggregate is None:
+        raise LookupError("client registration not found")
+    client = aggregate["client"]
+    registration = aggregate["registration"]
+    client = await update_table_record(
+        Client,
+        db,
+        field_value(client, "id"),
+        {
+            "redirect_uris": " ".join(payload["redirect_uris"]),
+            "grant_types": " ".join(payload["grant_types"]),
+            "response_types": " ".join(payload["response_types"]),
+        },
+    )
+    registration = await update_table_record(
+        ClientRegistration,
+        db,
+        field_value(registration, "id"),
+        {
+            "registration_metadata": dict(payload["metadata"]),
+            "contacts": list(payload.get("contacts") or ()),
+            "software_id": payload.get("software_id"),
+            "software_version": payload.get("software_version"),
+        },
+    )
+    return {"client": client, "registration": registration}
+
+
+async def disable_client_registration(ctx: Mapping[str, Any]) -> dict[str, Any]:
+    """Disable both sides of a client-registration aggregate without deleting history."""
+
+    from tigrbl_identity_storage.tables import Client, ClientRegistration
+
+    db = database_from_context(ctx)
+    payload = payload_from_context(ctx)
+    aggregate = await _registration_aggregate(db, payload["client_id"])
+    if aggregate is None:
+        raise LookupError("client registration not found")
+    disabled_at = payload.get("disabled_at") or dt.datetime.now(timezone.utc)
+    client = await update_table_record(
+        Client,
+        db,
+        field_value(aggregate["client"], "id"),
+        {"is_active": False},
+    )
+    registration = await update_table_record(
+        ClientRegistration,
+        db,
+        field_value(aggregate["registration"], "id"),
+        {"disabled_at": disabled_at},
+    )
+    return {"client": client, "registration": registration}
+
+
 async def persist_authorization_code(ctx: Mapping[str, Any]) -> Any:
     """Persist an authorization code using the canonical create operation."""
 
@@ -145,9 +272,13 @@ async def is_token_hash_revoked(ctx: Mapping[str, Any]) -> bool:
 
 
 __all__ = [
+    "create_client_registration",
+    "disable_client_registration",
     "is_token_hash_revoked",
     "persist_authorization_code",
     "persist_pushed_authorization_request",
+    "read_client_registration",
     "record_revoked_token_hash",
+    "update_client_registration",
     "upsert_client_registration",
 ]

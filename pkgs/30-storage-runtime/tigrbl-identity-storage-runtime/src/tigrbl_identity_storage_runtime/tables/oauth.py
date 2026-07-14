@@ -11,10 +11,14 @@ from tigrbl_identity_storage.tables import (
 from ..derive import deriveRuntimeTableSpec
 from ..make import makeRuntimeOperation
 from ..ops.oauth_state import (
+    create_client_registration,
+    disable_client_registration,
     is_token_hash_revoked,
     persist_authorization_code,
     persist_pushed_authorization_request,
+    read_client_registration,
     record_revoked_token_hash,
+    update_client_registration,
     upsert_client_registration,
 )
 from ..ops.device_codes import approve_device_code, deny_device_code
@@ -34,6 +38,21 @@ ClientRegistrationTable = ClientRegistration
 ClientRegistrationRuntimeSpec = deriveRuntimeTableSpec(
     ClientRegistrationTable,
     operations=(
+        makeRuntimeOperation(alias="register", handler=create_client_registration),
+        makeRuntimeOperation(
+            alias="get_registration",
+            handler=read_client_registration,
+            tx_scope="read_only",
+            persist="skip",
+        ),
+        makeRuntimeOperation(
+            alias="update_registration",
+            handler=update_client_registration,
+        ),
+        makeRuntimeOperation(
+            alias="disable_registration",
+            handler=disable_client_registration,
+        ),
         makeRuntimeOperation(alias="upsert", handler=upsert_client_registration),
     ),
 )

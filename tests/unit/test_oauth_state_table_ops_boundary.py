@@ -5,6 +5,7 @@ import pytest
 
 from tigrbl_identity_storage.tables import (
     AuthCode,
+    Client,
     ClientRegistration,
     PushedAuthorizationRequest,
     RevokedToken,
@@ -14,11 +15,15 @@ from tigrbl_identity_storage_runtime import (
     ClientRegistrationRuntimeSpec,
     PushedAuthorizationRequestRuntimeSpec,
     RevokedTokenRuntimeSpec,
+    create_client_registration,
+    disable_client_registration,
     initializeIdentityRuntimeTables,
     is_token_hash_revoked,
     persist_authorization_code,
     persist_pushed_authorization_request,
+    read_client_registration,
     record_revoked_token_hash,
+    update_client_registration,
     upsert_client_registration,
 )
 
@@ -34,6 +39,7 @@ def _activate_test_handlers(monkeypatch, storage) -> None:
     )
     for model in (
         AuthCode,
+        Client,
         ClientRegistration,
         PushedAuthorizationRequest,
         RevokedToken,
@@ -82,6 +88,64 @@ async def test_oauth_durable_state_operations_are_runtime_owned(
     assert updated["registration_metadata"] == {
         "token_endpoint_auth_method": "private_key_jwt"
     }
+
+    aggregate = await create_client_registration(
+        {
+            "payload": {
+                "client_id": "00000000-0000-0000-0000-000000000301",
+                "tenant_id": "00000000-0000-0000-0000-000000000201",
+                "client_secret_hash": "hashed-secret",
+                "redirect_uris": ("https://client.example/cb",),
+                "grant_types": ("authorization_code",),
+                "response_types": ("code",),
+                "metadata": {"client_name": "Example"},
+                "registration_access_token_hash": "hashed-access-token",
+                "registration_client_uri": "https://issuer.example/register/client",
+            },
+            "db": administrator_storage,
+        }
+    )
+    assert aggregate["client"]["redirect_uris"] == "https://client.example/cb"
+    assert aggregate["registration"]["registration_metadata"] == {
+        "client_name": "Example"
+    }
+
+    fetched = await read_client_registration(
+        {
+            "payload": {"client_id": aggregate["client"]["id"]},
+            "db": administrator_storage,
+        }
+    )
+    assert fetched is not None
+    assert fetched["registration"]["registration_access_token_hash"] == (
+        "hashed-access-token"
+    )
+
+    changed = await update_client_registration(
+        {
+            "payload": {
+                "client_id": aggregate["client"]["id"],
+                "redirect_uris": ("https://client.example/new",),
+                "grant_types": ("authorization_code", "refresh_token"),
+                "response_types": ("code",),
+                "metadata": {"client_name": "Changed"},
+            },
+            "db": administrator_storage,
+        }
+    )
+    assert changed["client"]["redirect_uris"] == "https://client.example/new"
+    assert changed["registration"]["registration_access_token_hash"] == (
+        "hashed-access-token"
+    )
+
+    disabled = await disable_client_registration(
+        {
+            "payload": {"client_id": aggregate["client"]["id"]},
+            "db": administrator_storage,
+        }
+    )
+    assert disabled["client"]["is_active"] is False
+    assert disabled["registration"]["disabled_at"] is not None
 
     pushed = await persist_pushed_authorization_request(
         {
@@ -132,7 +196,13 @@ def test_oauth_runtime_specs_expose_expected_custom_operations() -> None:
     }
     assert operations == {
         "AuthCode": {"authorize"},
-        "ClientRegistration": {"upsert"},
+        "ClientRegistration": {
+            "disable_registration",
+            "get_registration",
+            "register",
+            "update_registration",
+            "upsert",
+        },
         "PushedAuthorizationRequest": {"push_authorization_request"},
         "RevokedToken": {"is_hash_revoked", "record_hash"},
     }

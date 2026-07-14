@@ -278,6 +278,10 @@ _LAZY_EXPORTS = {
     "IssuedTokenSet": ".refresh",
     "RefreshTokenRequest": ".refresh",
     "RefreshTokenLifecyclePort": ".refresh",
+    "ClientRegistrationCreateRequest": ".registration",
+    "ClientRegistrationPort": ".registration",
+    "ClientRegistrationRecord": ".registration",
+    "ClientRegistrationUpdateRequest": ".registration",
     "RevokedTokenRecord": ".revocation",
     "ScopeMatchRequest": ".scope",
     "ScopeMatchResult": ".scope",
@@ -302,6 +306,10 @@ def __getattr__(name: str) -> Any:
 
 __all__ = [
     "AuthorizationDetailsBinding",
+    "ClientRegistrationCreateRequest",
+    "ClientRegistrationPort",
+    "ClientRegistrationRecord",
+    "ClientRegistrationUpdateRequest",
     "DPoPProof",
     "DeviceAuthorization",
     "NativeRedirectAssessment",
