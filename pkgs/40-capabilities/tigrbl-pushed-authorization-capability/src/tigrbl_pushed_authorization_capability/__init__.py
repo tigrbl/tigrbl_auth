@@ -91,6 +91,7 @@ class PushedAuthorizationCapability(Capability):
             )
 
         if self._record_audit_event is not None:
+            params = dict(request.params)
             event = self._record_audit_event(
                 {
                     "event_type": "authorization.par.created",
@@ -98,7 +99,15 @@ class PushedAuthorizationCapability(Capability):
                     "target_id": result.record_id or result.request_uri,
                     "client_id": request.client_id,
                     "tenant_id": request.tenant_id,
-                    "details": {"request_uri": result.request_uri},
+                    "details": {
+                        "request_uri": result.request_uri,
+                        "resource": params.get("resource"),
+                        "audience": params.get("audience"),
+                        "authorization_details_present": bool(
+                            params.get("authorization_details")
+                        ),
+                        "request_object_present": bool(params.get("request")),
+                    },
                 }
             )
             if inspect.isawaitable(event):

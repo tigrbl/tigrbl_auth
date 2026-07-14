@@ -11,6 +11,11 @@ CAPABILITY_REQUIREMENTS = (
         "oauth:rfc7662",
     ),
     ProtocolCapabilityRequirement(
+        "oauth-pushed-authorization", "RFC9126", "pushed-authorization",
+        "/par", "oauth.pushed-authorization", "push_authorization_request",
+        "oauth:rfc9126",
+    ),
+    ProtocolCapabilityRequirement(
         "oauth-dpop", "RFC9449", "dpop-jti-replay", "jti",
         "security.replay-protection", "check_and_reserve", "oauth:dpop-jti",
     ),

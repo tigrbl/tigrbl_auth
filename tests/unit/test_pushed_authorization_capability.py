@@ -40,6 +40,12 @@ async def test_pushed_authorization_delegates_persistence_and_audit() -> None:
             "target_id": "par-1",
             "client_id": "client-1",
             "tenant_id": "tenant-1",
-            "details": {"request_uri": result.request_uri},
+            "details": {
+                "request_uri": result.request_uri,
+                "resource": None,
+                "audience": None,
+                "authorization_details_present": False,
+                "request_object_present": False,
+            },
         }
     ]

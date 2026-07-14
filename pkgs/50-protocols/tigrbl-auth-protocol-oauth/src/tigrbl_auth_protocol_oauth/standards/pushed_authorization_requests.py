@@ -2,10 +2,17 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Any, Final
-from tigrbl_identity_contracts.oauth import PARValidationResult
+from typing import Any, Final, Mapping
+
+from tigrbl_identity_contracts.oauth import (
+    PARValidationResult,
+    PushedAuthorizationPersistenceRequest,
+    PushedAuthorizationResult,
+)
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
+from tigrbl_pushed_authorization_capability import PushedAuthorizationCapability
 
 STATUS: Final[str] = 'durable-request-uri-runtime'
 RFC9126_SPEC_URL: Final[str] = 'https://www.rfc-editor.org/rfc/rfc9126'
@@ -29,6 +36,45 @@ OWNER = StandardOwner(
 
 class PushedAuthorizationRequestError(ValueError):
     """Raised when a pushed authorization request violates the active PAR policy."""
+
+
+class PushedAuthorizationDisabledError(RuntimeError):
+    """Raised when composition disables the RFC 9126 protocol feature."""
+
+
+@dataclass(frozen=True, slots=True)
+class RFC9126PushedAuthorizationService:
+    """Map normalized RFC 9126 input to durable pushed authorization."""
+
+    capability: PushedAuthorizationCapability
+    enabled: bool = True
+
+    async def push(
+        self,
+        *,
+        client_id: str,
+        tenant_id: str | None,
+        params: Mapping[str, object],
+    ) -> PushedAuthorizationResult:
+        if not self.enabled:
+            raise PushedAuthorizationDisabledError(
+                f"RFC 9126 support is disabled: {RFC9126_SPEC_URL}"
+            )
+        call = await self.capability.call(
+            "push_authorization_request",
+            PushedAuthorizationPersistenceRequest(
+                client_id=client_id,
+                tenant_id=tenant_id,
+                params=dict(params),
+            ),
+        )
+        result = call.value
+        if not isinstance(result, PushedAuthorizationResult):
+            raise TypeError(
+                "oauth.pushed-authorization must return PushedAuthorizationResult"
+            )
+        validate_request_uri(result.request_uri)
+        return result
 
 
 
@@ -123,6 +169,8 @@ __all__ = [
     'StandardOwner',
     'PARValidationResult',
     'PushedAuthorizationRequestError',
+    'PushedAuthorizationDisabledError',
+    'RFC9126PushedAuthorizationService',
     'OWNER',
     'is_request_uri',
     'validate_request_uri',
