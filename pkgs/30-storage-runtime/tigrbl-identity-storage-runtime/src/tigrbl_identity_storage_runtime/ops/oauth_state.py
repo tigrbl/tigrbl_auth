@@ -29,6 +29,25 @@ async def persist_authorization_code(ctx: Mapping[str, Any]) -> Any:
     )
 
 
+async def persist_pushed_authorization_request(ctx: Mapping[str, Any]) -> Any:
+    """Persist one already-normalized pushed authorization request."""
+
+    from tigrbl_identity_storage.tables import PushedAuthorizationRequest
+
+    payload = dict(payload_from_context(ctx))
+    if not payload.get("client_id"):
+        raise ValueError("pushed authorization persistence requires client_id")
+    params = payload.get("params")
+    if not isinstance(params, Mapping):
+        raise TypeError("pushed authorization params must be a mapping")
+    payload["params"] = dict(params)
+    return await create_table_record(
+        PushedAuthorizationRequest,
+        database_from_context(ctx),
+        payload,
+    )
+
+
 async def upsert_client_registration(ctx: Mapping[str, Any]) -> Any:
     """Create or merge durable dynamic-client registration metadata."""
 
@@ -128,6 +147,7 @@ async def is_token_hash_revoked(ctx: Mapping[str, Any]) -> bool:
 __all__ = [
     "is_token_hash_revoked",
     "persist_authorization_code",
+    "persist_pushed_authorization_request",
     "record_revoked_token_hash",
     "upsert_client_registration",
 ]

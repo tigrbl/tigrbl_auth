@@ -4,6 +4,7 @@ from tigrbl_identity_storage.tables import (
     AuthCode,
     ClientRegistration,
     DeviceCode,
+    PushedAuthorizationRequest,
     RevokedToken,
 )
 
@@ -12,6 +13,7 @@ from ..make import makeRuntimeOperation
 from ..ops.oauth_state import (
     is_token_hash_revoked,
     persist_authorization_code,
+    persist_pushed_authorization_request,
     record_revoked_token_hash,
     upsert_client_registration,
 )
@@ -45,6 +47,17 @@ DeviceCodeRuntimeSpec = deriveRuntimeTableSpec(
     ),
 )
 
+PushedAuthorizationRequestTable = PushedAuthorizationRequest
+PushedAuthorizationRequestRuntimeSpec = deriveRuntimeTableSpec(
+    PushedAuthorizationRequestTable,
+    operations=(
+        makeRuntimeOperation(
+            alias="push_authorization_request",
+            handler=persist_pushed_authorization_request,
+        ),
+    ),
+)
+
 RevokedTokenTable = RevokedToken
 RevokedTokenRuntimeSpec = deriveRuntimeTableSpec(
     RevokedTokenTable,
@@ -61,6 +74,8 @@ __all__ = [
     "ClientRegistrationTable",
     "DeviceCodeRuntimeSpec",
     "DeviceCodeTable",
+    "PushedAuthorizationRequestRuntimeSpec",
+    "PushedAuthorizationRequestTable",
     "RevokedTokenRuntimeSpec",
     "RevokedTokenTable",
 ]
