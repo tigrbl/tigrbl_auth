@@ -144,14 +144,14 @@ def test_tigrbl_auth_tables_and_db_facades_reexport_storage_symbols() -> None:
     auth_tables = importlib.import_module("tigrbl_auth.tables")
     storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
     auth_db = importlib.import_module("tigrbl_auth.db")
-    storage_db = importlib.import_module("tigrbl_identity_storage.db")
+    runtime_db = importlib.import_module("tigrbl_identity_storage_runtime.engine")
 
     for name in storage_tables.__all__:
         assert getattr(auth_tables, name) is getattr(storage_tables, name)
 
-    assert auth_db.ENGINE is storage_db.ENGINE
-    assert auth_db.dsn == storage_db.dsn
-    assert auth_db.get_db is storage_db.get_db
+    assert auth_db.ENGINE is runtime_db.ENGINE
+    assert auth_db.dsn == runtime_db.dsn
+    assert auth_db.get_db is runtime_db.get_db
 
     auth_realm = importlib.import_module("tigrbl_auth.tables.realm")
     storage_realm = importlib.import_module("tigrbl_identity_storage.tables.realm")
@@ -165,10 +165,14 @@ def test_orm_export_paths_are_not_supported() -> None:
 
 def test_tigrbl_auth_persistence_facade_reexports_storage_helpers() -> None:
     auth_persistence = importlib.import_module("tigrbl_auth.services.persistence")
-    storage_persistence = importlib.import_module("tigrbl_identity_storage.persistence")
+    runtime_persistence = importlib.import_module(
+        "tigrbl_identity_storage_runtime.persistence"
+    )
 
-    for name in storage_persistence.__all__:
-        assert getattr(auth_persistence, name) is getattr(storage_persistence, name)
+    for name in runtime_persistence.__all__:
+        assert getattr(auth_persistence, name) is getattr(runtime_persistence, name)
+
+    assert importlib.util.find_spec("tigrbl_identity_storage.persistence") is None
 
 
 def test_runtime_owns_consent_and_registration_lifecycle_adapters() -> None:

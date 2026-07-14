@@ -16,7 +16,7 @@ from tigrbl_auth.crypto import hash_pw
 from tigrbl_auth.db import get_db as legacy_get_db
 from tigrbl_auth.tables import Tenant, User
 from tigrbl_identity_storage_runtime.resource_service import get_record
-from tigrbl_auth.tables import get_db as tables_get_db
+from tigrbl_identity_storage_runtime.engine import get_db as tables_get_db
 from tigrbl_auth.tables.engine import get_db as engine_get_db
 
 

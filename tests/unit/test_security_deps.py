@@ -39,7 +39,7 @@ class TestDatabaseDependency:
     def test_database_dependency_import(self):
         """Test that database dependency can be imported correctly."""
         from tigrbl_identity_server.security.security_deps import get_db
-        from tigrbl_identity_storage.tables.engine import get_db as db_get_db
+        from tigrbl_identity_storage_runtime.engine import get_db as db_get_db
 
         # Verify they're the same function
         assert get_db is db_get_db

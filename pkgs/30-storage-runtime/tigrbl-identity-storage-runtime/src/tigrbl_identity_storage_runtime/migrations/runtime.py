@@ -16,7 +16,7 @@ from tigrbl_identity_runtime.engine_resolver import (
     resolve_default_provider,
 )
 from tigrbl_identity_storage.tables import RestOltpTable
-from tigrbl_identity_storage.tables.engine import ENGINE
+from ..engine import ENGINE
 
 
 def _versions_dir() -> Path:

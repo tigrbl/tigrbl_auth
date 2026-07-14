@@ -135,7 +135,6 @@ from .operator_record import OperatorRecord
 from .operator_transaction import OperatorTransaction
 from .operator_audit_event import OperatorAuditEvent
 from .operator_activity import OperatorActivity
-from .engine import ENGINE, dsn, get_db
 from ._schema_ctx import set_schema
 
 

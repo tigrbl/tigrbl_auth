@@ -19,7 +19,7 @@ from tigrbl_identity_storage.framework import (
     status,
 )
 from tigrbl_identity_storage.tables.auth_code import AuthCode
-from tigrbl_identity_storage.tables.engine import get_db
+from .engine import get_db
 
 router = TigrblRouter()
 

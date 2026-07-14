@@ -5,8 +5,6 @@ from __future__ import annotations
 from typing import Any
 from uuid import UUID
 
-from tigrbl_identity_storage.tables.engine import storage_session
-
 from .ops.common import create_table_record, read_table_record
 from .ops.sessions import (
     bind_session_client,
@@ -14,6 +12,7 @@ from .ops.sessions import (
     rotate_session_cookie_secret,
     touch_session,
 )
+from .session import storage_session
 
 
 async def create_session_async(

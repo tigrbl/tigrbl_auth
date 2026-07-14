@@ -9,14 +9,13 @@ from tigrbl_identity_core.errors import InvalidRefreshTokenError, RefreshTokenRe
 from tigrbl_identity_core.digests import token_hash
 from tigrbl_identity_storage.tables.token_record._hooks import normalize_refresh_audience
 from tigrbl_identity_storage.tables import TokenRecord
-from tigrbl_identity_storage.tables.engine import storage_session
-
 from .ops.common import (
     delete_table_record,
     field_value,
     first_table_record,
 )
 from .ops.oauth_state import record_revoked_token_hash
+from .session import storage_session
 from .ops.tokens import (
     mark_refresh_token_rotated,
     persist_issued_token,

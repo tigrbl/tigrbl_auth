@@ -32,7 +32,7 @@ from tigrbl_identity_storage_runtime.dpop_state import check_and_store_dpop_repl
 
 try:  # pragma: no cover - exercised with the full runtime stack installed
     from tigrbl_identity_storage.framework import Depends, HTTPException, TigrblApp, TigrblRouter, status
-    from tigrbl_identity_storage.tables.engine import get_db
+    from .engine import get_db
 except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
     class _FallbackStatus:
         HTTP_400_BAD_REQUEST = 400

@@ -5,7 +5,7 @@ from typing import Any, Callable, Final
 
 from tigrbl import TigrblApp, TigrblRouter
 from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
-from tigrbl_identity_storage.tables.engine import dsn
+from tigrbl_identity_storage_runtime.engine import dsn
 from tigrbl_identity_storage_runtime.authorization import router as authorize_router
 from tigrbl_identity_storage_runtime.login import router as login_router
 from tigrbl_identity_storage_runtime.token_endpoint import router as token_router

@@ -4,9 +4,8 @@ from __future__ import annotations
 
 from types import SimpleNamespace
 
-from tigrbl_identity_storage.tables.engine import storage_session
-
 from .registration_lifecycle import get_client_registration_async
+from .session import storage_session
 from .session_lifecycle import (
     bind_session_client_async,
     create_session_async,

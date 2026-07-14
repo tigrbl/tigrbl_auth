@@ -73,7 +73,7 @@ FACADE_MODULES = {
     "tigrbl_auth.release_signing": "tigrbl_identity_author.release_signing",
     "tigrbl_auth.services.authorization_provenance": "tigrbl_authz_policy.provenance",
     "tigrbl_auth.uix.admin_console": "tigrbl_identity_operator.uix.admin_console",
-    "tigrbl_auth.db": "tigrbl_identity_storage.db",
+    "tigrbl_auth.db": "tigrbl_identity_storage_runtime.engine",
     "tigrbl_auth.tables": "tigrbl_identity_storage.tables",
     "tigrbl_auth.migrations": "tigrbl_identity_storage_runtime.migrations",
     "tigrbl_auth.migrations.helpers": "tigrbl_identity_storage.migrations.helpers",
@@ -262,7 +262,7 @@ def test_installable_tigrbl_auth_facade_exposes_storage_legacy_submodules() -> N
         legacy_user = importlib.import_module("tigrbl_auth.tables.user")
         canonical_user = importlib.import_module("tigrbl_identity_storage.tables.user")
         legacy_engine = importlib.import_module("tigrbl_auth.tables.engine")
-        canonical_engine = importlib.import_module("tigrbl_identity_storage.tables.engine")
+        canonical_engine = importlib.import_module("tigrbl_identity_storage_runtime.engine")
         legacy_revision = importlib.import_module(
             "tigrbl_auth.migrations.versions.0011_delegation_grant_lifecycle_tables"
         )
@@ -370,7 +370,7 @@ def test_tigrbl_auth_facade_declares_canonical_runtime_dependencies() -> None:
             "tigrbl-identity-jose==0.4.0.dev2",
             "tigrbl-auth-protocol-oauth==0.4.0.dev2",
             "tigrbl-identity-operator==0.4.0.dev2",
-            "tigrbl-authz-policy-authority-derivation-graph==0.4.0.dev2",
+            "tigrbl-authority-graph-concrete==0.4.0.dev2",
             "tigrbl-authz-policy-attributes-mapping==0.4.0.dev2",
             "tigrbl-authz-policy-combiner-default==0.4.0.dev2",
             "tigrbl-authz-policy-evaluators-default==0.4.0.dev2",
@@ -383,6 +383,7 @@ def test_tigrbl_auth_facade_declares_canonical_runtime_dependencies() -> None:
             "tigrbl-identity-runtime==0.4.0.dev2",
             "tigrbl-identity-server==0.4.0.dev2",
             "tigrbl-identity-storage==0.4.0.dev2",
+            "tigrbl-identity-storage-runtime==0.4.0.dev2",
             "swarmauri_standard==0.10.0",
             "swarmauri_crypto_paramiko==0.4.0.dev5",
         }

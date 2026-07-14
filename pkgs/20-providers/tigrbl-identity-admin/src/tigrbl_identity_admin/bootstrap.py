@@ -7,7 +7,10 @@ from typing import Any
 
 from tigrbl_identity_core.digests import sha256_text_digest
 from tigrbl_identity_runtime.deployment import deployment_from_request
-from tigrbl_identity_runtime.engine_resolver import resolve_api_provider
+from tigrbl_identity_runtime.engine_resolver import (
+    resolve_api_provider,
+    resolve_default_provider,
+)
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
 from tigrbl_identity_server.security.handler_records import (
@@ -18,7 +21,6 @@ from tigrbl_identity_server.security.handler_records import (
     update_handler_record,
 )
 from tigrbl_identity_storage.tables import Realm, Tenant, User
-from tigrbl_identity_storage.tables.engine import ENGINE
 
 DEFAULT_BOOTSTRAP_SUPERUSER_ID = "FFFFFFFF-0000-0000-0000-000000000001"
 DEFAULT_BOOTSTRAP_SUPERUSER_PASSWORD = "AdminPass123!"
@@ -39,7 +41,10 @@ def _resolve_provider():
             return provider
     except Exception:
         pass
-    return ENGINE.provider
+    provider = resolve_default_provider()
+    if provider is None:
+        raise RuntimeError("identity storage provider has not been configured")
+    return provider
 
 
 @asynccontextmanager

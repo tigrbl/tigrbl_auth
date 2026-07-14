@@ -16,7 +16,7 @@ from tigrbl_identity_runtime.settings import settings
 from tigrbl import TigrblApp
 from tigrbl_identity_storage_runtime.auth_flows import router
 from tigrbl_identity_server.rest.shared import _jwt
-from tigrbl_identity_storage.tables.engine import get_db
+from tigrbl_identity_storage_runtime.engine import get_db
 from tigrbl_identity_storage.tables import Client
 from tigrbl_identity_jose.jwt_coder import JWTCoder
 

@@ -8,7 +8,7 @@ from pydantic import BaseModel, Field, constr
 from tigrbl import TigrblRouter
 from tigrbl_identity_storage.framework import Depends, HTTPException, JSONResponse, RedirectResponse, Request, Response, status
 
-from tigrbl_identity_storage.tables.engine import get_db
+from tigrbl_identity_storage_runtime.engine import get_db
 from tigrbl_identity_storage.tables import User
 from tigrbl_identity_storage_runtime.ops.common import (
     read_record,

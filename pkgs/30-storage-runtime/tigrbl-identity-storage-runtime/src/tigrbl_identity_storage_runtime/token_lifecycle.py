@@ -8,8 +8,6 @@ from typing import Any
 from tigrbl_identity_core.clock import utc_now
 from tigrbl_identity_core.digests import token_hash
 from tigrbl_identity_storage.tables._sync import run_async
-from tigrbl_identity_storage.tables.engine import storage_session
-
 from .ops.common import (
     delete_table_record,
     field_value,
@@ -19,6 +17,7 @@ from .ops.common import (
 )
 from .ops.oauth_state import is_token_hash_revoked, record_revoked_token_hash
 from .ops.tokens import introspect_token_record
+from .session import storage_session
 from .token_persistence import remove_token_record_async, upsert_token_record_async
 
 

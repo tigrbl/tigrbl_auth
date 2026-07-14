@@ -5,10 +5,9 @@ from __future__ import annotations
 from typing import Any
 
 from tigrbl_identity_storage.tables._sync import run_async
-from tigrbl_identity_storage.tables.engine import storage_session
-
 from .ops.common import first_table_record
 from .ops.oauth_state import upsert_client_registration as _upsert_registration
+from .session import storage_session
 
 
 async def get_client_registration_async(client_id: Any):

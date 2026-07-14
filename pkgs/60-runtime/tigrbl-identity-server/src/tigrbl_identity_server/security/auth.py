@@ -20,7 +20,7 @@ from tigrbl_auth_protocol_oauth.standards.bearer_token_usage import extract_bear
 from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import verify_access_token_sender_constraint
 from tigrbl_identity_contracts.principals import PrincipalLike
 from tigrbl_identity_storage.tables import User
-from tigrbl_identity_storage.tables.engine import get_db
+from tigrbl_identity_storage_runtime.engine import get_db
 
 _api_key_backend = ApiKeyBackend()
 _jwt_coder: JWTCoder | None = None

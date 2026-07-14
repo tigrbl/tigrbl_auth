@@ -8,7 +8,7 @@ from tigrbl import TigrblRouter
 from tigrbl.runtime.status import HTTPException
 from tigrbl.security import Depends
 from tigrbl_identity_storage.tables import Consent, User
-from tigrbl_identity_storage.tables.engine import get_db
+from tigrbl_identity_storage_runtime.engine import get_db
 from tigrbl_identity_storage_runtime.ops.consents import (
     list_consents_for_user,
     revoke_consent_for_user,

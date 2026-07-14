@@ -22,7 +22,8 @@ from tigrbl_auth.runtime.engine_resolver import (
     set_default_provider,
 )
 from tigrbl_identity_admin.bootstrap import ensure_default_superuser_async
-from tigrbl_auth.tables import Tenant, User, get_db as tables_get_db
+from tigrbl_auth.tables import Tenant, User
+from tigrbl_identity_storage_runtime.engine import get_db as tables_get_db
 from tigrbl_auth.tables.engine import get_db as engine_get_db
 
 

@@ -31,7 +31,7 @@ from tigrbl_identity_storage.framework import (
 )
 from .ops.audit import append_audit_event_async
 from .session_lifecycle import get_session_async
-from tigrbl_identity_storage.tables.engine import get_db
+from .engine import get_db
 
 
 api = router = TigrblRouter()

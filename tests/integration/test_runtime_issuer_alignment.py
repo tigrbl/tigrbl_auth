@@ -14,7 +14,7 @@ from tigrbl_auth.config.deployment import DEFAULT_VALUES, resolve_deployment
 from tigrbl_auth.crypto import hash_pw
 from tigrbl_auth.db import get_db as legacy_get_db
 from tigrbl_auth.tables import Client, Tenant, User
-from tigrbl_auth.tables import get_db as tables_get_db
+from tigrbl_identity_storage_runtime.engine import get_db as tables_get_db
 from tigrbl_auth.tables.engine import get_db as engine_get_db
 from tigrbl_auth.rfc.rfc7636_pkce import makeCodeChallenge, makeCodeVerifier
 

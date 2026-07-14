@@ -34,7 +34,6 @@ _SUBMODULES = (
     "device_code",
     "dpop_nonce",
     "dpop_replay",
-    "engine",
     "entitlement",
     "entitlement_assignment",
     "key_attestation_evidence",
@@ -78,3 +77,9 @@ for _submodule in _SUBMODULES:
         f"tigrbl_identity_storage.tables.{_submodule}",
         "tigrbl-identity-storage",
     )
+
+_alias_module(
+    f"{_LEGACY_NAME}.engine",
+    "tigrbl_identity_storage_runtime.engine",
+    "tigrbl-identity-storage-runtime",
+)

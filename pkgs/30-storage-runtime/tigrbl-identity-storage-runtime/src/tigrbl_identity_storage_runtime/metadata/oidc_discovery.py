@@ -30,7 +30,7 @@ from tigrbl_auth_protocol_oidc.standards.discovery_metadata import build_openid_
 from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER, JWKS_PATH
 from tigrbl_identity_storage.tables import Realm, Tenant
 from ..ops.common import first_record
-from tigrbl_identity_storage.tables.engine import get_db
+from ..engine import get_db
 from tigrbl_identity_storage.tables.operator_record import OperatorRecord
 
 api = TigrblRouter()

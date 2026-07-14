@@ -9,7 +9,7 @@ import pytest_asyncio
 from tigrbl_auth import rfc7591
 from tigrbl_identity_storage_runtime.client_registration import router
 from tigrbl import TigrblApp
-from tigrbl_auth.tables import get_db
+from tigrbl_identity_storage_runtime.engine import get_db
 
 register_router_module = importlib.import_module(
     "tigrbl_identity_storage_runtime.client_registration"

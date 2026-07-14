@@ -4,6 +4,7 @@ from .consent_lifecycle import record_consent_async, revoke_consent_async
 from .define import *
 from .derive import *
 from .dpop_state import *
+from .engine import *
 from .factories import *
 from .hooks import *
 from .inventory import *
@@ -15,6 +16,7 @@ from .registration_lifecycle import (
     get_client_registration_async,
     upsert_client_registration_async,
 )
+from .session import *
 from .session_lifecycle import *
 from .tables import *
 from .token_persistence import *

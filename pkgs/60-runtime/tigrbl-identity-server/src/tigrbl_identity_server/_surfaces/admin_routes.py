@@ -41,7 +41,7 @@ from tigrbl_identity_storage.tables import (
     TokenRecord,
     User,
 )
-from tigrbl_identity_storage.tables.engine import dsn
+from tigrbl_identity_storage_runtime.engine import dsn
 
 ensure_identity_storage_importable()
 

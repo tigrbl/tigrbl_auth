@@ -7,10 +7,9 @@ from typing import Any
 from uuid import UUID
 
 from tigrbl_identity_storage.tables._sync import run_async
-from tigrbl_identity_storage.tables.engine import storage_session
-
 from .ops.common import create_table_record
 from .ops.consents import revoke_consent_for_user
+from .session import storage_session
 
 
 async def record_consent_async(

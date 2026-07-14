@@ -6,7 +6,7 @@ from typing import Any
 
 from tigrbl.security import Depends as TigrblDepends
 from tigrbl_identity_storage.framework import AsyncSession, Request, TigrblRouter
-from tigrbl_identity_storage.tables.engine import get_db
+from .engine import get_db
 from tigrbl_identity_storage.tables.token_record import TokenPair
 from tigrbl_identity_storage_runtime.token_request import token_request
 

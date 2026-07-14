@@ -42,7 +42,7 @@ async def append_audit_event_async(*, db: Any | None = None, **payload: Any) -> 
 
     if db is not None:
         return await append_audit_event_record({"payload": payload, "db": db})
-    from tigrbl_identity_storage.tables.engine import storage_session
+    from ..session import storage_session
 
     async with storage_session() as session:
         return await append_audit_event_record({"payload": payload, "db": session})

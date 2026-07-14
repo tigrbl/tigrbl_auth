@@ -10,7 +10,7 @@ from tigrbl.requests import Request
 from tigrbl.runtime.status import HTTPException
 from tigrbl.security import Depends
 from tigrbl_identity_storage.tables import User
-from tigrbl_identity_storage.tables.engine import get_db
+from tigrbl_identity_storage_runtime.engine import get_db
 
 
 class MyAccountMutationOut(BaseModel):

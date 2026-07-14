@@ -48,9 +48,6 @@ _attach_custom_op_schemas()
 
 __all__ = [
     "RestOltpTable",
-    "ENGINE",
-    "dsn",
-    "get_db",
     "TABLE_MODELS",
     "TABLE_MODEL_BY_NAME",
     "TABLE_MODEL_BY_TABLENAME",

@@ -41,7 +41,7 @@ from .ops.common import first_handler_record, read_handler_record
 from tigrbl_identity_storage.tables._sync import run_async
 from tigrbl_identity_storage.tables.client import Client
 from tigrbl_identity_storage.tables.client_registration import ClientRegistration
-from tigrbl_identity_storage.tables.engine import get_db
+from .engine import get_db
 from tigrbl_principal_authentication import ClientSecretAuthenticationCapability
 
 from .ops.clients import lookup_client

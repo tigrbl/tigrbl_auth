@@ -8,7 +8,7 @@ import pytest
 
 from tigrbl_identity_storage import build_migration_contract
 from tigrbl_identity_storage.tables import Client, Tenant, TokenRecord, User
-from tigrbl_identity_storage.tables.engine import dsn
+from tigrbl_identity_storage_runtime.engine import dsn
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -100,3 +100,24 @@ def test_storage_public_boundary_has_no_generic_repository_imports() -> None:
 
     assert imports.isdisjoint(forbidden_modules)
     assert names.isdisjoint(forbidden_names)
+
+
+@pytest.mark.unit
+def test_engine_and_session_execution_are_runtime_owned() -> None:
+    storage_engine = STORAGE_SRC / "tables" / "engine.py"
+    runtime_root = (
+        ROOT
+        / "pkgs"
+        / "30-storage-runtime"
+        / "tigrbl-identity-storage-runtime"
+        / "src"
+        / "tigrbl_identity_storage_runtime"
+    )
+
+    runtime_engine_source = (runtime_root / "engine.py").read_text(encoding="utf-8")
+    runtime_session_source = (runtime_root / "session.py").read_text(encoding="utf-8")
+
+    assert not storage_engine.exists()
+    assert not (STORAGE_SRC / "db.py").exists()
+    assert "build_engine(" in runtime_engine_source
+    assert "asynccontextmanager" in runtime_session_source

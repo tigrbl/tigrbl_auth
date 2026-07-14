@@ -274,7 +274,7 @@ def _import_runtime_objects() -> dict[str, Any]:
     from tigrbl.engine import Engine, EngineSpec
     from tigrbl_identity_server.app import app
     from tigrbl_identity_server.api.surfaces import surface_api as composed_surface_api
-    from tigrbl_identity_storage.tables.engine import get_db
+    from tigrbl_identity_storage_runtime.engine import get_db
     from tigrbl_identity_runtime.engine_resolver import (
         register_api_provider,
         resolve_api_provider,
@@ -461,7 +461,6 @@ async def override_get_db(test_db_engine: Any):
     app = runtime["app"]
     get_db = runtime["get_db"]
     from tigrbl_auth.db import get_db as legacy_get_db
-    from tigrbl_auth.tables import get_db as tables_get_db
     from tigrbl_auth.tables.engine import get_db as engine_get_db
 
     _, maker = test_db_engine.provider.ensure()
@@ -469,7 +468,7 @@ async def override_get_db(test_db_engine: Any):
         def _override_db():
             return session
 
-        for dependency in {get_db, legacy_get_db, tables_get_db, engine_get_db}:
+        for dependency in {get_db, legacy_get_db, engine_get_db}:
             app.router.dependency_overrides[dependency] = _override_db
             app.dependency_overrides[dependency] = _override_db
         try:

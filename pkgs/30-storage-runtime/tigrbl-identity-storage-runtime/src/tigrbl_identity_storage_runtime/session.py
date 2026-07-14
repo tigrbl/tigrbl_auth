@@ -5,7 +5,7 @@ from __future__ import annotations
 from contextlib import asynccontextmanager
 from typing import Any, AsyncIterator
 
-from tigrbl_identity_storage.tables.engine import ENGINE
+from .engine import ENGINE
 
 
 def _resolve_api_provider(api: Any) -> Any:

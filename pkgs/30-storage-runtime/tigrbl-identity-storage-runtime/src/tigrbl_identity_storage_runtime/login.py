@@ -6,7 +6,7 @@ from typing import Any
 
 from tigrbl_identity_storage.framework import Depends, HTTPException, JSONResponse, Request, TigrblRouter
 from tigrbl_identity_storage.tables.auth_session import CredsIn, TokenPair
-from tigrbl_identity_storage.tables.engine import get_db
+from .engine import get_db
 from tigrbl_principal_authentication import PasswordAuthenticationCapability
 
 from .ops.identities import lookup_identity_by_identifier
