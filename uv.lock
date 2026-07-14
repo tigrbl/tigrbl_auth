@@ -5765,6 +5765,7 @@ dependencies = [
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-storage-runtime" },
     { name = "tigrbl-replay-memory-provider" },
+    { name = "tigrbl-secret-hashing-bcrypt-provider" },
 ]
 
 [package.metadata]
@@ -5777,6 +5778,7 @@ requires-dist = [
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage-runtime", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-replay-memory-provider", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-secret-hashing-bcrypt-provider", specifier = "==0.1.0" },
 ]
 
 [[package]]
