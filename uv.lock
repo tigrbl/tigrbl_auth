@@ -2441,6 +2441,7 @@ dependencies = [
     { name = "tigrbl-identity-runtime" },
     { name = "tigrbl-security-proof-pkce" },
     { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-token-introspection-capability" },
 ]
 
 [package.metadata]
@@ -2466,6 +2467,7 @@ requires-dist = [
     { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-proof-pkce", specifier = "==0.1.0" },
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-token-introspection-capability", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]

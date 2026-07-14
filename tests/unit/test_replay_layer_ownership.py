@@ -80,9 +80,13 @@ def test_layer_40_capability_reports_provider_identity_and_persistence():
 
 def test_layer_50_maps_wire_requirements_to_replay_capability():
     requirements = SET_REQUIREMENTS + OAUTH_REQUIREMENTS + OIDC_REQUIREMENTS + OID4VP_REQUIREMENTS
-    assert {item.protocol for item in requirements} == {
+    replay_requirements = tuple(
+        item
+        for item in requirements
+        if item.capability_id == "security.replay-protection"
+    )
+    assert {item.protocol for item in replay_requirements} == {
         "set", "oauth-dpop", "oidc-backchannel-logout", "oid4vp"
     }
-    assert all(item.capability_id == "security.replay-protection" for item in requirements)
-    assert all(item.operation == "check_and_reserve" for item in requirements)
-    assert all(item.normalized_namespace for item in requirements)
+    assert all(item.operation == "check_and_reserve" for item in replay_requirements)
+    assert all(item.normalized_namespace for item in replay_requirements)

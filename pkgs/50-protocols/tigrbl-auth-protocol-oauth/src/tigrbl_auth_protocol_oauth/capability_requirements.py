@@ -2,6 +2,11 @@ from tigrbl_identity_contracts.capabilities import ProtocolCapabilityRequirement
 
 CAPABILITY_REQUIREMENTS = (
     ProtocolCapabilityRequirement(
+        "oauth-token-introspection", "RFC7662", "token-introspection",
+        "/introspect", "token.introspection", "introspect_token",
+        "oauth:rfc7662",
+    ),
+    ProtocolCapabilityRequirement(
         "oauth-dpop", "RFC9449", "dpop-jti-replay", "jti",
         "security.replay-protection", "check_and_reserve", "oauth:dpop-jti",
     ),
