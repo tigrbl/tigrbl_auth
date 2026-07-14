@@ -21,6 +21,11 @@ CAPABILITY_REQUIREMENTS = (
         "oauth:rfc7662",
     ),
     ProtocolCapabilityRequirement(
+        "oauth-token-exchange", "RFC8693", "token-exchange",
+        "POST /token/exchange", "token.exchange", "exchange_token",
+        "oauth:rfc8693",
+    ),
+    ProtocolCapabilityRequirement(
         "oauth-pushed-authorization", "RFC9126", "pushed-authorization",
         "/par", "oauth.pushed-authorization", "push_authorization_request",
         "oauth:rfc9126",

@@ -285,6 +285,7 @@ dependencies = [
     "tigrbl-replay-protection-capability==0.4.0.dev2",
     "tigrbl-token-introspection-capability==0.4.0.dev2",
     "tigrbl-token-issuance-capability==0.4.0.dev2",
+    "tigrbl-token-exchange-capability==0.4.0.dev2",
     "tigrbl-token-revocation-capability==0.4.0.dev2",
     "tigrbl-principal-authentication==0.4.0.dev2",
     "tigrbl-protocol-artifact-processing==0.4.0.dev2",
@@ -292,6 +293,7 @@ dependencies = [
     "tigrbl-client-registration-capability==0.4.0.dev2",
     "tigrbl-auth-api-oauth-authorization==0.4.0.dev2",
     "tigrbl-auth-api-oauth-device-authorization==0.4.0.dev2",
+    "tigrbl-auth-api-oauth-token-exchange==0.4.0.dev2",
     "tigrbl-auth-api-oidc-userinfo==0.4.0.dev2",
     "tigrbl-auth-api-oidc-logout==0.4.0.dev2",
     "tigrbl-auth-api-session-login==0.4.0.dev2",
@@ -655,6 +657,7 @@ tigrbl-replay-memory-provider = { path = "pkgs/20-providers/tigrbl-replay-memory
 tigrbl-replay-protection-capability = { path = "pkgs/40-capabilities/tigrbl-replay-protection-capability", editable = true }
 tigrbl-token-introspection-capability = { path = "pkgs/40-capabilities/tigrbl-token-introspection-capability", editable = true }
 tigrbl-token-issuance-capability = { path = "pkgs/40-capabilities/tigrbl-token-issuance-capability", editable = true }
+tigrbl-token-exchange-capability = { path = "pkgs/40-capabilities/tigrbl-token-exchange-capability", editable = true }
 tigrbl-token-revocation-capability = { path = "pkgs/40-capabilities/tigrbl-token-revocation-capability", editable = true }
 tigrbl-principal-authentication = { path = "pkgs/40-capabilities/tigrbl-principal-authentication", editable = true }
 tigrbl-protocol-artifact-processing = { path = "pkgs/40-capabilities/tigrbl-protocol-artifact-processing", editable = true }
@@ -662,6 +665,7 @@ tigrbl-pushed-authorization-capability = { path = "pkgs/40-capabilities/tigrbl-p
 tigrbl-client-registration-capability = { path = "pkgs/40-capabilities/tigrbl-client-registration-capability", editable = true }
 tigrbl-auth-api-oauth-authorization = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-authorization", editable = true }
 tigrbl-auth-api-oauth-device-authorization = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-device-authorization", editable = true }
+tigrbl-auth-api-oauth-token-exchange = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-token-exchange", editable = true }
 tigrbl-auth-api-oidc-userinfo = { path = "pkgs/80-apis/tigrbl-auth-api-oidc-userinfo", editable = true }
 tigrbl-auth-api-oidc-logout = { path = "pkgs/80-apis/tigrbl-auth-api-oidc-logout", editable = true }
 tigrbl-auth-api-session-login = { path = "pkgs/80-apis/tigrbl-auth-api-session-login", editable = true }

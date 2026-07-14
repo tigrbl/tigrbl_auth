@@ -250,7 +250,7 @@ def test_delegation_grant_table_owns_lifecycle_and_association_ops(monkeypatch: 
 
 
 def test_delegation_grant_oauth_boundary_no_policy_ownership_contract(monkeypatch: pytest.MonkeyPatch) -> None:
-    oauth_exchange = importlib.import_module("tigrbl_identity_storage_runtime.token_exchange")
+    oauth_exchange = importlib.import_module("tigrbl_identity_server.token_exchange_runtime")
 
     class FakeJwt:
         async def async_decode(self, token: str, verify_exp: bool = True) -> dict[str, object]:
@@ -313,6 +313,7 @@ def test_delegation_grant_oauth_boundary_no_policy_ownership_contract(monkeypatc
             b"&subject_token=subject-token"
             b"&subject_token_type=urn:ietf:params:oauth:token-type:access_token"
             b"&actor_token=actor-token"
+            b"&actor_token_type=urn:ietf:params:oauth:token-type:access_token"
             b"&requested_token_type=access_token"
             b"&delegation_grant_id=dgr:stored"
         ),

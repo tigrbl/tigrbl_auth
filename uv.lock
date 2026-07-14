@@ -2421,6 +2421,17 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-auth-api-oauth-token-exchange"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/80-apis/tigrbl-auth-api-oauth-token-exchange" }
+dependencies = [
+    { name = "tigrbl" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl", specifier = "==0.4.4.dev1" }]
+
+[[package]]
 name = "tigrbl-auth-api-oidc-logout"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/80-apis/tigrbl-auth-api-oidc-logout" }
@@ -2853,6 +2864,7 @@ dependencies = [
     { name = "tigrbl-auth-api-oauth-registration" },
     { name = "tigrbl-auth-api-oauth-revocation" },
     { name = "tigrbl-auth-api-oauth-token" },
+    { name = "tigrbl-auth-api-oauth-token-exchange" },
     { name = "tigrbl-auth-api-oidc-logout" },
     { name = "tigrbl-auth-api-oidc-userinfo" },
     { name = "tigrbl-auth-api-session-login" },
@@ -3101,6 +3113,7 @@ dependencies = [
     { name = "tigrbl-svid-concrete" },
     { name = "tigrbl-svid-verifier-provider" },
     { name = "tigrbl-token-bases" },
+    { name = "tigrbl-token-exchange-capability" },
     { name = "tigrbl-token-introspection-capability" },
     { name = "tigrbl-token-issuance-capability" },
     { name = "tigrbl-token-revocation-capability" },
@@ -3213,6 +3226,7 @@ requires-dist = [
     { name = "tigrbl-auth-api-oauth-registration", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-registration" },
     { name = "tigrbl-auth-api-oauth-revocation", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-revocation" },
     { name = "tigrbl-auth-api-oauth-token", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-token" },
+    { name = "tigrbl-auth-api-oauth-token-exchange", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-token-exchange" },
     { name = "tigrbl-auth-api-oidc-logout", editable = "pkgs/80-apis/tigrbl-auth-api-oidc-logout" },
     { name = "tigrbl-auth-api-oidc-userinfo", editable = "pkgs/80-apis/tigrbl-auth-api-oidc-userinfo" },
     { name = "tigrbl-auth-api-session-login", editable = "pkgs/80-apis/tigrbl-auth-api-session-login" },
@@ -3465,6 +3479,7 @@ requires-dist = [
     { name = "tigrbl-svid-concrete", editable = "pkgs/10-concrete/tigrbl-svid-concrete" },
     { name = "tigrbl-svid-verifier-provider", editable = "pkgs/20-providers/tigrbl-svid-verifier-provider" },
     { name = "tigrbl-token-bases", editable = "pkgs/05-bases/tigrbl-token-bases" },
+    { name = "tigrbl-token-exchange-capability", editable = "pkgs/40-capabilities/tigrbl-token-exchange-capability" },
     { name = "tigrbl-token-introspection-capability", editable = "pkgs/40-capabilities/tigrbl-token-introspection-capability" },
     { name = "tigrbl-token-issuance-capability", editable = "pkgs/40-capabilities/tigrbl-token-issuance-capability" },
     { name = "tigrbl-token-revocation-capability", editable = "pkgs/40-capabilities/tigrbl-token-revocation-capability" },
@@ -5960,6 +5975,7 @@ dependencies = [
     { name = "tigrbl-auth-api-oauth-registration" },
     { name = "tigrbl-auth-api-oauth-revocation" },
     { name = "tigrbl-auth-api-oauth-token" },
+    { name = "tigrbl-auth-api-oauth-token-exchange" },
     { name = "tigrbl-auth-api-oidc-logout" },
     { name = "tigrbl-auth-api-oidc-userinfo" },
     { name = "tigrbl-auth-api-session-login" },
@@ -5974,6 +5990,7 @@ dependencies = [
     { name = "tigrbl-pushed-authorization-capability" },
     { name = "tigrbl-replay-memory-provider" },
     { name = "tigrbl-secret-hashing-bcrypt-provider" },
+    { name = "tigrbl-token-exchange-capability" },
     { name = "tigrbl-token-introspection-capability" },
     { name = "tigrbl-token-issuance-capability" },
     { name = "tigrbl-token-revocation-capability" },
@@ -5990,6 +6007,7 @@ requires-dist = [
     { name = "tigrbl-auth-api-oauth-registration", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oauth-revocation", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oauth-token", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-api-oauth-token-exchange", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oidc-logout", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oidc-userinfo", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-session-login", specifier = "==0.4.0.dev2" },
@@ -6004,6 +6022,7 @@ requires-dist = [
     { name = "tigrbl-pushed-authorization-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-replay-memory-provider", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-secret-hashing-bcrypt-provider", specifier = "==0.1.0" },
+    { name = "tigrbl-token-exchange-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-token-introspection-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-token-issuance-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-token-revocation-capability", specifier = "==0.4.0.dev2" },
@@ -7101,6 +7120,21 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-token-exchange-capability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/40-capabilities/tigrbl-token-exchange-capability" }
+dependencies = [
+    { name = "tigrbl-capability" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-capability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-token-introspection-capability"

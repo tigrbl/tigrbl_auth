@@ -359,16 +359,17 @@ def test_executable_token_exchange_publisher_lives_above_storage() -> None:
     old_modules = (
         "tigrbl_identity_storage.tables.token_record._token_exchange",
         "tigrbl_identity_storage.tables.token_record._token_exchange_endpoint",
+        "tigrbl_identity_storage_runtime.token_exchange",
     )
     for module_name in old_modules:
         assert importlib.util.find_spec(module_name) is None
 
-    runtime = importlib.import_module("tigrbl_identity_storage_runtime.token_exchange")
+    runtime = importlib.import_module("tigrbl_identity_server.token_exchange_surface")
     storage = importlib.import_module("tigrbl_identity_storage.tables.token_record")
 
     assert runtime.api is runtime.router
     assert runtime.include_token_exchange_endpoint.__module__ == (
-        "tigrbl_identity_storage_runtime.token_exchange"
+        "tigrbl_identity_server.token_exchange_surface"
     )
     assert not hasattr(storage, "token_exchange")
 

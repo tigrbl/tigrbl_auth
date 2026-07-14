@@ -533,17 +533,48 @@ def enable_rfc7009():
 def enable_rfc8693():
     """Enable RFC 8693 token exchange for tests."""
     _require_runtime_stack()
+    from dataclasses import replace
+
     from tigrbl_auth.runtime_cfg import settings
-    from tigrbl_auth.rfc.rfc8693 import include_rfc8693
+    from tigrbl_identity_server.token_exchange_surface import include_rfc8693
+    from tigrbl_identity_runtime.deployment import resolve_deployment
 
     app = _import_runtime_objects()["app"]
+    deployment_owner = getattr(app, "_app", app)
     original = settings.enable_rfc8693
+    original_gate_deployment = getattr(deployment_owner, "deployment", None)
+    original_deployment = getattr(app.state, "tigrbl_auth_deployment", None)
     settings.enable_rfc8693 = True
+    deployment = original_deployment or resolve_deployment(
+        settings,
+        profile="hardening",
+        protocol_slices=("token-exchange",),
+    )
+    flags = dict(deployment.flags)
+    flags["enable_rfc8693"] = True
+    app.state.tigrbl_auth_deployment = replace(
+        deployment,
+        flags=flags,
+        protocol_slices=tuple(
+            dict.fromkeys((*deployment.protocol_slices, "token-exchange"))
+        ),
+        active_capabilities=tuple(
+            dict.fromkeys((*deployment.active_capabilities, "token-exchange"))
+        ),
+        active_routes=tuple(
+            dict.fromkeys((*deployment.active_routes, "/token/exchange"))
+        ),
+    )
+    if original_gate_deployment is not None:
+        deployment_owner.deployment = app.state.tigrbl_auth_deployment
     include_rfc8693(app)
     try:
         yield
     finally:
         settings.enable_rfc8693 = original
+        app.state.tigrbl_auth_deployment = original_deployment
+        if original_gate_deployment is not None:
+            deployment_owner.deployment = original_gate_deployment
 
 
 @pytest.fixture

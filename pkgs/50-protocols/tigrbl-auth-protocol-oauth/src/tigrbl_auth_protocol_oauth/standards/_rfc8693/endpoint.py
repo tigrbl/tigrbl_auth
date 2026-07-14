@@ -1,8 +1,4 @@
-"""Token exchange endpoint compatibility marker.
-
-The concrete endpoint is owned by
-``tigrbl_identity_storage_runtime.token_exchange``.
-"""
+"""Deterministic RFC 8693 compatibility helpers; no HTTP carrier ownership."""
 
 from __future__ import annotations
 # ruff: noqa: F403,F405

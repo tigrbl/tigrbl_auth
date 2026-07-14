@@ -24,10 +24,10 @@ async def test_token_exchange_flow(async_client: AsyncClient, enable_rfc8693) ->
         "scope": "read",
     }
     response = await async_client.post("/token/exchange", data=payload)
-    assert response.status_code == 200
+    assert response.status_code == 200, response.text
     data = response.json()
     assert data["token_type"].lower() == "bearer"
     claims = decode_jwt(data["access_token"])
     assert claims["sub"] == "user123"
     assert claims["tid"] == "tenant-1"
-    assert claims["scopes"] == ["read"]
+    assert claims["scope"] == "read"

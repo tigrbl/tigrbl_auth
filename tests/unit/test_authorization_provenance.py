@@ -9,7 +9,7 @@ from tigrbl_auth.services.authorization_provenance import (
     build_authorization_decision_trace,
     build_delegation_provenance,
 )
-import tigrbl_identity_storage_runtime.token_exchange as token_exchange_mod
+import tigrbl_identity_server.token_exchange_runtime as token_exchange_mod
 
 
 class _FakeRequest:

@@ -105,6 +105,10 @@ CAPABILITY_PURPOSES = {
         "coordinate token-pair issuance and refresh rotation across signing and "
         "durable lifecycle operations"
     ),
+    "tigrbl-token-exchange-capability": (
+        "coordinate normalized security-token exchange across verification, "
+        "issuance, durable lineage, and audit operations"
+    ),
     "tigrbl-token-revocation-capability": (
         "coordinate durable token revocation with optional audit recording"
     ),

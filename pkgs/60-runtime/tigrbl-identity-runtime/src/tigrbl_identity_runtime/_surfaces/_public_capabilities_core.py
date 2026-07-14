@@ -111,7 +111,7 @@ CORE_PUBLIC_CAPABILITIES: Final[tuple[dict[str, Any], ...]] = (
         "flags": ("enable_rfc8693",),
         "summary": "Token exchange endpoint",
         "tags": ("oauth2",),
-        "publisher_ref": "tigrbl_identity_storage_runtime.token_exchange:include_token_exchange_endpoint",
+        "publisher_ref": "tigrbl_identity_server.token_exchange_surface:include_token_exchange_endpoint",
         "targets": ("RFC 8693", "RFC 8705", "RFC 8707", "RFC 9068", "RFC 9449"),
         "contract_visible": True,
         "discovery_visible": False,

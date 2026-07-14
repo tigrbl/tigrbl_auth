@@ -11,8 +11,6 @@ from __future__ import annotations
 
 
 from typing import Any, Dict, List, Optional, Union
-from tigrbl import TigrblApp
-
 from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
 from tigrbl_auth_protocol_oauth.jwtoken import JWTCoder
 from tigrbl_auth_protocol_oauth.standards.json_web_token import decode_jwt, encode_jwt
@@ -22,19 +20,6 @@ RFC8693_SPEC_URL = "https://www.rfc-editor.org/rfc/rfc8693"
 
 # Token Exchange Grant Type
 TOKEN_EXCHANGE_GRANT_TYPE = "urn:ietf:params:oauth:grant-type:token-exchange"
-
-def include_rfc8693(app: TigrblApp) -> None:
-    """Attach the RFC 8693 router to *app* if enabled."""
-
-    from tigrbl_identity_storage_runtime.token_exchange import api
-
-    if settings.enable_rfc8693 and not any(
-        (getattr(route, "path", None) or getattr(route, "path_template", None))
-        == "/token/exchange"
-        for route in app.router.routes
-    ):
-        app.include_router(api)
-
 
 def _header_value(value: object) -> str | None:
     if value is None:

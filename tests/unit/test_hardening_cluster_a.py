@@ -20,14 +20,16 @@ from tigrbl_auth_protocol_oauth.standards.resource_indicators import (
     resource_binding_summary,
     select_resource_indicator,
 )
-import tigrbl_identity_storage_runtime.token_exchange as token_exchange_mod
+import tigrbl_identity_server.token_exchange_runtime as token_exchange_mod
 import tigrbl_identity_server.token_request as token_ops
 import tigrbl_identity_server.token_device_grant as device_ops
 
-from tigrbl_identity_storage_runtime.token_exchange import (
+from tigrbl_identity_server.token_exchange_runtime import (
     HTTPException,
     _actor_claim,
     _normalize_requested_token_type,
+)
+from tigrbl_auth_protocol_oauth.standards.token_exchange import (
     describe as describe_rfc8693,
 )
 

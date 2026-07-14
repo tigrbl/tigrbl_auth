@@ -26,7 +26,7 @@ async def test_token_exchange_endpoint(
         "subject_token_type": TokenType.ACCESS_TOKEN.value,
     }
     response = await async_client.post("/token/exchange", data=payload)
-    assert response.status_code == status.HTTP_200_OK
+    assert response.status_code == status.HTTP_200_OK, response.text
     data = response.json()
     assert "access_token" in data
     assert data["token_type"].lower() == "bearer"

@@ -19,8 +19,8 @@ from tigrbl_auth_protocol_oauth.standards.token_exchange import (
     makeImpersonationToken,
     makeDelegationToken,
     TOKEN_EXCHANGE_GRANT_TYPE,
-    include_rfc8693,
 )
+from tigrbl_identity_server.token_exchange_surface import include_rfc8693
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_auth_protocol_oauth.standards.json_web_token import encode_jwt
 import time

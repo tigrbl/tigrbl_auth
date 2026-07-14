@@ -29,7 +29,7 @@ from tigrbl_identity_storage_runtime.metadata.protected_resource_metadata import
 )
 from tigrbl_identity_server.par_surface import include_par_endpoint
 from tigrbl_identity_server.revocation_surface import include_revocation_endpoint
-from tigrbl_identity_storage_runtime.token_exchange import (
+from tigrbl_identity_server.token_exchange_surface import (
     include_token_exchange_endpoint,
 )
 from tigrbl_identity_server.userinfo_surface import include_oidc_userinfo
