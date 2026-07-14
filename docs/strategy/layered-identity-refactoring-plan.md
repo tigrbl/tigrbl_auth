@@ -100,6 +100,10 @@ Required ownership rules:
   executable table specifications and durable operations, and layer 50 accepts
   explicitly injected replay/nonce operations instead of configuring a global
   in-memory store.
+- [x] `738c6903` removes the remaining admin-auth DTOs, schema bindings,
+  lookup operation, bootstrap secret materialization, and password hashing from
+  the `User` storage model; the server runtime owns the HTTP DTOs and routes,
+  layer 30 owns identifier lookup, and the bcrypt provider owns hashing.
 - [x] Claim primitives, contracts, bases, `ClaimType`, `ClaimValueType`,
   `ClaimNameKind`, and standalone concrete claim packages exist.
 - [x] Protocol-neutral scope matching exists as
