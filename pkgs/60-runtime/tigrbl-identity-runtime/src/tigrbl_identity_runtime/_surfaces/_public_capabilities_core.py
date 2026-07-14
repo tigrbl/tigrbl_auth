@@ -16,7 +16,7 @@ CORE_PUBLIC_CAPABILITIES: Final[tuple[dict[str, Any], ...]] = (
         "flags": ("enable_rfc8628",),
         "summary": "Device authorization endpoint",
         "tags": ("oauth2",),
-        "publisher_ref": "tigrbl_identity_storage_runtime.device_authorization:include_device_authorization_endpoint",
+        "publisher_ref": "tigrbl_identity_server.device_authorization_surface:include_device_authorization_endpoint",
         "targets": ("RFC 8628", "RFC 8707"),
         "contract_visible": True,
         "discovery_visible": True,

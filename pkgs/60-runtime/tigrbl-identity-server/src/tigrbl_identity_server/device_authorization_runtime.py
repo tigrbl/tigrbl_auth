@@ -6,46 +6,11 @@ from typing import Any
 from urllib.parse import parse_qs
 from uuid import UUID
 
-from tigrbl_identity_runtime.deployment import deployment_from_app, deployment_from_request
+from tigrbl_identity_runtime.deployment import deployment_from_request
 from tigrbl_identity_runtime.settings import settings
-from .ops.common import create_record, read_record
+from tigrbl_identity_storage_runtime.ops.common import create_record, read_record
 from tigrbl_identity_storage.tables.audit_event import AuditEvent
-
-try:  # pragma: no cover - exercised with full runtime deps installed
-    from tigrbl import Depends, TigrblApp, TigrblRouter
-    from tigrbl.runtime.status import HTTPException, status
-    from .engine import get_db
-except Exception:  # pragma: no cover - dependency-light fallback
-    class _FallbackStatus:
-        HTTP_400_BAD_REQUEST = 400
-        HTTP_404_NOT_FOUND = 404
-
-    class HTTPException(Exception):
-        def __init__(self, status_code: int, detail: Any):
-            super().__init__(detail)
-            self.status_code = status_code
-            self.detail = detail
-
-    status = _FallbackStatus()
-    def Depends(dependency):
-        return dependency  # type: ignore[assignment]
-
-    class TigrblApp:  # type: ignore[override]
-        pass
-
-    class TigrblRouter:  # type: ignore[override]
-        def __init__(self, *args, **kwargs):
-            self.routes = []
-
-        def route(self, path: str, methods=None, response_model=None, **kwargs):
-            def decorator(func):
-                self.routes.append(type("Route", (), {"path": path, "methods": methods})())
-                return func
-
-            return decorator
-
-    def get_db():  # type: ignore[override]
-        return None
+from tigrbl.runtime.status import HTTPException, status
 
 from tigrbl_auth_protocol_oauth.standards.device_authorization import (
     DEVICE_CODE_EXPIRES_IN,
@@ -54,22 +19,8 @@ from tigrbl_auth_protocol_oauth.standards.device_authorization import (
     generate_user_code,
 )
 from tigrbl_auth_protocol_oauth.standards.resource_indicators import select_resource_indicator
-from tigrbl_auth_protocol_oauth.schemas import DeviceAuthorizationOut
-
-try:  # pragma: no cover
-    from tigrbl_identity_storage.tables.client import Client
-    from tigrbl_identity_storage.tables.device_code import DeviceCode
-except Exception:  # pragma: no cover - placeholders for dependency-light tests
-    class Client:  # type: ignore[override]
-        id = object()
-
-    class DeviceCode:  # type: ignore[override]
-        def __init__(self, **kwargs):
-            for key, value in kwargs.items():
-                setattr(self, key, value)
-            self.id = kwargs.get('id') or kwargs.get('device_code')
-
-api = router = TigrblRouter()
+from tigrbl_identity_storage.tables.client import Client
+from tigrbl_identity_storage.tables.device_code import DeviceCode
 
 
 async def device_authorization_request(*, request, db):
@@ -164,8 +115,7 @@ def _repo_root() -> Path:
     return Path(__file__).resolve().parents[5]
 
 
-@api.route("/device_authorization", methods=["POST"], response_model=DeviceAuthorizationOut)
-async def device_authorization(request: Any, db: Any = Depends(get_db)) -> Any:
+async def device_authorization(request: Any, db: Any) -> Any:
     result = await device_authorization_request(request=request, db=db)
     from tigrbl_identity_storage_runtime.session_service import observe_device_authorization_response
 
@@ -174,24 +124,7 @@ async def device_authorization(request: Any, db: Any = Depends(get_db)) -> Any:
     return result
 
 
-def include_device_authorization_endpoint(app: TigrblApp) -> None:
-    deployment = deployment_from_app(app, settings)
-    path = "/device_authorization"
-    if deployment.route_enabled(path) and not any(
-        (getattr(route, "path", None) or getattr(route, "path_template", None)) == path
-        for route in app.router.routes
-    ):
-        app.include_router(api)
-
-
-include_rfc8628 = include_device_authorization_endpoint
-
-
 __all__ = [
-    "api",
-    "router",
     "device_authorization",
     "device_authorization_request",
-    "include_device_authorization_endpoint",
-    "include_rfc8628",
 ]

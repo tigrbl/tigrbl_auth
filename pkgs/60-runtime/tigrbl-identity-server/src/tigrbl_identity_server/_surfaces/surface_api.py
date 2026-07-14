@@ -12,7 +12,7 @@ from tigrbl_identity_server.token_surface import router as token_router
 from tigrbl_identity_server.client_registration_surface import (
     include_client_registration_endpoint,
 )
-from tigrbl_identity_storage_runtime.device_authorization import (
+from tigrbl_identity_server.device_authorization_surface import (
     include_device_authorization_endpoint,
 )
 from tigrbl_identity_server.introspection_surface import include_introspection_endpoint

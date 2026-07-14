@@ -292,7 +292,7 @@ def test_token_endpoint_carrier_and_runtime_live_above_storage() -> None:
             set(),
         ),
         (
-            "tigrbl_identity_storage_runtime.device_authorization",
+            "tigrbl_identity_server.device_authorization_surface",
             "tigrbl_identity_storage.tables.device_code",
             "DeviceCode",
             {"device_authorization"},

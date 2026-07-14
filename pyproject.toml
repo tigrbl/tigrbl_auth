@@ -291,6 +291,7 @@ dependencies = [
     "tigrbl-pushed-authorization-capability==0.4.0.dev2",
     "tigrbl-client-registration-capability==0.4.0.dev2",
     "tigrbl-auth-api-oauth-authorization==0.4.0.dev2",
+    "tigrbl-auth-api-oauth-device-authorization==0.4.0.dev2",
     "tigrbl-auth-api-oidc-userinfo==0.4.0.dev2",
     "tigrbl-auth-api-oidc-logout==0.4.0.dev2",
     "tigrbl-auth-api-session-login==0.4.0.dev2",
@@ -660,6 +661,7 @@ tigrbl-protocol-artifact-processing = { path = "pkgs/40-capabilities/tigrbl-prot
 tigrbl-pushed-authorization-capability = { path = "pkgs/40-capabilities/tigrbl-pushed-authorization-capability", editable = true }
 tigrbl-client-registration-capability = { path = "pkgs/40-capabilities/tigrbl-client-registration-capability", editable = true }
 tigrbl-auth-api-oauth-authorization = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-authorization", editable = true }
+tigrbl-auth-api-oauth-device-authorization = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-device-authorization", editable = true }
 tigrbl-auth-api-oidc-userinfo = { path = "pkgs/80-apis/tigrbl-auth-api-oidc-userinfo", editable = true }
 tigrbl-auth-api-oidc-logout = { path = "pkgs/80-apis/tigrbl-auth-api-oidc-logout", editable = true }
 tigrbl-auth-api-session-login = { path = "pkgs/80-apis/tigrbl-auth-api-session-login", editable = true }

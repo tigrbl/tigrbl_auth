@@ -300,13 +300,19 @@ def test_executable_par_publisher_lives_above_storage() -> None:
 def test_executable_device_authorization_publisher_lives_above_storage() -> None:
     assert importlib.util.find_spec("tigrbl_identity_storage.tables.device_code._op") is None
 
-    runtime = importlib.import_module("tigrbl_identity_storage_runtime.device_authorization")
+    runtime = importlib.import_module(
+        "tigrbl_identity_server.device_authorization_surface"
+    )
     storage = importlib.import_module("tigrbl_identity_storage.tables.device_code")
 
     assert runtime.api is runtime.router
     assert runtime.include_device_authorization_endpoint.__module__ == (
-        "tigrbl_identity_storage_runtime.device_authorization"
+        "tigrbl_identity_server.device_authorization_surface"
     )
+    with pytest.raises(ModuleNotFoundError):
+        importlib.import_module(
+            "tigrbl_identity_storage_runtime.device_authorization"
+        )
     assert not hasattr(storage, "api")
     assert not hasattr(storage, "router")
 
