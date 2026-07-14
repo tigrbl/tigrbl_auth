@@ -2,6 +2,10 @@ from tigrbl_identity_contracts.capabilities import ProtocolCapabilityRequirement
 
 CAPABILITY_REQUIREMENTS = (
     ProtocolCapabilityRequirement(
+        "oauth-token-revocation", "RFC7009", "token-revocation",
+        "/revoke", "token.revocation", "revoke_token", "oauth:rfc7009",
+    ),
+    ProtocolCapabilityRequirement(
         "oauth-token-introspection", "RFC7662", "token-introspection",
         "/introspect", "token.introspection", "introspect_token",
         "oauth:rfc7662",
