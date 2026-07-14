@@ -156,6 +156,12 @@ Required ownership rules:
   carrier-neutral durable adapters, and preserve the layer-70 compatibility
   surface. Focused ownership, conformance, API, and real Basic-auth integration
   flows pass.
+- [x] `fbfb23cc`, `0dd9714a`, and `4306cfe2` add the typed token-revocation
+  contract/capability, explicit RFC 7009 requirement/service mapping, and
+  durable revocation plus optional audit composition.
+- [x] `b08b9e75` and `d0883321` add and mount the standalone layer-80 RFC 7009
+  carrier, reduce layer-30 revocation to durable lifecycle adapters, and
+  preserve the required 200 response for known and unknown tokens.
 
 ## 3. Layer 00: primitives
 
@@ -645,9 +651,9 @@ flags. Tier-4 claims require independent interoperability evidence.
 - [x] C3: finish all durable operations/hooks out of layer 01.
 - [ ] C4: remove route/runtime/provider imports from layer 01 and move routers
   to layer 80.
-  RFC 7662 introspection is complete; token, revocation, PAR, registration,
-  authorization, userinfo, logout, discovery, and token-exchange carriers
-  remain.
+  RFC 7662 introspection and RFC 7009 revocation are complete; token, PAR,
+  registration, authorization, userinfo, logout, discovery, and token-exchange
+  carriers remain.
 - [x] C5: finish claim package/facade cleanup and remove protocol-specific
   deterministic package names.
 - [x] C6: finish EAT token/evidence/appraisal/provider verification chain.
