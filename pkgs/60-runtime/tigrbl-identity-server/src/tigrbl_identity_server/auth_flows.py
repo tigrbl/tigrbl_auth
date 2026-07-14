@@ -6,7 +6,7 @@ from tigrbl import TigrblRouter
 
 from tigrbl_identity_server.authz_surface import router as authz_router
 from tigrbl_identity_server.introspection_surface import router as introspection_router
-from tigrbl_identity_storage_runtime.login import router as login_router
+from tigrbl_identity_server.login_surface import router as login_router
 
 router = TigrblRouter()
 router.include_router(login_router)

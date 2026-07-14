@@ -2249,6 +2249,7 @@ source = { editable = "pkgs/70-facade/tigrbl-auth" }
 dependencies = [
     { name = "swarmauri-crypto-paramiko" },
     { name = "swarmauri-standard" },
+    { name = "tigrbl-auth-api-session-login" },
     { name = "tigrbl-auth-plugin" },
     { name = "tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-auth-protocol-oidc" },
@@ -2284,6 +2285,7 @@ dependencies = [
 requires-dist = [
     { name = "swarmauri-crypto-paramiko", specifier = "==0.4.0.dev5" },
     { name = "swarmauri-standard", specifier = "==0.10.0" },
+    { name = "tigrbl-auth-api-session-login", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-plugin", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-oidc", specifier = "==0.4.0.dev2" },
@@ -2424,6 +2426,23 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [{ name = "tigrbl", specifier = "==0.4.4.dev1" }]
+
+[[package]]
+name = "tigrbl-auth-api-session-login"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/80-apis/tigrbl-auth-api-session-login" }
+dependencies = [
+    { name = "pydantic" },
+    { name = "tigrbl" },
+    { name = "tigrbl-auth-protocol-oauth" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "pydantic", specifier = ">=2.0" },
+    { name = "tigrbl", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-auth-plugin"
@@ -2820,6 +2839,7 @@ dependencies = [
     { name = "tigrbl-auth-api-oauth-token" },
     { name = "tigrbl-auth-api-oidc-logout" },
     { name = "tigrbl-auth-api-oidc-userinfo" },
+    { name = "tigrbl-auth-api-session-login" },
     { name = "tigrbl-auth-plugin" },
     { name = "tigrbl-auth-profile-haip" },
     { name = "tigrbl-auth-protocol-authzen" },
@@ -3178,6 +3198,7 @@ requires-dist = [
     { name = "tigrbl-auth-api-oauth-token", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-token" },
     { name = "tigrbl-auth-api-oidc-logout", editable = "pkgs/80-apis/tigrbl-auth-api-oidc-logout" },
     { name = "tigrbl-auth-api-oidc-userinfo", editable = "pkgs/80-apis/tigrbl-auth-api-oidc-userinfo" },
+    { name = "tigrbl-auth-api-session-login", editable = "pkgs/80-apis/tigrbl-auth-api-session-login" },
     { name = "tigrbl-auth-plugin", editable = "pkgs/60-runtime/tigrbl-auth-plugin" },
     { name = "tigrbl-auth-profile-haip", editable = "pkgs/50-protocols/tigrbl-auth-profile-haip" },
     { name = "tigrbl-auth-protocol-authzen", editable = "pkgs/50-protocols/tigrbl-auth-protocol-authzen" },
@@ -5923,6 +5944,7 @@ dependencies = [
     { name = "tigrbl-auth-api-oauth-token" },
     { name = "tigrbl-auth-api-oidc-logout" },
     { name = "tigrbl-auth-api-oidc-userinfo" },
+    { name = "tigrbl-auth-api-session-login" },
     { name = "tigrbl-auth-protocol-gnap" },
     { name = "tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-authz-policy-admin-gate" },
@@ -5951,6 +5973,7 @@ requires-dist = [
     { name = "tigrbl-auth-api-oauth-token", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oidc-logout", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oidc-userinfo", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-api-session-login", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-gnap", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy-admin-gate", specifier = "==0.4.0.dev2" },

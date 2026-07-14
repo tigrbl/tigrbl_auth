@@ -43,7 +43,7 @@ ROUTER_DEPRECATION_TARGETS = {
     "auth_flows.py": "tigrbl_identity_storage.tables.auth_session",
     "authorize.py": "tigrbl_identity_storage.tables.auth_code",
     "device_authorization.py": "tigrbl_identity_storage.tables.device_code",
-    "login.py": "tigrbl_identity_storage_runtime.login",
+    "login.py": "tigrbl_auth_api_session_login",
     "logout.py": "tigrbl_identity_storage.tables.logout_state",
     "my_account.py": "tigrbl_identity_storage.tables.user",
     "par.py": "tigrbl_auth_api_oauth_par",
@@ -62,7 +62,7 @@ def test_rest_schema_facade_points_to_protocol_and_api_owned_schemas() -> None:
     with pytest.warns(DeprecationWarning):
         schemas = importlib.reload(importlib.import_module("tigrbl_auth.api.rest.schemas"))
     from tigrbl_auth_protocol_oauth.schemas import TokenPair
-    from tigrbl_identity_server.admin_auth import CredsIn
+    from tigrbl_auth_api_session_login import CredsIn
 
     assert schemas.CredsIn is CredsIn
     assert schemas.TokenPair is TokenPair
@@ -95,8 +95,7 @@ def test_server_rest_router_bridges_warn_to_storage_owner(
         (
             "tigrbl_identity_storage.tables",
                 "tigrbl_identity_storage_runtime",
-                "tigrbl_auth_api_platform_admin",
-                "tigrbl_auth_api_oauth_",
+                "tigrbl_auth_api_",
             )
         )
     assert not path.exists()
@@ -275,10 +274,10 @@ def test_token_endpoint_carrier_and_runtime_live_above_storage() -> None:
     ("runtime_module_name", "storage_module_name", "class_name", "route_names"),
     [
         (
-            "tigrbl_identity_storage_runtime.login",
+            "tigrbl_identity_server.login_surface",
             "tigrbl_identity_storage.tables.auth_session",
             "AuthSession",
-            {"login"},
+            set(),
         ),
         (
             "tigrbl_identity_server.authorization_surface",
@@ -331,7 +330,7 @@ def test_moved_oauth_publishers_live_above_storage_table_modules(
     assert hasattr(runtime_module, "router")
     if runtime_module_name in {
         "tigrbl_identity_server.authorization_surface",
-        "tigrbl_identity_storage_runtime.login",
+        "tigrbl_identity_server.login_surface",
         "tigrbl_identity_server.client_registration_surface",
         "tigrbl_identity_server.par_surface",
     }:

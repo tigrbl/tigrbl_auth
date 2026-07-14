@@ -4,26 +4,9 @@ import secrets
 from datetime import datetime, timedelta, timezone
 from typing import Any
 
-from pydantic import BaseModel, constr
-from tigrbl import Depends, JSONResponse, Request, TigrblRouter
+from tigrbl import JSONResponse, Request
 from tigrbl.runtime.status import HTTPException
-from tigrbl_auth_protocol_oauth.schemas import TokenPair
-from .engine import get_db
-from tigrbl_principal_authentication import PasswordAuthenticationCapability
-
-from .ops.identities import lookup_identity_by_identifier
-
-router = TigrblRouter()
-
-
-class CredsIn(BaseModel):
-    identifier: constr(strip_whitespace=True, min_length=3, max_length=120)
-    password: constr(min_length=8, max_length=256)
-
-
-password_authentication = PasswordAuthenticationCapability(
-    lookup_identity_by_identifier
-)
+from .security.password_authentication import password_authentication
 
 
 async def login_user(*, request: Request, db: Any, identifier: str, password: str) -> Any:
@@ -109,21 +92,4 @@ async def login_user(*, request: Request, db: Any, identifier: str, password: st
     return response
 
 
-@router.route("/login", methods=["POST"], response_model=TokenPair)
-async def login(
-    request: Request,
-    creds: CredsIn | None = None,
-    db: Any = Depends(get_db),
-) -> Any:
-    if creds is None:
-        body = await request.json() or {}
-        creds = CredsIn.model_validate(body)
-    return await login_user(
-        request=request,
-        db=db,
-        identifier=creds.identifier,
-        password=creds.password,
-    )
-
-
-__all__ = ["login", "login_user", "password_authentication", "router"]
+__all__ = ["login_user", "password_authentication"]

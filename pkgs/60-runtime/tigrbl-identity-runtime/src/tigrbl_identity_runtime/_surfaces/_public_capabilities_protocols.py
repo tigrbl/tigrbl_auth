@@ -121,7 +121,7 @@ PROTOCOL_PUBLIC_CAPABILITIES: Final[tuple[dict[str, Any], ...]] = (
         "flags": ("enable_rfc6749",),
         "summary": "Password login helper",
         "tags": ("auth",),
-        "router_ref": "tigrbl_identity_storage_runtime.login:router",
+        "router_ref": "tigrbl_identity_server.login_surface:router",
         "targets": ("RFC 6749", "RFC 9068", "RFC 6265", "OIDC Session Management"),
         "contract_visible": True,
         "discovery_visible": False,

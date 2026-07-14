@@ -9,8 +9,8 @@ from tigrbl_identity_server.admin_auth import (
     AdminPasswordResetCompleteIn,
     AdminPasswordResetRequestIn,
     AdminSessionOut,
-    CredsIn,
 )
+from tigrbl_auth_api_session_login import CredsIn
 from tigrbl_auth_protocol_oauth.schemas import (
     AuthorizationCodeGrantForm,
     DeviceAuthorizationIn,

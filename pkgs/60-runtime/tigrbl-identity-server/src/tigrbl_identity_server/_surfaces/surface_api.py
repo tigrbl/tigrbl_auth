@@ -7,7 +7,7 @@ from tigrbl import TigrblApp, TigrblRouter
 from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
 from tigrbl_identity_storage_runtime.engine import dsn
 from tigrbl_identity_server.authorization_surface import router as authorize_router
-from tigrbl_identity_storage_runtime.login import router as login_router
+from tigrbl_identity_server.login_surface import router as login_router
 from tigrbl_identity_server.token_surface import router as token_router
 from tigrbl_identity_server.client_registration_surface import (
     include_client_registration_endpoint,

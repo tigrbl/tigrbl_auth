@@ -33,6 +33,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
+    "tigrbl-auth-api-session-login==0.4.0.dev2",
     "tigrbl-auth-api-oauth-authorization==0.4.0.dev2",
     "tigrbl-auth-api-oidc-userinfo==0.4.0.dev2",
     "tigrbl-auth-api-oidc-logout==0.4.0.dev2",
