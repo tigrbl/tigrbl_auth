@@ -84,6 +84,9 @@ CAPABILITY_PURPOSES = {
     "tigrbl-principal-authentication": (
         "coordinate durable principal lookup with replaceable credential verifiers"
     ),
+    "tigrbl-pushed-authorization-capability": (
+        "coordinate durable pushed-request creation with optional audit recording"
+    ),
     "tigrbl-replay-protection-capability": (
         "coordinate normalized replay reservations across protocol mappings, "
         "durable repositories, and replaceable providers"

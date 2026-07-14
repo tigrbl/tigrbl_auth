@@ -2926,6 +2926,7 @@ dependencies = [
     { name = "tigrbl-principal-authentication" },
     { name = "tigrbl-protocol-artifact-processing" },
     { name = "tigrbl-public-subject-identifier-concrete" },
+    { name = "tigrbl-pushed-authorization-capability" },
     { name = "tigrbl-release-contracts" },
     { name = "tigrbl-replay-bases" },
     { name = "tigrbl-replay-memory-provider" },
@@ -3279,6 +3280,7 @@ requires-dist = [
     { name = "tigrbl-principal-authentication", editable = "pkgs/40-capabilities/tigrbl-principal-authentication" },
     { name = "tigrbl-protocol-artifact-processing", editable = "pkgs/40-capabilities/tigrbl-protocol-artifact-processing" },
     { name = "tigrbl-public-subject-identifier-concrete", editable = "pkgs/10-concrete/tigrbl-public-subject-identifier-concrete" },
+    { name = "tigrbl-pushed-authorization-capability", editable = "pkgs/40-capabilities/tigrbl-pushed-authorization-capability" },
     { name = "tigrbl-release-contracts", editable = "pkgs/02-contracts/tigrbl-release-contracts" },
     { name = "tigrbl-replay-bases", editable = "pkgs/05-bases/tigrbl-replay-bases" },
     { name = "tigrbl-replay-memory-provider", editable = "pkgs/20-providers/tigrbl-replay-memory-provider" },
@@ -6218,6 +6220,21 @@ dependencies = [
 requires-dist = [
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-model-bases", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-pushed-authorization-capability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/40-capabilities/tigrbl-pushed-authorization-capability" }
+dependencies = [
+    { name = "tigrbl-capability" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-capability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]

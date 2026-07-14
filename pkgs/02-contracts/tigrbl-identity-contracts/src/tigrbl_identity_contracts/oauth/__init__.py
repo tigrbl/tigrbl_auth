@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime
 from importlib import import_module
-from typing import Any, Protocol
+from typing import Any, Mapping, Protocol
 
 from ..protocols import OAuthGrantStatus
 
@@ -79,6 +79,30 @@ class PARValidationResult:
     expires_at: datetime
     consumed: bool
     params: dict[str, Any]
+
+
+@dataclass(frozen=True, slots=True)
+class PushedAuthorizationPersistenceRequest:
+    client_id: str
+    tenant_id: str | None
+    params: Mapping[str, object]
+
+    def __post_init__(self) -> None:
+        if not self.client_id:
+            raise ValueError("client_id is required for pushed authorization")
+
+
+@dataclass(frozen=True, slots=True)
+class PushedAuthorizationResult:
+    request_uri: str
+    expires_in: int
+    record_id: str | None = None
+
+    def __post_init__(self) -> None:
+        if not self.request_uri:
+            raise ValueError("request_uri is required")
+        if self.expires_in <= 0:
+            raise ValueError("expires_in must be positive")
 
 
 @dataclass(frozen=True, slots=True)
@@ -284,6 +308,8 @@ __all__ = [
     "OAuthClient",
     "OAuthRepositoryPort",
     "PARValidationResult",
+    "PushedAuthorizationPersistenceRequest",
+    "PushedAuthorizationResult",
     "ProtectedResourceVerifierContract",
     "RequestObjectPolicy",
     "ResourceSelection",
