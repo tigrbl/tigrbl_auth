@@ -1,4 +1,4 @@
-"""Compatibility facade for `tigrbl_identity_storage_runtime.userinfo`."""
+"""Compatibility facade for the layer-60 UserInfo runtime."""
 
 from __future__ import annotations
 
@@ -6,8 +6,8 @@ from tigrbl_auth._split_imports import alias_module as _alias_module
 
 _module = _alias_module(
     __name__,
-    "tigrbl_identity_storage_runtime.userinfo",
-    "tigrbl-identity-storage-runtime",
+    "tigrbl_identity_server.userinfo_runtime",
+    "tigrbl-identity-server",
 )
 
 globals().update(_module.__dict__)

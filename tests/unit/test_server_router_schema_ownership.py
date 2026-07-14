@@ -311,7 +311,7 @@ def test_token_endpoint_carrier_and_runtime_live_above_storage() -> None:
             {"logout"},
         ),
         (
-            "tigrbl_identity_storage_runtime.userinfo",
+            "tigrbl_identity_server.userinfo_surface",
             "tigrbl_identity_storage.tables.user",
             "User",
             {"userinfo"},

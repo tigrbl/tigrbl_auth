@@ -34,6 +34,7 @@ classifiers = [
 ]
 dependencies = [
     "tigrbl-auth-api-oauth-authorization==0.4.0.dev2",
+    "tigrbl-auth-api-oidc-userinfo==0.4.0.dev2",
     "tigrbl-auth-api-oauth-introspection==0.4.0.dev2",
     "tigrbl-auth-api-oauth-revocation==0.4.0.dev2",
     "tigrbl-auth-api-oauth-par==0.4.0.dev2",

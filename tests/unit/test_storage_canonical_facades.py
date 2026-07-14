@@ -372,11 +372,15 @@ def test_executable_userinfo_publisher_lives_above_storage() -> None:
     for module_name in old_modules:
         assert importlib.util.find_spec(module_name) is None
 
-    runtime = importlib.import_module("tigrbl_identity_storage_runtime.userinfo")
+    runtime = importlib.import_module("tigrbl_identity_server.userinfo_surface")
     storage = importlib.import_module("tigrbl_identity_storage.tables.user")
 
     assert runtime.api is runtime.router
-    assert runtime.include_oidc_userinfo.__module__ == "tigrbl_identity_storage_runtime.userinfo"
+    assert runtime.include_oidc_userinfo.__module__ == (
+        "tigrbl_identity_server.userinfo_surface"
+    )
+    with pytest.raises(ModuleNotFoundError):
+        importlib.import_module("tigrbl_identity_storage_runtime.userinfo")
     assert not hasattr(storage, "api")
     assert not hasattr(storage, "router")
     assert not hasattr(storage, "userinfo")

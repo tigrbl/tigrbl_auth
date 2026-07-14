@@ -177,7 +177,7 @@ PROTOCOL_PUBLIC_CAPABILITIES: Final[tuple[dict[str, Any], ...]] = (
         "flags": ("enable_oidc_userinfo",),
         "summary": "OIDC UserInfo endpoint",
         "tags": ("oidc",),
-        "publisher_ref": "tigrbl_identity_storage_runtime.userinfo:include_oidc_userinfo",
+        "publisher_ref": "tigrbl_identity_server.userinfo_surface:include_oidc_userinfo",
         "targets": ("OIDC UserInfo", "RFC 6750"),
         "contract_visible": True,
         "discovery_visible": True,

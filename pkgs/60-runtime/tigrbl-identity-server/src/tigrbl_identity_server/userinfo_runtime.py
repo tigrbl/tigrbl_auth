@@ -1,4 +1,4 @@
-"""OIDC UserInfo runtime publisher."""
+"""OIDC UserInfo request orchestration independent of route mounting."""
 
 from __future__ import annotations
 
@@ -8,27 +8,18 @@ from collections.abc import Mapping
 from typing import Any
 from unittest.mock import Mock
 
-from tigrbl.security import Depends as TigrblDepends
-from tigrbl import (
-    TigrblRouter,
-    TigrblApp,
-    Request,
-    Response,
-)
+from tigrbl import Request, Response
 from tigrbl.engine import HybridSession as AsyncSession
 from tigrbl.runtime.status import HTTPException, status
 
 from tigrbl_identity_jose.jwt_coder import JWTCoder, InvalidTokenError
 from tigrbl_identity_jose.jwt_runtime import _svc, _svc_async
 from tigrbl_identity_storage.tables import User
-from .engine import get_db
 from tigrbl_auth_protocol_oauth.standards.bearer_token_usage import extract_bearer_token
 from swarmauri_core.crypto.types import JWAAlg
-from tigrbl_identity_runtime.deployment import deployment_from_app, deployment_from_request
+from tigrbl_identity_runtime.deployment import deployment_from_request
 from tigrbl_identity_runtime.settings import settings
 
-api = TigrblRouter()
-router = api
 _jwt_coder: JWTCoder | None = None
 
 
@@ -159,10 +150,9 @@ async def _resolve_current_user(request: Request, db: AsyncSession, payload: dic
     return user
 
 
-@api.route("/userinfo", methods=["GET"], response_model=None)
 async def userinfo(
     request: Request,
-    db: AsyncSession = TigrblDepends(get_db),
+    db: AsyncSession,
 ) -> Response | dict[str, str]:
     deployment = deployment_from_request(request, settings)
     if not deployment.route_enabled("/userinfo"):
@@ -204,22 +194,7 @@ async def userinfo(
     return claims
 
 
-def include_oidc_userinfo(app: TigrblApp) -> None:
-    deployment = deployment_from_app(app, settings)
-    if not deployment.route_enabled("/userinfo"):
-        return
-    if not any(
-        (getattr(route, "path", None) or getattr(route, "path_template", None))
-        == "/userinfo"
-        for route in app.router.routes
-    ):
-        app.include_router(api)
-
-
 __all__ = [
-    "api",
-    "router",
     "userinfo",
-    "include_oidc_userinfo",
     "first_user_by_filters",
 ]

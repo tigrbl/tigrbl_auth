@@ -1,8 +1,8 @@
 """OIDC Core certified-core aggregator.
 
 This module provides a named, non-wrapper aggregation point for the OIDC Core
-release path. It intentionally re-exports selected discovery, ID Token, and
-UserInfo helpers without depending on star-import shims.
+release path. It intentionally re-exports selected discovery and ID Token
+helpers plus descriptive UserInfo protocol ownership.
 """
 
 from __future__ import annotations
@@ -14,7 +14,10 @@ from tigrbl_auth_protocol_oidc.standards.id_token import (
     rotate_rsa_jwt_key,
     verify_id_token,
 )
-from tigrbl_auth_protocol_oidc.standards.userinfo import include_oidc_userinfo
+from tigrbl_auth_protocol_oidc.standards.userinfo import (
+    OWNER as USERINFO_OWNER,
+    describe as describe_userinfo,
+)
 
 OIDC_CORE_COMPONENTS = (
     "discovery",
@@ -25,7 +28,8 @@ OIDC_CORE_COMPONENTS = (
 __all__ = [
     "OIDC_CORE_COMPONENTS",
     "include_oidc_discovery",
-    "include_oidc_userinfo",
+    "USERINFO_OWNER",
+    "describe_userinfo",
     "mint_id_token",
     "oidc_hash",
     "rotate_rsa_jwt_key",

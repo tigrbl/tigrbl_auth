@@ -32,7 +32,7 @@ from tigrbl_identity_server.revocation_surface import include_revocation_endpoin
 from tigrbl_identity_storage_runtime.token_exchange import (
     include_token_exchange_endpoint,
 )
-from tigrbl_identity_storage_runtime.userinfo import include_oidc_userinfo
+from tigrbl_identity_server.userinfo_surface import include_oidc_userinfo
 from tigrbl_identity_server.standards_manifest import include_standards_manifest
 from tigrbl_identity_server.advanced_protocols import include_advanced_protocols
 
