@@ -108,9 +108,9 @@ def test_security_trust_contracts_bases_and_implementations_import_cleanly() -> 
     ):
         assert hasattr(trust_bases, name)
 
-    importlib.import_module("tigrbl_oauth_scope_matcher")
-    importlib.import_module("tigrbl_oidc_claims_concrete")
-    importlib.import_module("tigrbl_oidc_subject_strategy")
+    importlib.import_module("tigrbl_authorization_scope_set_matcher_concrete")
+    importlib.import_module("tigrbl_identity_assurance_concrete")
+    importlib.import_module("tigrbl_pairwise_subject_identifier_concrete")
     importlib.import_module("tigrbl_security_auth_context_acr_basic")
     importlib.import_module("tigrbl_security_auth_context_amr_basic")
     importlib.import_module("tigrbl_security_claims_provider_local")

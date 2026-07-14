@@ -15,7 +15,7 @@ from tigrbl_identity_claims_bases import ClaimBase
 PACKAGES = {
     "tigrbl_claim_http_method_concrete": "HttpMethodClaim",
     "tigrbl_claim_http_uri_concrete": "HttpUriClaim",
-    "tigrbl_claim_access_token_hash_concrete": "AccessTokenHashClaim",
+    "tigrbl_claim_access_token_digest_concrete": "AccessTokenDigestClaim",
     "tigrbl_claim_sd_hash_concrete": "SdHashClaim",
     "tigrbl_claim_eat_nonce_concrete": "EatNonceClaim",
     "tigrbl_claim_ueid_concrete": "UeidClaim",
@@ -55,7 +55,7 @@ def test_extended_protocol_claim_sets_are_explicitly_versioned():
     [
         ("tigrbl_claim_http_method_concrete", "HttpMethodClaim", "post"),
         ("tigrbl_claim_http_uri_concrete", "HttpUriClaim", "/token"),
-        ("tigrbl_claim_access_token_hash_concrete", "AccessTokenHashClaim", ""),
+        ("tigrbl_claim_access_token_digest_concrete", "AccessTokenDigestClaim", ""),
         ("tigrbl_claim_eat_nonce_concrete", "EatNonceClaim", []),
         ("tigrbl_claim_ueid_concrete", "UeidClaim", 3),
         ("tigrbl_claim_eat_submodules_concrete", "EatSubmodulesClaim", []),

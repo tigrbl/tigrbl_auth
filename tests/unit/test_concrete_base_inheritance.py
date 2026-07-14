@@ -11,9 +11,10 @@ def test_all_concrete_implementations_inherit_05_bases() -> None:
     import tigrbl_authz_policy_rules_concrete as rules
     import tigrbl_identity_credentials_concrete as credentials
     import tigrbl_identity_identities_concrete as identities
-    import tigrbl_oauth_scope_matcher as oauth
+    import tigrbl_authorization_scope_set_matcher_concrete as scopes
     import tigrbl_security_claims_provider_local as claims
-    import tigrbl_oidc_subject_strategy as subjects
+    import tigrbl_pairwise_subject_identifier_concrete as pairwise_subjects
+    import tigrbl_public_subject_identifier_concrete as public_subjects
     from tigrbl_authz_policy_bases import (
         AdviceHandlerBase,
         AttributeResolverBase,
@@ -52,11 +53,11 @@ def test_all_concrete_implementations_inherit_05_bases() -> None:
             obligations.NoopAdviceHandler,
             obligations.CollectingAdviceHandler,
         ],
-        ScopeMatcherBase: [oauth.DefaultScopeMatcher],
+        ScopeMatcherBase: [scopes.ScopeSetMatcher],
         ClaimsProviderBase: [claims.LocalClaimsProvider],
         SubjectIdentifierStrategyBase: [
-            subjects.PublicSubjectStrategy,
-            subjects.PairwiseSubjectStrategy,
+            public_subjects.PublicSubjectIdentifierStrategy,
+            pairwise_subjects.PairwiseSubjectIdentifierStrategy,
         ],
     }
     for base, implementations in groups.items():

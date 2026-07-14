@@ -18,7 +18,7 @@ from tigrbl_claim_salutation_concrete import SalutationClaim
 from tigrbl_claim_title_concrete import TitleClaim
 from tigrbl_claim_transaction_id_concrete import TransactionIdClaim
 from tigrbl_claim_verified_claims_concrete import VerifiedClaimsClaim
-from tigrbl_claim_access_token_hash_oidc_concrete import OidcAccessTokenHashClaim
+from tigrbl_claim_access_token_hash_concrete import AccessTokenHashClaim
 from tigrbl_claim_address_concrete import AddressClaim
 from tigrbl_claim_authorization_code_hash_concrete import AuthorizationCodeHashClaim
 from tigrbl_claim_birthdate_concrete import BirthdateClaim
@@ -70,7 +70,7 @@ OIDC_ID_TOKEN_PROFILE_CLAIMS = (
     AuthenticationContextClaim,
     AuthenticationMethodsClaim,
     AuthorizedPartyClaim,
-    OidcAccessTokenHashClaim,
+    AccessTokenHashClaim,
     AuthorizationCodeHashClaim,
     StateHashClaim,
     SessionIdClaim,

@@ -1,6 +1,6 @@
 """OIDC composition exports from protocol-neutral concrete owners."""
 
-from tigrbl_eap_acr_concrete import EapAcrValue, EapAmrValue, satisfies_eap_acr
+from .eap_acr_values import EapAcrValue, EapAmrValue, satisfies_eap_acr
 from tigrbl_identity_assurance_concrete import (
     parse_verified_claims,
     serialize_verified_claims,

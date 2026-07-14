@@ -4,7 +4,7 @@ from tigrbl_identity_contracts.claims import ClaimSet
 from tigrbl_claim_client_id_concrete import ClientIdClaim
 from tigrbl_claim_confirmation_concrete import ConfirmationClaim
 from tigrbl_claim_scope_concrete import ScopeClaim
-from tigrbl_claim_access_token_hash_concrete import AccessTokenHashClaim
+from tigrbl_claim_access_token_digest_concrete import AccessTokenDigestClaim
 from tigrbl_claim_actor_concrete import ActorClaim
 from tigrbl_claim_http_method_concrete import HttpMethodClaim
 from tigrbl_claim_http_uri_concrete import HttpUriClaim
@@ -20,7 +20,7 @@ OAUTH_DPOP_PROOF_CLAIMS = (
     HttpUriClaim,
     IssuedAtClaim,
     NonceClaim,
-    AccessTokenHashClaim,
+    AccessTokenDigestClaim,
 )
 OAUTH_TOKEN_EXCHANGE_CLAIMS = (ActorClaim, MayActClaim)
 

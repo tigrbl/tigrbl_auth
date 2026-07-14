@@ -613,7 +613,7 @@ flags. Tier-4 claims require independent interoperability evidence.
 - [ ] C3: finish all durable operations/hooks out of layer 01.
 - [ ] C4: remove route/runtime/provider imports from layer 01 and move routers
   to layer 80.
-- [ ] C5: finish claim package/facade cleanup and remove protocol-specific
+- [x] C5: finish claim package/facade cleanup and remove protocol-specific
   deterministic package names.
 - [x] C6: finish EAT token/evidence/appraisal/provider verification chain.
 - [ ] C7: normalize bases and provider ownership, including password/client

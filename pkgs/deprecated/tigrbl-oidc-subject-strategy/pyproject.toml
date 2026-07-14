@@ -1,0 +1,16 @@
+[project]
+name = "tigrbl-oidc-subject-strategy"
+version = "0.4.0.dev2"
+description = "Deprecated facade for neutral subject identifier strategies."
+requires-python = ">=3.10,<3.15"
+dependencies = [
+    "tigrbl-public-subject-identifier-concrete==0.4.0.dev2",
+    "tigrbl-pairwise-subject-identifier-concrete==0.4.0.dev2",
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tigrbl_oidc_subject_strategy", from = "src" }]

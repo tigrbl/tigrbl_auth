@@ -1,8 +1,16 @@
 from __future__ import annotations
 
+import importlib
+import inspect
+from pathlib import Path
+
 import tigrbl_identity_credentials_concrete as credentials
 import tigrbl_identity_identities_concrete as identities
-import tigrbl_oidc_claims_concrete as claims
+from tigrbl_identity_claims_bases import ClaimBase
+
+
+ROOT = Path(__file__).resolve().parents[2]
+CLAIM_PACKAGE_ROOT = ROOT / "pkgs" / "10-concrete"
 
 
 def test_identity_classes_have_standalone_layer_10_owners() -> None:
@@ -43,4 +51,30 @@ def test_credential_classes_have_standalone_layer_10_owners() -> None:
 
 
 def test_claims_classes_have_standalone_layer_10_owners() -> None:
-    assert not hasattr(claims, "LocalClaimsProvider")
+    ownership: dict[str, tuple[str, str | None]] = {}
+    package_dirs = (
+        path
+        for path in CLAIM_PACKAGE_ROOT.glob("tigrbl-claim-*-concrete")
+        if (path / "pyproject.toml").is_file()
+    )
+    for package_dir in sorted(package_dirs):
+        module_name = package_dir.name.replace("-", "_")
+        module = importlib.import_module(module_name)
+        claim_classes = [
+            value
+            for value in vars(module).values()
+            if inspect.isclass(value)
+            and issubclass(value, ClaimBase)
+            and value is not ClaimBase
+            and value.__module__ == module_name
+        ]
+        assert len(claim_classes) == 1, package_dir.name
+
+        claim_class = claim_classes[0]
+        canonical_name = claim_class.claim_name
+        protocol_label = getattr(claim_class, "protocol_label", None)
+        key = f"{canonical_name}:{protocol_label or ''}"
+        assert key not in ownership, (key, ownership[key], package_dir.name)
+        ownership[key] = (package_dir.name, protocol_label)
+
+    assert {"at_hash:", "ath:", "iss:", "sub:"}.issubset(ownership)

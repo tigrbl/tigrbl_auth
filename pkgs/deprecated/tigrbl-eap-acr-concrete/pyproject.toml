@@ -1,0 +1,13 @@
+[project]
+name = "tigrbl-eap-acr-concrete"
+version = "0.4.0.dev2"
+description = "Deprecated facade for OIDC EAP ACR Values profile behavior."
+requires-python = ">=3.10,<3.15"
+dependencies = ["tigrbl-auth-protocol-oidc==0.4.0.dev2"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tigrbl_eap_acr_concrete", from = "src" }]

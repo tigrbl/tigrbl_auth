@@ -1,19 +1,19 @@
+"""Standalone RFC 9449 access-token digest claim."""
+
 from tigrbl_identity_claims_bases import ClaimBase
 from tigrbl_identity_core import ClaimType, ClaimValueType
 
 
-class AccessTokenHashClaim(ClaimBase):
-    """OIDC ID Token hash of an access token (``at_hash``)."""
-
-    claim_name = "at_hash"
+class AccessTokenDigestClaim(ClaimBase):
+    claim_name = "ath"
     default_claim_type = ClaimType.AUTHENTICATION
     default_value_type = ClaimValueType.STRING
-    default_standards = ("OpenID Connect Core 1.0",)
+    default_standards = ("RFC9449",)
 
     @classmethod
     def validate_value(cls, value):
         if not isinstance(value, str) or not value:
-            raise ValueError("at_hash must be a non-empty base64url digest")
+            raise ValueError("ath must be a non-empty base64url digest")
 
 
-__all__ = ["AccessTokenHashClaim"]
+__all__ = ["AccessTokenDigestClaim"]

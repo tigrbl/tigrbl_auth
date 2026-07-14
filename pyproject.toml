@@ -99,10 +99,7 @@ dependencies = [
     "tigrbl-identity-admin-trust-federation-graph==0.4.0.dev2",
     "tigrbl-trust-federation-graph-concrete==0.4.0.dev2",
     "tigrbl-auth-protocol-oidc-backchannel-replay-store==0.4.0.dev2",
-    "tigrbl-oauth-scope-matcher==0.4.0.dev2",
     "tigrbl-set-concrete==0.4.0.dev2",
-    "tigrbl-oidc-claims-concrete==0.4.0.dev2",
-    "tigrbl-oidc-subject-strategy==0.4.0.dev2",
     "tigrbl-identity-claims-bases==0.4.0.dev2",
     "tigrbl-digital-credential-bases==0.4.0.dev2",
     "tigrbl-attestation-bases==0.4.0.dev2",
@@ -147,6 +144,7 @@ dependencies = [
     "tigrbl-claim-http-method-concrete==0.4.0.dev2",
     "tigrbl-claim-http-uri-concrete==0.4.0.dev2",
     "tigrbl-claim-access-token-hash-concrete==0.4.0.dev2",
+    "tigrbl-claim-access-token-digest-concrete==0.4.0.dev2",
     "tigrbl-claim-sd-hash-concrete==0.4.0.dev2",
     "tigrbl-claim-eat-nonce-concrete==0.4.0.dev2",
     "tigrbl-claim-ueid-concrete==0.4.0.dev2",
@@ -172,7 +170,6 @@ dependencies = [
     "tigrbl-claim-phone-number-verified-concrete==0.4.0.dev2",
     "tigrbl-claim-address-concrete==0.4.0.dev2",
     "tigrbl-claim-updated-at-concrete==0.4.0.dev2",
-    "tigrbl-claim-access-token-hash-oidc-concrete==0.4.0.dev2",
     "tigrbl-claim-authorization-code-hash-concrete==0.4.0.dev2",
     "tigrbl-claim-state-hash-concrete==0.4.0.dev2",
     "tigrbl-claim-session-id-concrete==0.4.0.dev2",
@@ -193,7 +190,6 @@ dependencies = [
     "tigrbl-authorization-scope-set-matcher-concrete==0.4.0.dev2",
     "tigrbl-public-subject-identifier-concrete==0.4.0.dev2",
     "tigrbl-pairwise-subject-identifier-concrete==0.4.0.dev2",
-    "tigrbl-eap-acr-concrete==0.4.0.dev2",
     "tigrbl-identity-assurance-concrete==0.4.0.dev2",
     "tigrbl-capability==0.4.0.dev2",
     "tigrbl-default-capability==0.4.0.dev2",
@@ -209,8 +205,6 @@ dependencies = [
     "tigrbl-authz-policy-bases==0.4.0.dev2",
     "tigrbl-identity-model-bases==0.4.0.dev2",
     "tigrbl-jose-bases==0.4.0.dev2",
-    "tigrbl-oauth-bases==0.4.0.dev2",
-    "tigrbl-oidc-bases==0.4.0.dev2",
     "tigrbl-resource-server-bases==0.4.0.dev2",
     "tigrbl-security-certificate-mtls==0.1.0",
     "tigrbl-security-dpop-cnf-binding-validator==0.1.0",
@@ -421,8 +415,6 @@ tigrbl-authz-policy-bases = { path = "pkgs/05-bases/tigrbl-authz-policy-bases", 
 tigrbl-identity-model-bases = { path = "pkgs/05-bases/tigrbl-identity-model-bases", editable = true }
 tigrbl-jose-bases = { path = "pkgs/05-bases/tigrbl-jose-bases", editable = true }
 tigrbl-cose-bases = { path = "pkgs/05-bases/tigrbl-cose-bases", editable = true }
-tigrbl-oauth-bases = { path = "pkgs/05-bases/tigrbl-oauth-bases", editable = true }
-tigrbl-oidc-bases = { path = "pkgs/05-bases/tigrbl-oidc-bases", editable = true }
 tigrbl-resource-server-bases = { path = "pkgs/05-bases/tigrbl-resource-server-bases", editable = true }
 tigrbl-security-certificate-mtls = { path = "pkgs/20-providers/tigrbl-security-certificate-mtls", editable = true }
 tigrbl-security-dpop-cnf-binding-validator = { path = "pkgs/20-providers/tigrbl-security-dpop-cnf-binding-validator", editable = true }
@@ -456,10 +448,7 @@ tigrbl-authenticator-federated-oidc = { path = "pkgs/20-providers/tigrbl-authent
 tigrbl-auth = { path = "pkgs/70-facade/tigrbl-auth", editable = true }
 tigrbl-auth-protocol-oauth = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oauth", editable = true }
 tigrbl-auth-protocol-oidc-backchannel-replay-store = { path = "pkgs/deprecated/tigrbl-auth-protocol-oidc-backchannel-replay-store", editable = true }
-tigrbl-oauth-scope-matcher = { path = "pkgs/10-concrete/tigrbl-oauth-scope-matcher", editable = true }
 tigrbl-set-concrete = { path = "pkgs/10-concrete/tigrbl-set-concrete", editable = true }
-tigrbl-oidc-claims-concrete = { path = "pkgs/10-concrete/tigrbl-oidc-claims-concrete", editable = true }
-tigrbl-oidc-subject-strategy = { path = "pkgs/10-concrete/tigrbl-oidc-subject-strategy", editable = true }
 tigrbl-auth-protocol-oidc = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oidc", editable = true }
 tigrbl-auth-protocol-oid4vci = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oid4vci", editable = true }
 tigrbl-auth-protocol-oid4vp = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oid4vp", editable = true }
@@ -540,6 +529,7 @@ tigrbl-claim-eat-profile-concrete = { path = "pkgs/10-concrete/tigrbl-claim-eat-
 tigrbl-claim-http-method-concrete = { path = "pkgs/10-concrete/tigrbl-claim-http-method-concrete", editable = true }
 tigrbl-claim-http-uri-concrete = { path = "pkgs/10-concrete/tigrbl-claim-http-uri-concrete", editable = true }
 tigrbl-claim-access-token-hash-concrete = { path = "pkgs/10-concrete/tigrbl-claim-access-token-hash-concrete", editable = true }
+tigrbl-claim-access-token-digest-concrete = { path = "pkgs/10-concrete/tigrbl-claim-access-token-digest-concrete", editable = true }
 tigrbl-claim-sd-hash-concrete = { path = "pkgs/10-concrete/tigrbl-claim-sd-hash-concrete", editable = true }
 tigrbl-claim-eat-nonce-concrete = { path = "pkgs/10-concrete/tigrbl-claim-eat-nonce-concrete", editable = true }
 tigrbl-claim-ueid-concrete = { path = "pkgs/10-concrete/tigrbl-claim-ueid-concrete", editable = true }
@@ -565,7 +555,6 @@ tigrbl-claim-phone-number-concrete = { path = "pkgs/10-concrete/tigrbl-claim-pho
 tigrbl-claim-phone-number-verified-concrete = { path = "pkgs/10-concrete/tigrbl-claim-phone-number-verified-concrete", editable = true }
 tigrbl-claim-address-concrete = { path = "pkgs/10-concrete/tigrbl-claim-address-concrete", editable = true }
 tigrbl-claim-updated-at-concrete = { path = "pkgs/10-concrete/tigrbl-claim-updated-at-concrete", editable = true }
-tigrbl-claim-access-token-hash-oidc-concrete = { path = "pkgs/10-concrete/tigrbl-claim-access-token-hash-oidc-concrete", editable = true }
 tigrbl-claim-authorization-code-hash-concrete = { path = "pkgs/10-concrete/tigrbl-claim-authorization-code-hash-concrete", editable = true }
 tigrbl-claim-state-hash-concrete = { path = "pkgs/10-concrete/tigrbl-claim-state-hash-concrete", editable = true }
 tigrbl-claim-session-id-concrete = { path = "pkgs/10-concrete/tigrbl-claim-session-id-concrete", editable = true }
@@ -586,7 +575,6 @@ tigrbl-credential-profile-sd-jwt-vc = { path = "pkgs/50-protocols/tigrbl-credent
 tigrbl-authorization-scope-set-matcher-concrete = { path = "pkgs/10-concrete/tigrbl-authorization-scope-set-matcher-concrete", editable = true }
 tigrbl-public-subject-identifier-concrete = { path = "pkgs/10-concrete/tigrbl-public-subject-identifier-concrete", editable = true }
 tigrbl-pairwise-subject-identifier-concrete = { path = "pkgs/10-concrete/tigrbl-pairwise-subject-identifier-concrete", editable = true }
-tigrbl-eap-acr-concrete = { path = "pkgs/10-concrete/tigrbl-eap-acr-concrete", editable = true }
 tigrbl-identity-assurance-concrete = { path = "pkgs/10-concrete/tigrbl-identity-assurance-concrete", editable = true }
 tigrbl-capability = { path = "pkgs/10-concrete/tigrbl-capability", editable = true }
 tigrbl-default-capability = { path = "pkgs/10-concrete/tigrbl-default-capability", editable = true }
