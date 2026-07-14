@@ -54,7 +54,9 @@ class EvidenceVerificationResult:
 
 
 class AttestationAppraiser(Protocol):
-    def appraise(self, evidence: AttestationEvidence, /) -> AppraisalResult: ...
+    def appraise(
+        self, evidence: VerifiedAttestationEvidence, /
+    ) -> AppraisalResult: ...
 
 
 class EvidenceVerifierPort(Protocol):
@@ -64,7 +66,9 @@ class EvidenceVerifierPort(Protocol):
 
 
 class AttestationAppraiserPort(Protocol):
-    def appraise(self, evidence: AttestationEvidence, /) -> AppraisalResult: ...
+    def appraise(
+        self, evidence: VerifiedAttestationEvidence, /
+    ) -> AppraisalResult: ...
 
 
 class ReferenceMaterialProviderPort(Protocol):

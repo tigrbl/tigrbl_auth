@@ -81,6 +81,9 @@ CAPABILITY_PURPOSES = {
         "coordinate protocol-neutral artifact decoding, validation, encoding, "
         "and error normalization through replaceable processors"
     ),
+    "tigrbl-principal-authentication": (
+        "coordinate durable principal lookup with replaceable credential verifiers"
+    ),
     "tigrbl-replay-protection-capability": (
         "coordinate normalized replay reservations across protocol mappings, "
         "durable repositories, and replaceable providers"

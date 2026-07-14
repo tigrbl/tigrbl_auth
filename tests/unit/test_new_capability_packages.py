@@ -5,7 +5,18 @@ from tigrbl_digital_credential_issuance import DigitalCredentialIssuanceCapabili
 from tigrbl_digital_credential_presentation import (
     DigitalCredentialPresentationCapability,
 )
-from tigrbl_identity_contracts.attestation import AppraisalResult, AttestationEvidence
+from tigrbl_identity_contracts.attestation import (
+    AppraisalResult,
+    AttestationEvidence,
+    EvidenceVerificationResult,
+    VerifiedAttestationEvidence,
+)
+from tigrbl_identity_contracts.tokens import (
+    ProtectedTokenEnvelope,
+    TokenEnvelopeFormat,
+    TokenProfile,
+    VerifiedTokenEnvelope,
+)
 from tigrbl_identity_contracts.digital_credentials import (
     CredentialConfiguration,
     CredentialFormat,
@@ -77,10 +88,25 @@ class _Appraiser:
         return AppraisalResult(True, "approved")
 
 
+class _EvidenceVerifier:
+    def verify_evidence(self, evidence):
+        envelope = ProtectedTokenEnvelope(
+            evidence.raw or "verified-token",
+            TokenEnvelopeFormat.JWT,
+            TokenProfile.ENTITY_ATTESTATION_TOKEN,
+        )
+        verified = VerifiedAttestationEvidence(
+            evidence, VerifiedTokenEnvelope(envelope, evidence.claims)
+        )
+        return EvidenceVerificationResult(True, "verified", verified, evidence.claims)
+
+
 def test_attestation_capability_records_appraisal_outcome():
     records = []
     capability = AttestationAppraisalCapability(
-        _Appraiser(), lambda evidence, result: records.append(result)
+        _EvidenceVerifier(),
+        _Appraiser(),
+        recorder=lambda evidence, result: records.append(result),
     )
     assert capability.appraise(AttestationEvidence("profile", {})).trusted
     assert records[0].reason == "approved"

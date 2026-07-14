@@ -11,6 +11,7 @@ from tigrbl_default_capability import DefaultCapability
 from tigrbl_digital_credential_issuance import DigitalCredentialIssuanceCapability
 from tigrbl_digital_credential_presentation import DigitalCredentialPresentationCapability
 from tigrbl_identity_admin_control_plane import AdminControlPlane
+from tigrbl_identity_contracts.attestation import EvidenceVerificationResult
 from tigrbl_identity_contracts.capabilities import (
     CapabilityCallContext,
     CapabilityDefinition,
@@ -26,6 +27,11 @@ from tigrbl_workload_identity import WorkloadIdentityCapability
 class _Appraiser:
     def appraise(self, evidence):
         return evidence
+
+
+class _EvidenceVerifier:
+    def verify_evidence(self, evidence):
+        return EvidenceVerificationResult(False, "test verifier")
 
 
 class _Issuer:
@@ -179,7 +185,7 @@ def test_default_capability_applies_only_its_documented_default_state() -> None:
 
 def test_every_layer_40_capability_has_one_effective_operation_registry() -> None:
     capabilities = (
-        AttestationAppraisalCapability(_Appraiser()),
+        AttestationAppraisalCapability(_EvidenceVerifier(), _Appraiser()),
         DigitalCredentialIssuanceCapability(_Issuer()),
         DigitalCredentialPresentationCapability(
             _PresentationVerifier(), lambda audience, key: True, lambda holder, request: True
@@ -199,7 +205,10 @@ def test_every_layer_40_capability_has_one_effective_operation_registry() -> Non
         assert isinstance(capability, ICapability)
         assert definition.capability_id
         assert definition.version
-        assert set(capability.callables()) == set(operations)
+        required_operations = {
+            name for name, operation in operations.items() if operation.required
+        }
+        assert required_operations <= set(capability.callables()) <= set(operations)
         assert report["capability_id"] == definition.capability_id
         assert report["version"] == definition.version
         assert report["operations"] == tuple(operations)
@@ -215,7 +224,7 @@ def test_every_layer_40_capability_has_one_effective_operation_registry() -> Non
             "implementation",
         ):
             assert removed_field not in report
-        assert report["bound_operations"] == tuple(sorted(operations))
+        assert report["bound_operations"] == tuple(sorted(capability.callables()))
         capability_ids.add(definition.capability_id)
 
     assert len(capability_ids) == len(capabilities)

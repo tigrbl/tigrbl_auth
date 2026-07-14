@@ -8,6 +8,7 @@ from tigrbl_identity_contracts.attestation import (
     EvidenceVerifierPort,
     ReferenceIntegrityManifest,
     ReferenceMaterialProviderPort,
+    VerifiedAttestationEvidence,
 )
 
 
@@ -19,7 +20,9 @@ class EvidenceVerifierBase(EvidenceVerifierPort, ABC):
 
 
 class AttestationAppraiserBase(AttestationAppraiserPort, ABC):
-    def appraise(self, evidence: AttestationEvidence, /) -> AppraisalResult:
+    def appraise(
+        self, evidence: VerifiedAttestationEvidence, /
+    ) -> AppraisalResult:
         raise NotImplementedError
 
 
