@@ -246,7 +246,9 @@ async def test_platform_admin_rest_control_plane_requires_admin_key(
         token = await client.post("/token", data={})
 
     assert missing_key.status_code == 401
-    assert invalid_key.status_code in {401, 403}
+    assert missing_key.json()["error"] == "missing_admin_api_key"
+    assert invalid_key.status_code == 403
+    assert invalid_key.json()["error"] == "invalid_admin_api_key"
     assert tenant_admin_route.status_code == 401
     assert raw_tenant.status_code == 404
     assert raw_realm.status_code == 404

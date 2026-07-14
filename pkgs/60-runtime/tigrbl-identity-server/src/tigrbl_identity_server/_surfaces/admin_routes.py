@@ -14,7 +14,6 @@ from typing import Any, Final
 
 from tigrbl import TigrblRouter
 from tigrbl_identity_server.admin_auth import admin_api as admin_auth_api
-from tigrbl_identity_storage.tables.user import admin_api as admin_identities_api
 from tigrbl_identity_storage.tables.realm import admin_api as admin_realms_api
 from tigrbl_identity_storage_runtime.tenant_admin import router as admin_tenants_router
 from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
@@ -77,7 +76,6 @@ ADMIN_ROUTER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (
     {"mount_group": "admin_auth", "router": admin_auth_api},
     {"mount_group": "admin_realms", "router": admin_realms_api},
     {"mount_group": "admin_tenants", "router": admin_tenants_router},
-    {"mount_group": "admin_identities", "router": admin_identities_api},
 )
 
 

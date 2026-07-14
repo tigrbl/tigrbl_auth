@@ -104,9 +104,6 @@ def test_server_rest_router_bridges_warn_to_storage_owner(
                 "AdminPasswordResetCompleteIn",
                 "AdminPasswordResetRequestIn",
                 "AdminSessionOut",
-                "AdminIdentityOut",
-                "AdminIdentityProvisionIn",
-                "AdminIdentityUpdateIn",
             },
         ),
         (
@@ -157,15 +154,6 @@ def test_remaining_table_backed_rest_routers_import_schemas_from_table_modules(
 @pytest.mark.parametrize(
     ("module_name", "route_names"),
     [
-        (
-            "tigrbl_identity_storage.tables.user",
-            {
-                "admin_list_identities",
-                "admin_create_identity",
-                "admin_update_identity",
-                "admin_delete_identity",
-            },
-        ),
         (
             "tigrbl_identity_storage.tables.realm",
             {
@@ -236,9 +224,26 @@ def test_admin_auth_routes_live_in_server_runtime() -> None:
         "admin_session",
     }
     assert runtime_module.admin_api is runtime_module.admin_router
-    assert runtime_module.admin_api is not storage_module.admin_api
+    assert not hasattr(storage_module, "admin_api")
+    assert not hasattr(storage_module, "admin_router")
     assert sorted(name for name in route_names if not hasattr(runtime_module, name)) == []
     assert sorted(name for name in route_names if hasattr(storage_module, name)) == []
+
+
+def test_identity_admin_routes_live_in_platform_api_package() -> None:
+    api_module = importlib.import_module("tigrbl_auth_api_platform_admin.identities")
+    storage_module = importlib.import_module("tigrbl_identity_storage.tables.user")
+    route_names = {
+        "admin_list_identities",
+        "admin_create_identity",
+        "admin_update_identity",
+        "admin_delete_identity",
+    }
+
+    assert api_module.api is api_module.router
+    assert sorted(name for name in route_names if not hasattr(api_module, name)) == []
+    assert sorted(name for name in route_names if hasattr(storage_module, name)) == []
+    assert sorted(name for name in route_names if hasattr(storage_module.User, name)) == []
 
 
 def test_my_account_profile_routes_live_in_api_package() -> None:

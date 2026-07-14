@@ -53,11 +53,6 @@ PUBLIC_ROUTER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (
         "capabilities": ("admin-auth",),
         "router": admin_tenants_router,
     },
-    {
-        "mount_group": "admin_identities",
-        "capabilities": ("admin-auth",),
-        "router": admin_identities_api,
-    },
     {"mount_group": "login", "capabilities": ("login",), "router": login_router},
     {
         "mount_group": "authorize",
@@ -174,7 +169,6 @@ def build_public_router(
                 admin_auth_api,
                 admin_realms_api,
                 admin_tenants_router,
-                admin_identities_api,
             }:
                 continue
             if any(

@@ -51,7 +51,7 @@ TABLE_ROUTE_FUNCTION_ALLOWLIST = {
         "admin_reset_password",
         "admin_session",
     },
-    "_user_admin_identity_routes.py": {
+    "identities.py": {
         "admin_create_identity",
         "admin_delete_identity",
         "admin_list_identities",

@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING, Any, Awaitable, Callable
 
 from tigrbl_auth.api.products import build_product_app
 from tigrbl_auth.runtime import LazyASGIApplication
+from tigrbl_auth_api_platform_admin.identities import api as identity_api
 
 if TYPE_CHECKING:
     from tigrbl import TigrblApp
@@ -110,7 +111,12 @@ def _default_settings() -> object:
 def build_app(settings_obj: object | None = None) -> "TigrblApp":
     if settings_obj is None:
         settings_obj = _default_settings()
-    return PlatformAdminCors(build_product_app(PRODUCT_SURFACE, settings_obj))
+    app = build_product_app(PRODUCT_SURFACE, settings_obj)
+    app.include_router(identity_api)
+    app.admin_path_prefixes = tuple(
+        dict.fromkeys((*app.admin_path_prefixes, "/admin/identities"))
+    )
+    return PlatformAdminCors(app)
 
 
 app = LazyASGIApplication(build_app)

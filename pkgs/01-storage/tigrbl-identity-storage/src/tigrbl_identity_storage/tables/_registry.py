@@ -7,9 +7,6 @@ from tigrbl_identity_storage.framework import RestOltpTable
 from .realm import AdminRealmOut, AdminRealmProvisionIn, AdminRealmUpdateIn, Realm
 from .tenant import AdminTenantOut, AdminTenantProvisionIn, AdminTenantUpdateIn, Tenant
 from .user import (
-    AdminIdentityOut,
-    AdminIdentityProvisionIn,
-    AdminIdentityUpdateIn,
     AdminPasswordChangeIn,
     AdminPasswordResetCompleteIn,
     AdminPasswordResetRequestIn,

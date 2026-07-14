@@ -117,11 +117,6 @@ def test_storage_tables_own_table_backed_rest_shapes() -> None:
             "AdminTenantProvisionIn",
             "AdminTenantUpdateIn",
         },
-        "tigrbl_identity_storage.tables.user": {
-            "AdminIdentityOut",
-            "AdminIdentityProvisionIn",
-            "AdminIdentityUpdateIn",
-        },
     }
     for module_name, dto_names in table_modules.items():
         module = importlib.import_module(module_name)
@@ -144,6 +139,15 @@ def test_my_account_api_owns_its_rest_shapes() -> None:
     assert sorted(name for name in names if not hasattr(api_module, name)) == []
     assert sorted(name for name in names if hasattr(session_storage, name)) == []
     assert sorted(name for name in names if hasattr(user_storage, name)) == []
+
+
+def test_platform_admin_api_owns_identity_rest_shapes() -> None:
+    api_module = importlib.import_module("tigrbl_auth_api_platform_admin")
+    storage_module = importlib.import_module("tigrbl_identity_storage.tables.user")
+    names = {"AdminIdentityOut", "AdminIdentityProvisionIn", "AdminIdentityUpdateIn"}
+
+    assert sorted(name for name in names if not hasattr(api_module, name)) == []
+    assert sorted(name for name in names if hasattr(storage_module, name)) == []
 
 
 def test_table_backed_route_modules_do_not_import_contract_dtos() -> None:
