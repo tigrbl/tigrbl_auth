@@ -5771,7 +5771,9 @@ source = { editable = "pkgs/60-runtime/tigrbl-identity-server" }
 dependencies = [
     { name = "email-validator" },
     { name = "tigrbl" },
+    { name = "tigrbl-auth-api-oauth-introspection" },
     { name = "tigrbl-auth-protocol-gnap" },
+    { name = "tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-authz-policy-admin-gate" },
     { name = "tigrbl-core" },
     { name = "tigrbl-identity-contracts" },
@@ -5786,7 +5788,9 @@ dependencies = [
 requires-dist = [
     { name = "email-validator", specifier = ">=2.0" },
     { name = "tigrbl", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-auth-api-oauth-introspection", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-gnap", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy-admin-gate", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-core", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },

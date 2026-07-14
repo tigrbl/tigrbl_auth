@@ -15,7 +15,7 @@ from tigrbl_identity_storage_runtime.client_registration import (
 from tigrbl_identity_storage_runtime.device_authorization import (
     include_device_authorization_endpoint,
 )
-from tigrbl_identity_storage_runtime.introspection import include_introspection_endpoint
+from tigrbl_identity_server.introspection_surface import include_introspection_endpoint
 from tigrbl_identity_storage_runtime.logout import include_logout_endpoint
 from tigrbl_identity_storage_runtime.metadata.authorization_server_metadata import (
     include_rfc8414,
