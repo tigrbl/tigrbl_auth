@@ -4,13 +4,15 @@ from __future__ import annotations
 
 import warnings
 
-from tigrbl_identity_storage.schemas import (
+from tigrbl_identity_server.admin_auth import (
     AdminPasswordChangeIn,
     AdminPasswordResetCompleteIn,
     AdminPasswordResetRequestIn,
     AdminSessionOut,
-    AuthorizationCodeGrantForm,
     CredsIn,
+)
+from tigrbl_identity_storage.schemas import (
+    AuthorizationCodeGrantForm,
     DeviceAuthorizationIn,
     DeviceAuthorizationOut,
     DynamicClientRegistrationIn,
@@ -33,7 +35,7 @@ LoginTokenPair = TokenPair
 
 warnings.warn(
     "tigrbl_auth.api.rest.schemas is deprecated; import REST schemas from the owning "
-    "tigrbl_identity_storage.schemas module.",
+    "the owning API/runtime modules.",
     DeprecationWarning,
     stacklevel=2,
 )

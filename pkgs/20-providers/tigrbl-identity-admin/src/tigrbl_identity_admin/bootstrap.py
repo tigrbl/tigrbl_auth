@@ -9,7 +9,7 @@ from tigrbl_identity_core.digests import sha256_text_digest
 from tigrbl_identity_runtime.deployment import deployment_from_request
 from tigrbl_identity_runtime.engine_resolver import resolve_api_provider
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_jose.key_management import hash_pw
+from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
 from tigrbl_identity_server.security.handler_records import (
     create_handler_record,
     first_handler_record,
@@ -19,7 +19,9 @@ from tigrbl_identity_server.security.handler_records import (
 )
 from tigrbl_identity_storage.tables import Realm, Tenant, User
 from tigrbl_identity_storage.tables.engine import ENGINE
-from tigrbl_identity_storage.tables.user import DEFAULT_BOOTSTRAP_SUPERUSER_PASSWORD
+
+DEFAULT_BOOTSTRAP_SUPERUSER_ID = "FFFFFFFF-0000-0000-0000-000000000001"
+DEFAULT_BOOTSTRAP_SUPERUSER_PASSWORD = "AdminPass123!"
 
 
 def user_is_admin(user: User | None) -> bool:
@@ -110,10 +112,13 @@ async def ensure_default_superuser_async(settings_obj: object) -> dict[str, str 
             User,
             db,
             {
+                "id": DEFAULT_BOOTSTRAP_SUPERUSER_ID,
                 "tenant_id": tenant.id,
                 "username": username,
                 "email": email,
-                "password_hash": hash_pw(str(password)),
+                "password_hash": BcryptSecretHasher().hash_secret(
+                    str(password)
+                ).encoded,
                 "is_admin": True,
                 "is_superuser": True,
                 "must_change_password": bool(getattr(settings_obj, "bootstrap_admin_force_password_change", True)),
@@ -186,7 +191,7 @@ async def consume_password_reset_token(*, token: str, new_password: str, db: Any
         db,
         row.id,
         {
-            "password_hash": hash_pw(new_password),
+            "password_hash": BcryptSecretHasher().hash_secret(new_password).encoded,
             "password_reset_token_hash": None,
             "password_reset_expires_at": None,
             "must_change_password": False,
@@ -195,6 +200,8 @@ async def consume_password_reset_token(*, token: str, new_password: str, db: Any
 
 
 __all__ = [
+    "DEFAULT_BOOTSTRAP_SUPERUSER_ID",
+    "DEFAULT_BOOTSTRAP_SUPERUSER_PASSWORD",
     "consume_password_reset_token",
     "ensure_default_superuser_async",
     "issue_password_reset_token",

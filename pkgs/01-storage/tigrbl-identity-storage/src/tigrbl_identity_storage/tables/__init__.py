@@ -41,12 +41,6 @@ def _attach_custom_op_schemas() -> None:
     set_schema(RevokedToken, "revoke", in_=RevocationIn, out=RevocationOut)
     set_schema(LogoutState, "logout", in_=LogoutIn, out=LogoutOut)
 
-    set_schema(User, "admin_login", in_=AdminCredsIn, out=AdminSessionOut)
-    set_schema(User, "admin_session", out=AdminSessionOut)
-    set_schema(User, "admin_logout", out=AdminSessionOut)
-    set_schema(User, "admin_forgot_password", in_=AdminPasswordResetRequestIn, out=AdminSessionOut)
-    set_schema(User, "admin_reset_password", in_=AdminPasswordResetCompleteIn, out=AdminSessionOut)
-    set_schema(User, "admin_change_password", in_=AdminPasswordChangeIn, out=AdminSessionOut)
 
 
 _ensure_runtime_bindings()

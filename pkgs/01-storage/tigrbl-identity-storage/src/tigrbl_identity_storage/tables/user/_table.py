@@ -4,13 +4,9 @@ from __future__ import annotations
 
 import uuid
 import datetime as dt
-from typing import Any
 
 from tigrbl_identity_storage.framework import (
     UserBase,
-    Bootstrappable,
-    BaseModel,
-    Field,
     LargeBinary,
     Mapped,
     Boolean,
@@ -22,51 +18,12 @@ from tigrbl_identity_storage.framework import (
     S,
     acol,
     ColumnSpec,
-    constr,
-    op_ctx,
 )
 
-from tigrbl_identity_jose.key_management import hash_pw
-
 DEFAULT_BOOTSTRAP_SUPERUSER_ID = uuid.UUID("FFFFFFFF-0000-0000-0000-000000000001")
-DEFAULT_BOOTSTRAP_SUPERUSER_PASSWORD = "AdminPass123!"
-_password = constr(min_length=8, max_length=256)
 
 
-class CredsIn(BaseModel):
-    identifier: constr(strip_whitespace=True, min_length=3, max_length=120)
-    password: _password
-
-
-class AdminPasswordResetRequestIn(BaseModel):
-    identifier: constr(strip_whitespace=True, min_length=3, max_length=120)
-
-
-class AdminPasswordResetCompleteIn(BaseModel):
-    token: constr(strip_whitespace=True, min_length=16, max_length=256)
-    password: _password
-
-
-class AdminPasswordChangeIn(BaseModel):
-    current_password: _password
-    new_password: _password
-
-
-class AdminSessionOut(BaseModel):
-    authenticated: bool
-    session_id: str | None = None
-    user_id: str | None = None
-    tenant_id: str | None = None
-    username: str | None = None
-    email: str | None = None
-    is_admin: bool = False
-    is_superuser: bool = False
-    must_change_password: bool = False
-    roles: list[str] = Field(default_factory=list)
-    debug_reset_token: str | None = None
-
-
-class User(UserBase, Bootstrappable):
+class User(UserBase):
     __table_args__ = ({"extend_existing": True, "schema": "authn"},)
 
     username: Mapped[str] = acol(
@@ -164,46 +121,7 @@ class User(UserBase, Bootstrappable):
             scopes.append("tigrbl_auth:superuser")
         return tuple(scopes)
 
-    DEFAULT_ROWS = [
-        {
-            "id": DEFAULT_BOOTSTRAP_SUPERUSER_ID,
-            "tenant_id": uuid.UUID("FFFFFFFF-0000-0000-0000-000000000000"),
-            "username": "admin",
-            "email": "admin@example.com",
-            "password_hash": hash_pw(DEFAULT_BOOTSTRAP_SUPERUSER_PASSWORD),
-            "is_admin": True,
-            "is_superuser": True,
-            "must_change_password": True,
-            "is_active": True,
-        }
-    ]
-
-
-@op_ctx(bind=User, alias="lookup_by_identifier", target="custom", arity="collection", rest=False)
-async def lookup_by_identifier(cls: type[User], ctx: dict[str, Any]):
-    from .._ops import field, list_records
-
-    identifier = str((ctx.get("payload") or {}).get("identifier") or "")
-    if not identifier:
-        return None
-    for row in await list_records(cls, ctx["db"]):
-        if not bool(field(row, "is_active", True)):
-            continue
-        if identifier in {field(row, "username"), field(row, "email")}:
-            return row
-    return None
-
-
-ADMIN_AUTH_TAGS = ["Admin Auth"]
-
-
 __all__ = [
-    "AdminPasswordChangeIn",
-    "AdminPasswordResetCompleteIn",
-    "AdminPasswordResetRequestIn",
-    "AdminSessionOut",
-    "CredsIn",
     "DEFAULT_BOOTSTRAP_SUPERUSER_ID",
-    "DEFAULT_BOOTSTRAP_SUPERUSER_PASSWORD",
     "User",
 ]

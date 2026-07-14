@@ -1,28 +1,57 @@
-"""Admin authentication routes bound to the User storage table."""
+"""Admin-auth HTTP models and routes backed by durable identity operations."""
 
 from __future__ import annotations
 
 from typing import Any
 
+from pydantic import BaseModel, Field, constr
 from tigrbl import TigrblRouter
 from tigrbl_identity_storage.framework import Depends, HTTPException, JSONResponse, RedirectResponse, Request, Response, status
 
 from tigrbl_identity_storage.tables.engine import get_db
-from tigrbl_identity_storage.tables.user._table import (
-    ADMIN_AUTH_TAGS,
-    AdminPasswordChangeIn,
-    AdminPasswordResetCompleteIn,
-    AdminPasswordResetRequestIn,
-    AdminSessionOut,
-    CredsIn,
-    User,
-)
+from tigrbl_identity_storage.tables import User
 from tigrbl_identity_storage_runtime.ops.common import (
-    first_record,
     read_record,
     update_record,
 )
 from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
+
+
+ADMIN_AUTH_TAGS = ["Admin Auth"]
+_password = constr(min_length=8, max_length=256)
+
+
+class CredsIn(BaseModel):
+    identifier: constr(strip_whitespace=True, min_length=3, max_length=120)
+    password: _password
+
+
+class AdminPasswordResetRequestIn(BaseModel):
+    identifier: constr(strip_whitespace=True, min_length=3, max_length=120)
+
+
+class AdminPasswordResetCompleteIn(BaseModel):
+    token: constr(strip_whitespace=True, min_length=16, max_length=256)
+    password: _password
+
+
+class AdminPasswordChangeIn(BaseModel):
+    current_password: _password
+    new_password: _password
+
+
+class AdminSessionOut(BaseModel):
+    authenticated: bool
+    session_id: str | None = None
+    user_id: str | None = None
+    tenant_id: str | None = None
+    username: str | None = None
+    email: str | None = None
+    is_admin: bool = False
+    is_superuser: bool = False
+    must_change_password: bool = False
+    roles: list[str] = Field(default_factory=list)
+    debug_reset_token: str | None = None
 
 
 admin_api = admin_router = TigrblRouter()
@@ -50,10 +79,13 @@ def _admin_session_payload(
 
 
 async def _find_user_by_identifier(db: Any, identifier: str) -> User | None:
-    row = await first_record(User, db, {"username": identifier})
-    if row is not None:
-        return row
-    return await first_record(User, db, {"email": identifier})
+    from tigrbl_identity_storage_runtime.ops.identities import (
+        lookup_identity_by_identifier,
+    )
+
+    return await lookup_identity_by_identifier(
+        {"payload": {"identifier": identifier}, "db": db}
+    )
 
 
 async def _resolve_admin_session_and_user(request: Request, db: Any) -> tuple[Any, User]:
@@ -181,6 +213,11 @@ async def admin_change_password(
 
 
 __all__ = [
+    "AdminPasswordChangeIn",
+    "AdminPasswordResetCompleteIn",
+    "AdminPasswordResetRequestIn",
+    "AdminSessionOut",
+    "CredsIn",
     "admin_api",
     "admin_router",
     "admin_change_password",

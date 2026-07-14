@@ -5264,6 +5264,7 @@ dependencies = [
     { name = "tigrbl-identity-identities-concrete" },
     { name = "tigrbl-identity-jose" },
     { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-secret-hashing-bcrypt-provider" },
     { name = "tigrbl-trust-federation-graph-concrete" },
 ]
 
@@ -5277,6 +5278,7 @@ requires-dist = [
     { name = "tigrbl-identity-identities-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-jose", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-secret-hashing-bcrypt-provider", specifier = "==0.1.0" },
     { name = "tigrbl-trust-federation-graph-concrete", specifier = "==0.4.0.dev2" },
 ]
 

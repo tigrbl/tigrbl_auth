@@ -61,7 +61,8 @@ def test_server_has_no_rest_schema_bucket_module() -> None:
 def test_rest_schema_facade_points_to_table_owned_schemas() -> None:
     with pytest.warns(DeprecationWarning):
         schemas = importlib.reload(importlib.import_module("tigrbl_auth.api.rest.schemas"))
-    from tigrbl_identity_storage.schemas import CredsIn, TokenPair
+    from tigrbl_identity_server.admin_auth import CredsIn
+    from tigrbl_identity_storage.schemas import TokenPair
 
     assert schemas.CredsIn is CredsIn
     assert schemas.TokenPair is TokenPair
@@ -98,29 +99,6 @@ def test_server_rest_router_bridges_warn_to_storage_owner(
         )
     )
     assert not path.exists()
-
-
-@pytest.mark.parametrize(
-    ("module_name", "names"),
-    [
-        (
-            "tigrbl_identity_storage.tables.user",
-            {
-                "AdminPasswordChangeIn",
-                "AdminPasswordResetCompleteIn",
-                "AdminPasswordResetRequestIn",
-                "AdminSessionOut",
-            },
-        ),
-    ],
-)
-def test_table_backed_rest_schemas_live_on_table_modules(
-    module_name: str, names: set[str]
-) -> None:
-    module = importlib.import_module(module_name)
-
-    missing = sorted(name for name in names if not hasattr(module, name))
-    assert missing == []
 
 
 @pytest.mark.parametrize(
@@ -217,6 +195,15 @@ def test_admin_auth_routes_live_in_server_runtime() -> None:
     assert not hasattr(storage_module, "admin_router")
     assert sorted(name for name in route_names if not hasattr(runtime_module, name)) == []
     assert sorted(name for name in route_names if hasattr(storage_module, name)) == []
+    for dto_name in {
+        "AdminPasswordChangeIn",
+        "AdminPasswordResetCompleteIn",
+        "AdminPasswordResetRequestIn",
+        "AdminSessionOut",
+        "CredsIn",
+    }:
+        assert hasattr(runtime_module, dto_name)
+        assert not hasattr(storage_module, dto_name)
 
 
 def test_identity_admin_routes_live_in_platform_api_package() -> None:

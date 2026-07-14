@@ -10,7 +10,7 @@ from httpx import ASGITransport, AsyncClient
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tigrbl_auth.api.app import build_app
+from tigrbl_auth_api_platform_admin.app import build_app
 from tigrbl_auth.config.deployment import DEFAULT_VALUES, resolve_deployment
 from tigrbl_auth.crypto import hash_pw
 from tigrbl_auth.db import get_db as legacy_get_db
@@ -21,7 +21,7 @@ from tigrbl_auth.runtime.engine_resolver import (
     resolve_default_provider,
     set_default_provider,
 )
-from tigrbl_auth.services.admin_identity_bootstrap import ensure_default_superuser_async
+from tigrbl_identity_admin.bootstrap import ensure_default_superuser_async
 from tigrbl_auth.tables import Tenant, User, get_db as tables_get_db
 from tigrbl_auth.tables.engine import get_db as engine_get_db
 
@@ -82,7 +82,7 @@ async def _ensure_runtime_tables(provider: object) -> None:
 async def _admin_client(tmp_path: Path, db_session: AsyncSession, test_db_engine):
     settings_obj = _settings(tmp_path)
     deployment = resolve_deployment(settings_obj, plugin_mode="mixed")
-    app = build_app(settings_obj, deployment=deployment)
+    app = build_app(settings_obj)
     provider = test_db_engine.provider
     original_admin_router = resolve_api_provider(AdminRouter)
     original_app = resolve_api_provider(app)

@@ -6,14 +6,7 @@ from tigrbl_identity_storage.framework import RestOltpTable
 
 from .realm import Realm
 from .tenant import Tenant
-from .user import (
-    AdminPasswordChangeIn,
-    AdminPasswordResetCompleteIn,
-    AdminPasswordResetRequestIn,
-    AdminSessionOut,
-    CredsIn as AdminCredsIn,
-    User,
-)
+from .user import User
 from .client import Client, _CLIENT_ID_RE
 from .client_registration import (
     ClientRegistration,

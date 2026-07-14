@@ -27,7 +27,6 @@ def test_custom_op_schemas_are_reachable_from_tigrbl_table_schema_namespace() ->
         PushedAuthorizationRequest,
         RevokedToken,
         TokenRecord,
-        User,
     )
     from tigrbl_identity_storage.tables.client_registration import (
         DynamicClientRegistrationIn,
@@ -46,8 +45,6 @@ def test_custom_op_schemas_are_reachable_from_tigrbl_table_schema_namespace() ->
         RefreshIn,
         TokenPair,
     )
-    from tigrbl_identity_storage.tables.user import AdminSessionOut, CredsIn as AdminCredsIn
-
     from tigrbl_identity_storage.tables.auth_session import CredsIn, TokenPair as LoginTokenPair
     from tigrbl_identity_storage_runtime.login import login
 
@@ -69,8 +66,19 @@ def test_custom_op_schemas_are_reachable_from_tigrbl_table_schema_namespace() ->
     assert RevokedToken.schemas.revoke.out is RevocationOut
     assert LogoutState.schemas.logout.in_ is LogoutIn
     assert LogoutState.schemas.logout.out is LogoutOut
-    assert User.schemas.admin_login.in_ is AdminCredsIn
-    assert User.schemas.admin_session.out is AdminSessionOut
+
+
+def test_admin_auth_schemas_are_owned_by_the_server_runtime() -> None:
+    from tigrbl_identity_server import admin_auth
+    from tigrbl_identity_storage.tables import User
+    from tigrbl_identity_storage.tables import user as storage_user
+
+    assert admin_auth.CredsIn.__module__ == admin_auth.__name__
+    assert admin_auth.AdminSessionOut.__module__ == admin_auth.__name__
+    assert not hasattr(storage_user, "CredsIn")
+    assert not hasattr(storage_user, "AdminSessionOut")
+    assert not hasattr(User.schemas, "admin_login")
+    assert not hasattr(User.schemas, "admin_session")
 
 
 def test_storage_tables_export_table_inventory_without_schema_namespaces() -> None:
@@ -138,9 +146,15 @@ def test_table_schema_alias_exports_cover_router_openapi_components() -> None:
     )
 
     component_names = set(surface_api.openapi().get("components", {}).get("schemas", {}))
-    missing = sorted(name for name in component_names if not hasattr(storage_schemas, name))
+    external_api_components = {"AdminSessionOut"}
+    missing = sorted(
+        name
+        for name in component_names
+        if not hasattr(storage_schemas, name) and name not in external_api_components
+    )
 
     assert missing == []
+    assert "AdminSessionOut" in component_names
     assert storage_schemas.CredentialServiceKeyCreateRequest.__name__ in component_names
     assert storage_schemas.TokenPair.__name__ in component_names
 
