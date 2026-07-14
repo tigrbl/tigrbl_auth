@@ -1,5 +1,6 @@
 """Runtime helpers for composing Tigrbl identity storage with runtime engines."""
 
+from .consent_lifecycle import record_consent_async, revoke_consent_async
 from .define import *
 from .derive import *
 from .dpop_state import *
@@ -10,6 +11,10 @@ from .initialize import *
 from .make import *
 from .migrations import *
 from .ops import *
+from .registration_lifecycle import (
+    get_client_registration_async,
+    upsert_client_registration_async,
+)
 from .session_lifecycle import *
 from .tables import *
 from .token_persistence import *

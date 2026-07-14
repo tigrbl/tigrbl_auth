@@ -171,6 +171,15 @@ def test_tigrbl_auth_persistence_facade_reexports_storage_helpers() -> None:
         assert getattr(auth_persistence, name) is getattr(storage_persistence, name)
 
 
+def test_runtime_owns_consent_and_registration_lifecycle_adapters() -> None:
+    runtime = importlib.import_module("tigrbl_identity_storage_runtime")
+
+    assert callable(runtime.record_consent_async)
+    assert callable(runtime.revoke_consent_async)
+    assert callable(runtime.get_client_registration_async)
+    assert callable(runtime.upsert_client_registration_async)
+
+
 def test_tigrbl_auth_migration_facades_reexport_storage_helpers() -> None:
     auth_migrations = importlib.import_module("tigrbl_auth.migrations")
     auth_runtime = importlib.import_module("tigrbl_auth.migrations.runtime")

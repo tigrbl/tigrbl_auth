@@ -4,9 +4,9 @@ from __future__ import annotations
 
 from types import SimpleNamespace
 
-from tigrbl_identity_storage.tables.client_registration import ClientRegistration
 from tigrbl_identity_storage.tables.engine import storage_session
 
+from .registration_lifecycle import get_client_registration_async
 from .session_lifecycle import (
     bind_session_client_async,
     create_session_async,
@@ -16,7 +16,6 @@ from .session_lifecycle import (
     touch_session_async,
 )
 
-from .ops.common import first_table_record
 from .ops.oidc_logout import (
     ensure_logout_for_session,
     latest_logout_for_session,
@@ -25,13 +24,6 @@ from .ops.oidc_logout import (
 )
 from .ops.oidc_replay import register_backchannel_logout_replay
 from .ops.sessions import terminate_session
-
-
-async def get_client_registration_async(client_id):
-    async with storage_session() as db:
-        return await first_table_record(
-            ClientRegistration, db, {"client_id": client_id}
-        )
 
 
 async def get_latest_logout_for_session_async(session_id):
