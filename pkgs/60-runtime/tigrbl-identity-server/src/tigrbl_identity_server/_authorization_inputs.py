@@ -1,26 +1,9 @@
-"""Runtime-owned OAuth/OIDC authorization endpoint."""
+"""OAuth/OIDC authorization-input resolution for runtime composition."""
 
 from __future__ import annotations
 
-import json
-from datetime import datetime, timedelta, timezone
 from typing import Any
-from urllib.parse import urlencode
-from uuid import UUID, uuid4
-
-from tigrbl import (
-    Depends,
-    HTMLResponse,
-    RedirectResponse,
-    Request,
-    TigrblRouter,
-)
-from tigrbl.engine import HybridSession as AsyncSession
 from tigrbl.runtime.status import HTTPException, status
-from tigrbl_identity_storage.tables.auth_code import AuthCode
-from .engine import get_db
-
-router = TigrblRouter()
 
 
 def _coerce_multi_value(value: Any) -> list[str]:

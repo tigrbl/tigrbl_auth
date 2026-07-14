@@ -281,10 +281,10 @@ def test_token_endpoint_carrier_and_runtime_live_above_storage() -> None:
             {"login"},
         ),
         (
-            "tigrbl_identity_storage_runtime.authorization",
+            "tigrbl_identity_server.authorization_surface",
             "tigrbl_identity_storage.tables.auth_code",
             "AuthCode",
-            {"authorize"},
+            set(),
         ),
         (
             "tigrbl_identity_server.client_registration_surface",
@@ -330,7 +330,7 @@ def test_moved_oauth_publishers_live_above_storage_table_modules(
 
     assert hasattr(runtime_module, "router")
     if runtime_module_name in {
-        "tigrbl_identity_storage_runtime.authorization",
+        "tigrbl_identity_server.authorization_surface",
         "tigrbl_identity_storage_runtime.login",
         "tigrbl_identity_server.client_registration_surface",
         "tigrbl_identity_server.par_surface",
@@ -344,11 +344,6 @@ def test_moved_oauth_publishers_live_above_storage_table_modules(
     assert not hasattr(storage_module, "router")
     missing_class_ops = sorted(name for name in route_names if hasattr(table_class, name))
     assert missing_class_ops == []
-    if runtime_module_name == "tigrbl_identity_storage_runtime.authorization":
-        from tigrbl_identity_storage_runtime import AuthCodeRuntimeSpec
-
-        runtime_ops = {operation.alias for operation in AuthCodeRuntimeSpec.ops}
-        assert route_names <= runtime_ops
 
 
 def test_consent_account_routes_live_above_storage_table_module() -> None:

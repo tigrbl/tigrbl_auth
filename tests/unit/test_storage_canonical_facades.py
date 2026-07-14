@@ -5,6 +5,8 @@ import importlib
 import importlib.util
 from pathlib import Path
 
+import pytest
+
 
 def test_storage_does_not_export_provenance_builders() -> None:
     assert importlib.util.find_spec("tigrbl_identity_storage.provenance") is None
@@ -421,7 +423,9 @@ def test_executable_auth_flow_composition_lives_above_storage() -> None:
 
     authz_surface = importlib.import_module("tigrbl_identity_server.authz_surface")
     auth_flows = importlib.import_module("tigrbl_identity_server.auth_flows")
-    authorization = importlib.import_module("tigrbl_identity_storage_runtime.authorization")
+    authorization = importlib.import_module(
+        "tigrbl_identity_server.authorization_surface"
+    )
 
     assert not hasattr(authz_surface, "api")
     assert not hasattr(auth_flows, "api")
@@ -429,6 +433,8 @@ def test_executable_auth_flow_composition_lives_above_storage() -> None:
     assert hasattr(authz_surface, "router")
     assert hasattr(auth_flows, "router")
     assert hasattr(authorization, "router")
+    with pytest.raises(ModuleNotFoundError):
+        importlib.import_module("tigrbl_identity_storage_runtime.authorization")
 
 
 def test_executable_account_surface_composition_lives_above_storage() -> None:

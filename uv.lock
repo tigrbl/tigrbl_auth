@@ -2316,6 +2316,17 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-auth-api-oauth-authorization"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/80-apis/tigrbl-auth-api-oauth-authorization" }
+dependencies = [
+    { name = "tigrbl" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl", specifier = "==0.4.4.dev1" }]
+
+[[package]]
 name = "tigrbl-auth-api-oauth-introspection"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/80-apis/tigrbl-auth-api-oauth-introspection" }
@@ -2779,6 +2790,7 @@ dependencies = [
     { name = "tigrbl-attestation-protocol-eat" },
     { name = "tigrbl-attestation-reference-provider" },
     { name = "tigrbl-auth" },
+    { name = "tigrbl-auth-api-oauth-authorization" },
     { name = "tigrbl-auth-api-oauth-introspection" },
     { name = "tigrbl-auth-api-oauth-par" },
     { name = "tigrbl-auth-api-oauth-registration" },
@@ -3134,6 +3146,7 @@ requires-dist = [
     { name = "tigrbl-attestation-protocol-eat", editable = "pkgs/50-protocols/tigrbl-attestation-protocol-eat" },
     { name = "tigrbl-attestation-reference-provider", editable = "pkgs/20-providers/tigrbl-attestation-reference-provider" },
     { name = "tigrbl-auth", editable = "pkgs/70-facade/tigrbl-auth" },
+    { name = "tigrbl-auth-api-oauth-authorization", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-authorization" },
     { name = "tigrbl-auth-api-oauth-introspection", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-introspection" },
     { name = "tigrbl-auth-api-oauth-par", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-par" },
     { name = "tigrbl-auth-api-oauth-registration", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-registration" },
@@ -5876,6 +5889,7 @@ source = { editable = "pkgs/60-runtime/tigrbl-identity-server" }
 dependencies = [
     { name = "email-validator" },
     { name = "tigrbl" },
+    { name = "tigrbl-auth-api-oauth-authorization" },
     { name = "tigrbl-auth-api-oauth-introspection" },
     { name = "tigrbl-auth-api-oauth-par" },
     { name = "tigrbl-auth-api-oauth-registration" },
@@ -5901,6 +5915,7 @@ dependencies = [
 requires-dist = [
     { name = "email-validator", specifier = ">=2.0" },
     { name = "tigrbl", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-auth-api-oauth-authorization", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oauth-introspection", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oauth-par", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oauth-registration", specifier = "==0.4.0.dev2" },

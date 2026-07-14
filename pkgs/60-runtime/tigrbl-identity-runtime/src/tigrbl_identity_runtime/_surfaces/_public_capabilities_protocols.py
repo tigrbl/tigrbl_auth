@@ -136,7 +136,7 @@ PROTOCOL_PUBLIC_CAPABILITIES: Final[tuple[dict[str, Any], ...]] = (
         "flags": ("enable_rfc6749", "enable_oidc_core"),
         "summary": "Authorization endpoint",
         "tags": ("oauth2", "oidc"),
-        "router_ref": "tigrbl_identity_storage_runtime.authorization:router",
+        "router_ref": "tigrbl_identity_server.authorization_surface:router",
         "targets": (
             "RFC 6749",
             "OIDC Core 1.0",

@@ -1,4 +1,4 @@
-"""Runtime-owned OAuth/OIDC authorization endpoint."""
+"""OAuth/OIDC authorization orchestration independent of route mounting."""
 
 from __future__ import annotations
 
@@ -9,19 +9,9 @@ from typing import Any
 from urllib.parse import urlencode
 from uuid import UUID, uuid4
 
-from tigrbl import (
-    Depends,
-    HTMLResponse,
-    RedirectResponse,
-    Request,
-    TigrblRouter,
-)
-from tigrbl.engine import HybridSession as AsyncSession
+from tigrbl import HTMLResponse, RedirectResponse, Request
 from tigrbl.runtime.status import HTTPException, status
 from tigrbl_identity_storage.tables.auth_code import AuthCode
-from .engine import get_db
-
-router = TigrblRouter()
 
 
 from ._authorization_inputs import (
@@ -319,53 +309,4 @@ async def authorize_request(*, request: Request, db: Any, params: dict[str, Any]
     return response
 
 
-@router.route("/authorize", methods=["GET"])
-async def authorize(
-    request: Request,
-    response_type: str | None = None,
-    client_id: str | None = None,
-    redirect_uri: str | None = None,
-    scope: str | None = None,
-    response_mode: str | None = None,
-    state: str | None = None,
-    nonce: str | None = None,
-    code_challenge: str | None = None,
-    code_challenge_method: str | None = None,
-    prompt: str | None = None,
-    max_age: int | None = None,
-    login_hint: str | None = None,
-    claims: str | None = None,
-    request_uri: str | None = None,
-    request_object: str | None = None,
-    authorization_details: str | None = None,
-    db: AsyncSession = Depends(get_db),
-) -> Any:
-    params = {
-        "response_type": response_type or request.query_params.get("response_type"),
-        "client_id": client_id or request.query_params.get("client_id"),
-        "redirect_uri": redirect_uri or request.query_params.get("redirect_uri"),
-        "scope": scope or request.query_params.get("scope"),
-        "response_mode": response_mode or request.query_params.get("response_mode"),
-        "state": state or request.query_params.get("state"),
-        "nonce": nonce or request.query_params.get("nonce"),
-        "code_challenge": code_challenge or request.query_params.get("code_challenge"),
-        "code_challenge_method": code_challenge_method or request.query_params.get("code_challenge_method"),
-        "prompt": prompt or request.query_params.get("prompt"),
-        "max_age": max_age if max_age is not None else request.query_params.get("max_age"),
-        "login_hint": login_hint or request.query_params.get("login_hint"),
-        "claims": claims or request.query_params.get("claims"),
-        "request_uri": request_uri or request.query_params.get("request_uri"),
-        "request": request_object or request.query_params.get("request"),
-        "authorization_details": authorization_details or request.query_params.get("authorization_details"),
-        "resource": list(request.query_params.getlist("resource"))
-        if hasattr(request.query_params, "getlist")
-        else None,
-    }
-    return await authorize_request(request=request, db=db, params=params)
-
-
-__all__ = [
-    "authorize",
-    "authorize_request",
-    "router",
-]
+__all__ = ["authorize_request"]
