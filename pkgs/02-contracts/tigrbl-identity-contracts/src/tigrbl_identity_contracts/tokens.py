@@ -107,6 +107,23 @@ class TokenIntrospectionResult:
     reason: str | None = None
 
 
+@dataclass(frozen=True, slots=True)
+class TokenRevocationRequest:
+    token: str
+    token_type_hint: str | None = None
+    reason: str = "revoked"
+
+    def __post_init__(self) -> None:
+        if not self.token:
+            raise ValueError("token is required for revocation")
+
+
+@dataclass(frozen=True, slots=True)
+class TokenRevocationResult:
+    revoked: bool = True
+    token_reference: str | None = None
+
+
 class TokenIssuerPort(Protocol):
     def issue(
         self, profile: TokenProfile, claims: Mapping[str | int, object], /
@@ -131,6 +148,8 @@ __all__ = [
     "TokenIssuerPort",
     "TokenIntrospectionRequest",
     "TokenIntrospectionResult",
+    "TokenRevocationRequest",
+    "TokenRevocationResult",
     "TokenEnvelopeFormat",
     "TokenProfile",
     "ProtectedTokenEnvelope",

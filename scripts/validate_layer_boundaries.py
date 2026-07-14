@@ -94,6 +94,9 @@ CAPABILITY_PURPOSES = {
     "tigrbl-token-introspection-capability": (
         "coordinate protocol-neutral token-state lookup and profile validation"
     ),
+    "tigrbl-token-revocation-capability": (
+        "coordinate durable token revocation with optional audit recording"
+    ),
     "tigrbl-workload-identity": (
         "coordinate workload credential retrieval and identity verification"
     ),

@@ -41,6 +41,9 @@ def test_layer_40_contains_only_registered_multi_component_use_cases() -> None:
         "tigrbl-token-introspection-capability": (
             "coordinate protocol-neutral token-state lookup and profile validation"
         ),
+        "tigrbl-token-revocation-capability": (
+            "coordinate durable token revocation with optional audit recording"
+        ),
         "tigrbl-workload-identity": (
             "coordinate workload credential retrieval and identity verification"
         ),
