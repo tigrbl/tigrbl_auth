@@ -13,7 +13,6 @@ from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_server.security.context import principal_var
 from tigrbl_identity_server.security.user_lookup import first_user_by_filters
 from tigrbl_auth_protocol_oidc.standards.session_mgmt import resolve_browser_session
-from tigrbl_authn_credentials.backends import ApiKeyBackend, AuthError, PasswordBackend
 from tigrbl_identity_jose.jwt_coder import JWTCoder, InvalidTokenError
 from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import presented_certificate_thumbprint
 from tigrbl_auth_protocol_oauth.standards.bearer_token_usage import extract_bearer_token
@@ -21,21 +20,8 @@ from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import verify_acces
 from tigrbl_identity_contracts.principals import PrincipalLike
 from tigrbl_identity_storage.tables import User
 from tigrbl_identity_storage_runtime.engine import get_db
-from tigrbl_identity_storage_runtime.ops.authentication_credentials import (
-    digest_api_key,
-    find_api_keys,
-    find_service_keys,
-    mark_credential_used,
-    resolve_user_principal,
-)
+from tigrbl_identity_server.security.api_key_authentication import authenticate_api_key
 
-_api_key_backend = ApiKeyBackend(
-    digest_key=digest_api_key,
-    find_api_keys=find_api_keys,
-    find_service_keys=find_service_keys,
-    resolve_user=resolve_user_principal,
-    mark_used=mark_credential_used,
-)
 _jwt_coder: JWTCoder | None = None
 
 
@@ -55,11 +41,7 @@ async def _user_from_jwt(token: str, db: AsyncSession, *, cert_thumbprint: str |
 
 
 async def _user_from_api_key(raw_key: str, db: AsyncSession) -> PrincipalLike | None:
-    try:
-        principal, _ = await _api_key_backend.authenticate(db, raw_key)
-        return principal
-    except AuthError:
-        return None
+    return await authenticate_api_key(raw_key, db)
 
 
 async def _user_from_browser_session(request: Request, db: AsyncSession) -> User | None:
@@ -134,6 +116,4 @@ __all__ = [
     "get_current_principal",
     "get_principal",
     "principal_var",
-    "PasswordBackend",
-    "ApiKeyBackend",
 ]

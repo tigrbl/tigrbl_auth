@@ -11,6 +11,8 @@ from .authenticators import AuthenticationEvidence
 class RecordAuthenticationResult:
     authenticated: bool
     record: object | None = None
+    credential_record: object | None = None
+    principal_kind: str | None = None
     evidence: AuthenticationEvidence = field(default_factory=AuthenticationEvidence)
     reason: str | None = None
 

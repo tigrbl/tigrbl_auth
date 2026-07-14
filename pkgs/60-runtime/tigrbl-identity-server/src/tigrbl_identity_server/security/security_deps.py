@@ -11,8 +11,8 @@ Exports
 get_current_principal   → dependency that returns an authenticated **User**
 require_scope           → decorator enforcing coarse scopes
 
-Both helpers are **framework-thin**: they translate `AuthError` raised by
-`backends.py` into `tigrbl.types.HTTPException` and nothing more.
+Both helpers are framework-thin and delegate API/service-key verification to
+the principal-authentication capability composed by layer 60.
 """
 
 from __future__ import annotations
@@ -25,20 +25,7 @@ from tigrbl.runtime.status import HTTPException
 from tigrbl.security import Depends
 from tigrbl_identity_runtime.deployment import deployment_from_request
 
-from tigrbl_authn_credentials.backends import (
-    ApiKeyBackend,
-    AuthError,
-    PasswordBackend,
-)  # PasswordBackend not used here, but re-exported for completeness
-
 from tigrbl_identity_storage_runtime.engine import get_db
-from tigrbl_identity_storage_runtime.ops.authentication_credentials import (
-    digest_api_key,
-    find_api_keys,
-    find_service_keys,
-    mark_credential_used,
-    resolve_user_principal,
-)
 from tigrbl_identity_jose.jwt_coder import JWTCoder, InvalidTokenError
 from tigrbl_identity_storage.tables import User
 from tigrbl_identity_server.security.context import principal_var
@@ -49,18 +36,12 @@ from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import runtime_secu
 from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import presented_certificate_thumbprint
 from tigrbl_identity_contracts.principals import PrincipalLike
 from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_server.security.api_key_authentication import authenticate_api_key
 
 
 # ---------------------------------------------------------------------
-# Backends + Coder
+# Capability composition + coder
 # ---------------------------------------------------------------------
-_api_key_backend = ApiKeyBackend(
-    digest_key=digest_api_key,
-    find_api_keys=find_api_keys,
-    find_service_keys=find_service_keys,
-    resolve_user=resolve_user_principal,
-    mark_used=mark_credential_used,
-)
 _jwt_coder: JWTCoder | None = None
 
 
@@ -84,11 +65,7 @@ async def _user_from_jwt(token: str, db: AsyncSession, *, cert_thumbprint: str |
 
 
 async def _user_from_api_key(raw_key: str, db: AsyncSession) -> PrincipalLike | None:
-    try:
-        principal, _ = await _api_key_backend.authenticate(db, raw_key)
-        return principal
-    except AuthError:
-        return None
+    return await authenticate_api_key(raw_key, db)
 
 
 async def _user_from_browser_session(request: Request, db: AsyncSession) -> User | None:
@@ -194,6 +171,4 @@ __all__ = [
     "get_current_principal",
     "get_principal",  # <- NEW
     "principal_var",  # <- used by row_filters
-    "PasswordBackend",
-    "ApiKeyBackend",
 ]

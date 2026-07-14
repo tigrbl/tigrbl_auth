@@ -5749,6 +5749,7 @@ dependencies = [
     { name = "tigrbl-core" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-storage-runtime" },
+    { name = "tigrbl-principal-authentication" },
     { name = "tigrbl-replay-memory-provider" },
     { name = "tigrbl-secret-hashing-bcrypt-provider" },
 ]
@@ -5762,6 +5763,7 @@ requires-dist = [
     { name = "tigrbl-core", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage-runtime", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-principal-authentication", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-replay-memory-provider", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-secret-hashing-bcrypt-provider", specifier = "==0.1.0" },
 ]
@@ -6112,16 +6114,20 @@ name = "tigrbl-principal-authentication"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/40-capabilities/tigrbl-principal-authentication" }
 dependencies = [
+    { name = "tigrbl-authenticator-api-key-local" },
     { name = "tigrbl-authenticator-client-secret-local" },
     { name = "tigrbl-authenticator-password-local" },
+    { name = "tigrbl-authenticator-service-key-local" },
     { name = "tigrbl-capability" },
     { name = "tigrbl-identity-contracts" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "tigrbl-authenticator-api-key-local", specifier = "==0.1.0" },
     { name = "tigrbl-authenticator-client-secret-local", specifier = "==0.1.0" },
     { name = "tigrbl-authenticator-password-local", specifier = "==0.1.0" },
+    { name = "tigrbl-authenticator-service-key-local", specifier = "==0.1.0" },
     { name = "tigrbl-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
 ]

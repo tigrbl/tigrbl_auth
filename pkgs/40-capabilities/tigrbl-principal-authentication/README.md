@@ -10,3 +10,8 @@ Operations:
 - `authenticate_password`
 - `authenticate_client_secret`
 - `verify_client_record`
+- `authenticate_api_key`
+
+`authenticate_api_key` receives digest, API-key lookup, service-key lookup,
+principal resolution, and last-used mutation callables from layer 30. It does
+not import mapped tables or own an in-memory credential store.

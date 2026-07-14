@@ -22,7 +22,6 @@ from tigrbl_identity_server.security.security_deps import (
     _user_from_api_key,
     principal_var,
 )
-from tigrbl_authn_credentials.backends import AuthError
 
 
 def _request() -> MagicMock:
@@ -200,14 +199,16 @@ class TestAPIKeyUserResolution:
         mock_db = AsyncMock(spec=AsyncSession)
         raw_key = "valid-api-key-12345"
 
-        with patch("tigrbl_identity_server.security.security_deps._api_key_backend") as mock_backend:
-            mock_backend.authenticate = AsyncMock(return_value=(mock_user, "user"))
+        with patch(
+            "tigrbl_identity_server.security.security_deps.authenticate_api_key",
+            AsyncMock(return_value=mock_user),
+        ) as authenticate:
 
             user = await _user_from_api_key(raw_key, mock_db)
 
             assert user is not None
             assert user.id == mock_user.id
-            mock_backend.authenticate.assert_called_once_with(mock_db, raw_key)
+            authenticate.assert_awaited_once_with(raw_key, mock_db)
 
     @pytest.mark.asyncio
     async def test_user_from_api_key_with_invalid_key(self):
@@ -215,15 +216,15 @@ class TestAPIKeyUserResolution:
         mock_db = AsyncMock(spec=AsyncSession)
         raw_key = "invalid-api-key"
 
-        with patch("tigrbl_identity_server.security.security_deps._api_key_backend") as mock_backend:
-            mock_backend.authenticate = AsyncMock(
-                side_effect=AuthError("Invalid API key")
-            )
+        with patch(
+            "tigrbl_identity_server.security.security_deps.authenticate_api_key",
+            AsyncMock(return_value=None),
+        ) as authenticate:
 
             user = await _user_from_api_key(raw_key, mock_db)
 
             assert user is None
-            mock_backend.authenticate.assert_called_once_with(mock_db, raw_key)
+            authenticate.assert_awaited_once_with(raw_key, mock_db)
 
     @pytest.mark.asyncio
     async def test_user_from_api_key_with_expired_key(self):
@@ -231,10 +232,10 @@ class TestAPIKeyUserResolution:
         mock_db = AsyncMock(spec=AsyncSession)
         raw_key = "expired-api-key"
 
-        with patch("tigrbl_identity_server.security.security_deps._api_key_backend") as mock_backend:
-            mock_backend.authenticate = AsyncMock(
-                side_effect=AuthError("API key expired")
-            )
+        with patch(
+            "tigrbl_identity_server.security.security_deps.authenticate_api_key",
+            AsyncMock(return_value=None),
+        ):
 
             user = await _user_from_api_key(raw_key, mock_db)
 
@@ -249,32 +250,15 @@ class TestAPIKeyUserResolution:
         mock_db = AsyncMock(spec=AsyncSession)
         raw_key = "service-api-key"
 
-        with patch("tigrbl_identity_server.security.security_deps._api_key_backend") as mock_backend:
-            mock_backend.authenticate = AsyncMock(
-                return_value=(mock_service, "service")
-            )
+        with patch(
+            "tigrbl_identity_server.security.security_deps.authenticate_api_key",
+            AsyncMock(return_value=mock_service),
+        ) as authenticate:
 
             principal = await _user_from_api_key(raw_key, mock_db)
 
             assert principal is mock_service
-            mock_backend.authenticate.assert_called_once_with(mock_db, raw_key)
-
-    @pytest.mark.asyncio
-    async def test_user_from_api_key_with_client_principal(self):
-        """Test resolution of client principal via API key."""
-        mock_client = MagicMock()
-        mock_client.id = uuid.uuid4()
-
-        mock_db = AsyncMock(spec=AsyncSession)
-        raw_key = "client-api-key"
-
-        with patch("tigrbl_identity_server.security.security_deps._api_key_backend") as mock_backend:
-            mock_backend.authenticate = AsyncMock(return_value=(mock_client, "client"))
-
-            principal = await _user_from_api_key(raw_key, mock_db)
-
-            assert principal is mock_client
-            mock_backend.authenticate.assert_called_once_with(mock_db, raw_key)
+            authenticate.assert_awaited_once_with(raw_key, mock_db)
 
 
 @pytest.mark.unit
@@ -599,24 +583,23 @@ class TestSecurityDepsIntegration:
             get_current_principal,
             get_principal,
             principal_var,
-            PasswordBackend,
-            ApiKeyBackend,
         )
 
         # Verify all expected exports exist
         assert callable(get_current_principal)
         assert callable(get_principal)
         assert isinstance(principal_var, contextvars.ContextVar)
-        assert PasswordBackend is not None
-        assert ApiKeyBackend is not None
 
     @pytest.mark.asyncio
-    async def test_backend_instances_are_created(self):
-        """Test that backend instances are properly initialized."""
-        from tigrbl_identity_server.security.security_deps import _api_key_backend, _get_jwt_coder
+    async def test_capability_and_coder_instances_are_created(self):
+        """Test that capability and JWT coder composition is initialized."""
+        from tigrbl_principal_authentication import ApiKeyAuthenticationCapability
+        from tigrbl_identity_server.security.api_key_authentication import (
+            api_key_authentication,
+        )
+        from tigrbl_identity_server.security.security_deps import _get_jwt_coder
 
-        # Verify backend instances exist
-        assert _api_key_backend is not None
+        assert isinstance(api_key_authentication, ApiKeyAuthenticationCapability)
         assert await _get_jwt_coder() is not None
 
     @pytest.mark.asyncio

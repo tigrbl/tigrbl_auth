@@ -40,6 +40,7 @@ dependencies = [
     "tigrbl-authz-policy-admin-gate==0.4.0.dev2",
     "tigrbl-core==0.4.4.dev1",
     "tigrbl-identity-storage-runtime==0.4.0.dev2",
+    "tigrbl-principal-authentication==0.4.0.dev2",
     "tigrbl-replay-memory-provider==0.4.0.dev2",
     "tigrbl-secret-hashing-bcrypt-provider==0.1.0",
 ]
