@@ -78,7 +78,7 @@ TABLE_ROUTE_FUNCTION_ALLOWLIST = {
     "pushed_authorization_request.py": {
         "par",
     },
-    "realm.py": {
+    "realms.py": {
         "admin_create_realm",
         "admin_create_realm_tenant",
         "admin_delete_realm",

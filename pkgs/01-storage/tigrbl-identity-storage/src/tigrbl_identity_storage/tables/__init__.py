@@ -50,9 +50,6 @@ def _attach_custom_op_schemas() -> None:
     set_schema(Tenant, "admin_create_tenant", in_=AdminTenantProvisionIn, out=AdminTenantOut)
     set_schema(Tenant, "admin_update_tenant", in_=AdminTenantUpdateIn, out=AdminTenantOut)
     set_schema(Tenant, "admin_delete_tenant", out=AdminTenantOut)
-    set_schema(Realm, "admin_create_realm", in_=AdminRealmProvisionIn, out=AdminRealmOut)
-    set_schema(Realm, "admin_update_realm", in_=AdminRealmUpdateIn, out=AdminRealmOut)
-    set_schema(Realm, "admin_delete_realm", out=AdminRealmOut)
 
 
 _ensure_runtime_bindings()

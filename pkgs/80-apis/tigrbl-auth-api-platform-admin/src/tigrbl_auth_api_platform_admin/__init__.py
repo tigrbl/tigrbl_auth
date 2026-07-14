@@ -9,11 +9,15 @@ from .identities import (
     AdminIdentityProvisionIn,
     AdminIdentityUpdateIn,
 )
+from .realms import AdminRealmOut, AdminRealmProvisionIn, AdminRealmUpdateIn
 
 __all__ = [
     "AdminIdentityOut",
     "AdminIdentityProvisionIn",
     "AdminIdentityUpdateIn",
+    "AdminRealmOut",
+    "AdminRealmProvisionIn",
+    "AdminRealmUpdateIn",
     "PRODUCT_SURFACE",
     "PLATFORM_ADMIN_API_CONTRACT",
     "PlatformAdminApiContract",

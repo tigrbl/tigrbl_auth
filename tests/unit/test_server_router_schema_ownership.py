@@ -110,10 +110,6 @@ def test_server_rest_router_bridges_warn_to_storage_owner(
             "tigrbl_identity_storage.tables.tenant",
             {"AdminTenantOut", "AdminTenantProvisionIn", "AdminTenantUpdateIn"},
         ),
-        (
-            "tigrbl_identity_storage.tables.realm",
-            {"AdminRealmOut", "AdminRealmProvisionIn", "AdminRealmUpdateIn"},
-        ),
     ],
 )
 def test_table_backed_rest_schemas_live_on_table_modules(
@@ -151,43 +147,25 @@ def test_remaining_table_backed_rest_routers_import_schemas_from_table_modules(
     assert not path.exists()
 
 
-@pytest.mark.parametrize(
-    ("module_name", "route_names"),
-    [
-        (
-            "tigrbl_identity_storage.tables.realm",
-            {
-                "admin_list_realms",
-                "admin_create_realm",
-                "admin_get_realm",
-                "admin_update_realm",
-                "admin_delete_realm",
-                "admin_list_realm_tenants",
-                "admin_create_realm_tenant",
-            },
-        ),
-    ],
-)
-def test_admin_route_handlers_live_on_storage_table_modules(
-    module_name: str, route_names: set[str]
-) -> None:
-    module = importlib.import_module(module_name)
-    table_name = module_name.rsplit(".", 1)[-1]
-    class_name = {
-        "realm": "Realm",
-        "tenant": "Tenant",
-        "user": "User",
-    }[table_name]
-    table_class = getattr(module, class_name)
+def test_realm_admin_routes_live_in_platform_api_package() -> None:
+    api_module = importlib.import_module("tigrbl_auth_api_platform_admin.realms")
+    storage_module = importlib.import_module("tigrbl_identity_storage.tables.realm")
+    route_names = {
+        "admin_list_realms",
+        "admin_create_realm",
+        "admin_get_realm",
+        "admin_update_realm",
+        "admin_delete_realm",
+        "admin_list_realm_tenants",
+        "admin_create_realm_tenant",
+    }
 
-    assert hasattr(module, "admin_api")
-    assert hasattr(module, "admin_router")
-    missing = sorted(name for name in route_names if not hasattr(module, name))
-    assert missing == []
-    missing_class_routes = sorted(
-        name for name in route_names if not hasattr(table_class, name)
-    )
-    assert missing_class_routes == []
+    assert api_module.api is api_module.router
+    assert sorted(name for name in route_names if not hasattr(api_module, name)) == []
+    assert not hasattr(storage_module, "admin_api")
+    assert not hasattr(storage_module, "admin_router")
+    assert sorted(name for name in route_names if hasattr(storage_module, name)) == []
+    assert sorted(name for name in route_names if hasattr(storage_module.Realm, name)) == []
 
 
 def test_tenant_admin_route_handlers_live_above_storage_table_module() -> None:

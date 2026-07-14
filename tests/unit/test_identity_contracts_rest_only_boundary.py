@@ -107,11 +107,6 @@ def test_identity_contracts_rest_schema_bridge_is_removed() -> None:
 
 def test_storage_tables_own_table_backed_rest_shapes() -> None:
     table_modules = {
-        "tigrbl_identity_storage.tables.realm": {
-            "AdminRealmOut",
-            "AdminRealmProvisionIn",
-            "AdminRealmUpdateIn",
-        },
         "tigrbl_identity_storage.tables.tenant": {
             "AdminTenantOut",
             "AdminTenantProvisionIn",
@@ -141,10 +136,17 @@ def test_my_account_api_owns_its_rest_shapes() -> None:
     assert sorted(name for name in names if hasattr(user_storage, name)) == []
 
 
-def test_platform_admin_api_owns_identity_rest_shapes() -> None:
+def test_platform_admin_api_owns_control_plane_rest_shapes() -> None:
     api_module = importlib.import_module("tigrbl_auth_api_platform_admin")
     storage_module = importlib.import_module("tigrbl_identity_storage.tables.user")
-    names = {"AdminIdentityOut", "AdminIdentityProvisionIn", "AdminIdentityUpdateIn"}
+    names = {
+        "AdminIdentityOut",
+        "AdminIdentityProvisionIn",
+        "AdminIdentityUpdateIn",
+        "AdminRealmOut",
+        "AdminRealmProvisionIn",
+        "AdminRealmUpdateIn",
+    }
 
     assert sorted(name for name in names if not hasattr(api_module, name)) == []
     assert sorted(name for name in names if hasattr(storage_module, name)) == []

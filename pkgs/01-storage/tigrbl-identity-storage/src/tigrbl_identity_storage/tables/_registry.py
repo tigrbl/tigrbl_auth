@@ -4,7 +4,7 @@ from tigrbl import bind
 
 from tigrbl_identity_storage.framework import RestOltpTable
 
-from .realm import AdminRealmOut, AdminRealmProvisionIn, AdminRealmUpdateIn, Realm
+from .realm import Realm
 from .tenant import AdminTenantOut, AdminTenantProvisionIn, AdminTenantUpdateIn, Tenant
 from .user import (
     AdminPasswordChangeIn,

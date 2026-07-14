@@ -167,7 +167,6 @@ def build_public_router(
         for entry in PUBLIC_ROUTER_BINDINGS:
             if entry["router"] in {
                 admin_auth_api,
-                admin_realms_api,
                 admin_tenants_router,
             }:
                 continue
