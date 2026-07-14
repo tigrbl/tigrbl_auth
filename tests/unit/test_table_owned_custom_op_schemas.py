@@ -103,7 +103,6 @@ def test_storage_tables_export_table_inventory_without_schema_namespaces() -> No
 def test_storage_schema_module_exports_openapi_component_model_names() -> None:
     storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
     storage_schemas = importlib.import_module("tigrbl_identity_storage.schemas")
-    contract_schemas = importlib.import_module("tigrbl_identity_contracts.schemas")
     schema_registry = importlib.import_module("tigrbl_identity_storage.schema_registry")
 
     for name in storage_tables.TABLE_MODEL_BY_NAME:
@@ -122,8 +121,6 @@ def test_storage_schema_module_exports_openapi_component_model_names() -> None:
                 schema_alias = getattr(storage_schemas, schema_name)
 
                 assert schema_name in storage_schemas.__all__
-                assert schema_name in contract_schemas.__all__
-                assert getattr(contract_schemas, schema_name) is schema_alias
                 assert schema_registry.OPENAPI_SCHEMA_REGISTRY[schema_name] is schema_alias
                 assert (
                     schema_registry.TABLE_SCHEMA_BINDINGS[(name, op_name, direction.removesuffix("_"))]

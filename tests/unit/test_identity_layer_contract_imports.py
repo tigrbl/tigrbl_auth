@@ -5,27 +5,23 @@ import importlib
 
 def test_authorization_server_table_and_schema_exports() -> None:
     storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
-    storage_schemas = importlib.import_module("tigrbl_identity_storage.schemas")
-    contract_schemas = importlib.import_module("tigrbl_identity_contracts.schemas")
+    oauth = importlib.import_module("tigrbl_identity_contracts.oauth")
 
     assert storage_tables.AuthorizationServer.__name__ == "AuthorizationServer"
     assert storage_tables.TABLE_MODEL_BY_NAME["AuthorizationServer"] is (
         storage_tables.AuthorizationServer
     )
 
-    schema_names = (
-        "AuthorizationServerCreateRequest",
-        "AuthorizationServerReadResponse",
-        "AuthorizationServerUpdateRequest",
+    assert oauth.AuthorizationServerConfiguration.__module__.startswith(
+        "tigrbl_identity_contracts"
     )
-    for name in schema_names:
-        assert getattr(contract_schemas, name) is getattr(storage_schemas, name)
+    assert oauth.AuthorizationServerPatch.__module__.startswith(
+        "tigrbl_identity_contracts"
+    )
 
 
 def test_policy_table_contract_exports() -> None:
     storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
-    storage_schemas = importlib.import_module("tigrbl_identity_storage.schemas")
-    contract_schemas = importlib.import_module("tigrbl_identity_contracts.schemas")
     policy_contracts = importlib.import_module("tigrbl_identity_contracts.policy")
 
     for table_name in (
@@ -38,18 +34,6 @@ def test_policy_table_contract_exports() -> None:
         assert getattr(storage_tables, table_name).__name__ == table_name
         assert storage_tables.TABLE_MODEL_BY_NAME[table_name] is getattr(storage_tables, table_name)
 
-    schema_names = (
-        "PolicyCreateRequest",
-        "PolicyReadResponse",
-        "PolicyUpdateRequest",
-        "PolicyVersionCreateRequest",
-        "PolicySetCreateRequest",
-        "PolicySetMemberCreateRequest",
-        "PolicyTargetCreateRequest",
-    )
-    for name in schema_names:
-        assert getattr(contract_schemas, name) is getattr(storage_schemas, name)
-
     for name in (
         "PolicyAdministrationPointPort",
         "PolicyRetrievalPointPort",
@@ -59,14 +43,20 @@ def test_policy_table_contract_exports() -> None:
         assert hasattr(policy_contracts, name)
 
 
-def test_oauth_contracts_use_storage_schema_lineage() -> None:
+def test_oauth_contracts_own_protocol_neutral_semantic_records() -> None:
     oauth = importlib.import_module("tigrbl_identity_contracts.oauth")
-    schemas = importlib.import_module("tigrbl_identity_contracts.schemas")
 
-    assert oauth.ConsentCreateRequest is schemas.ConsentCreateRequest
-    assert oauth.RefreshIn is schemas.RefreshIn
-    assert oauth.RevocationIn is schemas.RevocationIn
-    assert oauth.AuthorizationServerReadResponse is schemas.AuthorizationServerReadResponse
+    for name in (
+        "AuthorizationServerConfiguration",
+        "ConsentGrantRequest",
+        "ConsentRecord",
+        "IssuedTokenSet",
+        "RefreshTokenRequest",
+        "TokenRevocationRequest",
+        "TokenRevocationResult",
+    ):
+        value = getattr(oauth, name)
+        assert value.__module__.startswith("tigrbl_identity_contracts")
 
     for legacy_name in ("ConsentGrant", "ConsentDecision", "ConsentRevocation"):
         assert not hasattr(oauth, legacy_name)

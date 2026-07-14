@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from typing import Protocol
 
-from ..schemas import LogoutIn, LogoutOut, LogoutStateReadResponse
 from . import LogoutRequest, LogoutRequestContext, LogoutPlan
+from .session import LogoutStateRecord
 
 
 class FrontChannelLogoutPort(Protocol):
@@ -15,20 +15,18 @@ class FrontChannelLogoutPort(Protocol):
 class RpInitiatedLogoutPort(Protocol):
     async def rp_initiated_logout(
         self,
-        request: LogoutIn,
+        request: LogoutRequest,
         /,
         *,
         context: LogoutRequestContext | None = None,
-    ) -> LogoutOut: ...
+    ) -> LogoutPlan: ...
 
 
 __all__ = [
     "FrontChannelLogoutPort",
-    "LogoutIn",
-    "LogoutOut",
     "LogoutPlan",
     "LogoutRequest",
     "LogoutRequestContext",
-    "LogoutStateReadResponse",
+    "LogoutStateRecord",
     "RpInitiatedLogoutPort",
 ]

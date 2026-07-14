@@ -5439,14 +5439,12 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/02-contracts/tigrbl-identity-contracts" }
 dependencies = [
     { name = "tigrbl-identity-core" },
-    { name = "tigrbl-identity-storage" },
     { name = "tigrbl-security-trust-contracts" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
 ]
 
