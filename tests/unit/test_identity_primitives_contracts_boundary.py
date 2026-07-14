@@ -275,8 +275,8 @@ def test_contracts_do_not_export_wire_request_response_models() -> None:
         assert not hasattr(contracts, model_name), model_name
 
 
-def test_storage_tables_own_table_backed_admin_contracts() -> None:
-    from tigrbl_identity_storage.tables.tenant import AdminTenantOut, AdminTenantProvisionIn
+def test_platform_api_owns_tenant_admin_contracts() -> None:
+    from tigrbl_auth_api_platform_admin.tenants import AdminTenantOut, AdminTenantProvisionIn
 
     tenant_request = AdminTenantProvisionIn(slug="test", name="Test", email="admin@example.test")
     assert tenant_request.slug == "test"

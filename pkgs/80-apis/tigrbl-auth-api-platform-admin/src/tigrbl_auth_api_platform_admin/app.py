@@ -9,6 +9,7 @@ from tigrbl_auth.api.products import build_product_app
 from tigrbl_auth.runtime import LazyASGIApplication
 from tigrbl_auth_api_platform_admin.identities import api as identity_api
 from tigrbl_auth_api_platform_admin.realms import api as realm_api
+from tigrbl_auth_api_platform_admin.tenants import api as tenant_api
 
 if TYPE_CHECKING:
     from tigrbl import TigrblApp
@@ -113,6 +114,7 @@ def build_app(settings_obj: object | None = None) -> "TigrblApp":
     if settings_obj is None:
         settings_obj = _default_settings()
     app = build_product_app(PRODUCT_SURFACE, settings_obj)
+    app.include_router(tenant_api)
     app.include_router(realm_api)
     app.include_router(identity_api)
     app.admin_path_prefixes = tuple(

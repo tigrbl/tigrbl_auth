@@ -47,9 +47,6 @@ def _attach_custom_op_schemas() -> None:
     set_schema(User, "admin_forgot_password", in_=AdminPasswordResetRequestIn, out=AdminSessionOut)
     set_schema(User, "admin_reset_password", in_=AdminPasswordResetCompleteIn, out=AdminSessionOut)
     set_schema(User, "admin_change_password", in_=AdminPasswordChangeIn, out=AdminSessionOut)
-    set_schema(Tenant, "admin_create_tenant", in_=AdminTenantProvisionIn, out=AdminTenantOut)
-    set_schema(Tenant, "admin_update_tenant", in_=AdminTenantUpdateIn, out=AdminTenantOut)
-    set_schema(Tenant, "admin_delete_tenant", out=AdminTenantOut)
 
 
 _ensure_runtime_bindings()

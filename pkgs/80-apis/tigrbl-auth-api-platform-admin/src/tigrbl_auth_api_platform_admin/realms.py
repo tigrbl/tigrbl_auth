@@ -13,11 +13,7 @@ from tigrbl.security import Depends
 from tigrbl_authz_policy_admin_gate import ADMIN_OPENAPI_SECURITY_DEPENDENCIES
 from tigrbl_identity_storage.tables import Realm, Tenant
 from tigrbl_identity_storage.tables.engine import get_db
-from tigrbl_identity_storage.tables.tenant import (
-    AdminTenantOut,
-    AdminTenantProvisionIn,
-    _tenant_payload,
-)
+from .tenants import AdminTenantOut, AdminTenantProvisionIn, tenant_payload
 from tigrbl_identity_storage_runtime.ops.common import (
     create_table_record,
     delete_table_record,
@@ -286,7 +282,7 @@ async def admin_list_realm_tenants(
             field_value(row, "slug", ""),
         ),
     )
-    return [_tenant_payload(row) for row in rows]
+    return [tenant_payload(row) for row in rows]
 
 
 @api.route(
@@ -322,7 +318,7 @@ async def admin_create_realm_tenant(
             "realm_id": field_value(realm, "id"),
         },
     )
-    return _tenant_payload(row)
+    return tenant_payload(row)
 
 
 __all__ = [

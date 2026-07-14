@@ -5,7 +5,6 @@ from __future__ import annotations
 import uuid
 
 from tigrbl_identity_storage.framework import (
-    BaseModel,
     Bootstrappable,
     F,
     IO,
@@ -17,38 +16,8 @@ from tigrbl_identity_storage.framework import (
     String,
     TenantBase,
     acol,
-    constr,
     relationship,
 )
-
-_email = constr(strip_whitespace=True, min_length=3, max_length=120)
-_tenant_name = constr(strip_whitespace=True, min_length=1, max_length=120)
-_tenant_slug = constr(strip_whitespace=True, min_length=3, max_length=120)
-
-
-class AdminTenantOut(BaseModel):
-    id: str
-    realm_id: str | None = None
-    slug: str
-    name: str
-    email: str
-    created_at: str | None = None
-    updated_at: str | None = None
-
-
-class AdminTenantProvisionIn(BaseModel):
-    realm_id: str | None = None
-    slug: _tenant_slug
-    name: _tenant_name
-    email: _email
-
-
-class AdminTenantUpdateIn(BaseModel):
-    realm_id: str | None = None
-    slug: _tenant_slug | None = None
-    name: _tenant_name | None = None
-    email: _email | None = None
-    is_active: bool | None = None
 
 
 class Tenant(TenantBase, Bootstrappable):
@@ -111,25 +80,4 @@ class Tenant(TenantBase, Bootstrappable):
     ]
 
 
-def _tenant_payload(row: Tenant) -> AdminTenantOut:
-    return AdminTenantOut(
-        id=str(row.id),
-        realm_id=str(row.realm_id) if getattr(row, "realm_id", None) else None,
-        slug=row.slug,
-        name=row.name,
-        email=row.email,
-        created_at=getattr(row, "created_at", None).isoformat()
-        if getattr(row, "created_at", None)
-        else None,
-        updated_at=getattr(row, "updated_at", None).isoformat()
-        if getattr(row, "updated_at", None)
-        else None,
-    )
-
-
-__all__ = [
-    "AdminTenantOut",
-    "AdminTenantProvisionIn",
-    "AdminTenantUpdateIn",
-    "Tenant",
-]
+__all__ = ["Tenant"]

@@ -10,6 +10,7 @@ from .identities import (
     AdminIdentityUpdateIn,
 )
 from .realms import AdminRealmOut, AdminRealmProvisionIn, AdminRealmUpdateIn
+from .tenants import AdminTenantOut, AdminTenantProvisionIn, AdminTenantUpdateIn
 
 __all__ = [
     "AdminIdentityOut",
@@ -18,6 +19,9 @@ __all__ = [
     "AdminRealmOut",
     "AdminRealmProvisionIn",
     "AdminRealmUpdateIn",
+    "AdminTenantOut",
+    "AdminTenantProvisionIn",
+    "AdminTenantUpdateIn",
     "PRODUCT_SURFACE",
     "PLATFORM_ADMIN_API_CONTRACT",
     "PlatformAdminApiContract",

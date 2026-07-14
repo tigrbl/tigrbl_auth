@@ -48,11 +48,6 @@ PUBLIC_ROUTER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (
         "capabilities": ("admin-auth",),
         "router": admin_auth_api,
     },
-    {
-        "mount_group": "admin_tenants",
-        "capabilities": ("admin-auth",),
-        "router": admin_tenants_router,
-    },
     {"mount_group": "login", "capabilities": ("login",), "router": login_router},
     {
         "mount_group": "authorize",
@@ -165,10 +160,7 @@ def build_public_router(
     selected_table_resources = include_admin_routes(router, deployment=deployment)
     if deployment.surface_enabled("public-rest"):
         for entry in PUBLIC_ROUTER_BINDINGS:
-            if entry["router"] in {
-                admin_auth_api,
-                admin_tenants_router,
-            }:
+            if entry["router"] is admin_auth_api:
                 continue
             if any(
                 deployment.capability_enabled(capability)

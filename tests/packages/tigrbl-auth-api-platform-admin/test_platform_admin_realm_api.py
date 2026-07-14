@@ -18,7 +18,7 @@ if str(PKG_SRC) not in sys.path:
     sys.path.insert(0, str(PKG_SRC))
 
 build_app = import_module("tigrbl_auth_api_platform_admin").build_app
-admin_tenants = import_module("tigrbl_identity_storage_runtime.tenant_admin")
+admin_tenants = import_module("tigrbl_auth_api_platform_admin.tenants")
 
 
 def _settings(tmp_path: Path) -> SimpleNamespace:

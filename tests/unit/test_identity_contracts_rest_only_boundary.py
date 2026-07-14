@@ -105,18 +105,17 @@ def test_identity_contracts_rest_schema_bridge_is_removed() -> None:
         assert not hasattr(models, dto_name), dto_name
 
 
-def test_storage_tables_own_table_backed_rest_shapes() -> None:
-    table_modules = {
-        "tigrbl_identity_storage.tables.tenant": {
-            "AdminTenantOut",
-            "AdminTenantProvisionIn",
-            "AdminTenantUpdateIn",
-        },
+def test_platform_api_owns_tenant_admin_rest_shapes() -> None:
+    api_module = importlib.import_module("tigrbl_auth_api_platform_admin.tenants")
+    storage_module = importlib.import_module("tigrbl_identity_storage.tables.tenant")
+    dto_names = {
+        "AdminTenantOut",
+        "AdminTenantProvisionIn",
+        "AdminTenantUpdateIn",
     }
-    for module_name, dto_names in table_modules.items():
-        module = importlib.import_module(module_name)
-        for dto_name in dto_names:
-            assert hasattr(module, dto_name), f"{module_name}.{dto_name}"
+    for dto_name in dto_names:
+        assert hasattr(api_module, dto_name), dto_name
+        assert not hasattr(storage_module, dto_name), dto_name
 
 
 def test_my_account_api_owns_its_rest_shapes() -> None:

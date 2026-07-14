@@ -39,7 +39,7 @@ ROUTER_DEPRECATION_TARGETS = {
     "admin_auth.py": "tigrbl_identity_storage.tables.user",
     "admin_identities.py": "tigrbl_identity_storage.tables.user",
     "admin_realms.py": "tigrbl_identity_storage.tables.realm",
-    "admin_tenants.py": "tigrbl_identity_storage_runtime.tenant_admin",
+    "admin_tenants.py": "tigrbl_auth_api_platform_admin.tenants",
     "auth_flows.py": "tigrbl_identity_storage.tables.auth_session",
     "authorize.py": "tigrbl_identity_storage.tables.auth_code",
     "device_authorization.py": "tigrbl_identity_storage.tables.device_code",
@@ -90,7 +90,13 @@ def test_server_rest_router_bridges_warn_to_storage_owner(
     target: str,
 ) -> None:
     path = SERVER_ROOT / "tigrbl_identity_server" / "rest" / "routers" / route_file
-    assert target.startswith(("tigrbl_identity_storage.tables", "tigrbl_identity_storage_runtime"))
+    assert target.startswith(
+        (
+            "tigrbl_identity_storage.tables",
+            "tigrbl_identity_storage_runtime",
+            "tigrbl_auth_api_platform_admin",
+        )
+    )
     assert not path.exists()
 
 
@@ -105,10 +111,6 @@ def test_server_rest_router_bridges_warn_to_storage_owner(
                 "AdminPasswordResetRequestIn",
                 "AdminSessionOut",
             },
-        ),
-        (
-            "tigrbl_identity_storage.tables.tenant",
-            {"AdminTenantOut", "AdminTenantProvisionIn", "AdminTenantUpdateIn"},
         ),
     ],
 )
@@ -168,8 +170,8 @@ def test_realm_admin_routes_live_in_platform_api_package() -> None:
     assert sorted(name for name in route_names if hasattr(storage_module.Realm, name)) == []
 
 
-def test_tenant_admin_route_handlers_live_above_storage_table_module() -> None:
-    runtime_module = importlib.import_module("tigrbl_identity_storage_runtime.tenant_admin")
+def test_tenant_admin_routes_and_dtos_live_in_platform_api_package() -> None:
+    runtime_module = importlib.import_module("tigrbl_auth_api_platform_admin.tenants")
     storage_module = importlib.import_module("tigrbl_identity_storage.tables.tenant")
     table_class = storage_module.Tenant
     route_names = {
@@ -181,12 +183,21 @@ def test_tenant_admin_route_handlers_live_above_storage_table_module() -> None:
 
     assert hasattr(runtime_module, "admin_router")
     assert hasattr(runtime_module, "router")
-    assert not hasattr(runtime_module, "admin_api")
+    assert runtime_module.api is runtime_module.router
     assert not hasattr(storage_module, "admin_api")
     assert not hasattr(storage_module, "admin_router")
     assert sorted(name for name in route_names if not hasattr(runtime_module, name)) == []
     assert sorted(name for name in route_names if hasattr(storage_module, name)) == []
     assert sorted(name for name in route_names if hasattr(table_class, name)) == []
+    for dto_name in {
+        "AdminTenantOut",
+        "AdminTenantProvisionIn",
+        "AdminTenantUpdateIn",
+    }:
+        assert hasattr(runtime_module, dto_name)
+        assert not hasattr(storage_module, dto_name)
+    with pytest.raises(ModuleNotFoundError):
+        importlib.import_module("tigrbl_identity_storage_runtime.tenant_admin")
 
 
 def test_admin_auth_routes_live_in_server_runtime() -> None:
