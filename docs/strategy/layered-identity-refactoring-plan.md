@@ -200,6 +200,15 @@ Required ownership rules:
   authorization carrier, moves request-scoped issuer, durable device-code and
   audit composition to layer 60, and removes device-authorization routing from
   layer 30.
+- [x] `3a368284` removes JOSE provider imports of protocol-owned revocation
+  state, requires an explicit revocation checker for verified token decoding,
+  and injects the durable checker from layer-60 server composition.
+- [x] `2d3effb1` adds typed token-exchange contracts and the reportable
+  `token.exchange` capability, maps RFC 8693 to it at layer 50, moves lineage,
+  sender-constraint, issuance, persistence, and audit orchestration to layer
+  60, adds the standalone layer-80 carrier, and removes token-exchange routing
+  from layer 30. Focused ownership/unit gates and HTTP integration/conformance
+  flows pass.
 
 ## 3. Layer 00: primitives
 
@@ -692,7 +701,8 @@ flags. Tier-4 claims require independent interoperability evidence.
   RFC 7662 introspection, RFC 7009 revocation, RFC 9126 PAR, and RFC 7591/7592
   client registration/management, token, and authorization are complete;
   UserInfo, logout, login, and device authorization are also complete.
-  Discovery and token-exchange carriers remain.
+  Token exchange is complete. Discovery/JWKS, authorization-server metadata,
+  protected-resource metadata, and verifier metadata carriers remain.
 - [x] C5: finish claim package/facade cleanup and remove protocol-specific
   deterministic package names.
 - [x] C6: finish EAT token/evidence/appraisal/provider verification chain.
@@ -1110,9 +1120,12 @@ The final audit proves:
    runtime composition; UserInfo now also has descriptive layer-50 ownership,
    layer-60 runtime composition, and a standalone layer-80 carrier; logout now
    follows the same layer-60/80 split. Login and RFC 8628 device authorization
-   now also have standalone layer-80 carriers. Next move discovery,
-   token-exchange, and related HTTP bindings out of layer 30 and mount them
-   from layer 80.
+   now also have standalone layer-80 carriers. RFC 8693 token exchange now has
+   typed layer-02 contracts, a reportable layer-40 capability, explicit
+   layer-50 requirements, layer-60 runtime composition, and a standalone
+   layer-80 carrier. Next move discovery/JWKS, authorization-server metadata,
+   protected-resource metadata, verifier metadata, and related HTTP bindings
+   out of layer 30 and mount them from layer 80.
 4. **C5 neutral reusable ownership**: claims facade, scope matcher, subject
    strategy, OAuth/OIDC base cleanup.
 5. **C6 EAT chain**: typed token verifiers, verified evidence, appraisal
