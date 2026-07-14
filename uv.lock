@@ -2482,6 +2482,7 @@ dependencies = [
     { name = "tigrbl-claim-may-act-concrete" },
     { name = "tigrbl-claim-nonce-concrete" },
     { name = "tigrbl-claim-scope-concrete" },
+    { name = "tigrbl-client-registration-capability" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core" },
     { name = "tigrbl-identity-jose" },
@@ -2510,6 +2511,7 @@ requires-dist = [
     { name = "tigrbl-claim-may-act-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-claim-nonce-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-claim-scope-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-client-registration-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-jose", specifier = "==0.4.0.dev2" },
@@ -2867,6 +2869,7 @@ dependencies = [
     { name = "tigrbl-claim-website-uri-concrete" },
     { name = "tigrbl-claim-zoneinfo-concrete" },
     { name = "tigrbl-client-identity-concrete" },
+    { name = "tigrbl-client-registration-capability" },
     { name = "tigrbl-client-secret-credential-concrete" },
     { name = "tigrbl-concrete" },
     { name = "tigrbl-core" },
@@ -3218,6 +3221,7 @@ requires-dist = [
     { name = "tigrbl-claim-website-uri-concrete", editable = "pkgs/10-concrete/tigrbl-claim-website-uri-concrete" },
     { name = "tigrbl-claim-zoneinfo-concrete", editable = "pkgs/10-concrete/tigrbl-claim-zoneinfo-concrete" },
     { name = "tigrbl-client-identity-concrete", editable = "pkgs/10-concrete/tigrbl-client-identity-concrete" },
+    { name = "tigrbl-client-registration-capability", editable = "pkgs/40-capabilities/tigrbl-client-registration-capability" },
     { name = "tigrbl-client-secret-credential-concrete", editable = "pkgs/10-concrete/tigrbl-client-secret-credential-concrete" },
     { name = "tigrbl-concrete", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-core", specifier = "==0.4.4.dev1" },
@@ -4972,6 +4976,21 @@ dependencies = [
 requires-dist = [
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-model-bases", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-client-registration-capability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/40-capabilities/tigrbl-client-registration-capability" }
+dependencies = [
+    { name = "tigrbl-capability" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-capability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]

@@ -2,8 +2,14 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from typing import Final
 
+from tigrbl_client_registration_capability import ClientRegistrationCapability
+from tigrbl_identity_contracts.oauth import (
+    ClientRegistrationRecord,
+    ClientRegistrationUpdateRequest,
+)
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
 
 STATUS: Final[str] = 'persistence-backed-client-management-runtime'
@@ -21,6 +27,56 @@ OWNER = StandardOwner(
 )
 
 
+class ClientRegistrationManagementDisabledError(RuntimeError):
+    """Raised when composition disables RFC 7592 management."""
+
+
+@dataclass(frozen=True, slots=True)
+class RFC7592ClientRegistrationManagementService:
+    """Map RFC 7592 lifecycle operations to the registration capability."""
+
+    capability: ClientRegistrationCapability
+    enabled: bool = True
+
+    def _require_enabled(self) -> None:
+        if not self.enabled:
+            raise ClientRegistrationManagementDisabledError(
+                f"RFC 7592 support is disabled: {RFC7592_SPEC_URL}"
+            )
+
+    async def get(self, client_id: str) -> ClientRegistrationRecord | None:
+        self._require_enabled()
+        call = await self.capability.call("get_registration", client_id)
+        if call.value is not None and not isinstance(
+            call.value, ClientRegistrationRecord
+        ):
+            raise TypeError(
+                "client.registration must return ClientRegistrationRecord or None"
+            )
+        return call.value
+
+    async def update(
+        self,
+        request: ClientRegistrationUpdateRequest,
+    ) -> ClientRegistrationRecord:
+        self._require_enabled()
+        call = await self.capability.call("update_registration", request)
+        if not isinstance(call.value, ClientRegistrationRecord):
+            raise TypeError(
+                "client.registration must return ClientRegistrationRecord"
+            )
+        return call.value
+
+    async def delete(self, client_id: str) -> ClientRegistrationRecord:
+        self._require_enabled()
+        call = await self.capability.call("disable_registration", client_id)
+        if not isinstance(call.value, ClientRegistrationRecord):
+            raise TypeError(
+                "client.registration must return ClientRegistrationRecord"
+            )
+        return call.value
+
+
 def describe() -> dict[str, object]:
     return describe_owner(
         OWNER,
@@ -28,4 +84,12 @@ def describe() -> dict[str, object]:
     )
 
 
-__all__ = ['STATUS', 'RFC7592_SPEC_URL', 'StandardOwner', 'OWNER', 'describe']
+__all__ = [
+    'STATUS',
+    'RFC7592_SPEC_URL',
+    'ClientRegistrationManagementDisabledError',
+    'RFC7592ClientRegistrationManagementService',
+    'StandardOwner',
+    'OWNER',
+    'describe',
+]

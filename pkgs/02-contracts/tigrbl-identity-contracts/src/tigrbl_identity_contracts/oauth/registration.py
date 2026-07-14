@@ -47,6 +47,7 @@ class ClientRegistrationUpdateRequest:
     contacts: tuple[str, ...] = ()
     software_id: str | None = None
     software_version: str | None = None
+    updated_fields: tuple[str, ...] = ()
 
     def __post_init__(self) -> None:
         if not self.client_id:

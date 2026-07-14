@@ -15,6 +15,10 @@ def test_layer_40_contains_only_registered_multi_component_use_cases() -> None:
         "tigrbl-attestation-appraisal": (
             "coordinate evidence appraisal and result recording"
         ),
+        "tigrbl-client-registration-capability": (
+            "coordinate client and registration metadata lifecycle with optional "
+            "audit recording"
+        ),
         "tigrbl-digital-credential-issuance": (
             "coordinate credential configuration, wallet trust, offers, and issuance"
         ),

@@ -68,6 +68,10 @@ CAPABILITY_PURPOSES = {
     "tigrbl-attestation-appraisal": (
         "coordinate evidence appraisal and result recording"
     ),
+    "tigrbl-client-registration-capability": (
+        "coordinate client and registration metadata lifecycle with optional "
+        "audit recording"
+    ),
     "tigrbl-digital-credential-issuance": (
         "coordinate credential configuration, wallet trust, offers, and issuance"
     ),

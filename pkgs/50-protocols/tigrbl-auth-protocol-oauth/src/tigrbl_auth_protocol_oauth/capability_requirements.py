@@ -16,6 +16,26 @@ CAPABILITY_REQUIREMENTS = (
         "oauth:rfc9126",
     ),
     ProtocolCapabilityRequirement(
+        "oauth-dynamic-client-registration", "RFC7591", "register-client",
+        "POST /register", "client.registration", "register_client",
+        "oauth:rfc7591",
+    ),
+    ProtocolCapabilityRequirement(
+        "oauth-client-registration-management", "RFC7592", "read-registration",
+        "GET /register/{client_id}", "client.registration", "get_registration",
+        "oauth:rfc7592",
+    ),
+    ProtocolCapabilityRequirement(
+        "oauth-client-registration-management", "RFC7592", "update-registration",
+        "PUT /register/{client_id}", "client.registration", "update_registration",
+        "oauth:rfc7592",
+    ),
+    ProtocolCapabilityRequirement(
+        "oauth-client-registration-management", "RFC7592", "delete-registration",
+        "DELETE /register/{client_id}", "client.registration", "disable_registration",
+        "oauth:rfc7592",
+    ),
+    ProtocolCapabilityRequirement(
         "oauth-dpop", "RFC9449", "dpop-jti-replay", "jti",
         "security.replay-protection", "check_and_reserve", "oauth:dpop-jti",
     ),
