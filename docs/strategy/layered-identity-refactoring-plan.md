@@ -162,6 +162,14 @@ Required ownership rules:
 - [x] `b08b9e75` and `d0883321` add and mount the standalone layer-80 RFC 7009
   carrier, reduce layer-30 revocation to durable lifecycle adapters, and
   preserve the required 200 response for known and unknown tokens.
+- [x] `d9919cf8` and `17b52466` add the typed pushed-authorization contract,
+  delegated `oauth.pushed-authorization` capability, and carrier-neutral
+  layer-30 operation derived from the authoritative PAR table.
+- [x] `c7f0f44b` maps RFC 9126 `/par` semantics to the capability and composes
+  durable PAR plus audit operations on one injected layer-60 session.
+- [x] `7c4f59b3` adds and mounts the standalone layer-80 RFC 9126 carrier,
+  deletes the layer-30 HTTP module, preserves JAR/RAR/resource/FAPI/DPoP/mTLS
+  behavior, and prevents client authentication secrets from being persisted.
 
 ## 3. Layer 00: primitives
 
@@ -651,9 +659,9 @@ flags. Tier-4 claims require independent interoperability evidence.
 - [x] C3: finish all durable operations/hooks out of layer 01.
 - [ ] C4: remove route/runtime/provider imports from layer 01 and move routers
   to layer 80.
-  RFC 7662 introspection and RFC 7009 revocation are complete; token, PAR,
-  registration, authorization, userinfo, logout, discovery, and token-exchange
-  carriers remain.
+  RFC 7662 introspection, RFC 7009 revocation, and RFC 9126 PAR are complete;
+  token, registration, authorization, userinfo, logout, discovery, and
+  token-exchange carriers remain.
 - [x] C5: finish claim package/facade cleanup and remove protocol-specific
   deterministic package names.
 - [x] C6: finish EAT token/evidence/appraisal/provider verification chain.
@@ -1062,9 +1070,11 @@ The final audit proves:
 2. **C3b delegation/device/key/audit**: move remaining operations/hooks and
    delete layer-01 `_ops` use.
 3. **C4 routes/runtime barrels**: My Account, identity, realm, tenant, and
-   protocol-schema ownership is complete. Next add the missing OAuth
-   capability seam, move token/introspection/revocation/PAR/registration and
-   related HTTP bindings out of layer 30, and mount them from layer 80.
+   protocol-schema ownership is complete. Introspection, revocation, and PAR
+   now have explicit capability seams, protocol mappings, runtime composition,
+   and layer-80 carriers. Next move token, registration, authorization,
+   userinfo, logout, discovery, token-exchange, and related HTTP bindings out
+   of layer 30 and mount them from layer 80.
 4. **C5 neutral reusable ownership**: claims facade, scope matcher, subject
    strategy, OAuth/OIDC base cleanup.
 5. **C6 EAT chain**: typed token verifiers, verified evidence, appraisal
