@@ -2,6 +2,16 @@ from tigrbl_identity_contracts.capabilities import ProtocolCapabilityRequirement
 
 CAPABILITY_REQUIREMENTS = (
     ProtocolCapabilityRequirement(
+        "oauth-token-endpoint", "RFC6749", "issue-token-pair",
+        "POST /token", "token.issuance", "issue_token_pair",
+        "oauth:rfc6749",
+    ),
+    ProtocolCapabilityRequirement(
+        "oauth-token-endpoint", "RFC6749", "rotate-refresh-token",
+        "refresh_token grant", "token.issuance", "redeem_refresh_token",
+        "oauth:rfc6749",
+    ),
+    ProtocolCapabilityRequirement(
         "oauth-token-revocation", "RFC7009", "token-revocation",
         "/revoke", "token.revocation", "revoke_token", "oauth:rfc7009",
     ),

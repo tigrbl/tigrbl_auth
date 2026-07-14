@@ -2506,6 +2506,7 @@ dependencies = [
     { name = "tigrbl-security-proof-pkce" },
     { name = "tigrbl-security-trust-contracts" },
     { name = "tigrbl-token-introspection-capability" },
+    { name = "tigrbl-token-issuance-capability" },
     { name = "tigrbl-token-revocation-capability" },
 ]
 
@@ -2535,6 +2536,7 @@ requires-dist = [
     { name = "tigrbl-security-proof-pkce", specifier = "==0.1.0" },
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
     { name = "tigrbl-token-introspection-capability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-token-issuance-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-token-revocation-capability", specifier = "==0.4.0.dev2" },
 ]
 
@@ -3012,6 +3014,7 @@ dependencies = [
     { name = "tigrbl-svid-verifier-provider" },
     { name = "tigrbl-token-bases" },
     { name = "tigrbl-token-introspection-capability" },
+    { name = "tigrbl-token-issuance-capability" },
     { name = "tigrbl-token-revocation-capability" },
     { name = "tigrbl-trust-anchor-provider" },
     { name = "tigrbl-trust-federation-graph-concrete" },
@@ -3369,6 +3372,7 @@ requires-dist = [
     { name = "tigrbl-svid-verifier-provider", editable = "pkgs/20-providers/tigrbl-svid-verifier-provider" },
     { name = "tigrbl-token-bases", editable = "pkgs/05-bases/tigrbl-token-bases" },
     { name = "tigrbl-token-introspection-capability", editable = "pkgs/40-capabilities/tigrbl-token-introspection-capability" },
+    { name = "tigrbl-token-issuance-capability", editable = "pkgs/40-capabilities/tigrbl-token-issuance-capability" },
     { name = "tigrbl-token-revocation-capability", editable = "pkgs/40-capabilities/tigrbl-token-revocation-capability" },
     { name = "tigrbl-trust-anchor-provider", editable = "pkgs/20-providers/tigrbl-trust-anchor-provider" },
     { name = "tigrbl-trust-federation-graph-concrete", editable = "pkgs/10-concrete/tigrbl-trust-federation-graph-concrete" },
@@ -6994,6 +6998,21 @@ requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2
 name = "tigrbl-token-introspection-capability"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/40-capabilities/tigrbl-token-introspection-capability" }
+dependencies = [
+    { name = "tigrbl-capability" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-capability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-token-issuance-capability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/40-capabilities/tigrbl-token-issuance-capability" }
 dependencies = [
     { name = "tigrbl-capability" },
     { name = "tigrbl-identity-contracts" },

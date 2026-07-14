@@ -48,6 +48,10 @@ def test_layer_40_contains_only_registered_multi_component_use_cases() -> None:
         "tigrbl-token-introspection-capability": (
             "coordinate protocol-neutral token-state lookup and profile validation"
         ),
+        "tigrbl-token-issuance-capability": (
+            "coordinate token-pair issuance and refresh rotation across signing and "
+            "durable lifecycle operations"
+        ),
         "tigrbl-token-revocation-capability": (
             "coordinate durable token revocation with optional audit recording"
         ),
