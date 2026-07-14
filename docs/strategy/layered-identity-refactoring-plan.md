@@ -144,6 +144,18 @@ Required ownership rules:
   the old OIDC package is a compatibility facade.
 - [x] EAT is split into deterministic claim/evidence parsing at layer 10 and an
   integrity-verifying evidence provider at layer 20.
+- [x] `b9be0112` adds typed token-introspection contracts and a reportable,
+  delegated `token.introspection` capability at layer 40.
+- [x] `5273d55b` maps the RFC 7662 wire operation to that capability and owns
+  token-activity semantics in the descriptive layer-50 `introspection` module.
+- [x] `ecafbc72` composes the durable layer-30 lookup into the capability and
+  the selected RFC 7662 service at layer 60.
+- [x] `b07f4334` adds the standalone layer-80 RFC 7662 HTTP carrier package.
+- [x] `9afc2a70` and `b8bd18c` mount that carrier from runtime composition,
+  move client authentication out of layer 30, reduce layer-30 introspection to
+  carrier-neutral durable adapters, and preserve the layer-70 compatibility
+  surface. Focused ownership, conformance, API, and real Basic-auth integration
+  flows pass.
 
 ## 3. Layer 00: primitives
 
@@ -633,6 +645,9 @@ flags. Tier-4 claims require independent interoperability evidence.
 - [x] C3: finish all durable operations/hooks out of layer 01.
 - [ ] C4: remove route/runtime/provider imports from layer 01 and move routers
   to layer 80.
+  RFC 7662 introspection is complete; token, revocation, PAR, registration,
+  authorization, userinfo, logout, discovery, and token-exchange carriers
+  remain.
 - [x] C5: finish claim package/facade cleanup and remove protocol-specific
   deterministic package names.
 - [x] C6: finish EAT token/evidence/appraisal/provider verification chain.
