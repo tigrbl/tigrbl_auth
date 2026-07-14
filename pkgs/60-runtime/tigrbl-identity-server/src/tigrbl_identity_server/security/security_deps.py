@@ -26,6 +26,7 @@ from tigrbl.security import Depends
 from tigrbl_identity_runtime.deployment import deployment_from_request
 
 from tigrbl_identity_storage_runtime.engine import get_db
+from tigrbl_identity_storage_runtime.revocation import is_revoked_async
 from tigrbl_identity_jose.jwt_coder import JWTCoder, InvalidTokenError
 from tigrbl_identity_storage.tables import User
 from tigrbl_identity_server.security.context import principal_var
@@ -48,7 +49,9 @@ _jwt_coder: JWTCoder | None = None
 async def _get_jwt_coder() -> JWTCoder:
     global _jwt_coder
     if _jwt_coder is None:
-        _jwt_coder = await JWTCoder.async_default()
+        _jwt_coder = await JWTCoder.async_default(
+            revocation_checker=is_revoked_async,
+        )
     return _jwt_coder
 
 

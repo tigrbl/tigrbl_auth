@@ -20,6 +20,7 @@ from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import verify_acces
 from tigrbl_identity_contracts.principals import PrincipalLike
 from tigrbl_identity_storage.tables import User
 from tigrbl_identity_storage_runtime.engine import get_db
+from tigrbl_identity_storage_runtime.revocation import is_revoked_async
 from tigrbl_identity_server.security.api_key_authentication import authenticate_api_key
 
 _jwt_coder: JWTCoder | None = None
@@ -28,7 +29,9 @@ _jwt_coder: JWTCoder | None = None
 async def _get_jwt_coder() -> JWTCoder:
     global _jwt_coder
     if _jwt_coder is None:
-        _jwt_coder = await JWTCoder.async_default()
+        _jwt_coder = await JWTCoder.async_default(
+            revocation_checker=is_revoked_async,
+        )
     return _jwt_coder
 
 

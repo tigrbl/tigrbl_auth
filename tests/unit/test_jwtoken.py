@@ -19,6 +19,10 @@ from tigrbl_auth.jwtoken import (
 )
 
 
+def _not_revoked(_token: str) -> bool:
+    return False
+
+
 @pytest.mark.unit
 class TestJWTCoder:
     """Test JWTCoder class for JWT token operations."""
@@ -42,11 +46,15 @@ class TestJWTCoder:
 
     def create_jwt_coder(self):
         """Create a JWTCoder instance with test keys."""
-        return JWTCoder(self.test_private_key, self.test_public_key)
+        return JWTCoder(
+            self.test_private_key,
+            self.test_public_key,
+            revocation_checker=_not_revoked,
+        )
 
     def test_jwt_coder_initialization(self):
         """JWTCoder can sign and decode using provided keys."""
-        coder = JWTCoder(self.test_private_key, self.test_public_key)
+        coder = self.create_jwt_coder()
 
         token = coder.sign(sub="a", tid="t")
         payload = coder.decode(token)
@@ -56,13 +64,31 @@ class TestJWTCoder:
 
     def test_default_factory_method(self):
         """JWTCoder.default() returns a working instance."""
-        coder = JWTCoder.default()
+        coder = JWTCoder.default(revocation_checker=_not_revoked)
 
         token = coder.sign(sub="a", tid="t")
         payload = coder.decode(token)
 
         assert payload["sub"] == "a"
         assert payload["tid"] == "t"
+
+    def test_decode_requires_explicit_revocation_checker(self):
+        coder = JWTCoder(self.test_private_key, self.test_public_key)
+        token = coder.sign(sub="a", tid="t")
+
+        with pytest.raises(RuntimeError, match="revocation checker is required"):
+            coder.decode(token)
+
+    def test_decode_rejects_token_reported_revoked(self):
+        coder = JWTCoder(
+            self.test_private_key,
+            self.test_public_key,
+            revocation_checker=lambda _token: True,
+        )
+        token = coder.sign(sub="a", tid="t")
+
+        with pytest.raises(InvalidTokenError, match="token revoked"):
+            coder.decode(token)
 
     def test_sign_token_with_required_claims(self):
         """Test signing a token with required claims."""
@@ -253,7 +279,11 @@ class TestJWTCoder:
             format=serialization.PublicFormat.SubjectPublicKeyInfo,
         )
 
-        different_coder = JWTCoder(different_private_key, different_public_key)
+        different_coder = JWTCoder(
+            different_private_key,
+            different_public_key,
+            revocation_checker=_not_revoked,
+        )
 
         sub = str(uuid4())
         tid = str(uuid4())
@@ -432,7 +462,11 @@ class TestJWTCoder:
             format=serialization.PublicFormat.SubjectPublicKeyInfo,
         )
 
-        coder2 = JWTCoder(different_private_key, different_public_key)
+        coder2 = JWTCoder(
+            different_private_key,
+            different_public_key,
+            revocation_checker=_not_revoked,
+        )
 
         sub = str(uuid4())
         tid = str(uuid4())
@@ -463,7 +497,7 @@ class TestJWTCoderWithRealKeys:
     def test_default_coder_with_temp_keys(self, temp_key_file):
         """Test JWTCoder.default() with temporary key file."""
         # This will use the temp_key_file fixture which creates a key
-        coder = JWTCoder.default()
+        coder = JWTCoder.default(revocation_checker=_not_revoked)
 
         sub = str(uuid4())
         tid = str(uuid4())
@@ -477,7 +511,7 @@ class TestJWTCoderWithRealKeys:
 
     def test_sign_pair_with_real_keys(self, temp_key_file):
         """Test token pair generation with real keys."""
-        coder = JWTCoder.default()
+        coder = JWTCoder.default(revocation_checker=_not_revoked)
 
         sub = str(uuid4())
         tid = str(uuid4())
@@ -495,7 +529,7 @@ class TestJWTCoderWithRealKeys:
 
     def test_refresh_flow_with_real_keys(self, temp_key_file):
         """Test complete refresh flow with real keys."""
-        coder = JWTCoder.default()
+        coder = JWTCoder.default(revocation_checker=_not_revoked)
 
         sub = str(uuid4())
         tid = str(uuid4())

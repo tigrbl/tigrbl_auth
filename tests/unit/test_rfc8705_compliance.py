@@ -25,6 +25,10 @@ from tigrbl_auth.rfc.rfc8705 import (
 )
 
 
+def _not_revoked(_token: str) -> bool:
+    return False
+
+
 def _generate_cert_pem() -> bytes:
     """Return a minimal self-signed certificate in PEM format."""
     key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
@@ -59,7 +63,7 @@ def test_thumbprint_and_binding_helpers():
 def test_certificate_thumbprint_enforced(monkeypatch):
     """RFC 8705 §3.1 requires matching cnf.x5t#S256 when enabled."""
     monkeypatch.setattr(runtime_cfg.settings, "enable_rfc8705", True)
-    coder = JWTCoder.default()
+    coder = JWTCoder.default(revocation_checker=_not_revoked)
     token = coder.sign(sub="alice", tid="tenant", cert_thumbprint="thumb")
     payload = coder.decode(token, cert_thumbprint="thumb")
     assert payload["cnf"]["x5t#S256"] == "thumb"
@@ -71,7 +75,7 @@ def test_certificate_thumbprint_enforced(monkeypatch):
 def test_sign_requires_thumbprint_when_enabled(monkeypatch):
     """RFC 8705 demands certificate binding when feature flag is on."""
     monkeypatch.setattr(runtime_cfg.settings, "enable_rfc8705", True)
-    coder = JWTCoder.default()
+    coder = JWTCoder.default(revocation_checker=_not_revoked)
     with pytest.raises(ValueError):
         coder.sign(sub="carol", tid="tenant")
 
@@ -80,7 +84,7 @@ def test_sign_requires_thumbprint_when_enabled(monkeypatch):
 def test_feature_toggle_disabled(monkeypatch):
     """When disabled, tokens need not include the cnf claim."""
     monkeypatch.setattr(runtime_cfg.settings, "enable_rfc8705", False)
-    coder = JWTCoder.default()
+    coder = JWTCoder.default(revocation_checker=_not_revoked)
     token = coder.sign(sub="bob", tid="tenant")
     payload = coder.decode(token)
     assert "cnf" not in payload
@@ -90,7 +94,7 @@ def test_feature_toggle_disabled(monkeypatch):
 def test_decode_requires_cnf_claim_when_enabled(monkeypatch):
     """RFC 8705 §3.1 rejects tokens lacking cnf when feature flag is enabled."""
     monkeypatch.setattr(runtime_cfg.settings, "enable_rfc8705", False)
-    coder = JWTCoder.default()
+    coder = JWTCoder.default(revocation_checker=_not_revoked)
     token = coder.sign(sub="dave", tid="tenant")
     monkeypatch.setattr(runtime_cfg.settings, "enable_rfc8705", True)
     with pytest.raises(InvalidTokenError):

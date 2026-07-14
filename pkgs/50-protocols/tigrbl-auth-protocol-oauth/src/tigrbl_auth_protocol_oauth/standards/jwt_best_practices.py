@@ -25,7 +25,7 @@ def validate_jwt_best_practices(
 ) -> dict[str, Any]:
     if enabled is None:
         enabled = settings.enable_rfc8725
-    claims = JWTCoder.default().decode(token)
+    claims = JWTCoder.default().decode(token, verify_revocation=False)
     if not enabled:
         return claims
     head_b64 = token.split(".")[0]

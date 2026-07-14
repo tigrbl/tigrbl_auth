@@ -19,6 +19,7 @@ from tigrbl_auth_protocol_oauth.standards.bearer_token_usage import extract_bear
 from swarmauri_core.crypto.types import JWAAlg
 from tigrbl_identity_runtime.deployment import deployment_from_request
 from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_storage_runtime.revocation import is_revoked_async
 
 _jwt_coder: JWTCoder | None = None
 
@@ -100,7 +101,9 @@ async def _runtime_jwt_coder():
         return default_factory()
     if _jwt_coder is not None:
         return _jwt_coder
-    _jwt_coder = await JWTCoder.async_default()
+    _jwt_coder = await JWTCoder.async_default(
+        revocation_checker=is_revoked_async,
+    )
     return _jwt_coder
 
 

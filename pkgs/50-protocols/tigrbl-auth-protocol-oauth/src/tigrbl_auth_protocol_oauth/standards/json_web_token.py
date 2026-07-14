@@ -131,7 +131,9 @@ def decode_jwt(token: str) -> dict[str, Any]:
     if not settings.enable_rfc7519:
         raise RuntimeError(f"RFC 7519 support disabled: {RFC7519_SPEC_URL}")
     try:
-        return _call_runtime(lambda coder: coder.decode(token))
+        return _call_runtime(
+            lambda coder: coder.decode(token, verify_revocation=False)
+        )
     except Exception:
         pass
     return _fallback_decode(token)

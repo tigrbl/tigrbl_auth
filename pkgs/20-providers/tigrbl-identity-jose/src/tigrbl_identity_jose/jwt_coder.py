@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
+import inspect
+from collections.abc import Awaitable, Callable
 from typing import Any, Dict, Iterable, Optional, Tuple
 from uuid import uuid4
 
@@ -21,11 +23,21 @@ from .pqc_jwt import (
 )
 
 
-class JWTCoder(JwtCoderBase):
-    __slots__ = ("_svc", "_kid")
+RevocationChecker = Callable[[str], bool | Awaitable[bool]]
 
-    def __init__(self, arg1: Any, arg2: Any):
+
+class JWTCoder(JwtCoderBase):
+    __slots__ = ("_svc", "_kid", "_revocation_checker")
+
+    def __init__(
+        self,
+        arg1: Any,
+        arg2: Any,
+        *,
+        revocation_checker: RevocationChecker | None = None,
+    ):
         runtime = _load_runtime()
+        self._revocation_checker = revocation_checker
         if isinstance(arg1, runtime["JWTTokenService"]) and isinstance(arg2, str):
             self._svc = arg1
             self._kid = arg2
@@ -46,14 +58,22 @@ class JWTCoder(JwtCoderBase):
         raise TypeError("JWTCoder requires (JWTTokenService, kid) or (private_pem, public_pem)")
 
     @classmethod
-    def default(cls) -> "JWTCoder":
+    def default(
+        cls,
+        *,
+        revocation_checker: RevocationChecker | None = None,
+    ) -> "JWTCoder":
         svc, kid = _svc()
-        return cls(svc, kid)
+        return cls(svc, kid, revocation_checker=revocation_checker)
 
     @classmethod
-    async def async_default(cls) -> "JWTCoder":
+    async def async_default(
+        cls,
+        *,
+        revocation_checker: RevocationChecker | None = None,
+    ) -> "JWTCoder":
         svc, kid = await _svc_async()
-        return cls(svc, kid)
+        return cls(svc, kid, revocation_checker=revocation_checker)
 
     async def async_sign(
         self,
@@ -173,8 +193,16 @@ class JWTCoder(JwtCoderBase):
         cnf = payload.get("cnf") if isinstance(payload.get("cnf"), dict) else {}
         if getattr(settings, "enable_rfc8705", False) and cnf.get("x5t#S256") is not None:
             runtime["validate_certificate_binding"](payload, cert_thumbprint)
-        if verify_revocation and await runtime["is_revoked_async"](token):
-            raise InvalidTokenError("token revoked")
+        if verify_revocation:
+            if self._revocation_checker is None:
+                raise RuntimeError(
+                    "revocation checker is required when revocation verification is enabled"
+                )
+            revoked = self._revocation_checker(token)
+            if inspect.isawaitable(revoked):
+                revoked = await revoked
+            if revoked:
+                raise InvalidTokenError("token revoked")
         return payload
 
     def verify(self, token: str, **kwargs: Any) -> Dict[str, Any]:

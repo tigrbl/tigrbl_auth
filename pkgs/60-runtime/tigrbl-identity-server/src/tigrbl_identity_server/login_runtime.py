@@ -15,6 +15,7 @@ async def login_user(*, request: Request, db: Any, identifier: str, password: st
     from tigrbl_identity_jose.jwt_coder import JWTCoder
     from tigrbl_identity_runtime.http_standards.cookies import issue_session_cookie, session_cookie_policy
     from tigrbl_identity_runtime.settings import settings
+    from tigrbl_identity_storage_runtime.revocation import is_revoked_async
     from tigrbl_identity_server.rest.shared import _require_tls
     from tigrbl_identity_server.security.handler_records import (
         append_audit_event_record,
@@ -40,7 +41,9 @@ async def login_user(*, request: Request, db: Any, identifier: str, password: st
         username=row.username,
         expires_at=expires_at,
     )
-    jwt = await JWTCoder.async_default()
+    jwt = await JWTCoder.async_default(
+        revocation_checker=is_revoked_async,
+    )
     access, refresh = await issue_token_pair_records(
         db,
         jwt=jwt,

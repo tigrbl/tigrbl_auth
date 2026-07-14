@@ -26,7 +26,6 @@ def _load_runtime() -> dict[str, Any]:
         from swarmauri_keyprovider_local import LocalKeyProvider
         from swarmauri_tokens_jwt import JWTTokenService
         from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import validate_certificate_binding
-        from tigrbl_auth_protocol_oauth.standards.revocation import is_revoked, is_revoked_async
         from tigrbl_identity_runtime.settings import settings
     except Exception as exc:  # pragma: no cover
         raise RuntimeError("runtime token-service dependencies are unavailable") from exc
@@ -42,8 +41,6 @@ def _load_runtime() -> dict[str, Any]:
         "KeyUse": KeyUse,
         "settings": settings,
         "validate_certificate_binding": validate_certificate_binding,
-        "is_revoked": is_revoked,
-        "is_revoked_async": is_revoked_async,
     }
 
 
