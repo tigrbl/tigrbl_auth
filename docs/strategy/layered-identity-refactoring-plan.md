@@ -104,6 +104,12 @@ Required ownership rules:
   lookup operation, bootstrap secret materialization, and password hashing from
   the `User` storage model; the server runtime owns the HTTP DTOs and routes,
   layer 30 owns identifier lookup, and the bcrypt provider owns hashing.
+- [x] `a188ab76` replaces EAT's boolean integrity callback with explicit typed
+  JWT/CWT token verifiers, requires the EAT profile and trusted issuer/replay
+  result, parses only authenticated claims, rejects claim substitution, and
+  restricts reference-backed appraisal to verified attestation evidence. The
+  appraisal capability reports verification, reference resolution, appraisal,
+  and optional result-recording operations separately.
 - [x] Claim primitives, contracts, bases, `ClaimType`, `ClaimValueType`,
   `ClaimNameKind`, and standalone concrete claim packages exist.
 - [x] Protocol-neutral scope matching exists as
