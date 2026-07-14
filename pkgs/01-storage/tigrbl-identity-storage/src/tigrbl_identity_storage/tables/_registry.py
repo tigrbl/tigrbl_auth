@@ -1,6 +1,5 @@
-"""Persistence models and engine exports for the Tigrbl-native package tree."""
-
-from tigrbl import bind
+"""Canonical mapped-table inventory for identity storage."""
+# ruff: noqa: F401
 
 from tigrbl_identity_storage.framework import RestOltpTable
 

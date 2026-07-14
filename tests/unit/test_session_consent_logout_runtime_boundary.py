@@ -184,7 +184,7 @@ async def test_logout_propagation_is_runtime_owned(
     assert complete["propagated_at"] is not None
 
 
-def test_runtime_specs_preserve_operation_arity_and_schemas() -> None:
+def test_runtime_specs_preserve_arity_without_choosing_wire_schemas() -> None:
     session_ops = {operation.alias: operation for operation in AuthSessionRuntimeSpec.ops}
     consent_ops = {operation.alias: operation for operation in ConsentRuntimeSpec.ops}
     logout_ops = {operation.alias: operation for operation in LogoutStateRuntimeSpec.ops}
@@ -194,8 +194,8 @@ def test_runtime_specs_preserve_operation_arity_and_schemas() -> None:
     assert session_ops["get_active"].arity == "member"
     assert session_ops["rotate_cookie_secret"].arity == "member"
     assert session_ops["bind_client"].arity == "member"
-    assert consent_ops["list_for_user"].response_model is Consent.schemas.list.out
+    assert consent_ops["list_for_user"].response_model is None
     assert consent_ops["revoke_for_user"].arity == "member"
-    assert consent_ops["revoke_for_user"].response_model is Consent.schemas.update.out
+    assert consent_ops["revoke_for_user"].response_model is None
     assert logout_ops["update_metadata"].arity == "member"
     assert logout_ops["mark_channel"].arity == "member"

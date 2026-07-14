@@ -24,7 +24,6 @@ AuthCodeRuntimeSpec = deriveRuntimeTableSpec(
         makeRuntimeOperation(
             alias="authorize",
             handler=persist_authorization_code,
-            response_model=AuthCode.schemas.create.out,
         ),
     ),
 )

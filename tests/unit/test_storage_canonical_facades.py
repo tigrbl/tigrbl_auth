@@ -18,6 +18,27 @@ def test_storage_tables_do_not_export_ambient_session_module() -> None:
     assert runtime_session.resolve_storage_provider.__module__ == "tigrbl_identity_storage_runtime.session"
 
 
+def test_storage_table_import_does_not_activate_tigrbl_runtime_bindings() -> None:
+    storage_tables_source = Path(
+        "pkgs/01-storage/tigrbl-identity-storage/src/"
+        "tigrbl_identity_storage/tables/__init__.py"
+    ).read_text(encoding="utf-8")
+    registry_source = Path(
+        "pkgs/01-storage/tigrbl-identity-storage/src/"
+        "tigrbl_identity_storage/tables/_registry.py"
+    ).read_text(encoding="utf-8")
+
+    assert "from tigrbl import bind" not in storage_tables_source
+    assert "from tigrbl import bind" not in registry_source
+    assert "bind(" not in storage_tables_source
+    assert "rebind(" not in storage_tables_source
+
+    runtime_initializer = importlib.import_module(
+        "tigrbl_identity_storage_runtime.initialize"
+    )
+    assert callable(runtime_initializer.initializeIdentityRuntimeTables)
+
+
 TABLE_MODULE_EXPORTS = {
     "access_review_campaign": ("AccessReviewCampaign",),
     "access_review_decision": ("AccessReviewDecision",),

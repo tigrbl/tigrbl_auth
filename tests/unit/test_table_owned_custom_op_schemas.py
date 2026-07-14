@@ -100,7 +100,7 @@ def test_storage_tables_export_table_inventory_without_schema_namespaces() -> No
         exec("from tigrbl_identity_storage.tables import RoleSchemas", {})
 
 
-def test_storage_schema_module_exports_openapi_component_model_names() -> None:
+def test_storage_schema_registry_reflects_only_materialized_table_schemas() -> None:
     storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
     storage_schemas = importlib.import_module("tigrbl_identity_storage.schemas")
     schema_registry = importlib.import_module("tigrbl_identity_storage.schema_registry")
@@ -128,9 +128,10 @@ def test_storage_schema_module_exports_openapi_component_model_names() -> None:
                 )
                 assert schema_alias.model_json_schema() == schema.model_json_schema()
 
-    assert storage_schemas.RoleCreateRequest is storage_tables.Role.schemas.create.in_
-    assert storage_schemas.CredentialServiceKeyCreateRequest is storage_tables.CredentialServiceKey.schemas.create.in_
-    assert storage_schemas.OperatorRecordCreateRequest is storage_tables.OperatorRecord.schemas.create.in_
+    # Importing layer 01 no longer binds every mapped table merely to generate
+    # CRUD schemas. Runtime/API composition materializes selected tables later.
+    assert not hasattr(storage_schemas, "RoleCreateRequest")
+    assert not hasattr(storage_tables.Role.schemas, "create")
 
 
 def test_table_schema_alias_exports_cover_router_openapi_components() -> None:

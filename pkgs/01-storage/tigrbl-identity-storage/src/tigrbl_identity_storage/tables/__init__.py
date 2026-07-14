@@ -1,6 +1,4 @@
-'Persistence models and engine exports for the Tigrbl-native package tree.'
-
-from tigrbl import bind
+'Persistence models and inventory exports for the Tigrbl-native package tree.'
 
 from ._registry import *  # noqa: F401,F403
 from ._registry import _CLIENT_ID_RE, _TABLE_MODELS
@@ -8,15 +6,6 @@ from ._registry import _CLIENT_ID_RE, _TABLE_MODELS
 TABLE_MODELS = _TABLE_MODELS
 TABLE_MODEL_BY_NAME = {model.__name__: model for model in TABLE_MODELS}
 TABLE_MODEL_BY_TABLENAME = {model.__tablename__: model for model in TABLE_MODELS}
-
-
-def _ensure_runtime_bindings() -> None:
-    """Materialize model handlers/schemas through Tigrbl's public bind API."""
-
-    for model in _TABLE_MODELS:
-        handlers = getattr(model, "handlers", None)
-        if getattr(handlers, "read", None) is None:
-            bind(model)
 
 
 def _attach_custom_op_schemas() -> None:
@@ -41,9 +30,6 @@ def _attach_custom_op_schemas() -> None:
     set_schema(RevokedToken, "revoke", in_=RevocationIn, out=RevocationOut)
     set_schema(LogoutState, "logout", in_=LogoutIn, out=LogoutOut)
 
-
-
-_ensure_runtime_bindings()
 _attach_custom_op_schemas()
 
 __all__ = [
