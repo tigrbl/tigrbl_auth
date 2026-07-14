@@ -6,7 +6,7 @@ from datetime import datetime
 from typing import Any
 from uuid import UUID
 
-from tigrbl_identity_storage.tables._sync import run_async
+from .sync import run_async
 from .ops.common import create_table_record
 from .ops.consents import revoke_consent_for_user
 from .session import storage_session

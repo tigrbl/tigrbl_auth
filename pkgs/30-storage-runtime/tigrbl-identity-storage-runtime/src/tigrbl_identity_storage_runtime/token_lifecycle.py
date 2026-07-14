@@ -7,7 +7,7 @@ from typing import Any
 
 from tigrbl_identity_core.clock import utc_now
 from tigrbl_identity_core.digests import token_hash
-from tigrbl_identity_storage.tables._sync import run_async
+from .sync import run_async
 from .ops.common import (
     delete_table_record,
     field_value,

@@ -7,10 +7,11 @@ from typing import Any
 from tigrbl_identity_storage.tables import CredentialApiKey, CredentialServiceKey, User
 
 from .common import list_table_records, maybe_await, read_table_record
+from .identities import lookup_identity_by_identifier
 
 
 async def find_password_principals(db: Any, identifier: str) -> list[Any]:
-    row = await User.lookup_by_identifier(
+    row = await lookup_identity_by_identifier(
         {"payload": {"identifier": identifier}, "db": db}
     )
     return [row] if row is not None else []

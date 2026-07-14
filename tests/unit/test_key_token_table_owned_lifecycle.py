@@ -9,7 +9,7 @@ from tigrbl_identity_storage.tables import (
     RevokedToken,
     TokenRecord,
 )
-from tigrbl_identity_storage.tables._security_ctx import (
+from tigrbl_identity_storage_runtime.security_context import (
     JWT_CODER_CTX,
     KEY_PROVIDER_CTX,
     SIGNER_CTX,

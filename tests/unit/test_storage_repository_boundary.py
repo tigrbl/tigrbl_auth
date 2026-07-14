@@ -137,4 +137,6 @@ def test_storage_framework_is_schema_only_and_generic_ops_are_removed() -> None:
     }
 
     assert not (STORAGE_SRC / "tables" / "_ops.py").exists()
+    assert not (STORAGE_SRC / "tables" / "_sync.py").exists()
+    assert not (STORAGE_SRC / "tables" / "_security_ctx.py").exists()
     assert all(name not in framework_source for name in forbidden)

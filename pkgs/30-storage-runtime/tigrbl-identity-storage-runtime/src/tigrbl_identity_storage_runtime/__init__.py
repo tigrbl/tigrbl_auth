@@ -16,11 +16,13 @@ from .registration_lifecycle import (
     get_client_registration_async,
     upsert_client_registration_async,
 )
+from .security_context import *
 from .session import *
 from .session_lifecycle import *
 from .tables import *
 from .token_persistence import *
 from .token_lifecycle import *
+from .sync import *
 from .topology_validation import *
 
 __all__ = [
@@ -90,4 +92,6 @@ __all__ = [
     "check_and_reserve",
     "make_attestation_appraisal_recorder",
     "publish_reference_material",
+    "run_async",
+    "stash_security_providers",
 ]

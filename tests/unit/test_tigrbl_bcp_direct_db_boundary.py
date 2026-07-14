@@ -81,7 +81,7 @@ SEMANTIC_FACADE_PATHS = [
     ROOT / "pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/_surfaces/__init__.py",
     ROOT / "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/persistence.py",
     ROOT / "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/operator_store.py",
-    ROOT / "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/_sync.py",
+    ROOT / "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/sync.py",
     ROOT / "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/_operator_store/__init__.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/surfaces.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/_surfaces/__init__.py",
@@ -105,7 +105,7 @@ SYNC_COMPAT_PATHS = [
     ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/_dpop/primitives.py",
     ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/jwtoken.py",
     ROOT / "pkgs/20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose/standards/rfc8037.py",
-    ROOT / "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/_sync.py",
+    ROOT / "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/sync.py",
 ]
 
 ASYNC_REQUEST_TOKEN_PATHS = [

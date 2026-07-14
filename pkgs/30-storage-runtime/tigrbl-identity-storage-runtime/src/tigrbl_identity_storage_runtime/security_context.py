@@ -1,4 +1,4 @@
-"""Context keys consumed by table-owned key and token operations."""
+"""Context keys used to compose runtime key and token providers."""
 
 from __future__ import annotations
 
@@ -20,16 +20,15 @@ def stash_security_providers(
     jwt_coder: Any | None = None,
     clock: Any | None = None,
 ) -> MutableMapping[str, Any]:
-    if key_provider is not None:
-        ctx[KEY_PROVIDER_CTX] = key_provider
-    if signer is not None:
-        ctx[SIGNER_CTX] = signer
-    if verifier is not None:
-        ctx[VERIFIER_CTX] = verifier
-    if jwt_coder is not None:
-        ctx[JWT_CODER_CTX] = jwt_coder
-    if clock is not None:
-        ctx[CLOCK_CTX] = clock
+    for key, value in (
+        (KEY_PROVIDER_CTX, key_provider),
+        (SIGNER_CTX, signer),
+        (VERIFIER_CTX, verifier),
+        (JWT_CODER_CTX, jwt_coder),
+        (CLOCK_CTX, clock),
+    ):
+        if value is not None:
+            ctx[key] = value
     return ctx
 
 

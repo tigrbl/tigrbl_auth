@@ -1,4 +1,4 @@
-"""Synchronous compatibility wrapper for table-owned async helpers."""
+"""Synchronous compatibility bridge for layer-30 async lifecycle operations."""
 
 from __future__ import annotations
 
@@ -13,7 +13,10 @@ def run_async(coro: Coroutine[Any, Any, Any]) -> Any:
     except RuntimeError:
         return asyncio.run(coro)
     coro.close()
-    raise RuntimeError("sync table helpers cannot run inside an active event loop; use the async helper")
+    raise RuntimeError(
+        "sync runtime helpers cannot run inside an active event loop; "
+        "use the async lifecycle operation"
+    )
 
 
 __all__ = ["run_async"]

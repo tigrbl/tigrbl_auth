@@ -6,7 +6,7 @@ import warnings
 from typing import Any
 
 from tigrbl_identity_core.digests import token_hash
-from tigrbl_identity_storage.tables._sync import run_async
+from .sync import run_async
 
 from .consent_lifecycle import (
     record_consent,

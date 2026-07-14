@@ -16,7 +16,7 @@ from ..ops.common import (
     field as _table_field,
     list_handler_records as _list_table_records,
 )
-from tigrbl_identity_storage.tables._sync import run_async
+from ..sync import run_async
 from tigrbl_identity_storage.tables.operator_activity import OperatorActivity
 from tigrbl_identity_storage.tables.operator_audit_event import OperatorAuditEvent
 from tigrbl_identity_storage.tables.operator_metadata import OperatorMetadata

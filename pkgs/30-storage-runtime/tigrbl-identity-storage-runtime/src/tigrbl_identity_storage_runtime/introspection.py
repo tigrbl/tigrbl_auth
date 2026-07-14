@@ -37,7 +37,7 @@ from tigrbl import (
 from tigrbl.engine import HybridSession as AsyncSession
 from tigrbl.runtime.status import HTTPException, status
 from .ops.common import first_handler_record, read_handler_record
-from tigrbl_identity_storage.tables._sync import run_async
+from .sync import run_async
 from tigrbl_identity_storage.tables.client import Client
 from tigrbl_identity_storage.tables.client_registration import ClientRegistration
 from .engine import get_db
