@@ -21,8 +21,21 @@ from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import verify_acces
 from tigrbl_identity_contracts.principals import PrincipalLike
 from tigrbl_identity_storage.tables import User
 from tigrbl_identity_storage_runtime.engine import get_db
+from tigrbl_identity_storage_runtime.ops.authentication_credentials import (
+    digest_api_key,
+    find_api_keys,
+    find_service_keys,
+    mark_credential_used,
+    resolve_user_principal,
+)
 
-_api_key_backend = ApiKeyBackend()
+_api_key_backend = ApiKeyBackend(
+    digest_key=digest_api_key,
+    find_api_keys=find_api_keys,
+    find_service_keys=find_service_keys,
+    resolve_user=resolve_user_principal,
+    mark_used=mark_credential_used,
+)
 _jwt_coder: JWTCoder | None = None
 
 

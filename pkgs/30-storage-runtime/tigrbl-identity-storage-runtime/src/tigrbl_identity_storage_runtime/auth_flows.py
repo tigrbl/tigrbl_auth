@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from tigrbl_identity_storage.framework import TigrblRouter
+from tigrbl import TigrblRouter
 
 from tigrbl_identity_storage_runtime.authz_surface import router as authz_router
 from tigrbl_identity_storage_runtime.login import router as login_router

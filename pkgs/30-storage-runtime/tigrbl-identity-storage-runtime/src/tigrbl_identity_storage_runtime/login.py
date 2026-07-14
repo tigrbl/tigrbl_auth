@@ -4,7 +4,8 @@ import secrets
 from datetime import datetime, timedelta, timezone
 from typing import Any
 
-from tigrbl_identity_storage.framework import Depends, HTTPException, JSONResponse, Request, TigrblRouter
+from tigrbl import Depends, JSONResponse, Request, TigrblRouter
+from tigrbl.runtime.status import HTTPException
 from tigrbl_identity_storage.tables.auth_session import CredsIn, TokenPair
 from .engine import get_db
 from tigrbl_principal_authentication import PasswordAuthenticationCapability

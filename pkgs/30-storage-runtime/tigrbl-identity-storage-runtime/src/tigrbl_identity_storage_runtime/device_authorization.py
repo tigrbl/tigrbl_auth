@@ -12,7 +12,8 @@ from .ops.common import create_record, read_record
 from tigrbl_identity_storage.tables.audit_event import AuditEvent
 
 try:  # pragma: no cover - exercised with full runtime deps installed
-    from tigrbl_identity_storage.framework import Depends, HTTPException, TigrblApp, TigrblRouter, status
+    from tigrbl import Depends, TigrblApp, TigrblRouter
+    from tigrbl.runtime.status import HTTPException, status
     from .engine import get_db
 except Exception:  # pragma: no cover - dependency-light fallback
     class _FallbackStatus:

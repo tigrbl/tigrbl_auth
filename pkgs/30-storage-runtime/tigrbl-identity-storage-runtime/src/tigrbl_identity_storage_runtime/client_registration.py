@@ -18,13 +18,12 @@ from tigrbl_identity_runtime.deployment import (
     resolve_deployment,
 )
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_storage.framework import (
+from tigrbl import (
     Depends,
-    HTTPException,
     TigrblApp,
     TigrblRouter,
-    status,
 )
+from tigrbl.runtime.status import HTTPException, status
 from .ops.common import (
     create_record,
     first_record,

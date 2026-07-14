@@ -6,7 +6,8 @@ from typing import Final
 
 from tigrbl_identity_runtime.deployment import ResolvedDeployment, deployment_from_app, deployment_from_request, resolve_deployment
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_storage.framework import HTTPException, Request, TigrblApp, TigrblRouter, status
+from tigrbl import Request, TigrblApp, TigrblRouter
+from tigrbl.runtime.status import HTTPException, status
 from tigrbl_identity_runtime.http_standards.well_known import WELL_KNOWN_ENDPOINTS
 from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER, JWKS_PATH
 from tigrbl_auth_protocol_oauth.standards.resource_verifier_contract import build_protected_resource_verifier_contract

@@ -26,7 +26,9 @@ from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
 )
 
 try:  # pragma: no cover - exercised with the full runtime stack installed
-    from tigrbl_identity_storage.framework import Header, HTTPException, Request, TigrblApp, TigrblRouter, status
+    from tigrbl import Request, TigrblApp, TigrblRouter
+    from tigrbl.core.crud.params import Header
+    from tigrbl.runtime.status import HTTPException, status
 except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
     class _FallbackStatus:
         HTTP_400_BAD_REQUEST = 400

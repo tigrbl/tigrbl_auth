@@ -5,8 +5,8 @@ from uuid import UUID, uuid4
 
 import pytest
 
-from tigrbl_identity_storage.tables import _ops as table_ops
-from tigrbl_identity_storage.tables._ops import normalize_uuid_filters
+from tigrbl_identity_storage_runtime.ops import common as table_ops
+from tigrbl_identity_storage_runtime.ops.common import normalize_uuid_filters
 
 
 class _Core:

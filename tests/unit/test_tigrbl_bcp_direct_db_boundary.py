@@ -79,7 +79,7 @@ SEMANTIC_FACADE_PATHS = [
     ROOT / "pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/surfaces.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/_deployment/__init__.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/_surfaces/__init__.py",
-    ROOT / "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/persistence.py",
+    ROOT / "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/persistence.py",
     ROOT / "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/operator_store.py",
     ROOT / "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/_sync.py",
     ROOT / "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/_operator_store/__init__.py",

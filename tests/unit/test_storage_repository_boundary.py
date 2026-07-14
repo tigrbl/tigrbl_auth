@@ -121,3 +121,20 @@ def test_engine_and_session_execution_are_runtime_owned() -> None:
     assert not (STORAGE_SRC / "db.py").exists()
     assert "build_engine(" in runtime_engine_source
     assert "asynccontextmanager" in runtime_session_source
+
+
+@pytest.mark.unit
+def test_storage_framework_is_schema_only_and_generic_ops_are_removed() -> None:
+    framework_source = (STORAGE_SRC / "framework.py").read_text(encoding="utf-8")
+    forbidden = {
+        "TigrblApp",
+        "TigrblRouter",
+        "hook_ctx",
+        "op_ctx",
+        "build_engine",
+        "storage_session",
+        "HTTPException",
+    }
+
+    assert not (STORAGE_SRC / "tables" / "_ops.py").exists()
+    assert all(name not in framework_source for name in forbidden)

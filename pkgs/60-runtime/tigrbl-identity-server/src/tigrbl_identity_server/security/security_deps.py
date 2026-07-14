@@ -32,6 +32,13 @@ from tigrbl_authn_credentials.backends import (
 )  # PasswordBackend not used here, but re-exported for completeness
 
 from tigrbl_identity_storage_runtime.engine import get_db
+from tigrbl_identity_storage_runtime.ops.authentication_credentials import (
+    digest_api_key,
+    find_api_keys,
+    find_service_keys,
+    mark_credential_used,
+    resolve_user_principal,
+)
 from tigrbl_identity_jose.jwt_coder import JWTCoder, InvalidTokenError
 from tigrbl_identity_storage.tables import User
 from tigrbl_identity_server.security.context import principal_var
@@ -47,7 +54,13 @@ from tigrbl_identity_runtime.settings import settings
 # ---------------------------------------------------------------------
 # Backends + Coder
 # ---------------------------------------------------------------------
-_api_key_backend = ApiKeyBackend()
+_api_key_backend = ApiKeyBackend(
+    digest_key=digest_api_key,
+    find_api_keys=find_api_keys,
+    find_service_keys=find_service_keys,
+    resolve_user=resolve_user_principal,
+    mark_used=mark_credential_used,
+)
 _jwt_coder: JWTCoder | None = None
 
 

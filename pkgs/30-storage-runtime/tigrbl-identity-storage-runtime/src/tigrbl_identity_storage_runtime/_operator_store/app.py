@@ -7,7 +7,7 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Any, AsyncIterator
 
-from tigrbl_identity_storage.framework import TigrblRouter
+from tigrbl import TigrblRouter
 from tigrbl_identity_storage.tables.operator_activity import OperatorActivity
 from tigrbl_identity_storage.tables.operator_audit_event import OperatorAuditEvent
 from tigrbl_identity_storage.tables.operator_metadata import OperatorMetadata

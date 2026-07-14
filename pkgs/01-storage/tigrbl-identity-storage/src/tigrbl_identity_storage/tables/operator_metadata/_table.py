@@ -5,8 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 from tigrbl_identity_storage.framework import RestOltpTable, Mapped, S, String, TZDateTime, acol
-
-from .._ops import utc_now
+from tigrbl_identity_core.clock import utc_now
 
 
 class OperatorMetadata(RestOltpTable):

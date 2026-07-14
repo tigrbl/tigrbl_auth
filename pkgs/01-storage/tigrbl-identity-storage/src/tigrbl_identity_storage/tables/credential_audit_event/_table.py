@@ -5,8 +5,7 @@ from __future__ import annotations
 import datetime as dt
 
 from tigrbl_identity_storage.framework import RestOltpTable, GUIDPk, JSON, Mapped, S, String, TZDateTime, Timestamped, acol
-
-from .._ops import utc_now
+from tigrbl_identity_core.clock import utc_now
 
 
 class CredentialAuditEvent(RestOltpTable, GUIDPk, Timestamped):

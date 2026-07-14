@@ -5,13 +5,12 @@ from __future__ import annotations
 from urllib.parse import parse_qs
 
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_storage.framework import (
-    HTTPException,
+from tigrbl import (
     Request,
     TigrblApp,
     TigrblRouter,
-    status,
 )
+from tigrbl.runtime.status import HTTPException, status
 from .token_lifecycle import (
     is_revoked,
     is_revoked_async,

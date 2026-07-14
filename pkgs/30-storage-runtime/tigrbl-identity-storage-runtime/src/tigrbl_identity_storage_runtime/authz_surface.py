@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from tigrbl_identity_storage.framework import TigrblRouter
+from tigrbl import TigrblRouter
 
 from tigrbl_identity_storage_runtime.authorization import router as authorize_router
 from tigrbl_identity_storage_runtime.introspection import api as introspection_api

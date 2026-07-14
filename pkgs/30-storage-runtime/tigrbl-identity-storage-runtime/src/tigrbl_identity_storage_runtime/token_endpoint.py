@@ -5,7 +5,8 @@ from __future__ import annotations
 from typing import Any
 
 from tigrbl.security import Depends as TigrblDepends
-from tigrbl_identity_storage.framework import AsyncSession, Request, TigrblRouter
+from tigrbl import Request, TigrblRouter
+from tigrbl.engine import HybridSession as AsyncSession
 from .engine import get_db
 from tigrbl_identity_storage.tables.token_record import TokenPair
 from tigrbl_identity_storage_runtime.token_request import token_request

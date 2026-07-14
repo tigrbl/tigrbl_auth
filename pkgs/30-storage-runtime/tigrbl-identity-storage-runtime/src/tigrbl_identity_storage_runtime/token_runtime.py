@@ -60,7 +60,8 @@ from tigrbl_auth_protocol_oauth.standards._rfc9700.security_profile import asser
 from tigrbl_auth_protocol_oauth.standards.proof_key_for_code_exchange import verify_code_challenge
 
 try:  # pragma: no cover - exercised with full runtime deps installed
-    from tigrbl_identity_storage.framework import HTTPException, JSONResponse as _FrameworkJSONResponse, status
+    from tigrbl import JSONResponse as _FrameworkJSONResponse
+    from tigrbl.runtime.status import HTTPException, status
 
     class JSONResponse(_FrameworkJSONResponse):
         def __init__(self, content: Any, *, status_code: int = 200, headers: dict[str, str] | None = None):

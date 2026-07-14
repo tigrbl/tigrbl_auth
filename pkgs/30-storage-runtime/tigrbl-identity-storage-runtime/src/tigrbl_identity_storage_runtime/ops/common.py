@@ -5,6 +5,7 @@ from __future__ import annotations
 import inspect
 from collections.abc import Awaitable, Callable, Mapping
 from typing import Any
+from uuid import UUID
 
 from tigrbl_identity_core.clock import utc_now
 from tigrbl_identity_core.digests import token_hash
@@ -13,6 +14,45 @@ from tigrbl_identity_core.digests import token_hash
 SENSITIVE_RAW_FIELDS = frozenset(
     {"raw_nonce", "pre_authorized_code", "presentation_disclosures", "raw_payload"}
 )
+
+UUID_FILTER_KEYS = frozenset(
+    {
+        "id",
+        "tenant_id",
+        "user_id",
+        "client_id",
+        "session_id",
+        "service_identity_id",
+        "logout_id",
+        "consent_id",
+        "grant_id",
+        "parent_grant_id",
+        "child_grant_id",
+        "replaced_by_grant_id",
+        "actor_user_id",
+        "actor_client_id",
+    }
+)
+
+
+def coerce_uuid_value(value: Any) -> Any:
+    if value in {None, "", False} or isinstance(value, UUID):
+        return value
+    try:
+        return UUID(str(value))
+    except (TypeError, ValueError, AttributeError):
+        return value
+
+
+def normalize_uuid_identifier(value: Any) -> Any:
+    return coerce_uuid_value(value)
+
+
+def normalize_uuid_filters(filters: Mapping[str, Any]) -> dict[str, Any]:
+    return {
+        key: coerce_uuid_value(value) if key in UUID_FILTER_KEYS else value
+        for key, value in filters.items()
+    }
 
 
 def payload_from_context(ctx: Mapping[str, Any]) -> Mapping[str, Any]:
@@ -91,7 +131,7 @@ async def list_table_records(
     db: Any,
     filters: Mapping[str, Any] | None = None,
 ) -> list[Any]:
-    filters = dict(filters or {})
+    filters = normalize_uuid_filters(filters or {})
     context = {"payload": {"filters": filters}, "db": db}
     core = table.handlers.list.core
     parameters = inspect.signature(core, follow_wrapped=False).parameters
@@ -115,14 +155,15 @@ async def first_table_record(
     return rows[0] if rows else None
 
 
-async def read_table_record(table: type, db: Any, identifier: Any) -> Any:
-    context = {"path_params": {"id": identifier}, "db": db}
+async def read_table_record(table: type, db: Any, ident: Any) -> Any:
+    ident = normalize_uuid_identifier(ident)
+    context = {"path_params": {"id": ident}, "db": db}
     return await _call_table_core(
         table.handlers.read.core,
         table=table,
         db=db,
         context=context,
-        positional=(identifier,),
+        positional=(ident,),
     )
 
 
@@ -145,11 +186,11 @@ async def create_table_record(
 async def update_table_record(
     table: type,
     db: Any,
-    identifier: Any,
+    ident: Any,
     payload: Mapping[str, Any],
 ) -> Any:
     context = {
-        "path_params": {"id": identifier},
+        "path_params": {"id": normalize_uuid_identifier(ident)},
         "payload": dict(payload),
         "db": db,
     }
@@ -158,19 +199,20 @@ async def update_table_record(
         table=table,
         db=db,
         context=context,
-        positional=(identifier, dict(payload)),
+        positional=(normalize_uuid_identifier(ident), dict(payload)),
     )
     return result.get("item", result) if isinstance(result, Mapping) else result
 
 
-async def delete_table_record(table: type, db: Any, identifier: Any) -> Any:
-    context = {"path_params": {"id": identifier}, "db": db}
+async def delete_table_record(table: type, db: Any, ident: Any) -> Any:
+    ident = normalize_uuid_identifier(ident)
+    context = {"path_params": {"id": ident}, "db": db}
     return await _call_table_core(
         table.handlers.delete.core,
         table=table,
         db=db,
         context=context,
-        positional=(identifier,),
+        positional=(ident,),
     )
 
 
@@ -179,7 +221,7 @@ async def clear_table_records(
     db: Any,
     filters: Mapping[str, Any] | None = None,
 ) -> object:
-    filters = dict(filters or {})
+    filters = normalize_uuid_filters(filters or {})
     context = {"payload": {"filters": filters}, "db": db}
     core = table.handlers.clear.core
     parameters = inspect.signature(core, follow_wrapped=False).parameters
@@ -238,6 +280,8 @@ __all__ = [
     "list_handler_records",
     "list_records",
     "maybe_await",
+    "normalize_uuid_filters",
+    "normalize_uuid_identifier",
     "payload_from_context",
     "read_table_record",
     "read_handler_record",

@@ -49,9 +49,17 @@ class TestPasswordBackend:
 
     def setup_method(self):
         """Set up test fixtures for each test method."""
-        self.backend = PasswordBackend()
-        self.mock_db = AsyncMock()
         self.user_rows = []
+
+        async def find_principals(_db, identifier):
+            return [
+                row
+                for row in self.user_rows
+                if identifier in {row.username, row.email}
+            ]
+
+        self.backend = PasswordBackend(find_principals=find_principals)
+        self.mock_db = AsyncMock()
 
     @pytest.fixture(autouse=True)
     def _patch_user_handlers(self, monkeypatch):
@@ -195,10 +203,29 @@ class TestApiKeyBackend:
 
     def setup_method(self):
         """Set up test fixtures for each test method."""
-        self.backend = ApiKeyBackend()
-        self.mock_db = AsyncMock()
         self.api_key_rows = []
         self.service_key_rows = []
+
+        async def find_api_keys(_db, digest):
+            return [row for row in self.api_key_rows if row.digest == digest]
+
+        async def find_service_keys(_db, digest):
+            return [row for row in self.service_key_rows if row.digest == digest]
+
+        async def resolve_user(_db, row):
+            return getattr(row, "user", None)
+
+        async def mark_used(_db, row):
+            row.touch()
+
+        self.backend = ApiKeyBackend(
+            digest_key=CredentialApiKey.digest_of,
+            find_api_keys=find_api_keys,
+            find_service_keys=find_service_keys,
+            resolve_user=resolve_user,
+            mark_used=mark_used,
+        )
+        self.mock_db = AsyncMock()
 
     @pytest.fixture(autouse=True)
     def _patch_key_handlers(self, monkeypatch):
@@ -478,7 +505,7 @@ class TestApiKeyBackend:
             calls.append(value)
             return "mocked-digest"
 
-        monkeypatch.setattr("tigrbl_authn_credentials.backends.CredentialApiKey.digest_of", staticmethod(_digest_of))
+        monkeypatch.setattr(self.backend, "_digest_key", _digest_of)
 
         try:
             await self.backend.authenticate(self.mock_db, raw_key)
@@ -495,8 +522,14 @@ class TestBackendIntegration:
     @pytest.mark.asyncio
     async def test_password_and_api_key_backends_work_independently(self):
         """Test that both backends can be used independently."""
-        password_backend = PasswordBackend()
-        api_key_backend = ApiKeyBackend()
+        password_backend = PasswordBackend(find_principals=AsyncMock(return_value=[]))
+        api_key_backend = ApiKeyBackend(
+            digest_key=lambda value: value,
+            find_api_keys=AsyncMock(return_value=[]),
+            find_service_keys=AsyncMock(return_value=[]),
+            resolve_user=AsyncMock(return_value=None),
+            mark_used=AsyncMock(),
+        )
 
         # Verify they are different instances
         assert password_backend is not api_key_backend

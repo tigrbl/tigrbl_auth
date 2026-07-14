@@ -7,7 +7,8 @@ from typing import Any
 
 from tigrbl import TigrblApp, TigrblRouter
 from tigrbl_identity_contracts.attestation import AttestationEvidence
-from tigrbl_identity_storage.framework import HTTPException, Request, status
+from tigrbl import Request
+from tigrbl.runtime.status import HTTPException, status
 
 api = TigrblRouter()
 

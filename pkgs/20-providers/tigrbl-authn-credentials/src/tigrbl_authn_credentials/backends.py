@@ -3,16 +3,16 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
+import inspect
+from collections.abc import Awaitable, Callable, Sequence
 from typing import Any
 
 from tigrbl_identity_jose.key_management import verify_pw
 from tigrbl_identity_contracts.principals import PrincipalLike
-from tigrbl_identity_storage.tables._ops import field, list_records
-from tigrbl_identity_storage.tables import (
-    CredentialApiKey,
-    CredentialServiceKey,
-    User,
-)
+
+Lookup = Callable[[Any, str], Awaitable[Sequence[Any]]]
+ResolvePrincipal = Callable[[Any, Any], Awaitable[Any | None]]
+MarkUsed = Callable[[Any, Any], object | Awaitable[object]]
 
 
 class AuthError(Exception):
@@ -25,14 +25,27 @@ def _active(row: Any) -> bool:
     return bool(getattr(row, "is_active", True))
 
 
-class PasswordBackend:
-    async def _get_user_candidates(self, db: Any, identifier: str) -> list[User]:
-        row = await User.lookup_by_identifier(
-            {"payload": {"identifier": identifier}, "db": db}
-        )
-        return [row] if row is not None and _active(row) else []
+def _field(row: Any, key: str, default: Any = None) -> Any:
+    if isinstance(row, dict):
+        return row.get(key, default)
+    return getattr(row, key, default)
 
-    async def authenticate(self, db: Any, identifier: str, password: str) -> User:
+
+async def _maybe_await(value: object | Awaitable[object]) -> object:
+    if inspect.isawaitable(value):
+        return await value
+    return value
+
+
+class PasswordBackend:
+    def __init__(self, *, find_principals: Lookup) -> None:
+        self._find_principals = find_principals
+
+    async def _get_user_candidates(self, db: Any, identifier: str) -> list[Any]:
+        rows = await self._find_principals(db, identifier)
+        return [row for row in rows if _active(row)]
+
+    async def authenticate(self, db: Any, identifier: str, password: str) -> Any:
         row = next(iter(await self._get_user_candidates(db, identifier)), None)
         if not row or not verify_pw(password, row.password_hash):
             raise AuthError("invalid username/email or password")
@@ -40,27 +53,38 @@ class PasswordBackend:
 
 
 class ApiKeyBackend:
-    async def _get_key_row(self, db: Any, digest: str) -> CredentialApiKey | None:
-        return self._valid_key(
-            await list_records(CredentialApiKey, db, {"digest": digest})
-        )
+    def __init__(
+        self,
+        *,
+        digest_key: Callable[[str], str],
+        find_api_keys: Lookup,
+        find_service_keys: Lookup,
+        resolve_user: ResolvePrincipal,
+        mark_used: MarkUsed,
+    ) -> None:
+        self._digest_key = digest_key
+        self._find_api_keys = find_api_keys
+        self._find_service_keys = find_service_keys
+        self._resolve_user = resolve_user
+        self._mark_used = mark_used
+
+    async def _get_key_row(self, db: Any, digest: str) -> Any | None:
+        return self._valid_key(await self._find_api_keys(db, digest))
 
     async def _get_service_key_row(
         self, db: Any, digest: str
-    ) -> CredentialServiceKey | None:
-        return self._valid_key(
-            await list_records(CredentialServiceKey, db, {"digest": digest})
-        )
+    ) -> Any | None:
+        return self._valid_key(await self._find_service_keys(db, digest))
 
     @staticmethod
     def _valid_key(rows: list[Any]):
         now = datetime.now(timezone.utc)
         for row in rows:
-            status_value = field(row, "status", "active")
+            status_value = _field(row, "status", "active")
             if isinstance(status_value, str) and status_value != "active":
                 continue
-            valid_from = field(row, "valid_from")
-            valid_to = field(row, "valid_to")
+            valid_from = _field(row, "valid_from")
+            valid_to = _field(row, "valid_to")
             if isinstance(valid_from, datetime) and valid_from > now:
                 continue
             if isinstance(valid_to, datetime) and valid_to <= now:
@@ -68,33 +92,19 @@ class ApiKeyBackend:
             return row
         return None
 
-    async def _resolve_user_principal(self, db: Any, key_row: Any) -> User | None:
-        user = getattr(key_row, "user", None) or getattr(key_row, "_user", None)
-        if user is not None:
-            return user
-        principal_id = getattr(key_row, "principal_id", None)
-        if principal_id in {None, ""}:
-            return None
-        try:
-            return await User.handlers.read.core(
-                {"path_params": {"id": principal_id}, "db": db}
-            )
-        except Exception:
-            return None
-
     async def authenticate(self, db: Any, api_key: str) -> tuple[PrincipalLike, str]:
-        digest = CredentialApiKey.digest_of(api_key)
+        digest = self._digest_key(api_key)
 
         key_row = await self._get_key_row(db, digest)
         user = (
-            await self._resolve_user_principal(db, key_row)
+            await self._resolve_user(db, key_row)
             if key_row is not None
             else None
         )
         if key_row and user:
             if not user.is_active:
                 raise AuthError("user is inactive")
-            key_row.touch()
+            await _maybe_await(self._mark_used(db, key_row))
             return user, "user"
 
         svc_row = await self._get_service_key_row(db, digest)
@@ -107,7 +117,7 @@ class ApiKeyBackend:
         if svc_row and service_identity:
             if not service_identity.is_active:
                 raise AuthError("service identity is inactive")
-            svc_row.touch()
+            await _maybe_await(self._mark_used(db, svc_row))
             return service_identity, "service_identity"
 
         raise AuthError("API key invalid, revoked, or expired")

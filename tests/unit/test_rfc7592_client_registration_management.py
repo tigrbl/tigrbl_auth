@@ -7,7 +7,12 @@ import pytest
 from tigrbl_auth import rfc7592
 from tigrbl_auth.tables import Client
 from sqlalchemy.exc import NoResultFound
-from tigrbl_identity_storage.tables._ops import create_record, delete_record, read_record, update_record
+from tigrbl_identity_storage_runtime.ops.common import (
+    create_record,
+    delete_record,
+    read_record,
+    update_record,
+)
 from tigrbl_identity_jose.key_management import hash_pw
 
 
