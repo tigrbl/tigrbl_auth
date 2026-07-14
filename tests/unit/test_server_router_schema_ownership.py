@@ -46,7 +46,7 @@ ROUTER_DEPRECATION_TARGETS = {
     "login.py": "tigrbl_identity_storage_runtime.login",
     "logout.py": "tigrbl_identity_storage.tables.logout_state",
     "my_account.py": "tigrbl_identity_storage.tables.user",
-    "par.py": "tigrbl_identity_storage.tables.pushed_authorization_request",
+    "par.py": "tigrbl_auth_api_oauth_par",
     "register.py": "tigrbl_identity_storage.tables.client_registration",
     "revoke.py": "tigrbl_identity_storage.tables.revoked_token",
     "token.py": "tigrbl_identity_storage.tables.token_record",
@@ -94,10 +94,11 @@ def test_server_rest_router_bridges_warn_to_storage_owner(
     assert target.startswith(
         (
             "tigrbl_identity_storage.tables",
-            "tigrbl_identity_storage_runtime",
-            "tigrbl_auth_api_platform_admin",
+                "tigrbl_identity_storage_runtime",
+                "tigrbl_auth_api_platform_admin",
+                "tigrbl_auth_api_oauth_",
+            )
         )
-    )
     assert not path.exists()
 
 
@@ -307,10 +308,10 @@ def test_remaining_oauth_route_handlers_live_on_storage_table_modules(
             {"device_authorization"},
         ),
         (
-            "tigrbl_identity_storage_runtime.par",
+            "tigrbl_identity_server.par_surface",
             "tigrbl_identity_storage.tables.pushed_authorization_request",
             "PushedAuthorizationRequest",
-            {"par"},
+            set(),
         ),
         (
             "tigrbl_identity_storage_runtime.logout",
@@ -340,6 +341,7 @@ def test_moved_oauth_publishers_live_above_storage_table_modules(
     if runtime_module_name in {
         "tigrbl_identity_storage_runtime.authorization",
         "tigrbl_identity_storage_runtime.login",
+        "tigrbl_identity_server.par_surface",
     }:
         assert not hasattr(runtime_module, "api")
     else:

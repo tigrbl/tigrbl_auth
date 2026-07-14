@@ -31,7 +31,7 @@ CORE_PUBLIC_CAPABILITIES: Final[tuple[dict[str, Any], ...]] = (
         "flags": ("enable_rfc9126",),
         "summary": "Pushed authorization request endpoint",
         "tags": ("oauth2",),
-        "publisher_ref": "tigrbl_identity_storage_runtime.par:include_par_endpoint",
+        "publisher_ref": "tigrbl_identity_server.par_surface:include_par_endpoint",
         "targets": ("RFC 9126", "RFC 9101", "RFC 9396", "RFC 8707", "RFC 9700"),
         "contract_visible": True,
         "discovery_visible": True,

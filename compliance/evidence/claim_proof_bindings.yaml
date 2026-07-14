@@ -2638,6 +2638,7 @@ bindings:
   - tests/unit/test_backends.py
   - tests/unit/test_crypto.py
   - tests/unit/test_crypto_key_dependency_boundary.py
+  - tests/unit/test_crypto_key_runtime_boundary.py
   - tests/unit/test_crypto_key_storage_runtime_boundary.py
   evidence_refs:
   - compliance/evidence/tier3/cli-operator-surface/
@@ -3308,7 +3309,11 @@ bindings:
   - tests/negative/test_hardening_runtime_enforcement.py
   - tests/conformance/hardening/test_rfc9126_par.py
   - tests/unit/test_hardening_cluster_b.py
+  - tests/unit/test_pushed_authorization_capability.py
+  - tests/unit/test_pushed_authorization_runtime_composition.py
+  - tests/unit/test_rfc9126_capability_binding.py
   - tests/unit/test_rfc9126_pushed_authorization_requests.py
+  - tests/integration/test_rfc9126_par_runtime_surface.py
   evidence_refs:
   - compliance/evidence/tier3/cli-operator-surface/
   - compliance/evidence/tier3/contracts/openapi/
@@ -3943,7 +3948,11 @@ bindings:
   - tests/negative/test_hardening_runtime_enforcement.py
   - tests/conformance/hardening/test_rfc9126_par.py
   - tests/unit/test_hardening_cluster_b.py
+  - tests/unit/test_pushed_authorization_capability.py
+  - tests/unit/test_pushed_authorization_runtime_composition.py
+  - tests/unit/test_rfc9126_capability_binding.py
   - tests/unit/test_rfc9126_pushed_authorization_requests.py
+  - tests/integration/test_rfc9126_par_runtime_surface.py
   - tests/conformance/hardening/test_rfc9101_jar.py
   - tests/unit/test_rfc9101_jwt_secured_authorization_request.py
   - tests/conformance/hardening/test_rfc9700_security_bcp.py
@@ -4085,7 +4094,11 @@ bindings:
   - tests/negative/test_hardening_runtime_enforcement.py
   - tests/conformance/hardening/test_rfc9126_par.py
   - tests/unit/test_hardening_cluster_b.py
+  - tests/unit/test_pushed_authorization_capability.py
+  - tests/unit/test_pushed_authorization_runtime_composition.py
+  - tests/unit/test_rfc9126_capability_binding.py
   - tests/unit/test_rfc9126_pushed_authorization_requests.py
+  - tests/integration/test_rfc9126_par_runtime_surface.py
   - tests/conformance/hardening/test_rfc9700_security_bcp.py
   - tests/unit/test_fapi_runtime_profile.py
   - tests/unit/test_hardening_cluster_c.py
@@ -4225,7 +4238,11 @@ bindings:
   - tests/negative/test_hardening_runtime_enforcement.py
   - tests/conformance/hardening/test_rfc9126_par.py
   - tests/unit/test_hardening_cluster_b.py
+  - tests/unit/test_pushed_authorization_capability.py
+  - tests/unit/test_pushed_authorization_runtime_composition.py
+  - tests/unit/test_rfc9126_capability_binding.py
   - tests/unit/test_rfc9126_pushed_authorization_requests.py
+  - tests/integration/test_rfc9126_par_runtime_surface.py
   - tests/conformance/hardening/test_rfc9396_rar.py
   - tests/unit/test_rfc9396_authorization_details.py
   - tests/conformance/hardening/test_rfc9700_security_bcp.py
@@ -6138,7 +6155,11 @@ bindings:
   - tests/negative/test_hardening_runtime_enforcement.py
   - tests/conformance/hardening/test_rfc9126_par.py
   - tests/unit/test_hardening_cluster_b.py
+  - tests/unit/test_pushed_authorization_capability.py
+  - tests/unit/test_pushed_authorization_runtime_composition.py
+  - tests/unit/test_rfc9126_capability_binding.py
   - tests/unit/test_rfc9126_pushed_authorization_requests.py
+  - tests/integration/test_rfc9126_par_runtime_surface.py
   - tests/conformance/hardening/test_rfc9101_jar.py
   - tests/unit/test_rfc9101_jwt_secured_authorization_request.py
   - tests/conformance/hardening/test_rfc9396_rar.py
@@ -6409,7 +6430,11 @@ bindings:
   - tests/negative/test_hardening_runtime_enforcement.py
   - tests/conformance/hardening/test_rfc9126_par.py
   - tests/unit/test_hardening_cluster_b.py
+  - tests/unit/test_pushed_authorization_capability.py
+  - tests/unit/test_pushed_authorization_runtime_composition.py
+  - tests/unit/test_rfc9126_capability_binding.py
   - tests/unit/test_rfc9126_pushed_authorization_requests.py
+  - tests/integration/test_rfc9126_par_runtime_surface.py
   - tests/conformance/hardening/test_rfc9101_jar.py
   - tests/unit/test_rfc9101_jwt_secured_authorization_request.py
   - tests/conformance/hardening/test_rfc9396_rar.py
@@ -6681,7 +6706,11 @@ bindings:
   - tests/negative/test_hardening_runtime_enforcement.py
   - tests/conformance/hardening/test_rfc9126_par.py
   - tests/unit/test_hardening_cluster_b.py
+  - tests/unit/test_pushed_authorization_capability.py
+  - tests/unit/test_pushed_authorization_runtime_composition.py
+  - tests/unit/test_rfc9126_capability_binding.py
   - tests/unit/test_rfc9126_pushed_authorization_requests.py
+  - tests/integration/test_rfc9126_par_runtime_surface.py
   - tests/conformance/hardening/test_rfc9101_jar.py
   - tests/unit/test_rfc9101_jwt_secured_authorization_request.py
   - tests/conformance/hardening/test_rfc9396_rar.py
@@ -6956,7 +6985,11 @@ bindings:
   - tests/negative/test_hardening_runtime_enforcement.py
   - tests/conformance/hardening/test_rfc9126_par.py
   - tests/unit/test_hardening_cluster_b.py
+  - tests/unit/test_pushed_authorization_capability.py
+  - tests/unit/test_pushed_authorization_runtime_composition.py
+  - tests/unit/test_rfc9126_capability_binding.py
   - tests/unit/test_rfc9126_pushed_authorization_requests.py
+  - tests/integration/test_rfc9126_par_runtime_surface.py
   - tests/conformance/hardening/test_rfc9101_jar.py
   - tests/unit/test_rfc9101_jwt_secured_authorization_request.py
   - tests/conformance/hardening/test_rfc9396_rar.py
@@ -7163,7 +7196,11 @@ bindings:
   - tests/negative/test_hardening_runtime_enforcement.py
   - tests/conformance/hardening/test_rfc9126_par.py
   - tests/unit/test_hardening_cluster_b.py
+  - tests/unit/test_pushed_authorization_capability.py
+  - tests/unit/test_pushed_authorization_runtime_composition.py
+  - tests/unit/test_rfc9126_capability_binding.py
   - tests/unit/test_rfc9126_pushed_authorization_requests.py
+  - tests/integration/test_rfc9126_par_runtime_surface.py
   - tests/conformance/hardening/test_rfc9101_jar.py
   - tests/unit/test_rfc9101_jwt_secured_authorization_request.py
   - tests/conformance/hardening/test_rfc9396_rar.py
@@ -7405,6 +7442,7 @@ bindings:
   - tests/unit/test_backends.py
   - tests/unit/test_crypto.py
   - tests/unit/test_crypto_key_dependency_boundary.py
+  - tests/unit/test_crypto_key_runtime_boundary.py
   - tests/unit/test_crypto_key_storage_runtime_boundary.py
   evidence_refs:
   - compliance/evidence/tier3/oauth2-core/
@@ -7667,6 +7705,7 @@ bindings:
   - tests/unit/test_backends.py
   - tests/unit/test_crypto.py
   - tests/unit/test_crypto_key_dependency_boundary.py
+  - tests/unit/test_crypto_key_runtime_boundary.py
   - tests/unit/test_crypto_key_storage_runtime_boundary.py
   evidence_refs:
   - compliance/evidence/tier3/cookies/
@@ -7734,7 +7773,11 @@ bindings:
   - tests/negative/test_hardening_runtime_enforcement.py
   - tests/conformance/hardening/test_rfc9126_par.py
   - tests/unit/test_hardening_cluster_b.py
+  - tests/unit/test_pushed_authorization_capability.py
+  - tests/unit/test_pushed_authorization_runtime_composition.py
+  - tests/unit/test_rfc9126_capability_binding.py
   - tests/unit/test_rfc9126_pushed_authorization_requests.py
+  - tests/integration/test_rfc9126_par_runtime_surface.py
   - tests/conformance/hardening/test_rfc9101_jar.py
   - tests/unit/test_rfc9101_jwt_secured_authorization_request.py
   - tests/conformance/hardening/test_rfc9396_rar.py
@@ -8306,7 +8349,11 @@ bindings:
   - tests/negative/test_hardening_runtime_enforcement.py
   - tests/conformance/hardening/test_rfc9126_par.py
   - tests/unit/test_hardening_cluster_b.py
+  - tests/unit/test_pushed_authorization_capability.py
+  - tests/unit/test_pushed_authorization_runtime_composition.py
+  - tests/unit/test_rfc9126_capability_binding.py
   - tests/unit/test_rfc9126_pushed_authorization_requests.py
+  - tests/integration/test_rfc9126_par_runtime_surface.py
   evidence_refs:
   - compliance/evidence/tier3/par/
   security_sensitive: true
@@ -9204,7 +9251,11 @@ bindings:
   - tests/negative/test_hardening_runtime_enforcement.py
   - tests/conformance/hardening/test_rfc9126_par.py
   - tests/unit/test_hardening_cluster_b.py
+  - tests/unit/test_pushed_authorization_capability.py
+  - tests/unit/test_pushed_authorization_runtime_composition.py
+  - tests/unit/test_rfc9126_capability_binding.py
   - tests/unit/test_rfc9126_pushed_authorization_requests.py
+  - tests/integration/test_rfc9126_par_runtime_surface.py
   evidence_refs:
   - compliance/evidence/tier3/par/
   security_sensitive: true

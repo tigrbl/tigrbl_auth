@@ -2561,7 +2561,7 @@ features:
   kind: public-route
   title: /par
   description: Pushed authorization request endpoint
-  source: tigrbl_identity_storage_runtime.par:include_par_endpoint
+  source: tigrbl_identity_server.par_surface:include_par_endpoint
   scope: core
   targets:
   - RFC 9126

@@ -3437,7 +3437,7 @@ claims:
   - RFC 9700
   required_flags:
   - enable_rfc9126
-  source: tigrbl_identity_storage_runtime.par:include_par_endpoint
+  source: tigrbl_identity_server.par_surface:include_par_endpoint
 - id: route:presentation-verify
   feature_id: route:presentation-verify
   kind: public-route

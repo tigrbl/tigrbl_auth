@@ -5,7 +5,7 @@ from types import SimpleNamespace
 from uuid import uuid4
 
 from tigrbl_auth.api.rest.schemas import DynamicClientRegistrationIn
-import tigrbl_identity_storage_runtime.par as par_ops
+import tigrbl_identity_server.par_surface as par_ops
 import tigrbl_identity_storage_runtime._client_registration_create as register_ops
 import tigrbl_identity_storage_runtime.device_authorization as device_auth_ops
 import tigrbl_identity_storage_runtime.logout as logout_ops

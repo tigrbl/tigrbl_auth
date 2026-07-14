@@ -282,11 +282,15 @@ def test_executable_revocation_publisher_lives_above_storage() -> None:
 def test_executable_par_publisher_lives_above_storage() -> None:
     assert importlib.util.find_spec("tigrbl_identity_storage.tables.pushed_authorization_request._op") is None
 
-    runtime = importlib.import_module("tigrbl_identity_storage_runtime.par")
+    assert importlib.util.find_spec("tigrbl_identity_storage_runtime.par") is None
+    runtime = importlib.import_module("tigrbl_identity_server.par_surface")
+    carrier = importlib.import_module("tigrbl_auth_api_oauth_par")
     storage = importlib.import_module("tigrbl_identity_storage.tables.pushed_authorization_request")
 
-    assert runtime.api is runtime.router
-    assert runtime.include_par_endpoint.__module__ == "tigrbl_identity_storage_runtime.par"
+    assert runtime.include_par_endpoint.__module__ == "tigrbl_identity_server.par_surface"
+    assert carrier.build_pushed_authorization_router.__module__ == (
+        "tigrbl_auth_api_oauth_par.binding"
+    )
     assert not hasattr(storage, "api")
     assert not hasattr(storage, "router")
 

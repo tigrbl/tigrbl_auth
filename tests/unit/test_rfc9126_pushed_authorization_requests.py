@@ -1,12 +1,14 @@
 import pytest
-from http import HTTPStatus as status
-from types import SimpleNamespace
-
 from tigrbl_auth.tables.pushed_authorization_request import (
     PushedAuthorizationRequest,
     DEFAULT_PAR_EXPIRY,
 )
-from tigrbl_identity_storage_runtime import par as par_runtime
+from tigrbl_auth_protocol_oauth.standards.pushed_authorization_requests import (
+    PushedAuthorizationDisabledError,
+)
+from tigrbl_identity_server.security.pushed_authorization import (
+    build_rfc9126_pushed_authorization_service,
+)
 
 
 @pytest.mark.unit
@@ -21,9 +23,10 @@ async def test_par_returns_request_uri_and_expires(enable_rfc9126, db_session):
 
 @pytest.mark.unit
 @pytest.mark.asyncio
-async def test_par_runtime_disabled_returns_404(monkeypatch):
-    monkeypatch.setattr(par_runtime.settings, "enable_rfc9126", False)
-    request = SimpleNamespace(body=b"", app=None)
-    with pytest.raises(par_runtime.HTTPException) as exc:
-        await par_runtime.pushed_authorization_request(request=request, db=None)
-    assert exc.value.status_code == status.HTTP_404_NOT_FOUND
+async def test_par_runtime_composition_disables_rfc9126_before_persistence():
+    service = build_rfc9126_pushed_authorization_service(
+        object(),
+        type("Settings", (), {"enable_rfc9126": False})(),
+    )
+    with pytest.raises(PushedAuthorizationDisabledError):
+        await service.push(client_id="client-1", tenant_id=None, params={})

@@ -9,7 +9,7 @@ import pytest
 
 from tigrbl_auth.api.rest.schemas import DynamicClientRegistrationIn
 from tigrbl_auth.cli.artifacts import deployment_from_options
-import tigrbl_identity_storage_runtime.par as par_ops
+import tigrbl_identity_server.par_surface as par_ops
 import tigrbl_identity_storage_runtime.client_registration as register_ops
 import tigrbl_identity_storage_runtime.token_request as token_ops
 from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
@@ -189,7 +189,15 @@ async def test_fapi_par_requires_redirect_uri_and_client_auth(monkeypatch: pytes
         url="https://issuer.example/par",
     )
     with pytest.raises(par_ops.HTTPException) as excinfo:
-        await par_ops.pushed_authorization_request(request=missing_redirect_request, db=_FakeDB())
+        await par_ops.authorize_pushed_authorization_caller(
+            missing_redirect_request,
+            {
+                "client_id": str(client.id),
+                "response_type": "code",
+                "scope": "openid",
+            },
+            _FakeDB(),
+        )
     assert excinfo.value.status_code == 400
 
     authed_request = _FakeRequest(
@@ -204,7 +212,16 @@ async def test_fapi_par_requires_redirect_uri_and_client_auth(monkeypatch: pytes
         url="https://issuer.example/par",
     )
     with pytest.raises(par_ops.HTTPException) as auth_exc:
-        await par_ops.pushed_authorization_request(request=authed_request, db=_FakeDB())
+        await par_ops.authorize_pushed_authorization_caller(
+            authed_request,
+            {
+                "client_id": str(client.id),
+                "response_type": "code",
+                "scope": "openid",
+                "redirect_uri": "https://client.example/cb",
+            },
+            _FakeDB(),
+        )
     assert auth_exc.value.status_code == 401
 
 

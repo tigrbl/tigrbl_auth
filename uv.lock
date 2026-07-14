@@ -2331,6 +2331,23 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-auth-api-oauth-par"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/80-apis/tigrbl-auth-api-oauth-par" }
+dependencies = [
+    { name = "tigrbl" },
+    { name = "tigrbl-auth-protocol-oauth" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-auth-api-oauth-revocation"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/80-apis/tigrbl-auth-api-oauth-revocation" }
@@ -2729,6 +2746,7 @@ dependencies = [
     { name = "tigrbl-attestation-reference-provider" },
     { name = "tigrbl-auth" },
     { name = "tigrbl-auth-api-oauth-introspection" },
+    { name = "tigrbl-auth-api-oauth-par" },
     { name = "tigrbl-auth-api-oauth-revocation" },
     { name = "tigrbl-auth-plugin" },
     { name = "tigrbl-auth-profile-haip" },
@@ -3079,6 +3097,7 @@ requires-dist = [
     { name = "tigrbl-attestation-reference-provider", editable = "pkgs/20-providers/tigrbl-attestation-reference-provider" },
     { name = "tigrbl-auth", editable = "pkgs/70-facade/tigrbl-auth" },
     { name = "tigrbl-auth-api-oauth-introspection", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-introspection" },
+    { name = "tigrbl-auth-api-oauth-par", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-par" },
     { name = "tigrbl-auth-api-oauth-revocation", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-revocation" },
     { name = "tigrbl-auth-plugin", editable = "pkgs/60-runtime/tigrbl-auth-plugin" },
     { name = "tigrbl-auth-profile-haip", editable = "pkgs/50-protocols/tigrbl-auth-profile-haip" },
@@ -5662,10 +5681,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/deprecated/tigrbl-identity-oauth" }
 dependencies = [
     { name = "tigrbl-auth-protocol-oauth" },
+    { name = "tigrbl-identity-server" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" }]
+requires-dist = [
+    { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-server", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-identity-oidc"
@@ -5797,6 +5820,7 @@ dependencies = [
     { name = "email-validator" },
     { name = "tigrbl" },
     { name = "tigrbl-auth-api-oauth-introspection" },
+    { name = "tigrbl-auth-api-oauth-par" },
     { name = "tigrbl-auth-api-oauth-revocation" },
     { name = "tigrbl-auth-protocol-gnap" },
     { name = "tigrbl-auth-protocol-oauth" },
@@ -5817,6 +5841,7 @@ requires-dist = [
     { name = "email-validator", specifier = ">=2.0" },
     { name = "tigrbl", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-auth-api-oauth-introspection", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-api-oauth-par", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oauth-revocation", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-gnap", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },

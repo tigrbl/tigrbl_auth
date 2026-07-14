@@ -36,6 +36,7 @@ classifiers = [
 
 dependencies = [
     "tigrbl-auth-protocol-oauth==0.4.0.dev2",
+    "tigrbl-identity-server==0.4.0.dev2",
 ]
 
 [project.urls]
