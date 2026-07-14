@@ -286,6 +286,7 @@ dependencies = [
     "tigrbl-token-introspection-capability==0.4.0.dev2",
     "tigrbl-principal-authentication==0.4.0.dev2",
     "tigrbl-protocol-artifact-processing==0.4.0.dev2",
+    "tigrbl-auth-api-oauth-introspection==0.4.0.dev2",
     "tigrbl-set-transmitter-provider==0.4.0.dev2",
     "tigrbl-set-receiver-provider==0.4.0.dev2",
     "tigrbl-wallet-attestation-verifier==0.4.0.dev2",
@@ -642,6 +643,7 @@ tigrbl-replay-protection-capability = { path = "pkgs/40-capabilities/tigrbl-repl
 tigrbl-token-introspection-capability = { path = "pkgs/40-capabilities/tigrbl-token-introspection-capability", editable = true }
 tigrbl-principal-authentication = { path = "pkgs/40-capabilities/tigrbl-principal-authentication", editable = true }
 tigrbl-protocol-artifact-processing = { path = "pkgs/40-capabilities/tigrbl-protocol-artifact-processing", editable = true }
+tigrbl-auth-api-oauth-introspection = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-introspection", editable = true }
 tigrbl-set-transmitter-provider = { path = "pkgs/20-providers/tigrbl-set-transmitter-provider", editable = true }
 tigrbl-set-receiver-provider = { path = "pkgs/20-providers/tigrbl-set-receiver-provider", editable = true }
 tigrbl-wallet-attestation-verifier = { path = "pkgs/20-providers/tigrbl-wallet-attestation-verifier", editable = true }
