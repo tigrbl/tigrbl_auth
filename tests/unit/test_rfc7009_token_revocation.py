@@ -5,7 +5,10 @@ from http import HTTPStatus as status
 from httpx import AsyncClient
 
 from tigrbl_auth.runtime_cfg import settings
-from tigrbl_auth.rfc.rfc7009 import is_revoked_async, reset_revocations_async
+from tigrbl_identity_storage_runtime.revocation import (
+    is_revoked_async,
+    reset_revocations_async,
+)
 
 # RFC 7009 specification excerpt for reference within tests
 RFC7009_SPEC = """

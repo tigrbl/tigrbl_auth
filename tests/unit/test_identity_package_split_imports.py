@@ -353,7 +353,7 @@ def test_credentials_async_token_paths_use_async_persistence_hooks() -> None:
     assert "persist_token=False" in server_handler_source
 
 
-def test_oauth_revocation_exports_async_runtime_hooks() -> None:
+def test_oauth_revocation_exports_protocol_service_only() -> None:
     _install_package_src_paths()
 
     split_module = importlib.import_module(
@@ -366,9 +366,10 @@ def test_oauth_revocation_exports_async_runtime_hooks() -> None:
         / "jwt_runtime.py"
     ).read_text(encoding="utf-8")
 
-    assert inspect.iscoroutinefunction(split_module.revoke_token_async)
-    assert inspect.iscoroutinefunction(split_module.is_revoked_async)
-    assert inspect.iscoroutinefunction(split_module.reset_revocations_async)
+    assert hasattr(split_module, "RFC7009RevocationService")
+    assert not hasattr(split_module, "revoke_token_async")
+    assert not hasattr(split_module, "is_revoked_async")
+    assert not hasattr(split_module, "reset_revocations_async")
     assert (
         "from tigrbl_auth_protocol_oauth.standards.revocation import is_revoked, is_revoked_async"
         in runtime_source

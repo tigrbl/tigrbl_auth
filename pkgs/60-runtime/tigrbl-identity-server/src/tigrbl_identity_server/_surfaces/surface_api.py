@@ -28,7 +28,7 @@ from tigrbl_identity_storage_runtime.metadata.protected_resource_metadata import
     include_rfc9728,
 )
 from tigrbl_identity_storage_runtime.par import include_par_endpoint
-from tigrbl_identity_storage_runtime.revocation import include_revocation_endpoint
+from tigrbl_identity_server.revocation_surface import include_revocation_endpoint
 from tigrbl_identity_storage_runtime.token_exchange import (
     include_token_exchange_endpoint,
 )

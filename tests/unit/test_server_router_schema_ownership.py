@@ -313,12 +313,6 @@ def test_remaining_oauth_route_handlers_live_on_storage_table_modules(
             {"par"},
         ),
         (
-            "tigrbl_identity_storage_runtime.revocation",
-            "tigrbl_identity_storage.tables.revoked_token",
-            "RevokedToken",
-            {"revoke"},
-        ),
-        (
             "tigrbl_identity_storage_runtime.logout",
             "tigrbl_identity_storage.tables.logout_state",
             "LogoutState",

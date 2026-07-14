@@ -237,7 +237,7 @@ PROTOCOL_PUBLIC_CAPABILITIES: Final[tuple[dict[str, Any], ...]] = (
         "flags": ("enable_rfc7009",),
         "summary": "Token revocation endpoint",
         "tags": ("oauth2",),
-        "publisher_ref": "tigrbl_identity_storage_runtime.revocation:include_revocation_endpoint",
+        "publisher_ref": "tigrbl_identity_server.revocation_surface:include_revocation_endpoint",
         "targets": ("RFC 7009",),
         "contract_visible": True,
         "discovery_visible": True,

@@ -514,7 +514,8 @@ def enable_rfc7009():
     """Enable RFC 7009 token revocation for tests."""
     _require_runtime_stack()
     from tigrbl_auth.runtime_cfg import settings
-    from tigrbl_auth.rfc.rfc7009 import include_rfc7009, reset_revocations
+    from tigrbl_identity_server.revocation_surface import include_rfc7009
+    from tigrbl_identity_storage_runtime.revocation import reset_revocations
 
     app = _import_runtime_objects()["app"]
     original = settings.enable_rfc7009
