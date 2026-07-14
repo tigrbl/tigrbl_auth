@@ -110,6 +110,11 @@ Required ownership rules:
   restricts reference-backed appraisal to verified attestation evidence. The
   appraisal capability reports verification, reference resolution, appraisal,
   and optional result-recording operations separately.
+- [x] `7f0e100a` completes the RFC 9711 protocol owner with explicit claim,
+  carrier-schema, compatibility, binding, and error modules; removes generic
+  artifact-processing requirements from its capability report; makes appraisal
+  and recording awaitable; and adapts verified evidence/results to the existing
+  layer-30 attestation evidence and result operations.
 - [x] Claim primitives, contracts, bases, `ClaimType`, `ClaimValueType`,
   `ClaimNameKind`, and standalone concrete claim packages exist.
 - [x] Protocol-neutral scope matching exists as
@@ -610,7 +615,7 @@ flags. Tier-4 claims require independent interoperability evidence.
   to layer 80.
 - [ ] C5: finish claim package/facade cleanup and remove protocol-specific
   deterministic package names.
-- [ ] C6: finish EAT token/evidence/appraisal/provider verification chain.
+- [x] C6: finish EAT token/evidence/appraisal/provider verification chain.
 - [ ] C7: normalize bases and provider ownership, including password/client
   secret services.
 - [ ] C8: make every layer-40 feature composable, delegated, and reportable.
