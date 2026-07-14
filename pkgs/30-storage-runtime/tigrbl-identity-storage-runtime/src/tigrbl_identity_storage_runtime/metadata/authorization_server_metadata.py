@@ -8,7 +8,6 @@ from tigrbl import Request, TigrblApp, TigrblRouter
 from tigrbl.runtime.status import HTTPException, status
 from tigrbl_identity_runtime.deployment import deployment_from_app, deployment_from_request
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_storage_runtime.metadata.oidc_discovery import refresh_discovery_cache
 from tigrbl_auth_protocol_oidc.standards.discovery_metadata import build_openid_config
 
 RFC8414_SPEC_URL: Final = "https://www.rfc-editor.org/rfc/rfc8414"
@@ -34,4 +33,4 @@ def include_rfc8414(app: TigrblApp) -> None:
         app.include_router(api)
 
 
-__all__ = ["api", "router", "include_rfc8414", "RFC8414_SPEC_URL", "refresh_discovery_cache"]
+__all__ = ["api", "router", "include_rfc8414", "RFC8414_SPEC_URL"]

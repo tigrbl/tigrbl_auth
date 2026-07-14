@@ -7,7 +7,6 @@ helpers plus descriptive UserInfo protocol ownership.
 
 from __future__ import annotations
 
-from tigrbl_auth_protocol_oidc.standards.discovery import include_oidc_discovery
 from tigrbl_auth_protocol_oidc.standards.id_token import (
     mint_id_token,
     oidc_hash,
@@ -27,7 +26,6 @@ OIDC_CORE_COMPONENTS = (
 
 __all__ = [
     "OIDC_CORE_COMPONENTS",
-    "include_oidc_discovery",
     "USERINFO_OWNER",
     "describe_userinfo",
     "mint_id_token",

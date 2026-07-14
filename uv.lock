@@ -2432,6 +2432,23 @@ dependencies = [
 requires-dist = [{ name = "tigrbl", specifier = "==0.4.4.dev1" }]
 
 [[package]]
+name = "tigrbl-auth-api-oidc-discovery"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/80-apis/tigrbl-auth-api-oidc-discovery" }
+dependencies = [
+    { name = "tigrbl" },
+    { name = "tigrbl-auth-protocol-oauth" },
+    { name = "tigrbl-auth-protocol-oidc" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-protocol-oidc", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-auth-api-oidc-logout"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/80-apis/tigrbl-auth-api-oidc-logout" }
@@ -2865,6 +2882,7 @@ dependencies = [
     { name = "tigrbl-auth-api-oauth-revocation" },
     { name = "tigrbl-auth-api-oauth-token" },
     { name = "tigrbl-auth-api-oauth-token-exchange" },
+    { name = "tigrbl-auth-api-oidc-discovery" },
     { name = "tigrbl-auth-api-oidc-logout" },
     { name = "tigrbl-auth-api-oidc-userinfo" },
     { name = "tigrbl-auth-api-session-login" },
@@ -3227,6 +3245,7 @@ requires-dist = [
     { name = "tigrbl-auth-api-oauth-revocation", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-revocation" },
     { name = "tigrbl-auth-api-oauth-token", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-token" },
     { name = "tigrbl-auth-api-oauth-token-exchange", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-token-exchange" },
+    { name = "tigrbl-auth-api-oidc-discovery", editable = "pkgs/80-apis/tigrbl-auth-api-oidc-discovery" },
     { name = "tigrbl-auth-api-oidc-logout", editable = "pkgs/80-apis/tigrbl-auth-api-oidc-logout" },
     { name = "tigrbl-auth-api-oidc-userinfo", editable = "pkgs/80-apis/tigrbl-auth-api-oidc-userinfo" },
     { name = "tigrbl-auth-api-session-login", editable = "pkgs/80-apis/tigrbl-auth-api-session-login" },
@@ -5976,6 +5995,7 @@ dependencies = [
     { name = "tigrbl-auth-api-oauth-revocation" },
     { name = "tigrbl-auth-api-oauth-token" },
     { name = "tigrbl-auth-api-oauth-token-exchange" },
+    { name = "tigrbl-auth-api-oidc-discovery" },
     { name = "tigrbl-auth-api-oidc-logout" },
     { name = "tigrbl-auth-api-oidc-userinfo" },
     { name = "tigrbl-auth-api-session-login" },
@@ -6008,6 +6028,7 @@ requires-dist = [
     { name = "tigrbl-auth-api-oauth-revocation", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oauth-token", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oauth-token-exchange", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-api-oidc-discovery", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oidc-logout", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oidc-userinfo", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-session-login", specifier = "==0.4.0.dev2" },

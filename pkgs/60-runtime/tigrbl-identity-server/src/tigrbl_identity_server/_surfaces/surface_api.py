@@ -20,7 +20,7 @@ from tigrbl_identity_server.logout_surface import include_logout_endpoint
 from tigrbl_identity_storage_runtime.metadata.authorization_server_metadata import (
     include_rfc8414,
 )
-from tigrbl_identity_storage_runtime.metadata.oidc_discovery import (
+from tigrbl_identity_server.oidc_discovery_surface import (
     include_jwks,
     include_openid_configuration,
 )
