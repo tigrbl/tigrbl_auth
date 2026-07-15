@@ -38,6 +38,7 @@ def test_server_assembly_maps_selected_protocols_to_effective_capabilities() -> 
     assert assembly.capabilities.capability_ids() == (
         "artifact.processing",
         "client.registration",
+        "identity-admin.tenants",
         "oauth.pushed-authorization",
         "security.replay-protection",
         "token.exchange",
@@ -57,6 +58,9 @@ def test_server_assembly_materializes_database_and_processor_scoped_capabilities
             "artifact.processing", ArtifactProcessor()
         ),
         "client.registration": registry.materialize("client.registration", db),
+        "identity-admin.tenants": registry.materialize(
+            "identity-admin.tenants", db
+        ),
         "oauth.pushed-authorization": registry.materialize(
             "oauth.pushed-authorization", db
         ),

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import uuid
 from typing import Any
 
 from pydantic import BaseModel, constr
@@ -11,16 +10,20 @@ from tigrbl.requests import Request
 from tigrbl.runtime.status import HTTPException
 from tigrbl.security import Depends
 from tigrbl_authz_policy_admin_gate import ADMIN_OPENAPI_SECURITY_DEPENDENCIES
-from tigrbl_identity_storage.tables import Tenant
-from tigrbl_identity_storage_runtime.engine import get_db
-from tigrbl_identity_storage_runtime.ops.common import (
-    create_table_record,
-    delete_table_record,
-    field_value,
-    first_table_record,
-    list_table_records,
-    read_table_record,
-    update_table_record,
+from tigrbl_identity_contracts.admin_tenants import (
+    AdminTenant,
+    AdminTenantCreate,
+    AdminTenantUpdate,
+    TenantAdministrationConflictError,
+    TenantAdministrationNotFoundError,
+    TenantAdministrationPolicyError,
+    TenantAdministrationValidationError,
+    TenantAdministratorAuthenticationError,
+)
+from tigrbl_identity_server.platform_tenant_administration import (
+    get_db,
+    require_tenant_administrator,
+    tenant_administration_for_request,
 )
 
 
@@ -55,48 +58,38 @@ class AdminTenantUpdateIn(BaseModel):
     is_active: bool | None = None
 
 
-def tenant_payload(row: Any) -> AdminTenantOut:
-    created_at = field_value(row, "created_at")
-    updated_at = field_value(row, "updated_at")
-    realm_id = field_value(row, "realm_id")
+def tenant_payload(row: AdminTenant) -> AdminTenantOut:
     return AdminTenantOut(
-        id=str(field_value(row, "id")),
-        realm_id=str(realm_id) if realm_id else None,
-        slug=str(field_value(row, "slug")),
-        name=str(field_value(row, "name")),
-        email=str(field_value(row, "email")),
-        created_at=created_at.isoformat() if created_at else None,
-        updated_at=updated_at.isoformat() if updated_at else None,
+        id=row.tenant_id,
+        realm_id=row.realm_id,
+        slug=row.slug,
+        name=row.name,
+        email=row.email,
+        created_at=row.created_at,
+        updated_at=row.updated_at,
     )
 
 
-async def _require_admin(request: Request, db: Any) -> Any:
-    from tigrbl_identity_admin.bootstrap import resolve_admin_user_from_request
-
-    actor = await resolve_admin_user_from_request(request, db=db)
-    if actor is None:
-        raise HTTPException(401, "authenticated admin session required")
-    return actor
-
-
-def _require_superuser(actor: Any, action: str) -> None:
-    if not bool(getattr(actor, "is_superuser", False)):
-        raise HTTPException(403, f"superuser privileges required to {action} tenants")
-
-
-def _uuid(value: str, *, label: str) -> uuid.UUID:
+async def _invoke(
+    request: Request,
+    db: Any,
+    operation: str,
+    *args: object,
+) -> object:
     try:
-        return uuid.UUID(str(value))
-    except (TypeError, ValueError) as exc:
-        raise HTTPException(400, f"invalid {label}") from exc
-
-
-async def _find_duplicate(db: Any, *, slug: str, name: str, email: str) -> Any:
-    for filters in ({"slug": slug}, {"name": name}, {"email": email}):
-        row = await first_table_record(Tenant, db, filters)
-        if row is not None:
-            return row
-    return None
+        actor = await require_tenant_administrator(request, db)
+        capability = tenant_administration_for_request(request, db)
+        return (await capability.call(operation, actor, *args)).value
+    except TenantAdministratorAuthenticationError as exc:
+        raise HTTPException(401, str(exc)) from exc
+    except TenantAdministrationPolicyError as exc:
+        raise HTTPException(403, str(exc)) from exc
+    except TenantAdministrationNotFoundError as exc:
+        raise HTTPException(404, str(exc)) from exc
+    except TenantAdministrationConflictError as exc:
+        raise HTTPException(409, str(exc)) from exc
+    except TenantAdministrationValidationError as exc:
+        raise HTTPException(400, str(exc)) from exc
 
 
 api = admin_router = router = TigrblRouter()
@@ -112,16 +105,7 @@ async def admin_list_tenants(
     request: Request,
     db: Any = Depends(get_db),
 ) -> list[AdminTenantOut]:
-    await _require_admin(request, db)
-    rows = await list_table_records(Tenant, db)
-    rows = sorted(
-        rows,
-        key=lambda row: (
-            field_value(row, "created_at") or "",
-            field_value(row, "name", ""),
-            field_value(row, "slug", ""),
-        ),
-    )
+    rows = await _invoke(request, db, "list_tenants")
     return [tenant_payload(row) for row in rows]
 
 
@@ -136,26 +120,18 @@ async def admin_create_tenant(
     payload: AdminTenantProvisionIn | None = None,
     db: Any = Depends(get_db),
 ) -> AdminTenantOut:
-    actor = await _require_admin(request, db)
-    _require_superuser(actor, "provision")
     if payload is None:
         payload = AdminTenantProvisionIn.model_validate(await request.json() or {})
-    slug = payload.slug.strip().lower()
-    name = payload.name.strip()
-    email = payload.email.strip().lower()
-    if await _find_duplicate(db, slug=slug, name=name, email=email):
-        raise HTTPException(409, "tenant slug, name, or email already exists")
-    row = await create_table_record(
-        Tenant,
+    row = await _invoke(
+        request,
         db,
-        {
-            "realm_id": _uuid(payload.realm_id, label="realm_id")
-            if payload.realm_id is not None
-            else None,
-            "slug": slug,
-            "name": name,
-            "email": email,
-        },
+        "create_tenant",
+        AdminTenantCreate(
+            realm_id=payload.realm_id,
+            slug=payload.slug,
+            name=payload.name,
+            email=payload.email,
+        ),
     )
     return tenant_payload(row)
 
@@ -171,18 +147,8 @@ async def admin_delete_tenant(
     tenant_id: str,
     db: Any = Depends(get_db),
 ) -> AdminTenantOut:
-    actor = await _require_admin(request, db)
-    _require_superuser(actor, "delete")
-    row = await read_table_record(Tenant, db, _uuid(tenant_id, label="tenant_id"))
-    if row is None:
-        raise HTTPException(404, "tenant not found")
-    if field_value(row, "slug") == "public":
-        raise HTTPException(400, "cannot delete the default public tenant")
-    if str(actor.tenant_id) == str(field_value(row, "id")):
-        raise HTTPException(400, "cannot delete the current administrator tenant")
-    snapshot = tenant_payload(row)
-    await delete_table_record(Tenant, db, field_value(row, "id"))
-    return snapshot
+    row = await _invoke(request, db, "delete_tenant", tenant_id)
+    return tenant_payload(row)
 
 
 @router.route(
@@ -197,36 +163,21 @@ async def admin_update_tenant(
     payload: AdminTenantUpdateIn | None = None,
     db: Any = Depends(get_db),
 ) -> AdminTenantOut:
-    actor = await _require_admin(request, db)
-    _require_superuser(actor, "update")
     if payload is None:
         payload = AdminTenantUpdateIn.model_validate(await request.json() or {})
-    row = await read_table_record(Tenant, db, _uuid(tenant_id, label="tenant_id"))
-    if row is None:
-        raise HTTPException(404, "tenant not found")
-    changes: dict[str, Any] = {}
-    if payload.realm_id is not None:
-        changes["realm_id"] = _uuid(payload.realm_id, label="realm_id")
-    if payload.slug is not None:
-        changes["slug"] = payload.slug.strip().lower()
-    if payload.name is not None:
-        changes["name"] = payload.name.strip()
-    if payload.email is not None:
-        changes["email"] = payload.email.strip().lower()
-    if payload.is_active is not None:
-        changes["is_active"] = payload.is_active
-    if changes:
-        duplicate = await _find_duplicate(
-            db,
-            slug=changes.get("slug", field_value(row, "slug")),
-            name=changes.get("name", field_value(row, "name")),
-            email=changes.get("email", field_value(row, "email")),
-        )
-        if duplicate is not None and str(field_value(duplicate, "id")) != str(
-            field_value(row, "id")
-        ):
-            raise HTTPException(409, "tenant slug, name, or email already exists")
-        row = await update_table_record(Tenant, db, field_value(row, "id"), changes)
+    row = await _invoke(
+        request,
+        db,
+        "update_tenant",
+        tenant_id,
+        AdminTenantUpdate(
+            realm_id=payload.realm_id,
+            slug=payload.slug,
+            name=payload.name,
+            email=payload.email,
+            is_active=payload.is_active,
+        ),
+    )
     return tenant_payload(row)
 
 

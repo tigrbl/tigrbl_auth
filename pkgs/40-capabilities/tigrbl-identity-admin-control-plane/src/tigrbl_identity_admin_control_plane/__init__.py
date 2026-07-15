@@ -24,6 +24,14 @@ from .service import (
     AdminReadOperation,
     AdminUpdateOperation,
 )
+from .tenants import (
+    TenantAdministrationCapability,
+    TenantCreateOperation,
+    TenantDeleteOperation,
+    TenantListOperation,
+    TenantReadOperation,
+    TenantUpdateOperation,
+)
 
 __all__ = [
     "AdminAuditListOperation",
@@ -44,4 +52,10 @@ __all__ = [
     "OperatorAdministrationAuthorizer",
     "OperatorAdministrationCapability",
     "OperatorAdministrationOperation",
+    "TenantAdministrationCapability",
+    "TenantCreateOperation",
+    "TenantDeleteOperation",
+    "TenantListOperation",
+    "TenantReadOperation",
+    "TenantUpdateOperation",
 ]

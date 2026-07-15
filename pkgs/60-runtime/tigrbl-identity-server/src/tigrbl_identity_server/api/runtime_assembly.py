@@ -52,12 +52,16 @@ def build_server_runtime_assembly(
         from tigrbl_identity_server.security.token_issuance import (
             build_token_issuance_capability,
         )
+        from tigrbl_identity_server.platform_tenant_administration import (
+            build_tenant_administration_capability,
+        )
 
         token_coder = provider_set["token-coder"]
         return {
             "client-registration": build_client_registration_capability,
             "pushed-authorization": build_pushed_authorization_capability,
             "replay-provider": DatabaseReplayProvider,
+            "tenant-administration": build_tenant_administration_capability,
             "token-issuance": lambda db: build_token_issuance_capability(
                 db=db,
                 token_coder=token_coder,
@@ -78,6 +82,19 @@ def build_server_runtime_assembly(
 
         registry = CapabilityRegistry(
             (token_introspection, token_revocation, token_exchange_capability)
+        )
+        registry.register_factory(
+            CapabilityFactory(
+                CapabilityDefinition("identity-admin.tenants", "1.0"),
+                (
+                    "create_tenant",
+                    "delete_tenant",
+                    "list_tenants",
+                    "read_tenant",
+                    "update_tenant",
+                ),
+                storage_set["tenant-administration"],
+            )
         )
         registry.register_factory(
             CapabilityFactory(

@@ -10,6 +10,8 @@ dependencies = [
     "tigrbl==0.4.4.dev1",
     "tigrbl-auth==0.4.0.dev2",
     "tigrbl-authz-policy-admin-gate==0.4.0.dev2",
+    "tigrbl-identity-contracts==0.4.0.dev2",
+    "tigrbl-identity-server==0.4.0.dev2",
     "tigrbl-identity-storage==0.4.0.dev2",
     "tigrbl-identity-storage-runtime==0.4.0.dev2",
     "tigrbl-identity-admin==0.4.0.dev2",
