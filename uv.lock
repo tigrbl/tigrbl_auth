@@ -2391,6 +2391,21 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-auth-api-oauth-protected-resource-metadata"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/80-apis/tigrbl-auth-api-oauth-protected-resource-metadata" }
+dependencies = [
+    { name = "tigrbl" },
+    { name = "tigrbl-auth-protocol-oauth" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-auth-api-oauth-registration"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/80-apis/tigrbl-auth-api-oauth-registration" }
@@ -2894,6 +2909,7 @@ dependencies = [
     { name = "tigrbl-auth-api-oauth-device-authorization" },
     { name = "tigrbl-auth-api-oauth-introspection" },
     { name = "tigrbl-auth-api-oauth-par" },
+    { name = "tigrbl-auth-api-oauth-protected-resource-metadata" },
     { name = "tigrbl-auth-api-oauth-registration" },
     { name = "tigrbl-auth-api-oauth-revocation" },
     { name = "tigrbl-auth-api-oauth-token" },
@@ -3258,6 +3274,7 @@ requires-dist = [
     { name = "tigrbl-auth-api-oauth-device-authorization", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-device-authorization" },
     { name = "tigrbl-auth-api-oauth-introspection", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-introspection" },
     { name = "tigrbl-auth-api-oauth-par", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-par" },
+    { name = "tigrbl-auth-api-oauth-protected-resource-metadata", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-protected-resource-metadata" },
     { name = "tigrbl-auth-api-oauth-registration", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-registration" },
     { name = "tigrbl-auth-api-oauth-revocation", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-revocation" },
     { name = "tigrbl-auth-api-oauth-token", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-token" },
@@ -6009,6 +6026,7 @@ dependencies = [
     { name = "tigrbl-auth-api-oauth-device-authorization" },
     { name = "tigrbl-auth-api-oauth-introspection" },
     { name = "tigrbl-auth-api-oauth-par" },
+    { name = "tigrbl-auth-api-oauth-protected-resource-metadata" },
     { name = "tigrbl-auth-api-oauth-registration" },
     { name = "tigrbl-auth-api-oauth-revocation" },
     { name = "tigrbl-auth-api-oauth-token" },
@@ -6043,6 +6061,7 @@ requires-dist = [
     { name = "tigrbl-auth-api-oauth-device-authorization", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oauth-introspection", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oauth-par", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-api-oauth-protected-resource-metadata", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oauth-registration", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oauth-revocation", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oauth-token", specifier = "==0.4.0.dev2" },

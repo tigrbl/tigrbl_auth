@@ -24,7 +24,7 @@ from tigrbl_identity_server.oidc_discovery_surface import (
     include_jwks,
     include_openid_configuration,
 )
-from tigrbl_identity_storage_runtime.metadata.protected_resource_metadata import (
+from tigrbl_identity_server.protected_resource_metadata_surface import (
     include_rfc9728,
 )
 from tigrbl_identity_server.par_surface import include_par_endpoint

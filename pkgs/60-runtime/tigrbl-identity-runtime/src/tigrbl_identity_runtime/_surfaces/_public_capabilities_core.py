@@ -190,7 +190,7 @@ CORE_PUBLIC_CAPABILITIES: Final[tuple[dict[str, Any], ...]] = (
         "flags": ("enable_rfc9728", "enable_rfc8615"),
         "summary": "OAuth protected resource metadata",
         "tags": (".well-known",),
-        "publisher_ref": "tigrbl_identity_storage_runtime.metadata.protected_resource_metadata:include_rfc9728",
+        "publisher_ref": "tigrbl_identity_server.protected_resource_metadata_surface:include_rfc9728",
         "artifact_name": "oauth-protected-resource.json",
         "targets": ("RFC 9728", "RFC 8615"),
         "contract_visible": True,

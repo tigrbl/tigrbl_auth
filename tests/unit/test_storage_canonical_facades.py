@@ -266,8 +266,15 @@ def test_executable_metadata_publishers_live_above_storage() -> None:
     assert rfc8414_surface.include_rfc8414.__module__ == (
         "tigrbl_identity_server.authorization_server_metadata_surface"
     )
-    assert metadata.include_rfc9728.__module__ == (
+    rfc9728_surface = importlib.import_module(
+        "tigrbl_identity_server.protected_resource_metadata_surface"
+    )
+    assert importlib.util.find_spec(
         "tigrbl_identity_storage_runtime.metadata.protected_resource_metadata"
+    ) is None
+    assert not hasattr(metadata, "include_rfc9728")
+    assert rfc9728_surface.include_rfc9728.__module__ == (
+        "tigrbl_identity_server.protected_resource_metadata_surface"
     )
     assert metadata.include_resource_validation_metadata.__module__ == (
         "tigrbl_identity_storage_runtime.metadata.resource_validation_metadata"
