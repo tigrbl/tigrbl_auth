@@ -743,7 +743,7 @@ flags. Tier-4 claims require independent interoperability evidence.
 - [x] C7: normalize bases and provider ownership, including password/client
   secret services.
 - [x] C8: make every layer-40 feature composable, delegated, and reportable.
-- [ ] C9: complete per-specification layer-50 version/feature/compatibility and
+- [x] C9: complete per-specification layer-50 version/feature/compatibility and
   migration matrices.
 - [ ] C10: update runtime/facade/API/app/deployment compositions.
 - [ ] C11: remove compatibility packages after their release boundary.
@@ -1075,13 +1075,15 @@ The live package audit requires these concrete updates:
   supported features per revision, compatibility direction, and configuration
   migration functions. Draft support is labeled draft.
 
-C9 checkpoint status (2026-07-15): every direct layer-50 package now carries
-the required eight-module specification surface, the protocol tree has no
-upward runtime/storage imports, and wildcard imports have been eliminated and
-blocked by a package-boundary test. Remaining C9 closure work is the
-requirement-by-requirement capability-binding audit, neutral claim/scope and
-HAIP composition verification, and exact revision/compatibility/migration
-evidence for every independently versioned specification.
+C9 closure evidence (2026-07-15): every direct layer-50 package carries the
+required eight-module specification surface; the protocol tree has no upward
+runtime/storage imports or implicit stores; wildcard imports are eliminated
+and blocked by package-boundary tests; OAuth and OIDC consume neutral scope,
+claim, subject, and assurance owners; and HAIP composes OID4VCI, OID4VP,
+credential formats, attestation, and replay through explicit capability
+requirements. The complete versioned protocol/profile audit (45 tests), layer
+neutrality and standalone-object audit (36 tests), and structural closure
+audit (3 tests) pass.
 
 Protocol equivalence tests prove this chain:
 

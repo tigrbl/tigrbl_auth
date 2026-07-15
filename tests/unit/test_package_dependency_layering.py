@@ -164,6 +164,17 @@ for _layer, _folder in PYTHON_LAYER_FOLDERS.items():
 
 FRONTEND_LAYER_FOLDERS = {"90-uix-core", "95-ui"}
 
+REQUIRED_PROTOCOL_MODULES = {
+    "bindings.py",
+    "claims.py",
+    "compatibility.py",
+    "errors.py",
+    "features.py",
+    "migrations.py",
+    "schemas.py",
+    "versions.py",
+}
+
 FRONTEND_WORKSPACES = {
     ROOT / "pkgs" / "90-uix-core" / "uix-core",
     ROOT / "pkgs" / "95-ui" / "admin-uix",
@@ -264,6 +275,35 @@ def test_protocol_packages_use_explicit_import_surfaces() -> None:
                 violations.append(
                     f"{path.relative_to(ROOT)}:{node.lineno}: wildcard import"
                 )
+
+    assert violations == []
+
+
+def test_protocol_packages_own_complete_versioned_specification_surfaces() -> None:
+    violations: list[str] = []
+    protocol_root = PKGS / PYTHON_LAYER_FOLDERS["protocols"]
+
+    for package_dir in sorted(path for path in protocol_root.iterdir() if path.is_dir()):
+        package_roots = sorted(
+            path
+            for path in (package_dir / "src").iterdir()
+            if path.is_dir() and (path / "__init__.py").is_file()
+        )
+        if len(package_roots) != 1:
+            violations.append(
+                f"{package_dir.relative_to(ROOT)}: expected one import package, "
+                f"found {len(package_roots)}"
+            )
+            continue
+        missing = sorted(
+            module
+            for module in REQUIRED_PROTOCOL_MODULES
+            if not (package_roots[0] / module).is_file()
+        )
+        if missing:
+            violations.append(
+                f"{package_dir.relative_to(ROOT)}: missing {', '.join(missing)}"
+            )
 
     assert violations == []
 
