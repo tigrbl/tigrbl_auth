@@ -21,6 +21,9 @@ IDENTITY_API = (
     ROOT
     / "pkgs/80-apis/tigrbl-auth-api-platform-admin/src/tigrbl_auth_api_platform_admin/identities.py"
 )
+PLATFORM_ADMIN_PROJECT = (
+    ROOT / "pkgs/80-apis/tigrbl-auth-api-platform-admin/pyproject.toml"
+)
 
 
 def _identity(
@@ -136,3 +139,12 @@ def test_identity_api_is_http_only_and_does_not_hash_or_mutate_storage() -> None
     assert "update_table_record" not in source
     assert "delete_table_record" not in source
     assert "identity_administration_for_request" in source
+
+
+def test_platform_admin_api_has_no_storage_or_hashing_provider_dependency() -> None:
+    project = PLATFORM_ADMIN_PROJECT.read_text(encoding="utf-8")
+
+    assert '"tigrbl-identity-storage==' not in project
+    assert '"tigrbl-identity-storage-runtime==' not in project
+    assert '"tigrbl-identity-admin==' not in project
+    assert '"tigrbl-secret-hashing-bcrypt-provider==' not in project

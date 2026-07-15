@@ -7,6 +7,11 @@ Platform-scoped tenant lifecycle and authority-assignment API front door.
 | Property | Value |
 | --- | --- |
 | Product surface | `platform-admin-api` |
+
+The API package owns HTTP schemas and routes only. Tenant, realm, and identity
+administration are invoked through request-scoped layer-40 capabilities composed
+by `tigrbl-identity-server`; durable table operations and secret hashing remain
+in the layer-60 runtime adapters and their lower-layer providers.
 | Intended UIX | `@tigrbl-auth/platform-admin-uix` |
 | Exposes | Tenant lifecycle, platform authority assignment, admin identity lookup, audit/session/profile RPC |
 | Excludes | Public login/consent pages, tenant self-service-only workflows, developer app registration surface |
