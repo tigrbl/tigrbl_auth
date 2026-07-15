@@ -2856,12 +2856,32 @@ name = "tigrbl-auth-protocol-rp"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-rp" }
 dependencies = [
+    { name = "tigrbl-claim-audience-concrete" },
+    { name = "tigrbl-claim-authentication-context-concrete" },
+    { name = "tigrbl-claim-authentication-methods-concrete" },
+    { name = "tigrbl-claim-authentication-time-concrete" },
+    { name = "tigrbl-claim-authorized-party-concrete" },
+    { name = "tigrbl-claim-expiration-concrete" },
+    { name = "tigrbl-claim-issued-at-concrete" },
+    { name = "tigrbl-claim-issuer-concrete" },
+    { name = "tigrbl-claim-nonce-concrete" },
+    { name = "tigrbl-claim-subject-concrete" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-security-proof-pkce" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "tigrbl-claim-audience-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-claim-authentication-context-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-claim-authentication-methods-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-claim-authentication-time-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-claim-authorized-party-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-claim-expiration-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-claim-issued-at-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-claim-issuer-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-claim-nonce-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-claim-subject-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-proof-pkce", specifier = "==0.1.0" },
 ]

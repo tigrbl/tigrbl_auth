@@ -34,6 +34,16 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
+    "tigrbl-claim-audience-concrete==0.4.0.dev2",
+    "tigrbl-claim-authentication-context-concrete==0.4.0.dev2",
+    "tigrbl-claim-authentication-methods-concrete==0.4.0.dev2",
+    "tigrbl-claim-authentication-time-concrete==0.4.0.dev2",
+    "tigrbl-claim-authorized-party-concrete==0.4.0.dev2",
+    "tigrbl-claim-expiration-concrete==0.4.0.dev2",
+    "tigrbl-claim-issued-at-concrete==0.4.0.dev2",
+    "tigrbl-claim-issuer-concrete==0.4.0.dev2",
+    "tigrbl-claim-nonce-concrete==0.4.0.dev2",
+    "tigrbl-claim-subject-concrete==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
     "tigrbl-security-proof-pkce==0.1.0",
 ]

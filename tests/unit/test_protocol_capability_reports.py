@@ -17,16 +17,24 @@ PROTOCOL_MODULES = (
     "tigrbl_auth_protocol_oid4vci",
     "tigrbl_auth_protocol_oid4vp",
     "tigrbl_auth_protocol_oidc",
+    "tigrbl_auth_protocol_rp",
     "tigrbl_credential_profile_sd_jwt_vc",
     "tigrbl_security_event_protocol_set",
 )
 
 
 class _Processor:
-    def decode(self, request): return request
-    def validate(self, request): return request
-    def encode(self, request): return request
-    def map_error(self, error): return error
+    def decode(self, request):
+        return request
+
+    def validate(self, request):
+        return request
+
+    def encode(self, request):
+        return request
+
+    def map_error(self, error):
+        return error
 
 
 def test_protocol_artifact_capability_is_normalized_and_fully_reported() -> None:
@@ -38,7 +46,9 @@ def test_protocol_artifact_capability_is_normalized_and_fully_reported() -> None
     assert "unsupported" not in report
 
 
-def test_each_versioned_protocol_reports_revision_requirements_coverage_and_evidence() -> None:
+def test_each_versioned_protocol_reports_revision_requirements_coverage_and_evidence() -> (
+    None
+):
     for module_name in PROTOCOL_MODULES:
         module = importlib.import_module(module_name)
         report = module.capability_report()

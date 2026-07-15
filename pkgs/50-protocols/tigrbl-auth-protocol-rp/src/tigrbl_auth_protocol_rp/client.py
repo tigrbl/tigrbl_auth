@@ -14,14 +14,16 @@ from tigrbl_identity_contracts.rp import (
 from tigrbl_identity_contracts.protocols import BrowserStoragePolicy
 
 from .pkce import PkceVerifier, make_pkce_verifier, pkce_s256_challenge
-
-
-class RPError(RuntimeError):
-    pass
+from .errors import RPError
 
 
 class BrowserMemorySession:
-    def __init__(self, *, policy: BrowserStoragePolicy = BrowserStoragePolicy.MEMORY_ONLY, client_secret: str | None = None) -> None:
+    def __init__(
+        self,
+        *,
+        policy: BrowserStoragePolicy = BrowserStoragePolicy.MEMORY_ONLY,
+        client_secret: str | None = None,
+    ) -> None:
         if client_secret is not None:
             raise RPError("browser RP sessions must not contain a client secret")
         self.policy = BrowserStoragePolicy(policy)
@@ -42,7 +44,9 @@ def assert_browser_no_client_secret(config: RPConfiguration) -> None:
         raise RPError("browser RP configuration must not include a client secret")
 
 
-def validate_browser_storage_policy(policy: BrowserStoragePolicy | str) -> BrowserStoragePolicy:
+def validate_browser_storage_policy(
+    policy: BrowserStoragePolicy | str,
+) -> BrowserStoragePolicy:
     selected = BrowserStoragePolicy(policy)
     if selected is BrowserStoragePolicy.LOCAL_STORAGE:
         raise RPError("browser RP tokens must not be persisted in localStorage")
@@ -71,7 +75,9 @@ class DiscoveryClient:
         self.fetch = fetch
 
     def discover(self, issuer: str) -> Mapping[str, Any]:
-        metadata = dict(self.fetch(issuer.rstrip("/") + "/.well-known/openid-configuration"))
+        metadata = dict(
+            self.fetch(issuer.rstrip("/") + "/.well-known/openid-configuration")
+        )
         if metadata.get("issuer", "").rstrip("/") != issuer.rstrip("/"):
             raise RPError("issuer metadata mismatch")
         required = (
@@ -82,7 +88,9 @@ class DiscoveryClient:
         )
         missing = [name for name in required if not metadata.get(name)]
         if missing:
-            raise RPError(f"issuer metadata missing required endpoints: {', '.join(missing)}")
+            raise RPError(
+                f"issuer metadata missing required endpoints: {', '.join(missing)}"
+            )
         return metadata
 
 
@@ -97,13 +105,23 @@ class UserInfoClient:
 
 
 class RelyingParty:
-    def __init__(self, config: RPConfiguration, *, state_store: RPStatePort, session_store: RPSessionPort) -> None:
+    def __init__(
+        self,
+        config: RPConfiguration,
+        *,
+        state_store: RPStatePort,
+        session_store: RPSessionPort,
+    ) -> None:
         self.config = config
         self.state_store = state_store
         self.token_store = session_store
 
-    def build_authorization_url(self, authorization_endpoint: str) -> tuple[str, LoginRequest]:
-        login = self.state_store.create(redirect_uri=self.config.redirect_uri, scope=self.config.scopes)
+    def build_authorization_url(
+        self, authorization_endpoint: str
+    ) -> tuple[str, LoginRequest]:
+        login = self.state_store.create(
+            redirect_uri=self.config.redirect_uri, scope=self.config.scopes
+        )
         pkce = PkceVerifier(login.code_verifier)
         params = {
             "response_type": "code",
@@ -125,7 +143,9 @@ class RelyingParty:
         state = (values.get("state") or [""])[0]
         if not code or not state:
             raise RPError("callback requires code and state")
-        return CallbackResult(code=code, state=state, iss=(values.get("iss") or [None])[0])
+        return CallbackResult(
+            code=code, state=state, iss=(values.get("iss") or [None])[0]
+        )
 
     def validate_callback(self, callback: CallbackResult) -> LoginRequest:
         try:
@@ -133,7 +153,9 @@ class RelyingParty:
         except (KeyError, ValueError) as exc:
             raise RPError(str(exc)) from exc
 
-    def build_logout_url(self, end_session_endpoint: str, *, id_token_hint: str, state: str | None = None) -> str:
+    def build_logout_url(
+        self, end_session_endpoint: str, *, id_token_hint: str, state: str | None = None
+    ) -> str:
         params = {
             "client_id": self.config.client_id,
             "id_token_hint": id_token_hint,
@@ -173,7 +195,9 @@ class RelyingParty:
         self.token_store.save(login.state, session)
         return session
 
-    def refresh(self, refresh: Callable[[str], Mapping[str, str]], session_id: str) -> RPSession:
+    def refresh(
+        self, refresh: Callable[[str], Mapping[str, str]], session_id: str
+    ) -> RPSession:
         current = self.token_store.get(session_id)
         if not current.refresh_token:
             raise RPError("refresh token is not available")
@@ -188,7 +212,9 @@ class RelyingParty:
         return updated
 
 
-def validate_id_token_claims(claims: Mapping[str, Any], *, issuer: str, audience: str, nonce: str) -> Mapping[str, Any]:
+def validate_id_token_claims(
+    claims: Mapping[str, Any], *, issuer: str, audience: str, nonce: str
+) -> Mapping[str, Any]:
     if str(claims.get("iss", "")).rstrip("/") != issuer.rstrip("/"):
         raise RPError("ID token issuer mismatch")
     aud = claims.get("aud", ())
@@ -210,7 +236,9 @@ def shared_vector_manifest() -> Mapping[str, str]:
     }
 
 
-def framework_login_adapter(rp: RelyingParty, authorization_endpoint: str) -> Mapping[str, Any]:
+def framework_login_adapter(
+    rp: RelyingParty, authorization_endpoint: str
+) -> Mapping[str, Any]:
     url, login = rp.build_authorization_url(authorization_endpoint)
     return {
         "status": 302,

@@ -14,6 +14,9 @@ for src in (ROOT / "pkgs").glob("*/src"):
         sys.path.insert(0, value)
 
 from tigrbl_auth_protocol_rp import (  # noqa: E402
+    CAPABILITY_REQUIREMENTS,
+    CURRENT_VERSION,
+    RP_ID_TOKEN_CLAIMS,
     BrowserMemorySession,
     BrowserStoragePolicy,
     DiscoveryClient,
@@ -26,11 +29,15 @@ from tigrbl_auth_protocol_rp import (  # noqa: E402
     RelyingParty,
     UserInfoClient,
     assert_browser_no_client_secret,
+    capability_report,
+    compatibility,
     example_app_manifest,
     framework_callback_adapter,
     framework_login_adapter,
+    migrate_configuration,
     pkce_s256_challenge,
     shared_vector_manifest,
+    supports,
     validate_browser_storage_policy,
     validate_id_token_claims,
 )
@@ -66,6 +73,40 @@ def test_rp_t0_public_surfaces_and_vectors_are_importable() -> None:
 
 
 @pytest.mark.unit
+def test_rp_owns_composite_profile_history_claims_and_capability_bindings() -> None:
+    assert CURRENT_VERSION.status == "current-composite-profile"
+    assert supports("pkce-s256")
+    path = compatibility("oidc-core-1.0+oauth2.0")
+    assert path.compatible and path.migration_required
+    assert migrate_configuration(
+        {},
+        source="oidc-core-1.0+oauth2.0",
+    ) == {
+        "browser_storage_policy": "memory_only",
+        "pkce_method": "S256",
+    }
+    assert {claim.claim_name for claim in RP_ID_TOKEN_CLAIMS} >= {
+        "aud",
+        "exp",
+        "iat",
+        "iss",
+        "nonce",
+        "sub",
+    }
+    assert {item.operation for item in CAPABILITY_REQUIREMENTS} == {
+        "check_and_reserve",
+        "decode",
+        "validate",
+    }
+    report = capability_report()
+    assert report["selected_revision"] == CURRENT_VERSION.identifier
+    assert report["required_capabilities"] == (
+        "artifact.processing",
+        "security.replay-protection",
+    )
+
+
+@pytest.mark.unit
 def test_rp_t1_pkce_verifier_model_renders_authorization_params() -> None:
     verifier = PkceVerifier.generate()
     params = verifier.authorization_params()
@@ -79,7 +120,9 @@ def test_rp_t1_pkce_verifier_model_renders_authorization_params() -> None:
 def test_rp_t1_authorization_callback_confidential_exchange_and_refresh() -> None:
     rp = _rp()
     _url, login = rp.build_authorization_url("https://issuer.example.test/authorize")
-    callback = rp.parse_callback(f"https://rp.example.test/callback?code=abc&state={login.state}&iss=https://issuer.example.test")
+    callback = rp.parse_callback(
+        f"https://rp.example.test/callback?code=abc&state={login.state}&iss=https://issuer.example.test"
+    )
 
     session = rp.exchange_code_confidential(
         lambda payload: {
@@ -91,7 +134,10 @@ def test_rp_t1_authorization_callback_confidential_exchange_and_refresh() -> Non
         },
         callback,
     )
-    refreshed = rp.refresh(lambda token: {"access_token": "access-token-2", "refresh_token": token}, login.state)
+    refreshed = rp.refresh(
+        lambda token: {"access_token": "access-token-2", "refresh_token": token},
+        login.state,
+    )
 
     assert session.subject == "user:123"
     assert refreshed.access_token == "access-token-2"
@@ -113,26 +159,46 @@ def test_rp_t1_discovery_jwks_id_token_userinfo_logout_and_adapter() -> None:
     metadata = discovery.discover("https://issuer.example.test")
     jwks = JwksCache()
     jwks.put({"keys": [{"kid": "kid-1", "kty": "OKP"}]})
-    userinfo = UserInfoClient(lambda endpoint, token: {"endpoint": endpoint, "sub": "user:123", "token": token})
-    callback = framework_callback_adapter(rp, "https://rp.example.test/callback?code=abc&state=state-1")
+    userinfo = UserInfoClient(
+        lambda endpoint, token: {
+            "endpoint": endpoint,
+            "sub": "user:123",
+            "token": token,
+        }
+    )
+    callback = framework_callback_adapter(
+        rp, "https://rp.example.test/callback?code=abc&state=state-1"
+    )
     claims = validate_id_token_claims(
-        {"iss": "https://issuer.example.test", "aud": ["client-a"], "nonce": "nonce-1", "exp": 1},
+        {
+            "iss": "https://issuer.example.test",
+            "aud": ["client-a"],
+            "nonce": "nonce-1",
+            "exp": 1,
+        },
         issuer="https://issuer.example.test",
         audience="client-a",
         nonce="nonce-1",
     )
-    logout = rp.build_logout_url("https://issuer.example.test/logout", id_token_hint="id-token", state="bye")
+    logout = rp.build_logout_url(
+        "https://issuer.example.test/logout", id_token_hint="id-token", state="bye"
+    )
     login_response = framework_login_adapter(rp, metadata["authorization_endpoint"])
     manifest = example_app_manifest()
 
     assert metadata["userinfo_endpoint"].endswith("/userinfo")
     assert jwks.get("kid-1")["kty"] == "OKP"
-    assert userinfo.get("https://issuer.example.test/userinfo", "access-token")["sub"] == "user:123"
+    assert (
+        userinfo.get("https://issuer.example.test/userinfo", "access-token")["sub"]
+        == "user:123"
+    )
     assert callback.code == "abc"
     assert claims["aud"] == ["client-a"]
     assert "post_logout_redirect_uri=https%3A%2F%2Frp.example.test%2Flogout" in logout
     assert login_response["status"] == 302
-    assert login_response["headers"]["location"].startswith("https://issuer.example.test/authorize?")
+    assert login_response["headers"]["location"].startswith(
+        "https://issuer.example.test/authorize?"
+    )
     assert manifest["browser_rp"]["client_secret"] is False
 
 
@@ -143,7 +209,10 @@ def test_rp_t1_browser_memory_session_and_no_secret_guard() -> None:
     memory.set(session)
 
     assert_browser_no_client_secret(_rp(secret=None).config)
-    assert validate_browser_storage_policy(BrowserStoragePolicy.MEMORY_ONLY) is BrowserStoragePolicy.MEMORY_ONLY
+    assert (
+        validate_browser_storage_policy(BrowserStoragePolicy.MEMORY_ONLY)
+        is BrowserStoragePolicy.MEMORY_ONLY
+    )
     assert memory.get() == session
     memory.clear()
     assert memory.get() is None
@@ -155,7 +224,9 @@ def test_rp_t1_browser_memory_session_and_no_secret_guard() -> None:
 def test_rp_t2_callback_replay_public_client_and_validation_failures() -> None:
     rp = _rp()
     _url, login = rp.build_authorization_url("https://issuer.example.test/authorize")
-    callback = rp.parse_callback(f"https://rp.example.test/callback?code=abc&state={login.state}")
+    callback = rp.parse_callback(
+        f"https://rp.example.test/callback?code=abc&state={login.state}"
+    )
     rp.validate_callback(callback)
 
     with pytest.raises(RPError, match="already consumed"):
@@ -164,7 +235,12 @@ def test_rp_t2_callback_replay_public_client_and_validation_failures() -> None:
         _rp(secret=None).exchange_code_confidential(lambda _payload: {}, callback)
     with pytest.raises(RPError, match="audience"):
         validate_id_token_claims(
-            {"iss": "https://issuer.example.test", "aud": ["other"], "nonce": "nonce-1", "exp": 1},
+            {
+                "iss": "https://issuer.example.test",
+                "aud": ["other"],
+                "nonce": "nonce-1",
+                "exp": 1,
+            },
             issuer="https://issuer.example.test",
             audience="client-a",
             nonce="nonce-1",
@@ -174,11 +250,15 @@ def test_rp_t2_callback_replay_public_client_and_validation_failures() -> None:
     with pytest.raises(RPError, match="client secret"):
         assert_browser_no_client_secret(_rp(secret="not-browser-safe").config)
     with pytest.raises(RPError, match="missing required endpoints"):
-        DiscoveryClient(lambda _url: {"issuer": "https://issuer.example.test"}).discover("https://issuer.example.test")
+        DiscoveryClient(
+            lambda _url: {"issuer": "https://issuer.example.test"}
+        ).discover("https://issuer.example.test")
 
 
 @pytest.mark.unit
-def test_rp_t2_pkce_verifier_rejects_invalid_values_and_login_url_fails_closed() -> None:
+def test_rp_t2_pkce_verifier_rejects_invalid_values_and_login_url_fails_closed() -> (
+    None
+):
     class BadStateStore:
         def create(self, *, redirect_uri: str, scope: tuple[str, ...]) -> LoginRequest:
             return LoginRequest(
@@ -202,17 +282,21 @@ def test_rp_t2_pkce_verifier_rejects_invalid_values_and_login_url_fails_closed()
             _rp().config,
             state_store=BadStateStore(),
             session_store=MemoryRPSessionProvider(),
-        ).build_authorization_url(
-            "https://issuer.example.test/authorize"
-        )
+        ).build_authorization_url("https://issuer.example.test/authorize")
 
 
 @pytest.mark.unit
 def test_rp_t2_public_boundary_has_no_upper_runtime_imports() -> None:
     files = [
-        Path("pkgs/50-protocols/tigrbl-auth-protocol-rp/src/tigrbl_auth_protocol_rp/__init__.py"),
-        Path("pkgs/50-protocols/tigrbl-auth-protocol-rp/src/tigrbl_auth_protocol_rp/client.py"),
-        Path("pkgs/50-protocols/tigrbl-auth-protocol-rp/src/tigrbl_auth_protocol_rp/pkce.py"),
+        Path(
+            "pkgs/50-protocols/tigrbl-auth-protocol-rp/src/tigrbl_auth_protocol_rp/__init__.py"
+        ),
+        Path(
+            "pkgs/50-protocols/tigrbl-auth-protocol-rp/src/tigrbl_auth_protocol_rp/client.py"
+        ),
+        Path(
+            "pkgs/50-protocols/tigrbl-auth-protocol-rp/src/tigrbl_auth_protocol_rp/pkce.py"
+        ),
     ]
     forbidden = {
         "tigrbl_auth",
