@@ -1,6 +1,8 @@
 import asyncio
 from datetime import datetime, timezone
 
+import pytest
+
 from tigrbl_attestation_appraisal import AttestationAppraisalCapability
 from tigrbl_digital_credential_issuance import DigitalCredentialIssuanceCapability
 from tigrbl_digital_credential_presentation import (
@@ -29,7 +31,10 @@ from tigrbl_identity_contracts.digital_credentials import (
     PresentationResult,
     TransactionBinding,
 )
-from tigrbl_identity_contracts.security_events import SecurityEvent
+from tigrbl_identity_contracts.security_events import (
+    SecurityEvent,
+    SecurityEventSubscription,
+)
 from tigrbl_identity_contracts.workloads import SpiffeId, Svid, SvidFormat
 from tigrbl_security_events import SecurityEventsCapability
 from tigrbl_workload_identity import WorkloadIdentityCapability
@@ -142,7 +147,9 @@ def test_security_event_capability_composes_transmit_receive_and_recording():
         "jti",
         datetime.now(timezone.utc),
     )
-    records = []
+    events = []
+    deliveries = []
+    replay_keys = set()
 
     class _Transmitter:
         def transmit(self, event, subscriber):
@@ -155,11 +162,25 @@ def test_security_event_capability_composes_transmit_receive_and_recording():
     capability = SecurityEventsCapability(
         _Transmitter(),
         _Receiver(),
-        lambda action, value, subscriber: records.append(action),
+        events.append,
+        lambda subscriber, value: SecurityEventSubscription(
+            subscriber,
+            (value.event_type,),
+            "push",
+        ),
+        deliveries.append,
+        lambda value: (
+            value.token_id not in replay_keys
+            and not replay_keys.add(value.token_id)
+        ),
     )
-    assert capability.transmit(event, "receiver") == "a.b.c"
-    assert capability.receive("a.b.c") is event
-    assert records == ["transmitted", "received"]
+    assert asyncio.run(capability.transmit(event, "receiver")) == "a.b.c"
+    assert asyncio.run(capability.receive("a.b.c")) is event
+    assert events == [event, event]
+    assert deliveries[0].event_id == event.token_id
+    assert deliveries[0].subscriber == "receiver"
+    with pytest.raises(ValueError, match="replay"):
+        asyncio.run(capability.receive("a.b.c"))
 
 
 def test_workload_capability_returns_verified_identity_not_raw_svid():

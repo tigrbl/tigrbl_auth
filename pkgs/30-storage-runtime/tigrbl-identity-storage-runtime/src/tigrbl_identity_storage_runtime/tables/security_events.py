@@ -4,6 +4,7 @@ from tigrbl_identity_storage.tables import (
     SecurityEvent,
     SecurityEventDelivery,
     SecurityEventReplay,
+    SecurityEventSubscription,
 )
 
 from ..derive import deriveRuntimeTableSpec
@@ -11,12 +12,14 @@ from ..make import makeRuntimeOperation
 from ..ops.security_events import (
     enqueue_security_event_delivery,
     record_security_event,
+    record_security_event_subscription,
     reserve_security_event_replay,
 )
 
 SecurityEventTable = SecurityEvent
 SecurityEventDeliveryTable = SecurityEventDelivery
 SecurityEventReplayTable = SecurityEventReplay
+SecurityEventSubscriptionTable = SecurityEventSubscription
 
 SecurityEventRuntimeSpec = deriveRuntimeTableSpec(
     SecurityEventTable,
@@ -29,6 +32,15 @@ SecurityEventDeliveryRuntimeSpec = deriveRuntimeTableSpec(
     operations=(
         makeRuntimeOperation(
             alias="enqueue_delivery", handler=enqueue_security_event_delivery
+        ),
+    ),
+)
+SecurityEventSubscriptionRuntimeSpec = deriveRuntimeTableSpec(
+    SecurityEventSubscriptionTable,
+    operations=(
+        makeRuntimeOperation(
+            alias="record_subscription",
+            handler=record_security_event_subscription,
         ),
     ),
 )
@@ -48,4 +60,6 @@ __all__ = [
     "SecurityEventReplayTable",
     "SecurityEventRuntimeSpec",
     "SecurityEventTable",
+    "SecurityEventSubscriptionRuntimeSpec",
+    "SecurityEventSubscriptionTable",
 ]

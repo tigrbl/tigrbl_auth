@@ -338,7 +338,14 @@ def test_every_layer_40_capability_has_one_effective_operation_registry() -> Non
         ),
         AdminControlPlane(),
         ReplayProtectionCapability(_ReplayProvider()),
-        SecurityEventsCapability(_Transmitter(), _Receiver()),
+        SecurityEventsCapability(
+            _Transmitter(),
+            _Receiver(),
+            lambda event: None,
+            lambda subscriber, event: object(),
+            lambda delivery: None,
+            lambda event: True,
+        ),
         WorkloadIdentityCapability(_SvidProvider(), _SvidVerifier()),
     )
 
