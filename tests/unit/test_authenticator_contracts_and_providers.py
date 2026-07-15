@@ -15,12 +15,12 @@ from tigrbl_authenticator_recovery_code_local import RecoveryCodeLocalAuthentica
 from tigrbl_authenticator_remote_introspection import RemoteIntrospectionAuthenticator
 from tigrbl_authenticator_service_key_local import ServiceKeyLocalAuthenticator
 from tigrbl_authenticator_session_local import SessionLocalAuthenticator
-from tigrbl_authenticator_webauthn_local import WebAuthnLocalAuthenticator
-from tigrbl_identity_authenticator_bases import AuthenticatorBase, ChallengeAuthenticatorBase
+from tigrbl_identity_authenticator_bases import (
+    AuthenticatorBase,
+    ChallengeAuthenticatorBase,
+)
 from tigrbl_identity_contracts.authenticators import (
-    AuthenticationFactorClass,
     AuthenticatorKind,
-    AuthenticatorProperty,
     IAuthenticator,
     IChallengeAuthenticator,
 )
@@ -38,9 +38,24 @@ def test_authenticator_contracts_do_not_define_composite_surface():
 @pytest.mark.parametrize(
     ("authenticator", "kind", "credential_kind", "amr"),
     [
-        (PasswordLocalAuthenticator(), AuthenticatorKind.PASSWORD_LOCAL, CredentialKind.PASSWORD, ("pwd",)),
-        (ApiKeyLocalAuthenticator(), AuthenticatorKind.API_KEY_LOCAL, CredentialKind.API_KEY, ()),
-        (ServiceKeyLocalAuthenticator(), AuthenticatorKind.SERVICE_KEY_LOCAL, CredentialKind.SERVICE_KEY, ()),
+        (
+            PasswordLocalAuthenticator(),
+            AuthenticatorKind.PASSWORD_LOCAL,
+            CredentialKind.PASSWORD,
+            ("pwd",),
+        ),
+        (
+            ApiKeyLocalAuthenticator(),
+            AuthenticatorKind.API_KEY_LOCAL,
+            CredentialKind.API_KEY,
+            (),
+        ),
+        (
+            ServiceKeyLocalAuthenticator(),
+            AuthenticatorKind.SERVICE_KEY_LOCAL,
+            CredentialKind.SERVICE_KEY,
+            (),
+        ),
         (
             ClientSecretLocalAuthenticator(),
             AuthenticatorKind.CLIENT_SECRET_LOCAL,
@@ -48,7 +63,12 @@ def test_authenticator_contracts_do_not_define_composite_surface():
             (),
         ),
         (SessionLocalAuthenticator(), AuthenticatorKind.SESSION_LOCAL, None, ()),
-        (OtpLocalAuthenticator(), AuthenticatorKind.OTP_LOCAL, CredentialKind.MFA_FACTOR, ("otp",)),
+        (
+            OtpLocalAuthenticator(),
+            AuthenticatorKind.OTP_LOCAL,
+            CredentialKind.MFA_FACTOR,
+            ("otp",),
+        ),
         (
             RecoveryCodeLocalAuthenticator(),
             AuthenticatorKind.RECOVERY_CODE_LOCAL,
@@ -56,19 +76,23 @@ def test_authenticator_contracts_do_not_define_composite_surface():
             (),
         ),
         (
-            WebAuthnLocalAuthenticator(),
-            AuthenticatorKind.WEBAUTHN_LOCAL,
-            CredentialKind.PASSKEY_WEBAUTHN,
-            ("hwk", "user"),
-        ),
-        (
             MtlsClientCertAuthenticator(),
             AuthenticatorKind.MTLS_CLIENT_CERT,
             CredentialKind.MTLS_CERTIFICATE,
             (),
         ),
-        (DpopProofAuthenticator(), AuthenticatorKind.DPOP_PROOF, CredentialKind.DPOP_KEY, ()),
-        (RemoteIntrospectionAuthenticator(), AuthenticatorKind.REMOTE_INTROSPECTION, None, ()),
+        (
+            DpopProofAuthenticator(),
+            AuthenticatorKind.DPOP_PROOF,
+            CredentialKind.DPOP_KEY,
+            (),
+        ),
+        (
+            RemoteIntrospectionAuthenticator(),
+            AuthenticatorKind.REMOTE_INTROSPECTION,
+            None,
+            (),
+        ),
         (FederatedOidcAuthenticator(), AuthenticatorKind.FEDERATED_OIDC, None, ()),
     ],
 )
@@ -88,27 +112,16 @@ def test_provider_packages_advertise_single_authenticator_metadata(
 
 def test_challenge_authenticator_marker_is_limited_to_challenge_based_providers():
     otp = OtpLocalAuthenticator()
-    webauthn = WebAuthnLocalAuthenticator()
     password = PasswordLocalAuthenticator()
 
     assert isinstance(otp, ChallengeAuthenticatorBase)
-    assert isinstance(webauthn, ChallengeAuthenticatorBase)
     assert isinstance(otp, IChallengeAuthenticator)
-    assert isinstance(webauthn, IChallengeAuthenticator)
     assert not isinstance(password, IChallengeAuthenticator)
-
-
-def test_webauthn_metadata_carries_phishing_resistant_evidence_properties():
-    metadata = WebAuthnLocalAuthenticator().metadata()
-
-    assert metadata.factor_class is AuthenticationFactorClass.POSSESSION
-    assert AuthenticatorProperty.PHISHING_RESISTANT in metadata.properties
-    assert AuthenticatorProperty.VERIFIER_NAME_BOUND in metadata.properties
-    assert AuthenticatorProperty.USER_PRESENT in metadata.properties
-    assert AuthenticatorProperty.USER_VERIFIED in metadata.properties
 
 
 def test_no_composite_provider_package_was_added():
     root = Path(__file__).resolve().parents[2]
 
-    assert not (root / "pkgs" / "20-providers" / "tigrbl-authenticator-composite").exists()
+    assert not (
+        root / "pkgs" / "20-providers" / "tigrbl-authenticator-composite"
+    ).exists()

@@ -163,6 +163,38 @@ wheels = [
 ]
 
 [[package]]
+name = "cbor2"
+version = "6.1.3"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/3a/6f/07b4af8da8bd27f640362b1ac8271d80895407f2ede0c2bcc9433c06e1ca/cbor2-6.1.3.tar.gz", hash = "sha256:8d70680acb55c04ea5b5ad86da094f9612b53d5a8a65d0f5b3aafc3ce917ecbb", size = 89503, upload-time = "2026-07-04T10:36:48.793Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/65/ae/753c952af03e0a39c7907209a13d3147b856459d2101d1abc1911629dd11/cbor2-6.1.3-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:20205c698f9ea4918d1714c459f58f46464c9f0d1e467679da8bca9e4eb17d1c", size = 422565, upload-time = "2026-07-04T10:35:43.165Z" },
+    { url = "https://files.pythonhosted.org/packages/65/ca/21c301d4dc617ef2bc6629f5a2322c09a6abfa3ad3502e67458407991016/cbor2-6.1.3-cp310-cp310-manylinux_2_28_aarch64.whl", hash = "sha256:4e2e1c8ba6651e12fcf35188f24cbd2344ce0acb087cb7739e5bfb8cec6e12ea", size = 465650, upload-time = "2026-07-04T10:35:44.864Z" },
+    { url = "https://files.pythonhosted.org/packages/b6/14/7d8dba29b4103629a7c4b5f9697fac70d55d47f539da095674e3bb9f4fb1/cbor2-6.1.3-cp310-cp310-manylinux_2_28_x86_64.whl", hash = "sha256:a7bcc957049da506d6e59b4edb5594c68d81a1fa43b56f826839cb15e9a82572", size = 473041, upload-time = "2026-07-04T10:35:46.221Z" },
+    { url = "https://files.pythonhosted.org/packages/ff/09/0a0393e40a450833e63ca6cfd1a99432eebe40a43f2a9ef1ba4b6c6f4507/cbor2-6.1.3-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:d9971a2052802422efbbe11fc918c0f784de7280d2e0f45a6e9a8a0dc44e8f53", size = 530869, upload-time = "2026-07-04T10:35:47.701Z" },
+    { url = "https://files.pythonhosted.org/packages/ab/76/419ad2e318533a5a7bb9835ddf7e4adce2aa6e4d7559fc836b8fad19518a/cbor2-6.1.3-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:165ce348632a4b502d0eb5ff187138d3b34986224273faf2233f842a9331c3ff", size = 540295, upload-time = "2026-07-04T10:35:48.999Z" },
+    { url = "https://files.pythonhosted.org/packages/26/dd/70064846549f42fd2a4ed4e2e4f28111756b009d62b10d665aea17d1ac1f/cbor2-6.1.3-cp310-cp310-win32.whl", hash = "sha256:9084077c4cd7e905ebe47677934c9c6580942c9d1294f99524c0369b10829e78", size = 283423, upload-time = "2026-07-04T10:35:50.415Z" },
+    { url = "https://files.pythonhosted.org/packages/c6/8c/b95cb31a48062a27141759bc76d8d8c5e2e18c959cfbc38057d9b21a6b1e/cbor2-6.1.3-cp310-cp310-win_amd64.whl", hash = "sha256:72b23df796d083ff53d561fd86e397aa5c19010192e85ea3838d8ef21c09db6d", size = 304417, upload-time = "2026-07-04T10:35:51.786Z" },
+    { url = "https://files.pythonhosted.org/packages/0d/a5/b66695c2f8543b741b7178a5b7aeea3808524b65cd4f9918d1fba93debb7/cbor2-6.1.3-cp310-cp310-win_arm64.whl", hash = "sha256:fcec149218bacf1f98caf44225b67b4908e54e0440ca446ea488aac1ddc85a3b", size = 297762, upload-time = "2026-07-04T10:35:53.034Z" },
+    { url = "https://files.pythonhosted.org/packages/f8/2e/013b2c478c41585bf5c8f9659328412eda4fe8ed30ffeb8e4fde87f8b9a3/cbor2-6.1.3-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:84edab2df31c981d258d652a82a3e30eb7368d86d9d7284216282f65403a1e00", size = 421187, upload-time = "2026-07-04T10:35:54.334Z" },
+    { url = "https://files.pythonhosted.org/packages/96/78/840809f265a4537fde0ba646d92d61c500435fd811961d70776fc021b7ab/cbor2-6.1.3-cp311-cp311-manylinux_2_28_aarch64.whl", hash = "sha256:932e0894476fad36b186c0da6e9b1433358bea564a60ae4799e51182568ff29f", size = 463784, upload-time = "2026-07-04T10:35:55.771Z" },
+    { url = "https://files.pythonhosted.org/packages/3d/c5/4dad6125eea17b35ca5580a4f7308226c8a4511dfb91b94c329b167b6218/cbor2-6.1.3-cp311-cp311-manylinux_2_28_x86_64.whl", hash = "sha256:5f14159423a984c387982901f67313d6582251b6733c23e8bd925d73173691bf", size = 472119, upload-time = "2026-07-04T10:35:57.122Z" },
+    { url = "https://files.pythonhosted.org/packages/b2/f7/5f0387ee7b5601c6af5277051612b8163f82ccbddbae807bbc1326754e3e/cbor2-6.1.3-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:622ec874664b4db54bc6df40f82832ad30fa5c875ad85cde84392ac62bb33d15", size = 528659, upload-time = "2026-07-04T10:35:58.496Z" },
+    { url = "https://files.pythonhosted.org/packages/d7/7f/371ce0c200955a8a999e0a34398834ba88ef2fecda8437c3264c0673aa33/cbor2-6.1.3-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:c9144756fa7c9298d5882d1f7ad379c4a0059803a4c70329965a000bc79bf02d", size = 538983, upload-time = "2026-07-04T10:35:59.828Z" },
+    { url = "https://files.pythonhosted.org/packages/48/d4/3cb4d40ce9bbfb41098656a0be5a8d01f24fa54cdc6d2665cbbaefbb8ba0/cbor2-6.1.3-cp311-cp311-win32.whl", hash = "sha256:144f8cfd2e9149389c34026243aeb646184cd78a2c657822be9bc9e7a2c5f3f5", size = 282264, upload-time = "2026-07-04T10:36:01.131Z" },
+    { url = "https://files.pythonhosted.org/packages/36/1f/e9d123a071ee67ebca70b37401a03b80641d86953a72e8ea41194f99095a/cbor2-6.1.3-cp311-cp311-win_amd64.whl", hash = "sha256:187fd06befc59e6cafafc2709e5f1f3df8afe8bca5646f9cb5b70fc7e6ab1783", size = 303941, upload-time = "2026-07-04T10:36:02.45Z" },
+    { url = "https://files.pythonhosted.org/packages/32/4f/efb2ed376421641e372bfebe9fd98f11c9de3bbac1da9f2b8be5c96eb335/cbor2-6.1.3-cp311-cp311-win_arm64.whl", hash = "sha256:43f0f694f47958de50fc84e6268a3015cc2a7fce88b231456c053bc5a1c6c828", size = 296378, upload-time = "2026-07-04T10:36:03.77Z" },
+    { url = "https://files.pythonhosted.org/packages/31/16/cff14259c3d19a7f0ae88b6996fe4c85f6ff1764dad889ac8a39e843e39c/cbor2-6.1.3-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:3d939f55097c21e032f5a2d67592fcc57298986281f219356e2f519e4466f4ea", size = 412779, upload-time = "2026-07-04T10:36:04.975Z" },
+    { url = "https://files.pythonhosted.org/packages/50/6c/f3641d19b7b85a63cb2756c10164131489c2cb46b379ec51ae22283fefb9/cbor2-6.1.3-cp312-cp312-manylinux_2_28_aarch64.whl", hash = "sha256:b025009478d644dab407164fd60e3ef4381af284f5af6966df94c663756d949e", size = 457781, upload-time = "2026-07-04T10:36:06.349Z" },
+    { url = "https://files.pythonhosted.org/packages/55/85/0c55a66f3037056bfb8e1c7184168085fdea67ae5830404498bcf466233b/cbor2-6.1.3-cp312-cp312-manylinux_2_28_x86_64.whl", hash = "sha256:2226d32e102e375737656ad5d141ad8c6ae3e705e04e263f24756f0eb379c6c1", size = 468373, upload-time = "2026-07-04T10:36:07.769Z" },
+    { url = "https://files.pythonhosted.org/packages/46/74/40f7db3e0d880560193916a5c9b744fcf299558bed7113f77c28237c7c29/cbor2-6.1.3-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:e61d465244d66ffed36492eef3b44d43795d76a2bba0663a2f15c186af7f7513", size = 523844, upload-time = "2026-07-04T10:36:09.404Z" },
+    { url = "https://files.pythonhosted.org/packages/b5/a1/b5e07d6a08441c3a552fe2ae48ccb7e9dfc5065b9f6a3bae9879b4f0fbc0/cbor2-6.1.3-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:87fe7be8fab6ec4796aa127c1a52e09e79dbafd2aa31caf809cf04b8080a5975", size = 536238, upload-time = "2026-07-04T10:36:10.914Z" },
+    { url = "https://files.pythonhosted.org/packages/c9/99/e166be0fd74bf3a91f5a0d103e34883efbc438d970f72cc8200e274787e5/cbor2-6.1.3-cp312-cp312-win32.whl", hash = "sha256:da25d345f01e6a40b2e5c57ef96b4dcff7be69394fb62f0f70e07f437f2376a9", size = 279858, upload-time = "2026-07-04T10:36:12.247Z" },
+    { url = "https://files.pythonhosted.org/packages/d2/1b/90b4a121e40aba189c55a5822dd3c698eaf487e1d4a780ab18c804a5ef1c/cbor2-6.1.3-cp312-cp312-win_amd64.whl", hash = "sha256:d5514f693db6fa6f433b4096e9b604e6a7bf151c9ef1d2db86d0858e4c5e768f", size = 300929, upload-time = "2026-07-04T10:36:13.564Z" },
+    { url = "https://files.pythonhosted.org/packages/19/db/52c58a8d33464927389dde8103997b3fa51b081ce29b347ac2cc4fd0dfbf/cbor2-6.1.3-cp312-cp312-win_arm64.whl", hash = "sha256:3d43183d7beb3d3cd198d69b31bd2ee487ed704a1150c75cb0a66d6ad63d8c1a", size = 290908, upload-time = "2026-07-04T10:36:14.857Z" },
+]
+
+[[package]]
 name = "certifi"
 version = "2026.2.25"
 source = { registry = "https://pypi.org/simple" }
@@ -2209,6 +2241,27 @@ dependencies = [
 requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
 
 [[package]]
+name = "tigrbl-attestation-packed-provider"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-attestation-packed-provider" }
+dependencies = [
+    { name = "cbor2" },
+    { name = "cryptography" },
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-public-key-authenticator-bases" },
+    { name = "tigrbl-security-cose" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "cbor2", specifier = "==6.1.3" },
+    { name = "cryptography", specifier = ">=45" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-public-key-authenticator-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-cose", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-attestation-protocol-corim"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-attestation-protocol-corim" }
@@ -2258,6 +2311,48 @@ dependencies = [
 requires-dist = [{ name = "tigrbl-attestation-bases", specifier = "==0.4.0.dev2" }]
 
 [[package]]
+name = "tigrbl-attestation-tpm-provider"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-attestation-tpm-provider" }
+dependencies = [
+    { name = "cbor2" },
+    { name = "cryptography" },
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-public-key-authenticator-bases" },
+    { name = "tigrbl-security-cose" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "cbor2", specifier = "==6.1.3" },
+    { name = "cryptography", specifier = ">=45" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-public-key-authenticator-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-cose", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-attestation-u2f-provider"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-attestation-u2f-provider" }
+dependencies = [
+    { name = "cbor2" },
+    { name = "cryptography" },
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-public-key-authenticator-bases" },
+    { name = "tigrbl-security-cose" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "cbor2", specifier = "==6.1.3" },
+    { name = "cryptography", specifier = ">=45" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-public-key-authenticator-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-cose", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-auth"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/70-facade/tigrbl-auth" }
@@ -2265,10 +2360,12 @@ dependencies = [
     { name = "swarmauri-crypto-paramiko" },
     { name = "swarmauri-standard" },
     { name = "tigrbl-auth-api-session-login" },
+    { name = "tigrbl-auth-api-webauthn" },
     { name = "tigrbl-auth-plugin" },
     { name = "tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-auth-protocol-oidc" },
     { name = "tigrbl-auth-protocol-rp" },
+    { name = "tigrbl-auth-protocol-webauthn" },
     { name = "tigrbl-auth-release-certification" },
     { name = "tigrbl-authn-credentials" },
     { name = "tigrbl-authority-graph-concrete" },
@@ -2301,10 +2398,12 @@ requires-dist = [
     { name = "swarmauri-crypto-paramiko", specifier = "==0.4.0.dev5" },
     { name = "swarmauri-standard", specifier = "==0.10.0" },
     { name = "tigrbl-auth-api-session-login", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-api-webauthn", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-plugin", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-oidc", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-rp", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-protocol-webauthn", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-release-certification", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authn-credentials", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authority-graph-concrete", specifier = "==0.4.0.dev2" },
@@ -2548,6 +2647,23 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-auth-api-webauthn"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/80-apis/tigrbl-auth-api-webauthn" }
+dependencies = [
+    { name = "pydantic" },
+    { name = "tigrbl" },
+    { name = "tigrbl-auth-protocol-webauthn" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "pydantic", specifier = ">=2.0" },
+    { name = "tigrbl", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-auth-protocol-webauthn", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-auth-plugin"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/60-runtime/tigrbl-auth-plugin" }
@@ -2560,6 +2676,21 @@ dependencies = [
 requires-dist = [
     { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-server", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-auth-profile-fido2-server"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/50-protocols/tigrbl-auth-profile-fido2-server" }
+dependencies = [
+    { name = "tigrbl-auth-protocol-webauthn" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-auth-protocol-webauthn", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
@@ -2932,6 +3063,29 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-auth-protocol-webauthn"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-webauthn" }
+dependencies = [
+    { name = "cbor2" },
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-public-key-authentication-capability" },
+    { name = "tigrbl-public-key-registration-capability" },
+    { name = "tigrbl-security-cose" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "cbor2", specifier = "==6.1.3" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-public-key-authentication-capability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-public-key-registration-capability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-cose", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-auth-release-certification"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/60-runtime/tigrbl-auth-release-certification" }
@@ -2983,9 +3137,12 @@ dependencies = [
     { name = "tigrbl-attestation-appraisal" },
     { name = "tigrbl-attestation-appraiser" },
     { name = "tigrbl-attestation-bases" },
+    { name = "tigrbl-attestation-packed-provider" },
     { name = "tigrbl-attestation-protocol-corim" },
     { name = "tigrbl-attestation-protocol-eat" },
     { name = "tigrbl-attestation-reference-provider" },
+    { name = "tigrbl-attestation-tpm-provider" },
+    { name = "tigrbl-attestation-u2f-provider" },
     { name = "tigrbl-auth" },
     { name = "tigrbl-auth-api-oauth-authorization" },
     { name = "tigrbl-auth-api-oauth-authorization-server-metadata" },
@@ -3002,7 +3159,9 @@ dependencies = [
     { name = "tigrbl-auth-api-oidc-userinfo" },
     { name = "tigrbl-auth-api-resource-validation-metadata" },
     { name = "tigrbl-auth-api-session-login" },
+    { name = "tigrbl-auth-api-webauthn" },
     { name = "tigrbl-auth-plugin" },
+    { name = "tigrbl-auth-profile-fido2-server" },
     { name = "tigrbl-auth-profile-haip" },
     { name = "tigrbl-auth-protocol-authzen" },
     { name = "tigrbl-auth-protocol-cwt" },
@@ -3014,9 +3173,11 @@ dependencies = [
     { name = "tigrbl-auth-protocol-oidc" },
     { name = "tigrbl-auth-protocol-oidc-backchannel-replay-store" },
     { name = "tigrbl-auth-protocol-rp" },
+    { name = "tigrbl-auth-protocol-webauthn" },
     { name = "tigrbl-auth-release-certification" },
     { name = "tigrbl-authentication-assurance-bases" },
     { name = "tigrbl-authenticator-api-key-local" },
+    { name = "tigrbl-authenticator-attestation-capability" },
     { name = "tigrbl-authenticator-client-secret-local" },
     { name = "tigrbl-authenticator-dpop-proof" },
     { name = "tigrbl-authenticator-federated-oidc" },
@@ -3027,7 +3188,6 @@ dependencies = [
     { name = "tigrbl-authenticator-remote-introspection" },
     { name = "tigrbl-authenticator-service-key-local" },
     { name = "tigrbl-authenticator-session-local" },
-    { name = "tigrbl-authenticator-webauthn-local" },
     { name = "tigrbl-authn-credentials" },
     { name = "tigrbl-authority-graph-concrete" },
     { name = "tigrbl-authorization-scope-set-matcher-concrete" },
@@ -3148,6 +3308,7 @@ dependencies = [
     { name = "tigrbl-dpop-key-credential-concrete" },
     { name = "tigrbl-eat-concrete" },
     { name = "tigrbl-eat-verifier-provider" },
+    { name = "tigrbl-fido-metadata-service-provider" },
     { name = "tigrbl-grant-negotiation-capability" },
     { name = "tigrbl-identity-admin" },
     { name = "tigrbl-identity-admin-advanced-authenticator-registry" },
@@ -3206,6 +3367,10 @@ dependencies = [
     { name = "tigrbl-principal-authentication" },
     { name = "tigrbl-protected-resource-authorization-capability" },
     { name = "tigrbl-protocol-artifact-processing" },
+    { name = "tigrbl-public-key-authentication-capability" },
+    { name = "tigrbl-public-key-authenticator-bases" },
+    { name = "tigrbl-public-key-credential-management-capability" },
+    { name = "tigrbl-public-key-registration-capability" },
     { name = "tigrbl-public-subject-identifier-concrete" },
     { name = "tigrbl-pushed-authorization-capability" },
     { name = "tigrbl-release-contracts" },
@@ -3356,9 +3521,12 @@ requires-dist = [
     { name = "tigrbl-attestation-appraisal", editable = "pkgs/40-capabilities/tigrbl-attestation-appraisal" },
     { name = "tigrbl-attestation-appraiser", editable = "pkgs/20-providers/tigrbl-attestation-appraiser" },
     { name = "tigrbl-attestation-bases", editable = "pkgs/05-bases/tigrbl-attestation-bases" },
+    { name = "tigrbl-attestation-packed-provider", editable = "pkgs/20-providers/tigrbl-attestation-packed-provider" },
     { name = "tigrbl-attestation-protocol-corim", editable = "pkgs/50-protocols/tigrbl-attestation-protocol-corim" },
     { name = "tigrbl-attestation-protocol-eat", editable = "pkgs/50-protocols/tigrbl-attestation-protocol-eat" },
     { name = "tigrbl-attestation-reference-provider", editable = "pkgs/20-providers/tigrbl-attestation-reference-provider" },
+    { name = "tigrbl-attestation-tpm-provider", editable = "pkgs/20-providers/tigrbl-attestation-tpm-provider" },
+    { name = "tigrbl-attestation-u2f-provider", editable = "pkgs/20-providers/tigrbl-attestation-u2f-provider" },
     { name = "tigrbl-auth", editable = "pkgs/70-facade/tigrbl-auth" },
     { name = "tigrbl-auth-api-oauth-authorization", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-authorization" },
     { name = "tigrbl-auth-api-oauth-authorization-server-metadata", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-authorization-server-metadata" },
@@ -3375,7 +3543,9 @@ requires-dist = [
     { name = "tigrbl-auth-api-oidc-userinfo", editable = "pkgs/80-apis/tigrbl-auth-api-oidc-userinfo" },
     { name = "tigrbl-auth-api-resource-validation-metadata", editable = "pkgs/80-apis/tigrbl-auth-api-resource-validation-metadata" },
     { name = "tigrbl-auth-api-session-login", editable = "pkgs/80-apis/tigrbl-auth-api-session-login" },
+    { name = "tigrbl-auth-api-webauthn", editable = "pkgs/80-apis/tigrbl-auth-api-webauthn" },
     { name = "tigrbl-auth-plugin", editable = "pkgs/60-runtime/tigrbl-auth-plugin" },
+    { name = "tigrbl-auth-profile-fido2-server", editable = "pkgs/50-protocols/tigrbl-auth-profile-fido2-server" },
     { name = "tigrbl-auth-profile-haip", editable = "pkgs/50-protocols/tigrbl-auth-profile-haip" },
     { name = "tigrbl-auth-protocol-authzen", editable = "pkgs/50-protocols/tigrbl-auth-protocol-authzen" },
     { name = "tigrbl-auth-protocol-cwt", editable = "pkgs/50-protocols/tigrbl-auth-protocol-cwt" },
@@ -3387,9 +3557,11 @@ requires-dist = [
     { name = "tigrbl-auth-protocol-oidc", editable = "pkgs/50-protocols/tigrbl-auth-protocol-oidc" },
     { name = "tigrbl-auth-protocol-oidc-backchannel-replay-store", editable = "pkgs/deprecated/tigrbl-auth-protocol-oidc-backchannel-replay-store" },
     { name = "tigrbl-auth-protocol-rp", editable = "pkgs/50-protocols/tigrbl-auth-protocol-rp" },
+    { name = "tigrbl-auth-protocol-webauthn", editable = "pkgs/50-protocols/tigrbl-auth-protocol-webauthn" },
     { name = "tigrbl-auth-release-certification", editable = "pkgs/60-runtime/tigrbl-auth-release-certification" },
     { name = "tigrbl-authentication-assurance-bases", editable = "pkgs/05-bases/tigrbl-authentication-assurance-bases" },
     { name = "tigrbl-authenticator-api-key-local", editable = "pkgs/20-providers/tigrbl-authenticator-api-key-local" },
+    { name = "tigrbl-authenticator-attestation-capability", editable = "pkgs/40-capabilities/tigrbl-authenticator-attestation-capability" },
     { name = "tigrbl-authenticator-client-secret-local", editable = "pkgs/20-providers/tigrbl-authenticator-client-secret-local" },
     { name = "tigrbl-authenticator-dpop-proof", editable = "pkgs/20-providers/tigrbl-authenticator-dpop-proof" },
     { name = "tigrbl-authenticator-federated-oidc", editable = "pkgs/20-providers/tigrbl-authenticator-federated-oidc" },
@@ -3400,7 +3572,6 @@ requires-dist = [
     { name = "tigrbl-authenticator-remote-introspection", editable = "pkgs/20-providers/tigrbl-authenticator-remote-introspection" },
     { name = "tigrbl-authenticator-service-key-local", editable = "pkgs/20-providers/tigrbl-authenticator-service-key-local" },
     { name = "tigrbl-authenticator-session-local", editable = "pkgs/20-providers/tigrbl-authenticator-session-local" },
-    { name = "tigrbl-authenticator-webauthn-local", editable = "pkgs/20-providers/tigrbl-authenticator-webauthn-local" },
     { name = "tigrbl-authn-credentials", editable = "pkgs/20-providers/tigrbl-authn-credentials" },
     { name = "tigrbl-authority-graph-concrete", editable = "pkgs/10-concrete/tigrbl-authority-graph-concrete" },
     { name = "tigrbl-authorization-scope-set-matcher-concrete", editable = "pkgs/10-concrete/tigrbl-authorization-scope-set-matcher-concrete" },
@@ -3521,6 +3692,7 @@ requires-dist = [
     { name = "tigrbl-dpop-key-credential-concrete", editable = "pkgs/10-concrete/tigrbl-dpop-key-credential-concrete" },
     { name = "tigrbl-eat-concrete", editable = "pkgs/10-concrete/tigrbl-eat-concrete" },
     { name = "tigrbl-eat-verifier-provider", editable = "pkgs/20-providers/tigrbl-eat-verifier-provider" },
+    { name = "tigrbl-fido-metadata-service-provider", editable = "pkgs/20-providers/tigrbl-fido-metadata-service-provider" },
     { name = "tigrbl-grant-negotiation-capability", editable = "pkgs/40-capabilities/tigrbl-grant-negotiation-capability" },
     { name = "tigrbl-identity-admin", editable = "pkgs/20-providers/tigrbl-identity-admin" },
     { name = "tigrbl-identity-admin-advanced-authenticator-registry", editable = "pkgs/deprecated/tigrbl-identity-admin-advanced-authenticator-registry" },
@@ -3583,6 +3755,10 @@ requires-dist = [
     { name = "tigrbl-principal-authentication", editable = "pkgs/40-capabilities/tigrbl-principal-authentication" },
     { name = "tigrbl-protected-resource-authorization-capability", editable = "pkgs/40-capabilities/tigrbl-protected-resource-authorization-capability" },
     { name = "tigrbl-protocol-artifact-processing", editable = "pkgs/40-capabilities/tigrbl-protocol-artifact-processing" },
+    { name = "tigrbl-public-key-authentication-capability", editable = "pkgs/40-capabilities/tigrbl-public-key-authentication-capability" },
+    { name = "tigrbl-public-key-authenticator-bases", editable = "pkgs/05-bases/tigrbl-public-key-authenticator-bases" },
+    { name = "tigrbl-public-key-credential-management-capability", editable = "pkgs/40-capabilities/tigrbl-public-key-credential-management-capability" },
+    { name = "tigrbl-public-key-registration-capability", editable = "pkgs/40-capabilities/tigrbl-public-key-registration-capability" },
     { name = "tigrbl-public-subject-identifier-concrete", editable = "pkgs/10-concrete/tigrbl-public-subject-identifier-concrete" },
     { name = "tigrbl-pushed-authorization-capability", editable = "pkgs/40-capabilities/tigrbl-pushed-authorization-capability" },
     { name = "tigrbl-release-contracts", editable = "pkgs/02-contracts/tigrbl-release-contracts" },
@@ -3687,6 +3863,17 @@ requires-dist = [
     { name = "tigrbl-identity-authenticator-bases", specifier = "==0.1.0" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
 ]
+
+[[package]]
+name = "tigrbl-authenticator-attestation-capability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/40-capabilities/tigrbl-authenticator-attestation-capability" }
+dependencies = [
+    { name = "tigrbl-capability" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-capability", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-authenticator-client-secret-local"
@@ -3831,21 +4018,6 @@ requires-dist = [
 name = "tigrbl-authenticator-session-local"
 version = "0.1.0"
 source = { editable = "pkgs/20-providers/tigrbl-authenticator-session-local" }
-dependencies = [
-    { name = "tigrbl-identity-authenticator-bases" },
-    { name = "tigrbl-identity-contracts" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "tigrbl-identity-authenticator-bases", specifier = "==0.1.0" },
-    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
-]
-
-[[package]]
-name = "tigrbl-authenticator-webauthn-local"
-version = "0.1.0"
-source = { editable = "pkgs/20-providers/tigrbl-authenticator-webauthn-local" }
 dependencies = [
     { name = "tigrbl-identity-authenticator-bases" },
     { name = "tigrbl-identity-contracts" },
@@ -5653,6 +5825,21 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-fido-metadata-service-provider"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-fido-metadata-service-provider" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-public-key-authenticator-bases" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-public-key-authenticator-bases", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-grant-negotiation-capability"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/40-capabilities/tigrbl-grant-negotiation-capability" }
@@ -6151,9 +6338,14 @@ name = "tigrbl-identity-runtime"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/60-runtime/tigrbl-identity-runtime" }
 dependencies = [
+    { name = "tigrbl-auth-api-webauthn" },
+    { name = "tigrbl-auth-protocol-webauthn" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-jose" },
     { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-public-key-authentication-capability" },
+    { name = "tigrbl-public-key-credential-management-capability" },
+    { name = "tigrbl-public-key-registration-capability" },
 ]
 
 [package.optional-dependencies]
@@ -6176,9 +6368,14 @@ uvicorn = [
 requires-dist = [
     { name = "hypercorn", marker = "extra == 'hypercorn'", specifier = "==0.18.0" },
     { name = "hypercorn", marker = "extra == 'servers'", specifier = "==0.18.0" },
+    { name = "tigrbl-auth-api-webauthn", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-protocol-webauthn", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-jose", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-public-key-authentication-capability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-public-key-credential-management-capability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-public-key-registration-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrcorn", marker = "python_full_version >= '3.11' and extra == 'servers'", specifier = "==0.3.8" },
     { name = "tigrcorn", marker = "python_full_version >= '3.11' and extra == 'tigrcorn'", specifier = "==0.3.8" },
     { name = "uvicorn", extras = ["standard"], marker = "extra == 'servers'", specifier = "==0.41.0" },
@@ -6689,6 +6886,58 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-public-key-authentication-capability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/40-capabilities/tigrbl-public-key-authentication-capability" }
+dependencies = [
+    { name = "tigrbl-capability" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-capability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-public-key-authenticator-bases"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/05-bases/tigrbl-public-key-authenticator-bases" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-public-key-credential-management-capability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/40-capabilities/tigrbl-public-key-credential-management-capability" }
+dependencies = [
+    { name = "tigrbl-capability" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-capability", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-public-key-registration-capability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/40-capabilities/tigrbl-public-key-registration-capability" }
+dependencies = [
+    { name = "tigrbl-capability" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-capability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-public-subject-identifier-concrete"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-public-subject-identifier-concrete" }
@@ -6920,6 +7169,16 @@ requires-dist = [
 name = "tigrbl-security-cose"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/20-providers/tigrbl-security-cose" }
+dependencies = [
+    { name = "cbor2" },
+    { name = "cryptography" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "cbor2", specifier = "==6.1.3" },
+    { name = "cryptography", specifier = ">=45.0.0" },
+]
 
 [[package]]
 name = "tigrbl-security-dpop-cnf-binding-validator"

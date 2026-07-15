@@ -18,7 +18,6 @@ TRUST_BASE_PROVIDER_PACKAGES = {
     "tigrbl-authenticator-remote-introspection",
     "tigrbl-authenticator-service-key-local",
     "tigrbl-authenticator-session-local",
-    "tigrbl-authenticator-webauthn-local",
     "tigrbl-authz-resource-server-verifier",
     "tigrbl-identity-jose",
     "tigrbl-security-auth-context-acr-basic",

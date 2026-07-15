@@ -34,6 +34,12 @@ RFC 8291:
 RFC 8812:
   modules: [pkgs/20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose/standards/rfc8812.py]
   boundary: extension_quarantine
+WebAuthn Level 2 relying-party implementation:
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-webauthn/src/tigrbl_auth_protocol_webauthn, pkgs/80-apis/tigrbl-auth-api-webauthn/src/tigrbl_auth_api_webauthn]
+  boundary: extension_quarantine
+FIDO2 server implementation profile:
+  modules: [pkgs/50-protocols/tigrbl-auth-profile-fido2-server/src/tigrbl_auth_profile_fido2_server]
+  boundary: extension_quarantine
 RFC 8932:
   modules: [pkgs/50-protocols/tigrbl-auth-protocol-cwt/src/tigrbl_auth_protocol_cwt]
   boundary: extension_quarantine

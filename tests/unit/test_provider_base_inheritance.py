@@ -15,7 +15,6 @@ PROVIDER_BASES = {
     "tigrbl_authenticator_remote_introspection.RemoteIntrospectionAuthenticator": "tigrbl_identity_authenticator_bases.AuthenticatorBase",
     "tigrbl_authenticator_service_key_local.ServiceKeyLocalAuthenticator": "tigrbl_identity_authenticator_bases.AuthenticatorBase",
     "tigrbl_authenticator_session_local.SessionLocalAuthenticator": "tigrbl_identity_authenticator_bases.AuthenticatorBase",
-    "tigrbl_authenticator_webauthn_local.WebAuthnLocalAuthenticator": "tigrbl_identity_authenticator_bases.ChallengeAuthenticatorBase",
     "tigrbl_authz_resource_server_verifier.ResourceServerVerifier": "tigrbl_resource_server_bases.ResourceServerVerifierBase",
     "tigrbl_security_authorization_provenance_builder.DeterministicProvenanceArtifactBuilder": "tigrbl_security_provenance_bases.ProvenanceArtifactBuilderBase",
     "tigrbl_identity_jose.JWTCoder": "tigrbl_jose_bases.JwtCoderBase",

@@ -1,0 +1,13 @@
+[project]
+name = "tigrbl-fido-metadata-service-provider"
+version = "0.4.0.dev2"
+description = "FIDO Metadata Service signed-blob and authenticator status provider."
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = ["tigrbl-identity-contracts==0.4.0.dev2", "tigrbl-public-key-authenticator-bases==0.4.0.dev2"]
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+[tool.poetry]
+packages = [{ include = "tigrbl_fido_metadata_service_provider", from = "src" }]

@@ -12,6 +12,11 @@ RealmId = NewType("RealmId", str)
 PrincipalId = NewType("PrincipalId", str)
 ClientId = NewType("ClientId", str)
 CredentialId = NewType("CredentialId", str)
+CredentialExternalId = NewType("CredentialExternalId", str)
+CeremonyId = NewType("CeremonyId", str)
+RelyingPartyId = NewType("RelyingPartyId", str)
+UserHandleId = NewType("UserHandleId", str)
+AuthenticatorId = NewType("AuthenticatorId", str)
 IdentityId = NewType("IdentityId", str)
 TokenId = NewType("TokenId", str)
 PresentationId = NewType("PresentationId", str)
@@ -151,7 +156,9 @@ __all__ = [
     "Audience",
     "ClientId",
     "ClientRef",
+    "CeremonyId",
     "CredentialId",
+    "CredentialExternalId",
     "CredentialRef",
     "IdentityRef",
     "WalletRef",
@@ -161,6 +168,7 @@ __all__ = [
     "TokenId",
     "PresentationId",
     "AttestationId",
+    "AuthenticatorId",
     "ManifestId",
     "CertificateId",
     "WalletId",
@@ -176,11 +184,13 @@ __all__ = [
     "PrincipalRef",
     "RealmId",
     "RealmRef",
+    "RelyingPartyId",
     "Scope",
     "ScopeValue",
     "Subject",
     "TenantId",
     "TenantRef",
+    "UserHandleId",
     "new_client_id",
     "new_credential_id",
     "new_opaque_id",

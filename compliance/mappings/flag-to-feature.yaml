@@ -257,6 +257,12 @@ enable_rfc8707:
 enable_rfc8812:
 - extension:webauthn-passkeys
 - flag:enable_rfc8812
+enable_webauthn:
+- extension:webauthn-passkeys
+enable_fido2_server_profile:
+- extension:webauthn-passkeys
+enable_fido_metadata_service:
+- extension:webauthn-passkeys
 enable_rfc8932:
 - extension:dns-privacy
 - flag:enable_rfc8932

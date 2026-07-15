@@ -349,6 +349,15 @@ RFC 8291:
 - tests/unit/test_rfc8291_webpush_encryption.py
 RFC 8812:
 - tests/unit/test_rfc8812_webauthn_algorithms.py
+WebAuthn Level 2 relying-party implementation:
+- tests/unit/test_webauthn_foundation_delivery.py
+- tests/unit/test_webauthn_migration_0035.py
+- tests/unit/test_webauthn_protocol_delivery.py
+- tests/unit/test_webauthn_api_delivery.py
+- tests/unit/test_webauthn_attestation_delivery.py
+FIDO2 server implementation profile:
+- tests/unit/test_webauthn_protocol_delivery.py
+- tests/unit/test_webauthn_attestation_delivery.py
 RFC 8932:
 - tests/unit/test_rfc8932_dns_privacy.py
 - tests/unit/test_rfc8932_enhanced_metadata.py

@@ -1,6 +1,10 @@
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 
+from .algorithms import COSE_ALGORITHMS, CoseAlgorithm, resolve_cose_algorithm
+from .keys import decode_cose_key, load_cose_public_key
+from .signatures import verify_detached_signature
+
 CoseSigner = Callable[[bytes, Mapping[int | str, object], bytes], bytes]
 CoseVerifier = Callable[[bytes, bytes, str], bool]
 
@@ -44,4 +48,15 @@ class CoseSign1Provider:
         return self._verifier(encoded, external_aad, profile)
 
 
-__all__ = ["CoseSign1Envelope", "CoseSign1Provider", "CoseSigner", "CoseVerifier"]
+__all__ = [
+    "COSE_ALGORITHMS",
+    "CoseAlgorithm",
+    "CoseSign1Envelope",
+    "CoseSign1Provider",
+    "CoseSigner",
+    "CoseVerifier",
+    "decode_cose_key",
+    "load_cose_public_key",
+    "resolve_cose_algorithm",
+    "verify_detached_signature",
+]

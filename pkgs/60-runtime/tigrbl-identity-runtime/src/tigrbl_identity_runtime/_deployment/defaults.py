@@ -92,6 +92,9 @@ DEFAULT_VALUES: Final[dict[str, Any]] = {
     "enable_rfc8417": False,
     "enable_rfc8291": False,
     "enable_rfc8812": False,
+    "enable_webauthn": False,
+    "enable_fido2_server_profile": False,
+    "enable_fido_metadata_service": False,
     "enable_rfc8932": False,
     "enable_rfc8523": False,
 }

@@ -1987,6 +1987,10 @@ extension:set:
 - pkgs/10-concrete/tigrbl-set-concrete/tests/test_rfc8417.py
 extension:webauthn-passkeys:
 - tests/unit/test_rfc8812_webauthn_algorithms.py
+- tests/unit/test_webauthn_foundation_delivery.py
+- tests/unit/test_webauthn_protocol_delivery.py
+- tests/unit/test_webauthn_api_delivery.py
+- tests/unit/test_webauthn_attestation_delivery.py
 extension:webpush:
 - tests/unit/test_rfc8291_webpush_encryption.py
 profile:baseline:

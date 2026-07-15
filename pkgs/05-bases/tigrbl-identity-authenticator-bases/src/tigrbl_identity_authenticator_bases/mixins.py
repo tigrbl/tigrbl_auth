@@ -109,10 +109,12 @@ class RecoveryCodeVerifierMixin:
 
 
 class WebAuthnAssertionMixin:
+    """Deprecated compatibility mixin; use PublicKeyAssertionVerificationBase."""
+
     async def verify_webauthn_assertion(
         self, assertion: Mapping[str, Any], credential: Any
     ) -> Mapping[str, Any]:
-        raise NotImplementedError
+        raise NotImplementedError("use tigrbl-public-key-authenticator-bases")
 
 
 class SenderConstraintMixin:

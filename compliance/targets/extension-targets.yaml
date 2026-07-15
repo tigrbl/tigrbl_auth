@@ -31,6 +31,19 @@ targets:
     boundary.
   modules:
   - tigrbl_auth/extensions/rfc8812.py
+- id: webauthn.rp-level2
+  label: WebAuthn Level 2 relying-party implementation
+  title: W3C Web Authentication Level 2 relying-party ceremonies
+  quarantine_reason: Implementation is tested internally but no external FIDO conformance or certification claim is made.
+  modules:
+  - pkgs/50-protocols/tigrbl-auth-protocol-webauthn/src/tigrbl_auth_protocol_webauthn
+  - pkgs/80-apis/tigrbl-auth-api-webauthn/src/tigrbl_auth_api_webauthn
+- id: fido2.server-profile
+  label: FIDO2 server implementation profile
+  title: FIDO2 server requirements and capability mapping
+  quarantine_reason: Profile mapping is implemented but external certification evidence is not yet attached.
+  modules:
+  - pkgs/50-protocols/tigrbl-auth-profile-fido2-server/src/tigrbl_auth_profile_fido2_server
 - id: dns.privacy
   label: RFC 8932
   title: Recommendations for DNS Privacy Service Operators

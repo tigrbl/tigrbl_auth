@@ -359,6 +359,16 @@ class Settings(BaseSettings):
     enable_rfc8417: bool = Field(default=_env_bool("TIGRBL_AUTH_ENABLE_RFC8417"))
     enable_rfc8291: bool = Field(default=_env_bool("TIGRBL_AUTH_ENABLE_RFC8291"))
     enable_rfc8812: bool = Field(default=_env_bool("TIGRBL_AUTH_ENABLE_RFC8812"))
+    enable_webauthn: bool = Field(default=_env_bool("TIGRBL_AUTH_ENABLE_WEBAUTHN"))
+    webauthn_version: str = Field(default=os.environ.get("TIGRBL_AUTH_WEBAUTHN_VERSION", "level-2"))
+    webauthn_rp_id: str | None = Field(default=os.environ.get("TIGRBL_AUTH_WEBAUTHN_RP_ID"))
+    webauthn_allowed_origins: str = Field(default=os.environ.get("TIGRBL_AUTH_WEBAUTHN_ALLOWED_ORIGINS", ""))
+    webauthn_user_verification: str = Field(default=os.environ.get("TIGRBL_AUTH_WEBAUTHN_USER_VERIFICATION", "preferred"))
+    webauthn_resident_key: str = Field(default=os.environ.get("TIGRBL_AUTH_WEBAUTHN_RESIDENT_KEY", "preferred"))
+    webauthn_attestation: str = Field(default=os.environ.get("TIGRBL_AUTH_WEBAUTHN_ATTESTATION", "none"))
+    webauthn_allowed_algorithms: str = Field(default=os.environ.get("TIGRBL_AUTH_WEBAUTHN_ALLOWED_ALGORITHMS", "-7,-257"))
+    enable_fido2_server_profile: bool = Field(default=_env_bool("TIGRBL_AUTH_ENABLE_FIDO2_SERVER_PROFILE"))
+    enable_fido_metadata_service: bool = Field(default=_env_bool("TIGRBL_AUTH_ENABLE_FIDO_METADATA_SERVICE"))
     enable_rfc8932: bool = Field(
         default=_env_bool("TIGRBL_AUTH_ENABLE_RFC8932"),
         description="Quarantined extension flag for RFC 8932 DNS privacy work; not part of the certified auth-core boundary.",

@@ -24,6 +24,7 @@ from .token_persistence import *
 from .token_lifecycle import *
 from .sync import *
 from .topology_validation import *
+from .webauthn import *
 
 __all__ = [
     "makeRuntimeOperation",

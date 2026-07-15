@@ -19,6 +19,7 @@ from .security_events import *
 from .sessions import *
 from .tokens import *
 from .workloads import *
+from .webauthn import *
 
 DURABLE_RUNTIME_TABLE_SPECS = (
     AttributePolicyRuntimeSpec,
@@ -65,6 +66,10 @@ DURABLE_RUNTIME_TABLE_SPECS = (
     GnapGrantRuntimeSpec,
     GnapContinuationRuntimeSpec,
     GnapInteractionRuntimeSpec,
+    WebAuthnCeremonyRuntimeSpec,
+    WebAuthnCredentialRuntimeSpec,
+    WebAuthnRelyingPartyRuntimeSpec,
+    WebAuthnAttestationRecordRuntimeSpec,
 )
 
 __all__ = [

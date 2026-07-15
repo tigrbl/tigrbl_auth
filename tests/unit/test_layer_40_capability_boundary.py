@@ -19,6 +19,9 @@ def test_layer_40_contains_only_registered_multi_component_use_cases() -> None:
         "tigrbl-attestation-appraisal": (
             "coordinate evidence appraisal and result recording"
         ),
+        "tigrbl-authenticator-attestation-capability": (
+            "coordinate attestation format verification, metadata resolution, trust appraisal, and reappraisal"
+        ),
         "tigrbl-client-registration-capability": (
             "coordinate client and registration metadata lifecycle with optional "
             "audit recording"
@@ -51,6 +54,15 @@ def test_layer_40_contains_only_registered_multi_component_use_cases() -> None:
         ),
         "tigrbl-protected-resource-authorization-capability": (
             "coordinate normalized protected-resource token and claims authorization"
+        ),
+        "tigrbl-public-key-authentication-capability": (
+            "coordinate durable ceremony consumption, credential resolution, assertion verification, and session evidence"
+        ),
+        "tigrbl-public-key-credential-management-capability": (
+            "coordinate authenticated listing, naming, and revocation of registered public-key credentials"
+        ),
+        "tigrbl-public-key-registration-capability": (
+            "coordinate durable ceremony reservation, attestation verification, credential insertion, and audit evidence"
         ),
         "tigrbl-replay-protection-capability": (
             "coordinate normalized replay reservations across protocol mappings, "

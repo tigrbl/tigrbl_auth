@@ -19,6 +19,7 @@ from .capability_assembly import (
     build_runtime_capability_assembly,
     validate_protocol_capabilities,
 )
+from .composition.webauthn import WebAuthnComposition, build_webauthn_composition
 from .registry import (
     get_runner_adapter,
     iter_runner_adapters,
@@ -61,6 +62,8 @@ __all__ = [
     "standards_manifest",
     "testkit_provider_runtime_profile",
     "validate_protocol_capabilities",
+    "WebAuthnComposition",
+    "build_webauthn_composition",
 ]
 
 

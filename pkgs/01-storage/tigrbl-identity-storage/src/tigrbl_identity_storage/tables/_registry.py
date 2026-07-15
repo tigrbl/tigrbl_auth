@@ -24,6 +24,9 @@ from .credential_mtls_certificate import CredentialMtlsCertificate
 from .credential_password import CredentialPassword
 from .credential_recovery_code import CredentialRecoveryCode
 from .credential_webauthn_passkey import CredentialWebAuthnPasskey
+from .webauthn_attestation_record import WebAuthnAttestationRecord
+from .webauthn_ceremony import WebAuthnCeremony
+from .webauthn_relying_party import WebAuthnRelyingParty
 from .crypto_key import CryptoKey
 from .crypto_key_version import CryptoKeyVersion
 from .principal_key_binding import PrincipalKeyBinding
@@ -142,6 +145,9 @@ _TABLE_MODELS = (
     CredentialPassword,
     CredentialRecoveryCode,
     CredentialWebAuthnPasskey,
+    WebAuthnAttestationRecord,
+    WebAuthnCeremony,
+    WebAuthnRelyingParty,
     CryptoKey,
     CryptoKeyVersion,
     PrincipalKeyBinding,
