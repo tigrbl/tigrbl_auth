@@ -2700,12 +2700,18 @@ name = "tigrbl-auth-protocol-oid4vci"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-oid4vci" }
 dependencies = [
+    { name = "tigrbl-claim-audience-concrete" },
+    { name = "tigrbl-claim-issued-at-concrete" },
+    { name = "tigrbl-claim-nonce-concrete" },
     { name = "tigrbl-digital-credential-issuance" },
     { name = "tigrbl-identity-contracts" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "tigrbl-claim-audience-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-claim-issued-at-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-claim-nonce-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-digital-credential-issuance", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
 ]

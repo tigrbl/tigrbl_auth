@@ -1,4 +1,5 @@
 from collections.abc import Mapping
+import inspect
 
 from tigrbl_digital_credential_issuance import DigitalCredentialIssuanceCapability
 from tigrbl_identity_contracts.digital_credentials import (
@@ -13,7 +14,7 @@ class Oid4vciProtocol:
     def __init__(self, capability: DigitalCredentialIssuanceCapability):
         self._capability = capability
 
-    def credential(
+    async def credential(
         self,
         payload: Mapping[str, object],
         *,
@@ -33,7 +34,11 @@ class Oid4vciProtocol:
             CredentialFormat(format_identifier),
             proof=str(proofs) if proofs is not None else None,
         )
-        return self._capability.issue(request, wallet_attestation=wallet_attestation)
+        result = self._capability.issue(
+            request,
+            wallet_attestation=wallet_attestation,
+        )
+        return await result if inspect.isawaitable(result) else result
 
 
 __all__ = ["Oid4vciProtocol"]
