@@ -582,7 +582,9 @@ def enable_rfc8414():
     """Enable RFC 8414 authorization server metadata for tests."""
     _require_runtime_stack()
     from tigrbl_auth.runtime_cfg import settings
-    from tigrbl_auth.rfc.rfc8414 import include_rfc8414
+    from tigrbl_identity_server.authorization_server_metadata_surface import (
+        include_rfc8414,
+    )
     from tigrbl_identity_server.oidc_discovery_surface import include_oidc_discovery
 
     app = _import_runtime_objects()["app"]

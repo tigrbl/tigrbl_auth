@@ -40,6 +40,7 @@ dependencies = [
     "tigrbl-auth-api-oidc-userinfo==0.4.0.dev2",
     "tigrbl-auth-api-oidc-logout==0.4.0.dev2",
     "tigrbl-auth-api-oidc-discovery==0.4.0.dev2",
+    "tigrbl-auth-api-oauth-authorization-server-metadata==0.4.0.dev2",
     "tigrbl-auth-api-oauth-introspection==0.4.0.dev2",
     "tigrbl-auth-api-oauth-revocation==0.4.0.dev2",
     "tigrbl-auth-api-oauth-par==0.4.0.dev2",

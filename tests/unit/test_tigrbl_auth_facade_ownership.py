@@ -293,7 +293,6 @@ def test_installable_tigrbl_auth_facade_exposes_rfc_legacy_modules() -> None:
         "tigrbl_auth.rfc.rfc7662_introspection": (
             "tigrbl_auth_protocol_oauth.standards.introspection"
         ),
-        "tigrbl_auth.rfc.rfc8414": "tigrbl_auth_protocol_oauth.standards.authorization_server_metadata_endpoint",
         "tigrbl_auth.rfc.rfc9449_dpop": (
             "tigrbl_auth_protocol_oauth.standards.dpop"
         ),
@@ -311,6 +310,11 @@ def test_installable_tigrbl_auth_facade_exposes_rfc_legacy_modules() -> None:
             canonical = importlib.import_module(canonical_name)
 
             assert legacy is canonical
+
+        rfc8414 = importlib.import_module("tigrbl_auth.rfc.rfc8414")
+        assert rfc8414.include_rfc8414.__module__ == (
+            "tigrbl_identity_server.authorization_server_metadata_surface"
+        )
 
 
 def test_rfc8785_core_legacy_warns_and_facade_module_is_removed() -> None:

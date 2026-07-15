@@ -21,7 +21,6 @@ _OAUTH_RFC_MODULES = (
     "rfc7662",
     "rfc7662_introspection",
     "rfc8252",
-    "rfc8414",
     "rfc8414_metadata",
     "rfc8523",
     "rfc8628",
@@ -62,7 +61,6 @@ _OAUTH_RFC_TARGETS = {
     "rfc7662": "introspection",
     "rfc7662_introspection": "introspection",
     "rfc8252": "native_apps",
-    "rfc8414": "authorization_server_metadata_endpoint",
     "rfc8414_metadata": "authorization_server_metadata",
     "rfc8523": "legacy_jwt_client_assertions",
     "rfc8628": "device_authorization",
@@ -92,4 +90,4 @@ for _name in _JOSE_RFC_MODULES:
         "tigrbl-identity-jose",
     )
 
-__all__ = sorted((*_OAUTH_RFC_MODULES, *_JOSE_RFC_MODULES))
+__all__ = sorted(("rfc8414", *_OAUTH_RFC_MODULES, *_JOSE_RFC_MODULES))

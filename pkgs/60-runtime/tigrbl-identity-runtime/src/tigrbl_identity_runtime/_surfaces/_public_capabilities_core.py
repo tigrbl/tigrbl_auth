@@ -174,7 +174,7 @@ CORE_PUBLIC_CAPABILITIES: Final[tuple[dict[str, Any], ...]] = (
         "flags": ("enable_rfc8414", "enable_rfc8615"),
         "summary": "OAuth authorization server metadata",
         "tags": (".well-known",),
-        "publisher_ref": "tigrbl_identity_storage_runtime.metadata.authorization_server_metadata:include_rfc8414",
+        "publisher_ref": "tigrbl_identity_server.authorization_server_metadata_surface:include_rfc8414",
         "artifact_name": "oauth-authorization-server.json",
         "targets": ("RFC 8414", "RFC 8615"),
         "contract_visible": True,

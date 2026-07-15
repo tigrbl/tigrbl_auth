@@ -256,8 +256,15 @@ def test_executable_metadata_publishers_live_above_storage() -> None:
     assert oidc_surface.include_openid_configuration.__module__ == (
         "tigrbl_identity_server.oidc_discovery_surface"
     )
-    assert metadata.include_rfc8414.__module__ == (
+    rfc8414_surface = importlib.import_module(
+        "tigrbl_identity_server.authorization_server_metadata_surface"
+    )
+    assert importlib.util.find_spec(
         "tigrbl_identity_storage_runtime.metadata.authorization_server_metadata"
+    ) is None
+    assert not hasattr(metadata, "include_rfc8414")
+    assert rfc8414_surface.include_rfc8414.__module__ == (
+        "tigrbl_identity_server.authorization_server_metadata_surface"
     )
     assert metadata.include_rfc9728.__module__ == (
         "tigrbl_identity_storage_runtime.metadata.protected_resource_metadata"

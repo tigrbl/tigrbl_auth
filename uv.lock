@@ -2329,6 +2329,21 @@ dependencies = [
 requires-dist = [{ name = "tigrbl", specifier = "==0.4.4.dev1" }]
 
 [[package]]
+name = "tigrbl-auth-api-oauth-authorization-server-metadata"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/80-apis/tigrbl-auth-api-oauth-authorization-server-metadata" }
+dependencies = [
+    { name = "tigrbl" },
+    { name = "tigrbl-auth-protocol-oauth" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-auth-api-oauth-device-authorization"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/80-apis/tigrbl-auth-api-oauth-device-authorization" }
@@ -2875,6 +2890,7 @@ dependencies = [
     { name = "tigrbl-attestation-reference-provider" },
     { name = "tigrbl-auth" },
     { name = "tigrbl-auth-api-oauth-authorization" },
+    { name = "tigrbl-auth-api-oauth-authorization-server-metadata" },
     { name = "tigrbl-auth-api-oauth-device-authorization" },
     { name = "tigrbl-auth-api-oauth-introspection" },
     { name = "tigrbl-auth-api-oauth-par" },
@@ -3238,6 +3254,7 @@ requires-dist = [
     { name = "tigrbl-attestation-reference-provider", editable = "pkgs/20-providers/tigrbl-attestation-reference-provider" },
     { name = "tigrbl-auth", editable = "pkgs/70-facade/tigrbl-auth" },
     { name = "tigrbl-auth-api-oauth-authorization", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-authorization" },
+    { name = "tigrbl-auth-api-oauth-authorization-server-metadata", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-authorization-server-metadata" },
     { name = "tigrbl-auth-api-oauth-device-authorization", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-device-authorization" },
     { name = "tigrbl-auth-api-oauth-introspection", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-introspection" },
     { name = "tigrbl-auth-api-oauth-par", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-par" },
@@ -5988,6 +6005,7 @@ dependencies = [
     { name = "email-validator" },
     { name = "tigrbl" },
     { name = "tigrbl-auth-api-oauth-authorization" },
+    { name = "tigrbl-auth-api-oauth-authorization-server-metadata" },
     { name = "tigrbl-auth-api-oauth-device-authorization" },
     { name = "tigrbl-auth-api-oauth-introspection" },
     { name = "tigrbl-auth-api-oauth-par" },
@@ -6021,6 +6039,7 @@ requires-dist = [
     { name = "email-validator", specifier = ">=2.0" },
     { name = "tigrbl", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-auth-api-oauth-authorization", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-api-oauth-authorization-server-metadata", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oauth-device-authorization", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oauth-introspection", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oauth-par", specifier = "==0.4.0.dev2" },
