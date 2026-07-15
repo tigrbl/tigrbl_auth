@@ -10,7 +10,7 @@ from tigrbl_auth.runtime import LazyASGIApplication
 from tigrbl_auth_api_resource_validation.openapi import (
     patch_resource_validation_openapi,
 )
-from tigrbl_auth.standards.oauth2.resource_validation_metadata import (
+from tigrbl_identity_server.resource_validation_metadata_surface import (
     include_resource_validation_metadata,
 )
 

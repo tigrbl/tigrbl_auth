@@ -2501,6 +2501,21 @@ dependencies = [
 requires-dist = [{ name = "tigrbl", specifier = "==0.4.4.dev1" }]
 
 [[package]]
+name = "tigrbl-auth-api-resource-validation-metadata"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/80-apis/tigrbl-auth-api-resource-validation-metadata" }
+dependencies = [
+    { name = "tigrbl" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-auth-api-session-login"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/80-apis/tigrbl-auth-api-session-login" }
@@ -2917,6 +2932,7 @@ dependencies = [
     { name = "tigrbl-auth-api-oidc-discovery" },
     { name = "tigrbl-auth-api-oidc-logout" },
     { name = "tigrbl-auth-api-oidc-userinfo" },
+    { name = "tigrbl-auth-api-resource-validation-metadata" },
     { name = "tigrbl-auth-api-session-login" },
     { name = "tigrbl-auth-plugin" },
     { name = "tigrbl-auth-profile-haip" },
@@ -3282,6 +3298,7 @@ requires-dist = [
     { name = "tigrbl-auth-api-oidc-discovery", editable = "pkgs/80-apis/tigrbl-auth-api-oidc-discovery" },
     { name = "tigrbl-auth-api-oidc-logout", editable = "pkgs/80-apis/tigrbl-auth-api-oidc-logout" },
     { name = "tigrbl-auth-api-oidc-userinfo", editable = "pkgs/80-apis/tigrbl-auth-api-oidc-userinfo" },
+    { name = "tigrbl-auth-api-resource-validation-metadata", editable = "pkgs/80-apis/tigrbl-auth-api-resource-validation-metadata" },
     { name = "tigrbl-auth-api-session-login", editable = "pkgs/80-apis/tigrbl-auth-api-session-login" },
     { name = "tigrbl-auth-plugin", editable = "pkgs/60-runtime/tigrbl-auth-plugin" },
     { name = "tigrbl-auth-profile-haip", editable = "pkgs/50-protocols/tigrbl-auth-profile-haip" },
@@ -6034,6 +6051,7 @@ dependencies = [
     { name = "tigrbl-auth-api-oidc-discovery" },
     { name = "tigrbl-auth-api-oidc-logout" },
     { name = "tigrbl-auth-api-oidc-userinfo" },
+    { name = "tigrbl-auth-api-resource-validation-metadata" },
     { name = "tigrbl-auth-api-session-login" },
     { name = "tigrbl-auth-protocol-gnap" },
     { name = "tigrbl-auth-protocol-oauth" },
@@ -6069,6 +6087,7 @@ requires-dist = [
     { name = "tigrbl-auth-api-oidc-discovery", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oidc-logout", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oidc-userinfo", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-api-resource-validation-metadata", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-session-login", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-gnap", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },

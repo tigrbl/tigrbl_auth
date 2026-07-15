@@ -18,6 +18,7 @@ from .oauth import *
 from .oidc import *
 from .rp import *
 from .resource_server import *
+from .resource_validation_metadata import *
 from .tokens import *
 from .admin import *
 from .admin_services import *

@@ -245,14 +245,12 @@ def test_executable_metadata_publishers_live_above_storage() -> None:
     for module_name in old_modules:
         assert importlib.util.find_spec(module_name) is None
 
-    metadata = importlib.import_module("tigrbl_identity_storage_runtime.metadata")
     oidc_surface = importlib.import_module(
         "tigrbl_identity_server.oidc_discovery_surface"
     )
     assert importlib.util.find_spec(
         "tigrbl_identity_storage_runtime.metadata.oidc_discovery"
     ) is None
-    assert not hasattr(metadata, "include_openid_configuration")
     assert oidc_surface.include_openid_configuration.__module__ == (
         "tigrbl_identity_server.oidc_discovery_surface"
     )
@@ -262,7 +260,6 @@ def test_executable_metadata_publishers_live_above_storage() -> None:
     assert importlib.util.find_spec(
         "tigrbl_identity_storage_runtime.metadata.authorization_server_metadata"
     ) is None
-    assert not hasattr(metadata, "include_rfc8414")
     assert rfc8414_surface.include_rfc8414.__module__ == (
         "tigrbl_identity_server.authorization_server_metadata_surface"
     )
@@ -272,12 +269,17 @@ def test_executable_metadata_publishers_live_above_storage() -> None:
     assert importlib.util.find_spec(
         "tigrbl_identity_storage_runtime.metadata.protected_resource_metadata"
     ) is None
-    assert not hasattr(metadata, "include_rfc9728")
     assert rfc9728_surface.include_rfc9728.__module__ == (
         "tigrbl_identity_server.protected_resource_metadata_surface"
     )
-    assert metadata.include_resource_validation_metadata.__module__ == (
+    resource_validation_surface = importlib.import_module(
+        "tigrbl_identity_server.resource_validation_metadata_surface"
+    )
+    assert importlib.util.find_spec(
         "tigrbl_identity_storage_runtime.metadata.resource_validation_metadata"
+    ) is None
+    assert resource_validation_surface.include_resource_validation_metadata.__module__ == (
+        "tigrbl_identity_server.resource_validation_metadata_surface"
     )
 
 

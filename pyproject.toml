@@ -299,6 +299,7 @@ dependencies = [
       "tigrbl-auth-api-oidc-discovery==0.4.0.dev2",
       "tigrbl-auth-api-oauth-authorization-server-metadata==0.4.0.dev2",
       "tigrbl-auth-api-oauth-protected-resource-metadata==0.4.0.dev2",
+      "tigrbl-auth-api-resource-validation-metadata==0.4.0.dev2",
     "tigrbl-auth-api-session-login==0.4.0.dev2",
     "tigrbl-auth-api-oauth-introspection==0.4.0.dev2",
     "tigrbl-auth-api-oauth-revocation==0.4.0.dev2",
@@ -674,6 +675,7 @@ tigrbl-auth-api-oidc-logout = { path = "pkgs/80-apis/tigrbl-auth-api-oidc-logout
 tigrbl-auth-api-oidc-discovery = { path = "pkgs/80-apis/tigrbl-auth-api-oidc-discovery", editable = true }
 tigrbl-auth-api-oauth-authorization-server-metadata = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-authorization-server-metadata", editable = true }
 tigrbl-auth-api-oauth-protected-resource-metadata = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-protected-resource-metadata", editable = true }
+tigrbl-auth-api-resource-validation-metadata = { path = "pkgs/80-apis/tigrbl-auth-api-resource-validation-metadata", editable = true }
 tigrbl-auth-api-session-login = { path = "pkgs/80-apis/tigrbl-auth-api-session-login", editable = true }
 tigrbl-auth-api-oauth-introspection = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-introspection", editable = true }
 tigrbl-auth-api-oauth-revocation = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-revocation", editable = true }
