@@ -8,6 +8,14 @@ from .models import (
     AdminResourceStatus,
     App,
 )
+from .identities import (
+    IdentityAdministrationCapability,
+    IdentityCreateOperation,
+    IdentityDeleteOperation,
+    IdentityListOperation,
+    IdentityReadOperation,
+    IdentityUpdateOperation,
+)
 from .operator import (
     OPERATOR_ADMINISTRATION_OPERATIONS,
     OperatorAdministrationAuthorizer,
@@ -58,6 +66,12 @@ __all__ = [
     "AdminResourceStatus",
     "AdminUpdateOperation",
     "App",
+    "IdentityAdministrationCapability",
+    "IdentityCreateOperation",
+    "IdentityDeleteOperation",
+    "IdentityListOperation",
+    "IdentityReadOperation",
+    "IdentityUpdateOperation",
     "OPERATOR_ADMINISTRATION_OPERATIONS",
     "OperatorAdministrationAuthorizer",
     "OperatorAdministrationCapability",

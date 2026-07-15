@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import uuid
 from typing import Any
 
 from pydantic import BaseModel, Field, constr
@@ -10,18 +9,23 @@ from tigrbl import TigrblRouter
 from tigrbl.requests import Request
 from tigrbl.runtime.status import HTTPException
 from tigrbl.security import Depends
-from tigrbl_identity_storage.tables import Tenant, User
-from tigrbl_identity_storage_runtime.engine import get_db
-from tigrbl_identity_storage_runtime.ops.common import (
-    create_table_record,
-    delete_table_record,
-    field_value,
-    first_table_record,
-    list_table_records,
-    read_table_record,
-    update_table_record,
+from tigrbl_identity_contracts.admin_identities import (
+    AdminIdentity,
+    AdminIdentityCreate,
+    AdminIdentityUpdate,
+    IdentityAdministrationConflictError,
+    IdentityAdministrationNotFoundError,
+    IdentityAdministrationPolicyError,
+    IdentityAdministrationValidationError,
 )
-from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
+from tigrbl_identity_contracts.admin_tenants import (
+    TenantAdministratorAuthenticationError,
+)
+from tigrbl_identity_server.platform_identity_administration import (
+    get_db,
+    identity_administration_for_request,
+    require_identity_administrator,
+)
 from tigrbl_authz_policy_admin_gate import ADMIN_OPENAPI_SECURITY_DEPENDENCIES
 
 
@@ -64,50 +68,42 @@ class AdminIdentityUpdateIn(BaseModel):
     must_change_password: bool | None = None
 
 
-def _identity_payload(row: Any) -> AdminIdentityOut:
-    created_at = field_value(row, "created_at")
-    updated_at = field_value(row, "updated_at")
+def _identity_payload(row: AdminIdentity) -> AdminIdentityOut:
     return AdminIdentityOut(
-        id=str(field_value(row, "id")),
-        tenant_id=str(field_value(row, "tenant_id")),
-        username=str(field_value(row, "username")),
-        email=str(field_value(row, "email")),
-        is_active=bool(field_value(row, "is_active", True)),
-        is_admin=bool(field_value(row, "is_admin", False)),
-        is_superuser=bool(field_value(row, "is_superuser", False)),
-        must_change_password=bool(field_value(row, "must_change_password", False)),
-        roles=list(field_value(row, "roles", ())),
-        created_at=created_at.isoformat() if created_at else None,
-        updated_at=updated_at.isoformat() if updated_at else None,
+        id=row.identity_id,
+        tenant_id=row.tenant_id,
+        username=row.username,
+        email=row.email,
+        is_active=row.is_active,
+        is_admin=row.is_admin,
+        is_superuser=row.is_superuser,
+        must_change_password=row.must_change_password,
+        roles=list(row.roles),
+        created_at=row.created_at,
+        updated_at=row.updated_at,
     )
 
 
-async def _require_admin(request: Request, db: Any) -> User:
-    from tigrbl_identity_admin.bootstrap import resolve_admin_user_from_request
-
-    actor = await resolve_admin_user_from_request(request, db=db)
-    if actor is None:
-        raise HTTPException(401, "authenticated admin session required")
-    return actor
-
-
-def _check_admin_escalation(
-    actor: User,
-    *,
-    target_admin: bool,
-    target_superuser: bool,
-) -> None:
-    if target_superuser and not bool(getattr(actor, "is_superuser", False)):
-        raise HTTPException(403, "superuser privileges required")
-    if target_admin and not bool(getattr(actor, "is_superuser", False)):
-        raise HTTPException(403, "superuser privileges required to onboard administrators")
-
-
-def _uuid(value: str, *, label: str) -> uuid.UUID:
+async def _invoke(
+    request: Request,
+    db: Any,
+    operation: str,
+    *args: object,
+) -> object:
     try:
-        return uuid.UUID(str(value))
-    except (TypeError, ValueError) as exc:
-        raise HTTPException(400, f"invalid {label}") from exc
+        actor = await require_identity_administrator(request, db)
+        capability = identity_administration_for_request(request, db)
+        return (await capability.call(operation, actor, *args)).value
+    except TenantAdministratorAuthenticationError as exc:
+        raise HTTPException(401, str(exc)) from exc
+    except IdentityAdministrationPolicyError as exc:
+        raise HTTPException(403, str(exc)) from exc
+    except IdentityAdministrationNotFoundError as exc:
+        raise HTTPException(404, str(exc)) from exc
+    except IdentityAdministrationConflictError as exc:
+        raise HTTPException(409, str(exc)) from exc
+    except IdentityAdministrationValidationError as exc:
+        raise HTTPException(400, str(exc)) from exc
 
 
 api = router = TigrblRouter()
@@ -124,10 +120,7 @@ async def admin_list_identities(
     tenant_id: str | None = None,
     db: Any = Depends(get_db),
 ) -> list[AdminIdentityOut]:
-    actor = await _require_admin(request, db)
-    effective_tenant_id = _uuid(tenant_id or str(actor.tenant_id), label="tenant_id")
-    rows = await list_table_records(User, db, {"tenant_id": effective_tenant_id})
-    rows = sorted(rows, key=lambda row: field_value(row, "created_at") or "")
+    rows = await _invoke(request, db, "list_identities", tenant_id)
     return [_identity_payload(row) for row in rows]
 
 
@@ -142,35 +135,21 @@ async def admin_create_identity(
     payload: AdminIdentityProvisionIn | None = None,
     db: Any = Depends(get_db),
 ) -> AdminIdentityOut:
-    actor = await _require_admin(request, db)
     if payload is None:
         payload = AdminIdentityProvisionIn.model_validate(await request.json() or {})
-    _check_admin_escalation(
-        actor,
-        target_admin=bool(payload.is_admin),
-        target_superuser=bool(payload.is_superuser),
-    )
-    tenant = await read_table_record(Tenant, db, _uuid(payload.tenant_id, label="tenant_id"))
-    if tenant is None:
-        raise HTTPException(404, "tenant not found")
-    existing = await first_table_record(User, db, {"username": payload.username})
-    if existing is None:
-        existing = await first_table_record(User, db, {"email": str(payload.email)})
-    if existing is not None:
-        raise HTTPException(409, "username or email already exists")
-    password_hash = BcryptSecretHasher().hash_secret(payload.password).encoded
-    row = await create_table_record(
-        User,
+    row = await _invoke(
+        request,
         db,
-        {
-            "tenant_id": field_value(tenant, "id"),
-            "username": payload.username,
-            "email": str(payload.email),
-            "password_hash": password_hash,
-            "is_admin": bool(payload.is_admin),
-            "is_superuser": bool(payload.is_superuser),
-            "must_change_password": bool(payload.must_change_password),
-        },
+        "create_identity",
+        AdminIdentityCreate(
+            tenant_id=payload.tenant_id,
+            username=payload.username,
+            email=str(payload.email),
+            password=payload.password,
+            is_admin=payload.is_admin,
+            is_superuser=payload.is_superuser,
+            must_change_password=payload.must_change_password,
+        ),
     )
     return _identity_payload(row)
 
@@ -187,46 +166,23 @@ async def admin_update_identity(
     payload: AdminIdentityUpdateIn | None = None,
     db: Any = Depends(get_db),
 ) -> AdminIdentityOut:
-    actor = await _require_admin(request, db)
     if payload is None:
         payload = AdminIdentityUpdateIn.model_validate(await request.json() or {})
-    row = await read_table_record(User, db, _uuid(user_id, label="user_id"))
-    if row is None:
-        raise HTTPException(404, "user not found")
-    next_is_admin = (
-        bool(payload.is_admin)
-        if payload.is_admin is not None
-        else bool(field_value(row, "is_admin", False))
+    row = await _invoke(
+        request,
+        db,
+        "update_identity",
+        user_id,
+        AdminIdentityUpdate(
+            username=payload.username,
+            email=str(payload.email) if payload.email is not None else None,
+            password=payload.password,
+            is_active=payload.is_active,
+            is_admin=payload.is_admin,
+            is_superuser=payload.is_superuser,
+            must_change_password=payload.must_change_password,
+        ),
     )
-    next_is_superuser = (
-        bool(payload.is_superuser)
-        if payload.is_superuser is not None
-        else bool(field_value(row, "is_superuser", False))
-    )
-    _check_admin_escalation(
-        actor,
-        target_admin=next_is_admin,
-        target_superuser=next_is_superuser,
-    )
-    if str(actor.id) == str(field_value(row, "id")) and payload.is_active is False:
-        raise HTTPException(400, "cannot deactivate the current administrator")
-    changes: dict[str, Any] = {}
-    for field_name in (
-        "username",
-        "is_active",
-        "is_admin",
-        "is_superuser",
-        "must_change_password",
-    ):
-        value = getattr(payload, field_name)
-        if value is not None:
-            changes[field_name] = value
-    if payload.email is not None:
-        changes["email"] = str(payload.email)
-    if payload.password is not None:
-        changes["password_hash"] = BcryptSecretHasher().hash_secret(payload.password).encoded
-    if changes:
-        row = await update_table_record(User, db, field_value(row, "id"), changes)
     return _identity_payload(row)
 
 
@@ -241,19 +197,8 @@ async def admin_delete_identity(
     user_id: str,
     db: Any = Depends(get_db),
 ) -> AdminIdentityOut:
-    actor = await _require_admin(request, db)
-    row = await read_table_record(User, db, _uuid(user_id, label="user_id"))
-    if row is None:
-        raise HTTPException(404, "user not found")
-    if str(actor.id) == str(field_value(row, "id")):
-        raise HTTPException(400, "cannot delete the current administrator")
-    if bool(field_value(row, "is_superuser", False)) and not bool(
-        getattr(actor, "is_superuser", False)
-    ):
-        raise HTTPException(403, "superuser privileges required")
-    snapshot = _identity_payload(row)
-    await delete_table_record(User, db, field_value(row, "id"))
-    return snapshot
+    row = await _invoke(request, db, "delete_identity", user_id)
+    return _identity_payload(row)
 
 
 __all__ = [
