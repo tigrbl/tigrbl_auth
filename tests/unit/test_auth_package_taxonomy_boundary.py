@@ -58,6 +58,7 @@ DEPRECATED_MODULE_CANONICAL_IMPORT_ROOT = {
     "tigrbl_identity_credentials/operator_service.py": "tigrbl_identity_storage_runtime.resource_service",
     "tigrbl_identity_credentials/session_service.py": "tigrbl_identity_storage_runtime.session_service",
     "tigrbl_identity_credentials/token_service.py": "tigrbl_identity_runtime.token_service",
+    "tigrbl_identity_oidc/discovery_service.py": "tigrbl_identity_cli.discovery_service",
     "tigrbl_identity_policy/_certification/__init__.py": "tigrbl_auth_release_certification.certification",
     "tigrbl_identity_policy/_certification/authorization.py": "tigrbl_auth_release_certification.certification.authorization",
     "tigrbl_identity_policy/_certification/base.py": "tigrbl_auth_release_certification.certification.base",

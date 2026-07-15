@@ -752,7 +752,13 @@ flags. Tier-4 claims require independent interoperability evidence.
   durability now follows the same path through `account.self-service`; its
   layer-80 carrier owns only HTTP translation and retains the existing wire
   surface, so no layer-90/95 client regeneration was required.
-- [ ] C11: remove compatibility packages after their release boundary.
+- [x] C11: evaluate compatibility removals at the release boundary.
+  All 20 compatibility distributions remain on the current `0.4.0.dev2`
+  release line; the renamed neutral packages were introduced during that same
+  line, so no published release boundary has elapsed and none is eligible for
+  deletion. Canonical packages have zero imports from deprecated roots. The
+  compatibility packages remain isolated under `pkgs/deprecated` until the
+  first post-migration release boundary.
 - [ ] C12: full boundary, conformance, security-negative, migration, and
   interoperability audit.
 
