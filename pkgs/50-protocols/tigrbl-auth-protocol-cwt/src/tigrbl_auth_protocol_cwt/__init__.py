@@ -1,40 +1,24 @@
-from enum import StrEnum
+"""Versioned CBOR Web Token protocol ownership."""
 
-from tigrbl_claim_cwt_audience_concrete import CwtAudienceClaim
-from tigrbl_claim_cwt_expiration_concrete import CwtExpirationClaim
-from tigrbl_claim_cwt_id_concrete import CwtIdClaim
-from tigrbl_claim_cwt_issued_at_concrete import CwtIssuedAtClaim
-from tigrbl_claim_cwt_issuer_concrete import CwtIssuerClaim
-from tigrbl_claim_cwt_not_before_concrete import CwtNotBeforeClaim
-from tigrbl_claim_cwt_subject_concrete import CwtSubjectClaim
-from tigrbl_identity_contracts.claims import ClaimSet
-from tigrbl_identity_contracts.protocol_processing import build_protocol_capability_report
-
-
-class CwtVersion(StrEnum):
-    RFC8392 = "RFC8392"
-
-
-CURRENT_VERSION = CwtVersion.RFC8392
-VERSION_HISTORY = (CwtVersion.RFC8392,)
-FEATURES_BY_VERSION = {
-    CwtVersion.RFC8392.value: frozenset(
-        {"registered-claims", "cbor-map", "cose-protection", "application-cwt"}
-    )
-}
-CWT_REGISTERED_CLAIMS = (
-    CwtIssuerClaim,
-    CwtSubjectClaim,
-    CwtAudienceClaim,
-    CwtExpirationClaim,
-    CwtNotBeforeClaim,
-    CwtIssuedAtClaim,
-    CwtIdClaim,
+from tigrbl_identity_contracts.protocol_processing import (
+    build_protocol_capability_report,
 )
 
-
-def compose_cwt_claim_set(*claims, version: CwtVersion = CURRENT_VERSION) -> ClaimSet:
-    return ClaimSet(tuple(claims), "cwt", version.value)
+from .bindings import CAPABILITY_REQUIREMENTS
+from .claims import CWT_REGISTERED_CLAIMS, compose_cwt_claim_set
+from .compatibility import COMPATIBILITY_PATHS, CwtCompatibility, compatibility
+from .errors import CwtProtocolError, UnsupportedCwtMediaTypeError
+from .features import FEATURES_BY_VERSION, supports
+from .migrations import migrate_claims
+from .schemas import CWT_CARRIER, CwtCarrier, select_carrier
+from .versions import (
+    CURRENT_VERSION,
+    VERSION_HISTORY,
+    VERSION_PUBLISHED,
+    VERSION_STATUS,
+    CwtVersion,
+    select_version,
+)
 
 
 def capability_report() -> dict[str, object]:
@@ -42,16 +26,32 @@ def capability_report() -> dict[str, object]:
         protocol="cwt",
         revision=CURRENT_VERSION.value,
         features=tuple(FEATURES_BY_VERSION[CURRENT_VERSION.value]),
-        evidence_links=("tests/unit/test_claim_object_layers.py",),
+        evidence_links=("tests/unit/test_cwt_standalone_claim_packages.py",),
+        extra_requirements=CAPABILITY_REQUIREMENTS,
+        include_default_artifact_requirements=False,
     )
 
 
 __all__ = [
+    "CAPABILITY_REQUIREMENTS",
+    "COMPATIBILITY_PATHS",
     "CURRENT_VERSION",
+    "CWT_CARRIER",
     "CWT_REGISTERED_CLAIMS",
     "FEATURES_BY_VERSION",
-    "CwtVersion",
     "VERSION_HISTORY",
-    "compose_cwt_claim_set",
+    "VERSION_PUBLISHED",
+    "VERSION_STATUS",
+    "CwtCarrier",
+    "CwtCompatibility",
+    "CwtProtocolError",
+    "CwtVersion",
+    "UnsupportedCwtMediaTypeError",
     "capability_report",
+    "compatibility",
+    "compose_cwt_claim_set",
+    "migrate_claims",
+    "select_carrier",
+    "select_version",
+    "supports",
 ]
