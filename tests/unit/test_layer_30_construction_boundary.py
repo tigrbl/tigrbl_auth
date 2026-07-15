@@ -43,6 +43,43 @@ def test_new_table_runtime_construction_surface_has_no_higher_layer_imports() ->
         ), file
 
 
+def test_layer_30_has_no_http_or_protocol_provider_ownership() -> None:
+    forbidden_prefixes = (
+        "tigrbl_auth_api_",
+        "tigrbl_auth_protocol_",
+        "tigrbl_authenticator_",
+        "tigrbl_authz_resource_server",
+        "tigrbl_identity_jose",
+        "tigrbl_identity_runtime",
+        "tigrbl_identity_server",
+        "tigrbl_secret_hashing_",
+    )
+    forbidden_tigrbl_symbols = {"Request", "TigrblApp"}
+
+    for file in RUNTIME_SRC.rglob("*.py"):
+        tree = ast.parse(file.read_text(encoding="utf-8"))
+        imports: list[str] = []
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                imports.extend(alias.name for alias in node.names)
+            elif isinstance(node, ast.ImportFrom) and node.module:
+                imports.append(node.module)
+                if node.module == "tigrbl":
+                    assert not (
+                        forbidden_tigrbl_symbols
+                        & {alias.name for alias in node.names}
+                    ), file
+            elif isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute):
+                assert node.func.attr != "route", file
+
+        assert not any(
+            module.startswith(forbidden_prefixes) for module in imports
+        ), file
+        assert "HTTPException" not in {
+            node.id for node in ast.walk(tree) if isinstance(node, ast.Name)
+        }, file
+
+
 def test_layer_30_has_no_repository_or_store_abstraction_modules() -> None:
     forbidden_suffixes = ("Repository", "Store", "UnitOfWork")
     for file in RUNTIME_SRC.rglob("*.py"):
