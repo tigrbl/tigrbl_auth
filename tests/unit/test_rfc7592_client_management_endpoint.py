@@ -2,11 +2,12 @@
 
 import httpx
 import pytest
-from tigrbl_identity_server.app import app
 
 
 @pytest.fixture()
 async def running_app(override_get_db):
+    from tigrbl_identity_server.app import app
+
     async with httpx.AsyncClient(
         transport=httpx.ASGITransport(app=app),
         base_url="http://test",

@@ -15,10 +15,10 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def test_runtime_package_owns_runner_extras() -> None:
-    runtime_pyproject = ROOT / "pkgs" / "60-runtime" / "tigrbl-identity-runtime" / "pyproject.toml"
-    manifest = tomllib.loads(
-        runtime_pyproject.read_text(encoding="utf-8")
+    runtime_pyproject = (
+        ROOT / "pkgs" / "60-runtime" / "tigrbl-identity-runtime" / "pyproject.toml"
     )
+    manifest = tomllib.loads(runtime_pyproject.read_text(encoding="utf-8"))
     extras = manifest["project"]["optional-dependencies"]
 
     assert extras["uvicorn"] == ["uvicorn[standard]==0.41.0"]
@@ -33,7 +33,13 @@ def test_runtime_package_owns_runner_extras() -> None:
 
 def test_framework_facades_are_not_package_surfaces() -> None:
     assert not (
-        ROOT / "pkgs" / "70-facade" / "tigrbl-auth" / "src" / "tigrbl_auth" / "framework.py"
+        ROOT
+        / "pkgs"
+        / "70-facade"
+        / "tigrbl-auth"
+        / "src"
+        / "tigrbl_auth"
+        / "framework.py"
     ).exists()
     assert not (
         ROOT
@@ -58,9 +64,7 @@ def test_introspection_protocol_module_exports_service_not_runtime_router() -> N
     pytest.importorskip("sqlalchemy")
     pytest.importorskip("tigrbl")
 
-    import importlib
-
-    module = importlib.reload(importlib.import_module("tigrbl_auth_protocol_oauth.standards.introspection"))
+    import tigrbl_auth_protocol_oauth.standards.introspection as module
 
     assert not hasattr(module, "api")
     assert not hasattr(module, "introspect_token")
