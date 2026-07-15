@@ -19,23 +19,9 @@ from tigrbl_identity_storage_runtime.session_service import (
     revoke_session_for_context as _svc_revoke_session_for_context,
     revoke_token_for_context as _svc_revoke_token_for_context,
 )
-from tigrbl_identity_cli.discovery_service import (
-    diff_discovery as _svc_diff_discovery,
-    publish_discovery as _svc_publish_discovery,
-    show_discovery as _svc_show_discovery,
-    validate_discovery as _svc_validate_discovery,
-)
-from tigrbl_identity_storage_runtime.portability import (
-    export_status as _svc_export_status,
-    import_status as _svc_import_status,
-    run_export_file as _svc_run_export_file,
-    run_import_file as _svc_run_import_file,
-    validate_export_plan as _svc_validate_export_plan,
-    validate_import_file as _svc_validate_import_file,
-)
-
-
-def _svc_context(args: Any, resource: str, command: str | None = None) -> OperationContext:
+def _svc_context(
+    args: Any, resource: str, command: str | None = None
+) -> OperationContext:
     deployment = _resolved_from_args(args)
     return OperationContext(
         repo_root=_repo_root(getattr(args, "repo_root", None)),
@@ -62,7 +48,9 @@ def _svc_emit(args: Any, result: Any, rc: int = 0) -> int:
 
 
 def _svc_failure(args: Any, context: OperationContext, exc: OperatorStateError) -> int:
-    return _emit_with_code(args, exc.to_payload(context.command, context.resource), rc=exc.code)
+    return _emit_with_code(
+        args, exc.to_payload(context.command, context.resource), rc=exc.code
+    )
 
 
 def _svc_patch(args: Any) -> dict[str, Any]:
@@ -79,7 +67,9 @@ def _handle_service_create(args: Any, resource: str) -> int:
     elif if_exists not in {"error", "skip", "update", "replace"}:
         if_exists = "error"
     try:
-        result = _svc_create_resource(context, record_id=record_id, patch=patch, if_exists=if_exists)
+        result = _svc_create_resource(
+            context, record_id=record_id, patch=patch, if_exists=if_exists
+        )
     except OperatorStateError as exc:
         return _svc_failure(args, context, exc)
     return _svc_emit(args, result)
@@ -91,7 +81,9 @@ def _handle_service_update(args: Any, resource: str) -> int:
     record_id = getattr(args, "id", None) or patch.get("id")
     if_missing = str(getattr(args, "if_missing", "error")).replace("fail", "error")
     try:
-        result = _svc_update_resource(context, record_id=record_id, patch=patch, if_missing=if_missing)
+        result = _svc_update_resource(
+            context, record_id=record_id, patch=patch, if_missing=if_missing
+        )
     except OperatorStateError as exc:
         return _svc_failure(args, context, exc)
     return _svc_emit(args, result)
@@ -152,7 +144,9 @@ def _handle_service_list(args: Any, resource: str) -> int:
 
 
 def _handle_service_toggle(args: Any, resource: str, *, enabled: bool) -> int:
-    context = _svc_context(args, resource, f"{resource}.{'enable' if enabled else 'disable'}")
+    context = _svc_context(
+        args, resource, f"{resource}.{'enable' if enabled else 'disable'}"
+    )
     record_id = getattr(args, "id", None)
     if not record_id:
         raise SystemExit("--id is required")
@@ -236,7 +230,9 @@ def handle_identity_set_password(args: Any) -> int:
 
 
 def _lock_identity(args: Any, locked: bool) -> int:
-    context = _svc_context(args, "identity", f"identity.{'lock' if locked else 'unlock'}")
+    context = _svc_context(
+        args, "identity", f"identity.{'lock' if locked else 'unlock'}"
+    )
     record_id = getattr(args, "id", None)
     if not record_id:
         raise SystemExit("--id is required")
@@ -253,7 +249,11 @@ def _revoke_resource(args: Any, resource: str) -> int:
     if not record_id:
         raise SystemExit("--id is required")
     try:
-        result = _svc_revoke_session_for_context(context, record_id=record_id) if resource == "session" else _svc_revoke_token_for_context(context, record_id=record_id)
+        result = (
+            _svc_revoke_session_for_context(context, record_id=record_id)
+            if resource == "session"
+            else _svc_revoke_token_for_context(context, record_id=record_id)
+        )
     except OperatorStateError as exc:
         return _svc_failure(args, context, exc)
     return _svc_emit(args, result)
@@ -262,7 +262,11 @@ def _revoke_resource(args: Any, resource: str) -> int:
 def handle_session_revoke_all(args: Any) -> int:
     context = _svc_context(args, "session", "session.revoke-all")
     try:
-        result = _svc_revoke_all_sessions_for_context(context, status_filter=getattr(args, "status_filter", None), filter_expr=getattr(args, "filter", None))
+        result = _svc_revoke_all_sessions_for_context(
+            context,
+            status_filter=getattr(args, "status_filter", None),
+            filter_expr=getattr(args, "filter", None),
+        )
     except OperatorStateError as exc:
         return _svc_failure(args, context, exc)
     return _svc_emit(args, result)
@@ -286,8 +290,10 @@ def handle_token_exchange(args: Any) -> int:
     try:
         result = _svc_exchange_token_for_context(
             context,
-            subject_token=getattr(args, "subject_token", None) or patch.get("subject_token"),
-            requested_token_type=getattr(args, "requested_token_type", None) or patch.get("requested_token_type"),
+            subject_token=getattr(args, "subject_token", None)
+            or patch.get("subject_token"),
+            requested_token_type=getattr(args, "requested_token_type", None)
+            or patch.get("requested_token_type"),
             audience=getattr(args, "audience", None) or patch.get("audience"),
             resource=getattr(args, "resource", None) or patch.get("resource"),
             actor_token=getattr(args, "actor_token", None) or patch.get("actor_token"),
@@ -301,7 +307,13 @@ def handle_token_exchange(args: Any) -> int:
 def handle_keys_generate(args: Any) -> int:
     context = _svc_context(args, "keys", "keys.generate")
     patch = _svc_patch(args)
-    for source, target in (("kid", "kid"), ("alg", "alg"), ("use", "use"), ("kty", "kty"), ("curve", "curve")):
+    for source, target in (
+        ("kid", "kid"),
+        ("alg", "alg"),
+        ("use", "use"),
+        ("kty", "kty"),
+        ("curve", "curve"),
+    ):
         value = getattr(args, source, None)
         if value is not None:
             patch[target] = value
@@ -355,7 +367,11 @@ def handle_keys_retire(args: Any) -> int:
     if not record_id:
         raise SystemExit("--id is required")
     try:
-        result = retire_operator_key_for_context(context, record_id=record_id, retire_after=getattr(args, "retire_after", None))
+        result = retire_operator_key_for_context(
+            context,
+            record_id=record_id,
+            retire_after=getattr(args, "retire_after", None),
+        )
     except OperatorStateError as exc:
         return _svc_failure(args, context, exc)
     return _svc_emit(args, result)
@@ -363,57 +379,7 @@ def handle_keys_retire(args: Any) -> int:
 
 def handle_keys_publish_jwks(args: Any) -> int:
     context = _svc_context(args, "keys", "keys.publish-jwks")
-    result = publish_operator_jwks_for_context(context, output_path=getattr(args, "output", None))
+    result = publish_operator_jwks_for_context(
+        context, output_path=getattr(args, "output", None)
+    )
     return _svc_emit(args, result)
-
-
-def handle_discovery_show(args: Any) -> int:
-    deployment = _resolved_from_args(args)
-    payload = {"command": "discovery.show", "profile_source": deployment.profile_source, **_svc_show_discovery(_repo_root(getattr(args, "repo_root", None)), profile=deployment.profile)}
-    return _emit(args, payload)
-
-
-def handle_discovery_validate(args: Any) -> int:
-    deployment = _resolved_from_args(args)
-    payload = {"command": "discovery.validate", "profile_source": deployment.profile_source, **_svc_validate_discovery(_repo_root(getattr(args, "repo_root", None)), profile=deployment.profile)}
-    return _emit(args, payload)
-
-
-def handle_discovery_publish(args: Any) -> int:
-    context = _svc_context(args, "discovery", "discovery.publish")
-    result = _svc_publish_discovery(context, output_dir=Path(getattr(args, "output", None)).resolve() if getattr(args, "output", None) else None)
-    return _svc_emit(args, result)
-
-
-def handle_discovery_diff(args: Any) -> int:
-    deployment = _resolved_from_args(args)
-    payload = {"command": "discovery.diff", "profile_source": deployment.profile_source, **_svc_diff_discovery(_repo_root(getattr(args, "repo_root", None)), left_profile=getattr(args, "left_profile", None) or deployment.profile, right_profile=getattr(args, "right_profile", None))}
-    return _emit(args, payload)
-
-
-def handle_import_validate(args: Any) -> int:
-    input_path = getattr(args, "input", None) or getattr(args, "from_file", None)
-    if not input_path:
-        raise SystemExit("--input is required")
-    payload = {"command": "import.validate", **_svc_validate_import_file(Path(input_path).resolve())}
-    return _emit(args, payload)
-
-
-def handle_import_run(args: Any) -> int:
-    input_path = getattr(args, "input", None) or getattr(args, "from_file", None)
-    if not input_path:
-        raise SystemExit("--input is required")
-    context = _svc_context(args, "import", "import.run")
-    result = _svc_run_import_file(context, path=Path(input_path).resolve())
-    return _svc_emit(args, result)
-
-
-def handle_import_status(args: Any) -> int:
-    payload = {"command": "import.status", **_svc_import_status(_repo_root(getattr(args, "repo_root", None)))}
-    return _emit(args, payload)
-
-
-def handle_export_validate(args: Any) -> int:
-    context = _svc_context(args, "export", "export.validate")
-    payload = {"command": "export.validate", **_svc_validate_export_plan(context, redact=bool(getattr(args, "redact", False)))}
-    return _emit(args, payload)
