@@ -1,69 +1,38 @@
 """Endpoint tests for RFC 7591 client registration."""
 
-import asyncio
-
 import httpx
 import pytest
-import uvicorn
-
-
-async def _wait_for_app(base_url: str) -> None:
-    async with httpx.AsyncClient() as client:
-        for _ in range(50):
-            try:
-                resp = await client.get(f"{base_url}/openapi.json")
-                if resp.status_code == 200:
-                    return
-            except Exception:
-                pass
-            await asyncio.sleep(0.1)
-    raise RuntimeError("server not ready")
+from tigrbl_identity_server.app import app
 
 
 @pytest.fixture()
-async def running_app(override_get_db, unused_tcp_port):
-    port = unused_tcp_port
-    base_url = f"http://127.0.0.1:{port}"
-    cfg = uvicorn.Config(
-        "tigrbl_identity_server.app:app",
-        host="127.0.0.1",
-        port=port,
-        log_level="warning",
-        interface="asgi3",
-    )
-    server = uvicorn.Server(cfg)
-    task = asyncio.create_task(server.serve())
-    await _wait_for_app(base_url)
-    try:
-        yield base_url
-    finally:
-        server.should_exit = True
-        await task
+async def running_app(override_get_db):
+    async with httpx.AsyncClient(
+        transport=httpx.ASGITransport(app=app),
+        base_url="http://test",
+    ) as client:
+        yield client
 
 
 @pytest.mark.asyncio
 async def test_legacy_client_registration_endpoint_is_removed(running_app):
-    base = running_app
-    async with httpx.AsyncClient() as client:
-        resp = await client.post(
-            f"{base}/client/register",
-            json={
-                "tenant_slug": "public",
-                "redirect_uris": ["https://a.example/cb"],
-            },
-        )
+    resp = await running_app.post(
+        "/client/register",
+        json={
+            "tenant_slug": "public",
+            "redirect_uris": ["https://a.example/cb"],
+        },
+    )
     assert resp.status_code == 404
 
 
 @pytest.mark.asyncio
 async def test_rfc7591_redirect_uris_must_use_https(running_app):
-    base = running_app
-    async with httpx.AsyncClient() as client:
-        resp = await client.post(
-            f"{base}/register",
-            json={
-                "tenant_slug": "public",
-                "redirect_uris": ["http://insecure.example/cb"],
-            },
-        )
+    resp = await running_app.post(
+        "/register",
+        json={
+            "tenant_slug": "public",
+            "redirect_uris": ["http://insecure.example/cb"],
+        },
+    )
     assert resp.status_code == 400
