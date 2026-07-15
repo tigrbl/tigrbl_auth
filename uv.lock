@@ -2104,6 +2104,21 @@ wheels = [
 ]
 
 [[package]]
+name = "tigrbl-account-self-service"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/40-capabilities/tigrbl-account-self-service" }
+dependencies = [
+    { name = "tigrbl-capability" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-capability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-admin-identity-concrete"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-admin-identity-concrete" }
@@ -2961,6 +2976,7 @@ dependencies = [
     { name = "swarmauri-standard" },
     { name = "swarmauri-tokens-jwt" },
     { name = "tigrbl" },
+    { name = "tigrbl-account-self-service" },
     { name = "tigrbl-admin-identity-concrete" },
     { name = "tigrbl-api-key-credential-concrete" },
     { name = "tigrbl-atoms" },
@@ -3333,6 +3349,7 @@ requires-dist = [
     { name = "swarmauri-standard", specifier = "==0.10.0" },
     { name = "swarmauri-tokens-jwt", specifier = "==0.3.0.dev31" },
     { name = "tigrbl", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-account-self-service", editable = "pkgs/40-capabilities/tigrbl-account-self-service" },
     { name = "tigrbl-admin-identity-concrete", editable = "pkgs/10-concrete/tigrbl-admin-identity-concrete" },
     { name = "tigrbl-api-key-credential-concrete", editable = "pkgs/10-concrete/tigrbl-api-key-credential-concrete" },
     { name = "tigrbl-atoms", specifier = "==0.4.4.dev1" },
@@ -6176,6 +6193,7 @@ source = { editable = "pkgs/60-runtime/tigrbl-identity-server" }
 dependencies = [
     { name = "email-validator" },
     { name = "tigrbl" },
+    { name = "tigrbl-account-self-service" },
     { name = "tigrbl-auth-api-oauth-authorization" },
     { name = "tigrbl-auth-api-oauth-authorization-server-metadata" },
     { name = "tigrbl-auth-api-oauth-device-authorization" },
@@ -6198,6 +6216,7 @@ dependencies = [
     { name = "tigrbl-authz-policy-admin-gate" },
     { name = "tigrbl-client-registration-capability" },
     { name = "tigrbl-core" },
+    { name = "tigrbl-identity-admin-control-plane" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-jose" },
     { name = "tigrbl-identity-runtime" },
@@ -6218,6 +6237,7 @@ dependencies = [
 requires-dist = [
     { name = "email-validator", specifier = ">=2.0" },
     { name = "tigrbl", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-account-self-service", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oauth-authorization", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oauth-authorization-server-metadata", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-api-oauth-device-authorization", specifier = "==0.4.0.dev2" },
@@ -6240,6 +6260,7 @@ requires-dist = [
     { name = "tigrbl-authz-policy-admin-gate", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-client-registration-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-core", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-identity-admin-control-plane", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-jose", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },

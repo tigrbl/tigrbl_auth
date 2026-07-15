@@ -54,9 +54,7 @@ CAPABILITY_ALLOWED_LAYERS = frozenset(
         "40-capabilities",
     }
 )
-CAPABILITY_FORBIDDEN_LAYERS = frozenset(
-    {"01-storage", "05-bases"}
-)
+CAPABILITY_FORBIDDEN_LAYERS = frozenset({"01-storage", "05-bases"})
 CAPABILITY_FORBIDDEN_BASE_LAYERS = frozenset(
     {"00-primitives", "01-storage", "02-contracts", "05-bases"}
 )
@@ -67,6 +65,9 @@ CAPABILITY_IMPLEMENTATION_ROOTS = frozenset(
 # Layer 40 is intentionally sparse and opt-in.  Each entry names the complete
 # use case that would disappear if the orchestration package were removed.
 CAPABILITY_PURPOSES = {
+    "tigrbl-account-self-service": (
+        "coordinate authenticated profile, password, session, and consent lifecycle"
+    ),
     "tigrbl-attestation-appraisal": (
         "coordinate evidence appraisal and result recording"
     ),
@@ -224,16 +225,20 @@ def discover_packages(root: Path = ROOT) -> tuple[Package, ...]:
         seen_distributions[distribution] = manifest
 
         src = manifest.parent / "src"
-        import_roots = tuple(
-            sorted(
-                child.name
-                for child in src.iterdir()
-                if src.is_dir()
-                and child.is_dir()
-                and not child.name.endswith((".dist-info", ".egg-info"))
-                and child.name != "__pycache__"
+        import_roots = (
+            tuple(
+                sorted(
+                    child.name
+                    for child in src.iterdir()
+                    if src.is_dir()
+                    and child.is_dir()
+                    and not child.name.endswith((".dist-info", ".egg-info"))
+                    and child.name != "__pycache__"
+                )
             )
-        ) if src.is_dir() else ()
+            if src.is_dir()
+            else ()
+        )
         for import_root in import_roots:
             if previous := seen_import_roots.get(import_root):
                 raise ValueError(
@@ -268,9 +273,7 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
     packages = discover_packages(root)
     by_distribution = {item.distribution: item for item in packages}
     by_import_root = {
-        import_root: item
-        for item in packages
-        for import_root in item.import_roots
+        import_root: item for item in packages for import_root in item.import_roots
     }
     violations: list[Violation] = []
 
@@ -362,7 +365,9 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
                         root_name = alias.name.split(".")[0]
                         imports[alias.asname or root_name] = root_name
                         source_imports.append((root_name, node.lineno))
-                elif isinstance(node, ast.ImportFrom) and node.level == 0 and node.module:
+                elif (
+                    isinstance(node, ast.ImportFrom) and node.level == 0 and node.module
+                ):
                     root_name = node.module.split(".")[0]
                     source_imports.append((root_name, node.lineno))
                     for alias in node.names:
@@ -370,7 +375,10 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
 
             for match in DYNAMIC_IMPORT_RE.finditer(text):
                 source_imports.append(
-                    (match.group("module").split(".")[0], text.count("\n", 0, match.start()) + 1)
+                    (
+                        match.group("module").split(".")[0],
+                        text.count("\n", 0, match.start()) + 1,
+                    )
                 )
 
             relative_source = source.relative_to(root).as_posix()
@@ -399,7 +407,10 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
                     if import_root in CAPABILITY_IMPLEMENTATION_ROOTS:
                         has_capability_implementation = True
                     target = by_import_root.get(import_root or "")
-                    if target is None or target.layer not in CAPABILITY_FORBIDDEN_BASE_LAYERS:
+                    if (
+                        target is None
+                        or target.layer not in CAPABILITY_FORBIDDEN_BASE_LAYERS
+                    ):
                         continue
                     violations.append(
                         Violation(
@@ -451,12 +462,8 @@ def report(violations: tuple[Violation, ...]) -> dict[str, object]:
             "consumer": "40-capabilities",
             "allowed_target_layers": sorted(CAPABILITY_ALLOWED_LAYERS),
             "forbidden_target_layers": sorted(CAPABILITY_FORBIDDEN_LAYERS),
-            "forbidden_inheritance_layers": sorted(
-                CAPABILITY_FORBIDDEN_BASE_LAYERS
-            ),
-            "required_implementation_roots": sorted(
-                CAPABILITY_IMPLEMENTATION_ROOTS
-            ),
+            "forbidden_inheritance_layers": sorted(CAPABILITY_FORBIDDEN_BASE_LAYERS),
+            "required_implementation_roots": sorted(CAPABILITY_IMPLEMENTATION_ROOTS),
         },
         "capability_purposes": dict(sorted(CAPABILITY_PURPOSES.items())),
         "violation_count": len(violations),

@@ -6,6 +6,7 @@ import asyncio
 import inspect
 from collections.abc import Callable, Mapping
 from functools import partial
+from types import MappingProxyType
 from typing import TypeAlias
 
 from tigrbl_capability import Capability
@@ -74,7 +75,7 @@ class OperatorAdministrationCapability(Capability):
             )
 
         self._authorize = authorize
-        self._delegates = dict(delegates)
+        self._delegates = MappingProxyType(dict(delegates))
         super().__init__(
             CapabilityDefinition("identity-admin.operator", "1.0"),
             operations={

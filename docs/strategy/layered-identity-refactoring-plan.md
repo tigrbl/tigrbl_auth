@@ -745,7 +745,13 @@ flags. Tier-4 claims require independent interoperability evidence.
 - [x] C8: make every layer-40 feature composable, delegated, and reportable.
 - [x] C9: complete per-specification layer-50 version/feature/compatibility and
   migration matrices.
-- [ ] C10: update runtime/facade/API/app/deployment compositions.
+- [x] C10: update runtime/facade/API/app/deployment compositions.
+  CLI administration and platform tenant/realm/identity administration now
+  enter reportable layer-40 capabilities through request/command-scoped
+  layer-60 factories. My Account profile, password, session, and consent
+  durability now follows the same path through `account.self-service`; its
+  layer-80 carrier owns only HTTP translation and retains the existing wire
+  surface, so no layer-90/95 client regeneration was required.
 - [ ] C11: remove compatibility packages after their release boundary.
 - [ ] C12: full boundary, conformance, security-negative, migration, and
   interoperability audit.

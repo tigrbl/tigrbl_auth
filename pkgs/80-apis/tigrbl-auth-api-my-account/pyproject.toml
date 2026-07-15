@@ -9,9 +9,9 @@ dependencies = [
     "pydantic==2.12.5",
     "tigrbl-auth==0.4.0.dev2",
     "tigrbl==0.4.4.dev1",
-    "tigrbl-identity-storage==0.4.0.dev2",
-    "tigrbl-identity-storage-runtime==0.4.0.dev2",
-    "tigrbl-secret-hashing-bcrypt-provider==0.1.0",
+    "tigrbl-account-self-service==0.4.0.dev2",
+    "tigrbl-identity-contracts==0.4.0.dev2",
+    "tigrbl-identity-server==0.4.0.dev2",
 ]
 
 [project.urls]

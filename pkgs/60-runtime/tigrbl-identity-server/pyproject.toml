@@ -33,6 +33,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
+    "tigrbl-account-self-service==0.4.0.dev2",
     "tigrbl-auth-release-certification==0.4.0.dev2",
     "tigrbl-auth-api-session-login==0.4.0.dev2",
     "tigrbl-auth-api-oauth-authorization==0.4.0.dev2",
@@ -53,6 +54,7 @@ dependencies = [
     "tigrbl-auth-protocol-oidc==0.4.0.dev2",
     "tigrbl-auth-protocol-gnap==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
+    "tigrbl-identity-admin-control-plane==0.4.0.dev2",
     "tigrbl-identity-jose==0.4.0.dev2",
     "tigrbl-identity-runtime==0.4.0.dev2",
     "email-validator>=2.0",

@@ -13,6 +13,9 @@ from scripts.validate_layer_boundaries import CAPABILITY_PURPOSES, validate
 
 def test_layer_40_contains_only_registered_multi_component_use_cases() -> None:
     assert CAPABILITY_PURPOSES == {
+        "tigrbl-account-self-service": (
+            "coordinate authenticated profile, password, session, and consent lifecycle"
+        ),
         "tigrbl-attestation-appraisal": (
             "coordinate evidence appraisal and result recording"
         ),

@@ -92,6 +92,7 @@ dependencies = [
     "tigrbl-security-key-rotation-policy-contracts==0.1.0",
     "tigrbl-identity-admin-advanced-authenticator-registry==0.4.0.dev2",
     "tigrbl-identity-admin-auth-anomaly-detector==0.4.0.dev2",
+    "tigrbl-account-self-service==0.4.0.dev2",
     "tigrbl-identity-admin-control-plane==0.4.0.dev2",
     "tigrbl-identity-admin-federation-registry==0.4.0.dev2",
     "tigrbl-identity-admin-policy-registry==0.4.0.dev2",
@@ -637,6 +638,7 @@ tigrbl-corim-concrete = { path = "pkgs/10-concrete/tigrbl-corim-concrete", edita
 tigrbl-security-key-rotation-policy-contracts = { path = "pkgs/02-contracts/tigrbl-security-key-rotation-policy-contracts", editable = true }
 tigrbl-identity-admin-advanced-authenticator-registry = { path = "pkgs/deprecated/tigrbl-identity-admin-advanced-authenticator-registry", editable = true }
 tigrbl-identity-admin-auth-anomaly-detector = { path = "pkgs/20-providers/tigrbl-identity-admin-auth-anomaly-detector", editable = true }
+tigrbl-account-self-service = { path = "pkgs/40-capabilities/tigrbl-account-self-service", editable = true }
 tigrbl-identity-admin-control-plane = { path = "pkgs/40-capabilities/tigrbl-identity-admin-control-plane", editable = true }
 tigrbl-identity-admin-federation-registry = { path = "pkgs/deprecated/tigrbl-identity-admin-federation-registry", editable = true }
 tigrbl-identity-admin-policy-registry = { path = "pkgs/deprecated/tigrbl-identity-admin-policy-registry", editable = true }

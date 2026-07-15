@@ -1,4 +1,4 @@
-"""Current-subject consent and authorized-application routes."""
+"""Current-subject consent and authorized-application HTTP routes."""
 
 from __future__ import annotations
 
@@ -8,18 +8,21 @@ from uuid import UUID
 
 from pydantic import BaseModel
 from tigrbl import TigrblRouter
+from tigrbl.requests import Request
 from tigrbl.runtime.status import HTTPException
 from tigrbl.security import Depends
-from tigrbl_identity_storage.tables import User
-from tigrbl_identity_storage_runtime.engine import get_db
-from tigrbl_identity_storage_runtime.ops.consents import (
-    list_consents_for_user,
-    revoke_consent_for_user,
-    revoke_consents_for_client,
+from tigrbl_identity_contracts.account_self_service import (
+    AccountConsent,
+    AccountNotFoundError,
+    AccountPrincipal,
 )
-from tigrbl_identity_storage_runtime.ops.common import field_value
+from tigrbl_identity_server.account_self_service import (
+    account_principal,
+    account_self_service_for_request,
+    get_db,
+)
 
-from .common import current_principal_dependency, not_found_uuid
+from .common import current_principal_dependency
 
 
 api = router = TigrblRouter()
@@ -48,29 +51,29 @@ class MyAccountAuthorizedAppOut(BaseModel):
     revoked_at: datetime | None = None
 
 
-def _consent_payload(row: Any) -> MyAccountConsentOut:
+def _consent_payload(record: AccountConsent) -> MyAccountConsentOut:
     return MyAccountConsentOut(
-        id=field_value(row, "id"),
-        tenant_id=field_value(row, "tenant_id"),
-        user_id=field_value(row, "user_id"),
-        client_id=field_value(row, "client_id"),
-        scope=str(field_value(row, "scope", "")),
-        claims=field_value(row, "claims"),
-        state=str(field_value(row, "state", "active")),
-        granted_at=field_value(row, "granted_at"),
-        expires_at=field_value(row, "expires_at"),
-        revoked_at=field_value(row, "revoked_at"),
+        id=record.consent_id,
+        tenant_id=record.tenant_id,
+        user_id=record.identity_id,
+        client_id=record.client_id,
+        scope=record.scope,
+        claims=dict(record.claims) if record.claims is not None else None,
+        state=record.state,
+        granted_at=record.granted_at,
+        expires_at=record.expires_at,
+        revoked_at=record.revoked_at,
     )
 
 
-def _authorized_app_payload(row: Any) -> MyAccountAuthorizedAppOut:
+def _authorized_app_payload(record: AccountConsent) -> MyAccountAuthorizedAppOut:
     return MyAccountAuthorizedAppOut(
-        client_id=field_value(row, "client_id"),
-        tenant_id=field_value(row, "tenant_id"),
-        scope=str(field_value(row, "scope", "")),
-        consent_state=str(field_value(row, "state", "active")),
-        granted_at=field_value(row, "granted_at"),
-        revoked_at=field_value(row, "revoked_at"),
+        client_id=record.client_id,
+        tenant_id=record.tenant_id,
+        scope=record.scope,
+        consent_state=record.state,
+        granted_at=record.granted_at,
+        revoked_at=record.revoked_at,
     )
 
 
@@ -81,13 +84,14 @@ def _authorized_app_payload(row: Any) -> MyAccountAuthorizedAppOut:
     tags=MY_ACCOUNT_TAGS,
 )
 async def list_account_consents(
-    current_user: User = Depends(current_principal_dependency),
+    request: Request | None = None,
+    current_user: AccountPrincipal | object = Depends(current_principal_dependency),
     db: Any = Depends(get_db),
 ) -> list[MyAccountConsentOut]:
-    rows = await list_consents_for_user(
-        {"payload": {"user_id": current_user.id, "tenant_id": current_user.tenant_id}, "db": db}
-    )
-    return [_consent_payload(row) for row in rows]
+    records = await account_self_service_for_request(
+        request or object(), db
+    ).list_consents(account_principal(current_user))
+    return [_consent_payload(record) for record in records]
 
 
 @api.route(
@@ -98,19 +102,17 @@ async def list_account_consents(
 )
 async def revoke_account_consent(
     consent_id: str,
-    current_user: User = Depends(current_principal_dependency),
+    request: Request | None = None,
+    current_user: AccountPrincipal | object = Depends(current_principal_dependency),
     db: Any = Depends(get_db),
 ) -> MyAccountConsentOut:
-    row = await revoke_consent_for_user(
-        {
-            "path_params": {"id": not_found_uuid(consent_id, field="consent")},
-            "payload": {"user_id": current_user.id, "tenant_id": current_user.tenant_id},
-            "db": db,
-        }
-    )
-    if row is None:
-        raise HTTPException(404, "consent not found")
-    return _consent_payload(row)
+    try:
+        record = await account_self_service_for_request(
+            request or object(), db
+        ).revoke_consent(account_principal(current_user), consent_id)
+    except AccountNotFoundError as exc:
+        raise HTTPException(404, str(exc)) from exc
+    return _consent_payload(record)
 
 
 @api.route(
@@ -120,13 +122,14 @@ async def revoke_account_consent(
     tags=MY_ACCOUNT_TAGS,
 )
 async def list_account_authorized_apps(
-    current_user: User = Depends(current_principal_dependency),
+    request: Request | None = None,
+    current_user: AccountPrincipal | object = Depends(current_principal_dependency),
     db: Any = Depends(get_db),
 ) -> list[MyAccountAuthorizedAppOut]:
-    rows = await list_consents_for_user(
-        {"payload": {"user_id": current_user.id, "tenant_id": current_user.tenant_id}, "db": db}
-    )
-    return [_authorized_app_payload(row) for row in rows]
+    records = await account_self_service_for_request(
+        request or object(), db
+    ).list_authorized_apps(account_principal(current_user))
+    return [_authorized_app_payload(record) for record in records]
 
 
 @api.route(
@@ -137,19 +140,17 @@ async def list_account_authorized_apps(
 )
 async def revoke_account_authorized_app(
     client_id: str,
-    current_user: User = Depends(current_principal_dependency),
+    request: Request | None = None,
+    current_user: AccountPrincipal | object = Depends(current_principal_dependency),
     db: Any = Depends(get_db),
 ) -> list[MyAccountConsentOut]:
-    rows = await revoke_consents_for_client(
-        {
-            "path_params": {"client_id": not_found_uuid(client_id, field="client")},
-            "payload": {"user_id": current_user.id, "tenant_id": current_user.tenant_id},
-            "db": db,
-        }
-    )
-    if not rows:
-        raise HTTPException(404, "authorized app not found")
-    return [_consent_payload(row) for row in rows]
+    try:
+        records = await account_self_service_for_request(
+            request or object(), db
+        ).revoke_authorized_app(account_principal(current_user), client_id)
+    except AccountNotFoundError as exc:
+        raise HTTPException(404, str(exc)) from exc
+    return [_consent_payload(record) for record in records]
 
 
 __all__ = [

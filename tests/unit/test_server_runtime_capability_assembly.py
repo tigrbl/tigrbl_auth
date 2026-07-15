@@ -36,6 +36,7 @@ def test_server_assembly_maps_selected_protocols_to_effective_capabilities() -> 
         "oidc",
     )
     assert assembly.capabilities.capability_ids() == (
+        "account.self-service",
         "artifact.processing",
         "client.registration",
         "identity-admin.identities",
@@ -58,6 +59,7 @@ def test_server_assembly_materializes_database_and_processor_scoped_capabilities
     db = object()
 
     materialized = {
+        "account.self-service": registry.materialize("account.self-service", db),
         "artifact.processing": registry.materialize(
             "artifact.processing", ArtifactProcessor()
         ),
