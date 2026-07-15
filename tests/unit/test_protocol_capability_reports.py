@@ -18,6 +18,7 @@ PROTOCOL_MODULES = (
     "tigrbl_auth_protocol_oid4vp",
     "tigrbl_auth_protocol_oidc",
     "tigrbl_auth_protocol_rp",
+    "tigrbl_authz_resource_server",
     "tigrbl_credential_profile_sd_jwt_vc",
     "tigrbl_security_event_protocol_set",
 )

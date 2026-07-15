@@ -45,6 +45,15 @@ result = ResourceServerVerifier().verify_token(claims, requirement)
 ## Package Boundary
 
 - Protected API token validation
+- `versions.py` owns the implementation-profile history while
+  `SPECIFICATION_VERSIONS` records the independently versioned RFCs composed by
+  the profile.
+- `features.py`, `compatibility.py`, and `migrations.py` own profile selection,
+  feature reporting, and the legacy-unversioned metadata migration path.
+- `claims.py`, `schemas.py`, `bindings.py`, and `errors.py` own protocol mapping;
+  standalone claim classes and verifier implementations remain in lower layers.
+- `capability.py` composes the layer-20 verifier into the reportable
+  `protected-resource.authorization` layer-40 capability.
 - Resource, audience, scope, permission, DPoP, mTLS, and introspection orchestration
 - Resource-server framework adapters and verifier contracts
 - Enforcement integration with authorization policy inputs

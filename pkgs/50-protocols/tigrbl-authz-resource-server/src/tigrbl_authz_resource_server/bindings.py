@@ -1,0 +1,86 @@
+"""Protected-resource RFC obligations mapped to semantic capabilities."""
+
+from tigrbl_identity_contracts.capabilities import ProtocolCapabilityRequirement
+
+CAPABILITY_REQUIREMENTS = (
+    ProtocolCapabilityRequirement(
+        "oauth-protected-resource",
+        "RFC6750",
+        "bearer-token-authorization",
+        "Authorization: Bearer",
+        "protected-resource.authorization",
+        "verify_token",
+        "protected-resource-decision",
+    ),
+    ProtocolCapabilityRequirement(
+        "oauth-protected-resource",
+        "RFC9068",
+        "jwt-access-token-claims-authorization",
+        "JWT access-token claims",
+        "protected-resource.authorization",
+        "verify_claims",
+        "protected-resource-decision",
+    ),
+    ProtocolCapabilityRequirement(
+        "oauth-protected-resource",
+        "RFC7662",
+        "opaque-token-introspection",
+        "opaque access token",
+        "token.introspection",
+        "introspect_token",
+        "active-access-token",
+        False,
+    ),
+    ProtocolCapabilityRequirement(
+        "oauth-protected-resource",
+        "RFC9449",
+        "dpop-sender-constraint",
+        "DPoP proof and cnf.jkt",
+        "protected-resource.authorization",
+        "verify_token",
+        "dpop-bound-resource-decision",
+        False,
+    ),
+    ProtocolCapabilityRequirement(
+        "oauth-protected-resource",
+        "RFC9449",
+        "dpop-proof-replay",
+        "DPoP jti",
+        "security.replay-protection",
+        "check_and_reserve",
+        "reserved-dpop-proof",
+        False,
+    ),
+    ProtocolCapabilityRequirement(
+        "oauth-protected-resource",
+        "RFC8705",
+        "mtls-sender-constraint",
+        "cnf.x5t#S256 and client certificate",
+        "protected-resource.authorization",
+        "verify_token",
+        "mtls-bound-resource-decision",
+        False,
+    ),
+    ProtocolCapabilityRequirement(
+        "oauth-protected-resource",
+        "RFC9700",
+        "authorization-policy",
+        "resource, action, subject, and context",
+        "policy.evaluation",
+        "evaluate",
+        "policy-decision",
+        False,
+    ),
+    ProtocolCapabilityRequirement(
+        "oauth-protected-resource",
+        "RFC9728",
+        "protected-resource-metadata-validation",
+        "application/json metadata document",
+        "artifact.processing",
+        "validate",
+        "validated-protected-resource-metadata",
+        False,
+    ),
+)
+
+__all__ = ["CAPABILITY_REQUIREMENTS"]
