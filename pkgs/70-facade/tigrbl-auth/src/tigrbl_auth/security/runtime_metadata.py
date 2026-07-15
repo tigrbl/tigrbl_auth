@@ -1,10 +1,10 @@
-"""Compatibility facade for `tigrbl_authz_resource_server.runtime_metadata`."""
+"""Compatibility facade for release-certification runtime metadata."""
 
 from tigrbl_auth._split_imports import alias_module as _alias_module
 
 _module = _alias_module(
     __name__,
-    "tigrbl_authz_resource_server.runtime_metadata",
-    "tigrbl-authz-resource-server",
+    "tigrbl_auth_release_certification.runtime_metadata",
+    "tigrbl-auth-release-certification",
 )
 globals().update(_module.__dict__)

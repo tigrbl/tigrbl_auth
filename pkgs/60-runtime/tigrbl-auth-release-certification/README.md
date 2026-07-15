@@ -7,6 +7,8 @@ This package owns runtime validation, release posture summaries, disclosure rule
 ## Boundary
 
 - Owns executable release and certification checks.
+- Owns runtime capability truth manifests and capability attestations derived
+  from resolved deployment state.
 - May depend on runtime/concrete packages needed to evaluate release truth.
 - Must not own authorization policy decisioning, admin control-plane workflows, storage tables, or protocol runtime behavior.
 

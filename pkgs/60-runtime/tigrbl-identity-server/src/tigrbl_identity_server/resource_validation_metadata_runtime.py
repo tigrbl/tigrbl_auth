@@ -3,7 +3,7 @@
 from tigrbl_auth_protocol_oauth.standards.resource_verifier_contract import (
     build_protected_resource_verifier_contract,
 )
-from tigrbl_authz_resource_server.runtime_metadata import (
+from tigrbl_auth_release_certification.runtime_metadata import (
     build_capability_attestation,
     runtime_truth_manifest,
 )

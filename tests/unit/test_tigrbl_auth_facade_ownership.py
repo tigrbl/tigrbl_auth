@@ -52,7 +52,7 @@ FACADE_MODULES = {
     "tigrbl_auth.rfc.rfc7518": "tigrbl_identity_jose.standards.rfc7518",
     "tigrbl_auth.security.admin_gate": "tigrbl_authz_policy_admin_gate",
     "tigrbl_auth.security.certification": "tigrbl_auth_release_certification.certification",
-    "tigrbl_auth.security.runtime_metadata": "tigrbl_authz_resource_server.runtime_metadata",
+    "tigrbl_auth.security.runtime_metadata": "tigrbl_auth_release_certification.runtime_metadata",
     "tigrbl_auth.services.advanced_identity_plane": "tigrbl_identity_admin.advanced_identity_plane",
     "tigrbl_auth.services.governance_extension_plane": "tigrbl_authz_policy.governance_extension",
     "tigrbl_auth.services.policy_invariants": "tigrbl_authz_policy",

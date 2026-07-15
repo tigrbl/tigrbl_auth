@@ -2925,6 +2925,7 @@ name = "tigrbl-auth-release-certification"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/60-runtime/tigrbl-auth-release-certification" }
 dependencies = [
+    { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-identities-concrete" },
     { name = "tigrbl-identity-runtime" },
     { name = "tigrbl-release-contracts" },
@@ -2932,6 +2933,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-identities-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-release-contracts", specifier = "==0.1.0" },
@@ -4083,7 +4085,6 @@ source = { editable = "pkgs/50-protocols/tigrbl-authz-resource-server" }
 dependencies = [
     { name = "tigrbl-auth-protocol-jwt" },
     { name = "tigrbl-auth-protocol-oauth" },
-    { name = "tigrbl-auth-release-certification" },
     { name = "tigrbl-authz-policy" },
     { name = "tigrbl-authz-resource-server-verifier" },
     { name = "tigrbl-identity-contracts" },
@@ -4099,7 +4100,6 @@ dependencies = [
 requires-dist = [
     { name = "tigrbl-auth-protocol-jwt", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-auth-release-certification", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-resource-server-verifier", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
@@ -6189,6 +6189,7 @@ dependencies = [
     { name = "tigrbl-auth-api-session-login" },
     { name = "tigrbl-auth-protocol-gnap" },
     { name = "tigrbl-auth-protocol-oauth" },
+    { name = "tigrbl-auth-release-certification" },
     { name = "tigrbl-authz-policy-admin-gate" },
     { name = "tigrbl-client-registration-capability" },
     { name = "tigrbl-core" },
@@ -6225,6 +6226,7 @@ requires-dist = [
     { name = "tigrbl-auth-api-session-login", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-gnap", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-release-certification", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy-admin-gate", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-client-registration-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-core", specifier = "==0.4.4.dev1" },

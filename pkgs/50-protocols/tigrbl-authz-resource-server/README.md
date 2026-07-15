@@ -54,6 +54,9 @@ result = ResourceServerVerifier().verify_token(claims, requirement)
   standalone claim classes and verifier implementations remain in lower layers.
 - `capability.py` composes the layer-20 verifier into the reportable
   `protected-resource.authorization` layer-40 capability.
+- Runtime capability truth and certification attestations are owned by
+  `tigrbl-auth-release-certification.runtime_metadata` in layer 60; they are
+  not protocol behavior.
 - Resource, audience, scope, permission, DPoP, mTLS, and introspection orchestration
 - Resource-server framework adapters and verifier contracts
 - Enforcement integration with authorization policy inputs
