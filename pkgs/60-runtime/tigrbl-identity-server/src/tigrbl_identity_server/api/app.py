@@ -11,6 +11,7 @@ from tigrbl_identity_runtime import LazyASGIApplication, RuntimePlan, build_runt
 
 if TYPE_CHECKING:
     from tigrbl import TigrblApp
+    from tigrbl_identity_server.api.lifecycle import AssemblyFactory
 
 
 def _load_default_settings() -> object:
@@ -58,6 +59,7 @@ def build_app(
     settings_obj: object | None = None,
     *,
     deployment: ResolvedDeployment | None = None,
+    runtime_assembly_factory: AssemblyFactory | None = None,
 ) -> "TigrblApp":
     resolved_settings = settings_obj if settings_obj is not None else _load_default_settings()
     resolved_deployment = deployment or resolve_deployment(resolved_settings)
@@ -99,7 +101,7 @@ def build_app(
         resolved_deployment,
         diagnostics_prefix="/system",
     )
-    register_lifecycle(app)
+    register_lifecycle(app, assembly_factory=runtime_assembly_factory)
     return AdminGate(
         app,
         deployment=resolved_deployment,
