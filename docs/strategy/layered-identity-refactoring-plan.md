@@ -209,6 +209,26 @@ Required ownership rules:
   60, adds the standalone layer-80 carrier, and removes token-exchange routing
   from layer 30. Focused ownership/unit gates and HTTP integration/conformance
   flows pass.
+- [x] `116c6ecb` moves OIDC Discovery and issuer/tenant/realm JWKS publication
+  from layer 30 to request-neutral layer-60 orchestration and a standalone
+  layer-80 carrier while retaining descriptive OIDC Discovery ownership at
+  layer 50.
+- [x] `07b99301` and `6d282c49` move RFC 8414 authorization-server metadata and
+  RFC 9728 protected-resource metadata publication above storage. Their
+  versioned paths, descriptors, and semantic projections remain at layer 50;
+  deployment policy is layer 60; HTTP binding is layer 80.
+- [x] `8e1fc05f` moves project-specific capability/verifier metadata publication
+  above storage, assigns representation-neutral path identifiers to layer 02,
+  and preserves the resource-validation product and layer-70 compatibility
+  surfaces.
+- [x] `88e6d075` removes the last provider import found by the layer-30 carrier
+  audit: operator password/client-secret mutations now accept provider-produced
+  hashes, while layer 60 generates and hashes new material through the bcrypt
+  provider.
+- [x] `7638dd41` removes layer-30 migration resolution through layer 60, uses
+  Tigrbl's provider resolver with the storage-engine fallback, and adds a
+  workspace-wide guard against HTTP, protocol, provider, and higher-runtime
+  ownership returning to layer 30.
 
 ## 3. Layer 00: primitives
 
@@ -696,13 +716,15 @@ flags. Tier-4 claims require independent interoperability evidence.
 - [x] C1: layer-30 Tigrbl construction/activation foundation.
 - [x] C2: graph algorithm/runtime split.
 - [x] C3: finish all durable operations/hooks out of layer 01.
-- [ ] C4: remove route/runtime/provider imports from layer 01 and move routers
+- [x] C4: remove route/runtime/provider imports from layer 01 and move routers
   to layer 80.
   RFC 7662 introspection, RFC 7009 revocation, RFC 9126 PAR, and RFC 7591/7592
   client registration/management, token, and authorization are complete;
   UserInfo, logout, login, and device authorization are also complete.
-  Token exchange is complete. Discovery/JWKS, authorization-server metadata,
-  protected-resource metadata, and verifier metadata carriers remain.
+  Token exchange, Discovery/JWKS, authorization-server metadata,
+  protected-resource metadata, and verifier metadata carriers are complete.
+  The remaining layer-30 `TigrblRouter` use is the engine-backed internal
+  operator-store table container; it owns no HTTP routes or protocol binding.
 - [x] C5: finish claim package/facade cleanup and remove protocol-specific
   deterministic package names.
 - [x] C6: finish EAT token/evidence/appraisal/provider verification chain.
@@ -1110,22 +1132,13 @@ The final audit proves:
    storage models.
 2. **C3b delegation/device/key/audit**: move remaining operations/hooks and
    delete layer-01 `_ops` use.
-3. **C4 routes/runtime barrels**: My Account, identity, realm, tenant, and
-   protocol-schema ownership is complete. Introspection, revocation, and PAR
-   now have explicit capability seams, protocol mappings, runtime composition,
-   and layer-80 carriers. RFC 7591/7592 registration now also uses a durable
-   layer-30 aggregate, a reportable lifecycle capability, explicit protocol
-   requirements, runtime security composition, and a layer-80 carrier. Next
-   Token and authorization now have standalone layer-80 carriers and layer-60
-   runtime composition; UserInfo now also has descriptive layer-50 ownership,
-   layer-60 runtime composition, and a standalone layer-80 carrier; logout now
-   follows the same layer-60/80 split. Login and RFC 8628 device authorization
-   now also have standalone layer-80 carriers. RFC 8693 token exchange now has
-   typed layer-02 contracts, a reportable layer-40 capability, explicit
-   layer-50 requirements, layer-60 runtime composition, and a standalone
-   layer-80 carrier. Next move discovery/JWKS, authorization-server metadata,
-   protected-resource metadata, verifier metadata, and related HTTP bindings
-   out of layer 30 and mount them from layer 80.
+3. **C4 routes/runtime barrels — complete**: My Account, identity, realm,
+   tenant, protocol schemas, introspection, revocation, PAR, registration,
+   token, authorization, UserInfo, logout, login, device authorization, token
+   exchange, OIDC Discovery/JWKS, RFC 8414, RFC 9728, and resource-validation
+   metadata now compose above storage. Layer 30 retains durable Tigrbl table
+   operations and the internal operator-store engine container, not HTTP or
+   protocol routers.
 4. **C5 neutral reusable ownership**: claims facade, scope matcher, subject
    strategy, OAuth/OIDC base cleanup.
 5. **C6 EAT chain**: typed token verifiers, verified evidence, appraisal
