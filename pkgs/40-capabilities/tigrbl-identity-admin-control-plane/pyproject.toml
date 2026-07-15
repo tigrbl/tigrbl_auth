@@ -8,6 +8,7 @@ license = "Apache-2.0"
 dependencies = [
     "tigrbl-capability==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
+    "tigrbl-identity-core==0.4.0.dev2",
 ]
 
 [build-system]

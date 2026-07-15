@@ -5590,12 +5590,14 @@ source = { editable = "pkgs/40-capabilities/tigrbl-identity-admin-control-plane"
 dependencies = [
     { name = "tigrbl-capability" },
     { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]

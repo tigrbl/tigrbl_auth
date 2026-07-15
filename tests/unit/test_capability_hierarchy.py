@@ -10,7 +10,9 @@ from tigrbl_capability import Capability
 from tigrbl_capability_bases import CapabilityBase
 from tigrbl_default_capability import DefaultCapability
 from tigrbl_digital_credential_issuance import DigitalCredentialIssuanceCapability
-from tigrbl_digital_credential_presentation import DigitalCredentialPresentationCapability
+from tigrbl_digital_credential_presentation import (
+    DigitalCredentialPresentationCapability,
+)
 from tigrbl_identity_admin_control_plane import AdminControlPlane
 from tigrbl_identity_contracts.attestation import EvidenceVerificationResult
 from tigrbl_identity_contracts.capabilities import (
@@ -278,9 +280,7 @@ def test_runtime_capability_registry_validates_indexes_calls_and_reports() -> No
         "test.registry.first",
         "test.registry.optional",
     )
-    assert asyncio.run(
-        registry.call("test.registry.first", "execute", 2)
-    ).value == 3
+    assert asyncio.run(registry.call("test.registry.first", "execute", 2)).value == 3
     report = registry.report()
     assert report["capability_ids"] == registry.capability_ids()
     assert report["capabilities"]["test.registry.optional"][
@@ -336,7 +336,15 @@ def test_every_layer_40_capability_has_one_effective_operation_registry() -> Non
             lambda holder, request: None,
             lambda holder, request, result: None,
         ),
-        AdminControlPlane(),
+        AdminControlPlane(
+            lambda record: None,
+            lambda kind, resource_id: None,
+            lambda kind, tenant_id: (),
+            lambda record: None,
+            lambda record: None,
+            lambda event: None,
+            lambda: (),
+        ),
         ReplayProtectionCapability(_ReplayProvider()),
         SecurityEventsCapability(
             _Transmitter(),

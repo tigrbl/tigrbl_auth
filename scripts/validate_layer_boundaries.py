@@ -39,12 +39,14 @@ LAYER_ORDER = (
 )
 
 # Capabilities orchestrate implemented behavior.  Contract value types and
-# ports remain valid vocabulary, but capability implementations may not reach
-# into primitives, storage tables, or implementation bases.  In particular,
+# ports and primitive value helpers remain valid vocabulary, but capability
+# implementations may not reach into storage tables or implementation bases. In
+# particular,
 # layer 40 never *implements* a layer-02/05 abstraction; implementation starts
 # in layer 10 and concrete integrations belong in layer 20.
 CAPABILITY_ALLOWED_LAYERS = frozenset(
     {
+        "00-primitives",
         "02-contracts",
         "10-concrete",
         "20-providers",
@@ -53,7 +55,7 @@ CAPABILITY_ALLOWED_LAYERS = frozenset(
     }
 )
 CAPABILITY_FORBIDDEN_LAYERS = frozenset(
-    {"00-primitives", "01-storage", "05-bases"}
+    {"01-storage", "05-bases"}
 )
 CAPABILITY_FORBIDDEN_BASE_LAYERS = frozenset(
     {"00-primitives", "01-storage", "02-contracts", "05-bases"}
@@ -331,9 +333,9 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
                     path=manifest.relative_to(root).as_posix(),
                     line=None,
                     detail=(
-                        "capabilities may use contracts and layers 10, 20, 30, and 40; "
-                        "primitives, storage implementations, and bases require an "
-                        "implementation boundary"
+                        "capabilities may use primitives, contracts, and layers 10, "
+                        "20, 30, and 40; storage implementations and bases require "
+                        "an implementation boundary"
                     ),
                 )
             )

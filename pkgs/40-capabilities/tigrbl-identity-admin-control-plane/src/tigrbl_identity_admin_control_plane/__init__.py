@@ -4,16 +4,34 @@ from .models import (
     AdminControlPlaneError,
     AdminResource,
     AdminResourceKind,
+    AdminResourceRecord,
     AdminResourceStatus,
     App,
 )
-from .service import AdminControlPlane
+from .service import (
+    AdminAuditListOperation,
+    AdminAuditOperation,
+    AdminControlPlane,
+    AdminCreateOperation,
+    AdminDeleteOperation,
+    AdminListOperation,
+    AdminReadOperation,
+    AdminUpdateOperation,
+)
 
 __all__ = [
+    "AdminAuditListOperation",
+    "AdminAuditOperation",
     "AdminControlPlane",
     "AdminControlPlaneError",
+    "AdminCreateOperation",
+    "AdminDeleteOperation",
+    "AdminListOperation",
+    "AdminReadOperation",
     "AdminResource",
     "AdminResourceKind",
+    "AdminResourceRecord",
     "AdminResourceStatus",
+    "AdminUpdateOperation",
     "App",
 ]

@@ -45,8 +45,24 @@ class AdminResource:
         object.__setattr__(self, "attributes", dict(self.attributes))
 
 
+@dataclass(frozen=True, slots=True)
+class AdminResourceRecord:
+    """Pair durable administration metadata with its canonical domain object."""
+
+    metadata: AdminResource
+    resource: object
+
+    def __post_init__(self) -> None:
+        resource_id = getattr(self.resource, "id", None)
+        if resource_id is None:
+            resource_id = getattr(self.resource, "policy_id", None)
+        if resource_id is not None and resource_id != self.metadata.id:
+            raise ValueError("admin resource metadata and object IDs differ")
+
+
 __all__ = [
     "AdminResource",
     "AdminResourceKind",
+    "AdminResourceRecord",
     "AdminResourceStatus",
 ]
