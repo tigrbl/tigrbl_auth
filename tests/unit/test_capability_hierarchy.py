@@ -319,11 +319,22 @@ def test_default_capability_applies_only_its_documented_default_state() -> None:
 
 
 def test_every_layer_40_capability_has_one_effective_operation_registry() -> None:
+    configurations = {}
     capabilities = (
         AttestationAppraisalCapability(_EvidenceVerifier(), _Appraiser()),
-        DigitalCredentialIssuanceCapability(_Issuer()),
+        DigitalCredentialIssuanceCapability(
+            _Issuer(),
+            lambda value: configurations.__setitem__(value.identifier, value),
+            configurations.get,
+            lambda offer: None,
+            lambda request, result: None,
+        ),
         DigitalCredentialPresentationCapability(
-            _PresentationVerifier(), lambda audience, key: True, lambda holder, request: True
+            _PresentationVerifier(),
+            lambda audience, key: True,
+            lambda holder, request: True,
+            lambda holder, request: None,
+            lambda holder, request, result: None,
         ),
         AdminControlPlane(),
         ReplayProtectionCapability(_ReplayProvider()),

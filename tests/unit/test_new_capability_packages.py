@@ -50,17 +50,32 @@ def test_issuance_capability_composes_configuration_wallet_policy_and_issuer():
     configuration = CredentialConfiguration(
         "employee", CredentialType("urn:employee", format_), (format_,)
     )
-    capability = DigitalCredentialIssuanceCapability(_Issuer(), _WalletVerifier())
-    capability.register_configuration(configuration)
-    assert capability.offer("https://issuer", ("employee",)).configuration_ids == (
+    configurations = {}
+    offers = []
+    issuances = []
+    capability = DigitalCredentialIssuanceCapability(
+        _Issuer(),
+        lambda value: configurations.__setitem__(value.identifier, value),
+        configurations.get,
+        offers.append,
+        lambda request, result: issuances.append((request, result)),
+        _WalletVerifier(),
+    )
+    asyncio.run(capability.register_configuration(configuration))
+    assert asyncio.run(
+        capability.offer("https://issuer", ("employee",))
+    ).configuration_ids == (
         "employee",
     )
-    result = capability.issue(
-        CredentialIssuanceRequest("employee", format_),
-        wallet_attestation="valid-wallet",
-        require_wallet_attestation=True,
+    result = asyncio.run(
+        capability.issue(
+            CredentialIssuanceRequest("employee", format_),
+            wallet_attestation="valid-wallet",
+            require_wallet_attestation=True,
+        )
     )
     assert result.credential is not None
+    assert offers and issuances
 
 
 class _PresentationVerifier:
@@ -70,18 +85,24 @@ class _PresentationVerifier:
 
 def test_presentation_capability_enforces_consent_and_replay_before_verification():
     consumed = set()
+    transactions = []
+    results = []
     capability = DigitalCredentialPresentationCapability(
         _PresentationVerifier(),
         lambda audience, key: (
             (audience, key) not in consumed and not consumed.add((audience, key))
         ),
         lambda holder, request: holder == "alice",
+        lambda holder, request: transactions.append((holder, request)),
+        lambda holder, request, result: results.append((holder, request, result)),
     )
     request = PresentationRequest(
         ("dc+sd-jwt",), TransactionBinding("nonce", "https://verifier")
     )
-    assert capability.present("alice", "valid", request).valid
-    assert not capability.present("alice", "valid", request).valid
+    assert asyncio.run(capability.present("alice", "valid", request)).valid
+    assert not asyncio.run(capability.present("alice", "valid", request)).valid
+    assert len(transactions) == 2
+    assert len(results) == 2
 
 
 class _Appraiser:

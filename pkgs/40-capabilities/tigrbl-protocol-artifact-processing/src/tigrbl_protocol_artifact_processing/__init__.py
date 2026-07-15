@@ -25,9 +25,26 @@ class ProtocolArtifactProcessingCapability(Capability):
                 )
                 for name in ("decode", "validate", "encode", "map_error")
             },
-            state=CapabilityState(ready=True, healthy=True, status="ready"),
+            state=self._state,
         )
         self._processor = processor
+
+    def _state(self) -> CapabilityState:
+        bound = set(self.callables())
+        required = set(self.operations())
+        ready = required <= bound
+        healthy = bool(getattr(self._processor, "healthy", ready))
+        return CapabilityState(
+            ready=ready,
+            healthy=healthy,
+            status=str(
+                getattr(
+                    self._processor,
+                    "status",
+                    "ready" if ready and healthy else "unavailable",
+                )
+            ),
+        )
 
 
 __all__ = [
