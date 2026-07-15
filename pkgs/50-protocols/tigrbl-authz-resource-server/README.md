@@ -57,6 +57,8 @@ result = ResourceServerVerifier().verify_token(claims, requirement)
 - Runtime capability truth and certification attestations are owned by
   `tigrbl-auth-release-certification.runtime_metadata` in layer 60; they are
   not protocol behavior.
+- `contracts.py` is a compatibility export for the canonical OAuth
+  verifier-contract mapping and does not resolve runtime deployments.
 - Resource, audience, scope, permission, DPoP, mTLS, and introspection orchestration
 - Resource-server framework adapters and verifier contracts
 - Enforcement integration with authorization policy inputs

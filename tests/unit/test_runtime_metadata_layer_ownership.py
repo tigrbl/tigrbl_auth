@@ -52,4 +52,16 @@ def test_layer_50_resource_server_has_no_certification_runtime_dependency() -> N
     ).read_text(encoding="utf-8")
 
     assert "tigrbl-auth-release-certification" not in resource_manifest
+    assert "tigrbl-identity-runtime" not in resource_manifest
     assert "tigrbl-identity-contracts" in certification_manifest
+
+
+def test_resource_server_contract_module_is_a_runtime_neutral_compatibility_export() -> None:
+    source = (
+        ROOT
+        / "pkgs/50-protocols/tigrbl-authz-resource-server/src"
+        / "tigrbl_authz_resource_server/contracts.py"
+    ).read_text(encoding="utf-8")
+
+    assert "tigrbl_auth_protocol_oauth.standards.resource_verifier_contract" in source
+    assert "tigrbl_identity_runtime" not in source

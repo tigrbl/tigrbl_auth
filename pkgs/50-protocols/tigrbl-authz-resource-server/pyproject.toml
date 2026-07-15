@@ -38,7 +38,6 @@ dependencies = [
     "tigrbl-auth-protocol-jwt==0.4.0.dev2",
     "tigrbl-authz-policy==0.4.0.dev2",
     "tigrbl-authz-resource-server-verifier==0.4.0.dev2",
-    "tigrbl-identity-runtime==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
     "tigrbl-protected-resource-authorization-capability==0.4.0.dev2",
     "tigrbl-security-dpop-cnf-binding-validator==0.1.0",
