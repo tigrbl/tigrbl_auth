@@ -288,6 +288,7 @@ dependencies = [
     "tigrbl-token-exchange-capability==0.4.0.dev2",
     "tigrbl-token-revocation-capability==0.4.0.dev2",
     "tigrbl-principal-authentication==0.4.0.dev2",
+    "tigrbl-policy-evaluation-capability==0.4.0.dev2",
     "tigrbl-protocol-artifact-processing==0.4.0.dev2",
     "tigrbl-pushed-authorization-capability==0.4.0.dev2",
     "tigrbl-client-registration-capability==0.4.0.dev2",
@@ -664,6 +665,7 @@ tigrbl-token-issuance-capability = { path = "pkgs/40-capabilities/tigrbl-token-i
 tigrbl-token-exchange-capability = { path = "pkgs/40-capabilities/tigrbl-token-exchange-capability", editable = true }
 tigrbl-token-revocation-capability = { path = "pkgs/40-capabilities/tigrbl-token-revocation-capability", editable = true }
 tigrbl-principal-authentication = { path = "pkgs/40-capabilities/tigrbl-principal-authentication", editable = true }
+tigrbl-policy-evaluation-capability = { path = "pkgs/40-capabilities/tigrbl-policy-evaluation-capability", editable = true }
 tigrbl-protocol-artifact-processing = { path = "pkgs/40-capabilities/tigrbl-protocol-artifact-processing", editable = true }
 tigrbl-pushed-authorization-capability = { path = "pkgs/40-capabilities/tigrbl-pushed-authorization-capability", editable = true }
 tigrbl-client-registration-capability = { path = "pkgs/40-capabilities/tigrbl-client-registration-capability", editable = true }

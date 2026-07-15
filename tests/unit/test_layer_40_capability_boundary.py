@@ -36,6 +36,10 @@ def test_layer_40_contains_only_registered_multi_component_use_cases() -> None:
         "tigrbl-principal-authentication": (
             "coordinate durable principal lookup with replaceable credential verifiers"
         ),
+        "tigrbl-policy-evaluation-capability": (
+            "coordinate normalized policy evaluation, batch evaluation, entity search, "
+            "and service description"
+        ),
         "tigrbl-pushed-authorization-capability": (
             "coordinate durable pushed-request creation with optional audit recording"
         ),

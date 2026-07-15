@@ -90,6 +90,10 @@ CAPABILITY_PURPOSES = {
     "tigrbl-principal-authentication": (
         "coordinate durable principal lookup with replaceable credential verifiers"
     ),
+    "tigrbl-policy-evaluation-capability": (
+        "coordinate normalized policy evaluation, batch evaluation, entity search, "
+        "and service description"
+    ),
     "tigrbl-pushed-authorization-capability": (
         "coordinate durable pushed-request creation with optional audit recording"
     ),

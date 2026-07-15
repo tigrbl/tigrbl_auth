@@ -2,8 +2,11 @@ import asyncio
 
 import pytest
 from tigrbl_auth_protocol_authzen import (
+    CAPABILITY_REQUIREMENTS as AUTHZEN_REQUIREMENTS,
     AuthzenProtocol,
     CURRENT_VERSION as AUTHZEN_CURRENT,
+    capability_report as authzen_capability_report,
+    compatibility as authzen_compatibility,
     migrate_evaluation,
     supports as authzen_supports,
 )
@@ -29,7 +32,13 @@ from tigrbl_identity_contracts.digital_credentials import (
     CredentialIssuanceResult,
     PresentationResult,
 )
-from tigrbl_identity_contracts.policy import PolicyDecision, PolicyEvaluationResult
+from tigrbl_identity_contracts.policy import (
+    PolicyDecision,
+    PolicyEntity,
+    PolicyEntitySearchResult,
+    PolicyEvaluationResult,
+)
+from tigrbl_policy_evaluation_capability import PolicyEvaluationCapability
 
 
 def test_protocol_packages_pin_independent_final_versions_and_features():
@@ -157,10 +166,58 @@ def test_authzen_maps_wire_entities_to_neutral_policy_contracts():
     response = AuthzenProtocol(evaluator).access_evaluation(
         {
             "subject": {"type": "user", "id": "alice"},
-            "action": {"type": "action", "id": "read"},
+            "action": {"name": "read"},
             "resource": {"type": "document", "id": "document-1"},
             "context": {"time": "day"},
         }
     )
-    assert response == {"decision": True, "reason": "policy matched"}
+    assert response == {
+        "decision": True,
+        "context": {"reason": "policy matched"},
+    }
     assert evaluator.request.subject.entities[0].identifier == "alice"
+    assert evaluator.request.action.entities[0].identifier == "read"
+
+
+def test_authzen_maps_batch_search_and_discovery_capabilities():
+    capability = PolicyEvaluationCapability(
+        lambda request: PolicyEvaluationResult(PolicyDecision(True, "allowed")),
+        search_entities=lambda request: PolicyEntitySearchResult(
+            (PolicyEntity(request.target.value, "result-1"),)
+        ),
+    )
+    protocol = AuthzenProtocol(capability)
+
+    batch = protocol.access_evaluations(
+        {
+            "subject": {"type": "user", "id": "alice"},
+            "action": {"name": "read"},
+            "evaluations": [
+                {"resource": {"type": "document", "id": "one"}},
+                {"resource": {"type": "document", "id": "two"}},
+            ],
+        }
+    )
+    assert [item["decision"] for item in batch["evaluations"]] == [True, True]
+
+    search = protocol.search_resource(
+        {
+            "subject": {"type": "user", "id": "alice"},
+            "action": {"name": "read"},
+            "resource": {"type": "document"},
+        }
+    )
+    assert search == {"results": [{"type": "resource", "id": "result-1"}]}
+
+    assert authzen_compatibility("draft-03").migration_required
+    assert {requirement.operation for requirement in AUTHZEN_REQUIREMENTS} == {
+        "describe",
+        "evaluate",
+        "evaluate_many",
+        "search_entities",
+        "validate",
+    }
+    assert authzen_capability_report()["required_capabilities"] == (
+        "artifact.processing",
+        "policy.evaluation",
+    )

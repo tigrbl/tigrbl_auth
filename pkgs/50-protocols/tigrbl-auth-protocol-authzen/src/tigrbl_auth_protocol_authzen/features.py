@@ -1,17 +1,17 @@
+_EVALUATION = frozenset({"access-evaluation"})
+_BATCH = _EVALUATION | {"access-evaluations"}
+_SEARCH = _BATCH | {"search-subject", "search-resource", "search-action"}
+_DISCOVERY = _SEARCH | {"configuration", "capabilities", "signed-metadata"}
+
 FEATURES_BY_VERSION = {
-    "draft-00": frozenset({"access-evaluation"}),
-    "implementers-draft-1": frozenset({"access-evaluation"}),
-    "1.0": frozenset(
-        {
-            "access-evaluation",
-            "access-evaluations",
-            "search-subject",
-            "search-resource",
-            "search-action",
-            "configuration",
-            "capabilities",
-        }
-    ),
+    "draft-00": _EVALUATION,
+    "draft-01": _EVALUATION,
+    "implementers-draft-1": _EVALUATION,
+    "draft-02": _BATCH,
+    "draft-03": _SEARCH,
+    "draft-04": _DISCOVERY,
+    "draft-05": _DISCOVERY,
+    "1.0": _DISCOVERY,
 }
 
 
