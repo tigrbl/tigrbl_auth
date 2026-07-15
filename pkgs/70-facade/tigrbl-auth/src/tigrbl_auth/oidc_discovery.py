@@ -1,3 +1,3 @@
-"""Compatibility exports for resolved OIDC discovery behavior."""
+"""Compatibility exports for runtime-composed OIDC discovery behavior."""
 
-from tigrbl_auth_protocol_oidc.discovery import *  # noqa: F401,F403
+from tigrbl_identity_server.oidc_discovery_runtime import *  # noqa: F401,F403

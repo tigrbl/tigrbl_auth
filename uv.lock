@@ -6045,10 +6045,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/deprecated/tigrbl-identity-oidc" }
 dependencies = [
     { name = "tigrbl-auth-protocol-oidc" },
+    { name = "tigrbl-identity-cli" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-auth-protocol-oidc", specifier = "==0.4.0.dev2" }]
+requires-dist = [
+    { name = "tigrbl-auth-protocol-oidc", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-cli", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-identity-operator"

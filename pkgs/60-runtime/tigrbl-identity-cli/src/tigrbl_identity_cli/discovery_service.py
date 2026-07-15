@@ -1,3 +1,5 @@
+"""Runtime artifact operations for generated OIDC discovery profiles."""
+
 from __future__ import annotations
 
 import difflib

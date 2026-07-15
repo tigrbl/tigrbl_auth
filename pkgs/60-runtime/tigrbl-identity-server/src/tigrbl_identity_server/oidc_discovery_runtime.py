@@ -60,11 +60,12 @@ def _build_openid_config(
     profile: str | None = None,
     flag_overrides: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    return build_openid_config(
+    deployment = resolve_deployment(
         settings_obj or settings,
         profile=profile,
         flag_overrides=flag_overrides,
     )
+    return build_openid_config(deployment)
 
 
 @lru_cache(maxsize=8)

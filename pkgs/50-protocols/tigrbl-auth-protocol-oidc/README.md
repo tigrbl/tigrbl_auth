@@ -32,6 +32,9 @@ runtime = OidcProviderRuntime(branding=TenantBrandingRegistry())
 ## Package Boundary
 
 - OpenID Provider metadata and discovery behavior
+- Discovery metadata projection consumes an injected deployment view; profile
+  resolution, caching, HTTP publication, and artifact file operations remain
+  in layers 60 and 80.
 - ID Token, UserInfo, claims, `acr`, `amr`, session, and logout protocol behavior
 - `schemas.py` owns OIDC logout request and response wire models.
 - Provider-facing OIDC wire validation below API front-door assembly

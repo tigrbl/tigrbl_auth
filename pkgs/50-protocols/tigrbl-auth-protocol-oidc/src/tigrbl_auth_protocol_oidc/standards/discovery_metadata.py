@@ -7,10 +7,8 @@ contract/reporting workflows.
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Mapping, Protocol
 
-from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
-from tigrbl_identity_runtime.http_standards.well_known import WELL_KNOWN_ENDPOINTS
 from tigrbl_identity_jose.standards.rfc7516 import jwe_policy_metadata
 from tigrbl_auth_protocol_oauth.standards.jwt_client_auth import (
     token_endpoint_auth_methods_supported,
@@ -27,29 +25,26 @@ from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
     discovery_policy_metadata,
 )
 
-
-def _as_deployment(
-    settings_obj: object | ResolvedDeployment | None = None,
-    *,
-    profile: str | None = None,
-    flag_overrides: dict[str, Any] | None = None,
-) -> ResolvedDeployment:
-    if isinstance(settings_obj, ResolvedDeployment):
-        return settings_obj
-    return resolve_deployment(
-        settings_obj, profile=profile, flag_overrides=flag_overrides
-    )
+OAUTH_PROTECTED_RESOURCE_PATH = "/.well-known/oauth-protected-resource"
 
 
-def build_openid_config(
-    settings_obj: object | ResolvedDeployment | None = None,
-    *,
-    profile: str | None = None,
-    flag_overrides: dict[str, Any] | None = None,
-) -> dict[str, Any]:
-    deployment = _as_deployment(
-        settings_obj, profile=profile, flag_overrides=flag_overrides
-    )
+class OidcDiscoveryDeployment(Protocol):
+    """Runtime-neutral deployment view required by discovery projection."""
+
+    issuer: str | None
+    profile: str
+    flags: Mapping[str, Any]
+    active_capabilities: tuple[str, ...]
+
+    def flag_enabled(self, flag: str) -> bool: ...
+
+    def route_enabled(self, path: str) -> bool: ...
+
+    def capability_enabled(self, capability: str) -> bool: ...
+
+
+def build_openid_config(deployment: OidcDiscoveryDeployment) -> dict[str, Any]:
+    """Project an injected deployment into OIDC discovery metadata."""
     issuer = str(deployment.issuer or ISSUER)
     scopes = ["openid", "profile", "email", "address", "phone"]
     claims = ["sub", "name", "email", "address", "phone_number"]
@@ -123,10 +118,10 @@ def build_openid_config(
     ):
         config["pushed_authorization_request_endpoint"] = f"{issuer}/par"
     if bool(deployment.flags.get("enable_rfc9728", False)) and deployment.route_enabled(
-        WELL_KNOWN_ENDPOINTS["oauth_protected_resource"]
+        OAUTH_PROTECTED_RESOURCE_PATH
     ):
         config["protected_resource_metadata"] = (
-            f"{issuer}{WELL_KNOWN_ENDPOINTS['oauth_protected_resource']}"
+            f"{issuer}{OAUTH_PROTECTED_RESOURCE_PATH}"
         )
     if (
         deployment.flag_enabled("enable_rfc8705")
@@ -146,4 +141,8 @@ def build_openid_config(
     return config
 
 
-__all__ = ["build_openid_config"]
+__all__ = [
+    "OAUTH_PROTECTED_RESOURCE_PATH",
+    "OidcDiscoveryDeployment",
+    "build_openid_config",
+]

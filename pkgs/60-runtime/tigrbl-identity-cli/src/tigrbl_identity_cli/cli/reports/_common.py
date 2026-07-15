@@ -85,7 +85,7 @@ from tigrbl_identity_operator.repo_truth import (
 from tigrbl_identity_cli.package_maturity import evaluate_package_maturity
 from tigrbl_identity_runtime import build_runtime_hash_matrix, registered_runner_names, runner_registry_manifest
 from tigrbl_identity_storage_runtime.operator_store import OperationContext, operator_state_root, operator_store_summary
-from tigrbl_auth_protocol_oidc.discovery_service import diff_discovery, publish_discovery, validate_discovery
+from tigrbl_identity_cli.discovery_service import diff_discovery, publish_discovery, validate_discovery
 from tigrbl_identity_storage_runtime.resource_service import (
     create_resource,
     delete_resource,

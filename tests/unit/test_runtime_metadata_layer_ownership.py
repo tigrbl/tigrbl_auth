@@ -27,8 +27,7 @@ def test_runtime_capability_metadata_is_owned_by_layer_60_certification() -> Non
 
 def test_runtime_metadata_consumers_target_the_layer_60_owner() -> None:
     facade = (
-        ROOT
-        / "pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/security/runtime_metadata.py"
+        ROOT / "pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/security/runtime_metadata.py"
     ).read_text(encoding="utf-8")
     server = (
         ROOT
@@ -56,7 +55,9 @@ def test_layer_50_resource_server_has_no_certification_runtime_dependency() -> N
     assert "tigrbl-identity-contracts" in certification_manifest
 
 
-def test_resource_server_contract_module_is_a_runtime_neutral_compatibility_export() -> None:
+def test_resource_server_contract_module_is_a_runtime_neutral_compatibility_export() -> (
+    None
+):
     source = (
         ROOT
         / "pkgs/50-protocols/tigrbl-authz-resource-server/src"
@@ -93,3 +94,60 @@ def test_oauth_security_profiles_consume_injected_runtime_state() -> None:
     assert "tigrbl_identity_runtime" not in verifier_contract
     assert "deployment_from_request" in server_adapter
     assert "build_protected_resource_verifier_contract" in server_adapter
+
+
+def test_oidc_discovery_projection_consumes_injected_runtime_state() -> None:
+    oidc_root = (
+        ROOT
+        / "pkgs/50-protocols/tigrbl-auth-protocol-oidc/src"
+        / "tigrbl_auth_protocol_oidc"
+    )
+    rp_client = (
+        ROOT
+        / "pkgs/50-protocols/tigrbl-auth-protocol-rp/src"
+        / "tigrbl_auth_protocol_rp/discovery_client.py"
+    ).read_text(encoding="utf-8")
+    metadata = (oidc_root / "standards/discovery_metadata.py").read_text(
+        encoding="utf-8"
+    )
+    owner = (oidc_root / "standards/discovery.py").read_text(encoding="utf-8")
+    server_runtime = (
+        ROOT
+        / "pkgs/60-runtime/tigrbl-identity-server/src"
+        / "tigrbl_identity_server/oidc_discovery_runtime.py"
+    ).read_text(encoding="utf-8")
+    facade = (
+        ROOT / "pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/oidc_discovery.py"
+    ).read_text(encoding="utf-8")
+
+    assert "class OidcDiscoveryDeployment(Protocol)" in metadata
+    assert "def build_openid_config(deployment:" in metadata
+    for source in (metadata, owner, rp_client):
+        assert "tigrbl_identity_runtime" not in source
+        assert "tigrbl_identity_storage_runtime" not in source
+    assert "resolve_deployment" in server_runtime
+    assert "tigrbl_identity_server.oidc_discovery_runtime" in facade
+
+
+def test_discovery_artifact_operations_are_owned_by_the_cli_runtime() -> None:
+    old_owner = (
+        ROOT
+        / "pkgs/50-protocols/tigrbl-auth-protocol-oidc/src"
+        / "tigrbl_auth_protocol_oidc/discovery_service.py"
+    )
+    canonical_owner = (
+        ROOT
+        / "pkgs/60-runtime/tigrbl-identity-cli/src"
+        / "tigrbl_identity_cli/discovery_service.py"
+    )
+
+    assert not old_owner.exists()
+    assert canonical_owner.exists()
+    source = canonical_owner.read_text(encoding="utf-8")
+    for operation in (
+        "show_discovery",
+        "validate_discovery",
+        "publish_discovery",
+        "diff_discovery",
+    ):
+        assert f"def {operation}" in source

@@ -36,6 +36,9 @@ verifier = make_pkce_verifier()
 
 - Relying Party and OAuth client protocol behavior
 - Discovery, authorization URL, PKCE, callback, token exchange, UserInfo, logout, and session helpers
+- Discovery metadata semantics are consumed from the OIDC protocol package;
+  runtime deployment resolution and provider-side publication are not owned by
+  the RP package.
 - App-side protocol integration consuming an issuer
 - Browser/client storage and no-client-secret policy helpers
 

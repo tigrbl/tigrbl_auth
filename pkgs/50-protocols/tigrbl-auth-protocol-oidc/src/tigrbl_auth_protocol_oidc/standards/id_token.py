@@ -9,10 +9,12 @@ from hashlib import sha256
 from typing import Any, Iterable, Mapping
 
 from swarmauri_core.crypto.types import JWAAlg
-from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
+from tigrbl_identity_contracts.protocol_configuration import (
+    protocol_settings as settings,
+)
 from tigrbl_identity_core.errors import InvalidTokenError
 from tigrbl_identity_jose.oidc_key_runtime import (
-    _RSA_KEY_PATH,
+    _RSA_KEY_PATH,  # noqa: F401 - private compatibility patch point
     ensure_rsa_jwt_key,
     id_token_service,
     rsa_key_provider,
@@ -30,7 +32,9 @@ _service_cache = None
 def _header_alg(token: str) -> str:
     try:
         segment = token.split(".")[0]
-        header = json.loads(base64.urlsafe_b64decode(segment + "=" * (-len(segment) % 4)))
+        header = json.loads(
+            base64.urlsafe_b64decode(segment + "=" * (-len(segment) % 4))
+        )
         return str(header.get("alg", "")).lower()
     except Exception:
         return ""
@@ -39,7 +43,9 @@ def _header_alg(token: str) -> str:
 def oidc_hash(value: str) -> str:
     """Return the OIDC half-hash used by at_hash/c_hash/s_hash."""
     digest = sha256(value.encode("ascii")).digest()
-    return base64.urlsafe_b64encode(digest[: len(digest) // 2]).decode("ascii").rstrip("=")
+    return (
+        base64.urlsafe_b64encode(digest[: len(digest) // 2]).decode("ascii").rstrip("=")
+    )
 
 
 async def mint_id_token(
@@ -84,14 +90,7 @@ async def verify_id_token(
 
 
 async def rotate_rsa_jwt_key() -> str:
-    kid = await _rotate_rsa_jwt_key()
-    try:
-        from tigrbl_auth_protocol_oidc.standards.discovery import refresh_discovery_cache
-
-        refresh_discovery_cache()
-    except Exception:
-        pass
-    return kid
+    return await _rotate_rsa_jwt_key()
 
 
 __all__ = [

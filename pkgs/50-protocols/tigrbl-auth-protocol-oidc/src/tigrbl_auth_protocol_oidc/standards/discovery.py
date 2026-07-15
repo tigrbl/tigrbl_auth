@@ -1,22 +1,16 @@
-"""Pure OIDC Discovery 1.0 metadata ownership and cached projections."""
+"""Pure OIDC Discovery 1.0 metadata ownership and projection."""
 
 from __future__ import annotations
 
-import json
-from functools import lru_cache
-from typing import Any, Final
+from typing import Final
 
 from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import (
     ISSUER,
     JWKS_PATH,
 )
-from tigrbl_identity_contracts.protocol_configuration import (
-    protocol_settings as settings,
-)
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
-from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
 
-from .discovery_metadata import build_openid_config
+from .discovery_metadata import OidcDiscoveryDeployment, build_openid_config
 
 
 OIDC_DISCOVERY_SPEC_URL: Final[str] = (
@@ -34,46 +28,7 @@ OWNER = StandardOwner(
 )
 
 
-def _settings_signature(
-    settings_obj: object | None = None,
-    *,
-    profile: str | None = None,
-    flag_overrides: dict[str, Any] | None = None,
-) -> str:
-    deployment = resolve_deployment(
-        settings_obj or settings,
-        profile=profile,
-        flag_overrides=flag_overrides,
-    )
-    return json.dumps(deployment.to_manifest(), sort_keys=True)
-
-
-def _build_openid_config(
-    settings_obj: object | ResolvedDeployment | None = None,
-    *,
-    profile: str | None = None,
-    flag_overrides: dict[str, Any] | None = None,
-) -> dict[str, Any]:
-    return build_openid_config(
-        settings_obj or settings,
-        profile=profile,
-        flag_overrides=flag_overrides,
-    )
-
-
-@lru_cache(maxsize=8)
-def _cached_openid_config(signature: str) -> dict[str, Any]:
-    try:
-        manifest = json.loads(signature)
-        if isinstance(manifest, dict):
-            return _build_openid_config(ResolvedDeployment(**manifest))
-    except Exception:
-        pass
-    return _build_openid_config()
-
-
-def refresh_discovery_cache() -> None:
-    _cached_openid_config.cache_clear()
+_build_openid_config = build_openid_config
 
 
 def describe() -> dict[str, object]:
@@ -90,10 +45,9 @@ __all__ = [
     "ISSUER",
     "JWKS_PATH",
     "OIDC_DISCOVERY_SPEC_URL",
+    "OidcDiscoveryDeployment",
     "OWNER",
     "_build_openid_config",
-    "_cached_openid_config",
-    "_settings_signature",
+    "build_openid_config",
     "describe",
-    "refresh_discovery_cache",
 ]
