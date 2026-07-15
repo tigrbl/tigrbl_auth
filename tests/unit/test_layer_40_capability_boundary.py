@@ -46,6 +46,9 @@ def test_layer_40_contains_only_registered_multi_component_use_cases() -> None:
         "tigrbl-pushed-authorization-capability": (
             "coordinate durable pushed-request creation with optional audit recording"
         ),
+        "tigrbl-protected-resource-authorization-capability": (
+            "coordinate normalized protected-resource token and claims authorization"
+        ),
         "tigrbl-replay-protection-capability": (
             "coordinate normalized replay reservations across protocol mappings, "
             "durable repositories, and replaceable providers"

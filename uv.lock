@@ -3190,6 +3190,7 @@ dependencies = [
     { name = "tigrbl-platform-attestation-provider" },
     { name = "tigrbl-policy-evaluation-capability" },
     { name = "tigrbl-principal-authentication" },
+    { name = "tigrbl-protected-resource-authorization-capability" },
     { name = "tigrbl-protocol-artifact-processing" },
     { name = "tigrbl-public-subject-identifier-concrete" },
     { name = "tigrbl-pushed-authorization-capability" },
@@ -3565,6 +3566,7 @@ requires-dist = [
     { name = "tigrbl-platform-attestation-provider", editable = "pkgs/20-providers/tigrbl-platform-attestation-provider" },
     { name = "tigrbl-policy-evaluation-capability", editable = "pkgs/40-capabilities/tigrbl-policy-evaluation-capability" },
     { name = "tigrbl-principal-authentication", editable = "pkgs/40-capabilities/tigrbl-principal-authentication" },
+    { name = "tigrbl-protected-resource-authorization-capability", editable = "pkgs/40-capabilities/tigrbl-protected-resource-authorization-capability" },
     { name = "tigrbl-protocol-artifact-processing", editable = "pkgs/40-capabilities/tigrbl-protocol-artifact-processing" },
     { name = "tigrbl-public-subject-identifier-concrete", editable = "pkgs/10-concrete/tigrbl-public-subject-identifier-concrete" },
     { name = "tigrbl-pushed-authorization-capability", editable = "pkgs/40-capabilities/tigrbl-pushed-authorization-capability" },
@@ -6611,6 +6613,23 @@ requires-dist = [
     { name = "tigrbl-authenticator-service-key-local", specifier = "==0.1.0" },
     { name = "tigrbl-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-protected-resource-authorization-capability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/40-capabilities/tigrbl-protected-resource-authorization-capability" }
+dependencies = [
+    { name = "tigrbl-capability" },
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-security-trust-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-capability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
 ]
 
 [[package]]
