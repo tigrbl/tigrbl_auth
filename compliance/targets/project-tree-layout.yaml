@@ -26,57 +26,61 @@ project_tree:
   - tests/e2e
   - tests/perf
   - tests/examples
-  - tigrbl_auth/api
-  - tigrbl_auth/tables
-  - tigrbl_auth/ops
-  - tigrbl_auth/services
-  - tigrbl_auth/standards
-  - tigrbl_auth/security
-  - tigrbl_auth/config
-  - tigrbl_auth/adapters
-  - tigrbl_auth/schemas
-  - tigrbl_auth/migrations
-  - tigrbl_auth/cli
+  - pkgs/00-primitives
+  - pkgs/01-storage
+  - pkgs/02-contracts
+  - pkgs/05-bases
+  - pkgs/10-concrete
+  - pkgs/20-providers
+  - pkgs/30-storage-runtime
+  - pkgs/40-capabilities
+  - pkgs/50-protocols
+  - pkgs/60-runtime
+  - pkgs/70-facade
+  - pkgs/80-apis
   required_files:
-  - tigrbl_auth/plugin.py
-  - tigrbl_auth/gateway.py
-  - tigrbl_auth/api/app.py
-  - tigrbl_auth/api/surfaces.py
+  - pyproject.toml
+  - uv.lock
+  - pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/app.py
+  - pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/gateway.py
+  - pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/surfaces.py
+  - pkgs/60-runtime/tigrbl-identity-cli/src/tigrbl_identity_cli/cli
+  - pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/__init__.py
   - docs/architecture/PROJECT_TREE_LAYOUT.md
   - docs/architecture/MIGRATION_MOVE_PLAN.md
   - compliance/mappings/current-to-target-paths.yaml
   - compliance/targets/project-tree-layout.yaml
   runtime_planes:
     api:
-      path: tigrbl_auth/api
+      path: pkgs/80-apis
       ownership: transport
     tables:
-      path: tigrbl_auth/tables
+      path: pkgs/01-storage
       ownership: persistence
     ops:
-      path: tigrbl_auth/ops
+      path: pkgs/30-storage-runtime
       ownership: transaction orchestration
     services:
-      path: tigrbl_auth/services
-      ownership: reusable domain services
+      path: pkgs/40-capabilities
+      ownership: mountable and reportable capabilities
     standards:
-      path: tigrbl_auth/standards
-      ownership: protocol behavior
+      path: pkgs/50-protocols
+      ownership: versioned protocol behavior and capability mapping
     security:
-      path: tigrbl_auth/security
-      ownership: cross-cutting hardening
+      path: pkgs/20-providers
+      ownership: environment-backed providers and cross-cutting hardening
     config:
-      path: tigrbl_auth/config
+      path: pkgs/60-runtime
       ownership: profile and feature resolution
     adapters:
-      path: tigrbl_auth/adapters
-      ownership: integration seams
+      path: pkgs/60-runtime
+      ownership: composition and integration seams
     cli:
-      path: tigrbl_auth/cli
+      path: pkgs/60-runtime/tigrbl-identity-cli
       ownership: operator and certification UX
     plugin:
-      path: tigrbl_auth/plugin.py
-      ownership: installable composition
+      path: pkgs/70-facade
+      ownership: stable public facade
     gateway:
-      path: tigrbl_auth/gateway.py
+      path: pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/gateway.py
       ownership: standalone composition

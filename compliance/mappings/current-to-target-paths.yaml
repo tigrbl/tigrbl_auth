@@ -15,59 +15,59 @@ replacement_order:
 - cli/contracts/evidence/release automation
 moves:
 - source: tigrbl_auth/app.py
-  target: tigrbl_auth/api/app.py
+  target: pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/app.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tigrbl_auth/routers/surface.py
-  target: tigrbl_auth/api/surfaces.py
+  target: pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/surfaces.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tigrbl_auth/routers/auth_flows.py
-  target: tigrbl_auth/api/rest/routers/login.py
+  target: pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/login_surface.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tigrbl_auth/routers/authz/oidc.py
-  target: tigrbl_auth/api/rest/routers/authorize.py
+  target: pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/authorization_surface.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tigrbl_auth/orm
-  target: tigrbl_auth/tables
+  target: pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables
   status: completed
   legacy_boundary: legacy_transition
 - source: tigrbl_auth/db.py
-  target: tigrbl_auth/tables/engine.py
+  target: pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/engine.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tigrbl_auth/runtime_cfg.py
-  target: tigrbl_auth/config/settings.py
+  target: pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/settings.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tigrbl_auth/backends.py
-  target: tigrbl_auth/services/auth_backends.py
+  target: pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/auth.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tigrbl_auth/crypto.py
-  target: tigrbl_auth/services/key_management.py
+  target: pkgs/20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose/key_management.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tigrbl_auth/jwtoken.py
-  target: tigrbl_auth/services/token_service.py
+  target: pkgs/40-capabilities/tigrbl-token-issuance-capability/src/tigrbl_token_issuance_capability/__init__.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tigrbl_auth/oidc_discovery.py
-  target: tigrbl_auth/standards/oidc/discovery.py
+  target: pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/discovery_metadata.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tigrbl_auth/oidc_id_token.py
-  target: tigrbl_auth/standards/oidc/id_token.py
+  target: pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/id_token.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tigrbl_auth/oidc_userinfo.py
-  target: tigrbl_auth/standards/oidc/userinfo.py
+  target: pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/userinfo_runtime.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tigrbl_auth/rfc
-  target: tigrbl_auth/standards
+  target: pkgs/50-protocols
   status: completed
   legacy_boundary: legacy_transition
 - source: tests/i9n
