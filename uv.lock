@@ -5839,14 +5839,20 @@ name = "tigrbl-identity-cli"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/60-runtime/tigrbl-identity-cli" }
 dependencies = [
+    { name = "tigrbl-identity-admin-control-plane" },
     { name = "tigrbl-identity-author" },
+    { name = "tigrbl-identity-runtime" },
+    { name = "tigrbl-identity-storage-runtime" },
     { name = "tigrbl-secret-hashing-bcrypt-provider" },
     { name = "tomli", marker = "python_full_version < '3.11'" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "tigrbl-identity-admin-control-plane", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-author", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage-runtime", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-secret-hashing-bcrypt-provider", specifier = "==0.1.0" },
     { name = "tomli", marker = "python_full_version < '3.11'", specifier = ">=2.0" },
 ]

@@ -8,6 +8,12 @@ from .models import (
     AdminResourceStatus,
     App,
 )
+from .operator import (
+    OPERATOR_ADMINISTRATION_OPERATIONS,
+    OperatorAdministrationAuthorizer,
+    OperatorAdministrationCapability,
+    OperatorAdministrationOperation,
+)
 from .service import (
     AdminAuditListOperation,
     AdminAuditOperation,
@@ -34,4 +40,8 @@ __all__ = [
     "AdminResourceStatus",
     "AdminUpdateOperation",
     "App",
+    "OPERATOR_ADMINISTRATION_OPERATIONS",
+    "OperatorAdministrationAuthorizer",
+    "OperatorAdministrationCapability",
+    "OperatorAdministrationOperation",
 ]

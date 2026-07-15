@@ -353,26 +353,27 @@ __all__ = ["HANDLER_MAP"]
 # Service-layer overrides
 # -----------------------------------------------------------------------------
 
-from tigrbl_identity_storage_runtime.operator_store import OperationContext, TransactionResult, ArtifactResult
-from tigrbl_identity_storage_runtime.resource_service import (
+from tigrbl_identity_cli.operator_administration import (
+    ArtifactResult,
+    OperationContext,
     OperatorStateError,
     create_resource as _svc_create_resource,
     delete_resource as _svc_delete_resource,
     get_resource as _svc_get_resource,
-    list_resource_result as _svc_list_resource_result,
+    key_delete as delete_operator_key_for_context,
+    key_export as export_operator_key_for_context,
+    key_generate as generate_operator_key_for_context,
+    key_get as get_operator_key_for_context,
+    key_import as import_operator_key_for_context,
+    key_list as list_operator_keys_for_context,
+    key_publish_jwks as publish_operator_jwks_for_context,
+    key_retire as retire_operator_key_for_context,
+    key_rotate as rotate_operator_key_for_context,
+    list_resources as _svc_list_resource_result,
+    lock_identity as _svc_lock_identity,
     rotate_client_secret as _svc_rotate_client_secret,
+    set_identity_password as _svc_set_identity_password,
     toggle_resource as _svc_toggle_resource,
+    TransactionResult,
     update_resource as _svc_update_resource,
 )
-from tigrbl_identity_storage_runtime.key_management import (
-    delete_operator_key_for_context,
-    export_operator_key_for_context,
-    generate_operator_key_for_context,
-    get_operator_key_for_context,
-    import_operator_key_for_context,
-    list_operator_keys_for_context,
-    publish_operator_jwks_for_context,
-    retire_operator_key_for_context,
-    rotate_operator_key_for_context,
-)
-from tigrbl_identity_storage_runtime.resource_service import lock_identity as _svc_lock_identity, set_identity_password as _svc_set_identity_password

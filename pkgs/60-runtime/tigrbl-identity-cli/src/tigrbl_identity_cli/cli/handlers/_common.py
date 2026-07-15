@@ -28,7 +28,9 @@ from tigrbl_identity_cli.cli.claims import run_lint
 from tigrbl_identity_cli.cli.feature_surface import run_feature_surface_modularity_check
 from tigrbl_identity_cli.cli.governance import run_governance_install_check
 from tigrbl_identity_cli.cli.metadata import build_cli_conformance_snapshot, build_cli_contract_manifest
-from tigrbl_identity_storage_runtime.operator_store import operator_state_root as _durable_operator_state_root
+from tigrbl_identity_cli.operator_administration import (
+    durable_operator_state_root as _durable_operator_state_root,
+)
 from tigrbl_identity_cli.cli.project_tree import run_migration_plan_check, run_project_tree_layout_check
 from tigrbl_identity_cli.cli.reports import (
     build_adr_index,

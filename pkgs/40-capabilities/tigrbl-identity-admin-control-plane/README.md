@@ -16,6 +16,12 @@ resource servers, and policies plus `get`, `metadata`, `list`, `update`,
 `delete`, and `list_audit_events`. Every operation is required and construction
 fails when a target is absent.
 
+`OperatorAdministrationCapability` is the policy-gated operator surface used by
+layer-60 command runtimes. It receives an authorization callable and the
+layer-30 resource, identity-secret, and key-lifecycle operations. Authorization
+runs before every delegated operation. Its effective operation set is available
+through the standard capability report.
+
 ## Protocol consumers
 
 No layer-50 protocol currently consumes this administrative capability. Layer

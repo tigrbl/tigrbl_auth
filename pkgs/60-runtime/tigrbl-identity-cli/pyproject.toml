@@ -30,7 +30,10 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
+    "tigrbl-identity-admin-control-plane==0.4.0.dev2",
     "tigrbl-identity-author==0.4.0.dev2",
+    "tigrbl-identity-runtime==0.4.0.dev2",
+    "tigrbl-identity-storage-runtime==0.4.0.dev2",
     "tigrbl-secret-hashing-bcrypt-provider==0.1.0",
     "tomli>=2.0; python_version < '3.11'",
 ]
