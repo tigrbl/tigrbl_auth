@@ -11,7 +11,6 @@ This module deliberately keeps the session-management claim boundary truthful:
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
 from hashlib import sha256
 from typing import Final
 
@@ -20,18 +19,7 @@ from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from urllib.parse import urlparse
 from uuid import UUID
 
-from tigrbl_identity_runtime.deployment import (
-    deployment_from_request,
-    resolve_deployment,
-)
-from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
-from tigrbl_identity_runtime.http_standards.cookies import (
-    extract_session_cookie,
-    hash_cookie_secret,
-    new_session_cookie_secret,
-    new_session_state_salt,
-    parse_session_cookie_value,
-)
+from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER
 
 STATUS: Final[str] = "browser-session-runtime"
 
@@ -48,18 +36,6 @@ OWNER = StandardOwner(
         "and discovery/contracts remain truthful about that omission."
     ),
 )
-
-
-def _persistence():
-    from tigrbl_identity_storage_runtime.oidc_persistence import oidc_persistence
-
-    return oidc_persistence
-
-
-def _utc(value: datetime | None) -> datetime | None:
-    if value is None:
-        return None
-    return value if value.tzinfo is not None else value.replace(tzinfo=timezone.utc)
 
 
 def _origin(uri: str | None) -> str:
@@ -84,7 +60,7 @@ def compute_session_state(
     issuer: str | None = None,
 ) -> str:
     origin = _origin(redirect_uri)
-    payload = f"{client_id} {origin} {session_id} {salt} {issuer or settings.issuer}"
+    payload = f"{client_id} {origin} {session_id} {salt} {issuer or ISSUER}"
     return f"{sha256(payload.encode('utf-8')).hexdigest()}.{salt}"
 
 
@@ -167,76 +143,6 @@ def validate_session_state(
     )
 
 
-async def create_browser_session(
-    *,
-    user_id: UUID,
-    tenant_id: UUID,
-    username: str,
-    client_id: UUID | None = None,
-    expires_at: datetime | None = None,
-):
-    persistence = _persistence()
-    secret = new_session_cookie_secret()
-    salt = new_session_state_salt()
-    row = await persistence.create_session_async(
-        user_id=user_id,
-        tenant_id=tenant_id,
-        username=username,
-        client_id=client_id,
-        expires_at=expires_at,
-        cookie_secret_hash=hash_cookie_secret(secret),
-        session_state_salt=salt,
-    )
-    return row, secret
-
-
-async def resolve_browser_session(request, *, deployment=None):
-    deployment = (
-        deployment
-        if deployment is not None
-        else deployment_from_request(request, settings)
-    )
-    if not deployment.flag_enabled("enable_oidc_session_management"):
-        return None
-    parsed = parse_session_cookie_value(extract_session_cookie(request))
-    if parsed is None:
-        return None
-    persistence = _persistence()
-    row = await persistence.get_active_session_async(parsed.session_id)
-    if row is None:
-        return None
-    if parsed.secret:
-        if not row.cookie_secret_hash or row.cookie_secret_hash != hash_cookie_secret(
-            parsed.secret
-        ):
-            return None
-    await persistence.touch_session_async(row.id)
-    return row
-
-
-async def bind_browser_session_client(session_id: UUID, *, client_id: UUID | None):
-    return await _persistence().bind_session_client_async(
-        session_id, client_id=client_id
-    )
-
-
-async def maybe_rotate_browser_session_cookie(session_row):
-    if session_row is None:
-        return None
-    renewal_seconds = max(int(settings.session_cookie_renewal_seconds), 60)
-    now = datetime.now(timezone.utc)
-    rotated_at = _utc(getattr(session_row, "cookie_rotated_at", None)) or _utc(
-        getattr(session_row, "cookie_issued_at", None)
-    )
-    if rotated_at is None or (now - rotated_at).total_seconds() >= renewal_seconds:
-        secret = new_session_cookie_secret()
-        await _persistence().rotate_session_cookie_secret_async(
-            session_row.id, cookie_secret_hash=hash_cookie_secret(secret)
-        )
-        return secret
-    return None
-
-
 def session_state_for_client(
     session_row,
     *,
@@ -247,10 +153,13 @@ def session_state_for_client(
 ) -> str | None:
     if session_row is None:
         return None
-    deployment = deployment if deployment is not None else resolve_deployment(settings)
+    if deployment is None:
+        raise TypeError("session_state_for_client requires an injected deployment")
     if not deployment.flag_enabled("enable_oidc_session_management"):
         return None
-    salt = getattr(session_row, "session_state_salt", None) or new_session_state_salt()
+    salt = getattr(session_row, "session_state_salt", None)
+    if not salt:
+        return None
     return compute_session_state(
         client_id=client_id,
         redirect_uri=redirect_uri,
@@ -287,33 +196,14 @@ def validate_session_state_for_client(
     )
 
 
-async def touch_browser_session(session_id: UUID):
-    return await _persistence().touch_session_async(session_id)
-
-
-async def terminate_browser_session(session_id: UUID, **kwargs):
-    return await _persistence().terminate_session_async(session_id, **kwargs)
-
-
-def describe(*, request=None, deployment=None) -> dict[str, object]:
-    if deployment is None:
-        deployment = (
-            deployment_from_request(request, settings)
-            if request is not None
-            else resolve_deployment(settings)
-        )
+def describe(*, cross_site_logout_enabled: bool = True) -> dict[str, object]:
     return describe_owner(
         OWNER,
-        cookie_name=settings.session_cookie_name,
-        cookie_rotation_seconds=int(settings.session_cookie_renewal_seconds),
-        same_site_default=settings.session_cookie_samesite,
         session_state_validation_supported=True,
         session_state_origin_bound=True,
         auth_code_linkage_supported=True,
         check_session_iframe_claimed=False,
-        cross_site_logout_enabled=deployment.flag_enabled(
-            "enable_oidc_frontchannel_logout"
-        ),
+        cross_site_logout_enabled=cross_site_logout_enabled,
     )
 
 
@@ -322,17 +212,11 @@ __all__ = [
     "SessionStateValidation",
     "StandardOwner",
     "OWNER",
-    "bind_browser_session_client",
     "compute_session_state",
-    "create_browser_session",
     "describe",
-    "maybe_rotate_browser_session_cookie",
     "parse_session_state",
-    "resolve_browser_session",
     "session_client_origin",
     "session_state_for_client",
-    "terminate_browser_session",
-    "touch_browser_session",
     "validate_session_state",
     "validate_session_state_for_client",
 ]

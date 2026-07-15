@@ -130,7 +130,7 @@ def test_logout_request_uses_request_scoped_deployment_for_issuer_binding(
     session_row = SimpleNamespace(id=uuid4(), tenant_id=uuid4(), user_id=uuid4())
     observed: dict[str, object] = {}
 
-    async def _resolve_browser_session(request, *, deployment=None):
+    async def _resolve_browser_session(request, *, deployment=None, db=None):
         observed["session_deployment_issuer"] = getattr(deployment, "issuer", None)
         return session_row
 

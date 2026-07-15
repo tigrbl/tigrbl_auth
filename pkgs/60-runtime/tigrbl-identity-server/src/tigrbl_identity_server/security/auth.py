@@ -12,7 +12,9 @@ from tigrbl_identity_runtime.deployment import deployment_from_request
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_server.security.context import principal_var
 from tigrbl_identity_server.security.user_lookup import first_user_by_filters
-from tigrbl_auth_protocol_oidc.standards.session_mgmt import resolve_browser_session
+from tigrbl_identity_server.security.handler_records import (
+    resolve_browser_session_record,
+)
 from tigrbl_identity_jose.jwt_coder import JWTCoder, InvalidTokenError
 from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import presented_certificate_thumbprint
 from tigrbl_auth_protocol_oauth.standards.bearer_token_usage import extract_bearer_token
@@ -48,7 +50,10 @@ async def _user_from_api_key(raw_key: str, db: AsyncSession) -> PrincipalLike | 
 
 
 async def _user_from_browser_session(request: Request, db: AsyncSession) -> User | None:
-    session = await resolve_browser_session(request)
+    deployment = deployment_from_request(request, settings)
+    session = await resolve_browser_session_record(
+        db, request, deployment=deployment
+    )
     if session is None:
         return None
     return await first_user_by_filters(db, {"id": session.user_id, "is_active": True})

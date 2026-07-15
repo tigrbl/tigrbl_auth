@@ -15,7 +15,9 @@ from tigrbl_auth_protocol_oidc.standards.frontchannel_logout import (
 from tigrbl_auth_protocol_oidc.standards.rp_initiated_logout import (
     validate_logout_request,
 )
-from tigrbl_auth_protocol_oidc.standards.session_mgmt import resolve_browser_session
+from tigrbl_identity_server.security.handler_records import (
+    resolve_browser_session_record,
+)
 from tigrbl_identity_runtime.deployment import deployment_from_request
 from tigrbl_identity_runtime.http_standards.cookies import (
     clear_session_cookie,
@@ -69,6 +71,14 @@ def _cookie_session_id(request) -> UUID | None:
         return parsed.session_id if parsed is not None else None
     except Exception:
         return None
+
+
+async def resolve_browser_session(request, *, deployment, db):
+    """Resolve a browser session through the layer-60 table operation runtime."""
+
+    return await resolve_browser_session_record(
+        db, request, deployment=deployment
+    )
 
 
 async def build_logout_plan(
@@ -200,7 +210,7 @@ async def logout_request(*, request, db):
         body = getattr(request, "body", b"") or b""
         params = _body_params(body)
 
-    session = await resolve_browser_session(request, deployment=deployment)
+    session = await resolve_browser_session(request, deployment=deployment, db=db)
     if session is None and params.get("sid"):
         try:
             session = await get_session_async(UUID(str(params["sid"])))

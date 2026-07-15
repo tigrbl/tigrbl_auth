@@ -196,3 +196,26 @@ def test_durable_oidc_logout_planning_is_owned_by_layer_60() -> None:
     assert "tigrbl_identity_runtime" not in rp_compatibility
     assert "tigrbl_identity_storage_runtime" not in rp_compatibility
     assert "build_logout_plan" not in rp_compatibility
+
+
+def test_oidc_session_protocol_is_runtime_and_storage_neutral() -> None:
+    oidc_package = ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oidc"
+    session_protocol = (
+        oidc_package
+        / "src/tigrbl_auth_protocol_oidc/standards/session_mgmt.py"
+    ).read_text(encoding="utf-8")
+    manifest = (oidc_package / "pyproject.toml").read_text(encoding="utf-8")
+    handler_runtime = (
+        ROOT
+        / "pkgs/60-runtime/tigrbl-identity-server/src"
+        / "tigrbl_identity_server/security/handler_records.py"
+    ).read_text(encoding="utf-8")
+
+    assert "tigrbl_identity_runtime" not in session_protocol
+    assert "tigrbl_identity_storage_runtime" not in session_protocol
+    assert "resolve_browser_session" not in session_protocol
+    assert "create_browser_session" not in session_protocol
+    assert "tigrbl-identity-runtime" not in manifest
+    assert "tigrbl-identity-storage" not in manifest
+    assert "resolve_browser_session_record" in handler_runtime
+    assert "create_browser_session_record" in handler_runtime
