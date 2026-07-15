@@ -1075,6 +1075,14 @@ The live package audit requires these concrete updates:
   supported features per revision, compatibility direction, and configuration
   migration functions. Draft support is labeled draft.
 
+C9 checkpoint status (2026-07-15): every direct layer-50 package now carries
+the required eight-module specification surface, the protocol tree has no
+upward runtime/storage imports, and wildcard imports have been eliminated and
+blocked by a package-boundary test. Remaining C9 closure work is the
+requirement-by-requirement capability-binding audit, neutral claim/scope and
+HAIP composition verification, and exact revision/compatibility/migration
+evidence for every independently versioned specification.
+
 Protocol equivalence tests prove this chain:
 
 ```text

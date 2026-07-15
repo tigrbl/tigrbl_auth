@@ -21,6 +21,17 @@ RFC8693_SPEC_URL = "https://www.rfc-editor.org/rfc/rfc8693"
 # Token Exchange Grant Type
 TOKEN_EXCHANGE_GRANT_TYPE = "urn:ietf:params:oauth:grant-type:token-exchange"
 
+__all__ = [
+    "RFC8693_SPEC_URL",
+    "TOKEN_EXCHANGE_GRANT_TYPE",
+    "TokenExchangeRequest",
+    "TokenExchangeResponse",
+    "TokenType",
+    "exchange_token",
+    "validate_subject_token",
+    "validate_token_exchange_request",
+]
+
 def _header_value(value: object) -> str | None:
     if value is None:
         return None

@@ -1,12 +1,21 @@
 """RFC 8693 token-exchange specification owner and compatibility exports."""
 
 from __future__ import annotations
-# ruff: noqa: F403,F405
 
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
 
-from tigrbl_auth_protocol_oauth.standards._rfc8693.runtime import *
-from tigrbl_auth_protocol_oauth.standards._rfc8693.endpoint import *
+from tigrbl_auth_protocol_oauth.standards._rfc8693 import (
+    RFC8693_SPEC_URL,
+    TOKEN_EXCHANGE_GRANT_TYPE,
+    TokenExchangeRequest,
+    TokenExchangeResponse,
+    TokenType,
+    exchange_token,
+    makeDelegationToken,
+    makeImpersonationToken,
+    validate_subject_token,
+    validate_token_exchange_request,
+)
 
 
 OWNER = StandardOwner(
@@ -34,4 +43,17 @@ def describe() -> dict[str, object]:
         spec_url=RFC8693_SPEC_URL,
     )
 
-__all__ = [name for name in globals() if not name.startswith("_")]
+__all__ = [
+    "OWNER",
+    "RFC8693_SPEC_URL",
+    "TOKEN_EXCHANGE_GRANT_TYPE",
+    "TokenExchangeRequest",
+    "TokenExchangeResponse",
+    "TokenType",
+    "describe",
+    "exchange_token",
+    "makeDelegationToken",
+    "makeImpersonationToken",
+    "validate_subject_token",
+    "validate_token_exchange_request",
+]

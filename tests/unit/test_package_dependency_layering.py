@@ -251,6 +251,23 @@ def test_all_python_packages_are_assigned_to_one_dependency_layer() -> None:
             assert PYTHON_PACKAGE_LAYERS[layer].isdisjoint(PYTHON_PACKAGE_LAYERS[other])
 
 
+def test_protocol_packages_use_explicit_import_surfaces() -> None:
+    violations: list[str] = []
+    protocol_root = PKGS / PYTHON_LAYER_FOLDERS["protocols"]
+
+    for path in sorted(protocol_root.rglob("*.py")):
+        tree = ast.parse(path.read_text(encoding="utf-8-sig"))
+        for node in ast.walk(tree):
+            if isinstance(node, ast.ImportFrom) and any(
+                alias.name == "*" for alias in node.names
+            ):
+                violations.append(
+                    f"{path.relative_to(ROOT)}:{node.lineno}: wildcard import"
+                )
+
+    assert violations == []
+
+
 def test_python_package_layers_match_filesystem_layout() -> None:
     assert set(PYTHON_LAYER_FOLDERS) == set(PYTHON_PACKAGE_LAYERS)
 
