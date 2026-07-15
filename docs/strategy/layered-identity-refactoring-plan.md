@@ -229,6 +229,18 @@ Required ownership rules:
   Tigrbl's provider resolver with the storage-engine fallback, and adds a
   workspace-wide guard against HTTP, protocol, provider, and higher-runtime
   ownership returning to layer 30.
+- [x] `4919819b` adds typed capability call/delegation failures, effective call
+  context propagation, authority narrowing, cycle rejection, and the layer-60
+  capability registry/report composer.
+- [x] `c7fe536e`, `e0dad1ae`, and `943565b2` remove durable in-memory substitutes
+  from credential issuance, presentation, security events, and the admin
+  control plane; expose distinct required/optional operations; add async-safe
+  durable seams; and derive workload/artifact readiness from effective
+  bindings.
+- [x] `09c98bcb` documents every layer-40 package's injected dependencies,
+  operations/readiness, protocol consumers, and non-goals, and adds executable
+  guards against undocumented capabilities and mutable instance stores. The C8
+  focused capability, contract, report, admin, and boundary suites pass.
 
 ## 3. Layer 00: primitives
 
@@ -730,7 +742,7 @@ flags. Tier-4 claims require independent interoperability evidence.
 - [x] C6: finish EAT token/evidence/appraisal/provider verification chain.
 - [x] C7: normalize bases and provider ownership, including password/client
   secret services.
-- [ ] C8: make every layer-40 feature composable, delegated, and reportable.
+- [x] C8: make every layer-40 feature composable, delegated, and reportable.
 - [ ] C9: complete per-specification layer-50 version/feature/compatibility and
   migration matrices.
 - [ ] C10: update runtime/facade/API/app/deployment compositions.
