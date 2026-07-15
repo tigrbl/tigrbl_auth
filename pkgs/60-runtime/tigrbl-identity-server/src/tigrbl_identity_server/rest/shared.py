@@ -11,9 +11,10 @@ from tigrbl.runtime.status import HTTPException
 from tigrbl_identity_jose.jwt_coder import JWTCoder
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
-from tigrbl_auth_protocol_oidc.standards.frontchannel_logout import mark_frontchannel_complete
-from tigrbl_auth_protocol_oidc.standards.backchannel_logout import mark_backchannel_complete
-from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import runtime_security_profile
+from tigrbl_identity_storage_runtime.oidc_persistence import oidc_persistence
+from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
+    runtime_security_profile,
+)
 
 
 class _LazyRuntimeProxy:
@@ -51,6 +52,7 @@ class _LazyRuntimeProxy:
 
     def __getattr__(self, name: str) -> Any:
         if name.startswith("async_"):
+
             async def _async_method(*args: Any, **kwargs: Any) -> Any:
                 target = await self._resolve_async()
                 method = getattr(target, name)
@@ -77,7 +79,12 @@ class _LazyRuntimeProxy:
 
 
 _jwt = _LazyRuntimeProxy(JWTCoder.default)
-_ALLOWED_GRANT_TYPES = {"password", "authorization_code", "client_credentials", "refresh_token"}
+_ALLOWED_GRANT_TYPES = {
+    "password",
+    "authorization_code",
+    "client_credentials",
+    "refresh_token",
+}
 if settings.enable_rfc8628:
     _ALLOWED_GRANT_TYPES.add("urn:ietf:params:oauth:grant-type:device_code")
 
@@ -88,7 +95,9 @@ def allowed_grant_types(settings_obj: object | None = None) -> set[str]:
     return set(policy.allowed_grant_types)
 
 
-def _require_tls(request: Request, deployment: ResolvedDeployment | None = None) -> None:
+def _require_tls(
+    request: Request, deployment: ResolvedDeployment | None = None
+) -> None:
     scope = getattr(request, "scope", {})
     scheme = scope.get("scheme") if isinstance(scope, dict) else None
     if not scheme:
@@ -104,13 +113,17 @@ def _require_tls(request: Request, deployment: ResolvedDeployment | None = None)
 
 async def _front_channel_logout(logout_id: str) -> None:
     try:
-        await mark_frontchannel_complete(UUID(logout_id))
+        await oidc_persistence.mark_logout_channel_async(
+            UUID(logout_id), channel="frontchannel", status="complete"
+        )
     except Exception:
         return None
 
 
 async def _back_channel_logout(logout_id: str) -> None:
     try:
-        await mark_backchannel_complete(UUID(logout_id))
+        await oidc_persistence.mark_logout_channel_async(
+            UUID(logout_id), channel="backchannel", status="complete"
+        )
     except Exception:
         return None

@@ -76,6 +76,9 @@ def test_build_logout_plan_uses_deployment_issuer_for_fanout(monkeypatch) -> Non
             assert session_id == session_row.id
             return logout_row
 
+        async def get_client_registration_async(self, client_id):
+            return SimpleNamespace(registration_metadata={})
+
         async def update_logout_metadata_async(
             self, logout_id, *, metadata=None, status=None
         ):
@@ -91,23 +94,25 @@ def test_build_logout_plan_uses_deployment_issuer_for_fanout(monkeypatch) -> Non
         observed["back_iss"] = kwargs["iss"]
         return {"delivery": {"status": "pending", "attempts": 0, "max_retries": 3}}
 
-    monkeypatch.setattr(rp_logout, "_persistence", lambda: _Persistence())
     monkeypatch.setattr(
-        rp_logout, "_frontchannel_builder", lambda: _frontchannel_builder
+        logout_ops, "build_frontchannel_descriptor", _frontchannel_builder
     )
-    monkeypatch.setattr(rp_logout, "_backchannel_builder", lambda: _backchannel_builder)
+    monkeypatch.setattr(
+        logout_ops, "build_backchannel_descriptor", _backchannel_builder
+    )
 
     deployment = SimpleNamespace(
         issuer="https://tenant-a.example.com",
         flag_enabled=lambda name: True,
     )
     result = asyncio.run(
-        rp_logout.build_logout_plan(
+        logout_ops.build_logout_plan(
             session_row=session_row,
             client_id=uuid4(),
             post_logout_redirect_uri="https://rp.example/logout/callback",
             state="state-1",
             deployment=deployment,
+            persistence=_Persistence(),
         )
     )
     assert result is logout_row

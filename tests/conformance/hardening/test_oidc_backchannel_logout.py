@@ -28,7 +28,7 @@ class _Persistence:
 
 def test_backchannel_descriptor_and_logout_token_validation(monkeypatch):
     _Persistence.replay_keys.clear()
-    monkeypatch.setattr(backchannel_logout, "_persistence", lambda: _Persistence())
+    persistence = _Persistence()
     descriptor = asyncio.run(
         backchannel_logout.build_backchannel_descriptor(
             client_id=uuid4(),
@@ -36,6 +36,7 @@ def test_backchannel_descriptor_and_logout_token_validation(monkeypatch):
             sub="user-1",
             iss="https://issuer.example",
             logout_id=uuid4(),
+            registration_metadata=_Registration.registration_metadata,
         )
     )
     assert descriptor["delivery"]["status"] == "pending"
@@ -44,6 +45,7 @@ def test_backchannel_descriptor_and_logout_token_validation(monkeypatch):
             descriptor["logout_token"],
             client_id=descriptor["client_id"],
             issuer="https://issuer.example",
+            register_replay=persistence.register_backchannel_replay_async,
         )
     )
     assert claims["events"]
@@ -53,5 +55,6 @@ def test_backchannel_descriptor_and_logout_token_validation(monkeypatch):
                 descriptor["logout_token"],
                 client_id=descriptor["client_id"],
                 issuer="https://issuer.example",
+                register_replay=persistence.register_backchannel_replay_async,
             )
         )

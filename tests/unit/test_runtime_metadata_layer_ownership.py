@@ -151,3 +151,48 @@ def test_discovery_artifact_operations_are_owned_by_the_cli_runtime() -> None:
         "diff_discovery",
     ):
         assert f"def {operation}" in source
+
+
+def test_oidc_logout_protocol_consumes_injected_durable_operations() -> None:
+    oidc_root = (
+        ROOT
+        / "pkgs/50-protocols/tigrbl-auth-protocol-oidc/src"
+        / "tigrbl_auth_protocol_oidc/standards"
+    )
+    protocol_sources = [
+        (oidc_root / name).read_text(encoding="utf-8")
+        for name in (
+            "_rp_logout_validation.py",
+            "backchannel_logout.py",
+            "frontchannel_logout.py",
+            "rp_initiated_logout.py",
+        )
+    ]
+    for source in protocol_sources:
+        assert "tigrbl_identity_runtime" not in source
+        assert "tigrbl_identity_storage_runtime" not in source
+    assert "registration_metadata: Mapping" in protocol_sources[1]
+    assert "register_replay:" in protocol_sources[1]
+    assert "registration_metadata: Mapping" in protocol_sources[2]
+    assert "registration_resolver:" in protocol_sources[3]
+
+
+def test_durable_oidc_logout_planning_is_owned_by_layer_60() -> None:
+    server_runtime = (
+        ROOT
+        / "pkgs/60-runtime/tigrbl-identity-server/src"
+        / "tigrbl_identity_server/logout_runtime.py"
+    ).read_text(encoding="utf-8")
+    rp_compatibility = (
+        ROOT
+        / "pkgs/50-protocols/tigrbl-auth-protocol-rp/src"
+        / "tigrbl_auth_protocol_rp/logout.py"
+    ).read_text(encoding="utf-8")
+
+    assert "async def build_logout_plan(" in server_runtime
+    assert "oidc_persistence" in server_runtime
+    assert "build_frontchannel_descriptor" in server_runtime
+    assert "build_backchannel_descriptor" in server_runtime
+    assert "tigrbl_identity_runtime" not in rp_compatibility
+    assert "tigrbl_identity_storage_runtime" not in rp_compatibility
+    assert "build_logout_plan" not in rp_compatibility

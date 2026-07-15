@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import Any, Final
+from typing import Any, Final, Mapping
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from urllib.parse import urlencode
 from uuid import UUID
 
-from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
+from tigrbl_identity_contracts.protocol_configuration import (
+    protocol_settings as settings,
+)
 
 STATUS: Final[str] = "frontchannel-logout-fanout-runtime"
 _DEFAULT_MAX_RETRIES: Final[int] = 3
@@ -25,21 +27,15 @@ OWNER = StandardOwner(
 )
 
 
-def _persistence():
-    from tigrbl_identity_storage_runtime.oidc_persistence import oidc_persistence
-
-    return oidc_persistence
-
-
 async def build_frontchannel_descriptor(
     *,
     client_id: UUID,
     sid: str,
     iss: str | None = None,
     logout_id: UUID | None = None,
+    registration_metadata: Mapping[str, Any],
 ) -> dict[str, object] | None:
-    registration = await _persistence().get_client_registration_async(client_id)
-    metadata = dict(getattr(registration, "registration_metadata", {}) or {})
+    metadata = dict(registration_metadata)
     logout_uri = metadata.get("frontchannel_logout_uri")
     if not logout_uri:
         return None
@@ -71,24 +67,6 @@ async def build_frontchannel_descriptor(
             "replay_protected": True,
         },
     }
-
-
-async def mark_frontchannel_complete(logout_id: UUID):
-    return await _persistence().mark_logout_channel_async(
-        logout_id, channel="frontchannel", status="complete"
-    )
-
-
-async def mark_frontchannel_failed(
-    logout_id: UUID, *, error: str | None = None, retry_after_seconds: int | None = None
-):
-    return await _persistence().mark_logout_channel_async(
-        logout_id,
-        channel="frontchannel",
-        status="retryable_error",
-        reason=error,
-        retry_after_seconds=retry_after_seconds,
-    )
 
 
 def validate_frontchannel_request(
@@ -124,8 +102,6 @@ __all__ = [
     "StandardOwner",
     "OWNER",
     "build_frontchannel_descriptor",
-    "mark_frontchannel_complete",
-    "mark_frontchannel_failed",
     "validate_frontchannel_request",
     "describe",
 ]

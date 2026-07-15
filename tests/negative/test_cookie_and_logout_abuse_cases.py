@@ -7,7 +7,7 @@ from uuid import uuid4
 import pytest
 
 from tigrbl_auth.standards.http.cookies import parse_session_cookie_value
-from tigrbl_auth.standards.oidc import rp_initiated_logout as rp_logout
+from tigrbl_auth_protocol_oidc.standards import rp_initiated_logout as rp_logout
 
 
 
@@ -32,12 +32,12 @@ def test_logout_redirect_requires_client_registration(monkeypatch: pytest.Monkey
             assert resolved_client_id == client_id
             return _Registration()
 
-    monkeypatch.setattr(rp_logout, '_persistence', lambda: _Persistence())
     with pytest.raises(rp_logout.HTTPException) as exc_info:
         asyncio.run(
             rp_logout.validate_post_logout_redirect_uri(
                 client_id=client_id,
                 post_logout_redirect_uri='https://rp.example/unregistered',
+                registration_metadata=_Registration.registration_metadata,
             )
         )
     assert exc_info.value.status_code == 400

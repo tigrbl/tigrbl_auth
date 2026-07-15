@@ -36,6 +36,9 @@ runtime = OidcProviderRuntime(branding=TenantBrandingRegistry())
   resolution, caching, HTTP publication, and artifact file operations remain
   in layers 60 and 80.
 - ID Token, UserInfo, claims, `acr`, `amr`, session, and logout protocol behavior
+- Front-channel, back-channel, and RP-initiated logout modules consume injected
+  registration metadata and replay operations. Durable logout planning and
+  delivery-state updates are composed by the layer-60 server runtime.
 - `schemas.py` owns OIDC logout request and response wire models.
 - Provider-facing OIDC wire validation below API front-door assembly
 - OIDC behavior layered on OAuth protocol foundations

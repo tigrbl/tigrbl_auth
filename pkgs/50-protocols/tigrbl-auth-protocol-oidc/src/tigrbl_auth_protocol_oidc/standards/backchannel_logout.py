@@ -7,11 +7,13 @@ import hashlib
 import hmac
 import json
 from datetime import datetime, timedelta, timezone
-from typing import Any, Final
+from typing import Any, Awaitable, Callable, Final, Mapping
 from uuid import UUID, uuid4
 
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
-from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
+from tigrbl_identity_contracts.protocol_configuration import (
+    protocol_settings as settings,
+)
 
 STATUS: Final[str] = "backchannel-logout-fanout-runtime"
 _BACKCHANNEL_EVENT: Final[str] = "http://schemas.openid.net/event/backchannel-logout"
@@ -29,12 +31,6 @@ OWNER = StandardOwner(
         "backchannel_logout_uri and the module mints repository-owned logout tokens with replay protection, durable delivery state, and bounded retry metadata."
     ),
 )
-
-
-def _persistence():
-    from tigrbl_identity_storage_runtime.oidc_persistence import oidc_persistence
-
-    return oidc_persistence
 
 
 def _jwt_coder_cls():
@@ -112,9 +108,9 @@ async def build_backchannel_descriptor(
     sub: str,
     iss: str | None = None,
     logout_id: UUID | None = None,
+    registration_metadata: Mapping[str, Any],
 ) -> dict[str, object] | None:
-    registration = await _persistence().get_client_registration_async(client_id)
-    metadata = dict(getattr(registration, "registration_metadata", {}) or {})
+    metadata = dict(registration_metadata)
     logout_uri = metadata.get("backchannel_logout_uri")
     if not logout_uri:
         return None
@@ -157,6 +153,7 @@ async def validate_backchannel_logout_token(
     client_id: UUID | str,
     issuer: str | None = None,
     now: datetime | None = None,
+    register_replay: Callable[..., Awaitable[Any]],
 ) -> dict[str, Any]:
     effective_issuer = issuer or settings.issuer
     current = now or datetime.now(timezone.utc)
@@ -204,7 +201,7 @@ async def validate_backchannel_logout_token(
         if exp is not None
         else current + timedelta(minutes=5)
     )
-    await _persistence().register_backchannel_replay_async(
+    await register_replay(
         jti=jti,
         issuer=effective_issuer,
         client_id=str(client_id),
@@ -212,24 +209,6 @@ async def validate_backchannel_logout_token(
         now=current,
     )
     return claims
-
-
-async def mark_backchannel_complete(logout_id: UUID):
-    return await _persistence().mark_logout_channel_async(
-        logout_id, channel="backchannel", status="complete"
-    )
-
-
-async def mark_backchannel_failed(
-    logout_id: UUID, *, error: str | None = None, retry_after_seconds: int | None = None
-):
-    return await _persistence().mark_logout_channel_async(
-        logout_id,
-        channel="backchannel",
-        status="retryable_error",
-        reason=error,
-        retry_after_seconds=retry_after_seconds,
-    )
 
 
 def replay_store_snapshot() -> dict[str, str]:
@@ -251,8 +230,6 @@ __all__ = [
     "StandardOwner",
     "OWNER",
     "build_backchannel_descriptor",
-    "mark_backchannel_complete",
-    "mark_backchannel_failed",
     "replay_store_snapshot",
     "validate_backchannel_logout_token",
     "describe",

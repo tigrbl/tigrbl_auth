@@ -2,20 +2,12 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
 import base64
 import json
 from typing import Any, Final
-from tigrbl_identity_contracts.oidc import LogoutRequestContext
-from tigrbl_identity_core.standards import StandardOwner, describe_owner
+from tigrbl_identity_core.standards import StandardOwner
 from urllib.parse import urlparse
 from uuid import UUID
-
-from tigrbl_identity_runtime.deployment import (
-    deployment_from_request,
-    resolve_deployment,
-)
-from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
 
 try:  # dependency-light import path for checkpoint evidence generation
     from http import HTTPStatus as status
@@ -49,28 +41,6 @@ OWNER = StandardOwner(
         "logout_state record to provide replay-safe idempotence when logout is retried."
     ),
 )
-
-
-def _persistence():
-    from tigrbl_identity_storage_runtime.oidc_persistence import oidc_persistence
-
-    return oidc_persistence
-
-
-def _frontchannel_builder():
-    from tigrbl_auth_protocol_oidc.standards.frontchannel_logout import (
-        build_frontchannel_descriptor,
-    )
-
-    return build_frontchannel_descriptor
-
-
-def _backchannel_builder():
-    from tigrbl_auth_protocol_oidc.standards.backchannel_logout import (
-        build_backchannel_descriptor,
-    )
-
-    return build_backchannel_descriptor
 
 
 async def _verify_id_token_hint(token: str, *, issuer: str, audience: str):
@@ -141,5 +111,3 @@ def assert_logout_session_active(session_row) -> None:
         "revoked",
     }:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "expired_session"})
-
-

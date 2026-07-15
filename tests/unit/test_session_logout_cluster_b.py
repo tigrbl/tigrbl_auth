@@ -7,6 +7,7 @@ from uuid import uuid4
 import pytest
 
 from tigrbl_auth_protocol_oidc.standards import rp_initiated_logout as rp_logout
+from tigrbl_identity_server import logout_runtime as logout_ops
 from tigrbl_auth_protocol_oidc.standards.session_mgmt import (
     compute_session_state,
     describe as describe_session_management,
@@ -92,11 +93,11 @@ def test_validate_post_logout_redirect_uri_accepts_registered_uri(monkeypatch: p
             assert resolved_client_id == client_id
             return _Registration()
 
-    monkeypatch.setattr(rp_logout, '_persistence', lambda: _Persistence())
     validated = asyncio.run(
         rp_logout.validate_post_logout_redirect_uri(
             client_id=client_id,
             post_logout_redirect_uri='https://rp.example/logout/callback',
+            registration_metadata=_Registration.registration_metadata,
         )
     )
     assert validated == 'https://rp.example/logout/callback'
@@ -165,14 +166,18 @@ def test_build_logout_plan_reuses_existing_record_and_marks_replay(monkeypatch: 
             existing.logout_metadata = dict(metadata or {})
             return existing
 
-    monkeypatch.setattr(rp_logout, '_persistence', lambda: _Persistence())
     result = asyncio.run(
-        rp_logout.build_logout_plan(
+        logout_ops.build_logout_plan(
             session_row=session_row,
             client_id=None,
             post_logout_redirect_uri='https://rp.example/logout/callback',
             state='two',
             metadata={'id_token_hint_present': True},
+            deployment=SimpleNamespace(
+                issuer="https://issuer.example",
+                flag_enabled=lambda name: False,
+            ),
+            persistence=_Persistence(),
         )
     )
     assert result is existing

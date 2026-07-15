@@ -1,12 +1,18 @@
 from __future__ import annotations
 
 import json
+from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import parse_qs
 from uuid import UUID
 
+from tigrbl_auth_protocol_oidc.standards.backchannel_logout import (
+    build_backchannel_descriptor,
+)
+from tigrbl_auth_protocol_oidc.standards.frontchannel_logout import (
+    build_frontchannel_descriptor,
+)
 from tigrbl_auth_protocol_oidc.standards.rp_initiated_logout import (
-    build_logout_plan,
     validate_logout_request,
 )
 from tigrbl_auth_protocol_oidc.standards.session_mgmt import resolve_browser_session
@@ -20,6 +26,7 @@ from tigrbl_identity_runtime.settings import settings
 from tigrbl import JSONResponse, RedirectResponse
 from tigrbl.runtime.status import HTTPException, status
 from tigrbl_identity_storage_runtime.ops.audit import append_audit_event_async
+from tigrbl_identity_storage_runtime.oidc_persistence import oidc_persistence
 from tigrbl_identity_storage_runtime.session_lifecycle import get_session_async
 
 
@@ -64,6 +71,123 @@ def _cookie_session_id(request) -> UUID | None:
         return None
 
 
+async def build_logout_plan(
+    *,
+    session_row,
+    client_id: UUID | None,
+    post_logout_redirect_uri: str | None,
+    state: str | None,
+    reason: str = "logout",
+    metadata: dict[str, object] | None = None,
+    deployment,
+    persistence=None,
+):
+    """Compose durable logout state with pure protocol descriptors."""
+
+    persistence = persistence or oidc_persistence
+    now = datetime.now(timezone.utc).replace(microsecond=0)
+    existing = await persistence.get_latest_logout_for_session_async(session_row.id)
+    if existing is not None:
+        existing_meta = dict(getattr(existing, "logout_metadata", {}) or {})
+        if post_logout_redirect_uri and "post_logout_redirect_uri" not in existing_meta:
+            existing_meta["post_logout_redirect_uri"] = post_logout_redirect_uri
+        if state and "state" not in existing_meta:
+            existing_meta["state"] = state
+        existing_meta["replay_count"] = int(existing_meta.get("replay_count", 0)) + 1
+        existing_meta["replayed_at"] = now.isoformat()
+        if metadata:
+            existing_meta.update(metadata)
+        if existing_meta != dict(getattr(existing, "logout_metadata", {}) or {}):
+            existing = (
+                await persistence.update_logout_metadata_async(
+                    existing.id, metadata=existing_meta
+                )
+                or existing
+            )
+        return existing
+
+    front_required = bool(
+        client_id and deployment.flag_enabled("enable_oidc_frontchannel_logout")
+    )
+    back_required = bool(
+        client_id and deployment.flag_enabled("enable_oidc_backchannel_logout")
+    )
+    combined_meta = {
+        "post_logout_redirect_uri": post_logout_redirect_uri,
+        "state": state,
+        "client_id": str(client_id) if client_id is not None else None,
+        "request_validated_at": now.isoformat(),
+        "replay_count": 0,
+        "frontchannel_delivery": {
+            "status": "pending" if front_required else "not_configured",
+            "attempts": 0,
+            "max_retries": 3,
+        },
+        "backchannel_delivery": {
+            "status": "pending" if back_required else "not_configured",
+            "attempts": 0,
+            "max_retries": 3,
+        },
+    }
+    if metadata:
+        combined_meta.update(metadata)
+    logout = await persistence.terminate_session_async(
+        session_row.id,
+        initiated_by="rp_logout",
+        reason=reason,
+        frontchannel_required=front_required,
+        backchannel_required=back_required,
+        metadata=combined_meta,
+    )
+    if logout is None:
+        return None
+
+    frontchannel = None
+    backchannel = None
+    if client_id is not None:
+        registration = await persistence.get_client_registration_async(client_id)
+        registration_metadata = dict(
+            getattr(registration, "registration_metadata", {}) or {}
+        )
+        issuer = str(deployment.issuer or settings.issuer)
+        frontchannel = await build_frontchannel_descriptor(
+            client_id=client_id,
+            sid=str(session_row.id),
+            iss=issuer,
+            logout_id=logout.id,
+            registration_metadata=registration_metadata,
+        )
+        backchannel = await build_backchannel_descriptor(
+            client_id=client_id,
+            sid=str(session_row.id),
+            sub=str(session_row.user_id),
+            iss=issuer,
+            logout_id=logout.id,
+            registration_metadata=registration_metadata,
+        )
+    plan_meta = dict(logout.logout_metadata or {})
+    plan_meta.update(
+        {
+            "post_logout_redirect_uri": post_logout_redirect_uri,
+            "state": state,
+            "frontchannel": frontchannel,
+            "backchannel": backchannel,
+            "frontchannel_delivery": (frontchannel or {}).get("delivery")
+            if isinstance(frontchannel, dict)
+            else {"status": "not_configured", "attempts": 0, "max_retries": 3},
+            "backchannel_delivery": (backchannel or {}).get("delivery")
+            if isinstance(backchannel, dict)
+            else {"status": "not_configured", "attempts": 0, "max_retries": 3},
+            "idempotent_replay_protection": True,
+            "replay_count": 0,
+        }
+    )
+    return (
+        await persistence.update_logout_metadata_async(logout.id, metadata=plan_meta)
+        or logout
+    )
+
+
 async def logout_request(*, request, db):
     deployment = deployment_from_request(request, settings)
     if not deployment.flag_enabled("enable_oidc_rp_initiated_logout"):
@@ -95,6 +219,7 @@ async def logout_request(*, request, db):
         id_token_hint=params.get("id_token_hint"),
         session_row=session,
         issuer=str(deployment.issuer or settings.issuer),
+        registration_resolver=oidc_persistence.get_client_registration_async,
     )
     client_id = context.client_id
     redirect_uri = context.post_logout_redirect_uri

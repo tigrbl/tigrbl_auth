@@ -183,12 +183,12 @@ async def test_frontchannel_descriptor_and_validation(monkeypatch: pytest.Monkey
             assert resolved_client_id == client_id
             return _Registration()
 
-    monkeypatch.setattr(frontchannel_logout, "_persistence", lambda: _Persistence())
     descriptor = await frontchannel_logout.build_frontchannel_descriptor(
         client_id=client_id,
         sid="sid-123",
         iss="https://issuer.example",
         logout_id=uuid4(),
+        registration_metadata=_Registration.registration_metadata,
     )
     assert descriptor is not None
     assert descriptor["delivery"]["status"] == "pending"
@@ -240,7 +240,7 @@ async def test_backchannel_logout_token_fallback_and_replay(monkeypatch: pytest.
     def _missing_jwt_coder_cls():
         raise RuntimeError("no runtime JWT coder in dependency-light checkpoint")
 
-    monkeypatch.setattr(backchannel_logout, "_persistence", lambda: _Persistence())
+    persistence = _Persistence()
     monkeypatch.setattr(backchannel_logout, "_jwt_coder_cls", _missing_jwt_coder_cls)
     descriptor = await backchannel_logout.build_backchannel_descriptor(
         client_id=client_id,
@@ -248,6 +248,7 @@ async def test_backchannel_logout_token_fallback_and_replay(monkeypatch: pytest.
         sub="user-123",
         iss="https://issuer.example",
         logout_id=logout_id,
+        registration_metadata=_Registration.registration_metadata,
     )
     assert descriptor is not None
     assert descriptor["delivery"]["status"] == "pending"
@@ -256,6 +257,7 @@ async def test_backchannel_logout_token_fallback_and_replay(monkeypatch: pytest.
         str(descriptor["logout_token"]),
         client_id=client_id,
         issuer="https://issuer.example",
+        register_replay=persistence.register_backchannel_replay_async,
     )
     assert claims["events"]
     assert claims["sid"] == "sid-123"
@@ -264,6 +266,7 @@ async def test_backchannel_logout_token_fallback_and_replay(monkeypatch: pytest.
             str(descriptor["logout_token"]),
             client_id=client_id,
             issuer="https://issuer.example",
+            register_replay=persistence.register_backchannel_replay_async,
         )
 
 

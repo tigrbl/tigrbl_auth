@@ -41,6 +41,8 @@ verifier = make_pkce_verifier()
   the RP package.
 - App-side protocol integration consuming an issuer
 - Browser/client storage and no-client-secret policy helpers
+- The legacy `logout` module exports protocol validation semantics only;
+  provider-side durable fanout planning is owned by the identity server runtime.
 
 ## Related Packages
 

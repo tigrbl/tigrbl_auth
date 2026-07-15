@@ -11,19 +11,14 @@ class _Registration:
     }
 
 
-class _Persistence:
-    async def get_client_registration_async(self, client_id):
-        return _Registration()
-
-
 def test_frontchannel_descriptor_includes_delivery_state(monkeypatch):
-    monkeypatch.setattr(frontchannel_logout, "_persistence", lambda: _Persistence())
     descriptor = asyncio.run(
         frontchannel_logout.build_frontchannel_descriptor(
             client_id=uuid4(),
             sid="sid-1",
             iss="https://issuer.example",
             logout_id=uuid4(),
+            registration_metadata=_Registration.registration_metadata,
         )
     )
     assert descriptor["delivery"]["status"] == "pending"

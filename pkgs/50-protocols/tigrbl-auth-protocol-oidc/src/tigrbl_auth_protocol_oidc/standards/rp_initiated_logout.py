@@ -2,21 +2,21 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
-import base64
-import json
-from types import SimpleNamespace
-from typing import Any, Final
+from typing import Any, Awaitable, Callable, Final, Mapping
 from tigrbl_identity_contracts.oidc import LogoutRequestContext
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
-from urllib.parse import urlparse
 from uuid import UUID
 
-from tigrbl_identity_runtime.deployment import (
-    deployment_from_request,
-    resolve_deployment,
+from ._rp_logout_validation import (
+    OWNER,
+    _audiences,
+    _normalize_uuid,
+    _normalized_uris,
+    _require_https_if_present,
+    _unsafe_decode_jwt_claims,
+    _verify_id_token_hint,
+    assert_logout_session_active,
 )
-from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
 
 try:  # dependency-light import path for checkpoint evidence generation
     from http import HTTPStatus as status
@@ -39,14 +39,11 @@ except Exception:  # pragma: no cover - exercised in dependency-light tests
 STATUS: Final[str] = "rp-initiated-logout-runtime"
 
 
-from ._rp_logout_validation import (
-    OWNER, _audiences, _backchannel_builder, _frontchannel_builder, _normalize_uuid,
-    _normalized_uris, _persistence, _require_https_if_present, _unsafe_decode_jwt_claims,
-    _verify_id_token_hint, assert_logout_session_active,
-)
-
 async def validate_post_logout_redirect_uri(
-    *, client_id: UUID | None, post_logout_redirect_uri: str | None
+    *,
+    client_id: UUID | None,
+    post_logout_redirect_uri: str | None,
+    registration_metadata: Mapping[str, Any] | None,
 ) -> str | None:
     if not post_logout_redirect_uri:
         return None
@@ -59,8 +56,7 @@ async def validate_post_logout_redirect_uri(
                 "error_description": "client_id required when post_logout_redirect_uri is supplied",
             },
         )
-    registration = await _persistence().get_client_registration_async(client_id)
-    metadata = dict(getattr(registration, "registration_metadata", {}) or {})
+    metadata = dict(registration_metadata or {})
     allowed = _normalized_uris(metadata.get("post_logout_redirect_uris"))
     if post_logout_redirect_uri not in allowed:
         raise HTTPException(
@@ -82,7 +78,12 @@ async def validate_id_token_hint(
 ) -> dict[str, Any] | None:
     if not id_token_hint:
         return None
-    effective_issuer = issuer or settings.issuer
+    effective_issuer = str(issuer or "").strip()
+    if not effective_issuer:
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST,
+            {"error": "invalid_id_token_hint", "error_description": "issuer required"},
+        )
     effective_client_id = _normalize_uuid(client_id)
     if effective_client_id is None:
         unverified = _unsafe_decode_jwt_claims(id_token_hint)
@@ -202,6 +203,7 @@ async def validate_logout_request(
     id_token_hint: str | None,
     session_row=None,
     issuer: str | None = None,
+    registration_resolver: Callable[[UUID], Awaitable[Any]] | None = None,
 ) -> LogoutRequestContext:
     assert_logout_session_active(session_row)
     prevalidated_client_id = _normalize_uuid(requested_client_id) or _normalize_uuid(
@@ -218,9 +220,20 @@ async def validate_logout_request(
         session_row=session_row,
         hint_claims=hint_claims,
     )
+    registration_metadata: Mapping[str, Any] | None = None
+    if post_logout_redirect_uri and client_id is not None:
+        if registration_resolver is None:
+            raise RuntimeError(
+                "logout validation requires an injected registration resolver"
+            )
+        registration = await registration_resolver(client_id)
+        registration_metadata = dict(
+            getattr(registration, "registration_metadata", {}) or {}
+        )
     redirect_uri = await validate_post_logout_redirect_uri(
         client_id=client_id,
         post_logout_redirect_uri=post_logout_redirect_uri,
+        registration_metadata=registration_metadata,
     )
     return LogoutRequestContext(
         client_id=client_id,
@@ -229,117 +242,7 @@ async def validate_logout_request(
     )
 
 
-async def build_logout_plan(
-    *,
-    session_row,
-    client_id: UUID | None,
-    post_logout_redirect_uri: str | None,
-    state: str | None,
-    reason: str = "logout",
-    metadata: dict[str, Any] | None = None,
-    deployment=None,
-):
-    deployment = deployment if deployment is not None else resolve_deployment(settings)
-    persistence = _persistence()
-    now = datetime.now(timezone.utc).replace(microsecond=0)
-    existing = await persistence.get_latest_logout_for_session_async(session_row.id)
-    if existing is not None:
-        existing_meta = dict(getattr(existing, "logout_metadata", {}) or {})
-        if post_logout_redirect_uri and "post_logout_redirect_uri" not in existing_meta:
-            existing_meta["post_logout_redirect_uri"] = post_logout_redirect_uri
-        if state and "state" not in existing_meta:
-            existing_meta["state"] = state
-        existing_meta["replay_count"] = int(existing_meta.get("replay_count", 0)) + 1
-        existing_meta["replayed_at"] = now.isoformat()
-        if metadata:
-            existing_meta.update(metadata)
-        if existing_meta != dict(getattr(existing, "logout_metadata", {}) or {}):
-            existing = (
-                await persistence.update_logout_metadata_async(
-                    existing.id, metadata=existing_meta
-                )
-                or existing
-            )
-        return existing
-
-    front_required = bool(
-        client_id and deployment.flag_enabled("enable_oidc_frontchannel_logout")
-    )
-    back_required = bool(
-        client_id and deployment.flag_enabled("enable_oidc_backchannel_logout")
-    )
-    combined_meta = {
-        "post_logout_redirect_uri": post_logout_redirect_uri,
-        "state": state,
-        "client_id": str(client_id) if client_id is not None else None,
-        "request_validated_at": now.isoformat(),
-        "replay_count": 0,
-        "frontchannel_delivery": {
-            "status": "pending" if front_required else "not_configured",
-            "attempts": 0,
-            "max_retries": 3,
-        },
-        "backchannel_delivery": {
-            "status": "pending" if back_required else "not_configured",
-            "attempts": 0,
-            "max_retries": 3,
-        },
-    }
-    if metadata:
-        combined_meta.update(metadata)
-    logout = await persistence.terminate_session_async(
-        session_row.id,
-        initiated_by="rp_logout",
-        reason=reason,
-        frontchannel_required=front_required,
-        backchannel_required=back_required,
-        metadata=combined_meta,
-    )
-    if logout is None:
-        return None
-
-    frontchannel = None
-    backchannel = None
-    if client_id is not None:
-        frontchannel = await _frontchannel_builder()(
-            client_id=client_id,
-            sid=str(session_row.id),
-            iss=str(deployment.issuer or settings.issuer),
-            logout_id=logout.id,
-        )
-        backchannel = await _backchannel_builder()(
-            client_id=client_id,
-            sid=str(session_row.id),
-            sub=str(session_row.user_id),
-            iss=str(deployment.issuer or settings.issuer),
-            logout_id=logout.id,
-        )
-    plan_meta = dict(logout.logout_metadata or {})
-    plan_meta.update(
-        {
-            "post_logout_redirect_uri": post_logout_redirect_uri,
-            "state": state,
-            "frontchannel": frontchannel,
-            "backchannel": backchannel,
-            "frontchannel_delivery": (frontchannel or {}).get("delivery")
-            if isinstance(frontchannel, dict)
-            else {"status": "not_configured", "attempts": 0, "max_retries": 3},
-            "backchannel_delivery": (backchannel or {}).get("delivery")
-            if isinstance(backchannel, dict)
-            else {"status": "not_configured", "attempts": 0, "max_retries": 3},
-            "idempotent_replay_protection": True,
-            "replay_count": 0,
-        }
-    )
-    return (
-        await persistence.update_logout_metadata_async(logout.id, metadata=plan_meta)
-        or logout
-    )
-
-
-def describe(*, request=None, deployment=None) -> dict[str, object]:
-    if deployment is None and request is not None:
-        deployment = deployment_from_request(request, settings)
+def describe(*, deployment=None) -> dict[str, object]:
     return describe_owner(
         OWNER,
         id_token_hint_validation_supported=True,
@@ -368,7 +271,6 @@ __all__ = [
     "StandardOwner",
     "OWNER",
     "assert_logout_session_active",
-    "build_logout_plan",
     "describe",
     "resolve_logout_client_id",
     "validate_id_token_hint",
