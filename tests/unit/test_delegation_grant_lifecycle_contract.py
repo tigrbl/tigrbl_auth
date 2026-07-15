@@ -37,7 +37,9 @@ class _FakeTableHandlers:
 
     async def _read(self, ctx: dict[str, object]) -> dict[str, object] | None:
         ident = (ctx.get("path_params") or {}).get("id")  # type: ignore[union-attr]
-        return next((row for row in self.rows if str(row.get("id")) == str(ident)), None)
+        return next(
+            (row for row in self.rows if str(row.get("id")) == str(ident)), None
+        )
 
     async def _update(self, ctx: dict[str, object]) -> dict[str, object] | None:
         ident = (ctx.get("path_params") or {}).get("id")  # type: ignore[union-attr]
@@ -50,17 +52,34 @@ class _FakeTableHandlers:
 
 
 async def _op(model, operation: str, db, **payload):
-    return await getattr(model, operation)({"payload": payload, "db": db})
+    del model
+    runtime = importlib.import_module("tigrbl_identity_storage_runtime.ops.delegation")
+    handler_name = {
+        "link_edge": "link_grant_edge",
+        "persist_provenance": "persist_delegation_provenance",
+        "link_token": "link_delegation_token",
+        "list_for_grant": "list_tokens_for_grant",
+    }.get(operation, operation)
+    return await getattr(runtime, handler_name)({"payload": payload, "db": db})
 
 
 def test_delegation_lifecycle_dtos_are_contract_owned() -> None:
     authz_lifecycle = importlib.import_module("tigrbl_authz_policy.delegation")
     contracts = importlib.import_module("tigrbl_identity_contracts.delegation")
 
-    assert authz_lifecycle.DelegationGrantLifecycleEntry is contracts.DelegationGrantLifecycleEntry
-    assert authz_lifecycle.DelegationLifecycleAuditEvent is contracts.DelegationLifecycleAuditEvent
+    assert (
+        authz_lifecycle.DelegationGrantLifecycleEntry
+        is contracts.DelegationGrantLifecycleEntry
+    )
+    assert (
+        authz_lifecycle.DelegationLifecycleAuditEvent
+        is contracts.DelegationLifecycleAuditEvent
+    )
     assert authz_lifecycle.DelegationTokenLink is contracts.DelegationTokenLink
-    assert authz_lifecycle.normalize_delegation_scopes is contracts.normalize_delegation_scopes
+    assert (
+        authz_lifecycle.normalize_delegation_scopes
+        is contracts.normalize_delegation_scopes
+    )
     assert not (
         ROOT
         / "pkgs"
@@ -122,10 +141,17 @@ def test_delegation_grant_storage_model_contract() -> None:
     assert storage_tables.DelegationGrantRecord is storage_tables.DelegationGrant
     assert auth_tables.DelegationGrant is storage_tables.DelegationGrant
     assert auth_tables.DelegationGrantRecord is storage_tables.DelegationGrant
-    assert storage_tables.DelegationGrantScope.__tablename__ == "delegation_grant_scopes"
-    assert storage_tables.DelegationGrantProof.__tablename__ == "delegation_grant_proofs"
+    assert (
+        storage_tables.DelegationGrantScope.__tablename__ == "delegation_grant_scopes"
+    )
+    assert (
+        storage_tables.DelegationGrantProof.__tablename__ == "delegation_grant_proofs"
+    )
     assert storage_tables.DelegationGrantEdge.__tablename__ == "delegation_grant_edges"
-    assert storage_tables.DelegationGrantTokenLink.__tablename__ == "delegation_grant_token_links"
+    assert (
+        storage_tables.DelegationGrantTokenLink.__tablename__
+        == "delegation_grant_token_links"
+    )
 
     metadata_tables = set(storage_tables.RestOltpTable.metadata.tables)
     assert {
@@ -160,7 +186,9 @@ def test_delegation_grant_scope_normalization_contract() -> None:
         normalize_delegation_scopes(tenant_ids=[], actions=["client.read"])
 
 
-def test_delegation_grant_table_owns_lifecycle_and_association_ops(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_delegation_grant_table_owns_lifecycle_and_association_ops(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
     grant_handlers = _FakeTableHandlers()
     edge_handlers = _FakeTableHandlers()
@@ -170,27 +198,37 @@ def test_delegation_grant_table_owns_lifecycle_and_association_ops(monkeypatch: 
     monkeypatch.setattr(storage_tables.DelegationGrant, "handlers", grant_handlers)
     monkeypatch.setattr(storage_tables.DelegationGrantEdge, "handlers", edge_handlers)
     monkeypatch.setattr(storage_tables.DelegationGrantProof, "handlers", proof_handlers)
-    monkeypatch.setattr(storage_tables.DelegationGrantTokenLink, "handlers", token_link_handlers)
+    monkeypatch.setattr(
+        storage_tables.DelegationGrantTokenLink, "handlers", token_link_handlers
+    )
 
     async def scenario() -> None:
-        state_grant = await _op(storage_tables.DelegationGrant, "create_grant",
+        state_grant = await _op(
+            storage_tables.DelegationGrant,
+            "create_grant",
             object(),
             delegator_subject="alice",
             delegate_subject="erin",
         )
-        parent = await _op(storage_tables.DelegationGrant, "create_grant",
+        parent = await _op(
+            storage_tables.DelegationGrant,
+            "create_grant",
             object(),
             delegator_subject="alice",
             delegate_subject="bob",
             tenant_id=uuid4(),
         )
-        child = await _op(storage_tables.DelegationGrant, "create_grant",
+        child = await _op(
+            storage_tables.DelegationGrant,
+            "create_grant",
             object(),
             delegator_subject="bob",
             delegate_subject="carol",
             parent_grant_id=parent["id"],
         )
-        await _op(storage_tables.DelegationGrantEdge, "link_edge",
+        await _op(
+            storage_tables.DelegationGrantEdge,
+            "link_edge",
             object(),
             parent_grant_id=parent["id"],
             child_grant_id=child["id"],
@@ -198,28 +236,51 @@ def test_delegation_grant_table_owns_lifecycle_and_association_ops(monkeypatch: 
             delegate_subject="carol",
         )
 
-        inspected = await _op(storage_tables.DelegationGrant, "inspect_grant", object(), grant_id=parent["id"])
-        active = await _op(storage_tables.DelegationGrant, "activate_grant", object(), grant_id=state_grant["id"])
+        inspected = await _op(
+            storage_tables.DelegationGrant,
+            "inspect_grant",
+            object(),
+            grant_id=parent["id"],
+        )
+        active = await _op(
+            storage_tables.DelegationGrant,
+            "activate_grant",
+            object(),
+            grant_id=state_grant["id"],
+        )
         active_status = active["status"]
-        expired = await _op(storage_tables.DelegationGrant, "expire_grant", object(), grant_id=state_grant["id"])
-        replacement = await _op(storage_tables.DelegationGrant, "replace_grant",
+        expired = await _op(
+            storage_tables.DelegationGrant,
+            "expire_grant",
+            object(),
+            grant_id=state_grant["id"],
+        )
+        replacement = await _op(
+            storage_tables.DelegationGrant,
+            "replace_grant",
             object(),
             grant_id=child["id"],
             delegate_subject="dave",
         )
-        revoked = await _op(storage_tables.DelegationGrant, "revoke_grant",
+        revoked = await _op(
+            storage_tables.DelegationGrant,
+            "revoke_grant",
             object(),
             grant_id=parent["id"],
             revoked_by="admin",
             reason="cleanup",
             collapse_descendants=True,
         )
-        grants = await _op(storage_tables.DelegationGrant, "list_grants",
+        grants = await _op(
+            storage_tables.DelegationGrant,
+            "list_grants",
             object(),
             delegator_subject="alice",
             delegate_subject="bob",
         )
-        proof = await _op(storage_tables.DelegationGrantProof, "persist_provenance",
+        proof = await _op(
+            storage_tables.DelegationGrantProof,
+            "persist_provenance",
             object(),
             grant_id=parent["id"],
             source_scope_hash="source",
@@ -227,13 +288,20 @@ def test_delegation_grant_table_owns_lifecycle_and_association_ops(monkeypatch: 
             attenuation_result=True,
             proof_hash="proof:1",
         )
-        token_link = await _op(storage_tables.DelegationGrantTokenLink, "link_token",
+        token_link = await _op(
+            storage_tables.DelegationGrantTokenLink,
+            "link_token",
             object(),
             grant_id=parent["id"],
             token_hash="token:hash",
             subject="bob",
         )
-        token_links = await _op(storage_tables.DelegationGrantTokenLink, "list_for_grant", object(), grant_id=parent["id"])
+        token_links = await _op(
+            storage_tables.DelegationGrantTokenLink,
+            "list_for_grant",
+            object(),
+            grant_id=parent["id"],
+        )
 
         assert inspected is parent
         assert active_status == "active"
@@ -249,11 +317,17 @@ def test_delegation_grant_table_owns_lifecycle_and_association_ops(monkeypatch: 
     asyncio.run(scenario())
 
 
-def test_delegation_grant_oauth_boundary_no_policy_ownership_contract(monkeypatch: pytest.MonkeyPatch) -> None:
-    oauth_exchange = importlib.import_module("tigrbl_identity_server.token_exchange_runtime")
+def test_delegation_grant_oauth_boundary_no_policy_ownership_contract(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    oauth_exchange = importlib.import_module(
+        "tigrbl_identity_server.token_exchange_runtime"
+    )
 
     class FakeJwt:
-        async def async_decode(self, token: str, verify_exp: bool = True) -> dict[str, object]:
+        async def async_decode(
+            self, token: str, verify_exp: bool = True
+        ) -> dict[str, object]:
             if token == "subject-token":
                 return {
                     "sub": "bob",
@@ -269,7 +343,9 @@ def test_delegation_grant_oauth_boundary_no_policy_ownership_contract(monkeypatc
 
     captured: dict[str, object] = {}
 
-    async def capture_token_record(token: str, claims: dict[str, object], **kwargs: object) -> None:
+    async def capture_token_record(
+        token: str, claims: dict[str, object], **kwargs: object
+    ) -> None:
         captured["token"] = token
         captured["claims"] = claims
 
@@ -294,7 +370,9 @@ def test_delegation_grant_oauth_boundary_no_policy_ownership_contract(monkeypatc
             required_claims=("iss", "sub", "aud", "exp", "iat"),
         ),
     )
-    monkeypatch.setattr(oauth_exchange, "upsert_token_record_async", capture_token_record)
+    monkeypatch.setattr(
+        oauth_exchange, "upsert_token_record_async", capture_token_record
+    )
     monkeypatch.setattr(oauth_exchange, "append_audit_event_async", capture_audit_event)
     monkeypatch.setattr(
         oauth_exchange,

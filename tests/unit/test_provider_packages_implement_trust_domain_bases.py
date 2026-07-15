@@ -57,10 +57,19 @@ COMPOSITION_PROVIDER_PACKAGES = {
     "tigrbl-trust-anchor-provider",
 }
 
+DIRECT_CONTRACT_PROVIDER_PACKAGES = {
+    # Bcrypt is the sole implementation of the shared-secret hashing contract;
+    # a layer-05 behavior base would add no shared implementation seam.
+    "tigrbl-secret-hashing-bcrypt-provider",
+}
+
 
 def test_pqc_provider_inherits_signing_domain_base() -> None:
     from tigrbl_security_signing_pqc import PQCSigningProvider
-    from tigrbl_security_trust_domain_bases import SigningDomainBase, SigningProviderBase
+    from tigrbl_security_trust_domain_bases import (
+        SigningDomainBase,
+        SigningProviderBase,
+    )
 
     assert issubclass(PQCSigningProvider, SigningDomainBase)
     assert issubclass(PQCSigningProvider, SigningProviderBase)
@@ -76,19 +85,35 @@ def test_pkce_provider_inherits_proof_of_possession_domain_base() -> None:
 
 
 def test_provider_packages_have_explicit_trust_boundary_kind() -> None:
-    packages = {path.name for path in PROVIDERS.iterdir() if (path / "pyproject.toml").exists()}
+    packages = {
+        path.name for path in PROVIDERS.iterdir() if (path / "pyproject.toml").exists()
+    }
     assert packages
-    assert TRUST_BASE_PROVIDER_PACKAGES | COMPOSITION_PROVIDER_PACKAGES <= packages
+    classified = (
+        TRUST_BASE_PROVIDER_PACKAGES
+        | COMPOSITION_PROVIDER_PACKAGES
+        | DIRECT_CONTRACT_PROVIDER_PACKAGES
+    )
+    assert classified <= packages
     assert not (TRUST_BASE_PROVIDER_PACKAGES & COMPOSITION_PROVIDER_PACKAGES)
+    assert (
+        not (classified - DIRECT_CONTRACT_PROVIDER_PACKAGES)
+        & DIRECT_CONTRACT_PROVIDER_PACKAGES
+    )
 
 
 def test_trust_base_provider_packages_expose_base_implementers() -> None:
-    packages = [path for path in PROVIDERS.iterdir() if (path / "pyproject.toml").exists()]
+    packages = [
+        path for path in PROVIDERS.iterdir() if (path / "pyproject.toml").exists()
+    ]
     assert packages
 
     offenders: list[str] = []
     for package in packages:
-        if package.name in COMPOSITION_PROVIDER_PACKAGES:
+        if (
+            package.name
+            in COMPOSITION_PROVIDER_PACKAGES | DIRECT_CONTRACT_PROVIDER_PACKAGES
+        ):
             continue
         implementers: list[str] = []
         for path in (package / "src").rglob("*.py"):
@@ -98,8 +123,8 @@ def test_trust_base_provider_packages_expose_base_implementers() -> None:
                     continue
                 base_names = {
                     getattr(base, "id", getattr(base, "attr", ""))
-                        for base in node.bases
-                    }
+                    for base in node.bases
+                }
                 if any(name.endswith("Base") for name in base_names):
                     implementers.append(f"{path.relative_to(package)}::{node.name}")
         if not implementers:

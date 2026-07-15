@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import asyncio
+from types import SimpleNamespace
 
 from tigrbl_identity_storage.tables import (
     AttestationEndorsement,
@@ -10,16 +11,25 @@ from tigrbl_identity_storage.tables import (
 from tigrbl_identity_storage_runtime import publish_reference_material
 
 
-def test_corim_reference_material_uses_one_table_transaction_context(monkeypatch) -> None:
+def test_corim_reference_material_uses_one_table_transaction_context(
+    monkeypatch,
+) -> None:
     calls = []
 
     async def create(table, values, db):
         calls.append((table, dict(values), db))
         return dict(values)
 
-    monkeypatch.setattr(AttestationReferenceManifest.handlers.create, "core", create)
-    monkeypatch.setattr(AttestationReferenceValue.handlers.create, "core", create)
-    monkeypatch.setattr(AttestationEndorsement.handlers.create, "core", create)
+    for table in (
+        AttestationReferenceManifest,
+        AttestationReferenceValue,
+        AttestationEndorsement,
+    ):
+        monkeypatch.setattr(
+            table,
+            "handlers",
+            SimpleNamespace(create=SimpleNamespace(core=create)),
+        )
 
     db = object()
     result = asyncio.run(

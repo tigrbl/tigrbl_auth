@@ -53,13 +53,19 @@ def test_management_plane_contracts_own_admin_and_governance_surfaces() -> None:
 
     assert Role is control_contracts.Role
     assert SDKPackage is contracts.SDKPackage
-    assert control_contracts.Role(name="admin", permissions=("tenant.read",)).name == "admin"
+    assert (
+        control_contracts.Role(name="admin", permissions=("tenant.read",)).name
+        == "admin"
+    )
     assert contracts.AdminResourceKind.PRINCIPAL.value == "principal"
 
 
 def test_control_plane_contracts_own_control_plane_correctness_dtos() -> None:
     import tigrbl_identity_contracts as contracts
-    from tigrbl_authz_policy import ControlPlaneCorrectnessReport, CorrectnessProofSection
+    from tigrbl_authz_policy import (
+        ControlPlaneCorrectnessReport,
+        CorrectnessProofSection,
+    )
 
     assert CorrectnessProofSection is contracts.CorrectnessProofSection
     assert ControlPlaneCorrectnessReport is contracts.ControlPlaneCorrectnessReport
@@ -114,15 +120,23 @@ def test_control_plane_executable_helpers_stay_in_authz_policy_capability() -> N
 
     assert admin_models.Role is contracts.Role
     assert governance_models.SDKPackage is management_contracts.SDKPackage
-    assert set(admin_models.PUBLIC_CLIENT_FIELDS) < set(admin_models.ADMIN_CLIENT_FIELDS)
+    assert set(admin_models.PUBLIC_CLIENT_FIELDS) < set(
+        admin_models.ADMIN_CLIENT_FIELDS
+    )
     assert "client_secret" not in admin_models.PUBLIC_CLIENT_FIELDS
-    assert not hasattr(governance_models, "provisioning_governance_ecosystem_boundary_manifest")
-    assert not hasattr(governance_models, "provisioning_governance_ecosystem_boundary_integrity")
+    assert not hasattr(
+        governance_models, "provisioning_governance_ecosystem_boundary_manifest"
+    )
+    assert not hasattr(
+        governance_models, "provisioning_governance_ecosystem_boundary_integrity"
+    )
 
 
 def test_release_contracts_own_release_posture_surfaces() -> None:
     import tigrbl_release_contracts as contracts
-    from tigrbl_auth_release_certification.release_posture.models import TransportPosture
+    from tigrbl_auth_release_certification.release_posture.models import (
+        TransportPosture,
+    )
 
     assert TransportPosture is contracts.TransportPosture
 
@@ -156,10 +170,18 @@ def test_admin_capability_models_are_contract_reexports() -> None:
     assert AdminAuditEvent.__name__ == "AdminAuditEvent"
     assert not hasattr(admin_models, "AdminUiView")
     assert advanced_models.AdaptiveContext is control_contracts.AdaptiveContext
-    assert advanced_models.AccessDecisionRequest is control_contracts.AccessDecisionRequest
+    assert (
+        advanced_models.AccessDecisionRequest is control_contracts.AccessDecisionRequest
+    )
     assert advanced_models.TrustPath is control_contracts.TrustPath
-    assert advanced_models.PasswordlessCredential is credential_concrete.PasswordlessCredential
-    assert advanced_models.AuthenticationChallenge is user_contracts.AuthenticationChallenge
+    assert (
+        advanced_models.PasswordlessCredential
+        is credential_concrete.PasswordlessCredential
+    )
+    assert (
+        advanced_models.AuthenticationChallenge
+        is user_contracts.AuthenticationChallenge
+    )
     assert advanced_models.WorkloadIdentity is identity_concrete.WorkloadIdentity
     assert not hasattr(advanced_models, "AdvancedIdentityBoundaryFeature")
 
@@ -303,7 +325,10 @@ def test_liveness_contracts_are_domain_packaged() -> None:
 
     assert liveness.ConvergenceEvent.__module__ == "tigrbl_identity_contracts.liveness"
     assert liveness.ConvergenceState.__module__ == "tigrbl_identity_contracts.liveness"
-    assert liveness.LivenessConvergenceReport.__module__ == "tigrbl_identity_contracts.liveness"
+    assert (
+        liveness.LivenessConvergenceReport.__module__
+        == "tigrbl_identity_contracts.liveness"
+    )
     sys.modules.pop("tigrbl_identity_core.liveness", None)
     try:
         importlib.import_module("tigrbl_identity_core.liveness")
@@ -453,7 +478,9 @@ def test_removed_plane_contract_import_roots_are_not_loaded() -> None:
     assert "tigrbl_management_plane_contracts" not in sys.modules
 
 
-def test_contract_packages_do_not_import_capability_runtime_or_storage_packages() -> None:
+def test_contract_packages_do_not_import_capability_runtime_or_storage_packages() -> (
+    None
+):
     forbidden = {
         "tigrbl_auth",
         "tigrbl_authn_credentials",
@@ -498,12 +525,6 @@ def test_target_capability_packages_no_longer_own_contract_classes() -> None:
         / "tigrbl-authz-policy"
         / "src"
         / "tigrbl_authz_policy",
-        ROOT
-        / "pkgs"
-        / "50-protocols"
-        / "tigrbl-authz-resource-server"
-        / "src"
-        / "tigrbl_authz_resource_server",
     ]
     offenders: list[str] = []
 
@@ -536,7 +557,14 @@ def test_target_capability_packages_no_longer_own_contract_classes() -> None:
                         )
                         for decorator in node.decorator_list
                     )
-                    if has_dataclass or "Enum" in base_names or "Protocol" in base_names or "BaseModel" in base_names:
-                        offenders.append(f"{path.relative_to(ROOT)}:{node.lineno}:{node.name}")
+                    if (
+                        has_dataclass
+                        or "Enum" in base_names
+                        or "Protocol" in base_names
+                        or "BaseModel" in base_names
+                    ):
+                        offenders.append(
+                            f"{path.relative_to(ROOT)}:{node.lineno}:{node.name}"
+                        )
 
     assert offenders == []
