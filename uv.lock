@@ -2721,12 +2721,18 @@ name = "tigrbl-auth-protocol-oid4vp"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-oid4vp" }
 dependencies = [
+    { name = "tigrbl-claim-client-id-concrete" },
+    { name = "tigrbl-claim-nonce-concrete" },
+    { name = "tigrbl-claim-transaction-id-concrete" },
     { name = "tigrbl-digital-credential-presentation" },
     { name = "tigrbl-identity-contracts" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "tigrbl-claim-client-id-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-claim-nonce-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-claim-transaction-id-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-digital-credential-presentation", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
 ]

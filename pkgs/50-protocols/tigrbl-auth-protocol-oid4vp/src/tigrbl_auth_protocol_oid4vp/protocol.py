@@ -1,4 +1,5 @@
 from collections.abc import Mapping
+import inspect
 
 from tigrbl_digital_credential_presentation import (
     DigitalCredentialPresentationCapability,
@@ -15,7 +16,7 @@ class Oid4vpProtocol:
     def __init__(self, capability: DigitalCredentialPresentationCapability):
         self._capability = capability
 
-    def verify(
+    async def verify(
         self,
         holder: str,
         vp_token: str | bytes,
@@ -43,7 +44,8 @@ class Oid4vpProtocol:
                 transaction_id if isinstance(transaction_id, str) else None,
             ),
         )
-        return self._capability.present(holder, vp_token, request)
+        result = self._capability.present(holder, vp_token, request)
+        return await result if inspect.isawaitable(result) else result
 
 
 __all__ = ["Oid4vpProtocol"]
