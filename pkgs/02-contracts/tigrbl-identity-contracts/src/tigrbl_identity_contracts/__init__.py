@@ -37,6 +37,7 @@ from .policy_interop import *
 from .correctness import *
 from .admin_resources import *
 from .governance import *
+from .gnap import *
 from .invariants import *
 from .jose import *
 from .liveness import *

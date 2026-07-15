@@ -246,6 +246,7 @@ dependencies = [
     "tigrbl-authn-credentials==0.4.0.dev2",
     "tigrbl-digital-credential-issuance==0.4.0.dev2",
     "tigrbl-digital-credential-presentation==0.4.0.dev2",
+    "tigrbl-grant-negotiation-capability==0.4.0.dev2",
     "tigrbl-attestation-appraisal==0.4.0.dev2",
     "tigrbl-security-events==0.4.0.dev2",
     "tigrbl-workload-identity==0.4.0.dev2",
@@ -479,6 +480,7 @@ tigrbl-auth-protocol-rp = { path = "pkgs/50-protocols/tigrbl-auth-protocol-rp", 
 tigrbl-authn-credentials = { path = "pkgs/20-providers/tigrbl-authn-credentials", editable = true }
 tigrbl-digital-credential-issuance = { path = "pkgs/40-capabilities/tigrbl-digital-credential-issuance", editable = true }
 tigrbl-digital-credential-presentation = { path = "pkgs/40-capabilities/tigrbl-digital-credential-presentation", editable = true }
+tigrbl-grant-negotiation-capability = { path = "pkgs/40-capabilities/tigrbl-grant-negotiation-capability", editable = true }
 tigrbl-attestation-appraisal = { path = "pkgs/40-capabilities/tigrbl-attestation-appraisal", editable = true }
 tigrbl-security-events = { path = "pkgs/40-capabilities/tigrbl-security-events", editable = true }
 tigrbl-workload-identity = { path = "pkgs/40-capabilities/tigrbl-workload-identity", editable = true }

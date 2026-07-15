@@ -83,6 +83,9 @@ CAPABILITY_PURPOSES = {
     "tigrbl-identity-admin-control-plane": (
         "coordinate administrative resource lifecycle use cases"
     ),
+    "tigrbl-grant-negotiation-capability": (
+        "coordinate negotiated grant requests, continuation, and token rotation"
+    ),
     "tigrbl-protocol-artifact-processing": (
         "coordinate protocol-neutral artifact decoding, validation, encoding, "
         "and error normalization through replaceable processors"

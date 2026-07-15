@@ -29,6 +29,9 @@ def test_layer_40_contains_only_registered_multi_component_use_cases() -> None:
         "tigrbl-identity-admin-control-plane": (
             "coordinate administrative resource lifecycle use cases"
         ),
+        "tigrbl-grant-negotiation-capability": (
+            "coordinate negotiated grant requests, continuation, and token rotation"
+        ),
         "tigrbl-protocol-artifact-processing": (
             "coordinate protocol-neutral artifact decoding, validation, encoding, "
             "and error normalization through replaceable processors"

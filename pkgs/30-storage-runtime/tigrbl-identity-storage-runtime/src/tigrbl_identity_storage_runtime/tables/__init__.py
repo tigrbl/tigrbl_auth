@@ -8,6 +8,7 @@ from .consents import *
 from .credentials import *
 from .delegation import *
 from .dpop import *
+from .gnap import *
 from .oidc import *
 from .oauth import *
 from .identities import *
@@ -60,6 +61,10 @@ DURABLE_RUNTIME_TABLE_SPECS = (
     ReplayReservationRuntimeSpec,
     DpopReplayRuntimeSpec,
     DpopNonceRuntimeSpec,
+    GnapClientInstanceRuntimeSpec,
+    GnapGrantRuntimeSpec,
+    GnapContinuationRuntimeSpec,
+    GnapInteractionRuntimeSpec,
 )
 
 __all__ = [

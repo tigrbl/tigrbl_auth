@@ -3115,6 +3115,7 @@ dependencies = [
     { name = "tigrbl-dpop-key-credential-concrete" },
     { name = "tigrbl-eat-concrete" },
     { name = "tigrbl-eat-verifier-provider" },
+    { name = "tigrbl-grant-negotiation-capability" },
     { name = "tigrbl-identity-admin" },
     { name = "tigrbl-identity-admin-advanced-authenticator-registry" },
     { name = "tigrbl-identity-admin-auth-anomaly-detector" },
@@ -3482,6 +3483,7 @@ requires-dist = [
     { name = "tigrbl-dpop-key-credential-concrete", editable = "pkgs/10-concrete/tigrbl-dpop-key-credential-concrete" },
     { name = "tigrbl-eat-concrete", editable = "pkgs/10-concrete/tigrbl-eat-concrete" },
     { name = "tigrbl-eat-verifier-provider", editable = "pkgs/20-providers/tigrbl-eat-verifier-provider" },
+    { name = "tigrbl-grant-negotiation-capability", editable = "pkgs/40-capabilities/tigrbl-grant-negotiation-capability" },
     { name = "tigrbl-identity-admin", editable = "pkgs/20-providers/tigrbl-identity-admin" },
     { name = "tigrbl-identity-admin-advanced-authenticator-registry", editable = "pkgs/deprecated/tigrbl-identity-admin-advanced-authenticator-registry" },
     { name = "tigrbl-identity-admin-auth-anomaly-detector", editable = "pkgs/20-providers/tigrbl-identity-admin-auth-anomaly-detector" },
@@ -5563,6 +5565,21 @@ dependencies = [
 requires-dist = [
     { name = "tigrbl-attestation-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-eat-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-grant-negotiation-capability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/40-capabilities/tigrbl-grant-negotiation-capability" }
+dependencies = [
+    { name = "tigrbl-capability" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
 ]
 

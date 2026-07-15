@@ -13,6 +13,7 @@ from .oidc_replay import *
 from .oidc_logout import *
 from .oauth_state import *
 from .identities import *
+from .gnap import *
 from .presentations import *
 from .replay import *
 from .security_events import *

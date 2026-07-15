@@ -8,6 +8,10 @@ from tigrbl_identity_storage.tables import (
     CredentialIssuanceTransaction,
     CredentialOffer,
     CredentialStatusEntry,
+    GnapClientInstance,
+    GnapContinuation,
+    GnapGrant,
+    GnapInteraction,
     PresentationConsent,
     PresentationReplay,
     PresentationTransaction,
@@ -22,6 +26,10 @@ from tigrbl_identity_storage_runtime import (
     CredentialIssuanceTransactionRuntimeSpec,
     CredentialOfferRuntimeSpec,
     CredentialStatusEntryRuntimeSpec,
+    GnapClientInstanceRuntimeSpec,
+    GnapContinuationRuntimeSpec,
+    GnapGrantRuntimeSpec,
+    GnapInteractionRuntimeSpec,
     PresentationConsentRuntimeSpec,
     PresentationReplayRuntimeSpec,
     PresentationTransactionRuntimeSpec,
@@ -54,6 +62,10 @@ def test_runtime_specs_target_authoritative_layer_01_tables() -> None:
         (CredentialOfferRuntimeSpec, CredentialOffer),
         (CredentialIssuanceTransactionRuntimeSpec, CredentialIssuanceTransaction),
         (CredentialStatusEntryRuntimeSpec, CredentialStatusEntry),
+        (GnapClientInstanceRuntimeSpec, GnapClientInstance),
+        (GnapGrantRuntimeSpec, GnapGrant),
+        (GnapContinuationRuntimeSpec, GnapContinuation),
+        (GnapInteractionRuntimeSpec, GnapInteraction),
         (PresentationTransactionRuntimeSpec, PresentationTransaction),
         (PresentationConsentRuntimeSpec, PresentationConsent),
         (PresentationReplayRuntimeSpec, PresentationReplay),
@@ -77,6 +89,7 @@ def test_family_operations_are_carrier_neutral_table_operations() -> None:
         _operation(AttestationEvidenceRuntimeSpec, "record_evidence"),
         _operation(SecurityEventRuntimeSpec, "record_event"),
         _operation(SvidRecordRuntimeSpec, "record_svid"),
+        _operation(GnapGrantRuntimeSpec, "create_grant"),
     )
     for operation in operations:
         assert operation.target == "custom"
@@ -97,6 +110,24 @@ def test_table_operation_refuses_sensitive_raw_values_before_persistence() -> No
             asyncio.run(
                 operation.handler({"payload": {field: "secret"}, "db": object()})
             )
+
+
+def test_gnap_continuation_runtime_refuses_raw_tokens() -> None:
+    operation = _operation(GnapContinuationRuntimeSpec, "record_continuation")
+
+    with pytest.raises(ValueError, match="raw GNAP continuation"):
+        asyncio.run(
+            operation.handler(
+                {
+                    "payload": {
+                        "grant_id": "grant-1",
+                        "continuation_id": "continue-1",
+                        "continuation_token": "secret",
+                    },
+                    "db": object(),
+                }
+            )
+        )
 
 
 def test_attestation_recorder_adapts_verified_evidence_to_durable_operations(
