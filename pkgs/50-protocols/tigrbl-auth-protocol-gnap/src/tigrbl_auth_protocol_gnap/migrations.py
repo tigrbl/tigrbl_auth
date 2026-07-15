@@ -11,10 +11,9 @@ def migrate_request(
         or target != "RFC9635"
     ):
         raise ValueError(f"unsupported GNAP migration: {source} -> {target}")
-    migrated = dict(value)
-    migrated.setdefault("_migration", {})["from"] = source
-    migrated["_migration"]["to"] = target
-    return migrated
+    # The supported draft request members retained their RFC 9635 wire names.
+    # Migration metadata is deliberately not injected into protocol payloads.
+    return dict(value)
 
 
 __all__ = ["migrate_request"]

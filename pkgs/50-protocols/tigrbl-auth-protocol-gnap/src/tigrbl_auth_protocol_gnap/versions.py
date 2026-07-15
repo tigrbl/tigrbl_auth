@@ -9,9 +9,9 @@ class GnapVersion:
 
 
 VERSION_HISTORY = (
-    GnapVersion("draft-13", "superseded-draft", "2023-03"),
-    GnapVersion("draft-ietf-gnap-core-protocol-20", "superseded-draft", "2024-04"),
-    GnapVersion("RFC9635", "standards-track", "2024-10"),
+    GnapVersion("draft-13", "superseded-draft", "2023-03-13"),
+    GnapVersion("draft-ietf-gnap-core-protocol-20", "superseded-draft", "2024-04-24"),
+    GnapVersion("RFC9635", "proposed-standard", "2024-10"),
 )
 CURRENT_VERSION = VERSION_HISTORY[-1]
 

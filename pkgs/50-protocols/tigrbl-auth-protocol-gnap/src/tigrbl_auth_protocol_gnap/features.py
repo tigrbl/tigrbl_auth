@@ -22,6 +22,10 @@ FEATURES_BY_VERSION = {
             "token-rotation",
             "key-proofing",
             "multiple-access-tokens",
+            "grant-modification",
+            "token-management",
+            "authorization-server-discovery",
+            "subject-identifiers-rfc9493",
         }
     ),
 }

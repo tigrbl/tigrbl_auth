@@ -1,11 +1,18 @@
 [project]
-name="tigrbl-auth-protocol-gnap"
-version="0.4.0.dev2"
-requires-python=">=3.10,<3.15"
-license="Apache-2.0"
-dependencies=[]
+name = "tigrbl-auth-protocol-gnap"
+version = "0.4.0.dev2"
+description = "Versioned RFC 9635 Grant Negotiation and Authorization Protocol mapping."
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = [
+    "tigrbl-claim-assertions-concrete==0.4.0.dev2",
+    "tigrbl-claim-subject-identifiers-concrete==0.4.0.dev2",
+    "tigrbl-claim-updated-at-rfc3339-concrete==0.4.0.dev2",
+    "tigrbl-grant-negotiation-capability==0.4.0.dev2",
+    "tigrbl-identity-contracts==0.4.0.dev2",
+]
 [build-system]
-requires=["poetry-core>=1.0.0"]
-build-backend="poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 [tool.poetry]
-packages=[{include="tigrbl_auth_protocol_gnap",from="src"}]
+packages = [{ include = "tigrbl_auth_protocol_gnap", from = "src" }]

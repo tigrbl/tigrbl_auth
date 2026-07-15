@@ -170,6 +170,9 @@ dependencies = [
     "tigrbl-claim-phone-number-verified-concrete==0.4.0.dev2",
     "tigrbl-claim-address-concrete==0.4.0.dev2",
     "tigrbl-claim-updated-at-concrete==0.4.0.dev2",
+    "tigrbl-claim-subject-identifiers-concrete==0.4.0.dev2",
+    "tigrbl-claim-assertions-concrete==0.4.0.dev2",
+    "tigrbl-claim-updated-at-rfc3339-concrete==0.4.0.dev2",
     "tigrbl-claim-authorization-code-hash-concrete==0.4.0.dev2",
     "tigrbl-claim-state-hash-concrete==0.4.0.dev2",
     "tigrbl-claim-session-id-concrete==0.4.0.dev2",
@@ -579,6 +582,9 @@ tigrbl-claim-phone-number-concrete = { path = "pkgs/10-concrete/tigrbl-claim-pho
 tigrbl-claim-phone-number-verified-concrete = { path = "pkgs/10-concrete/tigrbl-claim-phone-number-verified-concrete", editable = true }
 tigrbl-claim-address-concrete = { path = "pkgs/10-concrete/tigrbl-claim-address-concrete", editable = true }
 tigrbl-claim-updated-at-concrete = { path = "pkgs/10-concrete/tigrbl-claim-updated-at-concrete", editable = true }
+tigrbl-claim-subject-identifiers-concrete = { path = "pkgs/10-concrete/tigrbl-claim-subject-identifiers-concrete", editable = true }
+tigrbl-claim-assertions-concrete = { path = "pkgs/10-concrete/tigrbl-claim-assertions-concrete", editable = true }
+tigrbl-claim-updated-at-rfc3339-concrete = { path = "pkgs/10-concrete/tigrbl-claim-updated-at-rfc3339-concrete", editable = true }
 tigrbl-claim-authorization-code-hash-concrete = { path = "pkgs/10-concrete/tigrbl-claim-authorization-code-hash-concrete", editable = true }
 tigrbl-claim-state-hash-concrete = { path = "pkgs/10-concrete/tigrbl-claim-state-hash-concrete", editable = true }
 tigrbl-claim-session-id-concrete = { path = "pkgs/10-concrete/tigrbl-claim-session-id-concrete", editable = true }

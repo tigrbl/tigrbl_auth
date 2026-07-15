@@ -1,31 +1,43 @@
-from dataclasses import dataclass
-from typing import Any, Mapping
+"""RFC 9635 mapping to the neutral grant-negotiation capability."""
+
+from __future__ import annotations
+
+from collections.abc import Mapping
+from typing import Any
+
+from tigrbl_grant_negotiation_capability import GrantNegotiationCapability
+from tigrbl_identity_contracts.gnap import GrantContinuationRequest
+
+from .schemas import GnapRequest, parse_gnap_request, serialize_gnap_result
 
 
-@dataclass(frozen=True, slots=True)
-class GnapRequest:
-    access_token: tuple[Mapping[str, Any], ...]
-    client: Mapping[str, Any] | str
-    interact: Mapping[str, Any] | None = None
+class GnapProtocol:
+    version = "RFC9635"
+
+    def __init__(self, capability: GrantNegotiationCapability):
+        self._capability = capability
+
+    async def grant(self, payload: Mapping[str, Any]) -> dict[str, object]:
+        request = parse_gnap_request(payload).to_contract()
+        return serialize_gnap_result(await self._capability.request(request))
+
+    async def continue_grant(
+        self,
+        continuation_token: str,
+        *,
+        proof: str | bytes | Mapping[str, object] | None = None,
+    ) -> dict[str, object]:
+        request = GrantContinuationRequest(continuation_token, proof)
+        return serialize_gnap_result(await self._capability.continue_request(request))
+
+    async def rotate_access_token(
+        self,
+        management_token: str,
+        *,
+        proof: str | bytes | Mapping[str, object] | None = None,
+    ) -> dict[str, object]:
+        request = GrantContinuationRequest(management_token, proof)
+        return serialize_gnap_result(await self._capability.rotate(request))
 
 
-def parse_gnap_request(value: Mapping[str, Any]) -> GnapRequest:
-    access = value.get("access_token")
-    client = value.get("client")
-    if isinstance(access, Mapping):
-        access = [access]
-    if (
-        not isinstance(access, list)
-        or not access
-        or not all(isinstance(item, Mapping) for item in access)
-    ):
-        raise ValueError("GNAP access_token must contain one or more requests")
-    if not isinstance(client, (Mapping, str)):
-        raise ValueError("GNAP request requires a client instance or key reference")
-    interact = value.get("interact")
-    if interact is not None and not isinstance(interact, Mapping):
-        raise ValueError("interact must be an object")
-    return GnapRequest(tuple(dict(item) for item in access), client, interact)
-
-
-__all__ = ["GnapRequest", "parse_gnap_request"]
+__all__ = ["GnapProtocol", "GnapRequest", "parse_gnap_request"]
