@@ -1,10 +1,5 @@
-from tigrbl_identity_contracts.capabilities import ProtocolCapabilityRequirement
+"""Compatibility import for the canonical SET bindings module."""
 
-CAPABILITY_REQUIREMENTS = (
-    ProtocolCapabilityRequirement(
-        "set", "RFC8417", "set-jti-replay", "jti",
-        "security.replay-protection", "check_and_reserve", "set:event-jti",
-    ),
-)
+from .bindings import CAPABILITY_REQUIREMENTS
 
 __all__ = ["CAPABILITY_REQUIREMENTS"]
