@@ -8,7 +8,7 @@ validate the stated requirements.
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
-from tigrbl import TigrblApp
+from tigrbl import Request, TigrblApp
 from tigrbl.security import Depends
 from http import HTTPStatus as status
 from httpx import ASGITransport, AsyncClient
@@ -17,15 +17,24 @@ from tigrbl_identity_server.security.security_deps import get_current_principal,
 from tigrbl_auth.runtime_cfg import settings
 
 
+async def _protected(request: Request, db=Depends(get_db)):
+    await get_current_principal(
+        request,
+        authorization=request.headers.get("Authorization", ""),
+        api_key=request.headers.get("x-api-key"),
+        dpop=request.headers.get("DPoP"),
+        db=db,
+    )
+    return {"ok": True}
+
+
 @pytest.mark.unit
 @pytest.mark.asyncio
 async def test_www_authenticate_header_on_missing_token():
     """RFC 6750 §3: Resource server MUST include WWW-Authenticate response header field."""
     app = TigrblApp()
 
-    @app.get("/protected")
-    async def protected(user=Depends(get_current_principal)):
-        return {"ok": True}
+    app.get("/protected")(_protected)
 
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://test") as client:
@@ -40,16 +49,15 @@ async def test_lowercase_bearer_scheme():
     """RFC 6750 §2.1: Authorization scheme name is case-insensitive."""
     app = TigrblApp()
 
-    @app.get("/protected")
-    async def protected(user=Depends(get_current_principal)):
-        return {"ok": True}
+    app.get("/protected")(_protected)
 
     mock_db = AsyncMock()
     app.dependency_overrides[get_db] = lambda: mock_db
 
     mock_user = MagicMock()
     with patch(
-        "tigrbl_identity_server.security.security_deps._user_from_jwt", AsyncMock(return_value=mock_user)
+        "tigrbl_identity_server.security.security_deps._user_from_jwt",
+        AsyncMock(return_value=mock_user),
     ):
         transport = ASGITransport(app=app)
         async with AsyncClient(transport=transport, base_url="http://test") as client:
@@ -65,9 +73,7 @@ async def test_rfc6750_disabled_rejects_header():
     """RFC 6750: Bearer tokens are ignored when feature disabled."""
     app = TigrblApp()
 
-    @app.get("/protected")
-    async def protected(user=Depends(get_current_principal)):
-        return {"ok": True}
+    app.get("/protected")(_protected)
 
     mock_db = AsyncMock()
     app.dependency_overrides[get_db] = lambda: mock_db
@@ -87,9 +93,7 @@ async def test_access_token_query_parameter_enabled():
     """RFC 6750 §2.3: Access token may be provided as URI query parameter."""
     app = TigrblApp()
 
-    @app.get("/protected")
-    async def protected(user=Depends(get_current_principal)):
-        return {"ok": True}
+    app.get("/protected")(_protected)
 
     mock_db = AsyncMock()
     app.dependency_overrides[get_db] = lambda: mock_db
@@ -114,9 +118,7 @@ async def test_access_token_query_parameter_disabled():
     """RFC 6750 §2.3: Query parameter rejected when feature disabled."""
     app = TigrblApp()
 
-    @app.get("/protected")
-    async def protected(user=Depends(get_current_principal)):
-        return {"ok": True}
+    app.get("/protected")(_protected)
 
     mock_db = AsyncMock()
     app.dependency_overrides[get_db] = lambda: mock_db
@@ -134,9 +136,7 @@ async def test_access_token_form_body_enabled():
     """RFC 6750 §2.2: Access token may be provided in the request body."""
     app = TigrblApp()
 
-    @app.post("/protected")
-    async def protected(user=Depends(get_current_principal)):
-        return {"ok": True}
+    app.post("/protected")(_protected)
 
     mock_db = AsyncMock()
     app.dependency_overrides[get_db] = lambda: mock_db
@@ -165,9 +165,7 @@ async def test_access_token_form_body_disabled():
     """RFC 6750 §2.2: Form body token rejected when feature disabled."""
     app = TigrblApp()
 
-    @app.post("/protected")
-    async def protected(user=Depends(get_current_principal)):
-        return {"ok": True}
+    app.post("/protected")(_protected)
 
     mock_db = AsyncMock()
     app.dependency_overrides[get_db] = lambda: mock_db
