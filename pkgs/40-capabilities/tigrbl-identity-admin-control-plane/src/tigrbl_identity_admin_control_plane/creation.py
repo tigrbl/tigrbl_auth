@@ -13,6 +13,9 @@ from .models import AdminResourceKind, App, _clean_tuple, _new_id, _utc_now
 
 
 class AdminCreationOperations:
+    def __init__(self, owner: Any) -> None:
+        self._owner = owner
+
     async def create_principal(
         self,
         *,
@@ -33,10 +36,10 @@ class AdminCreationOperations:
             roles=_clean_tuple(roles),
             attributes=dict(attributes or {}),
         )
-        metadata = self._metadata_for(
+        metadata = self._owner._metadata_for(
             principal.id, AdminResourceKind.PRINCIPAL, tenant_id, name
         )
-        return await self._create(metadata, principal, actor=actor)
+        return await self._owner._create(metadata, principal, actor=actor)
 
     async def create_credential(
         self,
@@ -48,7 +51,7 @@ class AdminCreationOperations:
         credential_kind: str,
         attributes: Mapping[str, Any] | None = None,
     ) -> Credential:
-        await self._require(
+        await self._owner._require(
             AdminResourceKind.PRINCIPAL, principal_id, tenant_id=tenant_id
         )
         credential = Credential(
@@ -57,10 +60,10 @@ class AdminCreationOperations:
             kind=CredentialKind(credential_kind),
             metadata=dict(attributes or {}),
         )
-        metadata = self._metadata_for(
+        metadata = self._owner._metadata_for(
             credential.id, AdminResourceKind.CREDENTIAL, tenant_id, name
         )
-        return await self._create(metadata, credential, actor=actor)
+        return await self._owner._create(metadata, credential, actor=actor)
 
     async def create_app(
         self,
@@ -72,7 +75,7 @@ class AdminCreationOperations:
         owner_principal_id: str | None = None,
     ) -> App:
         if owner_principal_id:
-            await self._require(
+            await self._owner._require(
                 AdminResourceKind.PRINCIPAL,
                 owner_principal_id,
                 tenant_id=tenant_id,
@@ -84,8 +87,10 @@ class AdminCreationOperations:
             client_ids=_clean_tuple(client_ids),
             owner_principal_id=owner_principal_id,
         )
-        metadata = self._metadata_for(app.id, AdminResourceKind.APP, tenant_id, name)
-        return await self._create(metadata, app, actor=actor)
+        metadata = self._owner._metadata_for(
+            app.id, AdminResourceKind.APP, tenant_id, name
+        )
+        return await self._owner._create(metadata, app, actor=actor)
 
     async def create_service_identity(
         self,
@@ -97,7 +102,7 @@ class AdminCreationOperations:
         owner_principal_id: str | None = None,
     ) -> Principal:
         if owner_principal_id:
-            await self._require(
+            await self._owner._require(
                 AdminResourceKind.PRINCIPAL,
                 owner_principal_id,
                 tenant_id=tenant_id,
@@ -113,10 +118,10 @@ class AdminCreationOperations:
                 "scopes": _clean_tuple(scopes),
             },
         )
-        metadata = self._metadata_for(
+        metadata = self._owner._metadata_for(
             service.id, AdminResourceKind.SERVICE_IDENTITY, tenant_id, name
         )
-        return await self._create(metadata, service, actor=actor)
+        return await self._owner._create(metadata, service, actor=actor)
 
     async def create_resource_server(
         self,
@@ -129,14 +134,14 @@ class AdminCreationOperations:
     ):
         if not audience:
             raise ValueError("resource server audience is required")
-        metadata = self._metadata_for(
+        metadata = self._owner._metadata_for(
             _new_id("rs"),
             AdminResourceKind.RESOURCE_SERVER,
             tenant_id,
             name,
             attributes={"audience": audience, "scopes": _clean_tuple(scopes)},
         )
-        return await self._create(metadata, metadata, actor=actor)
+        return await self._owner._create(metadata, metadata, actor=actor)
 
     async def create_policy(
         self,
@@ -157,14 +162,14 @@ class AdminCreationOperations:
             language=policy_kind,
             created_at=_utc_now(),
         )
-        metadata = self._metadata_for(
+        metadata = self._owner._metadata_for(
             policy.policy_id,
             AdminResourceKind.POLICY,
             tenant_id,
             name,
             attributes={"rules": dict(rules), "version": version},
         )
-        return await self._create(metadata, policy, actor=actor)
+        return await self._owner._create(metadata, policy, actor=actor)
 
 
 __all__ = ["AdminCreationOperations"]

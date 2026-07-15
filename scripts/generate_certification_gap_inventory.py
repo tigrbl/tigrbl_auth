@@ -18,7 +18,9 @@ MARKER_PATTERN = re.compile(
     r"\b(TODO|FIXME|NotImplemented|placeholder|partial|incomplete)\b",
     re.IGNORECASE,
 )
-CHRONOLOGY_PATTERN = re.compile(rf"(?i)(?:{''.join(('pha', 'se'))}|{''.join(('st', 'ep'))})\d+")
+CHRONOLOGY_PATTERN = re.compile(
+    rf"(?i)(?:{''.join(('pha', 'se'))}|{''.join(('st', 'ep'))})\d+"
+)
 SCAN_ROOTS = ("tigrbl_auth", "tests", "scripts", "compliance", "docs")
 SCAN_SUFFIXES = {".py", ".md", ".yaml", ".yml", ".toml"}
 SKIP_PARTS = {"archive", "dist", ".pytest_cache", "__pycache__"}
@@ -34,7 +36,9 @@ def status_counts(rows: list[dict[str, Any]], key: str) -> dict[str, int]:
     return dict(sorted(Counter(str(row.get(key, "unset")) for row in rows).items()))
 
 
-def list_rows(rows: list[dict[str, Any]], fields: tuple[str, ...]) -> list[dict[str, Any]]:
+def list_rows(
+    rows: list[dict[str, Any]], fields: tuple[str, ...]
+) -> list[dict[str, Any]]:
     return [{field: row.get(field) for field in fields} for row in rows]
 
 
@@ -93,8 +97,12 @@ def marker_inventory(root: Path) -> dict[str, Any]:
 def build_inventory(root: Path = ROOT) -> dict[str, Any]:
     registry = load_json(root / ".ssot" / "registry.json", {})
     validation = load_json(root / ".ssot" / "reports" / "validation.report.json", {})
-    package_review = load_json(root / "docs" / "compliance" / "PACKAGE_REVIEW_GAP_ANALYSIS.json", {})
-    certification_state = load_json(root / "docs" / "compliance" / "certification_state_report.json", {})
+    package_review = load_json(
+        root / "docs" / "compliance" / "PACKAGE_REVIEW_GAP_ANALYSIS.json", {}
+    )
+    certification_state = load_json(
+        root / "docs" / "compliance" / "certification_state_report.json", {}
+    )
 
     features = registry.get("features", [])
     profiles = registry.get("profiles", [])
@@ -117,9 +125,7 @@ def build_inventory(root: Path = ROOT) -> dict[str, Any]:
         row for row in features if row.get("plan", {}).get("horizon") != "out_of_bounds"
     ]
     partial_or_absent = [
-        row
-        for row in features
-        if row.get("implementation_status") != "implemented"
+        row for row in features if row.get("implementation_status") != "implemented"
     ]
     current_partial_or_absent = [
         row
@@ -127,16 +133,26 @@ def build_inventory(root: Path = ROOT) -> dict[str, Any]:
         if row.get("implementation_status") != "implemented"
     ]
     draft_profiles = [row for row in profiles if row.get("status") == "draft"]
-    open_issues = [row for row in issues if row.get("status") not in {"closed", "resolved"}]
-    active_risks = [row for row in risks if row.get("status") not in {"mitigated", "retired"}]
+    open_issues = [
+        row for row in issues if row.get("status") not in {"closed", "resolved"}
+    ]
+    active_risks = [
+        row for row in risks if row.get("status") not in {"mitigated", "retired"}
+    ]
     claims_without_tests = [
-        row for row in claims if row.get("status") != "retired" and not row.get("test_ids")
+        row
+        for row in claims
+        if row.get("status") != "retired" and not row.get("test_ids")
     ]
     claims_without_evidence = [
-        row for row in claims if row.get("status") != "retired" and not row.get("evidence_ids")
+        row
+        for row in claims
+        if row.get("status") != "retired" and not row.get("evidence_ids")
     ]
     tests_without_evidence = [
-        row for row in tests if row.get("status") == "passing" and not row.get("evidence_ids")
+        row
+        for row in tests
+        if row.get("status") == "passing" and not row.get("evidence_ids")
     ]
 
     certification_gaps = certification_state.get("summary", {}).get("open_gaps", [])
@@ -157,7 +173,9 @@ def build_inventory(root: Path = ROOT) -> dict[str, Any]:
             "validation_passed": bool(validation.get("passed")),
             "counts": registry_counts,
             "validation_counts": validation.get("summary", {}).get("counts", {}),
-            "feature_implementation_status": status_counts(features, "implementation_status"),
+            "feature_implementation_status": status_counts(
+                features, "implementation_status"
+            ),
             "feature_horizon": status_counts(
                 [
                     {"horizon": row.get("plan", {}).get("horizon", "unset")}
@@ -185,11 +203,25 @@ def build_inventory(root: Path = ROOT) -> dict[str, Any]:
             ),
             "open_issues": list_rows(
                 open_issues,
-                ("id", "title", "severity", "status", "release_blocking", "description"),
+                (
+                    "id",
+                    "title",
+                    "severity",
+                    "status",
+                    "release_blocking",
+                    "description",
+                ),
             ),
             "active_risks": list_rows(
                 active_risks,
-                ("id", "title", "severity", "status", "release_blocking", "description"),
+                (
+                    "id",
+                    "title",
+                    "severity",
+                    "status",
+                    "release_blocking",
+                    "description",
+                ),
             ),
             "claims_without_tests": list_rows(
                 claims_without_tests,
@@ -266,7 +298,9 @@ def render_markdown(inventory: dict[str, Any]) -> str:
     )
     if gaps["current_partial_or_absent_features"]:
         for row in gaps["current_partial_or_absent_features"]:
-            lines.append(f"- `{row['id']}`: {row['implementation_status']} - {row['title']}")
+            lines.append(
+                f"- `{row['id']}`: {row['implementation_status']} - {row['title']}"
+            )
     else:
         lines.append("- None")
 
@@ -286,7 +320,9 @@ def render_markdown(inventory: dict[str, Any]) -> str:
 
     lines.extend(["", "## Delivery Tracks", ""])
     for item in inventory["delivery_tracks"]:
-        lines.append(f"- {item['name']}: {item['required_change']} Current status: {item['current_status']}")
+        lines.append(
+            f"- {item['name']}: {item['required_change']} Current status: {item['current_status']}"
+        )
 
     lines.extend(["", "## Source Marker Scan", ""])
     lines.append(f"- files with marker terms: `{markers['count']}`")
@@ -297,16 +333,22 @@ def render_markdown(inventory: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
-def write_inventory(inventory: dict[str, Any], report_dir: Path = REPORT_DIR) -> dict[str, str]:
+def write_inventory(
+    inventory: dict[str, Any], report_dir: Path = REPORT_DIR
+) -> dict[str, str]:
     report_dir.mkdir(parents=True, exist_ok=True)
     json_out = report_dir / JSON_OUT.name
     md_out = report_dir / MD_OUT.name
     json_out.write_text(dump_jcs_json(inventory), encoding="utf-8")
     md_out.write_text(render_markdown(inventory) + "\n", encoding="utf-8")
-    return {
-        "json": json_out.relative_to(ROOT).as_posix(),
-        "markdown": md_out.relative_to(ROOT).as_posix(),
-    }
+
+    def display_path(path: Path) -> str:
+        try:
+            return path.relative_to(ROOT).as_posix()
+        except ValueError:
+            return path.as_posix()
+
+    return {"json": display_path(json_out), "markdown": display_path(md_out)}
 
 
 def main() -> int:

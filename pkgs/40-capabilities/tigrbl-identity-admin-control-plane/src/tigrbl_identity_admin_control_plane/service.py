@@ -42,7 +42,7 @@ async def _resolve(value):
     return await value if inspect.isawaitable(value) else value
 
 
-class AdminControlPlane(AdminCreationOperations, Capability):
+class AdminControlPlane(Capability):
     def __init__(
         self,
         creator: AdminCreateOperation,
@@ -60,6 +60,7 @@ class AdminControlPlane(AdminCreationOperations, Capability):
         self._deleter = deleter
         self._audit_recorder = audit_recorder
         self._audit_lister = audit_lister
+        self._creation = AdminCreationOperations(self)
         operation_names = (
             "create_principal",
             "create_credential",
@@ -87,6 +88,24 @@ class AdminControlPlane(AdminCreationOperations, Capability):
                 for name in operation_names
             },
         )
+
+    async def create_principal(self, **kwargs):
+        return await self._creation.create_principal(**kwargs)
+
+    async def create_credential(self, **kwargs):
+        return await self._creation.create_credential(**kwargs)
+
+    async def create_app(self, **kwargs):
+        return await self._creation.create_app(**kwargs)
+
+    async def create_service_identity(self, **kwargs):
+        return await self._creation.create_service_identity(**kwargs)
+
+    async def create_resource_server(self, **kwargs):
+        return await self._creation.create_resource_server(**kwargs)
+
+    async def create_policy(self, **kwargs):
+        return await self._creation.create_policy(**kwargs)
 
     async def get(
         self,
