@@ -20,7 +20,8 @@ ProtocolReport: TypeAlias = Mapping[str, object]
 ProviderBuilder: TypeAlias = Callable[[], ProviderSet]
 StorageRuntimeBuilder: TypeAlias = Callable[[ProviderSet], StorageRuntimeSet]
 CapabilityBuilder: TypeAlias = Callable[
-    [ProviderSet, StorageRuntimeSet], Iterable[ICapability]
+    [ProviderSet, StorageRuntimeSet],
+    Iterable[ICapability] | CapabilityRegistry,
 ]
 ProtocolBuilder: TypeAlias = Callable[
     [CapabilityRegistry], Iterable[ProtocolReport]
@@ -73,7 +74,7 @@ def validate_protocol_capabilities(
     failures: list[str] = []
     for requirement in _requirements(reports):
         try:
-            capability = registry.resolve(requirement.capability_id)
+            operations = registry.operation_names(requirement.capability_id)
         except KeyError:
             if requirement.required:
                 failures.append(
@@ -82,7 +83,7 @@ def validate_protocol_capabilities(
                     f"{requirement.capability_id}"
                 )
             continue
-        if requirement.operation not in capability.callables():
+        if requirement.operation not in operations:
             failures.append(
                 f"{requirement.protocol}@{requirement.revision}: "
                 f"{requirement.requirement_id} requires unavailable operation "
@@ -107,7 +108,12 @@ def build_runtime_capability_assembly(
     storage_runtime = dict(build_storage_runtime(providers))
     construction_order.append("storage-runtime")
 
-    registry = CapabilityRegistry(build_capabilities(providers, storage_runtime))
+    capabilities = build_capabilities(providers, storage_runtime)
+    registry = (
+        capabilities
+        if isinstance(capabilities, CapabilityRegistry)
+        else CapabilityRegistry(capabilities)
+    )
     construction_order.append("capabilities")
 
     protocols = tuple(build_protocols(registry))

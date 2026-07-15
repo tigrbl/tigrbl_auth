@@ -12,7 +12,7 @@ from .assembly import (
     testkit_provider_runtime_profile,
 )
 from .base import LazyASGIApplication, RunnerAdapter
-from .capability_registry import CapabilityRegistry
+from .capability_registry import CapabilityFactory, CapabilityRegistry
 from .capability_assembly import (
     ProtocolCapabilityBindingError,
     RuntimeCapabilityAssembly,
@@ -35,6 +35,7 @@ from .standards import (
 __all__ = [
     "CONFIG_PRECEDENCE",
     "CapabilityRegistry",
+    "CapabilityFactory",
     "LazyASGIApplication",
     "ProtocolCapabilityBindingError",
     "ReadinessDiagnostic",

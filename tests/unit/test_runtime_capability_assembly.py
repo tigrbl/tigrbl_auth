@@ -9,6 +9,8 @@ from tigrbl_identity_contracts.capabilities import (
     ProtocolCapabilityRequirement,
 )
 from tigrbl_identity_runtime import (
+    CapabilityFactory,
+    CapabilityRegistry,
     ProtocolCapabilityBindingError,
     build_runtime_capability_assembly,
 )
@@ -115,3 +117,75 @@ def test_runtime_assembly_allows_an_absent_optional_capability() -> None:
     )
 
     assert assembly.capabilities.capability_ids() == ("example.processing",)
+
+
+def test_request_scoped_factory_is_reported_validated_and_materialized() -> None:
+    definition = CapabilityDefinition("example.processing", "1.0")
+    registry = CapabilityRegistry(
+        factories=(
+            CapabilityFactory(
+                definition,
+                ("execute",),
+                lambda dependency: Capability(
+                    definition,
+                    operations={
+                        "execute": CapabilityOperation(
+                            target=lambda value: dependency + value
+                        ),
+                    },
+                ),
+            ),
+        )
+    )
+
+    assembly = build_runtime_capability_assembly(
+        build_providers=dict,
+        build_storage_runtime=lambda providers: {},
+        build_capabilities=lambda providers, storage: registry,
+        build_protocols=lambda capabilities: (
+            {"requirements": (_requirement(),)},
+        ),
+    )
+    report = assembly.capabilities.report()["capabilities"]["example.processing"]
+    capability = assembly.capabilities.materialize("example.processing", 2)
+
+    assert report["lifetime"] == "request-scoped"
+    assert report["state"]["status"] == "requires-materialization"
+    assert capability.definition() == definition
+
+
+def test_request_scoped_factory_rejects_definition_and_operation_drift() -> None:
+    definition = CapabilityDefinition("example.processing", "1.0")
+    wrong_definition = CapabilityRegistry(
+        factories=(
+            CapabilityFactory(
+                definition,
+                ("execute",),
+                lambda: Capability(
+                    CapabilityDefinition("different", "1.0"),
+                    operations={
+                        "execute": CapabilityOperation(target=lambda: None),
+                    },
+                ),
+            ),
+        )
+    )
+    missing_operation = CapabilityRegistry(
+        factories=(
+            CapabilityFactory(
+                definition,
+                ("execute",),
+                lambda: Capability(
+                    definition,
+                    operations={
+                        "other": CapabilityOperation(target=lambda: None),
+                    },
+                ),
+            ),
+        )
+    )
+
+    with pytest.raises(ValueError, match="different capability definition"):
+        wrong_definition.materialize("example.processing")
+    with pytest.raises(NotImplementedError, match="did not bind"):
+        missing_operation.materialize("example.processing")
