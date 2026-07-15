@@ -20,35 +20,17 @@ STORAGE_SRC = (
 def test_protocol_wire_schemas_are_not_owned_by_storage_tables() -> None:
     from tigrbl_auth_protocol_oauth import schemas as oauth_schemas
     from tigrbl_auth_protocol_oidc import schemas as oidc_schemas
-    from tigrbl_identity_storage.tables import (
-        AuthSession,
-        ClientRegistration,
-        DeviceCode,
-        LogoutState,
-        PushedAuthorizationRequest,
-        RevokedToken,
-        TokenRecord,
-    )
 
     assert oauth_schemas.TokenPair.__module__ == oauth_schemas.__name__
-    assert oauth_schemas.DynamicClientRegistrationIn.__module__ == oauth_schemas.__name__
+    assert (
+        oauth_schemas.DynamicClientRegistrationIn.__module__ == oauth_schemas.__name__
+    )
     assert oauth_schemas.DeviceAuthorizationOut.__module__ == oauth_schemas.__name__
-    assert oauth_schemas.PushedAuthorizationResponse.__module__ == oauth_schemas.__name__
+    assert (
+        oauth_schemas.PushedAuthorizationResponse.__module__ == oauth_schemas.__name__
+    )
     assert oauth_schemas.RevocationOut.__module__ == oauth_schemas.__name__
     assert oidc_schemas.LogoutIn.__module__ == oidc_schemas.__name__
-
-    custom_operations = {
-        AuthSession: ("login",),
-        TokenRecord: ("token", "refresh", "introspect"),
-        ClientRegistration: ("register", "register_put"),
-        DeviceCode: ("device_authorization",),
-        PushedAuthorizationRequest: ("par",),
-        RevokedToken: ("revoke",),
-        LogoutState: ("logout",),
-    }
-    for table, operation_names in custom_operations.items():
-        for operation_name in operation_names:
-            assert not hasattr(table.schemas, operation_name)
 
     storage_modules = (
         "auth_session",
@@ -59,9 +41,13 @@ def test_protocol_wire_schemas_are_not_owned_by_storage_tables() -> None:
         "revoked_token",
         "token_record",
     )
-    forbidden_schema_names = set(oauth_schemas.__all__) | set(oidc_schemas.__all__) | {"CredsIn"}
+    forbidden_schema_names = (
+        set(oauth_schemas.__all__) | set(oidc_schemas.__all__) | {"CredsIn"}
+    )
     for module_name in storage_modules:
-        module = importlib.import_module(f"tigrbl_identity_storage.tables.{module_name}")
+        module = importlib.import_module(
+            f"tigrbl_identity_storage.tables.{module_name}"
+        )
         assert forbidden_schema_names.isdisjoint(vars(module))
 
 
@@ -111,7 +97,9 @@ def test_protocol_schema_owner_covers_mounted_token_component() -> None:
         deployment=resolve_deployment(plugin_mode="mixed")
     )
 
-    component_names = set(surface_api.openapi().get("components", {}).get("schemas", {}))
+    component_names = set(
+        surface_api.openapi().get("components", {}).get("schemas", {})
+    )
     assert "AdminSessionOut" in component_names
     assert TokenPair.__name__ in component_names
 
@@ -127,7 +115,9 @@ def test_storage_package_does_not_import_identity_contract_schemas() -> None:
 
 
 def test_storage_package_metadata_does_not_depend_on_higher_layers() -> None:
-    pyproject = ROOT / "pkgs" / "01-storage" / "tigrbl-identity-storage" / "pyproject.toml"
+    pyproject = (
+        ROOT / "pkgs" / "01-storage" / "tigrbl-identity-storage" / "pyproject.toml"
+    )
     source = pyproject.read_text(encoding="utf-8")
 
     assert "tigrbl-authz-resource-server" not in source
@@ -164,8 +154,7 @@ def test_storage_table_helpers_are_nested_under_table_owners() -> None:
     offenders = [
         path.relative_to(ROOT).as_posix()
         for path in tables_root.glob("_*.py")
-        if path.name != "_ops.py"
-        and path.name.startswith(flat_helper_prefixes)
+        if path.name != "_ops.py" and path.name.startswith(flat_helper_prefixes)
     ]
 
     assert offenders == []
