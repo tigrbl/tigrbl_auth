@@ -63,6 +63,15 @@ def build_app(
 ) -> "TigrblApp":
     resolved_settings = settings_obj if settings_obj is not None else _load_default_settings()
     resolved_deployment = deployment or resolve_deployment(resolved_settings)
+    if runtime_assembly_factory is None:
+        from tigrbl_identity_server.api.runtime_assembly import (
+            build_server_runtime_assembly,
+        )
+
+        def default_runtime_assembly_factory():
+            return build_server_runtime_assembly(resolved_settings)
+
+        runtime_assembly_factory = default_runtime_assembly_factory
 
     from tigrbl_identity_contracts.protocol_configuration import (
         ProtocolSettingsOverlay,
