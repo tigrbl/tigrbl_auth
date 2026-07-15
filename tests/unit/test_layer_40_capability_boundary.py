@@ -55,6 +55,10 @@ def test_layer_40_contains_only_registered_multi_component_use_cases() -> None:
         "tigrbl-token-revocation-capability": (
             "coordinate durable token revocation with optional audit recording"
         ),
+        "tigrbl-token-exchange-capability": (
+            "coordinate normalized security-token exchange across verification, "
+            "issuance, durable lineage, and audit operations"
+        ),
         "tigrbl-workload-identity": (
             "coordinate workload credential retrieval and identity verification"
         ),

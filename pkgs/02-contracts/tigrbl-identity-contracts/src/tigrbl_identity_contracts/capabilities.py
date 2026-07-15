@@ -10,6 +10,30 @@ from typing import Protocol, TypeAlias, runtime_checkable
 CapabilityCallable: TypeAlias = Callable[..., object | Awaitable[object]]
 
 
+class CapabilityError(RuntimeError):
+    """Base error for capability definition, resolution, and execution."""
+
+
+class CapabilityContextError(CapabilityError, ValueError):
+    """Raised when a supplied call context conflicts with the target call."""
+
+
+class CapabilityOperationNotFoundError(CapabilityError, KeyError):
+    """Raised when a capability does not declare the requested operation."""
+
+
+class CapabilityOperationUnavailableError(CapabilityError, LookupError):
+    """Raised when an optional operation is declared but not bound."""
+
+
+class CapabilityDeadlineExceededError(CapabilityError, TimeoutError):
+    """Raised when execution begins after the caller's deadline."""
+
+
+class CapabilityDelegationCycleError(CapabilityError):
+    """Raised when a delegated call would revisit a capability."""
+
+
 @dataclass(frozen=True, slots=True)
 class CapabilityDefinition:
     capability_id: str
@@ -58,6 +82,7 @@ class CapabilityCallResult:
     operation: str = ""
     call_id: str = ""
     delegated: bool = False
+    context: CapabilityCallContext | None = None
 
 
 @runtime_checkable
@@ -71,6 +96,8 @@ class ICapability(Protocol):
     def callables(self) -> Mapping[str, CapabilityCallable]: ...
 
     def state(self) -> CapabilityState: ...
+
+    def capability_report(self) -> Mapping[str, object]: ...
 
     async def call(
         self,
@@ -86,6 +113,7 @@ class ICapability(Protocol):
         operation: str,
         *args: object,
         context: CapabilityCallContext,
+        authority: tuple[str, ...] | None = None,
         **kwargs: object,
     ) -> CapabilityCallResult: ...
 
@@ -106,8 +134,14 @@ __all__ = [
     "CapabilityCallContext",
     "CapabilityCallable",
     "CapabilityCallResult",
+    "CapabilityContextError",
+    "CapabilityDeadlineExceededError",
     "CapabilityDefinition",
+    "CapabilityDelegationCycleError",
+    "CapabilityError",
     "CapabilityOperation",
+    "CapabilityOperationNotFoundError",
+    "CapabilityOperationUnavailableError",
     "CapabilityState",
     "CapabilityStateProvider",
     "ICapability",

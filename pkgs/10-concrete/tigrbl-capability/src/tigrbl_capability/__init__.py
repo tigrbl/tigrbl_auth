@@ -12,8 +12,13 @@ from tigrbl_identity_contracts.capabilities import (
     CapabilityCallContext,
     CapabilityCallable,
     CapabilityCallResult,
+    CapabilityContextError,
+    CapabilityDeadlineExceededError,
     CapabilityDefinition,
+    CapabilityDelegationCycleError,
     CapabilityOperation,
+    CapabilityOperationNotFoundError,
+    CapabilityOperationUnavailableError,
     CapabilityState,
     CapabilityStateProvider,
     ICapability,
@@ -124,13 +129,33 @@ class Capability(CapabilityBase):
         try:
             operation_definition = self._capability_operations[operation]
         except KeyError as exc:
-            raise KeyError(f"unknown capability operation: {operation}") from exc
+            raise CapabilityOperationNotFoundError(
+                f"unknown capability operation: {operation}"
+            ) from exc
         target = operation_definition.target
         if target is None:
-            raise LookupError(f"unbound optional capability operation: {operation}")
+            raise CapabilityOperationUnavailableError(
+                f"unbound optional capability operation: {operation}"
+            )
         active = context or CapabilityCallContext(call_id=new_opaque_id())
+        capability_id = self._capability_definition.capability_id
+        if active.capability_id not in {None, capability_id}:
+            raise CapabilityContextError(
+                "call context capability_id does not match target capability"
+            )
+        if active.operation not in {None, operation}:
+            raise CapabilityContextError(
+                "call context operation does not match target operation"
+            )
+        active = replace(
+            active,
+            capability_id=capability_id,
+            operation=operation,
+        )
         if active.deadline is not None and time.time() > active.deadline:
-            raise TimeoutError("capability call deadline exceeded")
+            raise CapabilityDeadlineExceededError(
+                "capability call deadline exceeded"
+            )
         value = target(*args, **kwargs)
         if inspect.isawaitable(value):
             value = await value
@@ -140,6 +165,7 @@ class Capability(CapabilityBase):
             operation=operation,
             call_id=active.call_id,
             delegated=operation_definition.delegated,
+            context=active,
         )
 
     async def subcall(
@@ -148,6 +174,7 @@ class Capability(CapabilityBase):
         operation: str,
         *args: object,
         context: CapabilityCallContext,
+        authority: tuple[str, ...] | None = None,
         **kwargs: object,
     ) -> CapabilityCallResult:
         target_capability_id = capability.definition().capability_id
@@ -155,7 +182,14 @@ class Capability(CapabilityBase):
             self._capability_definition.capability_id,
         )
         if target_capability_id in delegation_chain:
-            raise RuntimeError("capability delegation cycle detected")
+            raise CapabilityDelegationCycleError(
+                "capability delegation cycle detected"
+            )
+        child_authority = context.authority if authority is None else authority
+        if not set(child_authority).issubset(context.authority):
+            raise CapabilityContextError(
+                "delegated authority must narrow or preserve parent authority"
+            )
         child = replace(
             context,
             parent_call_id=context.call_id,
@@ -163,6 +197,7 @@ class Capability(CapabilityBase):
             capability_id=target_capability_id,
             operation=operation,
             delegation_chain=delegation_chain,
+            authority=tuple(child_authority),
         )
         return await capability.call(operation, *args, context=child, **kwargs)
 

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import asyncio
+import time
 
 import pytest
 
@@ -14,11 +15,14 @@ from tigrbl_identity_admin_control_plane import AdminControlPlane
 from tigrbl_identity_contracts.attestation import EvidenceVerificationResult
 from tigrbl_identity_contracts.capabilities import (
     CapabilityCallContext,
+    CapabilityContextError,
+    CapabilityDeadlineExceededError,
     CapabilityDefinition,
     CapabilityOperation,
     CapabilityState,
     ICapability,
 )
+from tigrbl_identity_runtime import CapabilityRegistry
 from tigrbl_replay_protection_capability import ReplayProtectionCapability
 from tigrbl_security_events import SecurityEventsCapability
 from tigrbl_workload_identity import WorkloadIdentityCapability
@@ -146,6 +150,10 @@ def test_capability_operation_registry_supports_calls_and_delegated_subcalls() -
     assert nested.value == 6
     assert nested.delegated is True
     assert nested.capability_id == "test.child"
+    assert nested.context is not None
+    assert nested.context.parent_call_id == "parent-call"
+    assert nested.context.capability_id == "test.child"
+    assert nested.context.operation == "execute"
 
     with pytest.raises(RuntimeError, match="delegation cycle"):
         asyncio.run(
@@ -156,6 +164,133 @@ def test_capability_operation_registry_supports_calls_and_delegated_subcalls() -
                 context=CapabilityCallContext(call_id="cyclic-call"),
             )
         )
+
+
+def test_call_context_is_populated_validated_and_deadline_preserved() -> None:
+    capability = Capability(
+        _definition("test.context"),
+        operations={"execute": CapabilityOperation(target=lambda: "ok")},
+    )
+    context = CapabilityCallContext(
+        call_id="call-1",
+        tenant_id="tenant-1",
+        trace_id="trace-1",
+        authority=("read", "write"),
+        deadline=time.time() + 30,
+    )
+
+    result = asyncio.run(capability.call("execute", context=context))
+    assert result.context is not None
+    assert result.context.capability_id == "test.context"
+    assert result.context.operation == "execute"
+    assert result.context.tenant_id == "tenant-1"
+    assert result.context.trace_id == "trace-1"
+    assert result.context.deadline == context.deadline
+
+    with pytest.raises(CapabilityContextError, match="capability_id"):
+        asyncio.run(
+            capability.call(
+                "execute",
+                context=CapabilityCallContext(
+                    call_id="bad-capability",
+                    capability_id="other.capability",
+                ),
+            )
+        )
+    with pytest.raises(CapabilityContextError, match="operation"):
+        asyncio.run(
+            capability.call(
+                "execute",
+                context=CapabilityCallContext(
+                    call_id="bad-operation",
+                    operation="other",
+                ),
+            )
+        )
+    with pytest.raises(CapabilityDeadlineExceededError):
+        asyncio.run(
+            capability.call(
+                "execute",
+                context=CapabilityCallContext(
+                    call_id="expired",
+                    deadline=time.time() - 1,
+                ),
+            )
+        )
+
+
+def test_subcall_propagates_trace_and_tenant_and_narrows_authority() -> None:
+    parent = Capability(
+        _definition("test.parent-authority"),
+        operations={"execute": CapabilityOperation(target=lambda: None)},
+    )
+    child = Capability(
+        _definition("test.child-authority"),
+        operations={
+            "execute": CapabilityOperation(target=lambda: "child", delegated=True)
+        },
+    )
+    context = CapabilityCallContext(
+        call_id="parent-authority-call",
+        tenant_id="tenant-1",
+        trace_id="trace-1",
+        authority=("read", "write"),
+    )
+
+    result = asyncio.run(
+        parent.subcall(
+            child,
+            "execute",
+            context=context,
+            authority=("read",),
+        )
+    )
+    assert result.context is not None
+    assert result.context.tenant_id == "tenant-1"
+    assert result.context.trace_id == "trace-1"
+    assert result.context.authority == ("read",)
+
+    with pytest.raises(CapabilityContextError, match="narrow"):
+        asyncio.run(
+            parent.subcall(
+                child,
+                "execute",
+                context=context,
+                authority=("admin",),
+            )
+        )
+
+
+def test_runtime_capability_registry_validates_indexes_calls_and_reports() -> None:
+    first = Capability(
+        _definition("test.registry.first"),
+        operations={"execute": CapabilityOperation(target=lambda value: value + 1)},
+    )
+    optional = Capability(
+        _definition("test.registry.optional"),
+        operations={
+            "execute": CapabilityOperation(target=None, required=False),
+        },
+    )
+    registry = CapabilityRegistry((first, optional))
+
+    assert registry.capability_ids() == (
+        "test.registry.first",
+        "test.registry.optional",
+    )
+    assert asyncio.run(
+        registry.call("test.registry.first", "execute", 2)
+    ).value == 3
+    report = registry.report()
+    assert report["capability_ids"] == registry.capability_ids()
+    assert report["capabilities"]["test.registry.optional"][
+        "unavailable_optional_operations"
+    ] == ("execute",)
+
+    with pytest.raises(ValueError, match="duplicate"):
+        registry.register(first)
+    with pytest.raises(LookupError, match="unavailable"):
+        registry.require("test.registry.optional", operations=("execute",))
 
 
 def test_state_provider_is_evaluated_when_state_and_report_are_requested() -> None:

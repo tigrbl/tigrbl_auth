@@ -12,6 +12,7 @@ from .assembly import (
     testkit_provider_runtime_profile,
 )
 from .base import LazyASGIApplication, RunnerAdapter
+from .capability_registry import CapabilityRegistry
 from .registry import (
     get_runner_adapter,
     iter_runner_adapters,
@@ -27,6 +28,7 @@ from .standards import (
 
 __all__ = [
     "CONFIG_PRECEDENCE",
+    "CapabilityRegistry",
     "LazyASGIApplication",
     "ReadinessDiagnostic",
     "ReadinessStatus",
