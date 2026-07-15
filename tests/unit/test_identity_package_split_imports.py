@@ -315,7 +315,7 @@ def test_authn_credentials_no_longer_owns_token_or_session_service_modules() -> 
             importlib.import_module(module_name)
 
 
-def test_credentials_async_token_paths_use_async_persistence_hooks() -> None:
+def test_jose_token_paths_require_injected_async_revocation_hooks() -> None:
     coder_source = (
         _package_path("tigrbl-identity-jose")
         / "src"
@@ -344,11 +344,12 @@ def test_credentials_async_token_paths_use_async_persistence_hooks() -> None:
 
     assert "persist_token: bool = True" in coder_source
     assert "register_token" not in coder_source
-    assert 'runtime["is_revoked_async"]' in coder_source
-    assert 'runtime["is_revoked"](' not in coder_source
+    assert "revocation_checker: RevocationChecker | None" in coder_source
+    assert "self._revocation_checker(token)" in coder_source
+    assert 'runtime["is_revoked_async"]' not in coder_source
     assert "standards.introspection" not in runtime_source
     assert "register_token" not in runtime_source
-    assert '"is_revoked_async": is_revoked_async' in runtime_source
+    assert "standards.revocation" not in runtime_source
     assert "normalize_refresh_audience" in token_persistence_source
     assert "persist_token=False" in server_handler_source
 
@@ -370,10 +371,8 @@ def test_oauth_revocation_exports_protocol_service_only() -> None:
     assert not hasattr(split_module, "revoke_token_async")
     assert not hasattr(split_module, "is_revoked_async")
     assert not hasattr(split_module, "reset_revocations_async")
-    assert (
-        "from tigrbl_auth_protocol_oauth.standards.revocation import is_revoked, is_revoked_async"
-        in runtime_source
-    )
+    assert "standards.revocation" not in runtime_source
+    assert "is_revoked_async" not in runtime_source
 
 
 def test_oauth_introspection_exports_protocol_service_only() -> None:
