@@ -34,11 +34,23 @@ def test_each_extended_claim_is_a_standalone_claimbase_package():
 
 def test_protocols_compose_extended_claim_families():
     assert {claim.claim_name for claim in OAUTH_DPOP_PROOF_CLAIMS} == {
-        "jti", "htm", "htu", "iat", "nonce", "ath"
+        "jti",
+        "htm",
+        "htu",
+        "iat",
+        "nonce",
+        "ath",
     }
-    assert {claim.claim_name for claim in OAUTH_TOKEN_EXCHANGE_CLAIMS} == {"act", "may_act"}
+    assert {claim.claim_name for claim in OAUTH_TOKEN_EXCHANGE_CLAIMS} == {
+        "act",
+        "may_act",
+    }
     assert {claim.claim_name for claim in EAT_CLAIM_CLASSES} >= {
-        "eat_profile", "eat_nonce", "iat", "ueid", "submods"
+        "eat_profile",
+        "eat_nonce",
+        "iat",
+        "ueid",
+        "submods",
     }
 
 
@@ -47,7 +59,12 @@ def test_extended_protocol_claim_sets_are_explicitly_versioned():
     from tigrbl_claim_http_method_concrete import HttpMethodClaim
 
     assert compose_dpop_proof_claim_set(HttpMethodClaim("POST")).version == "RFC9449"
-    assert compose_token_exchange_claim_set(ActorClaim({"sub": "alice"})).version == "RFC8693"
+    assert (
+        compose_token_exchange_claim_set(ActorClaim({"sub": "alice"})).version
+        == "RFC8693"
+    )
+    with pytest.raises(ValueError, match="not valid for dpop-proof"):
+        compose_dpop_proof_claim_set(ActorClaim({"sub": "alice"}))
 
 
 @pytest.mark.parametrize(

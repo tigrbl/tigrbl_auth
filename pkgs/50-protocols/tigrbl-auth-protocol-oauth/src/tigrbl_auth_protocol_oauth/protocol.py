@@ -16,12 +16,11 @@ from tigrbl_identity_contracts.oauth import (
 )
 from tigrbl_identity_contracts.protocols import OAuthGrantStatus
 
+from .errors import OAuthProtocolError
 
-class OAuthError(RuntimeError):
-    def __init__(self, code: str, description: str) -> None:
-        super().__init__(description)
-        self.code = code
-        self.description = description
+
+class OAuthError(OAuthProtocolError):
+    """Backward-compatible concrete OAuth service error."""
 
 
 def _utc_now() -> datetime:

@@ -4,12 +4,25 @@ REMOVED_GRANTS = frozenset({"implicit", "password"})
 
 
 def migrate_client(
-    value: Mapping[str, Any], *, source: str, target: str = "draft-ietf-oauth-v2-1-13"
+    value: Mapping[str, Any],
+    *,
+    source: str,
+    target: str = "draft-ietf-oauth-v2-1-15",
 ) -> dict[str, Any]:
     if source == target:
         return dict(value)
-    if source != "RFC6749" or target != "draft-ietf-oauth-v2-1-13":
+    supported_drafts = {
+        "draft-ietf-oauth-v2-1-13",
+        "draft-ietf-oauth-v2-1-14",
+        "draft-ietf-oauth-v2-1-15",
+    }
+    if target != "draft-ietf-oauth-v2-1-15" or source not in {
+        "RFC6749",
+        *supported_drafts,
+    }:
         raise ValueError(f"unsupported OAuth migration: {source} -> {target}")
+    if source in supported_drafts:
+        return dict(value)
     grants = set(value.get("grant_types", ()))
     removed = grants & REMOVED_GRANTS
     if removed:

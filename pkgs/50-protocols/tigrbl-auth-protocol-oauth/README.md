@@ -33,6 +33,13 @@ client = OAuthClient(client_id="client-a", redirect_uris=("https://app.example/c
 ## Package Boundary
 
 - OAuth authorization and token protocol behavior
+- `versions.py` owns only the OAuth authorization-framework lineage. Extension
+  RFCs retain independent identities in `EXTENSION_SPECIFICATIONS` and in
+  their capability-requirement revisions.
+- `features.py`, `compatibility.py`, and `migrations.py` own revision selection,
+  feature flags, and supported OAuth 2.0-to-2.1 migration paths.
+- `claims.py`, `schemas.py`, `bindings.py`, and `errors.py` own OAuth wire
+  composition without taking ownership of standalone claim implementations.
 - `schemas.py` owns OAuth token, introspection, revocation, device authorization,
   PAR, and dynamic-client-registration wire models.
 - PKCE, PAR, RAR, JAR, device authorization, token exchange, DPoP, mTLS, and resource indicators
