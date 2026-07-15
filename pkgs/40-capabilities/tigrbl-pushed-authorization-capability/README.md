@@ -1,10 +1,25 @@
 # tigrbl-pushed-authorization-capability
 
-This layer-40 package accepts an already normalized and authenticated pushed
-authorization request. Its required `push_authorization_request` operation
-delegates durable request-URI creation; its optional `record_audit_event`
-operation records the resulting event.
+Layer-40 orchestration for persisting an already normalized and authenticated
+pushed authorization request.
 
-It does not parse HTTP, validate request objects, authenticate OAuth clients,
-verify DPoP, select FAPI policy, open storage sessions, or implement RFC 9126
-errors. Those collaborators are composed by protocol/runtime/API owners.
+## Injected dependencies
+
+A durable request-URI creation callable is required. A durable audit callable
+is optional. Both may be synchronous or asynchronous.
+
+## Operations and readiness
+
+`push_authorization_request` is required; `record_audit_event` is optional.
+Readiness follows the persistence binding, and the report exposes audit
+availability separately.
+
+## Protocol consumers
+
+The layer-50 OAuth package maps RFC 9126 PAR to this capability. OIDC and HAIP
+consume it through their configured OAuth/FAPI compositions where applicable.
+
+## Non-goals
+
+This package does not parse HTTP, authenticate clients, validate request
+objects/DPoP, choose FAPI policy or RFC errors, open sessions, or own state.

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import ast
 import sys
 from pathlib import Path
 
@@ -67,3 +68,54 @@ def test_layer_40_contains_only_registered_multi_component_use_cases() -> None:
 
 def test_layer_40_dependency_import_and_inheritance_boundaries() -> None:
     assert validate() == ()
+
+
+def test_every_layer_40_readme_declares_the_capability_contract() -> None:
+    capability_root = ROOT / "pkgs" / "40-capabilities"
+    required_sections = (
+        "## Injected dependencies",
+        "## Operations and readiness",
+        "## Protocol consumers",
+        "## Non-goals",
+    )
+
+    for package in capability_root.iterdir():
+        if not package.is_dir():
+            continue
+        readme = (package / "README.md").read_text(encoding="utf-8")
+        missing = tuple(
+            section for section in required_sections if section not in readme
+        )
+        assert not missing, f"{package.name} README missing sections: {missing}"
+
+
+def test_layer_40_capabilities_do_not_construct_mutable_instance_stores() -> None:
+    capability_root = ROOT / "pkgs" / "40-capabilities"
+    mutable_constructors = {"dict", "list", "set", "defaultdict"}
+    violations = []
+
+    for source in capability_root.rglob("*.py"):
+        tree = ast.parse(source.read_text(encoding="utf-8-sig"), filename=str(source))
+        for node in ast.walk(tree):
+            if not isinstance(node, (ast.Assign, ast.AnnAssign)):
+                continue
+            targets = node.targets if isinstance(node, ast.Assign) else (node.target,)
+            value = node.value
+            mutable_value = isinstance(value, (ast.Dict, ast.List, ast.Set)) or (
+                isinstance(value, ast.Call)
+                and isinstance(value.func, ast.Name)
+                and value.func.id in mutable_constructors
+            )
+            if not mutable_value:
+                continue
+            for target in targets:
+                if (
+                    isinstance(target, ast.Attribute)
+                    and isinstance(target.value, ast.Name)
+                    and target.value.id == "self"
+                ):
+                    violations.append(
+                        f"{source.relative_to(ROOT)}:{node.lineno}: self.{target.attr}"
+                    )
+
+    assert violations == []

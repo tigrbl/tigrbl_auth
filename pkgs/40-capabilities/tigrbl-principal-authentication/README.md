@@ -1,17 +1,29 @@
 # tigrbl-principal-authentication
 
-Composable record-backed authentication capabilities. Durable lookup operations
-are injected from layer 30 and secret verification is delegated to layer-20
-authenticator providers. The package does not own tables, routers, or protocol
-authentication-method selection.
+Layer-40 orchestration for record-backed password, client-secret, API-key, and
+service-key authentication.
 
-Operations:
+## Injected dependencies
 
-- `authenticate_password`
-- `authenticate_client_secret`
-- `verify_client_record`
-- `authenticate_api_key`
+Password/client capabilities receive durable lookup callables and layer-20
+authenticators. API-key authentication receives user/service-key lookup,
+principal resolution, and last-used mutation callables plus replaceable
+layer-20 key authenticators.
 
-`authenticate_api_key` receives digest, API-key lookup, service-key lookup,
-principal resolution, and last-used mutation callables from layer 30. It does
-not import mapped tables or own an in-memory credential store.
+## Operations and readiness
+
+Operations are `authenticate_password`, `authenticate_client_secret`,
+`verify_client_record`, and `authenticate_api_key`, split across three focused
+capabilities. Each capability is ready when its constructor-required targets
+are bound; required missing targets fail construction.
+
+## Protocol consumers
+
+Layer-50 OAuth and OIDC consume these capabilities for selected client and
+end-user authentication methods. GNAP may consume the normalized principal
+authentication result when configured.
+
+## Non-goals
+
+This package does not own credential tables, hashes, protocol method selection,
+session creation, routes, or authentication policy.

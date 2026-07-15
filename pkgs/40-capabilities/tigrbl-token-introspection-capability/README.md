@@ -1,15 +1,24 @@
 # tigrbl-token-introspection-capability
 
-This layer-40 package exposes one composable operation:
-`token.introspection:introspect_token`.
+Layer-40 protocol-neutral orchestration for typed token-state introspection.
 
-The capability accepts a typed `TokenIntrospectionRequest`, delegates durable
-lookup to an injected callable, and returns `TokenIntrospectionResult`. The
-injected callable may be synchronous or asynchronous and must return either a
-typed result or a mapping containing `active` plus normalized token claims.
+## Injected dependencies
 
-Readiness requires the `introspect_token` target to be bound at construction.
-The capability does not parse HTTP, authenticate an OAuth client, choose RFC
-7662 errors, open a database/session, verify token cryptography, or publish a
-route. OAuth maps this capability into its versioned protocol at layer 50 and a
-layer-80 API owns the carrier binding.
+A required synchronous or asynchronous lookup callable accepts a
+`TokenIntrospectionRequest` and returns a typed result or normalized mapping.
+It normally composes durable token state with profile validation below layer 40.
+
+## Operations and readiness
+
+The required operation is `introspect_token`. Construction fails without its
+target and the capability report exposes the effective binding and state.
+
+## Protocol consumers
+
+The layer-50 OAuth package maps RFC 7662 to this capability; the layer-50
+resource-server package may consume the normalized result for authorization.
+
+## Non-goals
+
+This package does not parse HTTP, authenticate callers, open sessions, verify
+cryptography, choose protocol errors, or publish routes.
