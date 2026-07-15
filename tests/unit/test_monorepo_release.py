@@ -118,7 +118,7 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
         cell["python_version"]
         for cell in matrix
         if cell["name"] == "tigrbl-authz-resource-server-verifier"
-    } == {"3.10", "3.11", "3.12", "3.13"}
+    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
     testkit_cells = [cell for cell in matrix if cell["name"] == "tigrbl-identity-testkit"]
     assert len(testkit_cells) == 3
     assert all(cell["cross_cutting"] == "true" for cell in testkit_cells)
