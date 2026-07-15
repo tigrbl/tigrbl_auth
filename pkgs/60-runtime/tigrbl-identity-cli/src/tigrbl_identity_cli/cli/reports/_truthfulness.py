@@ -248,7 +248,12 @@ def build_feature_completeness_report(repo_root: Path, *, report_dir: Path | Non
 
 
 def _ensure_repo_local_operator_state(repo_root: Path) -> Path:
+    configured = os.environ.get("TIGRBL_AUTH_OPERATOR_STATE_DIR")
+    if configured:
+        state_root = Path(configured).expanduser().resolve()
+        state_root.mkdir(parents=True, exist_ok=True)
+        return state_root
     state_root = repo_root / ".pytest-tmp" / "operator-state" / "certification-closure"
     state_root.mkdir(parents=True, exist_ok=True)
-    os.environ.setdefault("TIGRBL_AUTH_OPERATOR_STATE_DIR", str(state_root))
+    os.environ["TIGRBL_AUTH_OPERATOR_STATE_DIR"] = str(state_root)
     return state_root

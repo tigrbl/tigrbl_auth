@@ -17,6 +17,8 @@ def _repo_copy(src: Path, dst: Path) -> Path:
         ignore=shutil.ignore_patterns(
             ".git",
             ".pytest-tmp*",
+            ".test-tmp-*",
+            ".codex-tmp-*",
             ".pytest_cache*",
             ".uv-cache",
             ".uv-cache-local",
