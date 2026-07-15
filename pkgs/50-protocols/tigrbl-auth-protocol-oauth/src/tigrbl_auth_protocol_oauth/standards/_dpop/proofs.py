@@ -3,13 +3,14 @@ from __future__ import annotations
 import json
 import secrets
 import time
-import inspect
 from typing import Any
 
-from tigrbl_identity_core.standards import describe_owner
-from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
+from tigrbl_identity_contracts.protocol_configuration import (
+    protocol_settings as settings,
+)
 from tigrbl_security_trust_contracts import DPoPNonceRecord, DPoPProofClaims
 
+from .metadata import describe
 from .primitives import (
     OWNER,
     RFC9449_SPEC_URL,
@@ -29,6 +30,19 @@ from .primitives import (
     jwk_from_public_key,
     jwk_thumbprint,
 )
+from .state import (
+    _maybe_await,
+    _require_callable,
+    consume_nonce,
+    consume_nonce_async,
+    issue_nonce,
+    issue_nonce_async,
+    register_nonce,
+    register_nonce_async,
+    replay_table_snapshot,
+    replay_table_snapshot_async,
+)
+
 
 def _segments(proof: str) -> tuple[dict[str, Any], dict[str, Any]]:
     parts = str(proof).split(".")
@@ -81,7 +95,9 @@ def decode_proof(proof: str) -> dict[str, object]:
     return proof_claims(proof).as_dict()
 
 
-def _verify_fallback_signature(proof: str, method: str, url: str, *, max_skew_s: int = _ALLOWED_SKEW) -> bool:
+def _verify_fallback_signature(
+    proof: str, method: str, url: str, *, max_skew_s: int = _ALLOWED_SKEW
+) -> bool:
     if Ed25519PublicKey is None:
         raise RuntimeError("cryptography Ed25519 support is unavailable")
     header, payload = _segments(proof)
@@ -92,7 +108,11 @@ def _verify_fallback_signature(proof: str, method: str, url: str, *, max_skew_s:
     if typ and typ != _TYP_VALUE:
         raise ValueError(f"invalid DPoP typ: {RFC9449_SPEC_URL}")
     jwk = header.get("jwk")
-    if not isinstance(jwk, dict) or str(jwk.get("kty") or "") != "OKP" or str(jwk.get("crv") or "") != "Ed25519":
+    if (
+        not isinstance(jwk, dict)
+        or str(jwk.get("kty") or "") != "OKP"
+        or str(jwk.get("crv") or "") != "Ed25519"
+    ):
         raise ValueError(f"unsupported DPoP jwk: {RFC9449_SPEC_URL}")
     x = str(jwk.get("x") or "").strip()
     if not x:
@@ -111,13 +131,17 @@ def _verify_fallback_signature(proof: str, method: str, url: str, *, max_skew_s:
         raise ValueError(f"malformed DPoP proof: {RFC9449_SPEC_URL}")
     public_key = Ed25519PublicKey.from_public_bytes(_b64url_decode(x))
     try:
-        public_key.verify(_b64url_decode(parts[2]), f"{parts[0]}.{parts[1]}".encode("ascii"))
+        public_key.verify(
+            _b64url_decode(parts[2]), f"{parts[0]}.{parts[1]}".encode("ascii")
+        )
     except Exception:
         return False
     return True
 
 
-def _verify_signature_requirements(proof: str, method: str, url: str, *, max_skew_s: int = _ALLOWED_SKEW) -> bool:
+def _verify_signature_requirements(
+    proof: str, method: str, url: str, *, max_skew_s: int = _ALLOWED_SKEW
+) -> bool:
     if _SIGNER is not None:
         try:
             verified = bool(
@@ -169,46 +193,6 @@ async def _verify_signature_requirements_async(
     return _verify_fallback_signature(proof, method, url, max_skew_s=max_skew_s)
 
 
-async def _maybe_await(value: Any) -> Any:
-    if inspect.isawaitable(value):
-        return await value
-    return value
-
-
-async def _verify_signature_requirements_async(
-    proof: str,
-    method: str,
-    url: str,
-    *,
-    max_skew_s: int = _ALLOWED_SKEW,
-) -> bool:
-    if _SIGNER is not None:
-        try:
-            verified = bool(
-                await _SIGNER.verify_bytes(
-                    b"",
-                    [{"sig": proof}],
-                    require={
-                        "htm": method.upper(),
-                        "htu": url,
-                        "algs": [_ALG_VALUE],
-                        "max_skew_s": max_skew_s,
-                    },
-                )
-            )
-            if verified:
-                return True
-        except Exception:
-            pass
-    return _verify_fallback_signature(proof, method, url, max_skew_s=max_skew_s)
-
-
-async def _maybe_await(value: Any) -> Any:
-    if inspect.isawaitable(value):
-        return await value
-    return value
-
-
 def make_proof(
     keyref: Any,
     method: str,
@@ -242,7 +226,9 @@ def make_proof(
         proof = sigs[0]["sig"]
         try:
             claims = proof_claims(proof)
-            expected_ath = ath_for_access_token(access_token) if access_token is not None else None
+            expected_ath = (
+                ath_for_access_token(access_token) if access_token is not None else None
+            )
             if expected_ath is not None and claims.ath != expected_ath:
                 raise ValueError("ath mismatch")
             if nonce is not None and claims.nonce != str(nonce):
@@ -276,44 +262,6 @@ def make_proof(
 
 makeProof = make_proof
 create_proof = make_proof
-
-
-def _require_callable(fn: Any | None, purpose: str) -> Any:
-    if not callable(fn):
-        raise RuntimeError(f"{purpose} requires an injected DPoP table-backed operation")
-    return fn
-
-
-def issue_nonce(*, ttl_s: int = _ALLOWED_SKEW, issuer: Any | None = None) -> str:
-    return _require_callable(issuer, "issue_nonce")(ttl_s=ttl_s)
-
-
-async def issue_nonce_async(*, ttl_s: int = _ALLOWED_SKEW, issuer: Any | None = None) -> str:
-    return await _maybe_await(_require_callable(issuer, "issue_nonce_async")(ttl_s=ttl_s))
-
-
-def register_nonce(nonce: str, *, ttl_s: int = _ALLOWED_SKEW, registrar: Any | None = None) -> str:
-    return _require_callable(registrar, "register_nonce")(nonce, ttl_s=ttl_s)
-
-
-async def register_nonce_async(nonce: str, *, ttl_s: int = _ALLOWED_SKEW, registrar: Any | None = None) -> str:
-    return await _maybe_await(_require_callable(registrar, "register_nonce_async")(nonce, ttl_s=ttl_s))
-
-
-def consume_nonce(nonce: str, *, consumer: Any | None = None, now: int | None = None) -> bool:
-    return _require_callable(consumer, "consume_nonce")(nonce, now=now)
-
-
-async def consume_nonce_async(nonce: str, *, consumer: Any | None = None, now: int | None = None) -> bool:
-    return await _maybe_await(_require_callable(consumer, "consume_nonce_async")(nonce, now=now))
-
-
-def replay_table_snapshot(snapshotter: Any | None = None) -> dict[str, int]:
-    return _require_callable(snapshotter, "replay_table_snapshot")()
-
-
-async def replay_table_snapshot_async(snapshotter: Any | None = None) -> dict[str, int]:
-    return await _maybe_await(_require_callable(snapshotter, "replay_table_snapshot_async")())
 
 
 def verify_proof(
@@ -414,17 +362,6 @@ async def verify_proof_async(
     if replayed:
         raise ValueError(f"replayed DPoP proof: {RFC9449_SPEC_URL}")
     return claims.jkt
-
-
-def describe() -> dict[str, object]:
-    return describe_owner(
-        OWNER,
-        spec_url=RFC9449_SPEC_URL,
-        signing_alg_values_supported=[_ALG_VALUE],
-        ath_supported=True,
-        nonce_supported=True,
-        replay_detection_supported=True,
-    )
 
 
 __all__ = [
