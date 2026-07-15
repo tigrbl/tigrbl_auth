@@ -1,4 +1,4 @@
-from tigrbl_auth.standards.oauth2.rfc7009 import *
+from tigrbl_auth_protocol_oauth.standards.revocation import *
 
 
 def test_rfc7009_module_present():

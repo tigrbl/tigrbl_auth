@@ -11,10 +11,13 @@ from tigrbl import TigrblApp
 from tigrbl_identity_storage_runtime.engine import get_db
 import tigrbl_identity_server.client_registration_surface as registration_surface
 
+
 @pytest_asyncio.fixture()
 async def registration_client(db_session, monkeypatch):
     deployment = SimpleNamespace(
         issuer="https://test",
+        profile="production",
+        flags={"require_tls": True},
         flag_enabled=lambda name: name in {"enable_rfc7591", "enable_rfc7592"},
     )
     monkeypatch.setattr(registration_surface, "_deployment", lambda request: deployment)
