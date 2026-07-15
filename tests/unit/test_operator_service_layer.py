@@ -10,10 +10,12 @@ from tigrbl_identity_storage_runtime.resource_service import (
     get_resource,
     list_resource_result,
     publish_jwks_document,
+    rotate_client_secret,
     run_export,
     run_import,
     update_resource,
     validate_import_artifact,
+    set_identity_password,
 )
 from tigrbl_identity_storage_runtime.session_service import observe_token_response, token_hash
 from tigrbl_auth_protocol_oidc.discovery_service import diff_discovery, show_discovery
@@ -55,6 +57,43 @@ def test_operator_service_layer_round_trip(tmp_path: Path) -> None:
 
     delete = delete_resource(_context(imported_root, "tenant", "tenant.delete"), record_id="tenant-a")
     assert delete.status == "deleted"
+
+
+def test_operator_secret_mutations_persist_only_provider_outputs(
+    tmp_path: Path,
+) -> None:
+    client_context = _context(tmp_path, "client", "client.create")
+    create_resource(
+        client_context,
+        record_id="client-a",
+        patch={"name": "Client A", "client_secret": "legacy-plaintext"},
+        if_exists="error",
+    )
+    rotated = rotate_client_secret(
+        _context(tmp_path, "client", "client.rotate-secret"),
+        record_id="client-a",
+        client_secret_hash="provider-client-secret-hash",
+    )
+    assert rotated.record is not None
+    assert rotated.record["data"]["client_secret_hash"] == (
+        "provider-client-secret-hash"
+    )
+    assert "client_secret" not in rotated.record["data"]
+
+    identity_context = _context(tmp_path, "identity", "identity.create")
+    create_resource(
+        identity_context,
+        record_id="identity-a",
+        patch={"name": "Identity A"},
+        if_exists="error",
+    )
+    password = set_identity_password(
+        _context(tmp_path, "identity", "identity.set-password"),
+        record_id="identity-a",
+        password_hash="provider-password-hash",
+    )
+    assert password.record is not None
+    assert password.record["data"]["password_hash"] == "provider-password-hash"
 
 
 def test_runtime_observation_and_discovery(repo_root: Path | None = None) -> None:

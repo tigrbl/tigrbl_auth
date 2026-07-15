@@ -1,5 +1,12 @@
 from __future__ import annotations
 
+import secrets
+
+from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
+
+
+_OPERATOR_SECRET_HASHER = BcryptSecretHasher()
+
 from tigrbl_identity_storage_runtime.session_service import (
     exchange_token_for_context as _svc_exchange_token_for_context,
     get_session_for_context as _svc_get_session_for_context,
@@ -182,10 +189,25 @@ def handle_client_rotate_secret(args: Any) -> int:
     record_id = getattr(args, "id", None)
     if not record_id:
         raise SystemExit("--id is required")
+    client_secret = secrets.token_urlsafe(32)
+    client_secret_hash = _OPERATOR_SECRET_HASHER.hash_secret(client_secret).encoded
+    encoded_hash = (
+        client_secret_hash.decode("utf-8")
+        if isinstance(client_secret_hash, bytes)
+        else str(client_secret_hash)
+    )
     try:
-        result = _svc_rotate_client_secret(context, record_id=record_id)
+        result = _svc_rotate_client_secret(
+            context,
+            record_id=record_id,
+            client_secret_hash=encoded_hash,
+        )
     except OperatorStateError as exc:
         return _svc_failure(args, context, exc)
+    result.summary = {
+        **(result.summary or {}),
+        "secret_preview": f"{client_secret[:8]}...",
+    }
     return _svc_emit(args, result)
 
 
@@ -195,8 +217,19 @@ def handle_identity_set_password(args: Any) -> int:
     if not record_id:
         raise SystemExit("--id is required")
     patch = _svc_patch(args)
+    password = str(patch.get("password") or secrets.token_urlsafe(24))
+    password_hash = _OPERATOR_SECRET_HASHER.hash_secret(password).encoded
+    encoded_hash = (
+        password_hash.decode("utf-8")
+        if isinstance(password_hash, bytes)
+        else str(password_hash)
+    )
     try:
-        result = _svc_set_identity_password(context, record_id=record_id, password=patch.get("password"))
+        result = _svc_set_identity_password(
+            context,
+            record_id=record_id,
+            password_hash=encoded_hash,
+        )
     except OperatorStateError as exc:
         return _svc_failure(args, context, exc)
     return _svc_emit(args, result)

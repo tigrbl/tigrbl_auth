@@ -93,6 +93,7 @@ NON_TAXONOMY_CANONICAL_ROOTS = {
     "tigrbl_identity_identities_concrete",
     "tigrbl_identity_jose",
     "tigrbl_identity_runtime",
+    "tigrbl_identity_server",
     "tigrbl_identity_storage",
     "tigrbl_identity_storage_runtime",
     "tigrbl_security_authorization_provenance_builder",

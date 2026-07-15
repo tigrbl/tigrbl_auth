@@ -186,13 +186,22 @@ def toggle_resource(context: OperationContext, *, record_id: str, enabled: bool)
     return TransactionResult(transaction_id, context.command, context.resource, patched["status"], context.dry_run, not context.dry_run, record=patched, changed_ids=[str(record_id)])
 
 
-def rotate_client_secret(context: OperationContext, *, record_id: str) -> TransactionResult:
+def rotate_client_secret(
+    context: OperationContext,
+    *,
+    record_id: str,
+    client_secret_hash: str,
+) -> TransactionResult:
     records = load_records(context.repo_root, "client", tenant=context.tenant)
     record = records.get(str(record_id))
     if record is None:
         raise OperatorStateError(code=3, status="not_found", reason=f"client {record_id} was not found", payload={"id": record_id})
     patched = copy.deepcopy(record)
-    patched.setdefault("data", {})["client_secret"] = synthetic_id("client-secret")
+    if not client_secret_hash:
+        raise ValueError("client_secret_hash is required")
+    data = patched.setdefault("data", {})
+    data.pop("client_secret", None)
+    data["client_secret_hash"] = client_secret_hash
     patched.setdefault("data", {})["client_secret_rotated_at"] = utc_now()
     patched["updated_at"] = utc_now()
     new_records = dict(records)
@@ -201,16 +210,20 @@ def rotate_client_secret(context: OperationContext, *, record_id: str) -> Transa
     return TransactionResult(transaction_id, context.command, "client", "updated", context.dry_run, not context.dry_run, record=patched, changed_ids=[str(record_id)], summary={"rotated": True})
 
 
-def set_identity_password(context: OperationContext, *, record_id: str, password: str | None = None) -> TransactionResult:
-    from tigrbl_identity_jose.key_management import hash_pw
+def set_identity_password(
+    context: OperationContext,
+    *,
+    record_id: str,
+    password_hash: str,
+) -> TransactionResult:
     records = load_records(context.repo_root, "identity", tenant=context.tenant)
     record = records.get(str(record_id))
     if record is None:
         raise OperatorStateError(code=3, status="not_found", reason=f"identity {record_id} was not found", payload={"id": record_id})
     patched = copy.deepcopy(record)
-    password = password or synthetic_id("password")
-    hashed = hash_pw(password)
-    patched.setdefault("data", {})["password_hash"] = hashed.decode("utf-8") if isinstance(hashed, bytes) else str(hashed)
+    if not password_hash:
+        raise ValueError("password_hash is required")
+    patched.setdefault("data", {})["password_hash"] = password_hash
     patched.setdefault("data", {})["password_updated_at"] = utc_now()
     patched["updated_at"] = utc_now()
     new_records = dict(records)
