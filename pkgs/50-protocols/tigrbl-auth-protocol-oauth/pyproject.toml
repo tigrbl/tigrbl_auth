@@ -46,7 +46,6 @@ dependencies = [
     "tigrbl-client-registration-capability==0.4.0.dev2",
     "tigrbl-identity-core==0.4.0.dev2",
     "tigrbl-identity-jose==0.4.0.dev2",
-    "tigrbl-identity-runtime==0.4.0.dev2",
     "tigrbl-security-trust-contracts==0.1.0",
     "tigrbl-security-proof-pkce==0.1.0",
     "tigrbl-authorization-scope-set-matcher-concrete==0.4.0.dev2",

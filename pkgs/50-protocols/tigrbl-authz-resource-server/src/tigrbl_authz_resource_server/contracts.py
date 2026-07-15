@@ -3,11 +3,9 @@
 from tigrbl_auth_protocol_oauth.standards.resource_verifier_contract import (
     ProtectedResourceVerifierContract,
     build_protected_resource_verifier_contract,
-    protected_resource_verifier_contract_from_request,
 )
 
 __all__ = [
     "ProtectedResourceVerifierContract",
     "build_protected_resource_verifier_contract",
-    "protected_resource_verifier_contract_from_request",
 ]

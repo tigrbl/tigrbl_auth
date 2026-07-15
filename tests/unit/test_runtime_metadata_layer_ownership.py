@@ -65,3 +65,31 @@ def test_resource_server_contract_module_is_a_runtime_neutral_compatibility_expo
 
     assert "tigrbl_auth_protocol_oauth.standards.resource_verifier_contract" in source
     assert "tigrbl_identity_runtime" not in source
+
+
+def test_oauth_security_profiles_consume_injected_runtime_state() -> None:
+    oauth_root = (
+        ROOT
+        / "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src"
+        / "tigrbl_auth_protocol_oauth"
+    )
+    manifest = (
+        ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oauth/pyproject.toml"
+    ).read_text(encoding="utf-8")
+    security_profile = (
+        oauth_root / "standards/_rfc9700/security_profile.py"
+    ).read_text(encoding="utf-8")
+    verifier_contract = (
+        oauth_root / "standards/resource_verifier_contract.py"
+    ).read_text(encoding="utf-8")
+    server_adapter = (
+        ROOT
+        / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server"
+        / "introspection_surface.py"
+    ).read_text(encoding="utf-8")
+
+    assert "tigrbl-identity-runtime" not in manifest
+    assert "tigrbl_identity_runtime" not in security_profile
+    assert "tigrbl_identity_runtime" not in verifier_contract
+    assert "deployment_from_request" in server_adapter
+    assert "build_protected_resource_verifier_contract" in server_adapter

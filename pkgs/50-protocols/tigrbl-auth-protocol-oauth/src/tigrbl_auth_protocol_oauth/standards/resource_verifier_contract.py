@@ -3,36 +3,46 @@
 from __future__ import annotations
 
 from tigrbl_identity_contracts.oauth import ProtectedResourceVerifierContract
-from tigrbl_identity_runtime.deployment import ResolvedDeployment, deployment_from_request, resolve_deployment
-from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
-from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import runtime_security_profile
+from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
+    OAuthDeploymentProfile,
+    runtime_security_profile,
+)
 
 ML_DSA_65_ALG = "ML-DSA-65"
 
 
-def _pqc_jose_enabled(settings_obj: object | None) -> bool:
-    configured = str(getattr(settings_obj, "jwt_signing_alg", "") or "").replace("_", "-").upper()
-    return bool(getattr(settings_obj, "enable_pqc_jose", False)) or configured in {"ML-DSA-65", "MLDSA65"}
+def _pqc_jose_enabled(deployment: OAuthDeploymentProfile) -> bool:
+    configured = (
+        str(
+            getattr(deployment, "jwt_signing_alg", "")
+            or deployment.flags.get("jwt_signing_alg", "")
+        )
+        .replace("_", "-")
+        .upper()
+    )
+    return deployment.flag_enabled("enable_pqc_jose") or configured in {
+        "ML-DSA-65",
+        "MLDSA65",
+    }
 
 
-def _allowed_token_algs(settings_obj: object | None) -> tuple[str, ...]:
+def _allowed_token_algs(
+    deployment: OAuthDeploymentProfile,
+) -> tuple[str, ...]:
     algs = ["RS256", "ES256", "EdDSA"]
-    if _pqc_jose_enabled(settings_obj):
+    if _pqc_jose_enabled(deployment):
         algs.append(ML_DSA_65_ALG)
     return tuple(algs)
 
 
 def build_protected_resource_verifier_contract(
-    deployment: ResolvedDeployment | None = None,
+    deployment: OAuthDeploymentProfile,
 ) -> ProtectedResourceVerifierContract:
-    settings_obj = None if deployment is not None else settings
-    active_deployment = deployment or resolve_deployment(settings_obj)
-    policy = runtime_security_profile(active_deployment)
-    issuer = str(active_deployment.issuer or getattr(settings_obj, "issuer", "")).rstrip("/")
-    resource = str(
-        active_deployment.protected_resource_identifier
-        or getattr(settings_obj, "protected_resource_identifier", "")
-    )
+    policy = runtime_security_profile(deployment)
+    issuer = str(getattr(deployment, "issuer", "")).rstrip("/")
+    resource = str(getattr(deployment, "protected_resource_identifier", ""))
+    if not issuer or not resource:
+        raise ValueError("protected-resource deployment requires issuer and resource")
 
     modes: list[str] = ["bearer"]
     if policy.dpop_supported:
@@ -44,16 +54,20 @@ def build_protected_resource_verifier_contract(
     if policy.sender_constraint_required:
         required_claims.append("cnf")
 
-    replay_expectation = "proof-bound replay resistant" if policy.sender_constraint_required else "bearer replay constrained by token lifetime"
+    replay_expectation = (
+        "proof-bound replay resistant"
+        if policy.sender_constraint_required
+        else "bearer replay constrained by token lifetime"
+    )
     freshness_expectation = "introspection or local validation required at request time"
     return ProtectedResourceVerifierContract(
-        verifier_logic_id=f"resource-verifier:{active_deployment.profile}",
+        verifier_logic_id=f"resource-verifier:{deployment.profile}",
         issuer=issuer,
         accepted_issuers=(issuer,),
         resource=resource,
         accepted_audiences=(resource,),
         accepted_token_classes=("access_token",),
-        allowed_algs=_allowed_token_algs(settings_obj),
+        allowed_algs=_allowed_token_algs(deployment),
         jwks_uri=f"{issuer}/.well-known/jwks.json",
         introspection_endpoint=f"{issuer}/introspect",
         sender_constraint_modes=tuple(dict.fromkeys(modes)),
@@ -71,12 +85,7 @@ def build_protected_resource_verifier_contract(
     )
 
 
-def protected_resource_verifier_contract_from_request(request) -> ProtectedResourceVerifierContract:
-    return build_protected_resource_verifier_contract(deployment_from_request(request, settings))
-
-
 __all__ = [
     "ProtectedResourceVerifierContract",
     "build_protected_resource_verifier_contract",
-    "protected_resource_verifier_contract_from_request",
 ]

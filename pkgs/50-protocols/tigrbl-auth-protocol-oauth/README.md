@@ -40,6 +40,8 @@ client = OAuthClient(client_id="client-a", redirect_uris=("https://app.example/c
   feature flags, and supported OAuth 2.0-to-2.1 migration paths.
 - `claims.py`, `schemas.py`, `bindings.py`, and `errors.py` own OAuth wire
   composition without taking ownership of standalone claim implementations.
+- RFC 9700 policy evaluation consumes an injected resolved deployment profile;
+  request and default-profile resolution remain in layer 60.
 - `schemas.py` owns OAuth token, introspection, revocation, device authorization,
   PAR, and dynamic-client-registration wire models.
 - PKCE, PAR, RAR, JAR, device authorization, token exchange, DPoP, mTLS, and resource indicators

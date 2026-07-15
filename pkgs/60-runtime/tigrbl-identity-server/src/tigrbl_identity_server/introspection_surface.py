@@ -26,7 +26,7 @@ from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication impor
     presented_certificate_thumbprint,
 )
 from tigrbl_auth_protocol_oauth.standards.resource_verifier_contract import (
-    protected_resource_verifier_contract_from_request,
+    build_protected_resource_verifier_contract,
 )
 from tigrbl_identity_runtime.deployment import deployment_from_request
 from tigrbl_identity_runtime.settings import settings
@@ -68,10 +68,7 @@ def _optional_registration_unavailable(exc: Exception) -> bool:
     return any(
         marker in message
         for marker in ("undefinedtable", "no such table", "missing table")
-    ) or (
-        "does not exist" in message
-        and ("relation" in message or "table" in message)
-    )
+    ) or ("does not exist" in message and ("relation" in message or "table" in message))
 
 
 async def _load_client(
@@ -98,13 +95,14 @@ def _registered_auth_method(registration: ClientRegistration | None) -> str:
     raw = getattr(registration, "registration_metadata", None)
     metadata = raw if isinstance(raw, dict) else {}
     return str(
-        metadata.get("token_endpoint_auth_method")
-        or DEFAULT_TOKEN_ENDPOINT_AUTH_METHOD
+        metadata.get("token_endpoint_auth_method") or DEFAULT_TOKEN_ENDPOINT_AUTH_METHOD
     )
 
 
 def _protected_resource_verifier_contract(request: Any):
-    return protected_resource_verifier_contract_from_request(request)
+    return build_protected_resource_verifier_contract(
+        deployment_from_request(request, settings)
+    )
 
 
 def _introspection_endpoint_audiences(request: Any) -> set[str]:
@@ -122,9 +120,7 @@ async def authorize_introspection_caller(
     allowed_auth_methods = set(contract.introspection_auth_methods)
     authorization = header(request, "Authorization") or ""
     client_assertion = str(form_data.get("client_assertion") or "").strip()
-    client_assertion_type = str(
-        form_data.get("client_assertion_type") or ""
-    ).strip()
+    client_assertion_type = str(form_data.get("client_assertion_type") or "").strip()
     client_id: str | None = None
     client_secret: str | None = None
 

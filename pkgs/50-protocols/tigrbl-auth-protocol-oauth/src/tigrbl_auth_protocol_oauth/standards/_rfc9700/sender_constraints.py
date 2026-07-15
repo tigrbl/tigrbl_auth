@@ -2,13 +2,15 @@ from __future__ import annotations
 
 from typing import Any, Mapping
 
-from tigrbl_identity_runtime.deployment import ResolvedDeployment
-from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
+from tigrbl_identity_contracts.protocol_configuration import (
+    protocol_settings as settings,
+)
 
 from .security_profile import (
     DEVICE_CODE_GRANT_TYPE,
     RFC9700_SPEC_URL,
     TOKEN_EXCHANGE_GRANT_TYPE,
+    OAuthDeploymentProfile,
     OAuthPolicyViolation,
     RuntimeSecurityProfile,
     SenderConstraintResult,
@@ -25,8 +27,13 @@ ML_DSA_65_ALG = "ML-DSA-65"
 
 
 def _pqc_jose_enabled() -> bool:
-    configured = str(getattr(settings, "jwt_signing_alg", "") or "").replace("_", "-").upper()
-    return bool(getattr(settings, "enable_pqc_jose", False)) or configured in {"ML-DSA-65", "MLDSA65"}
+    configured = (
+        str(getattr(settings, "jwt_signing_alg", "") or "").replace("_", "-").upper()
+    )
+    return bool(getattr(settings, "enable_pqc_jose", False)) or configured in {
+        "ML-DSA-65",
+        "MLDSA65",
+    }
 
 
 def _access_token_signing_algs() -> list[str]:
@@ -35,9 +42,10 @@ def _access_token_signing_algs() -> list[str]:
         algs.append(ML_DSA_65_ALG)
     return algs
 
+
 def validate_sender_constraint(
     request: Any,
-    deployment: ResolvedDeployment,
+    deployment: OAuthDeploymentProfile,
     *,
     dpop_proof: str | None = None,
     replay_checker: Any | None = None,
@@ -84,7 +92,7 @@ def validate_sender_constraint(
 
 async def validate_sender_constraint_async(
     request: Any,
-    deployment: ResolvedDeployment,
+    deployment: OAuthDeploymentProfile,
     *,
     dpop_proof: str | None = None,
     replay_checker: Any | None = None,
@@ -132,7 +140,7 @@ async def validate_sender_constraint_async(
 def verify_access_token_sender_constraint(
     request: Any,
     token_payload: Mapping[str, Any],
-    deployment: ResolvedDeployment,
+    deployment: OAuthDeploymentProfile,
     *,
     access_token: str | None = None,
     dpop_proof: str | None = None,
@@ -147,7 +155,11 @@ def verify_access_token_sender_constraint(
     """
 
     policy = runtime_security_profile(deployment)
-    cnf = token_payload.get("cnf") if isinstance(token_payload.get("cnf"), Mapping) else {}
+    cnf = (
+        token_payload.get("cnf")
+        if isinstance(token_payload.get("cnf"), Mapping)
+        else {}
+    )
     jkt = cnf.get("jkt")
     x5t = cnf.get("x5t#S256")
 
@@ -177,7 +189,9 @@ def verify_access_token_sender_constraint(
                 nonce_consumer=nonce_consumer,
             )
         except ValueError as exc:
-            raise OAuthPolicyViolation("invalid_token", str(exc), status_code=401) from exc
+            raise OAuthPolicyViolation(
+                "invalid_token", str(exc), status_code=401
+            ) from exc
         return SenderConstraintResult(
             mechanism="dpop",
             token_type="DPoP",
@@ -199,13 +213,19 @@ def verify_access_token_sender_constraint(
                 "certificate-bound token presented while mTLS support is disabled",
                 status_code=401,
             )
-        from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import validate_request_certificate_binding
+        from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import (
+            validate_request_certificate_binding,
+        )
         from tigrbl_identity_core.errors import InvalidTokenError
 
         try:
-            cert_thumbprint = validate_request_certificate_binding(token_payload, request)
+            cert_thumbprint = validate_request_certificate_binding(
+                token_payload, request
+            )
         except InvalidTokenError as exc:
-            raise OAuthPolicyViolation("invalid_token", str(exc), status_code=401) from exc
+            raise OAuthPolicyViolation(
+                "invalid_token", str(exc), status_code=401
+            ) from exc
         return SenderConstraintResult(
             mechanism="mtls",
             token_type="bearer",
@@ -219,7 +239,7 @@ def verify_access_token_sender_constraint(
 async def verify_access_token_sender_constraint_async(
     request: Any,
     token_payload: Mapping[str, Any],
-    deployment: ResolvedDeployment,
+    deployment: OAuthDeploymentProfile,
     *,
     access_token: str | None = None,
     dpop_proof: str | None = None,
@@ -227,7 +247,11 @@ async def verify_access_token_sender_constraint_async(
     nonce_consumer: Any | None = None,
 ) -> SenderConstraintResult:
     policy = runtime_security_profile(deployment)
-    cnf = token_payload.get("cnf") if isinstance(token_payload.get("cnf"), Mapping) else {}
+    cnf = (
+        token_payload.get("cnf")
+        if isinstance(token_payload.get("cnf"), Mapping)
+        else {}
+    )
     jkt = cnf.get("jkt")
     x5t = cnf.get("x5t#S256")
 
@@ -257,7 +281,9 @@ async def verify_access_token_sender_constraint_async(
                 nonce_consumer=nonce_consumer,
             )
         except ValueError as exc:
-            raise OAuthPolicyViolation("invalid_token", str(exc), status_code=401) from exc
+            raise OAuthPolicyViolation(
+                "invalid_token", str(exc), status_code=401
+            ) from exc
         return SenderConstraintResult(
             mechanism="dpop",
             token_type="DPoP",
@@ -279,13 +305,19 @@ async def verify_access_token_sender_constraint_async(
                 "certificate-bound token presented while mTLS support is disabled",
                 status_code=401,
             )
-        from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import validate_request_certificate_binding
+        from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import (
+            validate_request_certificate_binding,
+        )
         from tigrbl_identity_core.errors import InvalidTokenError
 
         try:
-            cert_thumbprint = validate_request_certificate_binding(token_payload, request)
+            cert_thumbprint = validate_request_certificate_binding(
+                token_payload, request
+            )
         except InvalidTokenError as exc:
-            raise OAuthPolicyViolation("invalid_token", str(exc), status_code=401) from exc
+            raise OAuthPolicyViolation(
+                "invalid_token", str(exc), status_code=401
+            ) from exc
         return SenderConstraintResult(
             mechanism="mtls",
             token_type="bearer",
@@ -296,14 +328,18 @@ async def verify_access_token_sender_constraint_async(
     return SenderConstraintResult()
 
 
-def discovery_policy_metadata(deployment: ResolvedDeployment) -> dict[str, object]:
+def discovery_policy_metadata(
+    deployment: OAuthDeploymentProfile,
+) -> dict[str, object]:
     policy = runtime_security_profile(deployment)
     payload: dict[str, object] = {
         "response_types_supported": list(policy.allowed_response_types),
         "grant_types_supported": list(policy.allowed_grant_types),
         "response_modes_supported": list(policy.allowed_response_modes),
         "code_challenge_methods_supported": ["S256"] if policy.pkce_required else [],
-        "token_endpoint_auth_methods_supported": list(policy.allowed_client_auth_methods),
+        "token_endpoint_auth_methods_supported": list(
+            policy.allowed_client_auth_methods
+        ),
     }
     if policy.authorization_response_iss_required:
         payload["authorization_response_iss_parameter_supported"] = True
@@ -315,13 +351,24 @@ def discovery_policy_metadata(deployment: ResolvedDeployment) -> dict[str, objec
         payload["require_pushed_authorization_requests"] = True
     if policy.request_objects_supported:
         payload["request_parameter_supported"] = True
-        payload["request_object_signing_alg_values_supported"] = ["HS256", "HS384", "HS512"]
+        payload["request_object_signing_alg_values_supported"] = [
+            "HS256",
+            "HS384",
+            "HS512",
+        ]
     if policy.resource_indicators_supported:
         payload["resource_parameter_supported"] = True
     if policy.rich_authorization_requests_supported:
         payload["authorization_details_types_supported"] = ["*"]
-    if deployment.flag_enabled("enable_rfc9068") or deployment.profile in {"production", "hardening", "fapi2-security", "peer-claim"}:
-        payload["access_token_signing_alg_values_supported"] = _access_token_signing_algs()
+    if deployment.flag_enabled("enable_rfc9068") or deployment.profile in {
+        "production",
+        "hardening",
+        "fapi2-security",
+        "peer-claim",
+    }:
+        payload["access_token_signing_alg_values_supported"] = (
+            _access_token_signing_algs()
+        )
     if policy.fapi_mode:
         payload["fapi_profiles_supported"] = ["fapi2-security"]
     return payload
@@ -332,6 +379,7 @@ __all__ = [
     "DEVICE_CODE_GRANT_TYPE",
     "TOKEN_EXCHANGE_GRANT_TYPE",
     "OAuthPolicyViolation",
+    "OAuthDeploymentProfile",
     "SenderConstraintResult",
     "RuntimeSecurityProfile",
     "security_bcp_profile",
