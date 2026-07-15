@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import uuid
 from typing import Any
 
 from pydantic import BaseModel, constr
@@ -11,18 +10,29 @@ from tigrbl.requests import Request
 from tigrbl.runtime.status import HTTPException
 from tigrbl.security import Depends
 from tigrbl_authz_policy_admin_gate import ADMIN_OPENAPI_SECURITY_DEPENDENCIES
-from tigrbl_identity_storage.tables import Realm, Tenant
-from tigrbl_identity_storage_runtime.engine import get_db
-from .tenants import AdminTenantOut, AdminTenantProvisionIn, tenant_payload
-from tigrbl_identity_storage_runtime.ops.common import (
-    create_table_record,
-    delete_table_record,
-    field_value,
-    first_table_record,
-    list_table_records,
-    read_table_record,
-    update_table_record,
+from tigrbl_identity_contracts.admin_realms import (
+    AdminRealm,
+    AdminRealmCreate,
+    AdminRealmUpdate,
+    RealmAdministrationConflictError,
+    RealmAdministrationNotFoundError,
+    RealmAdministrationValidationError,
 )
+from tigrbl_identity_contracts.admin_tenants import (
+    AdminTenantCreate,
+    TenantAdministrationConflictError,
+    TenantAdministrationNotFoundError,
+    TenantAdministrationPolicyError,
+    TenantAdministrationValidationError,
+    TenantAdministratorAuthenticationError,
+)
+from tigrbl_identity_server.platform_realm_administration import (
+    get_db,
+    realm_administration_for_request,
+    require_realm_administrator,
+)
+
+from .tenants import AdminTenantOut, AdminTenantProvisionIn, tenant_payload
 
 
 _description = constr(strip_whitespace=True, max_length=255)
@@ -56,73 +66,41 @@ class AdminRealmUpdateIn(BaseModel):
     description: _description | None = None
 
 
-def _realm_payload(row: Any) -> AdminRealmOut:
-    created_at = field_value(row, "created_at")
-    updated_at = field_value(row, "updated_at")
+def _realm_payload(row: AdminRealm) -> AdminRealmOut:
     return AdminRealmOut(
-        id=str(field_value(row, "id")),
-        slug=str(field_value(row, "slug")),
-        name=str(field_value(row, "name")),
-        issuer_path=str(field_value(row, "issuer_path", "")),
-        description=field_value(row, "description"),
-        created_at=created_at.isoformat() if created_at else None,
-        updated_at=updated_at.isoformat() if updated_at else None,
+        id=row.realm_id,
+        slug=row.slug,
+        name=row.name,
+        issuer_path=row.issuer_path,
+        description=row.description,
+        created_at=row.created_at,
+        updated_at=row.updated_at,
     )
 
 
-async def _require_superuser(request: Request, db: Any) -> Any:
-    from tigrbl_identity_admin.bootstrap import resolve_admin_user_from_request
-
-    actor = await resolve_admin_user_from_request(request, db=db)
-    if actor is None:
-        raise HTTPException(401, "authenticated admin session required")
-    if not bool(getattr(actor, "is_superuser", False)):
-        raise HTTPException(403, "superuser privileges required")
-    return actor
-
-
-def _uuid(value: str, *, label: str) -> uuid.UUID:
+async def _invoke(
+    request: Request,
+    db: Any,
+    operation: str,
+    *args: object,
+) -> object:
     try:
-        return uuid.UUID(str(value))
-    except (TypeError, ValueError) as exc:
-        raise HTTPException(400, f"invalid {label}") from exc
-
-
-def _issuer_path(value: str | None, slug: str) -> str:
-    text = (value if value is not None else f"/realms/{slug}").strip()
-    if not text:
-        return ""
-    if not text.startswith("/"):
-        text = f"/{text}"
-    return text.rstrip("/")
-
-
-async def _find_realm_duplicate(
-    db: Any,
-    *,
-    slug: str,
-    name: str,
-    issuer_path: str,
-) -> Any:
-    for filters in ({"slug": slug}, {"name": name}, {"issuer_path": issuer_path}):
-        row = await first_table_record(Realm, db, filters)
-        if row is not None:
-            return row
-    return None
-
-
-async def _find_tenant_duplicate(
-    db: Any,
-    *,
-    slug: str,
-    name: str,
-    email: str,
-) -> Any:
-    for filters in ({"slug": slug}, {"name": name}, {"email": email}):
-        row = await first_table_record(Tenant, db, filters)
-        if row is not None:
-            return row
-    return None
+        actor = await require_realm_administrator(request, db)
+        capability = realm_administration_for_request(request, db)
+        return (await capability.call(operation, actor, *args)).value
+    except TenantAdministratorAuthenticationError as exc:
+        raise HTTPException(401, str(exc)) from exc
+    except TenantAdministrationPolicyError as exc:
+        raise HTTPException(403, str(exc)) from exc
+    except (RealmAdministrationNotFoundError, TenantAdministrationNotFoundError) as exc:
+        raise HTTPException(404, str(exc)) from exc
+    except (RealmAdministrationConflictError, TenantAdministrationConflictError) as exc:
+        raise HTTPException(409, str(exc)) from exc
+    except (
+        RealmAdministrationValidationError,
+        TenantAdministrationValidationError,
+    ) as exc:
+        raise HTTPException(400, str(exc)) from exc
 
 
 api = router = TigrblRouter()
@@ -138,16 +116,7 @@ async def admin_list_realms(
     request: Request,
     db: Any = Depends(get_db),
 ) -> list[AdminRealmOut]:
-    await _require_superuser(request, db)
-    rows = await list_table_records(Realm, db)
-    rows = sorted(
-        rows,
-        key=lambda row: (
-            field_value(row, "created_at") or "",
-            field_value(row, "name", ""),
-            field_value(row, "slug", ""),
-        ),
-    )
+    rows = await _invoke(request, db, "list_realms")
     return [_realm_payload(row) for row in rows]
 
 
@@ -162,23 +131,18 @@ async def admin_create_realm(
     payload: AdminRealmProvisionIn | None = None,
     db: Any = Depends(get_db),
 ) -> AdminRealmOut:
-    await _require_superuser(request, db)
     if payload is None:
         payload = AdminRealmProvisionIn.model_validate(await request.json() or {})
-    slug = payload.slug.strip().lower()
-    name = payload.name.strip()
-    issuer_path = _issuer_path(payload.issuer_path, slug)
-    if await _find_realm_duplicate(db, slug=slug, name=name, issuer_path=issuer_path):
-        raise HTTPException(409, "realm slug, name, or issuer path already exists")
-    row = await create_table_record(
-        Realm,
+    row = await _invoke(
+        request,
         db,
-        {
-            "slug": slug,
-            "name": name,
-            "issuer_path": issuer_path,
-            "description": payload.description,
-        },
+        "create_realm",
+        AdminRealmCreate(
+            slug=payload.slug,
+            name=payload.name,
+            issuer_path=payload.issuer_path,
+            description=payload.description,
+        ),
     )
     return _realm_payload(row)
 
@@ -194,8 +158,7 @@ async def admin_get_realm(
     realm_id: str,
     db: Any = Depends(get_db),
 ) -> AdminRealmOut:
-    await _require_superuser(request, db)
-    row = await read_table_record(Realm, db, _uuid(realm_id, label="realm_id"))
+    row = await _invoke(request, db, "read_realm", realm_id)
     if row is None:
         raise HTTPException(404, "realm not found")
     return _realm_payload(row)
@@ -213,25 +176,20 @@ async def admin_update_realm(
     payload: AdminRealmUpdateIn | None = None,
     db: Any = Depends(get_db),
 ) -> AdminRealmOut:
-    await _require_superuser(request, db)
     if payload is None:
         payload = AdminRealmUpdateIn.model_validate(await request.json() or {})
-    row = await read_table_record(Realm, db, _uuid(realm_id, label="realm_id"))
-    if row is None:
-        raise HTTPException(404, "realm not found")
-    changes: dict[str, Any] = {}
-    next_slug = str(field_value(row, "slug"))
-    if payload.slug is not None:
-        next_slug = payload.slug.strip().lower()
-        changes["slug"] = next_slug
-    if payload.name is not None:
-        changes["name"] = payload.name.strip()
-    if payload.issuer_path is not None:
-        changes["issuer_path"] = _issuer_path(payload.issuer_path, next_slug)
-    if payload.description is not None:
-        changes["description"] = payload.description
-    if changes:
-        row = await update_table_record(Realm, db, field_value(row, "id"), changes)
+    row = await _invoke(
+        request,
+        db,
+        "update_realm",
+        realm_id,
+        AdminRealmUpdate(
+            slug=payload.slug,
+            name=payload.name,
+            issuer_path=payload.issuer_path,
+            description=payload.description,
+        ),
+    )
     return _realm_payload(row)
 
 
@@ -246,15 +204,8 @@ async def admin_delete_realm(
     realm_id: str,
     db: Any = Depends(get_db),
 ) -> AdminRealmOut:
-    await _require_superuser(request, db)
-    row = await read_table_record(Realm, db, _uuid(realm_id, label="realm_id"))
-    if row is None:
-        raise HTTPException(404, "realm not found")
-    if await list_table_records(Tenant, db, {"realm_id": field_value(row, "id")}):
-        raise HTTPException(400, "cannot delete a realm that still owns tenants")
-    snapshot = _realm_payload(row)
-    await delete_table_record(Realm, db, field_value(row, "id"))
-    return snapshot
+    row = await _invoke(request, db, "delete_realm", realm_id)
+    return _realm_payload(row)
 
 
 @api.route(
@@ -268,20 +219,7 @@ async def admin_list_realm_tenants(
     realm_id: str,
     db: Any = Depends(get_db),
 ) -> list[AdminTenantOut]:
-    await _require_superuser(request, db)
-    rows = await list_table_records(
-        Tenant,
-        db,
-        {"realm_id": _uuid(realm_id, label="realm_id")},
-    )
-    rows = sorted(
-        rows,
-        key=lambda row: (
-            field_value(row, "created_at") or "",
-            field_value(row, "name", ""),
-            field_value(row, "slug", ""),
-        ),
-    )
+    rows = await _invoke(request, db, "list_realm_tenants", realm_id)
     return [tenant_payload(row) for row in rows]
 
 
@@ -297,26 +235,19 @@ async def admin_create_realm_tenant(
     payload: AdminTenantProvisionIn | None = None,
     db: Any = Depends(get_db),
 ) -> AdminTenantOut:
-    await _require_superuser(request, db)
     if payload is None:
         payload = AdminTenantProvisionIn.model_validate(await request.json() or {})
-    realm = await read_table_record(Realm, db, _uuid(realm_id, label="realm_id"))
-    if realm is None:
-        raise HTTPException(404, "realm not found")
-    slug = payload.slug.strip().lower()
-    name = payload.name.strip()
-    email = payload.email.strip().lower()
-    if await _find_tenant_duplicate(db, slug=slug, name=name, email=email):
-        raise HTTPException(409, "tenant slug, name, or email already exists")
-    row = await create_table_record(
-        Tenant,
+    row = await _invoke(
+        request,
         db,
-        {
-            "slug": slug,
-            "name": name,
-            "email": email,
-            "realm_id": field_value(realm, "id"),
-        },
+        "create_realm_tenant",
+        realm_id,
+        AdminTenantCreate(
+            realm_id=realm_id,
+            slug=payload.slug,
+            name=payload.name,
+            email=payload.email,
+        ),
     )
     return tenant_payload(row)
 

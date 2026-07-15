@@ -14,6 +14,16 @@ from .operator import (
     OperatorAdministrationCapability,
     OperatorAdministrationOperation,
 )
+from .realms import (
+    RealmAdministrationCapability,
+    RealmCreateOperation,
+    RealmDeleteOperation,
+    RealmListOperation,
+    RealmReadOperation,
+    RealmTenantCreateOperation,
+    RealmTenantListOperation,
+    RealmUpdateOperation,
+)
 from .service import (
     AdminAuditListOperation,
     AdminAuditOperation,
@@ -52,6 +62,14 @@ __all__ = [
     "OperatorAdministrationAuthorizer",
     "OperatorAdministrationCapability",
     "OperatorAdministrationOperation",
+    "RealmAdministrationCapability",
+    "RealmCreateOperation",
+    "RealmDeleteOperation",
+    "RealmListOperation",
+    "RealmReadOperation",
+    "RealmTenantCreateOperation",
+    "RealmTenantListOperation",
+    "RealmUpdateOperation",
     "TenantAdministrationCapability",
     "TenantCreateOperation",
     "TenantDeleteOperation",

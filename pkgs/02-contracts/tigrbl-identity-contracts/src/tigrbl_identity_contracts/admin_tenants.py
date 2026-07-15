@@ -30,11 +30,14 @@ class TenantAdministrationValidationError(TenantAdministrationError, ValueError)
 
 
 @dataclass(frozen=True, slots=True)
-class TenantAdministrator:
+class PlatformAdministrator:
     actor_id: str
     tenant_id: str
     is_admin: bool = False
     is_superuser: bool = False
+
+
+TenantAdministrator = PlatformAdministrator
 
 
 @dataclass(frozen=True, slots=True)
@@ -70,6 +73,7 @@ __all__ = [
     "AdminTenant",
     "AdminTenantCreate",
     "AdminTenantUpdate",
+    "PlatformAdministrator",
     "TenantAdministrationConflictError",
     "TenantAdministrationError",
     "TenantAdministrationNotFoundError",
