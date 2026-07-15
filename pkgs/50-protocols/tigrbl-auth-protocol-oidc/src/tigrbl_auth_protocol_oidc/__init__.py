@@ -1,8 +1,13 @@
-"""OpenID Connect provider surfaces for the Tigrbl identity package suite."""
+"""Versioned OpenID Connect provider protocol ownership."""
 
 from __future__ import annotations
 
-from .claim_sets import (
+from tigrbl_identity_contracts.protocol_processing import (
+    build_protocol_capability_report,
+)
+
+from .bindings import CAPABILITY_REQUIREMENTS
+from .claims import (
     OIDC_EXTENSION_CLAIMS,
     OIDC_ID_TOKEN_PROFILE_CLAIMS,
     OIDC_USERINFO_CLAIMS,
@@ -10,9 +15,10 @@ from .claim_sets import (
     compose_oidc_id_token_claim_set,
     compose_oidc_userinfo_claim_set,
 )
+from .compatibility import COMPATIBILITY_PATHS, OidcCompatibility, compatibility
+from .errors import OidcBindingError, OidcProtocolError, UnsupportedOidcRevisionError
 from .features import FEATURES_BY_VERSION, supports
 from .migrations import migrate_client_metadata
-from .schemas import LogoutIn, LogoutOut
 from .provider import (
     HostedLoginPage,
     HostedLoginRequest,
@@ -28,16 +34,30 @@ from .provider import (
     new_login_request,
     render_login_template,
 )
+from .schemas import LogoutIn, LogoutOut
 from .versions import CURRENT_VERSION, VERSION_HISTORY, OidcVersion, select_version
-from .capability_requirements import CAPABILITY_REQUIREMENTS
+
+
+def capability_report() -> dict[str, object]:
+    return build_protocol_capability_report(
+        protocol="oidc",
+        revision=CURRENT_VERSION.identifier,
+        features=tuple(FEATURES_BY_VERSION[CURRENT_VERSION.identifier]),
+        evidence_links=("tests/unit/test_versioned_oauth_oidc_protocols.py",),
+        extra_requirements=CAPABILITY_REQUIREMENTS,
+        include_default_artifact_requirements=False,
+    )
+
 
 __all__ = [
+    "CAPABILITY_REQUIREMENTS",
+    "COMPATIBILITY_PATHS",
+    "CURRENT_VERSION",
+    "FEATURES_BY_VERSION",
     "OIDC_EXTENSION_CLAIMS",
     "OIDC_ID_TOKEN_PROFILE_CLAIMS",
     "OIDC_USERINFO_CLAIMS",
-    "CURRENT_VERSION",
-    "CAPABILITY_REQUIREMENTS",
-    "FEATURES_BY_VERSION",
+    "VERSION_HISTORY",
     "HostedLoginPage",
     "HostedLoginRequest",
     "LoginThemeAssetPolicy",
@@ -45,12 +65,19 @@ __all__ = [
     "LogoutOut",
     "LogoutPlan",
     "LogoutRequest",
+    "OidcBindingError",
+    "OidcCompatibility",
+    "OidcProtocolError",
     "OidcProviderError",
     "OidcProviderRuntime",
     "OidcSession",
     "OidcSessionStatus",
+    "OidcVersion",
     "TenantBranding",
     "TenantBrandingRegistry",
+    "UnsupportedOidcRevisionError",
+    "capability_report",
+    "compatibility",
     "compose_oidc_claim_set",
     "compose_oidc_id_token_claim_set",
     "compose_oidc_userinfo_claim_set",
@@ -59,18 +86,4 @@ __all__ = [
     "render_login_template",
     "select_version",
     "supports",
-    "VERSION_HISTORY",
-    "OidcVersion",
 ]
-
-
-from tigrbl_identity_contracts.protocol_processing import build_protocol_capability_report as _build_protocol_capability_report
-
-def capability_report() -> dict[str, object]:
-    return _build_protocol_capability_report(
-        protocol='oidc',
-        revision=CURRENT_VERSION.identifier,
-        features=tuple(FEATURES_BY_VERSION[CURRENT_VERSION.identifier]),
-        evidence_links=('tests/unit/test_versioned_oauth_oidc_protocols.py',),
-        extra_requirements=tuple(globals().get('CAPABILITY_REQUIREMENTS', ())),
-    )

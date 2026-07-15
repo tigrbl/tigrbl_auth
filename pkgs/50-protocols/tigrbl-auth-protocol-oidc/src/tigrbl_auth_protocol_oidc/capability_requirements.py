@@ -1,10 +1,5 @@
-from tigrbl_identity_contracts.capabilities import ProtocolCapabilityRequirement
+"""Compatibility import for the canonical protocol bindings module."""
 
-CAPABILITY_REQUIREMENTS = (
-    ProtocolCapabilityRequirement(
-        "oidc-backchannel-logout", "1.0", "logout-token-jti-replay", "jti",
-        "security.replay-protection", "check_and_reserve", "oidc:logout-token-jti",
-    ),
-)
+from .bindings import CAPABILITY_REQUIREMENTS
 
 __all__ = ["CAPABILITY_REQUIREMENTS"]
