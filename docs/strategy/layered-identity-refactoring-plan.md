@@ -759,8 +759,16 @@ flags. Tier-4 claims require independent interoperability evidence.
   deletion. Canonical packages have zero imports from deprecated roots. The
   compatibility packages remain isolated under `pkgs/deprecated` until the
   first post-migration release boundary.
-- [ ] C12: full boundary, conformance, security-negative, migration, and
-  interoperability audit.
+- [x] C12: full boundary, conformance, security-negative, migration, and
+  interoperability audit executed.
+  The final sequential unit suite passes `1306` tests. The combined security,
+  negative, and conformance lane passes `180` tests with `5` explicitly planned
+  skips. Layer-boundary validation reports zero violations, `uv lock --check`
+  passes, and the bootstrap/migration lifecycle round trip passes against the
+  layered project-tree authority. The dedicated `tests/interop` directory
+  currently collects no executable tests, so independent interoperability and
+  Tier 4 peer evidence remain an external certification/release gate rather
+  than an unverified implementation claim.
 
 ## 16. Change notation and non-negotiable invariants
 
