@@ -1,31 +1,27 @@
-from tigrbl_identity_contracts.capabilities import ProtocolCapabilityRequirement
-from tigrbl_identity_contracts.protocol_processing import build_protocol_capability_report
+"""Versioned CoRIM-family reference-material profile ownership."""
 
+from tigrbl_identity_contracts.protocol_processing import (
+    build_protocol_capability_report,
+)
+
+from .bindings import CAPABILITY_REQUIREMENTS
+from .claims import CORIM_CLAIM_CLASSES, CORIM_MAP_FIELDS
+from .compatibility import COMPATIBILITY_PATHS, CorimCompatibility, compatibility
+from .errors import (
+    CorimProtocolError,
+    CorimReferenceIntegrityError,
+    UnsupportedCorimMediaTypeError,
+)
 from .features import FEATURES_BY_VERSION, supports
 from .migrations import migrate_document
-from .versions import CURRENT_VERSION, VERSION_HISTORY, CorimVersion, select_version
-
-
-CAPABILITY_REQUIREMENTS = (
-    ProtocolCapabilityRequirement(
-        protocol="corim",
-        revision=CURRENT_VERSION.identifier,
-        requirement_id="corim-reference-publication",
-        wire_element="tag-identity",
-        capability_id="attestation.reference-material",
-        operation="publish",
-        normalized_namespace="attestation-reference-manifest",
-    ),
-    ProtocolCapabilityRequirement(
-        protocol="corim",
-        revision=CURRENT_VERSION.identifier,
-        requirement_id="corim-appraisal-consumption",
-        wire_element="tags",
-        capability_id="attestation.appraisal",
-        operation="appraise",
-        normalized_namespace="attestation-evidence",
-    ),
+from .schemas import (
+    CORIM_CARRIERS,
+    CORIM_SIGNED_CARRIER,
+    CORIM_UNSIGNED_CARRIER,
+    CorimCarrier,
+    select_carrier,
 )
+from .versions import CURRENT_VERSION, VERSION_HISTORY, CorimVersion, select_version
 
 
 def capability_report() -> dict[str, object]:
@@ -35,13 +31,33 @@ def capability_report() -> dict[str, object]:
         features=tuple(FEATURES_BY_VERSION[CURRENT_VERSION.identifier]),
         evidence_links=("tests/unit/test_corim_protocol_versioning.py",),
         extra_requirements=CAPABILITY_REQUIREMENTS,
+        include_default_artifact_requirements=False,
     )
     report["status"] = CURRENT_VERSION.status
     return report
 
 
 __all__ = [
-    "CAPABILITY_REQUIREMENTS", "CURRENT_VERSION", "FEATURES_BY_VERSION",
-    "VERSION_HISTORY", "CorimVersion", "capability_report", "migrate_document",
-    "select_version", "supports",
+    "CAPABILITY_REQUIREMENTS",
+    "COMPATIBILITY_PATHS",
+    "CORIM_CARRIERS",
+    "CORIM_CLAIM_CLASSES",
+    "CORIM_MAP_FIELDS",
+    "CORIM_SIGNED_CARRIER",
+    "CORIM_UNSIGNED_CARRIER",
+    "CURRENT_VERSION",
+    "FEATURES_BY_VERSION",
+    "VERSION_HISTORY",
+    "CorimCarrier",
+    "CorimCompatibility",
+    "CorimProtocolError",
+    "CorimReferenceIntegrityError",
+    "CorimVersion",
+    "UnsupportedCorimMediaTypeError",
+    "capability_report",
+    "compatibility",
+    "migrate_document",
+    "select_carrier",
+    "select_version",
+    "supports",
 ]
