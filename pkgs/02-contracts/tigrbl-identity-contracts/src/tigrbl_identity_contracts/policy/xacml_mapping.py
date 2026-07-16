@@ -1,9 +1,9 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import StrEnum
-from typing import Mapping
+from typing import Mapping, Sequence
 
 
-class XacmlDecision(StrEnum):
+class XacmlDecisionValue(StrEnum):
     PERMIT = "Permit"
     DENY = "Deny"
     NOT_APPLICABLE = "NotApplicable"
@@ -16,4 +16,21 @@ class XacmlCategory:
     attributes: Mapping[str, object]
 
 
-__all__ = ["XacmlCategory", "XacmlDecision"]
+@dataclass(frozen=True, slots=True)
+class XacmlDecisionResult:
+    decision: XacmlDecisionValue
+    status: Mapping[str, object] = field(default_factory=dict)
+    obligations: Sequence[Mapping[str, object]] = ()
+    advice: Sequence[Mapping[str, object]] = ()
+
+
+# Compatibility name for callers that imported the value enum.
+XacmlDecision = XacmlDecisionValue
+
+
+__all__ = [
+    "XacmlCategory",
+    "XacmlDecision",
+    "XacmlDecisionResult",
+    "XacmlDecisionValue",
+]

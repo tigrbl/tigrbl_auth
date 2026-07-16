@@ -3176,6 +3176,7 @@ dependencies = [
     { name = "tigrbl-auth-protocol-webauthn" },
     { name = "tigrbl-auth-release-certification" },
     { name = "tigrbl-authentication-assurance-bases" },
+    { name = "tigrbl-authentication-context-bases" },
     { name = "tigrbl-authenticator-api-key-local" },
     { name = "tigrbl-authenticator-attestation-capability" },
     { name = "tigrbl-authenticator-client-secret-local" },
@@ -3318,7 +3319,9 @@ dependencies = [
     { name = "tigrbl-identity-admin-policy-registry" },
     { name = "tigrbl-identity-admin-relationship-graph" },
     { name = "tigrbl-identity-admin-trust-federation-graph" },
+    { name = "tigrbl-identity-assurance-bases" },
     { name = "tigrbl-identity-assurance-concrete" },
+    { name = "tigrbl-identity-assurance-contracts" },
     { name = "tigrbl-identity-authenticator-bases" },
     { name = "tigrbl-identity-author" },
     { name = "tigrbl-identity-claims-bases" },
@@ -3382,6 +3385,7 @@ dependencies = [
     { name = "tigrbl-sd-jwt-concrete" },
     { name = "tigrbl-sd-jwt-vc-concrete" },
     { name = "tigrbl-secret-hashing-bcrypt-provider" },
+    { name = "tigrbl-security-artifact-bases" },
     { name = "tigrbl-security-auth-context-acr-basic" },
     { name = "tigrbl-security-auth-context-amr-basic" },
     { name = "tigrbl-security-authorization-provenance-builder" },
@@ -3418,6 +3422,7 @@ dependencies = [
     { name = "tigrbl-svid-concrete" },
     { name = "tigrbl-svid-verifier-provider" },
     { name = "tigrbl-token-bases" },
+    { name = "tigrbl-token-contracts" },
     { name = "tigrbl-token-exchange-capability" },
     { name = "tigrbl-token-introspection-capability" },
     { name = "tigrbl-token-issuance-capability" },
@@ -3560,6 +3565,7 @@ requires-dist = [
     { name = "tigrbl-auth-protocol-webauthn", editable = "pkgs/50-protocols/tigrbl-auth-protocol-webauthn" },
     { name = "tigrbl-auth-release-certification", editable = "pkgs/60-runtime/tigrbl-auth-release-certification" },
     { name = "tigrbl-authentication-assurance-bases", editable = "pkgs/05-bases/tigrbl-authentication-assurance-bases" },
+    { name = "tigrbl-authentication-context-bases", editable = "pkgs/05-bases/tigrbl-authentication-context-bases" },
     { name = "tigrbl-authenticator-api-key-local", editable = "pkgs/20-providers/tigrbl-authenticator-api-key-local" },
     { name = "tigrbl-authenticator-attestation-capability", editable = "pkgs/40-capabilities/tigrbl-authenticator-attestation-capability" },
     { name = "tigrbl-authenticator-client-secret-local", editable = "pkgs/20-providers/tigrbl-authenticator-client-secret-local" },
@@ -3702,7 +3708,9 @@ requires-dist = [
     { name = "tigrbl-identity-admin-policy-registry", editable = "pkgs/deprecated/tigrbl-identity-admin-policy-registry" },
     { name = "tigrbl-identity-admin-relationship-graph", editable = "pkgs/20-providers/tigrbl-identity-admin-relationship-graph" },
     { name = "tigrbl-identity-admin-trust-federation-graph", editable = "pkgs/30-storage-runtime/tigrbl-identity-admin-trust-federation-graph" },
+    { name = "tigrbl-identity-assurance-bases", editable = "pkgs/05-bases/tigrbl-identity-assurance-bases" },
     { name = "tigrbl-identity-assurance-concrete", editable = "pkgs/10-concrete/tigrbl-identity-assurance-concrete" },
+    { name = "tigrbl-identity-assurance-contracts", editable = "pkgs/02-contracts/tigrbl-identity-assurance-contracts" },
     { name = "tigrbl-identity-authenticator-bases", editable = "pkgs/05-bases/tigrbl-identity-authenticator-bases" },
     { name = "tigrbl-identity-author", editable = "pkgs/60-runtime/tigrbl-identity-author" },
     { name = "tigrbl-identity-claims-bases", editable = "pkgs/05-bases/tigrbl-identity-claims-bases" },
@@ -3770,6 +3778,7 @@ requires-dist = [
     { name = "tigrbl-sd-jwt-concrete", editable = "pkgs/10-concrete/tigrbl-sd-jwt-concrete" },
     { name = "tigrbl-sd-jwt-vc-concrete", editable = "pkgs/10-concrete/tigrbl-sd-jwt-vc-concrete" },
     { name = "tigrbl-secret-hashing-bcrypt-provider", editable = "pkgs/20-providers/tigrbl-secret-hashing-bcrypt-provider" },
+    { name = "tigrbl-security-artifact-bases", editable = "pkgs/05-bases/tigrbl-security-artifact-bases" },
     { name = "tigrbl-security-auth-context-acr-basic", editable = "pkgs/20-providers/tigrbl-security-auth-context-acr-basic" },
     { name = "tigrbl-security-auth-context-amr-basic", editable = "pkgs/20-providers/tigrbl-security-auth-context-amr-basic" },
     { name = "tigrbl-security-authorization-provenance-builder", editable = "pkgs/20-providers/tigrbl-security-authorization-provenance-builder" },
@@ -3806,6 +3815,7 @@ requires-dist = [
     { name = "tigrbl-svid-concrete", editable = "pkgs/10-concrete/tigrbl-svid-concrete" },
     { name = "tigrbl-svid-verifier-provider", editable = "pkgs/20-providers/tigrbl-svid-verifier-provider" },
     { name = "tigrbl-token-bases", editable = "pkgs/05-bases/tigrbl-token-bases" },
+    { name = "tigrbl-token-contracts", editable = "pkgs/02-contracts/tigrbl-token-contracts" },
     { name = "tigrbl-token-exchange-capability", editable = "pkgs/40-capabilities/tigrbl-token-exchange-capability" },
     { name = "tigrbl-token-introspection-capability", editable = "pkgs/40-capabilities/tigrbl-token-introspection-capability" },
     { name = "tigrbl-token-issuance-capability", editable = "pkgs/40-capabilities/tigrbl-token-issuance-capability" },
@@ -3843,11 +3853,26 @@ name = "tigrbl-authentication-assurance-bases"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/05-bases/tigrbl-authentication-assurance-bases" }
 dependencies = [
+    { name = "tigrbl-identity-assurance-bases" },
     { name = "tigrbl-identity-contracts" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
+requires-dist = [
+    { name = "tigrbl-identity-assurance-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-authentication-context-bases"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/05-bases/tigrbl-authentication-context-bases" }
+dependencies = [
+    { name = "tigrbl-security-trust-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" }]
 
 [[package]]
 name = "tigrbl-authenticator-api-key-local"
@@ -5991,6 +6016,17 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-identity-assurance-bases"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/05-bases/tigrbl-identity-assurance-bases" }
+dependencies = [
+    { name = "tigrbl-identity-assurance-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-assurance-contracts", specifier = "==0.4.0.dev2" }]
+
+[[package]]
 name = "tigrbl-identity-assurance-concrete"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-identity-assurance-concrete" }
@@ -6000,6 +6036,11 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-identity-assurance-contracts"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/02-contracts/tigrbl-identity-assurance-contracts" }
 
 [[package]]
 name = "tigrbl-identity-authenticator-bases"
@@ -6066,14 +6107,18 @@ name = "tigrbl-identity-contracts"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/02-contracts/tigrbl-identity-contracts" }
 dependencies = [
+    { name = "tigrbl-identity-assurance-contracts" },
     { name = "tigrbl-identity-core" },
     { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-token-contracts" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "tigrbl-identity-assurance-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-token-contracts", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
@@ -7087,18 +7132,29 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-security-artifact-bases"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/05-bases/tigrbl-security-artifact-bases" }
+dependencies = [
+    { name = "tigrbl-security-trust-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" }]
+
+[[package]]
 name = "tigrbl-security-auth-context-acr-basic"
 version = "0.1.0"
 source = { editable = "pkgs/20-providers/tigrbl-security-auth-context-acr-basic" }
 dependencies = [
+    { name = "tigrbl-authentication-context-bases" },
     { name = "tigrbl-security-trust-contracts" },
-    { name = "tigrbl-security-trust-domain-bases" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "tigrbl-authentication-context-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
-    { name = "tigrbl-security-trust-domain-bases", specifier = "==0.1.0" },
 ]
 
 [[package]]
@@ -7106,14 +7162,14 @@ name = "tigrbl-security-auth-context-amr-basic"
 version = "0.1.0"
 source = { editable = "pkgs/20-providers/tigrbl-security-auth-context-amr-basic" }
 dependencies = [
+    { name = "tigrbl-authentication-context-bases" },
     { name = "tigrbl-security-trust-contracts" },
-    { name = "tigrbl-security-trust-domain-bases" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "tigrbl-authentication-context-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
-    { name = "tigrbl-security-trust-domain-bases", specifier = "==0.1.0" },
 ]
 
 [[package]]
@@ -7397,17 +7453,17 @@ version = "0.1.0"
 source = { editable = "pkgs/20-providers/tigrbl-security-subject-pairwise-provider" }
 dependencies = [
     { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-model-bases" },
     { name = "tigrbl-pairwise-subject-identifier-concrete" },
     { name = "tigrbl-security-trust-contracts" },
-    { name = "tigrbl-security-trust-domain-bases" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-model-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-pairwise-subject-identifier-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
-    { name = "tigrbl-security-trust-domain-bases", specifier = "==0.1.0" },
 ]
 
 [[package]]
@@ -7454,15 +7510,21 @@ name = "tigrbl-security-trust-domain-bases"
 version = "0.1.0"
 source = { editable = "pkgs/05-bases/tigrbl-security-trust-domain-bases" }
 dependencies = [
+    { name = "tigrbl-authentication-context-bases" },
     { name = "tigrbl-identity-claims-bases" },
     { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-model-bases" },
+    { name = "tigrbl-security-artifact-bases" },
     { name = "tigrbl-security-trust-contracts" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "tigrbl-authentication-context-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-claims-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-model-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-artifact-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
 ]
 
@@ -7660,6 +7722,17 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-token-contracts"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/02-contracts/tigrbl-token-contracts" }
+dependencies = [
+    { name = "tigrbl-identity-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-token-exchange-capability"

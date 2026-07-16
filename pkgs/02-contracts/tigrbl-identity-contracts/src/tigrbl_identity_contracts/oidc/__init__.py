@@ -5,7 +5,7 @@ import re
 from dataclasses import dataclass, field
 from datetime import datetime
 from importlib import import_module
-from typing import Any, Mapping, Protocol
+from typing import Any
 from uuid import UUID
 
 from ..protocols import OidcSessionStatus
@@ -135,12 +135,6 @@ class SessionStateValidation:
     expected_session_state: str | None
 
 
-class BackchannelReplayStorePort(Protocol):
-    def register(self, jti: str, *, exp: datetime, now: datetime) -> None: ...
-
-    def snapshot(self) -> Mapping[str, int]: ...
-
-
 _LAZY_EXPORTS = {
     "AuthenticatorEvidence": ".eap_acr",
     "ClaimDescriptor": ".claims",
@@ -201,7 +195,6 @@ def __getattr__(name: str) -> Any:
 
 
 __all__ = [
-    "BackchannelReplayStorePort",
     "HostedLoginPage",
     "HostedLoginRequest",
     "LoginThemeAssetPolicy",

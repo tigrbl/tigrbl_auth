@@ -52,6 +52,8 @@ dependencies = [
     "httpx==0.28.1",
     "aiosqlite==0.22.1",
     "tigrbl-identity-contracts==0.4.0.dev2",
+    "tigrbl-identity-assurance-contracts==0.4.0.dev2",
+    "tigrbl-token-contracts==0.4.0.dev2",
     "tigrbl-authz-policy-rules-concrete==0.4.0.dev2",
     "tigrbl-authz-policy-combiner-default==0.4.0.dev2",
     "tigrbl-authz-policy-evaluators-default==0.4.0.dev2",
@@ -110,6 +112,9 @@ dependencies = [
     "tigrbl-capability-bases==0.4.0.dev2",
     "tigrbl-replay-bases==0.4.0.dev2",
     "tigrbl-authentication-assurance-bases==0.4.0.dev2",
+    "tigrbl-authentication-context-bases==0.4.0.dev2",
+    "tigrbl-identity-assurance-bases==0.4.0.dev2",
+    "tigrbl-security-artifact-bases==0.4.0.dev2",
     "tigrbl-claim-issuer-concrete==0.4.0.dev2",
     "tigrbl-claim-subject-concrete==0.4.0.dev2",
     "tigrbl-claim-audience-concrete==0.4.0.dev2",
@@ -515,6 +520,8 @@ tigrbl-identity-testkit = { path = "pkgs/60-runtime/tigrbl-identity-testkit", ed
 tigrbl-identity-admin = { path = "pkgs/20-providers/tigrbl-identity-admin", editable = true }
 tigrbl-identity-author = { path = "pkgs/60-runtime/tigrbl-identity-author", editable = true }
 tigrbl-identity-contracts = { path = "pkgs/02-contracts/tigrbl-identity-contracts", editable = true }
+tigrbl-identity-assurance-contracts = { path = "pkgs/02-contracts/tigrbl-identity-assurance-contracts", editable = true }
+tigrbl-token-contracts = { path = "pkgs/02-contracts/tigrbl-token-contracts", editable = true }
 tigrbl-authz-policy-rules-concrete = { path = "pkgs/10-concrete/tigrbl-authz-policy-rules-concrete", editable = true }
 tigrbl-authz-policy-combiner-default = { path = "pkgs/10-concrete/tigrbl-authz-policy-combiner-default", editable = true }
 tigrbl-authz-policy-evaluators-default = { path = "pkgs/10-concrete/tigrbl-authz-policy-evaluators-default", editable = true }
@@ -535,6 +542,9 @@ tigrbl-token-bases = { path = "pkgs/05-bases/tigrbl-token-bases", editable = tru
 tigrbl-capability-bases = { path = "pkgs/05-bases/tigrbl-capability-bases", editable = true }
 tigrbl-replay-bases = { path = "pkgs/05-bases/tigrbl-replay-bases", editable = true }
 tigrbl-authentication-assurance-bases = { path = "pkgs/05-bases/tigrbl-authentication-assurance-bases", editable = true }
+tigrbl-authentication-context-bases = { path = "pkgs/05-bases/tigrbl-authentication-context-bases", editable = true }
+tigrbl-identity-assurance-bases = { path = "pkgs/05-bases/tigrbl-identity-assurance-bases", editable = true }
+tigrbl-security-artifact-bases = { path = "pkgs/05-bases/tigrbl-security-artifact-bases", editable = true }
 tigrbl-claim-issuer-concrete = { path = "pkgs/10-concrete/tigrbl-claim-issuer-concrete", editable = true }
 tigrbl-claim-subject-concrete = { path = "pkgs/10-concrete/tigrbl-claim-subject-concrete", editable = true }
 tigrbl-claim-audience-concrete = { path = "pkgs/10-concrete/tigrbl-claim-audience-concrete", editable = true }

@@ -1,14 +1,20 @@
 """Domain base classes composed from the horizontal security/trust contracts."""
+# ruff: noqa: E402, F401
 
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
 from typing import Any, Mapping, Sequence
 
-from tigrbl_identity_contracts.oidc import (
-    OidcFederationPort,
-    SubjectIdentifierStrategyPort,
-    WebFingerResolverPort,
+from tigrbl_identity_contracts.oidc import OidcFederationPort, WebFingerResolverPort
+from tigrbl_identity_model_bases import SubjectIdentifierStrategyBase
+from tigrbl_authentication_context_bases import AcrEvaluatorBase, AmrEvaluatorBase
+from tigrbl_security_artifact_bases import (
+    ProtectedArtifactOpenerBase as ArtifactOpenerBase,
+    ProtectedArtifactVerifierBase as ArtifactVerifierBase,
+    RecipientSetEditorBase,
+    SecurityArtifactCodecBase as ArtifactCodecBase,
+    SecurityArtifactIssuerBase as ArtifactIssuerBase,
 )
 
 from tigrbl_security_trust_contracts import (
@@ -102,44 +108,6 @@ class CapabilityProviderBase(ICapabilityProvider, ABC):
     def supports(self) -> CapabilityMap: ...
 
 
-class ArtifactCodecBase(IArtifactCodec, ABC):
-    """Base for parsers and deterministic canonicalizers."""
-
-    async def parse(self, request: ParseRequest) -> ParsedArtifact:
-        raise NotImplementedError
-
-    async def canonicalize(self, request: CanonicalizeRequest) -> bytes:
-        raise NotImplementedError
-
-
-class ArtifactIssuerBase(IArtifactIssuer, ABC):
-    """Base for providers that produce generic artifacts."""
-
-    async def issue(self, request: IssueRequest) -> Artifact:
-        raise NotImplementedError
-
-
-class ArtifactVerifierBase(IArtifactVerifier, ABC):
-    """Base for providers that verify generic artifacts."""
-
-    async def verify(self, request: VerifyRequest) -> VerificationResult:
-        raise NotImplementedError
-
-
-class ArtifactOpenerBase(IArtifactOpener, ABC):
-    """Base for providers that open protected artifacts."""
-
-    async def open(self, request: OpenRequest) -> OpenResult:
-        raise NotImplementedError
-
-
-class RecipientSetEditorBase(IRecipientSetEditor, ABC):
-    """Base for recipient-set mutation on multi-recipient envelopes."""
-
-    async def rewrap(self, request: RewrapRequest) -> Artifact:
-        raise NotImplementedError
-
-
 class SigningDomainBase(
     CapabilityProviderBase, ArtifactIssuerBase, ArtifactVerifierBase, ArtifactCodecBase
 ):
@@ -172,41 +140,8 @@ class PkceVerifierBase(IPkceVerifier, CapabilityProviderBase):
         raise NotImplementedError
 
 
-class AcrEvaluatorBase(IAcrEvaluator, CapabilityProviderBase):
-    """Base for Authentication Context Class Reference evaluators."""
-
-    def evaluate_acr(self, request: AcrEvaluationRequest) -> AcrEvaluationResult:
-        raise NotImplementedError
-
-
-class AmrEvaluatorBase(IAmrEvaluator, CapabilityProviderBase):
-    """Base for Authentication Methods References evaluators."""
-
-    def evaluate_amr(self, request: AmrEvaluationRequest) -> AmrEvaluationResult:
-        raise NotImplementedError
-
-
-class SubjectIdentifierStrategyBase(
-    SubjectIdentifierStrategyPort, CapabilityProviderBase
-):
-    """Base for public, pairwise, transient, and opaque subject strategies."""
-
-    def derive(self, request: Any) -> Any:
-        raise NotImplementedError
-
-
-class WebFingerResolverBase(WebFingerResolverPort, CapabilityProviderBase):
-    """Base for WebFinger discovery providers."""
-
-    async def resolve(self, request: Any) -> Any:
-        raise NotImplementedError
-
-
-class OidcFederationProviderBase(OidcFederationPort, CapabilityProviderBase):
-    """Base for OIDC Federation trust providers."""
-
-    async def entity_statement(self, request: Any) -> Any:
-        raise NotImplementedError
+WebFingerResolverBase = WebFingerResolverPort
+OidcFederationProviderBase = OidcFederationPort
 
 
 class TokenServiceDomainBase(

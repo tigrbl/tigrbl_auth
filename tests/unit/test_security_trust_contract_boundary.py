@@ -44,12 +44,15 @@ def test_security_trust_contracts_are_dependency_free_protocols() -> None:
         }, path
 
 
-def test_security_trust_domain_bases_depend_only_on_contracts() -> None:
+def test_security_trust_domain_bases_depend_only_on_contracts_and_peer_bases() -> None:
     metadata = tomllib.loads((BASES / "pyproject.toml").read_text(encoding="utf-8"))
 
     assert metadata["project"]["dependencies"] == [
         "tigrbl-identity-claims-bases==0.4.0.dev2",
         "tigrbl-identity-contracts==0.4.0.dev2",
+        "tigrbl-identity-model-bases==0.4.0.dev2",
+        "tigrbl-authentication-context-bases==0.4.0.dev2",
+        "tigrbl-security-artifact-bases==0.4.0.dev2",
         "tigrbl-security-trust-contracts==0.1.0",
     ]
     for path in sorted((BASES / "src").rglob("*.py")):
@@ -60,6 +63,9 @@ def test_security_trust_domain_bases_depend_only_on_contracts() -> None:
             "typing",
             "tigrbl_identity_claims_bases",
             "tigrbl_identity_contracts",
+            "tigrbl_identity_model_bases",
+            "tigrbl_authentication_context_bases",
+            "tigrbl_security_artifact_bases",
             "tigrbl_security_trust_contracts",
             "tigrbl_security_trust_domain_bases",
         }, path

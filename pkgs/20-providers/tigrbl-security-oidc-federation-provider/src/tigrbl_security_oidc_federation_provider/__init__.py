@@ -2,12 +2,11 @@ from __future__ import annotations
 
 from typing import Any, Mapping
 
-from tigrbl_identity_contracts.oidc import FederationEntityStatementRequest, FederationEntityStatementResult
+from tigrbl_identity_contracts.oidc import FederationEntityStatementRequest, FederationEntityStatementResult, OidcFederationPort
 from tigrbl_security_trust_contracts import CapabilityMap
-from tigrbl_security_trust_domain_bases import OidcFederationProviderBase
 
 
-class StaticOidcFederationProvider(OidcFederationProviderBase):
+class StaticOidcFederationProvider(OidcFederationPort):
     def __init__(self, statements: Mapping[str, str | Mapping[str, Any]] | None = None) -> None:
         self._statements = dict(statements or {})
 

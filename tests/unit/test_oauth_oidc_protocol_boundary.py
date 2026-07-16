@@ -61,7 +61,7 @@ def test_oauth_oidc_t0_public_surfaces_are_importable() -> None:
         scopes=("openid", "profile"),
     )
 
-    assert service.repository.get_client("client-a") is not None
+    assert service.operations.resolve_client("client-a") is not None
     assert request.scope == ("openid", "profile")
 
 

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from tigrbl_security_trust_contracts import AmrEvaluationRequest, AmrEvaluationResult, CapabilityMap
-from tigrbl_security_trust_domain_bases import AmrEvaluatorBase
+from tigrbl_authentication_context_bases import AmrEvaluatorBase
 
 
 class BasicAmrEvaluator(AmrEvaluatorBase):

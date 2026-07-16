@@ -31,6 +31,16 @@ class InMemorySecurityEventReplayStore(SecurityEventReplayBase):
         self._consumed.add(key)
         return True
 
+    def check_and_store(self, key: str, *, now: int | None = None, ttl_s: int) -> bool:
+        del now, ttl_s
+        if not key:
+            raise ValueError("replay key is required")
+        marker = ("generic", key)
+        if marker in self._consumed:
+            return False
+        self._consumed.add(marker)
+        return True
+
     def contains(self, issuer: str, token_id: str) -> bool:
         return (issuer, token_id) in self._consumed
 

@@ -23,6 +23,12 @@ class AccessEvaluationResponse:
 
 @dataclass(frozen=True, slots=True)
 class XacmlDecision:
+    """Deprecated wire-shaped compatibility result.
+
+    New code should use ``policy.xacml_mapping.XacmlDecisionResult`` and keep
+    AuthZEN/XACML conversion in layer 50.
+    """
+
     decision: str
     status: Mapping[str, Any] = field(default_factory=dict)
     obligations: Sequence[Mapping[str, Any]] = ()

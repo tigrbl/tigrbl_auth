@@ -95,7 +95,7 @@ class AnomalySignal:
 
 
 @dataclass(frozen=True, slots=True)
-class TrustDomain:
+class AdaptiveTrustDomain:
     name: str
     issuers: tuple[str, ...]
     clouds: tuple[str, ...]
@@ -128,7 +128,10 @@ __all__ = [
     "GraphDecision",
     "RelationshipDefinition",
     "RelationshipTuple",
-    "TrustDomain",
+    "AdaptiveTrustDomain",
     "TrustEdge",
     "TrustPath",
 ]
+
+# Compatibility alias. New code should use the unambiguous family name.
+TrustDomain = AdaptiveTrustDomain

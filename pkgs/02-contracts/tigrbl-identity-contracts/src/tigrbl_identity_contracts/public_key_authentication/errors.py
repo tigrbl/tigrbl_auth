@@ -9,8 +9,12 @@ class CeremonyStateError(PublicKeyAuthenticationError):
     """Raised when ceremony state is missing, expired, or already consumed."""
 
 
-class CredentialVerificationError(PublicKeyAuthenticationError):
+class PublicKeyCredentialVerificationError(PublicKeyAuthenticationError):
     """Raised when credential proof verification fails."""
+
+
+# Compatibility alias; the canonical generic error lives in credentials.errors.
+CredentialVerificationError = PublicKeyCredentialVerificationError
 
 
 class AttestationVerificationError(PublicKeyAuthenticationError):
@@ -25,6 +29,7 @@ __all__ = [
     "AttestationVerificationError",
     "CeremonyStateError",
     "CredentialVerificationError",
+    "PublicKeyCredentialVerificationError",
     "PublicKeyAuthenticationError",
     "RelyingPartyPolicyError",
 ]

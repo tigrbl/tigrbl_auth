@@ -1,0 +1,44 @@
+version: 1
+layer: 02-contracts
+owners:
+  Did:
+    canonical: tigrbl_identity_contracts.did.identifiers.Did
+    compatibility: [tigrbl_identity_contracts.decentralized.Did]
+  DidResolutionResult:
+    canonical: tigrbl_identity_contracts.did.resolution.DidResolutionResult
+    compatibility: [tigrbl_identity_contracts.decentralized.DidResolutionResult]
+  SpiffeId:
+    canonical: tigrbl_identity_contracts.workloads.spiffe.SpiffeId
+    compatibility: [tigrbl_identity_contracts.workload_identity.SpiffeId]
+  Svid:
+    canonical: tigrbl_identity_contracts.workloads.svid.Svid
+    compatibility: [tigrbl_identity_contracts.workload_identity.Svid]
+  SvidFormat:
+    canonical: tigrbl_identity_contracts.workloads.svid.SvidFormat
+    compatibility: [tigrbl_identity_contracts.workload_identity.SvidFormat]
+  SpiffeTrustDomain:
+    canonical: tigrbl_identity_contracts.workloads.spiffe.TrustDomain
+  AdaptiveTrustDomain:
+    canonical: tigrbl_identity_contracts.adaptive_access.AdaptiveTrustDomain
+  XacmlDecisionValue:
+    canonical: tigrbl_identity_contracts.policy.xacml_mapping.XacmlDecisionValue
+  XacmlDecisionResult:
+    canonical: tigrbl_identity_contracts.policy.xacml_mapping.XacmlDecisionResult
+  CredentialVerificationError:
+    canonical: tigrbl_identity_contracts.credentials.errors.CredentialVerificationError
+  PublicKeyCredentialVerificationError:
+    canonical: tigrbl_identity_contracts.public_key_authentication.errors.PublicKeyCredentialVerificationError
+  AttestationEvidence:
+    canonical: tigrbl_identity_contracts.attestation.AttestationEvidence
+  KeyAttestationEvidence:
+    canonical: tigrbl_security_trust_contracts.KeyAttestationEvidence
+  DigitalCredential:
+    canonical: tigrbl_identity_contracts.digital_credentials.artifacts.DigitalCredential
+  VerifiedClaims:
+    canonical: tigrbl_identity_assurance_contracts.VerifiedClaims
+    compatibility: [tigrbl_identity_contracts.assurance.VerifiedClaims]
+  IdentityAssuranceRequest:
+    canonical: tigrbl_identity_assurance_contracts.IdentityAssuranceRequest
+    compatibility: [tigrbl_identity_contracts.oidc.identity_assurance.IdentityAssuranceRequest]
+  ReplayReservationPort:
+    canonical: tigrbl_identity_contracts.replay.reservations.ReplayReservationPort

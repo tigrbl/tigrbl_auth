@@ -1,4 +1,5 @@
 'Key request, result, and lifecycle value objects.'
+# ruff: noqa: F405
 from __future__ import annotations
 
 from .keys import *  # noqa: F401,F403
@@ -245,7 +246,7 @@ class VerifyAttestationRequest:
 
 
 @dataclass(frozen=True)
-class AttestationEvidence:
+class KeyAttestationEvidence:
     """Portable key attestation evidence envelope."""
 
     evidence: Artifact | Mapping[str, Any] | bytes | str
@@ -254,6 +255,10 @@ class AttestationEvidence:
     issuer_key_ref: KeyRefLike | None = None
     claims: Mapping[str, Any] = field(default_factory=dict)
     meta: Mapping[str, Any] = field(default_factory=dict)
+
+
+# Compatibility alias for the former ambiguous key-evidence name.
+AttestationEvidence = KeyAttestationEvidence
 
 
 @dataclass(frozen=True)
@@ -279,6 +284,7 @@ class ExportPublicKeyResult:
 __all__ = [
     "AttestKeyRequest",
     "AttestationEvidence",
+    "KeyAttestationEvidence",
     "DecapsulateRequest",
     "DecryptRequest",
     "EncapsulateRequest",

@@ -27,7 +27,6 @@ TRUST_BASE_PROVIDER_PACKAGES = {
     "tigrbl-security-claims-provider-local",
     "tigrbl-security-dpop-cnf-binding-validator",
     "tigrbl-security-mtls-cnf-binding-validator",
-    "tigrbl-security-oidc-federation-provider",
     "tigrbl-security-proof-dpop",
     "tigrbl-security-proof-pkce",
     "tigrbl-security-sender-constraint-validator",
@@ -35,7 +34,6 @@ TRUST_BASE_PROVIDER_PACKAGES = {
     "tigrbl-security-subject-pairwise-provider",
     "tigrbl-security-token-introspection-client",
     "tigrbl-security-token-jwks-cache",
-    "tigrbl-security-webfinger-provider",
 }
 
 COMPOSITION_PROVIDER_PACKAGES = {
@@ -60,6 +58,10 @@ DIRECT_CONTRACT_PROVIDER_PACKAGES = {
     # Bcrypt is the sole implementation of the shared-secret hashing contract;
     # a layer-05 behavior base would add no shared implementation seam.
     "tigrbl-secret-hashing-bcrypt-provider",
+    # These protocol-specific providers implement their layer-02 ports directly;
+    # their versioned protocol mapping belongs in layer 50, not a general trust base.
+    "tigrbl-security-oidc-federation-provider",
+    "tigrbl-security-webfinger-provider",
 }
 
 

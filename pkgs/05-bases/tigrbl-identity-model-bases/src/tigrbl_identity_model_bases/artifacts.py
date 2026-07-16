@@ -16,23 +16,34 @@ from tigrbl_identity_contracts.credential_artifacts import (
 )
 
 
-class CredentialIssuerBase(CredentialIssuer, ABC):
+class LegacyCredentialIssuerBase(CredentialIssuer, ABC):
     @abstractmethod
     def issue(
         self, claims: Mapping[str, Any], /, **options: Any
     ) -> CredentialArtifact: ...
 
 
-class ArtifactVerifierBase(ArtifactVerifier, ABC):
+class LegacyCredentialArtifactVerifierBase(ArtifactVerifier, ABC):
     @abstractmethod
     def verify(self, request: VerificationRequest, /) -> VerificationResult: ...
 
 
-class PresentationBuilderBase(PresentationBuilder, ABC):
+class LegacyPresentationBuilderBase(PresentationBuilder, ABC):
     @abstractmethod
     def present(
         self, credentials: Sequence[CredentialArtifact], /, **options: Any
     ) -> PresentationArtifact: ...
 
 
-__all__ = ["ArtifactVerifierBase", "CredentialIssuerBase", "PresentationBuilderBase"]
+CredentialIssuerBase = LegacyCredentialIssuerBase
+ArtifactVerifierBase = LegacyCredentialArtifactVerifierBase
+PresentationBuilderBase = LegacyPresentationBuilderBase
+
+__all__ = [
+    "ArtifactVerifierBase",
+    "CredentialIssuerBase",
+    "LegacyCredentialArtifactVerifierBase",
+    "LegacyCredentialIssuerBase",
+    "LegacyPresentationBuilderBase",
+    "PresentationBuilderBase",
+]

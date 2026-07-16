@@ -6,9 +6,9 @@ from tigrbl_identity_contracts.security_events import (
     SecurityEvent,
     SecurityEventSubject,
 )
+from tigrbl_identity_contracts.replay import ReplayCheckPort
 from tigrbl_security_event_bases import (
     SecurityEventReceiverBase,
-    SecurityEventReplayBase,
 )
 from tigrbl_set_concrete import SET_TYP, validate_security_event_claims
 
@@ -27,7 +27,7 @@ class SetReceiverProvider(SecurityEventReceiverBase):
     def __init__(
         self,
         verifier: SetTokenVerifier,
-        replay: SecurityEventReplayBase,
+        replay: ReplayCheckPort,
         expected_issuer: str,
         expected_audience: str,
     ):
@@ -49,7 +49,9 @@ class SetReceiverProvider(SecurityEventReceiverBase):
             expected_issuer=self._issuer,
             expected_audience=self._audience,
         )
-        if not self._replay.consume_once(claims["iss"], claims["jti"]):
+        replay_key = f"set:{claims['iss']}:{claims['jti']}"
+        ttl_s = max(1, int(claims.get("exp", claims["iat"] + 300)) - int(claims["iat"]))
+        if not self._replay.check_and_store(replay_key, ttl_s=ttl_s):
             raise ValueError("Security Event Token replay detected")
         events = claims["events"]
         if len(events) != 1:

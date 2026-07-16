@@ -33,7 +33,9 @@ classifiers = [
 ]
 dependencies = [
     "tigrbl-identity-core==0.4.0.dev2",
+    "tigrbl-identity-assurance-contracts==0.4.0.dev2",
     "tigrbl-security-trust-contracts==0.1.0",
+    "tigrbl-token-contracts==0.4.0.dev2",
 ]
 
 [project.urls]

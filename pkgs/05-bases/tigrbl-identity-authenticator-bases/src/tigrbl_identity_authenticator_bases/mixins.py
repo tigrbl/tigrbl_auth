@@ -111,6 +111,17 @@ class RecoveryCodeVerifierMixin:
 class WebAuthnAssertionMixin:
     """Deprecated compatibility mixin; use PublicKeyAssertionVerificationBase."""
 
+    def __init_subclass__(cls, **kwargs: Any) -> None:
+        import warnings
+
+        warnings.warn(
+            "WebAuthnAssertionMixin is deprecated; use "
+            "tigrbl_public_key_authenticator_bases.PublicKeyAssertionVerificationBase",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        super().__init_subclass__(**kwargs)
+
     async def verify_webauthn_assertion(
         self, assertion: Mapping[str, Any], credential: Any
     ) -> Mapping[str, Any]:

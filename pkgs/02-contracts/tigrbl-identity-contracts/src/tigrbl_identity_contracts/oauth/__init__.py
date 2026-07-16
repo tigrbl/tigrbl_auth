@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime
 from importlib import import_module
-from typing import Any, Mapping, Protocol
+from typing import Any, Mapping
 
 from ..protocols import OAuthGrantStatus
 
@@ -51,18 +51,6 @@ class DPoPProof:
     iat: int
     jwk_thumbprint: str
     access_token_hash: str | None = None
-
-
-class OAuthRepositoryPort(Protocol):
-    def save_client(self, client: OAuthClient) -> None: ...
-
-    def get_client(self, client_id: str) -> OAuthClient | None: ...
-
-    def save_device_authorization(self, grant: DeviceAuthorization) -> None: ...
-
-    def get_device_authorization(self, device_code: str) -> DeviceAuthorization | None: ...
-
-    def remember_dpop_jti(self, client_id: str, jti: str) -> bool: ...
 
 
 @dataclass(frozen=True, slots=True)
@@ -236,7 +224,9 @@ class ProtectedResourceVerifierContract:
             "proof_modes_supported": list(self.sender_constraint_modes),
             "proof_binding_required": self.sender_constraint_required,
             "required_claims": list(self.required_claims),
-            "introspection_endpoint_auth_methods_supported": list(self.introspection_auth_methods),
+            "introspection_endpoint_auth_methods_supported": list(
+                self.introspection_auth_methods
+            ),
             "verifier_logic": self.verifier_logic_id,
             "verification_freshness_expectation": self.freshness_expectation,
             "verification_replay_expectation": self.replay_expectation,
@@ -317,7 +307,6 @@ __all__ = [
     "DeviceAuthorization",
     "NativeRedirectAssessment",
     "OAuthClient",
-    "OAuthRepositoryPort",
     "PARValidationResult",
     "PushedAuthorizationPersistenceRequest",
     "PushedAuthorizationResult",

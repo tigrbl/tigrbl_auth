@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from tigrbl_security_trust_contracts import AcrEvaluationRequest, AcrEvaluationResult, CapabilityMap
-from tigrbl_security_trust_domain_bases import AcrEvaluatorBase
+from tigrbl_authentication_context_bases import AcrEvaluatorBase
 
 
 class BasicAcrEvaluator(AcrEvaluatorBase):
