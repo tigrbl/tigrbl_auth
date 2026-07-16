@@ -1,0 +1,14 @@
+[project]
+name = "tigrbl-security-artifact-bases"
+version = "0.4.0.dev2"
+description = "Protocol-neutral protected security artifact bases."
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = ["tigrbl-security-trust-contracts==0.1.0"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tigrbl_security_artifact_bases", from = "src" }]
