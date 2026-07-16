@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from tigrbl_identity_authenticator_bases import AuthenticatorBase, RemoteIntrospectionMixin
+from tigrbl_authenticator_bases import AuthenticatorBase, RemoteIntrospectionMixin
 from tigrbl_identity_contracts.authenticators import AuthenticationFactorClass, AuthenticatorKind
 
 

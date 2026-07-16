@@ -1,0 +1,70 @@
+version: 1
+layer: 05-bases
+rules:
+  ownership: one-canonical-package-per-behavioral-family
+  contracts: inherit-layer-02-contracts-or-ports
+  models: do-not-redeclare-layer-02-models
+  protocol_wire_models: 50-protocols
+  durability: 01-storage-and-30-storage-runtime
+  deterministic_completion: 10-concrete
+  environment_completion: 20-providers
+  network_and_storage_io: forbidden
+families:
+  foundational:
+    capability: tigrbl-capability-bases
+    claim: tigrbl-claim-bases
+    identity: tigrbl-identity-bases
+    authentication_credential: tigrbl-authentication-credential-bases
+    authenticator: tigrbl-authenticator-bases
+    token: tigrbl-token-bases
+    replay: tigrbl-replay-bases
+  identity_security:
+    authentication_context: tigrbl-authentication-context-bases
+    identity_assurance: tigrbl-identity-assurance-bases
+    public_key_authentication: tigrbl-public-key-authentication-bases
+    did: tigrbl-did-bases
+    workload_identity: tigrbl-workload-identity-bases
+    digital_credential: tigrbl-digital-credential-bases
+    attestation: tigrbl-attestation-bases
+    security_event: tigrbl-security-event-bases
+  artifact_and_trust:
+    protected_artifact: tigrbl-protected-artifact-bases
+    certificate: tigrbl-certificate-bases
+    trust: tigrbl-trust-bases
+    key: tigrbl-key-bases
+    signing: tigrbl-signing-bases
+    encryption: tigrbl-encryption-bases
+    proof_of_possession: tigrbl-proof-of-possession-bases
+    token_introspection: tigrbl-token-introspection-bases
+  mechanisms:
+    jose: tigrbl-jose-bases
+    cose: tigrbl-cose-bases
+compatibility_aggregates:
+  tigrbl-identity-claims-bases:
+    canonical: tigrbl-claim-bases
+  tigrbl-identity-model-bases:
+    canonical:
+      - tigrbl-identity-bases
+      - tigrbl-authentication-credential-bases
+      - tigrbl-identity-core
+  tigrbl-identity-authenticator-bases:
+    canonical: tigrbl-authenticator-bases
+  tigrbl-public-key-authenticator-bases:
+    canonical: tigrbl-public-key-authentication-bases
+  tigrbl-security-artifact-bases:
+    canonical: tigrbl-protected-artifact-bases
+  tigrbl-security-trust-domain-bases:
+    canonical:
+      - tigrbl-certificate-bases
+      - tigrbl-did-bases
+      - tigrbl-encryption-bases
+      - tigrbl-key-bases
+      - tigrbl-proof-of-possession-bases
+      - tigrbl-signing-bases
+      - tigrbl-token-introspection-bases
+      - tigrbl-trust-bases
+      - tigrbl-workload-identity-bases
+pending_extraction:
+  authorization: tigrbl-authorization-bases
+  delegation: tigrbl-delegation-bases
+  release_assurance: tigrbl-release-assurance-bases

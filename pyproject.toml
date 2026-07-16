@@ -112,6 +112,21 @@ dependencies = [
     "tigrbl-auth-protocol-oidc-backchannel-replay-store==0.4.0.dev2",
     "tigrbl-set-concrete==0.4.0.dev2",
     "tigrbl-identity-claims-bases==0.4.0.dev2",
+    "tigrbl-claim-bases==0.4.0.dev2",
+    "tigrbl-identity-bases==0.4.0.dev2",
+    "tigrbl-authentication-credential-bases==0.4.0.dev2",
+    "tigrbl-authenticator-bases==0.1.0",
+    "tigrbl-public-key-authentication-bases==0.4.0.dev2",
+    "tigrbl-did-bases==0.4.0.dev2",
+    "tigrbl-workload-identity-bases==0.4.0.dev2",
+    "tigrbl-certificate-bases==0.4.0.dev2",
+    "tigrbl-trust-bases==0.4.0.dev2",
+    "tigrbl-protected-artifact-bases==0.4.0.dev2",
+    "tigrbl-signing-bases==0.4.0.dev2",
+    "tigrbl-key-bases==0.4.0.dev2",
+    "tigrbl-encryption-bases==0.4.0.dev2",
+    "tigrbl-proof-of-possession-bases==0.4.0.dev2",
+    "tigrbl-token-introspection-bases==0.4.0.dev2",
     "tigrbl-digital-credential-bases==0.4.0.dev2",
     "tigrbl-attestation-bases==0.4.0.dev2",
     "tigrbl-cose-bases==0.4.0.dev2",
@@ -462,6 +477,21 @@ tigrbl-release-contracts = { path = "pkgs/02-contracts/tigrbl-release-contracts"
 tigrbl-auth-release-certification = { path = "pkgs/60-runtime/tigrbl-auth-release-certification", editable = true }
 tigrbl-security-trust-contracts = { path = "pkgs/02-contracts/tigrbl-security-trust-contracts", editable = true }
 tigrbl-security-trust-domain-bases = { path = "pkgs/05-bases/tigrbl-security-trust-domain-bases", editable = true }
+tigrbl-claim-bases = { path = "pkgs/05-bases/tigrbl-claim-bases", editable = true }
+tigrbl-identity-bases = { path = "pkgs/05-bases/tigrbl-identity-bases", editable = true }
+tigrbl-authentication-credential-bases = { path = "pkgs/05-bases/tigrbl-authentication-credential-bases", editable = true }
+tigrbl-authenticator-bases = { path = "pkgs/05-bases/tigrbl-authenticator-bases", editable = true }
+tigrbl-public-key-authentication-bases = { path = "pkgs/05-bases/tigrbl-public-key-authentication-bases", editable = true }
+tigrbl-did-bases = { path = "pkgs/05-bases/tigrbl-did-bases", editable = true }
+tigrbl-workload-identity-bases = { path = "pkgs/05-bases/tigrbl-workload-identity-bases", editable = true }
+tigrbl-certificate-bases = { path = "pkgs/05-bases/tigrbl-certificate-bases", editable = true }
+tigrbl-trust-bases = { path = "pkgs/05-bases/tigrbl-trust-bases", editable = true }
+tigrbl-protected-artifact-bases = { path = "pkgs/05-bases/tigrbl-protected-artifact-bases", editable = true }
+tigrbl-signing-bases = { path = "pkgs/05-bases/tigrbl-signing-bases", editable = true }
+tigrbl-key-bases = { path = "pkgs/05-bases/tigrbl-key-bases", editable = true }
+tigrbl-encryption-bases = { path = "pkgs/05-bases/tigrbl-encryption-bases", editable = true }
+tigrbl-proof-of-possession-bases = { path = "pkgs/05-bases/tigrbl-proof-of-possession-bases", editable = true }
+tigrbl-token-introspection-bases = { path = "pkgs/05-bases/tigrbl-token-introspection-bases", editable = true }
 tigrbl-security-provenance-bases = { path = "pkgs/05-bases/tigrbl-security-provenance-bases", editable = true }
 tigrbl-authz-policy-bases = { path = "pkgs/05-bases/tigrbl-authz-policy-bases", editable = true }
 tigrbl-identity-model-bases = { path = "pkgs/05-bases/tigrbl-identity-model-bases", editable = true }

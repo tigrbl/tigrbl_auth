@@ -1,5 +1,5 @@
 from urllib.parse import urlparse
-from tigrbl_identity_claims_bases import ClaimBase
+from tigrbl_claim_bases import ClaimBase
 from tigrbl_identity_core import ClaimType, ClaimValueType
 
 

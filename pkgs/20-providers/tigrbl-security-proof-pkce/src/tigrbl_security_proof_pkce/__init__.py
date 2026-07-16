@@ -15,7 +15,7 @@ from tigrbl_security_trust_contracts import (
     VerificationResult,
     VerifyRequest,
 )
-from tigrbl_security_trust_domain_bases import PkceVerifierBase, ProofOfPossessionDomainBase
+from tigrbl_proof_of_possession_bases import PkceVerifierBase, ProofOfPossessionDomainBase
 
 PKCE_SPEC_URL: Final = "https://www.rfc-editor.org/rfc/rfc7636"
 PKCE_CHALLENGE_METHOD: Final = "S256"

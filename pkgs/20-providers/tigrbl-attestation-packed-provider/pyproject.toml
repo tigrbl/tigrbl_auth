@@ -5,7 +5,7 @@ description = "WebAuthn packed attestation verifier."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
-dependencies = ["cbor2==6.1.3", "cryptography>=45", "tigrbl-identity-contracts==0.4.0.dev2", "tigrbl-public-key-authenticator-bases==0.4.0.dev2", "tigrbl-security-cose==0.4.0.dev2"]
+dependencies = ["cbor2==6.1.3", "cryptography>=45", "tigrbl-identity-contracts==0.4.0.dev2", "tigrbl-public-key-authentication-bases==0.4.0.dev2", "tigrbl-security-cose==0.4.0.dev2"]
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"

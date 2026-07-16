@@ -4,7 +4,7 @@ import base64
 import hashlib
 from typing import Any, Final, Mapping
 
-from tigrbl_security_trust_domain_bases import SigningDomainBase, SigningProviderBase
+from tigrbl_signing_bases import SigningDomainBase, SigningProviderBase
 from tigrbl_security_trust_contracts import (
     Artifact,
     CanonicalizeRequest,

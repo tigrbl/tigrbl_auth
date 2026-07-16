@@ -108,26 +108,6 @@ class RecoveryCodeVerifierMixin:
         raise NotImplementedError
 
 
-class WebAuthnAssertionMixin:
-    """Deprecated compatibility mixin; use PublicKeyAssertionVerificationBase."""
-
-    def __init_subclass__(cls, **kwargs: Any) -> None:
-        import warnings
-
-        warnings.warn(
-            "WebAuthnAssertionMixin is deprecated; use "
-            "tigrbl_public_key_authenticator_bases.PublicKeyAssertionVerificationBase",
-            DeprecationWarning,
-            stacklevel=2,
-        )
-        super().__init_subclass__(**kwargs)
-
-    async def verify_webauthn_assertion(
-        self, assertion: Mapping[str, Any], credential: Any
-    ) -> Mapping[str, Any]:
-        raise NotImplementedError("use tigrbl-public-key-authenticator-bases")
-
-
 class SenderConstraintMixin:
     sender_constraint_properties = (
         AuthenticatorProperty.SENDER_CONSTRAINED,
@@ -178,5 +158,4 @@ __all__ = [
     "UserPresenceMixin",
     "UserVerificationMixin",
     "VerifierNameBindingMixin",
-    "WebAuthnAssertionMixin",
 ]

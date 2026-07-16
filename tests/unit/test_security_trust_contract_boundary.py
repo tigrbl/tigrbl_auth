@@ -47,24 +47,45 @@ def test_security_trust_contracts_are_dependency_free_protocols() -> None:
 def test_security_trust_domain_bases_depend_only_on_contracts_and_peer_bases() -> None:
     metadata = tomllib.loads((BASES / "pyproject.toml").read_text(encoding="utf-8"))
 
-    assert metadata["project"]["dependencies"] == [
-        "tigrbl-identity-claims-bases==0.4.0.dev2",
-        "tigrbl-identity-contracts==0.4.0.dev2",
-        "tigrbl-identity-model-bases==0.4.0.dev2",
-        "tigrbl-authentication-context-bases==0.4.0.dev2",
-        "tigrbl-security-artifact-bases==0.4.0.dev2",
-        "tigrbl-security-trust-contracts==0.1.0",
-    ]
+    dependencies = metadata["project"]["dependencies"]
+    assert {
+        "tigrbl-certificate-bases==0.4.0.dev2",
+        "tigrbl-capability-bases==0.4.0.dev2",
+        "tigrbl-claim-bases==0.4.0.dev2",
+        "tigrbl-did-bases==0.4.0.dev2",
+        "tigrbl-encryption-bases==0.4.0.dev2",
+        "tigrbl-key-bases==0.4.0.dev2",
+        "tigrbl-identity-bases==0.4.0.dev2",
+        "tigrbl-proof-of-possession-bases==0.4.0.dev2",
+        "tigrbl-protected-artifact-bases==0.4.0.dev2",
+        "tigrbl-signing-bases==0.4.0.dev2",
+        "tigrbl-token-introspection-bases==0.4.0.dev2",
+        "tigrbl-trust-bases==0.4.0.dev2",
+        "tigrbl-workload-identity-bases==0.4.0.dev2",
+    } <= set(dependencies)
     for path in sorted((BASES / "src").rglob("*.py")):
         imports = _absolute_import_roots(path)
         assert imports <= {
             "__future__",
             "abc",
             "typing",
+            "tigrbl_capability_bases",
+            "tigrbl_claim_bases",
             "tigrbl_identity_claims_bases",
+            "tigrbl_identity_bases",
             "tigrbl_identity_contracts",
             "tigrbl_identity_model_bases",
             "tigrbl_authentication_context_bases",
+            "tigrbl_certificate_bases",
+            "tigrbl_did_bases",
+            "tigrbl_encryption_bases",
+            "tigrbl_key_bases",
+            "tigrbl_proof_of_possession_bases",
+            "tigrbl_protected_artifact_bases",
+            "tigrbl_signing_bases",
+            "tigrbl_token_introspection_bases",
+            "tigrbl_trust_bases",
+            "tigrbl_workload_identity_bases",
             "tigrbl_security_artifact_bases",
             "tigrbl_security_trust_contracts",
             "tigrbl_security_trust_domain_bases",

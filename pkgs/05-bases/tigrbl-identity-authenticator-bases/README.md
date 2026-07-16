@@ -1,3 +1,3 @@
 # tigrbl-identity-authenticator-bases
 
-Base classes and mixins for authenticator providers.
+Deprecated compatibility facade. Use `tigrbl-authenticator-bases`.

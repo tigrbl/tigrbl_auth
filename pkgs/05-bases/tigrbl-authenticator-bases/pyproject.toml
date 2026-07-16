@@ -1,0 +1,18 @@
+[project]
+name = "tigrbl-authenticator-bases"
+version = "0.1.0"
+description = "Authenticator base classes and mixins for the Tigrbl auth package suite."
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = [
+    "tigrbl-identity-contracts==0.4.0.dev2",
+    "tigrbl-security-trust-contracts==0.1.0",
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tigrbl_authenticator_bases", from = "src" }]

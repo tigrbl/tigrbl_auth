@@ -4,6 +4,36 @@ from __future__ import annotations
 
 from collections.abc import Iterable, Mapping
 from typing import Any
+from uuid import uuid4
+
+
+def new_model_id() -> str:
+    """Return a dependency-light opaque identifier for concrete models."""
+
+    return str(uuid4())
+
+
+def required_text(value: object, field_name: str) -> str:
+    """Normalize a required textual field."""
+
+    cleaned = str(value).strip()
+    if not cleaned:
+        raise ValueError(f"{field_name} is required")
+    return cleaned
+
+
+def clean_tuple(values: Iterable[object] = ()) -> tuple[str, ...]:
+    """Return unique, non-empty textual values in stable order."""
+
+    return tuple(sorted({str(value).strip() for value in values if str(value).strip()}))
+
+
+def clean_mapping(value: Mapping[str, Any], field_name: str) -> dict[str, Any]:
+    """Validate and copy a mapping owned by a concrete model."""
+
+    if not isinstance(value, Mapping):
+        raise ValueError(f"{field_name} must be a mapping")
+    return dict(value)
 
 
 def pick_fields(record: Mapping[str, Any], fields: Iterable[str]) -> dict[str, Any]:
@@ -38,4 +68,14 @@ def normal_tuple(values: Iterable[str] | None) -> tuple[str, ...]:
     )
 
 
-__all__ = ["normal_tuple", "pick_fields", "row_active", "row_value", "str_tuple"]
+__all__ = [
+    "clean_mapping",
+    "clean_tuple",
+    "new_model_id",
+    "normal_tuple",
+    "pick_fields",
+    "required_text",
+    "row_active",
+    "row_value",
+    "str_tuple",
+]

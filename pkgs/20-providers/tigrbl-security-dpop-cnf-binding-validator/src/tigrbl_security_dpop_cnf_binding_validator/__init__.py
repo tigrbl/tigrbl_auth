@@ -8,7 +8,7 @@ from tigrbl_identity_contracts.resource_server import (
 )
 from tigrbl_security_proof_dpop import DpopBindingValidator
 from tigrbl_security_trust_contracts import CapabilityMap, DPoPBinding
-from tigrbl_security_trust_domain_bases import ConfirmationBindingValidatorBase
+from tigrbl_proof_of_possession_bases import ConfirmationBindingValidatorBase
 
 
 def _cnf_from(value: AccessTokenClaims | Mapping[str, Any]) -> Mapping[str, Any]:

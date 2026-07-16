@@ -12,6 +12,7 @@ from tigrbl_identity_contracts.capabilities import (
     CapabilityState,
     ICapability,
 )
+from tigrbl_security_trust_contracts import CapabilityMap, ICapabilityProvider
 
 
 class CapabilityBase(ICapability, ABC):
@@ -39,6 +40,13 @@ class CapabilityBase(ICapability, ABC):
         **kwargs: object,
     ) -> CapabilityCallResult: ...
 
+
+class CapabilityProviderBase(ICapabilityProvider, ABC):
+    """Base for providers that advertise executable support."""
+
+    @abstractmethod
+    def supports(self) -> CapabilityMap: ...
+
     @abstractmethod
     async def subcall(
         self,
@@ -50,4 +58,4 @@ class CapabilityBase(ICapability, ABC):
     ) -> CapabilityCallResult: ...
 
 
-__all__ = ["CapabilityBase"]
+__all__ = ["CapabilityBase", "CapabilityProviderBase"]

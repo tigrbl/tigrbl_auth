@@ -9,7 +9,7 @@ from tigrbl_security_trust_contracts import (
     DelegationProvenance,
     IProvenanceArtifactBuilder,
 )
-from tigrbl_security_trust_domain_bases import CapabilityProviderBase
+from tigrbl_capability_bases import CapabilityProviderBase
 
 
 class ProvenanceArtifactBuilderBase(

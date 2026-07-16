@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from tigrbl_identity_authenticator_bases import AmrEmitterMixin, AuthenticatorBase, CredentialKindMixin, SecretVerifierMixin
+from tigrbl_authenticator_bases import AmrEmitterMixin, AuthenticatorBase, CredentialKindMixin, SecretVerifierMixin
 from tigrbl_identity_contracts.authenticators import AuthenticationFactorClass, AuthenticatorKind
 from tigrbl_identity_contracts.credentials import CredentialKind
 from tigrbl_identity_contracts.shared_secrets import SecretVerificationPort

@@ -1,7 +1,7 @@
 from collections.abc import Callable, Iterable
 
 from tigrbl_identity_contracts.workloads import Svid, SvidFormat, WorkloadSelector
-from tigrbl_security_trust_domain_bases import SvidProviderBase
+from tigrbl_workload_identity_bases import SvidProviderBase
 from tigrbl_svid_concrete import normalize_selectors
 
 SelectorSource = Callable[[], Iterable[WorkloadSelector]]

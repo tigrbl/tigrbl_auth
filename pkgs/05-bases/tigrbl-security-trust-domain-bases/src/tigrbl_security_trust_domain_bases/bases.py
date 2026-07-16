@@ -7,9 +7,10 @@ from abc import ABC, abstractmethod
 from typing import Any, Mapping, Sequence
 
 from tigrbl_identity_contracts.oidc import OidcFederationPort, WebFingerResolverPort
-from tigrbl_identity_model_bases import SubjectIdentifierStrategyBase
+from tigrbl_identity_bases import SubjectIdentifierStrategyBase
 from tigrbl_authentication_context_bases import AcrEvaluatorBase, AmrEvaluatorBase
-from tigrbl_security_artifact_bases import (
+from tigrbl_capability_bases import CapabilityProviderBase
+from tigrbl_protected_artifact_bases import (
     ProtectedArtifactOpenerBase as ArtifactOpenerBase,
     ProtectedArtifactVerifierBase as ArtifactVerifierBase,
     RecipientSetEditorBase,
@@ -99,13 +100,6 @@ from tigrbl_security_trust_contracts import (
     IVerificationKeyCache,
     IVerificationKeyResolver,
 )
-
-
-class CapabilityProviderBase(ICapabilityProvider, ABC):
-    """Base for providers that advertise executable capability."""
-
-    @abstractmethod
-    def supports(self) -> CapabilityMap: ...
 
 
 class SigningDomainBase(

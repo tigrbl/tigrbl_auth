@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from tigrbl_identity_contracts.principals import PrincipalKind
-from tigrbl_identity_model_bases import IdentityBase, new_model_id
+from tigrbl_identity_bases import IdentityBase
+from tigrbl_identity_core import new_model_id
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)

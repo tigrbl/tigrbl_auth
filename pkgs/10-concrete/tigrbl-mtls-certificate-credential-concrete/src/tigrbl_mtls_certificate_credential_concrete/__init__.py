@@ -1,11 +1,7 @@
 from dataclasses import dataclass, field
 from tigrbl_identity_contracts.credentials import Credential, CredentialKind
-from tigrbl_identity_model_bases import (
-    CredentialBase,
-    clean_tuple,
-    new_model_id,
-    required_text,
-)
+from tigrbl_authentication_credential_bases import CredentialBase
+from tigrbl_identity_core import clean_tuple, new_model_id, required_text
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)

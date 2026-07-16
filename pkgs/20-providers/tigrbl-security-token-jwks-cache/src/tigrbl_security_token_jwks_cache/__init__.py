@@ -4,7 +4,7 @@ from typing import Any, Mapping
 
 from tigrbl_identity_contracts.resource_server import TokenValidationError
 from tigrbl_security_trust_contracts import CapabilityMap
-from tigrbl_security_trust_domain_bases import VerificationKeyCacheBase
+from tigrbl_token_introspection_bases import VerificationKeyCacheBase
 
 
 class JWKSCache(VerificationKeyCacheBase):

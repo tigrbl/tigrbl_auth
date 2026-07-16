@@ -10,7 +10,7 @@ from tigrbl_identity_contracts.did import (
     DidResolutionResult,
     DidUrl,
 )
-from tigrbl_security_trust_domain_bases import DidResolverBase
+from tigrbl_did_bases import DidResolverBase
 
 MethodResolver = Callable[[Did], DidDocument]
 

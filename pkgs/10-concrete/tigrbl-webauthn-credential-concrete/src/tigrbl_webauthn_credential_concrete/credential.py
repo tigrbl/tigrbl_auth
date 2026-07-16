@@ -3,7 +3,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 from tigrbl_identity_contracts.credentials import CredentialKind, CredentialStatus
-from tigrbl_identity_model_bases import CredentialBase, clean_tuple, required_text
+from tigrbl_authentication_credential_bases import CredentialBase
+from tigrbl_identity_core import clean_tuple, required_text
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)

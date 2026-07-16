@@ -1,10 +1,4 @@
-"""Protocol-neutral public-key authenticator extension bases."""
+"""Compatibility facade for :mod:`tigrbl_public_key_authentication_bases`."""
 
-from .attestation import *
-from .authentication import *
-from .bindings import *
-from .credentials import *
-from .evidence import *
-from .registration import *
-
-__all__ = [name for name in globals() if not name.startswith("_")]
+from tigrbl_public_key_authentication_bases import *  # noqa: F401,F403
+from tigrbl_public_key_authentication_bases import __all__

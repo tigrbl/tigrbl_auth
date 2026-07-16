@@ -20,12 +20,22 @@ classifiers = [
     "Topic :: Security",
 ]
 dependencies = [
-    "tigrbl-identity-claims-bases==0.4.0.dev2",
+    "tigrbl-certificate-bases==0.4.0.dev2",
+    "tigrbl-capability-bases==0.4.0.dev2",
+    "tigrbl-did-bases==0.4.0.dev2",
+    "tigrbl-encryption-bases==0.4.0.dev2",
+    "tigrbl-claim-bases==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
-    "tigrbl-identity-model-bases==0.4.0.dev2",
+    "tigrbl-identity-bases==0.4.0.dev2",
     "tigrbl-authentication-context-bases==0.4.0.dev2",
-    "tigrbl-security-artifact-bases==0.4.0.dev2",
+    "tigrbl-protected-artifact-bases==0.4.0.dev2",
     "tigrbl-security-trust-contracts==0.1.0",
+    "tigrbl-key-bases==0.4.0.dev2",
+    "tigrbl-proof-of-possession-bases==0.4.0.dev2",
+    "tigrbl-signing-bases==0.4.0.dev2",
+    "tigrbl-token-introspection-bases==0.4.0.dev2",
+    "tigrbl-trust-bases==0.4.0.dev2",
+    "tigrbl-workload-identity-bases==0.4.0.dev2",
 ]
 
 [build-system]

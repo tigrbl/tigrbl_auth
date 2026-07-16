@@ -10,7 +10,7 @@ from tigrbl_security_trust_contracts import (
     VerificationResult,
     VerifyRequest,
 )
-from tigrbl_security_trust_domain_bases import CertificateServiceDomainBase
+from tigrbl_certificate_bases import CertificateServiceDomainBase
 
 
 class MtlsBindingValidator(CertificateServiceDomainBase):

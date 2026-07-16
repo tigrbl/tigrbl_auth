@@ -189,7 +189,11 @@ def test_monorepo_release_resolves_local_dependency_closure() -> None:
         "tigrbl-security-proof-pkce",
         "tigrbl-security-signing-pqc",
         "tigrbl-security-trust-contracts",
-        "tigrbl-security-trust-domain-bases",
+        "tigrbl-certificate-bases",
+        "tigrbl-claim-bases",
+        "tigrbl-protected-artifact-bases",
+        "tigrbl-signing-bases",
+        "tigrbl-token-introspection-bases",
     }.issubset(dependency_names)
 
     facade_dependency_names = {

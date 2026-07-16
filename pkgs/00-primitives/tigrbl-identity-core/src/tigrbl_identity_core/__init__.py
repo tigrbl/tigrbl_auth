@@ -115,7 +115,17 @@ from .primitives import (
 )
 from .standards import StandardOwner, describe_owner
 from .json_canonicalization import canonical_json_bytes, canonicalize
-from .normalization import normal_tuple, pick_fields, row_active, row_value, str_tuple
+from .normalization import (
+    clean_mapping,
+    clean_tuple,
+    new_model_id,
+    normal_tuple,
+    pick_fields,
+    required_text,
+    row_active,
+    row_value,
+    str_tuple,
+)
 from .patterns import matches_dotted_pattern
 from .redaction import SECRET_FIELD_TOKENS, redact_sensitive_mapping
 from .typing import StrUUID, uuid_str
@@ -212,6 +222,9 @@ __all__ = [
     "json_response",
     "jsonrpc_error",
     "matches_dotted_pattern",
+    "clean_mapping",
+    "clean_tuple",
+    "new_model_id",
     "normal_tuple",
     "nonce_equal",
     "normalize_protocol_tag",
@@ -219,6 +232,7 @@ __all__ = [
     "normalize_entity",
     "pick_fields",
     "redact_sensitive_mapping",
+    "required_text",
     "RefreshTokenError",
     "RefreshTokenReuseError",
     "read_http_body",

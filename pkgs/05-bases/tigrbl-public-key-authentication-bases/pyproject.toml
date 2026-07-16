@@ -1,0 +1,15 @@
+[project]
+name = "tigrbl-public-key-authentication-bases"
+version = "0.4.0.dev2"
+description = "Protocol-neutral public-key authenticator extension bases."
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = ["tigrbl-public-key-authentication-contracts==0.4.0.dev2"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tigrbl_public_key_authentication_bases", from = "src" }]

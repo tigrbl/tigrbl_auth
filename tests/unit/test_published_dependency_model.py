@@ -248,8 +248,10 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-security-token-jwks-cache==0.1.0" in verifier_dependencies
     assert "tigrbl-security-token-introspection-client==0.1.0" in verifier_dependencies
     assert "tigrbl-authz-resource-server==0.4.0.dev2" not in verifier_dependencies
-    assert "tigrbl-security-trust-domain-bases==0.1.0" in jwks_cache_dependencies
-    assert "tigrbl-security-trust-domain-bases==0.1.0" in introspection_dependencies
+    assert "tigrbl-token-introspection-bases==0.4.0.dev2" in jwks_cache_dependencies
+    assert "tigrbl-token-introspection-bases==0.4.0.dev2" in introspection_dependencies
+    assert "tigrbl-security-trust-domain-bases==0.1.0" not in jwks_cache_dependencies
+    assert "tigrbl-security-trust-domain-bases==0.1.0" not in introspection_dependencies
     assert (
         "tigrbl-security-dpop-cnf-binding-validator==0.1.0"
         in sender_constraint_dependencies

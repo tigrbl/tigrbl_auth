@@ -1,7 +1,7 @@
 [project]
 name = "tigrbl-authentication-assurance-bases"
 version = "0.4.0.dev2"
-description = "Protocol-neutral authentication and identity assurance bases."
+description = "Compatibility bases for OIDC EAP ACR evaluation."
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
 dependencies = [

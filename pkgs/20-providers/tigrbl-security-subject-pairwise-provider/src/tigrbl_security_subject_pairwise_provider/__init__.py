@@ -6,7 +6,7 @@ from tigrbl_pairwise_subject_identifier_concrete import (
 )
 
 from tigrbl_security_trust_contracts import CapabilityMap
-from tigrbl_identity_model_bases import SubjectIdentifierStrategyBase
+from tigrbl_identity_bases import SubjectIdentifierStrategyBase
 
 PairwiseSubjectStrategy = PairwiseSubjectIdentifierStrategy
 

@@ -1,5 +1,5 @@
 from tigrbl_identity_contracts.workloads import SpiffeTrustBundle, TrustDomain
-from tigrbl_security_trust_domain_bases import TrustBundleProviderBase
+from tigrbl_workload_identity_bases import TrustBundleProviderBase
 
 
 class VersionedSpiffeBundleProvider(TrustBundleProviderBase):

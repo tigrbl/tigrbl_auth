@@ -1,7 +1,7 @@
 from datetime import date
 from urllib.parse import urlsplit
 
-from tigrbl_identity_claims_bases import ClaimBase
+from tigrbl_claim_bases import ClaimBase
 from tigrbl_identity_core import ClaimType, ClaimValueType
 
 

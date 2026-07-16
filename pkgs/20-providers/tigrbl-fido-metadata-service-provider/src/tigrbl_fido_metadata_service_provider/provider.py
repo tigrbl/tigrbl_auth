@@ -10,7 +10,7 @@ from datetime import date
 from tigrbl_identity_contracts.public_key_authentication import (
     AuthenticatorMetadataResult,
 )
-from tigrbl_public_key_authenticator_bases import AuthenticatorMetadataProviderBase
+from tigrbl_public_key_authentication_bases import AuthenticatorMetadataProviderBase
 
 
 @dataclass(frozen=True, slots=True)

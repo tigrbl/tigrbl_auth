@@ -1,6 +1,8 @@
 # tigrbl-authentication-assurance-bases
 
-Owns reusable implementation bases.
+Compatibility surface. Generic AMR/ACR evaluation is owned by
+`tigrbl-authentication-context-bases`; versioned EAP ACR behavior is owned by
+the OIDC protocol layer.
 
 ## Non-goals
 

@@ -6,7 +6,7 @@ from tigrbl_identity_contracts.resource_server import AccessTokenClaims
 from tigrbl_security_dpop_cnf_binding_validator import DpopCnfBindingValidator
 from tigrbl_security_mtls_cnf_binding_validator import MtlsCnfBindingValidator
 from tigrbl_security_trust_contracts import CapabilityMap, DPoPBinding, MTLSBinding
-from tigrbl_security_trust_domain_bases import SenderConstraintValidatorBase
+from tigrbl_proof_of_possession_bases import SenderConstraintValidatorBase
 
 
 def _cnf_from(value: AccessTokenClaims | Mapping[str, Any]) -> Mapping[str, Any]:

@@ -3,7 +3,7 @@ from tigrbl_identity_contracts.subject_identifiers import (
     SubjectIdentifierRequest,
     SubjectIdentifierResult,
 )
-from tigrbl_identity_model_bases import SubjectIdentifierStrategyBase
+from tigrbl_identity_bases import SubjectIdentifierStrategyBase
 
 
 class PublicSubjectIdentifierStrategy(SubjectIdentifierStrategyBase):

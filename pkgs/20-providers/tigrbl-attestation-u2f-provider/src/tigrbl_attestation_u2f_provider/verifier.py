@@ -12,7 +12,7 @@ from tigrbl_identity_contracts.public_key_authentication import (
     AttestationType,
     AuthenticatorAttestation,
 )
-from tigrbl_public_key_authenticator_bases import AttestationStatementVerifierBase
+from tigrbl_public_key_authentication_bases import AttestationStatementVerifierBase
 from tigrbl_security_cose import decode_cose_key
 
 

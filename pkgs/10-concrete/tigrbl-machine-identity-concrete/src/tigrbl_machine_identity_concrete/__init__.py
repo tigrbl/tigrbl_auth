@@ -1,7 +1,8 @@
 from dataclasses import dataclass, field
 from datetime import datetime
 from tigrbl_identity_contracts.principals import PrincipalKind
-from tigrbl_identity_model_bases import IdentityBase, required_text
+from tigrbl_identity_bases import IdentityBase
+from tigrbl_identity_core import required_text
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)

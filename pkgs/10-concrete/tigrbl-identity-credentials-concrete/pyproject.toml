@@ -23,7 +23,7 @@ classifiers = [
 ]
 dependencies = [
     "tigrbl-identity-contracts==0.4.0.dev2",
-    "tigrbl-identity-model-bases==0.4.0.dev2",
+    "tigrbl-authentication-credential-bases==0.4.0.dev2",
     "tigrbl-password-credential-concrete==0.4.0.dev2",
     "tigrbl-password-reset-credential-concrete==0.4.0.dev2",
     "tigrbl-api-key-credential-concrete==0.4.0.dev2",

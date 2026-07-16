@@ -7,7 +7,7 @@ from tigrbl_identity_contracts.workloads import (
     SvidFormat,
     TrustBundleProviderPort,
 )
-from tigrbl_security_trust_domain_bases import SvidVerifierBase
+from tigrbl_workload_identity_bases import SvidVerifierBase
 from tigrbl_svid_concrete import (
     X509SvidStructure,
     parse_jwt_svid_claims,

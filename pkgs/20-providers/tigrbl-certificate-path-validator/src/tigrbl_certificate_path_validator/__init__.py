@@ -9,7 +9,7 @@ from tigrbl_security_trust_contracts import (
     TrustAnchor,
     TrustAnchorProviderPort,
 )
-from tigrbl_security_trust_domain_bases import CertificatePathValidatorBase
+from tigrbl_certificate_bases import CertificatePathValidatorBase
 
 PathValidationBackend = Callable[
     [CertificatePathValidationRequest, Sequence[TrustAnchor]],

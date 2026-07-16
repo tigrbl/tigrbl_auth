@@ -11,7 +11,7 @@ from tigrbl_security_trust_contracts import (
     TokenIntrospectionRequest,
     TokenIntrospectionResult,
 )
-from tigrbl_security_trust_domain_bases import TokenIntrospectionClientBase
+from tigrbl_token_introspection_bases import TokenIntrospectionClientBase
 
 
 class IntrospectionClient(TokenIntrospectionClientBase):

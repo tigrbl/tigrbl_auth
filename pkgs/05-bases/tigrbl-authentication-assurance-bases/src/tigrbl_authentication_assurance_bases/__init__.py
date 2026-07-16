@@ -11,13 +11,16 @@ from tigrbl_identity_contracts.oidc.eap_acr import (
 )
 
 
-class AuthenticationContextEvaluatorBase(EapAcrEvaluatorPort, ABC):
+class EapAcrEvaluatorBase(EapAcrEvaluatorPort, ABC):
     def evaluate(self, request: EapAcrEvaluationRequest, /) -> EapAcrEvaluationResult:
         raise NotImplementedError
 
 
 __all__ = [
-    "AuthenticationContextEvaluatorBase",
+    "EapAcrEvaluatorBase",
     "IdentityAssuranceClaimsProviderBase",
     "VerifiedClaimsValidatorBase",
 ]
+
+AuthenticationContextEvaluatorBase = EapAcrEvaluatorBase
+__all__.append("AuthenticationContextEvaluatorBase")

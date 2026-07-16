@@ -7,38 +7,16 @@ from .bases import (
     ArtifactVerifierBase,
     AcrEvaluatorBase,
     AmrEvaluatorBase,
-    AttestationProviderBase,
     CapabilityProviderBase,
-    CertificateDomainBase,
-    CertificateServiceDomainBase,
-    CipherPolicyDomainBase,
-    ConfirmationBindingValidatorBase,
-    CryptoKeyProviderBase,
-    CryptoDomainBase,
-    EncryptionProviderBase,
-    KeyEncapsulationProviderBase,
-    KeyLifecycleProviderBase,
     KeyProviderDomainBase,
-    KeyResolverBase,
-    KeyWrappingProviderBase,
-    MreCryptoDomainBase,
     OidcFederationProviderBase,
-    PkceVerifierBase,
-    ProofOfPossessionDomainBase,
-    PublicKeyExporterBase,
     RecipientSetEditorBase,
-    SigningDomainBase,
-    SigningProviderBase,
-    SenderConstraintValidatorBase,
     SubjectIdentifierStrategyBase,
     TokenDomainBase,
-    TokenIntrospectionClientBase,
     TokenServiceDomainBase,
-    VerificationKeyCacheBase,
-    VerificationKeyResolverBase,
     WebFingerResolverBase,
 )
-from tigrbl_identity_claims_bases import ClaimsProviderBase
+from tigrbl_claim_bases import ClaimsProviderBase
 from .identity import (
     CertificatePathValidatorBase,
     DidResolverBase,
@@ -47,6 +25,34 @@ from .identity import (
     SvidVerifierBase,
     TrustBundleProviderBase,
     WalletTrustProviderBase,
+)
+from tigrbl_certificate_bases import CertificateDomainBase, CertificateServiceDomainBase
+from tigrbl_encryption_bases import (
+    CipherPolicyDomainBase,
+    CryptoDomainBase,
+    EncryptionProviderBase,
+    MreCryptoDomainBase,
+)
+from tigrbl_key_bases import (
+    AttestationProviderBase,
+    CryptoKeyProviderBase,
+    KeyEncapsulationProviderBase,
+    KeyLifecycleProviderBase,
+    KeyResolverBase,
+    KeyWrappingProviderBase,
+    PublicKeyExporterBase,
+)
+from tigrbl_proof_of_possession_bases import (
+    ConfirmationBindingValidatorBase,
+    PkceVerifierBase,
+    ProofOfPossessionDomainBase,
+    SenderConstraintValidatorBase,
+)
+from tigrbl_signing_bases import SigningDomainBase, SigningProviderBase
+from tigrbl_token_introspection_bases import (
+    TokenIntrospectionClientBase,
+    VerificationKeyCacheBase,
+    VerificationKeyResolverBase,
 )
 
 __all__ = [
