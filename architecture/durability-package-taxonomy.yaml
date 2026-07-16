@@ -1,0 +1,36 @@
+version: 1
+layer: 30-storage-runtime
+purpose: carrier-neutral durable operations and derived specifications for canonical layer-01 tables
+rules:
+  - canonical packages depend only on layers 00, 01, 02, 05, 10, 20, and the neutral layer-30 substrate
+  - canonical operations receive an engine or session through execution context
+  - canonical packages do not own repositories, stores, services, HTTP carriers, protocols, providers, or engine selection
+  - one package groups tables that participate in the same durable lifecycle or atomic consistency boundary
+substrate: tigrbl-table-durability
+canonical_packages:
+  - tigrbl-attestation-durability
+  - tigrbl-audit-durability
+  - tigrbl-authority-graph-durability
+  - tigrbl-authorization-policy-durability
+  - tigrbl-consent-durability
+  - tigrbl-delegation-durability
+  - tigrbl-digital-credential-durability
+  - tigrbl-gnap-state-durability
+  - tigrbl-identity-durability
+  - tigrbl-key-material-durability
+  - tigrbl-oauth-state-durability
+  - tigrbl-oidc-state-durability
+  - tigrbl-presentation-durability
+  - tigrbl-replay-protection-durability
+  - tigrbl-security-event-durability
+  - tigrbl-session-durability
+  - tigrbl-token-durability
+  - tigrbl-trust-federation-graph-durability
+  - tigrbl-webauthn-durability
+  - tigrbl-workload-identity-durability
+compatibility_packages:
+  tigrbl-identity-storage-runtime: aggregate facade and legacy lifecycle adapters
+  tigrbl-authz-policy-authority-derivation-graph: compatibility name and concrete graph re-exports
+  tigrbl-identity-admin-trust-federation-graph: compatibility name and concrete graph re-exports
+runtime_owned_modules:
+  engine: tigrbl-identity-runtime

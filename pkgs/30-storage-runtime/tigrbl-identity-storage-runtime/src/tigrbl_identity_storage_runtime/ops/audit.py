@@ -1,45 +1,14 @@
-"""Durable audit-event operations and compatibility adapters."""
+"""Compatibility adapters for canonical audit durability operations."""
 
-from __future__ import annotations
-
-from collections.abc import Mapping
 from typing import Any
 
-from .common import (
-    create_table_record,
-    database_from_context,
-    field_value,
-    list_table_records,
-    payload_from_context,
+from tigrbl_audit_durability.operations.audit import (
+    append_audit_event_record,
+    list_audit_event_records,
 )
 
 
-async def append_audit_event_record(ctx: Mapping[str, Any]) -> Any:
-    from tigrbl_identity_storage.tables import AuditEvent, Tenant
-
-    db = database_from_context(ctx)
-    payload = dict(payload_from_context(ctx))
-    if payload.get("tenant_id") is None:
-        tenants = await list_table_records(Tenant, db, {})
-        if tenants:
-            payload["tenant_id"] = field_value(tenants[0], "id")
-    return await create_table_record(AuditEvent, db, payload)
-
-
-async def list_audit_event_records(ctx: Mapping[str, Any]) -> list[Any]:
-    from tigrbl_identity_storage.tables import AuditEvent
-
-    filters = {
-        key: value
-        for key, value in dict(payload_from_context(ctx)).items()
-        if value is not None
-    }
-    return await list_table_records(AuditEvent, database_from_context(ctx), filters)
-
-
 async def append_audit_event_async(*, db: Any | None = None, **payload: Any) -> Any:
-    """Temporary call-shape adapter while protocol routes receive injected DBs."""
-
     if db is not None:
         return await append_audit_event_record({"payload": payload, "db": db})
     from ..session import storage_session

@@ -1,0 +1,22 @@
+[project]
+name = "tigrbl-workload-identity-durability"
+version = "0.4.0.dev2"
+description = "Carrier-neutral layer-30 durable table operations."
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = [
+    "tigrbl-table-durability==0.4.0.dev2",
+    "tigrbl-identity-storage==0.4.0.dev2",
+    "tigrbl-identity-core==0.4.0.dev2",
+    "tigrbl-identity-contracts==0.4.0.dev2",
+    "tigrbl-replay-bases==0.4.0.dev2",
+    "tigrbl-security-trust-contracts==0.1.0",
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tigrbl_workload_identity_durability", from = "src" }]

@@ -12,7 +12,14 @@ from tigrbl_identity_storage_runtime.engine import dsn
 
 
 ROOT = Path(__file__).resolve().parents[2]
-STORAGE_SRC = ROOT / "pkgs" / "01-storage" / "tigrbl-identity-storage" / "src" / "tigrbl_identity_storage"
+STORAGE_SRC = (
+    ROOT
+    / "pkgs"
+    / "01-storage"
+    / "tigrbl-identity-storage"
+    / "src"
+    / "tigrbl_identity_storage"
+)
 
 
 @pytest.mark.unit
@@ -61,7 +68,9 @@ def test_storage_migration_contract_uses_tigrbl_owned_tables() -> None:
         ),
     )
 
-    expected_latest = sorted(path.stem for path in versions_dir.glob("[0-9][0-9][0-9][0-9]_*.py"))[-1]
+    expected_latest = sorted(
+        path.stem for path in versions_dir.glob("[0-9][0-9][0-9][0-9]_*.py")
+    )[-1]
     assert contract.latest_revision == expected_latest
     assert contract.is_ordered is True
     assert len(contract.revisions) >= 9
@@ -105,7 +114,7 @@ def test_storage_public_boundary_has_no_generic_repository_imports() -> None:
 @pytest.mark.unit
 def test_engine_and_session_execution_are_runtime_owned() -> None:
     storage_engine = STORAGE_SRC / "tables" / "engine.py"
-    runtime_root = (
+    storage_runtime_root = (
         ROOT
         / "pkgs"
         / "30-storage-runtime"
@@ -113,9 +122,19 @@ def test_engine_and_session_execution_are_runtime_owned() -> None:
         / "src"
         / "tigrbl_identity_storage_runtime"
     )
+    runtime_root = (
+        ROOT
+        / "pkgs"
+        / "60-runtime"
+        / "tigrbl-identity-runtime"
+        / "src"
+        / "tigrbl_identity_runtime"
+    )
 
     runtime_engine_source = (runtime_root / "engine.py").read_text(encoding="utf-8")
-    runtime_session_source = (runtime_root / "session.py").read_text(encoding="utf-8")
+    runtime_session_source = (storage_runtime_root / "session.py").read_text(
+        encoding="utf-8"
+    )
 
     assert not storage_engine.exists()
     assert not (STORAGE_SRC / "db.py").exists()

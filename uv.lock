@@ -2282,6 +2282,29 @@ dependencies = [
 requires-dist = [{ name = "tigrbl-token-contracts", specifier = "==0.4.0.dev2" }]
 
 [[package]]
+name = "tigrbl-attestation-durability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/30-storage-runtime/tigrbl-attestation-durability" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-replay-bases" },
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-table-durability" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-replay-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-table-durability", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-attestation-packed-provider"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/20-providers/tigrbl-attestation-packed-provider" }
@@ -2393,6 +2416,29 @@ requires-dist = [
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-public-key-authentication-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-cose", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-audit-durability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/30-storage-runtime/tigrbl-audit-durability" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-replay-bases" },
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-table-durability" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-replay-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-table-durability", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
@@ -3185,12 +3231,14 @@ dependencies = [
     { name = "tigrbl-attestation-appraiser" },
     { name = "tigrbl-attestation-bases" },
     { name = "tigrbl-attestation-contracts" },
+    { name = "tigrbl-attestation-durability" },
     { name = "tigrbl-attestation-packed-provider" },
     { name = "tigrbl-attestation-protocol-corim" },
     { name = "tigrbl-attestation-protocol-eat" },
     { name = "tigrbl-attestation-reference-provider" },
     { name = "tigrbl-attestation-tpm-provider" },
     { name = "tigrbl-attestation-u2f-provider" },
+    { name = "tigrbl-audit-durability" },
     { name = "tigrbl-auth" },
     { name = "tigrbl-auth-api-oauth-authorization" },
     { name = "tigrbl-auth-api-oauth-authorization-server-metadata" },
@@ -3241,6 +3289,8 @@ dependencies = [
     { name = "tigrbl-authenticator-session-local" },
     { name = "tigrbl-authn-credentials" },
     { name = "tigrbl-authority-graph-concrete" },
+    { name = "tigrbl-authority-graph-durability" },
+    { name = "tigrbl-authorization-policy-durability" },
     { name = "tigrbl-authorization-provenance-concrete" },
     { name = "tigrbl-authorization-scope-set-matcher-concrete" },
     { name = "tigrbl-authz-policy" },
@@ -3342,6 +3392,7 @@ dependencies = [
     { name = "tigrbl-client-registration-capability" },
     { name = "tigrbl-client-secret-credential-concrete" },
     { name = "tigrbl-concrete" },
+    { name = "tigrbl-consent-durability" },
     { name = "tigrbl-core" },
     { name = "tigrbl-corim-concrete" },
     { name = "tigrbl-corim-reference-memory-provider" },
@@ -3351,6 +3402,7 @@ dependencies = [
     { name = "tigrbl-credential-protocol-iso-mdoc" },
     { name = "tigrbl-credential-protocol-w3c-vcdm" },
     { name = "tigrbl-default-capability" },
+    { name = "tigrbl-delegation-durability" },
     { name = "tigrbl-device-identity-concrete" },
     { name = "tigrbl-did-bases" },
     { name = "tigrbl-did-concrete" },
@@ -3359,6 +3411,7 @@ dependencies = [
     { name = "tigrbl-did-resolver-provider" },
     { name = "tigrbl-digital-credential-bases" },
     { name = "tigrbl-digital-credential-contracts" },
+    { name = "tigrbl-digital-credential-durability" },
     { name = "tigrbl-digital-credential-issuance" },
     { name = "tigrbl-digital-credential-issuer-local" },
     { name = "tigrbl-digital-credential-presentation" },
@@ -3372,6 +3425,7 @@ dependencies = [
     { name = "tigrbl-eat-verifier-provider" },
     { name = "tigrbl-encryption-bases" },
     { name = "tigrbl-fido-metadata-service-provider" },
+    { name = "tigrbl-gnap-state-durability" },
     { name = "tigrbl-grant-negotiation-capability" },
     { name = "tigrbl-identity-admin" },
     { name = "tigrbl-identity-admin-advanced-authenticator-registry" },
@@ -3393,6 +3447,7 @@ dependencies = [
     { name = "tigrbl-identity-core" },
     { name = "tigrbl-identity-credentials" },
     { name = "tigrbl-identity-credentials-concrete" },
+    { name = "tigrbl-identity-durability" },
     { name = "tigrbl-identity-identities-concrete" },
     { name = "tigrbl-identity-jose" },
     { name = "tigrbl-identity-model-bases" },
@@ -3413,6 +3468,7 @@ dependencies = [
     { name = "tigrbl-kernel" },
     { name = "tigrbl-key-attestation-verifier" },
     { name = "tigrbl-key-bases" },
+    { name = "tigrbl-key-material-durability" },
     { name = "tigrbl-machine-identity-concrete" },
     { name = "tigrbl-mdoc-concrete" },
     { name = "tigrbl-mdoc-credential-concrete" },
@@ -3422,6 +3478,8 @@ dependencies = [
     { name = "tigrbl-mfa-factor-concrete" },
     { name = "tigrbl-mtls-certificate-credential-concrete" },
     { name = "tigrbl-mtls-confirmation-binding-concrete" },
+    { name = "tigrbl-oauth-state-durability" },
+    { name = "tigrbl-oidc-state-durability" },
     { name = "tigrbl-ops-olap" },
     { name = "tigrbl-ops-oltp" },
     { name = "tigrbl-ops-realtime" },
@@ -3434,6 +3492,7 @@ dependencies = [
     { name = "tigrbl-pkce-concrete" },
     { name = "tigrbl-platform-attestation-provider" },
     { name = "tigrbl-policy-evaluation-capability" },
+    { name = "tigrbl-presentation-durability" },
     { name = "tigrbl-principal-authentication" },
     { name = "tigrbl-proof-of-possession-bases" },
     { name = "tigrbl-protected-artifact-bases" },
@@ -3452,6 +3511,7 @@ dependencies = [
     { name = "tigrbl-replay-contracts" },
     { name = "tigrbl-replay-memory-provider" },
     { name = "tigrbl-replay-protection-capability" },
+    { name = "tigrbl-replay-protection-durability" },
     { name = "tigrbl-resource-server-bases" },
     { name = "tigrbl-runtime" },
     { name = "tigrbl-sd-jwt-concrete" },
@@ -3468,6 +3528,7 @@ dependencies = [
     { name = "tigrbl-security-dpop-cnf-binding-validator" },
     { name = "tigrbl-security-event-bases" },
     { name = "tigrbl-security-event-contracts" },
+    { name = "tigrbl-security-event-durability" },
     { name = "tigrbl-security-event-protocol-set" },
     { name = "tigrbl-security-event-replay-store" },
     { name = "tigrbl-security-events" },
@@ -3488,6 +3549,7 @@ dependencies = [
     { name = "tigrbl-service-credential-concrete" },
     { name = "tigrbl-service-identity-concrete" },
     { name = "tigrbl-service-key-credential-concrete" },
+    { name = "tigrbl-session-durability" },
     { name = "tigrbl-set-concrete" },
     { name = "tigrbl-set-receiver-provider" },
     { name = "tigrbl-set-transmitter-provider" },
@@ -3496,8 +3558,10 @@ dependencies = [
     { name = "tigrbl-spiffe-workload-api-provider" },
     { name = "tigrbl-svid-concrete" },
     { name = "tigrbl-svid-verifier-provider" },
+    { name = "tigrbl-table-durability" },
     { name = "tigrbl-token-bases" },
     { name = "tigrbl-token-contracts" },
+    { name = "tigrbl-token-durability" },
     { name = "tigrbl-token-exchange-capability" },
     { name = "tigrbl-token-introspection-bases" },
     { name = "tigrbl-token-introspection-capability" },
@@ -3506,6 +3570,7 @@ dependencies = [
     { name = "tigrbl-trust-anchor-provider" },
     { name = "tigrbl-trust-bases" },
     { name = "tigrbl-trust-federation-graph-concrete" },
+    { name = "tigrbl-trust-federation-graph-durability" },
     { name = "tigrbl-typing" },
     { name = "tigrbl-user-identity-concrete" },
     { name = "tigrbl-vcdm-concrete" },
@@ -3513,10 +3578,12 @@ dependencies = [
     { name = "tigrbl-verifiable-presentation-concrete" },
     { name = "tigrbl-wallet-attestation-verifier" },
     { name = "tigrbl-webauthn-credential-concrete" },
+    { name = "tigrbl-webauthn-durability" },
     { name = "tigrbl-workload-identity" },
     { name = "tigrbl-workload-identity-bases" },
     { name = "tigrbl-workload-identity-concrete" },
     { name = "tigrbl-workload-identity-contracts" },
+    { name = "tigrbl-workload-identity-durability" },
     { name = "tomli", marker = "python_full_version < '3.11'" },
 ]
 
@@ -3610,12 +3677,14 @@ requires-dist = [
     { name = "tigrbl-attestation-appraiser", editable = "pkgs/20-providers/tigrbl-attestation-appraiser" },
     { name = "tigrbl-attestation-bases", editable = "pkgs/05-bases/tigrbl-attestation-bases" },
     { name = "tigrbl-attestation-contracts", editable = "pkgs/02-contracts/tigrbl-attestation-contracts" },
+    { name = "tigrbl-attestation-durability", editable = "pkgs/30-storage-runtime/tigrbl-attestation-durability" },
     { name = "tigrbl-attestation-packed-provider", editable = "pkgs/20-providers/tigrbl-attestation-packed-provider" },
     { name = "tigrbl-attestation-protocol-corim", editable = "pkgs/50-protocols/tigrbl-attestation-protocol-corim" },
     { name = "tigrbl-attestation-protocol-eat", editable = "pkgs/50-protocols/tigrbl-attestation-protocol-eat" },
     { name = "tigrbl-attestation-reference-provider", editable = "pkgs/20-providers/tigrbl-attestation-reference-provider" },
     { name = "tigrbl-attestation-tpm-provider", editable = "pkgs/20-providers/tigrbl-attestation-tpm-provider" },
     { name = "tigrbl-attestation-u2f-provider", editable = "pkgs/20-providers/tigrbl-attestation-u2f-provider" },
+    { name = "tigrbl-audit-durability", editable = "pkgs/30-storage-runtime/tigrbl-audit-durability" },
     { name = "tigrbl-auth", editable = "pkgs/70-facade/tigrbl-auth" },
     { name = "tigrbl-auth-api-oauth-authorization", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-authorization" },
     { name = "tigrbl-auth-api-oauth-authorization-server-metadata", editable = "pkgs/80-apis/tigrbl-auth-api-oauth-authorization-server-metadata" },
@@ -3666,6 +3735,8 @@ requires-dist = [
     { name = "tigrbl-authenticator-session-local", editable = "pkgs/20-providers/tigrbl-authenticator-session-local" },
     { name = "tigrbl-authn-credentials", editable = "pkgs/20-providers/tigrbl-authn-credentials" },
     { name = "tigrbl-authority-graph-concrete", editable = "pkgs/10-concrete/tigrbl-authority-graph-concrete" },
+    { name = "tigrbl-authority-graph-durability", editable = "pkgs/30-storage-runtime/tigrbl-authority-graph-durability" },
+    { name = "tigrbl-authorization-policy-durability", editable = "pkgs/30-storage-runtime/tigrbl-authorization-policy-durability" },
     { name = "tigrbl-authorization-provenance-concrete", editable = "pkgs/10-concrete/tigrbl-authorization-provenance-concrete" },
     { name = "tigrbl-authorization-scope-set-matcher-concrete", editable = "pkgs/10-concrete/tigrbl-authorization-scope-set-matcher-concrete" },
     { name = "tigrbl-authz-policy", editable = "pkgs/20-providers/tigrbl-authz-policy" },
@@ -3767,6 +3838,7 @@ requires-dist = [
     { name = "tigrbl-client-registration-capability", editable = "pkgs/40-capabilities/tigrbl-client-registration-capability" },
     { name = "tigrbl-client-secret-credential-concrete", editable = "pkgs/10-concrete/tigrbl-client-secret-credential-concrete" },
     { name = "tigrbl-concrete", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-consent-durability", editable = "pkgs/30-storage-runtime/tigrbl-consent-durability" },
     { name = "tigrbl-core", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-corim-concrete", editable = "pkgs/10-concrete/tigrbl-corim-concrete" },
     { name = "tigrbl-corim-reference-memory-provider", editable = "pkgs/20-providers/tigrbl-corim-reference-memory-provider" },
@@ -3776,6 +3848,7 @@ requires-dist = [
     { name = "tigrbl-credential-protocol-iso-mdoc", editable = "pkgs/50-protocols/tigrbl-credential-protocol-iso-mdoc" },
     { name = "tigrbl-credential-protocol-w3c-vcdm", editable = "pkgs/50-protocols/tigrbl-credential-protocol-w3c-vcdm" },
     { name = "tigrbl-default-capability", editable = "pkgs/10-concrete/tigrbl-default-capability" },
+    { name = "tigrbl-delegation-durability", editable = "pkgs/30-storage-runtime/tigrbl-delegation-durability" },
     { name = "tigrbl-device-identity-concrete", editable = "pkgs/10-concrete/tigrbl-device-identity-concrete" },
     { name = "tigrbl-did-bases", editable = "pkgs/05-bases/tigrbl-did-bases" },
     { name = "tigrbl-did-concrete", editable = "pkgs/10-concrete/tigrbl-did-concrete" },
@@ -3784,6 +3857,7 @@ requires-dist = [
     { name = "tigrbl-did-resolver-provider", editable = "pkgs/20-providers/tigrbl-did-resolver-provider" },
     { name = "tigrbl-digital-credential-bases", editable = "pkgs/05-bases/tigrbl-digital-credential-bases" },
     { name = "tigrbl-digital-credential-contracts", editable = "pkgs/02-contracts/tigrbl-digital-credential-contracts" },
+    { name = "tigrbl-digital-credential-durability", editable = "pkgs/30-storage-runtime/tigrbl-digital-credential-durability" },
     { name = "tigrbl-digital-credential-issuance", editable = "pkgs/40-capabilities/tigrbl-digital-credential-issuance" },
     { name = "tigrbl-digital-credential-issuer-local", editable = "pkgs/20-providers/tigrbl-digital-credential-issuer-local" },
     { name = "tigrbl-digital-credential-presentation", editable = "pkgs/40-capabilities/tigrbl-digital-credential-presentation" },
@@ -3797,6 +3871,7 @@ requires-dist = [
     { name = "tigrbl-eat-verifier-provider", editable = "pkgs/20-providers/tigrbl-eat-verifier-provider" },
     { name = "tigrbl-encryption-bases", editable = "pkgs/05-bases/tigrbl-encryption-bases" },
     { name = "tigrbl-fido-metadata-service-provider", editable = "pkgs/20-providers/tigrbl-fido-metadata-service-provider" },
+    { name = "tigrbl-gnap-state-durability", editable = "pkgs/30-storage-runtime/tigrbl-gnap-state-durability" },
     { name = "tigrbl-grant-negotiation-capability", editable = "pkgs/40-capabilities/tigrbl-grant-negotiation-capability" },
     { name = "tigrbl-identity-admin", editable = "pkgs/20-providers/tigrbl-identity-admin" },
     { name = "tigrbl-identity-admin-advanced-authenticator-registry", editable = "pkgs/deprecated/tigrbl-identity-admin-advanced-authenticator-registry" },
@@ -3818,6 +3893,7 @@ requires-dist = [
     { name = "tigrbl-identity-core", editable = "pkgs/00-primitives/tigrbl-identity-core" },
     { name = "tigrbl-identity-credentials", editable = "pkgs/deprecated/tigrbl-identity-credentials" },
     { name = "tigrbl-identity-credentials-concrete", editable = "pkgs/10-concrete/tigrbl-identity-credentials-concrete" },
+    { name = "tigrbl-identity-durability", editable = "pkgs/30-storage-runtime/tigrbl-identity-durability" },
     { name = "tigrbl-identity-identities-concrete", editable = "pkgs/10-concrete/tigrbl-identity-identities-concrete" },
     { name = "tigrbl-identity-jose", editable = "pkgs/20-providers/tigrbl-identity-jose" },
     { name = "tigrbl-identity-model-bases", editable = "pkgs/05-bases/tigrbl-identity-model-bases" },
@@ -3842,6 +3918,7 @@ requires-dist = [
     { name = "tigrbl-kernel", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-key-attestation-verifier", editable = "pkgs/20-providers/tigrbl-key-attestation-verifier" },
     { name = "tigrbl-key-bases", editable = "pkgs/05-bases/tigrbl-key-bases" },
+    { name = "tigrbl-key-material-durability", editable = "pkgs/30-storage-runtime/tigrbl-key-material-durability" },
     { name = "tigrbl-machine-identity-concrete", editable = "pkgs/10-concrete/tigrbl-machine-identity-concrete" },
     { name = "tigrbl-mdoc-concrete", editable = "pkgs/10-concrete/tigrbl-mdoc-concrete" },
     { name = "tigrbl-mdoc-credential-concrete", editable = "pkgs/10-concrete/tigrbl-mdoc-credential-concrete" },
@@ -3851,6 +3928,8 @@ requires-dist = [
     { name = "tigrbl-mfa-factor-concrete", editable = "pkgs/10-concrete/tigrbl-mfa-factor-concrete" },
     { name = "tigrbl-mtls-certificate-credential-concrete", editable = "pkgs/10-concrete/tigrbl-mtls-certificate-credential-concrete" },
     { name = "tigrbl-mtls-confirmation-binding-concrete", editable = "pkgs/10-concrete/tigrbl-mtls-confirmation-binding-concrete" },
+    { name = "tigrbl-oauth-state-durability", editable = "pkgs/30-storage-runtime/tigrbl-oauth-state-durability" },
+    { name = "tigrbl-oidc-state-durability", editable = "pkgs/30-storage-runtime/tigrbl-oidc-state-durability" },
     { name = "tigrbl-ops-olap", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-ops-oltp", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-ops-realtime", specifier = "==0.4.4.dev1" },
@@ -3863,6 +3942,7 @@ requires-dist = [
     { name = "tigrbl-pkce-concrete", editable = "pkgs/10-concrete/tigrbl-pkce-concrete" },
     { name = "tigrbl-platform-attestation-provider", editable = "pkgs/20-providers/tigrbl-platform-attestation-provider" },
     { name = "tigrbl-policy-evaluation-capability", editable = "pkgs/40-capabilities/tigrbl-policy-evaluation-capability" },
+    { name = "tigrbl-presentation-durability", editable = "pkgs/30-storage-runtime/tigrbl-presentation-durability" },
     { name = "tigrbl-principal-authentication", editable = "pkgs/40-capabilities/tigrbl-principal-authentication" },
     { name = "tigrbl-proof-of-possession-bases", editable = "pkgs/05-bases/tigrbl-proof-of-possession-bases" },
     { name = "tigrbl-protected-artifact-bases", editable = "pkgs/05-bases/tigrbl-protected-artifact-bases" },
@@ -3881,6 +3961,7 @@ requires-dist = [
     { name = "tigrbl-replay-contracts", editable = "pkgs/02-contracts/tigrbl-replay-contracts" },
     { name = "tigrbl-replay-memory-provider", editable = "pkgs/20-providers/tigrbl-replay-memory-provider" },
     { name = "tigrbl-replay-protection-capability", editable = "pkgs/40-capabilities/tigrbl-replay-protection-capability" },
+    { name = "tigrbl-replay-protection-durability", editable = "pkgs/30-storage-runtime/tigrbl-replay-protection-durability" },
     { name = "tigrbl-resource-server-bases", editable = "pkgs/05-bases/tigrbl-resource-server-bases" },
     { name = "tigrbl-runtime", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-sd-jwt-concrete", editable = "pkgs/10-concrete/tigrbl-sd-jwt-concrete" },
@@ -3897,6 +3978,7 @@ requires-dist = [
     { name = "tigrbl-security-dpop-cnf-binding-validator", editable = "pkgs/20-providers/tigrbl-security-dpop-cnf-binding-validator" },
     { name = "tigrbl-security-event-bases", editable = "pkgs/05-bases/tigrbl-security-event-bases" },
     { name = "tigrbl-security-event-contracts", editable = "pkgs/02-contracts/tigrbl-security-event-contracts" },
+    { name = "tigrbl-security-event-durability", editable = "pkgs/30-storage-runtime/tigrbl-security-event-durability" },
     { name = "tigrbl-security-event-protocol-set", editable = "pkgs/50-protocols/tigrbl-security-event-protocol-set" },
     { name = "tigrbl-security-event-replay-store", editable = "pkgs/deprecated/tigrbl-security-event-replay-store" },
     { name = "tigrbl-security-events", editable = "pkgs/40-capabilities/tigrbl-security-events" },
@@ -3917,6 +3999,7 @@ requires-dist = [
     { name = "tigrbl-service-credential-concrete", editable = "pkgs/10-concrete/tigrbl-service-credential-concrete" },
     { name = "tigrbl-service-identity-concrete", editable = "pkgs/10-concrete/tigrbl-service-identity-concrete" },
     { name = "tigrbl-service-key-credential-concrete", editable = "pkgs/10-concrete/tigrbl-service-key-credential-concrete" },
+    { name = "tigrbl-session-durability", editable = "pkgs/30-storage-runtime/tigrbl-session-durability" },
     { name = "tigrbl-set-concrete", editable = "pkgs/10-concrete/tigrbl-set-concrete" },
     { name = "tigrbl-set-receiver-provider", editable = "pkgs/20-providers/tigrbl-set-receiver-provider" },
     { name = "tigrbl-set-transmitter-provider", editable = "pkgs/20-providers/tigrbl-set-transmitter-provider" },
@@ -3925,8 +4008,10 @@ requires-dist = [
     { name = "tigrbl-spiffe-workload-api-provider", editable = "pkgs/20-providers/tigrbl-spiffe-workload-api-provider" },
     { name = "tigrbl-svid-concrete", editable = "pkgs/10-concrete/tigrbl-svid-concrete" },
     { name = "tigrbl-svid-verifier-provider", editable = "pkgs/20-providers/tigrbl-svid-verifier-provider" },
+    { name = "tigrbl-table-durability", editable = "pkgs/30-storage-runtime/tigrbl-table-durability" },
     { name = "tigrbl-token-bases", editable = "pkgs/05-bases/tigrbl-token-bases" },
     { name = "tigrbl-token-contracts", editable = "pkgs/02-contracts/tigrbl-token-contracts" },
+    { name = "tigrbl-token-durability", editable = "pkgs/30-storage-runtime/tigrbl-token-durability" },
     { name = "tigrbl-token-exchange-capability", editable = "pkgs/40-capabilities/tigrbl-token-exchange-capability" },
     { name = "tigrbl-token-introspection-bases", editable = "pkgs/05-bases/tigrbl-token-introspection-bases" },
     { name = "tigrbl-token-introspection-capability", editable = "pkgs/40-capabilities/tigrbl-token-introspection-capability" },
@@ -3935,6 +4020,7 @@ requires-dist = [
     { name = "tigrbl-trust-anchor-provider", editable = "pkgs/20-providers/tigrbl-trust-anchor-provider" },
     { name = "tigrbl-trust-bases", editable = "pkgs/05-bases/tigrbl-trust-bases" },
     { name = "tigrbl-trust-federation-graph-concrete", editable = "pkgs/10-concrete/tigrbl-trust-federation-graph-concrete" },
+    { name = "tigrbl-trust-federation-graph-durability", editable = "pkgs/30-storage-runtime/tigrbl-trust-federation-graph-durability" },
     { name = "tigrbl-typing", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-user-identity-concrete", editable = "pkgs/10-concrete/tigrbl-user-identity-concrete" },
     { name = "tigrbl-vcdm-concrete", editable = "pkgs/10-concrete/tigrbl-vcdm-concrete" },
@@ -3942,10 +4028,12 @@ requires-dist = [
     { name = "tigrbl-verifiable-presentation-concrete", editable = "pkgs/10-concrete/tigrbl-verifiable-presentation-concrete" },
     { name = "tigrbl-wallet-attestation-verifier", editable = "pkgs/20-providers/tigrbl-wallet-attestation-verifier" },
     { name = "tigrbl-webauthn-credential-concrete", editable = "pkgs/10-concrete/tigrbl-webauthn-credential-concrete" },
+    { name = "tigrbl-webauthn-durability", editable = "pkgs/30-storage-runtime/tigrbl-webauthn-durability" },
     { name = "tigrbl-workload-identity", editable = "pkgs/40-capabilities/tigrbl-workload-identity" },
     { name = "tigrbl-workload-identity-bases", editable = "pkgs/05-bases/tigrbl-workload-identity-bases" },
     { name = "tigrbl-workload-identity-concrete", editable = "pkgs/10-concrete/tigrbl-workload-identity-concrete" },
     { name = "tigrbl-workload-identity-contracts", editable = "pkgs/02-contracts/tigrbl-workload-identity-contracts" },
+    { name = "tigrbl-workload-identity-durability", editable = "pkgs/30-storage-runtime/tigrbl-workload-identity-durability" },
     { name = "tomli", marker = "python_full_version < '3.11'", specifier = "==2.4.0" },
 ]
 provides-extras = ["test", "postgres", "sqlite", "uvicorn", "hypercorn", "tigrcorn", "servers"]
@@ -4228,6 +4316,44 @@ dependencies = [
 requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
 
 [[package]]
+name = "tigrbl-authority-graph-durability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/30-storage-runtime/tigrbl-authority-graph-durability" }
+dependencies = [
+    { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-table-durability" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-table-durability", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-authorization-policy-durability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/30-storage-runtime/tigrbl-authorization-policy-durability" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-replay-bases" },
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-table-durability" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-replay-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-table-durability", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-authorization-provenance-concrete"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-authorization-provenance-concrete" }
@@ -4334,15 +4460,13 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/30-storage-runtime/tigrbl-authz-policy-authority-derivation-graph" }
 dependencies = [
     { name = "tigrbl-authority-graph-concrete" },
-    { name = "tigrbl-identity-storage" },
-    { name = "tigrbl-identity-storage-runtime" },
+    { name = "tigrbl-authority-graph-durability" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl-authority-graph-concrete", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-storage-runtime", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-authority-graph-durability", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
@@ -5728,6 +5852,29 @@ wheels = [
 ]
 
 [[package]]
+name = "tigrbl-consent-durability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/30-storage-runtime/tigrbl-consent-durability" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-replay-bases" },
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-table-durability" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-replay-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-table-durability", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-core"
 version = "0.4.4.dev1"
 source = { registry = "https://pypi.org/simple" }
@@ -5867,6 +6014,29 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-delegation-durability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/30-storage-runtime/tigrbl-delegation-durability" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-replay-bases" },
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-table-durability" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-replay-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-table-durability", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-device-identity-concrete"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-device-identity-concrete" }
@@ -5955,6 +6125,29 @@ requires-dist = [{ name = "tigrbl-digital-credential-contracts", specifier = "==
 name = "tigrbl-digital-credential-contracts"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/02-contracts/tigrbl-digital-credential-contracts" }
+
+[[package]]
+name = "tigrbl-digital-credential-durability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/30-storage-runtime/tigrbl-digital-credential-durability" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-replay-bases" },
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-table-durability" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-replay-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-table-durability", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-digital-credential-issuance"
@@ -6138,6 +6331,29 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-gnap-state-durability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/30-storage-runtime/tigrbl-gnap-state-durability" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-replay-bases" },
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-table-durability" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-replay-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-table-durability", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-grant-negotiation-capability"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/40-capabilities/tigrbl-grant-negotiation-capability" }
@@ -6276,16 +6492,14 @@ name = "tigrbl-identity-admin-trust-federation-graph"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/30-storage-runtime/tigrbl-identity-admin-trust-federation-graph" }
 dependencies = [
-    { name = "tigrbl-identity-storage" },
-    { name = "tigrbl-identity-storage-runtime" },
     { name = "tigrbl-trust-federation-graph-concrete" },
+    { name = "tigrbl-trust-federation-graph-durability" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-storage-runtime", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-trust-federation-graph-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-trust-federation-graph-durability", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
@@ -6497,6 +6711,29 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-identity-durability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/30-storage-runtime/tigrbl-identity-durability" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-replay-bases" },
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-table-durability" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-replay-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-table-durability", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-identity-identities-concrete"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-identity-identities-concrete" }
@@ -6691,6 +6928,7 @@ name = "tigrbl-identity-runtime"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/60-runtime/tigrbl-identity-runtime" }
 dependencies = [
+    { name = "tigrbl" },
     { name = "tigrbl-auth-api-webauthn" },
     { name = "tigrbl-auth-protocol-webauthn" },
     { name = "tigrbl-identity-contracts" },
@@ -6721,6 +6959,7 @@ uvicorn = [
 requires-dist = [
     { name = "hypercorn", marker = "extra == 'hypercorn'", specifier = "==0.18.0" },
     { name = "hypercorn", marker = "extra == 'servers'", specifier = "==0.18.0" },
+    { name = "tigrbl", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-auth-api-webauthn", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-webauthn", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
@@ -6853,36 +7092,74 @@ source = { editable = "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime" 
 dependencies = [
     { name = "pydantic" },
     { name = "tigrbl" },
+    { name = "tigrbl-attestation-durability" },
+    { name = "tigrbl-audit-durability" },
     { name = "tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-auth-protocol-oidc" },
+    { name = "tigrbl-authorization-policy-durability" },
     { name = "tigrbl-authz-resource-server" },
+    { name = "tigrbl-consent-durability" },
+    { name = "tigrbl-delegation-durability" },
+    { name = "tigrbl-digital-credential-durability" },
+    { name = "tigrbl-gnap-state-durability" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core" },
+    { name = "tigrbl-identity-durability" },
     { name = "tigrbl-identity-jose" },
     { name = "tigrbl-identity-runtime" },
     { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-key-material-durability" },
+    { name = "tigrbl-oauth-state-durability" },
+    { name = "tigrbl-oidc-state-durability" },
+    { name = "tigrbl-presentation-durability" },
     { name = "tigrbl-principal-authentication" },
     { name = "tigrbl-replay-bases" },
+    { name = "tigrbl-replay-protection-durability" },
     { name = "tigrbl-security-authorization-provenance-builder" },
+    { name = "tigrbl-security-event-durability" },
     { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-session-durability" },
+    { name = "tigrbl-table-durability" },
+    { name = "tigrbl-token-durability" },
+    { name = "tigrbl-webauthn-durability" },
+    { name = "tigrbl-workload-identity-durability" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "pydantic", specifier = "==2.12.5" },
     { name = "tigrbl", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-attestation-durability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-audit-durability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-oidc", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-authorization-policy-durability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-resource-server", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-consent-durability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-delegation-durability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-digital-credential-durability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-gnap-state-durability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-durability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-jose", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-key-material-durability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-oauth-state-durability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-oidc-state-durability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-presentation-durability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-principal-authentication", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-replay-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-replay-protection-durability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-authorization-provenance-builder", specifier = "==0.1.0" },
+    { name = "tigrbl-security-event-durability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-session-durability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-table-durability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-token-durability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-webauthn-durability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-workload-identity-durability", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
@@ -6944,6 +7221,25 @@ dependencies = [
 requires-dist = [
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
     { name = "tigrbl-signing-bases", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-key-material-durability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/30-storage-runtime/tigrbl-key-material-durability" }
+dependencies = [
+    { name = "tigrbl" },
+    { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-table-durability" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-table-durability", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
@@ -7071,6 +7367,52 @@ requires-dist = [
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-proof-of-possession-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+]
+
+[[package]]
+name = "tigrbl-oauth-state-durability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/30-storage-runtime/tigrbl-oauth-state-durability" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-replay-bases" },
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-table-durability" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-replay-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-table-durability", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-oidc-state-durability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/30-storage-runtime/tigrbl-oidc-state-durability" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-replay-bases" },
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-table-durability" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-replay-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-table-durability", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
@@ -7231,6 +7573,29 @@ dependencies = [
 requires-dist = [
     { name = "tigrbl-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-presentation-durability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/30-storage-runtime/tigrbl-presentation-durability" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-replay-bases" },
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-table-durability" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-replay-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-table-durability", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
@@ -7472,6 +7837,29 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-replay-protection-durability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/30-storage-runtime/tigrbl-replay-protection-durability" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-replay-bases" },
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-table-durability" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-replay-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-table-durability", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-resource-server-bases"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/05-bases/tigrbl-resource-server-bases" }
@@ -7668,6 +8056,29 @@ requires-dist = [{ name = "tigrbl-security-event-contracts", specifier = "==0.4.
 name = "tigrbl-security-event-contracts"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/02-contracts/tigrbl-security-event-contracts" }
+
+[[package]]
+name = "tigrbl-security-event-durability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/30-storage-runtime/tigrbl-security-event-durability" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-replay-bases" },
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-table-durability" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-replay-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-table-durability", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-security-event-protocol-set"
@@ -7992,6 +8403,29 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-session-durability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/30-storage-runtime/tigrbl-session-durability" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-replay-bases" },
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-table-durability" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-replay-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-table-durability", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-set-concrete"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-set-concrete" }
@@ -8117,6 +8551,17 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-table-durability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/30-storage-runtime/tigrbl-table-durability" }
+dependencies = [
+    { name = "tigrbl" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl", specifier = "==0.4.4.dev1" }]
+
+[[package]]
 name = "tigrbl-token-bases"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/05-bases/tigrbl-token-bases" }
@@ -8137,6 +8582,29 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [{ name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-token-durability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/30-storage-runtime/tigrbl-token-durability" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-replay-bases" },
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-table-durability" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-replay-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-table-durability", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-token-exchange-capability"
@@ -8243,6 +8711,21 @@ dependencies = [
 requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
 
 [[package]]
+name = "tigrbl-trust-federation-graph-durability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/30-storage-runtime/tigrbl-trust-federation-graph-durability" }
+dependencies = [
+    { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-table-durability" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-table-durability", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-typing"
 version = "0.4.4.dev1"
 source = { registry = "https://pypi.org/simple" }
@@ -8335,6 +8818,29 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-webauthn-durability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/30-storage-runtime/tigrbl-webauthn-durability" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-replay-bases" },
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-table-durability" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-replay-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-table-durability", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-workload-identity"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/40-capabilities/tigrbl-workload-identity" }
@@ -8379,6 +8885,29 @@ requires-dist = [
 name = "tigrbl-workload-identity-contracts"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/02-contracts/tigrbl-workload-identity-contracts" }
+
+[[package]]
+name = "tigrbl-workload-identity-durability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/30-storage-runtime/tigrbl-workload-identity-durability" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-replay-bases" },
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-table-durability" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-replay-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-table-durability", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrcorn"

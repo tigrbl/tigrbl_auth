@@ -1,20 +1,3 @@
-"""Replay table alias and executable runtime specification."""
+"""Compatibility facade for tigrbl_replay_protection_durability.specifications.replay."""
 
-from tigrbl_identity_storage.tables import ReplayReservation
-
-from ..derive import deriveRuntimeTableSpec
-from ..make import makeRuntimeOperation
-from ..ops.replay import check_and_reserve
-
-ReplayReservationTable = ReplayReservation
-ReplayReservationRuntimeSpec = deriveRuntimeTableSpec(
-    ReplayReservationTable,
-    operations=(
-        makeRuntimeOperation(
-            alias="check_and_reserve",
-            handler=check_and_reserve,
-        ),
-    ),
-)
-
-__all__ = ["ReplayReservationRuntimeSpec", "ReplayReservationTable"]
+from tigrbl_replay_protection_durability.specifications.replay import *

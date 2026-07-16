@@ -7,8 +7,7 @@ requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
 dependencies = [
     "tigrbl-trust-federation-graph-concrete==0.4.0.dev2",
-    "tigrbl-identity-storage==0.4.0.dev2",
-    "tigrbl-identity-storage-runtime==0.4.0.dev2",
+    "tigrbl-trust-federation-graph-durability==0.4.0.dev2",
 ]
 
 [build-system]

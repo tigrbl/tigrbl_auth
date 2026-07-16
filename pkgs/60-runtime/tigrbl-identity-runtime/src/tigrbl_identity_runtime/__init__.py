@@ -12,6 +12,7 @@ from .assembly import (
     testkit_provider_runtime_profile,
 )
 from .base import LazyASGIApplication, RunnerAdapter
+from .engine import ENGINE, bootstrap_runtime_engine, dsn, get_db
 from .capability_registry import CapabilityFactory, CapabilityRegistry
 from .capability_assembly import (
     ProtocolCapabilityBindingError,
@@ -64,6 +65,10 @@ __all__ = [
     "validate_protocol_capabilities",
     "WebAuthnComposition",
     "build_webauthn_composition",
+    "ENGINE",
+    "bootstrap_runtime_engine",
+    "dsn",
+    "get_db",
 ]
 
 

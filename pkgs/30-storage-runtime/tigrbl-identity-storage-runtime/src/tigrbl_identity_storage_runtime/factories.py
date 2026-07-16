@@ -1,18 +1,3 @@
-"""Stable factory aliases for layer-30 table-runtime authoring."""
+"""Compatibility facade for :mod:`tigrbl_table_durability.factories`."""
 
-from .define import defineRuntimeTableSpec
-from .derive import deriveRuntimeTableSpec
-from .make import makeRuntimeOperation
-
-operation = makeRuntimeOperation
-table_spec = defineRuntimeTableSpec
-derive = deriveRuntimeTableSpec
-
-__all__ = [
-    "defineRuntimeTableSpec",
-    "deriveRuntimeTableSpec",
-    "makeRuntimeOperation",
-    "derive",
-    "operation",
-    "table_spec",
-]
+from tigrbl_table_durability.factories import *  # noqa: F403

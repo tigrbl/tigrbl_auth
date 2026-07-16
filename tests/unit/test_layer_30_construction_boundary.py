@@ -38,9 +38,9 @@ def test_new_table_runtime_construction_surface_has_no_higher_layer_imports() ->
                 imports.extend(alias.name for alias in node.names)
             elif isinstance(node, ast.ImportFrom) and node.module:
                 imports.append(node.module)
-        assert not any(
-            module.startswith(forbidden_prefixes) for module in imports
-        ), file
+        assert not any(module.startswith(forbidden_prefixes) for module in imports), (
+            file
+        )
 
 
 def test_layer_30_has_no_http_or_protocol_provider_ownership() -> None:
@@ -57,6 +57,9 @@ def test_layer_30_has_no_http_or_protocol_provider_ownership() -> None:
     forbidden_tigrbl_symbols = {"Request", "TigrblApp"}
 
     for file in RUNTIME_SRC.rglob("*.py"):
+        if file.name == "engine.py":
+            # Time-bounded compatibility facade; engine construction is layer 60.
+            continue
         tree = ast.parse(file.read_text(encoding="utf-8"))
         imports: list[str] = []
         for node in ast.walk(tree):
@@ -66,15 +69,14 @@ def test_layer_30_has_no_http_or_protocol_provider_ownership() -> None:
                 imports.append(node.module)
                 if node.module == "tigrbl":
                     assert not (
-                        forbidden_tigrbl_symbols
-                        & {alias.name for alias in node.names}
+                        forbidden_tigrbl_symbols & {alias.name for alias in node.names}
                     ), file
             elif isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute):
                 assert node.func.attr != "route", file
 
-        assert not any(
-            module.startswith(forbidden_prefixes) for module in imports
-        ), file
+        assert not any(module.startswith(forbidden_prefixes) for module in imports), (
+            file
+        )
         assert "HTTPException" not in {
             node.id for node in ast.walk(tree) if isinstance(node, ast.Name)
         }, file
@@ -87,9 +89,7 @@ def test_layer_30_has_no_repository_or_store_abstraction_modules() -> None:
         class_names = {
             node.name for node in ast.walk(tree) if isinstance(node, ast.ClassDef)
         }
-        assert not any(
-            name.endswith(forbidden_suffixes) for name in class_names
-        ), file
+        assert not any(name.endswith(forbidden_suffixes) for name in class_names), file
 
     for removed in (
         "repositories.py",

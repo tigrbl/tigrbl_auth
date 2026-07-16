@@ -1,0 +1,20 @@
+[project]
+name = "tigrbl-key-material-durability"
+version = "0.4.0.dev2"
+description = "Durable crypto-key table hooks and specifications."
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = [
+    "tigrbl==0.4.4.dev1",
+    "tigrbl-table-durability==0.4.0.dev2",
+    "tigrbl-identity-storage==0.4.0.dev2",
+    "tigrbl-security-trust-contracts==0.1.0",
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tigrbl_key_material_durability", from = "src" }]

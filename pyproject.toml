@@ -381,6 +381,27 @@ dependencies = [
     "tigrbl-identity-server==0.4.0.dev2",
     "tigrbl-identity-storage==0.4.0.dev2",
     "tigrbl-identity-storage-runtime==0.4.0.dev2",
+    "tigrbl-table-durability==0.4.0.dev2",
+    "tigrbl-identity-durability==0.4.0.dev2",
+    "tigrbl-session-durability==0.4.0.dev2",
+    "tigrbl-consent-durability==0.4.0.dev2",
+    "tigrbl-token-durability==0.4.0.dev2",
+    "tigrbl-oauth-state-durability==0.4.0.dev2",
+    "tigrbl-oidc-state-durability==0.4.0.dev2",
+    "tigrbl-delegation-durability==0.4.0.dev2",
+    "tigrbl-authorization-policy-durability==0.4.0.dev2",
+    "tigrbl-digital-credential-durability==0.4.0.dev2",
+    "tigrbl-presentation-durability==0.4.0.dev2",
+    "tigrbl-attestation-durability==0.4.0.dev2",
+    "tigrbl-security-event-durability==0.4.0.dev2",
+    "tigrbl-workload-identity-durability==0.4.0.dev2",
+    "tigrbl-replay-protection-durability==0.4.0.dev2",
+    "tigrbl-webauthn-durability==0.4.0.dev2",
+    "tigrbl-gnap-state-durability==0.4.0.dev2",
+    "tigrbl-audit-durability==0.4.0.dev2",
+    "tigrbl-key-material-durability==0.4.0.dev2",
+    "tigrbl-authority-graph-durability==0.4.0.dev2",
+    "tigrbl-trust-federation-graph-durability==0.4.0.dev2",
     "tomli==2.4.0; python_version < '3.11'",
 ]
 
@@ -816,6 +837,27 @@ tigrbl-identity-runtime = { path = "pkgs/60-runtime/tigrbl-identity-runtime", ed
 tigrbl-identity-server = { path = "pkgs/60-runtime/tigrbl-identity-server", editable = true }
 tigrbl-identity-storage = { path = "pkgs/01-storage/tigrbl-identity-storage", editable = true }
 tigrbl-identity-storage-runtime = { path = "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime", editable = true }
+tigrbl-table-durability = { path = "pkgs/30-storage-runtime/tigrbl-table-durability", editable = true }
+tigrbl-identity-durability = { path = "pkgs/30-storage-runtime/tigrbl-identity-durability", editable = true }
+tigrbl-session-durability = { path = "pkgs/30-storage-runtime/tigrbl-session-durability", editable = true }
+tigrbl-consent-durability = { path = "pkgs/30-storage-runtime/tigrbl-consent-durability", editable = true }
+tigrbl-token-durability = { path = "pkgs/30-storage-runtime/tigrbl-token-durability", editable = true }
+tigrbl-oauth-state-durability = { path = "pkgs/30-storage-runtime/tigrbl-oauth-state-durability", editable = true }
+tigrbl-oidc-state-durability = { path = "pkgs/30-storage-runtime/tigrbl-oidc-state-durability", editable = true }
+tigrbl-delegation-durability = { path = "pkgs/30-storage-runtime/tigrbl-delegation-durability", editable = true }
+tigrbl-authorization-policy-durability = { path = "pkgs/30-storage-runtime/tigrbl-authorization-policy-durability", editable = true }
+tigrbl-digital-credential-durability = { path = "pkgs/30-storage-runtime/tigrbl-digital-credential-durability", editable = true }
+tigrbl-presentation-durability = { path = "pkgs/30-storage-runtime/tigrbl-presentation-durability", editable = true }
+tigrbl-attestation-durability = { path = "pkgs/30-storage-runtime/tigrbl-attestation-durability", editable = true }
+tigrbl-security-event-durability = { path = "pkgs/30-storage-runtime/tigrbl-security-event-durability", editable = true }
+tigrbl-workload-identity-durability = { path = "pkgs/30-storage-runtime/tigrbl-workload-identity-durability", editable = true }
+tigrbl-replay-protection-durability = { path = "pkgs/30-storage-runtime/tigrbl-replay-protection-durability", editable = true }
+tigrbl-webauthn-durability = { path = "pkgs/30-storage-runtime/tigrbl-webauthn-durability", editable = true }
+tigrbl-gnap-state-durability = { path = "pkgs/30-storage-runtime/tigrbl-gnap-state-durability", editable = true }
+tigrbl-audit-durability = { path = "pkgs/30-storage-runtime/tigrbl-audit-durability", editable = true }
+tigrbl-key-material-durability = { path = "pkgs/30-storage-runtime/tigrbl-key-material-durability", editable = true }
+tigrbl-authority-graph-durability = { path = "pkgs/30-storage-runtime/tigrbl-authority-graph-durability", editable = true }
+tigrbl-trust-federation-graph-durability = { path = "pkgs/30-storage-runtime/tigrbl-trust-federation-graph-durability", editable = true }
 
 [project.scripts]
 tigrbl-auth = "tigrbl_identity_cli.cli.main:main"

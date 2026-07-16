@@ -218,8 +218,15 @@ def test_pyproject_uses_published_pins_and_extras():
         "tigrbl-identity-admin-federation-registry==0.4.0.dev2"
         not in identity_admin_dependencies
     )
-    assert "tigrbl-identity-storage==0.4.0.dev2" in authority_graph_dependencies
-    assert "tigrbl-identity-storage==0.4.0.dev2" in trust_graph_dependencies
+    assert (
+        "tigrbl-authority-graph-durability==0.4.0.dev2" in authority_graph_dependencies
+    )
+    assert "tigrbl-identity-storage==0.4.0.dev2" not in authority_graph_dependencies
+    assert (
+        "tigrbl-trust-federation-graph-durability==0.4.0.dev2"
+        in trust_graph_dependencies
+    )
+    assert "tigrbl-identity-storage==0.4.0.dev2" not in trust_graph_dependencies
     assert (
         "tigrbl-identity-admin-relationship-graph==0.4.0.dev2"
         in identity_admin_dependencies
