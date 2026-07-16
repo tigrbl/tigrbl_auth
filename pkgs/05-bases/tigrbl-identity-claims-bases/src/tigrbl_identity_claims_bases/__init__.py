@@ -1,7 +1,7 @@
 """Protocol-neutral bases for claims production and assurance validation."""
 
 from abc import ABC
-from tigrbl_identity_contracts.claims import (
+from tigrbl_claim_contracts import (
     ClaimsProviderPort,
     ClaimsRequest,
     ClaimsResult,

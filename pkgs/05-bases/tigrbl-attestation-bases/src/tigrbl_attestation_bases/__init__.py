@@ -1,6 +1,6 @@
 from abc import ABC
 
-from tigrbl_identity_contracts.attestation import (
+from tigrbl_attestation_contracts import (
     AppraisalResult,
     AttestationAppraiserPort,
     AttestationEvidence,

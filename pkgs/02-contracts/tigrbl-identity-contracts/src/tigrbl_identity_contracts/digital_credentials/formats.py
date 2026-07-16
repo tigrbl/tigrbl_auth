@@ -1,16 +1,3 @@
-from dataclasses import dataclass
-
-
-@dataclass(frozen=True, slots=True)
-class CredentialFormat:
-    identifier: str
-    media_type: str | None = None
-
-
-@dataclass(frozen=True, slots=True)
-class CredentialType:
-    identifier: str
-    format: CredentialFormat
-
-
-__all__ = ["CredentialFormat", "CredentialType"]
+"""Compatibility facade for digital credential format contracts."""
+from tigrbl_digital_credential_contracts.formats import *  # noqa: F403
+from tigrbl_digital_credential_contracts.formats import __all__ as __all__

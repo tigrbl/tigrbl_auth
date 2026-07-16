@@ -3,7 +3,7 @@
 from __future__ import annotations
 from abc import ABC
 from typing import Any, ClassVar
-from tigrbl_identity_contracts.claims import Claim
+from tigrbl_claim_contracts import Claim
 from tigrbl_identity_core import ClaimNameKind, ClaimType, ClaimValueType
 
 

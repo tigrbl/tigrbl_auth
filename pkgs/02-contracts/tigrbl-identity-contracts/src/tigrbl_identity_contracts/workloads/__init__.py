@@ -1,18 +1,3 @@
-"""SPIFFE workload identity and SVID contracts."""
-
-from .bundles import SpiffeTrustBundle, TrustBundleProviderPort
-from .selectors import WorkloadSelector
-from .spiffe import SpiffeId, TrustDomain
-from .svid import Svid, SvidFormat, SvidProviderPort, SvidVerifierPort
-
-__all__ = [
-    "SpiffeId",
-    "SpiffeTrustBundle",
-    "Svid",
-    "SvidFormat",
-    "SvidProviderPort",
-    "SvidVerifierPort",
-    "TrustBundleProviderPort",
-    "TrustDomain",
-    "WorkloadSelector",
-]
+"""Compatibility facade for :mod:`tigrbl_workload_identity_contracts`."""
+from tigrbl_workload_identity_contracts import *  # noqa: F403
+from tigrbl_workload_identity_contracts import __all__ as __all__

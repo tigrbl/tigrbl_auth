@@ -34,8 +34,16 @@ classifiers = [
 dependencies = [
     "tigrbl-identity-core==0.4.0.dev2",
     "tigrbl-identity-assurance-contracts==0.4.0.dev2",
+    "tigrbl-attestation-contracts==0.4.0.dev2",
+    "tigrbl-claim-contracts==0.4.0.dev2",
+    "tigrbl-did-contracts==0.4.0.dev2",
+    "tigrbl-digital-credential-contracts==0.4.0.dev2",
+    "tigrbl-public-key-authentication-contracts==0.4.0.dev2",
+    "tigrbl-replay-contracts==0.4.0.dev2",
+    "tigrbl-security-event-contracts==0.4.0.dev2",
     "tigrbl-security-trust-contracts==0.1.0",
     "tigrbl-token-contracts==0.4.0.dev2",
+    "tigrbl-workload-identity-contracts==0.4.0.dev2",
 ]
 
 [project.urls]

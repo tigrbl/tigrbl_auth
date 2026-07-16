@@ -1,6 +1,6 @@
 from abc import ABC
 
-from tigrbl_identity_contracts.public_key_authentication import (
+from tigrbl_public_key_authentication_contracts import (
     PublicKeyCredentialSource,
 )
 

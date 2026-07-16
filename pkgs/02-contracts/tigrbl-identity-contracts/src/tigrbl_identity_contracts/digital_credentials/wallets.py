@@ -1,12 +1,3 @@
-from typing import Protocol
-
-
-class WalletAttestationVerifierPort(Protocol):
-    def verify_wallet_attestation(self, attestation: bytes | str, /) -> bool: ...
-
-
-class KeyAttestationVerifierPort(Protocol):
-    def verify_key_attestation(self, attestation: bytes | str, /) -> bool: ...
-
-
-__all__ = ["KeyAttestationVerifierPort", "WalletAttestationVerifierPort"]
+"""Compatibility facade for wallet attestation contracts."""
+from tigrbl_digital_credential_contracts.wallets import *  # noqa: F403
+from tigrbl_digital_credential_contracts.wallets import __all__ as __all__

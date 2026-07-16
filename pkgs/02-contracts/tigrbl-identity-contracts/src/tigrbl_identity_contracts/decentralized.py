@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from .did import Did, DidResolutionResult, DidResolverPort
+from tigrbl_did_contracts import Did, DidResolutionResult, DidResolverPort
 
 DidResolver = DidResolverPort
 

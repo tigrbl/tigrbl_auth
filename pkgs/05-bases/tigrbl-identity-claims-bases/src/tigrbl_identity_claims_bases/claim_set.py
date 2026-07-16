@@ -3,7 +3,7 @@
 from abc import ABC
 from collections.abc import Sequence
 
-from tigrbl_identity_contracts.claims import Claim, ClaimSet, ClaimSetComposerPort
+from tigrbl_claim_contracts import Claim, ClaimSet, ClaimSetComposerPort
 
 
 class ClaimSetComposerBase(ClaimSetComposerPort, ABC):

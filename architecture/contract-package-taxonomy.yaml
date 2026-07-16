@@ -1,0 +1,41 @@
+version: 1
+layer: 02-contracts
+rules:
+  ownership: one-canonical-package-per-semantic-family
+  ports: capability-shaped-not-storage-shaped
+  protocol_wire_models: 50-protocols
+  durability: 01-storage-and-30-storage-runtime
+  implementations: 05-bases-10-concrete-20-providers
+families:
+  foundational:
+    claim: tigrbl-claim-contracts
+    replay: tigrbl-replay-contracts
+    token: tigrbl-token-contracts
+  identity_security:
+    identity: tigrbl-identity-contracts
+    identity_assurance: tigrbl-identity-assurance-contracts
+    did: tigrbl-did-contracts
+    workload_identity: tigrbl-workload-identity-contracts
+    public_key_authentication: tigrbl-public-key-authentication-contracts
+    digital_credential: tigrbl-digital-credential-contracts
+    attestation: tigrbl-attestation-contracts
+    security_event: tigrbl-security-event-contracts
+  release:
+    release_assurance: tigrbl-release-contracts
+  pending_extraction:
+    authorization: tigrbl-authorization-contracts
+    delegation: tigrbl-delegation-contracts
+    administration: tigrbl-administration-contracts
+    audit: tigrbl-audit-contracts
+    governance: tigrbl-governance-contracts
+    key: tigrbl-key-contracts
+    certificate: tigrbl-certificate-contracts
+    trust: tigrbl-trust-contracts
+    protected_artifact: tigrbl-protected-artifact-contracts
+compatibility_aggregates:
+  tigrbl-identity-contracts:
+    status: transitional
+    removal_condition: all-consumers-import-canonical-family-packages
+  tigrbl-security-trust-contracts:
+    status: transitional
+    removal_condition: key-certificate-trust-and-artifact-families-extracted

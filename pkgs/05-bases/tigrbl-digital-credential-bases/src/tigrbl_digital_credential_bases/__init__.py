@@ -1,6 +1,6 @@
 from abc import ABC
 
-from tigrbl_identity_contracts.digital_credentials import (
+from tigrbl_digital_credential_contracts import (
     CredentialFormatVerifierPort,
     CredentialIssuanceRequest,
     CredentialIssuanceResult,

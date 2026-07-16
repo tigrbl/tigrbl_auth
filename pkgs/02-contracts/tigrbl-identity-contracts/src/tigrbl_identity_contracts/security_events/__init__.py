@@ -1,14 +1,3 @@
-"""Security Event Token domain contracts."""
-
-from .events import SecurityEvent, SecurityEventSubject
-from .ports import SecurityEventReceiverPort, SecurityEventTransmitterPort
-from .subscriptions import SecurityEventDelivery, SecurityEventSubscription
-
-__all__ = [
-    "SecurityEvent",
-    "SecurityEventDelivery",
-    "SecurityEventReceiverPort",
-    "SecurityEventSubject",
-    "SecurityEventSubscription",
-    "SecurityEventTransmitterPort",
-]
+"""Compatibility facade for :mod:`tigrbl_security_event_contracts`."""
+from tigrbl_security_event_contracts import *  # noqa: F403
+from tigrbl_security_event_contracts import __all__ as __all__

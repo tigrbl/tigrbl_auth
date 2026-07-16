@@ -1,6 +1,6 @@
 from abc import ABC
 
-from tigrbl_identity_contracts.security_events import (
+from tigrbl_security_event_contracts import (
     SecurityEvent,
     SecurityEventReceiverPort,
     SecurityEventTransmitterPort,

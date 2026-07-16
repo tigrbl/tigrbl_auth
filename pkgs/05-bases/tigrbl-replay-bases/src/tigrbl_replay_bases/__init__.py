@@ -3,7 +3,7 @@
 from abc import ABC
 from hashlib import sha256
 
-from tigrbl_identity_contracts.replay import (
+from tigrbl_replay_contracts import (
     ReplayKey,
     ReplayReservationPort,
     ReplayReservationRequest,

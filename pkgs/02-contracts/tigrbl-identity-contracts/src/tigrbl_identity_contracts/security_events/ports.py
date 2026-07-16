@@ -1,14 +1,3 @@
-from typing import Protocol
-
-from .events import SecurityEvent
-
-
-class SecurityEventTransmitterPort(Protocol):
-    def transmit(self, event: SecurityEvent, subscriber: str, /) -> str: ...
-
-
-class SecurityEventReceiverPort(Protocol):
-    def receive(self, encoded_event: str | bytes, /) -> SecurityEvent: ...
-
-
-__all__ = ["SecurityEventReceiverPort", "SecurityEventTransmitterPort"]
+"""Compatibility facade for security-event ports."""
+from tigrbl_security_event_contracts.ports import *  # noqa: F403
+from tigrbl_security_event_contracts.ports import __all__ as __all__

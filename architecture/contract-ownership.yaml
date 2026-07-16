@@ -2,22 +2,23 @@ version: 1
 layer: 02-contracts
 owners:
   Did:
-    canonical: tigrbl_identity_contracts.did.identifiers.Did
-    compatibility: [tigrbl_identity_contracts.decentralized.Did]
+    canonical: tigrbl_did_contracts.identifiers.Did
+    compatibility: [tigrbl_identity_contracts.did.identifiers.Did, tigrbl_identity_contracts.decentralized.Did]
   DidResolutionResult:
-    canonical: tigrbl_identity_contracts.did.resolution.DidResolutionResult
-    compatibility: [tigrbl_identity_contracts.decentralized.DidResolutionResult]
+    canonical: tigrbl_did_contracts.resolution.DidResolutionResult
+    compatibility: [tigrbl_identity_contracts.did.resolution.DidResolutionResult, tigrbl_identity_contracts.decentralized.DidResolutionResult]
   SpiffeId:
-    canonical: tigrbl_identity_contracts.workloads.spiffe.SpiffeId
-    compatibility: [tigrbl_identity_contracts.workload_identity.SpiffeId]
+    canonical: tigrbl_workload_identity_contracts.spiffe.SpiffeId
+    compatibility: [tigrbl_identity_contracts.workloads.spiffe.SpiffeId, tigrbl_identity_contracts.workload_identity.SpiffeId]
   Svid:
-    canonical: tigrbl_identity_contracts.workloads.svid.Svid
-    compatibility: [tigrbl_identity_contracts.workload_identity.Svid]
+    canonical: tigrbl_workload_identity_contracts.svid.Svid
+    compatibility: [tigrbl_identity_contracts.workloads.svid.Svid, tigrbl_identity_contracts.workload_identity.Svid]
   SvidFormat:
-    canonical: tigrbl_identity_contracts.workloads.svid.SvidFormat
-    compatibility: [tigrbl_identity_contracts.workload_identity.SvidFormat]
+    canonical: tigrbl_workload_identity_contracts.svid.SvidFormat
+    compatibility: [tigrbl_identity_contracts.workloads.svid.SvidFormat, tigrbl_identity_contracts.workload_identity.SvidFormat]
   SpiffeTrustDomain:
-    canonical: tigrbl_identity_contracts.workloads.spiffe.TrustDomain
+    canonical: tigrbl_workload_identity_contracts.spiffe.TrustDomain
+    compatibility: [tigrbl_identity_contracts.workloads.spiffe.TrustDomain]
   AdaptiveTrustDomain:
     canonical: tigrbl_identity_contracts.adaptive_access.AdaptiveTrustDomain
   XacmlDecisionValue:
@@ -27,13 +28,22 @@ owners:
   CredentialVerificationError:
     canonical: tigrbl_identity_contracts.credentials.errors.CredentialVerificationError
   PublicKeyCredentialVerificationError:
-    canonical: tigrbl_identity_contracts.public_key_authentication.errors.PublicKeyCredentialVerificationError
+    canonical: tigrbl_public_key_authentication_contracts.errors.PublicKeyCredentialVerificationError
+    compatibility: [tigrbl_identity_contracts.public_key_authentication.errors.PublicKeyCredentialVerificationError]
   AttestationEvidence:
-    canonical: tigrbl_identity_contracts.attestation.AttestationEvidence
+    canonical: tigrbl_attestation_contracts.AttestationEvidence
+    compatibility: [tigrbl_identity_contracts.attestation.AttestationEvidence]
   KeyAttestationEvidence:
     canonical: tigrbl_security_trust_contracts.KeyAttestationEvidence
   DigitalCredential:
-    canonical: tigrbl_identity_contracts.digital_credentials.artifacts.DigitalCredential
+    canonical: tigrbl_digital_credential_contracts.artifacts.DigitalCredential
+    compatibility: [tigrbl_identity_contracts.digital_credentials.artifacts.DigitalCredential]
+  Claim:
+    canonical: tigrbl_claim_contracts.Claim
+    compatibility: [tigrbl_identity_contracts.claims.Claim]
+  SecurityEvent:
+    canonical: tigrbl_security_event_contracts.SecurityEvent
+    compatibility: [tigrbl_identity_contracts.security_events.SecurityEvent]
   VerifiedClaims:
     canonical: tigrbl_identity_assurance_contracts.VerifiedClaims
     compatibility: [tigrbl_identity_contracts.assurance.VerifiedClaims]
@@ -41,4 +51,5 @@ owners:
     canonical: tigrbl_identity_assurance_contracts.IdentityAssuranceRequest
     compatibility: [tigrbl_identity_contracts.oidc.identity_assurance.IdentityAssuranceRequest]
   ReplayReservationPort:
-    canonical: tigrbl_identity_contracts.replay.reservations.ReplayReservationPort
+    canonical: tigrbl_replay_contracts.ReplayReservationPort
+    compatibility: [tigrbl_identity_contracts.replay.reservations.ReplayReservationPort]

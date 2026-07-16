@@ -54,6 +54,14 @@ dependencies = [
     "tigrbl-identity-contracts==0.4.0.dev2",
     "tigrbl-identity-assurance-contracts==0.4.0.dev2",
     "tigrbl-token-contracts==0.4.0.dev2",
+    "tigrbl-attestation-contracts==0.4.0.dev2",
+    "tigrbl-claim-contracts==0.4.0.dev2",
+    "tigrbl-did-contracts==0.4.0.dev2",
+    "tigrbl-digital-credential-contracts==0.4.0.dev2",
+    "tigrbl-public-key-authentication-contracts==0.4.0.dev2",
+    "tigrbl-replay-contracts==0.4.0.dev2",
+    "tigrbl-security-event-contracts==0.4.0.dev2",
+    "tigrbl-workload-identity-contracts==0.4.0.dev2",
     "tigrbl-authz-policy-rules-concrete==0.4.0.dev2",
     "tigrbl-authz-policy-combiner-default==0.4.0.dev2",
     "tigrbl-authz-policy-evaluators-default==0.4.0.dev2",
@@ -522,6 +530,14 @@ tigrbl-identity-author = { path = "pkgs/60-runtime/tigrbl-identity-author", edit
 tigrbl-identity-contracts = { path = "pkgs/02-contracts/tigrbl-identity-contracts", editable = true }
 tigrbl-identity-assurance-contracts = { path = "pkgs/02-contracts/tigrbl-identity-assurance-contracts", editable = true }
 tigrbl-token-contracts = { path = "pkgs/02-contracts/tigrbl-token-contracts", editable = true }
+tigrbl-attestation-contracts = { path = "pkgs/02-contracts/tigrbl-attestation-contracts", editable = true }
+tigrbl-claim-contracts = { path = "pkgs/02-contracts/tigrbl-claim-contracts", editable = true }
+tigrbl-did-contracts = { path = "pkgs/02-contracts/tigrbl-did-contracts", editable = true }
+tigrbl-digital-credential-contracts = { path = "pkgs/02-contracts/tigrbl-digital-credential-contracts", editable = true }
+tigrbl-public-key-authentication-contracts = { path = "pkgs/02-contracts/tigrbl-public-key-authentication-contracts", editable = true }
+tigrbl-replay-contracts = { path = "pkgs/02-contracts/tigrbl-replay-contracts", editable = true }
+tigrbl-security-event-contracts = { path = "pkgs/02-contracts/tigrbl-security-event-contracts", editable = true }
+tigrbl-workload-identity-contracts = { path = "pkgs/02-contracts/tigrbl-workload-identity-contracts", editable = true }
 tigrbl-authz-policy-rules-concrete = { path = "pkgs/10-concrete/tigrbl-authz-policy-rules-concrete", editable = true }
 tigrbl-authz-policy-combiner-default = { path = "pkgs/10-concrete/tigrbl-authz-policy-combiner-default", editable = true }
 tigrbl-authz-policy-evaluators-default = { path = "pkgs/10-concrete/tigrbl-authz-policy-evaluators-default", editable = true }

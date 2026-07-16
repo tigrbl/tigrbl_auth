@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from .workloads import SpiffeId, Svid, SvidFormat, SvidProviderPort
+from tigrbl_workload_identity_contracts import SpiffeId, Svid, SvidFormat, SvidProviderPort
 
 WorkloadIdentityProvider = SvidProviderPort
 

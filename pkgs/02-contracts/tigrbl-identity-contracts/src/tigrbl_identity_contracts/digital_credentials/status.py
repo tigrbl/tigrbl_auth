@@ -1,16 +1,3 @@
-from dataclasses import dataclass
-from typing import Protocol
-
-
-@dataclass(frozen=True, slots=True)
-class CredentialStatusReference:
-    method: str
-    uri: str
-    index: str | int | None = None
-
-
-class CredentialStatusResolverPort(Protocol):
-    def resolve(self, reference: CredentialStatusReference, /) -> str: ...
-
-
-__all__ = ["CredentialStatusReference", "CredentialStatusResolverPort"]
+"""Compatibility facade for digital credential status contracts."""
+from tigrbl_digital_credential_contracts.status import *  # noqa: F403
+from tigrbl_digital_credential_contracts.status import __all__ as __all__
