@@ -20,8 +20,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
-    "tigrbl-security-trust-contracts==0.1.0",
-    "tigrbl-proof-of-possession-bases==0.4.0.dev2",
+    "tigrbl-dpop-confirmation-binding-concrete==0.4.0.dev2",
 ]
 
 [project.urls]

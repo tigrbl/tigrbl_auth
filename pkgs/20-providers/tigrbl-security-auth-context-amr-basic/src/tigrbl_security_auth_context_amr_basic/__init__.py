@@ -1,18 +1,5 @@
-from __future__ import annotations
+"""Compatibility facade for the layer-10 basic AMR evaluator."""
 
-from tigrbl_security_trust_contracts import AmrEvaluationRequest, AmrEvaluationResult, CapabilityMap
-from tigrbl_authentication_context_bases import AmrEvaluatorBase
-
-
-class BasicAmrEvaluator(AmrEvaluatorBase):
-    def supports(self) -> CapabilityMap:
-        return CapabilityMap(ops={"evaluate_amr": ("basic",)}, features=("amr",))
-
-    def evaluate_amr(self, request: AmrEvaluationRequest) -> AmrEvaluationResult:
-        required = {str(getattr(value, "value", value)) for value in request.required}
-        achieved = {str(getattr(value, "value", value)) for value in request.achieved}
-        missing = tuple(sorted(required - achieved))
-        return AmrEvaluationResult(not missing, request.achieved, missing, None if not missing else "amr_not_satisfied")
-
+from tigrbl_amr_evaluator_basic_concrete import BasicAmrEvaluator
 
 __all__ = ["BasicAmrEvaluator"]

@@ -230,6 +230,12 @@ dependencies = [
     "tigrbl-authorization-scope-set-matcher-concrete==0.4.0.dev2",
     "tigrbl-public-subject-identifier-concrete==0.4.0.dev2",
     "tigrbl-pairwise-subject-identifier-concrete==0.4.0.dev2",
+    "tigrbl-acr-evaluator-basic-concrete==0.4.0.dev2",
+    "tigrbl-amr-evaluator-basic-concrete==0.4.0.dev2",
+    "tigrbl-authorization-provenance-concrete==0.4.0.dev2",
+    "tigrbl-dpop-confirmation-binding-concrete==0.4.0.dev2",
+    "tigrbl-mtls-confirmation-binding-concrete==0.4.0.dev2",
+    "tigrbl-pkce-concrete==0.4.0.dev2",
     "tigrbl-identity-assurance-concrete==0.4.0.dev2",
     "tigrbl-capability==0.4.0.dev2",
     "tigrbl-default-capability==0.4.0.dev2",
@@ -505,6 +511,12 @@ tigrbl-identity-model-bases = { path = "pkgs/05-bases/tigrbl-identity-model-base
 tigrbl-jose-bases = { path = "pkgs/05-bases/tigrbl-jose-bases", editable = true }
 tigrbl-cose-bases = { path = "pkgs/05-bases/tigrbl-cose-bases", editable = true }
 tigrbl-resource-server-bases = { path = "pkgs/05-bases/tigrbl-resource-server-bases", editable = true }
+tigrbl-acr-evaluator-basic-concrete = { path = "pkgs/10-concrete/tigrbl-acr-evaluator-basic-concrete", editable = true }
+tigrbl-amr-evaluator-basic-concrete = { path = "pkgs/10-concrete/tigrbl-amr-evaluator-basic-concrete", editable = true }
+tigrbl-authorization-provenance-concrete = { path = "pkgs/10-concrete/tigrbl-authorization-provenance-concrete", editable = true }
+tigrbl-dpop-confirmation-binding-concrete = { path = "pkgs/10-concrete/tigrbl-dpop-confirmation-binding-concrete", editable = true }
+tigrbl-mtls-confirmation-binding-concrete = { path = "pkgs/10-concrete/tigrbl-mtls-confirmation-binding-concrete", editable = true }
+tigrbl-pkce-concrete = { path = "pkgs/10-concrete/tigrbl-pkce-concrete", editable = true }
 tigrbl-security-certificate-mtls = { path = "pkgs/20-providers/tigrbl-security-certificate-mtls", editable = true }
 tigrbl-security-dpop-cnf-binding-validator = { path = "pkgs/20-providers/tigrbl-security-dpop-cnf-binding-validator", editable = true }
 tigrbl-security-mtls-cnf-binding-validator = { path = "pkgs/20-providers/tigrbl-security-mtls-cnf-binding-validator", editable = true }

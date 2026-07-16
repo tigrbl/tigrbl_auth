@@ -1,0 +1,161 @@
+version: 1
+layer: 20-providers
+rules:
+  ownership: one-replaceable-environment-implementation-per-package
+  implements: layer-02-port-or-layer-05-base
+  allowed_dependencies:
+    - 00-primitives
+    - 02-contracts
+    - 05-bases
+    - 10-concrete
+    - approved-20-provider-collaborators
+  forbidden_dependencies:
+    - 01-storage
+    - 30-storage-runtime
+    - 40-capabilities
+    - 50-protocols
+    - 60-runtime
+    - 70-facade
+    - 80-apis
+  deterministic_behavior: 10-concrete
+  durability: 01-storage-and-30-storage-runtime
+  orchestration: 40-capabilities
+  protocol_versions: 50-protocols
+  runtime_mounting: 60-runtime
+  http_surfaces: 80-apis
+
+canonical_providers:
+  authenticators:
+    - tigrbl-authenticator-api-key-local
+    - tigrbl-authenticator-client-secret-local
+    - tigrbl-authenticator-dpop-proof
+    - tigrbl-authenticator-federated-oidc
+    - tigrbl-authenticator-mtls-client-cert
+    - tigrbl-authenticator-otp-local
+    - tigrbl-authenticator-password-local
+    - tigrbl-authenticator-recovery-code-local
+    - tigrbl-authenticator-remote-introspection
+    - tigrbl-authenticator-service-key-local
+    - tigrbl-authenticator-session-local
+  attestation:
+    - tigrbl-attestation-appraiser
+    - tigrbl-attestation-packed-provider
+    - tigrbl-attestation-reference-provider
+    - tigrbl-attestation-tpm-provider
+    - tigrbl-attestation-u2f-provider
+    - tigrbl-corim-reference-memory-provider
+    - tigrbl-eat-verifier-provider
+    - tigrbl-fido-metadata-service-provider
+    - tigrbl-key-attestation-verifier
+    - tigrbl-platform-attestation-provider
+    - tigrbl-wallet-attestation-verifier
+  credentials_and_claims:
+    - tigrbl-digital-credential-status-provider
+    - tigrbl-digital-credential-trust-provider
+    - tigrbl-security-claims-provider-local
+  cryptography_and_trust:
+    - tigrbl-certificate-path-validator
+    - tigrbl-certificate-status-provider
+    - tigrbl-secret-hashing-bcrypt-provider
+    - tigrbl-security-cose
+    - tigrbl-security-signing-pqc
+    - tigrbl-trust-anchor-provider
+  policy:
+    - tigrbl-authz-policy-decision-engine
+  remote_and_resolution:
+    - tigrbl-did-resolver-provider
+    - tigrbl-security-oidc-federation-provider
+    - tigrbl-security-token-introspection-client
+    - tigrbl-security-token-jwks-cache
+    - tigrbl-security-webfinger-provider
+    - tigrbl-spiffe-bundle-provider
+    - tigrbl-spiffe-workload-api-provider
+    - tigrbl-svid-verifier-provider
+  explicitly_ephemeral:
+    - tigrbl-replay-memory-provider
+
+compatibility_or_migration_packages:
+  tigrbl-authn-credentials:
+    target: tigrbl-principal-authentication
+    target_layer: 40-capabilities
+  tigrbl-authz-policy:
+    target: tigrbl-policy-evaluation-capability
+    target_layer: 40-capabilities
+  tigrbl-authz-policy-admin-gate:
+    target: admin-api-runtime-gate
+    target_layer: 60-runtime-or-80-apis
+  tigrbl-authz-resource-server-verifier:
+    target: tigrbl-protected-resource-authorization-capability
+    target_layer: 40-capabilities
+  tigrbl-did-controller-provider:
+    target: did-controller-capability
+    target_layer: 40-capabilities
+  tigrbl-digital-credential-issuer-local:
+    target: tigrbl-digital-credential-issuance
+    target_layer: 40-capabilities
+  tigrbl-digital-presentation-verifier:
+    target: tigrbl-digital-credential-presentation
+    target_layer: 40-capabilities
+  tigrbl-identity-admin:
+    target: tigrbl-identity-admin-control-plane
+    target_layer: 40-capabilities
+  tigrbl-identity-admin-auth-anomaly-detector:
+    target: anomaly-rules-tables-ops-and-capability
+    target_layer: 10-01-30-40
+  tigrbl-identity-admin-relationship-graph:
+    target: relationship-graph-tables-ops-and-capability
+    target_layer: 10-01-30-40
+  tigrbl-identity-jose:
+    target: jose-concrete-providers-and-protocols
+    target_layer: 10-20-50
+  tigrbl-mdoc-issuer-provider:
+    target: iso-mdoc-protocol-plus-neutral-signing-providers
+    target_layer: 50-protocols
+  tigrbl-mdoc-verifier-provider:
+    target: iso-mdoc-protocol-plus-neutral-trust-providers
+    target_layer: 50-protocols
+  tigrbl-security-auth-context-acr-basic:
+    target: tigrbl-acr-evaluator-basic-concrete
+    target_layer: 10-concrete
+  tigrbl-security-auth-context-amr-basic:
+    target: tigrbl-amr-evaluator-basic-concrete
+    target_layer: 10-concrete
+  tigrbl-security-authorization-provenance-builder:
+    target: tigrbl-authorization-provenance-concrete
+    target_layer: 10-concrete
+  tigrbl-security-certificate-mtls:
+    target: tigrbl-mtls-confirmation-binding-concrete
+    target_layer: 10-concrete
+  tigrbl-security-dpop-cnf-binding-validator:
+    target: tigrbl-dpop-confirmation-binding-concrete
+    target_layer: 10-concrete
+  tigrbl-security-mtls-cnf-binding-validator:
+    target: tigrbl-mtls-confirmation-binding-concrete
+    target_layer: 10-concrete
+  tigrbl-security-proof-dpop:
+    target: tigrbl-dpop-confirmation-binding-concrete
+    target_layer: 10-concrete
+  tigrbl-security-proof-pkce:
+    target: tigrbl-pkce-concrete
+    target_layer: 10-concrete
+  tigrbl-security-sender-constraint-validator:
+    target: sender-constraint-validation-capability
+    target_layer: 40-capabilities
+  tigrbl-security-subject-pairwise-provider:
+    target: tigrbl-pairwise-subject-identifier-concrete
+    target_layer: 10-concrete
+  tigrbl-set-receiver-provider:
+    target: tigrbl-security-event-protocol-set
+    target_layer: 50-protocols
+  tigrbl-set-transmitter-provider:
+    target: tigrbl-security-event-protocol-set
+    target_layer: 50-protocols
+
+canonical_deterministic_extractions:
+  - tigrbl-acr-evaluator-basic-concrete
+  - tigrbl-amr-evaluator-basic-concrete
+  - tigrbl-authorization-provenance-concrete
+  - tigrbl-dpop-confirmation-binding-concrete
+  - tigrbl-mtls-confirmation-binding-concrete
+  - tigrbl-pairwise-subject-identifier-concrete
+  - tigrbl-pkce-concrete

@@ -3,8 +3,11 @@ from __future__ import annotations
 import ast
 from pathlib import Path
 
+import yaml
+
 ROOT = Path(__file__).resolve().parents[2]
 PROVIDERS = ROOT / "pkgs" / "20-providers"
+PROVIDER_TAXONOMY = ROOT / "architecture" / "provider-package-taxonomy.yaml"
 
 TRUST_BASE_PROVIDER_PACKAGES = {
     "tigrbl-authenticator-api-key-local",
@@ -104,6 +107,8 @@ def test_provider_packages_have_explicit_trust_boundary_kind() -> None:
 
 
 def test_trust_base_provider_packages_expose_base_implementers() -> None:
+    taxonomy = yaml.safe_load(PROVIDER_TAXONOMY.read_text(encoding="utf-8"))
+    migrating = set(taxonomy["compatibility_or_migration_packages"])
     packages = [
         path for path in PROVIDERS.iterdir() if (path / "pyproject.toml").exists()
     ]
@@ -113,7 +118,9 @@ def test_trust_base_provider_packages_expose_base_implementers() -> None:
     for package in packages:
         if (
             package.name
-            in COMPOSITION_PROVIDER_PACKAGES | DIRECT_CONTRACT_PROVIDER_PACKAGES
+            in COMPOSITION_PROVIDER_PACKAGES
+            | DIRECT_CONTRACT_PROVIDER_PACKAGES
+            | migrating
         ):
             continue
         implementers: list[str] = []

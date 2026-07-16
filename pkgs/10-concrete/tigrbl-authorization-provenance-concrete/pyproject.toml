@@ -1,0 +1,14 @@
+[project]
+name = "tigrbl-authorization-provenance-concrete"
+version = "0.4.0.dev2"
+description = "Deterministic authorization and delegation provenance builders."
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = ["tigrbl-identity-core==0.4.0.dev2", "tigrbl-security-provenance-bases==0.1.0", "tigrbl-security-trust-contracts==0.1.0"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tigrbl_authorization_provenance_concrete", from = "src" }]

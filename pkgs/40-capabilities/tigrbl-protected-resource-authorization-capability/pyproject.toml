@@ -9,6 +9,8 @@ dependencies = [
     "tigrbl-capability==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
     "tigrbl-security-trust-contracts==0.1.0",
+    "tigrbl-dpop-confirmation-binding-concrete==0.4.0.dev2",
+    "tigrbl-mtls-confirmation-binding-concrete==0.4.0.dev2",
 ]
 
 [build-system]

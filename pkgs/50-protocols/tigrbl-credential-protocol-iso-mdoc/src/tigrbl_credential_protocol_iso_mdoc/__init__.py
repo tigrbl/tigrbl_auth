@@ -2,6 +2,7 @@ from .compatibility import IsoMdocCompatibility, compatibility
 from .features import FEATURES_BY_VERSION, supports
 from .errors import IsoMdocProtocolError
 from .migrations import migrate_document
+from .issuance import MdocIssuerProvider
 from .schemas import (
     DeviceRequest,
     DeviceResponse,
@@ -28,6 +29,7 @@ from .versions import (
     IsoMdocVersion,
     select_version,
 )
+from .verification import MdocVerifierProvider
 
 __all__ = [
     "CURRENT_VERSION",
@@ -41,6 +43,8 @@ __all__ = [
     "IssuerSignedItem",
     "ItemsRequest",
     "Mdoc",
+    "MdocIssuerProvider",
+    "MdocVerifierProvider",
     "MobileSecurityObject",
     "SessionTranscript",
     "VERSION_HISTORY",

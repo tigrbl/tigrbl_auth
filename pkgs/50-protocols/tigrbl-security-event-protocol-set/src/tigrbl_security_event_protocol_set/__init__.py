@@ -10,8 +10,10 @@ from .compatibility import COMPATIBILITY_PATHS, SetCompatibility, compatibility
 from .errors import SetProtocolError, SetUsageError, UnsupportedSetMediaTypeError
 from .features import FEATURES_BY_VERSION, supports
 from .migrations import migrate_claims
+from .reception import SetReceiverProvider, SetTokenVerifier, VerifiedSetToken
 from .schemas import SET_JWT_CARRIER, SetCarrier, select_carrier
 from .versions import CURRENT_VERSION, VERSION_HISTORY, SetVersion, select_version
+from .transmission import SetSigner, SetTransmitterProvider
 
 
 def capability_report() -> dict[str, object]:
@@ -36,9 +38,14 @@ __all__ = [
     "SetCarrier",
     "SetCompatibility",
     "SetProtocolError",
+    "SetReceiverProvider",
+    "SetSigner",
+    "SetTokenVerifier",
+    "SetTransmitterProvider",
     "SetUsageError",
     "SetVersion",
     "UnsupportedSetMediaTypeError",
+    "VerifiedSetToken",
     "capability_report",
     "compatibility",
     "compose_set_claim_set",

@@ -16,6 +16,8 @@ from tigrbl_identity_contracts.resource_server import (
 )
 from tigrbl_security_trust_contracts import DPoPBinding, MTLSBinding
 
+from .sender_constraints import SenderConstraintValidator
+
 
 class ProtectedResourceAuthorizationCapability(Capability):
     """Delegate normalized protected-resource decisions to one verifier."""
@@ -87,4 +89,5 @@ class ProtectedResourceAuthorizationCapability(Capability):
 
 __all__ = [
     "ProtectedResourceAuthorizationCapability",
+    "SenderConstraintValidator",
 ]

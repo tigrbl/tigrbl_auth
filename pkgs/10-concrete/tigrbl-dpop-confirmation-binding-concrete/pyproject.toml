@@ -1,0 +1,14 @@
+[project]
+name = "tigrbl-dpop-confirmation-binding-concrete"
+version = "0.4.0.dev2"
+description = "Deterministic DPoP confirmation binding validation."
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = ["tigrbl-identity-contracts==0.4.0.dev2", "tigrbl-proof-of-possession-bases==0.4.0.dev2", "tigrbl-security-trust-contracts==0.1.0"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tigrbl_dpop_confirmation_binding_concrete", from = "src" }]

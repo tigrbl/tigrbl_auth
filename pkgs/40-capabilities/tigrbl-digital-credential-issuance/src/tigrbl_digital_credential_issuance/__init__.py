@@ -20,6 +20,8 @@ from tigrbl_identity_contracts.digital_credentials import (
     WalletAttestationVerifierPort,
 )
 
+from .issuer_dispatch import IssuanceHandler, LocalDigitalCredentialIssuer
+
 
 ConfigurationWriter: TypeAlias = Callable[[CredentialConfiguration], object]
 ConfigurationReader: TypeAlias = Callable[[str], CredentialConfiguration | None]
@@ -109,9 +111,7 @@ class DigitalCredentialIssuanceCapability(Capability):
         if self._wallet_verifier is None:
             raise LookupError("wallet attestation verifier is not configured")
         return bool(
-            await _resolve(
-                self._wallet_verifier.verify_wallet_attestation(value)
-            )
+            await _resolve(self._wallet_verifier.verify_wallet_attestation(value))
         )
 
     async def record_issuance(
@@ -148,5 +148,7 @@ __all__ = [
     "ConfigurationWriter",
     "DigitalCredentialIssuanceCapability",
     "IssuanceRecorder",
+    "IssuanceHandler",
+    "LocalDigitalCredentialIssuer",
     "OfferRecorder",
 ]

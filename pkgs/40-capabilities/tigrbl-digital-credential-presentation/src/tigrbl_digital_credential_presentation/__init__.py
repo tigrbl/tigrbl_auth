@@ -16,6 +16,8 @@ from tigrbl_identity_contracts.digital_credentials import (
     PresentationVerifierPort,
 )
 
+from .format_dispatch import DispatchingPresentationVerifier, PresentationHandler
+
 ReplayConsumer = Callable[[str, str], object]
 ConsentChecker = Callable[[str, PresentationRequest], object]
 TransactionRecorder = Callable[[str, PresentationRequest], object]
@@ -131,6 +133,8 @@ class DigitalCredentialPresentationCapability(Capability):
 __all__ = [
     "ConsentChecker",
     "DigitalCredentialPresentationCapability",
+    "DispatchingPresentationVerifier",
+    "PresentationHandler",
     "ReplayConsumer",
     "ResultRecorder",
     "TransactionRecorder",

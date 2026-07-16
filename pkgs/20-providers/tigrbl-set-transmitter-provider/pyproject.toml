@@ -4,7 +4,7 @@ version = "0.4.0.dev2"
 description = "RFC 8417 Security Event Token transmitter provider."
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
-dependencies = ["tigrbl-identity-contracts==0.4.0.dev2", "tigrbl-security-event-bases==0.4.0.dev2", "tigrbl-set-concrete==0.4.0.dev2"]
+dependencies = ["tigrbl-security-event-protocol-set==0.4.0.dev2"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
