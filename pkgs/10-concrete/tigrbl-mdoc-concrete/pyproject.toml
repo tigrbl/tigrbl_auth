@@ -3,7 +3,7 @@ name="tigrbl-mdoc-concrete"
 version="0.4.0.dev2"
 requires-python=">=3.10,<3.15"
 license="Apache-2.0"
-dependencies=["tigrbl-digital-credential-bases==0.4.0.dev2"]
+dependencies=["tigrbl-mdoc-credential-concrete==0.4.0.dev2","tigrbl-credential-protocol-iso-mdoc==0.4.0.dev2"]
 [build-system]
 requires=["poetry-core>=1.0.0"]
 build-backend="poetry.core.masonry.api"

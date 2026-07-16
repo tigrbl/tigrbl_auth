@@ -20,6 +20,10 @@ class CredentialFormatBase(ABC):
     format_identifier: str
 
 
+class PresentationFormatBase(ABC):
+    format_identifier: str
+
+
 class CredentialIssuerBase(CredentialIssuerPort, ABC):
     def issue(self, request: CredentialIssuanceRequest, /) -> CredentialIssuanceResult:
         raise NotImplementedError
@@ -55,5 +59,6 @@ __all__ = [
     "CredentialStatusResolverBase",
     "CredentialVerifierBase",
     "PresentationVerifierBase",
+    "PresentationFormatBase",
     "WalletAttestationVerifierBase",
 ]

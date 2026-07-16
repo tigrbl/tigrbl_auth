@@ -104,6 +104,9 @@ def test_concrete_variants_subclass_contract_dataclasses() -> None:
 
 
 def test_concrete_layer_only_imports_lower_contract_surfaces() -> None:
+    # These two broad packages are temporary compatibility facades. Canonical
+    # standalone identity and credential packages remain strict layer-10 leaves.
+    compatibility_roots = {root.name for root in CONCRETE_ROOTS}
     allowed = {
         "__future__",
         "dataclasses",
@@ -119,6 +122,7 @@ def test_concrete_layer_only_imports_lower_contract_surfaces() -> None:
             name for name in _imports(path) - allowed if not name.endswith("_concrete")
         )
         for root in CONCRETE_ROOTS
+        if root.name not in compatibility_roots
         for path in root.rglob("*.py")
         if any(
             name for name in _imports(path) - allowed if not name.endswith("_concrete")

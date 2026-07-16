@@ -1,19 +1,6 @@
-from tigrbl_claim_bases import ClaimBase
-from tigrbl_identity_core import ClaimNameKind, ClaimType, ClaimValueType
+"""Compatibility alias; CWT label 6 is owned by the layer-50 mapping."""
 
+from tigrbl_claim_issued_at_concrete import IssuedAtClaim
 
-class CwtIssuedAtClaim(ClaimBase):
-    claim_name = 6
-    default_name_kind = ClaimNameKind.INTEGER_LABEL
-    default_registry = "IANA CWT Claims"
-    default_claim_type = ClaimType.PROTOCOL
-    default_value_type = ClaimValueType.TIMESTAMP
-    default_standards = ("RFC8392",)
-
-    @classmethod
-    def validate_value(cls, value):
-        if not (isinstance(value, int) and not isinstance(value, bool)):
-            raise ValueError("CWT claim 6 has an invalid value")
-
-
+CwtIssuedAtClaim = IssuedAtClaim
 __all__ = ["CwtIssuedAtClaim"]

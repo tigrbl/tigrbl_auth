@@ -6,13 +6,14 @@ readme="README.md"
 requires-python=">=3.10,<3.15"
 dependencies=[
   "tigrbl-identity-contracts==0.4.0.dev2",
-  "tigrbl-claim-cwt-issuer-concrete==0.4.0.dev2",
-  "tigrbl-claim-cwt-subject-concrete==0.4.0.dev2",
-  "tigrbl-claim-cwt-audience-concrete==0.4.0.dev2",
-  "tigrbl-claim-cwt-expiration-concrete==0.4.0.dev2",
-  "tigrbl-claim-cwt-not-before-concrete==0.4.0.dev2",
-  "tigrbl-claim-cwt-issued-at-concrete==0.4.0.dev2",
-  "tigrbl-claim-cwt-id-concrete==0.4.0.dev2",
+  "tigrbl-claim-bases==0.4.0.dev2",
+  "tigrbl-claim-issuer-concrete==0.4.0.dev2",
+  "tigrbl-claim-subject-concrete==0.4.0.dev2",
+  "tigrbl-claim-audience-concrete==0.4.0.dev2",
+  "tigrbl-claim-expiration-concrete==0.4.0.dev2",
+  "tigrbl-claim-not-before-concrete==0.4.0.dev2",
+  "tigrbl-claim-issued-at-concrete==0.4.0.dev2",
+  "tigrbl-claim-jwt-id-concrete==0.4.0.dev2",
 ]
 [build-system]
 requires=["poetry-core>=1.0.0"]

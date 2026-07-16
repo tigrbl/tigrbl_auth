@@ -1,34 +1,4 @@
-from .device_request import (
-    DeviceRequest,
-    DocRequest,
-    ItemsRequest,
-    parse_device_request,
-)
-from .device_response import DeviceResponse, DeviceResponseStatus, parse_device_response
-from .issuer_signed import IssuerSigned, IssuerSignedItem, parse_issuer_signed
-from .mdoc import Mdoc, parse_mdoc
-from .mobile_security_object import (
-    MobileSecurityObject,
-    ValidityInfo,
-    parse_mobile_security_object,
-)
-from .session_transcript import SessionTranscript
+"""Compatibility facade for the canonical mdoc credential and protocol owners."""
 
-__all__ = [
-    "DeviceRequest",
-    "DeviceResponse",
-    "DeviceResponseStatus",
-    "DocRequest",
-    "IssuerSigned",
-    "IssuerSignedItem",
-    "ItemsRequest",
-    "Mdoc",
-    "MobileSecurityObject",
-    "SessionTranscript",
-    "ValidityInfo",
-    "parse_device_request",
-    "parse_device_response",
-    "parse_issuer_signed",
-    "parse_mdoc",
-    "parse_mobile_security_object",
-]
+from tigrbl_credential_protocol_iso_mdoc import *  # noqa: F403
+from tigrbl_credential_protocol_iso_mdoc import __all__

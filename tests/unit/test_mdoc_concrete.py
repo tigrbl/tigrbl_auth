@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 
 import pytest
-from tigrbl_mdoc_concrete import (
+from tigrbl_credential_protocol_iso_mdoc import (
     DeviceResponseStatus,
     SessionTranscript,
     parse_device_request,

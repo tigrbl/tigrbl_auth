@@ -91,6 +91,11 @@ dependencies = [
     "tigrbl-mtls-certificate-credential-concrete==0.4.0.dev2",
     "tigrbl-dpop-key-credential-concrete==0.4.0.dev2",
     "tigrbl-sd-jwt-vc-concrete==0.4.0.dev2",
+    "tigrbl-sd-jwt-vc-credential-concrete==0.4.0.dev2",
+    "tigrbl-mdoc-credential-concrete==0.4.0.dev2",
+    "tigrbl-verifiable-credential-concrete==0.4.0.dev2",
+    "tigrbl-verifiable-presentation-concrete==0.4.0.dev2",
+    "tigrbl-eat-evidence-concrete==0.4.0.dev2",
     "tigrbl-jose-concrete==0.4.0.dev2",
     "tigrbl-sd-jwt-concrete==0.4.0.dev2",
     "tigrbl-svid-concrete==0.4.0.dev2",
@@ -220,6 +225,8 @@ dependencies = [
     "tigrbl-attestation-protocol-eat==0.4.0.dev2",
     "tigrbl-attestation-protocol-corim==0.4.0.dev2",
     "tigrbl-credential-profile-sd-jwt-vc==0.4.0.dev2",
+    "tigrbl-credential-protocol-iso-mdoc==0.4.0.dev2",
+    "tigrbl-credential-protocol-w3c-vcdm==0.4.0.dev2",
     "tigrbl-authorization-scope-set-matcher-concrete==0.4.0.dev2",
     "tigrbl-public-subject-identifier-concrete==0.4.0.dev2",
     "tigrbl-pairwise-subject-identifier-concrete==0.4.0.dev2",
@@ -673,6 +680,8 @@ tigrbl-security-event-protocol-set = { path = "pkgs/50-protocols/tigrbl-security
 tigrbl-attestation-protocol-eat = { path = "pkgs/50-protocols/tigrbl-attestation-protocol-eat", editable = true }
 tigrbl-attestation-protocol-corim = { path = "pkgs/50-protocols/tigrbl-attestation-protocol-corim", editable = true }
 tigrbl-credential-profile-sd-jwt-vc = { path = "pkgs/50-protocols/tigrbl-credential-profile-sd-jwt-vc", editable = true }
+tigrbl-credential-protocol-iso-mdoc = { path = "pkgs/50-protocols/tigrbl-credential-protocol-iso-mdoc", editable = true }
+tigrbl-credential-protocol-w3c-vcdm = { path = "pkgs/50-protocols/tigrbl-credential-protocol-w3c-vcdm", editable = true }
 tigrbl-authorization-scope-set-matcher-concrete = { path = "pkgs/10-concrete/tigrbl-authorization-scope-set-matcher-concrete", editable = true }
 tigrbl-public-subject-identifier-concrete = { path = "pkgs/10-concrete/tigrbl-public-subject-identifier-concrete", editable = true }
 tigrbl-pairwise-subject-identifier-concrete = { path = "pkgs/10-concrete/tigrbl-pairwise-subject-identifier-concrete", editable = true }
@@ -700,6 +709,11 @@ tigrbl-mfa-factor-concrete = { path = "pkgs/10-concrete/tigrbl-mfa-factor-concre
 tigrbl-mtls-certificate-credential-concrete = { path = "pkgs/10-concrete/tigrbl-mtls-certificate-credential-concrete", editable = true }
 tigrbl-dpop-key-credential-concrete = { path = "pkgs/10-concrete/tigrbl-dpop-key-credential-concrete", editable = true }
 tigrbl-sd-jwt-vc-concrete = { path = "pkgs/10-concrete/tigrbl-sd-jwt-vc-concrete", editable = true }
+tigrbl-sd-jwt-vc-credential-concrete = { path = "pkgs/10-concrete/tigrbl-sd-jwt-vc-credential-concrete", editable = true }
+tigrbl-mdoc-credential-concrete = { path = "pkgs/10-concrete/tigrbl-mdoc-credential-concrete", editable = true }
+tigrbl-verifiable-credential-concrete = { path = "pkgs/10-concrete/tigrbl-verifiable-credential-concrete", editable = true }
+tigrbl-verifiable-presentation-concrete = { path = "pkgs/10-concrete/tigrbl-verifiable-presentation-concrete", editable = true }
+tigrbl-eat-evidence-concrete = { path = "pkgs/10-concrete/tigrbl-eat-evidence-concrete", editable = true }
 tigrbl-mdoc-concrete = { path = "pkgs/10-concrete/tigrbl-mdoc-concrete", editable = true }
 tigrbl-vcdm-concrete = { path = "pkgs/10-concrete/tigrbl-vcdm-concrete", editable = true }
 tigrbl-eat-concrete = { path = "pkgs/10-concrete/tigrbl-eat-concrete", editable = true }

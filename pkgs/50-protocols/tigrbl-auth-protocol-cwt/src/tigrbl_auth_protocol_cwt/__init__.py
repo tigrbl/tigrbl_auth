@@ -5,7 +5,14 @@ from tigrbl_identity_contracts.protocol_processing import (
 )
 
 from .bindings import CAPABILITY_REQUIREMENTS
-from .claims import CWT_REGISTERED_CLAIMS, compose_cwt_claim_set
+from .claims import (
+    CWT_CLAIM_BY_LABEL,
+    CWT_LABEL_BY_CLAIM,
+    CWT_REGISTERED_CLAIMS,
+    CwtClaimBinding,
+    compose_cwt_claim_set,
+    cwt_label_for,
+)
 from .compatibility import COMPATIBILITY_PATHS, CwtCompatibility, compatibility
 from .errors import CwtProtocolError, UnsupportedCwtMediaTypeError
 from .features import FEATURES_BY_VERSION, supports
@@ -38,6 +45,9 @@ __all__ = [
     "CURRENT_VERSION",
     "CWT_CARRIER",
     "CWT_REGISTERED_CLAIMS",
+    "CWT_CLAIM_BY_LABEL",
+    "CWT_LABEL_BY_CLAIM",
+    "CwtClaimBinding",
     "FEATURES_BY_VERSION",
     "VERSION_HISTORY",
     "VERSION_PUBLISHED",
@@ -50,6 +60,7 @@ __all__ = [
     "capability_report",
     "compatibility",
     "compose_cwt_claim_set",
+    "cwt_label_for",
     "migrate_claims",
     "select_carrier",
     "select_version",

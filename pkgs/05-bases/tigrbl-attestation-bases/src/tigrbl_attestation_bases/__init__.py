@@ -20,9 +20,7 @@ class EvidenceVerifierBase(EvidenceVerifierPort, ABC):
 
 
 class AttestationAppraiserBase(AttestationAppraiserPort, ABC):
-    def appraise(
-        self, evidence: VerifiedAttestationEvidence, /
-    ) -> AppraisalResult:
+    def appraise(self, evidence: VerifiedAttestationEvidence, /) -> AppraisalResult:
         raise NotImplementedError
 
 
@@ -35,8 +33,13 @@ class ReferenceManifestBase(ABC):
     """Common extension point for CoRIM-family and other reference manifests."""
 
 
+class AttestationEvidenceBase(AttestationEvidence, ABC):
+    """Canonical semantic base for concrete attestation evidence objects."""
+
+
 __all__ = [
     "AttestationAppraiserBase",
+    "AttestationEvidenceBase",
     "EvidenceVerifierBase",
     "ReferenceManifestBase",
     "ReferenceMaterialProviderBase",

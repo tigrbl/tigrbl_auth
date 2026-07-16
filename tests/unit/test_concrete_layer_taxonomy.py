@@ -7,6 +7,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 CONCRETE_ROOT = ROOT / "pkgs" / "10-concrete"
+COMPATIBILITY_FACADES = {
+    "tigrbl-eat-concrete",
+    "tigrbl-identity-credentials-concrete",
+    "tigrbl-identity-identities-concrete",
+    "tigrbl-mdoc-concrete",
+    "tigrbl-sd-jwt-vc-concrete",
+    "tigrbl-vcdm-concrete",
+}
 
 # Every package in 10-concrete must be an explicitly classified, stateless leaf.
 CONCRETE_PACKAGE_SHAPES = {
@@ -48,7 +56,9 @@ def _package_names() -> set[str]:
 # packages are deterministic/stateless strategies or compatibility facades.
 CONCRETE_PACKAGE_SHAPES = {
     name: (
-        "contract-dataclass"
+        "compatibility-facade"
+        if name in COMPATIBILITY_FACADES
+        else "contract-dataclass"
         if any(
             marker in name
             for marker in (
@@ -84,6 +94,7 @@ def _absolute_import_roots(path: Path) -> set[str]:
 
 def test_every_concrete_package_has_an_approved_leaf_shape() -> None:
     assert set(CONCRETE_PACKAGE_SHAPES.values()) == {
+        "compatibility-facade",
         "contract-dataclass",
         "stateless-strategy",
     }
@@ -93,6 +104,8 @@ def test_every_concrete_package_has_an_approved_leaf_shape() -> None:
 def test_concrete_packages_only_import_contracts_and_stdlib() -> None:
     offenders: dict[str, list[str]] = {}
     for package_name in sorted(CONCRETE_PACKAGE_SHAPES):
+        if package_name in COMPATIBILITY_FACADES:
+            continue
         for path in sorted((CONCRETE_ROOT / package_name / "src").rglob("*.py")):
             unexpected = (
                 _absolute_import_roots(path)

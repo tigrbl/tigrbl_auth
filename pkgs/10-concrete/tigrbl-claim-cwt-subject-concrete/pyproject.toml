@@ -2,7 +2,7 @@
 name="tigrbl-claim-cwt-subject-concrete"
 version="0.4.0.dev2"
 requires-python=">=3.10,<3.15"
-dependencies=["tigrbl-identity-core==0.4.0.dev2","tigrbl-claim-bases==0.4.0.dev2"]
+dependencies=["tigrbl-claim-subject-concrete==0.4.0.dev2"]
 [build-system]
 requires=["poetry-core>=1.0.0"]
 build-backend="poetry.core.masonry.api"

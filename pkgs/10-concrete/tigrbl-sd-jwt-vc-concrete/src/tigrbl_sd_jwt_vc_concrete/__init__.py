@@ -1,20 +1,11 @@
-from .claims import SdJwtVcClaimSetPayload, parse_sd_jwt_vc_claims
-from .metadata import SdJwtVcTypeMetadata, parse_type_metadata
-from .status import SdJwtVcStatusReference, parse_status_reference
-from .types import DRAFT_REVISION, MEDIA_TYPE, TYP, SdJwtVc, parse_sd_jwt_vc
-from .validation import validate_sd_jwt_vc
+"""Compatibility facade for the canonical SD-JWT VC object and profile owner."""
 
-__all__ = [
-    "DRAFT_REVISION",
-    "MEDIA_TYPE",
-    "TYP",
-    "SdJwtVc",
-    "SdJwtVcClaimSetPayload",
-    "SdJwtVcStatusReference",
-    "SdJwtVcTypeMetadata",
-    "parse_sd_jwt_vc",
-    "parse_sd_jwt_vc_claims",
-    "parse_status_reference",
-    "parse_type_metadata",
-    "validate_sd_jwt_vc",
-]
+from tigrbl_credential_profile_sd_jwt_vc import *  # noqa: F403
+from tigrbl_credential_profile_sd_jwt_vc import __all__ as _profile_exports
+from tigrbl_sd_jwt_vc_credential_concrete import SdJwtVcCredential
+
+SdJwtVc = SdJwtVcCredential
+DRAFT_REVISION = "draft-ietf-oauth-sd-jwt-vc-17"
+MEDIA_TYPE = "application/dc+sd-jwt"
+TYP = "dc+sd-jwt"
+__all__ = [*_profile_exports, "DRAFT_REVISION", "MEDIA_TYPE", "SdJwtVc", "TYP"]

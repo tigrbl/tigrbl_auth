@@ -1,0 +1,11 @@
+[project]
+name="tigrbl-credential-protocol-iso-mdoc"
+version="0.4.0.dev2"
+requires-python=">=3.10,<3.15"
+license="Apache-2.0"
+dependencies=["tigrbl-mdoc-credential-concrete==0.4.0.dev2"]
+[build-system]
+requires=["poetry-core>=1.0.0"]
+build-backend="poetry.core.masonry.api"
+[tool.poetry]
+packages=[{include="tigrbl_credential_protocol_iso_mdoc",from="src"}]

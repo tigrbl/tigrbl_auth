@@ -3,7 +3,7 @@ import json
 
 import pytest
 from tigrbl_sd_jwt_concrete import Disclosure, disclosure_digest, encode_disclosure
-from tigrbl_sd_jwt_vc_concrete import (
+from tigrbl_credential_profile_sd_jwt_vc import (
     DRAFT_REVISION,
     MEDIA_TYPE,
     parse_sd_jwt_vc,

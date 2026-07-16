@@ -1,5 +1,14 @@
 from .bindings import CAPABILITY_REQUIREMENTS
-from .claims import EAT_CLAIM_CLASSES, compose_eat_claim_set
+from .claims import (
+    EAT_CLAIM_CLASSES,
+    EatClaimSetPayload,
+    EatEncoding,
+    compose_eat_claim_set,
+    parse_eat_claims,
+)
+from .profiles import EatProfile
+from .submodules import EatSubmodule, parse_submodules
+from .validation import parse_eat, validate_eat_claims
 from .compatibility import COMPATIBILITY_PATHS, EatCompatibility, compatibility
 from .errors import EatProfileBindingError, EatProtocolError, UnsupportedEatCarrierError
 from .features import FEATURES_BY_VERSION, supports
@@ -34,6 +43,10 @@ __all__ = [
     "CURRENT_VERSION",
     "EAT_CARRIERS",
     "EAT_CLAIM_CLASSES",
+    "EatClaimSetPayload",
+    "EatEncoding",
+    "EatProfile",
+    "EatSubmodule",
     "EAT_CWT_CARRIER",
     "EAT_JWT_CARRIER",
     "FEATURES_BY_VERSION",
@@ -48,7 +61,11 @@ __all__ = [
     "compatibility",
     "compose_eat_claim_set",
     "migrate_claims",
+    "parse_eat",
+    "parse_eat_claims",
+    "parse_submodules",
     "select_carrier",
     "select_version",
     "supports",
+    "validate_eat_claims",
 ]

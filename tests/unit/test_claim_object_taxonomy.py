@@ -1,6 +1,9 @@
 from tigrbl_eat_concrete import EatClaimSetPayload, EatEncoding, parse_eat_claims
 from tigrbl_sd_jwt_concrete import KeyBindingClaimSetPayload, parse_key_binding_claims
-from tigrbl_sd_jwt_vc_concrete import SdJwtVcClaimSetPayload, parse_sd_jwt_vc_claims
+from tigrbl_credential_profile_sd_jwt_vc import (
+    SdJwtVcClaimSetPayload,
+    parse_sd_jwt_vc_claims,
+)
 from tigrbl_svid_concrete import JwtSvidClaimSetPayload, parse_jwt_svid_claims
 
 

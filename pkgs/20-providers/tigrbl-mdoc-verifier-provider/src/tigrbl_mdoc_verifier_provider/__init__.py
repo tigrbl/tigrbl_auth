@@ -6,7 +6,7 @@ from tigrbl_identity_contracts.digital_credentials import (
     CredentialVerificationRequest,
     CredentialVerificationResult,
 )
-from tigrbl_mdoc_concrete import parse_mdoc, parse_mobile_security_object
+from tigrbl_credential_protocol_iso_mdoc import parse_mdoc, parse_mobile_security_object
 from tigrbl_security_cose import CoseSign1Provider
 
 CanonicalCborEncoder = Callable[[Mapping[str, object]], bytes]

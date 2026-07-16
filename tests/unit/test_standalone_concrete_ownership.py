@@ -41,8 +41,8 @@ def test_credential_classes_have_standalone_layer_10_owners() -> None:
         "MfaFactor": "tigrbl_mfa_factor_concrete",
         "MtlsCertificateCredential": "tigrbl_mtls_certificate_credential_concrete",
         "DpopKeyCredential": "tigrbl_dpop_key_credential_concrete",
-        "SdJwtVc": "tigrbl_sd_jwt_vc_concrete",
-        "Mdoc": "tigrbl_mdoc_concrete",
+        "SdJwtVc": "tigrbl_sd_jwt_vc_credential_concrete",
+        "Mdoc": "tigrbl_mdoc_credential_concrete",
     }
     assert {
         name: getattr(credentials, name).__module__.split(".", 1)[0]
@@ -55,7 +55,7 @@ def test_claims_classes_have_standalone_layer_10_owners() -> None:
     package_dirs = (
         path
         for path in CLAIM_PACKAGE_ROOT.glob("tigrbl-claim-*-concrete")
-        if (path / "pyproject.toml").is_file()
+        if (path / "pyproject.toml").is_file() and "tigrbl-claim-cwt-" not in path.name
     )
     for package_dir in sorted(package_dirs):
         module_name = package_dir.name.replace("-", "_")

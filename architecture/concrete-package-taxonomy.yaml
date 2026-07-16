@@ -1,0 +1,109 @@
+version: 1
+layer: 10-concrete
+rules:
+  ownership: one-primary-deterministic-concept-per-package
+  contracts: materialize-layer-02-semantics
+  bases: inherit-canonical-layer-05-family
+  allowed_dependencies:
+    - 00-primitives
+    - 02-contracts
+    - 05-bases
+    - approved-10-refinements
+  forbidden_dependencies:
+    - 20-providers
+    - 30-storage-runtime
+    - 40-capabilities
+    - 50-protocols
+    - 60-runtime
+    - 70-facade
+    - 80-apis
+  protocol_claim_sets: 50-protocols
+  protocol_versions: 50-protocols
+  durability: 01-storage-and-30-storage-runtime
+  environment_io: 20-providers
+families:
+  claim:
+    package_pattern: tigrbl-claim-*-concrete
+    base: tigrbl-claim-bases
+    cardinality: one-claim-class
+  identity:
+    packages:
+      - tigrbl-admin-identity-concrete
+      - tigrbl-client-identity-concrete
+      - tigrbl-device-identity-concrete
+      - tigrbl-machine-identity-concrete
+      - tigrbl-service-identity-concrete
+      - tigrbl-user-identity-concrete
+      - tigrbl-workload-identity-concrete
+    base: tigrbl-identity-bases
+    cardinality: one-identity-class
+  authentication_credential:
+    package_pattern: tigrbl-*-credential-concrete
+    base: tigrbl-authentication-credential-bases
+    cardinality: one-credential-class
+  digital_credential:
+    packages:
+      - tigrbl-mdoc-credential-concrete
+      - tigrbl-sd-jwt-vc-credential-concrete
+      - tigrbl-verifiable-credential-concrete
+    base: tigrbl-digital-credential-bases
+    cardinality: one-digital-credential-class
+  presentation:
+    packages:
+      - tigrbl-verifiable-presentation-concrete
+    base: tigrbl-digital-credential-bases
+    cardinality: one-presentation-class
+  attestation_evidence:
+    packages:
+      - tigrbl-eat-evidence-concrete
+    base: tigrbl-attestation-bases
+    cardinality: one-evidence-class
+  capability_core:
+    packages:
+      - tigrbl-capability
+      - tigrbl-default-capability
+    base: tigrbl-capability-bases
+compatibility_aggregates:
+  tigrbl-identity-credentials-concrete:
+    replacement: layer-70-facade
+  tigrbl-identity-identities-concrete:
+    replacement: layer-70-facade
+  tigrbl-eat-concrete:
+    canonical:
+      - tigrbl-eat-evidence-concrete
+      - tigrbl-attestation-protocol-eat
+  tigrbl-mdoc-concrete:
+    canonical:
+      - tigrbl-mdoc-credential-concrete
+      - tigrbl-credential-protocol-iso-mdoc
+  tigrbl-vcdm-concrete:
+    canonical:
+      - tigrbl-verifiable-credential-concrete
+      - tigrbl-verifiable-presentation-concrete
+      - tigrbl-credential-protocol-w3c-vcdm
+  tigrbl-sd-jwt-vc-concrete:
+    canonical:
+      - tigrbl-sd-jwt-vc-credential-concrete
+      - tigrbl-credential-profile-sd-jwt-vc
+serialization_aliases:
+  cwt_registered_claims:
+    owner: tigrbl-auth-protocol-cwt
+    canonical_claims:
+      1: tigrbl-claim-issuer-concrete
+      2: tigrbl-claim-subject-concrete
+      3: tigrbl-claim-audience-concrete
+      4: tigrbl-claim-expiration-concrete
+      5: tigrbl-claim-not-before-concrete
+      6: tigrbl-claim-issued-at-concrete
+      7: tigrbl-claim-jwt-id-concrete
+completed_protocol_extractions:
+  cwt_registered_claim_serialization: tigrbl-auth-protocol-cwt
+  eat: tigrbl-attestation-protocol-eat
+  iso_mdoc: tigrbl-credential-protocol-iso-mdoc
+  w3c_vcdm: tigrbl-credential-protocol-w3c-vcdm
+  sd_jwt_vc: tigrbl-credential-profile-sd-jwt-vc
+planned_protocol_extractions:
+  corim: tigrbl-attestation-protocol-corim
+  did_core: tigrbl-identity-protocol-did-core
+  spiffe_svid: tigrbl-workload-protocol-spiffe-svid
+  set: tigrbl-security-event-protocol-set
