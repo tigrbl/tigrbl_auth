@@ -118,6 +118,12 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-auth-api-service-admin",
         "tigrbl-auth-api-tenant-admin",
     },
+    "tests": {
+        "tigrbl-identity-testkit",
+    },
+    "examples": {
+        "acme-notes-cli",
+    },
     "deprecated": {
         "tigrbl-auth-protocol-oidc-backchannel-replay-store",
         "tigrbl-authz-policy-invariant-registry",
@@ -146,6 +152,8 @@ PYTHON_LAYER_FOLDERS = {
     "runtime": "60-runtime",
     "facade": "70-facade",
     "apis": "80-apis",
+    "tests": "100-tests",
+    "examples": "105-examples",
     "deprecated": "deprecated",
 }
 

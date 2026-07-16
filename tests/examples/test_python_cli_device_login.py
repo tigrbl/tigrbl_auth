@@ -19,6 +19,7 @@ from tigrbl_identity_server.device_authorization_runtime import (
 from tigrbl_auth.tables import Client, DeviceCode, Tenant, User
 from tigrbl_auth.services.token_service import JWTCoder, issue_persisted_token_pair
 from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER
+from tigrbl_identity_storage_runtime.initialize import initializeIdentityRuntimeTables
 
 
 def _load_example_module(module_name: str, relative_path: str):
@@ -34,7 +35,7 @@ def _load_example_module(module_name: str, relative_path: str):
 
 def _install_example_package_path() -> None:
     repo_root = Path(__file__).resolve().parents[2]
-    src_path = repo_root / "examples" / "acme_notes_cli" / "src"
+    src_path = repo_root / "pkgs" / "105-examples" / "acme-notes-cli" / "src"
     if str(src_path) not in sys.path:
         sys.path.insert(0, str(src_path))
 
@@ -57,11 +58,11 @@ async def _create_tenant_user_and_client(db_session: AsyncSession) -> tuple[Tena
     )
     db_session.add(user)
 
-    client = Client.new(
+    client = Client(
         tenant_id=tenant.id,
-        client_id=str(uuid4()),
-        client_secret="device-client-secret",
-        redirects=["https://acme-notes.example/callback"],
+        id=uuid4(),
+        client_secret_hash=hash_pw("device-client-secret"),
+        redirect_uris="https://acme-notes.example/callback",
     )
     db_session.add(client)
     await db_session.commit()
@@ -111,7 +112,7 @@ class _TigrblAuthDeviceFlowTransport(httpx.AsyncBaseTransport):
             if not getattr(row, "authorized", False) or getattr(row, "user_id", None) is None:
                 return httpx.Response(400, json={"error": "authorization_pending"}, request=request)
             access_token, refresh_token = await issue_persisted_token_pair(
-                jwt=JWTCoder.default(),
+                jwt=await JWTCoder.async_default(),
                 sub=str(row.user_id),
                 tid=str(row.tenant_id),
                 client_id=str(row.client_id),
@@ -142,10 +143,11 @@ async def test_python_cli_package_can_login_via_tigrbl_auth_device_flow(
     _install_example_package_path()
     device_login = _load_example_module(
         "acme_notes_cli.device_login",
-        "examples/acme_notes_cli/src/acme_notes_cli/device_login.py",
+        "pkgs/105-examples/acme-notes-cli/src/acme_notes_cli/device_login.py",
     )
     monkeypatch.setattr(runtime_settings, "deployment_profile", "hardening")
     monkeypatch.setattr(runtime_settings, "enable_rfc8628", True)
+    initializeIdentityRuntimeTables()
 
     tenant, user, client = await _create_tenant_user_and_client(db_session)
     transport = _TigrblAuthDeviceFlowTransport(db_session, client_id=str(client.id))

@@ -138,7 +138,8 @@ clobbering an existing local listener on `8000`.
 
 ## CLI device login consumer example
 
-This repo includes a separate sample Python package at `examples/acme_notes_cli/`
+This repo includes a separate sample Python package at
+`pkgs/105-examples/acme-notes-cli/`.
 that demonstrates how another CLI can implement a `login` command on top of
 `tigrbl_auth` device authorization. The flow uses issuer discovery plus the
 canonical `POST /device_authorization` and `POST /token` endpoints.

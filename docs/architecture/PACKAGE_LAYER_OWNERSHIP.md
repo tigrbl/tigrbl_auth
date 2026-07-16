@@ -19,6 +19,19 @@ release phases and a package does not need to exist in every layer.
 | `60-runtime` | dependency injection, process construction, runners, and runtime lifecycle | product API policy |
 | `70-facade` | compatibility and ergonomic suite entry point | canonical lower-layer behavior |
 | `80-apis` | product-specific API applications and surface composition | lower-layer implementation truth |
+| `90-uix-core` | browser-safe reusable UIX components and client utilities | product-specific screens or Python runtime behavior |
+| `95-ui` | product-specific user interfaces and browser applications | backend implementation truth |
+| `100-tests` | shared fixtures, fakes, vectors, conformance harnesses, and cross-layer verification packages | production runtime behavior |
+| `105-examples` | runnable consumer applications demonstrating supported public surfaces | canonical implementation logic or test-only dependencies |
+
+## Terminal verification and demonstration layers
+
+`100-tests` and `105-examples` are terminal consumers rather than production
+dependency layers. Production packages may not depend on either layer. Example
+packages may compose any supported public production surface, but may not rely
+on test-only helpers. Shared test infrastructure belongs in `100-tests`; unit
+tests that verify one package may remain co-located with that package, and the
+repository-wide `tests/` tree remains the workspace verification harness.
 
 ## Layer 40 decision rule
 

@@ -35,8 +35,12 @@ LAYER_ORDER = (
     "60-runtime",
     "70-facade",
     "80-apis",
+    "100-tests",
+    "105-examples",
     "deprecated",
 )
+
+NON_PRODUCTION_LAYERS = frozenset({"100-tests", "105-examples"})
 
 # Capabilities orchestrate implemented behavior.  Contract value types and
 # ports and primitive value helpers remain valid vocabulary, but capability
@@ -223,6 +227,14 @@ def _dependency_name(requirement: object) -> str | None:
     return _normalize_distribution(match.group(1)) if match else None
 
 
+def _terminal_dependency_forbidden(consumer_layer: str, target_layer: str) -> bool:
+    if target_layer not in NON_PRODUCTION_LAYERS:
+        return False
+    if consumer_layer not in NON_PRODUCTION_LAYERS:
+        return True
+    return consumer_layer == "105-examples" and target_layer == "100-tests"
+
+
 def _manifest_dependencies(data: dict[str, object]) -> set[str]:
     project = data.get("project", {})
     if not isinstance(project, dict):
@@ -333,6 +345,70 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
         import_root: item for item in packages for import_root in item.import_roots
     }
     violations: list[Violation] = []
+
+    # Tests and examples are terminal consumers. Production packages must not
+    # acquire runtime dependencies on either layer, and examples must remain
+    # usable without importing test-only helpers.
+    for package in packages:
+        manifest = package.path / "pyproject.toml"
+        for dependency in package.dependencies:
+            target = by_distribution.get(dependency)
+            if target is None or not _terminal_dependency_forbidden(
+                package.layer, target.layer
+            ):
+                continue
+            violations.append(
+                Violation(
+                    kind="terminal-layer-dependency",
+                    package=package.distribution,
+                    package_layer=package.layer,
+                    target=target.distribution,
+                    target_layer=target.layer,
+                    path=manifest.relative_to(root).as_posix(),
+                    line=None,
+                    detail=(
+                        "production packages cannot depend on test or example "
+                        "packages; examples also cannot depend on test helpers"
+                    ),
+                )
+            )
+
+        for source in sorted((package.path / "src").rglob("*.py")):
+            tree = ast.parse(
+                source.read_text(encoding="utf-8-sig"), filename=str(source)
+            )
+            imported_roots: set[tuple[str, int]] = set()
+            for node in ast.walk(tree):
+                if isinstance(node, ast.Import):
+                    imported_roots.update(
+                        (alias.name.split(".")[0], node.lineno)
+                        for alias in node.names
+                    )
+                elif isinstance(node, ast.ImportFrom) and node.level == 0 and node.module:
+                    imported_roots.add((node.module.split(".")[0], node.lineno))
+
+            relative_source = source.relative_to(root).as_posix()
+            for import_root, line in sorted(imported_roots):
+                target = by_import_root.get(import_root)
+                if target is None or not _terminal_dependency_forbidden(
+                    package.layer, target.layer
+                ):
+                    continue
+                violations.append(
+                    Violation(
+                        kind="terminal-layer-import",
+                        package=package.distribution,
+                        package_layer=package.layer,
+                        target=target.distribution,
+                        target_layer=target.layer,
+                        path=relative_source,
+                        line=line,
+                        detail=(
+                            "production sources cannot import test or example "
+                            "packages; examples also cannot import test helpers"
+                        ),
+                    )
+                )
 
     capability_packages = {
         item.distribution for item in packages if item.layer == "40-capabilities"

@@ -9,6 +9,17 @@ resolution-markers = [
 ]
 
 [[package]]
+name = "acme-notes-cli"
+version = "0.1.0"
+source = { editable = "pkgs/105-examples/acme-notes-cli" }
+dependencies = [
+    { name = "httpx" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "httpx", specifier = ">=0.28,<0.29" }]
+
+[[package]]
 name = "aiofiles"
 version = "25.1.0"
 source = { registry = "https://pypi.org/simple" }
@@ -3809,6 +3820,9 @@ dependencies = [
 ]
 
 [package.optional-dependencies]
+examples = [
+    { name = "acme-notes-cli" },
+]
 hypercorn = [
     { name = "tigrbl-identity-runtime", extra = ["hypercorn"] },
 ]
@@ -3856,6 +3870,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "acme-notes-cli", marker = "extra == 'examples'", editable = "pkgs/105-examples/acme-notes-cli" },
     { name = "aiosqlite", specifier = "==0.22.1" },
     { name = "aiosqlite", marker = "extra == 'sqlite'", specifier = "==0.22.1" },
     { name = "asyncpg", marker = "extra == 'postgres'", specifier = "==0.31.0" },
@@ -4151,7 +4166,7 @@ requires-dist = [
     { name = "tigrbl-identity-server", editable = "pkgs/60-runtime/tigrbl-identity-server" },
     { name = "tigrbl-identity-storage", editable = "pkgs/01-storage/tigrbl-identity-storage" },
     { name = "tigrbl-identity-storage-runtime", editable = "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime" },
-    { name = "tigrbl-identity-testkit", editable = "pkgs/60-runtime/tigrbl-identity-testkit" },
+    { name = "tigrbl-identity-testkit", editable = "pkgs/100-tests/tigrbl-identity-testkit" },
     { name = "tigrbl-jose-bases", editable = "pkgs/05-bases/tigrbl-jose-bases" },
     { name = "tigrbl-jose-concrete", editable = "pkgs/10-concrete/tigrbl-jose-concrete" },
     { name = "tigrbl-jose-swarmauri-provider", editable = "pkgs/20-providers/tigrbl-jose-swarmauri-provider" },
@@ -4290,7 +4305,7 @@ requires-dist = [
     { name = "tigrbl-workload-identity-durability", editable = "pkgs/30-storage-runtime/tigrbl-workload-identity-durability" },
     { name = "tomli", marker = "python_full_version < '3.11'", specifier = "==2.4.0" },
 ]
-provides-extras = ["test", "postgres", "sqlite", "uvicorn", "hypercorn", "tigrcorn", "servers"]
+provides-extras = ["test", "examples", "postgres", "sqlite", "uvicorn", "hypercorn", "tigrcorn", "servers"]
 
 [package.metadata.requires-dev]
 dev = [
@@ -7527,7 +7542,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-identity-testkit"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/60-runtime/tigrbl-identity-testkit" }
+source = { editable = "pkgs/100-tests/tigrbl-identity-testkit" }
 
 [[package]]
 name = "tigrbl-jose-bases"

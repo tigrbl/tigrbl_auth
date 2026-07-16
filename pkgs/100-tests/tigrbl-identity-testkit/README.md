@@ -49,7 +49,7 @@ assert tigrbl_identity_testkit.__doc__
 
 - [PyPI package](https://pypi.org/project/tigrbl-identity-testkit/)
 - [Source repository](https://github.com/tigrbl/tigrbl_auth)
-- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/60-runtime/tigrbl-identity-testkit)
+- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/100-tests/tigrbl-identity-testkit)
 - [SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 
 ## Governance

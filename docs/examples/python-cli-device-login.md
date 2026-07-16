@@ -6,7 +6,7 @@ This repository exposes the server-side pieces needed for RFC 8628 device author
 - `POST /token` with `grant_type=urn:ietf:params:oauth:grant-type:device_code`
 - discovery metadata at `/.well-known/oauth-authorization-server`
 
-The sample consumer package under `examples/acme_notes_cli/` shows how a different Python package can expose a `login` command and use that flow for CLI authentication.
+The sample consumer package under `pkgs/105-examples/acme-notes-cli/` shows how a different Python package can expose a `login` command and use that flow for CLI authentication.
 
 ## What the consumer package does
 
@@ -22,7 +22,7 @@ The sample consumer package under `examples/acme_notes_cli/` shows how a differe
 ## Consumer package shape
 
 ```text
-examples/acme_notes_cli/
+pkgs/105-examples/acme-notes-cli/
   pyproject.toml
   src/acme_notes_cli/main.py
   src/acme_notes_cli/device_login.py
