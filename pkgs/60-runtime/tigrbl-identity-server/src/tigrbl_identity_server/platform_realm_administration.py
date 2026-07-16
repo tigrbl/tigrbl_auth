@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Any
 from uuid import UUID
 
-from tigrbl_identity_admin_control_plane import RealmAdministrationCapability
+from tigrbl_realm_administration_capability import RealmAdministrationCapability
 from tigrbl_identity_contracts.admin_realms import (
     AdminRealm,
     AdminRealmCreate,

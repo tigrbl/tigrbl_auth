@@ -5,6 +5,7 @@ description = "Policy administration and simulation capability."
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
 dependencies = [
+    "tigrbl-policy-administration-memory-provider==0.4.0.dev2",
     "tigrbl-capability==0.4.0.dev2",
     "tigrbl-authz-policy-rules-concrete==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",

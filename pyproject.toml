@@ -109,7 +109,15 @@ dependencies = [
     "tigrbl-security-key-rotation-policy-contracts==0.1.0",
     "tigrbl-identity-admin-advanced-authenticator-registry==0.4.0.dev2",
     "tigrbl-identity-admin-auth-anomaly-detector==0.4.0.dev2",
+    "tigrbl-access-governance-memory-provider==0.4.0.dev2",
+    "tigrbl-policy-administration-memory-provider==0.4.0.dev2",
     "tigrbl-account-self-service==0.4.0.dev2",
+    "tigrbl-account-self-service-capability==0.4.0.dev2",
+    "tigrbl-administrative-resource-capability==0.4.0.dev2",
+    "tigrbl-identity-administration-capability==0.4.0.dev2",
+    "tigrbl-operator-administration-capability==0.4.0.dev2",
+    "tigrbl-realm-administration-capability==0.4.0.dev2",
+    "tigrbl-tenant-administration-capability==0.4.0.dev2",
     "tigrbl-identity-admin-control-plane==0.4.0.dev2",
     "tigrbl-identity-admin-federation-registry==0.4.0.dev2",
     "tigrbl-identity-admin-policy-registry==0.4.0.dev2",
@@ -242,7 +250,9 @@ dependencies = [
     "tigrbl-capability==0.4.0.dev2",
     "tigrbl-default-capability==0.4.0.dev2",
     "tigrbl-access-governance-capability==0.4.0.dev2",
+    "tigrbl-adaptive-authentication-capability==0.4.0.dev2",
     "tigrbl-advanced-authentication-capability==0.4.0.dev2",
+    "tigrbl-mfa-challenge-capability==0.4.0.dev2",
     "tigrbl-key-administration-capability==0.4.0.dev2",
     "tigrbl-policy-administration-capability==0.4.0.dev2",
     "tigrbl-policy-assurance-capability==0.4.0.dev2",
@@ -302,11 +312,17 @@ dependencies = [
     "tigrbl-auth-protocol-rp==0.4.0.dev2",
     "tigrbl-authn-credentials==0.4.0.dev2",
     "tigrbl-digital-credential-issuance==0.4.0.dev2",
+    "tigrbl-digital-credential-issuance-capability==0.4.0.dev2",
     "tigrbl-digital-credential-presentation==0.4.0.dev2",
+    "tigrbl-digital-credential-presentation-capability==0.4.0.dev2",
     "tigrbl-grant-negotiation-capability==0.4.0.dev2",
+    "tigrbl-delegated-access-negotiation-capability==0.4.0.dev2",
     "tigrbl-attestation-appraisal==0.4.0.dev2",
+    "tigrbl-attestation-appraisal-capability==0.4.0.dev2",
     "tigrbl-security-events==0.4.0.dev2",
+    "tigrbl-security-event-delivery-capability==0.4.0.dev2",
     "tigrbl-workload-identity==0.4.0.dev2",
+    "tigrbl-workload-identity-capability==0.4.0.dev2",
     "tigrbl-authz-policy-admin-gate==0.4.0.dev2",
     "tigrbl-auth-api-admin-gate==0.4.0.dev2",
     "tigrbl-authz-policy==0.4.0.dev2",
@@ -354,10 +370,16 @@ dependencies = [
     "tigrbl-authenticator-attestation-capability==0.4.0.dev2",
     "tigrbl-token-exchange-capability==0.4.0.dev2",
     "tigrbl-token-revocation-capability==0.4.0.dev2",
+    "tigrbl-api-key-authentication-capability==0.4.0.dev2",
+    "tigrbl-client-secret-authentication-capability==0.4.0.dev2",
+    "tigrbl-password-authentication-capability==0.4.0.dev2",
+    "tigrbl-service-key-authentication-capability==0.4.0.dev2",
     "tigrbl-principal-authentication==0.4.0.dev2",
     "tigrbl-policy-evaluation-capability==0.4.0.dev2",
     "tigrbl-protocol-artifact-processing==0.4.0.dev2",
+    "tigrbl-artifact-processing-capability==0.4.0.dev2",
     "tigrbl-pushed-authorization-capability==0.4.0.dev2",
+    "tigrbl-authorization-request-staging-capability==0.4.0.dev2",
     "tigrbl-protected-resource-authorization-capability==0.4.0.dev2",
     "tigrbl-client-registration-capability==0.4.0.dev2",
     "tigrbl-auth-api-oauth-authorization==0.4.0.dev2",
@@ -592,12 +614,18 @@ tigrbl-auth-protocol-oid4vp = { path = "pkgs/50-protocols/tigrbl-auth-protocol-o
 tigrbl-auth-protocol-authzen = { path = "pkgs/50-protocols/tigrbl-auth-protocol-authzen", editable = true }
 tigrbl-auth-protocol-rp = { path = "pkgs/50-protocols/tigrbl-auth-protocol-rp", editable = true }
 tigrbl-authn-credentials = { path = "pkgs/20-providers/tigrbl-authn-credentials", editable = true }
-tigrbl-digital-credential-issuance = { path = "pkgs/40-capabilities/tigrbl-digital-credential-issuance", editable = true }
-tigrbl-digital-credential-presentation = { path = "pkgs/40-capabilities/tigrbl-digital-credential-presentation", editable = true }
-tigrbl-grant-negotiation-capability = { path = "pkgs/40-capabilities/tigrbl-grant-negotiation-capability", editable = true }
-tigrbl-attestation-appraisal = { path = "pkgs/40-capabilities/tigrbl-attestation-appraisal", editable = true }
-tigrbl-security-events = { path = "pkgs/40-capabilities/tigrbl-security-events", editable = true }
-tigrbl-workload-identity = { path = "pkgs/40-capabilities/tigrbl-workload-identity", editable = true }
+tigrbl-digital-credential-issuance = { path = "pkgs/deprecated/tigrbl-digital-credential-issuance", editable = true }
+tigrbl-digital-credential-issuance-capability = { path = "pkgs/40-capabilities/tigrbl-digital-credential-issuance-capability", editable = true }
+tigrbl-digital-credential-presentation = { path = "pkgs/deprecated/tigrbl-digital-credential-presentation", editable = true }
+tigrbl-digital-credential-presentation-capability = { path = "pkgs/40-capabilities/tigrbl-digital-credential-presentation-capability", editable = true }
+tigrbl-grant-negotiation-capability = { path = "pkgs/deprecated/tigrbl-grant-negotiation-capability", editable = true }
+tigrbl-delegated-access-negotiation-capability = { path = "pkgs/40-capabilities/tigrbl-delegated-access-negotiation-capability", editable = true }
+tigrbl-attestation-appraisal = { path = "pkgs/deprecated/tigrbl-attestation-appraisal", editable = true }
+tigrbl-attestation-appraisal-capability = { path = "pkgs/40-capabilities/tigrbl-attestation-appraisal-capability", editable = true }
+tigrbl-security-events = { path = "pkgs/deprecated/tigrbl-security-events", editable = true }
+tigrbl-security-event-delivery-capability = { path = "pkgs/40-capabilities/tigrbl-security-event-delivery-capability", editable = true }
+tigrbl-workload-identity = { path = "pkgs/deprecated/tigrbl-workload-identity", editable = true }
+tigrbl-workload-identity-capability = { path = "pkgs/40-capabilities/tigrbl-workload-identity-capability", editable = true }
 tigrbl-authz-policy-admin-gate = { path = "pkgs/20-providers/tigrbl-authz-policy-admin-gate", editable = true }
 tigrbl-auth-api-admin-gate = { path = "pkgs/80-apis/tigrbl-auth-api-admin-gate", editable = true }
 tigrbl-authz-policy-authority-derivation-graph = { path = "pkgs/30-storage-runtime/tigrbl-authz-policy-authority-derivation-graph", editable = true }
@@ -771,13 +799,21 @@ tigrbl-corim-concrete = { path = "pkgs/10-concrete/tigrbl-corim-concrete", edita
 tigrbl-security-key-rotation-policy-contracts = { path = "pkgs/02-contracts/tigrbl-security-key-rotation-policy-contracts", editable = true }
 tigrbl-identity-admin-advanced-authenticator-registry = { path = "pkgs/deprecated/tigrbl-identity-admin-advanced-authenticator-registry", editable = true }
 tigrbl-identity-admin-auth-anomaly-detector = { path = "pkgs/20-providers/tigrbl-identity-admin-auth-anomaly-detector", editable = true }
-tigrbl-account-self-service = { path = "pkgs/40-capabilities/tigrbl-account-self-service", editable = true }
+tigrbl-account-self-service = { path = "pkgs/deprecated/tigrbl-account-self-service", editable = true }
+tigrbl-account-self-service-capability = { path = "pkgs/40-capabilities/tigrbl-account-self-service-capability", editable = true }
+tigrbl-administrative-resource-capability = { path = "pkgs/40-capabilities/tigrbl-administrative-resource-capability", editable = true }
+tigrbl-identity-administration-capability = { path = "pkgs/40-capabilities/tigrbl-identity-administration-capability", editable = true }
+tigrbl-operator-administration-capability = { path = "pkgs/40-capabilities/tigrbl-operator-administration-capability", editable = true }
+tigrbl-realm-administration-capability = { path = "pkgs/40-capabilities/tigrbl-realm-administration-capability", editable = true }
+tigrbl-tenant-administration-capability = { path = "pkgs/40-capabilities/tigrbl-tenant-administration-capability", editable = true }
 tigrbl-access-governance-capability = { path = "pkgs/40-capabilities/tigrbl-access-governance-capability", editable = true }
-tigrbl-advanced-authentication-capability = { path = "pkgs/40-capabilities/tigrbl-advanced-authentication-capability", editable = true }
+tigrbl-adaptive-authentication-capability = { path = "pkgs/40-capabilities/tigrbl-adaptive-authentication-capability", editable = true }
+tigrbl-advanced-authentication-capability = { path = "pkgs/deprecated/tigrbl-advanced-authentication-capability", editable = true }
+tigrbl-mfa-challenge-capability = { path = "pkgs/40-capabilities/tigrbl-mfa-challenge-capability", editable = true }
 tigrbl-key-administration-capability = { path = "pkgs/40-capabilities/tigrbl-key-administration-capability", editable = true }
 tigrbl-policy-administration-capability = { path = "pkgs/40-capabilities/tigrbl-policy-administration-capability", editable = true }
 tigrbl-policy-assurance-capability = { path = "pkgs/40-capabilities/tigrbl-policy-assurance-capability", editable = true }
-tigrbl-identity-admin-control-plane = { path = "pkgs/40-capabilities/tigrbl-identity-admin-control-plane", editable = true }
+tigrbl-identity-admin-control-plane = { path = "pkgs/deprecated/tigrbl-identity-admin-control-plane", editable = true }
 tigrbl-identity-admin-federation-registry = { path = "pkgs/deprecated/tigrbl-identity-admin-federation-registry", editable = true }
 tigrbl-identity-admin-policy-registry = { path = "pkgs/deprecated/tigrbl-identity-admin-policy-registry", editable = true }
 tigrbl-identity-admin-relationship-graph = { path = "pkgs/20-providers/tigrbl-identity-admin-relationship-graph", editable = true }
@@ -821,12 +857,20 @@ tigrbl-public-key-credential-management-capability = { path = "pkgs/40-capabilit
 tigrbl-authenticator-attestation-capability = { path = "pkgs/40-capabilities/tigrbl-authenticator-attestation-capability", editable = true }
 tigrbl-token-exchange-capability = { path = "pkgs/40-capabilities/tigrbl-token-exchange-capability", editable = true }
 tigrbl-token-revocation-capability = { path = "pkgs/40-capabilities/tigrbl-token-revocation-capability", editable = true }
-tigrbl-principal-authentication = { path = "pkgs/40-capabilities/tigrbl-principal-authentication", editable = true }
+tigrbl-api-key-authentication-capability = { path = "pkgs/40-capabilities/tigrbl-api-key-authentication-capability", editable = true }
+tigrbl-client-secret-authentication-capability = { path = "pkgs/40-capabilities/tigrbl-client-secret-authentication-capability", editable = true }
+tigrbl-password-authentication-capability = { path = "pkgs/40-capabilities/tigrbl-password-authentication-capability", editable = true }
+tigrbl-service-key-authentication-capability = { path = "pkgs/40-capabilities/tigrbl-service-key-authentication-capability", editable = true }
+tigrbl-principal-authentication = { path = "pkgs/deprecated/tigrbl-principal-authentication", editable = true }
 tigrbl-policy-evaluation-capability = { path = "pkgs/40-capabilities/tigrbl-policy-evaluation-capability", editable = true }
-tigrbl-protocol-artifact-processing = { path = "pkgs/40-capabilities/tigrbl-protocol-artifact-processing", editable = true }
-tigrbl-pushed-authorization-capability = { path = "pkgs/40-capabilities/tigrbl-pushed-authorization-capability", editable = true }
+tigrbl-protocol-artifact-processing = { path = "pkgs/deprecated/tigrbl-protocol-artifact-processing", editable = true }
+tigrbl-artifact-processing-capability = { path = "pkgs/40-capabilities/tigrbl-artifact-processing-capability", editable = true }
+tigrbl-pushed-authorization-capability = { path = "pkgs/deprecated/tigrbl-pushed-authorization-capability", editable = true }
+tigrbl-authorization-request-staging-capability = { path = "pkgs/40-capabilities/tigrbl-authorization-request-staging-capability", editable = true }
 tigrbl-protected-resource-authorization-capability = { path = "pkgs/40-capabilities/tigrbl-protected-resource-authorization-capability", editable = true }
 tigrbl-client-registration-capability = { path = "pkgs/40-capabilities/tigrbl-client-registration-capability", editable = true }
+tigrbl-access-governance-memory-provider = { path = "pkgs/20-providers/tigrbl-access-governance-memory-provider", editable = true }
+tigrbl-policy-administration-memory-provider = { path = "pkgs/20-providers/tigrbl-policy-administration-memory-provider", editable = true }
 tigrbl-auth-api-oauth-authorization = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-authorization", editable = true }
 tigrbl-auth-api-oauth-device-authorization = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-device-authorization", editable = true }
 tigrbl-auth-api-oauth-token-exchange = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-token-exchange", editable = true }

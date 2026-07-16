@@ -1,0 +1,14 @@
+[project]
+name = "tigrbl-password-authentication-capability"
+version = "0.4.0.dev2"
+description = "Password authentication capability."
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = ["tigrbl-capability==0.4.0.dev2", "tigrbl-identity-contracts==0.4.0.dev2", "tigrbl-authenticator-password-local==0.1.0"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tigrbl_password_authentication_capability", from = "src" }]

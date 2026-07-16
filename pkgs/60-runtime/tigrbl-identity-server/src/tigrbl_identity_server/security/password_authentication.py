@@ -8,7 +8,7 @@ from tigrbl_identity_contracts.principals import PrincipalLike
 from tigrbl_identity_storage_runtime.ops.identities import (
     lookup_identity_by_identifier,
 )
-from tigrbl_principal_authentication import PasswordAuthenticationCapability
+from tigrbl_password_authentication_capability import PasswordAuthenticationCapability
 
 
 password_authentication = PasswordAuthenticationCapability(

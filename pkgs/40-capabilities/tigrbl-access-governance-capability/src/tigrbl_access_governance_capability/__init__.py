@@ -1,9 +1,6 @@
 """Access governance capability family."""
 
 from .capability import AccessGovernanceCapability
-from .governance_extension import *
-from .governance_provisioning import *
-from .governance_reviews import *
-from .service_identity_registry import *
+from tigrbl_access_governance_memory_provider import *  # noqa: F401,F403
 
 __all__ = [name for name in globals() if not name.startswith("_")]

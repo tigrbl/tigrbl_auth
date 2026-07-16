@@ -7,7 +7,7 @@ from collections.abc import Callable, Mapping
 from functools import lru_cache
 from pathlib import Path
 
-from tigrbl_identity_admin_control_plane import OperatorAdministrationCapability
+from tigrbl_operator_administration_capability import OperatorAdministrationCapability
 from tigrbl_identity_runtime import CapabilityRegistry
 from tigrbl_identity_storage_runtime.key_management import (
     delete_operator_key_for_context,

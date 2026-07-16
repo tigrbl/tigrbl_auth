@@ -1,0 +1,978 @@
+{
+  "capabilities": [
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": [
+          "tigrbl-access-governance-memory-provider"
+        ]
+      },
+      "families": [
+        "access"
+      ],
+      "implementations": [
+        {
+          "capability_id": "access.governance",
+          "class": "AccessGovernanceCapability",
+          "operations": [
+            "manage_entitlements",
+            "run_access_review"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-access-governance-capability/src/tigrbl_access_governance_capability/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-access-governance-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate entitlement management, provisioning, and access reviews"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "account"
+      ],
+      "implementations": [
+        {
+          "capability_id": "account.self-service",
+          "class": "AccountSelfServiceCapability",
+          "operations": [],
+          "source": "pkgs/40-capabilities/tigrbl-account-self-service-capability/src/tigrbl_account_self_service/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-account-self-service-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate authenticated profile, password, session, and consent lifecycle"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "authentication"
+      ],
+      "implementations": [
+        {
+          "capability_id": "authentication.adaptive",
+          "class": "AdaptiveAuthenticationCapability",
+          "operations": [
+            "evaluate_adaptive_context"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-adaptive-authentication-capability/src/tigrbl_adaptive_authentication_capability/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-adaptive-authentication-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate a normalized adaptive-authentication decision"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "administrative-resource"
+      ],
+      "implementations": [
+        {
+          "capability_id": "administrative-resource.lifecycle",
+          "class": "AdministrativeResourceCapability",
+          "operations": [],
+          "source": "pkgs/40-capabilities/tigrbl-administrative-resource-capability/src/tigrbl_administrative_resource_capability/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-administrative-resource-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate generic administrative-resource lifecycle operations"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": [
+          "tigrbl-authenticator-api-key-local"
+        ]
+      },
+      "families": [
+        "principal"
+      ],
+      "implementations": [
+        {
+          "capability_id": "principal.authentication.api-key",
+          "class": "ApiKeyAuthenticationCapability",
+          "operations": [
+            "authenticate_api_key"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-api-key-authentication-capability/src/tigrbl_api_key_authentication_capability/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-api-key-authentication-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate user API-key verification with durable credential operations"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "artifact"
+      ],
+      "implementations": [
+        {
+          "capability_id": "artifact.processing",
+          "class": "ProtocolArtifactProcessingCapability",
+          "operations": [],
+          "source": "pkgs/40-capabilities/tigrbl-artifact-processing-capability/src/tigrbl_protocol_artifact_processing/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-artifact-processing-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate protocol-neutral artifact decoding, validation, encoding, and error normalization through replaceable processors"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "attestation"
+      ],
+      "implementations": [
+        {
+          "capability_id": "attestation.appraisal",
+          "class": "AttestationAppraisalCapability",
+          "operations": [
+            "appraise",
+            "record_result",
+            "resolve_reference_material",
+            "verify_evidence"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-attestation-appraisal-capability/src/tigrbl_attestation_appraisal/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-attestation-appraisal-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate evidence appraisal and result recording"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "authenticator"
+      ],
+      "implementations": [
+        {
+          "capability_id": "authenticator.attestation",
+          "class": "AuthenticatorAttestationCapability",
+          "operations": [
+            "appraise_authenticator_attestation",
+            "reappraise_registered_authenticator",
+            "resolve_authenticator_metadata"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-authenticator-attestation-capability/src/tigrbl_authenticator_attestation_capability/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-authenticator-attestation-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate attestation format verification, metadata resolution, trust appraisal, and reappraisal"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "oauth"
+      ],
+      "implementations": [
+        {
+          "capability_id": "oauth.pushed-authorization",
+          "class": "PushedAuthorizationCapability",
+          "operations": [
+            "push_authorization_request",
+            "record_audit_event"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-authorization-request-staging-capability/src/tigrbl_pushed_authorization_capability/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-authorization-request-staging-capability",
+      "protocol_packages": [
+        "tigrbl-auth-protocol-oauth"
+      ],
+      "purpose": "coordinate durable pushed-request creation with optional audit recording"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "client"
+      ],
+      "implementations": [
+        {
+          "capability_id": "client.registration",
+          "class": "ClientRegistrationCapability",
+          "operations": [
+            "disable_registration",
+            "get_registration",
+            "record_audit_event",
+            "register_client",
+            "update_registration"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-client-registration-capability/src/tigrbl_client_registration_capability/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-client-registration-capability",
+      "protocol_packages": [
+        "tigrbl-auth-protocol-oauth"
+      ],
+      "purpose": "coordinate client and registration metadata lifecycle with optional audit recording"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": [
+          "tigrbl-authenticator-client-secret-local"
+        ]
+      },
+      "families": [
+        "principal"
+      ],
+      "implementations": [
+        {
+          "capability_id": "principal.authentication.client-secret",
+          "class": "ClientSecretAuthenticationCapability",
+          "operations": [
+            "authenticate_client_secret",
+            "verify_client_record"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-client-secret-authentication-capability/src/tigrbl_client_secret_authentication_capability/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-client-secret-authentication-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate client-secret verification with client lookup"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "grant"
+      ],
+      "implementations": [
+        {
+          "capability_id": "grant.negotiation",
+          "class": "GrantNegotiationCapability",
+          "operations": [
+            "continue_grant",
+            "request_grant",
+            "rotate_access_token"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-delegated-access-negotiation-capability/src/tigrbl_grant_negotiation_capability/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-delegated-access-negotiation-capability",
+      "protocol_packages": [
+        "tigrbl-auth-protocol-gnap"
+      ],
+      "purpose": "coordinate negotiated grant requests, continuation, and token rotation"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "digital-credential"
+      ],
+      "implementations": [
+        {
+          "capability_id": "digital-credential.issuance",
+          "class": "DigitalCredentialIssuanceCapability",
+          "operations": [
+            "create_offer",
+            "issue",
+            "record_issuance",
+            "register_configuration",
+            "verify_wallet_attestation"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-digital-credential-issuance-capability/src/tigrbl_digital_credential_issuance/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-digital-credential-issuance-capability",
+      "protocol_packages": [
+        "tigrbl-auth-protocol-oid4vci"
+      ],
+      "purpose": "coordinate credential configuration, wallet trust, offers, and issuance"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "digital-credential"
+      ],
+      "implementations": [
+        {
+          "capability_id": "digital-credential.presentation",
+          "class": "DigitalCredentialPresentationCapability",
+          "operations": [
+            "check_consent",
+            "present",
+            "record_result",
+            "record_transaction",
+            "reserve_replay",
+            "verify_presentation"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-digital-credential-presentation-capability/src/tigrbl_digital_credential_presentation/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-digital-credential-presentation-capability",
+      "protocol_packages": [
+        "tigrbl-auth-protocol-oid4vp"
+      ],
+      "purpose": "coordinate holder consent, replay defense, and presentation verification"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "identity-admin"
+      ],
+      "implementations": [
+        {
+          "capability_id": "identity-admin.identities",
+          "class": "IdentityAdministrationCapability",
+          "operations": [],
+          "source": "pkgs/40-capabilities/tigrbl-identity-administration-capability/src/tigrbl_identity_administration_capability/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-identity-administration-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate identity lifecycle administration"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "key"
+      ],
+      "implementations": [
+        {
+          "capability_id": "key.administration",
+          "class": "KeyAdministrationCapability",
+          "operations": [
+            "publish",
+            "rotate"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-key-administration-capability/src/tigrbl_key_administration_capability/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-key-administration-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate key rotation and publication through injected implementations"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "authentication"
+      ],
+      "implementations": [
+        {
+          "capability_id": "authentication.mfa-challenge",
+          "class": "MfaChallengeCapability",
+          "operations": [
+            "begin_mfa_challenge",
+            "complete_mfa_challenge"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-mfa-challenge-capability/src/tigrbl_mfa_challenge_capability/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-mfa-challenge-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate begin and complete operations for an MFA challenge"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "identity-admin"
+      ],
+      "implementations": [
+        {
+          "capability_id": "identity-admin.operator",
+          "class": "OperatorAdministrationCapability",
+          "operations": [],
+          "source": "pkgs/40-capabilities/tigrbl-operator-administration-capability/src/tigrbl_operator_administration_capability/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-operator-administration-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate policy-gated operator administration"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": [
+          "tigrbl-authenticator-password-local"
+        ]
+      },
+      "families": [
+        "principal"
+      ],
+      "implementations": [
+        {
+          "capability_id": "principal.authentication.password",
+          "class": "PasswordAuthenticationCapability",
+          "operations": [
+            "authenticate_password"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-password-authentication-capability/src/tigrbl_password_authentication_capability/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-password-authentication-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate password verification with identity lookup"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [
+          "tigrbl-authorization-policy-durability"
+        ],
+        "providers": [
+          "tigrbl-policy-administration-memory-provider"
+        ]
+      },
+      "families": [
+        "policy"
+      ],
+      "implementations": [
+        {
+          "capability_id": "policy.administration",
+          "class": "PolicyAdministrationCapability",
+          "operations": [
+            "administer",
+            "simulate"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-policy-administration-capability/src/tigrbl_policy_administration_capability/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-policy-administration-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate RBAC, ABAC, delegated-administration, and policy simulation operations"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [
+          "tigrbl-authorization-policy-durability"
+        ],
+        "providers": []
+      },
+      "families": [
+        "policy"
+      ],
+      "implementations": [
+        {
+          "capability_id": "policy.assurance",
+          "class": "PolicyAssuranceCapability",
+          "operations": [
+            "evaluate",
+            "report"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-policy-assurance-capability/src/tigrbl_policy_assurance_capability/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-policy-assurance-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate authorization invariants, replay checks, and assurance reporting"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "policy"
+      ],
+      "implementations": [
+        {
+          "capability_id": "policy.evaluation",
+          "class": "PolicyEvaluationCapability",
+          "operations": [
+            "describe",
+            "evaluate",
+            "evaluate_many",
+            "search_entities"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-policy-evaluation-capability/src/tigrbl_policy_evaluation_capability/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-policy-evaluation-capability",
+      "protocol_packages": [
+        "tigrbl-auth-protocol-authzen"
+      ],
+      "purpose": "coordinate normalized policy evaluation, batch evaluation, entity search, and service description"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "protected-resource"
+      ],
+      "implementations": [
+        {
+          "capability_id": "protected-resource.authorization",
+          "class": "ProtectedResourceAuthorizationCapability",
+          "operations": [
+            "verify_claims",
+            "verify_token"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-protected-resource-authorization-capability/src/tigrbl_protected_resource_authorization_capability/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-protected-resource-authorization-capability",
+      "protocol_packages": [
+        "tigrbl-authz-resource-server"
+      ],
+      "purpose": "coordinate normalized protected-resource token and claims authorization"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "credential"
+      ],
+      "implementations": [
+        {
+          "capability_id": "credential.public-key.authentication",
+          "class": "PublicKeyAuthenticationCapability",
+          "operations": [
+            "begin_public_key_authentication",
+            "complete_public_key_authentication"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-public-key-authentication-capability/src/tigrbl_public_key_authentication_capability/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-public-key-authentication-capability",
+      "protocol_packages": [
+        "tigrbl-auth-protocol-webauthn"
+      ],
+      "purpose": "coordinate durable ceremony consumption, credential resolution, assertion verification, and session evidence"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "credential"
+      ],
+      "implementations": [
+        {
+          "capability_id": "credential.public-key.management",
+          "class": "PublicKeyCredentialManagementCapability",
+          "operations": [
+            "list_public_key_credentials",
+            "rename_public_key_credential",
+            "revoke_public_key_credential"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-public-key-credential-management-capability/src/tigrbl_public_key_credential_management_capability/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-public-key-credential-management-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate authenticated listing, naming, and revocation of registered public-key credentials"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "credential"
+      ],
+      "implementations": [
+        {
+          "capability_id": "credential.public-key.registration",
+          "class": "PublicKeyRegistrationCapability",
+          "operations": [
+            "begin_public_key_registration",
+            "complete_public_key_registration"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-public-key-registration-capability/src/tigrbl_public_key_registration_capability/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-public-key-registration-capability",
+      "protocol_packages": [
+        "tigrbl-auth-protocol-webauthn"
+      ],
+      "purpose": "coordinate durable ceremony reservation, attestation verification, credential insertion, and audit evidence"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "identity-admin"
+      ],
+      "implementations": [
+        {
+          "capability_id": "identity-admin.realms",
+          "class": "RealmAdministrationCapability",
+          "operations": [],
+          "source": "pkgs/40-capabilities/tigrbl-realm-administration-capability/src/tigrbl_realm_administration_capability/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-realm-administration-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate realm lifecycle administration"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [],
+      "implementations": [
+        {
+          "capability_id": "",
+          "class": "ReplayProtectionCapability",
+          "operations": [
+            "check_and_reserve"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-replay-protection-capability/src/tigrbl_replay_protection_capability/__init__.py",
+          "version": ""
+        }
+      ],
+      "package": "tigrbl-replay-protection-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate normalized replay reservations across protocol mappings, durable repositories, and replaceable providers"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "security-events"
+      ],
+      "implementations": [
+        {
+          "capability_id": "security-events.delivery",
+          "class": "SecurityEventsCapability",
+          "operations": [
+            "receive",
+            "record_delivery",
+            "record_event",
+            "reserve_replay",
+            "resolve_subscription",
+            "transmit"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-security-event-delivery-capability/src/tigrbl_security_events/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-security-event-delivery-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate security-event transmission, receipt, and recording"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [
+          "tigrbl-api-key-authentication-capability"
+        ],
+        "durability": [],
+        "providers": [
+          "tigrbl-authenticator-service-key-local"
+        ]
+      },
+      "families": [
+        "principal"
+      ],
+      "implementations": [
+        {
+          "capability_id": "principal.authentication.service-key",
+          "class": "ServiceKeyAuthenticationCapability",
+          "operations": [
+            "authenticate_service_key"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-service-key-authentication-capability/src/tigrbl_service_key_authentication_capability/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-service-key-authentication-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate service-key verification with durable credential operations"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "identity-admin"
+      ],
+      "implementations": [
+        {
+          "capability_id": "identity-admin.tenants",
+          "class": "TenantAdministrationCapability",
+          "operations": [],
+          "source": "pkgs/40-capabilities/tigrbl-tenant-administration-capability/src/tigrbl_tenant_administration_capability/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-tenant-administration-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate tenant lifecycle administration"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "token"
+      ],
+      "implementations": [
+        {
+          "capability_id": "token.exchange",
+          "class": "TokenExchangeCapability",
+          "operations": [
+            "exchange_token"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-token-exchange-capability/src/tigrbl_token_exchange_capability/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-token-exchange-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate normalized security-token exchange across verification, issuance, durable lineage, and audit operations"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "token"
+      ],
+      "implementations": [
+        {
+          "capability_id": "token.introspection",
+          "class": "TokenIntrospectionCapability",
+          "operations": [
+            "introspect_token"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-token-introspection-capability/src/tigrbl_token_introspection_capability/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-token-introspection-capability",
+      "protocol_packages": [
+        "tigrbl-auth-protocol-oauth"
+      ],
+      "purpose": "coordinate protocol-neutral token-state lookup and profile validation"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "token"
+      ],
+      "implementations": [
+        {
+          "capability_id": "token.issuance",
+          "class": "TokenIssuanceCapability",
+          "operations": [
+            "issue_token_pair",
+            "record_audit_event",
+            "redeem_refresh_token"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-token-issuance-capability/src/tigrbl_token_issuance_capability/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-token-issuance-capability",
+      "protocol_packages": [
+        "tigrbl-auth-protocol-oauth"
+      ],
+      "purpose": "coordinate token-pair issuance and refresh rotation across signing and durable lifecycle operations"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "token"
+      ],
+      "implementations": [
+        {
+          "capability_id": "token.revocation",
+          "class": "TokenRevocationCapability",
+          "operations": [
+            "record_audit_event",
+            "revoke_token"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-token-revocation-capability/src/tigrbl_token_revocation_capability/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-token-revocation-capability",
+      "protocol_packages": [
+        "tigrbl-auth-protocol-oauth"
+      ],
+      "purpose": "coordinate durable token revocation with optional audit recording"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "workload-identity"
+      ],
+      "implementations": [
+        {
+          "capability_id": "workload-identity.spiffe",
+          "class": "WorkloadIdentityCapability",
+          "operations": [
+            "fetch_jwt_svid",
+            "fetch_x509_svid",
+            "refresh",
+            "resolve_bundle",
+            "verify_svid"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-workload-identity-capability/src/tigrbl_workload_identity/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-workload-identity-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate workload credential retrieval and identity verification"
+    }
+  ],
+  "schema_version": 1
+}

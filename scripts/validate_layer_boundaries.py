@@ -62,20 +62,32 @@ CAPABILITY_IMPLEMENTATION_ROOTS = frozenset(
     {"tigrbl_capability", "tigrbl_default_capability"}
 )
 
+# Compatibility aggregators preserve old imports for one release. They do not
+# own capability implementations and are excluded from the one-owner rule.
+CAPABILITY_COMPATIBILITY_AGGREGATORS = frozenset(
+    {}
+)
+
 # Layer 40 is intentionally sparse and opt-in.  Each entry names the complete
 # use case that would disappear if the orchestration package were removed.
 CAPABILITY_PURPOSES = {
+    "tigrbl-adaptive-authentication-capability": (
+        "coordinate a normalized adaptive-authentication decision"
+    ),
+    "tigrbl-administrative-resource-capability": (
+        "coordinate generic administrative-resource lifecycle operations"
+    ),
     "tigrbl-access-governance-capability": (
         "coordinate entitlement management, provisioning, and access reviews"
     ),
-    "tigrbl-advanced-authentication-capability": (
-        "coordinate adaptive, passwordless, MFA, and authenticator lifecycle operations"
-    ),
-    "tigrbl-account-self-service": (
+    "tigrbl-account-self-service-capability": (
         "coordinate authenticated profile, password, session, and consent lifecycle"
     ),
-    "tigrbl-attestation-appraisal": (
+    "tigrbl-attestation-appraisal-capability": (
         "coordinate evidence appraisal and result recording"
+    ),
+    "tigrbl-api-key-authentication-capability": (
+        "coordinate user API-key verification with durable credential operations"
     ),
     "tigrbl-authenticator-attestation-capability": (
         "coordinate attestation format verification, metadata resolution, trust appraisal, and reappraisal"
@@ -84,27 +96,36 @@ CAPABILITY_PURPOSES = {
         "coordinate client and registration metadata lifecycle with optional "
         "audit recording"
     ),
-    "tigrbl-digital-credential-issuance": (
+    "tigrbl-client-secret-authentication-capability": (
+        "coordinate client-secret verification with client lookup"
+    ),
+    "tigrbl-digital-credential-issuance-capability": (
         "coordinate credential configuration, wallet trust, offers, and issuance"
     ),
-    "tigrbl-digital-credential-presentation": (
+    "tigrbl-digital-credential-presentation-capability": (
         "coordinate holder consent, replay defense, and presentation verification"
     ),
-    "tigrbl-identity-admin-control-plane": (
-        "coordinate administrative resource lifecycle use cases"
+    "tigrbl-identity-administration-capability": (
+        "coordinate identity lifecycle administration"
     ),
     "tigrbl-key-administration-capability": (
         "coordinate key rotation and publication through injected implementations"
     ),
-    "tigrbl-grant-negotiation-capability": (
+    "tigrbl-mfa-challenge-capability": (
+        "coordinate begin and complete operations for an MFA challenge"
+    ),
+    "tigrbl-operator-administration-capability": (
+        "coordinate policy-gated operator administration"
+    ),
+    "tigrbl-password-authentication-capability": (
+        "coordinate password verification with identity lookup"
+    ),
+    "tigrbl-delegated-access-negotiation-capability": (
         "coordinate negotiated grant requests, continuation, and token rotation"
     ),
-    "tigrbl-protocol-artifact-processing": (
+    "tigrbl-artifact-processing-capability": (
         "coordinate protocol-neutral artifact decoding, validation, encoding, "
         "and error normalization through replaceable processors"
-    ),
-    "tigrbl-principal-authentication": (
-        "coordinate durable principal lookup with replaceable credential verifiers"
     ),
     "tigrbl-policy-evaluation-capability": (
         "coordinate normalized policy evaluation, batch evaluation, entity search, "
@@ -116,7 +137,7 @@ CAPABILITY_PURPOSES = {
     "tigrbl-policy-assurance-capability": (
         "coordinate authorization invariants, replay checks, and assurance reporting"
     ),
-    "tigrbl-pushed-authorization-capability": (
+    "tigrbl-authorization-request-staging-capability": (
         "coordinate durable pushed-request creation with optional audit recording"
     ),
     "tigrbl-protected-resource-authorization-capability": (
@@ -135,8 +156,17 @@ CAPABILITY_PURPOSES = {
         "coordinate normalized replay reservations across protocol mappings, "
         "durable repositories, and replaceable providers"
     ),
-    "tigrbl-security-events": (
+    "tigrbl-realm-administration-capability": (
+        "coordinate realm lifecycle administration"
+    ),
+    "tigrbl-security-event-delivery-capability": (
         "coordinate security-event transmission, receipt, and recording"
+    ),
+    "tigrbl-service-key-authentication-capability": (
+        "coordinate service-key verification with durable credential operations"
+    ),
+    "tigrbl-tenant-administration-capability": (
+        "coordinate tenant lifecycle administration"
     ),
     "tigrbl-token-introspection-capability": (
         "coordinate protocol-neutral token-state lookup and profile validation"
@@ -152,7 +182,7 @@ CAPABILITY_PURPOSES = {
     "tigrbl-token-revocation-capability": (
         "coordinate durable token revocation with optional audit recording"
     ),
-    "tigrbl-workload-identity": (
+    "tigrbl-workload-identity-capability": (
         "coordinate workload credential retrieval and identity verification"
     ),
 }
@@ -307,6 +337,24 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
     capability_packages = {
         item.distribution for item in packages if item.layer == "40-capabilities"
     }
+    registry_path = root / "pkgs" / "40-capabilities" / "capability-families.json"
+    registry = json.loads(registry_path.read_text(encoding="utf-8"))
+    registered_packages = {
+        str(item["package"]) for item in registry.get("capabilities", ())
+    }
+    if registered_packages != capability_packages:
+        violations.append(
+            Violation(
+                kind="stale-capability-family-registry",
+                package="40-capabilities",
+                package_layer="40-capabilities",
+                target="capability-families.json",
+                target_layer="architecture-policy",
+                path=registry_path.relative_to(root).as_posix(),
+                line=None,
+                detail="regenerate the registry after adding or removing a capability package",
+            )
+        )
     for package_name in sorted(capability_packages - set(CAPABILITY_PURPOSES)):
         package = by_distribution[package_name]
         violations.append(
@@ -344,7 +392,11 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
 
         manifest = package.path / "pyproject.toml"
         has_capability_implementation = False
-        if "tigrbl-capability" not in package.dependencies and (
+        capability_implementation_count = 0
+        is_compatibility_aggregator = (
+            package.distribution in CAPABILITY_COMPATIBILITY_AGGREGATORS
+        )
+        if not is_compatibility_aggregator and "tigrbl-capability" not in package.dependencies and (
             "tigrbl-default-capability" not in package.dependencies
         ):
             violations.append(
@@ -433,6 +485,7 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
                     import_root = _base_root(base, imports)
                     if import_root in CAPABILITY_IMPLEMENTATION_ROOTS:
                         has_capability_implementation = True
+                        capability_implementation_count += 1
                     target = by_import_root.get(import_root or "")
                     if (
                         target is None
@@ -455,7 +508,7 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
                         )
                     )
 
-        if not has_capability_implementation:
+        if not is_compatibility_aggregator and not has_capability_implementation:
             violations.append(
                 Violation(
                     kind="missing-capability-inheritance",
@@ -466,6 +519,25 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
                     path=package.path.relative_to(root).as_posix(),
                     line=None,
                     detail="no class inherits layer-10.1 Capability or layer-10.2 DefaultCapability",
+                )
+            )
+        elif (
+            not is_compatibility_aggregator
+            and capability_implementation_count != 1
+        ):
+            violations.append(
+                Violation(
+                    kind="capability-owner-count",
+                    package=package.distribution,
+                    package_layer=package.layer,
+                    target="one-primary-capability",
+                    target_layer="architecture-policy",
+                    path=package.path.relative_to(root).as_posix(),
+                    line=None,
+                    detail=(
+                        "canonical layer-40 packages own exactly one direct "
+                        f"Capability implementation; found {capability_implementation_count}"
+                    ),
                 )
             )
 
@@ -491,6 +563,7 @@ def report(violations: tuple[Violation, ...]) -> dict[str, object]:
             "forbidden_target_layers": sorted(CAPABILITY_FORBIDDEN_LAYERS),
             "forbidden_inheritance_layers": sorted(CAPABILITY_FORBIDDEN_BASE_LAYERS),
             "required_implementation_roots": sorted(CAPABILITY_IMPLEMENTATION_ROOTS),
+            "compatibility_aggregators": sorted(CAPABILITY_COMPATIBILITY_AGGREGATORS),
         },
         "capability_purposes": dict(sorted(CAPABILITY_PURPOSES.items())),
         "violation_count": len(violations),

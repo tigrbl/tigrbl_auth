@@ -50,7 +50,7 @@ from tigrbl_identity_storage_runtime.dpop_state import (
     check_and_store_dpop_replay,
     consume_dpop_nonce,
 )
-from tigrbl_principal_authentication import ClientSecretAuthenticationCapability
+from tigrbl_client_secret_authentication_capability import ClientSecretAuthenticationCapability
 from tigrbl_identity_storage_runtime.ops.clients import lookup_client
 
 from .security.token_issuance import build_rfc6749_token_endpoint_service

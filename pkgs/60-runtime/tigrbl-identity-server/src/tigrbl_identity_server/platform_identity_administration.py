@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Any
 from uuid import UUID
 
-from tigrbl_identity_admin_control_plane import IdentityAdministrationCapability
+from tigrbl_identity_administration_capability import IdentityAdministrationCapability
 from tigrbl_identity_contracts.admin_identities import (
     AdminIdentity,
     AdminIdentityCreate,

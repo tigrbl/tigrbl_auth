@@ -31,6 +31,7 @@ classifiers = [
 ]
 dependencies = [
     "tigrbl-identity-admin-control-plane==0.4.0.dev2",
+    "tigrbl-operator-administration-capability==0.4.0.dev2",
     "tigrbl-identity-author==0.4.0.dev2",
     "tigrbl-identity-runtime==0.4.0.dev2",
     "tigrbl-identity-storage-runtime==0.4.0.dev2",
