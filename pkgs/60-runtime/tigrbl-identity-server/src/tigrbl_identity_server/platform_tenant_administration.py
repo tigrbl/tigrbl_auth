@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Any
 from uuid import UUID
 
-from tigrbl_identity_admin.bootstrap import resolve_admin_user_from_request
+from tigrbl_identity_server.admin_bootstrap import resolve_admin_user_from_request
 from tigrbl_identity_admin_control_plane import TenantAdministrationCapability
 from tigrbl_identity_contracts.admin_tenants import (
     AdminTenant,

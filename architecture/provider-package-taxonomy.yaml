@@ -57,11 +57,11 @@ canonical_providers:
     - tigrbl-certificate-path-validator
     - tigrbl-certificate-status-provider
     - tigrbl-secret-hashing-bcrypt-provider
-    - tigrbl-security-cose
+    - tigrbl-cose-cryptography-provider
+    - tigrbl-jose-swarmauri-provider
     - tigrbl-security-signing-pqc
     - tigrbl-trust-anchor-provider
-  policy:
-    - tigrbl-authz-policy-decision-engine
+  policy: []
   remote_and_resolution:
     - tigrbl-did-resolver-provider
     - tigrbl-security-oidc-federation-provider
@@ -79,11 +79,14 @@ compatibility_or_migration_packages:
     target: tigrbl-principal-authentication
     target_layer: 40-capabilities
   tigrbl-authz-policy:
-    target: tigrbl-policy-evaluation-capability
+    target: tigrbl-policy-administration-capability-plus-policy-assurance-capability-plus-access-governance-capability
     target_layer: 40-capabilities
+  tigrbl-authz-policy-decision-engine:
+    target: tigrbl-policy-decision-engine-default
+    target_layer: 10-concrete
   tigrbl-authz-policy-admin-gate:
-    target: admin-api-runtime-gate
-    target_layer: 60-runtime-or-80-apis
+    target: tigrbl-auth-api-admin-gate
+    target_layer: 80-apis
   tigrbl-authz-resource-server-verifier:
     target: tigrbl-protected-resource-authorization-capability
     target_layer: 40-capabilities
@@ -97,8 +100,8 @@ compatibility_or_migration_packages:
     target: tigrbl-digital-credential-presentation
     target_layer: 40-capabilities
   tigrbl-identity-admin:
-    target: tigrbl-identity-admin-control-plane
-    target_layer: 40-capabilities
+    target: tigrbl-identity-admin-control-plane-plus-tigrbl-advanced-authentication-capability-plus-runtime-bootstrap
+    target_layer: 40-capabilities-and-60-runtime
   tigrbl-identity-admin-auth-anomaly-detector:
     target: anomaly-rules-tables-ops-and-capability
     target_layer: 10-01-30-40
@@ -106,8 +109,11 @@ compatibility_or_migration_packages:
     target: relationship-graph-tables-ops-and-capability
     target_layer: 10-01-30-40
   tigrbl-identity-jose:
-    target: jose-concrete-providers-and-protocols
+    target: tigrbl-jose-concrete-plus-tigrbl-jose-swarmauri-provider-plus-tigrbl-key-administration-capability-plus-tigrbl-security-protocol-jose
     target_layer: 10-20-50
+  tigrbl-security-cose:
+    target: tigrbl-cose-concrete-plus-tigrbl-cose-cryptography-provider
+    target_layer: 10-20
   tigrbl-mdoc-issuer-provider:
     target: iso-mdoc-protocol-plus-neutral-signing-providers
     target_layer: 50-protocols
@@ -155,7 +161,9 @@ canonical_deterministic_extractions:
   - tigrbl-acr-evaluator-basic-concrete
   - tigrbl-amr-evaluator-basic-concrete
   - tigrbl-authorization-provenance-concrete
+  - tigrbl-cose-concrete
   - tigrbl-dpop-confirmation-binding-concrete
   - tigrbl-mtls-confirmation-binding-concrete
   - tigrbl-pairwise-subject-identifier-concrete
   - tigrbl-pkce-concrete
+  - tigrbl-policy-decision-engine-default

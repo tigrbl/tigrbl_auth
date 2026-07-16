@@ -67,6 +67,8 @@ dependencies = [
     "tigrbl-authz-policy-evaluators-default==0.4.0.dev2",
     "tigrbl-authz-policy-attributes-mapping==0.4.0.dev2",
     "tigrbl-authz-policy-obligations-concrete==0.4.0.dev2",
+    "tigrbl-policy-decision-engine-default==0.4.0.dev2",
+    "tigrbl-cose-concrete==0.4.0.dev2",
     "tigrbl-security-authorization-provenance-builder==0.1.0",
     "tigrbl-identity-identities-concrete==0.4.0.dev2",
     "tigrbl-identity-credentials-concrete==0.4.0.dev2",
@@ -239,6 +241,11 @@ dependencies = [
     "tigrbl-identity-assurance-concrete==0.4.0.dev2",
     "tigrbl-capability==0.4.0.dev2",
     "tigrbl-default-capability==0.4.0.dev2",
+    "tigrbl-access-governance-capability==0.4.0.dev2",
+    "tigrbl-advanced-authentication-capability==0.4.0.dev2",
+    "tigrbl-key-administration-capability==0.4.0.dev2",
+    "tigrbl-policy-administration-capability==0.4.0.dev2",
+    "tigrbl-policy-assurance-capability==0.4.0.dev2",
     "tigrbl-authz-policy-authority-derivation-graph==0.4.0.dev2",
     "tigrbl-authority-graph-concrete==0.4.0.dev2",
     "tigrbl-authz-policy-decision-engine==0.4.0.dev2",
@@ -265,6 +272,8 @@ dependencies = [
     "tigrbl-security-oidc-federation-provider==0.1.0",
     "tigrbl-security-sender-constraint-validator==0.1.0",
     "tigrbl-security-signing-pqc==0.1.0",
+    "tigrbl-cose-cryptography-provider==0.4.0.dev2",
+    "tigrbl-jose-swarmauri-provider==0.4.0.dev2",
     "tigrbl-security-token-introspection-client==0.1.0",
     "tigrbl-security-token-jwks-cache==0.1.0",
     "tigrbl-identity-authenticator-bases==0.1.0",
@@ -286,6 +295,7 @@ dependencies = [
     "tigrbl-auth-protocol-oauth==0.4.0.dev2",
     "tigrbl-auth-protocol-oidc==0.4.0.dev2",
     "tigrbl-auth-protocol-webauthn==0.4.0.dev2",
+    "tigrbl-security-protocol-jose==0.4.0.dev2",
     "tigrbl-auth-protocol-oid4vci==0.4.0.dev2",
     "tigrbl-auth-protocol-oid4vp==0.4.0.dev2",
     "tigrbl-auth-protocol-authzen==0.4.0.dev2",
@@ -298,6 +308,7 @@ dependencies = [
     "tigrbl-security-events==0.4.0.dev2",
     "tigrbl-workload-identity==0.4.0.dev2",
     "tigrbl-authz-policy-admin-gate==0.4.0.dev2",
+    "tigrbl-auth-api-admin-gate==0.4.0.dev2",
     "tigrbl-authz-policy==0.4.0.dev2",
     "tigrbl-auth-plugin==0.4.0.dev2",
     "tigrbl-authz-resource-server==0.4.0.dev2",
@@ -551,6 +562,8 @@ tigrbl-security-webfinger-provider = { path = "pkgs/20-providers/tigrbl-security
 tigrbl-security-oidc-federation-provider = { path = "pkgs/20-providers/tigrbl-security-oidc-federation-provider", editable = true }
 tigrbl-security-sender-constraint-validator = { path = "pkgs/20-providers/tigrbl-security-sender-constraint-validator", editable = true }
 tigrbl-security-signing-pqc = { path = "pkgs/20-providers/tigrbl-security-signing-pqc", editable = true }
+tigrbl-cose-cryptography-provider = { path = "pkgs/20-providers/tigrbl-cose-cryptography-provider", editable = true }
+tigrbl-jose-swarmauri-provider = { path = "pkgs/20-providers/tigrbl-jose-swarmauri-provider", editable = true }
 tigrbl-security-token-introspection-client = { path = "pkgs/20-providers/tigrbl-security-token-introspection-client", editable = true }
 tigrbl-security-token-jwks-cache = { path = "pkgs/20-providers/tigrbl-security-token-jwks-cache", editable = true }
 tigrbl-identity-authenticator-bases = { path = "pkgs/05-bases/tigrbl-identity-authenticator-bases", editable = true }
@@ -573,6 +586,7 @@ tigrbl-auth-protocol-oidc-backchannel-replay-store = { path = "pkgs/deprecated/t
 tigrbl-set-concrete = { path = "pkgs/10-concrete/tigrbl-set-concrete", editable = true }
 tigrbl-auth-protocol-oidc = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oidc", editable = true }
 tigrbl-auth-protocol-webauthn = { path = "pkgs/50-protocols/tigrbl-auth-protocol-webauthn", editable = true }
+tigrbl-security-protocol-jose = { path = "pkgs/50-protocols/tigrbl-security-protocol-jose", editable = true }
 tigrbl-auth-protocol-oid4vci = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oid4vci", editable = true }
 tigrbl-auth-protocol-oid4vp = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oid4vp", editable = true }
 tigrbl-auth-protocol-authzen = { path = "pkgs/50-protocols/tigrbl-auth-protocol-authzen", editable = true }
@@ -585,6 +599,7 @@ tigrbl-attestation-appraisal = { path = "pkgs/40-capabilities/tigrbl-attestation
 tigrbl-security-events = { path = "pkgs/40-capabilities/tigrbl-security-events", editable = true }
 tigrbl-workload-identity = { path = "pkgs/40-capabilities/tigrbl-workload-identity", editable = true }
 tigrbl-authz-policy-admin-gate = { path = "pkgs/20-providers/tigrbl-authz-policy-admin-gate", editable = true }
+tigrbl-auth-api-admin-gate = { path = "pkgs/80-apis/tigrbl-auth-api-admin-gate", editable = true }
 tigrbl-authz-policy-authority-derivation-graph = { path = "pkgs/30-storage-runtime/tigrbl-authz-policy-authority-derivation-graph", editable = true }
 tigrbl-authority-graph-concrete = { path = "pkgs/10-concrete/tigrbl-authority-graph-concrete", editable = true }
 tigrbl-authz-policy = { path = "pkgs/20-providers/tigrbl-authz-policy", editable = true }
@@ -613,6 +628,8 @@ tigrbl-authz-policy-combiner-default = { path = "pkgs/10-concrete/tigrbl-authz-p
 tigrbl-authz-policy-evaluators-default = { path = "pkgs/10-concrete/tigrbl-authz-policy-evaluators-default", editable = true }
 tigrbl-authz-policy-attributes-mapping = { path = "pkgs/10-concrete/tigrbl-authz-policy-attributes-mapping", editable = true }
 tigrbl-authz-policy-obligations-concrete = { path = "pkgs/10-concrete/tigrbl-authz-policy-obligations-concrete", editable = true }
+tigrbl-policy-decision-engine-default = { path = "pkgs/10-concrete/tigrbl-policy-decision-engine-default", editable = true }
+tigrbl-cose-concrete = { path = "pkgs/10-concrete/tigrbl-cose-concrete", editable = true }
 tigrbl-security-authorization-provenance-builder = { path = "pkgs/20-providers/tigrbl-security-authorization-provenance-builder", editable = true }
 tigrbl-identity-identities-concrete = { path = "pkgs/10-concrete/tigrbl-identity-identities-concrete", editable = true }
 tigrbl-identity-credentials-concrete = { path = "pkgs/10-concrete/tigrbl-identity-credentials-concrete", editable = true }
@@ -755,6 +772,11 @@ tigrbl-security-key-rotation-policy-contracts = { path = "pkgs/02-contracts/tigr
 tigrbl-identity-admin-advanced-authenticator-registry = { path = "pkgs/deprecated/tigrbl-identity-admin-advanced-authenticator-registry", editable = true }
 tigrbl-identity-admin-auth-anomaly-detector = { path = "pkgs/20-providers/tigrbl-identity-admin-auth-anomaly-detector", editable = true }
 tigrbl-account-self-service = { path = "pkgs/40-capabilities/tigrbl-account-self-service", editable = true }
+tigrbl-access-governance-capability = { path = "pkgs/40-capabilities/tigrbl-access-governance-capability", editable = true }
+tigrbl-advanced-authentication-capability = { path = "pkgs/40-capabilities/tigrbl-advanced-authentication-capability", editable = true }
+tigrbl-key-administration-capability = { path = "pkgs/40-capabilities/tigrbl-key-administration-capability", editable = true }
+tigrbl-policy-administration-capability = { path = "pkgs/40-capabilities/tigrbl-policy-administration-capability", editable = true }
+tigrbl-policy-assurance-capability = { path = "pkgs/40-capabilities/tigrbl-policy-assurance-capability", editable = true }
 tigrbl-identity-admin-control-plane = { path = "pkgs/40-capabilities/tigrbl-identity-admin-control-plane", editable = true }
 tigrbl-identity-admin-federation-registry = { path = "pkgs/deprecated/tigrbl-identity-admin-federation-registry", editable = true }
 tigrbl-identity-admin-policy-registry = { path = "pkgs/deprecated/tigrbl-identity-admin-policy-registry", editable = true }

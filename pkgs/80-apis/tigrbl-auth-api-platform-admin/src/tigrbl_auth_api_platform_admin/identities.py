@@ -26,7 +26,7 @@ from tigrbl_identity_server.platform_identity_administration import (
     identity_administration_for_request,
     require_identity_administrator,
 )
-from tigrbl_authz_policy_admin_gate import ADMIN_OPENAPI_SECURITY_DEPENDENCIES
+from tigrbl_auth_api_admin_gate import ADMIN_OPENAPI_SECURITY_DEPENDENCIES
 
 
 _email = constr(strip_whitespace=True, min_length=3, max_length=120)

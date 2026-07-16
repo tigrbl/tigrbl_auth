@@ -15,7 +15,7 @@ from typing import Any, Final, Mapping
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey, Ed25519PublicKey
 from tigrbl_identity_core.base64url import base64url_decode, base64url_encode
-from tigrbl_identity_jose.pqc import (
+from tigrbl_jose_swarmauri_provider.pqc import (
     ML_DSA_65_ALG,
     PQC_JWK_KTY,
     PQC_SIGNATURE_ALGS,

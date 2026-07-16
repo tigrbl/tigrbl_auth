@@ -1,0 +1,48 @@
+"""
+tigrbl_authn_credentials.adapters.local
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+Concrete implementation of the ``AuthNProvider`` ABC declared by
+``tigrbl.authn_abc``.  It merely **adapts** the public helpers that already
+exist in *tigrbl_auth* so that Tigrbl can consume them automatically.
+
+Usage
+-----
+>>> from tigrbl import TigrblRouter
+>>> from tigrbl_authn_credentials.adapters import LocalAuthNAdapter
+>>> api = TigrblRouter(engine=ENGINE, authn=LocalAuthNAdapter())
+"""
+
+from __future__ import annotations
+
+from tigrbl.requests import Request
+from tigrbl.types import AuthNProvider
+from tigrbl_identity_server.security.auth import get_principal
+from tigrbl_identity_server.security.context import principal_var  # noqa: F401  # ensure ContextVar is initialised
+from .context import set_auth_context
+
+
+class LocalAuthNAdapter(AuthNProvider):
+    """
+    Thin wrapper that plugs existing *tigrbl_auth* functions into
+    the abstract interface expected by Tigrbl.
+    """
+
+    # ------------------------------------------------------------------ #
+    # Tigrbl dependency (mandatory)                                     #
+    # ------------------------------------------------------------------ #
+    async def get_principal(self, request: Request) -> dict:  # noqa: D401
+        """
+        Delegate to ``tigrbl_identity_server.security.security_deps.get_principal`` and forward
+        whatever dict it returns.
+
+        Raises
+        ------
+        tigrbl.types.HTTPException(401)
+            If the APIâ€‘key / bearer token is invalid or expired.
+        """
+        principal = await get_principal(request)  # type: ignore[arg-type]
+        set_auth_context(request, principal)
+        return principal
+
+
+__all__ = ["LocalAuthNAdapter"]

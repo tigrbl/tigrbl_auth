@@ -1,6 +1,6 @@
-"""Compatibility facade for `tigrbl_authz_policy_admin_gate`."""
+"""Runtime compatibility facade for the layer-80 administration gate."""
 
 from __future__ import annotations
 # ruff: noqa: F403,F405
 
-from tigrbl_authz_policy_admin_gate import *
+from tigrbl_auth_api_admin_gate import *

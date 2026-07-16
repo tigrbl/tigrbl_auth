@@ -1,6 +1,3 @@
-from __future__ import annotations
+"""Compatibility facade for tigrbl-advanced-authentication-capability."""
 
-from tigrbl_identity_admin_auth_anomaly_detector import AuthAnomalyDetector
-
-
-__all__ = ["AuthAnomalyDetector"]
+from tigrbl_advanced_authentication_capability.telemetry import *

@@ -65,6 +65,12 @@ CAPABILITY_IMPLEMENTATION_ROOTS = frozenset(
 # Layer 40 is intentionally sparse and opt-in.  Each entry names the complete
 # use case that would disappear if the orchestration package were removed.
 CAPABILITY_PURPOSES = {
+    "tigrbl-access-governance-capability": (
+        "coordinate entitlement management, provisioning, and access reviews"
+    ),
+    "tigrbl-advanced-authentication-capability": (
+        "coordinate adaptive, passwordless, MFA, and authenticator lifecycle operations"
+    ),
     "tigrbl-account-self-service": (
         "coordinate authenticated profile, password, session, and consent lifecycle"
     ),
@@ -87,6 +93,9 @@ CAPABILITY_PURPOSES = {
     "tigrbl-identity-admin-control-plane": (
         "coordinate administrative resource lifecycle use cases"
     ),
+    "tigrbl-key-administration-capability": (
+        "coordinate key rotation and publication through injected implementations"
+    ),
     "tigrbl-grant-negotiation-capability": (
         "coordinate negotiated grant requests, continuation, and token rotation"
     ),
@@ -100,6 +109,12 @@ CAPABILITY_PURPOSES = {
     "tigrbl-policy-evaluation-capability": (
         "coordinate normalized policy evaluation, batch evaluation, entity search, "
         "and service description"
+    ),
+    "tigrbl-policy-administration-capability": (
+        "coordinate RBAC, ABAC, delegated-administration, and policy simulation operations"
+    ),
+    "tigrbl-policy-assurance-capability": (
+        "coordinate authorization invariants, replay checks, and assurance reporting"
     ),
     "tigrbl-pushed-authorization-capability": (
         "coordinate durable pushed-request creation with optional audit recording"

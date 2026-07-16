@@ -1,25 +1,12 @@
-"""AdminGate surface for generated Tigrbl auth control-plane routes."""
+"""Deprecated compatibility facade for tigrbl-auth-api-admin-gate."""
 
-from __future__ import annotations
+import warnings
 
-from .gate import (
-    ADMIN_API_KEY_ENV,
-    ADMIN_API_KEY_HEADER,
-    ADMIN_BEARER_SCHEME,
-    ADMIN_HEADER_SCHEME,
-    ADMIN_OPENAPI_SECURITY_DEPENDENCIES,
-    ADMIN_SECURITY_REQUIREMENT,
-    ADMIN_SECURITY_SCHEMES,
-    AdminGate,
+from tigrbl_auth_api_admin_gate import *
+from tigrbl_auth_api_admin_gate import __all__
+
+warnings.warn(
+    "tigrbl-authz-policy-admin-gate moved to tigrbl-auth-api-admin-gate",
+    DeprecationWarning,
+    stacklevel=2,
 )
-
-__all__ = [
-    "ADMIN_API_KEY_ENV",
-    "ADMIN_API_KEY_HEADER",
-    "ADMIN_BEARER_SCHEME",
-    "ADMIN_HEADER_SCHEME",
-    "ADMIN_OPENAPI_SECURITY_DEPENDENCIES",
-    "ADMIN_SECURITY_REQUIREMENT",
-    "ADMIN_SECURITY_SCHEMES",
-    "AdminGate",
-]

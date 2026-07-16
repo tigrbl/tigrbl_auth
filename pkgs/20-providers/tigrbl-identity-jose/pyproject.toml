@@ -35,9 +35,12 @@ classifiers = [
 ]
 dependencies = [
     "tigrbl-jose-concrete==0.4.0.dev2",
+    "tigrbl-jose-swarmauri-provider==0.4.0.dev2",
     "tigrbl-jose-bases==0.4.0.dev2",
+    "tigrbl-key-administration-capability==0.4.0.dev2",
+    "tigrbl-security-protocol-jose==0.4.0.dev2",
     "tigrbl-security-key-rotation-policy-contracts==0.1.0",
-    "bcrypt==5.0.0",
+    "tigrbl-secret-hashing-bcrypt-provider==0.1.0",
     "swarmauri_core==0.10.0",
     "swarmauri_crypto_jwe==0.3.0.dev5",
     "swarmauri_keyprovider_file==0.2.0",

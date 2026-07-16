@@ -1,21 +1,13 @@
-from __future__ import annotations
+"""Compatibility facade for principal-authentication proof bindings."""
 
-from tigrbl_identity_credentials_concrete import (
-    DpopKeyCredential,
-    MtlsCertificateCredential,
-)
-from tigrbl_identity_contracts.credentials import (
-    ProofBinding,
-)
-from .lifecycle import (
-    create_dpop_key_credential,
-    create_mtls_certificate_credential,
+from tigrbl_principal_authentication import proof_bindings as _proof_bindings
+
+globals().update(
+    {
+        name: value
+        for name, value in vars(_proof_bindings).items()
+        if not name.startswith("__")
+    }
 )
 
-__all__ = [
-    "DpopKeyCredential",
-    "MtlsCertificateCredential",
-    "ProofBinding",
-    "create_dpop_key_credential",
-    "create_mtls_certificate_credential",
-]
+__all__ = [name for name in vars(_proof_bindings) if not name.startswith("_")]

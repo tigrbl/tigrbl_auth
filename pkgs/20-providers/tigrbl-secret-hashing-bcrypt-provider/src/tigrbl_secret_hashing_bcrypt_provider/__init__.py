@@ -70,4 +70,26 @@ class BcryptSecretHasher:
         )
 
 
-__all__ = ["BcryptSecretHasher"]
+def _legacy_bcrypt_bytes(plain: str) -> bytes:
+    value = plain.encode("utf-8")
+    return value[:72]
+
+
+def hash_pw(plain: str) -> bytes:
+    """Deprecated bytes-oriented bcrypt compatibility helper."""
+
+    return bcrypt.hashpw(_legacy_bcrypt_bytes(plain), bcrypt.gensalt(12))
+
+
+def verify_pw(plain: str, hashed: bytes | None) -> bool:
+    """Deprecated bytes-oriented bcrypt compatibility helper."""
+
+    if hashed is None:
+        return False
+    try:
+        return bcrypt.checkpw(_legacy_bcrypt_bytes(plain), hashed)
+    except (TypeError, ValueError):
+        return False
+
+
+__all__ = ["BcryptSecretHasher", "hash_pw", "verify_pw"]

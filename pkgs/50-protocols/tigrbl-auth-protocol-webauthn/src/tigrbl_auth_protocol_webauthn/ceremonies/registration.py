@@ -14,7 +14,8 @@ from tigrbl_identity_contracts.public_key_authentication import (
     PublicKeyCredentialSource,
     VerifiedCredentialRegistration,
 )
-from tigrbl_security_cose import decode_cose_key, verify_detached_signature
+from tigrbl_cose_concrete import decode_cose_key
+from tigrbl_cose_cryptography_provider import verify_detached_signature
 
 from ..codecs import decode_attestation_object, parse_client_data
 from ..attestation import AttestationVerificationInput, AttestationVerifierRegistry

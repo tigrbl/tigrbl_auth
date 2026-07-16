@@ -1,6 +1,9 @@
 """Compatibility export for OIDC ID Token protocol helpers."""
 
-from tigrbl_identity_jose.oidc_key_runtime import _RSA_KEY_PATH, rsa_key_provider as _provider
+from tigrbl_jose_swarmauri_provider.oidc_key_runtime import (
+    _RSA_KEY_PATH,
+    rsa_key_provider as _provider,
+)
 
 _service_cache = None
 from .standards.id_token import (

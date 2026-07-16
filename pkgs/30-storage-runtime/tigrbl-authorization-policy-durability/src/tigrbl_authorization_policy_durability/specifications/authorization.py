@@ -2,7 +2,12 @@
 
 from tigrbl_identity_storage.tables import (
     AttributePolicy,
+    AuthorizationInvariant,
     DelegatedAdminScope,
+    InvariantEvaluation,
+    InvariantViolation,
+    Policy,
+    PolicyVersion,
     Role,
     TenantMembership,
 )
@@ -27,6 +32,11 @@ TenantMembershipTable = TenantMembership
 DelegatedAdminScopeTable = DelegatedAdminScope
 RoleTable = Role
 AttributePolicyTable = AttributePolicy
+AuthorizationInvariantTable = AuthorizationInvariant
+InvariantEvaluationTable = InvariantEvaluation
+InvariantViolationTable = InvariantViolation
+PolicyTable = Policy
+PolicyVersionTable = PolicyVersion
 
 AttributePolicyRuntimeSpec = deriveRuntimeTableSpec(
     AttributePolicyTable,
@@ -92,8 +102,13 @@ DelegatedAdminScopeRuntimeSpec = deriveRuntimeTableSpec(
 __all__ = [
     "AttributePolicyRuntimeSpec",
     "AttributePolicyTable",
+    "AuthorizationInvariantTable",
     "DelegatedAdminScopeRuntimeSpec",
     "DelegatedAdminScopeTable",
+    "InvariantEvaluationTable",
+    "InvariantViolationTable",
+    "PolicyTable",
+    "PolicyVersionTable",
     "TenantMembershipRuntimeSpec",
     "TenantMembershipTable",
     "RoleRuntimeSpec",

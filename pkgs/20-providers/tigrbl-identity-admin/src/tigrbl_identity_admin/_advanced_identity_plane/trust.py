@@ -1,6 +1,3 @@
-from __future__ import annotations
+"""Compatibility facade for tigrbl-advanced-authentication-capability."""
 
-from tigrbl_trust_federation_graph_concrete import TrustFederationGraph
-
-
-__all__ = ["TrustFederationGraph"]
+from tigrbl_advanced_authentication_capability.trust import *

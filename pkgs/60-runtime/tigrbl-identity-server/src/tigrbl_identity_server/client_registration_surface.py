@@ -32,7 +32,7 @@ from tigrbl_identity_contracts.oauth import (
 )
 from tigrbl_identity_core.constant_time import text_equal
 from tigrbl_identity_core.digests import token_hash
-from tigrbl_identity_jose.key_management import hash_pw
+from tigrbl_secret_hashing_bcrypt_provider import hash_pw
 from tigrbl_identity_runtime.deployment import (
     deployment_from_app,
     deployment_from_request,

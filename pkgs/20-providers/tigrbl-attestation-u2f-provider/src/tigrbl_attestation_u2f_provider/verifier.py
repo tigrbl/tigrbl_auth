@@ -13,7 +13,7 @@ from tigrbl_identity_contracts.public_key_authentication import (
     AuthenticatorAttestation,
 )
 from tigrbl_public_key_authentication_bases import AttestationStatementVerifierBase
-from tigrbl_security_cose import decode_cose_key
+from tigrbl_cose_concrete import decode_cose_key
 
 
 def verify_u2f_attestation(

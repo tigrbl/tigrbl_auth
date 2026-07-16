@@ -9,7 +9,8 @@ dependencies = [
     "cbor2==6.1.3",
     "tigrbl-identity-core==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
-    "tigrbl-security-cose==0.4.0.dev2",
+    "tigrbl-cose-concrete==0.4.0.dev2",
+    "tigrbl-cose-cryptography-provider==0.4.0.dev2",
     "tigrbl-public-key-registration-capability==0.4.0.dev2",
     "tigrbl-public-key-authentication-capability==0.4.0.dev2",
 ]

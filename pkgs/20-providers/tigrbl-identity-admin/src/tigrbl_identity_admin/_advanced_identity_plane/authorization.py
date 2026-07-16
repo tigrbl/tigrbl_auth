@@ -1,7 +1,3 @@
-from __future__ import annotations
+"""Compatibility facade for tigrbl-advanced-authentication-capability."""
 
-from tigrbl_identity_admin_relationship_graph import RelationshipGraph
-from tigrbl_identity_storage.tables import Policy, PolicyVersion
-
-
-__all__ = ["Policy", "PolicyVersion", "RelationshipGraph"]
+from tigrbl_advanced_authentication_capability.authorization import *

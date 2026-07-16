@@ -1,6 +1,6 @@
 """WebAuthn credential public-key codec."""
 
-from tigrbl_security_cose import decode_cose_key
+from tigrbl_cose_concrete import decode_cose_key
 
 
 def decode_credential_public_key(encoded: bytes):

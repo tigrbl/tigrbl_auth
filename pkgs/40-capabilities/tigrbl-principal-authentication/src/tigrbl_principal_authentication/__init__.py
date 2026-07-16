@@ -13,8 +13,19 @@ from tigrbl_authenticator_password_local import PasswordLocalAuthenticator
 from tigrbl_authenticator_service_key_local import ServiceKeyLocalAuthenticator
 from tigrbl_capability import Capability
 from tigrbl_identity_contracts.authenticators import AuthenticationEvidence
-from tigrbl_identity_contracts.capabilities import CapabilityDefinition, CapabilityOperation
-from tigrbl_identity_contracts.principal_authentication import RecordAuthenticationResult
+from tigrbl_identity_contracts.capabilities import (
+    CapabilityDefinition,
+    CapabilityOperation,
+)
+from tigrbl_identity_contracts.principal_authentication import (
+    RecordAuthenticationResult,
+)
+
+from .backends import ApiKeyBackend, AuthError, PasswordBackend
+from .lifecycle import *
+from .lifecycle import __all__ as _lifecycle_exports
+from .proof_bindings import *
+from .proof_bindings import __all__ as _proof_binding_exports
 
 
 RecordLookup: TypeAlias = Callable[[Mapping[str, Any]], object | Awaitable[object]]
@@ -151,8 +162,12 @@ class ApiKeyAuthenticationCapability(Capability):
         self._find_service_keys = find_service_keys
         self._resolve_user = resolve_user
         self._mark_used = mark_used
-        self._api_key_authenticator = api_key_authenticator or ApiKeyLocalAuthenticator()
-        self._service_key_authenticator = service_key_authenticator or ServiceKeyLocalAuthenticator()
+        self._api_key_authenticator = (
+            api_key_authenticator or ApiKeyLocalAuthenticator()
+        )
+        self._service_key_authenticator = (
+            service_key_authenticator or ServiceKeyLocalAuthenticator()
+        )
         super().__init__(
             CapabilityDefinition("principal.authentication.api-key", "1.0"),
             operations={
@@ -262,10 +277,15 @@ class ApiKeyAuthenticationCapability(Capability):
 
 __all__ = [
     "ApiKeyAuthenticationCapability",
+    "ApiKeyBackend",
+    "AuthError",
     "ClientSecretAuthenticationCapability",
     "CredentialTouch",
     "KeyLookup",
     "PasswordAuthenticationCapability",
+    "PasswordBackend",
     "PrincipalResolver",
     "RecordLookup",
+    *_lifecycle_exports,
+    *_proof_binding_exports,
 ]

@@ -33,16 +33,9 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
-    "tigrbl-identity-identities-concrete==0.4.0.dev2",
-    "tigrbl-identity-credentials-concrete==0.4.0.dev2",
-    "tigrbl-identity-admin-auth-anomaly-detector==0.4.0.dev2",
+    "tigrbl-advanced-authentication-capability==0.4.0.dev2",
     "tigrbl-identity-admin-control-plane==0.4.0.dev2",
-    "tigrbl-identity-admin-relationship-graph==0.4.0.dev2",
-    "tigrbl-trust-federation-graph-concrete==0.4.0.dev2",
-    "tigrbl-identity-contracts==0.4.0.dev2",
-    "tigrbl-identity-jose==0.4.0.dev2",
-    "tigrbl-identity-storage==0.4.0.dev2",
-    "tigrbl-secret-hashing-bcrypt-provider==0.1.0",
+    "tigrbl-identity-server==0.4.0.dev2",
 ]
 
 [project.urls]

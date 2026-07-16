@@ -21,7 +21,7 @@ from typing import Any, Final, Mapping
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
 from tigrbl_identity_core.base64url import base64url_decode, base64url_encode
-from tigrbl_identity_jose.jwe_policy import JWEPolicy
+from tigrbl_jose_concrete import JWEPolicy
 from tigrbl_identity_runtime.settings import settings
 
 RFC7516_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc7516"

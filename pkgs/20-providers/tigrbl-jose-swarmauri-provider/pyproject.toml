@@ -1,0 +1,27 @@
+[project]
+name = "tigrbl-jose-swarmauri-provider"
+version = "0.4.0.dev2"
+description = "Swarmauri-backed JOSE provider."
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = [
+    "tigrbl-jose-concrete==0.4.0.dev2",
+    "tigrbl-jose-bases==0.4.0.dev2",
+    "tigrbl-identity-contracts==0.4.0.dev2",
+    "tigrbl-identity-core==0.4.0.dev2",
+    "tigrbl-security-signing-pqc==0.1.0",
+    "swarmauri_core==0.10.0",
+    "swarmauri_crypto_jwe==0.3.0.dev5",
+    "swarmauri_keyprovider_file==0.2.0",
+    "swarmauri_keyprovider_local==0.2.0",
+    "swarmauri_signing_ed25519==0.2.0.dev32",
+    "swarmauri_signing_jws==0.3.0.dev31",
+    "swarmauri_tokens_jwt==0.3.0.dev31",
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tigrbl_jose_swarmauri_provider", from = "src" }]

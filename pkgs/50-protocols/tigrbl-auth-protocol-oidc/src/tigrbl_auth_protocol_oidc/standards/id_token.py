@@ -13,7 +13,7 @@ from tigrbl_identity_contracts.protocol_configuration import (
     protocol_settings as settings,
 )
 from tigrbl_identity_core.errors import InvalidTokenError
-from tigrbl_identity_jose.oidc_key_runtime import (
+from tigrbl_jose_swarmauri_provider.oidc_key_runtime import (
     _RSA_KEY_PATH,  # noqa: F401 - private compatibility patch point
     ensure_rsa_jwt_key,
     id_token_service,

@@ -1,0 +1,27 @@
+[project]
+name = "tigrbl-advanced-authentication-capability"
+version = "0.4.0.dev2"
+description = "Advanced adaptive authentication capability."
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = [
+    "tigrbl-capability==0.4.0.dev2",
+    "tigrbl-authorization-policy-durability==0.4.0.dev2",
+    "tigrbl-identity-contracts==0.4.0.dev2",
+    "tigrbl-identity-core==0.4.0.dev2",
+    "tigrbl-identity-credentials-concrete==0.4.0.dev2",
+    "tigrbl-identity-identities-concrete==0.4.0.dev2",
+    "tigrbl-identity-admin-auth-anomaly-detector==0.4.0.dev2",
+    "tigrbl-identity-admin-relationship-graph==0.4.0.dev2",
+    "tigrbl-trust-federation-graph-concrete==0.4.0.dev2",
+    "tigrbl-identity-durability==0.4.0.dev2",
+    "tigrbl-webauthn-durability==0.4.0.dev2",
+    "tigrbl-jose-concrete==0.4.0.dev2",
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tigrbl_advanced_authentication_capability", from = "src" }]

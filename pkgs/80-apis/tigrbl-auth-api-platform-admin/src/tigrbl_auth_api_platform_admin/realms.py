@@ -9,7 +9,7 @@ from tigrbl import TigrblRouter
 from tigrbl.requests import Request
 from tigrbl.runtime.status import HTTPException
 from tigrbl.security import Depends
-from tigrbl_authz_policy_admin_gate import ADMIN_OPENAPI_SECURITY_DEPENDENCIES
+from tigrbl_auth_api_admin_gate import ADMIN_OPENAPI_SECURITY_DEPENDENCIES
 from tigrbl_identity_contracts.admin_realms import (
     AdminRealm,
     AdminRealmCreate,

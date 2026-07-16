@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from typing import Final
 
-from tigrbl_identity_jose.pqc import ML_DSA_65_ALG
+from tigrbl_jose_swarmauri_provider.pqc import ML_DSA_65_ALG
 from tigrbl_identity_runtime.settings import settings
 
 try:  # pragma: no cover - exercised when Swarmauri is installed

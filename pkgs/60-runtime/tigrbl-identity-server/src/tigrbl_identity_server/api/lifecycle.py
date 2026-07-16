@@ -10,7 +10,7 @@ from tigrbl_identity_server.surfaces import PublicRouter as surface_api
 from tigrbl_identity_storage_runtime import initializeIdentityRuntimeTables
 from tigrbl_identity_storage_runtime.migrations import apply_all_async
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_admin.bootstrap import ensure_default_superuser_async
+from tigrbl_identity_server.admin_bootstrap import ensure_default_superuser_async
 from tigrbl_identity_runtime import RuntimeCapabilityAssembly
 
 

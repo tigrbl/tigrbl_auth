@@ -1,6 +1,3 @@
-from __future__ import annotations
+"""Compatibility facade for tigrbl-advanced-authentication-capability."""
 
-from tigrbl_identity_storage.tables import Federation, FederatedSession, IdentityProvider
-
-
-__all__ = ["Federation", "FederatedSession", "IdentityProvider"]
+from tigrbl_advanced_authentication_capability.federation import *

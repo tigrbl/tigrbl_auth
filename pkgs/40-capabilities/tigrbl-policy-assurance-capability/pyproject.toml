@@ -1,0 +1,20 @@
+[project]
+name = "tigrbl-policy-assurance-capability"
+version = "0.4.0.dev2"
+description = "Authorization policy assurance capability."
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = [
+    "tigrbl-capability==0.4.0.dev2",
+    "tigrbl-authority-graph-concrete==0.4.0.dev2",
+    "tigrbl-identity-contracts==0.4.0.dev2",
+    "tigrbl-identity-core==0.4.0.dev2",
+    "tigrbl-authorization-policy-durability==0.4.0.dev2",
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tigrbl_policy_assurance_capability", from = "src" }]

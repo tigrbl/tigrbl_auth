@@ -89,7 +89,7 @@ async def _find_user_by_identifier(db: Any, identifier: str) -> User | None:
 
 
 async def _resolve_admin_session_and_user(request: Request, db: Any) -> tuple[Any, User]:
-    from tigrbl_identity_admin.bootstrap import resolve_admin_user_from_request
+    from tigrbl_identity_server.admin_bootstrap import resolve_admin_user_from_request
     from tigrbl_identity_runtime.deployment import deployment_from_request
     from tigrbl_identity_runtime.settings import settings
     from tigrbl_identity_server.security.handler_records import resolve_browser_session_record
@@ -107,7 +107,7 @@ async def _resolve_admin_session_and_user(request: Request, db: Any) -> tuple[An
 
 @admin_api.route("/admin/auth/login", methods=["POST"], response_model=AdminSessionOut, tags=ADMIN_AUTH_TAGS)
 async def admin_login(request: Request, creds: CredsIn | None = None, db: Any = Depends(get_db)) -> Response:
-    from tigrbl_identity_admin.bootstrap import user_is_admin
+    from tigrbl_identity_server.admin_bootstrap import user_is_admin
     from tigrbl_identity_server.login_runtime import login_user
 
     if creds is None:
@@ -149,7 +149,7 @@ async def admin_forgot_password(
     payload: AdminPasswordResetRequestIn | None = None,
     db: Any = Depends(get_db),
 ) -> AdminSessionOut:
-    from tigrbl_identity_admin.bootstrap import issue_password_reset_token, user_is_admin
+    from tigrbl_identity_server.admin_bootstrap import issue_password_reset_token, user_is_admin
     from tigrbl_identity_runtime.settings import settings
 
     if payload is None:
@@ -169,7 +169,7 @@ async def admin_reset_password(
     payload: AdminPasswordResetCompleteIn | None = None,
     db: Any = Depends(get_db),
 ) -> Response:
-    from tigrbl_identity_admin.bootstrap import consume_password_reset_token
+    from tigrbl_identity_server.admin_bootstrap import consume_password_reset_token
     from tigrbl_identity_runtime.http_standards.cookies import clear_session_cookie
 
     if payload is None:

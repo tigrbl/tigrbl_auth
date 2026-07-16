@@ -17,7 +17,7 @@ from tigrbl_identity_contracts.public_key_authentication import (
     VerifiedPublicKeyAssertion,
     VerifierBindingEvidence,
 )
-from tigrbl_security_cose import verify_detached_signature
+from tigrbl_cose_cryptography_provider import verify_detached_signature
 
 from ..codecs import decode_authenticator_data, parse_client_data
 from ..errors import AuthenticationVerificationError

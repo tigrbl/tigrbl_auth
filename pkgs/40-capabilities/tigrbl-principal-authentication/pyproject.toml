@@ -8,6 +8,8 @@ license = "Apache-2.0"
 dependencies = [
     "tigrbl-capability==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
+    "tigrbl-identity-credentials-concrete==0.4.0.dev2",
+    "tigrbl-secret-hashing-bcrypt-provider==0.1.0",
     "tigrbl-authenticator-password-local==0.1.0",
     "tigrbl-authenticator-client-secret-local==0.1.0",
     "tigrbl-authenticator-api-key-local==0.1.0",
