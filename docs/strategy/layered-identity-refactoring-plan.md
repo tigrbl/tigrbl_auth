@@ -315,11 +315,11 @@ table modules.
 ### Move out of storage entirely
 
 - `tables/auth_session/_table.py` account router and session HTTP handlers ->
-  `pkgs/80-apis/tigrbl-auth-api-my-account`.
+  `pkgs/90-backend-apps/tigrbl-auth-backend-app-my-account`.
 - `tables/realm/_table.py` admin router and realm/tenant HTTP handlers -> the
   appropriate layer-80 admin API package.
 - `tables/user/_admin_identity_route.py` -> layer-80 admin API.
-- `tables/user/_account_route.py` -> `tigrbl-auth-api-my-account`.
+- `tables/user/_account_route.py` -> `tigrbl-auth-backend-app-my-account`.
 - Password and client-secret hashing/verification imports -> layer-20
   authenticator providers.
 - `_persistence_extended.py` and `persistence.py` lifecycle/use-case facades ->
@@ -668,14 +668,14 @@ errors.py         # protocol error mapping
 
 ### Layer 90 UIX core
 
-- `pkgs/90-uix-core/uix-core` owns browser-safe, reusable React layout,
+- `pkgs/100-uix-core/uix-core` owns browser-safe, reusable React layout,
   authentication, API-client, form, table, and feedback primitives.
 - It does not own product routes, protocol algorithms, server-side secrets, or
   durable state.
 
-### Layer 95 product UIX
+### Layer 105 product UIX
 
-- `pkgs/95-ui/*` composes product-specific browser applications and SDKs from
+- `pkgs/105-ui/*` composes product-specific browser applications and SDKs from
   layer-90 UIX primitives and layer-80 API contracts.
 - Each UIX package advertises only operations actually mounted by its paired
   API surface. Deployment manifests remain in their existing workspace owners;
@@ -839,7 +839,7 @@ layer-50 token/introspection binding
 | ADD | `.../ops/identities.py` | Implement `lookup_identity_by_identifier`, `replace_password_hash`, `set_identity_enabled`, and password-reset state mutations. Reads filter active records and preserve username/email lookup semantics. |
 | ADD | `.../tables/identities.py` | Define and derive `UserRuntimeSpec`; attach aliases without HTTP bindings. |
 | MOVE | `pkgs/01-storage/.../tables/user/_table.py` | Remove request/response models, `TigrblRouter`, route imports, static route method attachment, `verify_password`, `lookup_by_identifier`, `op_ctx`, and JOSE password imports. Keep mapped columns, relationships, passive `roles`/`scopes` projections, and bootstrap identifiers. |
-| MOVE | `pkgs/01-storage/.../tables/user/_account_route.py` | Move HTTP schemas and handlers to `pkgs/80-apis/tigrbl-auth-api-my-account/src/tigrbl_auth_api_my_account/identities.py`; call the password-authentication capability and identity runtime operations. |
+| MOVE | `pkgs/01-storage/.../tables/user/_account_route.py` | Move HTTP schemas and handlers to `pkgs/90-backend-apps/tigrbl-auth-backend-app-my-account/src/tigrbl_auth_backend_app_my_account/identities.py`; call the password-authentication capability and identity runtime operations. |
 | MOVE | `pkgs/01-storage/.../tables/user/_admin_identity_route.py` | Move to the appropriate tenant/platform admin API modules; delegate mutations to the identity-administration capability. |
 | UPDATE | `.../login.py`, `pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/admin_auth.py` | Replace `row.verify_password(...)` with `PasswordAuthenticationCapability.authenticate(...)`. |
 | UPDATE | bootstrap composition | Hash the initial superuser password through the configured password provider during bootstrap. `User.DEFAULT_ROWS` must not execute provider cryptography at import time. |
@@ -1126,7 +1126,7 @@ or move carrier choices into handlers.
 | 60 | `tigrbl-identity-runtime/token_service.py` | Consume typed capability/protocol services rather than persistence helpers directly. |
 | 60 | CLI handlers | Call administration capabilities; remove direct `operator_store`, `resource_service`, and key-management mutations that bypass policy. |
 | 70 | `tigrbl-auth` | Export stable contracts/capabilities/protocol configuration. Warn with removal versions for old scope, subject, claims, persistence, and model-method paths. |
-| 80 | all `tigrbl-auth-api-*` packages | Own HTTP schemas/routes, translate request context to typed calls, mount selected layer-50 bindings, and generate OpenAPI/OpenRPC from mounted truth. |
+| 80 | all `tigrbl-auth-router-*` packages | Own HTTP schemas/routes, translate request context to typed calls, mount selected layer-50 bindings, and generate OpenAPI/OpenRPC from mounted truth. |
 | 90 | `uix-core` | Update shared generated clients/types only after layer-80 contracts stabilize. |
 | 95 | product UIX packages | Update imports/endpoints and verify each package uses only its allowed layer-80 API surface. |
 

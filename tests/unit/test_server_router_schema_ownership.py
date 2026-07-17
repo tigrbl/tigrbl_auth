@@ -39,14 +39,14 @@ ROUTER_DEPRECATION_TARGETS = {
     "admin_auth.py": "tigrbl_identity_storage.tables.user",
     "admin_identities.py": "tigrbl_identity_storage.tables.user",
     "admin_realms.py": "tigrbl_identity_storage.tables.realm",
-    "admin_tenants.py": "tigrbl_auth_api_platform_admin.tenants",
+    "admin_tenants.py": "tigrbl_auth_backend_app_platform_admin.tenants",
     "auth_flows.py": "tigrbl_identity_storage.tables.auth_session",
     "authorize.py": "tigrbl_identity_storage.tables.auth_code",
     "device_authorization.py": "tigrbl_identity_storage.tables.device_code",
-    "login.py": "tigrbl_auth_api_session_login",
+    "login.py": "tigrbl_auth_router_session_login",
     "logout.py": "tigrbl_identity_storage.tables.logout_state",
     "my_account.py": "tigrbl_identity_storage.tables.user",
-    "par.py": "tigrbl_auth_api_oauth_par",
+    "par.py": "tigrbl_auth_router_oauth_par",
     "register.py": "tigrbl_identity_storage.tables.client_registration",
     "revoke.py": "tigrbl_identity_storage.tables.revoked_token",
     "token.py": "tigrbl_identity_storage.tables.token_record",
@@ -62,7 +62,7 @@ def test_rest_schema_facade_points_to_protocol_and_api_owned_schemas() -> None:
     with pytest.warns(DeprecationWarning):
         schemas = importlib.reload(importlib.import_module("tigrbl_auth.api.rest.schemas"))
     from tigrbl_auth_protocol_oauth.schemas import TokenPair
-    from tigrbl_auth_api_session_login import CredsIn
+    from tigrbl_auth_router_session_login import CredsIn
 
     assert schemas.CredsIn is CredsIn
     assert schemas.TokenPair is TokenPair
@@ -95,7 +95,7 @@ def test_server_rest_router_bridges_warn_to_storage_owner(
         (
             "tigrbl_identity_storage.tables",
                 "tigrbl_identity_storage_runtime",
-                "tigrbl_auth_api_",
+                "tigrbl_auth_router_",
             )
         )
     assert not path.exists()
@@ -128,7 +128,7 @@ def test_remaining_table_backed_rest_routers_import_schemas_from_table_modules(
 
 
 def test_realm_admin_routes_live_in_platform_api_package() -> None:
-    api_module = importlib.import_module("tigrbl_auth_api_platform_admin.realms")
+    api_module = importlib.import_module("tigrbl_auth_backend_app_platform_admin.realms")
     storage_module = importlib.import_module("tigrbl_identity_storage.tables.realm")
     route_names = {
         "admin_list_realms",
@@ -149,7 +149,7 @@ def test_realm_admin_routes_live_in_platform_api_package() -> None:
 
 
 def test_tenant_admin_routes_and_dtos_live_in_platform_api_package() -> None:
-    runtime_module = importlib.import_module("tigrbl_auth_api_platform_admin.tenants")
+    runtime_module = importlib.import_module("tigrbl_auth_backend_app_platform_admin.tenants")
     storage_module = importlib.import_module("tigrbl_identity_storage.tables.tenant")
     table_class = storage_module.Tenant
     route_names = {
@@ -207,7 +207,7 @@ def test_admin_auth_routes_live_in_server_runtime() -> None:
 
 
 def test_identity_admin_routes_live_in_platform_api_package() -> None:
-    api_module = importlib.import_module("tigrbl_auth_api_platform_admin.identities")
+    api_module = importlib.import_module("tigrbl_auth_backend_app_platform_admin.identities")
     storage_module = importlib.import_module("tigrbl_identity_storage.tables.user")
     route_names = {
         "admin_list_identities",
@@ -223,7 +223,7 @@ def test_identity_admin_routes_live_in_platform_api_package() -> None:
 
 
 def test_my_account_profile_routes_live_in_api_package() -> None:
-    api_module = importlib.import_module("tigrbl_auth_api_my_account.profiles")
+    api_module = importlib.import_module("tigrbl_auth_backend_app_my_account.profiles")
     storage_module = importlib.import_module("tigrbl_identity_storage.tables.user")
     route_names = {"get_account_profile", "update_account_profile", "change_account_password"}
 
@@ -236,7 +236,7 @@ def test_my_account_profile_routes_live_in_api_package() -> None:
 
 
 def test_my_account_session_routes_live_in_api_package() -> None:
-    api_module = importlib.import_module("tigrbl_auth_api_my_account.sessions")
+    api_module = importlib.import_module("tigrbl_auth_backend_app_my_account.sessions")
     storage_module = importlib.import_module(
         "tigrbl_identity_storage.tables.auth_session"
     )
@@ -258,7 +258,7 @@ def test_token_endpoint_carrier_and_runtime_live_above_storage() -> None:
     storage_module = importlib.import_module(
         "tigrbl_identity_storage.tables.token_record"
     )
-    carrier_module = importlib.import_module("tigrbl_auth_api_oauth_token")
+    carrier_module = importlib.import_module("tigrbl_auth_router_oauth_token")
     runtime_module = importlib.import_module("tigrbl_identity_server.token_surface")
 
     assert hasattr(carrier_module, "build_token_router")
@@ -346,7 +346,7 @@ def test_moved_oauth_publishers_live_above_storage_table_modules(
 
 
 def test_consent_account_routes_live_above_storage_table_module() -> None:
-    runtime_module = importlib.import_module("tigrbl_auth_api_my_account.consents")
+    runtime_module = importlib.import_module("tigrbl_auth_backend_app_my_account.consents")
     storage_module = importlib.import_module("tigrbl_identity_storage.tables.consent")
     table_class = storage_module.Consent
     route_names = {

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from tigrbl_auth_api_webauthn import build_webauthn_router
+from tigrbl_auth_router_webauthn import build_webauthn_router
 from tigrbl_auth_protocol_webauthn import WebAuthnConfiguration, WebAuthnProtocol
 from tigrbl_public_key_authentication_capability import (
     PublicKeyAuthenticationCapability,

@@ -16,8 +16,8 @@ def package_src(name: str) -> Path:
 
 STORAGE_ROOT = package_src("tigrbl-identity-storage")
 NON_STORAGE_SOURCE_ROOTS = [
-    package_src("tigrbl-auth-api-my-account"),
-    package_src("tigrbl-auth-api-public"),
+    package_src("tigrbl-auth-backend-app-my-account"),
+    package_src("tigrbl-auth-backend-app-public"),
     package_src("tigrbl-auth-protocol-oauth"),
     package_src("tigrbl-authn-credentials"),
     package_src("tigrbl-identity-operator"),
@@ -132,7 +132,7 @@ def test_non_storage_packages_do_not_own_raw_durable_table_mutations() -> None:
 
 def test_no_rpc_support_is_reintroduced_in_product_api_packages() -> None:
     offenders: list[str] = []
-    for root in [package_src("tigrbl-auth-api-my-account"), package_src("tigrbl-auth-api-public")]:
+    for root in [package_src("tigrbl-auth-backend-app-my-account"), package_src("tigrbl-auth-backend-app-public")]:
         if not root.exists():
             continue
         for path in _python_files(root):
@@ -157,7 +157,7 @@ def test_route_and_hook_declarations_are_owned_by_executable_layers() -> None:
     storage_runtime_root = STORAGE_RUNTIME_ROOT / "tigrbl_identity_storage_runtime"
     executable_roots = tuple(
         root.resolve()
-        for layer in ("50-protocols", "60-runtime", "80-apis")
+        for layer in ("50-protocols", "60-runtime", "80-routers")
         for root in (PKGS / layer).glob("*/src")
     )
     for root in sorted(PKGS.glob("**/src")):

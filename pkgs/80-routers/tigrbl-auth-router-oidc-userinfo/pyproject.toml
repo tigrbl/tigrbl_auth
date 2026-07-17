@@ -1,0 +1,17 @@
+[project]
+name = "tigrbl-auth-router-oidc-userinfo"
+version = "0.4.0.dev2"
+description = "HTTP carrier binding for the OpenID Connect UserInfo endpoint."
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = [
+    "tigrbl==0.4.4.dev1",
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tigrbl_auth_router_oidc_userinfo", from = "src" }]

@@ -6,7 +6,7 @@ import pytest
 from httpx import ASGITransport, AsyncClient
 from tigrbl import TigrblApp
 
-from tigrbl_auth_api_oauth_par import (
+from tigrbl_auth_router_oauth_par import (
     build_pushed_authorization_router,
     request_body_data,
 )

@@ -41,12 +41,12 @@ def test_runtime_capability_truth_t2_rejects_disabled_or_unknown_advertising() -
 def test_runtime_derived_metadata_t1_projects_enabled_resource_validation_surface() -> None:
     deployment = resolve_deployment(
         profile="production",
-        product_surface="resource-validation-api",
+        product_surface="resource-validation-app",
     )
 
     manifest = runtime_truth_manifest(deployment)
 
-    assert manifest["product_surface"] == "resource-validation-api"
+    assert manifest["product_surface"] == "resource-validation-app"
     assert "introspection" in manifest["capabilities"]
     assert "jwks" in manifest["capabilities"]
     assert "token" not in manifest["capabilities"]
@@ -57,7 +57,7 @@ def test_runtime_derived_metadata_t1_projects_enabled_resource_validation_surfac
 def test_capability_attestation_t2_is_deterministic_and_evidence_backed() -> None:
     deployment = resolve_deployment(
         profile="production",
-        product_surface="resource-validation-api",
+        product_surface="resource-validation-app",
     )
 
     first = build_capability_attestation(

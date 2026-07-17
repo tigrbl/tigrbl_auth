@@ -1,7 +1,7 @@
 """Runtime composition for the OpenID Connect logout HTTP carrier."""
 
 from tigrbl import TigrblApp
-from tigrbl_auth_api_oidc_logout import (
+from tigrbl_auth_router_oidc_logout import (
     build_logout_router,
     include_logout_endpoint as include_logout_carrier,
 )

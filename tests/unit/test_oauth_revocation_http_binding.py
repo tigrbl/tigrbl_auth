@@ -4,7 +4,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from tigrbl_auth_api_oauth_revocation.binding import (
+from tigrbl_auth_router_oauth_revocation.binding import (
     _request_form_data,
     build_revocation_router,
 )

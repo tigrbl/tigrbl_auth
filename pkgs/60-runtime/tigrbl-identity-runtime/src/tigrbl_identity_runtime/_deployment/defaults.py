@@ -124,37 +124,37 @@ SURFACE_SET_REGISTRY: Final[dict[str, dict[str, bool]]] = {
         "surface_admin_enabled": False,
         "surface_diagnostics_enabled": True,
     },
-    "public-api": {
+    "public-app": {
         "surface_public_enabled": True,
         "surface_admin_enabled": False,
         "surface_diagnostics_enabled": False,
     },
-    "platform-admin-api": {
+    "platform-admin-app": {
         "surface_public_enabled": False,
         "surface_admin_enabled": True,
         "surface_diagnostics_enabled": False,
     },
-    "tenant-admin-api": {
+    "tenant-admin-app": {
         "surface_public_enabled": False,
         "surface_admin_enabled": True,
         "surface_diagnostics_enabled": False,
     },
-    "developer-api": {
+    "developer-app": {
         "surface_public_enabled": True,
         "surface_admin_enabled": True,
         "surface_diagnostics_enabled": False,
     },
-    "service-admin-api": {
+    "service-admin-app": {
         "surface_public_enabled": True,
         "surface_admin_enabled": True,
         "surface_diagnostics_enabled": False,
     },
-    "resource-validation-api": {
+    "resource-validation-app": {
         "surface_public_enabled": True,
         "surface_admin_enabled": False,
         "surface_diagnostics_enabled": False,
     },
-    "my-account-api": {
+    "my-account-app": {
         "surface_public_enabled": True,
         "surface_admin_enabled": False,
         "surface_diagnostics_enabled": False,

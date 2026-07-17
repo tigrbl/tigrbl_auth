@@ -15,7 +15,7 @@ from typing import Any, Final
 from tigrbl import TigrblRouter
 from tigrbl_identity_server.admin_auth import admin_api as admin_auth_api
 from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
-from tigrbl_auth_api_admin_gate import ADMIN_OPENAPI_SECURITY_DEPENDENCIES
+from tigrbl_auth_router_admin_gate import ADMIN_OPENAPI_SECURITY_DEPENDENCIES
 from tigrbl_identity_storage import ensure_identity_storage_importable
 from tigrbl_identity_storage.tables import (
     AuditEvent,
@@ -136,7 +136,7 @@ def assert_table_initialization_scope(
 
 
 def _admin_resource_path(resource: type[Any], deployment: ResolvedDeployment | None = None) -> str:
-    if getattr(deployment, "product_surface", None) == "platform-admin-api":
+    if getattr(deployment, "product_surface", None) == "platform-admin-app":
         if resource.__name__ == "Realm":
             return "/admin/realm"
         if resource.__name__ == "Tenant":
@@ -254,7 +254,7 @@ def _rewrite_admin_table_routes(
     router: TigrblRouter,
     deployment: ResolvedDeployment,
 ) -> None:
-    if deployment.product_surface != "platform-admin-api":
+    if deployment.product_surface != "platform-admin-app":
         return
     rewrites = {
         "Tenant": ("/tenant", "/admin/tenant"),
@@ -320,7 +320,7 @@ def include_admin_routes(
     if deployment.flag_enabled("surface_admin_enabled"):
         selected_table_resources = _admin_table_resources(deployment)
         if selected_table_resources:
-            if deployment.product_surface == "platform-admin-api":
+            if deployment.product_surface == "platform-admin-app":
                 for resource in selected_table_resources:
                     if resource.__name__ in {"Realm", "Tenant"}:
                         continue

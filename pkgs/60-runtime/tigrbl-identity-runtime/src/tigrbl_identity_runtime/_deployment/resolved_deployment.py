@@ -9,6 +9,7 @@ from tigrbl_identity_runtime.feature_flags import flags_for_profile
 from .defaults import *
 from .product_surfaces import *
 
+
 @dataclass(slots=True, frozen=True)
 class ResolvedDeployment:
     profile: str
@@ -28,6 +29,7 @@ class ResolvedDeployment:
     active_discovery_routes: tuple[str, ...]
     active_targets: tuple[str, ...]
     product_surface: str | None = None
+    router_packages: tuple[str, ...] = ()
     allowed_admin_resources: tuple[str, ...] = ()
     required_table_resources: tuple[str, ...] = ()
     allowed_admin_rest_groups: tuple[str, ...] = ()
@@ -91,6 +93,7 @@ class ResolvedDeployment:
             "active_discovery_routes": list(self.active_discovery_routes),
             "active_targets": list(self.active_targets),
             "product_surface": self.product_surface,
+            "router_packages": list(self.router_packages),
             "allowed_admin_resources": list(self.allowed_admin_resources),
             "required_table_resources": list(self.required_table_resources),
             "allowed_admin_rest_groups": list(self.allowed_admin_rest_groups),
@@ -220,5 +223,3 @@ def _derive_extensions(
         if all(bool(raw.get(flag, False)) for flag in flags):
             derived.append(name)
     return tuple(derived)
-
-

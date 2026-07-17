@@ -1,0 +1,19 @@
+[project]
+name = "tigrbl-auth-router-session-login"
+version = "0.4.0.dev2"
+description = "HTTP carrier binding for interactive identity session login."
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = [
+    "pydantic>=2.0",
+    "tigrbl==0.4.4.dev1",
+    "tigrbl-auth-protocol-oauth==0.4.0.dev2",
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tigrbl_auth_router_session_login", from = "src" }]

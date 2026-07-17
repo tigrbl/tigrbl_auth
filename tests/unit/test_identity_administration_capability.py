@@ -19,10 +19,10 @@ from tigrbl_identity_contracts.admin_tenants import PlatformAdministrator
 ROOT = Path(__file__).resolve().parents[2]
 IDENTITY_API = (
     ROOT
-    / "pkgs/80-apis/tigrbl-auth-api-platform-admin/src/tigrbl_auth_api_platform_admin/identities.py"
+    / "pkgs/90-backend-apps/tigrbl-auth-backend-app-platform-admin/src/tigrbl_auth_backend_app_platform_admin/identities.py"
 )
 PLATFORM_ADMIN_PROJECT = (
-    ROOT / "pkgs/80-apis/tigrbl-auth-api-platform-admin/pyproject.toml"
+    ROOT / "pkgs/90-backend-apps/tigrbl-auth-backend-app-platform-admin/pyproject.toml"
 )
 
 

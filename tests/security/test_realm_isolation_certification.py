@@ -63,7 +63,7 @@ def test_realm_isolation_t2_integrates_with_realm_and_tenant_metadata() -> None:
     deployment = resolve_deployment(
         SimpleNamespace(**values),
         profile="production",
-        product_surface="resource-validation-api",
+        product_surface="resource-validation-app",
     )
 
     realm_a = build_realm_openid_config(deployment, "realm-a")

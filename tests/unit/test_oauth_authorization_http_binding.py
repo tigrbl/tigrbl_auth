@@ -3,7 +3,7 @@ from __future__ import annotations
 import pytest
 from httpx import ASGITransport, AsyncClient
 from tigrbl import RedirectResponse, TigrblApp
-from tigrbl_auth_api_oauth_authorization import (
+from tigrbl_auth_router_oauth_authorization import (
     build_authorization_router,
     include_authorization_endpoint,
 )

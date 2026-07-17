@@ -113,7 +113,7 @@ SURFACE_BASELINE_BOUNDARY_FEATURES: Final[tuple[SurfaceBoundaryClassification, .
     ),
     SurfaceBoundaryClassification(
         feature_id="feat:api-public-boundary",
-        surface_name="public-api",
+        surface_name="public-app",
         family="api",
         audience="public",
         surface_set="public-rest",
@@ -125,7 +125,7 @@ SURFACE_BASELINE_BOUNDARY_FEATURES: Final[tuple[SurfaceBoundaryClassification, .
     ),
     SurfaceBoundaryClassification(
         feature_id="feat:api-public-oauth-boundary",
-        surface_name="public-api-oauth",
+        surface_name="public-app-oauth",
         family="api",
         audience="public",
         surface_set="public-rest",
@@ -145,7 +145,7 @@ SURFACE_BASELINE_BOUNDARY_FEATURES: Final[tuple[SurfaceBoundaryClassification, .
     ),
     SurfaceBoundaryClassification(
         feature_id="feat:api-public-oidc-boundary",
-        surface_name="public-api-oidc",
+        surface_name="public-app-oidc",
         family="api",
         audience="public",
         surface_set="public-rest",
@@ -157,7 +157,7 @@ SURFACE_BASELINE_BOUNDARY_FEATURES: Final[tuple[SurfaceBoundaryClassification, .
     ),
     SurfaceBoundaryClassification(
         feature_id="feat:api-public-discovery-boundary",
-        surface_name="public-api-discovery",
+        surface_name="public-app-discovery",
         family="api",
         audience="public",
         surface_set="public-rest",
@@ -174,7 +174,7 @@ SURFACE_BASELINE_BOUNDARY_FEATURES: Final[tuple[SurfaceBoundaryClassification, .
     ),
     SurfaceBoundaryClassification(
         feature_id="feat:api-public-registration-boundary",
-        surface_name="public-api-registration",
+        surface_name="public-app-registration",
         family="api",
         audience="public",
         surface_set="public-rest",
@@ -186,7 +186,7 @@ SURFACE_BASELINE_BOUNDARY_FEATURES: Final[tuple[SurfaceBoundaryClassification, .
     ),
     SurfaceBoundaryClassification(
         feature_id="feat:api-public-logout-boundary",
-        surface_name="public-api-logout",
+        surface_name="public-app-logout",
         family="api",
         audience="public",
         surface_set="public-rest",
@@ -198,7 +198,7 @@ SURFACE_BASELINE_BOUNDARY_FEATURES: Final[tuple[SurfaceBoundaryClassification, .
     ),
     SurfaceBoundaryClassification(
         feature_id="feat:api-public-admin-surface-exclusion",
-        surface_name="public-api-admin-exclusion",
+        surface_name="public-app-admin-exclusion",
         family="api",
         audience="public",
         surface_set="public-rest",

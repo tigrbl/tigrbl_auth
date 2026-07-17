@@ -13,12 +13,13 @@ from scripts.validate_layer_boundaries import (
     validate,
 )
 
+
 def test_test_and_example_packages_have_terminal_layer_ownership() -> None:
     packages = {package.distribution: package for package in discover_packages(ROOT)}
 
-    assert packages["tigrbl-identity-testkit"].layer == "100-tests"
-    assert packages["acme-notes-cli"].layer == "105-examples"
-    assert NON_PRODUCTION_LAYERS == {"100-tests", "105-examples"}
+    assert packages["tigrbl-identity-testkit"].layer == "120-tests"
+    assert packages["acme-notes-cli"].layer == "110-examples"
+    assert NON_PRODUCTION_LAYERS == {"120-tests", "110-examples"}
 
 
 def test_production_packages_do_not_depend_on_terminal_packages() -> None:
@@ -43,9 +44,9 @@ def test_examples_do_not_depend_on_test_packages() -> None:
     offenders = [
         (package.distribution, dependency)
         for package in packages
-        if package.layer == "105-examples"
+        if package.layer == "110-examples"
         for dependency in package.dependencies
-        if dependency in by_name and by_name[dependency].layer == "100-tests"
+        if dependency in by_name and by_name[dependency].layer == "120-tests"
     ]
 
     assert offenders == []

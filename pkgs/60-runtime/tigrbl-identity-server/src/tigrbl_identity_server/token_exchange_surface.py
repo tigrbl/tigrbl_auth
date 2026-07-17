@@ -1,7 +1,7 @@
 """Runtime composition for the RFC 8693 token-exchange carrier."""
 
 from tigrbl import TigrblApp
-from tigrbl_auth_api_oauth_token_exchange import (
+from tigrbl_auth_router_oauth_token_exchange import (
     build_token_exchange_router,
     include_token_exchange_endpoint as include_token_exchange_carrier,
 )

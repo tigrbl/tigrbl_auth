@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
-MY_ACCOUNT_ROOT = ROOT / "pkgs" / "tigrbl-auth-api-my-account" / "src"
+MY_ACCOUNT_ROOT = ROOT / "pkgs" / "tigrbl-auth-backend-app-my-account" / "src"
 
 
 def test_my_account_api_does_not_implement_durable_storage_ops() -> None:

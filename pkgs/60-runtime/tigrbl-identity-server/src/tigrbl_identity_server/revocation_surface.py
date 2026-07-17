@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from tigrbl import Request, TigrblApp
-from tigrbl_auth_api_oauth_revocation import (
+from tigrbl_auth_router_oauth_revocation import (
     build_revocation_router,
     include_revocation_endpoint as include_http_revocation_endpoint,
 )

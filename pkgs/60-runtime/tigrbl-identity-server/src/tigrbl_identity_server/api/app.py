@@ -85,7 +85,7 @@ def build_app(
 
     from tigrbl_identity_server.api.lifecycle import register_lifecycle
     from tigrbl_identity_server.surfaces import admin_resource_path_prefixes, attach_runtime_surfaces
-    from tigrbl_auth_api_admin_gate import AdminGate
+    from tigrbl_auth_router_admin_gate import AdminGate
     from tigrbl_identity_storage_runtime.engine import dsn
 
     app = TigrblApp(

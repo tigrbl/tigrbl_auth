@@ -30,7 +30,7 @@ services:
 
   admin-uix:
     build:
-      context: ../pkgs/95-ui/admin-uix
+      context: ../pkgs/105-ui/admin-uix
       dockerfile: Dockerfile
     image: tigrbl-auth-admin-uix-local:latest
     container_name: tigrbl-auth-admin-uix-local
@@ -44,7 +44,7 @@ services:
 
   public-uix:
     build:
-      context: ../pkgs/95-ui/public-uix
+      context: ../pkgs/105-ui/public-uix
       dockerfile: Dockerfile
     image: tigrbl-auth-public-uix-local:latest
     container_name: tigrbl-auth-public-uix-local

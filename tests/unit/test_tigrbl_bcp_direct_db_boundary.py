@@ -15,7 +15,7 @@ MIGRATED_RELEASE_PATHS = [
     ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/discovery.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/authorization_runtime.py",
     ROOT / "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/auth_session/_table.py",
-    ROOT / "pkgs/80-apis/tigrbl-auth-api-my-account/src/tigrbl_auth_api_my_account/routes.py",
+    ROOT / "pkgs/90-backend-apps/tigrbl-auth-backend-app-my-account/src/tigrbl_auth_backend_app_my_account/routes.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/auth_flows.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/authz_surface.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/client_registration_surface.py",

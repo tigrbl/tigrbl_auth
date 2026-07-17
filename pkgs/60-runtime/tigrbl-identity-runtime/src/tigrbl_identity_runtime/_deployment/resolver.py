@@ -21,6 +21,7 @@ from .resolved_deployment import (
     _valid_or_default,
 )
 
+
 def resolve_deployment(
     settings_obj: object | None = None,
     *,
@@ -205,6 +206,9 @@ def resolve_deployment(
         active_discovery_routes=tuple(active_discovery_routes),
         active_targets=tuple(active_targets),
         product_surface=product_surface_name,
+        router_packages=tuple(
+            str(item) for item in (product_meta or {}).get("router_packages", ())
+        ),
         allowed_admin_resources=tuple(
             str(item) for item in (product_meta or {}).get("admin_resources", ())
         ),
@@ -253,7 +257,8 @@ def deployment_from_request(
         if scoped_app is not None:
             deployment = deployment_from_app(scoped_app, fallback_settings)
             if isinstance(deployment, ResolvedDeployment) or (
-                hasattr(deployment, "route_enabled") and hasattr(deployment, "to_manifest")
+                hasattr(deployment, "route_enabled")
+                and hasattr(deployment, "to_manifest")
             ):
                 return deployment
     app = getattr(request, "app", None) if request is not None else None

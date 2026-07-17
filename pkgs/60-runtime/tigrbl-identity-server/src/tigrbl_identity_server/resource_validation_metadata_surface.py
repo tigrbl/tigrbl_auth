@@ -1,7 +1,7 @@
 """Runtime composition for resource-validation metadata carriers."""
 
 from tigrbl import TigrblApp
-from tigrbl_auth_api_resource_validation_metadata import (
+from tigrbl_auth_router_resource_validation_metadata import (
     build_resource_validation_metadata_router,
     include_resource_validation_metadata as include_metadata_carrier,
 )
@@ -26,7 +26,7 @@ def include_resource_validation_metadata(app: TigrblApp) -> None:
     include_metadata_carrier(
         app,
         router,
-        enabled=deployment.product_surface == "resource-validation-api",
+        enabled=deployment.product_surface == "resource-validation-app",
     )
 
 

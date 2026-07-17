@@ -16,7 +16,12 @@ LAYER_OWNERSHIP = {
     "50-protocols": "versioned protocol composition and compatibility",
     "60-runtime": "runtime assembly and operator tooling",
     "70-facade": "stable compatibility facade exports",
-    "80-apis": "public and administrative API mounting",
+    "80-routers": "reusable Tigrbl router composition",
+    "90-backend-apps": "deployable backend application composition",
+    "100-uix-core": "browser-safe reusable UIX components and clients",
+    "105-ui": "product-specific browser applications",
+    "110-examples": "runnable public-surface examples",
+    "120-tests": "reusable test fixtures, vectors, and harnesses",
 }
 
 

@@ -1,7 +1,7 @@
 """Runtime composition for OIDC discovery and JWKS HTTP carriers."""
 
 from tigrbl import TigrblApp, TigrblRouter
-from tigrbl_auth_api_oidc_discovery import (
+from tigrbl_auth_router_oidc_discovery import (
     build_oidc_discovery_routers,
     include_jwks as include_jwks_carrier,
     include_oidc_discovery as include_oidc_discovery_carrier,

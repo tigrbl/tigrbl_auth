@@ -165,8 +165,8 @@ def test_testkit_t2_rejects_replay_bad_pkce_resource_server_and_matrix_gaps() ->
 @pytest.mark.unit
 def test_testkit_t2_public_boundary_imports_are_package_safe() -> None:
     files = [
-        Path("pkgs/100-tests/tigrbl-identity-testkit/src/tigrbl_identity_testkit/__init__.py"),
-        Path("pkgs/100-tests/tigrbl-identity-testkit/src/tigrbl_identity_testkit/cross_cutting.py"),
+        Path("pkgs/120-tests/tigrbl-identity-testkit/src/tigrbl_identity_testkit/__init__.py"),
+        Path("pkgs/120-tests/tigrbl-identity-testkit/src/tigrbl_identity_testkit/cross_cutting.py"),
     ]
     forbidden = {
         "tigrbl_auth",

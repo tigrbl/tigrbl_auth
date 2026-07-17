@@ -1,6 +1,6 @@
 import pytest
 
-from tigrbl_auth_api_webauthn import (
+from tigrbl_auth_router_webauthn import (
     PublicKeyCredentialIn,
     decode_base64url,
     encode_base64url,

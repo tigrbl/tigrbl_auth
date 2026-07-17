@@ -32,7 +32,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
-    "tigrbl-auth-api-admin-gate==0.4.0.dev2",
+    "tigrbl-auth-router-admin-gate==0.4.0.dev2",
 ]
 
 [project.urls]

@@ -51,7 +51,7 @@ async def test_default_runtime_exposes_public_only_surface(tmp_path):
 
 @pytest.mark.asyncio
 async def test_admin_enabled_runtime_requires_local_admin_key(tmp_path):
-    deployment = resolve_deployment(product_surface="developer-api")
+    deployment = resolve_deployment(product_surface="developer-app")
     app = build_app(_settings(tmp_path), deployment=deployment)
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
         missing = await client.get("/client")

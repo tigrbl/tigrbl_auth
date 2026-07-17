@@ -1,6 +1,6 @@
 """Stable WebAuthn composition entry points."""
 
-from tigrbl_auth_api_webauthn import build_webauthn_router as build_webauthn_api
+from tigrbl_auth_router_webauthn import build_webauthn_router as build_webauthn_api
 from tigrbl_auth_protocol_webauthn import WebAuthnProtocol
 from tigrbl_identity_runtime.composition.webauthn import build_webauthn_composition
 

@@ -8,7 +8,7 @@ from tigrbl_auth.security.certification import (
 )
 
 
-def _qualification(surface: str = "public-api") -> RuntimeQualification:
+def _qualification(surface: str = "public-app") -> RuntimeQualification:
     return RuntimeQualification(
         artifact_sha256=stable_sha256("artifact"),
         dependency_lock_sha256=stable_sha256("lock"),
@@ -29,4 +29,4 @@ def test_runtime_qualification_t1_accepts_exact_deployment_truth_match() -> None
 
 def test_runtime_qualification_t2_rejects_drifted_runtime() -> None:
     with pytest.raises(CertificationError, match="deployment truth"):
-        assert_runtime_qualified(_qualification(), _qualification("platform-admin-api"))
+        assert_runtime_qualified(_qualification(), _qualification("platform-admin-app"))

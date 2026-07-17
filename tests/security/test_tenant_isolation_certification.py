@@ -68,7 +68,7 @@ def test_tenant_isolation_t2_integrates_with_same_and_cross_realm_metadata() -> 
     deployment = resolve_deployment(
         SimpleNamespace(**values),
         profile="production",
-        product_surface="resource-validation-api",
+        product_surface="resource-validation-app",
     )
 
     tenant_a = build_tenant_openid_config(deployment, "tenant-a")

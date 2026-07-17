@@ -1,7 +1,7 @@
 """Runtime composition for the RFC 8628 device-authorization carrier."""
 
 from tigrbl import TigrblApp
-from tigrbl_auth_api_oauth_device_authorization import (
+from tigrbl_auth_router_oauth_device_authorization import (
     build_device_authorization_router,
     include_device_authorization_endpoint as include_device_carrier,
 )

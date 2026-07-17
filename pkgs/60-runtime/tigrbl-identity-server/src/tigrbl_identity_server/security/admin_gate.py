@@ -3,4 +3,4 @@
 from __future__ import annotations
 # ruff: noqa: F403,F405
 
-from tigrbl_auth_api_admin_gate import *
+from tigrbl_auth_router_admin_gate import *

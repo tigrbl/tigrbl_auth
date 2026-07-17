@@ -3,7 +3,7 @@ from __future__ import annotations
 import pytest
 from httpx import ASGITransport, AsyncClient
 from tigrbl import TigrblApp
-from tigrbl_auth_api_oidc_logout import (
+from tigrbl_auth_router_oidc_logout import (
     build_logout_router,
     include_logout_endpoint,
 )

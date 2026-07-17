@@ -18,29 +18,22 @@ try:
 except ModuleNotFoundError:  # pragma: no cover - Python 3.10 CI
     import tomli as tomllib  # type: ignore[no-redef]
 
+try:
+    from scripts.package_layer_policy import dependency_allowed, load_layer_policy
+except ModuleNotFoundError:  # direct script execution
+    from package_layer_policy import dependency_allowed, load_layer_policy
+
 
 ROOT = Path(__file__).resolve().parents[1]
 PKGS = ROOT / "pkgs"
 
-LAYER_ORDER = (
-    "00-primitives",
-    "01-storage",
-    "02-contracts",
-    "05-bases",
-    "10-concrete",
-    "20-providers",
-    "30-storage-runtime",
-    "40-capabilities",
-    "50-protocols",
-    "60-runtime",
-    "70-facade",
-    "80-apis",
-    "100-tests",
-    "105-examples",
-    "deprecated",
-)
-
-NON_PRODUCTION_LAYERS = frozenset({"100-tests", "105-examples"})
+LAYER_POLICY = load_layer_policy(PKGS / "layers.toml")
+LAYER_ORDER = LAYER_POLICY.layer_ids
+NON_PRODUCTION_LAYERS = LAYER_POLICY.terminal_layers
+ROUTER_LAYER = "80-routers"
+BACKEND_APP_LAYER = "90-backend-apps"
+EXAMPLE_LAYER = "110-examples"
+TEST_LAYER = "120-tests"
 
 # Capabilities orchestrate implemented behavior.  Contract value types and
 # ports and primitive value helpers remain valid vocabulary, but capability
@@ -68,9 +61,7 @@ CAPABILITY_IMPLEMENTATION_ROOTS = frozenset(
 
 # Compatibility aggregators preserve old imports for one release. They do not
 # own capability implementations and are excluded from the one-owner rule.
-CAPABILITY_COMPATIBILITY_AGGREGATORS = frozenset(
-    {}
-)
+CAPABILITY_COMPATIBILITY_AGGREGATORS = frozenset({})
 
 # Layer 40 is intentionally sparse and opt-in.  Each entry names the complete
 # use case that would disappear if the orchestration package were removed.
@@ -228,11 +219,7 @@ def _dependency_name(requirement: object) -> str | None:
 
 
 def _terminal_dependency_forbidden(consumer_layer: str, target_layer: str) -> bool:
-    if target_layer not in NON_PRODUCTION_LAYERS:
-        return False
-    if consumer_layer not in NON_PRODUCTION_LAYERS:
-        return True
-    return consumer_layer == "105-examples" and target_layer == "100-tests"
+    return not dependency_allowed(consumer_layer, target_layer, LAYER_POLICY)
 
 
 def _manifest_dependencies(data: dict[str, object]) -> set[str]:
@@ -346,6 +333,60 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
     }
     violations: list[Violation] = []
 
+    for package in packages:
+        if package.layer == ROUTER_LAYER and not package.distribution.startswith(
+            "tigrbl-auth-router-"
+        ):
+            violations.append(
+                Violation(
+                    kind="router-package-name",
+                    package=package.distribution,
+                    package_layer=package.layer,
+                    target="tigrbl-auth-router-*",
+                    target_layer=ROUTER_LAYER,
+                    path=package.path.relative_to(root).as_posix(),
+                    line=None,
+                    detail="layer-80 packages use the router distribution family",
+                )
+            )
+        if package.layer == BACKEND_APP_LAYER and not package.distribution.startswith(
+            "tigrbl-auth-backend-app-"
+        ):
+            violations.append(
+                Violation(
+                    kind="backend-app-package-name",
+                    package=package.distribution,
+                    package_layer=package.layer,
+                    target="tigrbl-auth-backend-app-*",
+                    target_layer=BACKEND_APP_LAYER,
+                    path=package.path.relative_to(root).as_posix(),
+                    line=None,
+                    detail="layer-90 backend packages use the backend-app distribution family",
+                )
+            )
+
+        for dependency in package.dependencies:
+            target = by_distribution.get(dependency)
+            if (
+                package.layer == ROUTER_LAYER
+                and target is not None
+                and target.layer == BACKEND_APP_LAYER
+            ):
+                violations.append(
+                    Violation(
+                        kind="router-depends-on-backend-app",
+                        package=package.distribution,
+                        package_layer=package.layer,
+                        target=target.distribution,
+                        target_layer=target.layer,
+                        path=(package.path / "pyproject.toml")
+                        .relative_to(root)
+                        .as_posix(),
+                        line=None,
+                        detail="routers are reusable dependencies of apps, never app consumers",
+                    )
+                )
+
     # Tests and examples are terminal consumers. Production packages must not
     # acquire runtime dependencies on either layer, and examples must remain
     # usable without importing test-only helpers.
@@ -381,15 +422,36 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
             for node in ast.walk(tree):
                 if isinstance(node, ast.Import):
                     imported_roots.update(
-                        (alias.name.split(".")[0], node.lineno)
-                        for alias in node.names
+                        (alias.name.split(".")[0], node.lineno) for alias in node.names
                     )
-                elif isinstance(node, ast.ImportFrom) and node.level == 0 and node.module:
+                elif (
+                    isinstance(node, ast.ImportFrom) and node.level == 0 and node.module
+                ):
                     imported_roots.add((node.module.split(".")[0], node.lineno))
 
             relative_source = source.relative_to(root).as_posix()
             for import_root, line in sorted(imported_roots):
                 target = by_import_root.get(import_root)
+                if (
+                    package.layer == ROUTER_LAYER
+                    and target is not None
+                    and target.layer == BACKEND_APP_LAYER
+                ):
+                    violations.append(
+                        Violation(
+                            kind="router-imports-backend-app",
+                            package=package.distribution,
+                            package_layer=package.layer,
+                            target=target.distribution,
+                            target_layer=target.layer,
+                            path=relative_source,
+                            line=line,
+                            detail=(
+                                "routers are reusable dependencies of apps, "
+                                "never app consumers"
+                            ),
+                        )
+                    )
                 if target is None or not _terminal_dependency_forbidden(
                     package.layer, target.layer
                 ):
@@ -472,8 +534,10 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
         is_compatibility_aggregator = (
             package.distribution in CAPABILITY_COMPATIBILITY_AGGREGATORS
         )
-        if not is_compatibility_aggregator and "tigrbl-capability" not in package.dependencies and (
-            "tigrbl-default-capability" not in package.dependencies
+        if (
+            not is_compatibility_aggregator
+            and "tigrbl-capability" not in package.dependencies
+            and ("tigrbl-default-capability" not in package.dependencies)
         ):
             violations.append(
                 Violation(
@@ -597,10 +661,7 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
                     detail="no class inherits layer-10.1 Capability or layer-10.2 DefaultCapability",
                 )
             )
-        elif (
-            not is_compatibility_aggregator
-            and capability_implementation_count != 1
-        ):
+        elif not is_compatibility_aggregator and capability_implementation_count != 1:
             violations.append(
                 Violation(
                     kind="capability-owner-count",

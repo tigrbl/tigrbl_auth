@@ -1,0 +1,97 @@
+schema_version = 1
+
+[[layers]]
+id = "00-primitives"
+order = 0
+category = "production"
+
+[[layers]]
+id = "01-storage"
+order = 1
+category = "production"
+
+[[layers]]
+id = "02-contracts"
+order = 2
+category = "production"
+
+[[layers]]
+id = "05-bases"
+order = 5
+category = "production"
+
+[[layers]]
+id = "10-concrete"
+order = 10
+category = "production"
+
+[[layers]]
+id = "20-providers"
+order = 20
+category = "production"
+
+[[layers]]
+id = "30-storage-runtime"
+order = 30
+category = "production"
+
+[[layers]]
+id = "40-capabilities"
+order = 40
+category = "production"
+
+[[layers]]
+id = "50-protocols"
+order = 50
+category = "production"
+
+[[layers]]
+id = "60-runtime"
+order = 60
+category = "production"
+
+[[layers]]
+id = "70-facade"
+order = 70
+category = "production"
+
+[[layers]]
+id = "80-routers"
+order = 80
+category = "production"
+distribution_prefix = "tigrbl-auth-router-"
+
+[[layers]]
+id = "90-backend-apps"
+order = 90
+category = "production"
+distribution_prefix = "tigrbl-auth-backend-app-"
+
+[[layers]]
+id = "100-uix-core"
+order = 100
+category = "presentation"
+javascript = true
+
+[[layers]]
+id = "105-ui"
+order = 105
+category = "presentation"
+javascript = true
+
+[[layers]]
+id = "110-examples"
+order = 110
+category = "example"
+terminal = true
+
+[[layers]]
+id = "120-tests"
+order = 120
+category = "test"
+terminal = true
+
+[[layers]]
+id = "deprecated"
+order = 999
+category = "deprecated"

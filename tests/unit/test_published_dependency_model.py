@@ -366,21 +366,21 @@ def test_docker_assets_are_not_published_from_repository_root():
         "Dockerfile",
         "Dockerfile.local-tigrbl",
         "Dockerfile.dev-tigrbl",
-        "Dockerfile.dev-public-api",
-        "Dockerfile.dev-resource-validation-api",
-        "Dockerfile.dev-platform-admin-api",
-        "Dockerfile.dev-tenant-admin-api",
-        "Dockerfile.dev-developer-api",
-        "Dockerfile.dev-my-account-api",
-        "Dockerfile.dev-service-admin-api",
+        "Dockerfile.dev-public-app",
+        "Dockerfile.dev-resource-validation-app",
+        "Dockerfile.dev-platform-admin-app",
+        "Dockerfile.dev-tenant-admin-app",
+        "Dockerfile.dev-developer-app",
+        "Dockerfile.dev-my-account-app",
+        "Dockerfile.dev-service-admin-app",
         "docker-compose.yml",
-        "docker-compose.public-api.yml",
-        "docker-compose.resource-validation-api.yml",
-        "docker-compose.platform-admin-api.yml",
-        "docker-compose.tenant-admin-api.yml",
-        "docker-compose.developer-api.yml",
-        "docker-compose.my-account-api.yml",
-        "docker-compose.service-admin-api.yml",
+        "docker-compose.public-app.yml",
+        "docker-compose.resource-validation-app.yml",
+        "docker-compose.platform-admin-app.yml",
+        "docker-compose.tenant-admin-app.yml",
+        "docker-compose.developer-app.yml",
+        "docker-compose.my-account-app.yml",
+        "docker-compose.service-admin-app.yml",
         "docker-compose.demo-hub-uix.yml",
     }
     assert expected <= {path.name for path in docker_dir.iterdir()}
@@ -389,19 +389,19 @@ def test_docker_assets_are_not_published_from_repository_root():
         "Dockerfile",
         "Dockerfile.local-tigrbl",
         "Dockerfile.dev-tigrbl",
-        "Dockerfile.dev-public-api",
-        "Dockerfile.dev-resource-validation-api",
-        "Dockerfile.dev-platform-admin-api",
-        "Dockerfile.dev-tenant-admin-api",
-        "Dockerfile.dev-developer-api",
-        "Dockerfile.dev-my-account-api",
-        "Dockerfile.dev-service-admin-api",
+        "Dockerfile.dev-public-app",
+        "Dockerfile.dev-resource-validation-app",
+        "Dockerfile.dev-platform-admin-app",
+        "Dockerfile.dev-tenant-admin-app",
+        "Dockerfile.dev-developer-app",
+        "Dockerfile.dev-my-account-app",
+        "Dockerfile.dev-service-admin-app",
     }
     for dockerfile in root_context_dockerfiles:
         assert (docker_dir / f"{dockerfile}.dockerignore").is_file()
 
     assert (
-        ROOT / "pkgs" / "95-ui" / "demo-hub-uix" / "Dockerfile.dockerignore"
+        ROOT / "pkgs" / "105-ui" / "demo-hub-uix" / "Dockerfile.dockerignore"
     ).is_file()
 
 

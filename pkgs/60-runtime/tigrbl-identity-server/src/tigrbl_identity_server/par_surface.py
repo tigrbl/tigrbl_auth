@@ -9,7 +9,7 @@ from uuid import UUID
 
 from tigrbl import Request, TigrblApp
 from tigrbl.runtime.status import HTTPException, status
-from tigrbl_auth_api_oauth_par import (
+from tigrbl_auth_router_oauth_par import (
     build_pushed_authorization_router,
     include_pushed_authorization_endpoint as include_http_par_endpoint,
 )

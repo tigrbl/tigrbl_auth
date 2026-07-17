@@ -276,7 +276,7 @@ def test_contracts_do_not_export_wire_request_response_models() -> None:
 
 
 def test_platform_api_owns_tenant_admin_contracts() -> None:
-    from tigrbl_auth_api_platform_admin.tenants import AdminTenantOut, AdminTenantProvisionIn
+    from tigrbl_auth_backend_app_platform_admin.tenants import AdminTenantOut, AdminTenantProvisionIn
 
     tenant_request = AdminTenantProvisionIn(slug="test", name="Test", email="admin@example.test")
     assert tenant_request.slug == "test"

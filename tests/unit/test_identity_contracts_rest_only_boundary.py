@@ -106,7 +106,7 @@ def test_identity_contracts_rest_schema_bridge_is_removed() -> None:
 
 
 def test_platform_api_owns_tenant_admin_rest_shapes() -> None:
-    api_module = importlib.import_module("tigrbl_auth_api_platform_admin.tenants")
+    api_module = importlib.import_module("tigrbl_auth_backend_app_platform_admin.tenants")
     storage_module = importlib.import_module("tigrbl_identity_storage.tables.tenant")
     dto_names = {
         "AdminTenantOut",
@@ -119,7 +119,7 @@ def test_platform_api_owns_tenant_admin_rest_shapes() -> None:
 
 
 def test_my_account_api_owns_its_rest_shapes() -> None:
-    api_module = importlib.import_module("tigrbl_auth_api_my_account")
+    api_module = importlib.import_module("tigrbl_auth_backend_app_my_account")
     session_storage = importlib.import_module("tigrbl_identity_storage.tables.auth_session")
     user_storage = importlib.import_module("tigrbl_identity_storage.tables.user")
 
@@ -136,7 +136,7 @@ def test_my_account_api_owns_its_rest_shapes() -> None:
 
 
 def test_platform_admin_api_owns_control_plane_rest_shapes() -> None:
-    api_module = importlib.import_module("tigrbl_auth_api_platform_admin")
+    api_module = importlib.import_module("tigrbl_auth_backend_app_platform_admin")
     storage_module = importlib.import_module("tigrbl_identity_storage.tables.user")
     names = {
         "AdminIdentityOut",

@@ -8,13 +8,31 @@ from .defaults import (
 )
 
 PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
-    "public-api": {
+    "public-app": {
+        "router_packages": (
+            "tigrbl-auth-router-oauth-authorization",
+            "tigrbl-auth-router-oauth-authorization-server-metadata",
+            "tigrbl-auth-router-oauth-device-authorization",
+            "tigrbl-auth-router-oauth-introspection",
+            "tigrbl-auth-router-oauth-par",
+            "tigrbl-auth-router-oauth-protected-resource-metadata",
+            "tigrbl-auth-router-oauth-registration",
+            "tigrbl-auth-router-oauth-revocation",
+            "tigrbl-auth-router-oauth-token",
+            "tigrbl-auth-router-oauth-token-exchange",
+            "tigrbl-auth-router-oidc-discovery",
+            "tigrbl-auth-router-oidc-logout",
+            "tigrbl-auth-router-oidc-userinfo",
+            "tigrbl-auth-router-session-login",
+            "tigrbl-auth-router-webauthn",
+        ),
         "surface_sets": ("public-rest",),
         "allowed_capabilities": None,
         "admin_resources": (),
         "admin_rest_groups": (),
     },
-    "platform-admin-api": {
+    "platform-admin-app": {
+        "router_packages": ("tigrbl-auth-router-admin-gate",),
         "surface_sets": ("admin-rest",),
         "allowed_capabilities": (),
         "admin_resources": (
@@ -31,7 +49,8 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
         ),
         "admin_rest_groups": ("admin_auth", "admin_realms", "admin_identities"),
     },
-    "tenant-admin-api": {
+    "tenant-admin-app": {
+        "router_packages": ("tigrbl-auth-router-admin-gate",),
         "surface_sets": ("admin-rest",),
         "allowed_capabilities": (),
         "admin_resources": (
@@ -49,7 +68,13 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
         ),
         "admin_rest_groups": ("admin_auth", "admin_identities"),
     },
-    "developer-api": {
+    "developer-app": {
+        "router_packages": (
+            "tigrbl-auth-router-admin-gate",
+            "tigrbl-auth-router-oauth-authorization-server-metadata",
+            "tigrbl-auth-router-oauth-registration",
+            "tigrbl-auth-router-oidc-discovery",
+        ),
         "surface_sets": ("public-rest", "admin-rest"),
         "allowed_capabilities": (
             "register",
@@ -65,7 +90,13 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
         "admin_resources": ("Client", "ClientRegistration", "AuditEvent"),
         "admin_rest_groups": (),
     },
-    "service-admin-api": {
+    "service-admin-app": {
+        "router_packages": (
+            "tigrbl-auth-router-admin-gate",
+            "tigrbl-auth-router-oauth-introspection",
+            "tigrbl-auth-router-oauth-protected-resource-metadata",
+            "tigrbl-auth-router-oidc-discovery",
+        ),
         "surface_sets": ("public-rest", "admin-rest"),
         "allowed_capabilities": (
             "introspection",
@@ -86,7 +117,13 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
         ),
         "admin_rest_groups": (),
     },
-    "resource-validation-api": {
+    "resource-validation-app": {
+        "router_packages": (
+            "tigrbl-auth-router-oauth-introspection",
+            "tigrbl-auth-router-oauth-protected-resource-metadata",
+            "tigrbl-auth-router-oidc-discovery",
+            "tigrbl-auth-router-resource-validation-metadata",
+        ),
         "surface_sets": ("public-rest",),
         "allowed_capabilities": (
             "introspection",
@@ -101,7 +138,8 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
         "admin_resources": (),
         "admin_rest_groups": (),
     },
-    "my-account-api": {
+    "my-account-app": {
+        "router_packages": ("tigrbl-auth-router-oidc-discovery",),
         "surface_sets": ("public-rest",),
         "allowed_capabilities": (
             "openid-configuration",
@@ -258,5 +296,3 @@ VALID_PROFILES: Final[tuple[str, ...]] = (
 VALID_PLUGIN_MODES: Final[tuple[str, ...]] = tuple(PLUGIN_MODE_TO_SURFACE_SETS)
 VALID_RUNTIME_STYLES: Final[tuple[str, ...]] = ("plugin", "standalone")
 VALID_PRODUCT_SURFACES: Final[tuple[str, ...]] = tuple(PRODUCT_SURFACE_REGISTRY)
-
-

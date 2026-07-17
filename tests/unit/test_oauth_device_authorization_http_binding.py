@@ -5,7 +5,7 @@ import importlib.util
 import pytest
 from httpx import ASGITransport, AsyncClient
 from tigrbl import TigrblApp
-from tigrbl_auth_api_oauth_device_authorization import (
+from tigrbl_auth_router_oauth_device_authorization import (
     build_device_authorization_router,
     include_device_authorization_endpoint,
 )

@@ -1,7 +1,7 @@
 """Runtime composition for the RFC 9728 HTTP carrier."""
 
 from tigrbl import TigrblApp
-from tigrbl_auth_api_oauth_protected_resource_metadata import (
+from tigrbl_auth_router_oauth_protected_resource_metadata import (
     build_protected_resource_metadata_router,
     include_protected_resource_metadata,
 )

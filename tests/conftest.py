@@ -16,7 +16,7 @@ from typing import Any, AsyncGenerator, Generator
 import pytest
 
 _REPO_ROOT = Path(__file__).resolve().parents[1]
-for _api_src in sorted((_REPO_ROOT / "pkgs" / "80-apis").glob("*/src")):
+for _api_src in sorted((_REPO_ROOT / "pkgs" / "80-routers").glob("*/src")):
     if str(_api_src) not in sys.path:
         sys.path.insert(0, str(_api_src))
 

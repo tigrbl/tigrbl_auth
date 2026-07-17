@@ -1,0 +1,37 @@
+[project]
+name = "tigrbl-auth-backend-app-public"
+version = "0.4.0.dev2"
+description = "Public OAuth/OIDC and human-login backend application for Tigrbl Auth."
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = [
+    "tigrbl-auth==0.4.0.dev2",
+    "tigrbl-auth-router-oauth-authorization==0.4.0.dev2",
+    "tigrbl-auth-router-oauth-authorization-server-metadata==0.4.0.dev2",
+    "tigrbl-auth-router-oauth-device-authorization==0.4.0.dev2",
+    "tigrbl-auth-router-oauth-introspection==0.4.0.dev2",
+    "tigrbl-auth-router-oauth-par==0.4.0.dev2",
+    "tigrbl-auth-router-oauth-protected-resource-metadata==0.4.0.dev2",
+    "tigrbl-auth-router-oauth-registration==0.4.0.dev2",
+    "tigrbl-auth-router-oauth-revocation==0.4.0.dev2",
+    "tigrbl-auth-router-oauth-token==0.4.0.dev2",
+    "tigrbl-auth-router-oauth-token-exchange==0.4.0.dev2",
+    "tigrbl-auth-router-oidc-discovery==0.4.0.dev2",
+    "tigrbl-auth-router-oidc-logout==0.4.0.dev2",
+    "tigrbl-auth-router-oidc-userinfo==0.4.0.dev2",
+    "tigrbl-auth-router-session-login==0.4.0.dev2",
+    "tigrbl-auth-router-webauthn==0.4.0.dev2",
+]
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/90-backend-apps/tigrbl-auth-backend-app-public"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tigrbl_auth_backend_app_public", from = "src" }]

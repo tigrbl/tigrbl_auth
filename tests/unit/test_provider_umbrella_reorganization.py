@@ -19,7 +19,7 @@ def test_provider_taxonomy_names_canonical_destinations() -> None:
         "tigrbl-principal-authentication"
     )
     assert migrations["tigrbl-authz-policy-admin-gate"]["target"] == (
-        "tigrbl-auth-api-admin-gate"
+        "tigrbl-auth-router-admin-gate"
     )
     assert migrations["tigrbl-authz-policy-decision-engine"]["target"] == (
         "tigrbl-policy-decision-engine-default"
@@ -30,7 +30,7 @@ def test_provider_taxonomy_names_canonical_destinations() -> None:
 
 
 def test_compatibility_packages_reexport_canonical_objects() -> None:
-    from tigrbl_auth_api_admin_gate import AdminGate as CanonicalAdminGate
+    from tigrbl_auth_router_admin_gate import AdminGate as CanonicalAdminGate
     from tigrbl_authz_policy_admin_gate import AdminGate as LegacyAdminGate
     from tigrbl_cose_concrete import decode_cose_key as canonical_decode
     from tigrbl_principal_authentication.lifecycle import hash_secret as canonical_hash
@@ -53,7 +53,7 @@ def test_new_layer20_packages_do_not_import_downstream_layers() -> None:
         "tigrbl_identity_runtime",
         "tigrbl_identity_server",
         "tigrbl_auth_protocol_",
-        "tigrbl_auth_api_",
+        "tigrbl_auth_router_",
     )
     for root in roots:
         source = "\n".join(

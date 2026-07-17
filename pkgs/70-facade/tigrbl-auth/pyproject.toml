@@ -32,7 +32,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
-    "tigrbl-auth-api-session-login==0.4.0.dev2",
+    "tigrbl-auth-router-session-login==0.4.0.dev2",
     "tigrbl-authz-policy-rules-concrete==0.4.0.dev2",
     "tigrbl-authz-policy-combiner-default==0.4.0.dev2",
     "tigrbl-authz-policy-evaluators-default==0.4.0.dev2",
@@ -51,7 +51,7 @@ dependencies = [
     "tigrbl-auth-protocol-oauth==0.4.0.dev2",
     "tigrbl-auth-protocol-oidc==0.4.0.dev2",
     "tigrbl-auth-protocol-webauthn==0.4.0.dev2",
-    "tigrbl-auth-api-webauthn==0.4.0.dev2",
+    "tigrbl-auth-router-webauthn==0.4.0.dev2",
     "tigrbl-identity-principals==0.4.0.dev2",
     "tigrbl-identity-operator==0.4.0.dev2",
     "tigrbl-authority-graph-concrete==0.4.0.dev2",

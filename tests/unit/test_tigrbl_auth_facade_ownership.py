@@ -351,7 +351,7 @@ def test_installable_resource_validation_api_imports_facade_metadata_modules() -
         contract = importlib.import_module(
             "tigrbl_auth.standards.oauth2.resource_verifier_contract"
         )
-        package = importlib.import_module("tigrbl_auth_api_resource_validation")
+        package = importlib.import_module("tigrbl_auth_backend_app_resource_validation")
 
         assert metadata.CAPABILITIES_METADATA_PATH == "/metadata/capabilities"
         from tigrbl_identity_runtime.deployment import resolve_deployment
@@ -359,7 +359,7 @@ def test_installable_resource_validation_api_imports_facade_metadata_modules() -
         assert contract.build_protected_resource_verifier_contract(
             deployment=resolve_deployment()
         ).fail_closed is True
-        assert package.PRODUCT_SURFACE == "resource-validation-api"
+        assert package.PRODUCT_SURFACE == "resource-validation-app"
 
 
 def test_tigrbl_auth_facade_declares_canonical_runtime_dependencies() -> None:

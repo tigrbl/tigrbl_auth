@@ -5,7 +5,7 @@ import importlib.util
 import pytest
 from httpx import ASGITransport, AsyncClient
 from tigrbl import TigrblApp
-from tigrbl_auth_api_session_login import (
+from tigrbl_auth_router_session_login import (
     CredsIn,
     build_login_router,
     include_login_endpoint,

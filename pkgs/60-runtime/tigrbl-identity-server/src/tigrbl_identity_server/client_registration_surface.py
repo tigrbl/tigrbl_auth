@@ -8,7 +8,7 @@ from uuid import UUID, uuid4
 
 from tigrbl import Request, TigrblApp
 from tigrbl.runtime.status import HTTPException, status
-from tigrbl_auth_api_oauth_registration import (
+from tigrbl_auth_router_oauth_registration import (
     build_client_registration_router,
     include_client_registration_endpoint as include_http_registration_endpoint,
 )

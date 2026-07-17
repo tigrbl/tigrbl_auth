@@ -30,9 +30,9 @@ def test_release_contracts_export_release_assurance_dtos() -> None:
         artifact_sha256="a",
         dependency_lock_sha256="b",
         config_sha256="c",
-        product_surface="public-api",
+        product_surface="public-app",
         capabilities=frozenset({"jwks"}),
-    ).product_surface == "public-api"
+    ).product_surface == "public-app"
 
 
 def test_release_certification_modules_do_not_define_moved_contract_classes() -> None:

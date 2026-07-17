@@ -1,6 +1,6 @@
 """Runtime composition for the OAuth/OIDC authorization HTTP carrier."""
 
-from tigrbl_auth_api_oauth_authorization import build_authorization_router
+from tigrbl_auth_router_oauth_authorization import build_authorization_router
 from tigrbl_identity_storage_runtime.engine import get_db
 
 from .authorization_runtime import authorize_request

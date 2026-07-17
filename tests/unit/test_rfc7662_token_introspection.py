@@ -6,7 +6,7 @@ import pytest
 from httpx import ASGITransport, AsyncClient
 
 from tigrbl import TigrblApp
-from tigrbl_auth_api_oauth_introspection import build_introspection_router
+from tigrbl_auth_router_oauth_introspection import build_introspection_router
 from tigrbl_auth_protocol_oauth.standards.introspection import (
     RFC7662IntrospectionService,
 )

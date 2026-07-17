@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from tigrbl import TigrblApp
-from tigrbl_auth_api_oauth_token import (
+from tigrbl_auth_router_oauth_token import (
     build_token_router,
     include_token_endpoint,
 )

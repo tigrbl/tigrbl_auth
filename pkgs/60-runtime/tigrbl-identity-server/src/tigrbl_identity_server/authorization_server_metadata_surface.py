@@ -1,7 +1,7 @@
 """Runtime composition for the RFC 8414 HTTP carrier."""
 
 from tigrbl import TigrblApp
-from tigrbl_auth_api_oauth_authorization_server_metadata import (
+from tigrbl_auth_router_oauth_authorization_server_metadata import (
     build_authorization_server_metadata_router,
     include_authorization_server_metadata,
 )

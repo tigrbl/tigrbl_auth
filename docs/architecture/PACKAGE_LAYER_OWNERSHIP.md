@@ -18,18 +18,19 @@ release phases and a package does not need to exist in every layer.
 | `50-protocols` | OAuth, OIDC, credential, attestation, and event protocol behavior | process construction |
 | `60-runtime` | dependency injection, process construction, runners, and runtime lifecycle | product API policy |
 | `70-facade` | compatibility and ergonomic suite entry point | canonical lower-layer behavior |
-| `80-apis` | product-specific API applications and surface composition | lower-layer implementation truth |
-| `90-uix-core` | browser-safe reusable UIX components and client utilities | product-specific screens or Python runtime behavior |
-| `95-ui` | product-specific user interfaces and browser applications | backend implementation truth |
-| `100-tests` | shared fixtures, fakes, vectors, conformance harnesses, and cross-layer verification packages | production runtime behavior |
-| `105-examples` | runnable consumer applications demonstrating supported public surfaces | canonical implementation logic or test-only dependencies |
+| `80-routers` | reusable Tigrbl routers that close over one or more related tables, operations, schemas, and hooks | deployable backend application composition |
+| `90-backend-apps` | deployable backend applications composed from routers plus app-wide tables, operations, hooks, policy, configuration, and lifecycle | lower-layer implementation truth or router behavior duplicated inside an app |
+| `100-uix-core` | browser-safe reusable UIX components and client utilities | product-specific screens or Python runtime behavior |
+| `105-ui` | product-specific user interfaces and browser applications | backend implementation truth |
+| `110-examples` | runnable consumer applications demonstrating supported public surfaces | canonical implementation logic or test-only dependencies |
+| `120-tests` | shared fixtures, fakes, vectors, conformance harnesses, and cross-layer verification packages | production runtime behavior |
 
 ## Terminal verification and demonstration layers
 
-`100-tests` and `105-examples` are terminal consumers rather than production
+`120-tests` and `110-examples` are terminal consumers rather than production
 dependency layers. Production packages may not depend on either layer. Example
 packages may compose any supported public production surface, but may not rely
-on test-only helpers. Shared test infrastructure belongs in `100-tests`; unit
+on test-only helpers. Shared test infrastructure belongs in `120-tests`; unit
 tests that verify one package may remain co-located with that package, and the
 repository-wide `tests/` tree remains the workspace verification harness.
 
@@ -118,3 +119,26 @@ The validator checks live package metadata and Python ASTs. It rejects:
 The general package-layer tests continue to verify that every package resides
 in exactly one declared filesystem layer and that frontend workspaces remain
 outside the Python dependency graph.
+
+## Router and backend-application direction
+
+Layer 80 packages use the `tigrbl-auth-router-*` distribution family. A router
+is a reusable, mountable HTTP carrier. Its closure may be deliberately small:
+one operation, one table, an operation and a table, or a related set of
+operations, tables, schemas, and local hooks. A router does not construct a
+deployable product application.
+
+Layer 90 backend packages use the `tigrbl-auth-backend-app-*` distribution
+family. A backend app closes over all routers and all app-wide tables,
+operations, hooks, policy, settings, startup, shutdown, and middleware needed
+to run one product surface. It may implement local routers when a route is
+specific to that app and has no reusable layer-80 identity.
+
+The dependency direction is one-way:
+
+```text
+90-backend-apps -> 80-routers
+```
+
+Routers may never declare or import backend-app packages. The layer-boundary
+validator enforces both manifest dependencies and Python source imports.

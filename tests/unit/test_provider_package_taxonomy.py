@@ -17,7 +17,7 @@ FORBIDDEN_LAYERS = {
     "50-protocols",
     "60-runtime",
     "70-facade",
-    "80-apis",
+    "80-routers",
 }
 
 

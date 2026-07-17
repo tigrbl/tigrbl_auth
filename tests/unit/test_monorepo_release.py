@@ -207,7 +207,7 @@ def test_monorepo_release_resolves_local_dependency_closure() -> None:
 
     api_dependency_names = {
         item.name
-        for item in _local_dependency_closure(packages["tigrbl-auth-api-developer"])
+        for item in _local_dependency_closure(packages["tigrbl-auth-backend-app-developer"])
     }
     assert "tigrbl-auth" in api_dependency_names
     assert "tigrbl-auth-protocol-oauth" in api_dependency_names

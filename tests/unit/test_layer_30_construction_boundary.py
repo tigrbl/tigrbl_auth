@@ -27,7 +27,7 @@ def test_new_table_runtime_construction_surface_has_no_higher_layer_imports() ->
         "tigrbl_auth_protocol_",
         "tigrbl_identity_runtime",
         "tigrbl_identity_server",
-        "tigrbl_auth_api_",
+        "tigrbl_auth_router_",
     )
 
     for file in files:
@@ -45,7 +45,7 @@ def test_new_table_runtime_construction_surface_has_no_higher_layer_imports() ->
 
 def test_layer_30_has_no_http_or_protocol_provider_ownership() -> None:
     forbidden_prefixes = (
-        "tigrbl_auth_api_",
+        "tigrbl_auth_router_",
         "tigrbl_auth_protocol_",
         "tigrbl_authenticator_",
         "tigrbl_authz_resource_server",

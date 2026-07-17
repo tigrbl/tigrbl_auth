@@ -40,7 +40,7 @@ def test_every_layer_30_package_has_one_explicit_disposition() -> None:
 
 def test_canonical_durability_packages_have_no_higher_layer_imports() -> None:
     forbidden = (
-        "tigrbl_auth_api_",
+        "tigrbl_auth_router_",
         "tigrbl_auth_protocol_",
         "tigrbl_authz_resource_server",
         "tigrbl_identity_runtime",

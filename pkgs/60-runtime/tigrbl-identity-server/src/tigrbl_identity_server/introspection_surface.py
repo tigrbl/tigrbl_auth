@@ -10,7 +10,7 @@ from uuid import UUID
 from tigrbl import Request, TigrblApp
 from tigrbl.engine import HybridSession as AsyncSession
 from tigrbl.runtime.status import HTTPException
-from tigrbl_auth_api_oauth_introspection import (
+from tigrbl_auth_router_oauth_introspection import (
     build_introspection_router,
     include_introspection_endpoint as include_http_introspection_endpoint,
 )

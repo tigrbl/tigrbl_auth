@@ -51,8 +51,8 @@ def _settings(tmp_path: Path) -> SimpleNamespace:
 def test_surface_baseline_boundary_t0_inventory_classifies_all_admin_public_api_and_uix_surfaces():
     manifest = surface_baseline_boundary_manifest()
     registry = surface_registry()
-    admin_uix_pkg = json.loads((ROOT / "pkgs/95-ui/admin-uix/package.json").read_text())
-    public_uix_pkg = json.loads((ROOT / "pkgs/95-ui/public-uix/package.json").read_text())
+    admin_uix_pkg = json.loads((ROOT / "pkgs/105-ui/admin-uix/package.json").read_text())
+    public_uix_pkg = json.loads((ROOT / "pkgs/105-ui/public-uix/package.json").read_text())
 
     assert set(manifest) == BOUNDARY_FEATURE_IDS
     assert registry["admin_control_plane"]["surface_set"] == "admin-rest"

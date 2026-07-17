@@ -324,7 +324,7 @@ dependencies = [
     "tigrbl-workload-identity==0.4.0.dev2",
     "tigrbl-workload-identity-capability==0.4.0.dev2",
     "tigrbl-authz-policy-admin-gate==0.4.0.dev2",
-    "tigrbl-auth-api-admin-gate==0.4.0.dev2",
+    "tigrbl-auth-router-admin-gate==0.4.0.dev2",
     "tigrbl-authz-policy==0.4.0.dev2",
     "tigrbl-auth-plugin==0.4.0.dev2",
     "tigrbl-authz-resource-server==0.4.0.dev2",
@@ -382,22 +382,29 @@ dependencies = [
     "tigrbl-authorization-request-staging-capability==0.4.0.dev2",
     "tigrbl-protected-resource-authorization-capability==0.4.0.dev2",
     "tigrbl-client-registration-capability==0.4.0.dev2",
-    "tigrbl-auth-api-oauth-authorization==0.4.0.dev2",
-    "tigrbl-auth-api-oauth-device-authorization==0.4.0.dev2",
-    "tigrbl-auth-api-oauth-token-exchange==0.4.0.dev2",
-    "tigrbl-auth-api-oidc-userinfo==0.4.0.dev2",
-    "tigrbl-auth-api-oidc-logout==0.4.0.dev2",
-      "tigrbl-auth-api-oidc-discovery==0.4.0.dev2",
-      "tigrbl-auth-api-oauth-authorization-server-metadata==0.4.0.dev2",
-      "tigrbl-auth-api-oauth-protected-resource-metadata==0.4.0.dev2",
-      "tigrbl-auth-api-resource-validation-metadata==0.4.0.dev2",
-    "tigrbl-auth-api-session-login==0.4.0.dev2",
-    "tigrbl-auth-api-webauthn==0.4.0.dev2",
-    "tigrbl-auth-api-oauth-introspection==0.4.0.dev2",
-    "tigrbl-auth-api-oauth-revocation==0.4.0.dev2",
-    "tigrbl-auth-api-oauth-par==0.4.0.dev2",
-    "tigrbl-auth-api-oauth-registration==0.4.0.dev2",
-    "tigrbl-auth-api-oauth-token==0.4.0.dev2",
+    "tigrbl-auth-router-oauth-authorization==0.4.0.dev2",
+    "tigrbl-auth-router-oauth-device-authorization==0.4.0.dev2",
+    "tigrbl-auth-router-oauth-token-exchange==0.4.0.dev2",
+    "tigrbl-auth-router-oidc-userinfo==0.4.0.dev2",
+    "tigrbl-auth-router-oidc-logout==0.4.0.dev2",
+      "tigrbl-auth-router-oidc-discovery==0.4.0.dev2",
+      "tigrbl-auth-router-oauth-authorization-server-metadata==0.4.0.dev2",
+      "tigrbl-auth-router-oauth-protected-resource-metadata==0.4.0.dev2",
+      "tigrbl-auth-router-resource-validation-metadata==0.4.0.dev2",
+    "tigrbl-auth-router-session-login==0.4.0.dev2",
+    "tigrbl-auth-router-webauthn==0.4.0.dev2",
+    "tigrbl-auth-router-oauth-introspection==0.4.0.dev2",
+    "tigrbl-auth-router-oauth-revocation==0.4.0.dev2",
+    "tigrbl-auth-router-oauth-par==0.4.0.dev2",
+    "tigrbl-auth-router-oauth-registration==0.4.0.dev2",
+    "tigrbl-auth-router-oauth-token==0.4.0.dev2",
+    "tigrbl-auth-backend-app-developer==0.4.0.dev2",
+    "tigrbl-auth-backend-app-my-account==0.4.0.dev2",
+    "tigrbl-auth-backend-app-platform-admin==0.4.0.dev2",
+    "tigrbl-auth-backend-app-public==0.4.0.dev2",
+    "tigrbl-auth-backend-app-resource-validation==0.4.0.dev2",
+    "tigrbl-auth-backend-app-service-admin==0.4.0.dev2",
+    "tigrbl-auth-backend-app-tenant-admin==0.4.0.dev2",
     "tigrbl-set-transmitter-provider==0.4.0.dev2",
     "tigrbl-set-receiver-provider==0.4.0.dev2",
     "tigrbl-wallet-attestation-verifier==0.4.0.dev2",
@@ -630,7 +637,7 @@ tigrbl-security-event-delivery-capability = { path = "pkgs/40-capabilities/tigrb
 tigrbl-workload-identity = { path = "pkgs/deprecated/tigrbl-workload-identity", editable = true }
 tigrbl-workload-identity-capability = { path = "pkgs/40-capabilities/tigrbl-workload-identity-capability", editable = true }
 tigrbl-authz-policy-admin-gate = { path = "pkgs/20-providers/tigrbl-authz-policy-admin-gate", editable = true }
-tigrbl-auth-api-admin-gate = { path = "pkgs/80-apis/tigrbl-auth-api-admin-gate", editable = true }
+tigrbl-auth-router-admin-gate = { path = "pkgs/80-routers/tigrbl-auth-router-admin-gate", editable = true }
 tigrbl-authz-policy-authority-derivation-graph = { path = "pkgs/30-storage-runtime/tigrbl-authz-policy-authority-derivation-graph", editable = true }
 tigrbl-authority-graph-concrete = { path = "pkgs/10-concrete/tigrbl-authority-graph-concrete", editable = true }
 tigrbl-authz-policy = { path = "pkgs/20-providers/tigrbl-authz-policy", editable = true }
@@ -640,8 +647,8 @@ tigrbl-auth-plugin = { path = "pkgs/60-runtime/tigrbl-auth-plugin", editable = t
 tigrbl-authz-resource-server-verifier = { path = "pkgs/20-providers/tigrbl-authz-resource-server-verifier", editable = true }
 tigrbl-authz-resource-server = { path = "pkgs/50-protocols/tigrbl-authz-resource-server", editable = true }
 tigrbl-identity-cli = { path = "pkgs/60-runtime/tigrbl-identity-cli", editable = true }
-tigrbl-identity-testkit = { path = "pkgs/100-tests/tigrbl-identity-testkit", editable = true }
-acme-notes-cli = { path = "pkgs/105-examples/acme-notes-cli", editable = true }
+tigrbl-identity-testkit = { path = "pkgs/120-tests/tigrbl-identity-testkit", editable = true }
+acme-notes-cli = { path = "pkgs/110-examples/acme-notes-cli", editable = true }
 tigrbl-identity-admin = { path = "pkgs/20-providers/tigrbl-identity-admin", editable = true }
 tigrbl-identity-author = { path = "pkgs/60-runtime/tigrbl-identity-author", editable = true }
 tigrbl-identity-contracts = { path = "pkgs/02-contracts/tigrbl-identity-contracts", editable = true }
@@ -875,22 +882,29 @@ tigrbl-protected-resource-authorization-capability = { path = "pkgs/40-capabilit
 tigrbl-client-registration-capability = { path = "pkgs/40-capabilities/tigrbl-client-registration-capability", editable = true }
 tigrbl-access-governance-memory-provider = { path = "pkgs/20-providers/tigrbl-access-governance-memory-provider", editable = true }
 tigrbl-policy-administration-memory-provider = { path = "pkgs/20-providers/tigrbl-policy-administration-memory-provider", editable = true }
-tigrbl-auth-api-oauth-authorization = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-authorization", editable = true }
-tigrbl-auth-api-oauth-device-authorization = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-device-authorization", editable = true }
-tigrbl-auth-api-oauth-token-exchange = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-token-exchange", editable = true }
-tigrbl-auth-api-oidc-userinfo = { path = "pkgs/80-apis/tigrbl-auth-api-oidc-userinfo", editable = true }
-tigrbl-auth-api-oidc-logout = { path = "pkgs/80-apis/tigrbl-auth-api-oidc-logout", editable = true }
-tigrbl-auth-api-oidc-discovery = { path = "pkgs/80-apis/tigrbl-auth-api-oidc-discovery", editable = true }
-tigrbl-auth-api-oauth-authorization-server-metadata = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-authorization-server-metadata", editable = true }
-tigrbl-auth-api-oauth-protected-resource-metadata = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-protected-resource-metadata", editable = true }
-tigrbl-auth-api-resource-validation-metadata = { path = "pkgs/80-apis/tigrbl-auth-api-resource-validation-metadata", editable = true }
-tigrbl-auth-api-session-login = { path = "pkgs/80-apis/tigrbl-auth-api-session-login", editable = true }
-tigrbl-auth-api-webauthn = { path = "pkgs/80-apis/tigrbl-auth-api-webauthn", editable = true }
-tigrbl-auth-api-oauth-introspection = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-introspection", editable = true }
-tigrbl-auth-api-oauth-revocation = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-revocation", editable = true }
-tigrbl-auth-api-oauth-par = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-par", editable = true }
-tigrbl-auth-api-oauth-registration = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-registration", editable = true }
-tigrbl-auth-api-oauth-token = { path = "pkgs/80-apis/tigrbl-auth-api-oauth-token", editable = true }
+tigrbl-auth-router-oauth-authorization = { path = "pkgs/80-routers/tigrbl-auth-router-oauth-authorization", editable = true }
+tigrbl-auth-router-oauth-device-authorization = { path = "pkgs/80-routers/tigrbl-auth-router-oauth-device-authorization", editable = true }
+tigrbl-auth-router-oauth-token-exchange = { path = "pkgs/80-routers/tigrbl-auth-router-oauth-token-exchange", editable = true }
+tigrbl-auth-router-oidc-userinfo = { path = "pkgs/80-routers/tigrbl-auth-router-oidc-userinfo", editable = true }
+tigrbl-auth-router-oidc-logout = { path = "pkgs/80-routers/tigrbl-auth-router-oidc-logout", editable = true }
+tigrbl-auth-router-oidc-discovery = { path = "pkgs/80-routers/tigrbl-auth-router-oidc-discovery", editable = true }
+tigrbl-auth-router-oauth-authorization-server-metadata = { path = "pkgs/80-routers/tigrbl-auth-router-oauth-authorization-server-metadata", editable = true }
+tigrbl-auth-router-oauth-protected-resource-metadata = { path = "pkgs/80-routers/tigrbl-auth-router-oauth-protected-resource-metadata", editable = true }
+tigrbl-auth-router-resource-validation-metadata = { path = "pkgs/80-routers/tigrbl-auth-router-resource-validation-metadata", editable = true }
+tigrbl-auth-backend-app-developer = { path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-developer", editable = true }
+tigrbl-auth-backend-app-my-account = { path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-my-account", editable = true }
+tigrbl-auth-backend-app-platform-admin = { path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-platform-admin", editable = true }
+tigrbl-auth-backend-app-public = { path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-public", editable = true }
+tigrbl-auth-backend-app-resource-validation = { path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-resource-validation", editable = true }
+tigrbl-auth-backend-app-service-admin = { path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-service-admin", editable = true }
+tigrbl-auth-backend-app-tenant-admin = { path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-tenant-admin", editable = true }
+tigrbl-auth-router-session-login = { path = "pkgs/80-routers/tigrbl-auth-router-session-login", editable = true }
+tigrbl-auth-router-webauthn = { path = "pkgs/80-routers/tigrbl-auth-router-webauthn", editable = true }
+tigrbl-auth-router-oauth-introspection = { path = "pkgs/80-routers/tigrbl-auth-router-oauth-introspection", editable = true }
+tigrbl-auth-router-oauth-revocation = { path = "pkgs/80-routers/tigrbl-auth-router-oauth-revocation", editable = true }
+tigrbl-auth-router-oauth-par = { path = "pkgs/80-routers/tigrbl-auth-router-oauth-par", editable = true }
+tigrbl-auth-router-oauth-registration = { path = "pkgs/80-routers/tigrbl-auth-router-oauth-registration", editable = true }
+tigrbl-auth-router-oauth-token = { path = "pkgs/80-routers/tigrbl-auth-router-oauth-token", editable = true }
 tigrbl-set-transmitter-provider = { path = "pkgs/20-providers/tigrbl-set-transmitter-provider", editable = true }
 tigrbl-set-receiver-provider = { path = "pkgs/20-providers/tigrbl-set-receiver-provider", editable = true }
 tigrbl-wallet-attestation-verifier = { path = "pkgs/20-providers/tigrbl-wallet-attestation-verifier", editable = true }

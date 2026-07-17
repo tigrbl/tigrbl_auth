@@ -85,7 +85,7 @@ Use these boundaries:
   downstream ASGI app.
 - Keep provenance order: backend capability first, API front door second, UIX
   third. The platform-admin path is `tigrbl-identity-admin` ->
-  `tigrbl-auth-api-platform-admin` -> `@tigrbl-auth/platform-admin-uix`; apply
+  `tigrbl-auth-backend-app-platform-admin` -> `@tigrbl-auth/platform-admin-uix`; apply
   the same pattern to tenant-admin, developer, service-admin, public,
   my-account, and resource-validation surfaces.
 
@@ -139,7 +139,7 @@ clobbering an existing local listener on `8000`.
 ## CLI device login consumer example
 
 This repo includes a separate sample Python package at
-`pkgs/105-examples/acme-notes-cli/`.
+`pkgs/110-examples/acme-notes-cli/`.
 that demonstrates how another CLI can implement a `login` command on top of
 `tigrbl_auth` device authorization. The flow uses issuer discovery plus the
 canonical `POST /device_authorization` and `POST /token` endpoints.
@@ -175,7 +175,7 @@ plugin.install(app)
 - validated in-scope certification lane evidence is not yet fully preserved as passing
 - SQLite and PostgreSQL migration portability has not yet been preserved as passing in the final validated execution report
 - Tier 3 evidence has not yet been explicitly rebuilt from validated-run manifests in a fully green final gate set
-- the supported interpreter range remains Python `3.10`–`3.12`; this local checkpoint container only provides Python `3.13`, so it cannot truthfully generate the required preserved supported-matrix evidence by itself
+- the supported interpreter range remains Python `3.10`â€“`3.12`; this local checkpoint container only provides Python `3.13`, so it cannot truthfully generate the required preserved supported-matrix evidence by itself
 - release bundles and attestation verification can be rebuilt from this checkpoint, but the result remains a final-release **candidate**, not a truthful final certification release
 
 ## License

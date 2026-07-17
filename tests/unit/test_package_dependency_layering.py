@@ -109,14 +109,17 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-auth-release-certification",
     },
     "facade": {"tigrbl-auth"},
-    "apis": {
-        "tigrbl-auth-api-developer",
-        "tigrbl-auth-api-my-account",
-        "tigrbl-auth-api-platform-admin",
-        "tigrbl-auth-api-public",
-        "tigrbl-auth-api-resource-validation",
-        "tigrbl-auth-api-service-admin",
-        "tigrbl-auth-api-tenant-admin",
+    "routers": {
+        "tigrbl-auth-router-admin-gate",
+    },
+    "backend-apps": {
+        "tigrbl-auth-backend-app-developer",
+        "tigrbl-auth-backend-app-my-account",
+        "tigrbl-auth-backend-app-platform-admin",
+        "tigrbl-auth-backend-app-public",
+        "tigrbl-auth-backend-app-resource-validation",
+        "tigrbl-auth-backend-app-service-admin",
+        "tigrbl-auth-backend-app-tenant-admin",
     },
     "tests": {
         "tigrbl-identity-testkit",
@@ -151,9 +154,10 @@ PYTHON_LAYER_FOLDERS = {
     "protocols": "50-protocols",
     "runtime": "60-runtime",
     "facade": "70-facade",
-    "apis": "80-apis",
-    "tests": "100-tests",
-    "examples": "105-examples",
+    "routers": "80-routers",
+    "backend-apps": "90-backend-apps",
+    "tests": "120-tests",
+    "examples": "110-examples",
     "deprecated": "deprecated",
 }
 
@@ -170,7 +174,7 @@ for _layer, _folder in PYTHON_LAYER_FOLDERS.items():
         if child.is_dir() and (child / "pyproject.toml").is_file()
     }
 
-FRONTEND_LAYER_FOLDERS = {"90-uix-core", "95-ui"}
+FRONTEND_LAYER_FOLDERS = {"100-uix-core", "105-ui"}
 
 REQUIRED_PROTOCOL_MODULES = {
     "bindings.py",
@@ -184,16 +188,16 @@ REQUIRED_PROTOCOL_MODULES = {
 }
 
 FRONTEND_WORKSPACES = {
-    ROOT / "pkgs" / "90-uix-core" / "uix-core",
-    ROOT / "pkgs" / "95-ui" / "admin-uix",
-    ROOT / "pkgs" / "95-ui" / "demo-hub-uix",
-    ROOT / "pkgs" / "95-ui" / "developer-uix",
-    ROOT / "pkgs" / "95-ui" / "my-account-uix",
-    ROOT / "pkgs" / "95-ui" / "platform-admin-uix",
-    ROOT / "pkgs" / "95-ui" / "public-uix",
-    ROOT / "pkgs" / "95-ui" / "rp",
-    ROOT / "pkgs" / "95-ui" / "service-admin-uix",
-    ROOT / "pkgs" / "95-ui" / "tenant-admin-uix",
+    ROOT / "pkgs" / "100-uix-core" / "uix-core",
+    ROOT / "pkgs" / "105-ui" / "admin-uix",
+    ROOT / "pkgs" / "105-ui" / "demo-hub-uix",
+    ROOT / "pkgs" / "105-ui" / "developer-uix",
+    ROOT / "pkgs" / "105-ui" / "my-account-uix",
+    ROOT / "pkgs" / "105-ui" / "platform-admin-uix",
+    ROOT / "pkgs" / "105-ui" / "public-uix",
+    ROOT / "pkgs" / "105-ui" / "rp",
+    ROOT / "pkgs" / "105-ui" / "service-admin-uix",
+    ROOT / "pkgs" / "105-ui" / "tenant-admin-uix",
 }
 
 LOWER_LAYER_FACADE_IMPORT_EXCEPTIONS: dict[str, str] = {}
@@ -363,7 +367,7 @@ def test_lower_layer_packages_do_not_import_tigrbl_auth_facade() -> None:
         if _package_facade_imports(package)
     }
     expected_upper_layers = (
-        PYTHON_PACKAGE_LAYERS["facade"] | PYTHON_PACKAGE_LAYERS["apis"]
+        PYTHON_PACKAGE_LAYERS["facade"] | PYTHON_PACKAGE_LAYERS["backend-apps"]
     )
     lower_layer_consumers = facade_consumers - expected_upper_layers
 

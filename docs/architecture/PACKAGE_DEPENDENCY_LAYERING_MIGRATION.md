@@ -8,7 +8,7 @@ This plan makes the package rename work enforceable. The target graph is directi
 
 1. Foundational packages own identity, authn, authz, protocol, storage, runtime, server, contracts, and testkit behavior.
 2. `tigrbl-auth` is a compatibility facade and composed product front door over those packages.
-3. `tigrbl-auth-api-*` backend products consume the facade for ergonomic app assembly.
+3. `tigrbl-auth-router-*` backend products consume the facade for ergonomic app assembly.
 4. Frontend UIX workspaces consume HTTP, OpenAPI, OpenRPC, OIDC discovery, and UIX packages. They do not import Python internals.
 
 ## Target Layers
@@ -17,8 +17,8 @@ This plan makes the package rename work enforceable. The target graph is directi
 | --- | --- | --- |
 | Foundation | `tigrbl-identity-*`, `tigrbl-authn-*`, `tigrbl-authz-*`, `tigrbl-auth-protocol-*` | May depend sideways/downward only through owned package contracts. Must not import `tigrbl_auth`. |
 | Facade | `tigrbl-auth` | May import foundational packages and preserve compatibility paths. Must not become canonical truth for identity, authn, authz, protocol, storage, or policy. |
-| Downstream backend | `tigrbl-auth-api-*` | May import `tigrbl_auth` and product-local code. Should not reach around the facade into storage or lower internals unless a product contract requires it. |
-| Downstream frontend | `pkgs/95-ui/*-uix`, `pkgs/95-ui/rp`, `pkgs/90-uix-core/uix-core` | May consume API contracts, discovery metadata, generated clients, and browser-safe UIX packages. Must not import Python `tigrbl_auth` modules. |
+| Downstream backend | `tigrbl-auth-router-*` | May import `tigrbl_auth` and product-local code. Should not reach around the facade into storage or lower internals unless a product contract requires it. |
+| Downstream frontend | `pkgs/105-ui/*-uix`, `pkgs/105-ui/rp`, `pkgs/100-uix-core/uix-core` | May consume API contracts, discovery metadata, generated clients, and browser-safe UIX packages. Must not import Python `tigrbl_auth` modules. |
 
 ## Staged Enforcement
 
@@ -48,7 +48,7 @@ Current T1 exception packages:
 
 ### T2: Zero Exceptions
 
-Remove the exception ledger by moving facade-owned imports down into the owning foundational packages or by replacing them with lower-layer contracts. At T2, no foundational package imports `tigrbl_auth`; only `tigrbl-auth` and `tigrbl-auth-api-*` packages do.
+Remove the exception ledger by moving facade-owned imports down into the owning foundational packages or by replacing them with lower-layer contracts. At T2, no foundational package imports `tigrbl_auth`; only `tigrbl-auth` and `tigrbl-auth-router-*` packages do.
 
 Status: complete for direct Python imports. The exception ledger in `tests/unit/test_package_dependency_layering.py` is empty, and foundational packages now import the canonical split package roots directly.
 

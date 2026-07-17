@@ -309,12 +309,12 @@ def test_executable_par_publisher_lives_above_storage() -> None:
 
     assert importlib.util.find_spec("tigrbl_identity_storage_runtime.par") is None
     runtime = importlib.import_module("tigrbl_identity_server.par_surface")
-    carrier = importlib.import_module("tigrbl_auth_api_oauth_par")
+    carrier = importlib.import_module("tigrbl_auth_router_oauth_par")
     storage = importlib.import_module("tigrbl_identity_storage.tables.pushed_authorization_request")
 
     assert runtime.include_par_endpoint.__module__ == "tigrbl_identity_server.par_surface"
     assert carrier.build_pushed_authorization_router.__module__ == (
-        "tigrbl_auth_api_oauth_par.binding"
+        "tigrbl_auth_router_oauth_par.binding"
     )
     assert not hasattr(storage, "api")
     assert not hasattr(storage, "router")
@@ -369,7 +369,7 @@ def test_executable_client_registration_publisher_lives_above_storage() -> None:
     storage = importlib.import_module("tigrbl_identity_storage.tables.client_registration")
 
     assert not hasattr(runtime, "api")
-    carrier = importlib.import_module("tigrbl_auth_api_oauth_registration")
+    carrier = importlib.import_module("tigrbl_auth_router_oauth_registration")
     assert callable(carrier.build_client_registration_router)
     assert runtime.include_client_registration_endpoint.__module__ == (
         "tigrbl_identity_server.client_registration_surface"
@@ -480,7 +480,7 @@ def test_executable_account_surface_composition_lives_above_storage() -> None:
         "tigrbl_identity_storage.tables.user._account_surface"
     ) is None
 
-    account_surface = importlib.import_module("tigrbl_auth_api_my_account.routes")
+    account_surface = importlib.import_module("tigrbl_auth_backend_app_my_account.routes")
 
     assert account_surface.api is account_surface.router
 

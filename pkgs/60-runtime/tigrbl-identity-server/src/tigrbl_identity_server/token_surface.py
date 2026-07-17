@@ -1,6 +1,6 @@
 """Runtime composition for the OAuth token endpoint HTTP carrier."""
 
-from tigrbl_auth_api_oauth_token import build_token_router
+from tigrbl_auth_router_oauth_token import build_token_router
 from tigrbl_identity_storage_runtime.engine import get_db
 
 from .token_request import token_request

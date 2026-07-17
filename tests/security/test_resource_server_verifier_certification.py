@@ -60,7 +60,7 @@ def _deployment():
     return resolve_deployment(
         SimpleNamespace(**values),
         profile="production",
-        product_surface="resource-validation-api",
+        product_surface="resource-validation-app",
     )
 
 

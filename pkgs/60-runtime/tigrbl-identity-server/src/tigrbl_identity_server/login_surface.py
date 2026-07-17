@@ -1,6 +1,6 @@
 """Runtime composition for the interactive session-login HTTP carrier."""
 
-from tigrbl_auth_api_session_login import build_login_router
+from tigrbl_auth_router_session_login import build_login_router
 from tigrbl_identity_storage_runtime.engine import get_db
 
 from .login_runtime import login_user, password_authentication
