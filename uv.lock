@@ -8980,11 +8980,15 @@ name = "tigrbl-security-protocol-jose"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-security-protocol-jose" }
 dependencies = [
+    { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-jose-concrete" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-jose-concrete", specifier = "==0.4.0.dev2" }]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-jose-concrete", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-security-provenance-bases"
