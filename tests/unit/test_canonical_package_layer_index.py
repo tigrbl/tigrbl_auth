@@ -9,7 +9,13 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from scripts.package_layer_policy import dependency_allowed, load_layer_policy
+from scripts.package_layer_policy import (
+    DependencyRule,
+    classify_layer,
+    dependency_allowed,
+    load_layer_policy,
+    package_dependency_allowed,
+)
 from scripts.validate_layer_boundaries import LAYER_ORDER, discover_packages
 
 
@@ -61,6 +67,33 @@ def test_terminal_dependency_policy_is_directional() -> None:
     assert not dependency_allowed("70-facade", "120-tests", policy)
     assert not dependency_allowed("110-examples", "120-tests", policy)
 
+
+
+def test_dependency_rules_cover_every_layer_and_reject_upward_edges() -> None:
+    policy = load_layer_policy(ROOT / "pkgs" / "layers.toml")
+
+    assert all(isinstance(rule, DependencyRule) for rule in policy.dependency_rules)
+    assert set(policy.rules_by_consumer) == set(EXPECTED_LAYER_ORDER)
+    assert dependency_allowed("50-protocols", "40-capabilities", policy)
+    assert not dependency_allowed("20-providers", "40-capabilities", policy)
+    assert not dependency_allowed("60-runtime", "80-routers", policy)
+    assert dependency_allowed("90-backend-apps", "80-routers", policy)
+
+
+def test_package_exceptions_are_explicit_and_path_classification_is_authoritative() -> None:
+    policy = load_layer_policy(ROOT / "pkgs" / "layers.toml")
+
+    assert classify_layer(ROOT / "pkgs" / "80-routers" / "example", policy) == "80-routers"
+    assert package_dependency_allowed(
+        "tigrbl-identity-runtime",
+        "60-runtime",
+        "tigrbl-auth-router-webauthn",
+        "80-routers",
+        policy,
+    )
+    assert not package_dependency_allowed(
+        "new-runtime", "60-runtime", "new-router", "80-routers", policy
+    )
 
 def test_duplicate_layer_ids_are_rejected(tmp_path: Path) -> None:
     policy_path = tmp_path / "layers.toml"

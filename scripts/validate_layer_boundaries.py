@@ -19,9 +19,19 @@ except ModuleNotFoundError:  # pragma: no cover - Python 3.10 CI
     import tomli as tomllib  # type: ignore[no-redef]
 
 try:
-    from scripts.package_layer_policy import dependency_allowed, load_layer_policy
+    from scripts.package_layer_policy import (
+        classify_layer,
+        dependency_allowed,
+        load_layer_policy,
+        package_dependency_allowed,
+    )
 except ModuleNotFoundError:  # direct script execution
-    from package_layer_policy import dependency_allowed, load_layer_policy
+    from package_layer_policy import (
+        classify_layer,
+        dependency_allowed,
+        load_layer_policy,
+        package_dependency_allowed,
+    )
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -265,10 +275,7 @@ def discover_packages(root: Path = ROOT) -> tuple[Package, ...]:
     pkgs = root / "pkgs"
 
     for manifest in sorted(pkgs.rglob("pyproject.toml")):
-        relative = manifest.relative_to(pkgs)
-        layer = relative.parts[0]
-        if layer not in LAYER_ORDER:
-            raise ValueError(f"unknown package layer {layer!r}: {manifest}")
+        layer = classify_layer(manifest.parent, LAYER_POLICY, pkgs)
         data = tomllib.loads(manifest.read_text(encoding="utf-8"))
         project = data.get("project", {})
         if not isinstance(project, dict) or not project.get("name"):
@@ -387,90 +394,121 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
                     )
                 )
 
-    # Tests and examples are terminal consumers. Production packages must not
-    # acquire runtime dependencies on either layer, and examples must remain
-    # usable without importing test-only helpers.
+    # Apply the canonical policy to every first-party manifest and source import.
+    # Package-scoped exceptions are finite migration entries in pkgs/layers.toml.
+    observed_edges: set[tuple[str, str]] = set()
     for package in packages:
         manifest = package.path / "pyproject.toml"
         for dependency in package.dependencies:
             target = by_distribution.get(dependency)
-            if target is None or not _terminal_dependency_forbidden(
-                package.layer, target.layer
+            if target is not None:
+                observed_edges.add((package.distribution, target.distribution))
+            if target is None or package_dependency_allowed(
+                package.distribution,
+                package.layer,
+                target.distribution,
+                target.layer,
+                LAYER_POLICY,
             ):
                 continue
+            if package.layer == ROUTER_LAYER and target.layer == BACKEND_APP_LAYER:
+                kind = "router-depends-on-backend-app"
+                detail = "routers are reusable dependencies of apps, never app consumers"
+            elif target.layer in NON_PRODUCTION_LAYERS:
+                kind = "terminal-layer-dependency"
+                detail = "production cannot consume terminal packages; examples cannot consume tests"
+            else:
+                kind = "forbidden-layer-dependency"
+                detail = "target layer is not allowed by pkgs/layers.toml"
             violations.append(
                 Violation(
-                    kind="terminal-layer-dependency",
+                    kind=kind,
                     package=package.distribution,
                     package_layer=package.layer,
                     target=target.distribution,
                     target_layer=target.layer,
                     path=manifest.relative_to(root).as_posix(),
                     line=None,
-                    detail=(
-                        "production packages cannot depend on test or example "
-                        "packages; examples also cannot depend on test helpers"
-                    ),
+                    detail=detail,
                 )
             )
 
         for source in sorted((package.path / "src").rglob("*.py")):
-            tree = ast.parse(
-                source.read_text(encoding="utf-8-sig"), filename=str(source)
-            )
+            text = source.read_text(encoding="utf-8-sig")
+            tree = ast.parse(text, filename=str(source))
             imported_roots: set[tuple[str, int]] = set()
             for node in ast.walk(tree):
                 if isinstance(node, ast.Import):
                     imported_roots.update(
                         (alias.name.split(".")[0], node.lineno) for alias in node.names
                     )
-                elif (
-                    isinstance(node, ast.ImportFrom) and node.level == 0 and node.module
-                ):
+                elif isinstance(node, ast.ImportFrom) and node.level == 0 and node.module:
                     imported_roots.add((node.module.split(".")[0], node.lineno))
+            for match in DYNAMIC_IMPORT_RE.finditer(text):
+                imported_roots.add(
+                    (
+                        match.group("module").split(".")[0],
+                        text.count("\n", 0, match.start()) + 1,
+                    )
+                )
 
             relative_source = source.relative_to(root).as_posix()
             for import_root, line in sorted(imported_roots):
                 target = by_import_root.get(import_root)
-                if (
-                    package.layer == ROUTER_LAYER
-                    and target is not None
-                    and target.layer == BACKEND_APP_LAYER
-                ):
-                    violations.append(
-                        Violation(
-                            kind="router-imports-backend-app",
-                            package=package.distribution,
-                            package_layer=package.layer,
-                            target=target.distribution,
-                            target_layer=target.layer,
-                            path=relative_source,
-                            line=line,
-                            detail=(
-                                "routers are reusable dependencies of apps, "
-                                "never app consumers"
-                            ),
-                        )
-                    )
-                if target is None or not _terminal_dependency_forbidden(
-                    package.layer, target.layer
+                if target is not None:
+                    observed_edges.add((package.distribution, target.distribution))
+                if target is None or package_dependency_allowed(
+                    package.distribution,
+                    package.layer,
+                    target.distribution,
+                    target.layer,
+                    LAYER_POLICY,
                 ):
                     continue
+                if package.layer == ROUTER_LAYER and target.layer == BACKEND_APP_LAYER:
+                    kind = "router-imports-backend-app"
+                    detail = "routers are reusable dependencies of apps, never app consumers"
+                elif target.layer in NON_PRODUCTION_LAYERS:
+                    kind = "terminal-layer-import"
+                    detail = "production cannot import terminal packages; examples cannot import tests"
+                else:
+                    kind = "forbidden-layer-import"
+                    detail = f"first-party import root {import_root!r} crosses a forbidden layer edge"
                 violations.append(
                     Violation(
-                        kind="terminal-layer-import",
+                        kind=kind,
                         package=package.distribution,
                         package_layer=package.layer,
                         target=target.distribution,
                         target_layer=target.layer,
                         path=relative_source,
                         line=line,
-                        detail=(
-                            "production sources cannot import test or example "
-                            "packages; examples also cannot import test helpers"
-                        ),
+                        detail=detail,
                     )
                 )
+
+    for consumer, target in sorted(LAYER_POLICY.exception_pairs):
+        consumer_package = by_distribution.get(consumer)
+        target_package = by_distribution.get(target)
+        stale = (consumer, target) not in observed_edges
+        if consumer_package is not None and target_package is not None:
+            stale = stale or dependency_allowed(
+                consumer_package.layer, target_package.layer, LAYER_POLICY
+            )
+        if not stale:
+            continue
+        violations.append(
+            Violation(
+                kind="stale-dependency-exception",
+                package=consumer,
+                package_layer=(consumer_package.layer if consumer_package else "missing"),
+                target=target,
+                target_layer=(target_package.layer if target_package else "missing"),
+                path="pkgs/layers.toml",
+                line=None,
+                detail="remove migration exception that no longer covers a forbidden live edge",
+            )
+        )
 
     capability_packages = {
         item.distribution for item in packages if item.layer == "40-capabilities"
@@ -694,6 +732,17 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
 
 def report(violations: tuple[Violation, ...]) -> dict[str, object]:
     return {
+        "layer_policy": {
+            "layers": list(LAYER_POLICY.layer_ids),
+            "dependency_rules": {
+                rule.consumer_layer: sorted(rule.allowed_target_layers)
+                for rule in LAYER_POLICY.dependency_rules
+            },
+            "dependency_exceptions": [
+                {"consumer": item.consumer, "target": item.target, "reason": item.reason}
+                for item in LAYER_POLICY.dependency_exceptions
+            ],
+        },
         "policy": {
             "consumer": "40-capabilities",
             "allowed_target_layers": sorted(CAPABILITY_ALLOWED_LAYERS),
