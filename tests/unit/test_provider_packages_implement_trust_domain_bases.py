@@ -42,13 +42,13 @@ TRUST_BASE_PROVIDER_PACKAGES = {
 COMPOSITION_PROVIDER_PACKAGES = {
     "tigrbl-authn-credentials",
     "tigrbl-authz-policy",
-    "tigrbl-authz-policy-admin-gate",
     "tigrbl-authz-policy-decision-engine",
+    "tigrbl-access-governance-memory-provider",
+    "tigrbl-policy-administration-memory-provider",
     "tigrbl-certificate-status-provider",
     "tigrbl-corim-reference-memory-provider",
     "tigrbl-did-controller-provider",
     "tigrbl-digital-credential-trust-provider",
-    "tigrbl-identity-admin",
     "tigrbl-identity-admin-auth-anomaly-detector",
     "tigrbl-identity-admin-relationship-graph",
     "tigrbl-key-attestation-verifier",
@@ -65,6 +65,8 @@ DIRECT_CONTRACT_PROVIDER_PACKAGES = {
     # their versioned protocol mapping belongs in layer 50, not a general trust base.
     "tigrbl-security-oidc-federation-provider",
     "tigrbl-security-webfinger-provider",
+    "tigrbl-cose-cryptography-provider",
+    "tigrbl-jose-swarmauri-provider",
 }
 
 

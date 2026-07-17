@@ -1,21 +1,4 @@
-from __future__ import annotations
+"""Deprecated re-export of canonical proof-binding helpers."""
 
-from tigrbl_identity_credentials_concrete import (
-    DpopKeyCredential,
-    MtlsCertificateCredential,
-)
-from tigrbl_identity_contracts.credentials import (
-    ProofBinding,
-)
-from .lifecycle import (
-    create_dpop_key_credential,
-    create_mtls_certificate_credential,
-)
-
-__all__ = [
-    "DpopKeyCredential",
-    "MtlsCertificateCredential",
-    "ProofBinding",
-    "create_dpop_key_credential",
-    "create_mtls_certificate_credential",
-]
+from tigrbl_authn_credentials.proof_bindings import *  # noqa: F401,F403
+from tigrbl_authn_credentials.proof_bindings import __all__ as __all__

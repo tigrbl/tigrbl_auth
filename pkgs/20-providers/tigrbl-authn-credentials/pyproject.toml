@@ -35,7 +35,6 @@ classifiers = [
 dependencies = [
     "tigrbl-secret-hashing-bcrypt-provider==0.1.0",
     "tigrbl-identity-credentials-concrete==0.4.0.dev2",
-    "tigrbl-identity-server==0.4.0.dev2",
     "tigrbl-identity-jose==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
 ]

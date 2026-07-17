@@ -38,7 +38,7 @@ dependencies = [
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"
 Repository = "https://github.com/tigrbl/tigrbl_auth"
-Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/20-providers/tigrbl-authz-policy-admin-gate"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/deprecated/tigrbl-authz-policy-admin-gate"
 SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
 PyPI = "https://pypi.org/project/tigrbl-authz-policy-admin-gate/"
 

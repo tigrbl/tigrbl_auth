@@ -96,6 +96,7 @@ def test_server_rest_router_bridges_warn_to_storage_owner(
             "tigrbl_identity_storage.tables",
                 "tigrbl_identity_storage_runtime",
                 "tigrbl_auth_router_",
+                "tigrbl_auth_backend_app_",
             )
         )
     assert not path.exists()
@@ -127,8 +128,8 @@ def test_remaining_table_backed_rest_routers_import_schemas_from_table_modules(
     assert not path.exists()
 
 
-def test_realm_admin_routes_live_in_platform_api_package() -> None:
-    api_module = importlib.import_module("tigrbl_auth_backend_app_platform_admin.realms")
+def test_realm_admin_routes_live_in_platform_backend_app_package() -> None:
+    app_module = importlib.import_module("tigrbl_auth_backend_app_platform_admin.realms")
     storage_module = importlib.import_module("tigrbl_identity_storage.tables.realm")
     route_names = {
         "admin_list_realms",
@@ -140,15 +141,16 @@ def test_realm_admin_routes_live_in_platform_api_package() -> None:
         "admin_create_realm_tenant",
     }
 
-    assert api_module.api is api_module.router
-    assert sorted(name for name in route_names if not hasattr(api_module, name)) == []
+    assert hasattr(app_module, "router")
+    assert not hasattr(app_module, "api")
+    assert sorted(name for name in route_names if not hasattr(app_module, name)) == []
     assert not hasattr(storage_module, "admin_api")
     assert not hasattr(storage_module, "admin_router")
     assert sorted(name for name in route_names if hasattr(storage_module, name)) == []
     assert sorted(name for name in route_names if hasattr(storage_module.Realm, name)) == []
 
 
-def test_tenant_admin_routes_and_dtos_live_in_platform_api_package() -> None:
+def test_tenant_admin_routes_and_dtos_live_in_platform_backend_app_package() -> None:
     runtime_module = importlib.import_module("tigrbl_auth_backend_app_platform_admin.tenants")
     storage_module = importlib.import_module("tigrbl_identity_storage.tables.tenant")
     table_class = storage_module.Tenant
@@ -161,7 +163,7 @@ def test_tenant_admin_routes_and_dtos_live_in_platform_api_package() -> None:
 
     assert hasattr(runtime_module, "admin_router")
     assert hasattr(runtime_module, "router")
-    assert runtime_module.api is runtime_module.router
+    assert not hasattr(runtime_module, "api")
     assert not hasattr(storage_module, "admin_api")
     assert not hasattr(storage_module, "admin_router")
     assert sorted(name for name in route_names if not hasattr(runtime_module, name)) == []
@@ -206,8 +208,8 @@ def test_admin_auth_routes_live_in_server_runtime() -> None:
         assert not hasattr(storage_module, dto_name)
 
 
-def test_identity_admin_routes_live_in_platform_api_package() -> None:
-    api_module = importlib.import_module("tigrbl_auth_backend_app_platform_admin.identities")
+def test_identity_admin_routes_live_in_platform_backend_app_package() -> None:
+    app_module = importlib.import_module("tigrbl_auth_backend_app_platform_admin.identities")
     storage_module = importlib.import_module("tigrbl_identity_storage.tables.user")
     route_names = {
         "admin_list_identities",
@@ -216,37 +218,39 @@ def test_identity_admin_routes_live_in_platform_api_package() -> None:
         "admin_delete_identity",
     }
 
-    assert api_module.api is api_module.router
-    assert sorted(name for name in route_names if not hasattr(api_module, name)) == []
+    assert hasattr(app_module, "router")
+    assert not hasattr(app_module, "api")
+    assert sorted(name for name in route_names if not hasattr(app_module, name)) == []
     assert sorted(name for name in route_names if hasattr(storage_module, name)) == []
     assert sorted(name for name in route_names if hasattr(storage_module.User, name)) == []
 
 
-def test_my_account_profile_routes_live_in_api_package() -> None:
-    api_module = importlib.import_module("tigrbl_auth_backend_app_my_account.profiles")
+def test_my_account_profile_routes_live_in_backend_app_package() -> None:
+    app_module = importlib.import_module("tigrbl_auth_backend_app_my_account.profiles")
     storage_module = importlib.import_module("tigrbl_identity_storage.tables.user")
     route_names = {"get_account_profile", "update_account_profile", "change_account_password"}
 
-    assert api_module.api is api_module.router
-    assert sorted(name for name in route_names if not hasattr(api_module, name)) == []
+    assert hasattr(app_module, "router")
+    assert not hasattr(app_module, "api")
+    assert sorted(name for name in route_names if not hasattr(app_module, name)) == []
     assert not hasattr(storage_module, "account_api")
     assert not hasattr(storage_module, "account_router")
     assert sorted(name for name in route_names if hasattr(storage_module, name)) == []
     assert sorted(name for name in route_names if hasattr(storage_module.User, name)) == []
 
 
-def test_my_account_session_routes_live_in_api_package() -> None:
-    api_module = importlib.import_module("tigrbl_auth_backend_app_my_account.sessions")
+def test_my_account_session_routes_live_in_backend_app_package() -> None:
+    app_module = importlib.import_module("tigrbl_auth_backend_app_my_account.sessions")
     storage_module = importlib.import_module(
         "tigrbl_identity_storage.tables.auth_session"
     )
     table_class = storage_module.AuthSession
     route_names = {"list_account_sessions", "revoke_account_session"}
 
-    assert hasattr(api_module, "api")
-    assert hasattr(api_module, "router")
-    assert hasattr(api_module, "MyAccountSessionOut")
-    assert sorted(name for name in route_names if not hasattr(api_module, name)) == []
+    assert hasattr(app_module, "router")
+    assert not hasattr(app_module, "api")
+    assert hasattr(app_module, "MyAccountSessionOut")
+    assert sorted(name for name in route_names if not hasattr(app_module, name)) == []
     assert not hasattr(storage_module, "account_api")
     assert not hasattr(storage_module, "account_router")
     assert not hasattr(storage_module, "MyAccountSessionOut")
@@ -361,8 +365,8 @@ def test_consent_account_routes_live_above_storage_table_module() -> None:
         "revoke_for_client",
     }
 
-    assert hasattr(runtime_module, "api")
     assert hasattr(runtime_module, "router")
+    assert not hasattr(runtime_module, "api")
     assert not hasattr(storage_module, "account_api")
     assert not hasattr(storage_module, "account_router")
     assert sorted(name for name in route_names if not hasattr(runtime_module, name)) == []

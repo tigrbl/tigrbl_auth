@@ -9,8 +9,8 @@ from tigrbl.requests import Request
 from tigrbl.runtime.status import HTTPException
 from http import HTTPStatus as status
 
-import tigrbl_authn_credentials.adapters.remote as remote_adapter
-from tigrbl_authn_credentials.adapters.remote import RemoteAuthNAdapter
+import tigrbl_identity_server.security.authn_adapters.remote as remote_adapter
+from tigrbl_identity_server.security.authn_adapters.remote import RemoteAuthNAdapter
 
 
 @pytest.mark.unit

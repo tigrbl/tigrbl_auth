@@ -15,15 +15,6 @@ def test_provider_taxonomy_names_canonical_destinations() -> None:
     )
     migrations = taxonomy["compatibility_or_migration_packages"]
 
-    assert migrations["tigrbl-authn-credentials"]["target"] == (
-        "tigrbl-principal-authentication"
-    )
-    assert migrations["tigrbl-authz-policy-admin-gate"]["target"] == (
-        "tigrbl-auth-router-admin-gate"
-    )
-    assert migrations["tigrbl-authz-policy-decision-engine"]["target"] == (
-        "tigrbl-policy-decision-engine-default"
-    )
     assert migrations["tigrbl-security-cose"]["target"] == (
         "tigrbl-cose-concrete-plus-tigrbl-cose-cryptography-provider"
     )
@@ -33,9 +24,9 @@ def test_compatibility_packages_reexport_canonical_objects() -> None:
     from tigrbl_auth_router_admin_gate import AdminGate as CanonicalAdminGate
     from tigrbl_authz_policy_admin_gate import AdminGate as LegacyAdminGate
     from tigrbl_cose_concrete import decode_cose_key as canonical_decode
-    from tigrbl_principal_authentication.lifecycle import hash_secret as canonical_hash
+    from tigrbl_authn_credentials.lifecycle import hash_secret as canonical_hash
     from tigrbl_security_cose import decode_cose_key as legacy_decode
-    from tigrbl_authn_credentials.lifecycle import hash_secret as legacy_hash
+    from tigrbl_principal_authentication.lifecycle import hash_secret as legacy_hash
 
     assert LegacyAdminGate is CanonicalAdminGate
     assert legacy_decode is canonical_decode

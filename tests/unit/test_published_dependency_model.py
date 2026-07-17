@@ -192,8 +192,7 @@ def test_pyproject_uses_published_pins_and_extras():
     assert facade_dependencies.isdisjoint(removed_helper_pins)
     assert "pqcrypto==0.4.0" in pqc_provider_dependencies
     assert "pqcrypto==0.4.0" not in admin_gate_dependencies
-    assert "tigrbl-identity-core==0.4.0.dev2" in admin_gate_dependencies
-    assert "tigrbl-identity-runtime==0.4.0.dev2" in admin_gate_dependencies
+    assert admin_gate_dependencies == {"tigrbl-auth-router-admin-gate==0.4.0.dev2"}
     assert "pqcrypto==0.4.0" not in authz_rules_dependencies
     assert "tigrbl-identity-contracts==0.4.0.dev2" in authz_rules_dependencies
     assert "tigrbl-identity-core==0.4.0.dev2" not in authz_rules_dependencies
@@ -204,8 +203,10 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-identity-core==0.4.0.dev2" not in identity_credentials_dependencies
     assert "tigrbl-identity-jose==0.4.0.dev2" not in identity_credentials_dependencies
     assert (
-        "tigrbl-identity-admin-control-plane==0.4.0.dev2" in identity_admin_dependencies
+        "tigrbl-identity-admin-control-plane==0.4.0.dev2" not in identity_admin_dependencies
     )
+    assert "tigrbl-administrative-resource-capability==0.4.0.dev2" in identity_admin_dependencies
+    assert "tigrbl-operator-administration-capability==0.4.0.dev2" in identity_admin_dependencies
     assert (
         "tigrbl-identity-admin-advanced-authenticator-registry==0.4.0.dev2"
         not in identity_admin_dependencies
@@ -231,7 +232,8 @@ def test_pyproject_uses_published_pins_and_extras():
         "tigrbl-identity-admin-relationship-graph==0.4.0.dev2"
         in identity_admin_dependencies
     )
-    assert "tigrbl-identity-jose==0.4.0.dev2" in identity_admin_dependencies
+    assert "tigrbl-identity-jose==0.4.0.dev2" not in identity_admin_dependencies
+    assert "tigrbl-jose-concrete==0.4.0.dev2" in identity_admin_dependencies
     assert "tigrbl-identity-concrete==0.4.0.dev2" not in identity_admin_dependencies
     assert (
         "tigrbl-identity-identities-concrete==0.4.0.dev2" in identity_admin_dependencies

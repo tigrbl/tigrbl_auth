@@ -122,10 +122,10 @@ def test_authz_policy_admin_gate_package_uses_identity_core_primitives() -> None
     gate_path = (
         ROOT
         / "pkgs"
-        / "20-providers"
-        / "tigrbl-authz-policy-admin-gate"
+        / "80-routers"
+        / "tigrbl-auth-router-admin-gate"
         / "src"
-        / "tigrbl_authz_policy_admin_gate"
+        / "tigrbl_auth_router_admin_gate"
         / "gate.py"
     )
     tree = ast.parse(gate_path.read_text(encoding="utf-8"))
@@ -151,9 +151,9 @@ def test_authz_policy_control_plane_uses_identity_core_primitives() -> None:
         ROOT
         / "pkgs"
         / "20-providers"
-        / "tigrbl-authz-policy"
+        / "tigrbl-policy-administration-memory-provider"
         / "src"
-        / "tigrbl_authz_policy"
+        / "tigrbl_policy_administration_memory_provider"
         / "control_plane.py"
     )
     source = control_plane_path.read_text(encoding="utf-8")
