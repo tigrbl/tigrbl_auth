@@ -550,6 +550,14 @@ dev = [
 package = false
 
 [tool.uv.sources]
+tigrbl-authenticator-webauthn-local = { path = "pkgs/deprecated/tigrbl-authenticator-webauthn-local", editable = true }
+tigrbl-claim-access-token-hash-oidc-concrete = { path = "pkgs/deprecated/tigrbl-claim-access-token-hash-oidc-concrete", editable = true }
+tigrbl-eap-acr-concrete = { path = "pkgs/deprecated/tigrbl-eap-acr-concrete", editable = true }
+tigrbl-oauth-bases = { path = "pkgs/deprecated/tigrbl-oauth-bases", editable = true }
+tigrbl-oauth-scope-matcher = { path = "pkgs/deprecated/tigrbl-oauth-scope-matcher", editable = true }
+tigrbl-oidc-bases = { path = "pkgs/deprecated/tigrbl-oidc-bases", editable = true }
+tigrbl-oidc-claims-concrete = { path = "pkgs/deprecated/tigrbl-oidc-claims-concrete", editable = true }
+tigrbl-oidc-subject-strategy = { path = "pkgs/deprecated/tigrbl-oidc-subject-strategy", editable = true }
 tigrbl-release-contracts = { path = "pkgs/02-contracts/tigrbl-release-contracts", editable = true }
 tigrbl-auth-release-certification = { path = "pkgs/60-runtime/tigrbl-auth-release-certification", editable = true }
 tigrbl-security-trust-contracts = { path = "pkgs/02-contracts/tigrbl-security-trust-contracts", editable = true }
