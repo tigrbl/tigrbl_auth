@@ -90,12 +90,6 @@ compatibility_or_migration_packages:
   tigrbl-did-controller-provider:
     target: did-controller-capability
     target_layer: 40-capabilities
-  tigrbl-digital-credential-issuer-local:
-    target: tigrbl-digital-credential-issuance
-    target_layer: 40-capabilities
-  tigrbl-digital-presentation-verifier:
-    target: tigrbl-digital-credential-presentation
-    target_layer: 40-capabilities
   tigrbl-identity-admin-auth-anomaly-detector:
     target: anomaly-rules-tables-ops-and-capability
     target_layer: 10-01-30-40

@@ -8,7 +8,7 @@ dependencies = [
     "tigrbl-claim-audience-concrete==0.4.0.dev2",
     "tigrbl-claim-issued-at-concrete==0.4.0.dev2",
     "tigrbl-claim-nonce-concrete==0.4.0.dev2",
-    "tigrbl-digital-credential-issuance==0.4.0.dev2",
+    "tigrbl-digital-credential-issuance-capability==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
 ]
 

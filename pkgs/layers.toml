@@ -354,16 +354,6 @@ target = "tigrbl-pushed-authorization-capability"
 reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
 
 [[dependency_exceptions]]
-consumer = "tigrbl-auth-protocol-oid4vci"
-target = "tigrbl-digital-credential-issuance"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-auth-protocol-oid4vp"
-target = "tigrbl-digital-credential-presentation"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
-
-[[dependency_exceptions]]
 consumer = "tigrbl-auth-protocol-oidc"
 target = "tigrbl-principal-authentication"
 reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
@@ -386,26 +376,6 @@ reason = "baseline crossing exposed by universal validation; remove with owner-l
 [[dependency_exceptions]]
 consumer = "tigrbl-authz-policy"
 target = "tigrbl-identity-storage"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-digital-credential-issuer-local"
-target = "tigrbl-digital-credential-issuance"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-digital-credential-issuer-local"
-target = "tigrbl-digital-credential-issuance-capability"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-digital-presentation-verifier"
-target = "tigrbl-digital-credential-presentation"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-digital-presentation-verifier"
-target = "tigrbl-digital-credential-presentation-capability"
 reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
 
 [[dependency_exceptions]]
