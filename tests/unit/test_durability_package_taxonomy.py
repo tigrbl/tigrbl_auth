@@ -91,15 +91,15 @@ def test_legacy_operation_and_spec_paths_are_identity_preserving_facades() -> No
     assert any(operation.alias == "consume_ceremony" for operation in legacy_spec.ops)
 
 
-def test_engine_construction_is_owned_by_layer_60() -> None:
+def test_engine_construction_is_owned_by_layer_30() -> None:
     canonical = (
-        ROOT
-        / "pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/engine.py"
-    ).read_text(encoding="utf-8")
-    compatibility = (
         LAYER
         / "tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/engine.py"
     ).read_text(encoding="utf-8")
+    compatibility = (
+        ROOT
+        / "pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/engine.py"
+    ).read_text(encoding="utf-8")
     assert "build_engine(" in canonical
-    assert "tigrbl_identity_runtime.engine" in compatibility
+    assert "tigrbl_identity_storage_runtime.engine" in compatibility
     assert "build_engine(" not in compatibility

@@ -112,7 +112,7 @@ def test_storage_public_boundary_has_no_generic_repository_imports() -> None:
 
 
 @pytest.mark.unit
-def test_engine_and_session_execution_are_runtime_owned() -> None:
+def test_engine_and_session_execution_are_storage_runtime_owned() -> None:
     storage_engine = STORAGE_SRC / "tables" / "engine.py"
     storage_runtime_root = (
         ROOT
@@ -131,6 +131,9 @@ def test_engine_and_session_execution_are_runtime_owned() -> None:
         / "tigrbl_identity_runtime"
     )
 
+    storage_runtime_engine_source = (storage_runtime_root / "engine.py").read_text(
+        encoding="utf-8"
+    )
     runtime_engine_source = (runtime_root / "engine.py").read_text(encoding="utf-8")
     runtime_session_source = (storage_runtime_root / "session.py").read_text(
         encoding="utf-8"
@@ -138,7 +141,9 @@ def test_engine_and_session_execution_are_runtime_owned() -> None:
 
     assert not storage_engine.exists()
     assert not (STORAGE_SRC / "db.py").exists()
-    assert "build_engine(" in runtime_engine_source
+    assert "build_engine(" in storage_runtime_engine_source
+    assert "tigrbl_identity_storage_runtime.engine" in runtime_engine_source
+    assert "build_engine(" not in runtime_engine_source
     assert "asynccontextmanager" in runtime_session_source
 
 

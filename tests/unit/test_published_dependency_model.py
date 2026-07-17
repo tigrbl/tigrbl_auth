@@ -251,9 +251,10 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-identity-storage==0.4.0.dev2" in authz_dependencies
     assert authz_dependencies.isdisjoint(removed_helper_pins)
     assert "tigrbl-authz-policy==0.4.0.dev2" not in storage_dependencies
-    assert "tigrbl-auth-protocol-oauth==0.4.0.dev2" in storage_runtime_dependencies
-    assert "tigrbl-auth-protocol-oidc==0.4.0.dev2" in storage_runtime_dependencies
-    assert "tigrbl-authz-resource-server==0.4.0.dev2" in storage_runtime_dependencies
+    assert "tigrbl-auth-protocol-oauth==0.4.0.dev2" not in storage_runtime_dependencies
+    assert "tigrbl-auth-protocol-oidc==0.4.0.dev2" not in storage_runtime_dependencies
+    assert "tigrbl-authz-resource-server==0.4.0.dev2" not in storage_runtime_dependencies
+    assert "tigrbl-identity-runtime==0.4.0.dev2" not in storage_runtime_dependencies
     assert "pqcrypto==0.4.0" not in verifier_dependencies
     assert "tigrbl-identity-contracts==0.4.0.dev2" in verifier_dependencies
     assert "tigrbl-security-token-jwks-cache==0.1.0" in verifier_dependencies
