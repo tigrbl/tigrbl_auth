@@ -1,6 +1,6 @@
 import pytest
 
-from tigrbl_auth.uix import RBACAdministrator
+from tigrbl_policy_administration_memory_provider import RBACAdministrator
 
 
 @pytest.mark.asyncio

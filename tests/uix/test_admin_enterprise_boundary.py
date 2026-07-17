@@ -1,7 +1,12 @@
 import pytest
 
-from tigrbl_auth.uix import (
+from tigrbl_policy_administration_memory_provider import (
     ABACAdministrator,
+    RBACAdministrator,
+    simulate_policy,
+)
+
+from tigrbl_auth.uix import (
     ADMIN_NAVIGATION,
     RESOURCE_VIEW_METHODS,
     SAFE_MUTATION_METHODS,
@@ -9,13 +14,11 @@ from tigrbl_auth.uix import (
     AdminConsoleShell,
     AdminPrincipal,
     AdminSession,
-    RBACAdministrator,
     SafeMutationRequest,
     TenantProfileSelection,
     build_readiness_dashboard,
     build_resource_views,
     execute_safe_mutation,
-    simulate_policy,
 )
 
 

@@ -10,6 +10,7 @@ from pathlib import Path
 from tigrbl_operator_administration_capability import OperatorAdministrationCapability
 from tigrbl_identity_runtime import CapabilityRegistry
 from tigrbl_identity_storage_runtime.key_management import (
+    create_operator_key_for_context,
     delete_operator_key_for_context,
     export_operator_key_for_context,
     generate_operator_key_for_context,
@@ -19,6 +20,8 @@ from tigrbl_identity_storage_runtime.key_management import (
     publish_operator_jwks_for_context,
     retire_operator_key_for_context,
     rotate_operator_key_for_context,
+    seed_operator_key_for_context,
+    update_operator_key_for_context,
 )
 from tigrbl_identity_storage_runtime.operator_store import (
     ArtifactResult,
@@ -56,6 +59,7 @@ def operator_administration_delegates() -> Mapping[str, Callable[..., object]]:
         "create_resource": _create_resource,
         "delete_resource": _delete_resource,
         "get_resource": _get_resource,
+        "key_create": create_operator_key_for_context,
         "key_delete": delete_operator_key_for_context,
         "key_export": export_operator_key_for_context,
         "key_generate": generate_operator_key_for_context,
@@ -65,6 +69,8 @@ def operator_administration_delegates() -> Mapping[str, Callable[..., object]]:
         "key_publish_jwks": publish_operator_jwks_for_context,
         "key_retire": retire_operator_key_for_context,
         "key_rotate": rotate_operator_key_for_context,
+        "key_seed": seed_operator_key_for_context,
+        "key_update": update_operator_key_for_context,
         "list_resources": _list_resources,
         "lock_identity": _lock_identity,
         "rotate_client_secret": _rotate_client_secret,
@@ -182,6 +188,18 @@ def key_publish_jwks(context: OperationContext, **kwargs: object) -> object:
     return call_operator_administration("key_publish_jwks", context, **kwargs)
 
 
+def key_create(context: OperationContext, **kwargs: object) -> object:
+    return call_operator_administration("key_create", context, **kwargs)
+
+
+def key_seed(context: OperationContext, **kwargs: object) -> object:
+    return call_operator_administration("key_seed", context, **kwargs)
+
+
+def key_update(context: OperationContext, **kwargs: object) -> object:
+    return call_operator_administration("key_update", context, **kwargs)
+
+
 def key_delete(context: OperationContext, **kwargs: object) -> object:
     return call_operator_administration("key_delete", context, **kwargs)
 
@@ -202,6 +220,7 @@ __all__ = [
     "delete_resource",
     "durable_operator_state_root",
     "get_resource",
+    "key_create",
     "key_delete",
     "key_export",
     "key_generate",
@@ -211,6 +230,8 @@ __all__ = [
     "key_publish_jwks",
     "key_retire",
     "key_rotate",
+    "key_seed",
+    "key_update",
     "list_resources",
     "lock_identity",
     "operator_administration_delegates",

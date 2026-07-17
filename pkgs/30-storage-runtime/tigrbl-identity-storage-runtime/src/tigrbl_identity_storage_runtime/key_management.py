@@ -30,6 +30,63 @@ def _operator_context(
     )
 
 
+def create_operator_key_for_context(
+    context, *, patch: dict[str, Any] | None = None
+):
+    from tigrbl_identity_storage_runtime.resource_service import create_resource
+
+    patch = dict(patch or {})
+    record_id = str(
+        patch.get("kid") or patch.get("id") or patch.get("name") or "imported-key"
+    )
+    return create_resource(context, record_id=record_id, patch=patch, if_exists="error")
+
+
+def seed_operator_key_for_context(
+    context,
+    *,
+    kid: str | None = None,
+    patch: dict[str, Any] | None = None,
+):
+    from tigrbl_identity_storage_runtime.resource_service import create_resource
+
+    patch = dict(patch or {})
+    chosen_kid = str(
+        kid
+        or patch.get("kid")
+        or (f"{context.tenant}-jwks-active" if context.tenant else "jwks-active")
+    )
+    patch.setdefault("kid", chosen_kid)
+    patch.setdefault("alg", "EdDSA")
+    patch.setdefault("use", "sig")
+    patch.setdefault("kty", "OKP")
+    patch.setdefault("curve", "Ed25519")
+    patch.setdefault("status", "active")
+    patch.setdefault("publish", True)
+    return create_resource(
+        context,
+        record_id=chosen_kid,
+        patch=patch,
+        if_exists="skip",
+    )
+
+
+def update_operator_key_for_context(
+    context,
+    *,
+    record_id: str,
+    patch: dict[str, Any] | None = None,
+):
+    from tigrbl_identity_storage_runtime.resource_service import update_resource
+
+    return update_resource(
+        context,
+        record_id=record_id,
+        patch=dict(patch or {}),
+        if_missing="error",
+    )
+
+
 def generate_operator_key_for_context(
     context, *, patch: dict[str, Any] | None = None
 ):
@@ -111,6 +168,7 @@ def delete_operator_key_for_context(
 
 __all__ = [
     "_operator_context",
+    "create_operator_key_for_context",
     "delete_operator_key_for_context",
     "export_operator_key_for_context",
     "generate_operator_key_for_context",
@@ -119,5 +177,7 @@ __all__ = [
     "list_operator_keys_for_context",
     "publish_operator_jwks_for_context",
     "retire_operator_key_for_context",
+    "seed_operator_key_for_context",
+    "update_operator_key_for_context",
     "rotate_operator_key_for_context",
 ]
