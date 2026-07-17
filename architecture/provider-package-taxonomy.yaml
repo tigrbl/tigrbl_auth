@@ -74,7 +74,6 @@ canonical_providers:
   - tigrbl-svid-verifier-provider
   explicitly_ephemeral:
   - tigrbl-access-governance-memory-provider
-  - tigrbl-policy-administration-memory-provider
   - tigrbl-replay-memory-provider
   protocol_artifact_composition:
   - tigrbl-mdoc-issuer-provider

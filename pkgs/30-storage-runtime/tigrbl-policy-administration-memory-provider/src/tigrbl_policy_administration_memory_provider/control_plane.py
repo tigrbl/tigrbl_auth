@@ -25,7 +25,7 @@ from .delegated_admin import (
     DelegatedAdministrator,
     DelegatedAdminScope,
 )
-from tigrbl_access_governance_capability.service_identity_registry import (
+from tigrbl_access_governance_memory_provider.service_identity_registry import (
     ServiceCredential,
     ServiceIdentity,
     ServiceIdentityAuthentication,

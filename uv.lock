@@ -4390,7 +4390,7 @@ requires-dist = [
     { name = "tigrbl-pkce-concrete", editable = "pkgs/10-concrete/tigrbl-pkce-concrete" },
     { name = "tigrbl-platform-attestation-provider", editable = "pkgs/20-providers/tigrbl-platform-attestation-provider" },
     { name = "tigrbl-policy-administration-capability", editable = "pkgs/40-capabilities/tigrbl-policy-administration-capability" },
-    { name = "tigrbl-policy-administration-memory-provider", editable = "pkgs/20-providers/tigrbl-policy-administration-memory-provider" },
+    { name = "tigrbl-policy-administration-memory-provider", editable = "pkgs/30-storage-runtime/tigrbl-policy-administration-memory-provider" },
     { name = "tigrbl-policy-assurance-capability", editable = "pkgs/40-capabilities/tigrbl-policy-assurance-capability" },
     { name = "tigrbl-policy-decision-engine-default", editable = "pkgs/10-concrete/tigrbl-policy-decision-engine-default" },
     { name = "tigrbl-policy-evaluation-capability", editable = "pkgs/40-capabilities/tigrbl-policy-evaluation-capability" },
@@ -8359,7 +8359,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-policy-administration-memory-provider"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/20-providers/tigrbl-policy-administration-memory-provider" }
+source = { editable = "pkgs/30-storage-runtime/tigrbl-policy-administration-memory-provider" }
 dependencies = [
     { name = "tigrbl-access-governance-memory-provider" },
     { name = "tigrbl-identity-contracts" },

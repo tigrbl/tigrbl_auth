@@ -150,7 +150,7 @@ def test_authz_policy_control_plane_uses_identity_core_primitives() -> None:
     control_plane_path = (
         ROOT
         / "pkgs"
-        / "20-providers"
+        / "30-storage-runtime"
         / "tigrbl-policy-administration-memory-provider"
         / "src"
         / "tigrbl_policy_administration_memory_provider"

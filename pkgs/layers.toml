@@ -452,13 +452,3 @@ reason = "baseline crossing exposed by universal validation; remove with owner-l
 consumer = "tigrbl-identity-storage-runtime"
 target = "tigrbl-principal-authentication"
 reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-policy-administration-memory-provider"
-target = "tigrbl-access-governance-capability"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-policy-administration-memory-provider"
-target = "tigrbl-authorization-policy-durability"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"

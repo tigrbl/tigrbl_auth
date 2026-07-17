@@ -44,7 +44,6 @@ COMPOSITION_PROVIDER_PACKAGES = {
     "tigrbl-authz-policy",
     "tigrbl-authz-policy-decision-engine",
     "tigrbl-access-governance-memory-provider",
-    "tigrbl-policy-administration-memory-provider",
     "tigrbl-certificate-status-provider",
     "tigrbl-corim-reference-memory-provider",
     "tigrbl-did-controller-provider",
