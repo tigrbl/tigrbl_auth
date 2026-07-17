@@ -482,7 +482,8 @@ def test_executable_account_surface_composition_lives_above_storage() -> None:
 
     account_surface = importlib.import_module("tigrbl_auth_backend_app_my_account.routes")
 
-    assert account_surface.api is account_surface.router
+    assert hasattr(account_surface, "router")
+    assert not hasattr(account_surface, "api")
 
 
 def test_operator_service_composition_lives_above_storage() -> None:

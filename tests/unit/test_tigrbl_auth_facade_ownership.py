@@ -50,7 +50,7 @@ FACADE_MODULES = {
     "tigrbl_auth.rfc.rfc8725": "tigrbl_auth_protocol_oauth.standards.jwt_best_practices",
     "tigrbl_auth.rfc.rfc7517": "tigrbl_identity_jose.standards.rfc7517",
     "tigrbl_auth.rfc.rfc7518": "tigrbl_identity_jose.standards.rfc7518",
-    "tigrbl_auth.security.admin_gate": "tigrbl_authz_policy_admin_gate",
+    "tigrbl_auth.security.admin_gate": "tigrbl_auth_router_admin_gate",
     "tigrbl_auth.security.certification": "tigrbl_auth_release_certification.certification",
     "tigrbl_auth.security.runtime_metadata": "tigrbl_auth_release_certification.runtime_metadata",
     "tigrbl_auth.services.advanced_identity_plane": "tigrbl_identity_admin.advanced_identity_plane",

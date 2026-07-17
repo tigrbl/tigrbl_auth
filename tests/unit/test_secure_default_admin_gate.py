@@ -15,7 +15,7 @@ def _settings(tmp_path, key: str = "test-admin-key") -> SimpleNamespace:
 
 
 def test_admin_gate_canonical_package_owns_public_surface():
-    canonical = importlib.import_module("tigrbl_authz_policy_admin_gate")
+    canonical = importlib.import_module("tigrbl_auth_router_admin_gate")
     policy_wrapper = importlib.import_module("tigrbl_authz_policy.admin_gate")
     server_wrapper = importlib.import_module("tigrbl_identity_server.security.admin_gate")
     facade = importlib.import_module("tigrbl_auth.security.admin_gate")
