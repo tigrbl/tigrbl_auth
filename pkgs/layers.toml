@@ -304,11 +304,6 @@ target = "tigrbl-authz-policy-invariant-registry"
 reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
 
 [[dependency_exceptions]]
-consumer = "tigrbl-auth-backend-app-my-account"
-target = "tigrbl-account-self-service"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
-
-[[dependency_exceptions]]
 consumer = "tigrbl-authz-policy"
 target = "tigrbl-auth-router-admin-gate"
 reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
@@ -329,11 +324,6 @@ target = "tigrbl-identity-storage"
 reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
 
 [[dependency_exceptions]]
-consumer = "tigrbl-identity-cli"
-target = "tigrbl-identity-admin-control-plane"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
-
-[[dependency_exceptions]]
 consumer = "tigrbl-identity-jose"
 target = "tigrbl-auth-protocol-oauth"
 reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
@@ -341,24 +331,4 @@ reason = "baseline crossing exposed by universal validation; remove with owner-l
 [[dependency_exceptions]]
 consumer = "tigrbl-identity-jose"
 target = "tigrbl-identity-runtime"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-identity-server"
-target = "tigrbl-account-self-service"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-identity-server"
-target = "tigrbl-identity-admin-control-plane"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-identity-server"
-target = "tigrbl-protocol-artifact-processing"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-identity-server"
-target = "tigrbl-pushed-authorization-capability"
 reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"

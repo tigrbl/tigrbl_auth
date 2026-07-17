@@ -9,7 +9,7 @@ dependencies = [
     "pydantic==2.12.5",
     "tigrbl-auth==0.4.0.dev2",
     "tigrbl==0.4.4.dev1",
-    "tigrbl-account-self-service==0.4.0.dev2",
+    "tigrbl-account-self-service-capability==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
     "tigrbl-identity-server==0.4.0.dev2",
     "tigrbl-auth-router-oidc-discovery==0.4.0.dev2",
