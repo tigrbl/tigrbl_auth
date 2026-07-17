@@ -7266,6 +7266,7 @@ dependencies = [
     { name = "tigrbl-authn-credentials" },
     { name = "tigrbl-identity-jose" },
     { name = "tigrbl-identity-runtime" },
+    { name = "tigrbl-identity-server" },
     { name = "tigrbl-identity-storage" },
 ]
 
@@ -7274,6 +7275,7 @@ requires-dist = [
     { name = "tigrbl-authn-credentials", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-jose", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-server", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
 ]
 

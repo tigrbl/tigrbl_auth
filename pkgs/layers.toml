@@ -369,11 +369,6 @@ target = "tigrbl-principal-authentication"
 reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
 
 [[dependency_exceptions]]
-consumer = "tigrbl-authn-credentials"
-target = "tigrbl-identity-server"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
-
-[[dependency_exceptions]]
 consumer = "tigrbl-authz-policy"
 target = "tigrbl-auth-router-admin-gate"
 reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
