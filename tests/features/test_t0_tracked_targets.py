@@ -38,7 +38,7 @@ def test_t0_tracked_openid_federation_target_contract() -> None:
     test = tests[expected["test_id"]]
 
     assert feature["title"] == expected["title"]
-    assert feature["implementation_status"] == "absent"
+    assert feature["implementation_status"] == "partial"
     assert feature["plan"]["horizon"] == "future"
     assert feature["plan"]["target_claim_tier"] == "T0"
     assert set(feature["spec_ids"]) == expected["spec_ids"]
@@ -57,7 +57,7 @@ def test_t0_tracked_spiffe_spire_target_contract() -> None:
     test = tests[expected["test_id"]]
 
     assert feature["title"] == expected["title"]
-    assert feature["implementation_status"] == "absent"
+    assert feature["implementation_status"] == "partial"
     assert feature["plan"]["horizon"] == "future"
     assert feature["plan"]["target_claim_tier"] == "T0"
     assert set(feature["spec_ids"]) == expected["spec_ids"]

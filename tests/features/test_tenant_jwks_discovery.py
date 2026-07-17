@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 import json
 from pathlib import Path
 from types import SimpleNamespace
@@ -60,7 +61,7 @@ async def _client(tmp_path: Path) -> AsyncClient:
 
 @pytest.mark.asyncio
 async def test_tenant_scoped_issuer_boundary_contract(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    _seed_operator_state(tmp_path, monkeypatch)
+    await asyncio.to_thread(_seed_operator_state, tmp_path, monkeypatch)
     async with await _client(tmp_path) as client:
         response = await client.get(f"/tenants/{TENANT_A}/.well-known/openid-configuration")
     assert response.status_code == 200
@@ -69,7 +70,7 @@ async def test_tenant_scoped_issuer_boundary_contract(tmp_path: Path, monkeypatc
 
 @pytest.mark.asyncio
 async def test_tenant_openid_configuration_route_contract(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    _seed_operator_state(tmp_path, monkeypatch)
+    await asyncio.to_thread(_seed_operator_state, tmp_path, monkeypatch)
     async with await _client(tmp_path) as client:
         response = await client.get(f"/tenants/{TENANT_A}/.well-known/openid-configuration")
     assert response.status_code == 200
@@ -78,7 +79,7 @@ async def test_tenant_openid_configuration_route_contract(tmp_path: Path, monkey
 
 @pytest.mark.asyncio
 async def test_tenant_jwks_route_contract(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    _seed_operator_state(tmp_path, monkeypatch)
+    await asyncio.to_thread(_seed_operator_state, tmp_path, monkeypatch)
     async with await _client(tmp_path) as client:
         response = await client.get(f"/tenants/{TENANT_A}/.well-known/jwks.json")
     assert response.status_code == 200
@@ -87,7 +88,7 @@ async def test_tenant_jwks_route_contract(tmp_path: Path, monkeypatch: pytest.Mo
 
 @pytest.mark.asyncio
 async def test_tenant_discovery_jwks_uri_contract(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    _seed_operator_state(tmp_path, monkeypatch)
+    await asyncio.to_thread(_seed_operator_state, tmp_path, monkeypatch)
     async with await _client(tmp_path) as client:
         response = await client.get(f"/tenants/{TENANT_A}/.well-known/openid-configuration")
     assert response.json()["jwks_uri"] == f"{ROOT_ISSUER}/tenants/{TENANT_A}/.well-known/jwks.json"
@@ -95,7 +96,7 @@ async def test_tenant_discovery_jwks_uri_contract(tmp_path: Path, monkeypatch: p
 
 @pytest.mark.asyncio
 async def test_tenant_jwks_key_filtering_contract(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    _seed_operator_state(tmp_path, monkeypatch)
+    await asyncio.to_thread(_seed_operator_state, tmp_path, monkeypatch)
     async with await _client(tmp_path) as client:
         response = await client.get(f"/tenants/{TENANT_A}/.well-known/jwks.json")
     kids = {key["kid"] for key in response.json()["keys"]}
@@ -105,7 +106,7 @@ async def test_tenant_jwks_key_filtering_contract(tmp_path: Path, monkeypatch: p
 
 @pytest.mark.asyncio
 async def test_tenant_jwks_rotation_visibility_contract(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    _seed_operator_state(tmp_path, monkeypatch)
+    await asyncio.to_thread(_seed_operator_state, tmp_path, monkeypatch)
     async with await _client(tmp_path) as client:
         response = await client.get(f"/tenants/{TENANT_A}/.well-known/jwks.json")
     kids = {key["kid"] for key in response.json()["keys"]}
@@ -115,7 +116,7 @@ async def test_tenant_jwks_rotation_visibility_contract(tmp_path: Path, monkeypa
 
 @pytest.mark.asyncio
 async def test_tenant_public_discovery_disabled_policy_contract(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    _seed_operator_state(tmp_path, monkeypatch)
+    await asyncio.to_thread(_seed_operator_state, tmp_path, monkeypatch)
     async with await _client(tmp_path) as client:
         missing = await client.get("/tenants/missing/.well-known/openid-configuration")
         disabled = await client.get("/tenants/tenant-disabled/.well-known/jwks.json")
@@ -125,8 +126,11 @@ async def test_tenant_public_discovery_disabled_policy_contract(tmp_path: Path, 
 
 @pytest.mark.asyncio
 async def test_operator_tenant_jwks_runtime_parity_contract(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    _seed_operator_state(tmp_path, monkeypatch)
-    operator = publish_jwks_document(_context(tmp_path, "keys", "keys.publish-jwks", tenant=TENANT_A))
+    await asyncio.to_thread(_seed_operator_state, tmp_path, monkeypatch)
+    operator = await asyncio.to_thread(
+        publish_jwks_document,
+        _context(tmp_path, "keys", "keys.publish-jwks", tenant=TENANT_A),
+    )
     operator_payload = json.loads((tmp_path / operator.path).read_text(encoding="utf-8"))
     async with await _client(tmp_path) as client:
         runtime = await client.get(f"/tenants/{TENANT_A}/.well-known/jwks.json")
@@ -174,7 +178,7 @@ def test_tenant_trust_domain_authority_root_resolution_contract() -> None:
 
 @pytest.mark.asyncio
 async def test_tenant_jwks_cross_tenant_leakage_guard_contract(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    _seed_operator_state(tmp_path, monkeypatch)
+    await asyncio.to_thread(_seed_operator_state, tmp_path, monkeypatch)
     async with await _client(tmp_path) as client:
         discovery = await client.get(f"/tenants/{TENANT_A}/.well-known/openid-configuration")
         jwks = await client.get(f"/tenants/{TENANT_A}/.well-known/jwks.json")
