@@ -204,11 +204,6 @@ target = "tigrbl-identity-author"
 reason = "legacy reverse dependency pending owner-layer migration"
 
 [[dependency_exceptions]]
-consumer = "tigrbl-security-sender-constraint-validator"
-target = "tigrbl-protected-resource-authorization-capability"
-reason = "legacy reverse dependency pending owner-layer migration"
-
-[[dependency_exceptions]]
 consumer = "tigrbl-identity-storage-runtime"
 target = "tigrbl-auth-protocol-oauth"
 reason = "legacy reverse dependency pending owner-layer migration"

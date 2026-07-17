@@ -4443,7 +4443,7 @@ requires-dist = [
     { name = "tigrbl-security-proof-pkce", editable = "pkgs/20-providers/tigrbl-security-proof-pkce" },
     { name = "tigrbl-security-protocol-jose", editable = "pkgs/50-protocols/tigrbl-security-protocol-jose" },
     { name = "tigrbl-security-provenance-bases", editable = "pkgs/05-bases/tigrbl-security-provenance-bases" },
-    { name = "tigrbl-security-sender-constraint-validator", editable = "pkgs/20-providers/tigrbl-security-sender-constraint-validator" },
+    { name = "tigrbl-security-sender-constraint-validator", editable = "pkgs/deprecated/tigrbl-security-sender-constraint-validator" },
     { name = "tigrbl-security-signing-pqc", editable = "pkgs/20-providers/tigrbl-security-signing-pqc" },
     { name = "tigrbl-security-subject-pairwise-provider", editable = "pkgs/20-providers/tigrbl-security-subject-pairwise-provider" },
     { name = "tigrbl-security-token-introspection-client", editable = "pkgs/20-providers/tigrbl-security-token-introspection-client" },
@@ -5072,7 +5072,6 @@ dependencies = [
     { name = "tigrbl-protected-resource-authorization-capability" },
     { name = "tigrbl-security-dpop-cnf-binding-validator" },
     { name = "tigrbl-security-mtls-cnf-binding-validator" },
-    { name = "tigrbl-security-sender-constraint-validator" },
     { name = "tigrbl-security-trust-contracts" },
 ]
 
@@ -5086,7 +5085,6 @@ requires-dist = [
     { name = "tigrbl-protected-resource-authorization-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-dpop-cnf-binding-validator", specifier = "==0.1.0" },
     { name = "tigrbl-security-mtls-cnf-binding-validator", specifier = "==0.1.0" },
-    { name = "tigrbl-security-sender-constraint-validator", specifier = "==0.1.0" },
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
 ]
 
@@ -9116,7 +9114,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-security-sender-constraint-validator"
 version = "0.1.0"
-source = { editable = "pkgs/20-providers/tigrbl-security-sender-constraint-validator" }
+source = { editable = "pkgs/deprecated/tigrbl-security-sender-constraint-validator" }
 dependencies = [
     { name = "tigrbl-protected-resource-authorization-capability" },
 ]

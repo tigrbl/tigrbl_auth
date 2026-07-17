@@ -126,9 +126,6 @@ compatibility_or_migration_packages:
   tigrbl-security-proof-pkce:
     target: tigrbl-pkce-concrete
     target_layer: 10-concrete
-  tigrbl-security-sender-constraint-validator:
-    target: sender-constraint-validation-capability
-    target_layer: 40-capabilities
   tigrbl-security-subject-pairwise-provider:
     target: tigrbl-pairwise-subject-identifier-concrete
     target_layer: 10-concrete

@@ -32,7 +32,6 @@ TRUST_BASE_PROVIDER_PACKAGES = {
     "tigrbl-security-mtls-cnf-binding-validator",
     "tigrbl-security-proof-dpop",
     "tigrbl-security-proof-pkce",
-    "tigrbl-security-sender-constraint-validator",
     "tigrbl-security-signing-pqc",
     "tigrbl-security-subject-pairwise-provider",
     "tigrbl-security-token-introspection-client",

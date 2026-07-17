@@ -70,7 +70,7 @@ result = ResourceServerVerifier().verify_token(claims, requirement)
 - [tigrbl-auth-protocol-oauth](https://pypi.org/project/tigrbl-auth-protocol-oauth/) owns OAuth wire behavior.
 - [tigrbl-authz-resource-server-verifier](https://pypi.org/project/tigrbl-authz-resource-server-verifier/) owns the reusable protected-resource verifier.
 - [tigrbl-security-token-jwks-cache](https://pypi.org/project/tigrbl-security-token-jwks-cache/) and [tigrbl-security-token-introspection-client](https://pypi.org/project/tigrbl-security-token-introspection-client/) own token lookup helpers.
-- [tigrbl-security-dpop-cnf-binding-validator](https://pypi.org/project/tigrbl-security-dpop-cnf-binding-validator/), [tigrbl-security-mtls-cnf-binding-validator](https://pypi.org/project/tigrbl-security-mtls-cnf-binding-validator/), and [tigrbl-security-sender-constraint-validator](https://pypi.org/project/tigrbl-security-sender-constraint-validator/) own sender-constraint providers.
+- [tigrbl-security-dpop-cnf-binding-validator](https://pypi.org/project/tigrbl-security-dpop-cnf-binding-validator/), [tigrbl-security-mtls-cnf-binding-validator](https://pypi.org/project/tigrbl-security-mtls-cnf-binding-validator/) provide the concrete confirmation-binding validators; the protected-resource authorization capability composes them.
 - [tigrbl-security-proof-dpop](https://pypi.org/project/tigrbl-security-proof-dpop/) owns lower DPoP proof binding comparison.
 - [tigrbl-security-certificate-mtls](https://pypi.org/project/tigrbl-security-certificate-mtls/) owns lower certificate binding comparison.
 

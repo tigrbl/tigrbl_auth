@@ -41,7 +41,7 @@ from tigrbl_security_token_jwks_cache import (  # noqa: E402
 from tigrbl_security_mtls_cnf_binding_validator import (  # noqa: E402
     MtlsCnfBindingValidator as CanonicalMtlsCnfBindingValidator,
 )
-from tigrbl_security_sender_constraint_validator import (  # noqa: E402
+from tigrbl_protected_resource_authorization_capability import (  # noqa: E402
     SenderConstraintValidator as CanonicalSenderConstraintValidator,
 )
 from tigrbl_security_trust_domain_bases import VerificationKeyCacheBase  # noqa: E402
@@ -254,7 +254,7 @@ def test_resource_server_t2_public_boundary_has_no_provider_imports() -> None:
         Path("pkgs/20-providers/tigrbl-security-token-introspection-client/src/tigrbl_security_token_introspection_client/__init__.py"),
         Path("pkgs/20-providers/tigrbl-security-dpop-cnf-binding-validator/src/tigrbl_security_dpop_cnf_binding_validator/__init__.py"),
         Path("pkgs/20-providers/tigrbl-security-mtls-cnf-binding-validator/src/tigrbl_security_mtls_cnf_binding_validator/__init__.py"),
-        Path("pkgs/20-providers/tigrbl-security-sender-constraint-validator/src/tigrbl_security_sender_constraint_validator/__init__.py"),
+        Path("pkgs/deprecated/tigrbl-security-sender-constraint-validator/src/tigrbl_security_sender_constraint_validator/__init__.py"),
     ]
     forbidden = {
         "tigrbl_auth",

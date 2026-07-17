@@ -235,13 +235,15 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-identity-jose==0.4.0.dev2" not in identity_admin_dependencies
     assert "tigrbl-jose-concrete==0.4.0.dev2" in identity_admin_dependencies
     assert "tigrbl-identity-concrete==0.4.0.dev2" not in identity_admin_dependencies
-    assert (
-        "tigrbl-identity-identities-concrete==0.4.0.dev2" in identity_admin_dependencies
-    )
-    assert (
-        "tigrbl-identity-credentials-concrete==0.4.0.dev2"
-        in identity_admin_dependencies
-    )
+    assert "tigrbl-identity-identities-concrete==0.4.0.dev2" not in identity_admin_dependencies
+    assert "tigrbl-identity-credentials-concrete==0.4.0.dev2" not in identity_admin_dependencies
+    assert {
+        "tigrbl-device-identity-concrete==0.4.0.dev2",
+        "tigrbl-workload-identity-concrete==0.4.0.dev2",
+        "tigrbl-mfa-factor-concrete==0.4.0.dev2",
+        "tigrbl-passwordless-credential-concrete==0.4.0.dev2",
+        "tigrbl-webauthn-credential-concrete==0.4.0.dev2",
+    } <= identity_admin_dependencies
     assert identity_admin_dependencies.isdisjoint(removed_helper_pins)
     assert "pqcrypto==0.4.0" not in authz_dependencies
     assert "tigrbl-authz-policy-concrete==0.4.0.dev2" not in authz_dependencies
@@ -273,7 +275,7 @@ def test_pyproject_uses_published_pins_and_extras():
         in resource_server_dependencies
     )
     assert (
-        "tigrbl-security-sender-constraint-validator==0.1.0"
+        "tigrbl-protected-resource-authorization-capability==0.4.0.dev2"
         in resource_server_dependencies
     )
     assert resource_server_dependencies.isdisjoint(removed_helper_pins)
