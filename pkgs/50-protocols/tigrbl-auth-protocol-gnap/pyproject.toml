@@ -8,7 +8,7 @@ dependencies = [
     "tigrbl-claim-assertions-concrete==0.4.0.dev2",
     "tigrbl-claim-subject-identifiers-concrete==0.4.0.dev2",
     "tigrbl-claim-updated-at-rfc3339-concrete==0.4.0.dev2",
-    "tigrbl-grant-negotiation-capability==0.4.0.dev2",
+    "tigrbl-delegated-access-negotiation-capability==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
 ]
 [build-system]

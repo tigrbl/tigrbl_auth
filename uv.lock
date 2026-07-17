@@ -2155,8 +2155,6 @@ dependencies = [
     { name = "tigrbl-capability" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core" },
-    { name = "tigrbl-identity-credentials-concrete" },
-    { name = "tigrbl-identity-identities-concrete" },
 ]
 
 [package.metadata]
@@ -2165,8 +2163,6 @@ requires-dist = [
     { name = "tigrbl-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-credentials-concrete", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-identities-concrete", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
@@ -2972,7 +2968,7 @@ dependencies = [
     { name = "tigrbl-claim-assertions-concrete" },
     { name = "tigrbl-claim-subject-identifiers-concrete" },
     { name = "tigrbl-claim-updated-at-rfc3339-concrete" },
-    { name = "tigrbl-grant-negotiation-capability" },
+    { name = "tigrbl-delegated-access-negotiation-capability" },
     { name = "tigrbl-identity-contracts" },
 ]
 
@@ -2981,7 +2977,7 @@ requires-dist = [
     { name = "tigrbl-claim-assertions-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-claim-subject-identifiers-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-claim-updated-at-rfc3339-concrete", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-grant-negotiation-capability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-delegated-access-negotiation-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
 ]
 
@@ -3020,6 +3016,7 @@ dependencies = [
     { name = "pydantic", extra = ["email"] },
     { name = "swarmauri-signing-dpop" },
     { name = "tigrbl-auth-protocol-gnap" },
+    { name = "tigrbl-authorization-request-staging-capability" },
     { name = "tigrbl-authorization-scope-set-matcher-concrete" },
     { name = "tigrbl-claim-access-token-digest-concrete" },
     { name = "tigrbl-claim-actor-concrete" },
@@ -3036,7 +3033,6 @@ dependencies = [
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core" },
     { name = "tigrbl-identity-jose" },
-    { name = "tigrbl-pushed-authorization-capability" },
     { name = "tigrbl-security-proof-pkce" },
     { name = "tigrbl-security-trust-contracts" },
     { name = "tigrbl-token-introspection-capability" },
@@ -3049,6 +3045,7 @@ requires-dist = [
     { name = "pydantic", extras = ["email"], specifier = "==2.12.5" },
     { name = "swarmauri-signing-dpop", specifier = "==0.1.1" },
     { name = "tigrbl-auth-protocol-gnap", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-authorization-request-staging-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authorization-scope-set-matcher-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-claim-access-token-digest-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-claim-actor-concrete", specifier = "==0.4.0.dev2" },
@@ -3065,7 +3062,6 @@ requires-dist = [
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-jose", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-pushed-authorization-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-proof-pkce", specifier = "==0.1.0" },
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
     { name = "tigrbl-token-introspection-capability", specifier = "==0.4.0.dev2" },
@@ -3168,7 +3164,6 @@ dependencies = [
     { name = "tigrbl-identity-jose" },
     { name = "tigrbl-jose-swarmauri-provider" },
     { name = "tigrbl-pairwise-subject-identifier-concrete" },
-    { name = "tigrbl-principal-authentication" },
     { name = "tigrbl-public-subject-identifier-concrete" },
     { name = "tigrbl-security-claims-provider-local" },
 ]
@@ -3223,7 +3218,6 @@ requires-dist = [
     { name = "tigrbl-identity-jose", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-jose-swarmauri-provider", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-pairwise-subject-identifier-concrete", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-principal-authentication", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-public-subject-identifier-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-claims-provider-local", specifier = "==0.1.0" },
 ]

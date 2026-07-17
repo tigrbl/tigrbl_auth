@@ -36,7 +36,6 @@ classifiers = [
 dependencies = [
     "pydantic==2.12.5",
     "tigrbl-auth-protocol-oauth==0.4.0.dev2",
-    "tigrbl-principal-authentication==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
     "tigrbl-identity-core==0.4.0.dev2",
     "tigrbl-identity-jose==0.4.0.dev2",

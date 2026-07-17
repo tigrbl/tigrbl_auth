@@ -299,16 +299,6 @@ target = "tigrbl-auth-router-admin-gate"
 reason = "legacy reverse dependency pending owner-layer migration"
 
 [[dependency_exceptions]]
-consumer = "tigrbl-access-governance-capability"
-target = "tigrbl-identity-credentials-concrete"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-access-governance-capability"
-target = "tigrbl-identity-identities-concrete"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
-
-[[dependency_exceptions]]
 consumer = "tigrbl-auth"
 target = "tigrbl-authz-policy-invariant-registry"
 reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
@@ -316,21 +306,6 @@ reason = "baseline crossing exposed by universal validation; remove with owner-l
 [[dependency_exceptions]]
 consumer = "tigrbl-auth-backend-app-my-account"
 target = "tigrbl-account-self-service"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-auth-protocol-gnap"
-target = "tigrbl-grant-negotiation-capability"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-auth-protocol-oauth"
-target = "tigrbl-pushed-authorization-capability"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-auth-protocol-oidc"
-target = "tigrbl-principal-authentication"
 reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
 
 [[dependency_exceptions]]
