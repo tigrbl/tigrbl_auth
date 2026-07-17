@@ -6,7 +6,8 @@ on:
       - ".github/workflows/package-node-matrix.yml"
       - "package.json"
       - "package-lock.json"
-      - "apps/**"
+      - "pkgs/100-uix-core/**"
+      - "pkgs/105-ui/**"
   push:
     branches:
       - master
@@ -14,7 +15,8 @@ on:
       - ".github/workflows/package-node-matrix.yml"
       - "package.json"
       - "package-lock.json"
-      - "apps/**"
+      - "pkgs/100-uix-core/**"
+      - "pkgs/105-ui/**"
   workflow_dispatch:
     inputs:
       package:
@@ -56,13 +58,16 @@ jobs:
       - name: Discover UIX packages
         uses: cobycloud/actions/actions/monorepo-discover@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
-          package-globs: apps/*
+          package-globs: |
+            pkgs/100-uix-core/*
+            pkgs/105-ui/*
           ecosystem: node
       - name: Validate UIX package metadata
         uses: cobycloud/actions/actions/package-metadata@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           manifest-globs: |
-            apps/*/package.json
+            pkgs/100-uix-core/*/package.json
+            pkgs/105-ui/*/package.json
           require-description: "true"
           require-license: "true"
           require-readme: "true"
@@ -83,7 +88,7 @@ jobs:
           const selectedPackage = process.env.SELECTED_PACKAGE || "all";
           const selectedNode = process.env.SELECTED_NODE || "all";
           const nodeVersions = selectedNode === "all" ? ["22", "24", "26"] : [selectedNode];
-          const packageDirs = ["pkgs/95-ui/admin-uix", "pkgs/95-ui/public-uix", "pkgs/95-ui/rp"];
+          const packageDirs = ["pkgs/105-ui/admin-uix", "pkgs/105-ui/public-uix", "pkgs/105-ui/rp"];
           const cells = [];
 
           for (const packagePath of packageDirs) {

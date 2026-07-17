@@ -4,16 +4,16 @@
   "version": "0.3.5",
   "type": "module",
   "workspaces": [
-    "pkgs/90-uix-core/uix-core",
-    "pkgs/95-ui/admin-uix",
-    "pkgs/95-ui/platform-admin-uix",
-    "pkgs/95-ui/tenant-admin-uix",
-    "pkgs/95-ui/developer-uix",
-    "pkgs/95-ui/service-admin-uix",
-    "pkgs/95-ui/my-account-uix",
-    "pkgs/95-ui/demo-hub-uix",
-    "pkgs/95-ui/public-uix",
-    "pkgs/95-ui/rp"
+    "pkgs/100-uix-core/uix-core",
+    "pkgs/105-ui/admin-uix",
+    "pkgs/105-ui/platform-admin-uix",
+    "pkgs/105-ui/tenant-admin-uix",
+    "pkgs/105-ui/developer-uix",
+    "pkgs/105-ui/service-admin-uix",
+    "pkgs/105-ui/my-account-uix",
+    "pkgs/105-ui/demo-hub-uix",
+    "pkgs/105-ui/public-uix",
+    "pkgs/105-ui/rp"
   ],
   "scripts": {
     "build:uix-core": "npm run build -w @tigrbl-auth/uix-core",

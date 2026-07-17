@@ -1,0 +1,41 @@
+{
+  "name": "@tigrbl-auth/tenant-admin-uix",
+  "version": "0.3.5",
+  "description": "Tenant-scoped administration UIX for Tigrbl Auth.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tigrbl/tigrbl_auth.git",
+    "directory": "pkgs/105-ui/tenant-admin-uix"
+  },
+  "homepage": "https://github.com/tigrbl/tigrbl_auth#readme",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "files": ["dist", "README.md", "package.json"],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@tigrbl-auth/uix-core": "file:../../100-uix-core/uix-core",
+    "@vitejs/plugin-react": "^5.0.0",
+    "vite": "^6.2.0",
+    "typescript": "~5.8.2",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "vitest": "^3.2.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

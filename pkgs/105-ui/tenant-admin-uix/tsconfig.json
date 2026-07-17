@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "useDefineForClassFields": false,
+    "module": "ESNext",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+    "types": ["node"],
+    "moduleResolution": "bundler",
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "allowJs": true,
+    "jsx": "react-jsx",
+    "allowImportingTsExtensions": true,
+    "baseUrl": ".",
+    "paths": {
+      "@tigrbl-auth/uix-core": ["../../100-uix-core/uix-core/index.ts"],
+      "@tigrbl-auth/uix-core/styles.css": ["../../100-uix-core/uix-core/src/styles/core.css"]
+    },
+    "noEmit": true
+  }
+}
