@@ -17,7 +17,7 @@ from tigrbl_identity_contracts.oauth import (
     PushedAuthorizationPersistenceRequest,
 )
 from tigrbl_pushed_authorization_capability import PushedAuthorizationCapability
-import tigrbl_identity_server.par_surface as par_surface
+import tigrbl_auth_backend_app_core.surfaces.par_surface as par_surface
 
 
 @pytest.mark.asyncio

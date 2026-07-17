@@ -8,7 +8,7 @@ from types import SimpleNamespace
 import pytest
 from httpx import ASGITransport, AsyncClient
 
-from tigrbl_auth.api.app import build_app
+from tigrbl_auth_backend_app_core import build_app
 from tigrbl_auth.cli.artifacts import build_openapi_contract, deployment_from_options, write_discovery_artifacts
 from tigrbl_identity_storage_runtime.operator_store import OperationContext
 from tigrbl_identity_storage_runtime.resource_service import create_resource, generate_key_record, publish_jwks_document

@@ -9,7 +9,7 @@ from unittest.mock import patch
 import pytest
 from httpx import ASGITransport, AsyncClient
 
-from tigrbl_auth.api.surfaces import admin_resource_path_prefixes
+from tigrbl_auth_backend_app_core.surfaces import admin_resource_path_prefixes
 from tigrbl_auth.config.deployment import DEFAULT_VALUES, resolve_deployment
 
 
@@ -87,9 +87,9 @@ def test_service_admin_contract_routes_are_service_scoped_only() -> None:
     assert "/.well-known/oauth-protected-resource" in deployment.active_routes
     assert "/.well-known/openid-configuration" in deployment.active_routes
     assert "/.well-known/jwks.json" in deployment.active_routes
-    assert "/service" in prefixes
-    assert "/servicekey" in prefixes
-    assert "/apikey" in prefixes
+    assert "/serviceidentity" in prefixes
+    assert "/credentialservicekey" in prefixes
+    assert "/credentialapikey" in prefixes
     assert "/tokenrecord" in prefixes
 
     for forbidden in SERVICE_ADMIN_BACKEND_APP_CONTRACT.forbidden_route_prefixes:
@@ -117,9 +117,9 @@ async def test_service_admin_openapi_is_surface_constrained_and_openrpc_is_absen
     assert "/.well-known/oauth-protected-resource" in paths
     assert "/.well-known/openid-configuration" in paths
     assert "/.well-known/jwks.json" in paths
-    assert "/service" in paths
-    assert "/servicekey" in paths
-    assert "/apikey" in paths
+    assert "/serviceidentity" in paths
+    assert "/credentialservicekey" in paths
+    assert "/credentialapikey" in paths
     assert "/tokenrecord" in paths
     assert "/auditevent" in paths
     for forbidden in (
@@ -196,9 +196,9 @@ async def test_service_admin_rest_control_plane_requires_admin_key(
     async with AsyncClient(
         transport=ASGITransport(app=service_admin_app), base_url="http://test"
     ) as client:
-        missing_key = await client.get("/service")
+        missing_key = await client.get("/serviceidentity")
         invalid_key = await client.get(
-            "/service", headers={"X-API-Key": "wrong-service-admin-key"}
+            "/serviceidentity", headers={"X-API-Key": "wrong-service-admin-key"}
         )
         client_resource = await client.get(
             "/client", headers={"X-API-Key": "test-service-admin-key"}

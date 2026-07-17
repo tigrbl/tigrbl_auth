@@ -6,7 +6,7 @@ import pytest
 
 @pytest.fixture()
 async def running_app(override_get_db):
-    from tigrbl_identity_server.app import app
+    from tigrbl_auth_backend_app_public import app
 
     async with httpx.AsyncClient(
         transport=httpx.ASGITransport(app=app),

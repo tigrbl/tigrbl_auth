@@ -7,6 +7,7 @@ requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
 dependencies = [
     "tigrbl-auth==0.4.0.dev2",
+    "tigrbl-auth-backend-app-core==0.4.0.dev2",
     "tigrbl-auth-router-oauth-authorization==0.4.0.dev2",
     "tigrbl-auth-router-oauth-authorization-server-metadata==0.4.0.dev2",
     "tigrbl-auth-router-oauth-device-authorization==0.4.0.dev2",

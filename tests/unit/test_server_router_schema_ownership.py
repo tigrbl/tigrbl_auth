@@ -261,7 +261,7 @@ def test_token_endpoint_carrier_and_runtime_live_above_storage() -> None:
         "tigrbl_identity_storage.tables.token_record"
     )
     carrier_module = importlib.import_module("tigrbl_auth_router_oauth_token")
-    runtime_module = importlib.import_module("tigrbl_identity_server.token_surface")
+    runtime_module = importlib.import_module("tigrbl_auth_backend_app_core.surfaces.token_surface")
 
     assert hasattr(carrier_module, "build_token_router")
     assert hasattr(runtime_module, "router")
@@ -276,43 +276,43 @@ def test_token_endpoint_carrier_and_runtime_live_above_storage() -> None:
     ("runtime_module_name", "storage_module_name", "class_name", "route_names"),
     [
         (
-            "tigrbl_identity_server.login_surface",
+            "tigrbl_auth_backend_app_core.surfaces.login_surface",
             "tigrbl_identity_storage.tables.auth_session",
             "AuthSession",
             set(),
         ),
         (
-            "tigrbl_identity_server.authorization_surface",
+            "tigrbl_auth_backend_app_core.surfaces.authorization_surface",
             "tigrbl_identity_storage.tables.auth_code",
             "AuthCode",
             set(),
         ),
         (
-            "tigrbl_identity_server.client_registration_surface",
+            "tigrbl_auth_backend_app_core.surfaces.client_registration_surface",
             "tigrbl_identity_storage.tables.client_registration",
             "ClientRegistration",
             set(),
         ),
         (
-            "tigrbl_identity_server.device_authorization_surface",
+            "tigrbl_auth_backend_app_core.surfaces.device_authorization_surface",
             "tigrbl_identity_storage.tables.device_code",
             "DeviceCode",
             {"device_authorization"},
         ),
         (
-            "tigrbl_identity_server.par_surface",
+            "tigrbl_auth_backend_app_core.surfaces.par_surface",
             "tigrbl_identity_storage.tables.pushed_authorization_request",
             "PushedAuthorizationRequest",
             set(),
         ),
         (
-            "tigrbl_identity_server.logout_surface",
+            "tigrbl_auth_backend_app_core.surfaces.logout_surface",
             "tigrbl_identity_storage.tables.logout_state",
             "LogoutState",
             {"logout"},
         ),
         (
-            "tigrbl_identity_server.userinfo_surface",
+            "tigrbl_auth_backend_app_core.surfaces.userinfo_surface",
             "tigrbl_identity_storage.tables.user",
             "User",
             {"userinfo"},
@@ -331,10 +331,10 @@ def test_moved_oauth_publishers_live_above_storage_table_modules(
 
     assert hasattr(runtime_module, "router")
     if runtime_module_name in {
-        "tigrbl_identity_server.authorization_surface",
-        "tigrbl_identity_server.login_surface",
-        "tigrbl_identity_server.client_registration_surface",
-        "tigrbl_identity_server.par_surface",
+        "tigrbl_auth_backend_app_core.surfaces.authorization_surface",
+        "tigrbl_auth_backend_app_core.surfaces.login_surface",
+        "tigrbl_auth_backend_app_core.surfaces.client_registration_surface",
+        "tigrbl_auth_backend_app_core.surfaces.par_surface",
     }:
         assert not hasattr(runtime_module, "api")
     else:

@@ -9,7 +9,7 @@ from unittest.mock import patch
 import pytest
 from httpx import ASGITransport, AsyncClient
 
-from tigrbl_auth.api.surfaces import admin_resource_path_prefixes
+from tigrbl_auth_backend_app_core.surfaces import admin_resource_path_prefixes
 from tigrbl_auth.config.deployment import DEFAULT_VALUES, resolve_deployment
 
 

@@ -1,8 +1,18 @@
-"""Compatibility facade for `tigrbl_identity_server.surfaces`."""
+"""Retired layer-70 HTTP-surface facade.
 
-from tigrbl_auth._split_imports import alias_module as _alias_module
+HTTP routers and assembled surfaces are owned by tigrbl-auth-backend-app-core.
+The facade intentionally does not import layer 90.
+"""
 
-_module = _alias_module(
-    __name__, "tigrbl_identity_server.surfaces", "tigrbl-identity-server"
-)
-globals().update(_module.__dict__)
+
+class BackendAppSurfaceMovedError(ImportError):
+    pass
+
+
+def __getattr__(name: str) -> object:
+    raise BackendAppSurfaceMovedError(
+        f"{name} moved to tigrbl_auth_backend_app_core.surfaces"
+    )
+
+
+__all__: list[str] = []

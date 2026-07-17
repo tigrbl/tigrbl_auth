@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-from types import SimpleNamespace
 
 import pytest
 
 from tigrbl_auth.api import lifecycle
-from tigrbl_auth.api.surfaces import (
+from tigrbl_auth_backend_app_core.surfaces import (
     TableInitializationScopeError,
     assert_table_initialization_scope,
     build_surface_api,
@@ -89,12 +88,7 @@ async def test_backend_app_table_initialization_t2_startup_uses_mounted_surface_
         _activate_runtime_tables,
     )
     monkeypatch.setattr(lifecycle, "ensure_default_superuser_async", _noop)
-    SimpleNamespace(
-        state=SimpleNamespace(tigrbl_auth_surface_router=ProductSurfaceRouter())
-    )
-
-    monkeypatch.setattr(lifecycle, "surface_api", ProductSurfaceRouter())
-
-    await lifecycle._startup()
+    router = ProductSurfaceRouter()
+    await lifecycle._startup(surface_initializer=router.initialize)
 
     assert calls == ["storage-runtime", "product-surface"]

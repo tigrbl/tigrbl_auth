@@ -28,20 +28,10 @@ class StableEntrypoint:
 
 
 STABLE_ENTRYPOINTS: Mapping[str, StableEntrypoint] = {
-    "app": StableEntrypoint("app", "tigrbl_identity_server.app", "app", "tigrbl-identity-server", deprecated=True),
-    "build_app": StableEntrypoint("build_app", "tigrbl_identity_server.app", "build_app", "tigrbl-identity-server", deprecated=True),
     "build_application_runtime_plan": StableEntrypoint(
         "build_application_runtime_plan",
         "tigrbl_identity_server.app",
         "build_application_runtime_plan",
-        "tigrbl-identity-server",
-        deprecated=True,
-    ),
-    "gateway_app": StableEntrypoint("gateway_app", "tigrbl_identity_server.gateway", "app", "tigrbl-identity-server", deprecated=True),
-    "build_gateway": StableEntrypoint(
-        "build_gateway",
-        "tigrbl_identity_server.gateway",
-        "build_gateway",
         "tigrbl-identity-server",
         deprecated=True,
     ),
@@ -73,7 +63,13 @@ STABLE_ENTRYPOINTS: Mapping[str, StableEntrypoint] = {
         "tigrbl-auth-plugin",
         deprecated=True,
     ),
-    "cli_main": StableEntrypoint("cli_main", "tigrbl_identity_cli.cli.main", "main", "tigrbl-identity-cli", deprecated=True),
+    "cli_main": StableEntrypoint(
+        "cli_main",
+        "tigrbl_identity_cli.cli.main",
+        "main",
+        "tigrbl-identity-cli",
+        deprecated=True,
+    ),
 }
 
 
@@ -85,7 +81,11 @@ FACADE_EXTRAS: Mapping[str, tuple[str, ...]] = {
         "tigrbl-identity-storage",
     ),
     "operator": ("tigrbl-identity-operator", "tigrbl-identity-testkit"),
-    "oauth": ("tigrbl-auth-protocol-oauth", "tigrbl-auth-protocol-oidc", "tigrbl-identity-jose"),
+    "oauth": (
+        "tigrbl-auth-protocol-oauth",
+        "tigrbl-auth-protocol-oidc",
+        "tigrbl-identity-jose",
+    ),
     "consumer": ("tigrbl-authz-resource-server", "tigrbl-auth-protocol-rp"),
     "all": (
         "tigrbl-identity-core",
@@ -132,13 +132,17 @@ def resolve_entrypoint(name: str, *, warn: bool = True) -> Any:
     try:
         entrypoint = STABLE_ENTRYPOINTS[name]
     except KeyError as exc:
-        raise FacadeImportError(f"unknown tigrbl-auth facade entrypoint: {name}") from exc
+        raise FacadeImportError(
+            f"unknown tigrbl-auth facade entrypoint: {name}"
+        ) from exc
     if warn and entrypoint.deprecated:
         warn_legacy_import(f"tigrbl_auth.{name}", stacklevel=3)
     try:
         module = import_module(entrypoint.module)
         return getattr(module, entrypoint.target)
-    except Exception as exc:  # pragma: no cover - message is asserted through the public wrapper
+    except (
+        Exception
+    ) as exc:  # pragma: no cover - message is asserted through the public wrapper
         raise FacadeImportError(
             f"tigrbl-auth facade entrypoint {name!r} requires {entrypoint.package} "
             f"to provide {entrypoint.dotted_target}"

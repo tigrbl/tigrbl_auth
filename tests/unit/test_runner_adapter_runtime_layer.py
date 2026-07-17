@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from tigrbl_auth.api.app import app as api_app, build_application_runtime_plan
-from tigrbl_auth.app import app as package_app
+from tigrbl_auth_backend_app_core import app as api_app, build_application_runtime_plan
+from tigrbl_auth_backend_app_public import app as package_app
 from tigrbl_auth.config.deployment import resolve_deployment
-from tigrbl_auth.gateway import app as gateway_app, build_gateway_runtime_plan
+from tigrbl_auth.gateway import build_gateway_runtime_plan
 from tigrbl_auth.runtime import build_runtime_hash_matrix, get_runner_adapter, registered_runner_names
 from tigrbl_auth.cli.main import build_parser
 
@@ -11,11 +11,10 @@ from tigrbl_auth.cli.main import build_parser
 EXPECTED_RUNNERS = {"uvicorn", "hypercorn", "tigrcorn"}
 
 
-def test_runner_registry_and_lazy_apps_are_present():
+def test_runner_registry_and_layer_90_apps_are_present():
     assert EXPECTED_RUNNERS == set(registered_runner_names())
     assert callable(api_app)
     assert callable(package_app)
-    assert callable(gateway_app)
 
 
 def test_runtime_plan_hashing_is_application_invariant_across_runners():
@@ -27,14 +26,14 @@ def test_runtime_plan_hashing_is_application_invariant_across_runners():
     assert len({payload["runtime_hash"] for payload in matrix.values()}) == len(EXPECTED_RUNNERS)
 
 
-def test_runtime_plans_expose_runner_metadata_and_server_agnostic_factory():
+def test_runtime_plans_separate_carrier_neutral_and_composed_factories():
     plan = build_application_runtime_plan(runner="uvicorn", environment="test")
     gateway_plan = build_gateway_runtime_plan(runner="hypercorn", environment="test")
 
     assert plan.runner == "uvicorn"
     assert gateway_plan.runner == "hypercorn"
-    assert plan.app_factory == "tigrbl_identity_server.api.app.build_app"
-    assert gateway_plan.app_factory == "tigrbl_identity_server.api.app.build_app"
+    assert plan.app_factory == "tigrbl_auth_backend_app_core.app.build_app"
+    assert gateway_plan.app_factory == "unbound"
     assert len(plan.runner_capabilities) > 0
     assert len(gateway_plan.runner_flag_metadata) > 0
 

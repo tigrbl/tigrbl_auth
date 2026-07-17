@@ -36,11 +36,13 @@ class DatabaseReplayProvider:
         return await check_and_reserve({"payload": request, "db": self._db})
 
 
-def build_server_runtime_assembly(
+def _build_server_runtime_assembly(
     settings_obj: object,
+    *,
+    token_coder: object,
 ) -> RuntimeCapabilityAssembly:
     def providers() -> dict[str, object]:
-        return {"token-coder": JWTCoder.default()}
+        return {"token-coder": token_coder}
 
     def storage_runtime(provider_set: dict[str, object]) -> dict[str, object]:
         from tigrbl_identity_server.security.client_registration import (
@@ -211,4 +213,28 @@ def build_server_runtime_assembly(
     )
 
 
-__all__ = ["DatabaseReplayProvider", "build_server_runtime_assembly"]
+def build_server_runtime_assembly(
+    settings_obj: object,
+) -> RuntimeCapabilityAssembly:
+    """Build the assembly when no event loop is active."""
+    return _build_server_runtime_assembly(
+        settings_obj,
+        token_coder=JWTCoder.default(),
+    )
+
+
+async def build_server_runtime_assembly_async(
+    settings_obj: object,
+) -> RuntimeCapabilityAssembly:
+    """Build the assembly with event-loop-safe provider initialization."""
+    return _build_server_runtime_assembly(
+        settings_obj,
+        token_coder=await JWTCoder.async_default(),
+    )
+
+
+__all__ = [
+    "DatabaseReplayProvider",
+    "build_server_runtime_assembly",
+    "build_server_runtime_assembly_async",
+]

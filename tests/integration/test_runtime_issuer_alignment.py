@@ -9,7 +9,7 @@ from httpx import ASGITransport, AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from tigrbl_auth import decode_jwt
-from tigrbl_auth.api.app import build_app
+from tigrbl_auth_backend_app_core import build_app
 from tigrbl_auth.config.deployment import DEFAULT_VALUES, resolve_deployment
 from tigrbl_auth.crypto import hash_pw
 from tigrbl_auth.db import get_db as legacy_get_db

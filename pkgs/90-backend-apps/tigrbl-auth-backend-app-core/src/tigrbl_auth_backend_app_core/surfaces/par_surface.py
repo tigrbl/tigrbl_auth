@@ -57,7 +57,7 @@ from tigrbl_identity_storage_runtime.dpop_state import (
 from tigrbl_identity_storage_runtime.engine import get_db
 from tigrbl_identity_storage_runtime.ops.common import first_record, read_record
 
-from .security.pushed_authorization import (
+from tigrbl_identity_server.security.pushed_authorization import (
     build_rfc9126_pushed_authorization_service,
 )
 
@@ -198,9 +198,7 @@ async def _authenticate_fapi_par_client(
 
     authorization = _header(request, "Authorization")
     client_assertion = str(params.get("client_assertion") or "").strip()
-    client_assertion_type = str(
-        params.get("client_assertion_type") or ""
-    ).strip()
+    client_assertion_type = str(params.get("client_assertion_type") or "").strip()
     if authorization and authorization.startswith("Basic "):
         raise HTTPException(
             status.HTTP_401_UNAUTHORIZED,
@@ -344,9 +342,7 @@ def _service_for_request(request: Request, db):
     deployment = _resolve_request_deployment(request)
     return build_rfc9126_pushed_authorization_service(
         db,
-        SimpleNamespace(
-            enable_rfc9126=deployment.flag_enabled("enable_rfc9126")
-        ),
+        SimpleNamespace(enable_rfc9126=deployment.flag_enabled("enable_rfc9126")),
     )
 
 

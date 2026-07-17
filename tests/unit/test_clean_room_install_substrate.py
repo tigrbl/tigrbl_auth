@@ -108,5 +108,6 @@ def test_runtime_surface_probe_resolves_split_package_source_roots() -> None:
     assert all(item["passed"] for item in results)
     assert {item["module"] for item in results} >= {
         "tigrbl_identity_server.api.app",
-        "tigrbl_auth.app",
+        "tigrbl_auth_backend_app_core",
+        "tigrbl_auth_backend_app_public",
     }

@@ -9,7 +9,7 @@ from tigrbl_identity_runtime.deployment import deployment_from_app
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_storage_runtime.engine import get_db
 
-from .device_authorization_runtime import (
+from tigrbl_identity_server.device_authorization_runtime import (
     device_authorization,
     device_authorization_request,
 )

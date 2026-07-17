@@ -11,7 +11,9 @@ from tigrbl_auth_protocol_oauth.standards.protected_resource_metadata import (
 from tigrbl_identity_runtime.deployment import deployment_from_app
 from tigrbl_identity_runtime.settings import settings
 
-from .protected_resource_metadata_runtime import protected_resource_metadata
+from tigrbl_identity_server.protected_resource_metadata_runtime import (
+    protected_resource_metadata,
+)
 
 
 router = build_protected_resource_metadata_router(

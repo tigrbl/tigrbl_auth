@@ -144,6 +144,7 @@ def build_runtime_plan(
     deployment: ResolvedDeployment | None = None,
     runner: str = "uvicorn",
     environment: str = "development",
+    app_factory: str = "unbound",
     host: str = "127.0.0.1",
     port: int = 8000,
     workers: int = 1,
@@ -172,8 +173,12 @@ def build_runtime_plan(
     resolved_deployment = deployment or resolve_deployment(resolved_settings)
     adapter = get_runner_adapter(runner)
     deployment_profile = str(getattr(resolved_deployment, "profile", "baseline"))
-    deployment_runtime_style = str(getattr(resolved_deployment, "runtime_style", "portable"))
-    deployment_plugin_mode = str(getattr(resolved_deployment, "plugin_mode", "self-contained"))
+    deployment_runtime_style = str(
+        getattr(resolved_deployment, "runtime_style", "portable")
+    )
+    deployment_plugin_mode = str(
+        getattr(resolved_deployment, "plugin_mode", "self-contained")
+    )
     deployment_surfaces = getattr(resolved_deployment, "surfaces", {}) or {}
     plan = RuntimePlan(
         profile=deployment_profile,
@@ -181,7 +186,7 @@ def build_runtime_plan(
         plugin_mode=deployment_plugin_mode,
         runner=adapter.name,
         environment=environment,
-        app_factory="tigrbl_identity_server.api.app.build_app",
+        app_factory=app_factory,
         deployment=resolved_deployment,
         host=host,
         port=port,
@@ -198,10 +203,16 @@ def build_runtime_plan(
         cookies=cookies,
         health=health,
         metrics=metrics,
-        public=bool(deployment_surfaces.get("surface_public_enabled", False)) if public is None else bool(public),
-        admin=bool(deployment_surfaces.get("surface_admin_enabled", False)) if admin is None else bool(admin),
+        public=bool(deployment_surfaces.get("surface_public_enabled", False))
+        if public is None
+        else bool(public),
+        admin=bool(deployment_surfaces.get("surface_admin_enabled", False))
+        if admin is None
+        else bool(admin),
         rpc=False,
-        diagnostics=bool(deployment_surfaces.get("surface_diagnostics_enabled", False)) if diagnostics is None else bool(diagnostics),
+        diagnostics=bool(deployment_surfaces.get("surface_diagnostics_enabled", False))
+        if diagnostics is None
+        else bool(diagnostics),
         jwks_refresh_seconds=jwks_refresh_seconds,
         runner_options=dict(runner_options or {}),
         runner_capabilities=tuple(adapter.capabilities),
@@ -216,6 +227,7 @@ def build_runtime_hash_matrix(
     *,
     deployment: ResolvedDeployment | None = None,
     environment: str = "development",
+    app_factory: str = "unbound",
     host: str = "127.0.0.1",
     port: int = 8000,
     workers: int = 1,
@@ -232,6 +244,7 @@ def build_runtime_hash_matrix(
             deployment=deployment,
             runner=runner,
             environment=environment,
+            app_factory=app_factory,
             host=host,
             port=port,
             workers=workers,

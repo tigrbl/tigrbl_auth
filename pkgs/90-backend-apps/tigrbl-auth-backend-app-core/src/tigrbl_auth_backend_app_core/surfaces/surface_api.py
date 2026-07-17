@@ -6,35 +6,35 @@ from typing import Any, Callable, Final
 from tigrbl import TigrblApp, TigrblRouter
 from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
 from tigrbl_identity_storage_runtime.engine import dsn
-from tigrbl_identity_server.authorization_surface import router as authorize_router
-from tigrbl_identity_server.login_surface import router as login_router
-from tigrbl_identity_server.token_surface import router as token_router
-from tigrbl_identity_server.client_registration_surface import (
+from .authorization_surface import router as authorize_router
+from .login_surface import router as login_router
+from .token_surface import router as token_router
+from .client_registration_surface import (
     include_client_registration_endpoint,
 )
-from tigrbl_identity_server.device_authorization_surface import (
+from .device_authorization_surface import (
     include_device_authorization_endpoint,
 )
-from tigrbl_identity_server.introspection_surface import include_introspection_endpoint
-from tigrbl_identity_server.logout_surface import include_logout_endpoint
-from tigrbl_identity_server.authorization_server_metadata_surface import (
+from .introspection_surface import include_introspection_endpoint
+from .logout_surface import include_logout_endpoint
+from .authorization_server_metadata_surface import (
     include_rfc8414,
 )
-from tigrbl_identity_server.oidc_discovery_surface import (
+from .oidc_discovery_surface import (
     include_jwks,
     include_openid_configuration,
 )
-from tigrbl_identity_server.protected_resource_metadata_surface import (
+from .protected_resource_metadata_surface import (
     include_rfc9728,
 )
-from tigrbl_identity_server.par_surface import include_par_endpoint
-from tigrbl_identity_server.revocation_surface import include_revocation_endpoint
-from tigrbl_identity_server.token_exchange_surface import (
+from .par_surface import include_par_endpoint
+from .revocation_surface import include_revocation_endpoint
+from .token_exchange_surface import (
     include_token_exchange_endpoint,
 )
-from tigrbl_identity_server.userinfo_surface import include_oidc_userinfo
-from tigrbl_identity_server.standards_manifest import include_standards_manifest
-from tigrbl_identity_server.advanced_protocols import include_advanced_protocols
+from .userinfo_surface import include_oidc_userinfo
+from .standards_manifest import include_standards_manifest
+from .advanced_protocols import include_advanced_protocols
 
 from .admin_routes import *
 from .admin_routes import (

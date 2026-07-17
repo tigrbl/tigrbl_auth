@@ -4,7 +4,7 @@ import pytest
 from http import HTTPStatus as status
 from httpx import ASGITransport, AsyncClient
 
-from tigrbl_auth.app import app
+from tigrbl_auth_backend_app_public import app
 from tigrbl_auth.runtime_cfg import settings
 
 # RFC 8414 specification excerpt for reference within tests

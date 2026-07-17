@@ -6,7 +6,7 @@ from types import SimpleNamespace
 import pytest
 from httpx import ASGITransport, AsyncClient
 
-from tigrbl_auth.api.app import build_app
+from tigrbl_auth_backend_app_core import build_app
 from tigrbl_auth.config.deployment import resolve_deployment
 
 
@@ -16,12 +16,11 @@ def _settings(tmp_path, key: str = "test-admin-key") -> SimpleNamespace:
 
 def test_admin_gate_canonical_package_owns_public_surface():
     canonical = importlib.import_module("tigrbl_auth_router_admin_gate")
-    server_wrapper = importlib.import_module("tigrbl_identity_server.security.admin_gate")
     facade = importlib.import_module("tigrbl_auth.security.admin_gate")
 
-    assert server_wrapper.AdminGate is canonical.AdminGate
     assert facade is canonical
-    assert server_wrapper.ADMIN_SECURITY_SCHEMES is canonical.ADMIN_SECURITY_SCHEMES
+    with pytest.raises(ModuleNotFoundError):
+        importlib.import_module("tigrbl_identity_server.security.admin_gate")
 
 
 @pytest.mark.asyncio

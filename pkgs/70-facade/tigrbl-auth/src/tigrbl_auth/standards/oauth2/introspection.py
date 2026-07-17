@@ -9,11 +9,6 @@ from tigrbl_auth_protocol_oauth.standards._introspection_activity import (
 )
 from tigrbl_auth_protocol_oauth.standards.introspection import RFC7662_SPEC_URL
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_server.introspection_surface import (
-    _protected_resource_verifier_contract,
-    include_introspection_endpoint,
-    include_rfc7662,
-)
 from tigrbl_identity_storage_runtime.introspection import (
     introspect_token as _introspect_token,
     introspect_token_async as _introspect_token_async,
@@ -40,9 +35,6 @@ async def introspect_token_async(token: str) -> dict[str, Any]:
 
 __all__ = [
     "RFC7662_SPEC_URL",
-    "_protected_resource_verifier_contract",
-    "include_introspection_endpoint",
-    "include_rfc7662",
     "introspect_token",
     "introspect_token_async",
     "register_token",

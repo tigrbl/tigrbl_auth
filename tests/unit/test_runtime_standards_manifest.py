@@ -14,7 +14,7 @@ sys.path.insert(
 )
 from tigrbl_auth_backend_app_public import PUBLIC_BACKEND_APP_CONTRACT  # noqa: E402
 from tigrbl_identity_runtime.deployment import resolve_deployment
-from tigrbl_identity_server.api.app import build_app
+from tigrbl_auth_backend_app_core import build_app
 
 
 def test_runtime_manifest_exposes_exact_protocol_owner_versions() -> None:

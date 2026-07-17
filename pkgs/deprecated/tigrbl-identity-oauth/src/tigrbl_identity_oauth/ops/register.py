@@ -6,7 +6,7 @@ from importlib import import_module as _import_module
 import warnings as _warnings
 
 _DEPRECATED_MODULE = "tigrbl_identity_oauth.ops.register"
-_CANONICAL_MODULE = "tigrbl_identity_server.client_registration_surface"
+_CANONICAL_MODULE = "tigrbl_auth_backend_app_core.surfaces.client_registration_surface"
 
 _warnings.warn(
     f"{_DEPRECATED_MODULE} is deprecated; import {_CANONICAL_MODULE} instead.",
@@ -29,4 +29,8 @@ for _name, _value in vars(_target).items():
     if _name not in _EXCLUDED:
         globals()[_name] = _value
 
-__all__ = list(getattr(_target, "__all__", [name for name in globals() if not name.startswith("_")]))
+__all__ = list(
+    getattr(
+        _target, "__all__", [name for name in globals() if not name.startswith("_")]
+    )
+)

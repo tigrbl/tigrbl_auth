@@ -2299,7 +2299,7 @@ features:
   kind: public-route
   title: /access/v1/evaluation
   description: AuthZEN access evaluation endpoint
-  source: tigrbl_identity_server.advanced_protocols:include_advanced_protocols
+  source: tigrbl_auth_backend_app_core.surfaces.advanced_protocols:include_advanced_protocols
   scope: core
   targets:
   - AuthZEN Authorization API 1.0
@@ -2431,7 +2431,7 @@ features:
   kind: public-route
   title: /attestations/appraise
   description: Attestation evidence appraisal endpoint
-  source: tigrbl_identity_server.advanced_protocols:include_advanced_protocols
+  source: tigrbl_auth_backend_app_core.surfaces.advanced_protocols:include_advanced_protocols
   scope: core
   targets:
   - RFC 9711
@@ -2469,7 +2469,7 @@ features:
   kind: public-route
   title: /credential
   description: OID4VCI credential endpoint
-  source: tigrbl_identity_server.advanced_protocols:include_advanced_protocols
+  source: tigrbl_auth_backend_app_core.surfaces.advanced_protocols:include_advanced_protocols
   scope: core
   targets:
   - OID4VCI 1.0
@@ -2497,7 +2497,7 @@ features:
   kind: public-route
   title: /gnap/tx
   description: GNAP grant transaction endpoint
-  source: tigrbl_identity_server.advanced_protocols:include_advanced_protocols
+  source: tigrbl_auth_backend_app_core.surfaces.advanced_protocols:include_advanced_protocols
   scope: core
   targets:
   - RFC 9635
@@ -2561,7 +2561,7 @@ features:
   kind: public-route
   title: /par
   description: Pushed authorization request endpoint
-  source: tigrbl_identity_server.par_surface:include_par_endpoint
+  source: tigrbl_auth_backend_app_core.surfaces.par_surface:include_par_endpoint
   scope: core
   targets:
   - RFC 9126
@@ -2579,7 +2579,7 @@ features:
   kind: public-route
   title: /presentation/verify
   description: OID4VP presentation verification endpoint
-  source: tigrbl_identity_server.advanced_protocols:include_advanced_protocols
+  source: tigrbl_auth_backend_app_core.surfaces.advanced_protocols:include_advanced_protocols
   scope: core
   targets:
   - OID4VP 1.0
@@ -2625,7 +2625,7 @@ features:
   kind: public-route
   title: /register
   description: Dynamic client registration endpoint
-  source: tigrbl_identity_server.client_registration_surface:include_client_registration_endpoint
+  source: tigrbl_auth_backend_app_core.surfaces.client_registration_surface:include_client_registration_endpoint
   scope: core
   targets:
   - RFC 7591
@@ -2641,7 +2641,7 @@ features:
   kind: public-route
   title: /register/{client_id}
   description: Dynamic client registration management endpoint
-  source: tigrbl_identity_server.client_registration_surface:include_client_registration_endpoint
+  source: tigrbl_auth_backend_app_core.surfaces.client_registration_surface:include_client_registration_endpoint
   scope: core
   targets:
   - RFC 7592
@@ -2673,7 +2673,7 @@ features:
   kind: public-route
   title: /security-events/receive
   description: Security Event Token receiver endpoint
-  source: tigrbl_identity_server.advanced_protocols:include_advanced_protocols
+  source: tigrbl_auth_backend_app_core.surfaces.advanced_protocols:include_advanced_protocols
   scope: core
   targets:
   - RFC 8417
@@ -2686,7 +2686,7 @@ features:
   kind: public-route
   title: /standards
   description: Installed identity standards and exact revisions
-  source: tigrbl_identity_server.standards_manifest:include_standards_manifest
+  source: tigrbl_auth_backend_app_core.surfaces.standards_manifest:include_standards_manifest
   scope: core
   targets: []
   required_flags: []

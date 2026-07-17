@@ -46,7 +46,7 @@ Historical planning and scaffold-layout documents are retained under `docs/archi
 ## Runtime entrypoints
 
 - standalone gateway/application export: `tigrbl_auth.gateway:app`
-- application factory export: `tigrbl_auth.app:app`
+- application factory export: `tigrbl_auth_backend_app_public:app`
 - plugin installation: `tigrbl_auth.plugin:TigrblAuthPlugin`
 
 ## Current runtime model

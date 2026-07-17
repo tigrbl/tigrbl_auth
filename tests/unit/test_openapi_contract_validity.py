@@ -6,8 +6,8 @@ from types import SimpleNamespace
 import pytest
 from httpx import ASGITransport, AsyncClient
 
-from tigrbl_auth.api.app import build_app
-from tigrbl_auth.api.surfaces import admin_resource_path_prefixes
+from tigrbl_auth_backend_app_core import build_app
+from tigrbl_auth_backend_app_core.surfaces import admin_resource_path_prefixes
 from tigrbl_auth.cli.artifacts import build_openapi_contract, deployment_from_options
 from tigrbl_auth.config.deployment import ROUTE_REGISTRY, resolve_deployment
 

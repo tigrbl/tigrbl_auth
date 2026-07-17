@@ -14,8 +14,8 @@ from tigrbl_auth.config.deployment import (
     SURFACE_SET_REGISTRY,
     resolve_deployment,
 )
-from tigrbl_auth.api.surfaces import admin_resource_path_prefixes
-from tigrbl_auth.api import surfaces
+from tigrbl_auth_backend_app_core.surfaces import admin_resource_path_prefixes
+from tigrbl_auth_backend_app_core import surfaces
 
 
 ROOT = Path(__file__).resolve().parents[2]

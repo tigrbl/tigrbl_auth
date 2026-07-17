@@ -272,8 +272,8 @@ def _require_runtime_stack() -> None:
 def _import_runtime_objects() -> dict[str, Any]:
     _require_runtime_stack()
     from tigrbl.engine import Engine, EngineSpec
-    from tigrbl_identity_server.app import app
-    from tigrbl_identity_server.api.surfaces import surface_api as composed_surface_api
+    from tigrbl_auth_backend_app_public import app
+    from tigrbl_auth_backend_app_core.surfaces import surface_api as composed_surface_api
     from tigrbl_identity_storage_runtime.engine import get_db
     from tigrbl_identity_runtime.engine_resolver import (
         register_api_provider,
@@ -514,7 +514,7 @@ def enable_rfc7009():
     """Enable RFC 7009 token revocation for tests."""
     _require_runtime_stack()
     from tigrbl_auth.runtime_cfg import settings
-    from tigrbl_identity_server.revocation_surface import include_rfc7009
+    from tigrbl_auth_backend_app_core.surfaces.revocation_surface import include_rfc7009
     from tigrbl_identity_storage_runtime.revocation import reset_revocations
 
     app = _import_runtime_objects()["app"]
@@ -536,7 +536,7 @@ def enable_rfc8693():
     from dataclasses import replace
 
     from tigrbl_auth.runtime_cfg import settings
-    from tigrbl_identity_server.token_exchange_surface import include_rfc8693
+    from tigrbl_auth_backend_app_core.surfaces.token_exchange_surface import include_rfc8693
     from tigrbl_identity_runtime.deployment import resolve_deployment
 
     app = _import_runtime_objects()["app"]
@@ -582,10 +582,10 @@ def enable_rfc8414():
     """Enable RFC 8414 authorization server metadata for tests."""
     _require_runtime_stack()
     from tigrbl_auth.runtime_cfg import settings
-    from tigrbl_identity_server.authorization_server_metadata_surface import (
+    from tigrbl_auth_backend_app_core.surfaces.authorization_server_metadata_surface import (
         include_rfc8414,
     )
-    from tigrbl_identity_server.oidc_discovery_surface import include_oidc_discovery
+    from tigrbl_auth_backend_app_core.surfaces.oidc_discovery_surface import include_oidc_discovery
 
     app = _import_runtime_objects()["app"]
     original = settings.enable_rfc8414

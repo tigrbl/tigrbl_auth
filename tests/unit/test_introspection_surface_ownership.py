@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import importlib
 
-from tigrbl_identity_server.introspection_surface import (
+from tigrbl_auth_backend_app_core.surfaces.introspection_surface import (
     include_introspection_endpoint,
     router,
 )
@@ -10,7 +10,7 @@ from tigrbl_identity_server.introspection_surface import (
 
 def test_runtime_surface_mounts_layer_80_introspection_carrier() -> None:
     surface_api = importlib.import_module(
-        "tigrbl_identity_server._surfaces.surface_api"
+        "tigrbl_auth_backend_app_core.surfaces.surface_api"
     )
     binding = next(
         item

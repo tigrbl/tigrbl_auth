@@ -38,7 +38,6 @@ TABLE_MODULE_PREFIXES = ("tigrbl_identity_storage",)
 
 
 FACADE_MODULES = {
-    "tigrbl_auth.api.surfaces": "tigrbl_identity_server.surfaces",
     "tigrbl_auth.config.deployment": "tigrbl_identity_runtime.deployment",
     "tigrbl_auth.config.surfaces": "tigrbl_identity_runtime.surfaces",
     "tigrbl_auth.errors": "tigrbl_identity_core.errors",
@@ -88,7 +87,6 @@ EXECUTABLE_FACADE_MODULES: dict[str, str] = {
 INSTALLED_FACADE_MODULES = {
     key: FACADE_MODULES[key]
     for key in (
-        "tigrbl_auth.api.surfaces",
         "tigrbl_auth.config.deployment",
         "tigrbl_auth.config.surfaces",
         "tigrbl_auth.errors",
@@ -310,11 +308,12 @@ def test_installable_tigrbl_auth_facade_exposes_rfc_legacy_modules() -> None:
             canonical = importlib.import_module(canonical_name)
 
             assert legacy is canonical
-
         rfc8414 = importlib.import_module("tigrbl_auth.rfc.rfc8414")
-        assert rfc8414.include_rfc8414.__module__ == (
-            "tigrbl_identity_server.authorization_server_metadata_surface"
+        assert not hasattr(rfc8414, "include_rfc8414")
+        carrier = importlib.import_module(
+            "tigrbl_auth_backend_app_core.surfaces.authorization_server_metadata_surface"
         )
+        assert carrier.include_rfc8414.__module__ == carrier.__name__
 
 
 def test_rfc8785_core_legacy_warns_and_facade_module_is_removed() -> None:

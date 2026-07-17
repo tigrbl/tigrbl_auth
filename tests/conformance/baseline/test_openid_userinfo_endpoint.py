@@ -5,7 +5,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 from http import HTTPStatus as status
 
-from tigrbl_auth.app import app
+from tigrbl_auth_backend_app_public import app
 from tigrbl_identity_server.security.security_deps import get_current_principal
 
 

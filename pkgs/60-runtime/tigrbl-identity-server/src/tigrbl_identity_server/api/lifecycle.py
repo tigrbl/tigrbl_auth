@@ -6,7 +6,6 @@ from typing import TypeAlias
 
 from tigrbl import TigrblApp
 
-from tigrbl_identity_server.surfaces import PublicRouter as surface_api
 from tigrbl_identity_storage_runtime import initializeIdentityRuntimeTables
 from tigrbl_identity_storage_runtime.migrations import apply_all_async
 from tigrbl_identity_runtime.settings import settings
@@ -17,18 +16,21 @@ from tigrbl_identity_runtime import RuntimeCapabilityAssembly
 AssemblyFactory: TypeAlias = Callable[
     [], RuntimeCapabilityAssembly | Awaitable[RuntimeCapabilityAssembly]
 ]
+SurfaceInitializer: TypeAlias = Callable[[], object]
 
 
 async def _startup(
     app: TigrblApp | None = None,
     assembly_factory: AssemblyFactory | None = None,
+    surface_initializer: SurfaceInitializer | None = None,
 ) -> None:
     await apply_all_async()
     initializeIdentityRuntimeTables()
     await ensure_default_superuser_async(settings)
-    init = surface_api.initialize()
-    if inspect.isawaitable(init):
-        await init
+    if surface_initializer is not None:
+        initialized = surface_initializer()
+        if inspect.isawaitable(initialized):
+            await initialized
     if assembly_factory is not None:
         assembly = assembly_factory()
         if inspect.isawaitable(assembly):
@@ -48,11 +50,12 @@ def register_lifecycle(
     app: TigrblApp,
     *,
     assembly_factory: AssemblyFactory | None = None,
+    surface_initializer: SurfaceInitializer | None = None,
 ) -> None:
     async def startup() -> None:
-        await _startup(app, assembly_factory)
+        await _startup(app, assembly_factory, surface_initializer)
 
     app.add_event_handler("startup", startup)
 
 
-__all__ = ["AssemblyFactory", "register_lifecycle"]
+__all__ = ["AssemblyFactory", "SurfaceInitializer", "register_lifecycle"]

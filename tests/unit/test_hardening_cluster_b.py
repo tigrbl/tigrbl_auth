@@ -11,7 +11,7 @@ import pytest
 
 from tigrbl_auth.cli.artifacts import build_openapi_contract, deployment_from_options
 from tigrbl_auth.config.settings import settings
-from tigrbl_identity_server.par_surface import _normalized_par_params
+from tigrbl_auth_backend_app_core.surfaces.par_surface import _normalized_par_params
 from tigrbl_auth_protocol_oauth.standards.issuer_identification import (
     IssuerIdentificationError,
     authorization_response_issuer,

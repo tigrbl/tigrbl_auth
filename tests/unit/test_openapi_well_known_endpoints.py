@@ -2,8 +2,8 @@ import asyncio
 
 import pytest_asyncio
 
-from tigrbl_identity_server.api.app import app
-from tigrbl_identity_server.surfaces import PublicRouter
+from tigrbl_auth_backend_app_public import app
+from tigrbl_auth_backend_app_core.surfaces import PublicRouter
 from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import JWKS_PATH
 
 

@@ -21,7 +21,7 @@ surfaces:
       - /.well-known/oauth-authorization-server
       - /.well-known/oauth-protected-resource
       - /.well-known/jwks.json
-      mounting_entrypoint: tigrbl_auth.api.surfaces.attach_runtime_surfaces
+      mounting_entrypoint: tigrbl_auth_backend_app_core.surfaces.attach_runtime_surfaces
       capability_registry: tigrbl_auth/config/surfaces.py:PUBLIC_CAPABILITIES
       discovery_snapshots:
       - specs/discovery/profiles/baseline/openid-configuration.json

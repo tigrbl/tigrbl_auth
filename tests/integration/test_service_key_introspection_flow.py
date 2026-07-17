@@ -28,7 +28,7 @@ async def running_app(override_get_db):
     original = settings.enable_rfc7662
     settings.enable_rfc7662 = True
     cfg = uvicorn.Config(
-        "tigrbl_auth.app:app", host="127.0.0.1", port=8001, log_level="warning"
+        "tigrbl_auth_backend_app_public:app", host="127.0.0.1", port=8001, log_level="warning"
     )
     server = uvicorn.Server(cfg)
     task = asyncio.create_task(server.serve())

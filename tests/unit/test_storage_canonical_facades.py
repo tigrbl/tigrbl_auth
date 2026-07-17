@@ -246,40 +246,40 @@ def test_executable_metadata_publishers_live_above_storage() -> None:
         assert importlib.util.find_spec(module_name) is None
 
     oidc_surface = importlib.import_module(
-        "tigrbl_identity_server.oidc_discovery_surface"
+        "tigrbl_auth_backend_app_core.surfaces.oidc_discovery_surface"
     )
     assert importlib.util.find_spec(
         "tigrbl_identity_storage_runtime.metadata.oidc_discovery"
     ) is None
     assert oidc_surface.include_openid_configuration.__module__ == (
-        "tigrbl_identity_server.oidc_discovery_surface"
+        "tigrbl_auth_backend_app_core.surfaces.oidc_discovery_surface"
     )
     rfc8414_surface = importlib.import_module(
-        "tigrbl_identity_server.authorization_server_metadata_surface"
+        "tigrbl_auth_backend_app_core.surfaces.authorization_server_metadata_surface"
     )
     assert importlib.util.find_spec(
         "tigrbl_identity_storage_runtime.metadata.authorization_server_metadata"
     ) is None
     assert rfc8414_surface.include_rfc8414.__module__ == (
-        "tigrbl_identity_server.authorization_server_metadata_surface"
+        "tigrbl_auth_backend_app_core.surfaces.authorization_server_metadata_surface"
     )
     rfc9728_surface = importlib.import_module(
-        "tigrbl_identity_server.protected_resource_metadata_surface"
+        "tigrbl_auth_backend_app_core.surfaces.protected_resource_metadata_surface"
     )
     assert importlib.util.find_spec(
         "tigrbl_identity_storage_runtime.metadata.protected_resource_metadata"
     ) is None
     assert rfc9728_surface.include_rfc9728.__module__ == (
-        "tigrbl_identity_server.protected_resource_metadata_surface"
+        "tigrbl_auth_backend_app_core.surfaces.protected_resource_metadata_surface"
     )
     resource_validation_surface = importlib.import_module(
-        "tigrbl_identity_server.resource_validation_metadata_surface"
+        "tigrbl_auth_backend_app_core.surfaces.resource_validation_metadata_surface"
     )
     assert importlib.util.find_spec(
         "tigrbl_identity_storage_runtime.metadata.resource_validation_metadata"
     ) is None
     assert resource_validation_surface.include_resource_validation_metadata.__module__ == (
-        "tigrbl_identity_server.resource_validation_metadata_surface"
+        "tigrbl_auth_backend_app_core.surfaces.resource_validation_metadata_surface"
     )
 
 
@@ -288,7 +288,7 @@ def test_executable_revocation_publisher_lives_above_storage() -> None:
     assert importlib.util.find_spec("tigrbl_identity_storage.tables.revoked_token._op") is None
 
     runtime = importlib.import_module("tigrbl_identity_storage_runtime.revocation")
-    carrier = importlib.import_module("tigrbl_identity_server.revocation_surface")
+    carrier = importlib.import_module("tigrbl_auth_backend_app_core.surfaces.revocation_surface")
     lifecycle = importlib.import_module("tigrbl_identity_storage_runtime.token_lifecycle")
     storage = importlib.import_module("tigrbl_identity_storage.tables.revoked_token")
 
@@ -296,7 +296,7 @@ def test_executable_revocation_publisher_lives_above_storage() -> None:
     assert not hasattr(runtime, "router")
     assert not hasattr(runtime, "include_revocation_endpoint")
     assert carrier.include_revocation_endpoint.__module__ == (
-        "tigrbl_identity_server.revocation_surface"
+        "tigrbl_auth_backend_app_core.surfaces.revocation_surface"
     )
     assert importlib.util.find_spec("tigrbl_identity_storage.tables.revoked_token._ops") is None
     assert runtime.revoke_token_async is lifecycle.revoke_token_async
@@ -308,11 +308,11 @@ def test_executable_par_publisher_lives_above_storage() -> None:
     assert importlib.util.find_spec("tigrbl_identity_storage.tables.pushed_authorization_request._op") is None
 
     assert importlib.util.find_spec("tigrbl_identity_storage_runtime.par") is None
-    runtime = importlib.import_module("tigrbl_identity_server.par_surface")
+    runtime = importlib.import_module("tigrbl_auth_backend_app_core.surfaces.par_surface")
     carrier = importlib.import_module("tigrbl_auth_router_oauth_par")
     storage = importlib.import_module("tigrbl_identity_storage.tables.pushed_authorization_request")
 
-    assert runtime.include_par_endpoint.__module__ == "tigrbl_identity_server.par_surface"
+    assert runtime.include_par_endpoint.__module__ == "tigrbl_auth_backend_app_core.surfaces.par_surface"
     assert carrier.build_pushed_authorization_router.__module__ == (
         "tigrbl_auth_router_oauth_par.binding"
     )
@@ -324,13 +324,13 @@ def test_executable_device_authorization_publisher_lives_above_storage() -> None
     assert importlib.util.find_spec("tigrbl_identity_storage.tables.device_code._op") is None
 
     runtime = importlib.import_module(
-        "tigrbl_identity_server.device_authorization_surface"
+        "tigrbl_auth_backend_app_core.surfaces.device_authorization_surface"
     )
     storage = importlib.import_module("tigrbl_identity_storage.tables.device_code")
 
     assert runtime.api is runtime.router
     assert runtime.include_device_authorization_endpoint.__module__ == (
-        "tigrbl_identity_server.device_authorization_surface"
+        "tigrbl_auth_backend_app_core.surfaces.device_authorization_surface"
     )
     with pytest.raises(ModuleNotFoundError):
         importlib.import_module(
@@ -343,12 +343,12 @@ def test_executable_device_authorization_publisher_lives_above_storage() -> None
 def test_executable_logout_publisher_lives_above_storage() -> None:
     assert importlib.util.find_spec("tigrbl_identity_storage.tables.logout_state._op") is None
 
-    runtime = importlib.import_module("tigrbl_identity_server.logout_surface")
+    runtime = importlib.import_module("tigrbl_auth_backend_app_core.surfaces.logout_surface")
     storage = importlib.import_module("tigrbl_identity_storage.tables.logout_state")
 
     assert runtime.api is runtime.router
     assert runtime.include_logout_endpoint.__module__ == (
-        "tigrbl_identity_server.logout_surface"
+        "tigrbl_auth_backend_app_core.surfaces.logout_surface"
     )
     with pytest.raises(ModuleNotFoundError):
         importlib.import_module("tigrbl_identity_storage_runtime.logout")
@@ -365,14 +365,14 @@ def test_executable_client_registration_publisher_lives_above_storage() -> None:
     for module_name in old_modules:
         assert importlib.util.find_spec(module_name) is None
 
-    runtime = importlib.import_module("tigrbl_identity_server.client_registration_surface")
+    runtime = importlib.import_module("tigrbl_auth_backend_app_core.surfaces.client_registration_surface")
     storage = importlib.import_module("tigrbl_identity_storage.tables.client_registration")
 
     assert not hasattr(runtime, "api")
     carrier = importlib.import_module("tigrbl_auth_router_oauth_registration")
     assert callable(carrier.build_client_registration_router)
     assert runtime.include_client_registration_endpoint.__module__ == (
-        "tigrbl_identity_server.client_registration_surface"
+        "tigrbl_auth_backend_app_core.surfaces.client_registration_surface"
     )
     assert not hasattr(storage, "api")
     assert not hasattr(storage, "router")
@@ -387,12 +387,12 @@ def test_executable_token_exchange_publisher_lives_above_storage() -> None:
     for module_name in old_modules:
         assert importlib.util.find_spec(module_name) is None
 
-    runtime = importlib.import_module("tigrbl_identity_server.token_exchange_surface")
+    runtime = importlib.import_module("tigrbl_auth_backend_app_core.surfaces.token_exchange_surface")
     storage = importlib.import_module("tigrbl_identity_storage.tables.token_record")
 
     assert runtime.api is runtime.router
     assert runtime.include_token_exchange_endpoint.__module__ == (
-        "tigrbl_identity_server.token_exchange_surface"
+        "tigrbl_auth_backend_app_core.surfaces.token_exchange_surface"
     )
     assert not hasattr(storage, "token_exchange")
 
@@ -406,12 +406,12 @@ def test_executable_userinfo_publisher_lives_above_storage() -> None:
     for module_name in old_modules:
         assert importlib.util.find_spec(module_name) is None
 
-    runtime = importlib.import_module("tigrbl_identity_server.userinfo_surface")
+    runtime = importlib.import_module("tigrbl_auth_backend_app_core.surfaces.userinfo_surface")
     storage = importlib.import_module("tigrbl_identity_storage.tables.user")
 
     assert runtime.api is runtime.router
     assert runtime.include_oidc_userinfo.__module__ == (
-        "tigrbl_identity_server.userinfo_surface"
+        "tigrbl_auth_backend_app_core.surfaces.userinfo_surface"
     )
     with pytest.raises(ModuleNotFoundError):
         importlib.import_module("tigrbl_identity_storage_runtime.userinfo")
@@ -433,14 +433,14 @@ def test_executable_introspection_publisher_lives_above_storage() -> None:
         assert importlib.util.find_spec(module_name) is None
 
     runtime = importlib.import_module("tigrbl_identity_storage_runtime.introspection")
-    carrier = importlib.import_module("tigrbl_identity_server.introspection_surface")
+    carrier = importlib.import_module("tigrbl_auth_backend_app_core.surfaces.introspection_surface")
     storage = importlib.import_module("tigrbl_identity_storage.tables.token_record")
 
     assert not hasattr(runtime, "api")
     assert not hasattr(runtime, "router")
     assert not hasattr(runtime, "include_introspection_endpoint")
     assert carrier.include_introspection_endpoint.__module__ == (
-        "tigrbl_identity_server.introspection_surface"
+        "tigrbl_auth_backend_app_core.surfaces.introspection_surface"
     )
     assert importlib.util.find_spec("tigrbl_identity_storage.tables.token_record._ops") is None
     assert runtime.introspect_token_async.__module__ == (
@@ -459,10 +459,10 @@ def test_executable_auth_flow_composition_lives_above_storage() -> None:
     for module_name in old_modules:
         assert importlib.util.find_spec(module_name) is None
 
-    authz_surface = importlib.import_module("tigrbl_identity_server.authz_surface")
-    auth_flows = importlib.import_module("tigrbl_identity_server.auth_flows")
+    authz_surface = importlib.import_module("tigrbl_auth_backend_app_core.surfaces.authz_surface")
+    auth_flows = importlib.import_module("tigrbl_auth_backend_app_core.surfaces.auth_flows")
     authorization = importlib.import_module(
-        "tigrbl_identity_server.authorization_surface"
+        "tigrbl_auth_backend_app_core.surfaces.authorization_surface"
     )
 
     assert not hasattr(authz_surface, "api")

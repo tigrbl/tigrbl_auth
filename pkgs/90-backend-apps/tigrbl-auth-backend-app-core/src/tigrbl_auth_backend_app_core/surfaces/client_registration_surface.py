@@ -48,8 +48,10 @@ from tigrbl_identity_storage_runtime.ops.common import (
 )
 from tigrbl_identity_storage_runtime.tenant_state import enabled_tenant_record
 
-from .security.client_registration import build_client_registration_capability
-from .client_registration_support import (
+from tigrbl_identity_server.security.client_registration import (
+    build_client_registration_capability,
+)
+from tigrbl_identity_server.client_registration_support import (
     bearer_token as _bearer_token,
     merge_registration_metadata as _merge_registration_metadata,
     registration_response as _registration_response,

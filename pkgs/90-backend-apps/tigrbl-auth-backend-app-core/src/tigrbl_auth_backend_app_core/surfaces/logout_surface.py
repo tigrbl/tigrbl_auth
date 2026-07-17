@@ -9,7 +9,7 @@ from tigrbl_identity_runtime.deployment import deployment_from_app
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_storage_runtime.engine import get_db
 
-from .logout_runtime import logout, logout_request
+from tigrbl_identity_server.logout_runtime import logout, logout_request
 
 
 router = build_logout_router(logout_request=logout, get_db=get_db)

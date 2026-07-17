@@ -14,7 +14,7 @@ from tigrbl_auth_backend_app_platform_admin.app import build_app
 from tigrbl_auth.config.deployment import DEFAULT_VALUES, resolve_deployment
 from tigrbl_auth.crypto import hash_pw
 from tigrbl_auth.db import get_db as legacy_get_db
-from tigrbl_identity_server.surfaces import AdminRouter
+from tigrbl_auth_backend_app_core.surfaces import AdminRouter
 from tigrbl_auth.runtime.engine_resolver import (
     register_api_provider,
     resolve_api_provider,

@@ -8,7 +8,7 @@ from tigrbl_auth_router_resource_validation_metadata import (
 from tigrbl_identity_runtime.deployment import deployment_from_app
 from tigrbl_identity_runtime.settings import settings
 
-from .resource_validation_metadata_runtime import (
+from tigrbl_identity_server.resource_validation_metadata_runtime import (
     capability_metadata,
     verifier_contract_metadata,
 )

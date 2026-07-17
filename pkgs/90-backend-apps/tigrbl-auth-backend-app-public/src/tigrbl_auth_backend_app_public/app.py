@@ -5,7 +5,7 @@ from __future__ import annotations
 import os
 from typing import TYPE_CHECKING
 
-from tigrbl_auth.backend_apps import build_product_app
+from tigrbl_auth_backend_app_core import build_product_app
 from tigrbl_auth_backend_app_public.contract import PUBLIC_BACKEND_APP_CONTRACT
 from tigrbl_auth.runtime import LazyASGIApplication
 from tigrbl_auth_backend_app_public.openapi import patch_public_openapi
@@ -42,9 +42,16 @@ def _default_settings() -> object:
     return settings
 
 
+def _package_default_profile(settings_obj: object | None = None) -> str:
+    resolved = settings_obj if settings_obj is not None else _default_settings()
+    configured = str(getattr(resolved, "deployment_profile", "baseline") or "baseline")
+    return configured if configured != "baseline" else "production"
+
+
 def build_app(settings_obj: object | None = None) -> "TigrblApp":
     if settings_obj is None:
         settings_obj = _default_settings()
+        settings_obj.deployment_profile = _package_default_profile(settings_obj)
     return patch_public_openapi(
         build_product_app(
             PRODUCT_SURFACE, settings_obj, contract=PUBLIC_BACKEND_APP_CONTRACT
@@ -54,4 +61,4 @@ def build_app(settings_obj: object | None = None) -> "TigrblApp":
 
 app = LazyASGIApplication(build_app)
 
-__all__ = ["PRODUCT_SURFACE", "app", "build_app"]
+__all__ = ["PRODUCT_SURFACE", "_package_default_profile", "app", "build_app"]

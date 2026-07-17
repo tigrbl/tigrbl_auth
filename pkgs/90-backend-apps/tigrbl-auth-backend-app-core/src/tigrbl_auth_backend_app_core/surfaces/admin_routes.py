@@ -86,7 +86,9 @@ def _admin_table_resources(
         return tuple(TABLE_RESOURCES)
     required = getattr(deployment, "required_table_resources", ())
     if required:
-        resources_by_name = {resource.__name__: resource for resource in TABLE_RESOURCES}
+        resources_by_name = {
+            resource.__name__: resource for resource in TABLE_RESOURCES
+        }
         return tuple(
             resources_by_name[name]
             for name in tuple(str(item) for item in required)
@@ -135,7 +137,9 @@ def assert_table_initialization_scope(
         )
 
 
-def _admin_resource_path(resource: type[Any], deployment: ResolvedDeployment | None = None) -> str:
+def _admin_resource_path(
+    resource: type[Any], deployment: ResolvedDeployment | None = None
+) -> str:
     if getattr(deployment, "product_surface", None) == "platform-admin-app":
         if resource.__name__ == "Realm":
             return "/admin/realm"
@@ -231,15 +235,13 @@ def _rewrite_model_rest_bindings(
             for binding in tuple(getattr(spec, "bindings", ()) or ()):
                 path = getattr(binding, "path", None)
                 if isinstance(path, str) and path.startswith(old_prefix):
-                    next_path = f"{new_prefix}{path[len(old_prefix):]}"
+                    next_path = f"{new_prefix}{path[len(old_prefix) :]}"
                     next_bindings.append(replace(binding, path=next_path))
                     spec_changed = True
                 else:
                     next_bindings.append(binding)
             if spec_changed:
-                rewritten_specs.append(
-                    replace(spec, bindings=tuple(next_bindings))
-                )
+                rewritten_specs.append(replace(spec, bindings=tuple(next_bindings)))
                 changed = True
             else:
                 rewritten_specs.append(spec)
@@ -279,7 +281,7 @@ def _rewrite_admin_table_routes(
             rewritten.append(route)
             continue
         old_prefix, new_prefix = rewrite
-        next_path = f"{new_prefix}{path_template[len(old_prefix):]}"
+        next_path = f"{new_prefix}{path_template[len(old_prefix) :]}"
         binding = getattr(route, "tigrbl_binding", None)
         if binding is not None and hasattr(binding, "path"):
             binding = replace(binding, path=next_path)
@@ -346,6 +348,6 @@ def build_admin_router(
     return router
 
 
-AdminRouter = build_admin_router(deployment=resolve_deployment(plugin_mode="admin-only"))
-
-
+AdminRouter = build_admin_router(
+    deployment=resolve_deployment(plugin_mode="admin-only")
+)

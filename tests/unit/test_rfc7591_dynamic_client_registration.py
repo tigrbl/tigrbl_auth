@@ -6,10 +6,10 @@ import pytest_asyncio
 from types import SimpleNamespace
 
 from tigrbl_auth import rfc7591
-from tigrbl_identity_server.client_registration_surface import router
+from tigrbl_auth_backend_app_core.surfaces.client_registration_surface import router
 from tigrbl import TigrblApp
 from tigrbl_identity_storage_runtime.engine import get_db
-import tigrbl_identity_server.client_registration_surface as registration_surface
+import tigrbl_auth_backend_app_core.surfaces.client_registration_surface as registration_surface
 
 
 @pytest_asyncio.fixture()

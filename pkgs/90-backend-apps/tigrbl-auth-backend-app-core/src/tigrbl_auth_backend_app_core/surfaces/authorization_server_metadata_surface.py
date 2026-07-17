@@ -11,7 +11,9 @@ from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import (
 from tigrbl_identity_runtime.deployment import deployment_from_app
 from tigrbl_identity_runtime.settings import settings
 
-from .authorization_server_metadata_runtime import authorization_server_metadata
+from tigrbl_identity_server.authorization_server_metadata_runtime import (
+    authorization_server_metadata,
+)
 
 
 router = build_authorization_server_metadata_router(

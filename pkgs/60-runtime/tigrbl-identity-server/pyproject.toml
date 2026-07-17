@@ -1,7 +1,7 @@
 [project]
 name = "tigrbl-identity-server"
 version = "0.4.0.dev2"
-description = "Tigrbl ASGI identity server composition, app factories, gateway factories, routers, and REST surfaces."
+description = "Carrier-neutral identity runtime handlers, capability assembly, and lifecycle integration."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
@@ -37,21 +37,6 @@ dependencies = [
     "tigrbl-service-key-authentication-capability==0.4.0.dev2",
     "tigrbl-account-self-service-capability==0.4.0.dev2",
     "tigrbl-auth-release-certification==0.4.0.dev2",
-    "tigrbl-auth-router-session-login==0.4.0.dev2",
-    "tigrbl-auth-router-oauth-authorization==0.4.0.dev2",
-    "tigrbl-auth-router-oauth-device-authorization==0.4.0.dev2",
-    "tigrbl-auth-router-oauth-token-exchange==0.4.0.dev2",
-    "tigrbl-auth-router-oidc-userinfo==0.4.0.dev2",
-    "tigrbl-auth-router-oidc-logout==0.4.0.dev2",
-    "tigrbl-auth-router-oidc-discovery==0.4.0.dev2",
-    "tigrbl-auth-router-oauth-authorization-server-metadata==0.4.0.dev2",
-    "tigrbl-auth-router-oauth-protected-resource-metadata==0.4.0.dev2",
-    "tigrbl-auth-router-resource-validation-metadata==0.4.0.dev2",
-    "tigrbl-auth-router-oauth-introspection==0.4.0.dev2",
-    "tigrbl-auth-router-oauth-revocation==0.4.0.dev2",
-    "tigrbl-auth-router-oauth-par==0.4.0.dev2",
-    "tigrbl-auth-router-oauth-registration==0.4.0.dev2",
-    "tigrbl-auth-router-oauth-token==0.4.0.dev2",
     "tigrbl-auth-protocol-oauth==0.4.0.dev2",
     "tigrbl-auth-protocol-oidc==0.4.0.dev2",
     "tigrbl-auth-protocol-gnap==0.4.0.dev2",
@@ -63,7 +48,6 @@ dependencies = [
     "tigrbl-identity-runtime==0.4.0.dev2",
     "email-validator>=2.0",
     "tigrbl==0.4.4.dev1",
-    "tigrbl-auth-router-admin-gate==0.4.0.dev2",
     "tigrbl-core==0.4.4.dev1",
     "tigrbl-identity-storage-runtime==0.4.0.dev2",
     "tigrbl-client-secret-authentication-capability==0.4.0.dev2",

@@ -14,7 +14,7 @@ from tigrbl_identity_runtime.deployment import deployment_from_app
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_storage_runtime.engine import get_db
 
-from .oidc_discovery_runtime import (
+from tigrbl_identity_server.oidc_discovery_runtime import (
     jwks,
     openid_configuration,
     realm_jwks,
@@ -63,9 +63,7 @@ def include_oidc_discovery(app: TigrblApp) -> None:
         app,
         discovery_api,
         jwks_api,
-        discovery_enabled=deployment.route_enabled(
-            "/.well-known/openid-configuration"
-        ),
+        discovery_enabled=deployment.route_enabled("/.well-known/openid-configuration"),
         jwks_enabled=deployment.route_enabled(JWKS_PATH),
     )
 

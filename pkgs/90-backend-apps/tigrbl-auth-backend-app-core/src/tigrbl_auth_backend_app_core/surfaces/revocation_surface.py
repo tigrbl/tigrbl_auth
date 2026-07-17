@@ -9,7 +9,9 @@ from tigrbl_auth_router_oauth_revocation import (
 )
 from tigrbl_identity_runtime.settings import settings
 
-from .security.token_revocation import build_rfc7009_revocation_service
+from tigrbl_identity_server.security.token_revocation import (
+    build_rfc7009_revocation_service,
+)
 
 
 def _service_for_request(request: Request):

@@ -8,7 +8,6 @@ from typing import Any
 from tigrbl_identity_core.digests import sha256_text_digest
 from tigrbl_identity_runtime.deployment import deployment_from_request
 from tigrbl_identity_runtime.engine_resolver import (
-    resolve_api_provider,
     resolve_default_provider,
 )
 from tigrbl_identity_runtime.settings import settings
@@ -35,14 +34,6 @@ def user_is_admin(user: User | None) -> bool:
 
 
 def _resolve_provider():
-    try:
-        from tigrbl_identity_server.api.surfaces import surface_api
-
-        provider = resolve_api_provider(surface_api)
-        if provider is not None:
-            return provider
-    except Exception:
-        pass
     provider = resolve_default_provider()
     if provider is None:
         raise RuntimeError("identity storage provider has not been configured")

@@ -2695,11 +2695,81 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-auth-backend-app-core"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/90-backend-apps/tigrbl-auth-backend-app-core" }
+dependencies = [
+    { name = "tigrbl" },
+    { name = "tigrbl-auth-plugin" },
+    { name = "tigrbl-auth-protocol-gnap" },
+    { name = "tigrbl-auth-protocol-oauth" },
+    { name = "tigrbl-auth-router-admin-gate" },
+    { name = "tigrbl-auth-router-oauth-authorization" },
+    { name = "tigrbl-auth-router-oauth-authorization-server-metadata" },
+    { name = "tigrbl-auth-router-oauth-device-authorization" },
+    { name = "tigrbl-auth-router-oauth-introspection" },
+    { name = "tigrbl-auth-router-oauth-par" },
+    { name = "tigrbl-auth-router-oauth-protected-resource-metadata" },
+    { name = "tigrbl-auth-router-oauth-registration" },
+    { name = "tigrbl-auth-router-oauth-revocation" },
+    { name = "tigrbl-auth-router-oauth-token" },
+    { name = "tigrbl-auth-router-oauth-token-exchange" },
+    { name = "tigrbl-auth-router-oidc-discovery" },
+    { name = "tigrbl-auth-router-oidc-logout" },
+    { name = "tigrbl-auth-router-oidc-userinfo" },
+    { name = "tigrbl-auth-router-resource-validation-metadata" },
+    { name = "tigrbl-auth-router-session-login" },
+    { name = "tigrbl-client-secret-authentication-capability" },
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-identity-operator" },
+    { name = "tigrbl-identity-runtime" },
+    { name = "tigrbl-identity-server" },
+    { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-identity-storage-runtime" },
+    { name = "tigrbl-secret-hashing-bcrypt-provider" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-auth-plugin", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-protocol-gnap", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-router-admin-gate", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-router-oauth-authorization", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-router-oauth-authorization-server-metadata", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-router-oauth-device-authorization", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-router-oauth-introspection", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-router-oauth-par", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-router-oauth-protected-resource-metadata", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-router-oauth-registration", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-router-oauth-revocation", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-router-oauth-token", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-router-oauth-token-exchange", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-router-oidc-discovery", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-router-oidc-logout", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-router-oidc-userinfo", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-router-resource-validation-metadata", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-router-session-login", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-client-secret-authentication-capability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-operator", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-server", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage-runtime", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-secret-hashing-bcrypt-provider", specifier = "==0.1.0" },
+]
+
+[[package]]
 name = "tigrbl-auth-backend-app-developer"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/90-backend-apps/tigrbl-auth-backend-app-developer" }
 dependencies = [
     { name = "tigrbl-auth" },
+    { name = "tigrbl-auth-backend-app-core" },
     { name = "tigrbl-auth-router-admin-gate" },
     { name = "tigrbl-auth-router-oauth-authorization-server-metadata" },
     { name = "tigrbl-auth-router-oauth-registration" },
@@ -2709,6 +2779,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "tigrbl-auth", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-backend-app-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-router-admin-gate", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-router-oauth-authorization-server-metadata", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-router-oauth-registration", specifier = "==0.4.0.dev2" },
@@ -2724,6 +2795,7 @@ dependencies = [
     { name = "tigrbl" },
     { name = "tigrbl-account-self-service-capability" },
     { name = "tigrbl-auth" },
+    { name = "tigrbl-auth-backend-app-core" },
     { name = "tigrbl-auth-router-oidc-discovery" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-server" },
@@ -2735,6 +2807,7 @@ requires-dist = [
     { name = "tigrbl", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-account-self-service-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-backend-app-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-router-oidc-discovery", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-server", specifier = "==0.4.0.dev2" },
@@ -2748,6 +2821,7 @@ dependencies = [
     { name = "pydantic" },
     { name = "tigrbl" },
     { name = "tigrbl-auth" },
+    { name = "tigrbl-auth-backend-app-core" },
     { name = "tigrbl-auth-router-admin-gate" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-server" },
@@ -2758,6 +2832,7 @@ requires-dist = [
     { name = "pydantic", specifier = "==2.12.5" },
     { name = "tigrbl", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-auth", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-backend-app-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-router-admin-gate", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-server", specifier = "==0.4.0.dev2" },
@@ -2769,6 +2844,7 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/90-backend-apps/tigrbl-auth-backend-app-public" }
 dependencies = [
     { name = "tigrbl-auth" },
+    { name = "tigrbl-auth-backend-app-core" },
     { name = "tigrbl-auth-router-oauth-authorization" },
     { name = "tigrbl-auth-router-oauth-authorization-server-metadata" },
     { name = "tigrbl-auth-router-oauth-device-authorization" },
@@ -2789,6 +2865,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "tigrbl-auth", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-backend-app-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-router-oauth-authorization", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-router-oauth-authorization-server-metadata", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-router-oauth-device-authorization", specifier = "==0.4.0.dev2" },
@@ -2812,6 +2889,7 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/90-backend-apps/tigrbl-auth-backend-app-resource-validation" }
 dependencies = [
     { name = "tigrbl-auth" },
+    { name = "tigrbl-auth-backend-app-core" },
     { name = "tigrbl-auth-router-oauth-introspection" },
     { name = "tigrbl-auth-router-oauth-protected-resource-metadata" },
     { name = "tigrbl-auth-router-oidc-discovery" },
@@ -2821,6 +2899,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "tigrbl-auth", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-backend-app-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-router-oauth-introspection", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-router-oauth-protected-resource-metadata", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-router-oidc-discovery", specifier = "==0.4.0.dev2" },
@@ -2833,6 +2912,7 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/90-backend-apps/tigrbl-auth-backend-app-service-admin" }
 dependencies = [
     { name = "tigrbl-auth" },
+    { name = "tigrbl-auth-backend-app-core" },
     { name = "tigrbl-auth-router-admin-gate" },
     { name = "tigrbl-auth-router-oauth-introspection" },
     { name = "tigrbl-auth-router-oauth-protected-resource-metadata" },
@@ -2842,6 +2922,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "tigrbl-auth", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-backend-app-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-router-admin-gate", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-router-oauth-introspection", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-router-oauth-protected-resource-metadata", specifier = "==0.4.0.dev2" },
@@ -2854,12 +2935,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/90-backend-apps/tigrbl-auth-backend-app-tenant-admin" }
 dependencies = [
     { name = "tigrbl-auth" },
+    { name = "tigrbl-auth-backend-app-core" },
     { name = "tigrbl-auth-router-admin-gate" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl-auth", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-backend-app-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-router-admin-gate", specifier = "==0.4.0.dev2" },
 ]
 
@@ -3611,6 +3694,7 @@ dependencies = [
     { name = "tigrbl-attestation-u2f-provider" },
     { name = "tigrbl-audit-durability" },
     { name = "tigrbl-auth" },
+    { name = "tigrbl-auth-backend-app-core" },
     { name = "tigrbl-auth-backend-app-developer" },
     { name = "tigrbl-auth-backend-app-my-account" },
     { name = "tigrbl-auth-backend-app-platform-admin" },
@@ -4101,6 +4185,7 @@ requires-dist = [
     { name = "tigrbl-attestation-u2f-provider", editable = "pkgs/20-providers/tigrbl-attestation-u2f-provider" },
     { name = "tigrbl-audit-durability", editable = "pkgs/30-storage-runtime/tigrbl-audit-durability" },
     { name = "tigrbl-auth", editable = "pkgs/70-facade/tigrbl-auth" },
+    { name = "tigrbl-auth-backend-app-core", editable = "pkgs/90-backend-apps/tigrbl-auth-backend-app-core" },
     { name = "tigrbl-auth-backend-app-developer", editable = "pkgs/90-backend-apps/tigrbl-auth-backend-app-developer" },
     { name = "tigrbl-auth-backend-app-my-account", editable = "pkgs/90-backend-apps/tigrbl-auth-backend-app-my-account" },
     { name = "tigrbl-auth-backend-app-platform-admin", editable = "pkgs/90-backend-apps/tigrbl-auth-backend-app-platform-admin" },
@@ -7425,12 +7510,14 @@ name = "tigrbl-identity-oauth"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/deprecated/tigrbl-identity-oauth" }
 dependencies = [
+    { name = "tigrbl-auth-backend-app-core" },
     { name = "tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-identity-server" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "tigrbl-auth-backend-app-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-server", specifier = "==0.4.0.dev2" },
 ]
@@ -7603,22 +7690,6 @@ dependencies = [
     { name = "tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-auth-protocol-oidc" },
     { name = "tigrbl-auth-release-certification" },
-    { name = "tigrbl-auth-router-admin-gate" },
-    { name = "tigrbl-auth-router-oauth-authorization" },
-    { name = "tigrbl-auth-router-oauth-authorization-server-metadata" },
-    { name = "tigrbl-auth-router-oauth-device-authorization" },
-    { name = "tigrbl-auth-router-oauth-introspection" },
-    { name = "tigrbl-auth-router-oauth-par" },
-    { name = "tigrbl-auth-router-oauth-protected-resource-metadata" },
-    { name = "tigrbl-auth-router-oauth-registration" },
-    { name = "tigrbl-auth-router-oauth-revocation" },
-    { name = "tigrbl-auth-router-oauth-token" },
-    { name = "tigrbl-auth-router-oauth-token-exchange" },
-    { name = "tigrbl-auth-router-oidc-discovery" },
-    { name = "tigrbl-auth-router-oidc-logout" },
-    { name = "tigrbl-auth-router-oidc-userinfo" },
-    { name = "tigrbl-auth-router-resource-validation-metadata" },
-    { name = "tigrbl-auth-router-session-login" },
     { name = "tigrbl-authorization-request-staging-capability" },
     { name = "tigrbl-client-registration-capability" },
     { name = "tigrbl-client-secret-authentication-capability" },
@@ -7652,22 +7723,6 @@ requires-dist = [
     { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-oidc", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-release-certification", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-auth-router-admin-gate", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-auth-router-oauth-authorization", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-auth-router-oauth-authorization-server-metadata", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-auth-router-oauth-device-authorization", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-auth-router-oauth-introspection", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-auth-router-oauth-par", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-auth-router-oauth-protected-resource-metadata", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-auth-router-oauth-registration", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-auth-router-oauth-revocation", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-auth-router-oauth-token", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-auth-router-oauth-token-exchange", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-auth-router-oidc-discovery", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-auth-router-oidc-logout", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-auth-router-oidc-userinfo", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-auth-router-resource-validation-metadata", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-auth-router-session-login", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authorization-request-staging-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-client-registration-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-client-secret-authentication-capability", specifier = "==0.4.0.dev2" },

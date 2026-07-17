@@ -1,6 +1,6 @@
 import pytest
 from sqlalchemy import text
-from tigrbl_identity_server.routers.surface import surface_api
+from tigrbl_auth_backend_app_core.surfaces import surface_api
 from tigrbl_identity_runtime.engine_resolver import resolve_api_provider
 
 

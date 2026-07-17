@@ -398,6 +398,7 @@ dependencies = [
     "tigrbl-auth-router-oauth-par==0.4.0.dev2",
     "tigrbl-auth-router-oauth-registration==0.4.0.dev2",
     "tigrbl-auth-router-oauth-token==0.4.0.dev2",
+    "tigrbl-auth-backend-app-core==0.4.0.dev2",
     "tigrbl-auth-backend-app-developer==0.4.0.dev2",
     "tigrbl-auth-backend-app-my-account==0.4.0.dev2",
     "tigrbl-auth-backend-app-platform-admin==0.4.0.dev2",
@@ -899,6 +900,7 @@ tigrbl-auth-router-oidc-discovery = { path = "pkgs/80-routers/tigrbl-auth-router
 tigrbl-auth-router-oauth-authorization-server-metadata = { path = "pkgs/80-routers/tigrbl-auth-router-oauth-authorization-server-metadata", editable = true }
 tigrbl-auth-router-oauth-protected-resource-metadata = { path = "pkgs/80-routers/tigrbl-auth-router-oauth-protected-resource-metadata", editable = true }
 tigrbl-auth-router-resource-validation-metadata = { path = "pkgs/80-routers/tigrbl-auth-router-resource-validation-metadata", editable = true }
+tigrbl-auth-backend-app-core = { path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-core", editable = true }
 tigrbl-auth-backend-app-developer = { path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-developer", editable = true }
 tigrbl-auth-backend-app-my-account = { path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-my-account", editable = true }
 tigrbl-auth-backend-app-platform-admin = { path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-platform-admin", editable = true }

@@ -83,8 +83,7 @@ def test_facade_t0_public_surfaces_and_entrypoint_manifest_are_importable() -> N
         compat = importlib.import_module("tigrbl_auth.compat")
 
         assert facade.__file__ and "pkgs" in facade.__file__
-        assert "app" in compat.STABLE_ENTRYPOINTS
-        assert compat.STABLE_ENTRYPOINTS["app"].package == "tigrbl-identity-server"
+        assert "app" not in compat.STABLE_ENTRYPOINTS
         assert compat.STABLE_ENTRYPOINTS["TigrblAuthPlugin"].module == "tigrbl_auth_plugin"
         assert compat.STABLE_ENTRYPOINTS["TigrblAuthPlugin"].package == "tigrbl-auth-plugin"
         assert compat.STABLE_ENTRYPOINTS["plugin_install"].module == "tigrbl_auth_plugin"
@@ -104,11 +103,10 @@ def test_facade_t1_legacy_imports_are_stable_and_lazy() -> None:
             plugin_module = importlib.import_module("tigrbl_auth.plugin")
             cli_module = importlib.import_module("tigrbl_auth.cli")
 
-        assert sorted(app_module.__all__) == ["app", "build_app", "build_application_runtime_plan"]
-        assert "build_gateway" in gateway_module.__all__
+        assert app_module.__all__ == ["build_application_runtime_plan"]
+        assert "build_gateway" not in gateway_module.__all__
         assert "install" in plugin_module.__all__
         assert "main" in cli_module.__all__
-        assert repr(app_module.app).startswith("<LazyCompatEntrypoint")
         assert any("compatibility facade" in str(item.message) for item in captured)
 
 

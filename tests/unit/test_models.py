@@ -161,7 +161,7 @@ class TestCredentialServiceKeyModel:
 
     def test_service_key_schema_uses_service_identity_id(self):
         """Ensure CredentialServiceKey API schema exposes correct fields."""
-        from tigrbl_identity_server.surfaces import AdminRouter
+        from tigrbl_auth_backend_app_core.surfaces import AdminRouter
 
         create_schema = AdminRouter.schemas.CredentialServiceKey.create.in_.model_json_schema()
         create_fields = AdminRouter.schemas.CredentialServiceKey.create.in_.model_fields

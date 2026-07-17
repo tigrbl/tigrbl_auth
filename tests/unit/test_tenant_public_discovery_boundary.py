@@ -18,7 +18,7 @@ for src in sorted((ROOT / "pkgs").glob("**/src"), reverse=True):
 
 import tigrbl_identity_principals as principals  # noqa: E402
 
-from tigrbl_auth.api.app import build_app  # noqa: E402
+from tigrbl_auth_backend_app_core import build_app  # noqa: E402
 from tigrbl_auth.cli.artifacts import build_openapi_contract, deployment_from_options, write_discovery_artifacts  # noqa: E402
 from tigrbl_identity_storage_runtime.operator_store import OperationContext  # noqa: E402
 from tigrbl_identity_storage_runtime.resource_service import create_resource, generate_key_record, publish_jwks_document  # noqa: E402

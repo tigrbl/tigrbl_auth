@@ -6,7 +6,7 @@ from uuid import uuid4
 import pytest
 
 from tigrbl_auth.config.deployment import resolve_deployment
-import tigrbl_identity_server.introspection_surface as introspection_module
+import tigrbl_auth_backend_app_core.surfaces.introspection_surface as introspection_module
 from tigrbl_auth.standards.oauth2.resource_verifier_contract import build_protected_resource_verifier_contract
 from tigrbl_auth_protocol_oauth.standards.protected_resource_metadata import (
     build_protected_resource_metadata,

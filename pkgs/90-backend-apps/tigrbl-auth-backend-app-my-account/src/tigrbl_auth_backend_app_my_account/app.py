@@ -5,7 +5,7 @@ from __future__ import annotations
 import os
 from typing import TYPE_CHECKING, Any, Awaitable, Callable
 
-from tigrbl_auth.backend_apps import build_product_app
+from tigrbl_auth_backend_app_core import build_product_app
 from tigrbl_auth_backend_app_my_account.contract import MY_ACCOUNT_BACKEND_APP_CONTRACT
 from tigrbl_auth.runtime import LazyASGIApplication
 from tigrbl_auth_backend_app_my_account.openapi import patch_my_account_openapi

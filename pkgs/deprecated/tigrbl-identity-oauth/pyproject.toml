@@ -35,6 +35,7 @@ classifiers = [
 ]
 
 dependencies = [
+    "tigrbl-auth-backend-app-core==0.4.0.dev2",
     "tigrbl-auth-protocol-oauth==0.4.0.dev2",
     "tigrbl-identity-server==0.4.0.dev2",
 ]

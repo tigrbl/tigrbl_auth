@@ -10,7 +10,7 @@ import pytest
 from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tigrbl_auth.app import app
+from tigrbl_auth_backend_app_public import app
 from tigrbl_auth.crypto import hash_pw
 from tigrbl_auth.tables import Tenant, User
 from tigrbl_identity_storage_runtime.operator_store import OperationContext

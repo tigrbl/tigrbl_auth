@@ -9,7 +9,7 @@ from tigrbl_identity_runtime.deployment import deployment_from_app
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_storage_runtime.engine import get_db
 
-from .userinfo_runtime import first_user_by_filters, userinfo
+from tigrbl_identity_server.userinfo_runtime import first_user_by_filters, userinfo
 
 
 router = build_userinfo_router(userinfo_request=userinfo, get_db=get_db)

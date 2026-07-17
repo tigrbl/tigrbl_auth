@@ -7,7 +7,7 @@ from tigrbl_auth_router_oauth_token_exchange import (
 )
 from tigrbl_identity_runtime.settings import settings
 
-from .token_exchange_runtime import token_exchange
+from tigrbl_identity_server.token_exchange_runtime import token_exchange
 
 
 router = build_token_exchange_router(token_exchange_request=token_exchange)

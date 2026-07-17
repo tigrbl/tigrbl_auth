@@ -8,15 +8,6 @@ from typing import Any, AsyncIterator
 from .engine import ENGINE
 
 
-def _resolve_api_provider(api: Any) -> Any:
-    from tigrbl.engine import resolver as engine_resolver
-
-    try:
-        return engine_resolver.resolve_provider(api=api)
-    except TypeError:
-        return engine_resolver.resolve_provider(router=api)
-
-
 def _resolve_default_provider() -> Any:
     from tigrbl.engine import resolver as engine_resolver
 
@@ -24,18 +15,6 @@ def _resolve_default_provider() -> Any:
 
 
 def resolve_storage_provider() -> Any:
-    for module_name, attr_name in (
-        ("tigrbl_auth.api.surfaces", "surface_api"),
-        ("tigrbl_auth.app", "app"),
-    ):
-        try:
-            module = __import__(module_name, fromlist=[attr_name])
-            api = getattr(module, attr_name)
-            provider = _resolve_api_provider(api)
-            if provider is not None:
-                return provider
-        except Exception:
-            pass
     try:
         provider = _resolve_default_provider()
         if provider is not None:

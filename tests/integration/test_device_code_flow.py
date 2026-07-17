@@ -5,7 +5,7 @@ from http import HTTPStatus as status
 from httpx import ASGITransport, AsyncClient
 from uuid import uuid4
 
-from tigrbl_auth.api.app import build_app
+from tigrbl_auth_backend_app_core import build_app
 from tigrbl_auth.config.deployment import resolve_deployment
 from tigrbl_auth.db import get_db as legacy_get_db
 from tigrbl_identity_jose.key_management import hash_pw

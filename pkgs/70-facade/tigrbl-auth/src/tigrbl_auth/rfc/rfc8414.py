@@ -8,9 +8,6 @@ from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import (
     RFC8414_SPEC_URL,
     describe,
 )
-from tigrbl_identity_server.authorization_server_metadata_surface import (
-    include_rfc8414,
-)
 
 __all__ = [
     "ISSUER",
@@ -19,5 +16,4 @@ __all__ = [
     "RFC8414_METADATA_PATH",
     "RFC8414_SPEC_URL",
     "describe",
-    "include_rfc8414",
 ]

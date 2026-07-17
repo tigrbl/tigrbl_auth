@@ -2,7 +2,7 @@ import pytest_asyncio
 
 import asyncio
 
-from tigrbl_identity_server.surfaces import AdminRouter, PublicRouter
+from tigrbl_auth_backend_app_core.surfaces import AdminRouter, PublicRouter
 
 ORM_MODELS = [
     "Tenant",

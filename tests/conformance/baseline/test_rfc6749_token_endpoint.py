@@ -8,7 +8,7 @@ from unittest.mock import AsyncMock
 
 from tigrbl_identity_storage_runtime.engine import get_db
 from tigrbl import TigrblApp
-from tigrbl_identity_server.auth_flows import router
+from tigrbl_auth_backend_app_core.surfaces.auth_flows import router
 from tigrbl_identity_runtime.deployment import resolve_deployment
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher

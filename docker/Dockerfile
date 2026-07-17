@@ -28,4 +28,4 @@ ENV \
     REDIS_HOST="" \
     REDIS_PASSWORD=""
 
-CMD ["python", "-m", "uvicorn", "tigrbl_auth.app:app", "--host", "0.0.0.0", "--port", "8000", "--log-level", "info", "--proxy-headers"]
+CMD ["python", "-m", "uvicorn", "tigrbl_auth_backend_app_public:app", "--host", "0.0.0.0", "--port", "8000", "--log-level", "info", "--proxy-headers"]

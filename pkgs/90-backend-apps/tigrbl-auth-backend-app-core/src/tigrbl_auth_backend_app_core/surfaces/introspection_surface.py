@@ -38,9 +38,13 @@ from tigrbl_identity_storage_runtime.ops.common import (
     first_handler_record,
     read_handler_record,
 )
-from tigrbl_client_secret_authentication_capability import ClientSecretAuthenticationCapability
+from tigrbl_client_secret_authentication_capability import (
+    ClientSecretAuthenticationCapability,
+)
 
-from .security.token_introspection import build_rfc7662_introspection_service
+from tigrbl_identity_server.security.token_introspection import (
+    build_rfc7662_introspection_service,
+)
 
 
 DEFAULT_TOKEN_ENDPOINT_AUTH_METHOD = "client_secret_basic"

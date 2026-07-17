@@ -12,14 +12,14 @@ import pytest
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tigrbl_auth.api.app import build_app
-from tigrbl_auth.api.surfaces import TABLE_RESOURCES, admin_resource_path_prefixes
-from tigrbl_auth.api.surfaces import surface_api as composed_surface_api
+from tigrbl_auth_backend_app_core import build_app
+from tigrbl_auth_backend_app_core.surfaces import TABLE_RESOURCES, admin_resource_path_prefixes
+from tigrbl_auth_backend_app_core.surfaces import surface_api as composed_surface_api
 from tigrbl_auth.config.deployment import DEFAULT_VALUES, resolve_deployment
 from tigrbl_auth.crypto import hash_pw
 from tigrbl_auth.db import get_db as legacy_get_db
 from tigrbl_auth.tables import Tenant, User
-from tigrbl_identity_server.surfaces import AdminRouter
+from tigrbl_auth_backend_app_core.surfaces import AdminRouter
 from tigrbl_auth.runtime.engine_resolver import (
     register_api_provider,
     resolve_api_provider,

@@ -18,7 +18,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from tigrbl_identity_server.api.app import build_app
 from tigrbl_identity_cli.cli.certification_evidence import (
     environment_identity_ready,
     install_evidence_ready,

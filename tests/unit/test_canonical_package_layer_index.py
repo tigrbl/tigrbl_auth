@@ -80,7 +80,7 @@ def test_dependency_rules_cover_every_layer_and_reject_upward_edges() -> None:
     assert dependency_allowed("90-backend-apps", "80-routers", policy)
 
 
-def test_package_exceptions_are_explicit_and_path_classification_is_authoritative() -> None:
+def test_package_exceptions_are_eliminated_and_path_classification_is_authoritative() -> None:
     policy = load_layer_policy(ROOT / "pkgs" / "layers.toml")
 
     assert classify_layer(ROOT / "pkgs" / "80-routers" / "example", policy) == "80-routers"
@@ -91,13 +91,21 @@ def test_package_exceptions_are_explicit_and_path_classification_is_authoritativ
         "80-routers",
         policy,
     )
-    assert package_dependency_allowed(
+    assert not package_dependency_allowed(
         "tigrbl-identity-server",
         "60-runtime",
         "tigrbl-auth-router-session-login",
         "80-routers",
         policy,
     )
+    assert package_dependency_allowed(
+        "tigrbl-auth-backend-app-core",
+        "90-backend-apps",
+        "tigrbl-auth-router-session-login",
+        "80-routers",
+        policy,
+    )
+    assert policy.dependency_exceptions == ()
     assert not package_dependency_allowed(
         "new-runtime", "60-runtime", "new-router", "80-routers", policy
     )

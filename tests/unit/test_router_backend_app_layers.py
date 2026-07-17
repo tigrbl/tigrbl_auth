@@ -16,7 +16,7 @@ def test_router_and_backend_app_families_are_explicit() -> None:
     apps = [package for package in packages if package.layer == "90-backend-apps"]
 
     assert len(routers) == 17
-    assert len(apps) == 7
+    assert len(apps) == 8
     assert all(
         package.distribution.startswith("tigrbl-auth-router-") for package in routers
     )
@@ -59,7 +59,12 @@ def test_each_backend_app_closes_over_a_router_surface() -> None:
 def test_backend_app_contracts_match_router_dependencies() -> None:
     packages = discover_packages(ROOT)
     distributions = {package.distribution: package for package in packages}
-    apps = [package for package in packages if package.layer == "90-backend-apps"]
+    apps = [
+        package
+        for package in packages
+        if package.layer == "90-backend-apps"
+        and package.distribution != "tigrbl-auth-backend-app-core"
+    ]
 
     for app in apps:
         assert len(app.import_roots) == 1, app.distribution

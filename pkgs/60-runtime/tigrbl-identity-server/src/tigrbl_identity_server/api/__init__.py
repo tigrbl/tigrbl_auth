@@ -1,5 +1,11 @@
-"""Identity server API compatibility exports."""
+"""Carrier-neutral identity runtime API exports."""
 
-from __future__ import annotations
+from .app import build_application_runtime_plan
+from .lifecycle import AssemblyFactory, SurfaceInitializer, register_lifecycle
 
-from .surfaces import *
+__all__ = [
+    "AssemblyFactory",
+    "SurfaceInitializer",
+    "build_application_runtime_plan",
+    "register_lifecycle",
+]

@@ -3229,7 +3229,7 @@ claims:
   targets:
   - AuthZEN Authorization API 1.0
   required_flags: []
-  source: tigrbl_identity_server.advanced_protocols:include_advanced_protocols
+  source: tigrbl_auth_backend_app_core.surfaces.advanced_protocols:include_advanced_protocols
 - id: route:account-authorized-apps
   feature_id: route:account-authorized-apps
   kind: public-route
@@ -3328,7 +3328,7 @@ claims:
   - RFC 9711
   - RATS
   required_flags: []
-  source: tigrbl_identity_server.advanced_protocols:include_advanced_protocols
+  source: tigrbl_auth_backend_app_core.surfaces.advanced_protocols:include_advanced_protocols
 - id: route:authorize
   feature_id: route:authorize
   kind: public-route
@@ -3359,7 +3359,7 @@ claims:
   targets:
   - OID4VCI 1.0
   required_flags: []
-  source: tigrbl_identity_server.advanced_protocols:include_advanced_protocols
+  source: tigrbl_auth_backend_app_core.surfaces.advanced_protocols:include_advanced_protocols
 - id: route:device-authorization
   feature_id: route:device-authorization
   kind: public-route
@@ -3381,7 +3381,7 @@ claims:
   targets:
   - RFC 9635
   required_flags: []
-  source: tigrbl_identity_server.advanced_protocols:include_advanced_protocols
+  source: tigrbl_auth_backend_app_core.surfaces.advanced_protocols:include_advanced_protocols
 - id: route:introspect
   feature_id: route:introspect
   kind: public-route
@@ -3437,7 +3437,7 @@ claims:
   - RFC 9700
   required_flags:
   - enable_rfc9126
-  source: tigrbl_identity_server.par_surface:include_par_endpoint
+  source: tigrbl_auth_backend_app_core.surfaces.par_surface:include_par_endpoint
 - id: route:presentation-verify
   feature_id: route:presentation-verify
   kind: public-route
@@ -3447,7 +3447,7 @@ claims:
   targets:
   - OID4VP 1.0
   required_flags: []
-  source: tigrbl_identity_server.advanced_protocols:include_advanced_protocols
+  source: tigrbl_auth_backend_app_core.surfaces.advanced_protocols:include_advanced_protocols
 - id: route:realms-realm-slug-well-known-jwks-json
   feature_id: route:realms-realm-slug-well-known-jwks-json
   kind: public-route
@@ -3487,7 +3487,7 @@ claims:
   - OIDC RP-Initiated Logout
   required_flags:
   - enable_rfc7591
-  source: tigrbl_identity_server.client_registration_surface:include_client_registration_endpoint
+  source: tigrbl_auth_backend_app_core.surfaces.client_registration_surface:include_client_registration_endpoint
 - id: route:register-client-id
   feature_id: route:register-client-id
   kind: public-route
@@ -3500,7 +3500,7 @@ claims:
   - OIDC RP-Initiated Logout
   required_flags:
   - enable_rfc7592
-  source: tigrbl_identity_server.client_registration_surface:include_client_registration_endpoint
+  source: tigrbl_auth_backend_app_core.surfaces.client_registration_surface:include_client_registration_endpoint
 - id: route:revoke
   feature_id: route:revoke
   kind: public-route
@@ -3521,7 +3521,7 @@ claims:
   targets:
   - RFC 8417
   required_flags: []
-  source: tigrbl_identity_server.advanced_protocols:include_advanced_protocols
+  source: tigrbl_auth_backend_app_core.surfaces.advanced_protocols:include_advanced_protocols
 - id: route:standards
   feature_id: route:standards
   kind: public-route
@@ -3530,7 +3530,7 @@ claims:
   scope: core
   targets: []
   required_flags: []
-  source: tigrbl_identity_server.standards_manifest:include_standards_manifest
+  source: tigrbl_auth_backend_app_core.surfaces.standards_manifest:include_standards_manifest
 - id: route:tenants-tenant-slug-well-known-jwks-json
   feature_id: route:tenants-tenant-slug-well-known-jwks-json
   kind: public-route

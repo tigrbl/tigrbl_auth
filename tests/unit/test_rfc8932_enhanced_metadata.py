@@ -9,7 +9,7 @@ import pytest
 from http import HTTPStatus as status
 from httpx import ASGITransport, AsyncClient
 
-from tigrbl_auth.app import app
+from tigrbl_auth_backend_app_public import app
 from tigrbl_auth.rfc.rfc8932 import (
     RFC8932_SPEC_URL,
     include_rfc8932,

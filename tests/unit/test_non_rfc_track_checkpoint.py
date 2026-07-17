@@ -4,7 +4,7 @@ import json
 from http import HTTPStatus
 from pathlib import Path
 
-from tigrbl_auth.app import _package_default_profile
+from tigrbl_auth_backend_app_public.app import _package_default_profile
 from tigrbl_auth.cli.artifacts import build_effective_claims_manifest, deployment_from_options
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -20,11 +20,12 @@ def test_package_default_profile_uses_production_when_global_profile_is_baseline
     assert _package_default_profile() == 'production'
 
 
-def test_effective_claims_include_baseline_openrpc_contract() -> None:
-    deployment = deployment_from_options(profile='production', plugin_mode='mixed')
-    manifest = build_effective_claims_manifest(ROOT, deployment, profile_label='production-test')
-    claims = manifest['claim_set']['claims']
-    assert any(item['target'] == 'OpenRPC 1.4.x admin/control-plane contract' for item in claims)
+def test_effective_claims_exclude_retired_openrpc_contract() -> None:
+    deployment = deployment_from_options(profile="production", plugin_mode="mixed")
+    manifest = build_effective_claims_manifest(ROOT, deployment, profile_label="production-test")
+    targets = {item["target"] for item in manifest["claim_set"]["claims"]}
+    assert "OpenRPC 1.4.x admin/control-plane contract" not in targets
+    assert "OpenAPI 3.1 / 3.2 compatible public contract" in targets
 
 
 def test_non_rfc_status_report_tracks_zero_scope_discrepancies() -> None:

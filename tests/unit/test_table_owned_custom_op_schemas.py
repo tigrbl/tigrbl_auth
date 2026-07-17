@@ -91,7 +91,7 @@ def test_storage_package_has_no_openapi_schema_registry() -> None:
 def test_protocol_schema_owner_covers_mounted_token_component() -> None:
     from tigrbl_auth_protocol_oauth.schemas import TokenPair
     from tigrbl_identity_runtime.deployment import resolve_deployment
-    from tigrbl_identity_server.surfaces import build_public_router
+    from tigrbl_auth_backend_app_core.surfaces import build_public_router
 
     surface_api = build_public_router(
         deployment=resolve_deployment(plugin_mode="mixed")

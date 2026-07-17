@@ -8,6 +8,7 @@ from tigrbl_identity_contracts.capabilities import (
     CapabilityOperation,
     ProtocolCapabilityRequirement,
 )
+from tigrbl_identity_server.api import runtime_assembly as server_runtime_assembly
 from tigrbl_identity_runtime import (
     CapabilityFactory,
     CapabilityRegistry,
@@ -189,3 +190,32 @@ def test_request_scoped_factory_rejects_definition_and_operation_drift() -> None
         wrong_definition.materialize("example.processing")
     with pytest.raises(NotImplementedError, match="did not bind"):
         missing_operation.materialize("example.processing")
+
+@pytest.mark.asyncio
+async def test_server_runtime_assembly_async_uses_event_loop_safe_jwt_provider(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    token_coder = object()
+
+    async def async_default(*args: object, **kwargs: object) -> object:
+        return token_coder
+
+    def build_with_provider(
+        settings_obj: object,
+        *,
+        token_coder: object,
+    ) -> object:
+        return token_coder
+
+    monkeypatch.setattr(server_runtime_assembly.JWTCoder, "async_default", async_default)
+    monkeypatch.setattr(
+        server_runtime_assembly,
+        "_build_server_runtime_assembly",
+        build_with_provider,
+    )
+
+    assembly = await server_runtime_assembly.build_server_runtime_assembly_async(
+        object()
+    )
+
+    assert assembly is token_coder

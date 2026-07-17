@@ -5,7 +5,7 @@ from __future__ import annotations
 import os
 from typing import TYPE_CHECKING
 
-from tigrbl_auth.backend_apps import build_product_app
+from tigrbl_auth_backend_app_core import build_product_app
 from tigrbl_auth_backend_app_resource_validation.contract import (
     RESOURCE_VALIDATION_BACKEND_APP_CONTRACT,
 )
@@ -13,7 +13,7 @@ from tigrbl_auth.runtime import LazyASGIApplication
 from tigrbl_auth_backend_app_resource_validation.openapi import (
     patch_resource_validation_openapi,
 )
-from tigrbl_identity_server.resource_validation_metadata_surface import (
+from tigrbl_auth_backend_app_core.surfaces.resource_validation_metadata_surface import (
     include_resource_validation_metadata,
 )
 
