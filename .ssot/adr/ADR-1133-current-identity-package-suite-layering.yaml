@@ -8,53 +8,54 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "The identity package suite is governed by dependency layer and exported-surface ownership, not by an operator package category."
+summary: "The package suite is governed by the following canonical dependency layers:"
 supersedes:
   - "adr:1096"
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Supersede the first-wave package split with current layer and exported-surface ownership."
     at: "2026-06-22T07:42:04Z"
-  -
+    note: "Supersede the first-wave package split with current layer and exported-surface ownership."
     status: "accepted"
-    note: "Supersedes ADR-1096 first-wave package split wording."
+  -
     at: "2026-06-22T07:50:45Z"
+    note: "Supersedes ADR-1096 first-wave package split wording."
+    status: "accepted"
 references: []
 body: |-
   ## Decision
   
-  The identity package suite is governed by dependency layer and exported-surface ownership, not by an operator package category.
+  The package suite is governed by the following canonical dependency layers:
   
-  The canonical package layers are:
+  - `00-primitives`: dependency-light identifiers, enums, digests, nonces, media types, protocol tags, clocks, and URI helpers.
+  - `01-storage`: durable table schemas, migrations, and persistence-owned records.
+  - `02-contracts`: protocol-neutral semantic models, errors, enums, ports, and cross-package contracts.
+  - `05-bases`: reusable behavioral bases and mixins shared by multiple implementations.
+  - `10-concrete`: deterministic concrete objects and algorithms with no filesystem, network, database, HSM, or runtime configuration access.
+  - `20-providers`: environment-backed cryptography, key, attestation, metadata, certificate, and remote-service providers.
+  - `30-storage-runtime`: `make`, `define`, `derive`, and factory aliases over layer-01 tables, including hooks and atomic durable operations; it does not introduce a repository abstraction layer.
+  - `40-capabilities`: independently mountable and composable feature packages that bind semantic operations, delegate to injected implementations, and report their effective capability set.
+  - `50-protocols`: versioned standards/protocol packages that own revision history, feature selection, compatibility and migration paths, and mappings to layer-40 capabilities.
+  - `60-runtime`: process/runtime composition, settings, CLI/tooling, and lifecycle assembly below HTTP carriers.
+  - `70-facade`: stable public and compatibility exports that do not own router or backend-app implementation.
+  - `80-routers`: reusable Tigrbl HTTP carrier packages over lower-layer operations and schemas.
+  - `90-backend-apps`: deployable product applications that compose routers, tables, operations, hooks, middleware, configuration, startup, and shutdown behavior.
+  - `100-uix-core`: reusable browser/client primitives and framework-neutral UIX services.
+  - `105-ui`: product-specific UI applications built from UIX core.
+  - `110-examples`: terminal example packages that may consume production and UI layers but are never production dependencies.
+  - `120-tests`: terminal verification packages and suites that may consume all prior layers but are never production or example dependencies.
+  - `deprecated`: compatibility-only packages with explicit migration destinations.
   
-  - 00 primitives: reusable identity primitives with no suite dependencies.
-  - 01 contracts: public wire, manifest, release, and trust-domain contracts.
-  - 05 bases: reusable base abstractions for trust-domain implementations.
-  - 10 concrete: concrete shared implementations over primitives and contracts.
-  - 20 storage: canonical tables, migrations, persistence helpers, and table-owned operations.
-  - 30 providers: pluggable cryptographic, JOSE, certificate, proof, and trust providers.
-  - 40 capabilities: domain capability packages for administration, principals, credentials, and authorization policy.
-  - 50 protocols: OAuth, OIDC, resource-server, and relying-party protocol behavior.
-  - 60 runtime/tooling: server composition, runtime helpers, CLI, authoring tools, testkit, and release certification.
-  - 70 facade: the `tigrbl-auth` compatibility/public facade.
-  - 80 APIs: deployable product API frontdoors.
+  `pkgs/layers.toml` is the canonical machine-readable layer index. Package manifests, Python imports, TypeScript workspace dependencies, editable workspace sources, and active path references MUST agree with it.
   
-  Public downstream shape is defined by exported package APIs, product API frontdoors, generated contracts, and facade exports. A package name containing `operator` does not create an authority class, a role family, a storage model, or a public exported surface category. Legacy tooling package names may remain temporarily for compatibility, but new SSOT guidance must describe repository tooling, CLI, release certification, administration, or product API surfaces by their actual function.
+  ## Dependency direction
+  
+  Production dependencies flow downward. Layer 90 MAY depend on layer 80; layer 80 MUST NOT depend on layer 90. Layer 105 MAY depend on layer 100; layer 100 MUST NOT depend on layer 105. Layers 110 and 120 are terminal and MUST NOT be dependencies of production packages. Explicit temporary exceptions MUST identify both distributions, remain executable-policy visible, and be removed by owner migration.
   
   ## Rationale
   
-  ADR-1096 froze an early first-wave package split. The repository has since moved to a layered package layout with separate primitives, contracts, concrete implementations, storage, providers, capabilities, protocols, runtime/tooling, facade, and API frontdoors.
-  
-  Keeping the old first-wave wording makes downstream consumers expect a public operator surface and keeps storage, CLI, and product API responsibilities blurred. ADR-1132 already retired that vocabulary for public exported surfaces.
+  The former taxonomy conflated storage with contracts, providers with storage runtime, routers with deployable apps, and examples/tests with production layers. The numbered layout now communicates ownership, closure, and allowed dependency direction directly.
   
   ## Consequences
   
-  New ADRs, SPECs, package READMEs, and generated contract descriptions must name the actual exported surface or package layer.
-  
-  Storage remains the canonical owner of tables and table-owned persistent behavior.
-  
-  CLI and repository tooling may orchestrate storage-backed operations, portability, bootstrap, release, and evidence workflows, but they do not create a distinct public operator model.
-  
-  Deprecated packages and compatibility facades may continue to exist while import guards and documentation describe the current layer taxonomy.
+  New packages, ADRs, SPECs, READMEs, workspace sources, and generated reports MUST use these names and meanings. Router/app and UIX-core/product-UI closure are separately testable boundaries. Storage runtime uses the Tigrbl table-operation model rather than a generic repository pattern. Protocol packages may aggregate capability reports but do not own lower-layer capability implementations.

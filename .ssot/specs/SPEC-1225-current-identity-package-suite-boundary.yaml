@@ -8,66 +8,51 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification governs the current identity package-suite layering, public exported surface ownership, and import-direction vocabulary for `tigrbl_auth`."
+summary: "This specification governs the canonical package-layer index, dependency direction, workspace-source consistency, active-path hygiene, and exported-surface ownership for `tigrbl_auth`."
 supersedes:
   - "spc:1099"
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Define current package-suite layers without a public operator surface category."
     at: "2026-06-22T07:42:04Z"
-  -
+    note: "Define current package-suite layers without a public operator surface category."
     status: "accepted"
-    note: "Supersedes SPEC-1099 first-wave package suite boundary wording."
+  -
     at: "2026-06-22T07:50:45Z"
+    note: "Supersedes SPEC-1099 first-wave package suite boundary wording."
+    status: "accepted"
 references: []
 body: |-
   ## Scope
   
-  This specification governs the current identity package-suite layering, public exported surface ownership, and import-direction vocabulary for `tigrbl_auth`.
+  This specification governs the canonical package-layer index, dependency direction, workspace-source consistency, active-path hygiene, and exported-surface ownership for `tigrbl_auth`.
   
-  ## Package Layers
+  ## Canonical layers
   
-  The governed package suite MUST be described by layer and function:
+  Implementations MUST use the exact layer ids and meanings recorded by `pkgs/layers.toml`: `00-primitives`, `01-storage`, `02-contracts`, `05-bases`, `10-concrete`, `20-providers`, `30-storage-runtime`, `40-capabilities`, `50-protocols`, `60-runtime`, `70-facade`, `80-routers`, `90-backend-apps`, `100-uix-core`, `105-ui`, `110-examples`, `120-tests`, and `deprecated`.
   
-  - `pkgs/00-primitives`: primitive identity types and helpers.
-  - `pkgs/01-contracts`: public wire, manifest, trust, and release contracts.
-  - `pkgs/05-bases`: reusable trust-domain base abstractions.
-  - `pkgs/10-concrete`: concrete shared implementations.
-  - `pkgs/20-storage`: canonical identity storage tables, migrations, repository helpers, and table-owned operations.
-  - `pkgs/30-providers`: cryptographic, JOSE, certificate, proof, and trust providers.
-  - `pkgs/40-capabilities`: administration, principal, credential, and authorization capability packages.
-  - `pkgs/50-protocols`: OAuth, OIDC, resource-server, and relying-party protocol packages.
-  - `pkgs/60-runtime`: runtime assembly, CLI, authoring, testkit, release certification, and compatibility tooling.
-  - `pkgs/70-facade`: `tigrbl-auth` public and compatibility facade.
-  - `pkgs/80-routers`: deployable product API frontdoors.
+  Each Python distribution MUST resolve to exactly one layer from its path. Each JavaScript workspace MUST resolve to its declared JavaScript layer. Root editable sources and the lockfile MUST use the same canonical package paths.
   
-  ## Requirements
+  ## Dependency requirements
   
-  Public downstream shape MUST be defined by exported package APIs, facade exports, generated contracts, product API frontdoors, and documented package boundaries.
+  Production package dependencies and source imports MUST follow the allowed target-layer rules in `pkgs/layers.toml`. Package-specific exceptions MUST be explicit, test-visible, justified, and removable; a new unlisted upward edge MUST fail closed.
   
-  SSOT documents MUST NOT define a public operator surface, operator authority class, operator state model, or operator action family.
+  Backend apps MAY depend on routers. Routers MUST NOT depend on backend apps. Product UI packages MAY depend on UIX core. UIX core MUST NOT depend on product UI packages. Examples and tests are terminal: production packages MUST NOT depend on either, and examples MUST NOT depend on tests.
   
-  CLI and repository tooling descriptions MUST use function-specific wording such as CLI, repository tooling, release certification, portability, bootstrap, migration, evidence, or administration.
+  Layer 30 MUST express durable table behavior with `make`, `define`, `derive`, hooks, and factory aliases over layer-01 owners rather than introducing a parallel repository abstraction. Layer 40 packages MUST expose reportable capability operations. Layer 50 packages MUST own protocol/specification version history, versioned feature selection, backwards-compatibility rules, and migration paths where available.
   
-  Storage package documentation MUST describe canonical table and table-owned operation ownership. It MUST NOT advertise operator state storage as a public storage-package responsibility.
+  Layer 60 and layer 70 MUST NOT own or import layer-80 router implementations. HTTP route composition belongs to layer 90. Layer 80 owns carrier mapping only and MUST delegate semantic operations to lower layers.
   
-  Generated CLI contracts MUST be regenerated from metadata source after vocabulary changes. SPEC-1000 and SPEC-1001 MUST NOT be hand-edited as standalone truth.
+  ## Active path hygiene
   
-  Import-direction policy MUST preserve lower-layer independence from higher-layer runtime, facade, API, and testkit code. Compatibility packages may remain while marked as compatibility tooling rather than canonical public surface categories.
+  Active source, tests, docs, workflows, manifests, reports, and workspace configuration MUST NOT reference retired layer names or moved package paths. Historical migration artifacts may retain old paths only when explicitly classified as history.
   
   ## Verification
   
-  Verification MUST include:
-  
-  - static package metadata and README vocabulary checks;
-  - CLI metadata source checks for retired operator-shape vocabulary;
-  - generated CLI contract and reference documentation synchronization checks;
-  - ADR/SPEC vocabulary checks for active repo-local documents; and
-  - package import-layering checks.
+  Verification MUST include the canonical layer-index test, universal Python manifest/import validation, router/backend-app direction checks, UIX-core/product-UI direction checks, terminal example/test checks, editable workspace-source consistency checks, and active path-hygiene checks. T2 claims require fail-closed negative cases for forbidden and undeclared dependency edges.
 spec_kind: "normative"
 adr_ids:
   - "adr:1133"
   - "adr:1132"
   - "adr:1101"
+  - "adr:1136"
