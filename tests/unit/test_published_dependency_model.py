@@ -188,7 +188,6 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-authority-graph-concrete==0.4.0.dev2" in facade_dependencies
     assert "tigrbl-authz-policy-concrete==0.4.0.dev2" not in facade_dependencies
     assert "tigrbl-authz-policy-rules-concrete==0.4.0.dev2" in facade_dependencies
-    assert "tigrbl-authz-policy-invariant-registry==0.4.0.dev2" in facade_dependencies
     assert facade_dependencies.isdisjoint(removed_helper_pins)
     assert "pqcrypto==0.4.0" in pqc_provider_dependencies
     assert "pqcrypto==0.4.0" not in admin_gate_dependencies
@@ -248,7 +247,11 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "pqcrypto==0.4.0" not in authz_dependencies
     assert "tigrbl-authz-policy-concrete==0.4.0.dev2" not in authz_dependencies
     assert "tigrbl-authz-policy-rules-concrete==0.4.0.dev2" in authz_dependencies
-    assert "tigrbl-identity-storage==0.4.0.dev2" in authz_dependencies
+    assert "tigrbl-identity-storage==0.4.0.dev2" not in authz_dependencies
+    assert "tigrbl-identity-runtime==0.4.0.dev2" not in authz_dependencies
+    assert "tigrbl-access-governance-capability==0.4.0.dev2" in authz_dependencies
+    assert "tigrbl-policy-administration-capability==0.4.0.dev2" in authz_dependencies
+    assert "tigrbl-policy-assurance-capability==0.4.0.dev2" in authz_dependencies
     assert authz_dependencies.isdisjoint(removed_helper_pins)
     assert "tigrbl-authz-policy==0.4.0.dev2" not in storage_dependencies
     assert "tigrbl-auth-protocol-oauth==0.4.0.dev2" not in storage_runtime_dependencies

@@ -63,7 +63,7 @@ def test_monorepo_release_discovers_split_packages() -> None:
     assert packages["tigrbl-identity-storage-runtime"].path.as_posix() == (
         "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime"
     )
-    assert packages["tigrbl-authz-policy"].path.as_posix() == "pkgs/20-providers/tigrbl-authz-policy"
+    assert packages["tigrbl-authz-policy"].path.as_posix() == "pkgs/60-runtime/tigrbl-authz-policy"
     assert packages["tigrbl-identity-admin"].path.as_posix() == "pkgs/60-runtime/tigrbl-identity-admin"
     assert packages["tigrbl-authz-resource-server"].path.as_posix() == "pkgs/50-protocols/tigrbl-authz-resource-server"
 
@@ -189,11 +189,9 @@ def test_monorepo_release_resolves_local_dependency_closure() -> None:
         "tigrbl-security-proof-pkce",
         "tigrbl-security-signing-pqc",
         "tigrbl-security-trust-contracts",
-        "tigrbl-certificate-bases",
         "tigrbl-claim-bases",
         "tigrbl-protected-artifact-bases",
         "tigrbl-signing-bases",
-        "tigrbl-token-introspection-bases",
     }.issubset(dependency_names)
 
     facade_dependency_names = {
@@ -202,7 +200,6 @@ def test_monorepo_release_resolves_local_dependency_closure() -> None:
     assert "tigrbl-auth-protocol-oauth" in facade_dependency_names
     assert "tigrbl-identity-author" in facade_dependency_names
     assert "tigrbl-identity-storage" in facade_dependency_names
-    assert "tigrbl-authz-policy-invariant-registry" in facade_dependency_names
     assert "tigrbl-security-token-jwks-cache" in facade_dependency_names
 
     api_dependency_names = {

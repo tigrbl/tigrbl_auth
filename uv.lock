@@ -2640,7 +2640,6 @@ dependencies = [
     { name = "tigrbl-authz-policy-attributes-mapping" },
     { name = "tigrbl-authz-policy-combiner-default" },
     { name = "tigrbl-authz-policy-evaluators-default" },
-    { name = "tigrbl-authz-policy-invariant-registry" },
     { name = "tigrbl-authz-policy-obligations-concrete" },
     { name = "tigrbl-authz-policy-rules-concrete" },
     { name = "tigrbl-authz-resource-server" },
@@ -2676,7 +2675,6 @@ requires-dist = [
     { name = "tigrbl-authz-policy-attributes-mapping", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy-combiner-default", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy-evaluators-default", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-authz-policy-invariant-registry", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy-obligations-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy-rules-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-resource-server", specifier = "==0.4.0.dev2" },
@@ -4165,7 +4163,7 @@ requires-dist = [
     { name = "tigrbl-authorization-provenance-concrete", editable = "pkgs/10-concrete/tigrbl-authorization-provenance-concrete" },
     { name = "tigrbl-authorization-request-staging-capability", editable = "pkgs/40-capabilities/tigrbl-authorization-request-staging-capability" },
     { name = "tigrbl-authorization-scope-set-matcher-concrete", editable = "pkgs/10-concrete/tigrbl-authorization-scope-set-matcher-concrete" },
-    { name = "tigrbl-authz-policy", editable = "pkgs/20-providers/tigrbl-authz-policy" },
+    { name = "tigrbl-authz-policy", editable = "pkgs/60-runtime/tigrbl-authz-policy" },
     { name = "tigrbl-authz-policy-admin-gate", editable = "pkgs/deprecated/tigrbl-authz-policy-admin-gate" },
     { name = "tigrbl-authz-policy-attributes-mapping", editable = "pkgs/10-concrete/tigrbl-authz-policy-attributes-mapping" },
     { name = "tigrbl-authz-policy-authority-derivation-graph", editable = "pkgs/30-storage-runtime/tigrbl-authz-policy-authority-derivation-graph" },
@@ -4867,7 +4865,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-authz-policy"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/20-providers/tigrbl-authz-policy" }
+source = { editable = "pkgs/60-runtime/tigrbl-authz-policy" }
 dependencies = [
     { name = "tigrbl" },
     { name = "tigrbl-access-governance-capability" },
@@ -4875,10 +4873,6 @@ dependencies = [
     { name = "tigrbl-authz-policy-rules-concrete" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core" },
-    { name = "tigrbl-identity-credentials-concrete" },
-    { name = "tigrbl-identity-identities-concrete" },
-    { name = "tigrbl-identity-runtime" },
-    { name = "tigrbl-identity-storage" },
     { name = "tigrbl-policy-administration-capability" },
     { name = "tigrbl-policy-assurance-capability" },
     { name = "tigrbl-policy-decision-engine-default" },
@@ -4894,10 +4888,6 @@ requires-dist = [
     { name = "tigrbl-authz-policy-rules-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-credentials-concrete", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-identities-concrete", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-policy-administration-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-policy-assurance-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-policy-decision-engine-default", specifier = "==0.4.0.dev2" },
@@ -5056,7 +5046,6 @@ source = { editable = "pkgs/50-protocols/tigrbl-authz-resource-server" }
 dependencies = [
     { name = "tigrbl-auth-protocol-jwt" },
     { name = "tigrbl-auth-protocol-oauth" },
-    { name = "tigrbl-authz-policy" },
     { name = "tigrbl-authz-resource-server-verifier" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-protected-resource-authorization-capability" },
@@ -5069,7 +5058,6 @@ dependencies = [
 requires-dist = [
     { name = "tigrbl-auth-protocol-jwt", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-authz-policy", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-resource-server-verifier", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-protected-resource-authorization-capability", specifier = "==0.4.0.dev2" },
@@ -7491,6 +7479,7 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/deprecated/tigrbl-identity-policy" }
 dependencies = [
     { name = "tigrbl-auth-release-certification" },
+    { name = "tigrbl-auth-router-admin-gate" },
     { name = "tigrbl-authz-policy" },
     { name = "tigrbl-authz-policy-invariant-registry" },
 ]
@@ -7498,6 +7487,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "tigrbl-auth-release-certification", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-router-admin-gate", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy-invariant-registry", specifier = "==0.4.0.dev2" },
 ]

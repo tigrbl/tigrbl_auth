@@ -169,26 +169,6 @@ consumer_layer = "deprecated"
 allowed_target_layers = ["00-primitives","01-storage","02-contracts","05-bases","10-concrete","20-providers","30-storage-runtime","40-capabilities","50-protocols","60-runtime","70-facade","80-routers","90-backend-apps","100-uix-core","105-ui","110-examples","120-tests","deprecated"]
 
 [[dependency_exceptions]]
-consumer = "tigrbl-authz-policy"
-target = "tigrbl-access-governance-capability"
-reason = "legacy reverse dependency pending owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-authz-policy"
-target = "tigrbl-policy-administration-capability"
-reason = "legacy reverse dependency pending owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-authz-policy"
-target = "tigrbl-policy-assurance-capability"
-reason = "legacy reverse dependency pending owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-authz-policy"
-target = "tigrbl-identity-runtime"
-reason = "legacy reverse dependency pending owner-layer migration"
-
-[[dependency_exceptions]]
 consumer = "tigrbl-identity-jose"
 target = "tigrbl-key-administration-capability"
 reason = "legacy reverse dependency pending owner-layer migration"
@@ -282,31 +262,6 @@ reason = "legacy reverse dependency pending owner-layer migration"
 consumer = "tigrbl-identity-server"
 target = "tigrbl-auth-router-admin-gate"
 reason = "legacy reverse dependency pending owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-auth"
-target = "tigrbl-authz-policy-invariant-registry"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-authz-policy"
-target = "tigrbl-auth-router-admin-gate"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-authz-policy"
-target = "tigrbl-identity-credentials-concrete"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-authz-policy"
-target = "tigrbl-identity-identities-concrete"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-authz-policy"
-target = "tigrbl-identity-storage"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
 
 [[dependency_exceptions]]
 consumer = "tigrbl-identity-jose"
