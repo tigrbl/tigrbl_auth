@@ -56,7 +56,7 @@ For `tigrbl_auth`, the target product shape should be:
 | Principal facts and memberships | `tigrbl-identity-principals` |
 | Credential and assurance facts | `tigrbl-authn-credentials` |
 | OAuth scopes and resource indicators | `tigrbl-auth-protocol-oauth` |
-| Resource-server grants and enforcement | `tigrbl-authz-resource-server`, `tigrbl-auth-api-resource-validation` |
+| Resource-server grants and enforcement | `tigrbl-authz-resource-server`, `tigrbl-auth-backend-app-resource-validation` |
 | Canonical role/policy/grant/relationship tables | `tigrbl-identity-storage` |
 | Admin lifecycle | Platform-admin, tenant-admin, developer, and service-admin frontdoors as scoped Management API slices |
 | Policy UI | Platform-admin and tenant-admin UIX first, developer/service-admin UIX where delegated |

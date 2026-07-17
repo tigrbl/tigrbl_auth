@@ -1,7 +1,7 @@
 # Additional API + UIX Opportunity Map
 
-**Status:** Product-surface research and prioritization  
-**Prepared:** July 11, 2026  
+**Status:** Product-surface research and prioritization<br>
+**Prepared:** July 11, 2026<br>
 **Scope:** Missing horizontal API/UIX pairings, emerging token and credential services, authenticators, proof-of-possession, certificates, attestation, and vertical opportunities
 
 ## 1. Executive Recommendation
@@ -63,7 +63,7 @@ The gap is therefore often productization and lifecycle ownership, not a total a
 
 ### 1. Authenticator Lifecycle API + Authenticator Center UIX
 
-**Proposed packages:** `tigrbl-auth-api-authenticators` + `@tigrbl-auth/authenticator-center-uix`
+**Proposed packages:** `tigrbl-auth-router-authenticators` + `@tigrbl-auth/authenticator-center-uix`
 
 **Why it is missing:** WebAuthn, OTP, recovery code, federated OIDC, mTLS, password, session, and proof authenticators exist as packages, but no dedicated surface owns enrollment, binding, step-up eligibility, recovery, replacement, assurance, or revocation.
 
@@ -79,7 +79,7 @@ The gap is therefore often productization and lifecycle ownership, not a total a
 
 ### 2. Authorization Decision API + Policy Studio UIX
 
-**Proposed packages:** `tigrbl-auth-api-authorization` + `@tigrbl-auth/policy-studio-uix`
+**Proposed packages:** `tigrbl-auth-router-authorization` + `@tigrbl-auth/policy-studio-uix`
 
 **Why it is missing:** policy and graph machinery is deep, but policy administration remains scattered or legacy-simulated. A standard PDP surface would make the authorization layer productizable.
 
@@ -95,7 +95,7 @@ The gap is therefore often productization and lifecycle ownership, not a total a
 
 ### 3. Federation and Trust API + Federation Console UIX
 
-**Proposed packages:** `tigrbl-auth-api-federation` + `@tigrbl-auth/federation-uix`
+**Proposed packages:** `tigrbl-auth-router-federation` + `@tigrbl-auth/federation-uix`
 
 **Why it is missing:** federation registry and trust graphs exist, while the tracked OpenID Federation feature remains absent/future and no UI owns trust-anchor lifecycle.
 
@@ -111,7 +111,7 @@ The gap is therefore often productization and lifecycle ownership, not a total a
 
 ### 4. Provisioning API + Directory Sync UIX
 
-**Proposed packages:** `tigrbl-auth-api-provisioning` + `@tigrbl-auth/provisioning-uix`
+**Proposed packages:** `tigrbl-auth-router-provisioning` + `@tigrbl-auth/provisioning-uix`
 
 **Why it is missing:** SCIM is recorded as implemented in SSOT, but there is no dedicated SCIM service-provider/client surface, mapping studio, synchronization monitor, or reconciliation UIX.
 
@@ -127,7 +127,7 @@ The gap is therefore often productization and lifecycle ownership, not a total a
 
 ### 5. Security Signals API + Continuous Access UIX
 
-**Proposed packages:** `tigrbl-auth-api-security-signals` + `@tigrbl-auth/security-signals-uix`
+**Proposed packages:** `tigrbl-auth-router-security-signals` + `@tigrbl-auth/security-signals-uix`
 
 **Why it is missing:** security event token and anomaly foundations exist, but no product surface owns SET/SSF/CAEP/RISC transmitter/receiver configuration or continuous-access outcomes.
 
@@ -145,7 +145,7 @@ The gap is therefore often productization and lifecycle ownership, not a total a
 
 ### 6. Workload Trust API + Workload Identity UIX
 
-**Proposed packages:** `tigrbl-auth-api-workload-trust` + `@tigrbl-auth/workload-trust-uix`
+**Proposed packages:** `tigrbl-auth-router-workload-trust` + `@tigrbl-auth/workload-trust-uix`
 
 **Why separate from Service Admin:** Service Admin manages service records and long-lived credentials. Workload Trust should own runtime-attested, short-lived identities and trust domains.
 
@@ -159,7 +159,7 @@ The gap is therefore often productization and lifecycle ownership, not a total a
 
 ### 7. Certificate Lifecycle API + Certificate Operations UIX
 
-**Proposed packages:** `tigrbl-auth-api-certificates` + `@tigrbl-auth/certificate-ops-uix`
+**Proposed packages:** `tigrbl-auth-router-certificates` + `@tigrbl-auth/certificate-ops-uix`
 
 **Why it is missing:** certificate/CSR and mTLS abstractions exist, but certificate enrollment, issuance, renewal, chain, revocation, inventory, and policy lack a product owner.
 
@@ -175,7 +175,7 @@ The gap is therefore often productization and lifecycle ownership, not a total a
 
 ### 8. Attestation API + Attestation Studio UIX
 
-**Proposed packages:** `tigrbl-auth-api-attestation` + `@tigrbl-auth/attestation-uix`
+**Proposed packages:** `tigrbl-auth-router-attestation` + `@tigrbl-auth/attestation-uix`
 
 **Why it is missing:** attestation provider bases, evidence contracts, key-attestation resources, and planned workload-attestation models exist without an appraisal product surface.
 
@@ -191,7 +191,7 @@ The gap is therefore often productization and lifecycle ownership, not a total a
 
 ### 9. Token Service API + Token Studio UIX
 
-**Proposed packages:** `tigrbl-auth-api-token-service` + `@tigrbl-auth/token-studio-uix`
+**Proposed packages:** `tigrbl-auth-router-token-service` + `@tigrbl-auth/token-studio-uix`
 
 **Why it is missing:** token issuance, exchange, introspection, revocation, DPoP, mTLS, device flow, resource indicators, and GNAP exist across protocol/runtime packages, but no dedicated operator surface owns token profiles and exchange policy.
 
@@ -220,7 +220,7 @@ These should be profiles over reviewed JOSE/COSE/OAuth/GNAP primitives—not a n
 
 ### 10. Credential Issuer API + Issuer Studio UIX
 
-**Proposed packages:** `tigrbl-auth-api-credential-issuer` + `@tigrbl-auth/credential-issuer-uix`
+**Proposed packages:** `tigrbl-auth-router-credential-issuer` + `@tigrbl-auth/credential-issuer-uix`
 
 **API scope:** OpenID4VCI; credential offers; authorization/pre-authorized flows; deferred/batch issuance; credential configurations; schema/status; key binding; SD-JWT VC, W3C VC, and mdoc profiles.
 
@@ -230,7 +230,7 @@ These should be profiles over reviewed JOSE/COSE/OAuth/GNAP primitives—not a n
 
 ### 11. Credential Wallet API + Wallet UIX/SDK
 
-**Proposed packages:** `tigrbl-auth-api-wallet` + `@tigrbl-auth/wallet-uix` and wallet SDK
+**Proposed packages:** `tigrbl-auth-router-wallet` + `@tigrbl-auth/wallet-uix` and wallet SDK
 
 **API scope:** credential storage/custody abstraction; OpenID4VCI client; OpenID4VP response; holder binding; presentation consent; backup/recovery; multi-device; status refresh.
 
@@ -240,7 +240,7 @@ These should be profiles over reviewed JOSE/COSE/OAuth/GNAP primitives—not a n
 
 ### 12. Credential Verifier API + Verification Console UIX
 
-**Proposed packages:** `tigrbl-auth-api-credential-verifier` + `@tigrbl-auth/credential-verifier-uix`
+**Proposed packages:** `tigrbl-auth-router-credential-verifier` + `@tigrbl-auth/credential-verifier-uix`
 
 **API scope:** OpenID4VP requests/responses; DCQL/presentation requirements; trust lists; issuer/schema/status verification; SD-JWT VC selective disclosure; mdoc; W3C VC; holder binding; transaction data; policy decisions.
 

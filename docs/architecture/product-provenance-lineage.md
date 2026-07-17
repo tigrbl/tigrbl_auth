@@ -25,17 +25,17 @@ for one migration window.
 | 10 | `tigrbl-identity-storage` | Backend package | Persistence backing for identity/admin/runtime state. |
 | 11 | `tigrbl-identity-server` | Backend package | Provider app assembly. |
 | 12 | `tigrbl-identity-runtime` | Backend package | Runtime/profile/runner configuration. |
-| 13 | `tigrbl-auth-api-public` | API front door | First deployable public identity/provider surface. |
-| 14 | `tigrbl-auth-api-resource-validation` | API front door | Read-only validation/metadata surface derived from public issuer state. |
-| 15 | `tigrbl-auth-api-platform-admin` | API front door | Platform control plane: creates tenants and assigns authority. |
-| 16 | `tigrbl-auth-api-tenant-admin` | API front door | Tenant-scoped administration derived from platform-created tenants. |
-| 17 | `tigrbl-auth-api-developer` | API front door | Developer app/client registration inside a tenant context. |
-| 18 | `tigrbl-auth-api-service-admin` | API front door | Service/workload identity administration inside a tenant/platform context. |
-| 19 | `@tigrbl-auth/public-uix` | UIX app | Public hosted-login UI over `public-api`. |
-| 20 | `@tigrbl-auth/platform-admin-uix` | UIX app | Platform owner/admin/operator UI over `platform-admin-api`. |
-| 21 | `@tigrbl-auth/tenant-admin-uix` | UIX app | Tenant owner/admin UI over `tenant-admin-api`. |
-| 22 | `@tigrbl-auth/developer-uix` | UIX app | Tenant developer UI over `developer-api`. |
-| 23 | `@tigrbl-auth/service-admin-uix` | UIX app | Service/workload admin UI over `service-admin-api`. |
+| 13 | `tigrbl-auth-backend-app-public` | API front door | First deployable public identity/provider surface. |
+| 14 | `tigrbl-auth-backend-app-resource-validation` | API front door | Read-only validation/metadata surface derived from public issuer state. |
+| 15 | `tigrbl-auth-backend-app-platform-admin` | API front door | Platform control plane: creates tenants and assigns authority. |
+| 16 | `tigrbl-auth-backend-app-tenant-admin` | API front door | Tenant-scoped administration derived from platform-created tenants. |
+| 17 | `tigrbl-auth-backend-app-developer` | API front door | Developer app/client registration inside a tenant context. |
+| 18 | `tigrbl-auth-backend-app-service-admin` | API front door | Service/workload identity administration inside a tenant/platform context. |
+| 19 | `@tigrbl-auth/public-uix` | UIX app | Public hosted-login UI over `public-app`. |
+| 20 | `@tigrbl-auth/platform-admin-uix` | UIX app | Platform owner/admin/operator UI over `platform-admin-app`. |
+| 21 | `@tigrbl-auth/tenant-admin-uix` | UIX app | Tenant owner/admin UI over `tenant-admin-app`. |
+| 22 | `@tigrbl-auth/developer-uix` | UIX app | Tenant developer UI over `developer-app`. |
+| 23 | `@tigrbl-auth/service-admin-uix` | UIX app | Service/workload admin UI over `service-admin-app`. |
 | 24 | `tigrbl-auth-protocol-rp` | Consumer package | App-side relying-party integration consuming the public issuer. |
 | 25 | `@tigrbl-auth/rp` | Consumer UI/package | Browser/client RP integration consuming public issuer behavior. |
 | 26 | `tigrbl-authz-resource-server` | Consumer package | Protected API token-validation integration consuming resource-validation metadata. |

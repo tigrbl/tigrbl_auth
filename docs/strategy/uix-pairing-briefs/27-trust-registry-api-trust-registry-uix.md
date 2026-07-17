@@ -1,8 +1,8 @@
 # Trust Registry API + Trust Registry UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-api-trust-registry` + `@tigrbl-auth/trust-registry-uix`  
-**Opportunity-map item:** 17  
-**Primary buyers:** ecosystem operators, governments, healthcare exchanges, education consortia, supply-chain networks, and open-finance programs  
+**Pairing:** `tigrbl-auth-router-trust-registry` + `@tigrbl-auth/trust-registry-uix`<br>
+**Opportunity-map item:** 17<br>
+**Primary buyers:** ecosystem operators, governments, healthcare exchanges, education consortia, supply-chain networks, and open-finance programs<br>
 **Status:** proposed shared governance surface; federation, credential, certificate, attestation, policy, and residency foundations exist
 
 ## 1. Product Decision

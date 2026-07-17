@@ -18,7 +18,7 @@
 | BND-002 | `ADR-0017-plane-modularity.md` | module-boundary-resolution, wrapper_hygiene_scan | gate-00-structure, gate-15-boundary-enforcement, gate-25-wrapper-hygiene |
 | BND-003 | `ADR-0005-standards-vs-extensions.md` | claims_linter, extension-quarantine-check, boundary-import-scan | gate-05-governance, gate-15-boundary-enforcement |
 | BND-004 | `ADR-0004-no-fastapi-no-starlette.md` | framework_leakage_scan | gate-10-static, gate-15-boundary-enforcement |
-| BND-005 | `ADR-0014-tigrbl-public-api-only-composition.md` | framework_leakage_scan, boundary-import-scan | gate-10-static, gate-15-boundary-enforcement |
+| BND-005 | `ADR-0014-tigrbl-public-app-only-composition.md` | framework_leakage_scan, boundary-import-scan | gate-10-static, gate-15-boundary-enforcement |
 | BND-006 | `ADR-0019-boundary-enforcement-as-code.md` | wrapper_hygiene_scan, certified_core_wrapper_count_zero | gate-15-boundary-enforcement, gate-25-wrapper-hygiene |
 | BND-007 | `ADR-0011-evidence-model-and-tier-promotion.md` | evidence_gate, tier3_claims_have_evidence_refs | gate-40-evidence, gate-45-evidence-peer |
 | BND-008 | `ADR-0012-independent-peer-claims.md` | peer_gate, tier4_claims_have_peer_refs | gate-45-evidence-peer, gate-90-release |

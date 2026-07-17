@@ -53,7 +53,7 @@ options:
 ```text
 usage: tigrbl-auth bootstrap [-h] [--env-file ENV_FILE] [--profile PROFILE]
                              [--tenant TENANT] [--issuer ISSUER]
-                             [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                             [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                              [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                              [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -77,7 +77,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -102,7 +102,7 @@ options:
 usage: tigrbl-auth bootstrap apply [-h] [--env-file ENV_FILE]
                                    [--profile PROFILE] [--tenant TENANT]
                                    [--issuer ISSUER]
-                                   [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                   [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                    [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                    [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -122,7 +122,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -155,7 +155,7 @@ options:
 usage: tigrbl-auth bootstrap manifest [-h] [--env-file ENV_FILE]
                                       [--profile PROFILE] [--tenant TENANT]
                                       [--issuer ISSUER]
-                                      [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                      [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                       [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                       [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                       [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -174,7 +174,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -203,7 +203,7 @@ options:
 usage: tigrbl-auth bootstrap status [-h] [--env-file ENV_FILE]
                                     [--profile PROFILE] [--tenant TENANT]
                                     [--issuer ISSUER]
-                                    [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                    [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                     [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                     [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                     [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -222,7 +222,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -251,7 +251,7 @@ options:
 usage: tigrbl-auth bootstrap verify [-h] [--env-file ENV_FILE]
                                     [--profile PROFILE] [--tenant TENANT]
                                     [--issuer ISSUER]
-                                    [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                    [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                     [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                     [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                     [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -270,7 +270,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -298,7 +298,7 @@ options:
 ```text
 usage: tigrbl-auth claims [-h] [--env-file ENV_FILE] [--profile PROFILE]
                           [--tenant TENANT] [--issuer ISSUER]
-                          [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                          [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                           [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                           [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -321,7 +321,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -345,7 +345,7 @@ options:
 ```text
 usage: tigrbl-auth claims lint [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
-                               [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                               [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -363,7 +363,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -391,7 +391,7 @@ options:
 ```text
 usage: tigrbl-auth claims show [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
-                               [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                               [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -408,7 +408,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -435,7 +435,7 @@ options:
 usage: tigrbl-auth claims status [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
-                                 [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                 [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -453,7 +453,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -481,7 +481,7 @@ options:
 ```text
 usage: tigrbl-auth client [-h] [--env-file ENV_FILE] [--profile PROFILE]
                           [--tenant TENANT] [--issuer ISSUER]
-                          [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                          [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                           [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                           [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -510,7 +510,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -535,7 +535,7 @@ options:
 usage: tigrbl-auth client create [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
-                                 [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                 [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -557,7 +557,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -594,7 +594,7 @@ options:
 usage: tigrbl-auth client delete [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
-                                 [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                 [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -612,7 +612,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -642,7 +642,7 @@ options:
 usage: tigrbl-auth client disable [-h] [--env-file ENV_FILE]
                                   [--profile PROFILE] [--tenant TENANT]
                                   [--issuer ISSUER]
-                                  [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                   [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -661,7 +661,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -691,7 +691,7 @@ options:
 usage: tigrbl-auth client enable [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
-                                 [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                 [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -709,7 +709,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -738,7 +738,7 @@ options:
 ```text
 usage: tigrbl-auth client get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                               [--tenant TENANT] [--issuer ISSUER]
-                              [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                              [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                               [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                               [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                               [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -755,7 +755,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -782,7 +782,7 @@ options:
 ```text
 usage: tigrbl-auth client list [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
-                               [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                               [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -803,7 +803,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -836,7 +836,7 @@ options:
 usage: tigrbl-auth client rotate-secret [-h] [--env-file ENV_FILE]
                                         [--profile PROFILE] [--tenant TENANT]
                                         [--issuer ISSUER]
-                                        [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                        [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                         [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                         [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -855,7 +855,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -885,7 +885,7 @@ options:
 usage: tigrbl-auth client update [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
-                                 [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                 [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -906,7 +906,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -942,7 +942,7 @@ options:
 ```text
 usage: tigrbl-auth discovery [-h] [--env-file ENV_FILE] [--profile PROFILE]
                              [--tenant TENANT] [--issuer ISSUER]
-                             [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                             [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                              [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                              [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -966,7 +966,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -991,7 +991,7 @@ options:
 usage: tigrbl-auth discovery diff [-h] [--env-file ENV_FILE]
                                   [--profile PROFILE] [--tenant TENANT]
                                   [--issuer ISSUER]
-                                  [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                   [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -1010,7 +1010,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -1040,7 +1040,7 @@ options:
 usage: tigrbl-auth discovery publish [-h] [--env-file ENV_FILE]
                                      [--profile PROFILE] [--tenant TENANT]
                                      [--issuer ISSUER]
-                                     [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                     [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                      [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                      [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                      [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -1059,7 +1059,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -1089,7 +1089,7 @@ options:
 usage: tigrbl-auth discovery show [-h] [--env-file ENV_FILE]
                                   [--profile PROFILE] [--tenant TENANT]
                                   [--issuer ISSUER]
-                                  [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                   [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -1107,7 +1107,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -1134,7 +1134,7 @@ options:
 usage: tigrbl-auth discovery validate [-h] [--env-file ENV_FILE]
                                       [--profile PROFILE] [--tenant TENANT]
                                       [--issuer ISSUER]
-                                      [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                      [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                       [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                       [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                       [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -1153,7 +1153,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -1181,7 +1181,7 @@ options:
 ```text
 usage: tigrbl-auth doctor [-h] [--env-file ENV_FILE] [--profile PROFILE]
                           [--tenant TENANT] [--issuer ISSUER]
-                          [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                          [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                           [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                           [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -1198,7 +1198,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -1226,7 +1226,7 @@ options:
 ```text
 usage: tigrbl-auth evidence [-h] [--env-file ENV_FILE] [--profile PROFILE]
                             [--tenant TENANT] [--issuer ISSUER]
-                            [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                            [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                             [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                             [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                             [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -1252,7 +1252,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -1277,7 +1277,7 @@ options:
 usage: tigrbl-auth evidence bundle [-h] [--env-file ENV_FILE]
                                    [--profile PROFILE] [--tenant TENANT]
                                    [--issuer ISSUER]
-                                   [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                   [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                    [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                    [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -1296,7 +1296,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -1326,7 +1326,7 @@ options:
 usage: tigrbl-auth evidence peer-execute [-h] [--env-file ENV_FILE]
                                          [--profile PROFILE] [--tenant TENANT]
                                          [--issuer ISSUER]
-                                         [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                         [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                          [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                          [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                          [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -1347,7 +1347,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -1380,7 +1380,7 @@ options:
 usage: tigrbl-auth evidence peer-status [-h] [--env-file ENV_FILE]
                                         [--profile PROFILE] [--tenant TENANT]
                                         [--issuer ISSUER]
-                                        [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                        [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                         [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                         [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -1399,7 +1399,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -1428,7 +1428,7 @@ options:
 usage: tigrbl-auth evidence status [-h] [--env-file ENV_FILE]
                                    [--profile PROFILE] [--tenant TENANT]
                                    [--issuer ISSUER]
-                                   [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                   [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                    [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                    [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -1447,7 +1447,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -1477,7 +1477,7 @@ options:
 usage: tigrbl-auth evidence verify [-h] [--env-file ENV_FILE]
                                    [--profile PROFILE] [--tenant TENANT]
                                    [--issuer ISSUER]
-                                   [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                   [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                    [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                    [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -1496,7 +1496,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -1524,7 +1524,7 @@ options:
 ```text
 usage: tigrbl-auth export [-h] [--env-file ENV_FILE] [--profile PROFILE]
                           [--tenant TENANT] [--issuer ISSUER]
-                          [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                          [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                           [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                           [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -1547,7 +1547,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -1571,7 +1571,7 @@ options:
 ```text
 usage: tigrbl-auth export run [-h] [--env-file ENV_FILE] [--profile PROFILE]
                               [--tenant TENANT] [--issuer ISSUER]
-                              [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                              [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                               [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                               [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                               [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -1590,7 +1590,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -1624,7 +1624,7 @@ options:
 usage: tigrbl-auth export status [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
-                                 [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                 [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -1641,7 +1641,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -1668,7 +1668,7 @@ options:
 usage: tigrbl-auth export validate [-h] [--env-file ENV_FILE]
                                    [--profile PROFILE] [--tenant TENANT]
                                    [--issuer ISSUER]
-                                   [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                   [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                    [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                    [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -1688,7 +1688,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -1719,7 +1719,7 @@ options:
 ```text
 usage: tigrbl-auth flow [-h] [--env-file ENV_FILE] [--profile PROFILE]
                         [--tenant TENANT] [--issuer ISSUER]
-                        [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                        [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                         [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                         [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -1746,7 +1746,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -1770,7 +1770,7 @@ options:
 ```text
 usage: tigrbl-auth flow create [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
-                               [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                               [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -1791,7 +1791,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -1827,7 +1827,7 @@ options:
 ```text
 usage: tigrbl-auth flow delete [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
-                               [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                               [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -1845,7 +1845,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -1874,7 +1874,7 @@ options:
 ```text
 usage: tigrbl-auth flow disable [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                 [--tenant TENANT] [--issuer ISSUER]
-                                [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                 [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                 [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -1892,7 +1892,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -1921,7 +1921,7 @@ options:
 ```text
 usage: tigrbl-auth flow enable [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
-                               [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                               [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -1939,7 +1939,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -1968,7 +1968,7 @@ options:
 ```text
 usage: tigrbl-auth flow get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                             [--tenant TENANT] [--issuer ISSUER]
-                            [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                            [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                             [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                             [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                             [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -1985,7 +1985,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -2012,7 +2012,7 @@ options:
 ```text
 usage: tigrbl-auth flow list [-h] [--env-file ENV_FILE] [--profile PROFILE]
                              [--tenant TENANT] [--issuer ISSUER]
-                             [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                             [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                              [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                              [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -2032,7 +2032,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -2064,7 +2064,7 @@ options:
 ```text
 usage: tigrbl-auth flow update [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
-                               [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                               [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -2085,7 +2085,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -2121,7 +2121,7 @@ options:
 ```text
 usage: tigrbl-auth gate [-h] [--env-file ENV_FILE] [--profile PROFILE]
                         [--tenant TENANT] [--issuer ISSUER]
-                        [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                        [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                         [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                         [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -2139,7 +2139,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -2168,7 +2168,7 @@ options:
 ```text
 usage: tigrbl-auth identity [-h] [--env-file ENV_FILE] [--profile PROFILE]
                             [--tenant TENANT] [--issuer ISSUER]
-                            [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                            [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                             [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                             [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                             [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -2197,7 +2197,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -2222,7 +2222,7 @@ options:
 usage: tigrbl-auth identity create [-h] [--env-file ENV_FILE]
                                    [--profile PROFILE] [--tenant TENANT]
                                    [--issuer ISSUER]
-                                   [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                   [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                    [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                    [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -2244,7 +2244,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -2281,7 +2281,7 @@ options:
 usage: tigrbl-auth identity delete [-h] [--env-file ENV_FILE]
                                    [--profile PROFILE] [--tenant TENANT]
                                    [--issuer ISSUER]
-                                   [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                   [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                    [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                    [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -2300,7 +2300,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -2329,7 +2329,7 @@ options:
 ```text
 usage: tigrbl-auth identity get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                 [--tenant TENANT] [--issuer ISSUER]
-                                [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                 [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                 [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -2347,7 +2347,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -2375,7 +2375,7 @@ options:
 usage: tigrbl-auth identity list [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
-                                 [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                 [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -2396,7 +2396,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -2429,7 +2429,7 @@ options:
 usage: tigrbl-auth identity lock [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
-                                 [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                 [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -2447,7 +2447,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -2477,7 +2477,7 @@ options:
 usage: tigrbl-auth identity set-password [-h] [--env-file ENV_FILE]
                                          [--profile PROFILE] [--tenant TENANT]
                                          [--issuer ISSUER]
-                                         [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                         [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                          [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                          [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                          [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -2497,7 +2497,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -2530,7 +2530,7 @@ options:
 usage: tigrbl-auth identity unlock [-h] [--env-file ENV_FILE]
                                    [--profile PROFILE] [--tenant TENANT]
                                    [--issuer ISSUER]
-                                   [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                   [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                    [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                    [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -2549,7 +2549,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -2579,7 +2579,7 @@ options:
 usage: tigrbl-auth identity update [-h] [--env-file ENV_FILE]
                                    [--profile PROFILE] [--tenant TENANT]
                                    [--issuer ISSUER]
-                                   [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                   [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                    [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                    [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -2600,7 +2600,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -2636,7 +2636,7 @@ options:
 ```text
 usage: tigrbl-auth import [-h] [--env-file ENV_FILE] [--profile PROFILE]
                           [--tenant TENANT] [--issuer ISSUER]
-                          [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                          [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                           [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                           [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -2659,7 +2659,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -2683,7 +2683,7 @@ options:
 ```text
 usage: tigrbl-auth import run [-h] [--env-file ENV_FILE] [--profile PROFILE]
                               [--tenant TENANT] [--issuer ISSUER]
-                              [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                              [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                               [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                               [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                               [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -2702,7 +2702,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -2735,7 +2735,7 @@ options:
 usage: tigrbl-auth import status [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
-                                 [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                 [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -2752,7 +2752,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -2779,7 +2779,7 @@ options:
 usage: tigrbl-auth import validate [-h] [--env-file ENV_FILE]
                                    [--profile PROFILE] [--tenant TENANT]
                                    [--issuer ISSUER]
-                                   [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                   [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                    [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                    [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -2799,7 +2799,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -2829,7 +2829,7 @@ options:
 ```text
 usage: tigrbl-auth keys [-h] [--env-file ENV_FILE] [--profile PROFILE]
                         [--tenant TENANT] [--issuer ISSUER]
-                        [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                        [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                         [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                         [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -2859,7 +2859,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -2883,7 +2883,7 @@ options:
 ```text
 usage: tigrbl-auth keys delete [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
-                               [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                               [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -2901,7 +2901,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -2930,7 +2930,7 @@ options:
 ```text
 usage: tigrbl-auth keys export [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
-                               [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                               [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -2949,7 +2949,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -2980,7 +2980,7 @@ options:
 usage: tigrbl-auth keys generate [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
-                                 [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                 [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -3002,7 +3002,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -3042,7 +3042,7 @@ options:
 ```text
 usage: tigrbl-auth keys get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                             [--tenant TENANT] [--issuer ISSUER]
-                            [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                            [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                             [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                             [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                             [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -3059,7 +3059,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -3086,7 +3086,7 @@ options:
 ```text
 usage: tigrbl-auth keys import [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
-                               [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                               [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -3106,7 +3106,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -3140,7 +3140,7 @@ options:
 ```text
 usage: tigrbl-auth keys list [-h] [--env-file ENV_FILE] [--profile PROFILE]
                              [--tenant TENANT] [--issuer ISSUER]
-                             [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                             [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                              [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                              [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -3160,7 +3160,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -3193,7 +3193,7 @@ options:
 usage: tigrbl-auth keys publish-jwks [-h] [--env-file ENV_FILE]
                                      [--profile PROFILE] [--tenant TENANT]
                                      [--issuer ISSUER]
-                                     [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                     [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                      [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                      [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                      [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -3213,7 +3213,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -3242,7 +3242,7 @@ options:
 ```text
 usage: tigrbl-auth keys retire [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
-                               [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                               [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -3260,7 +3260,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -3290,7 +3290,7 @@ options:
 ```text
 usage: tigrbl-auth keys rotate [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
-                               [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                               [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -3312,7 +3312,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -3352,7 +3352,7 @@ options:
 ```text
 usage: tigrbl-auth migrate [-h] [--env-file ENV_FILE] [--profile PROFILE]
                            [--tenant TENANT] [--issuer ISSUER]
-                           [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                           [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                            [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                            [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                            [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -3376,7 +3376,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -3401,7 +3401,7 @@ options:
 usage: tigrbl-auth migrate apply [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
-                                 [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                 [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -3420,7 +3420,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -3450,7 +3450,7 @@ options:
 ```text
 usage: tigrbl-auth migrate plan [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                 [--tenant TENANT] [--issuer ISSUER]
-                                [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                 [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                 [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -3467,7 +3467,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -3494,7 +3494,7 @@ options:
 usage: tigrbl-auth migrate status [-h] [--env-file ENV_FILE]
                                   [--profile PROFILE] [--tenant TENANT]
                                   [--issuer ISSUER]
-                                  [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                   [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -3513,7 +3513,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -3542,7 +3542,7 @@ options:
 usage: tigrbl-auth migrate verify [-h] [--env-file ENV_FILE]
                                   [--profile PROFILE] [--tenant TENANT]
                                   [--issuer ISSUER]
-                                  [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                   [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -3561,7 +3561,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -3589,7 +3589,7 @@ options:
 ```text
 usage: tigrbl-auth release [-h] [--env-file ENV_FILE] [--profile PROFILE]
                            [--tenant TENANT] [--issuer ISSUER]
-                           [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                           [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                            [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                            [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                            [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -3614,7 +3614,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -3639,7 +3639,7 @@ options:
 usage: tigrbl-auth release bundle [-h] [--env-file ENV_FILE]
                                   [--profile PROFILE] [--tenant TENANT]
                                   [--issuer ISSUER]
-                                  [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                   [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -3659,7 +3659,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -3690,7 +3690,7 @@ options:
 usage: tigrbl-auth release recertify [-h] [--env-file ENV_FILE]
                                      [--profile PROFILE] [--tenant TENANT]
                                      [--issuer ISSUER]
-                                     [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                     [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                      [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                      [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                      [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -3709,7 +3709,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -3737,7 +3737,7 @@ options:
 ```text
 usage: tigrbl-auth release sign [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                 [--tenant TENANT] [--issuer ISSUER]
-                                [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                 [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                 [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -3756,7 +3756,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -3787,7 +3787,7 @@ options:
 usage: tigrbl-auth release status [-h] [--env-file ENV_FILE]
                                   [--profile PROFILE] [--tenant TENANT]
                                   [--issuer ISSUER]
-                                  [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                   [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -3806,7 +3806,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -3835,7 +3835,7 @@ options:
 usage: tigrbl-auth release verify [-h] [--env-file ENV_FILE]
                                   [--profile PROFILE] [--tenant TENANT]
                                   [--issuer ISSUER]
-                                  [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                   [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -3854,7 +3854,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -3882,7 +3882,7 @@ options:
 ```text
 usage: tigrbl-auth serve [-h] [--env-file ENV_FILE] [--profile PROFILE]
                          [--tenant TENANT] [--issuer ISSUER]
-                         [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                         [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                          [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                          [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                          [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -3922,7 +3922,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -4003,7 +4003,7 @@ options:
 ```text
 usage: tigrbl-auth session [-h] [--env-file ENV_FILE] [--profile PROFILE]
                            [--tenant TENANT] [--issuer ISSUER]
-                           [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                           [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                            [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                            [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                            [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -4027,7 +4027,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -4051,7 +4051,7 @@ options:
 ```text
 usage: tigrbl-auth session get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
-                               [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                               [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -4069,7 +4069,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -4096,7 +4096,7 @@ options:
 ```text
 usage: tigrbl-auth session list [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                 [--tenant TENANT] [--issuer ISSUER]
-                                [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                 [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                 [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -4117,7 +4117,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -4150,7 +4150,7 @@ options:
 usage: tigrbl-auth session revoke [-h] [--env-file ENV_FILE]
                                   [--profile PROFILE] [--tenant TENANT]
                                   [--issuer ISSUER]
-                                  [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                   [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -4169,7 +4169,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -4199,7 +4199,7 @@ options:
 usage: tigrbl-auth session revoke-all [-h] [--env-file ENV_FILE]
                                       [--profile PROFILE] [--tenant TENANT]
                                       [--issuer ISSUER]
-                                      [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                      [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                       [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                       [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                       [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -4219,7 +4219,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -4249,7 +4249,7 @@ options:
 ```text
 usage: tigrbl-auth spec [-h] [--env-file ENV_FILE] [--profile PROFILE]
                         [--tenant TENANT] [--issuer ISSUER]
-                        [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                        [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                         [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                         [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -4273,7 +4273,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -4297,7 +4297,7 @@ options:
 ```text
 usage: tigrbl-auth spec diff [-h] [--env-file ENV_FILE] [--profile PROFILE]
                              [--tenant TENANT] [--issuer ISSUER]
-                             [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                             [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                              [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                              [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -4317,7 +4317,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -4350,7 +4350,7 @@ options:
 usage: tigrbl-auth spec generate [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
-                                 [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                 [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -4369,7 +4369,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -4399,7 +4399,7 @@ options:
 ```text
 usage: tigrbl-auth spec report [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
-                               [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                               [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -4418,7 +4418,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -4449,7 +4449,7 @@ options:
 usage: tigrbl-auth spec validate [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
-                                 [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                 [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -4468,7 +4468,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -4498,7 +4498,7 @@ options:
 ```text
 usage: tigrbl-auth tenant [-h] [--env-file ENV_FILE] [--profile PROFILE]
                           [--tenant TENANT] [--issuer ISSUER]
-                          [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                          [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                           [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                           [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -4525,7 +4525,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -4550,7 +4550,7 @@ options:
 usage: tigrbl-auth tenant create [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
-                                 [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                 [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -4572,7 +4572,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -4609,7 +4609,7 @@ options:
 usage: tigrbl-auth tenant delete [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
-                                 [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                 [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -4627,7 +4627,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -4657,7 +4657,7 @@ options:
 usage: tigrbl-auth tenant disable [-h] [--env-file ENV_FILE]
                                   [--profile PROFILE] [--tenant TENANT]
                                   [--issuer ISSUER]
-                                  [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                   [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -4676,7 +4676,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -4706,7 +4706,7 @@ options:
 usage: tigrbl-auth tenant enable [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
-                                 [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                 [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -4724,7 +4724,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -4753,7 +4753,7 @@ options:
 ```text
 usage: tigrbl-auth tenant get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                               [--tenant TENANT] [--issuer ISSUER]
-                              [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                              [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                               [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                               [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                               [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -4770,7 +4770,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -4797,7 +4797,7 @@ options:
 ```text
 usage: tigrbl-auth tenant list [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
-                               [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                               [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -4818,7 +4818,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -4851,7 +4851,7 @@ options:
 usage: tigrbl-auth tenant update [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
-                                 [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                 [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -4872,7 +4872,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -4908,7 +4908,7 @@ options:
 ```text
 usage: tigrbl-auth token [-h] [--env-file ENV_FILE] [--profile PROFILE]
                          [--tenant TENANT] [--issuer ISSUER]
-                         [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                         [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                          [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                          [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                          [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -4933,7 +4933,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -4958,7 +4958,7 @@ options:
 usage: tigrbl-auth token exchange [-h] [--env-file ENV_FILE]
                                   [--profile PROFILE] [--tenant TENANT]
                                   [--issuer ISSUER]
-                                  [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                   [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -4978,7 +4978,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -5010,7 +5010,7 @@ options:
 ```text
 usage: tigrbl-auth token get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                              [--tenant TENANT] [--issuer ISSUER]
-                             [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                             [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                              [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                              [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -5027,7 +5027,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -5055,7 +5055,7 @@ options:
 usage: tigrbl-auth token introspect [-h] [--env-file ENV_FILE]
                                     [--profile PROFILE] [--tenant TENANT]
                                     [--issuer ISSUER]
-                                    [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                    [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                     [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                     [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                     [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -5073,7 +5073,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -5100,7 +5100,7 @@ options:
 ```text
 usage: tigrbl-auth token list [-h] [--env-file ENV_FILE] [--profile PROFILE]
                               [--tenant TENANT] [--issuer ISSUER]
-                              [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                              [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                               [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                               [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                               [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -5120,7 +5120,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -5152,7 +5152,7 @@ options:
 ```text
 usage: tigrbl-auth token revoke [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                 [--tenant TENANT] [--issuer ISSUER]
-                                [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                                [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                 [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                 [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -5170,7 +5170,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
@@ -5199,7 +5199,7 @@ options:
 ```text
 usage: tigrbl-auth verify [-h] [--env-file ENV_FILE] [--profile PROFILE]
                           [--tenant TENANT] [--issuer ISSUER]
-                          [--surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}]
+                          [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                           [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                           [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
@@ -5217,7 +5217,7 @@ options:
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
+  --surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.

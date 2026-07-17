@@ -1,12 +1,12 @@
 # Provisioning and Directory API + Directory and SCIM Center UIX Requirements Brief
 
-**Proposed pairing:** `tigrbl-auth-api-provisioning` + `@tigrbl-auth/directory-scim-center-uix`  
-**Protocol frontdoor:** tenant-scoped SCIM 2.0 under `/tenants/{tenant_slug}/scim/v2`  
-**Status:** New product surface; contracts, helper behavior, durable projections, principals, memberships, and audit foundations exist  
-**Prepared:** July 11, 2026  
-**Proposed API owner:** `pkgs/80-apis/tigrbl-auth-api-provisioning`  
-**Proposed protocol owner:** `pkgs/50-protocols/tigrbl-identity-scim`  
-**Proposed UIX owner:** `pkgs/95-ui/directory-scim-center-uix`
+**Proposed pairing:** `tigrbl-auth-router-provisioning` + `@tigrbl-auth/directory-scim-center-uix`<br>
+**Protocol frontdoor:** tenant-scoped SCIM 2.0 under `/tenants/{tenant_slug}/scim/v2`<br>
+**Status:** New product surface; contracts, helper behavior, durable projections, principals, memberships, and audit foundations exist<br>
+**Prepared:** July 11, 2026<br>
+**Proposed router owner:** `pkgs/80-routers/tigrbl-auth-router-provisioning`<br>
+**Proposed protocol owner:** `pkgs/50-protocols/tigrbl-identity-scim`<br>
+**Proposed UIX owner:** `pkgs/105-ui/directory-scim-center-uix`
 
 ## 1. Product Decision
 

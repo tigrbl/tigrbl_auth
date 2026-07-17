@@ -51,7 +51,7 @@ It should not own tenant-local day-to-day admin or end-user auth.
 
 ## Repo basis
 
-- platform-relevant portions of current `pkgs/95-ui/admin-uix`
+- platform-relevant portions of current `pkgs/105-ui/admin-uix`
 - current tenant and identity management surfaces
 
 ## Main split rule

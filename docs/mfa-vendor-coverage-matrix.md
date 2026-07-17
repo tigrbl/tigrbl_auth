@@ -52,9 +52,9 @@ For `tigrbl_auth`, the clean product split is:
 | --- | --- |
 | Factor proof material | `tigrbl-authn-credentials` |
 | MFA requirement decisions | `tigrbl-authz-policy` |
-| Challenge/session continuation | `tigrbl-auth-api-public`, `tigrbl-auth-protocol-oauth`, `tigrbl-auth-protocol-oidc` |
+| Challenge/session continuation | `tigrbl-auth-backend-app-public`, `tigrbl-auth-protocol-oauth`, `tigrbl-auth-protocol-oidc` |
 | Factor and challenge storage | `tigrbl-identity-storage` |
-| Tenant policy and support reset | `tigrbl-auth-api-tenant-admin` |
+| Tenant policy and support reset | `tigrbl-auth-backend-app-tenant-admin` |
 | Hosted login MFA UI | `@tigrbl-auth/public-uix` |
 | Assurance claims | `tigrbl-identity-jose`, `tigrbl-auth-protocol-oidc` |
 

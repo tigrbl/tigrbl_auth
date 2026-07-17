@@ -37,7 +37,7 @@ project_tree:
   - pkgs/50-protocols
   - pkgs/60-runtime
   - pkgs/70-facade
-  - pkgs/80-apis
+  - pkgs/80-routers
   required_files:
   - pyproject.toml
   - uv.lock
@@ -52,7 +52,7 @@ project_tree:
   - compliance/targets/project-tree-layout.yaml
   runtime_planes:
     api:
-      path: pkgs/80-apis
+      path: pkgs/80-routers
       ownership: transport
     tables:
       path: pkgs/01-storage

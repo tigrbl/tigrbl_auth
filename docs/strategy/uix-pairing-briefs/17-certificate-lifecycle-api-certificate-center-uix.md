@@ -1,11 +1,11 @@
 # Certificate Lifecycle API + Certificate Center UIX Requirements Brief
 
-**Proposed pairing:** `tigrbl-auth-api-certificates` + `@tigrbl-auth/certificate-center-uix`  
-**Status:** New product surface; certificate DTOs/bases, mTLS credentials, key lifecycle, rotation policy, storage, and JOSE foundations exist  
-**Prepared:** July 11, 2026  
-**Proposed API owner:** `pkgs/80-apis/tigrbl-auth-api-certificates`  
-**Proposed protocol/provider owners:** certificate domain providers plus optional ACME/EST adapters  
-**Proposed UIX owner:** `pkgs/95-ui/certificate-center-uix`
+**Proposed pairing:** `tigrbl-auth-router-certificates` + `@tigrbl-auth/certificate-center-uix`<br>
+**Status:** New product surface; certificate DTOs/bases, mTLS credentials, key lifecycle, rotation policy, storage, and JOSE foundations exist<br>
+**Prepared:** July 11, 2026<br>
+**Proposed router owner:** `pkgs/80-routers/tigrbl-auth-router-certificates`<br>
+**Proposed protocol/provider owners:** certificate domain providers plus optional ACME/EST adapters<br>
+**Proposed UIX owner:** `pkgs/105-ui/certificate-center-uix`
 
 ## 1. Product Decision
 
@@ -513,7 +513,7 @@ Guardrails include false-valid verification, SAN/usage escalation, key leakage, 
 - `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/key_rotation_policy/`
 - `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/key_rotation_event/`
 - key provider/lifecycle, JOSE, attestation, trust-domain, audit, service/workload, OAuth mTLS, and resource-validation packages;
-- `pkgs/95-ui/platform-admin-uix/pages/KeyRotationPage.tsx`;
+- `pkgs/105-ui/platform-admin-uix/pages/KeyRotationPage.tsx`;
 - mTLS, key-rotation, and certificate-credential tests.
 
 ### Standards and primary sources

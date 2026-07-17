@@ -37,7 +37,7 @@ targets:
   quarantine_reason: Implementation is tested internally but no external FIDO conformance or certification claim is made.
   modules:
   - pkgs/50-protocols/tigrbl-auth-protocol-webauthn/src/tigrbl_auth_protocol_webauthn
-  - pkgs/80-apis/tigrbl-auth-api-webauthn/src/tigrbl_auth_api_webauthn
+  - pkgs/80-routers/tigrbl-auth-router-webauthn/src/tigrbl_auth_router_webauthn
 - id: fido2.server-profile
   label: FIDO2 server implementation profile
   title: FIDO2 server requirements and capability mapping

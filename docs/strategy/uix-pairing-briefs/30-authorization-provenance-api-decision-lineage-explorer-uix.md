@@ -1,8 +1,8 @@
 # Authorization Provenance API + Decision Lineage Explorer UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-api-authorization-provenance` + `@tigrbl-auth/decision-lineage-explorer-uix`  
-**Additional opportunity:** Authorization/delegation/sovereignty extension 1  
-**Primary buyers:** security engineering, authorization platform teams, application owners, audit/compliance, incident response, and regulated operations  
+**Pairing:** `tigrbl-auth-router-authorization-provenance` + `@tigrbl-auth/decision-lineage-explorer-uix`<br>
+**Additional opportunity:** Authorization/delegation/sovereignty extension 1<br>
+**Primary buyers:** security engineering, authorization platform teams, application owners, audit/compliance, incident response, and regulated operations<br>
 **Status:** proposed product surface; deterministic trace, replay, policy, authority graph, token persistence, and audit foundations exist
 
 ## 1. Product Decision

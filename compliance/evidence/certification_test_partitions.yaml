@@ -53,22 +53,22 @@ partitions:
   - tests/features/test_t0_tracked_targets.py
   - tests/features/test_tenant_jwks_discovery.py
   - tests/features/test_tenant_jwks_key_administration.py
-  - tests/packages/tigrbl-auth-api-developer/test_developer_api_dev_deployment_proof.py
-  - tests/packages/tigrbl-auth-api-developer/test_developer_api_package.py
-  - tests/packages/tigrbl-auth-api-my-account/test_my_account_api_dev_deployment_proof.py
-  - tests/packages/tigrbl-auth-api-my-account/test_my_account_api_package.py
-  - tests/packages/tigrbl-auth-api-platform-admin/test_platform_admin_api_dev_deployment_proof.py
-  - tests/packages/tigrbl-auth-api-platform-admin/test_platform_admin_api_package.py
-  - tests/packages/tigrbl-auth-api-platform-admin/test_platform_admin_realm_api.py
-  - tests/packages/tigrbl-auth-api-public/test_public_api_dev_deployment_proof.py
-  - tests/packages/tigrbl-auth-api-public/test_public_api_package.py
-  - tests/packages/tigrbl-auth-api-public/test_public_api_realm_issuer.py
-  - tests/packages/tigrbl-auth-api-resource-validation/test_resource_validation_api_dev_deployment_proof.py
-  - tests/packages/tigrbl-auth-api-resource-validation/test_resource_validation_api_package.py
-  - tests/packages/tigrbl-auth-api-resource-validation/test_resource_validation_realm_metadata.py
-  - tests/packages/tigrbl-auth-api-service-admin/test_service_admin_api_package.py
-  - tests/packages/tigrbl-auth-api-tenant-admin/test_tenant_admin_api_dev_deployment_proof.py
-  - tests/packages/tigrbl-auth-api-tenant-admin/test_tenant_admin_api_package.py
+  - tests/packages/tigrbl-auth-backend-app-developer/test_developer_backend_app_dev_deployment_proof.py
+  - tests/packages/tigrbl-auth-backend-app-developer/test_developer_backend_app_package.py
+  - tests/packages/tigrbl-auth-backend-app-my-account/test_my_account_backend_app_dev_deployment_proof.py
+  - tests/packages/tigrbl-auth-backend-app-my-account/test_my_account_backend_app_package.py
+  - tests/packages/tigrbl-auth-backend-app-platform-admin/test_platform_admin_backend_app_dev_deployment_proof.py
+  - tests/packages/tigrbl-auth-backend-app-platform-admin/test_platform_admin_backend_app_package.py
+  - tests/packages/tigrbl-auth-backend-app-platform-admin/test_platform_admin_realm_router.py
+  - tests/packages/tigrbl-auth-backend-app-public/test_public_backend_app_dev_deployment_proof.py
+  - tests/packages/tigrbl-auth-backend-app-public/test_public_backend_app_package.py
+  - tests/packages/tigrbl-auth-backend-app-public/test_public_backend_app_realm_issuer.py
+  - tests/packages/tigrbl-auth-backend-app-resource-validation/test_resource_validation_backend_app_dev_deployment_proof.py
+  - tests/packages/tigrbl-auth-backend-app-resource-validation/test_resource_validation_backend_app_package.py
+  - tests/packages/tigrbl-auth-backend-app-resource-validation/test_resource_validation_realm_metadata.py
+  - tests/packages/tigrbl-auth-backend-app-service-admin/test_service_admin_backend_app_package.py
+  - tests/packages/tigrbl-auth-backend-app-tenant-admin/test_tenant_admin_backend_app_dev_deployment_proof.py
+  - tests/packages/tigrbl-auth-backend-app-tenant-admin/test_tenant_admin_backend_app_package.py
   - tests/packages/tigrbl-identity-testkit/test_identity_testkit_package.py
   - tests/perf/test_bundle_manifest_size.py
   - tests/uix/test_abac_admin.py
@@ -86,6 +86,7 @@ partitions:
   - tests/uix/test_resource_views_contract.py
   - tests/uix/test_resource_views_states.py
   - tests/uix/test_safe_mutations.py
+  - tests/unit/test_account_self_service_capability.py
   - tests/unit/test_adapters.py
   - tests/unit/test_admin_control_plane_boundary.py
   - tests/unit/test_admin_policy_boundary.py
@@ -111,12 +112,17 @@ partitions:
   - tests/unit/test_authorize_id_token_hashes.py
   - tests/unit/test_authorize_response_modes.py
   - tests/unit/test_authz_policy_table_ops_boundary.py
+  - tests/unit/test_backend_app_surfaces.py
+  - tests/unit/test_backend_app_table_initialization.py
   - tests/unit/test_backends.py
   - tests/unit/test_base_contract_inheritance.py
+  - tests/unit/test_base_package_taxonomy.py
   - tests/unit/test_bootstrap_secret_scrub.py
   - tests/unit/test_bootstrappable_user_defaults.py
   - tests/unit/test_boundary_freeze_checkpoint.py
   - tests/unit/test_bulk_schema_fields.py
+  - tests/unit/test_canonical_package_layer_index.py
+  - tests/unit/test_capability_family_registry.py
   - tests/unit/test_capability_hierarchy.py
   - tests/unit/test_certificate_providers.py
   - tests/unit/test_certification_evidence_negative_proofs.py
@@ -131,12 +137,17 @@ partitions:
   - tests/unit/test_cli_contract.py
   - tests/unit/test_cli_surface_checkpoint.py
   - tests/unit/test_client_identity_runtime_boundary.py
+  - tests/unit/test_client_registration_capability.py
   - tests/unit/test_collect_validated_artifact_downloads.py
   - tests/unit/test_concrete_base_inheritance.py
+  - tests/unit/test_concrete_digital_artifact_ownership.py
   - tests/unit/test_concrete_layer_taxonomy.py
+  - tests/unit/test_concrete_package_taxonomy.py
   - tests/unit/test_contract_durable_storage_tables.py
   - tests/unit/test_contract_enum_ownership.py
   - tests/unit/test_contract_generation_live.py
+  - tests/unit/test_contract_ownership_authority.py
+  - tests/unit/test_contract_package_taxonomy.py
   - tests/unit/test_contract_payloads_deferred_upstream.py
   - tests/unit/test_control_plane_correctness_properties.py
   - tests/unit/test_corim_protocol_versioning.py
@@ -155,12 +166,14 @@ partitions:
   - tests/unit/test_delegation_runtime_boundary.py
   - tests/unit/test_delegation_table_owned_ops_contract.py
   - tests/unit/test_deployment_resolver.py
+  - tests/unit/test_deprecated_compatibility_windows.py
   - tests/unit/test_deps_imports.py
   - tests/unit/test_device_code_runtime_boundary.py
   - tests/unit/test_did_providers.py
   - tests/unit/test_did_workload_policy_contracts.py
   - tests/unit/test_digital_credential_providers.py
   - tests/unit/test_dpop_key_credentials.py
+  - tests/unit/test_durability_package_taxonomy.py
   - tests/unit/test_eat_corim_concrete.py
   - tests/unit/test_eat_cross_aspect_contracts.py
   - tests/unit/test_effective_artifacts.py
@@ -174,11 +187,13 @@ partitions:
   - tests/unit/test_feature_flag_registry.py
   - tests/unit/test_final_aggregation.py
   - tests/unit/test_governance_extension_plane_phase5.py
+  - tests/unit/test_grant_negotiation_capability.py
   - tests/unit/test_graph_storage_table_ownership.py
   - tests/unit/test_handler_records.py
   - tests/unit/test_hardening_cluster_a.py
   - tests/unit/test_hardening_cluster_b.py
   - tests/unit/test_hardening_cluster_c.py
+  - tests/unit/test_identity_administration_capability.py
   - tests/unit/test_identity_author_release_signing_boundary.py
   - tests/unit/test_identity_cli_file_size_guard.py
   - tests/unit/test_identity_cli_package_boundary.py
@@ -212,25 +227,33 @@ partitions:
   - tests/unit/test_mtls_certificate_credentials.py
   - tests/unit/test_my_account_table_owned_ops.py
   - tests/unit/test_new_capability_packages.py
+  - tests/unit/test_node_workspace_layers.py
   - tests/unit/test_non_rfc_track_checkpoint.py
+  - tests/unit/test_oauth_authorization_http_binding.py
+  - tests/unit/test_oauth_device_authorization_http_binding.py
   - tests/unit/test_oauth_introspection_http_binding.py
   - tests/unit/test_oauth_oidc_protocol_boundary.py
   - tests/unit/test_oauth_par_http_binding.py
   - tests/unit/test_oauth_revocation_http_binding.py
   - tests/unit/test_oauth_state_table_ops_boundary.py
   - tests/unit/test_oauth_table_owned_ops.py
+  - tests/unit/test_oauth_token_http_binding.py
   - tests/unit/test_oidc_authorization_code_token_claims.py
   - tests/unit/test_oidc_authorize_scope_nonce.py
   - tests/unit/test_oidc_eap_identity_assurance_contracts.py
   - tests/unit/test_oidc_id_token.py
   - tests/unit/test_oidc_id_token_encryption.py
+  - tests/unit/test_oidc_logout_http_binding.py
   - tests/unit/test_oidc_standalone_claim_packages.py
+  - tests/unit/test_oidc_userinfo_http_binding.py
+  - tests/unit/test_oidc_userinfo_protocol_owner.py
   - tests/unit/test_openapi_contract_validity.py
   - tests/unit/test_openapi_examples.py
   - tests/unit/test_openapi_well_known_endpoints.py
   - tests/unit/test_openid_configuration.py
   - tests/unit/test_openid_userinfo_endpoint.py
   - tests/unit/test_openrpc_contract_validity.py
+  - tests/unit/test_operator_administration_capability.py
   - tests/unit/test_operator_control_plane.py
   - tests/unit/test_operator_service_layer.py
   - tests/unit/test_operator_store_table_owned_boundary.py
@@ -246,19 +269,21 @@ partitions:
   - tests/unit/test_policy_concrete_layer_boundary.py
   - tests/unit/test_policy_control_plane_phase3.py
   - tests/unit/test_policy_determinism_replay.py
+  - tests/unit/test_policy_evaluation_capability.py
   - tests/unit/test_policy_replay_stability_robustness_t2.py
   - tests/unit/test_principal_authentication_capability.py
   - tests/unit/test_principals_model_boundary.py
-  - tests/unit/test_product_api_surfaces.py
-  - tests/unit/test_product_api_table_initialization.py
   - tests/unit/test_profile_discovery_runtime.py
+  - tests/unit/test_protected_resource_authorization_capability.py
   - tests/unit/test_protected_resource_verifier_contract.py
   - tests/unit/test_protocol_capability_reports.py
   - tests/unit/test_protocol_neutral_reusable_ownership.py
   - tests/unit/test_protocol_state_provider_boundaries.py
   - tests/unit/test_provenance_naming_guard.py
   - tests/unit/test_provider_base_inheritance.py
+  - tests/unit/test_provider_package_taxonomy.py
   - tests/unit/test_provider_packages_implement_trust_domain_bases.py
+  - tests/unit/test_provider_umbrella_reorganization.py
   - tests/unit/test_provider_white_label_login_boundary.py
   - tests/unit/test_provisioning_governance_ecosystem_boundary.py
   - tests/unit/test_public_operator_surface_boundary.py
@@ -267,6 +292,7 @@ partitions:
   - tests/unit/test_pushed_authorization_capability.py
   - tests/unit/test_pushed_authorization_runtime_composition.py
   - tests/unit/test_pytest_workspace_temp_root.py
+  - tests/unit/test_realm_administration_capability.py
   - tests/unit/test_registry_state_table_ownership.py
   - tests/unit/test_release_contracts_boundary.py
   - tests/unit/test_release_posture_plane.py
@@ -325,13 +351,18 @@ partitions:
   - tests/unit/test_rfc9449_dpop.py
   - tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
   - tests/unit/test_rfc9728_metadata_checkpoint.py
+  - tests/unit/test_router_backend_app_layers.py
   - tests/unit/test_rp_consumer_boundary.py
   - tests/unit/test_rpc_registry_live.py
   - tests/unit/test_runner_adapter_runtime_layer.py
+  - tests/unit/test_runtime_capability_assembly.py
   - tests/unit/test_runtime_cfg.py
   - tests/unit/test_runtime_launcher.py
+  - tests/unit/test_runtime_lifecycle_capability_assembly.py
+  - tests/unit/test_runtime_metadata_layer_ownership.py
   - tests/unit/test_runtime_profile_configuration.py
   - tests/unit/test_runtime_standards_manifest.py
+  - tests/unit/test_runtime_token_capability_service.py
   - tests/unit/test_runtime_validation_matrix.py
   - tests/unit/test_runtime_version_truthfulness.py
   - tests/unit/test_sd_jwt_vc_concrete.py
@@ -340,8 +371,10 @@ partitions:
   - tests/unit/test_security_trust_contract_boundary.py
   - tests/unit/test_security_user_lookup.py
   - tests/unit/test_server_router_schema_ownership.py
+  - tests/unit/test_server_runtime_capability_assembly.py
   - tests/unit/test_server_runtime_operator_boundary.py
   - tests/unit/test_session_consent_logout_runtime_boundary.py
+  - tests/unit/test_session_login_http_binding.py
   - tests/unit/test_session_logout_cluster_b.py
   - tests/unit/test_set_providers.py
   - tests/unit/test_shared_secret_provider.py
@@ -365,8 +398,10 @@ partitions:
   - tests/unit/test_surface_baseline_boundary.py
   - tests/unit/test_svid_did_concrete.py
   - tests/unit/test_table_owned_custom_op_schemas.py
+  - tests/unit/test_tenant_administration_capability.py
   - tests/unit/test_tenant_public_discovery_boundary.py
   - tests/unit/test_tenant_realm_isolation_invariants.py
+  - tests/unit/test_terminal_package_layers.py
   - tests/unit/test_testkit_cross_cutting_boundary.py
   - tests/unit/test_tier3_validated_rebuild.py
   - tests/unit/test_tier4_checkpoint.py
@@ -374,8 +409,11 @@ partitions:
   - tests/unit/test_tigrbl_auth_plugin_package.py
   - tests/unit/test_tigrbl_bcp_direct_db_boundary.py
   - tests/unit/test_token_endpoint_minimal_storage.py
+  - tests/unit/test_token_exchange_capability.py
   - tests/unit/test_token_introspection_capability.py
   - tests/unit/test_token_introspection_runtime_composition.py
+  - tests/unit/test_token_issuance_capability.py
+  - tests/unit/test_token_issuance_runtime_composition.py
   - tests/unit/test_token_record_runtime_boundary.py
   - tests/unit/test_token_revocation_capability.py
   - tests/unit/test_token_revocation_runtime_composition.py
@@ -393,8 +431,13 @@ partitions:
   - tests/unit/test_versioned_jwt_protocol.py
   - tests/unit/test_versioned_oauth_oidc_protocols.py
   - tests/unit/test_versioned_oid4vc_authzen_protocols.py
+  - tests/unit/test_versioned_resource_server_profile.py
   - tests/unit/test_versioned_set_protocol.py
   - tests/unit/test_wallet_key_platform_attestation_providers.py
+  - tests/unit/test_webauthn_api_delivery.py
+  - tests/unit/test_webauthn_attestation_delivery.py
+  - tests/unit/test_webauthn_foundation_delivery.py
+  - tests/unit/test_webauthn_protocol_delivery.py
   - tests/unit/test_well_known_endpoints_behavior.py
   integration:
   - tests/integration/test_admin_auth_session.py
@@ -442,6 +485,7 @@ partitions:
   - tests/unit/test_replay_migration_0033.py
   - tests/unit/test_security_event_migration_0029.py
   - tests/unit/test_spiffe_migration_0028.py
+  - tests/unit/test_webauthn_migration_0035.py
   interop:
   - tests/interop/test_operator_profile_catalog_completeness.py
   - tests/interop/test_runner_profile_catalog_completeness.py

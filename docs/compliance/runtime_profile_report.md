@@ -1,6 +1,6 @@
 # Runtime Profile Report
 
-- Generated at: `20260713T054401Z`
+- Generated at: `20260717T172115Z`
 - Deployment profile: `baseline`
 - Report mode: `validated-runs`
 - Validated artifact source: `None`
@@ -44,7 +44,7 @@
 
 - Status: `missing`
 - Installed: `False`
-- Module: `hypercorn`
+- Module: `None`
 - Placeholder-supported: `False`
 - Declared CI-installable: `True`
 - Serve check passed: `False`
@@ -60,7 +60,7 @@
 
 - Status: `missing`
 - Installed: `False`
-- Module: `tigrcorn`
+- Module: `None`
 - Placeholder-supported: `False`
 - Declared CI-installable: `True`
 - Serve check passed: `False`

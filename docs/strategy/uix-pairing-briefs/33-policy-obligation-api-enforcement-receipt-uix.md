@@ -1,8 +1,8 @@
 # Policy Obligation API + Enforcement Receipt UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-api-policy-obligations` + `@tigrbl-auth/enforcement-receipt-uix`  
-**Additional opportunity:** Authorization/delegation/sovereignty extension 4  
-**Primary buyers:** authorization platform teams, API and application security, data governance, regulated operations, workload/agent platforms, and audit/compliance  
+**Pairing:** `tigrbl-auth-router-policy-obligations` + `@tigrbl-auth/enforcement-receipt-uix`<br>
+**Additional opportunity:** Authorization/delegation/sovereignty extension 4<br>
+**Primary buyers:** authorization platform teams, API and application security, data governance, regulated operations, workload/agent platforms, and audit/compliance<br>
 **Status:** proposed product surface; obligation/advice contracts and handler ports exist, but production enforcement and receipts do not
 
 ## 1. Product Decision

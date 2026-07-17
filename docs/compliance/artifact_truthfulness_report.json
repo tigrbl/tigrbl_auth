@@ -10,7 +10,7 @@
     "runtime_plan_to_discovery_sync_passed": true,
     "runner_contract_hash_invariance_passed": true,
     "authoritative_current_doc_stale_ref_count": 0,
-    "historical_doc_stale_ref_count": 161,
+    "historical_doc_stale_ref_count": 169,
     "openapi_profile_count_checked": 5,
     "discovery_profile_count_checked": 5
   },
@@ -469,9 +469,9 @@
     "runner_profiles": {
       "baseline": {
         "application_hashes": {
-          "hypercorn": "26e13c4c970dd83a1e1345f00aab174fc1ca757f9e2121c614f27f95946342dd",
-          "tigrcorn": "26e13c4c970dd83a1e1345f00aab174fc1ca757f9e2121c614f27f95946342dd",
-          "uvicorn": "26e13c4c970dd83a1e1345f00aab174fc1ca757f9e2121c614f27f95946342dd"
+          "hypercorn": "8a0c15f97e9d1b61f0c8d9efb79baabb1e7561bc1c051b298ef0d31015c87832",
+          "tigrcorn": "8a0c15f97e9d1b61f0c8d9efb79baabb1e7561bc1c051b298ef0d31015c87832",
+          "uvicorn": "8a0c15f97e9d1b61f0c8d9efb79baabb1e7561bc1c051b298ef0d31015c87832"
         },
         "contract_hashes": {
           "hypercorn": {
@@ -507,9 +507,9 @@
       },
       "production": {
         "application_hashes": {
-          "hypercorn": "752445c6623d899dfefc2fe2edd9e7a3176bf16af0f64251fb2e0d0ab18187a4",
-          "tigrcorn": "752445c6623d899dfefc2fe2edd9e7a3176bf16af0f64251fb2e0d0ab18187a4",
-          "uvicorn": "752445c6623d899dfefc2fe2edd9e7a3176bf16af0f64251fb2e0d0ab18187a4"
+          "hypercorn": "6cb34b3a45175bb63fd5f13c8b9006e59f224fcde89de67dd74e7db30e1c168e",
+          "tigrcorn": "6cb34b3a45175bb63fd5f13c8b9006e59f224fcde89de67dd74e7db30e1c168e",
+          "uvicorn": "6cb34b3a45175bb63fd5f13c8b9006e59f224fcde89de67dd74e7db30e1c168e"
         },
         "contract_hashes": {
           "hypercorn": {
@@ -548,9 +548,9 @@
       },
       "hardening": {
         "application_hashes": {
-          "hypercorn": "96a14f5b30ca02ff7baadafd77129dd9ac9f641911d4b8750f122ad0fe255ef7",
-          "tigrcorn": "96a14f5b30ca02ff7baadafd77129dd9ac9f641911d4b8750f122ad0fe255ef7",
-          "uvicorn": "96a14f5b30ca02ff7baadafd77129dd9ac9f641911d4b8750f122ad0fe255ef7"
+          "hypercorn": "90ffddac66744a66e12527f95003183fc8fe11c9d2399c08cb5536f4f15d7386",
+          "tigrcorn": "90ffddac66744a66e12527f95003183fc8fe11c9d2399c08cb5536f4f15d7386",
+          "uvicorn": "90ffddac66744a66e12527f95003183fc8fe11c9d2399c08cb5536f4f15d7386"
         },
         "contract_hashes": {
           "hypercorn": {
@@ -589,9 +589,9 @@
       },
       "fapi2-security": {
         "application_hashes": {
-          "hypercorn": "208a928eb915874815b9df51ecee8f6892f1dbf4767419d74b571e4e8a0ed066",
-          "tigrcorn": "208a928eb915874815b9df51ecee8f6892f1dbf4767419d74b571e4e8a0ed066",
-          "uvicorn": "208a928eb915874815b9df51ecee8f6892f1dbf4767419d74b571e4e8a0ed066"
+          "hypercorn": "7292451ced33651d33ffe5a535c380cfbcb203c6be896d44e43bb73f30f1e303",
+          "tigrcorn": "7292451ced33651d33ffe5a535c380cfbcb203c6be896d44e43bb73f30f1e303",
+          "uvicorn": "7292451ced33651d33ffe5a535c380cfbcb203c6be896d44e43bb73f30f1e303"
         },
         "contract_hashes": {
           "hypercorn": {
@@ -630,9 +630,9 @@
       },
       "peer-claim": {
         "application_hashes": {
-          "hypercorn": "cfdb45a1590a70bf369fa1500e229e1319e228abc36e3d42f440e4be16ad3e5b",
-          "tigrcorn": "cfdb45a1590a70bf369fa1500e229e1319e228abc36e3d42f440e4be16ad3e5b",
-          "uvicorn": "cfdb45a1590a70bf369fa1500e229e1319e228abc36e3d42f440e4be16ad3e5b"
+          "hypercorn": "09538ae6bd68178edc30dcfa31e74b43181927843b2a1c57aaf1a43ea8460107",
+          "tigrcorn": "09538ae6bd68178edc30dcfa31e74b43181927843b2a1c57aaf1a43ea8460107",
+          "uvicorn": "09538ae6bd68178edc30dcfa31e74b43181927843b2a1c57aaf1a43ea8460107"
         },
         "contract_hashes": {
           "hypercorn": {
@@ -676,7 +676,6 @@
         "tigrbl_auth/api/surfaces.py": [
           "docs/architecture/FEATURE_FLAGS_AND_SURFACES.md",
           "docs/architecture/MIGRATION_MOVE_PLAN.md",
-          "docs/compliance/project_tree_layout_report.md",
           "docs/compliance/RUNTIME_HTTP_SURFACE_CHECKPOINT_2026-03-26.md"
         ],
         "tigrbl_auth/config/deployment.py": [
@@ -694,35 +693,42 @@
           "docs/architecture/MIGRATION_COMPLETION_REPORT.md",
           "docs/architecture/MIGRATION_MOVE_PLAN.md",
           "docs/compliance/APP_FACTORY_MATERIALIZATION_CHECKPOINT_2026-03-26.md",
+          "docs/compliance/migration_plan_status_report.md",
           "docs/compliance/NON_RFC_TRACK_CLOSEOUT_CHECKPOINT_2026-03-26.md"
         ],
         "tigrbl_auth/backends.py": [
           "docs/architecture/MIGRATION_COMPLETION_REPORT.md",
-          "docs/architecture/MIGRATION_MOVE_PLAN.md"
+          "docs/architecture/MIGRATION_MOVE_PLAN.md",
+          "docs/compliance/migration_plan_status_report.md"
         ],
         "tigrbl_auth/cli/boundary.py": [
           "docs/architecture/MIGRATION_COMPLETION_REPORT.md"
         ],
         "tigrbl_auth/db.py": [
           "docs/architecture/MIGRATION_COMPLETION_REPORT.md",
-          "docs/architecture/MIGRATION_MOVE_PLAN.md"
+          "docs/architecture/MIGRATION_MOVE_PLAN.md",
+          "docs/compliance/migration_plan_status_report.md"
         ],
         "tigrbl_auth/jwtoken.py": [
           "docs/architecture/MIGRATION_COMPLETION_REPORT.md",
-          "docs/architecture/MIGRATION_MOVE_PLAN.md"
+          "docs/architecture/MIGRATION_MOVE_PLAN.md",
+          "docs/compliance/migration_plan_status_report.md"
         ],
         "tigrbl_auth/oidc_discovery.py": [
           "docs/architecture/MIGRATION_COMPLETION_REPORT.md",
-          "docs/architecture/MIGRATION_MOVE_PLAN.md"
+          "docs/architecture/MIGRATION_MOVE_PLAN.md",
+          "docs/compliance/migration_plan_status_report.md"
         ],
         "tigrbl_auth/oidc_id_token.py": [
           "docs/architecture/MIGRATION_COMPLETION_REPORT.md",
           "docs/architecture/MIGRATION_MOVE_PLAN.md",
+          "docs/compliance/migration_plan_status_report.md",
           "docs/compliance/NON_RFC_TRACK_CLOSEOUT_CHECKPOINT_2026-03-26.md"
         ],
         "tigrbl_auth/oidc_userinfo.py": [
           "docs/architecture/MIGRATION_COMPLETION_REPORT.md",
           "docs/architecture/MIGRATION_MOVE_PLAN.md",
+          "docs/compliance/migration_plan_status_report.md",
           "docs/compliance/NON_RFC_TRACK_CLOSEOUT_CHECKPOINT_2026-03-26.md"
         ],
         "tigrbl_auth/ops/authenticate.py": [
@@ -767,25 +773,29 @@
         ],
         "tigrbl_auth/routers/auth_flows.py": [
           "docs/architecture/MIGRATION_COMPLETION_REPORT.md",
-          "docs/architecture/MIGRATION_MOVE_PLAN.md"
+          "docs/architecture/MIGRATION_MOVE_PLAN.md",
+          "docs/compliance/migration_plan_status_report.md"
         ],
         "tigrbl_auth/routers/authz/__init__.py": [
           "docs/architecture/MIGRATION_COMPLETION_REPORT.md"
         ],
         "tigrbl_auth/routers/authz/oidc.py": [
           "docs/architecture/MIGRATION_COMPLETION_REPORT.md",
-          "docs/architecture/MIGRATION_MOVE_PLAN.md"
+          "docs/architecture/MIGRATION_MOVE_PLAN.md",
+          "docs/compliance/migration_plan_status_report.md"
         ],
         "tigrbl_auth/routers/shared.py": [
           "docs/architecture/MIGRATION_COMPLETION_REPORT.md"
         ],
         "tigrbl_auth/routers/surface.py": [
           "docs/architecture/MIGRATION_COMPLETION_REPORT.md",
-          "docs/architecture/MIGRATION_MOVE_PLAN.md"
+          "docs/architecture/MIGRATION_MOVE_PLAN.md",
+          "docs/compliance/migration_plan_status_report.md"
         ],
         "tigrbl_auth/runtime_cfg.py": [
           "docs/architecture/MIGRATION_COMPLETION_REPORT.md",
-          "docs/architecture/MIGRATION_MOVE_PLAN.md"
+          "docs/architecture/MIGRATION_MOVE_PLAN.md",
+          "docs/compliance/migration_plan_status_report.md"
         ],
         "tigrbl_auth/security/deps.py": [
           "docs/architecture/MIGRATION_COMPLETION_REPORT.md"
@@ -866,7 +876,6 @@
           "docs/architecture/MIGRATION_MOVE_PLAN.md",
           "docs/compliance/APP_FACTORY_MATERIALIZATION_CHECKPOINT_2026-03-26.md",
           "docs/compliance/INDEPENDENT_PACKAGE_REVIEW_2026-03-26.md",
-          "docs/compliance/project_tree_layout_report.md",
           "docs/compliance/RUNTIME_HTTP_SURFACE_CHECKPOINT_2026-03-26.md"
         ],
         "tigrbl_auth/api/rest/routers/authorize.py": [
@@ -880,7 +889,8 @@
           "docs/compliance/INDEPENDENT_PACKAGE_REVIEW_2026-03-27.md"
         ],
         "tigrbl_auth/crypto.py": [
-          "docs/architecture/MIGRATION_MOVE_PLAN.md"
+          "docs/architecture/MIGRATION_MOVE_PLAN.md",
+          "docs/compliance/migration_plan_status_report.md"
         ],
         "tigrbl_auth/services/auth_backends.py": [
           "docs/architecture/MIGRATION_MOVE_PLAN.md"
@@ -904,12 +914,10 @@
         ],
         "tigrbl_auth/gateway.py": [
           "docs/compliance/APP_FACTORY_MATERIALIZATION_CHECKPOINT_2026-03-26.md",
-          "docs/compliance/INDEPENDENT_PACKAGE_REVIEW_2026-03-26.md",
-          "docs/compliance/project_tree_layout_report.md"
+          "docs/compliance/INDEPENDENT_PACKAGE_REVIEW_2026-03-26.md"
         ],
         "tigrbl_auth/plugin.py": [
           "docs/compliance/APP_FACTORY_MATERIALIZATION_CHECKPOINT_2026-03-26.md",
-          "docs/compliance/project_tree_layout_report.md",
           "docs/compliance/RUNTIME_HTTP_SURFACE_CHECKPOINT_2026-03-26.md"
         ],
         "tigrbl_auth/services/authorization_provenance.py": [

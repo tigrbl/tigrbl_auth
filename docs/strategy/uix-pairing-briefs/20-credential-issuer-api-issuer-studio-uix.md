@@ -1,11 +1,11 @@
 # Credential Issuer API + Issuer Studio UIX Requirements Brief
 
-**Proposed pairing:** `tigrbl-auth-api-credential-issuer` + `@tigrbl-auth/credential-issuer-uix`  
-**Status:** New product surface; OAuth/OIDC, JOSE, credentials, policy, attestation, status, storage, and issuer foundations are reusable, but digital credential issuance is absent  
-**Prepared:** July 11, 2026  
-**Proposed API owner:** `pkgs/80-apis/tigrbl-auth-api-credential-issuer`  
-**Proposed protocol owner:** `pkgs/50-protocols/tigrbl-openid4vci`  
-**Proposed UIX owner:** `pkgs/95-ui/credential-issuer-uix`
+**Proposed pairing:** `tigrbl-auth-router-credential-issuer` + `@tigrbl-auth/credential-issuer-uix`<br>
+**Status:** New product surface; OAuth/OIDC, JOSE, credentials, policy, attestation, status, storage, and issuer foundations are reusable, but digital credential issuance is absent<br>
+**Prepared:** July 11, 2026<br>
+**Proposed router owner:** `pkgs/80-routers/tigrbl-auth-router-credential-issuer`<br>
+**Proposed protocol owner:** `pkgs/50-protocols/tigrbl-openid4vci`<br>
+**Proposed UIX owner:** `pkgs/105-ui/credential-issuer-uix`
 
 ## 1. Product Decision
 

@@ -9,8 +9,8 @@ For `tigrbl_auth`, MFA should be treated as an advanced authentication product l
 - `tigrbl-authn-credentials` for factor credential material and proof verification.
 - `tigrbl-authz-policy` for when MFA is required, optional, remembered, bypassed, or stepped up.
 - `tigrbl-auth-protocol-oidc` and `tigrbl-identity-jose` for `acr` and `amr` expression in ID/access tokens.
-- `tigrbl-auth-api-public` for user-facing enrollment/challenge/recovery flows.
-- `tigrbl-auth-api-tenant-admin` for tenant MFA policy and user factor reset.
+- `tigrbl-auth-backend-app-public` for user-facing enrollment/challenge/recovery flows.
+- `tigrbl-auth-backend-app-tenant-admin` for tenant MFA policy and user factor reset.
 - `@tigrbl-auth/public-uix` for hosted login, enrollment, challenge, recovery, and profile factor management.
 
 ## Current `tigrbl_auth` State
@@ -60,8 +60,8 @@ For `tigrbl_auth`, MFA should be treated as an advanced authentication product l
 | `tigrbl-authn-credentials` | Factor credential material, verification helpers, lifecycle states, recovery-code material, credential audit primitives. | Route composition, tenant policy, hosted login UX. |
 | `tigrbl-authz-policy` | MFA requirement decisions, step-up rules, factor assurance policy, bypass/remembered-device decisions. | Secret verification and WebAuthn cryptographic ceremony details. |
 | `tigrbl-auth-protocol-oidc` / `tigrbl-identity-jose` | `acr` and `amr` claim rules, OIDC authentication context expression. | Factor enrollment and user support workflows. |
-| `tigrbl-auth-api-public` | Login-time MFA challenge, enrollment prompt, recovery-code challenge, user factor management where safe. | Tenant-wide policy mutation and admin reset authority. |
-| `tigrbl-auth-api-tenant-admin` | Tenant MFA policy, required factors, admin factor reset, user support audit. | End-user factor secret display or challenge responses. |
+| `tigrbl-auth-backend-app-public` | Login-time MFA challenge, enrollment prompt, recovery-code challenge, user factor management where safe. | Tenant-wide policy mutation and admin reset authority. |
+| `tigrbl-auth-backend-app-tenant-admin` | Tenant MFA policy, required factors, admin factor reset, user support audit. | End-user factor secret display or challenge responses. |
 | `@tigrbl-auth/public-uix` | Enrollment screens, challenge screens, recovery-code display, factor management, remembered-device prompts. | Tenant policy administration. |
 | `@tigrbl-auth/tenant-admin-uix` | Policy configuration, user factor support/reset, MFA posture reporting. | Hosted-login challenge UX. |
 

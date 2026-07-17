@@ -51,14 +51,14 @@
 - tier4_external_handoff_template_present: `False`
 - signed_release_bundle_count: `0`
 - release_attestation_verifiable: `False`
-- base_dependency_count: `286`
-- base_exact_pinned_dependency_count: `286`
-- optional_extra_count: `7`
+- base_dependency_count: `425`
+- base_exact_pinned_dependency_count: `425`
+- optional_extra_count: `8`
 - runner_extra_count: `4`
 - storage_extra_count: `2`
-- workspace_source_count: `252`
+- workspace_source_count: `392`
 - workspace_sources_declared: `True`
-- first_party_workspace_source_count: `252`
+- first_party_workspace_source_count: `392`
 - forbidden_workspace_source_count: `0`
 - workspace_sources_present: `False`
 - dependency_provenance_artifact_count: `27`
@@ -87,7 +87,7 @@
 - registered_runner_count: `3`
 - registered_runner_names: `hypercorn, tigrcorn, uvicorn`
 - runtime_application_hash_invariant: `True`
-- runtime_runner_availability_count: `3`
+- runtime_runner_availability_count: `1`
 - runtime_profile_report_present: `True`
 - runtime_profile_ready_count: `0`
 - runtime_profile_missing_count: `3`
@@ -106,7 +106,7 @@
 - operator_plane_repo_mutation_dependency: `False`
 - operator_plane_tenancy_enforced: `True`
 - operator_plane_database_present: `True`
-- operator_plane_state_root: `.pytest-tmp/operator-state/certification-closure/tigrbl_auth-6b06ff767af75b98`
+- operator_plane_state_root: `.tmp/projection-final/operator-plane-state/tigrbl_auth-6b06ff767af75b98`
 - operator_plane_portability_schema_version: `3`
 - pyproject_requires_python: `>=3.10,<3.13`
 - serve_runtime_launcher_present: `True`
@@ -137,9 +137,9 @@
 - certification_evidence_target_profile_bundle_count: `199`
 - release_evidence_clean_checkout_required: `True`
 - release_evidence_clean_checkout_now: `False`
-- release_evidence_dirty_checkout_path_count: `100`
+- release_evidence_dirty_checkout_path_count: `135`
 - authoritative_current_doc_stale_ref_count: `0`
-- historical_doc_stale_ref_count: `161`
+- historical_doc_stale_ref_count: `169`
 - derived_current_doc_count: `11`
 - historical_archive_present: `True`
 - validated_execution_artifact_count: `2`

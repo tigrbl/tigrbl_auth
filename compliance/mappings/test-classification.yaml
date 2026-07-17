@@ -68,22 +68,22 @@ categories:
   - tests/features/test_t0_tracked_targets.py
   - tests/features/test_tenant_jwks_discovery.py
   - tests/features/test_tenant_jwks_key_administration.py
-  - tests/packages/tigrbl-auth-api-developer/test_developer_api_dev_deployment_proof.py
-  - tests/packages/tigrbl-auth-api-developer/test_developer_api_package.py
-  - tests/packages/tigrbl-auth-api-my-account/test_my_account_api_dev_deployment_proof.py
-  - tests/packages/tigrbl-auth-api-my-account/test_my_account_api_package.py
-  - tests/packages/tigrbl-auth-api-platform-admin/test_platform_admin_api_dev_deployment_proof.py
-  - tests/packages/tigrbl-auth-api-platform-admin/test_platform_admin_api_package.py
-  - tests/packages/tigrbl-auth-api-platform-admin/test_platform_admin_realm_api.py
-  - tests/packages/tigrbl-auth-api-public/test_public_api_dev_deployment_proof.py
-  - tests/packages/tigrbl-auth-api-public/test_public_api_package.py
-  - tests/packages/tigrbl-auth-api-public/test_public_api_realm_issuer.py
-  - tests/packages/tigrbl-auth-api-resource-validation/test_resource_validation_api_dev_deployment_proof.py
-  - tests/packages/tigrbl-auth-api-resource-validation/test_resource_validation_api_package.py
-  - tests/packages/tigrbl-auth-api-resource-validation/test_resource_validation_realm_metadata.py
-  - tests/packages/tigrbl-auth-api-service-admin/test_service_admin_api_package.py
-  - tests/packages/tigrbl-auth-api-tenant-admin/test_tenant_admin_api_dev_deployment_proof.py
-  - tests/packages/tigrbl-auth-api-tenant-admin/test_tenant_admin_api_package.py
+  - tests/packages/tigrbl-auth-backend-app-developer/test_developer_api_dev_deployment_proof.py
+  - tests/packages/tigrbl-auth-backend-app-developer/test_developer_api_package.py
+  - tests/packages/tigrbl-auth-backend-app-my-account/test_my_account_api_dev_deployment_proof.py
+  - tests/packages/tigrbl-auth-backend-app-my-account/test_my_account_api_package.py
+  - tests/packages/tigrbl-auth-backend-app-platform-admin/test_platform_admin_api_dev_deployment_proof.py
+  - tests/packages/tigrbl-auth-backend-app-platform-admin/test_platform_admin_api_package.py
+  - tests/packages/tigrbl-auth-backend-app-platform-admin/test_platform_admin_realm_api.py
+  - tests/packages/tigrbl-auth-backend-app-public/test_public_api_dev_deployment_proof.py
+  - tests/packages/tigrbl-auth-backend-app-public/test_public_api_package.py
+  - tests/packages/tigrbl-auth-backend-app-public/test_public_api_realm_issuer.py
+  - tests/packages/tigrbl-auth-backend-app-resource-validation/test_resource_validation_api_dev_deployment_proof.py
+  - tests/packages/tigrbl-auth-backend-app-resource-validation/test_resource_validation_api_package.py
+  - tests/packages/tigrbl-auth-backend-app-resource-validation/test_resource_validation_realm_metadata.py
+  - tests/packages/tigrbl-auth-backend-app-service-admin/test_service_admin_api_package.py
+  - tests/packages/tigrbl-auth-backend-app-tenant-admin/test_tenant_admin_api_dev_deployment_proof.py
+  - tests/packages/tigrbl-auth-backend-app-tenant-admin/test_tenant_admin_api_package.py
   - tests/packages/tigrbl-identity-testkit/test_identity_testkit_package.py
   - tests/unit/test_adapters.py
   - tests/unit/test_admin_control_plane_boundary.py

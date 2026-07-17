@@ -209,7 +209,7 @@ Amazon Cognito is split into User Pools, Identity Pools, managed/hosted UI, OAut
 
 | Segment | Auth0 | Okta | Keycloak | FusionAuth | Amazon Cognito | Implication for `tigrbl_auth` |
 |---|---|---|---|---|---|---|
-| Public issuer / authentication API | Authentication API | OIDC/OAuth API | Realm OIDC endpoints | OAuth/Login/JWT APIs | User-pool OAuth endpoints | Keep `tigrbl-auth-api-public` as a distinct public issuer. |
+| Public issuer / authentication API | Authentication API | OIDC/OAuth API | Realm OIDC endpoints | OAuth/Login/JWT APIs | User-pool OAuth endpoints | Keep `tigrbl-auth-backend-app-public` as a distinct public issuer. |
 | Management control plane | Management API v2 | Management API | Admin REST API | API catalog / Admin APIs | Cognito IdP API / AWS Console | A single "Management API product" can contain multiple deployable slices. |
 | Delegated org/tenant admin | My Organization API | Org/admin-role patterns in Management API | Realm/org admin delegation | Tenant Manager | AWS account/IAM plus user-pool scoped admin | `tenant-admin` should be framed as delegated management, not a generic admin clone. |
 | End-user self-service | My Account API | MyAccount API / End-User Dashboard | Account Console | Hosted account/user flows and User APIs | Managed Login / Amplify Authenticator | `tigrbl_auth` has a visible gap around first-class account self-service. |

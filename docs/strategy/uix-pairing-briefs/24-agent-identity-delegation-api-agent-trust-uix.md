@@ -1,11 +1,11 @@
 # Agent Identity and Delegation API + Agent Trust UIX Requirements Brief
 
-**Proposed pairing:** `tigrbl-auth-api-agent-delegation` + `@tigrbl-auth/agent-trust-uix`  
-**Status:** New product surface; delegation, attenuation, authority graph, token exchange, proof binding, policy, workload, audit, and provenance foundations exist  
-**Prepared:** July 11, 2026  
-**Proposed API owner:** `pkgs/80-apis/tigrbl-auth-api-agent-delegation`  
-**Proposed protocol/profile owners:** OAuth/RAR/token-exchange, optional GNAP, transaction-token, tool-protocol, and agent-runtime adapters  
-**Proposed UIX owner:** `pkgs/95-ui/agent-trust-uix`
+**Proposed pairing:** `tigrbl-auth-router-agent-delegation` + `@tigrbl-auth/agent-trust-uix`<br>
+**Status:** New product surface; delegation, attenuation, authority graph, token exchange, proof binding, policy, workload, audit, and provenance foundations exist<br>
+**Prepared:** July 11, 2026<br>
+**Proposed router owner:** `pkgs/80-routers/tigrbl-auth-router-agent-delegation`<br>
+**Proposed protocol/profile owners:** OAuth/RAR/token-exchange, optional GNAP, transaction-token, tool-protocol, and agent-runtime adapters<br>
+**Proposed UIX owner:** `pkgs/105-ui/agent-trust-uix`
 
 ## 1. Product Decision
 

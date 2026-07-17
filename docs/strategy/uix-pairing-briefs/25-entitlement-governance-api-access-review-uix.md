@@ -1,9 +1,9 @@
 # Entitlement Governance API + Access Review UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-api-entitlement-governance` + `@tigrbl-auth/access-review-uix`  
-**Opportunity-map item:** 15  
-**Primary buyers:** security, identity governance, compliance, internal audit, and application owners  
-**Best-fit verticals:** regulated enterprise, financial services, healthcare, government, and B2B SaaS  
+**Pairing:** `tigrbl-auth-router-entitlement-governance` + `@tigrbl-auth/access-review-uix`<br>
+**Opportunity-map item:** 15<br>
+**Primary buyers:** security, identity governance, compliance, internal audit, and application owners<br>
+**Best-fit verticals:** regulated enterprise, financial services, healthcare, government, and B2B SaaS<br>
 **Status:** proposed product surface built on existing repository primitives
 
 ## 1. Product Decision

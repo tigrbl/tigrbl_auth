@@ -1,11 +1,11 @@
 # Device and IoT Identity API + Fleet Trust UIX Requirements Brief
 
-**Proposed pairing:** `tigrbl-auth-api-device-identity` + `@tigrbl-auth/fleet-trust-uix`  
-**Status:** New product surface; device/machine principal, credential, certificate, attestation, policy, token, and storage foundations exist  
-**Prepared:** July 11, 2026  
-**Proposed API owner:** `pkgs/80-apis/tigrbl-auth-api-device-identity`  
-**Proposed protocol/provider owners:** device onboarding, attestation, ACE/CoAP, certificate, firmware, and vendor/cloud adapters  
-**Proposed UIX owner:** `pkgs/95-ui/fleet-trust-uix`
+**Proposed pairing:** `tigrbl-auth-router-device-identity` + `@tigrbl-auth/fleet-trust-uix`<br>
+**Status:** New product surface; device/machine principal, credential, certificate, attestation, policy, token, and storage foundations exist<br>
+**Prepared:** July 11, 2026<br>
+**Proposed router owner:** `pkgs/80-routers/tigrbl-auth-router-device-identity`<br>
+**Proposed protocol/provider owners:** device onboarding, attestation, ACE/CoAP, certificate, firmware, and vendor/cloud adapters<br>
+**Proposed UIX owner:** `pkgs/105-ui/fleet-trust-uix`
 
 ## 1. Product Decision
 

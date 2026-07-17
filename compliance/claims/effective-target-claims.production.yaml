@@ -70,6 +70,9 @@ effective_deployment:
     enable_rfc8417: false
     enable_rfc8291: false
     enable_rfc8812: false
+    enable_webauthn: false
+    enable_fido2_server_profile: false
+    enable_fido_metadata_service: false
     enable_rfc8932: false
     enable_rfc8523: false
   active_capabilities:
@@ -219,6 +222,7 @@ effective_deployment:
   - Import/export portability
   - Release bundle and signature verification
   product_surface: null
+  router_packages: []
   allowed_admin_resources: []
   required_table_resources: []
   allowed_admin_rest_groups: []

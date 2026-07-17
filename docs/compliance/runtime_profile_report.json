@@ -1,5 +1,5 @@
 {
-  "generated_at": "20260713T054401Z",
+  "generated_at": "20260717T172115Z",
   "deployment_profile": "baseline",
   "report_mode": "validated-runs",
   "validated_artifact_source": null,
@@ -61,7 +61,7 @@
       "display_name": "Hypercorn",
       "status": "missing",
       "installed": false,
-      "available_module": "hypercorn",
+      "available_module": null,
       "capabilities": [
         {
           "name": "http",
@@ -246,7 +246,7 @@
       "display_name": "Tigrcorn",
       "status": "missing",
       "installed": false,
-      "available_module": "tigrcorn",
+      "available_module": null,
       "capabilities": [
         {
           "name": "http",

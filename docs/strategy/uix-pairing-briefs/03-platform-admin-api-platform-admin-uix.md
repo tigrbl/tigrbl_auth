@@ -1,10 +1,10 @@
 # Platform Admin API + UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-api-platform-admin` + `@tigrbl-auth/platform-admin-uix`  
-**Status:** Delivery brief  
-**Prepared:** July 11, 2026  
-**API owner:** `pkgs/80-apis/tigrbl-auth-api-platform-admin`  
-**UIX owner:** `pkgs/95-ui/platform-admin-uix`
+**Pairing:** `tigrbl-auth-backend-app-platform-admin` + `@tigrbl-auth/platform-admin-uix`<br>
+**Status:** Delivery brief<br>
+**Prepared:** July 11, 2026<br>
+**Backend app owner:** `pkgs/90-backend-apps/tigrbl-auth-backend-app-platform-admin`<br>
+**UIX owner:** `pkgs/105-ui/platform-admin-uix`
 
 ## 1. Product Decision
 
@@ -62,7 +62,7 @@ The UIX must fail closed on:
 
 ### Contract drift to resolve
 
-The package README advertises `/rpc` and `/openrpc.json`, while the current `PLATFORM_ADMIN_API_CONTRACT` lists both as forbidden. Until source, generated contracts, tests, and documentation agree, the frontend must treat the machine-readable contract as authoritative and must not depend on JSON-RPC. Delivery must either:
+The package README advertises `/rpc` and `/openrpc.json`, while the current `PLATFORM_ADMIN_BACKEND_APP_CONTRACT` lists both as forbidden. Until source, generated contracts, tests, and documentation agree, the frontend must treat the machine-readable contract as authoritative and must not depend on JSON-RPC. Delivery must either:
 
 1. remove the stale README claims and keep the product REST-only; or
 2. deliberately add the RPC surface to the contract, boundary tests, authorization model, generated docs, and UIX client.
@@ -223,13 +223,13 @@ Produce a route-level copy deck containing:
 
 ## 11. Source Evidence
 
-- `pkgs/80-apis/tigrbl-auth-api-platform-admin/README.md`
-- `pkgs/80-apis/tigrbl-auth-api-platform-admin/src/tigrbl_auth_api_platform_admin/contract.py`
-- `pkgs/95-ui/platform-admin-uix/README.md`
-- `pkgs/95-ui/platform-admin-uix/App.tsx`
-- `pkgs/95-ui/platform-admin-uix/services/platformAdminClient.ts`
-- `pkgs/95-ui/platform-admin-uix/services/workflowCrud.test.ts`
-- `pkgs/95-ui/platform-admin-uix/pages/platformCrudPages.test.tsx`
-- `tests/packages/tigrbl-auth-api-platform-admin/`
+- `pkgs/90-backend-apps/tigrbl-auth-backend-app-platform-admin/README.md`
+- `pkgs/90-backend-apps/tigrbl-auth-backend-app-platform-admin/src/tigrbl_auth_backend_app_platform_admin/contract.py`
+- `pkgs/105-ui/platform-admin-uix/README.md`
+- `pkgs/105-ui/platform-admin-uix/App.tsx`
+- `pkgs/105-ui/platform-admin-uix/services/platformAdminClient.ts`
+- `pkgs/105-ui/platform-admin-uix/services/workflowCrud.test.ts`
+- `pkgs/105-ui/platform-admin-uix/pages/platformCrudPages.test.tsx`
+- `tests/packages/tigrbl-auth-backend-app-platform-admin/`
 - `tests/unit/test_product_api_surfaces.py`
 - Platform-admin SSOT feature/claim/test/evidence/boundary records

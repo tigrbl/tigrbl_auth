@@ -1,11 +1,11 @@
 # Token Service API + Token Studio UIX Requirements Brief
 
-**Proposed pairing:** `tigrbl-auth-api-token-service` + `@tigrbl-auth/token-studio-uix`  
-**Status:** New governed product surface over substantial existing OAuth, JOSE, storage, exchange, validation, and revocation behavior  
-**Prepared:** July 11, 2026  
-**Proposed API owner:** `pkgs/80-apis/tigrbl-auth-api-token-service`  
-**Protocol owners:** OAuth/OIDC protocol packages and format-specific token providers  
-**Proposed UIX owner:** `pkgs/95-ui/token-studio-uix`
+**Proposed pairing:** `tigrbl-auth-router-token-service` + `@tigrbl-auth/token-studio-uix`<br>
+**Status:** New governed product surface over substantial existing OAuth, JOSE, storage, exchange, validation, and revocation behavior<br>
+**Prepared:** July 11, 2026<br>
+**Proposed router owner:** `pkgs/80-routers/tigrbl-auth-router-token-service`<br>
+**Protocol owners:** OAuth/OIDC protocol packages and format-specific token providers<br>
+**Proposed UIX owner:** `pkgs/105-ui/token-studio-uix`
 
 ## 1. Product Decision
 

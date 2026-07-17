@@ -13,10 +13,10 @@ from .proofs import DelegationAttenuationProof, DelegationGrantSpec
 ACTIVE_GRANT_STATUSES = {"active"}
 TERMINAL_GRANT_STATUSES = {"revoked", "expired", "replaced"}
 MANAGEMENT_DELEGATION_SURFACES = {
-    "platform-admin-api",
-    "tenant-admin-api",
-    "developer-api",
-    "service-admin-api",
+    "platform-admin-app",
+    "tenant-admin-app",
+    "developer-app",
+    "service-admin-app",
 }
 DELEGATION_GRANT_UIX_WORKFLOWS = (
     "list",

@@ -22,7 +22,7 @@ This matrix reconciles declared scope, current claims, owner modules, public sur
 | OIDC Core 1.0 | tier 3 / evidenced-release-gated | pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/core.py | current: ∅<br>target: ∅ | conformance, integration | compliance/evidence/tier3/oidc-core/ | none |
 | OIDC Discovery 1.0 | tier 3 / evidenced-release-gated | pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/discovery.py | current: /.well-known/openid-configuration<br>target: /.well-known/openid-configuration | conformance, integration, interop | compliance/evidence/tier3/discovery/ | none |
 | OIDC Session Management | tier 3 / evidenced-release-gated | pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/session_mgmt.py | current: /login, /authorize, /logout<br>target: /login, /authorize, /logout | conformance, integration, negative, unit | compliance/evidence/tier3/oidc-session-management/ | none |
-| OpenAPI 3.1 / 3.2 compatible public contract | tier 3 / generated-live-from-deployment-metadata | pkgs/80-apis/tigrbl-auth-api-public/src/tigrbl_auth_api_public/openapi.py | current: ∅<br>target: ∅ | e2e, integration, unit | compliance/evidence/tier3/contracts/openapi/ | none |
+| OpenAPI 3.1 / 3.2 compatible public contract | tier 3 / generated-live-from-deployment-metadata | pkgs/90-backend-apps/tigrbl-auth-backend-app-public/src/tigrbl_auth_backend_app_public/openapi.py | current: ∅<br>target: ∅ | e2e, integration, unit | compliance/evidence/tier3/contracts/openapi/ | none |
 
 ## production-completion-required
 
@@ -62,7 +62,7 @@ This matrix reconciles declared scope, current claims, owner modules, public sur
 
 | Target | Claim | Owner | Surface | Tests | Evidence | Gaps |
 |---|---|---|---|---|---|---|
-| ASGI 3 application package | tier 3 / evidenced-release-gated | pkgs/80-apis/tigrbl-auth-api-public/src/tigrbl_auth_api_public/app.py | current: ∅<br>target: ∅ | integration, unit, conformance | compliance/evidence/tier3/asgi-application/ | none |
+| ASGI 3 application package | tier 3 / evidenced-release-gated | pkgs/90-backend-apps/tigrbl-auth-backend-app-public/src/tigrbl_auth_backend_app_public/app.py | current: ∅<br>target: ∅ | integration, unit, conformance | compliance/evidence/tier3/asgi-application/ | none |
 | Runner profile: Uvicorn | tier 3 / evidenced-release-gated | pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/uvicorn.py | current: ∅<br>target: ∅ | unit, integration, conformance | compliance/evidence/tier3/runner-uvicorn/ | none |
 | Runner profile: Hypercorn | tier 3 / evidenced-release-gated | pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/hypercorn.py | current: ∅<br>target: ∅ | unit, integration, conformance | compliance/evidence/tier3/runner-hypercorn/ | none |
 | Runner profile: Tigrcorn | tier 3 / evidenced-release-gated | pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/tigrcorn.py | current: ∅<br>target: ∅ | unit, integration, conformance | compliance/evidence/tier3/runner-tigrcorn/ | none |

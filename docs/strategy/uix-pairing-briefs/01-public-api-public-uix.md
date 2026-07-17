@@ -1,10 +1,10 @@
 # Public Identity API + UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-api-public` + `@tigrbl-auth/public-uix`  
-**Status:** Delivery brief  
-**Prepared:** July 11, 2026  
-**API owner:** `pkgs/80-apis/tigrbl-auth-api-public`  
-**UIX owner:** `pkgs/95-ui/public-uix`
+**Pairing:** `tigrbl-auth-backend-app-public` + `@tigrbl-auth/public-uix`<br>
+**Status:** Delivery brief<br>
+**Prepared:** July 11, 2026<br>
+**Backend app owner:** `pkgs/90-backend-apps/tigrbl-auth-backend-app-public`<br>
+**UIX owner:** `pkgs/105-ui/public-uix`
 
 ## 1. Product Decision
 
@@ -189,13 +189,13 @@ Produce a route-level copy deck containing:
 
 ## 11. Source Evidence
 
-- `pkgs/80-apis/tigrbl-auth-api-public/README.md`
-- `pkgs/80-apis/tigrbl-auth-api-public/src/tigrbl_auth_api_public/contract.py`
-- `pkgs/80-apis/tigrbl-auth-api-public/src/tigrbl_auth_api_public/openapi.py`
-- `pkgs/95-ui/public-uix/README.md`
-- `pkgs/95-ui/public-uix/App.tsx`
-- `pkgs/95-ui/public-uix/services/publicRouting.ts`
-- `pkgs/95-ui/public-uix/services/publicUxPolicy.ts`
+- `pkgs/90-backend-apps/tigrbl-auth-backend-app-public/README.md`
+- `pkgs/90-backend-apps/tigrbl-auth-backend-app-public/src/tigrbl_auth_backend_app_public/contract.py`
+- `pkgs/90-backend-apps/tigrbl-auth-backend-app-public/src/tigrbl_auth_backend_app_public/openapi.py`
+- `pkgs/105-ui/public-uix/README.md`
+- `pkgs/105-ui/public-uix/App.tsx`
+- `pkgs/105-ui/public-uix/services/publicRouting.ts`
+- `pkgs/105-ui/public-uix/services/publicUxPolicy.ts`
 - `tests/unit/test_public_route_contracts.py`
 - `tests/unit/test_public_operator_surface_boundary.py`
 - `tests/uix/` public UIX boundary and browser-security coverage

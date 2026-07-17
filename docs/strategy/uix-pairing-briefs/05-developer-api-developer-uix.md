@@ -1,10 +1,10 @@
 # Developer API + UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-api-developer` + `@tigrbl-auth/developer-uix`  
-**Status:** Delivery brief  
-**Prepared:** July 11, 2026  
-**API owner:** `pkgs/80-apis/tigrbl-auth-api-developer`  
-**UIX owner:** `pkgs/95-ui/developer-uix`
+**Pairing:** `tigrbl-auth-backend-app-developer` + `@tigrbl-auth/developer-uix`<br>
+**Status:** Delivery brief<br>
+**Prepared:** July 11, 2026<br>
+**Backend app owner:** `pkgs/90-backend-apps/tigrbl-auth-backend-app-developer`<br>
+**UIX owner:** `pkgs/105-ui/developer-uix`
 
 ## 1. Product Decision
 
@@ -222,15 +222,15 @@ Produce a route-level copy deck containing:
 
 ## 11. Source Evidence
 
-- `pkgs/80-apis/tigrbl-auth-api-developer/README.md`
-- `pkgs/80-apis/tigrbl-auth-api-developer/src/tigrbl_auth_api_developer/contract.py`
-- `pkgs/95-ui/developer-uix/README.md`
-- `pkgs/95-ui/developer-uix/App.tsx`
-- `pkgs/95-ui/developer-uix/services/developerClient.ts`
-- `pkgs/95-ui/developer-uix/services/backendSurface.ts`
-- `pkgs/95-ui/developer-uix/services/workflowCrud.test.ts`
-- `pkgs/95-ui/developer-uix/pages/developerCrudPages.test.tsx`
-- `pkgs/95-ui/developer-uix/pages/OAuthFlowTesterPage.tsx`
-- `tests/packages/tigrbl-auth-api-developer/`
+- `pkgs/90-backend-apps/tigrbl-auth-backend-app-developer/README.md`
+- `pkgs/90-backend-apps/tigrbl-auth-backend-app-developer/src/tigrbl_auth_backend_app_developer/contract.py`
+- `pkgs/105-ui/developer-uix/README.md`
+- `pkgs/105-ui/developer-uix/App.tsx`
+- `pkgs/105-ui/developer-uix/services/developerClient.ts`
+- `pkgs/105-ui/developer-uix/services/backendSurface.ts`
+- `pkgs/105-ui/developer-uix/services/workflowCrud.test.ts`
+- `pkgs/105-ui/developer-uix/pages/developerCrudPages.test.tsx`
+- `pkgs/105-ui/developer-uix/pages/OAuthFlowTesterPage.tsx`
+- `tests/packages/tigrbl-auth-backend-app-developer/`
 - `tests/unit/test_product_api_surfaces.py`
 - Developer API/UIX SSOT feature/claim/test/evidence/boundary records

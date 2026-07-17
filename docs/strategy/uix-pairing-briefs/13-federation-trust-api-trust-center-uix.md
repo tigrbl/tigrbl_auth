@@ -1,10 +1,10 @@
 # Federation and Trust API + Trust Center UIX Requirements Brief
 
-**Proposed pairing:** `tigrbl-auth-api-federation-trust` + `@tigrbl-auth/trust-center-uix`  
-**Status:** New product surface; relevant contracts, providers, graphs, discovery, JOSE, storage, and tenant authority foundations exist  
-**Prepared:** July 11, 2026  
-**Proposed API owner:** `pkgs/80-apis/tigrbl-auth-api-federation-trust`  
-**Proposed UIX owner:** `pkgs/95-ui/trust-center-uix`
+**Proposed pairing:** `tigrbl-auth-router-federation-trust` + `@tigrbl-auth/trust-center-uix`<br>
+**Status:** New product surface; relevant contracts, providers, graphs, discovery, JOSE, storage, and tenant authority foundations exist<br>
+**Prepared:** July 11, 2026<br>
+**Proposed router owner:** `pkgs/80-routers/tigrbl-auth-router-federation-trust`<br>
+**Proposed UIX owner:** `pkgs/105-ui/trust-center-uix`
 
 ## 1. Product Decision
 

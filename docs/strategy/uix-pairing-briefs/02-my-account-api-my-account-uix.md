@@ -1,10 +1,10 @@
 # My Account API + UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-api-my-account` + `@tigrbl-auth/my-account-uix`  
-**Status:** Delivery brief  
-**Prepared:** July 11, 2026  
-**API owner:** `pkgs/80-apis/tigrbl-auth-api-my-account`  
-**UIX owner:** `pkgs/95-ui/my-account-uix`
+**Pairing:** `tigrbl-auth-backend-app-my-account` + `@tigrbl-auth/my-account-uix`<br>
+**Status:** Delivery brief<br>
+**Prepared:** July 11, 2026<br>
+**Backend app owner:** `pkgs/90-backend-apps/tigrbl-auth-backend-app-my-account`<br>
+**UIX owner:** `pkgs/105-ui/my-account-uix`
 
 ## 1. Product Decision
 
@@ -196,11 +196,11 @@ Produce a route-level copy deck containing:
 
 ## 11. Source Evidence
 
-- `pkgs/80-apis/tigrbl-auth-api-my-account/README.md`
-- `pkgs/80-apis/tigrbl-auth-api-my-account/src/tigrbl_auth_api_my_account/contract.py`
-- `pkgs/95-ui/my-account-uix/README.md`
-- `pkgs/95-ui/my-account-uix/App.tsx`
-- `pkgs/95-ui/my-account-uix/services/myAccountClient.ts`
-- `pkgs/95-ui/my-account-uix/services/workflowCrud.test.ts`
-- `pkgs/95-ui/my-account-uix/pages/myAccountCrudPages.test.tsx`
+- `pkgs/90-backend-apps/tigrbl-auth-backend-app-my-account/README.md`
+- `pkgs/90-backend-apps/tigrbl-auth-backend-app-my-account/src/tigrbl_auth_backend_app_my_account/contract.py`
+- `pkgs/105-ui/my-account-uix/README.md`
+- `pkgs/105-ui/my-account-uix/App.tsx`
+- `pkgs/105-ui/my-account-uix/services/myAccountClient.ts`
+- `pkgs/105-ui/my-account-uix/services/workflowCrud.test.ts`
+- `pkgs/105-ui/my-account-uix/pages/myAccountCrudPages.test.tsx`
 - My Account API product-boundary tests and SSOT feature/claim/test/evidence records

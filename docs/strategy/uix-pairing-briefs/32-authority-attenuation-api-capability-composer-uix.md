@@ -1,8 +1,8 @@
 # Authority Attenuation API + Capability Composer UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-api-authority-attenuation` + `@tigrbl-auth/capability-composer-uix`  
-**Additional opportunity:** Authorization/delegation/sovereignty extension 3  
-**Primary buyers:** authorization platform teams, security engineering, workload and agent platforms, API product teams, governance administrators, and high-assurance application owners  
+**Pairing:** `tigrbl-auth-router-authority-attenuation` + `@tigrbl-auth/capability-composer-uix`<br>
+**Additional opportunity:** Authorization/delegation/sovereignty extension 3<br>
+**Primary buyers:** authorization platform teams, security engineering, workload and agent platforms, API product teams, governance administrators, and high-assurance application owners<br>
 **Status:** proposed product surface; scope coverage, wildcard narrowing, authority closure, monotonicity, least-authority diff, durable proof, and delegation lifecycle foundations exist
 
 ## 1. Product Decision

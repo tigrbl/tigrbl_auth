@@ -1,11 +1,11 @@
 # Credential Wallet API + Wallet UIX/SDK Requirements Brief
 
-**Proposed pairing:** `tigrbl-auth-api-wallet` + `@tigrbl-auth/wallet-uix` + wallet SDKs  
-**Status:** New product surface; no wallet contracts, custody model, credential store, OpenID4VC client, or presentation UIX currently exists  
-**Prepared:** July 11, 2026  
-**Proposed API owner:** conditional on custody decision; hosted services under `pkgs/80-apis/tigrbl-auth-api-wallet`  
-**Proposed protocol/SDK owners:** `pkgs/50-protocols/tigrbl-openid4vc-wallet` and platform/mobile/web SDKs  
-**Proposed UIX owner:** `pkgs/95-ui/wallet-uix`
+**Proposed pairing:** `tigrbl-auth-router-wallet` + `@tigrbl-auth/wallet-uix` + wallet SDKs<br>
+**Status:** New product surface; no wallet contracts, custody model, credential store, OpenID4VC client, or presentation UIX currently exists<br>
+**Prepared:** July 11, 2026<br>
+**Proposed router owner:** conditional on custody decision; hosted services under `pkgs/80-routers/tigrbl-auth-router-wallet`<br>
+**Proposed protocol/SDK owners:** `pkgs/50-protocols/tigrbl-openid4vc-wallet` and platform/mobile/web SDKs<br>
+**Proposed UIX owner:** `pkgs/105-ui/wallet-uix`
 
 ## 1. Product Decision Required Before Implementation
 

@@ -19,7 +19,7 @@ Normative anchors:
 | Runtime helper | `ScimProvisioningPlane` exists under governance-extension code and supports schema registration, user provision, group provision, simple patch, tenant snapshots. | [`governance_extension.py`](../pkgs/20-providers/tigrbl-authz-policy/src/tigrbl_authz_policy/governance_extension.py) | Useful prototype/behavior seed, not a SCIM protocol server. |
 | Tests | Unit tests cover schema registration, required fields, user patch, group membership, tenant mismatch, unsupported patch op. | [`test_governance_extension_plane_phase5.py`](../tests/unit/test_governance_extension_plane_phase5.py), [`test_phase5_governance_extension_boundary.py`](../tests/unit/test_phase5_governance_extension_boundary.py) | Current proof is helper-level T1/T2 behavior, not RFC 7643/7644 endpoint conformance. |
 | Storage | Canonical storage has `Tenant`, `User`, `Service`, `Client`, keys, sessions, tokens, audit, etc.; no canonical `Group`/SCIM mapping tables are present. | [`tigrbl_identity_storage.tables`](../pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables) | User mapping can start from existing tables; group, membership, externalId, schema metadata, and SCIM audit need storage work. |
-| Frontdoor API | No `tigrbl-auth-api-scim` or `/scim/v2` frontdoor exists. | Repo path scan | SCIM should be a new provisioning frontdoor or a tightly scoped Management API slice. |
+| Frontdoor API | No `tigrbl-auth-router-scim` or `/scim/v2` frontdoor exists. | Repo path scan | SCIM should be a new provisioning frontdoor or a tightly scoped Management API slice. |
 
 ## SCIM 2.0 Roles
 
@@ -28,8 +28,8 @@ Normative anchors:
 | SCIM Client | External IdP or lifecycle tool that sends provisioning operations. Examples: Okta, Microsoft Entra ID, Auth0 inbound SCIM partner connection, HRIS/IGA tooling. | A registered service/workload client with provisioning scopes and tenant binding. |
 | SCIM Service Provider | The application/service receiving SCIM requests and managing identities. | A new `tigrbl_auth` SCIM/provisioning API frontdoor backed by canonical identity storage. |
 | Resource Owner / Subject | User or group being provisioned. | Canonical `User`, future canonical `Group`, membership, entitlement, and audit records. |
-| Authorization Server | Issues tokens used by the SCIM Client to call the SCIM Service Provider. | Existing `public-api` token issuer or service-admin-issued API/service key material. |
-| Resource Server | Validates bearer credentials and enforces tenant/scim scopes on SCIM requests. | SCIM API frontdoor plus `resource-validation-api`/resource-server verifier contracts. |
+| Authorization Server | Issues tokens used by the SCIM Client to call the SCIM Service Provider. | Existing `public-app` token issuer or service-admin-issued API/service key material. |
+| Resource Server | Validates bearer credentials and enforces tenant/scim scopes on SCIM requests. | SCIM API frontdoor plus `resource-validation-app`/resource-server verifier contracts. |
 
 ## Protocol Surface
 
@@ -79,7 +79,7 @@ Normative anchors:
 |---|---|---|
 | Product lane | Treat SCIM as `Provisioning API`, not as public login, tenant-admin CRUD, or OIDC OP behavior. | Competitors expose SCIM as enterprise provisioning/lifecycle surface. |
 | Backend package | Add `tigrbl-identity-scim` only when implementation begins. | Keeps RFC 7643/7644 schemas, filters, PATCH semantics, SCIM errors, and mapping logic isolated from generic admin CRUD. |
-| Frontdoor package | Add `tigrbl-auth-api-scim` or `tigrbl-auth-api-provisioning` with `/scim/v2`. | SCIM clients expect a clean protocol base URL and standard resource paths. |
+| Frontdoor package | Add `tigrbl-auth-router-scim` or `tigrbl-auth-router-provisioning` with `/scim/v2`. | SCIM clients expect a clean protocol base URL and standard resource paths. |
 | Storage | Extend `tigrbl-identity-storage` with canonical `Group`, membership, SCIM external identity mapping, schema/connection metadata, and provisioning audit records. | SCIM must not duplicate identity tables or bypass canonical storage. |
 | Authn/authz | Protect SCIM with bearer tokens or service keys bound to tenant + SCIM scopes. | SCIM is a protected resource server surface. The SCIM API should consume tokens, not issue them. |
 | Tenant routing | Prefer tenant-scoped base URL: `/tenants/{tenant_slug}/scim/v2` for local/dev, with host-based tenant routing allowed later. | Enterprise IdPs configure one SCIM base URL per application/tenant. |
@@ -105,7 +105,7 @@ The clean target is:
 
 ```text
 tigrbl-identity-scim                 # RFC 7643/7644 schemas, protocol logic, filters, PATCH, errors
-tigrbl-auth-api-scim                 # Deployable SCIM v2 frontdoor
+tigrbl-auth-router-scim                 # Deployable SCIM v2 frontdoor
 @tigrbl-auth/tenant-admin-uix        # SCIM connection setup/status UI
 tigrbl-identity-storage              # Canonical users, groups, memberships, mappings, audit
 tigrbl-authz-resource-server      # Token/scope validation integration for SCIM API

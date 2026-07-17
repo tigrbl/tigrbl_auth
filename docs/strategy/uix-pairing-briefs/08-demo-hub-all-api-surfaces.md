@@ -1,9 +1,9 @@
 # Demo Hub + All Product API Surfaces Requirements Brief
 
-**Pairing:** `@tigrbl-auth/demo-hub-uix` + all seven product APIs/UIX  
-**Status:** Cross-surface orchestration brief; not a new aggregate API  
-**Prepared:** July 11, 2026  
-**UIX owner:** `pkgs/95-ui/demo-hub-uix`  
+**Pairing:** `@tigrbl-auth/demo-hub-uix` + all seven product APIs/UIX<br>
+**Status:** Cross-surface orchestration brief; not a new aggregate API<br>
+**Prepared:** July 11, 2026<br>
+**UIX owner:** `pkgs/105-ui/demo-hub-uix`<br>
 **Deployment owner:** `docker/docker-compose.demo-hub-uix.yml`
 
 ## 1. Product Decision
@@ -37,13 +37,13 @@ Demo Hub covers:
 
 | Surface | API | UIX |
 |---|---|---|
-| Public identity | `tigrbl-auth-api-public` | `@tigrbl-auth/public-uix` |
-| My Account | `tigrbl-auth-api-my-account` | `@tigrbl-auth/my-account-uix` |
-| Platform Admin | `tigrbl-auth-api-platform-admin` | `@tigrbl-auth/platform-admin-uix` |
-| Tenant Admin | `tigrbl-auth-api-tenant-admin` | `@tigrbl-auth/tenant-admin-uix` |
-| Developer | `tigrbl-auth-api-developer` | `@tigrbl-auth/developer-uix` |
-| Service Admin | `tigrbl-auth-api-service-admin` | `@tigrbl-auth/service-admin-uix` |
-| Resource Validation | `tigrbl-auth-api-resource-validation` | proposed `@tigrbl-auth/resource-validation-uix` |
+| Public identity | `tigrbl-auth-backend-app-public` | `@tigrbl-auth/public-uix` |
+| My Account | `tigrbl-auth-backend-app-my-account` | `@tigrbl-auth/my-account-uix` |
+| Platform Admin | `tigrbl-auth-backend-app-platform-admin` | `@tigrbl-auth/platform-admin-uix` |
+| Tenant Admin | `tigrbl-auth-backend-app-tenant-admin` | `@tigrbl-auth/tenant-admin-uix` |
+| Developer | `tigrbl-auth-backend-app-developer` | `@tigrbl-auth/developer-uix` |
+| Service Admin | `tigrbl-auth-backend-app-service-admin` | `@tigrbl-auth/service-admin-uix` |
+| Resource Validation | `tigrbl-auth-backend-app-resource-validation` | proposed `@tigrbl-auth/resource-validation-uix` |
 
 Demo Hub must preserve each surface’s authentication, authorization, path allowlist, and data ownership. It may deep-link across surfaces; it must not call a product API directly from the browser with shared administrator secrets.
 
@@ -236,11 +236,11 @@ Produce:
 
 ## 11. Source Evidence
 
-- `pkgs/95-ui/demo-hub-uix/README.md`
-- `pkgs/95-ui/demo-hub-uix/surfaces.ts`
-- `pkgs/95-ui/demo-hub-uix/demoState.ts`
-- `pkgs/95-ui/demo-hub-uix/App.tsx`
-- `pkgs/95-ui/demo-hub-uix/surfaces.test.ts`
+- `pkgs/105-ui/demo-hub-uix/README.md`
+- `pkgs/105-ui/demo-hub-uix/surfaces.ts`
+- `pkgs/105-ui/demo-hub-uix/demoState.ts`
+- `pkgs/105-ui/demo-hub-uix/App.tsx`
+- `pkgs/105-ui/demo-hub-uix/surfaces.test.ts`
 - `docker/docker-compose.demo-hub-uix.yml`
 - Seven product API contracts and individual API/UIX pairing briefs
 - Demo/API deployment and package-layering tests

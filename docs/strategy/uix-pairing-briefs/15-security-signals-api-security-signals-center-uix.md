@@ -1,11 +1,11 @@
 # Security Signals API + Security Signals Center UIX Requirements Brief
 
-**Proposed pairing:** `tigrbl-auth-api-security-signals` + `@tigrbl-auth/security-signals-center-uix`  
-**Status:** New product surface; telemetry, anomaly, audit, session, revocation, policy, JOSE, and provenance foundations exist  
-**Prepared:** July 11, 2026  
-**Proposed API owner:** `pkgs/80-apis/tigrbl-auth-api-security-signals`  
-**Proposed protocol owner:** `pkgs/50-protocols/tigrbl-security-shared-signals`  
-**Proposed UIX owner:** `pkgs/95-ui/security-signals-center-uix`
+**Proposed pairing:** `tigrbl-auth-router-security-signals` + `@tigrbl-auth/security-signals-center-uix`<br>
+**Status:** New product surface; telemetry, anomaly, audit, session, revocation, policy, JOSE, and provenance foundations exist<br>
+**Prepared:** July 11, 2026<br>
+**Proposed router owner:** `pkgs/80-routers/tigrbl-auth-router-security-signals`<br>
+**Proposed protocol owner:** `pkgs/50-protocols/tigrbl-security-shared-signals`<br>
+**Proposed UIX owner:** `pkgs/105-ui/security-signals-center-uix`
 
 ## 1. Product Decision
 

@@ -1,9 +1,9 @@
 # Secrets Lease/Broker API + Credential Broker UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-api-credential-broker` + `@tigrbl-auth/credential-broker-uix`  
-**Opportunity-map item:** 16  
-**Primary buyers:** platform engineering, DevOps, security engineering, data infrastructure, and CI/CD teams  
-**Best-fit verticals:** cloud platforms, data/AI infrastructure, software delivery, regulated operations, and multi-cloud enterprise  
+**Pairing:** `tigrbl-auth-router-credential-broker` + `@tigrbl-auth/credential-broker-uix`<br>
+**Opportunity-map item:** 16<br>
+**Primary buyers:** platform engineering, DevOps, security engineering, data infrastructure, and CI/CD teams<br>
+**Best-fit verticals:** cloud platforms, data/AI infrastructure, software delivery, regulated operations, and multi-cloud enterprise<br>
 **Status:** proposed product surface; identity, credential, workload, attestation, delegation, token, key, and audit foundations exist
 
 ## 1. Product Decision
@@ -542,7 +542,7 @@ Standardize `credential`, `lease`, `role`, `target`, `delivery`, `renewal`, `rot
 - `pkgs/01-storage/tigrbl-identity-storage/`
 - `pkgs/20-providers/tigrbl-authn-credentials/`
 - `pkgs/20-providers/tigrbl-authz-policy/`
-- `pkgs/80-apis/tigrbl-auth-api-service-admin/`
+- `pkgs/90-backend-apps/tigrbl-auth-backend-app-service-admin/`
 - `tests/integration/test_service_key_creation.py`
 - prior workload, attestation, certificate, token-service, agent-delegation, and entitlement-governance pairing briefs.
 

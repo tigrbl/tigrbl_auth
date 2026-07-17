@@ -1,10 +1,10 @@
 # Tenant Admin API + UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-api-tenant-admin` + `@tigrbl-auth/tenant-admin-uix`  
-**Status:** Delivery brief  
-**Prepared:** July 11, 2026  
-**API owner:** `pkgs/80-apis/tigrbl-auth-api-tenant-admin`  
-**UIX owner:** `pkgs/95-ui/tenant-admin-uix`
+**Pairing:** `tigrbl-auth-backend-app-tenant-admin` + `@tigrbl-auth/tenant-admin-uix`<br>
+**Status:** Delivery brief<br>
+**Prepared:** July 11, 2026<br>
+**Backend app owner:** `pkgs/90-backend-apps/tigrbl-auth-backend-app-tenant-admin`<br>
+**UIX owner:** `pkgs/105-ui/tenant-admin-uix`
 
 ## 1. Product Decision
 
@@ -220,14 +220,14 @@ Produce a route-level copy deck containing:
 
 ## 11. Source Evidence
 
-- `pkgs/80-apis/tigrbl-auth-api-tenant-admin/README.md`
-- `pkgs/80-apis/tigrbl-auth-api-tenant-admin/src/tigrbl_auth_api_tenant_admin/contract.py`
-- `pkgs/95-ui/tenant-admin-uix/README.md`
-- `pkgs/95-ui/tenant-admin-uix/App.tsx`
-- `pkgs/95-ui/tenant-admin-uix/services/tenantAdminClient.ts`
-- `pkgs/95-ui/tenant-admin-uix/services/backendSurface.ts`
-- `pkgs/95-ui/tenant-admin-uix/services/workflowCrud.test.ts`
-- `pkgs/95-ui/tenant-admin-uix/pages/tenantCrudPages.test.tsx`
-- `tests/packages/tigrbl-auth-api-tenant-admin/`
+- `pkgs/90-backend-apps/tigrbl-auth-backend-app-tenant-admin/README.md`
+- `pkgs/90-backend-apps/tigrbl-auth-backend-app-tenant-admin/src/tigrbl_auth_backend_app_tenant_admin/contract.py`
+- `pkgs/105-ui/tenant-admin-uix/README.md`
+- `pkgs/105-ui/tenant-admin-uix/App.tsx`
+- `pkgs/105-ui/tenant-admin-uix/services/tenantAdminClient.ts`
+- `pkgs/105-ui/tenant-admin-uix/services/backendSurface.ts`
+- `pkgs/105-ui/tenant-admin-uix/services/workflowCrud.test.ts`
+- `pkgs/105-ui/tenant-admin-uix/pages/tenantCrudPages.test.tsx`
+- `tests/packages/tigrbl-auth-backend-app-tenant-admin/`
 - `tests/unit/test_product_api_surfaces.py`
 - Tenant-admin SSOT feature/claim/test/evidence/boundary records

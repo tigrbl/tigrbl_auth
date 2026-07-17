@@ -44,7 +44,7 @@ decisions:
 - id: BND-005
   statement: Only Tigrbl public APIs may be used for release-path composition and
     runtime integration.
-  adr: docs/adr/ADR-0014-tigrbl-public-api-only-composition.md
+  adr: docs/adr/ADR-0014-tigrbl-public-app-only-composition.md
   enforced_by_checks:
   - framework_leakage_scan
   - boundary-import-scan

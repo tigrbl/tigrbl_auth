@@ -35,7 +35,7 @@ RFC 8812:
   modules: [pkgs/20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose/standards/rfc8812.py]
   boundary: extension_quarantine
 WebAuthn Level 2 relying-party implementation:
-  modules: [pkgs/50-protocols/tigrbl-auth-protocol-webauthn/src/tigrbl_auth_protocol_webauthn, pkgs/80-apis/tigrbl-auth-api-webauthn/src/tigrbl_auth_api_webauthn]
+  modules: [pkgs/50-protocols/tigrbl-auth-protocol-webauthn/src/tigrbl_auth_protocol_webauthn, pkgs/80-routers/tigrbl-auth-router-webauthn/src/tigrbl_auth_router_webauthn]
   boundary: extension_quarantine
 FIDO2 server implementation profile:
   modules: [pkgs/50-protocols/tigrbl-auth-profile-fido2-server/src/tigrbl_auth_profile_fido2_server]
@@ -64,7 +64,7 @@ RFC 9068:
 RFC 9449:
   modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/dpop.py]
 OpenAPI 3.1 / 3.2 compatible public contract:
-  modules: [pkgs/80-apis/tigrbl-auth-api-public/src/tigrbl_auth_api_public/openapi.py]
+  modules: [pkgs/90-backend-apps/tigrbl-auth-backend-app-public/src/tigrbl_auth_backend_app_public/openapi.py]
 RFC 7591:
   modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/dynamic_client_registration.py]
 RFC 7592:
@@ -98,7 +98,7 @@ OIDC Front-Channel Logout:
 OIDC Back-Channel Logout:
   modules: [pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/backchannel_logout.py]
 ASGI 3 application package:
-  modules: [pkgs/80-apis/tigrbl-auth-api-public/src/tigrbl_auth_api_public/app.py]
+  modules: [pkgs/90-backend-apps/tigrbl-auth-backend-app-public/src/tigrbl_auth_backend_app_public/app.py]
 'Runner profile: Uvicorn':
   modules: [pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/uvicorn.py]
 'Runner profile: Hypercorn':

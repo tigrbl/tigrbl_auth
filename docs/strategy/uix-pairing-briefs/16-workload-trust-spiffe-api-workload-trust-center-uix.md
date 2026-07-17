@@ -1,11 +1,11 @@
 # Workload Trust and SPIFFE API + Workload Trust Center UIX Requirements Brief
 
-**Proposed pairing:** `tigrbl-auth-api-workload-trust` + `@tigrbl-auth/workload-trust-center-uix`  
-**Status:** New product surface; workload/machine records, credentials, trust domains, graphs, token exchange, mTLS, and governance foundations exist  
-**Prepared:** July 11, 2026  
-**Proposed API owner:** `pkgs/80-apis/tigrbl-auth-api-workload-trust`  
-**Proposed protocol/provider owner:** `pkgs/50-protocols/tigrbl-workload-spiffe` and SPIFFE-compatible providers  
-**Proposed UIX owner:** `pkgs/95-ui/workload-trust-center-uix`
+**Proposed pairing:** `tigrbl-auth-router-workload-trust` + `@tigrbl-auth/workload-trust-center-uix`<br>
+**Status:** New product surface; workload/machine records, credentials, trust domains, graphs, token exchange, mTLS, and governance foundations exist<br>
+**Prepared:** July 11, 2026<br>
+**Proposed router owner:** `pkgs/80-routers/tigrbl-auth-router-workload-trust`<br>
+**Proposed protocol/provider owner:** `pkgs/50-protocols/tigrbl-workload-spiffe` and SPIFFE-compatible providers<br>
+**Proposed UIX owner:** `pkgs/105-ui/workload-trust-center-uix`
 
 ## 1. Product Decision
 

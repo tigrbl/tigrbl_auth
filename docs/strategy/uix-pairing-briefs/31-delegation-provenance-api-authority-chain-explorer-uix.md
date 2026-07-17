@@ -1,8 +1,8 @@
 # Delegation Provenance API + Authority Chain Explorer UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-api-delegation-provenance` + `@tigrbl-auth/authority-chain-explorer-uix`  
-**Additional opportunity:** Authorization/delegation/sovereignty extension 2  
-**Primary buyers:** security engineering, IAM platform teams, application owners, workload and agent platform teams, auditors, and incident response  
+**Pairing:** `tigrbl-auth-router-delegation-provenance` + `@tigrbl-auth/authority-chain-explorer-uix`<br>
+**Additional opportunity:** Authorization/delegation/sovereignty extension 2<br>
+**Primary buyers:** security engineering, IAM platform teams, application owners, workload and agent platform teams, auditors, and incident response<br>
 **Status:** proposed product surface; durable delegation grants, scopes, proofs, edges, token links, authority graphs, attenuation, and runtime lineage already exist
 
 ## 1. Product Decision

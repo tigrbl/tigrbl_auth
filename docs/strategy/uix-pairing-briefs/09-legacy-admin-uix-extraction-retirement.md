@@ -1,10 +1,10 @@
 # Legacy Admin UIX Extraction and Retirement Brief
 
-**Surface:** `@tigrbl-auth/admin-uix`  
-**Pairing:** Legacy aggregate admin contract; no approved one-to-one product API  
-**Status:** Migration source, security maintenance, and retirement  
-**Prepared:** July 11, 2026  
-**Current owner:** `pkgs/95-ui/admin-uix`
+**Surface:** `@tigrbl-auth/admin-uix`<br>
+**Pairing:** Legacy aggregate admin contract; no approved one-to-one product API<br>
+**Status:** Migration source, security maintenance, and retirement<br>
+**Prepared:** July 11, 2026<br>
+**Current owner:** `pkgs/105-ui/admin-uix`
 
 ## 1. Product Decision
 
@@ -232,13 +232,13 @@ The operational package may be retired when:
 
 ## 14. Source Evidence
 
-- `pkgs/95-ui/admin-uix/README.md`
-- `pkgs/95-ui/admin-uix/App.tsx`
-- `pkgs/95-ui/admin-uix/components/`
-- `pkgs/95-ui/admin-uix/services/backendService.ts`
-- `pkgs/95-ui/admin-uix/services/adminAuthService.ts`
-- `pkgs/95-ui/admin-uix/services/controlPlaneStateService.ts`
-- `pkgs/95-ui/admin-uix/services/persistence.ts`
+- `pkgs/105-ui/admin-uix/README.md`
+- `pkgs/105-ui/admin-uix/App.tsx`
+- `pkgs/105-ui/admin-uix/components/`
+- `pkgs/105-ui/admin-uix/services/backendService.ts`
+- `pkgs/105-ui/admin-uix/services/adminAuthService.ts`
+- `pkgs/105-ui/admin-uix/services/controlPlaneStateService.ts`
+- `pkgs/105-ui/admin-uix/services/persistence.ts`
 - Admin UIX boundary, auth, resource, mutation, policy, and governance tests
 - Platform/Tenant/Developer/Service API/UIX pairing briefs
 - Admin UIX SSOT feature/claim/test/evidence/boundary records

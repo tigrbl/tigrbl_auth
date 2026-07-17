@@ -1,6 +1,6 @@
 {
   "scope": "project-tree-layout",
-  "strict": true,
+  "strict": false,
   "passed": true,
   "failures": [],
   "warnings": [],

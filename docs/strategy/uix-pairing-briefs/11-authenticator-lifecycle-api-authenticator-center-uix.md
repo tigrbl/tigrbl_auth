@@ -1,10 +1,10 @@
 # Authenticator Lifecycle API + Authenticator Center UIX Requirements Brief
 
-**Proposed pairing:** `tigrbl-auth-api-authenticators` + `@tigrbl-auth/authenticator-center-uix`  
-**Status:** New product surface; existing provider and contract foundations  
-**Prepared:** July 11, 2026  
-**Proposed API owner:** `pkgs/80-apis/tigrbl-auth-api-authenticators`  
-**Proposed UIX owner:** `pkgs/95-ui/authenticator-center-uix`
+**Proposed pairing:** `tigrbl-auth-router-authenticators` + `@tigrbl-auth/authenticator-center-uix`<br>
+**Status:** New product surface; existing provider and contract foundations<br>
+**Prepared:** July 11, 2026<br>
+**Proposed router owner:** `pkgs/80-routers/tigrbl-auth-router-authenticators`<br>
+**Proposed UIX owner:** `pkgs/105-ui/authenticator-center-uix`
 
 ## 1. Product Decision
 

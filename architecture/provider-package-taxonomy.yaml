@@ -16,13 +16,13 @@ rules:
     - 50-protocols
     - 60-runtime
     - 70-facade
-    - 80-apis
+    - 80-routers
   deterministic_behavior: 10-concrete
   durability: 01-storage-and-30-storage-runtime
   orchestration: 40-capabilities
   protocol_versions: 50-protocols
   runtime_mounting: 60-runtime
-  http_surfaces: 80-apis
+  http_surfaces: 80-routers
 
 canonical_providers:
   authenticators:
@@ -72,6 +72,8 @@ canonical_providers:
     - tigrbl-spiffe-workload-api-provider
     - tigrbl-svid-verifier-provider
   explicitly_ephemeral:
+    - tigrbl-access-governance-memory-provider
+    - tigrbl-policy-administration-memory-provider
     - tigrbl-replay-memory-provider
 
 compatibility_or_migration_packages:
@@ -85,8 +87,8 @@ compatibility_or_migration_packages:
     target: tigrbl-policy-decision-engine-default
     target_layer: 10-concrete
   tigrbl-authz-policy-admin-gate:
-    target: tigrbl-auth-api-admin-gate
-    target_layer: 80-apis
+    target: tigrbl-auth-router-admin-gate
+    target_layer: 80-routers
   tigrbl-authz-resource-server-verifier:
     target: tigrbl-protected-resource-authorization-capability
     target_layer: 40-capabilities

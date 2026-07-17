@@ -3693,6 +3693,10 @@ bindings:
   profile: null
   positive_tests:
   - tests/unit/test_rfc8812_webauthn_algorithms.py
+  - tests/unit/test_webauthn_foundation_delivery.py
+  - tests/unit/test_webauthn_protocol_delivery.py
+  - tests/unit/test_webauthn_api_delivery.py
+  - tests/unit/test_webauthn_attestation_delivery.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/jose/
@@ -6176,6 +6180,7 @@ bindings:
   - tests/unit/test_security_deps.py
   - tests/conformance/hardening/test_rfc8693_token_exchange.py
   - tests/unit/test_rfc8693_token_exchange.py
+  - tests/unit/test_token_exchange_capability.py
   - tests/integration/test_rfc8693_token_exchange_endpoint.py
   - tests/integration/test_token_exchange_flow.py
   - tests/conformance/hardening/test_rfc9700_security_bcp.py
@@ -6451,6 +6456,7 @@ bindings:
   - tests/unit/test_security_deps.py
   - tests/conformance/hardening/test_rfc8693_token_exchange.py
   - tests/unit/test_rfc8693_token_exchange.py
+  - tests/unit/test_token_exchange_capability.py
   - tests/integration/test_rfc8693_token_exchange_endpoint.py
   - tests/integration/test_token_exchange_flow.py
   - tests/conformance/hardening/test_rfc9700_security_bcp.py
@@ -6727,6 +6733,7 @@ bindings:
   - tests/unit/test_security_deps.py
   - tests/conformance/hardening/test_rfc8693_token_exchange.py
   - tests/unit/test_rfc8693_token_exchange.py
+  - tests/unit/test_token_exchange_capability.py
   - tests/integration/test_rfc8693_token_exchange_endpoint.py
   - tests/integration/test_token_exchange_flow.py
   - tests/conformance/hardening/test_rfc9700_security_bcp.py
@@ -7006,6 +7013,7 @@ bindings:
   - tests/unit/test_security_deps.py
   - tests/conformance/hardening/test_rfc8693_token_exchange.py
   - tests/unit/test_rfc8693_token_exchange.py
+  - tests/unit/test_token_exchange_capability.py
   - tests/integration/test_rfc8693_token_exchange_endpoint.py
   - tests/integration/test_token_exchange_flow.py
   - tests/conformance/hardening/test_rfc9700_security_bcp.py
@@ -7217,6 +7225,7 @@ bindings:
   - tests/unit/test_security_deps.py
   - tests/conformance/hardening/test_rfc8693_token_exchange.py
   - tests/unit/test_rfc8693_token_exchange.py
+  - tests/unit/test_token_exchange_capability.py
   - tests/integration/test_rfc8693_token_exchange_endpoint.py
   - tests/integration/test_token_exchange_flow.py
   - tests/conformance/hardening/test_rfc9700_security_bcp.py
@@ -8105,6 +8114,7 @@ bindings:
   - tests/unit/test_security_deps.py
   - tests/conformance/hardening/test_rfc8693_token_exchange.py
   - tests/unit/test_rfc8693_token_exchange.py
+  - tests/unit/test_token_exchange_capability.py
   - tests/integration/test_rfc8693_token_exchange_endpoint.py
   - tests/integration/test_token_exchange_flow.py
   evidence_refs:
@@ -8398,6 +8408,7 @@ bindings:
   - tests/conformance/hardening/test_rfc8693_token_exchange.py
   - tests/unit/test_resource_server_consumer_boundary.py
   - tests/unit/test_rfc8693_token_exchange.py
+  - tests/unit/test_token_exchange_capability.py
   - tests/integration/test_rfc8693_token_exchange_endpoint.py
   - tests/integration/test_token_exchange_flow.py
   evidence_refs:
@@ -9127,6 +9138,7 @@ bindings:
   - tests/conformance/hardening/test_rfc8693_token_exchange.py
   - tests/unit/test_resource_server_consumer_boundary.py
   - tests/unit/test_rfc8693_token_exchange.py
+  - tests/unit/test_token_exchange_capability.py
   - tests/integration/test_rfc8693_token_exchange_endpoint.py
   - tests/integration/test_token_exchange_flow.py
   evidence_refs:

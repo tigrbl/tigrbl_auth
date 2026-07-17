@@ -2365,7 +2365,7 @@ targets:
     status: generated-live-from-deployment-metadata
     profile: baseline
   owner_modules:
-  - pkgs/80-apis/tigrbl-auth-api-public/src/tigrbl_auth_api_public/openapi.py
+  - pkgs/90-backend-apps/tigrbl-auth-backend-app-public/src/tigrbl_auth_backend_app_public/openapi.py
   endpoint_surface:
     current: []
     target: []
@@ -2460,7 +2460,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/80-apis/tigrbl-auth-api-public/src/tigrbl_auth_api_public/app.py
+  - pkgs/90-backend-apps/tigrbl-auth-backend-app-public/src/tigrbl_auth_backend_app_public/app.py
   endpoint_surface:
     current: []
     target: []

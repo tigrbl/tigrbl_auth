@@ -1,10 +1,10 @@
 # Authorization Decision API + Policy Studio UIX Requirements Brief
 
-**Proposed pairing:** `tigrbl-auth-api-authorization` + `@tigrbl-auth/policy-studio-uix`  
-**Status:** New product surface; substantial engine, contract, graph, and storage foundations exist  
-**Prepared:** July 11, 2026  
-**Proposed API owner:** `pkgs/80-apis/tigrbl-auth-api-authorization`  
-**Proposed UIX owner:** `pkgs/95-ui/policy-studio-uix`
+**Proposed pairing:** `tigrbl-auth-router-authorization` + `@tigrbl-auth/policy-studio-uix`<br>
+**Status:** New product surface; substantial engine, contract, graph, and storage foundations exist<br>
+**Prepared:** July 11, 2026<br>
+**Proposed router owner:** `pkgs/80-routers/tigrbl-auth-router-authorization`<br>
+**Proposed UIX owner:** `pkgs/105-ui/policy-studio-uix`
 
 ## 1. Product Decision
 

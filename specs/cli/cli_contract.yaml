@@ -56,15 +56,15 @@ global_flags:
   default: &id008 []
   choices: &id009
   - admin-rest
-  - developer-api
+  - developer-app
   - diagnostics
-  - my-account-api
-  - platform-admin-api
-  - public-api
+  - my-account-app
+  - platform-admin-app
+  - public-app
   - public-rest
-  - resource-validation-api
-  - service-admin-api
-  - tenant-admin-api
+  - resource-validation-app
+  - service-admin-app
+  - tenant-admin-app
   action: append
 - key: slice
   flags:

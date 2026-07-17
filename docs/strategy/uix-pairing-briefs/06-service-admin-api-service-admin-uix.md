@@ -1,10 +1,10 @@
 # Service Admin API + UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-api-service-admin` + `@tigrbl-auth/service-admin-uix`  
-**Status:** Delivery brief  
-**Prepared:** July 11, 2026  
-**API owner:** `pkgs/80-apis/tigrbl-auth-api-service-admin`  
-**UIX owner:** `pkgs/95-ui/service-admin-uix`
+**Pairing:** `tigrbl-auth-backend-app-service-admin` + `@tigrbl-auth/service-admin-uix`<br>
+**Status:** Delivery brief<br>
+**Prepared:** July 11, 2026<br>
+**Backend app owner:** `pkgs/90-backend-apps/tigrbl-auth-backend-app-service-admin`<br>
+**UIX owner:** `pkgs/105-ui/service-admin-uix`
 
 ## 1. Product Decision
 
@@ -218,14 +218,14 @@ Produce a route-level copy deck containing:
 
 ## 11. Source Evidence
 
-- `pkgs/80-apis/tigrbl-auth-api-service-admin/README.md`
-- `pkgs/80-apis/tigrbl-auth-api-service-admin/src/tigrbl_auth_api_service_admin/contract.py`
-- `pkgs/95-ui/service-admin-uix/README.md`
-- `pkgs/95-ui/service-admin-uix/App.tsx`
-- `pkgs/95-ui/service-admin-uix/services/serviceAdminClient.ts`
-- `pkgs/95-ui/service-admin-uix/services/workflowCrud.test.ts`
-- `pkgs/95-ui/service-admin-uix/pages/serviceCrudPages.test.tsx`
-- `pkgs/95-ui/service-admin-uix/pages/ValidationToolsPage.tsx`
-- `tests/packages/tigrbl-auth-api-service-admin/`
+- `pkgs/90-backend-apps/tigrbl-auth-backend-app-service-admin/README.md`
+- `pkgs/90-backend-apps/tigrbl-auth-backend-app-service-admin/src/tigrbl_auth_backend_app_service_admin/contract.py`
+- `pkgs/105-ui/service-admin-uix/README.md`
+- `pkgs/105-ui/service-admin-uix/App.tsx`
+- `pkgs/105-ui/service-admin-uix/services/serviceAdminClient.ts`
+- `pkgs/105-ui/service-admin-uix/services/workflowCrud.test.ts`
+- `pkgs/105-ui/service-admin-uix/pages/serviceCrudPages.test.tsx`
+- `pkgs/105-ui/service-admin-uix/pages/ValidationToolsPage.tsx`
+- `tests/packages/tigrbl-auth-backend-app-service-admin/`
 - `tests/unit/test_product_api_surfaces.py`
 - Service-admin SSOT feature/claim/test/evidence/boundary records

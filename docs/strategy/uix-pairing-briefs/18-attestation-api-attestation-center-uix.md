@@ -1,11 +1,11 @@
 # Attestation API + Attestation Center UIX Requirements Brief
 
-**Proposed pairing:** `tigrbl-auth-api-attestation` + `@tigrbl-auth/attestation-center-uix`  
-**Status:** New product surface; key-attestation contracts/runtime/storage and adjacent evidence foundations exist  
-**Prepared:** July 11, 2026  
-**Proposed API owner:** `pkgs/80-apis/tigrbl-auth-api-attestation`  
-**Proposed capability owners:** verifier-neutral attestation contracts, appraisal engine, and format/provider adapters  
-**Proposed UIX owner:** `pkgs/95-ui/attestation-center-uix`
+**Proposed pairing:** `tigrbl-auth-router-attestation` + `@tigrbl-auth/attestation-center-uix`<br>
+**Status:** New product surface; key-attestation contracts/runtime/storage and adjacent evidence foundations exist<br>
+**Prepared:** July 11, 2026<br>
+**Proposed router owner:** `pkgs/80-routers/tigrbl-auth-router-attestation`<br>
+**Proposed capability owners:** verifier-neutral attestation contracts, appraisal engine, and format/provider adapters<br>
+**Proposed UIX owner:** `pkgs/105-ui/attestation-center-uix`
 
 ## 1. Product Decision
 

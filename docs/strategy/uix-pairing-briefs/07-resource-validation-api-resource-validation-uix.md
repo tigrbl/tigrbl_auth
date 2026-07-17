@@ -1,10 +1,10 @@
 # Resource Validation API + UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-api-resource-validation` + proposed `@tigrbl-auth/resource-validation-uix`  
-**Status:** New UIX required; API exists  
-**Prepared:** July 11, 2026  
-**API owner:** `pkgs/80-apis/tigrbl-auth-api-resource-validation`  
-**Proposed UIX owner:** `pkgs/95-ui/resource-validation-uix`
+**Pairing:** `tigrbl-auth-backend-app-resource-validation` + proposed `@tigrbl-auth/resource-validation-uix`<br>
+**Status:** New UIX required; API exists<br>
+**Prepared:** July 11, 2026<br>
+**Backend app owner:** `pkgs/90-backend-apps/tigrbl-auth-backend-app-resource-validation`<br>
+**Proposed UIX owner:** `pkgs/105-ui/resource-validation-uix`
 
 ## 1. Product Decision
 
@@ -198,8 +198,8 @@ Every fixture must state expected stage/result and be resettable.
 
 ## 8. Frontend Engineering Instructions
 
-1. Scaffold `pkgs/95-ui/resource-validation-uix` using `@tigrbl-auth/uix-core` and a single resource-validation base URL.
-2. Implement strict endpoint/method allowlists matching `RESOURCE_VALIDATION_API_CONTRACT`.
+1. Scaffold `pkgs/105-ui/resource-validation-uix` using `@tigrbl-auth/uix-core` and a single resource-validation base URL.
+2. Implement strict endpoint/method allowlists matching `RESOURCE_VALIDATION_BACKEND_APP_CONTRACT`.
 3. Separate static metadata mode from authenticated introspection mode at routing, capability, and deployment layers.
 4. Use a server-mediated session for confidential introspection authentication; never ship credentials to the browser.
 5. Build token input as an ephemeral secret component with paste warning, immediate clearing, and redaction tests.
@@ -244,11 +244,11 @@ Produce a route-level copy deck containing:
 
 ## 12. Source Evidence
 
-- `pkgs/80-apis/tigrbl-auth-api-resource-validation/README.md`
-- `pkgs/80-apis/tigrbl-auth-api-resource-validation/src/tigrbl_auth_api_resource_validation/contract.py`
-- `docker/docker-compose.resource-validation-api.yml`
-- `pkgs/95-ui/demo-hub-uix/surfaces.ts`
-- `pkgs/95-ui/demo-hub-uix/demoState.ts`
+- `pkgs/90-backend-apps/tigrbl-auth-backend-app-resource-validation/README.md`
+- `pkgs/90-backend-apps/tigrbl-auth-backend-app-resource-validation/src/tigrbl_auth_backend_app_resource_validation/contract.py`
+- `docker/docker-compose.resource-validation-app.yml`
+- `pkgs/105-ui/demo-hub-uix/surfaces.ts`
+- `pkgs/105-ui/demo-hub-uix/demoState.ts`
 - Resource-validation API unit/integration/conformance tests
 - `tigrbl-authz-resource-server` package and verifier contract tests
 - Resource-validation SSOT feature/claim/test/evidence/boundary records

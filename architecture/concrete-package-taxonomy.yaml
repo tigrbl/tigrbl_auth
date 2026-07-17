@@ -16,7 +16,7 @@ rules:
     - 50-protocols
     - 60-runtime
     - 70-facade
-    - 80-apis
+    - 80-routers
   protocol_claim_sets: 50-protocols
   protocol_versions: 50-protocols
   durability: 01-storage-and-30-storage-runtime
