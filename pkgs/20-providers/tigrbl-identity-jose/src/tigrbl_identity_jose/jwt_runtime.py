@@ -25,8 +25,7 @@ def _load_runtime() -> dict[str, Any]:
         from swarmauri_keyprovider_file import FileKeyProvider
         from swarmauri_keyprovider_local import LocalKeyProvider
         from swarmauri_tokens_jwt import JWTTokenService
-        from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import validate_certificate_binding
-        from tigrbl_identity_runtime.settings import settings
+        from .configuration import settings
     except Exception as exc:  # pragma: no cover
         raise RuntimeError("runtime token-service dependencies are unavailable") from exc
     return {
@@ -40,7 +39,6 @@ def _load_runtime() -> dict[str, Any]:
         "KeySpec": KeySpec,
         "KeyUse": KeyUse,
         "settings": settings,
-        "validate_certificate_binding": validate_certificate_binding,
     }
 
 

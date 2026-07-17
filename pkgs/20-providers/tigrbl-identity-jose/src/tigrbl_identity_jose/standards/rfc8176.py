@@ -6,7 +6,7 @@ from collections.abc import Sequence
 from typing import Final
 
 from tigrbl_jose_concrete import AMR_VALUES, validate_amr_claim as _validate_amr_claim
-from tigrbl_identity_runtime.settings import settings
+from ..configuration import settings
 
 RFC8176_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc8176"
 

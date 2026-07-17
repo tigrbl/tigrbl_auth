@@ -1,3 +1,4 @@
+import hmac
 from typing import Mapping
 
 from .jwk_thumbprints import jwk_thumbprint, verify_jwk_thumbprint
@@ -25,4 +26,22 @@ def verify_proof_of_possession(
     return verify_jwk_thumbprint(jwk, confirmation["jkt"])
 
 
-__all__ = ["add_cnf_claim", "verify_proof_of_possession"]
+def verify_certificate_thumbprint_confirmation(
+    payload: Mapping[str, object], presented_thumbprint: str | None
+) -> bool:
+    """Verify an ``x5t#S256`` confirmation claim without choosing policy."""
+
+    confirmation = payload.get("cnf")
+    if not isinstance(confirmation, Mapping):
+        return False
+    bound = confirmation.get("x5t#S256")
+    if not isinstance(bound, str) or not isinstance(presented_thumbprint, str):
+        return False
+    return hmac.compare_digest(bound, presented_thumbprint)
+
+
+__all__ = [
+    "add_cnf_claim",
+    "verify_certificate_thumbprint_confirmation",
+    "verify_proof_of_possession",
+]

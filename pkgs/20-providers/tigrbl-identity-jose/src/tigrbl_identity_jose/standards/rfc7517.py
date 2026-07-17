@@ -16,7 +16,7 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from cryptography.hazmat.primitives.serialization import Encoding, NoEncryption, PrivateFormat, PublicFormat
 
 from tigrbl_identity_core.base64url import base64url_encode
-from tigrbl_identity_runtime.settings import settings
+from ..configuration import settings
 
 try:  # pragma: no cover - exercised when the full runtime stack is installed
     from tigrbl_identity_jose.key_management import _load_keypair, _provider

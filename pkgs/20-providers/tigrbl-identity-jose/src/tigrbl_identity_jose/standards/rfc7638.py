@@ -6,7 +6,7 @@ from typing import Any, Final, Mapping
 
 from tigrbl_jose_concrete import jwk_thumbprint as _jwk_thumbprint
 from tigrbl_jose_concrete import verify_jwk_thumbprint as _verify_jwk_thumbprint
-from tigrbl_identity_runtime.settings import settings
+from ..configuration import settings
 
 RFC7638_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc7638"
 

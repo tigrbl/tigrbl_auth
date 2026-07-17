@@ -17,6 +17,11 @@ from .boundary import (
 from .jwe_policy import JWEPolicy
 from .key_material import JWK_PRIVATE_PARAMETERS, materialize_public_key_record
 from .jwt_coder import JWTCoder
+from .configuration import (
+    DefaultJoseProviderSettings,
+    configure_jose_provider,
+    jose_provider_source,
+)
 from .key_rotation_policy import (
     EffectiveKeyRotationPolicy,
     KeyRotationAdministration,
@@ -41,6 +46,7 @@ from .pqc import (
 )
 
 __all__ = [
+    "DefaultJoseProviderSettings",
     "EffectiveKeyRotationPolicy",
     "JoseKey",
     "JoseKeyRotationResult",
@@ -62,7 +68,9 @@ __all__ = [
     "PQC_SIGNATURE_ALGS",
     "PQCSignatureKeyPair",
     "RFC_TARGETS",
+    "configure_jose_provider",
     "generate_pqc_signature_keypair",
+    "jose_provider_source",
     "jwk_thumbprint",
     "materialize_public_key_record",
     "pqc_backend_report",

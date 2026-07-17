@@ -5,7 +5,7 @@ from __future__ import annotations
 import asyncio
 from typing import Any, Awaitable
 
-from tigrbl_identity_runtime.settings import settings
+from ..configuration import settings
 from swarmauri_signing_ed25519 import Ed25519EnvelopeSigner
 
 try:  # pragma: no cover - optional dependency

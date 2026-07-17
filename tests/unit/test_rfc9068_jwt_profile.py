@@ -13,19 +13,22 @@ from cryptography.hazmat.primitives.asymmetric import ed25519
 from tigrbl_auth import runtime_cfg
 from tigrbl_auth.errors import InvalidTokenError
 from tigrbl_auth.jwtoken import JWTCoder
-from tigrbl_auth.rfc.rfc9068 import add_rfc9068_claims, validate_rfc9068_claims
+from tigrbl_auth_protocol_oauth.standards.jwt_access_tokens import (
+    add_jwt_access_token_claims,
+    validate_jwt_access_token_claims,
+)
 
 
 @pytest.mark.unit
 def test_helpers_apply_and_validate():
     """RFC 9068 claim helpers add and validate ``iss`` and ``aud``."""
     payload = {"sub": "alice", "exp": 1}
-    augmented = add_rfc9068_claims(payload, issuer="issuer", audience=["api"])
+    augmented = add_jwt_access_token_claims(payload, issuer="issuer", audience=["api"])
     assert augmented["iss"] == "issuer"
     assert augmented["aud"] == ["api"]
-    validate_rfc9068_claims(augmented, issuer="issuer", audience=["api"])
+    validate_jwt_access_token_claims(augmented, issuer="issuer", audience=["api"])
     with pytest.raises(InvalidTokenError):
-        validate_rfc9068_claims(augmented, issuer="other", audience=["api"])
+        validate_jwt_access_token_claims(augmented, issuer="other", audience=["api"])
 
 
 @pytest.mark.unit
@@ -54,11 +57,17 @@ def test_jwtoken_enforces_claims(monkeypatch):
         token,
         issuer="https://issuer.example.com",
         audience="api",
+        verify_revocation=False,
     )
     assert payload["iss"] == "https://issuer.example.com"
     assert payload["aud"] == "api"
     with pytest.raises(InvalidTokenError):
-        coder.decode(token, issuer="https://issuer.example.com", audience="other")
+        coder.decode(
+            token,
+            issuer="https://issuer.example.com",
+            audience="other",
+            verify_revocation=False,
+        )
 
 
 @pytest.mark.unit
@@ -78,6 +87,6 @@ def test_feature_toggle_disabled(monkeypatch):
     )
     coder = JWTCoder(private_pem, public_pem)
     token = coder.sign(sub="bob", tid="tenant")
-    payload = coder.decode(token)
+    payload = coder.decode(token, verify_revocation=False)
     assert "iss" not in payload
     assert "aud" not in payload

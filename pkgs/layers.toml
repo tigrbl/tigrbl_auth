@@ -247,13 +247,3 @@ reason = "legacy reverse dependency pending owner-layer migration"
 consumer = "tigrbl-identity-server"
 target = "tigrbl-auth-router-admin-gate"
 reason = "legacy reverse dependency pending owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-identity-jose"
-target = "tigrbl-auth-protocol-oauth"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-identity-jose"
-target = "tigrbl-identity-runtime"
-reason = "baseline crossing exposed by universal validation; remove with owner-layer migration"

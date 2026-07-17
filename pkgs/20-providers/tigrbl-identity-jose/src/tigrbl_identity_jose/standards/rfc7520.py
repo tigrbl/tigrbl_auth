@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Final
 
-from tigrbl_identity_runtime.settings import settings
+from ..configuration import settings
 from tigrbl_identity_jose.standards.rfc7515 import sign_jws, verify_jws
 from tigrbl_identity_jose.standards.rfc7516 import decrypt_jwe, encrypt_jwe
 

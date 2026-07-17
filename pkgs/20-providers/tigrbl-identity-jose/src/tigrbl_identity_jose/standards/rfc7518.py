@@ -9,7 +9,7 @@ from __future__ import annotations
 from typing import Final
 
 from tigrbl_jose_swarmauri_provider.pqc import ML_DSA_65_ALG
-from tigrbl_identity_runtime.settings import settings
+from ..configuration import settings
 
 try:  # pragma: no cover - exercised when Swarmauri is installed
     from swarmauri_core.crypto.types import JWAAlg

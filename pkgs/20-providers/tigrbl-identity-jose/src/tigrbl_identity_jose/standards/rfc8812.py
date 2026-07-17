@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Final, FrozenSet
 
-from tigrbl_identity_runtime.settings import settings
+from ..configuration import settings
 
 RFC8812_SPEC_URL: Final = "https://www.rfc-editor.org/rfc/rfc8812"
 

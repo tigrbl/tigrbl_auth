@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any, Final, Mapping
 
-from tigrbl_identity_runtime.settings import settings
+from ..configuration import settings
 from tigrbl_jose_concrete import add_cnf_claim as _add_cnf_claim
 from tigrbl_jose_concrete import verify_proof_of_possession as _verify_pop
 

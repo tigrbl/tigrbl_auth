@@ -5,6 +5,8 @@ from __future__ import annotations
 import os
 from typing import Optional
 
+from tigrbl_identity_jose.configuration import configure_jose_provider
+
 try:
     from dotenv import load_dotenv
 except Exception:  # pragma: no cover - optional dependency for clean-room/checkpoint tooling
@@ -397,3 +399,5 @@ else:
     for field, value in _new.model_dump().items():
         setattr(_existing, field, value)
     settings = _existing
+
+configure_jose_provider(settings)

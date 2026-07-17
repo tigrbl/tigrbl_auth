@@ -34,7 +34,7 @@ except Exception:  # pragma: no cover - dependency-light checkpoint fallback
     JWAAlg = None
     JwsSignerVerifier = None
 
-from tigrbl_identity_runtime.settings import settings
+from ..configuration import settings
 
 RFC7515_SPEC_URL: Final = "https://www.rfc-editor.org/rfc/rfc7515"
 _signer = JwsSignerVerifier() if JwsSignerVerifier is not None else None

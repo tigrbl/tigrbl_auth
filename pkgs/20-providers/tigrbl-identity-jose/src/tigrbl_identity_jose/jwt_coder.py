@@ -7,6 +7,7 @@ from typing import Any, Dict, Iterable, Optional, Tuple
 from uuid import uuid4
 
 from tigrbl_jose_bases import JwtCoderBase
+from tigrbl_jose_concrete import verify_certificate_thumbprint_confirmation
 from tigrbl_identity_contracts.tokens import (
     DEFAULT_ACCESS_TOKEN_TTL as _ACCESS_TTL,
     DEFAULT_REFRESH_TOKEN_TTL as _REFRESH_TTL,
@@ -103,15 +104,17 @@ class JWTCoder(JwtCoderBase):
             payload["tid"] = tid
         if getattr(settings, "enable_rfc8705", False) and cert_thumbprint is not None:
             payload["cnf"] = {"x5t#S256": cert_thumbprint}
+        elif getattr(settings, "enable_rfc8705", False):
+            raise ValueError("certificate thumbprint is required for certificate-bound tokens")
         if getattr(settings, "enable_rfc9068", False) and typ == "access":
             effective_issuer = issuer or settings.issuer
             effective_audience = audience or settings.protected_resource_identifier
-            from tigrbl_auth_protocol_oauth.standards.jwt_access_tokens import add_jwt_access_token_claims
-
-            payload = add_jwt_access_token_claims(
-                payload,
-                issuer=effective_issuer,
-                audience=effective_audience,
+            payload.setdefault("iss", effective_issuer)
+            payload.setdefault(
+                "aud",
+                effective_audience
+                if isinstance(effective_audience, str)
+                else list(effective_audience),
             )
             issuer = effective_issuer
             audience = effective_audience
@@ -192,7 +195,10 @@ class JWTCoder(JwtCoderBase):
                 raise InvalidTokenError("missing audience")
         cnf = payload.get("cnf") if isinstance(payload.get("cnf"), dict) else {}
         if getattr(settings, "enable_rfc8705", False) and cnf.get("x5t#S256") is not None:
-            runtime["validate_certificate_binding"](payload, cert_thumbprint)
+            if not verify_certificate_thumbprint_confirmation(payload, cert_thumbprint):
+                raise InvalidTokenError("certificate thumbprint mismatch")
+        elif getattr(settings, "enable_rfc8705", False):
+            raise InvalidTokenError("certificate confirmation claim required")
         if verify_revocation:
             if self._revocation_checker is None:
                 raise RuntimeError(
