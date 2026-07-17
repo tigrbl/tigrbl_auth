@@ -76,6 +76,11 @@ canonical_providers:
   - tigrbl-access-governance-memory-provider
   - tigrbl-policy-administration-memory-provider
   - tigrbl-replay-memory-provider
+  protocol_artifact_composition:
+  - tigrbl-mdoc-issuer-provider
+  - tigrbl-mdoc-verifier-provider
+  - tigrbl-set-receiver-provider
+  - tigrbl-set-transmitter-provider
 compatibility_or_migration_packages:
   tigrbl-authz-policy:
     target: tigrbl-policy-administration-capability-plus-policy-assurance-capability-plus-access-governance-capability
@@ -104,12 +109,6 @@ compatibility_or_migration_packages:
   tigrbl-security-cose:
     target: tigrbl-cose-concrete-plus-tigrbl-cose-cryptography-provider
     target_layer: 10-20
-  tigrbl-mdoc-issuer-provider:
-    target: iso-mdoc-protocol-plus-neutral-signing-providers
-    target_layer: 50-protocols
-  tigrbl-mdoc-verifier-provider:
-    target: iso-mdoc-protocol-plus-neutral-trust-providers
-    target_layer: 50-protocols
   tigrbl-security-auth-context-acr-basic:
     target: tigrbl-acr-evaluator-basic-concrete
     target_layer: 10-concrete
@@ -140,12 +139,6 @@ compatibility_or_migration_packages:
   tigrbl-security-subject-pairwise-provider:
     target: tigrbl-pairwise-subject-identifier-concrete
     target_layer: 10-concrete
-  tigrbl-set-receiver-provider:
-    target: tigrbl-security-event-protocol-set
-    target_layer: 50-protocols
-  tigrbl-set-transmitter-provider:
-    target: tigrbl-security-event-protocol-set
-    target_layer: 50-protocols
 canonical_deterministic_extractions:
 - tigrbl-acr-evaluator-basic-concrete
 - tigrbl-amr-evaluator-basic-concrete

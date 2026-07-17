@@ -1,8 +1,5 @@
-"""Compatibility facade for ISO mdoc protocol issuance composition."""
+"""ISO mdoc issuance provider composition."""
 
-from tigrbl_credential_protocol_iso_mdoc.issuance import (
-    CanonicalCborEncoder,
-    MdocIssuerProvider,
-)
+from .issuance import CanonicalCborEncoder, CoseSign1Provider, MdocIssuerProvider
 
-__all__ = ["CanonicalCborEncoder", "MdocIssuerProvider"]
+__all__ = ["CanonicalCborEncoder", "CoseSign1Provider", "MdocIssuerProvider"]

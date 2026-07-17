@@ -6505,7 +6505,8 @@ dependencies = [
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-mdoc-concrete" },
     { name = "tigrbl-mdoc-credential-concrete" },
-    { name = "tigrbl-security-cose" },
+    { name = "tigrbl-mdoc-issuer-provider" },
+    { name = "tigrbl-mdoc-verifier-provider" },
 ]
 
 [package.metadata]
@@ -6514,7 +6515,8 @@ requires-dist = [
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-mdoc-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-mdoc-credential-concrete", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-security-cose", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-mdoc-issuer-provider", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-mdoc-verifier-provider", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
@@ -8000,22 +8002,34 @@ name = "tigrbl-mdoc-issuer-provider"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/20-providers/tigrbl-mdoc-issuer-provider" }
 dependencies = [
-    { name = "tigrbl-credential-protocol-iso-mdoc" },
+    { name = "tigrbl-digital-credential-bases" },
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-mdoc-concrete" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-credential-protocol-iso-mdoc", specifier = "==0.4.0.dev2" }]
+requires-dist = [
+    { name = "tigrbl-digital-credential-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-mdoc-concrete", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-mdoc-verifier-provider"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/20-providers/tigrbl-mdoc-verifier-provider" }
 dependencies = [
-    { name = "tigrbl-credential-protocol-iso-mdoc" },
+    { name = "tigrbl-digital-credential-bases" },
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-mdoc-concrete" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-credential-protocol-iso-mdoc", specifier = "==0.4.0.dev2" }]
+requires-dist = [
+    { name = "tigrbl-digital-credential-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-mdoc-concrete", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-mfa-challenge-capability"
@@ -8965,6 +8979,8 @@ dependencies = [
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-security-event-bases" },
     { name = "tigrbl-set-concrete" },
+    { name = "tigrbl-set-receiver-provider" },
+    { name = "tigrbl-set-transmitter-provider" },
 ]
 
 [package.metadata]
@@ -8978,6 +8994,8 @@ requires-dist = [
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-event-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-set-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-set-receiver-provider", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-set-transmitter-provider", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
@@ -9342,22 +9360,34 @@ name = "tigrbl-set-receiver-provider"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/20-providers/tigrbl-set-receiver-provider" }
 dependencies = [
-    { name = "tigrbl-security-event-protocol-set" },
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-security-event-bases" },
+    { name = "tigrbl-set-concrete" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-security-event-protocol-set", specifier = "==0.4.0.dev2" }]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-event-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-set-concrete", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-set-transmitter-provider"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/20-providers/tigrbl-set-transmitter-provider" }
 dependencies = [
-    { name = "tigrbl-security-event-protocol-set" },
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-security-event-bases" },
+    { name = "tigrbl-set-concrete" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-security-event-protocol-set", specifier = "==0.4.0.dev2" }]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-event-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-set-concrete", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-signing-bases"

@@ -1,9 +1,10 @@
-"""Compatibility facade for ISO mdoc protocol verification composition."""
+"""ISO mdoc verification provider composition."""
 
-from tigrbl_credential_protocol_iso_mdoc.verification import (
+from .verification import (
     CanonicalCborEncoder,
     CborDecoder,
     CosePayloadDecoder,
+    CoseSign1Provider,
     MdocVerifierProvider,
 )
 
@@ -11,5 +12,6 @@ __all__ = [
     "CanonicalCborEncoder",
     "CborDecoder",
     "CosePayloadDecoder",
+    "CoseSign1Provider",
     "MdocVerifierProvider",
 ]

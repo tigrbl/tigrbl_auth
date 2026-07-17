@@ -1,9 +1,5 @@
-"""Compatibility facade for RFC 8417 SET reception."""
+"""RFC 8417 Security Event Token reception provider."""
 
-from tigrbl_security_event_protocol_set import (
-    SetReceiverProvider,
-    SetTokenVerifier,
-    VerifiedSetToken,
-)
+from .reception import SetReceiverProvider, SetTokenVerifier, VerifiedSetToken
 
 __all__ = ["SetReceiverProvider", "SetTokenVerifier", "VerifiedSetToken"]
