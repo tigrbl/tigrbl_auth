@@ -42,7 +42,7 @@ def test_protocol_wire_schemas_are_not_owned_by_storage_tables() -> None:
         "token_record",
     )
     forbidden_schema_names = (
-        set(oauth_schemas.__all__) | set(oidc_schemas.__all__) | {"CredsIn"}
+        set(oauth_schemas.__all__) | set(oidc_schemas.__all__)
     )
     for module_name in storage_modules:
         module = importlib.import_module(

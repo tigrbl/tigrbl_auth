@@ -204,21 +204,6 @@ target = "tigrbl-identity-author"
 reason = "legacy reverse dependency pending owner-layer migration"
 
 [[dependency_exceptions]]
-consumer = "tigrbl-identity-runtime"
-target = "tigrbl-auth-router-webauthn"
-reason = "legacy reverse dependency pending owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-auth"
-target = "tigrbl-auth-router-session-login"
-reason = "legacy reverse dependency pending owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-auth"
-target = "tigrbl-auth-router-webauthn"
-reason = "legacy reverse dependency pending owner-layer migration"
-
-[[dependency_exceptions]]
 consumer = "tigrbl-identity-server"
 target = "tigrbl-auth-router-session-login"
 reason = "legacy reverse dependency pending owner-layer migration"

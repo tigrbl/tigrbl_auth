@@ -10,7 +10,6 @@ from tigrbl_identity_server.admin_auth import (
     AdminPasswordResetRequestIn,
     AdminSessionOut,
 )
-from tigrbl_auth_router_session_login import CredsIn
 from tigrbl_auth_protocol_oauth.schemas import (
     AuthorizationCodeGrantForm,
     DeviceAuthorizationIn,
@@ -46,7 +45,6 @@ __all__ = [
     "AdminPasswordResetRequestIn",
     "AdminSessionOut",
     "AuthorizationCodeGrantForm",
-    "CredsIn",
     "DeviceAuthorizationIn",
     "DeviceAuthorizationOut",
     "DynamicClientRegistrationIn",

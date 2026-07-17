@@ -84,10 +84,17 @@ def test_package_exceptions_are_explicit_and_path_classification_is_authoritativ
     policy = load_layer_policy(ROOT / "pkgs" / "layers.toml")
 
     assert classify_layer(ROOT / "pkgs" / "80-routers" / "example", policy) == "80-routers"
-    assert package_dependency_allowed(
+    assert not package_dependency_allowed(
         "tigrbl-identity-runtime",
         "60-runtime",
         "tigrbl-auth-router-webauthn",
+        "80-routers",
+        policy,
+    )
+    assert package_dependency_allowed(
+        "tigrbl-identity-server",
+        "60-runtime",
+        "tigrbl-auth-router-session-login",
         "80-routers",
         policy,
     )
