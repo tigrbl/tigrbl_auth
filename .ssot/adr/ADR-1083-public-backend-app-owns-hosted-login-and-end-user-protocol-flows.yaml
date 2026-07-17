@@ -2,8 +2,8 @@ schema_version: "0.4.0"
 kind: "adr"
 id: "adr:1083"
 number: 1083
-slug: "public-api-owns-hosted-login-and-end-user-protocol-flows"
-title: "Public API Owns Hosted Login and End-User Protocol Flows"
+slug: "public-backend-app-owns-hosted-login-and-end-user-protocol-flows"
+title: "Public Backend App Owns Hosted Login and End-User Protocol Flows"
 status: "accepted"
 origin: "repo-local"
 decision_date: null

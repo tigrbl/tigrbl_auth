@@ -24,7 +24,7 @@ body: |-
 
   The authoritative model MUST support at least: implemented, planned, not-applicable, out-of-scope, and adjacent-but-non-authoritative.
 
-  The classification model MUST distinguish primitive implementation surfaces such as `public-rest`, `admin-rpc`, and `diagnostics` from deployable product surfaces such as `public-api`, `platform-admin-api`, `tenant-admin-api`, `developer-api`, `service-admin-api`, and `resource-validation-api`.
+  The classification model MUST distinguish primitive implementation surfaces such as `public-rest`, `admin-rpc`, and `diagnostics` from deployable product surfaces such as `public-app`, `platform-admin-app`, `tenant-admin-app`, `developer-app`, `service-admin-app`, and `resource-validation-app`.
 
   Informative reports and projections MUST derive status vocabulary from the authoritative classification model and MUST NOT use ambiguous empty-state placeholders as normative truth.
 

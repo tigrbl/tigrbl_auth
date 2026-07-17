@@ -2,8 +2,8 @@ schema_version: "0.4.0"
 kind: "spec"
 id: "spc:1143"
 number: 1143
-slug: "product-api-surface-separation-contract"
-title: "Product API Surface Separation Contract"
+slug: "product-backend-app-surface-separation-contract"
+title: "Product Backend App Surface Separation Contract"
 status: "draft"
 origin: "repo-local"
 decision_date: null
@@ -30,7 +30,7 @@ status_notes:
     status: "draft"
   -
     at: "2026-05-28T09:29:19Z"
-    note: "My Account API is now a product surface separation instance: authenticated end-user /account/* routes live in my-account-api, outside admin, RPC, client, tenant, and service surfaces."
+    note: "My Account API is now a product surface separation instance: authenticated end-user /account/* routes live in my-account-app, outside admin, RPC, client, tenant, and service surfaces."
     status: "draft"
   -
     at: "2026-06-01T09:52:56Z"
@@ -48,7 +48,7 @@ body: |-
   
   ## Requirements
   
-  The deployment resolver MUST define named product surfaces for `public-api`, `platform-admin-api`, `tenant-admin-api`, `developer-api`, `service-admin-api`, and `resource-validation-api`.
+  The deployment resolver MUST define named product surfaces for `public-app`, `platform-admin-app`, `tenant-admin-app`, `developer-app`, `service-admin-app`, and `resource-validation-app`.
   
   Each product surface MUST declare its underlying primitive surface sets, allowed public capabilities, allowed admin resources, allowed admin REST router groups, and allowed OpenRPC methods or method prefixes.
   

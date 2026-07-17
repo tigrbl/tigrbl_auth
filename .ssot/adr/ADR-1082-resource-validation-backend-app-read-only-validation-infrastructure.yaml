@@ -2,8 +2,8 @@ schema_version: "0.4.0"
 kind: "adr"
 id: "adr:1082"
 number: 1082
-slug: "resource-validation-api-read-only-validation-infrastructure"
-title: "Resource Validation API Is Read-Only Validation Infrastructure"
+slug: "resource-validation-backend-app-read-only-validation-infrastructure"
+title: "Resource Validation Backend App Is Read-Only Validation Infrastructure"
 status: "accepted"
 origin: "repo-local"
 decision_date: null

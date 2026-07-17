@@ -2,8 +2,8 @@ schema_version: "0.1.0"
 kind: "spec"
 id: "spc:1077"
 number: 1077
-slug: "public-api-boundary-requirements"
-title: "Public API Boundary Requirements"
+slug: "public-backend-app-boundary-requirements"
+title: "Public Backend App Boundary Requirements"
 status: "draft"
 origin: "repo-local"
 decision_date: null

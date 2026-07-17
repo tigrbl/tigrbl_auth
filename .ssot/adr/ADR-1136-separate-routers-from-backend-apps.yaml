@@ -1,0 +1,41 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1136"
+number: 1136
+slug: "separate-routers-from-backend-apps"
+title: "Separate reusable routers from deployable backend apps"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Reusable Tigrbl HTTP carrier packages belong to pkgs/80-routers and use the tigrbl-auth-router-* distribution family. Deployable backend product applications belong to pkgs/90-backend-apps and use the tigrbl-auth-backend-app-* distribution family."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted to govern the layer-80 router and layer-90 backend-app split."
+    at: "2026-07-17T17:57:45Z"
+references: []
+body: |-
+  ## Decision
+  
+  Reusable Tigrbl HTTP carrier packages belong to pkgs/80-routers and use the tigrbl-auth-router-* distribution family. Deployable backend product applications belong to pkgs/90-backend-apps and use the tigrbl-auth-backend-app-* distribution family.
+  
+  A router may close over one operation, one table, related schemas and hooks, or a cohesive combination. A backend app closes over every router, app-local router, table, operation, hook, policy, middleware, configuration, startup, and shutdown behavior required by one deployable product surface.
+  
+  Backend apps MAY depend on routers. Routers MUST NOT declare dependencies on or import backend apps. Both manifest and source-import edges are governed. API remains valid terminology for an HTTP interface or OpenAPI contract, but not as the package-family identity.
+  
+  ## Rationale
+  
+  The former 80 API layer mixed reusable carriers with deployable product assemblies and obscured closure and dependency direction.
+  
+  ## Consequences
+  
+  Protocol behavior and operation identity remain owned below the router layer. Router extraction and backend-app composition must preserve routes, methods, schemas, hook ordering, OpenAPI output, product filtering, and fail-closed behavior.
+  
+  ## Governed features
+  
+  - feat:router-backend-app-dependency-boundary
+  - feat:product-api-surface-registry
+  - feat:package-dependency-layering-guard

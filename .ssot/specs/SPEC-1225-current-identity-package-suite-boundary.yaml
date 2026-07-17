@@ -41,7 +41,7 @@ body: |-
   - `pkgs/50-protocols`: OAuth, OIDC, resource-server, and relying-party protocol packages.
   - `pkgs/60-runtime`: runtime assembly, CLI, authoring, testkit, release certification, and compatibility tooling.
   - `pkgs/70-facade`: `tigrbl-auth` public and compatibility facade.
-  - `pkgs/80-apis`: deployable product API frontdoors.
+  - `pkgs/80-routers`: deployable product API frontdoors.
   
   ## Requirements
   

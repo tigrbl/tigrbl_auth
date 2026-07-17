@@ -1,0 +1,39 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1180"
+number: 1180
+slug: "my-account-backend-app-contract"
+title: "My Account Backend App Contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The My Account API contract defines tigrbl-auth-backend-app-my-account as an authenticated end-user self-service surface. It exposes /account/profile, /account/sessions, /account/authorized-apps, /account/consents, and /account/password/change. The surface must be scoped to the current authenticated subject and must not expose /admin, /rpc, tenant-wide user management, platform administration, developer client administration, service administration, or raw table CRUD. The matching UIX package is @tigrbl-auth/my-account-uix. Public API remains the OAuth/OIDC issuer and hosted-login surface; My Account consumes existing identity principals, credentials, policy, OIDC, and canonical storage resources."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-05-28T08:29:36Z"
+    note: "Defines the My Account API and UIX contract for current-subject account self-service."
+    status: "draft"
+  -
+    at: "2026-05-28T09:29:19Z"
+    note: "Accepted after initial My Account API/UIX implementation and T1 verification."
+    status: "accepted"
+  -
+    at: "2026-05-31T02:59:38Z"
+    note: "Linked to adr:1088 so My Account UIX uses shared uix-core primitives for current-subject self-service mutations without becoming an admin CRUD surface."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "My Account remains current-subject scoped and inherits resolved Realm context without exposing Realm administration."
+    at: "2026-06-01T09:53:05Z"
+references: []
+body: |-
+  The My Account API contract defines tigrbl-auth-backend-app-my-account as an authenticated end-user self-service surface. It exposes /account/profile, /account/sessions, /account/authorized-apps, /account/consents, and /account/password/change. The surface must be scoped to the current authenticated subject and must not expose /admin, /rpc, tenant-wide user management, platform administration, developer client administration, service administration, or raw table CRUD. The matching UIX package is @tigrbl-auth/my-account-uix. Public API remains the OAuth/OIDC issuer and hosted-login surface; My Account consumes existing identity principals, credentials, policy, OIDC, and canonical storage resources.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1087"
+  - "adr:1120"
+  - "adr:1083"
+  - "adr:1088"

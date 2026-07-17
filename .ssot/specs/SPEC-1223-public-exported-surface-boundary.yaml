@@ -39,7 +39,7 @@ body: |-
   
   Public exported surfaces MUST delegate durable table mutation, reads, and derivation to storage table owners when the behavior concerns persisted table state.
   
-  Documents MUST use precise surface names: `platform-admin-api`, `tenant-admin-api`, `developer-api`, `service-admin-api`, `resource-validation-api`, `public-api`, `my-account-api`, package export, CLI command surface, UIX surface, or another explicit product/export boundary.
+  Documents MUST use precise surface names: `platform-admin-app`, `tenant-admin-app`, `developer-app`, `service-admin-app`, `resource-validation-app`, `public-app`, `my-account-app`, package export, CLI command surface, UIX surface, or another explicit product/export boundary.
   
   Documents MUST NOT use `operator surface`, `operator action`, `operator state`, `operator-style`, or `operator workflow` to describe public exports.
   

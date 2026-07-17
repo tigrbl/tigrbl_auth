@@ -8,7 +8,7 @@ status: "draft"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "Scope: API Access Security covers protected-resource metadata, JWKS consumption, token validation, introspection fallback, audience and resource checks, scope and permission enforcement, proof binding, DPoP, mTLS binding, and resource-server integration. Requirements: resource-validation-api remains a read-only issuer-derived validation surface; tigrbl-identity-resource-server remains a consumer package for protected APIs; product docs must describe this as protected API security rather than only metadata publication. M2M/workload identity flows must hand off issued tokens to this product lane for verifier proof. Out of scope: issuing tokens, human login UX, tenant lifecycle administration, and RP callback/session handling."
+summary: "Scope: API Access Security covers protected-resource metadata, JWKS consumption, token validation, introspection fallback, audience and resource checks, scope and permission enforcement, proof binding, DPoP, mTLS binding, and resource-server integration. Requirements: resource-validation-app remains a read-only issuer-derived validation surface; tigrbl-identity-resource-server remains a consumer package for protected APIs; product docs must describe this as protected API security rather than only metadata publication. M2M/workload identity flows must hand off issued tokens to this product lane for verifier proof. Out of scope: issuing tokens, human login UX, tenant lifecycle administration, and RP callback/session handling."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -18,7 +18,7 @@ status_notes:
     at: "2026-05-27T22:24:43Z"
 references: []
 body: |-
-  Scope: API Access Security covers protected-resource metadata, JWKS consumption, token validation, introspection fallback, audience and resource checks, scope and permission enforcement, proof binding, DPoP, mTLS binding, and resource-server integration. Requirements: resource-validation-api remains a read-only issuer-derived validation surface; tigrbl-identity-resource-server remains a consumer package for protected APIs; product docs must describe this as protected API security rather than only metadata publication. M2M/workload identity flows must hand off issued tokens to this product lane for verifier proof. Out of scope: issuing tokens, human login UX, tenant lifecycle administration, and RP callback/session handling.
+  Scope: API Access Security covers protected-resource metadata, JWKS consumption, token validation, introspection fallback, audience and resource checks, scope and permission enforcement, proof binding, DPoP, mTLS binding, and resource-server integration. Requirements: resource-validation-app remains a read-only issuer-derived validation surface; tigrbl-identity-resource-server remains a consumer package for protected APIs; product docs must describe this as protected API security rather than only metadata publication. M2M/workload identity flows must hand off issued tokens to this product lane for verifier proof. Out of scope: issuing tokens, human login UX, tenant lifecycle administration, and RP callback/session handling.
 spec_kind: "normative"
 adr_ids:
   - "adr:1105"

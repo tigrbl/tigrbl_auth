@@ -8,7 +8,7 @@ status: "draft"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification governs developer authorization and audit behavior for developer-api operations."
+summary: "This specification governs developer authorization and audit behavior for developer-app operations."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -20,7 +20,7 @@ references: []
 body: |-
   ## Scope
   
-  This specification governs developer authorization and audit behavior for developer-api operations.
+  This specification governs developer authorization and audit behavior for developer-app operations.
   
   ## Requirements
   

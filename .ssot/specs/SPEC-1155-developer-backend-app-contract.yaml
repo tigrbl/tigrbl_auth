@@ -2,13 +2,13 @@ schema_version: "0.4.0"
 kind: "spec"
 id: "spc:1155"
 number: 1155
-slug: "developer-api-contract"
-title: "Developer API Contract"
+slug: "developer-backend-app-contract"
+title: "Developer Backend App Contract"
 status: "draft"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification governs the \tigrbl-auth-api-developer product API surface."
+summary: "This specification governs the \tigrbl-auth-backend-app-developer product API surface."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -28,7 +28,7 @@ body: |-
   
   ## Requirements
   
-  The developer API MUST expose only developer self-service app and OAuth/OIDC client administration capabilities through the developer-api product surface. It MAY expose dynamic client registration, client registration management, developer-scoped client RPC methods, discovery metadata helpers, and JWKS helper routes.
+  The developer API MUST expose only developer self-service app and OAuth/OIDC client administration capabilities through the developer-app product surface. It MAY expose dynamic client registration, client registration management, developer-scoped client RPC methods, discovery metadata helpers, and JWKS helper routes.
   
   The developer API MUST NOT expose tenant lifecycle operations, platform authority assignment, tenant-admin identity administration, service identity administration, human login, authorization, diagnostics, or unrelated admin resources.
   

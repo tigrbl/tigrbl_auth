@@ -2,8 +2,8 @@ schema_version: "0.4.0"
 kind: "spec"
 id: "spc:1145"
 number: 1145
-slug: "platform-admin-api-contract"
-title: "Platform Admin API Contract"
+slug: "platform-admin-backend-app-contract"
+title: "Platform Admin Backend App Contract"
 status: "draft"
 origin: "repo-local"
 decision_date: null
@@ -38,7 +38,7 @@ body: |-
   
   It MUST exclude public end-user authentication pages, tenant self-service-only workflows, developer-only OIDC/OAuth app management, service-only machine identity workflows, and resource-validation-only surfaces.
   
-  The API MUST use the `platform-admin-api` product surface and MUST fail closed when a route, resource, or JSON-RPC method is not assigned to that surface.
+  The API MUST use the `platform-admin-app` product surface and MUST fail closed when a route, resource, or JSON-RPC method is not assigned to that surface.
 spec_kind: "normative"
 adr_ids:
   - "adr:1078"

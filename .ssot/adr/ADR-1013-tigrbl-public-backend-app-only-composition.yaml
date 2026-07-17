@@ -2,8 +2,8 @@ schema_version: "0.1.0"
 kind: "adr"
 id: "adr:1013"
 number: 1013
-slug: "tigrbl-public-api-only-composition"
-title: "Tigrbl public-API-only composition is mandatory in release paths"
+slug: "tigrbl-public-backend-app-only-composition"
+title: "Tigrbl public backend-app-only composition is mandatory in release paths"
 status: "accepted"
 origin: "repo-local"
 decision_date: null

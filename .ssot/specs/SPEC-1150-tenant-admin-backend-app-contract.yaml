@@ -2,13 +2,13 @@ schema_version: "0.4.0"
 kind: "spec"
 id: "spc:1150"
 number: 1150
-slug: "tenant-admin-api-contract"
-title: "Tenant Admin API Contract"
+slug: "tenant-admin-backend-app-contract"
+title: "Tenant Admin Backend App Contract"
 status: "draft"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification governs the \tigrbl-auth-api-tenant-admin product API surface."
+summary: "This specification governs the \tigrbl-auth-backend-app-tenant-admin product API surface."
 supersedes: []
 superseded_by: []
 status_notes:

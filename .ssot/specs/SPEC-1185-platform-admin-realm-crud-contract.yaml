@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "The platform-admin API MUST expose REST realm lifecycle routes under /admin/realm and tenant assignment routes under /admin/realm/{realm_id}/tenant. Realm CRUD is superuser-only. Raw /realm table routes MUST NOT be exposed by platform-admin-api. Existing /admin/tenant routes remain default-realm compatibility routes."
+summary: "The platform-admin API MUST expose REST realm lifecycle routes under /admin/realm and tenant assignment routes under /admin/realm/{realm_id}/tenant. Realm CRUD is superuser-only. Raw /realm table routes MUST NOT be exposed by platform-admin-app. Existing /admin/tenant routes remain default-realm compatibility routes."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -18,7 +18,7 @@ status_notes:
     at: "2026-06-01T09:47:59Z"
 references: []
 body: |-
-  The platform-admin API MUST expose REST realm lifecycle routes under /admin/realm and tenant assignment routes under /admin/realm/{realm_id}/tenant. Realm CRUD is superuser-only. Raw /realm table routes MUST NOT be exposed by platform-admin-api. Existing /admin/tenant routes remain default-realm compatibility routes.
+  The platform-admin API MUST expose REST realm lifecycle routes under /admin/realm and tenant assignment routes under /admin/realm/{realm_id}/tenant. Realm CRUD is superuser-only. Raw /realm table routes MUST NOT be exposed by platform-admin-app. Existing /admin/tenant routes remain default-realm compatibility routes.
 spec_kind: "normative"
 adr_ids:
   - "adr:1089"

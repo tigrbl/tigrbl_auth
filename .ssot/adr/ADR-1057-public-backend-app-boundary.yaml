@@ -2,8 +2,8 @@ schema_version: "0.4.0"
 kind: "adr"
 id: "adr:1057"
 number: 1057
-slug: "public-api-boundary"
-title: "Public API Boundary"
+slug: "public-backend-app-boundary"
+title: "Public Backend App Boundary"
 status: "draft"
 origin: "repo-local"
 decision_date: null

@@ -1,0 +1,38 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1166"
+number: 1166
+slug: "public-backend-app-contract"
+title: "Public Backend App Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The public API package must assemble only the public-app product surface. The surface exposes browser-facing OAuth/OIDC and hosted-login routes including login, authorize, token, logout, registration, consent, account recovery, discovery, JWKS, and public protocol helpers. It must not expose admin resources, tenant lifecycle administration, diagnostics, RPC, or operator-only control-plane paths. The intended primary UIX consumer is @tigrbl-auth/public-uix, with tenant-branded and white-label clients using the same public contract."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-05-25T05:33:54Z"
+    note: "Draft contract for public API completion."
+    status: "draft"
+  -
+    at: "2026-05-26T12:26:03Z"
+    note: "Decomposed into authorization, token/session, registration/recovery, and discovery/JWKS public API contracts."
+    status: "draft"
+  -
+    at: "2026-05-27T16:58:57Z"
+    note: "Linked to spc:1176 for canonical identity storage table and persistence ownership where this API exposes table-backed behavior."
+    status: "draft"
+  -
+    status: "draft"
+    note: "Public API discovery now includes /realms/{realm_slug}/.well-known/openid-configuration and realm JWKS metadata."
+    at: "2026-06-01T09:53:00Z"
+references: []
+body: |-
+  The public API package must assemble only the public-app product surface. The surface exposes browser-facing OAuth/OIDC and hosted-login routes including login, authorize, token, logout, registration, consent, account recovery, discovery, JWKS, and public protocol helpers. It must not expose admin resources, tenant lifecycle administration, diagnostics, RPC, or operator-only control-plane paths. The intended primary UIX consumer is @tigrbl-auth/public-uix, with tenant-branded and white-label clients using the same public contract.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1083"
+  - "adr:1120"
+  - "adr:1076"
