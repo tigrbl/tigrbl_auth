@@ -169,21 +169,6 @@ consumer_layer = "deprecated"
 allowed_target_layers = ["00-primitives","01-storage","02-contracts","05-bases","10-concrete","20-providers","30-storage-runtime","40-capabilities","50-protocols","60-runtime","70-facade","80-routers","90-backend-apps","100-uix-core","105-ui","110-examples","120-tests","deprecated"]
 
 [[dependency_exceptions]]
-consumer = "tigrbl-identity-jose"
-target = "tigrbl-key-administration-capability"
-reason = "legacy reverse dependency pending owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-identity-jose"
-target = "tigrbl-security-protocol-jose"
-reason = "legacy reverse dependency pending owner-layer migration"
-
-[[dependency_exceptions]]
-consumer = "tigrbl-identity-jose"
-target = "tigrbl-identity-author"
-reason = "legacy reverse dependency pending owner-layer migration"
-
-[[dependency_exceptions]]
 consumer = "tigrbl-identity-server"
 target = "tigrbl-auth-router-session-login"
 reason = "legacy reverse dependency pending owner-layer migration"

@@ -7372,16 +7372,13 @@ dependencies = [
     { name = "swarmauri-signing-ed25519" },
     { name = "swarmauri-signing-jws" },
     { name = "swarmauri-tokens-jwt" },
-    { name = "tigrbl-identity-author" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core" },
     { name = "tigrbl-jose-bases" },
     { name = "tigrbl-jose-concrete" },
     { name = "tigrbl-jose-swarmauri-provider" },
-    { name = "tigrbl-key-administration-capability" },
     { name = "tigrbl-secret-hashing-bcrypt-provider" },
     { name = "tigrbl-security-key-rotation-policy-contracts" },
-    { name = "tigrbl-security-protocol-jose" },
     { name = "tigrbl-security-signing-pqc" },
 ]
 
@@ -7394,16 +7391,13 @@ requires-dist = [
     { name = "swarmauri-signing-ed25519", specifier = "==0.2.0.dev32" },
     { name = "swarmauri-signing-jws", specifier = "==0.3.0.dev31" },
     { name = "swarmauri-tokens-jwt", specifier = "==0.3.0.dev31" },
-    { name = "tigrbl-identity-author", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-jose-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-jose-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-jose-swarmauri-provider", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-key-administration-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-secret-hashing-bcrypt-provider", specifier = "==0.1.0" },
     { name = "tigrbl-security-key-rotation-policy-contracts", specifier = "==0.1.0" },
-    { name = "tigrbl-security-protocol-jose", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-signing-pqc", specifier = "==0.1.0" },
 ]
 

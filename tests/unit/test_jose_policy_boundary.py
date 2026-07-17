@@ -217,13 +217,13 @@ def test_jose_policy_t2_public_boundary_has_no_forbidden_imports() -> None:
         root / "30-storage-runtime/tigrbl-authz-policy-authority-derivation-graph/src/tigrbl_authz_policy_authority_derivation_graph/__init__.py",
         root / "20-providers/tigrbl-authz-policy-decision-engine/src/tigrbl_authz_policy_decision_engine/__init__.py",
         root / "deprecated/tigrbl-authz-policy-invariant-registry/src/tigrbl_authz_policy_invariant_registry/__init__.py",
-        root / "20-providers/tigrbl-authz-policy/src/tigrbl_authz_policy/abac.py",
-        root / "20-providers/tigrbl-authz-policy/src/tigrbl_authz_policy/delegated_admin.py",
-        root / "20-providers/tigrbl-authz-policy/src/tigrbl_authz_policy/__init__.py",
-        root / "20-providers/tigrbl-authz-policy/src/tigrbl_authz_policy/decisions.py",
-        root / "20-providers/tigrbl-authz-policy/src/tigrbl_authz_policy/policy_engine.py",
-        root / "20-providers/tigrbl-authz-policy/src/tigrbl_authz_policy/rbac.py",
-        root / "20-providers/tigrbl-authz-policy/src/tigrbl_authz_policy/service_identity_registry.py",
+        root / "60-runtime/tigrbl-authz-policy/src/tigrbl_authz_policy/abac.py",
+        root / "60-runtime/tigrbl-authz-policy/src/tigrbl_authz_policy/delegated_admin.py",
+        root / "60-runtime/tigrbl-authz-policy/src/tigrbl_authz_policy/__init__.py",
+        root / "60-runtime/tigrbl-authz-policy/src/tigrbl_authz_policy/decisions.py",
+        root / "60-runtime/tigrbl-authz-policy/src/tigrbl_authz_policy/policy_engine.py",
+        root / "60-runtime/tigrbl-authz-policy/src/tigrbl_authz_policy/rbac.py",
+        root / "60-runtime/tigrbl-authz-policy/src/tigrbl_authz_policy/service_identity_registry.py",
     ]
     forbidden = {"tigrbl_auth", "tigrbl_auth_protocol_oauth", "tigrbl_auth_protocol_oidc", "tigrbl_identity_server"}
 
