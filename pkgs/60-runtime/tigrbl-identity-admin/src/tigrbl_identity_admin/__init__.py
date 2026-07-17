@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from tigrbl_identity_admin_control_plane import (
+from ._control_plane import (
     AdminControlPlane,
     AdminControlPlaneError,
     AdminResource,

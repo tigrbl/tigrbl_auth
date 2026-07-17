@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 import sys
 from pathlib import Path
 
@@ -10,10 +9,11 @@ if str(OPERATOR_SRC) not in sys.path:
     sys.path.append(str(OPERATOR_SRC))
 
 import tigrbl_identity_operator.uix as operator_uix  # noqa: E402
+from tigrbl_operator_administration_capability import OPERATOR_ADMINISTRATION_OPERATIONS  # noqa: E402
 
 from tigrbl_auth.uix import (  # noqa: E402
     ADMINISTRATIVE_RESOURCE_VIEW_FEATURES,
-    RESOURCE_VIEW_METHODS,
+    RESOURCE_VIEW_OPERATIONS,
     administrative_resource_views_boundary_integrity,
     administrative_resource_views_boundary_manifest,
     build_resource_views,
@@ -33,13 +33,8 @@ BOUNDARY_FEATURE_IDS = {
 }
 
 
-def _admin_openrpc_methods() -> set[str]:
-    contract = json.loads(
-        (ROOT / "specs/openrpc/profiles/baseline-development/tigrbl_auth.admin.openrpc.json").read_text(
-            encoding="utf-8"
-        )
-    )
-    return {method["name"] for method in contract["methods"]}
+def _admin_capability_operations() -> set[str]:
+    return set(OPERATOR_ADMINISTRATION_OPERATIONS)
 
 
 def test_priority1_administrative_resource_views_boundary_t0_inventory_tracks_all_features():
@@ -54,11 +49,11 @@ def test_priority1_administrative_resource_views_boundary_t0_inventory_tracks_al
     assert integrity["passed"] is True
     assert operator_integrity["passed"] is True
     assert integrity["feature_count"] == 9
-    assert set(integrity["views"]) == set(RESOURCE_VIEW_METHODS)
+    assert set(integrity["views"]) == set(RESOURCE_VIEW_OPERATIONS)
 
 
-def test_priority1_administrative_resource_views_boundary_t1_backs_all_views_from_openrpc_contract():
-    views = build_resource_views(_admin_openrpc_methods())
+def test_priority1_administrative_resource_views_boundary_t1_backs_all_views_from_capability_contract():
+    views = build_resource_views(_admin_capability_operations())
 
     assert tuple(views) == (
         "tenants",
@@ -73,22 +68,22 @@ def test_priority1_administrative_resource_views_boundary_t1_backs_all_views_fro
     )
     assert all(view.backed for view in views.values())
     for view_name, view in views.items():
-        assert view.required_methods == RESOURCE_VIEW_METHODS[view_name]
+        assert view.required_operations == RESOURCE_VIEW_OPERATIONS[view_name]
         assert view.states == ("empty", "loading", "error", "filtered", "detail")
 
 
-def test_priority1_administrative_resource_views_boundary_t2_reports_missing_methods_fail_closed():
-    available = _admin_openrpc_methods()
-    available.remove("client.show")
-    available.remove("keys.list")
-    available.remove("evidence.status")
+def test_priority1_administrative_resource_views_boundary_t2_reports_missing_operations_fail_closed():
+    available = _admin_capability_operations()
+    available.remove("get_resource")
+    available.remove("key_list")
 
     views = build_resource_views(available)
 
-    assert views["tenants"].backed
-    assert views["clients"].missing_methods == ("client.show",)
-    assert views["keys-jwks"].missing_methods == ("keys.list",)
-    assert views["profile-certification"].missing_methods == ("evidence.status",)
+    assert views["tenants"].missing_operations == ("get_resource",)
+    assert not views["tenants"].backed
+    assert views["clients"].missing_operations == ("get_resource",)
+    assert views["keys-jwks"].missing_operations == ("key_list",)
+    assert views["profile-certification"].missing_operations == ("get_resource",)
     assert not views["clients"].backed
     assert not views["keys-jwks"].backed
     assert not views["profile-certification"].backed

@@ -33,15 +33,31 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
-    "tigrbl-advanced-authentication-capability==0.4.0.dev2",
-    "tigrbl-identity-admin-control-plane==0.4.0.dev2",
+    "tigrbl-adaptive-authentication-capability==0.4.0.dev2",
+    "tigrbl-administrative-resource-capability==0.4.0.dev2",
+    "tigrbl-identity-administration-capability==0.4.0.dev2",
+    "tigrbl-operator-administration-capability==0.4.0.dev2",
+    "tigrbl-realm-administration-capability==0.4.0.dev2",
+    "tigrbl-tenant-administration-capability==0.4.0.dev2",
+    "tigrbl-capability==0.4.0.dev2",
+    "tigrbl-identity-contracts==0.4.0.dev2",
+    "tigrbl-identity-core==0.4.0.dev2",
+    "tigrbl-identity-credentials-concrete==0.4.0.dev2",
+    "tigrbl-identity-identities-concrete==0.4.0.dev2",
+    "tigrbl-jose-concrete==0.4.0.dev2",
+    "tigrbl-identity-durability==0.4.0.dev2",
+    "tigrbl-webauthn-durability==0.4.0.dev2",
+    "tigrbl-authorization-policy-durability==0.4.0.dev2",
+    "tigrbl-identity-admin-relationship-graph==0.4.0.dev2",
+    "tigrbl-identity-admin-auth-anomaly-detector==0.4.0.dev2",
+    "tigrbl-trust-federation-graph-concrete==0.4.0.dev2",
     "tigrbl-identity-server==0.4.0.dev2",
 ]
 
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"
 Repository = "https://github.com/tigrbl/tigrbl_auth"
-Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/20-providers/tigrbl-identity-admin"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/60-runtime/tigrbl-identity-admin"
 SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
 PyPI = "https://pypi.org/project/tigrbl-identity-admin/"
 

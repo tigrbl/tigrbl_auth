@@ -64,7 +64,7 @@ def test_monorepo_release_discovers_split_packages() -> None:
         "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime"
     )
     assert packages["tigrbl-authz-policy"].path.as_posix() == "pkgs/20-providers/tigrbl-authz-policy"
-    assert packages["tigrbl-identity-admin"].path.as_posix() == "pkgs/20-providers/tigrbl-identity-admin"
+    assert packages["tigrbl-identity-admin"].path.as_posix() == "pkgs/60-runtime/tigrbl-identity-admin"
     assert packages["tigrbl-authz-resource-server"].path.as_posix() == "pkgs/50-protocols/tigrbl-authz-resource-server"
 
 

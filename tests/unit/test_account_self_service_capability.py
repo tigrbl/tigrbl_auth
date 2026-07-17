@@ -80,7 +80,7 @@ async def test_account_self_service_normalizes_missing_owned_resources() -> None
 
 
 def test_my_account_http_package_has_no_durable_or_hashing_implementation() -> None:
-    package = ROOT / "pkgs" / "80-routers" / "tigrbl-auth-backend-app-my-account"
+    package = ROOT / "pkgs" / "90-backend-apps" / "tigrbl-auth-backend-app-my-account"
     source = "\n".join(path.read_text() for path in (package / "src").rglob("*.py"))
     metadata = (package / "pyproject.toml").read_text()
 

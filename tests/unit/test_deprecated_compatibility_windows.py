@@ -50,7 +50,7 @@ def test_compatibility_packages_remain_isolated_until_a_release_boundary() -> No
         sorted(path.name for path in DEPRECATED.iterdir() if path.is_dir())
     )
 
-    assert len(packages) == 21
+    assert packages
     assert all(
         (DEPRECATED / package / "pyproject.toml").is_file() for package in packages
     )

@@ -34,6 +34,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
+    "tigrbl-authn-credentials==0.4.0.dev2",
     "tigrbl==0.4.4.dev1",
     "tigrbl-identity-contracts==0.4.0.dev2",
     "tigrbl-identity-jose==0.4.0.dev2",

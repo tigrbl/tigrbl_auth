@@ -33,6 +33,8 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
+    "tigrbl-api-key-authentication-capability==0.4.0.dev2",
+    "tigrbl-service-key-authentication-capability==0.4.0.dev2",
     "tigrbl-account-self-service==0.4.0.dev2",
     "tigrbl-auth-release-certification==0.4.0.dev2",
     "tigrbl-auth-router-session-login==0.4.0.dev2",
@@ -65,7 +67,6 @@ dependencies = [
     "tigrbl-auth-router-admin-gate==0.4.0.dev2",
     "tigrbl-core==0.4.4.dev1",
     "tigrbl-identity-storage-runtime==0.4.0.dev2",
-    "tigrbl-principal-authentication==0.4.0.dev2",
     "tigrbl-client-secret-authentication-capability==0.4.0.dev2",
     "tigrbl-password-authentication-capability==0.4.0.dev2",
     "tigrbl-protocol-artifact-processing==0.4.0.dev2",

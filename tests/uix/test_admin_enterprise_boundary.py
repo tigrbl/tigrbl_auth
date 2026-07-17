@@ -8,7 +8,7 @@ from tigrbl_policy_administration_memory_provider import (
 
 from tigrbl_auth.uix import (
     ADMIN_NAVIGATION,
-    RESOURCE_VIEW_METHODS,
+    RESOURCE_VIEW_OPERATIONS,
     SAFE_MUTATION_METHODS,
     AdminAuthorizationError,
     AdminConsoleShell,
@@ -58,7 +58,7 @@ def test_admin_enterprise_boundary_t0_inventory_exposes_all_required_surfaces():
         "abac",
         "policy-simulation",
     } <= set(ADMIN_NAVIGATION)
-    assert set(RESOURCE_VIEW_METHODS) == {
+    assert set(RESOURCE_VIEW_OPERATIONS) == {
         "tenants",
         "clients",
         "identities",
@@ -100,7 +100,7 @@ async def test_admin_enterprise_boundary_t1_happy_path_composes_shell_views_muta
     )
 
     all_methods = {
-        method for required in RESOURCE_VIEW_METHODS.values() for method in required
+        method for required in RESOURCE_VIEW_OPERATIONS.values() for method in required
     }
     resource_views = build_resource_views(all_methods)
     mutation = execute_safe_mutation(

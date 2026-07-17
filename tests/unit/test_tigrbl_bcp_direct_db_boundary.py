@@ -30,7 +30,7 @@ MIGRATED_RELEASE_PATHS = [
     ROOT / "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/user/_table.py",
     ROOT / "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/realm/_table.py",
     ROOT / "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/tenant/_table.py",
-    ROOT / "pkgs/20-providers/tigrbl-identity-admin/src/tigrbl_identity_admin/bootstrap.py",
+    ROOT / "pkgs/60-runtime/tigrbl-identity-admin/src/tigrbl_identity_admin/bootstrap.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/backends.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/auth.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/security_deps.py",

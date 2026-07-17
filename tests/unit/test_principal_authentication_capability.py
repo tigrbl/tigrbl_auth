@@ -6,11 +6,10 @@ import pytest
 
 from tigrbl_authenticator_client_secret_local import ClientSecretLocalAuthenticator
 from tigrbl_authenticator_password_local import PasswordLocalAuthenticator
-from tigrbl_principal_authentication import (
-    ApiKeyAuthenticationCapability,
-    ClientSecretAuthenticationCapability,
-    PasswordAuthenticationCapability,
-)
+from tigrbl_api_key_authentication_capability import ApiKeyAuthenticationCapability
+from tigrbl_client_secret_authentication_capability import ClientSecretAuthenticationCapability
+from tigrbl_password_authentication_capability import PasswordAuthenticationCapability
+from tigrbl_service_key_authentication_capability import ServiceKeyAuthenticationCapability
 from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
 
 
@@ -97,7 +96,7 @@ def test_token_and_introspection_callers_use_capability_not_model_method() -> No
     ).authenticated is False
 
 
-def _api_key_capability(api_keys, service_keys, touched):
+def _api_key_capabilities(api_keys, service_keys, touched):
     async def find_api_keys(_db, digest):
         return [row for row in api_keys if row["digest"] == digest]
 
@@ -110,11 +109,16 @@ def _api_key_capability(api_keys, service_keys, touched):
     async def mark_used(_db, record):
         touched.append(record)
 
-    return ApiKeyAuthenticationCapability(
-        find_api_keys=find_api_keys,
-        find_service_keys=find_service_keys,
-        resolve_user=resolve_user,
-        mark_used=mark_used,
+    return (
+        ApiKeyAuthenticationCapability(
+            find_api_keys=find_api_keys,
+            resolve_user=resolve_user,
+            mark_used=mark_used,
+        ),
+        ServiceKeyAuthenticationCapability(
+            find_service_keys=find_service_keys,
+            mark_used=mark_used,
+        ),
     )
 
 
@@ -128,7 +132,7 @@ async def test_api_key_capability_authenticates_user_and_records_evidence() -> N
         "status": "active",
     }
     touched = []
-    capability = _api_key_capability([credential], [], touched)
+    capability, _service_capability = _api_key_capabilities([credential], [], touched)
 
     result = await capability.call(
         "authenticate_api_key",
@@ -155,10 +159,10 @@ async def test_api_key_capability_authenticates_service_identity() -> None:
         "status": "active",
     }
     touched = []
-    capability = _api_key_capability([], [credential], touched)
+    _capability, capability = _api_key_capabilities([], [credential], touched)
 
-    result = await capability.authenticate_api_key(
-        api_key="correct",
+    result = await capability.authenticate_service_key(
+        service_key="correct",
         db=object(),
     )
 
@@ -182,7 +186,7 @@ async def test_api_key_capability_rejects_expired_or_inactive_records() -> None:
         "user": {"id": "user-2", "is_active": False},
     }
     touched = []
-    capability = _api_key_capability([expired, inactive], [], touched)
+    capability, _service_capability = _api_key_capabilities([expired, inactive], [], touched)
 
     expired_result = await capability.authenticate_api_key(
         api_key="correct",
@@ -204,6 +208,10 @@ def test_server_api_key_authentication_uses_capability_composition() -> None:
     assert isinstance(
         api_key_authentication.api_key_authentication,
         ApiKeyAuthenticationCapability,
+    )
+    assert isinstance(
+        api_key_authentication.service_key_authentication,
+        ServiceKeyAuthenticationCapability,
     )
 
     for module_name in ("auth.py", "security_deps.py", "../rest/shared.py"):

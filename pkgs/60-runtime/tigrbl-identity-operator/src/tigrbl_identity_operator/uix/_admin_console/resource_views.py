@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+from datetime import datetime, timezone
 # ruff: noqa: F403,F405
 
 from .shell_state import *
@@ -63,16 +65,16 @@ class AdminConsoleShell:
         }
 
 
-RESOURCE_VIEW_METHODS: dict[str, tuple[str, ...]] = {
-    "tenants": ("tenant.list", "tenant.show"),
-    "clients": ("client.list", "client.show"),
-    "identities": ("identity.list", "identity.show"),
-    "sessions": ("session.list", "session.show"),
-    "tokens": ("token.list", "token.inspect"),
-    "consents": ("consent.list", "consent.show"),
-    "audit": ("audit.list", "audit.export"),
-    "keys-jwks": ("keys.list", "jwks.show"),
-    "profile-certification": ("profile.show", "target.list", "claims.show", "evidence.status"),
+RESOURCE_VIEW_OPERATIONS: dict[str, tuple[str, ...]] = {
+    "tenants": ("list_resources", "get_resource"),
+    "clients": ("list_resources", "get_resource"),
+    "identities": ("list_resources", "get_resource"),
+    "sessions": ("list_resources", "get_resource"),
+    "tokens": ("list_resources", "get_resource"),
+    "consents": ("list_resources", "get_resource"),
+    "audit": ("list_resources", "get_resource"),
+    "keys-jwks": ("key_list", "key_get", "key_publish_jwks"),
+    "profile-certification": ("list_resources", "get_resource"),
 }
 
 ADMINISTRATIVE_RESOURCE_VIEW_FEATURES: dict[str, str] = {
@@ -141,7 +143,7 @@ def administrative_safe_mutations_boundary_integrity() -> dict[str, Any]:
         if action not in SAFE_MUTATION_METHODS:
             failures.append(f"{feature_id} maps to missing safe mutation action {action}")
         elif not SAFE_MUTATION_METHODS[action]:
-            failures.append(f"{action} has no required OpenRPC method")
+            failures.append(f"{action} has no required capability operation")
     return {
         "passed": not failures,
         "feature_count": len(manifest),
@@ -153,21 +155,21 @@ def administrative_safe_mutations_boundary_integrity() -> dict[str, Any]:
 @dataclass(frozen=True, slots=True)
 class ResourceView:
     name: str
-    required_methods: tuple[str, ...]
-    missing_methods: tuple[str, ...]
+    required_operations: tuple[str, ...]
+    missing_operations: tuple[str, ...]
     states: tuple[str, ...] = RESOURCE_VIEW_STATES
 
     @property
     def backed(self) -> bool:
-        return not self.missing_methods
+        return not self.missing_operations
 
 
 def administrative_resource_views_boundary_manifest() -> dict[str, dict[str, Any]]:
     return {
         feature_id: {
             "view": view_name,
-            "runtime_objects": ["ResourceView", "RESOURCE_VIEW_METHODS", "build_resource_views"],
-            "required_methods": list(RESOURCE_VIEW_METHODS[view_name]),
+            "runtime_objects": ["ResourceView", "RESOURCE_VIEW_OPERATIONS", "build_resource_views"],
+            "required_operations": list(RESOURCE_VIEW_OPERATIONS[view_name]),
             "states": list(RESOURCE_VIEW_STATES),
         }
         for feature_id, view_name in ADMINISTRATIVE_RESOURCE_VIEW_FEATURES.items()
@@ -180,10 +182,10 @@ def administrative_resource_views_boundary_integrity() -> dict[str, Any]:
     if len(manifest) != 9:
         failures.append("priority 1 administrative resource views boundary must track exactly 9 feature rows")
     for feature_id, view_name in ADMINISTRATIVE_RESOURCE_VIEW_FEATURES.items():
-        if view_name not in RESOURCE_VIEW_METHODS:
+        if view_name not in RESOURCE_VIEW_OPERATIONS:
             failures.append(f"{feature_id} maps to missing view {view_name}")
-        elif not RESOURCE_VIEW_METHODS[view_name]:
-            failures.append(f"{view_name} has no required OpenRPC methods")
+        elif not RESOURCE_VIEW_OPERATIONS[view_name]:
+            failures.append(f"{view_name} has no required capability operations")
     for state in ("empty", "loading", "error", "filtered", "detail"):
         if state not in RESOURCE_VIEW_STATES:
             failures.append(f"missing resource view state {state}")
@@ -274,12 +276,12 @@ class SafeMutationResult:
     error: str | None = None
 
 
-def build_resource_views(available_methods: set[str] | tuple[str, ...] | list[str]) -> dict[str, ResourceView]:
-    available = set(available_methods)
+def build_resource_views(available_operations: set[str] | tuple[str, ...] | list[str]) -> dict[str, ResourceView]:
+    available = set(available_operations)
     views: dict[str, ResourceView] = {}
-    for name, required_methods in RESOURCE_VIEW_METHODS.items():
-        missing = tuple(method for method in required_methods if method not in available)
-        views[name] = ResourceView(name=name, required_methods=required_methods, missing_methods=missing)
+    for name, required_operations in RESOURCE_VIEW_OPERATIONS.items():
+        missing = tuple(method for method in required_operations if method not in available)
+        views[name] = ResourceView(name=name, required_operations=required_operations, missing_operations=missing)
     return views
 
 

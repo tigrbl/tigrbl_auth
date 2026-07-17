@@ -236,10 +236,10 @@ def test_admin_t2_public_boundary_has_no_forbidden_imports() -> None:
                 "pkgs/40-capabilities/tigrbl-administrative-resource-capability/src/tigrbl_administrative_resource_capability/capability.py"
             ),
         Path(
-            "pkgs/20-providers/tigrbl-identity-admin/src/tigrbl_identity_admin/__init__.py"
+            "pkgs/60-runtime/tigrbl-identity-admin/src/tigrbl_identity_admin/__init__.py"
         ),
         Path(
-            "pkgs/20-providers/tigrbl-identity-admin/src/tigrbl_identity_admin/control_plane.py"
+            "pkgs/60-runtime/tigrbl-identity-admin/src/tigrbl_identity_admin/control_plane.py"
         ),
     ]
     forbidden = {

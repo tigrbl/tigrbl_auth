@@ -1,22 +1,17 @@
-import json
+from tigrbl_auth.uix import RESOURCE_VIEW_OPERATIONS, build_resource_views
+from tigrbl_operator_administration_capability import OPERATOR_ADMINISTRATION_OPERATIONS
 
-from tigrbl_auth.uix import RESOURCE_VIEW_METHODS, build_resource_views
 
+def test_resource_views_are_backed_by_required_capability_operations():
+    views = build_resource_views(set(OPERATOR_ADMINISTRATION_OPERATIONS))
 
-def test_resource_views_are_backed_by_required_openrpc_methods():
-    contract = json.loads(
-        open("specs/openrpc/profiles/baseline-development/tigrbl_auth.admin.openrpc.json", encoding="utf-8").read()
-    )
-    available_methods = {method["name"] for method in contract["methods"]}
-    views = build_resource_views(available_methods)
-
-    assert set(views) == set(RESOURCE_VIEW_METHODS)
+    assert set(views) == set(RESOURCE_VIEW_OPERATIONS)
     assert all(view.backed for view in views.values())
 
 
-def test_resource_views_do_not_require_unbacked_backend_methods():
-    views = build_resource_views({"tenant.list", "tenant.show", "client.list"})
+def test_resource_views_do_not_require_unbacked_capability_operations():
+    views = build_resource_views({"list_resources", "get_resource", "key_list"})
 
     assert views["tenants"].backed
-    assert not views["clients"].backed
-    assert views["clients"].missing_methods == ("client.show",)
+    assert not views["keys-jwks"].backed
+    assert views["keys-jwks"].missing_operations == ("key_get", "key_publish_jwks")

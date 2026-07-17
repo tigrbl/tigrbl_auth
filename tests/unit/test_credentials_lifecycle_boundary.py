@@ -101,11 +101,11 @@ def test_credentials_do_not_own_a_secret_hash_format_or_durable_ledger() -> None
     lifecycle_path = (
         ROOT
         / "pkgs"
-        / "40-capabilities"
-        / "tigrbl-principal-authentication"
+        / "20-providers"
+        / "tigrbl-authenticator-password-local"
         / "src"
-        / "tigrbl_principal_authentication"
-        / "lifecycle.py"
+        / "tigrbl_authenticator_password_local"
+        / "__init__.py"
     )
     source = lifecycle_path.read_text(encoding="utf-8")
 

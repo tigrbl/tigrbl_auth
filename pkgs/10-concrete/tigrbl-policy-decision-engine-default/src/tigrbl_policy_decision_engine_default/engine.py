@@ -9,15 +9,14 @@ from tigrbl_authz_policy_rules_concrete import (
     PermissionPolicy,
     RolePolicy,
 )
-from tigrbl_identity_contracts.policy.decisions import PolicyDecision, PolicyTrace
+from tigrbl_identity_contracts.policy.decisions import PolicyDecision
 from tigrbl_identity_contracts.policy.effects import DecisionEffect
 from tigrbl_identity_contracts.policy.kinds import PolicyKind
 from tigrbl_identity_contracts.policy.requests import PolicyRequest
-from tigrbl_identity_core.clock import utc_now_iso
 from tigrbl_identity_core.patterns import matches_dotted_pattern
 
 
-class PolicyDecisionEngine:
+class PolicyDecisionEvaluator:
     def __init__(
         self,
         *,
@@ -32,12 +31,6 @@ class PolicyDecisionEngine:
         self.permissions = tuple(permissions)
         self.delegations = tuple(delegations)
         self.admins = tuple(admins)
-        self._traces: list[PolicyTrace] = []
-
-    @property
-    def traces(self) -> tuple[PolicyTrace, ...]:
-        return tuple(self._traces)
-
     def decide_rbac(self, request: PolicyRequest) -> PolicyDecision:
         matched_allow: list[str] = []
         matched_deny: list[str] = []
@@ -192,20 +185,7 @@ class PolicyDecisionEngine:
         matched = tuple(
             sorted({item for _kind, decision in decisions for item in decision.matched})
         )
-        trace_id = f"poltrace:{len(self._traces) + 1}"
-        trace = PolicyTrace(
-            trace_id=trace_id,
-            subject=request.subject,
-            tenant_id=request.tenant_id,
-            action=request.action,
-            allowed=allowed,
-            reason=reason,
-            matched=matched,
-            evaluated_kinds=tuple(kind for kind, _decision in decisions),
-            recorded_at=utc_now_iso(),
-        )
-        self._traces.append(trace)
-        return PolicyDecision(allowed, reason, matched, trace_id)
+        return PolicyDecision(allowed, reason, matched)
 
 
 __all__ = [
@@ -215,9 +195,8 @@ __all__ = [
     "DelegationPolicy",
     "PermissionPolicy",
     "PolicyDecision",
-    "PolicyDecisionEngine",
+    "PolicyDecisionEvaluator",
     "PolicyKind",
     "PolicyRequest",
-    "PolicyTrace",
     "RolePolicy",
 ]

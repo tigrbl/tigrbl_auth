@@ -30,6 +30,8 @@ CONCRETE_PACKAGE_SHAPES = {
     "tigrbl-oidc-subject-strategy": "stateless-strategy",
 }
 
+ALLOWED_DETERMINISTIC_DEPENDENCIES = {"cbor2"}
+
 ALLOWED_IMPORT_ROOTS = {
     "__future__",
     "dataclasses",
@@ -110,6 +112,7 @@ def test_concrete_packages_only_import_contracts_and_stdlib() -> None:
             unexpected = (
                 _absolute_import_roots(path)
                 - ALLOWED_IMPORT_ROOTS
+                - ALLOWED_DETERMINISTIC_DEPENDENCIES
                 - _allowed_workspace_import_roots()
                 - set(sys.stdlib_module_names)
             )
