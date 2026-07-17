@@ -34,7 +34,15 @@ classifiers = [
 ]
 dependencies = [
     "tigrbl-secret-hashing-bcrypt-provider==0.1.0",
-    "tigrbl-identity-credentials-concrete==0.4.0.dev2",
+    "tigrbl-api-key-credential-concrete==0.4.0.dev2",
+    "tigrbl-client-secret-credential-concrete==0.4.0.dev2",
+    "tigrbl-dpop-key-credential-concrete==0.4.0.dev2",
+    "tigrbl-mfa-credential-concrete==0.4.0.dev2",
+    "tigrbl-mtls-certificate-credential-concrete==0.4.0.dev2",
+    "tigrbl-passkey-credential-concrete==0.4.0.dev2",
+    "tigrbl-password-credential-concrete==0.4.0.dev2",
+    "tigrbl-password-reset-credential-concrete==0.4.0.dev2",
+    "tigrbl-service-key-credential-concrete==0.4.0.dev2",
     "tigrbl-identity-jose==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
 ]

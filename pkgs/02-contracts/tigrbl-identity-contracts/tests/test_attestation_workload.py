@@ -1,5 +1,6 @@
 from tigrbl_identity_contracts.workload_identity import SpiffeId, Svid, SvidFormat
-from tigrbl_identity_credentials_concrete import parse_corim, parse_eat
+from tigrbl_corim_concrete import parse_corim
+from tigrbl_eat_concrete import parse_eat
 
 
 def test_spiffe_id_and_svid_are_identity_and_credential_respectively() -> None:

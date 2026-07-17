@@ -1,9 +1,7 @@
 from __future__ import annotations
 
-from tigrbl_identity_credentials_concrete import (
-    DpopKeyCredential,
-    MtlsCertificateCredential,
-)
+from tigrbl_dpop_key_credential_concrete import DpopKeyCredential
+from tigrbl_mtls_certificate_credential_concrete import MtlsCertificateCredential
 from tigrbl_identity_contracts.credentials import (
     ProofBinding,
 )

@@ -49,7 +49,7 @@ dependencies = [
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"
 Repository = "https://github.com/tigrbl/tigrbl_auth"
-Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/10-concrete/tigrbl-identity-credentials-concrete"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/deprecated/tigrbl-identity-credentials-concrete"
 SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
 PyPI = "https://pypi.org/project/tigrbl-identity-credentials-concrete/"
 

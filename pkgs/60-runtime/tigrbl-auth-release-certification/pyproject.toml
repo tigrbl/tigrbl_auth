@@ -30,7 +30,7 @@ classifiers = [
 ]
 dependencies = [
     "tigrbl-identity-contracts==0.4.0.dev2",
-    "tigrbl-identity-identities-concrete==0.4.0.dev2",
+    "tigrbl-machine-identity-concrete==0.4.0.dev2",
     "tigrbl-identity-runtime==0.4.0.dev2",
     "tigrbl-release-contracts==0.1.0",
 ]

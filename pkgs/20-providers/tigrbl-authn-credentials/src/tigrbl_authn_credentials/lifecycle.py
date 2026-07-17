@@ -17,17 +17,15 @@ from tigrbl_identity_contracts.credentials import (
     CredentialVerificationError,
     IssuedCredential,
 )
-from tigrbl_identity_credentials_concrete import (
-    ApiKeyCredential,
-    ClientSecretCredential,
-    DpopKeyCredential,
-    MfaCredential,
-    MtlsCertificateCredential,
-    PasskeyCredential,
-    PasswordCredential,
-    PasswordResetCredential,
-    ServiceKeyCredential,
-)
+from tigrbl_api_key_credential_concrete import ApiKeyCredential
+from tigrbl_client_secret_credential_concrete import ClientSecretCredential
+from tigrbl_dpop_key_credential_concrete import DpopKeyCredential
+from tigrbl_mfa_credential_concrete import MfaCredential
+from tigrbl_mtls_certificate_credential_concrete import MtlsCertificateCredential
+from tigrbl_passkey_credential_concrete import PasskeyCredential
+from tigrbl_password_credential_concrete import PasswordCredential
+from tigrbl_password_reset_credential_concrete import PasswordResetCredential
+from tigrbl_service_key_credential_concrete import ServiceKeyCredential
 from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
 
 UTC = timezone.utc

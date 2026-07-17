@@ -30,7 +30,6 @@ def test_declared_canonical_concrete_packages_exist() -> None:
 
 
 def test_layer_10_never_imports_higher_layers() -> None:
-    data = yaml.safe_load(TAXONOMY.read_text(encoding="utf-8"))
     forbidden_fragments = (
         "_provider",
         "_storage_runtime",
@@ -39,9 +38,7 @@ def test_layer_10_never_imports_higher_layers() -> None:
         "_runtime",
         "_api_",
     )
-    exceptions = {"tigrbl_capability", "tigrbl_default_capability"} | {
-        name.replace("-", "_") for name in data["compatibility_aggregates"]
-    }
+    exceptions = {"tigrbl_capability", "tigrbl_default_capability"}
     for path in sorted(CONCRETE.rglob("*.py")):
         if "tests" in path.parts:
             continue

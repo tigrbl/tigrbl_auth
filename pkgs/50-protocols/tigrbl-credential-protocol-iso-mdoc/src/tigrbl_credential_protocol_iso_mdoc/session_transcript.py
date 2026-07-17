@@ -1,11 +1,7 @@
-from dataclasses import dataclass
+"""Versioned ISO mdoc protocol exports backed by deterministic layer-10 models."""
 
+from tigrbl_mdoc_concrete.session_transcript import (
+    SessionTranscript,
+)
 
-@dataclass(frozen=True, slots=True)
-class SessionTranscript:
-    device_engagement_bytes: bytes | None
-    reader_key_bytes: bytes | None
-    handover: object
-
-
-__all__ = ["SessionTranscript"]
+__all__ = ['SessionTranscript']

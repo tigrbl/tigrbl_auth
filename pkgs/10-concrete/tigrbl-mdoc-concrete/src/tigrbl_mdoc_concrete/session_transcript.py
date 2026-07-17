@@ -1,2 +1,11 @@
-from tigrbl_credential_protocol_iso_mdoc.session_transcript import *  # noqa: F403
-from tigrbl_credential_protocol_iso_mdoc.session_transcript import __all__ as __all__
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True, slots=True)
+class SessionTranscript:
+    device_engagement_bytes: bytes | None
+    reader_key_bytes: bytes | None
+    handover: object
+
+
+__all__ = ["SessionTranscript"]

@@ -52,7 +52,7 @@ def test_monorepo_release_discovers_split_packages() -> None:
         "pkgs/10-concrete/tigrbl-authz-policy-rules-concrete"
     )
     assert packages["tigrbl-identity-identities-concrete"].path.as_posix() == (
-        "pkgs/10-concrete/tigrbl-identity-identities-concrete"
+        "pkgs/deprecated/tigrbl-identity-identities-concrete"
     )
     assert packages["tigrbl-authz-resource-server-verifier"].path.as_posix() == (
         "pkgs/20-providers/tigrbl-authz-resource-server-verifier"

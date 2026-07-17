@@ -1,17 +1,5 @@
-from dataclasses import dataclass
+"""Versioned EAT protocol export for the deterministic profile value."""
 
-
-@dataclass(frozen=True, slots=True)
-class EatProfile:
-    identifier: str | int
-
-    def __post_init__(self) -> None:
-        if isinstance(self.identifier, str) and not self.identifier:
-            raise ValueError("EAT profile identifier cannot be empty")
-        if not isinstance(self.identifier, (str, int)) or isinstance(
-            self.identifier, bool
-        ):
-            raise ValueError("EAT profile must be a URI or OID identifier")
-
+from tigrbl_eat_concrete.profiles import EatProfile
 
 __all__ = ["EatProfile"]

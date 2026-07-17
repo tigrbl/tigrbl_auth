@@ -16,13 +16,13 @@ CONTRACTS_ROOT = (
 CONCRETE_ROOTS = (
     ROOT
     / "pkgs"
-    / "10-concrete"
+    / "deprecated"
     / "tigrbl-identity-identities-concrete"
     / "src"
     / "tigrbl_identity_identities_concrete",
     ROOT
     / "pkgs"
-    / "10-concrete"
+    / "deprecated"
     / "tigrbl-identity-credentials-concrete"
     / "src"
     / "tigrbl_identity_credentials_concrete",

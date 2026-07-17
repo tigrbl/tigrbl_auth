@@ -383,7 +383,7 @@ Produce:
 ## 15. Source Evidence
 
 - `pkgs/05-bases/tigrbl-identity-authenticator-bases/`
-- `pkgs/10-concrete/tigrbl-identity-credentials-concrete/`
+- `pkgs/deprecated/tigrbl-identity-credentials-concrete/`
 - `pkgs/20-providers/tigrbl-authenticator-*/`
 - `pkgs/20-providers/tigrbl-security-auth-context-acr-basic/`
 - `pkgs/20-providers/tigrbl-security-auth-context-amr-basic/`

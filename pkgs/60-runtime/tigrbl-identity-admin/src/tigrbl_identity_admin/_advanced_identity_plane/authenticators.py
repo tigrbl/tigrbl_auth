@@ -8,11 +8,9 @@ from uuid import uuid4
 from tigrbl_identity_contracts.adaptive_access import AdaptiveContext, AdaptiveDecision
 from tigrbl_identity_contracts.authentication import AuthenticationChallenge
 from tigrbl_identity_core.clock import utc_now, utc_now_iso
-from tigrbl_identity_credentials_concrete import (
-    MfaFactor,
-    PasswordlessCredential,
-    WebAuthnCredential,
-)
+from tigrbl_mfa_factor_concrete import MfaFactor
+from tigrbl_passwordless_credential_concrete import PasswordlessCredential
+from tigrbl_webauthn_credential_concrete import WebAuthnCredential
 from tigrbl_jose_concrete import is_webauthn_algorithm
 from tigrbl_identity_durability import (
     AuthenticationChallengeTable,

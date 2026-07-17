@@ -210,7 +210,7 @@ def test_advanced_identity_contracts_are_domain_packaged() -> None:
     concrete_root = (
         ROOT
         / "pkgs"
-        / "10-concrete"
+        / "deprecated"
         / "tigrbl-identity-identities-concrete"
         / "src"
         / "tigrbl_identity_identities_concrete"
@@ -218,7 +218,7 @@ def test_advanced_identity_contracts_are_domain_packaged() -> None:
     credential_root = (
         ROOT
         / "pkgs"
-        / "10-concrete"
+        / "deprecated"
         / "tigrbl-identity-credentials-concrete"
         / "src"
         / "tigrbl_identity_credentials_concrete"
