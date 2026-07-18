@@ -127,8 +127,8 @@ def _surface_probe_targets(*, app: Any, deployment: Any | None = None) -> tuple[
 RUNTIME_FALLBACK_PATHS = [
     "tigrbl_auth/framework.py",
     "tigrbl_auth/plugin.py",
-    "tigrbl_auth/api/app.py",
-    "tigrbl_auth/api/lifecycle.py",
+    "pkgs/90-backend-apps/tigrbl-auth-backend-app-core/src/tigrbl_auth_backend_app_core/app.py",
+    "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/composition/lifecycle.py",
     "tigrbl_auth/app.py",
     "tigrbl_auth/gateway.py",
 ]

@@ -1,31 +1,20 @@
 public_auth_plane:
-- tigrbl_auth/api/rest/routers/login.py
-- tigrbl_auth/api/rest/routers/authorize.py
-- tigrbl_auth/api/rest/routers/token.py
-- tigrbl_auth/standards/oidc/userinfo.py
-- tigrbl_auth/standards/oidc/discovery.py
-- tigrbl_auth/standards/oauth2/rfc8414.py
-- tigrbl_auth/standards/oauth2/rfc9728.py
-- tigrbl_auth/standards/oauth2/introspection.py
-- tigrbl_auth/standards/oauth2/revocation.py
-- tigrbl_auth/standards/oauth2/token_exchange.py
+- pkgs/80-routers/tigrbl-auth-router-session-login/src/tigrbl_auth_router_session_login/binding.py
+- pkgs/80-routers/tigrbl-auth-router-oauth-authorization/src/tigrbl_auth_router_oauth_authorization/binding.py
+- pkgs/80-routers/tigrbl-auth-router-oauth-token/src/tigrbl_auth_router_oauth_token/binding.py
+- pkgs/90-backend-apps/tigrbl-auth-backend-app-core/src/tigrbl_auth_backend_app_core/surfaces
 admin_control_plane:
-- tigrbl_auth/tables
-- tigrbl_auth/api/surfaces.py
+- pkgs/90-backend-apps/tigrbl-auth-backend-app-platform-admin/src/tigrbl_auth_backend_app_platform_admin
+- pkgs/90-backend-apps/tigrbl-auth-backend-app-my-account/src/tigrbl_auth_backend_app_my_account
 operator_plane:
-- tigrbl_auth/cli/main.py
-- tigrbl_auth/cli/claims.py
-- tigrbl_auth/cli/governance.py
-- tigrbl_auth/cli/runtime.py
-- tigrbl_auth/cli/feature_surface.py
+- pkgs/60-runtime/tigrbl-identity-cli/src/tigrbl_identity_cli
+- pkgs/60-runtime/tigrbl-identity-operator/src/tigrbl_identity_operator
 rpc_control_plane:
-- tigrbl_auth/api/rpc
-- tigrbl_auth/api/surfaces.py
-- tigrbl_auth/cli/artifacts.py
+- pkgs/60-runtime/tigrbl-identity-cli/src/tigrbl_identity_cli/cli/artifacts/_schemas.py
 - specs/openrpc/tigrbl_auth.admin.openrpc.json
 diagnostics_plane:
-- tigrbl_auth/plugin.py
-- tigrbl_auth/api/app.py
+- pkgs/90-backend-apps/tigrbl-auth-backend-app-core/src/tigrbl_auth_backend_app_core/app.py
+- pkgs/90-backend-apps/tigrbl-auth-backend-app-core/src/tigrbl_auth_backend_app_core/plugin.py
 plugin_plane:
-- tigrbl_auth/plugin.py
-- tigrbl_auth/gateway.py
+- pkgs/60-runtime/tigrbl-auth-plugin/src/tigrbl_auth_plugin/plugin.py
+- pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/gateway.py

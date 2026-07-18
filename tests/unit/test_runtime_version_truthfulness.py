@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from tigrbl_auth.api.app import _runtime_package_version
+from tigrbl_auth_backend_app_core.app import _runtime_package_version
 
 
 ROOT = Path(__file__).resolve().parents[2]

@@ -14,7 +14,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/api/app.py
+  - pkgs/90-backend-apps/tigrbl-auth-backend-app-core/src/tigrbl_auth_backend_app_core/app.py
   - tigrbl_auth/app.py
   - tigrbl_auth/plugin.py
   - tigrbl_auth/gateway.py
@@ -36,7 +36,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/api/app.py
+  - pkgs/90-backend-apps/tigrbl-auth-backend-app-core/src/tigrbl_auth_backend_app_core/app.py
   - tigrbl_auth/gateway.py
   - tigrbl_auth/cli/handlers.py
   - tigrbl_auth/config/deployment.py
@@ -55,7 +55,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/api/app.py
+  - pkgs/90-backend-apps/tigrbl-auth-backend-app-core/src/tigrbl_auth_backend_app_core/app.py
   - tigrbl_auth/gateway.py
   - tigrbl_auth/cli/handlers.py
   - tigrbl_auth/config/deployment.py
@@ -74,7 +74,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/api/app.py
+  - pkgs/90-backend-apps/tigrbl-auth-backend-app-core/src/tigrbl_auth_backend_app_core/app.py
   - tigrbl_auth/gateway.py
   - tigrbl_auth/cli/handlers.py
   - tigrbl_auth/config/deployment.py

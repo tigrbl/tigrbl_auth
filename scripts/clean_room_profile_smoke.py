@@ -98,7 +98,7 @@ def main() -> int:
 
     try:
         import tigrbl_auth  # noqa: F401
-        from tigrbl_auth.api.app import build_app, build_application_runtime_plan
+        from tigrbl_auth_backend_app_core import build_app, build_application_runtime_plan
         from tigrbl_auth.cli.runtime import probe_http_surface_endpoints
         from tigrbl_auth.config.deployment import resolve_deployment
         from tigrbl_auth.config.settings import settings

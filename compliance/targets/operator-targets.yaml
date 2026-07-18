@@ -47,7 +47,7 @@ targets:
   modules:
   - tigrbl_auth/cli/metadata.py
   - tigrbl_auth/cli/handlers.py
-  - tigrbl_auth/api/rpc/methods/keys.py
+  - pkgs/60-runtime/tigrbl-identity-cli/src/tigrbl_identity_cli/operator_administration.py
   - tigrbl_auth/standards/jose/rfc7517.py
   status: evidenced-release-gated
 - id: operator.import-export

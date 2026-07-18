@@ -77,7 +77,7 @@ def _revision_inventory() -> list[dict[str, Any]]:
 
 
 async def _applied_revision_snapshot(revision_order: list[str]) -> list[str]:
-    from tigrbl_auth.api.surfaces import surface_api
+    from tigrbl_auth_backend_app_core.surfaces import surface_api
     from tigrbl_auth.migrations.helpers import applied_revisions
     from tigrbl_auth.runtime.engine_resolver import resolve_api_provider
 
@@ -107,7 +107,7 @@ async def _exercise_backend(
 ) -> dict[str, Any]:
     from tigrbl.engine import Engine, EngineSpec
     from tigrbl_auth.app import app
-    from tigrbl_auth.api.surfaces import surface_api
+    from tigrbl_auth_backend_app_core.surfaces import surface_api
     from tigrbl_auth.migrations import apply_all_async, downgrade_one_async
     from tigrbl_auth.runtime.engine_resolver import register_api_provider, resolve_api_provider
 

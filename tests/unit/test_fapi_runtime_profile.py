@@ -8,7 +8,7 @@ from unittest.mock import AsyncMock
 
 import pytest
 
-from tigrbl_auth.api.rest.schemas import DynamicClientRegistrationIn
+from tigrbl_auth_protocol_oauth.schemas import DynamicClientRegistrationIn
 from tigrbl_auth.cli.artifacts import deployment_from_options
 import tigrbl_auth_backend_app_core.surfaces.par_surface as par_ops
 import tigrbl_auth_backend_app_core.surfaces.client_registration_surface as register_ops

@@ -38,7 +38,8 @@ def diff_contracts(repo_root: Path, kind: str = "all", profile_label: str = "act
 
 PROFILE_LABELS = ("baseline", "production", "hardening", "fapi2-security", "peer-claim")
 PUBLIC_ROUTE_SEARCH_ROOTS = (
-    "tigrbl_auth/api/rest/routers",
+    "pkgs/80-routers",
+    "pkgs/90-backend-apps",
     "tigrbl_auth/standards/oauth2",
     "tigrbl_auth/standards/oidc",
     "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers",

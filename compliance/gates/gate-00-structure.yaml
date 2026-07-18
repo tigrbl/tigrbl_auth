@@ -7,7 +7,8 @@ required:
 - compliance/targets
 - compliance/waivers
 - docs/adr
-- tigrbl_auth/api
+- pkgs/80-routers
+- pkgs/90-backend-apps
 - tigrbl_auth/security
 - tigrbl_auth/standards
 checks:

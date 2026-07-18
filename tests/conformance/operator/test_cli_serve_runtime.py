@@ -67,7 +67,7 @@ def test_cli_serve_live_path_writes_runtime_evidence_when_profile_is_ready(monke
 
     def fake_profile_report(*args, **kwargs):
         return {
-            "application_probe": {"passed": True, "app_factory": "tigrbl_auth.api.app.build_app", "message": "ok"},
+            "application_probe": {"passed": True, "app_factory": "tigrbl_auth_backend_app_core.app.build_app", "message": "ok"},
             "summary": {"runner_count": 3, "ready_count": 1, "missing_count": 0, "invalid_count": 0},
             "profiles": [
                 {"name": "uvicorn", "status": "ready", "installed": True, "available_module": "uvicorn", "diagnostics": [], "application_hash": "a", "runtime_hash": "b"},
@@ -75,7 +75,7 @@ def test_cli_serve_live_path_writes_runtime_evidence_when_profile_is_ready(monke
         }
 
     def fake_probe_application_factory(*, deployment):
-        return SimpleNamespace(passed=True, to_manifest=lambda: {"passed": True, "app_factory": "tigrbl_auth.api.app.build_app", "message": "ok"}), object()
+        return SimpleNamespace(passed=True, to_manifest=lambda: {"passed": True, "app_factory": "tigrbl_auth_backend_app_core.app.build_app", "message": "ok"}), object()
 
     def fake_launch_runtime_profile(repo_root, *, app, plan, adapter, startup_payload, evidence_paths=None):
         paths = evidence_paths or serve_globals["runtime_evidence_paths"](repo_root, plan.runner)

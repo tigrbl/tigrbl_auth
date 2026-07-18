@@ -10,7 +10,11 @@ pkgs/50-protocols: certified_core
 pkgs/60-runtime: certified_core
 pkgs/70-facade: legacy_transition
 pkgs/80-routers: certified_core
-tigrbl_auth/api: certified_core
+pkgs/90-backend-apps: certified_core
+pkgs/100-uix-core: certified_core
+pkgs/105-ui: certified_core
+pkgs/110-tests: governance_plane
+pkgs/120-examples: governance_plane
 tigrbl_auth/ops: certified_core
 tigrbl_auth/tables: certified_core
 tigrbl_auth/services: certified_core
@@ -78,9 +82,6 @@ tigrbl_auth/standards/oauth2/rfc9728.py: certified_core
 tigrbl_auth/standards/oauth2/rfc9700.py: certified_core
 tigrbl_auth/security/auth.py: certified_core
 tigrbl_auth/security/context.py: certified_core
-tigrbl_auth/api/rest/deps/auth.py: certified_core
-tigrbl_auth/api/rest/routers/login.py: certified_core
-tigrbl_auth/api/rest/routers/auth_flows.py: legacy_transition
 tigrbl_auth/standards/oauth2/revocation.py: certified_core
 tigrbl_auth/standards/oauth2/introspection.py: certified_core
 tigrbl_auth/standards/oauth2/native_apps.py: certified_core

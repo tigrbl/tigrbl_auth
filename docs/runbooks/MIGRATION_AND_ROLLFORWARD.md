@@ -89,7 +89,7 @@ python scripts/verify_persistence_migrations.py
 Application startup now invokes migration application before surface
 initialization via:
 
-- `tigrbl_auth/api/lifecycle.py`
+- `pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/composition/lifecycle.py`
 
 That means a standard application start should converge the schema to the latest
 owned revision set before the package begins serving requests.

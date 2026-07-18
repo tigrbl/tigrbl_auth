@@ -48,7 +48,7 @@ RFC 9728:
 RFC 9700:
   modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/oauth_security_bcp.py]
 OpenRPC 1.4.x admin/control-plane contract:
-  modules: [pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/api]
+  modules: [pkgs/60-runtime/tigrbl-identity-cli/src/tigrbl_identity_cli/cli/artifacts/_schemas.py]
 RFC 7009:
   modules: [pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/revocation.py]
 RFC 7662:

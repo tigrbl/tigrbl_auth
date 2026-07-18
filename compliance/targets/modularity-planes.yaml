@@ -1,58 +1,43 @@
-schema_version: 1
+schema_version: 2
 package: tigrbl_auth
 planes:
-  api:
-    responsibility: transport only
+  routers:
+    responsibility: closed, mountable HTTP carriers over owned operations and tables
     modules:
-    - tigrbl_auth/api
+    - pkgs/80-routers
     boundary: certified_core
-  tables:
-    responsibility: persistence only
+  backend_apps:
+    responsibility: deployable application composition of routers, tables, operations, and hooks
     modules:
-    - tigrbl_auth/tables
+    - pkgs/90-backend-apps
     boundary: certified_core
-  ops:
-    responsibility: transaction-owning orchestration
+  runtime:
+    responsibility: carrier-neutral process and deployment composition
     modules:
-    - tigrbl_auth/ops
+    - pkgs/60-runtime
     boundary: certified_core
-  services:
-    responsibility: reusable domain and integration services
+  facade:
+    responsibility: downward-only compatibility and stable public entrypoints
     modules:
-    - tigrbl_auth/services
-    boundary: certified_core
-  standards:
-    responsibility: protocol-specific behavior
+    - pkgs/70-facade
+    boundary: legacy_transition
+  uix_core:
+    responsibility: reusable frontend transport, authentication, and presentation primitives
     modules:
-    - tigrbl_auth/standards
+    - pkgs/100-uix-core
     boundary: certified_core
-  security:
-    responsibility: cross-cutting hardening
+  ui_apps:
+    responsibility: deployable user-interface applications
     modules:
-    - tigrbl_auth/security
+    - pkgs/105-ui
     boundary: certified_core
-  config:
-    responsibility: profile and feature resolution
+  tests:
+    responsibility: verification and conformance evidence
     modules:
-    - tigrbl_auth/config
-    boundary: certified_core
-  adapters:
-    responsibility: provider and trust seams
+    - pkgs/110-tests
+    boundary: governance_plane
+  examples:
+    responsibility: executable usage demonstrations
     modules:
-    - tigrbl_auth/adapters
-    boundary: certified_core
-  cli:
-    responsibility: operator and certification UX
-    modules:
-    - tigrbl_auth/cli
-    boundary: certified_core
-  plugin:
-    responsibility: installable Tigrbl plugin composition
-    modules:
-    - tigrbl_auth/plugin.py
-    boundary: certified_core
-  gateway:
-    responsibility: standalone Tigrbl gateway assembly
-    modules:
-    - tigrbl_auth/gateway.py
-    boundary: certified_core
+    - pkgs/120-examples
+    boundary: governance_plane

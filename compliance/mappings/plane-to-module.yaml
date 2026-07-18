@@ -1,22 +1,16 @@
-api:
-- tigrbl_auth/api
-tables:
-- tigrbl_auth/tables
-ops:
-- tigrbl_auth/ops
-services:
-- tigrbl_auth/services
-standards:
-- tigrbl_auth/standards
-security:
-- tigrbl_auth/security
-config:
-- tigrbl_auth/config
-adapters:
-- tigrbl_auth/adapters
-cli:
-- tigrbl_auth/cli
-plugin:
-- tigrbl_auth/plugin.py
-gateway:
-- tigrbl_auth/gateway.py
+routers:
+- pkgs/80-routers
+backend_apps:
+- pkgs/90-backend-apps
+runtime:
+- pkgs/60-runtime
+facade:
+- pkgs/70-facade
+uix_core:
+- pkgs/100-uix-core
+ui_apps:
+- pkgs/105-ui
+tests:
+- pkgs/110-tests
+examples:
+- pkgs/120-examples

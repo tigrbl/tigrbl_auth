@@ -61,7 +61,6 @@ _install_tomllib_alias()
 _install_http_status_aliases()
 
 _MODULE_EXPORTS = {
-    "api": "tigrbl_auth.api",
     "cli": "tigrbl_auth.cli",
     "compat": "tigrbl_auth.compat",
     "config": "tigrbl_auth.config",

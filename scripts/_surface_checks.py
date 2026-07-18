@@ -25,7 +25,8 @@ PUBLIC_ROUTE_SEARCH_ROOTS = (
     "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables",
     "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime",
     "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server",
-    "pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/api/rest/routers",
+    "pkgs/80-routers",
+    "pkgs/90-backend-apps",
     "pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/standards/oauth2",
     "pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/standards/oidc",
 )
@@ -381,8 +382,8 @@ def _extract_rpc_methods_from_methods_tuple(node: ast.AST) -> list[dict[str, Any
 
 def extract_rpc_method_definitions(repo_root: Path) -> dict[str, dict[str, Any]]:
     extracted: dict[str, dict[str, Any]] = {}
-    base = facade_package_root(repo_root) / "api/rpc/methods"
-    for path in sorted(base.glob("*.py")):
+    base = repo_root / "pkgs/90-backend-apps"
+    for path in sorted(base.rglob("*.py")):
         if path.name.startswith("_") or path.name == "__init__.py":
             continue
         tree = ast.parse(path.read_text(encoding="utf-8"))
@@ -883,10 +884,12 @@ def verify_feature_surface_modularity(repo_root: Path) -> dict[str, Any]:
             "plugin.py does not install surfaces through attach_runtime_surfaces"
         )
     if "attach_runtime_surfaces(" not in (
-        facade_package_root(repo_root) / "api/app.py"
+        repo_root
+        / "pkgs/90-backend-apps/tigrbl-auth-backend-app-core/src"
+        / "tigrbl_auth_backend_app_core/app.py"
     ).read_text(encoding="utf-8"):
         failures.append(
-            "api/app.py does not install surfaces through attach_runtime_surfaces"
+            "backend-app core does not install surfaces through attach_runtime_surfaces"
         )
     source_routes = extract_route_definitions(repo_root)
     for capability, meta in capability_map.items():

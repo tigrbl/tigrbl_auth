@@ -2412,7 +2412,7 @@ targets:
     status: implementation-backed-generated-from-rpc-registry
     profile: production
   owner_modules:
-  - pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/api
+  - pkgs/60-runtime/tigrbl-identity-cli/src/tigrbl_identity_cli/cli/artifacts/_schemas.py
   endpoint_surface:
     current:
     - /rpc

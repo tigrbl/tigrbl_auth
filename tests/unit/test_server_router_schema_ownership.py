@@ -58,12 +58,14 @@ def test_server_has_no_rest_schema_bucket_module() -> None:
         importlib.import_module("tigrbl_identity_server.routers.schemas")
 
 
-def test_rest_schema_facade_points_to_protocol_and_api_owned_schemas() -> None:
-    with pytest.warns(DeprecationWarning):
-        schemas = importlib.reload(importlib.import_module("tigrbl_auth.api.rest.schemas"))
+def test_protocol_schema_owner_is_direct_and_facade_api_namespace_is_removed() -> None:
+    schemas = importlib.import_module("tigrbl_auth_protocol_oauth.schemas")
     from tigrbl_auth_protocol_oauth.schemas import TokenPair
+
     assert not hasattr(schemas, "CredsIn")
     assert schemas.TokenPair is TokenPair
+    with pytest.raises(ModuleNotFoundError):
+        importlib.import_module("tigrbl_auth.api")
 
 
 def test_no_package_imports_removed_server_schema_bucket() -> None:

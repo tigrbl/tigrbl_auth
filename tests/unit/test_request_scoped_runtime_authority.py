@@ -4,7 +4,7 @@ import asyncio
 from types import SimpleNamespace
 from uuid import uuid4
 
-from tigrbl_auth.api.rest.schemas import DynamicClientRegistrationIn
+from tigrbl_auth_protocol_oauth.schemas import DynamicClientRegistrationIn
 import tigrbl_auth_backend_app_core.surfaces.par_surface as par_ops
 import tigrbl_auth_backend_app_core.surfaces.client_registration_surface as register_ops
 import tigrbl_identity_server.device_authorization_runtime as device_auth_ops
