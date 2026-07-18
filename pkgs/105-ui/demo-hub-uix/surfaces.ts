@@ -10,7 +10,7 @@ export const surfaces = [
     objects: "issuer metadata, authorization requests, tokens, userinfo, hosted login",
     demoAction: "Start authentication through hosted login.",
     uixUrl: SURFACE_LINKS.publicUix,
-    apiUrl: SURFACE_LINKS.publicApiDocs
+    backendAppUrl: SURFACE_LINKS.publicApiDocs
   },
   {
     id: "my-account",
@@ -21,7 +21,7 @@ export const surfaces = [
     objects: "profile, sessions, password posture, authorized apps, consent grants",
     demoAction: "Review profile, sessions, and authorized applications.",
     uixUrl: SURFACE_LINKS.myAccountUix,
-    apiUrl: SURFACE_LINKS.myAccountApiDocs
+    backendAppUrl: SURFACE_LINKS.myAccountApiDocs
   },
   {
     id: "platform-admin",
@@ -32,7 +32,7 @@ export const surfaces = [
     objects: "tenants, platform identities, authority assignment, signing posture, audit",
     demoAction: "Provision tenant authority and review platform posture.",
     uixUrl: SURFACE_LINKS.platformAdminUix,
-    apiUrl: SURFACE_LINKS.platformAdminApiDocs
+    backendAppUrl: SURFACE_LINKS.platformAdminApiDocs
   },
   {
     id: "tenant-admin",
@@ -43,7 +43,7 @@ export const surfaces = [
     objects: "tenant identities, roles, groups, tenant-scoped policy",
     demoAction: "Manage identities and delegated tenant authority.",
     uixUrl: SURFACE_LINKS.tenantAdminUix,
-    apiUrl: SURFACE_LINKS.tenantAdminApiDocs
+    backendAppUrl: SURFACE_LINKS.tenantAdminApiDocs
   },
   {
     id: "developer",
@@ -54,7 +54,7 @@ export const surfaces = [
     objects: "applications, OAuth clients, redirect URIs, scopes, client credentials",
     demoAction: "Register an application client and inspect integration metadata.",
     uixUrl: SURFACE_LINKS.developerUix,
-    apiUrl: SURFACE_LINKS.developerApiDocs
+    backendAppUrl: SURFACE_LINKS.developerApiDocs
   },
   {
     id: "service-admin",
@@ -65,7 +65,7 @@ export const surfaces = [
     objects: "workloads, service identities, service keys, M2M credentials",
     demoAction: "Create service credentials and review workload access posture.",
     uixUrl: SURFACE_LINKS.serviceAdminUix,
-    apiUrl: SURFACE_LINKS.serviceAdminApiDocs
+    backendAppUrl: SURFACE_LINKS.serviceAdminApiDocs
   },
   {
     id: "resource-validation",
@@ -76,6 +76,6 @@ export const surfaces = [
     objects: "JWKS, introspection, issuer validation metadata, token validation inputs",
     demoAction: "Show how protected APIs consume issuer state.",
     uixUrl: "",
-    apiUrl: SURFACE_LINKS.resourceValidationApiDocs
+    backendAppUrl: SURFACE_LINKS.resourceValidationApiDocs
   }
 ] as const;

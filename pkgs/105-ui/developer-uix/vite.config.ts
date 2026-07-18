@@ -4,7 +4,7 @@ import { defineConfig, loadEnv } from "vite";
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
-  const target = env.VITE_TIGRBL_AUTH_DEVELOPER_API_BASE_URL || "http://localhost:8017";
+  const target = env.VITE_TIGRBL_AUTH_DEVELOPER_BACKEND_APP_BASE_URL || "http://localhost:8017";
 
   return {
     plugins: [react()],

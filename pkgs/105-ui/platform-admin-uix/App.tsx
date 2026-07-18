@@ -12,7 +12,7 @@ import { RealmsPage } from "./pages/RealmsPage";
 import { IdentityMemberPage, RealmMemberPage, TenantMemberPage } from "./pages/ResourceMemberPages";
 import { SettingsPage } from "./pages/SettingsPage";
 import { TenantsPage } from "./pages/TenantsPage";
-import { API_BASE_URL, PRODUCT_API } from "./services/backendSurface";
+import { BACKEND_APP_BASE_URL, BACKEND_APP } from "./services/backendSurface";
 
 const navigation = [
   { href: "#/dashboard", label: "Dashboard" },
@@ -92,7 +92,7 @@ export default function App() {
     <AuthProvider value={authValue}>
       {!platform.session?.authenticated ? (
         <AuthShell
-          productApi={PRODUCT_API}
+          backendApp={BACKEND_APP}
           subtitle="Use an operator session to manage tenant lifecycle, platform authority, signing posture, and audit state."
           title="Platform Admin"
         >
@@ -101,10 +101,10 @@ export default function App() {
       ) : (
         <AppShell
           activeHref={currentHash}
-          apiBaseUrl={API_BASE_URL}
+          backendAppBaseUrl={BACKEND_APP_BASE_URL}
           navigation={navigation}
           onLogout={() => void platform.logout()}
-          productApi={PRODUCT_API}
+          backendApp={BACKEND_APP}
           sessionLabel={describeSession(authValue.session)}
           title="Platform Admin"
         >

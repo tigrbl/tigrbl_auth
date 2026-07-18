@@ -2,20 +2,20 @@ import type { NavigationItem } from "../types";
 
 export function Sidebar({
   activeHref,
-  apiBaseUrl,
+  backendAppBaseUrl,
   items,
-  productApi,
+  backendApp,
   title
 }: {
   activeHref: string;
-  apiBaseUrl?: string;
+  backendAppBaseUrl?: string;
   items: NavigationItem[];
-  productApi: string;
+  backendApp: string;
   title: string;
 }) {
   return (
     <aside className="tigrbl-sidebar">
-      <p className="tigrbl-sidebar-product">{productApi}</p>
+      <p className="tigrbl-sidebar-product">{backendApp}</p>
       <h1>{title}</h1>
       <nav>
         {items.map((item) => {
@@ -28,7 +28,7 @@ export function Sidebar({
           );
         })}
       </nav>
-      {apiBaseUrl && <p className="tigrbl-sidebar-api">API: <code>{apiBaseUrl}</code></p>}
+      {backendAppBaseUrl && <p className="tigrbl-sidebar-backend">Backend: <code>{backendAppBaseUrl}</code></p>}
     </aside>
   );
 }

@@ -1,4 +1,4 @@
-import { API_BASE_URL, apiUrl } from "./backendSurface";
+import { BACKEND_APP_BASE_URL, backendAppUrl } from "./backendSurface";
 import type { ClientRegistration, CreateClientRegistrationInput, DeveloperApplication, IssuerMetadata, UpdateClientRegistrationInput } from "../types";
 
 type Fetcher = typeof fetch;
@@ -13,7 +13,7 @@ export class DeveloperClient {
   constructor(private readonly fetcher: Fetcher = defaultFetcher) {}
 
   private async request<T>(path: string, init: RequestInit = {}): Promise<T> {
-    const response = await this.fetcher(apiUrl(path), {
+    const response = await this.fetcher(backendAppUrl(path), {
       credentials: "include",
       headers: {
         "content-type": "application/json",
@@ -37,7 +37,7 @@ export class DeveloperClient {
   }
 
   baseUrl() {
-    return API_BASE_URL;
+    return BACKEND_APP_BASE_URL;
   }
 
   applications() {

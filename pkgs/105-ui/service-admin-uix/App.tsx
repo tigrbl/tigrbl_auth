@@ -12,7 +12,7 @@ import { ServiceKeysPage } from "./pages/ServiceKeysPage";
 import { ServicesPage } from "./pages/ServicesPage";
 import { TokenRecordsPage } from "./pages/TokenRecordsPage";
 import { ValidationToolsPage } from "./pages/ValidationToolsPage";
-import { API_BASE_URL, PRODUCT_API } from "./services/backendSurface";
+import { BACKEND_APP_BASE_URL, BACKEND_APP } from "./services/backendSurface";
 
 const navigation = [
   { href: "#/dashboard", label: "Dashboard" },
@@ -61,7 +61,7 @@ export default function App() {
     <AuthProvider value={authValue}>
       {!serviceAdmin.session?.authenticated ? (
         <AuthShell
-          productApi={PRODUCT_API}
+          backendApp={BACKEND_APP}
           subtitle="Use a workload administrator session to manage service principals, API keys, service keys, token records, and validation tools."
           title="Service Admin"
         >
@@ -70,10 +70,10 @@ export default function App() {
       ) : (
         <AppShell
           activeHref={currentHash}
-          apiBaseUrl={API_BASE_URL}
+          backendAppBaseUrl={BACKEND_APP_BASE_URL}
           navigation={navigation}
           onLogout={() => serviceAdmin.logout()}
-          productApi={PRODUCT_API}
+          backendApp={BACKEND_APP}
           sessionLabel={describeSession(authValue.session)}
           title="Service Admin"
         >

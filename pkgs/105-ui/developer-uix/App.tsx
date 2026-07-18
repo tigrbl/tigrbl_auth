@@ -12,7 +12,7 @@ import { LoginPage } from "./pages/LoginPage";
 import { OAuthFlowTesterPage } from "./pages/OAuthFlowTesterPage";
 import { RedirectUrisPage } from "./pages/RedirectUrisPage";
 import { ScopesPage } from "./pages/ScopesPage";
-import { API_BASE_URL, PRODUCT_API } from "./services/backendSurface";
+import { BACKEND_APP_BASE_URL, BACKEND_APP } from "./services/backendSurface";
 
 const navigation = [
   { href: "#/dashboard", label: "Dashboard" },
@@ -62,7 +62,7 @@ export default function App() {
     <AuthProvider value={authValue}>
       {!developer.session?.authenticated ? (
         <AuthShell
-          productApi={PRODUCT_API}
+          backendApp={BACKEND_APP}
           subtitle="Continue with your developer and tenant context to manage applications, redirect URIs, scopes, credentials, and issuer metadata."
           title="Developer Portal"
         >
@@ -71,10 +71,10 @@ export default function App() {
       ) : (
         <AppShell
           activeHref={currentHash}
-          apiBaseUrl={API_BASE_URL}
+          backendAppBaseUrl={BACKEND_APP_BASE_URL}
           navigation={navigation}
           onLogout={() => developer.logout()}
-          productApi={PRODUCT_API}
+          backendApp={BACKEND_APP}
           sessionLabel={describeSession(authValue.session)}
           title="Developer Portal"
         >

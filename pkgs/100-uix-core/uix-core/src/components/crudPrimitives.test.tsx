@@ -4,7 +4,7 @@ import { Button } from "./Button";
 import { CodeField } from "./CodeField";
 import { DangerZone } from "./DangerZone";
 import { DetailDrawer } from "./DetailDrawer";
-import { ApiErrorNotice } from "./ApiErrorNotice";
+import { RequestErrorNotice } from "./RequestErrorNotice";
 import { CreateResourceDialog, EditResourceDialog } from "./ResourceDialogs";
 import { ResourceTable } from "./ResourceTable";
 import { ResourceToolbar } from "./ResourceToolbar";
@@ -67,7 +67,7 @@ describe("CRUD UIX primitives", () => {
           getRowKey={(item) => item.id}
           items={[] as Array<{ id: string; name: string }>}
         />
-        <ApiErrorNotice message="Tenant API unavailable" title="Cannot load tenants" />
+        <RequestErrorNotice message="Tenant service unavailable" title="Cannot load tenants" />
         <CreateResourceDialog open={false} title="Hidden create dialog" onClose={() => undefined}>
           Hidden form
         </CreateResourceDialog>

@@ -1,4 +1,4 @@
-export * from "./ApiErrorNotice";
+export * from "./RequestErrorNotice";
 export * from "./Button";
 export * from "./Card";
 export * from "./Checkbox";

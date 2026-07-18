@@ -5,26 +5,26 @@ import { Topbar } from "./Topbar";
 
 export function AppShell({
   activeHref,
-  apiBaseUrl,
+  backendAppBaseUrl,
   children,
   navigation,
   onLogout,
-  productApi,
+  backendApp,
   sessionLabel,
   title
 }: {
   activeHref: string;
-  apiBaseUrl?: string;
+  backendAppBaseUrl?: string;
   children: ReactNode;
   navigation: NavigationItem[];
   onLogout?: () => void;
-  productApi: string;
+  backendApp: string;
   sessionLabel?: string;
   title: string;
 }) {
   return (
     <main className="tigrbl-shell">
-      <Sidebar activeHref={activeHref} apiBaseUrl={apiBaseUrl} items={navigation} productApi={productApi} title={title} />
+      <Sidebar activeHref={activeHref} backendAppBaseUrl={backendAppBaseUrl} items={navigation} backendApp={backendApp} title={title} />
       <section className="tigrbl-shell-main">
         <Topbar onLogout={onLogout} sessionLabel={sessionLabel} />
         <div className="tigrbl-shell-content">{children}</div>

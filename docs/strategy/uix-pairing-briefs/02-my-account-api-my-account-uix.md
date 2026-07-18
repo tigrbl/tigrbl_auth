@@ -29,7 +29,7 @@ An authenticated human subject managing only their own account.
 
 ## 3. API Boundary
 
-The UIX consumes exactly one My Account API base URL and sends authenticated requests with browser credentials.
+The UIX consumes exactly one My Account backend-app base URL and sends authenticated requests with browser credentials.
 
 ### Owned endpoints
 
@@ -185,7 +185,7 @@ Produce a route-level copy deck containing:
 
 ## 10. Acceptance Criteria
 
-- Every API call is current-subject scoped and uses only the My Account API base URL.
+- Every API call is current-subject scoped and uses only the My Account backend-app base URL.
 - The UI cannot enumerate or mutate another user, tenant, client directory, service identity, key, raw token/session, or audit table.
 - Overview, profile, security, sessions, and authorized apps/consents have complete accessible states.
 - Profile and password mutations validate, prevent duplicate submission, and refresh authoritative state.

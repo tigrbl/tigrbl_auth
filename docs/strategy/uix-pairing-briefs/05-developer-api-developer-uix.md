@@ -32,7 +32,7 @@ The experience must organize the current route inventory into one application li
 
 ## 3. API Boundary
 
-The UIX consumes exactly one configured developer API base URL through `VITE_TIGRBL_AUTH_DEVELOPER_API_BASE_URL`.
+The UIX consumes exactly one configured developer backend-app base URL through `VITE_TIGRBL_AUTH_DEVELOPER_BACKEND_APP_BASE_URL`.
 
 ### Public developer capabilities
 
@@ -211,7 +211,7 @@ Produce a route-level copy deck containing:
 
 ## 10. Acceptance Criteria
 
-- The UIX calls only the developer API base URL and rejects tenant lifecycle, user, consent, service, key-admin, token, and raw session paths.
+- The UIX calls only the developer backend-app base URL and rejects tenant lifecycle, user, consent, service, key-admin, token, and raw session paths.
 - Every application subview binds to an explicit client/registration ID; no first-record selection remains.
 - Registration and metadata forms are structured and validated against active profile/contracts.
 - Browser clients cannot select or retain client secrets.

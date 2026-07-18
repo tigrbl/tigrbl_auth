@@ -4,13 +4,13 @@ import { BrandHeader } from "./BrandHeader";
 export function AuthShell({
   children,
   footer,
-  productApi,
+  backendApp,
   subtitle,
   title
 }: {
   children: ReactNode;
   footer?: ReactNode;
-  productApi?: string;
+  backendApp?: string;
   subtitle?: string;
   title: string;
 }) {
@@ -19,7 +19,7 @@ export function AuthShell({
       <BrandHeader label="Tigrbl Auth" />
       <section className="tigrbl-auth-shell-content">
         <div className="tigrbl-auth-copy">
-          {productApi && <p className="tigrbl-eyebrow">{productApi}</p>}
+          {backendApp && <p className="tigrbl-eyebrow">{backendApp}</p>}
           <h1>{title}</h1>
           {subtitle && <p>{subtitle}</p>}
         </div>

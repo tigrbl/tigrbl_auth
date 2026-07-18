@@ -1,7 +1,7 @@
 import { AppShell, AuthProvider, AuthShell, Button, Card, ErrorState, RequireAuth, Toast, describeSession } from "@tigrbl-auth/uix-core";
 import "@tigrbl-auth/uix-core/styles.css";
 import { useEffect, useState } from "react";
-import { API_BASE_URL, PRODUCT_API, PUBLIC_LOGIN_URL } from "./defaults";
+import { BACKEND_APP_BASE_URL, BACKEND_APP, PUBLIC_LOGIN_URL } from "./defaults";
 import { useConsents } from "./hooks/useConsents";
 import { useMyAccount } from "./hooks/useMyAccount";
 import { useSessions } from "./hooks/useSessions";
@@ -89,7 +89,7 @@ export default function App() {
     <AuthProvider value={authValue}>
       {!account.profile && !account.loading ? (
         <AuthShell
-          productApi={PRODUCT_API}
+          backendApp={BACKEND_APP}
           subtitle="Use the public issuer session to manage your profile, sessions, passwords, authorized apps, and consent grants."
           title="My Account"
         >
@@ -113,9 +113,9 @@ export default function App() {
       ) : (
         <AppShell
           activeHref={currentHash}
-          apiBaseUrl={API_BASE_URL}
+          backendAppBaseUrl={BACKEND_APP_BASE_URL}
           navigation={navigation}
-          productApi={PRODUCT_API}
+          backendApp={BACKEND_APP}
           sessionLabel={describeSession(authValue.session)}
           title="My Account"
         >

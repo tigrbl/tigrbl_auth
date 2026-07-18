@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { API_BASE_URL, PRODUCT_API, SURFACE_PURPOSE } from "../services/backendSurface";
+import { BACKEND_APP_BASE_URL, BACKEND_APP, SURFACE_PURPOSE } from "../services/backendSurface";
 import type { AdminSession } from "../types";
 import { Button } from "./UI";
 
@@ -33,7 +33,7 @@ export function Layout({
           width: "260px"
         }}
       >
-        <p style={{ color: "#4b6a5f", fontSize: "0.72rem", letterSpacing: "0.12em", margin: 0, textTransform: "uppercase" }}>{PRODUCT_API}</p>
+        <p style={{ color: "#4b6a5f", fontSize: "0.72rem", letterSpacing: "0.12em", margin: 0, textTransform: "uppercase" }}>{BACKEND_APP}</p>
         <h1 style={{ fontSize: "1.45rem", lineHeight: 1.1, margin: "10px 0 8px" }}>Platform Admin</h1>
         <p style={{ color: "#4b5f58", fontSize: "0.9rem", margin: "0 0 18px" }}>{SURFACE_PURPOSE}</p>
         <nav style={{ display: "grid", gap: "8px", marginTop: "20px" }}>
@@ -57,7 +57,7 @@ export function Layout({
           })}
         </nav>
         <div style={{ borderTop: "1px solid #d9e1dc", bottom: "18px", left: "18px", paddingTop: "14px", position: "absolute", right: "18px" }}>
-          <p style={{ color: "#60766e", fontSize: "0.78rem", margin: "0 0 8px" }}>API: <code>{API_BASE_URL}</code></p>
+          <p style={{ color: "#60766e", fontSize: "0.78rem", margin: "0 0 8px" }}>Backend: <code>{BACKEND_APP_BASE_URL}</code></p>
           {session?.authenticated ? (
             <>
               <p style={{ fontSize: "0.88rem", margin: "0 0 10px" }}>{session.username || session.email}</p>

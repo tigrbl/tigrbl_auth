@@ -1,6 +1,6 @@
 import { ErrorState } from "./ErrorState";
 
-export function ApiErrorNotice({
+export function RequestErrorNotice({
   message,
   title = "Request failed"
 }: {

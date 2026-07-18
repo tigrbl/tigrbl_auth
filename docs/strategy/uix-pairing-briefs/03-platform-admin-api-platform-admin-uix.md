@@ -31,7 +31,7 @@ It must make scope and consequence unmistakable. Operators should always know wh
 
 ## 3. API Boundary
 
-The UIX consumes exactly one configured platform-admin API base URL through `VITE_TIGRBL_AUTH_PLATFORM_ADMIN_API_BASE_URL`.
+The UIX consumes exactly one configured platform-admin backend-app base URL through `VITE_TIGRBL_AUTH_PLATFORM_ADMIN_BACKEND_APP_BASE_URL`.
 
 ### Owned resources
 
@@ -211,7 +211,7 @@ Produce a route-level copy deck containing:
 
 ## 10. Acceptance Criteria
 
-- The UIX calls only the platform-admin API base URL and rejects forbidden public, tenant-self-service, developer, service, token, and session paths.
+- The UIX calls only the platform-admin backend-app base URL and rejects forbidden public, tenant-self-service, developer, service, token, and session paths.
 - REST/RPC documentation and machine-readable contracts agree before release.
 - Realm, tenant, and identity member routes preserve scope and do not leak cross-realm or cross-tenant data.
 - Tenant lifecycle actions are explicit, permission-gated, consequence-led, and reconciled from the API.

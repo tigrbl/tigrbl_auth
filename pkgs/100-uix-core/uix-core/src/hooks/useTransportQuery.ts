@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
-export interface ApiQueryState<T> {
+export interface TransportQueryState<T> {
   data: T | null;
   error: string | null;
   loading: boolean;
 }
 
-export function useApiQuery<T>(loader: (signal: AbortSignal) => Promise<T>, deps: unknown[] = []): ApiQueryState<T> {
-  const [state, setState] = useState<ApiQueryState<T>>({ data: null, error: null, loading: true });
+export function useTransportQuery<T>(loader: (signal: AbortSignal) => Promise<T>, deps: unknown[] = []): TransportQueryState<T> {
+  const [state, setState] = useState<TransportQueryState<T>>({ data: null, error: null, loading: true });
 
   useEffect(() => {
     const controller = new AbortController();

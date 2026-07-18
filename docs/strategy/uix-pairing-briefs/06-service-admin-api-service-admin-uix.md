@@ -33,7 +33,7 @@ The experience must organize credentials around an owned service identity and ma
 
 ## 3. API Boundary
 
-The UIX consumes exactly one configured service-admin API base URL through `VITE_TIGRBL_AUTH_SERVICE_ADMIN_API_BASE_URL`.
+The UIX consumes exactly one configured service-admin backend-app base URL through `VITE_TIGRBL_AUTH_SERVICE_ADMIN_BACKEND_APP_BASE_URL`.
 
 ### Owned capabilities and resources
 
@@ -207,7 +207,7 @@ Produce a route-level copy deck containing:
 
 ## 10. Acceptance Criteria
 
-- The UIX calls only the service-admin API base URL and rejects tenant/user, human session/consent, developer client, key-admin, and public auth paths.
+- The UIX calls only the service-admin backend-app base URL and rejects tenant/user, human session/consent, developer client, key-admin, and public auth paths.
 - Every detail and credential view binds to an explicit service ID; no first-record selection remains.
 - Service/key/API-key lifecycle actions are stateful, permission-gated, consequence-led, and reconciled.
 - Newly issued secrets are shown once and never persisted, logged, analyzed, or included in fixtures/screenshots.

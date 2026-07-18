@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly VITE_TIGRBL_AUTH_PLATFORM_ADMIN_API_BASE_URL?: string;
+  readonly VITE_TIGRBL_AUTH_PLATFORM_ADMIN_BACKEND_APP_BASE_URL?: string;
 }
 
 interface ImportMeta {

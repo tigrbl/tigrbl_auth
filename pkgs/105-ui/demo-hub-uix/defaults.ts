@@ -14,4 +14,4 @@ export const SURFACE_LINKS = {
   myAccountApiDocs: import.meta.env.VITE_TIGRBL_AUTH_MY_ACCOUNT_API_DOCS_URL || "http://localhost:8019/docs"
 };
 
-export const PRODUCT_API = "tigrbl-auth-demo-hub-uix";
+export const BACKEND_APP = "composed local backend apps";

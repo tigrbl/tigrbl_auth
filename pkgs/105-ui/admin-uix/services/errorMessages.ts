@@ -137,7 +137,7 @@ const messageFromValue = (value: unknown): string | null => {
   return null;
 };
 
-export const extractApiErrorMessage = (
+export const extractResponseErrorMessage = (
   response: Pick<Response, 'status' | 'statusText'>,
   payload: unknown,
   options: { requestBody?: JsonObject; fallback?: string } = {},

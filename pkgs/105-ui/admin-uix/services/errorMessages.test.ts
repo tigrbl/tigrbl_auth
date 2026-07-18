@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { extractApiErrorMessage, humanizeError, parseResponseBody } from './errorMessages';
+import { extractResponseErrorMessage, humanizeError, parseResponseBody } from './errorMessages';
 
 const response = (status: number, body: string, contentType = 'application/json'): Response => (
   new Response(body, {
@@ -19,13 +19,13 @@ describe('admin UI error message normalization', () => {
     ));
 
     expect(parsed.isJson).toBe(true);
-    expect(extractApiErrorMessage({ status: 409, statusText: 'Conflict' }, parsed.payload)).toBe(
+    expect(extractResponseErrorMessage({ status: 409, statusText: 'Conflict' }, parsed.payload)).toBe(
       'Tenant slug, name, or email already exists',
     );
   });
 
   it('turns validation detail arrays into readable field messages', () => {
-    const message = extractApiErrorMessage(
+    const message = extractResponseErrorMessage(
       { status: 422, statusText: 'Unprocessable Entity' },
       {
         detail: [
@@ -48,7 +48,7 @@ describe('admin UI error message normalization', () => {
   });
 
   it('extracts nested JSON-RPC error messages', () => {
-    expect(extractApiErrorMessage(
+    expect(extractResponseErrorMessage(
       { status: 400, statusText: 'Bad Request' },
       { error: { code: -32000, message: 'policy denied tenant mutation' } },
     )).toBe('Policy denied tenant mutation');

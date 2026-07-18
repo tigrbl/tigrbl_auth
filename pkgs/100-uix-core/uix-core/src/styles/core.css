@@ -270,7 +270,7 @@ code {
   width: 3px;
 }
 
-.tigrbl-sidebar-api {
+.tigrbl-sidebar-backend {
   border-top: 1px solid var(--tigrbl-border);
   color: var(--tigrbl-muted);
   font-size: 0.78rem;

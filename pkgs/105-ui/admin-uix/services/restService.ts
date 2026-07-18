@@ -1,4 +1,4 @@
-import { extractApiErrorMessage, parseResponseBody } from './errorMessages';
+import { extractResponseErrorMessage, parseResponseBody } from './errorMessages';
 
 export class RestService {
   private base_url: string;
@@ -35,7 +35,7 @@ export class RestService {
     const parsed = await parseResponseBody(response);
 
     if (!response.ok) {
-      throw new Error(extractApiErrorMessage(response, parsed.payload, { fallback: `HTTP ${response.status}` }));
+      throw new Error(extractResponseErrorMessage(response, parsed.payload, { fallback: `HTTP ${response.status}` }));
     }
 
     if (response.status === 204 || parsed.payload === null) {

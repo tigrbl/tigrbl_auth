@@ -2,7 +2,7 @@ import { AppShell, Button, Card, DetailPanel, MetricCard, PageHeader, StatusBadg
 import "@tigrbl-auth/uix-core/styles.css";
 import { useEffect, useState } from "react";
 import { demoFixtures, getSurfaceForStep, journeySteps, type JourneyStep } from "./demoState";
-import { PRODUCT_API } from "./defaults";
+import { BACKEND_APP } from "./defaults";
 import { surfaces } from "./surfaces";
 
 const navigation = [
@@ -25,7 +25,7 @@ function SurfaceCard({ surface }: { surface: (typeof surfaces)[number] }) {
         <p style={{ color: "var(--tigrbl-primary)", fontWeight: 800, margin: 0 }}>{surface.demoAction}</p>
         <div className="tigrbl-actions" style={{ justifyContent: "flex-start" }}>
           {surface.uixUrl ? <a className="tigrbl-button tigrbl-button-primary" href={surface.uixUrl}>Open UIX</a> : null}
-          <a className="tigrbl-button tigrbl-button-subtle" href={surface.apiUrl}>API docs</a>
+          <a className="tigrbl-button tigrbl-button-subtle" href={surface.backendAppUrl}>API docs</a>
         </div>
       </div>
     </Card>
@@ -236,7 +236,7 @@ function DemoJourney() {
                   ) : null}
                   <div className="tigrbl-actions" style={{ justifyContent: "flex-start" }}>
                     {surface?.uixUrl ? <a className="tigrbl-button tigrbl-button-primary" href={surface.uixUrl}>Open UIX</a> : null}
-                    {surface?.apiUrl ? <a className="tigrbl-button tigrbl-button-subtle" href={surface.apiUrl}>Open API docs</a> : null}
+                    {surface?.backendAppUrl ? <a className="tigrbl-button tigrbl-button-subtle" href={surface.backendAppUrl}>Open API docs</a> : null}
                     <Button type="button" variant="subtle" onClick={() => void runStepApi(step)} disabled={runningApi !== null}>
                       {runningApi === step.id ? "Running API" : "Run API proof"}
                     </Button>
@@ -270,7 +270,7 @@ function Links() {
                 </div>
                 <div className="tigrbl-actions">
                   {surface.uixUrl ? <a className="tigrbl-button tigrbl-button-primary" href={surface.uixUrl}>UIX</a> : null}
-                  <a className="tigrbl-button tigrbl-button-subtle" href={surface.apiUrl}>Docs</a>
+                  <a className="tigrbl-button tigrbl-button-subtle" href={surface.backendAppUrl}>Docs</a>
                 </div>
               </div>
             </Card>
@@ -298,9 +298,9 @@ export default function App() {
   return (
     <AppShell
       activeHref={currentHash}
-      apiBaseUrl="local demo stack"
+      backendAppBaseUrl="local demo stack"
       navigation={navigation}
-      productApi={PRODUCT_API}
+      backendApp={BACKEND_APP}
       sessionLabel="Demo operator"
       title="Demo Hub"
     >

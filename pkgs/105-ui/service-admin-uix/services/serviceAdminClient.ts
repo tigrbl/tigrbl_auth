@@ -1,4 +1,4 @@
-import { API_BASE_URL, apiUrl } from "./backendSurface";
+import { BACKEND_APP_BASE_URL, backendAppUrl } from "./backendSurface";
 import type {
   ApiKeyRecord,
   CreateApiKeyInput,
@@ -25,7 +25,7 @@ export class ServiceAdminClient {
   constructor(private readonly fetcher: Fetcher = defaultFetcher) {}
 
   private async request<T>(path: string, init: RequestInit = {}): Promise<T> {
-    const response = await this.fetcher(apiUrl(path), {
+    const response = await this.fetcher(backendAppUrl(path), {
       credentials: "include",
       headers: {
         "content-type": "application/json",
@@ -49,7 +49,7 @@ export class ServiceAdminClient {
   }
 
   baseUrl() {
-    return API_BASE_URL;
+    return BACKEND_APP_BASE_URL;
   }
 
   services() {

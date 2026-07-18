@@ -35,7 +35,7 @@ Production resource servers and gateways consume the API directly. The UIX exist
 
 ## 3. API Boundary
 
-The UIX consumes exactly one configured resource-validation API base URL.
+The UIX consumes exactly one configured resource-validation backend-app base URL.
 
 ### Owned capabilities
 

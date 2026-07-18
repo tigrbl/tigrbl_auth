@@ -6,13 +6,13 @@ function matchesPrefix(path: string, prefix: string): boolean {
 
 export function assertSurfacePath(path: string, boundary: SurfaceBoundary): void {
   if (!path.startsWith("/")) {
-    throw new Error(`API paths must be absolute: ${path}`);
+    throw new Error(`Transport paths must be absolute: ${path}`);
   }
   if (boundary.forbiddenPathPrefixes.some((prefix) => matchesPrefix(path, prefix))) {
-    throw new Error(`Path is outside ${boundary.productApi}: ${path}`);
+    throw new Error(`Path is outside ${boundary.backendApp}: ${path}`);
   }
   if (!boundary.allowedPathPrefixes.some((prefix) => matchesPrefix(path, prefix))) {
-    throw new Error(`Path is not part of ${boundary.productApi}: ${path}`);
+    throw new Error(`Path is not part of ${boundary.backendApp}: ${path}`);
   }
 }
 

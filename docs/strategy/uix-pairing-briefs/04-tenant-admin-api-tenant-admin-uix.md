@@ -32,7 +32,7 @@ The active tenant and effective administrator authority must remain visible thro
 
 ## 3. API Boundary
 
-The UIX consumes exactly one configured tenant-admin API base URL through `VITE_TIGRBL_AUTH_TENANT_ADMIN_API_BASE_URL`.
+The UIX consumes exactly one configured tenant-admin backend-app base URL through `VITE_TIGRBL_AUTH_TENANT_ADMIN_BACKEND_APP_BASE_URL`.
 
 ### Owned resources
 
@@ -209,7 +209,7 @@ Produce a route-level copy deck containing:
 
 ## 10. Acceptance Criteria
 
-- The UIX calls only the tenant-admin API base URL and rejects platform lifecycle, service, raw token/session, and public protocol paths.
+- The UIX calls only the tenant-admin backend-app base URL and rejects platform lifecycle, service, raw token/session, and public protocol paths.
 - Every collection, count, detail, search, and mutation is tenant-filtered and tested against cross-tenant leakage.
 - Identity and client CRUD, consent revocation, and key-rotation requests are explicit, permission-gated, consequence-led, and reconciled.
 - Derived roles, administrator-only session, and audit placeholder are accurately labeled until dedicated APIs exist.

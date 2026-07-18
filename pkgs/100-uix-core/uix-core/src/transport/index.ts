@@ -1,4 +1,4 @@
-export * from "./ApiClient";
+export * from "./HttpTransportClient";
 export * from "./errors";
 export * from "./pagination";
 export * from "./surfaceBoundary";

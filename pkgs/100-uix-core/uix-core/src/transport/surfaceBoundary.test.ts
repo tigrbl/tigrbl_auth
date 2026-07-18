@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { assertSurfacePath, createSurfaceUrl } from "./surfaceBoundary";
 
 const boundary = {
-  productApi: "example-api",
+  backendApp: "example-backend",
   allowedPathPrefixes: ["/account", "/.well-known"],
   forbiddenPathPrefixes: ["/admin", "/tenant"]
 };

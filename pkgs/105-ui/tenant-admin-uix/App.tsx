@@ -11,7 +11,7 @@ import { IdentitiesPage } from "./pages/IdentitiesPage";
 import { KeyEventsPage } from "./pages/KeyEventsPage";
 import { LoginPage } from "./pages/LoginPage";
 import { SessionsPage } from "./pages/SessionsPage";
-import { API_BASE_URL, PRODUCT_API } from "./services/backendSurface";
+import { BACKEND_APP_BASE_URL, BACKEND_APP } from "./services/backendSurface";
 
 const navigation = [
   { href: "#/dashboard", label: "Dashboard" },
@@ -57,7 +57,7 @@ export default function App() {
     <AuthProvider value={authValue}>
       {!tenant.session?.authenticated ? (
         <AuthShell
-          productApi={PRODUCT_API}
+          backendApp={BACKEND_APP}
           subtitle="Use a tenant-scoped administrator session to manage identities, clients, consents, sessions, and audit posture."
           title="Tenant Admin"
         >
@@ -66,10 +66,10 @@ export default function App() {
       ) : (
         <AppShell
           activeHref={currentHash}
-          apiBaseUrl={API_BASE_URL}
+          backendAppBaseUrl={BACKEND_APP_BASE_URL}
           navigation={navigation}
           onLogout={() => void tenant.logout()}
-          productApi={PRODUCT_API}
+          backendApp={BACKEND_APP}
           sessionLabel={describeSession(authValue.session)}
           title="Tenant Admin"
         >

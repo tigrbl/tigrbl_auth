@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function useApiMutation<TArgs extends unknown[], TResult>(mutation: (...args: TArgs) => Promise<TResult>) {
+export function useTransportMutation<TArgs extends unknown[], TResult>(mutation: (...args: TArgs) => Promise<TResult>) {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 

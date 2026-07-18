@@ -18,10 +18,10 @@ This slice packages Tigrbl Auth as separate API front doors and separate UIX app
 | UIX app | NPM package | API package | Required base URL variable | Role |
 | --- | --- | --- | --- | --- |
 | `pkgs/105-ui/public-uix` | `@tigrbl-auth/public-uix` | `tigrbl-auth-backend-app-public` | `VITE_TIGRBL_AUTH_PUBLIC_BASE_URL` | Public login, registration, logout, recovery, consent |
-| `pkgs/105-ui/platform-admin-uix` | `@tigrbl-auth/platform-admin-uix` | `tigrbl-auth-backend-app-platform-admin` | `VITE_TIGRBL_AUTH_PLATFORM_ADMIN_API_BASE_URL` | Platform tenant lifecycle and authority assignment |
-| `pkgs/105-ui/tenant-admin-uix` | `@tigrbl-auth/tenant-admin-uix` | `tigrbl-auth-backend-app-tenant-admin` | `VITE_TIGRBL_AUTH_TENANT_ADMIN_API_BASE_URL` | Tenant identity, admin, JWKS, and local policy operations |
-| `pkgs/105-ui/developer-uix` | `@tigrbl-auth/developer-uix` | `tigrbl-auth-backend-app-developer` | `VITE_TIGRBL_AUTH_DEVELOPER_API_BASE_URL` | OIDC/OAuth app registration and client metadata |
-| `pkgs/105-ui/service-admin-uix` | `@tigrbl-auth/service-admin-uix` | `tigrbl-auth-backend-app-service-admin` | `VITE_TIGRBL_AUTH_SERVICE_ADMIN_API_BASE_URL` | Machine identity, service keys, API keys, workload credentials |
+| `pkgs/105-ui/platform-admin-uix` | `@tigrbl-auth/platform-admin-uix` | `tigrbl-auth-backend-app-platform-admin` | `VITE_TIGRBL_AUTH_PLATFORM_ADMIN_BACKEND_APP_BASE_URL` | Platform tenant lifecycle and authority assignment |
+| `pkgs/105-ui/tenant-admin-uix` | `@tigrbl-auth/tenant-admin-uix` | `tigrbl-auth-backend-app-tenant-admin` | `VITE_TIGRBL_AUTH_TENANT_ADMIN_BACKEND_APP_BASE_URL` | Tenant identity, admin, JWKS, and local policy operations |
+| `pkgs/105-ui/developer-uix` | `@tigrbl-auth/developer-uix` | `tigrbl-auth-backend-app-developer` | `VITE_TIGRBL_AUTH_DEVELOPER_BACKEND_APP_BASE_URL` | OIDC/OAuth app registration and client metadata |
+| `pkgs/105-ui/service-admin-uix` | `@tigrbl-auth/service-admin-uix` | `tigrbl-auth-backend-app-service-admin` | `VITE_TIGRBL_AUTH_SERVICE_ADMIN_BACKEND_APP_BASE_URL` | Machine identity, service keys, API keys, workload credentials |
 | `pkgs/105-ui/admin-uix` | `@tigrbl-auth/admin-uix` | Legacy mixed admin surface | Existing admin UIX config | Temporary extraction source until parity is proven |
 
 ## Runtime Enforcement

@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../defaults";
+import { BACKEND_APP_BASE_URL } from "../defaults";
 import type { AccountProfile, AccountSession, AuthorizedApp, Consent } from "../types";
 
 type Fetcher = typeof fetch;
@@ -14,7 +14,7 @@ function joinUrl(baseUrl: string, path: string) {
 }
 
 export class MyAccountClient {
-  constructor(private readonly baseUrl = API_BASE_URL, private readonly fetcher: Fetcher = defaultFetcher) {}
+  constructor(private readonly baseUrl = BACKEND_APP_BASE_URL, private readonly fetcher: Fetcher = defaultFetcher) {}
 
   private async request<T>(path: string, init: RequestInit = {}): Promise<T> {
     const response = await this.fetcher(joinUrl(this.baseUrl, path), {

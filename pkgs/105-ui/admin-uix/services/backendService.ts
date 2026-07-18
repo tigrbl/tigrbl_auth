@@ -1,7 +1,7 @@
 import { gateway_rpc } from './jsonRpcService';
 import type { Alert, OAuthClient, PolicyGate, Tenant, TelemetryData, TenantJwksKeyInput, TenantJwksPublicationKey, TenantJwksPublicationView, User } from '../types';
 import { UserStatus } from '../types';
-import { expectedJsonErrorMessage, extractApiErrorMessage, humanizeError, parseResponseBody } from './errorMessages';
+import { expectedJsonErrorMessage, extractResponseErrorMessage, humanizeError, parseResponseBody } from './errorMessages';
 
 const toError = (error: unknown): Error => {
   if (error instanceof Error) {
@@ -48,7 +48,7 @@ async function restJson<T>(path: string, init?: RequestInit): Promise<T> {
     throw new Error(`Expected JSON response from ${path}, but the JSON payload could not be parsed.`);
   }
   if (!response.ok) {
-    throw new Error(extractApiErrorMessage(response, body.payload, { fallback: `HTTP ${response.status}` }));
+    throw new Error(extractResponseErrorMessage(response, body.payload, { fallback: `HTTP ${response.status}` }));
   }
   return body.payload as T;
 }

@@ -1,4 +1,4 @@
-import { extractApiErrorMessage, parseResponseBody } from './errorMessages';
+import { extractResponseErrorMessage, parseResponseBody } from './errorMessages';
 
 export type AdminSessionState = {
   authenticated: boolean;
@@ -24,7 +24,7 @@ const postJson = async <T>(path: string, body: JsonObject): Promise<T> => {
   });
   const parsed = await parseResponseBody(response);
   if (!response.ok) {
-    throw new Error(extractApiErrorMessage(response, parsed.payload, { requestBody: body, fallback: `HTTP ${response.status}` }));
+    throw new Error(extractResponseErrorMessage(response, parsed.payload, { requestBody: body, fallback: `HTTP ${response.status}` }));
   }
   return parsed.payload as T;
 };
@@ -33,7 +33,7 @@ const getJson = async <T>(path: string): Promise<T> => {
   const response = await fetch(path, { headers: { Accept: 'application/json' } });
   const parsed = await parseResponseBody(response);
   if (!response.ok) {
-    throw new Error(extractApiErrorMessage(response, parsed.payload, { fallback: `HTTP ${response.status}` }));
+    throw new Error(extractResponseErrorMessage(response, parsed.payload, { fallback: `HTTP ${response.status}` }));
   }
   return parsed.payload as T;
 };

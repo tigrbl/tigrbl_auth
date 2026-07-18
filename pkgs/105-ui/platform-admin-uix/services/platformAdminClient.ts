@@ -1,4 +1,4 @@
-import { API_BASE_URL, apiUrl } from "./backendSurface";
+import { BACKEND_APP_BASE_URL, backendAppUrl } from "./backendSurface";
 import type { AdminSession, CreateIdentityInput, CreateRealmInput, CreateTenantInput, Identity, Realm, Tenant, UpdateIdentityInput, UpdateRealmInput, UpdateTenantInput } from "../types";
 
 type Fetcher = typeof fetch;
@@ -13,7 +13,7 @@ export class PlatformAdminClient {
   constructor(private readonly fetcher: Fetcher = defaultFetcher) {}
 
   private async request<T>(path: string, init: RequestInit = {}): Promise<T> {
-    const response = await this.fetcher(apiUrl(path), {
+    const response = await this.fetcher(backendAppUrl(path), {
       credentials: "include",
       headers: {
         "content-type": "application/json",
@@ -37,7 +37,7 @@ export class PlatformAdminClient {
   }
 
   baseUrl() {
-    return API_BASE_URL;
+    return BACKEND_APP_BASE_URL;
   }
 
   login(identifier: string, password: string) {

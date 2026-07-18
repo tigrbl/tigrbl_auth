@@ -10,14 +10,14 @@ import { SubmitButton } from "./SubmitButton";
 describe("public-style UIX primitives", () => {
   it("renders the centered auth shell with brand and product copy", () => {
     const html = renderToStaticMarkup(
-      <AuthShell productApi="test-api" subtitle="Identity product copy" title="Sign in">
+      <AuthShell backendApp="test-backend" subtitle="Identity product copy" title="Sign in">
         <Card>Form</Card>
       </AuthShell>
     );
 
     expect(html).toContain("tigrbl-auth-shell");
     expect(html).toContain("Tigrbl Auth");
-    expect(html).toContain("test-api");
+    expect(html).toContain("test-backend");
     expect(html).toContain("Identity product copy");
   });
 

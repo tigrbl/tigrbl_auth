@@ -31,7 +31,7 @@ The experience should feel trustworthy, calm, brandable, and precise. It is not 
 
 ## 3. API Boundary
 
-The UIX consumes exactly one configured public API base URL through `VITE_TIGRBL_AUTH_PUBLIC_BASE_URL`.
+The UIX consumes exactly one configured public backend-app base URL through `VITE_TIGRBL_AUTH_PUBLIC_BASE_URL`.
 
 ### Baseline-profile capabilities
 
@@ -178,7 +178,7 @@ Produce a route-level copy deck containing:
 
 ## 10. Acceptance Criteria
 
-- The public UIX calls only the public API base URL and rejects prohibited surface paths.
+- The public UIX calls only the public backend-app base URL and rejects prohibited surface paths.
 - Capability visibility matches the active profile and live contracts.
 - Authorization code + PKCE works end to end with safe callback and redirect handling.
 - Login, registration, MFA, verification, recovery, consent, profile continuation, and logout have complete accessible states or are omitted when unsupported.

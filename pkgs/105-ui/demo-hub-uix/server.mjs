@@ -7,12 +7,12 @@ const root = "/usr/share/demo-hub";
 const demoPassword = process.env.TIGRBL_AUTH_DEMO_ADMIN_PASSWORD || "AdminPass123!";
 
 const bases = {
-  public: process.env.TIGRBL_AUTH_PUBLIC_API_BASE_URL || "http://host.docker.internal:8013",
-  resourceValidation: process.env.TIGRBL_AUTH_RESOURCE_VALIDATION_API_BASE_URL || "http://host.docker.internal:8014",
-  platformAdmin: process.env.TIGRBL_AUTH_PLATFORM_ADMIN_API_BASE_URL || "http://host.docker.internal:8015",
-  tenantAdmin: process.env.TIGRBL_AUTH_TENANT_ADMIN_API_BASE_URL || "http://host.docker.internal:8016",
-  developer: process.env.TIGRBL_AUTH_DEVELOPER_API_BASE_URL || "http://host.docker.internal:8017",
-  serviceAdmin: process.env.TIGRBL_AUTH_SERVICE_ADMIN_API_BASE_URL || "http://host.docker.internal:8018"
+  public: process.env.TIGRBL_AUTH_PUBLIC_BACKEND_APP_BASE_URL || "http://host.docker.internal:8013",
+  resourceValidation: process.env.TIGRBL_AUTH_RESOURCE_VALIDATION_BACKEND_APP_BASE_URL || "http://host.docker.internal:8014",
+  platformAdmin: process.env.TIGRBL_AUTH_PLATFORM_ADMIN_BACKEND_APP_BASE_URL || "http://host.docker.internal:8015",
+  tenantAdmin: process.env.TIGRBL_AUTH_TENANT_ADMIN_BACKEND_APP_BASE_URL || "http://host.docker.internal:8016",
+  developer: process.env.TIGRBL_AUTH_DEVELOPER_BACKEND_APP_BASE_URL || "http://host.docker.internal:8017",
+  serviceAdmin: process.env.TIGRBL_AUTH_SERVICE_ADMIN_BACKEND_APP_BASE_URL || "http://host.docker.internal:8018"
 };
 
 const adminKeys = {

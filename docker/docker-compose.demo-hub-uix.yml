@@ -10,12 +10,12 @@ services:
       - "host.docker.internal:host-gateway"
     environment:
       TIGRBL_AUTH_DEMO_ADMIN_PASSWORD: AdminPass123!
-      TIGRBL_AUTH_PUBLIC_API_BASE_URL: http://host.docker.internal:8013
-      TIGRBL_AUTH_RESOURCE_VALIDATION_API_BASE_URL: http://host.docker.internal:8014
-      TIGRBL_AUTH_PLATFORM_ADMIN_API_BASE_URL: http://host.docker.internal:8015
-      TIGRBL_AUTH_TENANT_ADMIN_API_BASE_URL: http://host.docker.internal:8016
-      TIGRBL_AUTH_DEVELOPER_API_BASE_URL: http://host.docker.internal:8017
-      TIGRBL_AUTH_SERVICE_ADMIN_API_BASE_URL: http://host.docker.internal:8018
+      TIGRBL_AUTH_PUBLIC_BACKEND_APP_BASE_URL: http://host.docker.internal:8013
+      TIGRBL_AUTH_RESOURCE_VALIDATION_BACKEND_APP_BASE_URL: http://host.docker.internal:8014
+      TIGRBL_AUTH_PLATFORM_ADMIN_BACKEND_APP_BASE_URL: http://host.docker.internal:8015
+      TIGRBL_AUTH_TENANT_ADMIN_BACKEND_APP_BASE_URL: http://host.docker.internal:8016
+      TIGRBL_AUTH_DEVELOPER_BACKEND_APP_BASE_URL: http://host.docker.internal:8017
+      TIGRBL_AUTH_SERVICE_ADMIN_BACKEND_APP_BASE_URL: http://host.docker.internal:8018
       TIGRBL_AUTH_PLATFORM_ADMIN_API_KEY: dev-platform-admin-key
       TIGRBL_AUTH_TENANT_ADMIN_API_KEY: dev-tenant-admin-key
       TIGRBL_AUTH_DEVELOPER_API_KEY: dev-developer-key
