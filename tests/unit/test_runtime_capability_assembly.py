@@ -8,7 +8,7 @@ from tigrbl_identity_contracts.capabilities import (
     CapabilityOperation,
     ProtocolCapabilityRequirement,
 )
-from tigrbl_identity_server.api import runtime_assembly as server_runtime_assembly
+from tigrbl_identity_server.composition import runtime_assembly as server_runtime_assembly
 from tigrbl_identity_runtime import (
     CapabilityFactory,
     CapabilityRegistry,

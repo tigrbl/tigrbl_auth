@@ -10,7 +10,7 @@ from tigrbl_identity_contracts.capabilities import (
     CapabilityOperation,
 )
 from tigrbl_identity_runtime import build_runtime_capability_assembly
-from tigrbl_identity_server.api import lifecycle
+from tigrbl_identity_server.composition import lifecycle
 
 
 @pytest.mark.asyncio
@@ -52,9 +52,9 @@ async def test_startup_attaches_assembly_after_storage_and_surface_initializatio
     monkeypatch.setattr(lifecycle, "apply_all_async", migrate)
     monkeypatch.setattr(lifecycle, "initializeIdentityRuntimeTables", tables)
     monkeypatch.setattr(lifecycle, "ensure_default_superuser_async", superuser)
-    monkeypatch.setattr(lifecycle, "surface_api", ProductSurfaceRouter())
+    router = ProductSurfaceRouter()
 
-    await lifecycle._startup(app, assembly)
+    await lifecycle._startup(app, assembly, router.initialize)
 
     assert calls == ["migrations", "tables", "superuser", "surface", "assembly"]
     assert app.state.tigrbl_auth_capability_registry.capability_ids() == ("example",)
@@ -71,10 +71,11 @@ async def test_startup_rejects_an_invalid_assembly_factory(
     monkeypatch.setattr(lifecycle, "apply_all_async", noop)
     monkeypatch.setattr(lifecycle, "initializeIdentityRuntimeTables", lambda: None)
     monkeypatch.setattr(lifecycle, "ensure_default_superuser_async", noop)
-    monkeypatch.setattr(lifecycle, "surface_api", SimpleNamespace(initialize=lambda: None))
+
 
     with pytest.raises(TypeError, match="RuntimeCapabilityAssembly"):
         await lifecycle._startup(
             SimpleNamespace(state=SimpleNamespace()),
             lambda: object(),
+            lambda: None,
         )

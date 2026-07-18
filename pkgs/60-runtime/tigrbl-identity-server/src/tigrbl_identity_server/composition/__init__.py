@@ -1,4 +1,4 @@
-"""Carrier-neutral identity runtime API exports."""
+"""Carrier-neutral identity runtime composition exports."""
 
 from .app import build_application_runtime_plan
 from .lifecycle import AssemblyFactory, SurfaceInitializer, register_lifecycle

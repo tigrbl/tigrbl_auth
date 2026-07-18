@@ -25,7 +25,7 @@ ADDITIONAL_CERTIFICATION_ENVS = (
 )
 CERTIFICATION_TOX_ENVS = RUNTIME_MATRIX_ENVS + TEST_LANE_ENVS + ADDITIONAL_CERTIFICATION_ENVS
 RUNTIME_IMPORT_SURFACES = (
-    "tigrbl_identity_server.api.app",
+    "tigrbl_identity_server.composition.app",
     "tigrbl_auth_backend_app_core",
     "tigrbl_auth_backend_app_public",
     "tigrbl_auth.plugin",

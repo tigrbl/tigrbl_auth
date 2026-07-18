@@ -31,7 +31,7 @@ class TigrblAuthPlugin:
         resolved_settings = settings if settings is not None else self.settings
         deployment = self.resolve_plugin_deployment(resolved_settings)
 
-        from tigrbl_identity_server.api.lifecycle import register_lifecycle
+        from tigrbl_identity_server.composition.lifecycle import register_lifecycle
 
         state = getattr(app, "state", None)
         if state is not None:

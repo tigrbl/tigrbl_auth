@@ -13,14 +13,14 @@ from tigrbl_identity_operator.repo_truth import (
     package_version as repository_package_version,
 )
 from tigrbl_identity_runtime import LazyASGIApplication
-from tigrbl_identity_server.api.app import (
+from tigrbl_identity_server.composition.app import (
     _load_default_settings,
     build_application_runtime_plan as _build_application_runtime_plan,
 )
 
 if TYPE_CHECKING:
     from tigrbl import TigrblApp
-    from tigrbl_identity_server.api.lifecycle import AssemblyFactory
+    from tigrbl_identity_server.composition.lifecycle import AssemblyFactory
 
 
 def _runtime_package_version() -> str:
@@ -68,7 +68,7 @@ def build_app(
     )
     resolved_deployment = deployment or resolve_deployment(resolved_settings)
     if runtime_assembly_factory is None:
-        from tigrbl_identity_server.api.runtime_assembly import (
+        from tigrbl_identity_server.composition.runtime_assembly import (
             build_server_runtime_assembly_async,
         )
 
@@ -89,7 +89,7 @@ def build_app(
 
     from tigrbl import TigrblApp
 
-    from tigrbl_identity_server.api.lifecycle import register_lifecycle
+    from tigrbl_identity_server.composition.lifecycle import register_lifecycle
     from tigrbl_auth_backend_app_core.surfaces import (
         admin_resource_path_prefixes,
         attach_runtime_surfaces,

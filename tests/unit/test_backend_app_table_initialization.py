@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import pytest
 
-from tigrbl_auth.api import lifecycle
+from tigrbl_identity_server.composition import lifecycle
 from tigrbl_auth_backend_app_core.surfaces import (
     TableInitializationScopeError,
     assert_table_initialization_scope,
