@@ -17,6 +17,7 @@ from .compatibility import COMPATIBILITY_PATHS, CwtCompatibility, compatibility
 from .errors import CwtProtocolError, UnsupportedCwtMediaTypeError
 from .features import FEATURES_BY_VERSION, supports
 from .migrations import migrate_claims
+from .protocol import CwtProtocol
 from .schemas import CWT_CARRIER, CwtCarrier, select_carrier
 from .versions import (
     CURRENT_VERSION,
@@ -54,7 +55,7 @@ __all__ = [
     "VERSION_STATUS",
     "CwtCarrier",
     "CwtCompatibility",
-    "CwtProtocolError",
+    \
     "CwtVersion",
     "UnsupportedCwtMediaTypeError",
     "capability_report",

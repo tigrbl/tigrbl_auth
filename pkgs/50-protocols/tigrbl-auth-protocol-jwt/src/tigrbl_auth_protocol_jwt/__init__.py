@@ -1,3 +1,4 @@
+from .protocol import JwtProtocol
 """Versioned RFC 7519 JSON Web Token ownership."""
 
 from tigrbl_identity_contracts.protocol_processing import (
@@ -10,6 +11,7 @@ from .compatibility import COMPATIBILITY_PATHS, JwtCompatibility, compatibility
 from .errors import JwtProfileRequiredError, JwtProtocolError, UnsupportedJwtMediaTypeError
 from .features import FEATURES_BY_VERSION, supports
 from .migrations import migrate_claims
+from .profile import JwtProfile
 from .schemas import JWT_CARRIER, JwtCarrier, select_carrier
 from .versions import CURRENT_VERSION, VERSION_HISTORY, JwtVersion, select_version
 
@@ -26,6 +28,7 @@ def capability_report() -> dict[str, object]:
 
 
 __all__ = [
+    "JwtProtocol",
     "CAPABILITY_REQUIREMENTS",
     "COMPATIBILITY_PATHS",
     "CURRENT_VERSION",
@@ -36,6 +39,7 @@ __all__ = [
     "VERSION_HISTORY",
     "JwtCarrier",
     "JwtCompatibility",
+    "JwtProfile",
     "JwtProfileRequiredError",
     "JwtProtocolError",
     "JwtVersion",
