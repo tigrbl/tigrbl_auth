@@ -3,14 +3,23 @@ from __future__ import annotations
 import pytest
 
 from tigrbl_identity_core import (
+    APPLICATION_AT_JWT,
     APPLICATION_DC_SD_JWT,
+    APPLICATION_DID_JSON,
+    APPLICATION_VC_COSE,
+    APPLICATION_WIT_JWT,
+    APPLICATION_WPT_JWT,
     ArtifactRef,
     CredentialId,
     CredentialRef,
     CredentialFormat,
+    IdentityDocumentKind,
     IdentityId,
     IdentityRef,
     MediaType,
+    PresentationKind,
+    ProtectedEnvelopeKind,
+    TokenKind,
     StandardOwner,
     bytes_equal,
     describe_owner,
@@ -30,6 +39,9 @@ def test_protocol_tags_are_canonicalized() -> None:
     assert normalize_protocol_tag("XCAML") == "xacml"
     assert normalize_protocol_tag("OIDC4VI") == "oid4vci"
     assert normalize_protocol_tag("isomdc") == "iso-mdoc"
+    assert normalize_protocol_tag("CWT-SVID") == "cwt-svid-extension"
+    assert normalize_protocol_tag("WPT") == "wimse-wpt"
+    assert normalize_protocol_tag("x509-svid") == "spiffe-x509-svid"
     assert normalize_protocol_tags(["oauth", "OIDC", "oauth"]) == ("oauth", "oidc")
 
 
@@ -49,6 +61,11 @@ def test_nonce_generation_and_comparison() -> None:
 
 def test_media_type_and_uri_validation() -> None:
     assert str(APPLICATION_DC_SD_JWT) == "application/dc+sd-jwt"
+    assert str(APPLICATION_AT_JWT) == "application/at+jwt"
+    assert str(APPLICATION_WIT_JWT) == "application/wit+jwt"
+    assert str(APPLICATION_WPT_JWT) == "application/wpt+jwt"
+    assert str(APPLICATION_VC_COSE) == "application/vc+cose"
+    assert str(APPLICATION_DID_JSON) == "application/did+json"
     assert MediaType("APPLICATION/VC").value == "application/vc"
     assert (
         require_absolute_uri("https://issuer.example", https=True)
@@ -60,6 +77,13 @@ def test_media_type_and_uri_validation() -> None:
 
 def test_artifact_enums_and_raw_digest() -> None:
     assert CredentialFormat.ISO_MDOC.value == "iso-mdoc"
+    assert CredentialFormat.WIT_SVID.value == "wit-svid"
+    assert CredentialFormat.CWT_SVID_EXTENSION.value == "cwt-svid-extension"
+    assert TokenKind.OIDC_ID_TOKEN.value == "oidc-id-token"
+    assert TokenKind.WORKLOAD_PROOF_TOKEN.value == "workload-proof-token"
+    assert PresentationKind.VC_COSE.value == "vc-cose"
+    assert IdentityDocumentKind.DID_DOCUMENT.value == "did-document"
+    assert ProtectedEnvelopeKind.COSE_SIGN1.value == "cose-sign1"
     assert len(sha256_digest(b"artifact")) == 32
 
 
