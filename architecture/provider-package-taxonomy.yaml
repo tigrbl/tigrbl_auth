@@ -71,7 +71,6 @@ canonical_providers:
   - tigrbl-security-webfinger-provider
   - tigrbl-spiffe-bundle-provider
   - tigrbl-spiffe-workload-api-provider
-  - tigrbl-svid-verifier-provider
   explicitly_ephemeral:
   - tigrbl-access-governance-memory-provider
   - tigrbl-replay-memory-provider
@@ -81,6 +80,9 @@ canonical_providers:
   - tigrbl-set-receiver-provider
   - tigrbl-set-transmitter-provider
 compatibility_or_migration_packages:
+  tigrbl-svid-verifier-provider:
+    target: tigrbl-workload-protocol-spiffe-svid-plus-generic-jose-and-certificate-providers
+    target_layer: 20-50
   tigrbl-authz-policy:
     target: tigrbl-policy-administration-capability-plus-policy-assurance-capability-plus-access-governance-capability
     target_layer: 40-capabilities

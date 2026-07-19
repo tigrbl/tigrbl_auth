@@ -1,3 +1,15 @@
+"""Deprecated compatibility verifier for the legacy aggregate SVID model."""
+
+import warnings
+
+warnings.warn(
+    "tigrbl-svid-verifier-provider is deprecated; use the versioned "
+    "tigrbl-workload-protocol-spiffe-svid profile with injected JOSE and "
+    "certificate-path providers",
+    DeprecationWarning,
+    stacklevel=2,
+)
+
 from collections.abc import Callable, Mapping
 
 from tigrbl_identity_contracts.workloads import (

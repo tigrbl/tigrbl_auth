@@ -4612,7 +4612,7 @@ requires-dist = [
     { name = "tigrbl-spiffe-bundle-provider", editable = "pkgs/20-providers/tigrbl-spiffe-bundle-provider" },
     { name = "tigrbl-spiffe-workload-api-provider", editable = "pkgs/20-providers/tigrbl-spiffe-workload-api-provider" },
     { name = "tigrbl-svid-concrete", editable = "pkgs/10-concrete/tigrbl-svid-concrete" },
-    { name = "tigrbl-svid-verifier-provider", editable = "pkgs/20-providers/tigrbl-svid-verifier-provider" },
+    { name = "tigrbl-svid-verifier-provider", editable = "pkgs/deprecated/tigrbl-svid-verifier-provider" },
     { name = "tigrbl-table-durability", editable = "pkgs/30-storage-runtime/tigrbl-table-durability" },
     { name = "tigrbl-tenant-administration-capability", editable = "pkgs/40-capabilities/tigrbl-tenant-administration-capability" },
     { name = "tigrbl-token-bases", editable = "pkgs/05-bases/tigrbl-token-bases" },
@@ -9967,7 +9967,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-svid-verifier-provider"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/20-providers/tigrbl-svid-verifier-provider" }
+source = { editable = "pkgs/deprecated/tigrbl-svid-verifier-provider" }
 dependencies = [
     { name = "tigrbl-svid-concrete" },
     { name = "tigrbl-workload-identity-bases" },
