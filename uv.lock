@@ -3967,6 +3967,7 @@ dependencies = [
     { name = "tigrbl-mfa-factor-concrete" },
     { name = "tigrbl-mtls-certificate-credential-concrete" },
     { name = "tigrbl-mtls-confirmation-binding-concrete" },
+    { name = "tigrbl-oauth-profile-jwt-access-token" },
     { name = "tigrbl-oauth-state-durability" },
     { name = "tigrbl-oidc-id-token-concrete" },
     { name = "tigrbl-oidc-state-durability" },
@@ -4493,6 +4494,7 @@ requires-dist = [
     { name = "tigrbl-mfa-factor-concrete", editable = "pkgs/10-concrete/tigrbl-mfa-factor-concrete" },
     { name = "tigrbl-mtls-certificate-credential-concrete", editable = "pkgs/10-concrete/tigrbl-mtls-certificate-credential-concrete" },
     { name = "tigrbl-mtls-confirmation-binding-concrete", editable = "pkgs/10-concrete/tigrbl-mtls-confirmation-binding-concrete" },
+    { name = "tigrbl-oauth-profile-jwt-access-token", editable = "pkgs/50-protocols/tigrbl-oauth-profile-jwt-access-token" },
     { name = "tigrbl-oauth-state-durability", editable = "pkgs/30-storage-runtime/tigrbl-oauth-state-durability" },
     { name = "tigrbl-oidc-id-token-concrete", editable = "pkgs/10-concrete/tigrbl-oidc-id-token-concrete" },
     { name = "tigrbl-oidc-state-durability", editable = "pkgs/30-storage-runtime/tigrbl-oidc-state-durability" },
@@ -8385,6 +8387,11 @@ requires-dist = [
     { name = "tigrbl-proof-of-possession-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
 ]
+
+[[package]]
+name = "tigrbl-oauth-profile-jwt-access-token"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/50-protocols/tigrbl-oauth-profile-jwt-access-token" }
 
 [[package]]
 name = "tigrbl-oauth-state-durability"

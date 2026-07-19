@@ -326,6 +326,7 @@ dependencies = [
     "tigrbl-authz-resource-server-verifier==0.4.0.dev2",
     "tigrbl-auth==0.4.0.dev2",
     "tigrbl-auth-protocol-oauth==0.4.0.dev2",
+    "tigrbl-oauth-profile-jwt-access-token==0.4.0.dev2",
     "tigrbl-auth-protocol-oidc==0.4.0.dev2",
     "tigrbl-auth-protocol-webauthn==0.4.0.dev2",
     "tigrbl-security-protocol-jose==0.4.0.dev2",
@@ -1016,6 +1017,8 @@ tigrbl-security-protocol-jws = { path = "pkgs/50-protocols/tigrbl-security-proto
 tigrbl-security-protocol-cose = { path = "pkgs/50-protocols/tigrbl-security-protocol-cose", editable = true }
 
 tigrbl-identity-protocol-did-core = { path = "pkgs/50-protocols/tigrbl-identity-protocol-did-core", editable = true }
+
+tigrbl-oauth-profile-jwt-access-token = { path = "pkgs/50-protocols/tigrbl-oauth-profile-jwt-access-token", editable = true }
 
 [project.scripts]
 tigrbl-auth = "tigrbl_identity_cli.cli.main:main"
