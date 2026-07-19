@@ -1,3 +1,4 @@
+from .identity_artifacts import *
 from .webauthn import *
 from .workload_identity import *
 

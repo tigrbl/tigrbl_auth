@@ -63,6 +63,7 @@ _install_http_status_aliases()
 _MODULE_EXPORTS = {
     "cli": "tigrbl_auth.cli",
     "compat": "tigrbl_auth.compat",
+    "identity_artifacts": "tigrbl_auth.identity_artifacts",
     "config": "tigrbl_auth.config",
     "profiles": "tigrbl_auth.profiles",
     "runtime": "tigrbl_auth.runtime",
