@@ -1,8 +1,11 @@
-"""Reusable workload-identity bases."""
+"""Reusable protocol-neutral workload-identity bases."""
 
 from abc import ABC
 
 from tigrbl_workload_identity_contracts import (
+    DelegatedWorkloadCredentialProviderPort,
+    DelegatedWorkloadCredentialRequest,
+    ResolvedWorkload,
     SpiffeId,
     SpiffeTrustBundle,
     Svid,
@@ -10,9 +13,67 @@ from tigrbl_workload_identity_contracts import (
     SvidVerifierPort,
     TrustBundleProviderPort,
     TrustDomain,
+    WorkloadCredential,
+    WorkloadCredentialProviderPort,
+    WorkloadCredentialRequest,
+    WorkloadCredentialSet,
+    WorkloadCredentialVerifierPort,
+    WorkloadIdentityRef,
+    WorkloadReference,
+    WorkloadReferenceResolverPort,
+    WorkloadTrustMaterial,
+    WorkloadTrustMaterialProviderPort,
 )
 
 
+class WorkloadReferenceResolverBase(WorkloadReferenceResolverPort, ABC):
+    def resolve(self, reference: WorkloadReference, /) -> ResolvedWorkload:
+        raise NotImplementedError
+
+
+class WorkloadCredentialProviderBase(WorkloadCredentialProviderPort, ABC):
+    def obtain(self, request: WorkloadCredentialRequest, /) -> WorkloadCredentialSet:
+        raise NotImplementedError
+
+
+class DelegatedWorkloadCredentialProviderBase(
+    DelegatedWorkloadCredentialProviderPort,
+    ABC,
+):
+    def obtain_for(
+        self,
+        request: DelegatedWorkloadCredentialRequest,
+        /,
+    ) -> WorkloadCredentialSet:
+        raise NotImplementedError
+
+
+class WorkloadCredentialVerifierBase(WorkloadCredentialVerifierPort, ABC):
+    def verify(
+        self,
+        credential: WorkloadCredential,
+        expected_identity: WorkloadIdentityRef | None = None,
+        /,
+    ) -> WorkloadIdentityRef:
+        raise NotImplementedError
+
+
+class WorkloadTrustMaterialProviderBase(
+    WorkloadTrustMaterialProviderPort,
+    ABC,
+):
+    def trust_material_for(
+        self,
+        identity: WorkloadIdentityRef,
+        format: str,
+        /,
+    ) -> WorkloadTrustMaterial:
+        raise NotImplementedError
+
+
+# Compatibility bases for the existing SPIFFE-named layer-20 providers. New
+# providers must implement the neutral bases above; these leave layer 05 after
+# those providers are migrated.
 class SvidProviderBase(SvidProviderPort, ABC):
     def fetch_svid(self, audience: str | None = None, /) -> Svid:
         raise NotImplementedError
@@ -28,4 +89,13 @@ class TrustBundleProviderBase(TrustBundleProviderPort, ABC):
         raise NotImplementedError
 
 
-__all__ = ["SvidProviderBase", "SvidVerifierBase", "TrustBundleProviderBase"]
+__all__ = [
+    "DelegatedWorkloadCredentialProviderBase",
+    "SvidProviderBase",
+    "SvidVerifierBase",
+    "TrustBundleProviderBase",
+    "WorkloadCredentialProviderBase",
+    "WorkloadCredentialVerifierBase",
+    "WorkloadReferenceResolverBase",
+    "WorkloadTrustMaterialProviderBase",
+]

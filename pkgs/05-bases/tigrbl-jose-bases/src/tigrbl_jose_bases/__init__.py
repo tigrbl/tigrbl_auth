@@ -10,6 +10,27 @@ from tigrbl_identity_contracts.jose import (
     KeyRotationAdministrationPort,
     KeyRotationPolicyPort,
 )
+from tigrbl_protected_envelope_bases import (
+    ProtectedEnvelopeIssuerBase,
+    ProtectedEnvelopeVerifierBase,
+)
+from tigrbl_token_bases import ProfiledTokenIssuerBase, ProfiledTokenVerifierBase
+
+
+class JoseEnvelopeIssuerBase(ProtectedEnvelopeIssuerBase):
+    """Issue a protected envelope constrained to a JOSE serialization."""
+
+
+class JoseEnvelopeVerifierBase(ProtectedEnvelopeVerifierBase):
+    """Verify a protected envelope constrained to a JOSE serialization."""
+
+
+class JwtTokenIssuerBase(ProfiledTokenIssuerBase):
+    """Issue tokens constrained to an explicit JWT profile."""
+
+
+class JwtTokenVerifierBase(ProfiledTokenVerifierBase):
+    """Verify tokens constrained to an explicit JWT profile."""
 
 
 class JwtCoderBase(JwtCoderPort, ABC):
@@ -111,9 +132,13 @@ class WalletAttestationJwtVerifierBase(JwtCoderBase):
 
 __all__ = [
     "EatJwtCoderBase",
+    "JoseEnvelopeIssuerBase",
+    "JoseEnvelopeVerifierBase",
     "JoseKeySetBase",
     "JwePolicyBase",
     "JwtCoderBase",
+    "JwtTokenIssuerBase",
+    "JwtTokenVerifierBase",
     "KeyRotationAdministrationBase",
     "KeyRotationPolicyBase",
     "SdJwtCoderBase",

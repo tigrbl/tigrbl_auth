@@ -1,7 +1,7 @@
 [project]
 name = "tigrbl-workload-identity-bases"
 version = "0.4.0.dev2"
-description = "Reusable workload identity, SVID, and trust-bundle bases."
+description = "Protocol-neutral workload reference, credential, verification, delegation, and trust-material bases."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"

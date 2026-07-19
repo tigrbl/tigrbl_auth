@@ -144,6 +144,8 @@ dependencies = [
     "tigrbl-key-bases==0.4.0.dev2",
     "tigrbl-encryption-bases==0.4.0.dev2",
     "tigrbl-proof-of-possession-bases==0.4.0.dev2",
+    "tigrbl-identity-document-bases==0.4.0.dev2",
+    "tigrbl-protected-envelope-bases==0.4.0.dev2",
     "tigrbl-token-introspection-bases==0.4.0.dev2",
     "tigrbl-digital-credential-bases==0.4.0.dev2",
     "tigrbl-attestation-bases==0.4.0.dev2",
@@ -584,6 +586,8 @@ tigrbl-signing-bases = { path = "pkgs/05-bases/tigrbl-signing-bases", editable =
 tigrbl-key-bases = { path = "pkgs/05-bases/tigrbl-key-bases", editable = true }
 tigrbl-encryption-bases = { path = "pkgs/05-bases/tigrbl-encryption-bases", editable = true }
 tigrbl-proof-of-possession-bases = { path = "pkgs/05-bases/tigrbl-proof-of-possession-bases", editable = true }
+tigrbl-identity-document-bases = { path = "pkgs/05-bases/tigrbl-identity-document-bases", editable = true }
+tigrbl-protected-envelope-bases = { path = "pkgs/05-bases/tigrbl-protected-envelope-bases", editable = true }
 tigrbl-token-introspection-bases = { path = "pkgs/05-bases/tigrbl-token-introspection-bases", editable = true }
 tigrbl-security-provenance-bases = { path = "pkgs/05-bases/tigrbl-security-provenance-bases", editable = true }
 tigrbl-authz-policy-bases = { path = "pkgs/05-bases/tigrbl-authz-policy-bases", editable = true }

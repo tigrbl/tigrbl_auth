@@ -1,9 +1,11 @@
+"""Protocol-neutral profiled-token extension bases."""
+
 from abc import ABC
 from typing import Mapping
 
-from tigrbl_identity_contracts.tokens import (
-    TokenIssuerPort,
+from tigrbl_token_contracts import (
     ProtectedTokenEnvelope,
+    TokenIssuerPort,
     TokenProfile,
     TokenVerificationRequest,
     TokenVerificationResult,
@@ -14,7 +16,10 @@ from tigrbl_identity_contracts.tokens import (
 
 class ProfiledTokenIssuerBase(TokenIssuerPort, ABC):
     def issue(
-        self, profile: TokenProfile, claims: Mapping[str | int, object], /
+        self,
+        profile: TokenProfile,
+        claims: Mapping[str | int, object],
+        /,
     ) -> str | bytes:
         raise NotImplementedError
 
@@ -28,7 +33,9 @@ class TokenEnvelopeVerifierBase(ABC):
     """Verify a cryptographic envelope without making an appraisal decision."""
 
     def verify_envelope(
-        self, envelope: ProtectedTokenEnvelope, /
+        self,
+        envelope: ProtectedTokenEnvelope,
+        /,
     ) -> VerifiedTokenEnvelope:
         raise NotImplementedError
 
@@ -54,10 +61,10 @@ class StepUpAuthenticationEvaluatorBase(ABC):
 
 __all__ = [
     "DelegationActorChainValidatorBase",
+    "EatTokenEnvelopeVerifierBase",
     "ProfiledTokenIssuerBase",
     "ProfiledTokenVerifierBase",
     "RichAuthorizationDetailValidatorBase",
     "StepUpAuthenticationEvaluatorBase",
-    "EatTokenEnvelopeVerifierBase",
     "TokenEnvelopeVerifierBase",
 ]

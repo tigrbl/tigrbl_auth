@@ -1,11 +1,15 @@
 [project]
 name = "tigrbl-proof-of-possession-bases"
 version = "0.4.0.dev2"
-description = "Reusable proof-of-possession and sender-constraint bases."
+description = "Reusable proof-of-possession issuance, verification, key-resolution, and context-binding bases."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
-dependencies = ["tigrbl-protected-artifact-bases==0.4.0.dev2", "tigrbl-security-trust-contracts==0.1.0"]
+dependencies = [
+    "tigrbl-proof-of-possession-contracts==0.4.0.dev2",
+    "tigrbl-protected-artifact-bases==0.4.0.dev2",
+    "tigrbl-security-trust-contracts==0.1.0",
+]
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
