@@ -62,6 +62,9 @@ dependencies = [
     "tigrbl-replay-contracts==0.4.0.dev2",
     "tigrbl-security-event-contracts==0.4.0.dev2",
     "tigrbl-workload-identity-contracts==0.4.0.dev2",
+    "tigrbl-identity-document-contracts==0.4.0.dev2",
+    "tigrbl-protected-envelope-contracts==0.4.0.dev2",
+    "tigrbl-proof-of-possession-contracts==0.4.0.dev2",
     "tigrbl-authz-policy-rules-concrete==0.4.0.dev2",
     "tigrbl-authz-policy-combiner-default==0.4.0.dev2",
     "tigrbl-authz-policy-evaluators-default==0.4.0.dev2",
@@ -671,6 +674,9 @@ tigrbl-public-key-authentication-contracts = { path = "pkgs/02-contracts/tigrbl-
 tigrbl-replay-contracts = { path = "pkgs/02-contracts/tigrbl-replay-contracts", editable = true }
 tigrbl-security-event-contracts = { path = "pkgs/02-contracts/tigrbl-security-event-contracts", editable = true }
 tigrbl-workload-identity-contracts = { path = "pkgs/02-contracts/tigrbl-workload-identity-contracts", editable = true }
+tigrbl-identity-document-contracts = { path = "pkgs/02-contracts/tigrbl-identity-document-contracts", editable = true }
+tigrbl-protected-envelope-contracts = { path = "pkgs/02-contracts/tigrbl-protected-envelope-contracts", editable = true }
+tigrbl-proof-of-possession-contracts = { path = "pkgs/02-contracts/tigrbl-proof-of-possession-contracts", editable = true }
 tigrbl-authz-policy-rules-concrete = { path = "pkgs/10-concrete/tigrbl-authz-policy-rules-concrete", editable = true }
 tigrbl-authz-policy-combiner-default = { path = "pkgs/10-concrete/tigrbl-authz-policy-combiner-default", editable = true }
 tigrbl-authz-policy-evaluators-default = { path = "pkgs/10-concrete/tigrbl-authz-policy-evaluators-default", editable = true }

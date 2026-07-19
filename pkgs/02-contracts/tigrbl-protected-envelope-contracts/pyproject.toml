@@ -1,7 +1,7 @@
 [project]
-name = "tigrbl-workload-identity-contracts"
+name = "tigrbl-protected-envelope-contracts"
 version = "0.4.0.dev2"
-description = "Protocol-neutral workload identity, credential, trust, and delegation contracts."
+description = "Protocol-neutral signed and encrypted envelope contracts."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
@@ -12,4 +12,4 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-packages = [{ include = "tigrbl_workload_identity_contracts", from = "src" }]
+packages = [{ include = "tigrbl_protected_envelope_contracts", from = "src" }]

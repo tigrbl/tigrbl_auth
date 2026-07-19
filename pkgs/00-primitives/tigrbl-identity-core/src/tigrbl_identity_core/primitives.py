@@ -26,6 +26,11 @@ CertificateId = NewType("CertificateId", str)
 WalletId = NewType("WalletId", str)
 WalletInstanceId = NewType("WalletInstanceId", str)
 WorkloadId = NewType("WorkloadId", str)
+WorkloadReferenceId = NewType("WorkloadReferenceId", str)
+WorkloadCredentialId = NewType("WorkloadCredentialId", str)
+WorkloadEntitlementId = NewType("WorkloadEntitlementId", str)
+WorkloadSubscriptionId = NewType("WorkloadSubscriptionId", str)
+TrustMaterialId = NewType("TrustMaterialId", str)
 TrustDomainId = NewType("TrustDomainId", str)
 CredentialTypeId = NewType("CredentialTypeId", str)
 StatusListId = NewType("StatusListId", str)
@@ -174,6 +179,11 @@ __all__ = [
     "WalletId",
     "WalletInstanceId",
     "WorkloadId",
+    "WorkloadReferenceId",
+    "WorkloadCredentialId",
+    "WorkloadEntitlementId",
+    "WorkloadSubscriptionId",
+    "TrustMaterialId",
     "TrustDomainId",
     "CredentialTypeId",
     "StatusListId",
