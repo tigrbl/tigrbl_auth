@@ -1,0 +1,10 @@
+[project]
+name="tigrbl-jose-cryptography-provider"
+version="0.4.0.dev2"
+requires-python=">=3.10,<3.15"
+dependencies=["cryptography>=45.0.0","tigrbl-protected-envelope-bases==0.4.0.dev2","tigrbl-protected-envelope-contracts==0.4.0.dev2","tigrbl-jws-concrete==0.4.0.dev2","tigrbl-jwe-concrete==0.4.0.dev2"]
+[build-system]
+requires=["poetry-core>=1.0.0"]
+build-backend="poetry.core.masonry.api"
+[tool.poetry]
+packages=[{include="tigrbl_jose_cryptography_provider",from="src"}]

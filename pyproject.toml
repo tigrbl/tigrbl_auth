@@ -377,6 +377,7 @@ dependencies = [
     "tigrbl-identity-core==0.4.0.dev2",
     "tigrbl-identity-credentials==0.4.0.dev2",
     "tigrbl-identity-jose==0.4.0.dev2",
+    "tigrbl-jose-cryptography-provider==0.4.0.dev2",
     "tigrbl-digital-credential-issuer-local==0.4.0.dev2",
     "tigrbl-digital-credential-status-provider==0.4.0.dev2",
     "tigrbl-digital-credential-trust-provider==0.4.0.dev2",
@@ -1049,6 +1050,8 @@ tigrbl-workload-protocol-spiffe-broker-api = { path = "pkgs/50-protocols/tigrbl-
 tigrbl-workload-credential-conformance-testkit = { path = "pkgs/120-tests/tigrbl-workload-credential-conformance-testkit", editable = true }
 
 workload-credential-profiles-example = { path = "pkgs/110-examples/workload-credential-profiles-example", editable = true }
+
+tigrbl-jose-cryptography-provider = { path = "pkgs/20-providers/tigrbl-jose-cryptography-provider", editable = true }
 
 [project.scripts]
 tigrbl-auth = "tigrbl_identity_cli.cli.main:main"

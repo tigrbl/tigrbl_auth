@@ -3021,6 +3021,7 @@ dependencies = [
     { name = "tigrbl-claim-jwt-id-concrete" },
     { name = "tigrbl-claim-not-before-concrete" },
     { name = "tigrbl-claim-subject-concrete" },
+    { name = "tigrbl-cwt-concrete" },
     { name = "tigrbl-identity-contracts" },
 ]
 
@@ -3034,6 +3035,7 @@ requires-dist = [
     { name = "tigrbl-claim-jwt-id-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-claim-not-before-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-claim-subject-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-cwt-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
 ]
 
@@ -3071,6 +3073,8 @@ dependencies = [
     { name = "tigrbl-claim-not-before-concrete" },
     { name = "tigrbl-claim-subject-concrete" },
     { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-jwt-concrete" },
+    { name = "tigrbl-protected-envelope-contracts" },
 ]
 
 [package.metadata]
@@ -3083,6 +3087,8 @@ requires-dist = [
     { name = "tigrbl-claim-not-before-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-claim-subject-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-jwt-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-protected-envelope-contracts", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
@@ -3948,6 +3954,7 @@ dependencies = [
     { name = "tigrbl-identity-testkit" },
     { name = "tigrbl-jose-bases" },
     { name = "tigrbl-jose-concrete" },
+    { name = "tigrbl-jose-cryptography-provider" },
     { name = "tigrbl-jose-swarmauri-provider" },
     { name = "tigrbl-jwe-concrete" },
     { name = "tigrbl-jws-concrete" },
@@ -4485,6 +4492,7 @@ requires-dist = [
     { name = "tigrbl-identity-testkit", editable = "pkgs/120-tests/tigrbl-identity-testkit" },
     { name = "tigrbl-jose-bases", editable = "pkgs/05-bases/tigrbl-jose-bases" },
     { name = "tigrbl-jose-concrete", editable = "pkgs/10-concrete/tigrbl-jose-concrete" },
+    { name = "tigrbl-jose-cryptography-provider", editable = "pkgs/20-providers/tigrbl-jose-cryptography-provider" },
     { name = "tigrbl-jose-swarmauri-provider", editable = "pkgs/20-providers/tigrbl-jose-swarmauri-provider" },
     { name = "tigrbl-jwe-concrete", editable = "pkgs/10-concrete/tigrbl-jwe-concrete" },
     { name = "tigrbl-jws-concrete", editable = "pkgs/10-concrete/tigrbl-jws-concrete" },
@@ -8121,6 +8129,27 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-jose-cryptography-provider"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-jose-cryptography-provider" }
+dependencies = [
+    { name = "cryptography" },
+    { name = "tigrbl-jwe-concrete" },
+    { name = "tigrbl-jws-concrete" },
+    { name = "tigrbl-protected-envelope-bases" },
+    { name = "tigrbl-protected-envelope-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "cryptography", specifier = ">=45.0.0" },
+    { name = "tigrbl-jwe-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-jws-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-protected-envelope-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-protected-envelope-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-jose-swarmauri-provider"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/20-providers/tigrbl-jose-swarmauri-provider" }
@@ -9487,6 +9516,16 @@ requires-dist = [{ name = "tigrbl-pkce-concrete", specifier = "==0.4.0.dev2" }]
 name = "tigrbl-security-protocol-cose"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-security-protocol-cose" }
+dependencies = [
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-protected-envelope-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-protected-envelope-contracts", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-security-protocol-jose"
@@ -9507,11 +9546,31 @@ requires-dist = [
 name = "tigrbl-security-protocol-jwe"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-security-protocol-jwe" }
+dependencies = [
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-protected-envelope-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-protected-envelope-contracts", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-security-protocol-jws"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-security-protocol-jws" }
+dependencies = [
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-protected-envelope-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-protected-envelope-contracts", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-security-provenance-bases"
@@ -10287,12 +10346,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-workload-credential-profile-cwt-svid-extension" }
 dependencies = [
     { name = "tigrbl-auth-protocol-cwt" },
+    { name = "tigrbl-proof-of-possession-contracts" },
     { name = "tigrbl-security-protocol-cose" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl-auth-protocol-cwt", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-proof-of-possession-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-protocol-cose", specifier = "==0.4.0.dev2" },
 ]
 
@@ -10301,12 +10362,14 @@ name = "tigrbl-workload-credential-profile-spiffe-wit-svid"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-workload-credential-profile-spiffe-wit-svid" }
 dependencies = [
+    { name = "tigrbl-proof-of-possession-contracts" },
     { name = "tigrbl-workload-credential-profile-wimse-wit" },
     { name = "tigrbl-workload-protocol-spiffe-svid" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "tigrbl-proof-of-possession-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-workload-credential-profile-wimse-wit", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-workload-protocol-spiffe-svid", specifier = "==0.4.0.dev2" },
 ]

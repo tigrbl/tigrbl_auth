@@ -70,4 +70,7 @@ def parse_jws_compact(value: str) -> JwsCompact:
     return JwsCompact(value, parts[0], parts[1], parts[2], protected, payload, signature)
 
 
-__all__ = ["JwsCompact", "parse_jws_compact"]
+from .json_serialization import JwsJson, JwsJsonSignature, parse_jws_json
+from .rfc7797 import validate_unencoded_payload_headers
+
+__all__ = ["JwsCompact", "JwsJson", "JwsJsonSignature", "parse_jws_compact", "parse_jws_json", "validate_unencoded_payload_headers"]

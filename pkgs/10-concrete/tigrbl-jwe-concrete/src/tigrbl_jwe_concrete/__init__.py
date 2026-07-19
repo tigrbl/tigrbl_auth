@@ -64,4 +64,6 @@ def parse_jwe_compact(value: str) -> JweCompact:
     )
 
 
-__all__ = ["JweCompact", "parse_jwe_compact"]
+from .json_serialization import JweJson, JweRecipient, parse_jwe_json
+
+__all__ = ["JweCompact", "JweJson", "JweRecipient", "parse_jwe_compact", "parse_jwe_json"]

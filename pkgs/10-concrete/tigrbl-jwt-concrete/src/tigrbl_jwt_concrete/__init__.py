@@ -28,4 +28,6 @@ def decode_jwt_unverified(value: str) -> JwtObject:
     return JwtObject(value, jws, claims)
 
 
-__all__ = ["JwtObject", "decode_jwt_unverified"]
+from .validation import validate_registered_claims
+
+__all__ = ["JwtObject", "decode_jwt_unverified", "validate_registered_claims"]
