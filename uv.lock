@@ -4105,7 +4105,9 @@ dependencies = [
     { name = "tigrbl-workload-identity-contracts" },
     { name = "tigrbl-workload-identity-durability" },
     { name = "tigrbl-workload-proof-profile-wimse-wpt" },
+    { name = "tigrbl-workload-protocol-spiffe-broker-api" },
     { name = "tigrbl-workload-protocol-spiffe-svid" },
+    { name = "tigrbl-workload-protocol-spiffe-workload-api" },
     { name = "tigrbl-wpt-concrete" },
     { name = "tigrbl-x509-svid-credential-concrete" },
     { name = "tomli", marker = "python_full_version < '3.11'" },
@@ -4638,7 +4640,9 @@ requires-dist = [
     { name = "tigrbl-workload-identity-contracts", editable = "pkgs/02-contracts/tigrbl-workload-identity-contracts" },
     { name = "tigrbl-workload-identity-durability", editable = "pkgs/30-storage-runtime/tigrbl-workload-identity-durability" },
     { name = "tigrbl-workload-proof-profile-wimse-wpt", editable = "pkgs/50-protocols/tigrbl-workload-proof-profile-wimse-wpt" },
+    { name = "tigrbl-workload-protocol-spiffe-broker-api", editable = "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-broker-api" },
     { name = "tigrbl-workload-protocol-spiffe-svid", editable = "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-svid" },
+    { name = "tigrbl-workload-protocol-spiffe-workload-api", editable = "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-workload-api" },
     { name = "tigrbl-wpt-concrete", editable = "pkgs/10-concrete/tigrbl-wpt-concrete" },
     { name = "tigrbl-x509-svid-credential-concrete", editable = "pkgs/10-concrete/tigrbl-x509-svid-credential-concrete" },
     { name = "tomli", marker = "python_full_version < '3.11'", specifier = "==2.4.0" },
@@ -10397,6 +10401,11 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-workload-proof-profile-wimse-wpt" }
 
 [[package]]
+name = "tigrbl-workload-protocol-spiffe-broker-api"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-broker-api" }
+
+[[package]]
 name = "tigrbl-workload-protocol-spiffe-svid"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-svid" }
@@ -10410,6 +10419,11 @@ requires-dist = [
     { name = "tigrbl-jwt-svid-credential-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-x509-svid-credential-concrete", specifier = "==0.4.0.dev2" },
 ]
+
+[[package]]
+name = "tigrbl-workload-protocol-spiffe-workload-api"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-workload-api" }
 
 [[package]]
 name = "tigrbl-wpt-concrete"
