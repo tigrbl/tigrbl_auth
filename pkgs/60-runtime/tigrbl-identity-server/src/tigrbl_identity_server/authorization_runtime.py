@@ -11,17 +11,28 @@ from uuid import UUID, uuid4
 
 from tigrbl import HTMLResponse, RedirectResponse, Request
 from tigrbl.runtime.status import HTTPException, status
-from tigrbl_identity_storage.tables.auth_code import AuthCode
+from tigrbl_identity_storage_runtime.ops.oauth_state import persist_authorization_code
 
 
 from ._authorization_inputs import (
-    _coerce_multi_value, _resolve_pushed_authorization_request, _resolve_request_object,
+    _coerce_multi_value,
+    _resolve_pushed_authorization_request,
+    _resolve_request_object,
 )
 
-async def authorize_request(*, request: Request, db: Any, params: dict[str, Any]) -> Any:
-    from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER
-    from tigrbl_auth_protocol_oauth.standards.issuer_identification import authorization_response_issuer
-    from tigrbl_auth_protocol_oauth.standards.native_apps import validate_native_authorization_request
+
+async def authorize_request(
+    *, request: Request, db: Any, params: dict[str, Any]
+) -> Any:
+    from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import (
+        ISSUER,
+    )
+    from tigrbl_auth_protocol_oauth.standards.issuer_identification import (
+        authorization_response_issuer,
+    )
+    from tigrbl_auth_protocol_oauth.standards.native_apps import (
+        validate_native_authorization_request,
+    )
     from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
         OAuthPolicyViolation,
         assert_authorization_request_allowed,
@@ -30,12 +41,16 @@ async def authorize_request(*, request: Request, db: Any, params: dict[str, Any]
     from tigrbl_auth_protocol_oauth.standards.pushed_authorization_requests import (
         consume_pushed_authorization_request,
     )
-    from tigrbl_auth_protocol_oauth.standards.resource_indicators import extract_resource
+    from tigrbl_auth_protocol_oauth.standards.resource_indicators import (
+        extract_resource,
+    )
     from tigrbl_auth_protocol_oauth.standards.rich_authorization_requests import (
         normalize_authorization_details,
     )
     from tigrbl_auth_protocol_oidc.id_token import mint_id_token, oidc_hash
-    from tigrbl_auth_protocol_oidc.standards.session_mgmt import session_state_for_client
+    from tigrbl_auth_protocol_oidc.standards.session_mgmt import (
+        session_state_for_client,
+    )
     from tigrbl_identity_runtime.deployment import deployment_from_request
     from tigrbl_identity_runtime.http_standards.cookies import issue_session_cookie
     from tigrbl_identity_runtime.settings import settings
@@ -48,7 +63,9 @@ async def authorize_request(*, request: Request, db: Any, params: dict[str, Any]
         update_handler_record,
     )
     from tigrbl_identity_storage.tables.client import Client
-    from tigrbl_identity_storage.tables.pushed_authorization_request import PushedAuthorizationRequest
+    from tigrbl_identity_storage.tables.pushed_authorization_request import (
+        PushedAuthorizationRequest,
+    )
     from tigrbl_identity_storage.tables.user import User
 
     deployment = deployment_from_request(request, settings)
@@ -63,7 +80,9 @@ async def authorize_request(*, request: Request, db: Any, params: dict[str, Any]
     try:
         assert_authorization_request_allowed(params, deployment)
     except OAuthPolicyViolation as exc:
-        raise HTTPException(exc.status_code, {"error": exc.error, "error_description": exc.description}) from exc
+        raise HTTPException(
+            exc.status_code, {"error": exc.error, "error_description": exc.description}
+        ) from exc
 
     response_type = params.get("response_type")
     client_id = params.get("client_id")
@@ -88,14 +107,20 @@ async def authorize_request(*, request: Request, db: Any, params: dict[str, Any]
         try:
             max_age = int(max_age)
         except (TypeError, ValueError) as exc:
-            raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request"}) from exc
+            raise HTTPException(
+                status.HTTP_400_BAD_REQUEST, {"error": "invalid_request"}
+            ) from exc
         if max_age < 0:
-            raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request"})
+            raise HTTPException(
+                status.HTTP_400_BAD_REQUEST, {"error": "invalid_request"}
+            )
 
     rts = set(str(response_type).split())
     allowed = {"code", "token", "id_token"}
     if not rts or not rts.issubset(allowed):
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "unsupported_response_type"})
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST, {"error": "unsupported_response_type"}
+        )
 
     scopes = set(str(scope).split())
     if "openid" not in scopes:
@@ -106,14 +131,18 @@ async def authorize_request(*, request: Request, db: Any, params: dict[str, Any]
     try:
         client_uuid = UUID(str(client_id))
     except ValueError as exc:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request"}) from exc
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST, {"error": "invalid_request"}
+        ) from exc
 
     client = await read_handler_record(Client, db, client_uuid)
     if client is None or redirect_uri not in (client.redirect_uris or "").split():
         raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request"})
 
     if par_row is not None and par_row.client_id not in {None, client_uuid}:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request_uri"})
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST, {"error": "invalid_request_uri"}
+        )
 
     session = await resolve_browser_session_record(db, request, deployment=deployment)
     if login_hint and session and session.username != login_hint:
@@ -127,8 +156,12 @@ async def authorize_request(*, request: Request, db: Any, params: dict[str, Any]
         auth_time = session.auth_time
         if auth_time is not None and auth_time.tzinfo is None:
             auth_time = auth_time.replace(tzinfo=timezone.utc)
-        if auth_time is None or datetime.now(timezone.utc) - auth_time > timedelta(seconds=max_age):
-            raise HTTPException(status.HTTP_401_UNAUTHORIZED, {"error": "login_required"})
+        if auth_time is None or datetime.now(timezone.utc) - auth_time > timedelta(
+            seconds=max_age
+        ):
+            raise HTTPException(
+                status.HTTP_401_UNAUTHORIZED, {"error": "login_required"}
+            )
 
     try:
         validate_native_authorization_request(
@@ -144,15 +177,22 @@ async def authorize_request(*, request: Request, db: Any, params: dict[str, Any]
         ) from exc
     if code_challenge_method and code_challenge_method != "S256":
         raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request"})
-    if policy.pkce_s256_required and (not code_challenge or code_challenge_method != "S256"):
+    if policy.pkce_s256_required and (
+        not code_challenge or code_challenge_method != "S256"
+    ):
         raise HTTPException(
             status.HTTP_400_BAD_REQUEST,
-            {"error": "invalid_request", "error_description": "FAPI authorization requests require PKCE S256"},
+            {
+                "error": "invalid_request",
+                "error_description": "FAPI authorization requests require PKCE S256",
+            },
         )
 
     mode = response_mode or ("fragment" if rts & {"token", "id_token"} else "query")
     if mode not in {"query", "fragment", "form_post"}:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "unsupported_response_mode"})
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST, {"error": "unsupported_response_mode"}
+        )
 
     requested_claims: dict[str, Any] | None = None
     if claims:
@@ -162,19 +202,25 @@ async def authorize_request(*, request: Request, db: Any, params: dict[str, Any]
                 raise ValueError
             requested_claims = parsed
         except Exception as exc:
-            raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request"}) from exc
+            raise HTTPException(
+                status.HTTP_400_BAD_REQUEST, {"error": "invalid_request"}
+            ) from exc
 
     resource_audience: str | None = None
     if resources:
         try:
             resource_audience = extract_resource(resources)
         except ValueError as exc:
-            raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_target"}) from exc
+            raise HTTPException(
+                status.HTTP_400_BAD_REQUEST, {"error": "invalid_target"}
+            ) from exc
 
     parsed_authorization_details: list[dict[str, Any]] | None = None
     if authorization_details:
         if not deployment.flag_enabled("enable_rfc9396"):
-            raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request"})
+            raise HTTPException(
+                status.HTTP_400_BAD_REQUEST, {"error": "invalid_request"}
+            )
         try:
             binding = normalize_authorization_details(
                 authorization_details,
@@ -185,7 +231,9 @@ async def authorize_request(*, request: Request, db: Any, params: dict[str, Any]
             if resource_audience is None and binding.audience is not None:
                 resource_audience = binding.audience
         except ValueError as exc:
-            raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request"}) from exc
+            raise HTTPException(
+                status.HTTP_400_BAD_REQUEST, {"error": "invalid_request"}
+            ) from exc
 
     await bind_browser_session_client_record(db, session.id, client_id=client_uuid)
     session.client_id = client_uuid
@@ -208,21 +256,23 @@ async def authorize_request(*, request: Request, db: Any, params: dict[str, Any]
 
     if "code" in rts:
         code_uuid = uuid4()
-        await AuthCode.handlers.authorize.core(
+        await persist_authorization_code(
             {
-                "id": code_uuid,
-                "user_id": UUID(user_sub),
-                "tenant_id": UUID(tenant_id),
-                "client_id": client_uuid,
-                "session_id": session.id,
-                "redirect_uri": str(redirect_uri),
-                "code_challenge": code_challenge,
-                "nonce": nonce,
-                "scope": scope_str,
-                "expires_at": datetime.now(timezone.utc) + timedelta(minutes=10),
-                "claims": auth_code_claims or None,
-            },
-            db=db,
+                "db": db,
+                "payload": {
+                    "id": code_uuid,
+                    "user_id": UUID(user_sub),
+                    "tenant_id": UUID(tenant_id),
+                    "client_id": client_uuid,
+                    "session_id": session.id,
+                    "redirect_uri": str(redirect_uri),
+                    "code_challenge": code_challenge,
+                    "nonce": nonce,
+                    "scope": scope_str,
+                    "expires_at": datetime.now(timezone.utc) + timedelta(minutes=10),
+                    "claims": auth_code_claims or None,
+                },
+            }
         )
         commit = getattr(db, "commit", None)
         if callable(commit):
@@ -276,7 +326,9 @@ async def authorize_request(*, request: Request, db: Any, params: dict[str, Any]
     if session_state:
         params_out.append(("session_state", session_state))
     if policy.authorization_response_iss_required:
-        params_out.append(authorization_response_issuer(str(deployment.issuer or ISSUER)))
+        params_out.append(
+            authorization_response_issuer(str(deployment.issuer or ISSUER))
+        )
     if state:
         params_out.append(("state", str(state)))
 
@@ -292,9 +344,13 @@ async def authorize_request(*, request: Request, db: Any, params: dict[str, Any]
     rotated_secret = await maybe_rotate_browser_session_cookie_record(db, session)
 
     if mode == "fragment":
-        response = RedirectResponse(f"{redirect_uri}#{urlencode(params_out)}" if params_out else redirect_uri)
+        response = RedirectResponse(
+            f"{redirect_uri}#{urlencode(params_out)}" if params_out else redirect_uri
+        )
     elif mode == "form_post":
-        inputs = "".join(f'<input type="hidden" name="{k}" value="{v}" />' for k, v in params_out)
+        inputs = "".join(
+            f'<input type="hidden" name="{k}" value="{v}" />' for k, v in params_out
+        )
         body = (
             "<!DOCTYPE html><html><body>"
             + f'<form method="post" action="{redirect_uri}">{inputs}</form>'
@@ -302,10 +358,17 @@ async def authorize_request(*, request: Request, db: Any, params: dict[str, Any]
         )
         response = HTMLResponse(content=body)
     else:
-        response = RedirectResponse(f"{redirect_uri}?{urlencode(params_out)}" if params_out else redirect_uri)
+        response = RedirectResponse(
+            f"{redirect_uri}?{urlencode(params_out)}" if params_out else redirect_uri
+        )
 
     if rotated_secret:
-        issue_session_cookie(response, session_id=session.id, secret=rotated_secret, expires_at=session.expires_at)
+        issue_session_cookie(
+            response,
+            session_id=session.id,
+            secret=rotated_secret,
+            expires_at=session.expires_at,
+        )
     return response
 
 
