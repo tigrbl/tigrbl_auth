@@ -76,6 +76,16 @@ dependencies = [
     "tigrbl-jwe-concrete==0.4.0.dev2",
     "tigrbl-jwt-concrete==0.4.0.dev2",
     "tigrbl-cwt-concrete==0.4.0.dev2",
+    "tigrbl-oidc-id-token-concrete==0.4.0.dev2",
+    "tigrbl-did-document-concrete==0.4.0.dev2",
+    "tigrbl-vc-jose-credential-concrete==0.4.0.dev2",
+    "tigrbl-vc-cose-credential-concrete==0.4.0.dev2",
+    "tigrbl-wit-concrete==0.4.0.dev2",
+    "tigrbl-wit-svid-credential-concrete==0.4.0.dev2",
+    "tigrbl-wpt-concrete==0.4.0.dev2",
+    "tigrbl-x509-svid-credential-concrete==0.4.0.dev2",
+    "tigrbl-jwt-svid-credential-concrete==0.4.0.dev2",
+    "tigrbl-cwt-svid-extension-credential-concrete==0.4.0.dev2",
     "tigrbl-security-authorization-provenance-builder==0.1.0",
     "tigrbl-identity-identities-concrete==0.4.0.dev2",
     "tigrbl-identity-credentials-concrete==0.4.0.dev2",
@@ -700,6 +710,16 @@ tigrbl-jws-concrete = { path = "pkgs/10-concrete/tigrbl-jws-concrete", editable 
 tigrbl-jwe-concrete = { path = "pkgs/10-concrete/tigrbl-jwe-concrete", editable = true }
 tigrbl-jwt-concrete = { path = "pkgs/10-concrete/tigrbl-jwt-concrete", editable = true }
 tigrbl-cwt-concrete = { path = "pkgs/10-concrete/tigrbl-cwt-concrete", editable = true }
+tigrbl-oidc-id-token-concrete = { path = "pkgs/10-concrete/tigrbl-oidc-id-token-concrete", editable = true }
+tigrbl-did-document-concrete = { path = "pkgs/10-concrete/tigrbl-did-document-concrete", editable = true }
+tigrbl-vc-jose-credential-concrete = { path = "pkgs/10-concrete/tigrbl-vc-jose-credential-concrete", editable = true }
+tigrbl-vc-cose-credential-concrete = { path = "pkgs/10-concrete/tigrbl-vc-cose-credential-concrete", editable = true }
+tigrbl-wit-concrete = { path = "pkgs/10-concrete/tigrbl-wit-concrete", editable = true }
+tigrbl-wit-svid-credential-concrete = { path = "pkgs/10-concrete/tigrbl-wit-svid-credential-concrete", editable = true }
+tigrbl-wpt-concrete = { path = "pkgs/10-concrete/tigrbl-wpt-concrete", editable = true }
+tigrbl-x509-svid-credential-concrete = { path = "pkgs/10-concrete/tigrbl-x509-svid-credential-concrete", editable = true }
+tigrbl-jwt-svid-credential-concrete = { path = "pkgs/10-concrete/tigrbl-jwt-svid-credential-concrete", editable = true }
+tigrbl-cwt-svid-extension-credential-concrete = { path = "pkgs/10-concrete/tigrbl-cwt-svid-extension-credential-concrete", editable = true }
 tigrbl-security-authorization-provenance-builder = { path = "pkgs/20-providers/tigrbl-security-authorization-provenance-builder", editable = true }
 tigrbl-identity-identities-concrete = { path = "pkgs/deprecated/tigrbl-identity-identities-concrete", editable = true }
 tigrbl-identity-credentials-concrete = { path = "pkgs/deprecated/tigrbl-identity-credentials-concrete", editable = true }

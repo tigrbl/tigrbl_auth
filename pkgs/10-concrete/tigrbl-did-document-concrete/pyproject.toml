@@ -1,0 +1,17 @@
+[project]
+name = "tigrbl-did-document-concrete"
+version = "0.4.0.dev2"
+description = "Standalone DID document identity artifact."
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = [
+    "tigrbl-identity-document-contracts==0.4.0.dev2",
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tigrbl_did_document_concrete", from = "src" }]
