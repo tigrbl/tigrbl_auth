@@ -3872,6 +3872,7 @@ dependencies = [
     { name = "tigrbl-credential-profile-sd-jwt-vc" },
     { name = "tigrbl-credential-protocol-iso-mdoc" },
     { name = "tigrbl-credential-protocol-w3c-vcdm" },
+    { name = "tigrbl-cwt-concrete" },
     { name = "tigrbl-default-capability" },
     { name = "tigrbl-delegated-access-negotiation-capability" },
     { name = "tigrbl-delegation-durability" },
@@ -3943,6 +3944,9 @@ dependencies = [
     { name = "tigrbl-jose-bases" },
     { name = "tigrbl-jose-concrete" },
     { name = "tigrbl-jose-swarmauri-provider" },
+    { name = "tigrbl-jwe-concrete" },
+    { name = "tigrbl-jws-concrete" },
+    { name = "tigrbl-jwt-concrete" },
     { name = "tigrbl-kernel" },
     { name = "tigrbl-key-administration-capability" },
     { name = "tigrbl-key-attestation-verifier" },
@@ -4372,6 +4376,7 @@ requires-dist = [
     { name = "tigrbl-credential-profile-sd-jwt-vc", editable = "pkgs/50-protocols/tigrbl-credential-profile-sd-jwt-vc" },
     { name = "tigrbl-credential-protocol-iso-mdoc", editable = "pkgs/50-protocols/tigrbl-credential-protocol-iso-mdoc" },
     { name = "tigrbl-credential-protocol-w3c-vcdm", editable = "pkgs/50-protocols/tigrbl-credential-protocol-w3c-vcdm" },
+    { name = "tigrbl-cwt-concrete", editable = "pkgs/10-concrete/tigrbl-cwt-concrete" },
     { name = "tigrbl-default-capability", editable = "pkgs/10-concrete/tigrbl-default-capability" },
     { name = "tigrbl-delegated-access-negotiation-capability", editable = "pkgs/40-capabilities/tigrbl-delegated-access-negotiation-capability" },
     { name = "tigrbl-delegation-durability", editable = "pkgs/30-storage-runtime/tigrbl-delegation-durability" },
@@ -4447,6 +4452,9 @@ requires-dist = [
     { name = "tigrbl-jose-bases", editable = "pkgs/05-bases/tigrbl-jose-bases" },
     { name = "tigrbl-jose-concrete", editable = "pkgs/10-concrete/tigrbl-jose-concrete" },
     { name = "tigrbl-jose-swarmauri-provider", editable = "pkgs/20-providers/tigrbl-jose-swarmauri-provider" },
+    { name = "tigrbl-jwe-concrete", editable = "pkgs/10-concrete/tigrbl-jwe-concrete" },
+    { name = "tigrbl-jws-concrete", editable = "pkgs/10-concrete/tigrbl-jws-concrete" },
+    { name = "tigrbl-jwt-concrete", editable = "pkgs/10-concrete/tigrbl-jwt-concrete" },
     { name = "tigrbl-kernel", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-key-administration-capability", editable = "pkgs/40-capabilities/tigrbl-key-administration-capability" },
     { name = "tigrbl-key-attestation-verifier", editable = "pkgs/20-providers/tigrbl-key-attestation-verifier" },
@@ -6676,6 +6684,17 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-cwt-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-cwt-concrete" }
+dependencies = [
+    { name = "cbor2" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "cbor2", specifier = "==6.1.3" }]
+
+[[package]]
 name = "tigrbl-default-capability"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-default-capability" }
@@ -8004,6 +8023,39 @@ requires-dist = [
     { name = "tigrbl-jose-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-signing-pqc", specifier = "==0.1.0" },
 ]
+
+[[package]]
+name = "tigrbl-jwe-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-jwe-concrete" }
+dependencies = [
+    { name = "tigrbl-identity-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-jws-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-jws-concrete" }
+dependencies = [
+    { name = "tigrbl-identity-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-jwt-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-jwt-concrete" }
+dependencies = [
+    { name = "tigrbl-jws-concrete" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-jws-concrete", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-kernel"
