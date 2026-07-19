@@ -170,6 +170,10 @@ dependencies = [
     "tigrbl-claim-authentication-methods-concrete==0.4.0.dev2",
     "tigrbl-claim-authorized-party-concrete==0.4.0.dev2",
     "tigrbl-claim-confirmation-concrete==0.4.0.dev2",
+    "tigrbl-claim-cwt-confirmation-concrete==0.4.0.dev2",
+    "tigrbl-claim-workload-token-hash-concrete==0.4.0.dev2",
+    "tigrbl-claim-transaction-token-hash-concrete==0.4.0.dev2",
+    "tigrbl-claim-other-token-hashes-concrete==0.4.0.dev2",
     "tigrbl-claim-scope-concrete==0.4.0.dev2",
     "tigrbl-claim-client-id-concrete==0.4.0.dev2",
     "tigrbl-claim-verified-claims-concrete==0.4.0.dev2",
@@ -716,6 +720,10 @@ tigrbl-claim-authentication-context-concrete = { path = "pkgs/10-concrete/tigrbl
 tigrbl-claim-authentication-methods-concrete = { path = "pkgs/10-concrete/tigrbl-claim-authentication-methods-concrete", editable = true }
 tigrbl-claim-authorized-party-concrete = { path = "pkgs/10-concrete/tigrbl-claim-authorized-party-concrete", editable = true }
 tigrbl-claim-confirmation-concrete = { path = "pkgs/10-concrete/tigrbl-claim-confirmation-concrete", editable = true }
+tigrbl-claim-cwt-confirmation-concrete = { path = "pkgs/10-concrete/tigrbl-claim-cwt-confirmation-concrete", editable = true }
+tigrbl-claim-workload-token-hash-concrete = { path = "pkgs/10-concrete/tigrbl-claim-workload-token-hash-concrete", editable = true }
+tigrbl-claim-transaction-token-hash-concrete = { path = "pkgs/10-concrete/tigrbl-claim-transaction-token-hash-concrete", editable = true }
+tigrbl-claim-other-token-hashes-concrete = { path = "pkgs/10-concrete/tigrbl-claim-other-token-hashes-concrete", editable = true }
 tigrbl-claim-scope-concrete = { path = "pkgs/10-concrete/tigrbl-claim-scope-concrete", editable = true }
 tigrbl-claim-client-id-concrete = { path = "pkgs/10-concrete/tigrbl-claim-client-id-concrete", editable = true }
 tigrbl-claim-verified-claims-concrete = { path = "pkgs/10-concrete/tigrbl-claim-verified-claims-concrete", editable = true }

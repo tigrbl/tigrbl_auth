@@ -3801,6 +3801,7 @@ dependencies = [
     { name = "tigrbl-claim-credential-status-concrete" },
     { name = "tigrbl-claim-credential-type-concrete" },
     { name = "tigrbl-claim-cwt-audience-concrete" },
+    { name = "tigrbl-claim-cwt-confirmation-concrete" },
     { name = "tigrbl-claim-cwt-expiration-concrete" },
     { name = "tigrbl-claim-cwt-id-concrete" },
     { name = "tigrbl-claim-cwt-issued-at-concrete" },
@@ -3830,6 +3831,7 @@ dependencies = [
     { name = "tigrbl-claim-nickname-concrete" },
     { name = "tigrbl-claim-nonce-concrete" },
     { name = "tigrbl-claim-not-before-concrete" },
+    { name = "tigrbl-claim-other-token-hashes-concrete" },
     { name = "tigrbl-claim-phone-number-concrete" },
     { name = "tigrbl-claim-phone-number-verified-concrete" },
     { name = "tigrbl-claim-picture-uri-concrete" },
@@ -3846,11 +3848,13 @@ dependencies = [
     { name = "tigrbl-claim-subject-identifiers-concrete" },
     { name = "tigrbl-claim-title-concrete" },
     { name = "tigrbl-claim-transaction-id-concrete" },
+    { name = "tigrbl-claim-transaction-token-hash-concrete" },
     { name = "tigrbl-claim-ueid-concrete" },
     { name = "tigrbl-claim-updated-at-concrete" },
     { name = "tigrbl-claim-updated-at-rfc3339-concrete" },
     { name = "tigrbl-claim-verified-claims-concrete" },
     { name = "tigrbl-claim-website-uri-concrete" },
+    { name = "tigrbl-claim-workload-token-hash-concrete" },
     { name = "tigrbl-claim-zoneinfo-concrete" },
     { name = "tigrbl-client-identity-concrete" },
     { name = "tigrbl-client-registration-capability" },
@@ -4295,6 +4299,7 @@ requires-dist = [
     { name = "tigrbl-claim-credential-status-concrete", editable = "pkgs/10-concrete/tigrbl-claim-credential-status-concrete" },
     { name = "tigrbl-claim-credential-type-concrete", editable = "pkgs/10-concrete/tigrbl-claim-credential-type-concrete" },
     { name = "tigrbl-claim-cwt-audience-concrete", editable = "pkgs/10-concrete/tigrbl-claim-cwt-audience-concrete" },
+    { name = "tigrbl-claim-cwt-confirmation-concrete", editable = "pkgs/10-concrete/tigrbl-claim-cwt-confirmation-concrete" },
     { name = "tigrbl-claim-cwt-expiration-concrete", editable = "pkgs/10-concrete/tigrbl-claim-cwt-expiration-concrete" },
     { name = "tigrbl-claim-cwt-id-concrete", editable = "pkgs/10-concrete/tigrbl-claim-cwt-id-concrete" },
     { name = "tigrbl-claim-cwt-issued-at-concrete", editable = "pkgs/10-concrete/tigrbl-claim-cwt-issued-at-concrete" },
@@ -4324,6 +4329,7 @@ requires-dist = [
     { name = "tigrbl-claim-nickname-concrete", editable = "pkgs/10-concrete/tigrbl-claim-nickname-concrete" },
     { name = "tigrbl-claim-nonce-concrete", editable = "pkgs/10-concrete/tigrbl-claim-nonce-concrete" },
     { name = "tigrbl-claim-not-before-concrete", editable = "pkgs/10-concrete/tigrbl-claim-not-before-concrete" },
+    { name = "tigrbl-claim-other-token-hashes-concrete", editable = "pkgs/10-concrete/tigrbl-claim-other-token-hashes-concrete" },
     { name = "tigrbl-claim-phone-number-concrete", editable = "pkgs/10-concrete/tigrbl-claim-phone-number-concrete" },
     { name = "tigrbl-claim-phone-number-verified-concrete", editable = "pkgs/10-concrete/tigrbl-claim-phone-number-verified-concrete" },
     { name = "tigrbl-claim-picture-uri-concrete", editable = "pkgs/10-concrete/tigrbl-claim-picture-uri-concrete" },
@@ -4340,11 +4346,13 @@ requires-dist = [
     { name = "tigrbl-claim-subject-identifiers-concrete", editable = "pkgs/10-concrete/tigrbl-claim-subject-identifiers-concrete" },
     { name = "tigrbl-claim-title-concrete", editable = "pkgs/10-concrete/tigrbl-claim-title-concrete" },
     { name = "tigrbl-claim-transaction-id-concrete", editable = "pkgs/10-concrete/tigrbl-claim-transaction-id-concrete" },
+    { name = "tigrbl-claim-transaction-token-hash-concrete", editable = "pkgs/10-concrete/tigrbl-claim-transaction-token-hash-concrete" },
     { name = "tigrbl-claim-ueid-concrete", editable = "pkgs/10-concrete/tigrbl-claim-ueid-concrete" },
     { name = "tigrbl-claim-updated-at-concrete", editable = "pkgs/10-concrete/tigrbl-claim-updated-at-concrete" },
     { name = "tigrbl-claim-updated-at-rfc3339-concrete", editable = "pkgs/10-concrete/tigrbl-claim-updated-at-rfc3339-concrete" },
     { name = "tigrbl-claim-verified-claims-concrete", editable = "pkgs/10-concrete/tigrbl-claim-verified-claims-concrete" },
     { name = "tigrbl-claim-website-uri-concrete", editable = "pkgs/10-concrete/tigrbl-claim-website-uri-concrete" },
+    { name = "tigrbl-claim-workload-token-hash-concrete", editable = "pkgs/10-concrete/tigrbl-claim-workload-token-hash-concrete" },
     { name = "tigrbl-claim-zoneinfo-concrete", editable = "pkgs/10-concrete/tigrbl-claim-zoneinfo-concrete" },
     { name = "tigrbl-client-identity-concrete", editable = "pkgs/10-concrete/tigrbl-client-identity-concrete" },
     { name = "tigrbl-client-registration-capability", editable = "pkgs/40-capabilities/tigrbl-client-registration-capability" },
@@ -5617,6 +5625,21 @@ dependencies = [
 requires-dist = [{ name = "tigrbl-claim-audience-concrete", specifier = "==0.4.0.dev2" }]
 
 [[package]]
+name = "tigrbl-claim-cwt-confirmation-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-claim-cwt-confirmation-concrete" }
+dependencies = [
+    { name = "tigrbl-claim-bases" },
+    { name = "tigrbl-identity-core" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-claim-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-claim-cwt-expiration-concrete"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-claim-cwt-expiration-concrete" }
@@ -6020,6 +6043,21 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-claim-other-token-hashes-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-claim-other-token-hashes-concrete" }
+dependencies = [
+    { name = "tigrbl-claim-bases" },
+    { name = "tigrbl-identity-core" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-claim-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-claim-phone-number-concrete"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-claim-phone-number-concrete" }
@@ -6248,6 +6286,21 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-claim-transaction-token-hash-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-claim-transaction-token-hash-concrete" }
+dependencies = [
+    { name = "tigrbl-claim-bases" },
+    { name = "tigrbl-identity-core" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-claim-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-claim-ueid-concrete"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-claim-ueid-concrete" }
@@ -6311,6 +6364,21 @@ requires-dist = [
 name = "tigrbl-claim-website-uri-concrete"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-claim-website-uri-concrete" }
+dependencies = [
+    { name = "tigrbl-claim-bases" },
+    { name = "tigrbl-identity-core" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-claim-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-claim-workload-token-hash-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-claim-workload-token-hash-concrete" }
 dependencies = [
     { name = "tigrbl-claim-bases" },
     { name = "tigrbl-identity-core" },
