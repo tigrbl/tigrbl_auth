@@ -4095,12 +4095,14 @@ dependencies = [
     { name = "tigrbl-wit-concrete" },
     { name = "tigrbl-wit-svid-credential-concrete" },
     { name = "tigrbl-workload-credential-brokering-capability" },
+    { name = "tigrbl-workload-credential-profile-wimse-wit" },
     { name = "tigrbl-workload-identity" },
     { name = "tigrbl-workload-identity-bases" },
     { name = "tigrbl-workload-identity-capability" },
     { name = "tigrbl-workload-identity-concrete" },
     { name = "tigrbl-workload-identity-contracts" },
     { name = "tigrbl-workload-identity-durability" },
+    { name = "tigrbl-workload-proof-profile-wimse-wpt" },
     { name = "tigrbl-workload-protocol-spiffe-svid" },
     { name = "tigrbl-wpt-concrete" },
     { name = "tigrbl-x509-svid-credential-concrete" },
@@ -4624,12 +4626,14 @@ requires-dist = [
     { name = "tigrbl-wit-concrete", editable = "pkgs/10-concrete/tigrbl-wit-concrete" },
     { name = "tigrbl-wit-svid-credential-concrete", editable = "pkgs/10-concrete/tigrbl-wit-svid-credential-concrete" },
     { name = "tigrbl-workload-credential-brokering-capability", editable = "pkgs/40-capabilities/tigrbl-workload-credential-brokering-capability" },
+    { name = "tigrbl-workload-credential-profile-wimse-wit", editable = "pkgs/50-protocols/tigrbl-workload-credential-profile-wimse-wit" },
     { name = "tigrbl-workload-identity", editable = "pkgs/deprecated/tigrbl-workload-identity" },
     { name = "tigrbl-workload-identity-bases", editable = "pkgs/05-bases/tigrbl-workload-identity-bases" },
     { name = "tigrbl-workload-identity-capability", editable = "pkgs/40-capabilities/tigrbl-workload-identity-capability" },
     { name = "tigrbl-workload-identity-concrete", editable = "pkgs/10-concrete/tigrbl-workload-identity-concrete" },
     { name = "tigrbl-workload-identity-contracts", editable = "pkgs/02-contracts/tigrbl-workload-identity-contracts" },
     { name = "tigrbl-workload-identity-durability", editable = "pkgs/30-storage-runtime/tigrbl-workload-identity-durability" },
+    { name = "tigrbl-workload-proof-profile-wimse-wpt", editable = "pkgs/50-protocols/tigrbl-workload-proof-profile-wimse-wpt" },
     { name = "tigrbl-workload-protocol-spiffe-svid", editable = "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-svid" },
     { name = "tigrbl-wpt-concrete", editable = "pkgs/10-concrete/tigrbl-wpt-concrete" },
     { name = "tigrbl-x509-svid-credential-concrete", editable = "pkgs/10-concrete/tigrbl-x509-svid-credential-concrete" },
@@ -10261,6 +10265,11 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-workload-credential-profile-wimse-wit"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/50-protocols/tigrbl-workload-credential-profile-wimse-wit" }
+
+[[package]]
 name = "tigrbl-workload-identity"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/deprecated/tigrbl-workload-identity" }
@@ -10347,6 +10356,11 @@ requires-dist = [
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
     { name = "tigrbl-table-durability", specifier = "==0.4.0.dev2" },
 ]
+
+[[package]]
+name = "tigrbl-workload-proof-profile-wimse-wpt"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/50-protocols/tigrbl-workload-proof-profile-wimse-wpt" }
 
 [[package]]
 name = "tigrbl-workload-protocol-spiffe-svid"
