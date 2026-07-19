@@ -4095,6 +4095,8 @@ dependencies = [
     { name = "tigrbl-wit-concrete" },
     { name = "tigrbl-wit-svid-credential-concrete" },
     { name = "tigrbl-workload-credential-brokering-capability" },
+    { name = "tigrbl-workload-credential-profile-cwt-svid-extension" },
+    { name = "tigrbl-workload-credential-profile-spiffe-wit-svid" },
     { name = "tigrbl-workload-credential-profile-wimse-wit" },
     { name = "tigrbl-workload-identity" },
     { name = "tigrbl-workload-identity-bases" },
@@ -4626,6 +4628,8 @@ requires-dist = [
     { name = "tigrbl-wit-concrete", editable = "pkgs/10-concrete/tigrbl-wit-concrete" },
     { name = "tigrbl-wit-svid-credential-concrete", editable = "pkgs/10-concrete/tigrbl-wit-svid-credential-concrete" },
     { name = "tigrbl-workload-credential-brokering-capability", editable = "pkgs/40-capabilities/tigrbl-workload-credential-brokering-capability" },
+    { name = "tigrbl-workload-credential-profile-cwt-svid-extension", editable = "pkgs/50-protocols/tigrbl-workload-credential-profile-cwt-svid-extension" },
+    { name = "tigrbl-workload-credential-profile-spiffe-wit-svid", editable = "pkgs/50-protocols/tigrbl-workload-credential-profile-spiffe-wit-svid" },
     { name = "tigrbl-workload-credential-profile-wimse-wit", editable = "pkgs/50-protocols/tigrbl-workload-credential-profile-wimse-wit" },
     { name = "tigrbl-workload-identity", editable = "pkgs/deprecated/tigrbl-workload-identity" },
     { name = "tigrbl-workload-identity-bases", editable = "pkgs/05-bases/tigrbl-workload-identity-bases" },
@@ -10262,6 +10266,36 @@ requires-dist = [
     { name = "tigrbl-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-workload-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-workload-credential-profile-cwt-svid-extension"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/50-protocols/tigrbl-workload-credential-profile-cwt-svid-extension" }
+dependencies = [
+    { name = "tigrbl-auth-protocol-cwt" },
+    { name = "tigrbl-security-protocol-cose" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-auth-protocol-cwt", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-protocol-cose", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-workload-credential-profile-spiffe-wit-svid"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/50-protocols/tigrbl-workload-credential-profile-spiffe-wit-svid" }
+dependencies = [
+    { name = "tigrbl-workload-credential-profile-wimse-wit" },
+    { name = "tigrbl-workload-protocol-spiffe-svid" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-workload-credential-profile-wimse-wit", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-workload-protocol-spiffe-svid", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
