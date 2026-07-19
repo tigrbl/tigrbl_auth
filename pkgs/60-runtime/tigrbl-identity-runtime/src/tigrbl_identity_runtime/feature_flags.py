@@ -83,7 +83,19 @@ FEATURE_FLAG_GROUPS: Final[dict[str, dict[str, object]]] = {
             "oauth21_alignment_mode": "OAuth 2.1 alignment tracking mode",
         },
     },
-    "extension_quarantine": {
+    "workload_identity": {
+        "description": "Explicit workload credential and endpoint profiles; drafts and experiments remain disabled by default.",
+        "flags": {
+            "enable_spiffe_x509_svid": "Stable SPIFFE X.509-SVID profile",
+            "enable_spiffe_jwt_svid": "Stable SPIFFE JWT-SVID profile",
+            "enable_spiffe_workload_api": "Stable SPIFFE Workload API",
+            "enable_spiffe_broker_api": "Incubating SPIFFE Broker API v1.15.1",
+            "enable_wimse_wit": "IETF draft WIMSE WIT",
+            "enable_wimse_wpt": "IETF draft WIMSE WPT",
+            "enable_spiffe_wit_svid": "Incubating SPIFFE WIT-SVID",
+            "enable_cwt_svid_extension": "Experimental non-SPIFFE CWT-SVID extension",
+        },
+    },    "extension_quarantine": {
         "description": "Flags outside the certified core boundary by default.",
         "flags": {
             "enable_rfc7800": "RFC 7800 proof-of-possession JWT semantics",

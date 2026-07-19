@@ -371,6 +371,23 @@ class Settings(BaseSettings):
     webauthn_allowed_algorithms: str = Field(default=os.environ.get("TIGRBL_AUTH_WEBAUTHN_ALLOWED_ALGORITHMS", "-7,-257"))
     enable_fido2_server_profile: bool = Field(default=_env_bool("TIGRBL_AUTH_ENABLE_FIDO2_SERVER_PROFILE"))
     enable_fido_metadata_service: bool = Field(default=_env_bool("TIGRBL_AUTH_ENABLE_FIDO_METADATA_SERVICE"))
+    enable_spiffe_x509_svid: bool = Field(default=_env_bool("TIGRBL_AUTH_ENABLE_SPIFFE_X509_SVID"))
+    enable_spiffe_jwt_svid: bool = Field(default=_env_bool("TIGRBL_AUTH_ENABLE_SPIFFE_JWT_SVID"))
+    enable_spiffe_workload_api: bool = Field(default=_env_bool("TIGRBL_AUTH_ENABLE_SPIFFE_WORKLOAD_API"))
+    enable_spiffe_broker_api: bool = Field(default=_env_bool("TIGRBL_AUTH_ENABLE_SPIFFE_BROKER_API"))
+    enable_wimse_wit: bool = Field(default=_env_bool("TIGRBL_AUTH_ENABLE_WIMSE_WIT"))
+    enable_wimse_wpt: bool = Field(default=_env_bool("TIGRBL_AUTH_ENABLE_WIMSE_WPT"))
+    enable_spiffe_wit_svid: bool = Field(default=_env_bool("TIGRBL_AUTH_ENABLE_SPIFFE_WIT_SVID"))
+    enable_cwt_svid_extension: bool = Field(default=_env_bool("TIGRBL_AUTH_ENABLE_CWT_SVID_EXTENSION"))
+    spiffe_workload_api_version: str = Field(default=os.environ.get("TIGRBL_AUTH_SPIFFE_WORKLOAD_API_VERSION", "SPIFFE-Workload-API-1.0"))
+    spiffe_broker_api_version: str = Field(default=os.environ.get("TIGRBL_AUTH_SPIFFE_BROKER_API_VERSION", "SPIFFE-v1.15.1-Broker-API"))
+    wimse_wit_version: str = Field(default=os.environ.get("TIGRBL_AUTH_WIMSE_WIT_VERSION", "draft-ietf-wimse-workload-creds-02"))
+    wimse_wpt_version: str = Field(default=os.environ.get("TIGRBL_AUTH_WIMSE_WPT_VERSION", "draft-ietf-wimse-wpt-01"))
+    spiffe_wit_svid_version: str = Field(default=os.environ.get("TIGRBL_AUTH_SPIFFE_WIT_SVID_VERSION", "SPIFFE-v1.15.1-WIT-SVID"))
+    cwt_svid_extension_version: str = Field(default=os.environ.get("TIGRBL_AUTH_CWT_SVID_EXTENSION_VERSION", "TIGRBL-CWT-SVID-EXPERIMENT-1"))
+    spiffe_workload_endpoint: str | None = Field(default=os.environ.get("TIGRBL_AUTH_SPIFFE_WORKLOAD_ENDPOINT"))
+    spiffe_broker_endpoint: str | None = Field(default=os.environ.get("TIGRBL_AUTH_SPIFFE_BROKER_ENDPOINT"))
+    spiffe_broker_authorized_principals: str = Field(default=os.environ.get("TIGRBL_AUTH_SPIFFE_BROKER_AUTHORIZED_PRINCIPALS", ""))
     enable_rfc8932: bool = Field(
         default=_env_bool("TIGRBL_AUTH_ENABLE_RFC8932"),
         description="Quarantined extension flag for RFC 8932 DNS privacy work; not part of the certified auth-core boundary.",
