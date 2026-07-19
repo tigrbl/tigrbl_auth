@@ -1,0 +1,10 @@
+[project]
+name="workload-credential-profiles-example"
+version="0.4.0.dev2"
+requires-python=">=3.10,<3.15"
+dependencies=["tigrbl-workload-credential-profile-wimse-wit==0.4.0.dev2","tigrbl-workload-proof-profile-wimse-wpt==0.4.0.dev2","tigrbl-workload-credential-profile-spiffe-wit-svid==0.4.0.dev2"]
+[build-system]
+requires=["poetry-core>=1.0.0"]
+build-backend="poetry.core.masonry.api"
+[tool.poetry]
+packages=[{include="workload_credential_profiles_example",from="src"}]

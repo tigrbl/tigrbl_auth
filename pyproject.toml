@@ -252,6 +252,8 @@ dependencies = [
     "tigrbl-claim-cwt-id-concrete==0.4.0.dev2",
     "tigrbl-auth-protocol-cwt==0.4.0.dev2",
     "tigrbl-workload-protocol-spiffe-svid==0.4.0.dev2",
+    "workload-credential-profiles-example==0.4.0.dev2",
+    "tigrbl-workload-credential-conformance-testkit==0.4.0.dev2",
     "tigrbl-workload-protocol-spiffe-broker-api==0.4.0.dev2",
     "tigrbl-workload-protocol-spiffe-workload-api==0.4.0.dev2",
     "tigrbl-workload-credential-profile-cwt-svid-extension==0.4.0.dev2",
@@ -1043,6 +1045,10 @@ tigrbl-workload-credential-profile-cwt-svid-extension = { path = "pkgs/50-protoc
 tigrbl-workload-protocol-spiffe-workload-api = { path = "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-workload-api", editable = true }
 
 tigrbl-workload-protocol-spiffe-broker-api = { path = "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-broker-api", editable = true }
+
+tigrbl-workload-credential-conformance-testkit = { path = "pkgs/120-tests/tigrbl-workload-credential-conformance-testkit", editable = true }
+
+workload-credential-profiles-example = { path = "pkgs/110-examples/workload-credential-profiles-example", editable = true }
 
 [project.scripts]
 tigrbl-auth = "tigrbl_identity_cli.cli.main:main"
