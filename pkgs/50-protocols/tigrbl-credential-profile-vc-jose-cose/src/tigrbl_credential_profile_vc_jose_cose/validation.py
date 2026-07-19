@@ -10,7 +10,11 @@ def _validate_vcdm(payload: Mapping[object, object], artifact_kind: str) -> None
     if not isinstance(context, Sequence) or isinstance(context, (str, bytes)):
         raise ValueError("VCDM @context is required")
     type_values = (types,) if isinstance(types, str) else tuple(types or ())
-    expected = "VerifiableCredential" if artifact_kind == "credential" else "VerifiablePresentation"
+    expected = (
+        "VerifiableCredential"
+        if artifact_kind == "credential"
+        else "VerifiablePresentation"
+    )
     if expected not in type_values:
         raise ValueError(f"VCDM type must include {expected}")
     if artifact_kind == "credential":
@@ -20,7 +24,12 @@ def _validate_vcdm(payload: Mapping[object, object], artifact_kind: str) -> None
         raise ValueError("secured VP requires verifiableCredential")
 
 
-def validate_jose_vc(headers: Mapping[str, object], claims: Mapping[str, object], *, media_type: str = "application/vc+jwt") -> None:
+def validate_jose_vc(
+    headers: Mapping[str, object],
+    claims: Mapping[str, object],
+    *,
+    media_type: str = "application/vc+jwt",
+) -> None:
     selected = select_format(media_type)
     if selected.envelope_family != "JOSE":
         raise ValueError("JOSE artifact requires a JOSE VC/VP media type")
@@ -32,7 +41,12 @@ def validate_jose_vc(headers: Mapping[str, object], claims: Mapping[str, object]
     _validate_vcdm(claims, selected.artifact_kind)
 
 
-def validate_cose_vc(protected_headers: Mapping[object, object], claims: Mapping[object, object], *, media_type: str = "application/vc+cose") -> None:
+def validate_cose_vc(
+    protected_headers: Mapping[object, object],
+    claims: Mapping[object, object],
+    *,
+    media_type: str = "application/vc+cose",
+) -> None:
     selected = select_format(media_type)
     if selected.envelope_family != "COSE":
         raise ValueError("COSE artifact requires a COSE VC/VP media type")

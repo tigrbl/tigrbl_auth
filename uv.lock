@@ -6716,6 +6716,9 @@ name = "tigrbl-credential-profile-vc-jose-cose"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-credential-profile-vc-jose-cose" }
 dependencies = [
+    { name = "cbor2" },
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-protected-envelope-contracts" },
     { name = "tigrbl-security-protocol-cose" },
     { name = "tigrbl-security-protocol-jws" },
     { name = "tigrbl-vc-cose-credential-concrete" },
@@ -6724,6 +6727,9 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "cbor2", specifier = ">=5.6.0" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-protected-envelope-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-protocol-cose", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-protocol-jws", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-vc-cose-credential-concrete", specifier = "==0.4.0.dev2" },
