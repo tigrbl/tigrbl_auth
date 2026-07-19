@@ -4,20 +4,25 @@ import argparse
 import asyncio
 from pathlib import Path
 
-from acme_notes_cli.device_login import DeviceLoginClient, persist_tokens
+from oauth_device_authorization_cli_example.device_login import (
+    DeviceLoginClient,
+    persist_tokens,
+)
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="acme-notes")
+    parser = argparse.ArgumentParser(prog="oauth-device-login")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    login_parser = subparsers.add_parser("login", help="Authenticate via tigrbl_auth device authorization")
+    login_parser = subparsers.add_parser(
+        "login", help="Authenticate via tigrbl_auth device authorization"
+    )
     login_parser.add_argument("--issuer", required=True)
     login_parser.add_argument("--client-id", required=True)
     login_parser.add_argument("--scope", default="openid profile email")
     login_parser.add_argument(
         "--token-cache",
-        default=str(Path.home() / ".acme-notes" / "tokens.json"),
+        default=str(Path.home() / ".tigrbl-oauth-device-example" / "tokens.json"),
     )
     return parser
 

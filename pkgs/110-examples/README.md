@@ -7,4 +7,4 @@ packages.
 
 Current package:
 
-- `acme-notes-cli`
+- `oauth-device-authorization-cli-example`

@@ -1,5 +1,5 @@
 [project]
-name = "acme-notes-cli"
+name = "oauth-device-authorization-cli-example"
 version = "0.1.0"
 description = "Example consumer package showing CLI login against tigrbl_auth device authorization."
 requires-python = ">=3.10"
@@ -8,7 +8,7 @@ dependencies = [
 ]
 
 [project.scripts]
-acme-notes = "acme_notes_cli.main:main"
+oauth-device-login = "oauth_device_authorization_cli_example.main:main"
 
 [build-system]
 requires = ["setuptools>=68"]

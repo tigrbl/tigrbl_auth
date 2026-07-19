@@ -47,14 +47,18 @@ class DeviceLoginClient:
         client = self._http_client or httpx.AsyncClient()
         close_client = self._http_client is None
         try:
-            response = await client.get(f"{self.issuer}/.well-known/oauth-authorization-server")
+            response = await client.get(
+                f"{self.issuer}/.well-known/oauth-authorization-server"
+            )
             response.raise_for_status()
             return response.json()
         finally:
             if close_client:
                 await client.aclose()
 
-    def _resolve_device_authorization_endpoints(self, metadata: dict[str, Any]) -> list[str]:
+    def _resolve_device_authorization_endpoints(
+        self, metadata: dict[str, Any]
+    ) -> list[str]:
         endpoints: list[str] = []
         endpoint = str(metadata.get("device_authorization_endpoint") or "").strip()
         if endpoint:
@@ -113,7 +117,9 @@ class DeviceLoginClient:
         try:
             while True:
                 if time.monotonic() - started > int(expires_in):
-                    raise DeviceLoginError("device authorization expired before approval")
+                    raise DeviceLoginError(
+                        "device authorization expired before approval"
+                    )
                 response = await client.post(
                     str(token_endpoint),
                     data={
@@ -133,7 +139,9 @@ class DeviceLoginClient:
                     poll_interval += 5
                     await asyncio.sleep(poll_interval)
                     continue
-                raise DeviceLoginError(f"device login failed: {error or 'unknown_error'}")
+                raise DeviceLoginError(
+                    f"device login failed: {error or 'unknown_error'}"
+                )
         finally:
             if close_client:
                 await client.aclose()

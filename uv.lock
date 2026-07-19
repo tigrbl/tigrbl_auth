@@ -9,17 +9,6 @@ resolution-markers = [
 ]
 
 [[package]]
-name = "acme-notes-cli"
-version = "0.1.0"
-source = { editable = "pkgs/110-examples/acme-notes-cli" }
-dependencies = [
-    { name = "httpx" },
-]
-
-[package.metadata]
-requires-dist = [{ name = "httpx", specifier = ">=0.28,<0.29" }]
-
-[[package]]
 name = "aiofiles"
 version = "25.1.0"
 source = { registry = "https://pypi.org/simple" }
@@ -889,6 +878,17 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/a2/c8/f0a45426d6d21e7ea3310a15cf90c43a14d9232c31a837702dba437f3373/numpy-2.4.4-pp311-pypy311_pp73-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:9b2aec6af35c113b05695ebb5749a787acd63cafc83086a05771d1e1cd1e555f", size = 16753552, upload-time = "2026-03-29T13:21:54.344Z" },
     { url = "https://files.pythonhosted.org/packages/04/74/f4c001f4714c3ad9ce037e18cf2b9c64871a84951eaa0baf683a9ca9301c/numpy-2.4.4-pp311-pypy311_pp73-win_amd64.whl", hash = "sha256:f2cf083b324a467e1ab358c105f6cad5ea950f50524668a80c486ff1db24e119", size = 12509075, upload-time = "2026-03-29T13:21:57.644Z" },
 ]
+
+[[package]]
+name = "oauth-device-authorization-cli-example"
+version = "0.1.0"
+source = { editable = "pkgs/110-examples/oauth-device-authorization-cli-example" }
+dependencies = [
+    { name = "httpx" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "httpx", specifier = ">=0.28,<0.29" }]
 
 [[package]]
 name = "orjson"
@@ -4124,7 +4124,7 @@ dependencies = [
 
 [package.optional-dependencies]
 examples = [
-    { name = "acme-notes-cli" },
+    { name = "oauth-device-authorization-cli-example" },
 ]
 hypercorn = [
     { name = "tigrbl-identity-runtime", extra = ["hypercorn"] },
@@ -4173,12 +4173,12 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "acme-notes-cli", marker = "extra == 'examples'", editable = "pkgs/110-examples/acme-notes-cli" },
     { name = "aiosqlite", specifier = "==0.22.1" },
     { name = "aiosqlite", marker = "extra == 'sqlite'", specifier = "==0.22.1" },
     { name = "asyncpg", marker = "extra == 'postgres'", specifier = "==0.31.0" },
     { name = "bcrypt", specifier = "==5.0.0" },
     { name = "httpx", specifier = "==0.28.1" },
+    { name = "oauth-device-authorization-cli-example", marker = "extra == 'examples'", editable = "pkgs/110-examples/oauth-device-authorization-cli-example" },
     { name = "psycopg2-binary", marker = "extra == 'postgres'", specifier = "==2.9.11" },
     { name = "pydantic", extras = ["email"], specifier = "==2.12.5" },
     { name = "pydantic-settings", specifier = "==2.13.1" },
