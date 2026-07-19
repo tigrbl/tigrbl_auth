@@ -23,21 +23,29 @@ from tigrbl_jose_swarmauri_provider.oidc_key_runtime import (
 )
 from tigrbl_identity_jose.standards.rfc7516 import decrypt_jwe, encrypt_jwe
 
+from ..id_token_profile import validate_id_token_profile
+
 # Mutable compatibility hooks retained for one release boundary. Environment
 # key operations remain implemented by the layer-20 provider.
 _provider = rsa_key_provider
 _service_cache = None
 
 
-def _header_alg(token: str) -> str:
+def _header(token: str) -> Mapping[str, object]:
     try:
         segment = token.split(".")[0]
         header = json.loads(
             base64.urlsafe_b64decode(segment + "=" * (-len(segment) % 4))
         )
-        return str(header.get("alg", "")).lower()
-    except Exception:
-        return ""
+    except Exception as exc:
+        raise InvalidTokenError("invalid ID Token protected header") from exc
+    if not isinstance(header, dict):
+        raise InvalidTokenError("invalid ID Token protected header")
+    return header
+
+
+def _header_alg(token: str) -> str:
+    return str(_header(token).get("alg", "")).lower()
 
 
 def oidc_hash(value: str) -> str:
@@ -77,7 +85,13 @@ async def mint_id_token(
 
 
 async def verify_id_token(
-    token: str, *, issuer: str, audience: Iterable[str] | str
+    token: str,
+    *,
+    issuer: str,
+    audience: Iterable[str] | str,
+    nonce: str | None = None,
+    now: int | None = None,
+    clock_skew: int = 0,
 ) -> dict:
     if settings.enable_id_token_encryption:
         token = await decrypt_jwe(
@@ -86,7 +100,23 @@ async def verify_id_token(
     if _header_alg(token) in {"", "none"}:
         raise InvalidTokenError("unsigned JWTs are not accepted")
     service, _ = await id_token_service()
-    return await service.verify(token, issuer=issuer, audience=audience)
+    claims = await service.verify(token, issuer=issuer, audience=audience)
+    accepted_audiences = (audience,) if isinstance(audience, str) else tuple(audience)
+    if not accepted_audiences:
+        raise InvalidTokenError("ID Token audience is required")
+    try:
+        validate_id_token_profile(
+            _header(token),
+            claims,
+            expected_issuer=issuer,
+            client_id=accepted_audiences[0],
+            expected_nonce=nonce,
+            now=now,
+            clock_skew=clock_skew,
+        )
+    except ValueError as exc:
+        raise InvalidTokenError(str(exc)) from exc
+    return claims
 
 
 async def rotate_rsa_jwt_key() -> str:
