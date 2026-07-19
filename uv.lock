@@ -3937,6 +3937,7 @@ dependencies = [
     { name = "tigrbl-identity-operator" },
     { name = "tigrbl-identity-policy" },
     { name = "tigrbl-identity-principals" },
+    { name = "tigrbl-identity-protocol-did-core" },
     { name = "tigrbl-identity-resource-server" },
     { name = "tigrbl-identity-rp" },
     { name = "tigrbl-identity-runtime" },
@@ -4458,6 +4459,7 @@ requires-dist = [
     { name = "tigrbl-identity-operator", editable = "pkgs/60-runtime/tigrbl-identity-operator" },
     { name = "tigrbl-identity-policy", editable = "pkgs/deprecated/tigrbl-identity-policy" },
     { name = "tigrbl-identity-principals", editable = "pkgs/10-concrete/tigrbl-identity-principals" },
+    { name = "tigrbl-identity-protocol-did-core", editable = "pkgs/50-protocols/tigrbl-identity-protocol-did-core" },
     { name = "tigrbl-identity-resource-server", editable = "pkgs/deprecated/tigrbl-identity-resource-server" },
     { name = "tigrbl-identity-rp", editable = "pkgs/deprecated/tigrbl-identity-rp" },
     { name = "tigrbl-identity-runtime", editable = "pkgs/60-runtime/tigrbl-identity-runtime" },
@@ -7797,6 +7799,17 @@ requires-dist = [
     { name = "tigrbl-user-identity-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-workload-identity-concrete", specifier = "==0.4.0.dev2" },
 ]
+
+[[package]]
+name = "tigrbl-identity-protocol-did-core"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/50-protocols/tigrbl-identity-protocol-did-core" }
+dependencies = [
+    { name = "tigrbl-did-document-concrete" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-did-document-concrete", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-identity-resource-server"

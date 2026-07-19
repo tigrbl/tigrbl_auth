@@ -329,6 +329,7 @@ dependencies = [
     "tigrbl-auth-protocol-oidc==0.4.0.dev2",
     "tigrbl-auth-protocol-webauthn==0.4.0.dev2",
     "tigrbl-security-protocol-jose==0.4.0.dev2",
+    "tigrbl-identity-protocol-did-core==0.4.0.dev2",
     "tigrbl-security-protocol-cose==0.4.0.dev2",
     "tigrbl-security-protocol-jws==0.4.0.dev2",
     "tigrbl-security-protocol-jwe==0.4.0.dev2",
@@ -1013,6 +1014,8 @@ tigrbl-trust-federation-graph-durability = { path = "pkgs/30-storage-runtime/tig
 tigrbl-security-protocol-jwe = { path = "pkgs/50-protocols/tigrbl-security-protocol-jwe", editable = true }
 tigrbl-security-protocol-jws = { path = "pkgs/50-protocols/tigrbl-security-protocol-jws", editable = true }
 tigrbl-security-protocol-cose = { path = "pkgs/50-protocols/tigrbl-security-protocol-cose", editable = true }
+
+tigrbl-identity-protocol-did-core = { path = "pkgs/50-protocols/tigrbl-identity-protocol-did-core", editable = true }
 
 [project.scripts]
 tigrbl-auth = "tigrbl_identity_cli.cli.main:main"
