@@ -3870,6 +3870,7 @@ dependencies = [
     { name = "tigrbl-cose-concrete" },
     { name = "tigrbl-cose-cryptography-provider" },
     { name = "tigrbl-credential-profile-sd-jwt-vc" },
+    { name = "tigrbl-credential-profile-vc-jose-cose" },
     { name = "tigrbl-credential-protocol-iso-mdoc" },
     { name = "tigrbl-credential-protocol-w3c-vcdm" },
     { name = "tigrbl-cwt-concrete" },
@@ -4393,6 +4394,7 @@ requires-dist = [
     { name = "tigrbl-cose-concrete", editable = "pkgs/10-concrete/tigrbl-cose-concrete" },
     { name = "tigrbl-cose-cryptography-provider", editable = "pkgs/20-providers/tigrbl-cose-cryptography-provider" },
     { name = "tigrbl-credential-profile-sd-jwt-vc", editable = "pkgs/50-protocols/tigrbl-credential-profile-sd-jwt-vc" },
+    { name = "tigrbl-credential-profile-vc-jose-cose", editable = "pkgs/50-protocols/tigrbl-credential-profile-vc-jose-cose" },
     { name = "tigrbl-credential-protocol-iso-mdoc", editable = "pkgs/50-protocols/tigrbl-credential-protocol-iso-mdoc" },
     { name = "tigrbl-credential-protocol-w3c-vcdm", editable = "pkgs/50-protocols/tigrbl-credential-protocol-w3c-vcdm" },
     { name = "tigrbl-cwt-concrete", editable = "pkgs/10-concrete/tigrbl-cwt-concrete" },
@@ -6681,6 +6683,25 @@ requires-dist = [
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-sd-jwt-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-sd-jwt-vc-credential-concrete", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-credential-profile-vc-jose-cose"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/50-protocols/tigrbl-credential-profile-vc-jose-cose" }
+dependencies = [
+    { name = "tigrbl-security-protocol-cose" },
+    { name = "tigrbl-security-protocol-jws" },
+    { name = "tigrbl-vc-cose-credential-concrete" },
+    { name = "tigrbl-vc-jose-credential-concrete" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-security-protocol-cose", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-protocol-jws", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-vc-cose-credential-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-vc-jose-credential-concrete", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
