@@ -37,6 +37,7 @@ from .credential_issuance_state import CredentialDeferredTransaction,CredentialI
 from .presentation_state import PresentationConsent,PresentationReplay,PresentationTransaction,VerifierRegistration
 from .attestation_state import AttestationAppraisalPolicy,AttestationEndorsement,AttestationEvidence,AttestationReferenceManifest,AttestationReferenceValue,AttestationResult
 from .spiffe_state import SpiffeTrustBundle,SvidRecord,TrustDomainFederation
+from .workload_credential_state import PossessionProofReplay,ProtectedArtifactReference,WorkloadCredentialEntitlement,WorkloadReferenceBinding
 from .security_event_state import SecurityEvent,SecurityEventDelivery,SecurityEventReplay,SecurityEventSubscription
 from .replay_reservation import ReplayReservation
 from .did_gnap_state import DidDocument,DidDocumentVersion,DidResolutionCache,DidService,DidVerificationMethod,GnapClientInstance,GnapContinuation,GnapGrant,GnapInteraction
@@ -179,6 +180,10 @@ _TABLE_MODELS = (
     SvidRecord,
     SpiffeTrustBundle,
     TrustDomainFederation,
+    WorkloadReferenceBinding,
+    WorkloadCredentialEntitlement,
+    ProtectedArtifactReference,
+    PossessionProofReplay,
     SecurityEvent,
     SecurityEventSubscription,
     SecurityEventDelivery,

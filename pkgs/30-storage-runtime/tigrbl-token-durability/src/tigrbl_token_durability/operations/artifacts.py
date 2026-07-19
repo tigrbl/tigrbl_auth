@@ -1,0 +1,6 @@
+"""Durable protected-artifact reference and possession-proof replay operations."""
+from tigrbl_identity_storage.tables import PossessionProofReplay, ProtectedArtifactReference
+from tigrbl_table_durability import create_table_handler
+register_protected_artifact_reference=create_table_handler(ProtectedArtifactReference)
+reserve_possession_proof_replay=create_table_handler(PossessionProofReplay)
+__all__=["register_protected_artifact_reference","reserve_possession_proof_replay"]

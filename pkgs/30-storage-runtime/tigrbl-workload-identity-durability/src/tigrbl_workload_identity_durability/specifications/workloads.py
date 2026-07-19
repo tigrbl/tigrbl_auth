@@ -7,6 +7,7 @@ from tigrbl_table_durability import makeRuntimeOperation
 from tigrbl_workload_identity_durability.operations.workloads import (
     activate_spiffe_trust_bundle,
     record_svid,
+    record_workload_credential,
 )
 
 SvidRecordTable = SvidRecord
@@ -14,7 +15,10 @@ SpiffeTrustBundleTable = SpiffeTrustBundle
 
 SvidRecordRuntimeSpec = deriveRuntimeTableSpec(
     SvidRecordTable,
-    operations=(makeRuntimeOperation(alias="record_svid", handler=record_svid),),
+    operations=(
+        makeRuntimeOperation(alias="record_workload_credential", handler=record_workload_credential),
+        makeRuntimeOperation(alias="record_svid", handler=record_svid),
+    ),
 )
 SpiffeTrustBundleRuntimeSpec = deriveRuntimeTableSpec(
     SpiffeTrustBundleTable,

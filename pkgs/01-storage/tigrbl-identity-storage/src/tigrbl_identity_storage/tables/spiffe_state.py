@@ -25,6 +25,9 @@ class SvidRecord(RestOltpTable, GUIDPk, Timestamped):
         storage=S(String(255), nullable=False, unique=True, index=True)
     )
     key_id: Mapped[str | None] = acol(storage=S(String(255), nullable=True, index=True))
+    proof_key_id: Mapped[str | None] = acol(storage=S(String(255), nullable=True, index=True))
+    confirmation_key_thumbprint: Mapped[str | None] = acol(storage=S(String(255), nullable=True, index=True))
+    profile_revision: Mapped[str | None] = acol(storage=S(String(255), nullable=True, index=True))
     bundle_version: Mapped[str | None] = acol(
         storage=S(String(128), nullable=True, index=True)
     )

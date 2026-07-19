@@ -1,0 +1,6 @@
+"""Durable workload-reference and credential-entitlement operations."""
+from tigrbl_identity_storage.tables import WorkloadCredentialEntitlement, WorkloadReferenceBinding
+from tigrbl_table_durability import create_table_handler
+bind_workload_reference=create_table_handler(WorkloadReferenceBinding)
+grant_workload_credential_entitlement=create_table_handler(WorkloadCredentialEntitlement)
+__all__=["bind_workload_reference","grant_workload_credential_entitlement"]
