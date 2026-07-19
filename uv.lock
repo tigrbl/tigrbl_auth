@@ -4039,7 +4039,10 @@ dependencies = [
     { name = "tigrbl-security-oidc-federation-provider" },
     { name = "tigrbl-security-proof-dpop" },
     { name = "tigrbl-security-proof-pkce" },
+    { name = "tigrbl-security-protocol-cose" },
     { name = "tigrbl-security-protocol-jose" },
+    { name = "tigrbl-security-protocol-jwe" },
+    { name = "tigrbl-security-protocol-jws" },
     { name = "tigrbl-security-provenance-bases" },
     { name = "tigrbl-security-sender-constraint-validator" },
     { name = "tigrbl-security-signing-pqc" },
@@ -4561,7 +4564,10 @@ requires-dist = [
     { name = "tigrbl-security-oidc-federation-provider", editable = "pkgs/20-providers/tigrbl-security-oidc-federation-provider" },
     { name = "tigrbl-security-proof-dpop", editable = "pkgs/20-providers/tigrbl-security-proof-dpop" },
     { name = "tigrbl-security-proof-pkce", editable = "pkgs/20-providers/tigrbl-security-proof-pkce" },
+    { name = "tigrbl-security-protocol-cose", editable = "pkgs/50-protocols/tigrbl-security-protocol-cose" },
     { name = "tigrbl-security-protocol-jose", editable = "pkgs/50-protocols/tigrbl-security-protocol-jose" },
+    { name = "tigrbl-security-protocol-jwe", editable = "pkgs/50-protocols/tigrbl-security-protocol-jwe" },
+    { name = "tigrbl-security-protocol-jws", editable = "pkgs/50-protocols/tigrbl-security-protocol-jws" },
     { name = "tigrbl-security-provenance-bases", editable = "pkgs/05-bases/tigrbl-security-provenance-bases" },
     { name = "tigrbl-security-sender-constraint-validator", editable = "pkgs/deprecated/tigrbl-security-sender-constraint-validator" },
     { name = "tigrbl-security-signing-pqc", editable = "pkgs/20-providers/tigrbl-security-signing-pqc" },
@@ -9419,6 +9425,11 @@ dependencies = [
 requires-dist = [{ name = "tigrbl-pkce-concrete", specifier = "==0.4.0.dev2" }]
 
 [[package]]
+name = "tigrbl-security-protocol-cose"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/50-protocols/tigrbl-security-protocol-cose" }
+
+[[package]]
 name = "tigrbl-security-protocol-jose"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-security-protocol-jose" }
@@ -9432,6 +9443,16 @@ requires-dist = [
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-jose-concrete", specifier = "==0.4.0.dev2" },
 ]
+
+[[package]]
+name = "tigrbl-security-protocol-jwe"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/50-protocols/tigrbl-security-protocol-jwe" }
+
+[[package]]
+name = "tigrbl-security-protocol-jws"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/50-protocols/tigrbl-security-protocol-jws" }
 
 [[package]]
 name = "tigrbl-security-provenance-bases"

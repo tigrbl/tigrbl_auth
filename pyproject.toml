@@ -329,6 +329,9 @@ dependencies = [
     "tigrbl-auth-protocol-oidc==0.4.0.dev2",
     "tigrbl-auth-protocol-webauthn==0.4.0.dev2",
     "tigrbl-security-protocol-jose==0.4.0.dev2",
+    "tigrbl-security-protocol-cose==0.4.0.dev2",
+    "tigrbl-security-protocol-jws==0.4.0.dev2",
+    "tigrbl-security-protocol-jwe==0.4.0.dev2",
     "tigrbl-auth-protocol-oid4vci==0.4.0.dev2",
     "tigrbl-auth-protocol-oid4vp==0.4.0.dev2",
     "tigrbl-auth-protocol-authzen==0.4.0.dev2",
@@ -1006,6 +1009,10 @@ tigrbl-audit-durability = { path = "pkgs/30-storage-runtime/tigrbl-audit-durabil
 tigrbl-key-material-durability = { path = "pkgs/30-storage-runtime/tigrbl-key-material-durability", editable = true }
 tigrbl-authority-graph-durability = { path = "pkgs/30-storage-runtime/tigrbl-authority-graph-durability", editable = true }
 tigrbl-trust-federation-graph-durability = { path = "pkgs/30-storage-runtime/tigrbl-trust-federation-graph-durability", editable = true }
+
+tigrbl-security-protocol-jwe = { path = "pkgs/50-protocols/tigrbl-security-protocol-jwe", editable = true }
+tigrbl-security-protocol-jws = { path = "pkgs/50-protocols/tigrbl-security-protocol-jws", editable = true }
+tigrbl-security-protocol-cose = { path = "pkgs/50-protocols/tigrbl-security-protocol-cose", editable = true }
 
 [project.scripts]
 tigrbl-auth = "tigrbl_identity_cli.cli.main:main"
