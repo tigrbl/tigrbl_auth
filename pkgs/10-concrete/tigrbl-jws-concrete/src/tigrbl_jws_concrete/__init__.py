@@ -6,6 +6,9 @@ from typing import Mapping
 
 from tigrbl_identity_core.base64url import base64url_decode, base64url_encode
 
+from .json_serialization import JwsJson, JwsJsonSignature, parse_jws_json
+from .rfc7797 import validate_unencoded_payload_headers
+
 
 def _decode_segment(segment: str, *, name: str) -> bytes:
     try:
@@ -61,16 +64,24 @@ def parse_jws_compact(value: str) -> JwsCompact:
         raise TypeError("compact JWS must be text")
     parts = value.split(".")
     if len(parts) != 3 or not parts[0] or not parts[2]:
-        raise ValueError("compact JWS requires protected, payload, and signature segments")
+        raise ValueError(
+            "compact JWS requires protected, payload, and signature segments"
+        )
     protected = _decode_header(parts[0])
     payload = None if parts[1] == "" else _decode_segment(parts[1], name="payload")
     signature = _decode_segment(parts[2], name="signature")
     if not signature:
         raise ValueError("JWS signature must not be empty")
-    return JwsCompact(value, parts[0], parts[1], parts[2], protected, payload, signature)
+    return JwsCompact(
+        value, parts[0], parts[1], parts[2], protected, payload, signature
+    )
 
 
-from .json_serialization import JwsJson, JwsJsonSignature, parse_jws_json
-from .rfc7797 import validate_unencoded_payload_headers
-
-__all__ = ["JwsCompact", "JwsJson", "JwsJsonSignature", "parse_jws_compact", "parse_jws_json", "validate_unencoded_payload_headers"]
+__all__ = [
+    "JwsCompact",
+    "JwsJson",
+    "JwsJsonSignature",
+    "parse_jws_compact",
+    "parse_jws_json",
+    "validate_unencoded_payload_headers",
+]

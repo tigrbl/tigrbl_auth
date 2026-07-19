@@ -72,6 +72,14 @@ effective_deployment:
     surface_diagnostics_enabled: false
     surface_plugin_mode: public-only
     oauth21_alignment_mode: tracked
+    enable_spiffe_x509_svid: false
+    enable_spiffe_jwt_svid: false
+    enable_spiffe_workload_api: false
+    enable_spiffe_broker_api: false
+    enable_wimse_wit: false
+    enable_wimse_wpt: false
+    enable_spiffe_wit_svid: false
+    enable_cwt_svid_extension: false
     enable_rfc7800: false
     enable_rfc8417: false
     enable_rfc8291: false

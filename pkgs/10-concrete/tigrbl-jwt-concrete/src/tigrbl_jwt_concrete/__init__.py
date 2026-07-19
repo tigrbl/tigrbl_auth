@@ -6,6 +6,8 @@ from typing import Mapping
 
 from tigrbl_jws_concrete import JwsCompact, parse_jws_compact
 
+from .validation import validate_registered_claims
+
 
 @dataclass(frozen=True, slots=True)
 class JwtObject:
@@ -27,7 +29,5 @@ def decode_jwt_unverified(value: str) -> JwtObject:
         raise ValueError("JWT claims must be a JSON object")
     return JwtObject(value, jws, claims)
 
-
-from .validation import validate_registered_claims
 
 __all__ = ["JwtObject", "decode_jwt_unverified", "validate_registered_claims"]

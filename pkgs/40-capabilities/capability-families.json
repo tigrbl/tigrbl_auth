@@ -414,6 +414,33 @@
         "providers": []
       },
       "families": [
+        "identity-document"
+      ],
+      "implementations": [
+        {
+          "capability_id": "identity-document.processing",
+          "class": "IdentityDocumentCapability",
+          "operations": [
+            "publish_identity_document",
+            "resolve_identity_document",
+            "verify_identity_document"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-identity-document-capability/src/tigrbl_identity_document_capability/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-identity-document-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate identity-document parsing, resolution, and verification through injected implementations"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
         "key"
       ],
       "implementations": [
@@ -513,11 +540,10 @@
       "dependencies": {
         "capabilities": [],
         "durability": [
-          "tigrbl-authorization-policy-durability"
-        ],
-        "providers": [
+          "tigrbl-authorization-policy-durability",
           "tigrbl-policy-administration-memory-provider"
-        ]
+        ],
+        "providers": []
       },
       "families": [
         "policy"
@@ -595,6 +621,60 @@
         "tigrbl-auth-protocol-authzen"
       ],
       "purpose": "coordinate normalized policy evaluation, batch evaluation, entity search, and service description"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "possession-proof"
+      ],
+      "implementations": [
+        {
+          "capability_id": "possession-proof.processing",
+          "class": "PossessionProofCapability",
+          "operations": [
+            "evaluate_proof_context",
+            "issue_possession_proof",
+            "resolve_confirmation_key",
+            "verify_possession_proof"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-possession-proof-capability/src/tigrbl_possession_proof_capability/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-possession-proof-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate proof verification with replay acceptance and holder-binding evaluation"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "protected-envelope"
+      ],
+      "implementations": [
+        {
+          "capability_id": "protected-envelope.processing",
+          "class": "ProtectedEnvelopeCapability",
+          "operations": [
+            "protect_envelope",
+            "verify_envelope"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-protected-envelope-capability/src/tigrbl_protected_envelope_capability/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-protected-envelope-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate protected-envelope issuance and verification through injected cryptographic implementations"
     },
     {
       "compatibility_aggregator": false,
@@ -952,18 +1032,46 @@
         "providers": []
       },
       "families": [
+        "workload-credential"
+      ],
+      "implementations": [
+        {
+          "capability_id": "workload-credential.brokering",
+          "class": "WorkloadCredentialBrokeringCapability",
+          "operations": [
+            "authorize_delegated_credential_access",
+            "obtain_delegated_workload_credentials",
+            "resolve_delegated_workload_trust",
+            "resolve_workload_reference",
+            "watch_delegated_workload_credentials"
+          ],
+          "source": "pkgs/40-capabilities/tigrbl-workload-credential-brokering-capability/src/tigrbl_workload_credential_brokering_capability/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tigrbl-workload-credential-brokering-capability",
+      "protocol_packages": [],
+      "purpose": "coordinate delegated workload reference resolution, authorization, credential delivery, and trust material"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
         "workload-identity"
       ],
       "implementations": [
         {
-          "capability_id": "workload-identity.spiffe",
+          "capability_id": "workload-identity.credentials",
           "class": "WorkloadIdentityCapability",
           "operations": [
-            "fetch_jwt_svid",
-            "fetch_x509_svid",
-            "refresh",
-            "resolve_bundle",
-            "verify_svid"
+            "obtain_workload_credential",
+            "refresh_workload_credentials",
+            "resolve_workload_trust",
+            "verify_workload_credential"
           ],
           "source": "pkgs/40-capabilities/tigrbl-workload-identity-capability/src/tigrbl_workload_identity/__init__.py",
           "version": "1.0"

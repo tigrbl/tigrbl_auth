@@ -16,8 +16,6 @@ STATUS: Final[str] = "dynamic-client-registration-runtime"
 RFC7591_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc7591"
 
 
-
-
 OWNER = StandardOwner(
     label="RFC 7591",
     title="OAuth 2.0 Dynamic Client Registration Protocol",
@@ -48,9 +46,7 @@ class RFC7591DynamicClientRegistrationService:
             )
         call = await self.capability.call("register_client", request)
         if not isinstance(call.value, ClientRegistrationRecord):
-            raise TypeError(
-                "client.registration must return ClientRegistrationRecord"
-            )
+            raise TypeError("client.registration must return ClientRegistrationRecord")
         return call.value
 
 

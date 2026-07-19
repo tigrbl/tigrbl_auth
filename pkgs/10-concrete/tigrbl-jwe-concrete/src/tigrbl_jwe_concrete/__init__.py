@@ -6,6 +6,8 @@ from typing import Mapping
 
 from tigrbl_identity_core.base64url import base64url_decode
 
+from .json_serialization import JweJson, JweRecipient, parse_jwe_json
+
 
 def _decode(segment: str, *, name: str, allow_empty: bool = False) -> bytes:
     if segment == "" and allow_empty:
@@ -64,6 +66,10 @@ def parse_jwe_compact(value: str) -> JweCompact:
     )
 
 
-from .json_serialization import JweJson, JweRecipient, parse_jwe_json
-
-__all__ = ["JweCompact", "JweJson", "JweRecipient", "parse_jwe_compact", "parse_jwe_json"]
+__all__ = [
+    "JweCompact",
+    "JweJson",
+    "JweRecipient",
+    "parse_jwe_compact",
+    "parse_jwe_json",
+]

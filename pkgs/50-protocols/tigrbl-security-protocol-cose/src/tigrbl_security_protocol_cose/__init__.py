@@ -5,4 +5,15 @@ from .migrations import migration_path
 from .profile import COSEProfile
 from .versions import CURRENT_VERSION, VERSION_HISTORY, COSEVersion, select_version
 
-__all__ = ["CoseProtocol", "CURRENT_VERSION", "VERSION_HISTORY", "COSEProfile", "COSEVersion", "CompatibilityDecision", "migration_path", "require_exact_version", "select_version", "supports"]
+__all__ = [
+    "CoseProtocol",
+    "CURRENT_VERSION",
+    "VERSION_HISTORY",
+    "COSEProfile",
+    "COSEVersion",
+    "CompatibilityDecision",
+    "migration_path",
+    "require_exact_version",
+    "select_version",
+    "supports",
+]

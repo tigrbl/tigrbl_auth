@@ -20,7 +20,9 @@ from tigrbl_security_trust_contracts import MTLSClientAuthentication
 from cryptography import x509
 from cryptography.hazmat.primitives import serialization
 
-from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
+from tigrbl_identity_contracts.protocol_configuration import (
+    protocol_settings as settings,
+)
 from tigrbl_identity_core.errors import InvalidTokenError
 from tigrbl_auth_protocol_oauth.standards._mtls_identity import (
     certificate_matches_registered_identity,
@@ -147,7 +149,9 @@ def _scope_trusts_certificate_headers(request_or_mapping: Any) -> bool:
     if any(bool(scope.get(key)) for key in _TRUSTED_CERTIFICATE_SCOPE_KEYS):
         return True
     state = getattr(request_or_mapping, "state", None)
-    return any(bool(getattr(state, key, False)) for key in _TRUSTED_CERTIFICATE_SCOPE_KEYS)
+    return any(
+        bool(getattr(state, key, False)) for key in _TRUSTED_CERTIFICATE_SCOPE_KEYS
+    )
 
 
 def _header_certificate_thumbprint(request_or_mapping: Any) -> str | None:
@@ -177,7 +181,9 @@ def _scope_certificate_thumbprint(request_or_mapping: Any) -> str | None:
     return None
 
 
-def presented_certificate_pem(request_or_mapping: Any, *, trusted_proxy: bool = False) -> bytes | None:
+def presented_certificate_pem(
+    request_or_mapping: Any, *, trusted_proxy: bool = False
+) -> bytes | None:
     scope = _scope_from_request(request_or_mapping)
     for key in _SCOPE_CERTIFICATE_PEM_KEYS:
         pem = normalize_presented_pem(scope.get(key))
@@ -193,7 +199,9 @@ def presented_certificate_pem(request_or_mapping: Any, *, trusted_proxy: bool = 
     return None
 
 
-def presented_trusted_certificate_thumbprint(request_or_mapping: Any, *, trusted_proxy: bool = False) -> str | None:
+def presented_trusted_certificate_thumbprint(
+    request_or_mapping: Any, *, trusted_proxy: bool = False
+) -> str | None:
     scope_thumbprint = _scope_certificate_thumbprint(request_or_mapping)
     if scope_thumbprint:
         return scope_thumbprint
@@ -203,7 +211,9 @@ def presented_trusted_certificate_thumbprint(request_or_mapping: Any, *, trusted
 
 
 def presented_certificate_thumbprint(request_or_mapping: Any) -> str | None:
-    return _header_certificate_thumbprint(request_or_mapping) or _scope_certificate_thumbprint(request_or_mapping)
+    return _header_certificate_thumbprint(
+        request_or_mapping
+    ) or _scope_certificate_thumbprint(request_or_mapping)
 
 
 def _coerce_thumbprints(value: Any) -> tuple[str, ...]:
@@ -232,7 +242,9 @@ def registered_certificate_thumbprints(
     token_endpoint_auth_method: str | None = None,
 ) -> tuple[str, ...]:
     metadata = dict(registration_metadata or {})
-    auth_method = str(token_endpoint_auth_method or metadata.get("token_endpoint_auth_method") or "").strip()
+    auth_method = str(
+        token_endpoint_auth_method or metadata.get("token_endpoint_auth_method") or ""
+    ).strip()
     thumbprints: list[str] = []
     if auth_method in {"", TLS_CLIENT_AUTH_METHOD}:
         for key in _TLS_CERT_THUMBPRINT_KEYS:
@@ -261,27 +273,49 @@ def authenticate_mtls_client(
         or TLS_CLIENT_AUTH_METHOD
     ).strip()
     if auth_method not in SUPPORTED_MTLS_AUTH_METHODS:
-        raise ValueError("unsupported token_endpoint_auth_method for mTLS client authentication")
+        raise ValueError(
+            "unsupported token_endpoint_auth_method for mTLS client authentication"
+        )
     pem = normalize_presented_pem(presented_certificate_pem)
     effective_thumbprint = _normalize_presented_thumbprint(presented_thumbprint)
     if not effective_thumbprint and pem:
         effective_thumbprint = thumbprint_from_cert_pem(pem)
     if not effective_thumbprint:
-        raise ValueError("client certificate thumbprint required for mTLS client authentication")
+        raise ValueError(
+            "client certificate thumbprint required for mTLS client authentication"
+        )
     allowed = registered_certificate_thumbprints(
         registration_metadata,
         token_endpoint_auth_method=auth_method,
     )
     if allowed:
         if effective_thumbprint not in set(allowed):
-            raise ValueError("presented client certificate thumbprint is not registered for this client")
-        return MTLSClientAuthentication(auth_method=auth_method, cert_thumbprint=effective_thumbprint)
-    if auth_method == TLS_CLIENT_AUTH_METHOD and pem and certificate_matches_registered_identity(pem, registration_metadata):
-        return MTLSClientAuthentication(auth_method=auth_method, cert_thumbprint=effective_thumbprint)
-    if auth_method == TLS_CLIENT_AUTH_METHOD and any(registered_certificate_identity_metadata(registration_metadata).values()):
-        raise ValueError("presented client certificate identity is not registered for this client")
-    raise ValueError("registration metadata does not pin an allowed client certificate thumbprint")
-    return MTLSClientAuthentication(auth_method=auth_method, cert_thumbprint=effective_thumbprint)
+            raise ValueError(
+                "presented client certificate thumbprint is not registered for this client"
+            )
+        return MTLSClientAuthentication(
+            auth_method=auth_method, cert_thumbprint=effective_thumbprint
+        )
+    if (
+        auth_method == TLS_CLIENT_AUTH_METHOD
+        and pem
+        and certificate_matches_registered_identity(pem, registration_metadata)
+    ):
+        return MTLSClientAuthentication(
+            auth_method=auth_method, cert_thumbprint=effective_thumbprint
+        )
+    if auth_method == TLS_CLIENT_AUTH_METHOD and any(
+        registered_certificate_identity_metadata(registration_metadata).values()
+    ):
+        raise ValueError(
+            "presented client certificate identity is not registered for this client"
+        )
+    raise ValueError(
+        "registration metadata does not pin an allowed client certificate thumbprint"
+    )
+    return MTLSClientAuthentication(
+        auth_method=auth_method, cert_thumbprint=effective_thumbprint
+    )
 
 
 def validate_certificate_binding(
@@ -300,9 +334,13 @@ def validate_certificate_binding(
     bound = _normalize_presented_thumbprint(cnf.get("x5t#S256"))
     effective_thumbprint = _normalize_presented_thumbprint(presented_thumbprint)
     if not bound:
-        raise InvalidTokenError(f"x5t#S256 confirmation claim required by RFC 8705: {RFC8705_SPEC_URL}")
+        raise InvalidTokenError(
+            f"x5t#S256 confirmation claim required by RFC 8705: {RFC8705_SPEC_URL}"
+        )
     if bound != effective_thumbprint:
-        raise InvalidTokenError(f"certificate thumbprint mismatch per RFC 8705: {RFC8705_SPEC_URL}")
+        raise InvalidTokenError(
+            f"certificate thumbprint mismatch per RFC 8705: {RFC8705_SPEC_URL}"
+        )
 
 
 def validate_request_certificate_binding(

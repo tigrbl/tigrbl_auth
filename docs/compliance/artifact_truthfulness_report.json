@@ -10,7 +10,7 @@
     "runtime_plan_to_discovery_sync_passed": true,
     "runner_contract_hash_invariance_passed": true,
     "authoritative_current_doc_stale_ref_count": 0,
-    "historical_doc_stale_ref_count": 169,
+    "historical_doc_stale_ref_count": 168,
     "openapi_profile_count_checked": 5,
     "discovery_profile_count_checked": 5
   },
@@ -469,9 +469,9 @@
     "runner_profiles": {
       "baseline": {
         "application_hashes": {
-          "hypercorn": "8a0c15f97e9d1b61f0c8d9efb79baabb1e7561bc1c051b298ef0d31015c87832",
-          "tigrcorn": "8a0c15f97e9d1b61f0c8d9efb79baabb1e7561bc1c051b298ef0d31015c87832",
-          "uvicorn": "8a0c15f97e9d1b61f0c8d9efb79baabb1e7561bc1c051b298ef0d31015c87832"
+          "hypercorn": "73d14059d8c69d2cd278453d6ed9a0c6372a1545247bebaa875da2cef0fbd3d2",
+          "tigrcorn": "73d14059d8c69d2cd278453d6ed9a0c6372a1545247bebaa875da2cef0fbd3d2",
+          "uvicorn": "73d14059d8c69d2cd278453d6ed9a0c6372a1545247bebaa875da2cef0fbd3d2"
         },
         "contract_hashes": {
           "hypercorn": {
@@ -507,9 +507,9 @@
       },
       "production": {
         "application_hashes": {
-          "hypercorn": "6cb34b3a45175bb63fd5f13c8b9006e59f224fcde89de67dd74e7db30e1c168e",
-          "tigrcorn": "6cb34b3a45175bb63fd5f13c8b9006e59f224fcde89de67dd74e7db30e1c168e",
-          "uvicorn": "6cb34b3a45175bb63fd5f13c8b9006e59f224fcde89de67dd74e7db30e1c168e"
+          "hypercorn": "a6be4e5395e04e111e66bb28ce0faa224939b72e083cb0c59ff40f0dda8b5c9e",
+          "tigrcorn": "a6be4e5395e04e111e66bb28ce0faa224939b72e083cb0c59ff40f0dda8b5c9e",
+          "uvicorn": "a6be4e5395e04e111e66bb28ce0faa224939b72e083cb0c59ff40f0dda8b5c9e"
         },
         "contract_hashes": {
           "hypercorn": {
@@ -548,9 +548,9 @@
       },
       "hardening": {
         "application_hashes": {
-          "hypercorn": "90ffddac66744a66e12527f95003183fc8fe11c9d2399c08cb5536f4f15d7386",
-          "tigrcorn": "90ffddac66744a66e12527f95003183fc8fe11c9d2399c08cb5536f4f15d7386",
-          "uvicorn": "90ffddac66744a66e12527f95003183fc8fe11c9d2399c08cb5536f4f15d7386"
+          "hypercorn": "0c9559904f0e80949bf76c8216214ad38db6031b36ec5324627f165dc955f635",
+          "tigrcorn": "0c9559904f0e80949bf76c8216214ad38db6031b36ec5324627f165dc955f635",
+          "uvicorn": "0c9559904f0e80949bf76c8216214ad38db6031b36ec5324627f165dc955f635"
         },
         "contract_hashes": {
           "hypercorn": {
@@ -589,9 +589,9 @@
       },
       "fapi2-security": {
         "application_hashes": {
-          "hypercorn": "7292451ced33651d33ffe5a535c380cfbcb203c6be896d44e43bb73f30f1e303",
-          "tigrcorn": "7292451ced33651d33ffe5a535c380cfbcb203c6be896d44e43bb73f30f1e303",
-          "uvicorn": "7292451ced33651d33ffe5a535c380cfbcb203c6be896d44e43bb73f30f1e303"
+          "hypercorn": "3d80e0cd9bf1ad8604b3be7acb505efcfd58f0a8421506fae36b475b600c792d",
+          "tigrcorn": "3d80e0cd9bf1ad8604b3be7acb505efcfd58f0a8421506fae36b475b600c792d",
+          "uvicorn": "3d80e0cd9bf1ad8604b3be7acb505efcfd58f0a8421506fae36b475b600c792d"
         },
         "contract_hashes": {
           "hypercorn": {
@@ -630,9 +630,9 @@
       },
       "peer-claim": {
         "application_hashes": {
-          "hypercorn": "09538ae6bd68178edc30dcfa31e74b43181927843b2a1c57aaf1a43ea8460107",
-          "tigrcorn": "09538ae6bd68178edc30dcfa31e74b43181927843b2a1c57aaf1a43ea8460107",
-          "uvicorn": "09538ae6bd68178edc30dcfa31e74b43181927843b2a1c57aaf1a43ea8460107"
+          "hypercorn": "d4ec06181e36af836c14acc0a0d664009c0381b86df105e72a1ced9808e2fe49",
+          "tigrcorn": "d4ec06181e36af836c14acc0a0d664009c0381b86df105e72a1ced9808e2fe49",
+          "uvicorn": "d4ec06181e36af836c14acc0a0d664009c0381b86df105e72a1ced9808e2fe49"
         },
         "contract_hashes": {
           "hypercorn": {
@@ -1048,9 +1048,6 @@
         ],
         "tigrbl_auth/services/tenant_discovery.py": [
           "docs/compliance/tenant_trust_domain_authority_phase3.md"
-        ],
-        "tigrbl_auth/api/lifecycle.py": [
-          "docs/runbooks/MIGRATION_AND_ROLLFORWARD.md"
         ]
       }
     }

@@ -6,4 +6,4 @@ from tigrbl_mdoc_concrete.device_response import (
     parse_device_response,
 )
 
-__all__ = ['DeviceResponse', 'DeviceResponseStatus', 'parse_device_response']
+__all__ = ["DeviceResponse", "DeviceResponseStatus", "parse_device_response"]

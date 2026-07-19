@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+
 @dataclass(frozen=True, slots=True)
 class JWSVersion:
     identifier: str
@@ -7,8 +8,15 @@ class JWSVersion:
     published: str
     specification_uri: str
 
-CURRENT_VERSION = JWSVersion("RFC7515", "standards-track", "2015-05", "https://www.rfc-editor.org/rfc/rfc7515.html")
+
+CURRENT_VERSION = JWSVersion(
+    "RFC7515",
+    "standards-track",
+    "2015-05",
+    "https://www.rfc-editor.org/rfc/rfc7515.html",
+)
 VERSION_HISTORY = (CURRENT_VERSION,)
+
 
 def select_version(identifier: str = "RFC7515") -> JWSVersion:
     if identifier != CURRENT_VERSION.identifier:

@@ -11,7 +11,9 @@ from __future__ import annotations
 
 
 from typing import Any, Dict, List, Optional, Union
-from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
+from tigrbl_identity_contracts.protocol_configuration import (
+    protocol_settings as settings,
+)
 from tigrbl_auth_protocol_oauth.jwtoken import JWTCoder
 from tigrbl_auth_protocol_oauth.standards.json_web_token import decode_jwt, encode_jwt
 from tigrbl_identity_contracts.protocols import TokenType
@@ -31,6 +33,7 @@ __all__ = [
     "validate_subject_token",
     "validate_token_exchange_request",
 ]
+
 
 def _header_value(value: object) -> str | None:
     if value is None:
@@ -284,5 +287,3 @@ def exchange_token(
         scope=scope,
         issued_token_type=issued_token_type,
     )
-
-

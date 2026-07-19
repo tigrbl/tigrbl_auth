@@ -8,8 +8,12 @@ from typing import Any, Final, Iterable
 
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
 
-from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
-from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import SUPPORTED_MTLS_AUTH_METHODS
+from tigrbl_identity_contracts.protocol_configuration import (
+    protocol_settings as settings,
+)
+from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import (
+    SUPPORTED_MTLS_AUTH_METHODS,
+)
 from tigrbl_auth_protocol_oauth.standards.json_web_token import decode_jwt, encode_jwt
 from tigrbl_auth_protocol_oauth.standards.assertion_framework import (
     JWT_BEARER_ASSERTION_TYPE,
@@ -22,10 +26,10 @@ REQUIRED_CLAIMS: Final[set[str]] = {"iss", "sub", "aud", "exp"}
 STRICT_CLIENT_ASSERTION_CLAIMS: Final[set[str]] = REQUIRED_CLAIMS | {"iat", "jti"}
 PRIVATE_KEY_JWT_AUTH_METHOD: Final[str] = "private_key_jwt"
 CLIENT_SECRET_JWT_AUTH_METHOD: Final[str] = "client_secret_jwt"
-SUPPORTED_CLIENT_ASSERTION_AUTH_METHODS: Final[tuple[str, ...]] = (PRIVATE_KEY_JWT_AUTH_METHOD,)
+SUPPORTED_CLIENT_ASSERTION_AUTH_METHODS: Final[tuple[str, ...]] = (
+    PRIVATE_KEY_JWT_AUTH_METHOD,
+)
 SUPPORTED_CLIENT_ASSERTION_SIGNING_ALGS: Final[tuple[str, ...]] = ("EdDSA",)
-
-
 
 
 OWNER = StandardOwner(
@@ -37,7 +41,6 @@ OWNER = StandardOwner(
 )
 
 
-
 def _coerce_audiences(audience: str | Iterable[str] | None) -> set[str]:
     if audience is None:
         return set()
@@ -46,14 +49,12 @@ def _coerce_audiences(audience: str | Iterable[str] | None) -> set[str]:
     return {str(item) for item in audience}
 
 
-
 def _coerce_aud_claim(value: object) -> set[str]:
     if isinstance(value, str):
         return {value}
     if isinstance(value, (list, tuple, set)):
         return {str(item) for item in value}
     raise ValueError("invalid aud claim")
-
 
 
 def validate_client_jwt_bearer(
@@ -71,7 +72,9 @@ def validate_client_jwt_bearer(
     if not settings.enable_rfc7523:
         raise RuntimeError(f"RFC 7523 support disabled: {RFC7523_SPEC_URL}")
     claims = dict(decoder(assertion))
-    required_claims = STRICT_CLIENT_ASSERTION_CLAIMS if require_strict_claims else REQUIRED_CLAIMS
+    required_claims = (
+        STRICT_CLIENT_ASSERTION_CLAIMS if require_strict_claims else REQUIRED_CLAIMS
+    )
     missing = required_claims - claims.keys()
     if missing:
         raise ValueError(f"missing claims: {', '.join(sorted(missing))}")
@@ -94,7 +97,6 @@ def validate_client_jwt_bearer(
     return claims
 
 
-
 def authenticate_client_assertion(
     *,
     client_assertion_type: str,
@@ -107,7 +109,11 @@ def authenticate_client_assertion(
         raise RuntimeError(f"RFC 7523 support disabled: {RFC7523_SPEC_URL}")
     if client_assertion_type != JWT_BEARER_ASSERTION_TYPE:
         raise ValueError("unsupported client_assertion_type")
-    if token_endpoint_auth_method not in {None, PRIVATE_KEY_JWT_AUTH_METHOD, CLIENT_SECRET_JWT_AUTH_METHOD}:
+    if token_endpoint_auth_method not in {
+        None,
+        PRIVATE_KEY_JWT_AUTH_METHOD,
+        CLIENT_SECRET_JWT_AUTH_METHOD,
+    }:
         raise ValueError("unsupported token_endpoint_auth_method")
     return validate_client_jwt_bearer(
         client_assertion,
@@ -115,7 +121,6 @@ def authenticate_client_assertion(
         client_id=client_id,
         require_strict_claims=True,
     )
-
 
 
 def make_client_assertion_jwt(
@@ -143,7 +148,6 @@ def make_client_assertion_jwt(
     return encode_jwt(**claims)
 
 
-
 def token_endpoint_auth_methods_supported() -> list[str]:
     methods = ["client_secret_basic", "client_secret_post"]
     if settings.enable_rfc7523:
@@ -153,13 +157,15 @@ def token_endpoint_auth_methods_supported() -> list[str]:
     return list(dict.fromkeys(methods))
 
 
-
 def token_endpoint_auth_signing_alg_values_supported() -> list[str]:
-    return list(SUPPORTED_CLIENT_ASSERTION_SIGNING_ALGS) if settings.enable_rfc7523 else []
+    return (
+        list(SUPPORTED_CLIENT_ASSERTION_SIGNING_ALGS) if settings.enable_rfc7523 else []
+    )
 
 
-
-def build_client_assertion_contract_examples(token_endpoint_audience: str) -> list[dict[str, Any]]:
+def build_client_assertion_contract_examples(
+    token_endpoint_audience: str,
+) -> list[dict[str, Any]]:
     return [
         {
             "client_id": "<client-id>",
@@ -169,7 +175,6 @@ def build_client_assertion_contract_examples(token_endpoint_audience: str) -> li
             "audience": token_endpoint_audience,
         }
     ]
-
 
 
 def describe() -> dict[str, object]:

@@ -20,10 +20,16 @@ JOSE_SPECIFICATIONS = (
     JoseSpecification("RFC7520", "JOSE Cookbook", published="2015-05"),
     JoseSpecification("RFC7638", "JSON Web Key Thumbprint", published="2015-09"),
     JoseSpecification("RFC7797", "JWS Unencoded Payload Option", published="2016-02"),
-    JoseSpecification("RFC7800", "Proof-of-Possession Key Semantics", published="2016-04"),
+    JoseSpecification(
+        "RFC7800", "Proof-of-Possession Key Semantics", published="2016-04"
+    ),
     JoseSpecification("RFC8037", "CFRG Elliptic Curve Algorithms", published="2017-01"),
-    JoseSpecification("RFC8176", "Authentication Method Reference Values", published="2017-06"),
-    JoseSpecification("RFC8725", "JSON Web Token Best Current Practices", published="2020-02"),
+    JoseSpecification(
+        "RFC8176", "Authentication Method Reference Values", published="2017-06"
+    ),
+    JoseSpecification(
+        "RFC8725", "JSON Web Token Best Current Practices", published="2020-02"
+    ),
     JoseSpecification(
         "RFC8812",
         "CBOR Object Signing and Encryption Algorithms for WebAuthn",

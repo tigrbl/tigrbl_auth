@@ -34,10 +34,8 @@ def classify_native_redirect_uri(uri: str) -> NativeRedirectAssessment | None:
     return None
 
 
-
 def is_native_redirect_uri(uri: str) -> bool:
     return classify_native_redirect_uri(uri) is not None
-
 
 
 def validate_native_redirect_uri(uri: str) -> NativeRedirectAssessment:
@@ -53,15 +51,18 @@ def validate_native_redirect_uri(uri: str) -> NativeRedirectAssessment:
         if assessment.scheme != "http":
             raise ValueError("loopback redirect URIs for native apps must use http")
         if assessment.port is None:
-            raise ValueError("loopback redirect URIs for native apps must include an explicit port")
+            raise ValueError(
+                "loopback redirect URIs for native apps must include an explicit port"
+            )
         if parsed.username or parsed.password:
             raise ValueError("loopback redirect URIs must not include userinfo")
         return assessment
     # private-use scheme
     if parsed.netloc:
-        raise ValueError("private-use scheme redirect URIs must not include an authority component")
+        raise ValueError(
+            "private-use scheme redirect URIs must not include an authority component"
+        )
     return assessment
-
 
 
 def validate_native_client_metadata(
@@ -70,7 +71,11 @@ def validate_native_client_metadata(
     response_types: Iterable[str] | None = None,
     grant_types: Iterable[str] | None = None,
 ) -> dict[str, object]:
-    assessments = [validate_native_redirect_uri(uri) for uri in redirect_uris if is_native_redirect_uri(uri)]
+    assessments = [
+        validate_native_redirect_uri(uri)
+        for uri in redirect_uris
+        if is_native_redirect_uri(uri)
+    ]
     if not assessments:
         return {"native_application": False}
     response_types_set = {str(value) for value in response_types or [] if str(value)}
@@ -84,7 +89,6 @@ def validate_native_client_metadata(
         "pkce_required": True,
         "redirect_uri_kinds": sorted({assessment.kind for assessment in assessments}),
     }
-
 
 
 def validate_native_authorization_request(
@@ -106,8 +110,9 @@ def validate_native_authorization_request(
     return assessment
 
 
-
-def validate_native_token_request(*, redirect_uri: str, code_verifier: str | None) -> None:
+def validate_native_token_request(
+    *, redirect_uri: str, code_verifier: str | None
+) -> None:
     if not is_native_redirect_uri(redirect_uri):
         return
     validate_native_redirect_uri(redirect_uri)

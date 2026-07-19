@@ -60,6 +60,9 @@ bundles:
   tests:
   - tests/conformance/baseline/test_oidc_id_token.py
   - tests/conformance/baseline/test_openid_userinfo_endpoint.py
+  - tests/unit/test_oidc_id_token_canonical_verification.py
+  - tests/unit/test_authorize_id_token_hashes.py
+  - tests/unit/test_identity_artifact_confusion_vectors.py
   - tests/integration/test_authorization_response_types.py
   - tests/integration/test_oidc_endpoints.py
   evidence_refs:
@@ -131,6 +134,9 @@ bundles:
   tests:
   - tests/conformance/baseline/test_rfc7515_jws.py
   - tests/unit/test_rfc7515_jws.py
+  - tests/unit/test_complete_wire_objects.py
+  - tests/unit/test_jose_cose_cryptography_providers.py
+  - tests/unit/test_profile_protocol_bindings.py
   evidence_refs:
   - compliance/evidence/tier3/jose/
 - profile: baseline
@@ -139,6 +145,9 @@ bundles:
   - tests/conformance/production/test_rfc7516_jwe_profile.py
   - tests/unit/test_rfc7516_jwe.py
   - tests/unit/test_oidc_id_token_encryption.py
+  - tests/unit/test_complete_wire_objects.py
+  - tests/unit/test_jose_cose_cryptography_providers.py
+  - tests/unit/test_profile_protocol_bindings.py
   evidence_refs:
   - compliance/evidence/tier3/jwe/
 - profile: baseline
@@ -160,6 +169,8 @@ bundles:
   tests:
   - tests/conformance/baseline/test_rfc7519_jwt.py
   - tests/unit/test_jwtoken.py
+  - tests/unit/test_complete_wire_objects.py
+  - tests/unit/test_profile_protocol_bindings.py
   evidence_refs:
   - compliance/evidence/tier3/jwt/
 - profile: baseline
@@ -294,6 +305,9 @@ bundles:
   tests:
   - tests/conformance/baseline/test_oidc_id_token.py
   - tests/conformance/baseline/test_openid_userinfo_endpoint.py
+  - tests/unit/test_oidc_id_token_canonical_verification.py
+  - tests/unit/test_authorize_id_token_hashes.py
+  - tests/unit/test_identity_artifact_confusion_vectors.py
   - tests/integration/test_authorization_response_types.py
   - tests/integration/test_oidc_endpoints.py
   evidence_refs:
@@ -393,6 +407,9 @@ bundles:
   tests:
   - tests/conformance/baseline/test_rfc7515_jws.py
   - tests/unit/test_rfc7515_jws.py
+  - tests/unit/test_complete_wire_objects.py
+  - tests/unit/test_jose_cose_cryptography_providers.py
+  - tests/unit/test_profile_protocol_bindings.py
   evidence_refs:
   - compliance/evidence/tier3/jose/
 - profile: production
@@ -401,6 +418,9 @@ bundles:
   - tests/conformance/production/test_rfc7516_jwe_profile.py
   - tests/unit/test_rfc7516_jwe.py
   - tests/unit/test_oidc_id_token_encryption.py
+  - tests/unit/test_complete_wire_objects.py
+  - tests/unit/test_jose_cose_cryptography_providers.py
+  - tests/unit/test_profile_protocol_bindings.py
   evidence_refs:
   - compliance/evidence/tier3/jwe/
 - profile: production
@@ -422,6 +442,8 @@ bundles:
   tests:
   - tests/conformance/baseline/test_rfc7519_jwt.py
   - tests/unit/test_jwtoken.py
+  - tests/unit/test_complete_wire_objects.py
+  - tests/unit/test_profile_protocol_bindings.py
   evidence_refs:
   - compliance/evidence/tier3/jwt/
 - profile: production
@@ -652,6 +674,9 @@ bundles:
   tests:
   - tests/conformance/baseline/test_oidc_id_token.py
   - tests/conformance/baseline/test_openid_userinfo_endpoint.py
+  - tests/unit/test_oidc_id_token_canonical_verification.py
+  - tests/unit/test_authorize_id_token_hashes.py
+  - tests/unit/test_identity_artifact_confusion_vectors.py
   - tests/integration/test_authorization_response_types.py
   - tests/integration/test_oidc_endpoints.py
   evidence_refs:
@@ -760,6 +785,9 @@ bundles:
   tests:
   - tests/conformance/baseline/test_rfc7515_jws.py
   - tests/unit/test_rfc7515_jws.py
+  - tests/unit/test_complete_wire_objects.py
+  - tests/unit/test_jose_cose_cryptography_providers.py
+  - tests/unit/test_profile_protocol_bindings.py
   evidence_refs:
   - compliance/evidence/tier3/jose/
 - profile: hardening
@@ -768,6 +796,9 @@ bundles:
   - tests/conformance/production/test_rfc7516_jwe_profile.py
   - tests/unit/test_rfc7516_jwe.py
   - tests/unit/test_oidc_id_token_encryption.py
+  - tests/unit/test_complete_wire_objects.py
+  - tests/unit/test_jose_cose_cryptography_providers.py
+  - tests/unit/test_profile_protocol_bindings.py
   evidence_refs:
   - compliance/evidence/tier3/jwe/
 - profile: hardening
@@ -789,6 +820,8 @@ bundles:
   tests:
   - tests/conformance/baseline/test_rfc7519_jwt.py
   - tests/unit/test_jwtoken.py
+  - tests/unit/test_complete_wire_objects.py
+  - tests/unit/test_profile_protocol_bindings.py
   evidence_refs:
   - compliance/evidence/tier3/jwt/
 - profile: hardening
@@ -1115,6 +1148,9 @@ bundles:
   tests:
   - tests/conformance/baseline/test_oidc_id_token.py
   - tests/conformance/baseline/test_openid_userinfo_endpoint.py
+  - tests/unit/test_oidc_id_token_canonical_verification.py
+  - tests/unit/test_authorize_id_token_hashes.py
+  - tests/unit/test_identity_artifact_confusion_vectors.py
   - tests/integration/test_authorization_response_types.py
   - tests/integration/test_oidc_endpoints.py
   evidence_refs:
@@ -1223,6 +1259,9 @@ bundles:
   tests:
   - tests/conformance/baseline/test_rfc7515_jws.py
   - tests/unit/test_rfc7515_jws.py
+  - tests/unit/test_complete_wire_objects.py
+  - tests/unit/test_jose_cose_cryptography_providers.py
+  - tests/unit/test_profile_protocol_bindings.py
   evidence_refs:
   - compliance/evidence/tier3/jose/
 - profile: fapi2-security
@@ -1231,6 +1270,9 @@ bundles:
   - tests/conformance/production/test_rfc7516_jwe_profile.py
   - tests/unit/test_rfc7516_jwe.py
   - tests/unit/test_oidc_id_token_encryption.py
+  - tests/unit/test_complete_wire_objects.py
+  - tests/unit/test_jose_cose_cryptography_providers.py
+  - tests/unit/test_profile_protocol_bindings.py
   evidence_refs:
   - compliance/evidence/tier3/jwe/
 - profile: fapi2-security
@@ -1252,6 +1294,8 @@ bundles:
   tests:
   - tests/conformance/baseline/test_rfc7519_jwt.py
   - tests/unit/test_jwtoken.py
+  - tests/unit/test_complete_wire_objects.py
+  - tests/unit/test_profile_protocol_bindings.py
   evidence_refs:
   - compliance/evidence/tier3/jwt/
 - profile: fapi2-security
@@ -1590,6 +1634,9 @@ bundles:
   tests:
   - tests/conformance/baseline/test_oidc_id_token.py
   - tests/conformance/baseline/test_openid_userinfo_endpoint.py
+  - tests/unit/test_oidc_id_token_canonical_verification.py
+  - tests/unit/test_authorize_id_token_hashes.py
+  - tests/unit/test_identity_artifact_confusion_vectors.py
   - tests/integration/test_authorization_response_types.py
   - tests/integration/test_oidc_endpoints.py
   evidence_refs:
@@ -1698,6 +1745,9 @@ bundles:
   tests:
   - tests/conformance/baseline/test_rfc7515_jws.py
   - tests/unit/test_rfc7515_jws.py
+  - tests/unit/test_complete_wire_objects.py
+  - tests/unit/test_jose_cose_cryptography_providers.py
+  - tests/unit/test_profile_protocol_bindings.py
   evidence_refs:
   - compliance/evidence/tier3/jose/
 - profile: peer-claim
@@ -1706,6 +1756,9 @@ bundles:
   - tests/conformance/production/test_rfc7516_jwe_profile.py
   - tests/unit/test_rfc7516_jwe.py
   - tests/unit/test_oidc_id_token_encryption.py
+  - tests/unit/test_complete_wire_objects.py
+  - tests/unit/test_jose_cose_cryptography_providers.py
+  - tests/unit/test_profile_protocol_bindings.py
   evidence_refs:
   - compliance/evidence/tier3/jwe/
 - profile: peer-claim
@@ -1727,6 +1780,8 @@ bundles:
   tests:
   - tests/conformance/baseline/test_rfc7519_jwt.py
   - tests/unit/test_jwtoken.py
+  - tests/unit/test_complete_wire_objects.py
+  - tests/unit/test_profile_protocol_bindings.py
   evidence_refs:
   - compliance/evidence/tier3/jwt/
 - profile: peer-claim

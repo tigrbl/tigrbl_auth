@@ -20,7 +20,9 @@ try:
 except ModuleNotFoundError:  # pragma: no cover - dependency-light fallback
     pyjwt = None
 
-from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
+from tigrbl_identity_contracts.protocol_configuration import (
+    protocol_settings as settings,
+)
 from tigrbl_identity_core.errors import InvalidTokenError
 from tigrbl_auth_protocol_oauth.jwtoken import JWTCoder
 
@@ -78,10 +80,18 @@ def _secret_bytes() -> bytes:
 
 def _fallback_encode(**claims: Any) -> str:
     if pyjwt is not None:
-        return str(pyjwt.encode(claims, settings.jwt_secret, algorithm=_FALLBACK_ALGORITHM))
+        return str(
+            pyjwt.encode(claims, settings.jwt_secret, algorithm=_FALLBACK_ALGORITHM)
+        )
     header = {"alg": _FALLBACK_ALGORITHM, "typ": "JWT"}
-    header_b64 = _b64url_encode(json.dumps(header, separators=(",", ":"), sort_keys=True).encode("utf-8"))
-    payload_b64 = _b64url_encode(json.dumps(claims, separators=(",", ":"), sort_keys=True, default=str).encode("utf-8"))
+    header_b64 = _b64url_encode(
+        json.dumps(header, separators=(",", ":"), sort_keys=True).encode("utf-8")
+    )
+    payload_b64 = _b64url_encode(
+        json.dumps(claims, separators=(",", ":"), sort_keys=True, default=str).encode(
+            "utf-8"
+        )
+    )
     signing_input = f"{header_b64}.{payload_b64}".encode("ascii")
     signature = hmac.new(_secret_bytes(), signing_input, hashlib.sha256).digest()
     return f"{header_b64}.{payload_b64}.{_b64url_encode(signature)}"
@@ -90,11 +100,20 @@ def _fallback_encode(**claims: Any) -> str:
 def _fallback_decode(token: str) -> dict[str, Any]:
     try:
         if pyjwt is not None:
-            payload = pyjwt.decode_complete(token, options={"verify_signature": False}).get("payload", {})
+            payload = pyjwt.decode_complete(
+                token, options={"verify_signature": False}
+            ).get("payload", {})
             options = {"require": ["exp"]} if "exp" in payload else {}
             decode_options = {"verify_aud": False}
             decode_options.update(options)
-            return dict(pyjwt.decode(token, settings.jwt_secret, algorithms=[_FALLBACK_ALGORITHM], options=decode_options))
+            return dict(
+                pyjwt.decode(
+                    token,
+                    settings.jwt_secret,
+                    algorithms=[_FALLBACK_ALGORITHM],
+                    options=decode_options,
+                )
+            )
         parts = token.split(".")
         if len(parts) != 3:
             raise InvalidTokenError("malformed token")
@@ -131,9 +150,7 @@ def decode_jwt(token: str) -> dict[str, Any]:
     if not settings.enable_rfc7519:
         raise RuntimeError(f"RFC 7519 support disabled: {RFC7519_SPEC_URL}")
     try:
-        return _call_runtime(
-            lambda coder: coder.decode(token, verify_revocation=False)
-        )
+        return _call_runtime(lambda coder: coder.decode(token, verify_revocation=False))
     except Exception:
         pass
     return _fallback_decode(token)

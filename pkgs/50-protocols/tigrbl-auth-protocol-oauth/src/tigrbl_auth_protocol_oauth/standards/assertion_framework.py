@@ -11,18 +11,20 @@ from typing import Any, Final, Iterable
 
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
 
-from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
+from tigrbl_identity_contracts.protocol_configuration import (
+    protocol_settings as settings,
+)
 from tigrbl_identity_core.errors import InvalidTokenError
 from tigrbl_auth_protocol_oauth.standards.json_web_token import decode_jwt
 
 STATUS: Final[str] = "assertion-framework-runtime-integrated"
 RFC7521_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc7521"
 JWT_BEARER_GRANT_TYPE: Final[str] = "urn:ietf:params:oauth:grant-type:jwt-bearer"
-JWT_BEARER_ASSERTION_TYPE: Final[str] = "urn:ietf:params:oauth:client-assertion-type:jwt-bearer"
+JWT_BEARER_ASSERTION_TYPE: Final[str] = (
+    "urn:ietf:params:oauth:client-assertion-type:jwt-bearer"
+)
 REQUIRED_CLAIMS: Final[set[str]] = {"iss", "sub", "aud", "exp"}
 OPTIONAL_FRESHNESS_CLAIMS: Final[set[str]] = {"iat", "nbf", "jti"}
-
-
 
 
 OWNER = StandardOwner(
@@ -37,14 +39,12 @@ OWNER = StandardOwner(
 )
 
 
-
 def _coerce_audiences(audience: str | Iterable[str] | None) -> set[str]:
     if audience is None:
         return set()
     if isinstance(audience, str):
         return {audience}
     return {str(item) for item in audience}
-
 
 
 def _coerce_aud_claim(value: object) -> set[str]:
@@ -55,13 +55,11 @@ def _coerce_aud_claim(value: object) -> set[str]:
     raise ValueError("invalid aud claim")
 
 
-
 def _require_timestamp(claims: dict[str, object], name: str) -> int:
     value = claims.get(name)
     if not isinstance(value, int):
         raise InvalidTokenError(f"'{name}' claim must be an integer timestamp")
     return value
-
 
 
 def validate_temporal_claims(
@@ -86,7 +84,6 @@ def validate_temporal_claims(
             raise InvalidTokenError("'iat' claim must be an integer timestamp")
         if iat > current + leeway_seconds:
             raise InvalidTokenError("assertion 'iat' claim is in the future")
-
 
 
 def validate_jwt_assertion(
@@ -120,7 +117,6 @@ def validate_jwt_assertion(
     return claims
 
 
-
 def validate_assertion_grant_request(
     request_data: dict[str, str],
     *,
@@ -135,8 +131,9 @@ def validate_assertion_grant_request(
     return validate_jwt_assertion(assertion, audience=audience, now=now)
 
 
-
-def build_assertion_contract_examples(token_endpoint_audience: str) -> list[dict[str, Any]]:
+def build_assertion_contract_examples(
+    token_endpoint_audience: str,
+) -> list[dict[str, Any]]:
     return [
         {
             "grant_type": JWT_BEARER_GRANT_TYPE,
@@ -148,7 +145,6 @@ def build_assertion_contract_examples(token_endpoint_audience: str) -> list[dict
             "audience": token_endpoint_audience,
         }
     ]
-
 
 
 def describe() -> dict[str, object]:

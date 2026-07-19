@@ -1,1 +1,3 @@
-FEATURES = frozenset({"wit-svid", "spiffe-subject", "wit-signing-key-use", "mandatory-pop"})
+FEATURES = frozenset(
+    {"wit-svid", "spiffe-subject", "wit-signing-key-use", "mandatory-pop"}
+)

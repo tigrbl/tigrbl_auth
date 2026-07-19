@@ -9,17 +9,28 @@ RFC 8414:
 RFC 8615:
   modules: [pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/http_standards/well_known.py]
 RFC 7515:
-  modules: [pkgs/20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose]
+  modules:
+  - pkgs/10-concrete/tigrbl-jws-concrete/src/tigrbl_jws_concrete
+  - pkgs/20-providers/tigrbl-jose-cryptography-provider/src/tigrbl_jose_cryptography_provider
+  - pkgs/50-protocols/tigrbl-security-protocol-jws/src/tigrbl_security_protocol_jws
 RFC 7516:
-  modules: [pkgs/20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose]
+  modules:
+  - pkgs/10-concrete/tigrbl-jwe-concrete/src/tigrbl_jwe_concrete
+  - pkgs/20-providers/tigrbl-jose-cryptography-provider/src/tigrbl_jose_cryptography_provider
+  - pkgs/50-protocols/tigrbl-security-protocol-jwe/src/tigrbl_security_protocol_jwe
 RFC 7517:
   modules: [pkgs/20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose]
 RFC 7518:
   modules: [pkgs/20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose]
 RFC 7519:
-  modules: [pkgs/50-protocols/tigrbl-auth-protocol-jwt/src/tigrbl_auth_protocol_jwt]
+  modules:
+  - pkgs/10-concrete/tigrbl-jwt-concrete/src/tigrbl_jwt_concrete
+  - pkgs/50-protocols/tigrbl-auth-protocol-jwt/src/tigrbl_auth_protocol_jwt
 OIDC Core 1.0:
-  modules: [pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/core.py]
+  modules:
+  - pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/core.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/id_token_profile.py
+  - pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/id_token.py
 OIDC Discovery 1.0:
   modules: [pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/discovery.py]
 RFC 7800:

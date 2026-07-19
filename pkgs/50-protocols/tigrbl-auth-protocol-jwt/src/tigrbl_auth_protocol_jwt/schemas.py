@@ -18,9 +18,7 @@ JWT_CARRIER = JwtCarrier("application/jwt", TokenEnvelopeFormat.JWT)
 
 def select_carrier(media_type: str) -> JwtCarrier:
     if media_type != JWT_CARRIER.media_type:
-        raise UnsupportedJwtMediaTypeError(
-            f"unsupported JWT media type: {media_type}"
-        )
+        raise UnsupportedJwtMediaTypeError(f"unsupported JWT media type: {media_type}")
     return JWT_CARRIER
 
 

@@ -32,6 +32,7 @@ def describe() -> dict[str, object]:
         spec_url=RFC8414_SPEC_URL,
     )
 
+
 __all__ = [
     "ISSUER",
     "JWKS_PATH",

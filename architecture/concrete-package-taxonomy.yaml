@@ -43,7 +43,13 @@ families:
     cardinality: one-credential-class
   digital_credential:
     packages:
+      - tigrbl-cwt-svid-extension-credential-concrete
+      - tigrbl-jwt-svid-credential-concrete
       - tigrbl-mdoc-credential-concrete
+      - tigrbl-vc-cose-credential-concrete
+      - tigrbl-vc-jose-credential-concrete
+      - tigrbl-wit-svid-credential-concrete
+      - tigrbl-x509-svid-credential-concrete
       - tigrbl-sd-jwt-vc-credential-concrete
       - tigrbl-verifiable-credential-concrete
     base: tigrbl-digital-credential-bases

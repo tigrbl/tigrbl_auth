@@ -30,7 +30,9 @@ def certificate_subject_dn(cert_pem: str | bytes) -> str:
 def certificate_san_values(cert_pem: str | bytes) -> dict[str, tuple[str, ...]]:
     cert = _cert_from_pem(cert_pem)
     try:
-        sans = cert.extensions.get_extension_for_class(x509.SubjectAlternativeName).value
+        sans = cert.extensions.get_extension_for_class(
+            x509.SubjectAlternativeName
+        ).value
     except x509.ExtensionNotFound:
         return {"dns": (), "uri": (), "ip": (), "email": ()}
     return {
@@ -71,7 +73,9 @@ def certificate_matches_registered_identity(
     expected = registered_certificate_identity_metadata(registration_metadata)
     if not any(expected.values()):
         return False
-    if expected["subject_dn"] and certificate_subject_dn(cert_pem) in set(expected["subject_dn"]):
+    if expected["subject_dn"] and certificate_subject_dn(cert_pem) in set(
+        expected["subject_dn"]
+    ):
         return True
     sans = certificate_san_values(cert_pem)
     return any(

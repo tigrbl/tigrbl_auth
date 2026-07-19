@@ -1,6 +1,6 @@
 # Runtime Profile Report
 
-- Generated at: `20260717T172115Z`
+- Generated at: `20260719T075620Z`
 - Deployment profile: `baseline`
 - Report mode: `validated-runs`
 - Validated artifact source: `None`
@@ -26,7 +26,7 @@
 
 ## Application Probe
 
-- App factory: `tigrbl_identity_server.api.app.build_app`
+- App factory: `unbound`
 - Message: Validated runtime manifests are missing or failing for the base application-factory environments: base@py3.10, base@py3.11, base@py3.12
 
 ## Surface Probe

@@ -40,9 +40,7 @@ class RFC7662IntrospectionService:
         )
         result = call.value
         if not isinstance(result, TokenIntrospectionResult):
-            raise TypeError(
-                "token.introspection must return TokenIntrospectionResult"
-            )
+            raise TypeError("token.introspection must return TokenIntrospectionResult")
 
         payload: dict[str, object] = dict(result.claims)
         payload["active"] = result.active

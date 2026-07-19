@@ -18,7 +18,9 @@ from tigrbl_security_proof_pkce import (
     validate_pkce_verifier,
     verify_pkce_s256_challenge,
 )
-from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
+from tigrbl_identity_contracts.protocol_configuration import (
+    protocol_settings as settings,
+)
 
 RFC7636_SPEC_URL: Final = PKCE_SPEC_URL
 

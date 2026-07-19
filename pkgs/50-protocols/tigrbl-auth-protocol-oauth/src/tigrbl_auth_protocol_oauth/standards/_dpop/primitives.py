@@ -17,7 +17,10 @@ from tigrbl_identity_core.standards import StandardOwner
 
 try:
     from cryptography.hazmat.primitives import serialization
-    from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey, Ed25519PublicKey
+    from cryptography.hazmat.primitives.asymmetric.ed25519 import (
+        Ed25519PrivateKey,
+        Ed25519PublicKey,
+    )
     from cryptography.hazmat.primitives.serialization import (
         Encoding,
         NoEncryption,
@@ -26,7 +29,9 @@ try:
         load_pem_private_key,
         load_pem_public_key,
     )
-except Exception:  # pragma: no cover - cryptography is expected in release/runtime installs
+except (
+    Exception
+):  # pragma: no cover - cryptography is expected in release/runtime installs
     serialization = None  # type: ignore[assignment]
     Ed25519PrivateKey = None  # type: ignore[assignment]
     Ed25519PublicKey = None  # type: ignore[assignment]
@@ -81,7 +86,9 @@ def _b64url_decode(data: str) -> bytes:
 
 
 def _json_segment(payload: dict[str, Any]) -> str:
-    return _b64url(json.dumps(payload, separators=(",", ":"), sort_keys=True).encode("utf-8"))
+    return _b64url(
+        json.dumps(payload, separators=(",", ":"), sort_keys=True).encode("utf-8")
+    )
 
 
 def _compact_signing_input(header: dict[str, Any], payload: dict[str, Any]) -> str:
@@ -95,7 +102,11 @@ def _raw_public_bytes(public_key: Any) -> bytes:
         raw = public_key.encode("utf-8")
     elif Ed25519PublicKey is not None and isinstance(public_key, Ed25519PublicKey):
         return public_key.public_bytes(Encoding.Raw, PublicFormat.Raw)
-    elif hasattr(public_key, "public_bytes") and Encoding is not None and PublicFormat is not None:
+    elif (
+        hasattr(public_key, "public_bytes")
+        and Encoding is not None
+        and PublicFormat is not None
+    ):
         try:
             return public_key.public_bytes(Encoding.Raw, PublicFormat.Raw)
         except Exception:
@@ -104,7 +115,9 @@ def _raw_public_bytes(public_key: Any) -> bytes:
         raw = b""
     if raw.startswith(b"-----BEGIN"):
         if load_pem_public_key is None or Encoding is None or PublicFormat is None:
-            raise RuntimeError("PEM public-key conversion requires cryptography serialization support")
+            raise RuntimeError(
+                "PEM public-key conversion requires cryptography serialization support"
+            )
         pub_obj = load_pem_public_key(raw)
         return pub_obj.public_bytes(Encoding.Raw, PublicFormat.Raw)
     if raw:
@@ -120,9 +133,16 @@ def _raw_private_bytes(keyref: Any) -> bytes:
         return material
     if Ed25519PrivateKey is not None and isinstance(material, Ed25519PrivateKey):
         return material.private_bytes(Encoding.Raw, PrivateFormat.Raw, NoEncryption())
-    if hasattr(material, "private_bytes") and Encoding is not None and PrivateFormat is not None and NoEncryption is not None:
+    if (
+        hasattr(material, "private_bytes")
+        and Encoding is not None
+        and PrivateFormat is not None
+        and NoEncryption is not None
+    ):
         try:
-            return material.private_bytes(Encoding.Raw, PrivateFormat.Raw, NoEncryption())
+            return material.private_bytes(
+                Encoding.Raw, PrivateFormat.Raw, NoEncryption()
+            )
         except Exception:
             pass
     raise ValueError("private key material required for DPoP proof generation")
@@ -139,7 +159,9 @@ def _load_private_key(keyref: Any) -> Any:
     raw = _raw_private_bytes(keyref)
     if raw.startswith(b"-----BEGIN"):
         if load_pem_private_key is None:
-            raise RuntimeError("PEM private-key conversion requires cryptography serialization support")
+            raise RuntimeError(
+                "PEM private-key conversion requires cryptography serialization support"
+            )
         private_key = load_pem_private_key(raw, password=None)
         if not isinstance(private_key, Ed25519PrivateKey):
             raise ValueError("DPoP fallback only supports Ed25519 private keys")
@@ -176,5 +198,3 @@ def ath_for_access_token(access_token: str) -> str:
 
 
 access_token_hash = ath_for_access_token
-
-

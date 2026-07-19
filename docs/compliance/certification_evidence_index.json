@@ -13,158 +13,221 @@
     "clean_checkout": {
       "git_available": true,
       "clean": false,
-      "changed_path_count": 135,
+      "changed_path_count": 229,
       "changed_paths": [
-        ".ssot/adr/ADR-1013-tigrbl-public-api-only-composition.yaml",
-        ".ssot/adr/ADR-1057-public-api-boundary.yaml",
-        ".ssot/adr/ADR-1080-developer-api-app-oauth-client-self-service.yaml",
-        ".ssot/adr/ADR-1082-resource-validation-api-read-only-validation-infrastructure.yaml",
-        ".ssot/adr/ADR-1083-public-api-owns-hosted-login-and-end-user-protocol-flows.yaml",
-        ".ssot/adr/ADR-1087-my-account-api-as-end-user-self-service-surface.yaml",
-        ".ssot/exports/key_rotation_policy_governance_t2_registry.json",
-        ".ssot/exports/registry.json",
-        ".ssot/exports/release-closure-registry-20260513.json",
-        ".ssot/exports/uix-tenant-jwks-publication-view.registry.json",
-        ".ssot/graphs/key_rotation_policy_governance_t2_graph.json",
-        ".ssot/graphs/registry.graph.json",
-        ".ssot/graphs/registry.lineage.html",
-        ".ssot/graphs/release-closure-graph-20260513.json",
-        ".ssot/graphs/uix-tenant-jwks-publication-view.graph.json",
-        ".ssot/registry.json",
-        ".ssot/releases/rel__phase1-surface-baseline-20260505/published.snapshot.json",
-        ".ssot/releases/rel__phase1-surface-baseline-20260505/release.snapshot.json",
-        ".ssot/releases/rel__phase2-public-uix-browser-security-20260505/release.snapshot.json",
-        ".ssot/reports/canonical-storage-facade-pytest.json",
-        ".ssot/reports/certification-gap-inventory.json",
-        ".ssot/reports/certification-gap-inventory.md",
-        ".ssot/reports/developer-api-dev-deployment-proof.pytest.json",
-        ".ssot/reports/package-dependency-layering/t2-zero-exception-plan.md",
-        ".ssot/reports/platform-admin-api-dev-deployment-proof.execution.json",
-        ".ssot/reports/platform-admin-api-dev-deployment-proof.pytest.json",
-        ".ssot/reports/public-api-dev-deployment-proof.execution.json",
-        ".ssot/reports/public-api-dev-deployment-proof.pytest.json",
-        ".ssot/reports/residency-and-table-init-t1.pytest.json",
-        ".ssot/reports/residency-and-table-init-t2.pytest.json",
-        ".ssot/reports/resource-validation-api-dev-deployment-proof.execution.json",
-        ".ssot/reports/resource-validation-api-dev-deployment-proof.pytest.json",
-        ".ssot/reports/tenant-admin-api-dev-deployment-proof.execution.json",
-        ".ssot/reports/tenant-admin-api-dev-deployment-proof.pytest.json",
-        ".ssot/specs/SPEC-1000-cli-contract-json.yaml",
-        ".ssot/specs/SPEC-1001-cli-contract-yaml.yaml",
-        ".ssot/specs/SPEC-1077-public-api-boundary-requirements.yaml",
-        ".ssot/specs/SPEC-1078-surface-applicability-and-scope-classification-requirements.yaml",
-        ".ssot/specs/SPEC-1143-product-api-surface-separation-contract.yaml",
-        ".ssot/specs/SPEC-1145-platform-admin-api-contract.yaml",
-        ".ssot/specs/SPEC-1150-tenant-admin-api-contract.yaml",
-        ".ssot/specs/SPEC-1155-developer-api-contract.yaml",
-        ".ssot/specs/SPEC-1159-developer-audit-and-authorization-contract.yaml",
-        ".ssot/specs/SPEC-1160-service-admin-api-contract.yaml",
-        ".ssot/specs/SPEC-1165-resource-validation-api-contract.yaml",
-        ".ssot/specs/SPEC-1166-public-api-contract.yaml",
-        ".ssot/specs/SPEC-1179-api-access-security-product-contract.yaml",
-        ".ssot/specs/SPEC-1180-my-account-api-contract.yaml",
-        ".ssot/specs/SPEC-1185-platform-admin-realm-crud-contract.yaml",
-        ".ssot/specs/SPEC-1223-public-exported-surface-boundary.yaml",
-        ".ssot/specs/SPEC-1225-current-identity-package-suite-boundary.yaml",
         "architecture/concrete-package-taxonomy.yaml",
         "architecture/provider-package-taxonomy.yaml",
+        "architecture/workload-identity-artifact-support.md",
         "compliance/claims/effective-target-claims.baseline.yaml",
         "compliance/claims/effective-target-claims.fapi2-security.yaml",
         "compliance/claims/effective-target-claims.hardening.yaml",
         "compliance/claims/effective-target-claims.peer-claim.yaml",
         "compliance/claims/effective-target-claims.production.yaml",
         "compliance/evidence/effective-release-evidence.baseline.yaml",
-        "compliance/mappings/module-to-boundary.yaml",
+        "compliance/evidence/workload-identity-artifact-evidence.md",
         "compliance/mappings/target-to-module.yaml",
-        "compliance/mappings/test-classification.yaml",
-        "compliance/mappings/test_classification.yaml",
-        "compliance/targets/boundary-decisions.yaml",
-        "compliance/targets/certification_scope.yaml",
+        "compliance/mappings/target-to-test.yaml",
         "compliance/targets/document-authority.yaml",
-        "compliance/targets/extension-targets.yaml",
-        "compliance/targets/project-tree-layout.yaml",
-        "docs/architecture/FUTURE_STATE_APP_DEPLOYMENT_MATRICES.md",
-        "docs/architecture/FUTURE_STATE_UIX_DEPLOYMENT_MATRICES.md",
-        "docs/architecture/TIGRBL_APP_DEPENDENCY_MATRICES.md",
-        "docs/architecture/TIGRBL_UIX_DEPENDENCY_MATRICES.md",
-        "docs/architecture/apps/tigrbl-auth-platform-admin-console.md",
-        "docs/architecture/apps/tigrbl-auth-public-portal.md",
-        "docs/architecture/apps/tigrbl-auth-tenant-admin-console.md",
-        "docs/architecture/product-provenance-lineage.md",
-        "docs/archive/historical/compliance/boundary_decision_matrix.md",
-        "docs/authorization-vendor-coverage-matrix.md",
-        "docs/competitor-api-surface-feature-matrix.md",
-        "docs/competitor-feature-surface-matrix-selection.md",
-        "docs/competitor-product-surface-research.md",
-        "docs/frontdoor-api-competitor-map.md",
-        "docs/iam-ciam-pam-focus.md",
-        "docs/idp-vendor-coverage-matrix.md",
-        "docs/m2m-vendor-coverage-matrix.md",
-        "docs/m2m-workload-identity-focus.md",
-        "docs/mfa-focus.md",
-        "docs/mfa-vendor-coverage-matrix.md",
-        "docs/oauth-2-0-2-1-focus.md",
-        "docs/oauth-2x-vendor-coverage-matrix.md",
-        "docs/oidc-party-vendor-coverage-matrix.md",
-        "docs/oidc-party-vendor-support-matrix.md",
-        "docs/scim-v2-focus.md",
-        "docs/scim-v2-vendor-coverage-matrix.md",
-        "docs/strategy/uix-pairing-briefs/01-public-api-public-uix.md",
-        "docs/strategy/uix-pairing-briefs/02-my-account-api-my-account-uix.md",
-        "docs/strategy/uix-pairing-briefs/03-platform-admin-api-platform-admin-uix.md",
-        "docs/strategy/uix-pairing-briefs/04-tenant-admin-api-tenant-admin-uix.md",
-        "docs/strategy/uix-pairing-briefs/05-developer-api-developer-uix.md",
-        "docs/strategy/uix-pairing-briefs/06-service-admin-api-service-admin-uix.md",
-        "docs/strategy/uix-pairing-briefs/07-resource-validation-api-resource-validation-uix.md",
-        "docs/strategy/uix-pairing-briefs/08-demo-hub-all-api-surfaces.md",
-        "docs/strategy/uix-pairing-briefs/09-legacy-admin-uix-extraction-retirement.md",
-        "docs/strategy/uix-pairing-briefs/10-additional-api-uix-opportunity-map.md",
-        "docs/strategy/uix-pairing-briefs/11-authenticator-lifecycle-api-authenticator-center-uix.md",
-        "docs/strategy/uix-pairing-briefs/12-authorization-decision-api-policy-studio-uix.md",
-        "docs/strategy/uix-pairing-briefs/13-federation-trust-api-trust-center-uix.md",
-        "docs/strategy/uix-pairing-briefs/14-provisioning-directory-api-directory-scim-center-uix.md",
-        "docs/strategy/uix-pairing-briefs/15-security-signals-api-security-signals-center-uix.md",
-        "docs/strategy/uix-pairing-briefs/16-workload-trust-spiffe-api-workload-trust-center-uix.md",
-        "docs/strategy/uix-pairing-briefs/17-certificate-lifecycle-api-certificate-center-uix.md",
-        "docs/strategy/uix-pairing-briefs/18-attestation-api-attestation-center-uix.md",
-        "docs/strategy/uix-pairing-briefs/19-token-service-api-token-studio-uix.md",
-        "docs/strategy/uix-pairing-briefs/20-credential-issuer-api-issuer-studio-uix.md",
-        "docs/strategy/uix-pairing-briefs/21-credential-wallet-api-wallet-uix-sdk.md",
-        "docs/strategy/uix-pairing-briefs/22-credential-verifier-api-verification-console-uix.md",
-        "docs/strategy/uix-pairing-briefs/23-device-iot-identity-api-fleet-trust-uix.md",
-        "docs/strategy/uix-pairing-briefs/24-agent-identity-delegation-api-agent-trust-uix.md",
-        "docs/strategy/uix-pairing-briefs/25-entitlement-governance-api-access-review-uix.md",
-        "docs/strategy/uix-pairing-briefs/26-secrets-lease-broker-api-credential-broker-uix.md",
-        "docs/strategy/uix-pairing-briefs/27-trust-registry-api-trust-registry-uix.md",
-        "docs/strategy/uix-pairing-briefs/28-communications-identity-api-certificate-attestation-uix.md",
-        "docs/strategy/uix-pairing-briefs/29-supply-chain-identity-api-provenance-uix.md",
-        "docs/strategy/uix-pairing-briefs/30-authorization-provenance-api-decision-lineage-explorer-uix.md",
-        "docs/strategy/uix-pairing-briefs/31-delegation-provenance-api-authority-chain-explorer-uix.md",
-        "docs/strategy/uix-pairing-briefs/32-authority-attenuation-api-capability-composer-uix.md",
-        "docs/strategy/uix-pairing-briefs/33-policy-obligation-api-enforcement-receipt-uix.md",
-        "docs/strategy/uix-public-style-system-brief.md",
-        "pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/delegation/lifecycle.py",
-        ".ssot/adr/ADR-1136-separate-routers-from-backend-apps.yaml",
-        "docs/amr-screen-support-matrix.md",
-        "docs/strategy/all-uix-app-requirements-brief.md",
-        "docs/strategy/amr-frontend-uix-briefs/",
-        "docs/strategy/portfolio-website-app-requirements-brief.md",
-        "docs/strategy/uix-pairing-briefs/40-authenticator-ceremony-api-universal-authenticator-pages-uix.md"
+        "pkgs/10-concrete/tigrbl-cose-concrete/src/tigrbl_cose_concrete/__init__.py",
+        "pkgs/10-concrete/tigrbl-cose-concrete/src/tigrbl_cose_concrete/messages.py",
+        "pkgs/10-concrete/tigrbl-cose-concrete/src/tigrbl_cose_concrete/structures.py",
+        "pkgs/10-concrete/tigrbl-cwt-concrete/src/tigrbl_cwt_concrete/__init__.py",
+        "pkgs/10-concrete/tigrbl-cwt-concrete/src/tigrbl_cwt_concrete/tagged.py",
+        "pkgs/10-concrete/tigrbl-jwe-concrete/src/tigrbl_jwe_concrete/__init__.py",
+        "pkgs/10-concrete/tigrbl-jwe-concrete/src/tigrbl_jwe_concrete/json_serialization.py",
+        "pkgs/10-concrete/tigrbl-jws-concrete/src/tigrbl_jws_concrete/__init__.py",
+        "pkgs/10-concrete/tigrbl-jws-concrete/src/tigrbl_jws_concrete/json_serialization.py",
+        "pkgs/10-concrete/tigrbl-jws-concrete/src/tigrbl_jws_concrete/rfc7797.py",
+        "pkgs/10-concrete/tigrbl-jwt-concrete/src/tigrbl_jwt_concrete/__init__.py",
+        "pkgs/10-concrete/tigrbl-jwt-concrete/src/tigrbl_jwt_concrete/validation.py",
+        "pkgs/20-providers/tigrbl-cose-cryptography-provider/src/tigrbl_cose_cryptography_provider/__init__.py",
+        "pkgs/20-providers/tigrbl-cose-cryptography-provider/src/tigrbl_cose_cryptography_provider/provider.py",
+        "pkgs/20-providers/tigrbl-cose-cryptography-provider/src/tigrbl_cose_cryptography_provider/signatures.py",
+        "pkgs/20-providers/tigrbl-cose-cryptography-provider/src/tigrbl_cose_cryptography_provider/signing.py",
+        "pkgs/20-providers/tigrbl-jose-cryptography-provider/src/tigrbl_jose_cryptography_provider/__init__.py",
+        "pkgs/20-providers/tigrbl-jose-cryptography-provider/src/tigrbl_jose_cryptography_provider/jwe.py",
+        "pkgs/20-providers/tigrbl-jose-cryptography-provider/src/tigrbl_jose_cryptography_provider/jws.py",
+        "pkgs/40-capabilities/capability-families.json",
+        "pkgs/40-capabilities/tigrbl-identity-document-capability/README.md",
+        "pkgs/40-capabilities/tigrbl-possession-proof-capability/README.md",
+        "pkgs/40-capabilities/tigrbl-protected-envelope-capability/README.md",
+        "pkgs/40-capabilities/tigrbl-workload-credential-brokering-capability/README.md",
+        "pkgs/40-capabilities/tigrbl-workload-identity-capability/README.md",
+        "pkgs/50-protocols/tigrbl-auth-protocol-cwt/src/tigrbl_auth_protocol_cwt/profile.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-cwt/src/tigrbl_auth_protocol_cwt/protocol.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-jwt/src/tigrbl_auth_protocol_jwt/__init__.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-jwt/src/tigrbl_auth_protocol_jwt/errors.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-jwt/src/tigrbl_auth_protocol_jwt/profile.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-jwt/src/tigrbl_auth_protocol_jwt/protocol.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-jwt/src/tigrbl_auth_protocol_jwt/schemas.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/_dpop/__init__.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/_dpop/primitives.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/_mtls_identity.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/_rfc8693/__init__.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/_rfc8693/endpoint.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/_rfc8693/runtime.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/_rfc9700/__init__.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/assertion_framework.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/authorization_framework.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/authorization_server_metadata.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/authorization_server_metadata_endpoint.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/bearer_token_usage.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/client_registration_management.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/device_authorization.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/dpop.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/dynamic_client_registration.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/introspection.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/issuer_identification.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/json_web_token.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/jwt_access_tokens.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/jwt_best_practices.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/jwt_client_auth.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/jwt_secured_authorization_requests.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/legacy_jwt_client_assertions.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/mutual_tls_client_authentication.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/native_apps.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/oauth_security_bcp.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/proof_key_for_code_exchange.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/pushed_authorization_requests.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/resource_indicators.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/rich_authorization_requests.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/token_exchange.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/__init__.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/id_token.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/jwks_service.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/core.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/session_mgmt.py",
+        "pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/userinfo.py",
+        "pkgs/50-protocols/tigrbl-authz-resource-server/src/tigrbl_authz_resource_server/metadata.py",
+        "pkgs/50-protocols/tigrbl-credential-protocol-iso-mdoc/src/tigrbl_credential_protocol_iso_mdoc/device_request.py",
+        "pkgs/50-protocols/tigrbl-credential-protocol-iso-mdoc/src/tigrbl_credential_protocol_iso_mdoc/device_response.py",
+        "pkgs/50-protocols/tigrbl-credential-protocol-iso-mdoc/src/tigrbl_credential_protocol_iso_mdoc/issuer_signed.py",
+        "pkgs/50-protocols/tigrbl-credential-protocol-iso-mdoc/src/tigrbl_credential_protocol_iso_mdoc/mdoc.py",
+        "pkgs/50-protocols/tigrbl-credential-protocol-iso-mdoc/src/tigrbl_credential_protocol_iso_mdoc/mobile_security_object.py",
+        "pkgs/50-protocols/tigrbl-credential-protocol-iso-mdoc/src/tigrbl_credential_protocol_iso_mdoc/schemas.py",
+        "pkgs/50-protocols/tigrbl-credential-protocol-iso-mdoc/src/tigrbl_credential_protocol_iso_mdoc/session_transcript.py",
+        "pkgs/50-protocols/tigrbl-identity-protocol-did-core/src/tigrbl_identity_protocol_did_core/compatibility.py",
+        "pkgs/50-protocols/tigrbl-identity-protocol-did-core/src/tigrbl_identity_protocol_did_core/features.py",
+        "pkgs/50-protocols/tigrbl-identity-protocol-did-core/src/tigrbl_identity_protocol_did_core/migrations.py",
+        "pkgs/50-protocols/tigrbl-identity-protocol-did-core/src/tigrbl_identity_protocol_did_core/versions.py",
+        "pkgs/50-protocols/tigrbl-oauth-profile-jwt-access-token/src/tigrbl_oauth_profile_jwt_access_token/__init__.py",
+        "pkgs/50-protocols/tigrbl-oauth-profile-jwt-access-token/src/tigrbl_oauth_profile_jwt_access_token/features.py",
+        "pkgs/50-protocols/tigrbl-oauth-profile-jwt-access-token/src/tigrbl_oauth_profile_jwt_access_token/validation.py",
+        "pkgs/50-protocols/tigrbl-oauth-profile-jwt-access-token/src/tigrbl_oauth_profile_jwt_access_token/versions.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-cose/src/tigrbl_security_protocol_cose/__init__.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-cose/src/tigrbl_security_protocol_cose/compatibility.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-cose/src/tigrbl_security_protocol_cose/features.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-cose/src/tigrbl_security_protocol_cose/protocol.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-cose/src/tigrbl_security_protocol_cose/versions.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-jose/src/tigrbl_security_protocol_jose/schemas.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-jose/src/tigrbl_security_protocol_jose/versions.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-jwe/src/tigrbl_security_protocol_jwe/__init__.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-jwe/src/tigrbl_security_protocol_jwe/compatibility.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-jwe/src/tigrbl_security_protocol_jwe/features.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-jwe/src/tigrbl_security_protocol_jwe/profile.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-jwe/src/tigrbl_security_protocol_jwe/protocol.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-jwe/src/tigrbl_security_protocol_jwe/versions.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-jws/src/tigrbl_security_protocol_jws/__init__.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-jws/src/tigrbl_security_protocol_jws/compatibility.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-jws/src/tigrbl_security_protocol_jws/features.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-jws/src/tigrbl_security_protocol_jws/profile.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-jws/src/tigrbl_security_protocol_jws/protocol.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-jws/src/tigrbl_security_protocol_jws/versions.py",
+        "pkgs/50-protocols/tigrbl-workload-credential-profile-cwt-svid-extension/src/tigrbl_workload_credential_profile_cwt_svid_extension/__init__.py",
+        "pkgs/50-protocols/tigrbl-workload-credential-profile-cwt-svid-extension/src/tigrbl_workload_credential_profile_cwt_svid_extension/compatibility.py",
+        "pkgs/50-protocols/tigrbl-workload-credential-profile-cwt-svid-extension/src/tigrbl_workload_credential_profile_cwt_svid_extension/features.py",
+        "pkgs/50-protocols/tigrbl-workload-credential-profile-cwt-svid-extension/src/tigrbl_workload_credential_profile_cwt_svid_extension/migrations.py",
+        "pkgs/50-protocols/tigrbl-workload-credential-profile-cwt-svid-extension/src/tigrbl_workload_credential_profile_cwt_svid_extension/validation.py",
+        "pkgs/50-protocols/tigrbl-workload-credential-profile-cwt-svid-extension/src/tigrbl_workload_credential_profile_cwt_svid_extension/verification.py",
+        "pkgs/50-protocols/tigrbl-workload-credential-profile-cwt-svid-extension/src/tigrbl_workload_credential_profile_cwt_svid_extension/versions.py",
+        "pkgs/50-protocols/tigrbl-workload-credential-profile-spiffe-wit-svid/src/tigrbl_workload_credential_profile_spiffe_wit_svid/__init__.py",
+        "pkgs/50-protocols/tigrbl-workload-credential-profile-spiffe-wit-svid/src/tigrbl_workload_credential_profile_spiffe_wit_svid/compatibility.py",
+        "pkgs/50-protocols/tigrbl-workload-credential-profile-spiffe-wit-svid/src/tigrbl_workload_credential_profile_spiffe_wit_svid/features.py",
+        "pkgs/50-protocols/tigrbl-workload-credential-profile-spiffe-wit-svid/src/tigrbl_workload_credential_profile_spiffe_wit_svid/migrations.py",
+        "pkgs/50-protocols/tigrbl-workload-credential-profile-spiffe-wit-svid/src/tigrbl_workload_credential_profile_spiffe_wit_svid/validation.py",
+        "pkgs/50-protocols/tigrbl-workload-credential-profile-spiffe-wit-svid/src/tigrbl_workload_credential_profile_spiffe_wit_svid/versions.py",
+        "pkgs/50-protocols/tigrbl-workload-credential-profile-wimse-wit/src/tigrbl_workload_credential_profile_wimse_wit/__init__.py",
+        "pkgs/50-protocols/tigrbl-workload-credential-profile-wimse-wit/src/tigrbl_workload_credential_profile_wimse_wit/compatibility.py",
+        "pkgs/50-protocols/tigrbl-workload-credential-profile-wimse-wit/src/tigrbl_workload_credential_profile_wimse_wit/features.py",
+        "pkgs/50-protocols/tigrbl-workload-credential-profile-wimse-wit/src/tigrbl_workload_credential_profile_wimse_wit/migrations.py",
+        "pkgs/50-protocols/tigrbl-workload-credential-profile-wimse-wit/src/tigrbl_workload_credential_profile_wimse_wit/validation.py",
+        "pkgs/50-protocols/tigrbl-workload-credential-profile-wimse-wit/src/tigrbl_workload_credential_profile_wimse_wit/versions.py",
+        "pkgs/50-protocols/tigrbl-workload-proof-profile-wimse-wpt/src/tigrbl_workload_proof_profile_wimse_wpt/__init__.py",
+        "pkgs/50-protocols/tigrbl-workload-proof-profile-wimse-wpt/src/tigrbl_workload_proof_profile_wimse_wpt/compatibility.py",
+        "pkgs/50-protocols/tigrbl-workload-proof-profile-wimse-wpt/src/tigrbl_workload_proof_profile_wimse_wpt/features.py",
+        "pkgs/50-protocols/tigrbl-workload-proof-profile-wimse-wpt/src/tigrbl_workload_proof_profile_wimse_wpt/migrations.py",
+        "pkgs/50-protocols/tigrbl-workload-proof-profile-wimse-wpt/src/tigrbl_workload_proof_profile_wimse_wpt/validation.py",
+        "pkgs/50-protocols/tigrbl-workload-proof-profile-wimse-wpt/src/tigrbl_workload_proof_profile_wimse_wpt/versions.py",
+        "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-broker-api/src/tigrbl_workload_protocol_spiffe_broker_api/__init__.py",
+        "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-broker-api/src/tigrbl_workload_protocol_spiffe_broker_api/compatibility.py",
+        "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-broker-api/src/tigrbl_workload_protocol_spiffe_broker_api/endpoint.py",
+        "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-broker-api/src/tigrbl_workload_protocol_spiffe_broker_api/features.py",
+        "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-broker-api/src/tigrbl_workload_protocol_spiffe_broker_api/migrations.py",
+        "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-broker-api/src/tigrbl_workload_protocol_spiffe_broker_api/references.py",
+        "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-broker-api/src/tigrbl_workload_protocol_spiffe_broker_api/rpcs.py",
+        "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-broker-api/src/tigrbl_workload_protocol_spiffe_broker_api/service.py",
+        "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-broker-api/src/tigrbl_workload_protocol_spiffe_broker_api/versions.py",
+        "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-svid/src/tigrbl_workload_protocol_spiffe_svid/__init__.py",
+        "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-svid/src/tigrbl_workload_protocol_spiffe_svid/compatibility.py",
+        "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-svid/src/tigrbl_workload_protocol_spiffe_svid/jwt_svid.py",
+        "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-svid/src/tigrbl_workload_protocol_spiffe_svid/migrations.py",
+        "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-svid/src/tigrbl_workload_protocol_spiffe_svid/spiffe_id.py",
+        "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-svid/src/tigrbl_workload_protocol_spiffe_svid/versions.py",
+        "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-svid/src/tigrbl_workload_protocol_spiffe_svid/x509_svid.py",
+        "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-workload-api/src/tigrbl_workload_protocol_spiffe_workload_api/__init__.py",
+        "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-workload-api/src/tigrbl_workload_protocol_spiffe_workload_api/compatibility.py",
+        "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-workload-api/src/tigrbl_workload_protocol_spiffe_workload_api/endpoint.py",
+        "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-workload-api/src/tigrbl_workload_protocol_spiffe_workload_api/features.py",
+        "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-workload-api/src/tigrbl_workload_protocol_spiffe_workload_api/migrations.py",
+        "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-workload-api/src/tigrbl_workload_protocol_spiffe_workload_api/rpcs.py",
+        "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-workload-api/src/tigrbl_workload_protocol_spiffe_workload_api/service.py",
+        "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-workload-api/src/tigrbl_workload_protocol_spiffe_workload_api/streams.py",
+        "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-workload-api/src/tigrbl_workload_protocol_spiffe_workload_api/versions.py",
+        "scripts/validate_layer_boundaries.py",
+        "tests/unit/test_auth_package_taxonomy_boundary.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_cose_cwt_runtime_profiles.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py",
+        "tests/unit/test_terminal_package_layers.py",
+        "pkgs/10-concrete/tigrbl-cwt-concrete/src/tigrbl_cwt_concrete/claims.py",
+        "pkgs/50-protocols/tigrbl-credential-profile-vc-jose-cose/src/tigrbl_credential_profile_vc_jose_cose/bindings.py",
+        "pkgs/50-protocols/tigrbl-credential-profile-vc-jose-cose/src/tigrbl_credential_profile_vc_jose_cose/claims.py",
+        "pkgs/50-protocols/tigrbl-credential-profile-vc-jose-cose/src/tigrbl_credential_profile_vc_jose_cose/errors.py",
+        "pkgs/50-protocols/tigrbl-credential-profile-vc-jose-cose/src/tigrbl_credential_profile_vc_jose_cose/schemas.py",
+        "pkgs/50-protocols/tigrbl-identity-protocol-did-core/src/tigrbl_identity_protocol_did_core/bindings.py",
+        "pkgs/50-protocols/tigrbl-identity-protocol-did-core/src/tigrbl_identity_protocol_did_core/claims.py",
+        "pkgs/50-protocols/tigrbl-identity-protocol-did-core/src/tigrbl_identity_protocol_did_core/errors.py",
+        "pkgs/50-protocols/tigrbl-identity-protocol-did-core/src/tigrbl_identity_protocol_did_core/schemas.py",
+        "pkgs/50-protocols/tigrbl-oauth-profile-jwt-access-token/src/tigrbl_oauth_profile_jwt_access_token/bindings.py",
+        "pkgs/50-protocols/tigrbl-oauth-profile-jwt-access-token/src/tigrbl_oauth_profile_jwt_access_token/claims.py",
+        "pkgs/50-protocols/tigrbl-oauth-profile-jwt-access-token/src/tigrbl_oauth_profile_jwt_access_token/errors.py",
+        "pkgs/50-protocols/tigrbl-oauth-profile-jwt-access-token/src/tigrbl_oauth_profile_jwt_access_token/schemas.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-cose/src/tigrbl_security_protocol_cose/bindings.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-cose/src/tigrbl_security_protocol_cose/claims.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-cose/src/tigrbl_security_protocol_cose/errors.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-cose/src/tigrbl_security_protocol_cose/schemas.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-jwe/src/tigrbl_security_protocol_jwe/bindings.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-jwe/src/tigrbl_security_protocol_jwe/claims.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-jwe/src/tigrbl_security_protocol_jwe/errors.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-jwe/src/tigrbl_security_protocol_jwe/schemas.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-jws/src/tigrbl_security_protocol_jws/bindings.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-jws/src/tigrbl_security_protocol_jws/claims.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-jws/src/tigrbl_security_protocol_jws/errors.py",
+        "pkgs/50-protocols/tigrbl-security-protocol-jws/src/tigrbl_security_protocol_jws/schemas.py"
       ],
-      "ignored_generated_path_count": 25,
+      "ignored_generated_path_count": 24,
       "ignored_generated_paths": [
-        "compliance/claims/repository-state.yaml",
         "compliance/evidence/certification_test_partitions.json",
         "compliance/evidence/certification_test_partitions.yaml",
         "compliance/evidence/claim_proof_bindings.json",
         "compliance/evidence/claim_proof_bindings.yaml",
-        "docs/compliance/TARGET_REALITY_MATRIX.md",
+        "compliance/evidence/target_profile_evidence.json",
+        "compliance/evidence/target_profile_evidence.yaml",
         "docs/compliance/artifact_truthfulness_report.json",
         "docs/compliance/artifact_truthfulness_report.md",
         "docs/compliance/certification_evidence_index.json",
         "docs/compliance/certification_evidence_index.md",
-        "docs/compliance/cli_conformance_snapshot.json",
-        "docs/compliance/cli_conformance_snapshot.md",
         "docs/compliance/current_state_report.json",
         "docs/compliance/current_state_report.md",
         "docs/compliance/feature_completeness_report.json",
@@ -172,12 +235,13 @@
         "docs/compliance/install_substrate_report.json",
         "docs/compliance/install_substrate_report.md",
         "docs/compliance/project_tree_layout_report.json",
+        "docs/compliance/project_tree_layout_report.md",
         "docs/compliance/runtime_profile_report.json",
         "docs/compliance/runtime_profile_report.md",
-        "docs/compliance/truth_chain.json",
-        "docs/compliance/truth_chain.md",
-        "specs/cli/cli_contract.json",
-        "specs/cli/cli_contract.yaml"
+        "docs/compliance/target_module_mapping_report.json",
+        "docs/compliance/target_module_mapping_report.md",
+        "docs/compliance/target_test_mapping_report.json",
+        "docs/compliance/target_test_mapping_report.md"
       ]
     }
   },
@@ -271,6 +335,7 @@
       "tests/uix/test_resource_views_states.py",
       "tests/uix/test_safe_mutations.py",
       "tests/unit/test_account_self_service_capability.py",
+      "tests/unit/test_active_layer_path_hygiene.py",
       "tests/unit/test_adapters.py",
       "tests/unit/test_admin_control_plane_boundary.py",
       "tests/unit/test_admin_policy_boundary.py",
@@ -323,6 +388,7 @@
       "tests/unit/test_client_identity_runtime_boundary.py",
       "tests/unit/test_client_registration_capability.py",
       "tests/unit/test_collect_validated_artifact_downloads.py",
+      "tests/unit/test_complete_wire_objects.py",
       "tests/unit/test_concrete_base_inheritance.py",
       "tests/unit/test_concrete_digital_artifact_ownership.py",
       "tests/unit/test_concrete_layer_taxonomy.py",
@@ -336,6 +402,7 @@
       "tests/unit/test_control_plane_correctness_properties.py",
       "tests/unit/test_corim_protocol_versioning.py",
       "tests/unit/test_corim_reference_material_runtime.py",
+      "tests/unit/test_cose_cwt_runtime_profiles.py",
       "tests/unit/test_cose_mdoc_providers.py",
       "tests/unit/test_credentials_lifecycle_boundary.py",
       "tests/unit/test_crypto.py",
@@ -353,6 +420,8 @@
       "tests/unit/test_deprecated_compatibility_windows.py",
       "tests/unit/test_deps_imports.py",
       "tests/unit/test_device_code_runtime_boundary.py",
+      "tests/unit/test_did_core_canonical_document.py",
+      "tests/unit/test_did_core_protocol.py",
       "tests/unit/test_did_providers.py",
       "tests/unit/test_did_workload_policy_contracts.py",
       "tests/unit/test_digital_credential_providers.py",
@@ -378,6 +447,9 @@
       "tests/unit/test_hardening_cluster_b.py",
       "tests/unit/test_hardening_cluster_c.py",
       "tests/unit/test_identity_administration_capability.py",
+      "tests/unit/test_identity_artifact_capabilities.py",
+      "tests/unit/test_identity_artifact_confusion_vectors.py",
+      "tests/unit/test_identity_artifact_runtime_composition.py",
       "tests/unit/test_identity_author_release_signing_boundary.py",
       "tests/unit/test_identity_cli_file_size_guard.py",
       "tests/unit/test_identity_cli_package_boundary.py",
@@ -393,8 +465,11 @@
       "tests/unit/test_identity_topology_validation.py",
       "tests/unit/test_introspection_surface_ownership.py",
       "tests/unit/test_jose_contract_reexports.py",
+      "tests/unit/test_jose_cose_cryptography_providers.py",
+      "tests/unit/test_jose_cose_token_objects.py",
       "tests/unit/test_jose_policy_boundary.py",
       "tests/unit/test_jose_pqc_mldsa.py",
+      "tests/unit/test_jose_provider_configuration.py",
       "tests/unit/test_jose_sd_jwt_concrete.py",
       "tests/unit/test_jwks_rotation.py",
       "tests/unit/test_jwtoken.py",
@@ -410,6 +485,8 @@
       "tests/unit/test_monorepo_release.py",
       "tests/unit/test_mtls_certificate_credentials.py",
       "tests/unit/test_my_account_table_owned_ops.py",
+      "tests/unit/test_neutral_identity_artifact_bases.py",
+      "tests/unit/test_neutral_identity_artifact_contracts.py",
       "tests/unit/test_new_capability_packages.py",
       "tests/unit/test_node_workspace_layers.py",
       "tests/unit/test_non_rfc_track_checkpoint.py",
@@ -425,7 +502,9 @@
       "tests/unit/test_oidc_authorization_code_token_claims.py",
       "tests/unit/test_oidc_authorize_scope_nonce.py",
       "tests/unit/test_oidc_eap_identity_assurance_contracts.py",
+      "tests/unit/test_oidc_id_and_jwt_access_token_profiles.py",
       "tests/unit/test_oidc_id_token.py",
+      "tests/unit/test_oidc_id_token_canonical_verification.py",
       "tests/unit/test_oidc_id_token_encryption.py",
       "tests/unit/test_oidc_logout_http_binding.py",
       "tests/unit/test_oidc_standalone_claim_packages.py",
@@ -458,6 +537,7 @@
       "tests/unit/test_principal_authentication_capability.py",
       "tests/unit/test_principals_model_boundary.py",
       "tests/unit/test_profile_discovery_runtime.py",
+      "tests/unit/test_profile_protocol_bindings.py",
       "tests/unit/test_protected_resource_authorization_capability.py",
       "tests/unit/test_protected_resource_verifier_contract.py",
       "tests/unit/test_protocol_capability_reports.py",
@@ -563,12 +643,15 @@
       "tests/unit/test_set_providers.py",
       "tests/unit/test_shared_secret_provider.py",
       "tests/unit/test_spiffe_providers.py",
+      "tests/unit/test_spiffe_svid_profiles.py",
+      "tests/unit/test_spiffe_workload_and_broker_api_profiles.py",
       "tests/unit/test_ssot_dependency_maintenance_traceability.py",
       "tests/unit/test_ssot_document_authority.py",
       "tests/unit/test_ssot_operator_vocabulary_boundary.py",
       "tests/unit/test_ssot_registry_integrity.py",
       "tests/unit/test_ssot_work_item_traceability.py",
       "tests/unit/test_standalone_concrete_ownership.py",
+      "tests/unit/test_standalone_identity_credential_artifacts.py",
       "tests/unit/test_standard_owner_metadata.py",
       "tests/unit/test_storage_canonical_facades.py",
       "tests/unit/test_storage_repository_boundary.py",
@@ -605,13 +688,19 @@
       "tests/unit/test_trust_graph_integrity_guards.py",
       "tests/unit/test_truth_chain_hashing.py",
       "tests/unit/test_truthfulness_alignment.py",
+      "tests/unit/test_typed_artifact_verification_results.py",
       "tests/unit/test_typescript_rp_node_package_boundary.py",
+      "tests/unit/test_uix_layer_boundaries.py",
       "tests/unit/test_user_register_schema.py",
       "tests/unit/test_validated_execution_runtime_matrix.py",
+      "tests/unit/test_vc_jose_cose_profile.py",
+      "tests/unit/test_vc_jose_cose_protocol.py",
       "tests/unit/test_vcdm_concrete.py",
       "tests/unit/test_versioned_eat_sd_jwt_vc_profiles.py",
+      "tests/unit/test_versioned_envelope_protocols.py",
       "tests/unit/test_versioned_gnap_protocol.py",
       "tests/unit/test_versioned_haip_profile.py",
+      "tests/unit/test_versioned_jose_protocol.py",
       "tests/unit/test_versioned_jwt_protocol.py",
       "tests/unit/test_versioned_oauth_oidc_protocols.py",
       "tests/unit/test_versioned_oid4vc_authzen_protocols.py",
@@ -622,7 +711,14 @@
       "tests/unit/test_webauthn_attestation_delivery.py",
       "tests/unit/test_webauthn_foundation_delivery.py",
       "tests/unit/test_webauthn_protocol_delivery.py",
-      "tests/unit/test_well_known_endpoints_behavior.py"
+      "tests/unit/test_well_known_endpoints_behavior.py",
+      "tests/unit/test_wimse_wit_wpt_profiles.py",
+      "tests/unit/test_wit_and_cwt_svid_profiles.py",
+      "tests/unit/test_workload_artifact_durability.py",
+      "tests/unit/test_workload_identity_conformance_testkit.py",
+      "tests/unit/test_workload_identity_runtime_composition.py",
+      "tests/unit/test_workload_proof_claims.py",
+      "tests/unit/test_workspace_layer_sources.py"
     ],
     "integration": [
       "tests/integration/test_admin_auth_session.py",
@@ -671,7 +767,8 @@
       "tests/unit/test_replay_migration_0033.py",
       "tests/unit/test_security_event_migration_0029.py",
       "tests/unit/test_spiffe_migration_0028.py",
-      "tests/unit/test_webauthn_migration_0035.py"
+      "tests/unit/test_webauthn_migration_0035.py",
+      "tests/unit/test_workload_artifact_migration_0036.py"
     ],
     "interop": [
       "tests/interop/test_operator_profile_catalog_completeness.py",
@@ -4003,7 +4100,8 @@
         "tests/unit/test_crypto.py",
         "tests/unit/test_crypto_key_dependency_boundary.py",
         "tests/unit/test_crypto_key_runtime_boundary.py",
-        "tests/unit/test_crypto_key_storage_runtime_boundary.py"
+        "tests/unit/test_crypto_key_storage_runtime_boundary.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/cli-operator-surface/"
@@ -8133,7 +8231,13 @@
         "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
         "tests/unit/test_rfc9728_metadata_checkpoint.py",
         "tests/unit/test_session_logout_cluster_b.py",
-        "tests/unit/test_well_known_endpoints_behavior.py"
+        "tests/unit/test_well_known_endpoints_behavior.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py"
       ],
       "negative_tests": [
         "tests/negative/test_certification_attack_paths.py",
@@ -8433,7 +8537,13 @@
         "tests/unit/test_rfc9728_metadata_checkpoint.py",
         "tests/unit/test_rpc_registry_live.py",
         "tests/unit/test_session_logout_cluster_b.py",
-        "tests/unit/test_well_known_endpoints_behavior.py"
+        "tests/unit/test_well_known_endpoints_behavior.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py"
       ],
       "negative_tests": [
         "tests/negative/test_certification_attack_paths.py",
@@ -8734,7 +8844,13 @@
         "tests/unit/test_rfc9728_metadata_checkpoint.py",
         "tests/unit/test_rpc_registry_live.py",
         "tests/unit/test_session_logout_cluster_b.py",
-        "tests/unit/test_well_known_endpoints_behavior.py"
+        "tests/unit/test_well_known_endpoints_behavior.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py"
       ],
       "negative_tests": [
         "tests/negative/test_certification_attack_paths.py",
@@ -9044,7 +9160,13 @@
         "tests/unit/test_rfc9728_metadata_checkpoint.py",
         "tests/unit/test_rpc_registry_live.py",
         "tests/unit/test_session_logout_cluster_b.py",
-        "tests/unit/test_well_known_endpoints_behavior.py"
+        "tests/unit/test_well_known_endpoints_behavior.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py"
       ],
       "negative_tests": [
         "tests/negative/test_certification_attack_paths.py",
@@ -9262,7 +9384,13 @@
         "tests/unit/test_rfc9728_metadata_checkpoint.py",
         "tests/unit/test_rpc_registry_live.py",
         "tests/unit/test_session_logout_cluster_b.py",
-        "tests/unit/test_well_known_endpoints_behavior.py"
+        "tests/unit/test_well_known_endpoints_behavior.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py"
       ],
       "negative_tests": [
         "tests/negative/test_certification_attack_paths.py",
@@ -9452,7 +9580,10 @@
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -9481,7 +9612,10 @@
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -9510,7 +9644,10 @@
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -9539,7 +9676,10 @@
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -9573,7 +9713,8 @@
         "tests/unit/test_crypto.py",
         "tests/unit/test_crypto_key_dependency_boundary.py",
         "tests/unit/test_crypto_key_runtime_boundary.py",
-        "tests/unit/test_crypto_key_storage_runtime_boundary.py"
+        "tests/unit/test_crypto_key_storage_runtime_boundary.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oauth2-core/"
@@ -9602,7 +9743,10 @@
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py",
-        "tests/negative/test_cookie_and_logout_abuse_cases.py"
+        "tests/negative/test_cookie_and_logout_abuse_cases.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py"
       ],
       "negative_tests": [
         "tests/conformance/baseline/test_rfc6750_bearer_token.py",
@@ -9726,7 +9870,10 @@
         "tests/unit/test_rfc8252_native_app_redirects.py",
         "tests/unit/test_rfc9207_issuer_identification.py",
         "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
-        "tests/unit/test_session_logout_cluster_b.py"
+        "tests/unit/test_session_logout_cluster_b.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py"
       ],
       "negative_tests": [
         "tests/negative/test_certification_attack_paths.py",
@@ -9884,7 +10031,8 @@
         "tests/unit/test_crypto.py",
         "tests/unit/test_crypto_key_dependency_boundary.py",
         "tests/unit/test_crypto_key_runtime_boundary.py",
-        "tests/unit/test_crypto_key_storage_runtime_boundary.py"
+        "tests/unit/test_crypto_key_storage_runtime_boundary.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/cookies/",
@@ -11084,7 +11232,10 @@
         "tests/conformance/baseline/test_oidc_id_token.py",
         "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
         "tests/integration/test_authorization_response_types.py",
-        "tests/integration/test_oidc_endpoints.py"
+        "tests/integration/test_oidc_endpoints.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -11343,7 +11494,10 @@
       "profile": null,
       "positive_tests": [
         "tests/conformance/baseline/test_rfc7515_jws.py",
-        "tests/unit/test_rfc7515_jws.py"
+        "tests/unit/test_rfc7515_jws.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -11361,7 +11515,10 @@
       "positive_tests": [
         "tests/conformance/production/test_rfc7516_jwe_profile.py",
         "tests/unit/test_oidc_id_token_encryption.py",
-        "tests/unit/test_rfc7516_jwe.py"
+        "tests/unit/test_rfc7516_jwe.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -11412,7 +11569,9 @@
       "profile": null,
       "positive_tests": [
         "tests/conformance/baseline/test_rfc7519_jwt.py",
-        "tests/unit/test_jwtoken.py"
+        "tests/unit/test_jwtoken.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -12215,6 +12374,9 @@
       "tests": [
         "tests/conformance/baseline/test_oidc_id_token.py",
         "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py",
         "tests/integration/test_authorization_response_types.py",
         "tests/integration/test_oidc_endpoints.py"
       ],
@@ -12313,7 +12475,10 @@
       "target": "RFC 7515",
       "tests": [
         "tests/conformance/baseline/test_rfc7515_jws.py",
-        "tests/unit/test_rfc7515_jws.py"
+        "tests/unit/test_rfc7515_jws.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jose/"
@@ -12325,7 +12490,10 @@
       "tests": [
         "tests/conformance/production/test_rfc7516_jwe_profile.py",
         "tests/unit/test_rfc7516_jwe.py",
-        "tests/unit/test_oidc_id_token_encryption.py"
+        "tests/unit/test_oidc_id_token_encryption.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwe/"
@@ -12358,7 +12526,9 @@
       "target": "RFC 7519",
       "tests": [
         "tests/conformance/baseline/test_rfc7519_jwt.py",
-        "tests/unit/test_jwtoken.py"
+        "tests/unit/test_jwtoken.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwt/"
@@ -12545,6 +12715,9 @@
       "tests": [
         "tests/conformance/baseline/test_oidc_id_token.py",
         "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py",
         "tests/integration/test_authorization_response_types.py",
         "tests/integration/test_oidc_endpoints.py"
       ],
@@ -12683,7 +12856,10 @@
       "target": "RFC 7515",
       "tests": [
         "tests/conformance/baseline/test_rfc7515_jws.py",
-        "tests/unit/test_rfc7515_jws.py"
+        "tests/unit/test_rfc7515_jws.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jose/"
@@ -12695,7 +12871,10 @@
       "tests": [
         "tests/conformance/production/test_rfc7516_jwe_profile.py",
         "tests/unit/test_rfc7516_jwe.py",
-        "tests/unit/test_oidc_id_token_encryption.py"
+        "tests/unit/test_oidc_id_token_encryption.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwe/"
@@ -12728,7 +12907,9 @@
       "target": "RFC 7519",
       "tests": [
         "tests/conformance/baseline/test_rfc7519_jwt.py",
-        "tests/unit/test_jwtoken.py"
+        "tests/unit/test_jwtoken.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwt/"
@@ -13051,6 +13232,9 @@
       "tests": [
         "tests/conformance/baseline/test_oidc_id_token.py",
         "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py",
         "tests/integration/test_authorization_response_types.py",
         "tests/integration/test_oidc_endpoints.py"
       ],
@@ -13202,7 +13386,10 @@
       "target": "RFC 7515",
       "tests": [
         "tests/conformance/baseline/test_rfc7515_jws.py",
-        "tests/unit/test_rfc7515_jws.py"
+        "tests/unit/test_rfc7515_jws.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jose/"
@@ -13214,7 +13401,10 @@
       "tests": [
         "tests/conformance/production/test_rfc7516_jwe_profile.py",
         "tests/unit/test_rfc7516_jwe.py",
-        "tests/unit/test_oidc_id_token_encryption.py"
+        "tests/unit/test_oidc_id_token_encryption.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwe/"
@@ -13247,7 +13437,9 @@
       "target": "RFC 7519",
       "tests": [
         "tests/conformance/baseline/test_rfc7519_jwt.py",
-        "tests/unit/test_jwtoken.py"
+        "tests/unit/test_jwtoken.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwt/"
@@ -13698,6 +13890,9 @@
       "tests": [
         "tests/conformance/baseline/test_oidc_id_token.py",
         "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py",
         "tests/integration/test_authorization_response_types.py",
         "tests/integration/test_oidc_endpoints.py"
       ],
@@ -13849,7 +14044,10 @@
       "target": "RFC 7515",
       "tests": [
         "tests/conformance/baseline/test_rfc7515_jws.py",
-        "tests/unit/test_rfc7515_jws.py"
+        "tests/unit/test_rfc7515_jws.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jose/"
@@ -13861,7 +14059,10 @@
       "tests": [
         "tests/conformance/production/test_rfc7516_jwe_profile.py",
         "tests/unit/test_rfc7516_jwe.py",
-        "tests/unit/test_oidc_id_token_encryption.py"
+        "tests/unit/test_oidc_id_token_encryption.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwe/"
@@ -13894,7 +14095,9 @@
       "target": "RFC 7519",
       "tests": [
         "tests/conformance/baseline/test_rfc7519_jwt.py",
-        "tests/unit/test_jwtoken.py"
+        "tests/unit/test_jwtoken.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwt/"
@@ -14361,6 +14564,9 @@
       "tests": [
         "tests/conformance/baseline/test_oidc_id_token.py",
         "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py",
         "tests/integration/test_authorization_response_types.py",
         "tests/integration/test_oidc_endpoints.py"
       ],
@@ -14512,7 +14718,10 @@
       "target": "RFC 7515",
       "tests": [
         "tests/conformance/baseline/test_rfc7515_jws.py",
-        "tests/unit/test_rfc7515_jws.py"
+        "tests/unit/test_rfc7515_jws.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jose/"
@@ -14524,7 +14733,10 @@
       "tests": [
         "tests/conformance/production/test_rfc7516_jwe_profile.py",
         "tests/unit/test_rfc7516_jwe.py",
-        "tests/unit/test_oidc_id_token_encryption.py"
+        "tests/unit/test_oidc_id_token_encryption.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwe/"
@@ -14557,7 +14769,9 @@
       "target": "RFC 7519",
       "tests": [
         "tests/conformance/baseline/test_rfc7519_jwt.py",
-        "tests/unit/test_jwtoken.py"
+        "tests/unit/test_jwtoken.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwt/"

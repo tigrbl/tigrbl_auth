@@ -5,4 +5,4 @@ from tigrbl_mdoc_concrete.mdoc import (
     parse_mdoc,
 )
 
-__all__ = ['Mdoc', 'parse_mdoc']
+__all__ = ["Mdoc", "parse_mdoc"]

@@ -13,4 +13,8 @@ class JwtProfileRequiredError(JwtProtocolError):
     """Raised when a trust/use decision is attempted without a token profile."""
 
 
-__all__ = ["JwtProfileRequiredError", "JwtProtocolError", "UnsupportedJwtMediaTypeError"]
+__all__ = [
+    "JwtProfileRequiredError",
+    "JwtProtocolError",
+    "UnsupportedJwtMediaTypeError",
+]

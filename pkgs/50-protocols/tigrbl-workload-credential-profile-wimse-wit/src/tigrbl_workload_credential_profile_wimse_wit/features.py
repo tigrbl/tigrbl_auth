@@ -1,1 +1,3 @@
-FEATURES = frozenset({"wit-jwt", "confirmation-key", "short-lifetime", "proof-presentation"})
+FEATURES = frozenset(
+    {"wit-jwt", "confirmation-key", "short-lifetime", "proof-presentation"}
+)

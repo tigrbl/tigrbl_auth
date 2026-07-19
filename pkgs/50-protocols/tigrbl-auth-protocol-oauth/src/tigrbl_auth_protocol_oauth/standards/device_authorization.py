@@ -9,11 +9,15 @@ from datetime import datetime, timezone
 from typing import Final, Literal
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
 
-from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
+from tigrbl_identity_contracts.protocol_configuration import (
+    protocol_settings as settings,
+)
 
 try:  # pragma: no cover - exercised when full runtime deps are installed
     from tigrbl.types import BaseModel
-except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
+except (
+    Exception
+):  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
     from pydantic import BaseModel
 
 
@@ -26,8 +30,6 @@ DEVICE_CODE_INTERVAL: Final[int] = 5
 DEVICE_CODE_SLOW_DOWN_INCREMENT: Final[int] = 5
 _USER_CODE_CHARSET: Final[str] = string.ascii_uppercase + string.digits
 _USER_CODE_RE: Final[re.Pattern[str]] = re.compile(r"^[A-Z0-9]{8,}$")
-
-
 
 
 OWNER = StandardOwner(
@@ -64,13 +66,10 @@ class DeviceGrantForm(BaseModel):
     client_id: str
 
 
-
-
 def generate_user_code(length: int = 8) -> str:
     if length <= 0:
         raise ValueError("length must be positive")
     return "".join(secrets.choice(_USER_CODE_CHARSET) for _ in range(length))
-
 
 
 def validate_user_code(code: str) -> bool:
@@ -79,27 +78,33 @@ def validate_user_code(code: str) -> bool:
     return bool(_USER_CODE_RE.fullmatch(code))
 
 
-
 def generate_device_code() -> str:
     return secrets.token_urlsafe(32)
 
 
-
-def next_device_poll_interval(current_interval: int | None = None, *, slow_down_count: int = 0) -> int:
+def next_device_poll_interval(
+    current_interval: int | None = None, *, slow_down_count: int = 0
+) -> int:
     base = max(int(current_interval or DEVICE_CODE_INTERVAL), DEVICE_CODE_INTERVAL)
     if slow_down_count <= 0:
         return base
     return base + (DEVICE_CODE_SLOW_DOWN_INCREMENT * int(slow_down_count))
 
 
-
-def poll_too_frequently(*, last_polled_at: datetime | None, now: datetime, interval: int | None = None) -> bool:
+def poll_too_frequently(
+    *, last_polled_at: datetime | None, now: datetime, interval: int | None = None
+) -> bool:
     if last_polled_at is None:
         return False
-    effective_interval = max(int(interval or DEVICE_CODE_INTERVAL), DEVICE_CODE_INTERVAL)
-    last = last_polled_at if last_polled_at.tzinfo is not None else last_polled_at.replace(tzinfo=timezone.utc)
+    effective_interval = max(
+        int(interval or DEVICE_CODE_INTERVAL), DEVICE_CODE_INTERVAL
+    )
+    last = (
+        last_polled_at
+        if last_polled_at.tzinfo is not None
+        else last_polled_at.replace(tzinfo=timezone.utc)
+    )
     return (now - last).total_seconds() < effective_interval
-
 
 
 def describe() -> dict[str, object]:

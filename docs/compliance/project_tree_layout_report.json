@@ -1,8 +1,10 @@
 {
   "scope": "project-tree-layout",
   "strict": false,
-  "passed": true,
-  "failures": [],
+  "passed": false,
+  "failures": [
+    "Missing required file: pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/surfaces.py"
+  ],
   "warnings": [],
   "summary": {
     "required_directory_count": 36,

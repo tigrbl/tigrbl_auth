@@ -7,4 +7,4 @@ from tigrbl_mdoc_concrete.device_request import (
     parse_device_request,
 )
 
-__all__ = ['DeviceRequest', 'DocRequest', 'ItemsRequest', 'parse_device_request']
+__all__ = ["DeviceRequest", "DocRequest", "ItemsRequest", "parse_device_request"]

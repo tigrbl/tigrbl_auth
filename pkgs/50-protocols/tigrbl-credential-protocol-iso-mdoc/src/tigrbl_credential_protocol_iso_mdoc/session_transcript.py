@@ -4,4 +4,4 @@ from tigrbl_mdoc_concrete.session_transcript import (
     SessionTranscript,
 )
 
-__all__ = ['SessionTranscript']
+__all__ = ["SessionTranscript"]

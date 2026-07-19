@@ -3285,7 +3285,8 @@
         "tests/unit/test_crypto.py",
         "tests/unit/test_crypto_key_dependency_boundary.py",
         "tests/unit/test_crypto_key_runtime_boundary.py",
-        "tests/unit/test_crypto_key_storage_runtime_boundary.py"
+        "tests/unit/test_crypto_key_storage_runtime_boundary.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/cli-operator-surface/"
@@ -7415,7 +7416,13 @@
         "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
         "tests/unit/test_rfc9728_metadata_checkpoint.py",
         "tests/unit/test_session_logout_cluster_b.py",
-        "tests/unit/test_well_known_endpoints_behavior.py"
+        "tests/unit/test_well_known_endpoints_behavior.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py"
       ],
       "negative_tests": [
         "tests/negative/test_certification_attack_paths.py",
@@ -7715,7 +7722,13 @@
         "tests/unit/test_rfc9728_metadata_checkpoint.py",
         "tests/unit/test_rpc_registry_live.py",
         "tests/unit/test_session_logout_cluster_b.py",
-        "tests/unit/test_well_known_endpoints_behavior.py"
+        "tests/unit/test_well_known_endpoints_behavior.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py"
       ],
       "negative_tests": [
         "tests/negative/test_certification_attack_paths.py",
@@ -8016,7 +8029,13 @@
         "tests/unit/test_rfc9728_metadata_checkpoint.py",
         "tests/unit/test_rpc_registry_live.py",
         "tests/unit/test_session_logout_cluster_b.py",
-        "tests/unit/test_well_known_endpoints_behavior.py"
+        "tests/unit/test_well_known_endpoints_behavior.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py"
       ],
       "negative_tests": [
         "tests/negative/test_certification_attack_paths.py",
@@ -8326,7 +8345,13 @@
         "tests/unit/test_rfc9728_metadata_checkpoint.py",
         "tests/unit/test_rpc_registry_live.py",
         "tests/unit/test_session_logout_cluster_b.py",
-        "tests/unit/test_well_known_endpoints_behavior.py"
+        "tests/unit/test_well_known_endpoints_behavior.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py"
       ],
       "negative_tests": [
         "tests/negative/test_certification_attack_paths.py",
@@ -8544,7 +8569,13 @@
         "tests/unit/test_rfc9728_metadata_checkpoint.py",
         "tests/unit/test_rpc_registry_live.py",
         "tests/unit/test_session_logout_cluster_b.py",
-        "tests/unit/test_well_known_endpoints_behavior.py"
+        "tests/unit/test_well_known_endpoints_behavior.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py"
       ],
       "negative_tests": [
         "tests/negative/test_certification_attack_paths.py",
@@ -8734,7 +8765,10 @@
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -8763,7 +8797,10 @@
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -8792,7 +8829,10 @@
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -8821,7 +8861,10 @@
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -8855,7 +8898,8 @@
         "tests/unit/test_crypto.py",
         "tests/unit/test_crypto_key_dependency_boundary.py",
         "tests/unit/test_crypto_key_runtime_boundary.py",
-        "tests/unit/test_crypto_key_storage_runtime_boundary.py"
+        "tests/unit/test_crypto_key_storage_runtime_boundary.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oauth2-core/"
@@ -8884,7 +8928,10 @@
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py",
-        "tests/negative/test_cookie_and_logout_abuse_cases.py"
+        "tests/negative/test_cookie_and_logout_abuse_cases.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py"
       ],
       "negative_tests": [
         "tests/conformance/baseline/test_rfc6750_bearer_token.py",
@@ -9008,7 +9055,10 @@
         "tests/unit/test_rfc8252_native_app_redirects.py",
         "tests/unit/test_rfc9207_issuer_identification.py",
         "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
-        "tests/unit/test_session_logout_cluster_b.py"
+        "tests/unit/test_session_logout_cluster_b.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py"
       ],
       "negative_tests": [
         "tests/negative/test_certification_attack_paths.py",
@@ -9166,7 +9216,8 @@
         "tests/unit/test_crypto.py",
         "tests/unit/test_crypto_key_dependency_boundary.py",
         "tests/unit/test_crypto_key_runtime_boundary.py",
-        "tests/unit/test_crypto_key_storage_runtime_boundary.py"
+        "tests/unit/test_crypto_key_storage_runtime_boundary.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/cookies/",
@@ -10366,7 +10417,10 @@
         "tests/conformance/baseline/test_oidc_id_token.py",
         "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
         "tests/integration/test_authorization_response_types.py",
-        "tests/integration/test_oidc_endpoints.py"
+        "tests/integration/test_oidc_endpoints.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -10625,7 +10679,10 @@
       "profile": null,
       "positive_tests": [
         "tests/conformance/baseline/test_rfc7515_jws.py",
-        "tests/unit/test_rfc7515_jws.py"
+        "tests/unit/test_rfc7515_jws.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -10643,7 +10700,10 @@
       "positive_tests": [
         "tests/conformance/production/test_rfc7516_jwe_profile.py",
         "tests/unit/test_oidc_id_token_encryption.py",
-        "tests/unit/test_rfc7516_jwe.py"
+        "tests/unit/test_rfc7516_jwe.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -10694,7 +10754,9 @@
       "profile": null,
       "positive_tests": [
         "tests/conformance/baseline/test_rfc7519_jwt.py",
-        "tests/unit/test_jwtoken.py"
+        "tests/unit/test_jwtoken.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "negative_tests": [],
       "evidence_refs": [

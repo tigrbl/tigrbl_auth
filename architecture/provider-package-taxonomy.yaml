@@ -58,6 +58,7 @@ canonical_providers:
   - tigrbl-certificate-status-provider
   - tigrbl-secret-hashing-bcrypt-provider
   - tigrbl-cose-cryptography-provider
+  - tigrbl-jose-cryptography-provider
   - tigrbl-jose-swarmauri-provider
   - tigrbl-security-signing-pqc
   - tigrbl-trust-anchor-provider
@@ -80,12 +81,6 @@ canonical_providers:
   - tigrbl-set-receiver-provider
   - tigrbl-set-transmitter-provider
 compatibility_or_migration_packages:
-  tigrbl-svid-verifier-provider:
-    target: tigrbl-workload-protocol-spiffe-svid-plus-generic-jose-and-certificate-providers
-    target_layer: 20-50
-  tigrbl-authz-policy:
-    target: tigrbl-policy-administration-capability-plus-policy-assurance-capability-plus-access-governance-capability
-    target_layer: 40-capabilities
   tigrbl-authz-resource-server-verifier:
     target: tigrbl-protected-resource-authorization-capability
     target_layer: 40-capabilities

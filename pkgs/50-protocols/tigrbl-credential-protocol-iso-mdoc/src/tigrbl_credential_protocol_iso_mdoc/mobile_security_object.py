@@ -6,4 +6,4 @@ from tigrbl_mdoc_concrete.mobile_security_object import (
     parse_mobile_security_object,
 )
 
-__all__ = ['MobileSecurityObject', 'ValidityInfo', 'parse_mobile_security_object']
+__all__ = ["MobileSecurityObject", "ValidityInfo", "parse_mobile_security_object"]

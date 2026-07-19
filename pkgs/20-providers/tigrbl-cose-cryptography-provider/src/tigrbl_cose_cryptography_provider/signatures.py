@@ -5,7 +5,6 @@ from collections.abc import Mapping
 from cryptography.exceptions import InvalidSignature
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import ec, ed25519, padding, rsa
-from cryptography.hazmat.primitives.asymmetric.utils import encode_dss_signature
 from tigrbl_cose_concrete import resolve_cose_algorithm
 
 from .keys import load_cose_public_key

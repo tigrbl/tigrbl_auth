@@ -18,7 +18,7 @@ def test_test_and_example_packages_have_terminal_layer_ownership() -> None:
     packages = {package.distribution: package for package in discover_packages(ROOT)}
 
     assert packages["tigrbl-identity-testkit"].layer == "120-tests"
-    assert packages["acme-notes-cli"].layer == "110-examples"
+    assert packages["oauth-device-authorization-cli-example"].layer == "110-examples"
     assert NON_PRODUCTION_LAYERS == {"120-tests", "110-examples"}
 
 

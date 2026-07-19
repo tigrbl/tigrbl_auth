@@ -12,18 +12,16 @@ from tigrbl_identity_contracts.oauth import (
 )
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
 
-STATUS: Final[str] = 'persistence-backed-client-management-runtime'
-RFC7592_SPEC_URL: Final[str] = 'https://www.rfc-editor.org/rfc/rfc7592'
-
-
+STATUS: Final[str] = "persistence-backed-client-management-runtime"
+RFC7592_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc7592"
 
 
 OWNER = StandardOwner(
-    label='RFC 7592',
-    title='OAuth 2.0 Dynamic Client Registration Management Protocol',
+    label="RFC 7592",
+    title="OAuth 2.0 Dynamic Client Registration Management Protocol",
     runtime_status=STATUS,
-    public_surface=('/register/{client_id}',),
-    notes='Authoritative standards-tree owner module. Registration management is mounted on the public release path with bearer-authenticated GET/PUT/DELETE semantics, durable client-registration metadata persistence, and audit-observable update/delete behavior.',
+    public_surface=("/register/{client_id}",),
+    notes="Authoritative standards-tree owner module. Registration management is mounted on the public release path with bearer-authenticated GET/PUT/DELETE semantics, durable client-registration metadata persistence, and audit-observable update/delete behavior.",
 )
 
 
@@ -62,18 +60,14 @@ class RFC7592ClientRegistrationManagementService:
         self._require_enabled()
         call = await self.capability.call("update_registration", request)
         if not isinstance(call.value, ClientRegistrationRecord):
-            raise TypeError(
-                "client.registration must return ClientRegistrationRecord"
-            )
+            raise TypeError("client.registration must return ClientRegistrationRecord")
         return call.value
 
     async def delete(self, client_id: str) -> ClientRegistrationRecord:
         self._require_enabled()
         call = await self.capability.call("disable_registration", client_id)
         if not isinstance(call.value, ClientRegistrationRecord):
-            raise TypeError(
-                "client.registration must return ClientRegistrationRecord"
-            )
+            raise TypeError("client.registration must return ClientRegistrationRecord")
         return call.value
 
 
@@ -85,11 +79,11 @@ def describe() -> dict[str, object]:
 
 
 __all__ = [
-    'STATUS',
-    'RFC7592_SPEC_URL',
-    'ClientRegistrationManagementDisabledError',
-    'RFC7592ClientRegistrationManagementService',
-    'StandardOwner',
-    'OWNER',
-    'describe',
+    "STATUS",
+    "RFC7592_SPEC_URL",
+    "ClientRegistrationManagementDisabledError",
+    "RFC7592ClientRegistrationManagementService",
+    "StandardOwner",
+    "OWNER",
+    "describe",
 ]

@@ -6,4 +6,4 @@ from tigrbl_mdoc_concrete.issuer_signed import (
     parse_issuer_signed,
 )
 
-__all__ = ['IssuerSigned', 'IssuerSignedItem', 'parse_issuer_signed']
+__all__ = ["IssuerSigned", "IssuerSignedItem", "parse_issuer_signed"]

@@ -12,7 +12,7 @@ Freeze the retained certification boundary for closeout at the exact target set 
 - retained_target_count: `48`
 - retained_rfc_target_count: `30`
 - retained_non_rfc_target_count: `18`
-- deferred_target_count: `25`
+- deferred_target_count: `27`
 - retained_target_identity_hash: `b5caac77a8e8bc398c8d4679049f525d94ad701cd345eaa51498567972ce9f60`
 
 ## Required closeout rules

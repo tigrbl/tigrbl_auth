@@ -98,7 +98,9 @@ def decode_cose_message(
     protected_serialized, unprotected, payload_or_ciphertext, *remaining = value
     if not isinstance(unprotected, Mapping):
         raise ValueError("COSE unprotected headers must be a map")
-    if payload_or_ciphertext is not None and not isinstance(payload_or_ciphertext, bytes):
+    if payload_or_ciphertext is not None and not isinstance(
+        payload_or_ciphertext, bytes
+    ):
         raise ValueError("COSE payload or ciphertext must be bytes or nil")
 
     return CoseMessage(

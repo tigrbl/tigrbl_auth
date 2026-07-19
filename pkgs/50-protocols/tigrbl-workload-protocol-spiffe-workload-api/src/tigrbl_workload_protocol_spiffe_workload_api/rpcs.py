@@ -1,9 +1,13 @@
 from dataclasses import dataclass
+
+
 @dataclass(frozen=True, slots=True)
 class RpcDefinition:
     name: str
     server_streaming: bool
     profile: str
+
+
 RPC_DEFINITIONS = (
     RpcDefinition("FetchX509SVID", True, "x509-svid"),
     RpcDefinition("FetchX509Bundles", True, "x509-svid"),

@@ -43,6 +43,7 @@ def describe() -> dict[str, object]:
         spec_url=RFC8693_SPEC_URL,
     )
 
+
 __all__ = [
     "OWNER",
     "RFC8693_SPEC_URL",

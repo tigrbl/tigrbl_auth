@@ -1,6 +1,6 @@
 # Install Substrate Report
 
-- Generated at: `20260717T172112Z`
+- Generated at: `20260719T075617Z`
 - Passed: `True`
 - Static manifest passed: `True`
 - Profile: `base`
@@ -49,8 +49,9 @@
 
 ## Runtime import surfaces
 
-- `tigrbl_identity_server.api.app` → passed=`True` message=`import surface resolvable`
-- `tigrbl_auth.app` → passed=`True` message=`import surface resolvable`
+- `tigrbl_identity_server.composition.app` → passed=`True` message=`import surface resolvable`
+- `tigrbl_auth_backend_app_core` → passed=`True` message=`import surface resolvable`
+- `tigrbl_auth_backend_app_public` → passed=`True` message=`import surface resolvable`
 - `tigrbl_auth.plugin` → passed=`True` message=`import surface resolvable`
 - `tigrbl_auth.gateway` → passed=`True` message=`import surface resolvable`
 

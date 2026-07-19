@@ -18,6 +18,7 @@ from .claims import (
 from .compatibility import COMPATIBILITY_PATHS, OidcCompatibility, compatibility
 from .errors import OidcBindingError, OidcProtocolError, UnsupportedOidcRevisionError
 from .features import FEATURES_BY_VERSION, supports
+from .id_token_profile import REQUIRED_ID_TOKEN_CLAIMS, validate_id_token_profile
 from .migrations import migrate_client_metadata
 from .provider import (
     HostedLoginPage,
@@ -57,6 +58,7 @@ __all__ = [
     "OIDC_EXTENSION_CLAIMS",
     "OIDC_ID_TOKEN_PROFILE_CLAIMS",
     "OIDC_USERINFO_CLAIMS",
+    "REQUIRED_ID_TOKEN_CLAIMS",
     "VERSION_HISTORY",
     "HostedLoginPage",
     "HostedLoginRequest",
@@ -86,6 +88,5 @@ __all__ = [
     "render_login_template",
     "select_version",
     "supports",
+    "validate_id_token_profile",
 ]
-
-from .id_token_profile import REQUIRED_ID_TOKEN_CLAIMS, validate_id_token_profile

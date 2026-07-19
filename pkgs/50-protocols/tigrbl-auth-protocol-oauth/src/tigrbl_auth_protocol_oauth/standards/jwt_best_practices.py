@@ -6,7 +6,9 @@ import base64
 import json
 from typing import Any
 
-from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
+from tigrbl_identity_contracts.protocol_configuration import (
+    protocol_settings as settings,
+)
 from tigrbl_identity_core.errors import InvalidTokenError as BaseInvalidTokenError
 from tigrbl_auth_protocol_oauth.jwtoken import JWTCoder
 

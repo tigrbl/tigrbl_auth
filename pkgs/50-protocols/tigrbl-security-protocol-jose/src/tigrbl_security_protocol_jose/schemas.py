@@ -30,7 +30,9 @@ JOSE_CARRIERS = (
     JoseCarrier("application/jose", JoseArtifactKind.JOSE, JoseSerialization.COMPACT),
     JoseCarrier("application/jose+json", JoseArtifactKind.JOSE, JoseSerialization.JSON),
     JoseCarrier("application/jwk+json", JoseArtifactKind.JWK, JoseSerialization.JSON),
-    JoseCarrier("application/jwk-set+json", JoseArtifactKind.JWKS, JoseSerialization.JSON),
+    JoseCarrier(
+        "application/jwk-set+json", JoseArtifactKind.JWKS, JoseSerialization.JSON
+    ),
 )
 
 

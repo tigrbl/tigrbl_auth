@@ -7,20 +7,29 @@ from typing import Any, Mapping
 from tigrbl_identity_contracts.resource_server import VerifierContractProfile
 
 
-
 def verifier_contract_from_metadata(
     metadata: Mapping[str, Any],
 ) -> VerifierContractProfile:
     issuer = str(metadata.get("issuer") or "")
-    audiences_value = metadata.get("accepted_audiences") or metadata.get("resource") or ()
+    audiences_value = (
+        metadata.get("accepted_audiences") or metadata.get("resource") or ()
+    )
     if isinstance(audiences_value, str):
         audiences = (audiences_value,)
     else:
         audiences = tuple(str(value) for value in audiences_value)
     scopes_value = metadata.get("required_scopes") or ()
-    scopes = (scopes_value,) if isinstance(scopes_value, str) else tuple(str(value) for value in scopes_value)
+    scopes = (
+        (scopes_value,)
+        if isinstance(scopes_value, str)
+        else tuple(str(value) for value in scopes_value)
+    )
     algs_value = metadata.get("allowed_algorithms") or ()
-    algs = (algs_value,) if isinstance(algs_value, str) else tuple(str(value) for value in algs_value)
+    algs = (
+        (algs_value,)
+        if isinstance(algs_value, str)
+        else tuple(str(value) for value in algs_value)
+    )
     profile = VerifierContractProfile(
         issuer=issuer,
         audiences=audiences,

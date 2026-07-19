@@ -1,11 +1,11 @@
 {
-  "generated_at": "20260717T172115Z",
+  "generated_at": "20260719T075620Z",
   "deployment_profile": "baseline",
   "report_mode": "validated-runs",
   "validated_artifact_source": null,
   "application_probe": {
     "passed": false,
-    "app_factory": "tigrbl_identity_server.api.app.build_app",
+    "app_factory": "unbound",
     "message": "Validated runtime manifests are missing or failing for the base application-factory environments: base@py3.10, base@py3.11, base@py3.12",
     "error_type": "ValidatedRuntimeEvidenceMissing"
   },

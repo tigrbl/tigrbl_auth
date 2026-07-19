@@ -82,6 +82,9 @@
       "tests": [
         "tests/conformance/baseline/test_oidc_id_token.py",
         "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py",
         "tests/integration/test_authorization_response_types.py",
         "tests/integration/test_oidc_endpoints.py"
       ],
@@ -180,7 +183,10 @@
       "target": "RFC 7515",
       "tests": [
         "tests/conformance/baseline/test_rfc7515_jws.py",
-        "tests/unit/test_rfc7515_jws.py"
+        "tests/unit/test_rfc7515_jws.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jose/"
@@ -192,7 +198,10 @@
       "tests": [
         "tests/conformance/production/test_rfc7516_jwe_profile.py",
         "tests/unit/test_rfc7516_jwe.py",
-        "tests/unit/test_oidc_id_token_encryption.py"
+        "tests/unit/test_oidc_id_token_encryption.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwe/"
@@ -225,7 +234,9 @@
       "target": "RFC 7519",
       "tests": [
         "tests/conformance/baseline/test_rfc7519_jwt.py",
-        "tests/unit/test_jwtoken.py"
+        "tests/unit/test_jwtoken.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwt/"
@@ -412,6 +423,9 @@
       "tests": [
         "tests/conformance/baseline/test_oidc_id_token.py",
         "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py",
         "tests/integration/test_authorization_response_types.py",
         "tests/integration/test_oidc_endpoints.py"
       ],
@@ -550,7 +564,10 @@
       "target": "RFC 7515",
       "tests": [
         "tests/conformance/baseline/test_rfc7515_jws.py",
-        "tests/unit/test_rfc7515_jws.py"
+        "tests/unit/test_rfc7515_jws.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jose/"
@@ -562,7 +579,10 @@
       "tests": [
         "tests/conformance/production/test_rfc7516_jwe_profile.py",
         "tests/unit/test_rfc7516_jwe.py",
-        "tests/unit/test_oidc_id_token_encryption.py"
+        "tests/unit/test_oidc_id_token_encryption.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwe/"
@@ -595,7 +615,9 @@
       "target": "RFC 7519",
       "tests": [
         "tests/conformance/baseline/test_rfc7519_jwt.py",
-        "tests/unit/test_jwtoken.py"
+        "tests/unit/test_jwtoken.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwt/"
@@ -918,6 +940,9 @@
       "tests": [
         "tests/conformance/baseline/test_oidc_id_token.py",
         "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py",
         "tests/integration/test_authorization_response_types.py",
         "tests/integration/test_oidc_endpoints.py"
       ],
@@ -1069,7 +1094,10 @@
       "target": "RFC 7515",
       "tests": [
         "tests/conformance/baseline/test_rfc7515_jws.py",
-        "tests/unit/test_rfc7515_jws.py"
+        "tests/unit/test_rfc7515_jws.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jose/"
@@ -1081,7 +1109,10 @@
       "tests": [
         "tests/conformance/production/test_rfc7516_jwe_profile.py",
         "tests/unit/test_rfc7516_jwe.py",
-        "tests/unit/test_oidc_id_token_encryption.py"
+        "tests/unit/test_oidc_id_token_encryption.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwe/"
@@ -1114,7 +1145,9 @@
       "target": "RFC 7519",
       "tests": [
         "tests/conformance/baseline/test_rfc7519_jwt.py",
-        "tests/unit/test_jwtoken.py"
+        "tests/unit/test_jwtoken.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwt/"
@@ -1565,6 +1598,9 @@
       "tests": [
         "tests/conformance/baseline/test_oidc_id_token.py",
         "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py",
         "tests/integration/test_authorization_response_types.py",
         "tests/integration/test_oidc_endpoints.py"
       ],
@@ -1716,7 +1752,10 @@
       "target": "RFC 7515",
       "tests": [
         "tests/conformance/baseline/test_rfc7515_jws.py",
-        "tests/unit/test_rfc7515_jws.py"
+        "tests/unit/test_rfc7515_jws.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jose/"
@@ -1728,7 +1767,10 @@
       "tests": [
         "tests/conformance/production/test_rfc7516_jwe_profile.py",
         "tests/unit/test_rfc7516_jwe.py",
-        "tests/unit/test_oidc_id_token_encryption.py"
+        "tests/unit/test_oidc_id_token_encryption.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwe/"
@@ -1761,7 +1803,9 @@
       "target": "RFC 7519",
       "tests": [
         "tests/conformance/baseline/test_rfc7519_jwt.py",
-        "tests/unit/test_jwtoken.py"
+        "tests/unit/test_jwtoken.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwt/"
@@ -2228,6 +2272,9 @@
       "tests": [
         "tests/conformance/baseline/test_oidc_id_token.py",
         "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
+        "tests/unit/test_oidc_id_token_canonical_verification.py",
+        "tests/unit/test_authorize_id_token_hashes.py",
+        "tests/unit/test_identity_artifact_confusion_vectors.py",
         "tests/integration/test_authorization_response_types.py",
         "tests/integration/test_oidc_endpoints.py"
       ],
@@ -2379,7 +2426,10 @@
       "target": "RFC 7515",
       "tests": [
         "tests/conformance/baseline/test_rfc7515_jws.py",
-        "tests/unit/test_rfc7515_jws.py"
+        "tests/unit/test_rfc7515_jws.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jose/"
@@ -2391,7 +2441,10 @@
       "tests": [
         "tests/conformance/production/test_rfc7516_jwe_profile.py",
         "tests/unit/test_rfc7516_jwe.py",
-        "tests/unit/test_oidc_id_token_encryption.py"
+        "tests/unit/test_oidc_id_token_encryption.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwe/"
@@ -2424,7 +2477,9 @@
       "target": "RFC 7519",
       "tests": [
         "tests/conformance/baseline/test_rfc7519_jwt.py",
-        "tests/unit/test_jwtoken.py"
+        "tests/unit/test_jwtoken.py",
+        "tests/unit/test_complete_wire_objects.py",
+        "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwt/"

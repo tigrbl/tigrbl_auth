@@ -11,10 +11,14 @@ import time
 import warnings
 from typing import Any, Iterable
 
-from tigrbl_identity_contracts.protocol_configuration import protocol_settings as settings
+from tigrbl_identity_contracts.protocol_configuration import (
+    protocol_settings as settings,
+)
 from tigrbl_identity_core.errors import InvalidTokenError
 from tigrbl_auth_protocol_oauth.standards.json_web_token import encode_jwt
-from tigrbl_auth_protocol_oauth.standards.jwt_client_auth import validate_client_jwt_bearer
+from tigrbl_auth_protocol_oauth.standards.jwt_client_auth import (
+    validate_client_jwt_bearer,
+)
 
 RFC8523_SPEC_URL = "https://www.rfc-editor.org/rfc/rfc8523"
 REQUIRED_CLAIMS: set[str] = {"iss", "sub", "aud", "exp", "iat", "jti"}
@@ -32,7 +36,9 @@ def validate_enhanced_jwt_bearer(
     claims = validate_client_jwt_bearer(assertion, audience=audience)
     missing = REQUIRED_CLAIMS - claims.keys()
     if missing:
-        raise ValueError(f"Legacy RFC 8523 path missing claims: {', '.join(sorted(missing))}")
+        raise ValueError(
+            f"Legacy RFC 8523 path missing claims: {', '.join(sorted(missing))}"
+        )
     current_time = int(time.time())
     iat = claims.get("iat")
     if not isinstance(iat, int):

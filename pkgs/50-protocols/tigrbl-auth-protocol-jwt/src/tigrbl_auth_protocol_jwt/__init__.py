@@ -1,14 +1,19 @@
-from .protocol import JwtProtocol
 """Versioned RFC 7519 JSON Web Token ownership."""
 
 from tigrbl_identity_contracts.protocol_processing import (
     build_protocol_capability_report,
 )
 
+from .protocol import JwtProtocol
+
 from .bindings import CAPABILITY_REQUIREMENTS
 from .claims import JWT_CLAIM_CLASSES, JWT_VERSION, compose_jwt_claim_set
 from .compatibility import COMPATIBILITY_PATHS, JwtCompatibility, compatibility
-from .errors import JwtProfileRequiredError, JwtProtocolError, UnsupportedJwtMediaTypeError
+from .errors import (
+    JwtProfileRequiredError,
+    JwtProtocolError,
+    UnsupportedJwtMediaTypeError,
+)
 from .features import FEATURES_BY_VERSION, supports
 from .migrations import migrate_claims
 from .profile import JwtProfile

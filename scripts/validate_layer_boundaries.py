@@ -110,6 +110,18 @@ CAPABILITY_PURPOSES = {
     "tigrbl-digital-credential-presentation-capability": (
         "coordinate holder consent, replay defense, and presentation verification"
     ),
+    "tigrbl-identity-document-capability": (
+        "coordinate identity-document parsing, resolution, and verification through injected implementations"
+    ),
+    "tigrbl-possession-proof-capability": (
+        "coordinate proof verification with replay acceptance and holder-binding evaluation"
+    ),
+    "tigrbl-protected-envelope-capability": (
+        "coordinate protected-envelope issuance and verification through injected cryptographic implementations"
+    ),
+    "tigrbl-workload-credential-brokering-capability": (
+        "coordinate delegated workload reference resolution, authorization, credential delivery, and trust material"
+    ),
     "tigrbl-identity-administration-capability": (
         "coordinate identity lifecycle administration"
     ),
@@ -413,7 +425,9 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
                 continue
             if package.layer == ROUTER_LAYER and target.layer == BACKEND_APP_LAYER:
                 kind = "router-depends-on-backend-app"
-                detail = "routers are reusable dependencies of apps, never app consumers"
+                detail = (
+                    "routers are reusable dependencies of apps, never app consumers"
+                )
             elif target.layer in NON_PRODUCTION_LAYERS:
                 kind = "terminal-layer-dependency"
                 detail = "production cannot consume terminal packages; examples cannot consume tests"
@@ -442,7 +456,9 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
                     imported_roots.update(
                         (alias.name.split(".")[0], node.lineno) for alias in node.names
                     )
-                elif isinstance(node, ast.ImportFrom) and node.level == 0 and node.module:
+                elif (
+                    isinstance(node, ast.ImportFrom) and node.level == 0 and node.module
+                ):
                     imported_roots.add((node.module.split(".")[0], node.lineno))
             for match in DYNAMIC_IMPORT_RE.finditer(text):
                 imported_roots.add(
@@ -467,7 +483,9 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
                     continue
                 if package.layer == ROUTER_LAYER and target.layer == BACKEND_APP_LAYER:
                     kind = "router-imports-backend-app"
-                    detail = "routers are reusable dependencies of apps, never app consumers"
+                    detail = (
+                        "routers are reusable dependencies of apps, never app consumers"
+                    )
                 elif target.layer in NON_PRODUCTION_LAYERS:
                     kind = "terminal-layer-import"
                     detail = "production cannot import terminal packages; examples cannot import tests"
@@ -501,7 +519,9 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
             Violation(
                 kind="stale-dependency-exception",
                 package=consumer,
-                package_layer=(consumer_package.layer if consumer_package else "missing"),
+                package_layer=(
+                    consumer_package.layer if consumer_package else "missing"
+                ),
                 target=target,
                 target_layer=(target_package.layer if target_package else "missing"),
                 path="pkgs/layers.toml",
@@ -739,7 +759,11 @@ def report(violations: tuple[Violation, ...]) -> dict[str, object]:
                 for rule in LAYER_POLICY.dependency_rules
             },
             "dependency_exceptions": [
-                {"consumer": item.consumer, "target": item.target, "reason": item.reason}
+                {
+                    "consumer": item.consumer,
+                    "target": item.target,
+                    "reason": item.reason,
+                }
                 for item in LAYER_POLICY.dependency_exceptions
             ],
         },

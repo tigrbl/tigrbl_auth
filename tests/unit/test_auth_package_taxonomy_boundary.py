@@ -47,6 +47,7 @@ DEPRECATED_DIST_TO_IMPORT_ROOT = {
 }
 
 DEPRECATED_MODULE_CANONICAL_IMPORT_ROOT = {
+    "tigrbl_identity_oauth/ops/authorize.py": "tigrbl_auth_backend_app_core.surfaces.authorization_surface",
     "tigrbl_identity_credentials/authenticators.py": "tigrbl_identity_server.security.auth",
     "tigrbl_identity_credentials/_operator_store.py": "tigrbl_identity_storage_runtime.operator_store",
     "tigrbl_identity_credentials/_token_service/__init__.py": "tigrbl_identity_runtime.token_service",
@@ -83,6 +84,7 @@ DEPRECATED_MODULE_CANONICAL_IMPORT_ROOT = {
 }
 
 NON_TAXONOMY_CANONICAL_ROOTS = {
+    "tigrbl_auth_backend_app_core",
     "tigrbl_auth_release_certification",
     "tigrbl_authz_policy_admin_gate",
     "tigrbl_authz_policy_attributes_mapping",
@@ -137,7 +139,10 @@ def test_deprecated_taxonomy_roots_reexport_preferred_surfaces() -> None:
 
         assert set(preferred.__all__) == set(compat.__all__)
         for name in preferred.__all__:
-            assert getattr(preferred, name) is getattr(compat, name), (preferred_root, name)
+            assert getattr(preferred, name) is getattr(compat, name), (
+                preferred_root,
+                name,
+            )
 
 
 def test_preferred_taxonomy_package_metadata_is_declared() -> None:
@@ -146,7 +151,9 @@ def test_preferred_taxonomy_package_metadata_is_declared() -> None:
         metadata = tomllib.loads(pyproject.read_text(encoding="utf-8"))
 
         assert metadata["project"]["name"] == dist_name
-        assert metadata["tool"]["poetry"]["packages"] == [{"include": import_root, "from": "src"}]
+        assert metadata["tool"]["poetry"]["packages"] == [
+            {"include": import_root, "from": "src"}
+        ]
 
 
 def test_deprecated_taxonomy_package_metadata_lives_under_deprecated_folder() -> None:
@@ -157,7 +164,9 @@ def test_deprecated_taxonomy_package_metadata_lives_under_deprecated_folder() ->
 
         assert not (PKGS / dist_name).exists()
         assert metadata["project"]["name"] == dist_name
-        assert metadata["tool"]["poetry"]["packages"] == [{"include": import_root, "from": "src"}]
+        assert metadata["tool"]["poetry"]["packages"] == [
+            {"include": import_root, "from": "src"}
+        ]
         assert (package_path / "src" / import_root).is_dir()
 
 
@@ -188,7 +197,9 @@ def test_deprecated_taxonomy_roots_delegate_to_preferred_roots() -> None:
                 assert canonical_module == expected_root, path
             assert canonical_root not in deprecated_imports, path
             assert canonical_root != "tigrbl_auth", path
-            assert _absolute_imports(path) <= {"__future__", "importlib", "warnings"}, path
+            assert _absolute_imports(path) <= {"__future__", "importlib", "warnings"}, (
+                path
+            )
 
 
 def test_authn_authz_protocol_roots_do_not_import_deprecated_roots() -> None:

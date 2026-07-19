@@ -41,8 +41,7 @@ def describe() -> dict[str, object]:
         bearer_token_required=True,
         signed_response_media_type="application/jwt",
         scope_claims={
-            scope: list(claims)
-            for scope, claims in USERINFO_SCOPE_CLAIMS.items()
+            scope: list(claims) for scope, claims in USERINFO_SCOPE_CLAIMS.items()
         },
     )
 
