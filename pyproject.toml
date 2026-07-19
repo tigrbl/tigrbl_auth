@@ -251,6 +251,7 @@ dependencies = [
     "tigrbl-claim-cwt-issued-at-concrete==0.4.0.dev2",
     "tigrbl-claim-cwt-id-concrete==0.4.0.dev2",
     "tigrbl-auth-protocol-cwt==0.4.0.dev2",
+    "tigrbl-workload-protocol-spiffe-svid==0.4.0.dev2",
     "tigrbl-auth-protocol-gnap==0.4.0.dev2",
     "tigrbl-auth-profile-haip==0.4.0.dev2",
     "tigrbl-auth-profile-fido2-server==0.4.0.dev2",
@@ -1022,6 +1023,8 @@ tigrbl-identity-protocol-did-core = { path = "pkgs/50-protocols/tigrbl-identity-
 tigrbl-oauth-profile-jwt-access-token = { path = "pkgs/50-protocols/tigrbl-oauth-profile-jwt-access-token", editable = true }
 
 tigrbl-credential-profile-vc-jose-cose = { path = "pkgs/50-protocols/tigrbl-credential-profile-vc-jose-cose", editable = true }
+
+tigrbl-workload-protocol-spiffe-svid = { path = "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-svid", editable = true }
 
 [project.scripts]
 tigrbl-auth = "tigrbl_identity_cli.cli.main:main"

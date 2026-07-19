@@ -4101,6 +4101,7 @@ dependencies = [
     { name = "tigrbl-workload-identity-concrete" },
     { name = "tigrbl-workload-identity-contracts" },
     { name = "tigrbl-workload-identity-durability" },
+    { name = "tigrbl-workload-protocol-spiffe-svid" },
     { name = "tigrbl-wpt-concrete" },
     { name = "tigrbl-x509-svid-credential-concrete" },
     { name = "tomli", marker = "python_full_version < '3.11'" },
@@ -4629,6 +4630,7 @@ requires-dist = [
     { name = "tigrbl-workload-identity-concrete", editable = "pkgs/10-concrete/tigrbl-workload-identity-concrete" },
     { name = "tigrbl-workload-identity-contracts", editable = "pkgs/02-contracts/tigrbl-workload-identity-contracts" },
     { name = "tigrbl-workload-identity-durability", editable = "pkgs/30-storage-runtime/tigrbl-workload-identity-durability" },
+    { name = "tigrbl-workload-protocol-spiffe-svid", editable = "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-svid" },
     { name = "tigrbl-wpt-concrete", editable = "pkgs/10-concrete/tigrbl-wpt-concrete" },
     { name = "tigrbl-x509-svid-credential-concrete", editable = "pkgs/10-concrete/tigrbl-x509-svid-credential-concrete" },
     { name = "tomli", marker = "python_full_version < '3.11'", specifier = "==2.4.0" },
@@ -10344,6 +10346,21 @@ requires-dist = [
     { name = "tigrbl-replay-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
     { name = "tigrbl-table-durability", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-workload-protocol-spiffe-svid"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-svid" }
+dependencies = [
+    { name = "tigrbl-jwt-svid-credential-concrete" },
+    { name = "tigrbl-x509-svid-credential-concrete" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-jwt-svid-credential-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-x509-svid-credential-concrete", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]

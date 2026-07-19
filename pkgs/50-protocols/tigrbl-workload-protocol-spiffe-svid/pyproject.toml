@@ -1,0 +1,10 @@
+[project]
+name="tigrbl-workload-protocol-spiffe-svid"
+version="0.4.0.dev2"
+requires-python=">=3.10,<3.15"
+dependencies=["tigrbl-x509-svid-credential-concrete==0.4.0.dev2","tigrbl-jwt-svid-credential-concrete==0.4.0.dev2"]
+[build-system]
+requires=["poetry-core>=1.0.0"]
+build-backend="poetry.core.masonry.api"
+[tool.poetry]
+packages=[{include="tigrbl_workload_protocol_spiffe_svid",from="src"}]
