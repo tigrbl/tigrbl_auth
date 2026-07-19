@@ -3926,6 +3926,7 @@ dependencies = [
     { name = "tigrbl-identity-credentials" },
     { name = "tigrbl-identity-credentials-concrete" },
     { name = "tigrbl-identity-document-bases" },
+    { name = "tigrbl-identity-document-capability" },
     { name = "tigrbl-identity-document-contracts" },
     { name = "tigrbl-identity-durability" },
     { name = "tigrbl-identity-identities-concrete" },
@@ -3986,12 +3987,14 @@ dependencies = [
     { name = "tigrbl-policy-assurance-capability" },
     { name = "tigrbl-policy-decision-engine-default" },
     { name = "tigrbl-policy-evaluation-capability" },
+    { name = "tigrbl-possession-proof-capability" },
     { name = "tigrbl-presentation-durability" },
     { name = "tigrbl-principal-authentication" },
     { name = "tigrbl-proof-of-possession-bases" },
     { name = "tigrbl-proof-of-possession-contracts" },
     { name = "tigrbl-protected-artifact-bases" },
     { name = "tigrbl-protected-envelope-bases" },
+    { name = "tigrbl-protected-envelope-capability" },
     { name = "tigrbl-protected-envelope-contracts" },
     { name = "tigrbl-protected-resource-authorization-capability" },
     { name = "tigrbl-protocol-artifact-processing" },
@@ -4085,6 +4088,7 @@ dependencies = [
     { name = "tigrbl-webauthn-durability" },
     { name = "tigrbl-wit-concrete" },
     { name = "tigrbl-wit-svid-credential-concrete" },
+    { name = "tigrbl-workload-credential-brokering-capability" },
     { name = "tigrbl-workload-identity" },
     { name = "tigrbl-workload-identity-bases" },
     { name = "tigrbl-workload-identity-capability" },
@@ -4440,6 +4444,7 @@ requires-dist = [
     { name = "tigrbl-identity-credentials", editable = "pkgs/deprecated/tigrbl-identity-credentials" },
     { name = "tigrbl-identity-credentials-concrete", editable = "pkgs/deprecated/tigrbl-identity-credentials-concrete" },
     { name = "tigrbl-identity-document-bases", editable = "pkgs/05-bases/tigrbl-identity-document-bases" },
+    { name = "tigrbl-identity-document-capability", editable = "pkgs/40-capabilities/tigrbl-identity-document-capability" },
     { name = "tigrbl-identity-document-contracts", editable = "pkgs/02-contracts/tigrbl-identity-document-contracts" },
     { name = "tigrbl-identity-durability", editable = "pkgs/30-storage-runtime/tigrbl-identity-durability" },
     { name = "tigrbl-identity-identities-concrete", editable = "pkgs/deprecated/tigrbl-identity-identities-concrete" },
@@ -4504,12 +4509,14 @@ requires-dist = [
     { name = "tigrbl-policy-assurance-capability", editable = "pkgs/40-capabilities/tigrbl-policy-assurance-capability" },
     { name = "tigrbl-policy-decision-engine-default", editable = "pkgs/10-concrete/tigrbl-policy-decision-engine-default" },
     { name = "tigrbl-policy-evaluation-capability", editable = "pkgs/40-capabilities/tigrbl-policy-evaluation-capability" },
+    { name = "tigrbl-possession-proof-capability", editable = "pkgs/40-capabilities/tigrbl-possession-proof-capability" },
     { name = "tigrbl-presentation-durability", editable = "pkgs/30-storage-runtime/tigrbl-presentation-durability" },
     { name = "tigrbl-principal-authentication", editable = "pkgs/deprecated/tigrbl-principal-authentication" },
     { name = "tigrbl-proof-of-possession-bases", editable = "pkgs/05-bases/tigrbl-proof-of-possession-bases" },
     { name = "tigrbl-proof-of-possession-contracts", editable = "pkgs/02-contracts/tigrbl-proof-of-possession-contracts" },
     { name = "tigrbl-protected-artifact-bases", editable = "pkgs/05-bases/tigrbl-protected-artifact-bases" },
     { name = "tigrbl-protected-envelope-bases", editable = "pkgs/05-bases/tigrbl-protected-envelope-bases" },
+    { name = "tigrbl-protected-envelope-capability", editable = "pkgs/40-capabilities/tigrbl-protected-envelope-capability" },
     { name = "tigrbl-protected-envelope-contracts", editable = "pkgs/02-contracts/tigrbl-protected-envelope-contracts" },
     { name = "tigrbl-protected-resource-authorization-capability", editable = "pkgs/40-capabilities/tigrbl-protected-resource-authorization-capability" },
     { name = "tigrbl-protocol-artifact-processing", editable = "pkgs/deprecated/tigrbl-protocol-artifact-processing" },
@@ -4603,6 +4610,7 @@ requires-dist = [
     { name = "tigrbl-webauthn-durability", editable = "pkgs/30-storage-runtime/tigrbl-webauthn-durability" },
     { name = "tigrbl-wit-concrete", editable = "pkgs/10-concrete/tigrbl-wit-concrete" },
     { name = "tigrbl-wit-svid-credential-concrete", editable = "pkgs/10-concrete/tigrbl-wit-svid-credential-concrete" },
+    { name = "tigrbl-workload-credential-brokering-capability", editable = "pkgs/40-capabilities/tigrbl-workload-credential-brokering-capability" },
     { name = "tigrbl-workload-identity", editable = "pkgs/deprecated/tigrbl-workload-identity" },
     { name = "tigrbl-workload-identity-bases", editable = "pkgs/05-bases/tigrbl-workload-identity-bases" },
     { name = "tigrbl-workload-identity-capability", editable = "pkgs/40-capabilities/tigrbl-workload-identity-capability" },
@@ -7550,6 +7558,23 @@ dependencies = [
 requires-dist = [{ name = "tigrbl-identity-document-contracts", specifier = "==0.4.0.dev2" }]
 
 [[package]]
+name = "tigrbl-identity-document-capability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/40-capabilities/tigrbl-identity-document-capability" }
+dependencies = [
+    { name = "tigrbl-capability" },
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-document-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-capability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-document-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-identity-document-contracts"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/02-contracts/tigrbl-identity-document-contracts" }
@@ -8670,6 +8695,23 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-possession-proof-capability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/40-capabilities/tigrbl-possession-proof-capability" }
+dependencies = [
+    { name = "tigrbl-capability" },
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-proof-of-possession-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-capability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-proof-of-possession-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-presentation-durability"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/30-storage-runtime/tigrbl-presentation-durability" }
@@ -8776,6 +8818,23 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [{ name = "tigrbl-protected-envelope-contracts", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-protected-envelope-capability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/40-capabilities/tigrbl-protected-envelope-capability" }
+dependencies = [
+    { name = "tigrbl-capability" },
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-protected-envelope-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-capability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-protected-envelope-contracts", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-protected-envelope-contracts"
@@ -10121,6 +10180,23 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-workload-credential-brokering-capability"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/40-capabilities/tigrbl-workload-credential-brokering-capability" }
+dependencies = [
+    { name = "tigrbl-capability" },
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-workload-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-capability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-workload-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-workload-identity"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/deprecated/tigrbl-workload-identity" }
@@ -10149,12 +10225,14 @@ source = { editable = "pkgs/40-capabilities/tigrbl-workload-identity-capability"
 dependencies = [
     { name = "tigrbl-capability" },
     { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-workload-identity-contracts" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-workload-identity-contracts", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]

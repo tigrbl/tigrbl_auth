@@ -346,6 +346,10 @@ dependencies = [
     "tigrbl-security-event-delivery-capability==0.4.0.dev2",
     "tigrbl-workload-identity==0.4.0.dev2",
     "tigrbl-workload-identity-capability==0.4.0.dev2",
+    "tigrbl-identity-document-capability==0.4.0.dev2",
+    "tigrbl-protected-envelope-capability==0.4.0.dev2",
+    "tigrbl-possession-proof-capability==0.4.0.dev2",
+    "tigrbl-workload-credential-brokering-capability==0.4.0.dev2",
     "tigrbl-authz-policy-admin-gate==0.4.0.dev2",
     "tigrbl-auth-router-admin-gate==0.4.0.dev2",
     "tigrbl-authz-policy==0.4.0.dev2",
@@ -670,6 +674,10 @@ tigrbl-security-events = { path = "pkgs/deprecated/tigrbl-security-events", edit
 tigrbl-security-event-delivery-capability = { path = "pkgs/40-capabilities/tigrbl-security-event-delivery-capability", editable = true }
 tigrbl-workload-identity = { path = "pkgs/deprecated/tigrbl-workload-identity", editable = true }
 tigrbl-workload-identity-capability = { path = "pkgs/40-capabilities/tigrbl-workload-identity-capability", editable = true }
+tigrbl-identity-document-capability = { path = "pkgs/40-capabilities/tigrbl-identity-document-capability", editable = true }
+tigrbl-protected-envelope-capability = { path = "pkgs/40-capabilities/tigrbl-protected-envelope-capability", editable = true }
+tigrbl-possession-proof-capability = { path = "pkgs/40-capabilities/tigrbl-possession-proof-capability", editable = true }
+tigrbl-workload-credential-brokering-capability = { path = "pkgs/40-capabilities/tigrbl-workload-credential-brokering-capability", editable = true }
 tigrbl-authz-policy-admin-gate = { path = "pkgs/deprecated/tigrbl-authz-policy-admin-gate", editable = true }
 tigrbl-auth-router-admin-gate = { path = "pkgs/80-routers/tigrbl-auth-router-admin-gate", editable = true }
 tigrbl-authz-policy-authority-derivation-graph = { path = "pkgs/30-storage-runtime/tigrbl-authz-policy-authority-derivation-graph", editable = true }
