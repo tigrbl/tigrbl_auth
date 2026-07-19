@@ -1,3 +1,4 @@
+import warnings
 from collections.abc import Mapping
 
 from tigrbl_identity_contracts.did import (
@@ -11,6 +12,11 @@ from .identifiers import parse_did
 
 
 def parse_did_document(value: Mapping[str, object]) -> DidDocument:
+    warnings.warn(
+        "tigrbl_did_concrete.parse_did_document is deprecated; use tigrbl_did_document_concrete.DidDocument with tigrbl_identity_protocol_did_core",
+        DeprecationWarning,
+        stacklevel=2,
+    )
     identifier = value.get("id")
     if not isinstance(identifier, str):
         raise ValueError("DID document requires id")

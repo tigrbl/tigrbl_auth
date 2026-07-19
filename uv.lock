@@ -7855,10 +7855,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-identity-protocol-did-core" }
 dependencies = [
     { name = "tigrbl-did-document-concrete" },
+    { name = "tigrbl-identity-document-contracts" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-did-document-concrete", specifier = "==0.4.0.dev2" }]
+requires-dist = [
+    { name = "tigrbl-did-document-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-document-contracts", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-identity-resource-server"
