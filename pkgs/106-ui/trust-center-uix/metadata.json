@@ -1,0 +1,6 @@
+{
+  "name": "Trust Center & Federation Console",
+  "description": "An enterprise console and runtime trust engine for OpenID Federation 1.0, OIDC identity providers, trust chain resolution, mapping labs, and incident containment.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
