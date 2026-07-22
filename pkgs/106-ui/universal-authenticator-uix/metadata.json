@@ -1,0 +1,6 @@
+{
+  "name": "Universal Authenticator UIX",
+  "description": "High-fidelity universal authenticator ceremony and lifecycle management portal covering human, recovery, and machine authentication.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

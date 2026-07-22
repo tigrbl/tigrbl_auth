@@ -1,0 +1,6 @@
+{
+  "name": "Tigrbl Authenticator Console",
+  "description": "A high-fidelity universal ceremony engine, authenticator inventory, policy modeler, and developer dashboard conforming to modern phishing-resistant guidelines.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

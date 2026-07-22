@@ -1,0 +1,6 @@
+{
+  "name": "Tigrbl Directory & SCIM Center",
+  "description": "Inbound SCIM 2.0 provisioning control plane, directory explorer, mapping studio, sync timeline, and active SCIM simulation sandbox.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

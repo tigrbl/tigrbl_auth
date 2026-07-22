@@ -80,6 +80,12 @@ category = "presentation"
 javascript = true
 
 [[layers]]
+id = "106-ui"
+order = 106
+category = "presentation"
+javascript = true
+
+[[layers]]
 id = "110-examples"
 order = 110
 category = "example"
@@ -157,13 +163,17 @@ consumer_layer = "105-ui"
 allowed_target_layers = ["100-uix-core","105-ui"]
 
 [[dependency_rules]]
+consumer_layer = "106-ui"
+allowed_target_layers = ["100-uix-core", "105-ui", "106-ui"]
+
+[[dependency_rules]]
 consumer_layer = "110-examples"
-allowed_target_layers = ["00-primitives","01-storage","02-contracts","05-bases","10-concrete","20-providers","30-storage-runtime","40-capabilities","50-protocols","60-runtime","70-facade","80-routers","90-backend-apps","100-uix-core","105-ui","110-examples"]
+allowed_target_layers = ["00-primitives","01-storage","02-contracts","05-bases","10-concrete","20-providers","30-storage-runtime","40-capabilities","50-protocols","60-runtime","70-facade","80-routers","90-backend-apps","100-uix-core","105-ui","106-ui","110-examples"]
 
 [[dependency_rules]]
 consumer_layer = "120-tests"
-allowed_target_layers = ["00-primitives","01-storage","02-contracts","05-bases","10-concrete","20-providers","30-storage-runtime","40-capabilities","50-protocols","60-runtime","70-facade","80-routers","90-backend-apps","100-uix-core","105-ui","110-examples","120-tests","deprecated"]
+allowed_target_layers = ["00-primitives","01-storage","02-contracts","05-bases","10-concrete","20-providers","30-storage-runtime","40-capabilities","50-protocols","60-runtime","70-facade","80-routers","90-backend-apps","100-uix-core","105-ui","106-ui","110-examples","120-tests","deprecated"]
 
 [[dependency_rules]]
 consumer_layer = "deprecated"
-allowed_target_layers = ["00-primitives","01-storage","02-contracts","05-bases","10-concrete","20-providers","30-storage-runtime","40-capabilities","50-protocols","60-runtime","70-facade","80-routers","90-backend-apps","100-uix-core","105-ui","110-examples","120-tests","deprecated"]
+allowed_target_layers = ["00-primitives","01-storage","02-contracts","05-bases","10-concrete","20-providers","30-storage-runtime","40-capabilities","50-protocols","60-runtime","70-facade","80-routers","90-backend-apps","100-uix-core","105-ui","106-ui","110-examples","120-tests","deprecated"]

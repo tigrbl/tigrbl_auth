@@ -1,0 +1,6 @@
+{
+  "name": "Password AMR Lifecycle Workspace",
+  "description": "A comprehensive frontend UIX implementation of first-party password enrollment, authentication, lifecycle, reset, policy, and recovery flows under the pwd AMR.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

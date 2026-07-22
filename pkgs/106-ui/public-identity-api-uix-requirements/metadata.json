@@ -1,0 +1,6 @@
+{
+  "name": "Tigrbl Auth",
+  "description": "Hosted public identity front door for Tigrbl Auth. Complete secure login, registration, MFA, password recovery, and OAuth consent journeys.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Windows Integrated Authentication (WIA) Hub",
+  "description": "An enterprise hub for Windows Integrated Authentication (wia) featuring the P0 Negotiate ceremony, user enrollment, administrative policies, KDC diagnostics, and CLI simulations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

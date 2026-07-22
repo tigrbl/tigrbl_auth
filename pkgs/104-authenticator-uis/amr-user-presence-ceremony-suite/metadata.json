@@ -1,0 +1,6 @@
+{
+  "name": "AMR User-Presence Ceremony Suite",
+  "description": "A complete first-party user-presence ceremony, evidence, policy, and diagnostics platform for authenticators.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

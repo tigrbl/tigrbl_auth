@@ -1,0 +1,6 @@
+{
+  "name": "Knowledge-Based Authentication Portal",
+  "description": "High-fidelity interactive demonstration and design portal for first-party KBA enrollment, challenge, lifecycle, recovery, policy, and operations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

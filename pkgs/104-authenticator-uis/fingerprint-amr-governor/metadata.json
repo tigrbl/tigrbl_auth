@@ -1,0 +1,6 @@
+{
+  "name": "Fingerprint AMR Governor",
+  "description": "An enterprise interface for governing and simulating verified fingerprint Authentication Method Reference (AMR) evidence, policy enforcement, and audit provenance.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

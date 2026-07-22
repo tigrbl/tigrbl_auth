@@ -1,0 +1,6 @@
+{
+  "name": "Tigrbl Authorization Studio",
+  "description": "AuthZEN-compliant Policy Decision Point (PDP) and Policy Studio management engine.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

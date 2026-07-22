@@ -1,0 +1,6 @@
+{
+  "name": "Telephone Confirmation AMR",
+  "description": "Telephone-based confirmation AMR system for secure enrollment, call verification, lifecycle management, and provider diagnostics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

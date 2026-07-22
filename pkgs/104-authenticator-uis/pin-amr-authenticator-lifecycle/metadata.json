@@ -1,0 +1,6 @@
+{
+  "name": "PIN AMR Authenticator Lifecycle",
+  "description": "A high-fidelity simulator and reference implementation of first-party account PIN authenticator and WebAuthn/external security key AMR adapters.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

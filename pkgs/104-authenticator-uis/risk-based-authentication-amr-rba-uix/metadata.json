@@ -1,0 +1,6 @@
+{
+  "name": "Risk-Based Authentication AMR RBA UIX",
+  "description": "Interactive first-party adaptive authentication, step-up ceremony, user security lifecycle, policy editor, and simulation workbench.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
