@@ -1,0 +1,63 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.key-material"
+distribution = "tigrbl-identity-storage-key-material"
+import_root = "tigrbl_identity_storage_key_material"
+
+[schema]
+contract = "1.0.0"
+migration_head = "63c8e724-a0ec-5475-89aa-d5a3d23f0769"
+migrations_package = "tigrbl_identity_storage_key_material.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.key-material:table:crypto_keys"
+kind = "table"
+physical_name = "authn.crypto_keys"
+model = "tigrbl_identity_storage_key_material.tables:CryptoKey"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.key-material:table:crypto_key_versions"
+kind = "table"
+physical_name = "authn.crypto_key_versions"
+model = "tigrbl_identity_storage_key_material.tables:CryptoKeyVersion"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.key-material:table:principal_key_bindings"
+kind = "table"
+physical_name = "authn.principal_key_bindings"
+model = "tigrbl_identity_storage_key_material.tables:PrincipalKeyBinding"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.key-material:table:key_envelopes"
+kind = "table"
+physical_name = "authn.key_envelopes"
+model = "tigrbl_identity_storage_key_material.tables:KeyEnvelope"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.key-material:table:key_attestation_evidence"
+kind = "table"
+physical_name = "authn.key_attestation_evidence"
+model = "tigrbl_identity_storage_key_material.tables:KeyAttestationEvidence"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.key-material:table:key_rotation_events"
+kind = "table"
+physical_name = "authn.key_rotation_events"
+model = "tigrbl_identity_storage_key_material.tables:KeyRotationEvent"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.key-material:table:key_rotation_policies"
+kind = "table"
+physical_name = "authn.key_rotation_policies"
+model = "tigrbl_identity_storage_key_material.tables:KeyRotationPolicy"
+
+[[schema.requires]]
+component = "tigrbl.identity.storage.foundation"
+contract = ">=1.0.0,<2.0.0"
+minimum_revision = "9f7432bf-9b26-5d0a-8a77-24b749d76b38"
+
+[[schema.requires]]
+component = "tigrbl.identity.storage.oauth"
+contract = ">=1.0.0,<2.0.0"
+minimum_revision = "d4b74406-754c-5424-9009-4dff55e1e1c4"

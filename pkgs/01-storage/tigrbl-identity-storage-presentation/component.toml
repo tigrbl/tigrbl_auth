@@ -1,0 +1,35 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.presentation"
+distribution = "tigrbl-identity-storage-presentation"
+import_root = "tigrbl_identity_storage_presentation"
+
+[schema]
+contract = "1.0.0"
+migration_head = "45cfd21c-7eec-5db2-980a-e27b27cb8679"
+migrations_package = "tigrbl_identity_storage_presentation.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.presentation:table:verifier_registrations"
+kind = "table"
+physical_name = "authn.verifier_registrations"
+model = "tigrbl_identity_storage_presentation.tables:VerifierRegistration"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.presentation:table:presentation_transactions"
+kind = "table"
+physical_name = "authn.presentation_transactions"
+model = "tigrbl_identity_storage_presentation.tables:PresentationTransaction"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.presentation:table:presentation_consents"
+kind = "table"
+physical_name = "authn.presentation_consents"
+model = "tigrbl_identity_storage_presentation.tables:PresentationConsent"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.presentation:table:presentation_replays"
+kind = "table"
+physical_name = "authn.presentation_replays"
+model = "tigrbl_identity_storage_presentation.tables:PresentationReplay"

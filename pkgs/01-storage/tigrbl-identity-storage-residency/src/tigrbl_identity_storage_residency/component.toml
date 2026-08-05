@@ -1,0 +1,23 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.residency"
+distribution = "tigrbl-identity-storage-residency"
+import_root = "tigrbl_identity_storage_residency"
+
+[schema]
+contract = "1.0.0"
+migration_head = "48009f00-9c83-56cf-98ea-1128a3307a56"
+migrations_package = "tigrbl_identity_storage_residency.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.residency:table:residency_zones"
+kind = "table"
+physical_name = "authn.residency_zones"
+model = "tigrbl_identity_storage_residency.tables:ResidencyZone"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.residency:table:tenant_residency"
+kind = "table"
+physical_name = "authn.tenant_residency"
+model = "tigrbl_identity_storage_residency.tables:TenantResidency"

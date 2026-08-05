@@ -1,7 +1,7 @@
 """Create certificate metadata, trust-anchor, and status-snapshot tables."""
 
 from tigrbl_identity_storage.migrations.helpers import create_tables, drop_tables
-from tigrbl_identity_storage.tables.certificate_state import (
+from tigrbl_identity_storage_certificate.tables.certificate_state import (
     CertificateRecord,
     CertificateStatusSnapshot,
     TrustAnchor,

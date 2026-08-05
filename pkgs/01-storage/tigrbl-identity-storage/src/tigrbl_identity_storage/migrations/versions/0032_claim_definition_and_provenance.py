@@ -1,7 +1,7 @@
 """Create private-claim definition, release-policy, and provenance tables."""
 
 from tigrbl_identity_storage.migrations.helpers import create_tables, drop_tables
-from tigrbl_identity_storage.tables.claim_state import (
+from tigrbl_identity_storage_claims.tables.claim_state import (
     ClaimDefinition,
     ClaimProvenanceRecord,
     ClaimReleasePolicy,

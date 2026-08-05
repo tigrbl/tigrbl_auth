@@ -1,0 +1,22 @@
+[project]
+name = "tigrbl-identity-storage-key-material"
+version = "0.4.0.dev2"
+description = "Owned key-material identity database tables and migrations."
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+license = { text = "Apache-2.0" }
+dependencies = [
+    "tigrbl>=0.4.4.dev1,<0.5",
+    "tigrbl-migrations>=0.4.5.dev4",
+    "tigrbl-identity-storage-core>=0.4.0.dev2",
+    "tigrbl-identity-storage-foundation>=0.4.0.dev2",
+    "tigrbl-identity-storage-oauth>=0.4.0.dev2",
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tigrbl_identity_storage_key_material", from = "src" }]
+include = ["src/tigrbl_identity_storage_key_material/component.toml"]

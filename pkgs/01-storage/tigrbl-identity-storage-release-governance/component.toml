@@ -1,0 +1,83 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.release-governance"
+distribution = "tigrbl-identity-storage-release-governance"
+import_root = "tigrbl_identity_storage_release_governance"
+
+[schema]
+contract = "1.0.0"
+migration_head = "90c6e0ac-6f27-5837-9d8b-895adb4679d5"
+migrations_package = "tigrbl_identity_storage_release_governance.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.release-governance:table:sdk_packages"
+kind = "table"
+physical_name = "authn.sdk_packages"
+model = "tigrbl_identity_storage_release_governance.tables:SDKPackageRecord"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.release-governance:table:plugin_descriptors"
+kind = "table"
+physical_name = "authn.plugin_descriptors"
+model = "tigrbl_identity_storage_release_governance.tables:PluginDescriptorRecord"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.release-governance:table:plugin_lifecycle_events"
+kind = "table"
+physical_name = "authn.plugin_lifecycle_events"
+model = "tigrbl_identity_storage_release_governance.tables:PluginLifecycleEventRecord"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.release-governance:table:release_capability_records"
+kind = "table"
+physical_name = "authn.release_capability_records"
+model = "tigrbl_identity_storage_release_governance.tables:ReleaseCapabilityRecord"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.release-governance:table:release_authorization_states"
+kind = "table"
+physical_name = "authn.release_authorization_states"
+model = "tigrbl_identity_storage_release_governance.tables:ReleaseAuthorizationState"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.release-governance:table:runtime_qualifications"
+kind = "table"
+physical_name = "authn.runtime_qualifications"
+model = "tigrbl_identity_storage_release_governance.tables:RuntimeQualificationRecord"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.release-governance:table:release_security_postures"
+kind = "table"
+physical_name = "authn.release_security_postures"
+model = "tigrbl_identity_storage_release_governance.tables:ReleaseSecurityPosture"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.release-governance:table:release_postures"
+kind = "table"
+physical_name = "authn.release_postures"
+model = "tigrbl_identity_storage_release_governance.tables:ReleasePosture"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.release-governance:table:release_attestation_events"
+kind = "table"
+physical_name = "authn.release_attestation_events"
+model = "tigrbl_identity_storage_release_governance.tables:ReleaseAttestationEvent"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.release-governance:table:control_correctness_reports"
+kind = "table"
+physical_name = "authn.control_correctness_reports"
+model = "tigrbl_identity_storage_release_governance.tables:ControlCorrectnessReport"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.release-governance:table:authz_verification_reports"
+kind = "table"
+physical_name = "authn.authz_verification_reports"
+model = "tigrbl_identity_storage_release_governance.tables:AuthzVerificationReport"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.release-governance:table:resource_server_contracts"
+kind = "table"
+physical_name = "authn.resource_server_contracts"
+model = "tigrbl_identity_storage_release_governance.tables:ResourceServerContract"

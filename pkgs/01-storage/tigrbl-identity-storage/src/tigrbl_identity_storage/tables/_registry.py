@@ -1,143 +1,50 @@
-"""Canonical mapped-table inventory for identity storage."""
-# ruff: noqa: F401
+"""Compatibility projection of independently owned storage components."""
+# ruff: noqa: F401,F403
 
-from tigrbl_identity_storage.framework import RestOltpTable
-
-from .realm import Realm
-from .tenant import Tenant
-from .user import User
-from .client import Client, _CLIENT_ID_RE
-from .client_registration import ClientRegistration
-from .authorization_server import AuthorizationServer
-from .principal import Principal
-from .service_identity import ServiceIdentity
-from .machine_identity import MachineIdentity
-from .workload_identity import WorkloadIdentity
-from .credential_api_key import CredentialApiKey
-from .credential_service_key import CredentialServiceKey
-from .credential import Credential
-from .credential_audit_event import CredentialAuditEvent
-from .credential_client_secret import CredentialClientSecret
-from .credential_dpop_key import CredentialDpopKey
-from .credential_mfa_factor import CredentialMfaFactor
-from .credential_mtls_certificate import CredentialMtlsCertificate
-from .credential_password import CredentialPassword
-from .credential_recovery_code import CredentialRecoveryCode
-from .credential_webauthn_passkey import CredentialWebAuthnPasskey
-from .webauthn_attestation_record import WebAuthnAttestationRecord
-from .webauthn_ceremony import WebAuthnCeremony
-from .webauthn_relying_party import WebAuthnRelyingParty
-from .crypto_key import CryptoKey
-from .crypto_key_version import CryptoKeyVersion
-from .principal_key_binding import PrincipalKeyBinding
-from .key_envelope import KeyEnvelope
-from .key_attestation_evidence import KeyAttestationEvidence
-from .credential_ecosystem_registry import CredentialConfiguration,CredentialIssuer,WalletAttestation,WalletInstance,WalletKeyBinding,WalletRegistration
-from .credential_issuance_state import CredentialDeferredTransaction,CredentialIssuanceTransaction,CredentialNotification,CredentialOffer,CredentialStatusEntry,CredentialStatusList,CredentialStatusPublication
-from .presentation_state import PresentationConsent,PresentationReplay,PresentationTransaction,VerifierRegistration
-from .attestation_state import AttestationAppraisalPolicy,AttestationEndorsement,AttestationEvidence,AttestationReferenceManifest,AttestationReferenceValue,AttestationResult
-from .spiffe_state import SpiffeTrustBundle,SvidRecord,TrustDomainFederation
-from .workload_credential_state import PossessionProofReplay,ProtectedArtifactReference,WorkloadCredentialEntitlement,WorkloadReferenceBinding
-from .security_event_state import SecurityEvent,SecurityEventDelivery,SecurityEventReplay,SecurityEventSubscription
-from .replay_reservation import ReplayReservation
-from .did_gnap_state import DidDocument,DidDocumentVersion,DidResolutionCache,DidService,DidVerificationMethod,GnapClientInstance,GnapContinuation,GnapGrant,GnapInteraction
-from .certificate_state import CertificateRecord,CertificateStatusSnapshot,TrustAnchor
-from .claim_state import ClaimDefinition,ClaimProvenanceRecord,ClaimReleasePolicy,ClaimSnapshot,ClaimSourceBinding
-from .auth_session import AuthSession
-from .auth_code import AuthCode
-from .device_code import DeviceCode
-from .revoked_token import RevokedToken
-from .token_record import TokenRecord
-from .delegation_grant import (
-    DelegationGrant,
-    DelegationGrantEdge,
-    DelegationGrantProof,
-    DelegationGrantRecord,
-    DelegationGrantScope,
-    DelegationGrantTokenLink,
-)
-from .pushed_authorization_request import PushedAuthorizationRequest
-from .consent import Consent
-from .audit_event import AuditEvent
-from .logout_state import LogoutState
-from .backchannel_logout_replay import BackchannelLogoutReplay
-from .authentication_challenge import AuthenticationChallenge
-from .dpop_nonce import DpopNonce
-from .dpop_replay import DpopReplay
-from .key_rotation_event import KeyRotationEvent
-from .key_rotation_policy import KeyRotationPolicy
-from .tenant_membership import TenantMembership
-from .subject_alias import SubjectAlias
-from .role import Role
-from .attribute_policy import AttributePolicy
-from .policy_condition import PolicyCondition
-from .policy import Policy
-from .policy_version import PolicyVersion
-from .policy_set import PolicySet
-from .policy_set_member import PolicySetMember
-from .policy_target import PolicyTarget
-from .delegated_admin_scope import DelegatedAdminScope
-from .entitlement import Entitlement
-from .entitlement_assignment import EntitlementAssignment
-from .access_review_campaign import AccessReviewCampaign
-from .access_review_item import AccessReviewItem
-from .access_review_decision import AccessReviewDecision
-from .residency_zone import ResidencyZone
-from .tenant_residency import TenantResidency
-from .sdk_package import SDKPackageRecord
-from .plugin_descriptor import PluginDescriptorRecord
-from .plugin_lifecycle_event import PluginLifecycleEventRecord
-from .scim_schema import ScimSchemaRecord
-from .scim_user import ScimUserRecord
-from .scim_group import ScimGroupRecord
-from .scim_patch_event import ScimPatchEvent
-from .release_capability_record import ReleaseCapabilityRecord
-from .release_authorization_state import ReleaseAuthorizationState
-from .runtime_qualification import RuntimeQualificationRecord
-from .release_security_posture import ReleaseSecurityPosture
-from .release_posture import ReleasePosture
-from .release_attestation_event import ReleaseAttestationEvent
-from .control_correctness_report import ControlCorrectnessReport
-from .authz_verification_report import AuthzVerificationReport
-from .resource_server_contract import ResourceServerContract
-from .provider_artifact import ProviderArtifact
-from .identity_provider import IdentityProvider
-from .federation import Federation
-from .federated_session import FederatedSession
-from .authorization_invariant import AuthorizationInvariant
-from .invariant_evaluation import InvariantEvaluation
-from .invariant_violation import InvariantViolation
-from .authority_derivation_graph import (
-    AuthorityDerivationGraph,
-    AuthorityDerivationGraphEdge,
-    AuthorityDerivationGraphNode,
-)
-from .trust_federation_graph import (
-    TrustFederationGraph,
-    TrustFederationGraphEdge,
-    TrustFederationGraphNode,
-)
-from .operator_metadata import OperatorMetadata
-from .operator_record import OperatorRecord
-from .operator_transaction import OperatorTransaction
-from .operator_audit_event import OperatorAuditEvent
-from .operator_activity import OperatorActivity
-
+from tigrbl_identity_storage_core.framework import RestOltpTable
+from tigrbl_identity_storage_foundation.tables import Realm, Tenant, User, Principal, SubjectAlias, ServiceIdentity, MachineIdentity
+from tigrbl_identity_storage_authentication.tables import Credential, CredentialApiKey, CredentialServiceKey, CredentialAuditEvent, CredentialClientSecret, CredentialDpopKey, CredentialMfaFactor, CredentialMtlsCertificate, CredentialPassword, CredentialRecoveryCode, AuthenticationChallenge
+from tigrbl_identity_storage_oauth.tables import Client, ClientRegistration, AuthorizationServer, AuthSession, AuthCode, DeviceCode, RevokedToken, PushedAuthorizationRequest
+from tigrbl_identity_storage_oidc.tables import LogoutState, BackchannelLogoutReplay
+from tigrbl_identity_storage_token.tables import TokenRecord, ProtectedArtifactReference, PossessionProofReplay
+from tigrbl_identity_storage_consent.tables import Consent
+from tigrbl_identity_storage_delegation.tables import DelegationGrant, DelegationGrantScope, DelegationGrantProof, DelegationGrantEdge, DelegationGrantTokenLink
+from tigrbl_identity_storage_key_material.tables import CryptoKey, CryptoKeyVersion, PrincipalKeyBinding, KeyEnvelope, KeyAttestationEvidence, KeyRotationEvent, KeyRotationPolicy
+from tigrbl_identity_storage_authorization_policy.tables import TenantMembership, Role, AttributePolicy, PolicyCondition, Policy, PolicyVersion, PolicySet, PolicySetMember, PolicyTarget, DelegatedAdminScope, AuthorizationInvariant, InvariantEvaluation, InvariantViolation
+from tigrbl_identity_storage_access_governance.tables import Entitlement, EntitlementAssignment, AccessReviewCampaign, AccessReviewItem, AccessReviewDecision
+from tigrbl_identity_storage_residency.tables import ResidencyZone, TenantResidency
+from tigrbl_identity_storage_audit.tables import AuditEvent
+from tigrbl_identity_storage_federation.tables import ProviderArtifact, IdentityProvider, Federation, FederatedSession
+from tigrbl_identity_storage_digital_credential.tables import CredentialIssuer, CredentialConfiguration, WalletRegistration, WalletInstance, WalletAttestation, WalletKeyBinding, CredentialOffer, CredentialIssuanceTransaction, CredentialDeferredTransaction, CredentialNotification, CredentialStatusList, CredentialStatusEntry, CredentialStatusPublication
+from tigrbl_identity_storage_presentation.tables import VerifierRegistration, PresentationTransaction, PresentationConsent, PresentationReplay
+from tigrbl_identity_storage_attestation.tables import AttestationEvidence, AttestationResult, AttestationReferenceManifest, AttestationReferenceValue, AttestationEndorsement, AttestationAppraisalPolicy
+from tigrbl_identity_storage_workload_identity.tables import WorkloadIdentity, SvidRecord, SpiffeTrustBundle, TrustDomainFederation, WorkloadReferenceBinding, WorkloadCredentialEntitlement
+from tigrbl_identity_storage_security_event.tables import SecurityEvent, SecurityEventSubscription, SecurityEventDelivery, SecurityEventReplay
+from tigrbl_identity_storage_replay_protection.tables import ReplayReservation, DpopReplay, DpopNonce
+from tigrbl_identity_storage_did.tables import DidDocument, DidDocumentVersion, DidVerificationMethod, DidService, DidResolutionCache
+from tigrbl_identity_storage_gnap.tables import GnapGrant, GnapContinuation, GnapClientInstance, GnapInteraction
+from tigrbl_identity_storage_certificate.tables import CertificateRecord, TrustAnchor, CertificateStatusSnapshot
+from tigrbl_identity_storage_claims.tables import ClaimDefinition, ClaimSourceBinding, ClaimReleasePolicy, ClaimProvenanceRecord, ClaimSnapshot
+from tigrbl_identity_storage_webauthn.tables import CredentialWebAuthnPasskey, WebAuthnAttestationRecord, WebAuthnCeremony, WebAuthnRelyingParty
+from tigrbl_identity_storage_authority_graph.tables import AuthorityDerivationGraph, AuthorityDerivationGraphNode, AuthorityDerivationGraphEdge
+from tigrbl_identity_storage_trust_federation_graph.tables import TrustFederationGraph, TrustFederationGraphNode, TrustFederationGraphEdge
+from tigrbl_identity_storage_scim.tables import ScimSchemaRecord, ScimUserRecord, ScimGroupRecord, ScimPatchEvent
+from tigrbl_identity_storage_release_governance.tables import SDKPackageRecord, PluginDescriptorRecord, PluginLifecycleEventRecord, ReleaseCapabilityRecord, ReleaseAuthorizationState, RuntimeQualificationRecord, ReleaseSecurityPosture, ReleasePosture, ReleaseAttestationEvent, ControlCorrectnessReport, AuthzVerificationReport, ResourceServerContract
+from tigrbl_identity_storage_operator.tables import OperatorMetadata, OperatorRecord, OperatorTransaction, OperatorAuditEvent, OperatorActivity
+from tigrbl_identity_storage_oauth.tables.client import _CLIENT_ID_RE
+from tigrbl_identity_storage_delegation.tables.delegation_grant import DelegationGrantRecord
 
 _TABLE_MODELS = (
     Realm,
     Tenant,
     User,
-    Client,
-    ClientRegistration,
-    AuthorizationServer,
     Principal,
+    SubjectAlias,
     ServiceIdentity,
     MachineIdentity,
-    WorkloadIdentity,
+    Credential,
     CredentialApiKey,
     CredentialServiceKey,
-    Credential,
     CredentialAuditEvent,
     CredentialClientSecret,
     CredentialDpopKey,
@@ -145,15 +52,58 @@ _TABLE_MODELS = (
     CredentialMtlsCertificate,
     CredentialPassword,
     CredentialRecoveryCode,
-    CredentialWebAuthnPasskey,
-    WebAuthnAttestationRecord,
-    WebAuthnCeremony,
-    WebAuthnRelyingParty,
+    AuthenticationChallenge,
+    Client,
+    ClientRegistration,
+    AuthorizationServer,
+    AuthSession,
+    AuthCode,
+    DeviceCode,
+    RevokedToken,
+    PushedAuthorizationRequest,
+    LogoutState,
+    BackchannelLogoutReplay,
+    TokenRecord,
+    ProtectedArtifactReference,
+    PossessionProofReplay,
+    Consent,
+    DelegationGrant,
+    DelegationGrantScope,
+    DelegationGrantProof,
+    DelegationGrantEdge,
+    DelegationGrantTokenLink,
     CryptoKey,
     CryptoKeyVersion,
     PrincipalKeyBinding,
     KeyEnvelope,
     KeyAttestationEvidence,
+    KeyRotationEvent,
+    KeyRotationPolicy,
+    TenantMembership,
+    Role,
+    AttributePolicy,
+    PolicyCondition,
+    Policy,
+    PolicyVersion,
+    PolicySet,
+    PolicySetMember,
+    PolicyTarget,
+    DelegatedAdminScope,
+    AuthorizationInvariant,
+    InvariantEvaluation,
+    InvariantViolation,
+    Entitlement,
+    EntitlementAssignment,
+    AccessReviewCampaign,
+    AccessReviewItem,
+    AccessReviewDecision,
+    ResidencyZone,
+    TenantResidency,
+    AuditEvent,
+    ProviderArtifact,
+    IdentityProvider,
+    Federation,
+    FederatedSession,
     CredentialIssuer,
     CredentialConfiguration,
     WalletRegistration,
@@ -177,18 +127,19 @@ _TABLE_MODELS = (
     AttestationReferenceValue,
     AttestationEndorsement,
     AttestationAppraisalPolicy,
+    WorkloadIdentity,
     SvidRecord,
     SpiffeTrustBundle,
     TrustDomainFederation,
     WorkloadReferenceBinding,
     WorkloadCredentialEntitlement,
-    ProtectedArtifactReference,
-    PossessionProofReplay,
     SecurityEvent,
     SecurityEventSubscription,
     SecurityEventDelivery,
     SecurityEventReplay,
     ReplayReservation,
+    DpopReplay,
+    DpopNonce,
     DidDocument,
     DidDocumentVersion,
     DidVerificationMethod,
@@ -206,51 +157,23 @@ _TABLE_MODELS = (
     ClaimReleasePolicy,
     ClaimProvenanceRecord,
     ClaimSnapshot,
-    AuthSession,
-    AuthCode,
-    DeviceCode,
-    RevokedToken,
-    TokenRecord,
-    DelegationGrant,
-    DelegationGrantScope,
-    DelegationGrantProof,
-    DelegationGrantEdge,
-    DelegationGrantTokenLink,
-    PushedAuthorizationRequest,
-    Consent,
-    AuditEvent,
-    LogoutState,
-    BackchannelLogoutReplay,
-    AuthenticationChallenge,
-    DpopReplay,
-    DpopNonce,
-    KeyRotationEvent,
-    KeyRotationPolicy,
-    TenantMembership,
-    SubjectAlias,
-    Role,
-    AttributePolicy,
-    PolicyCondition,
-    Policy,
-    PolicyVersion,
-    PolicySet,
-    PolicySetMember,
-    PolicyTarget,
-    DelegatedAdminScope,
-    Entitlement,
-    EntitlementAssignment,
-    AccessReviewCampaign,
-    AccessReviewItem,
-    AccessReviewDecision,
-    ResidencyZone,
-    TenantResidency,
-    SDKPackageRecord,
-    PluginDescriptorRecord,
-    PluginLifecycleEventRecord,
+    CredentialWebAuthnPasskey,
+    WebAuthnAttestationRecord,
+    WebAuthnCeremony,
+    WebAuthnRelyingParty,
+    AuthorityDerivationGraph,
+    AuthorityDerivationGraphNode,
+    AuthorityDerivationGraphEdge,
+    TrustFederationGraph,
+    TrustFederationGraphNode,
+    TrustFederationGraphEdge,
     ScimSchemaRecord,
     ScimUserRecord,
     ScimGroupRecord,
     ScimPatchEvent,
+    SDKPackageRecord,
+    PluginDescriptorRecord,
+    PluginLifecycleEventRecord,
     ReleaseCapabilityRecord,
     ReleaseAuthorizationState,
     RuntimeQualificationRecord,
@@ -260,19 +183,6 @@ _TABLE_MODELS = (
     ControlCorrectnessReport,
     AuthzVerificationReport,
     ResourceServerContract,
-    ProviderArtifact,
-    IdentityProvider,
-    Federation,
-    FederatedSession,
-    AuthorizationInvariant,
-    InvariantEvaluation,
-    InvariantViolation,
-    AuthorityDerivationGraph,
-    AuthorityDerivationGraphNode,
-    AuthorityDerivationGraphEdge,
-    TrustFederationGraph,
-    TrustFederationGraphNode,
-    TrustFederationGraphEdge,
     OperatorMetadata,
     OperatorRecord,
     OperatorTransaction,

@@ -1,0 +1,82 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.authentication"
+distribution = "tigrbl-identity-storage-authentication"
+import_root = "tigrbl_identity_storage_authentication"
+
+[schema]
+contract = "1.0.0"
+migration_head = "79c73e01-df92-5166-844d-b2e96bcae30b"
+migrations_package = "tigrbl_identity_storage_authentication.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authentication:table:credentials"
+kind = "table"
+physical_name = "authn.credentials"
+model = "tigrbl_identity_storage_authentication.tables:Credential"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authentication:table:credential_api_keys"
+kind = "table"
+physical_name = "authn.credential_api_keys"
+model = "tigrbl_identity_storage_authentication.tables:CredentialApiKey"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authentication:table:credential_service_keys"
+kind = "table"
+physical_name = "authn.credential_service_keys"
+model = "tigrbl_identity_storage_authentication.tables:CredentialServiceKey"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authentication:table:credential_audit_events"
+kind = "table"
+physical_name = "authn.credential_audit_events"
+model = "tigrbl_identity_storage_authentication.tables:CredentialAuditEvent"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authentication:table:credential_client_secrets"
+kind = "table"
+physical_name = "authn.credential_client_secrets"
+model = "tigrbl_identity_storage_authentication.tables:CredentialClientSecret"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authentication:table:credential_dpop_keys"
+kind = "table"
+physical_name = "authn.credential_dpop_keys"
+model = "tigrbl_identity_storage_authentication.tables:CredentialDpopKey"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authentication:table:credential_mfa_factors"
+kind = "table"
+physical_name = "authn.credential_mfa_factors"
+model = "tigrbl_identity_storage_authentication.tables:CredentialMfaFactor"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authentication:table:credential_mtls_certificates"
+kind = "table"
+physical_name = "authn.credential_mtls_certificates"
+model = "tigrbl_identity_storage_authentication.tables:CredentialMtlsCertificate"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authentication:table:credential_passwords"
+kind = "table"
+physical_name = "authn.credential_passwords"
+model = "tigrbl_identity_storage_authentication.tables:CredentialPassword"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authentication:table:credential_recovery_codes"
+kind = "table"
+physical_name = "authn.credential_recovery_codes"
+model = "tigrbl_identity_storage_authentication.tables:CredentialRecoveryCode"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authentication:table:authentication_challenges"
+kind = "table"
+physical_name = "authn.authentication_challenges"
+model = "tigrbl_identity_storage_authentication.tables:AuthenticationChallenge"
+
+[[schema.requires]]
+component = "tigrbl.identity.storage.foundation"
+contract = ">=1.0.0,<2.0.0"
+minimum_revision = "9f7432bf-9b26-5d0a-8a77-24b749d76b38"

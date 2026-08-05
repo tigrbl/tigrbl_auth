@@ -1,0 +1,29 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.trust-federation-graph"
+distribution = "tigrbl-identity-storage-trust-federation-graph"
+import_root = "tigrbl_identity_storage_trust_federation_graph"
+
+[schema]
+contract = "1.0.0"
+migration_head = "88f90844-5618-5007-9883-d1d6f7c35d66"
+migrations_package = "tigrbl_identity_storage_trust_federation_graph.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.trust-federation-graph:table:trust_federation_graphs"
+kind = "table"
+physical_name = "authn.trust_federation_graphs"
+model = "tigrbl_identity_storage_trust_federation_graph.tables:TrustFederationGraph"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.trust-federation-graph:table:trust_federation_graph_nodes"
+kind = "table"
+physical_name = "authn.trust_federation_graph_nodes"
+model = "tigrbl_identity_storage_trust_federation_graph.tables:TrustFederationGraphNode"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.trust-federation-graph:table:trust_federation_graph_edges"
+kind = "table"
+physical_name = "authn.trust_federation_graph_edges"
+model = "tigrbl_identity_storage_trust_federation_graph.tables:TrustFederationGraphEdge"

@@ -1,0 +1,46 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.delegation"
+distribution = "tigrbl-identity-storage-delegation"
+import_root = "tigrbl_identity_storage_delegation"
+
+[schema]
+contract = "1.0.0"
+migration_head = "5dc5f3c2-fd95-5d25-b45e-7e43ffcb823c"
+migrations_package = "tigrbl_identity_storage_delegation.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.delegation:table:delegation_grants"
+kind = "table"
+physical_name = "authn.delegation_grants"
+model = "tigrbl_identity_storage_delegation.tables:DelegationGrant"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.delegation:table:delegation_grant_scopes"
+kind = "table"
+physical_name = "authn.delegation_grant_scopes"
+model = "tigrbl_identity_storage_delegation.tables:DelegationGrantScope"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.delegation:table:delegation_grant_proofs"
+kind = "table"
+physical_name = "authn.delegation_grant_proofs"
+model = "tigrbl_identity_storage_delegation.tables:DelegationGrantProof"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.delegation:table:delegation_grant_edges"
+kind = "table"
+physical_name = "authn.delegation_grant_edges"
+model = "tigrbl_identity_storage_delegation.tables:DelegationGrantEdge"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.delegation:table:delegation_grant_token_links"
+kind = "table"
+physical_name = "authn.delegation_grant_token_links"
+model = "tigrbl_identity_storage_delegation.tables:DelegationGrantTokenLink"
+
+[[schema.requires]]
+component = "tigrbl.identity.storage.foundation"
+contract = ">=1.0.0,<2.0.0"
+minimum_revision = "9f7432bf-9b26-5d0a-8a77-24b749d76b38"

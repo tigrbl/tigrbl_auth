@@ -1,0 +1,29 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.certificate"
+distribution = "tigrbl-identity-storage-certificate"
+import_root = "tigrbl_identity_storage_certificate"
+
+[schema]
+contract = "1.0.0"
+migration_head = "a7e704e3-722e-5a59-92a6-9825004d8817"
+migrations_package = "tigrbl_identity_storage_certificate.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.certificate:table:certificate_records"
+kind = "table"
+physical_name = "authn.certificate_records"
+model = "tigrbl_identity_storage_certificate.tables:CertificateRecord"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.certificate:table:trust_anchors"
+kind = "table"
+physical_name = "authn.trust_anchors"
+model = "tigrbl_identity_storage_certificate.tables:TrustAnchor"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.certificate:table:certificate_status_snapshots"
+kind = "table"
+physical_name = "authn.certificate_status_snapshots"
+model = "tigrbl_identity_storage_certificate.tables:CertificateStatusSnapshot"

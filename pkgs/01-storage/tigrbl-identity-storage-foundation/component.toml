@@ -1,0 +1,53 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.foundation"
+distribution = "tigrbl-identity-storage-foundation"
+import_root = "tigrbl_identity_storage_foundation"
+
+[schema]
+contract = "1.0.0"
+migration_head = "9f7432bf-9b26-5d0a-8a77-24b749d76b38"
+migrations_package = "tigrbl_identity_storage_foundation.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.foundation:table:realms"
+kind = "table"
+physical_name = "authn.realms"
+model = "tigrbl_identity_storage_foundation.tables:Realm"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.foundation:table:tenants"
+kind = "table"
+physical_name = "authn.tenants"
+model = "tigrbl_identity_storage_foundation.tables:Tenant"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.foundation:table:users"
+kind = "table"
+physical_name = "authn.users"
+model = "tigrbl_identity_storage_foundation.tables:User"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.foundation:table:principals"
+kind = "table"
+physical_name = "authn.principals"
+model = "tigrbl_identity_storage_foundation.tables:Principal"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.foundation:table:subject_aliases"
+kind = "table"
+physical_name = "authn.subject_aliases"
+model = "tigrbl_identity_storage_foundation.tables:SubjectAlias"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.foundation:table:service_identities"
+kind = "table"
+physical_name = "authn.service_identities"
+model = "tigrbl_identity_storage_foundation.tables:ServiceIdentity"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.foundation:table:machine_identities"
+kind = "table"
+physical_name = "authn.machine_identities"
+model = "tigrbl_identity_storage_foundation.tables:MachineIdentity"

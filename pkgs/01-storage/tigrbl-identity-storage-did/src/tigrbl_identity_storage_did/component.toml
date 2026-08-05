@@ -1,0 +1,41 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.did"
+distribution = "tigrbl-identity-storage-did"
+import_root = "tigrbl_identity_storage_did"
+
+[schema]
+contract = "1.0.0"
+migration_head = "7900a065-d6b7-5f37-aab2-8083fafb462e"
+migrations_package = "tigrbl_identity_storage_did.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.did:table:did_documents"
+kind = "table"
+physical_name = "authn.did_documents"
+model = "tigrbl_identity_storage_did.tables:DidDocument"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.did:table:did_document_versions"
+kind = "table"
+physical_name = "authn.did_document_versions"
+model = "tigrbl_identity_storage_did.tables:DidDocumentVersion"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.did:table:did_verification_methods"
+kind = "table"
+physical_name = "authn.did_verification_methods"
+model = "tigrbl_identity_storage_did.tables:DidVerificationMethod"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.did:table:did_services"
+kind = "table"
+physical_name = "authn.did_services"
+model = "tigrbl_identity_storage_did.tables:DidService"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.did:table:did_resolution_cache"
+kind = "table"
+physical_name = "authn.did_resolution_cache"
+model = "tigrbl_identity_storage_did.tables:DidResolutionCache"

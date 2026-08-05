@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import importlib.util
+import importlib.metadata
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -12,6 +13,8 @@ from tigrbl.ddl import sqlite_default_attach_map
 from tigrbl_identity_storage.migrations.helpers import applied_revisions, column_names, mark_revision, table_names, unmark_revision
 from tigrbl_identity_storage.migrations.helpers import AUTHN_SCHEMA
 from tigrbl_identity_storage.tables import RestOltpTable
+from tigrbl_identity_storage.components import load_full_composition
+from tigrbl_migrations import MigrationLedger, MigrationOrchestrator
 from ..engine import ENGINE
 
 
@@ -139,23 +142,30 @@ async def apply_all_async() -> MigrationResult:
         _ensure_sqlite_attachment_on_connection(sync_conn, attachments)
         modules = iter_migration_modules()
         current = applied_revisions(sync_conn)
-        needs_sqlite_repair = (
-            sync_conn.dialect.name == "sqlite"
-            and bool(verify_schema_sync(sync_conn).missing_tables)
-        )
-        pending_before = [
-            module.revision
-            for module in modules
-            if needs_sqlite_repair or module.revision not in current
-        ]
+        pending_before: list[str] = []
         applied_now: list[str] = []
-        for module in modules:
-            if not needs_sqlite_repair and module.revision in current:
-                continue
-            module.upgrade(sync_conn)
-            if module.revision not in current:
+        if current and "0038_adopt_component_ownership" not in current:
+            legacy_pending = [module for module in modules if module.revision not in current]
+            pending_before.extend(module.revision for module in legacy_pending)
+            for module in legacy_pending:
+                module.upgrade(sync_conn)
                 mark_revision(sync_conn, module.revision)
-            applied_now.append(module.revision)
+                applied_now.append(module.revision)
+
+        composition, migrations = load_full_composition()
+        artifact_versions = {
+            manifest.component_id: importlib.metadata.version(manifest.distribution)
+            for manifest in composition.manifests
+        }
+        orchestrator = MigrationOrchestrator(
+            composition=composition,
+            migrations=migrations,
+            ledger=MigrationLedger(sync_conn),
+            artifact_versions=artifact_versions,
+        )
+        component_plan = orchestrator.plan()
+        pending_before.extend(item.revision for item in component_plan.ordered)
+        applied_now.extend(item.revision for item in orchestrator.apply().ordered)
         verification = verify_schema_sync(sync_conn)
         return MigrationResult(
             applied=applied_now,

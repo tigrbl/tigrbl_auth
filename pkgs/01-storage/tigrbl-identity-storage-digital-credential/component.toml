@@ -1,0 +1,89 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.digital-credential"
+distribution = "tigrbl-identity-storage-digital-credential"
+import_root = "tigrbl_identity_storage_digital_credential"
+
+[schema]
+contract = "1.0.0"
+migration_head = "0e47cb7f-3dd7-5c79-a82a-371198cf5b27"
+migrations_package = "tigrbl_identity_storage_digital_credential.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.digital-credential:table:credential_issuers"
+kind = "table"
+physical_name = "authn.credential_issuers"
+model = "tigrbl_identity_storage_digital_credential.tables:CredentialIssuer"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.digital-credential:table:credential_configurations"
+kind = "table"
+physical_name = "authn.credential_configurations"
+model = "tigrbl_identity_storage_digital_credential.tables:CredentialConfiguration"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.digital-credential:table:wallet_registrations"
+kind = "table"
+physical_name = "authn.wallet_registrations"
+model = "tigrbl_identity_storage_digital_credential.tables:WalletRegistration"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.digital-credential:table:wallet_instances"
+kind = "table"
+physical_name = "authn.wallet_instances"
+model = "tigrbl_identity_storage_digital_credential.tables:WalletInstance"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.digital-credential:table:wallet_attestations"
+kind = "table"
+physical_name = "authn.wallet_attestations"
+model = "tigrbl_identity_storage_digital_credential.tables:WalletAttestation"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.digital-credential:table:wallet_key_bindings"
+kind = "table"
+physical_name = "authn.wallet_key_bindings"
+model = "tigrbl_identity_storage_digital_credential.tables:WalletKeyBinding"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.digital-credential:table:credential_offers"
+kind = "table"
+physical_name = "authn.credential_offers"
+model = "tigrbl_identity_storage_digital_credential.tables:CredentialOffer"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.digital-credential:table:credential_issuance_transactions"
+kind = "table"
+physical_name = "authn.credential_issuance_transactions"
+model = "tigrbl_identity_storage_digital_credential.tables:CredentialIssuanceTransaction"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.digital-credential:table:credential_deferred_transactions"
+kind = "table"
+physical_name = "authn.credential_deferred_transactions"
+model = "tigrbl_identity_storage_digital_credential.tables:CredentialDeferredTransaction"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.digital-credential:table:credential_notifications"
+kind = "table"
+physical_name = "authn.credential_notifications"
+model = "tigrbl_identity_storage_digital_credential.tables:CredentialNotification"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.digital-credential:table:credential_status_lists"
+kind = "table"
+physical_name = "authn.credential_status_lists"
+model = "tigrbl_identity_storage_digital_credential.tables:CredentialStatusList"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.digital-credential:table:credential_status_entries"
+kind = "table"
+physical_name = "authn.credential_status_entries"
+model = "tigrbl_identity_storage_digital_credential.tables:CredentialStatusEntry"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.digital-credential:table:credential_status_publications"
+kind = "table"
+physical_name = "authn.credential_status_publications"
+model = "tigrbl_identity_storage_digital_credential.tables:CredentialStatusPublication"

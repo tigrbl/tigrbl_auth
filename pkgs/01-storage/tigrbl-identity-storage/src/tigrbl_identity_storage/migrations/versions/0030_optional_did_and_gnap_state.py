@@ -1,16 +1,15 @@
 """Create optional DID and GNAP durable state tables."""
 
 from tigrbl_identity_storage.migrations.helpers import create_tables, drop_tables
-from tigrbl_identity_storage.tables.did_gnap_state import (
+from tigrbl_identity_storage_did.tables.did_gnap_state import (
     DidDocument,
     DidDocumentVersion,
     DidResolutionCache,
     DidService,
     DidVerificationMethod,
-    GnapClientInstance,
-    GnapContinuation,
-    GnapGrant,
-    GnapInteraction,
+)
+from tigrbl_identity_storage_gnap.tables.did_gnap_state import (
+    GnapClientInstance, GnapContinuation, GnapGrant, GnapInteraction,
 )
 
 revision = "0030_optional_did_and_gnap_state"

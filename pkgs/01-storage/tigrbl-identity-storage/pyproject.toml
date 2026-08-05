@@ -38,6 +38,37 @@ dependencies = [
     "tigrbl-core==0.4.4.dev1",
     "tigrbl-identity-core==0.4.0.dev2",
     "tigrbl-security-trust-contracts==0.1.0",
+    "tigrbl-migrations>=0.4.5.dev4",
+    "tigrbl-identity-storage-core==0.4.0.dev2",
+    "tigrbl-identity-storage-access-governance==0.4.0.dev2",
+    "tigrbl-identity-storage-attestation==0.4.0.dev2",
+    "tigrbl-identity-storage-audit==0.4.0.dev2",
+    "tigrbl-identity-storage-authentication==0.4.0.dev2",
+    "tigrbl-identity-storage-authority-graph==0.4.0.dev2",
+    "tigrbl-identity-storage-authorization-policy==0.4.0.dev2",
+    "tigrbl-identity-storage-certificate==0.4.0.dev2",
+    "tigrbl-identity-storage-claims==0.4.0.dev2",
+    "tigrbl-identity-storage-consent==0.4.0.dev2",
+    "tigrbl-identity-storage-delegation==0.4.0.dev2",
+    "tigrbl-identity-storage-did==0.4.0.dev2",
+    "tigrbl-identity-storage-digital-credential==0.4.0.dev2",
+    "tigrbl-identity-storage-federation==0.4.0.dev2",
+    "tigrbl-identity-storage-foundation==0.4.0.dev2",
+    "tigrbl-identity-storage-gnap==0.4.0.dev2",
+    "tigrbl-identity-storage-key-material==0.4.0.dev2",
+    "tigrbl-identity-storage-oauth==0.4.0.dev2",
+    "tigrbl-identity-storage-oidc==0.4.0.dev2",
+    "tigrbl-identity-storage-operator==0.4.0.dev2",
+    "tigrbl-identity-storage-presentation==0.4.0.dev2",
+    "tigrbl-identity-storage-release-governance==0.4.0.dev2",
+    "tigrbl-identity-storage-replay-protection==0.4.0.dev2",
+    "tigrbl-identity-storage-residency==0.4.0.dev2",
+    "tigrbl-identity-storage-scim==0.4.0.dev2",
+    "tigrbl-identity-storage-security-event==0.4.0.dev2",
+    "tigrbl-identity-storage-token==0.4.0.dev2",
+    "tigrbl-identity-storage-trust-federation-graph==0.4.0.dev2",
+    "tigrbl-identity-storage-webauthn==0.4.0.dev2",
+    "tigrbl-identity-storage-workload-identity==0.4.0.dev2",
 ]
 
 [project.urls]
@@ -53,3 +84,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 packages = [{ include = "tigrbl_identity_storage", from = "src" }]
+include = [
+    "src/tigrbl_identity_storage/storage.toml",
+    "src/tigrbl_identity_storage/storage.lock.toml",
+]

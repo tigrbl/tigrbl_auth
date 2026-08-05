@@ -1,7 +1,7 @@
 """Create credential issuer, configuration, and wallet registry tables."""
 
 from tigrbl_identity_storage.migrations.helpers import create_tables, drop_tables
-from tigrbl_identity_storage.tables.credential_ecosystem_registry import (
+from tigrbl_identity_storage_digital_credential.tables.credential_ecosystem_registry import (
     CredentialConfiguration,
     CredentialIssuer,
     WalletAttestation,

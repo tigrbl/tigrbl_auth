@@ -1,7 +1,7 @@
 """Create attestation evidence, appraisal, and reference-material tables."""
 
 from tigrbl_identity_storage.migrations.helpers import create_tables, drop_tables
-from tigrbl_identity_storage.tables.attestation_state import (
+from tigrbl_identity_storage_attestation.tables.attestation_state import (
     AttestationAppraisalPolicy,
     AttestationEndorsement,
     AttestationEvidence,

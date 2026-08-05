@@ -1,0 +1,29 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.replay-protection"
+distribution = "tigrbl-identity-storage-replay-protection"
+import_root = "tigrbl_identity_storage_replay_protection"
+
+[schema]
+contract = "1.0.0"
+migration_head = "f25dd772-7549-52a4-932c-bf5e460b2ac9"
+migrations_package = "tigrbl_identity_storage_replay_protection.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.replay-protection:table:replay_reservations"
+kind = "table"
+physical_name = "authn.replay_reservations"
+model = "tigrbl_identity_storage_replay_protection.tables:ReplayReservation"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.replay-protection:table:dpop_replays"
+kind = "table"
+physical_name = "authn.dpop_replays"
+model = "tigrbl_identity_storage_replay_protection.tables:DpopReplay"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.replay-protection:table:dpop_nonces"
+kind = "table"
+physical_name = "authn.dpop_nonces"
+model = "tigrbl_identity_storage_replay_protection.tables:DpopNonce"

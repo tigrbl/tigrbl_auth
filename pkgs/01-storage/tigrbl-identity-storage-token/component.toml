@@ -1,0 +1,39 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.token"
+distribution = "tigrbl-identity-storage-token"
+import_root = "tigrbl_identity_storage_token"
+
+[schema]
+contract = "1.0.0"
+migration_head = "563f6816-43af-5ca0-8c78-b73eec393c1c"
+migrations_package = "tigrbl_identity_storage_token.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.token:table:token_records"
+kind = "table"
+physical_name = "authn.token_records"
+model = "tigrbl_identity_storage_token.tables:TokenRecord"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.token:table:protected_artifact_references"
+kind = "table"
+physical_name = "authn.protected_artifact_references"
+model = "tigrbl_identity_storage_token.tables:ProtectedArtifactReference"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.token:table:possession_proof_replays"
+kind = "table"
+physical_name = "authn.possession_proof_replays"
+model = "tigrbl_identity_storage_token.tables:PossessionProofReplay"
+
+[[schema.requires]]
+component = "tigrbl.identity.storage.foundation"
+contract = ">=1.0.0,<2.0.0"
+minimum_revision = "9f7432bf-9b26-5d0a-8a77-24b749d76b38"
+
+[[schema.requires]]
+component = "tigrbl.identity.storage.oauth"
+contract = ">=1.0.0,<2.0.0"
+minimum_revision = "d4b74406-754c-5424-9009-4dff55e1e1c4"

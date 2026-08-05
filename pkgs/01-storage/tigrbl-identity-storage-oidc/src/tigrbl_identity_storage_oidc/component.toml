@@ -1,0 +1,28 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.oidc"
+distribution = "tigrbl-identity-storage-oidc"
+import_root = "tigrbl_identity_storage_oidc"
+
+[schema]
+contract = "1.0.0"
+migration_head = "d33404e7-316b-5c4e-8336-5103efa79186"
+migrations_package = "tigrbl_identity_storage_oidc.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.oidc:table:logout_state"
+kind = "table"
+physical_name = "authn.logout_state"
+model = "tigrbl_identity_storage_oidc.tables:LogoutState"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.oidc:table:backchannel_logout_replays"
+kind = "table"
+physical_name = "authn.backchannel_logout_replays"
+model = "tigrbl_identity_storage_oidc.tables:BackchannelLogoutReplay"
+
+[[schema.requires]]
+component = "tigrbl.identity.storage.oauth"
+contract = ">=1.0.0,<2.0.0"
+minimum_revision = "d4b74406-754c-5424-9009-4dff55e1e1c4"

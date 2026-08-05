@@ -1,0 +1,35 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.scim"
+distribution = "tigrbl-identity-storage-scim"
+import_root = "tigrbl_identity_storage_scim"
+
+[schema]
+contract = "1.0.0"
+migration_head = "6bf4ad16-462a-5913-9322-f1ccbf2a82f5"
+migrations_package = "tigrbl_identity_storage_scim.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.scim:table:scim_schemas"
+kind = "table"
+physical_name = "authn.scim_schemas"
+model = "tigrbl_identity_storage_scim.tables:ScimSchemaRecord"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.scim:table:scim_users"
+kind = "table"
+physical_name = "authn.scim_users"
+model = "tigrbl_identity_storage_scim.tables:ScimUserRecord"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.scim:table:scim_groups"
+kind = "table"
+physical_name = "authn.scim_groups"
+model = "tigrbl_identity_storage_scim.tables:ScimGroupRecord"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.scim:table:scim_patch_events"
+kind = "table"
+physical_name = "authn.scim_patch_events"
+model = "tigrbl_identity_storage_scim.tables:ScimPatchEvent"

@@ -1,0 +1,27 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.audit"
+distribution = "tigrbl-identity-storage-audit"
+import_root = "tigrbl_identity_storage_audit"
+
+[schema]
+contract = "1.0.0"
+migration_head = "37f71b0c-7b5a-571c-bde6-a1ef26058fad"
+migrations_package = "tigrbl_identity_storage_audit.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.audit:table:audit_events"
+kind = "table"
+physical_name = "authn.audit_events"
+model = "tigrbl_identity_storage_audit.tables:AuditEvent"
+
+[[schema.requires]]
+component = "tigrbl.identity.storage.foundation"
+contract = ">=1.0.0,<2.0.0"
+minimum_revision = "9f7432bf-9b26-5d0a-8a77-24b749d76b38"
+
+[[schema.requires]]
+component = "tigrbl.identity.storage.oauth"
+contract = ">=1.0.0,<2.0.0"
+minimum_revision = "d4b74406-754c-5424-9009-4dff55e1e1c4"

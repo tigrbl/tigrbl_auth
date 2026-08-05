@@ -1,7 +1,7 @@
 """Create presentation transaction, consent, and replay tables."""
 
 from tigrbl_identity_storage.migrations.helpers import create_tables, drop_tables
-from tigrbl_identity_storage.tables.presentation_state import (
+from tigrbl_identity_storage_presentation.tables.presentation_state import (
     PresentationConsent,
     PresentationReplay,
     PresentationTransaction,

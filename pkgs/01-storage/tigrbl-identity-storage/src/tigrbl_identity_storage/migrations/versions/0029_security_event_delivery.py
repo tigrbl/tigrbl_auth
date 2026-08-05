@@ -1,7 +1,7 @@
 """Create security-event delivery and replay tables."""
 
 from tigrbl_identity_storage.migrations.helpers import create_tables, drop_tables
-from tigrbl_identity_storage.tables.security_event_state import (
+from tigrbl_identity_storage_security_event.tables.security_event_state import (
     SecurityEvent,
     SecurityEventDelivery,
     SecurityEventReplay,

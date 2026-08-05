@@ -1,0 +1,29 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.authority-graph"
+distribution = "tigrbl-identity-storage-authority-graph"
+import_root = "tigrbl_identity_storage_authority_graph"
+
+[schema]
+contract = "1.0.0"
+migration_head = "d7c60dd1-6611-58b2-8f62-5ca0e066afbd"
+migrations_package = "tigrbl_identity_storage_authority_graph.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authority-graph:table:authority_derivation_graphs"
+kind = "table"
+physical_name = "authn.authority_derivation_graphs"
+model = "tigrbl_identity_storage_authority_graph.tables:AuthorityDerivationGraph"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authority-graph:table:authority_derivation_graph_nodes"
+kind = "table"
+physical_name = "authn.authority_derivation_graph_nodes"
+model = "tigrbl_identity_storage_authority_graph.tables:AuthorityDerivationGraphNode"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authority-graph:table:authority_derivation_graph_edges"
+kind = "table"
+physical_name = "authn.authority_derivation_graph_edges"
+model = "tigrbl_identity_storage_authority_graph.tables:AuthorityDerivationGraphEdge"

@@ -1,0 +1,35 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.gnap"
+distribution = "tigrbl-identity-storage-gnap"
+import_root = "tigrbl_identity_storage_gnap"
+
+[schema]
+contract = "1.0.0"
+migration_head = "1021a8ad-e1fb-5632-8a07-a4942cc61056"
+migrations_package = "tigrbl_identity_storage_gnap.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.gnap:table:gnap_grants"
+kind = "table"
+physical_name = "authn.gnap_grants"
+model = "tigrbl_identity_storage_gnap.tables:GnapGrant"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.gnap:table:gnap_continuations"
+kind = "table"
+physical_name = "authn.gnap_continuations"
+model = "tigrbl_identity_storage_gnap.tables:GnapContinuation"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.gnap:table:gnap_client_instances"
+kind = "table"
+physical_name = "authn.gnap_client_instances"
+model = "tigrbl_identity_storage_gnap.tables:GnapClientInstance"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.gnap:table:gnap_interactions"
+kind = "table"
+physical_name = "authn.gnap_interactions"
+model = "tigrbl_identity_storage_gnap.tables:GnapInteraction"

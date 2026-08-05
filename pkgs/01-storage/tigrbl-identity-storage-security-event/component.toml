@@ -1,0 +1,35 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.security-event"
+distribution = "tigrbl-identity-storage-security-event"
+import_root = "tigrbl_identity_storage_security_event"
+
+[schema]
+contract = "1.0.0"
+migration_head = "8d8364e1-c9bf-59ea-b46c-fe28ddf83cba"
+migrations_package = "tigrbl_identity_storage_security_event.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.security-event:table:security_events"
+kind = "table"
+physical_name = "authn.security_events"
+model = "tigrbl_identity_storage_security_event.tables:SecurityEvent"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.security-event:table:security_event_subscriptions"
+kind = "table"
+physical_name = "authn.security_event_subscriptions"
+model = "tigrbl_identity_storage_security_event.tables:SecurityEventSubscription"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.security-event:table:security_event_deliveries"
+kind = "table"
+physical_name = "authn.security_event_deliveries"
+model = "tigrbl_identity_storage_security_event.tables:SecurityEventDelivery"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.security-event:table:security_event_replays"
+kind = "table"
+physical_name = "authn.security_event_replays"
+model = "tigrbl_identity_storage_security_event.tables:SecurityEventReplay"

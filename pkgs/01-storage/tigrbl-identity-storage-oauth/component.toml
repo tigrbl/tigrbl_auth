@@ -1,0 +1,64 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.oauth"
+distribution = "tigrbl-identity-storage-oauth"
+import_root = "tigrbl_identity_storage_oauth"
+
+[schema]
+contract = "1.0.0"
+migration_head = "d4b74406-754c-5424-9009-4dff55e1e1c4"
+migrations_package = "tigrbl_identity_storage_oauth.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.oauth:table:clients"
+kind = "table"
+physical_name = "authn.clients"
+model = "tigrbl_identity_storage_oauth.tables:Client"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.oauth:table:client_registrations"
+kind = "table"
+physical_name = "authn.client_registrations"
+model = "tigrbl_identity_storage_oauth.tables:ClientRegistration"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.oauth:table:authorization_servers"
+kind = "table"
+physical_name = "authn.authorization_servers"
+model = "tigrbl_identity_storage_oauth.tables:AuthorizationServer"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.oauth:table:sessions"
+kind = "table"
+physical_name = "authn.sessions"
+model = "tigrbl_identity_storage_oauth.tables:AuthSession"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.oauth:table:auth_codes"
+kind = "table"
+physical_name = "authn.auth_codes"
+model = "tigrbl_identity_storage_oauth.tables:AuthCode"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.oauth:table:device_codes"
+kind = "table"
+physical_name = "authn.device_codes"
+model = "tigrbl_identity_storage_oauth.tables:DeviceCode"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.oauth:table:revoked_tokens"
+kind = "table"
+physical_name = "authn.revoked_tokens"
+model = "tigrbl_identity_storage_oauth.tables:RevokedToken"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.oauth:table:par_requests"
+kind = "table"
+physical_name = "authn.par_requests"
+model = "tigrbl_identity_storage_oauth.tables:PushedAuthorizationRequest"
+
+[[schema.requires]]
+component = "tigrbl.identity.storage.foundation"
+contract = ">=1.0.0,<2.0.0"
+minimum_revision = "9f7432bf-9b26-5d0a-8a77-24b749d76b38"

@@ -1,0 +1,35 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.federation"
+distribution = "tigrbl-identity-storage-federation"
+import_root = "tigrbl_identity_storage_federation"
+
+[schema]
+contract = "1.0.0"
+migration_head = "d0a7da98-00a5-58f8-ac3e-d0912c96f0db"
+migrations_package = "tigrbl_identity_storage_federation.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.federation:table:provider_artifacts"
+kind = "table"
+physical_name = "authn.provider_artifacts"
+model = "tigrbl_identity_storage_federation.tables:ProviderArtifact"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.federation:table:identity_providers"
+kind = "table"
+physical_name = "authn.identity_providers"
+model = "tigrbl_identity_storage_federation.tables:IdentityProvider"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.federation:table:federations"
+kind = "table"
+physical_name = "authn.federations"
+model = "tigrbl_identity_storage_federation.tables:Federation"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.federation:table:federated_sessions"
+kind = "table"
+physical_name = "authn.federated_sessions"
+model = "tigrbl_identity_storage_federation.tables:FederatedSession"

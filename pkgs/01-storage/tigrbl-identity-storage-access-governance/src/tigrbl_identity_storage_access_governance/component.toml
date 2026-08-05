@@ -1,0 +1,41 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.access-governance"
+distribution = "tigrbl-identity-storage-access-governance"
+import_root = "tigrbl_identity_storage_access_governance"
+
+[schema]
+contract = "1.0.0"
+migration_head = "851b516f-e2a5-533b-8a68-a9ac3f9c7cb5"
+migrations_package = "tigrbl_identity_storage_access_governance.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.access-governance:table:entitlements"
+kind = "table"
+physical_name = "authn.entitlements"
+model = "tigrbl_identity_storage_access_governance.tables:Entitlement"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.access-governance:table:entitlement_assignments"
+kind = "table"
+physical_name = "authn.entitlement_assignments"
+model = "tigrbl_identity_storage_access_governance.tables:EntitlementAssignment"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.access-governance:table:access_review_campaigns"
+kind = "table"
+physical_name = "authn.access_review_campaigns"
+model = "tigrbl_identity_storage_access_governance.tables:AccessReviewCampaign"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.access-governance:table:access_review_items"
+kind = "table"
+physical_name = "authn.access_review_items"
+model = "tigrbl_identity_storage_access_governance.tables:AccessReviewItem"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.access-governance:table:access_review_decisions"
+kind = "table"
+physical_name = "authn.access_review_decisions"
+model = "tigrbl_identity_storage_access_governance.tables:AccessReviewDecision"

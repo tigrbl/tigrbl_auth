@@ -1,0 +1,35 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.webauthn"
+distribution = "tigrbl-identity-storage-webauthn"
+import_root = "tigrbl_identity_storage_webauthn"
+
+[schema]
+contract = "1.0.0"
+migration_head = "35709893-1208-54c2-ab00-dca4b2e67065"
+migrations_package = "tigrbl_identity_storage_webauthn.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.webauthn:table:credential_webauthn_passkeys"
+kind = "table"
+physical_name = "authn.credential_webauthn_passkeys"
+model = "tigrbl_identity_storage_webauthn.tables:CredentialWebAuthnPasskey"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.webauthn:table:webauthn_attestation_records"
+kind = "table"
+physical_name = "authn.webauthn_attestation_records"
+model = "tigrbl_identity_storage_webauthn.tables:WebAuthnAttestationRecord"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.webauthn:table:webauthn_ceremonies"
+kind = "table"
+physical_name = "authn.webauthn_ceremonies"
+model = "tigrbl_identity_storage_webauthn.tables:WebAuthnCeremony"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.webauthn:table:webauthn_relying_parties"
+kind = "table"
+physical_name = "authn.webauthn_relying_parties"
+model = "tigrbl_identity_storage_webauthn.tables:WebAuthnRelyingParty"

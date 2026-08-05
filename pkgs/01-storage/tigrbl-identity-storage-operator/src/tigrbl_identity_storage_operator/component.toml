@@ -1,0 +1,41 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.operator"
+distribution = "tigrbl-identity-storage-operator"
+import_root = "tigrbl_identity_storage_operator"
+
+[schema]
+contract = "1.0.0"
+migration_head = "469839b2-d339-544a-b747-fd68b6a5f235"
+migrations_package = "tigrbl_identity_storage_operator.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.operator:table:operator_metadata"
+kind = "table"
+physical_name = "operator_metadata"
+model = "tigrbl_identity_storage_operator.tables:OperatorMetadata"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.operator:table:operator_records"
+kind = "table"
+physical_name = "operator_records"
+model = "tigrbl_identity_storage_operator.tables:OperatorRecord"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.operator:table:operator_transactions"
+kind = "table"
+physical_name = "operator_transactions"
+model = "tigrbl_identity_storage_operator.tables:OperatorTransaction"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.operator:table:operator_audit_events"
+kind = "table"
+physical_name = "operator_audit_events"
+model = "tigrbl_identity_storage_operator.tables:OperatorAuditEvent"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.operator:table:operator_activity"
+kind = "table"
+physical_name = "operator_activity"
+model = "tigrbl_identity_storage_operator.tables:OperatorActivity"

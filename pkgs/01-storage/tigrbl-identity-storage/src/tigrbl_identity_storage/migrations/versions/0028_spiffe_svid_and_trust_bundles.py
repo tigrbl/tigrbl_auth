@@ -1,7 +1,7 @@
 """Create SPIFFE SVID and trust-bundle metadata tables."""
 
 from tigrbl_identity_storage.migrations.helpers import create_tables, drop_tables
-from tigrbl_identity_storage.tables.spiffe_state import (
+from tigrbl_identity_storage_workload_identity.tables.spiffe_state import (
     SpiffeTrustBundle,
     SvidRecord,
     TrustDomainFederation,

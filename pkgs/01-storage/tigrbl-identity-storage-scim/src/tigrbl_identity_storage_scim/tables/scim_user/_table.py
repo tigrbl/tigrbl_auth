@@ -1,0 +1,21 @@
+"""Durable SCIM user projection rows."""
+
+from __future__ import annotations
+
+
+from tigrbl_identity_storage_core.framework import RestOltpTable, GUIDPk, JSON, Mapped, S, String, Timestamped, acol
+
+
+
+class ScimUserRecord(RestOltpTable, GUIDPk, Timestamped):
+    __tablename__ = "scim_users"
+    __table_args__ = ({"schema": "authn"},)
+
+    user_id: Mapped[str] = acol(storage=S(String(255), nullable=False, unique=True, index=True))
+    tenant_id: Mapped[str] = acol(storage=S(String(255), nullable=False, index=True))
+    user_name: Mapped[str] = acol(storage=S(String(255), nullable=False, index=True))
+    attributes: Mapped[dict] = acol(storage=S(JSON, nullable=False, default=dict))
+    status: Mapped[str] = acol(storage=S(String(32), nullable=False, default="active", index=True))
+
+
+__all__ = ["ScimUserRecord"]

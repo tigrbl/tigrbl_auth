@@ -1,0 +1,47 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.workload-identity"
+distribution = "tigrbl-identity-storage-workload-identity"
+import_root = "tigrbl_identity_storage_workload_identity"
+
+[schema]
+contract = "1.0.0"
+migration_head = "0bcee998-b0a3-5ba2-b04c-d049cad65127"
+migrations_package = "tigrbl_identity_storage_workload_identity.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.workload-identity:table:workload_identities"
+kind = "table"
+physical_name = "authn.workload_identities"
+model = "tigrbl_identity_storage_workload_identity.tables:WorkloadIdentity"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.workload-identity:table:svid_records"
+kind = "table"
+physical_name = "authn.svid_records"
+model = "tigrbl_identity_storage_workload_identity.tables:SvidRecord"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.workload-identity:table:spiffe_trust_bundles"
+kind = "table"
+physical_name = "authn.spiffe_trust_bundles"
+model = "tigrbl_identity_storage_workload_identity.tables:SpiffeTrustBundle"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.workload-identity:table:trust_domain_federations"
+kind = "table"
+physical_name = "authn.trust_domain_federations"
+model = "tigrbl_identity_storage_workload_identity.tables:TrustDomainFederation"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.workload-identity:table:workload_reference_bindings"
+kind = "table"
+physical_name = "authn.workload_reference_bindings"
+model = "tigrbl_identity_storage_workload_identity.tables:WorkloadReferenceBinding"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.workload-identity:table:workload_credential_entitlements"
+kind = "table"
+physical_name = "authn.workload_credential_entitlements"
+model = "tigrbl_identity_storage_workload_identity.tables:WorkloadCredentialEntitlement"

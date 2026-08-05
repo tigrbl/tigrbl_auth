@@ -1,0 +1,89 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.authorization-policy"
+distribution = "tigrbl-identity-storage-authorization-policy"
+import_root = "tigrbl_identity_storage_authorization_policy"
+
+[schema]
+contract = "1.0.0"
+migration_head = "0ef0b038-e979-5ba7-b874-d36093292702"
+migrations_package = "tigrbl_identity_storage_authorization_policy.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authorization-policy:table:tenant_memberships"
+kind = "table"
+physical_name = "authn.tenant_memberships"
+model = "tigrbl_identity_storage_authorization_policy.tables:TenantMembership"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authorization-policy:table:roles"
+kind = "table"
+physical_name = "authn.roles"
+model = "tigrbl_identity_storage_authorization_policy.tables:Role"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authorization-policy:table:attribute_policies"
+kind = "table"
+physical_name = "authn.attribute_policies"
+model = "tigrbl_identity_storage_authorization_policy.tables:AttributePolicy"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authorization-policy:table:policy_conditions"
+kind = "table"
+physical_name = "authn.policy_conditions"
+model = "tigrbl_identity_storage_authorization_policy.tables:PolicyCondition"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authorization-policy:table:policies"
+kind = "table"
+physical_name = "authn.policies"
+model = "tigrbl_identity_storage_authorization_policy.tables:Policy"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authorization-policy:table:policy_versions"
+kind = "table"
+physical_name = "authn.policy_versions"
+model = "tigrbl_identity_storage_authorization_policy.tables:PolicyVersion"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authorization-policy:table:policy_sets"
+kind = "table"
+physical_name = "authn.policy_sets"
+model = "tigrbl_identity_storage_authorization_policy.tables:PolicySet"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authorization-policy:table:policy_set_members"
+kind = "table"
+physical_name = "authn.policy_set_members"
+model = "tigrbl_identity_storage_authorization_policy.tables:PolicySetMember"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authorization-policy:table:policy_targets"
+kind = "table"
+physical_name = "authn.policy_targets"
+model = "tigrbl_identity_storage_authorization_policy.tables:PolicyTarget"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authorization-policy:table:delegated_admin_scopes"
+kind = "table"
+physical_name = "authn.delegated_admin_scopes"
+model = "tigrbl_identity_storage_authorization_policy.tables:DelegatedAdminScope"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authorization-policy:table:authorization_invariants"
+kind = "table"
+physical_name = "authn.authorization_invariants"
+model = "tigrbl_identity_storage_authorization_policy.tables:AuthorizationInvariant"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authorization-policy:table:invariant_evaluations"
+kind = "table"
+physical_name = "authn.invariant_evaluations"
+model = "tigrbl_identity_storage_authorization_policy.tables:InvariantEvaluation"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authorization-policy:table:invariant_violations"
+kind = "table"
+physical_name = "authn.invariant_violations"
+model = "tigrbl_identity_storage_authorization_policy.tables:InvariantViolation"
