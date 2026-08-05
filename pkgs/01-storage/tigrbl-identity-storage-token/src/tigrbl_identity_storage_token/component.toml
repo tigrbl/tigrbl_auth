@@ -29,11 +29,11 @@ physical_name = "authn.possession_proof_replays"
 model = "tigrbl_identity_storage_token.tables:PossessionProofReplay"
 
 [[schema.requires]]
-component = "tigrbl.identity.storage.foundation"
-contract = ">=1.0.0,<2.0.0"
-minimum_revision = "9f7432bf-9b26-5d0a-8a77-24b749d76b38"
-
-[[schema.requires]]
 component = "tigrbl.identity.storage.oauth"
 contract = ">=1.0.0,<2.0.0"
 minimum_revision = "d4b74406-754c-5424-9009-4dff55e1e1c4"
+
+[[schema.requires]]
+component = "tigrbl.identity.storage.tenancy"
+contract = ">=1.0.0,<2.0.0"
+minimum_revision = "69854e73-52d3-53ec-9542-6737159e42d6"

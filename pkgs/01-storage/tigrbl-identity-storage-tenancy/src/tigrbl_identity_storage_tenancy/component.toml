@@ -1,0 +1,23 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.tenancy"
+distribution = "tigrbl-identity-storage-tenancy"
+import_root = "tigrbl_identity_storage_tenancy"
+
+[schema]
+contract = "1.0.0"
+migration_head = "69854e73-52d3-53ec-9542-6737159e42d6"
+migrations_package = "tigrbl_identity_storage_tenancy.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.tenancy:table:realms"
+kind = "table"
+physical_name = "authn.realms"
+model = "tigrbl_identity_storage_tenancy.tables:Realm"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.tenancy:table:tenants"
+kind = "table"
+physical_name = "authn.tenants"
+model = "tigrbl_identity_storage_tenancy.tables:Tenant"

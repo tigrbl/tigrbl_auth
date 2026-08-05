@@ -3959,24 +3959,24 @@ dependencies = [
     { name = "tigrbl-identity-storage-certificate" },
     { name = "tigrbl-identity-storage-claims" },
     { name = "tigrbl-identity-storage-consent" },
-    { name = "tigrbl-identity-storage-core" },
     { name = "tigrbl-identity-storage-delegation" },
     { name = "tigrbl-identity-storage-did" },
     { name = "tigrbl-identity-storage-digital-credential" },
     { name = "tigrbl-identity-storage-federation" },
-    { name = "tigrbl-identity-storage-foundation" },
     { name = "tigrbl-identity-storage-gnap" },
     { name = "tigrbl-identity-storage-key-material" },
     { name = "tigrbl-identity-storage-oauth" },
     { name = "tigrbl-identity-storage-oidc" },
     { name = "tigrbl-identity-storage-operator" },
     { name = "tigrbl-identity-storage-presentation" },
+    { name = "tigrbl-identity-storage-principals" },
     { name = "tigrbl-identity-storage-release-governance" },
     { name = "tigrbl-identity-storage-replay-protection" },
     { name = "tigrbl-identity-storage-residency" },
     { name = "tigrbl-identity-storage-runtime" },
     { name = "tigrbl-identity-storage-scim" },
     { name = "tigrbl-identity-storage-security-event" },
+    { name = "tigrbl-identity-storage-tenancy" },
     { name = "tigrbl-identity-storage-token" },
     { name = "tigrbl-identity-storage-trust-federation-graph" },
     { name = "tigrbl-identity-storage-webauthn" },
@@ -4528,24 +4528,24 @@ requires-dist = [
     { name = "tigrbl-identity-storage-certificate", editable = "pkgs/01-storage/tigrbl-identity-storage-certificate" },
     { name = "tigrbl-identity-storage-claims", editable = "pkgs/01-storage/tigrbl-identity-storage-claims" },
     { name = "tigrbl-identity-storage-consent", editable = "pkgs/01-storage/tigrbl-identity-storage-consent" },
-    { name = "tigrbl-identity-storage-core", editable = "pkgs/01-storage/tigrbl-identity-storage-core" },
     { name = "tigrbl-identity-storage-delegation", editable = "pkgs/01-storage/tigrbl-identity-storage-delegation" },
     { name = "tigrbl-identity-storage-did", editable = "pkgs/01-storage/tigrbl-identity-storage-did" },
     { name = "tigrbl-identity-storage-digital-credential", editable = "pkgs/01-storage/tigrbl-identity-storage-digital-credential" },
     { name = "tigrbl-identity-storage-federation", editable = "pkgs/01-storage/tigrbl-identity-storage-federation" },
-    { name = "tigrbl-identity-storage-foundation", editable = "pkgs/01-storage/tigrbl-identity-storage-foundation" },
     { name = "tigrbl-identity-storage-gnap", editable = "pkgs/01-storage/tigrbl-identity-storage-gnap" },
     { name = "tigrbl-identity-storage-key-material", editable = "pkgs/01-storage/tigrbl-identity-storage-key-material" },
     { name = "tigrbl-identity-storage-oauth", editable = "pkgs/01-storage/tigrbl-identity-storage-oauth" },
     { name = "tigrbl-identity-storage-oidc", editable = "pkgs/01-storage/tigrbl-identity-storage-oidc" },
     { name = "tigrbl-identity-storage-operator", editable = "pkgs/01-storage/tigrbl-identity-storage-operator" },
     { name = "tigrbl-identity-storage-presentation", editable = "pkgs/01-storage/tigrbl-identity-storage-presentation" },
+    { name = "tigrbl-identity-storage-principals", editable = "pkgs/01-storage/tigrbl-identity-storage-principals" },
     { name = "tigrbl-identity-storage-release-governance", editable = "pkgs/01-storage/tigrbl-identity-storage-release-governance" },
     { name = "tigrbl-identity-storage-replay-protection", editable = "pkgs/01-storage/tigrbl-identity-storage-replay-protection" },
     { name = "tigrbl-identity-storage-residency", editable = "pkgs/01-storage/tigrbl-identity-storage-residency" },
     { name = "tigrbl-identity-storage-runtime", editable = "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime" },
     { name = "tigrbl-identity-storage-scim", editable = "pkgs/01-storage/tigrbl-identity-storage-scim" },
     { name = "tigrbl-identity-storage-security-event", editable = "pkgs/01-storage/tigrbl-identity-storage-security-event" },
+    { name = "tigrbl-identity-storage-tenancy", editable = "pkgs/01-storage/tigrbl-identity-storage-tenancy" },
     { name = "tigrbl-identity-storage-token", editable = "pkgs/01-storage/tigrbl-identity-storage-token" },
     { name = "tigrbl-identity-storage-trust-federation-graph", editable = "pkgs/01-storage/tigrbl-identity-storage-trust-federation-graph" },
     { name = "tigrbl-identity-storage-webauthn", editable = "pkgs/01-storage/tigrbl-identity-storage-webauthn" },
@@ -7595,6 +7595,15 @@ name = "tigrbl-identity-core"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/00-primitives/tigrbl-identity-core" }
 
+[package.optional-dependencies]
+storage = [
+    { name = "tigrbl" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl", marker = "extra == 'storage'", specifier = ">=0.4.4.dev1,<0.5" }]
+provides-extras = ["storage"]
+
 [[package]]
 name = "tigrbl-identity-credentials"
 version = "0.4.0.dev2"
@@ -8108,23 +8117,23 @@ dependencies = [
     { name = "tigrbl-identity-storage-certificate" },
     { name = "tigrbl-identity-storage-claims" },
     { name = "tigrbl-identity-storage-consent" },
-    { name = "tigrbl-identity-storage-core" },
     { name = "tigrbl-identity-storage-delegation" },
     { name = "tigrbl-identity-storage-did" },
     { name = "tigrbl-identity-storage-digital-credential" },
     { name = "tigrbl-identity-storage-federation" },
-    { name = "tigrbl-identity-storage-foundation" },
     { name = "tigrbl-identity-storage-gnap" },
     { name = "tigrbl-identity-storage-key-material" },
     { name = "tigrbl-identity-storage-oauth" },
     { name = "tigrbl-identity-storage-oidc" },
     { name = "tigrbl-identity-storage-operator" },
     { name = "tigrbl-identity-storage-presentation" },
+    { name = "tigrbl-identity-storage-principals" },
     { name = "tigrbl-identity-storage-release-governance" },
     { name = "tigrbl-identity-storage-replay-protection" },
     { name = "tigrbl-identity-storage-residency" },
     { name = "tigrbl-identity-storage-scim" },
     { name = "tigrbl-identity-storage-security-event" },
+    { name = "tigrbl-identity-storage-tenancy" },
     { name = "tigrbl-identity-storage-token" },
     { name = "tigrbl-identity-storage-trust-federation-graph" },
     { name = "tigrbl-identity-storage-webauthn" },
@@ -8147,23 +8156,23 @@ requires-dist = [
     { name = "tigrbl-identity-storage-certificate", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage-claims", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage-consent", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-storage-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage-delegation", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage-did", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage-digital-credential", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage-federation", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-storage-foundation", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage-gnap", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage-key-material", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage-oauth", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage-oidc", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage-operator", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage-presentation", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage-principals", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage-release-governance", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage-replay-protection", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage-residency", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage-scim", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage-security-event", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage-tenancy", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage-token", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage-trust-federation-graph", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage-webauthn", specifier = "==0.4.0.dev2" },
@@ -8178,14 +8187,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-access-governance" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 
@@ -8195,14 +8204,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-attestation" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 
@@ -8212,18 +8221,20 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-audit" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
-    { name = "tigrbl-identity-storage-foundation" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
     { name = "tigrbl-identity-storage-oauth" },
+    { name = "tigrbl-identity-storage-principals" },
+    { name = "tigrbl-identity-storage-tenancy" },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
-    { name = "tigrbl-identity-storage-foundation", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-identity-storage-oauth", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-storage-principals", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-storage-tenancy", specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 
@@ -8233,16 +8244,16 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-authentication" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
-    { name = "tigrbl-identity-storage-foundation" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
+    { name = "tigrbl-identity-storage-principals" },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
-    { name = "tigrbl-identity-storage-foundation", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-storage-principals", specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 
@@ -8252,14 +8263,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-authority-graph" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 
@@ -8269,14 +8280,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-authorization-policy" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 
@@ -8286,14 +8297,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-certificate" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 
@@ -8303,16 +8314,16 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-claims" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
-    { name = "tigrbl-identity-storage-foundation" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
+    { name = "tigrbl-identity-storage-tenancy" },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
-    { name = "tigrbl-identity-storage-foundation", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-storage-tenancy", specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 
@@ -8322,36 +8333,21 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-consent" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
-    { name = "tigrbl-identity-storage-foundation" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
     { name = "tigrbl-identity-storage-oauth" },
+    { name = "tigrbl-identity-storage-principals" },
+    { name = "tigrbl-identity-storage-tenancy" },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
-    { name = "tigrbl-identity-storage-foundation", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-identity-storage-oauth", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-storage-principals", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-storage-tenancy", specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
-]
-
-[[package]]
-name = "tigrbl-identity-storage-core"
-version = "0.4.0.dev2"
-source = { editable = "pkgs/01-storage/tigrbl-identity-storage-core" }
-dependencies = [
-    { name = "tigrbl" },
-    { name = "tigrbl-core" },
-    { name = "tigrbl-identity-core" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-core", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
@@ -8360,16 +8356,16 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-delegation" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
-    { name = "tigrbl-identity-storage-foundation" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
+    { name = "tigrbl-identity-storage-tenancy" },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
-    { name = "tigrbl-identity-storage-foundation", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-storage-tenancy", specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 
@@ -8379,14 +8375,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-did" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 
@@ -8396,14 +8392,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-digital-credential" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 
@@ -8413,31 +8409,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-federation" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
-    { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
-]
-
-[[package]]
-name = "tigrbl-identity-storage-foundation"
-version = "0.4.0.dev2"
-source = { editable = "pkgs/01-storage/tigrbl-identity-storage-foundation" }
-dependencies = [
-    { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
-    { name = "tigrbl-migrations" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 
@@ -8447,14 +8426,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-gnap" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 
@@ -8464,18 +8443,20 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-key-material" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
-    { name = "tigrbl-identity-storage-foundation" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
     { name = "tigrbl-identity-storage-oauth" },
+    { name = "tigrbl-identity-storage-principals" },
+    { name = "tigrbl-identity-storage-tenancy" },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
-    { name = "tigrbl-identity-storage-foundation", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-identity-storage-oauth", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-storage-principals", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-storage-tenancy", specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 
@@ -8485,16 +8466,18 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-oauth" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
-    { name = "tigrbl-identity-storage-foundation" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
+    { name = "tigrbl-identity-storage-principals" },
+    { name = "tigrbl-identity-storage-tenancy" },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
-    { name = "tigrbl-identity-storage-foundation", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-storage-principals", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-storage-tenancy", specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 
@@ -8504,7 +8487,7 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-oidc" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
     { name = "tigrbl-identity-storage-oauth" },
     { name = "tigrbl-migrations" },
 ]
@@ -8512,7 +8495,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-identity-storage-oauth", specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
@@ -8523,14 +8506,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-operator" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 
@@ -8540,14 +8523,33 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-presentation" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
+]
+
+[[package]]
+name = "tigrbl-identity-storage-principals"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/01-storage/tigrbl-identity-storage-principals" }
+dependencies = [
+    { name = "tigrbl" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
+    { name = "tigrbl-identity-storage-tenancy" },
+    { name = "tigrbl-migrations" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-storage-tenancy", specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 
@@ -8557,14 +8559,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-release-governance" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 
@@ -8574,14 +8576,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-replay-protection" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 
@@ -8591,14 +8593,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-residency" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 
@@ -8671,14 +8673,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-scim" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 
@@ -8688,14 +8690,31 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-security-event" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
+]
+
+[[package]]
+name = "tigrbl-identity-storage-tenancy"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/01-storage/tigrbl-identity-storage-tenancy" }
+dependencies = [
+    { name = "tigrbl" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
+    { name = "tigrbl-migrations" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 
@@ -8705,18 +8724,18 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-token" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
-    { name = "tigrbl-identity-storage-foundation" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
     { name = "tigrbl-identity-storage-oauth" },
+    { name = "tigrbl-identity-storage-tenancy" },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
-    { name = "tigrbl-identity-storage-foundation", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-identity-storage-oauth", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-storage-tenancy", specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 
@@ -8726,14 +8745,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-trust-federation-graph" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 
@@ -8743,14 +8762,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-webauthn" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 
@@ -8760,14 +8779,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/01-storage/tigrbl-identity-storage-workload-identity" }
 dependencies = [
     { name = "tigrbl" },
-    { name = "tigrbl-identity-storage-core" },
+    { name = "tigrbl-identity-core", extra = ["storage"] },
     { name = "tigrbl-migrations" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = ">=0.4.4.dev1,<0.5" },
-    { name = "tigrbl-identity-storage-core", specifier = ">=0.4.0.dev2" },
+    { name = "tigrbl-identity-core", extras = ["storage"], specifier = ">=0.4.0.dev2" },
     { name = "tigrbl-migrations", specifier = ">=0.4.5.dev4" },
 ]
 

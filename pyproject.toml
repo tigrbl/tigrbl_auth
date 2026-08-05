@@ -465,7 +465,6 @@ dependencies = [
     "tigrbl-identity-server==0.4.0.dev2",
     "tigrbl-identity-storage==0.4.0.dev2",
     "tigrbl-migrations==0.4.5.dev4",
-    "tigrbl-identity-storage-core==0.4.0.dev2",
     "tigrbl-identity-storage-access-governance==0.4.0.dev2",
     "tigrbl-identity-storage-attestation==0.4.0.dev2",
     "tigrbl-identity-storage-audit==0.4.0.dev2",
@@ -479,7 +478,7 @@ dependencies = [
     "tigrbl-identity-storage-did==0.4.0.dev2",
     "tigrbl-identity-storage-digital-credential==0.4.0.dev2",
     "tigrbl-identity-storage-federation==0.4.0.dev2",
-    "tigrbl-identity-storage-foundation==0.4.0.dev2",
+    "tigrbl-identity-storage-principals==0.4.0.dev2",
     "tigrbl-identity-storage-gnap==0.4.0.dev2",
     "tigrbl-identity-storage-key-material==0.4.0.dev2",
     "tigrbl-identity-storage-oauth==0.4.0.dev2",
@@ -492,6 +491,7 @@ dependencies = [
     "tigrbl-identity-storage-scim==0.4.0.dev2",
     "tigrbl-identity-storage-security-event==0.4.0.dev2",
     "tigrbl-identity-storage-token==0.4.0.dev2",
+    "tigrbl-identity-storage-tenancy==0.4.0.dev2",
     "tigrbl-identity-storage-trust-federation-graph==0.4.0.dev2",
     "tigrbl-identity-storage-webauthn==0.4.0.dev2",
     "tigrbl-identity-storage-workload-identity==0.4.0.dev2",
@@ -1032,7 +1032,6 @@ tigrbl-identity-runtime = { path = "pkgs/60-runtime/tigrbl-identity-runtime", ed
 tigrbl-identity-server = { path = "pkgs/60-runtime/tigrbl-identity-server", editable = true }
 tigrbl-identity-storage = { path = "pkgs/01-storage/tigrbl-identity-storage", editable = true }
 tigrbl-migrations = { path = "../tigrbl/pkgs/10_core/tigrbl_migrations", editable = true }
-tigrbl-identity-storage-core = { path = "pkgs/01-storage/tigrbl-identity-storage-core", editable = true }
 tigrbl-identity-storage-access-governance = { path = "pkgs/01-storage/tigrbl-identity-storage-access-governance", editable = true }
 tigrbl-identity-storage-attestation = { path = "pkgs/01-storage/tigrbl-identity-storage-attestation", editable = true }
 tigrbl-identity-storage-audit = { path = "pkgs/01-storage/tigrbl-identity-storage-audit", editable = true }
@@ -1046,7 +1045,7 @@ tigrbl-identity-storage-delegation = { path = "pkgs/01-storage/tigrbl-identity-s
 tigrbl-identity-storage-did = { path = "pkgs/01-storage/tigrbl-identity-storage-did", editable = true }
 tigrbl-identity-storage-digital-credential = { path = "pkgs/01-storage/tigrbl-identity-storage-digital-credential", editable = true }
 tigrbl-identity-storage-federation = { path = "pkgs/01-storage/tigrbl-identity-storage-federation", editable = true }
-tigrbl-identity-storage-foundation = { path = "pkgs/01-storage/tigrbl-identity-storage-foundation", editable = true }
+tigrbl-identity-storage-principals = { path = "pkgs/01-storage/tigrbl-identity-storage-principals", editable = true }
 tigrbl-identity-storage-gnap = { path = "pkgs/01-storage/tigrbl-identity-storage-gnap", editable = true }
 tigrbl-identity-storage-key-material = { path = "pkgs/01-storage/tigrbl-identity-storage-key-material", editable = true }
 tigrbl-identity-storage-oauth = { path = "pkgs/01-storage/tigrbl-identity-storage-oauth", editable = true }
@@ -1059,6 +1058,7 @@ tigrbl-identity-storage-residency = { path = "pkgs/01-storage/tigrbl-identity-st
 tigrbl-identity-storage-scim = { path = "pkgs/01-storage/tigrbl-identity-storage-scim", editable = true }
 tigrbl-identity-storage-security-event = { path = "pkgs/01-storage/tigrbl-identity-storage-security-event", editable = true }
 tigrbl-identity-storage-token = { path = "pkgs/01-storage/tigrbl-identity-storage-token", editable = true }
+tigrbl-identity-storage-tenancy = { path = "pkgs/01-storage/tigrbl-identity-storage-tenancy", editable = true }
 tigrbl-identity-storage-trust-federation-graph = { path = "pkgs/01-storage/tigrbl-identity-storage-trust-federation-graph", editable = true }
 tigrbl-identity-storage-webauthn = { path = "pkgs/01-storage/tigrbl-identity-storage-webauthn", editable = true }
 tigrbl-identity-storage-workload-identity = { path = "pkgs/01-storage/tigrbl-identity-storage-workload-identity", editable = true }

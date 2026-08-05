@@ -20,7 +20,8 @@ LEGACY = STORAGE / "tigrbl-identity-storage/src/tigrbl_identity_storage/tables"
 NAMESPACE = uuid.UUID("72ced0b5-f90a-47ba-b7d5-da70a6b62d4f")
 
 COMPONENTS: dict[str, tuple[str, ...]] = {
-    "foundation": ("Realm", "Tenant", "User", "Principal", "SubjectAlias", "ServiceIdentity", "MachineIdentity"),
+    "tenancy": ("Realm", "Tenant"),
+    "principals": ("User", "Principal", "SubjectAlias", "ServiceIdentity", "MachineIdentity"),
     "authentication": ("Credential", "CredentialApiKey", "CredentialServiceKey", "CredentialAuditEvent", "CredentialClientSecret", "CredentialDpopKey", "CredentialMfaFactor", "CredentialMtlsCertificate", "CredentialPassword", "CredentialRecoveryCode", "AuthenticationChallenge"),
     "oauth": ("Client", "ClientRegistration", "AuthorizationServer", "AuthSession", "AuthCode", "DeviceCode", "RevokedToken", "PushedAuthorizationRequest"),
     "oidc": ("LogoutState", "BackchannelLogoutReplay"),
@@ -71,7 +72,7 @@ def _sources() -> tuple[dict[str, Path], dict[str, str], dict[str, object]]:
                         table_names[node.name] = statement.value.value
     sys.path[:0] = [
         str(STORAGE / "tigrbl-identity-storage/src"),
-        str(STORAGE / "tigrbl-identity-storage-core/src"),
+        str(ROOT / "pkgs/00-primitives/tigrbl-identity-core/src"),
         *(
             str(path / "src")
             for path in STORAGE.glob("tigrbl-identity-storage-*")
@@ -90,7 +91,8 @@ def _revision(component: str) -> str:
 
 
 def _rewrite(text: str, import_root: str) -> str:
-    text = text.replace("tigrbl_identity_storage.framework", "tigrbl_identity_storage_core.framework")
+    text = text.replace("tigrbl_identity_storage.framework", "tigrbl_identity_core.orm")
+    text = text.replace("tigrbl_identity_storage_core.framework", "tigrbl_identity_core.orm")
     text = text.replace("tigrbl_identity_storage.tables._graph_base", f"{import_root}.tables._graph_base")
     return text.rstrip() + "\n"
 
@@ -240,7 +242,7 @@ def main() -> None:
         dependency_rows = [
             '    "tigrbl>=0.4.4.dev1,<0.5",',
             '    "tigrbl-migrations>=0.4.5.dev4",',
-            '    "tigrbl-identity-storage-core>=0.4.0.dev2",',
+            '    "tigrbl-identity-core[storage]>=0.4.0.dev2",',
             *(f'    "{item}>=0.4.0.dev2",' for item in dependency_dists),
         ]
         pyproject = f'''[project]
@@ -317,7 +319,7 @@ MIGRATION = Migration(
         '"""Compatibility projection of independently owned storage components."""',
         "# ruff: noqa: F401,F403",
         "",
-        "from tigrbl_identity_storage_core.framework import RestOltpTable",
+        "from tigrbl_identity_core.orm import RestOltpTable",
     ]
     for component, classes in COMPONENTS.items():
         import_root = "tigrbl_identity_storage_" + component.replace("-", "_")

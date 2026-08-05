@@ -54,8 +54,8 @@ def _schema_signature(connection):
 def test_all_tables_have_one_component_identity_and_one_object_identity() -> None:
     composition, migrations, models = _model_inventory()
     objects = [owned for manifest in composition.manifests for owned in manifest.objects]
-    assert len(composition.manifests) == 29
-    assert len(migrations) == 29
+    assert len(composition.manifests) == 30
+    assert len(migrations) == 30
     assert len(models) == 153
     assert len(COMPATIBILITY_MODELS) == 153
     assert {id(model) for model in models} == {id(model) for model in COMPATIBILITY_MODELS}
@@ -102,7 +102,7 @@ def test_fresh_component_install_is_repeatable_and_records_ownership() -> None:
         orchestrator = MigrationOrchestrator(composition, migrations, ledger, versions)
         first = orchestrator.apply()
         second = orchestrator.apply()
-        assert len(first.ordered) == 29
+        assert len(first.ordered) == 30
         assert not second.ordered
         assert len(_schema_signature(connection)) == 153
         ownership = connection.exec_driver_sql(
@@ -171,7 +171,7 @@ def test_legacy_adoption_preserves_data_and_claims_every_object(monkeypatch) -> 
         ).scalar_one() == 153
         assert connection.exec_driver_sql(
             "SELECT COUNT(*) FROM tigrbl_schema_migrations WHERE application_mode = 'adopted'"
-        ).scalar_one() == 29
+        ).scalar_one() == 30
     finally:
         connection.close()
         engine.dispose()

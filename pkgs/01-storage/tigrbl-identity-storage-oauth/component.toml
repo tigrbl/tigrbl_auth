@@ -59,6 +59,11 @@ physical_name = "authn.par_requests"
 model = "tigrbl_identity_storage_oauth.tables:PushedAuthorizationRequest"
 
 [[schema.requires]]
-component = "tigrbl.identity.storage.foundation"
+component = "tigrbl.identity.storage.principals"
 contract = ">=1.0.0,<2.0.0"
-minimum_revision = "9f7432bf-9b26-5d0a-8a77-24b749d76b38"
+minimum_revision = "44ff280d-bf80-54b1-9bb2-c796f258bd4d"
+
+[[schema.requires]]
+component = "tigrbl.identity.storage.tenancy"
+contract = ">=1.0.0,<2.0.0"
+minimum_revision = "69854e73-52d3-53ec-9542-6737159e42d6"

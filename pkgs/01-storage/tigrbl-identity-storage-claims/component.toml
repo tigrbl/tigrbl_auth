@@ -41,6 +41,6 @@ physical_name = "authn.claim_snapshots"
 model = "tigrbl_identity_storage_claims.tables:ClaimSnapshot"
 
 [[schema.requires]]
-component = "tigrbl.identity.storage.foundation"
+component = "tigrbl.identity.storage.tenancy"
 contract = ">=1.0.0,<2.0.0"
-minimum_revision = "9f7432bf-9b26-5d0a-8a77-24b749d76b38"
+minimum_revision = "69854e73-52d3-53ec-9542-6737159e42d6"

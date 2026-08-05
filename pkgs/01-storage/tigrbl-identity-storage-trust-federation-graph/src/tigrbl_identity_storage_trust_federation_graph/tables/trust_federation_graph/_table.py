@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from sqlalchemy import Index, UniqueConstraint
 
-from tigrbl_identity_storage_core.framework import (
+from tigrbl_identity_core.orm import (
     ForeignKeySpec,
     GUIDPk,
     JSON,

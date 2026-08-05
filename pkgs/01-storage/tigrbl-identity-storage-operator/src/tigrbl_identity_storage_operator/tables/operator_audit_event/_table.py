@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from tigrbl_identity_storage_core.framework import RestOltpTable, Mapped, S, String, acol
+from tigrbl_identity_core.orm import RestOltpTable, Mapped, S, String, acol
 
 
 class OperatorAuditEvent(RestOltpTable):

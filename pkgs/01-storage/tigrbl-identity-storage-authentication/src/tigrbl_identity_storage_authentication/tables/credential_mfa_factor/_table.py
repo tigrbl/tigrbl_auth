@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 
-from tigrbl_identity_storage_core.framework import GUIDPk, JSON, Mapped, RestOltpTable, S, String, Timestamped, acol
+from tigrbl_identity_core.orm import GUIDPk, JSON, Mapped, RestOltpTable, S, String, Timestamped, acol
 
 
 

@@ -1,6 +1,6 @@
 """Tenant-scoped WebAuthn relying-party configuration."""
 
-from tigrbl_identity_storage_core.framework import Boolean, GUIDPk, JSON, Mapped, RestOltpTable, S, String, Timestamped, acol
+from tigrbl_identity_core.orm import Boolean, GUIDPk, JSON, Mapped, RestOltpTable, S, String, Timestamped, acol
 
 
 class WebAuthnRelyingParty(RestOltpTable, GUIDPk, Timestamped):

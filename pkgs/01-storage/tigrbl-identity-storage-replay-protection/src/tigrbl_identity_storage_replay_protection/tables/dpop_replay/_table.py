@@ -7,7 +7,7 @@ import hashlib
 from datetime import timezone
 from typing import Any
 
-from tigrbl_identity_storage_core.framework import (
+from tigrbl_identity_core.orm import (
     GUIDPk,
     Mapped,
     RestOltpTable,

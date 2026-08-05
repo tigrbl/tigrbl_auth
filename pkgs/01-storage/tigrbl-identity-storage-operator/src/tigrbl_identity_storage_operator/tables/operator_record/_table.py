@@ -5,7 +5,7 @@ from __future__ import annotations
 import copy
 from typing import Any, Mapping
 
-from tigrbl_identity_storage_core.framework import RestOltpTable, Boolean, Mapped, S, String, acol
+from tigrbl_identity_core.orm import RestOltpTable, Boolean, Mapped, S, String, acol
 
 
 

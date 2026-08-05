@@ -17,11 +17,16 @@ physical_name = "authn.audit_events"
 model = "tigrbl_identity_storage_audit.tables:AuditEvent"
 
 [[schema.requires]]
-component = "tigrbl.identity.storage.foundation"
-contract = ">=1.0.0,<2.0.0"
-minimum_revision = "9f7432bf-9b26-5d0a-8a77-24b749d76b38"
-
-[[schema.requires]]
 component = "tigrbl.identity.storage.oauth"
 contract = ">=1.0.0,<2.0.0"
 minimum_revision = "d4b74406-754c-5424-9009-4dff55e1e1c4"
+
+[[schema.requires]]
+component = "tigrbl.identity.storage.principals"
+contract = ">=1.0.0,<2.0.0"
+minimum_revision = "44ff280d-bf80-54b1-9bb2-c796f258bd4d"
+
+[[schema.requires]]
+component = "tigrbl.identity.storage.tenancy"
+contract = ">=1.0.0,<2.0.0"
+minimum_revision = "69854e73-52d3-53ec-9542-6737159e42d6"

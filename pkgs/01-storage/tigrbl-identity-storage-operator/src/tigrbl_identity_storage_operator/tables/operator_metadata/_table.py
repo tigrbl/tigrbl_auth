@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from tigrbl_identity_storage_core.framework import RestOltpTable, Mapped, S, String, TZDateTime, acol
+from tigrbl_identity_core.orm import RestOltpTable, Mapped, S, String, TZDateTime, acol
 from tigrbl_identity_core.clock import utc_now
 
 

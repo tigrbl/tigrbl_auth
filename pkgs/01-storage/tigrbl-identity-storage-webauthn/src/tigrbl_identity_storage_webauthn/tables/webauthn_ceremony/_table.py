@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import datetime as dt
 
-from tigrbl_identity_storage_core.framework import (
+from tigrbl_identity_core.orm import (
     GUIDPk,
     LargeBinary,
     Mapped,

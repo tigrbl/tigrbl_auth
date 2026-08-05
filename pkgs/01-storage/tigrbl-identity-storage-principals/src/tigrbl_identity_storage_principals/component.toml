@@ -1,0 +1,46 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.principals"
+distribution = "tigrbl-identity-storage-principals"
+import_root = "tigrbl_identity_storage_principals"
+
+[schema]
+contract = "1.0.0"
+migration_head = "44ff280d-bf80-54b1-9bb2-c796f258bd4d"
+migrations_package = "tigrbl_identity_storage_principals.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.principals:table:users"
+kind = "table"
+physical_name = "authn.users"
+model = "tigrbl_identity_storage_principals.tables:User"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.principals:table:principals"
+kind = "table"
+physical_name = "authn.principals"
+model = "tigrbl_identity_storage_principals.tables:Principal"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.principals:table:subject_aliases"
+kind = "table"
+physical_name = "authn.subject_aliases"
+model = "tigrbl_identity_storage_principals.tables:SubjectAlias"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.principals:table:service_identities"
+kind = "table"
+physical_name = "authn.service_identities"
+model = "tigrbl_identity_storage_principals.tables:ServiceIdentity"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.principals:table:machine_identities"
+kind = "table"
+physical_name = "authn.machine_identities"
+model = "tigrbl_identity_storage_principals.tables:MachineIdentity"
+
+[[schema.requires]]
+component = "tigrbl.identity.storage.tenancy"
+contract = ">=1.0.0,<2.0.0"
+minimum_revision = "69854e73-52d3-53ec-9542-6737159e42d6"

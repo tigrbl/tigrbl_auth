@@ -6,7 +6,7 @@ import datetime as dt
 import uuid
 from datetime import datetime, timedelta, timezone
 
-from tigrbl_identity_storage_core.framework import (
+from tigrbl_identity_core.orm import (
     RestOltpTable,
     Timestamped,
     S,

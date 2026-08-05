@@ -8,7 +8,7 @@ license = { text = "Apache-2.0" }
 dependencies = [
     "tigrbl>=0.4.4.dev1,<0.5",
     "tigrbl-migrations>=0.4.5.dev4",
-    "tigrbl-identity-storage-core>=0.4.0.dev2",
+    "tigrbl-identity-core[storage]>=0.4.0.dev2",
 ]
 
 [build-system]

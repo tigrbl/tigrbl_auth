@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import datetime as dt
 
-from tigrbl_identity_storage_core.framework import GUIDPk, JSON, Mapped, RestOltpTable, S, String, TZDateTime, Timestamped, acol
+from tigrbl_identity_core.orm import GUIDPk, JSON, Mapped, RestOltpTable, S, String, TZDateTime, Timestamped, acol
 
 
 

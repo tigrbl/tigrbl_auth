@@ -1,8 +1,9 @@
 """Compatibility projection of independently owned storage components."""
 # ruff: noqa: F401,F403
 
-from tigrbl_identity_storage_core.framework import RestOltpTable
-from tigrbl_identity_storage_foundation.tables import Realm, Tenant, User, Principal, SubjectAlias, ServiceIdentity, MachineIdentity
+from tigrbl_identity_core.orm import RestOltpTable
+from tigrbl_identity_storage_tenancy.tables import Realm, Tenant
+from tigrbl_identity_storage_principals.tables import User, Principal, SubjectAlias, ServiceIdentity, MachineIdentity
 from tigrbl_identity_storage_authentication.tables import Credential, CredentialApiKey, CredentialServiceKey, CredentialAuditEvent, CredentialClientSecret, CredentialDpopKey, CredentialMfaFactor, CredentialMtlsCertificate, CredentialPassword, CredentialRecoveryCode, AuthenticationChallenge
 from tigrbl_identity_storage_oauth.tables import Client, ClientRegistration, AuthorizationServer, AuthSession, AuthCode, DeviceCode, RevokedToken, PushedAuthorizationRequest
 from tigrbl_identity_storage_oidc.tables import LogoutState, BackchannelLogoutReplay

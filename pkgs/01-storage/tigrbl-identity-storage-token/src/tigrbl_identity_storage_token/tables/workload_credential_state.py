@@ -2,7 +2,7 @@
 """Durable workload references, credential entitlements, artifact locators, and proof replay."""
 from __future__ import annotations
 import datetime as dt
-from tigrbl_identity_storage_core.framework import Boolean, GUIDPk, JSON, Mapped, RestOltpTable, S, String, TZDateTime, Timestamped, acol
+from tigrbl_identity_core.orm import Boolean, GUIDPk, JSON, Mapped, RestOltpTable, S, String, TZDateTime, Timestamped, acol
 
 class ProtectedArtifactReference(RestOltpTable, GUIDPk, Timestamped):
     __tablename__ = 'protected_artifact_references'
