@@ -1,16 +1,23 @@
 """Durable presentation lifecycle operations."""
 
+from tigrbl_identity_core.persistence import reject_sensitive_raw_fields
 from tigrbl_identity_storage.tables import (
     PresentationConsent,
     PresentationReplay,
     PresentationTransaction,
 )
 
-from tigrbl_table_durability import create_table_handler
+from tigrbl import provideTableHandler
 
-begin_presentation = create_table_handler(PresentationTransaction)
-record_presentation_consent = create_table_handler(PresentationConsent)
-reserve_presentation_replay = create_table_handler(PresentationReplay)
+begin_presentation = provideTableHandler(
+    PresentationTransaction, payload_validator=reject_sensitive_raw_fields
+)
+record_presentation_consent = provideTableHandler(
+    PresentationConsent, payload_validator=reject_sensitive_raw_fields
+)
+reserve_presentation_replay = provideTableHandler(
+    PresentationReplay, payload_validator=reject_sensitive_raw_fields
+)
 
 __all__ = [
     "begin_presentation",

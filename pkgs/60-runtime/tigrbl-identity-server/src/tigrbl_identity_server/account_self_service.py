@@ -18,7 +18,7 @@ from tigrbl_identity_contracts.account_self_service import (
 )
 from tigrbl_identity_storage.tables import AuthSession, User
 from tigrbl_identity_storage_runtime.engine import get_db
-from tigrbl_identity_storage_runtime.ops.common import (
+from tigrbl import (
     field_value,
     list_table_records,
     read_table_record,

@@ -39,7 +39,7 @@ dependencies = [
     "tigrbl-policy-assurance-capability==0.4.0.dev2",
     "tigrbl-authz-policy-rules-concrete==0.4.0.dev2",
     "tigrbl-security-authorization-provenance-builder==0.1.0",
-    "tigrbl==0.4.4.dev1",
+    "tigrbl==0.4.5.dev4",
     "tigrbl-identity-core==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
     "tigrbl-authority-graph-concrete==0.4.0.dev2",

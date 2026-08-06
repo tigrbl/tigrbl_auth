@@ -8,7 +8,7 @@ from typing import Any
 
 from tigrbl_identity_core.clock import utc_now
 
-from tigrbl_table_durability import (
+from tigrbl import (
     database_from_context,
     field_value,
     payload_from_context,

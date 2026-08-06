@@ -512,10 +512,6 @@ Owner: `pkgs/30-storage-runtime/tigrbl-identity-storage-runtime`.
 
 ```text
 src/tigrbl_identity_storage_runtime/
-  make.py          # makeRuntimeOperation
-  define.py        # reusable TableSpec definition classes
-  derive.py        # overlay runtime specs on layer-01 models
-  factories.py     # family factories
   inventory.py     # table/spec/operation indexes
   initialize.py    # explicit runtime activation
   ops/             # carrier-neutral durable operation bodies
@@ -525,12 +521,13 @@ src/tigrbl_identity_storage_runtime/
 
 ### Operation authoring rules
 
-- An operation is created once with `makeRuntimeOperation`; its alias, handler,
-  transaction scope, schemas, hooks, and owner metadata are one definition.
-- `deriveRuntimeTableSpec` overlays it on the canonical layer-01 model.
+- An operation is created once with Tigrbl's `makeOp`; its alias, handler,
+  transaction scope, schemas, and hooks are one definition.
+- Tigrbl's `deriveTableSpec` overlays it on the canonical layer-01 model.
 - `initializeIdentityRuntimeTables` activates selected specs at composition
   time. Importing layer 01 must not activate runtime behavior.
-- Operation bodies call canonical Tigrbl handlers through `ops/common.py`.
+- Operation bodies call the canonical handlers bound to Tigrbl tables; the
+  generic record invocation helpers are owned by `tigrbl-concrete`.
 - Preserve alias, arity/target semantics, input materialization, response shape,
   transaction boundary, error behavior, and lifecycle hook order.
 - Do not parse HTTP requests, choose protocol responses, load trust roots, or

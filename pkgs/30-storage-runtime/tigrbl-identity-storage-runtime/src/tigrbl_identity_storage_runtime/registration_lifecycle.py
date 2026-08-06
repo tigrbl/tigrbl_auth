@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 from .sync import run_async
-from .ops.common import first_table_record
+from tigrbl import first_table_record
 from .ops.oauth_state import upsert_client_registration as _upsert_registration
 from .session import storage_session
 

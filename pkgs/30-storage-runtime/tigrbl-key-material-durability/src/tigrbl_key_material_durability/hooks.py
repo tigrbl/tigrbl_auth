@@ -11,7 +11,7 @@ from tigrbl_security_trust_contracts import (
     resolve_key_allowed_operations,
 )
 
-from tigrbl_table_durability import (
+from tigrbl import (
     create_table_record,
     database_from_context,
     field_value,

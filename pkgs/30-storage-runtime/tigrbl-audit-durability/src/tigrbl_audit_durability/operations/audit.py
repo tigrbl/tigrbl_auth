@@ -5,7 +5,7 @@ from __future__ import annotations
 from collections.abc import Mapping
 from typing import Any
 
-from tigrbl_table_durability import (
+from tigrbl import (
     create_table_record,
     database_from_context,
     field_value,

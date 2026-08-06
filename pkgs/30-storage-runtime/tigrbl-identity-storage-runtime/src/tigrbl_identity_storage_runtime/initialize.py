@@ -1,13 +1,8 @@
-"""Compatibility activation facade over :mod:`tigrbl_table_durability`."""
+"""Activation entrypoint for the identity runtime table inventory."""
 
 from collections.abc import Iterable
 
-from tigrbl import OpSpec, TableSpec
-from tigrbl_table_durability import (
-    activateRuntimeTableSpec,
-    activateRuntimeTableSpecs,
-    runtimeOperations,
-)
+from tigrbl import OpSpec, TableSpec, activateTableSpecs
 
 
 def initializeIdentityRuntimeTables(
@@ -17,18 +12,12 @@ def initializeIdentityRuntimeTables(
         from .tables import DURABLE_RUNTIME_TABLE_SPECS
 
         specs = DURABLE_RUNTIME_TABLE_SPECS
-    return activateRuntimeTableSpecs(specs)
+    return activateTableSpecs(specs)
 
 
-activate_runtime_table_spec = activateRuntimeTableSpec
 initialize_identity_runtime_tables = initializeIdentityRuntimeTables
-runtime_operations = runtimeOperations
 
 __all__ = [
-    "activateRuntimeTableSpec",
-    "activate_runtime_table_spec",
     "initializeIdentityRuntimeTables",
     "initialize_identity_runtime_tables",
-    "runtimeOperations",
-    "runtime_operations",
 ]

@@ -55,7 +55,7 @@ from tigrbl_identity_storage_runtime.dpop_state import (
     consume_dpop_nonce,
 )
 from tigrbl_identity_storage_runtime.engine import get_db
-from tigrbl_identity_storage_runtime.ops.common import first_record, read_record
+from tigrbl import first_record, read_record
 
 from tigrbl_identity_server.security.pushed_authorization import (
     build_rfc9126_pushed_authorization_service,

@@ -4,11 +4,11 @@ import uuid
 
 import pytest
 
+from tigrbl import create_table_record
 from tigrbl_identity_storage.tables import CryptoKey, CryptoKeyVersion
 from tigrbl_identity_storage_runtime import (
     CryptoKeyRuntimeSpec,
     CryptoKeyVersionRuntimeSpec,
-    create_table_record,
     ensure_key_enabled,
     initializeIdentityRuntimeTables,
     normalize_key_usage_policy,
@@ -17,9 +17,7 @@ from tigrbl_identity_storage_runtime import (
 
 
 def _activate(monkeypatch, storage) -> None:
-    initializeIdentityRuntimeTables(
-        (CryptoKeyRuntimeSpec, CryptoKeyVersionRuntimeSpec)
-    )
+    initializeIdentityRuntimeTables((CryptoKeyRuntimeSpec, CryptoKeyVersionRuntimeSpec))
     for model in (CryptoKey, CryptoKeyVersion):
         runtime_handlers = model.handlers
         handlers = storage.handlers_for(model)
@@ -127,7 +125,8 @@ def test_runtime_activation_installs_key_hook_order() -> None:
     hooks = {
         hook.name: hook
         for hook in CryptoKey.HOOKS
-        if hook.name in {
+        if hook.name
+        in {
             "normalize_key_usage_policy",
             "seed_primary_key_version",
             "ensure_key_enabled",

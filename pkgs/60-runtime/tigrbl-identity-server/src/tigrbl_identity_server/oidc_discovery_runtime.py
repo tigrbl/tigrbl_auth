@@ -33,7 +33,7 @@ from tigrbl_identity_runtime.deployment import (
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_storage.tables import Realm, Tenant
 from tigrbl_identity_storage.tables.operator_record import OperatorRecord
-from tigrbl_identity_storage_runtime.ops.common import first_record
+from tigrbl import first_record
 from tigrbl_identity_storage_runtime.resource_service import (
     build_operator_jwks_payload,
     get_record,

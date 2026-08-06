@@ -5,38 +5,56 @@ from tigrbl_identity_storage.tables import (
     AuthorityDerivationGraphEdge as AuthorityGraphEdgeTable,
     AuthorityDerivationGraphNode as AuthorityGraphNodeTable,
 )
-from tigrbl_table_durability import (
-    create_table_handler,
-    deriveRuntimeTableSpec,
-    makeRuntimeOperation,
+from tigrbl import (
+    provideTableHandler,
+    deriveTableSpec,
+    makeOp,
 )
 
-record_authority_graph = create_table_handler(
-    AuthorityGraphTable, reject_sensitive=False
-)
-add_authority_graph_node = create_table_handler(
-    AuthorityGraphNodeTable, reject_sensitive=False
-)
-add_authority_graph_edge = create_table_handler(
-    AuthorityGraphEdgeTable, reject_sensitive=False
-)
+record_authority_graph = provideTableHandler(AuthorityGraphTable)
+add_authority_graph_node = provideTableHandler(AuthorityGraphNodeTable)
+add_authority_graph_edge = provideTableHandler(AuthorityGraphEdgeTable)
 
-AuthorityGraphRuntimeSpec = deriveRuntimeTableSpec(
+AuthorityGraphRuntimeSpec = deriveTableSpec(
     AuthorityGraphTable,
-    operations=(
-        makeRuntimeOperation(alias="record_graph", handler=record_authority_graph),
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="record_graph",
+            handler=record_authority_graph,
+        ),
     ),
 )
-AuthorityGraphNodeRuntimeSpec = deriveRuntimeTableSpec(
+AuthorityGraphNodeRuntimeSpec = deriveTableSpec(
     AuthorityGraphNodeTable,
-    operations=(
-        makeRuntimeOperation(alias="add_node", handler=add_authority_graph_node),
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="add_node",
+            handler=add_authority_graph_node,
+        ),
     ),
 )
-AuthorityGraphEdgeRuntimeSpec = deriveRuntimeTableSpec(
+AuthorityGraphEdgeRuntimeSpec = deriveTableSpec(
     AuthorityGraphEdgeTable,
-    operations=(
-        makeRuntimeOperation(alias="add_edge", handler=add_authority_graph_edge),
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="add_edge",
+            handler=add_authority_graph_edge,
+        ),
     ),
 )
 

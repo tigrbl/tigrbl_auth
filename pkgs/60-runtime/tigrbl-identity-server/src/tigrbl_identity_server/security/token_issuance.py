@@ -22,7 +22,7 @@ from tigrbl_identity_core.errors import (
     RefreshTokenReuseError,
 )
 from tigrbl_identity_storage_runtime.ops.audit import append_audit_event_record
-from tigrbl_identity_storage_runtime.ops.common import field_value
+from tigrbl import field_value
 from tigrbl_identity_storage_runtime.ops.oauth_state import (
     record_revoked_token_hash,
 )
@@ -156,9 +156,7 @@ def build_token_issuance_capability(
 
     async def redeem(request: RefreshTokenRedemptionRequest) -> IssuedTokenPair:
         digest = token_hash(request.refresh_token)
-        record = await read_token_record(
-            {"payload": {"token_hash": digest}, "db": db}
-        )
+        record = await read_token_record({"payload": {"token_hash": digest}, "db": db})
         if record is None:
             raise InvalidRefreshTokenError(
                 "refresh token was not issued by this repository"
@@ -189,9 +187,7 @@ def build_token_issuance_capability(
                         {
                             "payload": {
                                 "token_hash": field_value(row, "token_hash"),
-                                "token_type_hint": field_value(
-                                    row, "token_type_hint"
-                                ),
+                                "token_type_hint": field_value(row, "token_type_hint"),
                                 "refresh_family_id": family_id,
                                 "reason": "refresh_token_reuse_detected",
                                 "subject": field_value(row, "subject"),
@@ -203,9 +199,10 @@ def build_token_issuance_capability(
                         }
                     )
             raise RefreshTokenReuseError("refresh token replay detected")
-        if not field_value(record, "active", False) or field_value(
-            record, "revoked_at"
-        ) is not None:
+        if (
+            not field_value(record, "active", False)
+            or field_value(record, "revoked_at") is not None
+        ):
             raise InvalidRefreshTokenError("refresh token is inactive")
 
         claims = dict(
@@ -293,15 +290,11 @@ def build_token_issuance_capability(
             {
                 "payload": {
                     "tenant_id": _uuid_or_value(event.get("tenant_id")),
-                    "actor_client_id": _uuid_or_value(
-                        event.get("actor_client_id")
-                    ),
+                    "actor_client_id": _uuid_or_value(event.get("actor_client_id")),
                     "event_type": str(event.get("event_type") or "token.issued"),
                     "target_type": str(event.get("target_type") or "token"),
                     "target_id": str(event.get("target_id") or ""),
-                    "details": (
-                        dict(details) if isinstance(details, Mapping) else {}
-                    ),
+                    "details": (dict(details) if isinstance(details, Mapping) else {}),
                 },
                 "db": db,
             }

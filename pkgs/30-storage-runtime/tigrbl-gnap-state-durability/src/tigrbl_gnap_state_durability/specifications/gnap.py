@@ -7,8 +7,8 @@ from tigrbl_identity_storage.tables import (
     GnapInteraction,
 )
 
-from tigrbl_table_durability import deriveRuntimeTableSpec
-from tigrbl_table_durability import makeRuntimeOperation
+from tigrbl import deriveTableSpec
+from tigrbl import makeOp
 from tigrbl_gnap_state_durability.operations.gnap import (
     complete_gnap_interaction,
     create_gnap_grant,
@@ -22,58 +22,112 @@ from tigrbl_gnap_state_durability.operations.gnap import (
 )
 
 GnapClientInstanceTable = GnapClientInstance
-GnapClientInstanceRuntimeSpec = deriveRuntimeTableSpec(
+GnapClientInstanceRuntimeSpec = deriveTableSpec(
     GnapClientInstanceTable,
-    operations=(
-        makeRuntimeOperation(
-            alias="record_client_instance", handler=record_gnap_client_instance
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="record_client_instance",
+            handler=record_gnap_client_instance,
         ),
     ),
 )
 
 GnapGrantTable = GnapGrant
-GnapGrantRuntimeSpec = deriveRuntimeTableSpec(
+GnapGrantRuntimeSpec = deriveTableSpec(
     GnapGrantTable,
-    operations=(
-        makeRuntimeOperation(alias="create_grant", handler=create_gnap_grant),
-        makeRuntimeOperation(
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="create_grant",
+            handler=create_gnap_grant,
+        ),
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
             alias="read_grant",
             handler=read_gnap_grant,
             tx_scope="read_only",
             persist="skip",
         ),
-        makeRuntimeOperation(alias="update_grant", handler=update_gnap_grant),
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="update_grant",
+            handler=update_gnap_grant,
+        ),
     ),
 )
 
 GnapContinuationTable = GnapContinuation
-GnapContinuationRuntimeSpec = deriveRuntimeTableSpec(
+GnapContinuationRuntimeSpec = deriveTableSpec(
     GnapContinuationTable,
-    operations=(
-        makeRuntimeOperation(
-            alias="record_continuation", handler=record_gnap_continuation
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="record_continuation",
+            handler=record_gnap_continuation,
         ),
-        makeRuntimeOperation(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
             alias="read_continuation",
             handler=read_gnap_continuation,
             tx_scope="read_only",
             persist="skip",
         ),
-        makeRuntimeOperation(
-            alias="rotate_continuation", handler=rotate_gnap_continuation
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="rotate_continuation",
+            handler=rotate_gnap_continuation,
         ),
     ),
 )
 
 GnapInteractionTable = GnapInteraction
-GnapInteractionRuntimeSpec = deriveRuntimeTableSpec(
+GnapInteractionRuntimeSpec = deriveTableSpec(
     GnapInteractionTable,
-    operations=(
-        makeRuntimeOperation(
-            alias="record_interaction", handler=record_gnap_interaction
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="record_interaction",
+            handler=record_gnap_interaction,
         ),
-        makeRuntimeOperation(
-            alias="complete_interaction", handler=complete_gnap_interaction
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="complete_interaction",
+            handler=complete_gnap_interaction,
         ),
     ),
 )

@@ -1,11 +1,11 @@
 # tigrbl-identity-storage-runtime
 
-Compatibility facade for the split layer-30 durability packages.
+Aggregate runtime for the split layer-30 durability packages.
 
-New code should import the neutral authoring substrate from
-`tigrbl-table-durability` and table-family operations from their standalone
-`*-durability` owner. This aggregate package preserves the previous imports
-while callers migrate.
+Table specifications use Tigrbl's public `makeOp`, `defineTableSpec`,
+`deriveTableSpec`, `provideTableSpec`, and `activateTableSpec` functions.
+Table-family operations remain in their standalone `*-durability` owner; this
+aggregate package collects and activates them without defining factory aliases.
 
 Layer 30 owns carrier-neutral Tigrbl operations, derived table specifications,
 and durability hooks. It does not own tables or migrations (layer 01), semantic

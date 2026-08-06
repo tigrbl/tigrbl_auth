@@ -6,8 +6,8 @@ from tigrbl_identity_storage.tables import (
     AttestationResult,
 )
 
-from tigrbl_table_durability import deriveRuntimeTableSpec
-from tigrbl_table_durability import makeRuntimeOperation
+from tigrbl import deriveTableSpec
+from tigrbl import makeOp
 from tigrbl_attestation_durability.operations.attestation import (
     publish_reference_material,
     record_attestation_evidence,
@@ -18,26 +18,43 @@ AttestationEvidenceTable = AttestationEvidence
 AttestationResultTable = AttestationResult
 AttestationReferenceManifestTable = AttestationReferenceManifest
 
-AttestationEvidenceRuntimeSpec = deriveRuntimeTableSpec(
+AttestationEvidenceRuntimeSpec = deriveTableSpec(
     AttestationEvidenceTable,
-    operations=(
-        makeRuntimeOperation(
-            alias="record_evidence", handler=record_attestation_evidence
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="record_evidence",
+            handler=record_attestation_evidence,
         ),
     ),
 )
-AttestationResultRuntimeSpec = deriveRuntimeTableSpec(
+AttestationResultRuntimeSpec = deriveTableSpec(
     AttestationResultTable,
-    operations=(
-        makeRuntimeOperation(
-            alias="record_appraisal_result", handler=record_attestation_result
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="record_appraisal_result",
+            handler=record_attestation_result,
         ),
     ),
 )
-AttestationReferenceManifestRuntimeSpec = deriveRuntimeTableSpec(
+AttestationReferenceManifestRuntimeSpec = deriveTableSpec(
     AttestationReferenceManifestTable,
-    operations=(
-        makeRuntimeOperation(
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
             alias="publish_reference_material",
             handler=publish_reference_material,
         ),

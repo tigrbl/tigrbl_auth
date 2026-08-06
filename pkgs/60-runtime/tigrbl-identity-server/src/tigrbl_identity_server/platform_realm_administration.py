@@ -21,7 +21,7 @@ from tigrbl_identity_contracts.admin_tenants import (
 )
 from tigrbl_identity_storage.tables import Realm
 from tigrbl_identity_storage_runtime.engine import get_db
-from tigrbl_identity_storage_runtime.ops.common import (
+from tigrbl import (
     create_table_record,
     delete_table_record,
     field_value,

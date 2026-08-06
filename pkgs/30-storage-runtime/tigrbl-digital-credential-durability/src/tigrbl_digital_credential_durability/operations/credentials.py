@@ -1,15 +1,22 @@
 """Durable credential lifecycle operations."""
 
+from tigrbl_identity_core.persistence import reject_sensitive_raw_fields
 from tigrbl_identity_storage.tables import (
     CredentialIssuanceTransaction,
     CredentialOffer,
     CredentialStatusEntry,
 )
 
-from tigrbl_table_durability import create_table_handler
+from tigrbl import provideTableHandler
 
-create_offer = create_table_handler(CredentialOffer)
-begin_issuance = create_table_handler(CredentialIssuanceTransaction)
-set_credential_status = create_table_handler(CredentialStatusEntry)
+create_offer = provideTableHandler(
+    CredentialOffer, payload_validator=reject_sensitive_raw_fields
+)
+begin_issuance = provideTableHandler(
+    CredentialIssuanceTransaction, payload_validator=reject_sensitive_raw_fields
+)
+set_credential_status = provideTableHandler(
+    CredentialStatusEntry, payload_validator=reject_sensitive_raw_fields
+)
 
 __all__ = ["begin_issuance", "create_offer", "set_credential_status"]

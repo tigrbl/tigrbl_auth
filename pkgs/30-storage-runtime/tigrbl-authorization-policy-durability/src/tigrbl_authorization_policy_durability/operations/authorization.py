@@ -13,7 +13,7 @@ from tigrbl_identity_storage.tables import (
     TenantMembership,
 )
 
-from tigrbl_table_durability import (
+from tigrbl import (
     create_table_record,
     clear_table_records,
     database_from_context,

@@ -6,7 +6,7 @@ from typing import Any
 
 from tigrbl_identity_storage.tables import CredentialApiKey, CredentialServiceKey, User
 
-from tigrbl_table_durability import list_table_records, maybe_await, read_table_record
+from tigrbl import list_table_records, maybe_await, read_table_record
 from tigrbl_identity_durability.operations.identities import (
     lookup_identity_by_identifier,
 )

@@ -5,40 +5,56 @@ from tigrbl_identity_storage.tables import (
     TrustFederationGraphEdge as TrustFederationGraphEdgeTable,
     TrustFederationGraphNode as TrustFederationGraphNodeTable,
 )
-from tigrbl_table_durability import (
-    create_table_handler,
-    deriveRuntimeTableSpec,
-    makeRuntimeOperation,
+from tigrbl import (
+    provideTableHandler,
+    deriveTableSpec,
+    makeOp,
 )
 
-record_trust_federation_graph = create_table_handler(
-    TrustFederationGraphTable, reject_sensitive=False
-)
-add_trust_federation_graph_node = create_table_handler(
-    TrustFederationGraphNodeTable, reject_sensitive=False
-)
-add_trust_federation_graph_edge = create_table_handler(
-    TrustFederationGraphEdgeTable, reject_sensitive=False
-)
+record_trust_federation_graph = provideTableHandler(TrustFederationGraphTable)
+add_trust_federation_graph_node = provideTableHandler(TrustFederationGraphNodeTable)
+add_trust_federation_graph_edge = provideTableHandler(TrustFederationGraphEdgeTable)
 
-TrustFederationGraphRuntimeSpec = deriveRuntimeTableSpec(
+TrustFederationGraphRuntimeSpec = deriveTableSpec(
     TrustFederationGraphTable,
-    operations=(
-        makeRuntimeOperation(
-            alias="record_graph", handler=record_trust_federation_graph
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="record_graph",
+            handler=record_trust_federation_graph,
         ),
     ),
 )
-TrustFederationGraphNodeRuntimeSpec = deriveRuntimeTableSpec(
+TrustFederationGraphNodeRuntimeSpec = deriveTableSpec(
     TrustFederationGraphNodeTable,
-    operations=(
-        makeRuntimeOperation(alias="add_node", handler=add_trust_federation_graph_node),
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="add_node",
+            handler=add_trust_federation_graph_node,
+        ),
     ),
 )
-TrustFederationGraphEdgeRuntimeSpec = deriveRuntimeTableSpec(
+TrustFederationGraphEdgeRuntimeSpec = deriveTableSpec(
     TrustFederationGraphEdgeTable,
-    operations=(
-        makeRuntimeOperation(alias="add_edge", handler=add_trust_federation_graph_edge),
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="add_edge",
+            handler=add_trust_federation_graph_edge,
+        ),
     ),
 )
 

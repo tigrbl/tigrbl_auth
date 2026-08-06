@@ -2,8 +2,8 @@
 
 from tigrbl_identity_storage.tables import AuditEvent
 
-from tigrbl_table_durability import deriveRuntimeTableSpec
-from tigrbl_table_durability import makeRuntimeOperation
+from tigrbl import deriveTableSpec
+from tigrbl import makeOp
 from tigrbl_audit_durability.operations.audit import (
     append_audit_event_record,
     list_audit_event_records,
@@ -11,11 +11,23 @@ from tigrbl_audit_durability.operations.audit import (
 
 
 AuditEventTable = AuditEvent
-AuditEventRuntimeSpec = deriveRuntimeTableSpec(
+AuditEventRuntimeSpec = deriveTableSpec(
     AuditEventTable,
-    operations=(
-        makeRuntimeOperation(alias="append", handler=append_audit_event_record),
-        makeRuntimeOperation(
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="append",
+            handler=append_audit_event_record,
+        ),
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
             alias="list_events",
             handler=list_audit_event_records,
             tx_scope="read_only",

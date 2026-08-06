@@ -2,8 +2,8 @@
 
 from tigrbl_identity_storage.tables import Client
 
-from tigrbl_table_durability import deriveRuntimeTableSpec
-from tigrbl_table_durability import makeRuntimeOperation
+from tigrbl import deriveTableSpec
+from tigrbl import makeOp
 from tigrbl_identity_durability.operations.clients import (
     disable_client,
     enable_client,
@@ -13,18 +13,45 @@ from tigrbl_identity_durability.operations.clients import (
 
 
 ClientTable = Client
-ClientRuntimeSpec = deriveRuntimeTableSpec(
+ClientRuntimeSpec = deriveTableSpec(
     ClientTable,
-    operations=(
-        makeRuntimeOperation(
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
             alias="lookup_client",
             handler=lookup_client,
             tx_scope="read_only",
             persist="skip",
         ),
-        makeRuntimeOperation(alias="enable", handler=enable_client, arity="member"),
-        makeRuntimeOperation(alias="disable", handler=disable_client, arity="member"),
-        makeRuntimeOperation(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="enable",
+            handler=enable_client,
+            arity="member",
+        ),
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="disable",
+            handler=disable_client,
+            arity="member",
+        ),
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
             alias="rotate_secret_hash",
             handler=replace_client_secret_hash,
             arity="member",

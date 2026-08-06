@@ -5,7 +5,7 @@ description = "Reusable ASGI administration-gate router for Tigrbl Auth."
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
 dependencies = [
-    "tigrbl==0.4.4.dev1",
+    "tigrbl==0.4.5.dev4",
     "tigrbl-identity-core==0.4.0.dev2",
     "tigrbl-identity-runtime==0.4.0.dev2",
 ]

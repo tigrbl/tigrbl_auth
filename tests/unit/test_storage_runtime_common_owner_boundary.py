@@ -1,22 +1,21 @@
 from __future__ import annotations
 
+import importlib.util
 from pathlib import Path
 
-from tigrbl_identity_storage_runtime.ops import common
+from tigrbl import create_table_record, field_value, list_table_records
 
 
 ROOT = Path(__file__).resolve().parents[2]
 
 
-def test_layer30_common_adapter_preserves_helper_call_shapes() -> None:
-    assert common.create_record is common.create_table_record
-    assert common.read_record is common.read_table_record
-    assert common.update_record is common.update_table_record
-    assert common.delete_record is common.delete_table_record
-    assert common.list_records is common.list_table_records
-    assert common.first_record is common.first_table_record
-    assert common.field is common.field_value
-    assert common.record_id is common.record_identifier
+def test_layer30_common_adapter_is_removed() -> None:
+    assert (
+        importlib.util.find_spec("tigrbl_identity_storage_runtime.ops.common") is None
+    )
+    assert callable(create_table_record)
+    assert callable(list_table_records)
+    assert callable(field_value)
 
 
 def test_runtime_and_server_do_not_import_layer01_private_ops() -> None:

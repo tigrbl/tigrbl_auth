@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 # ruff: noqa: F403,F405
 from .paths import *
 from .paths import (
@@ -8,11 +9,11 @@ from .paths import (
     _write_metadata_snapshot,
 )
 from .app import operator_store_session
-from ..ops.common import (
-    create_handler_record as _create_table_record,
-    delete_handler_record as _delete_table_record,
+from tigrbl import (
+    create_table_record as _create_table_record,
+    delete_table_record as _delete_table_record,
     field as _table_field,
-    list_handler_records as _list_table_records,
+    list_table_records as _list_table_records,
 )
 from ..sync import run_async
 from tigrbl_identity_storage.tables.operator_activity import OperatorActivity
@@ -20,6 +21,8 @@ from tigrbl_identity_storage.tables.operator_audit_event import OperatorAuditEve
 from tigrbl_identity_storage.tables.operator_metadata import OperatorMetadata
 from tigrbl_identity_storage.tables.operator_record import OperatorRecord
 from tigrbl_identity_storage.tables.operator_transaction import OperatorTransaction
+
+
 async def _upsert_operator_metadata(db: Any, key: str, value: Any) -> None:
     existing = await _list_table_records(OperatorMetadata, db, {"key": key})
     for row in existing:
@@ -33,6 +36,8 @@ async def _upsert_operator_metadata(db: Any, key: str, value: Any) -> None:
             "updated_at": datetime.now(timezone.utc),
         },
     )
+
+
 def _load_records_from_snapshot(
     path: Path, *, tenant: str | None = None
 ) -> dict[str, dict[str, Any]]:
@@ -54,6 +59,8 @@ def _load_records_from_snapshot(
             continue
         rows[str(record_id)] = copy.deepcopy(dict(item))
     return rows
+
+
 async def _load_records_async(
     repo_root: Path, resource: str, tenant: str | None = None
 ) -> dict[str, dict[str, Any]]:
@@ -397,4 +404,3 @@ from . import mutation as _mutation
 from .mutation import *  # noqa: F401,F403
 
 __all__ = _mutation.__all__
-

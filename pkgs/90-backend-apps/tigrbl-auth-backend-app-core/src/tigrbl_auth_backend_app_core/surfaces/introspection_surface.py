@@ -34,9 +34,9 @@ from tigrbl_identity_storage.tables.client import Client
 from tigrbl_identity_storage.tables.client_registration import ClientRegistration
 from tigrbl_identity_storage_runtime.engine import get_db
 from tigrbl_identity_storage_runtime.ops.clients import lookup_client
-from tigrbl_identity_storage_runtime.ops.common import (
-    first_handler_record,
-    read_handler_record,
+from tigrbl import (
+    first_table_record,
+    read_table_record,
 )
 from tigrbl_client_secret_authentication_capability import (
     ClientSecretAuthenticationCapability,
@@ -82,11 +82,11 @@ async def _load_client(
         client_key: UUID | str = UUID(str(client_id))
     except ValueError:
         client_key = client_id
-    client = await read_handler_record(Client, db, client_key)
+    client = await read_table_record(Client, db, client_key)
     registration = None
     if client is not None:
         try:
-            registration = await first_handler_record(
+            registration = await first_table_record(
                 ClientRegistration, db, {"client_id": client.id}
             )
         except Exception as exc:

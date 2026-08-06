@@ -2,8 +2,8 @@
 
 from tigrbl_identity_storage.tables import TokenRecord
 
-from tigrbl_table_durability import deriveRuntimeTableSpec
-from tigrbl_table_durability import makeRuntimeOperation
+from tigrbl import deriveTableSpec
+from tigrbl import makeOp
 from tigrbl_token_durability.operations.tokens import (
     introspect_token_record,
     mark_refresh_token_rotated,
@@ -13,21 +13,55 @@ from tigrbl_token_durability.operations.tokens import (
 )
 
 TokenRecordTable = TokenRecord
-TokenRecordRuntimeSpec = deriveRuntimeTableSpec(
+TokenRecordRuntimeSpec = deriveTableSpec(
     TokenRecordTable,
-    operations=(
-        makeRuntimeOperation(alias="persist_issued", handler=persist_issued_token),
-        makeRuntimeOperation(
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="persist_issued",
+            handler=persist_issued_token,
+        ),
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
             alias="get_by_hash",
             handler=read_token_record,
             tx_scope="read_only",
             persist="skip",
         ),
-        makeRuntimeOperation(alias="mark_rotated", handler=mark_refresh_token_rotated),
-        makeRuntimeOperation(
-            alias="revoke_family", handler=revoke_refresh_token_family
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="mark_rotated",
+            handler=mark_refresh_token_rotated,
         ),
-        makeRuntimeOperation(alias="introspect", handler=introspect_token_record),
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="revoke_family",
+            handler=revoke_refresh_token_family,
+        ),
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="introspect",
+            handler=introspect_token_record,
+        ),
     ),
 )
 

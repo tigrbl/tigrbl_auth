@@ -8,9 +8,9 @@ from typing import Any
 from tigrbl_identity_storage.tables import DpopNonce, DpopReplay
 from tigrbl_security_trust_contracts import DPoPProofClaims
 
-from tigrbl_table_durability import deriveRuntimeTableSpec
-from tigrbl_table_durability import makeRuntimeOperation
-from tigrbl_table_durability import database_from_context
+from tigrbl import deriveTableSpec
+from tigrbl import makeOp
+from tigrbl import database_from_context
 from tigrbl_replay_protection_durability.operations.dpop import (
     check_and_store_dpop_replay,
     clear_dpop_nonces,
@@ -97,27 +97,107 @@ async def _clear_nonces(ctx: Mapping[str, Any]) -> None:
 
 
 def makeDpopReplayRuntimeSpec(table: type = DpopReplay) -> type:
-    return deriveRuntimeTableSpec(
+    return deriveTableSpec(
         table,
-        operations=(
-            makeRuntimeOperation(alias="check_and_store", handler=_check_and_store),
-            makeRuntimeOperation(alias="snapshot", handler=_replay_snapshot),
-            makeRuntimeOperation(alias="purge_expired", handler=_purge_replays),
-            makeRuntimeOperation(alias="clear", handler=_clear_replays),
+        ops=(
+            makeOp(
+                extra={"owner_layer": "30-storage-runtime"},
+                expose_routes=False,
+                expose_rpc=False,
+                expose_method=True,
+                tx_scope="read_write",
+                alias="check_and_store",
+                handler=_check_and_store,
+            ),
+            makeOp(
+                extra={"owner_layer": "30-storage-runtime"},
+                expose_routes=False,
+                expose_rpc=False,
+                expose_method=True,
+                tx_scope="read_write",
+                alias="snapshot",
+                handler=_replay_snapshot,
+            ),
+            makeOp(
+                extra={"owner_layer": "30-storage-runtime"},
+                expose_routes=False,
+                expose_rpc=False,
+                expose_method=True,
+                tx_scope="read_write",
+                alias="purge_expired",
+                handler=_purge_replays,
+            ),
+            makeOp(
+                extra={"owner_layer": "30-storage-runtime"},
+                expose_routes=False,
+                expose_rpc=False,
+                expose_method=True,
+                tx_scope="read_write",
+                alias="clear",
+                handler=_clear_replays,
+            ),
         ),
     )
 
 
 def makeDpopNonceRuntimeSpec(table: type = DpopNonce) -> type:
-    return deriveRuntimeTableSpec(
+    return deriveTableSpec(
         table,
-        operations=(
-            makeRuntimeOperation(alias="issue", handler=_issue_nonce),
-            makeRuntimeOperation(alias="register", handler=_register_nonce),
-            makeRuntimeOperation(alias="consume", handler=_consume_nonce),
-            makeRuntimeOperation(alias="snapshot", handler=_nonce_snapshot),
-            makeRuntimeOperation(alias="purge_expired", handler=_purge_nonces),
-            makeRuntimeOperation(alias="clear", handler=_clear_nonces),
+        ops=(
+            makeOp(
+                extra={"owner_layer": "30-storage-runtime"},
+                expose_routes=False,
+                expose_rpc=False,
+                expose_method=True,
+                tx_scope="read_write",
+                alias="issue",
+                handler=_issue_nonce,
+            ),
+            makeOp(
+                extra={"owner_layer": "30-storage-runtime"},
+                expose_routes=False,
+                expose_rpc=False,
+                expose_method=True,
+                tx_scope="read_write",
+                alias="register",
+                handler=_register_nonce,
+            ),
+            makeOp(
+                extra={"owner_layer": "30-storage-runtime"},
+                expose_routes=False,
+                expose_rpc=False,
+                expose_method=True,
+                tx_scope="read_write",
+                alias="consume",
+                handler=_consume_nonce,
+            ),
+            makeOp(
+                extra={"owner_layer": "30-storage-runtime"},
+                expose_routes=False,
+                expose_rpc=False,
+                expose_method=True,
+                tx_scope="read_write",
+                alias="snapshot",
+                handler=_nonce_snapshot,
+            ),
+            makeOp(
+                extra={"owner_layer": "30-storage-runtime"},
+                expose_routes=False,
+                expose_rpc=False,
+                expose_method=True,
+                tx_scope="read_write",
+                alias="purge_expired",
+                handler=_purge_nonces,
+            ),
+            makeOp(
+                extra={"owner_layer": "30-storage-runtime"},
+                expose_routes=False,
+                expose_rpc=False,
+                expose_method=True,
+                tx_scope="read_write",
+                alias="clear",
+                handler=_clear_nonces,
+            ),
         ),
     )
 

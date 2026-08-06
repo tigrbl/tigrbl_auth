@@ -16,7 +16,7 @@ from tigrbl_identity_contracts.replay import (
 from tigrbl_identity_storage.tables import ReplayReservation
 from tigrbl_replay_bases import ReplayReservationBase
 
-from tigrbl_table_durability import database_from_context, maybe_await
+from tigrbl import database_from_context, maybe_await
 
 
 DURABLE_REPLAY_DESCRIPTOR = ReplayStoreDescriptor(

@@ -4,11 +4,11 @@ import uuid
 
 import pytest
 
+from tigrbl import create_table_record
 from tigrbl_identity_storage.tables import Client, User
 from tigrbl_identity_storage_runtime import (
     ClientRuntimeSpec,
     UserRuntimeSpec,
-    create_table_record,
     disable_client,
     enable_client,
     initializeIdentityRuntimeTables,
@@ -56,7 +56,10 @@ async def test_client_record_lifecycle_is_runtime_owned(
     assert (await disable_client(context))["is_active"] is False
     assert (await enable_client(context))["is_active"] is True
     rotated = await replace_client_secret_hash(
-        {**context, "payload": {"client_id": client_id, "client_secret_hash": b"new-hash"}}
+        {
+            **context,
+            "payload": {"client_id": client_id, "client_secret_hash": b"new-hash"},
+        }
     )
     assert rotated["client_secret_hash"] == b"new-hash"
 
@@ -103,26 +106,38 @@ async def test_identity_lookup_and_password_state_are_runtime_owned(
             "db": administrator_storage,
         }
     )
-    assert await lookup_identity_by_identifier(
-        {"payload": {"identifier": "alice"}, "db": administrator_storage}
-    ) is None
+    assert (
+        await lookup_identity_by_identifier(
+            {"payload": {"identifier": "alice"}, "db": administrator_storage}
+        )
+        is None
+    )
 
 
 def test_client_and_identity_runtime_operation_identity() -> None:
     client_ops = {
         operation.alias: operation
         for operation in ClientRuntimeSpec.ops
-        if operation.extra.get("owner_layer") == "30-storage-runtime"
+        if operation.target == "custom"
     }
     identity_ops = {
         operation.alias: operation
         for operation in UserRuntimeSpec.ops
-        if operation.extra.get("owner_layer") == "30-storage-runtime"
+        if operation.target == "custom"
     }
-    assert set(client_ops) == {"lookup_client", "enable", "disable", "rotate_secret_hash"}
+    assert set(client_ops) == {
+        "lookup_client",
+        "enable",
+        "disable",
+        "rotate_secret_hash",
+    }
     assert client_ops["lookup_client"].tx_scope == "read_only"
     assert client_ops["enable"].arity == "member"
-    assert set(identity_ops) == {"lookup_by_identifier", "replace_password_hash", "set_enabled"}
+    assert set(identity_ops) == {
+        "lookup_by_identifier",
+        "replace_password_hash",
+        "set_enabled",
+    }
     assert not hasattr(Client, "verify_secret")
     assert not hasattr(Client, "authenticate")
     assert not hasattr(Client, "rotate_secret")

@@ -5,13 +5,13 @@ import uuid
 
 import pytest
 
+from tigrbl import create_table_record
 from tigrbl_identity_storage.tables import AuthSession, Consent, LogoutState
 from tigrbl_identity_storage_runtime import (
     AuthSessionRuntimeSpec,
     ConsentRuntimeSpec,
     LogoutStateRuntimeSpec,
     bind_session_client,
-    create_table_record,
     ensure_logout_for_session,
     get_active_session,
     initializeIdentityRuntimeTables,
@@ -41,7 +41,9 @@ def _activate(monkeypatch, storage) -> None:
 
 
 @pytest.mark.asyncio
-async def test_session_lifecycle_is_runtime_owned(monkeypatch, administrator_storage) -> None:
+async def test_session_lifecycle_is_runtime_owned(
+    monkeypatch, administrator_storage
+) -> None:
     _activate(monkeypatch, administrator_storage)
     session = await create_table_record(
         AuthSession,
@@ -61,25 +63,23 @@ async def test_session_lifecycle_is_runtime_owned(monkeypatch, administrator_sto
     assert await get_active_session(context) == session
     touched = await touch_session(context)
     assert touched["last_seen_at"] is not None
-    bound = await bind_session_client(
-        {**context, "payload": {"client_id": "client-a"}}
-    )
+    bound = await bind_session_client({**context, "payload": {"client_id": "client-a"}})
     assert bound["client_id"] == "client-a"
     rotated = await rotate_session_cookie_secret(
         {**context, "payload": {"cookie_secret_hash": "digest-a"}}
     )
     assert rotated["cookie_secret_hash"] == "digest-a"
     assert rotated["cookie_issued_at"] is not None
-    terminated = await terminate_session(
-        {**context, "payload": {"reason": "logout"}}
-    )
+    terminated = await terminate_session({**context, "payload": {"reason": "logout"}})
     assert terminated["session_state"] == "terminated"
     assert terminated["ended_at"] is not None
     assert await get_active_session(context) is None
 
 
 @pytest.mark.asyncio
-async def test_consent_lifecycle_is_runtime_owned(monkeypatch, administrator_storage) -> None:
+async def test_consent_lifecycle_is_runtime_owned(
+    monkeypatch, administrator_storage
+) -> None:
     _activate(monkeypatch, administrator_storage)
     tenant_id = uuid.uuid4()
     user_id = uuid.uuid4()
@@ -185,9 +185,13 @@ async def test_logout_propagation_is_runtime_owned(
 
 
 def test_runtime_specs_preserve_arity_without_choosing_wire_schemas() -> None:
-    session_ops = {operation.alias: operation for operation in AuthSessionRuntimeSpec.ops}
+    session_ops = {
+        operation.alias: operation for operation in AuthSessionRuntimeSpec.ops
+    }
     consent_ops = {operation.alias: operation for operation in ConsentRuntimeSpec.ops}
-    logout_ops = {operation.alias: operation for operation in LogoutStateRuntimeSpec.ops}
+    logout_ops = {
+        operation.alias: operation for operation in LogoutStateRuntimeSpec.ops
+    }
 
     assert session_ops["terminate"].arity == "member"
     assert session_ops["touch"].arity == "member"

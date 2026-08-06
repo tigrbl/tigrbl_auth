@@ -1,9 +1,48 @@
 """Protected artifact and possession-proof replay runtime specifications."""
-from tigrbl_identity_storage.tables import PossessionProofReplay, ProtectedArtifactReference
-from tigrbl_table_durability import deriveRuntimeTableSpec, makeRuntimeOperation
-from tigrbl_token_durability.operations.artifacts import register_protected_artifact_reference, reserve_possession_proof_replay
-ProtectedArtifactReferenceTable=ProtectedArtifactReference
-PossessionProofReplayTable=PossessionProofReplay
-ProtectedArtifactReferenceRuntimeSpec=deriveRuntimeTableSpec(ProtectedArtifactReferenceTable,operations=(makeRuntimeOperation(alias="register_protected_artifact_reference",handler=register_protected_artifact_reference),))
-PossessionProofReplayRuntimeSpec=deriveRuntimeTableSpec(PossessionProofReplayTable,operations=(makeRuntimeOperation(alias="reserve_possession_proof_replay",handler=reserve_possession_proof_replay),))
-__all__=["PossessionProofReplayRuntimeSpec","PossessionProofReplayTable","ProtectedArtifactReferenceRuntimeSpec","ProtectedArtifactReferenceTable"]
+
+from tigrbl_identity_storage.tables import (
+    PossessionProofReplay,
+    ProtectedArtifactReference,
+)
+from tigrbl import deriveTableSpec, makeOp
+from tigrbl_token_durability.operations.artifacts import (
+    register_protected_artifact_reference,
+    reserve_possession_proof_replay,
+)
+
+ProtectedArtifactReferenceTable = ProtectedArtifactReference
+PossessionProofReplayTable = PossessionProofReplay
+ProtectedArtifactReferenceRuntimeSpec = deriveTableSpec(
+    ProtectedArtifactReferenceTable,
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="register_protected_artifact_reference",
+            handler=register_protected_artifact_reference,
+        ),
+    ),
+)
+PossessionProofReplayRuntimeSpec = deriveTableSpec(
+    PossessionProofReplayTable,
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="reserve_possession_proof_replay",
+            handler=reserve_possession_proof_replay,
+        ),
+    ),
+)
+__all__ = [
+    "PossessionProofReplayRuntimeSpec",
+    "PossessionProofReplayTable",
+    "ProtectedArtifactReferenceRuntimeSpec",
+    "ProtectedArtifactReferenceTable",
+]

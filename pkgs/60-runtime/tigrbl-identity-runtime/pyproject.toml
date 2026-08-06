@@ -35,7 +35,7 @@ classifiers = [
 ]
 dependencies = [
     "tigrbl-authn-credentials==0.4.0.dev2",
-    "tigrbl==0.4.4.dev1",
+    "tigrbl==0.4.5.dev4",
     "tigrbl-identity-contracts==0.4.0.dev2",
     "tigrbl-identity-jose==0.4.0.dev2",
     "tigrbl-identity-storage==0.4.0.dev2",

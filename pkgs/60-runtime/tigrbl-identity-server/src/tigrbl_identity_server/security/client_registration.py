@@ -12,7 +12,7 @@ from tigrbl_identity_contracts.oauth import (
     ClientRegistrationUpdateRequest,
 )
 from tigrbl_identity_storage_runtime.ops.audit import append_audit_event_record
-from tigrbl_identity_storage_runtime.ops.common import field_value
+from tigrbl import field_value
 from tigrbl_identity_storage_runtime.ops.oauth_state import (
     create_client_registration,
     disable_client_registration,
@@ -59,9 +59,7 @@ def registration_record_from_aggregate(
         registration_access_token_hash=field_value(
             registration, "registration_access_token_hash"
         ),
-        registration_client_uri=field_value(
-            registration, "registration_client_uri"
-        ),
+        registration_client_uri=field_value(registration, "registration_client_uri"),
         issued_at=field_value(registration, "issued_at"),
         disabled_at=field_value(registration, "disabled_at"),
         client_active=bool(field_value(client, "is_active", True)),
@@ -139,9 +137,7 @@ def build_client_registration_capability(db: Any) -> ClientRegistrationCapabilit
         return record
 
     async def audit(event: Mapping[str, object]) -> None:
-        await append_audit_event_record(
-            {"payload": dict(event), "db": db}
-        )
+        await append_audit_event_record({"payload": dict(event), "db": db})
 
     return ClientRegistrationCapability(create, get, update, disable, audit)
 

@@ -2,8 +2,8 @@
 
 from tigrbl_identity_storage.tables import BackchannelLogoutReplay, LogoutState
 
-from tigrbl_table_durability import deriveRuntimeTableSpec
-from tigrbl_table_durability import makeRuntimeOperation
+from tigrbl import deriveTableSpec
+from tigrbl import makeOp
 from tigrbl_oidc_state_durability.operations.oidc_replay import (
     register_backchannel_logout_replay,
 )
@@ -15,10 +15,15 @@ from tigrbl_oidc_state_durability.operations.oidc_logout import (
 )
 
 BackchannelLogoutReplayTable = BackchannelLogoutReplay
-BackchannelLogoutReplayRuntimeSpec = deriveRuntimeTableSpec(
+BackchannelLogoutReplayRuntimeSpec = deriveTableSpec(
     BackchannelLogoutReplayTable,
-    operations=(
-        makeRuntimeOperation(
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
             alias="register",
             handler=register_backchannel_logout_replay,
         ),
@@ -26,24 +31,44 @@ BackchannelLogoutReplayRuntimeSpec = deriveRuntimeTableSpec(
 )
 
 LogoutStateTable = LogoutState
-LogoutStateRuntimeSpec = deriveRuntimeTableSpec(
+LogoutStateRuntimeSpec = deriveTableSpec(
     LogoutStateTable,
-    operations=(
-        makeRuntimeOperation(
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
             alias="latest_for_session",
             handler=latest_logout_for_session,
         ),
-        makeRuntimeOperation(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
             alias="update_metadata",
             handler=update_logout_metadata,
             arity="member",
         ),
-        makeRuntimeOperation(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
             alias="mark_channel",
             handler=mark_logout_channel,
             arity="member",
         ),
-        makeRuntimeOperation(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
             alias="ensure_for_session",
             handler=ensure_logout_for_session,
         ),

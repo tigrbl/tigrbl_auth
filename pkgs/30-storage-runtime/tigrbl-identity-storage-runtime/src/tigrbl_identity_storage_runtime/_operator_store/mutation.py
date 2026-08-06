@@ -10,11 +10,11 @@ from .paths import (
     _write_metadata_snapshot,
 )
 from .app import operator_store_session
-from ..ops.common import (
-    create_handler_record as _create_table_record,
-    delete_handler_record as _delete_table_record,
+from tigrbl import (
+    create_table_record as _create_table_record,
+    delete_table_record as _delete_table_record,
     field as _table_field,
-    list_handler_records as _list_table_records,
+    list_table_records as _list_table_records,
 )
 from ..sync import run_async
 from tigrbl_identity_storage.tables.operator_activity import OperatorActivity
@@ -26,11 +26,17 @@ from tigrbl_identity_storage.tables.operator_transaction import OperatorTransact
 
 from .records import *  # noqa: F401,F403
 from .records import (
-    _operator_activity_record, _operator_activity_rows, _operator_audit_record,
-    _operator_audit_rows, _operator_transaction_record, _operator_transaction_rows,
-    _sync_resource_snapshot, _upsert_operator_metadata,
+    _operator_activity_record,
+    _operator_activity_rows,
+    _operator_audit_record,
+    _operator_audit_rows,
+    _operator_transaction_record,
+    _operator_transaction_rows,
+    _sync_resource_snapshot,
+    _upsert_operator_metadata,
 )
 from .paths import _jsonl_rows
+
 
 async def _commit_mutation_async(
     context: OperationContext,
@@ -46,11 +52,17 @@ async def _commit_mutation_async(
                 OperatorRecord, db, {"resource": context.resource}
             )
             for row in stored:
-                if context.tenant is not None and _table_field(row, "tenant") != context.tenant:
+                if (
+                    context.tenant is not None
+                    and _table_field(row, "tenant") != context.tenant
+                ):
                     continue
                 await _delete_table_record(OperatorRecord, db, _table_field(row, "id"))
             for record_id, record in records.items():
-                if context.tenant is not None and record.get("tenant") != context.tenant:
+                if (
+                    context.tenant is not None
+                    and record.get("tenant") != context.tenant
+                ):
                     continue
                 await _create_table_record(
                     OperatorRecord,
@@ -59,7 +71,9 @@ async def _commit_mutation_async(
                         "id": OperatorRecord.store_id(context.resource, str(record_id)),
                         "resource": context.resource,
                         "record_id": str(record_id),
-                        "status": record.get("status", default_status(context.resource)),
+                        "status": record.get(
+                            "status", default_status(context.resource)
+                        ),
                         "enabled": bool(record.get("enabled", True)),
                         "created_at": record.get("created_at") or utc_now(),
                         "updated_at": record.get("updated_at") or utc_now(),
@@ -68,7 +82,9 @@ async def _commit_mutation_async(
                         "tenant": record.get("tenant"),
                         "issuer": record.get("issuer"),
                         "revision": int(record.get("revision") or 1),
-                        "data_json": json.dumps(dict(record.get("data") or {}), sort_keys=True),
+                        "data_json": json.dumps(
+                            dict(record.get("data") or {}), sort_keys=True
+                        ),
                     },
                 )
         await _create_table_record(

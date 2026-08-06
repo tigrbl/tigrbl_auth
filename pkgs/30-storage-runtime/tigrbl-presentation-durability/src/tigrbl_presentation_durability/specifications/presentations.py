@@ -6,8 +6,8 @@ from tigrbl_identity_storage.tables import (
     PresentationTransaction,
 )
 
-from tigrbl_table_durability import deriveRuntimeTableSpec
-from tigrbl_table_durability import makeRuntimeOperation
+from tigrbl import deriveTableSpec
+from tigrbl import makeOp
 from tigrbl_presentation_durability.operations.presentations import (
     begin_presentation,
     record_presentation_consent,
@@ -18,25 +18,45 @@ PresentationTransactionTable = PresentationTransaction
 PresentationConsentTable = PresentationConsent
 PresentationReplayTable = PresentationReplay
 
-PresentationTransactionRuntimeSpec = deriveRuntimeTableSpec(
+PresentationTransactionRuntimeSpec = deriveTableSpec(
     PresentationTransactionTable,
-    operations=(
-        makeRuntimeOperation(alias="begin_presentation", handler=begin_presentation),
-    ),
-)
-PresentationConsentRuntimeSpec = deriveRuntimeTableSpec(
-    PresentationConsentTable,
-    operations=(
-        makeRuntimeOperation(
-            alias="record_consent", handler=record_presentation_consent
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="begin_presentation",
+            handler=begin_presentation,
         ),
     ),
 )
-PresentationReplayRuntimeSpec = deriveRuntimeTableSpec(
+PresentationConsentRuntimeSpec = deriveTableSpec(
+    PresentationConsentTable,
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="record_consent",
+            handler=record_presentation_consent,
+        ),
+    ),
+)
+PresentationReplayRuntimeSpec = deriveTableSpec(
     PresentationReplayTable,
-    operations=(
-        makeRuntimeOperation(
-            alias="reserve_replay", handler=reserve_presentation_replay
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="reserve_replay",
+            handler=reserve_presentation_replay,
         ),
     ),
 )

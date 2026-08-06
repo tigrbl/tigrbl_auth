@@ -7,8 +7,8 @@ from tigrbl_identity_storage.tables import (
     WebAuthnRelyingParty,
 )
 
-from tigrbl_table_durability import deriveRuntimeTableSpec
-from tigrbl_table_durability import makeRuntimeOperation
+from tigrbl import deriveTableSpec
+from tigrbl import makeOp
 from tigrbl_webauthn_durability.operations.webauthn_ceremonies import (
     consume_ceremony,
     fail_ceremony,
@@ -34,10 +34,18 @@ WebAuthnRelyingPartyTable = WebAuthnRelyingParty
 WebAuthnCredentialTable = CredentialWebAuthnPasskey
 WebAuthnAttestationRecordTable = WebAuthnAttestationRecord
 
-WebAuthnCeremonyRuntimeSpec = deriveRuntimeTableSpec(
+WebAuthnCeremonyRuntimeSpec = deriveTableSpec(
     WebAuthnCeremonyTable,
-    operations=tuple(
-        makeRuntimeOperation(alias=name, handler=handler)
+    ops=tuple(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias=name,
+            handler=handler,
+        )
         for name, handler in (
             ("reserve_registration_ceremony", reserve_registration_ceremony),
             ("reserve_authentication_ceremony", reserve_authentication_ceremony),
@@ -47,10 +55,18 @@ WebAuthnCeremonyRuntimeSpec = deriveRuntimeTableSpec(
         )
     ),
 )
-WebAuthnCredentialRuntimeSpec = deriveRuntimeTableSpec(
+WebAuthnCredentialRuntimeSpec = deriveTableSpec(
     WebAuthnCredentialTable,
-    operations=tuple(
-        makeRuntimeOperation(alias=name, handler=handler)
+    ops=tuple(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias=name,
+            handler=handler,
+        )
         for name, handler in (
             ("insert_public_key_credential", insert_public_key_credential),
             ("find_public_key_credential", find_public_key_credential),
@@ -65,10 +81,14 @@ WebAuthnCredentialRuntimeSpec = deriveRuntimeTableSpec(
         )
     ),
 )
-WebAuthnRelyingPartyRuntimeSpec = deriveRuntimeTableSpec(
+WebAuthnRelyingPartyRuntimeSpec = deriveTableSpec(
     WebAuthnRelyingPartyTable,
-    operations=(
-        makeRuntimeOperation(
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
             alias="resolve_relying_party_configuration",
             handler=resolve_relying_party_configuration,
             tx_scope="read",
@@ -76,8 +96,6 @@ WebAuthnRelyingPartyRuntimeSpec = deriveRuntimeTableSpec(
         ),
     ),
 )
-WebAuthnAttestationRecordRuntimeSpec = deriveRuntimeTableSpec(
-    WebAuthnAttestationRecordTable
-)
+WebAuthnAttestationRecordRuntimeSpec = deriveTableSpec(WebAuthnAttestationRecordTable)
 
 __all__ = [name for name in globals() if name.endswith(("RuntimeSpec", "Table"))]

@@ -6,7 +6,7 @@ from collections.abc import Mapping
 from typing import Any
 from uuid import UUID
 
-from tigrbl_table_durability import (
+from tigrbl import (
     database_from_context,
     payload_from_context,
     read_table_record,

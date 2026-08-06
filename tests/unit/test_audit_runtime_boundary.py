@@ -4,11 +4,11 @@ import uuid
 
 import pytest
 
+from tigrbl import create_table_record
 from tigrbl_identity_storage.tables import AuditEvent, Tenant
 from tigrbl_identity_storage_runtime import (
     AuditEventRuntimeSpec,
     append_audit_event_record,
-    create_table_record,
     initializeIdentityRuntimeTables,
     list_audit_event_records,
 )
@@ -26,7 +26,9 @@ def _activate(monkeypatch, storage) -> None:
 
 
 @pytest.mark.asyncio
-async def test_audit_append_uses_explicit_tenant(monkeypatch, administrator_storage) -> None:
+async def test_audit_append_uses_explicit_tenant(
+    monkeypatch, administrator_storage
+) -> None:
     _activate(monkeypatch, administrator_storage)
     tenant_id = uuid.uuid4()
     event = await append_audit_event_record(

@@ -2,11 +2,11 @@ version: 1
 layer: 30-storage-runtime
 purpose: carrier-neutral durable operations and derived specifications for canonical layer-01 tables
 rules:
-  - canonical packages depend only on layers 00, 01, 02, 05, 10, 20, and the neutral layer-30 substrate
+  - canonical packages depend only on layers 00, 01, 02, 05, 10, 20, and Tigrbl's public table factories and bound handlers
   - canonical operations receive an engine or session through execution context
   - canonical packages do not own repositories, stores, services, HTTP carriers, protocols, or providers
   - one package groups tables that participate in the same durable lifecycle or atomic consistency boundary
-substrate: tigrbl-table-durability
+substrate: tigrbl
 canonical_packages:
   - tigrbl-attestation-durability
   - tigrbl-audit-durability

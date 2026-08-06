@@ -7,7 +7,7 @@ from typing import Any
 from uuid import UUID
 
 from .sync import run_async
-from .ops.common import create_table_record
+from tigrbl import create_table_record
 from .ops.consents import revoke_consent_for_user
 from .session import storage_session
 

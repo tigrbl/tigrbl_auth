@@ -31,7 +31,6 @@ def test_every_layer_30_package_has_one_explicit_disposition() -> None:
         path.name for path in LAYER.iterdir() if (path / "pyproject.toml").exists()
     }
     declared = {
-        TAXONOMY["substrate"],
         *TAXONOMY["canonical_packages"],
         *TAXONOMY["compatibility_packages"],
     }
@@ -47,7 +46,7 @@ def test_canonical_durability_packages_have_no_higher_layer_imports() -> None:
         "tigrbl_identity_server",
         "tigrbl_identity_storage_runtime",
     )
-    packages = [TAXONOMY["substrate"], *TAXONOMY["canonical_packages"]]
+    packages = list(TAXONOMY["canonical_packages"])
     violations: list[str] = []
     for package in packages:
         for source in (LAYER / package).rglob("*.py"):
@@ -59,7 +58,7 @@ def test_canonical_durability_packages_have_no_higher_layer_imports() -> None:
 
 def test_canonical_durability_packages_do_not_define_repository_wrappers() -> None:
     forbidden_suffixes = ("Repository", "Store", "UnitOfWork", "Service")
-    packages = [TAXONOMY["substrate"], *TAXONOMY["canonical_packages"]]
+    packages = list(TAXONOMY["canonical_packages"])
     violations: list[str] = []
     for package in packages:
         for source in (LAYER / package).rglob("*.py"):

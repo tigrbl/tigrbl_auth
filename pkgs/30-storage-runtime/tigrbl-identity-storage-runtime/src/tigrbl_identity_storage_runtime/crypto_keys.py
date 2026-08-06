@@ -6,7 +6,7 @@ from collections.abc import Mapping
 from typing import Any
 
 from tigrbl_identity_storage.tables import CryptoKey
-from .ops.common import create_record, first_record, update_record
+from tigrbl import create_record, first_record, update_record
 from tigrbl_security_trust_contracts import (
     AttestKeyRequest,
     DecapsulateRequest,
@@ -31,7 +31,9 @@ from ._crypto_keys import (
 )
 
 
-async def _key_for_operation(db: Any, *, kid: str, operation: str, tenant_id: Any = None) -> Any:
+async def _key_for_operation(
+    db: Any, *, kid: str, operation: str, tenant_id: Any = None
+) -> Any:
     filters = {"kid": kid}
     if tenant_id is not None:
         filters["tenant_id"] = tenant_id
@@ -69,10 +71,19 @@ async def create_key(
             "kid": kid,
             "algorithm": algorithm,
             "provider": data.pop("provider", getattr(handle, "provider", None)),
-            "provider_key_ref": data.pop("provider_key_ref", getattr(handle, "ref", None)),
-            "public_material": data.pop("public_material", getattr(handle, "public_material", None)),
-            "public_material_format": data.pop("public_material_format", getattr(handle, "public_material_format", None)),
-            "fingerprint": data.pop("fingerprint", getattr(handle, "fingerprint", None)),
+            "provider_key_ref": data.pop(
+                "provider_key_ref", getattr(handle, "ref", None)
+            ),
+            "public_material": data.pop(
+                "public_material", getattr(handle, "public_material", None)
+            ),
+            "public_material_format": data.pop(
+                "public_material_format",
+                getattr(handle, "public_material_format", None),
+            ),
+            "fingerprint": data.pop(
+                "fingerprint", getattr(handle, "fingerprint", None)
+            ),
             **data,
         },
     )
@@ -114,7 +125,9 @@ async def sign(
 ) -> Any:
     row = await _key_for_operation(db, kid=kid, operation="sign", tenant_id=tenant_id)
     provider = _provider(row, registry=registry, ctx=ctx)
-    return await provider.sign(SignRequest(payload=payload, key=provider_key_ref_from_row(row), alg=alg))
+    return await provider.sign(
+        SignRequest(payload=payload, key=provider_key_ref_from_row(row), alg=alg)
+    )
 
 
 async def verify(
@@ -131,76 +144,144 @@ async def verify(
     row = await _key_for_operation(db, kid=kid, operation="verify", tenant_id=tenant_id)
     provider = _provider(row, registry=registry, ctx=ctx)
     return await provider.verify_signature(
-        VerifySignatureRequest(payload=payload, signature=signature, key=public_material_from_row(row), alg=alg)
+        VerifySignatureRequest(
+            payload=payload,
+            signature=signature,
+            key=public_material_from_row(row),
+            alg=alg,
+        )
     )
 
 
-async def encrypt(db: Any, *, kid: str, plaintext: bytes, registry=None, ctx=None, alg: str | None = None) -> Any:
+async def encrypt(
+    db: Any,
+    *,
+    kid: str,
+    plaintext: bytes,
+    registry=None,
+    ctx=None,
+    alg: str | None = None,
+) -> Any:
     row = await _key_for_operation(db, kid=kid, operation="encrypt")
     return await _provider(row, registry=registry, ctx=ctx).encrypt(
         EncryptRequest(plaintext=plaintext, key=provider_key_ref_from_row(row), alg=alg)
     )
 
 
-async def decrypt(db: Any, *, kid: str, ciphertext: Any, registry=None, ctx=None, alg: str | None = None) -> bytes:
+async def decrypt(
+    db: Any,
+    *,
+    kid: str,
+    ciphertext: Any,
+    registry=None,
+    ctx=None,
+    alg: str | None = None,
+) -> bytes:
     row = await _key_for_operation(db, kid=kid, operation="decrypt")
     return await _provider(row, registry=registry, ctx=ctx).decrypt(
-        DecryptRequest(ciphertext=ciphertext, key=provider_key_ref_from_row(row), alg=alg)
+        DecryptRequest(
+            ciphertext=ciphertext, key=provider_key_ref_from_row(row), alg=alg
+        )
     )
 
 
-async def wrap_key(db: Any, *, kid: str, material: bytes | Any, registry=None, ctx=None, alg: str | None = None) -> Any:
+async def wrap_key(
+    db: Any,
+    *,
+    kid: str,
+    material: bytes | Any,
+    registry=None,
+    ctx=None,
+    alg: str | None = None,
+) -> Any:
     row = await _key_for_operation(db, kid=kid, operation="wrap_key")
     return await _provider(row, registry=registry, ctx=ctx).wrap_key(
-        WrapKeyRequest(material=material, wrapping_key=provider_key_ref_from_row(row), alg=alg)
+        WrapKeyRequest(
+            material=material, wrapping_key=provider_key_ref_from_row(row), alg=alg
+        )
     )
 
 
-async def unwrap_key(db: Any, *, kid: str, wrapped: Any, registry=None, ctx=None, alg: str | None = None) -> Any:
+async def unwrap_key(
+    db: Any, *, kid: str, wrapped: Any, registry=None, ctx=None, alg: str | None = None
+) -> Any:
     row = await _key_for_operation(db, kid=kid, operation="unwrap_key")
     return await _provider(row, registry=registry, ctx=ctx).unwrap_key(
-        UnwrapKeyRequest(wrapped=wrapped, wrapping_key=provider_key_ref_from_row(row), alg=alg)
+        UnwrapKeyRequest(
+            wrapped=wrapped, wrapping_key=provider_key_ref_from_row(row), alg=alg
+        )
     )
 
 
-async def encapsulate(db: Any, *, kid: str, registry=None, ctx=None, alg: str | None = None) -> Any:
+async def encapsulate(
+    db: Any, *, kid: str, registry=None, ctx=None, alg: str | None = None
+) -> Any:
     row = await _key_for_operation(db, kid=kid, operation="encapsulate")
     return await _provider(row, registry=registry, ctx=ctx).encapsulate(
         EncapsulateRequest(public_key=public_material_from_row(row), alg=alg)
     )
 
 
-async def decapsulate(db: Any, *, kid: str, ciphertext: bytes | str, registry=None, ctx=None, alg: str | None = None) -> bytes:
+async def decapsulate(
+    db: Any,
+    *,
+    kid: str,
+    ciphertext: bytes | str,
+    registry=None,
+    ctx=None,
+    alg: str | None = None,
+) -> bytes:
     row = await _key_for_operation(db, kid=kid, operation="decapsulate")
     return await _provider(row, registry=registry, ctx=ctx).decapsulate(
-        DecapsulateRequest(ciphertext=ciphertext, secret_key=provider_key_ref_from_row(row), alg=alg)
+        DecapsulateRequest(
+            ciphertext=ciphertext, secret_key=provider_key_ref_from_row(row), alg=alg
+        )
     )
 
 
-async def attest_key(db: Any, *, kid: str, registry=None, ctx=None, claims: Mapping[str, Any] | None = None) -> Any:
+async def attest_key(
+    db: Any,
+    *,
+    kid: str,
+    registry=None,
+    ctx=None,
+    claims: Mapping[str, Any] | None = None,
+) -> Any:
     row = await _key_for_operation(db, kid=kid, operation="attest")
     return await _provider(row, registry=registry, ctx=ctx).attest_key(
         AttestKeyRequest(key=provider_key_ref_from_row(row), claims=claims or {})
     )
 
 
-async def verify_attestation(db: Any, *, kid: str, evidence: Any, registry=None, ctx=None) -> Any:
+async def verify_attestation(
+    db: Any, *, kid: str, evidence: Any, registry=None, ctx=None
+) -> Any:
     row = await _key_for_operation(db, kid=kid, operation="verify_attestation")
     return await _provider(row, registry=registry, ctx=ctx).verify_attestation(
-        VerifyAttestationRequest(evidence=evidence, trust_roots=(public_material_from_row(row),))
+        VerifyAttestationRequest(
+            evidence=evidence, trust_roots=(public_material_from_row(row),)
+        )
     )
 
 
-async def export_public(db: Any, *, kid: str, registry=None, ctx=None, format: str = "jwk") -> Any:
+async def export_public(
+    db: Any, *, kid: str, registry=None, ctx=None, format: str = "jwk"
+) -> Any:
     row = await _key_for_operation(db, kid=kid, operation="export_public")
     provider = _provider(row, registry=registry, ctx=ctx)
     if hasattr(provider, "export_public_key"):
-        return await provider.export_public_key(ExportPublicKeyRequest(key=public_material_from_row(row), format=format))
+        return await provider.export_public_key(
+            ExportPublicKeyRequest(key=public_material_from_row(row), format=format)
+        )
     return public_material_from_row(row)
 
 
-async def publish_jwks(db: Any, *, tenant_id: Any = None) -> dict[str, list[dict[str, Any]]]:
-    rows = await CryptoKey.list_active(tenant_id=tenant_id, db=db, operation="export_public")
+async def publish_jwks(
+    db: Any, *, tenant_id: Any = None
+) -> dict[str, list[dict[str, Any]]]:
+    rows = await CryptoKey.list_active(
+        tenant_id=tenant_id, db=db, operation="export_public"
+    )
     return jwks_from_crypto_keys(rows)
 
 

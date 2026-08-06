@@ -18,19 +18,19 @@ classifiers = [
 authors = [{ name = "Jacob Stewart", email = "jacob@swarmauri.com" }]
 keywords = ["oidc", "oauth2", "identity-provider", "jwks", "jwt", "tigrbl", "sdk", "standards", "auth", "authentication"]
 dependencies = [
-    "tigrbl==0.4.4.dev1",
-    "tigrbl-atoms==0.4.4.dev1",
-    "tigrbl-base==0.4.4.dev1",
-    "tigrbl-canon==0.4.4.dev1",
-    "tigrbl-concrete==0.4.4.dev1",
-    "tigrbl-core==0.4.4.dev1",
-    "tigrbl-kernel==0.4.4.dev1",
-    "tigrbl-ops-olap==0.4.4.dev1",
-    "tigrbl-ops-oltp==0.4.4.dev1",
-    "tigrbl-ops-realtime==0.4.4.dev1",
-    "tigrbl-orm==0.4.4.dev1",
-    "tigrbl-runtime==0.4.4.dev1",
-    "tigrbl-typing==0.4.4.dev1",
+    "tigrbl==0.4.5.dev4",
+    "tigrbl-atoms==0.4.5.dev4",
+    "tigrbl-base==0.4.5.dev4",
+    "tigrbl-canon==0.4.5.dev4",
+    "tigrbl-concrete==0.4.5.dev4",
+    "tigrbl-core==0.4.5.dev4",
+    "tigrbl-kernel==0.4.5.dev4",
+    "tigrbl-ops-olap==0.4.5.dev4",
+    "tigrbl-ops-oltp==0.4.5.dev4",
+    "tigrbl-ops-realtime==0.4.5.dev4",
+    "tigrbl-orm==0.4.5.dev4",
+    "tigrbl-runtime==0.4.5.dev4",
+    "tigrbl-typing==0.4.5.dev4",
     "swarmauri_core==0.10.0",
     "swarmauri_base==0.10.0",
     "swarmauri_standard==0.10.0",
@@ -496,7 +496,6 @@ dependencies = [
     "tigrbl-identity-storage-webauthn==0.4.0.dev2",
     "tigrbl-identity-storage-workload-identity==0.4.0.dev2",
     "tigrbl-identity-storage-runtime==0.4.0.dev2",
-    "tigrbl-table-durability==0.4.0.dev2",
     "tigrbl-identity-durability==0.4.0.dev2",
     "tigrbl-session-durability==0.4.0.dev2",
     "tigrbl-consent-durability==0.4.0.dev2",
@@ -1063,7 +1062,6 @@ tigrbl-identity-storage-trust-federation-graph = { path = "pkgs/01-storage/tigrb
 tigrbl-identity-storage-webauthn = { path = "pkgs/01-storage/tigrbl-identity-storage-webauthn", editable = true }
 tigrbl-identity-storage-workload-identity = { path = "pkgs/01-storage/tigrbl-identity-storage-workload-identity", editable = true }
 tigrbl-identity-storage-runtime = { path = "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime", editable = true }
-tigrbl-table-durability = { path = "pkgs/30-storage-runtime/tigrbl-table-durability", editable = true }
 tigrbl-identity-durability = { path = "pkgs/30-storage-runtime/tigrbl-identity-durability", editable = true }
 tigrbl-session-durability = { path = "pkgs/30-storage-runtime/tigrbl-session-durability", editable = true }
 tigrbl-consent-durability = { path = "pkgs/30-storage-runtime/tigrbl-consent-durability", editable = true }

@@ -89,7 +89,9 @@ def _identity_key(prefix: str, value: Any) -> str | None:
     return f"{prefix}:{ident}"
 
 
-def observe_identity_topology(snapshot: IdentityTopologySnapshot) -> ObservedIdentityTopology:
+def observe_identity_topology(
+    snapshot: IdentityTopologySnapshot,
+) -> ObservedIdentityTopology:
     realm_ids = _unique(_row_id(row) for row in snapshot.realms)
     tenant_ids = _unique(_row_id(row) for row in snapshot.tenants)
 
@@ -106,7 +108,9 @@ def observe_identity_topology(snapshot: IdentityTopologySnapshot) -> ObservedIde
             identity_tenant_ids.add(tenant_id)
 
     for principal in snapshot.principals:
-        key = _identity_key("principal", _row_id(principal) or _field(principal, "subject"))
+        key = _identity_key(
+            "principal", _row_id(principal) or _field(principal, "subject")
+        )
         if key:
             identity_ids.add(key)
         tenant_id = _id(_field(principal, "tenant_id"))
@@ -141,7 +145,9 @@ def observe_identity_topology(snapshot: IdentityTopologySnapshot) -> ObservedIde
         realm_ids=realm_ids,
         tenant_ids=tenant_ids,
         identity_ids=tuple(sorted(identity_ids)),
-        tenant_realm_ids=_unique(_field(tenant, "realm_id") for tenant in snapshot.tenants),
+        tenant_realm_ids=_unique(
+            _field(tenant, "realm_id") for tenant in snapshot.tenants
+        ),
         identity_tenant_ids=tuple(sorted(identity_tenant_ids)),
         identity_realm_ids=tuple(sorted(identity_realm_ids)),
     )
@@ -203,11 +209,15 @@ def validate_identity_topology_snapshot(
 
     unknown_identity_tenants = sorted(identity_tenant_set - tenant_set)
     if unknown_identity_tenants:
-        failures.append(f"identities reference unknown tenants: {unknown_identity_tenants}")
+        failures.append(
+            f"identities reference unknown tenants: {unknown_identity_tenants}"
+        )
 
     unknown_identity_realms = sorted(identity_realm_set - realm_set)
     if unknown_identity_realms:
-        failures.append(f"identities reference unknown realms: {unknown_identity_realms}")
+        failures.append(
+            f"identities reference unknown realms: {unknown_identity_realms}"
+        )
 
     if scenario.realm == "multi" and len(observed.realm_ids) > 1:
         tenants_without_realm = [
@@ -216,22 +226,36 @@ def validate_identity_topology_snapshot(
             if not _present(_field(tenant, "realm_id"))
         ]
         if tenants_without_realm:
-            failures.append(f"multi-realm topology has tenants without realm_id: {tenants_without_realm}")
+            failures.append(
+                f"multi-realm topology has tenants without realm_id: {tenants_without_realm}"
+            )
 
     if scenario.realm == "single" and len(tenant_realm_set) > 1:
-        failures.append(f"single-realm topology has tenants in multiple realms: {sorted(tenant_realm_set)}")
+        failures.append(
+            f"single-realm topology has tenants in multiple realms: {sorted(tenant_realm_set)}"
+        )
 
     if scenario.tenant == "single" and len(identity_tenant_set) > 1:
-        failures.append(f"single-tenant topology has identities in multiple tenants: {sorted(identity_tenant_set)}")
+        failures.append(
+            f"single-tenant topology has identities in multiple tenants: {sorted(identity_tenant_set)}"
+        )
 
     if observed.identity_ids and observed.tenant_ids and not identity_tenant_set:
         failures.append("identity topology has identities without tenant bindings")
 
     if scenario.tenant == "multi" and len(identity_tenant_set) < 2:
-        failures.append("multi-tenant topology must bind identities to at least two tenants")
+        failures.append(
+            "multi-tenant topology must bind identities to at least two tenants"
+        )
 
-    if scenario.realm == "multi" and scenario.tenant == "multi" and len(tenant_realm_set) < 2:
-        failures.append("multi-realm multi-tenant topology must place tenants in at least two realms")
+    if (
+        scenario.realm == "multi"
+        and scenario.tenant == "multi"
+        and len(tenant_realm_set) < 2
+    ):
+        failures.append(
+            "multi-realm multi-tenant topology must place tenants in at least two realms"
+        )
 
     return IdentityTopologyValidationReport(
         scenario=scenario,
@@ -249,7 +273,7 @@ async def collect_identity_topology_snapshot(db: Any) -> IdentityTopologySnapsho
         TenantMembership,
         User,
     )
-    from .ops.common import list_records
+    from tigrbl import list_records
 
     return IdentityTopologySnapshot(
         realms=tuple(await list_records(Realm, db)),

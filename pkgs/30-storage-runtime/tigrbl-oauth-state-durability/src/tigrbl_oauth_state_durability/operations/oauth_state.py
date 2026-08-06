@@ -7,7 +7,7 @@ from collections.abc import Mapping
 from datetime import timezone
 from typing import Any
 
-from tigrbl_table_durability import (
+from tigrbl import (
     create_table_record,
     database_from_context,
     field_value,

@@ -5,11 +5,11 @@ import uuid
 
 import pytest
 
+from tigrbl import create_table_record
 from tigrbl_identity_storage.tables import DeviceCode
 from tigrbl_identity_storage_runtime import (
     DeviceCodeRuntimeSpec,
     approve_device_code,
-    create_table_record,
     deny_device_code,
     initializeIdentityRuntimeTables,
 )
@@ -82,12 +82,15 @@ async def test_device_code_transition_without_identity_is_noop(
     administrator_storage,
 ) -> None:
     _activate(monkeypatch, administrator_storage)
-    assert await approve_device_code(
-        {"payload": {}, "db": administrator_storage}
-    ) is None
-    assert await deny_device_code(
-        {"payload": {"device_code": "missing"}, "db": administrator_storage}
-    ) is None
+    assert (
+        await approve_device_code({"payload": {}, "db": administrator_storage}) is None
+    )
+    assert (
+        await deny_device_code(
+            {"payload": {"device_code": "missing"}, "db": administrator_storage}
+        )
+        is None
+    )
 
 
 def test_device_code_runtime_spec_preserves_operation_identity() -> None:

@@ -2,18 +2,18 @@
 
 from tigrbl_identity_storage.tables import CryptoKey, CryptoKeyVersion
 
-from tigrbl_table_durability import deriveRuntimeTableSpec
+from tigrbl import deriveTableSpec
 from tigrbl_key_material_durability.hooks import CRYPTO_KEY_RUNTIME_HOOKS
 
 
 CryptoKeyTable = CryptoKey
 CryptoKeyVersionTable = CryptoKeyVersion
 
-CryptoKeyRuntimeSpec = deriveRuntimeTableSpec(
+CryptoKeyRuntimeSpec = deriveTableSpec(
     CryptoKeyTable,
     hooks=CRYPTO_KEY_RUNTIME_HOOKS,
 )
-CryptoKeyVersionRuntimeSpec = deriveRuntimeTableSpec(CryptoKeyVersionTable)
+CryptoKeyVersionRuntimeSpec = deriveTableSpec(CryptoKeyVersionTable)
 
 
 __all__ = [

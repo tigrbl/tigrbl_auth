@@ -6,8 +6,8 @@ from tigrbl_identity_storage.tables import (
     CredentialStatusEntry,
 )
 
-from tigrbl_table_durability import deriveRuntimeTableSpec
-from tigrbl_table_durability import makeRuntimeOperation
+from tigrbl import deriveTableSpec
+from tigrbl import makeOp
 from tigrbl_digital_credential_durability.operations.credentials import (
     begin_issuance,
     create_offer,
@@ -18,19 +18,45 @@ CredentialOfferTable = CredentialOffer
 CredentialIssuanceTransactionTable = CredentialIssuanceTransaction
 CredentialStatusEntryTable = CredentialStatusEntry
 
-CredentialOfferRuntimeSpec = deriveRuntimeTableSpec(
+CredentialOfferRuntimeSpec = deriveTableSpec(
     CredentialOfferTable,
-    operations=(makeRuntimeOperation(alias="create_offer", handler=create_offer),),
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="create_offer",
+            handler=create_offer,
+        ),
+    ),
 )
-CredentialIssuanceTransactionRuntimeSpec = deriveRuntimeTableSpec(
+CredentialIssuanceTransactionRuntimeSpec = deriveTableSpec(
     CredentialIssuanceTransactionTable,
-    operations=(makeRuntimeOperation(alias="begin_issuance", handler=begin_issuance),),
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="begin_issuance",
+            handler=begin_issuance,
+        ),
+    ),
 )
-CredentialStatusEntryRuntimeSpec = deriveRuntimeTableSpec(
+CredentialStatusEntryRuntimeSpec = deriveTableSpec(
     CredentialStatusEntryTable,
-    operations=(
-        makeRuntimeOperation(
-            alias="set_credential_status", handler=set_credential_status
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="set_credential_status",
+            handler=set_credential_status,
         ),
     ),
 )

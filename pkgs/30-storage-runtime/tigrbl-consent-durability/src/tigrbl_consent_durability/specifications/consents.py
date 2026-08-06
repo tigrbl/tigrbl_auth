@@ -2,8 +2,8 @@
 
 from tigrbl_identity_storage.tables import Consent
 
-from tigrbl_table_durability import deriveRuntimeTableSpec
-from tigrbl_table_durability import makeRuntimeOperation
+from tigrbl import deriveTableSpec
+from tigrbl import makeOp
 from tigrbl_consent_durability.operations.consents import (
     list_consents_for_user,
     revoke_consent_for_user,
@@ -11,19 +11,34 @@ from tigrbl_consent_durability.operations.consents import (
 )
 
 ConsentTable = Consent
-ConsentRuntimeSpec = deriveRuntimeTableSpec(
+ConsentRuntimeSpec = deriveTableSpec(
     ConsentTable,
-    operations=(
-        makeRuntimeOperation(
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
             alias="list_for_user",
             handler=list_consents_for_user,
         ),
-        makeRuntimeOperation(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
             alias="revoke_for_user",
             handler=revoke_consent_for_user,
             arity="member",
         ),
-        makeRuntimeOperation(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
             alias="revoke_for_client",
             handler=revoke_consents_for_client,
         ),

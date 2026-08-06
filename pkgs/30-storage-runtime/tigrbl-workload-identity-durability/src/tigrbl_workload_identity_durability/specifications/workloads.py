@@ -2,8 +2,8 @@
 
 from tigrbl_identity_storage.tables import SpiffeTrustBundle, SvidRecord
 
-from tigrbl_table_durability import deriveRuntimeTableSpec
-from tigrbl_table_durability import makeRuntimeOperation
+from tigrbl import deriveTableSpec
+from tigrbl import makeOp
 from tigrbl_workload_identity_durability.operations.workloads import (
     activate_spiffe_trust_bundle,
     record_svid,
@@ -13,17 +13,38 @@ from tigrbl_workload_identity_durability.operations.workloads import (
 SvidRecordTable = SvidRecord
 SpiffeTrustBundleTable = SpiffeTrustBundle
 
-SvidRecordRuntimeSpec = deriveRuntimeTableSpec(
+SvidRecordRuntimeSpec = deriveTableSpec(
     SvidRecordTable,
-    operations=(
-        makeRuntimeOperation(alias="record_workload_credential", handler=record_workload_credential),
-        makeRuntimeOperation(alias="record_svid", handler=record_svid),
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="record_workload_credential",
+            handler=record_workload_credential,
+        ),
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="record_svid",
+            handler=record_svid,
+        ),
     ),
 )
-SpiffeTrustBundleRuntimeSpec = deriveRuntimeTableSpec(
+SpiffeTrustBundleRuntimeSpec = deriveTableSpec(
     SpiffeTrustBundleTable,
-    operations=(
-        makeRuntimeOperation(
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
             alias="activate_trust_bundle",
             handler=activate_spiffe_trust_bundle,
         ),

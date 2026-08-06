@@ -13,7 +13,7 @@ from tigrbl_identity_contracts.oauth import (
     PushedAuthorizationResult,
 )
 from tigrbl_identity_storage_runtime.ops.audit import append_audit_event_record
-from tigrbl_identity_storage_runtime.ops.common import field_value
+from tigrbl import field_value
 from tigrbl_identity_storage_runtime.ops.oauth_state import (
     persist_pushed_authorization_request,
 )

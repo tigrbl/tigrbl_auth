@@ -8,7 +8,7 @@ from typing import Any
 
 from tigrbl_identity_storage.tables import CredentialWebAuthnPasskey
 
-from tigrbl_table_durability import (
+from tigrbl import (
     create_table_record,
     database_from_context,
     first_table_record,

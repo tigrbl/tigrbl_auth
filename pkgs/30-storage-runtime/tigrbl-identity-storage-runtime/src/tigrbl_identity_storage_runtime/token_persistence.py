@@ -8,7 +8,7 @@ from uuid import uuid4
 from tigrbl_identity_core.errors import InvalidRefreshTokenError, RefreshTokenReuseError
 from tigrbl_identity_core.digests import token_hash
 from tigrbl_identity_storage.tables import TokenRecord
-from .ops.common import (
+from tigrbl import (
     delete_table_record,
     field_value,
     first_table_record,
@@ -204,7 +204,9 @@ async def issue_persisted_token_pair(
         access_claims["client_id"] = client_id
         refresh_claims["client_id"] = client_id
     family_id = refresh_family_id or str(uuid4())
-    refresh_parent_hash = token_hash(refresh_parent_token) if refresh_parent_token else None
+    refresh_parent_hash = (
+        token_hash(refresh_parent_token) if refresh_parent_token else None
+    )
     await upsert_token_record_async(
         access_token,
         access_claims,
@@ -237,7 +239,9 @@ async def redeem_refresh_token(
 ) -> dict[str, Any]:
     record = await get_token_record_async(refresh_token)
     if record is None:
-        raise InvalidRefreshTokenError("refresh token was not issued by this repository")
+        raise InvalidRefreshTokenError(
+            "refresh token was not issued by this repository"
+        )
     if record.token_kind != "refresh":
         raise InvalidRefreshTokenError("presented token is not a refresh token")
     if str(record.client_id or "") not in {"", client_id}:
@@ -250,15 +254,24 @@ async def redeem_refresh_token(
     if not record.active or record.revoked_at is not None:
         raise InvalidRefreshTokenError("refresh token is inactive")
 
-    claims = await jwt.async_decode(refresh_token, verify_exp=True, cert_thumbprint=cert_thumbprint)
+    claims = await jwt.async_decode(
+        refresh_token, verify_exp=True, cert_thumbprint=cert_thumbprint
+    )
     if claims.get("typ") != "refresh":
         raise InvalidRefreshTokenError("presented token is not a refresh token")
-    if client_id and str(claims.get("client_id") or record.client_id or "") not in {"", client_id}:
+    if client_id and str(claims.get("client_id") or record.client_id or "") not in {
+        "",
+        client_id,
+    }:
         raise InvalidRefreshTokenError("refresh token client binding mismatch")
 
-    stored_audience = normalize_refresh_audience((record.claims or {}).get("aud") if isinstance(record.claims, dict) else None)
+    stored_audience = normalize_refresh_audience(
+        (record.claims or {}).get("aud") if isinstance(record.claims, dict) else None
+    )
     if requested_audience and stored_audience not in {None, "", requested_audience}:
-        raise InvalidRefreshTokenError("refresh token audience cannot be widened or changed")
+        raise InvalidRefreshTokenError(
+            "refresh token audience cannot be widened or changed"
+        )
 
     preserved_claims = deepcopy(record.claims or claims)
     preserved_claims.pop("iat", None)
@@ -267,7 +280,9 @@ async def redeem_refresh_token(
     preserved_claims.pop("jti", None)
     preserved_claims.pop("typ", None)
 
-    next_audience = requested_audience or normalize_refresh_audience(preserved_claims.pop("aud", None))
+    next_audience = requested_audience or normalize_refresh_audience(
+        preserved_claims.pop("aud", None)
+    )
     next_scope = preserved_claims.pop("scope", None)
     next_issuer = preserved_claims.pop("iss", None)
     preserved_claims.pop("sub", None)

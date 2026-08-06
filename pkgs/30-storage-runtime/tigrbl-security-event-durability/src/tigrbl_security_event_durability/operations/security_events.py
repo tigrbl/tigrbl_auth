@@ -1,5 +1,6 @@
 """Durable security-event lifecycle operations."""
 
+from tigrbl_identity_core.persistence import reject_sensitive_raw_fields
 from tigrbl_identity_storage.tables import (
     SecurityEvent,
     SecurityEventDelivery,
@@ -7,12 +8,20 @@ from tigrbl_identity_storage.tables import (
     SecurityEventSubscription,
 )
 
-from tigrbl_table_durability import create_table_handler
+from tigrbl import provideTableHandler
 
-record_security_event = create_table_handler(SecurityEvent)
-record_security_event_subscription = create_table_handler(SecurityEventSubscription)
-enqueue_security_event_delivery = create_table_handler(SecurityEventDelivery)
-reserve_security_event_replay = create_table_handler(SecurityEventReplay)
+record_security_event = provideTableHandler(
+    SecurityEvent, payload_validator=reject_sensitive_raw_fields
+)
+record_security_event_subscription = provideTableHandler(
+    SecurityEventSubscription, payload_validator=reject_sensitive_raw_fields
+)
+enqueue_security_event_delivery = provideTableHandler(
+    SecurityEventDelivery, payload_validator=reject_sensitive_raw_fields
+)
+reserve_security_event_replay = provideTableHandler(
+    SecurityEventReplay, payload_validator=reject_sensitive_raw_fields
+)
 
 __all__ = [
     "enqueue_security_event_delivery",

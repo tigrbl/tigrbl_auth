@@ -9,7 +9,7 @@ from typing import Any
 from tigrbl_identity_core.digests import sha256_digest
 from tigrbl_identity_storage.tables import WebAuthnCeremony
 
-from tigrbl_table_durability import (
+from tigrbl import (
     create_table_record,
     database_from_context,
     field_value,

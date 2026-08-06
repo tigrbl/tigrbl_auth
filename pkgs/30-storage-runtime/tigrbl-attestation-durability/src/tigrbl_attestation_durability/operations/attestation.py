@@ -12,17 +12,21 @@ from tigrbl_identity_storage.tables import (
     AttestationReferenceValue,
     AttestationResult,
 )
+from tigrbl_identity_core.persistence import reject_sensitive_raw_fields
 
-from tigrbl_table_durability import (
-    create_table_handler,
+from tigrbl import (
+    provideTableHandler,
     database_from_context,
     maybe_await,
     payload_from_context,
-    reject_sensitive_raw_fields,
 )
 
-record_attestation_evidence = create_table_handler(AttestationEvidence)
-record_attestation_result = create_table_handler(AttestationResult)
+record_attestation_evidence = provideTableHandler(
+    AttestationEvidence, payload_validator=reject_sensitive_raw_fields
+)
+record_attestation_result = provideTableHandler(
+    AttestationResult, payload_validator=reject_sensitive_raw_fields
+)
 
 
 def make_attestation_appraisal_recorder(

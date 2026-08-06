@@ -8,8 +8,8 @@ from tigrbl_identity_storage.tables import (
     RevokedToken,
 )
 
-from tigrbl_table_durability import deriveRuntimeTableSpec
-from tigrbl_table_durability import makeRuntimeOperation
+from tigrbl import deriveTableSpec
+from tigrbl import makeOp
 from tigrbl_oauth_state_durability.operations.oauth_state import (
     create_client_registration,
     disable_client_registration,
@@ -27,10 +27,15 @@ from tigrbl_oauth_state_durability.operations.device_codes import (
 )
 
 AuthCodeTable = AuthCode
-AuthCodeRuntimeSpec = deriveRuntimeTableSpec(
+AuthCodeRuntimeSpec = deriveTableSpec(
     AuthCodeTable,
-    operations=(
-        makeRuntimeOperation(
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
             alias="authorize",
             handler=persist_authorization_code,
         ),
@@ -38,42 +43,93 @@ AuthCodeRuntimeSpec = deriveRuntimeTableSpec(
 )
 
 ClientRegistrationTable = ClientRegistration
-ClientRegistrationRuntimeSpec = deriveRuntimeTableSpec(
+ClientRegistrationRuntimeSpec = deriveTableSpec(
     ClientRegistrationTable,
-    operations=(
-        makeRuntimeOperation(alias="register", handler=create_client_registration),
-        makeRuntimeOperation(
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="register",
+            handler=create_client_registration,
+        ),
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
             alias="get_registration",
             handler=read_client_registration,
             tx_scope="read_only",
             persist="skip",
         ),
-        makeRuntimeOperation(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
             alias="update_registration",
             handler=update_client_registration,
         ),
-        makeRuntimeOperation(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
             alias="disable_registration",
             handler=disable_client_registration,
         ),
-        makeRuntimeOperation(alias="upsert", handler=upsert_client_registration),
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="upsert",
+            handler=upsert_client_registration,
+        ),
     ),
 )
 
 DeviceCodeTable = DeviceCode
-DeviceCodeRuntimeSpec = deriveRuntimeTableSpec(
+DeviceCodeRuntimeSpec = deriveTableSpec(
     DeviceCodeTable,
-    operations=(
-        makeRuntimeOperation(alias="approve", handler=approve_device_code),
-        makeRuntimeOperation(alias="deny", handler=deny_device_code),
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="approve",
+            handler=approve_device_code,
+        ),
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="deny",
+            handler=deny_device_code,
+        ),
     ),
 )
 
 PushedAuthorizationRequestTable = PushedAuthorizationRequest
-PushedAuthorizationRequestRuntimeSpec = deriveRuntimeTableSpec(
+PushedAuthorizationRequestRuntimeSpec = deriveTableSpec(
     PushedAuthorizationRequestTable,
-    operations=(
-        makeRuntimeOperation(
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
             alias="push_authorization_request",
             handler=persist_pushed_authorization_request,
         ),
@@ -81,11 +137,27 @@ PushedAuthorizationRequestRuntimeSpec = deriveRuntimeTableSpec(
 )
 
 RevokedTokenTable = RevokedToken
-RevokedTokenRuntimeSpec = deriveRuntimeTableSpec(
+RevokedTokenRuntimeSpec = deriveTableSpec(
     RevokedTokenTable,
-    operations=(
-        makeRuntimeOperation(alias="record_hash", handler=record_revoked_token_hash),
-        makeRuntimeOperation(alias="is_hash_revoked", handler=is_token_hash_revoked),
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="record_hash",
+            handler=record_revoked_token_hash,
+        ),
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="is_hash_revoked",
+            handler=is_token_hash_revoked,
+        ),
     ),
 )
 

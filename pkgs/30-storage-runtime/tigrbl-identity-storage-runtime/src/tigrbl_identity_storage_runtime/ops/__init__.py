@@ -3,7 +3,6 @@
 from .attestation import *
 from .audit import *
 from .authorization import *
-from .common import *
 from .clients import *
 from .consents import *
 from .delegation import *

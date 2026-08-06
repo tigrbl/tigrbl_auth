@@ -41,7 +41,7 @@ from tigrbl_identity_runtime.deployment import (
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_storage.tables.tenant import Tenant
 from tigrbl_identity_storage_runtime.engine import get_db
-from tigrbl_identity_storage_runtime.ops.common import (
+from tigrbl import (
     create_record,
     first_record,
     read_record,

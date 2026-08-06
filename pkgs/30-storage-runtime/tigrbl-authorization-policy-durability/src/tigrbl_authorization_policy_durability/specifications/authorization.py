@@ -12,8 +12,8 @@ from tigrbl_identity_storage.tables import (
     TenantMembership,
 )
 
-from tigrbl_table_durability import deriveRuntimeTableSpec
-from tigrbl_table_durability import makeRuntimeOperation
+from tigrbl import deriveTableSpec
+from tigrbl import makeOp
 from tigrbl_authorization_policy_durability.operations.authorization import (
     assign_role,
     delegated_scope_for_subject,
@@ -38,13 +38,23 @@ InvariantViolationTable = InvariantViolation
 PolicyTable = Policy
 PolicyVersionTable = PolicyVersion
 
-AttributePolicyRuntimeSpec = deriveRuntimeTableSpec(
+AttributePolicyRuntimeSpec = deriveTableSpec(
     AttributePolicyTable,
-    operations=(
-        makeRuntimeOperation(
-            alias="upsert_with_conditions", handler=upsert_attribute_policy
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="upsert_with_conditions",
+            handler=upsert_attribute_policy,
         ),
-        makeRuntimeOperation(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
             alias="list_active_with_conditions",
             handler=list_active_attribute_policies,
             tx_scope="read_only",
@@ -53,11 +63,23 @@ AttributePolicyRuntimeSpec = deriveRuntimeTableSpec(
     ),
 )
 
-RoleRuntimeSpec = deriveRuntimeTableSpec(
+RoleRuntimeSpec = deriveTableSpec(
     RoleTable,
-    operations=(
-        makeRuntimeOperation(alias="create_role", handler=upsert_role),
-        makeRuntimeOperation(
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="create_role",
+            handler=upsert_role,
+        ),
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
             alias="list_for_tenant",
             handler=list_roles_for_tenant,
             tx_scope="read_only",
@@ -66,12 +88,32 @@ RoleRuntimeSpec = deriveRuntimeTableSpec(
     ),
 )
 
-TenantMembershipRuntimeSpec = deriveRuntimeTableSpec(
+TenantMembershipRuntimeSpec = deriveTableSpec(
     TenantMembershipTable,
-    operations=(
-        makeRuntimeOperation(alias="grant_membership", handler=grant_membership),
-        makeRuntimeOperation(alias="assign_role", handler=assign_role),
-        makeRuntimeOperation(
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="grant_membership",
+            handler=grant_membership,
+        ),
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="assign_role",
+            handler=assign_role,
+        ),
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
             alias="role_names_for_principal",
             handler=role_names_for_principal,
             tx_scope="read_only",
@@ -79,18 +121,42 @@ TenantMembershipRuntimeSpec = deriveRuntimeTableSpec(
         ),
     ),
 )
-DelegatedAdminScopeRuntimeSpec = deriveRuntimeTableSpec(
+DelegatedAdminScopeRuntimeSpec = deriveTableSpec(
     DelegatedAdminScopeTable,
-    operations=(
-        makeRuntimeOperation(alias="grant_scope", handler=grant_delegated_scope),
-        makeRuntimeOperation(alias="revoke_scope", handler=revoke_delegated_scope),
-        makeRuntimeOperation(
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="grant_scope",
+            handler=grant_delegated_scope,
+        ),
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="revoke_scope",
+            handler=revoke_delegated_scope,
+        ),
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
             alias="lookup",
             handler=delegated_scope_for_subject,
             tx_scope="read_only",
             persist="skip",
         ),
-        makeRuntimeOperation(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
             alias="list_active",
             handler=list_active_delegated_scopes,
             tx_scope="read_only",

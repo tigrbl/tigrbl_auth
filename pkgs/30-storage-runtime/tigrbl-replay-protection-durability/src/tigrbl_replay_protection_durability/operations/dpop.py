@@ -12,7 +12,7 @@ from tigrbl_identity_storage.tables.dpop_nonce import nonce_hash, nonce_payload
 from tigrbl_identity_storage.tables.dpop_replay import replay_payload
 from tigrbl_security_trust_contracts import DPoPNonceRecord, DPoPProofClaims
 
-from tigrbl_table_durability import (
+from tigrbl import (
     clear_records,
     create_record,
     delete_record,

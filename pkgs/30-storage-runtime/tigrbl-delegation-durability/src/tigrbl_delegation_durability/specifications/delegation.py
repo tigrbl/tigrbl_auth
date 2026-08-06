@@ -7,8 +7,8 @@ from tigrbl_identity_storage.tables import (
     DelegationGrantTokenLink,
 )
 
-from tigrbl_table_durability import deriveRuntimeTableSpec
-from tigrbl_table_durability import makeRuntimeOperation
+from tigrbl import deriveTableSpec
+from tigrbl import makeOp
 from tigrbl_delegation_durability.operations.delegation import (
     activate_grant,
     create_grant,
@@ -30,10 +30,18 @@ DelegationGrantEdgeTable = DelegationGrantEdge
 DelegationGrantProofTable = DelegationGrantProof
 DelegationGrantTokenLinkTable = DelegationGrantTokenLink
 
-DelegationGrantRuntimeSpec = deriveRuntimeTableSpec(
+DelegationGrantRuntimeSpec = deriveTableSpec(
     DelegationGrantTable,
-    operations=tuple(
-        makeRuntimeOperation(alias=alias, handler=handler)
+    ops=tuple(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias=alias,
+            handler=handler,
+        )
         for alias, handler in (
             ("create_grant", create_grant),
             ("inspect_grant", inspect_grant),
@@ -45,30 +53,64 @@ DelegationGrantRuntimeSpec = deriveRuntimeTableSpec(
         )
     ),
 )
-DelegationGrantEdgeRuntimeSpec = deriveRuntimeTableSpec(
+DelegationGrantEdgeRuntimeSpec = deriveTableSpec(
     DelegationGrantEdgeTable,
-    operations=(
-        makeRuntimeOperation(alias="link_edge", handler=link_grant_edge),
-        makeRuntimeOperation(
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="link_edge",
+            handler=link_grant_edge,
+        ),
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
             alias="deactivate_children",
             handler=deactivate_grant_children,
         ),
     ),
 )
-DelegationGrantProofRuntimeSpec = deriveRuntimeTableSpec(
+DelegationGrantProofRuntimeSpec = deriveTableSpec(
     DelegationGrantProofTable,
-    operations=(
-        makeRuntimeOperation(
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
             alias="persist_provenance",
             handler=persist_delegation_provenance,
         ),
     ),
 )
-DelegationGrantTokenLinkRuntimeSpec = deriveRuntimeTableSpec(
+DelegationGrantTokenLinkRuntimeSpec = deriveTableSpec(
     DelegationGrantTokenLinkTable,
-    operations=(
-        makeRuntimeOperation(alias="link_token", handler=link_delegation_token),
-        makeRuntimeOperation(alias="list_for_grant", handler=list_tokens_for_grant),
+    ops=(
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="link_token",
+            handler=link_delegation_token,
+        ),
+        makeOp(
+            extra={"owner_layer": "30-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            alias="list_for_grant",
+            handler=list_tokens_for_grant,
+        ),
     ),
 )
 
