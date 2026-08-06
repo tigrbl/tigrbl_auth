@@ -15,6 +15,7 @@ from tigrbl_auth.config.deployment import DEFAULT_VALUES, resolve_deployment
 from tigrbl_auth.tables import AuthSession, Client, Consent, Tenant, User
 from tigrbl_identity_jose.key_management import hash_pw
 from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
+from tigrbl_identity_contracts.account_self_service import AccountPrincipal
 
 ROOT = Path(__file__).resolve().parents[3]
 PKG_SRC = ROOT / "pkgs" / "80-routers" / "tigrbl-auth-backend-app-my-account" / "src"
@@ -29,6 +30,7 @@ build_app = my_account_package.build_app
 account_session_module = import_module("tigrbl_auth_backend_app_my_account.sessions")
 account_consent_module = import_module("tigrbl_auth_backend_app_my_account.consents")
 account_user_module = import_module("tigrbl_auth_backend_app_my_account.profiles")
+account_common_module = import_module("tigrbl_auth_backend_app_my_account.common")
 
 
 def _settings() -> SimpleNamespace:
@@ -103,6 +105,25 @@ def test_my_account_contract_matches_product_surface_registry() -> None:
         if capability == "rest-only":
             continue
         assert deployment.capability_enabled(capability), capability
+
+
+@pytest.mark.asyncio
+async def test_my_account_accepts_an_embedding_app_principal_provider() -> None:
+    expected = AccountPrincipal(identity_id=str(uuid4()), tenant_id=str(uuid4()))
+    request = SimpleNamespace(
+        app=SimpleNamespace(
+            state=SimpleNamespace(
+                tigrbl_auth_account_principal_provider=lambda _request: expected
+            )
+        ),
+        headers={},
+    )
+
+    actual = await account_common_module.current_principal_dependency(
+        request, db=object()
+    )
+
+    assert actual is expected
 
 
 def test_my_account_build_app_uses_environment_backed_default_settings() -> None:

@@ -28,10 +28,14 @@ def test_provider_configuration_is_injected_without_runtime_import() -> None:
 
 def test_provider_and_rfc_modules_do_not_import_higher_layers() -> None:
     package = ROOT / "pkgs/20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose"
-    sources = [package / "jwt_runtime.py", *(package / "standards").glob("*.py")]
+    sources = list(package.rglob("*.py"))
     combined = "\n".join(path.read_text(encoding="utf-8") for path in sources)
     assert "tigrbl_identity_runtime" not in combined
     assert "tigrbl_auth_protocol_oauth" not in combined
+    assert "swarmauri" not in combined.lower()
+
+    manifest = (package.parents[1] / "pyproject.toml").read_text(encoding="utf-8")
+    assert "swarmauri" not in manifest.lower()
 
 
 def test_certificate_thumbprint_confirmation_is_deterministic() -> None:

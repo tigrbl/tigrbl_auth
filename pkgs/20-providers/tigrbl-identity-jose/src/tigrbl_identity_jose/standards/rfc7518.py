@@ -1,35 +1,16 @@
 """RFC 7518 - JSON Web Algorithms (JWA).
 
-Expose the list of algorithms supported by this service. When the Swarmauri JWA
-registry is unavailable, a dependency-light fallback registry is used.
+Expose the algorithms implemented by Tigrbl Auth's JOSE runtime.
 """
 
 from __future__ import annotations
 
 from typing import Final
 
-from tigrbl_jose_swarmauri_provider.pqc import ML_DSA_65_ALG
+from ..pqc import ML_DSA_65_ALG
 from ..configuration import settings
 
-try:  # pragma: no cover - exercised when Swarmauri is installed
-    from swarmauri_core.crypto.types import JWAAlg
-    _BASE_ALGORITHMS = {alg.value for alg in JWAAlg}
-except Exception:  # pragma: no cover - dependency-light checkpoint fallback
-    _BASE_ALGORITHMS = {
-        "HS256",
-        "HS384",
-        "HS512",
-        "RS256",
-        "RS384",
-        "RS512",
-        "PS256",
-        "PS384",
-        "PS512",
-        "ES256",
-        "ES384",
-        "ES512",
-        "EdDSA",
-    }
+_BASE_ALGORITHMS = {"HS256", "RS256", "EdDSA"}
 
 RFC7518_SPEC_URL: Final = "https://www.rfc-editor.org/rfc/rfc7518"
 WEBAUTHN_ALGORITHMS = frozenset({"RS256", "RS384", "RS512", "RS1", "PS256", "PS384", "PS512", "ES256", "ES384", "ES512", "ES256K"})

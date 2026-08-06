@@ -1,14 +1,6 @@
-"""Compatibility facade for tigrbl-jose-swarmauri-provider."""
+"""Compatibility alias for Tigrbl Auth's internal JOSE key manager."""
+from importlib import import_module
+import sys
 
-from tigrbl_jose_swarmauri_provider import crypto as _provider_crypto
-from tigrbl_secret_hashing_bcrypt_provider import hash_pw, verify_pw
-
-globals().update(
-    {
-        name: value
-        for name, value in vars(_provider_crypto).items()
-        if not name.startswith("__")
-    }
-)
-
-__all__ = [*_provider_crypto.__all__, "hash_pw", "verify_pw"]
+_implementation = import_module("tigrbl_identity_jose.key_management")
+sys.modules[__name__] = _implementation

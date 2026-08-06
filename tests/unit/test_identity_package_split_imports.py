@@ -238,8 +238,9 @@ def test_oauth_protocol_declares_security_proof_dependencies() -> None:
         )
     )
 
-    assert "swarmauri_signing_dpop==0.1.1" in set(
-        metadata["project"].get("dependencies", [])
+    assert not any(
+        dependency.startswith("swarmauri_")
+        for dependency in metadata["project"].get("dependencies", [])
     )
     assert "tigrbl-security-proof-pkce==0.1.0" in set(
         metadata["project"].get("dependencies", [])

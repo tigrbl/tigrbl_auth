@@ -34,18 +34,7 @@ RUNTIME_IMPORT_SURFACES = (
 
 _BASE_MODULES: tuple[dict[str, Any], ...] = (
     {"module": "tigrbl", "package": "tigrbl", "category": "runtime"},
-    {"module": "swarmauri_core", "package": "swarmauri_core", "category": "runtime"},
-    {"module": "swarmauri_base", "package": "swarmauri_base", "category": "runtime"},
-    {"module": "swarmauri_standard", "package": "swarmauri_standard", "category": "runtime"},
-    {"module": "swarmauri_tokens_jwt", "package": "swarmauri_tokens_jwt", "category": "runtime"},
-    {"module": "swarmauri_signing_jws", "package": "swarmauri_signing_jws", "category": "runtime"},
-    {"module": "swarmauri_signing_ed25519", "package": "swarmauri_signing_ed25519", "category": "runtime"},
-    {"module": "swarmauri_signing_dpop", "package": "swarmauri_signing_dpop", "category": "runtime"},
     {"module": "pqcrypto", "package": "pqcrypto", "category": "runtime"},
-    {"module": "swarmauri_crypto_jwe", "package": "swarmauri_crypto_jwe", "category": "runtime"},
-    {"module": "swarmauri_crypto_paramiko", "package": "swarmauri_crypto_paramiko", "category": "runtime"},
-    {"module": "swarmauri_keyprovider_file", "package": "swarmauri_keyprovider_file", "category": "runtime"},
-    {"module": "swarmauri_keyprovider_local", "package": "swarmauri_keyprovider_local", "category": "runtime"},
     {"module": "sqlalchemy", "package": "sqlalchemy", "category": "runtime"},
     {"module": "bcrypt", "package": "bcrypt", "category": "runtime"},
     {"module": "httpx", "package": "httpx", "category": "runtime"},

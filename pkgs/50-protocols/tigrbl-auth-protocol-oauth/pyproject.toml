@@ -37,7 +37,6 @@ classifiers = [
 dependencies = [
     "pydantic[email]==2.12.5",
     "tigrbl-auth-protocol-gnap==0.4.0.dev2",
-    "swarmauri_signing_dpop==0.1.1",
     "tigrbl-identity-contracts==0.4.0.dev2",
     "tigrbl-token-introspection-capability==0.4.0.dev2",
     "tigrbl-token-issuance-capability==0.4.0.dev2",

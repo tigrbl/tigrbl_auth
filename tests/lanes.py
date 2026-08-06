@@ -14,18 +14,7 @@ OPTIONAL_RUNTIME_MODULES = (
     "tigrbl",
     "sqlalchemy",
     "bcrypt",
-    "swarmauri_core",
-    "swarmauri_base",
-    "swarmauri_standard",
-    "swarmauri_signing_jws",
-    "swarmauri_tokens_jwt",
-    "swarmauri_signing_ed25519",
-    "swarmauri_signing_dpop",
     "pqcrypto",
-    "swarmauri_crypto_jwe",
-    "swarmauri_crypto_paramiko",
-    "swarmauri_keyprovider_file",
-    "swarmauri_keyprovider_local",
 )
 RUNTIME_STACK_SOURCE_PREFIXES = (
     "tigrbl_auth",

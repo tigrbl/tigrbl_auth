@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import inspect
 from typing import Any
 
 from pydantic import BaseModel
@@ -26,6 +27,14 @@ async def current_principal_dependency(
     dpop: str | None = None,
     db: Any = Depends(get_db),
 ) -> AccountPrincipal:
+    app_state = getattr(getattr(request, "app", None), "state", None)
+    provider = getattr(app_state, "tigrbl_auth_account_principal_provider", None)
+    if callable(provider):
+        provided = provider(request)
+        principal = await provided if inspect.isawaitable(provided) else provided
+        if not isinstance(principal, AccountPrincipal):
+            raise TypeError("account principal provider returned an invalid principal")
+        return principal
     headers = getattr(request, "headers", {})
     authorization = (
         authorization

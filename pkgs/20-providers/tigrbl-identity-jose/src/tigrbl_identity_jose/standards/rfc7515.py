@@ -1,8 +1,7 @@
 """RFC 7515 - JSON Web Signature (JWS) helpers.
 
-The canonical implementation prefers the Swarmauri signer, but it also exposes
-an internal dependency-light compact JWS fallback so helper tests and governance
-workflows can run without the full Tigrbl runtime stack.
+The canonical implementation is the dependency-light compact JWS runtime used
+by both deployed token paths and standalone conformance helpers.
 """
 
 from __future__ import annotations
@@ -15,7 +14,7 @@ from typing import Any, Final, Mapping
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey, Ed25519PublicKey
 from tigrbl_identity_core.base64url import base64url_decode, base64url_encode
-from tigrbl_jose_swarmauri_provider.pqc import (
+from ..pqc import (
     ML_DSA_65_ALG,
     PQC_JWK_KTY,
     PQC_SIGNATURE_ALGS,
@@ -27,17 +26,9 @@ from tigrbl_jose_swarmauri_provider.pqc import (
     verify_pqc_signature,
 )
 
-try:  # pragma: no cover - exercised when the full runtime stack is installed
-    from swarmauri_core.crypto.types import JWAAlg
-    from swarmauri_signing_jws import JwsSignerVerifier
-except Exception:  # pragma: no cover - dependency-light checkpoint fallback
-    JWAAlg = None
-    JwsSignerVerifier = None
-
 from ..configuration import settings
 
 RFC7515_SPEC_URL: Final = "https://www.rfc-editor.org/rfc/rfc7515"
-_signer = JwsSignerVerifier() if JwsSignerVerifier is not None else None
 
 
 def _oct_key_bytes(key: Mapping[str, Any]) -> bytes:
@@ -160,9 +151,6 @@ async def sign_jws(payload: str, key: Mapping[str, Any], alg: str | None = None)
     selected_alg = _fallback_algorithm_for_key(key, alg=alg)
     if selected_alg in PQC_SIGNATURE_ALGS:
         return _fallback_sign(payload, key, alg=selected_alg)
-    if _signer is not None and JWAAlg is not None:
-        alg = JWAAlg.HS256 if key.get("kty") == "oct" else JWAAlg.EDDSA
-        return await _signer.sign_compact(payload=payload, alg=alg, key=key)
     return _fallback_sign(payload, key, alg=selected_alg)
 
 
@@ -172,9 +160,6 @@ async def verify_jws(token: str, key: Mapping[str, Any]) -> str:
         raise RuntimeError(f"RFC 7515 support disabled: {RFC7515_SPEC_URL}")
     if _token_header_alg(token) in PQC_SIGNATURE_ALGS:
         return _fallback_verify(token, key)
-    if _signer is not None:
-        result = await _signer.verify_compact(token, jwks_resolver=lambda _k, _a: key)
-        return result.payload.decode()
     return _fallback_verify(token, key)
 
 

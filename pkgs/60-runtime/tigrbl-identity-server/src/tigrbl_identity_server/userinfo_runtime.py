@@ -16,7 +16,7 @@ from tigrbl_identity_jose.jwt_coder import JWTCoder, InvalidTokenError
 from tigrbl_identity_jose.jwt_runtime import _svc, _svc_async
 from tigrbl_identity_storage.tables import User
 from tigrbl_auth_protocol_oauth.standards.bearer_token_usage import extract_bearer_token
-from swarmauri_core.crypto.types import JWAAlg
+from tigrbl_identity_jose.framework import JWAAlg
 from tigrbl_identity_runtime.deployment import deployment_from_request
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_storage_runtime.revocation import is_revoked_async

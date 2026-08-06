@@ -1,4 +1,4 @@
-"""Swarmauri-backed JOSE provider."""
+"""Deprecated import compatibility for the former Swarmauri JOSE provider."""
 
 from .jwks_publication import build_combined_jwks_document
 from .key_management import *

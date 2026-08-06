@@ -1,6 +1,6 @@
 """Compatibility export for OIDC ID Token protocol helpers."""
 
-from tigrbl_jose_swarmauri_provider.oidc_key_runtime import (
+from tigrbl_identity_jose.oidc_key_runtime import (
     _RSA_KEY_PATH,  # noqa: F401 - private compatibility patch point
     rsa_key_provider as _provider,  # noqa: F401 - private compatibility cache patch point
 )

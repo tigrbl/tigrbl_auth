@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from swarmauri_core.key_providers import KeyAlg
-from swarmauri_tokens_jwt import JWTTokenService
+from tigrbl_identity_jose.framework import KeyAlg, JWTTokenService
 
 
 def test_provider_packages_expose_tokens_and_key_types() -> None:

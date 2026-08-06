@@ -393,8 +393,6 @@ def test_tigrbl_auth_facade_declares_canonical_runtime_dependencies() -> None:
             "tigrbl-identity-server==0.4.0.dev2",
             "tigrbl-identity-storage==0.4.0.dev2",
             "tigrbl-identity-storage-runtime==0.4.0.dev2",
-            "swarmauri_standard==0.10.0",
-            "swarmauri_crypto_paramiko==0.4.0.dev5",
         }
     )
 

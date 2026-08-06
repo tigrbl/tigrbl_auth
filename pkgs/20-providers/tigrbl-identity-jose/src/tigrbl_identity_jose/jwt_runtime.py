@@ -19,15 +19,11 @@ _REFRESH_TTL = DEFAULT_REFRESH_TOKEN_TTL
 
 
 def _load_runtime() -> dict[str, Any]:
-    try:
-        from swarmauri_core.crypto.types import ExportPolicy, JWAAlg, KeyUse
-        from swarmauri_core.key_providers.types import KeyAlg, KeyClass, KeySpec
-        from swarmauri_keyprovider_file import FileKeyProvider
-        from swarmauri_keyprovider_local import LocalKeyProvider
-        from swarmauri_tokens_jwt import JWTTokenService
-        from .configuration import settings
-    except Exception as exc:  # pragma: no cover
-        raise RuntimeError("runtime token-service dependencies are unavailable") from exc
+    from .framework import (
+        ExportPolicy, FileKeyProvider, JWAAlg, JWTTokenService, KeyAlg,
+        KeyClass, KeySpec, KeyUse, LocalKeyProvider,
+    )
+    from .configuration import settings
     return {
         "ExportPolicy": ExportPolicy,
         "FileKeyProvider": FileKeyProvider,

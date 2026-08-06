@@ -42,17 +42,11 @@ except (
     load_pem_private_key = None  # type: ignore[assignment]
     load_pem_public_key = None  # type: ignore[assignment]
 
-try:  # pragma: no cover - exercised in real runtime installs
-    from swarmauri_signing_dpop import DpopSigner
-except Exception:  # pragma: no cover - dependency-light checkpoint fallback
-    DpopSigner = None  # type: ignore[assignment]
-
-
 RFC9449_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc9449"
 _ALG_VALUE: Final[str] = "EdDSA"
 _TYP_VALUE: Final[str] = "dpop+jwt"
 _ALLOWED_SKEW: Final[int] = 300
-_SIGNER = DpopSigner() if DpopSigner is not None else None
+_SIGNER = None  # The cryptography-backed implementation in proofs.py is canonical.
 
 
 OWNER = StandardOwner(
