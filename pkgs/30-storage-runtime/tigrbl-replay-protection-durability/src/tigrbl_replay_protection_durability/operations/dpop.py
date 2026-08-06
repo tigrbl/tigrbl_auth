@@ -8,8 +8,8 @@ from datetime import timezone
 from typing import Any
 
 from tigrbl_identity_storage.tables import DpopNonce, DpopReplay
-from tigrbl_identity_storage.tables.dpop_nonce import nonce_hash, nonce_payload
-from tigrbl_identity_storage.tables.dpop_replay import replay_payload
+from tigrbl_identity_storage_replay_protection.tables.dpop_nonce import nonce_hash, nonce_payload
+from tigrbl_identity_storage_replay_protection.tables.dpop_replay import replay_payload
 from tigrbl_security_trust_contracts import DPoPNonceRecord, DPoPProofClaims
 
 from tigrbl import (
