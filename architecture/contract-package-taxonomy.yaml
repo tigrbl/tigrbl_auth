@@ -13,6 +13,11 @@ families:
     token: tigrbl-token-contracts
   identity_security:
     identity: tigrbl-identity-contracts
+    administration: tigrbl-administration-contracts
+    authorization: tigrbl-authorization-contracts
+    audit: tigrbl-audit-contracts
+    delegation: tigrbl-delegation-contracts
+    governance: tigrbl-governance-contracts
     identity_assurance: tigrbl-identity-assurance-contracts
     did: tigrbl-did-contracts
     workload_identity: tigrbl-workload-identity-contracts
@@ -20,22 +25,14 @@ families:
     digital_credential: tigrbl-digital-credential-contracts
     attestation: tigrbl-attestation-contracts
     security_event: tigrbl-security-event-contracts
-  release:
-    release_assurance: tigrbl-release-contracts
-  pending_extraction:
-    authorization: tigrbl-authorization-contracts
-    delegation: tigrbl-delegation-contracts
-    administration: tigrbl-administration-contracts
-    audit: tigrbl-audit-contracts
-    governance: tigrbl-governance-contracts
+  artifact_and_trust:
     key: tigrbl-key-contracts
     certificate: tigrbl-certificate-contracts
     trust: tigrbl-trust-contracts
     protected_artifact: tigrbl-protected-artifact-contracts
+  release:
+    release_assurance: tigrbl-release-contracts
 compatibility_aggregates:
-  tigrbl-identity-contracts:
-    status: transitional
-    removal_condition: all-consumers-import-canonical-family-packages
   tigrbl-security-trust-contracts:
     status: transitional
     removal_condition: key-certificate-trust-and-artifact-families-extracted

@@ -46,3 +46,17 @@ from .residency import *
 from .topology import *
 
 __all__ = [name for name in globals() if not name.startswith("_")]
+
+# Transitional migration compatibility shims.
+# These legacy package-level imports are kept as a narrow deprecation bridge
+# while downstream consumers migrate to canonical contract package names.
+try:  # pragma: no cover - exercised via consumer migration checks
+    from tigrbl_administration_contracts import *  # noqa: F401,F403
+    from tigrbl_authorization_contracts import *  # noqa: F401,F403
+    from tigrbl_audit_contracts import *  # noqa: F401,F403
+    from tigrbl_delegation_contracts import *  # noqa: F401,F403
+    from tigrbl_governance_contracts import *  # noqa: F401,F403
+except ModuleNotFoundError:
+    # Canonical contracts are optional during rollout; keep the legacy package
+    # importable even when only the legacy monolith is installed.
+    pass

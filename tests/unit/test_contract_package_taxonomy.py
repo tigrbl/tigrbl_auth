@@ -10,6 +10,13 @@ import yaml
 ROOT = Path(__file__).resolve().parents[2]
 TAXONOMY = ROOT / "architecture" / "contract-package-taxonomy.yaml"
 CONTRACTS = ROOT / "pkgs" / "02-contracts"
+CANONICAL_MIGRATED_PACKAGES = (
+    "tigrbl-administration-contracts",
+    "tigrbl-authorization-contracts",
+    "tigrbl-audit-contracts",
+    "tigrbl-delegation-contracts",
+    "tigrbl-governance-contracts",
+)
 
 
 def test_active_contract_taxonomy_names_live_packages() -> None:
@@ -61,6 +68,31 @@ def test_compatibility_facades_preserve_canonical_object_identity() -> None:
             "tigrbl_identity_contracts.attestation",
             "AttestationEvidence",
         ),
+        (
+            "tigrbl_administration_contracts",
+            "tigrbl_identity_contracts",
+            "PlatformAdministrator",
+        ),
+        (
+            "tigrbl_authorization_contracts",
+            "tigrbl_identity_contracts",
+            "ScopeMatchRequest",
+        ),
+        (
+            "tigrbl_audit_contracts",
+            "tigrbl_identity_contracts",
+            "AdminAuditEvent",
+        ),
+        (
+            "tigrbl_delegation_contracts",
+            "tigrbl_identity_contracts",
+            "DelegatedAdminScope",
+        ),
+        (
+            "tigrbl_governance_contracts",
+            "tigrbl_identity_contracts",
+            "AccessReviewItem",
+        ),
     )
     for canonical_module, compatibility_module, name in pairs:
         canonical = getattr(import_module(canonical_module), name)
@@ -99,7 +131,23 @@ def test_canonical_contract_packages_do_not_import_compatibility_aggregate() -> 
         "tigrbl-replay-contracts",
         "tigrbl-security-event-contracts",
         "tigrbl-workload-identity-contracts",
+        *CANONICAL_MIGRATED_PACKAGES,
     )
     for package in packages:
         for path in (CONTRACTS / package / "src").rglob("*.py"):
             assert "tigrbl_identity_contracts" not in path.read_text(encoding="utf-8"), path
+
+
+def test_identity_contract_shims_export_canonical_objects_for_migrated_families() -> None:
+    identity_contracts = import_module("tigrbl_identity_contracts")
+    canonical_exports = (
+        ("tigrbl_administration_contracts", "PlatformAdministrator"),
+        ("tigrbl_authorization_contracts", "ScopeMatchRequest"),
+        ("tigrbl_audit_contracts", "AdminAuditEvent"),
+        ("tigrbl_delegation_contracts", "DelegatedAdminScope"),
+        ("tigrbl_governance_contracts", "AccessReviewItem"),
+    )
+    for canonical_package, symbol in canonical_exports:
+        canonical = getattr(import_module(canonical_package), symbol)
+        compatibility = getattr(identity_contracts, symbol)
+        assert compatibility is canonical, (canonical_package, symbol)
