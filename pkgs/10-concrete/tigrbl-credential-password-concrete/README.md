@@ -1,4 +1,4 @@
-# tigrbl-password-credential-concrete
+# tigrbl-credential-password-concrete
 
 Owns deterministic concrete value semantics.
 

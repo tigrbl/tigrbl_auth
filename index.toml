@@ -715,14 +715,6 @@ local_dependencies = ["tigrbl-authentication-context-bases", "tigrbl-security-tr
 same_layer_dependencies = []
 
 [[packages]]
-name = "tigrbl-api-key-credential-concrete"
-path = "pkgs/10-concrete/tigrbl-credential-api-key-concrete"
-layer = "10-concrete"
-order = "00"
-local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
-same_layer_dependencies = []
-
-[[packages]]
 name = "tigrbl-authority-graph-concrete"
 path = "pkgs/10-concrete/tigrbl-authority-graph-concrete"
 layer = "10-concrete"
@@ -1363,14 +1355,6 @@ local_dependencies = ["tigrbl-identity-bases", "tigrbl-identity-contracts"]
 same_layer_dependencies = []
 
 [[packages]]
-name = "tigrbl-client-secret-credential-concrete"
-path = "pkgs/10-concrete/tigrbl-credential-client-secret-concrete"
-layer = "10-concrete"
-order = "00"
-local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
-same_layer_dependencies = []
-
-[[packages]]
 name = "tigrbl-corim-concrete"
 path = "pkgs/10-concrete/tigrbl-corim-concrete"
 layer = "10-concrete"
@@ -1384,6 +1368,78 @@ path = "pkgs/10-concrete/tigrbl-cose-concrete"
 layer = "10-concrete"
 order = "00"
 local_dependencies = []
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-credential-api-key-concrete"
+path = "pkgs/10-concrete/tigrbl-credential-api-key-concrete"
+layer = "10-concrete"
+order = "00"
+local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-credential-client-secret-concrete"
+path = "pkgs/10-concrete/tigrbl-credential-client-secret-concrete"
+layer = "10-concrete"
+order = "00"
+local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-credential-dpop-key-concrete"
+path = "pkgs/10-concrete/tigrbl-credential-dpop-key-concrete"
+layer = "10-concrete"
+order = "00"
+local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-credential-mfa-concrete"
+path = "pkgs/10-concrete/tigrbl-credential-mfa-concrete"
+layer = "10-concrete"
+order = "00"
+local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-credential-mtls-certificate-concrete"
+path = "pkgs/10-concrete/tigrbl-credential-mtls-certificate-concrete"
+layer = "10-concrete"
+order = "00"
+local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-credential-passkey-concrete"
+path = "pkgs/10-concrete/tigrbl-credential-passkey-concrete"
+layer = "10-concrete"
+order = "00"
+local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-credential-password-concrete"
+path = "pkgs/10-concrete/tigrbl-credential-password-concrete"
+layer = "10-concrete"
+order = "00"
+local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-credential-password-reset-concrete"
+path = "pkgs/10-concrete/tigrbl-credential-password-reset-concrete"
+layer = "10-concrete"
+order = "00"
+local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-credential-service-key-concrete"
+path = "pkgs/10-concrete/tigrbl-credential-service-key-concrete"
+layer = "10-concrete"
+order = "00"
+local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -1424,14 +1480,6 @@ path = "pkgs/10-concrete/tigrbl-dpop-confirmation-binding-concrete"
 layer = "10-concrete"
 order = "00"
 local_dependencies = ["tigrbl-identity-contracts", "tigrbl-proof-of-possession-bases", "tigrbl-security-trust-contracts"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tigrbl-dpop-key-credential-concrete"
-path = "pkgs/10-concrete/tigrbl-credential-dpop-key-concrete"
-layer = "10-concrete"
-order = "00"
-local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -1491,24 +1539,8 @@ local_dependencies = ["tigrbl-digital-credential-bases"]
 same_layer_dependencies = []
 
 [[packages]]
-name = "tigrbl-mfa-credential-concrete"
-path = "pkgs/10-concrete/tigrbl-credential-mfa-concrete"
-layer = "10-concrete"
-order = "00"
-local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
-same_layer_dependencies = []
-
-[[packages]]
 name = "tigrbl-mfa-factor-concrete"
 path = "pkgs/10-concrete/tigrbl-mfa-factor-concrete"
-layer = "10-concrete"
-order = "00"
-local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tigrbl-mtls-certificate-credential-concrete"
-path = "pkgs/10-concrete/tigrbl-credential-mtls-certificate-concrete"
 layer = "10-concrete"
 order = "00"
 local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
@@ -1528,30 +1560,6 @@ path = "pkgs/10-concrete/tigrbl-pairwise-subject-identifier-concrete"
 layer = "10-concrete"
 order = "00"
 local_dependencies = ["tigrbl-identity-bases", "tigrbl-identity-contracts"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tigrbl-passkey-credential-concrete"
-path = "pkgs/10-concrete/tigrbl-credential-passkey-concrete"
-layer = "10-concrete"
-order = "00"
-local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tigrbl-password-credential-concrete"
-path = "pkgs/10-concrete/tigrbl-credential-password-concrete"
-layer = "10-concrete"
-order = "00"
-local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tigrbl-password-reset-credential-concrete"
-path = "pkgs/10-concrete/tigrbl-credential-password-reset-concrete"
-layer = "10-concrete"
-order = "00"
-local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -1592,14 +1600,6 @@ path = "pkgs/10-concrete/tigrbl-service-identity-concrete"
 layer = "10-concrete"
 order = "00"
 local_dependencies = ["tigrbl-identity-bases", "tigrbl-identity-contracts"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tigrbl-service-key-credential-concrete"
-path = "pkgs/10-concrete/tigrbl-credential-service-key-concrete"
-layer = "10-concrete"
-order = "00"
-local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -3239,7 +3239,7 @@ name = "tigrbl-credentials"
 path = "pkgs/70-facade/tigrbl-credentials"
 layer = "70-facade"
 order = "00"
-local_dependencies = ["tigrbl-api-key-credential-concrete", "tigrbl-client-secret-credential-concrete", "tigrbl-digital-credential-contracts", "tigrbl-dpop-key-credential-concrete", "tigrbl-identity-contracts", "tigrbl-identity-jose", "tigrbl-mfa-credential-concrete", "tigrbl-mtls-certificate-credential-concrete", "tigrbl-passkey-credential-concrete", "tigrbl-password-credential-concrete", "tigrbl-password-reset-credential-concrete", "tigrbl-secret-hashing-bcrypt-provider", "tigrbl-service-key-credential-concrete", "tigrbl-workload-identity-contracts"]
+local_dependencies = ["tigrbl-credential-api-key-concrete", "tigrbl-credential-client-secret-concrete", "tigrbl-credential-dpop-key-concrete", "tigrbl-credential-mfa-concrete", "tigrbl-credential-mtls-certificate-concrete", "tigrbl-credential-passkey-concrete", "tigrbl-credential-password-concrete", "tigrbl-credential-password-reset-concrete", "tigrbl-credential-service-key-concrete", "tigrbl-digital-credential-contracts", "tigrbl-identity-contracts", "tigrbl-identity-jose", "tigrbl-secret-hashing-bcrypt-provider", "tigrbl-workload-identity-contracts"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -3615,7 +3615,7 @@ name = "tigrbl-identity-credentials-concrete"
 path = "pkgs/deprecated/tigrbl-identity-credentials-concrete"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tigrbl-api-key-credential-concrete", "tigrbl-authentication-credential-bases", "tigrbl-client-secret-credential-concrete", "tigrbl-corim-concrete", "tigrbl-credential-profile-sd-jwt-vc", "tigrbl-credential-protocol-iso-mdoc", "tigrbl-credential-protocol-w3c-vcdm", "tigrbl-dpop-key-credential-concrete", "tigrbl-eat-concrete", "tigrbl-identity-contracts", "tigrbl-mdoc-credential-concrete", "tigrbl-mfa-credential-concrete", "tigrbl-mfa-factor-concrete", "tigrbl-mtls-certificate-credential-concrete", "tigrbl-passkey-credential-concrete", "tigrbl-password-credential-concrete", "tigrbl-password-reset-credential-concrete", "tigrbl-passwordless-credential-concrete", "tigrbl-sd-jwt-vc-credential-concrete", "tigrbl-service-credential-concrete", "tigrbl-service-key-credential-concrete", "tigrbl-webauthn-credential-concrete"]
+local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-corim-concrete", "tigrbl-credential-api-key-concrete", "tigrbl-credential-client-secret-concrete", "tigrbl-credential-dpop-key-concrete", "tigrbl-credential-mfa-concrete", "tigrbl-credential-mtls-certificate-concrete", "tigrbl-credential-passkey-concrete", "tigrbl-credential-password-concrete", "tigrbl-credential-password-reset-concrete", "tigrbl-credential-profile-sd-jwt-vc", "tigrbl-credential-protocol-iso-mdoc", "tigrbl-credential-protocol-w3c-vcdm", "tigrbl-credential-service-key-concrete", "tigrbl-eat-concrete", "tigrbl-identity-contracts", "tigrbl-mdoc-credential-concrete", "tigrbl-mfa-factor-concrete", "tigrbl-passwordless-credential-concrete", "tigrbl-sd-jwt-vc-credential-concrete", "tigrbl-service-credential-concrete", "tigrbl-webauthn-credential-concrete"]
 same_layer_dependencies = []
 
 [[packages]]

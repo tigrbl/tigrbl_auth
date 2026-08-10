@@ -1,4 +1,4 @@
-# tigrbl-api-key-credential-concrete
+# tigrbl-credential-api-key-concrete
 
 Owns deterministic concrete value semantics.
 

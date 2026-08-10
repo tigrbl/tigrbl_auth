@@ -1,4 +1,4 @@
-# tigrbl-mfa-credential-concrete
+# tigrbl-credential-mfa-concrete
 
 Owns deterministic concrete value semantics.
 

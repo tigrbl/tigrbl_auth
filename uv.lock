@@ -1866,21 +1866,6 @@ requires-dist = [
 ]
 
 [[package]]
-name = "tigrbl-api-key-credential-concrete"
-version = "0.4.0.dev2"
-source = { editable = "pkgs/10-concrete/tigrbl-credential-api-key-concrete" }
-dependencies = [
-    { name = "tigrbl-authentication-credential-bases" },
-    { name = "tigrbl-identity-contracts" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "tigrbl-authentication-credential-bases", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
-]
-
-[[package]]
 name = "tigrbl-artifact-processing-capability"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/40-capabilities/tigrbl-artifact-processing-capability" }
@@ -3189,7 +3174,6 @@ dependencies = [
     { name = "tigrbl-advanced-authentication-capability" },
     { name = "tigrbl-amr-evaluator-basic-concrete" },
     { name = "tigrbl-api-key-authentication-capability" },
-    { name = "tigrbl-api-key-credential-concrete" },
     { name = "tigrbl-artifact-processing-capability" },
     { name = "tigrbl-atoms" },
     { name = "tigrbl-attestation-appraisal" },
@@ -3371,7 +3355,6 @@ dependencies = [
     { name = "tigrbl-client-identity-concrete" },
     { name = "tigrbl-client-registration-capability" },
     { name = "tigrbl-client-secret-authentication-capability" },
-    { name = "tigrbl-client-secret-credential-concrete" },
     { name = "tigrbl-concrete" },
     { name = "tigrbl-consent-durability" },
     { name = "tigrbl-core" },
@@ -3381,10 +3364,19 @@ dependencies = [
     { name = "tigrbl-cose-bases" },
     { name = "tigrbl-cose-concrete" },
     { name = "tigrbl-cose-cryptography-provider" },
+    { name = "tigrbl-credential-api-key-concrete" },
+    { name = "tigrbl-credential-client-secret-concrete" },
+    { name = "tigrbl-credential-dpop-key-concrete" },
+    { name = "tigrbl-credential-mfa-concrete" },
+    { name = "tigrbl-credential-mtls-certificate-concrete" },
+    { name = "tigrbl-credential-passkey-concrete" },
+    { name = "tigrbl-credential-password-concrete" },
+    { name = "tigrbl-credential-password-reset-concrete" },
     { name = "tigrbl-credential-profile-sd-jwt-vc" },
     { name = "tigrbl-credential-profile-vc-jose-cose" },
     { name = "tigrbl-credential-protocol-iso-mdoc" },
     { name = "tigrbl-credential-protocol-w3c-vcdm" },
+    { name = "tigrbl-credential-service-key-concrete" },
     { name = "tigrbl-credentials" },
     { name = "tigrbl-cwt-concrete" },
     { name = "tigrbl-cwt-svid-extension-credential-concrete" },
@@ -3410,7 +3402,6 @@ dependencies = [
     { name = "tigrbl-digital-credential-trust-provider" },
     { name = "tigrbl-digital-presentation-verifier" },
     { name = "tigrbl-dpop-confirmation-binding-concrete" },
-    { name = "tigrbl-dpop-key-credential-concrete" },
     { name = "tigrbl-eat-concrete" },
     { name = "tigrbl-eat-evidence-concrete" },
     { name = "tigrbl-eat-verifier-provider" },
@@ -3507,10 +3498,8 @@ dependencies = [
     { name = "tigrbl-mdoc-issuer-provider" },
     { name = "tigrbl-mdoc-verifier-provider" },
     { name = "tigrbl-mfa-challenge-capability" },
-    { name = "tigrbl-mfa-credential-concrete" },
     { name = "tigrbl-mfa-factor-concrete" },
     { name = "tigrbl-migrations" },
-    { name = "tigrbl-mtls-certificate-credential-concrete" },
     { name = "tigrbl-mtls-confirmation-binding-concrete" },
     { name = "tigrbl-oauth-profile-jwt-access-token" },
     { name = "tigrbl-oauth-state-durability" },
@@ -3522,10 +3511,7 @@ dependencies = [
     { name = "tigrbl-ops-realtime" },
     { name = "tigrbl-orm" },
     { name = "tigrbl-pairwise-subject-identifier-concrete" },
-    { name = "tigrbl-passkey-credential-concrete" },
     { name = "tigrbl-password-authentication-capability" },
-    { name = "tigrbl-password-credential-concrete" },
-    { name = "tigrbl-password-reset-credential-concrete" },
     { name = "tigrbl-passwordless-credential-concrete" },
     { name = "tigrbl-pkce-concrete" },
     { name = "tigrbl-platform-attestation-provider" },
@@ -3602,7 +3588,6 @@ dependencies = [
     { name = "tigrbl-service-credential-concrete" },
     { name = "tigrbl-service-identity-concrete" },
     { name = "tigrbl-service-key-authentication-capability" },
-    { name = "tigrbl-service-key-credential-concrete" },
     { name = "tigrbl-session-durability" },
     { name = "tigrbl-set-concrete" },
     { name = "tigrbl-set-receiver-provider" },
@@ -3742,7 +3727,6 @@ requires-dist = [
     { name = "tigrbl-advanced-authentication-capability", editable = "pkgs/deprecated/tigrbl-advanced-authentication-capability" },
     { name = "tigrbl-amr-evaluator-basic-concrete", editable = "pkgs/10-concrete/tigrbl-amr-evaluator-basic-concrete" },
     { name = "tigrbl-api-key-authentication-capability", editable = "pkgs/40-capabilities/tigrbl-api-key-authentication-capability" },
-    { name = "tigrbl-api-key-credential-concrete", editable = "pkgs/10-concrete/tigrbl-credential-api-key-concrete" },
     { name = "tigrbl-artifact-processing-capability", editable = "pkgs/40-capabilities/tigrbl-artifact-processing-capability" },
     { name = "tigrbl-atoms", specifier = "==0.4.5.dev4" },
     { name = "tigrbl-attestation-appraisal", editable = "pkgs/deprecated/tigrbl-attestation-appraisal" },
@@ -3924,7 +3908,6 @@ requires-dist = [
     { name = "tigrbl-client-identity-concrete", editable = "pkgs/10-concrete/tigrbl-client-identity-concrete" },
     { name = "tigrbl-client-registration-capability", editable = "pkgs/40-capabilities/tigrbl-client-registration-capability" },
     { name = "tigrbl-client-secret-authentication-capability", editable = "pkgs/40-capabilities/tigrbl-client-secret-authentication-capability" },
-    { name = "tigrbl-client-secret-credential-concrete", editable = "pkgs/10-concrete/tigrbl-credential-client-secret-concrete" },
     { name = "tigrbl-concrete", specifier = "==0.4.5.dev4" },
     { name = "tigrbl-consent-durability", editable = "pkgs/30-storage-runtime/tigrbl-consent-durability" },
     { name = "tigrbl-core", specifier = "==0.4.5.dev4" },
@@ -3934,10 +3917,19 @@ requires-dist = [
     { name = "tigrbl-cose-bases", editable = "pkgs/05-bases/tigrbl-cose-bases" },
     { name = "tigrbl-cose-concrete", editable = "pkgs/10-concrete/tigrbl-cose-concrete" },
     { name = "tigrbl-cose-cryptography-provider", editable = "pkgs/20-providers/tigrbl-cose-cryptography-provider" },
+    { name = "tigrbl-credential-api-key-concrete", editable = "pkgs/10-concrete/tigrbl-credential-api-key-concrete" },
+    { name = "tigrbl-credential-client-secret-concrete", editable = "pkgs/10-concrete/tigrbl-credential-client-secret-concrete" },
+    { name = "tigrbl-credential-dpop-key-concrete", editable = "pkgs/10-concrete/tigrbl-credential-dpop-key-concrete" },
+    { name = "tigrbl-credential-mfa-concrete", editable = "pkgs/10-concrete/tigrbl-credential-mfa-concrete" },
+    { name = "tigrbl-credential-mtls-certificate-concrete", editable = "pkgs/10-concrete/tigrbl-credential-mtls-certificate-concrete" },
+    { name = "tigrbl-credential-passkey-concrete", editable = "pkgs/10-concrete/tigrbl-credential-passkey-concrete" },
+    { name = "tigrbl-credential-password-concrete", editable = "pkgs/10-concrete/tigrbl-credential-password-concrete" },
+    { name = "tigrbl-credential-password-reset-concrete", editable = "pkgs/10-concrete/tigrbl-credential-password-reset-concrete" },
     { name = "tigrbl-credential-profile-sd-jwt-vc", editable = "pkgs/50-protocols/tigrbl-credential-profile-sd-jwt-vc" },
     { name = "tigrbl-credential-profile-vc-jose-cose", editable = "pkgs/50-protocols/tigrbl-credential-profile-vc-jose-cose" },
     { name = "tigrbl-credential-protocol-iso-mdoc", editable = "pkgs/50-protocols/tigrbl-credential-protocol-iso-mdoc" },
     { name = "tigrbl-credential-protocol-w3c-vcdm", editable = "pkgs/50-protocols/tigrbl-credential-protocol-w3c-vcdm" },
+    { name = "tigrbl-credential-service-key-concrete", editable = "pkgs/10-concrete/tigrbl-credential-service-key-concrete" },
     { name = "tigrbl-credentials", editable = "pkgs/70-facade/tigrbl-credentials" },
     { name = "tigrbl-cwt-concrete", editable = "pkgs/10-concrete/tigrbl-cwt-concrete" },
     { name = "tigrbl-cwt-svid-extension-credential-concrete", editable = "pkgs/10-concrete/tigrbl-cwt-svid-extension-credential-concrete" },
@@ -3963,7 +3955,6 @@ requires-dist = [
     { name = "tigrbl-digital-credential-trust-provider", editable = "pkgs/20-providers/tigrbl-digital-credential-trust-provider" },
     { name = "tigrbl-digital-presentation-verifier", editable = "pkgs/deprecated/tigrbl-digital-presentation-verifier" },
     { name = "tigrbl-dpop-confirmation-binding-concrete", editable = "pkgs/10-concrete/tigrbl-dpop-confirmation-binding-concrete" },
-    { name = "tigrbl-dpop-key-credential-concrete", editable = "pkgs/10-concrete/tigrbl-credential-dpop-key-concrete" },
     { name = "tigrbl-eat-concrete", editable = "pkgs/10-concrete/tigrbl-eat-concrete" },
     { name = "tigrbl-eat-evidence-concrete", editable = "pkgs/10-concrete/tigrbl-eat-evidence-concrete" },
     { name = "tigrbl-eat-verifier-provider", editable = "pkgs/20-providers/tigrbl-eat-verifier-provider" },
@@ -4064,10 +4055,8 @@ requires-dist = [
     { name = "tigrbl-mdoc-issuer-provider", editable = "pkgs/20-providers/tigrbl-mdoc-issuer-provider" },
     { name = "tigrbl-mdoc-verifier-provider", editable = "pkgs/20-providers/tigrbl-mdoc-verifier-provider" },
     { name = "tigrbl-mfa-challenge-capability", editable = "pkgs/40-capabilities/tigrbl-mfa-challenge-capability" },
-    { name = "tigrbl-mfa-credential-concrete", editable = "pkgs/10-concrete/tigrbl-credential-mfa-concrete" },
     { name = "tigrbl-mfa-factor-concrete", editable = "pkgs/10-concrete/tigrbl-mfa-factor-concrete" },
     { name = "tigrbl-migrations", editable = "../tigrbl/pkgs/10_core/tigrbl_migrations" },
-    { name = "tigrbl-mtls-certificate-credential-concrete", editable = "pkgs/10-concrete/tigrbl-credential-mtls-certificate-concrete" },
     { name = "tigrbl-mtls-confirmation-binding-concrete", editable = "pkgs/10-concrete/tigrbl-mtls-confirmation-binding-concrete" },
     { name = "tigrbl-oauth-profile-jwt-access-token", editable = "pkgs/50-protocols/tigrbl-oauth-profile-jwt-access-token" },
     { name = "tigrbl-oauth-state-durability", editable = "pkgs/30-storage-runtime/tigrbl-oauth-state-durability" },
@@ -4079,10 +4068,7 @@ requires-dist = [
     { name = "tigrbl-ops-realtime", specifier = "==0.4.5.dev4" },
     { name = "tigrbl-orm", specifier = "==0.4.5.dev4" },
     { name = "tigrbl-pairwise-subject-identifier-concrete", editable = "pkgs/10-concrete/tigrbl-pairwise-subject-identifier-concrete" },
-    { name = "tigrbl-passkey-credential-concrete", editable = "pkgs/10-concrete/tigrbl-credential-passkey-concrete" },
     { name = "tigrbl-password-authentication-capability", editable = "pkgs/40-capabilities/tigrbl-password-authentication-capability" },
-    { name = "tigrbl-password-credential-concrete", editable = "pkgs/10-concrete/tigrbl-credential-password-concrete" },
-    { name = "tigrbl-password-reset-credential-concrete", editable = "pkgs/10-concrete/tigrbl-credential-password-reset-concrete" },
     { name = "tigrbl-passwordless-credential-concrete", editable = "pkgs/10-concrete/tigrbl-passwordless-credential-concrete" },
     { name = "tigrbl-pkce-concrete", editable = "pkgs/10-concrete/tigrbl-pkce-concrete" },
     { name = "tigrbl-platform-attestation-provider", editable = "pkgs/20-providers/tigrbl-platform-attestation-provider" },
@@ -4159,7 +4145,6 @@ requires-dist = [
     { name = "tigrbl-service-credential-concrete", editable = "pkgs/10-concrete/tigrbl-service-credential-concrete" },
     { name = "tigrbl-service-identity-concrete", editable = "pkgs/10-concrete/tigrbl-service-identity-concrete" },
     { name = "tigrbl-service-key-authentication-capability", editable = "pkgs/40-capabilities/tigrbl-service-key-authentication-capability" },
-    { name = "tigrbl-service-key-credential-concrete", editable = "pkgs/10-concrete/tigrbl-credential-service-key-concrete" },
     { name = "tigrbl-session-durability", editable = "pkgs/30-storage-runtime/tigrbl-session-durability" },
     { name = "tigrbl-set-concrete", editable = "pkgs/10-concrete/tigrbl-set-concrete" },
     { name = "tigrbl-set-receiver-provider", editable = "pkgs/20-providers/tigrbl-set-receiver-provider" },
@@ -6062,21 +6047,6 @@ requires-dist = [
 ]
 
 [[package]]
-name = "tigrbl-client-secret-credential-concrete"
-version = "0.4.0.dev2"
-source = { editable = "pkgs/10-concrete/tigrbl-credential-client-secret-concrete" }
-dependencies = [
-    { name = "tigrbl-authentication-credential-bases" },
-    { name = "tigrbl-identity-contracts" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "tigrbl-authentication-credential-bases", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
-]
-
-[[package]]
 name = "tigrbl-concrete"
 version = "0.4.5.dev4"
 source = { registry = "https://pypi.org/simple" }
@@ -6223,6 +6193,126 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-credential-api-key-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-credential-api-key-concrete" }
+dependencies = [
+    { name = "tigrbl-authentication-credential-bases" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-authentication-credential-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-credential-client-secret-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-credential-client-secret-concrete" }
+dependencies = [
+    { name = "tigrbl-authentication-credential-bases" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-authentication-credential-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-credential-dpop-key-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-credential-dpop-key-concrete" }
+dependencies = [
+    { name = "tigrbl-authentication-credential-bases" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-authentication-credential-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-credential-mfa-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-credential-mfa-concrete" }
+dependencies = [
+    { name = "tigrbl-authentication-credential-bases" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-authentication-credential-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-credential-mtls-certificate-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-credential-mtls-certificate-concrete" }
+dependencies = [
+    { name = "tigrbl-authentication-credential-bases" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-authentication-credential-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-credential-passkey-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-credential-passkey-concrete" }
+dependencies = [
+    { name = "tigrbl-authentication-credential-bases" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-authentication-credential-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-credential-password-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-credential-password-concrete" }
+dependencies = [
+    { name = "tigrbl-authentication-credential-bases" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-authentication-credential-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-credential-password-reset-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-credential-password-reset-concrete" }
+dependencies = [
+    { name = "tigrbl-authentication-credential-bases" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-authentication-credential-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-credential-profile-sd-jwt-vc"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-credential-profile-sd-jwt-vc" }
@@ -6307,41 +6397,56 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-credential-service-key-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-credential-service-key-concrete" }
+dependencies = [
+    { name = "tigrbl-authentication-credential-bases" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-authentication-credential-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-credentials"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/70-facade/tigrbl-credentials" }
 dependencies = [
-    { name = "tigrbl-api-key-credential-concrete" },
-    { name = "tigrbl-client-secret-credential-concrete" },
+    { name = "tigrbl-credential-api-key-concrete" },
+    { name = "tigrbl-credential-client-secret-concrete" },
+    { name = "tigrbl-credential-dpop-key-concrete" },
+    { name = "tigrbl-credential-mfa-concrete" },
+    { name = "tigrbl-credential-mtls-certificate-concrete" },
+    { name = "tigrbl-credential-passkey-concrete" },
+    { name = "tigrbl-credential-password-concrete" },
+    { name = "tigrbl-credential-password-reset-concrete" },
+    { name = "tigrbl-credential-service-key-concrete" },
     { name = "tigrbl-digital-credential-contracts" },
-    { name = "tigrbl-dpop-key-credential-concrete" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-jose" },
-    { name = "tigrbl-mfa-credential-concrete" },
-    { name = "tigrbl-mtls-certificate-credential-concrete" },
-    { name = "tigrbl-passkey-credential-concrete" },
-    { name = "tigrbl-password-credential-concrete" },
-    { name = "tigrbl-password-reset-credential-concrete" },
     { name = "tigrbl-secret-hashing-bcrypt-provider" },
-    { name = "tigrbl-service-key-credential-concrete" },
     { name = "tigrbl-workload-identity-contracts" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "tigrbl-api-key-credential-concrete", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-client-secret-credential-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-credential-api-key-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-credential-client-secret-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-credential-dpop-key-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-credential-mfa-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-credential-mtls-certificate-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-credential-passkey-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-credential-password-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-credential-password-reset-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-credential-service-key-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-digital-credential-contracts", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-dpop-key-credential-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-jose", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-mfa-credential-concrete", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-mtls-certificate-credential-concrete", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-passkey-credential-concrete", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-password-credential-concrete", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-password-reset-credential-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-secret-hashing-bcrypt-provider", specifier = "==0.1.0" },
-    { name = "tigrbl-service-key-credential-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-workload-identity-contracts", specifier = "==0.4.0.dev2" },
 ]
 
@@ -6659,21 +6764,6 @@ requires-dist = [
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-proof-of-possession-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
-]
-
-[[package]]
-name = "tigrbl-dpop-key-credential-concrete"
-version = "0.4.0.dev2"
-source = { editable = "pkgs/10-concrete/tigrbl-credential-dpop-key-concrete" }
-dependencies = [
-    { name = "tigrbl-authentication-credential-bases" },
-    { name = "tigrbl-identity-contracts" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "tigrbl-authentication-credential-bases", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
@@ -7139,53 +7229,53 @@ name = "tigrbl-identity-credentials-concrete"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/deprecated/tigrbl-identity-credentials-concrete" }
 dependencies = [
-    { name = "tigrbl-api-key-credential-concrete" },
     { name = "tigrbl-authentication-credential-bases" },
-    { name = "tigrbl-client-secret-credential-concrete" },
     { name = "tigrbl-corim-concrete" },
+    { name = "tigrbl-credential-api-key-concrete" },
+    { name = "tigrbl-credential-client-secret-concrete" },
+    { name = "tigrbl-credential-dpop-key-concrete" },
+    { name = "tigrbl-credential-mfa-concrete" },
+    { name = "tigrbl-credential-mtls-certificate-concrete" },
+    { name = "tigrbl-credential-passkey-concrete" },
+    { name = "tigrbl-credential-password-concrete" },
+    { name = "tigrbl-credential-password-reset-concrete" },
     { name = "tigrbl-credential-profile-sd-jwt-vc" },
     { name = "tigrbl-credential-protocol-iso-mdoc" },
     { name = "tigrbl-credential-protocol-w3c-vcdm" },
-    { name = "tigrbl-dpop-key-credential-concrete" },
+    { name = "tigrbl-credential-service-key-concrete" },
     { name = "tigrbl-eat-concrete" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-mdoc-credential-concrete" },
-    { name = "tigrbl-mfa-credential-concrete" },
     { name = "tigrbl-mfa-factor-concrete" },
-    { name = "tigrbl-mtls-certificate-credential-concrete" },
-    { name = "tigrbl-passkey-credential-concrete" },
-    { name = "tigrbl-password-credential-concrete" },
-    { name = "tigrbl-password-reset-credential-concrete" },
     { name = "tigrbl-passwordless-credential-concrete" },
     { name = "tigrbl-sd-jwt-vc-credential-concrete" },
     { name = "tigrbl-service-credential-concrete" },
-    { name = "tigrbl-service-key-credential-concrete" },
     { name = "tigrbl-webauthn-credential-concrete" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "tigrbl-api-key-credential-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authentication-credential-bases", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-client-secret-credential-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-corim-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-credential-api-key-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-credential-client-secret-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-credential-dpop-key-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-credential-mfa-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-credential-mtls-certificate-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-credential-passkey-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-credential-password-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-credential-password-reset-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-credential-profile-sd-jwt-vc", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-credential-protocol-iso-mdoc", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-credential-protocol-w3c-vcdm", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-dpop-key-credential-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-credential-service-key-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-eat-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-mdoc-credential-concrete", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-mfa-credential-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-mfa-factor-concrete", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-mtls-certificate-credential-concrete", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-passkey-credential-concrete", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-password-credential-concrete", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-password-reset-credential-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-passwordless-credential-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-sd-jwt-vc-credential-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-service-credential-concrete", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-service-key-credential-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-webauthn-credential-concrete", specifier = "==0.4.0.dev2" },
 ]
 
@@ -8552,21 +8642,6 @@ requires-dist = [
 ]
 
 [[package]]
-name = "tigrbl-mfa-credential-concrete"
-version = "0.4.0.dev2"
-source = { editable = "pkgs/10-concrete/tigrbl-credential-mfa-concrete" }
-dependencies = [
-    { name = "tigrbl-authentication-credential-bases" },
-    { name = "tigrbl-identity-contracts" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "tigrbl-authentication-credential-bases", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
-]
-
-[[package]]
 name = "tigrbl-mfa-factor-concrete"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-mfa-factor-concrete" }
@@ -8598,21 +8673,6 @@ requires-dist = [
     { name = "tomli", marker = "python_full_version < '3.11'", specifier = ">=2.0" },
 ]
 provides-extras = ["test"]
-
-[[package]]
-name = "tigrbl-mtls-certificate-credential-concrete"
-version = "0.4.0.dev2"
-source = { editable = "pkgs/10-concrete/tigrbl-credential-mtls-certificate-concrete" }
-dependencies = [
-    { name = "tigrbl-authentication-credential-bases" },
-    { name = "tigrbl-identity-contracts" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "tigrbl-authentication-credential-bases", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
-]
 
 [[package]]
 name = "tigrbl-mtls-confirmation-binding-concrete"
@@ -8779,21 +8839,6 @@ requires-dist = [
 ]
 
 [[package]]
-name = "tigrbl-passkey-credential-concrete"
-version = "0.4.0.dev2"
-source = { editable = "pkgs/10-concrete/tigrbl-credential-passkey-concrete" }
-dependencies = [
-    { name = "tigrbl-authentication-credential-bases" },
-    { name = "tigrbl-identity-contracts" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "tigrbl-authentication-credential-bases", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
-]
-
-[[package]]
 name = "tigrbl-password-authentication-capability"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/40-capabilities/tigrbl-password-authentication-capability" }
@@ -8807,36 +8852,6 @@ dependencies = [
 requires-dist = [
     { name = "tigrbl-authenticator-password-local", specifier = "==0.1.0" },
     { name = "tigrbl-capability", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
-]
-
-[[package]]
-name = "tigrbl-password-credential-concrete"
-version = "0.4.0.dev2"
-source = { editable = "pkgs/10-concrete/tigrbl-credential-password-concrete" }
-dependencies = [
-    { name = "tigrbl-authentication-credential-bases" },
-    { name = "tigrbl-identity-contracts" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "tigrbl-authentication-credential-bases", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
-]
-
-[[package]]
-name = "tigrbl-password-reset-credential-concrete"
-version = "0.4.0.dev2"
-source = { editable = "pkgs/10-concrete/tigrbl-credential-password-reset-concrete" }
-dependencies = [
-    { name = "tigrbl-authentication-credential-bases" },
-    { name = "tigrbl-identity-contracts" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "tigrbl-authentication-credential-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
 ]
 
@@ -9967,21 +9982,6 @@ requires-dist = [
     { name = "tigrbl-api-key-authentication-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authenticator-service-key-local", specifier = "==0.1.0" },
     { name = "tigrbl-capability", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
-]
-
-[[package]]
-name = "tigrbl-service-key-credential-concrete"
-version = "0.4.0.dev2"
-source = { editable = "pkgs/10-concrete/tigrbl-credential-service-key-concrete" }
-dependencies = [
-    { name = "tigrbl-authentication-credential-bases" },
-    { name = "tigrbl-identity-contracts" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "tigrbl-authentication-credential-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
 ]
 

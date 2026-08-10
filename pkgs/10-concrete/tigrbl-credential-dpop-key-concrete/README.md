@@ -1,4 +1,4 @@
-# tigrbl-dpop-key-credential-concrete
+# tigrbl-credential-dpop-key-concrete
 
 Owns deterministic concrete value semantics.
 

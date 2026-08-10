@@ -28,19 +28,19 @@ def test_identity_classes_have_standalone_layer_10_owners() -> None:
 
 def test_credential_classes_have_standalone_layer_10_owners() -> None:
     expected = {
-        "PasswordCredential": "tigrbl_password_credential_concrete",
-        "PasswordResetCredential": "tigrbl_password_reset_credential_concrete",
-        "ApiKeyCredential": "tigrbl_api_key_credential_concrete",
-        "ServiceKeyCredential": "tigrbl_service_key_credential_concrete",
-        "ClientSecretCredential": "tigrbl_client_secret_credential_concrete",
-        "MfaCredential": "tigrbl_mfa_credential_concrete",
-        "PasskeyCredential": "tigrbl_passkey_credential_concrete",
+        "PasswordCredential": "tigrbl_credential_password_concrete",
+        "PasswordResetCredential": "tigrbl_credential_password_reset_concrete",
+        "ApiKeyCredential": "tigrbl_credential_api_key_concrete",
+        "ServiceKeyCredential": "tigrbl_credential_service_key_concrete",
+        "ClientSecretCredential": "tigrbl_credential_client_secret_concrete",
+        "MfaCredential": "tigrbl_credential_mfa_concrete",
+        "PasskeyCredential": "tigrbl_credential_passkey_concrete",
         "ServiceCredential": "tigrbl_service_credential_concrete",
         "WebAuthnCredential": "tigrbl_webauthn_credential_concrete",
         "PasswordlessCredential": "tigrbl_passwordless_credential_concrete",
         "MfaFactor": "tigrbl_mfa_factor_concrete",
-        "MtlsCertificateCredential": "tigrbl_mtls_certificate_credential_concrete",
-        "DpopKeyCredential": "tigrbl_dpop_key_credential_concrete",
+        "MtlsCertificateCredential": "tigrbl_credential_mtls_certificate_concrete",
+        "DpopKeyCredential": "tigrbl_credential_dpop_key_concrete",
         "SdJwtVc": "tigrbl_sd_jwt_vc_credential_concrete",
         "Mdoc": "tigrbl_mdoc_credential_concrete",
     }

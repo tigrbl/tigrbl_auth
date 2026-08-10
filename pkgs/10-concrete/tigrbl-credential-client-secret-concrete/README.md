@@ -1,4 +1,4 @@
-# tigrbl-client-secret-credential-concrete
+# tigrbl-credential-client-secret-concrete
 
 Owns deterministic concrete value semantics.
 

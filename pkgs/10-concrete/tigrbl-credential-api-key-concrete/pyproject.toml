@@ -1,5 +1,5 @@
 [project]
-name="tigrbl-api-key-credential-concrete"
+name="tigrbl-credential-api-key-concrete"
 version="0.4.0.dev2"
 requires-python=">=3.10,<3.15"
 license="Apache-2.0"
@@ -8,4 +8,4 @@ dependencies=["tigrbl-identity-contracts==0.4.0.dev2","tigrbl-authentication-cre
 requires=["poetry-core>=1.0.0"]
 build-backend="poetry.core.masonry.api"
 [tool.poetry]
-packages=[{include="tigrbl_api_key_credential_concrete",from="src"}]
+packages=[{include="tigrbl_credential_api_key_concrete",from="src"}]
