@@ -1,5 +1,5 @@
 {
-  "name": "react-example",
+  "name": "@tigrbl-auth/voice-biometric-authenticator",
   "private": true,
   "version": "0.0.0",
   "type": "module",

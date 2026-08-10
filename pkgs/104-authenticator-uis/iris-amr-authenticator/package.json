@@ -1,5 +1,5 @@
 {
-  "name": "react-example",
+  "name": "@tigrbl-auth/iris-amr-authenticator",
   "private": true,
   "version": "0.0.0",
   "type": "module",

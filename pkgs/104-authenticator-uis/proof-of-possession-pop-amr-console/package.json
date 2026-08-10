@@ -1,5 +1,5 @@
 {
-  "name": "react-example",
+  "name": "@tigrbl-auth/proof-of-possession-pop-authenticator-amr-console",
   "private": true,
   "version": "0.0.0",
   "type": "module",

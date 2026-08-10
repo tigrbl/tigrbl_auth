@@ -1,5 +1,5 @@
 {
-  "name": "react-example",
+  "name": "@tigrbl-auth/one-time-password-authenticator-uix",
   "private": true,
   "version": "0.0.0",
   "type": "module",
