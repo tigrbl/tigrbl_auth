@@ -336,7 +336,7 @@ dependencies = [
     "tigrbl-auth-protocol-oid4vp==0.4.0.dev2",
     "tigrbl-auth-protocol-authzen==0.4.0.dev2",
     "tigrbl-auth-protocol-rp==0.4.0.dev2",
-    "tigrbl-authn-credentials==0.4.0.dev2",
+    "tigrbl-credentials==0.4.0.dev2",
     "tigrbl-digital-credential-issuance==0.4.0.dev2",
     "tigrbl-digital-credential-issuance-capability==0.4.0.dev2",
     "tigrbl-digital-credential-presentation==0.4.0.dev2",
@@ -363,6 +363,7 @@ dependencies = [
     "tigrbl-identity-admin==0.4.0.dev2",
     "tigrbl-identity-author==0.4.0.dev2",
     "tigrbl-identity-core==0.4.0.dev2",
+    "tigrbl-authn-credentials==0.4.0.dev2",
     "tigrbl-identity-credentials==0.4.0.dev2",
     "tigrbl-identity-jose==0.4.0.dev2",
     "tigrbl-jose-cryptography-provider==0.4.0.dev2",
@@ -695,7 +696,7 @@ tigrbl-auth-protocol-oid4vci = { path = "pkgs/50-protocols/tigrbl-auth-protocol-
 tigrbl-auth-protocol-oid4vp = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oid4vp", editable = true }
 tigrbl-auth-protocol-authzen = { path = "pkgs/50-protocols/tigrbl-auth-protocol-authzen", editable = true }
 tigrbl-auth-protocol-rp = { path = "pkgs/50-protocols/tigrbl-auth-protocol-rp", editable = true }
-tigrbl-authn-credentials = { path = "pkgs/20-providers/tigrbl-authn-credentials", editable = true }
+tigrbl-credentials = { path = "pkgs/70-facade/tigrbl-credentials", editable = true }
 tigrbl-digital-credential-issuance = { path = "pkgs/deprecated/tigrbl-digital-credential-issuance", editable = true }
 tigrbl-digital-credential-issuance-capability = { path = "pkgs/40-capabilities/tigrbl-digital-credential-issuance-capability", editable = true }
 tigrbl-digital-credential-presentation = { path = "pkgs/deprecated/tigrbl-digital-credential-presentation", editable = true }
@@ -881,19 +882,19 @@ tigrbl-client-identity-concrete = { path = "pkgs/10-concrete/tigrbl-client-ident
 tigrbl-machine-identity-concrete = { path = "pkgs/10-concrete/tigrbl-machine-identity-concrete", editable = true }
 tigrbl-workload-identity-concrete = { path = "pkgs/10-concrete/tigrbl-workload-identity-concrete", editable = true }
 tigrbl-device-identity-concrete = { path = "pkgs/10-concrete/tigrbl-device-identity-concrete", editable = true }
-tigrbl-password-credential-concrete = { path = "pkgs/10-concrete/tigrbl-password-credential-concrete", editable = true }
-tigrbl-password-reset-credential-concrete = { path = "pkgs/10-concrete/tigrbl-password-reset-credential-concrete", editable = true }
-tigrbl-api-key-credential-concrete = { path = "pkgs/10-concrete/tigrbl-api-key-credential-concrete", editable = true }
-tigrbl-service-key-credential-concrete = { path = "pkgs/10-concrete/tigrbl-service-key-credential-concrete", editable = true }
-tigrbl-client-secret-credential-concrete = { path = "pkgs/10-concrete/tigrbl-client-secret-credential-concrete", editable = true }
-tigrbl-mfa-credential-concrete = { path = "pkgs/10-concrete/tigrbl-mfa-credential-concrete", editable = true }
-tigrbl-passkey-credential-concrete = { path = "pkgs/10-concrete/tigrbl-passkey-credential-concrete", editable = true }
+tigrbl-password-credential-concrete = { path = "pkgs/10-concrete/tigrbl-credential-password-concrete", editable = true }
+tigrbl-password-reset-credential-concrete = { path = "pkgs/10-concrete/tigrbl-credential-password-reset-concrete", editable = true }
+tigrbl-api-key-credential-concrete = { path = "pkgs/10-concrete/tigrbl-credential-api-key-concrete", editable = true }
+tigrbl-service-key-credential-concrete = { path = "pkgs/10-concrete/tigrbl-credential-service-key-concrete", editable = true }
+tigrbl-client-secret-credential-concrete = { path = "pkgs/10-concrete/tigrbl-credential-client-secret-concrete", editable = true }
+tigrbl-mfa-credential-concrete = { path = "pkgs/10-concrete/tigrbl-credential-mfa-concrete", editable = true }
+tigrbl-passkey-credential-concrete = { path = "pkgs/10-concrete/tigrbl-credential-passkey-concrete", editable = true }
 tigrbl-service-credential-concrete = { path = "pkgs/10-concrete/tigrbl-service-credential-concrete", editable = true }
 tigrbl-webauthn-credential-concrete = { path = "pkgs/10-concrete/tigrbl-webauthn-credential-concrete", editable = true }
 tigrbl-passwordless-credential-concrete = { path = "pkgs/10-concrete/tigrbl-passwordless-credential-concrete", editable = true }
 tigrbl-mfa-factor-concrete = { path = "pkgs/10-concrete/tigrbl-mfa-factor-concrete", editable = true }
-tigrbl-mtls-certificate-credential-concrete = { path = "pkgs/10-concrete/tigrbl-mtls-certificate-credential-concrete", editable = true }
-tigrbl-dpop-key-credential-concrete = { path = "pkgs/10-concrete/tigrbl-dpop-key-credential-concrete", editable = true }
+tigrbl-mtls-certificate-credential-concrete = { path = "pkgs/10-concrete/tigrbl-credential-mtls-certificate-concrete", editable = true }
+tigrbl-dpop-key-credential-concrete = { path = "pkgs/10-concrete/tigrbl-credential-dpop-key-concrete", editable = true }
 tigrbl-sd-jwt-vc-concrete = { path = "pkgs/deprecated/tigrbl-sd-jwt-vc-concrete", editable = true }
 tigrbl-sd-jwt-vc-credential-concrete = { path = "pkgs/10-concrete/tigrbl-sd-jwt-vc-credential-concrete", editable = true }
 tigrbl-mdoc-credential-concrete = { path = "pkgs/10-concrete/tigrbl-mdoc-credential-concrete", editable = true }
@@ -928,6 +929,7 @@ tigrbl-identity-admin-relationship-graph = { path = "pkgs/20-providers/tigrbl-id
 tigrbl-identity-admin-trust-federation-graph = { path = "pkgs/30-storage-runtime/tigrbl-identity-admin-trust-federation-graph", editable = true }
 tigrbl-trust-federation-graph-concrete = { path = "pkgs/10-concrete/tigrbl-trust-federation-graph-concrete", editable = true }
 tigrbl-identity-core = { path = "pkgs/00-primitives/tigrbl-identity-core", editable = true }
+tigrbl-authn-credentials = { path = "pkgs/deprecated/tigrbl-authn-credentials", editable = true }
 tigrbl-identity-credentials = { path = "pkgs/deprecated/tigrbl-identity-credentials", editable = true }
 tigrbl-identity-jose = { path = "pkgs/20-providers/tigrbl-identity-jose", editable = true }
 tigrbl-digital-credential-issuer-local = { path = "pkgs/deprecated/tigrbl-digital-credential-issuer-local", editable = true }

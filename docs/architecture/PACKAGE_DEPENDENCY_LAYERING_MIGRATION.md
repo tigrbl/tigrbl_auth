@@ -35,7 +35,7 @@ Current T1 exception packages:
 - `tigrbl-identity-admin`
 - `tigrbl-identity-cli`
 - `tigrbl-identity-contracts`
-- `tigrbl-authn-credentials`
+- `tigrbl-credentials`
 - `tigrbl-identity-jose`
 - `tigrbl-auth-protocol-oauth`
 - `tigrbl-auth-protocol-oidc`

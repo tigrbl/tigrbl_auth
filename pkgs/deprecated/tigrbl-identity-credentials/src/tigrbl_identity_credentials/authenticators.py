@@ -1,4 +1,4 @@
-"""Deprecated compatibility module for `tigrbl_authn_credentials.authenticators`."""
+"""Deprecated compatibility module for `tigrbl_credentials.authenticators`."""
 
 from __future__ import annotations
 

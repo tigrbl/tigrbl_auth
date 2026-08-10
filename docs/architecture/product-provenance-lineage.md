@@ -16,7 +16,7 @@ for one migration window.
 | 1 | `tigrbl-identity-core` | Backend package | Root primitives and shared identity foundation. |
 | 2 | `tigrbl-identity-contracts` | Backend package | Shared wire models and API contracts. |
 | 3 | `tigrbl-identity-principals` | Backend package | Tenants, users, services, clients, workloads, identity subjects. |
-| 4 | `tigrbl-authn-credentials` | Backend package | Passwords, keys, API keys, service keys, credential proof/lifecycle. |
+| 4 | `tigrbl-credentials` | Backend package | Passwords, keys, API keys, service keys, credential proof/lifecycle. |
 | 5 | `tigrbl-identity-jose` | Backend package | JWT, JWK, JWKS, signing, key material, token crypto. |
 | 6 | `tigrbl-authz-policy` | Backend package | Authorization, RBAC/ABAC/delegation/governance decisions. |
 | 7 | `tigrbl-auth-protocol-oauth` | Backend package | OAuth protocol flows. |

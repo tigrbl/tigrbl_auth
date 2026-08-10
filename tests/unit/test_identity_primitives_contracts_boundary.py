@@ -202,10 +202,10 @@ def test_auth_helpers_import_principal_protocol_from_contracts() -> None:
     targets = [
         ROOT
         / "pkgs"
-        / "20-providers"
-        / "tigrbl-authn-credentials"
+        / "70-facade"
+        / "tigrbl-credentials"
         / "src"
-        / "tigrbl_authn_credentials"
+        / "tigrbl_credentials"
         / "backends.py",
         ROOT
         / "pkgs"
@@ -233,10 +233,10 @@ def test_auth_helpers_import_principal_protocol_from_contracts() -> None:
     removed_composition = (
         ROOT
         / "pkgs"
-        / "20-providers"
-        / "tigrbl-authn-credentials"
+        / "70-facade"
+        / "tigrbl-credentials"
         / "src"
-        / "tigrbl_authn_credentials"
+        / "tigrbl_credentials"
         / "authenticators.py"
     ).read_text(encoding="utf-8")
     assert "Removed runtime composition surface" in removed_composition

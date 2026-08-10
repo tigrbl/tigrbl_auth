@@ -15,6 +15,10 @@ def test_provider_taxonomy_names_canonical_destinations() -> None:
     )
     migrations = taxonomy["compatibility_or_migration_packages"]
 
+    assert migrations["tigrbl-authn-credentials"] == {
+        "target": "tigrbl-credentials",
+        "target_layer": "70-facade",
+    }
     assert migrations["tigrbl-security-cose"]["target"] == (
         "tigrbl-cose-concrete-plus-tigrbl-cose-cryptography-provider"
     )
@@ -24,13 +28,23 @@ def test_compatibility_packages_reexport_canonical_objects() -> None:
     from tigrbl_auth_router_admin_gate import AdminGate as CanonicalAdminGate
     from tigrbl_authz_policy_admin_gate import AdminGate as LegacyAdminGate
     from tigrbl_cose_concrete import decode_cose_key as canonical_decode
-    from tigrbl_authn_credentials.lifecycle import hash_secret as canonical_hash
+    from tigrbl_credentials.lifecycle import hash_secret as canonical_hash
+    from tigrbl_authn_credentials.lifecycle import hash_secret as authn_legacy_hash
     from tigrbl_security_cose import decode_cose_key as legacy_decode
     from tigrbl_principal_authentication.lifecycle import hash_secret as legacy_hash
 
     assert LegacyAdminGate is CanonicalAdminGate
     assert legacy_decode is canonical_decode
+    assert authn_legacy_hash is canonical_hash
     assert legacy_hash is canonical_hash
+
+
+def test_credentials_facade_covers_each_credential_domain() -> None:
+    import tigrbl_credentials as credentials
+
+    assert credentials.CredentialKind.PASSWORD.value == "password"
+    assert credentials.digital.DigitalCredential is not None
+    assert credentials.workload.WorkloadCredential is not None
 
 
 def test_new_layer20_packages_do_not_import_downstream_layers() -> None:

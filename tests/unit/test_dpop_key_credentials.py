@@ -11,7 +11,7 @@ for src in sorted((ROOT / "pkgs").glob("*/src")):
 
 
 def test_dpop_key_credential_t0_public_model_is_importable() -> None:
-    import tigrbl_authn_credentials as credentials
+    import tigrbl_credentials as credentials
 
     dpop = credentials.create_dpop_key_credential(
         "service:billing",
@@ -25,7 +25,7 @@ def test_dpop_key_credential_t0_public_model_is_importable() -> None:
 
 
 def test_dpop_key_credential_t1_renders_confirmation_claim_and_lifecycle_credential() -> None:
-    import tigrbl_authn_credentials as credentials
+    import tigrbl_credentials as credentials
 
     dpop = credentials.create_dpop_key_credential(
         "service:billing",
@@ -45,7 +45,7 @@ def test_dpop_key_credential_t1_renders_confirmation_claim_and_lifecycle_credent
 
 def test_dpop_key_credential_t2_rejects_blank_or_malformed_proof_material() -> None:
     import pytest
-    import tigrbl_authn_credentials as credentials
+    import tigrbl_credentials as credentials
 
     with pytest.raises(ValueError, match="JWK thumbprint is required"):
         credentials.create_dpop_key_credential(

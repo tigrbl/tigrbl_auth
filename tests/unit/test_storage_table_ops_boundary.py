@@ -19,7 +19,7 @@ NON_STORAGE_SOURCE_ROOTS = [
     package_src("tigrbl-auth-backend-app-my-account"),
     package_src("tigrbl-auth-backend-app-public"),
     package_src("tigrbl-auth-protocol-oauth"),
-    package_src("tigrbl-authn-credentials"),
+    package_src("tigrbl-credentials"),
     package_src("tigrbl-identity-operator"),
     package_src("tigrbl-identity-server"),
 ]

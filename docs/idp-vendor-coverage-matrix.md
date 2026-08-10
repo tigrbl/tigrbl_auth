@@ -53,7 +53,7 @@ For `tigrbl_auth`, the clean architecture is:
 | --- | --- |
 | First-party OIDC Provider behavior | `tigrbl-auth-protocol-oidc`, `tigrbl-auth-backend-app-public` |
 | External IdP / federation domain models | Future `tigrbl-identity-federation` or a clearly named federation module under admin/storage before package split |
-| Provider credentials and secret material | `tigrbl-authn-credentials` plus `tigrbl-identity-storage` |
+| Provider credentials and secret material | `tigrbl-credentials` plus `tigrbl-identity-storage` |
 | Subject aliasing and account linking | `tigrbl-identity-principals` plus canonical storage |
 | Tenant/app/provider policy | `tigrbl-authz-policy`, tenant-admin/developer frontdoors |
 | Provider configuration surfaces | `tigrbl-auth-backend-app-tenant-admin`, `tigrbl-auth-backend-app-developer`, and their UIX apps |

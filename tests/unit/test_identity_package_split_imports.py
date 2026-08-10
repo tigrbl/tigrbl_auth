@@ -19,6 +19,7 @@ PKGS = ROOT / "pkgs"
 
 
 DEPRECATED_DIST_NAMES = {
+    "tigrbl-authn-credentials",
     "tigrbl-auth-protocol-oidc-backchannel-replay-store",
     "tigrbl-authz-policy-invariant-registry",
     "tigrbl-identity-admin-advanced-authenticator-registry",
@@ -48,6 +49,7 @@ PACKAGE_ROOTS = [
     "tigrbl_auth_protocol_oauth",
     "tigrbl_auth_protocol_oidc",
     "tigrbl_auth_protocol_rp",
+    "tigrbl_credentials",
     "tigrbl_authn_credentials",
     "tigrbl_authz_policy_admin_gate",
     "tigrbl_authz_policy_authority_derivation_graph",
@@ -110,6 +112,7 @@ DIST_TO_IMPORT_ROOT = {
     "tigrbl-auth-protocol-oauth": "tigrbl_auth_protocol_oauth",
     "tigrbl-auth-protocol-oidc": "tigrbl_auth_protocol_oidc",
     "tigrbl-auth-protocol-rp": "tigrbl_auth_protocol_rp",
+    "tigrbl-credentials": "tigrbl_credentials",
     "tigrbl-authn-credentials": "tigrbl_authn_credentials",
     "tigrbl-authz-policy-admin-gate": "tigrbl_authz_policy_admin_gate",
     "tigrbl-authz-policy-authority-derivation-graph": "tigrbl_authz_policy_authority_derivation_graph",
@@ -293,11 +296,11 @@ def test_runtime_token_service_uses_provider_jwt_coder() -> None:
     assert module.JWTCoder is coder_module.JWTCoder
 
 
-def test_authn_credentials_no_longer_owns_token_or_session_service_modules() -> None:
+def test_credentials_facade_does_not_own_token_or_session_service_modules() -> None:
     _install_package_src_paths()
 
     credentials_root = (
-        _package_path("tigrbl-authn-credentials") / "src" / "tigrbl_authn_credentials"
+        _package_path("tigrbl-credentials") / "src" / "tigrbl_credentials"
     )
 
     assert not (credentials_root / "token_service.py").exists()
@@ -305,9 +308,9 @@ def test_authn_credentials_no_longer_owns_token_or_session_service_modules() -> 
     assert not (credentials_root / "_token_service").exists()
 
     for module_name in (
-        "tigrbl_authn_credentials.token_service",
-        "tigrbl_authn_credentials.session_service",
-        "tigrbl_authn_credentials._token_service",
+        "tigrbl_credentials.token_service",
+        "tigrbl_credentials.session_service",
+        "tigrbl_credentials._token_service",
     ):
         for loaded_name in list(sys.modules):
             if loaded_name == module_name or loaded_name.startswith(f"{module_name}."):

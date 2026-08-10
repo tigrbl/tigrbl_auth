@@ -39,7 +39,6 @@ TRUST_BASE_PROVIDER_PACKAGES = {
 }
 
 COMPOSITION_PROVIDER_PACKAGES = {
-    "tigrbl-authn-credentials",
     "tigrbl-authz-policy",
     "tigrbl-authz-policy-decision-engine",
     "tigrbl-access-governance-memory-provider",

@@ -16,7 +16,7 @@ This taxonomy separates identity, authentication, authorization, protocol, and c
 
 | Concern | Preferred package | Deprecated compatibility package |
 | --- | --- | --- |
-| Credential proof and lifecycle | `tigrbl-authn-credentials` | `tigrbl-authn-credentials` |
+| Credential proof and lifecycle | `tigrbl-credentials` | `tigrbl-credentials` |
 | Authorization policy and authority | `tigrbl-authz-policy` | `tigrbl-authz-policy` |
 | Protected-resource enforcement | `tigrbl-authz-resource-server` | `tigrbl-authz-resource-server` |
 | OAuth protocol behavior | `tigrbl-auth-protocol-oauth` | `tigrbl-auth-protocol-oauth` |

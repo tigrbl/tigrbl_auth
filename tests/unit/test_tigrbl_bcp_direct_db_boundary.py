@@ -10,8 +10,8 @@ import pytest
 ROOT = Path(__file__).resolve().parents[2]
 
 MIGRATED_RELEASE_PATHS = [
-    ROOT / "pkgs/20-providers/tigrbl-authn-credentials/src/tigrbl_authn_credentials/authenticators.py",
-    ROOT / "pkgs/20-providers/tigrbl-authn-credentials/src/tigrbl_authn_credentials/backends.py",
+    ROOT / "pkgs/70-facade/tigrbl-credentials/src/tigrbl_credentials/authenticators.py",
+    ROOT / "pkgs/70-facade/tigrbl-credentials/src/tigrbl_credentials/backends.py",
     ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/discovery.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/authorization_runtime.py",
     ROOT / "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/auth_session/_table.py",
@@ -109,7 +109,7 @@ SYNC_COMPAT_PATHS = [
 ]
 
 ASYNC_REQUEST_TOKEN_PATHS = [
-    ROOT / "pkgs/20-providers/tigrbl-authn-credentials/src/tigrbl_authn_credentials/authenticators.py",
+    ROOT / "pkgs/70-facade/tigrbl-credentials/src/tigrbl_credentials/authenticators.py",
     ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/token_exchange.py",
     ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/userinfo.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/auth.py",

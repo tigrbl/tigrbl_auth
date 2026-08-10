@@ -65,7 +65,7 @@ MY_ACCOUNT_BACKEND_APP_CONTRACT = MyAccountBackendAppContract(
         "tigrbl-identity-server",
         "tigrbl-identity-runtime",
         "tigrbl-identity-principals",
-        "tigrbl-authn-credentials",
+        "tigrbl-credentials",
         "tigrbl-authz-policy",
         "tigrbl-auth-protocol-oidc",
         "tigrbl-identity-storage",

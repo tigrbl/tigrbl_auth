@@ -50,7 +50,7 @@ For `tigrbl_auth`, the clean product split is:
 
 | Layer | Recommended owner |
 | --- | --- |
-| Factor proof material | `tigrbl-authn-credentials` |
+| Factor proof material | `tigrbl-credentials` |
 | MFA requirement decisions | `tigrbl-authz-policy` |
 | Challenge/session continuation | `tigrbl-auth-backend-app-public`, `tigrbl-auth-protocol-oauth`, `tigrbl-auth-protocol-oidc` |
 | Factor and challenge storage | `tigrbl-identity-storage` |

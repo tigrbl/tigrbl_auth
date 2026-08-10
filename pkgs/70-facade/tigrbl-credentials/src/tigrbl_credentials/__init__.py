@@ -1,4 +1,4 @@
-"""Credential lifecycle and verification surfaces for the Tigrbl identity package suite."""
+"""Curated credential facade for authentication, digital, and workload domains."""
 
 from __future__ import annotations
 
@@ -36,6 +36,7 @@ from .proof_bindings import (
     create_dpop_key_credential,
     create_mtls_certificate_credential,
 )
+from . import digital, workload
 
 __all__ = [
     "Credential",
@@ -68,4 +69,6 @@ __all__ = [
     "utc_now",
     "verify_credential",
     "verify_secret",
+    "digital",
+    "workload",
 ]

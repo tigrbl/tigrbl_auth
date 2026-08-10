@@ -6,7 +6,7 @@ MFA is not just a one-time-password check. A complete MFA product includes facto
 
 For `tigrbl_auth`, MFA should be treated as an advanced authentication product lane that spans:
 
-- `tigrbl-authn-credentials` for factor credential material and proof verification.
+- `tigrbl-credentials` for factor credential material and proof verification.
 - `tigrbl-authz-policy` for when MFA is required, optional, remembered, bypassed, or stepped up.
 - `tigrbl-auth-protocol-oidc` and `tigrbl-identity-jose` for `acr` and `amr` expression in ID/access tokens.
 - `tigrbl-auth-backend-app-public` for user-facing enrollment/challenge/recovery flows.
@@ -18,8 +18,8 @@ For `tigrbl_auth`, MFA should be treated as an advanced authentication product l
 | Area | Current state | Evidence | Interpretation |
 | --- | --- | --- | --- |
 | Governance | MFA is governed by advanced-authentication SSOT, but current implementation status is explicitly less than implemented. | [SPEC-1067](../.ssot/specs/SPEC-1067-advanced-authentication-and-adaptive-auth-requirements.yaml) | Do not claim production MFA support yet. |
-| Credential primitive | `tigrbl-authn-credentials` has `CredentialKind.MFA_FACTOR`, `create_mfa_factor_credential`, credential verification, lifecycle, rotation, revocation, and audit primitives. | [`lifecycle.py`](../pkgs/20-providers/tigrbl-authn-credentials/src/tigrbl_authn_credentials/lifecycle.py), [`test_credentials_lifecycle_boundary.py`](../tests/unit/test_credentials_lifecycle_boundary.py) | Useful foundation, but not a complete factor protocol or public flow. |
-| Passkey/WebAuthn primitive | `PASSKEY_WEBAUTHN` credential primitives and tests exist. | [`lifecycle.py`](../pkgs/20-providers/tigrbl-authn-credentials/src/tigrbl_authn_credentials/lifecycle.py), [`test_credentials_lifecycle_boundary.py`](../tests/unit/test_credentials_lifecycle_boundary.py) | Current behavior is proof-of-concept credential modeling, not full WebAuthn ceremony support. |
+| Credential primitive | `tigrbl-credentials` has `CredentialKind.MFA_FACTOR`, `create_mfa_factor_credential`, credential verification, lifecycle, rotation, revocation, and audit primitives. | [`lifecycle.py`](../pkgs/70-facade/tigrbl-credentials/src/tigrbl_credentials/lifecycle.py), [`test_credentials_lifecycle_boundary.py`](../tests/unit/test_credentials_lifecycle_boundary.py) | Useful foundation, but not a complete factor protocol or public flow. |
+| Passkey/WebAuthn primitive | `PASSKEY_WEBAUTHN` credential primitives and tests exist. | [`lifecycle.py`](../pkgs/70-facade/tigrbl-credentials/src/tigrbl_credentials/lifecycle.py), [`test_credentials_lifecycle_boundary.py`](../tests/unit/test_credentials_lifecycle_boundary.py) | Current behavior is proof-of-concept credential modeling, not full WebAuthn ceremony support. |
 | Advanced auth registry | Phase 4 test scaffolds include `AdvancedAuthenticatorRegistry`, MFA enrollment, WebAuthn, passwordless, replay, anomaly, and adaptive contexts. | [`test_phase4_advanced_identity_boundary.py`](../tests/unit/test_phase4_advanced_identity_boundary.py) | Good conceptual boundary, but it is not yet productized through storage, routes, UI, and conformance tests. |
 | Public UIX contract | Public UIX contract says MFA views belong in the public hosted-login surface. | [SPEC-1167](../.ssot/specs/SPEC-1167-public-uix-composition-contract.yaml) | MFA UX belongs with public login, not admin APIs. |
 | Standards signal | JOSE package includes RFC 8176 `amr` validation. | [`rfc8176.py`](../pkgs/10-domain/tigrbl-identity-jose/src/tigrbl_identity_jose/standards/rfc8176.py) | Token expression of authentication method references is recognized. |
@@ -57,7 +57,7 @@ For `tigrbl_auth`, MFA should be treated as an advanced authentication product l
 
 | Surface | Owns | Does not own |
 | --- | --- | --- |
-| `tigrbl-authn-credentials` | Factor credential material, verification helpers, lifecycle states, recovery-code material, credential audit primitives. | Route composition, tenant policy, hosted login UX. |
+| `tigrbl-credentials` | Factor credential material, verification helpers, lifecycle states, recovery-code material, credential audit primitives. | Route composition, tenant policy, hosted login UX. |
 | `tigrbl-authz-policy` | MFA requirement decisions, step-up rules, factor assurance policy, bypass/remembered-device decisions. | Secret verification and WebAuthn cryptographic ceremony details. |
 | `tigrbl-auth-protocol-oidc` / `tigrbl-identity-jose` | `acr` and `amr` claim rules, OIDC authentication context expression. | Factor enrollment and user support workflows. |
 | `tigrbl-auth-backend-app-public` | Login-time MFA challenge, enrollment prompt, recovery-code challenge, user factor management where safe. | Tenant-wide policy mutation and admin reset authority. |

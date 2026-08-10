@@ -13,7 +13,8 @@ PKGS = ROOT / "pkgs"
 
 
 COMPAT_TO_PREFERRED = {
-    "tigrbl_identity_credentials": "tigrbl_authn_credentials",
+    "tigrbl_authn_credentials": "tigrbl_credentials",
+    "tigrbl_identity_credentials": "tigrbl_credentials",
     "tigrbl_identity_policy": "tigrbl_authz_policy",
     "tigrbl_identity_resource_server": "tigrbl_authz_resource_server",
     "tigrbl_identity_oauth": "tigrbl_auth_protocol_oauth",
@@ -22,7 +23,7 @@ COMPAT_TO_PREFERRED = {
 }
 
 DIST_TO_IMPORT_ROOT = {
-    "tigrbl-authn-credentials": "tigrbl_authn_credentials",
+    "tigrbl-credentials": "tigrbl_credentials",
     "tigrbl-authz-policy-admin-gate": "tigrbl_authz_policy_admin_gate",
     "tigrbl-authz-policy": "tigrbl_authz_policy",
     "tigrbl-authz-resource-server": "tigrbl_authz_resource_server",
@@ -38,6 +39,7 @@ DIST_TO_IMPORT_ROOT = {
 }
 
 DEPRECATED_DIST_TO_IMPORT_ROOT = {
+    "tigrbl-authn-credentials": "tigrbl_authn_credentials",
     "tigrbl-identity-credentials": "tigrbl_identity_credentials",
     "tigrbl-identity-policy": "tigrbl_identity_policy",
     "tigrbl-identity-resource-server": "tigrbl_identity_resource_server",

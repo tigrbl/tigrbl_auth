@@ -52,7 +52,6 @@ canonical_providers:
   - tigrbl-digital-credential-status-provider
   - tigrbl-digital-credential-trust-provider
   - tigrbl-security-claims-provider-local
-  - tigrbl-authn-credentials
   cryptography_and_trust:
   - tigrbl-certificate-path-validator
   - tigrbl-certificate-status-provider
@@ -81,6 +80,9 @@ canonical_providers:
   - tigrbl-set-receiver-provider
   - tigrbl-set-transmitter-provider
 compatibility_or_migration_packages:
+  tigrbl-authn-credentials:
+    target: tigrbl-credentials
+    target_layer: 70-facade
   tigrbl-authz-resource-server-verifier:
     target: tigrbl-protected-resource-authorization-capability
     target_layer: 40-capabilities

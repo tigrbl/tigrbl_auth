@@ -54,7 +54,7 @@ For `tigrbl_auth`, the target product shape should be:
 | --- | --- |
 | Authorization decision primitives | `tigrbl-authz-policy` |
 | Principal facts and memberships | `tigrbl-identity-principals` |
-| Credential and assurance facts | `tigrbl-authn-credentials` |
+| Credential and assurance facts | `tigrbl-credentials` |
 | OAuth scopes and resource indicators | `tigrbl-auth-protocol-oauth` |
 | Resource-server grants and enforcement | `tigrbl-authz-resource-server`, `tigrbl-auth-backend-app-resource-validation` |
 | Canonical role/policy/grant/relationship tables | `tigrbl-identity-storage` |

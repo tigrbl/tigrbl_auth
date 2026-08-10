@@ -14,7 +14,7 @@ for src in sorted((ROOT / "pkgs").glob("*/src")):
 
 
 def test_credentials_t0_exports_public_lifecycle_surface() -> None:
-    import tigrbl_authn_credentials as credentials
+    import tigrbl_credentials as credentials
 
     assert credentials.CredentialKind.PASSWORD.value == "password"
     assert credentials.CredentialStatus.ACTIVE.value == "active"
@@ -23,7 +23,7 @@ def test_credentials_t0_exports_public_lifecycle_surface() -> None:
 
 
 def test_credentials_t0_constructs_each_credential_kind() -> None:
-    import tigrbl_authn_credentials as credentials
+    import tigrbl_credentials as credentials
 
     password = credentials.create_password_credential("p1", "correct-horse")
     reset = credentials.create_password_reset_credential("p1")
@@ -43,7 +43,7 @@ def test_credentials_t0_constructs_each_credential_kind() -> None:
 
 
 def test_credentials_t1_verifies_password_keys_client_secret_and_mfa() -> None:
-    import tigrbl_authn_credentials as credentials
+    import tigrbl_credentials as credentials
 
     password = credentials.create_password_credential("p1", "pw")
     api_key = credentials.create_api_key_credential("p1", public_id="api-key-id")
@@ -61,7 +61,7 @@ def test_credentials_t1_verifies_password_keys_client_secret_and_mfa() -> None:
 
 def test_credentials_t1_password_reset_and_passkey_behaviors() -> None:
     import pytest
-    import tigrbl_authn_credentials as credentials
+    import tigrbl_credentials as credentials
 
     reset = credentials.create_password_reset_credential("p1", ttl=timedelta(minutes=5))
     consumed = credentials.consume_one_time_credential(reset.credential, reset.secret or "")
@@ -75,7 +75,7 @@ def test_credentials_t1_password_reset_and_passkey_behaviors() -> None:
 
 def test_credentials_t2_rotation_and_revocation_are_pure_transformations() -> None:
     import pytest
-    import tigrbl_authn_credentials as credentials
+    import tigrbl_credentials as credentials
 
     issued = credentials.create_api_key_credential("p1")
     rotated = credentials.rotate_credential(
@@ -115,7 +115,7 @@ def test_credentials_do_not_own_a_secret_hash_format_or_durable_ledger() -> None
 
 
 def test_credentials_t2_public_surface_import_dag_stays_clean() -> None:
-    package_root = ROOT / "pkgs" / "20-providers" / "tigrbl-authn-credentials" / "src" / "tigrbl_authn_credentials"
+    package_root = ROOT / "pkgs" / "70-facade" / "tigrbl-credentials" / "src" / "tigrbl_credentials"
     checked = [package_root / "__init__.py", package_root / "lifecycle.py"]
     forbidden = {"tigrbl_auth", "tigrbl_identity_server", "tigrbl_identity_storage", "tigrbl_identity_admin"}
 

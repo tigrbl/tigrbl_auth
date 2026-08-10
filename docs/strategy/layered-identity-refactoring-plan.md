@@ -899,7 +899,7 @@ constraint, index, or relationship changes.
 | ADD | `pkgs/20-providers/tigrbl-secret-hashing-bcrypt-provider` | Add `BcryptSecretHasher` implementing hash/verify for the existing `LargeBinary(60)` representation, cost policy, malformed-hash rejection, and optional rehash-needed detection. |
 | UPDATE | `tigrbl-authenticator-password-local` | `PasswordLocalAuthenticator` injects the hasher and implements typed authenticate/verify behavior; it does not query `User`. |
 | UPDATE | `tigrbl-authenticator-client-secret-local` | `ClientSecretLocalAuthenticator` injects the hasher and implements typed verify behavior; remove OAuth-specific implementation semantics. |
-| UPDATE | `tigrbl-authn-credentials/lifecycle.py` | Stop maintaining a competing PBKDF2 storage format unless explicitly supported as a versioned migration algorithm. Split deterministic lifecycle from provider hashing; remove `CredentialLedger` as an in-memory durable substitute. |
+| UPDATE | `tigrbl-credentials/lifecycle.py` | Stop maintaining a competing PBKDF2 storage format unless explicitly supported as a versioned migration algorithm. Split deterministic lifecycle from provider hashing; remove `CredentialLedger` as an in-memory durable substitute. |
 
 If legacy PBKDF2 hashes exist, add a layer-20 `CompositeSecretVerifier` that
 recognizes both encodings, verifies with the correct provider, and requests a
@@ -920,7 +920,7 @@ ADD `pkgs/40-capabilities/tigrbl-principal-authentication` with:
   without exposing stored digests.
 
 MOVE the composition currently in
-`pkgs/20-providers/tigrbl-authn-credentials/src/tigrbl_authn_credentials/backends.py`
+`pkgs/70-facade/tigrbl-credentials/src/tigrbl_credentials/backends.py`
 to these capabilities. Remove imports of `tigrbl_identity_storage.tables`,
 `tables._ops`, `User.lookup_by_identifier`, `Client.authenticate`, and
 `tigrbl_identity_jose.key_management.verify_pw` from layer 20.

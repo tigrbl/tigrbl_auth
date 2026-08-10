@@ -21,7 +21,7 @@ PACKAGE_MATURITY_FEATURE_ALIASES = {
     "tigrbl-auth-protocol-oauth": "oauth",
     "tigrbl-auth-protocol-oidc": "oidc",
     "tigrbl-auth-protocol-rp": "rp",
-    "tigrbl-authn-credentials": "credentials",
+    "tigrbl-credentials": "credentials",
     "tigrbl-authz-policy": "policy",
     "tigrbl-authz-resource-server": "resource-server",
     "tigrbl-auth": "facade",

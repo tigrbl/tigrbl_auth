@@ -29,8 +29,8 @@ def _imports_for(package: str) -> set[str]:
 def test_user_plane_contracts_own_authn_resource_and_security_surfaces() -> None:
     import tigrbl_identity_contracts as contracts
     import tigrbl_security_trust_contracts as security_trust
-    from tigrbl_authn_credentials.lifecycle import Credential
-    from tigrbl_authn_credentials.proof_bindings import ProofBinding
+    from tigrbl_credentials.lifecycle import Credential
+    from tigrbl_credentials.proof_bindings import ProofBinding
 
     assert contracts.CredentialKind.PASSWORD.value == "password"
     assert Credential is contracts.Credential
@@ -483,6 +483,7 @@ def test_contract_packages_do_not_import_capability_runtime_or_storage_packages(
 ):
     forbidden = {
         "tigrbl_auth",
+        "tigrbl_credentials",
         "tigrbl_authn_credentials",
         "tigrbl_authz_policy",
         "tigrbl_authz_resource_server",
@@ -515,10 +516,10 @@ def test_target_capability_packages_no_longer_own_contract_classes() -> None:
         / "tigrbl_identity_admin",
         ROOT
         / "pkgs"
-        / "20-providers"
-        / "tigrbl-authn-credentials"
+        / "70-facade"
+        / "tigrbl-credentials"
         / "src"
-        / "tigrbl_authn_credentials",
+        / "tigrbl_credentials",
         ROOT
         / "pkgs"
         / "20-providers"

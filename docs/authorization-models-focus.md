@@ -50,7 +50,7 @@ The main distinction: these are not competing features where one replaces the ot
 | --- | --- | --- |
 | `tigrbl-authz-policy` | Policy request/decision contracts, RBAC, ABAC, PBAC, delegation, tenant isolation, scope/permission decisions, decision traces. | Credential verification, token signing, route mounting, DB sessions. |
 | `tigrbl-identity-principals` | Principal facts: user, admin, owner, service, workload, client, tenant membership, roles as facts. | Final authorization decisions. |
-| `tigrbl-authn-credentials` | Credential facts and proof posture: password, API key, service key, client secret, MFA/passkey status. | Whether a credential grants permission to perform an action. |
+| `tigrbl-credentials` | Credential facts and proof posture: password, API key, service key, client secret, MFA/passkey status. | Whether a credential grants permission to perform an action. |
 | `tigrbl-auth-protocol-oauth` | OAuth scopes, resource indicators, consent inputs, token issuance hooks. | Tenant/admin authorization policy itself. |
 | `tigrbl-authz-resource-server` | Downstream enforcement of audience, scope, token validity, proof binding, and policy hooks. | Issuing tokens or managing policy definitions. |
 | `tigrbl-identity-storage` | Canonical policy, role, permission, grant, relationship, assignment, audit, and version tables. | Policy semantics. |

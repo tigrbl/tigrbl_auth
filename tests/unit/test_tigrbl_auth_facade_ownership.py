@@ -376,7 +376,7 @@ def test_tigrbl_auth_facade_declares_canonical_runtime_dependencies() -> None:
             "tigrbl-identity-cli==0.4.0.dev2",
             "tigrbl-identity-admin==0.4.0.dev2",
             "tigrbl-identity-author==0.4.0.dev2",
-            "tigrbl-authn-credentials==0.4.0.dev2",
+            "tigrbl-credentials==0.4.0.dev2",
             "tigrbl-identity-jose==0.4.0.dev2",
             "tigrbl-auth-protocol-oauth==0.4.0.dev2",
             "tigrbl-identity-operator==0.4.0.dev2",

@@ -16,7 +16,7 @@ This brief grounds the architecture image in the live package inventory in this 
 - `tigrbl-identity-admin`: tenant, user, client, key, session, token, consent, audit, profile, and governance control-plane operations.
 - `tigrbl-auth-protocol-oauth`: OAuth 2.x protocol flows including device authorization, PAR, token exchange, DPoP, and related RFC helpers.
 - `tigrbl-auth-protocol-oidc`: OIDC discovery, ID token, userinfo, logout, session, and OIDC standards helpers.
-- `tigrbl-authn-credentials`: password, API key, auth context, session, and token lifecycle helpers.
+- `tigrbl-credentials`: password, API key, auth context, session, and token lifecycle helpers.
 - `tigrbl-authz-policy`: RBAC, ABAC, delegated administration, provenance, and governance policy controls.
 - `tigrbl-identity-principals`: tenant, principal, subject context, and trust-domain discovery helpers.
 - `tigrbl-identity-jose`: JOSE, JWT, JWS, JWE, JWK, JWKS, key rotation, and signing helpers.

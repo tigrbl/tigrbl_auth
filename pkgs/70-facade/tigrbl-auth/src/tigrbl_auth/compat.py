@@ -91,7 +91,7 @@ FACADE_EXTRAS: Mapping[str, tuple[str, ...]] = {
         "tigrbl-identity-core",
         "tigrbl-identity-contracts",
         "tigrbl-identity-principals",
-        "tigrbl-authn-credentials",
+        "tigrbl-credentials",
         "tigrbl-identity-jose",
         "tigrbl-authz-policy",
         "tigrbl-auth-protocol-oauth",

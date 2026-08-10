@@ -37,7 +37,7 @@ The app names here match the target composition set in
 
 | Dependency class | Dependencies |
 |---|---|
-| Runtime package dependencies | `tigrbl-auth`, `tigrbl-identity-server`, `tigrbl-identity-runtime`, `tigrbl-identity-admin`, `tigrbl-auth-protocol-oauth`, `tigrbl-auth-protocol-oidc`, `tigrbl-authn-credentials`, `tigrbl-authz-policy`, `tigrbl-identity-principals`, `tigrbl-identity-jose`, `tigrbl-identity-contracts`, `tigrbl-identity-storage`, `tigrbl-identity-core`, `tigrbl-identity-operator` |
+| Runtime package dependencies | `tigrbl-auth`, `tigrbl-identity-server`, `tigrbl-identity-runtime`, `tigrbl-identity-admin`, `tigrbl-auth-protocol-oauth`, `tigrbl-auth-protocol-oidc`, `tigrbl-credentials`, `tigrbl-authz-policy`, `tigrbl-identity-principals`, `tigrbl-identity-jose`, `tigrbl-identity-contracts`, `tigrbl-identity-storage`, `tigrbl-identity-core`, `tigrbl-identity-operator` |
 | Surface dependencies | public REST/OIDC lane, admin REST lane, admin RPC/OpenRPC lane, discovery documents, tenant discovery routes, JWKS publication routes |
 | UIX dependencies | supports `tigrbl-auth-public-portal`, `tigrbl-auth-platform-admin-console`, `tigrbl-auth-tenant-admin-console`, `tigrbl-auth-developer-portal`, and optionally `tigrbl-auth-service-admin-surface` |
 | Data and state dependencies | tenant records, user identities, auth sessions, auth codes, token records, client registrations, service keys, API keys, consent, audit events, key rotation events, JWKS artifacts |
@@ -102,7 +102,7 @@ The app names here match the target composition set in
 
 | Dependency class | Dependencies |
 |---|---|
-| Runtime package dependencies | future dedicated UIX or automation surface; backend support from `tigrbl-authn-credentials`, `tigrbl-authz-policy`, `tigrbl-identity-principals`, `tigrbl-auth-protocol-oauth`, `tigrbl-authz-resource-server`, and operator/service-key workflows |
+| Runtime package dependencies | future dedicated UIX or automation surface; backend support from `tigrbl-credentials`, `tigrbl-authz-policy`, `tigrbl-identity-principals`, `tigrbl-auth-protocol-oauth`, `tigrbl-authz-resource-server`, and operator/service-key workflows |
 | Surface dependencies | token endpoint, introspection endpoint, JWKS publication, service-key and API-key administration surfaces, workload-identity and advanced-identity control surfaces where promoted into the release path |
 | UIX dependencies | `service-admin-uix` if browser-based; may also depend on CLI or automation surfaces rather than a browser UI alone |
 | Data and state dependencies | service identities, service keys, API keys, workload identity records, token introspection state, machine principal metadata, trust-domain and scope policy |

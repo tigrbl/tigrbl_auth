@@ -74,7 +74,7 @@ services = ServiceIdentityRegistry()
 - [tigrbl-authz-policy-rules-concrete](https://pypi.org/project/tigrbl-authz-policy-rules-concrete/) owns deterministic rule implementations.
 - [tigrbl-authz-policy-decision-engine](https://pypi.org/project/tigrbl-authz-policy-decision-engine/), [tigrbl-authz-policy-authority-derivation-graph](https://pypi.org/project/tigrbl-authz-policy-authority-derivation-graph/), and [tigrbl-authz-policy-invariant-registry](https://pypi.org/project/tigrbl-authz-policy-invariant-registry/) own their respective concrete implementations.
 - [tigrbl-identity-storage](https://pypi.org/project/tigrbl-identity-storage/) owns durable role, tenant membership, attribute policy, policy condition, and delegated admin scope records.
-- [tigrbl-authn-credentials](https://pypi.org/project/tigrbl-authn-credentials/) owns credential proof.
+- [tigrbl-credentials](https://pypi.org/project/tigrbl-credentials/) provides the credential facade.
 - [tigrbl-authz-resource-server](https://pypi.org/project/tigrbl-authz-resource-server/) owns protected-resource token validation and enforcement integration.
 
 ## Governance

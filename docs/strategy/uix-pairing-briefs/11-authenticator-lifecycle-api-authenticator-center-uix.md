@@ -387,7 +387,7 @@ Produce:
 - `pkgs/20-providers/tigrbl-authenticator-*/`
 - `pkgs/20-providers/tigrbl-security-auth-context-acr-basic/`
 - `pkgs/20-providers/tigrbl-security-auth-context-amr-basic/`
-- `pkgs/20-providers/tigrbl-authn-credentials/`
+- `pkgs/70-facade/tigrbl-credentials/`
 - `pkgs/60-runtime/tigrbl-identity-admin/src/tigrbl_identity_admin/_advanced_identity_plane/`
 - `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/authenticators.py`
 - `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/credentials/`

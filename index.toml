@@ -716,7 +716,7 @@ same_layer_dependencies = []
 
 [[packages]]
 name = "tigrbl-api-key-credential-concrete"
-path = "pkgs/10-concrete/tigrbl-api-key-credential-concrete"
+path = "pkgs/10-concrete/tigrbl-credential-api-key-concrete"
 layer = "10-concrete"
 order = "00"
 local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
@@ -1364,7 +1364,7 @@ same_layer_dependencies = []
 
 [[packages]]
 name = "tigrbl-client-secret-credential-concrete"
-path = "pkgs/10-concrete/tigrbl-client-secret-credential-concrete"
+path = "pkgs/10-concrete/tigrbl-credential-client-secret-concrete"
 layer = "10-concrete"
 order = "00"
 local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
@@ -1428,7 +1428,7 @@ same_layer_dependencies = []
 
 [[packages]]
 name = "tigrbl-dpop-key-credential-concrete"
-path = "pkgs/10-concrete/tigrbl-dpop-key-credential-concrete"
+path = "pkgs/10-concrete/tigrbl-credential-dpop-key-concrete"
 layer = "10-concrete"
 order = "00"
 local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
@@ -1492,7 +1492,7 @@ same_layer_dependencies = []
 
 [[packages]]
 name = "tigrbl-mfa-credential-concrete"
-path = "pkgs/10-concrete/tigrbl-mfa-credential-concrete"
+path = "pkgs/10-concrete/tigrbl-credential-mfa-concrete"
 layer = "10-concrete"
 order = "00"
 local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
@@ -1508,7 +1508,7 @@ same_layer_dependencies = []
 
 [[packages]]
 name = "tigrbl-mtls-certificate-credential-concrete"
-path = "pkgs/10-concrete/tigrbl-mtls-certificate-credential-concrete"
+path = "pkgs/10-concrete/tigrbl-credential-mtls-certificate-concrete"
 layer = "10-concrete"
 order = "00"
 local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
@@ -1532,7 +1532,7 @@ same_layer_dependencies = []
 
 [[packages]]
 name = "tigrbl-passkey-credential-concrete"
-path = "pkgs/10-concrete/tigrbl-passkey-credential-concrete"
+path = "pkgs/10-concrete/tigrbl-credential-passkey-concrete"
 layer = "10-concrete"
 order = "00"
 local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
@@ -1540,7 +1540,7 @@ same_layer_dependencies = []
 
 [[packages]]
 name = "tigrbl-password-credential-concrete"
-path = "pkgs/10-concrete/tigrbl-password-credential-concrete"
+path = "pkgs/10-concrete/tigrbl-credential-password-concrete"
 layer = "10-concrete"
 order = "00"
 local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
@@ -1548,7 +1548,7 @@ same_layer_dependencies = []
 
 [[packages]]
 name = "tigrbl-password-reset-credential-concrete"
-path = "pkgs/10-concrete/tigrbl-password-reset-credential-concrete"
+path = "pkgs/10-concrete/tigrbl-credential-password-reset-concrete"
 layer = "10-concrete"
 order = "00"
 local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
@@ -1596,7 +1596,7 @@ same_layer_dependencies = []
 
 [[packages]]
 name = "tigrbl-service-key-credential-concrete"
-path = "pkgs/10-concrete/tigrbl-service-key-credential-concrete"
+path = "pkgs/10-concrete/tigrbl-credential-service-key-concrete"
 layer = "10-concrete"
 order = "00"
 local_dependencies = ["tigrbl-authentication-credential-bases", "tigrbl-identity-contracts"]
@@ -2355,12 +2355,12 @@ local_dependencies = ["tigrbl-identity-contracts", "tigrbl-resource-server-bases
 same_layer_dependencies = ["tigrbl-security-dpop-cnf-binding-validator", "tigrbl-security-mtls-cnf-binding-validator", "tigrbl-security-token-introspection-client", "tigrbl-security-token-jwks-cache"]
 
 [[packages]]
-name = "tigrbl-jose-swarmauri-provider"
-path = "pkgs/20-providers/tigrbl-jose-swarmauri-provider"
+name = "tigrbl-identity-jose"
+path = "pkgs/20-providers/tigrbl-identity-jose"
 layer = "20-providers"
 order = "01"
-local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-jose-bases", "tigrbl-jose-concrete", "tigrbl-security-signing-pqc"]
-same_layer_dependencies = ["tigrbl-security-signing-pqc"]
+local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-jose-bases", "tigrbl-jose-concrete", "tigrbl-secret-hashing-bcrypt-provider", "tigrbl-security-key-rotation-policy-contracts", "tigrbl-security-signing-pqc"]
+same_layer_dependencies = ["tigrbl-secret-hashing-bcrypt-provider", "tigrbl-security-signing-pqc"]
 
 [[packages]]
 name = "tigrbl-replay-memory-provider"
@@ -2379,20 +2379,108 @@ local_dependencies = ["tigrbl-cose-concrete", "tigrbl-cose-cryptography-provider
 same_layer_dependencies = ["tigrbl-cose-cryptography-provider"]
 
 [[packages]]
-name = "tigrbl-identity-jose"
-path = "pkgs/20-providers/tigrbl-identity-jose"
+name = "tigrbl-jose-swarmauri-provider"
+path = "pkgs/20-providers/tigrbl-jose-swarmauri-provider"
 layer = "20-providers"
 order = "02"
-local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-jose-bases", "tigrbl-jose-concrete", "tigrbl-jose-swarmauri-provider", "tigrbl-secret-hashing-bcrypt-provider", "tigrbl-security-key-rotation-policy-contracts", "tigrbl-security-signing-pqc"]
-same_layer_dependencies = ["tigrbl-jose-swarmauri-provider", "tigrbl-secret-hashing-bcrypt-provider", "tigrbl-security-signing-pqc"]
+local_dependencies = ["tigrbl-identity-jose"]
+same_layer_dependencies = ["tigrbl-identity-jose"]
 
 [[packages]]
-name = "tigrbl-authn-credentials"
-path = "pkgs/20-providers/tigrbl-authn-credentials"
-layer = "20-providers"
-order = "03"
-local_dependencies = ["tigrbl-api-key-credential-concrete", "tigrbl-client-secret-credential-concrete", "tigrbl-dpop-key-credential-concrete", "tigrbl-identity-contracts", "tigrbl-identity-jose", "tigrbl-mfa-credential-concrete", "tigrbl-mtls-certificate-credential-concrete", "tigrbl-passkey-credential-concrete", "tigrbl-password-credential-concrete", "tigrbl-password-reset-credential-concrete", "tigrbl-secret-hashing-bcrypt-provider", "tigrbl-service-key-credential-concrete"]
-same_layer_dependencies = ["tigrbl-identity-jose", "tigrbl-secret-hashing-bcrypt-provider"]
+name = "tigrbl-attestation-durability"
+path = "pkgs/30-storage-runtime/tigrbl-attestation-durability"
+layer = "30-storage-runtime"
+order = "00"
+local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-audit-durability"
+path = "pkgs/30-storage-runtime/tigrbl-audit-durability"
+layer = "30-storage-runtime"
+order = "00"
+local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-authority-graph-durability"
+path = "pkgs/30-storage-runtime/tigrbl-authority-graph-durability"
+layer = "30-storage-runtime"
+order = "00"
+local_dependencies = ["tigrbl-identity-storage"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-authorization-policy-durability"
+path = "pkgs/30-storage-runtime/tigrbl-authorization-policy-durability"
+layer = "30-storage-runtime"
+order = "00"
+local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-consent-durability"
+path = "pkgs/30-storage-runtime/tigrbl-consent-durability"
+layer = "30-storage-runtime"
+order = "00"
+local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-delegation-durability"
+path = "pkgs/30-storage-runtime/tigrbl-delegation-durability"
+layer = "30-storage-runtime"
+order = "00"
+local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-digital-credential-durability"
+path = "pkgs/30-storage-runtime/tigrbl-digital-credential-durability"
+layer = "30-storage-runtime"
+order = "00"
+local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-gnap-state-durability"
+path = "pkgs/30-storage-runtime/tigrbl-gnap-state-durability"
+layer = "30-storage-runtime"
+order = "00"
+local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-identity-durability"
+path = "pkgs/30-storage-runtime/tigrbl-identity-durability"
+layer = "30-storage-runtime"
+order = "00"
+local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-key-material-durability"
+path = "pkgs/30-storage-runtime/tigrbl-key-material-durability"
+layer = "30-storage-runtime"
+order = "00"
+local_dependencies = ["tigrbl-identity-storage", "tigrbl-security-trust-contracts"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-oauth-state-durability"
+path = "pkgs/30-storage-runtime/tigrbl-oauth-state-durability"
+layer = "30-storage-runtime"
+order = "00"
+local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-oidc-state-durability"
+path = "pkgs/30-storage-runtime/tigrbl-oidc-state-durability"
+layer = "30-storage-runtime"
+order = "00"
+local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts"]
+same_layer_dependencies = []
 
 [[packages]]
 name = "tigrbl-policy-administration-memory-provider"
@@ -2403,178 +2491,74 @@ local_dependencies = ["tigrbl-access-governance-memory-provider", "tigrbl-identi
 same_layer_dependencies = []
 
 [[packages]]
-name = "tigrbl-table-durability"
-path = "pkgs/30-storage-runtime/tigrbl-table-durability"
-layer = "30-storage-runtime"
-order = "00"
-local_dependencies = []
-same_layer_dependencies = []
-
-[[packages]]
-name = "tigrbl-attestation-durability"
-path = "pkgs/30-storage-runtime/tigrbl-attestation-durability"
-layer = "30-storage-runtime"
-order = "01"
-local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts", "tigrbl-table-durability"]
-same_layer_dependencies = ["tigrbl-table-durability"]
-
-[[packages]]
-name = "tigrbl-audit-durability"
-path = "pkgs/30-storage-runtime/tigrbl-audit-durability"
-layer = "30-storage-runtime"
-order = "01"
-local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts", "tigrbl-table-durability"]
-same_layer_dependencies = ["tigrbl-table-durability"]
-
-[[packages]]
-name = "tigrbl-authority-graph-durability"
-path = "pkgs/30-storage-runtime/tigrbl-authority-graph-durability"
-layer = "30-storage-runtime"
-order = "01"
-local_dependencies = ["tigrbl-identity-storage", "tigrbl-table-durability"]
-same_layer_dependencies = ["tigrbl-table-durability"]
-
-[[packages]]
-name = "tigrbl-authorization-policy-durability"
-path = "pkgs/30-storage-runtime/tigrbl-authorization-policy-durability"
-layer = "30-storage-runtime"
-order = "01"
-local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts", "tigrbl-table-durability"]
-same_layer_dependencies = ["tigrbl-table-durability"]
-
-[[packages]]
-name = "tigrbl-consent-durability"
-path = "pkgs/30-storage-runtime/tigrbl-consent-durability"
-layer = "30-storage-runtime"
-order = "01"
-local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts", "tigrbl-table-durability"]
-same_layer_dependencies = ["tigrbl-table-durability"]
-
-[[packages]]
-name = "tigrbl-delegation-durability"
-path = "pkgs/30-storage-runtime/tigrbl-delegation-durability"
-layer = "30-storage-runtime"
-order = "01"
-local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts", "tigrbl-table-durability"]
-same_layer_dependencies = ["tigrbl-table-durability"]
-
-[[packages]]
-name = "tigrbl-digital-credential-durability"
-path = "pkgs/30-storage-runtime/tigrbl-digital-credential-durability"
-layer = "30-storage-runtime"
-order = "01"
-local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts", "tigrbl-table-durability"]
-same_layer_dependencies = ["tigrbl-table-durability"]
-
-[[packages]]
-name = "tigrbl-gnap-state-durability"
-path = "pkgs/30-storage-runtime/tigrbl-gnap-state-durability"
-layer = "30-storage-runtime"
-order = "01"
-local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts", "tigrbl-table-durability"]
-same_layer_dependencies = ["tigrbl-table-durability"]
-
-[[packages]]
-name = "tigrbl-identity-durability"
-path = "pkgs/30-storage-runtime/tigrbl-identity-durability"
-layer = "30-storage-runtime"
-order = "01"
-local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts", "tigrbl-table-durability"]
-same_layer_dependencies = ["tigrbl-table-durability"]
-
-[[packages]]
-name = "tigrbl-key-material-durability"
-path = "pkgs/30-storage-runtime/tigrbl-key-material-durability"
-layer = "30-storage-runtime"
-order = "01"
-local_dependencies = ["tigrbl-identity-storage", "tigrbl-security-trust-contracts", "tigrbl-table-durability"]
-same_layer_dependencies = ["tigrbl-table-durability"]
-
-[[packages]]
-name = "tigrbl-oauth-state-durability"
-path = "pkgs/30-storage-runtime/tigrbl-oauth-state-durability"
-layer = "30-storage-runtime"
-order = "01"
-local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts", "tigrbl-table-durability"]
-same_layer_dependencies = ["tigrbl-table-durability"]
-
-[[packages]]
-name = "tigrbl-oidc-state-durability"
-path = "pkgs/30-storage-runtime/tigrbl-oidc-state-durability"
-layer = "30-storage-runtime"
-order = "01"
-local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts", "tigrbl-table-durability"]
-same_layer_dependencies = ["tigrbl-table-durability"]
-
-[[packages]]
 name = "tigrbl-presentation-durability"
 path = "pkgs/30-storage-runtime/tigrbl-presentation-durability"
 layer = "30-storage-runtime"
-order = "01"
-local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts", "tigrbl-table-durability"]
-same_layer_dependencies = ["tigrbl-table-durability"]
+order = "00"
+local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts"]
+same_layer_dependencies = []
 
 [[packages]]
 name = "tigrbl-replay-protection-durability"
 path = "pkgs/30-storage-runtime/tigrbl-replay-protection-durability"
 layer = "30-storage-runtime"
-order = "01"
-local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts", "tigrbl-table-durability"]
-same_layer_dependencies = ["tigrbl-table-durability"]
+order = "00"
+local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts"]
+same_layer_dependencies = []
 
 [[packages]]
 name = "tigrbl-security-event-durability"
 path = "pkgs/30-storage-runtime/tigrbl-security-event-durability"
 layer = "30-storage-runtime"
-order = "01"
-local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts", "tigrbl-table-durability"]
-same_layer_dependencies = ["tigrbl-table-durability"]
+order = "00"
+local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts"]
+same_layer_dependencies = []
 
 [[packages]]
 name = "tigrbl-session-durability"
 path = "pkgs/30-storage-runtime/tigrbl-session-durability"
 layer = "30-storage-runtime"
-order = "01"
-local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts", "tigrbl-table-durability"]
-same_layer_dependencies = ["tigrbl-table-durability"]
+order = "00"
+local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts"]
+same_layer_dependencies = []
 
 [[packages]]
 name = "tigrbl-token-durability"
 path = "pkgs/30-storage-runtime/tigrbl-token-durability"
 layer = "30-storage-runtime"
-order = "01"
-local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts", "tigrbl-table-durability"]
-same_layer_dependencies = ["tigrbl-table-durability"]
+order = "00"
+local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts"]
+same_layer_dependencies = []
 
 [[packages]]
 name = "tigrbl-trust-federation-graph-durability"
 path = "pkgs/30-storage-runtime/tigrbl-trust-federation-graph-durability"
 layer = "30-storage-runtime"
-order = "01"
-local_dependencies = ["tigrbl-identity-storage", "tigrbl-table-durability"]
-same_layer_dependencies = ["tigrbl-table-durability"]
+order = "00"
+local_dependencies = ["tigrbl-identity-storage"]
+same_layer_dependencies = []
 
 [[packages]]
 name = "tigrbl-webauthn-durability"
 path = "pkgs/30-storage-runtime/tigrbl-webauthn-durability"
 layer = "30-storage-runtime"
-order = "01"
-local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts", "tigrbl-table-durability"]
-same_layer_dependencies = ["tigrbl-table-durability"]
+order = "00"
+local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts"]
+same_layer_dependencies = []
 
 [[packages]]
 name = "tigrbl-workload-identity-durability"
 path = "pkgs/30-storage-runtime/tigrbl-workload-identity-durability"
 layer = "30-storage-runtime"
-order = "01"
-local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts", "tigrbl-table-durability"]
-same_layer_dependencies = ["tigrbl-table-durability"]
+order = "00"
+local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts"]
+same_layer_dependencies = []
 
 [[packages]]
 name = "tigrbl-authz-policy-authority-derivation-graph"
 path = "pkgs/30-storage-runtime/tigrbl-authz-policy-authority-derivation-graph"
 layer = "30-storage-runtime"
-order = "02"
+order = "01"
 local_dependencies = ["tigrbl-authority-graph-concrete", "tigrbl-authority-graph-durability"]
 same_layer_dependencies = ["tigrbl-authority-graph-durability"]
 
@@ -2582,7 +2566,7 @@ same_layer_dependencies = ["tigrbl-authority-graph-durability"]
 name = "tigrbl-identity-admin-trust-federation-graph"
 path = "pkgs/30-storage-runtime/tigrbl-identity-admin-trust-federation-graph"
 layer = "30-storage-runtime"
-order = "02"
+order = "01"
 local_dependencies = ["tigrbl-trust-federation-graph-concrete", "tigrbl-trust-federation-graph-durability"]
 same_layer_dependencies = ["tigrbl-trust-federation-graph-durability"]
 
@@ -2590,9 +2574,9 @@ same_layer_dependencies = ["tigrbl-trust-federation-graph-durability"]
 name = "tigrbl-identity-storage-runtime"
 path = "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime"
 layer = "30-storage-runtime"
-order = "02"
-local_dependencies = ["tigrbl-attestation-durability", "tigrbl-audit-durability", "tigrbl-authorization-policy-durability", "tigrbl-consent-durability", "tigrbl-delegation-durability", "tigrbl-digital-credential-durability", "tigrbl-gnap-state-durability", "tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-durability", "tigrbl-identity-storage", "tigrbl-key-material-durability", "tigrbl-oauth-state-durability", "tigrbl-oidc-state-durability", "tigrbl-presentation-durability", "tigrbl-replay-protection-durability", "tigrbl-security-authorization-provenance-builder", "tigrbl-security-event-durability", "tigrbl-security-trust-contracts", "tigrbl-session-durability", "tigrbl-table-durability", "tigrbl-token-durability", "tigrbl-webauthn-durability", "tigrbl-workload-identity-durability"]
-same_layer_dependencies = ["tigrbl-attestation-durability", "tigrbl-audit-durability", "tigrbl-authorization-policy-durability", "tigrbl-consent-durability", "tigrbl-delegation-durability", "tigrbl-digital-credential-durability", "tigrbl-gnap-state-durability", "tigrbl-identity-durability", "tigrbl-key-material-durability", "tigrbl-oauth-state-durability", "tigrbl-oidc-state-durability", "tigrbl-presentation-durability", "tigrbl-replay-protection-durability", "tigrbl-security-event-durability", "tigrbl-session-durability", "tigrbl-table-durability", "tigrbl-token-durability", "tigrbl-webauthn-durability", "tigrbl-workload-identity-durability"]
+order = "01"
+local_dependencies = ["tigrbl-attestation-durability", "tigrbl-audit-durability", "tigrbl-authorization-policy-durability", "tigrbl-consent-durability", "tigrbl-delegation-durability", "tigrbl-digital-credential-durability", "tigrbl-gnap-state-durability", "tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-durability", "tigrbl-identity-storage", "tigrbl-key-material-durability", "tigrbl-oauth-state-durability", "tigrbl-oidc-state-durability", "tigrbl-presentation-durability", "tigrbl-replay-protection-durability", "tigrbl-security-authorization-provenance-builder", "tigrbl-security-event-durability", "tigrbl-security-trust-contracts", "tigrbl-session-durability", "tigrbl-token-durability", "tigrbl-webauthn-durability", "tigrbl-workload-identity-durability"]
+same_layer_dependencies = ["tigrbl-attestation-durability", "tigrbl-audit-durability", "tigrbl-authorization-policy-durability", "tigrbl-consent-durability", "tigrbl-delegation-durability", "tigrbl-digital-credential-durability", "tigrbl-gnap-state-durability", "tigrbl-identity-durability", "tigrbl-key-material-durability", "tigrbl-oauth-state-durability", "tigrbl-oidc-state-durability", "tigrbl-presentation-durability", "tigrbl-replay-protection-durability", "tigrbl-security-event-durability", "tigrbl-session-durability", "tigrbl-token-durability", "tigrbl-webauthn-durability", "tigrbl-workload-identity-durability"]
 
 [[packages]]
 name = "tigrbl-access-governance-capability"
@@ -3159,7 +3143,7 @@ name = "tigrbl-auth-protocol-oidc"
 path = "pkgs/50-protocols/tigrbl-auth-protocol-oidc"
 layer = "50-protocols"
 order = "02"
-local_dependencies = ["tigrbl-auth-protocol-oauth", "tigrbl-claim-access-token-hash-concrete", "tigrbl-claim-address-concrete", "tigrbl-claim-address-country-code-concrete", "tigrbl-claim-also-known-as-concrete", "tigrbl-claim-authentication-context-concrete", "tigrbl-claim-authentication-methods-concrete", "tigrbl-claim-authentication-time-concrete", "tigrbl-claim-authorization-code-hash-concrete", "tigrbl-claim-authorized-party-concrete", "tigrbl-claim-birth-family-name-concrete", "tigrbl-claim-birth-given-name-concrete", "tigrbl-claim-birth-middle-name-concrete", "tigrbl-claim-birthdate-concrete", "tigrbl-claim-email-concrete", "tigrbl-claim-email-verified-concrete", "tigrbl-claim-family-name-concrete", "tigrbl-claim-gender-concrete", "tigrbl-claim-given-name-concrete", "tigrbl-claim-locale-concrete", "tigrbl-claim-middle-name-concrete", "tigrbl-claim-msisdn-concrete", "tigrbl-claim-name-concrete", "tigrbl-claim-nationalities-concrete", "tigrbl-claim-nickname-concrete", "tigrbl-claim-nonce-concrete", "tigrbl-claim-phone-number-concrete", "tigrbl-claim-phone-number-verified-concrete", "tigrbl-claim-picture-uri-concrete", "tigrbl-claim-place-of-birth-concrete", "tigrbl-claim-preferred-username-concrete", "tigrbl-claim-profile-uri-concrete", "tigrbl-claim-salutation-concrete", "tigrbl-claim-session-id-concrete", "tigrbl-claim-state-hash-concrete", "tigrbl-claim-title-concrete", "tigrbl-claim-transaction-id-concrete", "tigrbl-claim-updated-at-concrete", "tigrbl-claim-verified-claims-concrete", "tigrbl-claim-website-uri-concrete", "tigrbl-claim-zoneinfo-concrete", "tigrbl-identity-assurance-concrete", "tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-jose", "tigrbl-jose-swarmauri-provider", "tigrbl-pairwise-subject-identifier-concrete", "tigrbl-public-subject-identifier-concrete", "tigrbl-security-claims-provider-local"]
+local_dependencies = ["tigrbl-auth-protocol-oauth", "tigrbl-claim-access-token-hash-concrete", "tigrbl-claim-address-concrete", "tigrbl-claim-address-country-code-concrete", "tigrbl-claim-also-known-as-concrete", "tigrbl-claim-authentication-context-concrete", "tigrbl-claim-authentication-methods-concrete", "tigrbl-claim-authentication-time-concrete", "tigrbl-claim-authorization-code-hash-concrete", "tigrbl-claim-authorized-party-concrete", "tigrbl-claim-birth-family-name-concrete", "tigrbl-claim-birth-given-name-concrete", "tigrbl-claim-birth-middle-name-concrete", "tigrbl-claim-birthdate-concrete", "tigrbl-claim-email-concrete", "tigrbl-claim-email-verified-concrete", "tigrbl-claim-family-name-concrete", "tigrbl-claim-gender-concrete", "tigrbl-claim-given-name-concrete", "tigrbl-claim-locale-concrete", "tigrbl-claim-middle-name-concrete", "tigrbl-claim-msisdn-concrete", "tigrbl-claim-name-concrete", "tigrbl-claim-nationalities-concrete", "tigrbl-claim-nickname-concrete", "tigrbl-claim-nonce-concrete", "tigrbl-claim-phone-number-concrete", "tigrbl-claim-phone-number-verified-concrete", "tigrbl-claim-picture-uri-concrete", "tigrbl-claim-place-of-birth-concrete", "tigrbl-claim-preferred-username-concrete", "tigrbl-claim-profile-uri-concrete", "tigrbl-claim-salutation-concrete", "tigrbl-claim-session-id-concrete", "tigrbl-claim-state-hash-concrete", "tigrbl-claim-title-concrete", "tigrbl-claim-transaction-id-concrete", "tigrbl-claim-updated-at-concrete", "tigrbl-claim-verified-claims-concrete", "tigrbl-claim-website-uri-concrete", "tigrbl-claim-zoneinfo-concrete", "tigrbl-identity-assurance-concrete", "tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-jose", "tigrbl-pairwise-subject-identifier-concrete", "tigrbl-public-subject-identifier-concrete", "tigrbl-security-claims-provider-local"]
 same_layer_dependencies = ["tigrbl-auth-protocol-oauth"]
 
 [[packages]]
@@ -3199,7 +3183,7 @@ name = "tigrbl-identity-runtime"
 path = "pkgs/60-runtime/tigrbl-identity-runtime"
 layer = "60-runtime"
 order = "00"
-local_dependencies = ["tigrbl-auth-protocol-cwt", "tigrbl-auth-protocol-webauthn", "tigrbl-authn-credentials", "tigrbl-credential-profile-vc-jose-cose", "tigrbl-identity-contracts", "tigrbl-identity-jose", "tigrbl-identity-protocol-did-core", "tigrbl-identity-storage", "tigrbl-identity-storage-runtime", "tigrbl-protected-envelope-capability", "tigrbl-public-key-authentication-capability", "tigrbl-public-key-credential-management-capability", "tigrbl-public-key-registration-capability", "tigrbl-security-protocol-cose", "tigrbl-security-protocol-jws", "tigrbl-workload-credential-profile-cwt-svid-extension"]
+local_dependencies = ["tigrbl-auth-protocol-cwt", "tigrbl-auth-protocol-webauthn", "tigrbl-credential-profile-vc-jose-cose", "tigrbl-credentials", "tigrbl-identity-contracts", "tigrbl-identity-jose", "tigrbl-identity-protocol-did-core", "tigrbl-identity-storage", "tigrbl-identity-storage-runtime", "tigrbl-protected-envelope-capability", "tigrbl-public-key-authentication-capability", "tigrbl-public-key-credential-management-capability", "tigrbl-public-key-registration-capability", "tigrbl-security-protocol-cose", "tigrbl-security-protocol-jws", "tigrbl-workload-credential-profile-cwt-svid-extension"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -3251,12 +3235,20 @@ local_dependencies = ["tigrbl-adaptive-authentication-capability", "tigrbl-admin
 same_layer_dependencies = ["tigrbl-identity-server"]
 
 [[packages]]
+name = "tigrbl-credentials"
+path = "pkgs/70-facade/tigrbl-credentials"
+layer = "70-facade"
+order = "00"
+local_dependencies = ["tigrbl-api-key-credential-concrete", "tigrbl-client-secret-credential-concrete", "tigrbl-digital-credential-contracts", "tigrbl-dpop-key-credential-concrete", "tigrbl-identity-contracts", "tigrbl-identity-jose", "tigrbl-mfa-credential-concrete", "tigrbl-mtls-certificate-credential-concrete", "tigrbl-passkey-credential-concrete", "tigrbl-password-credential-concrete", "tigrbl-password-reset-credential-concrete", "tigrbl-secret-hashing-bcrypt-provider", "tigrbl-service-key-credential-concrete", "tigrbl-workload-identity-contracts"]
+same_layer_dependencies = []
+
+[[packages]]
 name = "tigrbl-auth"
 path = "pkgs/70-facade/tigrbl-auth"
 layer = "70-facade"
-order = "00"
-local_dependencies = ["tigrbl-auth-plugin", "tigrbl-auth-protocol-oauth", "tigrbl-auth-protocol-oidc", "tigrbl-auth-protocol-rp", "tigrbl-auth-protocol-webauthn", "tigrbl-auth-release-certification", "tigrbl-authn-credentials", "tigrbl-authority-graph-concrete", "tigrbl-authz-policy", "tigrbl-authz-policy-attributes-mapping", "tigrbl-authz-policy-combiner-default", "tigrbl-authz-policy-evaluators-default", "tigrbl-authz-policy-obligations-concrete", "tigrbl-authz-policy-rules-concrete", "tigrbl-authz-resource-server", "tigrbl-identity-admin", "tigrbl-identity-author", "tigrbl-identity-cli", "tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-jose", "tigrbl-identity-operator", "tigrbl-identity-principals", "tigrbl-identity-runtime", "tigrbl-identity-server", "tigrbl-identity-storage", "tigrbl-identity-storage-runtime", "tigrbl-security-authorization-provenance-builder", "tigrbl-security-signing-pqc"]
-same_layer_dependencies = []
+order = "01"
+local_dependencies = ["tigrbl-auth-plugin", "tigrbl-auth-protocol-oauth", "tigrbl-auth-protocol-oidc", "tigrbl-auth-protocol-rp", "tigrbl-auth-protocol-webauthn", "tigrbl-auth-release-certification", "tigrbl-authority-graph-concrete", "tigrbl-authz-policy", "tigrbl-authz-policy-attributes-mapping", "tigrbl-authz-policy-combiner-default", "tigrbl-authz-policy-evaluators-default", "tigrbl-authz-policy-obligations-concrete", "tigrbl-authz-policy-rules-concrete", "tigrbl-authz-resource-server", "tigrbl-credentials", "tigrbl-identity-admin", "tigrbl-identity-author", "tigrbl-identity-cli", "tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-jose", "tigrbl-identity-operator", "tigrbl-identity-principals", "tigrbl-identity-runtime", "tigrbl-identity-server", "tigrbl-identity-storage", "tigrbl-identity-storage-runtime", "tigrbl-security-authorization-provenance-builder", "tigrbl-security-signing-pqc"]
+same_layer_dependencies = ["tigrbl-credentials"]
 
 [[packages]]
 name = "tigrbl-auth-router-admin-gate"
@@ -3491,6 +3483,14 @@ local_dependencies = ["tigrbl-identity-authenticator-bases", "tigrbl-identity-co
 same_layer_dependencies = []
 
 [[packages]]
+name = "tigrbl-authn-credentials"
+path = "pkgs/deprecated/tigrbl-authn-credentials"
+layer = "deprecated"
+order = "00"
+local_dependencies = ["tigrbl-credentials"]
+same_layer_dependencies = []
+
+[[packages]]
 name = "tigrbl-authz-policy-admin-gate"
 path = "pkgs/deprecated/tigrbl-authz-policy-admin-gate"
 layer = "deprecated"
@@ -3607,7 +3607,7 @@ name = "tigrbl-identity-credentials"
 path = "pkgs/deprecated/tigrbl-identity-credentials"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tigrbl-authn-credentials", "tigrbl-identity-jose", "tigrbl-identity-runtime", "tigrbl-identity-server", "tigrbl-identity-storage"]
+local_dependencies = ["tigrbl-credentials", "tigrbl-identity-jose", "tigrbl-identity-runtime", "tigrbl-identity-server", "tigrbl-identity-storage"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -3791,5 +3791,5 @@ name = "tigrbl-principal-authentication"
 path = "pkgs/deprecated/tigrbl-principal-authentication"
 layer = "deprecated"
 order = "01"
-local_dependencies = ["tigrbl-api-key-authentication-capability", "tigrbl-authenticator-api-key-local", "tigrbl-authenticator-client-secret-local", "tigrbl-authenticator-password-local", "tigrbl-authenticator-service-key-local", "tigrbl-capability", "tigrbl-client-secret-authentication-capability", "tigrbl-identity-contracts", "tigrbl-identity-credentials-concrete", "tigrbl-password-authentication-capability", "tigrbl-secret-hashing-bcrypt-provider", "tigrbl-service-key-authentication-capability"]
+local_dependencies = ["tigrbl-api-key-authentication-capability", "tigrbl-authenticator-api-key-local", "tigrbl-authenticator-client-secret-local", "tigrbl-authenticator-password-local", "tigrbl-authenticator-service-key-local", "tigrbl-capability", "tigrbl-client-secret-authentication-capability", "tigrbl-credentials", "tigrbl-identity-contracts", "tigrbl-identity-credentials-concrete", "tigrbl-password-authentication-capability", "tigrbl-secret-hashing-bcrypt-provider", "tigrbl-service-key-authentication-capability"]
 same_layer_dependencies = ["tigrbl-identity-credentials-concrete"]

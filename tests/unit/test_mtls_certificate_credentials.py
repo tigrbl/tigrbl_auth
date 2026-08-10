@@ -11,7 +11,7 @@ for src in sorted((ROOT / "pkgs").glob("*/src")):
 
 
 def test_mtls_certificate_credential_t0_public_model_is_importable() -> None:
-    import tigrbl_authn_credentials as credentials
+    import tigrbl_credentials as credentials
 
     mtls = credentials.create_mtls_certificate_credential(
         "service:billing",
@@ -26,7 +26,7 @@ def test_mtls_certificate_credential_t0_public_model_is_importable() -> None:
 
 
 def test_proof_binding_t1_renders_dpop_and_mtls_confirmation_claims() -> None:
-    import tigrbl_authn_credentials as credentials
+    import tigrbl_credentials as credentials
 
     mtls = credentials.create_mtls_certificate_credential(
         "service:billing",
@@ -43,7 +43,7 @@ def test_proof_binding_t1_renders_dpop_and_mtls_confirmation_claims() -> None:
 
 def test_mtls_certificate_credential_t2_rejects_blank_proof_material() -> None:
     import pytest
-    import tigrbl_authn_credentials as credentials
+    import tigrbl_credentials as credentials
 
     with pytest.raises(ValueError, match="certificate thumbprint is required"):
         credentials.create_mtls_certificate_credential(
@@ -60,7 +60,7 @@ def test_mtls_certificate_credential_t2_rejects_blank_proof_material() -> None:
 
 def test_proof_binding_t2_rejects_missing_confirmation_members() -> None:
     import pytest
-    import tigrbl_authn_credentials as credentials
+    import tigrbl_credentials as credentials
 
     with pytest.raises(ValueError, match="cnf.jkt"):
         credentials.ProofBinding.for_dpop("  ")
