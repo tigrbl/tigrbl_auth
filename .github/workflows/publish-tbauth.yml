@@ -1,0 +1,39 @@
+name: publish-tbauth
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build tbauth distributions
+        uses: cobycloud/actions/actions/python-package-build@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
+        with:
+          python-version: "3.12"
+          project-path: pkgs/70-facade/tbauth
+          out-dir: dist/tbauth
+          upload-artifact: "true"
+          artifact-name: python-dist-tbauth
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: python-dist-tbauth
+          path: dist/tbauth
+      - name: Publish tbauth to PyPI with Trusted Publishing
+        uses: cobycloud/actions/actions/pypi-trusted-publish@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
+        with:
+          packages-dir: dist/tbauth
+          skip-existing: "true"
