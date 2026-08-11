@@ -3235,6 +3235,22 @@ local_dependencies = ["tigrbl-adaptive-authentication-capability", "tigrbl-admin
 same_layer_dependencies = ["tigrbl-identity-server"]
 
 [[packages]]
+name = "tba"
+path = "pkgs/70-facade/tba"
+layer = "70-facade"
+order = "00"
+local_dependencies = []
+same_layer_dependencies = []
+
+[[packages]]
+name = "tbauth"
+path = "pkgs/70-facade/tbauth"
+layer = "70-facade"
+order = "00"
+local_dependencies = []
+same_layer_dependencies = []
+
+[[packages]]
 name = "tigrbl-credentials"
 path = "pkgs/70-facade/tigrbl-credentials"
 layer = "70-facade"
