@@ -8,6 +8,7 @@ import {
   buildBrowserJsonRequestInit,
   getOrCreateCsrfToken,
 } from '../services/publicUxPolicy';
+import { resolveAuthorizationContinuation } from '../services/publicRouting';
 
 interface LoginCredentials {
   identifier: string;
@@ -60,6 +61,14 @@ export const useLogin = () => {
       const config = await getTigrblAuthProviderConfig();
       if (credentials) {
         await createBrowserSession(credentials);
+        const continuation = resolveAuthorizationContinuation(
+          window.location.pathname,
+          window.location.search,
+        );
+        if (continuation) {
+          window.location.assign(continuation);
+          return;
+        }
       }
       localStorage.setItem('tigrbl_auth_pending_provider', provider);
       const adapter = OidcAdapterFactory.getAdapter(provider, config);

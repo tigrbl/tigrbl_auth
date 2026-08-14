@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   LOGIN_HASH,
   publicHashPath,
+  resolveAuthorizationContinuation,
   resolveInitialPublicHash,
   resolvePublicRedirect,
   shouldNormalizeCallbackLocation,
@@ -36,6 +37,33 @@ describe("publicRouting", () => {
     expect(resolveInitialPublicHash("/", "", "")).toBe("#/");
     expect(resolveInitialPublicHash("/", "", "#/profile")).toBe("#/profile");
     expect(shouldNormalizeCallbackLocation("/", "?code=code-1&state=state-1")).toBeNull();
+  });
+
+  it("T1 preserves a valid relying-party authorization request after login", () => {
+    expect(
+      resolveAuthorizationContinuation(
+        "/authorize",
+        "?client_id=customer&redirect_uri=https%3A%2F%2Fapp.example.com%2Fcallback&response_type=code&state=state-1&code_challenge=challenge",
+      ),
+    ).toBe(
+      "/authorize?client_id=customer&redirect_uri=https%3A%2F%2Fapp.example.com%2Fcallback&response_type=code&state=state-1&code_challenge=challenge",
+    );
+  });
+
+  it("T2 refuses malformed or non-code authorization continuations", () => {
+    expect(resolveAuthorizationContinuation("/authorize", "?response_type=code")).toBeNull();
+    expect(
+      resolveAuthorizationContinuation(
+        "/authorize",
+        "?client_id=customer&redirect_uri=https%3A%2F%2Fapp.example.com%2Fcallback&response_type=token",
+      ),
+    ).toBeNull();
+    expect(
+      resolveAuthorizationContinuation(
+        "/not-authorize",
+        "?client_id=customer&redirect_uri=https%3A%2F%2Fapp.example.com%2Fcallback&response_type=code",
+      ),
+    ).toBeNull();
   });
 
   it("T2 never redirects an active callback route to login", () => {

@@ -5,6 +5,24 @@ export const DEFAULT_PUBLIC_HASH = "#/";
 export const LOGIN_HASH = "#/login";
 export const VERIFY_EMAIL_HASH = "#/verify-email";
 
+export const resolveAuthorizationContinuation = (
+  pathname: string,
+  search: string,
+): string | null => {
+  if (pathname !== "/authorize") {
+    return null;
+  }
+  const params = new URLSearchParams(search.replace(/^\?/, ""));
+  if (
+    params.get("response_type") !== "code"
+    || !params.get("client_id")
+    || !params.get("redirect_uri")
+  ) {
+    return null;
+  }
+  return `/authorize?${params.toString()}`;
+};
+
 export const publicHashPath = (hash: string): string => hash.split("?")[0] || DEFAULT_PUBLIC_HASH;
 
 export const resolveInitialPublicHash = (
