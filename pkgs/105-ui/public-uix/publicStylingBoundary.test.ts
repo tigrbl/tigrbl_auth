@@ -66,4 +66,15 @@ describe("public UIX styling boundary", () => {
       }
     }
   });
+
+  it("keeps the public login shell within narrow mobile viewports", () => {
+    const layout = readFileSync(join(ROOT, "components", "Layout.css"), "utf8");
+    const login = readFileSync(join(ROOT, "pages", "LoginPage.css"), "utf8");
+
+    expect(layout).toContain("@media (max-width: 640px)");
+    expect(layout).toMatch(/\.layout-header-inner,[\s\S]*?min-width:\s*0;/);
+    expect(layout).toMatch(/\.layout-footer-links\s*\{[\s\S]*?flex-wrap:\s*wrap;/);
+    expect(login).toContain("@media (max-width: 640px)");
+    expect(login).toMatch(/\.login-shell\s*\{[\s\S]*?min-width:\s*0;/);
+  });
 });

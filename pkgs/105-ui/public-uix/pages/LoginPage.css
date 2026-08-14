@@ -152,3 +152,22 @@
 .login-footer-button:hover {
   text-decoration: underline;
 }
+
+@media (max-width: 640px) {
+  .login-page {
+    padding: 1rem;
+  }
+
+  .login-shell {
+    min-width: 0;
+    gap: 1.5rem;
+  }
+
+  .login-title {
+    font-size: 1.5rem;
+  }
+
+  .login-card {
+    padding: 1.25rem;
+  }
+}

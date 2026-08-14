@@ -160,8 +160,48 @@
 }
 
 @media (max-width: 640px) {
+  .layout-header {
+    padding: 0.75rem 1rem;
+  }
+
+  .layout-header-inner,
+  .layout-brand,
+  .layout-guest-nav {
+    min-width: 0;
+  }
+
+  .layout-brand {
+    font-size: 1.125rem;
+  }
+
+  .layout-brand-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .layout-guest-nav {
+    flex: 0 0 auto;
+    gap: 0.5rem;
+  }
+
+  .layout-join-button {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .layout-footer {
+    padding: 1rem;
+  }
+
   .layout-footer-inner {
     flex-direction: column;
+    text-align: center;
+  }
+
+  .layout-footer-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem 1rem;
   }
 
   .layout-user-name {
