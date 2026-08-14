@@ -7,7 +7,7 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Any, AsyncIterator
 
-from tigrbl import TigrblRouter
+from tigrbl_concrete._concrete import TigrblRouter
 from tigrbl_identity_storage.tables.operator_activity import OperatorActivity
 from tigrbl_identity_storage.tables.operator_audit_event import OperatorAuditEvent
 from tigrbl_identity_storage.tables.operator_metadata import OperatorMetadata
@@ -29,7 +29,7 @@ _APP_CACHE: dict[str, TigrblRouter] = {}
 
 
 def _resolve_api_provider(api: Any) -> Any:
-    from tigrbl.engine import resolver as engine_resolver
+    from tigrbl_concrete.engine import resolver as engine_resolver
 
     try:
         return engine_resolver.resolve_provider(api=api)
@@ -85,4 +85,9 @@ async def operator_store_session(state_root: Path) -> AsyncIterator[Any]:
             raise
 
 
-__all__ = ["OPERATOR_TABLES", "operator_store_app", "operator_store_provider", "operator_store_session"]
+__all__ = [
+    "OPERATOR_TABLES",
+    "operator_store_app",
+    "operator_store_provider",
+    "operator_store_session",
+]

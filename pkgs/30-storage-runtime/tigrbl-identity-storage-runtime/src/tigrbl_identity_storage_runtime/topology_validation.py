@@ -273,7 +273,7 @@ async def collect_identity_topology_snapshot(db: Any) -> IdentityTopologySnapsho
         TenantMembership,
         User,
     )
-    from tigrbl import list_records
+    from tigrbl_concrete.records import list_records
 
     return IdentityTopologySnapshot(
         realms=tuple(await list_records(Realm, db)),

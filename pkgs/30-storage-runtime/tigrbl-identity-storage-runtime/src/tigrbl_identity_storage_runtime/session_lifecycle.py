@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Any
 from uuid import UUID
 
-from tigrbl import create_table_record, read_table_record
+from tigrbl_concrete.records import create_table_record, read_table_record
 from .ops.sessions import (
     bind_session_client,
     get_active_session,

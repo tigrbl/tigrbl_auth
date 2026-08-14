@@ -8,9 +8,15 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from tigrbl import bootstrap_dbschema
-from tigrbl.ddl import sqlite_default_attach_map
-from tigrbl_identity_storage.migrations.helpers import applied_revisions, column_names, mark_revision, table_names, unmark_revision
+from tigrbl_concrete.ddl import bootstrap_dbschema
+from tigrbl_concrete.ddl import sqlite_default_attach_map
+from tigrbl_identity_storage.migrations.helpers import (
+    applied_revisions,
+    column_names,
+    mark_revision,
+    table_names,
+    unmark_revision,
+)
 from tigrbl_identity_storage.migrations.helpers import AUTHN_SCHEMA
 from tigrbl_identity_storage.tables import RestOltpTable
 from tigrbl_identity_storage.components import load_full_composition
@@ -22,7 +28,9 @@ def _versions_dir() -> Path:
     spec = importlib.util.find_spec("tigrbl_identity_storage.migrations.versions")
     locations = list(spec.submodule_search_locations or ()) if spec is not None else []
     if not locations:
-        raise RuntimeError("Unable to resolve tigrbl_identity_storage migration versions directory")
+        raise RuntimeError(
+            "Unable to resolve tigrbl_identity_storage migration versions directory"
+        )
     return Path(locations[0])
 
 
@@ -50,7 +58,7 @@ class SchemaVerification:
 
 def _resolve_provider():
     try:
-        from tigrbl.engine import resolver as engine_resolver
+        from tigrbl_concrete.engine import resolver as engine_resolver
 
         provider = engine_resolver.resolve_provider()
         if provider is not None:
@@ -71,12 +79,18 @@ def _load_module(path: Path):
 
 
 def iter_migration_modules() -> list[Any]:
-    return [_load_module(path) for path in sorted(VERSIONS_DIR.glob("*.py")) if path.name != "__init__.py"]
+    return [
+        _load_module(path)
+        for path in sorted(VERSIONS_DIR.glob("*.py"))
+        if path.name != "__init__.py"
+    ]
 
 
 def expected_table_names() -> list[str]:
     names: list[str] = []
-    for table in sorted(RestOltpTable.metadata.sorted_tables, key=lambda item: item.name):
+    for table in sorted(
+        RestOltpTable.metadata.sorted_tables, key=lambda item: item.name
+    ):
         if table.schema == "authn":
             names.append(table.name)
     return names
@@ -96,7 +110,9 @@ def _bootstrap_sqlite_schema(raw_engine: Any) -> dict[str, str]:
     return attachments
 
 
-def _ensure_sqlite_attachment_on_connection(sync_conn: Any, attachments: dict[str, str]) -> None:
+def _ensure_sqlite_attachment_on_connection(
+    sync_conn: Any, attachments: dict[str, str]
+) -> None:
     if sync_conn.dialect.name != "sqlite" or not attachments:
         return
     existing = {
@@ -110,7 +126,7 @@ def _ensure_sqlite_attachment_on_connection(sync_conn: Any, attachments: dict[st
             sync_conn.exec_driver_sql(f'ATTACH DATABASE ? AS "{schema}"', (path,))
         except Exception:
             safe_path = path.replace("'", "''")
-            sync_conn.exec_driver_sql(f'ATTACH DATABASE \'{safe_path}\' AS "{schema}"')
+            sync_conn.exec_driver_sql(f"ATTACH DATABASE '{safe_path}' AS \"{schema}\"")
 
 
 def verify_schema_sync(conn) -> SchemaVerification:
@@ -145,7 +161,9 @@ async def apply_all_async() -> MigrationResult:
         pending_before: list[str] = []
         applied_now: list[str] = []
         if current and "0038_adopt_component_ownership" not in current:
-            legacy_pending = [module for module in modules if module.revision not in current]
+            legacy_pending = [
+                module for module in modules if module.revision not in current
+            ]
             pending_before.extend(module.revision for module in legacy_pending)
             for module in legacy_pending:
                 module.upgrade(sync_conn)
@@ -219,7 +237,12 @@ async def verify_schema_async() -> SchemaVerification:
     begin_ctx = raw_engine.begin()
     if hasattr(begin_ctx, "__aenter__"):
         async with begin_ctx as conn:
-            return await conn.run_sync(lambda sync_conn: (_ensure_sqlite_attachment_on_connection(sync_conn, attachments), verify_schema_sync(sync_conn))[1])
+            return await conn.run_sync(
+                lambda sync_conn: (
+                    _ensure_sqlite_attachment_on_connection(sync_conn, attachments),
+                    verify_schema_sync(sync_conn),
+                )[1]
+            )
     with begin_ctx as conn:
         _ensure_sqlite_attachment_on_connection(conn, attachments)
         return verify_schema_sync(conn)

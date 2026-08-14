@@ -2,7 +2,8 @@
 
 from collections.abc import Iterable
 
-from tigrbl import OpSpec, TableSpec, activateTableSpecs
+from tigrbl_concrete.factories import activateTableSpecs
+from tigrbl_core._spec import OpSpec, TableSpec
 
 
 def initializeIdentityRuntimeTables(

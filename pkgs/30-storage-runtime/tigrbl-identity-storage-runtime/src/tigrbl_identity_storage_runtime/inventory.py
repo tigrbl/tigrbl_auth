@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from tigrbl_identity_storage.tables import TABLE_MODELS
 
-from tigrbl import deriveTableSpec
+from tigrbl_concrete.factories import deriveTableSpec
 
 
 RUNTIME_TABLES = tuple(TABLE_MODELS)

@@ -9,7 +9,7 @@ from .engine import ENGINE
 
 
 def _resolve_default_provider() -> Any:
-    from tigrbl.engine import resolver as engine_resolver
+    from tigrbl_concrete.engine import resolver as engine_resolver
 
     return engine_resolver.resolve_provider()
 

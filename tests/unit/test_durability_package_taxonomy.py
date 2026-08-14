@@ -102,3 +102,19 @@ def test_engine_construction_is_owned_by_layer_30() -> None:
     assert "build_engine(" in canonical
     assert "tigrbl_identity_storage_runtime.engine" in compatibility
     assert "build_engine(" not in compatibility
+
+
+def test_identity_storage_runtime_uses_direct_tigrbl_packages() -> None:
+    package = LAYER / "tigrbl-identity-storage-runtime"
+    facade_imports: list[str] = []
+    for source in (package / "src").rglob("*.py"):
+        for imported in _imports(source):
+            if imported == "tigrbl" or imported.startswith("tigrbl."):
+                facade_imports.append(f"{source.relative_to(ROOT)} -> {imported}")
+
+    manifest = (package / "pyproject.toml").read_text(encoding="utf-8")
+
+    assert facade_imports == []
+    assert '"tigrbl-concrete @ git+https://github.com/tigrbl/tigrbl.git@4329694c1d20c16a6e07cd49397871bf479c8703#subdirectory=pkgs/70_concrete/tigrbl_concrete"' in manifest
+    assert '"tigrbl-core==0.4.5.dev4"' in manifest
+    assert '"tigrbl==0.4.5.dev4"' not in manifest

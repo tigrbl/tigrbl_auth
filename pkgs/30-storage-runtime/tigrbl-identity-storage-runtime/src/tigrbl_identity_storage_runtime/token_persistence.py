@@ -8,7 +8,7 @@ from uuid import uuid4
 from tigrbl_identity_core.errors import InvalidRefreshTokenError, RefreshTokenReuseError
 from tigrbl_identity_core.digests import token_hash
 from tigrbl_identity_storage.tables import TokenRecord
-from tigrbl import (
+from tigrbl_concrete.records import (
     delete_table_record,
     field_value,
     first_table_record,

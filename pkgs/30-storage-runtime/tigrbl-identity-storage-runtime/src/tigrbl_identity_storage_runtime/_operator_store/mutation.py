@@ -10,7 +10,7 @@ from .paths import (
     _write_metadata_snapshot,
 )
 from .app import operator_store_session
-from tigrbl import (
+from tigrbl_concrete.records import (
     create_table_record as _create_table_record,
     delete_table_record as _delete_table_record,
     field as _table_field,

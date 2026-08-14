@@ -1647,7 +1647,7 @@ wheels = [
 [[package]]
 name = "tigrbl"
 version = "0.4.5.dev4"
-source = { registry = "https://pypi.org/simple" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F80_facade%2Ftigrbl&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
 dependencies = [
     { name = "aiosqlite" },
     { name = "greenlet" },
@@ -1663,11 +1663,6 @@ dependencies = [
     { name = "tigrbl-ops-oltp" },
     { name = "tigrbl-orm" },
     { name = "tigrbl-runtime" },
-    { name = "uvicorn" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/ab/ef/44a0978996d974729d04e91edf40fb5c1ac7cdf8b344b6715219aaea6d64/tigrbl-0.4.5.dev4.tar.gz", hash = "sha256:ccd2636e253424a872a6bb6a69a60219dc492cc2305166fa05a3406d7ed360b8", size = 69357, upload-time = "2026-06-27T11:07:38.596Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/a2/a7/086c2d29f567fd03daaf5d9a62ebd823a1b6349cce19f99dcc2e14930b78/tigrbl-0.4.5.dev4-py3-none-any.whl", hash = "sha256:54f6ae2654102d7fba71509d3276270cb8ef8696bd689e3665c17a60de02813d", size = 85683, upload-time = "2026-06-27T11:07:37.561Z" },
 ]
 
 [[package]]
@@ -1883,7 +1878,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-atoms"
 version = "0.4.5.dev4"
-source = { registry = "https://pypi.org/simple" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F40_atoms%2Ftigrbl_atoms&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
 dependencies = [
     { name = "jinja2" },
     { name = "sqlalchemy" },
@@ -1894,10 +1889,6 @@ dependencies = [
     { name = "tigrbl-ops-webtransport" },
     { name = "tigrbl-typing" },
     { name = "typing-extensions" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/d6/09/a137dc8930601f65a8d83560822c4c40161978f4b15a90c021faa13c6570/tigrbl_atoms-0.4.5.dev4.tar.gz", hash = "sha256:9f45ff11cab5ac2021694d0c37d918f9e6f7fe507d6e15d2cd827876f3104618", size = 123862, upload-time = "2026-06-27T11:07:23.918Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/49/70/83689e8ff42993bb0754d0ffa60159d81907ece189bb994f4239f75241dd/tigrbl_atoms-0.4.5.dev4-py3-none-any.whl", hash = "sha256:f1779be68cd17b11337c82274e10c7ceecb9ef4ea79560d2c9866375dc21bd23", size = 201266, upload-time = "2026-06-27T11:07:22.542Z" },
 ]
 
 [[package]]
@@ -3715,7 +3706,7 @@ requires-dist = [
     { name = "requests", marker = "extra == 'test'", specifier = "==2.33.1" },
     { name = "sqlalchemy", extras = ["asyncio"], specifier = "==2.0.49" },
     { name = "ssot-registry", marker = "extra == 'test'", specifier = "==0.2.17" },
-    { name = "tigrbl", specifier = "==0.4.5.dev4" },
+    { name = "tigrbl", git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F80_facade%2Ftigrbl&rev=4329694c1d20c16a6e07cd49397871bf479c8703" },
     { name = "tigrbl-access-governance-capability", editable = "pkgs/40-capabilities/tigrbl-access-governance-capability" },
     { name = "tigrbl-access-governance-memory-provider", editable = "pkgs/20-providers/tigrbl-access-governance-memory-provider" },
     { name = "tigrbl-account-self-service", editable = "pkgs/deprecated/tigrbl-account-self-service" },
@@ -4065,7 +4056,7 @@ requires-dist = [
     { name = "tigrbl-operator-administration-capability", editable = "pkgs/40-capabilities/tigrbl-operator-administration-capability" },
     { name = "tigrbl-ops-olap", specifier = "==0.4.5.dev4" },
     { name = "tigrbl-ops-oltp", specifier = "==0.4.5.dev4" },
-    { name = "tigrbl-ops-realtime", specifier = "==0.4.5.dev4" },
+    { name = "tigrbl-ops-realtime", git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F60_ops%2Ftigrbl_ops_realtime&rev=4329694c1d20c16a6e07cd49397871bf479c8703" },
     { name = "tigrbl-orm", specifier = "==0.4.5.dev4" },
     { name = "tigrbl-pairwise-subject-identifier-concrete", editable = "pkgs/10-concrete/tigrbl-pairwise-subject-identifier-concrete" },
     { name = "tigrbl-password-authentication-capability", editable = "pkgs/40-capabilities/tigrbl-password-authentication-capability" },
@@ -4787,22 +4778,18 @@ requires-dist = [
 [[package]]
 name = "tigrbl-base"
 version = "0.4.5.dev4"
-source = { registry = "https://pypi.org/simple" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F20_base%2Ftigrbl_base&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
 dependencies = [
     { name = "pydantic" },
     { name = "sqlalchemy" },
     { name = "tigrbl-atoms" },
     { name = "tigrbl-core" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/4a/4d/bfb803dc5a457e0b19417ca86f1b31019d06b2baf565a595bdaae3c3e0a6/tigrbl_base-0.4.5.dev4.tar.gz", hash = "sha256:9963c1ab8c3daebbba35c88580f3d828391243a2fc816d7a2d7d2c37d9ab34f2", size = 41972, upload-time = "2026-06-27T11:07:40.506Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/ed/af/6bfdd53348faee4232e431cbddf1c613c2a28959f59ef7af37d7416fd0a2/tigrbl_base-0.4.5.dev4-py3-none-any.whl", hash = "sha256:4bef9ee278e42a0b1cf1b5816155eb13287d790fd8f79d791ed482904d020485", size = 50529, upload-time = "2026-06-27T11:07:39.363Z" },
-]
 
 [[package]]
 name = "tigrbl-canon"
 version = "0.4.5.dev4"
-source = { registry = "https://pypi.org/simple" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F99_deprecated%2Ftigrbl_canon&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
 dependencies = [
     { name = "tigrbl" },
     { name = "tigrbl-atoms" },
@@ -4811,10 +4798,6 @@ dependencies = [
     { name = "tigrbl-core" },
     { name = "tigrbl-ops-oltp" },
     { name = "tigrbl-runtime" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/68/e3/388d683906d1ab3c86c2748155b51cefddcd238e84d509f7d6d7490e4a94/tigrbl_canon-0.4.5.dev4.tar.gz", hash = "sha256:7e5d6618771ef12466e110554af0e5c9df76c3eeba242b37c2caa5a96e8d9020", size = 64883, upload-time = "2026-06-27T11:07:45.816Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/37/fc/0154fa087c342f6f4cba8905bb121ba5513e7492eab53c8786bc7afc32b3/tigrbl_canon-0.4.5.dev4-py3-none-any.whl", hash = "sha256:0f81118d5e3af934f474bd12be8b16a23741f7e78b1b1cd586aef30dc9076343", size = 90595, upload-time = "2026-06-27T11:07:44.887Z" },
 ]
 
 [[package]]
@@ -6049,7 +6032,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-concrete"
 version = "0.4.5.dev4"
-source = { registry = "https://pypi.org/simple" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F70_concrete%2Ftigrbl_concrete&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
 dependencies = [
     { name = "orjson" },
     { name = "pydantic" },
@@ -6064,10 +6047,6 @@ dependencies = [
     { name = "tigrbl-runtime" },
     { name = "tigrbl-typing" },
     { name = "uvicorn" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/1b/36/c00943e3a9f0dd5d2927a83c5f5446b49d493b0724bc607a63d97631bc61/tigrbl_concrete-0.4.5.dev4.tar.gz", hash = "sha256:d140c845aa8d9221ad7918adf7dc0e8bcdec99a5915c4ef03e983db854936d09", size = 136516, upload-time = "2026-06-27T11:07:24.797Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/97/2b/7119f90f20ac970766076bc3fe85e94ec711c9ee0c48714c02e31c12e4c1/tigrbl_concrete-0.4.5.dev4-py3-none-any.whl", hash = "sha256:4024a3aeedd48998d97d75bf642de11ecf557bba186abb827e9e4e82556c7f6e", size = 188138, upload-time = "2026-06-27T11:07:23.286Z" },
 ]
 
 [[package]]
@@ -6096,7 +6075,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-core"
 version = "0.4.5.dev4"
-source = { registry = "https://pypi.org/simple" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F10_core%2Ftigrbl_core&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
 dependencies = [
     { name = "pydantic" },
     { name = "pyyaml" },
@@ -6104,10 +6083,6 @@ dependencies = [
     { name = "tigrbl-typing" },
     { name = "tomli", marker = "python_full_version < '3.11'" },
     { name = "tomli-w" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/d6/11/82974f7f3273c333f2c02ac74e21a2c684ec21559914c39ae0918c962b61/tigrbl_core-0.4.5.dev4.tar.gz", hash = "sha256:0fc70e624e1e8f746c464003f3b679d5920ee00de67871aecfc9172973fe515a", size = 94093, upload-time = "2026-06-27T11:07:24.904Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/a8/36/80b628b06f401fc3236d932b33494be566798391280be19ba85308fd57a1/tigrbl_core-0.4.5.dev4-py3-none-any.whl", hash = "sha256:3eed00b4d5c11591bea434d103ee83460dd43cab76c3abe77f478cd02b82e09e", size = 114392, upload-time = "2026-06-27T11:07:23.926Z" },
 ]
 
 [[package]]
@@ -8195,11 +8170,12 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime" }
 dependencies = [
     { name = "pydantic" },
-    { name = "tigrbl" },
     { name = "tigrbl-attestation-durability" },
     { name = "tigrbl-audit-durability" },
     { name = "tigrbl-authorization-policy-durability" },
+    { name = "tigrbl-concrete" },
     { name = "tigrbl-consent-durability" },
+    { name = "tigrbl-core" },
     { name = "tigrbl-delegation-durability" },
     { name = "tigrbl-digital-credential-durability" },
     { name = "tigrbl-gnap-state-durability" },
@@ -8225,11 +8201,12 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "pydantic", specifier = "==2.12.5" },
-    { name = "tigrbl", specifier = "==0.4.5.dev4" },
     { name = "tigrbl-attestation-durability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-audit-durability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authorization-policy-durability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-concrete", git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F70_concrete%2Ftigrbl_concrete&rev=4329694c1d20c16a6e07cd49397871bf479c8703" },
     { name = "tigrbl-consent-durability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-core", specifier = "==0.4.5.dev4" },
     { name = "tigrbl-delegation-durability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-digital-credential-durability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-gnap-state-durability", specifier = "==0.4.0.dev2" },
@@ -8488,15 +8465,11 @@ requires-dist = [
 [[package]]
 name = "tigrbl-kernel"
 version = "0.4.5.dev4"
-source = { registry = "https://pypi.org/simple" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F45_kernel%2Ftigrbl_kernel&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
 dependencies = [
     { name = "tigrbl-atoms" },
     { name = "tigrbl-core" },
     { name = "tigrbl-typing" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/77/7f/67d18d446de21a2ecd4fda33521d6088ca8391be32a3367dfe3c99cbc66f/tigrbl_kernel-0.4.5.dev4.tar.gz", hash = "sha256:f4843b673f96fa5d435b5276386a6f2eba43cd0cf5d1e0531483844ebd4f9d20", size = 91742, upload-time = "2026-06-27T11:07:46.951Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/63/fb/3af6337c36fdb1e771c2b9bd3d00551864a3b48c834569105e287c463804/tigrbl_kernel-0.4.5.dev4-py3-none-any.whl", hash = "sha256:b6ab3fc6d2d2b04c6ddee443962dc8de543a2d8d3664d7963104dbdb80ce8989", size = 109702, upload-time = "2026-06-27T11:07:45.795Z" },
 ]
 
 [[package]]
@@ -8775,54 +8748,34 @@ requires-dist = [
 [[package]]
 name = "tigrbl-ops-olap"
 version = "0.4.5.dev4"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/18/cf/5726324fd2df310013ebed3a531420ac965aa27c0c49f9518d1d3f1faf58/tigrbl_ops_olap-0.4.5.dev4.tar.gz", hash = "sha256:e2f5e8fcc7b382133f570c2912a768bb664bf4313a2984de5aa7efd4c6d7005e", size = 9577, upload-time = "2026-06-27T11:07:24.088Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/3a/af/7ae3c20aebfd8772ecd1cbb1f8d9c40a58c57feb9b3de310dd08b2b604d7/tigrbl_ops_olap-0.4.5.dev4-py3-none-any.whl", hash = "sha256:f5bccd98154a6740e7c56f7610e4ba7b0d839c2c85e557996b84502372f4f189", size = 13544, upload-time = "2026-06-27T11:07:23.026Z" },
-]
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F60_ops%2Ftigrbl_ops_olap&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
 
 [[package]]
 name = "tigrbl-ops-oltp"
 version = "0.4.5.dev4"
-source = { registry = "https://pypi.org/simple" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F60_ops%2Ftigrbl_ops_oltp&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
 dependencies = [
     { name = "tigrbl-base" },
     { name = "tigrbl-core" },
     { name = "tigrbl-orm" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/bf/d3/23c951116a92d366ba6bfd4c7188a3676505f479a8a15c32ca6b3489e23d/tigrbl_ops_oltp-0.4.5.dev4.tar.gz", hash = "sha256:e77b8f1f80e6a0de17c975f77f084588a769a72781f82eb33ef4ae3b31749ec5", size = 23632, upload-time = "2026-06-27T11:07:32.862Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/25/d3/5b881bef8cac7b2e074ebd963cd54b58b7067a7cce44a83291211ac2db15/tigrbl_ops_oltp-0.4.5.dev4-py3-none-any.whl", hash = "sha256:425767c3cc04e4b6fb526cb301a34b30ad5f6e7d253d921a27598f42e2c9186c", size = 26327, upload-time = "2026-06-27T11:07:31.959Z" },
-]
 
 [[package]]
 name = "tigrbl-ops-realtime"
-version = "0.4.5.dev4"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/e6/dd/60a51b3f4782ba271673b6ec65c9205a8a2aa71a92fd47608b9aa6b7e0a3/tigrbl_ops_realtime-0.4.5.dev4.tar.gz", hash = "sha256:001cb1cb2bb0bb365c45cd0d7ad59c9e5b61922783a54426e98f39f71df115c8", size = 9237, upload-time = "2026-06-27T11:07:24.219Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/fb/e9/a7b5570509ed70344b62adf40c1e5bfad766e5d305bec5e64d1971d51b7f/tigrbl_ops_realtime-0.4.5.dev4-py3-none-any.whl", hash = "sha256:51435b1616d130a88c4497b50378b03c8e6fe4fb5d14b1a2c969bd8c8b143c29", size = 13305, upload-time = "2026-06-27T11:07:23.162Z" },
-]
+version = "0.4.5.dev5"
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F60_ops%2Ftigrbl_ops_realtime&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
 
 [[package]]
 name = "tigrbl-ops-webtransport"
 version = "0.4.5.dev5"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/bc/a1/9ed3ffff8eadacb6db940c7969d235c14eec494a73d7d99a63dbdc24434f/tigrbl_ops_webtransport-0.4.5.dev5.tar.gz", hash = "sha256:9a7e6373769ed9531bc3d724ee51934dd91ed055426c00854c17347af176d06f", size = 9377, upload-time = "2026-06-27T11:07:40.847Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/45/c5/43ca6341d610242ede3763ba3bb7f7be311a566cbbdf6e4ad7aca39532fe/tigrbl_ops_webtransport-0.4.5.dev5-py3-none-any.whl", hash = "sha256:0e4b3812a572ee8c1d363d2c97e590e0cd0daf5bb7c7a997c35537c4077bc3e1", size = 13522, upload-time = "2026-06-27T11:07:40.07Z" },
-]
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F60_ops%2Ftigrbl_ops_webtransport&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
 
 [[package]]
 name = "tigrbl-orm"
 version = "0.4.5.dev4"
-source = { registry = "https://pypi.org/simple" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F30_orm%2Ftigrbl_orm&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
 dependencies = [
     { name = "sqlalchemy" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/83/1d/a1bb889bdaf891bb3bf93446b491aef2ec5b50a71576e1101f2224e6180f/tigrbl_orm-0.4.5.dev4.tar.gz", hash = "sha256:59a4ab710321aa1796e8620556a06acc1a561e31089bbc44dd28e715e4427af6", size = 28639, upload-time = "2026-06-27T11:07:26.178Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/eb/5a/5299fdbe441d7289b155519faadcbd0dfe36356353cbedc5adb73b4f101c/tigrbl_orm-0.4.5.dev4-py3-none-any.whl", hash = "sha256:773ec447fa5b9e473c1fe5a261551fb7490369ca7c445051a48c04eda3b06ced", size = 38655, upload-time = "2026-06-27T11:07:25.246Z" },
 ]
 
 [[package]]
@@ -9379,7 +9332,7 @@ requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2
 [[package]]
 name = "tigrbl-runtime"
 version = "0.4.5.dev4"
-source = { registry = "https://pypi.org/simple" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F50_runtime%2Ftigrbl_runtime&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
 dependencies = [
     { name = "numba" },
     { name = "tigrbl-atoms" },
@@ -9387,10 +9340,6 @@ dependencies = [
     { name = "tigrbl-core" },
     { name = "tigrbl-kernel" },
     { name = "tigrbl-typing" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/39/7f/7a9f1e2896b4e3e4a1fbb8527b2f4c8bf41a18f175bd0ef89444414ca482/tigrbl_runtime-0.4.5.dev4.tar.gz", hash = "sha256:ac748cdff456fc7482f5e4e65841728f850d162077de0c810a0fbd84eaf26288", size = 63370, upload-time = "2026-06-27T11:07:25.111Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/44/23/2b1a639ea2f9dea2cef193e5a60dad796056580968ad8d2443942ee6b693/tigrbl_runtime-0.4.5.dev4-py3-none-any.whl", hash = "sha256:8d8096187492589a12d6ca0235b5ced096bb5bf51f1e17af14b8be1767e01732", size = 85727, upload-time = "2026-06-27T11:07:23.904Z" },
 ]
 
 [[package]]
@@ -10072,15 +10021,11 @@ requires-dist = [
 
 [[package]]
 name = "tigrbl-spec"
-version = "0.4.3"
-source = { registry = "https://pypi.org/simple" }
+version = "0.4.5.dev4"
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F01_spec%2Ftigrbl_spec&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
 dependencies = [
     { name = "jsonschema" },
     { name = "typing-extensions" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/09/d2/61efd5d2b4a1e558569d68d54e816449378316bab70b3070d1f36fc2bc75/tigrbl_spec-0.4.3.tar.gz", hash = "sha256:bfd79d86d412ed64487487ec2ac86631417707f63a855fdec08b9766b120e521", size = 28903, upload-time = "2026-06-18T21:55:04.527Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/16/d3/26b5cee1b556d6e5aeaa4c1fa346f2095749c263e80f283ab4d30b724ee8/tigrbl_spec-0.4.3-py3-none-any.whl", hash = "sha256:a94c97b78eefe3c3f080e37641e959b4096446aa2f8eb71bc9fce475b6baf867", size = 47631, upload-time = "2026-06-18T21:55:03.535Z" },
 ]
 
 [[package]]
@@ -10329,13 +10274,9 @@ requires-dist = [
 [[package]]
 name = "tigrbl-typing"
 version = "0.4.5.dev4"
-source = { registry = "https://pypi.org/simple" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F00_typing%2Ftigrbl_typing&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
 dependencies = [
     { name = "pydantic" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/25/f5/f3ed45cbdbd48a5d416d24390bb193a13c946bff47a9272858b385a7ca66/tigrbl_typing-0.4.5.dev4.tar.gz", hash = "sha256:f591d276001053e839f3adb5571a0d7acce6d19cc9b9aa2fcc7ef2585a065866", size = 23611, upload-time = "2026-06-27T11:07:24.344Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/ad/1d/d7c261d973b4b0d98db958b5e1634a8a690d42e10a4bcd915225d2928e51/tigrbl_typing-0.4.5.dev4-py3-none-any.whl", hash = "sha256:87cf4d71644437e6272a78b5ed637e98d7aeb835d2b7990c5e6354c4f8f0a21e", size = 28092, upload-time = "2026-06-27T11:07:23.242Z" },
 ]
 
 [[package]]

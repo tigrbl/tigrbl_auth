@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import os
 
-from tigrbl import bootstrap_dbschema
-from tigrbl.ddl import sqlite_default_attach_map
-from tigrbl.engine import engine as build_engine
+from tigrbl_concrete.ddl import bootstrap_dbschema
+from tigrbl_concrete.ddl import sqlite_default_attach_map
+from tigrbl_concrete.engine import engine as build_engine
 
 
 def _async_postgres_dsn() -> str:
