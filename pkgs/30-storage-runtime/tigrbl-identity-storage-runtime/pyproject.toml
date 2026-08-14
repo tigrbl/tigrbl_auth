@@ -32,7 +32,7 @@ classifiers = [
 dependencies = [
     "pydantic==2.12.5",
     "tigrbl-security-authorization-provenance-builder==0.1.0",
-    "tigrbl-concrete @ git+https://github.com/tigrbl/tigrbl.git@7ad64c0bced9c4da4aee4edd7df9abb5e21a3802#subdirectory=pkgs/70_concrete/tigrbl_concrete",
+    "tigrbl-concrete @ git+https://github.com/tigrbl/tigrbl.git@8ba156ba322ad24c0624b8b03672dbfcc382773f#subdirectory=pkgs/70_concrete/tigrbl_concrete",
     "tigrbl-core==0.4.5.dev4",
     "tigrbl-identity-core==0.4.0.dev2",
     "tigrbl-identity-storage==0.4.0.dev2",
