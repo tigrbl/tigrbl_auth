@@ -30,8 +30,9 @@ export const Input: React.FC<{
   placeholder?: string;
   value: string;
   error?: string;
+  autoComplete?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}> = ({ label, type = "text", placeholder, value, error, onChange }) => (
+}> = ({ label, type = "text", placeholder, value, error, autoComplete, onChange }) => (
   <div className="ui-input-field">
     <div className="ui-input-header">
       <label className="ui-input-label">{label}</label>
@@ -41,6 +42,7 @@ export const Input: React.FC<{
       type={type}
       placeholder={placeholder}
       value={value}
+      autoComplete={autoComplete}
       onChange={onChange}
       className={`ui-input-control ${error ? 'ui-input-control--error' : ''}`}
     />

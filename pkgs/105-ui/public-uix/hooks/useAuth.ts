@@ -44,6 +44,7 @@ export const useAuth = () => {
     user: session.user,
     isAuthenticated: session.isAuthenticated,
     mfaPending: loginActions.mfaPending,
+    passwordChangeRequired: loginActions.passwordChangeRequired,
     verificationEmailSent: registrationActions.verificationEmailSent,
     resendSuccess: verificationActions.resendSuccess,
     resetRequestSent: recoveryActions.resetRequestSent,
@@ -52,6 +53,7 @@ export const useAuth = () => {
 
     // Actions
     login: loginActions.login,
+    changeRequiredPassword: loginActions.changeRequiredPassword,
     logout: session.logout,
     register: registrationActions.register,
     verifyMfa: mfaActions.verifyMfa,

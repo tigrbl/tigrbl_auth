@@ -8,6 +8,7 @@ import { ForgotPasswordPage } from "./ForgotPasswordPage";
 import { LoginPage } from "./LoginPage";
 import { ProfilePage } from "./ProfilePage";
 import { RegisterPage } from "./RegisterPage";
+import { RequiredPasswordChangePage } from "./RequiredPasswordChangePage";
 
 describe("public UIX surface pages", () => {
   it("renders the public shell for unauthenticated users", () => {
@@ -57,6 +58,20 @@ describe("public UIX surface pages", () => {
     expect(loginMarkup).toContain("Authorize Session");
     expect(registerMarkup).toContain("Join Platform");
     expect(recoveryMarkup).toContain("Send Reset Link");
+  });
+
+  it("renders a mandatory temporary-password replacement surface", () => {
+    const markup = renderToStaticMarkup(
+      <RequiredPasswordChangePage
+        onChangePassword={() => undefined}
+        isLoading={false}
+        error={null}
+      />,
+    );
+
+    expect(markup).toContain("Replace your temporary password");
+    expect(markup).toContain("Change password and continue");
+    expect(markup).toContain("new-password");
   });
 
   it("does not render raw backend diagnostics on the login page", () => {

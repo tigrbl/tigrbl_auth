@@ -7,6 +7,7 @@ from httpx import ASGITransport, AsyncClient
 from tigrbl import TigrblApp
 from tigrbl_auth_router_session_login import (
     CredsIn,
+    RequiredPasswordChangeIn,
     build_login_router,
     include_login_endpoint,
 )
@@ -71,3 +72,45 @@ def test_login_schema_and_mounting_remain_stable() -> None:
     include_login_endpoint(app, router)
     paths = [getattr(route, "path", None) for route in app.router.routes]
     assert paths.count("/login") == 1
+
+
+@pytest.mark.asyncio
+async def test_required_password_change_carrier_is_explicit_and_validated() -> None:
+    database = object()
+    observed = []
+
+    async def login_request(**kwargs):
+        return {"access_token": "access", "token_type": "bearer"}
+
+    async def password_change_request(
+        *, request, db, current_password, new_password
+    ):
+        observed.append((db, current_password, new_password))
+        return {"password_changed": True}
+
+    router = build_login_router(
+        login_request=login_request,
+        get_db=lambda: database,
+        required_password_change_request=password_change_request,
+    )
+    app = TigrblApp()
+    app.include_router(router)
+    async with AsyncClient(
+        transport=ASGITransport(app=app),
+        base_url="https://issuer.example",
+    ) as client:
+        response = await client.post(
+            "/login/password-change",
+            json={
+                "current_password": "temporary-password",
+                "new_password": "permanent-password",
+            },
+        )
+
+    assert RequiredPasswordChangeIn.model_json_schema()["required"] == [
+        "current_password",
+        "new_password",
+    ]
+    assert response.status_code == 200
+    assert response.json() == {"password_changed": True}
+    assert observed == [(database, "temporary-password", "permanent-password")]

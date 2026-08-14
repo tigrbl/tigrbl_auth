@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from './hooks/useAuth';
 import { Layout } from './components/Layout';
 import { LoginPage } from './pages/LoginPage';
+import { RequiredPasswordChangePage } from './pages/RequiredPasswordChangePage';
 import { RegisterPage } from './pages/RegisterPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { CallbackPage } from './pages/CallbackPage';
@@ -32,6 +33,8 @@ const App: React.FC = () => {
     isLoading,
     error,
     login,
+    changeRequiredPassword,
+    passwordChangeRequired,
     register,
     logout,
     handleCallback,
@@ -80,6 +83,16 @@ const App: React.FC = () => {
 
   const renderContent = () => {
     const path = publicHashPath(currentHash);
+
+    if (passwordChangeRequired) {
+      return (
+        <RequiredPasswordChangePage
+          onChangePassword={changeRequiredPassword}
+          isLoading={isLoading}
+          error={error}
+        />
+      );
+    }
 
     // MFA Flow takes precedence
     if (mfaPending) return <MfaPage onVerify={verifyMfa} isLoading={isLoading} error={error} />;

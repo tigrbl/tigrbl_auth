@@ -140,11 +140,18 @@ async def ensure_default_superuser_async(
 
 
 async def resolve_admin_user_from_request(
-    request, *, db: Any | None = None
+    request,
+    *,
+    db: Any | None = None,
+    allow_password_change_required: bool = False,
 ) -> User | None:
     if db is None:
         async with _session() as session:
-            return await resolve_admin_user_from_request(request, db=session)
+            return await resolve_admin_user_from_request(
+                request,
+                db=session,
+                allow_password_change_required=allow_password_change_required,
+            )
     session_row = await resolve_browser_session_record(
         db,
         request,
@@ -156,6 +163,8 @@ async def resolve_admin_user_from_request(
     if user is not None and not bool(getattr(user, "is_active", True)):
         user = None
     if not user_is_admin(user):
+        return None
+    if bool(getattr(user, "must_change_password", False)) and not allow_password_change_required:
         return None
     return user
 

@@ -152,6 +152,17 @@ async def authorize_request(
         session = None
     if session is None:
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, {"error": "login_required"})
+    session_user = await read_handler_record(User, db, session.user_id)
+    if session_user is None or bool(
+        getattr(session_user, "must_change_password", False)
+    ):
+        raise HTTPException(
+            428,
+            {
+                "error": "password_change_required",
+                "error_description": "the temporary password must be changed before authorization",
+            },
+        )
     if max_age is not None:
         auth_time = session.auth_time
         if auth_time is not None and auth_time.tzinfo is None:

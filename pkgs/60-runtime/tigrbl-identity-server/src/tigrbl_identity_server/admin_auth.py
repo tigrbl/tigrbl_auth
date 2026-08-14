@@ -100,7 +100,10 @@ async def _find_user_by_identifier(db: Any, identifier: str) -> User | None:
 
 
 async def _resolve_admin_session_and_user(
-    request: Request, db: Any
+    request: Request,
+    db: Any,
+    *,
+    allow_password_change_required: bool = False,
 ) -> tuple[Any, User]:
     from tigrbl_identity_server.admin_bootstrap import resolve_admin_user_from_request
     from tigrbl_identity_runtime.deployment import deployment_from_request
@@ -114,7 +117,11 @@ async def _resolve_admin_session_and_user(
         request,
         deployment=deployment_from_request(request, settings),
     )
-    user = await resolve_admin_user_from_request(request, db=db)
+    user = await resolve_admin_user_from_request(
+        request,
+        db=db,
+        allow_password_change_required=allow_password_change_required,
+    )
     if session_row is None or user is None:
         raise HTTPException(
             status.HTTP_401_UNAUTHORIZED, "authenticated admin session required"
@@ -163,7 +170,11 @@ async def admin_login_browser_redirect() -> Response:
     tags=ADMIN_AUTH_TAGS,
 )
 async def admin_session(request: Request, db: Any = Depends(get_db)) -> AdminSessionOut:
-    session_row, user = await _resolve_admin_session_and_user(request, db)
+    session_row, user = await _resolve_admin_session_and_user(
+        request,
+        db,
+        allow_password_change_required=True,
+    )
     return _admin_session_payload(user, session_id=str(session_row.id))
 
 
@@ -252,7 +263,11 @@ async def admin_change_password(
 ) -> AdminSessionOut:
     if payload is None:
         payload = AdminPasswordChangeIn.model_validate(await request.json() or {})
-    session_row, user = await _resolve_admin_session_and_user(request, db)
+    session_row, user = await _resolve_admin_session_and_user(
+        request,
+        db,
+        allow_password_change_required=True,
+    )
     hasher = BcryptSecretHasher()
     verification = hasher.verify_secret(payload.current_password, user.password_hash)
     if not verification.verified:

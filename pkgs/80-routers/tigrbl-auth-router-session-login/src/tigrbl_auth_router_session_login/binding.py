@@ -15,6 +15,11 @@ class CredsIn(BaseModel):
     password: constr(min_length=8, max_length=256)
 
 
+class RequiredPasswordChangeIn(BaseModel):
+    current_password: constr(min_length=8, max_length=256)
+    new_password: constr(min_length=8, max_length=256)
+
+
 DatabaseDependency: TypeAlias = Callable[..., object]
 LoginRequestTarget: TypeAlias = Callable[..., Any | Awaitable[Any]]
 
@@ -23,6 +28,7 @@ def build_login_router(
     *,
     login_request: LoginRequestTarget,
     get_db: DatabaseDependency,
+    required_password_change_request: LoginRequestTarget | None = None,
 ) -> TigrblRouter:
     """Build the POST login carrier around injected runtime orchestration."""
 
@@ -42,6 +48,24 @@ def build_login_router(
             identifier=creds.identifier,
             password=creds.password,
         )
+
+    if required_password_change_request is not None:
+        @router.route("/login/password-change", methods=["POST"])
+        async def required_password_change(
+            request: Request,
+            payload: RequiredPasswordChangeIn | None = None,
+            db: object = Depends(get_db),
+        ) -> Any:
+            if payload is None:
+                payload = RequiredPasswordChangeIn.model_validate(
+                    await request.json() or {}
+                )
+            return await required_password_change_request(
+                request=request,
+                db=db,
+                current_password=payload.current_password,
+                new_password=payload.new_password,
+            )
 
     return router
 
@@ -67,6 +91,7 @@ __all__ = [
     "CredsIn",
     "DatabaseDependency",
     "LoginRequestTarget",
+    "RequiredPasswordChangeIn",
     "build_login_router",
     "include_login_endpoint",
 ]
