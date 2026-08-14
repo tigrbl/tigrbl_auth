@@ -45,9 +45,8 @@ from tigrbl_identity_runtime.deployment import (
     resolve_deployment,
 )
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_storage.tables.client import Client
-from tigrbl_identity_storage.tables.client_registration import ClientRegistration
-from tigrbl_identity_storage.tables.pushed_authorization_request import (
+from tigrbl_identity_storage_oauth.tables import Client, ClientRegistration
+from tigrbl_identity_storage_oauth.tables.pushed_authorization_request import (
     DEFAULT_PAR_EXPIRY,
 )
 from tigrbl_identity_storage_runtime.dpop_state import (

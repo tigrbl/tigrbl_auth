@@ -15,7 +15,7 @@ from tigrbl_identity_server.security.handler_records import (
     first_handler_record,
     update_handler_record,
 )
-from tigrbl_identity_storage.tables.device_code import DeviceCode
+from tigrbl_identity_storage_oauth.tables import DeviceCode
 
 from .token_runtime import (
     JSONResponse,

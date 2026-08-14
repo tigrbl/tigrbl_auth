@@ -122,12 +122,14 @@ from tigrbl_identity_server.security.handler_records import (
 )
 
 try:  # pragma: no cover
-    from tigrbl_identity_storage.tables.auth_code import AuthCode
-    from tigrbl_identity_storage.tables.auth_session import AuthSession
-    from tigrbl_identity_storage.tables.client import Client
-    from tigrbl_identity_storage.tables.client_registration import ClientRegistration
-    from tigrbl_identity_storage.tables.device_code import DeviceCode
-    from tigrbl_identity_storage.tables.user import User
+    from tigrbl_identity_storage_oauth.tables import (
+        AuthCode,
+        AuthSession,
+        Client,
+        ClientRegistration,
+        DeviceCode,
+    )
+    from tigrbl_identity_storage_principals.tables import User
 except Exception:  # pragma: no cover - placeholders for dependency-light tests
     class Client:  # type: ignore[override]
         id = object()

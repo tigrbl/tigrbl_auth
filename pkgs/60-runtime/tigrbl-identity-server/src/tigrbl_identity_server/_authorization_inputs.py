@@ -20,7 +20,7 @@ async def _resolve_pushed_authorization_request(db: Any, params: dict[str, Any])
         validate_pushed_authorization_request_row,
     )
     from tigrbl_identity_server.security.handler_records import first_handler_record
-    from tigrbl_identity_storage.tables.pushed_authorization_request import PushedAuthorizationRequest
+    from tigrbl_identity_storage_oauth.tables import PushedAuthorizationRequest
 
     request_uri = params.get("request_uri")
     if not request_uri:

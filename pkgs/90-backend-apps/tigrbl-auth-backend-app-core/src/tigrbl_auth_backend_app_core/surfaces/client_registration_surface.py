@@ -39,7 +39,7 @@ from tigrbl_identity_runtime.deployment import (
     resolve_deployment,
 )
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_storage.tables.tenant import Tenant
+from tigrbl_identity_storage.tables import Tenant
 from tigrbl_identity_storage_runtime.engine import get_db
 from tigrbl import (
     create_record,

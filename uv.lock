@@ -2223,7 +2223,9 @@ dependencies = [
     { name = "tigrbl-identity-runtime" },
     { name = "tigrbl-identity-server" },
     { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-identity-storage-oauth" },
     { name = "tigrbl-identity-storage-runtime" },
+    { name = "tigrbl-identity-storage-tenancy" },
     { name = "tigrbl-secret-hashing-bcrypt-provider" },
 ]
 
@@ -2256,7 +2258,9 @@ requires-dist = [
     { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-server", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage-oauth", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage-runtime", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage-tenancy", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-secret-hashing-bcrypt-provider", specifier = "==0.1.0" },
 ]
 
@@ -7613,7 +7617,12 @@ dependencies = [
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-jose" },
     { name = "tigrbl-identity-runtime" },
+    { name = "tigrbl-identity-storage-audit" },
+    { name = "tigrbl-identity-storage-oauth" },
+    { name = "tigrbl-identity-storage-operator" },
+    { name = "tigrbl-identity-storage-principals" },
     { name = "tigrbl-identity-storage-runtime" },
+    { name = "tigrbl-identity-storage-tenancy" },
     { name = "tigrbl-password-authentication-capability" },
     { name = "tigrbl-realm-administration-capability" },
     { name = "tigrbl-replay-memory-provider" },
@@ -7646,7 +7655,12 @@ requires-dist = [
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-jose", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage-audit", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage-oauth", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage-operator", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage-principals", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage-runtime", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage-tenancy", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-password-authentication-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-realm-administration-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-replay-memory-provider", specifier = "==0.4.0.dev2" },
@@ -10468,6 +10482,7 @@ dependencies = [
     { name = "tigrbl-auth-protocol-cwt" },
     { name = "tigrbl-proof-of-possession-contracts" },
     { name = "tigrbl-security-protocol-cose" },
+    { name = "tigrbl-workload-protocol-spiffe-svid" },
 ]
 
 [package.metadata]
@@ -10475,6 +10490,7 @@ requires-dist = [
     { name = "tigrbl-auth-protocol-cwt", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-proof-of-possession-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-protocol-cose", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-workload-protocol-spiffe-svid", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]

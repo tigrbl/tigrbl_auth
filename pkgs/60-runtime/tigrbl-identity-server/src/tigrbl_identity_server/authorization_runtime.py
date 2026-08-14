@@ -62,11 +62,11 @@ async def authorize_request(
         resolve_browser_session_record,
         update_handler_record,
     )
-    from tigrbl_identity_storage.tables.client import Client
-    from tigrbl_identity_storage.tables.pushed_authorization_request import (
+    from tigrbl_identity_storage_oauth.tables import Client
+    from tigrbl_identity_storage_oauth.tables import (
         PushedAuthorizationRequest,
     )
-    from tigrbl_identity_storage.tables.user import User
+    from tigrbl_identity_storage_principals.tables import User
 
     deployment = deployment_from_request(request, settings)
     _require_tls(request, deployment=deployment)

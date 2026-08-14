@@ -72,7 +72,9 @@ def test_product_surfaces_are_registered_as_named_surface_sets() -> None:
 
 def test_backend_app_surface_resources_are_canonical_storage_tables() -> None:
     for resource in surfaces.TABLE_RESOURCES:
-        assert resource.__module__.startswith("tigrbl_identity_storage.tables.")
+        module_name = resource.__module__
+        assert module_name.startswith("tigrbl_identity_storage_")
+        assert not module_name.startswith("tigrbl_identity_storage.tables.")
 
 
 @pytest.mark.parametrize("product_surface", sorted(BACKEND_APP_PACKAGES))

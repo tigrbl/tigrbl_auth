@@ -30,8 +30,8 @@ from tigrbl_auth_protocol_oauth.standards.resource_verifier_contract import (
 )
 from tigrbl_identity_runtime.deployment import deployment_from_request
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_storage.tables.client import Client
-from tigrbl_identity_storage.tables.client_registration import ClientRegistration
+from tigrbl_identity_storage_oauth.tables import Client
+from tigrbl_identity_storage_oauth.tables import ClientRegistration
 from tigrbl_identity_storage_runtime.engine import get_db
 from tigrbl_identity_storage_runtime.ops.clients import lookup_client
 from tigrbl import (

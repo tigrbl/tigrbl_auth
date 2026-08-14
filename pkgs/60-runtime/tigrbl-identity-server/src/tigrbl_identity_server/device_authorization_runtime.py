@@ -9,7 +9,8 @@ from uuid import UUID
 from tigrbl_identity_runtime.deployment import deployment_from_request
 from tigrbl_identity_runtime.settings import settings
 from tigrbl import create_record, read_record
-from tigrbl_identity_storage.tables.audit_event import AuditEvent
+from tigrbl_identity_storage_audit.tables import AuditEvent
+from tigrbl_identity_storage_oauth.tables import Client, DeviceCode
 from tigrbl.runtime.status import HTTPException, status
 
 from tigrbl_auth_protocol_oauth.standards.device_authorization import (
@@ -21,8 +22,6 @@ from tigrbl_auth_protocol_oauth.standards.device_authorization import (
 from tigrbl_auth_protocol_oauth.standards.resource_indicators import (
     select_resource_indicator,
 )
-from tigrbl_identity_storage.tables.client import Client
-from tigrbl_identity_storage.tables.device_code import DeviceCode
 
 
 async def device_authorization_request(*, request, db):
