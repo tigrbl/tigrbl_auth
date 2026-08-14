@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import inspect
 import secrets
 from pathlib import Path
 from uuid import UUID, uuid4
@@ -203,6 +204,11 @@ async def register_client(
             registration_client_uri=registration_client_uri,
         )
     )
+    commit = getattr(db, "commit", None)
+    if callable(commit):
+        committed = commit()
+        if inspect.isawaitable(committed):
+            await committed
     suppress_secret = policy.fapi_mode and (
         payload.token_endpoint_auth_method in set(policy.allowed_client_auth_methods)
     )

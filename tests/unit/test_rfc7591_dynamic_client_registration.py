@@ -4,6 +4,7 @@ import httpx
 import pytest
 import pytest_asyncio
 from types import SimpleNamespace
+from unittest.mock import AsyncMock
 
 from tigrbl_auth import rfc7591
 from tigrbl_auth_backend_app_core.surfaces.client_registration_surface import router
@@ -49,6 +50,57 @@ async def test_register_client_via_server(registration_client):
     assert resp.status_code == 200, resp.text
     assert resp.json()["client_id"]
 
+
+@pytest.mark.asyncio
+async def test_register_client_commits_the_request_scoped_transaction(
+    monkeypatch,
+):
+    """A successful registration survives beyond its request transaction."""
+    deployment = SimpleNamespace(
+        issuer="https://test",
+        profile="production",
+        flags={"require_tls": True},
+        flag_enabled=lambda name: name in {"enable_rfc7591", "enable_rfc7592"},
+    )
+    tenant = SimpleNamespace(id="2a0fc946-1109-4488-97e9-5f79bf642bb2")
+    service = SimpleNamespace(register=AsyncMock(return_value=object()))
+    db = SimpleNamespace(commit=AsyncMock())
+    monkeypatch.setattr(registration_surface, "_deployment", lambda request: deployment)
+    monkeypatch.setattr(
+        registration_surface,
+        "_validated_registration_payload",
+        AsyncMock(return_value=(tenant, {})),
+    )
+    monkeypatch.setattr(
+        registration_surface,
+        "runtime_security_profile",
+        lambda deployment: SimpleNamespace(
+            fapi_mode=False,
+            allowed_client_auth_methods=(),
+        ),
+    )
+    monkeypatch.setattr(
+        registration_surface,
+        "_rfc7591_service",
+        lambda request, db: service,
+    )
+    monkeypatch.setattr(
+        registration_surface,
+        "_registration_response",
+        lambda record, **kwargs: {"client_id": "registered"},
+    )
+
+    response = await registration_surface.register_client(
+        SimpleNamespace(),
+        db,
+        registration_surface.DynamicClientRegistrationIn(
+            tenant_slug="public",
+            redirect_uris=["https://persist.example/cb"],
+        ),
+    )
+
+    assert response == {"client_id": "registered"}
+    db.commit.assert_awaited_once_with()
 
 @pytest.mark.asyncio
 async def test_registration_management_lifecycle_via_http_carrier(
