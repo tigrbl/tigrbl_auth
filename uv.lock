@@ -1647,7 +1647,7 @@ wheels = [
 [[package]]
 name = "tigrbl"
 version = "0.4.5.dev4"
-source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F80_facade%2Ftigrbl&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F80_facade%2Ftigrbl&rev=7ad64c0bced9c4da4aee4edd7df9abb5e21a3802#7ad64c0bced9c4da4aee4edd7df9abb5e21a3802" }
 dependencies = [
     { name = "aiosqlite" },
     { name = "greenlet" },
@@ -1878,7 +1878,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-atoms"
 version = "0.4.5.dev4"
-source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F40_atoms%2Ftigrbl_atoms&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F40_atoms%2Ftigrbl_atoms&rev=7ad64c0bced9c4da4aee4edd7df9abb5e21a3802#7ad64c0bced9c4da4aee4edd7df9abb5e21a3802" }
 dependencies = [
     { name = "jinja2" },
     { name = "sqlalchemy" },
@@ -3710,7 +3710,7 @@ requires-dist = [
     { name = "requests", marker = "extra == 'test'", specifier = "==2.33.1" },
     { name = "sqlalchemy", extras = ["asyncio"], specifier = "==2.0.49" },
     { name = "ssot-registry", marker = "extra == 'test'", specifier = "==0.2.17" },
-    { name = "tigrbl", git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F80_facade%2Ftigrbl&rev=4329694c1d20c16a6e07cd49397871bf479c8703" },
+    { name = "tigrbl", git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F80_facade%2Ftigrbl&rev=7ad64c0bced9c4da4aee4edd7df9abb5e21a3802" },
     { name = "tigrbl-access-governance-capability", editable = "pkgs/40-capabilities/tigrbl-access-governance-capability" },
     { name = "tigrbl-access-governance-memory-provider", editable = "pkgs/20-providers/tigrbl-access-governance-memory-provider" },
     { name = "tigrbl-account-self-service", editable = "pkgs/deprecated/tigrbl-account-self-service" },
@@ -4060,7 +4060,7 @@ requires-dist = [
     { name = "tigrbl-operator-administration-capability", editable = "pkgs/40-capabilities/tigrbl-operator-administration-capability" },
     { name = "tigrbl-ops-olap", specifier = "==0.4.5.dev4" },
     { name = "tigrbl-ops-oltp", specifier = "==0.4.5.dev4" },
-    { name = "tigrbl-ops-realtime", git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F60_ops%2Ftigrbl_ops_realtime&rev=4329694c1d20c16a6e07cd49397871bf479c8703" },
+    { name = "tigrbl-ops-realtime", git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F60_ops%2Ftigrbl_ops_realtime&rev=7ad64c0bced9c4da4aee4edd7df9abb5e21a3802" },
     { name = "tigrbl-orm", specifier = "==0.4.5.dev4" },
     { name = "tigrbl-pairwise-subject-identifier-concrete", editable = "pkgs/10-concrete/tigrbl-pairwise-subject-identifier-concrete" },
     { name = "tigrbl-password-authentication-capability", editable = "pkgs/40-capabilities/tigrbl-password-authentication-capability" },
@@ -4782,7 +4782,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-base"
 version = "0.4.5.dev4"
-source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F20_base%2Ftigrbl_base&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F20_base%2Ftigrbl_base&rev=7ad64c0bced9c4da4aee4edd7df9abb5e21a3802#7ad64c0bced9c4da4aee4edd7df9abb5e21a3802" }
 dependencies = [
     { name = "pydantic" },
     { name = "sqlalchemy" },
@@ -4793,7 +4793,7 @@ dependencies = [
 [[package]]
 name = "tigrbl-canon"
 version = "0.4.5.dev4"
-source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F99_deprecated%2Ftigrbl_canon&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F99_deprecated%2Ftigrbl_canon&rev=7ad64c0bced9c4da4aee4edd7df9abb5e21a3802#7ad64c0bced9c4da4aee4edd7df9abb5e21a3802" }
 dependencies = [
     { name = "tigrbl" },
     { name = "tigrbl-atoms" },
@@ -6036,7 +6036,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-concrete"
 version = "0.4.5.dev4"
-source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F70_concrete%2Ftigrbl_concrete&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F70_concrete%2Ftigrbl_concrete&rev=7ad64c0bced9c4da4aee4edd7df9abb5e21a3802#7ad64c0bced9c4da4aee4edd7df9abb5e21a3802" }
 dependencies = [
     { name = "orjson" },
     { name = "pydantic" },
@@ -6079,7 +6079,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-core"
 version = "0.4.5.dev4"
-source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F10_core%2Ftigrbl_core&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F10_core%2Ftigrbl_core&rev=7ad64c0bced9c4da4aee4edd7df9abb5e21a3802#7ad64c0bced9c4da4aee4edd7df9abb5e21a3802" }
 dependencies = [
     { name = "pydantic" },
     { name = "pyyaml" },
@@ -8218,7 +8218,7 @@ requires-dist = [
     { name = "tigrbl-attestation-durability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-audit-durability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authorization-policy-durability", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-concrete", git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F70_concrete%2Ftigrbl_concrete&rev=4329694c1d20c16a6e07cd49397871bf479c8703" },
+    { name = "tigrbl-concrete", git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F70_concrete%2Ftigrbl_concrete&rev=7ad64c0bced9c4da4aee4edd7df9abb5e21a3802" },
     { name = "tigrbl-consent-durability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-core", specifier = "==0.4.5.dev4" },
     { name = "tigrbl-delegation-durability", specifier = "==0.4.0.dev2" },
@@ -8479,7 +8479,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-kernel"
 version = "0.4.5.dev4"
-source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F45_kernel%2Ftigrbl_kernel&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F45_kernel%2Ftigrbl_kernel&rev=7ad64c0bced9c4da4aee4edd7df9abb5e21a3802#7ad64c0bced9c4da4aee4edd7df9abb5e21a3802" }
 dependencies = [
     { name = "tigrbl-atoms" },
     { name = "tigrbl-core" },
@@ -8762,12 +8762,12 @@ requires-dist = [
 [[package]]
 name = "tigrbl-ops-olap"
 version = "0.4.5.dev4"
-source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F60_ops%2Ftigrbl_ops_olap&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F60_ops%2Ftigrbl_ops_olap&rev=7ad64c0bced9c4da4aee4edd7df9abb5e21a3802#7ad64c0bced9c4da4aee4edd7df9abb5e21a3802" }
 
 [[package]]
 name = "tigrbl-ops-oltp"
 version = "0.4.5.dev4"
-source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F60_ops%2Ftigrbl_ops_oltp&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F60_ops%2Ftigrbl_ops_oltp&rev=7ad64c0bced9c4da4aee4edd7df9abb5e21a3802#7ad64c0bced9c4da4aee4edd7df9abb5e21a3802" }
 dependencies = [
     { name = "tigrbl-base" },
     { name = "tigrbl-core" },
@@ -8777,17 +8777,17 @@ dependencies = [
 [[package]]
 name = "tigrbl-ops-realtime"
 version = "0.4.5.dev5"
-source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F60_ops%2Ftigrbl_ops_realtime&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F60_ops%2Ftigrbl_ops_realtime&rev=7ad64c0bced9c4da4aee4edd7df9abb5e21a3802#7ad64c0bced9c4da4aee4edd7df9abb5e21a3802" }
 
 [[package]]
 name = "tigrbl-ops-webtransport"
 version = "0.4.5.dev5"
-source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F60_ops%2Ftigrbl_ops_webtransport&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F60_ops%2Ftigrbl_ops_webtransport&rev=7ad64c0bced9c4da4aee4edd7df9abb5e21a3802#7ad64c0bced9c4da4aee4edd7df9abb5e21a3802" }
 
 [[package]]
 name = "tigrbl-orm"
 version = "0.4.5.dev4"
-source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F30_orm%2Ftigrbl_orm&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F30_orm%2Ftigrbl_orm&rev=7ad64c0bced9c4da4aee4edd7df9abb5e21a3802#7ad64c0bced9c4da4aee4edd7df9abb5e21a3802" }
 dependencies = [
     { name = "sqlalchemy" },
 ]
@@ -9346,7 +9346,7 @@ requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2
 [[package]]
 name = "tigrbl-runtime"
 version = "0.4.5.dev4"
-source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F50_runtime%2Ftigrbl_runtime&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F50_runtime%2Ftigrbl_runtime&rev=7ad64c0bced9c4da4aee4edd7df9abb5e21a3802#7ad64c0bced9c4da4aee4edd7df9abb5e21a3802" }
 dependencies = [
     { name = "numba" },
     { name = "tigrbl-atoms" },
@@ -10036,7 +10036,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-spec"
 version = "0.4.5.dev4"
-source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F01_spec%2Ftigrbl_spec&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F01_spec%2Ftigrbl_spec&rev=7ad64c0bced9c4da4aee4edd7df9abb5e21a3802#7ad64c0bced9c4da4aee4edd7df9abb5e21a3802" }
 dependencies = [
     { name = "jsonschema" },
     { name = "typing-extensions" },
@@ -10288,7 +10288,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-typing"
 version = "0.4.5.dev4"
-source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F00_typing%2Ftigrbl_typing&rev=4329694c1d20c16a6e07cd49397871bf479c8703#4329694c1d20c16a6e07cd49397871bf479c8703" }
+source = { git = "https://github.com/tigrbl/tigrbl.git?subdirectory=pkgs%2F00_typing%2Ftigrbl_typing&rev=7ad64c0bced9c4da4aee4edd7df9abb5e21a3802#7ad64c0bced9c4da4aee4edd7df9abb5e21a3802" }
 dependencies = [
     { name = "pydantic" },
 ]

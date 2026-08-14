@@ -613,7 +613,7 @@ dev = [
 package = false
 
 [tool.uv.sources]
-tigrbl = { git = "https://github.com/tigrbl/tigrbl.git", rev = "4329694c1d20c16a6e07cd49397871bf479c8703", subdirectory = "pkgs/80_facade/tigrbl" }
+tigrbl = { git = "https://github.com/tigrbl/tigrbl.git", rev = "7ad64c0bced9c4da4aee4edd7df9abb5e21a3802", subdirectory = "pkgs/80_facade/tigrbl" }
 tigrbl-authenticator-webauthn-local = { path = "pkgs/deprecated/tigrbl-authenticator-webauthn-local", editable = true }
 tigrbl-claim-access-token-hash-oidc-concrete = { path = "pkgs/deprecated/tigrbl-claim-access-token-hash-oidc-concrete", editable = true }
 tigrbl-eap-acr-concrete = { path = "pkgs/deprecated/tigrbl-eap-acr-concrete", editable = true }
@@ -1022,7 +1022,7 @@ tigrbl-identity-runtime = { path = "pkgs/60-runtime/tigrbl-identity-runtime", ed
 tigrbl-identity-server = { path = "pkgs/60-runtime/tigrbl-identity-server", editable = true }
 tigrbl-identity-storage = { path = "pkgs/01-storage/tigrbl-identity-storage", editable = true }
 tigrbl-migrations = { path = "../tigrbl/pkgs/10_core/tigrbl_migrations", editable = true }
-tigrbl-ops-realtime = { git = "https://github.com/tigrbl/tigrbl.git", rev = "4329694c1d20c16a6e07cd49397871bf479c8703", subdirectory = "pkgs/60_ops/tigrbl_ops_realtime" }
+tigrbl-ops-realtime = { git = "https://github.com/tigrbl/tigrbl.git", rev = "7ad64c0bced9c4da4aee4edd7df9abb5e21a3802", subdirectory = "pkgs/60_ops/tigrbl_ops_realtime" }
 tigrbl-identity-storage-access-governance = { path = "pkgs/01-storage/tigrbl-identity-storage-access-governance", editable = true }
 tigrbl-identity-storage-attestation = { path = "pkgs/01-storage/tigrbl-identity-storage-attestation", editable = true }
 tigrbl-identity-storage-audit = { path = "pkgs/01-storage/tigrbl-identity-storage-audit", editable = true }
