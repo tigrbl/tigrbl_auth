@@ -77,7 +77,7 @@ async def resolve_browser_session(request, *, deployment, db):
     """Resolve a browser session through the layer-60 table operation runtime."""
 
     return await resolve_browser_session_record(
-        db, request, deployment=deployment
+        db, request, deployment=deployment, update_last_seen=False
     )
 
 

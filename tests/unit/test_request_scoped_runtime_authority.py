@@ -186,6 +186,39 @@ def test_logout_request_uses_request_scoped_deployment_for_issuer_binding(
     assert response.headers["x-test-cookie-cleared"] == "1"
 
 
+def test_logout_session_resolution_does_not_lock_session_row(monkeypatch) -> None:
+    observed: dict[str, object] = {}
+    expected = SimpleNamespace(id=uuid4())
+
+    async def _resolve(db, request, *, deployment, update_last_seen=True):
+        observed["db"] = db
+        observed["request"] = request
+        observed["deployment"] = deployment
+        observed["update_last_seen"] = update_last_seen
+        return expected
+
+    monkeypatch.setattr(logout_ops, "resolve_browser_session_record", _resolve)
+    db = object()
+    request = object()
+    deployment = object()
+
+    result = asyncio.run(
+        logout_ops.resolve_browser_session(
+            request,
+            deployment=deployment,
+            db=db,
+        )
+    )
+
+    assert result is expected
+    assert observed == {
+        "db": db,
+        "request": request,
+        "deployment": deployment,
+        "update_last_seen": False,
+    }
+
+
 def test_register_client_uses_request_scoped_registration_client_uri(
     monkeypatch,
 ) -> None:

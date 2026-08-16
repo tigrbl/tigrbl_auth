@@ -243,7 +243,13 @@ async def create_browser_session_record(
     )
     return _created_item(row), secret
 
-async def resolve_browser_session_record(db: Any, request: Any, *, deployment: Any) -> Any:
+async def resolve_browser_session_record(
+    db: Any,
+    request: Any,
+    *,
+    deployment: Any,
+    update_last_seen: bool = True,
+) -> Any:
     if not deployment.flag_enabled("enable_oidc_session_management"):
         return None
     parsed = parse_session_cookie_value(extract_session_cookie(request))
@@ -266,8 +272,9 @@ async def resolve_browser_session_record(db: Any, request: Any, *, deployment: A
     if parsed.secret:
         if not getattr(row, "cookie_secret_hash", None) or row.cookie_secret_hash != hash_cookie_secret(parsed.secret):
             return None
-    await update_handler_record(AuthSession, db, row.id, {"last_seen_at": now})
-    row.last_seen_at = now
+    if update_last_seen:
+        await update_handler_record(AuthSession, db, row.id, {"last_seen_at": now})
+        row.last_seen_at = now
     return row
 
 async def bind_browser_session_client_record(db: Any, session_id: UUID, *, client_id: UUID | None) -> Any:
