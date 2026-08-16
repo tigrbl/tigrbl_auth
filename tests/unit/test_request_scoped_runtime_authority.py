@@ -209,6 +209,21 @@ def test_logout_wrapper_awaits_async_response_observer(monkeypatch) -> None:
     assert observed["details"]["status"] == "logged_out"
 
 
+def test_logout_wrapper_survives_optional_observer_failure(monkeypatch) -> None:
+    response = SimpleNamespace(body=b"", headers={})
+
+    async def _logout_request(*, request, db):
+        return response
+
+    async def _observe(repo_root, **details):
+        raise RuntimeError("operator telemetry unavailable")
+
+    monkeypatch.setattr(logout_ops, "logout_request", _logout_request)
+    monkeypatch.setattr(session_service, "observe_logout_response_async", _observe)
+
+    assert asyncio.run(logout_ops.logout(object(), object())) is response
+
+
 def test_logout_session_resolution_does_not_lock_session_row(monkeypatch) -> None:
     observed: dict[str, object] = {}
     expected = SimpleNamespace(id=uuid4())

@@ -334,9 +334,12 @@ async def logout(request, db):
             "logout_id": headers.get("x-tigrbl-auth-logout-id"),
             "session_id": headers.get("x-tigrbl-auth-session-id"),
         }
-    await observe_logout_response_async(
-        _repo_root(), session_id=payload.get("session_id"), details=payload
-    )
+    try:
+        await observe_logout_response_async(
+            _repo_root(), session_id=payload.get("session_id"), details=payload
+        )
+    except Exception:
+        pass
     return result
 
 
