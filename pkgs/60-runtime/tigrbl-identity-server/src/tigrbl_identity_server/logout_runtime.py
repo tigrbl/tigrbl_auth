@@ -316,7 +316,9 @@ def _repo_root() -> Path:
 
 async def logout(request, db):
     result = await logout_request(request=request, db=db)
-    from tigrbl_identity_storage_runtime.session_service import observe_logout_response
+    from tigrbl_identity_storage_runtime.session_service import (
+        observe_logout_response_async,
+    )
 
     payload: dict[str, object] = {}
     body = getattr(result, "body", None)
@@ -332,7 +334,7 @@ async def logout(request, db):
             "logout_id": headers.get("x-tigrbl-auth-logout-id"),
             "session_id": headers.get("x-tigrbl-auth-session-id"),
         }
-    observe_logout_response(
+    await observe_logout_response_async(
         _repo_root(), session_id=payload.get("session_id"), details=payload
     )
     return result

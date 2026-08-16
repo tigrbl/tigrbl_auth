@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping
@@ -273,6 +274,24 @@ def observe_logout_response(
     return {"session_id": session_id, "status": "ok"}
 
 
+async def observe_logout_response_async(
+    repo_root: Path,
+    *,
+    session_id: str | None,
+    actor: str | None = None,
+    tenant: str | None = None,
+    details: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    return await asyncio.to_thread(
+        observe_logout_response,
+        repo_root,
+        session_id=session_id,
+        actor=actor,
+        tenant=tenant,
+        details=details,
+    )
+
+
 def observe_device_authorization_response(
     repo_root: Path,
     *,
@@ -328,6 +347,7 @@ __all__ = [
     "list_tokens_for_context",
     "observe_device_authorization_response",
     "observe_logout_response",
+    "observe_logout_response_async",
     "observe_par_response",
     "observe_token_response",
     "revoke_all_sessions_for_context",

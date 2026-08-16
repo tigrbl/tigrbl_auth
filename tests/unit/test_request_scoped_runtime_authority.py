@@ -9,6 +9,7 @@ import tigrbl_auth_backend_app_core.surfaces.par_surface as par_ops
 import tigrbl_auth_backend_app_core.surfaces.client_registration_surface as register_ops
 import tigrbl_identity_server.device_authorization_runtime as device_auth_ops
 import tigrbl_identity_server.logout_runtime as logout_ops
+import tigrbl_identity_storage_runtime.session_service as session_service
 from tigrbl_auth_protocol_oidc.standards import rp_initiated_logout as rp_logout
 from tigrbl_auth_protocol_oidc.standards.session_mgmt import (
     compute_session_state,
@@ -184,6 +185,28 @@ def test_logout_request_uses_request_scoped_deployment_for_issuer_binding(
     assert observed["planned_issuer"] == "https://tenant-a.example.com"
     assert observed["audit_event"] == "session.logout"
     assert response.headers["x-test-cookie-cleared"] == "1"
+
+
+def test_logout_wrapper_awaits_async_response_observer(monkeypatch) -> None:
+    response = SimpleNamespace(
+        body=b"",
+        headers={"x-tigrbl-auth-logout-status": "logged_out"},
+    )
+    observed: dict[str, object] = {}
+
+    async def _logout_request(*, request, db):
+        return response
+
+    async def _observe(repo_root, **details):
+        observed.update(details)
+
+    monkeypatch.setattr(logout_ops, "logout_request", _logout_request)
+    monkeypatch.setattr(session_service, "observe_logout_response_async", _observe)
+
+    result = asyncio.run(logout_ops.logout(object(), object()))
+
+    assert result is response
+    assert observed["details"]["status"] == "logged_out"
 
 
 def test_logout_session_resolution_does_not_lock_session_row(monkeypatch) -> None:
