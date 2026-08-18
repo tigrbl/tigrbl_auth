@@ -1,0 +1,1 @@
+{"name":"@tigrbl-auth/platform-admin-client","version":"0.4.0-dev.3","type":"module","license":"Apache-2.0","exports":"./src/index.ts","files":["src","package.json"]}

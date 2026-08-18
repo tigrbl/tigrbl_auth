@@ -1,0 +1,68 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1135"
+number: 1135
+slug: "platform-iam-rp-client-layer-ownership"
+title: "Platform IAM, RP, and Client Layer Ownership"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Tigrbl Auth owns three related but distinct product planes: the identity provider,"
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-08-18T08:54:41Z"
+    note: "Accepted for the customer and internal platform IAM T0-T2 delivery boundary."
+    status: "accepted"
+references: []
+body: |-
+  # Platform IAM, RP, and client-layer decision
+
+  ## Decision
+
+  Tigrbl Auth owns three related but distinct product planes: the identity provider,
+  customer-scoped platform IAM, and internal workforce/platform IAM. Authentication
+  establishes a stable principal and assurance context. Authorization is evaluated
+  separately from current roles, grants, policies, resource scope, and request
+  context. Customer and internal authority are never merged.
+
+  Remote Python and TypeScript SDKs are first-class client packages. They live in a
+  new `75-clients` layer, not in `70-facade`, `100-uix-core`, or `105-ui`.
+  Clients and server routers share lower-layer contracts but never import each
+  other's implementations.
+
+  OIDC relying-party protocol behavior remains in layer 50. Durable RP login
+  transactions and sessions live in layer 30, the complete login/session workflow
+  lives in layer 40, process composition lives in layer 60, reusable routes live in
+  layer 80, and the deployable RP/BFF lives in layer 90. Application identity
+  binding and application-session exchange are injected ports; Tigrbl does not own
+  consumer-specific roles or resource vocabularies.
+
+  Authorization uses default deny, explicit-deny precedence, tenant isolation,
+  time-bounded scoped grants, immutable published policy versions, typed decision
+  reasons, obligations, and durable audit provenance. UI visibility is never an
+  authorization boundary.
+
+  ## Scope
+
+  This decision governs:
+
+  - `feat:platform-iam-client-layer`
+  - `feat:platform-iam-authorization-contracts`
+  - `feat:platform-iam-durable-rbac`
+  - `feat:platform-iam-policy-decision`
+  - `feat:platform-iam-rp-session-broker`
+  - `feat:platform-iam-customer-administration`
+  - `feat:platform-iam-internal-administration`
+  - `feat:platform-iam-access-governance`
+  - `feat:platform-iam-audit-provenance`
+
+  ## Consequences
+
+  Node, cluster, workload, fleet, deployment, and cloud-provider IAM remain out of
+  scope. Existing JSON role and membership fields require an additive migration to
+  normalized grants before their compatibility paths can be removed. Existing
+  memory providers remain development/test implementations and cannot be selected
+  implicitly by production administration or decision services.

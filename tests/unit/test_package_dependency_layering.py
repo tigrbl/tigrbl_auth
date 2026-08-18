@@ -22,6 +22,7 @@ PYTHON_LAYER_FOLDERS = {
     "protocols": "50-protocols",
     "runtime": "60-runtime",
     "facade": "70-facade",
+    "clients": "75-clients",
     "routers": "80-routers",
     "backend-apps": "90-backend-apps",
     "tests": "120-tests",
@@ -42,7 +43,7 @@ for _layer, _folder in PYTHON_LAYER_FOLDERS.items():
         if child.is_dir() and (child / "pyproject.toml").is_file()
     }
 
-FRONTEND_LAYER_FOLDERS = {"100-uix-core", "105-ui"}
+FRONTEND_LAYER_FOLDERS = {"75-clients", "100-uix-core", "104-authenticator-uis", "105-ui", "106-ui"}
 
 REQUIRED_PROTOCOL_MODULES = {
     "bindings.py",
@@ -57,16 +58,25 @@ REQUIRED_PROTOCOL_MODULES = {
 
 FRONTEND_WORKSPACES = {
     ROOT / "pkgs" / "100-uix-core" / "uix-core",
+    ROOT / "pkgs" / "75-clients" / "rp",
+    ROOT / "pkgs" / "75-clients" / "session-client",
+    ROOT / "pkgs" / "75-clients" / "tenant-admin-client",
+    ROOT / "pkgs" / "75-clients" / "platform-admin-client",
+    ROOT / "pkgs" / "75-clients" / "policy-decision-client",
     ROOT / "pkgs" / "105-ui" / "admin-uix",
     ROOT / "pkgs" / "105-ui" / "demo-hub-uix",
     ROOT / "pkgs" / "105-ui" / "developer-uix",
     ROOT / "pkgs" / "105-ui" / "my-account-uix",
     ROOT / "pkgs" / "105-ui" / "platform-admin-uix",
     ROOT / "pkgs" / "105-ui" / "public-uix",
-    ROOT / "pkgs" / "105-ui" / "rp",
     ROOT / "pkgs" / "105-ui" / "service-admin-uix",
     ROOT / "pkgs" / "105-ui" / "tenant-admin-uix",
 }
+FRONTEND_WORKSPACES.update(
+    path.parent
+    for layer_name in FRONTEND_LAYER_FOLDERS
+    for path in (ROOT / "pkgs" / layer_name).glob("*/package.json")
+)
 
 LOWER_LAYER_FACADE_IMPORT_EXCEPTIONS: dict[str, str] = {}
 

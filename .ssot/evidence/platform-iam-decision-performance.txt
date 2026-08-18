@@ -1,0 +1,1 @@
+PASSED 2026-08-18. The performance test passed its 1000 default-deny decisions under 0.5 seconds threshold. A direct frozen-environment measurement completed 1000 decisions in 0.002601 seconds.

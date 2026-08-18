@@ -55,12 +55,12 @@ def test_all_tables_have_one_component_identity_and_one_object_identity() -> Non
     composition, migrations, models = _model_inventory()
     objects = [owned for manifest in composition.manifests for owned in manifest.objects]
     assert len(composition.manifests) == 30
-    assert len(migrations) == 30
-    assert len(models) == 153
-    assert len(COMPATIBILITY_MODELS) == 153
+    assert len(migrations) == 31
+    assert len(models) == 161
+    assert len(COMPATIBILITY_MODELS) == 161
     assert {id(model) for model in models} == {id(model) for model in COMPATIBILITY_MODELS}
-    assert len({owned.id for owned in objects}) == 153
-    assert len({owned.physical_name for owned in objects}) == 153
+    assert len({owned.id for owned in objects}) == 161
+    assert len({owned.physical_name for owned in objects}) == 161
     assert {owned.physical_name for owned in objects} == {
         model.__table__.fullname for model in models
     }
@@ -102,13 +102,13 @@ def test_fresh_component_install_is_repeatable_and_records_ownership() -> None:
         orchestrator = MigrationOrchestrator(composition, migrations, ledger, versions)
         first = orchestrator.apply()
         second = orchestrator.apply()
-        assert len(first.ordered) == 30
+        assert len(first.ordered) == 31
         assert not second.ordered
-        assert len(_schema_signature(connection)) == 153
+        assert len(_schema_signature(connection)) == 161
         ownership = connection.exec_driver_sql(
             "SELECT COUNT(*) FROM tigrbl_schema_ownership WHERE ownership_state = 'active'"
         ).scalar_one()
-        assert ownership == 153
+        assert ownership == 161
     finally:
         connection.close()
         engine.dispose()
@@ -168,7 +168,7 @@ def test_legacy_adoption_preserves_data_and_claims_every_object(monkeypatch) -> 
         ).scalar_one() == '{"preserved":true}'
         assert connection.exec_driver_sql(
             "SELECT COUNT(*) FROM tigrbl_schema_ownership"
-        ).scalar_one() == 153
+        ).scalar_one() == 161
         assert connection.exec_driver_sql(
             "SELECT COUNT(*) FROM tigrbl_schema_migrations WHERE application_mode = 'adopted'"
         ).scalar_one() == 30

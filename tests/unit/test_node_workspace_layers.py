@@ -13,7 +13,7 @@ def test_node_workspaces_use_canonical_uix_layers() -> None:
 
     assert workspaces
     assert all(
-        workspace.startswith(("pkgs/100-uix-core/", "pkgs/105-ui/"))
+        workspace.startswith(("pkgs/75-clients/", "pkgs/100-uix-core/", "pkgs/105-ui/", "pkgs/106-ui/"))
         for workspace in workspaces
     )
     assert all((ROOT / workspace / "package.json").is_file() for workspace in workspaces)
