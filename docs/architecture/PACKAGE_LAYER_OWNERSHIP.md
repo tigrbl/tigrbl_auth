@@ -18,6 +18,7 @@ release phases and a package does not need to exist in every layer.
 | `50-protocols` | OAuth, OIDC, credential, attestation, and event protocol behavior | process construction |
 | `60-runtime` | dependency injection, process construction, runners, and runtime lifecycle | product API policy |
 | `70-facade` | compatibility and ergonomic suite entry point | canonical lower-layer behavior |
+| `75-clients` | independently versioned Python and TypeScript remote SDKs plus consumer-side enforcement adapters | server composition, storage, routers, backend apps, facades, or UI screens |
 | `80-routers` | reusable Tigrbl routers that close over one or more related tables, operations, schemas, and hooks | deployable backend application composition |
 | `90-backend-apps` | deployable backend applications composed from routers plus app-wide tables, operations, hooks, policy, configuration, and lifecycle | lower-layer implementation truth or router behavior duplicated inside an app |
 | `100-uix-core` | browser-safe reusable UIX components and client utilities | product-specific screens or Python runtime behavior |
@@ -138,7 +139,11 @@ The dependency direction is one-way:
 
 ```text
 90-backend-apps -> 80-routers
+105-ui -> 75-clients -> 02-contracts / 50-protocols
 ```
 
 Routers may never declare or import backend-app packages. The layer-boundary
 validator enforces both manifest dependencies and Python source imports.
+Server packages do not depend on layer 75. Clients are a peer delivery layer,
+not a facade: they consume stable wire contracts and remain independently
+usable without importing product UIX or server implementations.

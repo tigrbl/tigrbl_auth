@@ -2340,6 +2340,17 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-auth-backend-app-policy-decision"
+version = "0.4.0.dev3"
+source = { editable = "pkgs/90-backend-apps/tigrbl-auth-backend-app-policy-decision" }
+dependencies = [
+    { name = "tigrbl-auth-router-policy-decision" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-auth-router-policy-decision", specifier = "==0.4.0.dev3" }]
+
+[[package]]
 name = "tigrbl-auth-backend-app-public"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/90-backend-apps/tigrbl-auth-backend-app-public" }
@@ -2406,6 +2417,17 @@ requires-dist = [
     { name = "tigrbl-auth-router-oidc-discovery", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-router-resource-validation-metadata", specifier = "==0.4.0.dev2" },
 ]
+
+[[package]]
+name = "tigrbl-auth-backend-app-rp"
+version = "0.4.0.dev3"
+source = { editable = "pkgs/90-backend-apps/tigrbl-auth-backend-app-rp" }
+dependencies = [
+    { name = "tigrbl-auth-router-rp-session" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-auth-router-rp-session", specifier = "==0.4.0.dev3" }]
 
 [[package]]
 name = "tigrbl-auth-backend-app-service-admin"
@@ -2912,6 +2934,21 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-auth-router-authorization-admin"
+version = "0.4.0.dev3"
+source = { editable = "pkgs/80-routers/tigrbl-auth-router-authorization-admin" }
+dependencies = [
+    { name = "tigrbl-authorization-contracts" },
+    { name = "tigrbl-authorization-policy-durability" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-authorization-contracts", specifier = "==0.4.0.dev3" },
+    { name = "tigrbl-authorization-policy-durability", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-auth-router-oauth-authorization"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/80-routers/tigrbl-auth-router-oauth-authorization" }
@@ -3095,6 +3132,21 @@ dependencies = [
 requires-dist = [{ name = "tigrbl", specifier = "==0.4.5.dev4" }]
 
 [[package]]
+name = "tigrbl-auth-router-policy-decision"
+version = "0.4.0.dev3"
+source = { editable = "pkgs/80-routers/tigrbl-auth-router-policy-decision" }
+dependencies = [
+    { name = "tigrbl-authorization-contracts" },
+    { name = "tigrbl-authz-policy-decision-engine" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-authorization-contracts", specifier = "==0.4.0.dev3" },
+    { name = "tigrbl-authz-policy-decision-engine", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-auth-router-resource-validation-metadata"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/80-routers/tigrbl-auth-router-resource-validation-metadata" }
@@ -3107,6 +3159,21 @@ dependencies = [
 requires-dist = [
     { name = "tigrbl", specifier = "==0.4.5.dev4" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-auth-router-rp-session"
+version = "0.4.0.dev3"
+source = { editable = "pkgs/80-routers/tigrbl-auth-router-rp-session" }
+dependencies = [
+    { name = "tigrbl-auth-protocol-rp" },
+    { name = "tigrbl-rp-session-runtime" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-auth-protocol-rp", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-rp-session-runtime", specifier = "==0.4.0.dev3" },
 ]
 
 [[package]]
@@ -3189,8 +3256,10 @@ dependencies = [
     { name = "tigrbl-auth-backend-app-developer" },
     { name = "tigrbl-auth-backend-app-my-account" },
     { name = "tigrbl-auth-backend-app-platform-admin" },
+    { name = "tigrbl-auth-backend-app-policy-decision" },
     { name = "tigrbl-auth-backend-app-public" },
     { name = "tigrbl-auth-backend-app-resource-validation" },
+    { name = "tigrbl-auth-backend-app-rp" },
     { name = "tigrbl-auth-backend-app-service-admin" },
     { name = "tigrbl-auth-backend-app-tenant-admin" },
     { name = "tigrbl-auth-plugin" },
@@ -3209,6 +3278,7 @@ dependencies = [
     { name = "tigrbl-auth-protocol-webauthn" },
     { name = "tigrbl-auth-release-certification" },
     { name = "tigrbl-auth-router-admin-gate" },
+    { name = "tigrbl-auth-router-authorization-admin" },
     { name = "tigrbl-auth-router-oauth-authorization" },
     { name = "tigrbl-auth-router-oauth-authorization-server-metadata" },
     { name = "tigrbl-auth-router-oauth-device-authorization" },
@@ -3222,7 +3292,9 @@ dependencies = [
     { name = "tigrbl-auth-router-oidc-discovery" },
     { name = "tigrbl-auth-router-oidc-logout" },
     { name = "tigrbl-auth-router-oidc-userinfo" },
+    { name = "tigrbl-auth-router-policy-decision" },
     { name = "tigrbl-auth-router-resource-validation-metadata" },
+    { name = "tigrbl-auth-router-rp-session" },
     { name = "tigrbl-auth-router-session-login" },
     { name = "tigrbl-auth-router-webauthn" },
     { name = "tigrbl-authentication-assurance-bases" },
@@ -3244,6 +3316,8 @@ dependencies = [
     { name = "tigrbl-authn-credentials" },
     { name = "tigrbl-authority-graph-concrete" },
     { name = "tigrbl-authority-graph-durability" },
+    { name = "tigrbl-authorization-admin-client" },
+    { name = "tigrbl-authorization-contracts" },
     { name = "tigrbl-authorization-policy-durability" },
     { name = "tigrbl-authorization-provenance-concrete" },
     { name = "tigrbl-authorization-request-staging-capability" },
@@ -3513,7 +3587,9 @@ dependencies = [
     { name = "tigrbl-policy-administration-capability" },
     { name = "tigrbl-policy-administration-memory-provider" },
     { name = "tigrbl-policy-assurance-capability" },
+    { name = "tigrbl-policy-decision-client" },
     { name = "tigrbl-policy-decision-engine-default" },
+    { name = "tigrbl-policy-enforcement-asgi" },
     { name = "tigrbl-policy-evaluation-capability" },
     { name = "tigrbl-possession-proof-capability" },
     { name = "tigrbl-presentation-durability" },
@@ -3542,6 +3618,8 @@ dependencies = [
     { name = "tigrbl-replay-protection-capability" },
     { name = "tigrbl-replay-protection-durability" },
     { name = "tigrbl-resource-server-bases" },
+    { name = "tigrbl-rp-session-client" },
+    { name = "tigrbl-rp-session-runtime" },
     { name = "tigrbl-runtime" },
     { name = "tigrbl-sd-jwt-concrete" },
     { name = "tigrbl-sd-jwt-vc-concrete" },
@@ -3742,8 +3820,10 @@ requires-dist = [
     { name = "tigrbl-auth-backend-app-developer", editable = "pkgs/90-backend-apps/tigrbl-auth-backend-app-developer" },
     { name = "tigrbl-auth-backend-app-my-account", editable = "pkgs/90-backend-apps/tigrbl-auth-backend-app-my-account" },
     { name = "tigrbl-auth-backend-app-platform-admin", editable = "pkgs/90-backend-apps/tigrbl-auth-backend-app-platform-admin" },
+    { name = "tigrbl-auth-backend-app-policy-decision", editable = "pkgs/90-backend-apps/tigrbl-auth-backend-app-policy-decision" },
     { name = "tigrbl-auth-backend-app-public", editable = "pkgs/90-backend-apps/tigrbl-auth-backend-app-public" },
     { name = "tigrbl-auth-backend-app-resource-validation", editable = "pkgs/90-backend-apps/tigrbl-auth-backend-app-resource-validation" },
+    { name = "tigrbl-auth-backend-app-rp", editable = "pkgs/90-backend-apps/tigrbl-auth-backend-app-rp" },
     { name = "tigrbl-auth-backend-app-service-admin", editable = "pkgs/90-backend-apps/tigrbl-auth-backend-app-service-admin" },
     { name = "tigrbl-auth-backend-app-tenant-admin", editable = "pkgs/90-backend-apps/tigrbl-auth-backend-app-tenant-admin" },
     { name = "tigrbl-auth-plugin", editable = "pkgs/60-runtime/tigrbl-auth-plugin" },
@@ -3762,6 +3842,7 @@ requires-dist = [
     { name = "tigrbl-auth-protocol-webauthn", editable = "pkgs/50-protocols/tigrbl-auth-protocol-webauthn" },
     { name = "tigrbl-auth-release-certification", editable = "pkgs/60-runtime/tigrbl-auth-release-certification" },
     { name = "tigrbl-auth-router-admin-gate", editable = "pkgs/80-routers/tigrbl-auth-router-admin-gate" },
+    { name = "tigrbl-auth-router-authorization-admin", editable = "pkgs/80-routers/tigrbl-auth-router-authorization-admin" },
     { name = "tigrbl-auth-router-oauth-authorization", editable = "pkgs/80-routers/tigrbl-auth-router-oauth-authorization" },
     { name = "tigrbl-auth-router-oauth-authorization-server-metadata", editable = "pkgs/80-routers/tigrbl-auth-router-oauth-authorization-server-metadata" },
     { name = "tigrbl-auth-router-oauth-device-authorization", editable = "pkgs/80-routers/tigrbl-auth-router-oauth-device-authorization" },
@@ -3775,7 +3856,9 @@ requires-dist = [
     { name = "tigrbl-auth-router-oidc-discovery", editable = "pkgs/80-routers/tigrbl-auth-router-oidc-discovery" },
     { name = "tigrbl-auth-router-oidc-logout", editable = "pkgs/80-routers/tigrbl-auth-router-oidc-logout" },
     { name = "tigrbl-auth-router-oidc-userinfo", editable = "pkgs/80-routers/tigrbl-auth-router-oidc-userinfo" },
+    { name = "tigrbl-auth-router-policy-decision", editable = "pkgs/80-routers/tigrbl-auth-router-policy-decision" },
     { name = "tigrbl-auth-router-resource-validation-metadata", editable = "pkgs/80-routers/tigrbl-auth-router-resource-validation-metadata" },
+    { name = "tigrbl-auth-router-rp-session", editable = "pkgs/80-routers/tigrbl-auth-router-rp-session" },
     { name = "tigrbl-auth-router-session-login", editable = "pkgs/80-routers/tigrbl-auth-router-session-login" },
     { name = "tigrbl-auth-router-webauthn", editable = "pkgs/80-routers/tigrbl-auth-router-webauthn" },
     { name = "tigrbl-authentication-assurance-bases", editable = "pkgs/05-bases/tigrbl-authentication-assurance-bases" },
@@ -3797,6 +3880,8 @@ requires-dist = [
     { name = "tigrbl-authn-credentials", editable = "pkgs/deprecated/tigrbl-authn-credentials" },
     { name = "tigrbl-authority-graph-concrete", editable = "pkgs/10-concrete/tigrbl-authority-graph-concrete" },
     { name = "tigrbl-authority-graph-durability", editable = "pkgs/30-storage-runtime/tigrbl-authority-graph-durability" },
+    { name = "tigrbl-authorization-admin-client", editable = "pkgs/75-clients/tigrbl-authorization-admin-client" },
+    { name = "tigrbl-authorization-contracts", editable = "pkgs/02-contracts/tigrbl-authorization-contracts" },
     { name = "tigrbl-authorization-policy-durability", editable = "pkgs/30-storage-runtime/tigrbl-authorization-policy-durability" },
     { name = "tigrbl-authorization-provenance-concrete", editable = "pkgs/10-concrete/tigrbl-authorization-provenance-concrete" },
     { name = "tigrbl-authorization-request-staging-capability", editable = "pkgs/40-capabilities/tigrbl-authorization-request-staging-capability" },
@@ -4070,7 +4155,9 @@ requires-dist = [
     { name = "tigrbl-policy-administration-capability", editable = "pkgs/40-capabilities/tigrbl-policy-administration-capability" },
     { name = "tigrbl-policy-administration-memory-provider", editable = "pkgs/30-storage-runtime/tigrbl-policy-administration-memory-provider" },
     { name = "tigrbl-policy-assurance-capability", editable = "pkgs/40-capabilities/tigrbl-policy-assurance-capability" },
+    { name = "tigrbl-policy-decision-client", editable = "pkgs/75-clients/tigrbl-policy-decision-client" },
     { name = "tigrbl-policy-decision-engine-default", editable = "pkgs/10-concrete/tigrbl-policy-decision-engine-default" },
+    { name = "tigrbl-policy-enforcement-asgi", editable = "pkgs/75-clients/tigrbl-policy-enforcement-asgi" },
     { name = "tigrbl-policy-evaluation-capability", editable = "pkgs/40-capabilities/tigrbl-policy-evaluation-capability" },
     { name = "tigrbl-possession-proof-capability", editable = "pkgs/40-capabilities/tigrbl-possession-proof-capability" },
     { name = "tigrbl-presentation-durability", editable = "pkgs/30-storage-runtime/tigrbl-presentation-durability" },
@@ -4099,6 +4186,8 @@ requires-dist = [
     { name = "tigrbl-replay-protection-capability", editable = "pkgs/40-capabilities/tigrbl-replay-protection-capability" },
     { name = "tigrbl-replay-protection-durability", editable = "pkgs/30-storage-runtime/tigrbl-replay-protection-durability" },
     { name = "tigrbl-resource-server-bases", editable = "pkgs/05-bases/tigrbl-resource-server-bases" },
+    { name = "tigrbl-rp-session-client", editable = "pkgs/75-clients/tigrbl-rp-session-client" },
+    { name = "tigrbl-rp-session-runtime", editable = "pkgs/30-storage-runtime/tigrbl-rp-session-runtime" },
     { name = "tigrbl-runtime", specifier = "==0.4.5.dev4" },
     { name = "tigrbl-sd-jwt-concrete", editable = "pkgs/10-concrete/tigrbl-sd-jwt-concrete" },
     { name = "tigrbl-sd-jwt-vc-concrete", editable = "pkgs/deprecated/tigrbl-sd-jwt-vc-concrete" },
@@ -4481,11 +4570,28 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-authorization-admin-client"
+version = "0.4.0.dev3"
+source = { editable = "pkgs/75-clients/tigrbl-authorization-admin-client" }
+dependencies = [
+    { name = "tigrbl-authorization-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-authorization-contracts", specifier = "==0.4.0.dev3" }]
+
+[[package]]
+name = "tigrbl-authorization-contracts"
+version = "0.4.0.dev3"
+source = { editable = "pkgs/02-contracts/tigrbl-authorization-contracts" }
+
+[[package]]
 name = "tigrbl-authorization-policy-durability"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/30-storage-runtime/tigrbl-authorization-policy-durability" }
 dependencies = [
     { name = "tigrbl" },
+    { name = "tigrbl-authorization-contracts" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core" },
     { name = "tigrbl-identity-storage" },
@@ -4496,6 +4602,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = "==0.4.5.dev4" },
+    { name = "tigrbl-authorization-contracts", specifier = "==0.4.0.dev3" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
@@ -4655,6 +4762,7 @@ name = "tigrbl-authz-policy-decision-engine"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/20-providers/tigrbl-authz-policy-decision-engine" }
 dependencies = [
+    { name = "tigrbl-authorization-contracts" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core" },
     { name = "tigrbl-policy-decision-engine-default" },
@@ -4662,6 +4770,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "tigrbl-authorization-contracts", specifier = "==0.4.0.dev3" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-policy-decision-engine-default", specifier = "==0.4.0.dev2" },
@@ -7536,7 +7645,6 @@ dependencies = [
     { name = "tigrbl-auth-protocol-cwt" },
     { name = "tigrbl-auth-protocol-webauthn" },
     { name = "tigrbl-credential-profile-vc-jose-cose" },
-    { name = "tigrbl-credentials" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-jose" },
     { name = "tigrbl-identity-protocol-did-core" },
@@ -7546,6 +7654,7 @@ dependencies = [
     { name = "tigrbl-public-key-authentication-capability" },
     { name = "tigrbl-public-key-credential-management-capability" },
     { name = "tigrbl-public-key-registration-capability" },
+    { name = "tigrbl-secret-hashing-bcrypt-provider" },
     { name = "tigrbl-security-protocol-cose" },
     { name = "tigrbl-security-protocol-jws" },
     { name = "tigrbl-workload-credential-profile-cwt-svid-extension" },
@@ -7575,7 +7684,6 @@ requires-dist = [
     { name = "tigrbl-auth-protocol-cwt", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-webauthn", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-credential-profile-vc-jose-cose", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-credentials", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-jose", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-protocol-did-core", specifier = "==0.4.0.dev2" },
@@ -7585,6 +7693,7 @@ requires-dist = [
     { name = "tigrbl-public-key-authentication-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-public-key-credential-management-capability", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-public-key-registration-capability", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-secret-hashing-bcrypt-provider", specifier = "==0.1.0" },
     { name = "tigrbl-security-protocol-cose", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-protocol-jws", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-workload-credential-profile-cwt-svid-extension", specifier = "==0.4.0.dev2" },
@@ -8927,6 +9036,17 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-policy-decision-client"
+version = "0.4.0.dev3"
+source = { editable = "pkgs/75-clients/tigrbl-policy-decision-client" }
+dependencies = [
+    { name = "tigrbl-authorization-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-authorization-contracts", specifier = "==0.4.0.dev3" }]
+
+[[package]]
 name = "tigrbl-policy-decision-engine-default"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-policy-decision-engine-default" }
@@ -8942,6 +9062,17 @@ requires-dist = [
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
 ]
+
+[[package]]
+name = "tigrbl-policy-enforcement-asgi"
+version = "0.4.0.dev3"
+source = { editable = "pkgs/75-clients/tigrbl-policy-enforcement-asgi" }
+dependencies = [
+    { name = "tigrbl-policy-decision-client" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-policy-decision-client", specifier = "==0.4.0.dev3" }]
 
 [[package]]
 name = "tigrbl-policy-evaluation-capability"
@@ -9342,6 +9473,16 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-rp-session-client"
+version = "0.4.0.dev3"
+source = { editable = "pkgs/75-clients/tigrbl-rp-session-client" }
+
+[[package]]
+name = "tigrbl-rp-session-runtime"
+version = "0.4.0.dev3"
+source = { editable = "pkgs/30-storage-runtime/tigrbl-rp-session-runtime" }
 
 [[package]]
 name = "tigrbl-runtime"

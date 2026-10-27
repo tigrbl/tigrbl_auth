@@ -1,4 +1,5 @@
 import { BACKEND_APP_BASE_URL, backendAppUrl } from "./backendSurface";
+import { PlatformAdminClient as PlatformIamClient } from "@tigrbl-auth/platform-admin-client";
 import type { AdminSession, CreateIdentityInput, CreateRealmInput, CreateTenantInput, Identity, Realm, Tenant, UpdateIdentityInput, UpdateRealmInput, UpdateTenantInput } from "../types";
 
 type Fetcher = typeof fetch;
@@ -10,7 +11,13 @@ function pathSegment(value: string) {
 }
 
 export class PlatformAdminClient {
-  constructor(private readonly fetcher: Fetcher = defaultFetcher) {}
+  readonly iam: PlatformIamClient;
+
+  constructor(private readonly fetcher: Fetcher = defaultFetcher) {
+    this.iam = new PlatformIamClient(async <T>(method: string, path: string, body?: unknown) =>
+      this.request<T>(path, { method, body: body === undefined ? undefined : JSON.stringify(body) })
+    );
+  }
 
   private async request<T>(path: string, init: RequestInit = {}): Promise<T> {
     const response = await this.fetcher(backendAppUrl(path), {

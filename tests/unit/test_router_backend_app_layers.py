@@ -15,8 +15,8 @@ def test_router_and_backend_app_families_are_explicit() -> None:
     routers = [package for package in packages if package.layer == "80-routers"]
     apps = [package for package in packages if package.layer == "90-backend-apps"]
 
-    assert len(routers) == 17
-    assert len(apps) == 8
+    assert len(routers) == 20
+    assert len(apps) == 10
     assert all(
         package.distribution.startswith("tigrbl-auth-router-") for package in routers
     )

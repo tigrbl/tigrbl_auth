@@ -1,4 +1,5 @@
 import { BACKEND_APP_BASE_URL, backendAppUrl } from "./backendSurface";
+import { TenantAdminClient as TenantIamClient } from "@tigrbl-auth/tenant-admin-client";
 import type {
   CreateTenantClientInput,
   CreateTenantIdentityInput,
@@ -20,7 +21,13 @@ function pathSegment(value: string) {
 }
 
 export class TenantAdminClient {
-  constructor(private readonly fetcher: Fetcher = defaultFetcher) {}
+  readonly iam: TenantIamClient;
+
+  constructor(private readonly fetcher: Fetcher = defaultFetcher) {
+    this.iam = new TenantIamClient(async <T>(method: string, path: string, body?: unknown) =>
+      this.request<T>(path, { method, body: body === undefined ? undefined : JSON.stringify(body) })
+    );
+  }
 
   private async request<T>(path: string, init: RequestInit = {}): Promise<T> {
     const response = await this.fetcher(backendAppUrl(path), {

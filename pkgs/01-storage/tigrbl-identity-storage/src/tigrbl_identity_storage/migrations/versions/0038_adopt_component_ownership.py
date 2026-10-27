@@ -11,7 +11,7 @@ from tigrbl_identity_storage.components import load_full_composition
 from tigrbl_migrations import MigrationLedger
 
 revision = "0038_adopt_component_ownership"
-down_revision = "0037_operator_tables"
+down_revision = "0039_normalized_platform_iam"
 branch_labels = None
 depends_on = None
 

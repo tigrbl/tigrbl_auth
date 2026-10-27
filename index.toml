@@ -259,6 +259,14 @@ local_dependencies = ["tigrbl-identity-core", "tigrbl-identity-storage-access-go
 same_layer_dependencies = ["tigrbl-identity-storage-access-governance", "tigrbl-identity-storage-attestation", "tigrbl-identity-storage-audit", "tigrbl-identity-storage-authentication", "tigrbl-identity-storage-authority-graph", "tigrbl-identity-storage-authorization-policy", "tigrbl-identity-storage-certificate", "tigrbl-identity-storage-claims", "tigrbl-identity-storage-consent", "tigrbl-identity-storage-delegation", "tigrbl-identity-storage-did", "tigrbl-identity-storage-digital-credential", "tigrbl-identity-storage-federation", "tigrbl-identity-storage-gnap", "tigrbl-identity-storage-key-material", "tigrbl-identity-storage-oauth", "tigrbl-identity-storage-oidc", "tigrbl-identity-storage-operator", "tigrbl-identity-storage-presentation", "tigrbl-identity-storage-principals", "tigrbl-identity-storage-release-governance", "tigrbl-identity-storage-replay-protection", "tigrbl-identity-storage-residency", "tigrbl-identity-storage-scim", "tigrbl-identity-storage-security-event", "tigrbl-identity-storage-tenancy", "tigrbl-identity-storage-token", "tigrbl-identity-storage-trust-federation-graph", "tigrbl-identity-storage-webauthn", "tigrbl-identity-storage-workload-identity"]
 
 [[packages]]
+name = "tigrbl-authorization-contracts"
+path = "pkgs/02-contracts/tigrbl-authorization-contracts"
+layer = "02-contracts"
+order = "00"
+local_dependencies = []
+same_layer_dependencies = []
+
+[[packages]]
 name = "tigrbl-claim-contracts"
 path = "pkgs/02-contracts/tigrbl-claim-contracts"
 layer = "02-contracts"
@@ -1991,7 +1999,7 @@ name = "tigrbl-authz-policy-decision-engine"
 path = "pkgs/20-providers/tigrbl-authz-policy-decision-engine"
 layer = "20-providers"
 order = "00"
-local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-policy-decision-engine-default"]
+local_dependencies = ["tigrbl-authorization-contracts", "tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-policy-decision-engine-default"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2415,7 +2423,7 @@ name = "tigrbl-authorization-policy-durability"
 path = "pkgs/30-storage-runtime/tigrbl-authorization-policy-durability"
 layer = "30-storage-runtime"
 order = "00"
-local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts"]
+local_dependencies = ["tigrbl-authorization-contracts", "tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2504,6 +2512,14 @@ path = "pkgs/30-storage-runtime/tigrbl-replay-protection-durability"
 layer = "30-storage-runtime"
 order = "00"
 local_dependencies = ["tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-storage", "tigrbl-replay-bases", "tigrbl-security-trust-contracts"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-rp-session-runtime"
+path = "pkgs/30-storage-runtime/tigrbl-rp-session-runtime"
+layer = "30-storage-runtime"
+order = "00"
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3127,8 +3143,8 @@ name = "tigrbl-workload-credential-profile-cwt-svid-extension"
 path = "pkgs/50-protocols/tigrbl-workload-credential-profile-cwt-svid-extension"
 layer = "50-protocols"
 order = "01"
-local_dependencies = ["tigrbl-auth-protocol-cwt", "tigrbl-proof-of-possession-contracts", "tigrbl-security-protocol-cose"]
-same_layer_dependencies = ["tigrbl-auth-protocol-cwt", "tigrbl-security-protocol-cose"]
+local_dependencies = ["tigrbl-auth-protocol-cwt", "tigrbl-proof-of-possession-contracts", "tigrbl-security-protocol-cose", "tigrbl-workload-protocol-spiffe-svid"]
+same_layer_dependencies = ["tigrbl-auth-protocol-cwt", "tigrbl-security-protocol-cose", "tigrbl-workload-protocol-spiffe-svid"]
 
 [[packages]]
 name = "tigrbl-workload-credential-profile-spiffe-wit-svid"
@@ -3183,7 +3199,7 @@ name = "tigrbl-identity-runtime"
 path = "pkgs/60-runtime/tigrbl-identity-runtime"
 layer = "60-runtime"
 order = "00"
-local_dependencies = ["tigrbl-auth-protocol-cwt", "tigrbl-auth-protocol-webauthn", "tigrbl-credential-profile-vc-jose-cose", "tigrbl-credentials", "tigrbl-identity-contracts", "tigrbl-identity-jose", "tigrbl-identity-protocol-did-core", "tigrbl-identity-storage", "tigrbl-identity-storage-runtime", "tigrbl-protected-envelope-capability", "tigrbl-public-key-authentication-capability", "tigrbl-public-key-credential-management-capability", "tigrbl-public-key-registration-capability", "tigrbl-security-protocol-cose", "tigrbl-security-protocol-jws", "tigrbl-workload-credential-profile-cwt-svid-extension"]
+local_dependencies = ["tigrbl-auth-protocol-cwt", "tigrbl-auth-protocol-webauthn", "tigrbl-credential-profile-vc-jose-cose", "tigrbl-identity-contracts", "tigrbl-identity-jose", "tigrbl-identity-protocol-did-core", "tigrbl-identity-storage", "tigrbl-identity-storage-runtime", "tigrbl-protected-envelope-capability", "tigrbl-public-key-authentication-capability", "tigrbl-public-key-credential-management-capability", "tigrbl-public-key-registration-capability", "tigrbl-secret-hashing-bcrypt-provider", "tigrbl-security-protocol-cose", "tigrbl-security-protocol-jws", "tigrbl-workload-credential-profile-cwt-svid-extension"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -3215,7 +3231,7 @@ name = "tigrbl-identity-server"
 path = "pkgs/60-runtime/tigrbl-identity-server"
 layer = "60-runtime"
 order = "02"
-local_dependencies = ["tigrbl-account-self-service-capability", "tigrbl-api-key-authentication-capability", "tigrbl-artifact-processing-capability", "tigrbl-auth-protocol-gnap", "tigrbl-auth-protocol-oauth", "tigrbl-auth-protocol-oidc", "tigrbl-auth-release-certification", "tigrbl-authorization-request-staging-capability", "tigrbl-client-registration-capability", "tigrbl-client-secret-authentication-capability", "tigrbl-identity-administration-capability", "tigrbl-identity-contracts", "tigrbl-identity-jose", "tigrbl-identity-runtime", "tigrbl-identity-storage-runtime", "tigrbl-password-authentication-capability", "tigrbl-realm-administration-capability", "tigrbl-replay-memory-provider", "tigrbl-replay-protection-capability", "tigrbl-secret-hashing-bcrypt-provider", "tigrbl-service-key-authentication-capability", "tigrbl-tenant-administration-capability", "tigrbl-token-exchange-capability", "tigrbl-token-introspection-capability", "tigrbl-token-issuance-capability", "tigrbl-token-revocation-capability"]
+local_dependencies = ["tigrbl-account-self-service-capability", "tigrbl-api-key-authentication-capability", "tigrbl-artifact-processing-capability", "tigrbl-auth-protocol-gnap", "tigrbl-auth-protocol-oauth", "tigrbl-auth-protocol-oidc", "tigrbl-auth-release-certification", "tigrbl-authorization-request-staging-capability", "tigrbl-client-registration-capability", "tigrbl-client-secret-authentication-capability", "tigrbl-identity-administration-capability", "tigrbl-identity-contracts", "tigrbl-identity-jose", "tigrbl-identity-runtime", "tigrbl-identity-storage-audit", "tigrbl-identity-storage-oauth", "tigrbl-identity-storage-operator", "tigrbl-identity-storage-principals", "tigrbl-identity-storage-runtime", "tigrbl-identity-storage-tenancy", "tigrbl-password-authentication-capability", "tigrbl-realm-administration-capability", "tigrbl-replay-memory-provider", "tigrbl-replay-protection-capability", "tigrbl-secret-hashing-bcrypt-provider", "tigrbl-service-key-authentication-capability", "tigrbl-tenant-administration-capability", "tigrbl-token-exchange-capability", "tigrbl-token-introspection-capability", "tigrbl-token-issuance-capability", "tigrbl-token-revocation-capability"]
 same_layer_dependencies = ["tigrbl-auth-release-certification", "tigrbl-identity-runtime"]
 
 [[packages]]
@@ -3267,11 +3283,51 @@ local_dependencies = ["tigrbl-auth-plugin", "tigrbl-auth-protocol-oauth", "tigrb
 same_layer_dependencies = ["tigrbl-credentials"]
 
 [[packages]]
+name = "tigrbl-authorization-admin-client"
+path = "pkgs/75-clients/tigrbl-authorization-admin-client"
+layer = "75-clients"
+order = "00"
+local_dependencies = ["tigrbl-authorization-contracts"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-policy-decision-client"
+path = "pkgs/75-clients/tigrbl-policy-decision-client"
+layer = "75-clients"
+order = "00"
+local_dependencies = ["tigrbl-authorization-contracts"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-rp-session-client"
+path = "pkgs/75-clients/tigrbl-rp-session-client"
+layer = "75-clients"
+order = "00"
+local_dependencies = []
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-policy-enforcement-asgi"
+path = "pkgs/75-clients/tigrbl-policy-enforcement-asgi"
+layer = "75-clients"
+order = "01"
+local_dependencies = ["tigrbl-policy-decision-client"]
+same_layer_dependencies = ["tigrbl-policy-decision-client"]
+
+[[packages]]
 name = "tigrbl-auth-router-admin-gate"
 path = "pkgs/80-routers/tigrbl-auth-router-admin-gate"
 layer = "80-routers"
 order = "00"
 local_dependencies = ["tigrbl-identity-core", "tigrbl-identity-runtime"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-auth-router-authorization-admin"
+path = "pkgs/80-routers/tigrbl-auth-router-authorization-admin"
+layer = "80-routers"
+order = "00"
+local_dependencies = ["tigrbl-authorization-contracts", "tigrbl-authorization-policy-durability"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -3379,11 +3435,27 @@ local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
+name = "tigrbl-auth-router-policy-decision"
+path = "pkgs/80-routers/tigrbl-auth-router-policy-decision"
+layer = "80-routers"
+order = "00"
+local_dependencies = ["tigrbl-authorization-contracts", "tigrbl-authz-policy-decision-engine"]
+same_layer_dependencies = []
+
+[[packages]]
 name = "tigrbl-auth-router-resource-validation-metadata"
 path = "pkgs/80-routers/tigrbl-auth-router-resource-validation-metadata"
 layer = "80-routers"
 order = "00"
 local_dependencies = ["tigrbl-identity-contracts"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-auth-router-rp-session"
+path = "pkgs/80-routers/tigrbl-auth-router-rp-session"
+layer = "80-routers"
+order = "00"
+local_dependencies = ["tigrbl-auth-protocol-rp", "tigrbl-rp-session-runtime"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -3407,7 +3479,23 @@ name = "tigrbl-auth-backend-app-core"
 path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-core"
 layer = "90-backend-apps"
 order = "00"
-local_dependencies = ["tigrbl-auth-plugin", "tigrbl-auth-protocol-gnap", "tigrbl-auth-protocol-oauth", "tigrbl-auth-router-admin-gate", "tigrbl-auth-router-oauth-authorization", "tigrbl-auth-router-oauth-authorization-server-metadata", "tigrbl-auth-router-oauth-device-authorization", "tigrbl-auth-router-oauth-introspection", "tigrbl-auth-router-oauth-par", "tigrbl-auth-router-oauth-protected-resource-metadata", "tigrbl-auth-router-oauth-registration", "tigrbl-auth-router-oauth-revocation", "tigrbl-auth-router-oauth-token", "tigrbl-auth-router-oauth-token-exchange", "tigrbl-auth-router-oidc-discovery", "tigrbl-auth-router-oidc-logout", "tigrbl-auth-router-oidc-userinfo", "tigrbl-auth-router-resource-validation-metadata", "tigrbl-auth-router-session-login", "tigrbl-client-secret-authentication-capability", "tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-operator", "tigrbl-identity-runtime", "tigrbl-identity-server", "tigrbl-identity-storage", "tigrbl-identity-storage-runtime", "tigrbl-secret-hashing-bcrypt-provider"]
+local_dependencies = ["tigrbl-auth-plugin", "tigrbl-auth-protocol-gnap", "tigrbl-auth-protocol-oauth", "tigrbl-auth-router-admin-gate", "tigrbl-auth-router-oauth-authorization", "tigrbl-auth-router-oauth-authorization-server-metadata", "tigrbl-auth-router-oauth-device-authorization", "tigrbl-auth-router-oauth-introspection", "tigrbl-auth-router-oauth-par", "tigrbl-auth-router-oauth-protected-resource-metadata", "tigrbl-auth-router-oauth-registration", "tigrbl-auth-router-oauth-revocation", "tigrbl-auth-router-oauth-token", "tigrbl-auth-router-oauth-token-exchange", "tigrbl-auth-router-oidc-discovery", "tigrbl-auth-router-oidc-logout", "tigrbl-auth-router-oidc-userinfo", "tigrbl-auth-router-resource-validation-metadata", "tigrbl-auth-router-session-login", "tigrbl-client-secret-authentication-capability", "tigrbl-identity-contracts", "tigrbl-identity-core", "tigrbl-identity-operator", "tigrbl-identity-runtime", "tigrbl-identity-server", "tigrbl-identity-storage", "tigrbl-identity-storage-oauth", "tigrbl-identity-storage-runtime", "tigrbl-identity-storage-tenancy", "tigrbl-secret-hashing-bcrypt-provider"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-auth-backend-app-policy-decision"
+path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-policy-decision"
+layer = "90-backend-apps"
+order = "00"
+local_dependencies = ["tigrbl-auth-router-policy-decision"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tigrbl-auth-backend-app-rp"
+path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-rp"
+layer = "90-backend-apps"
+order = "00"
+local_dependencies = ["tigrbl-auth-router-rp-session"]
 same_layer_dependencies = []
 
 [[packages]]

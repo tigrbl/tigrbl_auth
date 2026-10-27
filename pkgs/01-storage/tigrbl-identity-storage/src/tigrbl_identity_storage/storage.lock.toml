@@ -38,9 +38,9 @@ manifest_digest = "sha256:dadb34f3c6e7e4111981b25523f9b5fa327216903452c74947df8a
 [components."tigrbl.identity.storage.authorization-policy"]
 distribution = "tigrbl-identity-storage-authorization-policy"
 artifact = "0.4.0.dev2"
-schema_contract = "1.0.0"
-migration_head = "0ef0b038-e979-5ba7-b874-d36093292702"
-manifest_digest = "sha256:dc9368b6f70c047f340fca53c22e6dddd22dfafa7cd5407ddda0bf90d0f6d1f0"
+schema_contract = "1.1.0"
+migration_head = "5b573a6c-8268-5af3-a505-ea2c8a7c9dcc"
+manifest_digest = "sha256:31fee3e79a5ffcf416e7e085f2f95a69df7e4fbffcc226e2f2ac08d2f7d0dcd7"
 
 [components."tigrbl.identity.storage.certificate"]
 distribution = "tigrbl-identity-storage-certificate"

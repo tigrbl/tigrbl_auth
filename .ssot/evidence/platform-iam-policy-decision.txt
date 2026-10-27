@@ -1,0 +1,1 @@
+PASSED 2026-08-18. Four PDP integration tests passed: tenant isolation, unknown action, expiry/revocation, explicit-deny precedence, RBAC grant matching, ABAC missing-fact default deny, assurance step-up obligation, and immutable publication lineage.

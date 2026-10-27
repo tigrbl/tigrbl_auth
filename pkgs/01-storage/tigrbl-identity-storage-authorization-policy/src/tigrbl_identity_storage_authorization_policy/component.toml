@@ -1,4 +1,4 @@
-manifest_version = "1.0.0"
+manifest_version = "1.1.0"
 
 [component]
 id = "tigrbl.identity.storage.authorization-policy"
@@ -6,8 +6,8 @@ distribution = "tigrbl-identity-storage-authorization-policy"
 import_root = "tigrbl_identity_storage_authorization_policy"
 
 [schema]
-contract = "1.0.0"
-migration_head = "0ef0b038-e979-5ba7-b874-d36093292702"
+contract = "1.1.0"
+migration_head = "5b573a6c-8268-5af3-a505-ea2c8a7c9dcc"
 migrations_package = "tigrbl_identity_storage_authorization_policy.migrations.versions"
 
 [[schema.objects]]
@@ -87,3 +87,51 @@ id = "tigrbl.identity.storage.authorization-policy:table:invariant_violations"
 kind = "table"
 physical_name = "authn.invariant_violations"
 model = "tigrbl_identity_storage_authorization_policy.tables:InvariantViolation"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authorization-policy:table:authorization_resource_types"
+kind = "table"
+physical_name = "authn.authorization_resource_types"
+model = "tigrbl_identity_storage_authorization_policy.tables:AuthorizationResourceType"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authorization-policy:table:authorization_actions"
+kind = "table"
+physical_name = "authn.authorization_actions"
+model = "tigrbl_identity_storage_authorization_policy.tables:AuthorizationAction"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authorization-policy:table:authorization_groups"
+kind = "table"
+physical_name = "authn.authorization_groups"
+model = "tigrbl_identity_storage_authorization_policy.tables:AuthorizationGroup"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authorization-policy:table:authorization_group_memberships"
+kind = "table"
+physical_name = "authn.authorization_group_memberships"
+model = "tigrbl_identity_storage_authorization_policy.tables:AuthorizationGroupMembership"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authorization-policy:table:role_permissions"
+kind = "table"
+physical_name = "authn.role_permissions"
+model = "tigrbl_identity_storage_authorization_policy.tables:RolePermission"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authorization-policy:table:role_grants"
+kind = "table"
+physical_name = "authn.role_grants"
+model = "tigrbl_identity_storage_authorization_policy.tables:RoleGrant"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authorization-policy:table:policy_approvals"
+kind = "table"
+physical_name = "authn.policy_approvals"
+model = "tigrbl_identity_storage_authorization_policy.tables:PolicyApproval"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.authorization-policy:table:policy_publications"
+kind = "table"
+physical_name = "authn.policy_publications"
+model = "tigrbl_identity_storage_authorization_policy.tables:PolicyPublication"

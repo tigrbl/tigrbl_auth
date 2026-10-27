@@ -22,6 +22,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@tigrbl-auth/tenant-admin-client": "file:../../75-clients/tenant-admin-client",
     "@tigrbl-auth/uix-core": "file:../../100-uix-core/uix-core",
     "@vitejs/plugin-react": "^5.0.0",
     "vite": "^6.2.0",

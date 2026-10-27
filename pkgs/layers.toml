@@ -56,6 +56,11 @@ order = 70
 category = "production"
 
 [[layers]]
+id = "75-clients"
+order = 75
+category = "client"
+
+[[layers]]
 id = "80-routers"
 order = 80
 category = "production"
@@ -147,6 +152,10 @@ consumer_layer = "70-facade"
 allowed_target_layers = ["00-primitives","01-storage","02-contracts","05-bases","10-concrete","20-providers","30-storage-runtime","40-capabilities","50-protocols","60-runtime","70-facade"]
 
 [[dependency_rules]]
+consumer_layer = "75-clients"
+allowed_target_layers = ["00-primitives","02-contracts","50-protocols","75-clients"]
+
+[[dependency_rules]]
 consumer_layer = "80-routers"
 allowed_target_layers = ["00-primitives","01-storage","02-contracts","05-bases","10-concrete","20-providers","30-storage-runtime","40-capabilities","50-protocols","60-runtime","70-facade","80-routers"]
 
@@ -156,15 +165,15 @@ allowed_target_layers = ["00-primitives","01-storage","02-contracts","05-bases",
 
 [[dependency_rules]]
 consumer_layer = "100-uix-core"
-allowed_target_layers = ["100-uix-core"]
+allowed_target_layers = ["75-clients","100-uix-core"]
 
 [[dependency_rules]]
 consumer_layer = "105-ui"
-allowed_target_layers = ["100-uix-core","105-ui"]
+allowed_target_layers = ["75-clients","100-uix-core","105-ui"]
 
 [[dependency_rules]]
 consumer_layer = "106-ui"
-allowed_target_layers = ["100-uix-core", "105-ui", "106-ui"]
+allowed_target_layers = ["75-clients","100-uix-core", "105-ui", "106-ui"]
 
 [[dependency_rules]]
 consumer_layer = "110-examples"

@@ -29,7 +29,7 @@ def test_javascript_workspace_members_match_numbered_ui_layers() -> None:
     declared = set(data["workspaces"])
     discovered = {
         path.parent.relative_to(ROOT).as_posix()
-        for layer in (PKGS / "100-uix-core", PKGS / "105-ui")
+        for layer in (PKGS / "75-clients", PKGS / "100-uix-core", PKGS / "105-ui")
         for path in layer.glob("*/package.json")
     }
     assert declared == discovered

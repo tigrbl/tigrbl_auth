@@ -1,0 +1,13 @@
+[project]
+name = "tigrbl-auth-router-rp-session"
+version = "0.4.0.dev3"
+description = "Reusable RP/BFF login and session routes."
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = ["tigrbl-auth-protocol-rp==0.4.0.dev2", "tigrbl-rp-session-runtime==0.4.0.dev3"]
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+[tool.poetry]
+packages = [{include = "tigrbl_auth_router_rp_session", from = "src"}]

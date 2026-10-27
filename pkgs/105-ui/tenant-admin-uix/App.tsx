@@ -11,12 +11,18 @@ import { IdentitiesPage } from "./pages/IdentitiesPage";
 import { KeyEventsPage } from "./pages/KeyEventsPage";
 import { LoginPage } from "./pages/LoginPage";
 import { SessionsPage } from "./pages/SessionsPage";
+import { AccessManagementPage } from "./pages/AccessManagementPage";
 import { BACKEND_APP_BASE_URL, BACKEND_APP } from "./services/backendSurface";
 
 const navigation = [
   { href: "#/dashboard", label: "Dashboard" },
   { href: "#/identities", label: "Identities" },
-  { href: "#/groups", label: "Groups / Roles" },
+  { href: "#/members", label: "Members" },
+  { href: "#/groups", label: "Groups" },
+  { href: "#/roles", label: "Roles" },
+  { href: "#/grants", label: "Grants" },
+  { href: "#/effective-access", label: "Effective Access" },
+  { href: "#/access-reviews", label: "Access Reviews" },
   { href: "#/clients", label: "Clients" },
   { href: "#/consents", label: "Consents" },
   { href: "#/sessions", label: "Sessions" },
@@ -86,6 +92,11 @@ export default function App() {
               />
             )}
             {currentHash.startsWith("#/groups") && <GroupsRolesPage identities={tenant.identities} />}
+            {currentHash.startsWith("#/members") && <AccessManagementPage section="Members" />}
+            {currentHash.startsWith("#/roles") && <AccessManagementPage section="Roles" />}
+            {currentHash.startsWith("#/grants") && <AccessManagementPage section="Grants" />}
+            {currentHash.startsWith("#/effective-access") && <AccessManagementPage section="Effective access" />}
+            {currentHash.startsWith("#/access-reviews") && <AccessManagementPage section="Access reviews" />}
             {currentHash.startsWith("#/clients") && (
               <ClientsPage
                 clients={tenant.clients}

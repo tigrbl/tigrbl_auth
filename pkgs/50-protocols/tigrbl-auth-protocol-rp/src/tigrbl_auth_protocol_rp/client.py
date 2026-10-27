@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import dataclass
 from typing import Any, Callable, Mapping
 from urllib.parse import parse_qs, urlencode, urlparse
 
@@ -228,6 +229,49 @@ def validate_id_token_claims(
     return dict(claims)
 
 
+@dataclass(frozen=True, slots=True)
+class VerifiedExternalIdentity:
+    subject: str
+    issuer: str
+    claims: Mapping[str, Any]
+    userinfo: Mapping[str, Any] | None = None
+
+
+def verify_id_token(
+    token: str,
+    *,
+    verifier: Callable[[str], Mapping[str, Any]],
+    issuer: str,
+    audience: str,
+    nonce: str,
+    now: int,
+    userinfo: Mapping[str, Any] | None = None,
+    maximum_age: int | None = None,
+) -> VerifiedExternalIdentity:
+    """Verify signature through the injected JOSE boundary, then enforce OIDC claims."""
+    claims = dict(verifier(token))
+    validate_id_token_claims(claims, issuer=issuer, audience=audience, nonce=nonce)
+    if not claims.get("sub"):
+        raise RPError("ID token subject is required")
+    if int(claims.get("exp", 0)) <= now:
+        raise RPError("ID token has expired")
+    if int(claims.get("iat", now)) > now:
+        raise RPError("ID token was issued in the future")
+    if int(claims.get("nbf", now)) > now:
+        raise RPError("ID token is not active yet")
+    if maximum_age is not None:
+        if "auth_time" not in claims:
+            raise RPError("ID token authentication time is required")
+        if now - int(claims["auth_time"]) > maximum_age:
+            raise RPError("ID token authentication is too old")
+    audiences = claims.get("aud", ())
+    if not isinstance(audiences, str) and len(tuple(audiences)) > 1 and claims.get("azp") != audience:
+        raise RPError("ID token authorized party mismatch")
+    if userinfo is not None and userinfo.get("sub") != claims["sub"]:
+        raise RPError("UserInfo subject does not match ID token subject")
+    return VerifiedExternalIdentity(str(claims["sub"]), str(claims["iss"]), claims, dict(userinfo) if userinfo is not None else None)
+
+
 def shared_vector_manifest() -> Mapping[str, str]:
     return {
         "pkce_s256_empty": pkce_s256_challenge("vector-verifier"),
@@ -279,6 +323,7 @@ __all__ = [
     "RPSession",
     "RelyingParty",
     "UserInfoClient",
+    "VerifiedExternalIdentity",
     "assert_browser_no_client_secret",
     "example_app_manifest",
     "framework_login_adapter",
@@ -288,4 +333,5 @@ __all__ = [
     "shared_vector_manifest",
     "validate_browser_storage_policy",
     "validate_id_token_claims",
+    "verify_id_token",
 ]

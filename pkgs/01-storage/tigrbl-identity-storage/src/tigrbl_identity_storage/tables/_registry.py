@@ -11,7 +11,7 @@ from tigrbl_identity_storage_token.tables import TokenRecord, ProtectedArtifactR
 from tigrbl_identity_storage_consent.tables import Consent
 from tigrbl_identity_storage_delegation.tables import DelegationGrant, DelegationGrantScope, DelegationGrantProof, DelegationGrantEdge, DelegationGrantTokenLink
 from tigrbl_identity_storage_key_material.tables import CryptoKey, CryptoKeyVersion, PrincipalKeyBinding, KeyEnvelope, KeyAttestationEvidence, KeyRotationEvent, KeyRotationPolicy
-from tigrbl_identity_storage_authorization_policy.tables import TenantMembership, Role, AttributePolicy, PolicyCondition, Policy, PolicyVersion, PolicySet, PolicySetMember, PolicyTarget, DelegatedAdminScope, AuthorizationInvariant, InvariantEvaluation, InvariantViolation
+from tigrbl_identity_storage_authorization_policy.tables import TenantMembership, Role, AttributePolicy, PolicyCondition, Policy, PolicyVersion, PolicySet, PolicySetMember, PolicyTarget, DelegatedAdminScope, AuthorizationInvariant, InvariantEvaluation, InvariantViolation, AuthorizationResourceType, AuthorizationAction, AuthorizationGroup, AuthorizationGroupMembership, RolePermission, RoleGrant, PolicyApproval, PolicyPublication
 from tigrbl_identity_storage_access_governance.tables import Entitlement, EntitlementAssignment, AccessReviewCampaign, AccessReviewItem, AccessReviewDecision
 from tigrbl_identity_storage_residency.tables import ResidencyZone, TenantResidency
 from tigrbl_identity_storage_audit.tables import AuditEvent
@@ -93,6 +93,14 @@ _TABLE_MODELS = (
     AuthorizationInvariant,
     InvariantEvaluation,
     InvariantViolation,
+    AuthorizationResourceType,
+    AuthorizationAction,
+    AuthorizationGroup,
+    AuthorizationGroupMembership,
+    RolePermission,
+    RoleGrant,
+    PolicyApproval,
+    PolicyPublication,
     Entitlement,
     EntitlementAssignment,
     AccessReviewCampaign,

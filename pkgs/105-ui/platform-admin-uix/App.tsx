@@ -12,6 +12,7 @@ import { RealmsPage } from "./pages/RealmsPage";
 import { IdentityMemberPage, RealmMemberPage, TenantMemberPage } from "./pages/ResourceMemberPages";
 import { SettingsPage } from "./pages/SettingsPage";
 import { TenantsPage } from "./pages/TenantsPage";
+import { PlatformIamPage } from "./pages/PlatformIamPage";
 import { BACKEND_APP_BASE_URL, BACKEND_APP } from "./services/backendSurface";
 
 const navigation = [
@@ -19,7 +20,12 @@ const navigation = [
   { href: "#/realms", label: "Realms" },
   { href: "#/tenants", label: "Tenants" },
   { href: "#/identities", label: "Identities" },
-  { href: "#/authority", label: "Authority" },
+  { href: "#/authority/people", label: "Authority People" },
+  { href: "#/authority/grants", label: "Authority Grants" },
+  { href: "#/authority/policies", label: "Policies" },
+  { href: "#/authority/decisions", label: "Decisions" },
+  { href: "#/authority/break-glass", label: "Break Glass" },
+  { href: "#/identity-provider/clients", label: "IdP Clients" },
   { href: "#/keys", label: "Key Rotation" },
   { href: "#/audit", label: "Audit" },
   { href: "#/settings", label: "Settings" }
@@ -164,6 +170,12 @@ export default function App() {
             {currentHash.startsWith("#/authority") && (
               <AuthorityPage identities={platform.identities} selectedTenant={selectedTenant} tenants={platform.tenants} />
             )}
+            {currentHash.startsWith("#/authority/people") && <PlatformIamPage section="People" />}
+            {currentHash.startsWith("#/authority/grants") && <PlatformIamPage section="Grants" />}
+            {currentHash.startsWith("#/authority/policies") && <PlatformIamPage section="Policies" />}
+            {currentHash.startsWith("#/authority/decisions") && <PlatformIamPage section="Decision audit" />}
+            {currentHash.startsWith("#/authority/break-glass") && <PlatformIamPage section="Break glass" />}
+            {currentHash.startsWith("#/identity-provider/clients") && <PlatformIamPage section="Identity provider clients" />}
             {currentHash.startsWith("#/keys") && (
               <KeyRotationPage selectedTenant={selectedTenant} tenants={platform.tenants} />
             )}

@@ -20,6 +20,7 @@ from .client import (
     RPSession,
     RelyingParty,
     UserInfoClient,
+    VerifiedExternalIdentity,
     assert_browser_no_client_secret,
     example_app_manifest,
     framework_callback_adapter,
@@ -29,6 +30,7 @@ from .client import (
     shared_vector_manifest,
     validate_browser_storage_policy,
     validate_id_token_claims,
+    verify_id_token,
 )
 from .compatibility import COMPATIBILITY_PATHS, RpCompatibility, compatibility
 from .errors import RPError, UnsupportedRpProfileError
@@ -75,6 +77,7 @@ __all__ = [
     "RpProfileVersion",
     "UnsupportedRpProfileError",
     "UserInfoClient",
+    "VerifiedExternalIdentity",
     "assert_browser_no_client_secret",
     "capability_report",
     "compatibility",
@@ -90,4 +93,5 @@ __all__ = [
     "supports",
     "validate_browser_storage_policy",
     "validate_id_token_claims",
+    "verify_id_token",
 ]

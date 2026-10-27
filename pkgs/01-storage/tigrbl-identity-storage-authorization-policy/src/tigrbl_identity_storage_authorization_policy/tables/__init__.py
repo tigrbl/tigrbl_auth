@@ -13,6 +13,7 @@ from .policy_target import PolicyTarget
 from .policy_version import PolicyVersion
 from .role import Role
 from .tenant_membership import TenantMembership
+from .normalized import AuthorizationAction, AuthorizationGroup, AuthorizationGroupMembership, AuthorizationResourceType, PolicyApproval, PolicyPublication, RoleGrant, RolePermission
 
 TABLE_MODELS = (
     TenantMembership,
@@ -28,6 +29,14 @@ TABLE_MODELS = (
     AuthorizationInvariant,
     InvariantEvaluation,
     InvariantViolation,
+    AuthorizationResourceType,
+    AuthorizationAction,
+    AuthorizationGroup,
+    AuthorizationGroupMembership,
+    RolePermission,
+    RoleGrant,
+    PolicyApproval,
+    PolicyPublication,
 )
 TABLE_MODEL_BY_NAME = {model.__name__: model for model in TABLE_MODELS}
 TABLE_MODEL_BY_TABLENAME = {model.__tablename__: model for model in TABLE_MODELS}

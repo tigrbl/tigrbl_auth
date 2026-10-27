@@ -281,6 +281,17 @@ dependencies = [
     "tigrbl-authz-policy-authority-derivation-graph==0.4.0.dev2",
     "tigrbl-authority-graph-concrete==0.4.0.dev2",
     "tigrbl-authz-policy-decision-engine==0.4.0.dev2",
+    "tigrbl-authorization-contracts==0.4.0.dev3",
+    "tigrbl-rp-session-runtime==0.4.0.dev3",
+    "tigrbl-authorization-admin-client==0.4.0.dev3",
+    "tigrbl-policy-decision-client==0.4.0.dev3",
+    "tigrbl-rp-session-client==0.4.0.dev3",
+    "tigrbl-policy-enforcement-asgi==0.4.0.dev3",
+    "tigrbl-auth-router-authorization-admin==0.4.0.dev3",
+    "tigrbl-auth-router-policy-decision==0.4.0.dev3",
+    "tigrbl-auth-router-rp-session==0.4.0.dev3",
+    "tigrbl-auth-backend-app-policy-decision==0.4.0.dev3",
+    "tigrbl-auth-backend-app-rp==0.4.0.dev3",
     "tigrbl-authz-policy-invariant-registry==0.4.0.dev2",
     "tigrbl-release-contracts==0.1.0",
     "tigrbl-auth-release-certification==0.4.0.dev2",
@@ -687,6 +698,8 @@ tigrbl-authenticator-dpop-proof = { path = "pkgs/20-providers/tigrbl-authenticat
 tigrbl-authenticator-remote-introspection = { path = "pkgs/20-providers/tigrbl-authenticator-remote-introspection", editable = true }
 tigrbl-authenticator-federated-oidc = { path = "pkgs/20-providers/tigrbl-authenticator-federated-oidc", editable = true }
 tigrbl-auth = { path = "pkgs/70-facade/tigrbl-auth", editable = true }
+tba = { path = "pkgs/70-facade/tba", editable = true }
+tbauth = { path = "pkgs/70-facade/tbauth", editable = true }
 tigrbl-auth-protocol-oauth = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oauth", editable = true }
 tigrbl-auth-protocol-oidc-backchannel-replay-store = { path = "pkgs/deprecated/tigrbl-auth-protocol-oidc-backchannel-replay-store", editable = true }
 tigrbl-set-concrete = { path = "pkgs/10-concrete/tigrbl-set-concrete", editable = true }
@@ -697,6 +710,17 @@ tigrbl-auth-protocol-oid4vci = { path = "pkgs/50-protocols/tigrbl-auth-protocol-
 tigrbl-auth-protocol-oid4vp = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oid4vp", editable = true }
 tigrbl-auth-protocol-authzen = { path = "pkgs/50-protocols/tigrbl-auth-protocol-authzen", editable = true }
 tigrbl-auth-protocol-rp = { path = "pkgs/50-protocols/tigrbl-auth-protocol-rp", editable = true }
+tigrbl-authorization-contracts = { path = "pkgs/02-contracts/tigrbl-authorization-contracts", editable = true }
+tigrbl-rp-session-runtime = { path = "pkgs/30-storage-runtime/tigrbl-rp-session-runtime", editable = true }
+tigrbl-authorization-admin-client = { path = "pkgs/75-clients/tigrbl-authorization-admin-client", editable = true }
+tigrbl-policy-decision-client = { path = "pkgs/75-clients/tigrbl-policy-decision-client", editable = true }
+tigrbl-rp-session-client = { path = "pkgs/75-clients/tigrbl-rp-session-client", editable = true }
+tigrbl-policy-enforcement-asgi = { path = "pkgs/75-clients/tigrbl-policy-enforcement-asgi", editable = true }
+tigrbl-auth-router-authorization-admin = { path = "pkgs/80-routers/tigrbl-auth-router-authorization-admin", editable = true }
+tigrbl-auth-router-policy-decision = { path = "pkgs/80-routers/tigrbl-auth-router-policy-decision", editable = true }
+tigrbl-auth-router-rp-session = { path = "pkgs/80-routers/tigrbl-auth-router-rp-session", editable = true }
+tigrbl-auth-backend-app-policy-decision = { path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-policy-decision", editable = true }
+tigrbl-auth-backend-app-rp = { path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-rp", editable = true }
 tigrbl-credentials = { path = "pkgs/70-facade/tigrbl-credentials", editable = true }
 tigrbl-digital-credential-issuance = { path = "pkgs/deprecated/tigrbl-digital-credential-issuance", editable = true }
 tigrbl-digital-credential-issuance-capability = { path = "pkgs/40-capabilities/tigrbl-digital-credential-issuance-capability", editable = true }
