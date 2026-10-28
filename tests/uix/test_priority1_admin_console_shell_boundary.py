@@ -6,13 +6,13 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parents[2]
-OPERATOR_SRC = ROOT / "pkgs" / "tigrbl-identity-operator" / "src"
+OPERATOR_SRC = ROOT / "pkgs" / "tba-operator-identity" / "src"
 if str(OPERATOR_SRC) not in sys.path:
     sys.path.append(str(OPERATOR_SRC))
 
-import tigrbl_identity_operator.uix as operator_uix  # noqa: E402
+import tba_operator_identity.uix as operator_uix  # noqa: E402
 
-from tigrbl_auth.uix import (  # noqa: E402
+from tba_auth.uix import (  # noqa: E402
     ADMIN_NAVIGATION,
     AdminAuthorizationError,
     AdminConsoleShell,
@@ -126,7 +126,7 @@ def test_priority1_admin_console_shell_boundary_t2_fails_closed_for_admin_sessio
         session=AdminSession(
             session_id="sess-scope-admin",
             authenticated=True,
-            principal=AdminPrincipal(subject="scoped@example.test", scopes=("tigrbl_auth:admin",)),
+            principal=AdminPrincipal(subject="scoped@example.test", scopes=("tba_auth:admin",)),
         ),
         selection=selection,
         readiness={**_healthy_readiness(), "contracts_valid": False, "cookies_secure": False},

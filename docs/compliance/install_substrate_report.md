@@ -49,11 +49,11 @@
 
 ## Runtime import surfaces
 
-- `tigrbl_identity_server.composition.app` → passed=`True` message=`import surface resolvable`
-- `tigrbl_auth_backend_app_core` → passed=`True` message=`import surface resolvable`
-- `tigrbl_auth_backend_app_public` → passed=`True` message=`import surface resolvable`
-- `tigrbl_auth.plugin` → passed=`True` message=`import surface resolvable`
-- `tigrbl_auth.gateway` → passed=`True` message=`import surface resolvable`
+- `tba_server_identity.composition.app` → passed=`True` message=`import surface resolvable`
+- `tba_app_backend_core` → passed=`True` message=`import surface resolvable`
+- `tba_app_backend_public` → passed=`True` message=`import surface resolvable`
+- `tba_auth.plugin` → passed=`True` message=`import surface resolvable`
+- `tba_auth.gateway` → passed=`True` message=`import surface resolvable`
 
 ## Detected supported interpreters
 

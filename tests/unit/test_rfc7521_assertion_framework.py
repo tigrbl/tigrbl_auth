@@ -7,16 +7,16 @@ from unittest.mock import patch
 
 import pytest
 
-from tigrbl_auth import encode_jwt
-from tigrbl_auth.errors import InvalidTokenError
-from tigrbl_auth.rfc.rfc7521 import (
+from tba_auth import encode_jwt
+from tba_auth.errors import InvalidTokenError
+from tba_auth.rfc.rfc7521 import (
     JWT_BEARER_GRANT_TYPE,
     RFC7521_SPEC_URL,
     build_assertion_contract_examples,
     validate_assertion_grant_request,
     validate_jwt_assertion,
 )
-from tigrbl_auth.runtime_cfg import settings
+from tba_auth.runtime_cfg import settings
 
 
 @pytest.mark.unit

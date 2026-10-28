@@ -8,14 +8,14 @@
 /docs/compliance/ @Tigrbl/compliance
 
 # Standards and protocol implementation
-/tigrbl_auth/standards/ @Tigrbl/standards
-/tigrbl_auth/ops/ @Tigrbl/standards
+/tba_auth/standards/ @Tigrbl/standards
+/tba_auth/ops/ @Tigrbl/standards
 /specs/ @Tigrbl/standards
 
 # Security-sensitive code and evidence
-/tigrbl_auth/services/token_service.py @Tigrbl/security
-/tigrbl_auth/ops/token.py @Tigrbl/security
-/tigrbl_auth/release_signing.py @Tigrbl/security
+/tba_auth/services/token_service.py @Tigrbl/security
+/tba_auth/ops/token.py @Tigrbl/security
+/tba_auth/release_signing.py @Tigrbl/security
 /tests/security/ @Tigrbl/security
 /tests/negative/ @Tigrbl/security
 

@@ -1,0 +1,79 @@
+[project]
+name = "tba-auth"
+version = "0.4.0.dev2"
+description = "Compatibility facade for the split TBA identity package suite, preserving legacy app, gateway, plugin, CLI, and RFC imports."
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+license = "Apache-2.0"
+keywords = [
+    "tigrbl",
+    "tba-auth",
+    "identity",
+    "iam",
+    "compatibility",
+    "facade",
+    "oauth",
+    "oidc",
+    "asgi",
+    "authentication",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3 :: Only",
+    "Typing :: Typed",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Security",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "tba-concrete-authorization-policy-rules==0.4.0.dev2",
+    "tba-concrete-authorization-policy-combiner-default==0.4.0.dev2",
+    "tba-concrete-authorization-policy-evaluators-default==0.4.0.dev2",
+    "tba-concrete-authorization-policy-attributes-mapping==0.4.0.dev2",
+    "tba-concrete-authorization-policy-obligations==0.4.0.dev2",
+    "tba-provider-security-authorization-provenance-builder==0.1.0",
+    "tba-runtime-identity-administration==0.4.0.dev2",
+    "tba-runtime-identity-authoring==0.4.0.dev2",
+    "tba-cli-identity==0.4.0.dev2",
+    "tba-contracts-identity==0.4.0.dev2",
+    "tba-primitives-identity==0.4.0.dev2",
+    "tba-credentials==0.4.0.dev2",
+    "tba-provider-identity-jose==0.4.0.dev2",
+    "tba-protocol-oauth==0.4.0.dev2",
+    "tba-protocol-oidc==0.4.0.dev2",
+    "tba-protocol-webauthn==0.4.0.dev2",
+    "tba-concrete-identity-principals==0.4.0.dev2",
+    "tba-operator-identity==0.4.0.dev2",
+    "tba-concrete-authority-graph==0.4.0.dev2",
+    "tba-runtime-authorization-policy==0.4.0.dev2",
+    "tba-protocol-authorization-resource-server==0.4.0.dev2",
+    "tba-certification-release==0.4.0.dev2",
+    "tba-protocol-oidc-relying-party==0.4.0.dev2",
+    "tba-plugin-tigrbl==0.4.0.dev2",
+    "tba-runtime-identity==0.4.0.dev2",
+    "tba-server-identity==0.4.0.dev2",
+    "tba-storage-core==0.4.0.dev2",
+    "tba-runtime-identity-storage==0.4.0.dev2",
+    "tba-provider-security-signing-pqc==0.1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/70-facade/tba-auth"
+SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
+PyPI = "https://pypi.org/project/tba-auth/"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tba_auth", from = "src" }]
+include = ["src/tba_auth/profiles/*.yaml"]

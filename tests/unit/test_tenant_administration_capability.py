@@ -5,8 +5,8 @@ from pathlib import Path
 
 import pytest
 
-from tigrbl_identity_admin_control_plane import TenantAdministrationCapability
-from tigrbl_identity_contracts.admin_tenants import (
+from tba_runtime_identity_administration_control_plane import TenantAdministrationCapability
+from tba_contracts_identity.admin_tenants import (
     AdminTenant,
     AdminTenantCreate,
     AdminTenantUpdate,
@@ -19,8 +19,8 @@ from tigrbl_identity_contracts.admin_tenants import (
 ROOT = Path(__file__).resolve().parents[2]
 TENANT_API = (
     ROOT
-    / "pkgs/90-backend-apps/tigrbl-auth-backend-app-platform-admin/src"
-    / "tigrbl_auth_backend_app_platform_admin/tenants.py"
+    / "pkgs/90-backend-apps/tba-app-backend-platform-admin/src"
+    / "tba_app_backend_platform_admin/tenants.py"
 )
 
 
@@ -119,7 +119,7 @@ def test_tenant_capability_prevents_default_and_current_tenant_deletion() -> Non
 def test_tenant_api_is_http_only_and_has_no_storage_runtime_imports() -> None:
     source = TENANT_API.read_text(encoding="utf-8")
 
-    assert "tigrbl_identity_storage" not in source
+    assert "tba_storage_core" not in source
     assert "create_table_record" not in source
     assert "update_table_record" not in source
     assert "delete_table_record" not in source

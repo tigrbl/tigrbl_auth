@@ -4,11 +4,11 @@ from datetime import datetime, timedelta, timezone
 
 import pytest
 
-from tigrbl_authenticator_attestation_capability import (
+from tba_capability_authenticator_attestation import (
     AuthenticatorAttestationCapability,
 )
-from tigrbl_identity_contracts.capabilities import CapabilityOperationUnavailableError
-from tigrbl_identity_contracts.public_key_authentication import (
+from tba_contracts_identity.capabilities import CapabilityOperationUnavailableError
+from tba_contracts_identity.public_key_authentication import (
     CeremonyBinding,
     CeremonyContext,
     CeremonyKind,
@@ -21,26 +21,26 @@ from tigrbl_identity_contracts.public_key_authentication import (
     PublicKeyRegistrationIntent,
     PublicKeyRegistrationOptions,
 )
-from tigrbl_identity_core import normalize_protocol_tag
-from tigrbl_identity_storage.tables import (
+from tba_primitives_identity import normalize_protocol_tag
+from tba_storage_core.tables import (
     CredentialWebAuthnPasskey,
     WebAuthnAttestationRecord,
     WebAuthnCeremony,
     WebAuthnRelyingParty,
 )
-from tigrbl_identity_storage_runtime.tables.webauthn import (
+from tba_runtime_identity_storage.tables.webauthn import (
     WebAuthnCeremonyRuntimeSpec,
     WebAuthnCredentialRuntimeSpec,
     WebAuthnRelyingPartyRuntimeSpec,
 )
-from tigrbl_public_key_authentication_capability import (
+from tba_capability_public_key_authentication import (
     PublicKeyAuthenticationCapability,
 )
-from tigrbl_public_key_credential_management_capability import (
+from tba_capability_public_key_credential_management import (
     PublicKeyCredentialManagementCapability,
 )
-from tigrbl_public_key_registration_capability import PublicKeyRegistrationCapability
-from tigrbl_webauthn_credential_concrete import WebAuthnCredential
+from tba_capability_public_key_registration import PublicKeyRegistrationCapability
+from tba_concrete_webauthn_credential import WebAuthnCredential
 
 
 def _context(kind: CeremonyKind) -> CeremonyContext:

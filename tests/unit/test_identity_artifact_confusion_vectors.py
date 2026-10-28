@@ -4,12 +4,12 @@ import json
 
 import pytest
 
-from tigrbl_auth_protocol_cwt.profile import CwtProfile
-from tigrbl_auth_protocol_oidc.id_token_profile import validate_id_token_profile
-from tigrbl_credential_profile_vc_jose_cose import select_format, validate_jose_vc
-from tigrbl_identity_protocol_did_core import DidCoreProtocol
-from tigrbl_proof_of_possession_contracts import PossessionProofVerificationResult
-from tigrbl_workload_credential_profile_cwt_svid_extension import (
+from tba_protocol_cwt.profile import CwtProfile
+from tba_protocol_oidc.id_token_profile import validate_id_token_profile
+from tba_profile_credential_vc_jose_cose import select_format, validate_jose_vc
+from tba_protocol_identity_did_core import DidCoreProtocol
+from tba_contracts_proof_of_possession import PossessionProofVerificationResult
+from tba_profile_workload_credential_cwt_svid_extension import (
     validate_cwt_svid_extension,
 )
 

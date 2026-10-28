@@ -1,7 +1,7 @@
 sha256:
   README.md: fcd6921616fb1e9712684e0a18fd6092df871e357beddb70ba5d918053f317a3
   contracts/oauth-authorization-server.json: d1e8d9e1fabcd81d8ea456c77cd51ea1036fffb0531948496a1c9a06491cf7f9
-  contracts/tigrbl_auth.public.openapi.json: 05c68144246c02d1e99956d4db872348ddb34ff8ed54cfd743ca5385ba8d21c5
+  contracts/tba_auth.public.openapi.json: 05c68144246c02d1e99956d4db872348ddb34ff8ed54cfd743ca5385ba8d21c5
   docs/compliance/certification_state_report.json: ff16debac6dc2a44ddd025499ce1316bff1d77cf39728427211659aaf1ee9902
   docs/compliance/certification_state_report.md: de62a0f31690648875e42aeb80cc0b9e73ebf380f0cf3676a4b1284e735b9fbd
   docs/compliance/claims_lint_report.json: 1424866c339d7b3a34a996e2345ad1547768bbd2ed790ae00af41241b17c737c

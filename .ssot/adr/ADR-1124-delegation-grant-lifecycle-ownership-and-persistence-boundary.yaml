@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "Decision: DelegationGrant truth lives in tigrbl-identity-policy semantics and tigrbl-identity-storage persistence. OAuth/OIDC token exchange consumes active grants, validates protocol inputs, and emits token, introspection, and provenance artifacts, but it does not own canonical delegation-grant truth. Consequences: persisted grants, grant scopes, grant proofs, graph edges, token links, and lifecycle audit events are the durable authority inputs; request-time act claims and token-exchange traces are derived artifacts."
+summary: "Decision: DelegationGrant truth lives in tigrbl-identity-policy semantics and tba-storage-core persistence. OAuth/OIDC token exchange consumes active grants, validates protocol inputs, and emits token, introspection, and provenance artifacts, but it does not own canonical delegation-grant truth. Consequences: persisted grants, grant scopes, grant proofs, graph edges, token links, and lifecycle audit events are the durable authority inputs; request-time act claims and token-exchange traces are derived artifacts."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -18,4 +18,4 @@ status_notes:
     at: "2026-06-14T11:50:43Z"
 references: []
 body: |-
-  Decision: DelegationGrant truth lives in tigrbl-identity-policy semantics and tigrbl-identity-storage persistence. OAuth/OIDC token exchange consumes active grants, validates protocol inputs, and emits token, introspection, and provenance artifacts, but it does not own canonical delegation-grant truth. Consequences: persisted grants, grant scopes, grant proofs, graph edges, token links, and lifecycle audit events are the durable authority inputs; request-time act claims and token-exchange traces are derived artifacts.
+  Decision: DelegationGrant truth lives in tigrbl-identity-policy semantics and tba-storage-core persistence. OAuth/OIDC token exchange consumes active grants, validates protocol inputs, and emits token, introspection, and provenance artifacts, but it does not own canonical delegation-grant truth. Consequences: persisted grants, grant scopes, grant proofs, graph edges, token links, and lifecycle audit events are the durable authority inputs; request-time act claims and token-exchange traces are derived artifacts.

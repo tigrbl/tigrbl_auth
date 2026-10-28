@@ -13,8 +13,8 @@ except ModuleNotFoundError:  # pragma: no cover - Python 3.10 fallback
 
 
 ROOT = Path(__file__).resolve().parents[2]
-CONTRACTS = ROOT / "pkgs" / "02-contracts" / "tigrbl-security-trust-contracts"
-BASES = ROOT / "pkgs" / "05-bases" / "tigrbl-security-trust-domain-bases"
+CONTRACTS = ROOT / "pkgs" / "02-contracts" / "tba-contracts-security-trust"
+BASES = ROOT / "pkgs" / "05-bases" / "tba-bases-security-trust-domain"
 
 
 def _absolute_import_roots(path: Path) -> set[str]:
@@ -40,7 +40,7 @@ def test_security_trust_contracts_are_dependency_free_protocols() -> None:
         "datetime",
             "enum",
             "typing",
-            "tigrbl_security_trust_contracts",
+            "tba_contracts_security_trust",
         }, path
 
 
@@ -49,19 +49,19 @@ def test_security_trust_domain_bases_depend_only_on_contracts_and_peer_bases() -
 
     dependencies = metadata["project"]["dependencies"]
     assert {
-        "tigrbl-certificate-bases==0.4.0.dev2",
-        "tigrbl-capability-bases==0.4.0.dev2",
-        "tigrbl-claim-bases==0.4.0.dev2",
-        "tigrbl-did-bases==0.4.0.dev2",
-        "tigrbl-encryption-bases==0.4.0.dev2",
-        "tigrbl-key-bases==0.4.0.dev2",
-        "tigrbl-identity-bases==0.4.0.dev2",
-        "tigrbl-proof-of-possession-bases==0.4.0.dev2",
-        "tigrbl-protected-artifact-bases==0.4.0.dev2",
-        "tigrbl-signing-bases==0.4.0.dev2",
-        "tigrbl-token-introspection-bases==0.4.0.dev2",
-        "tigrbl-trust-bases==0.4.0.dev2",
-        "tigrbl-workload-identity-bases==0.4.0.dev2",
+        "tba-bases-certificate==0.4.0.dev2",
+        "tba-bases-capability==0.4.0.dev2",
+        "tba-bases-claim==0.4.0.dev2",
+        "tba-bases-did==0.4.0.dev2",
+        "tba-bases-encryption==0.4.0.dev2",
+        "tba-bases-key==0.4.0.dev2",
+        "tba-bases-identity==0.4.0.dev2",
+        "tba-bases-proof-of-possession==0.4.0.dev2",
+        "tba-bases-protected-artifact==0.4.0.dev2",
+        "tba-bases-signing==0.4.0.dev2",
+        "tba-bases-token-introspection==0.4.0.dev2",
+        "tba-bases-trust==0.4.0.dev2",
+        "tba-bases-workload-identity==0.4.0.dev2",
     } <= set(dependencies)
     for path in sorted((BASES / "src").rglob("*.py")):
         imports = _absolute_import_roots(path)
@@ -69,36 +69,36 @@ def test_security_trust_domain_bases_depend_only_on_contracts_and_peer_bases() -
             "__future__",
             "abc",
             "typing",
-            "tigrbl_capability_bases",
-            "tigrbl_claim_bases",
-            "tigrbl_identity_claims_bases",
-            "tigrbl_identity_bases",
-            "tigrbl_identity_contracts",
-            "tigrbl_identity_model_bases",
-            "tigrbl_authentication_context_bases",
-            "tigrbl_certificate_bases",
-            "tigrbl_did_bases",
-            "tigrbl_encryption_bases",
-            "tigrbl_key_bases",
-            "tigrbl_proof_of_possession_bases",
-            "tigrbl_protected_artifact_bases",
-            "tigrbl_signing_bases",
-            "tigrbl_token_introspection_bases",
-            "tigrbl_trust_bases",
-            "tigrbl_workload_identity_bases",
-            "tigrbl_security_artifact_bases",
-            "tigrbl_security_trust_contracts",
-            "tigrbl_security_trust_domain_bases",
+            "tba_bases_capability",
+            "tba_bases_claim",
+            "tba_bases_identity_claims",
+            "tba_bases_identity",
+            "tba_contracts_identity",
+            "tba_bases_identity_model",
+            "tba_bases_authentication_context",
+            "tba_bases_certificate",
+            "tba_bases_did",
+            "tba_bases_encryption",
+            "tba_bases_key",
+            "tba_bases_proof_of_possession",
+            "tba_bases_protected_artifact",
+            "tba_bases_signing",
+            "tba_bases_token_introspection",
+            "tba_bases_trust",
+            "tba_bases_workload_identity",
+            "tba_bases_security_artifact",
+            "tba_contracts_security_trust",
+            "tba_bases_security_trust_domain",
         }, path
 
 
 def test_security_trust_contract_and_base_packages_export_expected_surfaces() -> None:
-    contracts = importlib.import_module("tigrbl_security_trust_contracts")
-    bases = importlib.import_module("tigrbl_security_trust_domain_bases")
+    contracts = importlib.import_module("tba_contracts_security_trust")
+    bases = importlib.import_module("tba_bases_security_trust_domain")
 
     assert contracts.ICapabilityProvider.__name__ == "ICapabilityProvider"
     assert contracts.Artifact.__name__ == "Artifact"
-    assert contracts.JWTPayload.__module__ == "tigrbl_security_trust_contracts.types"
+    assert contracts.JWTPayload.__module__ == "tba_contracts_security_trust.types"
     assert contracts.ProofBinding("dpop", {"jkt": "thumb"}).method == "dpop"
     assert contracts.DPoPBinding(
         jwk_thumbprint="thumb",
@@ -130,7 +130,7 @@ def test_security_trust_contract_and_base_packages_export_expected_surfaces() ->
 
 
 def test_key_usage_specs_default_narrow_and_reject_expanded_operations() -> None:
-    contracts = importlib.import_module("tigrbl_security_trust_contracts")
+    contracts = importlib.import_module("tba_contracts_security_trust")
 
     assert contracts.resolve_key_allowed_operations(
         kind="symmetric",

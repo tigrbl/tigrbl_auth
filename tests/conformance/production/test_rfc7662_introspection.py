@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from tigrbl_auth.config.deployment import resolve_deployment
-from tigrbl_auth.standards.oauth2.introspection import _protected_resource_verifier_contract
-from tigrbl_auth.standards.oauth2.resource_verifier_contract import build_protected_resource_verifier_contract
+from tba_auth.config.deployment import resolve_deployment
+from tba_auth.standards.oauth2.introspection import _protected_resource_verifier_contract
+from tba_auth.standards.oauth2.resource_verifier_contract import build_protected_resource_verifier_contract
 
 
 def test_rfc7662_introspection_uses_protected_resource_verifier_contract() -> None:
@@ -20,7 +20,7 @@ def test_rfc7662_introspection_contract_is_request_scoped() -> None:
     request = type(
         "_Request",
         (),
-        {"app": type("_App", (), {"state": type("_State", (), {"tigrbl_auth_deployment": deployment})()})()},
+        {"app": type("_App", (), {"state": type("_State", (), {"tba_auth_deployment": deployment})()})()},
     )()
     contract = _protected_resource_verifier_contract(request)
 

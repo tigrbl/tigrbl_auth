@@ -1,5 +1,5 @@
 """
-Unit tests for tigrbl_auth.tables module.
+Unit tests for tba_auth.tables module.
 
 Tests ORM model creation, validation, relationships, hybrid properties, and methods.
 """
@@ -8,7 +8,7 @@ import uuid
 
 import pytest
 
-from tigrbl_identity_storage.tables import (
+from tba_storage_core.tables import (
     Client,
     CredentialApiKey,
     CredentialServiceKey,
@@ -16,8 +16,8 @@ from tigrbl_identity_storage.tables import (
     Tenant,
     User,
 )
-from tigrbl_identity_jose.key_management import hash_pw
-from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
+from tba_provider_identity_jose.key_management import hash_pw
+from tba_provider_secret_hashing_bcrypt import BcryptSecretHasher
 
 
 @pytest.mark.unit
@@ -161,7 +161,7 @@ class TestCredentialServiceKeyModel:
 
     def test_service_key_schema_uses_service_identity_id(self):
         """Ensure CredentialServiceKey API schema exposes correct fields."""
-        from tigrbl_auth_backend_app_core.surfaces import AdminRouter
+        from tba_app_backend_core.surfaces import AdminRouter
 
         create_schema = AdminRouter.schemas.CredentialServiceKey.create.in_.model_json_schema()
         create_fields = AdminRouter.schemas.CredentialServiceKey.create.in_.model_fields
@@ -204,7 +204,7 @@ class TestModelIntegration:
 
     def test_client_id_regex_pattern(self):
         """Test the client ID regex pattern directly."""
-        from tigrbl_auth.tables import _CLIENT_ID_RE
+        from tba_auth.tables import _CLIENT_ID_RE
 
         valid_patterns = [
             "simple123",

@@ -3,8 +3,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from tigrbl_auth.cli.certification_evidence import runtime_identity
-from tigrbl_auth.cli.reports import load_validated_execution_status
+from tba_auth.cli.certification_evidence import runtime_identity
+from tba_auth.cli.reports import load_validated_execution_status
 
 
 def _write_json(path: Path, payload: dict) -> None:

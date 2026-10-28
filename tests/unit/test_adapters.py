@@ -7,10 +7,10 @@ from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 
-import tigrbl_identity_server.security.authn_adapters.local as local_adapter_mod
-from tigrbl.config.constants import TIGRBL_AUTH_CONTEXT_ATTR
-from tigrbl_identity_server.security.authn_adapters.local import LocalAuthNAdapter
-from tigrbl_identity_server.security.authn_adapters.remote import RemoteAuthNAdapter
+import tba_server_identity.security.authn_adapters.local as local_adapter_mod
+from tigrbl.config.constants import TBA_AUTH_CONTEXT_ATTR
+from tba_server_identity.security.authn_adapters.local import LocalAuthNAdapter
+from tba_server_identity.security.authn_adapters.remote import RemoteAuthNAdapter
 
 
 @pytest.mark.unit
@@ -41,7 +41,7 @@ async def test_local_adapter_injects_auth_context(monkeypatch):
     result = await adapter.get_principal(request)
 
     assert result == principal
-    assert getattr(request.state, TIGRBL_AUTH_CONTEXT_ATTR) == {
+    assert getattr(request.state, TBA_AUTH_CONTEXT_ATTR) == {
         "user_id": "u1",
         "tenant_id": "t1",
     }
@@ -59,7 +59,7 @@ async def test_remote_adapter_injects_auth_context(monkeypatch):
     result = await adapter.get_principal(request, api_key="key")
 
     assert result == principal
-    assert getattr(request.state, TIGRBL_AUTH_CONTEXT_ATTR) == {
+    assert getattr(request.state, TBA_AUTH_CONTEXT_ATTR) == {
         "user_id": "u2",
         "tenant_id": "t2",
     }

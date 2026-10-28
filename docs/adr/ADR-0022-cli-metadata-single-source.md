@@ -7,5 +7,5 @@
 # CLI metadata as the single source
 
 - Status: accepted
-- Decision: argparse help text and generated CLI documentation SHALL both derive from `tigrbl_auth.cli.metadata`.
+- Decision: argparse help text and generated CLI documentation SHALL both derive from `tba_auth.cli.metadata`.
 - Consequences: flag drift is caught by regeneration and contract/report automation.

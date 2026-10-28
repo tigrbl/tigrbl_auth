@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from tigrbl_auth.cli.main import main
+from tba_auth.cli.main import main
 
 
 ROOT = Path(__file__).resolve().parents[3]

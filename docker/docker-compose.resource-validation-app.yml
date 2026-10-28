@@ -1,21 +1,21 @@
-name: tigrbl_auth_resource_validation_api_dev
+name: tba_auth_resource_validation_api_dev
 
 services:
   resource-validation-app:
     build:
       context: ..
       dockerfile: docker/Dockerfile.dev-resource-validation-app
-    image: tigrbl-auth-resource-validation-app-dev:latest
-    container_name: tigrbl-auth-resource-validation-app-dev
+    image: tba-auth-resource-validation-app-dev:latest
+    container_name: tba-auth-resource-validation-app-dev
     ports:
       - "8014:8000"
     environment:
-      TIGRBL_AUTH_PROFILE: ${TIGRBL_AUTH_PROFILE:-production}
+      TBA_AUTH_PROFILE: ${TBA_AUTH_PROFILE:-production}
       AUTHN_ISSUER: ${AUTHN_ISSUER:-http://localhost:8014}
-      TIGRBL_AUTH_PROTECTED_RESOURCE_IDENTIFIER: ${TIGRBL_AUTH_PROTECTED_RESOURCE_IDENTIFIER:-http://localhost:8014/resource}
-      TIGRBL_AUTH_REQUIRE_TLS: "false"
-      TIGRBL_AUTH_SESSION_COOKIE_FORCE_SECURE: "false"
-      TIGRBL_AUTH_ENABLE_RFC9207: "false"
+      TBA_AUTH_PROTECTED_RESOURCE_IDENTIFIER: ${TBA_AUTH_PROTECTED_RESOURCE_IDENTIFIER:-http://localhost:8014/resource}
+      TBA_AUTH_REQUIRE_TLS: "false"
+      TBA_AUTH_SESSION_COOKIE_FORCE_SECURE: "false"
+      TBA_AUTH_ENABLE_RFC9207: "false"
       PG_HOST: ""
       PG_PORT: "5432"
       PG_DB: ""

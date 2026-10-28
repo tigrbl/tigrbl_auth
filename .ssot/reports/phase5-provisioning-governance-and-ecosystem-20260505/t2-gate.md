@@ -18,7 +18,7 @@ ecosystem extension drift:
 Verification:
 
 ```powershell
-$env:UV_CACHE_DIR='E:\swarmauri_github\tigrbl_auth\.tmp\uv-cache'; uv run --no-sync pytest tests/unit/test_phase5_governance_extension_boundary.py tests/unit/test_governance_extension_plane_phase5.py
+$env:UV_CACHE_DIR='E:\swarmauri_github\tba_auth\.tmp\uv-cache'; uv run --no-sync pytest tests/unit/test_phase5_governance_extension_boundary.py tests/unit/test_governance_extension_plane_phase5.py
 ```
 
 Result: 8 passed.

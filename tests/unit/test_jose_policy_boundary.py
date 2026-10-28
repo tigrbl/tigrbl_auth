@@ -12,7 +12,7 @@ for src in (ROOT / "pkgs").rglob("src"):
     if value not in sys.path:
         sys.path.insert(0, value)
 
-from tigrbl_identity_jose import (
+from tba_provider_identity_jose import (
     RFC_TARGETS,
     JoseKey,
     JoseKeyRotationResult,
@@ -23,7 +23,7 @@ from tigrbl_identity_jose import (
     publish_tenant_jwks,
     rfc_vector_manifest,
 )
-from tigrbl_authz_policy import (
+from tba_runtime_authorization_policy import (
     AdminPolicy,
     AttributePolicy,
     DelegationPolicy,
@@ -33,7 +33,7 @@ from tigrbl_authz_policy import (
     PolicyRequest,
     RolePolicy,
 )
-from tigrbl_authz_policy_decision_engine import PolicyDecisionEngine as CanonicalPolicyDecisionEngine
+from tba_provider_authorization_policy_decision_engine import PolicyDecisionEngine as CanonicalPolicyDecisionEngine
 
 
 PUBLIC_JWK = {
@@ -212,20 +212,20 @@ def test_policy_t2_denies_out_of_scope_delegation_and_admin() -> None:
 def test_jose_policy_t2_public_boundary_has_no_forbidden_imports() -> None:
     root = Path("pkgs")
     files = [
-        root / "20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose/__init__.py",
-        root / "20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose/boundary.py",
-        root / "30-storage-runtime/tigrbl-authz-policy-authority-derivation-graph/src/tigrbl_authz_policy_authority_derivation_graph/__init__.py",
-        root / "20-providers/tigrbl-authz-policy-decision-engine/src/tigrbl_authz_policy_decision_engine/__init__.py",
-        root / "deprecated/tigrbl-authz-policy-invariant-registry/src/tigrbl_authz_policy_invariant_registry/__init__.py",
-        root / "60-runtime/tigrbl-authz-policy/src/tigrbl_authz_policy/abac.py",
-        root / "60-runtime/tigrbl-authz-policy/src/tigrbl_authz_policy/delegated_admin.py",
-        root / "60-runtime/tigrbl-authz-policy/src/tigrbl_authz_policy/__init__.py",
-        root / "60-runtime/tigrbl-authz-policy/src/tigrbl_authz_policy/decisions.py",
-        root / "60-runtime/tigrbl-authz-policy/src/tigrbl_authz_policy/policy_engine.py",
-        root / "60-runtime/tigrbl-authz-policy/src/tigrbl_authz_policy/rbac.py",
-        root / "60-runtime/tigrbl-authz-policy/src/tigrbl_authz_policy/service_identity_registry.py",
+        root / "20-providers/tba-provider-identity-jose/src/tba_provider_identity_jose/__init__.py",
+        root / "20-providers/tba-provider-identity-jose/src/tba_provider_identity_jose/boundary.py",
+        root / "30-storage-runtime/tba-durability-authorization-policy-authority-derivation-graph/src/tba_durability_authorization_policy_authority_derivation_graph/__init__.py",
+        root / "20-providers/tba-provider-authorization-policy-decision-engine/src/tba_provider_authorization_policy_decision_engine/__init__.py",
+        root / "deprecated/tigrbl-authz-policy-invariant-registry/src/tba_runtime_authorization_policy_invariant_registry/__init__.py",
+        root / "60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/abac.py",
+        root / "60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/delegated_admin.py",
+        root / "60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/__init__.py",
+        root / "60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/decisions.py",
+        root / "60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/policy_engine.py",
+        root / "60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/rbac.py",
+        root / "60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/service_identity_registry.py",
     ]
-    forbidden = {"tigrbl_auth", "tigrbl_auth_protocol_oauth", "tigrbl_auth_protocol_oidc", "tigrbl_identity_server"}
+    forbidden = {"tba_auth", "tba_protocol_oauth", "tba_protocol_oidc", "tba_server_identity"}
 
     imports: set[str] = set()
     for file in files:

@@ -13,7 +13,7 @@ def package_src(name: str) -> Path:
     return matches[0]
 
 
-OAUTH_ROOT = package_src("tigrbl-auth-protocol-oauth")
+OAUTH_ROOT = package_src("tba-protocol-oauth")
 
 
 def test_oauth_protocol_modules_do_not_use_raw_table_mutation_handlers() -> None:

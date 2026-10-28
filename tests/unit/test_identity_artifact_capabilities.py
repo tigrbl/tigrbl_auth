@@ -1,8 +1,8 @@
-from tigrbl_identity_document_capability import IdentityDocumentCapability
-from tigrbl_possession_proof_capability import PossessionProofCapability
-from tigrbl_protected_envelope_capability import ProtectedEnvelopeCapability
-from tigrbl_workload_credential_brokering_capability import WorkloadCredentialBrokeringCapability
-from tigrbl_workload_identity import WorkloadIdentityCapability
+from tba_capability_identity_document import IdentityDocumentCapability
+from tba_capability_possession_proof import PossessionProofCapability
+from tba_capability_protected_envelope import ProtectedEnvelopeCapability
+from tba_capability_workload_credential_brokering import WorkloadCredentialBrokeringCapability
+from tba_capability_workload_identity import WorkloadIdentityCapability
 
 class Delegate:
     def __getattr__(self,name): return lambda *args,**kwargs:(name,args,kwargs)

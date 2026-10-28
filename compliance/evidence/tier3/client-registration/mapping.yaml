@@ -7,11 +7,11 @@ targets:
     status: evidenced-release-gated
     profile: production
   modules:
-  - tigrbl_auth/standards/oauth2/dynamic_client_registration.py
-  - tigrbl_auth/api/rest/routers/register.py
-  - tigrbl_auth/ops/register.py
-  - tigrbl_auth/tables/client_registration.py
-  - tigrbl_auth/services/persistence.py
+  - tba_auth/standards/oauth2/dynamic_client_registration.py
+  - tba_auth/api/rest/routers/register.py
+  - tba_auth/ops/register.py
+  - tba_auth/tables/client_registration.py
+  - tba_auth/services/persistence.py
   tests:
   - tests/conformance/production/test_rfc7591_dynamic_client_registration.py
   - tests/integration/test_persistence_lifecycle_durability.py
@@ -55,7 +55,7 @@ reports:
 - docs/compliance/certification_state_report.json
 - docs/compliance/certification_state_report.md
 contracts:
-- specs/openapi/profiles/production/tigrbl_auth.public.openapi.json
+- specs/openapi/profiles/production/tba_auth.public.openapi.json
 - specs/discovery/profiles/production/openid-configuration.json
 scenario_ids:
 - rfc-7591

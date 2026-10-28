@@ -21,7 +21,7 @@ MARKER_PATTERN = re.compile(
 CHRONOLOGY_PATTERN = re.compile(
     rf"(?i)(?:{''.join(('pha', 'se'))}|{''.join(('st', 'ep'))})\d+"
 )
-SCAN_ROOTS = ("tigrbl_auth", "tests", "scripts", "compliance", "docs")
+SCAN_ROOTS = ("tba_auth", "tests", "scripts", "compliance", "docs")
 SCAN_SUFFIXES = {".py", ".md", ".yaml", ".yml", ".toml"}
 SKIP_PARTS = {"archive", "dist", ".pytest_cache", "__pycache__"}
 
@@ -168,7 +168,7 @@ def build_inventory(root: Path = ROOT) -> dict[str, Any]:
 
     return {
         "schema_version": 1,
-        "package": "tigrbl_auth",
+        "package": "tba_auth",
         "registry": {
             "validation_passed": bool(validation.get("passed")),
             "counts": registry_counts,

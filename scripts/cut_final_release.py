@@ -10,23 +10,23 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from tigrbl_auth.cli.artifacts import deployment_from_options
-from tigrbl_auth.cli.reports import (
+from tba_auth.cli.artifacts import deployment_from_options
+from tba_auth.cli.reports import (
     build_release_bundle,
     run_final_release_readiness_gate,
     sign_release_bundle,
     verify_release_bundle_signatures,
 )
-from tigrbl_auth.cli.truth import materialize_truth_chain
-from tigrbl_identity_author.release_signing import load_signer
+from tba_auth.cli.truth import materialize_truth_chain
+from tba_runtime_identity_authoring.release_signing import load_signer
 
 PROFILES = ("baseline", "production", "hardening", "fapi2-security", "peer-claim")
 
 
 def _run(script_name: str, *, check: bool = True) -> subprocess.CompletedProcess[str]:
     env = os.environ.copy()
-    env.setdefault("TIGRBL_AUTH_RUNTIME_REPORT_MODE", "validated-runs")
-    env.setdefault("TIGRBL_AUTH_SKIP_EXECUTION_PROBES", "1")
+    env.setdefault("TBA_AUTH_RUNTIME_REPORT_MODE", "validated-runs")
+    env.setdefault("TBA_AUTH_SKIP_EXECUTION_PROBES", "1")
     return subprocess.run(
         [sys.executable, str(ROOT / "scripts" / script_name)],
         check=check,
@@ -73,8 +73,8 @@ def main() -> int:
     _emit(_run("run_release_gates.py", check=False))
 
     signer = load_signer(
-        signing_key=os.environ.get("TIGRBL_AUTH_RELEASE_SIGNING_KEY"),
-        signer_id=os.environ.get("TIGRBL_AUTH_RELEASE_SIGNER_ID"),
+        signing_key=os.environ.get("TBA_AUTH_RELEASE_SIGNING_KEY"),
+        signer_id=os.environ.get("TBA_AUTH_RELEASE_SIGNER_ID"),
     )
     shared_key = signer.private_key_pem()
     version = _current_version()

@@ -11,17 +11,17 @@ for src in (ROOT / "pkgs").rglob("src"):
     if value not in sys.path:
         sys.path.insert(0, value)
 
-from tigrbl_auth.security.certification import (  # noqa: E402
+from tba_auth.security.certification import (  # noqa: E402
     CertificationError,
     VerifierPolicy,
     assert_verifier_accepts,
 )
-from tigrbl_auth.config.deployment import resolve_deployment  # noqa: E402
-from tigrbl_auth.config.deployment import DEFAULT_VALUES  # noqa: E402
-from tigrbl_auth.standards.oauth2.resource_verifier_contract import (  # noqa: E402
+from tba_auth.config.deployment import resolve_deployment  # noqa: E402
+from tba_auth.config.deployment import DEFAULT_VALUES  # noqa: E402
+from tba_auth.standards.oauth2.resource_verifier_contract import (  # noqa: E402
     build_protected_resource_verifier_contract,
 )
-from tigrbl_authz_resource_server import (  # noqa: E402
+from tba_protocol_authorization_resource_server import (  # noqa: E402
     AccessTokenClaims,
     ResourceServerVerifier,
     verifier_contract_from_metadata,

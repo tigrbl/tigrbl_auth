@@ -1,9 +1,9 @@
 # Authenticator Lifecycle API + Authenticator Center UIX Requirements Brief
 
-**Proposed pairing:** `tigrbl-auth-router-authenticators` + `@tigrbl-auth/authenticator-center-uix`<br>
+**Proposed pairing:** `tba-router-authenticators` + `@tba/ui-authenticator-center-uix`<br>
 **Status:** New product surface; existing provider and contract foundations<br>
 **Prepared:** July 11, 2026<br>
-**Proposed router owner:** `pkgs/80-routers/tigrbl-auth-router-authenticators`<br>
+**Proposed router owner:** `pkgs/80-routers/tba-router-authenticators`<br>
 **Proposed UIX owner:** `pkgs/105-ui/authenticator-center-uix`
 
 ## 1. Product Decision
@@ -21,7 +21,7 @@ Workload/API/client credential lifecycle remains owned by Service Admin, Develop
 
 The repository already has:
 
-- `tigrbl-identity-authenticator-bases` and challenge-authenticator contracts;
+- `tba-bases-identity-authenticator` and challenge-authenticator contracts;
 - password, OTP, recovery-code, WebAuthn, federated OIDC, session, remote introspection, API-key, client-secret, service-key, mTLS certificate, and DPoP proof providers;
 - authenticator metadata with kind, AMR values, properties, and challenge ceremonies;
 - ACR and AMR evaluator providers;
@@ -382,14 +382,14 @@ Produce:
 
 ## 15. Source Evidence
 
-- `pkgs/05-bases/tigrbl-identity-authenticator-bases/`
+- `pkgs/05-bases/tba-bases-identity-authenticator/`
 - `pkgs/deprecated/tigrbl-identity-credentials-concrete/`
-- `pkgs/20-providers/tigrbl-authenticator-*/`
-- `pkgs/20-providers/tigrbl-security-auth-context-acr-basic/`
-- `pkgs/20-providers/tigrbl-security-auth-context-amr-basic/`
-- `pkgs/70-facade/tigrbl-credentials/`
-- `pkgs/60-runtime/tigrbl-identity-admin/src/tigrbl_identity_admin/_advanced_identity_plane/`
-- `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/authenticators.py`
-- `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/credentials/`
+- `pkgs/20-providers/tba-authenticator-*/`
+- `pkgs/20-providers/tba-provider-authentication-context-acr-basic/`
+- `pkgs/20-providers/tba-provider-authentication-context-amr-basic/`
+- `pkgs/70-facade/tba-credentials/`
+- `pkgs/60-runtime/tba-runtime-identity-administration/src/tba_runtime_identity_administration/_advanced_identity_plane/`
+- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/authenticators.py`
+- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/credentials/`
 - Public UIX, My Account, Tenant Admin, provider, WebAuthn, MFA, credential, and authentication-context tests
 - Authenticator/passkey/credential/context SSOT features, planned tests, claims, and evidence

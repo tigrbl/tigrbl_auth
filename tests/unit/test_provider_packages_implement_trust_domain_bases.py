@@ -10,66 +10,66 @@ PROVIDERS = ROOT / "pkgs" / "20-providers"
 PROVIDER_TAXONOMY = ROOT / "architecture" / "provider-package-taxonomy.yaml"
 
 TRUST_BASE_PROVIDER_PACKAGES = {
-    "tigrbl-authenticator-api-key-local",
-    "tigrbl-authenticator-client-secret-local",
-    "tigrbl-authenticator-dpop-proof",
-    "tigrbl-authenticator-federated-oidc",
-    "tigrbl-authenticator-mtls-client-cert",
-    "tigrbl-authenticator-otp-local",
-    "tigrbl-authenticator-password-local",
-    "tigrbl-authenticator-recovery-code-local",
-    "tigrbl-authenticator-remote-introspection",
-    "tigrbl-authenticator-service-key-local",
-    "tigrbl-authenticator-session-local",
-    "tigrbl-authz-resource-server-verifier",
-    "tigrbl-identity-jose",
-    "tigrbl-security-auth-context-acr-basic",
-    "tigrbl-security-auth-context-amr-basic",
-    "tigrbl-security-authorization-provenance-builder",
-    "tigrbl-security-certificate-mtls",
-    "tigrbl-security-claims-provider-local",
-    "tigrbl-security-dpop-cnf-binding-validator",
-    "tigrbl-security-mtls-cnf-binding-validator",
-    "tigrbl-security-proof-dpop",
-    "tigrbl-security-proof-pkce",
-    "tigrbl-security-signing-pqc",
-    "tigrbl-security-subject-pairwise-provider",
-    "tigrbl-security-token-introspection-client",
-    "tigrbl-security-token-jwks-cache",
+    "tba-provider-authenticator-api-key-local",
+    "tba-provider-authenticator-client-secret-local",
+    "tba-provider-authenticator-dpop-proof",
+    "tba-provider-authenticator-federated-oidc",
+    "tba-provider-authenticator-mtls-client-cert",
+    "tba-provider-authenticator-otp-local",
+    "tba-provider-authenticator-password-local",
+    "tba-provider-authenticator-recovery-code-local",
+    "tba-provider-authenticator-remote-introspection",
+    "tba-provider-authenticator-service-key-local",
+    "tba-provider-authenticator-session-local",
+    "tba-provider-authorization-resource-server-verifier",
+    "tba-provider-identity-jose",
+    "tba-provider-authentication-context-acr-basic",
+    "tba-provider-authentication-context-amr-basic",
+    "tba-provider-security-authorization-provenance-builder",
+    "tba-provider-security-certificate-mtls",
+    "tba-provider-security-claims-provider-local",
+    "tba-provider-security-dpop-cnf-binding-validator",
+    "tba-provider-security-mtls-cnf-binding-validator",
+    "tba-provider-security-proof-dpop",
+    "tba-provider-security-proof-pkce",
+    "tba-provider-security-signing-pqc",
+    "tba-provider-security-subject-pairwise",
+    "tba-provider-security-token-introspection-client",
+    "tba-provider-security-token-jwks-cache",
 }
 
 COMPOSITION_PROVIDER_PACKAGES = {
-    "tigrbl-authz-policy",
-    "tigrbl-authz-policy-decision-engine",
-    "tigrbl-access-governance-memory-provider",
-    "tigrbl-certificate-status-provider",
-    "tigrbl-corim-reference-memory-provider",
-    "tigrbl-did-controller-provider",
-    "tigrbl-digital-credential-trust-provider",
-    "tigrbl-identity-admin-auth-anomaly-detector",
-    "tigrbl-identity-admin-relationship-graph",
-    "tigrbl-key-attestation-verifier",
-    "tigrbl-platform-attestation-provider",
-    "tigrbl-security-cose",
-    "tigrbl-trust-anchor-provider",
+    "tba-runtime-authorization-policy",
+    "tba-provider-authorization-policy-decision-engine",
+    "tba-provider-access-governance-memory",
+    "tba-provider-certificate-status",
+    "tba-provider-corim-reference-memory",
+    "tba-provider-did-controller",
+    "tba-provider-digital-credential-trust",
+    "tba-provider-identity-admin-auth-anomaly-detector",
+    "tba-provider-identity-admin-relationship-graph",
+    "tba-provider-key-attestation-verifier",
+    "tba-provider-platform-attestation",
+    "tba-provider-security-cose",
+    "tba-provider-trust-anchor",
 }
 
 DIRECT_CONTRACT_PROVIDER_PACKAGES = {
     # Bcrypt is the sole implementation of the shared-secret hashing contract;
     # a layer-05 behavior base would add no shared implementation seam.
-    "tigrbl-secret-hashing-bcrypt-provider",
+    "tba-provider-secret-hashing-bcrypt",
     # These protocol-specific providers implement their layer-02 ports directly;
     # their versioned protocol mapping belongs in layer 50, not a general trust base.
-    "tigrbl-security-oidc-federation-provider",
-    "tigrbl-security-webfinger-provider",
-    "tigrbl-cose-cryptography-provider",
-    "tigrbl-jose-swarmauri-provider",
+    "tba-provider-security-oidc-federation",
+    "tba-provider-security-webfinger",
+    "tba-provider-cose-cryptography",
+    "tba-provider-jose-swarmauri",
 }
 
 
 def test_pqc_provider_inherits_signing_domain_base() -> None:
-    from tigrbl_security_signing_pqc import PQCSigningProvider
-    from tigrbl_security_trust_domain_bases import (
+    from tba_provider_security_signing_pqc import PQCSigningProvider
+    from tba_bases_security_trust_domain import (
         SigningDomainBase,
         SigningProviderBase,
     )
@@ -80,8 +80,8 @@ def test_pqc_provider_inherits_signing_domain_base() -> None:
 
 
 def test_pkce_provider_inherits_proof_of_possession_domain_base() -> None:
-    from tigrbl_security_proof_pkce import PkceProofProvider
-    from tigrbl_security_trust_domain_bases import ProofOfPossessionDomainBase
+    from tba_provider_security_proof_pkce import PkceProofProvider
+    from tba_bases_security_trust_domain import ProofOfPossessionDomainBase
 
     assert issubclass(PkceProofProvider, ProofOfPossessionDomainBase)
     assert "S256" in PkceProofProvider().supports().algs

@@ -7,29 +7,29 @@ from unittest.mock import AsyncMock
 
 import pytest
 
-from tigrbl_auth_protocol_oauth.standards.client_registration_management import describe as describe_rfc7592
-from tigrbl_auth_protocol_oauth.standards.device_authorization import (
+from tba_protocol_oauth.standards.client_registration_management import describe as describe_rfc7592
+from tba_protocol_oauth.standards.device_authorization import (
     DEVICE_CODE_INTERVAL,
     DEVICE_CODE_SLOW_DOWN_INCREMENT,
     describe as describe_rfc8628,
     next_device_poll_interval,
     poll_too_frequently,
 )
-from tigrbl_auth_protocol_oauth.standards.resource_indicators import (
+from tba_protocol_oauth.standards.resource_indicators import (
     describe as describe_rfc8707,
     resource_binding_summary,
     select_resource_indicator,
 )
-import tigrbl_identity_server.token_exchange_runtime as token_exchange_mod
-import tigrbl_identity_server.token_request as token_ops
-import tigrbl_identity_server.token_device_grant as device_ops
+import tba_server_identity.token_exchange_runtime as token_exchange_mod
+import tba_server_identity.token_request as token_ops
+import tba_server_identity.token_device_grant as device_ops
 
-from tigrbl_identity_server.token_exchange_runtime import (
+from tba_server_identity.token_exchange_runtime import (
     HTTPException,
     _actor_claim,
     _normalize_requested_token_type,
 )
-from tigrbl_auth_protocol_oauth.standards.token_exchange import (
+from tba_protocol_oauth.standards.token_exchange import (
     describe as describe_rfc8693,
 )
 

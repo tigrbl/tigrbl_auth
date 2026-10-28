@@ -21,7 +21,7 @@ A real defect surfaced in the supported `py311` **core** lane:
 - failure: `AuthorizationDetail.model_validate` was assumed to exist
 - local environment reality: the lightweight fallback surface here exposes **Pydantic 1.x**, which provides `parse_obj(...)` instead of `model_validate(...)`
 
-` tigrbl_auth/rfc/rfc9396.py ` was updated to validate authorization-detail items compatibly across both:
+` tba_auth/rfc/rfc9396.py ` was updated to validate authorization-detail items compatibly across both:
 
 - Pydantic v2 / framework `model_validate(...)`
 - Pydantic v1 `parse_obj(...)`
@@ -139,7 +139,7 @@ Current state in this checkpoint:
 
 ## Primary files changed in this revision
 
-- `tigrbl_auth/rfc/rfc9396.py`
+- `tba_auth/rfc/rfc9396.py`
 - `docs/compliance/validated_execution_report.*`
 - `docs/compliance/release_gate_report.*`
 - `docs/compliance/current_state_report.*`

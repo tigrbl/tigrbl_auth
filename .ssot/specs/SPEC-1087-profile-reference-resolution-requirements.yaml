@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification defines how `tigrbl_auth` resolves a `--profile` value into a runtime profile source."
+summary: "This specification defines how `tba_auth` resolves a `--profile` value into a runtime profile source."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -20,7 +20,7 @@ references: []
 body: |-
   ## Overview
   
-  This specification defines how `tigrbl_auth` resolves a `--profile` value into a runtime profile source.
+  This specification defines how `tba_auth` resolves a `--profile` value into a runtime profile source.
   
   Decision source: `adr:1065`.
   
@@ -41,7 +41,7 @@ body: |-
   
   ## Packaged Profile Resolution
   
-  When `--profile` matches a packaged runtime profile ID, the resolver MUST load the matching profile from `tigrbl_auth/profiles/*.yaml`.
+  When `--profile` matches a packaged runtime profile ID, the resolver MUST load the matching profile from `tba_auth/profiles/*.yaml`.
   
   Packaged resolution MUST preserve existing profile IDs and behavior for:
   

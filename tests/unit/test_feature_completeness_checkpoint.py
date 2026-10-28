@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from tigrbl_auth.cli.metadata import build_cli_conformance_snapshot, build_cli_contract_manifest
-from tigrbl_auth.cli.reports import build_feature_completeness_report, generate_state_reports
+from tba_auth.cli.metadata import build_cli_conformance_snapshot, build_cli_contract_manifest
+from tba_auth.cli.reports import build_feature_completeness_report, generate_state_reports
 
 
 ROOT = Path(__file__).resolve().parents[2]

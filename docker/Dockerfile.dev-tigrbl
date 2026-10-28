@@ -16,7 +16,7 @@ RUN uv sync --frozen --extra tigrcorn --no-dev
 EXPOSE 8000
 
 ENV \
-    TIGRBL_AUTH_INSTALL_PROFILE="tigrcorn" \
+    TBA_AUTH_INSTALL_PROFILE="tigrcorn" \
     PG_HOST="" \
     PG_PORT="5432" \
     PG_DB="" \
@@ -26,4 +26,4 @@ ENV \
     REDIS_PASSWORD="" \
     UV_PROJECT_ENVIRONMENT="/app/.venv"
 
-CMD ["/app/.venv/bin/tigrbl-auth", "serve", "--server", "tigrcorn", "--profile", "production", "--host", "0.0.0.0", "--port", "8000", "--proxy-headers", "--no-require-tls"]
+CMD ["/app/.venv/bin/tba-auth", "serve", "--server", "tigrcorn", "--profile", "production", "--host", "0.0.0.0", "--port", "8000", "--proxy-headers", "--no-require-tls"]

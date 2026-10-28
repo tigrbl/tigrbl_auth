@@ -1,14 +1,14 @@
 import pickle
 from hashlib import sha256
 
-from tigrbl_identity_contracts.digital_credentials import (
+from tba_contracts_identity.digital_credentials import (
     CredentialFormat,
     CredentialIssuanceRequest,
     CredentialVerificationRequest,
 )
-from tigrbl_mdoc_issuer_provider import MdocIssuerProvider
-from tigrbl_mdoc_verifier_provider import MdocVerifierProvider
-from tigrbl_security_cose import CoseSign1Provider
+from tba_provider_mdoc_issuer import MdocIssuerProvider
+from tba_provider_mdoc_verifier import MdocVerifierProvider
+from tba_provider_security_cose import CoseSign1Provider
 
 
 def _encode(value):

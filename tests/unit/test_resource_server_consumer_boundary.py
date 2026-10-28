@@ -12,7 +12,7 @@ for src in (ROOT / "pkgs").rglob("src"):
     if value not in sys.path:
         sys.path.insert(0, value)
 
-from tigrbl_authz_resource_server import (  # noqa: E402
+from tba_protocol_authorization_resource_server import (  # noqa: E402
     AccessTokenClaims,
     DPoPBinding,
     DpopCnfBindingValidator,
@@ -29,23 +29,23 @@ from tigrbl_authz_resource_server import (  # noqa: E402
     bearer_token_from_authorization,
     verify_framework_request,
 )
-from tigrbl_security_dpop_cnf_binding_validator import (  # noqa: E402
+from tba_provider_security_dpop_cnf_binding_validator import (  # noqa: E402
     DpopCnfBindingValidator as CanonicalDpopCnfBindingValidator,
 )
-from tigrbl_security_token_introspection_client import (  # noqa: E402
+from tba_provider_security_token_introspection_client import (  # noqa: E402
     IntrospectionClient as CanonicalIntrospectionClient,
 )
-from tigrbl_security_token_jwks_cache import (  # noqa: E402
+from tba_provider_security_token_jwks_cache import (  # noqa: E402
     JWKSCache as CanonicalJWKSCache,
 )
-from tigrbl_security_mtls_cnf_binding_validator import (  # noqa: E402
+from tba_provider_security_mtls_cnf_binding_validator import (  # noqa: E402
     MtlsCnfBindingValidator as CanonicalMtlsCnfBindingValidator,
 )
-from tigrbl_protected_resource_authorization_capability import (  # noqa: E402
+from tba_capability_protected_resource_authorization import (  # noqa: E402
     SenderConstraintValidator as CanonicalSenderConstraintValidator,
 )
-from tigrbl_security_trust_domain_bases import VerificationKeyCacheBase  # noqa: E402
-from tigrbl_authz_resource_server_verifier import (  # noqa: E402
+from tba_bases_security_trust_domain import VerificationKeyCacheBase  # noqa: E402
+from tba_provider_authorization_resource_server_verifier import (  # noqa: E402
     ResourceServerVerifier as CanonicalResourceServerVerifier,
 )
 
@@ -246,22 +246,22 @@ def test_resource_server_t2_rejects_bad_dpop_mtls_and_missing_bearer() -> None:
 @pytest.mark.unit
 def test_resource_server_t2_public_boundary_has_no_provider_imports() -> None:
     files = [
-        Path("pkgs/50-protocols/tigrbl-authz-resource-server/src/tigrbl_authz_resource_server/__init__.py"),
-        Path("pkgs/50-protocols/tigrbl-authz-resource-server/src/tigrbl_authz_resource_server/verifier.py"),
-        Path("pkgs/50-protocols/tigrbl-authz-resource-server/src/tigrbl_authz_resource_server/sender_constraints.py"),
-        Path("pkgs/20-providers/tigrbl-authz-resource-server-verifier/src/tigrbl_authz_resource_server_verifier/__init__.py"),
-        Path("pkgs/20-providers/tigrbl-security-token-jwks-cache/src/tigrbl_security_token_jwks_cache/__init__.py"),
-        Path("pkgs/20-providers/tigrbl-security-token-introspection-client/src/tigrbl_security_token_introspection_client/__init__.py"),
-        Path("pkgs/20-providers/tigrbl-security-dpop-cnf-binding-validator/src/tigrbl_security_dpop_cnf_binding_validator/__init__.py"),
-        Path("pkgs/20-providers/tigrbl-security-mtls-cnf-binding-validator/src/tigrbl_security_mtls_cnf_binding_validator/__init__.py"),
+        Path("pkgs/50-protocols/tba-protocol-authorization-resource-server/src/tba_protocol_authorization_resource_server/__init__.py"),
+        Path("pkgs/50-protocols/tba-protocol-authorization-resource-server/src/tba_protocol_authorization_resource_server/verifier.py"),
+        Path("pkgs/50-protocols/tba-protocol-authorization-resource-server/src/tba_protocol_authorization_resource_server/sender_constraints.py"),
+        Path("pkgs/20-providers/tba-provider-authorization-resource-server-verifier/src/tba_provider_authorization_resource_server_verifier/__init__.py"),
+        Path("pkgs/20-providers/tba-provider-security-token-jwks-cache/src/tba_provider_security_token_jwks_cache/__init__.py"),
+        Path("pkgs/20-providers/tba-provider-security-token-introspection-client/src/tba_provider_security_token_introspection_client/__init__.py"),
+        Path("pkgs/20-providers/tba-provider-security-dpop-cnf-binding-validator/src/tba_provider_security_dpop_cnf_binding_validator/__init__.py"),
+        Path("pkgs/20-providers/tba-provider-security-mtls-cnf-binding-validator/src/tba_provider_security_mtls_cnf_binding_validator/__init__.py"),
         Path("pkgs/deprecated/tigrbl-security-sender-constraint-validator/src/tigrbl_security_sender_constraint_validator/__init__.py"),
     ]
     forbidden = {
-        "tigrbl_auth",
-        "tigrbl_auth_protocol_oauth",
-        "tigrbl_auth_protocol_oidc",
-        "tigrbl_identity_server",
-        "tigrbl_identity_runtime",
+        "tba_auth",
+        "tba_protocol_oauth",
+        "tba_protocol_oidc",
+        "tba_server_identity",
+        "tba_runtime_identity",
     }
 
     imports: set[str] = set()

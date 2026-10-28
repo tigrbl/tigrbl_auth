@@ -1,5 +1,5 @@
 schema_version: 1
-package: tigrbl_auth
+package: tba_auth
 boundaries:
   certified_core:
     description: Release-eligible Tigrbl-native authn/z implementation boundary. Only

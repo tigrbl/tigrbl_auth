@@ -6,11 +6,11 @@ import pytest_asyncio
 from types import SimpleNamespace
 from unittest.mock import AsyncMock
 
-from tigrbl_auth import rfc7591
-from tigrbl_auth_backend_app_core.surfaces.client_registration_surface import router
+from tba_auth import rfc7591
+from tba_app_backend_core.surfaces.client_registration_surface import router
 from tigrbl import TigrblApp
-from tigrbl_identity_storage_runtime.engine import get_db
-import tigrbl_auth_backend_app_core.surfaces.client_registration_surface as registration_surface
+from tba_runtime_identity_storage.engine import get_db
+import tba_app_backend_core.surfaces.client_registration_surface as registration_surface
 
 
 @pytest_asyncio.fixture()

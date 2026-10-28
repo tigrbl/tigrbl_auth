@@ -1,6 +1,6 @@
 import pytest
 
-from tigrbl_policy_administration_memory_provider import ABACAdministrator
+from tba_provider_policy_administration_memory import ABACAdministrator
 
 
 @pytest.mark.asyncio

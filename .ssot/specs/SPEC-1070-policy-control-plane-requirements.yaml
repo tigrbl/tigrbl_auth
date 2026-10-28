@@ -26,7 +26,7 @@ body: |-
   
   This specification defines normative requirements for policy control-plane
   decisioning, language, lifecycle, simulation, audit, and decision APIs in
-  `tigrbl_auth`.
+  `tba_auth`.
   
   ## Decision Source
   

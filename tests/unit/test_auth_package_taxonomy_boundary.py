@@ -13,33 +13,33 @@ PKGS = ROOT / "pkgs"
 
 
 COMPAT_TO_PREFERRED = {
-    "tigrbl_authn_credentials": "tigrbl_credentials",
-    "tigrbl_identity_credentials": "tigrbl_credentials",
-    "tigrbl_identity_policy": "tigrbl_authz_policy",
-    "tigrbl_identity_resource_server": "tigrbl_authz_resource_server",
-    "tigrbl_identity_oauth": "tigrbl_auth_protocol_oauth",
-    "tigrbl_identity_oidc": "tigrbl_auth_protocol_oidc",
-    "tigrbl_identity_rp": "tigrbl_auth_protocol_rp",
+    "tba_authn_credentials": "tba_credentials",
+    "tigrbl_identity_credentials": "tba_credentials",
+    "tigrbl_identity_policy": "tba_runtime_authorization_policy",
+    "tigrbl_identity_resource_server": "tba_protocol_authorization_resource_server",
+    "tigrbl_identity_oauth": "tba_protocol_oauth",
+    "tigrbl_identity_oidc": "tba_protocol_oidc",
+    "tigrbl_identity_rp": "tba_protocol_oidc_relying_party",
 }
 
 DIST_TO_IMPORT_ROOT = {
-    "tigrbl-credentials": "tigrbl_credentials",
-    "tigrbl-authz-policy-admin-gate": "tigrbl_authz_policy_admin_gate",
-    "tigrbl-authz-policy": "tigrbl_authz_policy",
-    "tigrbl-authz-resource-server": "tigrbl_authz_resource_server",
-    "tigrbl-authz-resource-server-verifier": "tigrbl_authz_resource_server_verifier",
-    "tigrbl-security-dpop-cnf-binding-validator": "tigrbl_security_dpop_cnf_binding_validator",
-    "tigrbl-security-mtls-cnf-binding-validator": "tigrbl_security_mtls_cnf_binding_validator",
+    "tba-credentials": "tba_credentials",
+    "tigrbl-authz-policy-admin-gate": "tba_runtime_authorization_policy_admin_gate",
+    "tba-runtime-authorization-policy": "tba_runtime_authorization_policy",
+    "tba-protocol-authorization-resource-server": "tba_protocol_authorization_resource_server",
+    "tba-provider-authorization-resource-server-verifier": "tba_provider_authorization_resource_server_verifier",
+    "tba-provider-security-dpop-cnf-binding-validator": "tba_provider_security_dpop_cnf_binding_validator",
+    "tba-provider-security-mtls-cnf-binding-validator": "tba_provider_security_mtls_cnf_binding_validator",
     "tigrbl-security-sender-constraint-validator": "tigrbl_security_sender_constraint_validator",
-    "tigrbl-security-token-introspection-client": "tigrbl_security_token_introspection_client",
-    "tigrbl-security-token-jwks-cache": "tigrbl_security_token_jwks_cache",
-    "tigrbl-auth-protocol-oauth": "tigrbl_auth_protocol_oauth",
-    "tigrbl-auth-protocol-oidc": "tigrbl_auth_protocol_oidc",
-    "tigrbl-auth-protocol-rp": "tigrbl_auth_protocol_rp",
+    "tba-provider-security-token-introspection-client": "tba_provider_security_token_introspection_client",
+    "tba-provider-security-token-jwks-cache": "tba_provider_security_token_jwks_cache",
+    "tba-protocol-oauth": "tba_protocol_oauth",
+    "tba-protocol-oidc": "tba_protocol_oidc",
+    "tba-protocol-oidc-relying-party": "tba_protocol_oidc_relying_party",
 }
 
 DEPRECATED_DIST_TO_IMPORT_ROOT = {
-    "tigrbl-authn-credentials": "tigrbl_authn_credentials",
+    "tigrbl-authn-credentials": "tba_authn_credentials",
     "tigrbl-identity-credentials": "tigrbl_identity_credentials",
     "tigrbl-identity-policy": "tigrbl_identity_policy",
     "tigrbl-identity-resource-server": "tigrbl_identity_resource_server",
@@ -49,60 +49,60 @@ DEPRECATED_DIST_TO_IMPORT_ROOT = {
 }
 
 DEPRECATED_MODULE_CANONICAL_IMPORT_ROOT = {
-    "tigrbl_identity_oauth/ops/authorize.py": "tigrbl_auth_backend_app_core.surfaces.authorization_surface",
-    "tigrbl_identity_credentials/authenticators.py": "tigrbl_identity_server.security.auth",
-    "tigrbl_identity_credentials/_operator_store.py": "tigrbl_identity_storage_runtime.operator_store",
-    "tigrbl_identity_credentials/_token_service/__init__.py": "tigrbl_identity_runtime.token_service",
-    "tigrbl_identity_credentials/_token_service/coder.py": "tigrbl_identity_jose.jwt_coder",
-    "tigrbl_identity_credentials/_token_service/operator.py": "tigrbl_identity_storage_runtime.session_service",
-    "tigrbl_identity_credentials/_token_service/persistence.py": "tigrbl_identity_storage_runtime.token_persistence",
-    "tigrbl_identity_credentials/_token_service/runtime.py": "tigrbl_identity_jose.jwt_runtime",
-    "tigrbl_identity_credentials/audit_service.py": "tigrbl_identity_storage_runtime.audit",
-    "tigrbl_identity_credentials/operator_service.py": "tigrbl_identity_storage_runtime.resource_service",
-    "tigrbl_identity_credentials/session_service.py": "tigrbl_identity_storage_runtime.session_service",
-    "tigrbl_identity_credentials/token_service.py": "tigrbl_identity_runtime.token_service",
-    "tigrbl_identity_oidc/discovery_service.py": "tigrbl_identity_cli.discovery_service",
-    "tigrbl_identity_policy/_certification/__init__.py": "tigrbl_auth_release_certification.certification",
-    "tigrbl_identity_policy/_certification/authorization.py": "tigrbl_auth_release_certification.certification.authorization",
-    "tigrbl_identity_policy/_certification/base.py": "tigrbl_auth_release_certification.certification.base",
-    "tigrbl_identity_policy/_certification/crypto.py": "tigrbl_auth_release_certification.certification.crypto",
-    "tigrbl_identity_policy/_certification/isolation.py": "tigrbl_auth_release_certification.certification.isolation",
-    "tigrbl_identity_policy/_certification/observability.py": "tigrbl_auth_release_certification.certification.observability",
-    "tigrbl_identity_policy/_certification/runtime.py": "tigrbl_auth_release_certification.certification.runtime",
-    "tigrbl_identity_policy/_release_posture/__init__.py": "tigrbl_auth_release_certification.release_posture",
-    "tigrbl_identity_policy/_release_posture/disclosure.py": "tigrbl_auth_release_certification.release_posture.disclosure",
-    "tigrbl_identity_policy/_release_posture/models.py": "tigrbl_auth_release_certification.release_posture.models",
-    "tigrbl_identity_policy/_release_posture/provenance.py": "tigrbl_auth_release_certification.release_posture.provenance",
-    "tigrbl_identity_policy/_release_posture/summary.py": "tigrbl_auth_release_certification.release_posture.summary",
-    "tigrbl_identity_policy/_release_posture/transport.py": "tigrbl_auth_release_certification.release_posture.transport",
-    "tigrbl_identity_policy/admin_gate.py": "tigrbl_auth_router_admin_gate",
-    "tigrbl_identity_policy/_admin_gate/__init__.py": "tigrbl_auth_router_admin_gate",
-    "tigrbl_identity_policy/_admin_gate/constants.py": "tigrbl_auth_router_admin_gate",
-    "tigrbl_identity_policy/_admin_gate/gate.py": "tigrbl_auth_router_admin_gate",
-    "tigrbl_identity_policy/_admin_gate/helpers.py": "tigrbl_auth_router_admin_gate",
-    "tigrbl_identity_policy/certification.py": "tigrbl_auth_release_certification.certification",
-    "tigrbl_identity_policy/invariants.py": "tigrbl_authz_policy",
-    "tigrbl_identity_policy/release_posture.py": "tigrbl_auth_release_certification.release_posture",
+    "tigrbl_identity_oauth/ops/authorize.py": "tba_app_backend_core.surfaces.authorization_surface",
+    "tigrbl_identity_credentials/authenticators.py": "tba_server_identity.security.auth",
+    "tigrbl_identity_credentials/_operator_store.py": "tba_runtime_identity_storage.operator_store",
+    "tigrbl_identity_credentials/_token_service/__init__.py": "tba_runtime_identity.token_service",
+    "tigrbl_identity_credentials/_token_service/coder.py": "tba_provider_identity_jose.jwt_coder",
+    "tigrbl_identity_credentials/_token_service/operator.py": "tba_runtime_identity_storage.session_service",
+    "tigrbl_identity_credentials/_token_service/persistence.py": "tba_runtime_identity_storage.token_persistence",
+    "tigrbl_identity_credentials/_token_service/runtime.py": "tba_provider_identity_jose.jwt_runtime",
+    "tigrbl_identity_credentials/audit_service.py": "tba_runtime_identity_storage.audit",
+    "tigrbl_identity_credentials/operator_service.py": "tba_runtime_identity_storage.resource_service",
+    "tigrbl_identity_credentials/session_service.py": "tba_runtime_identity_storage.session_service",
+    "tigrbl_identity_credentials/token_service.py": "tba_runtime_identity.token_service",
+    "tigrbl_identity_oidc/discovery_service.py": "tba_cli_identity.discovery_service",
+    "tigrbl_identity_policy/_certification/__init__.py": "tba_certification_release.certification",
+    "tigrbl_identity_policy/_certification/authorization.py": "tba_certification_release.certification.authorization",
+    "tigrbl_identity_policy/_certification/base.py": "tba_certification_release.certification.base",
+    "tigrbl_identity_policy/_certification/crypto.py": "tba_certification_release.certification.crypto",
+    "tigrbl_identity_policy/_certification/isolation.py": "tba_certification_release.certification.isolation",
+    "tigrbl_identity_policy/_certification/observability.py": "tba_certification_release.certification.observability",
+    "tigrbl_identity_policy/_certification/runtime.py": "tba_certification_release.certification.runtime",
+    "tigrbl_identity_policy/_release_posture/__init__.py": "tba_certification_release.release_posture",
+    "tigrbl_identity_policy/_release_posture/disclosure.py": "tba_certification_release.release_posture.disclosure",
+    "tigrbl_identity_policy/_release_posture/models.py": "tba_certification_release.release_posture.models",
+    "tigrbl_identity_policy/_release_posture/provenance.py": "tba_certification_release.release_posture.provenance",
+    "tigrbl_identity_policy/_release_posture/summary.py": "tba_certification_release.release_posture.summary",
+    "tigrbl_identity_policy/_release_posture/transport.py": "tba_certification_release.release_posture.transport",
+    "tigrbl_identity_policy/admin_gate.py": "tba_router_admin_gate",
+    "tigrbl_identity_policy/_admin_gate/__init__.py": "tba_router_admin_gate",
+    "tigrbl_identity_policy/_admin_gate/constants.py": "tba_router_admin_gate",
+    "tigrbl_identity_policy/_admin_gate/gate.py": "tba_router_admin_gate",
+    "tigrbl_identity_policy/_admin_gate/helpers.py": "tba_router_admin_gate",
+    "tigrbl_identity_policy/certification.py": "tba_certification_release.certification",
+    "tigrbl_identity_policy/invariants.py": "tba_runtime_authorization_policy",
+    "tigrbl_identity_policy/release_posture.py": "tba_certification_release.release_posture",
 }
 
 NON_TAXONOMY_CANONICAL_ROOTS = {
-    "tigrbl_auth_backend_app_core",
-    "tigrbl_auth_release_certification",
-    "tigrbl_authz_policy_admin_gate",
-    "tigrbl_authz_policy_attributes_mapping",
-    "tigrbl_authz_policy_combiner_default",
-    "tigrbl_authz_policy_evaluators_default",
-    "tigrbl_authz_policy_obligations_concrete",
-    "tigrbl_authz_policy_rules_concrete",
+    "tba_app_backend_core",
+    "tba_certification_release",
+    "tba_runtime_authorization_policy_admin_gate",
+    "tba_concrete_authorization_policy_attributes_mapping",
+    "tba_concrete_authorization_policy_combiner_default",
+    "tba_concrete_authorization_policy_evaluators_default",
+    "tba_concrete_authorization_policy_obligations",
+    "tba_concrete_authorization_policy_rules",
     "tigrbl_identity_credentials_concrete",
     "tigrbl_identity_identities_concrete",
-    "tigrbl_identity_jose",
-    "tigrbl_identity_runtime",
-    "tigrbl_identity_server",
-    "tigrbl_identity_storage",
-    "tigrbl_identity_storage_runtime",
-    "tigrbl_security_authorization_provenance_builder",
-    "tigrbl_security_key_rotation_policy_contracts",
+    "tba_provider_identity_jose",
+    "tba_runtime_identity",
+    "tba_server_identity",
+    "tba_storage_core",
+    "tba_runtime_identity_storage",
+    "tba_provider_security_authorization_provenance_builder",
+    "tba_contracts_security_key_rotation_policy",
 }
 
 CANONICAL_MODULE_RE = re.compile(r'_CANONICAL_MODULE\s*=\s*"([^"]+)"')
@@ -198,7 +198,7 @@ def test_deprecated_taxonomy_roots_delegate_to_preferred_roots() -> None:
             else:
                 assert canonical_module == expected_root, path
             assert canonical_root not in deprecated_imports, path
-            assert canonical_root != "tigrbl_auth", path
+            assert canonical_root != "tba_auth", path
             assert _absolute_imports(path) <= {"__future__", "importlib", "warnings"}, (
                 path
             )
@@ -211,5 +211,5 @@ def test_authn_authz_protocol_roots_do_not_import_deprecated_roots() -> None:
         package_root = next(PKGS.glob(f"**/src/{import_root}"))
         for path in package_root.rglob("*.py"):
             imports = _absolute_imports(path)
-            assert "tigrbl_auth" not in imports, path
+            assert "tba_auth" not in imports, path
             assert imports.isdisjoint(deprecated_imports), path

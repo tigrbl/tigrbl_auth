@@ -12,23 +12,23 @@ and independently verifiable results.
 
 | Layer | Package or family | Delivered | Remaining |
 |---|---|---|---|
-| 00 | `tigrbl-identity-core` | Opaque IDs and refs; artifact, credential-format, token, presentation, attestation, manifest, lifecycle, media-type, nonce, digest, URI, protocol-tag, `ClaimType`, `ClaimValueType`, and `RegisteredClaim` primitives | Extend registries only when an implemented revision requires a new semantic value |
-| 01 | `tigrbl-identity-storage` | Credential issuer/configuration/offer/issuance/status state; presentation transaction/consent/replay state; attestation evidence/results/reference material; SVID/trust bundles; SET delivery; optional DID/GNAP state; certificate records/trust anchors/status snapshots | Enforce deployment-specific retention, encryption, and deletion policies for sensitive payloads |
-| 02 | `tigrbl-identity-contracts` | Neutral claim/claim-set, digital credential, presentation, wallet, attestation, workload/SVID, DID, security-event, policy/AuthZEN/XACML, delegation, EAP ACR, and Identity Assurance contracts | Continue removing wire-format dictionaries when stable neutral semantics exist |
-| 02 | `tigrbl-security-trust-contracts` | Certificate profiles/path/status, trust anchors/bundles, issuer trust, and verification-key ports | Add profile contracts only with an implemented verifier |
-| 05 | `tigrbl-identity-claims-bases` | `ClaimBase` and neutral provider base | None for current claim catalog |
-| 05 | `tigrbl-digital-credential-bases` | Format, issuer, verifier, presentation, status, and wallet-attestation bases | Add bases only for multiple concrete implementations |
+| 00 | `tba-primitives-identity` | Opaque IDs and refs; artifact, credential-format, token, presentation, attestation, manifest, lifecycle, media-type, nonce, digest, URI, protocol-tag, `ClaimType`, `ClaimValueType`, and `RegisteredClaim` primitives | Extend registries only when an implemented revision requires a new semantic value |
+| 01 | `tba-storage-core` | Credential issuer/configuration/offer/issuance/status state; presentation transaction/consent/replay state; attestation evidence/results/reference material; SVID/trust bundles; SET delivery; optional DID/GNAP state; certificate records/trust anchors/status snapshots | Enforce deployment-specific retention, encryption, and deletion policies for sensitive payloads |
+| 02 | `tba-contracts-identity` | Neutral claim/claim-set, digital credential, presentation, wallet, attestation, workload/SVID, DID, security-event, policy/AuthZEN/XACML, delegation, EAP ACR, and Identity Assurance contracts | Continue removing wire-format dictionaries when stable neutral semantics exist |
+| 02 | `tba-contracts-security-trust` | Certificate profiles/path/status, trust anchors/bundles, issuer trust, and verification-key ports | Add profile contracts only with an implemented verifier |
+| 05 | `tba-bases-identity-claims` | `ClaimBase` and neutral provider base | None for current claim catalog |
+| 05 | `tba-bases-digital-credential` | Format, issuer, verifier, presentation, status, and wallet-attestation bases | Add bases only for multiple concrete implementations |
 | 05 | attestation, JOSE, COSE, OAuth/OIDC compatibility, policy, resource-server, and trust bases | Shared deterministic/provider extension points | Finish removal of remaining protocol-named compatibility bases |
 | 10 | standalone identity packages | One package per concrete user, admin, service, client, machine, workload, and device identity | Add identity classes only for distinct semantics/lifecycle |
 | 10 | standalone authenticator-credential packages | One package per password, reset, API/service key, client secret, MFA/passkey/WebAuthn/passwordless, mTLS, and DPoP-key credential | Keep these distinct from issued digital credentials |
 | 10 | standalone claim packages | One `ClaimBase` subclass per registered concrete claim package | Complete claim-name coverage as additional standards revisions are implemented |
 | 10 | JOSE, SD-JWT, SD-JWT VC, mdoc, VCDM, EAT, CoRIM, SVID, DID, SET concrete packages | Deterministic parsing, validation, serialization, and format behavior | No filesystem, HTTP, database, HSM, or issuer-trust decisions |
 | 20 | credential, presentation, COSE/mdoc, wallet/key/platform attestation, EAT/RATS/CoRIM, SPIFFE/SVID, DID, SET, certificate/trust, and replaceable infrastructure providers | Environment-backed signing, verification, resolution, appraisal, delivery, trust, and explicitly named external/ephemeral storage adapters | Rename ambiguous `*-store` packages as implementation-specific providers; no canonical durable schema or transaction ownership |
-| 30 | `tigrbl-identity-storage-runtime` | Executable repositories, atomic reservations, database sessions, migrations, and transaction coordinators over layer-01 state | Add durable replay repositories and exercise every repository against production database backends |
+| 30 | `tba-runtime-identity-storage` | Executable repositories, atomic reservations, database sessions, migrations, and transaction coordinators over layer-01 state | Add durable replay repositories and exercise every repository against production database backends |
 | 40 | digital credential issuance/presentation, attestation appraisal, security events, workload identity | Multi-component use-case orchestration over neutral ports, with delegated subimplementations and machine-readable capability descriptors | Complete operation, binding, readiness, and health reporting without leaking wire formats |
 | 50 | JWT, OAuth, OIDC, OID4VCI, OID4VP, HAIP, AuthZEN, GNAP, SET, EAT, SD-JWT VC | Independent version histories, revision feature gates, compatibility/migrations, protocol claim-set composition, and traceable protocol-requirement-to-capability mappings | Remove embedded state-store implementations; add normative endpoint coverage and independent interop evidence before certification |
-| 60 | `tigrbl-identity-runtime` | Lazy installed-owner standards registry and exact runtime manifest | Remove older layer-50 imports of runtime settings by injecting deployment configuration |
-| 70 | `tigrbl-auth` | Stable lazy exports for runtime standards discovery | Re-export additional APIs only after owner packages stabilize |
+| 60 | `tba-runtime-identity` | Lazy installed-owner standards registry and exact runtime manifest | Remove older layer-50 imports of runtime settings by injecting deployment configuration |
+| 70 | `tba-auth` | Stable lazy exports for runtime standards discovery | Re-export additional APIs only after owner packages stabilize |
 | 80 | public API contract | Declares standards-manifest capability and OID4VC/HAIP package consumption | Mount credential issuance, presentation, AuthZEN, GNAP, SET, and attestation routes from protocol/capability truth |
 | Compliance | targets, mappings, claims, evidence, generated reports | RFC 8417 correction; live SET concrete/protocol owners; canonical registries regenerated and verified | Add new targets only when tests and independent evidence justify the claimed tier |
 
@@ -41,7 +41,7 @@ not mean every encoded payload should be retained.
 |---|---|---:|---:|---:|---:|---:|---:|---|---|
 | Principal | subject/authorization | yes | yes | yes | optional | yes | yes | neutral identity packages | oauth, oidc, authzen, xacml, zta |
 | Identity | identity | yes | yes | yes | yes | standalone | source-dependent | standalone identity package | oidc, did-core, spiffe, zta |
-| SPIFFE ID | workload identity | yes | yes | yes | yes | yes | resolver/provider | `tigrbl-svid-concrete` | spiffe, svid, x509, jwt |
+| SPIFFE ID | workload identity | yes | yes | yes | yes | yes | resolver/provider | `tba-concrete-svid` | spiffe, svid, x509, jwt |
 | SVID | workload credential | yes | yes | yes | yes | JWT/X.509 | yes | SVID concrete/providers | spiffe, svid, jwt, x509 |
 | Authenticator credential | authentication credential | yes | yes | yes | yes | standalone | yes | standalone credential package | oidc, oauth, webauthn, fido, x509, dpop |
 | Digital credential | issued assertion | yes | yes | yes | yes | format-specific | issuer/verifier | digital credential families | oid4vci, oid4vp, haip, w3c-vcdm, sd-jwt-vc, iso-mdoc |
@@ -118,13 +118,13 @@ Canonical placement rule:
 
 - [x] Layer-01 tables exist for security-event, backchannel-logout, and
   presentation replay state.
-- [x] Neutral replay contracts exist in `tigrbl-identity-contracts`.
+- [x] Neutral replay contracts exist in `tba-contracts-identity`.
 - [x] Normalize the replay contract around an atomic reservation result and a
   protocol-neutral replay namespace/key/context.
 - [x] Add a layer-05 replay base only for behavior genuinely shared by at least
   two providers.
 - [x] Replace `tigrbl-security-event-replay-store` with
-  `tigrbl-replay-memory-provider`, retain the old distribution only as a
+  `tba-provider-replay-memory`, retain the old distribution only as a
   deprecated compatibility alias, and document it as
   non-durable, single-process, and unsuitable for horizontally scaled
   production deployments.
@@ -134,7 +134,7 @@ Canonical placement rule:
   their dependencies and operational semantics differ.
   No Redis/vendor backend is selected in this delivery, so no speculative
   provider package is created; the rule is enforced by provider boundaries.
-- [x] Add a layer-40 `tigrbl-replay-protection-capability` package that delegates to a
+- [x] Add a layer-40 `tba-capability-replay-protection` package that delegates to a
   selected provider/repository and reports operations, bindings, namespaces,
   provider identity, persistence class, readiness, and health.
 - [x] Map SET `jti`, DPoP proof `jti`/nonce, OIDC backchannel logout token `jti`,
@@ -150,7 +150,7 @@ Canonical placement rule:
   exists.
 - [x] Layer-02 reference-material provider contracts and layer-05 bases exist.
 - [x] Replace `tigrbl-corim-store-provider` with the implementation-specific
-  `tigrbl-corim-reference-memory-provider`; retain the former only as a
+  `tba-provider-corim-reference-memory`; retain the former only as a
   deprecated compatibility alias.
 - [x] Put durable CoRIM/CoMID reference-material repositories and immutable
   publication transactions in layer 30.
@@ -192,7 +192,7 @@ Canonical placement rule:
   results are distinct contracts.
 - [x] Claim, claim-set, token, evidence-verification, and appraisal bases exist.
 - [x] EAT JWT and EAT CWT/COSE extension bases exist symmetrically.
-- [x] `tigrbl-eat-concrete` specializes neutral `AttestationEvidence` without
+- [x] `tba-concrete-eat` specializes neutral `AttestationEvidence` without
   owning key resolution, trust selection, persistence, or appraisal.
 - [x] The EAT verifier returns evidence-integrity verification separately from
   the reference-backed attestation appraisal decision.
@@ -210,7 +210,7 @@ Canonical placement rule:
   checks pass.
 - [x] RP state/token memory stores and DPoP replay/nonce memory stores are
   injected through neutral ports; explicit process-local implementations live
-  in `tigrbl-replay-memory-provider`, and layer 60 selects them deliberately.
+  in `tba-provider-replay-memory`, and layer 60 selects them deliberately.
 - [x] Layer-50 protocol packages consume the neutral injected protocol-settings
   proxy; layer 60 binds deployment settings and no layer-50 module imports the
   runtime settings module.

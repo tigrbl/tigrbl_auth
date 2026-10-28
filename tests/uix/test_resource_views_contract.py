@@ -1,5 +1,5 @@
-from tigrbl_auth.uix import RESOURCE_VIEW_OPERATIONS, build_resource_views
-from tigrbl_operator_administration_capability import OPERATOR_ADMINISTRATION_OPERATIONS
+from tba_auth.uix import RESOURCE_VIEW_OPERATIONS, build_resource_views
+from tba_capability_operator_administration import OPERATOR_ADMINISTRATION_OPERATIONS
 
 
 def test_resource_views_are_backed_by_required_capability_operations():

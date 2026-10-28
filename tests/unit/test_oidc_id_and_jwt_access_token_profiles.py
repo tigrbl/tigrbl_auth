@@ -1,6 +1,6 @@
 import pytest
-from tigrbl_auth_protocol_oidc.id_token_profile import validate_id_token_profile
-from tigrbl_oauth_profile_jwt_access_token import validate_access_token
+from tba_protocol_oidc.id_token_profile import validate_id_token_profile
+from tba_profile_oauth_jwt_access_token import validate_access_token
 
 def test_oidc_id_token_profile_enforces_nonce_azp_and_type() -> None:
     claims = {"iss": "https://issuer", "sub": "subject", "aud": ["client", "api"], "azp": "client", "exp": 200, "iat": 100, "nonce": "n"}

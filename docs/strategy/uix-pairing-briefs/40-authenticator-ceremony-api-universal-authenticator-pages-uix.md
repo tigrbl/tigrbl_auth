@@ -53,7 +53,7 @@ Relevant foundations already exist:
 - My Account security and session pages;
 - Developer client-credential pages;
 - Service Admin API-key and service-key pages;
-- shared `@tigrbl-auth/uix-core` components and tokens.
+- shared `@tba/ui-primitives` components and tokens.
 
 The shipped UI is incomplete and inconsistent:
 
@@ -309,7 +309,7 @@ On refresh or browser restoration, fetch the ceremony by ID and render the serve
 
 ## 7. Shared component requirements
 
-Build these in `@tigrbl-auth/uix-core`, with typed props and no provider business logic.
+Build these in `@tba/ui-primitives`, with typed props and no provider business logic.
 
 ### Catalog and inventory
 
@@ -683,7 +683,7 @@ Require:
 
 ## 12. Canonical design system
 
-Use `@tigrbl-auth/uix-core` as the canonical system.
+Use `@tba/ui-primitives` as the canonical system.
 
 ### Token direction
 
@@ -702,14 +702,14 @@ Retain the current shared foundation:
 
 Replace hard-coded Public UIX indigo/slate tokens with semantic shared tokens:
 
-- `--tigrbl-primary`
-- `--tigrbl-primary-hover`
-- `--tigrbl-primary-soft`
-- `--tigrbl-bg`
-- `--tigrbl-panel`
-- `--tigrbl-border`
-- `--tigrbl-text`
-- `--tigrbl-muted`
+- `--tba-primary`
+- `--tba-primary-hover`
+- `--tba-primary-soft`
+- `--tba-bg`
+- `--tba-panel`
+- `--tba-border`
+- `--tba-text`
+- `--tba-muted`
 - semantic success/warning/danger/info tokens;
 - tenant-brand overrides with contrast validation.
 

@@ -2,12 +2,12 @@ from __future__ import annotations
 
 import pytest
 
-from tigrbl_identity_contracts.tokens import (
+from tba_contracts_identity.tokens import (
     TokenIntrospectionRequest,
     TokenIntrospectionResult,
     TokenProfile,
 )
-from tigrbl_token_introspection_capability import TokenIntrospectionCapability
+from tba_capability_token_introspection import TokenIntrospectionCapability
 
 
 def test_introspection_capability_requires_a_bound_target() -> None:

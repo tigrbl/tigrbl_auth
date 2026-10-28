@@ -18,10 +18,10 @@ def test_router_and_backend_app_families_are_explicit() -> None:
     assert len(routers) == 20
     assert len(apps) == 10
     assert all(
-        package.distribution.startswith("tigrbl-auth-router-") for package in routers
+        package.distribution.startswith("tba-router-") for package in routers
     )
     assert all(
-        package.distribution.startswith("tigrbl-auth-backend-app-") for package in apps
+        package.distribution.startswith("tba-app-backend-") for package in apps
     )
 
 
@@ -63,7 +63,7 @@ def test_backend_app_contracts_match_router_dependencies() -> None:
         package
         for package in packages
         if package.layer == "90-backend-apps"
-        and package.distribution != "tigrbl-auth-backend-app-core"
+        and package.distribution != "tba-app-backend-core"
     ]
 
     for app in apps:

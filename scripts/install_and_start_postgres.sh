@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-POSTGRES_DB="${POSTGRES_DB:-tigrbl_auth_ci}"
+POSTGRES_DB="${POSTGRES_DB:-tba_auth_ci}"
 POSTGRES_USER="${POSTGRES_USER:-postgres}"
 POSTGRES_PASSWORD="${POSTGRES_PASSWORD:-postgres}"
 POSTGRES_PORT="${POSTGRES_PORT:-5432}"

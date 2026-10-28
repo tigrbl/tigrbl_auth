@@ -53,8 +53,8 @@ required_targets:
 required_artifacts:
 - docs/reference/CLI_SURFACE.md
 - specs/cli/cli_contract.json
-- specs/openapi/profiles/peer-claim/tigrbl_auth.public.openapi.json
-- specs/openrpc/profiles/peer-claim/tigrbl_auth.admin.openrpc.json
+- specs/openapi/profiles/peer-claim/tba_auth.public.openapi.json
+- specs/openrpc/profiles/peer-claim/tba_auth.admin.openrpc.json
 - tests/conformance/operator/test_cli_serve_runtime.py
 - tests/conformance/operator/test_cli_resource_lifecycle.py
 - tests/conformance/operator/test_cli_keys_lifecycle.py

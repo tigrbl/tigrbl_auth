@@ -18,12 +18,12 @@ def _load_package_pyproject(name: str) -> dict:
 
 
 def test_crypto_key_execution_dependencies_flow_through_storage_runtime() -> None:
-    jose_dependencies = set(_load_package_pyproject("tigrbl-identity-jose")["project"]["dependencies"])
-    storage_dependencies = set(_load_package_pyproject("tigrbl-identity-storage")["project"]["dependencies"])
+    jose_dependencies = set(_load_package_pyproject("tba-provider-identity-jose")["project"]["dependencies"])
+    storage_dependencies = set(_load_package_pyproject("tba-storage-core")["project"]["dependencies"])
     storage_runtime_dependencies = set(
-        _load_package_pyproject("tigrbl-identity-storage-runtime")["project"]["dependencies"]
+        _load_package_pyproject("tba-runtime-identity-storage")["project"]["dependencies"]
     )
 
-    assert "tigrbl-identity-storage==0.4.0.dev2" not in jose_dependencies
-    assert "tigrbl-security-trust-contracts==0.1.0" in storage_dependencies
-    assert "tigrbl-security-trust-contracts==0.1.0" in storage_runtime_dependencies
+    assert "tba-storage-core==0.4.0.dev2" not in jose_dependencies
+    assert "tba-contracts-security-trust==0.1.0" in storage_dependencies
+    assert "tba-contracts-security-trust==0.1.0" in storage_runtime_dependencies

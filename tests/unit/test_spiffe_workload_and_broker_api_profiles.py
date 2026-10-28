@@ -1,6 +1,6 @@
 import pytest
-from tigrbl_workload_protocol_spiffe_broker_api import CURRENT_VERSION as BROKER_VERSION, RPC_NAMES as BROKER_RPCS, BrokerApiService
-from tigrbl_workload_protocol_spiffe_workload_api import FORBIDDEN_EXTENSION_RPCS, RPC_NAMES as WORKLOAD_RPCS, WorkloadApiService
+from tba_protocol_workload_spiffe_broker_api import CURRENT_VERSION as BROKER_VERSION, RPC_NAMES as BROKER_RPCS, BrokerApiService
+from tba_protocol_workload_spiffe_workload_api import FORBIDDEN_EXTENSION_RPCS, RPC_NAMES as WORKLOAD_RPCS, WorkloadApiService
 
 def test_exact_spiffe_rpc_surfaces_do_not_invent_wit_or_cwt_methods() -> None:
     assert WORKLOAD_RPCS == {"FetchX509SVID", "FetchX509Bundles", "FetchJWTSVID", "FetchJWTBundles", "ValidateJWTSVID"}

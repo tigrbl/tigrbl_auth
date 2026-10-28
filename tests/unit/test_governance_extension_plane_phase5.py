@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
 
-from tigrbl_auth.services.governance_extension_plane import (
+from tba_auth.services.governance_extension_plane import (
     AccessReviewWorkflow,
     EntitlementManager,
     PluginRuntimeRegistry,
@@ -17,7 +17,7 @@ def test_sdk_ecosystem_tracks_runtime_compatibility_and_contract_alignment():
     catalog = SDKEcosystemCatalog()
     catalog.register_sdk(
         "sdk-python",
-        package_name="tigrbl-auth-python",
+        package_name="tba-auth-python",
         language="python",
         version="0.3.4",
         compatible_runtime_range=("0.3.0", "0.3.9"),
@@ -27,7 +27,7 @@ def test_sdk_ecosystem_tracks_runtime_compatibility_and_contract_alignment():
     )
     catalog.register_sdk(
         "sdk-typescript",
-        package_name="tigrbl-auth-ts",
+        package_name="tba-auth-ts",
         language="typescript",
         version="0.3.4",
         compatible_runtime_range=("0.3.0", "0.3.9"),
@@ -179,7 +179,7 @@ def test_phase5_delivery_summary_aggregates_workflow_state():
     catalog = SDKEcosystemCatalog()
     catalog.register_sdk(
         "sdk-python",
-        package_name="tigrbl-auth-python",
+        package_name="tba-auth-python",
         language="python",
         version="0.3.4",
         compatible_runtime_range=("0.3.0", "0.3.9"),

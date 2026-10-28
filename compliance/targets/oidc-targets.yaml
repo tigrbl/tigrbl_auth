@@ -1,5 +1,5 @@
 schema_version: 1
-package: tigrbl_auth
+package: tba_auth
 target_family: oidc
 scope: core
 targets:
@@ -13,8 +13,8 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oidc/core.py
-  - tigrbl_auth/standards/oidc/id_token.py
+  - tba_auth/standards/oidc/core.py
+  - tba_auth/standards/oidc/id_token.py
 - id: oidc.discovery
   label: OIDC Discovery 1.0
   delivery_track: baseline-interoperability
@@ -25,7 +25,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oidc/discovery.py
+  - tba_auth/standards/oidc/discovery.py
   endpoints:
   - /.well-known/openid-configuration
 - id: oidc.userinfo
@@ -37,7 +37,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oidc/userinfo.py
+  - tba_auth/standards/oidc/userinfo.py
   endpoints:
   - /userinfo
 - id: oidc.session-management
@@ -50,7 +50,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oidc/session_mgmt.py
+  - tba_auth/standards/oidc/session_mgmt.py
 - id: oidc.rp-initiated-logout
   label: OIDC RP-Initiated Logout
   delivery_track: production-readiness
@@ -60,7 +60,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oidc/rp_initiated_logout.py
+  - tba_auth/standards/oidc/rp_initiated_logout.py
   endpoints:
   - /logout
 - id: oidc.front-channel-logout
@@ -71,7 +71,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oidc/frontchannel_logout.py
+  - tba_auth/standards/oidc/frontchannel_logout.py
 - id: oidc.back-channel-logout
   label: OIDC Back-Channel Logout
   delivery_track: hardening-interop
@@ -80,4 +80,4 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oidc/backchannel_logout.py
+  - tba_auth/standards/oidc/backchannel_logout.py

@@ -9,8 +9,8 @@ try:
 except ModuleNotFoundError:  # pragma: no cover - Python 3.10 dependency path
     import tomli as tomllib
 
-from tigrbl_auth.config.deployment import VALID_PROFILES, resolve_deployment
-from tigrbl_auth.config.profile_loader import (
+from tba_auth.config.deployment import VALID_PROFILES, resolve_deployment
+from tba_auth.config.profile_loader import (
     RuntimeProfileError,
     load_packaged_runtime_profiles,
     load_runtime_profile,
@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def test_packaged_runtime_profiles_load_and_validate() -> None:
-    """Every packaged tigrbl_auth/profiles/*.yaml file loads and validates."""
+    """Every packaged tba_auth/profiles/*.yaml file loads and validates."""
     profiles = load_packaged_runtime_profiles()
 
     assert set(profiles) == set(VALID_PROFILES)
@@ -37,13 +37,13 @@ def test_runtime_profile_yaml_files_are_included_in_build_config() -> None:
             ROOT
             / "pkgs"
             / "60-runtime"
-            / "tigrbl-identity-runtime"
+            / "tba-runtime-identity"
             / "pyproject.toml"
         ).read_text(encoding="utf-8")
     )
     includes = pyproject["tool"]["poetry"]["include"]
 
-    assert "src/tigrbl_identity_runtime/profiles/*.yaml" in includes
+    assert "src/tba_runtime_identity/profiles/*.yaml" in includes
 
 
 def test_development_profile_is_active_in_ssot_registry() -> None:

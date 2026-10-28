@@ -13,7 +13,7 @@ for src in (ROOT / "pkgs").glob("*/src"):
     if value not in sys.path:
         sys.path.insert(0, value)
 
-from tigrbl_auth_protocol_rp import (  # noqa: E402
+from tba_protocol_oidc_relying_party import (  # noqa: E402
     CAPABILITY_REQUIREMENTS,
     CURRENT_VERSION,
     RP_ID_TOKEN_CLAIMS,
@@ -41,7 +41,7 @@ from tigrbl_auth_protocol_rp import (  # noqa: E402
     validate_browser_storage_policy,
     validate_id_token_claims,
 )
-from tigrbl_replay_memory_provider import MemoryRPSessionProvider, MemoryRPStateProvider
+from tba_provider_replay_memory import MemoryRPSessionProvider, MemoryRPStateProvider
 
 
 def _rp(*, secret: str | None = "secret") -> RelyingParty:
@@ -289,21 +289,21 @@ def test_rp_t2_pkce_verifier_rejects_invalid_values_and_login_url_fails_closed()
 def test_rp_t2_public_boundary_has_no_upper_runtime_imports() -> None:
     files = [
         Path(
-            "pkgs/50-protocols/tigrbl-auth-protocol-rp/src/tigrbl_auth_protocol_rp/__init__.py"
+            "pkgs/50-protocols/tba-protocol-oidc-relying-party/src/tba_protocol_oidc_relying_party/__init__.py"
         ),
         Path(
-            "pkgs/50-protocols/tigrbl-auth-protocol-rp/src/tigrbl_auth_protocol_rp/client.py"
+            "pkgs/50-protocols/tba-protocol-oidc-relying-party/src/tba_protocol_oidc_relying_party/client.py"
         ),
         Path(
-            "pkgs/50-protocols/tigrbl-auth-protocol-rp/src/tigrbl_auth_protocol_rp/pkce.py"
+            "pkgs/50-protocols/tba-protocol-oidc-relying-party/src/tba_protocol_oidc_relying_party/pkce.py"
         ),
     ]
     forbidden = {
-        "tigrbl_auth",
-        "tigrbl_auth_protocol_oauth",
-        "tigrbl_auth_protocol_oidc",
-        "tigrbl_identity_server",
-        "tigrbl_identity_runtime",
+        "tba_auth",
+        "tba_protocol_oauth",
+        "tba_protocol_oidc",
+        "tba_server_identity",
+        "tba_runtime_identity",
     }
 
     imports: set[str] = set()

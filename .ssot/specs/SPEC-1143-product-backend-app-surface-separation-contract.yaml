@@ -8,7 +8,7 @@ status: "draft"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This SPEC governs deployable product API surfaces for Tigrbl Auth."
+summary: "This SPEC governs deployable product API surfaces for TBA."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -44,7 +44,7 @@ references: []
 body: |-
   ## Scope
   
-  This SPEC governs deployable product API surfaces for Tigrbl Auth.
+  This SPEC governs deployable product API surfaces for TBA.
   
   ## Requirements
   
@@ -56,7 +56,7 @@ body: |-
   
   Runtime mounting, generated contracts, and JSON-RPC dispatch MUST derive from the same effective product-surface configuration and fail closed for disabled methods.
   
-  Product API frontdoors MUST compose table-backed resources from canonical `tigrbl_identity_storage` table objects as defined by `spc:1176`. Product frontdoors own route composition, tags, prefixes, capability filtering, and product-surface exposure policy; they MUST NOT define or fork identity table classes.
+  Product API frontdoors MUST compose table-backed resources from canonical `tba_storage_core` table objects as defined by `spc:1176`. Product frontdoors own route composition, tags, prefixes, capability filtering, and product-surface exposure policy; they MUST NOT define or fork identity table classes.
   
   ## Verification
   

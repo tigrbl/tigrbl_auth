@@ -4,9 +4,9 @@
       "aliases": [],
       "description": "Resolve deployment, materialize a runner-qualified runtime plan, validate the selected profile, and optionally launch runtime.",
       "examples": [
-        "tigrbl-auth serve --server uvicorn --check",
-        "tigrbl-auth serve --server hypercorn --host 0.0.0.0 --port 8443",
-        "tigrbl-auth serve --server tigrcorn --dry-run --format yaml"
+        "tba-auth serve --server uvicorn --check",
+        "tba-auth serve --server hypercorn --host 0.0.0.0 --port 8443",
+        "tba-auth serve --server tigrcorn --dry-run --format yaml"
       ],
       "exit_codes": [
         {
@@ -7327,7 +7327,7 @@
       "key": "yes"
     }
   },
-  "generated_from": "tigrbl_auth.cli.metadata",
+  "generated_from": "tba_auth.cli.metadata",
   "global_flags": [
     {
       "default": null,
@@ -7538,7 +7538,7 @@
       "key": "trace"
     }
   ],
-  "package": "tigrbl_auth",
+  "package": "tba_auth",
   "schema_version": 1,
   "summary": {
     "command_count": 20,

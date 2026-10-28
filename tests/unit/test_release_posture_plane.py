@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from tigrbl_auth.services.release_posture_plane import (
+from tba_auth.services.release_posture_plane import (
     build_disclosure_rules,
     build_phase6_delivery_summary,
     build_release_provenance_requirements,

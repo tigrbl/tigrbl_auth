@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from tigrbl_authz_policy import (
+from tba_runtime_authorization_policy import (
     ResidencyPolicyError,
     ResidencyZone,
     TenantResidencyRecord,

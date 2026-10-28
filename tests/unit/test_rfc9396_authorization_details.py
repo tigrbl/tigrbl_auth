@@ -13,12 +13,12 @@ conditionally enabled or disabled via runtime configuration.
 
 import pytest
 
-from tigrbl_auth import (
+from tba_auth import (
     AuthorizationDetail,
     RFC9396_SPEC_URL,
     parse_authorization_details,
 )
-from tigrbl_auth.runtime_cfg import settings
+from tba_auth.runtime_cfg import settings
 
 
 def test_parse_authorization_details_enabled(monkeypatch):

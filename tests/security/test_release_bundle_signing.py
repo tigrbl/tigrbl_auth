@@ -1,7 +1,7 @@
 from pathlib import Path
 
-from tigrbl_auth.cli.artifacts import deployment_from_options
-from tigrbl_auth.cli.reports import build_release_bundle, sign_release_bundle, verify_release_bundle_signatures
+from tba_auth.cli.artifacts import deployment_from_options
+from tba_auth.cli.reports import build_release_bundle, sign_release_bundle, verify_release_bundle_signatures
 
 
 def test_release_bundle_signing_manifest_created():

@@ -21,9 +21,9 @@ migration chain introduced in the persistence-domain checkpoint persistence chec
 
 The migration system is owned by the repository and is implemented under:
 
-- `tigrbl_auth/migrations/helpers.py`
-- `tigrbl_auth/migrations/runtime.py`
-- `tigrbl_auth/migrations/versions/*.py`
+- `tba_auth/migrations/helpers.py`
+- `tba_auth/migrations/runtime.py`
+- `tba_auth/migrations/versions/*.py`
 
 ## Preconditions
 
@@ -89,7 +89,7 @@ python scripts/verify_persistence_migrations.py
 Application startup now invokes migration application before surface
 initialization via:
 
-- `pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/composition/lifecycle.py`
+- `pkgs/60-runtime/tba-server-identity/src/tba_server_identity/composition/lifecycle.py`
 
 That means a standard application start should converge the schema to the latest
 owned revision set before the package begins serving requests.

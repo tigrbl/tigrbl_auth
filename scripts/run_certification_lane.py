@@ -49,7 +49,7 @@ def main() -> int:
     _prepare_lane_artifacts(args.lane)
 
     install_env = dict(os.environ)
-    install_env.setdefault("TIGRBL_AUTH_INSTALL_PROFILE", f"test-{args.lane}")
+    install_env.setdefault("TBA_AUTH_INSTALL_PROFILE", f"test-{args.lane}")
     install_cmd = [
         sys.executable,
         str(ROOT / "scripts" / "verify_clean_room_install_substrate.py"),

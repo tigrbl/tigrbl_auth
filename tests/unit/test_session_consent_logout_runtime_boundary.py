@@ -6,8 +6,8 @@ import uuid
 import pytest
 
 from tigrbl import create_table_record
-from tigrbl_identity_storage.tables import AuthSession, Consent, LogoutState
-from tigrbl_identity_storage_runtime import (
+from tba_storage_core.tables import AuthSession, Consent, LogoutState
+from tba_runtime_identity_storage import (
     AuthSessionRuntimeSpec,
     ConsentRuntimeSpec,
     LogoutStateRuntimeSpec,

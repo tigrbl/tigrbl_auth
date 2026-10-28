@@ -7,8 +7,8 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   modules:
-  - tigrbl_auth/api/rest
-  - tigrbl_auth/api/surfaces.py
+  - tba_auth/api/rest
+  - tba_auth/api/surfaces.py
   tests:
   - tests/e2e/test_release_gate_catalog.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
@@ -45,7 +45,7 @@ reports:
 - docs/compliance/certification_state_report.json
 - docs/compliance/certification_state_report.md
 contracts:
-- specs/openapi/profiles/baseline/tigrbl_auth.public.openapi.json
+- specs/openapi/profiles/baseline/tba_auth.public.openapi.json
 - specs/discovery/profiles/baseline/openid-configuration.json
 - specs/discovery/profiles/baseline/oauth-authorization-server.json
 - specs/discovery/profiles/baseline/jwks.json

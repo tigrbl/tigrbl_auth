@@ -11,7 +11,7 @@ pytestmark = pytest.mark.skip("README examples require full system setup")
 
 @pytest.mark.example
 def test_health_endpoint_in_readme():
-    from tigrbl_auth_backend_app_public import app
+    from tba_app_backend_public import app
 
     client = TestClient(app)
     assert client.get("/healthz").json() == {"status": "alive"}
@@ -19,7 +19,7 @@ def test_health_endpoint_in_readme():
 
 @pytest.mark.example
 def test_password_grant_flow_in_readme():
-    from tigrbl_auth_backend_app_public import app
+    from tba_app_backend_public import app
 
     client = TestClient(app)
     slug = f"tenant-{uuid.uuid4().hex[:6]}"
@@ -49,7 +49,7 @@ def test_password_grant_flow_in_readme():
 
 @pytest.mark.example
 def test_refresh_token_flow_in_readme():
-    from tigrbl_auth_backend_app_public import app
+    from tba_app_backend_public import app
 
     client = TestClient(app)
     slug = f"tenant-{uuid.uuid4().hex[:6]}"
@@ -75,8 +75,8 @@ def test_refresh_token_flow_in_readme():
 
 @pytest.mark.example
 def test_token_revocation_flow_in_readme():
-    os.environ["TIGRBL_AUTH_ENABLE_RFC7009"] = "1"
-    import tigrbl_auth_backend_app_public.app as app_module
+    os.environ["TBA_AUTH_ENABLE_RFC7009"] = "1"
+    import tba_app_backend_public.app as app_module
 
     importlib.reload(app_module)
     client = TestClient(app_module.app)

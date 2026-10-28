@@ -1,6 +1,6 @@
 import pytest
 
-from tigrbl_auth.uix import (
+from tba_auth.uix import (
     ABACAdministrator,
     ADMIN_CLIENT_FIELDS,
     PUBLIC_CLIENT_FIELDS,
@@ -16,19 +16,19 @@ from tigrbl_auth.uix import (
     filter_visible_tenants,
     simulate_policy,
 )
-from tigrbl_authz_policy import (
+from tba_runtime_authorization_policy import (
     ABACAdministrator as CanonicalABACAdministrator,
     AttributePolicy as CanonicalAttributePolicy,
     DynamicCondition as CanonicalDynamicCondition,
 )
-from tigrbl_authz_policy import (
+from tba_runtime_authorization_policy import (
     DelegatedAdministrator as CanonicalDelegatedAdministrator,
 )
-from tigrbl_authz_policy import PolicyEngine as CanonicalPolicyEngine
-from tigrbl_authz_policy import (
+from tba_runtime_authorization_policy import PolicyEngine as CanonicalPolicyEngine
+from tba_runtime_authorization_policy import (
     ServiceIdentityRegistry as CanonicalServiceIdentityRegistry,
 )
-from tigrbl_authz_policy import (
+from tba_runtime_authorization_policy import (
     RBACAdministrator as CanonicalRBACAdministrator,
 )
 
@@ -60,8 +60,8 @@ def test_service_identities_support_tenant_scoped_authentication_and_revocation(
 
 
 def test_administrator_hard_rename_exports_only_new_names():
-    import tigrbl_auth.uix as uix
-    import tigrbl_authz_policy as authz_policy
+    import tba_auth.uix as uix
+    import tba_runtime_authorization_policy as authz_policy
 
     for module in (uix, authz_policy):
         assert module.RBACAdministrator is CanonicalRBACAdministrator

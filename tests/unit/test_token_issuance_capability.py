@@ -2,19 +2,19 @@ from __future__ import annotations
 
 import pytest
 
-from tigrbl_auth_protocol_oauth.capability_requirements import (
+from tba_protocol_oauth.capability_requirements import (
     CAPABILITY_REQUIREMENTS,
 )
-from tigrbl_auth_protocol_oauth.standards.token_endpoint import (
+from tba_protocol_oauth.standards.token_endpoint import (
     RFC6749TokenEndpointService,
     TokenEndpointDisabledError,
 )
-from tigrbl_identity_contracts.tokens import (
+from tba_contracts_identity.tokens import (
     IssuedTokenPair,
     RefreshTokenRedemptionRequest,
     TokenPairIssueRequest,
 )
-from tigrbl_token_issuance_capability import TokenIssuanceCapability
+from tba_capability_token_issuance import TokenIssuanceCapability
 
 
 def _issue_request() -> TokenPairIssueRequest:

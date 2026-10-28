@@ -6,9 +6,9 @@ from pathlib import Path
 
 import pytest
 
-from tigrbl_identity_storage import build_migration_contract
-from tigrbl_identity_storage.tables import Client, Tenant, TokenRecord, User
-from tigrbl_identity_storage_runtime.engine import dsn
+from tba_storage_core import build_migration_contract
+from tba_storage_core.tables import Client, Tenant, TokenRecord, User
+from tba_runtime_identity_storage.engine import dsn
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -16,9 +16,9 @@ STORAGE_SRC = (
     ROOT
     / "pkgs"
     / "01-storage"
-    / "tigrbl-identity-storage"
+    / "tba-storage-core"
     / "src"
-    / "tigrbl_identity_storage"
+    / "tba_storage_core"
 )
 
 
@@ -27,12 +27,12 @@ def test_storage_generic_repository_surface_is_removed() -> None:
     assert not (STORAGE_SRC / "repository.py").exists()
 
     with pytest.raises(ModuleNotFoundError):
-        importlib.import_module("tigrbl_identity_storage.repository")
+        importlib.import_module("tba_storage_core.repository")
 
 
 @pytest.mark.unit
 def test_storage_public_root_exports_migrations_not_repository_abstractions() -> None:
-    package = importlib.import_module("tigrbl_identity_storage")
+    package = importlib.import_module("tba_storage_core")
     removed_names = {
         "InMemoryRepository",
         "RepositoryPort",
@@ -55,7 +55,7 @@ def test_storage_tables_are_the_canonical_storage_surface() -> None:
 
 
 @pytest.mark.unit
-def test_storage_migration_contract_uses_tigrbl_owned_tables() -> None:
+def test_storage_migration_contract_uses_tba_owned_tables() -> None:
     versions_dir = STORAGE_SRC / "migrations" / "versions"
     contract = build_migration_contract(
         versions_dir=versions_dir,
@@ -88,7 +88,7 @@ def test_storage_public_boundary_has_no_generic_repository_imports() -> None:
         STORAGE_SRC / "migrations" / "__init__.py",
         STORAGE_SRC / "tables" / "__init__.py",
     ]
-    forbidden_modules = {"tigrbl_identity_storage.repository"}
+    forbidden_modules = {"tba_storage_core.repository"}
     forbidden_names = {
         "InMemoryRepository",
         "RepositoryPort",
@@ -118,17 +118,17 @@ def test_engine_and_session_execution_are_storage_runtime_owned() -> None:
         ROOT
         / "pkgs"
         / "30-storage-runtime"
-        / "tigrbl-identity-storage-runtime"
+        / "tba-runtime-identity-storage"
         / "src"
-        / "tigrbl_identity_storage_runtime"
+        / "tba_runtime_identity_storage"
     )
     runtime_root = (
         ROOT
         / "pkgs"
         / "60-runtime"
-        / "tigrbl-identity-runtime"
+        / "tba-runtime-identity"
         / "src"
-        / "tigrbl_identity_runtime"
+        / "tba_runtime_identity"
     )
 
     storage_runtime_engine_source = (storage_runtime_root / "engine.py").read_text(
@@ -142,7 +142,7 @@ def test_engine_and_session_execution_are_storage_runtime_owned() -> None:
     assert not storage_engine.exists()
     assert not (STORAGE_SRC / "db.py").exists()
     assert "build_engine(" in storage_runtime_engine_source
-    assert "tigrbl_identity_storage_runtime.engine" in runtime_engine_source
+    assert "tba_runtime_identity_storage.engine" in runtime_engine_source
     assert "build_engine(" not in runtime_engine_source
     assert "asynccontextmanager" in runtime_session_source
 

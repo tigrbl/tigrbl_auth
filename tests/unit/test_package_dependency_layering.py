@@ -20,10 +20,12 @@ PYTHON_LAYER_FOLDERS = {
     "storage-runtime": "30-storage-runtime",
     "capabilities": "40-capabilities",
     "protocols": "50-protocols",
+    "profiles": "55-profiles",
     "runtime": "60-runtime",
     "facade": "70-facade",
     "clients": "75-clients",
     "routers": "80-routers",
+    "middleware": "85-middleware",
     "backend-apps": "90-backend-apps",
     "tests": "120-tests",
     "examples": "110-examples",
@@ -57,20 +59,20 @@ REQUIRED_PROTOCOL_MODULES = {
 }
 
 FRONTEND_WORKSPACES = {
-    ROOT / "pkgs" / "100-uix-core" / "uix-core",
-    ROOT / "pkgs" / "75-clients" / "rp",
-    ROOT / "pkgs" / "75-clients" / "session-client",
-    ROOT / "pkgs" / "75-clients" / "tenant-admin-client",
-    ROOT / "pkgs" / "75-clients" / "platform-admin-client",
-    ROOT / "pkgs" / "75-clients" / "policy-decision-client",
-    ROOT / "pkgs" / "105-ui" / "admin-uix",
-    ROOT / "pkgs" / "105-ui" / "demo-hub-uix",
-    ROOT / "pkgs" / "105-ui" / "developer-uix",
-    ROOT / "pkgs" / "105-ui" / "my-account-uix",
-    ROOT / "pkgs" / "105-ui" / "platform-admin-uix",
-    ROOT / "pkgs" / "105-ui" / "public-uix",
-    ROOT / "pkgs" / "105-ui" / "service-admin-uix",
-    ROOT / "pkgs" / "105-ui" / "tenant-admin-uix",
+    ROOT / "pkgs" / "100-uix-core" / "tba-ui-primitives",
+    ROOT / "pkgs" / "75-clients" / "tba-typescript-client-oidc-relying-party",
+    ROOT / "pkgs" / "75-clients" / "tba-typescript-client-relying-party-session",
+    ROOT / "pkgs" / "75-clients" / "tba-typescript-client-tenant-admin",
+    ROOT / "pkgs" / "75-clients" / "tba-typescript-client-platform-admin",
+    ROOT / "pkgs" / "75-clients" / "tba-typescript-client-policy-decision",
+    ROOT / "pkgs" / "105-ui" / "tba-ui-admin",
+    ROOT / "pkgs" / "105-ui" / "tba-ui-demo-hub",
+    ROOT / "pkgs" / "105-ui" / "tba-ui-developer",
+    ROOT / "pkgs" / "105-ui" / "tba-ui-my-account",
+    ROOT / "pkgs" / "105-ui" / "tba-ui-platform-admin",
+    ROOT / "pkgs" / "105-ui" / "tba-ui-public",
+    ROOT / "pkgs" / "105-ui" / "tba-ui-service-admin",
+    ROOT / "pkgs" / "105-ui" / "tba-ui-tenant-admin",
 }
 FRONTEND_WORKSPACES.update(
     path.parent
@@ -117,7 +119,7 @@ def _package_facade_imports(package_name: str) -> list[Path]:
     return [
         path.relative_to(ROOT)
         for path in sorted((package_dir / "src").rglob("*.py"))
-        if "tigrbl_auth" in _absolute_import_roots(path)
+        if "tba_auth" in _absolute_import_roots(path)
     ]
 
 
@@ -238,7 +240,7 @@ def test_layer_children_are_packages_or_declared_frontend_workspaces() -> None:
     assert offenders == []
 
 
-def test_lower_layer_packages_do_not_import_tigrbl_auth_facade() -> None:
+def test_lower_layer_packages_do_not_import_tba_auth_facade() -> None:
     facade_consumers = {
         package
         for package in _declared_python_packages()
@@ -259,7 +261,7 @@ def test_lower_layer_packages_do_not_import_tigrbl_auth_facade() -> None:
     assert not stale
 
 
-def test_new_authn_authz_protocol_packages_do_not_import_tigrbl_auth_facade() -> None:
+def test_new_authn_authz_protocol_packages_do_not_import_tba_auth_facade() -> None:
     split_packages = (
         PYTHON_PACKAGE_LAYERS["capabilities"] | PYTHON_PACKAGE_LAYERS["protocols"]
     )
@@ -285,7 +287,7 @@ def test_frontend_workspaces_do_not_import_python_facade_modules() -> None:
             python_facade_specifiers = [
                 specifier
                 for specifier in sorted(_js_import_specifiers(path))
-                if specifier == "tigrbl_auth" or specifier.startswith("tigrbl_auth.")
+                if specifier == "tba_auth" or specifier.startswith("tba_auth.")
             ]
             if python_facade_specifiers:
                 offenders[str(path.relative_to(ROOT))] = python_facade_specifiers

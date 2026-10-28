@@ -4,12 +4,12 @@ import ast
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-JOSE_ROOT = ROOT / "pkgs" / "20-providers" / "tigrbl-identity-jose"
+JOSE_ROOT = ROOT / "pkgs" / "20-providers" / "tba-provider-identity-jose"
 
 ALLOWED_JOSE_DATACLASSES: set[str] = {
-    "src/tigrbl_identity_jose/jwe_policy.py::JWEPolicy",
-    "src/tigrbl_identity_jose/keys.py::JoseKey",
-    "src/tigrbl_identity_jose/keys.py::JoseKeyRotationResult",
+    "src/tba_provider_identity_jose/jwe_policy.py::JWEPolicy",
+    "src/tba_provider_identity_jose/keys.py::JoseKey",
+    "src/tba_provider_identity_jose/keys.py::JoseKeyRotationResult",
 }
 
 
@@ -27,18 +27,18 @@ def _dataclass_defs(path: Path) -> set[str]:
 
 
 def test_jose_reusable_dataclasses_are_owner_reexports() -> None:
-    import tigrbl_security_trust_contracts as security_trust_contracts
-    import tigrbl_identity_contracts as user_contracts
-    from tigrbl_identity_contracts.evidence.key_rotation import KeyRotationAuditEvidence
-    from tigrbl_security_key_rotation_policy_contracts import (
+    import tba_contracts_security_trust as security_trust_contracts
+    import tba_contracts_identity as user_contracts
+    from tba_contracts_identity.evidence.key_rotation import KeyRotationAuditEvidence
+    from tba_contracts_security_key_rotation_policy import (
         EffectiveKeyRotationPolicy,
         KeyRotationPolicyVersion,
     )
-    from tigrbl_auth_protocol_oidc import tenant_discovery
-    from tigrbl_identity_jose import boundary, key_rotation_policy, keys, pqc
-    from tigrbl_identity_jose.jwe_policy import JWEPolicy
-    from tigrbl_identity_jose.standards import rfc7516
-    from tigrbl_identity_principals import factories
+    from tba_protocol_oidc import tenant_discovery
+    from tba_provider_identity_jose import boundary, key_rotation_policy, keys, pqc
+    from tba_provider_identity_jose.jwe_policy import JWEPolicy
+    from tba_provider_identity_jose.standards import rfc7516
+    from tba_concrete_identity_principals import factories
 
     assert boundary.JoseKey is keys.JoseKey
     assert boundary.JoseKeyRotationResult is keys.JoseKeyRotationResult

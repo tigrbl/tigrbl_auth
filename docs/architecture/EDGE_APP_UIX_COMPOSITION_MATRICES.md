@@ -22,24 +22,24 @@ In the current checkout, the backend is shared and multi-tenant, `public-uix` is
 
 | App / surface | Kind | Primary users | Backend lane | Current repo state | Notes |
 |---|---|---|---|---|---|
-| `tigrbl_auth` identity deployment | backend app | platform, tenants, tenant apps, end users | public REST/OIDC and admin REST/RPC | shipped | Shared multi-tenant backend deployment. |
+| `tba_auth` identity deployment | backend app | platform, tenants, tenant apps, end users | public REST/OIDC and admin REST/RPC | shipped | Shared multi-tenant backend deployment. |
 | `admin-uix` | frontend app / UIX | platform admins, tenant admins | `/admin/*` and `/rpc` | shipped | Currently combines platform-admin and tenant-admin responsibilities. |
 | `public-uix` | frontend app / UIX | tenant human users | public REST/OIDC | shipped | Covers login, registration, consent, callback, logout, and profile flows. |
-| `@tigrbl-auth/rp` | browser client package | browser application developers | public REST/OIDC | shipped | Browser-safe RP SDK, not an operator console. |
-| `tigrbl-auth-protocol-rp` | Python client package | backend application developers | public REST/OIDC | shipped | Server-side RP helper library, not a deployable portal. |
-| `tigrbl-authz-resource-server` | API integration package | protected API developers | JWKS and introspection | shipped | Validation helper for downstream protected APIs. |
+| `@tba/client-oidc-relying-party` | browser client package | browser application developers | public REST/OIDC | shipped | Browser-safe RP SDK, not an operator console. |
+| `tba-protocol-oidc-relying-party` | Python client package | backend application developers | public REST/OIDC | shipped | Server-side RP helper library, not a deployable portal. |
+| `tba-protocol-authorization-resource-server` | API integration package | protected API developers | JWKS and introspection | shipped | Validation helper for downstream protected APIs. |
 | `acme-notes-cli` | example client app | CLI users / integrators | device authorization and token | shipped example | Example consumer, not a platform control-plane app. |
 
 ## Target app composition matrix
 
 | Target app | Kind | Primary users | Backend lane | Why it should exist | Current status |
 |---|---|---|---|---|---|
-| `tigrbl-auth-idp` | backend app | all external surfaces | public REST/OIDC and admin REST/RPC | Shared multi-tenant identity provider and control plane. | exists today as `tigrbl_auth` deployment |
-| `tigrbl-auth-public-portal` | frontend app / UIX | tenant human users | public REST/OIDC | End-user login and consent should stay separate from admin operations. | exists today as `public-uix` |
-| `tigrbl-auth-platform-admin-console` | frontend app / UIX | platform superusers | admin REST/RPC | Platform-wide tenant creation and authority assignment need their own surface. | folded into `admin-uix` today |
-| `tigrbl-auth-tenant-admin-console` | frontend app / UIX | tenant admins | admin REST/RPC | Tenant-scoped identity, key, and app administration should be isolated from platform actions. | folded into `admin-uix` today |
-| `tigrbl-auth-developer-portal` | frontend app / UIX | tenant app developers | public registration plus admin/client control plane | App/client registration and integration settings are a distinct workflow from user admin. | backend support exists; UIX not fully shipped |
-| `tigrbl-auth-service-admin-surface` | app or focused UIX | workload and service operators | admin/control plane plus token surfaces | Machine identities, service keys, workload identities, and automation posture are distinct from human admin UX. | partial backend capability; no dedicated shipped UIX |
+| `tba-auth-idp` | backend app | all external surfaces | public REST/OIDC and admin REST/RPC | Shared multi-tenant identity provider and control plane. | exists today as `tba_auth` deployment |
+| `tba-auth-public-portal` | frontend app / UIX | tenant human users | public REST/OIDC | End-user login and consent should stay separate from admin operations. | exists today as `public-uix` |
+| `tba-auth-platform-admin-console` | frontend app / UIX | platform superusers | admin REST/RPC | Platform-wide tenant creation and authority assignment need their own surface. | folded into `admin-uix` today |
+| `tba-auth-tenant-admin-console` | frontend app / UIX | tenant admins | admin REST/RPC | Tenant-scoped identity, key, and app administration should be isolated from platform actions. | folded into `admin-uix` today |
+| `tba-auth-developer-portal` | frontend app / UIX | tenant app developers | public registration plus admin/client control plane | App/client registration and integration settings are a distinct workflow from user admin. | backend support exists; UIX not fully shipped |
+| `tba-auth-service-admin-surface` | app or focused UIX | workload and service operators | admin/control plane plus token surfaces | Machine identities, service keys, workload identities, and automation posture are distinct from human admin UX. | partial backend capability; no dedicated shipped UIX |
 
 ## Current UIX matrix
 
@@ -68,9 +68,9 @@ In the current checkout, the backend is shared and multi-tenant, `public-uix` is
 | Manage tenant JWKS | tenant admin | admin RPC plus public tenant discovery parity | tenant admin console | `tenant-admin-uix` | currently done in `admin-uix` |
 | Human user login | tenant human user | public REST/OIDC | public portal | `public-uix` | already aligned |
 | CLI device login | CLI user | device authorization and token | consumer CLI | not a UIX | example exists as `acme-notes-cli` |
-| Browser app login integration | tenant app developer | authorize and token | browser app using RP SDK | not a UIX | package exists as `@tigrbl-auth/rp` |
-| Backend app login integration | backend app developer | discovery, authorize, token, userinfo | backend app using RP helpers | not a UIX | package exists as `tigrbl-auth-protocol-rp` |
-| Protected API token validation | API developer | JWKS and introspection | protected API using verifier package | not a UIX | package exists as `tigrbl-authz-resource-server` |
+| Browser app login integration | tenant app developer | authorize and token | browser app using RP SDK | not a UIX | package exists as `@tba/client-oidc-relying-party` |
+| Backend app login integration | backend app developer | discovery, authorize, token, userinfo | backend app using RP helpers | not a UIX | package exists as `tba-protocol-oidc-relying-party` |
+| Protected API token validation | API developer | JWKS and introspection | protected API using verifier package | not a UIX | package exists as `tba-protocol-authorization-resource-server` |
 | Register OIDC application | tenant developer or tenant admin | `/register` or client control plane | developer portal | `developer-uix` | backend supported; shipped UIX incomplete |
 | Rotate client credentials or metadata | tenant developer or tenant admin | client control plane | developer portal | `developer-uix` | backend/client component exists; not fully exposed in shipped admin nav |
 | Manage machine identities | service operator | token, service-key, operator plane | service admin surface | `service-admin-uix` | partial backend support; no dedicated UIX |
@@ -79,9 +79,9 @@ In the current checkout, the backend is shared and multi-tenant, `public-uix` is
 
 | Composition level | Include | Result |
 |---|---|---|
-| Minimum deployable | `tigrbl_auth` backend + `public-uix` + `admin-uix` | Works today, but admin responsibilities are overloaded. |
-| Recommended near-term split | `tigrbl_auth` backend + `public-uix` + `platform-admin-uix` + `tenant-admin-uix` | Clean separation between deployment-wide and tenant-scoped administration. |
-| Recommended product split | `tigrbl_auth` backend + `public-uix` + `platform-admin-uix` + `tenant-admin-uix` + `developer-uix` | Adds a proper self-service application registration surface. |
+| Minimum deployable | `tba_auth` backend + `public-uix` + `admin-uix` | Works today, but admin responsibilities are overloaded. |
+| Recommended near-term split | `tba_auth` backend + `public-uix` + `platform-admin-uix` + `tenant-admin-uix` | Clean separation between deployment-wide and tenant-scoped administration. |
+| Recommended product split | `tba_auth` backend + `public-uix` + `platform-admin-uix` + `tenant-admin-uix` + `developer-uix` | Adds a proper self-service application registration surface. |
 | Full role-complete split | previous set + `service-admin-uix` | Adds a dedicated non-human identity and workload-operator surface. |
 
 ## Honest gap matrix
@@ -97,12 +97,12 @@ In the current checkout, the backend is shared and multi-tenant, `public-uix` is
 
 ### Apps
 
-- `tigrbl-auth-idp`
-- `tigrbl-auth-public-portal`
-- `tigrbl-auth-platform-admin-console`
-- `tigrbl-auth-tenant-admin-console`
-- `tigrbl-auth-developer-portal`
-- `tigrbl-auth-service-admin-surface` optional
+- `tba-auth-idp`
+- `tba-auth-public-portal`
+- `tba-auth-platform-admin-console`
+- `tba-auth-tenant-admin-console`
+- `tba-auth-developer-portal`
+- `tba-auth-service-admin-surface` optional
 
 ### UIXs
 

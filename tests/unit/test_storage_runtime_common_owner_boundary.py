@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 def test_layer30_common_adapter_is_removed() -> None:
     assert (
-        importlib.util.find_spec("tigrbl_identity_storage_runtime.ops.common") is None
+        importlib.util.find_spec("tba_runtime_identity_storage.ops.common") is None
     )
     assert callable(create_table_record)
     assert callable(list_table_records)
@@ -20,11 +20,11 @@ def test_layer30_common_adapter_is_removed() -> None:
 
 def test_runtime_and_server_do_not_import_layer01_private_ops() -> None:
     roots = (
-        ROOT / "pkgs" / "30-storage-runtime" / "tigrbl-identity-storage-runtime",
-        ROOT / "pkgs" / "60-runtime" / "tigrbl-identity-server",
+        ROOT / "pkgs" / "30-storage-runtime" / "tba-runtime-identity-storage",
+        ROOT / "pkgs" / "60-runtime" / "tba-server-identity",
     )
     offenders = []
-    forbidden = "tigrbl_identity_storage.tables._ops"
+    forbidden = "tba_storage_core.tables._ops"
     for root in roots:
         for path in root.rglob("*.py"):
             if forbidden in path.read_text(encoding="utf-8"):

@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from tigrbl_auth.cli.reports import validate_openapi_contract
+from tba_auth.cli.reports import validate_openapi_contract
 
 
 def main() -> int:

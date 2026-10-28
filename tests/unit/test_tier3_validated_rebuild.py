@@ -10,9 +10,9 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from scripts.collect_validated_artifact_downloads import collect_validated_artifact_downloads
-from tigrbl_auth.cli.certification_evidence import runtime_identity
-from tigrbl_auth.cli.reports import load_validated_execution_status
-from tigrbl_auth.cli.runtime import write_runtime_profile_report
+from tba_auth.cli.certification_evidence import runtime_identity
+from tba_auth.cli.reports import load_validated_execution_status
+from tba_auth.cli.runtime import write_runtime_profile_report
 
 
 def _write_json(path: Path, payload: dict) -> None:
@@ -23,7 +23,7 @@ def _write_json(path: Path, payload: dict) -> None:
 def _copy_support_files(dst_root: Path) -> None:
     for rel in [
         "pyproject.toml",
-        "pkgs/60-runtime/tigrbl-identity-runtime/pyproject.toml",
+        "pkgs/60-runtime/tba-runtime-identity/pyproject.toml",
         "uv.lock",
         "tox.ini",
         ".github/workflows/ci-install-profiles.yml",

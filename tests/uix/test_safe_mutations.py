@@ -1,4 +1,4 @@
-from tigrbl_auth.uix import SAFE_MUTATION_METHODS, SafeMutationRequest, execute_safe_mutation
+from tba_auth.uix import SAFE_MUTATION_METHODS, SafeMutationRequest, execute_safe_mutation
 
 
 def test_safe_mutations_require_confirmation_before_execution():

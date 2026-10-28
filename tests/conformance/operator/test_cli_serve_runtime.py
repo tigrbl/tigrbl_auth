@@ -8,7 +8,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from tigrbl_auth.cli.main import main
+from tba_auth.cli.main import main
 
 
 def _invoke_json(argv: list[str]) -> tuple[int, dict[str, object]]:
@@ -60,14 +60,14 @@ def test_cli_serve_check_reports_runner_readiness_in_current_environment() -> No
 
 @pytest.mark.conformance
 def test_cli_serve_live_path_writes_runtime_evidence_when_profile_is_ready(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
-    from tigrbl_identity_cli.cli.handlers import HANDLER_MAP
+    from tba_cli_identity.cli.handlers import HANDLER_MAP
 
     serve_globals = HANDLER_MAP["serve"].__globals__
     startup_records: dict[str, object] = {}
 
     def fake_profile_report(*args, **kwargs):
         return {
-            "application_probe": {"passed": True, "app_factory": "tigrbl_auth_backend_app_core.app.build_app", "message": "ok"},
+            "application_probe": {"passed": True, "app_factory": "tba_app_backend_core.app.build_app", "message": "ok"},
             "summary": {"runner_count": 3, "ready_count": 1, "missing_count": 0, "invalid_count": 0},
             "profiles": [
                 {"name": "uvicorn", "status": "ready", "installed": True, "available_module": "uvicorn", "diagnostics": [], "application_hash": "a", "runtime_hash": "b"},
@@ -75,7 +75,7 @@ def test_cli_serve_live_path_writes_runtime_evidence_when_profile_is_ready(monke
         }
 
     def fake_probe_application_factory(*, deployment):
-        return SimpleNamespace(passed=True, to_manifest=lambda: {"passed": True, "app_factory": "tigrbl_auth_backend_app_core.app.build_app", "message": "ok"}), object()
+        return SimpleNamespace(passed=True, to_manifest=lambda: {"passed": True, "app_factory": "tba_app_backend_core.app.build_app", "message": "ok"}), object()
 
     def fake_launch_runtime_profile(repo_root, *, app, plan, adapter, startup_payload, evidence_paths=None):
         paths = evidence_paths or serve_globals["runtime_evidence_paths"](repo_root, plan.runner)

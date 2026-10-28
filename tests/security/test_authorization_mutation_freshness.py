@@ -1,15 +1,15 @@
 import pytest
 
-from tigrbl_auth.security.certification import (
+from tba_auth.security.certification import (
     AuthorizationSnapshot,
     AuthorizationState,
     CertificationError,
     assert_authorization_fresh,
 )
-from tigrbl_auth_protocol_oauth.standards.introspection import (
+from tba_protocol_oauth.standards.introspection import (
     RFC7662IntrospectionService,
 )
-from tigrbl_token_introspection_capability import TokenIntrospectionCapability
+from tba_capability_token_introspection import TokenIntrospectionCapability
 
 
 def test_authorization_mutation_t0_contract_exports_versioned_state() -> None:

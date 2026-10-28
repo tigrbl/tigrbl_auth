@@ -172,7 +172,7 @@ def main() -> int:
             for profile in ('baseline', 'production', 'hardening')
         }
         openrpc_artifacts_present = {
-            profile: bool((ROOT / 'specs' / 'openrpc' / 'profiles' / profile / 'tigrbl_auth.admin.openrpc.json').exists())
+            profile: bool((ROOT / 'specs' / 'openrpc' / 'profiles' / profile / 'tba_auth.admin.openrpc.json').exists())
             for profile in ('baseline', 'production', 'hardening')
         }
         row = {

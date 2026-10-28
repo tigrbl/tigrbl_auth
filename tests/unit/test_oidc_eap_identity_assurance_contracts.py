@@ -1,12 +1,12 @@
 import pytest
 
-from tigrbl_authentication_assurance_bases import (
+from tba_bases_authentication_assurance import (
     AuthenticationContextEvaluatorBase,
     IdentityAssuranceClaimsProviderBase,
     VerifiedClaimsValidatorBase,
 )
-from tigrbl_identity_contracts.assurance import VerifiedClaimsRequest
-from tigrbl_identity_contracts.oidc import (
+from tba_contracts_identity.assurance import VerifiedClaimsRequest
+from tba_contracts_identity.oidc import (
     IDENTITY_ASSURANCE_CLAIM_NAMES,
     AuthenticatorEvidence,
     EapAcrEvaluationRequest,

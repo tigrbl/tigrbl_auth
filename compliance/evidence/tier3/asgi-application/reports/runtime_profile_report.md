@@ -26,7 +26,7 @@
 
 ## Application Probe
 
-- App factory: `tigrbl_auth.api.app.build_app`
+- App factory: `tba_auth.api.app.build_app`
 - Message: Application factory materialized successfully with 6 active routes and 24 active targets.
 
 ## Surface Probe

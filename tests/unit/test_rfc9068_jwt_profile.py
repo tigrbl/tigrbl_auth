@@ -10,10 +10,10 @@ import pytest
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ed25519
 
-from tigrbl_auth import runtime_cfg
-from tigrbl_auth.errors import InvalidTokenError
-from tigrbl_auth.jwtoken import JWTCoder
-from tigrbl_auth_protocol_oauth.standards.jwt_access_tokens import (
+from tba_auth import runtime_cfg
+from tba_auth.errors import InvalidTokenError
+from tba_auth.jwtoken import JWTCoder
+from tba_protocol_oauth.standards.jwt_access_tokens import (
     add_jwt_access_token_claims,
     validate_jwt_access_token_claims,
 )

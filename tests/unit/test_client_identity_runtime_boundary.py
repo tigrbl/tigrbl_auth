@@ -5,8 +5,8 @@ import uuid
 import pytest
 
 from tigrbl import create_table_record
-from tigrbl_identity_storage.tables import Client, User
-from tigrbl_identity_storage_runtime import (
+from tba_storage_core.tables import Client, User
+from tba_runtime_identity_storage import (
     ClientRuntimeSpec,
     UserRuntimeSpec,
     disable_client,

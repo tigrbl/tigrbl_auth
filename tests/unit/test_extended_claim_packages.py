@@ -2,26 +2,26 @@ import importlib
 
 import pytest
 
-from tigrbl_attestation_protocol_eat import EAT_CLAIM_CLASSES
-from tigrbl_auth_protocol_oauth import (
+from tba_protocol_attestation_eat import EAT_CLAIM_CLASSES
+from tba_protocol_oauth import (
     OAUTH_DPOP_PROOF_CLAIMS,
     OAUTH_TOKEN_EXCHANGE_CLAIMS,
     compose_dpop_proof_claim_set,
     compose_token_exchange_claim_set,
 )
-from tigrbl_identity_claims_bases import ClaimBase
+from tba_bases_identity_claims import ClaimBase
 
 
 PACKAGES = {
-    "tigrbl_claim_http_method_concrete": "HttpMethodClaim",
-    "tigrbl_claim_http_uri_concrete": "HttpUriClaim",
-    "tigrbl_claim_access_token_digest_concrete": "AccessTokenDigestClaim",
-    "tigrbl_claim_sd_hash_concrete": "SdHashClaim",
-    "tigrbl_claim_eat_nonce_concrete": "EatNonceClaim",
-    "tigrbl_claim_ueid_concrete": "UeidClaim",
-    "tigrbl_claim_eat_submodules_concrete": "EatSubmodulesClaim",
-    "tigrbl_claim_actor_concrete": "ActorClaim",
-    "tigrbl_claim_may_act_concrete": "MayActClaim",
+    "tba_concrete_claim_http_method": "HttpMethodClaim",
+    "tba_concrete_claim_http_uri": "HttpUriClaim",
+    "tba_concrete_claim_access_token_digest": "AccessTokenDigestClaim",
+    "tba_concrete_claim_sd_hash": "SdHashClaim",
+    "tba_concrete_claim_eat_nonce": "EatNonceClaim",
+    "tba_concrete_claim_ueid": "UeidClaim",
+    "tba_concrete_claim_eat_submodules": "EatSubmodulesClaim",
+    "tba_concrete_claim_actor": "ActorClaim",
+    "tba_concrete_claim_may_act": "MayActClaim",
 }
 
 
@@ -55,8 +55,8 @@ def test_protocols_compose_extended_claim_families():
 
 
 def test_extended_protocol_claim_sets_are_explicitly_versioned():
-    from tigrbl_claim_actor_concrete import ActorClaim
-    from tigrbl_claim_http_method_concrete import HttpMethodClaim
+    from tba_concrete_claim_actor import ActorClaim
+    from tba_concrete_claim_http_method import HttpMethodClaim
 
     assert compose_dpop_proof_claim_set(HttpMethodClaim("POST")).version == "RFC9449"
     assert (
@@ -70,14 +70,14 @@ def test_extended_protocol_claim_sets_are_explicitly_versioned():
 @pytest.mark.parametrize(
     ("module", "class_name", "bad_value"),
     [
-        ("tigrbl_claim_http_method_concrete", "HttpMethodClaim", "post"),
-        ("tigrbl_claim_http_uri_concrete", "HttpUriClaim", "/token"),
-        ("tigrbl_claim_access_token_digest_concrete", "AccessTokenDigestClaim", ""),
-        ("tigrbl_claim_eat_nonce_concrete", "EatNonceClaim", []),
-        ("tigrbl_claim_ueid_concrete", "UeidClaim", 3),
-        ("tigrbl_claim_eat_submodules_concrete", "EatSubmodulesClaim", []),
-        ("tigrbl_claim_actor_concrete", "ActorClaim", {}),
-        ("tigrbl_claim_may_act_concrete", "MayActClaim", {}),
+        ("tba_concrete_claim_http_method", "HttpMethodClaim", "post"),
+        ("tba_concrete_claim_http_uri", "HttpUriClaim", "/token"),
+        ("tba_concrete_claim_access_token_digest", "AccessTokenDigestClaim", ""),
+        ("tba_concrete_claim_eat_nonce", "EatNonceClaim", []),
+        ("tba_concrete_claim_ueid", "UeidClaim", 3),
+        ("tba_concrete_claim_eat_submodules", "EatSubmodulesClaim", []),
+        ("tba_concrete_claim_actor", "ActorClaim", {}),
+        ("tba_concrete_claim_may_act", "MayActClaim", {}),
     ],
 )
 def test_extended_claims_reject_invalid_shapes(module, class_name, bad_value):

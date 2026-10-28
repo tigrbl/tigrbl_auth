@@ -1,6 +1,6 @@
-from tigrbl_protected_envelope_contracts import EnvelopeVerificationResult, VerificationKeyRequest, VerificationKeyResult
-from tigrbl_identity_document_contracts import IdentityDocumentVerificationResult
-from tigrbl_proof_of_possession_contracts import PossessionProofVerificationResult
+from tba_contracts_protected_envelope import EnvelopeVerificationResult, VerificationKeyRequest, VerificationKeyResult
+from tba_contracts_identity_document import IdentityDocumentVerificationResult
+from tba_contracts_proof_of_possession import PossessionProofVerificationResult
 
 def test_verification_results_distinguish_security_dimensions() -> None:
     result = EnvelopeVerificationResult(True, structural_valid=True, cryptographic_valid=True, key_resolved=True, issuer_trusted=True, profile_valid=True)

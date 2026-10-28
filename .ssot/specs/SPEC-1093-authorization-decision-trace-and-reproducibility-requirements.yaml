@@ -21,7 +21,7 @@ body: |-
   ## Overview
   
   This specification defines reproducible pre-token authorization decision
-  artifacts for `tigrbl_auth`.
+  artifacts for `tba_auth`.
   
   ## Decision Source
   

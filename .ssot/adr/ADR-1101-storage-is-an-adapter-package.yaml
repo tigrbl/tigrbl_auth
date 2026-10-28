@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "Create `tigrbl-identity-storage` as the canonical table, migration, repository helper, and table-owned operation package. SQLAlchemy/Tigrbl tables are the default implementation substrate, but the tracked package boundary is storage-owned persistence behavior."
+summary: "Create `tba-storage-core` as the canonical table, migration, repository helper, and table-owned operation package. SQLAlchemy/Tigrbl tables are the default implementation substrate, but the tracked package boundary is storage-owned persistence behavior."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -18,7 +18,7 @@ status_notes:
     status: "accepted"
   -
     at: "2026-05-27T16:58:17Z"
-    note: "Clarified by adr:1121: the storage adapter boundary includes canonical table, ORM, migration, engine, and persistence symbol ownership; tigrbl_auth surfaces are compatibility facades."
+    note: "Clarified by adr:1121: the storage adapter boundary includes canonical table, ORM, migration, engine, and persistence symbol ownership; tba_auth surfaces are compatibility facades."
     status: "accepted"
   -
     status: "accepted"
@@ -32,7 +32,7 @@ references: []
 body: |-
   ## Decision
   
-  Create `tigrbl-identity-storage` as the canonical table, migration, repository helper, and table-owned operation package. SQLAlchemy/Tigrbl tables are the default implementation substrate, but the tracked package boundary is storage-owned persistence behavior.
+  Create `tba-storage-core` as the canonical table, migration, repository helper, and table-owned operation package. SQLAlchemy/Tigrbl tables are the default implementation substrate, but the tracked package boundary is storage-owned persistence behavior.
   
   It owns:
   

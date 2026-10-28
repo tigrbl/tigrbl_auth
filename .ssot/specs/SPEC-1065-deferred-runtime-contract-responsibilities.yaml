@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification defines runtime contract responsibilities that `tigrbl_auth` MUST defer upstream to `tigrbl`."
+summary: "This specification defines runtime contract responsibilities that `tba_auth` MUST defer upstream to `tigrbl`."
 supersedes: []
 superseded_by: []
 status_notes: []
@@ -16,22 +16,22 @@ references: []
 body: |-
   ## Overview
   
-  This specification defines runtime contract responsibilities that `tigrbl_auth` MUST defer upstream to `tigrbl`.
+  This specification defines runtime contract responsibilities that `tba_auth` MUST defer upstream to `tigrbl`.
   
   Decision source: `adr:1045`.
   
   ## Scope
   
-  This specification applies to runtime wrapper and gateway modules in `tigrbl_auth`, including:
+  This specification applies to runtime wrapper and gateway modules in `tba_auth`, including:
   
-  - `tigrbl_auth/api/app.py`,
-  - `tigrbl_auth/security/admin_gate.py`,
+  - `tba_auth/api/app.py`,
+  - `tba_auth/security/admin_gate.py`,
   - live `/openapi.json` responses,
   - live `/openrpc.json` responses.
   
   ## Deferred Responsibilities
   
-  `tigrbl_auth` MUST defer the following runtime responsibilities to `tigrbl`:
+  `tba_auth` MUST defer the following runtime responsibilities to `tigrbl`:
   
   - generation of the live OpenAPI payload,
   - generation of the live OpenRPC payload,
@@ -40,7 +40,7 @@ body: |-
   
   ## Wrapper Constraints
   
-  Wrapper modules in `tigrbl_auth` MUST:
+  Wrapper modules in `tba_auth` MUST:
   
   - forward live `/openapi.json` responses without payload mutation,
   - forward live `/openrpc.json` responses without payload mutation,
@@ -49,7 +49,7 @@ body: |-
   
   ## Allowed Responsibilities
   
-  `tigrbl_auth` MAY still:
+  `tba_auth` MAY still:
   
   - protect non-contract admin and RPC business endpoints with access control,
   - generate and validate governed contract artifacts through non-runtime builder surfaces,

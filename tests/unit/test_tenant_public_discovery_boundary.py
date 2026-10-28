@@ -16,20 +16,20 @@ for src in sorted((ROOT / "pkgs").glob("**/src"), reverse=True):
         sys.path.remove(value)
     sys.path.insert(0, value)
 
-import tigrbl_identity_principals as principals  # noqa: E402
+import tba_concrete_identity_principals as principals  # noqa: E402
 
-from tigrbl_auth_backend_app_core import build_app  # noqa: E402
-from tigrbl_auth.cli.artifacts import build_openapi_contract, deployment_from_options, write_discovery_artifacts  # noqa: E402
-from tigrbl_identity_storage_runtime.operator_store import OperationContext  # noqa: E402
-from tigrbl_identity_storage_runtime.resource_service import create_resource, generate_key_record, publish_jwks_document  # noqa: E402
-from tigrbl_auth_protocol_oidc.tenant_discovery import (  # noqa: E402
+from tba_app_backend_core import build_app  # noqa: E402
+from tba_auth.cli.artifacts import build_openapi_contract, deployment_from_options, write_discovery_artifacts  # noqa: E402
+from tba_runtime_identity_storage.operator_store import OperationContext  # noqa: E402
+from tba_runtime_identity_storage.resource_service import create_resource, generate_key_record, publish_jwks_document  # noqa: E402
+from tba_protocol_oidc.tenant_discovery import (  # noqa: E402
     TENANT_JWKS_PATH,
     TENANT_OPENID_CONFIGURATION_PATH,
     require_tenant_issuer,
     resolve_tenant_trust_domain_authority,
     tenant_issuer,
 )
-from tigrbl_identity_storage_runtime.tenant_state import enabled_tenant_record  # noqa: E402
+from tba_runtime_identity_storage.tenant_state import enabled_tenant_record  # noqa: E402
 
 
 ROOT_ISSUER = "https://id.example.com"
@@ -181,7 +181,7 @@ def test_tenant_public_discovery_boundary_t0_inventory_tracks_all_features():
 
 @pytest.mark.asyncio
 async def test_tenant_public_discovery_boundary_t1_composes_runtime_contracts(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
-    monkeypatch.setenv("TIGRBL_AUTH_OPERATOR_STATE_DIR", str(tmp_path / ".operator-state"))
+    monkeypatch.setenv("TBA_AUTH_OPERATOR_STATE_DIR", str(tmp_path / ".operator-state"))
     monkeypatch.chdir(tmp_path)
     await asyncio.to_thread(_seed_operator_records, tmp_path)
     deployment = _deployment()
@@ -207,7 +207,7 @@ async def test_tenant_public_discovery_boundary_t1_composes_runtime_contracts(tm
     assert jwks.status_code == 200
     assert discovery_payload["issuer"] == tenant_issuer(ROOT_ISSUER, TENANT_A)
     assert discovery_payload["jwks_uri"] == f"{ROOT_ISSUER}/tenants/{TENANT_A}/.well-known/jwks.json"
-    assert discovery_payload["tigrbl_auth_subject_namespace"] == f"{TENANT_A}:subjects"
+    assert discovery_payload["tba_auth_subject_namespace"] == f"{TENANT_A}:subjects"
     assert authority.accepted_issuers == (discovery_payload["issuer"],)
     assert jwks_payload == operator_payload
     assert {"kid-a-active", "kid-a-next"} <= kids
@@ -222,7 +222,7 @@ async def test_tenant_public_discovery_boundary_t2_fails_closed_for_disabled_pol
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ):
-    monkeypatch.setenv("TIGRBL_AUTH_OPERATOR_STATE_DIR", str(tmp_path / ".operator-state"))
+    monkeypatch.setenv("TBA_AUTH_OPERATOR_STATE_DIR", str(tmp_path / ".operator-state"))
     monkeypatch.chdir(tmp_path)
     await asyncio.to_thread(_seed_operator_records, tmp_path)
 

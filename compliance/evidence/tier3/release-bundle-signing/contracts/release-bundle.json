@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "package": "tigrbl_auth",
+  "package": "tba_auth",
   "version": "0.3.4",
   "profile": "baseline",
   "artifact_selection": "all",
@@ -304,7 +304,7 @@
     "operator_plane_repo_mutation_dependency": false,
     "operator_plane_tenancy_enforced": true,
     "operator_plane_database_present": false,
-    "operator_plane_state_root": "<repo>\\.pytest-tmp\\operator-plane-state481\\tigrbl_auth-9a06a2e3bfb81899",
+    "operator_plane_state_root": "<repo>\\.pytest-tmp\\operator-plane-state481\\tba_auth-9a06a2e3bfb81899",
     "operator_plane_portability_schema_version": 3,
     "pyproject_requires_python": ">=3.10,<3.13",
     "serve_runtime_launcher_present": true,
@@ -522,7 +522,7 @@
     "changed_paths": [
       ".ssot/registry.json",
       ".ssot/reports/security/secure-default-admin-gate-runtime-contract-tests.passed.json",
-      ".ssot/reports/security/upstream-tigrbl-abstractions-dependency-compatibility.passed.json",
+      ".ssot/reports/security/upstream-tba-abstractions-dependency-compatibility.passed.json",
       ".ssot/reports/validation.report.json",
       ".ssot/specs/SPEC-1051-dependency-compatibility-maintenance.yaml",
       ".ssot/specs/SPEC-1052-ssot-document-authority.yaml",
@@ -546,8 +546,8 @@
       "compliance/evidence/tier3/asgi-application/contracts/oauth-authorization-server.json",
       "compliance/evidence/tier3/asgi-application/contracts/openid-configuration.json",
       "compliance/evidence/tier3/asgi-application/contracts/runtime_profile_report.json",
-      "compliance/evidence/tier3/asgi-application/contracts/tigrbl_auth.admin.openrpc.json",
-      "compliance/evidence/tier3/asgi-application/contracts/tigrbl_auth.public.openapi.json",
+      "compliance/evidence/tier3/asgi-application/contracts/tba_auth.admin.openrpc.json",
+      "compliance/evidence/tier3/asgi-application/contracts/tba_auth.public.openapi.json",
       "compliance/evidence/tier3/asgi-application/environment.yaml",
       "compliance/evidence/tier3/asgi-application/execution.log",
       "compliance/evidence/tier3/asgi-application/hashes.yaml",
@@ -598,7 +598,7 @@
       "compliance/evidence/tier3/cli-operator-surface/README.md",
       "compliance/evidence/tier3/cli-operator-surface/contracts/CLI_SURFACE.md",
       "compliance/evidence/tier3/cli-operator-surface/contracts/cli_contract.json",
-      "compliance/evidence/tier3/cli-operator-surface/contracts/tigrbl_auth.admin.openrpc.json",
+      "compliance/evidence/tier3/cli-operator-surface/contracts/tba_auth.admin.openrpc.json",
       "compliance/evidence/tier3/cli-operator-surface/environment.yaml",
       "compliance/evidence/tier3/cli-operator-surface/execution.log",
       "compliance/evidence/tier3/cli-operator-surface/hashes.yaml",
@@ -628,7 +628,7 @@
       "compliance/evidence/tier3/contracts/openapi/docs/compliance/current_state_report.md",
       "compliance/evidence/tier3/contracts/openapi/reports/current_state_report.json",
       "compliance/evidence/tier3/contracts/openapi/reports/current_state_report.md",
-      "compliance/evidence/tier3/contracts/openrpc/contracts/tigrbl_auth.admin.openrpc.json",
+      "compliance/evidence/tier3/contracts/openrpc/contracts/tba_auth.admin.openrpc.json",
       "compliance/evidence/tier3/contracts/openrpc/docs/compliance/current_state_report.json",
       "compliance/evidence/tier3/contracts/openrpc/docs/compliance/current_state_report.md",
       "compliance/evidence/tier3/contracts/openrpc/reports/current_state_report.json",
@@ -734,12 +734,12 @@
       "sha256": "35e51fcf3dab9b4062fc127f6b482288349d0fd27abff4f80161f179702786e3"
     },
     {
-      "path": "specs\\openapi\\profiles\\baseline\\tigrbl_auth.public.openapi.json",
+      "path": "specs\\openapi\\profiles\\baseline\\tba_auth.public.openapi.json",
       "present": true,
       "sha256": "3fe2bfe0bbae99ea6654e3813346c295be04832dc01d58e259f13ba7abc951be"
     },
     {
-      "path": "specs\\openrpc\\profiles\\baseline\\tigrbl_auth.admin.openrpc.json",
+      "path": "specs\\openrpc\\profiles\\baseline\\tba_auth.admin.openrpc.json",
       "present": true,
       "sha256": "f1148f03f77f9df2538ccdecfc6879011ae5b1f5e9377458e28c1369b4e3c0cf"
     },

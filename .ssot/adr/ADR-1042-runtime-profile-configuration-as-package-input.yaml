@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "`tigrbl_auth` shall maintain human-readable runtime profile configuration files as packaged repository inputs under `tigrbl_auth/profiles/*.yaml`, and live runtime handling shall bind issuer-bearing artifacts and enabled routes to the resolved deployment they produce."
+summary: "`tba_auth` shall maintain human-readable runtime profile configuration files as packaged repository inputs under `tba_auth/profiles/*.yaml`, and live runtime handling shall bind issuer-bearing artifacts and enabled routes to the resolved deployment they produce."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -24,8 +24,8 @@ references: []
 body: |-
   ## Decision
   
-  `tigrbl_auth` shall maintain human-readable runtime profile configuration files
-  as packaged repository inputs under `tigrbl_auth/profiles/*.yaml`.
+  `tba_auth` shall maintain human-readable runtime profile configuration files
+  as packaged repository inputs under `tba_auth/profiles/*.yaml`.
   
   These files are executable product configuration. The deployment/profile
   resolver shall load and validate them, compose them with environment and CLI
@@ -37,7 +37,7 @@ body: |-
   SSOT profile entities remain the governance truth for profile lifecycle,
   feature links, claim targets, test links, evidence, and release readiness.
   Runtime profile files are the package-level input truth for how
-  `tigrbl_auth` configures itself at startup. Generated compliance documents,
+  `tba_auth` configures itself at startup. Generated compliance documents,
   generated profile catalogs, and release reports remain projections and may not
   redefine either SSOT governance truth or executable runtime behavior.
   
@@ -66,7 +66,7 @@ body: |-
   
   - `.ssot/` defines governed intent, lifecycle state, release claims, and
     evidence.
-  - `tigrbl_auth/profiles/*.yaml` defines packaged runtime configuration that
+  - `tba_auth/profiles/*.yaml` defines packaged runtime configuration that
     the product can actually ingest.
   - generated compliance and contract artifacts project the active state for
     consumers and audits.

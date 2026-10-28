@@ -3,12 +3,12 @@ from __future__ import annotations
 import asyncio
 from types import SimpleNamespace
 
-from tigrbl_identity_storage.tables import (
+from tba_storage_core.tables import (
     AttestationEndorsement,
     AttestationReferenceManifest,
     AttestationReferenceValue,
 )
-from tigrbl_identity_storage_runtime import publish_reference_material
+from tba_runtime_identity_storage import publish_reference_material
 
 
 def test_corim_reference_material_uses_one_table_transaction_context(

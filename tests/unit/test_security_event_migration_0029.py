@@ -2,7 +2,7 @@ import importlib
 from sqlalchemy import create_engine, inspect
 
 MIGRATION = importlib.import_module(
-    "tigrbl_identity_storage.migrations.versions.0029_security_event_delivery"
+    "tba_storage_core.migrations.versions.0029_security_event_delivery"
 )
 
 

@@ -1,4 +1,4 @@
-from tigrbl_auth.cli.artifacts import build_openapi_contract, deployment_from_options
+from tba_auth.cli.artifacts import build_openapi_contract, deployment_from_options
 
 
 def test_production_contract_exposes_capability_public_routes():

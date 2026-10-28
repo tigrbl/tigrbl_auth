@@ -4,25 +4,25 @@ Research date: 2026-05-28
 
 MFA is not just a one-time-password check. A complete MFA product includes factor enrollment, challenge and verification, step-up policy, recovery, revocation, phishing-resistant authenticators, tenant/app policy, audit, UI, admin support, and token/session expression through `acr` and `amr`.
 
-For `tigrbl_auth`, MFA should be treated as an advanced authentication product lane that spans:
+For `tba_auth`, MFA should be treated as an advanced authentication product lane that spans:
 
-- `tigrbl-credentials` for factor credential material and proof verification.
-- `tigrbl-authz-policy` for when MFA is required, optional, remembered, bypassed, or stepped up.
-- `tigrbl-auth-protocol-oidc` and `tigrbl-identity-jose` for `acr` and `amr` expression in ID/access tokens.
-- `tigrbl-auth-backend-app-public` for user-facing enrollment/challenge/recovery flows.
-- `tigrbl-auth-backend-app-tenant-admin` for tenant MFA policy and user factor reset.
-- `@tigrbl-auth/public-uix` for hosted login, enrollment, challenge, recovery, and profile factor management.
+- `tba-credentials` for factor credential material and proof verification.
+- `tba-runtime-authorization-policy` for when MFA is required, optional, remembered, bypassed, or stepped up.
+- `tba-protocol-oidc` and `tba-provider-identity-jose` for `acr` and `amr` expression in ID/access tokens.
+- `tba-app-backend-public` for user-facing enrollment/challenge/recovery flows.
+- `tba-app-backend-tenant-admin` for tenant MFA policy and user factor reset.
+- `@tba/ui-public` for hosted login, enrollment, challenge, recovery, and profile factor management.
 
-## Current `tigrbl_auth` State
+## Current `tba_auth` State
 
 | Area | Current state | Evidence | Interpretation |
 | --- | --- | --- | --- |
 | Governance | MFA is governed by advanced-authentication SSOT, but current implementation status is explicitly less than implemented. | [SPEC-1067](../.ssot/specs/SPEC-1067-advanced-authentication-and-adaptive-auth-requirements.yaml) | Do not claim production MFA support yet. |
-| Credential primitive | `tigrbl-credentials` has `CredentialKind.MFA_FACTOR`, `create_mfa_factor_credential`, credential verification, lifecycle, rotation, revocation, and audit primitives. | [`lifecycle.py`](../pkgs/70-facade/tigrbl-credentials/src/tigrbl_credentials/lifecycle.py), [`test_credentials_lifecycle_boundary.py`](../tests/unit/test_credentials_lifecycle_boundary.py) | Useful foundation, but not a complete factor protocol or public flow. |
-| Passkey/WebAuthn primitive | `PASSKEY_WEBAUTHN` credential primitives and tests exist. | [`lifecycle.py`](../pkgs/70-facade/tigrbl-credentials/src/tigrbl_credentials/lifecycle.py), [`test_credentials_lifecycle_boundary.py`](../tests/unit/test_credentials_lifecycle_boundary.py) | Current behavior is proof-of-concept credential modeling, not full WebAuthn ceremony support. |
+| Credential primitive | `tba-credentials` has `CredentialKind.MFA_FACTOR`, `create_mfa_factor_credential`, credential verification, lifecycle, rotation, revocation, and audit primitives. | [`lifecycle.py`](../pkgs/70-facade/tba-credentials/src/tba_credentials/lifecycle.py), [`test_credentials_lifecycle_boundary.py`](../tests/unit/test_credentials_lifecycle_boundary.py) | Useful foundation, but not a complete factor protocol or public flow. |
+| Passkey/WebAuthn primitive | `PASSKEY_WEBAUTHN` credential primitives and tests exist. | [`lifecycle.py`](../pkgs/70-facade/tba-credentials/src/tba_credentials/lifecycle.py), [`test_credentials_lifecycle_boundary.py`](../tests/unit/test_credentials_lifecycle_boundary.py) | Current behavior is proof-of-concept credential modeling, not full WebAuthn ceremony support. |
 | Advanced auth registry | Phase 4 test scaffolds include `AdvancedAuthenticatorRegistry`, MFA enrollment, WebAuthn, passwordless, replay, anomaly, and adaptive contexts. | [`test_phase4_advanced_identity_boundary.py`](../tests/unit/test_phase4_advanced_identity_boundary.py) | Good conceptual boundary, but it is not yet productized through storage, routes, UI, and conformance tests. |
 | Public UIX contract | Public UIX contract says MFA views belong in the public hosted-login surface. | [SPEC-1167](../.ssot/specs/SPEC-1167-public-uix-composition-contract.yaml) | MFA UX belongs with public login, not admin APIs. |
-| Standards signal | JOSE package includes RFC 8176 `amr` validation. | [`rfc8176.py`](../pkgs/10-domain/tigrbl-identity-jose/src/tigrbl_identity_jose/standards/rfc8176.py) | Token expression of authentication method references is recognized. |
+| Standards signal | JOSE package includes RFC 8176 `amr` validation. | [`rfc8176.py`](../pkgs/10-domain/tba-provider-identity-jose/src/tba_provider_identity_jose/standards/rfc8176.py) | Token expression of authentication method references is recognized. |
 
 ## Vendor Product Shape
 
@@ -33,11 +33,11 @@ For `tigrbl_auth`, MFA should be treated as an advanced authentication product l
 | Keycloak | MFA is modeled through authentication flows, required actions, OTP, WebAuthn, and recovery code authenticators. Docs: [Keycloak authentication flows](https://www.keycloak.org/docs/latest/server_admin/#_authentication-flows), [Keycloak WebAuthn](https://www.keycloak.org/docs/latest/server_admin/#_webauthn), [Keycloak recovery codes](https://www.keycloak.org/2025/10/recovery-codes). | OTP/TOTP, WebAuthn, passkeys/passwordless, recovery authentication codes, custom authenticators. | Highly configurable authentication flows with conditional 2FA and alternative authenticators. | Admin Console and Admin REST manage flows, credentials, required actions, and user credentials. | Powerful and flexible, but product UX depends heavily on flow configuration. |
 | FusionAuth | MFA is a login and step-up product with Multi-Factor API and tenant/user settings. Docs: [FusionAuth MFA](https://fusionauth.io/docs/lifecycle/authenticate-users/multi-factor-authentication), [FusionAuth Multi-Factor API](https://fusionauth.io/docs/apis/two-factor). | TOTP, email, SMS/phone where plan supports it, recovery-style workflows through API design. | Supports MFA during login and step-up authentication before sensitive operations. | Multi-Factor API enables/disables and sends/validates MFA methods; User API stores user factor settings. | Clear app-developer integration model; TOTP is available broadly while email/phone can be plan-dependent. |
 | Amazon Cognito | MFA is user-pool configuration integrated with managed login and auth challenge flows. Docs: [Cognito MFA](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-mfa.html), [Cognito TOTP MFA](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-mfa-totp.html). | SMS, email, TOTP; passkeys can satisfy MFA requirements with user verification in supported WebAuthn configuration. | User-pool MFA can be optional/required; app auth flows return MFA challenges and setup challenges. | User Pool APIs include software token association/verification and user MFA preference operations. | Strong managed-app baseline, but federated users delegate authentication to upstream IdP and Cognito does not add extra MFA for them. |
-| `tigrbl_auth` | Planned advanced-authentication lane; current support is primitives and tests, not a complete MFA product. | Generic MFA factor credential plus passkey credential primitive; no mature TOTP/WebAuthn/SMS/email/push factor products yet. | Adaptive context and policy concepts exist in tests/specs, but no productized tenant/app policy surface. | Public UIX/API should own user challenge/enrollment; tenant-admin should own policy and reset; credentials package should own proof material. | Best next move: define MFA as a governed product slice before adding routes. |
+| `tba_auth` | Planned advanced-authentication lane; current support is primitives and tests, not a complete MFA product. | Generic MFA factor credential plus passkey credential primitive; no mature TOTP/WebAuthn/SMS/email/push factor products yet. | Adaptive context and policy concepts exist in tests/specs, but no productized tenant/app policy surface. | Public UIX/API should own user challenge/enrollment; tenant-admin should own policy and reset; credentials package should own proof material. | Best next move: define MFA as a governed product slice before adding routes. |
 
 ## MFA Capability Matrix
 
-| Capability | Current / target in `tigrbl_auth` | Priority |
+| Capability | Current / target in `tba_auth` | Priority |
 | --- | --- | --- |
 | Factor inventory | Current `MFA_FACTOR` credential kind is too generic. Add first-class factor metadata: type, channel, display name, tenant, subject, status, assurance, last-used, verified-at. | P0 |
 | TOTP enrollment | Need otpauth URI generation, secret creation, QR payload, verification window, replay protection, and drift policy. | P0 |
@@ -57,13 +57,13 @@ For `tigrbl_auth`, MFA should be treated as an advanced authentication product l
 
 | Surface | Owns | Does not own |
 | --- | --- | --- |
-| `tigrbl-credentials` | Factor credential material, verification helpers, lifecycle states, recovery-code material, credential audit primitives. | Route composition, tenant policy, hosted login UX. |
-| `tigrbl-authz-policy` | MFA requirement decisions, step-up rules, factor assurance policy, bypass/remembered-device decisions. | Secret verification and WebAuthn cryptographic ceremony details. |
-| `tigrbl-auth-protocol-oidc` / `tigrbl-identity-jose` | `acr` and `amr` claim rules, OIDC authentication context expression. | Factor enrollment and user support workflows. |
-| `tigrbl-auth-backend-app-public` | Login-time MFA challenge, enrollment prompt, recovery-code challenge, user factor management where safe. | Tenant-wide policy mutation and admin reset authority. |
-| `tigrbl-auth-backend-app-tenant-admin` | Tenant MFA policy, required factors, admin factor reset, user support audit. | End-user factor secret display or challenge responses. |
-| `@tigrbl-auth/public-uix` | Enrollment screens, challenge screens, recovery-code display, factor management, remembered-device prompts. | Tenant policy administration. |
-| `@tigrbl-auth/tenant-admin-uix` | Policy configuration, user factor support/reset, MFA posture reporting. | Hosted-login challenge UX. |
+| `tba-credentials` | Factor credential material, verification helpers, lifecycle states, recovery-code material, credential audit primitives. | Route composition, tenant policy, hosted login UX. |
+| `tba-runtime-authorization-policy` | MFA requirement decisions, step-up rules, factor assurance policy, bypass/remembered-device decisions. | Secret verification and WebAuthn cryptographic ceremony details. |
+| `tba-protocol-oidc` / `tba-provider-identity-jose` | `acr` and `amr` claim rules, OIDC authentication context expression. | Factor enrollment and user support workflows. |
+| `tba-app-backend-public` | Login-time MFA challenge, enrollment prompt, recovery-code challenge, user factor management where safe. | Tenant-wide policy mutation and admin reset authority. |
+| `tba-app-backend-tenant-admin` | Tenant MFA policy, required factors, admin factor reset, user support audit. | End-user factor secret display or challenge responses. |
+| `@tba/ui-public` | Enrollment screens, challenge screens, recovery-code display, factor management, remembered-device prompts. | Tenant policy administration. |
+| `@tba/ui-tenant-admin` | Policy configuration, user factor support/reset, MFA posture reporting. | Hosted-login challenge UX. |
 
 ## Minimum Viable MFA Slice
 

@@ -7,7 +7,7 @@ except ModuleNotFoundError:  # pragma: no cover - Python 3.10 fallback
 from pathlib import Path
 from types import SimpleNamespace
 
-from tigrbl_auth.cli.reports import _dependency_artifact_paths, generate_state_reports
+from tba_auth.cli.reports import _dependency_artifact_paths, generate_state_reports
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -29,16 +29,16 @@ def test_pyproject_uses_published_pins_and_extras():
     dependencies = set(project["dependencies"])
     extras = project["optional-dependencies"]
     removed_helper_pins = {
-        "tigrbl-authz-policy-abac-administrator==0.4.0.dev2",
-        "tigrbl-authz-policy-delegated-administrator==0.4.0.dev2",
-        "tigrbl-authz-policy-engine==0.4.0.dev2",
-        "tigrbl-authz-policy-rbac-administrator==0.4.0.dev2",
-        "tigrbl-authz-policy-service-identity-registry==0.4.0.dev2",
-        "tigrbl-authz-resource-server-dpop-cnf-binding-validator==0.4.0.dev2",
-        "tigrbl-authz-resource-server-introspection-client==0.4.0.dev2",
-        "tigrbl-authz-resource-server-jwks-cache==0.4.0.dev2",
-        "tigrbl-authz-resource-server-mtls-cnf-binding-validator==0.4.0.dev2",
-        "tigrbl-authz-resource-server-sender-constraint-validator==0.4.0.dev2",
+        "tba-runtime-authorization-policy-abac-administrator==0.4.0.dev2",
+        "tba-runtime-authorization-policy-delegated-administrator==0.4.0.dev2",
+        "tba-runtime-authorization-policy-engine==0.4.0.dev2",
+        "tba-runtime-authorization-policy-rbac-administrator==0.4.0.dev2",
+        "tba-runtime-authorization-policy-service-identity-registry==0.4.0.dev2",
+        "tba-protocol-authorization-resource-server-dpop-cnf-binding-validator==0.4.0.dev2",
+        "tba-protocol-authorization-resource-server-introspection-client==0.4.0.dev2",
+        "tba-protocol-authorization-resource-server-jwks-cache==0.4.0.dev2",
+        "tba-protocol-authorization-resource-server-mtls-cnf-binding-validator==0.4.0.dev2",
+        "tba-protocol-authorization-resource-server-sender-constraint-validator==0.4.0.dev2",
     }
 
     assert "tigrbl==0.4.4.dev1" in dependencies
@@ -48,31 +48,31 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "swarmauri_tokens_jwt==0.3.0.dev31" not in dependencies
     assert "swarmauri_crypto_jwe==0.3.0.dev5" not in dependencies
     assert "pqcrypto==0.4.0" not in dependencies
-    assert "tigrbl-security-signing-pqc==0.1.0" in dependencies
-    assert "tigrbl-authz-resource-server-verifier==0.4.0.dev2" in dependencies
-    assert "tigrbl-security-token-verification==0.4.0.dev2" not in dependencies
-    assert "tigrbl-security-token-jwks-cache==0.1.0" in dependencies
-    assert "tigrbl-security-token-introspection-client==0.1.0" in dependencies
+    assert "tba-provider-security-signing-pqc==0.1.0" in dependencies
+    assert "tba-provider-authorization-resource-server-verifier==0.4.0.dev2" in dependencies
+    assert "tba-security-token-verification==0.4.0.dev2" not in dependencies
+    assert "tba-provider-security-token-jwks-cache==0.1.0" in dependencies
+    assert "tba-provider-security-token-introspection-client==0.1.0" in dependencies
     assert "tigrbl-security-sender-constraint-validator==0.1.0" in dependencies
-    assert "tigrbl-authz-policy-concrete==0.4.0.dev2" not in dependencies
-    assert "tigrbl-identity-concrete==0.4.0.dev2" not in dependencies
-    assert "tigrbl-authz-policy-rules-concrete==0.4.0.dev2" in dependencies
+    assert "tba-runtime-authorization-policy-concrete==0.4.0.dev2" not in dependencies
+    assert "tba-identity-concrete==0.4.0.dev2" not in dependencies
+    assert "tba-concrete-authorization-policy-rules==0.4.0.dev2" in dependencies
     assert "tigrbl-identity-identities-concrete==0.4.0.dev2" in dependencies
     assert "tigrbl-identity-credentials-concrete==0.4.0.dev2" in dependencies
-    assert "tigrbl-security-authorization-provenance-builder==0.1.0" in dependencies
+    assert "tba-provider-security-authorization-provenance-builder==0.1.0" in dependencies
     assert dependencies.isdisjoint(removed_helper_pins)
 
     assert set(
         {"postgres", "sqlite", "uvicorn", "hypercorn", "tigrcorn", "servers"}
     ) <= set(extras)
-    assert extras["uvicorn"] == ["tigrbl-identity-runtime[uvicorn]==0.4.0.dev2"]
+    assert extras["uvicorn"] == ["tba-runtime-identity[uvicorn]==0.4.0.dev2"]
     assert "sqlalchemy[asyncio]==2.0.49" in dependencies
     assert "pydantic[email]==2.12.5" in dependencies
-    assert extras["hypercorn"] == ["tigrbl-identity-runtime[hypercorn]==0.4.0.dev2"]
-    assert extras["tigrcorn"] == ["tigrbl-identity-runtime[tigrcorn]==0.4.0.dev2"]
-    assert extras["servers"] == ["tigrbl-identity-runtime[servers]==0.4.0.dev2"]
+    assert extras["hypercorn"] == ["tba-runtime-identity[hypercorn]==0.4.0.dev2"]
+    assert extras["tigrcorn"] == ["tba-runtime-identity[tigrcorn]==0.4.0.dev2"]
+    assert extras["servers"] == ["tba-runtime-identity[servers]==0.4.0.dev2"]
 
-    runtime_extras = _load_package_pyproject("tigrbl-identity-runtime")["project"][
+    runtime_extras = _load_package_pyproject("tba-runtime-identity")["project"][
         "optional-dependencies"
     ]
     assert runtime_extras["uvicorn"] == ["uvicorn[standard]==0.41.0"]
@@ -81,16 +81,16 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrcorn==0.3.8; python_version >= '3.11'" in runtime_extras["servers"]
 
     jose_dependencies = set(
-        _load_package_pyproject("tigrbl-identity-jose")["project"]["dependencies"]
+        _load_package_pyproject("tba-provider-identity-jose")["project"]["dependencies"]
     )
     oidc_dependencies = set(
-        _load_package_pyproject("tigrbl-auth-protocol-oidc")["project"]["dependencies"]
+        _load_package_pyproject("tba-protocol-oidc")["project"]["dependencies"]
     )
     facade_dependencies = set(
-        _load_package_pyproject("tigrbl-auth")["project"]["dependencies"]
+        _load_package_pyproject("tba-auth")["project"]["dependencies"]
     )
     pqc_provider_dependencies = set(
-        _load_package_pyproject("tigrbl-security-signing-pqc")["project"][
+        _load_package_pyproject("tba-provider-security-signing-pqc")["project"][
             "dependencies"
         ]
     )
@@ -100,7 +100,7 @@ def test_pyproject_uses_published_pins_and_extras():
         ]
     )
     authz_rules_dependencies = set(
-        _load_package_pyproject("tigrbl-authz-policy-rules-concrete")["project"][
+        _load_package_pyproject("tba-concrete-authorization-policy-rules")["project"][
             "dependencies"
         ]
     )
@@ -115,33 +115,33 @@ def test_pyproject_uses_published_pins_and_extras():
         ]
     )
     identity_admin_dependencies = set(
-        _load_package_pyproject("tigrbl-identity-admin")["project"]["dependencies"]
+        _load_package_pyproject("tba-runtime-identity-administration")["project"]["dependencies"]
     )
     authority_graph_dependencies = set(
-        _load_package_pyproject("tigrbl-authz-policy-authority-derivation-graph")[
+        _load_package_pyproject("tba-durability-authorization-policy-authority-derivation-graph")[
             "project"
         ]["dependencies"]
     )
     trust_graph_dependencies = set(
-        _load_package_pyproject("tigrbl-identity-admin-trust-federation-graph")[
+        _load_package_pyproject("tba-durability-identity-admin-trust-federation-graph")[
             "project"
         ]["dependencies"]
     )
     authz_dependencies = set(
-        _load_package_pyproject("tigrbl-authz-policy")["project"]["dependencies"]
+        _load_package_pyproject("tba-runtime-authorization-policy")["project"]["dependencies"]
     )
     verifier_dependencies = set(
-        _load_package_pyproject("tigrbl-authz-resource-server-verifier")["project"][
+        _load_package_pyproject("tba-provider-authorization-resource-server-verifier")["project"][
             "dependencies"
         ]
     )
     jwks_cache_dependencies = set(
-        _load_package_pyproject("tigrbl-security-token-jwks-cache")["project"][
+        _load_package_pyproject("tba-provider-security-token-jwks-cache")["project"][
             "dependencies"
         ]
     )
     introspection_dependencies = set(
-        _load_package_pyproject("tigrbl-security-token-introspection-client")[
+        _load_package_pyproject("tba-provider-security-token-introspection-client")[
             "project"
         ]["dependencies"]
     )
@@ -151,61 +151,61 @@ def test_pyproject_uses_published_pins_and_extras():
         ]["dependencies"]
     )
     resource_server_dependencies = set(
-        _load_package_pyproject("tigrbl-authz-resource-server")["project"][
+        _load_package_pyproject("tba-protocol-authorization-resource-server")["project"][
             "dependencies"
         ]
     )
     storage_dependencies = set(
-        _load_package_pyproject("tigrbl-identity-storage")["project"]["dependencies"]
+        _load_package_pyproject("tba-storage-core")["project"]["dependencies"]
     )
     storage_runtime_dependencies = set(
-        _load_package_pyproject("tigrbl-identity-storage-runtime")["project"][
+        _load_package_pyproject("tba-runtime-identity-storage")["project"][
             "dependencies"
         ]
     )
     operator_dependencies = set(
-        _load_package_pyproject("tigrbl-identity-operator")["project"]["dependencies"]
+        _load_package_pyproject("tba-operator-identity")["project"]["dependencies"]
     )
     deprecated_policy_dependencies = set(
         _load_package_pyproject("tigrbl-identity-policy")["project"]["dependencies"]
     )
 
     assert "pqcrypto==0.4.0" not in jose_dependencies
-    assert "tigrbl-security-signing-pqc==0.1.0" in jose_dependencies
+    assert "tba-provider-security-signing-pqc==0.1.0" in jose_dependencies
     assert (
         "tigrbl-auth-protocol-oidc-backchannel-replay-store==0.4.0.dev2"
         not in oidc_dependencies
     )
-    assert "tigrbl-identity-storage==0.4.0.dev2" not in oidc_dependencies
-    assert "tigrbl-identity-concrete==0.4.0.dev2" not in oidc_dependencies
+    assert "tba-storage-core==0.4.0.dev2" not in oidc_dependencies
+    assert "tba-identity-concrete==0.4.0.dev2" not in oidc_dependencies
     assert oidc_dependencies.isdisjoint(removed_helper_pins)
     assert "pqcrypto==0.4.0" not in facade_dependencies
-    assert "tigrbl-security-signing-pqc==0.1.0" in facade_dependencies
+    assert "tba-provider-security-signing-pqc==0.1.0" in facade_dependencies
     assert (
-        "tigrbl-authz-policy-authority-derivation-graph==0.4.0.dev2"
+        "tba-durability-authorization-policy-authority-derivation-graph==0.4.0.dev2"
         not in facade_dependencies
     )
-    assert "tigrbl-authority-graph-concrete==0.4.0.dev2" in facade_dependencies
-    assert "tigrbl-authz-policy-concrete==0.4.0.dev2" not in facade_dependencies
-    assert "tigrbl-authz-policy-rules-concrete==0.4.0.dev2" in facade_dependencies
+    assert "tba-concrete-authority-graph==0.4.0.dev2" in facade_dependencies
+    assert "tba-runtime-authorization-policy-concrete==0.4.0.dev2" not in facade_dependencies
+    assert "tba-concrete-authorization-policy-rules==0.4.0.dev2" in facade_dependencies
     assert facade_dependencies.isdisjoint(removed_helper_pins)
     assert "pqcrypto==0.4.0" in pqc_provider_dependencies
     assert "pqcrypto==0.4.0" not in admin_gate_dependencies
-    assert admin_gate_dependencies == {"tigrbl-auth-router-admin-gate==0.4.0.dev2"}
+    assert admin_gate_dependencies == {"tba-router-admin-gate==0.4.0.dev2"}
     assert "pqcrypto==0.4.0" not in authz_rules_dependencies
-    assert "tigrbl-identity-contracts==0.4.0.dev2" in authz_rules_dependencies
-    assert "tigrbl-identity-core==0.4.0.dev2" not in authz_rules_dependencies
+    assert "tba-contracts-identity==0.4.0.dev2" in authz_rules_dependencies
+    assert "tba-primitives-identity==0.4.0.dev2" not in authz_rules_dependencies
     assert "pqcrypto==0.4.0" not in identity_credentials_dependencies
     assert "pqcrypto==0.4.0" not in identity_identities_dependencies
-    assert "tigrbl-identity-contracts==0.4.0.dev2" in identity_credentials_dependencies
-    assert "tigrbl-identity-contracts==0.4.0.dev2" in identity_identities_dependencies
-    assert "tigrbl-identity-core==0.4.0.dev2" not in identity_credentials_dependencies
-    assert "tigrbl-identity-jose==0.4.0.dev2" not in identity_credentials_dependencies
+    assert "tba-contracts-identity==0.4.0.dev2" in identity_credentials_dependencies
+    assert "tba-contracts-identity==0.4.0.dev2" in identity_identities_dependencies
+    assert "tba-primitives-identity==0.4.0.dev2" not in identity_credentials_dependencies
+    assert "tba-provider-identity-jose==0.4.0.dev2" not in identity_credentials_dependencies
     assert (
         "tigrbl-identity-admin-control-plane==0.4.0.dev2" not in identity_admin_dependencies
     )
-    assert "tigrbl-administrative-resource-capability==0.4.0.dev2" in identity_admin_dependencies
-    assert "tigrbl-operator-administration-capability==0.4.0.dev2" in identity_admin_dependencies
+    assert "tba-capability-administrative-resource==0.4.0.dev2" in identity_admin_dependencies
+    assert "tba-capability-operator-administration==0.4.0.dev2" in identity_admin_dependencies
     assert (
         "tigrbl-identity-admin-advanced-authenticator-registry==0.4.0.dev2"
         not in identity_admin_dependencies
@@ -219,98 +219,98 @@ def test_pyproject_uses_published_pins_and_extras():
         not in identity_admin_dependencies
     )
     assert (
-        "tigrbl-authority-graph-durability==0.4.0.dev2" in authority_graph_dependencies
+        "tba-durability-authority-graph==0.4.0.dev2" in authority_graph_dependencies
     )
-    assert "tigrbl-identity-storage==0.4.0.dev2" not in authority_graph_dependencies
+    assert "tba-storage-core==0.4.0.dev2" not in authority_graph_dependencies
     assert (
-        "tigrbl-trust-federation-graph-durability==0.4.0.dev2"
+        "tba-durability-trust-federation-graph==0.4.0.dev2"
         in trust_graph_dependencies
     )
-    assert "tigrbl-identity-storage==0.4.0.dev2" not in trust_graph_dependencies
+    assert "tba-storage-core==0.4.0.dev2" not in trust_graph_dependencies
     assert (
-        "tigrbl-identity-admin-relationship-graph==0.4.0.dev2"
+        "tba-provider-identity-admin-relationship-graph==0.4.0.dev2"
         in identity_admin_dependencies
     )
-    assert "tigrbl-identity-jose==0.4.0.dev2" not in identity_admin_dependencies
-    assert "tigrbl-jose-concrete==0.4.0.dev2" in identity_admin_dependencies
-    assert "tigrbl-identity-concrete==0.4.0.dev2" not in identity_admin_dependencies
+    assert "tba-provider-identity-jose==0.4.0.dev2" not in identity_admin_dependencies
+    assert "tba-concrete-jose==0.4.0.dev2" in identity_admin_dependencies
+    assert "tba-identity-concrete==0.4.0.dev2" not in identity_admin_dependencies
     assert "tigrbl-identity-identities-concrete==0.4.0.dev2" not in identity_admin_dependencies
     assert "tigrbl-identity-credentials-concrete==0.4.0.dev2" not in identity_admin_dependencies
     assert {
-        "tigrbl-device-identity-concrete==0.4.0.dev2",
-        "tigrbl-workload-identity-concrete==0.4.0.dev2",
-        "tigrbl-mfa-factor-concrete==0.4.0.dev2",
-        "tigrbl-passwordless-credential-concrete==0.4.0.dev2",
-        "tigrbl-webauthn-credential-concrete==0.4.0.dev2",
+        "tba-concrete-device-identity==0.4.0.dev2",
+        "tba-concrete-workload-identity==0.4.0.dev2",
+        "tba-concrete-mfa-factor==0.4.0.dev2",
+        "tba-concrete-passwordless-credential==0.4.0.dev2",
+        "tba-concrete-webauthn-credential==0.4.0.dev2",
     } <= identity_admin_dependencies
     assert identity_admin_dependencies.isdisjoint(removed_helper_pins)
     assert "pqcrypto==0.4.0" not in authz_dependencies
-    assert "tigrbl-authz-policy-concrete==0.4.0.dev2" not in authz_dependencies
-    assert "tigrbl-authz-policy-rules-concrete==0.4.0.dev2" in authz_dependencies
-    assert "tigrbl-identity-storage==0.4.0.dev2" not in authz_dependencies
-    assert "tigrbl-identity-runtime==0.4.0.dev2" not in authz_dependencies
-    assert "tigrbl-access-governance-capability==0.4.0.dev2" in authz_dependencies
-    assert "tigrbl-policy-administration-capability==0.4.0.dev2" in authz_dependencies
-    assert "tigrbl-policy-assurance-capability==0.4.0.dev2" in authz_dependencies
+    assert "tba-runtime-authorization-policy-concrete==0.4.0.dev2" not in authz_dependencies
+    assert "tba-concrete-authorization-policy-rules==0.4.0.dev2" in authz_dependencies
+    assert "tba-storage-core==0.4.0.dev2" not in authz_dependencies
+    assert "tba-runtime-identity==0.4.0.dev2" not in authz_dependencies
+    assert "tba-capability-access-governance==0.4.0.dev2" in authz_dependencies
+    assert "tba-capability-policy-administration==0.4.0.dev2" in authz_dependencies
+    assert "tba-capability-policy-assurance==0.4.0.dev2" in authz_dependencies
     assert authz_dependencies.isdisjoint(removed_helper_pins)
-    assert "tigrbl-authz-policy==0.4.0.dev2" not in storage_dependencies
-    assert "tigrbl-auth-protocol-oauth==0.4.0.dev2" not in storage_runtime_dependencies
-    assert "tigrbl-auth-protocol-oidc==0.4.0.dev2" not in storage_runtime_dependencies
-    assert "tigrbl-authz-resource-server==0.4.0.dev2" not in storage_runtime_dependencies
-    assert "tigrbl-identity-runtime==0.4.0.dev2" not in storage_runtime_dependencies
+    assert "tba-runtime-authorization-policy==0.4.0.dev2" not in storage_dependencies
+    assert "tba-protocol-oauth==0.4.0.dev2" not in storage_runtime_dependencies
+    assert "tba-protocol-oidc==0.4.0.dev2" not in storage_runtime_dependencies
+    assert "tba-protocol-authorization-resource-server==0.4.0.dev2" not in storage_runtime_dependencies
+    assert "tba-runtime-identity==0.4.0.dev2" not in storage_runtime_dependencies
     assert "pqcrypto==0.4.0" not in verifier_dependencies
-    assert "tigrbl-identity-contracts==0.4.0.dev2" in verifier_dependencies
-    assert "tigrbl-security-token-jwks-cache==0.1.0" in verifier_dependencies
-    assert "tigrbl-security-token-introspection-client==0.1.0" in verifier_dependencies
-    assert "tigrbl-authz-resource-server==0.4.0.dev2" not in verifier_dependencies
-    assert "tigrbl-token-introspection-bases==0.4.0.dev2" in jwks_cache_dependencies
-    assert "tigrbl-token-introspection-bases==0.4.0.dev2" in introspection_dependencies
-    assert "tigrbl-security-trust-domain-bases==0.1.0" not in jwks_cache_dependencies
-    assert "tigrbl-security-trust-domain-bases==0.1.0" not in introspection_dependencies
+    assert "tba-contracts-identity==0.4.0.dev2" in verifier_dependencies
+    assert "tba-provider-security-token-jwks-cache==0.1.0" in verifier_dependencies
+    assert "tba-provider-security-token-introspection-client==0.1.0" in verifier_dependencies
+    assert "tba-protocol-authorization-resource-server==0.4.0.dev2" not in verifier_dependencies
+    assert "tba-bases-token-introspection==0.4.0.dev2" in jwks_cache_dependencies
+    assert "tba-bases-token-introspection==0.4.0.dev2" in introspection_dependencies
+    assert "tba-bases-security-trust-domain==0.1.0" not in jwks_cache_dependencies
+    assert "tba-bases-security-trust-domain==0.1.0" not in introspection_dependencies
     assert sender_constraint_dependencies == {
-        "tigrbl-protected-resource-authorization-capability==0.4.0.dev2"
+        "tba-capability-protected-resource-authorization==0.4.0.dev2"
     }
     assert (
-        "tigrbl-security-token-verification==0.4.0.dev2"
+        "tba-security-token-verification==0.4.0.dev2"
         not in resource_server_dependencies
     )
     assert (
-        "tigrbl-authz-resource-server-verifier==0.4.0.dev2"
+        "tba-provider-authorization-resource-server-verifier==0.4.0.dev2"
         in resource_server_dependencies
     )
     assert (
-        "tigrbl-protected-resource-authorization-capability==0.4.0.dev2"
+        "tba-capability-protected-resource-authorization==0.4.0.dev2"
         in resource_server_dependencies
     )
     assert resource_server_dependencies.isdisjoint(removed_helper_pins)
-    assert "tigrbl-authz-policy==0.4.0.dev2" in operator_dependencies
-    assert "tigrbl-authz-policy-concrete==0.4.0.dev2" not in operator_dependencies
+    assert "tba-runtime-authorization-policy==0.4.0.dev2" in operator_dependencies
+    assert "tba-runtime-authorization-policy-concrete==0.4.0.dev2" not in operator_dependencies
     assert operator_dependencies.isdisjoint(removed_helper_pins)
-    assert "tigrbl-authz-policy==0.4.0.dev2" in deprecated_policy_dependencies
+    assert "tba-runtime-authorization-policy==0.4.0.dev2" in deprecated_policy_dependencies
     assert (
         "tigrbl-authz-policy-invariant-registry==0.4.0.dev2"
         in deprecated_policy_dependencies
     )
     assert (
-        "tigrbl-authz-policy-concrete==0.4.0.dev2" not in deprecated_policy_dependencies
+        "tba-runtime-authorization-policy-concrete==0.4.0.dev2" not in deprecated_policy_dependencies
     )
     assert deprecated_policy_dependencies.isdisjoint(removed_helper_pins)
 
 
-def test_tigrbl_router_uses_upstream_tigrbl_router():
+def test_tba_router_uses_upstream_tigrbl_router():
     import tigrbl
 
     assert tigrbl.TigrblRouter is not None
 
 
-def test_tigrbl_router_exposes_upstream_include_tables():
+def test_tba_router_exposes_upstream_include_tables():
     import tigrbl
 
     assert callable(getattr(tigrbl.TigrblRouter, "include_tables", None))
 
 
 def test_deployment_from_options_uses_active_settings_values():
-    from tigrbl_auth.cli.artifacts import deployment_from_options
+    from tba_auth.cli.artifacts import deployment_from_options
 
     deployment = deployment_from_options(
         settings_obj=SimpleNamespace(
@@ -338,7 +338,7 @@ def test_workspace_sources_removed_and_provenance_artifacts_exist():
     required = {
         "docker/Dockerfile",
         "uv.lock",
-        "pkgs/60-runtime/tigrbl-identity-runtime/pyproject.toml",
+        "pkgs/60-runtime/tba-runtime-identity/pyproject.toml",
         "docs/runbooks/INSTALLATION_PROFILES.md",
         "docs/runbooks/CLEAN_CHECKOUT_REPRO.md",
         ".github/workflows/ci-install-profiles.yml",
@@ -409,7 +409,7 @@ def test_docker_assets_are_not_published_from_repository_root():
         assert (docker_dir / f"{dockerfile}.dockerignore").is_file()
 
     assert (
-        ROOT / "pkgs" / "105-ui" / "demo-hub-uix" / "Dockerfile.dockerignore"
+        ROOT / "pkgs" / "105-ui" / "tba-ui-demo-hub" / "Dockerfile.dockerignore"
     ).is_file()
 
 

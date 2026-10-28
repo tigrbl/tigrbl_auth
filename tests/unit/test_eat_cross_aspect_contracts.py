@@ -1,19 +1,19 @@
-from tigrbl_attestation_bases import AttestationAppraiserBase, EvidenceVerifierBase
-from tigrbl_cose_bases import EatCwtVerifierBase
-from tigrbl_identity_claims_bases import ClaimBase, ClaimSetComposerBase
-from tigrbl_identity_contracts.attestation import (
+from tba_bases_attestation import AttestationAppraiserBase, EvidenceVerifierBase
+from tba_bases_cose import EatCwtVerifierBase
+from tba_bases_identity_claims import ClaimBase, ClaimSetComposerBase
+from tba_contracts_identity.attestation import (
     AttestationEvidence,
     EvidenceVerificationResult,
     VerifiedAttestationEvidence,
 )
-from tigrbl_identity_contracts.tokens import (
+from tba_contracts_identity.tokens import (
     ProtectedTokenEnvelope,
     TokenEnvelopeFormat,
     TokenProfile,
     VerifiedTokenEnvelope,
 )
-from tigrbl_jose_bases import EatJwtCoderBase
-from tigrbl_token_bases import EatTokenEnvelopeVerifierBase, TokenEnvelopeVerifierBase
+from tba_bases_jose import EatJwtCoderBase
+from tba_bases_token import EatTokenEnvelopeVerifierBase, TokenEnvelopeVerifierBase
 
 
 def test_eat_has_distinct_contracts_for_each_cross_cutting_aspect():

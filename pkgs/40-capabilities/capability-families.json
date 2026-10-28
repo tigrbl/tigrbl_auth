@@ -6,7 +6,7 @@
         "capabilities": [],
         "durability": [],
         "providers": [
-          "tigrbl-access-governance-memory-provider"
+          "tba-provider-access-governance-memory"
         ]
       },
       "families": [
@@ -20,11 +20,11 @@
             "manage_entitlements",
             "run_access_review"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-access-governance-capability/src/tigrbl_access_governance_capability/capability.py",
+          "source": "pkgs/40-capabilities/tba-capability-access-governance/src/tba_capability_access_governance/capability.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-access-governance-capability",
+      "package": "tba-capability-access-governance",
       "protocol_packages": [],
       "purpose": "coordinate entitlement management, provisioning, and access reviews"
     },
@@ -43,11 +43,11 @@
           "capability_id": "account.self-service",
           "class": "AccountSelfServiceCapability",
           "operations": [],
-          "source": "pkgs/40-capabilities/tigrbl-account-self-service-capability/src/tigrbl_account_self_service/__init__.py",
+          "source": "pkgs/40-capabilities/tba-capability-account-self-service/src/tba_capability_account_self_service/__init__.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-account-self-service-capability",
+      "package": "tba-capability-account-self-service",
       "protocol_packages": [],
       "purpose": "coordinate authenticated profile, password, session, and consent lifecycle"
     },
@@ -68,11 +68,11 @@
           "operations": [
             "evaluate_adaptive_context"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-adaptive-authentication-capability/src/tigrbl_adaptive_authentication_capability/capability.py",
+          "source": "pkgs/40-capabilities/tba-capability-adaptive-authentication/src/tba_capability_adaptive_authentication/capability.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-adaptive-authentication-capability",
+      "package": "tba-capability-adaptive-authentication",
       "protocol_packages": [],
       "purpose": "coordinate a normalized adaptive-authentication decision"
     },
@@ -91,11 +91,11 @@
           "capability_id": "administrative-resource.lifecycle",
           "class": "AdministrativeResourceCapability",
           "operations": [],
-          "source": "pkgs/40-capabilities/tigrbl-administrative-resource-capability/src/tigrbl_administrative_resource_capability/capability.py",
+          "source": "pkgs/40-capabilities/tba-capability-administrative-resource/src/tba_capability_administrative_resource/capability.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-administrative-resource-capability",
+      "package": "tba-capability-administrative-resource",
       "protocol_packages": [],
       "purpose": "coordinate generic administrative-resource lifecycle operations"
     },
@@ -105,7 +105,7 @@
         "capabilities": [],
         "durability": [],
         "providers": [
-          "tigrbl-authenticator-api-key-local"
+          "tba-provider-authenticator-api-key-local"
         ]
       },
       "families": [
@@ -118,11 +118,11 @@
           "operations": [
             "authenticate_api_key"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-api-key-authentication-capability/src/tigrbl_api_key_authentication_capability/capability.py",
+          "source": "pkgs/40-capabilities/tba-capability-api-key-authentication/src/tba_capability_api_key_authentication/capability.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-api-key-authentication-capability",
+      "package": "tba-capability-api-key-authentication",
       "protocol_packages": [],
       "purpose": "coordinate user API-key verification with durable credential operations"
     },
@@ -141,11 +141,11 @@
           "capability_id": "artifact.processing",
           "class": "ProtocolArtifactProcessingCapability",
           "operations": [],
-          "source": "pkgs/40-capabilities/tigrbl-artifact-processing-capability/src/tigrbl_protocol_artifact_processing/__init__.py",
+          "source": "pkgs/40-capabilities/tba-capability-artifact-processing/src/tba_capability_artifact_processing/__init__.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-artifact-processing-capability",
+      "package": "tba-capability-artifact-processing",
       "protocol_packages": [],
       "purpose": "coordinate protocol-neutral artifact decoding, validation, encoding, and error normalization through replaceable processors"
     },
@@ -169,11 +169,11 @@
             "resolve_reference_material",
             "verify_evidence"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-attestation-appraisal-capability/src/tigrbl_attestation_appraisal/__init__.py",
+          "source": "pkgs/40-capabilities/tba-capability-attestation-appraisal/src/tba_capability_attestation_appraisal/__init__.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-attestation-appraisal-capability",
+      "package": "tba-capability-attestation-appraisal",
       "protocol_packages": [],
       "purpose": "coordinate evidence appraisal and result recording"
     },
@@ -196,11 +196,11 @@
             "reappraise_registered_authenticator",
             "resolve_authenticator_metadata"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-authenticator-attestation-capability/src/tigrbl_authenticator_attestation_capability/capability.py",
+          "source": "pkgs/40-capabilities/tba-capability-authenticator-attestation/src/tba_capability_authenticator_attestation/capability.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-authenticator-attestation-capability",
+      "package": "tba-capability-authenticator-attestation",
       "protocol_packages": [],
       "purpose": "coordinate attestation format verification, metadata resolution, trust appraisal, and reappraisal"
     },
@@ -222,13 +222,13 @@
             "push_authorization_request",
             "record_audit_event"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-authorization-request-staging-capability/src/tigrbl_pushed_authorization_capability/__init__.py",
+          "source": "pkgs/40-capabilities/tba-capability-authorization-request-staging/src/tba_capability_authorization_request_staging/__init__.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-authorization-request-staging-capability",
+      "package": "tba-capability-authorization-request-staging",
       "protocol_packages": [
-        "tigrbl-auth-protocol-oauth"
+        "tba-protocol-oauth"
       ],
       "purpose": "coordinate durable pushed-request creation with optional audit recording"
     },
@@ -253,13 +253,13 @@
             "register_client",
             "update_registration"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-client-registration-capability/src/tigrbl_client_registration_capability/__init__.py",
+          "source": "pkgs/40-capabilities/tba-capability-client-registration/src/tba_capability_client_registration/__init__.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-client-registration-capability",
+      "package": "tba-capability-client-registration",
       "protocol_packages": [
-        "tigrbl-auth-protocol-oauth"
+        "tba-protocol-oauth"
       ],
       "purpose": "coordinate client and registration metadata lifecycle with optional audit recording"
     },
@@ -269,7 +269,7 @@
         "capabilities": [],
         "durability": [],
         "providers": [
-          "tigrbl-authenticator-client-secret-local"
+          "tba-provider-authenticator-client-secret-local"
         ]
       },
       "families": [
@@ -283,11 +283,11 @@
             "authenticate_client_secret",
             "verify_client_record"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-client-secret-authentication-capability/src/tigrbl_client_secret_authentication_capability/capability.py",
+          "source": "pkgs/40-capabilities/tba-capability-client-secret-authentication/src/tba_capability_client_secret_authentication/capability.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-client-secret-authentication-capability",
+      "package": "tba-capability-client-secret-authentication",
       "protocol_packages": [],
       "purpose": "coordinate client-secret verification with client lookup"
     },
@@ -310,13 +310,13 @@
             "request_grant",
             "rotate_access_token"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-delegated-access-negotiation-capability/src/tigrbl_grant_negotiation_capability/__init__.py",
+          "source": "pkgs/40-capabilities/tba-capability-delegated-access-negotiation/src/tba_capability_delegated_access_negotiation/__init__.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-delegated-access-negotiation-capability",
+      "package": "tba-capability-delegated-access-negotiation",
       "protocol_packages": [
-        "tigrbl-auth-protocol-gnap"
+        "tba-protocol-gnap"
       ],
       "purpose": "coordinate negotiated grant requests, continuation, and token rotation"
     },
@@ -341,13 +341,13 @@
             "register_configuration",
             "verify_wallet_attestation"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-digital-credential-issuance-capability/src/tigrbl_digital_credential_issuance/__init__.py",
+          "source": "pkgs/40-capabilities/tba-capability-digital-credential-issuance/src/tba_capability_digital_credential_issuance/__init__.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-digital-credential-issuance-capability",
+      "package": "tba-capability-digital-credential-issuance",
       "protocol_packages": [
-        "tigrbl-auth-protocol-oid4vci"
+        "tba-protocol-oid4vci"
       ],
       "purpose": "coordinate credential configuration, wallet trust, offers, and issuance"
     },
@@ -373,13 +373,13 @@
             "reserve_replay",
             "verify_presentation"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-digital-credential-presentation-capability/src/tigrbl_digital_credential_presentation/__init__.py",
+          "source": "pkgs/40-capabilities/tba-capability-digital-credential-presentation/src/tba_capability_digital_credential_presentation/__init__.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-digital-credential-presentation-capability",
+      "package": "tba-capability-digital-credential-presentation",
       "protocol_packages": [
-        "tigrbl-auth-protocol-oid4vp"
+        "tba-protocol-oid4vp"
       ],
       "purpose": "coordinate holder consent, replay defense, and presentation verification"
     },
@@ -398,11 +398,11 @@
           "capability_id": "identity-admin.identities",
           "class": "IdentityAdministrationCapability",
           "operations": [],
-          "source": "pkgs/40-capabilities/tigrbl-identity-administration-capability/src/tigrbl_identity_administration_capability/capability.py",
+          "source": "pkgs/40-capabilities/tba-capability-identity-administration/src/tba_capability_identity_administration/capability.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-identity-administration-capability",
+      "package": "tba-capability-identity-administration",
       "protocol_packages": [],
       "purpose": "coordinate identity lifecycle administration"
     },
@@ -425,11 +425,11 @@
             "resolve_identity_document",
             "verify_identity_document"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-identity-document-capability/src/tigrbl_identity_document_capability/__init__.py",
+          "source": "pkgs/40-capabilities/tba-capability-identity-document/src/tba_capability_identity_document/__init__.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-identity-document-capability",
+      "package": "tba-capability-identity-document",
       "protocol_packages": [],
       "purpose": "coordinate identity-document parsing, resolution, and verification through injected implementations"
     },
@@ -451,11 +451,11 @@
             "publish",
             "rotate"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-key-administration-capability/src/tigrbl_key_administration_capability/capability.py",
+          "source": "pkgs/40-capabilities/tba-capability-key-administration/src/tba_capability_key_administration/capability.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-key-administration-capability",
+      "package": "tba-capability-key-administration",
       "protocol_packages": [],
       "purpose": "coordinate key rotation and publication through injected implementations"
     },
@@ -477,11 +477,11 @@
             "begin_mfa_challenge",
             "complete_mfa_challenge"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-mfa-challenge-capability/src/tigrbl_mfa_challenge_capability/capability.py",
+          "source": "pkgs/40-capabilities/tba-capability-mfa-challenge/src/tba_capability_mfa_challenge/capability.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-mfa-challenge-capability",
+      "package": "tba-capability-mfa-challenge",
       "protocol_packages": [],
       "purpose": "coordinate begin and complete operations for an MFA challenge"
     },
@@ -500,11 +500,11 @@
           "capability_id": "identity-admin.operator",
           "class": "OperatorAdministrationCapability",
           "operations": [],
-          "source": "pkgs/40-capabilities/tigrbl-operator-administration-capability/src/tigrbl_operator_administration_capability/capability.py",
+          "source": "pkgs/40-capabilities/tba-capability-operator-administration/src/tba_capability_operator_administration/capability.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-operator-administration-capability",
+      "package": "tba-capability-operator-administration",
       "protocol_packages": [],
       "purpose": "coordinate policy-gated operator administration"
     },
@@ -514,7 +514,7 @@
         "capabilities": [],
         "durability": [],
         "providers": [
-          "tigrbl-authenticator-password-local"
+          "tba-provider-authenticator-password-local"
         ]
       },
       "families": [
@@ -527,11 +527,11 @@
           "operations": [
             "authenticate_password"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-password-authentication-capability/src/tigrbl_password_authentication_capability/capability.py",
+          "source": "pkgs/40-capabilities/tba-capability-password-authentication/src/tba_capability_password_authentication/capability.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-password-authentication-capability",
+      "package": "tba-capability-password-authentication",
       "protocol_packages": [],
       "purpose": "coordinate password verification with identity lookup"
     },
@@ -540,8 +540,8 @@
       "dependencies": {
         "capabilities": [],
         "durability": [
-          "tigrbl-authorization-policy-durability",
-          "tigrbl-policy-administration-memory-provider"
+          "tba-durability-authorization-policy",
+          "tba-provider-policy-administration-memory"
         ],
         "providers": []
       },
@@ -556,11 +556,11 @@
             "administer",
             "simulate"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-policy-administration-capability/src/tigrbl_policy_administration_capability/capability.py",
+          "source": "pkgs/40-capabilities/tba-capability-policy-administration/src/tba_capability_policy_administration/capability.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-policy-administration-capability",
+      "package": "tba-capability-policy-administration",
       "protocol_packages": [],
       "purpose": "coordinate RBAC, ABAC, delegated-administration, and policy simulation operations"
     },
@@ -569,7 +569,7 @@
       "dependencies": {
         "capabilities": [],
         "durability": [
-          "tigrbl-authorization-policy-durability"
+          "tba-durability-authorization-policy"
         ],
         "providers": []
       },
@@ -584,11 +584,11 @@
             "evaluate",
             "report"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-policy-assurance-capability/src/tigrbl_policy_assurance_capability/capability.py",
+          "source": "pkgs/40-capabilities/tba-capability-policy-assurance/src/tba_capability_policy_assurance/capability.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-policy-assurance-capability",
+      "package": "tba-capability-policy-assurance",
       "protocol_packages": [],
       "purpose": "coordinate authorization invariants, replay checks, and assurance reporting"
     },
@@ -612,13 +612,13 @@
             "evaluate_many",
             "search_entities"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-policy-evaluation-capability/src/tigrbl_policy_evaluation_capability/__init__.py",
+          "source": "pkgs/40-capabilities/tba-capability-policy-evaluation/src/tba_capability_policy_evaluation/__init__.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-policy-evaluation-capability",
+      "package": "tba-capability-policy-evaluation",
       "protocol_packages": [
-        "tigrbl-auth-protocol-authzen"
+        "tba-protocol-authzen"
       ],
       "purpose": "coordinate normalized policy evaluation, batch evaluation, entity search, and service description"
     },
@@ -642,11 +642,11 @@
             "resolve_confirmation_key",
             "verify_possession_proof"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-possession-proof-capability/src/tigrbl_possession_proof_capability/__init__.py",
+          "source": "pkgs/40-capabilities/tba-capability-possession-proof/src/tba_capability_possession_proof/__init__.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-possession-proof-capability",
+      "package": "tba-capability-possession-proof",
       "protocol_packages": [],
       "purpose": "coordinate proof verification with replay acceptance and holder-binding evaluation"
     },
@@ -668,11 +668,11 @@
             "protect_envelope",
             "verify_envelope"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-protected-envelope-capability/src/tigrbl_protected_envelope_capability/__init__.py",
+          "source": "pkgs/40-capabilities/tba-capability-protected-envelope/src/tba_capability_protected_envelope/__init__.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-protected-envelope-capability",
+      "package": "tba-capability-protected-envelope",
       "protocol_packages": [],
       "purpose": "coordinate protected-envelope issuance and verification through injected cryptographic implementations"
     },
@@ -694,13 +694,13 @@
             "verify_claims",
             "verify_token"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-protected-resource-authorization-capability/src/tigrbl_protected_resource_authorization_capability/__init__.py",
+          "source": "pkgs/40-capabilities/tba-capability-protected-resource-authorization/src/tba_capability_protected_resource_authorization/__init__.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-protected-resource-authorization-capability",
+      "package": "tba-capability-protected-resource-authorization",
       "protocol_packages": [
-        "tigrbl-authz-resource-server"
+        "tba-protocol-authorization-resource-server"
       ],
       "purpose": "coordinate normalized protected-resource token and claims authorization"
     },
@@ -722,13 +722,13 @@
             "begin_public_key_authentication",
             "complete_public_key_authentication"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-public-key-authentication-capability/src/tigrbl_public_key_authentication_capability/capability.py",
+          "source": "pkgs/40-capabilities/tba-capability-public-key-authentication/src/tba_capability_public_key_authentication/capability.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-public-key-authentication-capability",
+      "package": "tba-capability-public-key-authentication",
       "protocol_packages": [
-        "tigrbl-auth-protocol-webauthn"
+        "tba-protocol-webauthn"
       ],
       "purpose": "coordinate durable ceremony consumption, credential resolution, assertion verification, and session evidence"
     },
@@ -751,11 +751,11 @@
             "rename_public_key_credential",
             "revoke_public_key_credential"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-public-key-credential-management-capability/src/tigrbl_public_key_credential_management_capability/capability.py",
+          "source": "pkgs/40-capabilities/tba-capability-public-key-credential-management/src/tba_capability_public_key_credential_management/capability.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-public-key-credential-management-capability",
+      "package": "tba-capability-public-key-credential-management",
       "protocol_packages": [],
       "purpose": "coordinate authenticated listing, naming, and revocation of registered public-key credentials"
     },
@@ -777,13 +777,13 @@
             "begin_public_key_registration",
             "complete_public_key_registration"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-public-key-registration-capability/src/tigrbl_public_key_registration_capability/capability.py",
+          "source": "pkgs/40-capabilities/tba-capability-public-key-registration/src/tba_capability_public_key_registration/capability.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-public-key-registration-capability",
+      "package": "tba-capability-public-key-registration",
       "protocol_packages": [
-        "tigrbl-auth-protocol-webauthn"
+        "tba-protocol-webauthn"
       ],
       "purpose": "coordinate durable ceremony reservation, attestation verification, credential insertion, and audit evidence"
     },
@@ -802,11 +802,11 @@
           "capability_id": "identity-admin.realms",
           "class": "RealmAdministrationCapability",
           "operations": [],
-          "source": "pkgs/40-capabilities/tigrbl-realm-administration-capability/src/tigrbl_realm_administration_capability/capability.py",
+          "source": "pkgs/40-capabilities/tba-capability-realm-administration/src/tba_capability_realm_administration/capability.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-realm-administration-capability",
+      "package": "tba-capability-realm-administration",
       "protocol_packages": [],
       "purpose": "coordinate realm lifecycle administration"
     },
@@ -825,11 +825,11 @@
           "operations": [
             "check_and_reserve"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-replay-protection-capability/src/tigrbl_replay_protection_capability/__init__.py",
+          "source": "pkgs/40-capabilities/tba-capability-replay-protection/src/tba_capability_replay_protection/__init__.py",
           "version": ""
         }
       ],
-      "package": "tigrbl-replay-protection-capability",
+      "package": "tba-capability-replay-protection",
       "protocol_packages": [],
       "purpose": "coordinate normalized replay reservations across protocol mappings, durable repositories, and replaceable providers"
     },
@@ -855,11 +855,11 @@
             "resolve_subscription",
             "transmit"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-security-event-delivery-capability/src/tigrbl_security_events/__init__.py",
+          "source": "pkgs/40-capabilities/tba-capability-security-event-delivery/src/tba_capability_security_event_delivery/__init__.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-security-event-delivery-capability",
+      "package": "tba-capability-security-event-delivery",
       "protocol_packages": [],
       "purpose": "coordinate security-event transmission, receipt, and recording"
     },
@@ -867,11 +867,11 @@
       "compatibility_aggregator": false,
       "dependencies": {
         "capabilities": [
-          "tigrbl-api-key-authentication-capability"
+          "tba-capability-api-key-authentication"
         ],
         "durability": [],
         "providers": [
-          "tigrbl-authenticator-service-key-local"
+          "tba-provider-authenticator-service-key-local"
         ]
       },
       "families": [
@@ -884,11 +884,11 @@
           "operations": [
             "authenticate_service_key"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-service-key-authentication-capability/src/tigrbl_service_key_authentication_capability/capability.py",
+          "source": "pkgs/40-capabilities/tba-capability-service-key-authentication/src/tba_capability_service_key_authentication/capability.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-service-key-authentication-capability",
+      "package": "tba-capability-service-key-authentication",
       "protocol_packages": [],
       "purpose": "coordinate service-key verification with durable credential operations"
     },
@@ -907,11 +907,11 @@
           "capability_id": "identity-admin.tenants",
           "class": "TenantAdministrationCapability",
           "operations": [],
-          "source": "pkgs/40-capabilities/tigrbl-tenant-administration-capability/src/tigrbl_tenant_administration_capability/capability.py",
+          "source": "pkgs/40-capabilities/tba-capability-tenant-administration/src/tba_capability_tenant_administration/capability.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-tenant-administration-capability",
+      "package": "tba-capability-tenant-administration",
       "protocol_packages": [],
       "purpose": "coordinate tenant lifecycle administration"
     },
@@ -932,11 +932,11 @@
           "operations": [
             "exchange_token"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-token-exchange-capability/src/tigrbl_token_exchange_capability/__init__.py",
+          "source": "pkgs/40-capabilities/tba-capability-token-exchange/src/tba_capability_token_exchange/__init__.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-token-exchange-capability",
+      "package": "tba-capability-token-exchange",
       "protocol_packages": [],
       "purpose": "coordinate normalized security-token exchange across verification, issuance, durable lineage, and audit operations"
     },
@@ -957,13 +957,13 @@
           "operations": [
             "introspect_token"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-token-introspection-capability/src/tigrbl_token_introspection_capability/__init__.py",
+          "source": "pkgs/40-capabilities/tba-capability-token-introspection/src/tba_capability_token_introspection/__init__.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-token-introspection-capability",
+      "package": "tba-capability-token-introspection",
       "protocol_packages": [
-        "tigrbl-auth-protocol-oauth"
+        "tba-protocol-oauth"
       ],
       "purpose": "coordinate protocol-neutral token-state lookup and profile validation"
     },
@@ -986,13 +986,13 @@
             "record_audit_event",
             "redeem_refresh_token"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-token-issuance-capability/src/tigrbl_token_issuance_capability/__init__.py",
+          "source": "pkgs/40-capabilities/tba-capability-token-issuance/src/tba_capability_token_issuance/__init__.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-token-issuance-capability",
+      "package": "tba-capability-token-issuance",
       "protocol_packages": [
-        "tigrbl-auth-protocol-oauth"
+        "tba-protocol-oauth"
       ],
       "purpose": "coordinate token-pair issuance and refresh rotation across signing and durable lifecycle operations"
     },
@@ -1014,13 +1014,13 @@
             "record_audit_event",
             "revoke_token"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-token-revocation-capability/src/tigrbl_token_revocation_capability/__init__.py",
+          "source": "pkgs/40-capabilities/tba-capability-token-revocation/src/tba_capability_token_revocation/__init__.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-token-revocation-capability",
+      "package": "tba-capability-token-revocation",
       "protocol_packages": [
-        "tigrbl-auth-protocol-oauth"
+        "tba-protocol-oauth"
       ],
       "purpose": "coordinate durable token revocation with optional audit recording"
     },
@@ -1045,11 +1045,11 @@
             "resolve_workload_reference",
             "watch_delegated_workload_credentials"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-workload-credential-brokering-capability/src/tigrbl_workload_credential_brokering_capability/__init__.py",
+          "source": "pkgs/40-capabilities/tba-capability-workload-credential-brokering/src/tba_capability_workload_credential_brokering/__init__.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-workload-credential-brokering-capability",
+      "package": "tba-capability-workload-credential-brokering",
       "protocol_packages": [],
       "purpose": "coordinate delegated workload reference resolution, authorization, credential delivery, and trust material"
     },
@@ -1073,11 +1073,11 @@
             "resolve_workload_trust",
             "verify_workload_credential"
           ],
-          "source": "pkgs/40-capabilities/tigrbl-workload-identity-capability/src/tigrbl_workload_identity/__init__.py",
+          "source": "pkgs/40-capabilities/tba-capability-workload-identity/src/tba_capability_workload_identity/__init__.py",
           "version": "1.0"
         }
       ],
-      "package": "tigrbl-workload-identity-capability",
+      "package": "tba-capability-workload-identity",
       "protocol_packages": [],
       "purpose": "coordinate workload credential retrieval and identity verification"
     }

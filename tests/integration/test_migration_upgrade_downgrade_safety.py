@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from tigrbl_auth.migrations import apply_all_async, column_names_async, downgrade_one_async, expected_table_names, verify_schema_async
+from tba_auth.migrations import apply_all_async, column_names_async, downgrade_one_async, expected_table_names, verify_schema_async
 
 
 pytestmark = [pytest.mark.integration, pytest.mark.asyncio]
@@ -29,7 +29,7 @@ DELEGATION_TABLES = {
 
 
 def _backend_matrix(tmp_path: Path) -> list[tuple[str, str]]:
-    cases = [("sqlite", f"sqlite+aiosqlite:///{tmp_path / 'tigrbl_auth_test.db'}")]
+    cases = [("sqlite", f"sqlite+aiosqlite:///{tmp_path / 'tba_auth_test.db'}")]
     postgres_url = os.environ.get("POSTGRES_URL")
     if postgres_url:
         cases.append(("postgres", postgres_url))

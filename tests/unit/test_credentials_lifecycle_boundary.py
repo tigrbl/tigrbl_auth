@@ -14,7 +14,7 @@ for src in sorted((ROOT / "pkgs").glob("*/src")):
 
 
 def test_credentials_t0_exports_public_lifecycle_surface() -> None:
-    import tigrbl_credentials as credentials
+    import tba_credentials as credentials
 
     assert credentials.CredentialKind.PASSWORD.value == "password"
     assert credentials.CredentialStatus.ACTIVE.value == "active"
@@ -23,7 +23,7 @@ def test_credentials_t0_exports_public_lifecycle_surface() -> None:
 
 
 def test_credentials_t0_constructs_each_credential_kind() -> None:
-    import tigrbl_credentials as credentials
+    import tba_credentials as credentials
 
     password = credentials.create_password_credential("p1", "correct-horse")
     reset = credentials.create_password_reset_credential("p1")
@@ -43,7 +43,7 @@ def test_credentials_t0_constructs_each_credential_kind() -> None:
 
 
 def test_credentials_t1_verifies_password_keys_client_secret_and_mfa() -> None:
-    import tigrbl_credentials as credentials
+    import tba_credentials as credentials
 
     password = credentials.create_password_credential("p1", "pw")
     api_key = credentials.create_api_key_credential("p1", public_id="api-key-id")
@@ -61,7 +61,7 @@ def test_credentials_t1_verifies_password_keys_client_secret_and_mfa() -> None:
 
 def test_credentials_t1_password_reset_and_passkey_behaviors() -> None:
     import pytest
-    import tigrbl_credentials as credentials
+    import tba_credentials as credentials
 
     reset = credentials.create_password_reset_credential("p1", ttl=timedelta(minutes=5))
     consumed = credentials.consume_one_time_credential(reset.credential, reset.secret or "")
@@ -75,7 +75,7 @@ def test_credentials_t1_password_reset_and_passkey_behaviors() -> None:
 
 def test_credentials_t2_rotation_and_revocation_are_pure_transformations() -> None:
     import pytest
-    import tigrbl_credentials as credentials
+    import tba_credentials as credentials
 
     issued = credentials.create_api_key_credential("p1")
     rotated = credentials.rotate_credential(
@@ -102,9 +102,9 @@ def test_credentials_do_not_own_a_secret_hash_format_or_durable_ledger() -> None
         ROOT
         / "pkgs"
         / "20-providers"
-        / "tigrbl-authenticator-password-local"
+        / "tba-provider-authenticator-password-local"
         / "src"
-        / "tigrbl_authenticator_password_local"
+        / "tba_provider_authenticator_password_local"
         / "__init__.py"
     )
     source = lifecycle_path.read_text(encoding="utf-8")
@@ -115,9 +115,9 @@ def test_credentials_do_not_own_a_secret_hash_format_or_durable_ledger() -> None
 
 
 def test_credentials_t2_public_surface_import_dag_stays_clean() -> None:
-    package_root = ROOT / "pkgs" / "70-facade" / "tigrbl-credentials" / "src" / "tigrbl_credentials"
+    package_root = ROOT / "pkgs" / "70-facade" / "tba-credentials" / "src" / "tba_credentials"
     checked = [package_root / "__init__.py", package_root / "lifecycle.py"]
-    forbidden = {"tigrbl_auth", "tigrbl_identity_server", "tigrbl_identity_storage", "tigrbl_identity_admin"}
+    forbidden = {"tba_auth", "tba_server_identity", "tba_storage_core", "tba_runtime_identity_administration"}
 
     for path in checked:
         tree = ast.parse(path.read_text(encoding="utf-8"))
@@ -131,10 +131,10 @@ def test_credentials_t2_public_surface_import_dag_stays_clean() -> None:
 
 
 def test_credentials_contracts_are_packaged_by_domain() -> None:
-    contracts_root = ROOT / "pkgs" / "02-contracts" / "tigrbl-identity-contracts" / "src" / "tigrbl_identity_contracts"
+    contracts_root = ROOT / "pkgs" / "02-contracts" / "tba-contracts-identity" / "src" / "tba_contracts_identity"
 
-    from tigrbl_identity_contracts.audit.credentials import CredentialAuditEvent
-    import tigrbl_identity_contracts.credentials as credential_contracts
+    from tba_contracts_identity.audit.credentials import CredentialAuditEvent
+    import tba_contracts_identity.credentials as credential_contracts
 
     assert not (contracts_root / "authn.py").exists()
     assert (contracts_root / "credentials" / "__init__.py").exists()
@@ -142,5 +142,5 @@ def test_credentials_contracts_are_packaged_by_domain() -> None:
     assert (contracts_root / "credentials" / "errors.py").exists()
     assert (contracts_root / "credentials" / "models.py").exists()
     assert (contracts_root / "audit" / "credentials.py").exists()
-    assert CredentialAuditEvent.__module__ == "tigrbl_identity_contracts.audit.credentials"
+    assert CredentialAuditEvent.__module__ == "tba_contracts_identity.audit.credentials"
     assert not hasattr(credential_contracts.models, "CredentialAuditEvent")

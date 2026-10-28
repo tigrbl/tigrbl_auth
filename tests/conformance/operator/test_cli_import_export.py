@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from tigrbl_auth.cli.main import main
+from tba_auth.cli.main import main
 
 
 def _invoke_json(argv: list[str]) -> tuple[int, dict[str, object]]:

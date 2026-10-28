@@ -1,6 +1,6 @@
-from tigrbl_auth.config.deployment import resolve_deployment
-from tigrbl_auth.standards.oidc.discovery_metadata import build_openid_config
-from tigrbl_auth.standards.oidc.rp_initiated_logout import describe
+from tba_auth.config.deployment import resolve_deployment
+from tba_auth.standards.oidc.discovery_metadata import build_openid_config
+from tba_auth.standards.oidc.rp_initiated_logout import describe
 
 
 def test_oidc_rp_initiated_logout_route_is_active_in_production():

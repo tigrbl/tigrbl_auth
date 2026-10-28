@@ -2,9 +2,9 @@
 
 Research date: 2026-05-28
 
-Scope: this matrix compares `tigrbl_auth` with Auth0, Okta, Keycloak, FusionAuth, and Amazon Cognito for machine-to-machine (M2M) and workload identity coverage. The rows intentionally go beyond OAuth `client_credentials`; a serious M2M product also needs lifecycle, credentials, authorization grants, validation, telemetry, admin surfaces, and developer setup surfaces.
+Scope: this matrix compares `tba_auth` with Auth0, Okta, Keycloak, FusionAuth, and Amazon Cognito for machine-to-machine (M2M) and workload identity coverage. The rows intentionally go beyond OAuth `client_credentials`; a serious M2M product also needs lifecycle, credentials, authorization grants, validation, telemetry, admin surfaces, and developer setup surfaces.
 
-| M2M capability | tigrbl_auth | Auth0 | Okta | Keycloak | FusionAuth | Amazon Cognito |
+| M2M capability | tba_auth | Auth0 | Okta | Keycloak | FusionAuth | Amazon Cognito |
 | --- | --- | --- | --- | --- | --- | --- |
 | Product framing | Planned first-class M2M / workload identity lane across public issuer, resource-validation, developer, and service-admin frontdoors; see `adr:1085`, `spc:1177`, and service-admin API docs. | First-class "Machine to Machine Applications" plus API authorization using the [Client Credentials Flow](https://auth0.com/docs/flows/client-credentials-flow). | First-class service app model for Okta APIs and custom authorization servers via [OAuth for Okta service apps](https://developer.okta.com/docs/guides/implement-oauth-for-okta-serviceapp/) and [client credentials](https://developer.okta.com/docs/guides/implement-grant-type/clientcreds/main/). | Confidential clients with service accounts; M2M is modeled through clients, service-account users, roles, and protocol endpoints in [OIDC layers](https://www.keycloak.org/securing-apps/oidc-layers). | Explicit [Machine-to-machine communication](https://fusionauth.io/docs/get-started/use-cases/machine-to-machine) use case plus entity management. | Supports app-client based M2M for user pools with custom resource servers and `client_credentials`; see [resource servers](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-define-resource-servers.html). |
 | Principal / subject model | Under construction: `Service`, `ServiceKey`, `ApiKey`, `Client`, and client registration tables exist in storage/facades; product semantics need to distinguish OAuth clients from service/workload principals. | M2M application is the OAuth client; access tokens identify the client/application and API audience. | Service app is the OAuth client; Okta admin API access also uses service-app grants and admin roles. | Service account is associated with a confidential client and appears as a user-like account for role assignment. | Separates applications, users, and [entities](https://fusionauth.io/docs/get-started/core-concepts/entity-management), allowing non-user principals and relationships. | App client is the main M2M principal; no broad standalone workload identity product outside Cognito user-pool app clients. |
@@ -30,18 +30,18 @@ Scope: this matrix compares `tigrbl_auth` with Auth0, Okta, Keycloak, FusionAuth
 
 The vendor pattern is consistent: M2M is not a single endpoint or just OAuth `client_credentials`. It is a cross-surface product spanning authorization-server token issuance, service/client lifecycle, credential management, API/resource permissions, token validation, audit, and an admin/developer setup experience.
 
-For `tigrbl_auth`, the product should be named explicitly as **M2M / Workload Identity**. The `tigrbl-auth-backend-app-service-admin` package is the lifecycle frontdoor for service/workload principals and credentials, not the entire product. The complete M2M product also uses:
+For `tba_auth`, the product should be named explicitly as **M2M / Workload Identity**. The `tba-app-backend-service-admin` package is the lifecycle frontdoor for service/workload principals and credentials, not the entire product. The complete M2M product also uses:
 
-| Product layer | tigrbl_auth owner |
+| Product layer | tba_auth owner |
 | --- | --- |
-| Token issuance | `tigrbl-auth-backend-app-public` |
-| Token validation and issuer metadata | `tigrbl-auth-backend-app-resource-validation` |
-| Service/workload lifecycle | `tigrbl-auth-backend-app-service-admin` |
-| Developer app/client setup | `tigrbl-auth-backend-app-developer` |
-| Tenant/platform authority boundaries | `tigrbl-auth-backend-app-platform-admin`, `tigrbl-auth-backend-app-tenant-admin` |
-| Persistence and canonical tables | `tigrbl-identity-storage` |
-| Signing and token crypto | `tigrbl-identity-jose` |
-| Authorization decisions | `tigrbl-authz-policy` |
+| Token issuance | `tba-app-backend-public` |
+| Token validation and issuer metadata | `tba-app-backend-resource-validation` |
+| Service/workload lifecycle | `tba-app-backend-service-admin` |
+| Developer app/client setup | `tba-app-backend-developer` |
+| Tenant/platform authority boundaries | `tba-app-backend-platform-admin`, `tba-app-backend-tenant-admin` |
+| Persistence and canonical tables | `tba-storage-core` |
+| Signing and token crypto | `tba-provider-identity-jose` |
+| Authorization decisions | `tba-runtime-authorization-policy` |
 
 Recommended near-term framing:
 

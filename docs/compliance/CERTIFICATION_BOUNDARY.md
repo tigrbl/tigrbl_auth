@@ -2,7 +2,7 @@
 
 # Certification Boundary
 
-This document declares the authoritative certification boundary for the current `tigrbl_auth` checkpoint.
+This document declares the authoritative certification boundary for the current `tba_auth` checkpoint.
 
 ## Authority
 

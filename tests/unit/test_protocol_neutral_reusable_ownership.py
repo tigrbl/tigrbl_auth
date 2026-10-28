@@ -1,32 +1,32 @@
-from tigrbl_auth_protocol_oauth.reusable_components import ScopeSetMatcher
-from tigrbl_auth_protocol_oidc.reusable_components import (
+from tba_protocol_oauth.reusable_components import ScopeSetMatcher
+from tba_protocol_oidc.reusable_components import (
     EapAcrValue,
     LocalClaimsProvider,
     PairwiseSubjectIdentifierStrategy,
     PublicSubjectIdentifierStrategy,
     parse_verified_claims,
 )
-from tigrbl_authorization_scope_set_matcher_concrete import ScopeSetMatcher as NeutralScopeSetMatcher
-from tigrbl_pairwise_subject_identifier_concrete import PairwiseSubjectIdentifierStrategy as NeutralPairwiseStrategy
+from tba_concrete_authorization_scope_set_matcher import ScopeSetMatcher as NeutralScopeSetMatcher
+from tba_concrete_pairwise_subject_identifier import PairwiseSubjectIdentifierStrategy as NeutralPairwiseStrategy
 
 
 def test_protocol_packages_compose_protocol_neutral_concretes() -> None:
     assert (
-        ScopeSetMatcher.__module__ == "tigrbl_authorization_scope_set_matcher_concrete"
+        ScopeSetMatcher.__module__ == "tba_concrete_authorization_scope_set_matcher"
     )
-    assert LocalClaimsProvider.__module__ == "tigrbl_security_claims_provider_local"
+    assert LocalClaimsProvider.__module__ == "tba_provider_security_claims_provider_local"
     assert (
         PublicSubjectIdentifierStrategy.__module__
-        == "tigrbl_public_subject_identifier_concrete"
+        == "tba_concrete_public_subject_identifier"
     )
     assert (
         PairwiseSubjectIdentifierStrategy.__module__
-        == "tigrbl_pairwise_subject_identifier_concrete"
+        == "tba_concrete_pairwise_subject_identifier"
     )
-    assert parse_verified_claims.__module__ == "tigrbl_identity_assurance_concrete"
+    assert parse_verified_claims.__module__ == "tba_concrete_identity_assurance"
 
 
 def test_protocol_composition_uses_neutral_owners_directly() -> None:
     assert NeutralScopeSetMatcher is ScopeSetMatcher
     assert NeutralPairwiseStrategy is PairwiseSubjectIdentifierStrategy
-    assert EapAcrValue.__module__ == "tigrbl_identity_contracts.oidc.eap_acr"
+    assert EapAcrValue.__module__ == "tba_contracts_identity.oidc.eap_acr"

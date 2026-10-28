@@ -11,7 +11,7 @@ import json
 
 import yaml
 
-from tigrbl_auth.cli.artifacts import (
+from tba_auth.cli.artifacts import (
     deployment_from_options,
     write_discovery_artifacts,
     write_effective_claims_manifest,
@@ -19,14 +19,14 @@ from tigrbl_auth.cli.artifacts import (
     write_openapi_contract,
     write_openrpc_contract,
 )
-from tigrbl_auth.cli.metadata import (
+from tba_auth.cli.metadata import (
     build_cli_conformance_snapshot,
     build_cli_contract_manifest,
     render_cli_conformance_markdown,
     render_cli_markdown,
 )
-from tigrbl_identity_contracts.protocol_configuration import bind_protocol_settings
-from tigrbl_identity_runtime.settings import settings
+from tba_contracts_identity.protocol_configuration import bind_protocol_settings
+from tba_runtime_identity.settings import settings
 
 
 def _write_cli_artifacts(repo_root: Path) -> None:
@@ -63,7 +63,7 @@ def _write_discovery_reference(repo_root: Path) -> None:
         "",
         "## Notes",
         "",
-        "- snapshot files are generated from `tigrbl_auth.cli.artifacts.write_discovery_artifacts` using executable deployment metadata",
+        "- snapshot files are generated from `tba_auth.cli.artifacts.write_discovery_artifacts` using executable deployment metadata",
         "- JWKS snapshots intentionally omit live signing material and record only a deterministic public-artifact shape",
         "- current authoritative CLI/runtime/discovery docs are those listed in `docs/reference/README.md`",
         "",

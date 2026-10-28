@@ -31,11 +31,11 @@ The release path is organized into these planes:
 
 Package prefixes follow the same single-concern rule:
 
-- `tigrbl-identity-*` owns neutral identity records and operational support,
-- `tigrbl-authn-*` owns credential proof and authentication lifecycle,
-- `tigrbl-authz-*` owns authority, policy, grants, permissions, decisions, and enforcement,
-- `tigrbl-auth-protocol-*` owns OAuth/OIDC/RP wire behavior,
-- `tigrbl-auth*` owns composed products and front doors.
+- `tba-identity-*` owns neutral identity records and operational support,
+- `tba-authn-*` owns credential proof and authentication lifecycle,
+- `tba-authorization-*` owns authority, policy, grants, permissions, decisions, and enforcement,
+- `tba-*-protocol` owns OAuth/OIDC/RP wire behavior,
+- `tba-auth*` owns composed products and front doors.
 
 ## Consequences
 

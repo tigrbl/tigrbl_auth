@@ -8,18 +8,18 @@ from unittest.mock import AsyncMock
 
 import pytest
 
-from tigrbl_auth_protocol_oauth.schemas import DynamicClientRegistrationIn
-from tigrbl_auth.cli.artifacts import deployment_from_options
-import tigrbl_auth_backend_app_core.surfaces.par_surface as par_ops
-import tigrbl_auth_backend_app_core.surfaces.client_registration_surface as register_ops
-import tigrbl_identity_server.token_request as token_ops
-from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
+from tba_protocol_oauth.schemas import DynamicClientRegistrationIn
+from tba_auth.cli.artifacts import deployment_from_options
+import tba_app_backend_core.surfaces.par_surface as par_ops
+import tba_app_backend_core.surfaces.client_registration_surface as register_ops
+import tba_server_identity.token_request as token_ops
+from tba_protocol_oauth.standards.oauth_security_bcp import (
     OAuthPolicyViolation,
     assert_authorization_request_allowed,
     runtime_security_profile,
 )
-from tigrbl_auth_protocol_oauth.standards.protected_resource_metadata import build_protected_resource_metadata
-from tigrbl_auth_protocol_oidc.standards.discovery_metadata import build_openid_config
+from tba_protocol_oauth.standards.protected_resource_metadata import build_protected_resource_metadata
+from tba_protocol_oidc.standards.discovery_metadata import build_openid_config
 
 
 class _Form(dict):

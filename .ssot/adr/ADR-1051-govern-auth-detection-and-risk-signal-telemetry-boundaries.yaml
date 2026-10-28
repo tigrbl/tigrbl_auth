@@ -16,7 +16,7 @@ references: []
 body: |-
   ## Decision
 
-  `tigrbl_auth` MUST govern authentication anomaly detection as a detection and telemetry capability, separate from release-governance risk tracking or protocol security checks.
+  `tba_auth` MUST govern authentication anomaly detection as a detection and telemetry capability, separate from release-governance risk tracking or protocol security checks.
 
   ## Current Implementation Status
 

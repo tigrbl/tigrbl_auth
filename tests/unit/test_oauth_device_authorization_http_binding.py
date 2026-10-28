@@ -5,7 +5,7 @@ import importlib.util
 import pytest
 from httpx import ASGITransport, AsyncClient
 from tigrbl import TigrblApp
-from tigrbl_auth_router_oauth_device_authorization import (
+from tba_router_oauth_device_authorization import (
     build_device_authorization_router,
     include_device_authorization_endpoint,
 )
@@ -43,7 +43,7 @@ def test_http_binding_builds_post_device_authorization_carrier() -> None:
 
     assert route.methods == {"POST"}
     assert importlib.util.find_spec(
-        "tigrbl_identity_storage_runtime.device_authorization"
+        "tba_runtime_identity_storage.device_authorization"
     ) is None
 
 

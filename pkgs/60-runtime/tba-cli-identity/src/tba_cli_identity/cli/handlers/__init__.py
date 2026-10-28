@@ -1,0 +1,21 @@
+from __future__ import annotations
+
+from tba_cli_identity.cli._fragment_loader import load_fragments as _load_fragments
+
+_load_fragments(
+    globals(),
+    __file__,
+    "handlers.py",
+    (
+        "_common",
+        "_runtime",
+        "_contracts",
+        "_claims_evidence",
+        "_adr_doctor",
+        "_discovery",
+        "_portability",
+        "_bootstrap_migrate",
+    ),
+)
+
+del _load_fragments

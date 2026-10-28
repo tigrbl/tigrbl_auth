@@ -9,25 +9,25 @@ import pytest
 
 
 def test_storage_does_not_export_provenance_builders() -> None:
-    assert importlib.util.find_spec("tigrbl_identity_storage.provenance") is None
+    assert importlib.util.find_spec("tba_storage_core.provenance") is None
 
 
 def test_storage_tables_do_not_export_ambient_session_module() -> None:
-    assert importlib.util.find_spec("tigrbl_identity_storage.tables._session") is None
+    assert importlib.util.find_spec("tba_storage_core.tables._session") is None
 
-    runtime_session = importlib.import_module("tigrbl_identity_storage_runtime.session")
-    assert runtime_session.storage_session.__module__ == "tigrbl_identity_storage_runtime.session"
-    assert runtime_session.resolve_storage_provider.__module__ == "tigrbl_identity_storage_runtime.session"
+    runtime_session = importlib.import_module("tba_runtime_identity_storage.session")
+    assert runtime_session.storage_session.__module__ == "tba_runtime_identity_storage.session"
+    assert runtime_session.resolve_storage_provider.__module__ == "tba_runtime_identity_storage.session"
 
 
-def test_storage_table_import_does_not_activate_tigrbl_runtime_bindings() -> None:
+def test_storage_table_import_does_not_activate_tba_runtime_bindings() -> None:
     storage_tables_source = Path(
-        "pkgs/01-storage/tigrbl-identity-storage/src/"
-        "tigrbl_identity_storage/tables/__init__.py"
+        "pkgs/01-storage/tba-storage-core/src/"
+        "tba_storage_core/tables/__init__.py"
     ).read_text(encoding="utf-8")
     registry_source = Path(
-        "pkgs/01-storage/tigrbl-identity-storage/src/"
-        "tigrbl_identity_storage/tables/_registry.py"
+        "pkgs/01-storage/tba-storage-core/src/"
+        "tba_storage_core/tables/_registry.py"
     ).read_text(encoding="utf-8")
 
     assert "from tigrbl import bind" not in storage_tables_source
@@ -36,7 +36,7 @@ def test_storage_table_import_does_not_activate_tigrbl_runtime_bindings() -> Non
     assert "rebind(" not in storage_tables_source
 
     runtime_initializer = importlib.import_module(
-        "tigrbl_identity_storage_runtime.initialize"
+        "tba_runtime_identity_storage.initialize"
     )
     assert callable(runtime_initializer.initializeIdentityRuntimeTables)
 
@@ -123,51 +123,51 @@ TABLE_MODULE_EXPORTS = {
 }
 
 
-def test_tigrbl_auth_tables_reexport_canonical_storage_symbols() -> None:
-    auth_tables = importlib.import_module("tigrbl_auth.tables")
-    storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
+def test_tba_auth_tables_reexport_canonical_storage_symbols() -> None:
+    auth_tables = importlib.import_module("tba_auth.tables")
+    storage_tables = importlib.import_module("tba_storage_core.tables")
 
     for name in storage_tables.__all__:
         assert getattr(auth_tables, name) is getattr(storage_tables, name)
 
     for module_name, exports in TABLE_MODULE_EXPORTS.items():
-        auth_module = importlib.import_module(f"tigrbl_auth.tables.{module_name}")
+        auth_module = importlib.import_module(f"tba_auth.tables.{module_name}")
         storage_module = importlib.import_module(
-            f"tigrbl_identity_storage.tables.{module_name}"
+            f"tba_storage_core.tables.{module_name}"
         )
         for exported in exports:
             assert getattr(auth_module, exported) is getattr(storage_module, exported)
 
 
 def test_renamed_identity_credential_tables_do_not_keep_legacy_modules() -> None:
-    storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
+    storage_tables = importlib.import_module("tba_storage_core.tables")
 
     for legacy_name in ("ApiKey", "Service", "ServiceKey"):
         assert legacy_name not in storage_tables.__all__
         assert not hasattr(storage_tables, legacy_name)
 
     for module_name in ("api_key", "service", "service_key"):
-        assert importlib.util.find_spec(f"tigrbl_identity_storage.tables.{module_name}") is None
-        assert importlib.util.find_spec(f"tigrbl_auth.tables.{module_name}") is None
+        assert importlib.util.find_spec(f"tba_storage_core.tables.{module_name}") is None
+        assert importlib.util.find_spec(f"tba_auth.tables.{module_name}") is None
 
 
 def test_renamed_crypto_key_tables_do_not_keep_legacy_modules() -> None:
-    storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
+    storage_tables = importlib.import_module("tba_storage_core.tables")
 
     for legacy_name in ("Key", "KeyVersion"):
         assert legacy_name not in storage_tables.__all__
         assert not hasattr(storage_tables, legacy_name)
 
     for module_name in ("key", "key_version"):
-        assert importlib.util.find_spec(f"tigrbl_identity_storage.tables.{module_name}") is None
-        assert importlib.util.find_spec(f"tigrbl_auth.tables.{module_name}") is None
+        assert importlib.util.find_spec(f"tba_storage_core.tables.{module_name}") is None
+        assert importlib.util.find_spec(f"tba_auth.tables.{module_name}") is None
 
 
-def test_tigrbl_auth_tables_and_db_facades_reexport_storage_symbols() -> None:
-    auth_tables = importlib.import_module("tigrbl_auth.tables")
-    storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
-    auth_db = importlib.import_module("tigrbl_auth.db")
-    runtime_db = importlib.import_module("tigrbl_identity_storage_runtime.engine")
+def test_tba_auth_tables_and_db_facades_reexport_storage_symbols() -> None:
+    auth_tables = importlib.import_module("tba_auth.tables")
+    storage_tables = importlib.import_module("tba_storage_core.tables")
+    auth_db = importlib.import_module("tba_auth.db")
+    runtime_db = importlib.import_module("tba_runtime_identity_storage.engine")
 
     for name in storage_tables.__all__:
         assert getattr(auth_tables, name) is getattr(storage_tables, name)
@@ -176,30 +176,30 @@ def test_tigrbl_auth_tables_and_db_facades_reexport_storage_symbols() -> None:
     assert auth_db.dsn == runtime_db.dsn
     assert auth_db.get_db is runtime_db.get_db
 
-    auth_realm = importlib.import_module("tigrbl_auth.tables.realm")
-    storage_realm = importlib.import_module("tigrbl_identity_storage.tables.realm")
+    auth_realm = importlib.import_module("tba_auth.tables.realm")
+    storage_realm = importlib.import_module("tba_storage_core.tables.realm")
     assert auth_realm.Realm is storage_realm.Realm
 
 
 def test_orm_export_paths_are_not_supported() -> None:
-    assert importlib.util.find_spec("tigrbl_auth.orm") is None
-    assert importlib.util.find_spec("tigrbl_identity_storage.orm") is None
+    assert importlib.util.find_spec("tba_auth.orm") is None
+    assert importlib.util.find_spec("tba_storage_core.orm") is None
 
 
-def test_tigrbl_auth_persistence_facade_reexports_storage_helpers() -> None:
-    auth_persistence = importlib.import_module("tigrbl_auth.services.persistence")
+def test_tba_auth_persistence_facade_reexports_storage_helpers() -> None:
+    auth_persistence = importlib.import_module("tba_auth.services.persistence")
     runtime_persistence = importlib.import_module(
-        "tigrbl_identity_storage_runtime.persistence"
+        "tba_runtime_identity_storage.persistence"
     )
 
     for name in runtime_persistence.__all__:
         assert getattr(auth_persistence, name) is getattr(runtime_persistence, name)
 
-    assert importlib.util.find_spec("tigrbl_identity_storage.persistence") is None
+    assert importlib.util.find_spec("tba_storage_core.persistence") is None
 
 
 def test_runtime_owns_consent_and_registration_lifecycle_adapters() -> None:
-    runtime = importlib.import_module("tigrbl_identity_storage_runtime")
+    runtime = importlib.import_module("tba_runtime_identity_storage")
 
     assert callable(runtime.record_consent_async)
     assert callable(runtime.revoke_consent_async)
@@ -207,14 +207,14 @@ def test_runtime_owns_consent_and_registration_lifecycle_adapters() -> None:
     assert callable(runtime.upsert_client_registration_async)
 
 
-def test_tigrbl_auth_migration_facades_reexport_storage_helpers() -> None:
-    auth_migrations = importlib.import_module("tigrbl_auth.migrations")
-    auth_runtime = importlib.import_module("tigrbl_auth.migrations.runtime")
-    auth_helpers = importlib.import_module("tigrbl_auth.migrations.helpers")
-    storage_migrations = importlib.import_module("tigrbl_identity_storage.migrations")
-    storage_runtime = importlib.import_module("tigrbl_identity_storage_runtime.migrations.runtime")
-    storage_runtime_migrations = importlib.import_module("tigrbl_identity_storage_runtime.migrations")
-    storage_helpers = importlib.import_module("tigrbl_identity_storage.migrations.helpers")
+def test_tba_auth_migration_facades_reexport_storage_helpers() -> None:
+    auth_migrations = importlib.import_module("tba_auth.migrations")
+    auth_runtime = importlib.import_module("tba_auth.migrations.runtime")
+    auth_helpers = importlib.import_module("tba_auth.migrations.helpers")
+    storage_migrations = importlib.import_module("tba_storage_core.migrations")
+    storage_runtime = importlib.import_module("tba_runtime_identity_storage.migrations.runtime")
+    storage_runtime_migrations = importlib.import_module("tba_runtime_identity_storage.migrations")
+    storage_helpers = importlib.import_module("tba_storage_core.migrations.helpers")
 
     for name in storage_migrations.__all__:
         assert getattr(auth_migrations, name) is getattr(storage_migrations, name)
@@ -227,152 +227,152 @@ def test_tigrbl_auth_migration_facades_reexport_storage_helpers() -> None:
 
 
 def test_executable_migration_runtime_lives_above_storage() -> None:
-    assert importlib.util.find_spec("tigrbl_identity_storage.migrations.runtime") is None
+    assert importlib.util.find_spec("tba_storage_core.migrations.runtime") is None
 
-    runtime = importlib.import_module("tigrbl_identity_storage_runtime.migrations.runtime")
+    runtime = importlib.import_module("tba_runtime_identity_storage.migrations.runtime")
     assert runtime.VERSIONS_DIR.name == "versions"
-    assert "tigrbl-identity-storage" in runtime.VERSIONS_DIR.parts
-    assert "tigrbl_identity_storage" in runtime.VERSIONS_DIR.parts
+    assert "tba-storage-core" in runtime.VERSIONS_DIR.parts
+    assert "tba_storage_core" in runtime.VERSIONS_DIR.parts
 
 
 def test_executable_metadata_publishers_live_above_storage() -> None:
     old_modules = (
-        "tigrbl_identity_storage.tables.realm._oidc_discovery",
-        "tigrbl_identity_storage.tables.realm._oauth_authorization_server_metadata",
-        "tigrbl_identity_storage.tables.token_record._protected_resource_metadata",
-        "tigrbl_identity_storage.tables.token_record._resource_validation_metadata",
+        "tba_storage_core.tables.realm._oidc_discovery",
+        "tba_storage_core.tables.realm._oauth_authorization_server_metadata",
+        "tba_storage_core.tables.token_record._protected_resource_metadata",
+        "tba_storage_core.tables.token_record._resource_validation_metadata",
     )
     for module_name in old_modules:
         assert importlib.util.find_spec(module_name) is None
 
     oidc_surface = importlib.import_module(
-        "tigrbl_auth_backend_app_core.surfaces.oidc_discovery_surface"
+        "tba_app_backend_core.surfaces.oidc_discovery_surface"
     )
     assert importlib.util.find_spec(
-        "tigrbl_identity_storage_runtime.metadata.oidc_discovery"
+        "tba_runtime_identity_storage.metadata.oidc_discovery"
     ) is None
     assert oidc_surface.include_openid_configuration.__module__ == (
-        "tigrbl_auth_backend_app_core.surfaces.oidc_discovery_surface"
+        "tba_app_backend_core.surfaces.oidc_discovery_surface"
     )
     rfc8414_surface = importlib.import_module(
-        "tigrbl_auth_backend_app_core.surfaces.authorization_server_metadata_surface"
+        "tba_app_backend_core.surfaces.authorization_server_metadata_surface"
     )
     assert importlib.util.find_spec(
-        "tigrbl_identity_storage_runtime.metadata.authorization_server_metadata"
+        "tba_runtime_identity_storage.metadata.authorization_server_metadata"
     ) is None
     assert rfc8414_surface.include_rfc8414.__module__ == (
-        "tigrbl_auth_backend_app_core.surfaces.authorization_server_metadata_surface"
+        "tba_app_backend_core.surfaces.authorization_server_metadata_surface"
     )
     rfc9728_surface = importlib.import_module(
-        "tigrbl_auth_backend_app_core.surfaces.protected_resource_metadata_surface"
+        "tba_app_backend_core.surfaces.protected_resource_metadata_surface"
     )
     assert importlib.util.find_spec(
-        "tigrbl_identity_storage_runtime.metadata.protected_resource_metadata"
+        "tba_runtime_identity_storage.metadata.protected_resource_metadata"
     ) is None
     assert rfc9728_surface.include_rfc9728.__module__ == (
-        "tigrbl_auth_backend_app_core.surfaces.protected_resource_metadata_surface"
+        "tba_app_backend_core.surfaces.protected_resource_metadata_surface"
     )
     resource_validation_surface = importlib.import_module(
-        "tigrbl_auth_backend_app_core.surfaces.resource_validation_metadata_surface"
+        "tba_app_backend_core.surfaces.resource_validation_metadata_surface"
     )
     assert importlib.util.find_spec(
-        "tigrbl_identity_storage_runtime.metadata.resource_validation_metadata"
+        "tba_runtime_identity_storage.metadata.resource_validation_metadata"
     ) is None
     assert resource_validation_surface.include_resource_validation_metadata.__module__ == (
-        "tigrbl_auth_backend_app_core.surfaces.resource_validation_metadata_surface"
+        "tba_app_backend_core.surfaces.resource_validation_metadata_surface"
     )
 
 
 def test_executable_revocation_publisher_lives_above_storage() -> None:
-    assert importlib.util.find_spec("tigrbl_identity_storage.tables.revoked_token._route") is None
-    assert importlib.util.find_spec("tigrbl_identity_storage.tables.revoked_token._op") is None
+    assert importlib.util.find_spec("tba_storage_core.tables.revoked_token._route") is None
+    assert importlib.util.find_spec("tba_storage_core.tables.revoked_token._op") is None
 
-    runtime = importlib.import_module("tigrbl_identity_storage_runtime.revocation")
-    carrier = importlib.import_module("tigrbl_auth_backend_app_core.surfaces.revocation_surface")
-    lifecycle = importlib.import_module("tigrbl_identity_storage_runtime.token_lifecycle")
-    storage = importlib.import_module("tigrbl_identity_storage.tables.revoked_token")
+    runtime = importlib.import_module("tba_runtime_identity_storage.revocation")
+    carrier = importlib.import_module("tba_app_backend_core.surfaces.revocation_surface")
+    lifecycle = importlib.import_module("tba_runtime_identity_storage.token_lifecycle")
+    storage = importlib.import_module("tba_storage_core.tables.revoked_token")
 
     assert not hasattr(runtime, "api")
     assert not hasattr(runtime, "router")
     assert not hasattr(runtime, "include_revocation_endpoint")
     assert carrier.include_revocation_endpoint.__module__ == (
-        "tigrbl_auth_backend_app_core.surfaces.revocation_surface"
+        "tba_app_backend_core.surfaces.revocation_surface"
     )
-    assert importlib.util.find_spec("tigrbl_identity_storage.tables.revoked_token._ops") is None
+    assert importlib.util.find_spec("tba_storage_core.tables.revoked_token._ops") is None
     assert runtime.revoke_token_async is lifecycle.revoke_token_async
     assert not hasattr(storage, "api")
     assert not hasattr(storage, "router")
 
 
 def test_executable_par_publisher_lives_above_storage() -> None:
-    assert importlib.util.find_spec("tigrbl_identity_storage.tables.pushed_authorization_request._op") is None
+    assert importlib.util.find_spec("tba_storage_core.tables.pushed_authorization_request._op") is None
 
-    assert importlib.util.find_spec("tigrbl_identity_storage_runtime.par") is None
-    runtime = importlib.import_module("tigrbl_auth_backend_app_core.surfaces.par_surface")
-    carrier = importlib.import_module("tigrbl_auth_router_oauth_par")
-    storage = importlib.import_module("tigrbl_identity_storage.tables.pushed_authorization_request")
+    assert importlib.util.find_spec("tba_runtime_identity_storage.par") is None
+    runtime = importlib.import_module("tba_app_backend_core.surfaces.par_surface")
+    carrier = importlib.import_module("tba_router_oauth_pushed_authorization_request")
+    storage = importlib.import_module("tba_storage_core.tables.pushed_authorization_request")
 
-    assert runtime.include_par_endpoint.__module__ == "tigrbl_auth_backend_app_core.surfaces.par_surface"
+    assert runtime.include_par_endpoint.__module__ == "tba_app_backend_core.surfaces.par_surface"
     assert carrier.build_pushed_authorization_router.__module__ == (
-        "tigrbl_auth_router_oauth_par.binding"
+        "tba_router_oauth_pushed_authorization_request.binding"
     )
     assert not hasattr(storage, "api")
     assert not hasattr(storage, "router")
 
 
 def test_executable_device_authorization_publisher_lives_above_storage() -> None:
-    assert importlib.util.find_spec("tigrbl_identity_storage.tables.device_code._op") is None
+    assert importlib.util.find_spec("tba_storage_core.tables.device_code._op") is None
 
     runtime = importlib.import_module(
-        "tigrbl_auth_backend_app_core.surfaces.device_authorization_surface"
+        "tba_app_backend_core.surfaces.device_authorization_surface"
     )
-    storage = importlib.import_module("tigrbl_identity_storage.tables.device_code")
+    storage = importlib.import_module("tba_storage_core.tables.device_code")
 
     assert runtime.api is runtime.router
     assert runtime.include_device_authorization_endpoint.__module__ == (
-        "tigrbl_auth_backend_app_core.surfaces.device_authorization_surface"
+        "tba_app_backend_core.surfaces.device_authorization_surface"
     )
     with pytest.raises(ModuleNotFoundError):
         importlib.import_module(
-            "tigrbl_identity_storage_runtime.device_authorization"
+            "tba_runtime_identity_storage.device_authorization"
         )
     assert not hasattr(storage, "api")
     assert not hasattr(storage, "router")
 
 
 def test_executable_logout_publisher_lives_above_storage() -> None:
-    assert importlib.util.find_spec("tigrbl_identity_storage.tables.logout_state._op") is None
+    assert importlib.util.find_spec("tba_storage_core.tables.logout_state._op") is None
 
-    runtime = importlib.import_module("tigrbl_auth_backend_app_core.surfaces.logout_surface")
-    storage = importlib.import_module("tigrbl_identity_storage.tables.logout_state")
+    runtime = importlib.import_module("tba_app_backend_core.surfaces.logout_surface")
+    storage = importlib.import_module("tba_storage_core.tables.logout_state")
 
     assert runtime.api is runtime.router
     assert runtime.include_logout_endpoint.__module__ == (
-        "tigrbl_auth_backend_app_core.surfaces.logout_surface"
+        "tba_app_backend_core.surfaces.logout_surface"
     )
     with pytest.raises(ModuleNotFoundError):
-        importlib.import_module("tigrbl_identity_storage_runtime.logout")
+        importlib.import_module("tba_runtime_identity_storage.logout")
     assert not hasattr(storage, "api")
     assert not hasattr(storage, "router")
 
 
 def test_executable_client_registration_publisher_lives_above_storage() -> None:
     old_modules = (
-        "tigrbl_identity_storage.tables.client_registration._op",
-        "tigrbl_identity_storage.tables.client_registration._endpoint",
-        "tigrbl_identity_storage.tables.client_registration._route_op",
+        "tba_storage_core.tables.client_registration._op",
+        "tba_storage_core.tables.client_registration._endpoint",
+        "tba_storage_core.tables.client_registration._route_op",
     )
     for module_name in old_modules:
         assert importlib.util.find_spec(module_name) is None
 
-    runtime = importlib.import_module("tigrbl_auth_backend_app_core.surfaces.client_registration_surface")
-    storage = importlib.import_module("tigrbl_identity_storage.tables.client_registration")
+    runtime = importlib.import_module("tba_app_backend_core.surfaces.client_registration_surface")
+    storage = importlib.import_module("tba_storage_core.tables.client_registration")
 
     assert not hasattr(runtime, "api")
-    carrier = importlib.import_module("tigrbl_auth_router_oauth_registration")
+    carrier = importlib.import_module("tba_router_oauth_registration")
     assert callable(carrier.build_client_registration_router)
     assert runtime.include_client_registration_endpoint.__module__ == (
-        "tigrbl_auth_backend_app_core.surfaces.client_registration_surface"
+        "tba_app_backend_core.surfaces.client_registration_surface"
     )
     assert not hasattr(storage, "api")
     assert not hasattr(storage, "router")
@@ -380,41 +380,41 @@ def test_executable_client_registration_publisher_lives_above_storage() -> None:
 
 def test_executable_token_exchange_publisher_lives_above_storage() -> None:
     old_modules = (
-        "tigrbl_identity_storage.tables.token_record._token_exchange",
-        "tigrbl_identity_storage.tables.token_record._token_exchange_endpoint",
-        "tigrbl_identity_storage_runtime.token_exchange",
+        "tba_storage_core.tables.token_record._token_exchange",
+        "tba_storage_core.tables.token_record._token_exchange_endpoint",
+        "tba_runtime_identity_storage.token_exchange",
     )
     for module_name in old_modules:
         assert importlib.util.find_spec(module_name) is None
 
-    runtime = importlib.import_module("tigrbl_auth_backend_app_core.surfaces.token_exchange_surface")
-    storage = importlib.import_module("tigrbl_identity_storage.tables.token_record")
+    runtime = importlib.import_module("tba_app_backend_core.surfaces.token_exchange_surface")
+    storage = importlib.import_module("tba_storage_core.tables.token_record")
 
     assert runtime.api is runtime.router
     assert runtime.include_token_exchange_endpoint.__module__ == (
-        "tigrbl_auth_backend_app_core.surfaces.token_exchange_surface"
+        "tba_app_backend_core.surfaces.token_exchange_surface"
     )
     assert not hasattr(storage, "token_exchange")
 
 
 def test_executable_userinfo_publisher_lives_above_storage() -> None:
     old_modules = (
-        "tigrbl_identity_storage.tables.user._oidc_userinfo",
-        "tigrbl_identity_storage.tables.user._oidc_userinfo_top",
-        "tigrbl_identity_storage.tables.user._rp_userinfo_client",
+        "tba_storage_core.tables.user._oidc_userinfo",
+        "tba_storage_core.tables.user._oidc_userinfo_top",
+        "tba_storage_core.tables.user._rp_userinfo_client",
     )
     for module_name in old_modules:
         assert importlib.util.find_spec(module_name) is None
 
-    runtime = importlib.import_module("tigrbl_auth_backend_app_core.surfaces.userinfo_surface")
-    storage = importlib.import_module("tigrbl_identity_storage.tables.user")
+    runtime = importlib.import_module("tba_app_backend_core.surfaces.userinfo_surface")
+    storage = importlib.import_module("tba_storage_core.tables.user")
 
     assert runtime.api is runtime.router
     assert runtime.include_oidc_userinfo.__module__ == (
-        "tigrbl_auth_backend_app_core.surfaces.userinfo_surface"
+        "tba_app_backend_core.surfaces.userinfo_surface"
     )
     with pytest.raises(ModuleNotFoundError):
-        importlib.import_module("tigrbl_identity_storage_runtime.userinfo")
+        importlib.import_module("tba_runtime_identity_storage.userinfo")
     assert not hasattr(storage, "api")
     assert not hasattr(storage, "router")
     assert not hasattr(storage, "userinfo")
@@ -422,29 +422,29 @@ def test_executable_userinfo_publisher_lives_above_storage() -> None:
 
 def test_executable_introspection_publisher_lives_above_storage() -> None:
     old_modules = (
-        "tigrbl_identity_storage.tables.token_record._op",
-        "tigrbl_identity_storage.tables.token_record._introspection",
-        "tigrbl_identity_storage.tables.token_record._introspection_store",
-        "tigrbl_identity_storage.tables.token_record._lifecycle",
-        "tigrbl_identity_storage.tables.token_record._endpoint",
-        "tigrbl_identity_storage.tables.token_record._route",
+        "tba_storage_core.tables.token_record._op",
+        "tba_storage_core.tables.token_record._introspection",
+        "tba_storage_core.tables.token_record._introspection_store",
+        "tba_storage_core.tables.token_record._lifecycle",
+        "tba_storage_core.tables.token_record._endpoint",
+        "tba_storage_core.tables.token_record._route",
     )
     for module_name in old_modules:
         assert importlib.util.find_spec(module_name) is None
 
-    runtime = importlib.import_module("tigrbl_identity_storage_runtime.introspection")
-    carrier = importlib.import_module("tigrbl_auth_backend_app_core.surfaces.introspection_surface")
-    storage = importlib.import_module("tigrbl_identity_storage.tables.token_record")
+    runtime = importlib.import_module("tba_runtime_identity_storage.introspection")
+    carrier = importlib.import_module("tba_app_backend_core.surfaces.introspection_surface")
+    storage = importlib.import_module("tba_storage_core.tables.token_record")
 
     assert not hasattr(runtime, "api")
     assert not hasattr(runtime, "router")
     assert not hasattr(runtime, "include_introspection_endpoint")
     assert carrier.include_introspection_endpoint.__module__ == (
-        "tigrbl_auth_backend_app_core.surfaces.introspection_surface"
+        "tba_app_backend_core.surfaces.introspection_surface"
     )
-    assert importlib.util.find_spec("tigrbl_identity_storage.tables.token_record._ops") is None
+    assert importlib.util.find_spec("tba_storage_core.tables.token_record._ops") is None
     assert runtime.introspect_token_async.__module__ == (
-        "tigrbl_identity_storage_runtime.token_lifecycle"
+        "tba_runtime_identity_storage.token_lifecycle"
     )
     assert not hasattr(storage, "introspect")
     assert not hasattr(storage, "include_introspection_endpoint")
@@ -452,17 +452,17 @@ def test_executable_introspection_publisher_lives_above_storage() -> None:
 
 def test_executable_auth_flow_composition_lives_above_storage() -> None:
     old_modules = (
-        "tigrbl_identity_storage.tables.auth_code._authz_surface",
-        "tigrbl_identity_storage.tables.auth_code._auth_flows",
-        "tigrbl_identity_storage.tables.auth_code._oidc_route",
+        "tba_storage_core.tables.auth_code._authz_surface",
+        "tba_storage_core.tables.auth_code._auth_flows",
+        "tba_storage_core.tables.auth_code._oidc_route",
     )
     for module_name in old_modules:
         assert importlib.util.find_spec(module_name) is None
 
-    authz_surface = importlib.import_module("tigrbl_auth_backend_app_core.surfaces.authz_surface")
-    auth_flows = importlib.import_module("tigrbl_auth_backend_app_core.surfaces.auth_flows")
+    authz_surface = importlib.import_module("tba_app_backend_core.surfaces.authz_surface")
+    auth_flows = importlib.import_module("tba_app_backend_core.surfaces.auth_flows")
     authorization = importlib.import_module(
-        "tigrbl_auth_backend_app_core.surfaces.authorization_surface"
+        "tba_app_backend_core.surfaces.authorization_surface"
     )
 
     assert not hasattr(authz_surface, "api")
@@ -472,15 +472,15 @@ def test_executable_auth_flow_composition_lives_above_storage() -> None:
     assert hasattr(auth_flows, "router")
     assert hasattr(authorization, "router")
     with pytest.raises(ModuleNotFoundError):
-        importlib.import_module("tigrbl_identity_storage_runtime.authorization")
+        importlib.import_module("tba_runtime_identity_storage.authorization")
 
 
 def test_executable_account_surface_composition_lives_above_storage() -> None:
     assert importlib.util.find_spec(
-        "tigrbl_identity_storage.tables.user._account_surface"
+        "tba_storage_core.tables.user._account_surface"
     ) is None
 
-    account_surface = importlib.import_module("tigrbl_auth_backend_app_my_account.routes")
+    account_surface = importlib.import_module("tba_app_backend_my_account.routes")
 
     assert hasattr(account_surface, "router")
     assert not hasattr(account_surface, "api")
@@ -488,26 +488,26 @@ def test_executable_account_surface_composition_lives_above_storage() -> None:
 
 def test_operator_service_composition_lives_above_storage() -> None:
     old_modules = (
-        "tigrbl_identity_storage.operator_store",
-        "tigrbl_identity_storage.resource_service",
-        "tigrbl_identity_storage.session_service",
-        "tigrbl_identity_storage.audit",
-        "tigrbl_identity_storage.portability",
-        "tigrbl_identity_storage._operator_store",
-        "tigrbl_identity_storage._resource_service",
+        "tba_storage_core.operator_store",
+        "tba_storage_core.resource_service",
+        "tba_storage_core.session_service",
+        "tba_storage_core.audit",
+        "tba_storage_core.portability",
+        "tba_storage_core._operator_store",
+        "tba_storage_core._resource_service",
     )
     for module_name in old_modules:
         assert importlib.util.find_spec(module_name) is None
 
     runtime_modules = (
-        "tigrbl_identity_storage_runtime.operator_store",
-        "tigrbl_identity_storage_runtime.resource_service",
-        "tigrbl_identity_storage_runtime.session_service",
-        "tigrbl_identity_storage_runtime.audit",
-        "tigrbl_identity_storage_runtime.portability",
-        "tigrbl_identity_storage_runtime._operator_store",
-        "tigrbl_identity_storage_runtime._resource_service",
-        "tigrbl_identity_storage_runtime.key_management",
+        "tba_runtime_identity_storage.operator_store",
+        "tba_runtime_identity_storage.resource_service",
+        "tba_runtime_identity_storage.session_service",
+        "tba_runtime_identity_storage.audit",
+        "tba_runtime_identity_storage.portability",
+        "tba_runtime_identity_storage._operator_store",
+        "tba_runtime_identity_storage._resource_service",
+        "tba_runtime_identity_storage.key_management",
     )
     for module_name in runtime_modules:
         assert importlib.import_module(module_name).__name__ == module_name
@@ -525,7 +525,7 @@ def test_lower_layers_do_not_import_storage_runtime_composition() -> None:
     offenders: list[str] = []
     for root in lower_layers:
         for path in root.rglob("*.py"):
-            if "tigrbl_identity_storage_runtime" in path.read_text(encoding="utf-8"):
+            if "tba_runtime_identity_storage" in path.read_text(encoding="utf-8"):
                 offenders.append(path.as_posix())
 
     assert offenders == []
@@ -533,8 +533,8 @@ def test_lower_layers_do_not_import_storage_runtime_composition() -> None:
 
 def test_token_table_route_does_not_call_sync_session_observer() -> None:
     path = Path(
-        "pkgs/01-storage/tigrbl-identity-storage/src/"
-        "tigrbl_identity_storage/tables/token_record/_table.py"
+        "pkgs/01-storage/tba-storage-core/src/"
+        "tba_storage_core/tables/token_record/_table.py"
     )
     source = path.read_text(encoding="utf-8")
 
@@ -542,17 +542,17 @@ def test_token_table_route_does_not_call_sync_session_observer() -> None:
     assert "session_service" not in source
 
 
-def test_tigrbl_auth_table_modules_do_not_define_duplicate_table_classes() -> None:
-    table_dir = Path("pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/tables")
+def test_tba_auth_table_modules_do_not_define_duplicate_table_classes() -> None:
+    table_dir = Path("pkgs/70-facade/tba-auth/src/tba_auth/tables")
     for path in table_dir.glob("*.py"):
         tree = ast.parse(path.read_text(encoding="utf-8"))
         class_defs = [node.name for node in ast.walk(tree) if isinstance(node, ast.ClassDef)]
         assert class_defs == [], f"{path} defines duplicate table classes: {class_defs}"
 
 
-def test_tigrbl_auth_migration_modules_do_not_define_duplicate_runtime_logic() -> None:
+def test_tba_auth_migration_modules_do_not_define_duplicate_runtime_logic() -> None:
     migration_files = [
-        Path("pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/migrations/__init__.py"),
+        Path("pkgs/70-facade/tba-auth/src/tba_auth/migrations/__init__.py"),
     ]
     for path in migration_files:
         tree = ast.parse(path.read_text(encoding="utf-8"))
@@ -567,21 +567,21 @@ def test_tigrbl_auth_migration_modules_do_not_define_duplicate_runtime_logic() -
 
 
 def test_storage_package_does_not_import_compat_table_facades() -> None:
-    storage_root = Path("pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage")
+    storage_root = Path("pkgs/01-storage/tba-storage-core/src/tba_storage_core")
     offenders = []
     for path in storage_root.rglob("*.py"):
         text = path.read_text(encoding="utf-8")
-        if "from tigrbl_auth.tables" in text or "import tigrbl_auth.tables" in text:
+        if "from tba_auth.tables" in text or "import tba_auth.tables" in text:
             offenders.append(str(path))
     assert offenders == []
 
 
 def test_storage_migrations_import_canonical_models() -> None:
     migration_root = Path(
-        "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/migrations"
+        "pkgs/01-storage/tba-storage-core/src/tba_storage_core/migrations"
     )
     migration_files = list(migration_root.rglob("*.py"))
     assert migration_files
     for path in migration_files:
         text = path.read_text(encoding="utf-8")
-        assert "tigrbl_auth.tables" not in text
+        assert "tba_auth.tables" not in text

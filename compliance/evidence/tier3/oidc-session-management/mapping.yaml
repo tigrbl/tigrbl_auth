@@ -1,14 +1,14 @@
 targets:
 - OIDC Session Management
 modules:
-- tigrbl_auth/standards/oidc/session_mgmt.py
-- tigrbl_auth/standards/http/cookies.py
-- tigrbl_auth/ops/login.py
-- tigrbl_auth/ops/authorize.py
-- tigrbl_auth/ops/logout.py
-- tigrbl_auth/tables/auth_session.py
-- tigrbl_auth/tables/auth_code.py
-- tigrbl_auth/services/persistence.py
+- tba_auth/standards/oidc/session_mgmt.py
+- tba_auth/standards/http/cookies.py
+- tba_auth/ops/login.py
+- tba_auth/ops/authorize.py
+- tba_auth/ops/logout.py
+- tba_auth/tables/auth_session.py
+- tba_auth/tables/auth_code.py
+- tba_auth/services/persistence.py
 tests:
 - tests/unit/test_session_logout_cluster_b.py
 - tests/conformance/production/test_oidc_session_management.py

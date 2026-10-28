@@ -2,11 +2,11 @@ from __future__ import annotations
 
 from types import SimpleNamespace
 
-from tigrbl_identity_server.security.token_introspection import (
+from tba_server_identity.security.token_introspection import (
     build_rfc7662_introspection_service,
     token_introspection,
 )
-from tigrbl_identity_storage_runtime.token_lifecycle import introspect_token_async
+from tba_runtime_identity_storage.token_lifecycle import introspect_token_async
 
 
 def test_runtime_composes_durable_lookup_as_reportable_capability() -> None:

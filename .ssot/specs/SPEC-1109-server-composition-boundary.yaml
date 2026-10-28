@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification governs `tigrbl-identity-server` and shared Tigrbl Auth server composition."
+summary: "This specification governs `tba-server-identity` and shared TBA server composition."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -24,7 +24,7 @@ references: []
 body: |-
   ## Scope
   
-  This specification governs `tigrbl-identity-server` and shared Tigrbl Auth server composition.
+  This specification governs `tba-server-identity` and shared TBA server composition.
   
   ## First-Class Objects
   

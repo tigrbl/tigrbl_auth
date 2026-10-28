@@ -4,8 +4,8 @@ import pytest
 from http import HTTPStatus as status
 from httpx import AsyncClient
 
-from tigrbl_auth.runtime_cfg import settings
-from tigrbl_identity_storage_runtime.revocation import (
+from tba_auth.runtime_cfg import settings
+from tba_runtime_identity_storage.revocation import (
     is_revoked_async,
     reset_revocations_async,
 )

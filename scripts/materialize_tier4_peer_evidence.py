@@ -11,7 +11,7 @@ from typing import Any
 
 import yaml
 
-from tigrbl_auth.repo_truth import evaluate_tier4_bundle, package_version
+from tba_auth.repo_truth import evaluate_tier4_bundle, package_version
 
 ROOT = Path(__file__).resolve().parents[1]
 PEER_PROFILE_DIR = ROOT / 'compliance' / 'evidence' / 'peer_profiles'
@@ -180,8 +180,8 @@ def canonical_contract_snapshots() -> dict[str, list[str]]:
     profile_paths: dict[str, list[str]] = {}
     for label in ('baseline', 'production', 'hardening', 'peer-claim'):
         candidates = [
-            ROOT / 'specs' / 'openapi' / 'profiles' / label / 'tigrbl_auth.public.openapi.json',
-            ROOT / 'specs' / 'openrpc' / 'profiles' / label / 'tigrbl_auth.admin.openrpc.json',
+            ROOT / 'specs' / 'openapi' / 'profiles' / label / 'tba_auth.public.openapi.json',
+            ROOT / 'specs' / 'openrpc' / 'profiles' / label / 'tba_auth.admin.openrpc.json',
             ROOT / 'compliance' / 'claims' / f'effective-target-claims.{label}.yaml',
             ROOT / 'compliance' / 'evidence' / f'effective-release-evidence.{label}.yaml',
         ]
@@ -811,7 +811,7 @@ def write_peer_program_docs(promoted_targets: set[str], peer_matrix: list[dict[s
     lines = [
         '# runtime-foundation checkpoint3 Independent Peer Program and Strict Public Claims',
         '',
-        'This checkpoint extends the independent peer program for `tigrbl_auth`, installs full retained target-to-peer coverage, and preserves Tier 4 bundle normalization logic that fails closed when external artifacts are absent, incomplete, self-attested, or repository-staged.',
+        'This checkpoint extends the independent peer program for `tba_auth`, installs full retained target-to-peer coverage, and preserves Tier 4 bundle normalization logic that fails closed when external artifacts are absent, incomplete, self-attested, or repository-staged.',
         '',
         '## Implemented in this checkpoint',
         '',
@@ -1156,7 +1156,7 @@ def main(argv: list[str] | None = None) -> int:
     contract_paths = canonical_contract_snapshots()
 
     if external_root is not None:
-        os.environ['TIGRBL_AUTH_PEER_ARTIFACTS_ROOT'] = str(external_root)
+        os.environ['TBA_AUTH_PEER_ARTIFACTS_ROOT'] = str(external_root)
 
     materialize_external_handoff_templates(peer_profiles, counterparts)
     write_peer_profile_execution_reports(peer_profiles, external_root, retained_targets)

@@ -1,8 +1,8 @@
 import json
 
-from tigrbl_did_document_concrete import DidDocument
-from tigrbl_identity_document_contracts import IdentityDocumentVerificationRequest
-from tigrbl_identity_protocol_did_core import DidCoreProtocol
+from tba_concrete_did_document import DidDocument
+from tba_contracts_identity_document import IdentityDocumentVerificationRequest
+from tba_protocol_identity_did_core import DidCoreProtocol
 
 
 DOCUMENT = {

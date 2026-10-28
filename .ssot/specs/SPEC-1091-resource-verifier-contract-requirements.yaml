@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification defines first-class verifier-grade resource contracts for protected-resource behavior in `tigrbl_auth`."
+summary: "This specification defines first-class verifier-grade resource contracts for protected-resource behavior in `tba_auth`."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -24,7 +24,7 @@ references: []
 body: |-
   ## Overview
   
-  This specification defines first-class verifier-grade resource contracts for protected-resource behavior in `tigrbl_auth`.
+  This specification defines first-class verifier-grade resource contracts for protected-resource behavior in `tba_auth`.
   
   ## Contract Model
   
@@ -44,7 +44,7 @@ body: |-
   visibility requirements are not met, or when the verifier cannot determine
   whether a token remains valid under the declared resource contract.
   
-  Resource validation metadata exposed by Tigrbl Auth SHOULD be available through the resource-validation API surface. That surface MUST expose only validation metadata and validation endpoints such as JWKS, tenant JWKS, discovery, protected-resource metadata, and introspection where enabled. It MUST NOT expose human login, client registration, admin resources, diagnostics, or JSON-RPC.
+  Resource validation metadata exposed by TBA SHOULD be available through the resource-validation API surface. That surface MUST expose only validation metadata and validation endpoints such as JWKS, tenant JWKS, discovery, protected-resource metadata, and introspection where enabled. It MUST NOT expose human login, client registration, admin resources, diagnostics, or JSON-RPC.
   
   ## Projection Rules
   

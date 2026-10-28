@@ -2,13 +2,13 @@ from __future__ import annotations
 
 import pytest
 
-from tigrbl_identity_contracts.oauth.exchange import (
+from tba_contracts_identity.oauth.exchange import (
     TokenExchangeContext,
     TokenExchangeRequest,
     TokenExchangeResponse,
     TokenExchangeSenderConstraint,
 )
-from tigrbl_token_exchange_capability import TokenExchangeCapability
+from tba_capability_token_exchange import TokenExchangeCapability
 
 
 def _context() -> TokenExchangeContext:

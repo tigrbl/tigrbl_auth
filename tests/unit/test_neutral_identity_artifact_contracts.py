@@ -2,7 +2,7 @@ from datetime import datetime, timedelta, timezone
 
 import pytest
 
-from tigrbl_identity_core import (
+from tba_primitives_identity import (
     CredentialFormat,
     IdentityDocumentKind,
     ProtectedEnvelopeKind,
@@ -10,15 +10,15 @@ from tigrbl_identity_core import (
     WorkloadCredentialId,
     WorkloadReferenceId,
 )
-from tigrbl_identity_document_contracts import IdentityDocument
-from tigrbl_proof_of_possession_contracts import (
+from tba_contracts_identity_document import IdentityDocument
+from tba_contracts_proof_of_possession import (
     ConfirmationKeyBinding,
     PossessionProof,
     PossessionProofContext,
 )
-from tigrbl_protected_envelope_contracts import ProtectedEnvelope
-from tigrbl_token_contracts import TokenProfile
-from tigrbl_workload_identity_contracts import (
+from tba_contracts_protected_envelope import ProtectedEnvelope
+from tba_contracts_token import TokenProfile
+from tba_contracts_workload_identity import (
     WorkloadCredential,
     WorkloadCredentialRequest,
     WorkloadCredentialSet,

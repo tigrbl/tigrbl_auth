@@ -16,18 +16,18 @@ jobs:
       postgres:
         image: postgres:16
         env:
-          POSTGRES_DB: tigrbl_auth_ci
+          POSTGRES_DB: tba_auth_ci
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         ports:
           - 5432:5432
         options: >-
-          --health-cmd "pg_isready -U postgres -d tigrbl_auth_ci"
+          --health-cmd "pg_isready -U postgres -d tba_auth_ci"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
     env:
-      POSTGRES_URL: postgresql://postgres:postgres@127.0.0.1:5432/tigrbl_auth_ci
+      POSTGRES_URL: postgresql://postgres:postgres@127.0.0.1:5432/tba_auth_ci
     strategy:
       fail-fast: false
       matrix:
@@ -95,18 +95,18 @@ jobs:
       postgres:
         image: postgres:16
         env:
-          POSTGRES_DB: tigrbl_auth_ci
+          POSTGRES_DB: tba_auth_ci
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         ports:
           - 5432:5432
         options: >-
-          --health-cmd "pg_isready -U postgres -d tigrbl_auth_ci"
+          --health-cmd "pg_isready -U postgres -d tba_auth_ci"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
     env:
-      POSTGRES_URL: postgresql://postgres:postgres@127.0.0.1:5432/tigrbl_auth_ci
+      POSTGRES_URL: postgresql://postgres:postgres@127.0.0.1:5432/tba_auth_ci
     strategy:
       fail-fast: false
       matrix:
@@ -174,18 +174,18 @@ jobs:
       postgres:
         image: postgres:16
         env:
-          POSTGRES_DB: tigrbl_auth_ci
+          POSTGRES_DB: tba_auth_ci
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         ports:
           - 5432:5432
         options: >-
-          --health-cmd "pg_isready -U postgres -d tigrbl_auth_ci"
+          --health-cmd "pg_isready -U postgres -d tba_auth_ci"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
     env:
-      POSTGRES_URL: postgresql://postgres:postgres@127.0.0.1:5432/tigrbl_auth_ci
+      POSTGRES_URL: postgresql://postgres:postgres@127.0.0.1:5432/tba_auth_ci
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
@@ -221,18 +221,18 @@ jobs:
       postgres:
         image: postgres:16
         env:
-          POSTGRES_DB: tigrbl_auth_ci
+          POSTGRES_DB: tba_auth_ci
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         ports:
           - 5432:5432
         options: >-
-          --health-cmd "pg_isready -U postgres -d tigrbl_auth_ci"
+          --health-cmd "pg_isready -U postgres -d tba_auth_ci"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
     env:
-      POSTGRES_URL: postgresql://postgres:postgres@127.0.0.1:5432/tigrbl_auth_ci
+      POSTGRES_URL: postgresql://postgres:postgres@127.0.0.1:5432/tba_auth_ci
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
@@ -249,7 +249,7 @@ jobs:
       - name: Run final certification gates
         shell: bash
         env:
-          TIGRBL_AUTH_VALIDATED_ARTIFACT_DOWNLOAD_ROOT: .artifacts/validated-downloads
+          TBA_AUTH_VALIDATED_ARTIFACT_DOWNLOAD_ROOT: .artifacts/validated-downloads
         run: tox -e py311-final-certification
       - name: Verify truth chain
         shell: bash

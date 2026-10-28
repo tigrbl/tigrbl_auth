@@ -1,4 +1,4 @@
-# Python CLI Device Login Against `tigrbl_auth`
+# Python CLI Device Login Against `tba_auth`
 
 This repository exposes the server-side pieces needed for RFC 8628 device authorization:
 
@@ -45,7 +45,7 @@ The consumer package only needs:
 - a pre-registered client ID
 - an HTTP client
 
-It does not need to import `tigrbl_auth` directly in production. It only talks to:
+It does not need to import `tba_auth` directly in production. It only talks to:
 
 - `GET /.well-known/oauth-authorization-server`
 - `POST /device_authorization`

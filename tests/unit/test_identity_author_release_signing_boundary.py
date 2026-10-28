@@ -9,22 +9,22 @@ AUTHOR_ROOT = (
     ROOT
     / "pkgs"
     / "60-runtime"
-    / "tigrbl-identity-author"
+    / "tba-runtime-identity-authoring"
     / "src"
-    / "tigrbl_identity_author"
+    / "tba_runtime_identity_authoring"
 )
 JOSE_ROOT = (
     ROOT
     / "pkgs"
     / "20-providers"
-    / "tigrbl-identity-jose"
+    / "tba-provider-identity-jose"
     / "src"
-    / "tigrbl_identity_jose"
+    / "tba_provider_identity_jose"
 )
 
 
 def test_release_signing_lives_in_identity_author() -> None:
-    canonical = importlib.import_module("tigrbl_identity_author.release_signing")
+    canonical = importlib.import_module("tba_runtime_identity_authoring.release_signing")
 
     assert (AUTHOR_ROOT / "release_signing").is_dir()
     assert not (JOSE_ROOT / "_release_signing").exists()
@@ -37,9 +37,9 @@ def test_jose_release_signing_bridge_is_removed() -> None:
     assert not (JOSE_ROOT / "release_signing.py").exists()
 
 
-def test_tigrbl_auth_release_signing_facade_points_to_identity_author() -> None:
-    canonical = importlib.import_module("tigrbl_identity_author.release_signing")
-    legacy = importlib.import_module("tigrbl_auth.release_signing")
+def test_tba_auth_release_signing_facade_points_to_identity_author() -> None:
+    canonical = importlib.import_module("tba_runtime_identity_authoring.release_signing")
+    legacy = importlib.import_module("tba_auth.release_signing")
 
     assert legacy is canonical
 
@@ -49,9 +49,9 @@ def test_release_signing_consumers_do_not_import_jose_owner() -> None:
         ROOT
         / "pkgs"
         / "60-runtime"
-        / "tigrbl-identity-cli"
+        / "tba-cli-identity"
         / "src"
-        / "tigrbl_identity_cli"
+        / "tba_cli_identity"
         / "cli"
         / "reports"
         / "_common.py",
@@ -61,6 +61,6 @@ def test_release_signing_consumers_do_not_import_jose_owner() -> None:
 
     for path in source_paths:
         source = path.read_text(encoding="utf-8")
-        assert "tigrbl_identity_author.release_signing" in source, path
-        assert "tigrbl_identity_jose.release_signing" not in source, path
-        assert "tigrbl_auth.release_signing" not in source, path
+        assert "tba_runtime_identity_authoring.release_signing" in source, path
+        assert "tba_provider_identity_jose.release_signing" not in source, path
+        assert "tba_auth.release_signing" not in source, path

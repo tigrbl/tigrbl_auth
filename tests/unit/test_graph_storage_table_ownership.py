@@ -14,7 +14,7 @@ def _unique_columns(model: type) -> set[tuple[str, ...]]:
 
 
 def test_graph_storage_exports_concrete_graph_tables_not_generic_graph_registry() -> None:
-    tables = importlib.import_module("tigrbl_identity_storage.tables")
+    tables = importlib.import_module("tba_storage_core.tables")
 
     for abstract_name in ("GraphBase", "GraphNodeBase", "GraphEdgeBase"):
         assert abstract_name not in tables.TABLE_MODEL_BY_NAME
@@ -32,7 +32,7 @@ def test_graph_storage_exports_concrete_graph_tables_not_generic_graph_registry(
 
 
 def test_graph_edge_uniqueness_is_edge_key_scoped_not_src_dst_kind() -> None:
-    tables = importlib.import_module("tigrbl_identity_storage.tables")
+    tables = importlib.import_module("tba_storage_core.tables")
 
     for model in (tables.AuthorityDerivationGraphEdge, tables.TrustFederationGraphEdge):
         uniques = _unique_columns(model)
@@ -44,11 +44,11 @@ def test_graph_edge_uniqueness_is_edge_key_scoped_not_src_dst_kind() -> None:
 
 
 def test_graph_algorithms_are_storage_neutral_and_layer_30_specs_bind_tables() -> None:
-    tables = importlib.import_module("tigrbl_identity_storage.tables")
-    authority_concrete = importlib.import_module("tigrbl_authority_graph_concrete")
-    trust_concrete = importlib.import_module("tigrbl_trust_federation_graph_concrete")
-    authority = importlib.import_module("tigrbl_authz_policy_authority_derivation_graph")
-    trust = importlib.import_module("tigrbl_identity_admin_trust_federation_graph")
+    tables = importlib.import_module("tba_storage_core.tables")
+    authority_concrete = importlib.import_module("tba_concrete_authority_graph")
+    trust_concrete = importlib.import_module("tba_concrete_trust_federation_graph")
+    authority = importlib.import_module("tba_durability_authorization_policy_authority_derivation_graph")
+    trust = importlib.import_module("tba_durability_identity_admin_trust_federation_graph")
 
     assert not hasattr(authority_concrete.AuthorityDerivationGraph, "graph_table")
     assert not hasattr(trust_concrete.TrustFederationGraph, "graph_table")
@@ -68,9 +68,9 @@ def test_graph_storage_does_not_introduce_repository_wrappers() -> None:
         "TrustGraphRepository",
     }
     modules = (
-        importlib.import_module("tigrbl_identity_storage.tables"),
-        importlib.import_module("tigrbl_authz_policy_authority_derivation_graph"),
-        importlib.import_module("tigrbl_identity_admin_trust_federation_graph"),
+        importlib.import_module("tba_storage_core.tables"),
+        importlib.import_module("tba_durability_authorization_policy_authority_derivation_graph"),
+        importlib.import_module("tba_durability_identity_admin_trust_federation_graph"),
     )
 
     for module in modules:

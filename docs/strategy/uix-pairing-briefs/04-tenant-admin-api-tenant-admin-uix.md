@@ -1,10 +1,10 @@
 # Tenant Admin API + UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-backend-app-tenant-admin` + `@tigrbl-auth/tenant-admin-uix`<br>
+**Pairing:** `tba-app-backend-tenant-admin` + `@tba/ui-tenant-admin`<br>
 **Status:** Delivery brief<br>
 **Prepared:** July 11, 2026<br>
-**Backend app owner:** `pkgs/90-backend-apps/tigrbl-auth-backend-app-tenant-admin`<br>
-**UIX owner:** `pkgs/105-ui/tenant-admin-uix`
+**Backend app owner:** `pkgs/90-backend-apps/tba-app-backend-tenant-admin`<br>
+**UIX owner:** `pkgs/105-ui/tba-ui-tenant-admin`
 
 ## 1. Product Decision
 
@@ -32,7 +32,7 @@ The active tenant and effective administrator authority must remain visible thro
 
 ## 3. API Boundary
 
-The UIX consumes exactly one configured tenant-admin backend-app base URL through `VITE_TIGRBL_AUTH_TENANT_ADMIN_BACKEND_APP_BASE_URL`.
+The UIX consumes exactly one configured tenant-admin backend-app base URL through `VITE_TBA_AUTH_TENANT_ADMIN_BACKEND_APP_BASE_URL`.
 
 ### Owned resources
 
@@ -220,14 +220,14 @@ Produce a route-level copy deck containing:
 
 ## 11. Source Evidence
 
-- `pkgs/90-backend-apps/tigrbl-auth-backend-app-tenant-admin/README.md`
-- `pkgs/90-backend-apps/tigrbl-auth-backend-app-tenant-admin/src/tigrbl_auth_backend_app_tenant_admin/contract.py`
-- `pkgs/105-ui/tenant-admin-uix/README.md`
-- `pkgs/105-ui/tenant-admin-uix/App.tsx`
-- `pkgs/105-ui/tenant-admin-uix/services/tenantAdminClient.ts`
-- `pkgs/105-ui/tenant-admin-uix/services/backendSurface.ts`
-- `pkgs/105-ui/tenant-admin-uix/services/workflowCrud.test.ts`
-- `pkgs/105-ui/tenant-admin-uix/pages/tenantCrudPages.test.tsx`
-- `tests/packages/tigrbl-auth-backend-app-tenant-admin/`
+- `pkgs/90-backend-apps/tba-app-backend-tenant-admin/README.md`
+- `pkgs/90-backend-apps/tba-app-backend-tenant-admin/src/tba_app_backend_tenant_admin/contract.py`
+- `pkgs/105-ui/tba-ui-tenant-admin/README.md`
+- `pkgs/105-ui/tba-ui-tenant-admin/App.tsx`
+- `pkgs/105-ui/tba-ui-tenant-admin/services/tenantAdminClient.ts`
+- `pkgs/105-ui/tba-ui-tenant-admin/services/backendSurface.ts`
+- `pkgs/105-ui/tba-ui-tenant-admin/services/workflowCrud.test.ts`
+- `pkgs/105-ui/tba-ui-tenant-admin/pages/tenantCrudPages.test.tsx`
+- `tests/packages/tba-app-backend-tenant-admin/`
 - `tests/unit/test_product_api_surfaces.py`
 - Tenant-admin SSOT feature/claim/test/evidence/boundary records

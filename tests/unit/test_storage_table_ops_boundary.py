@@ -14,16 +14,16 @@ def package_src(name: str) -> Path:
     return matches[0]
 
 
-STORAGE_ROOT = package_src("tigrbl-identity-storage")
+STORAGE_ROOT = package_src("tba-storage-core")
 NON_STORAGE_SOURCE_ROOTS = [
-    package_src("tigrbl-auth-backend-app-my-account"),
-    package_src("tigrbl-auth-backend-app-public"),
-    package_src("tigrbl-auth-protocol-oauth"),
-    package_src("tigrbl-credentials"),
-    package_src("tigrbl-identity-operator"),
-    package_src("tigrbl-identity-server"),
+    package_src("tba-app-backend-my-account"),
+    package_src("tba-app-backend-public"),
+    package_src("tba-protocol-oauth"),
+    package_src("tba-credentials"),
+    package_src("tba-operator-identity"),
+    package_src("tba-server-identity"),
 ]
-STORAGE_RUNTIME_ROOT = package_src("tigrbl-identity-storage-runtime")
+STORAGE_RUNTIME_ROOT = package_src("tba-runtime-identity-storage")
 
 RAW_HANDLER_TOKENS = (
     ".handlers.create.core",
@@ -33,7 +33,7 @@ RAW_HANDLER_TOKENS = (
 )
 
 RAW_HANDLER_ALLOWLIST = {
-    "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/handler_records.py",
+    "pkgs/60-runtime/tba-server-identity/src/tba_server_identity/security/handler_records.py",
 }
 
 TABLE_ROUTE_FUNCTION_ALLOWLIST = {
@@ -132,7 +132,7 @@ def test_non_storage_packages_do_not_own_raw_durable_table_mutations() -> None:
 
 def test_no_rpc_support_is_reintroduced_in_product_api_packages() -> None:
     offenders: list[str] = []
-    for root in [package_src("tigrbl-auth-backend-app-my-account"), package_src("tigrbl-auth-backend-app-public")]:
+    for root in [package_src("tba-app-backend-my-account"), package_src("tba-app-backend-public")]:
         if not root.exists():
             continue
         for path in _python_files(root):
@@ -144,17 +144,17 @@ def test_no_rpc_support_is_reintroduced_in_product_api_packages() -> None:
 
 
 def test_protocol_and_facade_ops_packages_are_not_supported() -> None:
-    assert not (package_src("tigrbl-auth-protocol-oauth") / "tigrbl_auth_protocol_oauth" / "ops").exists()
-    assert not (package_src("tigrbl-auth") / "tigrbl_auth" / "ops").exists()
-    assert not (package_src("tigrbl-identity-server") / "tigrbl_identity_server" / "ops").exists()
-    assert not (package_src("tigrbl-identity-server") / "tigrbl_identity_server" / "rest" / "routers").exists()
-    assert not (package_src("tigrbl-auth") / "tigrbl_auth" / "api" / "rest" / "routers").exists()
+    assert not (package_src("tba-protocol-oauth") / "tba_protocol_oauth" / "ops").exists()
+    assert not (package_src("tba-auth") / "tba_auth" / "ops").exists()
+    assert not (package_src("tba-server-identity") / "tba_server_identity" / "ops").exists()
+    assert not (package_src("tba-server-identity") / "tba_server_identity" / "rest" / "routers").exists()
+    assert not (package_src("tba-auth") / "tba_auth" / "api" / "rest" / "routers").exists()
 
 
 def test_route_and_hook_declarations_are_owned_by_executable_layers() -> None:
     offenders: list[str] = []
-    storage_tables_root = package_src("tigrbl-identity-storage") / "tigrbl_identity_storage" / "tables"
-    storage_runtime_root = STORAGE_RUNTIME_ROOT / "tigrbl_identity_storage_runtime"
+    storage_tables_root = package_src("tba-storage-core") / "tba_storage_core" / "tables"
+    storage_runtime_root = STORAGE_RUNTIME_ROOT / "tba_runtime_identity_storage"
     executable_roots = tuple(
         root.resolve()
         for layer in ("50-protocols", "60-runtime", "80-routers")
@@ -183,14 +183,14 @@ def test_route_and_hook_declarations_are_owned_by_executable_layers() -> None:
 def test_protocol_packages_do_not_import_removed_oauth_ops() -> None:
     offenders: list[str] = []
     for root in [
-        package_src("tigrbl-auth-protocol-oauth"),
-        package_src("tigrbl-auth-protocol-oidc"),
-        package_src("tigrbl-auth-protocol-rp"),
+        package_src("tba-protocol-oauth"),
+        package_src("tba-protocol-oidc"),
+        package_src("tba-protocol-oidc-relying-party"),
     ]:
         for path in _python_files(root):
             rel = path.relative_to(ROOT).as_posix()
             source = path.read_text(encoding="utf-8")
-            if "tigrbl_auth_protocol_oauth.ops" in source:
+            if "tba_protocol_oauth.ops" in source:
                 offenders.append(f"{rel} imports removed oauth ops")
 
     assert offenders == []
@@ -198,7 +198,7 @@ def test_protocol_packages_do_not_import_removed_oauth_ops() -> None:
 
 def test_storage_table_ops_are_not_hidden_in_module_level_free_functions() -> None:
     offenders: list[str] = []
-    for path in (STORAGE_ROOT / "tigrbl_identity_storage" / "tables").glob("*.py"):
+    for path in (STORAGE_ROOT / "tba_storage_core" / "tables").glob("*.py"):
         if path.name in {"__init__.py", "engine.py"} or path.name.startswith("_"):
             continue
         tree = ast.parse(path.read_text(encoding="utf-8"))

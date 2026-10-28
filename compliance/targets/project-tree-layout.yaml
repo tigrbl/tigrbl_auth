@@ -1,5 +1,5 @@
 schema_version: 1
-package: tigrbl_auth
+package: tba_auth
 project_tree:
   required_directories:
   - docs/adr
@@ -41,11 +41,11 @@ project_tree:
   required_files:
   - pyproject.toml
   - uv.lock
-  - pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/app.py
-  - pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/gateway.py
-  - pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/surfaces.py
-  - pkgs/60-runtime/tigrbl-identity-cli/src/tigrbl_identity_cli/cli
-  - pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/__init__.py
+  - pkgs/60-runtime/tba-server-identity/src/tba_server_identity/app.py
+  - pkgs/60-runtime/tba-server-identity/src/tba_server_identity/gateway.py
+  - pkgs/60-runtime/tba-server-identity/src/tba_server_identity/surfaces.py
+  - pkgs/60-runtime/tba-cli-identity/src/tba_cli_identity/cli
+  - pkgs/70-facade/tba-auth/src/tba_auth/__init__.py
   - docs/architecture/PROJECT_TREE_LAYOUT.md
   - docs/architecture/MIGRATION_MOVE_PLAN.md
   - compliance/mappings/current-to-target-paths.yaml
@@ -76,11 +76,11 @@ project_tree:
       path: pkgs/60-runtime
       ownership: composition and integration seams
     cli:
-      path: pkgs/60-runtime/tigrbl-identity-cli
+      path: pkgs/60-runtime/tba-cli-identity
       ownership: operator and certification UX
     plugin:
       path: pkgs/70-facade
       ownership: stable public facade
     gateway:
-      path: pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/gateway.py
+      path: pkgs/60-runtime/tba-server-identity/src/tba_server_identity/gateway.py
       ownership: standalone composition

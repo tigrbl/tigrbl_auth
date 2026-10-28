@@ -2,7 +2,7 @@
 
 Research date: 2026-05-28
 
-Scope: this matrix compares `tigrbl_auth` with Auth0, Okta, Keycloak, FusionAuth, and Amazon Cognito / Amazon Verified Permissions for ACLs, RBAC, ABAC, DeBAC, PBAC, ReBAC, scopes, tenant isolation, policy lifecycle, and audit.
+Scope: this matrix compares `tba_auth` with Auth0, Okta, Keycloak, FusionAuth, and Amazon Cognito / Amazon Verified Permissions for ACLs, RBAC, ABAC, DeBAC, PBAC, ReBAC, scopes, tenant isolation, policy lifecycle, and audit.
 
 Authorization vocabulary is inconsistent across vendors. In this matrix:
 
@@ -13,7 +13,7 @@ Authorization vocabulary is inconsistent across vendors. In this matrix:
 - PBAC means policy-based or permission-based access control, depending on vendor wording.
 - ReBAC means relationship-based access control or graph authorization.
 
-| Authorization capability | tigrbl_auth | Auth0 | Okta | Keycloak | FusionAuth | Amazon Cognito / Verified Permissions |
+| Authorization capability | tba_auth | Auth0 | Okta | Keycloak | FusionAuth | Amazon Cognito / Verified Permissions |
 | --- | --- | --- | --- | --- | --- | --- |
 | Product framing | Policy is a first-class package boundary. Current executable primitives cover RBAC, ABAC, PBAC, delegation, admin policy, traces, and ReBAC-like tests, but product storage/admin surfaces are incomplete. See [Authorization Models Focus](authorization-models-focus.md). | Core Auth0 supports RBAC roles/permissions for APIs, while Auth0 FGA is a separate fine-grained authorization service. See [Auth0 RBAC roles](https://auth0.com/docs/authorization/guides/manage-roles) and [Auth0 FGA docs](https://docs.fga.dev/). | Okta splits admin authorization roles, app/API access policies, groups, scopes, custom admin roles, and FGA under the broader Okta/Auth0 portfolio. See [Okta roles overview](https://developer.okta.com/docs/reference/api/roles/). | Keycloak has realm/client roles, groups, scopes, and Authorization Services for resources, scopes, policies, and permissions. See [Keycloak Authorization Services](https://www.keycloak.org/docs/latest/authorization_services/). | FusionAuth supports application roles, groups, entities/relationships, and FGA integration. See [FusionAuth roles](https://fusionauth.io/docs/get-started/core-concepts/roles) and [FusionAuth docs authorization section](https://fusionauth.io/docs/). | Cognito has groups, scopes, IAM role integration, and resource servers; fine-grained policy decisions are better represented by Amazon Verified Permissions with Cedar. See [Cognito groups](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-user-groups.html) and [Verified Permissions](https://docs.aws.amazon.com/verifiedpermissions/). |
 | ACL / direct grants | Planned through `ResourceServerGrant`, delegation grants, relationship tuples, and role assignments; no mature ACL product surface yet. | Auth0 Core is role/permission centric; Auth0 FGA can represent direct object relationships such as user viewer of document. | Okta admin role assignments can target resources; app-level ACLs are usually modeled in applications or FGA. | Authorization Services can model user/resource/scope permissions and direct user policies. | Entity grants and user/application roles can model direct access. | Cognito groups are coarse; Verified Permissions can express direct principal-resource permissions in Cedar. |
@@ -48,16 +48,16 @@ The competitor pattern is not one authorization model. It is layered:
 | Fine-grained authorization | Separate FGA/PBAC/ReBAC service or module with authorization models, relationship tuples, policies, and check APIs. |
 | Audit and operations | Logs for policy changes, assignment changes, role changes, and authorization decisions where supported. |
 
-For `tigrbl_auth`, the target product shape should be:
+For `tba_auth`, the target product shape should be:
 
 | Product layer | Recommended owner |
 | --- | --- |
-| Authorization decision primitives | `tigrbl-authz-policy` |
-| Principal facts and memberships | `tigrbl-identity-principals` |
-| Credential and assurance facts | `tigrbl-credentials` |
-| OAuth scopes and resource indicators | `tigrbl-auth-protocol-oauth` |
-| Resource-server grants and enforcement | `tigrbl-authz-resource-server`, `tigrbl-auth-backend-app-resource-validation` |
-| Canonical role/policy/grant/relationship tables | `tigrbl-identity-storage` |
+| Authorization decision primitives | `tba-runtime-authorization-policy` |
+| Principal facts and memberships | `tba-concrete-identity-principals` |
+| Credential and assurance facts | `tba-credentials` |
+| OAuth scopes and resource indicators | `tba-protocol-oauth` |
+| Resource-server grants and enforcement | `tba-protocol-authorization-resource-server`, `tba-app-backend-resource-validation` |
+| Canonical role/policy/grant/relationship tables | `tba-storage-core` |
 | Admin lifecycle | Platform-admin, tenant-admin, developer, and service-admin frontdoors as scoped Management API slices |
 | Policy UI | Platform-admin and tenant-admin UIX first, developer/service-admin UIX where delegated |
 

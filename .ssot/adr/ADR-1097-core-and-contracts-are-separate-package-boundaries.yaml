@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "`tigrbl-identity-core` owns pure primitives such as IDs, refs, scopes,"
+summary: "`tba-primitives-identity` owns pure primitives such as IDs, refs, scopes,"
 supersedes: []
 superseded_by: []
 status_notes:
@@ -20,11 +20,11 @@ references: []
 body: |-
   ## Decision
   
-  `tigrbl-identity-core` owns pure primitives such as IDs, refs, scopes,
+  `tba-primitives-identity` owns pure primitives such as IDs, refs, scopes,
   audiences, issuers, subjects, grant types, result types, error codes, clocks,
   and feature/profile names.
   
-  `tigrbl-identity-contracts` owns public wire models, request/response schemas,
+  `tba-contracts-identity` owns public wire models, request/response schemas,
   metadata documents, OpenAPI/OpenRPC inputs, capability manifests, and typed
   error responses.
   

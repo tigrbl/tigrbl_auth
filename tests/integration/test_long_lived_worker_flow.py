@@ -2,17 +2,17 @@ import time
 import pytest
 from httpx import AsyncClient
 from http import HTTPStatus as status
-from tigrbl_identity_jose.framework import ExportPolicy, KeyUse, KeyAlg, KeyClass, KeySpec, LocalKeyProvider
+from tba_provider_identity_jose.framework import ExportPolicy, KeyUse, KeyAlg, KeyClass, KeySpec, LocalKeyProvider
 
-from tigrbl_auth import encode_jwt, decode_jwt
-from tigrbl_auth.crypto import hash_pw
-from tigrbl_auth.tables import Tenant, User
-from tigrbl_auth.rfc.rfc9449_dpop import (
+from tba_auth import encode_jwt, decode_jwt
+from tba_auth.crypto import hash_pw
+from tba_auth.tables import Tenant, User
+from tba_auth.rfc.rfc9449_dpop import (
     makeProof,
     jwk_from_public_key,
     jwk_thumbprint,
 )
-from tigrbl_auth.rfc.rfc8693 import TOKEN_EXCHANGE_GRANT_TYPE, TokenType
+from tba_auth.rfc.rfc8693 import TOKEN_EXCHANGE_GRANT_TYPE, TokenType
 
 
 @pytest.mark.integration

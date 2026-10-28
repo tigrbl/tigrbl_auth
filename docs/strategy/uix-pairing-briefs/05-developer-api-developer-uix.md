@@ -1,10 +1,10 @@
 # Developer API + UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-backend-app-developer` + `@tigrbl-auth/developer-uix`<br>
+**Pairing:** `tba-app-backend-developer` + `@tba/ui-developer`<br>
 **Status:** Delivery brief<br>
 **Prepared:** July 11, 2026<br>
-**Backend app owner:** `pkgs/90-backend-apps/tigrbl-auth-backend-app-developer`<br>
-**UIX owner:** `pkgs/105-ui/developer-uix`
+**Backend app owner:** `pkgs/90-backend-apps/tba-app-backend-developer`<br>
+**UIX owner:** `pkgs/105-ui/tba-ui-developer`
 
 ## 1. Product Decision
 
@@ -32,7 +32,7 @@ The experience must organize the current route inventory into one application li
 
 ## 3. API Boundary
 
-The UIX consumes exactly one configured developer backend-app base URL through `VITE_TIGRBL_AUTH_DEVELOPER_BACKEND_APP_BASE_URL`.
+The UIX consumes exactly one configured developer backend-app base URL through `VITE_TBA_AUTH_DEVELOPER_BACKEND_APP_BASE_URL`.
 
 ### Public developer capabilities
 
@@ -117,7 +117,7 @@ The OAuth tester may navigate the browser to the discovered public authorization
 ### Discovery and integration snippets
 
 - Render issuer, authorization/token endpoints, JWKS URI, supported scopes/grants/responses/auth methods, and profile/version context.
-- Provide tested snippets for `@tigrbl-auth/rp` workspace usage, server-side Python, and curl where appropriate.
+- Provide tested snippets for `@tba/client-oidc-relying-party` workspace usage, server-side Python, and curl where appropriate.
 - Separate stable public install instructions from repository/prerelease instructions; reviewed npm packages are not currently public.
 - Add expected output, productionization notes, copy feedback, and version markers.
 
@@ -222,15 +222,15 @@ Produce a route-level copy deck containing:
 
 ## 11. Source Evidence
 
-- `pkgs/90-backend-apps/tigrbl-auth-backend-app-developer/README.md`
-- `pkgs/90-backend-apps/tigrbl-auth-backend-app-developer/src/tigrbl_auth_backend_app_developer/contract.py`
-- `pkgs/105-ui/developer-uix/README.md`
-- `pkgs/105-ui/developer-uix/App.tsx`
-- `pkgs/105-ui/developer-uix/services/developerClient.ts`
-- `pkgs/105-ui/developer-uix/services/backendSurface.ts`
-- `pkgs/105-ui/developer-uix/services/workflowCrud.test.ts`
-- `pkgs/105-ui/developer-uix/pages/developerCrudPages.test.tsx`
-- `pkgs/105-ui/developer-uix/pages/OAuthFlowTesterPage.tsx`
-- `tests/packages/tigrbl-auth-backend-app-developer/`
+- `pkgs/90-backend-apps/tba-app-backend-developer/README.md`
+- `pkgs/90-backend-apps/tba-app-backend-developer/src/tba_app_backend_developer/contract.py`
+- `pkgs/105-ui/tba-ui-developer/README.md`
+- `pkgs/105-ui/tba-ui-developer/App.tsx`
+- `pkgs/105-ui/tba-ui-developer/services/developerClient.ts`
+- `pkgs/105-ui/tba-ui-developer/services/backendSurface.ts`
+- `pkgs/105-ui/tba-ui-developer/services/workflowCrud.test.ts`
+- `pkgs/105-ui/tba-ui-developer/pages/developerCrudPages.test.tsx`
+- `pkgs/105-ui/tba-ui-developer/pages/OAuthFlowTesterPage.tsx`
+- `tests/packages/tba-app-backend-developer/`
 - `tests/unit/test_product_api_surfaces.py`
 - Developer API/UIX SSOT feature/claim/test/evidence/boundary records

@@ -7,13 +7,13 @@ from types import SimpleNamespace
 import pytest
 from httpx import ASGITransport, AsyncClient
 
-from tigrbl_auth_backend_app_core import build_app
-from tigrbl_auth.cli.artifacts import (
+from tba_app_backend_core import build_app
+from tba_auth.cli.artifacts import (
     build_openapi_contract,
     deployment_from_options,
 )
-from tigrbl_auth.config.deployment import resolve_deployment
-from tigrbl_auth.config.surfaces import (
+from tba_auth.config.deployment import resolve_deployment
+from tba_auth.config.surfaces import (
     public_contract_paths,
     route_registry,
     surface_baseline_boundary_integrity,
@@ -51,16 +51,16 @@ def _settings(tmp_path: Path) -> SimpleNamespace:
 def test_surface_baseline_boundary_t0_inventory_classifies_all_admin_public_api_and_uix_surfaces():
     manifest = surface_baseline_boundary_manifest()
     registry = surface_registry()
-    admin_uix_pkg = json.loads((ROOT / "pkgs/105-ui/admin-uix/package.json").read_text())
-    public_uix_pkg = json.loads((ROOT / "pkgs/105-ui/public-uix/package.json").read_text())
+    admin_uix_pkg = json.loads((ROOT / "pkgs/105-ui/tba-ui-admin/package.json").read_text())
+    public_uix_pkg = json.loads((ROOT / "pkgs/105-ui/tba-ui-public/package.json").read_text())
 
     assert set(manifest) == BOUNDARY_FEATURE_IDS
     assert registry["admin_control_plane"]["surface_set"] == "admin-rest"
     assert registry["public_auth_plane"]["surface_set"] == "public-rest"
     assert manifest["feat:uix-admin-boundary"]["audience"] == "admin"
     assert manifest["feat:uix-public-boundary"]["audience"] == "public"
-    assert admin_uix_pkg["name"] == "@tigrbl-auth/admin-uix"
-    assert public_uix_pkg["name"] == "@tigrbl-auth/public-uix"
+    assert admin_uix_pkg["name"] == "@tba/ui-admin"
+    assert public_uix_pkg["name"] == "@tba/ui-public"
     assert "/register" in public_contract_paths()
     assert "/logout" in public_contract_paths()
 

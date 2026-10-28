@@ -3,24 +3,24 @@ from datetime import datetime, timezone
 
 import pytest
 
-from tigrbl_attestation_appraisal import AttestationAppraisalCapability
-from tigrbl_digital_credential_issuance import DigitalCredentialIssuanceCapability
-from tigrbl_digital_credential_presentation import (
+from tba_capability_attestation_appraisal import AttestationAppraisalCapability
+from tba_capability_digital_credential_issuance import DigitalCredentialIssuanceCapability
+from tba_capability_digital_credential_presentation import (
     DigitalCredentialPresentationCapability,
 )
-from tigrbl_identity_contracts.attestation import (
+from tba_contracts_identity.attestation import (
     AppraisalResult,
     AttestationEvidence,
     EvidenceVerificationResult,
     VerifiedAttestationEvidence,
 )
-from tigrbl_identity_contracts.tokens import (
+from tba_contracts_identity.tokens import (
     ProtectedTokenEnvelope,
     TokenEnvelopeFormat,
     TokenProfile,
     VerifiedTokenEnvelope,
 )
-from tigrbl_identity_contracts.digital_credentials import (
+from tba_contracts_identity.digital_credentials import (
     CredentialConfiguration,
     CredentialFormat,
     CredentialIssuanceRequest,
@@ -31,13 +31,13 @@ from tigrbl_identity_contracts.digital_credentials import (
     PresentationResult,
     TransactionBinding,
 )
-from tigrbl_identity_contracts.security_events import (
+from tba_contracts_identity.security_events import (
     SecurityEvent,
     SecurityEventSubscription,
 )
-from tigrbl_identity_contracts.workloads import SpiffeId, Svid, SvidFormat
-from tigrbl_security_events import SecurityEventsCapability
-from tigrbl_workload_identity import WorkloadIdentityCapability
+from tba_contracts_identity.workloads import SpiffeId, Svid, SvidFormat
+from tba_capability_security_event_delivery import SecurityEventsCapability
+from tba_capability_workload_identity import WorkloadIdentityCapability
 
 
 class _Issuer:

@@ -1,6 +1,6 @@
 # Package review gap analysis
 
-- package: `tigrbl_auth`
+- package: `tba_auth`
 - version: `0.3.4`
 - delivery lifecycle: `independent-peer-evidence`
 - fully certifiable now: `False`

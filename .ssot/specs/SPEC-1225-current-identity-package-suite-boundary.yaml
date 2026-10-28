@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification governs the canonical package-layer index, dependency direction, workspace-source consistency, active-path hygiene, and exported-surface ownership for `tigrbl_auth`."
+summary: "This specification governs the canonical package-layer index, dependency direction, workspace-source consistency, active-path hygiene, and exported-surface ownership for `tba_auth`."
 supersedes:
   - "spc:1099"
 superseded_by: []
@@ -25,7 +25,7 @@ references: []
 body: |-
   ## Scope
   
-  This specification governs the canonical package-layer index, dependency direction, workspace-source consistency, active-path hygiene, and exported-surface ownership for `tigrbl_auth`.
+  This specification governs the canonical package-layer index, dependency direction, workspace-source consistency, active-path hygiene, and exported-surface ownership for `tba_auth`.
   
   ## Canonical layers
   

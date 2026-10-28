@@ -1,5 +1,5 @@
 schema_version: 1
-package: tigrbl_auth
+package: tba_auth
 enforcement:
   checks:
   - claims_linter
@@ -32,41 +32,41 @@ enforcement:
   supported_package_paths:
   - pkgs/80-routers
   - pkgs/90-backend-apps
-  - tigrbl_auth/tables
-  - tigrbl_auth/ops
-  - tigrbl_auth/services
-  - tigrbl_auth/security
-  - tigrbl_auth/config
-  - tigrbl_auth/standards
-  - tigrbl_auth/cli
-  - tigrbl_auth/plugin.py
-  - tigrbl_auth/gateway.py
-  - tigrbl_auth/framework.py
+  - tba_auth/tables
+  - tba_auth/ops
+  - tba_auth/services
+  - tba_auth/security
+  - tba_auth/config
+  - tba_auth/standards
+  - tba_auth/cli
+  - tba_auth/plugin.py
+  - tba_auth/gateway.py
+  - tba_auth/framework.py
   forbidden_import_roots:
   - fastapi
   - starlette
-  - tigrbl_auth.rfc
-  - tigrbl_auth.routers
-  - tigrbl_auth.orm
-  - tigrbl_auth.backends
-  - tigrbl_auth.runtime_cfg
-  - tigrbl_auth.extensions
+  - tba_auth.rfc
+  - tba_auth.routers
+  - tba_auth.orm
+  - tba_auth.backends
+  - tba_auth.runtime_cfg
+  - tba_auth.extensions
   - tigrbl_core
   - tigrbl._
   profile_artifacts:
     baseline:
-      openapi: specs/openapi/profiles/baseline/tigrbl_auth.public.openapi.json
-      openrpc: specs/openrpc/profiles/baseline/tigrbl_auth.admin.openrpc.json
+      openapi: specs/openapi/profiles/baseline/tba_auth.public.openapi.json
+      openrpc: specs/openrpc/profiles/baseline/tba_auth.admin.openrpc.json
       claims: compliance/claims/effective-target-claims.baseline.yaml
       evidence: compliance/evidence/effective-release-evidence.baseline.yaml
     production:
-      openapi: specs/openapi/profiles/production/tigrbl_auth.public.openapi.json
-      openrpc: specs/openrpc/profiles/production/tigrbl_auth.admin.openrpc.json
+      openapi: specs/openapi/profiles/production/tba_auth.public.openapi.json
+      openrpc: specs/openrpc/profiles/production/tba_auth.admin.openrpc.json
       claims: compliance/claims/effective-target-claims.production.yaml
       evidence: compliance/evidence/effective-release-evidence.production.yaml
     hardening:
-      openapi: specs/openapi/profiles/hardening/tigrbl_auth.public.openapi.json
-      openrpc: specs/openrpc/profiles/hardening/tigrbl_auth.admin.openrpc.json
+      openapi: specs/openapi/profiles/hardening/tba_auth.public.openapi.json
+      openrpc: specs/openrpc/profiles/hardening/tba_auth.admin.openrpc.json
       claims: compliance/claims/effective-target-claims.hardening.yaml
       evidence: compliance/evidence/effective-release-evidence.hardening.yaml
   fail_closed: true

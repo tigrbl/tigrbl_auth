@@ -1,16 +1,16 @@
 targets:
 - RFC 8252
 modules:
-- tigrbl_auth/standards/oauth2/native_apps.py
-- tigrbl_auth/tables/client.py
-- tigrbl_auth/ops/authorize.py
-- tigrbl_auth/ops/register.py
-- tigrbl_auth/ops/token.py
+- tba_auth/standards/oauth2/native_apps.py
+- tba_auth/tables/client.py
+- tba_auth/ops/authorize.py
+- tba_auth/ops/register.py
+- tba_auth/ops/token.py
 tests:
 - tests/unit/test_rfc8252_native_app_redirects.py
 - tests/conformance/production/test_rfc8252_native_apps.py
 contracts:
-- contracts/tigrbl_auth.public.openapi.json
+- contracts/tba_auth.public.openapi.json
 - contracts/native-app-policy.json
 reports:
 - reports/current_state_report.md

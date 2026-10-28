@@ -8,10 +8,10 @@ from pathlib import Path
 
 import pytest
 
-from tigrbl_auth.cli.main import build_parser
-from tigrbl_auth.cli.reports import generate_state_reports
-from tigrbl_auth.config.deployment import resolve_deployment
-from tigrbl_auth.runtime import build_runtime_plan, get_runner_adapter
+from tba_auth.cli.main import build_parser
+from tba_auth.cli.reports import generate_state_reports
+from tba_auth.config.deployment import resolve_deployment
+from tba_auth.runtime import build_runtime_plan, get_runner_adapter
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -81,7 +81,7 @@ def test_cli_serve_accepts_portable_and_backend_runtime_flags():
             "--graceful-timeout",
             "45",
             "--pid-file",
-            "/tmp/tigrbl-auth.pid",
+            "/tmp/tba-auth.pid",
             "--uvicorn-loop",
             "asyncio",
             "--uvicorn-http",
@@ -97,7 +97,7 @@ def test_cli_serve_accepts_portable_and_backend_runtime_flags():
     assert args.access_log is True
     assert args.lifespan == "on"
     assert args.graceful_timeout == 45
-    assert args.pid_file == "/tmp/tigrbl-auth.pid"
+    assert args.pid_file == "/tmp/tba-auth.pid"
     assert args.uvicorn_loop == "asyncio"
     assert args.uvicorn_http == "h11"
     assert args.uvicorn_ws == "none"

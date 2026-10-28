@@ -38,11 +38,11 @@ def test_layer_10_never_imports_higher_layers() -> None:
         "_runtime",
         "_api_",
     )
-    exceptions = {"tigrbl_capability", "tigrbl_default_capability"}
+    exceptions = {"tba_concrete_capability", "tba_concrete_capability_default"}
     for path in sorted(CONCRETE.rglob("*.py")):
         if "tests" in path.parts:
             continue
-        package = next(part for part in path.parts if part.startswith("tigrbl-"))
+        package = next(part for part in path.parts if part.startswith("tba-"))
         module = package.replace("-", "_")
         if module in exceptions:
             continue
@@ -57,14 +57,14 @@ def test_identity_and_authentication_credential_packages_use_canonical_bases() -
     data = yaml.safe_load(TAXONOMY.read_text(encoding="utf-8"))
     for package in data["families"]["identity"]["packages"]:
         metadata = (CONCRETE / package / "pyproject.toml").read_text(encoding="utf-8")
-        assert "tigrbl-identity-bases" in metadata, package
-    credential_packages = sorted(CONCRETE.glob("tigrbl-*-credential-concrete"))
+        assert "tba-bases-identity" in metadata, package
+    credential_packages = sorted(CONCRETE.glob("tba-*-credential-concrete"))
     digital = set(data["families"]["digital_credential"]["packages"])
     for package in credential_packages:
         metadata = (package / "pyproject.toml").read_text(encoding="utf-8")
         expected = (
-            "tigrbl-digital-credential-bases"
+            "tba-bases-digital-credential"
             if package.name in digital
-            else "tigrbl-authentication-credential-bases"
+            else "tba-bases-authentication-credential"
         )
         assert expected in metadata, package.name

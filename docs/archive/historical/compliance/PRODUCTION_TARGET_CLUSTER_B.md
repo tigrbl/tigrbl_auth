@@ -27,7 +27,7 @@ The checkpoint closes the helper-only and policy-partial gaps for those two targ
 
 Completed work:
 
-- updated `tigrbl_auth/standards/oidc/session_mgmt.py` so the module is dependency-light importable in this checkpoint environment
+- updated `tba_auth/standards/oidc/session_mgmt.py` so the module is dependency-light importable in this checkpoint environment
 - added explicit session-state parsing and validation helpers:
   - `parse_session_state(...)`
   - `validate_session_state(...)`
@@ -39,7 +39,7 @@ Completed work:
   - `session_state_origin_bound`
   - `auth_code_linkage_supported`
   - `check_session_iframe_claimed`
-- updated browser cookie policy reporting in `tigrbl_auth/standards/http/cookies.py` so rotation and invalidation behavior are reflected explicitly
+- updated browser cookie policy reporting in `tba_auth/standards/http/cookies.py` so rotation and invalidation behavior are reflected explicitly
 
 Important truthfulness boundary:
 
@@ -52,7 +52,7 @@ Important truthfulness boundary:
 
 Completed work:
 
-- updated `tigrbl_auth/standards/oidc/rp_initiated_logout.py` so it is dependency-light importable in this checkpoint environment
+- updated `tba_auth/standards/oidc/rp_initiated_logout.py` so it is dependency-light importable in this checkpoint environment
 - added structured logout validation helpers:
   - `validate_id_token_hint(...)`
   - `resolve_logout_client_id(...)`
@@ -65,24 +65,24 @@ Completed work:
   - expired-session rejection
   - cross-client misuse rejection
 - updated logout planning so replay/idempotent requests reuse persisted logout state rather than creating an unbounded series of independent logout artifacts
-- updated `tigrbl_auth/ops/logout.py` so the runtime path uses the new validation layer and carries forward validated session/client metadata
-- updated `tigrbl_auth/api/rest/routers/logout.py` so runtime observation artifacts can be derived from structured response payloads or fallback headers
-- patched `tigrbl_auth/services/persistence.py` so repeated logout attempts for the same session can reuse and update the latest logout state record
+- updated `tba_auth/ops/logout.py` so the runtime path uses the new validation layer and carries forward validated session/client metadata
+- updated `tba_auth/api/rest/routers/logout.py` so runtime observation artifacts can be derived from structured response payloads or fallback headers
+- patched `tba_auth/services/persistence.py` so repeated logout attempts for the same session can reuse and update the latest logout state record
 
 ### Supporting fixes
 
-- fixed `tigrbl_auth/ops/login.py` to import `settings` correctly
+- fixed `tba_auth/ops/login.py` to import `settings` correctly
 - updated front-channel and back-channel logout helper modules so they can be imported without eagerly requiring the full SQLAlchemy/runtime stack in this checkpoint environment
 
 ## Contract/discovery truthfulness updates
 
 Updated or regenerated:
 
-- `tigrbl_auth/standards/oidc/session_mgmt.py`
-- `tigrbl_auth/standards/http/cookies.py`
-- `tigrbl_auth/standards/oidc/rp_initiated_logout.py`
-- `tigrbl_auth/ops/logout.py`
-- `tigrbl_auth/api/rest/routers/logout.py`
+- `tba_auth/standards/oidc/session_mgmt.py`
+- `tba_auth/standards/http/cookies.py`
+- `tba_auth/standards/oidc/rp_initiated_logout.py`
+- `tba_auth/ops/logout.py`
+- `tba_auth/api/rest/routers/logout.py`
 - discovery snapshots
 - certification/current-state reports
 

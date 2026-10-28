@@ -1,14 +1,14 @@
 import json
 from cryptography.hazmat.primitives.asymmetric import ed25519
 from cryptography.hazmat.primitives import serialization
-from tigrbl_jose_cryptography_provider import (
+from tba_provider_jose_cryptography import (
     JweCryptographyProvider,
     JwsCryptographyProvider,
 )
-from tigrbl_protected_envelope_capability import ProtectedEnvelopeCapability
-from tigrbl_security_protocol_jws import JWSProfile, JwsProtocol
-from tigrbl_security_protocol_jwe import JWEProfile, JweProtocol
-from tigrbl_auth_protocol_jwt import JwtProfile, JwtProtocol
+from tba_capability_protected_envelope import ProtectedEnvelopeCapability
+from tba_protocol_security_jws import JWSProfile, JwsProtocol
+from tba_protocol_security_jwe import JWEProfile, JweProtocol
+from tba_protocol_jwt import JwtProfile, JwtProtocol
 
 
 def keys():

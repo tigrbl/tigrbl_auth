@@ -6,7 +6,7 @@ from sqlalchemy import create_engine, inspect
 
 
 MIGRATION = importlib.import_module(
-    "tigrbl_identity_storage.migrations.versions.0023_artifact_and_token_profile_discriminators"
+    "tba_storage_core.migrations.versions.0023_artifact_and_token_profile_discriminators"
 )
 
 

@@ -14,7 +14,7 @@
 
 ## Executed checks in this checkpoint
 
-- `python -m compileall tigrbl_auth scripts tests`
+- `python -m compileall tba_auth scripts tests`
 - `python scripts/generate_openapi_contract.py`
 - `python scripts/generate_openrpc_contract.py`
 - `python scripts/generate_effective_release_manifests.py`

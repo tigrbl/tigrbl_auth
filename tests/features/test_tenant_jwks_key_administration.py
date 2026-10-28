@@ -5,14 +5,14 @@ from pathlib import Path
 
 import pytest
 
-from tigrbl_identity_cli.operator_administration import (
+from tba_cli_identity.operator_administration import (
     build_operator_administration_capability,
 )
-from tigrbl_identity_storage_runtime._resource_service.token_key_artifacts import (
+from tba_runtime_identity_storage._resource_service.token_key_artifacts import (
     build_operator_jwks_payload,
 )
-from tigrbl_identity_storage_runtime.operator_store import OperationContext
-from tigrbl_identity_storage_runtime.resource_service import OperatorStateError
+from tba_runtime_identity_storage.operator_store import OperationContext
+from tba_runtime_identity_storage.resource_service import OperatorStateError
 
 
 TENANT_A = "tenant-a"

@@ -1,6 +1,6 @@
 # Authority Attenuation API + Capability Composer UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-router-authority-attenuation` + `@tigrbl-auth/capability-composer-uix`<br>
+**Pairing:** `tba-router-authority-attenuation` + `@tba/capability-composer-uix`<br>
 **Additional opportunity:** Authorization/delegation/sovereignty extension 3<br>
 **Primary buyers:** authorization platform teams, security engineering, workload and agent platforms, API product teams, governance administrators, and high-assurance application owners<br>
 **Status:** proposed product surface; scope coverage, wildcard narrowing, authority closure, monotonicity, least-authority diff, durable proof, and delegation lifecycle foundations exist
@@ -732,12 +732,12 @@ Standardize `source authority`, `proposed authority`, `clause`, `dimension`, `co
 - `.ssot/specs/SPEC-1208-delegation-attenuation-proof-contract.yaml`
 - `.ssot/specs/SPEC-1206-authority-derivation-graph-contract.yaml`
 - `.ssot/specs/SPEC-1213-delegation-grant-lifecycle-contract.yaml`
-- `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/authority/graph.py`
-- `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/authority/semantics.py`
-- `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/delegation/proofs.py`
-- `pkgs/20-providers/tigrbl-authz-policy/src/tigrbl_authz_policy/delegation.py`
-- `pkgs/30-storage-runtime/tigrbl-authz-policy-authority-derivation-graph/`
-- `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/delegation_grant/`
+- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/authority/graph.py`
+- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/authority/semantics.py`
+- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/delegation/proofs.py`
+- `pkgs/20-providers/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/delegation.py`
+- `pkgs/30-storage-runtime/tba-durability-authorization-policy-authority-derivation-graph/`
+- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/delegation_grant/`
 - `tests/unit/test_delegation_attenuation_proof.py`
 - `tests/unit/test_delegation_attenuation_robustness_t2.py`
 - `tests/unit/test_authority_closure_monotonicity.py`

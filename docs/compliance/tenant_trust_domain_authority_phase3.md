@@ -4,8 +4,8 @@ This checkpoint captures the tenant trust-domain runtime authority slice for `fe
 
 Implemented paths:
 
-- `tigrbl_auth/services/tenant_discovery.py`
-- `tigrbl_auth/cli/artifacts.py`
+- `tba_auth/services/tenant_discovery.py`
+- `tba_auth/cli/artifacts.py`
 
 Coverage strengthened:
 

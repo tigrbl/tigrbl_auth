@@ -1,0 +1,84 @@
+[project]
+name = "tba-server-identity"
+version = "0.4.0.dev2"
+description = "Carrier-neutral identity runtime handlers, capability assembly, and lifecycle integration."
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+keywords = [
+    "tigrbl",
+    "identity",
+    "server",
+    "asgi",
+    "gateway",
+    "plugin",
+    "rest",
+    "oauth",
+    "oidc",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3 :: Only",
+    "Typing :: Typed",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Security",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "tba-capability-api-key-authentication==0.4.0.dev2",
+    "tba-capability-service-key-authentication==0.4.0.dev2",
+    "tba-capability-account-self-service==0.4.0.dev2",
+    "tba-certification-release==0.4.0.dev2",
+    "tba-protocol-oauth==0.4.0.dev2",
+    "tba-protocol-oidc==0.4.0.dev2",
+    "tba-protocol-gnap==0.4.0.dev2",
+    "tba-contracts-identity==0.4.0.dev2",
+    "tba-capability-identity-administration==0.4.0.dev2",
+    "tba-capability-realm-administration==0.4.0.dev2",
+    "tba-capability-tenant-administration==0.4.0.dev2",
+    "tba-provider-identity-jose==0.4.0.dev2",
+    "tba-runtime-identity==0.4.0.dev2",
+    "email-validator>=2.0",
+    "tigrbl==0.4.5.dev4",
+    "tigrbl-core==0.4.5.dev4",
+    "tba-runtime-identity-storage==0.4.0.dev2",
+    "tba-storage-audit==0.4.0.dev2",
+    "tba-storage-oauth==0.4.0.dev2",
+    "tba-storage-operator==0.4.0.dev2",
+    "tba-storage-principals==0.4.0.dev2",
+    "tba-storage-tenancy==0.4.0.dev2",
+    "tba-capability-client-secret-authentication==0.4.0.dev2",
+    "tba-capability-password-authentication==0.4.0.dev2",
+    "tba-capability-artifact-processing==0.4.0.dev2",
+    "tba-capability-replay-protection==0.4.0.dev2",
+    "tba-capability-token-introspection==0.4.0.dev2",
+    "tba-capability-token-issuance==0.4.0.dev2",
+    "tba-capability-token-exchange==0.4.0.dev2",
+    "tba-capability-token-revocation==0.4.0.dev2",
+    "tba-capability-authorization-request-staging==0.4.0.dev2",
+    "tba-capability-client-registration==0.4.0.dev2",
+    "tba-provider-replay-memory==0.4.0.dev2",
+    "tba-provider-secret-hashing-bcrypt==0.1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/60-runtime/tba-server-identity"
+SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
+PyPI = "https://pypi.org/project/tba-server-identity/"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tba_server_identity", from = "src" }]

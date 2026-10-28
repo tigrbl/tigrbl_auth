@@ -355,7 +355,7 @@ Confidential SPA profile pattern:
 RFC 7800:
 - tests/unit/test_rfc7800_proof_of_possession.py
 RFC 8417:
-- pkgs/10-concrete/tigrbl-set-concrete/tests/test_rfc8417.py
+- pkgs/10-concrete/tba-concrete-set/tests/test_rfc8417.py
 RFC 8291:
 - tests/unit/test_rfc8291_webpush_encryption.py
 RFC 8812:

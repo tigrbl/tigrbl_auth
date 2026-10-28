@@ -1,4 +1,4 @@
-from tigrbl_auth_protocol_oauth.standards.jwt_access_tokens import (
+from tba_protocol_oauth.standards.jwt_access_tokens import (
     add_jwt_access_token_claims,
     validate_jwt_access_token_claims,
 )

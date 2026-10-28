@@ -4,22 +4,22 @@ from dataclasses import dataclass
 
 import pytest
 
-from tigrbl_identity_contracts.tokens import (
+from tba_contracts_identity.tokens import (
     RefreshTokenRedemptionRequest,
     TokenPairIssueRequest,
 )
-from tigrbl_identity_core.digests import token_hash
-from tigrbl_identity_core.errors import (
+from tba_primitives_identity.digests import token_hash
+from tba_primitives_identity.errors import (
     InvalidRefreshTokenError,
     RefreshTokenReuseError,
 )
-from tigrbl_identity_storage.tables import TokenRecord
-from tigrbl_identity_storage_runtime import (
+from tba_storage_core.tables import TokenRecord
+from tba_runtime_identity_storage import (
     TokenRecordRuntimeSpec,
     initializeIdentityRuntimeTables,
     read_token_record,
 )
-from tigrbl_identity_server.security import token_issuance as runtime
+from tba_server_identity.security import token_issuance as runtime
 
 
 @dataclass
@@ -278,7 +278,7 @@ async def test_refresh_rejects_audience_widening(monkeypatch) -> None:
 
 
 @pytest.mark.asyncio
-async def test_capability_issues_and_rotates_through_real_tigrbl_aliases(
+async def test_capability_issues_and_rotates_through_real_tba_aliases(
     monkeypatch,
     administrator_storage,
 ) -> None:

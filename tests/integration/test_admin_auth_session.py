@@ -10,21 +10,21 @@ from httpx import ASGITransport, AsyncClient
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tigrbl_auth_backend_app_platform_admin.app import build_app
-from tigrbl_auth.config.deployment import DEFAULT_VALUES, resolve_deployment
-from tigrbl_auth.crypto import hash_pw
-from tigrbl_auth.db import get_db as legacy_get_db
-from tigrbl_auth_backend_app_core.surfaces import AdminRouter
-from tigrbl_auth.runtime.engine_resolver import (
+from tba_app_backend_platform_admin.app import build_app
+from tba_auth.config.deployment import DEFAULT_VALUES, resolve_deployment
+from tba_auth.crypto import hash_pw
+from tba_auth.db import get_db as legacy_get_db
+from tba_app_backend_core.surfaces import AdminRouter
+from tba_auth.runtime.engine_resolver import (
     register_api_provider,
     resolve_api_provider,
     resolve_default_provider,
     set_default_provider,
 )
-from tigrbl_identity_admin.bootstrap import ensure_default_superuser_async
-from tigrbl_auth.tables import Tenant, User
-from tigrbl_identity_storage_runtime.engine import get_db as tables_get_db
-from tigrbl_auth.tables.engine import get_db as engine_get_db
+from tba_runtime_identity_administration.bootstrap import ensure_default_superuser_async
+from tba_auth.tables import Tenant, User
+from tba_runtime_identity_storage.engine import get_db as tables_get_db
+from tba_auth.tables.engine import get_db as engine_get_db
 
 
 pytestmark = pytest.mark.integration
@@ -66,7 +66,7 @@ async def _ensure_runtime_tables(provider: object) -> None:
     raw_engine, _ = provider.ensure()
 
     def _create_runtime_tables(sync_conn):
-        from tigrbl_auth.tables import RestOltpTable
+        from tba_auth.tables import RestOltpTable
 
         RestOltpTable.metadata.create_all(bind=sync_conn, checkfirst=True)
 

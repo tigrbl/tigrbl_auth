@@ -1,0 +1,47 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.attestation"
+distribution = "tba-storage-attestation"
+import_root = "tba_storage_attestation"
+
+[schema]
+contract = "1.0.0"
+migration_head = "7e916983-3ad7-51a7-bf4a-79ce229eb092"
+migrations_package = "tba_storage_attestation.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.attestation:table:attestation_evidence"
+kind = "table"
+physical_name = "authn.attestation_evidence"
+model = "tba_storage_attestation.tables:AttestationEvidence"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.attestation:table:attestation_results"
+kind = "table"
+physical_name = "authn.attestation_results"
+model = "tba_storage_attestation.tables:AttestationResult"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.attestation:table:attestation_reference_manifests"
+kind = "table"
+physical_name = "authn.attestation_reference_manifests"
+model = "tba_storage_attestation.tables:AttestationReferenceManifest"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.attestation:table:attestation_reference_values"
+kind = "table"
+physical_name = "authn.attestation_reference_values"
+model = "tba_storage_attestation.tables:AttestationReferenceValue"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.attestation:table:attestation_endorsements"
+kind = "table"
+physical_name = "authn.attestation_endorsements"
+model = "tba_storage_attestation.tables:AttestationEndorsement"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.attestation:table:attestation_appraisal_policies"
+kind = "table"
+physical_name = "authn.attestation_appraisal_policies"
+model = "tba_storage_attestation.tables:AttestationAppraisalPolicy"

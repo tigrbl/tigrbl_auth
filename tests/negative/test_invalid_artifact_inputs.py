@@ -5,12 +5,12 @@ from types import SimpleNamespace
 
 import pytest
 
-from tigrbl_identity_jose.standards.rfc7516 import JWEPolicyError, decrypt_jwe
-from tigrbl_auth_protocol_oauth.standards.assertion_framework import (
+from tba_provider_identity_jose.standards.rfc7516 import JWEPolicyError, decrypt_jwe
+from tba_protocol_oauth.standards.assertion_framework import (
     JWT_BEARER_GRANT_TYPE,
     validate_assertion_grant_request,
 )
-from tigrbl_auth_protocol_oauth.standards.pushed_authorization_requests import PushedAuthorizationRequestError, validate_pushed_authorization_request_row
+from tba_protocol_oauth.standards.pushed_authorization_requests import PushedAuthorizationRequestError, validate_pushed_authorization_request_row
 
 
 @pytest.mark.negative

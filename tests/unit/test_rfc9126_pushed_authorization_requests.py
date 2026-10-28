@@ -1,12 +1,12 @@
 import pytest
-from tigrbl_auth.tables.pushed_authorization_request import (
+from tba_auth.tables.pushed_authorization_request import (
     PushedAuthorizationRequest,
     DEFAULT_PAR_EXPIRY,
 )
-from tigrbl_auth_protocol_oauth.standards.pushed_authorization_requests import (
+from tba_protocol_oauth.standards.pushed_authorization_requests import (
     PushedAuthorizationDisabledError,
 )
-from tigrbl_identity_server.security.pushed_authorization import (
+from tba_server_identity.security.pushed_authorization import (
     build_rfc9126_pushed_authorization_service,
 )
 

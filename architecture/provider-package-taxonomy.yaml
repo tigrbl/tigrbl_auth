@@ -25,116 +25,116 @@ rules:
   http_surfaces: 80-routers
 canonical_providers:
   authenticators:
-  - tigrbl-authenticator-api-key-local
-  - tigrbl-authenticator-client-secret-local
-  - tigrbl-authenticator-dpop-proof
-  - tigrbl-authenticator-federated-oidc
-  - tigrbl-authenticator-mtls-client-cert
-  - tigrbl-authenticator-otp-local
-  - tigrbl-authenticator-password-local
-  - tigrbl-authenticator-recovery-code-local
-  - tigrbl-authenticator-remote-introspection
-  - tigrbl-authenticator-service-key-local
-  - tigrbl-authenticator-session-local
+  - tba-provider-authenticator-api-key-local
+  - tba-provider-authenticator-client-secret-local
+  - tba-provider-authenticator-dpop-proof
+  - tba-provider-authenticator-federated-oidc
+  - tba-provider-authenticator-mtls-client-cert
+  - tba-provider-authenticator-otp-local
+  - tba-provider-authenticator-password-local
+  - tba-provider-authenticator-recovery-code-local
+  - tba-provider-authenticator-remote-introspection
+  - tba-provider-authenticator-service-key-local
+  - tba-provider-authenticator-session-local
   attestation:
-  - tigrbl-attestation-appraiser
-  - tigrbl-attestation-packed-provider
-  - tigrbl-attestation-reference-provider
-  - tigrbl-attestation-tpm-provider
-  - tigrbl-attestation-u2f-provider
-  - tigrbl-corim-reference-memory-provider
-  - tigrbl-eat-verifier-provider
-  - tigrbl-fido-metadata-service-provider
-  - tigrbl-key-attestation-verifier
-  - tigrbl-platform-attestation-provider
-  - tigrbl-wallet-attestation-verifier
+  - tba-provider-attestation-appraiser
+  - tba-provider-attestation-packed
+  - tba-provider-attestation-reference
+  - tba-provider-attestation-tpm
+  - tba-provider-attestation-u2f
+  - tba-provider-corim-reference-memory
+  - tba-provider-eat-verifier
+  - tba-provider-fido-metadata-service
+  - tba-provider-key-attestation-verifier
+  - tba-provider-platform-attestation
+  - tba-provider-wallet-attestation-verifier
   credentials_and_claims:
-  - tigrbl-digital-credential-status-provider
-  - tigrbl-digital-credential-trust-provider
-  - tigrbl-security-claims-provider-local
+  - tba-provider-digital-credential-status
+  - tba-provider-digital-credential-trust
+  - tba-provider-security-claims-provider-local
   cryptography_and_trust:
-  - tigrbl-certificate-path-validator
-  - tigrbl-certificate-status-provider
-  - tigrbl-secret-hashing-bcrypt-provider
-  - tigrbl-cose-cryptography-provider
-  - tigrbl-jose-cryptography-provider
-  - tigrbl-jose-swarmauri-provider
-  - tigrbl-security-signing-pqc
-  - tigrbl-trust-anchor-provider
+  - tba-provider-certificate-path-validator
+  - tba-provider-certificate-status
+  - tba-provider-secret-hashing-bcrypt
+  - tba-provider-cose-cryptography
+  - tba-provider-jose-cryptography
+  - tba-provider-jose-swarmauri
+  - tba-provider-security-signing-pqc
+  - tba-provider-trust-anchor
   policy:
-  - tigrbl-authz-policy-decision-engine
+  - tba-provider-authorization-policy-decision-engine
   remote_and_resolution:
-  - tigrbl-did-resolver-provider
-  - tigrbl-security-oidc-federation-provider
-  - tigrbl-security-token-introspection-client
-  - tigrbl-security-token-jwks-cache
-  - tigrbl-security-webfinger-provider
-  - tigrbl-spiffe-bundle-provider
-  - tigrbl-spiffe-workload-api-provider
+  - tba-provider-did-resolver
+  - tba-provider-security-oidc-federation
+  - tba-provider-security-token-introspection-client
+  - tba-provider-security-token-jwks-cache
+  - tba-provider-security-webfinger
+  - tba-provider-spiffe-bundle
+  - tba-provider-spiffe-workload-api
   explicitly_ephemeral:
-  - tigrbl-access-governance-memory-provider
-  - tigrbl-replay-memory-provider
+  - tba-provider-access-governance-memory
+  - tba-provider-replay-memory
   protocol_artifact_composition:
-  - tigrbl-mdoc-issuer-provider
-  - tigrbl-mdoc-verifier-provider
-  - tigrbl-set-receiver-provider
-  - tigrbl-set-transmitter-provider
+  - tba-provider-mdoc-issuer
+  - tba-provider-mdoc-verifier
+  - tba-provider-set-receiver
+  - tba-provider-set-transmitter
 compatibility_or_migration_packages:
   tigrbl-authn-credentials:
-    target: tigrbl-credentials
+    target: tba-credentials
     target_layer: 70-facade
-  tigrbl-authz-resource-server-verifier:
-    target: tigrbl-protected-resource-authorization-capability
+  tba-provider-authorization-resource-server-verifier:
+    target: tba-capability-protected-resource-authorization
     target_layer: 40-capabilities
-  tigrbl-did-controller-provider:
+  tba-provider-did-controller:
     target: did-controller-capability
     target_layer: 40-capabilities
-  tigrbl-identity-admin-auth-anomaly-detector:
+  tba-provider-identity-admin-auth-anomaly-detector:
     target: anomaly-rules-tables-ops-and-capability
     target_layer: 10-01-30-40
-  tigrbl-identity-admin-relationship-graph:
+  tba-provider-identity-admin-relationship-graph:
     target: relationship-graph-tables-ops-and-capability
     target_layer: 10-01-30-40
-  tigrbl-identity-jose:
-    target: tigrbl-jose-concrete-plus-tigrbl-jose-swarmauri-provider-plus-tigrbl-key-administration-capability-plus-tigrbl-security-protocol-jose
+  tba-provider-identity-jose:
+    target: tba-concrete-jose-plus-tba-provider-jose-swarmauri-plus-tba-capability-key-administration-plus-tba-protocol-security-jose
     target_layer: 10-20-50
-  tigrbl-security-cose:
-    target: tigrbl-cose-concrete-plus-tigrbl-cose-cryptography-provider
+  tba-provider-security-cose:
+    target: tba-concrete-cose-plus-tba-provider-cose-cryptography
     target_layer: 10-20
-  tigrbl-security-auth-context-acr-basic:
-    target: tigrbl-acr-evaluator-basic-concrete
+  tba-provider-authentication-context-acr-basic:
+    target: tba-concrete-acr-evaluator-basic
     target_layer: 10-concrete
-  tigrbl-security-auth-context-amr-basic:
-    target: tigrbl-amr-evaluator-basic-concrete
+  tba-provider-authentication-context-amr-basic:
+    target: tba-concrete-amr-evaluator-basic
     target_layer: 10-concrete
-  tigrbl-security-authorization-provenance-builder:
-    target: tigrbl-authorization-provenance-concrete
+  tba-provider-security-authorization-provenance-builder:
+    target: tba-concrete-authorization-provenance
     target_layer: 10-concrete
-  tigrbl-security-certificate-mtls:
-    target: tigrbl-mtls-confirmation-binding-concrete
+  tba-provider-security-certificate-mtls:
+    target: tba-concrete-mtls-confirmation-binding
     target_layer: 10-concrete
-  tigrbl-security-dpop-cnf-binding-validator:
-    target: tigrbl-dpop-confirmation-binding-concrete
+  tba-provider-security-dpop-cnf-binding-validator:
+    target: tba-concrete-dpop-confirmation-binding
     target_layer: 10-concrete
-  tigrbl-security-mtls-cnf-binding-validator:
-    target: tigrbl-mtls-confirmation-binding-concrete
+  tba-provider-security-mtls-cnf-binding-validator:
+    target: tba-concrete-mtls-confirmation-binding
     target_layer: 10-concrete
-  tigrbl-security-proof-dpop:
-    target: tigrbl-dpop-confirmation-binding-concrete
+  tba-provider-security-proof-dpop:
+    target: tba-concrete-dpop-confirmation-binding
     target_layer: 10-concrete
-  tigrbl-security-proof-pkce:
-    target: tigrbl-pkce-concrete
+  tba-provider-security-proof-pkce:
+    target: tba-concrete-pkce
     target_layer: 10-concrete
-  tigrbl-security-subject-pairwise-provider:
-    target: tigrbl-pairwise-subject-identifier-concrete
+  tba-provider-security-subject-pairwise:
+    target: tba-concrete-pairwise-subject-identifier
     target_layer: 10-concrete
 canonical_deterministic_extractions:
-- tigrbl-acr-evaluator-basic-concrete
-- tigrbl-amr-evaluator-basic-concrete
-- tigrbl-authorization-provenance-concrete
-- tigrbl-cose-concrete
-- tigrbl-dpop-confirmation-binding-concrete
-- tigrbl-mtls-confirmation-binding-concrete
-- tigrbl-pairwise-subject-identifier-concrete
-- tigrbl-pkce-concrete
-- tigrbl-policy-decision-engine-default
+- tba-concrete-acr-evaluator-basic
+- tba-concrete-amr-evaluator-basic
+- tba-concrete-authorization-provenance
+- tba-concrete-cose
+- tba-concrete-dpop-confirmation-binding
+- tba-concrete-mtls-confirmation-binding
+- tba-concrete-pairwise-subject-identifier
+- tba-concrete-pkce
+- tba-concrete-policy-decision-engine-default

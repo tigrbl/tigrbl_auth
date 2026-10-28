@@ -8,7 +8,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from tigrbl_auth.cli.governance import run_governance_install_check
+from tba_auth.cli.governance import run_governance_install_check
 
 
 if __name__ == "__main__":

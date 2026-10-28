@@ -1,0 +1,18 @@
+[project]
+name = "tba-concrete-cwt-svid-extension-credential"
+version = "0.4.0.dev2"
+description = "Experimental Tigrbl CWT-SVID extension credential object."
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = [
+    "tba-concrete-cwt==0.4.0.dev2",
+    "tba-bases-digital-credential==0.4.0.dev2",
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tba_concrete_cwt_svid_extension_credential", from = "src" }]

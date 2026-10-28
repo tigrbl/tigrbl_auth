@@ -7,7 +7,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   modules:
-  - tigrbl_auth/standards/jose/rfc7515.py
+  - tba_auth/standards/jose/rfc7515.py
   tests:
   - tests/conformance/baseline/test_rfc7515_jws.py
   - tests/unit/test_rfc7515_jws.py
@@ -19,7 +19,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   modules:
-  - tigrbl_auth/standards/jose/rfc7518.py
+  - tba_auth/standards/jose/rfc7518.py
   tests:
   - tests/conformance/baseline/test_rfc7518_jwa.py
   - tests/unit/test_rfc7518_jwa.py

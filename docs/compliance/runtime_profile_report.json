@@ -190,7 +190,7 @@
       "serve_check": {
         "executed": false,
         "passed": false,
-        "command": "tigrbl-auth serve --check --server hypercorn --format json",
+        "command": "tba-auth serve --check --server hypercorn --format json",
         "message": "Validated runtime manifests are missing or failing serve-check evidence for required cells: postgres-hypercorn@py3.10, postgres-hypercorn@py3.11, postgres-hypercorn@py3.12",
         "exit_code": null
       },
@@ -379,7 +379,7 @@
       "serve_check": {
         "executed": false,
         "passed": false,
-        "command": "tigrbl-auth serve --check --server tigrcorn --format json",
+        "command": "tba-auth serve --check --server tigrcorn --format json",
         "message": "Validated runtime manifests are missing or failing serve-check evidence for required cells: tigrcorn@py3.11, tigrcorn@py3.12",
         "exit_code": null
       },
@@ -590,7 +590,7 @@
       "serve_check": {
         "executed": false,
         "passed": false,
-        "command": "tigrbl-auth serve --check --server uvicorn --format json",
+        "command": "tba-auth serve --check --server uvicorn --format json",
         "message": "Validated runtime manifests are missing or failing serve-check evidence for required cells: sqlite-uvicorn@py3.10, sqlite-uvicorn@py3.11, sqlite-uvicorn@py3.12",
         "exit_code": null
       },

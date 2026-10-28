@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "`tigrbl_auth` SHALL govern downstream consumer roles as explicit identity"
+summary: "`tba_auth` SHALL govern downstream consumer roles as explicit identity"
 supersedes: []
 superseded_by: []
 status_notes:
@@ -20,7 +20,7 @@ references: []
 body: |-
   ## Decision
   
-  `tigrbl_auth` SHALL govern downstream consumer roles as explicit identity
+  `tba_auth` SHALL govern downstream consumer roles as explicit identity
   package boundaries:
   
   - `tigrbl-identity-resource-server`

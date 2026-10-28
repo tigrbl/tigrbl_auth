@@ -9,8 +9,8 @@ required:
 - docs/adr
 - pkgs/80-routers
 - pkgs/90-backend-apps
-- tigrbl_auth/security
-- tigrbl_auth/standards
+- tba_auth/security
+- tba_auth/standards
 checks:
 - boundary_manifests_present
 - governance_directories_present

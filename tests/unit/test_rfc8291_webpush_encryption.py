@@ -8,12 +8,12 @@ import os
 
 import pytest
 
-from tigrbl_auth.rfc.rfc8291 import (
+from tba_auth.rfc.rfc8291 import (
     RFC8291_SPEC_URL,
     decrypt_push_message,
     encrypt_push_message,
 )
-from tigrbl_auth.runtime_cfg import settings
+from tba_auth.runtime_cfg import settings
 
 
 @pytest.mark.unit

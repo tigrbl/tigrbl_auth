@@ -1,16 +1,16 @@
 from cryptography.hazmat.primitives.asymmetric import ed25519
 from cryptography.hazmat.primitives import serialization
-from tigrbl_identity_core import ProtectedEnvelopeKind
-from tigrbl_protected_envelope_contracts import (
+from tba_primitives_identity import ProtectedEnvelopeKind
+from tba_contracts_protected_envelope import (
     EnvelopeProtectionRequest,
     EnvelopeVerificationRequest,
 )
-from tigrbl_jose_cryptography_provider import (
+from tba_provider_jose_cryptography import (
     JweCryptographyProvider,
     JwsCryptographyProvider,
 )
-from tigrbl_cose_concrete import sig_structure
-from tigrbl_cose_cryptography_provider import (
+from tba_concrete_cose import sig_structure
+from tba_provider_cose_cryptography import (
     sign_detached_signature,
     verify_detached_signature,
 )

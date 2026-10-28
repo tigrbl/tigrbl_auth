@@ -5,10 +5,10 @@ from httpx import AsyncClient, BasicAuth
 from uuid import uuid4
 
 from sqlalchemy.ext.asyncio import AsyncSession
-from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
+from tba_provider_secret_hashing_bcrypt import BcryptSecretHasher
 
-from tigrbl_auth.tables import Client, Tenant
-from tigrbl_auth.standards.oauth2.introspection import register_token_async, reset_tokens_async
+from tba_auth.tables import Client, Tenant
+from tba_auth.standards.oauth2.introspection import register_token_async, reset_tokens_async
 
 
 async def _create_tenant_and_client(db_session: AsyncSession) -> Client:

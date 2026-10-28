@@ -138,7 +138,7 @@ Required ownership rules:
 - [x] Claim primitives, contracts, bases, `ClaimType`, `ClaimValueType`,
   `ClaimNameKind`, and standalone concrete claim packages exist.
 - [x] Protocol-neutral scope matching exists as
-  `tigrbl-authorization-scope-set-matcher-concrete`; the old OAuth package is a
+  `tba-concrete-authorization-scope-set-matcher`; the old OAuth package is a
   compatibility facade.
 - [x] Protocol-neutral public and pairwise subject identifier strategies exist;
   the old OIDC package is a compatibility facade.
@@ -244,7 +244,7 @@ Required ownership rules:
 
 ## 3. Layer 00: primitives
 
-Owner: `pkgs/00-primitives/tigrbl-identity-core`.
+Owner: `pkgs/00-primitives/tba-primitives-identity`.
 
 ### Retain and finish
 
@@ -280,7 +280,7 @@ Owner: `pkgs/00-primitives/tigrbl-identity-core`.
 
 ## 4. Layer 01: durable schemas only
 
-Owner: `pkgs/01-storage/tigrbl-identity-storage`.
+Owner: `pkgs/01-storage/tba-storage-core`.
 
 ### Keep
 
@@ -315,11 +315,11 @@ table modules.
 ### Move out of storage entirely
 
 - `tables/auth_session/_table.py` account router and session HTTP handlers ->
-  `pkgs/90-backend-apps/tigrbl-auth-backend-app-my-account`.
+  `pkgs/90-backend-apps/tba-app-backend-my-account`.
 - `tables/realm/_table.py` admin router and realm/tenant HTTP handlers -> the
   appropriate layer-80 admin API package.
 - `tables/user/_admin_identity_route.py` -> layer-80 admin API.
-- `tables/user/_account_route.py` -> `tigrbl-auth-backend-app-my-account`.
+- `tables/user/_account_route.py` -> `tba-app-backend-my-account`.
 - Password and client-secret hashing/verification imports -> layer-20
   authenticator providers.
 - `_persistence_extended.py` and `persistence.py` lifecycle/use-case facades ->
@@ -342,12 +342,12 @@ table modules.
 
 Primary owners:
 
-- `pkgs/02-contracts/tigrbl-identity-contracts`
-- `pkgs/02-contracts/tigrbl-security-trust-contracts`
+- `pkgs/02-contracts/tba-contracts-identity`
+- `pkgs/02-contracts/tba-contracts-security-trust`
 
 ### Claims
 
-Retain and finish `tigrbl_identity_contracts.claims`:
+Retain and finish `tba_contracts_identity.claims`:
 
 - `Claim`, `ClaimSet`, `ClaimDescriptor`, `ClaimProvenance`,
   `ClaimDisclosure`, `ClaimsRequest`, `ClaimsResult`.
@@ -393,23 +393,23 @@ Retain and finish `tigrbl_identity_contracts.claims`:
 
 - Move reusable behavior from `tigrbl-oauth-bases` and `tigrbl-oidc-bases` into
   domain owners where the abstraction is not inherently protocol-specific:
-  - claim composition/validation -> `tigrbl-identity-claims-bases`;
+  - claim composition/validation -> `tba-bases-identity-claims`;
   - subject identifier strategy -> an identity-identifier base package;
   - authorization scope matching -> an authorization-scope base package;
-  - profiled token verification -> `tigrbl-token-bases`;
+  - profiled token verification -> `tba-bases-token`;
   - authentication assurance evaluation ->
-    `tigrbl-authentication-assurance-bases`.
+    `tba-bases-authentication-assurance`.
 - Keep an OAuth/OIDC base only when its method contract is defined by that
   protocol and has multiple implementations.
 
 ### EAT facets
 
-- `tigrbl-token-bases`: protected token-envelope verification.
-- `tigrbl-jose-bases`: EAT JWT coding only.
-- `tigrbl-cose-bases`: EAT CWT coding only.
-- `tigrbl-attestation-bases`: evidence verification, appraisal, reference
+- `tba-bases-token`: protected token-envelope verification.
+- `tba-bases-jose`: EAT JWT coding only.
+- `tba-bases-cose`: EAT CWT coding only.
+- `tba-bases-attestation`: evidence verification, appraisal, reference
   material, and manifest behavior.
-- `tigrbl-identity-claims-bases`: `ClaimBase` and claim-set composition.
+- `tba-bases-identity-claims`: `ClaimBase` and claim-set composition.
 - Do not create an `EatBase` that conflates all four facets.
 
 ### Base-class gate
@@ -421,7 +421,7 @@ needs a stable extension point. Data objects do not receive ceremonial bases.
 
 ### Claim family
 
-- Keep one distributable `tigrbl-claim-<name>-concrete` package per concrete
+- Keep one distributable `tba-claim-<name>-concrete` package per concrete
   claim class.
 - Every class subclasses `ClaimBase` and declares canonical name/label,
   `ClaimType`, `ClaimValueType`, and name kind.
@@ -438,7 +438,7 @@ needs a stable extension point. Data objects do not receive ceremonial bases.
 
 ### Scope matcher rename
 
-- Canonical package: `tigrbl-authorization-scope-set-matcher-concrete`.
+- Canonical package: `tba-concrete-authorization-scope-set-matcher`.
 - Canonical class: `ScopeSetMatcher`.
 - Remove `DefaultScopeMatcher`; “default” is composition policy, not a concrete
   algorithm identity.
@@ -448,17 +448,17 @@ needs a stable extension point. Data objects do not receive ceremonial bases.
 ### Subject strategy rename
 
 - Canonical packages:
-  `tigrbl-public-subject-identifier-concrete` and
-  `tigrbl-pairwise-subject-identifier-concrete`.
+  `tba-concrete-public-subject-identifier` and
+  `tba-concrete-pairwise-subject-identifier`.
 - Canonical classes: `PublicSubjectIdentifierStrategy` and
   `PairwiseSubjectIdentifierStrategy`.
-- Update `tigrbl-security-subject-pairwise-provider` and protocol imports.
+- Update `tba-provider-security-subject-pairwise` and protocol imports.
 - Keep `tigrbl-oidc-subject-strategy` as a warning facade for one release, then
   remove package, workspace entries, and lockfile records.
 
 ### EAT
 
-- `tigrbl-eat-concrete/claims.py`: deterministic claim-set parsing.
+- `tba-concrete-eat/claims.py`: deterministic claim-set parsing.
 - `profiles.py`: exact RFC/draft revision and profile identifiers.
 - `submodules.py`: nested EAT submodule parsing.
 - `evidence.py`: conversion to the representation-neutral evidence contract;
@@ -470,7 +470,7 @@ needs a stable extension point. Data objects do not receive ceremonial bases.
 
 ### Other concrete families
 
-- Keep deterministic JOSE in `tigrbl-jose-concrete`.
+- Keep deterministic JOSE in `tba-concrete-jose`.
 - Keep SD-JWT, SD-JWT VC, mdoc, VCDM, CoRIM, SVID, DID, SET, identities, and
   credentials in their standalone layer-10 owners.
 - Every concrete credential and identity class remains a standalone package.
@@ -488,10 +488,10 @@ needs a stable extension point. Data objects do not receive ceremonial bases.
 
 ### Required corrections
 
-- `tigrbl-eat-verifier-provider` must verify protected JWT/CWT integrity before
+- `tba-provider-eat-verifier` must verify protected JWT/CWT integrity before
   returning `VerifiedAttestationEvidence`; then appraisers may evaluate claims
   against reference material.
-- Split password/client-secret hashing out of `tigrbl-identity-jose` into the
+- Split password/client-secret hashing out of `tba-provider-identity-jose` into the
   appropriate authenticator providers; JOSE is not password hashing.
 - Update client/user call sites to provider ports instead of model methods.
 - Replay memory remains a layer-20 provider because it is an environment-backed
@@ -506,12 +506,12 @@ needs a stable extension point. Data objects do not receive ceremonial bases.
 
 ## 9. Layer 30: durable Tigrbl table runtime
 
-Owner: `pkgs/30-storage-runtime/tigrbl-identity-storage-runtime`.
+Owner: `pkgs/30-storage-runtime/tba-runtime-identity-storage`.
 
 ### Canonical module shape
 
 ```text
-src/tigrbl_identity_storage_runtime/
+src/tba_runtime_identity_storage/
   inventory.py     # table/spec/operation indexes
   initialize.py    # explicit runtime activation
   ops/             # carrier-neutral durable operation bodies
@@ -583,7 +583,7 @@ src/tigrbl_identity_storage_runtime/
 - `tigrbl-attestation-appraisal`
 - `tigrbl-security-events`
 - `tigrbl-workload-identity`
-- `tigrbl-replay-protection-capability`
+- `tba-capability-replay-protection`
 - identity administration/control-plane capabilities
 - protocol-artifact processing, with explicit token/credential/attestation
   profile dispatch.
@@ -665,7 +665,7 @@ errors.py         # protocol error mapping
 
 ### Layer 90 UIX core
 
-- `pkgs/100-uix-core/uix-core` owns browser-safe, reusable React layout,
+- `pkgs/100-uix-core/tba-ui-primitives` owns browser-safe, reusable React layout,
   authentication, API-client, form, table, and feedback primitives.
 - It does not own product routes, protocol algorithms, server-side secrets, or
   durable state.
@@ -811,11 +811,11 @@ routers or persistence singletons.
 
 | Action | File | Required change |
 |---|---|---|
-| ADD | `pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/ops/clients.py` | Implement `lookup_client`, `set_client_enabled`, and `replace_client_secret_hash` using the common layer-30 table operations. The operation accepts an already-produced digest; it never hashes or verifies a secret. |
-| ADD | `pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/tables/clients.py` | Define `ClientRuntimeSpec` with aliases `lookup_client`, `enable`, `disable`, and `rotate_secret_hash`; preserve collection/member arity and read-only versus read-write transaction scope. |
+| ADD | `pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/ops/clients.py` | Implement `lookup_client`, `set_client_enabled`, and `replace_client_secret_hash` using the common layer-30 table operations. The operation accepts an already-produced digest; it never hashes or verifies a secret. |
+| ADD | `pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/tables/clients.py` | Define `ClientRuntimeSpec` with aliases `lookup_client`, `enable`, `disable`, and `rotate_secret_hash`; preserve collection/member arity and read-only versus read-write transaction scope. |
 | UPDATE | `.../tables/__init__.py`, `.../ops/__init__.py` | Export and activate the client runtime family. |
 | UPDATE | `.../inventory.py` | Ensure the derived `ClientRuntimeSpec` is indexed by table and operation alias. Do not derive a second mapped class. |
-| MOVE | `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/client/_table.py` | Remove `verify_secret`, `rotate_secret`, `enable`, `disable`, `authenticate`, `op_ctx`, `_ops`, and `tigrbl_identity_jose` imports. Retain mapped fields, relationship, `_CLIENT_ID_RE`, and schema metadata. |
+| MOVE | `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/client/_table.py` | Remove `verify_secret`, `rotate_secret`, `enable`, `disable`, `authenticate`, `op_ctx`, `_ops`, and `tba_provider_identity_jose` imports. Retain mapped fields, relationship, `_CLIENT_ID_RE`, and schema metadata. |
 | UPDATE | `.../introspection.py`, `.../token_request.py` | Replace `client.verify_secret(...)` with an injected client-secret verification port; replace direct client lookup with the layer-30 operation. |
 | UPDATE | tests and examples currently calling `Client.new(...)` | Use a provider-backed client-record factory that hashes before invoking the layer-30 create operation. Do not restore `Client.new` on the mapped model. |
 
@@ -836,9 +836,9 @@ layer-50 token/introspection binding
 | ADD | `.../ops/identities.py` | Implement `lookup_identity_by_identifier`, `replace_password_hash`, `set_identity_enabled`, and password-reset state mutations. Reads filter active records and preserve username/email lookup semantics. |
 | ADD | `.../tables/identities.py` | Define and derive `UserRuntimeSpec`; attach aliases without HTTP bindings. |
 | MOVE | `pkgs/01-storage/.../tables/user/_table.py` | Remove request/response models, `TigrblRouter`, route imports, static route method attachment, `verify_password`, `lookup_by_identifier`, `op_ctx`, and JOSE password imports. Keep mapped columns, relationships, passive `roles`/`scopes` projections, and bootstrap identifiers. |
-| MOVE | `pkgs/01-storage/.../tables/user/_account_route.py` | Move HTTP schemas and handlers to `pkgs/90-backend-apps/tigrbl-auth-backend-app-my-account/src/tigrbl_auth_backend_app_my_account/identities.py`; call the password-authentication capability and identity runtime operations. |
+| MOVE | `pkgs/01-storage/.../tables/user/_account_route.py` | Move HTTP schemas and handlers to `pkgs/90-backend-apps/tba-app-backend-my-account/src/tba_app_backend_my_account/identities.py`; call the password-authentication capability and identity runtime operations. |
 | MOVE | `pkgs/01-storage/.../tables/user/_admin_identity_route.py` | Move to the appropriate tenant/platform admin API modules; delegate mutations to the identity-administration capability. |
-| UPDATE | `.../login.py`, `pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/admin_auth.py` | Replace `row.verify_password(...)` with `PasswordAuthenticationCapability.authenticate(...)`. |
+| UPDATE | `.../login.py`, `pkgs/60-runtime/tba-server-identity/src/tba_server_identity/admin_auth.py` | Replace `row.verify_password(...)` with `PasswordAuthenticationCapability.authenticate(...)`. |
 | UPDATE | bootstrap composition | Hash the initial superuser password through the configured password provider during bootstrap. `User.DEFAULT_ROWS` must not execute provider cryptography at import time. |
 | REMOVE | old route files and layer-01 route exports | Delete only after OpenAPI equivalence and UI/API integration tests pass. |
 
@@ -893,13 +893,13 @@ constraint, index, or relationship changes.
 
 | Action | File/package | Required change |
 |---|---|---|
-| ADD | `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/shared_secrets.py` | Define `SecretHash`, `SecretHashingPort.hash_secret`, `SecretVerificationPort.verify_secret`, `SecretHashPolicy`, and a typed verification result/error. The contract carries encoded bytes/string without choosing bcrypt/PBKDF2. |
+| ADD | `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/shared_secrets.py` | Define `SecretHash`, `SecretHashingPort.hash_secret`, `SecretVerificationPort.verify_secret`, `SecretHashPolicy`, and a typed verification result/error. The contract carries encoded bytes/string without choosing bcrypt/PBKDF2. |
 | UPDATE | `.../authenticators.py` and package `__init__.py` | Reference the shared-secret ports from password/client-secret authenticator contracts and export them. |
-| UPDATE | `pkgs/05-bases/tigrbl-identity-authenticator-bases/.../mixins.py` | Make `SecretVerifierMixin` an adapter over an injected `SecretVerificationPort`, or remove it if it remains a method that only raises `NotImplementedError`. |
-| ADD | `pkgs/20-providers/tigrbl-secret-hashing-bcrypt-provider` | Add `BcryptSecretHasher` implementing hash/verify for the existing `LargeBinary(60)` representation, cost policy, malformed-hash rejection, and optional rehash-needed detection. |
-| UPDATE | `tigrbl-authenticator-password-local` | `PasswordLocalAuthenticator` injects the hasher and implements typed authenticate/verify behavior; it does not query `User`. |
-| UPDATE | `tigrbl-authenticator-client-secret-local` | `ClientSecretLocalAuthenticator` injects the hasher and implements typed verify behavior; remove OAuth-specific implementation semantics. |
-| UPDATE | `tigrbl-credentials/lifecycle.py` | Stop maintaining a competing PBKDF2 storage format unless explicitly supported as a versioned migration algorithm. Split deterministic lifecycle from provider hashing; remove `CredentialLedger` as an in-memory durable substitute. |
+| UPDATE | `pkgs/05-bases/tba-bases-identity-authenticator/.../mixins.py` | Make `SecretVerifierMixin` an adapter over an injected `SecretVerificationPort`, or remove it if it remains a method that only raises `NotImplementedError`. |
+| ADD | `pkgs/20-providers/tba-provider-secret-hashing-bcrypt` | Add `BcryptSecretHasher` implementing hash/verify for the existing `LargeBinary(60)` representation, cost policy, malformed-hash rejection, and optional rehash-needed detection. |
+| UPDATE | `tba-provider-authenticator-password-local` | `PasswordLocalAuthenticator` injects the hasher and implements typed authenticate/verify behavior; it does not query `User`. |
+| UPDATE | `tba-provider-authenticator-client-secret-local` | `ClientSecretLocalAuthenticator` injects the hasher and implements typed verify behavior; remove OAuth-specific implementation semantics. |
+| UPDATE | `tba-credentials/lifecycle.py` | Stop maintaining a competing PBKDF2 storage format unless explicitly supported as a versioned migration algorithm. Split deterministic lifecycle from provider hashing; remove `CredentialLedger` as an in-memory durable substitute. |
 
 If legacy PBKDF2 hashes exist, add a layer-20 `CompositeSecretVerifier` that
 recognizes both encodings, verifies with the correct provider, and requests a
@@ -920,10 +920,10 @@ ADD `pkgs/40-capabilities/tigrbl-principal-authentication` with:
   without exposing stored digests.
 
 MOVE the composition currently in
-`pkgs/70-facade/tigrbl-credentials/src/tigrbl_credentials/backends.py`
-to these capabilities. Remove imports of `tigrbl_identity_storage.tables`,
+`pkgs/70-facade/tba-credentials/src/tba_credentials/backends.py`
+to these capabilities. Remove imports of `tba_storage_core.tables`,
 `tables._ops`, `User.lookup_by_identifier`, `Client.authenticate`, and
-`tigrbl_identity_jose.key_management.verify_pw` from layer 20.
+`tba_provider_identity_jose.key_management.verify_pw` from layer 20.
 
 | Current call | Replacement |
 |---|---|
@@ -938,18 +938,18 @@ to these capabilities. Remove imports of `tigrbl_identity_storage.tables`,
 
 ### 19.1 Claims
 
-- KEEP `tigrbl_identity_core` claim classifiers and
-  `tigrbl_identity_contracts.claims` semantic objects/ports.
-- KEEP `tigrbl-identity-claims-bases` as the protocol-neutral home of
+- KEEP `tba_primitives_identity` claim classifiers and
+  `tba_contracts_identity.claims` semantic objects/ports.
+- KEEP `tba-bases-identity-claims` as the protocol-neutral home of
   `ClaimBase`, `ClaimSetComposerBase`, and `ClaimsProviderBase`.
-- REQUIRE every `pkgs/10-concrete/tigrbl-claim-*-concrete` class to subclass
+- REQUIRE every `pkgs/10-concrete/tba-claim-*-concrete` class to subclass
   `ClaimBase` and declare canonical name, name kind, claim type, and value type.
 - ADD a generated ownership test that discovers every standalone claim package,
   instantiates its exported claim class, rejects duplicate canonical names
   unless an explicit protocol label differs, and proves no package imports
   layer 50.
 - REMOVE `tigrbl-claim-access-token-hash-oidc-concrete` after its users migrate
-  to `tigrbl-claim-access-token-hash-concrete`.
+  to `tba-concrete-claim-access-token-hash`.
 
 `tigrbl-oidc-claims-concrete` becomes a FACADE only:
 
@@ -957,7 +957,7 @@ to these capabilities. Remove imports of `tigrbl_identity_storage.tables`,
   OIDC/EAP profile modules at layer 50 because these are registered OIDC values,
   not generic claim objects;
 - MOVE `parse_verified_claims` and `serialize_verified_claims` from
-  `identity_assurance.py` to `tigrbl-identity-assurance-concrete` because the
+  `identity_assurance.py` to `tba-concrete-identity-assurance` because the
   evidence structure is reusable below the OIDC wire profile;
 - UPDATE `tests/unit/test_protocol_neutral_reusable_ownership.py`,
   `test_standalone_concrete_ownership.py`, package-local tests, and imports;
@@ -967,11 +967,11 @@ to these capabilities. Remove imports of `tigrbl_identity_storage.tables`,
 ### 19.2 Scope and subject identifiers
 
 - UPDATE callers/tests to import `ScopeSetMatcher` from
-  `tigrbl-authorization-scope-set-matcher-concrete`; FACADE then REMOVE
+  `tba-concrete-authorization-scope-set-matcher`; FACADE then REMOVE
   `tigrbl-oauth-scope-matcher` and `DefaultScopeMatcher`.
-- UPDATE `tigrbl-security-subject-pairwise-provider` to import
+- UPDATE `tba-provider-security-subject-pairwise` to import
   `PairwiseSubjectIdentifierStrategy` from
-  `tigrbl-pairwise-subject-identifier-concrete`.
+  `tba-concrete-pairwise-subject-identifier`.
 - UPDATE OIDC layer-50 composition to choose public versus pairwise strategy.
 - FACADE then REMOVE `tigrbl-oidc-subject-strategy`.
 
@@ -979,8 +979,8 @@ to these capabilities. Remove imports of `tigrbl_identity_storage.tables`,
 
 - MOVE profiled token verification, rich-authorization validation, actor-chain
   validation, and step-up evaluation from `tigrbl-oauth-bases` to
-  `tigrbl-token-bases`, authorization/delegation bases, and
-  `tigrbl-authentication-assurance-bases` respectively.
+  `tba-bases-token`, authorization/delegation bases, and
+  `tba-bases-authentication-assurance` respectively.
 - MOVE EAP/verified-claims evaluation from `tigrbl-oidc-bases` to
   authentication-assurance and identity-claims bases.
 - retain only genuinely OAuth/OIDC-defined extension points with multiple
@@ -997,14 +997,14 @@ The existing split is retained and hardened:
 |---|---|---|
 | 02 | `tokens.py` | `ProtectedTokenEnvelope`, `VerifiedTokenEnvelope`, and explicit `TokenProfile.ENTITY_ATTESTATION_TOKEN`. |
 | 02 | `attestation/*` | Evidence, verified evidence, appraisal, reference values, endorsements, manifests, and result ports. |
-| 05 | `tigrbl-token-bases` | Protected envelope verification extension point. |
-| 05 | `tigrbl-jose-bases` / `tigrbl-cose-bases` | JWT and CWT integrity coding extension points. |
-| 05 | `tigrbl-attestation-bases` | Evidence verification and appraisal extension points. |
-| 10 | `tigrbl-eat-concrete` | Structural EAT claim parsing, submodules, profiles, detached-bundle structure, and evidence conversion only. |
-| 20 | `tigrbl-eat-verifier-provider` | Choose JWT/CWT verifier by explicit envelope/profile, resolve issuer/key/trust, verify integrity, then return `VerifiedAttestationEvidence`. |
+| 05 | `tba-bases-token` | Protected envelope verification extension point. |
+| 05 | `tba-bases-jose` / `tba-bases-cose` | JWT and CWT integrity coding extension points. |
+| 05 | `tba-bases-attestation` | Evidence verification and appraisal extension points. |
+| 10 | `tba-concrete-eat` | Structural EAT claim parsing, submodules, profiles, detached-bundle structure, and evidence conversion only. |
+| 20 | `tba-provider-eat-verifier` | Choose JWT/CWT verifier by explicit envelope/profile, resolve issuer/key/trust, verify integrity, then return `VerifiedAttestationEvidence`. |
 | 30 | attestation runtime tables | Persist protected artifact digest/locator, verification result, appraisal result, reference material, and replay state. |
 | 40 | `tigrbl-attestation-appraisal` | Subcall evidence verification, reference resolution, appraisal, and durable result recording. |
-| 50 | `tigrbl-attestation-protocol-eat` | Own exact RFC/profile versions, media types, claim labels, compatibility, feature flags, migrations, and capability bindings. |
+| 50 | `tba-protocol-attestation-eat` | Own exact RFC/profile versions, media types, claim labels, compatibility, feature flags, migrations, and capability bindings. |
 
 UPDATE `EatVerifierProvider`: replace the untyped
 `Callable[[bytes | str, str], bool]` with typed JWT/CWT token verifier ports;
@@ -1046,7 +1046,7 @@ raw evidence cannot be appraised as trusted evidence.
 | `tigrbl-attestation-appraisal` | Use the verified-evidence chain in section 20 and durable recorder operations. |
 | `tigrbl-security-events` | Inject durable event/subscription/delivery/replay operations; transmitter and receiver remain providers. |
 | `tigrbl-workload-identity` | Expose fetch-X509-SVID, fetch-JWT-SVID, verify-SVID, resolve-bundle, and refresh operations as distinct targets. |
-| `tigrbl-replay-protection-capability` | Keep memory provider support, bind durable reservations from layer 30 when selected, and derive persistence/provider reporting from the binding. |
+| `tba-capability-replay-protection` | Keep memory provider support, bind durable reservations from layer 30 when selected, and derive persistence/provider reporting from the binding. |
 | `tigrbl-protocol-artifact-processing` | Remove hard-coded ready state; derive readiness from bound operations and providers. |
 
 Every layer-40 README must state injected dependencies, operation names,
@@ -1070,8 +1070,8 @@ errors.py
 
 The live package audit requires these concrete updates:
 
-- ADD the missing standard module set to `tigrbl-auth-protocol-cwt` and
-  `tigrbl-auth-protocol-rp` where applicable.
+- ADD the missing standard module set to `tba-protocol-cwt` and
+  `tba-protocol-oidc-relying-party` where applicable.
 - ADD `compatibility.py`, `claims.py`, `schemas.py`, `bindings.py`, and
   `errors.py` to EAT, CoRIM, HAIP, AuthZEN, GNAP, JWT, OID4VCI, OID4VP,
   SD-JWT VC, and SET packages as required by their wire surfaces.
@@ -1118,12 +1118,12 @@ or move carrier choices into handlers.
 
 | Layer | Files/packages | Required change |
 |---|---|---|
-| 60 | `tigrbl-identity-server/api/lifecycle.py` | Build providers, layer-30 runtimes, capability registry, and selected protocols in that order; fail startup on missing required targets. |
-| 60 | `tigrbl-identity-server/_surfaces/*.py` | Stop importing routers from layer 30. Import layer-80 API routers or mount layer-50 bindings. |
-| 60 | `tigrbl-identity-runtime/token_service.py` | Consume typed capability/protocol services rather than persistence helpers directly. |
+| 60 | `tba-server-identity/api/lifecycle.py` | Build providers, layer-30 runtimes, capability registry, and selected protocols in that order; fail startup on missing required targets. |
+| 60 | `tba-server-identity/_surfaces/*.py` | Stop importing routers from layer 30. Import layer-80 API routers or mount layer-50 bindings. |
+| 60 | `tba-runtime-identity/token_service.py` | Consume typed capability/protocol services rather than persistence helpers directly. |
 | 60 | CLI handlers | Call administration capabilities; remove direct `operator_store`, `resource_service`, and key-management mutations that bypass policy. |
-| 70 | `tigrbl-auth` | Export stable contracts/capabilities/protocol configuration. Warn with removal versions for old scope, subject, claims, persistence, and model-method paths. |
-| 80 | all `tigrbl-auth-router-*` packages | Own HTTP schemas/routes, translate request context to typed calls, mount selected layer-50 bindings, and generate OpenAPI/OpenRPC from mounted truth. |
+| 70 | `tba-auth` | Export stable contracts/capabilities/protocol configuration. Warn with removal versions for old scope, subject, claims, persistence, and model-method paths. |
+| 80 | all `tba-router-*` packages | Own HTTP schemas/routes, translate request context to typed calls, mount selected layer-50 bindings, and generate OpenAPI/OpenRPC from mounted truth. |
 | 90 | `uix-core` | Update shared generated clients/types only after layer-80 contracts stabilize. |
 | 95 | product UIX packages | Update imports/endpoints and verify each package uses only its allowed layer-80 API surface. |
 

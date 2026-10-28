@@ -10,7 +10,7 @@ import pytest
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import ec
 
-from tigrbl_auth_protocol_webauthn import (
+from tba_protocol_webauthn import (
     AuthenticationExpectation,
     AuthenticationVerificationError,
     AuthenticatorAssertionResponse,
@@ -25,7 +25,7 @@ from tigrbl_auth_protocol_webauthn import (
     verify_authentication_response,
     verify_registration_response,
 )
-from tigrbl_security_cose import decode_cose_key, verify_detached_signature
+from tba_provider_security_cose import decode_cose_key, verify_detached_signature
 
 
 def _b64(value: bytes) -> str:

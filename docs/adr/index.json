@@ -67,8 +67,8 @@
       "title": "Remove vendor directories and forbid private framework shims"
     },
     {
-      "id": "ADR-0014-tigrbl-public-api-only-composition",
-      "path": "docs\\adr\\ADR-0014-tigrbl-public-api-only-composition.md",
+      "id": "ADR-0014-tba-public-api-only-composition",
+      "path": "docs\\adr\\ADR-0014-tba-public-api-only-composition.md",
       "title": "Tigrbl public-API-only composition is mandatory in release paths"
     },
     {

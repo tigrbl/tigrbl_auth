@@ -5,24 +5,24 @@ from pathlib import Path
 
 import pytest
 
-from tigrbl_identity_admin_control_plane import IdentityAdministrationCapability
-from tigrbl_identity_contracts.admin_identities import (
+from tba_runtime_identity_administration_control_plane import IdentityAdministrationCapability
+from tba_contracts_identity.admin_identities import (
     AdminIdentity,
     AdminIdentityCreate,
     AdminIdentityUpdate,
     IdentityAdministrationPolicyError,
     IdentityAdministrationValidationError,
 )
-from tigrbl_identity_contracts.admin_tenants import PlatformAdministrator
+from tba_contracts_identity.admin_tenants import PlatformAdministrator
 
 
 ROOT = Path(__file__).resolve().parents[2]
 IDENTITY_API = (
     ROOT
-    / "pkgs/90-backend-apps/tigrbl-auth-backend-app-platform-admin/src/tigrbl_auth_backend_app_platform_admin/identities.py"
+    / "pkgs/90-backend-apps/tba-app-backend-platform-admin/src/tba_app_backend_platform_admin/identities.py"
 )
 PLATFORM_ADMIN_PROJECT = (
-    ROOT / "pkgs/90-backend-apps/tigrbl-auth-backend-app-platform-admin/pyproject.toml"
+    ROOT / "pkgs/90-backend-apps/tba-app-backend-platform-admin/pyproject.toml"
 )
 
 
@@ -133,7 +133,7 @@ def test_identity_capability_prevents_self_deactivation_and_deletion() -> None:
 def test_identity_api_is_http_only_and_does_not_hash_or_mutate_storage() -> None:
     source = IDENTITY_API.read_text(encoding="utf-8")
 
-    assert "tigrbl_identity_storage" not in source
+    assert "tba_storage_core" not in source
     assert "BcryptSecretHasher" not in source
     assert "create_table_record" not in source
     assert "update_table_record" not in source
@@ -144,7 +144,7 @@ def test_identity_api_is_http_only_and_does_not_hash_or_mutate_storage() -> None
 def test_platform_admin_api_has_no_storage_or_hashing_provider_dependency() -> None:
     project = PLATFORM_ADMIN_PROJECT.read_text(encoding="utf-8")
 
-    assert '"tigrbl-identity-storage==' not in project
-    assert '"tigrbl-identity-storage-runtime==' not in project
-    assert '"tigrbl-identity-admin==' not in project
-    assert '"tigrbl-secret-hashing-bcrypt-provider==' not in project
+    assert '"tba-storage-core==' not in project
+    assert '"tba-runtime-identity-storage==' not in project
+    assert '"tba-runtime-identity-administration==' not in project
+    assert '"tba-provider-secret-hashing-bcrypt==' not in project

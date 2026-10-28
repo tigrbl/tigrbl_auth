@@ -30,7 +30,7 @@ def _normalized_dist_name(name: str) -> str:
 @contextmanager
 def isolated_facade_import():
     original_path = list(sys.path)
-    removed_modules = {name: module for name, module in sys.modules.items() if name == "tigrbl_auth" or name.startswith("tigrbl_auth.")}
+    removed_modules = {name: module for name, module in sys.modules.items() if name == "tba_auth" or name.startswith("tba_auth.")}
     for name in list(removed_modules):
         sys.modules.pop(name, None)
     try:
@@ -43,35 +43,35 @@ def isolated_facade_import():
         yield
     finally:
         for name in list(sys.modules):
-            if name == "tigrbl_auth" or name.startswith("tigrbl_auth."):
+            if name == "tba_auth" or name.startswith("tba_auth."):
                 sys.modules.pop(name, None)
         sys.modules.update(removed_modules)
         sys.path = original_path
 
 
 @pytest.mark.unit
-def test_root_project_does_not_claim_tigrbl_auth_facade_distribution() -> None:
+def test_root_project_does_not_claim_tba_auth_facade_distribution() -> None:
     root_pyproject = _load_pyproject(ROOT / "pyproject.toml")
     root_project = root_pyproject["project"]
     facade_project = _load_pyproject(
-        ROOT / "pkgs" / "70-facade" / "tigrbl-auth" / "pyproject.toml"
+        ROOT / "pkgs" / "70-facade" / "tba-auth" / "pyproject.toml"
     )["project"]
 
-    assert _normalized_dist_name(facade_project["name"]) == "tigrbl-auth"
-    assert _normalized_dist_name(root_project["name"]) != "tigrbl-auth"
+    assert _normalized_dist_name(facade_project["name"]) == "tba-auth"
+    assert _normalized_dist_name(root_project["name"]) != "tba-auth"
     assert _normalized_dist_name(root_project["name"]).endswith("-workspace")
-    assert "tigrbl-auth==0.4.0.dev2" in root_project["dependencies"]
+    assert "tba-auth==0.4.0.dev2" in root_project["dependencies"]
     assert root_pyproject["tool"]["uv"]["package"] is False
     assert "poetry" not in root_pyproject["tool"]
-    assert not (ROOT / "tigrbl_auth").exists()
-    assert not (ROOT / "tigrbl_auth_workspace").exists()
+    assert not (ROOT / "tba_auth").exists()
+    assert not (ROOT / "tba_auth_workspace").exists()
     assert (
         ROOT
         / "pkgs"
         / "70-facade"
-        / "tigrbl-auth"
+        / "tba-auth"
         / "src"
-        / "tigrbl_auth"
+        / "tba_auth"
         / "__init__.py"
     ).exists()
 
@@ -79,18 +79,18 @@ def test_root_project_does_not_claim_tigrbl_auth_facade_distribution() -> None:
 @pytest.mark.unit
 def test_facade_t0_public_surfaces_and_entrypoint_manifest_are_importable() -> None:
     with isolated_facade_import():
-        facade = importlib.import_module("tigrbl_auth")
-        compat = importlib.import_module("tigrbl_auth.compat")
+        facade = importlib.import_module("tba_auth")
+        compat = importlib.import_module("tba_auth.compat")
 
         assert facade.__file__ and "pkgs" in facade.__file__
         assert "app" not in compat.STABLE_ENTRYPOINTS
-        assert compat.STABLE_ENTRYPOINTS["TigrblAuthPlugin"].module == "tigrbl_auth_plugin"
-        assert compat.STABLE_ENTRYPOINTS["TigrblAuthPlugin"].package == "tigrbl-auth-plugin"
-        assert compat.STABLE_ENTRYPOINTS["plugin_install"].module == "tigrbl_auth_plugin"
-        assert compat.STABLE_ENTRYPOINTS["plugin_install"].package == "tigrbl-auth-plugin"
-        assert compat.extras_for("consumer") == ("tigrbl-authz-resource-server", "tigrbl-auth-protocol-rp")
-        assert facade.security is importlib.import_module("tigrbl_auth.security")
-        assert facade.standards is importlib.import_module("tigrbl_auth.standards")
+        assert compat.STABLE_ENTRYPOINTS["TbaPlugin"].module == "tba_plugin_tigrbl"
+        assert compat.STABLE_ENTRYPOINTS["TbaPlugin"].package == "tba-plugin-tigrbl"
+        assert compat.STABLE_ENTRYPOINTS["plugin_install"].module == "tba_plugin_tigrbl"
+        assert compat.STABLE_ENTRYPOINTS["plugin_install"].package == "tba-plugin-tigrbl"
+        assert compat.extras_for("consumer") == ("tba-protocol-authorization-resource-server", "tba-protocol-oidc-relying-party")
+        assert facade.security is importlib.import_module("tba_auth.security")
+        assert facade.standards is importlib.import_module("tba_auth.standards")
 
 
 @pytest.mark.unit
@@ -98,10 +98,10 @@ def test_facade_t1_legacy_imports_are_stable_and_lazy() -> None:
     with isolated_facade_import():
         with warnings.catch_warnings(record=True) as captured:
             warnings.simplefilter("always")
-            app_module = importlib.import_module("tigrbl_auth.app")
-            gateway_module = importlib.import_module("tigrbl_auth.gateway")
-            plugin_module = importlib.import_module("tigrbl_auth.plugin")
-            cli_module = importlib.import_module("tigrbl_auth.cli")
+            app_module = importlib.import_module("tba_auth.app")
+            gateway_module = importlib.import_module("tba_auth.gateway")
+            plugin_module = importlib.import_module("tba_auth.plugin")
+            cli_module = importlib.import_module("tba_auth.cli")
 
         assert app_module.__all__ == ["build_application_runtime_plan"]
         assert "build_gateway" not in gateway_module.__all__
@@ -113,36 +113,36 @@ def test_facade_t1_legacy_imports_are_stable_and_lazy() -> None:
 @pytest.mark.unit
 def test_facade_cli_proxy_prefers_workspace_split_cli() -> None:
     with isolated_facade_import():
-        install_substrate = importlib.import_module("tigrbl_auth.cli.install_substrate")
+        install_substrate = importlib.import_module("tba_auth.cli.install_substrate")
 
         assert install_substrate.SUPPORTED_PYTHON_VERSIONS == ("3.10", "3.11", "3.12")
-        loaded = sys.modules["tigrbl_auth.cli.install_substrate"]
+        loaded = sys.modules["tba_auth.cli.install_substrate"]
         assert Path(loaded.__file__).resolve().is_relative_to(
-            ROOT / "pkgs" / "60-runtime" / "tigrbl-identity-cli" / "src"
+            ROOT / "pkgs" / "60-runtime" / "tba-cli-identity" / "src"
         )
 
 
 @pytest.mark.unit
 def test_facade_t1_extras_map_covers_product_install_groups() -> None:
     with isolated_facade_import():
-        compat = importlib.import_module("tigrbl_auth.compat")
+        compat = importlib.import_module("tba_auth.compat")
 
-        assert "tigrbl-identity-server" in compat.extras_for("server")
-        assert "tigrbl-auth-plugin" in compat.extras_for("server")
-        assert "tigrbl-identity-operator" in compat.extras_for("operator")
-        assert "tigrbl-auth-protocol-oauth" in compat.extras_for("oauth")
-        assert "tigrbl-auth-protocol-rp" in compat.extras_for("consumer")
+        assert "tba-server-identity" in compat.extras_for("server")
+        assert "tba-plugin-tigrbl" in compat.extras_for("server")
+        assert "tba-operator-identity" in compat.extras_for("operator")
+        assert "tba-protocol-oauth" in compat.extras_for("oauth")
+        assert "tba-protocol-oidc-relying-party" in compat.extras_for("consumer")
         assert set(compat.extras_for("all")).issuperset(set(compat.extras_for("server")))
 
 
 @pytest.mark.unit
 def test_facade_t2_fail_closed_unknowns_and_unavailable_targets(monkeypatch: pytest.MonkeyPatch) -> None:
     with isolated_facade_import():
-        compat = importlib.import_module("tigrbl_auth.compat")
+        compat = importlib.import_module("tba_auth.compat")
 
-        with pytest.raises(compat.FacadeImportError, match="unknown tigrbl-auth extra"):
+        with pytest.raises(compat.FacadeImportError, match="unknown tba-auth extra"):
             compat.extras_for("missing")
-        with pytest.raises(compat.FacadeImportError, match="unknown tigrbl-auth facade entrypoint"):
+        with pytest.raises(compat.FacadeImportError, match="unknown tba-auth facade entrypoint"):
             compat.resolve_entrypoint("missing")
 
         monkeypatch.setitem(
@@ -157,17 +157,17 @@ def test_facade_t2_fail_closed_unknowns_and_unavailable_targets(monkeypatch: pyt
 @pytest.mark.unit
 def test_facade_t2_import_boundary_does_not_eagerly_import_split_runtime() -> None:
     files = [
-        Path("pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/__init__.py"),
-        Path("pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/app.py"),
-        Path("pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/gateway.py"),
-        Path("pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/plugin.py"),
-        Path("pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/cli/__init__.py"),
-        Path("pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/compat.py"),
+        Path("pkgs/70-facade/tba-auth/src/tba_auth/__init__.py"),
+        Path("pkgs/70-facade/tba-auth/src/tba_auth/app.py"),
+        Path("pkgs/70-facade/tba-auth/src/tba_auth/gateway.py"),
+        Path("pkgs/70-facade/tba-auth/src/tba_auth/plugin.py"),
+        Path("pkgs/70-facade/tba-auth/src/tba_auth/cli/__init__.py"),
+        Path("pkgs/70-facade/tba-auth/src/tba_auth/compat.py"),
     ]
     forbidden_imports = {
-        "tigrbl_identity_server",
-        "tigrbl_identity_runtime",
-        "tigrbl_identity_operator",
+        "tba_server_identity",
+        "tba_runtime_identity",
+        "tba_operator_identity",
     }
 
     imports: set[str] = set()

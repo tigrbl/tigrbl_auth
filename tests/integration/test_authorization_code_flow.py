@@ -4,9 +4,9 @@ from urllib.parse import parse_qs, urlparse
 from uuid import UUID, uuid4
 
 from tigrbl.engine import HybridSession
-from tigrbl_auth.crypto import hash_pw
-from tigrbl_auth.tables import Client, Tenant, User
-from tigrbl_auth.rfc.rfc7636_pkce import makeCodeChallenge, makeCodeVerifier
+from tba_auth.crypto import hash_pw
+from tba_auth.tables import Client, Tenant, User
+from tba_auth.rfc.rfc7636_pkce import makeCodeChallenge, makeCodeVerifier
 
 
 @pytest.mark.asyncio

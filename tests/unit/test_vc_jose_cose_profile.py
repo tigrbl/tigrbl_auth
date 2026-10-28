@@ -1,6 +1,6 @@
 import pytest
 
-from tigrbl_credential_profile_vc_jose_cose import (
+from tba_profile_credential_vc_jose_cose import (
     CURRENT_VERSION,
     select_format,
     validate_cose_vc,

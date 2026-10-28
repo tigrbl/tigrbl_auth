@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from tigrbl_identity_storage.tables import (
+from tba_storage_core.tables import (
     CryptoKey,
     CryptoKeyVersion,
     KeyAttestationEvidence,
@@ -9,15 +9,15 @@ from tigrbl_identity_storage.tables import (
     RevokedToken,
     TokenRecord,
 )
-from tigrbl_identity_storage_runtime.security_context import (
+from tba_runtime_identity_storage.security_context import (
     JWT_CODER_CTX,
     KEY_PROVIDER_CTX,
     SIGNER_CTX,
     VERIFIER_CTX,
     stash_security_providers,
 )
-from tigrbl_identity_jose import materialize_public_key_record
-from tigrbl_identity_storage_runtime import normalize_key_usage_values
+from tba_provider_identity_jose import materialize_public_key_record
+from tba_runtime_identity_storage import normalize_key_usage_values
 
 
 def test_key_tables_are_storage_owned_and_exported() -> None:

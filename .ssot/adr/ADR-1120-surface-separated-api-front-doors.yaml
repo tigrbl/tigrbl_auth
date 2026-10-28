@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "Tigrbl Auth product APIs are deployed as separate API front doors over the shared `tigrbl_auth` identity foundation. Each product API package selects one named product surface and MUST expose only its allowed public capabilities, admin resources, admin REST router groups, and OpenRPC methods."
+summary: "TBA product APIs are deployed as separate API front doors over the shared `tba_auth` identity foundation. Each product API package selects one named product surface and MUST expose only its allowed public capabilities, admin resources, admin REST router groups, and OpenRPC methods."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -24,7 +24,7 @@ references: []
 body: |-
   ## Decision
   
-  Tigrbl Auth product APIs are deployed as separate API front doors over the shared `tigrbl_auth` identity foundation. Each product API package selects one named product surface and MUST expose only its allowed public capabilities, admin resources, admin REST router groups, and OpenRPC methods.
+  TBA product APIs are deployed as separate API front doors over the shared `tba_auth` identity foundation. Each product API package selects one named product surface and MUST expose only its allowed public capabilities, admin resources, admin REST router groups, and OpenRPC methods.
   
   ## Rationale
   

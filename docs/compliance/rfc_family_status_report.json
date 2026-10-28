@@ -128,8 +128,8 @@
         ],
         "scope_bucket": "baseline-certifiable-now",
         "modules": [
-          "tigrbl_auth/standards/oauth2/rfc6749.py",
-          "tigrbl_auth/standards/oauth2/rfc6749_token.py"
+          "tba_auth/standards/oauth2/rfc6749.py",
+          "tba_auth/standards/oauth2/rfc6749_token.py"
         ],
         "tests": [
           "tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py",
@@ -181,7 +181,7 @@
         ],
         "scope_bucket": "baseline-certifiable-now",
         "modules": [
-          "tigrbl_auth/standards/oauth2/rfc6750.py"
+          "tba_auth/standards/oauth2/rfc6750.py"
         ],
         "tests": [
           "tests/conformance/baseline/test_rfc6750_bearer_token.py",
@@ -232,7 +232,7 @@
         ],
         "scope_bucket": "baseline-certifiable-now",
         "modules": [
-          "tigrbl_auth/standards/oauth2/rfc7636_pkce.py"
+          "tba_auth/standards/oauth2/rfc7636_pkce.py"
         ],
         "tests": [
           "tests/conformance/baseline/test_rfc7636_pkce.py",
@@ -284,8 +284,8 @@
         ],
         "scope_bucket": "baseline-certifiable-now",
         "modules": [
-          "tigrbl_auth/standards/oauth2/rfc8414.py",
-          "tigrbl_auth/standards/oauth2/rfc8414_metadata.py"
+          "tba_auth/standards/oauth2/rfc8414.py",
+          "tba_auth/standards/oauth2/rfc8414_metadata.py"
         ],
         "tests": [
           "tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py",
@@ -328,7 +328,7 @@
         ],
         "scope_bucket": "baseline-certifiable-now",
         "modules": [
-          "tigrbl_auth/standards/http/well_known.py"
+          "tba_auth/standards/http/well_known.py"
         ],
         "tests": [
           "tests/conformance/production/test_rfc8615_well_known_uris.py",
@@ -379,7 +379,7 @@
         ],
         "scope_bucket": "baseline-certifiable-now",
         "modules": [
-          "tigrbl_auth/standards/jose/rfc7515.py"
+          "tba_auth/standards/jose/rfc7515.py"
         ],
         "tests": [
           "tests/conformance/baseline/test_rfc7515_jws.py",
@@ -417,9 +417,9 @@
         ],
         "scope_bucket": "baseline-certifiable-now",
         "modules": [
-          "tigrbl_auth/standards/jose/rfc7516.py",
-          "tigrbl_auth/standards/oidc/id_token.py",
-          "tigrbl_auth/standards/oidc/discovery_metadata.py"
+          "tba_auth/standards/jose/rfc7516.py",
+          "tba_auth/standards/oidc/id_token.py",
+          "tba_auth/standards/oidc/discovery_metadata.py"
         ],
         "tests": [
           "tests/conformance/production/test_rfc7516_jwe_profile.py",
@@ -459,7 +459,7 @@
         ],
         "scope_bucket": "baseline-certifiable-now",
         "modules": [
-          "tigrbl_auth/standards/jose/rfc7517.py"
+          "tba_auth/standards/jose/rfc7517.py"
         ],
         "tests": [
           "tests/conformance/baseline/test_rfc7517_jwk.py",
@@ -502,7 +502,7 @@
         ],
         "scope_bucket": "baseline-certifiable-now",
         "modules": [
-          "tigrbl_auth/standards/jose/rfc7518.py"
+          "tba_auth/standards/jose/rfc7518.py"
         ],
         "tests": [
           "tests/conformance/baseline/test_rfc7518_jwa.py",
@@ -540,7 +540,7 @@
         ],
         "scope_bucket": "baseline-certifiable-now",
         "modules": [
-          "tigrbl_auth/standards/jose/rfc7519.py"
+          "tba_auth/standards/jose/rfc7519.py"
         ],
         "tests": [
           "tests/conformance/baseline/test_rfc7519_jwt.py",
@@ -577,12 +577,12 @@
         ],
         "scope_bucket": "production-completion-required",
         "modules": [
-          "tigrbl_auth/standards/oauth2/revocation.py",
-          "tigrbl_auth/api/rest/routers/revoke.py",
-          "tigrbl_auth/ops/revoke.py",
-          "tigrbl_auth/services/persistence.py",
-          "tigrbl_auth/tables/revoked_token.py",
-          "tigrbl_auth/tables/token_record.py"
+          "tba_auth/standards/oauth2/revocation.py",
+          "tba_auth/api/rest/routers/revoke.py",
+          "tba_auth/ops/revoke.py",
+          "tba_auth/services/persistence.py",
+          "tba_auth/tables/revoked_token.py",
+          "tba_auth/tables/token_record.py"
         ],
         "tests": [
           "tests/conformance/production/test_rfc7009_token_revocation.py",
@@ -627,11 +627,11 @@
         ],
         "scope_bucket": "production-completion-required",
         "modules": [
-          "tigrbl_auth/standards/oauth2/dynamic_client_registration.py",
-          "tigrbl_auth/api/rest/routers/register.py",
-          "tigrbl_auth/ops/register.py",
-          "tigrbl_auth/tables/client_registration.py",
-          "tigrbl_auth/services/persistence.py"
+          "tba_auth/standards/oauth2/dynamic_client_registration.py",
+          "tba_auth/api/rest/routers/register.py",
+          "tba_auth/ops/register.py",
+          "tba_auth/tables/client_registration.py",
+          "tba_auth/services/persistence.py"
         ],
         "tests": [
           "tests/conformance/production/test_rfc7591_dynamic_client_registration.py",
@@ -676,13 +676,13 @@
         ],
         "scope_bucket": "production-completion-required",
         "modules": [
-          "tigrbl_auth/standards/oauth2/client_registration_management.py",
-          "tigrbl_auth/tables/client_registration.py",
-          "tigrbl_auth/services/persistence.py",
-          "tigrbl_auth/api/rest/routers/register.py",
-          "tigrbl_auth/ops/register.py",
-          "tigrbl_auth/api/rpc/methods/client_registration.py",
-          "tigrbl_auth/api/rpc/schemas/client_registration.py"
+          "tba_auth/standards/oauth2/client_registration_management.py",
+          "tba_auth/tables/client_registration.py",
+          "tba_auth/services/persistence.py",
+          "tba_auth/api/rest/routers/register.py",
+          "tba_auth/ops/register.py",
+          "tba_auth/api/rpc/methods/client_registration.py",
+          "tba_auth/api/rpc/schemas/client_registration.py"
         ],
         "tests": [
           "tests/unit/test_hardening_cluster_a.py",
@@ -727,10 +727,10 @@
         ],
         "scope_bucket": "production-completion-required",
         "modules": [
-          "tigrbl_auth/standards/oauth2/introspection.py",
-          "tigrbl_auth/services/persistence.py",
-          "tigrbl_auth/tables/token_record.py",
-          "tigrbl_auth/tables/revoked_token.py"
+          "tba_auth/standards/oauth2/introspection.py",
+          "tba_auth/services/persistence.py",
+          "tba_auth/tables/token_record.py",
+          "tba_auth/tables/revoked_token.py"
         ],
         "tests": [
           "tests/conformance/production/test_rfc7662_introspection.py",
@@ -775,11 +775,11 @@
         ],
         "scope_bucket": "production-completion-required",
         "modules": [
-          "tigrbl_auth/standards/oauth2/native_apps.py",
-          "tigrbl_auth/tables/client.py",
-          "tigrbl_auth/ops/authorize.py",
-          "tigrbl_auth/ops/register.py",
-          "tigrbl_auth/ops/token.py"
+          "tba_auth/standards/oauth2/native_apps.py",
+          "tba_auth/tables/client.py",
+          "tba_auth/ops/authorize.py",
+          "tba_auth/ops/register.py",
+          "tba_auth/ops/token.py"
         ],
         "tests": [
           "tests/unit/test_rfc8252_native_app_redirects.py",
@@ -829,12 +829,12 @@
         ],
         "scope_bucket": "hardening-completion-required",
         "modules": [
-          "tigrbl_auth/standards/oauth2/device_authorization.py",
-          "tigrbl_auth/api/rest/routers/device_authorization.py",
-          "tigrbl_auth/ops/device_authorization.py",
-          "tigrbl_auth/tables/device_code.py",
-          "tigrbl_auth/ops/token.py",
-          "tigrbl_auth/services/persistence.py"
+          "tba_auth/standards/oauth2/device_authorization.py",
+          "tba_auth/api/rest/routers/device_authorization.py",
+          "tba_auth/ops/device_authorization.py",
+          "tba_auth/tables/device_code.py",
+          "tba_auth/ops/token.py",
+          "tba_auth/services/persistence.py"
         ],
         "tests": [
           "tests/unit/test_hardening_cluster_a.py",
@@ -883,12 +883,12 @@
         ],
         "scope_bucket": "hardening-completion-required",
         "modules": [
-          "tigrbl_auth/standards/oauth2/token_exchange.py",
-          "tigrbl_auth/ops/token.py",
-          "tigrbl_auth/services/token_service.py",
-          "tigrbl_auth/services/persistence.py",
-          "tigrbl_auth/api/rpc/methods/token.py",
-          "tigrbl_auth/api/rpc/schemas/token.py"
+          "tba_auth/standards/oauth2/token_exchange.py",
+          "tba_auth/ops/token.py",
+          "tba_auth/services/token_service.py",
+          "tba_auth/services/persistence.py",
+          "tba_auth/api/rpc/methods/token.py",
+          "tba_auth/api/rpc/schemas/token.py"
         ],
         "tests": [
           "tests/unit/test_hardening_cluster_a.py",
@@ -937,16 +937,16 @@
         ],
         "scope_bucket": "hardening-completion-required",
         "modules": [
-          "tigrbl_auth/standards/oauth2/mtls.py",
-          "tigrbl_auth/standards/oauth2/rfc9700.py",
-          "tigrbl_auth/ops/token.py",
-          "tigrbl_auth/standards/oauth2/token_exchange.py",
-          "tigrbl_auth/services/token_service.py",
-          "tigrbl_auth/ops/register.py",
-          "tigrbl_auth/api/rest/schemas.py",
-          "tigrbl_auth/standards/oidc/discovery_metadata.py",
-          "tigrbl_auth/security/auth.py",
-          "tigrbl_auth/security/deps.py"
+          "tba_auth/standards/oauth2/mtls.py",
+          "tba_auth/standards/oauth2/rfc9700.py",
+          "tba_auth/ops/token.py",
+          "tba_auth/standards/oauth2/token_exchange.py",
+          "tba_auth/services/token_service.py",
+          "tba_auth/ops/register.py",
+          "tba_auth/api/rest/schemas.py",
+          "tba_auth/standards/oidc/discovery_metadata.py",
+          "tba_auth/security/auth.py",
+          "tba_auth/security/deps.py"
         ],
         "tests": [
           "tests/conformance/hardening/test_rfc8705_mtls.py",
@@ -995,13 +995,13 @@
         ],
         "scope_bucket": "hardening-completion-required",
         "modules": [
-          "tigrbl_auth/standards/oauth2/resource_indicators.py",
-          "tigrbl_auth/ops/authorize.py",
-          "tigrbl_auth/ops/token.py",
-          "tigrbl_auth/ops/device_authorization.py",
-          "tigrbl_auth/ops/par.py",
-          "tigrbl_auth/standards/oauth2/token_exchange.py",
-          "tigrbl_auth/services/token_service.py"
+          "tba_auth/standards/oauth2/resource_indicators.py",
+          "tba_auth/ops/authorize.py",
+          "tba_auth/ops/token.py",
+          "tba_auth/ops/device_authorization.py",
+          "tba_auth/ops/par.py",
+          "tba_auth/standards/oauth2/token_exchange.py",
+          "tba_auth/services/token_service.py"
         ],
         "tests": [
           "tests/unit/test_hardening_cluster_a.py",
@@ -1054,11 +1054,11 @@
         ],
         "scope_bucket": "production-completion-required",
         "modules": [
-          "tigrbl_auth/standards/oauth2/jwt_access_tokens.py",
-          "tigrbl_auth/services/token_service.py",
-          "tigrbl_auth/ops/login.py",
-          "tigrbl_auth/ops/token.py",
-          "tigrbl_auth/standards/oauth2/token_exchange.py"
+          "tba_auth/standards/oauth2/jwt_access_tokens.py",
+          "tba_auth/services/token_service.py",
+          "tba_auth/ops/login.py",
+          "tba_auth/ops/token.py",
+          "tba_auth/standards/oauth2/token_exchange.py"
         ],
         "tests": [
           "tests/conformance/production/test_rfc9068_jwt_profile.py",
@@ -1108,10 +1108,10 @@
         ],
         "scope_bucket": "hardening-completion-required",
         "modules": [
-          "tigrbl_auth/standards/oauth2/jar.py",
-          "tigrbl_auth/ops/authorize.py",
-          "tigrbl_auth/ops/par.py",
-          "tigrbl_auth/cli/artifacts.py"
+          "tba_auth/standards/oauth2/jar.py",
+          "tba_auth/ops/authorize.py",
+          "tba_auth/ops/par.py",
+          "tba_auth/cli/artifacts.py"
         ],
         "tests": [
           "tests/conformance/hardening/test_rfc9101_jar.py",
@@ -1160,11 +1160,11 @@
         ],
         "scope_bucket": "hardening-completion-required",
         "modules": [
-          "tigrbl_auth/standards/oauth2/par.py",
-          "tigrbl_auth/api/rest/routers/par.py",
-          "tigrbl_auth/ops/par.py",
-          "tigrbl_auth/ops/authorize.py",
-          "tigrbl_auth/tables/pushed_authorization_request.py"
+          "tba_auth/standards/oauth2/par.py",
+          "tba_auth/api/rest/routers/par.py",
+          "tba_auth/ops/par.py",
+          "tba_auth/ops/authorize.py",
+          "tba_auth/tables/pushed_authorization_request.py"
         ],
         "tests": [
           "tests/conformance/hardening/test_rfc9126_par.py",
@@ -1212,11 +1212,11 @@
         ],
         "scope_bucket": "production-completion-required",
         "modules": [
-          "tigrbl_auth/standards/oauth2/issuer_identification.py",
-          "tigrbl_auth/config/deployment.py",
-          "tigrbl_auth/ops/authorize.py",
-          "tigrbl_auth/standards/oidc/discovery_metadata.py",
-          "tigrbl_auth/cli/artifacts.py"
+          "tba_auth/standards/oauth2/issuer_identification.py",
+          "tba_auth/config/deployment.py",
+          "tba_auth/ops/authorize.py",
+          "tba_auth/standards/oidc/discovery_metadata.py",
+          "tba_auth/cli/artifacts.py"
         ],
         "tests": [
           "tests/conformance/hardening/test_rfc9207_issuer_identification.py",
@@ -1263,10 +1263,10 @@
         ],
         "scope_bucket": "hardening-completion-required",
         "modules": [
-          "tigrbl_auth/standards/oauth2/rar.py",
-          "tigrbl_auth/ops/authorize.py",
-          "tigrbl_auth/ops/par.py",
-          "tigrbl_auth/cli/artifacts.py"
+          "tba_auth/standards/oauth2/rar.py",
+          "tba_auth/ops/authorize.py",
+          "tba_auth/ops/par.py",
+          "tba_auth/cli/artifacts.py"
         ],
         "tests": [
           "tests/conformance/hardening/test_rfc9396_rar.py",
@@ -1315,12 +1315,12 @@
         ],
         "scope_bucket": "hardening-completion-required",
         "modules": [
-          "tigrbl_auth/standards/oauth2/dpop.py",
-          "tigrbl_auth/standards/oauth2/rfc9700.py",
-          "tigrbl_auth/ops/token.py",
-          "tigrbl_auth/standards/oauth2/token_exchange.py",
-          "tigrbl_auth/security/auth.py",
-          "tigrbl_auth/security/deps.py"
+          "tba_auth/standards/oauth2/dpop.py",
+          "tba_auth/standards/oauth2/rfc9700.py",
+          "tba_auth/ops/token.py",
+          "tba_auth/standards/oauth2/token_exchange.py",
+          "tba_auth/security/auth.py",
+          "tba_auth/security/deps.py"
         ],
         "tests": [
           "tests/conformance/hardening/test_rfc9449_dpop.py",
@@ -1371,12 +1371,12 @@
         ],
         "scope_bucket": "baseline-certifiable-now",
         "modules": [
-          "tigrbl_auth/standards/http/cookies.py",
-          "tigrbl_auth/standards/oidc/session_mgmt.py",
-          "tigrbl_auth/ops/login.py",
-          "tigrbl_auth/ops/authorize.py",
-          "tigrbl_auth/ops/logout.py",
-          "tigrbl_auth/tables/auth_session.py"
+          "tba_auth/standards/http/cookies.py",
+          "tba_auth/standards/oidc/session_mgmt.py",
+          "tba_auth/ops/login.py",
+          "tba_auth/ops/authorize.py",
+          "tba_auth/ops/logout.py",
+          "tba_auth/tables/auth_session.py"
         ],
         "tests": [
           "tests/conformance/production/test_rfc6265_cookies.py",
@@ -1424,9 +1424,9 @@
         ],
         "scope_bucket": "production-completion-required",
         "modules": [
-          "tigrbl_auth/standards/oauth2/assertion_framework.py",
-          "tigrbl_auth/ops/token.py",
-          "tigrbl_auth/cli/artifacts.py"
+          "tba_auth/standards/oauth2/assertion_framework.py",
+          "tba_auth/ops/token.py",
+          "tba_auth/cli/artifacts.py"
         ],
         "tests": [
           "tests/conformance/production/test_rfc7521_assertion_framework.py",
@@ -1467,11 +1467,11 @@
         ],
         "scope_bucket": "production-completion-required",
         "modules": [
-          "tigrbl_auth/standards/oauth2/jwt_client_auth.py",
-          "tigrbl_auth/ops/token.py",
-          "tigrbl_auth/ops/register.py",
-          "tigrbl_auth/standards/oidc/discovery_metadata.py",
-          "tigrbl_auth/cli/artifacts.py"
+          "tba_auth/standards/oauth2/jwt_client_auth.py",
+          "tba_auth/ops/token.py",
+          "tba_auth/ops/register.py",
+          "tba_auth/standards/oidc/discovery_metadata.py",
+          "tba_auth/cli/artifacts.py"
         ],
         "tests": [
           "tests/conformance/production/test_rfc7523_jwt_profile.py",
@@ -1516,7 +1516,7 @@
         ],
         "scope_bucket": "production-completion-required",
         "modules": [
-          "tigrbl_auth/standards/oauth2/rfc9728.py"
+          "tba_auth/standards/oauth2/rfc9728.py"
         ],
         "tests": [
           "tests/conformance/production/test_rfc9728_protected_resource_metadata.py",
@@ -1564,14 +1564,14 @@
         ],
         "scope_bucket": "hardening-completion-required",
         "modules": [
-          "tigrbl_auth/standards/oauth2/rfc9700.py",
-          "tigrbl_auth/ops/authorize.py",
-          "tigrbl_auth/ops/token.py",
-          "tigrbl_auth/standards/oidc/discovery.py",
-          "tigrbl_auth/standards/oidc/discovery_metadata.py",
-          "tigrbl_auth/cli/artifacts.py",
-          "tigrbl_auth/security/auth.py",
-          "tigrbl_auth/security/deps.py"
+          "tba_auth/standards/oauth2/rfc9700.py",
+          "tba_auth/ops/authorize.py",
+          "tba_auth/ops/token.py",
+          "tba_auth/standards/oidc/discovery.py",
+          "tba_auth/standards/oidc/discovery_metadata.py",
+          "tba_auth/cli/artifacts.py",
+          "tba_auth/security/auth.py",
+          "tba_auth/security/deps.py"
         ],
         "tests": [
           "tests/conformance/hardening/test_rfc9700_security_bcp.py",

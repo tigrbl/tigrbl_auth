@@ -1,4 +1,4 @@
-from tigrbl_auth.config.feature_flags import feature_flag_registry, cli_flag_registry, flags_for_profile
+from tba_auth.config.feature_flags import feature_flag_registry, cli_flag_registry, flags_for_profile
 
 
 def test_feature_flag_registry_contains_required_groups():

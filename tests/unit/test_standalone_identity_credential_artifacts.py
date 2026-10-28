@@ -3,20 +3,20 @@ import json
 import cbor2
 import pytest
 
-from tigrbl_cose_concrete import decode_cose_message
-from tigrbl_cwt_concrete import CwtClaimsSet
-from tigrbl_cwt_svid_extension_credential_concrete import CwtSvidExtensionCredential
-from tigrbl_did_document_concrete import DidDocument
-from tigrbl_identity_core.base64url import base64url_encode
-from tigrbl_jwt_concrete import decode_jwt_unverified
-from tigrbl_jwt_svid_credential_concrete import JwtSvidCredential
-from tigrbl_oidc_id_token_concrete import OidcIdToken
-from tigrbl_vc_cose_credential_concrete import VcCoseCredential
-from tigrbl_vc_jose_credential_concrete import VcJoseCredential
-from tigrbl_wit_concrete import WorkloadIdentityToken
-from tigrbl_wit_svid_credential_concrete import WitSvidCredential
-from tigrbl_wpt_concrete import WorkloadProofToken
-from tigrbl_x509_svid_credential_concrete import X509SvidCredential
+from tba_concrete_cose import decode_cose_message
+from tba_concrete_cwt import CwtClaimsSet
+from tba_concrete_cwt_svid_extension_credential import CwtSvidExtensionCredential
+from tba_concrete_did_document import DidDocument
+from tba_primitives_identity.base64url import base64url_encode
+from tba_concrete_jwt import decode_jwt_unverified
+from tba_concrete_jwt_svid_credential import JwtSvidCredential
+from tba_concrete_oidc_id_token import OidcIdToken
+from tba_concrete_vc_cose_credential import VcCoseCredential
+from tba_concrete_vc_jose_credential import VcJoseCredential
+from tba_concrete_wit import WorkloadIdentityToken
+from tba_concrete_wit_svid_credential import WitSvidCredential
+from tba_concrete_wpt import WorkloadProofToken
+from tba_concrete_x509_svid_credential import X509SvidCredential
 
 
 def _jwt(claims, *, typ="JWT"):

@@ -6,7 +6,7 @@ from pathlib import Path
 
 import tigrbl_identity_credentials_concrete as credentials
 import tigrbl_identity_identities_concrete as identities
-from tigrbl_identity_claims_bases import ClaimBase
+from tba_bases_identity_claims import ClaimBase
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -15,34 +15,34 @@ CLAIM_PACKAGE_ROOT = ROOT / "pkgs" / "10-concrete"
 
 def test_identity_classes_have_standalone_layer_10_owners() -> None:
     expected = {
-        "UserIdentity": "tigrbl_user_identity_concrete",
-        "AdminIdentity": "tigrbl_admin_identity_concrete",
-        "ServiceIdentity": "tigrbl_service_identity_concrete",
-        "ClientIdentity": "tigrbl_client_identity_concrete",
-        "MachineIdentity": "tigrbl_machine_identity_concrete",
-        "WorkloadIdentity": "tigrbl_workload_identity_concrete",
-        "DeviceIdentity": "tigrbl_device_identity_concrete",
+        "UserIdentity": "tba_concrete_user_identity",
+        "AdminIdentity": "tba_concrete_admin_identity",
+        "ServiceIdentity": "tba_concrete_service_identity",
+        "ClientIdentity": "tba_concrete_client_identity",
+        "MachineIdentity": "tba_concrete_machine_identity",
+        "WorkloadIdentity": "tba_concrete_workload_identity",
+        "DeviceIdentity": "tba_concrete_device_identity",
     }
     assert {name: getattr(identities, name).__module__ for name in expected} == expected
 
 
 def test_credential_classes_have_standalone_layer_10_owners() -> None:
     expected = {
-        "PasswordCredential": "tigrbl_credential_password_concrete",
-        "PasswordResetCredential": "tigrbl_credential_password_reset_concrete",
-        "ApiKeyCredential": "tigrbl_credential_api_key_concrete",
-        "ServiceKeyCredential": "tigrbl_credential_service_key_concrete",
-        "ClientSecretCredential": "tigrbl_credential_client_secret_concrete",
-        "MfaCredential": "tigrbl_credential_mfa_concrete",
-        "PasskeyCredential": "tigrbl_credential_passkey_concrete",
-        "ServiceCredential": "tigrbl_service_credential_concrete",
-        "WebAuthnCredential": "tigrbl_webauthn_credential_concrete",
-        "PasswordlessCredential": "tigrbl_passwordless_credential_concrete",
-        "MfaFactor": "tigrbl_mfa_factor_concrete",
-        "MtlsCertificateCredential": "tigrbl_credential_mtls_certificate_concrete",
-        "DpopKeyCredential": "tigrbl_credential_dpop_key_concrete",
-        "SdJwtVc": "tigrbl_sd_jwt_vc_credential_concrete",
-        "Mdoc": "tigrbl_mdoc_credential_concrete",
+        "PasswordCredential": "tba_concrete_credential_password",
+        "PasswordResetCredential": "tba_concrete_credential_password_reset",
+        "ApiKeyCredential": "tba_concrete_credential_api_key",
+        "ServiceKeyCredential": "tba_concrete_credential_service_key",
+        "ClientSecretCredential": "tba_concrete_credential_client_secret",
+        "MfaCredential": "tba_concrete_credential_mfa",
+        "PasskeyCredential": "tba_concrete_credential_passkey",
+        "ServiceCredential": "tba_concrete_service_credential",
+        "WebAuthnCredential": "tba_concrete_webauthn_credential",
+        "PasswordlessCredential": "tba_concrete_passwordless_credential",
+        "MfaFactor": "tba_concrete_mfa_factor",
+        "MtlsCertificateCredential": "tba_concrete_credential_mtls_certificate",
+        "DpopKeyCredential": "tba_concrete_credential_dpop_key",
+        "SdJwtVc": "tba_concrete_sd_jwt_vc_credential",
+        "Mdoc": "tba_concrete_mdoc_credential",
     }
     assert {
         name: getattr(credentials, name).__module__.split(".", 1)[0]
@@ -54,8 +54,8 @@ def test_claims_classes_have_standalone_layer_10_owners() -> None:
     ownership: dict[str, tuple[str, str | None]] = {}
     package_dirs = (
         path
-        for path in CLAIM_PACKAGE_ROOT.glob("tigrbl-claim-*-concrete")
-        if (path / "pyproject.toml").is_file() and "tigrbl-claim-cwt-" not in path.name
+        for path in CLAIM_PACKAGE_ROOT.glob("tba-claim-*-concrete")
+        if (path / "pyproject.toml").is_file() and "tba-claim-cwt-" not in path.name
     )
     for package_dir in sorted(package_dirs):
         module_name = package_dir.name.replace("-", "_")

@@ -1,50 +1,50 @@
-from tigrbl_cose_bases import (
+from tba_bases_cose import (
     CoseEnvelopeIssuerBase,
     CoseEnvelopeVerifierBase,
     CwtTokenIssuerBase,
     CwtTokenVerifierBase,
 )
-from tigrbl_identity_document_bases import (
+from tba_bases_identity_document import (
     IdentityDocumentPublisherBase,
     IdentityDocumentResolverBase,
     IdentityDocumentVerifierBase,
 )
-from tigrbl_identity_document_contracts import (
+from tba_contracts_identity_document import (
     IdentityDocumentPublisherPort,
     IdentityDocumentResolverPort,
     IdentityDocumentVerifierPort,
 )
-from tigrbl_jose_bases import (
+from tba_bases_jose import (
     JoseEnvelopeIssuerBase,
     JoseEnvelopeVerifierBase,
     JwtTokenIssuerBase,
     JwtTokenVerifierBase,
 )
-from tigrbl_proof_of_possession_bases import (
+from tba_bases_proof_of_possession import (
     ConfirmationKeyResolverBase,
     PossessionProofIssuerBase,
     PossessionProofVerifierBase,
     ProofContextBindingEvaluatorBase,
 )
-from tigrbl_proof_of_possession_contracts import (
+from tba_contracts_proof_of_possession import (
     ConfirmationKeyResolverPort,
     PossessionProofIssuerPort,
     PossessionProofVerifierPort,
     ProofContextBindingEvaluatorPort,
 )
-from tigrbl_protected_envelope_bases import (
+from tba_bases_protected_envelope import (
     ProtectedEnvelopeIssuerBase,
     ProtectedEnvelopeVerifierBase,
 )
-from tigrbl_token_bases import ProfiledTokenIssuerBase, ProfiledTokenVerifierBase
-from tigrbl_workload_identity_bases import (
+from tba_bases_token import ProfiledTokenIssuerBase, ProfiledTokenVerifierBase
+from tba_bases_workload_identity import (
     DelegatedWorkloadCredentialProviderBase,
     WorkloadCredentialProviderBase,
     WorkloadCredentialVerifierBase,
     WorkloadReferenceResolverBase,
     WorkloadTrustMaterialProviderBase,
 )
-from tigrbl_workload_identity_contracts import (
+from tba_contracts_workload_identity import (
     DelegatedWorkloadCredentialProviderPort,
     WorkloadCredentialProviderPort,
     WorkloadCredentialVerifierPort,

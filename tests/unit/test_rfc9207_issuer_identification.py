@@ -13,8 +13,8 @@ validate the stated requirements.
 
 import pytest
 
-from tigrbl_auth import RFC9207_SPEC_URL, extract_issuer
-from tigrbl_auth.runtime_cfg import settings
+from tba_auth import RFC9207_SPEC_URL, extract_issuer
+from tba_auth.runtime_cfg import settings
 
 
 @pytest.mark.unit

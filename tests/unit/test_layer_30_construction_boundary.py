@@ -9,9 +9,9 @@ RUNTIME_SRC = (
     ROOT
     / "pkgs"
     / "30-storage-runtime"
-    / "tigrbl-identity-storage-runtime"
+    / "tba-runtime-identity-storage"
     / "src"
-    / "tigrbl_identity_storage_runtime"
+    / "tba_runtime_identity_storage"
 )
 
 
@@ -24,10 +24,10 @@ def test_new_table_runtime_construction_surface_has_no_higher_layer_imports() ->
         RUNTIME_SRC / "inventory.py",
     )
     forbidden_prefixes = (
-        "tigrbl_auth_protocol_",
-        "tigrbl_identity_runtime",
-        "tigrbl_identity_server",
-        "tigrbl_auth_router_",
+        "tba_protocol_",
+        "tba_runtime_identity",
+        "tba_server_identity",
+        "tba_router_",
     )
 
     for file in files:
@@ -45,16 +45,16 @@ def test_new_table_runtime_construction_surface_has_no_higher_layer_imports() ->
 
 def test_layer_30_has_no_http_or_protocol_provider_ownership() -> None:
     forbidden_prefixes = (
-        "tigrbl_auth_router_",
-        "tigrbl_auth_protocol_",
-        "tigrbl_authenticator_",
-        "tigrbl_authz_resource_server",
-        "tigrbl_identity_jose",
-        "tigrbl_identity_runtime",
-        "tigrbl_identity_server",
-        "tigrbl_secret_hashing_",
+        "tba_router_",
+        "tba_protocol_",
+        "tba_authenticator_",
+        "tba_protocol_authorization_resource_server",
+        "tba_provider_identity_jose",
+        "tba_runtime_identity",
+        "tba_server_identity",
+        "tba_secret_hashing_",
     )
-    forbidden_tigrbl_symbols = {"Request", "TigrblApp"}
+    forbidden_tba_symbols = {"Request", "TigrblApp"}
 
     for file in RUNTIME_SRC.rglob("*.py"):
         if file.name == "engine.py":
@@ -69,7 +69,7 @@ def test_layer_30_has_no_http_or_protocol_provider_ownership() -> None:
                 imports.append(node.module)
                 if node.module == "tigrbl":
                     assert not (
-                        forbidden_tigrbl_symbols & {alias.name for alias in node.names}
+                        forbidden_tba_symbols & {alias.name for alias in node.names}
                     ), file
             elif isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute):
                 assert node.func.attr != "route", file
@@ -108,9 +108,9 @@ def test_authorization_mutations_are_not_defined_by_layer_01_tables() -> None:
         ROOT
         / "pkgs"
         / "01-storage"
-        / "tigrbl-identity-storage"
+        / "tba-storage-core"
         / "src"
-        / "tigrbl_identity_storage"
+        / "tba_storage_core"
         / "tables"
     )
     for relative in (
@@ -132,9 +132,9 @@ def test_oidc_replay_mutation_is_not_defined_by_layer_01_table() -> None:
         ROOT
         / "pkgs"
         / "01-storage"
-        / "tigrbl-identity-storage"
+        / "tba-storage-core"
         / "src"
-        / "tigrbl_identity_storage"
+        / "tba_storage_core"
         / "tables"
         / "backchannel_logout_replay"
         / "_table.py"
@@ -153,9 +153,9 @@ def test_oauth_state_mutations_are_not_defined_by_layer_01_tables() -> None:
         ROOT
         / "pkgs"
         / "01-storage"
-        / "tigrbl-identity-storage"
+        / "tba-storage-core"
         / "src"
-        / "tigrbl_identity_storage"
+        / "tba_storage_core"
         / "tables"
     )
     for relative in (
@@ -177,9 +177,9 @@ def test_session_consent_logout_mutations_are_not_layer_01_operations() -> None:
         ROOT
         / "pkgs"
         / "01-storage"
-        / "tigrbl-identity-storage"
+        / "tba-storage-core"
         / "src"
-        / "tigrbl_identity_storage"
+        / "tba_storage_core"
         / "tables"
     )
     for relative in (
@@ -196,9 +196,9 @@ def test_token_record_lifecycle_is_not_defined_by_layer_01() -> None:
         ROOT
         / "pkgs"
         / "01-storage"
-        / "tigrbl-identity-storage"
+        / "tba-storage-core"
         / "src"
-        / "tigrbl_identity_storage"
+        / "tba_storage_core"
         / "tables"
         / "token_record"
     )

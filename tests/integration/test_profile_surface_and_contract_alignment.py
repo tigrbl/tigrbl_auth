@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def _openapi(profile: str) -> dict:
-    return json.loads((ROOT / 'specs' / 'openapi' / 'profiles' / profile / 'tigrbl_auth.public.openapi.json').read_text(encoding='utf-8'))
+    return json.loads((ROOT / 'specs' / 'openapi' / 'profiles' / profile / 'tba_auth.public.openapi.json').read_text(encoding='utf-8'))
 
 
 def _discovery(profile: str) -> dict:

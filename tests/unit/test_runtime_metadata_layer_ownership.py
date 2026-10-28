@@ -9,13 +9,13 @@ ROOT = Path(__file__).resolve().parents[2]
 def test_runtime_capability_metadata_is_owned_by_layer_60_certification() -> None:
     old_owner = (
         ROOT
-        / "pkgs/50-protocols/tigrbl-authz-resource-server/src"
-        / "tigrbl_authz_resource_server/runtime_metadata.py"
+        / "pkgs/50-protocols/tba-protocol-authorization-resource-server/src"
+        / "tba_protocol_authorization_resource_server/runtime_metadata.py"
     )
     canonical_owner = (
         ROOT
-        / "pkgs/60-runtime/tigrbl-auth-release-certification/src"
-        / "tigrbl_auth_release_certification/runtime_metadata.py"
+        / "pkgs/60-runtime/tba-certification-release/src"
+        / "tba_certification_release/runtime_metadata.py"
     )
 
     assert not old_owner.exists()
@@ -27,32 +27,32 @@ def test_runtime_capability_metadata_is_owned_by_layer_60_certification() -> Non
 
 def test_runtime_metadata_consumers_target_the_layer_60_owner() -> None:
     facade = (
-        ROOT / "pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/security/runtime_metadata.py"
+        ROOT / "pkgs/70-facade/tba-auth/src/tba_auth/security/runtime_metadata.py"
     ).read_text(encoding="utf-8")
     server = (
         ROOT
-        / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server"
+        / "pkgs/60-runtime/tba-server-identity/src/tba_server_identity"
         / "resource_validation_metadata_runtime.py"
     ).read_text(encoding="utf-8")
 
-    target = "tigrbl_auth_release_certification.runtime_metadata"
+    target = "tba_certification_release.runtime_metadata"
     assert target in facade
     assert target in server
-    assert "tigrbl_authz_resource_server.runtime_metadata" not in facade
-    assert "tigrbl_authz_resource_server.runtime_metadata" not in server
+    assert "tba_protocol_authorization_resource_server.runtime_metadata" not in facade
+    assert "tba_protocol_authorization_resource_server.runtime_metadata" not in server
 
 
 def test_layer_50_resource_server_has_no_certification_runtime_dependency() -> None:
     resource_manifest = (
-        ROOT / "pkgs/50-protocols/tigrbl-authz-resource-server/pyproject.toml"
+        ROOT / "pkgs/50-protocols/tba-protocol-authorization-resource-server/pyproject.toml"
     ).read_text(encoding="utf-8")
     certification_manifest = (
-        ROOT / "pkgs/60-runtime/tigrbl-auth-release-certification/pyproject.toml"
+        ROOT / "pkgs/60-runtime/tba-certification-release/pyproject.toml"
     ).read_text(encoding="utf-8")
 
-    assert "tigrbl-auth-release-certification" not in resource_manifest
-    assert "tigrbl-identity-runtime" not in resource_manifest
-    assert "tigrbl-identity-contracts" in certification_manifest
+    assert "tba-certification-release" not in resource_manifest
+    assert "tba-runtime-identity" not in resource_manifest
+    assert "tba-contracts-identity" in certification_manifest
 
 
 def test_resource_server_contract_module_is_a_runtime_neutral_compatibility_export() -> (
@@ -60,22 +60,22 @@ def test_resource_server_contract_module_is_a_runtime_neutral_compatibility_expo
 ):
     source = (
         ROOT
-        / "pkgs/50-protocols/tigrbl-authz-resource-server/src"
-        / "tigrbl_authz_resource_server/contracts.py"
+        / "pkgs/50-protocols/tba-protocol-authorization-resource-server/src"
+        / "tba_protocol_authorization_resource_server/contracts.py"
     ).read_text(encoding="utf-8")
 
-    assert "tigrbl_auth_protocol_oauth.standards.resource_verifier_contract" in source
-    assert "tigrbl_identity_runtime" not in source
+    assert "tba_protocol_oauth.standards.resource_verifier_contract" in source
+    assert "tba_runtime_identity" not in source
 
 
 def test_oauth_security_profiles_consume_injected_runtime_state() -> None:
     oauth_root = (
         ROOT
-        / "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src"
-        / "tigrbl_auth_protocol_oauth"
+        / "pkgs/50-protocols/tba-protocol-oauth/src"
+        / "tba_protocol_oauth"
     )
     manifest = (
-        ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oauth/pyproject.toml"
+        ROOT / "pkgs/50-protocols/tba-protocol-oauth/pyproject.toml"
     ).read_text(encoding="utf-8")
     security_profile = (
         oauth_root / "standards/_rfc9700/security_profile.py"
@@ -85,13 +85,13 @@ def test_oauth_security_profiles_consume_injected_runtime_state() -> None:
     ).read_text(encoding="utf-8")
     server_adapter = (
         ROOT
-        / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server"
+        / "pkgs/60-runtime/tba-server-identity/src/tba_server_identity"
         / "introspection_surface.py"
     ).read_text(encoding="utf-8")
 
-    assert "tigrbl-identity-runtime" not in manifest
-    assert "tigrbl_identity_runtime" not in security_profile
-    assert "tigrbl_identity_runtime" not in verifier_contract
+    assert "tba-runtime-identity" not in manifest
+    assert "tba_runtime_identity" not in security_profile
+    assert "tba_runtime_identity" not in verifier_contract
     assert "deployment_from_request" in server_adapter
     assert "build_protected_resource_verifier_contract" in server_adapter
 
@@ -99,13 +99,13 @@ def test_oauth_security_profiles_consume_injected_runtime_state() -> None:
 def test_oidc_discovery_projection_consumes_injected_runtime_state() -> None:
     oidc_root = (
         ROOT
-        / "pkgs/50-protocols/tigrbl-auth-protocol-oidc/src"
-        / "tigrbl_auth_protocol_oidc"
+        / "pkgs/50-protocols/tba-protocol-oidc/src"
+        / "tba_protocol_oidc"
     )
     rp_client = (
         ROOT
-        / "pkgs/50-protocols/tigrbl-auth-protocol-rp/src"
-        / "tigrbl_auth_protocol_rp/discovery_client.py"
+        / "pkgs/50-protocols/tba-protocol-oidc-relying-party/src"
+        / "tba_protocol_oidc_relying_party/discovery_client.py"
     ).read_text(encoding="utf-8")
     metadata = (oidc_root / "standards/discovery_metadata.py").read_text(
         encoding="utf-8"
@@ -113,32 +113,32 @@ def test_oidc_discovery_projection_consumes_injected_runtime_state() -> None:
     owner = (oidc_root / "standards/discovery.py").read_text(encoding="utf-8")
     server_runtime = (
         ROOT
-        / "pkgs/60-runtime/tigrbl-identity-server/src"
-        / "tigrbl_identity_server/oidc_discovery_runtime.py"
+        / "pkgs/60-runtime/tba-server-identity/src"
+        / "tba_server_identity/oidc_discovery_runtime.py"
     ).read_text(encoding="utf-8")
     facade = (
-        ROOT / "pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/oidc_discovery.py"
+        ROOT / "pkgs/70-facade/tba-auth/src/tba_auth/oidc_discovery.py"
     ).read_text(encoding="utf-8")
 
     assert "class OidcDiscoveryDeployment(Protocol)" in metadata
     assert "def build_openid_config(deployment:" in metadata
     for source in (metadata, owner, rp_client):
-        assert "tigrbl_identity_runtime" not in source
-        assert "tigrbl_identity_storage_runtime" not in source
+        assert "tba_runtime_identity" not in source
+        assert "tba_runtime_identity_storage" not in source
     assert "resolve_deployment" in server_runtime
-    assert "tigrbl_identity_server.oidc_discovery_runtime" in facade
+    assert "tba_server_identity.oidc_discovery_runtime" in facade
 
 
 def test_discovery_artifact_operations_are_owned_by_the_cli_runtime() -> None:
     old_owner = (
         ROOT
-        / "pkgs/50-protocols/tigrbl-auth-protocol-oidc/src"
-        / "tigrbl_auth_protocol_oidc/discovery_service.py"
+        / "pkgs/50-protocols/tba-protocol-oidc/src"
+        / "tba_protocol_oidc/discovery_service.py"
     )
     canonical_owner = (
         ROOT
-        / "pkgs/60-runtime/tigrbl-identity-cli/src"
-        / "tigrbl_identity_cli/discovery_service.py"
+        / "pkgs/60-runtime/tba-cli-identity/src"
+        / "tba_cli_identity/discovery_service.py"
     )
 
     assert not old_owner.exists()
@@ -156,8 +156,8 @@ def test_discovery_artifact_operations_are_owned_by_the_cli_runtime() -> None:
 def test_oidc_logout_protocol_consumes_injected_durable_operations() -> None:
     oidc_root = (
         ROOT
-        / "pkgs/50-protocols/tigrbl-auth-protocol-oidc/src"
-        / "tigrbl_auth_protocol_oidc/standards"
+        / "pkgs/50-protocols/tba-protocol-oidc/src"
+        / "tba_protocol_oidc/standards"
     )
     protocol_sources = [
         (oidc_root / name).read_text(encoding="utf-8")
@@ -169,8 +169,8 @@ def test_oidc_logout_protocol_consumes_injected_durable_operations() -> None:
         )
     ]
     for source in protocol_sources:
-        assert "tigrbl_identity_runtime" not in source
-        assert "tigrbl_identity_storage_runtime" not in source
+        assert "tba_runtime_identity" not in source
+        assert "tba_runtime_identity_storage" not in source
     assert "registration_metadata: Mapping" in protocol_sources[1]
     assert "register_replay:" in protocol_sources[1]
     assert "registration_metadata: Mapping" in protocol_sources[2]
@@ -180,42 +180,42 @@ def test_oidc_logout_protocol_consumes_injected_durable_operations() -> None:
 def test_durable_oidc_logout_planning_is_owned_by_layer_60() -> None:
     server_runtime = (
         ROOT
-        / "pkgs/60-runtime/tigrbl-identity-server/src"
-        / "tigrbl_identity_server/logout_runtime.py"
+        / "pkgs/60-runtime/tba-server-identity/src"
+        / "tba_server_identity/logout_runtime.py"
     ).read_text(encoding="utf-8")
     rp_compatibility = (
         ROOT
-        / "pkgs/50-protocols/tigrbl-auth-protocol-rp/src"
-        / "tigrbl_auth_protocol_rp/logout.py"
+        / "pkgs/50-protocols/tba-protocol-oidc-relying-party/src"
+        / "tba_protocol_oidc_relying_party/logout.py"
     ).read_text(encoding="utf-8")
 
     assert "async def build_logout_plan(" in server_runtime
     assert "oidc_persistence" in server_runtime
     assert "build_frontchannel_descriptor" in server_runtime
     assert "build_backchannel_descriptor" in server_runtime
-    assert "tigrbl_identity_runtime" not in rp_compatibility
-    assert "tigrbl_identity_storage_runtime" not in rp_compatibility
+    assert "tba_runtime_identity" not in rp_compatibility
+    assert "tba_runtime_identity_storage" not in rp_compatibility
     assert "build_logout_plan" not in rp_compatibility
 
 
 def test_oidc_session_protocol_is_runtime_and_storage_neutral() -> None:
-    oidc_package = ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oidc"
+    oidc_package = ROOT / "pkgs/50-protocols/tba-protocol-oidc"
     session_protocol = (
         oidc_package
-        / "src/tigrbl_auth_protocol_oidc/standards/session_mgmt.py"
+        / "src/tba_protocol_oidc/standards/session_mgmt.py"
     ).read_text(encoding="utf-8")
     manifest = (oidc_package / "pyproject.toml").read_text(encoding="utf-8")
     handler_runtime = (
         ROOT
-        / "pkgs/60-runtime/tigrbl-identity-server/src"
-        / "tigrbl_identity_server/security/handler_records.py"
+        / "pkgs/60-runtime/tba-server-identity/src"
+        / "tba_server_identity/security/handler_records.py"
     ).read_text(encoding="utf-8")
 
-    assert "tigrbl_identity_runtime" not in session_protocol
-    assert "tigrbl_identity_storage_runtime" not in session_protocol
+    assert "tba_runtime_identity" not in session_protocol
+    assert "tba_runtime_identity_storage" not in session_protocol
     assert "resolve_browser_session" not in session_protocol
     assert "create_browser_session" not in session_protocol
-    assert "tigrbl-identity-runtime" not in manifest
-    assert "tigrbl-identity-storage" not in manifest
+    assert "tba-runtime-identity" not in manifest
+    assert "tba-storage-core" not in manifest
     assert "resolve_browser_session_record" in handler_runtime
     assert "create_browser_session_record" in handler_runtime

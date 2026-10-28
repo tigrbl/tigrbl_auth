@@ -1,15 +1,15 @@
 from pathlib import Path
 
-from tigrbl_auth_protocol_oidc import (
+from tba_protocol_oidc import (
     OIDC_ID_TOKEN_PROFILE_CLAIMS,
     OIDC_USERINFO_CLAIMS,
     compose_oidc_id_token_claim_set,
     compose_oidc_userinfo_claim_set,
 )
-from tigrbl_claim_email_concrete import EmailClaim
-from tigrbl_claim_email_verified_concrete import EmailVerifiedClaim
-from tigrbl_claim_name_concrete import NameClaim
-from tigrbl_identity_claims_bases import ClaimBase
+from tba_concrete_claim_email import EmailClaim
+from tba_concrete_claim_email_verified import EmailVerifiedClaim
+from tba_concrete_claim_name import NameClaim
+from tba_bases_identity_claims import ClaimBase
 
 ROOT = Path(__file__).resolve().parents[2]
 

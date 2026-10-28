@@ -1,12 +1,12 @@
 import pytest
-from tigrbl_did_concrete import (
+from tba_concrete_did import (
     parse_did_document,
     parse_did_url,
     select_document_resource,
     validate_did_document,
 )
-from tigrbl_identity_contracts.workloads import WorkloadSelector
-from tigrbl_svid_concrete import (
+from tba_contracts_identity.workloads import WorkloadSelector
+from tba_concrete_svid import (
     X509SvidStructure,
     normalize_selectors,
     normalize_spiffe_id,

@@ -1,6 +1,6 @@
 import pytest
 
-from tigrbl_attestation_protocol_corim import (
+from tba_protocol_attestation_corim import (
     CAPABILITY_REQUIREMENTS,
     CORIM_CLAIM_CLASSES,
     CORIM_UNSIGNED_CARRIER,

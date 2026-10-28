@@ -1,4 +1,4 @@
-"""Reserved planning facade for the Tigrbl Auth package suite."""
+"""Reserved planning facade for the TBA package suite."""
 
 from importlib.metadata import version
 

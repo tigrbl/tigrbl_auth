@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import tests.unit.formal_auth_helpers  # noqa: F401
 
-from tigrbl_auth.services.formal_authorization import DelegationGrantSpec as FacadeDelegationGrantSpec
-from tigrbl_authz_policy import AuthorityScope, DelegationGrantSpec, prove_delegation_attenuation
+from tba_auth.services.formal_authorization import DelegationGrantSpec as FacadeDelegationGrantSpec
+from tba_runtime_authorization_policy import AuthorityScope, DelegationGrantSpec, prove_delegation_attenuation
 
 
 def test_delegation_attenuation_t0_exports_facade_identity() -> None:

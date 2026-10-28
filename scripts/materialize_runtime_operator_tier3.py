@@ -47,8 +47,8 @@ BUNDLE_SPECS = [
         contracts=[
             "specs/cli/cli_contract.json",
             "docs/compliance/runtime_profile_report.json",
-            "specs/openapi/profiles/baseline/tigrbl_auth.public.openapi.json",
-            "specs/openrpc/profiles/baseline/tigrbl_auth.admin.openrpc.json",
+            "specs/openapi/profiles/baseline/tba_auth.public.openapi.json",
+            "specs/openrpc/profiles/baseline/tba_auth.admin.openrpc.json",
             "specs/discovery/profiles/baseline/openid-configuration.json",
             "specs/discovery/profiles/baseline/oauth-authorization-server.json",
         ],
@@ -158,7 +158,7 @@ BUNDLE_SPECS = [
         contracts=[
             "specs/cli/cli_contract.json",
             "docs/reference/CLI_SURFACE.md",
-            "specs/openrpc/profiles/baseline/tigrbl_auth.admin.openrpc.json",
+            "specs/openrpc/profiles/baseline/tba_auth.admin.openrpc.json",
         ],
         reports=[
             "docs/compliance/current_state_report.json",
@@ -336,8 +336,8 @@ def _missing_runtime_imports() -> list[str]:
 
 def _source_zip() -> str | None:
     candidates = [
-        Path("/mnt/data/tigrbl_auth_truthfulness_checkpoint.zip"),
-        Path("/mnt/data/tigrbl_auth_hardening_cluster_checkpoint.zip"),
+        Path("/mnt/data/tba_auth_truthfulness_checkpoint.zip"),
+        Path("/mnt/data/tba_auth_hardening_cluster_checkpoint.zip"),
     ]
     for candidate in candidates:
         if candidate.exists():
@@ -347,8 +347,8 @@ def _source_zip() -> str | None:
 
 def _capability_scoped_text(text: str) -> str:
     replacements = {
-        "tigrbl_auth_capability_final_certification_closeout_checkpoint_updated": (
-            "tigrbl_auth_capability_final_certification_closeout"
+        "tba_auth_capability_final_certification_closeout_checkpoint_updated": (
+            "tba_auth_capability_final_certification_closeout"
         ),
         "truthfulness_checkpoint": "truthfulness_evidence",
         "hardening_cluster_checkpoint": "hardening_cluster_evidence",

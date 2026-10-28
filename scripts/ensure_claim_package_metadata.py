@@ -8,7 +8,7 @@ CLAIM_PACKAGES = ROOT / "pkgs" / "10-concrete"
 
 
 def main() -> None:
-    for package in sorted(CLAIM_PACKAGES.glob("tigrbl-claim-*-concrete")):
+    for package in sorted(CLAIM_PACKAGES.glob("tba-concrete-claim-*")):
         metadata = tomllib.loads((package / "pyproject.toml").read_text(encoding="utf-8"))
         distribution = metadata["project"]["name"]
         package_entry = metadata["tool"]["poetry"]["packages"][0]

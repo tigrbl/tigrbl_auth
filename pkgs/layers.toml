@@ -46,6 +46,12 @@ order = 50
 category = "production"
 
 [[layers]]
+id = "55-profiles"
+order = 55
+category = "index"
+distribution_prefix = "tba-profile-"
+
+[[layers]]
 id = "60-runtime"
 order = 60
 category = "production"
@@ -64,13 +70,18 @@ category = "client"
 id = "80-routers"
 order = 80
 category = "production"
-distribution_prefix = "tigrbl-auth-router-"
+distribution_prefix = "tba-router-"
+
+[[layers]]
+id = "85-middleware"
+order = 85
+category = "middleware"
 
 [[layers]]
 id = "90-backend-apps"
 order = 90
 category = "production"
-distribution_prefix = "tigrbl-auth-backend-app-"
+distribution_prefix = "tba-app-backend-"
 
 [[layers]]
 id = "100-uix-core"
@@ -144,24 +155,32 @@ consumer_layer = "50-protocols"
 allowed_target_layers = ["00-primitives","02-contracts","05-bases","10-concrete","20-providers","40-capabilities","50-protocols"]
 
 [[dependency_rules]]
+consumer_layer = "55-profiles"
+allowed_target_layers = ["00-primitives","02-contracts","05-bases","10-concrete","20-providers","40-capabilities","50-protocols","55-profiles"]
+
+[[dependency_rules]]
 consumer_layer = "60-runtime"
-allowed_target_layers = ["00-primitives","01-storage","02-contracts","05-bases","10-concrete","20-providers","30-storage-runtime","40-capabilities","50-protocols","60-runtime"]
+allowed_target_layers = ["00-primitives","01-storage","02-contracts","05-bases","10-concrete","20-providers","30-storage-runtime","40-capabilities","50-protocols","55-profiles","60-runtime"]
 
 [[dependency_rules]]
 consumer_layer = "70-facade"
-allowed_target_layers = ["00-primitives","01-storage","02-contracts","05-bases","10-concrete","20-providers","30-storage-runtime","40-capabilities","50-protocols","60-runtime","70-facade"]
+allowed_target_layers = ["00-primitives","01-storage","02-contracts","05-bases","10-concrete","20-providers","30-storage-runtime","40-capabilities","50-protocols","55-profiles","60-runtime","70-facade"]
 
 [[dependency_rules]]
 consumer_layer = "75-clients"
-allowed_target_layers = ["00-primitives","02-contracts","50-protocols","75-clients"]
+allowed_target_layers = ["00-primitives","02-contracts","50-protocols","55-profiles","75-clients"]
 
 [[dependency_rules]]
 consumer_layer = "80-routers"
-allowed_target_layers = ["00-primitives","01-storage","02-contracts","05-bases","10-concrete","20-providers","30-storage-runtime","40-capabilities","50-protocols","60-runtime","70-facade","80-routers"]
+allowed_target_layers = ["00-primitives","01-storage","02-contracts","05-bases","10-concrete","20-providers","30-storage-runtime","40-capabilities","50-protocols","55-profiles","60-runtime","70-facade","80-routers"]
+
+[[dependency_rules]]
+consumer_layer = "85-middleware"
+allowed_target_layers = ["00-primitives","02-contracts","75-clients","85-middleware"]
 
 [[dependency_rules]]
 consumer_layer = "90-backend-apps"
-allowed_target_layers = ["00-primitives","01-storage","02-contracts","05-bases","10-concrete","20-providers","30-storage-runtime","40-capabilities","50-protocols","60-runtime","70-facade","80-routers","90-backend-apps"]
+allowed_target_layers = ["00-primitives","01-storage","02-contracts","05-bases","10-concrete","20-providers","30-storage-runtime","40-capabilities","50-protocols","55-profiles","60-runtime","70-facade","75-clients","80-routers","85-middleware","90-backend-apps"]
 
 [[dependency_rules]]
 consumer_layer = "100-uix-core"
@@ -177,12 +196,12 @@ allowed_target_layers = ["75-clients","100-uix-core", "105-ui", "106-ui"]
 
 [[dependency_rules]]
 consumer_layer = "110-examples"
-allowed_target_layers = ["00-primitives","01-storage","02-contracts","05-bases","10-concrete","20-providers","30-storage-runtime","40-capabilities","50-protocols","60-runtime","70-facade","80-routers","90-backend-apps","100-uix-core","105-ui","106-ui","110-examples"]
+allowed_target_layers = ["00-primitives","01-storage","02-contracts","05-bases","10-concrete","20-providers","30-storage-runtime","40-capabilities","50-protocols","55-profiles","60-runtime","70-facade","75-clients","80-routers","85-middleware","90-backend-apps","100-uix-core","105-ui","106-ui","110-examples"]
 
 [[dependency_rules]]
 consumer_layer = "120-tests"
-allowed_target_layers = ["00-primitives","01-storage","02-contracts","05-bases","10-concrete","20-providers","30-storage-runtime","40-capabilities","50-protocols","60-runtime","70-facade","80-routers","90-backend-apps","100-uix-core","105-ui","106-ui","110-examples","120-tests","deprecated"]
+allowed_target_layers = ["00-primitives","01-storage","02-contracts","05-bases","10-concrete","20-providers","30-storage-runtime","40-capabilities","50-protocols","55-profiles","60-runtime","70-facade","75-clients","80-routers","85-middleware","90-backend-apps","100-uix-core","105-ui","106-ui","110-examples","120-tests","deprecated"]
 
 [[dependency_rules]]
 consumer_layer = "deprecated"
-allowed_target_layers = ["00-primitives","01-storage","02-contracts","05-bases","10-concrete","20-providers","30-storage-runtime","40-capabilities","50-protocols","60-runtime","70-facade","80-routers","90-backend-apps","100-uix-core","105-ui","106-ui","110-examples","120-tests","deprecated"]
+allowed_target_layers = ["00-primitives","01-storage","02-contracts","05-bases","10-concrete","20-providers","30-storage-runtime","40-capabilities","50-protocols","55-profiles","60-runtime","70-facade","75-clients","80-routers","85-middleware","90-backend-apps","100-uix-core","105-ui","106-ui","110-examples","120-tests","deprecated"]

@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from types import SimpleNamespace
 
-from tigrbl_auth.cli.runtime import write_runtime_profile_report
+from tba_auth.cli.runtime import write_runtime_profile_report
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -17,7 +17,7 @@ def _write_json(path: Path, payload: dict) -> None:
 def _copy_support_files(dst_root: Path) -> None:
     for rel in [
         "pyproject.toml",
-        "pkgs/60-runtime/tigrbl-identity-runtime/pyproject.toml",
+        "pkgs/60-runtime/tba-runtime-identity/pyproject.toml",
         "uv.lock",
         "tox.ini",
         ".github/workflows/ci-install-profiles.yml",

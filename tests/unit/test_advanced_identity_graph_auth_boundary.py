@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from tigrbl_auth.services.advanced_identity_plane import (
+from tba_auth.services.advanced_identity_plane import (
     AdaptiveContext,
     AdvancedAuthenticatorRegistry,
     AuthAnomalyDetector,

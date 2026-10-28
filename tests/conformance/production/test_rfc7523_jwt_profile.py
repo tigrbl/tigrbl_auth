@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from tigrbl_auth.rfc.rfc7523 import (
+from tba_auth.rfc.rfc7523 import (
     JWT_BEARER_ASSERTION_TYPE,
     PRIVATE_KEY_JWT_AUTH_METHOD,
     authenticate_client_assertion,

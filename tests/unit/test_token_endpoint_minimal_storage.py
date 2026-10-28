@@ -4,16 +4,16 @@ from types import SimpleNamespace
 
 import pytest
 
-import tigrbl_identity_storage_runtime.token_persistence as token_persistence
-import tigrbl_identity_server.token_runtime as token_runtime
-from tigrbl_identity_server.security import handler_records
+import tba_runtime_identity_storage.token_persistence as token_persistence
+import tba_server_identity.token_runtime as token_runtime
+from tba_server_identity.security import handler_records
 
 
 def test_storage_token_service_uses_provider_object_protocol():
     source = token_persistence.__loader__.get_source(token_persistence.__name__)
 
     assert "class TokenCoder(Protocol)" in source
-    assert "from tigrbl_identity_jose" not in source
+    assert "from tba_provider_identity_jose" not in source
     assert "jwt: TokenCoder" in source
 
 
@@ -90,11 +90,11 @@ async def test_issue_persisted_token_pair_decodes_minted_tokens_without_revocati
         persisted.append((token, claims))
 
     monkeypatch.setattr(
-        "tigrbl_identity_storage_runtime.token_persistence.upsert_token_record_async",
+        "tba_runtime_identity_storage.token_persistence.upsert_token_record_async",
         upsert_token_record_async,
     )
     monkeypatch.setattr(
-        "tigrbl_identity_storage_runtime.token_persistence.token_hash",
+        "tba_runtime_identity_storage.token_persistence.token_hash",
         lambda token: f"hash:{token}",
     )
 

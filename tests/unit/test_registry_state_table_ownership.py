@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def test_registry_state_has_storage_tables_without_runtime_repositories() -> None:
-    tables = importlib.import_module("tigrbl_identity_storage.tables")
+    tables = importlib.import_module("tba_storage_core.tables")
 
     for name in (
         "Policy",
@@ -32,7 +32,7 @@ def test_registry_state_has_storage_tables_without_runtime_repositories() -> Non
         assert name in tables.TABLE_MODEL_BY_NAME
         assert getattr(tables, name) is tables.TABLE_MODEL_BY_NAME[name]
 
-    runtime = importlib.import_module("tigrbl_identity_storage_runtime")
+    runtime = importlib.import_module("tba_runtime_identity_storage")
     assert not hasattr(runtime, "StoragePolicyRepository")
     assert not hasattr(runtime, "StorageFederationRepository")
     assert not hasattr(runtime, "StorageInvariantRepository")
@@ -42,7 +42,7 @@ def test_registry_state_has_storage_tables_without_runtime_repositories() -> Non
 
 def test_registry_tables_are_in_migration_chain() -> None:
     migration = importlib.import_module(
-        "tigrbl_identity_storage.migrations.versions.0019_federation_and_invariant_tables"
+        "tba_storage_core.migrations.versions.0019_federation_and_invariant_tables"
     )
 
     assert migration.down_revision == "0018_policy_tables"
@@ -58,7 +58,7 @@ def test_registry_tables_are_in_migration_chain() -> None:
 
 def test_backchannel_replay_table_is_in_migration_chain() -> None:
     migration = importlib.import_module(
-        "tigrbl_identity_storage.migrations.versions.0020_backchannel_logout_replay_table"
+        "tba_storage_core.migrations.versions.0020_backchannel_logout_replay_table"
     )
 
     assert migration.down_revision == "0019_federation_and_invariant_tables"
@@ -69,7 +69,7 @@ def test_backchannel_replay_table_is_in_migration_chain() -> None:
 
 def test_authentication_challenge_table_is_in_migration_chain() -> None:
     migration = importlib.import_module(
-        "tigrbl_identity_storage.migrations.versions.0021_authentication_challenge_table"
+        "tba_storage_core.migrations.versions.0021_authentication_challenge_table"
     )
 
     assert migration.down_revision == "0020_backchannel_logout_replay_table"
@@ -80,7 +80,7 @@ def test_authentication_challenge_table_is_in_migration_chain() -> None:
 
 def test_authority_and_trust_graph_tables_are_in_migration_chain() -> None:
     migration = importlib.import_module(
-        "tigrbl_identity_storage.migrations.versions.0022_authority_and_trust_graph_tables"
+        "tba_storage_core.migrations.versions.0022_authority_and_trust_graph_tables"
     )
 
     assert migration.down_revision == "0021_authentication_challenge_table"
@@ -96,7 +96,7 @@ def test_authority_and_trust_graph_tables_are_in_migration_chain() -> None:
 
 def test_dpop_replay_and_nonce_tables_are_in_migration_chain() -> None:
     migration = importlib.import_module(
-        "tigrbl_identity_storage.migrations.versions.0034_dpop_replay_nonce_tables"
+        "tba_storage_core.migrations.versions.0034_dpop_replay_nonce_tables"
     )
 
     assert migration.down_revision == "0033_replay_reservations"
@@ -107,9 +107,9 @@ def test_dpop_replay_and_nonce_tables_are_in_migration_chain() -> None:
 
 
 def test_dpop_table_factories_live_in_storage_runtime() -> None:
-    import tigrbl_identity_storage.tables as storage
-    from tigrbl_identity_storage.tables import DpopNonce, DpopReplay
-    from tigrbl_identity_storage_runtime.tables.dpop import (
+    import tba_storage_core.tables as storage
+    from tba_storage_core.tables import DpopNonce, DpopReplay
+    from tba_runtime_identity_storage.tables.dpop import (
         DpopNonceRuntimeSpec,
         DpopReplayRuntimeSpec,
         makeDpopNonceRuntimeSpec,
@@ -142,18 +142,18 @@ def test_dpop_table_factories_live_in_storage_runtime() -> None:
 
 def test_deprecated_state_registries_are_marked_for_compatibility_only() -> None:
     compatibility_modules = {
-        "tigrbl_identity_admin_policy_registry": "PolicyRegistry",
-        "tigrbl_identity_admin_federation_registry": "FederationRegistry",
-        "tigrbl_authz_policy_invariant_registry": "InvariantRegistry",
+        "tba_runtime_identity_administration_policy_registry": "PolicyRegistry",
+        "tba_runtime_identity_administration_federation_registry": "FederationRegistry",
+        "tba_runtime_authorization_policy_invariant_registry": "InvariantRegistry",
     }
     for module_name, class_name in compatibility_modules.items():
         module = importlib.import_module(module_name)
         assert hasattr(module, class_name)
 
     for removed_module in (
-        "tigrbl_identity_storage_runtime.policy_repository",
-        "tigrbl_identity_storage_runtime.federation_repository",
-        "tigrbl_identity_storage_runtime.invariant_repository",
+        "tba_runtime_identity_storage.policy_repository",
+        "tba_runtime_identity_storage.federation_repository",
+        "tba_runtime_identity_storage.invariant_repository",
     ):
         try:
             importlib.import_module(removed_module)

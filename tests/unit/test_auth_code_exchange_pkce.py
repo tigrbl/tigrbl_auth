@@ -5,8 +5,8 @@ from types import SimpleNamespace
 import pytest
 
 from tigrbl.requests import Request
-from tigrbl_auth.tables import AuthCode
-from tigrbl_auth.rfc.rfc7636_pkce import makeCodeChallenge, makeCodeVerifier
+from tba_auth.tables import AuthCode
+from tba_auth.rfc.rfc7636_pkce import makeCodeChallenge, makeCodeVerifier
 
 
 @pytest.mark.unit
@@ -38,10 +38,10 @@ async def test_exchange_accepts_hex_client_id(monkeypatch):
     async def fake_delete(payload):  # pragma: no cover - trivial
         return None
 
-    monkeypatch.setattr("tigrbl_auth.tables.auth_code._jwt", DummyJWT())
-    monkeypatch.setattr("tigrbl_auth.tables.auth_code.mint_id_token", fake_mint)
+    monkeypatch.setattr("tba_auth.tables.auth_code._jwt", DummyJWT())
+    monkeypatch.setattr("tba_auth.tables.auth_code.mint_id_token", fake_mint)
     monkeypatch.setattr(
-        "tigrbl_auth.tables.auth_code.AuthCode.handlers.delete.core", fake_delete
+        "tba_auth.tables.auth_code.AuthCode.handlers.delete.core", fake_delete
     )
 
     request = Request(scope={"type": "http", "scheme": "https"})

@@ -1,6 +1,6 @@
 import pytest
 
-from tigrbl_attestation_protocol_eat import (
+from tba_protocol_attestation_eat import (
     CAPABILITY_REQUIREMENTS,
     CURRENT_VERSION as EAT_VERSION,
     EAT_CWT_CARRIER,
@@ -12,7 +12,7 @@ from tigrbl_attestation_protocol_eat import (
     select_carrier,
     supports as eat_supports,
 )
-from tigrbl_credential_profile_sd_jwt_vc import (
+from tba_profile_credential_sd_jwt_vc import (
     CAPABILITY_REQUIREMENTS as SD_JWT_VC_REQUIREMENTS,
     CURRENT_VERSION as SD_JWT_VC_VERSION,
     SD_JWT_VC_CARRIER,

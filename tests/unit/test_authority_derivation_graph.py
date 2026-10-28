@@ -2,14 +2,14 @@ from __future__ import annotations
 
 import tests.unit.formal_auth_helpers  # noqa: F401
 
-from tigrbl_auth.services.formal_authorization import AuthorityDerivationGraph as FacadeGraph
-from tigrbl_authz_policy import AuthorityDerivationGraph as PolicyGraph
-from tigrbl_identity_storage.tables import (
+from tba_auth.services.formal_authorization import AuthorityDerivationGraph as FacadeGraph
+from tba_runtime_authorization_policy import AuthorityDerivationGraph as PolicyGraph
+from tba_storage_core.tables import (
     AuthorityDerivationGraph as AuthorityDerivationGraphTable,
     AuthorityDerivationGraphEdge,
     AuthorityDerivationGraphNode,
 )
-from tigrbl_authz_policy_authority_derivation_graph import (
+from tba_durability_authorization_policy_authority_derivation_graph import (
     AuthorityDerivationGraph,
     AuthorityDerivationGraphEdgeRuntimeSpec,
     AuthorityDerivationGraphNodeRuntimeSpec,

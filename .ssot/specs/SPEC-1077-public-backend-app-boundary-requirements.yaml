@@ -8,7 +8,7 @@ status: "draft"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "The public API boundary MUST define the public protocol-facing API surface for `tigrbl_auth`."
+summary: "The public API boundary MUST define the public protocol-facing API surface for `tba_auth`."
 supersedes: []
 superseded_by: []
 status_notes: []
@@ -17,7 +17,7 @@ body: |-
   ## Requirements
 
   The public API boundary MUST define the public protocol-facing API surface for
-  `tigrbl_auth`.
+  `tba_auth`.
 
   Required in-scope capabilities:
   - public OAuth routes

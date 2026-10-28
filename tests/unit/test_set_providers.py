@@ -1,13 +1,13 @@
 from datetime import datetime, timezone
 
 import pytest
-from tigrbl_identity_contracts.security_events import (
+from tba_contracts_identity.security_events import (
     SecurityEvent,
     SecurityEventSubject,
 )
 from tigrbl_security_event_replay_store import InMemorySecurityEventReplayStore
-from tigrbl_set_receiver_provider import SetReceiverProvider, VerifiedSetToken
-from tigrbl_set_transmitter_provider import SetTransmitterProvider
+from tba_provider_set_receiver import SetReceiverProvider, VerifiedSetToken
+from tba_provider_set_transmitter import SetTransmitterProvider
 
 EVENT_TYPE = "https://schemas.example/events/account-disabled"
 

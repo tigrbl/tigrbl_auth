@@ -8,7 +8,7 @@ from uuid import uuid4
 
 import pytest
 
-from tigrbl_identity_contracts.delegation import (
+from tba_contracts_identity.delegation import (
     DelegationGrantLifecycleEntry,
     DelegationGrantSpec,
     normalize_delegation_scopes,
@@ -53,7 +53,7 @@ class _FakeTableHandlers:
 
 async def _op(model, operation: str, db, **payload):
     del model
-    runtime = importlib.import_module("tigrbl_identity_storage_runtime.ops.delegation")
+    runtime = importlib.import_module("tba_runtime_identity_storage.ops.delegation")
     handler_name = {
         "link_edge": "link_grant_edge",
         "persist_provenance": "persist_delegation_provenance",
@@ -64,8 +64,8 @@ async def _op(model, operation: str, db, **payload):
 
 
 def test_delegation_lifecycle_dtos_are_contract_owned() -> None:
-    authz_lifecycle = importlib.import_module("tigrbl_authz_policy.delegation")
-    contracts = importlib.import_module("tigrbl_identity_contracts.delegation")
+    authz_lifecycle = importlib.import_module("tba_runtime_authorization_policy.delegation")
+    contracts = importlib.import_module("tba_contracts_identity.delegation")
 
     assert (
         authz_lifecycle.DelegationGrantLifecycleEntry
@@ -84,26 +84,26 @@ def test_delegation_lifecycle_dtos_are_contract_owned() -> None:
         ROOT
         / "pkgs"
         / "40-capabilities"
-        / "tigrbl-authz-policy"
+        / "tba-runtime-authorization-policy"
         / "src"
-        / "tigrbl_authz_policy"
+        / "tba_runtime_authorization_policy"
         / "_delegation_lifecycle_models.py"
     ).exists()
     assert not (
         ROOT
         / "pkgs"
         / "40-capabilities"
-        / "tigrbl-authz-policy"
+        / "tba-runtime-authorization-policy"
         / "src"
-        / "tigrbl_authz_policy"
+        / "tba_runtime_authorization_policy"
         / "_delegation_lifecycle_service.py"
     ).exists()
 
 
 def test_delegation_grant_spec_contract_replaces_policy_grant_name() -> None:
-    contracts = importlib.import_module("tigrbl_identity_contracts.delegation")
-    authz_policy = importlib.import_module("tigrbl_authz_policy")
-    facade = importlib.import_module("tigrbl_auth.services.formal_authorization")
+    contracts = importlib.import_module("tba_contracts_identity.delegation")
+    authz_policy = importlib.import_module("tba_runtime_authorization_policy")
+    facade = importlib.import_module("tba_auth.services.formal_authorization")
 
     assert contracts.DelegationGrantSpec is DelegationGrantSpec
     assert authz_policy.DelegationGrantSpec is DelegationGrantSpec
@@ -134,8 +134,8 @@ def test_delegation_lifecycle_entry_converts_to_grant_spec() -> None:
 
 
 def test_delegation_grant_storage_model_contract() -> None:
-    storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
-    auth_tables = importlib.import_module("tigrbl_auth.tables")
+    storage_tables = importlib.import_module("tba_storage_core.tables")
+    auth_tables = importlib.import_module("tba_auth.tables")
 
     assert storage_tables.DelegationGrant.__tablename__ == "delegation_grants"
     assert storage_tables.DelegationGrantRecord is storage_tables.DelegationGrant
@@ -189,7 +189,7 @@ def test_delegation_grant_scope_normalization_contract() -> None:
 def test_delegation_grant_table_owns_lifecycle_and_association_ops(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
+    storage_tables = importlib.import_module("tba_storage_core.tables")
     grant_handlers = _FakeTableHandlers()
     edge_handlers = _FakeTableHandlers()
     proof_handlers = _FakeTableHandlers()
@@ -321,7 +321,7 @@ def test_delegation_grant_oauth_boundary_no_policy_ownership_contract(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     oauth_exchange = importlib.import_module(
-        "tigrbl_identity_server.token_exchange_runtime"
+        "tba_server_identity.token_exchange_runtime"
     )
 
     class FakeJwt:

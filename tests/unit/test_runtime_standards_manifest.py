@@ -4,17 +4,17 @@ from pathlib import Path
 import pytest
 from httpx import ASGITransport, AsyncClient
 
-from tigrbl_auth import standard_version, standards_manifest
+from tba_auth import standard_version, standards_manifest
 
 sys.path.insert(
     0,
     str(
-        Path(__file__).resolve().parents[2] / "pkgs/90-backend-apps/tigrbl-auth-backend-app-public/src"
+        Path(__file__).resolve().parents[2] / "pkgs/90-backend-apps/tba-app-backend-public/src"
     ),
 )
-from tigrbl_auth_backend_app_public import PUBLIC_BACKEND_APP_CONTRACT  # noqa: E402
-from tigrbl_identity_runtime.deployment import resolve_deployment
-from tigrbl_auth_backend_app_core import build_app
+from tba_app_backend_public import PUBLIC_BACKEND_APP_CONTRACT  # noqa: E402
+from tba_runtime_identity.deployment import resolve_deployment
+from tba_app_backend_core import build_app
 
 
 def test_runtime_manifest_exposes_exact_protocol_owner_versions() -> None:
@@ -30,9 +30,9 @@ def test_runtime_manifest_exposes_exact_protocol_owner_versions() -> None:
 
 def test_public_backend_app_contract_consumes_runtime_protocol_truth() -> None:
     assert "standards-manifest" in PUBLIC_BACKEND_APP_CONTRACT.production_capabilities
-    assert "tigrbl-auth-protocol-oid4vci" in PUBLIC_BACKEND_APP_CONTRACT.consumed_packages
-    assert "tigrbl-auth-protocol-oid4vp" in PUBLIC_BACKEND_APP_CONTRACT.consumed_packages
-    assert "tigrbl-auth-profile-haip" in PUBLIC_BACKEND_APP_CONTRACT.consumed_packages
+    assert "tba-protocol-oid4vci" in PUBLIC_BACKEND_APP_CONTRACT.consumed_packages
+    assert "tba-protocol-oid4vp" in PUBLIC_BACKEND_APP_CONTRACT.consumed_packages
+    assert "tba-profile-haip" in PUBLIC_BACKEND_APP_CONTRACT.consumed_packages
 
 
 def test_standards_manifest_is_mounted_from_runtime_capability_truth() -> None:

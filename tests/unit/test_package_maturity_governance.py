@@ -10,7 +10,7 @@ for src in sorted((ROOT / "pkgs").glob("*/src")):
     if value not in sys.path:
         sys.path.append(value)
 
-from tigrbl_identity_operator.package_maturity import (  # noqa: E402
+from tba_operator_identity.package_maturity import (  # noqa: E402
     PACKAGE_MATURITY_BOUNDARY_ID,
     SUPPORTED_PYTHON_VERSIONS,
     build_package_python_matrix,
@@ -25,11 +25,11 @@ def test_package_maturity_t0_discovers_all_split_packages() -> None:
 
     assert len(packages) >= 25
     assert {package.name for package in packages} >= {
-        "tigrbl-auth",
-        "tigrbl-identity-core",
-        "tigrbl-identity-cli",
-        "tigrbl-identity-operator",
-        "tigrbl-identity-testkit",
+        "tba-auth",
+        "tba-primitives-identity",
+        "tba-cli-identity",
+        "tba-operator-identity",
+        "tba-testkit-identity",
     }
     assert all(package.version for package in packages)
     assert all(package.path.startswith("pkgs/") for package in packages)
@@ -54,12 +54,12 @@ def test_package_maturity_t2_builds_complete_package_python_matrix() -> None:
     assert {
         cell["python_version"]
         for cell in matrix
-        if cell["name"] == "tigrbl-identity-core"
+        if cell["name"] == "tba-primitives-identity"
     } == set(SUPPORTED_PYTHON_VERSIONS)
-    testkit_cells = [cell for cell in matrix if cell["name"] == "tigrbl-identity-testkit"]
+    testkit_cells = [cell for cell in matrix if cell["name"] == "tba-testkit-identity"]
     assert len(testkit_cells) == len(SUPPORTED_PYTHON_VERSIONS)
     assert all(cell["cross_cutting"] == "true" for cell in testkit_cells)
-    assert all("tests/packages/tigrbl-identity-testkit" in cell["package_test_paths"] for cell in testkit_cells)
+    assert all("tests/packages/tba-testkit-identity" in cell["package_test_paths"] for cell in testkit_cells)
     assert all("tests/integration" not in cell["package_test_paths"] for cell in testkit_cells)
     assert all("tests/interop" in cell["package_test_paths"] for cell in testkit_cells)
 

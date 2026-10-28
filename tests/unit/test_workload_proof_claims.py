@@ -1,11 +1,11 @@
 import pytest
 
-from tigrbl_claim_confirmation_concrete import ConfirmationClaim
-from tigrbl_claim_cwt_confirmation_concrete import CwtConfirmationClaim
-from tigrbl_claim_other_token_hashes_concrete import OtherTokenHashesClaim
-from tigrbl_claim_transaction_token_hash_concrete import TransactionTokenHashClaim
-from tigrbl_claim_workload_token_hash_concrete import WorkloadTokenHashClaim
-from tigrbl_identity_core import ClaimNameKind
+from tba_concrete_claim_confirmation import ConfirmationClaim
+from tba_concrete_claim_cwt_confirmation import CwtConfirmationClaim
+from tba_concrete_claim_other_token_hashes import OtherTokenHashesClaim
+from tba_concrete_claim_transaction_token_hash import TransactionTokenHashClaim
+from tba_concrete_claim_workload_token_hash import WorkloadTokenHashClaim
+from tba_primitives_identity import ClaimNameKind
 
 _DIGEST = "A" * 43
 

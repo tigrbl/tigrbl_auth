@@ -2,8 +2,8 @@ from datetime import datetime, timezone
 
 import pytest
 
-from tigrbl_rp_session_runtime import InMemoryRPSessionRepository, InMemoryRPTransactionRepository, RPSessionRuntime, RPTransactionRuntime
-from tigrbl_auth_protocol_rp import RPError, verify_id_token
+from tba_runtime_relying_party_session import InMemoryRPSessionRepository, InMemoryRPTransactionRepository, RPSessionRuntime, RPTransactionRuntime
+from tba_protocol_oidc_relying_party import RPError, verify_id_token
 
 
 def test_login_transaction_is_expiring_and_consumed_once() -> None:

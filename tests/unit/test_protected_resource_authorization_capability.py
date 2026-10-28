@@ -2,13 +2,13 @@ from __future__ import annotations
 
 import pytest
 
-from tigrbl_identity_contracts.resource_server import (
+from tba_contracts_identity.resource_server import (
     AccessTokenClaims,
     ResourceRequirement,
     VerificationResult,
     VerificationStatus,
 )
-from tigrbl_protected_resource_authorization_capability import (
+from tba_capability_protected_resource_authorization import (
     ProtectedResourceAuthorizationCapability,
 )
 

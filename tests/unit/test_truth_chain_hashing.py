@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from tigrbl_auth.cli.truth import _hash_file
+from tba_auth.cli.truth import _hash_file
 
 
 def test_truth_chain_text_artifact_hash_ignores_line_endings(tmp_path: Path) -> None:

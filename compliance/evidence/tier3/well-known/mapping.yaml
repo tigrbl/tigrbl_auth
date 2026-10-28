@@ -7,7 +7,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   modules:
-  - tigrbl_auth/standards/http/well_known.py
+  - tba_auth/standards/http/well_known.py
   tests:
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/unit/test_well_known_endpoints_behavior.py

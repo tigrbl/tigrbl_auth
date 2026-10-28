@@ -18,7 +18,7 @@ authorization drift:
 Verification:
 
 ```powershell
-$env:UV_CACHE_DIR='E:\swarmauri_github\tigrbl_auth\.tmp\uv-cache'; uv run --no-sync pytest tests/unit/test_phase4_advanced_identity_boundary.py tests/unit/test_advanced_identity_plane_phase4.py
+$env:UV_CACHE_DIR='E:\swarmauri_github\tba_auth\.tmp\uv-cache'; uv run --no-sync pytest tests/unit/test_phase4_advanced_identity_boundary.py tests/unit/test_advanced_identity_plane_phase4.py
 ```
 
 Result: 9 passed.

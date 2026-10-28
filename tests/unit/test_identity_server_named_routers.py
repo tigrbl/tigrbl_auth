@@ -3,8 +3,8 @@ from __future__ import annotations
 from tigrbl import TigrblRouter
 
 
-def test_identity_server_exports_named_tigrbl_routers() -> None:
-    from tigrbl_auth_backend_app_core.surfaces import AdminRouter, PublicRouter, surface_api
+def test_identity_server_exports_named_tba_routers() -> None:
+    from tba_app_backend_core.surfaces import AdminRouter, PublicRouter, surface_api
 
     assert isinstance(AdminRouter, TigrblRouter)
     assert isinstance(PublicRouter, TigrblRouter)
@@ -14,11 +14,11 @@ def test_identity_server_exports_named_tigrbl_routers() -> None:
 
 
 def test_identity_server_compatibility_surfaces_share_public_router() -> None:
-    from tigrbl_auth_backend_app_core.surfaces import PublicRouter as api_public_router
-    from tigrbl_auth_backend_app_core.surfaces import surface_api as api_surface_api
-    from tigrbl_auth_backend_app_core.surfaces import PublicRouter as legacy_public_router
-    from tigrbl_auth_backend_app_core.surfaces import surface_api as legacy_surface_api
-    from tigrbl_auth_backend_app_core.surfaces import PublicRouter
+    from tba_app_backend_core.surfaces import PublicRouter as api_public_router
+    from tba_app_backend_core.surfaces import surface_api as api_surface_api
+    from tba_app_backend_core.surfaces import PublicRouter as legacy_public_router
+    from tba_app_backend_core.surfaces import surface_api as legacy_surface_api
+    from tba_app_backend_core.surfaces import PublicRouter
 
     assert api_public_router is PublicRouter
     assert api_surface_api is PublicRouter

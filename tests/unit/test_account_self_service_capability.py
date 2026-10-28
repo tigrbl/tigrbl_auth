@@ -4,8 +4,8 @@ from pathlib import Path
 
 import pytest
 
-from tigrbl_account_self_service import AccountSelfServiceCapability
-from tigrbl_identity_contracts.account_self_service import (
+from tba_capability_account_self_service import AccountSelfServiceCapability
+from tba_contracts_identity.account_self_service import (
     AccountConsent,
     AccountMutation,
     AccountNotFoundError,
@@ -80,17 +80,17 @@ async def test_account_self_service_normalizes_missing_owned_resources() -> None
 
 
 def test_my_account_http_package_has_no_durable_or_hashing_implementation() -> None:
-    package = ROOT / "pkgs" / "90-backend-apps" / "tigrbl-auth-backend-app-my-account"
+    package = ROOT / "pkgs" / "90-backend-apps" / "tba-app-backend-my-account"
     source = "\n".join(path.read_text() for path in (package / "src").rglob("*.py"))
     metadata = (package / "pyproject.toml").read_text()
 
     for forbidden in (
-        "tigrbl_identity_storage",
+        "tba_storage_core",
         "BcryptSecretHasher",
         "read_table_record",
         "update_table_record",
         "list_table_records",
     ):
         assert forbidden not in source
-    assert "tigrbl-identity-storage" not in metadata
-    assert "tigrbl-secret-hashing" not in metadata
+    assert "tba-storage-core" not in metadata
+    assert "tba-secret-hashing" not in metadata

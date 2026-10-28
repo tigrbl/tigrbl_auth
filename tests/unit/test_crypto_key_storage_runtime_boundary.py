@@ -4,8 +4,8 @@ from types import SimpleNamespace
 
 import pytest
 
-from tigrbl_identity_storage_runtime import crypto_keys
-from tigrbl_security_trust_contracts import SignResult, VerifySignatureResult
+from tba_runtime_identity_storage import crypto_keys
+from tba_contracts_security_trust import SignResult, VerifySignatureResult
 
 
 class _FakeSigningProvider:

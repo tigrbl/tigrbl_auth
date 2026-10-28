@@ -27,10 +27,10 @@ def _imports_for(package: str) -> set[str]:
 
 
 def test_user_plane_contracts_own_authn_resource_and_security_surfaces() -> None:
-    import tigrbl_identity_contracts as contracts
-    import tigrbl_security_trust_contracts as security_trust
-    from tigrbl_credentials.lifecycle import Credential
-    from tigrbl_credentials.proof_bindings import ProofBinding
+    import tba_contracts_identity as contracts
+    import tba_contracts_security_trust as security_trust
+    from tba_credentials.lifecycle import Credential
+    from tba_credentials.proof_bindings import ProofBinding
 
     assert contracts.CredentialKind.PASSWORD.value == "password"
     assert Credential is contracts.Credential
@@ -46,10 +46,10 @@ def test_user_plane_contracts_own_authn_resource_and_security_surfaces() -> None
 
 
 def test_management_plane_contracts_own_admin_and_governance_surfaces() -> None:
-    import tigrbl_identity_contracts as control_contracts
-    import tigrbl_identity_contracts as contracts
-    from tigrbl_authz_policy.control_plane import Role
-    from tigrbl_authz_policy.governance_extension import SDKPackage
+    import tba_contracts_identity as control_contracts
+    import tba_contracts_identity as contracts
+    from tba_runtime_authorization_policy.control_plane import Role
+    from tba_runtime_authorization_policy.governance_extension import SDKPackage
 
     assert Role is control_contracts.Role
     assert SDKPackage is contracts.SDKPackage
@@ -61,8 +61,8 @@ def test_management_plane_contracts_own_admin_and_governance_surfaces() -> None:
 
 
 def test_control_plane_contracts_own_control_plane_correctness_dtos() -> None:
-    import tigrbl_identity_contracts as contracts
-    from tigrbl_authz_policy import (
+    import tba_contracts_identity as contracts
+    from tba_runtime_authorization_policy import (
         ControlPlaneCorrectnessReport,
         CorrectnessProofSection,
     )
@@ -72,7 +72,7 @@ def test_control_plane_contracts_own_control_plane_correctness_dtos() -> None:
 
 
 def test_control_plane_contracts_do_not_export_executable_boundary_helpers() -> None:
-    import tigrbl_identity_contracts as contracts
+    import tba_contracts_identity as contracts
 
     executable_helpers = {
         "provisioning_governance_ecosystem_boundary_manifest",
@@ -90,9 +90,9 @@ def test_control_plane_contract_modules_have_no_top_level_functions() -> None:
         ROOT
         / "pkgs"
         / "02-contracts"
-        / "tigrbl-identity-contracts"
+        / "tba-contracts-identity"
         / "src"
-        / "tigrbl_identity_contracts"
+        / "tba_contracts_identity"
     )
     checked_modules = {
         "admin.py",
@@ -113,10 +113,10 @@ def test_control_plane_contract_modules_have_no_top_level_functions() -> None:
 
 
 def test_control_plane_executable_helpers_stay_in_authz_policy_capability() -> None:
-    import tigrbl_identity_contracts as contracts
-    import tigrbl_identity_contracts as management_contracts
-    import tigrbl_authz_policy.control_plane as admin_models
-    import tigrbl_authz_policy.governance_extension as governance_models
+    import tba_contracts_identity as contracts
+    import tba_contracts_identity as management_contracts
+    import tba_runtime_authorization_policy.control_plane as admin_models
+    import tba_runtime_authorization_policy.governance_extension as governance_models
 
     assert admin_models.Role is contracts.Role
     assert governance_models.SDKPackage is management_contracts.SDKPackage
@@ -133,8 +133,8 @@ def test_control_plane_executable_helpers_stay_in_authz_policy_capability() -> N
 
 
 def test_release_contracts_own_release_posture_surfaces() -> None:
-    import tigrbl_release_contracts as contracts
-    from tigrbl_auth_release_certification.release_posture.models import (
+    import tba_contracts_release as contracts
+    from tba_certification_release.release_posture.models import (
         TransportPosture,
     )
 
@@ -142,9 +142,9 @@ def test_release_contracts_own_release_posture_surfaces() -> None:
 
 
 def test_management_plane_contracts_own_residency_and_evidence_surfaces() -> None:
-    import tigrbl_identity_contracts as contracts
-    from tigrbl_identity_contracts.evidence.key_rotation import KeyRotationAuditEvidence
-    from tigrbl_authz_policy import ResidencyZone
+    import tba_contracts_identity as contracts
+    from tba_contracts_identity.evidence.key_rotation import KeyRotationAuditEvidence
+    from tba_runtime_authorization_policy import ResidencyZone
 
     assert ResidencyZone is contracts.ResidencyZone
     assert KeyRotationAuditEvidence.__name__ == "KeyRotationAuditEvidence"
@@ -152,15 +152,15 @@ def test_management_plane_contracts_own_residency_and_evidence_surfaces() -> Non
 
 
 def test_admin_capability_models_are_contract_reexports() -> None:
-    from tigrbl_identity_contracts.audit.admin import AdminAuditEvent
-    import tigrbl_identity_contracts as control_contracts
-    import tigrbl_identity_contracts as management_contracts
-    import tigrbl_identity_contracts as user_contracts
+    from tba_contracts_identity.audit.admin import AdminAuditEvent
+    import tba_contracts_identity as control_contracts
+    import tba_contracts_identity as management_contracts
+    import tba_contracts_identity as user_contracts
     import tigrbl_identity_credentials_concrete as credential_concrete
     import tigrbl_identity_identities_concrete as identity_concrete
-    from tigrbl_identity_admin._advanced_identity_plane import models as advanced_models
-    from tigrbl_identity_admin._control_plane import models as legacy_admin_models
-    from tigrbl_identity_admin_control_plane import models as admin_models
+    from tba_runtime_identity_administration._advanced_identity_plane import models as advanced_models
+    from tba_runtime_identity_administration._control_plane import models as legacy_admin_models
+    from tba_runtime_identity_administration_control_plane import models as admin_models
 
     assert admin_models.AdminResource is management_contracts.AdminResource
     assert admin_models.App is management_contracts.App
@@ -191,9 +191,9 @@ def test_advanced_identity_contracts_are_domain_packaged() -> None:
         ROOT
         / "pkgs"
         / "02-contracts"
-        / "tigrbl-identity-contracts"
+        / "tba-contracts-identity"
         / "src"
-        / "tigrbl_identity_contracts"
+        / "tba_contracts_identity"
     )
 
     assert not (contracts_root / "advanced_identity.py").exists()
@@ -232,9 +232,9 @@ def test_application_contracts_are_domain_packaged() -> None:
         ROOT
         / "pkgs"
         / "02-contracts"
-        / "tigrbl-identity-contracts"
+        / "tba-contracts-identity"
         / "src"
-        / "tigrbl_identity_contracts"
+        / "tba_contracts_identity"
     )
 
     assert (contracts_root / "applications" / "__init__.py").exists()
@@ -246,9 +246,9 @@ def test_authority_contracts_are_domain_packaged() -> None:
         ROOT
         / "pkgs"
         / "02-contracts"
-        / "tigrbl-identity-contracts"
+        / "tba-contracts-identity"
         / "src"
-        / "tigrbl_identity_contracts"
+        / "tba_contracts_identity"
     )
 
     assert not (contracts_root / "authz" / "authority_graph.py").exists()
@@ -260,11 +260,11 @@ def test_authority_contracts_are_domain_packaged() -> None:
     assert (contracts_root / "authority" / "roles.py").exists()
     assert (contracts_root / "authority" / "semantics.py").exists()
     assert (contracts_root / "authority" / "trust_domains.py").exists()
-    assert not hasattr(__import__("tigrbl_identity_contracts.admin").admin, "Role")
+    assert not hasattr(__import__("tba_contracts_identity.admin").admin, "Role")
 
-    from tigrbl_identity_contracts.authority import Role
+    from tba_contracts_identity.authority import Role
 
-    assert Role.__module__ == "tigrbl_identity_contracts.authority.roles"
+    assert Role.__module__ == "tba_contracts_identity.authority.roles"
 
 
 def test_correctness_contracts_are_domain_packaged() -> None:
@@ -272,9 +272,9 @@ def test_correctness_contracts_are_domain_packaged() -> None:
         ROOT
         / "pkgs"
         / "02-contracts"
-        / "tigrbl-identity-contracts"
+        / "tba-contracts-identity"
         / "src"
-        / "tigrbl_identity_contracts"
+        / "tba_contracts_identity"
     )
 
     assert not (contracts_root / "correctness.py").exists()
@@ -290,9 +290,9 @@ def test_invariant_contracts_are_domain_packaged() -> None:
         ROOT
         / "pkgs"
         / "02-contracts"
-        / "tigrbl-identity-contracts"
+        / "tba-contracts-identity"
         / "src"
-        / "tigrbl_identity_contracts"
+        / "tba_contracts_identity"
     )
 
     assert not (contracts_root / "authz" / "invariants.py").exists()
@@ -304,9 +304,9 @@ def test_liveness_contracts_are_domain_packaged() -> None:
         ROOT
         / "pkgs"
         / "02-contracts"
-        / "tigrbl-identity-contracts"
+        / "tba-contracts-identity"
         / "src"
-        / "tigrbl_identity_contracts"
+        / "tba_contracts_identity"
     )
 
     assert not (contracts_root / "authz" / "liveness.py").exists()
@@ -315,27 +315,27 @@ def test_liveness_contracts_are_domain_packaged() -> None:
         ROOT
         / "pkgs"
         / "00-primitives"
-        / "tigrbl-identity-core"
+        / "tba-primitives-identity"
         / "src"
-        / "tigrbl_identity_core"
+        / "tba_primitives_identity"
         / "liveness.py"
     ).exists()
 
-    import tigrbl_identity_contracts.liveness as liveness
+    import tba_contracts_identity.liveness as liveness
 
-    assert liveness.ConvergenceEvent.__module__ == "tigrbl_identity_contracts.liveness"
-    assert liveness.ConvergenceState.__module__ == "tigrbl_identity_contracts.liveness"
+    assert liveness.ConvergenceEvent.__module__ == "tba_contracts_identity.liveness"
+    assert liveness.ConvergenceState.__module__ == "tba_contracts_identity.liveness"
     assert (
         liveness.LivenessConvergenceReport.__module__
-        == "tigrbl_identity_contracts.liveness"
+        == "tba_contracts_identity.liveness"
     )
-    sys.modules.pop("tigrbl_identity_core.liveness", None)
+    sys.modules.pop("tba_primitives_identity.liveness", None)
     try:
-        importlib.import_module("tigrbl_identity_core.liveness")
+        importlib.import_module("tba_primitives_identity.liveness")
     except ModuleNotFoundError:
         pass
     else:  # pragma: no cover - fail if core starts owning liveness records again.
-        raise AssertionError("tigrbl_identity_core.liveness should not exist")
+        raise AssertionError("tba_primitives_identity.liveness should not exist")
 
 
 def test_replay_contracts_are_domain_packaged() -> None:
@@ -343,9 +343,9 @@ def test_replay_contracts_are_domain_packaged() -> None:
         ROOT
         / "pkgs"
         / "02-contracts"
-        / "tigrbl-identity-contracts"
+        / "tba-contracts-identity"
         / "src"
-        / "tigrbl_identity_contracts"
+        / "tba_contracts_identity"
     )
 
     assert not (contracts_root / "authz" / "replay.py").exists()
@@ -357,9 +357,9 @@ def test_governance_contracts_are_domain_packaged() -> None:
         ROOT
         / "pkgs"
         / "02-contracts"
-        / "tigrbl-identity-contracts"
+        / "tba-contracts-identity"
         / "src"
-        / "tigrbl_identity_contracts"
+        / "tba_contracts_identity"
     )
 
     assert not (contracts_root / "governance.py").exists()
@@ -375,9 +375,9 @@ def test_service_identity_contracts_are_placed_with_owning_domains() -> None:
         ROOT
         / "pkgs"
         / "02-contracts"
-        / "tigrbl-identity-contracts"
+        / "tba-contracts-identity"
         / "src"
-        / "tigrbl_identity_contracts"
+        / "tba_contracts_identity"
     )
 
     assert not (contracts_root / "service_identity.py").exists()
@@ -393,9 +393,9 @@ def test_delegation_contracts_are_domain_packaged() -> None:
         ROOT
         / "pkgs"
         / "02-contracts"
-        / "tigrbl-identity-contracts"
+        / "tba-contracts-identity"
         / "src"
-        / "tigrbl_identity_contracts"
+        / "tba_contracts_identity"
     )
 
     assert not (contracts_root / "authz" / "delegation_lifecycle_models.py").exists()
@@ -410,9 +410,9 @@ def test_residency_contracts_are_domain_packaged() -> None:
         ROOT
         / "pkgs"
         / "02-contracts"
-        / "tigrbl-identity-contracts"
+        / "tba-contracts-identity"
         / "src"
-        / "tigrbl_identity_contracts"
+        / "tba_contracts_identity"
     )
 
     assert not (contracts_root / "residency.py").exists()
@@ -429,9 +429,9 @@ def test_policy_contracts_are_domain_packaged_without_old_owners() -> None:
         ROOT
         / "pkgs"
         / "02-contracts"
-        / "tigrbl-identity-contracts"
+        / "tba-contracts-identity"
         / "src"
-        / "tigrbl_identity_contracts"
+        / "tba_contracts_identity"
     )
 
     assert not (contracts_root / "authz" / "decisions.py").exists()
@@ -451,9 +451,9 @@ def test_policy_contracts_are_domain_packaged_without_old_owners() -> None:
         ROOT
         / "pkgs"
         / "10-concrete"
-        / "tigrbl-authz-policy-rules-concrete"
+        / "tba-concrete-authorization-policy-rules"
         / "src"
-        / "tigrbl_authz_policy_rules_concrete"
+        / "tba_concrete_authorization_policy_rules"
         / "__init__.py"
     ).exists()
 
@@ -463,9 +463,9 @@ def test_plane_contracts_are_domain_packaged() -> None:
         ROOT
         / "pkgs"
         / "02-contracts"
-        / "tigrbl-identity-contracts"
+        / "tba-contracts-identity"
         / "src"
-        / "tigrbl_identity_contracts"
+        / "tba_contracts_identity"
     )
 
     assert not (contracts_root / "planes.py").exists()
@@ -473,29 +473,29 @@ def test_plane_contracts_are_domain_packaged() -> None:
 
 
 def test_removed_plane_contract_import_roots_are_not_loaded() -> None:
-    assert "tigrbl_user_plane_contracts" not in sys.modules
-    assert "tigrbl_control_plane_contracts" not in sys.modules
-    assert "tigrbl_management_plane_contracts" not in sys.modules
+    assert "tba_user_plane_contracts" not in sys.modules
+    assert "tba_control_plane_contracts" not in sys.modules
+    assert "tba_management_plane_contracts" not in sys.modules
 
 
 def test_contract_packages_do_not_import_capability_runtime_or_storage_packages() -> (
     None
 ):
     forbidden = {
-        "tigrbl_auth",
-        "tigrbl_credentials",
-        "tigrbl_authn_credentials",
-        "tigrbl_authz_policy",
-        "tigrbl_authz_resource_server",
-        "tigrbl_identity_runtime",
-        "tigrbl_identity_storage",
-        "tigrbl_auth_release_certification",
+        "tba_auth",
+        "tba_credentials",
+        "tba_authn_credentials",
+        "tba_runtime_authorization_policy",
+        "tba_protocol_authorization_resource_server",
+        "tba_runtime_identity",
+        "tba_storage_core",
+        "tba_certification_release",
     }
 
     for package in (
-        "tigrbl_identity_contracts",
-        "tigrbl_release_contracts",
-        "tigrbl_security_trust_contracts",
+        "tba_contracts_identity",
+        "tba_contracts_release",
+        "tba_contracts_security_trust",
     ):
         assert not (_imports_for(package) & forbidden), package
 
@@ -507,25 +507,25 @@ def test_target_capability_packages_no_longer_own_contract_classes() -> None:
         / "40-capabilities"
         / "tigrbl-identity-admin-control-plane"
         / "src"
-        / "tigrbl_identity_admin_control_plane",
+        / "tba_runtime_identity_administration_control_plane",
         ROOT
         / "pkgs"
         / "20-providers"
-        / "tigrbl-identity-admin"
+        / "tba-runtime-identity-administration"
         / "src"
-        / "tigrbl_identity_admin",
+        / "tba_runtime_identity_administration",
         ROOT
         / "pkgs"
         / "70-facade"
-        / "tigrbl-credentials"
+        / "tba-credentials"
         / "src"
-        / "tigrbl_credentials",
+        / "tba_credentials",
         ROOT
         / "pkgs"
         / "20-providers"
-        / "tigrbl-authz-policy"
+        / "tba-runtime-authorization-policy"
         / "src"
-        / "tigrbl_authz_policy",
+        / "tba_runtime_authorization_policy",
     ]
     offenders: list[str] = []
 

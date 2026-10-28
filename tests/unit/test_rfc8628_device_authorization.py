@@ -9,13 +9,13 @@ digits.
 
 import pytest
 
-from tigrbl_auth import (
+from tba_auth import (
     RFC8628_SPEC_URL,
     generate_device_code,
     generate_user_code,
     validate_user_code,
 )
-import tigrbl_auth.rfc.rfc8628 as rfc8628_mod
+import tba_auth.rfc.rfc8628 as rfc8628_mod
 
 
 @pytest.mark.unit

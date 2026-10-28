@@ -1984,7 +1984,7 @@ extension:dns-privacy:
 - tests/unit/test_rfc8932_dns_privacy.py
 - tests/unit/test_rfc8932_enhanced_metadata.py
 extension:set:
-- pkgs/10-concrete/tigrbl-set-concrete/tests/test_rfc8417.py
+- pkgs/10-concrete/tba-concrete-set/tests/test_rfc8417.py
 extension:webauthn-passkeys:
 - tests/unit/test_rfc8812_webauthn_algorithms.py
 - tests/unit/test_webauthn_foundation_delivery.py
@@ -2785,7 +2785,7 @@ route:revoke:
 - tests/integration/test_persistence_lifecycle_durability.py
 - tests/unit/test_public_route_contracts.py
 route:security-events-receive:
-- pkgs/10-concrete/tigrbl-set-concrete/tests/test_rfc8417.py
+- pkgs/10-concrete/tba-concrete-set/tests/test_rfc8417.py
 route:standards: []
 route:tenants-tenant-slug-well-known-jwks-json:
 - tests/conformance/baseline/test_rfc7517_jwk.py
@@ -3844,7 +3844,7 @@ target:rfc-8414:
 - tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py
 - tests/integration/test_rfc8414_metadata.py
 target:rfc-8417:
-- pkgs/10-concrete/tigrbl-set-concrete/tests/test_rfc8417.py
+- pkgs/10-concrete/tba-concrete-set/tests/test_rfc8417.py
 target:rfc-8615:
 - tests/conformance/production/test_rfc8615_well_known_uris.py
 - tests/integration/test_profile_surface_and_contract_alignment.py

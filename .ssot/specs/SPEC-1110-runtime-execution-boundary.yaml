@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification governs `tigrbl-identity-runtime`."
+summary: "This specification governs `tba-runtime-identity`."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -20,7 +20,7 @@ references: []
 body: |-
   ## Scope
   
-  This specification governs `tigrbl-identity-runtime`.
+  This specification governs `tba-runtime-identity`.
   
   ## First-Class Objects
   

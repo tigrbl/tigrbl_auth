@@ -1,6 +1,6 @@
 import pytest
 from tigrbl import bind
-from tigrbl_auth.tables import User
+from tba_auth.tables import User
 
 
 @pytest.mark.unit

@@ -1,9 +1,9 @@
 targets:
 - RFC 7516
 modules:
-- tigrbl_auth/standards/jose/rfc7516.py
-- tigrbl_auth/standards/oidc/id_token.py
-- tigrbl_auth/standards/oidc/discovery_metadata.py
+- tba_auth/standards/jose/rfc7516.py
+- tba_auth/standards/oidc/id_token.py
+- tba_auth/standards/oidc/discovery_metadata.py
 tests:
 - tests/unit/test_rfc7516_jwe.py
 - tests/unit/test_oidc_id_token_encryption.py

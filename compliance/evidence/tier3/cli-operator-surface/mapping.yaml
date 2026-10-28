@@ -1,16 +1,16 @@
 targets:
 - CLI operator surface
 modules:
-- tigrbl_auth/cli/main.py
-- tigrbl_auth/cli/metadata.py
-- tigrbl_auth/cli/handlers.py
-- tigrbl_auth/cli/runtime.py
-- tigrbl_auth/cli/reports.py
-- tigrbl_auth/services/operator_service.py
-- tigrbl_auth/services/audit_service.py
-- tigrbl_auth/services/client_service.py
-- tigrbl_auth/services/identity_service.py
-- tigrbl_auth/services/session_service.py
+- tba_auth/cli/main.py
+- tba_auth/cli/metadata.py
+- tba_auth/cli/handlers.py
+- tba_auth/cli/runtime.py
+- tba_auth/cli/reports.py
+- tba_auth/services/operator_service.py
+- tba_auth/services/audit_service.py
+- tba_auth/services/client_service.py
+- tba_auth/services/identity_service.py
+- tba_auth/services/session_service.py
 tests:
 - tests/conformance/operator/test_cli_resource_lifecycle.py
 - tests/conformance/operator/test_cli_serve_runtime.py
@@ -18,7 +18,7 @@ tests:
 contracts:
 - contracts\cli_contract.json
 - contracts\CLI_SURFACE.md
-- contracts\tigrbl_auth.admin.openrpc.json
+- contracts\tba_auth.admin.openrpc.json
 reports:
 - reports\current_state_report.json
 - reports\current_state_report.md

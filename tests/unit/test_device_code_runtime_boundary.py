@@ -6,8 +6,8 @@ import uuid
 import pytest
 
 from tigrbl import create_table_record
-from tigrbl_identity_storage.tables import DeviceCode
-from tigrbl_identity_storage_runtime import (
+from tba_storage_core.tables import DeviceCode
+from tba_runtime_identity_storage import (
     DeviceCodeRuntimeSpec,
     approve_device_code,
     deny_device_code,

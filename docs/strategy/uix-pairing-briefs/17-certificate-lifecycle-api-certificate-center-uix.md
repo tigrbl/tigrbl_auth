@@ -1,9 +1,9 @@
 # Certificate Lifecycle API + Certificate Center UIX Requirements Brief
 
-**Proposed pairing:** `tigrbl-auth-router-certificates` + `@tigrbl-auth/certificate-center-uix`<br>
+**Proposed pairing:** `tba-router-certificates` + `@tba/certificate-center-uix`<br>
 **Status:** New product surface; certificate DTOs/bases, mTLS credentials, key lifecycle, rotation policy, storage, and JOSE foundations exist<br>
 **Prepared:** July 11, 2026<br>
-**Proposed router owner:** `pkgs/80-routers/tigrbl-auth-router-certificates`<br>
+**Proposed router owner:** `pkgs/80-routers/tba-router-certificates`<br>
 **Proposed protocol/provider owners:** certificate domain providers plus optional ACME/EST adapters<br>
 **Proposed UIX owner:** `pkgs/105-ui/certificate-center-uix`
 
@@ -504,16 +504,16 @@ Guardrails include false-valid verification, SAN/usage escalation, key leakage, 
 
 ### Repository
 
-- `pkgs/02-contracts/tigrbl-security-trust-contracts/src/tigrbl_security_trust_contracts/types.py`
-- `pkgs/05-bases/tigrbl-security-trust-domain-bases/src/tigrbl_security_trust_domain_bases/bases.py`
-- `pkgs/20-providers/tigrbl-security-certificate-mtls/`
-- `pkgs/20-providers/tigrbl-security-mtls-cnf-binding-validator/`
-- `pkgs/20-providers/tigrbl-authenticator-mtls-client-cert/`
-- `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/credential_mtls_certificate/`
-- `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/key_rotation_policy/`
-- `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/key_rotation_event/`
+- `pkgs/02-contracts/tba-contracts-security-trust/src/tba_contracts_security_trust/types.py`
+- `pkgs/05-bases/tba-bases-security-trust-domain/src/tba_bases_security_trust_domain/bases.py`
+- `pkgs/20-providers/tba-provider-security-certificate-mtls/`
+- `pkgs/20-providers/tba-provider-security-mtls-cnf-binding-validator/`
+- `pkgs/20-providers/tba-provider-authenticator-mtls-client-cert/`
+- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/credential_mtls_certificate/`
+- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/key_rotation_policy/`
+- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/key_rotation_event/`
 - key provider/lifecycle, JOSE, attestation, trust-domain, audit, service/workload, OAuth mTLS, and resource-validation packages;
-- `pkgs/105-ui/platform-admin-uix/pages/KeyRotationPage.tsx`;
+- `pkgs/105-ui/tba-ui-platform-admin/pages/KeyRotationPage.tsx`;
 - mTLS, key-rotation, and certificate-credential tests.
 
 ### Standards and primary sources

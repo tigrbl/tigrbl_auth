@@ -1,7 +1,7 @@
 # Layer 80: Routers
 
 This layer owns reusable Tigrbl HTTP routers. Distribution names use
-`tigrbl-auth-router-*` and Python import roots use `tigrbl_auth_router_*`.
+`tba-router-*` and Python import roots use `tba_router_*`.
 
 A router package closes over the smallest independently mountable carrier
 surface. It may expose one operation or table, or a cohesive combination of

@@ -2,7 +2,7 @@ from datetime import datetime, timedelta, timezone
 
 import pytest
 
-from tigrbl_auth.security.certification import (
+from tba_auth.security.certification import (
     CertificationError,
     MachineIdentity,
     assert_machine_identity_governed,

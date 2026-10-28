@@ -1,26 +1,26 @@
-from tigrbl_attestation_bases import (
+from tba_bases_attestation import (
     AttestationAppraiserBase,
     EvidenceVerifierBase,
     ReferenceMaterialProviderBase,
 )
-from tigrbl_authentication_assurance_bases import (
+from tba_bases_authentication_assurance import (
     AuthenticationContextEvaluatorBase,
     IdentityAssuranceClaimsProviderBase,
     VerifiedClaimsValidatorBase,
 )
-from tigrbl_digital_credential_bases import (
+from tba_bases_digital_credential import (
     CredentialIssuerBase,
     CredentialStatusResolverBase,
     CredentialVerifierBase,
     PresentationVerifierBase,
     WalletAttestationVerifierBase,
 )
-from tigrbl_identity_authenticator_bases import (
+from tba_bases_identity_authenticator import (
     AuthenticatorEvidenceEvaluatorBase,
     HardwareKeyProtectionEvaluatorBase,
     PhishingResistanceEvaluatorBase,
 )
-from tigrbl_jose_bases import (
+from tba_bases_jose import (
     EatJwtCoderBase,
     SdJwtCoderBase,
     SdJwtDisclosureVerifierBase,
@@ -28,17 +28,17 @@ from tigrbl_jose_bases import (
     SetCoderBase,
     WalletAttestationJwtVerifierBase,
 )
-from tigrbl_authentication_assurance_bases import (
+from tba_bases_authentication_assurance import (
     AuthenticationContextEvaluatorBase as EapAcrEvaluatorBase,
 )
-from tigrbl_token_bases import ProfiledTokenVerifierBase
-from tigrbl_security_event_bases import (
+from tba_bases_token import ProfiledTokenVerifierBase
+from tba_bases_security_event import (
     SecurityEventDeliveryBase,
     SecurityEventReceiverBase,
     SecurityEventReplayBase,
     SecurityEventTransmitterBase,
 )
-from tigrbl_token_bases import ProfiledTokenIssuerBase
+from tba_bases_token import ProfiledTokenIssuerBase
 
 
 def test_digital_credential_and_attestation_base_surfaces_are_importable():
@@ -69,7 +69,7 @@ def test_token_and_security_event_bases_are_profile_neutral():
 
 def test_oidc_and_oauth_names_are_compatibility_exports_of_neutral_bases():
     assert EapAcrEvaluatorBase is AuthenticationContextEvaluatorBase
-    assert ProfiledTokenVerifierBase.__module__ == "tigrbl_token_bases"
+    assert ProfiledTokenVerifierBase.__module__ == "tba_bases_token"
 
 
 def test_jose_and_authenticator_extension_points_are_explicit():

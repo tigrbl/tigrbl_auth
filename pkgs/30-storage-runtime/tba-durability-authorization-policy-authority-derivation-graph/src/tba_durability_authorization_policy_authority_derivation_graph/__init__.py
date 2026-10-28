@@ -1,0 +1,11 @@
+"""Compatibility facade for tba-durability-authority-graph."""
+
+from tba_durability_authority_graph import *
+from tba_concrete_authority_graph import *
+
+AuthorityDerivationGraphTable = AuthorityGraphTable
+AuthorityDerivationGraphNode = AuthorityGraphNodeTable
+AuthorityDerivationGraphEdge = AuthorityGraphEdgeTable
+AuthorityDerivationGraphRuntimeSpec = AuthorityGraphRuntimeSpec
+AuthorityDerivationGraphNodeRuntimeSpec = AuthorityGraphNodeRuntimeSpec
+AuthorityDerivationGraphEdgeRuntimeSpec = AuthorityGraphEdgeRuntimeSpec

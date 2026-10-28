@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from tigrbl_auth.security.certification import (
+from tba_auth.security.certification import (
     AlgorithmPolicy,
     CertificationError,
     ML_DSA_65_ALG,

@@ -1,7 +1,7 @@
 """RFC 7520 compliance tests for JOSE examples.
 
 These tests verify that the helper functions defined by :rfc:`7520` behave as
-expected and honor the ``TIGRBL_AUTH_ENABLE_RFC7520`` flag.
+expected and honor the ``TBA_AUTH_ENABLE_RFC7520`` flag.
 """
 
 import importlib
@@ -12,8 +12,8 @@ import asyncio
 
 import pytest
 
-import tigrbl_auth.rfc.rfc7520 as rfc7520
-from tigrbl_auth import (
+import tba_auth.rfc.rfc7520 as rfc7520
+from tba_auth import (
     RFC7520_SPEC_URL,
     jws_then_jwe,
     jwe_then_jws,
@@ -35,8 +35,8 @@ def test_jws_then_jwe_roundtrip() -> None:
 
 
 def test_rfc7520_disabled(monkeypatch) -> None:
-    monkeypatch.setenv("TIGRBL_AUTH_ENABLE_RFC7520", "0")
-    import tigrbl_auth.runtime_cfg as runtime_cfg
+    monkeypatch.setenv("TBA_AUTH_ENABLE_RFC7520", "0")
+    import tba_auth.runtime_cfg as runtime_cfg
 
     importlib.reload(runtime_cfg)
     importlib.reload(rfc7520)

@@ -17,8 +17,8 @@ def package_root(name: str) -> Path:
     return matches[0].parent
 
 
-SERVER_ROOT = package_root("tigrbl-identity-server") / "src"
-AUTH_FACADE_ROOT = package_root("tigrbl-auth") / "src"
+SERVER_ROOT = package_root("tba-server-identity") / "src"
+AUTH_FACADE_ROOT = package_root("tba-auth") / "src"
 
 
 def _source(path: Path) -> str:
@@ -35,37 +35,37 @@ def _imports_from(path: Path) -> set[str]:
 
 
 ROUTER_DEPRECATION_TARGETS = {
-    "__init__.py": "tigrbl_identity_storage.tables.*",
-    "admin_auth.py": "tigrbl_identity_storage.tables.user",
-    "admin_identities.py": "tigrbl_identity_storage.tables.user",
-    "admin_realms.py": "tigrbl_identity_storage.tables.realm",
-    "admin_tenants.py": "tigrbl_auth_backend_app_platform_admin.tenants",
-    "auth_flows.py": "tigrbl_identity_storage.tables.auth_session",
-    "authorize.py": "tigrbl_identity_storage.tables.auth_code",
-    "device_authorization.py": "tigrbl_identity_storage.tables.device_code",
-    "login.py": "tigrbl_auth_router_session_login",
-    "logout.py": "tigrbl_identity_storage.tables.logout_state",
-    "my_account.py": "tigrbl_identity_storage.tables.user",
-    "par.py": "tigrbl_auth_router_oauth_par",
-    "register.py": "tigrbl_identity_storage.tables.client_registration",
-    "revoke.py": "tigrbl_identity_storage.tables.revoked_token",
-    "token.py": "tigrbl_identity_storage.tables.token_record",
+    "__init__.py": "tba_storage_core.tables.*",
+    "admin_auth.py": "tba_storage_core.tables.user",
+    "admin_identities.py": "tba_storage_core.tables.user",
+    "admin_realms.py": "tba_storage_core.tables.realm",
+    "admin_tenants.py": "tba_app_backend_platform_admin.tenants",
+    "auth_flows.py": "tba_storage_core.tables.auth_session",
+    "authorize.py": "tba_storage_core.tables.auth_code",
+    "device_authorization.py": "tba_storage_core.tables.device_code",
+    "login.py": "tba_router_session_login",
+    "logout.py": "tba_storage_core.tables.logout_state",
+    "my_account.py": "tba_storage_core.tables.user",
+    "par.py": "tba_router_oauth_pushed_authorization_request",
+    "register.py": "tba_storage_core.tables.client_registration",
+    "revoke.py": "tba_storage_core.tables.revoked_token",
+    "token.py": "tba_storage_core.tables.token_record",
 }
 
 
 def test_server_has_no_rest_schema_bucket_module() -> None:
     with pytest.raises(ModuleNotFoundError):
-        importlib.import_module("tigrbl_identity_server.routers.schemas")
+        importlib.import_module("tba_server_identity.routers.schemas")
 
 
 def test_protocol_schema_owner_is_direct_and_facade_api_namespace_is_removed() -> None:
-    schemas = importlib.import_module("tigrbl_auth_protocol_oauth.schemas")
-    from tigrbl_auth_protocol_oauth.schemas import TokenPair
+    schemas = importlib.import_module("tba_protocol_oauth.schemas")
+    from tba_protocol_oauth.schemas import TokenPair
 
     assert not hasattr(schemas, "CredsIn")
     assert schemas.TokenPair is TokenPair
     with pytest.raises(ModuleNotFoundError):
-        importlib.import_module("tigrbl_auth.api")
+        importlib.import_module("tba_auth.api")
 
 
 def test_no_package_imports_removed_server_schema_bucket() -> None:
@@ -74,7 +74,7 @@ def test_no_package_imports_removed_server_schema_bucket() -> None:
         for path in root.rglob("*.py"):
             source = _source(path)
             if (
-                "tigrbl_identity_server.routers.schemas" in source
+                "tba_server_identity.routers.schemas" in source
                 or "routers.schemas" in source
             ):
                 offenders.append(path.relative_to(ROOT).as_posix())
@@ -90,13 +90,13 @@ def test_server_rest_router_bridges_warn_to_storage_owner(
     route_file: str,
     target: str,
 ) -> None:
-    path = SERVER_ROOT / "tigrbl_identity_server" / "rest" / "routers" / route_file
+    path = SERVER_ROOT / "tba_server_identity" / "rest" / "routers" / route_file
     assert target.startswith(
         (
-            "tigrbl_identity_storage.tables",
-                "tigrbl_identity_storage_runtime",
-                "tigrbl_auth_router_",
-                "tigrbl_auth_backend_app_",
+            "tba_storage_core.tables",
+                "tba_runtime_identity_storage",
+                "tba_router_",
+                "tba_app_backend_",
             )
         )
     assert not path.exists()
@@ -108,9 +108,9 @@ def test_server_rest_router_bridges_warn_to_storage_owner(
         (
             "my_account.py",
             {
-                "tigrbl_identity_storage.tables.auth_session",
-                "tigrbl_identity_storage.tables.consent",
-                "tigrbl_identity_storage.tables.user",
+                "tba_storage_core.tables.auth_session",
+                "tba_storage_core.tables.consent",
+                "tba_storage_core.tables.user",
             },
         ),
     ],
@@ -118,19 +118,19 @@ def test_server_rest_router_bridges_warn_to_storage_owner(
 def test_remaining_table_backed_rest_routers_import_schemas_from_table_modules(
     route_file: str, required_imports: set[str]
 ) -> None:
-    path = SERVER_ROOT / "tigrbl_identity_server" / "rest" / "routers" / route_file
+    path = SERVER_ROOT / "tba_server_identity" / "rest" / "routers" / route_file
     assert route_file == "my_account.py"
     assert required_imports == {
-        "tigrbl_identity_storage.tables.auth_session",
-        "tigrbl_identity_storage.tables.consent",
-        "tigrbl_identity_storage.tables.user",
+        "tba_storage_core.tables.auth_session",
+        "tba_storage_core.tables.consent",
+        "tba_storage_core.tables.user",
     }
     assert not path.exists()
 
 
 def test_realm_admin_routes_live_in_platform_backend_app_package() -> None:
-    app_module = importlib.import_module("tigrbl_auth_backend_app_platform_admin.realms")
-    storage_module = importlib.import_module("tigrbl_identity_storage.tables.realm")
+    app_module = importlib.import_module("tba_app_backend_platform_admin.realms")
+    storage_module = importlib.import_module("tba_storage_core.tables.realm")
     route_names = {
         "admin_list_realms",
         "admin_create_realm",
@@ -151,8 +151,8 @@ def test_realm_admin_routes_live_in_platform_backend_app_package() -> None:
 
 
 def test_tenant_admin_routes_and_dtos_live_in_platform_backend_app_package() -> None:
-    runtime_module = importlib.import_module("tigrbl_auth_backend_app_platform_admin.tenants")
-    storage_module = importlib.import_module("tigrbl_identity_storage.tables.tenant")
+    runtime_module = importlib.import_module("tba_app_backend_platform_admin.tenants")
+    storage_module = importlib.import_module("tba_storage_core.tables.tenant")
     table_class = storage_module.Tenant
     route_names = {
         "admin_list_tenants",
@@ -177,12 +177,12 @@ def test_tenant_admin_routes_and_dtos_live_in_platform_backend_app_package() -> 
         assert hasattr(runtime_module, dto_name)
         assert not hasattr(storage_module, dto_name)
     with pytest.raises(ModuleNotFoundError):
-        importlib.import_module("tigrbl_identity_storage_runtime.tenant_admin")
+        importlib.import_module("tba_runtime_identity_storage.tenant_admin")
 
 
 def test_admin_auth_routes_live_in_server_runtime() -> None:
-    runtime_module = importlib.import_module("tigrbl_identity_server.admin_auth")
-    storage_module = importlib.import_module("tigrbl_identity_storage.tables.user")
+    runtime_module = importlib.import_module("tba_server_identity.admin_auth")
+    storage_module = importlib.import_module("tba_storage_core.tables.user")
     route_names = {
         "admin_change_password",
         "admin_forgot_password",
@@ -209,8 +209,8 @@ def test_admin_auth_routes_live_in_server_runtime() -> None:
 
 
 def test_identity_admin_routes_live_in_platform_backend_app_package() -> None:
-    app_module = importlib.import_module("tigrbl_auth_backend_app_platform_admin.identities")
-    storage_module = importlib.import_module("tigrbl_identity_storage.tables.user")
+    app_module = importlib.import_module("tba_app_backend_platform_admin.identities")
+    storage_module = importlib.import_module("tba_storage_core.tables.user")
     route_names = {
         "admin_list_identities",
         "admin_create_identity",
@@ -226,8 +226,8 @@ def test_identity_admin_routes_live_in_platform_backend_app_package() -> None:
 
 
 def test_my_account_profile_routes_live_in_backend_app_package() -> None:
-    app_module = importlib.import_module("tigrbl_auth_backend_app_my_account.profiles")
-    storage_module = importlib.import_module("tigrbl_identity_storage.tables.user")
+    app_module = importlib.import_module("tba_app_backend_my_account.profiles")
+    storage_module = importlib.import_module("tba_storage_core.tables.user")
     route_names = {"get_account_profile", "update_account_profile", "change_account_password"}
 
     assert hasattr(app_module, "router")
@@ -240,9 +240,9 @@ def test_my_account_profile_routes_live_in_backend_app_package() -> None:
 
 
 def test_my_account_session_routes_live_in_backend_app_package() -> None:
-    app_module = importlib.import_module("tigrbl_auth_backend_app_my_account.sessions")
+    app_module = importlib.import_module("tba_app_backend_my_account.sessions")
     storage_module = importlib.import_module(
-        "tigrbl_identity_storage.tables.auth_session"
+        "tba_storage_core.tables.auth_session"
     )
     table_class = storage_module.AuthSession
     route_names = {"list_account_sessions", "revoke_account_session"}
@@ -260,10 +260,10 @@ def test_my_account_session_routes_live_in_backend_app_package() -> None:
 
 def test_token_endpoint_carrier_and_runtime_live_above_storage() -> None:
     storage_module = importlib.import_module(
-        "tigrbl_identity_storage.tables.token_record"
+        "tba_storage_core.tables.token_record"
     )
-    carrier_module = importlib.import_module("tigrbl_auth_router_oauth_token")
-    runtime_module = importlib.import_module("tigrbl_auth_backend_app_core.surfaces.token_surface")
+    carrier_module = importlib.import_module("tba_router_oauth_token")
+    runtime_module = importlib.import_module("tba_app_backend_core.surfaces.token_surface")
 
     assert hasattr(carrier_module, "build_token_router")
     assert hasattr(runtime_module, "router")
@@ -271,51 +271,51 @@ def test_token_endpoint_carrier_and_runtime_live_above_storage() -> None:
     assert not hasattr(storage_module, "api")
     assert not hasattr(storage_module, "router")
     with pytest.raises(ModuleNotFoundError):
-        importlib.import_module("tigrbl_identity_storage_runtime.token_endpoint")
+        importlib.import_module("tba_runtime_identity_storage.token_endpoint")
 
 
 @pytest.mark.parametrize(
     ("runtime_module_name", "storage_module_name", "class_name", "route_names"),
     [
         (
-            "tigrbl_auth_backend_app_core.surfaces.login_surface",
-            "tigrbl_identity_storage.tables.auth_session",
+            "tba_app_backend_core.surfaces.login_surface",
+            "tba_storage_core.tables.auth_session",
             "AuthSession",
             set(),
         ),
         (
-            "tigrbl_auth_backend_app_core.surfaces.authorization_surface",
-            "tigrbl_identity_storage.tables.auth_code",
+            "tba_app_backend_core.surfaces.authorization_surface",
+            "tba_storage_core.tables.auth_code",
             "AuthCode",
             set(),
         ),
         (
-            "tigrbl_auth_backend_app_core.surfaces.client_registration_surface",
-            "tigrbl_identity_storage.tables.client_registration",
+            "tba_app_backend_core.surfaces.client_registration_surface",
+            "tba_storage_core.tables.client_registration",
             "ClientRegistration",
             set(),
         ),
         (
-            "tigrbl_auth_backend_app_core.surfaces.device_authorization_surface",
-            "tigrbl_identity_storage.tables.device_code",
+            "tba_app_backend_core.surfaces.device_authorization_surface",
+            "tba_storage_core.tables.device_code",
             "DeviceCode",
             {"device_authorization"},
         ),
         (
-            "tigrbl_auth_backend_app_core.surfaces.par_surface",
-            "tigrbl_identity_storage.tables.pushed_authorization_request",
+            "tba_app_backend_core.surfaces.par_surface",
+            "tba_storage_core.tables.pushed_authorization_request",
             "PushedAuthorizationRequest",
             set(),
         ),
         (
-            "tigrbl_auth_backend_app_core.surfaces.logout_surface",
-            "tigrbl_identity_storage.tables.logout_state",
+            "tba_app_backend_core.surfaces.logout_surface",
+            "tba_storage_core.tables.logout_state",
             "LogoutState",
             {"logout"},
         ),
         (
-            "tigrbl_auth_backend_app_core.surfaces.userinfo_surface",
-            "tigrbl_identity_storage.tables.user",
+            "tba_app_backend_core.surfaces.userinfo_surface",
+            "tba_storage_core.tables.user",
             "User",
             {"userinfo"},
         ),
@@ -333,10 +333,10 @@ def test_moved_oauth_publishers_live_above_storage_table_modules(
 
     assert hasattr(runtime_module, "router")
     if runtime_module_name in {
-        "tigrbl_auth_backend_app_core.surfaces.authorization_surface",
-        "tigrbl_auth_backend_app_core.surfaces.login_surface",
-        "tigrbl_auth_backend_app_core.surfaces.client_registration_surface",
-        "tigrbl_auth_backend_app_core.surfaces.par_surface",
+        "tba_app_backend_core.surfaces.authorization_surface",
+        "tba_app_backend_core.surfaces.login_surface",
+        "tba_app_backend_core.surfaces.client_registration_surface",
+        "tba_app_backend_core.surfaces.par_surface",
     }:
         assert not hasattr(runtime_module, "api")
     else:
@@ -350,8 +350,8 @@ def test_moved_oauth_publishers_live_above_storage_table_modules(
 
 
 def test_consent_account_routes_live_above_storage_table_module() -> None:
-    runtime_module = importlib.import_module("tigrbl_auth_backend_app_my_account.consents")
-    storage_module = importlib.import_module("tigrbl_identity_storage.tables.consent")
+    runtime_module = importlib.import_module("tba_app_backend_my_account.consents")
+    storage_module = importlib.import_module("tba_storage_core.tables.consent")
     table_class = storage_module.Consent
     route_names = {
         "list_account_consents",
@@ -372,7 +372,7 @@ def test_consent_account_routes_live_above_storage_table_module() -> None:
     assert sorted(name for name in route_names if not hasattr(runtime_module, name)) == []
     assert sorted(name for name in route_names if hasattr(storage_module, name)) == []
     assert sorted(name for name in table_op_names if hasattr(table_class, name)) == []
-    from tigrbl_identity_storage_runtime import ConsentRuntimeSpec
+    from tba_runtime_identity_storage import ConsentRuntimeSpec
 
     runtime_ops = {operation.alias for operation in ConsentRuntimeSpec.ops}
     assert table_op_names <= runtime_ops
@@ -398,15 +398,15 @@ def test_consent_account_routes_live_above_storage_table_module() -> None:
     ],
 )
 def test_relocated_table_backed_server_rest_routers_are_bridge_only(route_file: str) -> None:
-    path = SERVER_ROOT / "tigrbl_identity_server" / "rest" / "routers" / route_file
+    path = SERVER_ROOT / "tba_server_identity" / "rest" / "routers" / route_file
     assert not path.exists()
 
 
 @pytest.mark.parametrize(
     "path",
     [
-        SERVER_ROOT / "tigrbl_identity_server" / "routers" / "auth_flows.py",
-        SERVER_ROOT / "tigrbl_identity_server" / "routers" / "authz" / "oidc.py",
+        SERVER_ROOT / "tba_server_identity" / "routers" / "auth_flows.py",
+        SERVER_ROOT / "tba_server_identity" / "routers" / "authz" / "oidc.py",
     ],
 )
 def test_legacy_router_modules_are_bridge_only(path: Path) -> None:

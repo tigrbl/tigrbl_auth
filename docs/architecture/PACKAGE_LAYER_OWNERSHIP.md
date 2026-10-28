@@ -123,13 +123,13 @@ outside the Python dependency graph.
 
 ## Router and backend-application direction
 
-Layer 80 packages use the `tigrbl-auth-router-*` distribution family. A router
+Layer 80 packages use the `tba-router-*` distribution family. A router
 is a reusable, mountable HTTP carrier. Its closure may be deliberately small:
 one operation, one table, an operation and a table, or a related set of
 operations, tables, schemas, and local hooks. A router does not construct a
 deployable product application.
 
-Layer 90 backend packages use the `tigrbl-auth-backend-app-*` distribution
+Layer 90 backend packages use the `tba-app-backend-*` distribution
 family. A backend app closes over all routers and all app-wide tables,
 operations, hooks, policy, settings, startup, shutdown, and middleware needed
 to run one product surface. It may implement local routers when a route is

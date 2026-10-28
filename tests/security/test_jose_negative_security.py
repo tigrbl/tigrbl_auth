@@ -1,6 +1,6 @@
 import pytest
 
-from tigrbl_auth.security.certification import CertificationError, validate_jwk_set
+from tba_auth.security.certification import CertificationError, validate_jwk_set
 
 
 def test_jose_negative_security_t0_contract_exports_validator() -> None:

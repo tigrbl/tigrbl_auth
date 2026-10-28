@@ -19,7 +19,7 @@ artifacts.
 
 ## Decision
 
-`tigrbl_auth` is certified only as a **Tigrbl-native OAuth 2.0 Authorization
+`tba_auth` is certified only as a **Tigrbl-native OAuth 2.0 Authorization
 Server + OpenID Connect Provider + discovery / trust plane**. The public auth
 plane, admin/control plane, contract plane, and governance plane are all within
 scope when they are declared, mapped, and release-gated.

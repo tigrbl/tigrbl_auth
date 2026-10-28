@@ -8,30 +8,30 @@ rules:
   - one package groups tables that participate in the same durable lifecycle or atomic consistency boundary
 substrate: tigrbl
 canonical_packages:
-  - tigrbl-attestation-durability
-  - tigrbl-audit-durability
-  - tigrbl-authority-graph-durability
-  - tigrbl-authorization-policy-durability
-  - tigrbl-consent-durability
-  - tigrbl-delegation-durability
-  - tigrbl-digital-credential-durability
-  - tigrbl-gnap-state-durability
-  - tigrbl-identity-durability
-  - tigrbl-key-material-durability
-  - tigrbl-oauth-state-durability
-  - tigrbl-oidc-state-durability
-  - tigrbl-presentation-durability
-  - tigrbl-policy-administration-memory-provider
-  - tigrbl-replay-protection-durability
-  - tigrbl-security-event-durability
-  - tigrbl-session-durability
-  - tigrbl-token-durability
-  - tigrbl-trust-federation-graph-durability
-  - tigrbl-webauthn-durability
-  - tigrbl-workload-identity-durability
+  - tba-durability-attestation
+  - tba-durability-audit
+  - tba-durability-authority-graph
+  - tba-durability-authorization-policy
+  - tba-durability-consent
+  - tba-durability-delegation
+  - tba-durability-digital-credential
+  - tba-durability-gnap-state
+  - tba-durability-identity
+  - tba-durability-key-material
+  - tba-durability-oauth-state
+  - tba-durability-oidc-state
+  - tba-durability-presentation
+  - tba-provider-policy-administration-memory
+  - tba-durability-replay-protection
+  - tba-durability-security-event
+  - tba-durability-session
+  - tba-durability-token
+  - tba-durability-trust-federation-graph
+  - tba-durability-webauthn
+  - tba-durability-workload-identity
 compatibility_packages:
-  tigrbl-identity-storage-runtime: aggregate facade and legacy lifecycle adapters
-  tigrbl-authz-policy-authority-derivation-graph: compatibility name and concrete graph re-exports
-  tigrbl-identity-admin-trust-federation-graph: compatibility name and concrete graph re-exports
+  tba-runtime-identity-storage: aggregate facade and legacy lifecycle adapters
+  tba-durability-authorization-policy-authority-derivation-graph: compatibility name and concrete graph re-exports
+  tba-durability-identity-admin-trust-federation-graph: compatibility name and concrete graph re-exports
 durability_owned_modules:
-  engine: tigrbl-identity-storage-runtime
+  engine: tba-runtime-identity-storage

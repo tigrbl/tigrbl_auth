@@ -3,7 +3,7 @@ from __future__ import annotations
 import asyncio
 from secrets import token_bytes
 
-from tigrbl_identity_jose.standards.rfc7516 import (
+from tba_provider_identity_jose.standards.rfc7516 import (
     SUPPORTED_JWE_ALG_VALUES,
     SUPPORTED_JWE_ENC_VALUES,
     decrypt_jwe,

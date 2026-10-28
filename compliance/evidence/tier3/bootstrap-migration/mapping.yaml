@@ -1,11 +1,11 @@
 targets:
 - Bootstrap and migration lifecycle
 modules:
-- tigrbl_auth/cli/main.py
-- tigrbl_auth/cli/metadata.py
-- tigrbl_auth/cli/handlers.py
-- tigrbl_auth/cli/project_tree.py
-- tigrbl_auth/services/persistence.py
+- tba_auth/cli/main.py
+- tba_auth/cli/metadata.py
+- tba_auth/cli/handlers.py
+- tba_auth/cli/project_tree.py
+- tba_auth/services/persistence.py
 tests:
 - tests/conformance/operator/test_cli_bootstrap_migrate.py
 contracts:

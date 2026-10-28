@@ -6,7 +6,7 @@ from decimal import Decimal
 
 import pytest
 
-from tigrbl_identity_core.json_canonicalization import (
+from tba_primitives_identity.json_canonicalization import (
     JCSCanonicalizationError,
     MAX_SAFE_INTEGER,
     canonicalize,
@@ -100,7 +100,7 @@ def test_rfc8785_rejects_numbers_that_are_not_safe_json_integers() -> None:
 
 @pytest.mark.conformance
 def test_non_jcs_release_signing_helper_is_not_exported_as_jcs() -> None:
-    import tigrbl_auth.release_signing as release_signing
+    import tba_auth.release_signing as release_signing
 
     assert hasattr(release_signing, "_canonical_json")
     assert not hasattr(release_signing, "canonicalize")

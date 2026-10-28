@@ -18,12 +18,12 @@ The migration/runtime path and related tests were still using the historical res
 
 This checkpoint adds a compatibility adapter in:
 
-- `tigrbl_auth/runtime/engine_resolver.py`
+- `tba_auth/runtime/engine_resolver.py`
 
 and updates these callers to the published public API boundary:
 
-- `tigrbl_auth/migrations/runtime.py`
-- `tigrbl_auth/services/persistence.py`
+- `tba_auth/migrations/runtime.py`
+- `tba_auth/services/persistence.py`
 - `tests/conftest.py`
 - `tests/unit/test_engine_initialization.py`
 
@@ -33,7 +33,7 @@ The executable migration helpers still assumed schema-qualified table DDL would 
 
 This checkpoint updates:
 
-- `tigrbl_auth/migrations/helpers.py`
+- `tba_auth/migrations/helpers.py`
 
 so that SQLite execution clones schema-qualified tables into schema-less metadata for DDL purposes, preserves prior-table dependency resolution, and rebuilds drop-column tables without reintroducing unsupported cross-schema FK resolution.
 

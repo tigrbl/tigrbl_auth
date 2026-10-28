@@ -1,13 +1,13 @@
 import pytest
 
-from tigrbl_auth_router_webauthn import (
+from tba_router_webauthn import (
     PublicKeyCredentialIn,
     decode_base64url,
     encode_base64url,
     parse_public_key_credential,
     to_json_value,
 )
-from tigrbl_auth_protocol_webauthn import build_request_options
+from tba_protocol_webauthn import build_request_options
 
 
 def test_base64url_transport_is_unpadded_and_strict():

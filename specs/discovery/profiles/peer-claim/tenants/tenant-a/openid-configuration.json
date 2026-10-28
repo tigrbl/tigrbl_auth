@@ -18,6 +18,6 @@
     "profile",
     "email"
   ],
-  "tigrbl_auth_subject_namespace": "tenant-a:subjects",
-  "tigrbl_auth_signing_scope": "tenant:tenant-a"
+  "tba_auth_subject_namespace": "tenant-a:subjects",
+  "tba_auth_signing_scope": "tenant:tenant-a"
 }

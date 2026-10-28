@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "`tigrbl-identity-server` builds the ASGI/Tigrbl application."
+summary: "`tba-server-identity` builds the ASGI/Tigrbl application."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -20,7 +20,7 @@ references: []
 body: |-
   ## Decision
   
-  `tigrbl-identity-server` builds the ASGI/Tigrbl application.
+  `tba-server-identity` builds the ASGI/Tigrbl application.
   
   It owns:
   
@@ -33,7 +33,7 @@ body: |-
   - protocol publisher binding
   - server settings
   
-  `tigrbl-identity-runtime` runs the composed application.
+  `tba-runtime-identity` runs the composed application.
   
   It owns:
   

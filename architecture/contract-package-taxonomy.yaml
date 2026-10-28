@@ -8,31 +8,31 @@ rules:
   implementations: 05-bases-10-concrete-20-providers
 families:
   foundational:
-    claim: tigrbl-claim-contracts
-    replay: tigrbl-replay-contracts
-    token: tigrbl-token-contracts
+    claim: tba-contracts-claim
+    replay: tba-contracts-replay
+    token: tba-contracts-token
   identity_security:
-    identity: tigrbl-identity-contracts
-    administration: tigrbl-administration-contracts
-    authorization: tigrbl-authorization-contracts
-    audit: tigrbl-audit-contracts
-    delegation: tigrbl-delegation-contracts
-    governance: tigrbl-governance-contracts
-    identity_assurance: tigrbl-identity-assurance-contracts
-    did: tigrbl-did-contracts
-    workload_identity: tigrbl-workload-identity-contracts
-    public_key_authentication: tigrbl-public-key-authentication-contracts
-    digital_credential: tigrbl-digital-credential-contracts
-    attestation: tigrbl-attestation-contracts
-    security_event: tigrbl-security-event-contracts
+    identity: tba-contracts-identity
+    administration: tba-administration-contracts
+    authorization: tba-contracts-authorization
+    audit: tba-audit-contracts
+    delegation: tba-delegation-contracts
+    governance: tba-governance-contracts
+    identity_assurance: tba-contracts-identity-assurance
+    did: tba-contracts-did
+    workload_identity: tba-contracts-workload-identity
+    public_key_authentication: tba-contracts-public-key-authentication
+    digital_credential: tba-contracts-digital-credential
+    attestation: tba-contracts-attestation
+    security_event: tba-contracts-security-event
   artifact_and_trust:
-    key: tigrbl-key-contracts
-    certificate: tigrbl-certificate-contracts
-    trust: tigrbl-trust-contracts
-    protected_artifact: tigrbl-protected-artifact-contracts
+    key: tba-key-contracts
+    certificate: tba-certificate-contracts
+    trust: tba-trust-contracts
+    protected_artifact: tba-protected-artifact-contracts
   release:
-    release_assurance: tigrbl-release-contracts
+    release_assurance: tba-contracts-release
 compatibility_aggregates:
-  tigrbl-security-trust-contracts:
+  tba-contracts-security-trust:
     status: transitional
     removal_condition: key-certificate-trust-and-artifact-families-extracted

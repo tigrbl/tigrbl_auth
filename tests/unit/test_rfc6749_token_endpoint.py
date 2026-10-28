@@ -6,12 +6,12 @@ from http import HTTPStatus as status
 from httpx import ASGITransport, AsyncClient, BasicAuth
 from unittest.mock import AsyncMock
 
-from tigrbl_identity_storage_runtime.engine import get_db
+from tba_runtime_identity_storage.engine import get_db
 from tigrbl import TigrblApp
-from tigrbl_auth_backend_app_core.surfaces.auth_flows import router
-from tigrbl_identity_runtime.deployment import resolve_deployment
-from tigrbl_identity_runtime.settings import settings
-from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
+from tba_app_backend_core.surfaces.auth_flows import router
+from tba_runtime_identity.deployment import resolve_deployment
+from tba_runtime_identity.settings import settings
+from tba_provider_secret_hashing_bcrypt import BcryptSecretHasher
 
 CLIENT_ID = "00000000-0000-0000-0000-000000000000"
 AUTH = BasicAuth(CLIENT_ID, "secret")
@@ -30,21 +30,21 @@ class DummyDB:
 @pytest_asyncio.fixture()
 async def client(monkeypatch):
     app = TigrblApp()
-    app.state.tigrbl_auth_deployment = resolve_deployment(
+    app.state.tba_auth_deployment = resolve_deployment(
         settings, flag_overrides={"require_tls": False}
     )
     app.include_router(router)
     app.router.dependency_overrides[get_db] = lambda: DummyDB()
     monkeypatch.setattr(
-        "tigrbl_identity_server.token_runtime.read_handler_record",
+        "tba_server_identity.token_runtime.read_handler_record",
         AsyncMock(return_value=DummyClient()),
     )
     monkeypatch.setattr(
-        "tigrbl_identity_server.token_runtime.first_handler_record",
+        "tba_server_identity.token_runtime.first_handler_record",
         AsyncMock(return_value=None),
     )
     monkeypatch.setattr(
-        "tigrbl_identity_server.token_runtime.issue_token_pair_records",
+        "tba_server_identity.token_runtime.issue_token_pair_records",
         AsyncMock(return_value=("access-token", "refresh-token")),
     )
     transport = ASGITransport(app=app)
@@ -112,7 +112,7 @@ async def test_password_grant_rejects_failed_capability_authentication(
     monkeypatch,
 ):
     monkeypatch.setattr(
-        "tigrbl_identity_server.token_request.authenticate_password",
+        "tba_server_identity.token_request.authenticate_password",
         AsyncMock(return_value=None),
     )
 

@@ -11,15 +11,15 @@ import pytest
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tigrbl_auth.crypto import hash_pw
-from tigrbl_auth.config.settings import settings as runtime_settings
-from tigrbl_identity_server.device_authorization_runtime import (
+from tba_auth.crypto import hash_pw
+from tba_auth.config.settings import settings as runtime_settings
+from tba_server_identity.device_authorization_runtime import (
     device_authorization_request,
 )
-from tigrbl_auth.tables import Client, DeviceCode, Tenant, User
-from tigrbl_auth.services.token_service import JWTCoder, issue_persisted_token_pair
-from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER
-from tigrbl_identity_storage_runtime.initialize import initializeIdentityRuntimeTables
+from tba_auth.tables import Client, DeviceCode, Tenant, User
+from tba_auth.services.token_service import JWTCoder, issue_persisted_token_pair
+from tba_protocol_oauth.standards.authorization_server_metadata import ISSUER
+from tba_runtime_identity_storage.initialize import initializeIdentityRuntimeTables
 
 
 def _load_example_module(module_name: str, relative_path: str):
@@ -77,7 +77,7 @@ class _OpsRequest:
         self.url = httpx.URL(f"https://test{path}")
 
 
-class _TigrblAuthDeviceFlowTransport(httpx.AsyncBaseTransport):
+class _TbaAuthDeviceFlowTransport(httpx.AsyncBaseTransport):
     def __init__(self, db_session: AsyncSession, *, client_id: str):
         self._db_session = db_session
         self._client_id = client_id
@@ -136,7 +136,7 @@ class _TigrblAuthDeviceFlowTransport(httpx.AsyncBaseTransport):
 @pytest.mark.example
 @pytest.mark.integration
 @pytest.mark.asyncio
-async def test_python_cli_package_can_login_via_tigrbl_auth_device_flow(
+async def test_python_cli_package_can_login_via_tba_auth_device_flow(
     db_session: AsyncSession,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -150,7 +150,7 @@ async def test_python_cli_package_can_login_via_tigrbl_auth_device_flow(
     initializeIdentityRuntimeTables()
 
     tenant, user, client = await _create_tenant_user_and_client(db_session)
-    transport = _TigrblAuthDeviceFlowTransport(db_session, client_id=str(client.id))
+    transport = _TbaAuthDeviceFlowTransport(db_session, client_id=str(client.id))
     async with httpx.AsyncClient(transport=transport, base_url="https://test") as async_client:
         consumer = device_login.DeviceLoginClient(
             issuer="https://test",

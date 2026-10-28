@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from tigrbl_auth.config.deployment import resolve_deployment
+from tba_auth.config.deployment import resolve_deployment
 
 
 def test_baseline_profile_filters_production_and_hardening_targets() -> None:

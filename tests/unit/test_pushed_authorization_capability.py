@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import pytest
 
-from tigrbl_identity_contracts.oauth import PushedAuthorizationPersistenceRequest
-from tigrbl_pushed_authorization_capability import PushedAuthorizationCapability
+from tba_contracts_identity.oauth import PushedAuthorizationPersistenceRequest
+from tba_capability_authorization_request_staging import PushedAuthorizationCapability
 
 
 def test_pushed_authorization_requires_durable_target() -> None:

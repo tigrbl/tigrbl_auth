@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification governs `tigrbl-identity-jose`."
+summary: "This specification governs `tba-provider-identity-jose`."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -20,7 +20,7 @@ references: []
 body: |-
   ## Scope
   
-  This specification governs `tigrbl-identity-jose`.
+  This specification governs `tba-provider-identity-jose`.
   
   ## First-Class Objects
   

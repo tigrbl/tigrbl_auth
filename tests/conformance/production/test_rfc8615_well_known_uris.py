@@ -1,4 +1,4 @@
-from tigrbl_auth.cli.artifacts import build_openapi_contract, deployment_from_options
+from tba_auth.cli.artifacts import build_openapi_contract, deployment_from_options
 
 
 def test_rfc8615_well_known_endpoints_are_published_in_production_contract() -> None:

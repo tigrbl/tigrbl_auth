@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from tigrbl_identity_admin.bootstrap import DEFAULT_BOOTSTRAP_SUPERUSER_PASSWORD
-from tigrbl_identity_storage.tables import User
-from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
+from tba_runtime_identity_administration.bootstrap import DEFAULT_BOOTSTRAP_SUPERUSER_PASSWORD
+from tba_storage_core.tables import User
+from tba_provider_secret_hashing_bcrypt import BcryptSecretHasher
 
 
 def test_user_storage_does_not_materialize_a_bootstrap_secret() -> None:

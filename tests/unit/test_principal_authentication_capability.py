@@ -4,13 +4,13 @@ from datetime import datetime, timedelta, timezone
 
 import pytest
 
-from tigrbl_authenticator_client_secret_local import ClientSecretLocalAuthenticator
-from tigrbl_authenticator_password_local import PasswordLocalAuthenticator
-from tigrbl_api_key_authentication_capability import ApiKeyAuthenticationCapability
-from tigrbl_client_secret_authentication_capability import ClientSecretAuthenticationCapability
-from tigrbl_password_authentication_capability import PasswordAuthenticationCapability
-from tigrbl_service_key_authentication_capability import ServiceKeyAuthenticationCapability
-from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
+from tba_provider_authenticator_client_secret_local import ClientSecretLocalAuthenticator
+from tba_provider_authenticator_password_local import PasswordLocalAuthenticator
+from tba_capability_api_key_authentication import ApiKeyAuthenticationCapability
+from tba_capability_client_secret_authentication import ClientSecretAuthenticationCapability
+from tba_capability_password_authentication import PasswordAuthenticationCapability
+from tba_capability_service_key_authentication import ServiceKeyAuthenticationCapability
+from tba_provider_secret_hashing_bcrypt import BcryptSecretHasher
 
 
 @pytest.mark.asyncio
@@ -78,7 +78,7 @@ async def test_client_secret_capability_supports_lookup_and_loaded_record() -> N
 
 
 def test_token_and_introspection_callers_use_capability_not_model_method() -> None:
-    from tigrbl_identity_server import introspection_surface, token_request
+    from tba_server_identity import introspection_surface, token_request
 
     hasher = BcryptSecretHasher()
     record = {
@@ -203,7 +203,7 @@ async def test_api_key_capability_rejects_expired_or_inactive_records() -> None:
 
 
 def test_server_api_key_authentication_uses_capability_composition() -> None:
-    from tigrbl_identity_server.security import api_key_authentication
+    from tba_server_identity.security import api_key_authentication
 
     assert isinstance(
         api_key_authentication.api_key_authentication,
@@ -219,13 +219,13 @@ def test_server_api_key_authentication_uses_capability_composition() -> None:
             __import__("pathlib").Path(__file__).resolve().parents[2]
             / "pkgs"
             / "60-runtime"
-            / "tigrbl-identity-server"
+            / "tba-server-identity"
             / "src"
-            / "tigrbl_identity_server"
+            / "tba_server_identity"
             / "security"
             / module_name
         )
-        assert "tigrbl_authn_credentials.backends" not in path.read_text(
+        assert "tba_authn_credentials.backends" not in path.read_text(
             encoding="utf-8"
         )
 
@@ -233,9 +233,9 @@ def test_server_api_key_authentication_uses_capability_composition() -> None:
         __import__("pathlib").Path(__file__).resolve().parents[2]
         / "pkgs"
         / "60-runtime"
-        / "tigrbl-identity-server"
+        / "tba-server-identity"
         / "src"
-        / "tigrbl_identity_server"
+        / "tba_server_identity"
         / "token_runtime.py"
     ).read_text(encoding="utf-8")
     assert "_pwd_backend" not in token_runtime

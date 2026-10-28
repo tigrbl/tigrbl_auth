@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "`tigrbl_auth` MUST govern compliance reporting, access review workflows, entitlement management, and delegated administration as access-governance product capabilities, distinct from repository certification reports."
+summary: "`tba_auth` MUST govern compliance reporting, access review workflows, entitlement management, and delegated administration as access-governance product capabilities, distinct from repository certification reports."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -24,7 +24,7 @@ references: []
 body: |-
   ## Decision
   
-  `tigrbl_auth` MUST govern compliance reporting, access review workflows, entitlement management, and delegated administration as access-governance product capabilities, distinct from repository certification reports.
+  `tba_auth` MUST govern compliance reporting, access review workflows, entitlement management, and delegated administration as access-governance product capabilities, distinct from repository certification reports.
   
   ## Current Implementation Status
   

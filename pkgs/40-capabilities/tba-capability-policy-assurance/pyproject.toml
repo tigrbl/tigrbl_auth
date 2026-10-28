@@ -1,0 +1,20 @@
+[project]
+name = "tba-capability-policy-assurance"
+version = "0.4.0.dev2"
+description = "Authorization policy assurance capability."
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = [
+    "tba-concrete-capability==0.4.0.dev2",
+    "tba-concrete-authority-graph==0.4.0.dev2",
+    "tba-contracts-identity==0.4.0.dev2",
+    "tba-primitives-identity==0.4.0.dev2",
+    "tba-durability-authorization-policy==0.4.0.dev2",
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tba_capability_policy_assurance", from = "src" }]

@@ -1,9 +1,9 @@
 # Agent Identity and Delegation API + Agent Trust UIX Requirements Brief
 
-**Proposed pairing:** `tigrbl-auth-router-agent-delegation` + `@tigrbl-auth/agent-trust-uix`<br>
+**Proposed pairing:** `tba-router-agent-delegation` + `@tba/agent-trust-uix`<br>
 **Status:** New product surface; delegation, attenuation, authority graph, token exchange, proof binding, policy, workload, audit, and provenance foundations exist<br>
 **Prepared:** July 11, 2026<br>
-**Proposed router owner:** `pkgs/80-routers/tigrbl-auth-router-agent-delegation`<br>
+**Proposed router owner:** `pkgs/80-routers/tba-router-agent-delegation`<br>
 **Proposed protocol/profile owners:** OAuth/RAR/token-exchange, optional GNAP, transaction-token, tool-protocol, and agent-runtime adapters<br>
 **Proposed UIX owner:** `pkgs/105-ui/agent-trust-uix`
 
@@ -617,11 +617,11 @@ Guardrails include sponsor ambiguity, impersonation, authority amplification, ru
 
 ### Repository
 
-- `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/delegation/`;
-- `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/authority/graph.py`;
-- `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/delegation_grant/`;
-- `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/authority_derivation_graph/`;
-- `pkgs/20-providers/tigrbl-authz-policy/src/tigrbl_authz_policy/delegation.py`;
+- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/delegation/`;
+- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/authority/graph.py`;
+- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/delegation_grant/`;
+- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/authority_derivation_graph/`;
+- `pkgs/20-providers/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/delegation.py`;
 - authority derivation/attenuation capabilities and tests;
 - RFC 9396 RAR, RFC 8693 token exchange, resource indicators, DPoP/mTLS, token/delegation provenance, policy, workload, attestation, audit, and security-signal foundations;
 - `tests/security/planning/test_authorization_budgets_planning.py` as planning-only evidence;

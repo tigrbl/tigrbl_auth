@@ -1,4 +1,4 @@
-from tigrbl_auth.cli.main import build_parser
+from tba_auth.cli.main import build_parser
 
 
 def test_cli_includes_extended_operator_commands():

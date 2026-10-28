@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from tigrbl_identity_cli.cli.reports._execution_status import _clean_check_ignored, _negative_tests_for_claim
+from tba_cli_identity.cli.reports._execution_status import _clean_check_ignored, _negative_tests_for_claim
 
 
 PARTITIONED_TESTS = {

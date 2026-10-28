@@ -17,14 +17,14 @@ the migration program.
 
 Completed in this checkpoint:
 - removed release-path framework fallbacks from active runtime entry paths
-- rewrote `tigrbl_auth/framework.py` to a Tigrbl-only import surface
+- rewrote `tba_auth/framework.py` to a Tigrbl-only import surface
 - replaced private/non-public Tigrbl imports used in active runtime files
 - corrected auth context constant import to `tigrbl.config.constants`
 - finalized `plugin.py` and `gateway.py` as explicit Tigrbl composition roots
 - removed `hasattr(...)` release-path fallback checks from app/plugin/lifecycle
 - extended no-FastAPI/Starlette verification to runtime package, tests,
   scripts, and packaging metadata
-- added `tigrbl-auth verify --scope runtime-foundation`
+- added `tba-auth verify --scope runtime-foundation`
 - generated updated runtime foundation and no-FastAPI/Starlette reports
 
 Honest status:

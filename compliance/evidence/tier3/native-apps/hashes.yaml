@@ -1,7 +1,7 @@
 sha256:
   README.md: 73398b332265ce70503dafeef4b837e8f095b017cbc296ebb94bd2239487f3a4
   contracts/native-app-policy.json: 6d83d00540ecc6fb9c6b85c332ab9cf77bfecc4caa7ffd9a79f0d4653e9be242
-  contracts/tigrbl_auth.public.openapi.json: 6fb1f1f40bf24a13122a123d7ab0a32a900a85cbbdd9513a72b898b5ec11a63d
+  contracts/tba_auth.public.openapi.json: 6fb1f1f40bf24a13122a123d7ab0a32a900a85cbbdd9513a72b898b5ec11a63d
   environment.yaml: 1739053ea683a2c2e2a1b0fb189df6987f9026270d01eb371cf913dcb4b5da10
   execution.log: f198657a4829fc8e3a90f562e9cc7f3c21155548f45b0273ea427207f9a3b844
   http-transcript.yaml: b1675c57831ce61f8bc01094b32035e588b7d15ac9975107ea1962f9cb5089ca

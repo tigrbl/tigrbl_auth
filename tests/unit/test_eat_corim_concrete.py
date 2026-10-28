@@ -1,11 +1,11 @@
 import pytest
-from tigrbl_corim_concrete import (
+from tba_concrete_corim import (
     CORIM_REVISION,
     parse_corim,
     parse_corim_tag,
     validate_corim_tag,
 )
-from tigrbl_eat_concrete import (
+from tba_concrete_eat import (
     RFC_REVISION,
     EatEncoding,
     parse_detached_bundle,
@@ -13,7 +13,7 @@ from tigrbl_eat_concrete import (
     parse_eat_claims,
     validate_eat_claims,
 )
-from tigrbl_identity_contracts.attestation import AttestationEvidence
+from tba_contracts_identity.attestation import AttestationEvidence
 
 
 def test_eat_is_attestation_evidence_not_identity_or_authentication_token():

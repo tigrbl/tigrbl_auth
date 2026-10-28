@@ -1,8 +1,8 @@
 # Layer 90: Backend Apps
 
 This layer owns deployable backend applications. Distribution names use
-`tigrbl-auth-backend-app-*` and Python import roots use
-`tigrbl_auth_backend_app_*`.
+`tba-app-backend-*` and Python import roots use
+`tba_app_backend_*`.
 
 Each package closes over one product surface: its mounted layer-80 routers,
 app-local routers, tables, operations, local and global hooks, policy,

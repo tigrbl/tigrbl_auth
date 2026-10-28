@@ -2,7 +2,7 @@ from pathlib import Path
 
 import yaml
 
-from tigrbl_auth.cli.main import build_parser
+from tba_auth.cli.main import build_parser
 
 
 ROOT = Path(__file__).resolve().parents[2]

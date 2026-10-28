@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import tests.unit.formal_auth_helpers  # noqa: F401
 
-from tigrbl_authz_policy import (
+from tba_runtime_authorization_policy import (
     AuthorizationInvariant,
     AuthorizationSafetyPropertyEvaluator,
     InvariantEvaluation,

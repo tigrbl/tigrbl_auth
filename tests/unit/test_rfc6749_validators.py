@@ -2,13 +2,13 @@
 
 import pytest
 
-from tigrbl_auth.rfc.rfc6749 import (
+from tba_auth.rfc.rfc6749 import (
     RFC6749Error,
     enforce_grant_type,
     enforce_password_grant,
     enforce_authorization_code_grant,
 )
-from tigrbl_auth.runtime_cfg import settings
+from tba_auth.runtime_cfg import settings
 
 
 @pytest.fixture()

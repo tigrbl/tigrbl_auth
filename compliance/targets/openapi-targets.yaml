@@ -1,5 +1,5 @@
 schema_version: 1
-package: tigrbl_auth
+package: tba_auth
 target_family: contract
 scope: core
 targets:
@@ -16,5 +16,5 @@ targets:
   - http bearer
   - oauth2
   - openIdConnect
-  artifact: specs/openapi/tigrbl_auth.public.openapi.yaml
+  artifact: specs/openapi/tba_auth.public.openapi.yaml
   status: generated-live-from-deployment-metadata

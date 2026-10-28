@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from tigrbl_auth.cli.certification_evidence import current_environment_identity, runtime_identity
+from tba_auth.cli.certification_evidence import current_environment_identity, runtime_identity
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -45,35 +45,35 @@ def _relative_to_root(path: Path) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Clean-room install and runtime-path smoke for a certification profile.")
-    parser.add_argument("--runner", default=os.environ.get("TIGRBL_AUTH_RUNNER", ""), help="Runner profile to materialize in the runtime plan.")
+    parser.add_argument("--runner", default=os.environ.get("TBA_AUTH_RUNNER", ""), help="Runner profile to materialize in the runtime plan.")
     parser.add_argument(
         "--require-runner-installed",
         action="store_true",
-        default=_env_bool("TIGRBL_AUTH_EXPECT_RUNNER_INSTALLED"),
+        default=_env_bool("TBA_AUTH_EXPECT_RUNNER_INSTALLED"),
         help="Fail if the selected runner adapter is not backed by an installed module.",
     )
     parser.add_argument(
         "--probe-surfaces",
         action="store_true",
-        default=_env_bool("TIGRBL_AUTH_PROBE_SURFACES"),
+        default=_env_bool("TBA_AUTH_PROBE_SURFACES"),
         help="Probe discovery, JWKS, and public contract endpoints against the built ASGI app.",
     )
     parser.add_argument(
         "--require-surface-probes",
         action="store_true",
-        default=_env_bool("TIGRBL_AUTH_REQUIRE_SURFACE_PROBES"),
+        default=_env_bool("TBA_AUTH_REQUIRE_SURFACE_PROBES"),
         help="Fail if the runtime surface probes do not pass.",
     )
     parser.add_argument(
         "--artifact-dir",
-        default=os.environ.get("TIGRBL_AUTH_SMOKE_ARTIFACT_DIR", str(ROOT / "dist" / "runtime-smoke")),
+        default=os.environ.get("TBA_AUTH_SMOKE_ARTIFACT_DIR", str(ROOT / "dist" / "runtime-smoke")),
         help="Directory where the runtime smoke artifact should be written.",
     )
     args = parser.parse_args()
 
-    matrix_profile = os.environ.get("TIGRBL_AUTH_MATRIX_PROFILE", "unknown")
+    matrix_profile = os.environ.get("TBA_AUTH_MATRIX_PROFILE", "unknown")
     runner = args.runner.strip() or None
-    install_profile = os.environ.get("TIGRBL_AUTH_INSTALL_PROFILE", matrix_profile)
+    install_profile = os.environ.get("TBA_AUTH_INSTALL_PROFILE", matrix_profile)
     payload: dict[str, Any] = {
         "schema_version": 3,
         "identity": runtime_identity(matrix_profile),
@@ -97,13 +97,13 @@ def main() -> int:
     rc = 0
 
     try:
-        import tigrbl_auth  # noqa: F401
-        from tigrbl_auth_backend_app_core import build_app, build_application_runtime_plan
-        from tigrbl_auth.cli.runtime import probe_http_surface_endpoints
-        from tigrbl_auth.config.deployment import resolve_deployment
-        from tigrbl_auth.config.settings import settings
-        from tigrbl_auth.runtime import get_runner_adapter
-        from tigrbl_auth.tables.engine import dsn
+        import tba_auth  # noqa: F401
+        from tba_app_backend_core import build_app, build_application_runtime_plan
+        from tba_auth.cli.runtime import probe_http_surface_endpoints
+        from tba_auth.config.deployment import resolve_deployment
+        from tba_auth.config.settings import settings
+        from tba_auth.runtime import get_runner_adapter
+        from tba_auth.tables.engine import dsn
 
         deployment = resolve_deployment(settings)
         app = build_app(deployment=deployment)

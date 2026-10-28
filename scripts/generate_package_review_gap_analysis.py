@@ -15,7 +15,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from tigrbl_auth.repo_truth import (
+from tba_auth.repo_truth import (
     has_install_matrix_workflow,
     has_release_gate_workflow,
     workflow_paths,
@@ -69,7 +69,7 @@ def build_review() -> dict[str, Any]:
 
     return {
         "schema_version": 1,
-        "package": matrix.get("package", "tigrbl_auth"),
+        "package": matrix.get("package", "tba_auth"),
         "delivery_lifecycle": matrix.get("delivery_lifecycle", matrix.get("delivery_track", "unknown")),
         "version": pyproject.get("project", {}).get("version", "0.0.0"),
         "summary": {

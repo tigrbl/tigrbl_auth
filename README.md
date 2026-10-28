@@ -1,8 +1,12 @@
 ![Tigrbl Logo](https://raw.githubusercontent.com/swarmauri/swarmauri-sdk/master/assets/tigrbl_full_logo.png)
 
-# tigrbl_auth
+# tba_auth
 
 Tigrbl-native authentication and authorization package for the Tigrbl ecosystem.
+
+Active packages use the **TBA** namespace (`tba-*`, `tba_*`, and `@tba/*`).
+See the [namespace migration guide](docs/packaging/tba-namespace-migration.md)
+for import, environment, client, and legacy-package details.
 
 ## Repository state
 
@@ -45,9 +49,9 @@ Historical planning and scaffold-layout documents are retained under `docs/archi
 
 ## Runtime entrypoints
 
-- standalone gateway/application export: `tigrbl_auth.gateway:app`
-- application factory export: `tigrbl_auth_backend_app_public:app`
-- plugin installation: `tigrbl_auth.plugin:TigrblAuthPlugin`
+- standalone gateway/application export: `tba_auth.gateway:app`
+- application factory export: `tba_app_backend_public:app`
+- plugin installation: `tba_auth.plugin:TbaPlugin`
 
 ## Current runtime model
 
@@ -63,7 +67,7 @@ This checkpoint remains intentionally aligned to Tigrbl guidance:
 
 ## Downstream implementation best practices
 
-Downstream products should treat `tigrbl_auth` as the owner of the identity
+Downstream products should treat `tba_auth` as the owner of the identity
 schema and product surfaces. A downstream authn/authz platform should compose
 the app, plugin, split identity/authn/authz/protocol packages, and API/UIX front doors rather than
 creating parallel tables for realms, tenants, principals, roles, sessions,
@@ -71,7 +75,7 @@ clients, tokens, or keys.
 
 Use these boundaries:
 
-- Schema and default rows belong in upstream Tigrbl Auth table packages. Tables
+- Schema and default rows belong in upstream TBA table packages. Tables
   such as `Realm` and `Tenant` use Tigrbl's `Bootstrappable` contract with
   `DEFAULT_ROWS`; the default superuser is created by the upstream admin
   bootstrap service.
@@ -81,11 +85,11 @@ Use these boundaries:
   declarative bases or shadow identity tables.
 - Runtime serving should select an explicit runner profile. For Tigrcorn-first
   deployments, install the `tigrcorn` extra and launch with
-  `tigrbl-auth serve --server tigrcorn` or the `tigrcorn` CLI against the
+  `tba-auth serve --server tigrcorn` or the `tigrcorn` CLI against the
   downstream ASGI app.
 - Keep provenance order: backend capability first, API front door second, UIX
-  third. The platform-admin path is `tigrbl-identity-admin` ->
-  `tigrbl-auth-backend-app-platform-admin` -> `@tigrbl-auth/platform-admin-uix`; apply
+  third. The platform-admin path is `tba-runtime-identity-administration` ->
+  `tba-app-backend-platform-admin` -> `@tba/ui-platform-admin`; apply
   the same pattern to tenant-admin, developer, service-admin, public,
   my-account, and resource-validation surfaces.
 
@@ -118,13 +122,13 @@ The `tigrcorn` extra is pinned to a published Tigrcorn runner package for Python
 ## Run
 
 ```bash
-tigrbl-auth claims lint
+tba-auth claims lint
 ```
 
 Launch the standalone app on Tigrcorn through `uv`:
 
 ```bash
-uv run tigrbl-auth serve --server tigrcorn --profile production --host 127.0.0.1 --port 8000 --no-require-tls
+uv run tba-auth serve --server tigrcorn --profile production --host 127.0.0.1 --port 8000 --no-require-tls
 ```
 
 Or bring up the checked-in Docker example:
@@ -141,7 +145,7 @@ clobbering an existing local listener on `8000`.
 This repo includes a separate sample Python package at
 `pkgs/110-examples/acme-notes-cli/`.
 that demonstrates how another CLI can implement a `login` command on top of
-`tigrbl_auth` device authorization. The flow uses issuer discovery plus the
+`tba_auth` device authorization. The flow uses issuer discovery plus the
 canonical `POST /device_authorization` and `POST /token` endpoints.
 
 See `docs/examples/python-cli-device-login.md`.
@@ -150,10 +154,10 @@ or embed as a plugin:
 
 ```python
 from tigrbl import TigrblApp
-from tigrbl_auth.plugin import TigrblAuthPlugin
+from tba_auth.plugin import TbaPlugin
 
 app = TigrblApp()
-plugin = TigrblAuthPlugin()
+plugin = TbaPlugin()
 plugin.install(app)
 ```
 
@@ -162,10 +166,10 @@ plugin.install(app)
 - OAuth 2.1 alignment is tracked as a profile, not as a formal RFC claim.
 - `keys` is the canonical certified command family; `key` is no longer part of the certified operator surface.
 - public "independent" wording remains disallowed until preserved Tier 4 external peer bundles exist and promote the retained boundary.
-- The authoritative executable CLI surface is `pkgs/60-runtime/tigrbl-identity-cli/src/tigrbl_identity_cli/cli/metadata/` plus the generated `docs/reference/CLI_SURFACE.md`.
+- The authoritative executable CLI surface is `pkgs/60-runtime/tba-cli-identity/src/tba_cli_identity/cli/metadata/` plus the generated `docs/reference/CLI_SURFACE.md`.
 - A current checkpoint gap review remains published at `docs/compliance/PACKAGE_REVIEW_GAP_ANALYSIS.md`.
 - Supplemental supporting review/plan docs remain available at `docs/compliance/INDEPENDENT_PACKAGE_REVIEW_2026-03-27.md` and `docs/compliance/CERTIFIABLE_DELIVERY_PLAN_2026-03-27.md`; the authoritative active document is the SSOT, and the generated reports and top-level current-state docs are its current projections.
-- Dependency provenance for this checkpoint is preserved in `pyproject.toml`, `pkgs/60-runtime/tigrbl-identity-runtime/pyproject.toml`, and `uv.lock`.
+- Dependency provenance for this checkpoint is preserved in `pyproject.toml`, `pkgs/60-runtime/tba-runtime-identity/pyproject.toml`, and `uv.lock`.
 
 ## Known current blockers
 

@@ -21,7 +21,7 @@ body: |-
   ## Overview
   
   This specification defines freshness and convergence requirements for verifier
-  state used by protected-resource validation in `tigrbl_auth`.
+  state used by protected-resource validation in `tba_auth`.
   
   ## Decision Source
   

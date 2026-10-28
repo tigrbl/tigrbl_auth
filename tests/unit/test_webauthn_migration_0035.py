@@ -2,10 +2,10 @@ import importlib
 
 from sqlalchemy import create_engine, inspect
 
-from tigrbl_identity_storage.tables import CredentialWebAuthnPasskey
+from tba_storage_core.tables import CredentialWebAuthnPasskey
 
 migration = importlib.import_module(
-    "tigrbl_identity_storage.migrations.versions.0035_webauthn_rp_ceremony_and_credentials"
+    "tba_storage_core.migrations.versions.0035_webauthn_rp_ceremony_and_credentials"
 )
 
 

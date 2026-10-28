@@ -1,5 +1,5 @@
 import pytest
-from tigrbl_credential_protocol_w3c_vcdm import (
+from tba_protocol_credential_w3c_vcdm import (
     VCDM_2_RECOMMENDATION,
     parse_verifiable_credential,
     parse_verifiable_presentation,

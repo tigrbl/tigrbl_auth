@@ -1,22 +1,22 @@
 # Docker Local Runtime
 
-This runbook starts a `tigrbl_auth` example runtime on `Tigrcorn` using `uv`
+This runbook starts a `tba_auth` example runtime on `Tigrcorn` using `uv`
 inside Docker and exposes it on `http://127.0.0.1:8001`.
 
 ## Build and Run
 
 ```powershell
-docker build -f docker/Dockerfile.dev-tigrbl -t tigrbl-auth-local:latest .
-docker run -d --name tigrbl-auth-local -p 8001:8000 `
+docker build -f docker/Dockerfile.dev-tigrbl -t tba-auth-local:latest .
+docker run -d --name tba-auth-local -p 8001:8000 `
   -e AUTHN_ISSUER=http://localhost:8001 `
-  -e TIGRBL_AUTH_PROTECTED_RESOURCE_IDENTIFIER=http://localhost:8001/resource `
-  -e TIGRBL_AUTH_REQUIRE_TLS=false `
-  -e TIGRBL_AUTH_SESSION_COOKIE_FORCE_SECURE=false `
-  -e TIGRBL_AUTH_BOOTSTRAP_ADMIN_USERNAME=admin `
-  -e TIGRBL_AUTH_BOOTSTRAP_ADMIN_EMAIL=admin@example.test `
-  -e TIGRBL_AUTH_BOOTSTRAP_ADMIN_PASSWORD=AdminPass123! `
-  -e TIGRBL_AUTH_BOOTSTRAP_ADMIN_FORCE_PASSWORD_CHANGE=true `
-  tigrbl-auth-local:latest
+  -e TBA_AUTH_PROTECTED_RESOURCE_IDENTIFIER=http://localhost:8001/resource `
+  -e TBA_AUTH_REQUIRE_TLS=false `
+  -e TBA_AUTH_SESSION_COOKIE_FORCE_SECURE=false `
+  -e TBA_AUTH_BOOTSTRAP_ADMIN_USERNAME=admin `
+  -e TBA_AUTH_BOOTSTRAP_ADMIN_EMAIL=admin@example.test `
+  -e TBA_AUTH_BOOTSTRAP_ADMIN_PASSWORD=AdminPass123! `
+  -e TBA_AUTH_BOOTSTRAP_ADMIN_FORCE_PASSWORD_CHANGE=true `
+  tba-auth-local:latest
 ```
 
 Equivalent compose workflow:
@@ -37,8 +37,8 @@ The first login is expected to force a password rotation.
 Useful container checks:
 
 ```powershell
-docker ps --filter name=tigrbl-auth-local
-docker logs --tail 80 tigrbl-auth-local
+docker ps --filter name=tba-auth-local
+docker logs --tail 80 tba-auth-local
 ```
 
 ## CLI
@@ -46,10 +46,10 @@ docker logs --tail 80 tigrbl-auth-local
 Run the packaged operator CLI inside the container:
 
 ```powershell
-docker exec tigrbl-auth-local /app/.venv/bin/tigrbl-auth --help
-docker exec tigrbl-auth-local /app/.venv/bin/tigrbl-auth serve --server tigrcorn --check --profile production --format json
-docker exec tigrbl-auth-local /app/.venv/bin/tigrbl-auth discovery show --repo-root /app --profile production --format json
-docker exec tigrbl-auth-local /app/.venv/bin/tigrbl-auth spec validate --kind openrpc --repo-root /app --profile production --format json
+docker exec tba-auth-local /app/.venv/bin/tba-auth --help
+docker exec tba-auth-local /app/.venv/bin/tba-auth serve --server tigrcorn --check --profile production --format json
+docker exec tba-auth-local /app/.venv/bin/tba-auth discovery show --repo-root /app --profile production --format json
+docker exec tba-auth-local /app/.venv/bin/tba-auth spec validate --kind openrpc --repo-root /app --profile production --format json
 ```
 
 ## REST
@@ -72,7 +72,7 @@ launches the prebuilt virtual environment directly so runtime startup does not
 re-resolve optional extras:
 
 ```powershell
-/app/.venv/bin/tigrbl-auth serve --server tigrcorn --profile production --host 0.0.0.0 --port 8000 --proxy-headers --no-require-tls
+/app/.venv/bin/tba-auth serve --server tigrcorn --profile production --host 0.0.0.0 --port 8000 --proxy-headers --no-require-tls
 ```
 
 List the bootstrapped tenants over REST:
@@ -148,6 +148,6 @@ the database with a null `label` and fails the `api_keys.label` constraint.
 Leave the container running during local verification. To stop it later:
 
 ```powershell
-docker stop tigrbl-auth-local
-docker rm tigrbl-auth-local
+docker stop tba-auth-local
+docker rm tba-auth-local
 ```

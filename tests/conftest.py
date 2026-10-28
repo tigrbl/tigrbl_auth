@@ -1,5 +1,5 @@
 """
-Shared test configuration and fixtures for tigrbl_auth test suite.
+Shared test configuration and fixtures for tba_auth test suite.
 """
 
 import inspect
@@ -20,8 +20,8 @@ for _api_src in sorted((_REPO_ROOT / "pkgs" / "80-routers").glob("*/src")):
     if str(_api_src) not in sys.path:
         sys.path.insert(0, str(_api_src))
 
-from tigrbl_identity_contracts.protocol_configuration import bind_protocol_settings
-from tigrbl_identity_runtime.settings import settings as _protocol_test_settings
+from tba_contracts_identity.protocol_configuration import bind_protocol_settings
+from tba_runtime_identity.settings import settings as _protocol_test_settings
 
 bind_protocol_settings(_protocol_test_settings)
 
@@ -170,12 +170,12 @@ def mock_data_factory():
 
 @pytest.fixture
 def administrator_storage(monkeypatch: pytest.MonkeyPatch):
-    from tigrbl_identity_storage.tables.attribute_policy import AttributePolicy
-    from tigrbl_identity_storage.tables.delegated_admin_scope import DelegatedAdminScope
-    from tigrbl_identity_storage.tables.policy_condition import PolicyCondition
-    from tigrbl_identity_storage.tables.role import Role
-    from tigrbl_identity_storage.tables.tenant_membership import TenantMembership
-    from tigrbl_identity_storage_runtime import (
+    from tba_storage_core.tables.attribute_policy import AttributePolicy
+    from tba_storage_core.tables.delegated_admin_scope import DelegatedAdminScope
+    from tba_storage_core.tables.policy_condition import PolicyCondition
+    from tba_storage_core.tables.role import Role
+    from tba_storage_core.tables.tenant_membership import TenantMembership
+    from tba_runtime_identity_storage import (
         DelegatedAdminScopeRuntimeSpec,
         AttributePolicyRuntimeSpec,
         RoleRuntimeSpec,
@@ -216,7 +216,7 @@ def pytest_addoption(parser: pytest.Parser) -> None:
         choices=["core", "integration", "conformance", "security-negative", "interop", "extension", "all"],
         help=(
             "Select the certification lane to collect and run. Defaults to the "
-            "TIGRBL_AUTH_TEST_LANE environment variable, falling back to 'core'."
+            "TBA_AUTH_TEST_LANE environment variable, falling back to 'core'."
         ),
     )
 
@@ -272,10 +272,10 @@ def _require_runtime_stack() -> None:
 def _import_runtime_objects() -> dict[str, Any]:
     _require_runtime_stack()
     from tigrbl.engine import Engine, EngineSpec
-    from tigrbl_auth_backend_app_public import app
-    from tigrbl_auth_backend_app_core.surfaces import surface_api as composed_surface_api
-    from tigrbl_identity_storage_runtime.engine import get_db
-    from tigrbl_identity_runtime.engine_resolver import (
+    from tba_app_backend_public import app
+    from tba_app_backend_core.surfaces import surface_api as composed_surface_api
+    from tba_runtime_identity_storage.engine import get_db
+    from tba_runtime_identity.engine_resolver import (
         register_api_provider,
         resolve_api_provider,
         resolve_default_provider,
@@ -305,7 +305,7 @@ def _import_runtime_objects() -> dict[str, Any]:
 def isolate_operator_plane_state(monkeypatch: pytest.MonkeyPatch, tmp_path: Path):
     state_home = tmp_path.parent / "operator-plane-state"
     state_home.mkdir(exist_ok=True)
-    monkeypatch.setenv("TIGRBL_AUTH_OPERATOR_STATE_DIR", str(state_home))
+    monkeypatch.setenv("TBA_AUTH_OPERATOR_STATE_DIR", str(state_home))
     yield
 
 @pytest.fixture(scope="session", autouse=True)
@@ -325,7 +325,7 @@ def cleanup_runtime_secrets() -> Generator[None, None, None]:
 
 @pytest.fixture(autouse=True)
 def disable_tls_requirement():
-    from tigrbl_auth.runtime_cfg import settings
+    from tba_auth.runtime_cfg import settings
 
     original = settings.require_tls
     settings.require_tls = False
@@ -365,7 +365,7 @@ async def _runtime_engine_context(database_url: str):
     setattr(surface_api, "_ddl_executed", False)
     await surface_api.initialize()
     raw_engine, _ = provider.ensure()
-    from tigrbl_identity_storage_runtime.migrations.runtime import (
+    from tba_runtime_identity_storage.migrations.runtime import (
         _bootstrap_sqlite_schema,
         _ensure_sqlite_attachment_on_connection,
     )
@@ -373,8 +373,8 @@ async def _runtime_engine_context(database_url: str):
     sqlite_attachments = _bootstrap_sqlite_schema(raw_engine)
 
     def _create_runtime_tables(sync_conn):
-        from tigrbl_auth.tables import RestOltpTable
-        from tigrbl_identity_storage.migrations.helpers import ensure_schema
+        from tba_auth.tables import RestOltpTable
+        from tba_storage_core.migrations.helpers import ensure_schema
 
         _ensure_sqlite_attachment_on_connection(sync_conn, sqlite_attachments)
         ensure_schema(sync_conn)
@@ -429,7 +429,7 @@ def postgres_database_url() -> str | None:
 @pytest_asyncio.fixture
 async def test_db_engine(tmp_path_factory: pytest.TempPathFactory) -> AsyncGenerator[Any, None]:
     """Create and initialize a test database engine."""
-    db_path = tmp_path_factory.mktemp("runtime-db") / "tigrbl_auth_test.db"
+    db_path = tmp_path_factory.mktemp("runtime-db") / "tba_auth_test.db"
     test_database_url = f"sqlite+aiosqlite:///{db_path}"
     async with _runtime_engine_context(test_database_url) as engine:
         try:
@@ -460,8 +460,8 @@ async def override_get_db(test_db_engine: Any):
     runtime = _import_runtime_objects()
     app = runtime["app"]
     get_db = runtime["get_db"]
-    from tigrbl_auth.db import get_db as legacy_get_db
-    from tigrbl_auth.tables.engine import get_db as engine_get_db
+    from tba_auth.db import get_db as legacy_get_db
+    from tba_auth.tables.engine import get_db as engine_get_db
 
     _, maker = test_db_engine.provider.ensure()
     async with maker() as session:
@@ -499,7 +499,7 @@ async def async_client(override_get_db) -> AsyncGenerator[AsyncClient, None]:
 @pytest.fixture
 def enable_rfc7662():
     """Enable RFC 7662 token introspection for tests."""
-    from tigrbl_auth.runtime_cfg import settings
+    from tba_auth.runtime_cfg import settings
 
     original = settings.enable_rfc7662
     settings.enable_rfc7662 = True
@@ -513,9 +513,9 @@ def enable_rfc7662():
 def enable_rfc7009():
     """Enable RFC 7009 token revocation for tests."""
     _require_runtime_stack()
-    from tigrbl_auth.runtime_cfg import settings
-    from tigrbl_auth_backend_app_core.surfaces.revocation_surface import include_rfc7009
-    from tigrbl_identity_storage_runtime.revocation import reset_revocations
+    from tba_auth.runtime_cfg import settings
+    from tba_app_backend_core.surfaces.revocation_surface import include_rfc7009
+    from tba_runtime_identity_storage.revocation import reset_revocations
 
     app = _import_runtime_objects()["app"]
     original = settings.enable_rfc7009
@@ -535,15 +535,15 @@ def enable_rfc8693():
     _require_runtime_stack()
     from dataclasses import replace
 
-    from tigrbl_auth.runtime_cfg import settings
-    from tigrbl_auth_backend_app_core.surfaces.token_exchange_surface import include_rfc8693
-    from tigrbl_identity_runtime.deployment import resolve_deployment
+    from tba_auth.runtime_cfg import settings
+    from tba_app_backend_core.surfaces.token_exchange_surface import include_rfc8693
+    from tba_runtime_identity.deployment import resolve_deployment
 
     app = _import_runtime_objects()["app"]
     deployment_owner = getattr(app, "_app", app)
     original = settings.enable_rfc8693
     original_gate_deployment = getattr(deployment_owner, "deployment", None)
-    original_deployment = getattr(app.state, "tigrbl_auth_deployment", None)
+    original_deployment = getattr(app.state, "tba_auth_deployment", None)
     settings.enable_rfc8693 = True
     deployment = original_deployment or resolve_deployment(
         settings,
@@ -552,7 +552,7 @@ def enable_rfc8693():
     )
     flags = dict(deployment.flags)
     flags["enable_rfc8693"] = True
-    app.state.tigrbl_auth_deployment = replace(
+    app.state.tba_auth_deployment = replace(
         deployment,
         flags=flags,
         protocol_slices=tuple(
@@ -566,13 +566,13 @@ def enable_rfc8693():
         ),
     )
     if original_gate_deployment is not None:
-        deployment_owner.deployment = app.state.tigrbl_auth_deployment
+        deployment_owner.deployment = app.state.tba_auth_deployment
     include_rfc8693(app)
     try:
         yield
     finally:
         settings.enable_rfc8693 = original
-        app.state.tigrbl_auth_deployment = original_deployment
+        app.state.tba_auth_deployment = original_deployment
         if original_gate_deployment is not None:
             deployment_owner.deployment = original_gate_deployment
 
@@ -581,11 +581,11 @@ def enable_rfc8693():
 def enable_rfc8414():
     """Enable RFC 8414 authorization server metadata for tests."""
     _require_runtime_stack()
-    from tigrbl_auth.runtime_cfg import settings
-    from tigrbl_auth_backend_app_core.surfaces.authorization_server_metadata_surface import (
+    from tba_auth.runtime_cfg import settings
+    from tba_app_backend_core.surfaces.authorization_server_metadata_surface import (
         include_rfc8414,
     )
-    from tigrbl_auth_backend_app_core.surfaces.oidc_discovery_surface import include_oidc_discovery
+    from tba_app_backend_core.surfaces.oidc_discovery_surface import include_oidc_discovery
 
     app = _import_runtime_objects()["app"]
     original = settings.enable_rfc8414
@@ -601,7 +601,7 @@ def enable_rfc8414():
 @pytest_asyncio.fixture
 async def enable_rfc9126(db_session):
     """Enable RFC 9126 pushed authorization requests for tests."""
-    from tigrbl_auth.runtime_cfg import settings
+    from tba_auth.runtime_cfg import settings
 
     original = settings.enable_rfc9126
     settings.enable_rfc9126 = True
@@ -617,9 +617,9 @@ def temp_key_file(tmp_path_factory: pytest.TempPathFactory):
     temp_dir = tmp_path_factory.mktemp("runtime-keys")
     temp_kid = temp_dir / "jwt_ed25519.kid"
 
-    import tigrbl_identity_jose.crypto as crypto_module
-    import tigrbl_auth_protocol_oidc.id_token as oidc_module
-    import tigrbl_auth_protocol_oidc.standards.id_token as canonical_oidc_module
+    import tba_provider_identity_jose.crypto as crypto_module
+    import tba_protocol_oidc.id_token as oidc_module
+    import tba_protocol_oidc.standards.id_token as canonical_oidc_module
 
     original_dir = crypto_module._DEFAULT_KEY_DIR
     original_path = crypto_module._DEFAULT_KEY_PATH
@@ -657,11 +657,11 @@ def temp_key_file(tmp_path_factory: pytest.TempPathFactory):
 @pytest.fixture
 def mock_env_vars(monkeypatch: pytest.MonkeyPatch):
     """Mock environment variables for testing."""
-    monkeypatch.setenv("TIGRBL_AUTH_ISSUER", "https://authn.example.com")
-    monkeypatch.setenv("TIGRBL_AUTH_BASE_URL", "https://authn.example.com")
-    monkeypatch.setenv("TIGRBL_AUTH_ENV", "test")
+    monkeypatch.setenv("TBA_AUTH_ISSUER", "https://authn.example.com")
+    monkeypatch.setenv("TBA_AUTH_BASE_URL", "https://authn.example.com")
+    monkeypatch.setenv("TBA_AUTH_ENV", "test")
     yield {
-        "TIGRBL_AUTH_ISSUER": "https://authn.example.com",
-        "TIGRBL_AUTH_BASE_URL": "https://authn.example.com",
-        "TIGRBL_AUTH_ENV": "test",
+        "TBA_AUTH_ISSUER": "https://authn.example.com",
+        "TBA_AUTH_BASE_URL": "https://authn.example.com",
+        "TBA_AUTH_ENV": "test",
     }

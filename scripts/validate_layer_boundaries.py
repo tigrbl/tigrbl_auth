@@ -66,7 +66,7 @@ CAPABILITY_FORBIDDEN_BASE_LAYERS = frozenset(
     {"00-primitives", "01-storage", "02-contracts", "05-bases"}
 )
 CAPABILITY_IMPLEMENTATION_ROOTS = frozenset(
-    {"tigrbl_capability", "tigrbl_default_capability"}
+    {"tba_concrete_capability", "tba_concrete_capability_default"}
 )
 
 # Compatibility aggregators preserve old imports for one release. They do not
@@ -76,130 +76,130 @@ CAPABILITY_COMPATIBILITY_AGGREGATORS = frozenset({})
 # Layer 40 is intentionally sparse and opt-in.  Each entry names the complete
 # use case that would disappear if the orchestration package were removed.
 CAPABILITY_PURPOSES = {
-    "tigrbl-adaptive-authentication-capability": (
+    "tba-capability-adaptive-authentication": (
         "coordinate a normalized adaptive-authentication decision"
     ),
-    "tigrbl-administrative-resource-capability": (
+    "tba-capability-administrative-resource": (
         "coordinate generic administrative-resource lifecycle operations"
     ),
-    "tigrbl-access-governance-capability": (
+    "tba-capability-access-governance": (
         "coordinate entitlement management, provisioning, and access reviews"
     ),
-    "tigrbl-account-self-service-capability": (
+    "tba-capability-account-self-service": (
         "coordinate authenticated profile, password, session, and consent lifecycle"
     ),
-    "tigrbl-attestation-appraisal-capability": (
+    "tba-capability-attestation-appraisal": (
         "coordinate evidence appraisal and result recording"
     ),
-    "tigrbl-api-key-authentication-capability": (
+    "tba-capability-api-key-authentication": (
         "coordinate user API-key verification with durable credential operations"
     ),
-    "tigrbl-authenticator-attestation-capability": (
+    "tba-capability-authenticator-attestation": (
         "coordinate attestation format verification, metadata resolution, trust appraisal, and reappraisal"
     ),
-    "tigrbl-client-registration-capability": (
+    "tba-capability-client-registration": (
         "coordinate client and registration metadata lifecycle with optional "
         "audit recording"
     ),
-    "tigrbl-client-secret-authentication-capability": (
+    "tba-capability-client-secret-authentication": (
         "coordinate client-secret verification with client lookup"
     ),
-    "tigrbl-digital-credential-issuance-capability": (
+    "tba-capability-digital-credential-issuance": (
         "coordinate credential configuration, wallet trust, offers, and issuance"
     ),
-    "tigrbl-digital-credential-presentation-capability": (
+    "tba-capability-digital-credential-presentation": (
         "coordinate holder consent, replay defense, and presentation verification"
     ),
-    "tigrbl-identity-document-capability": (
+    "tba-capability-identity-document": (
         "coordinate identity-document parsing, resolution, and verification through injected implementations"
     ),
-    "tigrbl-possession-proof-capability": (
+    "tba-capability-possession-proof": (
         "coordinate proof verification with replay acceptance and holder-binding evaluation"
     ),
-    "tigrbl-protected-envelope-capability": (
+    "tba-capability-protected-envelope": (
         "coordinate protected-envelope issuance and verification through injected cryptographic implementations"
     ),
-    "tigrbl-workload-credential-brokering-capability": (
+    "tba-capability-workload-credential-brokering": (
         "coordinate delegated workload reference resolution, authorization, credential delivery, and trust material"
     ),
-    "tigrbl-identity-administration-capability": (
+    "tba-capability-identity-administration": (
         "coordinate identity lifecycle administration"
     ),
-    "tigrbl-key-administration-capability": (
+    "tba-capability-key-administration": (
         "coordinate key rotation and publication through injected implementations"
     ),
-    "tigrbl-mfa-challenge-capability": (
+    "tba-capability-mfa-challenge": (
         "coordinate begin and complete operations for an MFA challenge"
     ),
-    "tigrbl-operator-administration-capability": (
+    "tba-capability-operator-administration": (
         "coordinate policy-gated operator administration"
     ),
-    "tigrbl-password-authentication-capability": (
+    "tba-capability-password-authentication": (
         "coordinate password verification with identity lookup"
     ),
-    "tigrbl-delegated-access-negotiation-capability": (
+    "tba-capability-delegated-access-negotiation": (
         "coordinate negotiated grant requests, continuation, and token rotation"
     ),
-    "tigrbl-artifact-processing-capability": (
+    "tba-capability-artifact-processing": (
         "coordinate protocol-neutral artifact decoding, validation, encoding, "
         "and error normalization through replaceable processors"
     ),
-    "tigrbl-policy-evaluation-capability": (
+    "tba-capability-policy-evaluation": (
         "coordinate normalized policy evaluation, batch evaluation, entity search, "
         "and service description"
     ),
-    "tigrbl-policy-administration-capability": (
+    "tba-capability-policy-administration": (
         "coordinate RBAC, ABAC, delegated-administration, and policy simulation operations"
     ),
-    "tigrbl-policy-assurance-capability": (
+    "tba-capability-policy-assurance": (
         "coordinate authorization invariants, replay checks, and assurance reporting"
     ),
-    "tigrbl-authorization-request-staging-capability": (
+    "tba-capability-authorization-request-staging": (
         "coordinate durable pushed-request creation with optional audit recording"
     ),
-    "tigrbl-protected-resource-authorization-capability": (
+    "tba-capability-protected-resource-authorization": (
         "coordinate normalized protected-resource token and claims authorization"
     ),
-    "tigrbl-public-key-authentication-capability": (
+    "tba-capability-public-key-authentication": (
         "coordinate durable ceremony consumption, credential resolution, assertion verification, and session evidence"
     ),
-    "tigrbl-public-key-credential-management-capability": (
+    "tba-capability-public-key-credential-management": (
         "coordinate authenticated listing, naming, and revocation of registered public-key credentials"
     ),
-    "tigrbl-public-key-registration-capability": (
+    "tba-capability-public-key-registration": (
         "coordinate durable ceremony reservation, attestation verification, credential insertion, and audit evidence"
     ),
-    "tigrbl-replay-protection-capability": (
+    "tba-capability-replay-protection": (
         "coordinate normalized replay reservations across protocol mappings, "
         "durable repositories, and replaceable providers"
     ),
-    "tigrbl-realm-administration-capability": (
+    "tba-capability-realm-administration": (
         "coordinate realm lifecycle administration"
     ),
-    "tigrbl-security-event-delivery-capability": (
+    "tba-capability-security-event-delivery": (
         "coordinate security-event transmission, receipt, and recording"
     ),
-    "tigrbl-service-key-authentication-capability": (
+    "tba-capability-service-key-authentication": (
         "coordinate service-key verification with durable credential operations"
     ),
-    "tigrbl-tenant-administration-capability": (
+    "tba-capability-tenant-administration": (
         "coordinate tenant lifecycle administration"
     ),
-    "tigrbl-token-introspection-capability": (
+    "tba-capability-token-introspection": (
         "coordinate protocol-neutral token-state lookup and profile validation"
     ),
-    "tigrbl-token-issuance-capability": (
+    "tba-capability-token-issuance": (
         "coordinate token-pair issuance and refresh rotation across signing and "
         "durable lifecycle operations"
     ),
-    "tigrbl-token-exchange-capability": (
+    "tba-capability-token-exchange": (
         "coordinate normalized security-token exchange across verification, "
         "issuance, durable lineage, and audit operations"
     ),
-    "tigrbl-token-revocation-capability": (
+    "tba-capability-token-revocation": (
         "coordinate durable token revocation with optional audit recording"
     ),
-    "tigrbl-workload-identity-capability": (
+    "tba-capability-workload-identity": (
         "coordinate workload credential retrieval and identity verification"
     ),
 }
@@ -354,14 +354,14 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
 
     for package in packages:
         if package.layer == ROUTER_LAYER and not package.distribution.startswith(
-            "tigrbl-auth-router-"
+            "tba-router-"
         ):
             violations.append(
                 Violation(
                     kind="router-package-name",
                     package=package.distribution,
                     package_layer=package.layer,
-                    target="tigrbl-auth-router-*",
+                    target="tba-router-*",
                     target_layer=ROUTER_LAYER,
                     path=package.path.relative_to(root).as_posix(),
                     line=None,
@@ -369,14 +369,14 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
                 )
             )
         if package.layer == BACKEND_APP_LAYER and not package.distribution.startswith(
-            "tigrbl-auth-backend-app-"
+            "tba-app-backend-"
         ):
             violations.append(
                 Violation(
                     kind="backend-app-package-name",
                     package=package.distribution,
                     package_layer=package.layer,
-                    target="tigrbl-auth-backend-app-*",
+                    target="tba-app-backend-*",
                     target_layer=BACKEND_APP_LAYER,
                     path=package.path.relative_to(root).as_posix(),
                     line=None,
@@ -594,15 +594,15 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
         )
         if (
             not is_compatibility_aggregator
-            and "tigrbl-capability" not in package.dependencies
-            and ("tigrbl-default-capability" not in package.dependencies)
+            and "tba-concrete-capability" not in package.dependencies
+            and ("tba-concrete-capability-default" not in package.dependencies)
         ):
             violations.append(
                 Violation(
                     kind="missing-capability-implementation-dependency",
                     package=package.distribution,
                     package_layer=package.layer,
-                    target="tigrbl-capability",
+                    target="tba-concrete-capability",
                     target_layer="10-concrete",
                     path=manifest.relative_to(root).as_posix(),
                     line=None,

@@ -5,14 +5,14 @@ from pathlib import Path
 
 from sqlalchemy import create_engine
 
-from tigrbl_identity_storage_operator.tables import OperatorRecord
+from tba_storage_operator.tables import OperatorRecord
 
 
 ROOT = Path(__file__).resolve().parents[2]
-STORAGE_ROOT = ROOT / "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage"
+STORAGE_ROOT = ROOT / "pkgs/01-storage/tba-storage-core/src/tba_storage_core"
 RUNTIME_ROOT = (
     ROOT
-    / "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime"
+    / "pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage"
 )
 
 
@@ -50,7 +50,7 @@ def test_operator_migration_compiles_each_index_to_distinct_driver_sql(
     monkeypatch,
 ) -> None:
     migration = importlib.import_module(
-        "tigrbl_identity_storage_operator.migrations.versions."
+        "tba_storage_operator.migrations.versions."
         "469839b2_d339_544a_b747_fd68b6a5f235_initial_schema"
     )
     engine = create_engine("sqlite+pysqlite:///:memory:")

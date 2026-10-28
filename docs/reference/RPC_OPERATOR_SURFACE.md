@@ -4,13 +4,13 @@
 
 The operator/admin control plane is now implementation-backed.
 
-The authoritative RPC surface is owned by `tigrbl_auth/api/rpc/`:
+The authoritative RPC surface is owned by `tba_auth/api/rpc/`:
 
 - `registry.py` owns method registration and deployment filtering
 - `methods/` owns executable operator/admin handlers
 - `schemas/` owns request/response models used by both handlers and OpenRPC
-- `pkgs/60-runtime/tigrbl-identity-cli/src/tigrbl_identity_cli/cli/artifacts/` generates OpenRPC directly from the live registry
-- `pkgs/60-runtime/tigrbl-identity-cli/src/tigrbl_identity_cli/cli/reports/` validates that committed OpenRPC methods match the implementation-backed registry exactly
+- `pkgs/60-runtime/tba-cli-identity/src/tba_cli_identity/cli/artifacts/` generates OpenRPC directly from the live registry
+- `pkgs/60-runtime/tba-cli-identity/src/tba_cli_identity/cli/reports/` validates that committed OpenRPC methods match the implementation-backed registry exactly
 
 ## Contract generation model
 
@@ -85,8 +85,8 @@ This removes the prior detached catalog-only posture.
 
 Every OpenRPC method must map to:
 
-- an executable handler under `tigrbl_auth/api/rpc/methods/`
-- a request model and result model under `tigrbl_auth/api/rpc/schemas/`
+- an executable handler under `tba_auth/api/rpc/methods/`
+- a request model and result model under `tba_auth/api/rpc/schemas/`
 - an owner-module path embedded in the committed OpenRPC artifact
 - an active method entry in the deployment-resolved registry
 
@@ -96,7 +96,7 @@ The repository now fails contract validation when:
 
 - a committed OpenRPC method is missing from the implementation registry
 - an implementation-backed method is absent from the committed OpenRPC artifact
-- an OpenRPC method omits `x-tigrbl-auth.owner_module`
+- an OpenRPC method omits `x-tba-auth.owner_module`
 - an owner-module path in the committed OpenRPC artifact does not exist
 - admin-rpc is active but the contract has no methods or no schema components
 

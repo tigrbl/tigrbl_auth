@@ -1,5 +1,5 @@
 schema_version: 1
-package: tigrbl_auth
+package: tba_auth
 target_family: profile
 scope: alignment-only
 targets:

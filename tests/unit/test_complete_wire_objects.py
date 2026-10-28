@@ -1,11 +1,11 @@
 import json
 import pytest
-from tigrbl_identity_core.base64url import base64url_encode
-from tigrbl_jws_concrete import parse_jws_json, validate_unencoded_payload_headers
-from tigrbl_jwe_concrete import parse_jwe_json
-from tigrbl_jwt_concrete import validate_registered_claims
-from tigrbl_cose_concrete import sig_structure
-from tigrbl_cwt_concrete import CwtClaimsSet, decode_tagged_cwt, encode_tagged_cwt
+from tba_primitives_identity.base64url import base64url_encode
+from tba_concrete_jws import parse_jws_json, validate_unencoded_payload_headers
+from tba_concrete_jwe import parse_jwe_json
+from tba_concrete_jwt import validate_registered_claims
+from tba_concrete_cose import sig_structure
+from tba_concrete_cwt import CwtClaimsSet, decode_tagged_cwt, encode_tagged_cwt
 
 
 def b64(value: bytes) -> str:

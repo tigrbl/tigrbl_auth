@@ -3682,7 +3682,7 @@ bindings:
   - RFC 8417
   profile: null
   positive_tests:
-  - pkgs/10-concrete/tigrbl-set-concrete/tests/test_rfc8417.py
+  - pkgs/10-concrete/tba-concrete-set/tests/test_rfc8417.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/jwt/
@@ -8001,7 +8001,7 @@ bindings:
   - RFC 8417
   profile: null
   positive_tests:
-  - pkgs/10-concrete/tigrbl-set-concrete/tests/test_rfc8417.py
+  - pkgs/10-concrete/tba-concrete-set/tests/test_rfc8417.py
   negative_tests:
   - tests/negative/test_certification_attack_paths.py
   - tests/negative/test_hardening_runtime_enforcement.py
@@ -9136,7 +9136,7 @@ bindings:
   - RFC 8417
   profile: null
   positive_tests:
-  - pkgs/10-concrete/tigrbl-set-concrete/tests/test_rfc8417.py
+  - pkgs/10-concrete/tba-concrete-set/tests/test_rfc8417.py
   negative_tests:
   - tests/negative/test_certification_attack_paths.py
   - tests/negative/test_hardening_runtime_enforcement.py

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from tigrbl_identity_storage.tables import (
+from tba_storage_core.tables import (
     AuthzVerificationReport,
     ControlCorrectnessReport,
     PluginDescriptorRecord,
@@ -43,7 +43,7 @@ def test_optional_contract_state_tables_are_storage_owned() -> None:
     }
 
     for model, table_name in expected.items():
-        assert model.__module__.startswith("tigrbl_identity_storage.tables.")
+        assert model.__module__.startswith("tba_storage_core.tables.")
         assert model.__tablename__ == table_name
         assert getattr(model, "__table__", None) is not None
         assert getattr(model, "handlers", None) is not None

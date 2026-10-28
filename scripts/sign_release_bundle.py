@@ -9,9 +9,9 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from tigrbl_auth.cli.artifacts import deployment_from_options
-from tigrbl_auth.cli.reports import build_release_bundle, sign_release_bundle
-from tigrbl_identity_author.release_signing import load_signer
+from tba_auth.cli.artifacts import deployment_from_options
+from tba_auth.cli.reports import build_release_bundle, sign_release_bundle
+from tba_runtime_identity_authoring.release_signing import load_signer
 
 
 PROFILES = ("baseline", "production", "hardening", "fapi2-security", "peer-claim")
@@ -28,7 +28,7 @@ def _version(repo_root: Path) -> str:
 
 def main() -> int:
     payloads = []
-    shared_signer = load_signer(signing_key=os.environ.get("TIGRBL_AUTH_RELEASE_SIGNING_KEY"), signer_id=os.environ.get("TIGRBL_AUTH_RELEASE_SIGNER_ID"))
+    shared_signer = load_signer(signing_key=os.environ.get("TBA_AUTH_RELEASE_SIGNING_KEY"), signer_id=os.environ.get("TBA_AUTH_RELEASE_SIGNER_ID"))
     shared_signing_key = shared_signer.private_key_pem()
     version = _version(ROOT)
     for profile in PROFILES:

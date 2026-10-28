@@ -1,9 +1,9 @@
 from time import time
 
-from tigrbl_key_attestation_verifier import ProfiledKeyAttestationVerifier
-from tigrbl_platform_attestation_provider import PlatformAttestationProvider
+from tba_provider_key_attestation_verifier import ProfiledKeyAttestationVerifier
+from tba_provider_platform_attestation import PlatformAttestationProvider
 from tigrbl_security_event_replay_store import InMemorySecurityEventReplayStore
-from tigrbl_wallet_attestation_verifier import ProfiledWalletAttestationVerifier
+from tba_provider_wallet_attestation_verifier import ProfiledWalletAttestationVerifier
 
 
 def _wallet_claims(**overrides):

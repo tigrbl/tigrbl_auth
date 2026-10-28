@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from tigrbl_security_proof_pkce import (
+from tba_provider_security_proof_pkce import (
     PKCE_CHALLENGE_METHOD,
     PkceProofProvider,
     make_pkce_verifier,
@@ -10,7 +10,7 @@ from tigrbl_security_proof_pkce import (
     validate_pkce_verifier,
     verify_pkce_s256_challenge,
 )
-from tigrbl_security_trust_contracts import Artifact, IssueRequest, VerifyRequest
+from tba_contracts_security_trust import Artifact, IssueRequest, VerifyRequest
 
 
 @pytest.mark.unit

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from types import SimpleNamespace
 
-from tigrbl_identity_server.security.token_revocation import (
+from tba_server_identity.security.token_revocation import (
     build_rfc7009_revocation_service,
     token_revocation,
 )

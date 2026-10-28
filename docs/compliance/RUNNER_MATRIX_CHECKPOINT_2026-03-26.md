@@ -42,12 +42,12 @@ A runtime-profile manifest now has to carry evidence that the environment actual
 - application probe passed
 - runtime HTTP surface probe passed
 - runner module was available for runner-backed profiles
-- `tigrbl-auth serve --check --server <runner>` passed for runner-backed profiles
+- `tba-auth serve --check --server <runner>` passed for runner-backed profiles
 
 This was implemented by tightening:
 
 - `scripts/record_validated_run.py`
-- `tigrbl_auth/cli/reports.py`
+- `tba_auth/cli/reports.py`
 
 ### 2. The base runtime smoke now probes HTTP surfaces as well
 
@@ -147,7 +147,7 @@ Runner matrix is **not** exit-complete yet. The remaining work is external execu
 - `scripts/clean_room_profile_smoke.py`
 - `scripts/record_validated_run.py`
 - `scripts/collect_validated_artifact_downloads.py`
-- `tigrbl_auth/cli/reports.py`
+- `tba_auth/cli/reports.py`
 - `tox.ini`
 - `.github/workflows/ci-release-gates.yml`
 - `tests/unit/test_validated_execution_runtime_matrix.py`

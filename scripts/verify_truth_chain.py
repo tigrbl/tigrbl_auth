@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from tigrbl_auth.cli.truth import verify_truth_chain
+from tba_auth.cli.truth import verify_truth_chain
 
 
 def main() -> int:

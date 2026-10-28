@@ -16,7 +16,7 @@ references: []
 body: |-
   ## Decision
 
-  `tigrbl_auth` may define paired development profiles for production-facing and certification-facing runtime profiles.
+  `tba_auth` may define paired development profiles for production-facing and certification-facing runtime profiles.
 
   A development profile is a local-operator and developer-support posture derived from an existing governed runtime profile. It exists to expose development-only visibility surfaces such as:
 

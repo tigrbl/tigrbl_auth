@@ -105,7 +105,7 @@
     "introspection_endpoint": "https://authn.example.com/introspect",
     "registration_endpoint": "https://authn.example.com/register"
   },
-  "tigrbl_auth_capabilities": [
+  "tba_auth_capabilities": [
     "account-consents",
     "account-credentials",
     "account-profile",

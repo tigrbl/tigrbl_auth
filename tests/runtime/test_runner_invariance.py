@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from tigrbl_auth.cli.runtime import build_runner_profile_report
-from tigrbl_auth.config.deployment import resolve_deployment
-from tigrbl_auth.runtime import build_runtime_hash_matrix, registered_runner_names, runner_registry_manifest
+from tba_auth.cli.runtime import build_runner_profile_report
+from tba_auth.config.deployment import resolve_deployment
+from tba_auth.runtime import build_runtime_hash_matrix, registered_runner_names, runner_registry_manifest
 
 
 def test_runner_profile_hashes_and_registry_are_complete_and_invariant() -> None:

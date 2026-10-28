@@ -4,8 +4,8 @@ import datetime as dt
 
 import pytest
 
-from tigrbl_identity_storage.tables import TokenRecord
-from tigrbl_identity_storage_runtime import (
+from tba_storage_core.tables import TokenRecord
+from tba_runtime_identity_storage import (
     TokenRecordRuntimeSpec,
     initializeIdentityRuntimeTables,
     introspect_token_record,

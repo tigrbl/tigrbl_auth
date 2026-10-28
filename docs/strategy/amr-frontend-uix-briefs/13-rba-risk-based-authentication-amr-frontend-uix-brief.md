@@ -151,4 +151,4 @@ Analytics records safe decision class, step-up method, completion, fallback, rev
 
 - [AMR screen support matrix](../../amr-screen-support-matrix.md)
 - [Universal authenticator ceremony brief](../uix-pairing-briefs/40-authenticator-ceremony-api-universal-authenticator-pages-uix.md)
-- [Canonical AMR vocabulary](../../../pkgs/10-concrete/tigrbl-jose-concrete/src/tigrbl_jose_concrete/amr.py)
+- [Canonical AMR vocabulary](../../../pkgs/10-concrete/tba-concrete-jose/src/tba_concrete_jose/amr.py)

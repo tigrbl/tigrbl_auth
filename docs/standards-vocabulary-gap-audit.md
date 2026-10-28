@@ -4,7 +4,7 @@ Status: repository audit and implementation-planning document
 
 Date: 2026-07-11
 
-Scope: `tigrbl_auth` OAuth, OpenID Connect, identity-assurance, authorization-policy, verifiable-credential, decentralized-identity, zero-trust, workload-identity, and attestation vocabulary
+Scope: `tba_auth` OAuth, OpenID Connect, identity-assurance, authorization-policy, verifiable-credential, decentralized-identity, zero-trust, workload-identity, and attestation vocabulary
 
 ## Executive summary
 
@@ -179,8 +179,8 @@ The retained OAuth/OIDC/JOSE boundary is represented primarily in:
 - `compliance/targets/oidc-targets.yaml`;
 - `compliance/targets/extension-targets.yaml`;
 - `compliance/targets/alignment-targets.yaml`;
-- `pkgs/50-protocols/tigrbl-auth-protocol-oauth`;
-- `pkgs/50-protocols/tigrbl-auth-protocol-oidc`; and
+- `pkgs/50-protocols/tba-protocol-oauth`;
+- `pkgs/50-protocols/tba-protocol-oidc`; and
 - the associated compliance mappings, tests, evidence, and generated reports.
 
 Implemented/tracked OAuth vocabulary includes authorization and token endpoints, bearer-token use, PKCE, authorization-server metadata, protected-resource metadata, revocation, introspection, dynamic registration and registration management, native apps, device authorization, token exchange, mTLS client authentication and certificate-bound tokens, resource indicators, JWT access tokens, JAR, PAR, issuer identification, RAR `authorization_details`, DPoP, assertion grants/client authentication, and the OAuth Security BCP.
@@ -886,7 +886,7 @@ Suggested conceptual ownership:
 | SET events and delivery | shared-signals/security-events package |
 | GNAP | independent authorization protocol package |
 
-The existing `tigrbl-auth-protocol-oauth` and `tigrbl-auth-protocol-oidc` packages should expose integration points, not become owners of every credential, policy, DID, and attestation schema.
+The existing `tba-protocol-oauth` and `tba-protocol-oidc` packages should expose integration points, not become owners of every credential, policy, DID, and attestation schema.
 
 ## 22. Compliance-target model
 

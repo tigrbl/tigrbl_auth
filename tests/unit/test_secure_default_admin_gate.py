@@ -6,8 +6,8 @@ from types import SimpleNamespace
 import pytest
 from httpx import ASGITransport, AsyncClient
 
-from tigrbl_auth_backend_app_core import build_app
-from tigrbl_auth.config.deployment import resolve_deployment
+from tba_app_backend_core import build_app
+from tba_auth.config.deployment import resolve_deployment
 
 
 def _settings(tmp_path, key: str = "test-admin-key") -> SimpleNamespace:
@@ -15,12 +15,12 @@ def _settings(tmp_path, key: str = "test-admin-key") -> SimpleNamespace:
 
 
 def test_admin_gate_canonical_package_owns_public_surface():
-    canonical = importlib.import_module("tigrbl_auth_router_admin_gate")
-    facade = importlib.import_module("tigrbl_auth.security.admin_gate")
+    canonical = importlib.import_module("tba_router_admin_gate")
+    facade = importlib.import_module("tba_auth.security.admin_gate")
 
     assert facade is canonical
     with pytest.raises(ModuleNotFoundError):
-        importlib.import_module("tigrbl_identity_server.security.admin_gate")
+        importlib.import_module("tba_server_identity.security.admin_gate")
 
 
 @pytest.mark.asyncio
@@ -79,7 +79,7 @@ async def test_admin_enabled_runtime_defers_openapi_payload_to_upstream_app(tmp_
 
 
 @pytest.mark.asyncio
-async def test_admin_enabled_runtime_openapi_declares_tigrbl_security_dependencies(tmp_path):
+async def test_admin_enabled_runtime_openapi_declares_tba_security_dependencies(tmp_path):
     deployment = resolve_deployment(plugin_mode="mixed")
     app = build_app(_settings(tmp_path), deployment=deployment)
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:

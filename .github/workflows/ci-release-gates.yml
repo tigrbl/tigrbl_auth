@@ -8,23 +8,23 @@ permissions:
   contents: read
 
 env:
-  TIGRBL_AUTH_RELEASE_RUNTIME_ENVS: >-
+  TBA_AUTH_RELEASE_RUNTIME_ENVS: >-
     py310-base py311-base py312-base
     py310-sqlite-uvicorn py311-sqlite-uvicorn py312-sqlite-uvicorn
     py310-postgres-hypercorn py311-postgres-hypercorn py312-postgres-hypercorn
     py311-tigrcorn py312-tigrcorn
     py310-devtest py311-devtest py312-devtest
-  TIGRBL_AUTH_RELEASE_LANE_ENVS: >-
+  TBA_AUTH_RELEASE_LANE_ENVS: >-
     py310-test-core py311-test-core py312-test-core
     py310-test-integration py311-test-integration py312-test-integration
     py310-test-conformance py311-test-conformance py312-test-conformance
     py310-test-security-negative py311-test-security-negative py312-test-security-negative
     py310-test-interop py311-test-interop py312-test-interop
-  TIGRBL_AUTH_RELEASE_EXTRA_ENVS: >-
+  TBA_AUTH_RELEASE_EXTRA_ENVS: >-
     py311-gates py311-test-extension py311-migration-portability py311-final-certification
-  TIGRBL_AUTH_RELEASE_REQUIRED_PROBES: >-
+  TBA_AUTH_RELEASE_REQUIRED_PROBES: >-
     --runner uvicorn --runner hypercorn --runner tigrcorn
-  TIGRBL_AUTH_RELEASE_ARTIFACT_PATHS: >-
+  TBA_AUTH_RELEASE_ARTIFACT_PATHS: >-
     dist/install-substrate dist/runtime-smoke
 
 jobs:

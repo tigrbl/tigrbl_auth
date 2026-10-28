@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from tigrbl_authz_policy.control_plane import (
+from tba_runtime_authorization_policy.control_plane import (
     ADMIN_CLIENT_FIELDS,
     PUBLIC_CLIENT_FIELDS,
     ABACAdministrator,
@@ -17,18 +17,18 @@ from tigrbl_authz_policy.control_plane import (
     filter_visible_tenants,
     simulate_policy,
 )
-from tigrbl_authz_policy import (
+from tba_runtime_authorization_policy import (
     ABACAdministrator as CanonicalABACAdministrator,
     DynamicCondition as CanonicalDynamicCondition,
 )
-from tigrbl_authz_policy import (
+from tba_runtime_authorization_policy import (
     DelegatedAdministrator as CanonicalDelegatedAdministrator,
 )
-from tigrbl_authz_policy import PolicyEngine as CanonicalPolicyEngine
-from tigrbl_authz_policy import (
+from tba_runtime_authorization_policy import PolicyEngine as CanonicalPolicyEngine
+from tba_runtime_authorization_policy import (
     ServiceIdentityRegistry as CanonicalServiceIdentityRegistry,
 )
-from tigrbl_authz_policy import (
+from tba_runtime_authorization_policy import (
     RBACAdministrator as CanonicalRBACAdministrator,
 )
 

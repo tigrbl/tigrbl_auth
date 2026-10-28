@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "`tigrbl_auth` MUST treat verifier-grade resource contracts as first-class authority objects with explicit verifier-state obligations."
+summary: "`tba_auth` MUST treat verifier-grade resource contracts as first-class authority objects with explicit verifier-state obligations."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -20,7 +20,7 @@ references: []
 body: |-
   ## Decision
   
-  `tigrbl_auth` MUST treat verifier-grade resource contracts as first-class
+  `tba_auth` MUST treat verifier-grade resource contracts as first-class
   authority objects rather than as metadata side effects of endpoint code.
   
   Resource contracts MUST own, at minimum:

@@ -10,9 +10,9 @@ except ModuleNotFoundError:  # pragma: no cover - Python < 3.11
 
 
 ROOT = Path(__file__).resolve().parents[2]
-FACADE_SRC = ROOT / "pkgs" / "70-facade" / "tigrbl-auth" / "src"
-CLI_SRC = ROOT / "pkgs" / "60-runtime" / "tigrbl-identity-cli" / "src"
-OPERATOR_SRC = ROOT / "pkgs" / "60-runtime" / "tigrbl-identity-operator" / "src"
+FACADE_SRC = ROOT / "pkgs" / "70-facade" / "tba-auth" / "src"
+CLI_SRC = ROOT / "pkgs" / "60-runtime" / "tba-cli-identity" / "src"
+OPERATOR_SRC = ROOT / "pkgs" / "60-runtime" / "tba-operator-identity" / "src"
 
 for value in (str(ROOT), str(FACADE_SRC), str(CLI_SRC), str(OPERATOR_SRC)):
     if value in sys.path:
@@ -30,10 +30,10 @@ def _clear_cli_modules() -> None:
         sys.path.insert(0, value)
     for name in list(sys.modules):
         if (
-            name == "tigrbl_auth"
-            or name.startswith("tigrbl_auth.cli")
-            or name.startswith("tigrbl_identity_cli")
-            or name.startswith("tigrbl_identity_operator.cli")
+            name == "tba_auth"
+            or name.startswith("tba_auth.cli")
+            or name.startswith("tba_cli_identity")
+            or name.startswith("tba_operator_identity.cli")
         ):
             sys.modules.pop(name, None)
 
@@ -41,22 +41,22 @@ def _clear_cli_modules() -> None:
 def test_identity_cli_package_owns_canonical_entrypoint() -> None:
     _clear_cli_modules()
 
-    from tigrbl_identity_cli.cli.main import main
-    from tigrbl_identity_cli.cli.metadata import build_parser
+    from tba_cli_identity.cli.main import main
+    from tba_cli_identity.cli.metadata import build_parser
 
     assert callable(main)
-    assert build_parser().prog == "tigrbl-auth"
+    assert build_parser().prog == "tba-auth"
 
 
 def test_legacy_cli_import_paths_are_shims_to_identity_cli() -> None:
     _clear_cli_modules()
 
-    from tigrbl_auth.cli.handlers import HANDLER_MAP as auth_handlers
-    from tigrbl_auth.cli.metadata import COMMAND_SPECS as auth_specs
-    from tigrbl_identity_cli.cli.handlers import HANDLER_MAP as cli_handlers
-    from tigrbl_identity_cli.cli.metadata import COMMAND_SPECS as cli_specs
-    from tigrbl_identity_operator.cli.handlers import HANDLER_MAP as operator_handlers
-    from tigrbl_identity_operator.cli.metadata import COMMAND_SPECS as operator_specs
+    from tba_auth.cli.handlers import HANDLER_MAP as auth_handlers
+    from tba_auth.cli.metadata import COMMAND_SPECS as auth_specs
+    from tba_cli_identity.cli.handlers import HANDLER_MAP as cli_handlers
+    from tba_cli_identity.cli.metadata import COMMAND_SPECS as cli_specs
+    from tba_operator_identity.cli.handlers import HANDLER_MAP as operator_handlers
+    from tba_operator_identity.cli.metadata import COMMAND_SPECS as operator_specs
 
     assert auth_handlers is cli_handlers
     assert operator_handlers is cli_handlers
@@ -66,13 +66,13 @@ def test_legacy_cli_import_paths_are_shims_to_identity_cli() -> None:
 
 def test_legacy_cli_packages_do_not_keep_per_module_shim_files() -> None:
     legacy_cli_roots = [
-        ROOT / "pkgs" / "70-facade" / "tigrbl-auth" / "src" / "tigrbl_auth" / "cli",
+        ROOT / "pkgs" / "70-facade" / "tba-auth" / "src" / "tba_auth" / "cli",
         ROOT
         / "pkgs"
         / "60-runtime"
-        / "tigrbl-identity-operator"
+        / "tba-operator-identity"
         / "src"
-        / "tigrbl_identity_operator"
+        / "tba_operator_identity"
         / "cli",
     ]
 
@@ -83,16 +83,16 @@ def test_legacy_cli_packages_do_not_keep_per_module_shim_files() -> None:
 def test_workspace_console_script_delegates_to_identity_cli_without_packaging_root() -> None:
     pyproject = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
 
-    assert pyproject["project"]["scripts"]["tigrbl-auth"] == "tigrbl_identity_cli.cli.main:main"
+    assert pyproject["project"]["scripts"]["tba-auth"] == "tba_cli_identity.cli.main:main"
     assert pyproject["tool"]["uv"]["package"] is False
-    assert "tigrbl_auth_workspace" not in (ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    assert "tba_auth_workspace" not in (ROOT / "pyproject.toml").read_text(encoding="utf-8")
     assert "." not in pyproject["tool"]["pytest"]["ini_options"]["pythonpath"]
-    assert "pkgs/60-runtime/tigrbl-identity-cli/src" in pyproject["tool"]["pytest"]["ini_options"]["pythonpath"]
+    assert "pkgs/60-runtime/tba-cli-identity/src" in pyproject["tool"]["pytest"]["ini_options"]["pythonpath"]
 
 
 def test_identity_cli_declares_python_310_toml_reader_dependency() -> None:
     pyproject = tomllib.loads(
-        (ROOT / "pkgs" / "60-runtime" / "tigrbl-identity-cli" / "pyproject.toml").read_text(
+        (ROOT / "pkgs" / "60-runtime" / "tba-cli-identity" / "pyproject.toml").read_text(
             encoding="utf-8"
         )
     )

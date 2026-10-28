@@ -1,15 +1,15 @@
 targets:
 - 'Runner profile: Hypercorn'
 modules:
-- tigrbl_auth/api/app.py
-- tigrbl_auth/gateway.py
-- tigrbl_auth/cli/handlers.py
-- tigrbl_auth/config/deployment.py
-- tigrbl_auth/runtime/registry.py
-- tigrbl_auth/runtime/plan.py
-- tigrbl_auth/runtime/hypercorn.py
-- tigrbl_auth/cli/runtime.py
-- tigrbl_auth/cli/reports.py
+- tba_auth/api/app.py
+- tba_auth/gateway.py
+- tba_auth/cli/handlers.py
+- tba_auth/config/deployment.py
+- tba_auth/runtime/registry.py
+- tba_auth/runtime/plan.py
+- tba_auth/runtime/hypercorn.py
+- tba_auth/cli/runtime.py
+- tba_auth/cli/reports.py
 tests:
 - tests/runtime/test_runner_hypercorn.py
 - tests/conformance/operator/test_cli_serve_runtime.py

@@ -4,7 +4,7 @@
   "report_mode": "live-probe",
   "application_probe": {
     "passed": true,
-    "app_factory": "tigrbl_auth.api.app.build_app",
+    "app_factory": "tba_auth.api.app.build_app",
     "message": "Application factory materialized successfully with 6 active routes and 24 active targets."
   },
   "surface_probe": {
@@ -219,7 +219,7 @@
       "serve_check": {
         "passed": false,
         "executed": false,
-        "command": "tigrbl-auth serve --repo-root <repo> --server hypercorn --format json --check",
+        "command": "tba-auth serve --repo-root <repo> --server hypercorn --format json --check",
         "message": "Skipped because the runner is not installed in this environment."
       },
       "required_extra": "hypercorn",
@@ -393,7 +393,7 @@
       "serve_check": {
         "passed": false,
         "executed": false,
-        "command": "tigrbl-auth serve --repo-root <repo> --server tigrcorn --format json --check",
+        "command": "tba-auth serve --repo-root <repo> --server tigrcorn --format json --check",
         "message": "Skipped because the runner is not installed in this environment."
       },
       "required_extra": "tigrcorn",
@@ -583,12 +583,12 @@
       "serve_check": {
         "passed": true,
         "executed": true,
-        "command": "tigrbl-auth serve --repo-root <repo> --server uvicorn --format json --check",
+        "command": "tba-auth serve --repo-root <repo> --server uvicorn --format json --check",
         "message": "Application factory materialized successfully with 7 active routes and 25 active targets.",
         "exit_code": 0,
         "launch_ready": true,
-        "stdout": "{\n  \"application_probe\": {\n    \"app_factory\": \"tigrbl_auth.api.app.build_app\",\n    \"message\": \"Application factory materialized successfully with 7 active routes and 25 active targets.\",\n    \"passed\": true\n  },\n  \"command\": \"serve\",\n  \"launch_mode\": \"check\",\n  \"launch_ready\": true,\n  \"runner_profile_report_paths\": {\n    \"json\": \"docs\\\\compliance\\\\runtime_profile_report.json\",\n    \"md\": \"docs\\\\compliance\\\\runtime_profile_report.md\"\n  },\n  \"runner_registry\": [\n    {\n      \"available_module\": null,\n      \"capabilities\": [\n        {\n          \"description\": \"HTTP ASGI serving\",\n          \"name\": \"http\",\n          \"portable\": true\n        },\n        {\n          \"description\": \"WebSocket ASGI serving\",\n          \"name\": \"websocket\",\n          \"portable\": true\n        },\n        {\n          \"description\": \"ASGI lifespan integration\",\n          \"name\": \"lifespan\",\n          \"portable\": true\n        },\n        {\n          \"description\": \"Unix domain socket binding\",\n          \"name\": \"uds\",\n  \u2026",
-        "stderr": "Generated bootstrap admin API key for local control-plane surfaces. Set TIGRBL_AUTH_ADMIN_API_KEY to replace it. bootstrap_key_redacted=[REDACTED-COMPROMISED]\nGenerated bootstrap admin API key for local control-plane surfaces. Set TIGRBL_AUTH_ADMIN_API_KEY to replace it. bootstrap_key_redacted=[REDACTED-COMPROMISED]"
+        "stdout": "{\n  \"application_probe\": {\n    \"app_factory\": \"tba_auth.api.app.build_app\",\n    \"message\": \"Application factory materialized successfully with 7 active routes and 25 active targets.\",\n    \"passed\": true\n  },\n  \"command\": \"serve\",\n  \"launch_mode\": \"check\",\n  \"launch_ready\": true,\n  \"runner_profile_report_paths\": {\n    \"json\": \"docs\\\\compliance\\\\runtime_profile_report.json\",\n    \"md\": \"docs\\\\compliance\\\\runtime_profile_report.md\"\n  },\n  \"runner_registry\": [\n    {\n      \"available_module\": null,\n      \"capabilities\": [\n        {\n          \"description\": \"HTTP ASGI serving\",\n          \"name\": \"http\",\n          \"portable\": true\n        },\n        {\n          \"description\": \"WebSocket ASGI serving\",\n          \"name\": \"websocket\",\n          \"portable\": true\n        },\n        {\n          \"description\": \"ASGI lifespan integration\",\n          \"name\": \"lifespan\",\n          \"portable\": true\n        },\n        {\n          \"description\": \"Unix domain socket binding\",\n          \"name\": \"uds\",\n  \u2026",
+        "stderr": "Generated bootstrap admin API key for local control-plane surfaces. Set TBA_AUTH_ADMIN_API_KEY to replace it. bootstrap_key_redacted=[REDACTED-COMPROMISED]\nGenerated bootstrap admin API key for local control-plane surfaces. Set TBA_AUTH_ADMIN_API_KEY to replace it. bootstrap_key_redacted=[REDACTED-COMPROMISED]"
       },
       "required_extra": "uvicorn",
       "profile_name": "sqlite-uvicorn",

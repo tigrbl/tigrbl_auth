@@ -7,11 +7,11 @@ targets:
     status: evidenced-release-gated
     profile: production
   modules:
-  - tigrbl_auth/standards/oauth2/jwt_access_tokens.py
-  - tigrbl_auth/services/token_service.py
-  - tigrbl_auth/ops/login.py
-  - tigrbl_auth/ops/token.py
-  - tigrbl_auth/standards/oauth2/token_exchange.py
+  - tba_auth/standards/oauth2/jwt_access_tokens.py
+  - tba_auth/services/token_service.py
+  - tba_auth/ops/login.py
+  - tba_auth/ops/token.py
+  - tba_auth/standards/oauth2/token_exchange.py
   tests:
   - tests/conformance/production/test_rfc9068_jwt_profile.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
@@ -60,7 +60,7 @@ reports:
 - docs/compliance/certification_state_report.json
 - docs/compliance/certification_state_report.md
 contracts:
-- specs/openapi/profiles/production/tigrbl_auth.public.openapi.json
+- specs/openapi/profiles/production/tba_auth.public.openapi.json
 - specs/discovery/profiles/production/oauth-authorization-server.json
 scenario_ids:
 - rfc-9068

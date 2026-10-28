@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from tigrbl_identity_core.standards import StandardOwner, describe_owner
+from tba_primitives_identity.standards import StandardOwner, describe_owner
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -13,9 +13,9 @@ PRIMITIVES_STANDARDS_PATH = (
     REPO_ROOT
     / "pkgs"
     / "00-primitives"
-    / "tigrbl-identity-core"
+    / "tba-primitives-identity"
     / "src"
-    / "tigrbl_identity_core"
+    / "tba_primitives_identity"
     / "standards.py"
 )
 

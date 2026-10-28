@@ -7,7 +7,7 @@ from secrets import token_bytes
 
 import pytest
 
-from tigrbl_identity_jose.standards.rfc7516 import (
+from tba_provider_identity_jose.standards.rfc7516 import (
     JWEPolicyError,
     decrypt_jwe,
     encrypt_jwe,

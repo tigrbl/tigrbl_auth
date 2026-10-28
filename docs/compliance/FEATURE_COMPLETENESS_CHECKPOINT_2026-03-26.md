@@ -8,8 +8,8 @@ The Feature completeness work closed the operator-surface gap for explicit signe
 
 ## What changed
 
-- added `release verify` to `tigrbl_auth/cli/metadata.py`
-- added `handle_release_verify(...)` to `tigrbl_auth/cli/handlers.py`
+- added `release verify` to `tba_auth/cli/metadata.py`
+- added `handle_release_verify(...)` to `tba_auth/cli/handlers.py`
 - expanded `compliance/targets/public-operator-surface.yaml` to include explicit `spec` and `release` verb inventories
 - added a generated `feature_completeness_report` to track end-to-end package capabilities
 - made feature-completeness operator sandboxes idempotent by resetting external operator-plane state before re-running workflows

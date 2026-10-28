@@ -5,8 +5,8 @@ import uuid
 import pytest
 
 from tigrbl import create_table_record
-from tigrbl_identity_storage.tables import CryptoKey, CryptoKeyVersion
-from tigrbl_identity_storage_runtime import (
+from tba_storage_core.tables import CryptoKey, CryptoKeyVersion
+from tba_runtime_identity_storage import (
     CryptoKeyRuntimeSpec,
     CryptoKeyVersionRuntimeSpec,
     ensure_key_enabled,

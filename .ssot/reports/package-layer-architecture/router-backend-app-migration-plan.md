@@ -3,7 +3,7 @@
 Status: planned.
 
 The layer-80 router boundary is enforced, but the migration is not complete while
-`tigrbl-identity-server` retains explicit layer-60 to layer-80 dependency
+`tba-server-identity` retains explicit layer-60 to layer-80 dependency
 exceptions in `pkgs/layers.toml`.
 
 Completion requires moving deployable router composition into layer-90 backend

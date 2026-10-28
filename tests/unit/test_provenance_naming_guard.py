@@ -124,7 +124,7 @@ def test_retained_boundary_bundle_metadata_uses_capability_scoped_names() -> Non
 
 def test_active_runtime_status_values_use_capability_scoped_names() -> None:
     offenders = []
-    for path in (ROOT / "tigrbl_auth").rglob("*.py"):
+    for path in (ROOT / "tba_auth").rglob("*.py"):
         if "__pycache__" in path.parts:
             continue
         text = path.read_text(encoding="utf-8", errors="ignore")

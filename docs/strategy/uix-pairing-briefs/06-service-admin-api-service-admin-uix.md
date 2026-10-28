@@ -1,10 +1,10 @@
 # Service Admin API + UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-backend-app-service-admin` + `@tigrbl-auth/service-admin-uix`<br>
+**Pairing:** `tba-app-backend-service-admin` + `@tba/ui-service-admin`<br>
 **Status:** Delivery brief<br>
 **Prepared:** July 11, 2026<br>
-**Backend app owner:** `pkgs/90-backend-apps/tigrbl-auth-backend-app-service-admin`<br>
-**UIX owner:** `pkgs/105-ui/service-admin-uix`
+**Backend app owner:** `pkgs/90-backend-apps/tba-app-backend-service-admin`<br>
+**UIX owner:** `pkgs/105-ui/tba-ui-service-admin`
 
 ## 1. Product Decision
 
@@ -33,7 +33,7 @@ The experience must organize credentials around an owned service identity and ma
 
 ## 3. API Boundary
 
-The UIX consumes exactly one configured service-admin backend-app base URL through `VITE_TIGRBL_AUTH_SERVICE_ADMIN_BACKEND_APP_BASE_URL`.
+The UIX consumes exactly one configured service-admin backend-app base URL through `VITE_TBA_AUTH_SERVICE_ADMIN_BACKEND_APP_BASE_URL`.
 
 ### Owned capabilities and resources
 
@@ -218,14 +218,14 @@ Produce a route-level copy deck containing:
 
 ## 11. Source Evidence
 
-- `pkgs/90-backend-apps/tigrbl-auth-backend-app-service-admin/README.md`
-- `pkgs/90-backend-apps/tigrbl-auth-backend-app-service-admin/src/tigrbl_auth_backend_app_service_admin/contract.py`
-- `pkgs/105-ui/service-admin-uix/README.md`
-- `pkgs/105-ui/service-admin-uix/App.tsx`
-- `pkgs/105-ui/service-admin-uix/services/serviceAdminClient.ts`
-- `pkgs/105-ui/service-admin-uix/services/workflowCrud.test.ts`
-- `pkgs/105-ui/service-admin-uix/pages/serviceCrudPages.test.tsx`
-- `pkgs/105-ui/service-admin-uix/pages/ValidationToolsPage.tsx`
-- `tests/packages/tigrbl-auth-backend-app-service-admin/`
+- `pkgs/90-backend-apps/tba-app-backend-service-admin/README.md`
+- `pkgs/90-backend-apps/tba-app-backend-service-admin/src/tba_app_backend_service_admin/contract.py`
+- `pkgs/105-ui/tba-ui-service-admin/README.md`
+- `pkgs/105-ui/tba-ui-service-admin/App.tsx`
+- `pkgs/105-ui/tba-ui-service-admin/services/serviceAdminClient.ts`
+- `pkgs/105-ui/tba-ui-service-admin/services/workflowCrud.test.ts`
+- `pkgs/105-ui/tba-ui-service-admin/pages/serviceCrudPages.test.tsx`
+- `pkgs/105-ui/tba-ui-service-admin/pages/ValidationToolsPage.tsx`
+- `tests/packages/tba-app-backend-service-admin/`
 - `tests/unit/test_product_api_surfaces.py`
 - Service-admin SSOT feature/claim/test/evidence/boundary records

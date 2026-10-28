@@ -1,6 +1,6 @@
 import pytest
 
-from tigrbl_auth.services.key_rotation_policy import (
+from tba_auth.services.key_rotation_policy import (
     EffectiveKeyRotationPolicy,
     KeyRotationAdministration,
     KeyRotationPolicyGovernance,

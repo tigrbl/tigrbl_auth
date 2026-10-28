@@ -29,9 +29,9 @@ Deliver a package that can truthfully claim all of the following at once:
    - or remove the runtime activation from profiles where the target is not claimed.
 3. Update all of the following together so there is no split-brain truth:
    - `compliance/targets/rfc-targets.yaml`
-   - `tigrbl_auth/config/feature_flags.py`
-   - `tigrbl_auth/config/deployment.py`
-   - `tigrbl_auth/config/surfaces.py`
+   - `tba_auth/config/feature_flags.py`
+   - `tba_auth/config/deployment.py`
+   - `tba_auth/config/surfaces.py`
    - generated route/contract/target reports in `docs/compliance/`
 4. Regenerate:
    - target reality matrix
@@ -157,9 +157,9 @@ Deliver a package that can truthfully claim all of the following at once:
 ### Claim-boundary normalization
 
 - `compliance/targets/rfc-targets.yaml`
-- `tigrbl_auth/config/feature_flags.py`
-- `tigrbl_auth/config/deployment.py`
-- `tigrbl_auth/config/surfaces.py`
+- `tba_auth/config/feature_flags.py`
+- `tba_auth/config/deployment.py`
+- `tba_auth/config/surfaces.py`
 - `docs/compliance/TARGET_REALITY_MATRIX.md`
 - `docs/compliance/rfc_family_status_report.md`
 
@@ -177,7 +177,7 @@ Deliver a package that can truthfully claim all of the following at once:
 ### Migration portability
 
 - `scripts/run_migration_portability.py`
-- `tigrbl_auth/migrations/**`
+- `tba_auth/migrations/**`
 - `docs/compliance/migration_portability_report.md`
 - `dist/migration-portability/**`
 

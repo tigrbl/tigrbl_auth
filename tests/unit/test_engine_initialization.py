@@ -1,7 +1,7 @@
 import pytest
 from sqlalchemy import text
-from tigrbl_auth_backend_app_core.surfaces import surface_api
-from tigrbl_identity_runtime.engine_resolver import resolve_api_provider
+from tba_app_backend_core.surfaces import surface_api
+from tba_runtime_identity.engine_resolver import resolve_api_provider
 
 
 @pytest.mark.unit

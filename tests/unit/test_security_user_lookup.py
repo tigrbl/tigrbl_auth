@@ -8,8 +8,8 @@ from unittest.mock import AsyncMock
 
 import pytest
 
-from tigrbl_auth.security import user_lookup
-from tigrbl_identity_server.security import user_lookup as identity_server_user_lookup
+from tba_auth.security import user_lookup
+from tba_server_identity.security import user_lookup as identity_server_user_lookup
 
 
 @pytest.fixture(params=[user_lookup, identity_server_user_lookup])

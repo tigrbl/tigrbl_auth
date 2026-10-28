@@ -5,7 +5,7 @@ from pathlib import Path
 
 import yaml
 
-from tigrbl_auth.document_authority import SSOT_DOCUMENT_AUTHORITY_SPEC, load_document_authority
+from tba_auth.document_authority import SSOT_DOCUMENT_AUTHORITY_SPEC, load_document_authority
 
 
 ROOT = Path(__file__).resolve().parents[2]

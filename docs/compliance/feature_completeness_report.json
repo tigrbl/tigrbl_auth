@@ -37,7 +37,7 @@
       "passed": true,
       "summary": "The storage-backed administration workflow materializes durable sqlite-backed state outside the repository tree.",
       "evidence": [
-        "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/operator_store.py",
+        "pkgs/01-storage/tba-storage-core/src/tba_storage_core/operator_store.py",
         "tests/unit/test_operator_control_plane.py"
       ],
       "details": {
@@ -131,8 +131,8 @@
         "docs/reference/CLI_SURFACE.md"
       ],
       "details": {
-        "openapi_path": "specs/openapi/tigrbl_auth.public.openapi.json",
-        "openrpc_path": "specs/openrpc/tigrbl_auth.admin.openrpc.json",
+        "openapi_path": "specs/openapi/tba_auth.public.openapi.json",
+        "openrpc_path": "specs/openrpc/tba_auth.admin.openrpc.json",
         "discovery_publish_status": "published",
         "discovery_document_count": 3,
         "discovery_changed_count": 4,

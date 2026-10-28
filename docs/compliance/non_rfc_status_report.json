@@ -109,8 +109,8 @@
         "family": "oidc",
         "scope_bucket": "baseline-certifiable-now",
         "modules": [
-          "tigrbl_auth/standards/oidc/core.py",
-          "tigrbl_auth/standards/oidc/id_token.py"
+          "tba_auth/standards/oidc/core.py",
+          "tba_auth/standards/oidc/id_token.py"
         ],
         "tests": [
           "tests/conformance/baseline/test_oidc_id_token.py",
@@ -176,7 +176,7 @@
         "family": "oidc",
         "scope_bucket": "baseline-certifiable-now",
         "modules": [
-          "tigrbl_auth/standards/oidc/discovery.py"
+          "tba_auth/standards/oidc/discovery.py"
         ],
         "tests": [
           "tests/conformance/baseline/test_openid_configuration.py",
@@ -257,7 +257,7 @@
         "family": "oidc",
         "scope_bucket": "production-completion-required",
         "modules": [
-          "tigrbl_auth/standards/oidc/userinfo.py"
+          "tba_auth/standards/oidc/userinfo.py"
         ],
         "tests": [
           "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
@@ -330,14 +330,14 @@
         "family": "oidc",
         "scope_bucket": "baseline-certifiable-now",
         "modules": [
-          "tigrbl_auth/standards/oidc/session_mgmt.py",
-          "tigrbl_auth/standards/http/cookies.py",
-          "tigrbl_auth/ops/login.py",
-          "tigrbl_auth/ops/authorize.py",
-          "tigrbl_auth/ops/logout.py",
-          "tigrbl_auth/tables/auth_session.py",
-          "tigrbl_auth/tables/auth_code.py",
-          "tigrbl_auth/services/persistence.py"
+          "tba_auth/standards/oidc/session_mgmt.py",
+          "tba_auth/standards/http/cookies.py",
+          "tba_auth/ops/login.py",
+          "tba_auth/ops/authorize.py",
+          "tba_auth/ops/logout.py",
+          "tba_auth/tables/auth_session.py",
+          "tba_auth/tables/auth_code.py",
+          "tba_auth/services/persistence.py"
         ],
         "tests": [
           "tests/conformance/production/test_oidc_session_management.py",
@@ -424,12 +424,12 @@
         "family": "oidc",
         "scope_bucket": "production-completion-required",
         "modules": [
-          "tigrbl_auth/standards/oidc/rp_initiated_logout.py",
-          "tigrbl_auth/api/rest/routers/logout.py",
-          "tigrbl_auth/ops/logout.py",
-          "tigrbl_auth/tables/logout_state.py",
-          "tigrbl_auth/tables/client_registration.py",
-          "tigrbl_auth/services/persistence.py"
+          "tba_auth/standards/oidc/rp_initiated_logout.py",
+          "tba_auth/api/rest/routers/logout.py",
+          "tba_auth/ops/logout.py",
+          "tba_auth/tables/logout_state.py",
+          "tba_auth/tables/client_registration.py",
+          "tba_auth/services/persistence.py"
         ],
         "tests": [
           "tests/conformance/production/test_oidc_rp_initiated_logout.py",
@@ -505,15 +505,15 @@
         "family": "oidc",
         "scope_bucket": "hardening-completion-required",
         "modules": [
-          "tigrbl_auth/standards/oidc/frontchannel_logout.py",
-          "tigrbl_auth/standards/oidc/rp_initiated_logout.py",
-          "tigrbl_auth/ops/logout.py",
-          "tigrbl_auth/tables/logout_state.py",
-          "tigrbl_auth/tables/client_registration.py",
-          "tigrbl_auth/services/persistence.py",
-          "tigrbl_auth/api/rest/shared.py",
-          "tigrbl_auth/standards/oidc/discovery_metadata.py",
-          "tigrbl_auth/cli/artifacts.py"
+          "tba_auth/standards/oidc/frontchannel_logout.py",
+          "tba_auth/standards/oidc/rp_initiated_logout.py",
+          "tba_auth/ops/logout.py",
+          "tba_auth/tables/logout_state.py",
+          "tba_auth/tables/client_registration.py",
+          "tba_auth/services/persistence.py",
+          "tba_auth/api/rest/shared.py",
+          "tba_auth/standards/oidc/discovery_metadata.py",
+          "tba_auth/cli/artifacts.py"
         ],
         "tests": [
           "tests/conformance/hardening/test_oidc_frontchannel_logout.py",
@@ -588,15 +588,15 @@
         "family": "oidc",
         "scope_bucket": "hardening-completion-required",
         "modules": [
-          "tigrbl_auth/standards/oidc/backchannel_logout.py",
-          "tigrbl_auth/standards/oidc/rp_initiated_logout.py",
-          "tigrbl_auth/ops/logout.py",
-          "tigrbl_auth/tables/logout_state.py",
-          "tigrbl_auth/tables/client_registration.py",
-          "tigrbl_auth/services/persistence.py",
-          "tigrbl_auth/api/rest/shared.py",
-          "tigrbl_auth/standards/oidc/discovery_metadata.py",
-          "tigrbl_auth/cli/artifacts.py"
+          "tba_auth/standards/oidc/backchannel_logout.py",
+          "tba_auth/standards/oidc/rp_initiated_logout.py",
+          "tba_auth/ops/logout.py",
+          "tba_auth/tables/logout_state.py",
+          "tba_auth/tables/client_registration.py",
+          "tba_auth/services/persistence.py",
+          "tba_auth/api/rest/shared.py",
+          "tba_auth/standards/oidc/discovery_metadata.py",
+          "tba_auth/cli/artifacts.py"
         ],
         "tests": [
           "tests/conformance/hardening/test_oidc_backchannel_logout.py",
@@ -671,8 +671,8 @@
         "family": "contract",
         "scope_bucket": "baseline-certifiable-now",
         "modules": [
-          "tigrbl_auth/api/rest",
-          "tigrbl_auth/api/surfaces.py"
+          "tba_auth/api/rest",
+          "tba_auth/api/surfaces.py"
         ],
         "tests": [
           "tests/e2e/test_release_gate_catalog.py",
@@ -737,14 +737,14 @@
         "family": "contract",
         "scope_bucket": "production-completion-required",
         "modules": [
-          "tigrbl_auth/api/rpc/__init__.py",
-          "tigrbl_auth/api/rpc/registry.py",
-          "tigrbl_auth/api/rpc/methods",
-          "tigrbl_auth/api/rpc/schemas",
-          "tigrbl_auth/api/surfaces.py",
-          "tigrbl_auth/cli/artifacts.py",
-          "tigrbl_auth/cli/reports.py",
-          "tigrbl_auth/config/deployment.py"
+          "tba_auth/api/rpc/__init__.py",
+          "tba_auth/api/rpc/registry.py",
+          "tba_auth/api/rpc/methods",
+          "tba_auth/api/rpc/schemas",
+          "tba_auth/api/surfaces.py",
+          "tba_auth/cli/artifacts.py",
+          "tba_auth/cli/reports.py",
+          "tba_auth/config/deployment.py"
         ],
         "tests": [
           "tests/e2e/test_release_gate_catalog.py",
@@ -812,17 +812,17 @@
         "family": "runtime",
         "scope_bucket": "runtime-completion-required",
         "modules": [
-          "tigrbl_auth/api/app.py",
-          "tigrbl_auth/app.py",
-          "tigrbl_auth/plugin.py",
-          "tigrbl_auth/gateway.py",
-          "tigrbl_auth/config/deployment.py",
-          "tigrbl_auth/runtime/__init__.py",
-          "tigrbl_auth/runtime/types.py",
-          "tigrbl_auth/runtime/base.py",
-          "tigrbl_auth/runtime/plan.py",
-          "tigrbl_auth/runtime/registry.py",
-          "tigrbl_auth/cli/runtime.py"
+          "tba_auth/api/app.py",
+          "tba_auth/app.py",
+          "tba_auth/plugin.py",
+          "tba_auth/gateway.py",
+          "tba_auth/config/deployment.py",
+          "tba_auth/runtime/__init__.py",
+          "tba_auth/runtime/types.py",
+          "tba_auth/runtime/base.py",
+          "tba_auth/runtime/plan.py",
+          "tba_auth/runtime/registry.py",
+          "tba_auth/cli/runtime.py"
         ],
         "tests": [
           "tests/integration/test_profile_surface_and_contract_alignment.py",
@@ -893,15 +893,15 @@
         "family": "runtime",
         "scope_bucket": "runtime-completion-required",
         "modules": [
-          "tigrbl_auth/api/app.py",
-          "tigrbl_auth/gateway.py",
-          "tigrbl_auth/cli/handlers.py",
-          "tigrbl_auth/config/deployment.py",
-          "tigrbl_auth/runtime/registry.py",
-          "tigrbl_auth/runtime/plan.py",
-          "tigrbl_auth/runtime/uvicorn.py",
-          "tigrbl_auth/cli/runtime.py",
-          "tigrbl_auth/cli/reports.py"
+          "tba_auth/api/app.py",
+          "tba_auth/gateway.py",
+          "tba_auth/cli/handlers.py",
+          "tba_auth/config/deployment.py",
+          "tba_auth/runtime/registry.py",
+          "tba_auth/runtime/plan.py",
+          "tba_auth/runtime/uvicorn.py",
+          "tba_auth/cli/runtime.py",
+          "tba_auth/cli/reports.py"
         ],
         "tests": [
           "tests/unit/test_claim_boundary_rebaseline.py",
@@ -970,15 +970,15 @@
         "family": "runtime",
         "scope_bucket": "runtime-completion-required",
         "modules": [
-          "tigrbl_auth/api/app.py",
-          "tigrbl_auth/gateway.py",
-          "tigrbl_auth/cli/handlers.py",
-          "tigrbl_auth/config/deployment.py",
-          "tigrbl_auth/runtime/registry.py",
-          "tigrbl_auth/runtime/plan.py",
-          "tigrbl_auth/runtime/hypercorn.py",
-          "tigrbl_auth/cli/runtime.py",
-          "tigrbl_auth/cli/reports.py"
+          "tba_auth/api/app.py",
+          "tba_auth/gateway.py",
+          "tba_auth/cli/handlers.py",
+          "tba_auth/config/deployment.py",
+          "tba_auth/runtime/registry.py",
+          "tba_auth/runtime/plan.py",
+          "tba_auth/runtime/hypercorn.py",
+          "tba_auth/cli/runtime.py",
+          "tba_auth/cli/reports.py"
         ],
         "tests": [
           "tests/unit/test_claim_boundary_rebaseline.py",
@@ -1047,15 +1047,15 @@
         "family": "runtime",
         "scope_bucket": "runtime-completion-required",
         "modules": [
-          "tigrbl_auth/api/app.py",
-          "tigrbl_auth/gateway.py",
-          "tigrbl_auth/cli/handlers.py",
-          "tigrbl_auth/config/deployment.py",
-          "tigrbl_auth/runtime/registry.py",
-          "tigrbl_auth/runtime/plan.py",
-          "tigrbl_auth/runtime/tigrcorn.py",
-          "tigrbl_auth/cli/runtime.py",
-          "tigrbl_auth/cli/reports.py"
+          "tba_auth/api/app.py",
+          "tba_auth/gateway.py",
+          "tba_auth/cli/handlers.py",
+          "tba_auth/config/deployment.py",
+          "tba_auth/runtime/registry.py",
+          "tba_auth/runtime/plan.py",
+          "tba_auth/runtime/tigrcorn.py",
+          "tba_auth/cli/runtime.py",
+          "tba_auth/cli/reports.py"
         ],
         "tests": [
           "tests/unit/test_claim_boundary_rebaseline.py",
@@ -1124,16 +1124,16 @@
         "family": "operator",
         "scope_bucket": "operator-completion-required",
         "modules": [
-          "tigrbl_auth/cli/main.py",
-          "tigrbl_auth/cli/metadata.py",
-          "tigrbl_auth/cli/handlers.py",
-          "tigrbl_auth/cli/runtime.py",
-          "tigrbl_auth/cli/reports.py",
-          "tigrbl_auth/services/operator_service.py",
-          "tigrbl_auth/services/audit_service.py",
-          "tigrbl_auth/services/client_service.py",
-          "tigrbl_auth/services/identity_service.py",
-          "tigrbl_auth/services/session_service.py"
+          "tba_auth/cli/main.py",
+          "tba_auth/cli/metadata.py",
+          "tba_auth/cli/handlers.py",
+          "tba_auth/cli/runtime.py",
+          "tba_auth/cli/reports.py",
+          "tba_auth/services/operator_service.py",
+          "tba_auth/services/audit_service.py",
+          "tba_auth/services/client_service.py",
+          "tba_auth/services/identity_service.py",
+          "tba_auth/services/session_service.py"
         ],
         "tests": [
           "tests/unit/test_claim_boundary_rebaseline.py",
@@ -1204,11 +1204,11 @@
         "family": "operator",
         "scope_bucket": "operator-completion-required",
         "modules": [
-          "tigrbl_auth/cli/main.py",
-          "tigrbl_auth/cli/metadata.py",
-          "tigrbl_auth/cli/handlers.py",
-          "tigrbl_auth/cli/project_tree.py",
-          "tigrbl_auth/services/persistence.py"
+          "tba_auth/cli/main.py",
+          "tba_auth/cli/metadata.py",
+          "tba_auth/cli/handlers.py",
+          "tba_auth/cli/project_tree.py",
+          "tba_auth/services/persistence.py"
         ],
         "tests": [
           "tests/unit/test_claim_boundary_rebaseline.py",
@@ -1274,12 +1274,12 @@
         "family": "operator",
         "scope_bucket": "operator-completion-required",
         "modules": [
-          "tigrbl_auth/cli/metadata.py",
-          "tigrbl_auth/cli/handlers.py",
-          "tigrbl_auth/api/rpc/methods/keys.py",
-          "tigrbl_auth/standards/jose/rfc7517.py",
-          "tigrbl_auth/services/key_management.py",
-          "tigrbl_auth/services/operator_service.py"
+          "tba_auth/cli/metadata.py",
+          "tba_auth/cli/handlers.py",
+          "tba_auth/api/rpc/methods/keys.py",
+          "tba_auth/standards/jose/rfc7517.py",
+          "tba_auth/services/key_management.py",
+          "tba_auth/services/operator_service.py"
         ],
         "tests": [
           "tests/unit/test_claim_boundary_rebaseline.py",
@@ -1346,10 +1346,10 @@
         "family": "operator",
         "scope_bucket": "operator-completion-required",
         "modules": [
-          "tigrbl_auth/cli/metadata.py",
-          "tigrbl_auth/cli/handlers.py",
-          "tigrbl_auth/services/import_export_service.py",
-          "tigrbl_auth/services/operator_service.py"
+          "tba_auth/cli/metadata.py",
+          "tba_auth/cli/handlers.py",
+          "tba_auth/services/import_export_service.py",
+          "tba_auth/services/operator_service.py"
         ],
         "tests": [
           "tests/unit/test_claim_boundary_rebaseline.py",
@@ -1414,9 +1414,9 @@
         "family": "operator",
         "scope_bucket": "operator-completion-required",
         "modules": [
-          "tigrbl_auth/cli/reports.py",
-          "tigrbl_auth/cli/handlers.py",
-          "tigrbl_auth/cli/artifacts.py"
+          "tba_auth/cli/reports.py",
+          "tba_auth/cli/handlers.py",
+          "tba_auth/cli/artifacts.py"
         ],
         "tests": [
           "tests/unit/test_claim_boundary_rebaseline.py",

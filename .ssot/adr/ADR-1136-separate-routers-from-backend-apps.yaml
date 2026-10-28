@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "Reusable Tigrbl HTTP carrier packages belong to pkgs/80-routers and use the tigrbl-auth-router-* distribution family. Deployable backend product applications belong to pkgs/90-backend-apps and use the tigrbl-auth-backend-app-* distribution family."
+summary: "Reusable Tigrbl HTTP carrier packages belong to pkgs/80-routers and use the tba-router-* distribution family. Deployable backend product applications belong to pkgs/90-backend-apps and use the tba-app-backend-* distribution family."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -20,7 +20,7 @@ references: []
 body: |-
   ## Decision
   
-  Reusable Tigrbl HTTP carrier packages belong to pkgs/80-routers and use the tigrbl-auth-router-* distribution family. Deployable backend product applications belong to pkgs/90-backend-apps and use the tigrbl-auth-backend-app-* distribution family.
+  Reusable Tigrbl HTTP carrier packages belong to pkgs/80-routers and use the tba-router-* distribution family. Deployable backend product applications belong to pkgs/90-backend-apps and use the tba-app-backend-* distribution family.
   
   A router may close over one operation, one table, related schemas and hooks, or a cohesive combination. A backend app closes over every router, app-local router, table, operation, hook, policy, middleware, configuration, startup, and shutdown behavior required by one deployable product surface.
   

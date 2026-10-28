@@ -1,5 +1,5 @@
 schema_version: 1
-package: tigrbl_auth
+package: tba_auth
 target_family: operator
 scope: core
 targets:
@@ -14,9 +14,9 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/cli/main.py
-  - tigrbl_auth/cli/metadata.py
-  - tigrbl_auth/cli/handlers.py
+  - tba_auth/cli/main.py
+  - tba_auth/cli/metadata.py
+  - tba_auth/cli/handlers.py
   status: evidenced-release-gated
 - id: operator.bootstrap-migration
   label: Bootstrap and migration lifecycle
@@ -29,10 +29,10 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/cli/main.py
-  - tigrbl_auth/cli/metadata.py
-  - tigrbl_auth/cli/handlers.py
-  - tigrbl_auth/cli/project_tree.py
+  - tba_auth/cli/main.py
+  - tba_auth/cli/metadata.py
+  - tba_auth/cli/handlers.py
+  - tba_auth/cli/project_tree.py
   status: evidenced-release-gated
 - id: operator.keys-jwks
   label: Key lifecycle and JWKS publication
@@ -45,10 +45,10 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/cli/metadata.py
-  - tigrbl_auth/cli/handlers.py
-  - pkgs/60-runtime/tigrbl-identity-cli/src/tigrbl_identity_cli/operator_administration.py
-  - tigrbl_auth/standards/jose/rfc7517.py
+  - tba_auth/cli/metadata.py
+  - tba_auth/cli/handlers.py
+  - pkgs/60-runtime/tba-cli-identity/src/tba_cli_identity/operator_administration.py
+  - tba_auth/standards/jose/rfc7517.py
   status: evidenced-release-gated
 - id: operator.import-export
   label: Import/export portability
@@ -61,8 +61,8 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/cli/metadata.py
-  - tigrbl_auth/cli/handlers.py
+  - tba_auth/cli/metadata.py
+  - tba_auth/cli/handlers.py
   status: evidenced-release-gated
 - id: operator.release-bundle-signing
   label: Release bundle and signature verification
@@ -75,7 +75,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/cli/reports.py
-  - tigrbl_auth/cli/handlers.py
-  - tigrbl_auth/cli/artifacts.py
+  - tba_auth/cli/reports.py
+  - tba_auth/cli/handlers.py
+  - tba_auth/cli/artifacts.py
   status: evidenced-release-gated

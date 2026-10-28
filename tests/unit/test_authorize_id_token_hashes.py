@@ -4,10 +4,10 @@ from urllib.parse import parse_qs, urlparse
 import pytest
 from http import HTTPStatus as status
 
-from tigrbl_auth.crypto import hash_pw
-from tigrbl_auth.tables import Client, Tenant, User
-from tigrbl_auth.oidc_id_token import oidc_hash, verify_id_token
-from tigrbl_auth.rfc.rfc8414_metadata import ISSUER
+from tba_auth.crypto import hash_pw
+from tba_auth.tables import Client, Tenant, User
+from tba_auth.oidc_id_token import oidc_hash, verify_id_token
+from tba_auth.rfc.rfc8414_metadata import ISSUER
 
 
 @pytest.mark.usefixtures("temp_key_file")

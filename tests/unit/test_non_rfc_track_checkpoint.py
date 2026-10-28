@@ -4,8 +4,8 @@ import json
 from http import HTTPStatus
 from pathlib import Path
 
-from tigrbl_auth_backend_app_public.app import _package_default_profile
-from tigrbl_auth.cli.artifacts import build_effective_claims_manifest, deployment_from_options
+from tba_app_backend_public.app import _package_default_profile
+from tba_auth.cli.artifacts import build_effective_claims_manifest, deployment_from_options
 
 ROOT = Path(__file__).resolve().parents[2]
 

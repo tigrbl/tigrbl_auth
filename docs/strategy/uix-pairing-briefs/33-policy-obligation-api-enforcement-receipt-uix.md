@@ -1,6 +1,6 @@
 # Policy Obligation API + Enforcement Receipt UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-router-policy-obligations` + `@tigrbl-auth/enforcement-receipt-uix`<br>
+**Pairing:** `tba-router-policy-obligations` + `@tba/enforcement-receipt-uix`<br>
 **Additional opportunity:** Authorization/delegation/sovereignty extension 4<br>
 **Primary buyers:** authorization platform teams, API and application security, data governance, regulated operations, workload/agent platforms, and audit/compliance<br>
 **Status:** proposed product surface; obligation/advice contracts and handler ports exist, but production enforcement and receipts do not
@@ -757,10 +757,10 @@ Standardize `obligation`, `advice`, `phase`, `PEP`, `handler`, `execution plan`,
 
 ### Repository
 
-- `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/policy/obligations.py`
-- `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/policy/decisions.py`
-- `pkgs/05-bases/tigrbl-authz-policy-bases/`
-- `pkgs/10-concrete/tigrbl-authz-policy-obligations-concrete/`
+- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/policy/obligations.py`
+- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/policy/decisions.py`
+- `pkgs/05-bases/tba-bases-authorization-policy/`
+- `pkgs/10-concrete/tba-concrete-authorization-policy-obligations/`
 - `docs/strategy/uix-pairing-briefs/12-authorization-decision-api-policy-studio-uix.md`
 - `docs/strategy/uix-pairing-briefs/30-authorization-provenance-api-decision-lineage-explorer-uix.md`
 - `docs/strategy/uix-pairing-briefs/31-delegation-provenance-api-authority-chain-explorer-uix.md`

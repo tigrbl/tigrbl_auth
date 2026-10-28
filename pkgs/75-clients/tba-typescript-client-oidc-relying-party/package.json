@@ -1,0 +1,43 @@
+{
+  "name": "@tba/client-oidc-relying-party",
+  "version": "0.4.0-dev.2",
+  "description": "Browser OAuth 2.1 and OpenID Connect relying-party client for authorization, PKCE, and login callback flows.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tigrbl/tigrbl_auth.git",
+    "directory": "pkgs/75-clients/tba-typescript-client-oidc-relying-party"
+  },
+  "homepage": "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/75-clients/tba-typescript-client-oidc-relying-party#readme",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/",
+    "provenance": true
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "package.json"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json && vite build",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0",
+    "vitest": "^3.2.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

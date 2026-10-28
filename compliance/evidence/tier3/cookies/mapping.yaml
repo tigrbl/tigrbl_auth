@@ -7,12 +7,12 @@ targets:
     status: evidenced-release-gated
     profile: production
   modules:
-  - tigrbl_auth/standards/http/cookies.py
-  - tigrbl_auth/standards/oidc/session_mgmt.py
-  - tigrbl_auth/ops/login.py
-  - tigrbl_auth/ops/authorize.py
-  - tigrbl_auth/ops/logout.py
-  - tigrbl_auth/tables/auth_session.py
+  - tba_auth/standards/http/cookies.py
+  - tba_auth/standards/oidc/session_mgmt.py
+  - tba_auth/ops/login.py
+  - tba_auth/ops/authorize.py
+  - tba_auth/ops/logout.py
+  - tba_auth/tables/auth_session.py
   tests:
   - tests/conformance/production/test_rfc6265_cookies.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
@@ -59,7 +59,7 @@ reports:
 - docs/compliance/certification_state_report.json
 - docs/compliance/certification_state_report.md
 contracts:
-- specs/openapi/profiles/production/tigrbl_auth.public.openapi.json
+- specs/openapi/profiles/production/tba_auth.public.openapi.json
 - specs/discovery/profiles/production/openid-configuration.json
 scenario_ids:
 - rfc-6265

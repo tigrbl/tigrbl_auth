@@ -2,18 +2,18 @@
 
 Research date: 2026-05-28
 
-Scope: this matrix compares `tigrbl_auth` with Auth0, Okta, Keycloak, FusionAuth, and Amazon Cognito for Identity Provider coverage. "IdP" has two meanings that should stay separate:
+Scope: this matrix compares `tba_auth` with Auth0, Okta, Keycloak, FusionAuth, and Amazon Cognito for Identity Provider coverage. "IdP" has two meanings that should stay separate:
 
 1. A first-party identity provider or OIDC Provider that authenticates users and issues tokens for applications.
 2. An identity broker or federation surface that lets users authenticate through upstream social, enterprise, SAML, OIDC, LDAP, or other external providers.
 
-`tigrbl_auth` already targets the first meaning through its public OAuth/OIDC issuer. The second meaning is a trust-plane/federation product lane and is much thinner today.
+`tba_auth` already targets the first meaning through its public OAuth/OIDC issuer. The second meaning is a trust-plane/federation product lane and is much thinner today.
 
-| IdP capability | tigrbl_auth | Auth0 | Okta | Keycloak | FusionAuth | Amazon Cognito |
+| IdP capability | tba_auth | Auth0 | Okta | Keycloak | FusionAuth | Amazon Cognito |
 | --- | --- | --- | --- | --- | --- | --- |
-| First-party IdP / OIDC Provider | Present as the public issuer and OIDC package: discovery, ID token, UserInfo, logout, sessions, JWKS, and token issuance are package goals. See [`tigrbl-auth-protocol-oidc`](../pkgs/50-protocols/tigrbl-auth-protocol-oidc/README.md). | Present through Auth0 Universal Login, Authentication API, tenants, applications, users, and connections. | Present as Okta org authorization servers, Universal Directory, hosted sign-in, OIDC/OAuth APIs. | Present as realm-level OIDC/OAuth/SAML provider behavior. | Present as FusionAuth applications, tenants, OAuth/OIDC, hosted login, users, and identity provider features. | Present as Cognito User Pools with hosted UI / managed login and OAuth/OIDC endpoints. |
+| First-party IdP / OIDC Provider | Present as the public issuer and OIDC package: discovery, ID token, UserInfo, logout, sessions, JWKS, and token issuance are package goals. See [`tba-protocol-oidc`](../pkgs/50-protocols/tba-protocol-oidc/README.md). | Present through Auth0 Universal Login, Authentication API, tenants, applications, users, and connections. | Present as Okta org authorization servers, Universal Directory, hosted sign-in, OIDC/OAuth APIs. | Present as realm-level OIDC/OAuth/SAML provider behavior. | Present as FusionAuth applications, tenants, OAuth/OIDC, hosted login, users, and identity provider features. | Present as Cognito User Pools with hosted UI / managed login and OAuth/OIDC endpoints. |
 | External IdP / broker product framing | Planned/underframed. ADR-1048 and SPEC-1068 govern federation/provisioning/cross-cloud trust separately from baseline OIDC provider behavior. | First-class "Identity Providers" and "Connections" model for social, enterprise, passwordless, database, and custom integrations. See [Auth0 identity providers](https://auth0.com/docs/authenticate/identity-providers). | First-class external IdP model. Okta explicitly sits between apps and upstream IdPs. See [Okta External Identity Providers](https://developer.okta.com/docs/concepts/identity-providers/). | First-class identity brokering. Keycloak redirects users to external IdPs and maps them into a realm. See [Keycloak identity brokering](https://www.keycloak.org/docs/latest/server_admin/#_identity_broker). | First-class identity provider model with social, enterprise, OIDC, SAML, external JWT, and connectors. See [FusionAuth Identity Providers](https://fusionauth.io/docs/lifecycle/authenticate-users/identity-providers/). | First-class user-pool identity federation with third-party IdPs. See [Cognito user pool federation](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-identity-federation.html). |
-| Social login providers | Gap as a product surface. Could be part of a future `tigrbl-identity-federation` package. | Present for social providers such as Google, Facebook, Apple, GitHub, and others. See [Auth0 Social Identity Providers](https://auth0.com/docs/authenticate/identity-providers/social-identity-providers). | Present for social IdPs; Okta docs name Apple and Facebook examples and support broader social IdP integrations. | Present through built-in and configurable identity providers, depending on realm/provider setup. | Present for Apple, Facebook, GitHub, Google, LinkedIn, Twitter/X, and gaming providers. | Present for supported social providers such as Login with Amazon, Apple, Facebook, and Google. |
+| Social login providers | Gap as a product surface. Could be part of a future `tba-identity-federation` package. | Present for social providers such as Google, Facebook, Apple, GitHub, and others. See [Auth0 Social Identity Providers](https://auth0.com/docs/authenticate/identity-providers/social-identity-providers). | Present for social IdPs; Okta docs name Apple and Facebook examples and support broader social IdP integrations. | Present through built-in and configurable identity providers, depending on realm/provider setup. | Present for Apple, Facebook, GitHub, Google, LinkedIn, Twitter/X, and gaming providers. | Present for supported social providers such as Login with Amazon, Apple, Facebook, and Google. |
 | Enterprise SSO providers | Gap/underframed. Governance says enterprise SSO/federation is distinct from baseline OIDC provider support. | Present for enterprise connections including SAML, OIDC, Azure AD/Entra, Google Workspace, ADFS, Okta, and others. See [Auth0 Enterprise Identity Providers](https://auth0.com/docs/authenticate/identity-providers/enterprise-identity-providers). | Present for enterprise SAML and OIDC IdPs, including inbound federation and Okta-to-Okta federation. | Present through SAML and OIDC identity providers plus configurable mappers. | Present for OIDC, SAML v2, HYPR, LDAP connector, external JWT, and provider-specific enterprise guides. | Present for SAML and OIDC third-party IdPs in user pools. |
 | OIDC upstream federation | Future trust-plane capability, not a current productized admin/API surface. OIDC Provider support is not the same as upstream OIDC broker support. | Present as enterprise OIDC connections. | Present as inbound OIDC IdPs. | Present as OIDC identity providers in identity brokering. | Present as OpenID Connect Identity Providers. | Present through OIDC identity providers on user pools. |
 | SAML upstream federation | Explicitly deferred/out of current scope in architecture notes; should not be implied by OIDC provider support. | Present as enterprise SAML connections. | Present as inbound SAML IdPs. | Present as SAML identity providers and brokered login. | Present as SAML v2 external identity providers. | Present through SAML identity providers on user pools. |
@@ -47,17 +47,17 @@ The competitive pattern is clear: mature identity vendors treat external IdPs as
 | Security | Issuer pinning, metadata refresh, signing/encryption requirements, key rotation, callback validation, and credential storage. |
 | Operations | Audit logs, event hooks, failed login diagnostics, drift detection, and provider health. |
 
-For `tigrbl_auth`, the clean architecture is:
+For `tba_auth`, the clean architecture is:
 
 | Layer | Recommended owner |
 | --- | --- |
-| First-party OIDC Provider behavior | `tigrbl-auth-protocol-oidc`, `tigrbl-auth-backend-app-public` |
-| External IdP / federation domain models | Future `tigrbl-identity-federation` or a clearly named federation module under admin/storage before package split |
-| Provider credentials and secret material | `tigrbl-credentials` plus `tigrbl-identity-storage` |
-| Subject aliasing and account linking | `tigrbl-identity-principals` plus canonical storage |
-| Tenant/app/provider policy | `tigrbl-authz-policy`, tenant-admin/developer frontdoors |
-| Provider configuration surfaces | `tigrbl-auth-backend-app-tenant-admin`, `tigrbl-auth-backend-app-developer`, and their UIX apps |
-| Hosted provider selection | `@tigrbl-auth/public-uix` over public issuer behavior |
+| First-party OIDC Provider behavior | `tba-protocol-oidc`, `tba-app-backend-public` |
+| External IdP / federation domain models | Future `tba-identity-federation` or a clearly named federation module under admin/storage before package split |
+| Provider credentials and secret material | `tba-credentials` plus `tba-storage-core` |
+| Subject aliasing and account linking | `tba-concrete-identity-principals` plus canonical storage |
+| Tenant/app/provider policy | `tba-runtime-authorization-policy`, tenant-admin/developer frontdoors |
+| Provider configuration surfaces | `tba-app-backend-tenant-admin`, `tba-app-backend-developer`, and their UIX apps |
+| Hosted provider selection | `@tba/ui-public` over public issuer behavior |
 
 Recommended near-term stance:
 

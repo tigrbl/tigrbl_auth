@@ -12,8 +12,8 @@ validate the stated requirements.
 
 import pytest
 
-from tigrbl_auth import RFC8932_SPEC_URL, enforce_encrypted_dns
-from tigrbl_auth.runtime_cfg import settings
+from tba_auth import RFC8932_SPEC_URL, enforce_encrypted_dns
+from tba_auth.runtime_cfg import settings
 
 
 @pytest.mark.unit

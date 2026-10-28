@@ -1,12 +1,12 @@
 targets:
 - OIDC RP-Initiated Logout
 modules:
-- tigrbl_auth/standards/oidc/rp_initiated_logout.py
-- tigrbl_auth/api/rest/routers/logout.py
-- tigrbl_auth/ops/logout.py
-- tigrbl_auth/tables/logout_state.py
-- tigrbl_auth/tables/client_registration.py
-- tigrbl_auth/services/persistence.py
+- tba_auth/standards/oidc/rp_initiated_logout.py
+- tba_auth/api/rest/routers/logout.py
+- tba_auth/ops/logout.py
+- tba_auth/tables/logout_state.py
+- tba_auth/tables/client_registration.py
+- tba_auth/services/persistence.py
 tests:
 - tests/unit/test_session_logout_cluster_b.py
 - tests/conformance/production/test_oidc_rp_initiated_logout.py

@@ -1,4 +1,4 @@
-# Tigrbl Auth Portfolio Website — App Requirements Brief
+# TBA Portfolio Website — App Requirements Brief
 
 **Status:** Draft for product, GTM, design, engineering, and copy review  
 **Prepared:** July 11, 2026  
@@ -6,7 +6,7 @@
 
 ## Executive Summary
 
-- **Build an evidence-led product portfolio, not a conventional package landing page.** Tigrbl Auth is a suite of provider, relying-party, resource-server, administration, policy, runtime, SDK, and certification surfaces. The website must help each visitor choose a use case and reach runnable proof without making them understand the package graph first.
+- **Build an evidence-led product portfolio, not a conventional package landing page.** TBA is a suite of provider, relying-party, resource-server, administration, policy, runtime, SDK, and certification surfaces. The website must help each visitor choose a use case and reach runnable proof without making them understand the package graph first.
 - **Make product truth visible at the point of every claim.** The repository contains 1,160 governed features, 1,766 claims, six active profiles, and 11 registry releases, but the current SSOT validation is failing and final certification remains blocked. Every capability shown publicly must be labeled `Published`, `Checkpoint`, `Planned`, or `Certification pending`; “independently certified,” “fully RFC compliant,” and “production certified” are prohibited until the governing gates permit them.
 - **Anchor the experience around five demonstrable journeys.** The initial portfolio should prove hosted login, developer app registration, tenant administration, machine-to-machine access, and protected-API validation. A demo hub and evidence explorer should connect these journeys to installable packages, docs, contracts, tests, and release status.
 - **Ship a focused first release.** The minimum credible site is a homepage, use-case portfolio, product-surface pages, interactive demo hub, developer quickstart, standards/evidence center, release page, and sales-ready deployment/security page. Broader feature catalogs and competitor comparisons should follow once the truth pipeline is automated.
@@ -15,7 +15,7 @@
 
 The website must let a technical evaluator, developer, buyer, or account stakeholder answer four questions quickly:
 
-1. What problem does Tigrbl Auth solve for me?
+1. What problem does TBA solve for me?
 2. Which product surface and deployment profile fit my use case?
 3. Can I see and run a realistic flow?
 4. What is published, verified, planned, or still blocked?
@@ -30,11 +30,11 @@ The website is not the admin console, a generated API reference, or a raw SSOT b
 
 | Area | Repository evidence | Website implication |
 |---|---|---|
-| Distribution | Python workspace `0.4.0.dev2`; stable `tigrbl-auth` `0.3.4` on PyPI; Python 3.10–3.12 | Show stable install separately from repository checkpoint. Never present dev-only package versions as the default install. |
+| Distribution | Python workspace `0.4.0.dev2`; stable `tba-auth` `0.3.4` on PyPI; Python 3.10–3.12 | Show stable install separately from repository checkpoint. Never present dev-only package versions as the default install. |
 | Product APIs | Public, platform-admin, tenant-admin, developer, service-admin, resource-validation packages | Organize portfolio pages by user job and boundary, not internal directory layer. |
 | UIX | Admin, platform-admin, tenant-admin, developer, service-admin, my-account, public, demo-hub, and browser RP workspaces | Use real UI screenshots/flows as proof; clearly mark partial product-boundary extraction where applicable. |
-| Runtime | ASGI app/plugin model; Uvicorn, Hypercorn, and Tigrcorn runner profiles; SQLite/PostgreSQL options | Provide a deployment selector and architecture explainer. Avoid implying Tigrbl Auth is a bundled hosting service. |
-| Interactive tooling | `tigrbl-auth` operator CLI, OpenAPI, OpenRPC, JSON Schema, demo hub, Docker examples | Give developers runnable commands, contract links, and copyable flows; use progressive disclosure for operator tooling. |
+| Runtime | ASGI app/plugin model; Uvicorn, Hypercorn, and Tigrcorn runner profiles; SQLite/PostgreSQL options | Provide a deployment selector and architecture explainer. Avoid implying TBA is a bundled hosting service. |
+| Interactive tooling | `tba-auth` operator CLI, OpenAPI, OpenRPC, JSON Schema, demo hub, Docker examples | Give developers runnable commands, contract links, and copyable flows; use progressive disclosure for operator tooling. |
 | Examples | Docker compose paths and `acme_notes_cli` device-authorization consumer | Turn examples into guided journeys with expected results, prerequisites, and reset instructions. |
 | Profiles | Baseline, baseline-development, FAPI2 security, hardening, peer-claim, production | Present profiles as selectable policy/deployment postures, not badges of universal compliance. |
 | Governed scope | 1,160 features: 824 implemented, 48 partial, 288 absent | Do not publish a flat “all features” checklist without state and scope filters. |
@@ -66,7 +66,7 @@ Needs:
 - A crisp category: **composable identity and authorization infrastructure for Tigrbl applications**.
 - Narrative proof that spans human login, service identity, authorization policy, tenant control, and API protection.
 - Reusable diagrams, screenshots, capability cards, release callouts, and evidence-backed comparison points.
-- SEO landing routes for OAuth/OIDC provider, OAuth 2.1 alignment, resource-server validation, machine identity, multi-tenant IAM, RBAC/ABAC, and Tigrbl authentication.
+- SEO landing routes for OAuth/OIDC provider, OAuth 2.1 alignment, resource-server validation, machine identity, multi-tenant IAM, RBAC/ABAC, and TBAentication.
 
 Requirements:
 
@@ -337,7 +337,7 @@ Style:
 - Explain acronyms on first use.
 - Prefer active verbs and observable outcomes.
 - Avoid “enterprise-grade,” “seamless,” “complete,” “turnkey,” and “best-in-class” unless replaced by specific proof.
-- Treat Tigrbl Auth as a singular product suite and named packages as components/surfaces.
+- Treat TBA as a singular product suite and named packages as components/surfaces.
 
 Example approved pattern:
 
@@ -409,7 +409,7 @@ Guardrails:
 
 This brief evaluates repository product and delivery evidence, not customer research, pipeline data, support history, or stakeholder interviews. Team needs are therefore evidence-backed working requirements, not confirmed organizational commitments.
 
-Primary repository sources reviewed include `README.md`, `CURRENT_STATE.md`, `CERTIFICATION_STATUS.md`, `pyproject.toml`, `package.json`, `.ssot/registry.json`, SSOT graph/registry exports, generated compliance material, architecture/strategy documents, product API and UIX packages, examples, tests, CLI/runtime surfaces, and Git tags. Public release evidence was checked against the `tigrbl-auth` PyPI project on July 11, 2026.
+Primary repository sources reviewed include `README.md`, `CURRENT_STATE.md`, `CERTIFICATION_STATUS.md`, `pyproject.toml`, `package.json`, `.ssot/registry.json`, SSOT graph/registry exports, generated compliance material, architecture/strategy documents, product API and UIX packages, examples, tests, CLI/runtime surfaces, and Git tags. Public release evidence was checked against the `tba-auth` PyPI project on July 11, 2026.
 
 Reproducible SSOT inspection commands:
 

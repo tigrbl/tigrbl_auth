@@ -9,8 +9,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from tigrbl_auth.cli.artifacts import deployment_from_options
-from tigrbl_auth.cli.reports import build_release_bundle
+from tba_auth.cli.artifacts import deployment_from_options
+from tba_auth.cli.reports import build_release_bundle
 
 
 PROFILES = ("baseline", "production", "hardening", "fapi2-security", "peer-claim")

@@ -1,10 +1,10 @@
-from tigrbl_eat_concrete import EatClaimSetPayload, EatEncoding, parse_eat_claims
-from tigrbl_sd_jwt_concrete import KeyBindingClaimSetPayload, parse_key_binding_claims
-from tigrbl_credential_profile_sd_jwt_vc import (
+from tba_concrete_eat import EatClaimSetPayload, EatEncoding, parse_eat_claims
+from tba_concrete_sd_jwt import KeyBindingClaimSetPayload, parse_key_binding_claims
+from tba_profile_credential_sd_jwt_vc import (
     SdJwtVcClaimSetPayload,
     parse_sd_jwt_vc_claims,
 )
-from tigrbl_svid_concrete import JwtSvidClaimSetPayload, parse_jwt_svid_claims
+from tba_concrete_svid import JwtSvidClaimSetPayload, parse_jwt_svid_claims
 
 
 def test_aggregate_payload_models_are_explicitly_claim_sets() -> None:

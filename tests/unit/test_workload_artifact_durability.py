@@ -1,6 +1,6 @@
-from tigrbl_identity_storage.tables import PossessionProofReplay, ProtectedArtifactReference, TABLE_MODELS, WorkloadCredentialEntitlement, WorkloadReferenceBinding
-from tigrbl_token_durability import RUNTIME_OPERATION_BY_ALIAS as TOKEN_OPS
-from tigrbl_workload_identity_durability import RUNTIME_OPERATION_BY_ALIAS as WORKLOAD_OPS
+from tba_storage_core.tables import PossessionProofReplay, ProtectedArtifactReference, TABLE_MODELS, WorkloadCredentialEntitlement, WorkloadReferenceBinding
+from tba_durability_token import RUNTIME_OPERATION_BY_ALIAS as TOKEN_OPS
+from tba_durability_workload_identity import RUNTIME_OPERATION_BY_ALIAS as WORKLOAD_OPS
 
 def test_new_tables_are_canonical_storage_models()->None:
     assert {WorkloadReferenceBinding,WorkloadCredentialEntitlement,ProtectedArtifactReference,PossessionProofReplay}.issubset(set(TABLE_MODELS))

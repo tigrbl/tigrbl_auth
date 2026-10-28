@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "package": "tigrbl_auth",
+  "package": "tba_auth",
   "delivery_track": "independent-peer-evidence",
   "fully_certifiable_now": false,
   "fully_rfc_compliant_now": false,
@@ -15,14 +15,14 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/rfc6749.py",
-        "tigrbl_auth/standards/oauth2/rfc6749_token.py"
+        "tba_auth/standards/oauth2/rfc6749.py",
+        "tba_auth/standards/oauth2/rfc6749_token.py"
       ],
       "exposed_surface": "current: /authorize, /token; target: /authorize, /token",
       "persistence_artifact": [
-        "tigrbl_auth/tables/auth_code.py",
-        "tigrbl_auth/tables/token_record.py",
-        "tigrbl_auth/tables/auth_session.py"
+        "tba_auth/tables/auth_code.py",
+        "tba_auth/tables/token_record.py",
+        "tba_auth/tables/auth_session.py"
       ],
       "test_evidence": {
         "classes": "integration, conformance, interop",
@@ -64,11 +64,11 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/rfc6750.py"
+        "tba_auth/standards/oauth2/rfc6750.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/tables/token_record.py"
       ],
       "test_evidence": {
         "classes": "integration, conformance, interop",
@@ -107,11 +107,11 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/rfc7636_pkce.py"
+        "tba_auth/standards/oauth2/rfc7636_pkce.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
-        "tigrbl_auth/tables/auth_code.py"
+        "tba_auth/tables/auth_code.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, interop",
@@ -151,8 +151,8 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/rfc8414.py",
-        "tigrbl_auth/standards/oauth2/rfc8414_metadata.py"
+        "tba_auth/standards/oauth2/rfc8414.py",
+        "tba_auth/standards/oauth2/rfc8414_metadata.py"
       ],
       "exposed_surface": "current: /.well-known/oauth-authorization-server; target: /.well-known/oauth-authorization-server",
       "persistence_artifact": [
@@ -192,7 +192,7 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/http/well_known.py"
+        "tba_auth/standards/http/well_known.py"
       ],
       "exposed_surface": "current: /.well-known/openid-configuration, /.well-known/oauth-authorization-server, /.well-known/jwks.json, /.well-known/oauth-protected-resource; target: /.well-known/openid-configuration, /.well-known/oauth-authorization-server, /.well-known/jwks.json, /.well-known/oauth-protected-resource",
       "persistence_artifact": [
@@ -232,12 +232,12 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/jose/rfc7515.py"
+        "tba_auth/standards/jose/rfc7515.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
-        "tigrbl_auth/tables/service_key.py",
-        "tigrbl_auth/tables/key_rotation_event.py"
+        "tba_auth/tables/service_key.py",
+        "tba_auth/tables/key_rotation_event.py"
       ],
       "test_evidence": {
         "classes": "unit, conformance",
@@ -273,14 +273,14 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/jose/rfc7516.py",
-        "tigrbl_auth/standards/oidc/id_token.py",
-        "tigrbl_auth/standards/oidc/discovery_metadata.py"
+        "tba_auth/standards/jose/rfc7516.py",
+        "tba_auth/standards/oidc/id_token.py",
+        "tba_auth/standards/oidc/discovery_metadata.py"
       ],
       "exposed_surface": "current: \u2205; target: \u2205 [runtime-integrated-encrypted-id-token-profile]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/service_key.py",
-        "tigrbl_auth/tables/key_rotation_event.py"
+        "tba_auth/tables/service_key.py",
+        "tba_auth/tables/key_rotation_event.py"
       ],
       "test_evidence": {
         "classes": "unit",
@@ -316,12 +316,12 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/jose/rfc7517.py"
+        "tba_auth/standards/jose/rfc7517.py"
       ],
       "exposed_surface": "current: /.well-known/jwks.json; target: /.well-known/jwks.json",
       "persistence_artifact": [
-        "tigrbl_auth/tables/service_key.py",
-        "tigrbl_auth/tables/key_rotation_event.py"
+        "tba_auth/tables/service_key.py",
+        "tba_auth/tables/key_rotation_event.py"
       ],
       "test_evidence": {
         "classes": "unit, conformance",
@@ -357,12 +357,12 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/jose/rfc7518.py"
+        "tba_auth/standards/jose/rfc7518.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
-        "tigrbl_auth/tables/service_key.py",
-        "tigrbl_auth/tables/key_rotation_event.py"
+        "tba_auth/tables/service_key.py",
+        "tba_auth/tables/key_rotation_event.py"
       ],
       "test_evidence": {
         "classes": "unit, conformance",
@@ -398,11 +398,11 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/jose/rfc7519.py"
+        "tba_auth/standards/jose/rfc7519.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/tables/token_record.py"
       ],
       "test_evidence": {
         "classes": "unit, conformance",
@@ -438,17 +438,17 @@
       "claim_tier": 3,
       "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/revocation.py",
-        "tigrbl_auth/api/rest/routers/revoke.py",
-        "tigrbl_auth/ops/revoke.py",
-        "tigrbl_auth/services/persistence.py",
-        "tigrbl_auth/tables/revoked_token.py",
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/standards/oauth2/revocation.py",
+        "tba_auth/api/rest/routers/revoke.py",
+        "tba_auth/ops/revoke.py",
+        "tba_auth/services/persistence.py",
+        "tba_auth/tables/revoked_token.py",
+        "tba_auth/tables/token_record.py"
       ],
       "exposed_surface": "current: /revoke; target: /revoke [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/revoked_token.py",
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/tables/revoked_token.py",
+        "tba_auth/tables/token_record.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance",
@@ -487,16 +487,16 @@
       "claim_tier": 3,
       "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/dynamic_client_registration.py",
-        "tigrbl_auth/api/rest/routers/register.py",
-        "tigrbl_auth/ops/register.py",
-        "tigrbl_auth/tables/client_registration.py",
-        "tigrbl_auth/services/persistence.py"
+        "tba_auth/standards/oauth2/dynamic_client_registration.py",
+        "tba_auth/api/rest/routers/register.py",
+        "tba_auth/ops/register.py",
+        "tba_auth/tables/client_registration.py",
+        "tba_auth/services/persistence.py"
       ],
       "exposed_surface": "current: /register; target: /register [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/client.py",
-        "tigrbl_auth/tables/client_registration.py"
+        "tba_auth/tables/client.py",
+        "tba_auth/tables/client_registration.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance",
@@ -535,18 +535,18 @@
       "claim_tier": 3,
       "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/client_registration_management.py",
-        "tigrbl_auth/tables/client_registration.py",
-        "tigrbl_auth/services/persistence.py",
-        "tigrbl_auth/api/rest/routers/register.py",
-        "tigrbl_auth/ops/register.py",
-        "tigrbl_auth/api/rpc/methods/client_registration.py",
-        "tigrbl_auth/api/rpc/schemas/client_registration.py"
+        "tba_auth/standards/oauth2/client_registration_management.py",
+        "tba_auth/tables/client_registration.py",
+        "tba_auth/services/persistence.py",
+        "tba_auth/api/rest/routers/register.py",
+        "tba_auth/ops/register.py",
+        "tba_auth/api/rpc/methods/client_registration.py",
+        "tba_auth/api/rpc/schemas/client_registration.py"
       ],
       "exposed_surface": "current: /register/{client_id}; target: /register/{client_id} [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/client.py",
-        "tigrbl_auth/tables/client_registration.py"
+        "tba_auth/tables/client.py",
+        "tba_auth/tables/client_registration.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance",
@@ -585,14 +585,14 @@
       "claim_tier": 3,
       "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/introspection.py",
-        "tigrbl_auth/services/persistence.py",
-        "tigrbl_auth/tables/token_record.py",
-        "tigrbl_auth/tables/revoked_token.py"
+        "tba_auth/standards/oauth2/introspection.py",
+        "tba_auth/services/persistence.py",
+        "tba_auth/tables/token_record.py",
+        "tba_auth/tables/revoked_token.py"
       ],
       "exposed_surface": "current: /introspect; target: /introspect [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/tables/token_record.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance",
@@ -631,16 +631,16 @@
       "claim_tier": 3,
       "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/native_apps.py",
-        "tigrbl_auth/tables/client.py",
-        "tigrbl_auth/ops/authorize.py",
-        "tigrbl_auth/ops/register.py",
-        "tigrbl_auth/ops/token.py"
+        "tba_auth/standards/oauth2/native_apps.py",
+        "tba_auth/tables/client.py",
+        "tba_auth/ops/authorize.py",
+        "tba_auth/ops/register.py",
+        "tba_auth/ops/token.py"
       ],
       "exposed_surface": "current: /authorize, /token, /register, /register/{client_id}; target: /authorize, /token, /register, /register/{client_id} [runtime-validated-native-app-profile]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/client.py",
-        "tigrbl_auth/tables/client_registration.py"
+        "tba_auth/tables/client.py",
+        "tba_auth/tables/client_registration.py"
       ],
       "test_evidence": {
         "classes": "unit, conformance, interop",
@@ -679,17 +679,17 @@
       "claim_tier": 3,
       "profile": "hardening",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/device_authorization.py",
-        "tigrbl_auth/api/rest/routers/device_authorization.py",
-        "tigrbl_auth/ops/device_authorization.py",
-        "tigrbl_auth/tables/device_code.py",
-        "tigrbl_auth/ops/token.py",
-        "tigrbl_auth/services/persistence.py"
+        "tba_auth/standards/oauth2/device_authorization.py",
+        "tba_auth/api/rest/routers/device_authorization.py",
+        "tba_auth/ops/device_authorization.py",
+        "tba_auth/tables/device_code.py",
+        "tba_auth/ops/token.py",
+        "tba_auth/services/persistence.py"
       ],
       "exposed_surface": "current: /device_authorization; target: /device_authorization [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/device_code.py",
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/tables/device_code.py",
+        "tba_auth/tables/token_record.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, interop",
@@ -732,16 +732,16 @@
       "claim_tier": 3,
       "profile": "hardening",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/token_exchange.py",
-        "tigrbl_auth/ops/token.py",
-        "tigrbl_auth/services/token_service.py",
-        "tigrbl_auth/services/persistence.py",
-        "tigrbl_auth/api/rpc/methods/token.py",
-        "tigrbl_auth/api/rpc/schemas/token.py"
+        "tba_auth/standards/oauth2/token_exchange.py",
+        "tba_auth/ops/token.py",
+        "tba_auth/services/token_service.py",
+        "tba_auth/services/persistence.py",
+        "tba_auth/api/rpc/methods/token.py",
+        "tba_auth/api/rpc/schemas/token.py"
       ],
       "exposed_surface": "current: /token/exchange; target: /token/exchange [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/tables/token_record.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, interop",
@@ -784,21 +784,21 @@
       "claim_tier": 3,
       "profile": "hardening",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/mtls.py",
-        "tigrbl_auth/standards/oauth2/rfc9700.py",
-        "tigrbl_auth/ops/token.py",
-        "tigrbl_auth/standards/oauth2/token_exchange.py",
-        "tigrbl_auth/services/token_service.py",
-        "tigrbl_auth/ops/register.py",
-        "tigrbl_auth/api/rest/schemas.py",
-        "tigrbl_auth/standards/oidc/discovery_metadata.py",
-        "tigrbl_auth/security/auth.py",
-        "tigrbl_auth/security/deps.py"
+        "tba_auth/standards/oauth2/mtls.py",
+        "tba_auth/standards/oauth2/rfc9700.py",
+        "tba_auth/ops/token.py",
+        "tba_auth/standards/oauth2/token_exchange.py",
+        "tba_auth/services/token_service.py",
+        "tba_auth/ops/register.py",
+        "tba_auth/api/rest/schemas.py",
+        "tba_auth/standards/oidc/discovery_metadata.py",
+        "tba_auth/security/auth.py",
+        "tba_auth/security/deps.py"
       ],
       "exposed_surface": "current: /token, /token/exchange; target: /token, /token/exchange [runtime-enforced-sender-constraint]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/token_record.py",
-        "tigrbl_auth/tables/client.py"
+        "tba_auth/tables/token_record.py",
+        "tba_auth/tables/client.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, interop",
@@ -839,19 +839,19 @@
       "claim_tier": 3,
       "profile": "hardening",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/resource_indicators.py",
-        "tigrbl_auth/ops/authorize.py",
-        "tigrbl_auth/ops/token.py",
-        "tigrbl_auth/ops/device_authorization.py",
-        "tigrbl_auth/ops/par.py",
-        "tigrbl_auth/standards/oauth2/token_exchange.py",
-        "tigrbl_auth/services/token_service.py"
+        "tba_auth/standards/oauth2/resource_indicators.py",
+        "tba_auth/ops/authorize.py",
+        "tba_auth/ops/token.py",
+        "tba_auth/ops/device_authorization.py",
+        "tba_auth/ops/par.py",
+        "tba_auth/standards/oauth2/token_exchange.py",
+        "tba_auth/services/token_service.py"
       ],
       "exposed_surface": "current: /authorize, /token, /device_authorization, /par, /token/exchange; target: /authorize, /token, /device_authorization, /par, /token/exchange [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/pushed_authorization_request.py",
-        "tigrbl_auth/tables/auth_code.py",
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/tables/pushed_authorization_request.py",
+        "tba_auth/tables/auth_code.py",
+        "tba_auth/tables/token_record.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance",
@@ -889,15 +889,15 @@
       "claim_tier": 3,
       "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/jwt_access_tokens.py",
-        "tigrbl_auth/services/token_service.py",
-        "tigrbl_auth/ops/login.py",
-        "tigrbl_auth/ops/token.py",
-        "tigrbl_auth/standards/oauth2/token_exchange.py"
+        "tba_auth/standards/oauth2/jwt_access_tokens.py",
+        "tba_auth/services/token_service.py",
+        "tba_auth/ops/login.py",
+        "tba_auth/ops/token.py",
+        "tba_auth/standards/oauth2/token_exchange.py"
       ],
       "exposed_surface": "current: /login, /token, /token/exchange; target: /login, /token, /token/exchange [mounted-jwt-access-token-profile]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/tables/token_record.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, interop",
@@ -937,15 +937,15 @@
       "claim_tier": 3,
       "profile": "hardening",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/jar.py",
-        "tigrbl_auth/ops/authorize.py",
-        "tigrbl_auth/ops/par.py",
-        "tigrbl_auth/cli/artifacts.py"
+        "tba_auth/standards/oauth2/jar.py",
+        "tba_auth/ops/authorize.py",
+        "tba_auth/ops/par.py",
+        "tba_auth/cli/artifacts.py"
       ],
       "exposed_surface": "current: /authorize, /par; target: /authorize, /par [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/pushed_authorization_request.py",
-        "tigrbl_auth/tables/auth_code.py"
+        "tba_auth/tables/pushed_authorization_request.py",
+        "tba_auth/tables/auth_code.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, interop",
@@ -986,15 +986,15 @@
       "claim_tier": 3,
       "profile": "hardening",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/par.py",
-        "tigrbl_auth/api/rest/routers/par.py",
-        "tigrbl_auth/ops/par.py",
-        "tigrbl_auth/ops/authorize.py",
-        "tigrbl_auth/tables/pushed_authorization_request.py"
+        "tba_auth/standards/oauth2/par.py",
+        "tba_auth/api/rest/routers/par.py",
+        "tba_auth/ops/par.py",
+        "tba_auth/ops/authorize.py",
+        "tba_auth/tables/pushed_authorization_request.py"
       ],
       "exposed_surface": "current: /par; target: /par [mounted-normalized-request-surface]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/pushed_authorization_request.py"
+        "tba_auth/tables/pushed_authorization_request.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, interop",
@@ -1035,16 +1035,16 @@
       "claim_tier": 3,
       "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/issuer_identification.py",
-        "tigrbl_auth/config/deployment.py",
-        "tigrbl_auth/ops/authorize.py",
-        "tigrbl_auth/standards/oidc/discovery_metadata.py",
-        "tigrbl_auth/cli/artifacts.py"
+        "tba_auth/standards/oauth2/issuer_identification.py",
+        "tba_auth/config/deployment.py",
+        "tba_auth/ops/authorize.py",
+        "tba_auth/standards/oidc/discovery_metadata.py",
+        "tba_auth/cli/artifacts.py"
       ],
       "exposed_surface": "current: /authorize, /.well-known/openid-configuration; target: /authorize, /.well-known/openid-configuration [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/auth_code.py",
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/tables/auth_code.py",
+        "tba_auth/tables/token_record.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance",
@@ -1083,15 +1083,15 @@
       "claim_tier": 3,
       "profile": "hardening",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/rar.py",
-        "tigrbl_auth/ops/authorize.py",
-        "tigrbl_auth/ops/par.py",
-        "tigrbl_auth/cli/artifacts.py"
+        "tba_auth/standards/oauth2/rar.py",
+        "tba_auth/ops/authorize.py",
+        "tba_auth/ops/par.py",
+        "tba_auth/cli/artifacts.py"
       ],
       "exposed_surface": "current: /authorize, /par; target: /authorize, /par [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/pushed_authorization_request.py",
-        "tigrbl_auth/tables/auth_code.py"
+        "tba_auth/tables/pushed_authorization_request.py",
+        "tba_auth/tables/auth_code.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, interop",
@@ -1132,16 +1132,16 @@
       "claim_tier": 3,
       "profile": "hardening",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/dpop.py",
-        "tigrbl_auth/standards/oauth2/rfc9700.py",
-        "tigrbl_auth/ops/token.py",
-        "tigrbl_auth/standards/oauth2/token_exchange.py",
-        "tigrbl_auth/security/auth.py",
-        "tigrbl_auth/security/deps.py"
+        "tba_auth/standards/oauth2/dpop.py",
+        "tba_auth/standards/oauth2/rfc9700.py",
+        "tba_auth/ops/token.py",
+        "tba_auth/standards/oauth2/token_exchange.py",
+        "tba_auth/security/auth.py",
+        "tba_auth/security/deps.py"
       ],
       "exposed_surface": "current: /token, /token/exchange; target: /token, /token/exchange [runtime-enforced-dpop]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/tables/token_record.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, interop",
@@ -1182,17 +1182,17 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/http/cookies.py",
-        "tigrbl_auth/standards/oidc/session_mgmt.py",
-        "tigrbl_auth/ops/login.py",
-        "tigrbl_auth/ops/authorize.py",
-        "tigrbl_auth/ops/logout.py",
-        "tigrbl_auth/tables/auth_session.py"
+        "tba_auth/standards/http/cookies.py",
+        "tba_auth/standards/oidc/session_mgmt.py",
+        "tba_auth/ops/login.py",
+        "tba_auth/ops/authorize.py",
+        "tba_auth/ops/logout.py",
+        "tba_auth/tables/auth_session.py"
       ],
       "exposed_surface": "current: /login, /authorize, /logout; target: /login, /authorize, /logout [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/auth_session.py",
-        "tigrbl_auth/tables/logout_state.py"
+        "tba_auth/tables/auth_session.py",
+        "tba_auth/tables/logout_state.py"
       ],
       "test_evidence": {
         "classes": "integration, conformance, negative",
@@ -1230,14 +1230,14 @@
       "claim_tier": 3,
       "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/assertion_framework.py",
-        "tigrbl_auth/ops/token.py",
-        "tigrbl_auth/cli/artifacts.py"
+        "tba_auth/standards/oauth2/assertion_framework.py",
+        "tba_auth/ops/token.py",
+        "tba_auth/cli/artifacts.py"
       ],
       "exposed_surface": "current: /token; target: /token [runtime-integrated-token-endpoint]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/client.py",
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/tables/client.py",
+        "tba_auth/tables/token_record.py"
       ],
       "test_evidence": {
         "classes": "unit",
@@ -1272,16 +1272,16 @@
       "claim_tier": 3,
       "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/jwt_client_auth.py",
-        "tigrbl_auth/ops/token.py",
-        "tigrbl_auth/ops/register.py",
-        "tigrbl_auth/standards/oidc/discovery_metadata.py",
-        "tigrbl_auth/cli/artifacts.py"
+        "tba_auth/standards/oauth2/jwt_client_auth.py",
+        "tba_auth/ops/token.py",
+        "tba_auth/ops/register.py",
+        "tba_auth/standards/oidc/discovery_metadata.py",
+        "tba_auth/cli/artifacts.py"
       ],
       "exposed_surface": "current: /token, /register, /register/{client_id}; target: /token, /register, /register/{client_id} [runtime-integrated-token-endpoint-and-registration-metadata]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/client.py",
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/tables/client.py",
+        "tba_auth/tables/token_record.py"
       ],
       "test_evidence": {
         "classes": "unit",
@@ -1316,12 +1316,12 @@
       "claim_tier": 3,
       "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/rfc9728.py"
+        "tba_auth/standards/oauth2/rfc9728.py"
       ],
       "exposed_surface": "current: /.well-known/oauth-protected-resource; target: /.well-known/oauth-protected-resource",
       "persistence_artifact": [
-        "tigrbl_auth/tables/service.py",
-        "tigrbl_auth/tables/service_key.py"
+        "tba_auth/tables/service.py",
+        "tba_auth/tables/service_key.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, interop",
@@ -1361,19 +1361,19 @@
       "claim_tier": 3,
       "profile": "hardening",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/rfc9700.py",
-        "tigrbl_auth/ops/authorize.py",
-        "tigrbl_auth/ops/token.py",
-        "tigrbl_auth/standards/oidc/discovery.py",
-        "tigrbl_auth/standards/oidc/discovery_metadata.py",
-        "tigrbl_auth/cli/artifacts.py",
-        "tigrbl_auth/security/auth.py",
-        "tigrbl_auth/security/deps.py"
+        "tba_auth/standards/oauth2/rfc9700.py",
+        "tba_auth/ops/authorize.py",
+        "tba_auth/ops/token.py",
+        "tba_auth/standards/oidc/discovery.py",
+        "tba_auth/standards/oidc/discovery_metadata.py",
+        "tba_auth/cli/artifacts.py",
+        "tba_auth/security/auth.py",
+        "tba_auth/security/deps.py"
       ],
       "exposed_surface": "current: /authorize, /token, /.well-known/openid-configuration; target: /authorize, /token, /.well-known/openid-configuration [implemented-core-runtime-enforcement]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/token_record.py",
-        "tigrbl_auth/tables/client.py"
+        "tba_auth/tables/token_record.py",
+        "tba_auth/tables/client.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, negative",
@@ -1412,16 +1412,16 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/oidc/core.py",
-        "tigrbl_auth/standards/oidc/id_token.py"
+        "tba_auth/standards/oidc/core.py",
+        "tba_auth/standards/oidc/id_token.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
-        "tigrbl_auth/tables/auth_session.py",
-        "tigrbl_auth/tables/auth_code.py",
-        "tigrbl_auth/tables/token_record.py",
-        "tigrbl_auth/tables/user.py",
-        "tigrbl_auth/tables/consent.py"
+        "tba_auth/tables/auth_session.py",
+        "tba_auth/tables/auth_code.py",
+        "tba_auth/tables/token_record.py",
+        "tba_auth/tables/user.py",
+        "tba_auth/tables/consent.py"
       ],
       "test_evidence": {
         "classes": "integration, conformance",
@@ -1459,7 +1459,7 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/oidc/discovery.py"
+        "tba_auth/standards/oidc/discovery.py"
       ],
       "exposed_surface": "current: /.well-known/openid-configuration; target: /.well-known/openid-configuration",
       "persistence_artifact": [
@@ -1507,13 +1507,13 @@
       "claim_tier": 3,
       "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/standards/oidc/userinfo.py"
+        "tba_auth/standards/oidc/userinfo.py"
       ],
       "exposed_surface": "current: /userinfo; target: /userinfo [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/user.py",
-        "tigrbl_auth/tables/token_record.py",
-        "tigrbl_auth/tables/auth_session.py"
+        "tba_auth/tables/user.py",
+        "tba_auth/tables/token_record.py",
+        "tba_auth/tables/auth_session.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance",
@@ -1550,19 +1550,19 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/oidc/session_mgmt.py",
-        "tigrbl_auth/standards/http/cookies.py",
-        "tigrbl_auth/ops/login.py",
-        "tigrbl_auth/ops/authorize.py",
-        "tigrbl_auth/ops/logout.py",
-        "tigrbl_auth/tables/auth_session.py",
-        "tigrbl_auth/tables/auth_code.py",
-        "tigrbl_auth/services/persistence.py"
+        "tba_auth/standards/oidc/session_mgmt.py",
+        "tba_auth/standards/http/cookies.py",
+        "tba_auth/ops/login.py",
+        "tba_auth/ops/authorize.py",
+        "tba_auth/ops/logout.py",
+        "tba_auth/tables/auth_session.py",
+        "tba_auth/tables/auth_code.py",
+        "tba_auth/services/persistence.py"
       ],
       "exposed_surface": "current: /login, /authorize, /logout; target: /login, /authorize, /logout [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/auth_session.py",
-        "tigrbl_auth/tables/logout_state.py"
+        "tba_auth/tables/auth_session.py",
+        "tba_auth/tables/logout_state.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, negative",
@@ -1601,17 +1601,17 @@
       "claim_tier": 3,
       "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/standards/oidc/rp_initiated_logout.py",
-        "tigrbl_auth/api/rest/routers/logout.py",
-        "tigrbl_auth/ops/logout.py",
-        "tigrbl_auth/tables/logout_state.py",
-        "tigrbl_auth/tables/client_registration.py",
-        "tigrbl_auth/services/persistence.py"
+        "tba_auth/standards/oidc/rp_initiated_logout.py",
+        "tba_auth/api/rest/routers/logout.py",
+        "tba_auth/ops/logout.py",
+        "tba_auth/tables/logout_state.py",
+        "tba_auth/tables/client_registration.py",
+        "tba_auth/services/persistence.py"
       ],
       "exposed_surface": "current: /logout; target: /logout [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/logout_state.py",
-        "tigrbl_auth/tables/auth_session.py"
+        "tba_auth/tables/logout_state.py",
+        "tba_auth/tables/auth_session.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, negative",
@@ -1650,20 +1650,20 @@
       "claim_tier": 3,
       "profile": "hardening",
       "implemented_module": [
-        "tigrbl_auth/standards/oidc/frontchannel_logout.py",
-        "tigrbl_auth/standards/oidc/rp_initiated_logout.py",
-        "tigrbl_auth/ops/logout.py",
-        "tigrbl_auth/tables/logout_state.py",
-        "tigrbl_auth/tables/client_registration.py",
-        "tigrbl_auth/services/persistence.py",
-        "tigrbl_auth/api/rest/shared.py",
-        "tigrbl_auth/standards/oidc/discovery_metadata.py",
-        "tigrbl_auth/cli/artifacts.py"
+        "tba_auth/standards/oidc/frontchannel_logout.py",
+        "tba_auth/standards/oidc/rp_initiated_logout.py",
+        "tba_auth/ops/logout.py",
+        "tba_auth/tables/logout_state.py",
+        "tba_auth/tables/client_registration.py",
+        "tba_auth/services/persistence.py",
+        "tba_auth/api/rest/shared.py",
+        "tba_auth/standards/oidc/discovery_metadata.py",
+        "tba_auth/cli/artifacts.py"
       ],
       "exposed_surface": "current: /logout; target: /logout [fanout-planned-on-mounted-logout-route]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/logout_state.py",
-        "tigrbl_auth/tables/auth_session.py"
+        "tba_auth/tables/logout_state.py",
+        "tba_auth/tables/auth_session.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, negative",
@@ -1701,20 +1701,20 @@
       "claim_tier": 3,
       "profile": "hardening",
       "implemented_module": [
-        "tigrbl_auth/standards/oidc/backchannel_logout.py",
-        "tigrbl_auth/standards/oidc/rp_initiated_logout.py",
-        "tigrbl_auth/ops/logout.py",
-        "tigrbl_auth/tables/logout_state.py",
-        "tigrbl_auth/tables/client_registration.py",
-        "tigrbl_auth/services/persistence.py",
-        "tigrbl_auth/api/rest/shared.py",
-        "tigrbl_auth/standards/oidc/discovery_metadata.py",
-        "tigrbl_auth/cli/artifacts.py"
+        "tba_auth/standards/oidc/backchannel_logout.py",
+        "tba_auth/standards/oidc/rp_initiated_logout.py",
+        "tba_auth/ops/logout.py",
+        "tba_auth/tables/logout_state.py",
+        "tba_auth/tables/client_registration.py",
+        "tba_auth/services/persistence.py",
+        "tba_auth/api/rest/shared.py",
+        "tba_auth/standards/oidc/discovery_metadata.py",
+        "tba_auth/cli/artifacts.py"
       ],
       "exposed_surface": "current: /logout; target: /logout [fanout-planned-on-mounted-logout-route]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/logout_state.py",
-        "tigrbl_auth/tables/auth_session.py"
+        "tba_auth/tables/logout_state.py",
+        "tba_auth/tables/auth_session.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, negative",
@@ -1752,8 +1752,8 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/api/rest",
-        "tigrbl_auth/api/surfaces.py"
+        "tba_auth/api/rest",
+        "tba_auth/api/surfaces.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
@@ -1794,14 +1794,14 @@
       "claim_tier": 3,
       "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/api/rpc/__init__.py",
-        "tigrbl_auth/api/rpc/registry.py",
-        "tigrbl_auth/api/rpc/methods",
-        "tigrbl_auth/api/rpc/schemas",
-        "tigrbl_auth/api/surfaces.py",
-        "tigrbl_auth/cli/artifacts.py",
-        "tigrbl_auth/cli/reports.py",
-        "tigrbl_auth/config/deployment.py"
+        "tba_auth/api/rpc/__init__.py",
+        "tba_auth/api/rpc/registry.py",
+        "tba_auth/api/rpc/methods",
+        "tba_auth/api/rpc/schemas",
+        "tba_auth/api/surfaces.py",
+        "tba_auth/cli/artifacts.py",
+        "tba_auth/cli/reports.py",
+        "tba_auth/config/deployment.py"
       ],
       "exposed_surface": "current: /rpc; target: /rpc [implementation-backed]",
       "persistence_artifact": [
@@ -1842,17 +1842,17 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/api/app.py",
-        "tigrbl_auth/app.py",
-        "tigrbl_auth/plugin.py",
-        "tigrbl_auth/gateway.py",
-        "tigrbl_auth/config/deployment.py",
-        "tigrbl_auth/runtime/__init__.py",
-        "tigrbl_auth/runtime/types.py",
-        "tigrbl_auth/runtime/base.py",
-        "tigrbl_auth/runtime/plan.py",
-        "tigrbl_auth/runtime/registry.py",
-        "tigrbl_auth/cli/runtime.py"
+        "tba_auth/api/app.py",
+        "tba_auth/app.py",
+        "tba_auth/plugin.py",
+        "tba_auth/gateway.py",
+        "tba_auth/config/deployment.py",
+        "tba_auth/runtime/__init__.py",
+        "tba_auth/runtime/types.py",
+        "tba_auth/runtime/base.py",
+        "tba_auth/runtime/plan.py",
+        "tba_auth/runtime/registry.py",
+        "tba_auth/cli/runtime.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
@@ -1897,15 +1897,15 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/api/app.py",
-        "tigrbl_auth/gateway.py",
-        "tigrbl_auth/cli/handlers.py",
-        "tigrbl_auth/config/deployment.py",
-        "tigrbl_auth/runtime/registry.py",
-        "tigrbl_auth/runtime/plan.py",
-        "tigrbl_auth/runtime/uvicorn.py",
-        "tigrbl_auth/cli/runtime.py",
-        "tigrbl_auth/cli/reports.py"
+        "tba_auth/api/app.py",
+        "tba_auth/gateway.py",
+        "tba_auth/cli/handlers.py",
+        "tba_auth/config/deployment.py",
+        "tba_auth/runtime/registry.py",
+        "tba_auth/runtime/plan.py",
+        "tba_auth/runtime/uvicorn.py",
+        "tba_auth/cli/runtime.py",
+        "tba_auth/cli/reports.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
@@ -1950,15 +1950,15 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/api/app.py",
-        "tigrbl_auth/gateway.py",
-        "tigrbl_auth/cli/handlers.py",
-        "tigrbl_auth/config/deployment.py",
-        "tigrbl_auth/runtime/registry.py",
-        "tigrbl_auth/runtime/plan.py",
-        "tigrbl_auth/runtime/hypercorn.py",
-        "tigrbl_auth/cli/runtime.py",
-        "tigrbl_auth/cli/reports.py"
+        "tba_auth/api/app.py",
+        "tba_auth/gateway.py",
+        "tba_auth/cli/handlers.py",
+        "tba_auth/config/deployment.py",
+        "tba_auth/runtime/registry.py",
+        "tba_auth/runtime/plan.py",
+        "tba_auth/runtime/hypercorn.py",
+        "tba_auth/cli/runtime.py",
+        "tba_auth/cli/reports.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
@@ -2003,15 +2003,15 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/api/app.py",
-        "tigrbl_auth/gateway.py",
-        "tigrbl_auth/cli/handlers.py",
-        "tigrbl_auth/config/deployment.py",
-        "tigrbl_auth/runtime/registry.py",
-        "tigrbl_auth/runtime/plan.py",
-        "tigrbl_auth/runtime/tigrcorn.py",
-        "tigrbl_auth/cli/runtime.py",
-        "tigrbl_auth/cli/reports.py"
+        "tba_auth/api/app.py",
+        "tba_auth/gateway.py",
+        "tba_auth/cli/handlers.py",
+        "tba_auth/config/deployment.py",
+        "tba_auth/runtime/registry.py",
+        "tba_auth/runtime/plan.py",
+        "tba_auth/runtime/tigrcorn.py",
+        "tba_auth/cli/runtime.py",
+        "tba_auth/cli/reports.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
@@ -2056,16 +2056,16 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/cli/main.py",
-        "tigrbl_auth/cli/metadata.py",
-        "tigrbl_auth/cli/handlers.py",
-        "tigrbl_auth/cli/runtime.py",
-        "tigrbl_auth/cli/reports.py",
-        "tigrbl_auth/services/operator_service.py",
-        "tigrbl_auth/services/audit_service.py",
-        "tigrbl_auth/services/client_service.py",
-        "tigrbl_auth/services/identity_service.py",
-        "tigrbl_auth/services/session_service.py"
+        "tba_auth/cli/main.py",
+        "tba_auth/cli/metadata.py",
+        "tba_auth/cli/handlers.py",
+        "tba_auth/cli/runtime.py",
+        "tba_auth/cli/reports.py",
+        "tba_auth/services/operator_service.py",
+        "tba_auth/services/audit_service.py",
+        "tba_auth/services/client_service.py",
+        "tba_auth/services/identity_service.py",
+        "tba_auth/services/session_service.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
@@ -2113,11 +2113,11 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/cli/main.py",
-        "tigrbl_auth/cli/metadata.py",
-        "tigrbl_auth/cli/handlers.py",
-        "tigrbl_auth/cli/project_tree.py",
-        "tigrbl_auth/services/persistence.py"
+        "tba_auth/cli/main.py",
+        "tba_auth/cli/metadata.py",
+        "tba_auth/cli/handlers.py",
+        "tba_auth/cli/project_tree.py",
+        "tba_auth/services/persistence.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
@@ -2159,12 +2159,12 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/cli/metadata.py",
-        "tigrbl_auth/cli/handlers.py",
-        "tigrbl_auth/api/rpc/methods/keys.py",
-        "tigrbl_auth/standards/jose/rfc7517.py",
-        "tigrbl_auth/services/key_management.py",
-        "tigrbl_auth/services/operator_service.py"
+        "tba_auth/cli/metadata.py",
+        "tba_auth/cli/handlers.py",
+        "tba_auth/api/rpc/methods/keys.py",
+        "tba_auth/standards/jose/rfc7517.py",
+        "tba_auth/services/key_management.py",
+        "tba_auth/services/operator_service.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
@@ -2208,10 +2208,10 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/cli/metadata.py",
-        "tigrbl_auth/cli/handlers.py",
-        "tigrbl_auth/services/import_export_service.py",
-        "tigrbl_auth/services/operator_service.py"
+        "tba_auth/cli/metadata.py",
+        "tba_auth/cli/handlers.py",
+        "tba_auth/services/import_export_service.py",
+        "tba_auth/services/operator_service.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
@@ -2253,9 +2253,9 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/cli/reports.py",
-        "tigrbl_auth/cli/handlers.py",
-        "tigrbl_auth/cli/artifacts.py"
+        "tba_auth/cli/reports.py",
+        "tba_auth/cli/handlers.py",
+        "tba_auth/cli/artifacts.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
@@ -2366,7 +2366,7 @@
       "kind": "extension-quarantine",
       "reason": "Optional hardening extension not yet promoted into the certified core boundary.",
       "implemented_module": [
-        "tigrbl_auth/standards/jose/rfc7800.py"
+        "tba_auth/standards/jose/rfc7800.py"
       ],
       "ssot_entity_cells": {
         "admin_api": [
@@ -2389,7 +2389,7 @@
       "kind": "extension-quarantine",
       "reason": "Outside the default OAuth 2.0 / OIDC auth-server certification boundary.",
       "implemented_module": [
-        "pkgs/50-protocols/tigrbl-security-event-protocol-set/src/tigrbl_security_event_protocol_set/__init__.py"
+        "pkgs/50-protocols/tba-protocol-security-event-set/src/tba_protocol_security_event_set/__init__.py"
       ],
       "ssot_entity_cells": {
         "admin_api": [
@@ -2412,7 +2412,7 @@
       "kind": "extension-quarantine",
       "reason": "Web Push is not part of the certified auth-core boundary.",
       "implemented_module": [
-        "tigrbl_auth/extensions/rfc8291.py"
+        "tba_auth/extensions/rfc8291.py"
       ],
       "ssot_entity_cells": {
         "admin_api": [
@@ -2435,7 +2435,7 @@
       "kind": "extension-quarantine",
       "reason": "WebAuthn is extension work and not part of the default certified boundary.",
       "implemented_module": [
-        "tigrbl_auth/extensions/rfc8812.py"
+        "tba_auth/extensions/rfc8812.py"
       ],
       "ssot_entity_cells": {
         "admin_api": [
@@ -2458,7 +2458,7 @@
       "kind": "extension-quarantine",
       "reason": "RFC 8932 is not an OAuth/OIDC auth-core target and remains quarantined from certification claims.",
       "implemented_module": [
-        "tigrbl_auth/extensions/rfc8932.py"
+        "tba_auth/extensions/rfc8932.py"
       ],
       "ssot_entity_cells": {
         "admin_api": [

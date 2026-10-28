@@ -1,13 +1,13 @@
 targets:
 - RFC 7592
 modules:
-- tigrbl_auth/standards/oauth2/client_registration_management.py
-- tigrbl_auth/ops/register.py
-- tigrbl_auth/api/rest/routers/register.py
-- tigrbl_auth/api/rpc/methods/client_registration.py
-- tigrbl_auth/api/rpc/schemas/client_registration.py
-- tigrbl_auth/services/persistence.py
-- tigrbl_auth/tables/client_registration.py
+- tba_auth/standards/oauth2/client_registration_management.py
+- tba_auth/ops/register.py
+- tba_auth/api/rest/routers/register.py
+- tba_auth/api/rpc/methods/client_registration.py
+- tba_auth/api/rpc/schemas/client_registration.py
+- tba_auth/services/persistence.py
+- tba_auth/tables/client_registration.py
 tests:
 - tests/unit/test_hardening_cluster_a.py
 - tests/conformance/hardening/test_rfc7592_client_registration_management.py

@@ -2,9 +2,9 @@
 
 Research date: 2026-05-28
 
-Scope: this matrix compares `tigrbl_auth` with Auth0, Okta, Keycloak, FusionAuth, and Amazon Cognito for multi-factor authentication coverage. MFA is treated as a product surface spanning factors, enrollment, challenge, policy, recovery, audit, hosted login, admin APIs, and token assurance claims.
+Scope: this matrix compares `tba_auth` with Auth0, Okta, Keycloak, FusionAuth, and Amazon Cognito for multi-factor authentication coverage. MFA is treated as a product surface spanning factors, enrollment, challenge, policy, recovery, audit, hosted login, admin APIs, and token assurance claims.
 
-| MFA capability | tigrbl_auth | Auth0 | Okta | Keycloak | FusionAuth | Amazon Cognito |
+| MFA capability | tba_auth | Auth0 | Okta | Keycloak | FusionAuth | Amazon Cognito |
 | --- | --- | --- | --- | --- | --- | --- |
 | Product framing | Planned advanced-authentication lane. Current state is credential primitives plus tests, not production MFA. See [MFA Focus](mfa-focus.md). | First-class MFA product integrated with Universal Login, Guardian, Actions, Management API, and MFA API. See [Auth0 MFA factors](https://auth0.com/docs/secure/multi-factor-authentication/multi-factor-authentication-factors). | First-class MFA/authenticator assurance product across Identity Engine, policies, Factors API, and Authentication API. See [Okta MFA concepts](https://developer.okta.com/docs/concepts/mfa/). | MFA is configured through authentication flows, required actions, OTP, WebAuthn, and recovery authenticators. See [Keycloak authentication flows](https://www.keycloak.org/docs/latest/server_admin/#_authentication-flows). | MFA is a login and step-up product with tenant/user settings and Multi-Factor API. See [FusionAuth MFA](https://fusionauth.io/docs/lifecycle/authenticate-users/multi-factor-authentication). | MFA is user-pool configuration integrated with managed login and auth challenge flows. See [Cognito MFA](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-mfa.html). |
 | Factor inventory model | Generic `CredentialKind.MFA_FACTOR` exists; needs canonical factor records with type, tenant, subject, status, assurance, verified-at, and last-used. | Guardian factors and MFA enrollments are managed through tenant/application/user APIs. | User Factors / Authenticators model enrollable and verifiable factors for users. See [Okta User Factors API](https://developer.okta.com/docs/reference/api/factors/). | User credentials and authenticator configuration live under realm/user authentication flow and credential management. | User `twoFactor.methods` and Multi-Factor API model user methods. | User-pool MFA settings plus per-user preferences model enabled/preferred methods. |
@@ -46,17 +46,17 @@ The vendor pattern is consistent: MFA is treated as an authentication product su
 | Audit | Factor enrollment, challenge, success, failure, reset, recovery, revocation, and policy-change events. |
 | Claims | `amr` and `acr` or equivalent assurance signals for downstream applications and APIs. |
 
-For `tigrbl_auth`, the clean product split is:
+For `tba_auth`, the clean product split is:
 
 | Layer | Recommended owner |
 | --- | --- |
-| Factor proof material | `tigrbl-credentials` |
-| MFA requirement decisions | `tigrbl-authz-policy` |
-| Challenge/session continuation | `tigrbl-auth-backend-app-public`, `tigrbl-auth-protocol-oauth`, `tigrbl-auth-protocol-oidc` |
-| Factor and challenge storage | `tigrbl-identity-storage` |
-| Tenant policy and support reset | `tigrbl-auth-backend-app-tenant-admin` |
-| Hosted login MFA UI | `@tigrbl-auth/public-uix` |
-| Assurance claims | `tigrbl-identity-jose`, `tigrbl-auth-protocol-oidc` |
+| Factor proof material | `tba-credentials` |
+| MFA requirement decisions | `tba-runtime-authorization-policy` |
+| Challenge/session continuation | `tba-app-backend-public`, `tba-protocol-oauth`, `tba-protocol-oidc` |
+| Factor and challenge storage | `tba-storage-core` |
+| Tenant policy and support reset | `tba-app-backend-tenant-admin` |
+| Hosted login MFA UI | `@tba/ui-public` |
+| Assurance claims | `tba-provider-identity-jose`, `tba-protocol-oidc` |
 
 Recommended near-term stance:
 

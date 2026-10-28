@@ -1,6 +1,6 @@
 # OpenAPI Contract Summary
 
-- Title: `tigrbl_auth public auth server`
+- Title: `tba_auth public auth server`
 - Version: `0.4.0.dev2`
 - Profile: `baseline`
 - Surface sets: `public-rest`

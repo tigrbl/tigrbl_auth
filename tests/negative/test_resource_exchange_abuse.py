@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from tigrbl_auth_protocol_oauth.standards.resource_indicators import (
+from tba_protocol_oauth.standards.resource_indicators import (
     select_resource_indicator,
 )
 

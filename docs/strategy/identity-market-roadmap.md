@@ -105,7 +105,7 @@ identity security, not generic IAM.
 | 14 | `admin` | Tenant/user/client/app/service/key/session/token/policy administration after policy and credential foundations are clear. |
 | 15 | `rp` | Relying-party client SDK for login, callback handling, session establishment, logout, and userinfo mapping. |
 | 16 | `testkit` | Fixtures, fake providers, fake repositories, fake key stores, conformance harnesses, protocol vectors. |
-| 17 | `tigrbl-auth` facade | Compatibility and product facade over the split packages. |
+| 17 | `tba-auth` facade | Compatibility and product facade over the split packages. |
 
 ## Delivery Waves
 
@@ -176,7 +176,7 @@ runtime
 server
 storage
 operator
-tigrbl-auth facade
+tba-auth facade
 ```
 
 Deliverables:
@@ -293,5 +293,5 @@ The resulting product stack is:
   feature flags, config precedence, lifecycle hooks, health checks, and
   middleware enablement are product surfaces.
 - Keep operator workflows separate from request-path runtime behavior.
-- Keep `tigrbl-auth` as the facade and compatibility product while the
+- Keep `tba-auth` as the facade and compatibility product while the
   identity suite becomes the implementation and distribution layer.

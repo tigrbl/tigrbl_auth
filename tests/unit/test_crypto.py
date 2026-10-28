@@ -1,5 +1,5 @@
 """
-Unit tests for tigrbl_auth.crypto module.
+Unit tests for tba_auth.crypto module.
 
 Tests password hashing, JWT key management, and security functions.
 """
@@ -12,7 +12,7 @@ import pytest
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from cryptography.hazmat.primitives import serialization
 
-from tigrbl_auth.crypto import (
+from tba_auth.crypto import (
     hash_pw,
     verify_pw,
     signing_key,
@@ -116,7 +116,7 @@ class TestJWTKeyCrypto:
         kid, original_priv, original_pub = _generate_keypair(key_path)
 
         # Mock the default path to use our test file
-        with patch("tigrbl_auth.crypto._DEFAULT_KEY_PATH", key_path):
+        with patch("tba_auth.crypto._DEFAULT_KEY_PATH", key_path):
             # Clear the cache
             _load_keypair.cache_clear()
 
@@ -131,7 +131,7 @@ class TestJWTKeyCrypto:
         """Test that keys are generated when file is missing."""
         key_path = tmp_path / "missing_key.pem"
 
-        with patch("tigrbl_auth.crypto._DEFAULT_KEY_PATH", key_path):
+        with patch("tba_auth.crypto._DEFAULT_KEY_PATH", key_path):
             # Clear the cache
             _load_keypair.cache_clear()
 
@@ -150,7 +150,7 @@ class TestJWTKeyCrypto:
         """Test that key pair loading is cached."""
         key_path = tmp_path / "cached_key.pem"
 
-        with patch("tigrbl_auth.crypto._DEFAULT_KEY_PATH", key_path):
+        with patch("tba_auth.crypto._DEFAULT_KEY_PATH", key_path):
             # Clear the cache
             _load_keypair.cache_clear()
 
@@ -212,7 +212,7 @@ class TestJWTKeyCrypto:
 
         key_path.write_text("missing-key-id")
 
-        with patch("tigrbl_auth.crypto._DEFAULT_KEY_PATH", key_path):
+        with patch("tba_auth.crypto._DEFAULT_KEY_PATH", key_path):
             _load_keypair.cache_clear()
 
             kid, priv_pem, pub_pem = _load_keypair()
@@ -241,7 +241,7 @@ class TestJWTKeyCrypto:
         kid = asyncio.run(_create_rsa())
         key_path.write_text(kid)
 
-        with patch("tigrbl_auth.crypto._DEFAULT_KEY_PATH", key_path):
+        with patch("tba_auth.crypto._DEFAULT_KEY_PATH", key_path):
             _load_keypair.cache_clear()
 
             with pytest.raises(RuntimeError, match="JWT signing key is not Ed25519"):
@@ -249,7 +249,7 @@ class TestJWTKeyCrypto:
 
     def test_env_key_dir_override(self, monkeypatch, tmp_path):
         """Test that JWT_ED25519_KEY_DIR overrides the default key directory."""
-        import tigrbl_auth.crypto as crypto
+        import tba_auth.crypto as crypto
         import importlib
 
         monkeypatch.setenv("JWT_ED25519_KEY_DIR", str(tmp_path))

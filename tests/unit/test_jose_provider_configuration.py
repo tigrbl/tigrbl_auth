@@ -3,12 +3,12 @@ from __future__ import annotations
 from pathlib import Path
 from types import SimpleNamespace
 
-from tigrbl_identity_jose.configuration import (
+from tba_provider_identity_jose.configuration import (
     configure_jose_provider,
     jose_provider_source,
     settings,
 )
-from tigrbl_jose_concrete import verify_certificate_thumbprint_confirmation
+from tba_concrete_jose import verify_certificate_thumbprint_confirmation
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -27,11 +27,11 @@ def test_provider_configuration_is_injected_without_runtime_import() -> None:
 
 
 def test_provider_and_rfc_modules_do_not_import_higher_layers() -> None:
-    package = ROOT / "pkgs/20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose"
+    package = ROOT / "pkgs/20-providers/tba-provider-identity-jose/src/tba_provider_identity_jose"
     sources = list(package.rglob("*.py"))
     combined = "\n".join(path.read_text(encoding="utf-8") for path in sources)
-    assert "tigrbl_identity_runtime" not in combined
-    assert "tigrbl_auth_protocol_oauth" not in combined
+    assert "tba_runtime_identity" not in combined
+    assert "tba_protocol_oauth" not in combined
     assert "swarmauri" not in combined.lower()
 
     manifest = (package.parents[1] / "pyproject.toml").read_text(encoding="utf-8")

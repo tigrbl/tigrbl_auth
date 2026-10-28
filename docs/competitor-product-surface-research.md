@@ -207,12 +207,12 @@ Amazon Cognito is split into User Pools, Identity Pools, managed/hosted UI, OAut
 
 ## Cross-Competitor Surface Implications
 
-| Segment | Auth0 | Okta | Keycloak | FusionAuth | Amazon Cognito | Implication for `tigrbl_auth` |
+| Segment | Auth0 | Okta | Keycloak | FusionAuth | Amazon Cognito | Implication for `tba_auth` |
 |---|---|---|---|---|---|---|
-| Public issuer / authentication API | Authentication API | OIDC/OAuth API | Realm OIDC endpoints | OAuth/Login/JWT APIs | User-pool OAuth endpoints | Keep `tigrbl-auth-backend-app-public` as a distinct public issuer. |
+| Public issuer / authentication API | Authentication API | OIDC/OAuth API | Realm OIDC endpoints | OAuth/Login/JWT APIs | User-pool OAuth endpoints | Keep `tba-app-backend-public` as a distinct public issuer. |
 | Management control plane | Management API v2 | Management API | Admin REST API | API catalog / Admin APIs | Cognito IdP API / AWS Console | A single "Management API product" can contain multiple deployable slices. |
 | Delegated org/tenant admin | My Organization API | Org/admin-role patterns in Management API | Realm/org admin delegation | Tenant Manager | AWS account/IAM plus user-pool scoped admin | `tenant-admin` should be framed as delegated management, not a generic admin clone. |
-| End-user self-service | My Account API | MyAccount API / End-User Dashboard | Account Console | Hosted account/user flows and User APIs | Managed Login / Amplify Authenticator | `tigrbl_auth` has a visible gap around first-class account self-service. |
+| End-user self-service | My Account API | MyAccount API / End-User Dashboard | Account Console | Hosted account/user flows and User APIs | Managed Login / Amplify Authenticator | `tba_auth` has a visible gap around first-class account self-service. |
 | M2M/workload identity | M2M applications + client credentials | OAuth for service apps | Service accounts + client credentials | Applications/API keys/client credentials | Client credentials/resource servers | M2M needs first-class product framing, not only "service admin." |
 | API access security / resource validation | Token/JWKS/Auth0 FGA adjacency | API Access Management | Authorization Services / policy enforcer | JWT/introspection/key APIs | JWT validation/resource servers | `resource-validation` maps to a real competitor lane, but API access management should be specified more clearly. |
 | SDK/platform integration | SPA/server/mobile + Management SDKs | Auth JS/framework/mobile/JWT verifier SDKs | JS adapter/admin client/policy enforcer | Client libraries + React/Angular/Vue SDKs | AWS SDKs + Amplify Auth/UI | SDKs are product surfaces, not just examples. |

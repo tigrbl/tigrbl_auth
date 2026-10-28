@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from tigrbl_authz_resource_server import (
+from tba_protocol_authorization_resource_server import (
     CAPABILITY_REQUIREMENTS,
     CURRENT_VERSION,
     RESOURCE_SERVER_ACCESS_TOKEN_CLAIM_CLASSES,
@@ -11,16 +11,16 @@ from tigrbl_authz_resource_server import (
     migrate_verifier_metadata,
     supports,
 )
-from tigrbl_claim_audience_concrete import AudienceClaim
-from tigrbl_claim_confirmation_concrete import ConfirmationClaim
-from tigrbl_claim_expiration_concrete import ExpirationClaim
-from tigrbl_claim_issuer_concrete import IssuerClaim
-from tigrbl_claim_scope_concrete import ScopeClaim
-from tigrbl_claim_subject_concrete import SubjectClaim
+from tba_concrete_claim_audience import AudienceClaim
+from tba_concrete_claim_confirmation import ConfirmationClaim
+from tba_concrete_claim_expiration import ExpirationClaim
+from tba_concrete_claim_issuer import IssuerClaim
+from tba_concrete_claim_scope import ScopeClaim
+from tba_concrete_claim_subject import SubjectClaim
 
 
 def test_resource_server_profile_catalogs_peer_rfc_versions() -> None:
-    assert CURRENT_VERSION.identifier == "tigrbl-oauth-protected-resource-1.0"
+    assert CURRENT_VERSION.identifier == "tba-oauth-protected-resource-1.0"
     assert CURRENT_VERSION.status == "implementation-profile"
     assert {item.identifier for item in SPECIFICATION_VERSIONS} == {
         "RFC6750",

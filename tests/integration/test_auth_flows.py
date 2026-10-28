@@ -10,10 +10,10 @@ from httpx import AsyncClient, BasicAuth
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tigrbl_auth.crypto import hash_pw
-from tigrbl_auth.tables import Client, ClientRegistration, Tenant, User
-from tigrbl_auth.services.persistence import get_token_record_async
-from tigrbl_auth.services.token_service import JWTCoder, issue_persisted_token_pair
+from tba_auth.crypto import hash_pw
+from tba_auth.tables import Client, ClientRegistration, Tenant, User
+from tba_auth.services.persistence import get_token_record_async
+from tba_auth.services.token_service import JWTCoder, issue_persisted_token_pair
 
 
 def _unique_tenant(label: str) -> Tenant:
@@ -457,7 +457,7 @@ class TestIntrospectionEndpoint:
 
 @pytest.mark.integration
 async def test_authentication_helpers() -> None:
-    from tigrbl_auth.crypto import verify_pw
+    from tba_auth.crypto import verify_pw
 
     password = "TestPassword123!"
     hashed = hash_pw(password)

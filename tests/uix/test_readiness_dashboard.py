@@ -1,4 +1,4 @@
-from tigrbl_auth.uix import build_readiness_dashboard
+from tba_auth.uix import build_readiness_dashboard
 
 
 def test_readiness_dashboard_renders_healthy_degraded_and_blocked_states():

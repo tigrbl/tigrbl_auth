@@ -3,7 +3,7 @@
 import pytest
 from tigrbl import TigrblApp
 
-from tigrbl_auth_backend_app_core.surfaces.auth_flows import router
+from tba_app_backend_core.surfaces.auth_flows import router
 
 
 def _collect_paths(app: TigrblApp) -> set[str]:

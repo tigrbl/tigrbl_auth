@@ -1,18 +1,18 @@
-"""Integration test for Device Code (RFC 8628) flow on the canon tigrbl_auth app."""
+"""Integration test for Device Code (RFC 8628) flow on the canon tba_auth app."""
 
 import pytest
 from http import HTTPStatus as status
 from httpx import ASGITransport, AsyncClient
 from uuid import uuid4
 
-from tigrbl_auth_backend_app_core import build_app
-from tigrbl_auth.config.deployment import resolve_deployment
-from tigrbl_auth.db import get_db as legacy_get_db
-from tigrbl_identity_jose.key_management import hash_pw
-from tigrbl_auth.rfc.rfc8628 import approve_device_code
-from tigrbl_auth.tables import Client, Tenant, User
-from tigrbl_identity_storage_runtime.engine import get_db as tables_get_db
-from tigrbl_auth.tables.engine import get_db as engine_get_db
+from tba_app_backend_core import build_app
+from tba_auth.config.deployment import resolve_deployment
+from tba_auth.db import get_db as legacy_get_db
+from tba_provider_identity_jose.key_management import hash_pw
+from tba_auth.rfc.rfc8628 import approve_device_code
+from tba_auth.tables import Client, Tenant, User
+from tba_runtime_identity_storage.engine import get_db as tables_get_db
+from tba_auth.tables.engine import get_db as engine_get_db
 
 
 @pytest.mark.integration

@@ -1,9 +1,9 @@
 # Token Service API + Token Studio UIX Requirements Brief
 
-**Proposed pairing:** `tigrbl-auth-router-token-service` + `@tigrbl-auth/token-studio-uix`<br>
+**Proposed pairing:** `tba-router-token-service` + `@tba/token-studio-uix`<br>
 **Status:** New governed product surface over substantial existing OAuth, JOSE, storage, exchange, validation, and revocation behavior<br>
 **Prepared:** July 11, 2026<br>
-**Proposed router owner:** `pkgs/80-routers/tigrbl-auth-router-token-service`<br>
+**Proposed router owner:** `pkgs/80-routers/tba-router-token-service`<br>
 **Protocol owners:** OAuth/OIDC protocol packages and format-specific token providers<br>
 **Proposed UIX owner:** `pkgs/105-ui/token-studio-uix`
 
@@ -557,16 +557,16 @@ Guardrails include token confusion, privilege escalation, cross-tenant exchange,
 
 ### Repository
 
-- `pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/token_service.py`
-- `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/token_record/`
-- `pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/token_exchange.py`
-- `pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/introspection.py`
-- `pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/revocation.py`
-- `pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/`
-- `pkgs/20-providers/tigrbl-security-proof-dpop/`
-- `pkgs/20-providers/tigrbl-security-dpop-cnf-binding-validator/`
-- `pkgs/20-providers/tigrbl-security-mtls-cnf-binding-validator/`
-- `pkgs/20-providers/tigrbl-security-token-introspection-client/`
+- `pkgs/60-runtime/tba-runtime-identity/src/tba_runtime_identity/token_service.py`
+- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/token_record/`
+- `pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/token_exchange.py`
+- `pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/introspection.py`
+- `pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/revocation.py`
+- `pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/`
+- `pkgs/20-providers/tba-provider-security-proof-dpop/`
+- `pkgs/20-providers/tba-provider-security-dpop-cnf-binding-validator/`
+- `pkgs/20-providers/tba-provider-security-mtls-cnf-binding-validator/`
+- `pkgs/20-providers/tba-provider-security-token-introspection-client/`
 - JOSE, credentials, resource validation, delegation, authorization provenance, audit, and key-rotation packages;
 - RFC 7009/7662/8693/8705/9449 and refresh/token persistence tests.
 

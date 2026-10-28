@@ -14,7 +14,7 @@
 
 ## Objective
 
-Deliver a certifiable `tigrbl_auth` package whose claims are bounded by declared
+Deliver a certifiable `tba_auth` package whose claims are bounded by declared
 standards targets, enforced by code, and supported by release gates and
 preserved evidence.
 
@@ -46,7 +46,7 @@ preserved evidence.
 ## Required reports
 
 - claims_lint_report
-- tigrbl_runtime_foundation_report
+- tba_runtime_foundation_report
 - boundary_enforcement_report
 - wrapper_hygiene_report
 - contract_sync_report

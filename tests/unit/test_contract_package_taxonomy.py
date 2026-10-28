@@ -11,11 +11,11 @@ ROOT = Path(__file__).resolve().parents[2]
 TAXONOMY = ROOT / "architecture" / "contract-package-taxonomy.yaml"
 CONTRACTS = ROOT / "pkgs" / "02-contracts"
 CANONICAL_MIGRATED_PACKAGES = (
-    "tigrbl-administration-contracts",
-    "tigrbl-authorization-contracts",
-    "tigrbl-audit-contracts",
-    "tigrbl-delegation-contracts",
-    "tigrbl-governance-contracts",
+    "tba-administration-contracts",
+    "tba-contracts-authorization",
+    "tba-audit-contracts",
+    "tba-delegation-contracts",
+    "tba-governance-contracts",
 )
 
 
@@ -36,61 +36,61 @@ def test_active_contract_taxonomy_names_live_packages() -> None:
 
 def test_compatibility_facades_preserve_canonical_object_identity() -> None:
     pairs = (
-        ("tigrbl_claim_contracts", "tigrbl_identity_contracts.claims", "Claim"),
-        ("tigrbl_did_contracts", "tigrbl_identity_contracts.did", "Did"),
+        ("tba_contracts_claim", "tba_contracts_identity.claims", "Claim"),
+        ("tba_contracts_did", "tba_contracts_identity.did", "Did"),
         (
-            "tigrbl_digital_credential_contracts",
-            "tigrbl_identity_contracts.digital_credentials",
+            "tba_contracts_digital_credential",
+            "tba_contracts_identity.digital_credentials",
             "DigitalCredential",
         ),
         (
-            "tigrbl_public_key_authentication_contracts",
-            "tigrbl_identity_contracts.public_key_authentication",
+            "tba_contracts_public_key_authentication",
+            "tba_contracts_identity.public_key_authentication",
             "PublicKeyCredentialSource",
         ),
         (
-            "tigrbl_replay_contracts",
-            "tigrbl_identity_contracts.replay.reservations",
+            "tba_contracts_replay",
+            "tba_contracts_identity.replay.reservations",
             "ReplayReservationPort",
         ),
         (
-            "tigrbl_security_event_contracts",
-            "tigrbl_identity_contracts.security_events",
+            "tba_contracts_security_event",
+            "tba_contracts_identity.security_events",
             "SecurityEvent",
         ),
         (
-            "tigrbl_workload_identity_contracts",
-            "tigrbl_identity_contracts.workloads",
+            "tba_contracts_workload_identity",
+            "tba_contracts_identity.workloads",
             "Svid",
         ),
         (
-            "tigrbl_attestation_contracts",
-            "tigrbl_identity_contracts.attestation",
+            "tba_contracts_attestation",
+            "tba_contracts_identity.attestation",
             "AttestationEvidence",
         ),
         (
-            "tigrbl_administration_contracts",
-            "tigrbl_identity_contracts",
+            "tba_administration_contracts",
+            "tba_contracts_identity",
             "PlatformAdministrator",
         ),
         (
-            "tigrbl_authorization_contracts",
-            "tigrbl_identity_contracts",
+            "tba_contracts_authorization",
+            "tba_contracts_identity",
             "ScopeMatchRequest",
         ),
         (
-            "tigrbl_audit_contracts",
-            "tigrbl_identity_contracts",
+            "tba_audit_contracts",
+            "tba_contracts_identity",
             "AdminAuditEvent",
         ),
         (
-            "tigrbl_delegation_contracts",
-            "tigrbl_identity_contracts",
+            "tba_delegation_contracts",
+            "tba_contracts_identity",
             "DelegatedAdminScope",
         ),
         (
-            "tigrbl_governance_contracts",
-            "tigrbl_identity_contracts",
+            "tba_governance_contracts",
+            "tba_contracts_identity",
             "AccessReviewItem",
         ),
     )
@@ -111,9 +111,9 @@ def test_extracted_compatibility_modules_define_no_classes() -> None:
     )
     identity = (
         CONTRACTS
-        / "tigrbl-identity-contracts"
+        / "tba-contracts-identity"
         / "src"
-        / "tigrbl_identity_contracts"
+        / "tba_contracts_identity"
     )
     for root in roots:
         for path in (identity / root).rglob("*.py"):
@@ -123,29 +123,29 @@ def test_extracted_compatibility_modules_define_no_classes() -> None:
 
 def test_canonical_contract_packages_do_not_import_compatibility_aggregate() -> None:
     packages = (
-        "tigrbl-attestation-contracts",
-        "tigrbl-claim-contracts",
-        "tigrbl-did-contracts",
-        "tigrbl-digital-credential-contracts",
-        "tigrbl-public-key-authentication-contracts",
-        "tigrbl-replay-contracts",
-        "tigrbl-security-event-contracts",
-        "tigrbl-workload-identity-contracts",
+        "tba-contracts-attestation",
+        "tba-contracts-claim",
+        "tba-contracts-did",
+        "tba-contracts-digital-credential",
+        "tba-contracts-public-key-authentication",
+        "tba-contracts-replay",
+        "tba-contracts-security-event",
+        "tba-contracts-workload-identity",
         *CANONICAL_MIGRATED_PACKAGES,
     )
     for package in packages:
         for path in (CONTRACTS / package / "src").rglob("*.py"):
-            assert "tigrbl_identity_contracts" not in path.read_text(encoding="utf-8"), path
+            assert "tba_contracts_identity" not in path.read_text(encoding="utf-8"), path
 
 
 def test_identity_contract_shims_export_canonical_objects_for_migrated_families() -> None:
-    identity_contracts = import_module("tigrbl_identity_contracts")
+    identity_contracts = import_module("tba_contracts_identity")
     canonical_exports = (
-        ("tigrbl_administration_contracts", "PlatformAdministrator"),
-        ("tigrbl_authorization_contracts", "ScopeMatchRequest"),
-        ("tigrbl_audit_contracts", "AdminAuditEvent"),
-        ("tigrbl_delegation_contracts", "DelegatedAdminScope"),
-        ("tigrbl_governance_contracts", "AccessReviewItem"),
+        ("tba_administration_contracts", "PlatformAdministrator"),
+        ("tba_contracts_authorization", "ScopeMatchRequest"),
+        ("tba_audit_contracts", "AdminAuditEvent"),
+        ("tba_delegation_contracts", "DelegatedAdminScope"),
+        ("tba_governance_contracts", "AccessReviewItem"),
     )
     for canonical_package, symbol in canonical_exports:
         canonical = getattr(import_module(canonical_package), symbol)

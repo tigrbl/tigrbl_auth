@@ -7,12 +7,12 @@ targets:
     status: evidenced-release-gated
     profile: production
   modules:
-  - tigrbl_auth/standards/oauth2/revocation.py
-  - tigrbl_auth/api/rest/routers/revoke.py
-  - tigrbl_auth/ops/revoke.py
-  - tigrbl_auth/services/persistence.py
-  - tigrbl_auth/tables/revoked_token.py
-  - tigrbl_auth/tables/token_record.py
+  - tba_auth/standards/oauth2/revocation.py
+  - tba_auth/api/rest/routers/revoke.py
+  - tba_auth/ops/revoke.py
+  - tba_auth/services/persistence.py
+  - tba_auth/tables/revoked_token.py
+  - tba_auth/tables/token_record.py
   tests:
   - tests/conformance/production/test_rfc7009_token_revocation.py
   - tests/integration/test_full_workflow.py
@@ -57,7 +57,7 @@ reports:
 - docs/compliance/certification_state_report.json
 - docs/compliance/certification_state_report.md
 contracts:
-- specs/openapi/profiles/production/tigrbl_auth.public.openapi.json
+- specs/openapi/profiles/production/tba_auth.public.openapi.json
 - specs/discovery/profiles/production/openid-configuration.json
 - specs/discovery/profiles/production/oauth-authorization-server.json
 scenario_ids:

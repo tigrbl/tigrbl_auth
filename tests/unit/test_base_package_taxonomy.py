@@ -38,10 +38,10 @@ def test_compatibility_aggregates_depend_on_canonical_owners() -> None:
 
 def test_canonical_and_compatibility_exports_are_identical() -> None:
     pairs = {
-        "tigrbl_identity_claims_bases": "tigrbl_claim_bases",
-        "tigrbl_identity_authenticator_bases": "tigrbl_authenticator_bases",
-        "tigrbl_public_key_authenticator_bases": "tigrbl_public_key_authentication_bases",
-        "tigrbl_security_artifact_bases": "tigrbl_protected_artifact_bases",
+        "tba_bases_identity_claims": "tba_bases_claim",
+        "tba_bases_identity_authenticator": "tba_bases_authenticator",
+        "tba_bases_public_key_authenticator": "tba_bases_public_key_authentication",
+        "tba_bases_security_artifact": "tba_bases_protected_artifact",
     }
     for compatibility_name, canonical_name in pairs.items():
         compatibility = importlib.import_module(compatibility_name)
@@ -51,7 +51,7 @@ def test_canonical_and_compatibility_exports_are_identical() -> None:
 
 
 def test_model_normalization_is_owned_by_layer_zero() -> None:
-    compatibility = importlib.import_module("tigrbl_identity_model_bases")
-    primitives = importlib.import_module("tigrbl_identity_core")
+    compatibility = importlib.import_module("tba_bases_identity_model")
+    primitives = importlib.import_module("tba_primitives_identity")
     for name in ("clean_mapping", "clean_tuple", "new_model_id", "required_text"):
         assert getattr(compatibility, name) is getattr(primitives, name)

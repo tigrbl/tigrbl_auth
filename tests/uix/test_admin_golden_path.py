@@ -1,4 +1,4 @@
-from tigrbl_auth.uix import AdminConsoleShell, AdminPrincipal, AdminSession, TenantProfileSelection
+from tba_auth.uix import AdminConsoleShell, AdminPrincipal, AdminSession, TenantProfileSelection
 
 
 def test_admin_uix_golden_path_from_login_to_dashboard_to_mutation_audit():

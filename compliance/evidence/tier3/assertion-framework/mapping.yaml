@@ -1,9 +1,9 @@
 targets:
 - RFC 7521
 modules:
-- tigrbl_auth/standards/oauth2/assertion_framework.py
-- tigrbl_auth/ops/token.py
-- tigrbl_auth/cli/artifacts.py
+- tba_auth/standards/oauth2/assertion_framework.py
+- tba_auth/ops/token.py
+- tba_auth/cli/artifacts.py
 tests:
 - tests/unit/test_rfc7521_assertion_framework.py
 contracts:

@@ -6,8 +6,8 @@ from contextlib import suppress
 
 import pytest
 
-from tigrbl_auth.config.deployment import resolve_deployment
-from tigrbl_auth.runtime import build_runtime_plan, get_runner_adapter
+from tba_auth.config.deployment import resolve_deployment
+from tba_auth.runtime import build_runtime_plan, get_runner_adapter
 
 
 async def _dummy_asgi_app(scope, receive, send):

@@ -14,21 +14,21 @@ for src in (ROOT / "pkgs").glob("*/src"):
     if value not in sys.path:
         sys.path.append(value)
 
-from tigrbl_auth.services.policy_invariants import (
+from tba_auth.services.policy_invariants import (
     AuthorizationInvariantTable as FacadeAuthorizationInvariantTable,
 )
-from tigrbl_identity_contracts.invariants import (
+from tba_contracts_identity.invariants import (
     AuthorizationInvariant as ContractAuthorizationInvariant,
     InvariantEvaluation,
     InvariantSeverity,
     VerificationMethod,
 )
-from tigrbl_identity_storage.tables import (
+from tba_storage_core.tables import (
     AuthorizationInvariant as StorageAuthorizationInvariant,
     InvariantEvaluation as StorageInvariantEvaluation,
     InvariantViolation as StorageInvariantViolation,
 )
-from tigrbl_authz_policy import (
+from tba_runtime_authorization_policy import (
     AuthorizationInvariant,
     AuthorizationInvariantTable,
     InvariantEvaluationTable,

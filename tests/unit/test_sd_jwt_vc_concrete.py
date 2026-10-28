@@ -2,8 +2,8 @@ import base64
 import json
 
 import pytest
-from tigrbl_sd_jwt_concrete import Disclosure, disclosure_digest, encode_disclosure
-from tigrbl_credential_profile_sd_jwt_vc import (
+from tba_concrete_sd_jwt import Disclosure, disclosure_digest, encode_disclosure
+from tba_profile_credential_sd_jwt_vc import (
     DRAFT_REVISION,
     MEDIA_TYPE,
     parse_sd_jwt_vc,

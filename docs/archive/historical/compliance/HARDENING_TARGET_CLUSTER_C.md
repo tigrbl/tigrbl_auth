@@ -94,24 +94,24 @@ These fixes were necessary to make the checkpoint honest and releasable:
 
 Primary implementation surfaces:
 
-- `tigrbl_auth/standards/oauth2/mtls.py`
-- `tigrbl_auth/standards/oauth2/dpop.py`
-- `tigrbl_auth/standards/oauth2/rfc9700.py`
-- `tigrbl_auth/standards/oauth2/rfc8705.py`
-- `tigrbl_auth/rfc/rfc8705.py`
-- `tigrbl_auth/standards/oauth2/rfc9449_dpop.py`
-- `tigrbl_auth/rfc/rfc9449_dpop.py`
-- `tigrbl_auth/ops/token.py`
-- `tigrbl_auth/ops/register.py`
-- `tigrbl_auth/services/token_service.py`
-- `tigrbl_auth/jwtoken.py`
-- `tigrbl_auth/security/auth.py`
-- `tigrbl_auth/security/deps.py`
-- `tigrbl_auth/services/persistence.py`
-- `tigrbl_auth/standards/oidc/frontchannel_logout.py`
-- `tigrbl_auth/standards/oidc/backchannel_logout.py`
-- `tigrbl_auth/api/rest/schemas.py`
-- `tigrbl_auth/cli/artifacts.py`
+- `tba_auth/standards/oauth2/mtls.py`
+- `tba_auth/standards/oauth2/dpop.py`
+- `tba_auth/standards/oauth2/rfc9700.py`
+- `tba_auth/standards/oauth2/rfc8705.py`
+- `tba_auth/rfc/rfc8705.py`
+- `tba_auth/standards/oauth2/rfc9449_dpop.py`
+- `tba_auth/rfc/rfc9449_dpop.py`
+- `tba_auth/ops/token.py`
+- `tba_auth/ops/register.py`
+- `tba_auth/services/token_service.py`
+- `tba_auth/jwtoken.py`
+- `tba_auth/security/auth.py`
+- `tba_auth/security/deps.py`
+- `tba_auth/services/persistence.py`
+- `tba_auth/standards/oidc/frontchannel_logout.py`
+- `tba_auth/standards/oidc/backchannel_logout.py`
+- `tba_auth/api/rest/schemas.py`
+- `tba_auth/cli/artifacts.py`
 - `tests/unit/test_10_hardening_cluster_c.py`
 - `tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py`
 - `tests/conformance/hardening/test_rfc8705_mtls.py`

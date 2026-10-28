@@ -1,5 +1,5 @@
 import pytest
-from tigrbl_identity_protocol_did_core import CURRENT_VERSION, validate_document
+from tba_protocol_identity_did_core import CURRENT_VERSION, validate_document
 
 def test_did_core_document_relationships_resolve() -> None:
     document = {"id": "did:example:123", "verificationMethod": [{"id": "did:example:123#key-1"}], "authentication": ["did:example:123#key-1"]}

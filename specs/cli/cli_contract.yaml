@@ -1,6 +1,6 @@
 schema_version: 1
-package: tigrbl_auth
-generated_from: tigrbl_identity_cli.cli.metadata
+package: tba_auth
+generated_from: tba_cli_identity.cli.metadata
 summary:
   command_count: 20
   verb_count: 83
@@ -1059,9 +1059,9 @@ commands:
   verbs: []
   family: runtime
   examples:
-  - tigrbl-auth serve --server uvicorn --check
-  - tigrbl-auth serve --server hypercorn --host 0.0.0.0 --port 8443
-  - tigrbl-auth serve --server tigrcorn --dry-run --format yaml
+  - tba-auth serve --server uvicorn --check
+  - tba-auth serve --server hypercorn --host 0.0.0.0 --port 8443
+  - tba-auth serve --server tigrcorn --dry-run --format yaml
   output:
     name: runtime-launch
     description: Runtime plan, runner diagnostics, and launch/evidence metadata.

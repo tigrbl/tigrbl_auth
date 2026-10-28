@@ -69,7 +69,7 @@ The closure work was applied against the provided capability-wiring checkpoint c
 
 These fixes were necessary to make the checkpoint honest and testable:
 
-- made `tigrbl_auth.ops` namespace imports dependency-light so targeted standards tests can import individual operation modules without pulling in the full runtime stack
+- made `tba_auth.ops` namespace imports dependency-light so targeted standards tests can import individual operation modules without pulling in the full runtime stack
 - added dependency-light fallbacks in `ops/par.py` so test-plane checkpoint standards evidence can execute without the full SQLAlchemy/Tigrbl runtime stack
 - updated CLI/OpenAPI contract generation so hardening authorization responses require `iss` when RFC 9207 is active
 - refreshed target/test/module/peer mappings so the promoted Tier 3 claims point at the current test-plane checkpoint closure surfaces
@@ -78,16 +78,16 @@ These fixes were necessary to make the checkpoint honest and testable:
 
 Primary implementation surfaces:
 
-- `tigrbl_auth/standards/oauth2/jar.py`
-- `tigrbl_auth/standards/oauth2/par.py`
-- `tigrbl_auth/standards/oauth2/issuer_identification.py`
-- `tigrbl_auth/standards/oauth2/rar.py`
-- `tigrbl_auth/ops/par.py`
-- `tigrbl_auth/ops/authorize.py`
-- `tigrbl_auth/config/deployment.py`
-- `tigrbl_auth/cli/artifacts.py`
-- `tigrbl_auth/tables/pushed_authorization_request.py`
-- `tigrbl_auth/ops/__init__.py`
+- `tba_auth/standards/oauth2/jar.py`
+- `tba_auth/standards/oauth2/par.py`
+- `tba_auth/standards/oauth2/issuer_identification.py`
+- `tba_auth/standards/oauth2/rar.py`
+- `tba_auth/ops/par.py`
+- `tba_auth/ops/authorize.py`
+- `tba_auth/config/deployment.py`
+- `tba_auth/cli/artifacts.py`
+- `tba_auth/tables/pushed_authorization_request.py`
+- `tba_auth/ops/__init__.py`
 - `tests/unit/test_TEST_PLANE_hardening_cluster_b.py`
 - `tests/conformance/hardening/test_rfc9207_issuer_identification.py`
 

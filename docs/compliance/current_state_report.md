@@ -106,7 +106,7 @@
 - operator_plane_repo_mutation_dependency: `False`
 - operator_plane_tenancy_enforced: `True`
 - operator_plane_database_present: `True`
-- operator_plane_state_root: `<operator-state>/tigrbl_auth-6b06ff767af75b98`
+- operator_plane_state_root: `<operator-state>/tba_auth-6b06ff767af75b98`
 - operator_plane_portability_schema_version: `3`
 - pyproject_requires_python: `>=3.10,<3.13`
 - serve_runtime_launcher_present: `True`

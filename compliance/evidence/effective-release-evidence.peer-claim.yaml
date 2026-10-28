@@ -1,5 +1,5 @@
 schema_version: 1
-package: tigrbl_auth
+package: tba_auth
 profile_label: peer-claim
 effective_deployment:
   profile: peer-claim

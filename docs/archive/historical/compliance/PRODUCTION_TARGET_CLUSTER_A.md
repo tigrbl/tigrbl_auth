@@ -29,7 +29,7 @@ The checkpoint closes the helper-only gap for those targets at the standards/mod
 
 Completed work:
 
-- replaced helper-only JWE behavior with a dependency-light compact JWE implementation in `tigrbl_auth/standards/jose/rfc7516.py`
+- replaced helper-only JWE behavior with a dependency-light compact JWE implementation in `tba_auth/standards/jose/rfc7516.py`
 - enforced a real bounded JWE policy:
   - `alg=dir`
   - `enc=A256GCM`
@@ -42,9 +42,9 @@ Completed work:
 
 Completed work:
 
-- converted `tigrbl_auth/standards/oauth2/assertion_framework.py` into a runtime-oriented validator for JWT bearer assertion grants
+- converted `tba_auth/standards/oauth2/assertion_framework.py` into a runtime-oriented validator for JWT bearer assertion grants
 - added strict required-claim, temporal-claim, issuer/subject, and audience validation
-- integrated assertion grant handling into `/token` in `tigrbl_auth/ops/token.py`
+- integrated assertion grant handling into `/token` in `tba_auth/ops/token.py`
 - added auditable token issuance for assertion grants
 - added token-contract examples for assertion grants
 
@@ -52,10 +52,10 @@ Completed work:
 
 Completed work:
 
-- converted `tigrbl_auth/standards/oauth2/jwt_client_auth.py` into a runtime-oriented validator for `private_key_jwt`
+- converted `tba_auth/standards/oauth2/jwt_client_auth.py` into a runtime-oriented validator for `private_key_jwt`
 - enforced strict `iat` + `jti` claim requirements for token-endpoint client assertions
 - integrated JWT client assertion authentication into `/token`
-- coupled registration policy to runtime auth policy in `tigrbl_auth/ops/register.py`
+- coupled registration policy to runtime auth policy in `tba_auth/ops/register.py`
 - made discovery truthful for:
   - `token_endpoint_auth_methods_supported`
   - `token_endpoint_auth_signing_alg_values_supported`
@@ -66,7 +66,7 @@ Completed work:
 
 Completed work:
 
-- strengthened native redirect classification and validation in `tigrbl_auth/standards/oauth2/native_apps.py`
+- strengthened native redirect classification and validation in `tba_auth/standards/oauth2/native_apps.py`
 - enforced:
   - loopback redirects must use `http`
   - explicit loopback port is required
@@ -84,11 +84,11 @@ Completed work:
 
 Updated:
 
-- `tigrbl_auth/standards/oidc/discovery_metadata.py`
-- `tigrbl_auth/cli/artifacts.py`
-- `tigrbl_auth/standards/oauth2/rfc9700.py`
-- `tigrbl_auth/config/feature_flags.py`
-- `tigrbl_auth/config/deployment.py`
+- `tba_auth/standards/oidc/discovery_metadata.py`
+- `tba_auth/cli/artifacts.py`
+- `tba_auth/standards/oauth2/rfc9700.py`
+- `tba_auth/config/feature_flags.py`
+- `tba_auth/config/deployment.py`
 
 Effects:
 

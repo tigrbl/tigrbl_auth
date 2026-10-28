@@ -10,30 +10,30 @@ Normative anchors:
 - [RFC 7644: SCIM Protocol](https://www.rfc-editor.org/rfc/rfc7644)
 - [IANA SCIM Schema URIs](https://www.iana.org/assignments/scim/scim.xhtml)
 
-## Current `tigrbl_auth` State
+## Current `tba_auth` State
 
 | Area | Current state | Evidence | Interpretation |
 |---|---|---|---|
 | SSOT target | SCIM is tracked as `feat:f33-scim-provisioning` and covered by `adr:1052`, `spc:1068`, and `spc:1072`. | [ADR-1052](../.ssot/adr/ADR-1052-govern-access-governance-compliance-reporting-and-delegated-administration.yaml), [SPEC-1068](../.ssot/specs/SPEC-1068-federation-provisioning-and-cross-cloud-trust-requirements.yaml), [SPEC-1072](../.ssot/specs/SPEC-1072-access-governance-compliance-and-delegated-administration-requirements.yaml) | SCIM is governed, but not implemented as a product API. |
 | Certification boundary | SCIM is explicitly out of the default baseline. | [Target Reality Matrix](compliance/TARGET_REALITY_MATRIX.md) | Current conformance claims should not imply SCIM support. |
-| Runtime helper | `ScimProvisioningPlane` exists under governance-extension code and supports schema registration, user provision, group provision, simple patch, tenant snapshots. | [`governance_extension.py`](../pkgs/20-providers/tigrbl-authz-policy/src/tigrbl_authz_policy/governance_extension.py) | Useful prototype/behavior seed, not a SCIM protocol server. |
+| Runtime helper | `ScimProvisioningPlane` exists under governance-extension code and supports schema registration, user provision, group provision, simple patch, tenant snapshots. | [`governance_extension.py`](../pkgs/20-providers/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/governance_extension.py) | Useful prototype/behavior seed, not a SCIM protocol server. |
 | Tests | Unit tests cover schema registration, required fields, user patch, group membership, tenant mismatch, unsupported patch op. | [`test_governance_extension_plane_phase5.py`](../tests/unit/test_governance_extension_plane_phase5.py), [`test_phase5_governance_extension_boundary.py`](../tests/unit/test_phase5_governance_extension_boundary.py) | Current proof is helper-level T1/T2 behavior, not RFC 7643/7644 endpoint conformance. |
-| Storage | Canonical storage has `Tenant`, `User`, `Service`, `Client`, keys, sessions, tokens, audit, etc.; no canonical `Group`/SCIM mapping tables are present. | [`tigrbl_identity_storage.tables`](../pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables) | User mapping can start from existing tables; group, membership, externalId, schema metadata, and SCIM audit need storage work. |
-| Frontdoor API | No `tigrbl-auth-router-scim` or `/scim/v2` frontdoor exists. | Repo path scan | SCIM should be a new provisioning frontdoor or a tightly scoped Management API slice. |
+| Storage | Canonical storage has `Tenant`, `User`, `Service`, `Client`, keys, sessions, tokens, audit, etc.; no canonical `Group`/SCIM mapping tables are present. | [`tba_storage_core.tables`](../pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables) | User mapping can start from existing tables; group, membership, externalId, schema metadata, and SCIM audit need storage work. |
+| Frontdoor API | No `tba-router-scim` or `/scim/v2` frontdoor exists. | Repo path scan | SCIM should be a new provisioning frontdoor or a tightly scoped Management API slice. |
 
 ## SCIM 2.0 Roles
 
-| SCIM role | Meaning | `tigrbl_auth` mapping |
+| SCIM role | Meaning | `tba_auth` mapping |
 |---|---|---|
 | SCIM Client | External IdP or lifecycle tool that sends provisioning operations. Examples: Okta, Microsoft Entra ID, Auth0 inbound SCIM partner connection, HRIS/IGA tooling. | A registered service/workload client with provisioning scopes and tenant binding. |
-| SCIM Service Provider | The application/service receiving SCIM requests and managing identities. | A new `tigrbl_auth` SCIM/provisioning API frontdoor backed by canonical identity storage. |
+| SCIM Service Provider | The application/service receiving SCIM requests and managing identities. | A new `tba_auth` SCIM/provisioning API frontdoor backed by canonical identity storage. |
 | Resource Owner / Subject | User or group being provisioned. | Canonical `User`, future canonical `Group`, membership, entitlement, and audit records. |
 | Authorization Server | Issues tokens used by the SCIM Client to call the SCIM Service Provider. | Existing `public-app` token issuer or service-admin-issued API/service key material. |
 | Resource Server | Validates bearer credentials and enforces tenant/scim scopes on SCIM requests. | SCIM API frontdoor plus `resource-validation-app`/resource-server verifier contracts. |
 
 ## Protocol Surface
 
-| Endpoint family | Expected behavior | Baseline priority | Notes for `tigrbl_auth` |
+| Endpoint family | Expected behavior | Baseline priority | Notes for `tba_auth` |
 |---|---|---|---|
 | `GET /scim/v2/ServiceProviderConfig` | Advertise supported auth schemes, PATCH, bulk, filter, change password, sort, ETag. | Must-have | This is the product honesty endpoint. It should only advertise what is implemented. |
 | `GET /scim/v2/ResourceTypes` and `GET /scim/v2/ResourceTypes/{type}` | Describe `User`, `Group`, and schema endpoint locations. | Must-have | Use canonical route metadata and schema definitions. |
@@ -73,14 +73,14 @@ Normative anchors:
 | FusionAuth | Present as SCIM API for users/groups. | Dedicated SCIM API endpoints under FusionAuth API catalog. | FusionAuth exposes SCIM as user/group provisioning API. See [FusionAuth SCIM APIs](https://fusionauth.io/docs/apis/scim). |
 | Amazon Cognito | Cognito User Pools do not appear to expose a first-class SCIM user-pool API; AWS IAM Identity Center does support SCIM for its own identity-center product. | Cognito uses User Pools APIs/managed login; IAM Identity Center has separate SCIM provisioning. | Do not treat Cognito User Pools as SCIM-equivalent. See [Cognito User Pools API](https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/Welcome.html) and [IAM Identity Center SCIM provisioning](https://docs.aws.amazon.com/singlesignon/latest/userguide/provision-automatically.html). |
 
-## Recommended `tigrbl_auth` Target Architecture
+## Recommended `tba_auth` Target Architecture
 
 | Decision | Recommendation | Reason |
 |---|---|---|
 | Product lane | Treat SCIM as `Provisioning API`, not as public login, tenant-admin CRUD, or OIDC OP behavior. | Competitors expose SCIM as enterprise provisioning/lifecycle surface. |
-| Backend package | Add `tigrbl-identity-scim` only when implementation begins. | Keeps RFC 7643/7644 schemas, filters, PATCH semantics, SCIM errors, and mapping logic isolated from generic admin CRUD. |
-| Frontdoor package | Add `tigrbl-auth-router-scim` or `tigrbl-auth-router-provisioning` with `/scim/v2`. | SCIM clients expect a clean protocol base URL and standard resource paths. |
-| Storage | Extend `tigrbl-identity-storage` with canonical `Group`, membership, SCIM external identity mapping, schema/connection metadata, and provisioning audit records. | SCIM must not duplicate identity tables or bypass canonical storage. |
+| Backend package | Add `tba-identity-scim` only when implementation begins. | Keeps RFC 7643/7644 schemas, filters, PATCH semantics, SCIM errors, and mapping logic isolated from generic admin CRUD. |
+| Frontdoor package | Add `tba-router-scim` or `tba-router-provisioning` with `/scim/v2`. | SCIM clients expect a clean protocol base URL and standard resource paths. |
+| Storage | Extend `tba-storage-core` with canonical `Group`, membership, SCIM external identity mapping, schema/connection metadata, and provisioning audit records. | SCIM must not duplicate identity tables or bypass canonical storage. |
 | Authn/authz | Protect SCIM with bearer tokens or service keys bound to tenant + SCIM scopes. | SCIM is a protected resource server surface. The SCIM API should consume tokens, not issue them. |
 | Tenant routing | Prefer tenant-scoped base URL: `/tenants/{tenant_slug}/scim/v2` for local/dev, with host-based tenant routing allowed later. | Enterprise IdPs configure one SCIM base URL per application/tenant. |
 | Admin UIX | Put SCIM connection setup and status in tenant-admin/platform-admin UIX, not public UIX. | Admins configure provisioning; end users do not interact with SCIM directly. |
@@ -104,11 +104,11 @@ SCIM should become a new provisioning surface, not a feature hidden inside `/adm
 The clean target is:
 
 ```text
-tigrbl-identity-scim                 # RFC 7643/7644 schemas, protocol logic, filters, PATCH, errors
-tigrbl-auth-router-scim                 # Deployable SCIM v2 frontdoor
-@tigrbl-auth/tenant-admin-uix        # SCIM connection setup/status UI
-tigrbl-identity-storage              # Canonical users, groups, memberships, mappings, audit
-tigrbl-authz-resource-server      # Token/scope validation integration for SCIM API
+tba-identity-scim                 # RFC 7643/7644 schemas, protocol logic, filters, PATCH, errors
+tba-router-scim                 # Deployable SCIM v2 frontdoor
+@tba/ui-tenant-admin        # SCIM connection setup/status UI
+tba-storage-core              # Canonical users, groups, memberships, mappings, audit
+tba-protocol-authorization-resource-server      # Token/scope validation integration for SCIM API
 ```
 
 This keeps the split consistent with the repo's current direction: canonical storage owns tables, protocol packages own protocol semantics, and frontdoor APIs own route composition and product filtering.

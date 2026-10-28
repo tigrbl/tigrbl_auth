@@ -8,9 +8,9 @@ import pytest
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tigrbl_auth.crypto import hash_pw
-from tigrbl_auth.tables import Client, LogoutState, PushedAuthorizationRequest
-from tigrbl_auth.tables import RevokedToken, Tenant, TokenRecord, User
+from tba_auth.crypto import hash_pw
+from tba_auth.tables import Client, LogoutState, PushedAuthorizationRequest
+from tba_auth.tables import RevokedToken, Tenant, TokenRecord, User
 
 from tests.integration.test_admin_table_surfaces import _admin_client, _invoke_rpc
 

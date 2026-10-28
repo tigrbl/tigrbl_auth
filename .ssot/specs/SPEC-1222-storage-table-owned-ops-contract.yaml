@@ -8,7 +8,7 @@ status: "draft"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This SPEC defines the storage-table-owned operation contract for `tigrbl-identity-storage`."
+summary: "This SPEC defines the storage-table-owned operation contract for `tba-storage-core`."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -20,13 +20,13 @@ references: []
 body: |-
   ## Scope
   
-  This SPEC defines the storage-table-owned operation contract for `tigrbl-identity-storage`.
+  This SPEC defines the storage-table-owned operation contract for `tba-storage-core`.
   
   ## Requirements
   
   Each storage table kind MUST expose the operations that own its durable behavior from the table module that defines the table. Generic CRUD operations remain table-bound through Tigrbl binding. Domain operations MUST also be table-owned when they mutate, read, consume, revoke, rotate, issue, derive, or project durable state whose primary aggregate is that table.
   
-  The owning table module MAY implement operations as class methods, module-level functions, or explicitly exported operation objects, but callers MUST import them from `tigrbl_identity_storage.tables.<table>` or the aggregate table package when a grouped table module owns several related tables.
+  The owning table module MAY implement operations as class methods, module-level functions, or explicitly exported operation objects, but callers MUST import them from `tba_storage_core.tables.<table>` or the aggregate table package when a grouped table module owns several related tables.
   
   REST routers, server ops, protocol packages, runtime packages, operator packages, and facade packages MUST NOT be canonical owners for storage-table operations. They may:
   
@@ -55,7 +55,7 @@ body: |-
   - an inventory test that fails when a storage table lacks its required table-owned operation exports,
   - route/protocol delegation tests for my-account, OAuth, OIDC logout, registration, token, device, PAR, and revocation flows,
   - a static ownership guard that fails when protocol/server/router/facade modules define canonical storage-table mutation functions,
-  - import-boundary tests proving table-owned operations are importable without root-level `tigrbl_auth` facades.
+  - import-boundary tests proving table-owned operations are importable without root-level `tba_auth` facades.
 spec_kind: "normative"
 adr_ids:
   - "adr:1101"

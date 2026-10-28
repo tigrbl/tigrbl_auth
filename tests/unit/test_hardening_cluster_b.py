@@ -9,23 +9,23 @@ from types import SimpleNamespace
 
 import pytest
 
-from tigrbl_auth.cli.artifacts import build_openapi_contract, deployment_from_options
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth_backend_app_core.surfaces.par_surface import _normalized_par_params
-from tigrbl_auth_protocol_oauth.standards.issuer_identification import (
+from tba_auth.cli.artifacts import build_openapi_contract, deployment_from_options
+from tba_auth.config.settings import settings
+from tba_app_backend_core.surfaces.par_surface import _normalized_par_params
+from tba_protocol_oauth.standards.issuer_identification import (
     IssuerIdentificationError,
     authorization_response_issuer,
     extract_issuer_from_redirect_uri,
 )
-from tigrbl_auth_protocol_oauth.standards.jwt_secured_authorization_requests import (
+from tba_protocol_oauth.standards.jwt_secured_authorization_requests import (
     RequestObjectValidationError,
     make_request_object,
     merge_request_object_params,
     parse_request_object,
 )
-from tigrbl_auth_protocol_oauth.standards.pushed_authorization_requests import PushedAuthorizationRequestError, validate_pushed_authorization_request_row
-from tigrbl_auth_protocol_oauth.standards.rich_authorization_requests import normalize_authorization_details
-from tigrbl_auth_protocol_oidc.standards.discovery_metadata import build_openid_config
+from tba_protocol_oauth.standards.pushed_authorization_requests import PushedAuthorizationRequestError, validate_pushed_authorization_request_row
+from tba_protocol_oauth.standards.rich_authorization_requests import normalize_authorization_details
+from tba_protocol_oidc.standards.discovery_metadata import build_openid_config
 
 
 

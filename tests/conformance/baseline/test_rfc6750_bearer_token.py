@@ -13,8 +13,8 @@ from tigrbl.security import Depends
 from http import HTTPStatus as status
 from httpx import ASGITransport, AsyncClient
 
-from tigrbl_identity_server.security.security_deps import get_current_principal, get_db
-from tigrbl_auth.runtime_cfg import settings
+from tba_server_identity.security.security_deps import get_current_principal, get_db
+from tba_auth.runtime_cfg import settings
 
 
 async def _protected(request: Request, db=Depends(get_db)):
@@ -56,7 +56,7 @@ async def test_lowercase_bearer_scheme():
 
     mock_user = MagicMock()
     with patch(
-        "tigrbl_identity_server.security.security_deps._user_from_jwt",
+        "tba_server_identity.security.security_deps._user_from_jwt",
         AsyncMock(return_value=mock_user),
     ):
         transport = ASGITransport(app=app)
@@ -101,7 +101,7 @@ async def test_access_token_query_parameter_enabled():
     mock_user = MagicMock()
     with patch.object(settings, "enable_rfc6750_query", True):
         with patch(
-            "tigrbl_identity_server.security.security_deps._user_from_jwt",
+            "tba_server_identity.security.security_deps._user_from_jwt",
             AsyncMock(return_value=mock_user),
         ):
             transport = ASGITransport(app=app)
@@ -144,7 +144,7 @@ async def test_access_token_form_body_enabled():
     mock_user = MagicMock()
     with patch.object(settings, "enable_rfc6750_form", True):
         with patch(
-            "tigrbl_identity_server.security.security_deps._user_from_jwt",
+            "tba_server_identity.security.security_deps._user_from_jwt",
             AsyncMock(return_value=mock_user),
         ):
             transport = ASGITransport(app=app)

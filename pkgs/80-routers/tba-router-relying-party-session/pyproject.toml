@@ -1,0 +1,13 @@
+[project]
+name = "tba-router-relying-party-session"
+version = "0.4.0.dev3"
+description = "Reusable RP/BFF login and session routes."
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = ["tba-protocol-oidc-relying-party==0.4.0.dev2", "tba-runtime-relying-party-session==0.4.0.dev3"]
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+[tool.poetry]
+packages = [{include = "tba_router_relying_party_session", from = "src"}]

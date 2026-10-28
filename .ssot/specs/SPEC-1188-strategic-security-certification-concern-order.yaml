@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "Defines the ordered strategic security certification ladder, current and later horizons, and non-blocking future standards for tigrbl_auth."
+summary: "Defines the ordered strategic security certification ladder, current and later horizons, and non-blocking future standards for tba_auth."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -22,7 +22,7 @@ status_notes:
     at: "2026-06-01T10:40:51Z"
 references: []
 body: |-
-  Defines the ordered strategic security certification ladder, current and later horizons, and non-blocking future standards for tigrbl_auth.
+  Defines the ordered strategic security certification ladder, current and later horizons, and non-blocking future standards for tba_auth.
 spec_kind: "governance"
 adr_ids:
   - "adr:1090"

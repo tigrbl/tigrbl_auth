@@ -1,12 +1,12 @@
 import pytest
 
-from tigrbl_auth.config.deployment import resolve_deployment
-from tigrbl_auth.security.certification import (
+from tba_auth.config.deployment import resolve_deployment
+from tba_auth.security.certification import (
     CapabilityRecord,
     CertificationError,
     runtime_capability_truth,
 )
-from tigrbl_auth.security.runtime_metadata import (
+from tba_auth.security.runtime_metadata import (
     build_capability_attestation,
     runtime_truth_manifest,
 )

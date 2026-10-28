@@ -2,7 +2,7 @@
 
 Research date: 2026-05-28
 
-Scope: this note frames IAM, CIAM, PAM, IGA, workforce identity, customer identity, developer identity, service/workload identity, and adjacent identity-security categories for `tigrbl_auth`.
+Scope: this note frames IAM, CIAM, PAM, IGA, workforce identity, customer identity, developer identity, service/workload identity, and adjacent identity-security categories for `tba_auth`.
 
 The key point: IAM, CIAM, and PAM are product categories, not single protocols. OAuth, OIDC, SCIM, MFA, RBAC, IdP federation, M2M, and admin APIs are component capabilities that can be assembled into those product categories.
 
@@ -18,11 +18,11 @@ The key point: IAM, CIAM, and PAM are product categories, not single protocols. 
 | NHI / workload identity | Non-human identity for services, workloads, CI/CD, API clients, machines, devices, and agents. | Service owners, platform engineers, workload operators. | Service principals, workload federation, client credentials, service keys, API keys, rotation, validation, audit. |
 | Developer identity platform | Identity product surface for app developers integrating auth into apps and APIs. | Tenant developers, customer developers, integration owners. | App/client registration, redirect URIs, client secrets/JWKS, SDKs, docs, test clients, scopes. |
 
-## Current `tigrbl_auth` Fit
+## Current `tba_auth` Fit
 
 | Category | Current fit | Evidence | Interpretation |
 | --- | --- | --- | --- |
-| CIAM | Strongest fit. Public API/UIX, tenant branding intent, hosted login, registration/recovery, consent, OAuth/OIDC, RP packages, developer API, organizations/tenants, and external-user journeys point here. | [Surface Packaging](architecture/SURFACE_SEPARATED_PRODUCT_PACKAGING.md), [Role User Journeys](architecture/ROLE_USER_JOURNEYS_AND_STORIES.md), [Public API spec](../.ssot/specs/SPEC-1166-public-app-contract.yaml), [Public UIX spec](../.ssot/specs/SPEC-1167-public-uix-composition-contract.yaml) | `tigrbl_auth` can credibly be framed as a CIAM-oriented identity provider platform in target architecture, with current implementation still maturing feature by feature. |
+| CIAM | Strongest fit. Public API/UIX, tenant branding intent, hosted login, registration/recovery, consent, OAuth/OIDC, RP packages, developer API, organizations/tenants, and external-user journeys point here. | [Surface Packaging](architecture/SURFACE_SEPARATED_PRODUCT_PACKAGING.md), [Role User Journeys](architecture/ROLE_USER_JOURNEYS_AND_STORIES.md), [Public API spec](../.ssot/specs/SPEC-1166-public-app-contract.yaml), [Public UIX spec](../.ssot/specs/SPEC-1167-public-uix-composition-contract.yaml) | `tba_auth` can credibly be framed as a CIAM-oriented identity provider platform in target architecture, with current implementation still maturing feature by feature. |
 | IAM | Partial but broad. The suite has tenants, principals, credentials, policy, admin surfaces, JOSE, OAuth/OIDC, storage, runtime, operator, resource-server, and RP packages. | [Product Provenance Lineage](architecture/product-provenance-lineage.md), [Policy boundary](../.ssot/adr/ADR-1099-policy-is-an-explicit-package-boundary.yaml) | Use "identity platform" or "IAM suite" carefully; core IAM pieces exist, but not every workforce/enterprise IAM capability is productized. |
 | Workforce IAM | Underframed/partial. Tenant-admin and platform-admin cover administration, but there is no full workforce directory/lifecycle/device posture/app catalog product yet. | [Platform-admin ADR](../.ssot/adr/ADR-1078-platform-admin-cross-tenant-authority.yaml), [Tenant-admin ADR](../.ssot/adr/ADR-1079-tenant-admin-tenant-scoped-self-service-authority.yaml) | Could support workforce-style tenants later, but current product language should not imply Okta Workforce Cloud parity. |
 | PAM | Mostly gap. Admin authority, break-glass intent, service/workload identity, audit, and policy primitives exist, but no privileged session brokering, credential vaulting, JIT elevation, infrastructure connectors, or recording. | [Role User Journeys](architecture/ROLE_USER_JOURNEYS_AND_STORIES.md), [Authorization Models Focus](authorization-models-focus.md), [M2M Focus](m2m-workload-identity-focus.md) | Do not market as PAM. Treat PAM as a future privileged-access product lane if needed. |
@@ -43,19 +43,19 @@ The key point: IAM, CIAM, and PAM are product categories, not single protocols. 
 
 ## Product Category Mapping
 
-| `tigrbl_auth` surface | IAM | CIAM | PAM | IGA | NHI/workload | Developer platform |
+| `tba_auth` surface | IAM | CIAM | PAM | IGA | NHI/workload | Developer platform |
 | --- | --- | --- | --- | --- | --- | --- |
-| `tigrbl-auth-backend-app-public` | Partial | Strong | No | No | Token issuance only | Strong |
-| `@tigrbl-auth/public-uix` | Partial | Strong | No | No | No | Strong for app login testing |
-| `tigrbl-auth-backend-app-platform-admin` | Strong platform control | Partial | Privileged admin basis only | Partial | Partial | No |
-| `tigrbl-auth-backend-app-tenant-admin` | Strong tenant control | Strong for tenant-owned customer/user admin | Privileged admin basis only | Partial | Partial | Partial |
-| `tigrbl-auth-backend-app-developer` | Partial | Strong for app integration | No | No | M2M client setup partial | Strong |
-| `tigrbl-auth-backend-app-service-admin` | Strong for NHI | Partial | PAM-adjacent but not PAM | Partial | Strong | Partial |
-| `tigrbl-auth-backend-app-resource-validation` | Strong for API IAM | Strong for protected APIs | No | No | Strong | Strong |
-| `tigrbl-authz-policy` | Strong foundation | Strong foundation | Foundation only | Foundation only | Strong foundation | Strong foundation |
-| `tigrbl-identity-operator` | Strong operator tooling | Partial | PAM-adjacent only | Partial | Partial | No |
+| `tba-app-backend-public` | Partial | Strong | No | No | Token issuance only | Strong |
+| `@tba/ui-public` | Partial | Strong | No | No | No | Strong for app login testing |
+| `tba-app-backend-platform-admin` | Strong platform control | Partial | Privileged admin basis only | Partial | Partial | No |
+| `tba-app-backend-tenant-admin` | Strong tenant control | Strong for tenant-owned customer/user admin | Privileged admin basis only | Partial | Partial | Partial |
+| `tba-app-backend-developer` | Partial | Strong for app integration | No | No | M2M client setup partial | Strong |
+| `tba-app-backend-service-admin` | Strong for NHI | Partial | PAM-adjacent but not PAM | Partial | Strong | Partial |
+| `tba-app-backend-resource-validation` | Strong for API IAM | Strong for protected APIs | No | No | Strong | Strong |
+| `tba-runtime-authorization-policy` | Strong foundation | Strong foundation | Foundation only | Foundation only | Strong foundation | Strong foundation |
+| `tba-operator-identity` | Strong operator tooling | Partial | PAM-adjacent only | Partial | Partial | No |
 
-## What `tigrbl_auth` Should Claim
+## What `tba_auth` Should Claim
 
 | Claim | Recommendation | Reason |
 | --- | --- | --- |
@@ -70,7 +70,7 @@ The key point: IAM, CIAM, and PAM are product categories, not single protocols. 
 
 ## PAM Gap Breakdown
 
-| PAM capability | Current `tigrbl_auth` state | Needed before claiming PAM |
+| PAM capability | Current `tba_auth` state | Needed before claiming PAM |
 | --- | --- | --- |
 | Privileged account inventory | Admin/service principals exist conceptually. | Canonical privileged account/resource model and ownership. |
 | JIT elevation | Underframed. | Request/approval workflow, time-bound elevation, automatic expiry. |
@@ -86,13 +86,13 @@ The key point: IAM, CIAM, and PAM are product categories, not single protocols. 
 
 | Product | Description | Current maturity |
 | --- | --- | --- |
-| Tigrbl Auth CIAM | Customer/tenant-facing identity provider with hosted login, registration, recovery, consent, OAuth/OIDC, app integration, and tenant/developer admin. | Best strategic framing; implementation still maturing by capability. |
-| Tigrbl Auth Management API | One management product with platform, tenant, developer, and service/workload resource groups exposed as deployable frontdoor slices. | Strong architectural direction; ADR-1086 draft should mature. |
-| Tigrbl Auth Developer Platform | App/client registration, RP SDKs, resource-server validation, examples, discovery, JWKS, token integration. | Strong direction. |
-| Tigrbl Auth Workload Identity | Service principals, API keys, service keys, client credentials, resource validation, workload federation. | Strong planned lane; needs productized grants/rotation/audit. |
-| Tigrbl Auth Workforce IAM | Employee/contractor identity, app assignments, lifecycle, tenant admin, policy. | Possible future packaging, but underframed today. |
-| Tigrbl Auth PAM | JIT privileged access and infrastructure/admin-session controls. | Future adjacency only; do not claim now. |
-| Tigrbl Auth IGA | Access requests, reviews, certifications, entitlement governance. | Future adjacency only; do not claim now. |
+| TBA CIAM | Customer/tenant-facing identity provider with hosted login, registration, recovery, consent, OAuth/OIDC, app integration, and tenant/developer admin. | Best strategic framing; implementation still maturing by capability. |
+| TBA Management API | One management product with platform, tenant, developer, and service/workload resource groups exposed as deployable frontdoor slices. | Strong architectural direction; ADR-1086 draft should mature. |
+| TBA Developer Platform | App/client registration, RP SDKs, resource-server validation, examples, discovery, JWKS, token integration. | Strong direction. |
+| TBA Workload Identity | Service principals, API keys, service keys, client credentials, resource validation, workload federation. | Strong planned lane; needs productized grants/rotation/audit. |
+| TBA Workforce IAM | Employee/contractor identity, app assignments, lifecycle, tenant admin, policy. | Possible future packaging, but underframed today. |
+| TBA PAM | JIT privileged access and infrastructure/admin-session controls. | Future adjacency only; do not claim now. |
+| TBA IGA | Access requests, reviews, certifications, entitlement governance. | Future adjacency only; do not claim now. |
 
 ## Recommended Next Steps
 
@@ -108,7 +108,7 @@ The key point: IAM, CIAM, and PAM are product categories, not single protocols. 
 
 ## Key Takeaway
 
-`tigrbl_auth` is best framed as:
+`tba_auth` is best framed as:
 
 ```text
 CIAM-oriented identity provider + management API + developer integration platform

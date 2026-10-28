@@ -16,7 +16,7 @@ references: []
 body: |-
   ## Decision
 
-  `tigrbl_auth` MUST govern passwordless authentication, MFA, WebAuthn, social login, and contextual authentication as separate authentication capabilities, not as incidental effects of OAuth/OIDC support.
+  `tba_auth` MUST govern passwordless authentication, MFA, WebAuthn, social login, and contextual authentication as separate authentication capabilities, not as incidental effects of OAuth/OIDC support.
 
   ## Current Implementation Status
 

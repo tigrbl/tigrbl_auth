@@ -8,7 +8,7 @@ status: "draft"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification governs the \tigrbl-auth-backend-app-developer product API surface."
+summary: "This specification governs the \tba-app-backend-developer product API surface."
 supersedes: []
 superseded_by: []
 status_notes:

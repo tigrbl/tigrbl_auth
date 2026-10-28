@@ -1,0 +1,211 @@
+lock_version = "1.0.0"
+
+[components."tigrbl.identity.storage.access-governance"]
+distribution = "tba-storage-access-governance"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "851b516f-e2a5-533b-8a68-a9ac3f9c7cb5"
+manifest_digest = "sha256:7273d7d693f60d899e2046615506b57a2e92997c657b2d55453e54d54debcc4e"
+
+[components."tigrbl.identity.storage.attestation"]
+distribution = "tba-storage-attestation"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "7e916983-3ad7-51a7-bf4a-79ce229eb092"
+manifest_digest = "sha256:9c7f28b0f7f75b7ed8df6eac4a5e945e2d7e6c278e4b4c8526fe5aaba97e24d1"
+
+[components."tigrbl.identity.storage.audit"]
+distribution = "tba-storage-audit"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "37f71b0c-7b5a-571c-bde6-a1ef26058fad"
+manifest_digest = "sha256:0ea292c7975a9f32530fc8606aa49b7e2acdb7c761ad0c5a544ec27099836680"
+
+[components."tigrbl.identity.storage.authentication"]
+distribution = "tba-storage-authentication"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "79c73e01-df92-5166-844d-b2e96bcae30b"
+manifest_digest = "sha256:e62266f79e04ef7aacd1bb52b808717cff7024b82858b74b52d531f14dd68550"
+
+[components."tigrbl.identity.storage.authority-graph"]
+distribution = "tba-storage-authority-graph"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "d7c60dd1-6611-58b2-8f62-5ca0e066afbd"
+manifest_digest = "sha256:dadb34f3c6e7e4111981b25523f9b5fa327216903452c74947df8a89277b9d78"
+
+[components."tigrbl.identity.storage.authorization-policy"]
+distribution = "tba-storage-authorization-policy"
+artifact = "0.4.0.dev2"
+schema_contract = "1.1.0"
+migration_head = "5b573a6c-8268-5af3-a505-ea2c8a7c9dcc"
+manifest_digest = "sha256:31fee3e79a5ffcf416e7e085f2f95a69df7e4fbffcc226e2f2ac08d2f7d0dcd7"
+
+[components."tigrbl.identity.storage.certificate"]
+distribution = "tba-storage-certificate"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "a7e704e3-722e-5a59-92a6-9825004d8817"
+manifest_digest = "sha256:b582d26ae08ad10f2c21d58c7a920e56d245e4aa3fb9aa5b23f76b50f2ffbfce"
+
+[components."tigrbl.identity.storage.claims"]
+distribution = "tba-storage-claims"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "6b5acf6a-8d14-51f3-af78-0534d36dac44"
+manifest_digest = "sha256:464c134178d84783e1e63df57d3cf542766197d860b422e21d58a16a991be5fa"
+
+[components."tigrbl.identity.storage.consent"]
+distribution = "tba-storage-consent"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "4541f213-14f7-544d-aec6-ac2302c8639e"
+manifest_digest = "sha256:7fbfd0bf497f1b8d9cac82983635ce9ed107616ee7d40ba3f0635a8b91a78617"
+
+[components."tigrbl.identity.storage.delegation"]
+distribution = "tba-storage-delegation"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "5dc5f3c2-fd95-5d25-b45e-7e43ffcb823c"
+manifest_digest = "sha256:7ff86e1afdc21fc70ab592944a6060d67ece4d36e86addf05911f5e89b526289"
+
+[components."tigrbl.identity.storage.did"]
+distribution = "tba-storage-did"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "7900a065-d6b7-5f37-aab2-8083fafb462e"
+manifest_digest = "sha256:498b62e6d408ba513834a96c19d8a6f285487a61345a1c738760526f9f18a9bc"
+
+[components."tigrbl.identity.storage.digital-credential"]
+distribution = "tba-storage-digital-credential"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "0e47cb7f-3dd7-5c79-a82a-371198cf5b27"
+manifest_digest = "sha256:506deebb22bcbffb111eb6fb98ff6cf1c8ccf8e2e474fddba5225a9812f4aab0"
+
+[components."tigrbl.identity.storage.federation"]
+distribution = "tba-storage-federation"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "d0a7da98-00a5-58f8-ac3e-d0912c96f0db"
+manifest_digest = "sha256:208271e21dc080e282345e5d677824cd2cafe92283d475e060e04a193e19bf14"
+
+[components."tigrbl.identity.storage.gnap"]
+distribution = "tba-storage-gnap"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "1021a8ad-e1fb-5632-8a07-a4942cc61056"
+manifest_digest = "sha256:8f52de4fab5b2b9f8685637bf30780f367669fb3a3cb3b97230c7bb09e7bd0d8"
+
+[components."tigrbl.identity.storage.key-material"]
+distribution = "tba-storage-key-material"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "63c8e724-a0ec-5475-89aa-d5a3d23f0769"
+manifest_digest = "sha256:ce6b73d3da6b55f1b960a618b9a3e2da4a69320bcdb679b73aa15662caa7da9d"
+
+[components."tigrbl.identity.storage.oauth"]
+distribution = "tba-storage-oauth"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "d4b74406-754c-5424-9009-4dff55e1e1c4"
+manifest_digest = "sha256:7190780cda08f9152d1fcfe9b792ae8373cbbae076a596e1f9cf4f335ae4ec86"
+
+[components."tigrbl.identity.storage.oidc"]
+distribution = "tba-storage-oidc"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "d33404e7-316b-5c4e-8336-5103efa79186"
+manifest_digest = "sha256:86ddfd33ab8c8d7077ca353eead7b29bf9c56c3967950a0fe1dec70d5441f0cd"
+
+[components."tigrbl.identity.storage.operator"]
+distribution = "tba-storage-operator"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "469839b2-d339-544a-b747-fd68b6a5f235"
+manifest_digest = "sha256:b3f926864ae075dc55e1f98baca45d22ee30e2097e661f48c5673a0f17862423"
+
+[components."tigrbl.identity.storage.presentation"]
+distribution = "tba-storage-presentation"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "45cfd21c-7eec-5db2-980a-e27b27cb8679"
+manifest_digest = "sha256:ad6b2894f99abbf0ebfa93996ebace440f7172ab4615850b11169b2470096d25"
+
+[components."tigrbl.identity.storage.principals"]
+distribution = "tba-storage-principals"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "44ff280d-bf80-54b1-9bb2-c796f258bd4d"
+manifest_digest = "sha256:c34b4190acdcb22fc30ff34714b6471c98128afbb3a161c16458ed3aa04d9ba1"
+
+[components."tigrbl.identity.storage.release-governance"]
+distribution = "tba-storage-release-governance"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "90c6e0ac-6f27-5837-9d8b-895adb4679d5"
+manifest_digest = "sha256:c6af136b0010854cdd6ae33fdd50705510f2d96bf492178cf12c6e03a576d33d"
+
+[components."tigrbl.identity.storage.replay-protection"]
+distribution = "tba-storage-replay-protection"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "f25dd772-7549-52a4-932c-bf5e460b2ac9"
+manifest_digest = "sha256:d3761979f9c305fd9e38287f6b6cb699fbd19e889645774d69069ee5a7b0ea92"
+
+[components."tigrbl.identity.storage.residency"]
+distribution = "tba-storage-residency"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "48009f00-9c83-56cf-98ea-1128a3307a56"
+manifest_digest = "sha256:b78215e9e4f3b5f3f280d4ffa513f0b982c4ea51fd540383d9c6b7f3276afd09"
+
+[components."tigrbl.identity.storage.scim"]
+distribution = "tba-storage-scim"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "6bf4ad16-462a-5913-9322-f1ccbf2a82f5"
+manifest_digest = "sha256:3c189cdbcad359ebfbfd28f610ad182aa71e40d81e9163c6fc2919bfa0e2b030"
+
+[components."tigrbl.identity.storage.security-event"]
+distribution = "tba-storage-security-event"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "8d8364e1-c9bf-59ea-b46c-fe28ddf83cba"
+manifest_digest = "sha256:496ab8394329e440d1d5c2849087338f60621db73edff98e45fbd69c4548c853"
+
+[components."tigrbl.identity.storage.tenancy"]
+distribution = "tba-storage-tenancy"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "69854e73-52d3-53ec-9542-6737159e42d6"
+manifest_digest = "sha256:e6a06e82b3f1b28a09d3c5c39f02196e8b44cfded9bd6c764704d837f80cddbc"
+
+[components."tigrbl.identity.storage.token"]
+distribution = "tba-storage-token"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "563f6816-43af-5ca0-8c78-b73eec393c1c"
+manifest_digest = "sha256:396288b2ca91797faee7ab4ed40aae614bc7feaee23e240fa32ae535f580c359"
+
+[components."tigrbl.identity.storage.trust-federation-graph"]
+distribution = "tba-storage-trust-federation-graph"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "88f90844-5618-5007-9883-d1d6f7c35d66"
+manifest_digest = "sha256:dcd9964b95b6d8cd8199e311ab0fe7c3f191930e498ecb5e3475120067c9f491"
+
+[components."tigrbl.identity.storage.webauthn"]
+distribution = "tba-storage-webauthn"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "35709893-1208-54c2-ab00-dca4b2e67065"
+manifest_digest = "sha256:96bb23286fde769beb8544d1ce8a6d40f91b66a09bb7632a8330cf45e82db8fb"
+
+[components."tigrbl.identity.storage.workload-identity"]
+distribution = "tba-storage-workload-identity"
+artifact = "0.4.0.dev2"
+schema_contract = "1.0.0"
+migration_head = "0bcee998-b0a3-5ba2-b04c-d049cad65127"
+manifest_digest = "sha256:bb9192305fc423f94b8fb543ac4870badb858a11e2c619217a3180d0034cf4c8"

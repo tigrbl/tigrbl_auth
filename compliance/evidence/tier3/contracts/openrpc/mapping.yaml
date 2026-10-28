@@ -7,14 +7,14 @@ targets:
     status: evidenced-release-gated
     profile: production
   modules:
-  - tigrbl_auth/api/rpc/__init__.py
-  - tigrbl_auth/api/rpc/registry.py
-  - tigrbl_auth/api/rpc/methods
-  - tigrbl_auth/api/rpc/schemas
-  - tigrbl_auth/api/surfaces.py
-  - tigrbl_auth/cli/artifacts.py
-  - tigrbl_auth/cli/reports.py
-  - tigrbl_auth/config/deployment.py
+  - tba_auth/api/rpc/__init__.py
+  - tba_auth/api/rpc/registry.py
+  - tba_auth/api/rpc/methods
+  - tba_auth/api/rpc/schemas
+  - tba_auth/api/surfaces.py
+  - tba_auth/cli/artifacts.py
+  - tba_auth/cli/reports.py
+  - tba_auth/config/deployment.py
   tests:
   - tests/e2e/test_release_gate_catalog.py
   - tests/unit/test_contract_generation_live.py
@@ -56,6 +56,6 @@ reports:
 - docs/compliance/certification_state_report.json
 - docs/compliance/certification_state_report.md
 contracts:
-- specs/openrpc/profiles/production/tigrbl_auth.admin.openrpc.json
+- specs/openrpc/profiles/production/tba_auth.admin.openrpc.json
 scenario_ids:
 - openrpc-14x-admin-control-plane-contract

@@ -15,7 +15,7 @@ for src in sorted((ROOT / "pkgs").glob("*/*/src")):
 
 
 def test_identity_primitives_exports_public_values() -> None:
-    import tigrbl_identity_core as core
+    import tba_primitives_identity as core
 
     class Row:
         status = "active"
@@ -46,7 +46,7 @@ def test_identity_primitives_exports_public_values() -> None:
 
 
 def test_identity_primitives_error_taxonomy_and_clock_values() -> None:
-    import tigrbl_identity_core as core
+    import tba_primitives_identity as core
 
     assert issubclass(core.IdentityValidationError, core.IdentityError)
     assert issubclass(core.IdentityAuthorizationError, core.IdentityError)
@@ -60,7 +60,7 @@ def test_identity_primitives_error_taxonomy_and_clock_values() -> None:
 
 def test_prefixed_identity_rejects_invalid_prefixes() -> None:
     import pytest
-    import tigrbl_identity_core as core
+    import tba_primitives_identity as core
 
     with pytest.raises(ValueError):
         core.new_prefixed_id("")
@@ -69,7 +69,7 @@ def test_prefixed_identity_rejects_invalid_prefixes() -> None:
 
 
 def test_identity_primitives_export_version_range_helpers() -> None:
-    import tigrbl_identity_core as core
+    import tba_primitives_identity as core
 
     assert core.semver_key("v1.2.3-alpha") == (1, 2, 3)
     assert core.semver_key("1.2") == (1, 2, 0)
@@ -78,7 +78,7 @@ def test_identity_primitives_export_version_range_helpers() -> None:
 
 
 def test_identity_primitives_export_dotted_permission_matching() -> None:
-    import tigrbl_identity_core as core
+    import tba_primitives_identity as core
 
     assert core.matches_dotted_pattern("*", "client.read")
     assert core.matches_dotted_pattern("client.*", "client")
@@ -88,7 +88,7 @@ def test_identity_primitives_export_dotted_permission_matching() -> None:
 
 
 def test_identity_primitives_export_http_and_jsonrpc_helpers() -> None:
-    import tigrbl_identity_core as core
+    import tba_primitives_identity as core
 
     status, headers, body = core.json_response(401, {"error": "missing"})
 
@@ -123,9 +123,9 @@ def test_authz_policy_admin_gate_package_uses_identity_core_primitives() -> None
         ROOT
         / "pkgs"
         / "80-routers"
-        / "tigrbl-auth-router-admin-gate"
+        / "tba-router-admin-gate"
         / "src"
-        / "tigrbl_auth_router_admin_gate"
+        / "tba_router_admin_gate"
         / "gate.py"
     )
     tree = ast.parse(gate_path.read_text(encoding="utf-8"))
@@ -143,7 +143,7 @@ def test_authz_policy_admin_gate_package_uses_identity_core_primitives() -> None
         "_read_http_body",
         "_replay_http_body",
     }.isdisjoint(local_functions)
-    assert "from tigrbl_identity_core import" in gate_path.read_text(encoding="utf-8")
+    assert "from tba_primitives_identity import" in gate_path.read_text(encoding="utf-8")
 
 
 def test_authz_policy_control_plane_uses_identity_core_primitives() -> None:
@@ -151,9 +151,9 @@ def test_authz_policy_control_plane_uses_identity_core_primitives() -> None:
         ROOT
         / "pkgs"
         / "30-storage-runtime"
-        / "tigrbl-policy-administration-memory-provider"
+        / "tba-provider-policy-administration-memory"
         / "src"
-        / "tigrbl_policy_administration_memory_provider"
+        / "tba_provider_policy_administration_memory"
         / "control_plane.py"
     )
     source = control_plane_path.read_text(encoding="utf-8")
@@ -175,7 +175,7 @@ def test_authz_policy_control_plane_uses_identity_core_primitives() -> None:
 
 
 def test_identity_primitives_do_not_own_liveness_contracts() -> None:
-    import tigrbl_identity_core as core
+    import tba_primitives_identity as core
 
     assert not hasattr(core, "ConvergenceEvent")
     assert not hasattr(core, "ConvergenceState")
@@ -183,19 +183,19 @@ def test_identity_primitives_do_not_own_liveness_contracts() -> None:
 
 
 def test_identity_primitives_do_not_own_jwt_payload_or_principal_protocol() -> None:
-    import tigrbl_identity_core as core
-    import tigrbl_identity_core.typing as core_typing
-    import tigrbl_identity_contracts as identity_contracts
-    from tigrbl_identity_contracts.principals import PrincipalLike
-    from tigrbl_security_trust_contracts import JWTPayload
+    import tba_primitives_identity as core
+    import tba_primitives_identity.typing as core_typing
+    import tba_contracts_identity as identity_contracts
+    from tba_contracts_identity.principals import PrincipalLike
+    from tba_contracts_security_trust import JWTPayload
 
     assert not hasattr(core, "JWTPayload")
     assert not hasattr(core, "Principal")
     assert not hasattr(core_typing, "JWTPayload")
     assert not hasattr(core_typing, "Principal")
     assert not hasattr(identity_contracts, "JWTPayload")
-    assert JWTPayload.__module__ == "tigrbl_security_trust_contracts.types"
-    assert PrincipalLike.__module__ == "tigrbl_identity_contracts.principals.protocols"
+    assert JWTPayload.__module__ == "tba_contracts_security_trust.types"
+    assert PrincipalLike.__module__ == "tba_contracts_identity.principals.protocols"
 
 
 def test_auth_helpers_import_principal_protocol_from_contracts() -> None:
@@ -203,49 +203,49 @@ def test_auth_helpers_import_principal_protocol_from_contracts() -> None:
         ROOT
         / "pkgs"
         / "70-facade"
-        / "tigrbl-credentials"
+        / "tba-credentials"
         / "src"
-        / "tigrbl_credentials"
+        / "tba_credentials"
         / "backends.py",
         ROOT
         / "pkgs"
         / "60-runtime"
-        / "tigrbl-identity-server"
+        / "tba-server-identity"
         / "src"
-        / "tigrbl_identity_server"
+        / "tba_server_identity"
         / "security"
         / "auth.py",
         ROOT
         / "pkgs"
         / "60-runtime"
-        / "tigrbl-identity-server"
+        / "tba-server-identity"
         / "src"
-        / "tigrbl_identity_server"
+        / "tba_server_identity"
         / "security"
         / "security_deps.py",
     ]
 
     for path in targets:
         source = path.read_text(encoding="utf-8")
-        assert "from tigrbl_identity_core.typing import Principal" not in source
-        assert "from tigrbl_identity_contracts.principals import PrincipalLike" in source
+        assert "from tba_primitives_identity.typing import Principal" not in source
+        assert "from tba_contracts_identity.principals import PrincipalLike" in source
 
     removed_composition = (
         ROOT
         / "pkgs"
         / "70-facade"
-        / "tigrbl-credentials"
+        / "tba-credentials"
         / "src"
-        / "tigrbl_credentials"
+        / "tba_credentials"
         / "authenticators.py"
     ).read_text(encoding="utf-8")
     assert "Removed runtime composition surface" in removed_composition
-    assert "tigrbl_identity_contracts.principals" not in removed_composition
+    assert "tba_contracts_identity.principals" not in removed_composition
 
 
 def test_identity_primitives_import_dag_clean_room() -> None:
-    core_root = ROOT / "pkgs" / "00-primitives" / "tigrbl-identity-core" / "src" / "tigrbl_identity_core"
-    forbidden = {"tigrbl_auth", "tigrbl_identity_server", "tigrbl_identity_runtime", "tigrbl_identity_storage"}
+    core_root = ROOT / "pkgs" / "00-primitives" / "tba-primitives-identity" / "src" / "tba_primitives_identity"
+    forbidden = {"tba_auth", "tba_server_identity", "tba_runtime_identity", "tba_storage_core"}
     for path in core_root.rglob("*.py"):
         tree = ast.parse(path.read_text(encoding="utf-8"))
         imports: set[str] = set()
@@ -258,7 +258,7 @@ def test_identity_primitives_import_dag_clean_room() -> None:
 
 
 def test_contracts_do_not_export_wire_request_response_models() -> None:
-    import tigrbl_identity_contracts as contracts
+    import tba_contracts_identity as contracts
 
     removed_wire_models = {
         "OAuthIntrospectionResponse",
@@ -276,7 +276,7 @@ def test_contracts_do_not_export_wire_request_response_models() -> None:
 
 
 def test_platform_api_owns_tenant_admin_contracts() -> None:
-    from tigrbl_auth_backend_app_platform_admin.tenants import AdminTenantOut, AdminTenantProvisionIn
+    from tba_app_backend_platform_admin.tenants import AdminTenantOut, AdminTenantProvisionIn
 
     tenant_request = AdminTenantProvisionIn(slug="test", name="Test", email="admin@example.test")
     assert tenant_request.slug == "test"
@@ -284,7 +284,7 @@ def test_platform_api_owns_tenant_admin_contracts() -> None:
 
 
 def test_contracts_t2_projection_models_wrap_openapi_only() -> None:
-    from tigrbl_identity_contracts import ContractProjection
+    from tba_contracts_identity import ContractProjection
 
     openapi = {
         "openapi": "3.1.0",

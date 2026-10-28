@@ -4,19 +4,19 @@ from datetime import datetime, timezone
 
 import pytest
 
-from tigrbl_auth_protocol_oauth.capability_requirements import (
+from tba_protocol_oauth.capability_requirements import (
     CAPABILITY_REQUIREMENTS,
 )
-from tigrbl_auth_protocol_oauth.standards.client_registration_management import (
+from tba_protocol_oauth.standards.client_registration_management import (
     ClientRegistrationManagementDisabledError,
     RFC7592ClientRegistrationManagementService,
 )
-from tigrbl_auth_protocol_oauth.standards.dynamic_client_registration import (
+from tba_protocol_oauth.standards.dynamic_client_registration import (
     DynamicClientRegistrationDisabledError,
     RFC7591DynamicClientRegistrationService,
 )
-from tigrbl_client_registration_capability import ClientRegistrationCapability
-from tigrbl_identity_contracts.oauth import (
+from tba_capability_client_registration import ClientRegistrationCapability
+from tba_contracts_identity.oauth import (
     ClientRegistrationCreateRequest,
     ClientRegistrationRecord,
     ClientRegistrationUpdateRequest,

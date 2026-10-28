@@ -2,7 +2,7 @@ from datetime import datetime, timedelta, timezone
 
 import pytest
 
-from tigrbl_authorization_contracts import (
+from tba_contracts_authorization import (
     ActionDefinition,
     AuthorizationDecision,
     AuthorizationEffect,

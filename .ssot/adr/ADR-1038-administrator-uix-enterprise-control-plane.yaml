@@ -19,7 +19,7 @@ body: |-
   Status: accepted
   Date: 2026-04-24
   
-  `tigrbl_auth` MUST provide an enterprise administrator browser UIX as a governed product surface. The command-line and OpenRPC planes remain required operator surfaces, but they are not sufficient by themselves for enterprise deployment, configuration, and day-to-day administration.
+  `tba_auth` MUST provide an enterprise administrator browser UIX as a governed product surface. The command-line and OpenRPC planes remain required operator surfaces, but they are not sufficient by themselves for enterprise deployment, configuration, and day-to-day administration.
   
   ## Rationale
   

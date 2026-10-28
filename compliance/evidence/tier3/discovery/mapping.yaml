@@ -7,8 +7,8 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   modules:
-  - tigrbl_auth/standards/oauth2/rfc8414.py
-  - tigrbl_auth/standards/oauth2/rfc8414_metadata.py
+  - tba_auth/standards/oauth2/rfc8414.py
+  - tba_auth/standards/oauth2/rfc8414_metadata.py
   tests:
   - tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py
   - tests/integration/test_rfc8414_metadata.py
@@ -24,7 +24,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   modules:
-  - tigrbl_auth/standards/oidc/discovery.py
+  - tba_auth/standards/oidc/discovery.py
   tests:
   - tests/conformance/baseline/test_openid_configuration.py
   - tests/integration/test_oidc_endpoints.py

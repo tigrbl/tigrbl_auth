@@ -3,18 +3,18 @@ from __future__ import annotations
 import asyncio
 from datetime import datetime, timedelta, timezone
 
-from tigrbl_auth_protocol_oauth import CAPABILITY_REQUIREMENTS as OAUTH_REQUIREMENTS
-from tigrbl_auth_protocol_oid4vp import CAPABILITY_REQUIREMENTS as OID4VP_REQUIREMENTS
-from tigrbl_auth_protocol_oidc import CAPABILITY_REQUIREMENTS as OIDC_REQUIREMENTS
-from tigrbl_identity_contracts.replay import ReplayKey, ReplayReservationRequest
-from tigrbl_identity_storage.tables import ReplayReservation
-from tigrbl_identity_storage_runtime import (
+from tba_protocol_oauth import CAPABILITY_REQUIREMENTS as OAUTH_REQUIREMENTS
+from tba_protocol_oid4vp import CAPABILITY_REQUIREMENTS as OID4VP_REQUIREMENTS
+from tba_protocol_oidc import CAPABILITY_REQUIREMENTS as OIDC_REQUIREMENTS
+from tba_contracts_identity.replay import ReplayKey, ReplayReservationRequest
+from tba_storage_core.tables import ReplayReservation
+from tba_runtime_identity_storage import (
     DURABLE_REPLAY_DESCRIPTOR,
     ReplayReservationRuntimeSpec,
 )
-from tigrbl_replay_memory_provider import MemoryReplayProvider
-from tigrbl_replay_protection_capability import ReplayProtectionCapability
-from tigrbl_security_event_protocol_set import CAPABILITY_REQUIREMENTS as SET_REQUIREMENTS
+from tba_provider_replay_memory import MemoryReplayProvider
+from tba_capability_replay_protection import ReplayProtectionCapability
+from tba_protocol_security_event_set import CAPABILITY_REQUIREMENTS as SET_REQUIREMENTS
 
 
 def _request(value: str = "same") -> ReplayReservationRequest:

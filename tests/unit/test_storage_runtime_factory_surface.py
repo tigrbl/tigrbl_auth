@@ -8,8 +8,8 @@ from tigrbl import (
     deriveTableSpec,
     makeOp,
 )
-from tigrbl_identity_storage.tables import ReplayReservation
-from tigrbl_identity_storage_runtime import (
+from tba_storage_core.tables import ReplayReservation
+from tba_runtime_identity_storage import (
     RUNTIME_OPERATION_BY_ALIAS,
     RUNTIME_TABLE_BY_NAME,
     RUNTIME_TABLE_SPEC_BY_NAME,
@@ -41,7 +41,7 @@ def test_runtime_operation_is_carrier_neutral_and_transactional() -> None:
     assert operation.handler is _reserve
 
 
-def test_runtime_table_definition_uses_the_public_tigrbl_factory() -> None:
+def test_runtime_table_definition_uses_the_public_tba_factory() -> None:
     operation = makeOp(alias="check_and_reserve", handler=_reserve)
     definition = defineTableSpec(ops=(operation,))
 

@@ -5,7 +5,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 MAX_LOC = 400
-CHECK_ROOTS = ("pkgs", "tigrbl_auth")
+CHECK_ROOTS = ("pkgs", "tba_auth")
 IGNORED_PARTS = {"__pycache__", "build", "dist"}
 
 

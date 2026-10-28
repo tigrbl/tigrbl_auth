@@ -8,7 +8,7 @@ status: "superseded"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification governs the first-wave `tigrbl-identity-*` package suite"
+summary: "This specification governs the first-wave `tba-identity-*` package suite"
 supersedes: []
 superseded_by:
   - "spc:1225"
@@ -19,7 +19,7 @@ status_notes:
     status: "accepted"
   -
     status: "accepted"
-    note: "Import DAG now includes the foundation -> tigrbl-auth facade -> backend API products and frontend UIX layering guard, with T1 exception-ledger enforcement and a T2 zero-exception target."
+    note: "Import DAG now includes the foundation -> tba-auth facade -> backend API products and frontend UIX layering guard, with T1 exception-ledger enforcement and a T2 zero-exception target."
     at: "2026-06-14T22:51:25Z"
   -
     status: "superseded"
@@ -28,79 +28,79 @@ status_notes:
 references: []
 body: |-
   ## Scope
-  
-  This specification governs the first-wave `tigrbl-identity-*` package suite
-  and the `tigrbl-auth` facade.
-  
+
+  This specification governs the first-wave `tba-identity-*` package suite
+  and the `tba-auth` facade.
+
   ## Package Set
-  
+
   The governed package set is:
-  
-  - `tigrbl-identity-core`
-  - `tigrbl-identity-contracts`
-  - `tigrbl-identity-principals`
+
+  - `tba-primitives-identity`
+  - `tba-contracts-identity`
+  - `tba-concrete-identity-principals`
   - `tigrbl-identity-credentials`
-  - `tigrbl-identity-jose`
+  - `tba-provider-identity-jose`
   - `tigrbl-identity-policy`
   - `tigrbl-identity-oauth`
   - `tigrbl-identity-oidc`
-  - `tigrbl-identity-admin`
-  - `tigrbl-identity-storage`
-  - `tigrbl-identity-server`
-  - `tigrbl-identity-runtime`
-  - `tigrbl-identity-operator`
-  - `tigrbl-identity-testkit`
-  - `tigrbl-auth`
-  
+  - `tba-runtime-identity-administration`
+  - `tba-storage-core`
+  - `tba-server-identity`
+  - `tba-runtime-identity`
+  - `tba-operator-identity`
+  - `tba-testkit-identity`
+  - `tba-auth`
+
   Distribution names MUST use hyphens. Import names MUST use independent
   top-level packages with underscores, not a shared namespace package. For
   example, `tigrbl-identity-oauth` imports as `tigrbl_identity_oauth`.
-  
+
   ## Import DAG
-  
+
   `core` MUST NOT import any other identity package.
-  
+
   `contracts` MAY import `core`.
-  
+
   `principals` MAY import `core`.
-  
+
   `credentials` MAY import `core`, and MAY depend on principal references.
   It SHOULD NOT require concrete principal implementations unless needed for
   lifecycle validation.
-  
+
   `jose` MAY import `core` and `contracts`.
-  
+
   `policy` MAY import `core`, `contracts`, `principals`, and credential fact
   contracts. It MUST NOT perform credential verification.
-  
+
   `oauth` MAY import `core`, `contracts`, `principals`, `credentials`, `jose`,
   and `policy`.
-  
+
   `oidc` MAY import `core`, `contracts`, `principals`, `jose`, `oauth`, and
   `policy`.
-  
+
   `admin` MAY import `core`, `contracts`, `principals`, `credentials`, `jose`,
   `oauth`, `oidc`, and `policy`.
-  
+
   `storage` MAY import semantic and protocol packages for mapping
   purposes. Protocol packages MUST NOT import storage.
-  
+
   `server` MAY import `core`, `contracts`, `principals`, `credentials`, `jose`,
   `oauth`, `oidc`, `admin`, `policy`, and `storage`.
-  
+
   `runtime` MAY import `server` and runtime-safe contracts.
-  
+
   `operator` MAY import `runtime`, `server`, and storage/admin/operator support
   APIs. It MUST NOT be required by request-path runtime code.
-  
+
   `testkit` MAY import production packages for testing. Production packages MUST
   NOT import `testkit`.
-  
-  `tigrbl-auth` MAY import selected public entrypoints from `server`, `runtime`,
+
+  `tba-auth` MAY import selected public entrypoints from `server`, `runtime`,
   and `contracts`.
-  
+
   ## Forbidden Edges
-  
+
   - `core` MUST NOT import anything above it.
   - `contracts` MUST NOT import server, runtime, storage, operator, or testkit.
   - `jose` MUST NOT import oauth, oidc, admin, server, runtime, or storage.
@@ -110,9 +110,9 @@ body: |-
   - `server` MUST NOT import operator or testkit.
   - `runtime` MUST NOT import operator or testkit.
   - Production code MUST NOT import testkit.
-  
+
   ## Verification
-  
+
   Verification MUST include static import checks, package metadata checks, and
   at least one packaging smoke test for the facade and server profiles.
 spec_kind: "normative"

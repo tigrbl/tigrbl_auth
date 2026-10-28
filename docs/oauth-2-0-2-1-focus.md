@@ -4,7 +4,7 @@ Research date: 2026-05-28
 
 OAuth 2.0 is the standing standards base for the authorization server, client, resource server, and token ecosystem. OAuth 2.1 should be treated differently: as of this review, it is still an IETF draft, with latest observed revision `draft-ietf-oauth-v2-1-15` dated 2026-03-02. It is not a final RFC compliance target.
 
-For `tigrbl_auth`, the right framing is:
+For `tba_auth`, the right framing is:
 
 - keep OAuth 2.0 plus extension RFCs as the broad compatibility and certification target;
 - add OAuth 2.1 as a fail-closed runtime/profile alignment mode;
@@ -20,24 +20,24 @@ Normative anchors:
 - [IETF OAuth 2.1 draft](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1)
 - [IETF OAuth 2.1 draft history](https://datatracker.ietf.org/doc/draft-ietf-oauth-v2-1/history/)
 
-## Current `tigrbl_auth` State
+## Current `tba_auth` State
 
 | Area | Current state | Evidence | Interpretation |
 |---|---|---|---|
-| OAuth protocol package | `tigrbl-auth-protocol-oauth` owns OAuth 2.x protocol behavior below route composition. | [`tigrbl-auth-protocol-oauth` README](../pkgs/50-protocols/tigrbl-auth-protocol-oauth/README.md) | This is the right package for OAuth 2.0 and OAuth 2.1 profile logic. |
-| Public authorization-server frontdoor | `tigrbl-auth-backend-app-public` exposes login, authorize, token, logout, registration, discovery, JWKS, and public OAuth/OIDC helpers. | [`tigrbl-auth-backend-app-public` README](../pkgs/90-backend-apps/tigrbl-auth-backend-app-public/README.md) | This is the deployable AS frontdoor for OAuth/OIDC protocol endpoints. |
-| Resource validation frontdoor | `tigrbl-auth-backend-app-resource-validation` exposes validation and metadata surfaces such as JWKS, introspection, and protected-resource metadata. | [`tigrbl-auth-backend-app-resource-validation` README](../pkgs/90-backend-apps/tigrbl-auth-backend-app-resource-validation/README.md), [Target Reality Matrix](compliance/TARGET_REALITY_MATRIX.md) | This is the protected-resource / resource-server integration surface. |
-| Developer frontdoor | `tigrbl-auth-backend-app-developer` owns developer-facing client registration and client management. | [`tigrbl-auth-backend-app-developer` README](../pkgs/90-backend-apps/tigrbl-auth-backend-app-developer/README.md) | OAuth client policy belongs here, while public protocol endpoints stay in public-app. |
-| Service admin frontdoor | `tigrbl-auth-backend-app-service-admin` owns service/workload identity administration. | [`tigrbl-auth-backend-app-service-admin` README](../pkgs/90-backend-apps/tigrbl-auth-backend-app-service-admin/README.md) | Client credentials, M2M, workload credentials, and service keys are product concerns here. |
-| RP package | `tigrbl-auth-protocol-rp` is the app-side relying-party integration. | [`tigrbl-auth-protocol-rp` README](../pkgs/50-protocols/tigrbl-auth-protocol-rp/README.md) | Client/RP behavior should be tested separately from AS behavior. |
+| OAuth protocol package | `tba-protocol-oauth` owns OAuth 2.x protocol behavior below route composition. | [`tba-protocol-oauth` README](../pkgs/50-protocols/tba-protocol-oauth/README.md) | This is the right package for OAuth 2.0 and OAuth 2.1 profile logic. |
+| Public authorization-server frontdoor | `tba-app-backend-public` exposes login, authorize, token, logout, registration, discovery, JWKS, and public OAuth/OIDC helpers. | [`tba-app-backend-public` README](../pkgs/90-backend-apps/tba-app-backend-public/README.md) | This is the deployable AS frontdoor for OAuth/OIDC protocol endpoints. |
+| Resource validation frontdoor | `tba-app-backend-resource-validation` exposes validation and metadata surfaces such as JWKS, introspection, and protected-resource metadata. | [`tba-app-backend-resource-validation` README](../pkgs/90-backend-apps/tba-app-backend-resource-validation/README.md), [Target Reality Matrix](compliance/TARGET_REALITY_MATRIX.md) | This is the protected-resource / resource-server integration surface. |
+| Developer frontdoor | `tba-app-backend-developer` owns developer-facing client registration and client management. | [`tba-app-backend-developer` README](../pkgs/90-backend-apps/tba-app-backend-developer/README.md) | OAuth client policy belongs here, while public protocol endpoints stay in public-app. |
+| Service admin frontdoor | `tba-app-backend-service-admin` owns service/workload identity administration. | [`tba-app-backend-service-admin` README](../pkgs/90-backend-apps/tba-app-backend-service-admin/README.md) | Client credentials, M2M, workload credentials, and service keys are product concerns here. |
+| RP package | `tba-protocol-oidc-relying-party` is the app-side relying-party integration. | [`tba-protocol-oidc-relying-party` README](../pkgs/50-protocols/tba-protocol-oidc-relying-party/README.md) | Client/RP behavior should be tested separately from AS behavior. |
 | OAuth 2.1 profile | Tracked only as alignment, not a final standard claim. | [Target Reality Matrix](compliance/TARGET_REALITY_MATRIX.md) | This is correct and should remain true until OAuth 2.1 exits draft state. |
-| Password grant signal | A table-owned `PasswordGrantForm` schema exists today. | [`token_record.py`](../pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/token_record.py) | This must be explicitly excluded from any OAuth 2.1 profile, except tightly labeled dev/backcompat modes. |
+| Password grant signal | A table-owned `PasswordGrantForm` schema exists today. | [`token_record.py`](../pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/token_record.py) | This must be explicitly excluded from any OAuth 2.1 profile, except tightly labeled dev/backcompat modes. |
 
 ## Standards Coverage Map
 
 | Standard / profile | Status in repo direction | Owning surface | OAuth 2.1 relevance |
 |---|---|---|---|
-| RFC 6749 OAuth 2.0 | Baseline certifiable target. | `tigrbl-auth-protocol-oauth`, `tigrbl-auth-backend-app-public` | Foundation that OAuth 2.1 consolidates and tightens. |
+| RFC 6749 OAuth 2.0 | Baseline certifiable target. | `tba-protocol-oauth`, `tba-app-backend-public` | Foundation that OAuth 2.1 consolidates and tightens. |
 | RFC 6750 Bearer Tokens | Baseline certifiable target. | Public API, resource validation API, resource-server integrations | OAuth 2.1 posture should disallow bearer tokens in query transport. |
 | RFC 7636 PKCE | Baseline certifiable target. | Public API authorize/token flow, RP package | Core OAuth 2.1 profile requirement for authorization-code clients. |
 | RFC 7009 Token Revocation | Production-completion target. | Public API `/revoke` | Required for serious client/session lifecycle management. |
@@ -60,7 +60,7 @@ Normative anchors:
 
 ## OAuth 2.0 vs OAuth 2.1 Deltas
 
-| Topic | OAuth 2.0 compatibility posture | OAuth 2.1 alignment posture | `tigrbl_auth` action |
+| Topic | OAuth 2.0 compatibility posture | OAuth 2.1 alignment posture | `tba_auth` action |
 |---|---|---|---|
 | Authorization code | Core grant. PKCE is an extension in RFC 7636. | Authorization code plus PKCE is the primary interactive flow. | Keep `/authorize` and `/token`; require PKCE in OAuth 2.1 profile, especially for public/browser/native clients. |
 | Implicit grant | Present in RFC 6749 era compatibility. | Omitted from OAuth 2.1 draft. | Do not advertise `response_type=token` in OAuth 2.1 metadata; reject it fail-closed in OAuth 2.1 profile. |
@@ -77,16 +77,16 @@ Normative anchors:
 
 | Capability | Package / API owner | Route or product shape | Notes |
 |---|---|---|---|
-| Authorization endpoint | `tigrbl-auth-backend-app-public`, backed by `tigrbl-auth-protocol-oauth` | `/authorize` | OAuth 2.1 profile should require PKCE and reject implicit. |
-| Token endpoint | `tigrbl-auth-backend-app-public`, backed by `tigrbl-auth-protocol-oauth` and credentials/JOSE/storage | `/token` | Must enforce grant allowlist by profile and client type. |
-| Revocation | `tigrbl-auth-backend-app-public` | `/revoke` | Also needs tenant/client scoping and audit. |
-| Introspection | `tigrbl-auth-backend-app-resource-validation` as preferred validation surface | `/introspect` where exposed | Resource validation should be the clean product surface for protected APIs. |
-| Authorization server metadata | `tigrbl-auth-backend-app-public` | `/.well-known/oauth-authorization-server` | Must be profile-specific and issuer-correct. |
-| JWKS | `tigrbl-auth-backend-app-resource-validation` and public issuer metadata | `/.well-known/jwks.json`, tenant JWKS | Signing-key metadata supports resource-server validation. |
+| Authorization endpoint | `tba-app-backend-public`, backed by `tba-protocol-oauth` | `/authorize` | OAuth 2.1 profile should require PKCE and reject implicit. |
+| Token endpoint | `tba-app-backend-public`, backed by `tba-protocol-oauth` and credentials/JOSE/storage | `/token` | Must enforce grant allowlist by profile and client type. |
+| Revocation | `tba-app-backend-public` | `/revoke` | Also needs tenant/client scoping and audit. |
+| Introspection | `tba-app-backend-resource-validation` as preferred validation surface | `/introspect` where exposed | Resource validation should be the clean product surface for protected APIs. |
+| Authorization server metadata | `tba-app-backend-public` | `/.well-known/oauth-authorization-server` | Must be profile-specific and issuer-correct. |
+| JWKS | `tba-app-backend-resource-validation` and public issuer metadata | `/.well-known/jwks.json`, tenant JWKS | Signing-key metadata supports resource-server validation. |
 | Dynamic registration | Public API for protocol endpoint, developer API for product lifecycle | `/register`, client-management routes | Developer API should own policy, lifecycle, UI-facing registration management. |
-| M2M / client credentials | `tigrbl-auth-backend-app-service-admin`, `tigrbl-auth-backend-app-developer`, token endpoint | service clients, workload credentials, `/token` | Product lane needs explicit scopes, resources, rotation, and audit. |
-| RP behavior | `tigrbl-auth-protocol-rp`, `@tigrbl-auth/rp` | SDK/client integration | Should verify metadata consumption, PKCE, state/nonce, token exchange, and logout behavior. |
-| Resource server behavior | `tigrbl-authz-resource-server`, resource validation API | API middleware/integration | Should validate JWT/opaque tokens, issuer, audience/resource, scopes, DPoP/mTLS where enabled. |
+| M2M / client credentials | `tba-app-backend-service-admin`, `tba-app-backend-developer`, token endpoint | service clients, workload credentials, `/token` | Product lane needs explicit scopes, resources, rotation, and audit. |
+| RP behavior | `tba-protocol-oidc-relying-party`, `@tba/client-oidc-relying-party` | SDK/client integration | Should verify metadata consumption, PKCE, state/nonce, token exchange, and logout behavior. |
+| Resource server behavior | `tba-protocol-authorization-resource-server`, resource validation API | API middleware/integration | Should validate JWT/opaque tokens, issuer, audience/resource, scopes, DPoP/mTLS where enabled. |
 
 ## Competitor Surface Comparison
 
@@ -97,7 +97,7 @@ Normative anchors:
 | Keycloak | Realm OIDC/OAuth endpoints, client registration, service accounts, admin console/API. Docs: [Keycloak OIDC endpoint layers](https://www.keycloak.org/securing-apps/oidc-layers). | Product is protocol/provider-centered; OAuth 2.1 posture is a configuration/profile concern, not a separate product. |
 | FusionAuth | OAuth endpoints, application configuration, JWT/API-key/service behavior. Docs: [FusionAuth OAuth guide](https://fusionauth.io/docs/lifecycle/authenticate-users/oauth/), [FusionAuth OAuth endpoints](https://fusionauth.io/docs/v1/tech/oauth/endpoints/). | Exposes OAuth 2.0 grants and PKCE configuration; OAuth 2.1 is best represented as stricter application policy. |
 | Amazon Cognito | User pool authorization server, hosted UI, token endpoint, app clients, M2M client credentials. Docs: [Cognito OAuth grants](https://docs.aws.amazon.com/cognito/latest/developerguide/federation-endpoints-oauth-grants.html), [Cognito token endpoint](https://docs.aws.amazon.com/cognito/latest/developerguide/token-endpoint.html). | Supports PKCE and client credentials, but still documents implicit; OAuth 2.1-like behavior would be a stricter app-client policy. |
-| `tigrbl_auth` | Protocol package plus thin product frontdoors: public AS, resource validation, developer client admin, service/workload admin, RP/resource-server packages. | Should add an explicit OAuth 2.1 alignment profile, while keeping OAuth 2.0 and extension RFC certification separate. |
+| `tba_auth` | Protocol package plus thin product frontdoors: public AS, resource validation, developer client admin, service/workload admin, RP/resource-server packages. | Should add an explicit OAuth 2.1 alignment profile, while keeping OAuth 2.0 and extension RFC certification separate. |
 
 ## Recommended Target Architecture
 
@@ -148,13 +148,13 @@ Do not replace current OAuth 2.0 entities. Add a narrow profile contract and pro
 OAuth 2.1 should not force a new deployable API package. It should be a runtime/profile mode across existing packages:
 
 ```text
-tigrbl-auth-protocol-oauth                    # OAuth 2.0 + extension RFC logic, OAuth 2.1 profile rules
-tigrbl-auth-backend-app-public                   # authorize/token/revoke/register/discovery/JWKS protocol frontdoor
-tigrbl-auth-backend-app-resource-validation      # introspection, JWKS, protected-resource metadata
-tigrbl-auth-backend-app-developer                # client registration, redirect/grant/client policy
-tigrbl-auth-backend-app-service-admin            # M2M/workload/service identity lifecycle
-tigrbl-auth-protocol-rp / @tigrbl-auth/rp     # OAuth/OIDC client and RP behavior
-tigrbl-authz-resource-server          # protected API token validation integration
+tba-protocol-oauth                    # OAuth 2.0 + extension RFC logic, OAuth 2.1 profile rules
+tba-app-backend-public                   # authorize/token/revoke/register/discovery/JWKS protocol frontdoor
+tba-app-backend-resource-validation      # introspection, JWKS, protected-resource metadata
+tba-app-backend-developer                # client registration, redirect/grant/client policy
+tba-app-backend-service-admin            # M2M/workload/service identity lifecycle
+tba-protocol-oidc-relying-party / @tba/client-oidc-relying-party     # OAuth/OIDC client and RP behavior
+tba-protocol-authorization-resource-server          # protected API token validation integration
 ```
 
 The practical course is to keep OAuth 2.0 broad and interoperable, then add a stricter OAuth 2.1 alignment profile that operators can enable and tests can certify without overstating draft-standard status.

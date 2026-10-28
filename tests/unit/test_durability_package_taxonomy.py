@@ -39,12 +39,12 @@ def test_every_layer_30_package_has_one_explicit_disposition() -> None:
 
 def test_canonical_durability_packages_have_no_higher_layer_imports() -> None:
     forbidden = (
-        "tigrbl_auth_router_",
-        "tigrbl_auth_protocol_",
-        "tigrbl_authz_resource_server",
-        "tigrbl_identity_runtime",
-        "tigrbl_identity_server",
-        "tigrbl_identity_storage_runtime",
+        "tba_router_",
+        "tba_protocol_",
+        "tba_protocol_authorization_resource_server",
+        "tba_runtime_identity",
+        "tba_server_identity",
+        "tba_runtime_identity_storage",
     )
     packages = list(TAXONOMY["canonical_packages"])
     violations: list[str] = []
@@ -72,16 +72,16 @@ def test_canonical_durability_packages_do_not_define_repository_wrappers() -> No
 
 
 def test_legacy_operation_and_spec_paths_are_identity_preserving_facades() -> None:
-    from tigrbl_identity_storage_runtime.ops.webauthn_ceremonies import (
+    from tba_runtime_identity_storage.ops.webauthn_ceremonies import (
         consume_ceremony as legacy_consume,
     )
-    from tigrbl_identity_storage_runtime.tables.webauthn import (
+    from tba_runtime_identity_storage.tables.webauthn import (
         WebAuthnCeremonyRuntimeSpec as legacy_spec,
     )
-    from tigrbl_webauthn_durability.operations.webauthn_ceremonies import (
+    from tba_durability_webauthn.operations.webauthn_ceremonies import (
         consume_ceremony,
     )
-    from tigrbl_webauthn_durability.specifications.webauthn import (
+    from tba_durability_webauthn.specifications.webauthn import (
         WebAuthnCeremonyRuntimeSpec,
     )
 
@@ -93,19 +93,19 @@ def test_legacy_operation_and_spec_paths_are_identity_preserving_facades() -> No
 def test_engine_construction_is_owned_by_layer_30() -> None:
     canonical = (
         LAYER
-        / "tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/engine.py"
+        / "tba-runtime-identity-storage/src/tba_runtime_identity_storage/engine.py"
     ).read_text(encoding="utf-8")
     compatibility = (
         ROOT
-        / "pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/engine.py"
+        / "pkgs/60-runtime/tba-runtime-identity/src/tba_runtime_identity/engine.py"
     ).read_text(encoding="utf-8")
     assert "build_engine(" in canonical
-    assert "tigrbl_identity_storage_runtime.engine" in compatibility
+    assert "tba_runtime_identity_storage.engine" in compatibility
     assert "build_engine(" not in compatibility
 
 
-def test_identity_storage_runtime_uses_direct_tigrbl_packages() -> None:
-    package = LAYER / "tigrbl-identity-storage-runtime"
+def test_identity_storage_runtime_uses_direct_tba_packages() -> None:
+    package = LAYER / "tba-runtime-identity-storage"
     facade_imports: list[str] = []
     for source in (package / "src").rglob("*.py"):
         for imported in _imports(source):

@@ -1,4 +1,4 @@
-from tigrbl_auth.uix import RESOURCE_VIEW_OPERATIONS, build_resource_views
+from tba_auth.uix import RESOURCE_VIEW_OPERATIONS, build_resource_views
 
 
 def test_resource_views_handle_empty_loading_error_filtered_and_detail_states():

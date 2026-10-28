@@ -8,7 +8,7 @@ status: "draft"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "The admin UIX boundary defines administrator browser-facing surfaces for `tigrbl_auth`."
+summary: "The admin UIX boundary defines administrator browser-facing surfaces for `tba_auth`."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -20,7 +20,7 @@ references: []
 body: |-
   ## Requirements
 
-  The admin UIX boundary defines administrator browser-facing surfaces for `tigrbl_auth`.
+  The admin UIX boundary defines administrator browser-facing surfaces for `tba_auth`.
 
   The historical `apps/admin-uix` package is a compatibility and extraction source while product UIXs are separated. New administrator workflows SHOULD land in the product UIX that owns the workflow:
 

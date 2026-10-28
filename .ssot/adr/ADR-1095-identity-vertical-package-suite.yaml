@@ -14,37 +14,37 @@ superseded_by: []
 status_notes:
   -
     status: "accepted"
-    note: "Adopt identity as the package-suite vertical and retain tigrbl-auth as the facade."
+    note: "Adopt identity as the package-suite vertical and retain tba-auth as the facade."
     at: "2026-05-18T08:12:36Z"
 references: []
 body: |-
   ## Decision
-  
+
   Use `identity` as the vertical name for the split package suite.
-  
-  Distribution packages MUST use `tigrbl-identity-*` names. Import packages MUST
-  use independent top-level `tigrbl_identity_*` package names, not a shared
-  namespace package. The existing `tigrbl-auth` distribution remains the product
+
+  Distribution packages MUST use `tba-identity-*` names. Import packages MUST
+  use independent top-level `tba_identity_*` package names, not a shared
+  namespace package. The existing `tba-auth` distribution remains the product
   and compatibility facade.
-  
+
   ## Context
-  
-  The existing `tigrbl_auth` repository covers more than authentication. It
+
+  The existing `tba_auth` repository covers more than authentication. It
   includes OAuth/OIDC protocol behavior, principals, credentials, clients,
   services, policy controls, tenant boundaries, runtime profiles, repository
   tooling workflows, contracts, and certification evidence.
-  
+
   The term `auth` is ambiguous and can mean authentication, authorization, or
   both. The package suite needs a name that can truthfully cover users, clients,
   apps, services, devices, workloads, credentials, protocol flows, and runtime
   surfaces.
-  
+
   ## Consequences
-  
+
   The architecture can distinguish authentication, authorization, principals,
   credentials, policy, protocol standards, storage, server composition, runtime
   execution, and repository tooling workflows without forcing them under a vague auth
   bucket.
-  
-  Existing users can continue using `tigrbl-auth` while implementation
+
+  Existing users can continue using `tba-auth` while implementation
   ownership moves to the identity suite.

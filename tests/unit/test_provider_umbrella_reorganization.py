@@ -16,21 +16,21 @@ def test_provider_taxonomy_names_canonical_destinations() -> None:
     migrations = taxonomy["compatibility_or_migration_packages"]
 
     assert migrations["tigrbl-authn-credentials"] == {
-        "target": "tigrbl-credentials",
+        "target": "tba-credentials",
         "target_layer": "70-facade",
     }
-    assert migrations["tigrbl-security-cose"]["target"] == (
-        "tigrbl-cose-concrete-plus-tigrbl-cose-cryptography-provider"
+    assert migrations["tba-provider-security-cose"]["target"] == (
+        "tba-concrete-cose-plus-tba-provider-cose-cryptography"
     )
 
 
 def test_compatibility_packages_reexport_canonical_objects() -> None:
-    from tigrbl_auth_router_admin_gate import AdminGate as CanonicalAdminGate
-    from tigrbl_authz_policy_admin_gate import AdminGate as LegacyAdminGate
-    from tigrbl_cose_concrete import decode_cose_key as canonical_decode
-    from tigrbl_credentials.lifecycle import hash_secret as canonical_hash
-    from tigrbl_authn_credentials.lifecycle import hash_secret as authn_legacy_hash
-    from tigrbl_security_cose import decode_cose_key as legacy_decode
+    from tba_router_admin_gate import AdminGate as CanonicalAdminGate
+    from tba_runtime_authorization_policy_admin_gate import AdminGate as LegacyAdminGate
+    from tba_concrete_cose import decode_cose_key as canonical_decode
+    from tba_credentials.lifecycle import hash_secret as canonical_hash
+    from tba_authn_credentials.lifecycle import hash_secret as authn_legacy_hash
+    from tba_provider_security_cose import decode_cose_key as legacy_decode
     from tigrbl_principal_authentication.lifecycle import hash_secret as legacy_hash
 
     assert LegacyAdminGate is CanonicalAdminGate
@@ -40,7 +40,7 @@ def test_compatibility_packages_reexport_canonical_objects() -> None:
 
 
 def test_credentials_facade_covers_each_credential_domain() -> None:
-    import tigrbl_credentials as credentials
+    import tba_credentials as credentials
 
     assert credentials.CredentialKind.PASSWORD.value == "password"
     assert credentials.digital.DigitalCredential is not None
@@ -49,16 +49,16 @@ def test_credentials_facade_covers_each_credential_domain() -> None:
 
 def test_new_layer20_packages_do_not_import_downstream_layers() -> None:
     roots = (
-        ROOT / "pkgs" / "20-providers" / "tigrbl-cose-cryptography-provider",
-        ROOT / "pkgs" / "20-providers" / "tigrbl-jose-swarmauri-provider",
+        ROOT / "pkgs" / "20-providers" / "tba-provider-cose-cryptography",
+        ROOT / "pkgs" / "20-providers" / "tba-provider-jose-swarmauri",
     )
     forbidden = (
-        "tigrbl_identity_storage",
-        "tigrbl_identity_storage_runtime",
-        "tigrbl_identity_runtime",
-        "tigrbl_identity_server",
-        "tigrbl_auth_protocol_",
-        "tigrbl_auth_router_",
+        "tba_storage_core",
+        "tba_runtime_identity_storage",
+        "tba_runtime_identity",
+        "tba_server_identity",
+        "tba_protocol_",
+        "tba_router_",
     )
     for root in roots:
         source = "\n".join(
@@ -70,15 +70,15 @@ def test_new_layer20_packages_do_not_import_downstream_layers() -> None:
 def test_extracted_capability_families_bind_reportable_operations() -> None:
     import asyncio
 
-    from tigrbl_access_governance_capability import AccessGovernanceCapability
+    from tba_capability_access_governance import AccessGovernanceCapability
     from tigrbl_advanced_authentication_capability import (
         AdvancedAuthenticationCapability,
     )
-    from tigrbl_key_administration_capability import KeyAdministrationCapability
-    from tigrbl_policy_administration_capability import (
+    from tba_capability_key_administration import KeyAdministrationCapability
+    from tba_capability_policy_administration import (
         PolicyAdministrationCapability,
     )
-    from tigrbl_policy_assurance_capability import PolicyAssuranceCapability
+    from tba_capability_policy_assurance import PolicyAssuranceCapability
 
     capabilities = (
         (AccessGovernanceCapability(lambda value: value), "manage_entitlements"),

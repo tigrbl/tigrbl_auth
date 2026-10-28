@@ -2,7 +2,7 @@ import asyncio
 
 import pytest
 
-from tigrbl_auth_protocol_gnap import (
+from tba_protocol_gnap import (
     CAPABILITY_REQUIREMENTS,
     CURRENT_VERSION,
     GnapProtocol,
@@ -13,11 +13,11 @@ from tigrbl_auth_protocol_gnap import (
     parse_gnap_request,
     supports,
 )
-from tigrbl_claim_assertions_concrete import AssertionsClaim
-from tigrbl_claim_subject_identifiers_concrete import SubjectIdentifiersClaim
-from tigrbl_claim_updated_at_rfc3339_concrete import UpdatedAtRfc3339Claim
-from tigrbl_grant_negotiation_capability import GrantNegotiationCapability
-from tigrbl_identity_contracts.gnap import GrantNegotiationResult
+from tba_concrete_claim_assertions import AssertionsClaim
+from tba_concrete_claim_subject_identifiers import SubjectIdentifiersClaim
+from tba_concrete_claim_updated_at_rfc3339 import UpdatedAtRfc3339Claim
+from tba_capability_delegated_access_negotiation import GrantNegotiationCapability
+from tba_contracts_identity.gnap import GrantNegotiationResult
 
 
 def test_gnap_owns_rfc_9635_version_and_features() -> None:

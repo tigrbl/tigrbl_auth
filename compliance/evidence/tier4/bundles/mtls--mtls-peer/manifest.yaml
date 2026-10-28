@@ -24,12 +24,12 @@ peer_identity:
   peer_version: 2026.03.25+fixture
   peer_operator: checkpoint-staged-external-root
 peer_runtime:
-  image_ref: ghcr.io/tigrbl-auth/peer-fixtures/mtls-peer:2026-03-25
+  image_ref: ghcr.io/tba-auth/peer-fixtures/mtls-peer:2026-03-25
   image_digest: sha256:2dfc56c90637a1616be53295abdeacf8d00f42206e90bc7b1deab60ce6d688d5
   execution_style: black-box-http-mtls
 independence_attestation:
   attestation_class: repository-fixture-nonindependent
-  attesting_organization: tigrbl_auth checkpoint fixture generator
+  attesting_organization: tba_auth checkpoint fixture generator
   attesting_contact: repository-local-fixture@invalid.example
   attestation_timestamp: '2026-03-26T23:28:15+00:00'
   counterpart_identified: true

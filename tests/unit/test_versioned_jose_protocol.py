@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from tigrbl_security_protocol_jose import (
+from tba_protocol_security_jose import (
     CLAIMS_ARE_PROFILE_OWNED,
     CURRENT_VERSION,
     JOSE_CLAIM_CLASSES,

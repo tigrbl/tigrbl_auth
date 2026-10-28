@@ -41,7 +41,7 @@ This repository checkpoint now defines the clean-room certification matrix, but 
 The clean-room matrix now performs real runtime validation in supported environments, not just metadata inspection. For each kept runner profile the matrix executes:
 
 - `python scripts/clean_room_profile_smoke.py --runner <runner> --require-runner-installed --probe-surfaces --require-surface-probes`
-- `tigrbl-auth serve --check --server <runner> --format json --output dist/runtime-smoke/<profile>-serve-check.json`
+- `tba-auth serve --check --server <runner> --format json --output dist/runtime-smoke/<profile>-serve-check.json`
 - `python scripts/generate_state_reports.py`
 
 The release-gate tox environment runs the same serve-check and HTTP-surface probes for `uvicorn`, `hypercorn`, and `tigrcorn` so the generated `docs/compliance/runtime_profile_report.json` can be built from executable checks in a supported interpreter environment.

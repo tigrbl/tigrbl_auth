@@ -1,5 +1,5 @@
 schema_version: 1
-package: tigrbl_auth
+package: tba_auth
 profile_label: fapi2-security
 effective_deployment:
   profile: fapi2-security

@@ -8,7 +8,7 @@ status: "superseded"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification governs `tigrbl-identity-operator`."
+summary: "This specification governs `tba-operator-identity`."
 supersedes: []
 superseded_by:
   - "spc:1223"
@@ -25,7 +25,7 @@ references: []
 body: |-
   ## Scope
   
-  This specification governs `tigrbl-identity-operator`.
+  This specification governs `tba-operator-identity`.
   
   ## First-Class Objects
   

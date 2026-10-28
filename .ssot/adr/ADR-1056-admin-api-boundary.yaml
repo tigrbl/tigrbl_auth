@@ -19,7 +19,7 @@ body: |-
   Status: proposed
   Date: 2026-05-04
   
-  `tigrbl_auth` MUST define the admin API as a privileged governed boundary.
+  `tba_auth` MUST define the admin API as a privileged governed boundary.
   The boundary includes authenticated and authorized control-plane operations,
   administrative resource management, administrative policy operations, and
   implementation-backed admin contract publication.

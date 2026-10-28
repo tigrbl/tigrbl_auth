@@ -13,8 +13,8 @@ def package_src(name: str) -> Path:
     return matches[0]
 
 
-FACADE_DIR = package_src("tigrbl-auth") / "tigrbl_auth"
-STORAGE_DIR = package_src("tigrbl-identity-storage") / "tigrbl_identity_storage"
+FACADE_DIR = package_src("tba-auth") / "tba_auth"
+STORAGE_DIR = package_src("tba-storage-core") / "tba_storage_core"
 
 
 def test_orm_export_paths_are_not_supported_for_storage_ops() -> None:
@@ -36,7 +36,7 @@ def test_storage_does_not_import_server_framework_surface() -> None:
     offenders = [
         path.relative_to(ROOT).as_posix()
         for path in STORAGE_DIR.rglob("*.py")
-        if "tigrbl_identity_server.framework" in path.read_text(encoding="utf-8")
+        if "tba_server_identity.framework" in path.read_text(encoding="utf-8")
     ]
 
     assert offenders == []

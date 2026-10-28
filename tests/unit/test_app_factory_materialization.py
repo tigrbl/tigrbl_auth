@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from tigrbl_auth.cli.install_substrate import build_install_substrate_report
+from tba_auth.cli.install_substrate import build_install_substrate_report
 
 try:
     import tomllib
@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 def test_runtime_package_owns_runner_extras() -> None:
     runtime_pyproject = (
-        ROOT / "pkgs" / "60-runtime" / "tigrbl-identity-runtime" / "pyproject.toml"
+        ROOT / "pkgs" / "60-runtime" / "tba-runtime-identity" / "pyproject.toml"
     )
     manifest = tomllib.loads(runtime_pyproject.read_text(encoding="utf-8"))
     extras = manifest["project"]["optional-dependencies"]
@@ -36,18 +36,18 @@ def test_framework_facades_are_not_package_surfaces() -> None:
         ROOT
         / "pkgs"
         / "70-facade"
-        / "tigrbl-auth"
+        / "tba-auth"
         / "src"
-        / "tigrbl_auth"
+        / "tba_auth"
         / "framework.py"
     ).exists()
     assert not (
         ROOT
         / "pkgs"
         / "60-runtime"
-        / "tigrbl-identity-server"
+        / "tba-server-identity"
         / "src"
-        / "tigrbl_identity_server"
+        / "tba_server_identity"
         / "framework.py"
     ).exists()
 
@@ -56,7 +56,7 @@ def test_install_substrate_report_tracks_extras_consistency() -> None:
     payload = build_install_substrate_report(ROOT, execute_import_probes=False)
     assert payload["extras_consistency"]["passed"] is True
     assert payload["extras_consistency"]["workspace_runner_extras"]["uvicorn"] == [
-        "tigrbl-identity-runtime[uvicorn]==0.4.0.dev2"
+        "tba-runtime-identity[uvicorn]==0.4.0.dev2"
     ]
 
 
@@ -64,11 +64,11 @@ def test_introspection_protocol_module_exports_service_not_runtime_router() -> N
     pytest.importorskip("sqlalchemy")
     pytest.importorskip("tigrbl")
 
-    import tigrbl_auth_protocol_oauth.standards.introspection as module
+    import tba_protocol_oauth.standards.introspection as module
 
     assert not hasattr(module, "api")
     assert not hasattr(module, "introspect_token")
     assert not hasattr(module, "include_introspection_endpoint")
     assert module.RFC7662IntrospectionService.__module__ == (
-        "tigrbl_auth_protocol_oauth.standards.introspection"
+        "tba_protocol_oauth.standards.introspection"
     )

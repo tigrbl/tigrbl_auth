@@ -10,10 +10,10 @@ from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.x509.oid import NameOID
 
-from tigrbl_attestation_packed_provider import verify_packed_attestation
-from tigrbl_attestation_tpm_provider import verify_tpm_attestation
-from tigrbl_attestation_u2f_provider import verify_u2f_attestation
-from tigrbl_fido_metadata_service_provider import FidoMetadataServiceProvider
+from tba_provider_attestation_packed import verify_packed_attestation
+from tba_provider_attestation_tpm import verify_tpm_attestation
+from tba_provider_attestation_u2f import verify_u2f_attestation
+from tba_provider_fido_metadata_service import FidoMetadataServiceProvider
 
 
 def _key_material():

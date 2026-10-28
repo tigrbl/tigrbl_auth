@@ -4,9 +4,9 @@ from pathlib import Path
 
 import pytest
 
-from tigrbl_auth_protocol_oauth.standards.dpop import issue_nonce
-from tigrbl_auth_protocol_rp import RPConfiguration, RelyingParty
-from tigrbl_replay_memory_provider import (
+from tba_protocol_oauth.standards.dpop import issue_nonce
+from tba_protocol_oidc_relying_party import RPConfiguration, RelyingParty
+from tba_provider_replay_memory import (
     MemoryRPSessionProvider,
     MemoryRPStateProvider,
 )
@@ -36,8 +36,8 @@ def test_layer_50_does_not_import_runtime_settings() -> None:
         path.read_text(encoding="utf-8")
         for path in (ROOT / "pkgs" / "50-protocols").rglob("*.py")
     )
-    assert "tigrbl_identity_runtime.settings" not in source
-    assert "from tigrbl_identity_runtime import settings" not in source
+    assert "tba_runtime_identity.settings" not in source
+    assert "from tba_runtime_identity import settings" not in source
 
 
 def test_layer_20_does_not_own_sql_sessions_or_transactions() -> None:
@@ -62,7 +62,7 @@ def test_layer_50_does_not_own_database_or_environment_key_loading() -> None:
         for path in (ROOT / "pkgs" / "50-protocols").rglob("*.py")
     )
     for forbidden in (
-        "tigrbl_identity_storage.tables",
+        "tba_storage_core.tables",
         "storage_session",
         "from sqlalchemy",
         "import sqlalchemy",
@@ -78,7 +78,7 @@ def test_layer_40_consumes_normalized_contracts_not_protocol_modules() -> None:
         path.read_text(encoding="utf-8")
         for path in (ROOT / "pkgs" / "40-capabilities").rglob("*.py")
     )
-    assert "tigrbl_auth_protocol_" not in source
+    assert "tba_protocol_" not in source
     assert ".nonce" not in source
     assert ".jti" not in source
     assert "Header(" not in source

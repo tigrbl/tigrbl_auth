@@ -1,5 +1,5 @@
 
-from tigrbl_auth.cli.reports import diff_contracts
+from tba_auth.cli.reports import diff_contracts
 
 def test_contract_diff_runs_without_crash(tmp_path=None):
     # The live repository should have generated contracts that diff cleanly.

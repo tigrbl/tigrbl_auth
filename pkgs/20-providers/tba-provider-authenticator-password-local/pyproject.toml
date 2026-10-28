@@ -1,0 +1,19 @@
+[project]
+name = "tba-provider-authenticator-password-local"
+version = "0.1.0"
+description = "Local password authenticator provider for the TBA package suite."
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = [
+    "tba-contracts-identity==0.4.0.dev2",
+    "tba-bases-authenticator==0.1.0",
+    "tba-provider-secret-hashing-bcrypt==0.1.0",
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tba_provider_authenticator_password_local", from = "src" }]

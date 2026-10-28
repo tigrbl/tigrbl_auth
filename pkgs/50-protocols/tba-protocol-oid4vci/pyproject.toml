@@ -1,0 +1,20 @@
+[project]
+name = "tba-protocol-oid4vci"
+version = "0.4.0.dev2"
+description = "OpenID for Verifiable Credential Issuance protocol package."
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = [
+    "tba-concrete-claim-audience==0.4.0.dev2",
+    "tba-concrete-claim-issued-at==0.4.0.dev2",
+    "tba-concrete-claim-nonce==0.4.0.dev2",
+    "tba-capability-digital-credential-issuance==0.4.0.dev2",
+    "tba-contracts-identity==0.4.0.dev2",
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tba_protocol_oid4vci", from = "src" }]

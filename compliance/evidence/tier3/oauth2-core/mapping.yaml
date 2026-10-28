@@ -7,8 +7,8 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   modules:
-  - tigrbl_auth/standards/oauth2/rfc6749.py
-  - tigrbl_auth/standards/oauth2/rfc6749_token.py
+  - tba_auth/standards/oauth2/rfc6749.py
+  - tba_auth/standards/oauth2/rfc6749_token.py
   tests:
   - tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py
   - tests/conformance/baseline/test_rfc6749_token_endpoint.py
@@ -56,7 +56,7 @@ reports:
 - docs/compliance/certification_state_report.json
 - docs/compliance/certification_state_report.md
 contracts:
-- specs/openapi/profiles/baseline/tigrbl_auth.public.openapi.json
+- specs/openapi/profiles/baseline/tba_auth.public.openapi.json
 - specs/discovery/profiles/baseline/oauth-authorization-server.json
 scenario_ids:
 - rfc-6749

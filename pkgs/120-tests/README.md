@@ -10,4 +10,4 @@ the root `tests/` harness and consume reusable support from here.
 
 Current package:
 
-- `tigrbl-identity-testkit`
+- `tba-testkit-identity`

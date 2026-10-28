@@ -75,7 +75,7 @@
   ],
   "end_session_endpoint": "https://authn.example.com/logout",
   "protected_resource_metadata": "https://authn.example.com/.well-known/oauth-protected-resource",
-  "tigrbl_auth_capabilities": [
+  "tba_auth_capabilities": [
     "account-consents",
     "account-credentials",
     "account-profile",

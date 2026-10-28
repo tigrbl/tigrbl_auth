@@ -1,28 +1,28 @@
 import pytest
 
-import tigrbl_identity_admin._advanced_identity_plane.authenticators as authenticators_module
-from tigrbl_identity_admin._advanced_identity_plane.authenticators import (
+import tba_runtime_identity_administration._advanced_identity_plane.authenticators as authenticators_module
+from tba_runtime_identity_administration._advanced_identity_plane.authenticators import (
     AdvancedAuthenticatorRegistry as CanonicalAdvancedAuthenticatorRegistry,
 )
-from tigrbl_identity_admin_auth_anomaly_detector import AuthAnomalyDetector as CanonicalAuthAnomalyDetector
-from tigrbl_identity_admin_relationship_graph import RelationshipGraph as CanonicalRelationshipGraph
-from tigrbl_identity_admin_trust_federation_graph import (
+from tba_provider_identity_admin_auth_anomaly_detector import AuthAnomalyDetector as CanonicalAuthAnomalyDetector
+from tba_provider_identity_admin_relationship_graph import RelationshipGraph as CanonicalRelationshipGraph
+from tba_durability_identity_admin_trust_federation_graph import (
     TrustFederationGraph as CanonicalTrustFederationGraph,
     TrustFederationGraphEdgeRuntimeSpec,
     TrustFederationGraphNodeRuntimeSpec,
     TrustFederationGraphRuntimeSpec,
 )
-from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_storage.tables import Federation as CanonicalFederation
-from tigrbl_identity_storage.tables import AuthenticationChallenge as CanonicalAuthenticationChallenge
-from tigrbl_identity_storage.tables import CredentialMfaFactor, CredentialWebAuthnPasskey
-from tigrbl_identity_storage.tables import Policy as CanonicalPolicy
-from tigrbl_identity_storage.tables import (
+from tba_runtime_identity.settings import settings
+from tba_storage_core.tables import Federation as CanonicalFederation
+from tba_storage_core.tables import AuthenticationChallenge as CanonicalAuthenticationChallenge
+from tba_storage_core.tables import CredentialMfaFactor, CredentialWebAuthnPasskey
+from tba_storage_core.tables import Policy as CanonicalPolicy
+from tba_storage_core.tables import (
     TrustFederationGraph as TrustFederationGraphTable,
     TrustFederationGraphEdge,
     TrustFederationGraphNode,
 )
-from tigrbl_auth.services.advanced_identity_plane import (
+from tba_auth.services.advanced_identity_plane import (
     AdaptiveContext,
     AdvancedAuthenticatorRegistry,
     AuthAnomalyDetector,
@@ -124,7 +124,7 @@ def test_advanced_authenticator_uses_canonical_webauthn_algorithm_registry(monke
 
 def test_deprecated_advanced_authenticator_registry_reexports_admin_surface():
     with pytest.warns(DeprecationWarning):
-        from tigrbl_identity_admin_advanced_authenticator_registry import (
+        from tba_runtime_identity_administration_advanced_authenticator_registry import (
             AdvancedAuthenticatorRegistry as DeprecatedAdvancedAuthenticatorRegistry,
         )
 

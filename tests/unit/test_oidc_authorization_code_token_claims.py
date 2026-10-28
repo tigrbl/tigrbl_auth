@@ -8,8 +8,8 @@ from unittest.mock import AsyncMock
 import pytest
 
 from tigrbl.requests import Request
-from tigrbl_auth.rfc.rfc7636_pkce import makeCodeChallenge, makeCodeVerifier
-import tigrbl_identity_server.token_request as token_endpoint
+from tba_auth.rfc.rfc7636_pkce import makeCodeChallenge, makeCodeVerifier
+import tba_server_identity.token_request as token_endpoint
 
 
 @pytest.mark.unit

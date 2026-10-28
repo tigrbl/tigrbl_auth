@@ -1,4 +1,4 @@
-"""Unit tests for ``tigrbl_auth.jwtoken`` module."""
+"""Unit tests for ``tba_auth.jwtoken`` module."""
 
 import base64
 import json
@@ -10,7 +10,7 @@ import pytest
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 
-from tigrbl_auth.jwtoken import (
+from tba_auth.jwtoken import (
     JWTCoder,
     InvalidTokenError,
     _ACCESS_TTL,

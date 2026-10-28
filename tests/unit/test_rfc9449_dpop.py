@@ -6,8 +6,8 @@ that the helper functions respect the ``enable_rfc9449`` feature flag.
 
 import asyncio
 import pytest
-from tigrbl_identity_jose.framework import ExportPolicy, KeyUse, KeyAlg, KeyClass, KeySpec, LocalKeyProvider
-from tigrbl_auth.rfc.rfc9449_dpop import (
+from tba_provider_identity_jose.framework import ExportPolicy, KeyUse, KeyAlg, KeyClass, KeySpec, LocalKeyProvider
+from tba_auth.rfc.rfc9449_dpop import (
     RFC9449_SPEC_URL,
     makeProof,
     verify_proof,
@@ -167,7 +167,7 @@ def test_async_dpop_verifier_accepts_table_style_nonce_and_replay_operations():
 
 @pytest.mark.unit
 def test_dpop_protocol_does_not_export_store_classes():
-    import tigrbl_auth_protocol_oauth.standards.dpop as dpop
+    import tba_protocol_oauth.standards.dpop as dpop
 
     assert not hasattr(dpop, "DPoPReplayStore")
     assert not hasattr(dpop, "DPoPNonceStore")

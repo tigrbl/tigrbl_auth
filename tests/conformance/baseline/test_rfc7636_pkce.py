@@ -12,12 +12,12 @@ with a minimum length of 43 characters and a maximum length of 128 characters.
 
 import pytest
 
-from tigrbl_auth import (
+from tba_auth import (
     makeCodeChallenge,
     makeCodeVerifier,
     verify_code_challenge,
 )
-import tigrbl_auth.rfc.rfc7636_pkce as pkce_mod
+import tba_auth.rfc.rfc7636_pkce as pkce_mod
 
 
 @pytest.mark.unit

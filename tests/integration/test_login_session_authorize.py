@@ -8,8 +8,8 @@ from httpx import AsyncClient
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tigrbl_auth.crypto import hash_pw
-from tigrbl_auth.tables import AuthSession, Client, Tenant, User
+from tba_auth.crypto import hash_pw
+from tba_auth.tables import AuthSession, Client, Tenant, User
 
 
 @pytest.mark.integration

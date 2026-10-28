@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "Decision: tigrbl_auth implements RFC 8705 mTLS client authentication and certificate-bound token support as OAuth protocol/runtime behavior, credential proof-material modeling, and resource-server sender-constraint validation. Actual TLS handshakes and proxy termination remain deployment/runtime infrastructure. Forwarded certificate headers are trusted only when the request carries an explicit trusted runtime marker or ASGI scope certificate material. References: RFC 8705 https://www.rfc-editor.org/rfc/rfc8705, RFC 7800 https://www.rfc-editor.org/rfc/rfc7800."
+summary: "Decision: tba_auth implements RFC 8705 mTLS client authentication and certificate-bound token support as OAuth protocol/runtime behavior, credential proof-material modeling, and resource-server sender-constraint validation. Actual TLS handshakes and proxy termination remain deployment/runtime infrastructure. Forwarded certificate headers are trusted only when the request carries an explicit trusted runtime marker or ASGI scope certificate material. References: RFC 8705 https://www.rfc-editor.org/rfc/rfc8705, RFC 7800 https://www.rfc-editor.org/rfc/rfc7800."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -18,4 +18,4 @@ status_notes:
     at: "2026-06-17T09:48:44Z"
 references: []
 body: |-
-  Decision: tigrbl_auth implements RFC 8705 mTLS client authentication and certificate-bound token support as OAuth protocol/runtime behavior, credential proof-material modeling, and resource-server sender-constraint validation. Actual TLS handshakes and proxy termination remain deployment/runtime infrastructure. Forwarded certificate headers are trusted only when the request carries an explicit trusted runtime marker or ASGI scope certificate material. References: RFC 8705 https://www.rfc-editor.org/rfc/rfc8705, RFC 7800 https://www.rfc-editor.org/rfc/rfc7800.
+  Decision: tba_auth implements RFC 8705 mTLS client authentication and certificate-bound token support as OAuth protocol/runtime behavior, credential proof-material modeling, and resource-server sender-constraint validation. Actual TLS handshakes and proxy termination remain deployment/runtime infrastructure. Forwarded certificate headers are trusted only when the request carries an explicit trusted runtime marker or ASGI scope certificate material. References: RFC 8705 https://www.rfc-editor.org/rfc/rfc8705, RFC 7800 https://www.rfc-editor.org/rfc/rfc7800.

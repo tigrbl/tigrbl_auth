@@ -1,6 +1,6 @@
 # CLI Conformance Snapshot
 
-> Generated from `tigrbl_identity_cli.cli.metadata` and argparse parser snapshots.
+> Generated from `tba_cli_identity.cli.metadata` and argparse parser snapshots.
 
 - Command count: `20`
 - Verb count: `83`
@@ -12,14 +12,14 @@
 
 ## Help snapshots
 
-### `tigrbl-auth`
+### `tba-auth`
 
 ```text
-usage: tigrbl-auth [-h]
+usage: tba-auth [-h]
                    {serve,verify,gate,spec,claims,evidence,doctor,bootstrap,migrate,release,tenant,client,identity,flow,session,token,keys,discovery,import,export}
                    ...
 
-Tigrbl-native identity CLI for the tigrbl_auth package.
+Tigrbl-native identity CLI for the tba_auth package.
 
 positional arguments:
   {serve,verify,gate,spec,claims,evidence,doctor,bootstrap,migrate,release,tenant,client,identity,flow,session,token,keys,discovery,import,export}
@@ -48,10 +48,10 @@ options:
   -h, --help            show this help message and exit
 ```
 
-### `tigrbl-auth bootstrap`
+### `tba-auth bootstrap`
 
 ```text
-usage: tigrbl-auth bootstrap [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth bootstrap [-h] [--env-file ENV_FILE] [--profile PROFILE]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -96,10 +96,10 @@ options:
   --trace               Emit trace-oriented execution details.
 ```
 
-### `tigrbl-auth bootstrap apply`
+### `tba-auth bootstrap apply`
 
 ```text
-usage: tigrbl-auth bootstrap apply [-h] [--env-file ENV_FILE]
+usage: tba-auth bootstrap apply [-h] [--env-file ENV_FILE]
                                    [--profile PROFILE] [--tenant TENANT]
                                    [--issuer ISSUER]
                                    [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -149,10 +149,10 @@ options:
   --timeout TIMEOUT     Maximum wait time in seconds for supported long-running operations.
 ```
 
-### `tigrbl-auth bootstrap manifest`
+### `tba-auth bootstrap manifest`
 
 ```text
-usage: tigrbl-auth bootstrap manifest [-h] [--env-file ENV_FILE]
+usage: tba-auth bootstrap manifest [-h] [--env-file ENV_FILE]
                                       [--profile PROFILE] [--tenant TENANT]
                                       [--issuer ISSUER]
                                       [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -197,10 +197,10 @@ options:
                         Explicit bundle output directory.
 ```
 
-### `tigrbl-auth bootstrap status`
+### `tba-auth bootstrap status`
 
 ```text
-usage: tigrbl-auth bootstrap status [-h] [--env-file ENV_FILE]
+usage: tba-auth bootstrap status [-h] [--env-file ENV_FILE]
                                     [--profile PROFILE] [--tenant TENANT]
                                     [--issuer ISSUER]
                                     [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -245,10 +245,10 @@ options:
                         Directory for generated reports.
 ```
 
-### `tigrbl-auth bootstrap verify`
+### `tba-auth bootstrap verify`
 
 ```text
-usage: tigrbl-auth bootstrap verify [-h] [--env-file ENV_FILE]
+usage: tba-auth bootstrap verify [-h] [--env-file ENV_FILE]
                                     [--profile PROFILE] [--tenant TENANT]
                                     [--issuer ISSUER]
                                     [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -293,10 +293,10 @@ options:
                         Directory for generated reports.
 ```
 
-### `tigrbl-auth claims`
+### `tba-auth claims`
 
 ```text
-usage: tigrbl-auth claims [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth claims [-h] [--env-file ENV_FILE] [--profile PROFILE]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -340,10 +340,10 @@ options:
   --trace               Emit trace-oriented execution details.
 ```
 
-### `tigrbl-auth claims lint`
+### `tba-auth claims lint`
 
 ```text
-usage: tigrbl-auth claims lint [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth claims lint [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -386,10 +386,10 @@ options:
                         Directory for generated reports.
 ```
 
-### `tigrbl-auth claims show`
+### `tba-auth claims show`
 
 ```text
-usage: tigrbl-auth claims show [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth claims show [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -429,10 +429,10 @@ options:
                         Repository root for governance automation.
 ```
 
-### `tigrbl-auth claims status`
+### `tba-auth claims status`
 
 ```text
-usage: tigrbl-auth claims status [-h] [--env-file ENV_FILE]
+usage: tba-auth claims status [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -476,10 +476,10 @@ options:
                         Directory for generated reports.
 ```
 
-### `tigrbl-auth client`
+### `tba-auth client`
 
 ```text
-usage: tigrbl-auth client [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth client [-h] [--env-file ENV_FILE] [--profile PROFILE]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -529,10 +529,10 @@ options:
   --trace               Emit trace-oriented execution details.
 ```
 
-### `tigrbl-auth client create`
+### `tba-auth client create`
 
 ```text
-usage: tigrbl-auth client create [-h] [--env-file ENV_FILE]
+usage: tba-auth client create [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -588,10 +588,10 @@ options:
   --timeout TIMEOUT     Maximum wait time in seconds for supported long-running operations.
 ```
 
-### `tigrbl-auth client delete`
+### `tba-auth client delete`
 
 ```text
-usage: tigrbl-auth client delete [-h] [--env-file ENV_FILE]
+usage: tba-auth client delete [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -636,10 +636,10 @@ options:
   --dry-run             Resolve and emit the runtime plan without applying or launching state changes.
 ```
 
-### `tigrbl-auth client disable`
+### `tba-auth client disable`
 
 ```text
-usage: tigrbl-auth client disable [-h] [--env-file ENV_FILE]
+usage: tba-auth client disable [-h] [--env-file ENV_FILE]
                                   [--profile PROFILE] [--tenant TENANT]
                                   [--issuer ISSUER]
                                   [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -685,10 +685,10 @@ options:
   --dry-run             Resolve and emit the runtime plan without applying or launching state changes.
 ```
 
-### `tigrbl-auth client enable`
+### `tba-auth client enable`
 
 ```text
-usage: tigrbl-auth client enable [-h] [--env-file ENV_FILE]
+usage: tba-auth client enable [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -733,10 +733,10 @@ options:
   --dry-run             Resolve and emit the runtime plan without applying or launching state changes.
 ```
 
-### `tigrbl-auth client get`
+### `tba-auth client get`
 
 ```text
-usage: tigrbl-auth client get [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth client get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                               [--tenant TENANT] [--issuer ISSUER]
                               [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                               [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -777,10 +777,10 @@ options:
   --id ID               Primary identifier for a single record.
 ```
 
-### `tigrbl-auth client list`
+### `tba-auth client list`
 
 ```text
-usage: tigrbl-auth client list [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth client list [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -830,10 +830,10 @@ options:
   --status STATUS       Status filter for list operations.
 ```
 
-### `tigrbl-auth client rotate-secret`
+### `tba-auth client rotate-secret`
 
 ```text
-usage: tigrbl-auth client rotate-secret [-h] [--env-file ENV_FILE]
+usage: tba-auth client rotate-secret [-h] [--env-file ENV_FILE]
                                         [--profile PROFILE] [--tenant TENANT]
                                         [--issuer ISSUER]
                                         [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -879,10 +879,10 @@ options:
   --dry-run             Resolve and emit the runtime plan without applying or launching state changes.
 ```
 
-### `tigrbl-auth client update`
+### `tba-auth client update`
 
 ```text
-usage: tigrbl-auth client update [-h] [--env-file ENV_FILE]
+usage: tba-auth client update [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -937,10 +937,10 @@ options:
   --timeout TIMEOUT     Maximum wait time in seconds for supported long-running operations.
 ```
 
-### `tigrbl-auth discovery`
+### `tba-auth discovery`
 
 ```text
-usage: tigrbl-auth discovery [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth discovery [-h] [--env-file ENV_FILE] [--profile PROFILE]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -985,10 +985,10 @@ options:
   --trace               Emit trace-oriented execution details.
 ```
 
-### `tigrbl-auth discovery diff`
+### `tba-auth discovery diff`
 
 ```text
-usage: tigrbl-auth discovery diff [-h] [--env-file ENV_FILE]
+usage: tba-auth discovery diff [-h] [--env-file ENV_FILE]
                                   [--profile PROFILE] [--tenant TENANT]
                                   [--issuer ISSUER]
                                   [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -1034,10 +1034,10 @@ options:
                         Directory for generated reports.
 ```
 
-### `tigrbl-auth discovery publish`
+### `tba-auth discovery publish`
 
 ```text
-usage: tigrbl-auth discovery publish [-h] [--env-file ENV_FILE]
+usage: tba-auth discovery publish [-h] [--env-file ENV_FILE]
                                      [--profile PROFILE] [--tenant TENANT]
                                      [--issuer ISSUER]
                                      [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -1083,10 +1083,10 @@ options:
   --dry-run             Resolve and emit the runtime plan without applying or launching state changes.
 ```
 
-### `tigrbl-auth discovery show`
+### `tba-auth discovery show`
 
 ```text
-usage: tigrbl-auth discovery show [-h] [--env-file ENV_FILE]
+usage: tba-auth discovery show [-h] [--env-file ENV_FILE]
                                   [--profile PROFILE] [--tenant TENANT]
                                   [--issuer ISSUER]
                                   [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -1128,10 +1128,10 @@ options:
                         Repository root for governance automation.
 ```
 
-### `tigrbl-auth discovery validate`
+### `tba-auth discovery validate`
 
 ```text
-usage: tigrbl-auth discovery validate [-h] [--env-file ENV_FILE]
+usage: tba-auth discovery validate [-h] [--env-file ENV_FILE]
                                       [--profile PROFILE] [--tenant TENANT]
                                       [--issuer ISSUER]
                                       [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -1176,10 +1176,10 @@ options:
                         Directory for generated reports.
 ```
 
-### `tigrbl-auth doctor`
+### `tba-auth doctor`
 
 ```text
-usage: tigrbl-auth doctor [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth doctor [-h] [--env-file ENV_FILE] [--profile PROFILE]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1221,10 +1221,10 @@ options:
                         Directory for generated reports.
 ```
 
-### `tigrbl-auth evidence`
+### `tba-auth evidence`
 
 ```text
-usage: tigrbl-auth evidence [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth evidence [-h] [--env-file ENV_FILE] [--profile PROFILE]
                             [--tenant TENANT] [--issuer ISSUER]
                             [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                             [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1271,10 +1271,10 @@ options:
   --trace               Emit trace-oriented execution details.
 ```
 
-### `tigrbl-auth evidence bundle`
+### `tba-auth evidence bundle`
 
 ```text
-usage: tigrbl-auth evidence bundle [-h] [--env-file ENV_FILE]
+usage: tba-auth evidence bundle [-h] [--env-file ENV_FILE]
                                    [--profile PROFILE] [--tenant TENANT]
                                    [--issuer ISSUER]
                                    [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -1320,10 +1320,10 @@ options:
                         Explicit bundle output directory.
 ```
 
-### `tigrbl-auth evidence peer-execute`
+### `tba-auth evidence peer-execute`
 
 ```text
-usage: tigrbl-auth evidence peer-execute [-h] [--env-file ENV_FILE]
+usage: tba-auth evidence peer-execute [-h] [--env-file ENV_FILE]
                                          [--profile PROFILE] [--tenant TENANT]
                                          [--issuer ISSUER]
                                          [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -1374,10 +1374,10 @@ options:
                         Directory for generated reports.
 ```
 
-### `tigrbl-auth evidence peer-status`
+### `tba-auth evidence peer-status`
 
 ```text
-usage: tigrbl-auth evidence peer-status [-h] [--env-file ENV_FILE]
+usage: tba-auth evidence peer-status [-h] [--env-file ENV_FILE]
                                         [--profile PROFILE] [--tenant TENANT]
                                         [--issuer ISSUER]
                                         [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -1422,10 +1422,10 @@ options:
                         Directory for generated reports.
 ```
 
-### `tigrbl-auth evidence status`
+### `tba-auth evidence status`
 
 ```text
-usage: tigrbl-auth evidence status [-h] [--env-file ENV_FILE]
+usage: tba-auth evidence status [-h] [--env-file ENV_FILE]
                                    [--profile PROFILE] [--tenant TENANT]
                                    [--issuer ISSUER]
                                    [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -1471,10 +1471,10 @@ options:
                         Directory for generated reports.
 ```
 
-### `tigrbl-auth evidence verify`
+### `tba-auth evidence verify`
 
 ```text
-usage: tigrbl-auth evidence verify [-h] [--env-file ENV_FILE]
+usage: tba-auth evidence verify [-h] [--env-file ENV_FILE]
                                    [--profile PROFILE] [--tenant TENANT]
                                    [--issuer ISSUER]
                                    [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -1519,10 +1519,10 @@ options:
                         Directory for generated reports.
 ```
 
-### `tigrbl-auth export`
+### `tba-auth export`
 
 ```text
-usage: tigrbl-auth export [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth export [-h] [--env-file ENV_FILE] [--profile PROFILE]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1566,10 +1566,10 @@ options:
   --trace               Emit trace-oriented execution details.
 ```
 
-### `tigrbl-auth export run`
+### `tba-auth export run`
 
 ```text
-usage: tigrbl-auth export run [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth export run [-h] [--env-file ENV_FILE] [--profile PROFILE]
                               [--tenant TENANT] [--issuer ISSUER]
                               [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                               [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1618,10 +1618,10 @@ options:
   --timeout TIMEOUT     Maximum wait time in seconds for supported long-running operations.
 ```
 
-### `tigrbl-auth export status`
+### `tba-auth export status`
 
 ```text
-usage: tigrbl-auth export status [-h] [--env-file ENV_FILE]
+usage: tba-auth export status [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -1662,10 +1662,10 @@ options:
                         Repository root for governance automation.
 ```
 
-### `tigrbl-auth export validate`
+### `tba-auth export validate`
 
 ```text
-usage: tigrbl-auth export validate [-h] [--env-file ENV_FILE]
+usage: tba-auth export validate [-h] [--env-file ENV_FILE]
                                    [--profile PROFILE] [--tenant TENANT]
                                    [--issuer ISSUER]
                                    [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -1714,10 +1714,10 @@ options:
                         Directory for generated reports.
 ```
 
-### `tigrbl-auth flow`
+### `tba-auth flow`
 
 ```text
-usage: tigrbl-auth flow [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth flow [-h] [--env-file ENV_FILE] [--profile PROFILE]
                         [--tenant TENANT] [--issuer ISSUER]
                         [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1765,10 +1765,10 @@ options:
   --trace               Emit trace-oriented execution details.
 ```
 
-### `tigrbl-auth flow create`
+### `tba-auth flow create`
 
 ```text
-usage: tigrbl-auth flow create [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth flow create [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1822,10 +1822,10 @@ options:
   --timeout TIMEOUT     Maximum wait time in seconds for supported long-running operations.
 ```
 
-### `tigrbl-auth flow delete`
+### `tba-auth flow delete`
 
 ```text
-usage: tigrbl-auth flow delete [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth flow delete [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1869,10 +1869,10 @@ options:
   --dry-run             Resolve and emit the runtime plan without applying or launching state changes.
 ```
 
-### `tigrbl-auth flow disable`
+### `tba-auth flow disable`
 
 ```text
-usage: tigrbl-auth flow disable [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth flow disable [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                 [--tenant TENANT] [--issuer ISSUER]
                                 [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1916,10 +1916,10 @@ options:
   --dry-run             Resolve and emit the runtime plan without applying or launching state changes.
 ```
 
-### `tigrbl-auth flow enable`
+### `tba-auth flow enable`
 
 ```text
-usage: tigrbl-auth flow enable [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth flow enable [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1963,10 +1963,10 @@ options:
   --dry-run             Resolve and emit the runtime plan without applying or launching state changes.
 ```
 
-### `tigrbl-auth flow get`
+### `tba-auth flow get`
 
 ```text
-usage: tigrbl-auth flow get [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth flow get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                             [--tenant TENANT] [--issuer ISSUER]
                             [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                             [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2007,10 +2007,10 @@ options:
   --id ID               Primary identifier for a single record.
 ```
 
-### `tigrbl-auth flow list`
+### `tba-auth flow list`
 
 ```text
-usage: tigrbl-auth flow list [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth flow list [-h] [--env-file ENV_FILE] [--profile PROFILE]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2059,10 +2059,10 @@ options:
   --status STATUS       Status filter for list operations.
 ```
 
-### `tigrbl-auth flow update`
+### `tba-auth flow update`
 
 ```text
-usage: tigrbl-auth flow update [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth flow update [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2116,10 +2116,10 @@ options:
   --timeout TIMEOUT     Maximum wait time in seconds for supported long-running operations.
 ```
 
-### `tigrbl-auth gate`
+### `tba-auth gate`
 
 ```text
-usage: tigrbl-auth gate [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth gate [-h] [--env-file ENV_FILE] [--profile PROFILE]
                         [--tenant TENANT] [--issuer ISSUER]
                         [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2163,10 +2163,10 @@ options:
   --name NAME           Optional named release gate or artifact selector.
 ```
 
-### `tigrbl-auth identity`
+### `tba-auth identity`
 
 ```text
-usage: tigrbl-auth identity [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth identity [-h] [--env-file ENV_FILE] [--profile PROFILE]
                             [--tenant TENANT] [--issuer ISSUER]
                             [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                             [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2216,10 +2216,10 @@ options:
   --trace               Emit trace-oriented execution details.
 ```
 
-### `tigrbl-auth identity create`
+### `tba-auth identity create`
 
 ```text
-usage: tigrbl-auth identity create [-h] [--env-file ENV_FILE]
+usage: tba-auth identity create [-h] [--env-file ENV_FILE]
                                    [--profile PROFILE] [--tenant TENANT]
                                    [--issuer ISSUER]
                                    [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -2275,10 +2275,10 @@ options:
   --timeout TIMEOUT     Maximum wait time in seconds for supported long-running operations.
 ```
 
-### `tigrbl-auth identity delete`
+### `tba-auth identity delete`
 
 ```text
-usage: tigrbl-auth identity delete [-h] [--env-file ENV_FILE]
+usage: tba-auth identity delete [-h] [--env-file ENV_FILE]
                                    [--profile PROFILE] [--tenant TENANT]
                                    [--issuer ISSUER]
                                    [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -2324,10 +2324,10 @@ options:
   --dry-run             Resolve and emit the runtime plan without applying or launching state changes.
 ```
 
-### `tigrbl-auth identity get`
+### `tba-auth identity get`
 
 ```text
-usage: tigrbl-auth identity get [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth identity get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                 [--tenant TENANT] [--issuer ISSUER]
                                 [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2369,10 +2369,10 @@ options:
   --id ID               Primary identifier for a single record.
 ```
 
-### `tigrbl-auth identity list`
+### `tba-auth identity list`
 
 ```text
-usage: tigrbl-auth identity list [-h] [--env-file ENV_FILE]
+usage: tba-auth identity list [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -2423,10 +2423,10 @@ options:
   --status STATUS       Status filter for list operations.
 ```
 
-### `tigrbl-auth identity lock`
+### `tba-auth identity lock`
 
 ```text
-usage: tigrbl-auth identity lock [-h] [--env-file ENV_FILE]
+usage: tba-auth identity lock [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -2471,10 +2471,10 @@ options:
   --dry-run             Resolve and emit the runtime plan without applying or launching state changes.
 ```
 
-### `tigrbl-auth identity set-password`
+### `tba-auth identity set-password`
 
 ```text
-usage: tigrbl-auth identity set-password [-h] [--env-file ENV_FILE]
+usage: tba-auth identity set-password [-h] [--env-file ENV_FILE]
                                          [--profile PROFILE] [--tenant TENANT]
                                          [--issuer ISSUER]
                                          [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -2524,10 +2524,10 @@ options:
   --dry-run             Resolve and emit the runtime plan without applying or launching state changes.
 ```
 
-### `tigrbl-auth identity unlock`
+### `tba-auth identity unlock`
 
 ```text
-usage: tigrbl-auth identity unlock [-h] [--env-file ENV_FILE]
+usage: tba-auth identity unlock [-h] [--env-file ENV_FILE]
                                    [--profile PROFILE] [--tenant TENANT]
                                    [--issuer ISSUER]
                                    [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -2573,10 +2573,10 @@ options:
   --dry-run             Resolve and emit the runtime plan without applying or launching state changes.
 ```
 
-### `tigrbl-auth identity update`
+### `tba-auth identity update`
 
 ```text
-usage: tigrbl-auth identity update [-h] [--env-file ENV_FILE]
+usage: tba-auth identity update [-h] [--env-file ENV_FILE]
                                    [--profile PROFILE] [--tenant TENANT]
                                    [--issuer ISSUER]
                                    [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -2631,10 +2631,10 @@ options:
   --timeout TIMEOUT     Maximum wait time in seconds for supported long-running operations.
 ```
 
-### `tigrbl-auth import`
+### `tba-auth import`
 
 ```text
-usage: tigrbl-auth import [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth import [-h] [--env-file ENV_FILE] [--profile PROFILE]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2678,10 +2678,10 @@ options:
   --trace               Emit trace-oriented execution details.
 ```
 
-### `tigrbl-auth import run`
+### `tba-auth import run`
 
 ```text
-usage: tigrbl-auth import run [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth import run [-h] [--env-file ENV_FILE] [--profile PROFILE]
                               [--tenant TENANT] [--issuer ISSUER]
                               [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                               [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2729,10 +2729,10 @@ options:
   --timeout TIMEOUT     Maximum wait time in seconds for supported long-running operations.
 ```
 
-### `tigrbl-auth import status`
+### `tba-auth import status`
 
 ```text
-usage: tigrbl-auth import status [-h] [--env-file ENV_FILE]
+usage: tba-auth import status [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -2773,10 +2773,10 @@ options:
                         Repository root for governance automation.
 ```
 
-### `tigrbl-auth import validate`
+### `tba-auth import validate`
 
 ```text
-usage: tigrbl-auth import validate [-h] [--env-file ENV_FILE]
+usage: tba-auth import validate [-h] [--env-file ENV_FILE]
                                    [--profile PROFILE] [--tenant TENANT]
                                    [--issuer ISSUER]
                                    [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -2824,10 +2824,10 @@ options:
                         Directory for generated reports.
 ```
 
-### `tigrbl-auth keys`
+### `tba-auth keys`
 
 ```text
-usage: tigrbl-auth keys [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth keys [-h] [--env-file ENV_FILE] [--profile PROFILE]
                         [--tenant TENANT] [--issuer ISSUER]
                         [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2878,10 +2878,10 @@ options:
   --trace               Emit trace-oriented execution details.
 ```
 
-### `tigrbl-auth keys delete`
+### `tba-auth keys delete`
 
 ```text
-usage: tigrbl-auth keys delete [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth keys delete [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2925,10 +2925,10 @@ options:
   --dry-run             Resolve and emit the runtime plan without applying or launching state changes.
 ```
 
-### `tigrbl-auth keys export`
+### `tba-auth keys export`
 
 ```text
-usage: tigrbl-auth keys export [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth keys export [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2974,10 +2974,10 @@ options:
   --checksum CHECKSUM   Expected checksum or checksum algorithm for import/export validation.
 ```
 
-### `tigrbl-auth keys generate`
+### `tba-auth keys generate`
 
 ```text
-usage: tigrbl-auth keys generate [-h] [--env-file ENV_FILE]
+usage: tba-auth keys generate [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -3037,10 +3037,10 @@ options:
   --dry-run             Resolve and emit the runtime plan without applying or launching state changes.
 ```
 
-### `tigrbl-auth keys get`
+### `tba-auth keys get`
 
 ```text
-usage: tigrbl-auth keys get [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth keys get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                             [--tenant TENANT] [--issuer ISSUER]
                             [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                             [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3081,10 +3081,10 @@ options:
   --id ID               Primary identifier for a single record.
 ```
 
-### `tigrbl-auth keys import`
+### `tba-auth keys import`
 
 ```text
-usage: tigrbl-auth keys import [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth keys import [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3135,10 +3135,10 @@ options:
   --dry-run             Resolve and emit the runtime plan without applying or launching state changes.
 ```
 
-### `tigrbl-auth keys list`
+### `tba-auth keys list`
 
 ```text
-usage: tigrbl-auth keys list [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth keys list [-h] [--env-file ENV_FILE] [--profile PROFILE]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3187,10 +3187,10 @@ options:
   --status STATUS       Status filter for list operations.
 ```
 
-### `tigrbl-auth keys publish-jwks`
+### `tba-auth keys publish-jwks`
 
 ```text
-usage: tigrbl-auth keys publish-jwks [-h] [--env-file ENV_FILE]
+usage: tba-auth keys publish-jwks [-h] [--env-file ENV_FILE]
                                      [--profile PROFILE] [--tenant TENANT]
                                      [--issuer ISSUER]
                                      [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -3237,10 +3237,10 @@ options:
   --checksum CHECKSUM   Expected checksum or checksum algorithm for import/export validation.
 ```
 
-### `tigrbl-auth keys retire`
+### `tba-auth keys retire`
 
 ```text
-usage: tigrbl-auth keys retire [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth keys retire [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3285,10 +3285,10 @@ options:
   --publish             Publish JWKS after a successful key mutation.
 ```
 
-### `tigrbl-auth keys rotate`
+### `tba-auth keys rotate`
 
 ```text
-usage: tigrbl-auth keys rotate [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth keys rotate [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3347,10 +3347,10 @@ options:
   --dry-run             Resolve and emit the runtime plan without applying or launching state changes.
 ```
 
-### `tigrbl-auth migrate`
+### `tba-auth migrate`
 
 ```text
-usage: tigrbl-auth migrate [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth migrate [-h] [--env-file ENV_FILE] [--profile PROFILE]
                            [--tenant TENANT] [--issuer ISSUER]
                            [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                            [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3395,10 +3395,10 @@ options:
   --trace               Emit trace-oriented execution details.
 ```
 
-### `tigrbl-auth migrate apply`
+### `tba-auth migrate apply`
 
 ```text
-usage: tigrbl-auth migrate apply [-h] [--env-file ENV_FILE]
+usage: tba-auth migrate apply [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -3445,10 +3445,10 @@ options:
   --timeout TIMEOUT     Maximum wait time in seconds for supported long-running operations.
 ```
 
-### `tigrbl-auth migrate plan`
+### `tba-auth migrate plan`
 
 ```text
-usage: tigrbl-auth migrate plan [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth migrate plan [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                 [--tenant TENANT] [--issuer ISSUER]
                                 [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3488,10 +3488,10 @@ options:
                         Repository root for governance automation.
 ```
 
-### `tigrbl-auth migrate status`
+### `tba-auth migrate status`
 
 ```text
-usage: tigrbl-auth migrate status [-h] [--env-file ENV_FILE]
+usage: tba-auth migrate status [-h] [--env-file ENV_FILE]
                                   [--profile PROFILE] [--tenant TENANT]
                                   [--issuer ISSUER]
                                   [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -3536,10 +3536,10 @@ options:
                         Directory for generated reports.
 ```
 
-### `tigrbl-auth migrate verify`
+### `tba-auth migrate verify`
 
 ```text
-usage: tigrbl-auth migrate verify [-h] [--env-file ENV_FILE]
+usage: tba-auth migrate verify [-h] [--env-file ENV_FILE]
                                   [--profile PROFILE] [--tenant TENANT]
                                   [--issuer ISSUER]
                                   [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -3584,10 +3584,10 @@ options:
                         Directory for generated reports.
 ```
 
-### `tigrbl-auth release`
+### `tba-auth release`
 
 ```text
-usage: tigrbl-auth release [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth release [-h] [--env-file ENV_FILE] [--profile PROFILE]
                            [--tenant TENANT] [--issuer ISSUER]
                            [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                            [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3633,10 +3633,10 @@ options:
   --trace               Emit trace-oriented execution details.
 ```
 
-### `tigrbl-auth release bundle`
+### `tba-auth release bundle`
 
 ```text
-usage: tigrbl-auth release bundle [-h] [--env-file ENV_FILE]
+usage: tba-auth release bundle [-h] [--env-file ENV_FILE]
                                   [--profile PROFILE] [--tenant TENANT]
                                   [--issuer ISSUER]
                                   [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -3684,10 +3684,10 @@ options:
                         Release artifact subset.
 ```
 
-### `tigrbl-auth release recertify`
+### `tba-auth release recertify`
 
 ```text
-usage: tigrbl-auth release recertify [-h] [--env-file ENV_FILE]
+usage: tba-auth release recertify [-h] [--env-file ENV_FILE]
                                      [--profile PROFILE] [--tenant TENANT]
                                      [--issuer ISSUER]
                                      [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -3732,10 +3732,10 @@ options:
                         Directory for generated reports.
 ```
 
-### `tigrbl-auth release sign`
+### `tba-auth release sign`
 
 ```text
-usage: tigrbl-auth release sign [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth release sign [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                 [--tenant TENANT] [--issuer ISSUER]
                                 [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3781,10 +3781,10 @@ options:
                         Optional Ed25519 private signing key path or seed.
 ```
 
-### `tigrbl-auth release status`
+### `tba-auth release status`
 
 ```text
-usage: tigrbl-auth release status [-h] [--env-file ENV_FILE]
+usage: tba-auth release status [-h] [--env-file ENV_FILE]
                                   [--profile PROFILE] [--tenant TENANT]
                                   [--issuer ISSUER]
                                   [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -3829,10 +3829,10 @@ options:
                         Directory for generated reports.
 ```
 
-### `tigrbl-auth release verify`
+### `tba-auth release verify`
 
 ```text
-usage: tigrbl-auth release verify [-h] [--env-file ENV_FILE]
+usage: tba-auth release verify [-h] [--env-file ENV_FILE]
                                   [--profile PROFILE] [--tenant TENANT]
                                   [--issuer ISSUER]
                                   [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -3877,10 +3877,10 @@ options:
                         Explicit bundle output directory.
 ```
 
-### `tigrbl-auth serve`
+### `tba-auth serve`
 
 ```text
-usage: tigrbl-auth serve [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth serve [-h] [--env-file ENV_FILE] [--profile PROFILE]
                          [--tenant TENANT] [--issuer ISSUER]
                          [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                          [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3998,10 +3998,10 @@ options:
                         Preferred Tigrcorn runtime mode hint.
 ```
 
-### `tigrbl-auth session`
+### `tba-auth session`
 
 ```text
-usage: tigrbl-auth session [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth session [-h] [--env-file ENV_FILE] [--profile PROFILE]
                            [--tenant TENANT] [--issuer ISSUER]
                            [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                            [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4046,10 +4046,10 @@ options:
   --trace               Emit trace-oriented execution details.
 ```
 
-### `tigrbl-auth session get`
+### `tba-auth session get`
 
 ```text
-usage: tigrbl-auth session get [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth session get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4091,10 +4091,10 @@ options:
   --id ID               Primary identifier for a single record.
 ```
 
-### `tigrbl-auth session list`
+### `tba-auth session list`
 
 ```text
-usage: tigrbl-auth session list [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth session list [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                 [--tenant TENANT] [--issuer ISSUER]
                                 [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4144,10 +4144,10 @@ options:
   --status STATUS       Status filter for list operations.
 ```
 
-### `tigrbl-auth session revoke`
+### `tba-auth session revoke`
 
 ```text
-usage: tigrbl-auth session revoke [-h] [--env-file ENV_FILE]
+usage: tba-auth session revoke [-h] [--env-file ENV_FILE]
                                   [--profile PROFILE] [--tenant TENANT]
                                   [--issuer ISSUER]
                                   [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -4193,10 +4193,10 @@ options:
   --dry-run             Resolve and emit the runtime plan without applying or launching state changes.
 ```
 
-### `tigrbl-auth session revoke-all`
+### `tba-auth session revoke-all`
 
 ```text
-usage: tigrbl-auth session revoke-all [-h] [--env-file ENV_FILE]
+usage: tba-auth session revoke-all [-h] [--env-file ENV_FILE]
                                       [--profile PROFILE] [--tenant TENANT]
                                       [--issuer ISSUER]
                                       [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -4244,10 +4244,10 @@ options:
   --dry-run             Resolve and emit the runtime plan without applying or launching state changes.
 ```
 
-### `tigrbl-auth spec`
+### `tba-auth spec`
 
 ```text
-usage: tigrbl-auth spec [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth spec [-h] [--env-file ENV_FILE] [--profile PROFILE]
                         [--tenant TENANT] [--issuer ISSUER]
                         [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4292,10 +4292,10 @@ options:
   --trace               Emit trace-oriented execution details.
 ```
 
-### `tigrbl-auth spec diff`
+### `tba-auth spec diff`
 
 ```text
-usage: tigrbl-auth spec diff [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth spec diff [-h] [--env-file ENV_FILE] [--profile PROFILE]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4344,10 +4344,10 @@ options:
                         Directory for generated reports.
 ```
 
-### `tigrbl-auth spec generate`
+### `tba-auth spec generate`
 
 ```text
-usage: tigrbl-auth spec generate [-h] [--env-file ENV_FILE]
+usage: tba-auth spec generate [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -4394,10 +4394,10 @@ options:
                         Directory for generated reports.
 ```
 
-### `tigrbl-auth spec report`
+### `tba-auth spec report`
 
 ```text
-usage: tigrbl-auth spec report [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth spec report [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4443,10 +4443,10 @@ options:
                         Directory for generated reports.
 ```
 
-### `tigrbl-auth spec validate`
+### `tba-auth spec validate`
 
 ```text
-usage: tigrbl-auth spec validate [-h] [--env-file ENV_FILE]
+usage: tba-auth spec validate [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -4493,10 +4493,10 @@ options:
                         Directory for generated reports.
 ```
 
-### `tigrbl-auth tenant`
+### `tba-auth tenant`
 
 ```text
-usage: tigrbl-auth tenant [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth tenant [-h] [--env-file ENV_FILE] [--profile PROFILE]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4544,10 +4544,10 @@ options:
   --trace               Emit trace-oriented execution details.
 ```
 
-### `tigrbl-auth tenant create`
+### `tba-auth tenant create`
 
 ```text
-usage: tigrbl-auth tenant create [-h] [--env-file ENV_FILE]
+usage: tba-auth tenant create [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -4603,10 +4603,10 @@ options:
   --timeout TIMEOUT     Maximum wait time in seconds for supported long-running operations.
 ```
 
-### `tigrbl-auth tenant delete`
+### `tba-auth tenant delete`
 
 ```text
-usage: tigrbl-auth tenant delete [-h] [--env-file ENV_FILE]
+usage: tba-auth tenant delete [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -4651,10 +4651,10 @@ options:
   --dry-run             Resolve and emit the runtime plan without applying or launching state changes.
 ```
 
-### `tigrbl-auth tenant disable`
+### `tba-auth tenant disable`
 
 ```text
-usage: tigrbl-auth tenant disable [-h] [--env-file ENV_FILE]
+usage: tba-auth tenant disable [-h] [--env-file ENV_FILE]
                                   [--profile PROFILE] [--tenant TENANT]
                                   [--issuer ISSUER]
                                   [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -4700,10 +4700,10 @@ options:
   --dry-run             Resolve and emit the runtime plan without applying or launching state changes.
 ```
 
-### `tigrbl-auth tenant enable`
+### `tba-auth tenant enable`
 
 ```text
-usage: tigrbl-auth tenant enable [-h] [--env-file ENV_FILE]
+usage: tba-auth tenant enable [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -4748,10 +4748,10 @@ options:
   --dry-run             Resolve and emit the runtime plan without applying or launching state changes.
 ```
 
-### `tigrbl-auth tenant get`
+### `tba-auth tenant get`
 
 ```text
-usage: tigrbl-auth tenant get [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth tenant get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                               [--tenant TENANT] [--issuer ISSUER]
                               [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                               [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4792,10 +4792,10 @@ options:
   --id ID               Primary identifier for a single record.
 ```
 
-### `tigrbl-auth tenant list`
+### `tba-auth tenant list`
 
 ```text
-usage: tigrbl-auth tenant list [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth tenant list [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4845,10 +4845,10 @@ options:
   --status STATUS       Status filter for list operations.
 ```
 
-### `tigrbl-auth tenant update`
+### `tba-auth tenant update`
 
 ```text
-usage: tigrbl-auth tenant update [-h] [--env-file ENV_FILE]
+usage: tba-auth tenant update [-h] [--env-file ENV_FILE]
                                  [--profile PROFILE] [--tenant TENANT]
                                  [--issuer ISSUER]
                                  [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -4903,10 +4903,10 @@ options:
   --timeout TIMEOUT     Maximum wait time in seconds for supported long-running operations.
 ```
 
-### `tigrbl-auth token`
+### `tba-auth token`
 
 ```text
-usage: tigrbl-auth token [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth token [-h] [--env-file ENV_FILE] [--profile PROFILE]
                          [--tenant TENANT] [--issuer ISSUER]
                          [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                          [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4952,10 +4952,10 @@ options:
   --trace               Emit trace-oriented execution details.
 ```
 
-### `tigrbl-auth token exchange`
+### `tba-auth token exchange`
 
 ```text
-usage: tigrbl-auth token exchange [-h] [--env-file ENV_FILE]
+usage: tba-auth token exchange [-h] [--env-file ENV_FILE]
                                   [--profile PROFILE] [--tenant TENANT]
                                   [--issuer ISSUER]
                                   [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -5005,10 +5005,10 @@ options:
   --dry-run             Resolve and emit the runtime plan without applying or launching state changes.
 ```
 
-### `tigrbl-auth token get`
+### `tba-auth token get`
 
 ```text
-usage: tigrbl-auth token get [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth token get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -5049,10 +5049,10 @@ options:
   --id ID               Primary identifier for a single record.
 ```
 
-### `tigrbl-auth token introspect`
+### `tba-auth token introspect`
 
 ```text
-usage: tigrbl-auth token introspect [-h] [--env-file ENV_FILE]
+usage: tba-auth token introspect [-h] [--env-file ENV_FILE]
                                     [--profile PROFILE] [--tenant TENANT]
                                     [--issuer ISSUER]
                                     [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
@@ -5095,10 +5095,10 @@ options:
   --id ID               Primary identifier for a single record.
 ```
 
-### `tigrbl-auth token list`
+### `tba-auth token list`
 
 ```text
-usage: tigrbl-auth token list [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth token list [-h] [--env-file ENV_FILE] [--profile PROFILE]
                               [--tenant TENANT] [--issuer ISSUER]
                               [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                               [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -5147,10 +5147,10 @@ options:
   --status STATUS       Status filter for list operations.
 ```
 
-### `tigrbl-auth token revoke`
+### `tba-auth token revoke`
 
 ```text
-usage: tigrbl-auth token revoke [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth token revoke [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                 [--tenant TENANT] [--issuer ISSUER]
                                 [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -5194,10 +5194,10 @@ options:
   --dry-run             Resolve and emit the runtime plan without applying or launching state changes.
 ```
 
-### `tigrbl-auth verify`
+### `tba-auth verify`
 
 ```text
-usage: tigrbl-auth verify [-h] [--env-file ENV_FILE] [--profile PROFILE]
+usage: tba-auth verify [-h] [--env-file ENV_FILE] [--profile PROFILE]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rest,developer-app,diagnostics,my-account-app,platform-admin-app,public-app,public-rest,resource-validation-app,service-admin-app,tenant-admin-app}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]

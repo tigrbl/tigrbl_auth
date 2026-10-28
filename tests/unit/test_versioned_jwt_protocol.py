@@ -1,6 +1,6 @@
 import pytest
 
-from tigrbl_auth_protocol_jwt import (
+from tba_protocol_jwt import (
     CURRENT_VERSION,
     JWT_CARRIER,
     JWT_VERSION,

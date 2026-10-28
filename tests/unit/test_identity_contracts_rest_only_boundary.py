@@ -6,17 +6,17 @@ from pathlib import Path
 
 import pytest
 
-from tigrbl_identity_contracts.models import ContractProjection
+from tba_contracts_identity.models import ContractProjection
 
 
 ROOT = Path(__file__).resolve().parents[2]
 TARGET_PACKAGES = (
-    "tigrbl-identity-contracts",
-    "tigrbl-identity-admin",
+    "tba-contracts-identity",
+    "tba-runtime-identity-administration",
     "tigrbl-identity-credentials-concrete",
     "tigrbl-identity-identities-concrete",
-    "tigrbl-identity-server",
-    "tigrbl-identity-runtime",
+    "tba-server-identity",
+    "tba-runtime-identity",
 )
 
 if sys.version_info >= (3, 11):
@@ -33,9 +33,9 @@ def package_root(name: str) -> Path:
 
 def test_identity_contracts_do_not_export_rpc_package() -> None:
     for module_name in (
-        "tigrbl_identity_contracts.rpc",
-        "tigrbl_identity_admin.rpc",
-        "tigrbl_identity_server.rpc",
+        "tba_contracts_identity.rpc",
+        "tba_runtime_identity_administration.rpc",
+        "tba_server_identity.rpc",
     ):
         with pytest.raises(ModuleNotFoundError):
             importlib.import_module(module_name)
@@ -60,13 +60,13 @@ def test_identity_contract_projection_is_openapi_only() -> None:
 
 
 def test_identity_contracts_have_no_pydantic_schema_ownership() -> None:
-    current_package_root = package_root("tigrbl-identity-contracts")
+    current_package_root = package_root("tba-contracts-identity")
     metadata = tomllib.loads((current_package_root / "pyproject.toml").read_text(encoding="utf-8"))
     dependencies = [dependency.lower() for dependency in metadata.get("project", {}).get("dependencies", [])]
     assert not any("pydantic" in dependency for dependency in dependencies)
 
     offenders = []
-    for path in (current_package_root / "src" / "tigrbl_identity_contracts").rglob("*.py"):
+    for path in (current_package_root / "src" / "tba_contracts_identity").rglob("*.py"):
         source = path.read_text(encoding="utf-8")
         if "BaseModel" in source or "pydantic" in source:
             offenders.append(path.relative_to(ROOT).as_posix())
@@ -76,8 +76,8 @@ def test_identity_contracts_have_no_pydantic_schema_ownership() -> None:
 
 def test_identity_contracts_rest_schema_bridge_is_removed() -> None:
     with pytest.raises(ModuleNotFoundError):
-        importlib.import_module("tigrbl_identity_contracts.rest")
-    models = importlib.import_module("tigrbl_identity_contracts.models")
+        importlib.import_module("tba_contracts_identity.rest")
+    models = importlib.import_module("tba_contracts_identity.models")
 
     table_backed_dtos = {
         "AdminPrincipalResponse",
@@ -106,8 +106,8 @@ def test_identity_contracts_rest_schema_bridge_is_removed() -> None:
 
 
 def test_platform_api_owns_tenant_admin_rest_shapes() -> None:
-    api_module = importlib.import_module("tigrbl_auth_backend_app_platform_admin.tenants")
-    storage_module = importlib.import_module("tigrbl_identity_storage.tables.tenant")
+    api_module = importlib.import_module("tba_app_backend_platform_admin.tenants")
+    storage_module = importlib.import_module("tba_storage_core.tables.tenant")
     dto_names = {
         "AdminTenantOut",
         "AdminTenantProvisionIn",
@@ -119,9 +119,9 @@ def test_platform_api_owns_tenant_admin_rest_shapes() -> None:
 
 
 def test_my_account_api_owns_its_rest_shapes() -> None:
-    api_module = importlib.import_module("tigrbl_auth_backend_app_my_account")
-    session_storage = importlib.import_module("tigrbl_identity_storage.tables.auth_session")
-    user_storage = importlib.import_module("tigrbl_identity_storage.tables.user")
+    api_module = importlib.import_module("tba_app_backend_my_account")
+    session_storage = importlib.import_module("tba_storage_core.tables.auth_session")
+    user_storage = importlib.import_module("tba_storage_core.tables.user")
 
     names = {
         "MyAccountMutationOut",
@@ -136,8 +136,8 @@ def test_my_account_api_owns_its_rest_shapes() -> None:
 
 
 def test_platform_admin_api_owns_control_plane_rest_shapes() -> None:
-    api_module = importlib.import_module("tigrbl_auth_backend_app_platform_admin")
-    storage_module = importlib.import_module("tigrbl_identity_storage.tables.user")
+    api_module = importlib.import_module("tba_app_backend_platform_admin")
+    storage_module = importlib.import_module("tba_storage_core.tables.user")
     names = {
         "AdminIdentityOut",
         "AdminIdentityProvisionIn",
@@ -152,7 +152,7 @@ def test_platform_admin_api_owns_control_plane_rest_shapes() -> None:
 
 
 def test_table_backed_route_modules_do_not_import_contract_dtos() -> None:
-    route_root = package_root("tigrbl-identity-server") / "src" / "tigrbl_identity_server" / "rest" / "routers"
+    route_root = package_root("tba-server-identity") / "src" / "tba_server_identity" / "rest" / "routers"
     table_backed_route_files = (
         "admin_identities.py",
         "admin_realms.py",
@@ -164,7 +164,7 @@ def test_table_backed_route_modules_do_not_import_contract_dtos() -> None:
         if not route_file.exists():
             continue
         source = route_file.read_text(encoding="utf-8")
-        assert "tigrbl_identity_contracts" not in source, filename
+        assert "tba_contracts_identity" not in source, filename
 
 
 def test_identity_core_package_metadata_does_not_advertise_rpc_surfaces() -> None:
@@ -186,12 +186,12 @@ def test_identity_core_package_metadata_does_not_advertise_rpc_surfaces() -> Non
 
 def test_identity_core_package_source_does_not_advertise_rpc_surfaces() -> None:
     forbidden = ("json-rpc", "openrpc", "admin-rpc", "surface_rpc_enabled")
-    server_root = package_root("tigrbl-identity-server")
+    server_root = package_root("tba-server-identity")
     allowed_negative_route_guards = {
         (
             server_root
             / "src"
-            / "tigrbl_identity_server"
+            / "tba_server_identity"
             / "security"
             / "admin_gate.py"
         )

@@ -1,12 +1,12 @@
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ed25519
 
-from tigrbl_cose_cryptography_provider import CoseSign1CryptographyProvider
-from tigrbl_jose_cryptography_provider import JwsCryptographyProvider
-from tigrbl_protected_envelope_capability import ProtectedEnvelopeCapability
-from tigrbl_security_protocol_cose import COSEProfile, CoseProtocol
-from tigrbl_security_protocol_jws import JWSProfile, JwsProtocol
-from tigrbl_credential_profile_vc_jose_cose import VcJoseCoseProtocol
+from tba_provider_cose_cryptography import CoseSign1CryptographyProvider
+from tba_provider_jose_cryptography import JwsCryptographyProvider
+from tba_capability_protected_envelope import ProtectedEnvelopeCapability
+from tba_protocol_security_cose import COSEProfile, CoseProtocol
+from tba_protocol_security_jws import JWSProfile, JwsProtocol
+from tba_profile_credential_vc_jose_cose import VcJoseCoseProtocol
 
 
 VC = {

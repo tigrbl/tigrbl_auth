@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 
-from tigrbl_identity_contracts.digital_credentials import (
+from tba_contracts_identity.digital_credentials import (
     CredentialFormat,
     CredentialIssuanceRequest,
     CredentialType,
@@ -8,12 +8,12 @@ from tigrbl_identity_contracts.digital_credentials import (
     PresentationRequest,
     TransactionBinding,
 )
-from tigrbl_identity_contracts.security_events import (
+from tba_contracts_identity.security_events import (
     SecurityEvent,
     SecurityEventSubject,
 )
-from tigrbl_identity_contracts.tokens import TokenProfile, TokenVerificationRequest
-from tigrbl_security_trust_contracts import (
+from tba_contracts_identity.tokens import TokenProfile, TokenVerificationRequest
+from tba_contracts_security_trust import (
     CertificateArtifact,
     CertificatePathValidationRequest,
     CertificateProfile,

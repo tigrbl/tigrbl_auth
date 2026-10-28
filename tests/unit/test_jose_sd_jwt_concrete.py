@@ -2,14 +2,14 @@ import base64
 import json
 
 import pytest
-from tigrbl_jose_concrete import (
+from tba_concrete_jose import (
     add_cnf_claim,
     jwk_thumbprint,
     parse_compact_jose,
     validate_amr_claim,
     verify_proof_of_possession,
 )
-from tigrbl_sd_jwt_concrete import (
+from tba_concrete_sd_jwt import (
     Disclosure,
     decode_disclosure,
     disclosure_digest,

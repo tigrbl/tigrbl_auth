@@ -5,14 +5,14 @@ from pathlib import Path
 
 import pytest
 
-from tigrbl_identity_admin_control_plane import RealmAdministrationCapability
-from tigrbl_identity_contracts.admin_realms import (
+from tba_runtime_identity_administration_control_plane import RealmAdministrationCapability
+from tba_contracts_identity.admin_realms import (
     AdminRealm,
     AdminRealmCreate,
     AdminRealmUpdate,
     RealmAdministrationValidationError,
 )
-from tigrbl_identity_contracts.admin_tenants import (
+from tba_contracts_identity.admin_tenants import (
     AdminTenant,
     AdminTenantCreate,
     PlatformAdministrator,
@@ -23,7 +23,7 @@ from tigrbl_identity_contracts.admin_tenants import (
 ROOT = Path(__file__).resolve().parents[2]
 REALM_API = (
     ROOT
-    / "pkgs/90-backend-apps/tigrbl-auth-backend-app-platform-admin/src/tigrbl_auth_backend_app_platform_admin/realms.py"
+    / "pkgs/90-backend-apps/tba-app-backend-platform-admin/src/tba_app_backend_platform_admin/realms.py"
 )
 
 
@@ -127,7 +127,7 @@ def test_realm_tenant_creation_binds_the_path_realm() -> None:
 def test_realm_api_is_http_only_and_has_no_storage_runtime_imports() -> None:
     source = REALM_API.read_text(encoding="utf-8")
 
-    assert "tigrbl_identity_storage" not in source
+    assert "tba_storage_core" not in source
     assert "create_table_record" not in source
     assert "update_table_record" not in source
     assert "delete_table_record" not in source

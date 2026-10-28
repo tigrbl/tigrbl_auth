@@ -16,17 +16,17 @@
 
 ## Direct move map
 
-- `tigrbl_auth/app.py` → `tigrbl_auth/api/app.py`
-- `tigrbl_auth/routers/surface.py` → `tigrbl_auth/api/surfaces.py`
-- `tigrbl_auth/routers/auth_flows.py` → `tigrbl_auth/api/rest/routers/login.py`
-- `tigrbl_auth/routers/authz/oidc.py` → `tigrbl_auth/api/rest/routers/authorize.py`
-- `tigrbl_auth/orm/*` → `tigrbl_auth/tables/*`
-- `tigrbl_auth/db.py` → `tigrbl_auth/tables/engine.py`
-- `tigrbl_auth/runtime_cfg.py` → `tigrbl_auth/config/settings.py`
-- `tigrbl_auth/backends.py` → `tigrbl_auth/services/auth_backends.py` and `tigrbl_auth/ops/authenticate.py`
-- `tigrbl_auth/crypto.py` + `tigrbl_auth/jwtoken.py` → `tigrbl_auth/services/key_management.py` + `tigrbl_auth/services/token_service.py`
-- `tigrbl_auth/oidc_discovery.py` / `tigrbl_auth/oidc_id_token.py` / `tigrbl_auth/oidc_userinfo.py` → `tigrbl_auth/standards/oidc/*`
-- `tigrbl_auth/rfc/*` → `tigrbl_auth/standards/{oauth2,oidc,jose,http}/*`
+- `tba_auth/app.py` → `tba_auth/api/app.py`
+- `tba_auth/routers/surface.py` → `tba_auth/api/surfaces.py`
+- `tba_auth/routers/auth_flows.py` → `tba_auth/api/rest/routers/login.py`
+- `tba_auth/routers/authz/oidc.py` → `tba_auth/api/rest/routers/authorize.py`
+- `tba_auth/orm/*` → `tba_auth/tables/*`
+- `tba_auth/db.py` → `tba_auth/tables/engine.py`
+- `tba_auth/runtime_cfg.py` → `tba_auth/config/settings.py`
+- `tba_auth/backends.py` → `tba_auth/services/auth_backends.py` and `tba_auth/ops/authenticate.py`
+- `tba_auth/crypto.py` + `tba_auth/jwtoken.py` → `tba_auth/services/key_management.py` + `tba_auth/services/token_service.py`
+- `tba_auth/oidc_discovery.py` / `tba_auth/oidc_id_token.py` / `tba_auth/oidc_userinfo.py` → `tba_auth/standards/oidc/*`
+- `tba_auth/rfc/*` → `tba_auth/standards/{oauth2,oidc,jose,http}/*`
 - `vendor/*` → deleted / forbidden
 - `tests/integration/*` → `tests/integration/*`
 

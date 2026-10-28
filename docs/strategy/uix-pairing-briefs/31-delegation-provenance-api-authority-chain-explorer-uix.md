@@ -1,6 +1,6 @@
 # Delegation Provenance API + Authority Chain Explorer UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-router-delegation-provenance` + `@tigrbl-auth/authority-chain-explorer-uix`<br>
+**Pairing:** `tba-router-delegation-provenance` + `@tba/authority-chain-explorer-uix`<br>
 **Additional opportunity:** Authorization/delegation/sovereignty extension 2<br>
 **Primary buyers:** security engineering, IAM platform teams, application owners, workload and agent platform teams, auditors, and incident response<br>
 **Status:** proposed product surface; durable delegation grants, scopes, proofs, edges, token links, authority graphs, attenuation, and runtime lineage already exist
@@ -624,13 +624,13 @@ Standardize `source authority`, `responsible subject`, `delegator`, `delegate/ac
 - `.ssot/specs/SPEC-1206-authority-derivation-graph-contract.yaml`
 - `.ssot/specs/SPEC-1208-delegation-attenuation-proof-contract.yaml`
 - `.ssot/specs/SPEC-1213-delegation-grant-lifecycle-contract.yaml`
-- `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/delegation/`
-- `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/authority/`
-- `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/delegation_grant/`
-- `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/authority_derivation_graph/`
-- `pkgs/20-providers/tigrbl-security-authorization-provenance-builder/`
-- `pkgs/30-storage-runtime/tigrbl-authz-policy-authority-derivation-graph/`
-- `pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/token_exchange.py`
+- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/delegation/`
+- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/authority/`
+- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/delegation_grant/`
+- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/authority_derivation_graph/`
+- `pkgs/20-providers/tba-provider-security-authorization-provenance-builder/`
+- `pkgs/30-storage-runtime/tba-durability-authorization-policy-authority-derivation-graph/`
+- `pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/token_exchange.py`
 - `tests/security/test_delegation_provenance.py`
 - `tests/unit/test_delegation_grant_lifecycle_contract.py`
 - `tests/unit/test_delegation_attenuation_proof.py`

@@ -1,9 +1,9 @@
 import asyncio
 import pytest
 
-import tigrbl_auth.oidc_discovery as oidc_discovery
-from tigrbl_auth.oidc_id_token import mint_id_token, verify_id_token
-from tigrbl_auth.runtime_cfg import settings
+import tba_auth.oidc_discovery as oidc_discovery
+from tba_auth.oidc_id_token import mint_id_token, verify_id_token
+from tba_auth.runtime_cfg import settings
 
 
 @pytest.mark.unit

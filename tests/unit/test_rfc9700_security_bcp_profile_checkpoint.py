@@ -1,8 +1,8 @@
-from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
+from tba_protocol_oauth.standards.oauth_security_bcp import (
     runtime_security_profile,
     security_bcp_profile,
 )
-from tigrbl_identity_runtime.deployment import resolve_deployment
+from tba_runtime_identity.deployment import resolve_deployment
 
 
 def test_rfc9700_security_bcp_profile_exposes_requirements():

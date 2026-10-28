@@ -13,7 +13,7 @@ for src in sorted((ROOT / "pkgs").glob("*/src")):
 
 
 def test_principals_t0_exports_all_first_class_models() -> None:
-    import tigrbl_identity_principals as principals
+    import tba_concrete_identity_principals as principals
 
     assert principals.PrincipalKind.USER.value == "user"
     assert principals.PrincipalStatus.ACTIVE.value == "active"
@@ -27,9 +27,9 @@ def test_principal_contracts_are_grouped_under_principals_package() -> None:
         ROOT
         / "pkgs"
         / "02-contracts"
-        / "tigrbl-identity-contracts"
+        / "tba-contracts-identity"
         / "src"
-        / "tigrbl_identity_contracts"
+        / "tba_contracts_identity"
     )
 
     assert not (contracts_root / "principals.py").exists()
@@ -39,9 +39,9 @@ def test_principal_contracts_are_grouped_under_principals_package() -> None:
 
 
 def test_authority_roles_are_authority_owned_with_principal_compatibility() -> None:
-    import tigrbl_authz_policy as authz
-    import tigrbl_identity_contracts as contracts
-    import tigrbl_identity_principals as principals
+    import tba_runtime_authorization_policy as authz
+    import tba_contracts_identity as contracts
+    import tba_concrete_identity_principals as principals
 
     assert contracts.AuthorityRole is principals.AuthorityRole
     assert authz.AuthorityRole.SUPERUSER.value == principals.AuthorityRole.SUPERUSER.value
@@ -51,7 +51,7 @@ def test_authority_roles_are_authority_owned_with_principal_compatibility() -> N
 
 
 def test_principals_t0_constructs_human_and_nonhuman_principals() -> None:
-    import tigrbl_identity_principals as principals
+    import tba_concrete_identity_principals as principals
 
     user = principals.create_user_principal("user@example.test", tenant_id="tenant-a")
     service = principals.create_service_principal("svc:billing", tenant_id="tenant-a")
@@ -72,7 +72,7 @@ def test_principals_t0_constructs_human_and_nonhuman_principals() -> None:
 
 
 def test_principals_t1_admin_owner_superuser_roles_are_explicit() -> None:
-    import tigrbl_identity_principals as principals
+    import tba_concrete_identity_principals as principals
 
     admin = principals.create_admin_principal("admin@example.test", owner=True, superuser=True)
 
@@ -84,7 +84,7 @@ def test_principals_t1_admin_owner_superuser_roles_are_explicit() -> None:
 
 
 def test_principals_t1_membership_and_alias_resolution() -> None:
-    import tigrbl_identity_principals as principals
+    import tba_concrete_identity_principals as principals
 
     directory = principals.PrincipalDirectory()
     user = directory.add_principal(principals.create_user_principal("user@example.test", id="p-user"))
@@ -101,7 +101,7 @@ def test_principals_t1_membership_and_alias_resolution() -> None:
 
 def test_principals_t2_rejects_invalid_nonhuman_kind_and_alias_collision() -> None:
     import pytest
-    import tigrbl_identity_principals as principals
+    import tba_concrete_identity_principals as principals
 
     directory = principals.PrincipalDirectory()
     first = directory.add_principal(principals.create_user_principal("first@example.test", id="p-first"))
@@ -119,11 +119,11 @@ def test_principals_t2_import_dag_stays_clean() -> None:
         ROOT
         / "pkgs"
         / "40-capabilities"
-        / "tigrbl-identity-principals"
+        / "tba-concrete-identity-principals"
         / "src"
-        / "tigrbl_identity_principals"
+        / "tba_concrete_identity_principals"
     )
-    forbidden = {"tigrbl_auth", "tigrbl_identity_admin", "tigrbl_identity_server", "tigrbl_identity_storage"}
+    forbidden = {"tba_auth", "tba_runtime_identity_administration", "tba_server_identity", "tba_storage_core"}
 
     for path in package_root.rglob("*.py"):
         tree = ast.parse(path.read_text(encoding="utf-8"))

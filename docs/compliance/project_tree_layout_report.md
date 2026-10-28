@@ -4,7 +4,7 @@
 
 ## Failures
 
-- Missing required file: pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/surfaces.py
+- Missing required file: pkgs/60-runtime/tba-server-identity/src/tba_server_identity/surfaces.py
 
 ## Summary
 

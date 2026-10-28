@@ -1,11 +1,11 @@
 targets:
 - RFC 7523
 modules:
-- tigrbl_auth/standards/oauth2/jwt_client_auth.py
-- tigrbl_auth/ops/token.py
-- tigrbl_auth/ops/register.py
-- tigrbl_auth/standards/oidc/discovery_metadata.py
-- tigrbl_auth/cli/artifacts.py
+- tba_auth/standards/oauth2/jwt_client_auth.py
+- tba_auth/ops/token.py
+- tba_auth/ops/register.py
+- tba_auth/standards/oidc/discovery_metadata.py
+- tba_auth/cli/artifacts.py
 tests:
 - tests/unit/test_rfc7523_jwt_profile.py
 contracts:

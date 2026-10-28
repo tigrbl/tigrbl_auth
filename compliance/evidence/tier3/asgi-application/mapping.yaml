@@ -1,25 +1,25 @@
 targets:
 - ASGI 3 application package
 modules:
-- tigrbl_auth/api/app.py
-- tigrbl_auth/app.py
-- tigrbl_auth/plugin.py
-- tigrbl_auth/gateway.py
-- tigrbl_auth/config/deployment.py
-- tigrbl_auth/runtime/__init__.py
-- tigrbl_auth/runtime/types.py
-- tigrbl_auth/runtime/base.py
-- tigrbl_auth/runtime/plan.py
-- tigrbl_auth/runtime/registry.py
-- tigrbl_auth/cli/runtime.py
+- tba_auth/api/app.py
+- tba_auth/app.py
+- tba_auth/plugin.py
+- tba_auth/gateway.py
+- tba_auth/config/deployment.py
+- tba_auth/runtime/__init__.py
+- tba_auth/runtime/types.py
+- tba_auth/runtime/base.py
+- tba_auth/runtime/plan.py
+- tba_auth/runtime/registry.py
+- tba_auth/cli/runtime.py
 tests:
 - tests/runtime/test_runner_invariance.py
 - tests/conformance/operator/test_cli_serve_runtime.py
 contracts:
 - contracts\cli_contract.json
 - contracts\runtime_profile_report.json
-- contracts\tigrbl_auth.public.openapi.json
-- contracts\tigrbl_auth.admin.openrpc.json
+- contracts\tba_auth.public.openapi.json
+- contracts\tba_auth.admin.openrpc.json
 - contracts\openid-configuration.json
 - contracts\oauth-authorization-server.json
 reports:

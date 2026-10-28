@@ -1,12 +1,12 @@
 import pytest
 
-from tigrbl_policy_administration_memory_provider import (
+from tba_provider_policy_administration_memory import (
     ABACAdministrator,
     RBACAdministrator,
     simulate_policy,
 )
 
-from tigrbl_auth.uix import (
+from tba_auth.uix import (
     ADMIN_NAVIGATION,
     RESOURCE_VIEW_OPERATIONS,
     SAFE_MUTATION_METHODS,

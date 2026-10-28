@@ -6,18 +6,18 @@ import pytest
 from httpx import ASGITransport, AsyncClient
 from tigrbl import TigrblApp
 
-from tigrbl_auth_router_oauth_par import (
+from tba_router_oauth_pushed_authorization_request import (
     build_pushed_authorization_router,
     request_body_data,
 )
-from tigrbl_auth_protocol_oauth.standards.pushed_authorization_requests import (
+from tba_protocol_oauth.standards.pushed_authorization_requests import (
     RFC9126PushedAuthorizationService,
 )
-from tigrbl_identity_contracts.oauth import (
+from tba_contracts_identity.oauth import (
     PushedAuthorizationPersistenceRequest,
 )
-from tigrbl_pushed_authorization_capability import PushedAuthorizationCapability
-import tigrbl_auth_backend_app_core.surfaces.par_surface as par_surface
+from tba_capability_authorization_request_staging import PushedAuthorizationCapability
+import tba_app_backend_core.surfaces.par_surface as par_surface
 
 
 @pytest.mark.asyncio

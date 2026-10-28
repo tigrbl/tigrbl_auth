@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from tigrbl_identity_testkit import (
+from tba_testkit_identity import (
     PackageMatrixHarness,
     TestkitError,
     build_fake_flow,
@@ -62,13 +62,13 @@ def test_identity_testkit_package_fails_closed_for_bad_vectors() -> None:
     with pytest.raises(TestkitError, match="missing authorization"):
         resource_server.verify(None)
     with pytest.raises(TestkitError, match="missing Python versions"):
-        PackageMatrixHarness().assert_complete([], package="tigrbl-identity-testkit")
+        PackageMatrixHarness().assert_complete([], package="tba-testkit-identity")
 
 
 def test_identity_testkit_package_matrix_cells_cover_supported_versions() -> None:
     cells = PackageMatrixHarness().cells_for(
-        "tigrbl-identity-testkit",
-        test_paths=("tests/packages/tigrbl-identity-testkit", "tests/interop"),
+        "tba-testkit-identity",
+        test_paths=("tests/packages/tba-testkit-identity", "tests/interop"),
         cross_cutting=True,
     )
 

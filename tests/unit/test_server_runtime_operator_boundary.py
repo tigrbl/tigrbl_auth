@@ -12,8 +12,8 @@ for src in (ROOT / "pkgs").glob("*/src"):
     if value not in sys.path:
         sys.path.insert(0, value)
 
-from tigrbl_identity_operator import OperatorWorkflow  # noqa: E402
-from tigrbl_identity_runtime import (  # noqa: E402
+from tba_operator_identity import OperatorWorkflow  # noqa: E402
+from tba_runtime_identity import (  # noqa: E402
     ReadinessStatus,
     provider_runtime_profile,
     readiness_diagnostic,
@@ -21,7 +21,7 @@ from tigrbl_identity_runtime import (  # noqa: E402
     resolve_feature_flags,
     testkit_provider_runtime_profile as build_testkit_provider_runtime_profile,
 )
-from tigrbl_identity_server import (  # noqa: E402
+from tba_server_identity import (  # noqa: E402
     SurfacePlane,
     assert_public_admin_separation,
     build_route_surface_registry,
@@ -98,15 +98,15 @@ def test_operator_t1_bootstrap_release_evidence_and_import_export_roundtrip() ->
         scopes=("jobs.write", "jobs.read"),
     )
     evidence = workflow.package_release_evidence(
-        package="tigrbl-identity-server",
+        package="tba-server-identity",
         version="0.4.0.dev2",
-        artifact_paths=("dist/tigrbl_identity_server.whl",),
+        artifact_paths=("dist/tba_server_identity.whl",),
     )
     imported = OperatorWorkflow.import_state(workflow.export_state())
 
     assert jwks.kids == ("kid-a", "kid-b")
     assert service.scopes == ("jobs.read", "jobs.write")
-    assert evidence.package == "tigrbl-identity-server"
+    assert evidence.package == "tba-server-identity"
     assert imported.state == workflow.state
 
 
@@ -126,14 +126,14 @@ def test_server_runtime_operator_t2_fail_closed_guards() -> None:
 @pytest.mark.unit
 def test_server_runtime_operator_t2_import_boundaries() -> None:
     server_files = [
-        Path("pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/__init__.py"),
-        Path("pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/assembly.py"),
+        Path("pkgs/60-runtime/tba-server-identity/src/tba_server_identity/__init__.py"),
+        Path("pkgs/60-runtime/tba-server-identity/src/tba_server_identity/assembly.py"),
     ]
     runtime_files = [
-        Path("pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/assembly.py"),
+        Path("pkgs/60-runtime/tba-runtime-identity/src/tba_runtime_identity/assembly.py"),
     ]
     operator_files = [
-        Path("pkgs/60-runtime/tigrbl-identity-operator/src/tigrbl_identity_operator/workflows.py"),
+        Path("pkgs/60-runtime/tba-operator-identity/src/tba_operator_identity/workflows.py"),
     ]
 
     def imports_for(files: list[Path]) -> set[str]:
@@ -147,6 +147,6 @@ def test_server_runtime_operator_t2_import_boundaries() -> None:
                     imports.add(node.module.split(".")[0])
         return imports
 
-    assert "tigrbl_identity_operator" not in imports_for(server_files)
-    assert "tigrbl_auth" not in imports_for(server_files + runtime_files + operator_files)
-    assert "tigrbl_identity_server" not in imports_for(operator_files)
+    assert "tba_operator_identity" not in imports_for(server_files)
+    assert "tba_auth" not in imports_for(server_files + runtime_files + operator_files)
+    assert "tba_server_identity" not in imports_for(operator_files)

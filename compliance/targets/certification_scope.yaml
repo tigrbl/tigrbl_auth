@@ -1,5 +1,5 @@
 schema_version: 1
-package: tigrbl_auth
+package: tba_auth
 delivery_track: release-claim-canonicalization
 authoritative: true
 repository_tier: 3
@@ -21,12 +21,12 @@ authoritative_sources:
   - compliance/evidence/effective-release-evidence.production.yaml
   - compliance/evidence/effective-release-evidence.hardening.yaml
   contracts:
-  - specs/openapi/profiles/baseline/tigrbl_auth.public.openapi.json
-  - specs/openapi/profiles/production/tigrbl_auth.public.openapi.json
-  - specs/openapi/profiles/hardening/tigrbl_auth.public.openapi.json
-  - specs/openrpc/profiles/baseline/tigrbl_auth.admin.openrpc.json
-  - specs/openrpc/profiles/production/tigrbl_auth.admin.openrpc.json
-  - specs/openrpc/profiles/hardening/tigrbl_auth.admin.openrpc.json
+  - specs/openapi/profiles/baseline/tba_auth.public.openapi.json
+  - specs/openapi/profiles/production/tba_auth.public.openapi.json
+  - specs/openapi/profiles/hardening/tba_auth.public.openapi.json
+  - specs/openrpc/profiles/baseline/tba_auth.admin.openrpc.json
+  - specs/openrpc/profiles/production/tba_auth.admin.openrpc.json
+  - specs/openrpc/profiles/hardening/tba_auth.admin.openrpc.json
   mappings:
   - compliance/mappings/target-to-module.yaml
   - compliance/mappings/target-to-endpoint.yaml
@@ -163,42 +163,42 @@ deferred_targets:
   kind: extension-quarantine
   reason: Optional hardening extension not yet promoted into the certified core boundary.
   modules:
-  - tigrbl_auth/standards/jose/rfc7800.py
+  - tba_auth/standards/jose/rfc7800.py
 - label: RFC 8417
   kind: extension-quarantine
   reason: Outside the default OAuth 2.0 / OIDC auth-server certification boundary.
   modules:
-  - pkgs/10-concrete/tigrbl-set-concrete/src/tigrbl_set_concrete/__init__.py
-  - pkgs/50-protocols/tigrbl-security-event-protocol-set/src/tigrbl_security_event_protocol_set/__init__.py
+  - pkgs/10-concrete/tba-concrete-set/src/tba_concrete_set/__init__.py
+  - pkgs/50-protocols/tba-protocol-security-event-set/src/tba_protocol_security_event_set/__init__.py
 - label: RFC 8291
   kind: extension-quarantine
   reason: Web Push is not part of the certified auth-core boundary.
   modules:
-  - tigrbl_auth/extensions/rfc8291.py
+  - tba_auth/extensions/rfc8291.py
 - label: RFC 8812
   kind: extension-quarantine
   reason: WebAuthn is extension work and not part of the default certified boundary.
   modules:
-  - tigrbl_auth/extensions/rfc8812.py
+  - tba_auth/extensions/rfc8812.py
 - label: WebAuthn Level 2 relying-party implementation
   kind: extension-quarantine
   reason: Implementation is tested internally but no external FIDO conformance or
     certification claim is made.
   modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-webauthn/src/tigrbl_auth_protocol_webauthn
-  - pkgs/80-routers/tigrbl-auth-router-webauthn/src/tigrbl_auth_router_webauthn
+  - pkgs/50-protocols/tba-protocol-webauthn/src/tba_protocol_webauthn
+  - pkgs/80-routers/tba-router-webauthn/src/tba_router_webauthn
 - label: FIDO2 server implementation profile
   kind: extension-quarantine
   reason: Profile mapping is implemented but external certification evidence is not
     yet attached.
   modules:
-  - pkgs/50-protocols/tigrbl-auth-profile-fido2-server/src/tigrbl_auth_profile_fido2_server
+  - pkgs/55-profiles/tba-profile-fido2-server/src/tba_profile_fido2_server
 - label: RFC 8932
   kind: extension-quarantine
   reason: RFC 8932 is not an OAuth/OIDC auth-core target and remains quarantined from
     certification claims.
   modules:
-  - tigrbl_auth/extensions/rfc8932.py
+  - tba_auth/extensions/rfc8932.py
 - label: OAuth 2.1 alignment profile
   kind: alignment-only
   reason: Track draft-era alignment only. Do not emit as a final RFC compliance claim.
@@ -298,7 +298,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/authorization_framework.py
+  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/authorization_framework.py
   endpoint_surface:
     current:
     - /authorize
@@ -360,7 +360,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/bearer_token_usage.py
+  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/bearer_token_usage.py
   endpoint_surface:
     current:
     - /token
@@ -422,7 +422,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/proof_key_for_code_exchange.py
+  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/proof_key_for_code_exchange.py
   endpoint_surface:
     current:
     - /authorize
@@ -483,7 +483,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/authorization_server_metadata.py
+  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/authorization_server_metadata.py
   endpoint_surface:
     current:
     - /.well-known/oauth-authorization-server
@@ -533,7 +533,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/http_standards/well_known.py
+  - pkgs/60-runtime/tba-runtime-identity/src/tba_runtime_identity/http_standards/well_known.py
   endpoint_surface:
     current:
     - /.well-known/openid-configuration
@@ -599,9 +599,9 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/10-concrete/tigrbl-jws-concrete/src/tigrbl_jws_concrete
-  - pkgs/20-providers/tigrbl-jose-cryptography-provider/src/tigrbl_jose_cryptography_provider
-  - pkgs/50-protocols/tigrbl-security-protocol-jws/src/tigrbl_security_protocol_jws
+  - pkgs/10-concrete/tba-concrete-jws/src/tba_concrete_jws
+  - pkgs/20-providers/tba-provider-jose-cryptography/src/tba_provider_jose_cryptography
+  - pkgs/50-protocols/tba-protocol-security-jws/src/tba_protocol_security_jws
   endpoint_surface:
     current: []
     target: []
@@ -649,9 +649,9 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/10-concrete/tigrbl-jwe-concrete/src/tigrbl_jwe_concrete
-  - pkgs/20-providers/tigrbl-jose-cryptography-provider/src/tigrbl_jose_cryptography_provider
-  - pkgs/50-protocols/tigrbl-security-protocol-jwe/src/tigrbl_security_protocol_jwe
+  - pkgs/10-concrete/tba-concrete-jwe/src/tba_concrete_jwe
+  - pkgs/20-providers/tba-provider-jose-cryptography/src/tba_provider_jose_cryptography
+  - pkgs/50-protocols/tba-protocol-security-jwe/src/tba_protocol_security_jwe
   endpoint_surface:
     current: []
     target: []
@@ -700,7 +700,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose
+  - pkgs/20-providers/tba-provider-identity-jose/src/tba_provider_identity_jose
   endpoint_surface:
     current:
     - /.well-known/jwks.json
@@ -750,7 +750,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose
+  - pkgs/20-providers/tba-provider-identity-jose/src/tba_provider_identity_jose
   endpoint_surface:
     current: []
     target: []
@@ -795,8 +795,8 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/10-concrete/tigrbl-jwt-concrete/src/tigrbl_jwt_concrete
-  - pkgs/50-protocols/tigrbl-auth-protocol-jwt/src/tigrbl_auth_protocol_jwt
+  - pkgs/10-concrete/tba-concrete-jwt/src/tba_concrete_jwt
+  - pkgs/50-protocols/tba-protocol-jwt/src/tba_protocol_jwt
   endpoint_surface:
     current: []
     target: []
@@ -843,7 +843,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/revocation.py
+  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/revocation.py
   endpoint_surface:
     current:
     - /revoke
@@ -896,7 +896,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/dynamic_client_registration.py
+  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/dynamic_client_registration.py
   endpoint_surface:
     current:
     - /register
@@ -949,7 +949,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/client_registration_management.py
+  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/client_registration_management.py
   endpoint_surface:
     current:
     - /register/{client_id}
@@ -1002,7 +1002,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/introspection.py
+  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/introspection.py
   endpoint_surface:
     current:
     - /introspect
@@ -1055,7 +1055,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/native_apps.py
+  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/native_apps.py
   endpoint_surface:
     current:
     - /authorize
@@ -1122,7 +1122,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/device_authorization.py
+  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/device_authorization.py
   endpoint_surface:
     current:
     - /device_authorization
@@ -1179,7 +1179,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/token_exchange.py
+  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/token_exchange.py
   endpoint_surface:
     current:
     - /token/exchange
@@ -1236,7 +1236,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/mutual_tls_client_authentication.py
+  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/mutual_tls_client_authentication.py
   endpoint_surface:
     current:
     - /token
@@ -1296,7 +1296,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/resource_indicators.py
+  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/resource_indicators.py
   endpoint_surface:
     current:
     - /authorize
@@ -1363,7 +1363,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/jwt_access_tokens.py
+  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/jwt_access_tokens.py
   endpoint_surface:
     current:
     - /login
@@ -1427,7 +1427,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/jwt_secured_authorization_requests.py
+  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/jwt_secured_authorization_requests.py
   endpoint_surface:
     current:
     - /authorize
@@ -1487,7 +1487,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/pushed_authorization_requests.py
+  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/pushed_authorization_requests.py
   endpoint_surface:
     current:
     - /par
@@ -1542,7 +1542,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/issuer_identification.py
+  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/issuer_identification.py
   endpoint_surface:
     current:
     - /authorize
@@ -1601,7 +1601,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/rich_authorization_requests.py
+  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/rich_authorization_requests.py
   endpoint_surface:
     current:
     - /authorize
@@ -1661,7 +1661,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/dpop.py
+  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/dpop.py
   endpoint_surface:
     current:
     - /token
@@ -1721,7 +1721,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/http_standards/cookies.py
+  - pkgs/60-runtime/tba-runtime-identity/src/tba_runtime_identity/http_standards/cookies.py
   endpoint_surface:
     current:
     - /login
@@ -1783,7 +1783,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/assertion_framework.py
+  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/assertion_framework.py
   endpoint_surface:
     current:
     - /token
@@ -1833,7 +1833,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/jwt_client_auth.py
+  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/jwt_client_auth.py
   endpoint_surface:
     current:
     - /token
@@ -1891,7 +1891,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/protected_resource_metadata.py
+  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/protected_resource_metadata.py
   endpoint_surface:
     current:
     - /.well-known/oauth-protected-resource
@@ -1947,7 +1947,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/oauth_security_bcp.py
+  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/oauth_security_bcp.py
   endpoint_surface:
     current:
     - /authorize
@@ -2013,9 +2013,9 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/core.py
-  - pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/id_token_profile.py
-  - pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/id_token.py
+  - pkgs/50-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/core.py
+  - pkgs/50-protocols/tba-protocol-oidc/src/tba_protocol_oidc/id_token_profile.py
+  - pkgs/50-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/id_token.py
   endpoint_surface:
     current: []
     target: []
@@ -2066,7 +2066,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/discovery.py
+  - pkgs/50-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/discovery.py
   endpoint_surface:
     current:
     - /.well-known/openid-configuration
@@ -2122,7 +2122,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/userinfo.py
+  - pkgs/50-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/userinfo.py
   endpoint_surface:
     current:
     - /userinfo
@@ -2173,7 +2173,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/session_mgmt.py
+  - pkgs/50-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/session_mgmt.py
   endpoint_surface:
     current:
     - /login
@@ -2237,7 +2237,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/rp_initiated_logout.py
+  - pkgs/50-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/rp_initiated_logout.py
   endpoint_surface:
     current:
     - /logout
@@ -2291,7 +2291,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/frontchannel_logout.py
+  - pkgs/50-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/frontchannel_logout.py
   endpoint_surface:
     current:
     - /logout
@@ -2344,7 +2344,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/backchannel_logout.py
+  - pkgs/50-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/backchannel_logout.py
   endpoint_surface:
     current:
     - /logout
@@ -2397,7 +2397,7 @@ targets:
     status: generated-live-from-deployment-metadata
     profile: baseline
   owner_modules:
-  - pkgs/90-backend-apps/tigrbl-auth-backend-app-public/src/tigrbl_auth_backend_app_public/openapi.py
+  - pkgs/90-backend-apps/tba-app-backend-public/src/tba_app_backend_public/openapi.py
   endpoint_surface:
     current: []
     target: []
@@ -2444,7 +2444,7 @@ targets:
     status: implementation-backed-generated-from-rpc-registry
     profile: production
   owner_modules:
-  - pkgs/60-runtime/tigrbl-identity-cli/src/tigrbl_identity_cli/cli/artifacts/_schemas.py
+  - pkgs/60-runtime/tba-cli-identity/src/tba_cli_identity/cli/artifacts/_schemas.py
   endpoint_surface:
     current:
     - /rpc
@@ -2492,7 +2492,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/90-backend-apps/tigrbl-auth-backend-app-public/src/tigrbl_auth_backend_app_public/app.py
+  - pkgs/90-backend-apps/tba-app-backend-public/src/tba_app_backend_public/app.py
   endpoint_surface:
     current: []
     target: []
@@ -2543,7 +2543,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/uvicorn.py
+  - pkgs/60-runtime/tba-runtime-identity/src/tba_runtime_identity/uvicorn.py
   endpoint_surface:
     current: []
     target: []
@@ -2594,7 +2594,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/hypercorn.py
+  - pkgs/60-runtime/tba-runtime-identity/src/tba_runtime_identity/hypercorn.py
   endpoint_surface:
     current: []
     target: []
@@ -2645,7 +2645,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/tigrcorn.py
+  - pkgs/60-runtime/tba-runtime-identity/src/tba_runtime_identity/tigrcorn.py
   endpoint_surface:
     current: []
     target: []
@@ -2696,7 +2696,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/60-runtime/tigrbl-identity-cli/src/tigrbl_identity_cli/cli
+  - pkgs/60-runtime/tba-cli-identity/src/tba_cli_identity/cli
   endpoint_surface:
     current: []
     target: []
@@ -2749,7 +2749,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/migrations
+  - pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/migrations
   endpoint_surface:
     current: []
     target: []
@@ -2797,7 +2797,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/jwks_service.py
+  - pkgs/50-protocols/tba-protocol-oidc/src/tba_protocol_oidc/jwks_service.py
   endpoint_surface:
     current: []
     target: []
@@ -2846,7 +2846,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/portability.py
+  - pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/portability.py
   endpoint_surface:
     current: []
     target: []
@@ -2893,7 +2893,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/60-runtime/tigrbl-auth-release-certification/src/tigrbl_auth_release_certification
+  - pkgs/60-runtime/tba-certification-release/src/tba_certification_release
   endpoint_surface:
     current: []
     target: []

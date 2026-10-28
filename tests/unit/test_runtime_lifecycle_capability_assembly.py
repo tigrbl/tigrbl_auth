@@ -4,13 +4,13 @@ from types import SimpleNamespace
 
 import pytest
 
-from tigrbl_capability import Capability
-from tigrbl_identity_contracts.capabilities import (
+from tba_concrete_capability import Capability
+from tba_contracts_identity.capabilities import (
     CapabilityDefinition,
     CapabilityOperation,
 )
-from tigrbl_identity_runtime import build_runtime_capability_assembly
-from tigrbl_identity_server.composition import lifecycle
+from tba_runtime_identity import build_runtime_capability_assembly
+from tba_server_identity.composition import lifecycle
 
 
 @pytest.mark.asyncio
@@ -57,8 +57,8 @@ async def test_startup_attaches_assembly_after_storage_and_surface_initializatio
     await lifecycle._startup(app, assembly, router.initialize)
 
     assert calls == ["migrations", "tables", "superuser", "surface", "assembly"]
-    assert app.state.tigrbl_auth_capability_registry.capability_ids() == ("example",)
-    assert app.state.tigrbl_auth_protocol_reports == ()
+    assert app.state.tba_auth_capability_registry.capability_ids() == ("example",)
+    assert app.state.tba_protocol_reports == ()
 
 
 @pytest.mark.asyncio

@@ -4564,7 +4564,7 @@
       ],
       "profile": null,
       "positive_tests": [
-        "pkgs/10-concrete/tigrbl-set-concrete/tests/test_rfc8417.py"
+        "pkgs/10-concrete/tba-concrete-set/tests/test_rfc8417.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -9497,7 +9497,7 @@
       ],
       "profile": null,
       "positive_tests": [
-        "pkgs/10-concrete/tigrbl-set-concrete/tests/test_rfc8417.py"
+        "pkgs/10-concrete/tba-concrete-set/tests/test_rfc8417.py"
       ],
       "negative_tests": [
         "tests/negative/test_certification_attack_paths.py",
@@ -10956,7 +10956,7 @@
       ],
       "profile": null,
       "positive_tests": [
-        "pkgs/10-concrete/tigrbl-set-concrete/tests/test_rfc8417.py"
+        "pkgs/10-concrete/tba-concrete-set/tests/test_rfc8417.py"
       ],
       "negative_tests": [
         "tests/negative/test_certification_attack_paths.py",

@@ -1,7 +1,7 @@
 [project]
-name = "tigrbl-auth-workspace"
+name = "tba-workspace"
 version = "0.4.0.dev2"
-description = "Workspace-only development harness for the split Tigrbl identity package suite."
+description = "Workspace-only development harness for the split TBA identity package suite."
 license = "Apache-2.0"
 readme = "README.md"
 requires-python = ">=3.10,<3.13"
@@ -40,482 +40,447 @@ dependencies = [
     "bcrypt==5.0.0",
     "httpx==0.28.1",
     "aiosqlite==0.22.1",
-    "tigrbl-identity-contracts==0.4.0.dev2",
-    "tigrbl-identity-assurance-contracts==0.4.0.dev2",
-    "tigrbl-token-contracts==0.4.0.dev2",
-    "tigrbl-attestation-contracts==0.4.0.dev2",
-    "tigrbl-claim-contracts==0.4.0.dev2",
-    "tigrbl-did-contracts==0.4.0.dev2",
-    "tigrbl-digital-credential-contracts==0.4.0.dev2",
-    "tigrbl-public-key-authentication-contracts==0.4.0.dev2",
-    "tigrbl-replay-contracts==0.4.0.dev2",
-    "tigrbl-security-event-contracts==0.4.0.dev2",
-    "tigrbl-workload-identity-contracts==0.4.0.dev2",
-    "tigrbl-identity-document-contracts==0.4.0.dev2",
-    "tigrbl-protected-envelope-contracts==0.4.0.dev2",
-    "tigrbl-proof-of-possession-contracts==0.4.0.dev2",
-    "tigrbl-authz-policy-rules-concrete==0.4.0.dev2",
-    "tigrbl-authz-policy-combiner-default==0.4.0.dev2",
-    "tigrbl-authz-policy-evaluators-default==0.4.0.dev2",
-    "tigrbl-authz-policy-attributes-mapping==0.4.0.dev2",
-    "tigrbl-authz-policy-obligations-concrete==0.4.0.dev2",
-    "tigrbl-policy-decision-engine-default==0.4.0.dev2",
-    "tigrbl-cose-concrete==0.4.0.dev2",
-    "tigrbl-jws-concrete==0.4.0.dev2",
-    "tigrbl-jwe-concrete==0.4.0.dev2",
-    "tigrbl-jwt-concrete==0.4.0.dev2",
-    "tigrbl-cwt-concrete==0.4.0.dev2",
-    "tigrbl-oidc-id-token-concrete==0.4.0.dev2",
-    "tigrbl-did-document-concrete==0.4.0.dev2",
-    "tigrbl-vc-jose-credential-concrete==0.4.0.dev2",
-    "tigrbl-vc-cose-credential-concrete==0.4.0.dev2",
-    "tigrbl-wit-concrete==0.4.0.dev2",
-    "tigrbl-wit-svid-credential-concrete==0.4.0.dev2",
-    "tigrbl-wpt-concrete==0.4.0.dev2",
-    "tigrbl-x509-svid-credential-concrete==0.4.0.dev2",
-    "tigrbl-jwt-svid-credential-concrete==0.4.0.dev2",
-    "tigrbl-cwt-svid-extension-credential-concrete==0.4.0.dev2",
-    "tigrbl-security-authorization-provenance-builder==0.1.0",
-    "tigrbl-identity-identities-concrete==0.4.0.dev2",
-    "tigrbl-identity-credentials-concrete==0.4.0.dev2",
-    "tigrbl-user-identity-concrete==0.4.0.dev2",
-    "tigrbl-admin-identity-concrete==0.4.0.dev2",
-    "tigrbl-service-identity-concrete==0.4.0.dev2",
-    "tigrbl-client-identity-concrete==0.4.0.dev2",
-    "tigrbl-machine-identity-concrete==0.4.0.dev2",
-    "tigrbl-workload-identity-concrete==0.4.0.dev2",
-    "tigrbl-device-identity-concrete==0.4.0.dev2",
-    "tigrbl-credential-password-concrete==0.4.0.dev2",
-    "tigrbl-credential-password-reset-concrete==0.4.0.dev2",
-    "tigrbl-credential-api-key-concrete==0.4.0.dev2",
-    "tigrbl-credential-service-key-concrete==0.4.0.dev2",
-    "tigrbl-credential-client-secret-concrete==0.4.0.dev2",
-    "tigrbl-credential-mfa-concrete==0.4.0.dev2",
-    "tigrbl-credential-passkey-concrete==0.4.0.dev2",
-    "tigrbl-service-credential-concrete==0.4.0.dev2",
-    "tigrbl-webauthn-credential-concrete==0.4.0.dev2",
-    "tigrbl-passwordless-credential-concrete==0.4.0.dev2",
-    "tigrbl-mfa-factor-concrete==0.4.0.dev2",
-    "tigrbl-credential-mtls-certificate-concrete==0.4.0.dev2",
-    "tigrbl-credential-dpop-key-concrete==0.4.0.dev2",
-    "tigrbl-sd-jwt-vc-concrete==0.4.0.dev2",
-    "tigrbl-sd-jwt-vc-credential-concrete==0.4.0.dev2",
-    "tigrbl-mdoc-credential-concrete==0.4.0.dev2",
-    "tigrbl-verifiable-credential-concrete==0.4.0.dev2",
-    "tigrbl-verifiable-presentation-concrete==0.4.0.dev2",
-    "tigrbl-eat-evidence-concrete==0.4.0.dev2",
-    "tigrbl-jose-concrete==0.4.0.dev2",
-    "tigrbl-sd-jwt-concrete==0.4.0.dev2",
-    "tigrbl-svid-concrete==0.4.0.dev2",
-    "tigrbl-did-concrete==0.4.0.dev2",
-    "tigrbl-mdoc-concrete==0.4.0.dev2",
-    "tigrbl-vcdm-concrete==0.4.0.dev2",
-    "tigrbl-eat-concrete==0.4.0.dev2",
-    "tigrbl-corim-concrete==0.4.0.dev2",
-    "tigrbl-security-key-rotation-policy-contracts==0.1.0",
-    "tigrbl-identity-admin-advanced-authenticator-registry==0.4.0.dev2",
-    "tigrbl-identity-admin-auth-anomaly-detector==0.4.0.dev2",
-    "tigrbl-access-governance-memory-provider==0.4.0.dev2",
-    "tigrbl-policy-administration-memory-provider==0.4.0.dev2",
-    "tigrbl-account-self-service==0.4.0.dev2",
-    "tigrbl-account-self-service-capability==0.4.0.dev2",
-    "tigrbl-administrative-resource-capability==0.4.0.dev2",
-    "tigrbl-identity-administration-capability==0.4.0.dev2",
-    "tigrbl-operator-administration-capability==0.4.0.dev2",
-    "tigrbl-realm-administration-capability==0.4.0.dev2",
-    "tigrbl-tenant-administration-capability==0.4.0.dev2",
-    "tigrbl-identity-admin-control-plane==0.4.0.dev2",
-    "tigrbl-identity-admin-federation-registry==0.4.0.dev2",
-    "tigrbl-identity-admin-policy-registry==0.4.0.dev2",
-    "tigrbl-identity-admin-relationship-graph==0.4.0.dev2",
-    "tigrbl-identity-admin-trust-federation-graph==0.4.0.dev2",
-    "tigrbl-trust-federation-graph-concrete==0.4.0.dev2",
-    "tigrbl-auth-protocol-oidc-backchannel-replay-store==0.4.0.dev2",
-    "tigrbl-set-concrete==0.4.0.dev2",
-    "tigrbl-identity-claims-bases==0.4.0.dev2",
-    "tigrbl-claim-bases==0.4.0.dev2",
-    "tigrbl-identity-bases==0.4.0.dev2",
-    "tigrbl-authentication-credential-bases==0.4.0.dev2",
-    "tigrbl-authenticator-bases==0.1.0",
-    "tigrbl-public-key-authentication-bases==0.4.0.dev2",
-    "tigrbl-did-bases==0.4.0.dev2",
-    "tigrbl-workload-identity-bases==0.4.0.dev2",
-    "tigrbl-certificate-bases==0.4.0.dev2",
-    "tigrbl-trust-bases==0.4.0.dev2",
-    "tigrbl-protected-artifact-bases==0.4.0.dev2",
-    "tigrbl-signing-bases==0.4.0.dev2",
-    "tigrbl-key-bases==0.4.0.dev2",
-    "tigrbl-encryption-bases==0.4.0.dev2",
-    "tigrbl-proof-of-possession-bases==0.4.0.dev2",
-    "tigrbl-identity-document-bases==0.4.0.dev2",
-    "tigrbl-protected-envelope-bases==0.4.0.dev2",
-    "tigrbl-token-introspection-bases==0.4.0.dev2",
-    "tigrbl-digital-credential-bases==0.4.0.dev2",
-    "tigrbl-attestation-bases==0.4.0.dev2",
-    "tigrbl-cose-bases==0.4.0.dev2",
-    "tigrbl-security-event-bases==0.4.0.dev2",
-    "tigrbl-token-bases==0.4.0.dev2",
-    "tigrbl-capability-bases==0.4.0.dev2",
-    "tigrbl-replay-bases==0.4.0.dev2",
-    "tigrbl-authentication-assurance-bases==0.4.0.dev2",
-    "tigrbl-authentication-context-bases==0.4.0.dev2",
-    "tigrbl-identity-assurance-bases==0.4.0.dev2",
-    "tigrbl-security-artifact-bases==0.4.0.dev2",
-    "tigrbl-claim-issuer-concrete==0.4.0.dev2",
-    "tigrbl-claim-subject-concrete==0.4.0.dev2",
-    "tigrbl-claim-audience-concrete==0.4.0.dev2",
-    "tigrbl-claim-expiration-concrete==0.4.0.dev2",
-    "tigrbl-claim-not-before-concrete==0.4.0.dev2",
-    "tigrbl-claim-issued-at-concrete==0.4.0.dev2",
-    "tigrbl-claim-jwt-id-concrete==0.4.0.dev2",
-    "tigrbl-auth-protocol-jwt==0.4.0.dev2",
-    "tigrbl-claim-authentication-time-concrete==0.4.0.dev2",
-    "tigrbl-claim-nonce-concrete==0.4.0.dev2",
-    "tigrbl-claim-authentication-context-concrete==0.4.0.dev2",
-    "tigrbl-claim-authentication-methods-concrete==0.4.0.dev2",
-    "tigrbl-claim-authorized-party-concrete==0.4.0.dev2",
-    "tigrbl-claim-confirmation-concrete==0.4.0.dev2",
-    "tigrbl-claim-cwt-confirmation-concrete==0.4.0.dev2",
-    "tigrbl-claim-workload-token-hash-concrete==0.4.0.dev2",
-    "tigrbl-claim-transaction-token-hash-concrete==0.4.0.dev2",
-    "tigrbl-claim-other-token-hashes-concrete==0.4.0.dev2",
-    "tigrbl-claim-scope-concrete==0.4.0.dev2",
-    "tigrbl-claim-client-id-concrete==0.4.0.dev2",
-    "tigrbl-claim-verified-claims-concrete==0.4.0.dev2",
-    "tigrbl-claim-place-of-birth-concrete==0.4.0.dev2",
-    "tigrbl-claim-nationalities-concrete==0.4.0.dev2",
-    "tigrbl-claim-birth-family-name-concrete==0.4.0.dev2",
-    "tigrbl-claim-birth-given-name-concrete==0.4.0.dev2",
-    "tigrbl-claim-birth-middle-name-concrete==0.4.0.dev2",
-    "tigrbl-claim-salutation-concrete==0.4.0.dev2",
-    "tigrbl-claim-title-concrete==0.4.0.dev2",
-    "tigrbl-claim-msisdn-concrete==0.4.0.dev2",
-    "tigrbl-claim-also-known-as-concrete==0.4.0.dev2",
-    "tigrbl-claim-address-country-code-concrete==0.4.0.dev2",
-    "tigrbl-claim-credential-type-concrete==0.4.0.dev2",
-    "tigrbl-claim-credential-status-concrete==0.4.0.dev2",
-    "tigrbl-claim-security-events-concrete==0.4.0.dev2",
-    "tigrbl-claim-transaction-id-concrete==0.4.0.dev2",
-    "tigrbl-claim-eat-profile-concrete==0.4.0.dev2",
-    "tigrbl-claim-http-method-concrete==0.4.0.dev2",
-    "tigrbl-claim-http-uri-concrete==0.4.0.dev2",
-    "tigrbl-claim-access-token-hash-concrete==0.4.0.dev2",
-    "tigrbl-claim-access-token-digest-concrete==0.4.0.dev2",
-    "tigrbl-claim-sd-hash-concrete==0.4.0.dev2",
-    "tigrbl-claim-eat-nonce-concrete==0.4.0.dev2",
-    "tigrbl-claim-ueid-concrete==0.4.0.dev2",
-    "tigrbl-claim-eat-submodules-concrete==0.4.0.dev2",
-    "tigrbl-claim-actor-concrete==0.4.0.dev2",
-    "tigrbl-claim-may-act-concrete==0.4.0.dev2",
-    "tigrbl-claim-name-concrete==0.4.0.dev2",
-    "tigrbl-claim-given-name-concrete==0.4.0.dev2",
-    "tigrbl-claim-family-name-concrete==0.4.0.dev2",
-    "tigrbl-claim-middle-name-concrete==0.4.0.dev2",
-    "tigrbl-claim-nickname-concrete==0.4.0.dev2",
-    "tigrbl-claim-preferred-username-concrete==0.4.0.dev2",
-    "tigrbl-claim-profile-uri-concrete==0.4.0.dev2",
-    "tigrbl-claim-picture-uri-concrete==0.4.0.dev2",
-    "tigrbl-claim-website-uri-concrete==0.4.0.dev2",
-    "tigrbl-claim-email-concrete==0.4.0.dev2",
-    "tigrbl-claim-email-verified-concrete==0.4.0.dev2",
-    "tigrbl-claim-gender-concrete==0.4.0.dev2",
-    "tigrbl-claim-birthdate-concrete==0.4.0.dev2",
-    "tigrbl-claim-zoneinfo-concrete==0.4.0.dev2",
-    "tigrbl-claim-locale-concrete==0.4.0.dev2",
-    "tigrbl-claim-phone-number-concrete==0.4.0.dev2",
-    "tigrbl-claim-phone-number-verified-concrete==0.4.0.dev2",
-    "tigrbl-claim-address-concrete==0.4.0.dev2",
-    "tigrbl-claim-updated-at-concrete==0.4.0.dev2",
-    "tigrbl-claim-subject-identifiers-concrete==0.4.0.dev2",
-    "tigrbl-claim-assertions-concrete==0.4.0.dev2",
-    "tigrbl-claim-updated-at-rfc3339-concrete==0.4.0.dev2",
-    "tigrbl-claim-authorization-code-hash-concrete==0.4.0.dev2",
-    "tigrbl-claim-state-hash-concrete==0.4.0.dev2",
-    "tigrbl-claim-session-id-concrete==0.4.0.dev2",
-    "tigrbl-claim-cwt-issuer-concrete==0.4.0.dev2",
-    "tigrbl-claim-cwt-subject-concrete==0.4.0.dev2",
-    "tigrbl-claim-cwt-audience-concrete==0.4.0.dev2",
-    "tigrbl-claim-cwt-expiration-concrete==0.4.0.dev2",
-    "tigrbl-claim-cwt-not-before-concrete==0.4.0.dev2",
-    "tigrbl-claim-cwt-issued-at-concrete==0.4.0.dev2",
-    "tigrbl-claim-cwt-id-concrete==0.4.0.dev2",
-    "tigrbl-auth-protocol-cwt==0.4.0.dev2",
-    "tigrbl-workload-protocol-spiffe-svid==0.4.0.dev2",
-    "workload-credential-profiles-example==0.4.0.dev2",
-    "tigrbl-workload-credential-conformance-testkit==0.4.0.dev2",
-    "tigrbl-workload-protocol-spiffe-broker-api==0.4.0.dev2",
-    "tigrbl-workload-protocol-spiffe-workload-api==0.4.0.dev2",
-    "tigrbl-workload-credential-profile-cwt-svid-extension==0.4.0.dev2",
-    "tigrbl-workload-credential-profile-spiffe-wit-svid==0.4.0.dev2",
-    "tigrbl-workload-proof-profile-wimse-wpt==0.4.0.dev2",
-    "tigrbl-workload-credential-profile-wimse-wit==0.4.0.dev2",
-    "tigrbl-auth-protocol-gnap==0.4.0.dev2",
-    "tigrbl-auth-profile-haip==0.4.0.dev2",
-    "tigrbl-auth-profile-fido2-server==0.4.0.dev2",
-    "tigrbl-security-event-protocol-set==0.4.0.dev2",
-    "tigrbl-attestation-protocol-eat==0.4.0.dev2",
-    "tigrbl-attestation-protocol-corim==0.4.0.dev2",
-    "tigrbl-credential-profile-sd-jwt-vc==0.4.0.dev2",
-    "tigrbl-credential-profile-vc-jose-cose==0.4.0.dev2",
-    "tigrbl-credential-protocol-iso-mdoc==0.4.0.dev2",
-    "tigrbl-credential-protocol-w3c-vcdm==0.4.0.dev2",
-    "tigrbl-authorization-scope-set-matcher-concrete==0.4.0.dev2",
-    "tigrbl-public-subject-identifier-concrete==0.4.0.dev2",
-    "tigrbl-pairwise-subject-identifier-concrete==0.4.0.dev2",
-    "tigrbl-acr-evaluator-basic-concrete==0.4.0.dev2",
-    "tigrbl-amr-evaluator-basic-concrete==0.4.0.dev2",
-    "tigrbl-authorization-provenance-concrete==0.4.0.dev2",
-    "tigrbl-dpop-confirmation-binding-concrete==0.4.0.dev2",
-    "tigrbl-mtls-confirmation-binding-concrete==0.4.0.dev2",
-    "tigrbl-pkce-concrete==0.4.0.dev2",
-    "tigrbl-identity-assurance-concrete==0.4.0.dev2",
-    "tigrbl-capability==0.4.0.dev2",
-    "tigrbl-default-capability==0.4.0.dev2",
-    "tigrbl-access-governance-capability==0.4.0.dev2",
-    "tigrbl-adaptive-authentication-capability==0.4.0.dev2",
-    "tigrbl-advanced-authentication-capability==0.4.0.dev2",
-    "tigrbl-mfa-challenge-capability==0.4.0.dev2",
-    "tigrbl-key-administration-capability==0.4.0.dev2",
-    "tigrbl-policy-administration-capability==0.4.0.dev2",
-    "tigrbl-policy-assurance-capability==0.4.0.dev2",
-    "tigrbl-authz-policy-authority-derivation-graph==0.4.0.dev2",
-    "tigrbl-authority-graph-concrete==0.4.0.dev2",
-    "tigrbl-authz-policy-decision-engine==0.4.0.dev2",
-    "tigrbl-authorization-contracts==0.4.0.dev3",
-    "tigrbl-rp-session-runtime==0.4.0.dev3",
-    "tigrbl-authorization-admin-client==0.4.0.dev3",
-    "tigrbl-policy-decision-client==0.4.0.dev3",
-    "tigrbl-rp-session-client==0.4.0.dev3",
-    "tigrbl-policy-enforcement-asgi==0.4.0.dev3",
-    "tigrbl-auth-router-authorization-admin==0.4.0.dev3",
-    "tigrbl-auth-router-policy-decision==0.4.0.dev3",
-    "tigrbl-auth-router-rp-session==0.4.0.dev3",
-    "tigrbl-auth-backend-app-policy-decision==0.4.0.dev3",
-    "tigrbl-auth-backend-app-rp==0.4.0.dev3",
-    "tigrbl-authz-policy-invariant-registry==0.4.0.dev2",
-    "tigrbl-release-contracts==0.1.0",
-    "tigrbl-auth-release-certification==0.4.0.dev2",
-    "tigrbl-security-trust-contracts==0.1.0",
-    "tigrbl-security-trust-domain-bases==0.1.0",
-    "tigrbl-security-provenance-bases==0.1.0",
-    "tigrbl-authz-policy-bases==0.4.0.dev2",
-    "tigrbl-identity-model-bases==0.4.0.dev2",
-    "tigrbl-jose-bases==0.4.0.dev2",
-    "tigrbl-resource-server-bases==0.4.0.dev2",
-    "tigrbl-security-certificate-mtls==0.1.0",
-    "tigrbl-security-dpop-cnf-binding-validator==0.1.0",
-    "tigrbl-security-mtls-cnf-binding-validator==0.1.0",
-    "tigrbl-security-proof-dpop==0.1.0",
-    "tigrbl-security-proof-pkce==0.1.0",
-    "tigrbl-security-auth-context-acr-basic==0.1.0",
-    "tigrbl-security-auth-context-amr-basic==0.1.0",
-    "tigrbl-security-claims-provider-local==0.1.0",
-    "tigrbl-security-subject-pairwise-provider==0.1.0",
-    "tigrbl-security-webfinger-provider==0.1.0",
-    "tigrbl-security-oidc-federation-provider==0.1.0",
-    "tigrbl-security-sender-constraint-validator==0.1.0",
-    "tigrbl-security-signing-pqc==0.1.0",
-    "tigrbl-cose-cryptography-provider==0.4.0.dev2",
-    "tigrbl-security-token-introspection-client==0.1.0",
-    "tigrbl-security-token-jwks-cache==0.1.0",
-    "tigrbl-identity-authenticator-bases==0.1.0",
-    "tigrbl-public-key-authenticator-bases==0.4.0.dev2",
-    "tigrbl-authenticator-password-local==0.1.0",
-    "tigrbl-authenticator-api-key-local==0.1.0",
-    "tigrbl-authenticator-service-key-local==0.1.0",
-    "tigrbl-authenticator-client-secret-local==0.1.0",
-    "tigrbl-secret-hashing-bcrypt-provider==0.1.0",
-    "tigrbl-authenticator-session-local==0.1.0",
-    "tigrbl-authenticator-otp-local==0.1.0",
-    "tigrbl-authenticator-recovery-code-local==0.1.0",
-    "tigrbl-authenticator-mtls-client-cert==0.1.0",
-    "tigrbl-authenticator-dpop-proof==0.1.0",
-    "tigrbl-authenticator-remote-introspection==0.1.0",
-    "tigrbl-authenticator-federated-oidc==0.1.0",
-    "tigrbl-authz-resource-server-verifier==0.4.0.dev2",
-    "tigrbl-auth==0.4.0.dev2",
-    "tigrbl-auth-protocol-oauth==0.4.0.dev2",
-    "tigrbl-oauth-profile-jwt-access-token==0.4.0.dev2",
-    "tigrbl-auth-protocol-oidc==0.4.0.dev2",
-    "tigrbl-auth-protocol-webauthn==0.4.0.dev2",
-    "tigrbl-security-protocol-jose==0.4.0.dev2",
-    "tigrbl-identity-protocol-did-core==0.4.0.dev2",
-    "tigrbl-security-protocol-cose==0.4.0.dev2",
-    "tigrbl-security-protocol-jws==0.4.0.dev2",
-    "tigrbl-security-protocol-jwe==0.4.0.dev2",
-    "tigrbl-auth-protocol-oid4vci==0.4.0.dev2",
-    "tigrbl-auth-protocol-oid4vp==0.4.0.dev2",
-    "tigrbl-auth-protocol-authzen==0.4.0.dev2",
-    "tigrbl-auth-protocol-rp==0.4.0.dev2",
-    "tigrbl-credentials==0.4.0.dev2",
-    "tigrbl-digital-credential-issuance==0.4.0.dev2",
-    "tigrbl-digital-credential-issuance-capability==0.4.0.dev2",
-    "tigrbl-digital-credential-presentation==0.4.0.dev2",
-    "tigrbl-digital-credential-presentation-capability==0.4.0.dev2",
-    "tigrbl-grant-negotiation-capability==0.4.0.dev2",
-    "tigrbl-delegated-access-negotiation-capability==0.4.0.dev2",
-    "tigrbl-attestation-appraisal==0.4.0.dev2",
-    "tigrbl-attestation-appraisal-capability==0.4.0.dev2",
-    "tigrbl-security-events==0.4.0.dev2",
-    "tigrbl-security-event-delivery-capability==0.4.0.dev2",
-    "tigrbl-workload-identity==0.4.0.dev2",
-    "tigrbl-workload-identity-capability==0.4.0.dev2",
-    "tigrbl-identity-document-capability==0.4.0.dev2",
-    "tigrbl-protected-envelope-capability==0.4.0.dev2",
-    "tigrbl-possession-proof-capability==0.4.0.dev2",
-    "tigrbl-workload-credential-brokering-capability==0.4.0.dev2",
-    "tigrbl-authz-policy-admin-gate==0.4.0.dev2",
-    "tigrbl-auth-router-admin-gate==0.4.0.dev2",
-    "tigrbl-authz-policy==0.4.0.dev2",
-    "tigrbl-auth-plugin==0.4.0.dev2",
-    "tigrbl-authz-resource-server==0.4.0.dev2",
-    "tigrbl-identity-cli==0.4.0.dev2",
-    "tigrbl-identity-testkit==0.4.0.dev2",
-    "tigrbl-identity-admin==0.4.0.dev2",
-    "tigrbl-identity-author==0.4.0.dev2",
-    "tigrbl-identity-core==0.4.0.dev2",
-    "tigrbl-authn-credentials==0.4.0.dev2",
-    "tigrbl-identity-credentials==0.4.0.dev2",
-    "tigrbl-identity-jose==0.4.0.dev2",
-    "tigrbl-jose-cryptography-provider==0.4.0.dev2",
-    "tigrbl-digital-credential-issuer-local==0.4.0.dev2",
-    "tigrbl-digital-credential-status-provider==0.4.0.dev2",
-    "tigrbl-digital-credential-trust-provider==0.4.0.dev2",
-    "tigrbl-digital-presentation-verifier==0.4.0.dev2",
-    "tigrbl-eat-verifier-provider==0.4.0.dev2",
-    "tigrbl-attestation-reference-provider==0.4.0.dev2",
-    "tigrbl-attestation-appraiser==0.4.0.dev2",
-    "tigrbl-corim-store-provider==0.4.0.dev2",
-    "tigrbl-corim-reference-memory-provider==0.4.0.dev2",
-    "tigrbl-spiffe-workload-api-provider==0.4.0.dev2",
-    "tigrbl-spiffe-bundle-provider==0.4.0.dev2",
-    "tigrbl-svid-verifier-provider==0.4.0.dev2",
-    "tigrbl-did-resolver-provider==0.4.0.dev2",
-    "tigrbl-did-controller-provider==0.4.0.dev2",
-    "tigrbl-trust-anchor-provider==0.4.0.dev2",
-    "tigrbl-certificate-status-provider==0.4.0.dev2",
-    "tigrbl-certificate-path-validator==0.4.0.dev2",
-    "tigrbl-security-cose==0.4.0.dev2",
-    "tigrbl-attestation-packed-provider==0.4.0.dev2",
-    "tigrbl-attestation-u2f-provider==0.4.0.dev2",
-    "tigrbl-attestation-tpm-provider==0.4.0.dev2",
-    "tigrbl-fido-metadata-service-provider==0.4.0.dev2",
-    "tigrbl-mdoc-issuer-provider==0.4.0.dev2",
-    "tigrbl-mdoc-verifier-provider==0.4.0.dev2",
-    "tigrbl-security-event-replay-store==0.4.0.dev2",
-    "tigrbl-replay-memory-provider==0.4.0.dev2",
-    "tigrbl-replay-protection-capability==0.4.0.dev2",
-    "tigrbl-token-introspection-capability==0.4.0.dev2",
-    "tigrbl-token-issuance-capability==0.4.0.dev2",
-    "tigrbl-public-key-registration-capability==0.4.0.dev2",
-    "tigrbl-public-key-authentication-capability==0.4.0.dev2",
-    "tigrbl-public-key-credential-management-capability==0.4.0.dev2",
-    "tigrbl-authenticator-attestation-capability==0.4.0.dev2",
-    "tigrbl-token-exchange-capability==0.4.0.dev2",
-    "tigrbl-token-revocation-capability==0.4.0.dev2",
-    "tigrbl-api-key-authentication-capability==0.4.0.dev2",
-    "tigrbl-client-secret-authentication-capability==0.4.0.dev2",
-    "tigrbl-password-authentication-capability==0.4.0.dev2",
-    "tigrbl-service-key-authentication-capability==0.4.0.dev2",
-    "tigrbl-principal-authentication==0.4.0.dev2",
-    "tigrbl-policy-evaluation-capability==0.4.0.dev2",
-    "tigrbl-protocol-artifact-processing==0.4.0.dev2",
-    "tigrbl-artifact-processing-capability==0.4.0.dev2",
-    "tigrbl-pushed-authorization-capability==0.4.0.dev2",
-    "tigrbl-authorization-request-staging-capability==0.4.0.dev2",
-    "tigrbl-protected-resource-authorization-capability==0.4.0.dev2",
-    "tigrbl-client-registration-capability==0.4.0.dev2",
-    "tigrbl-auth-router-oauth-authorization==0.4.0.dev2",
-    "tigrbl-auth-router-oauth-device-authorization==0.4.0.dev2",
-    "tigrbl-auth-router-oauth-token-exchange==0.4.0.dev2",
-    "tigrbl-auth-router-oidc-userinfo==0.4.0.dev2",
-    "tigrbl-auth-router-oidc-logout==0.4.0.dev2",
-      "tigrbl-auth-router-oidc-discovery==0.4.0.dev2",
-      "tigrbl-auth-router-oauth-authorization-server-metadata==0.4.0.dev2",
-      "tigrbl-auth-router-oauth-protected-resource-metadata==0.4.0.dev2",
-      "tigrbl-auth-router-resource-validation-metadata==0.4.0.dev2",
-    "tigrbl-auth-router-session-login==0.4.0.dev2",
-    "tigrbl-auth-router-webauthn==0.4.0.dev2",
-    "tigrbl-auth-router-oauth-introspection==0.4.0.dev2",
-    "tigrbl-auth-router-oauth-revocation==0.4.0.dev2",
-    "tigrbl-auth-router-oauth-par==0.4.0.dev2",
-    "tigrbl-auth-router-oauth-registration==0.4.0.dev2",
-    "tigrbl-auth-router-oauth-token==0.4.0.dev2",
-    "tigrbl-auth-backend-app-core==0.4.0.dev2",
-    "tigrbl-auth-backend-app-developer==0.4.0.dev2",
-    "tigrbl-auth-backend-app-my-account==0.4.0.dev2",
-    "tigrbl-auth-backend-app-platform-admin==0.4.0.dev2",
-    "tigrbl-auth-backend-app-public==0.4.0.dev2",
-    "tigrbl-auth-backend-app-resource-validation==0.4.0.dev2",
-    "tigrbl-auth-backend-app-service-admin==0.4.0.dev2",
-    "tigrbl-auth-backend-app-tenant-admin==0.4.0.dev2",
-    "tigrbl-set-transmitter-provider==0.4.0.dev2",
-    "tigrbl-set-receiver-provider==0.4.0.dev2",
-    "tigrbl-wallet-attestation-verifier==0.4.0.dev2",
-    "tigrbl-key-attestation-verifier==0.4.0.dev2",
-    "tigrbl-platform-attestation-provider==0.4.0.dev2",
-    "tigrbl-identity-oauth==0.4.0.dev2",
-    "tigrbl-identity-oidc==0.4.0.dev2",
-    "tigrbl-identity-principals==0.4.0.dev2",
-    "tigrbl-identity-operator==0.4.0.dev2",
-    "tigrbl-identity-policy==0.4.0.dev2",
-    "tigrbl-identity-resource-server==0.4.0.dev2",
-    "tigrbl-identity-rp==0.4.0.dev2",
-    "tigrbl-identity-runtime==0.4.0.dev2",
-    "tigrbl-identity-server==0.4.0.dev2",
-    "tigrbl-identity-storage==0.4.0.dev2",
+    "tba-contracts-identity==0.4.0.dev2",
+    "tba-contracts-identity-assurance==0.4.0.dev2",
+    "tba-contracts-token==0.4.0.dev2",
+    "tba-contracts-attestation==0.4.0.dev2",
+    "tba-contracts-claim==0.4.0.dev2",
+    "tba-contracts-did==0.4.0.dev2",
+    "tba-contracts-digital-credential==0.4.0.dev2",
+    "tba-contracts-public-key-authentication==0.4.0.dev2",
+    "tba-contracts-replay==0.4.0.dev2",
+    "tba-contracts-security-event==0.4.0.dev2",
+    "tba-contracts-workload-identity==0.4.0.dev2",
+    "tba-contracts-identity-document==0.4.0.dev2",
+    "tba-contracts-protected-envelope==0.4.0.dev2",
+    "tba-contracts-proof-of-possession==0.4.0.dev2",
+    "tba-concrete-authorization-policy-rules==0.4.0.dev2",
+    "tba-concrete-authorization-policy-combiner-default==0.4.0.dev2",
+    "tba-concrete-authorization-policy-evaluators-default==0.4.0.dev2",
+    "tba-concrete-authorization-policy-attributes-mapping==0.4.0.dev2",
+    "tba-concrete-authorization-policy-obligations==0.4.0.dev2",
+    "tba-concrete-policy-decision-engine-default==0.4.0.dev2",
+    "tba-concrete-cose==0.4.0.dev2",
+    "tba-concrete-jws==0.4.0.dev2",
+    "tba-concrete-jwe==0.4.0.dev2",
+    "tba-concrete-jwt==0.4.0.dev2",
+    "tba-concrete-cwt==0.4.0.dev2",
+    "tba-concrete-oidc-id-token==0.4.0.dev2",
+    "tba-concrete-did-document==0.4.0.dev2",
+    "tba-concrete-vc-jose-credential==0.4.0.dev2",
+    "tba-concrete-vc-cose-credential==0.4.0.dev2",
+    "tba-concrete-wit==0.4.0.dev2",
+    "tba-concrete-wit-svid-credential==0.4.0.dev2",
+    "tba-concrete-wpt==0.4.0.dev2",
+    "tba-concrete-x509-svid-credential==0.4.0.dev2",
+    "tba-concrete-jwt-svid-credential==0.4.0.dev2",
+    "tba-concrete-cwt-svid-extension-credential==0.4.0.dev2",
+    "tba-provider-security-authorization-provenance-builder==0.1.0",
+    "tba-concrete-user-identity==0.4.0.dev2",
+    "tba-concrete-admin-identity==0.4.0.dev2",
+    "tba-concrete-service-identity==0.4.0.dev2",
+    "tba-concrete-client-identity==0.4.0.dev2",
+    "tba-concrete-machine-identity==0.4.0.dev2",
+    "tba-concrete-workload-identity==0.4.0.dev2",
+    "tba-concrete-device-identity==0.4.0.dev2",
+    "tba-concrete-credential-password==0.4.0.dev2",
+    "tba-concrete-credential-password-reset==0.4.0.dev2",
+    "tba-concrete-credential-api-key==0.4.0.dev2",
+    "tba-concrete-credential-service-key==0.4.0.dev2",
+    "tba-concrete-credential-client-secret==0.4.0.dev2",
+    "tba-concrete-credential-mfa==0.4.0.dev2",
+    "tba-concrete-credential-passkey==0.4.0.dev2",
+    "tba-concrete-service-credential==0.4.0.dev2",
+    "tba-concrete-webauthn-credential==0.4.0.dev2",
+    "tba-concrete-passwordless-credential==0.4.0.dev2",
+    "tba-concrete-mfa-factor==0.4.0.dev2",
+    "tba-concrete-credential-mtls-certificate==0.4.0.dev2",
+    "tba-concrete-credential-dpop-key==0.4.0.dev2",
+    "tba-concrete-sd-jwt-vc-credential==0.4.0.dev2",
+    "tba-concrete-mdoc-credential==0.4.0.dev2",
+    "tba-concrete-verifiable-credential==0.4.0.dev2",
+    "tba-concrete-verifiable-presentation==0.4.0.dev2",
+    "tba-concrete-eat-evidence==0.4.0.dev2",
+    "tba-concrete-jose==0.4.0.dev2",
+    "tba-concrete-sd-jwt==0.4.0.dev2",
+    "tba-concrete-svid==0.4.0.dev2",
+    "tba-concrete-did==0.4.0.dev2",
+    "tba-concrete-mdoc==0.4.0.dev2",
+    "tba-concrete-eat==0.4.0.dev2",
+    "tba-concrete-corim==0.4.0.dev2",
+    "tba-contracts-security-key-rotation-policy==0.1.0",
+    "tba-provider-identity-admin-auth-anomaly-detector==0.4.0.dev2",
+    "tba-provider-access-governance-memory==0.4.0.dev2",
+    "tba-provider-policy-administration-memory==0.4.0.dev2",
+    "tba-capability-account-self-service==0.4.0.dev2",
+    "tba-capability-administrative-resource==0.4.0.dev2",
+    "tba-capability-identity-administration==0.4.0.dev2",
+    "tba-capability-operator-administration==0.4.0.dev2",
+    "tba-capability-realm-administration==0.4.0.dev2",
+    "tba-capability-tenant-administration==0.4.0.dev2",
+    "tba-provider-identity-admin-relationship-graph==0.4.0.dev2",
+    "tba-durability-identity-admin-trust-federation-graph==0.4.0.dev2",
+    "tba-concrete-trust-federation-graph==0.4.0.dev2",
+    "tba-concrete-set==0.4.0.dev2",
+    "tba-bases-identity-claims==0.4.0.dev2",
+    "tba-bases-claim==0.4.0.dev2",
+    "tba-bases-identity==0.4.0.dev2",
+    "tba-bases-authentication-credential==0.4.0.dev2",
+    "tba-bases-authenticator==0.1.0",
+    "tba-bases-public-key-authentication==0.4.0.dev2",
+    "tba-bases-did==0.4.0.dev2",
+    "tba-bases-workload-identity==0.4.0.dev2",
+    "tba-bases-certificate==0.4.0.dev2",
+    "tba-bases-trust==0.4.0.dev2",
+    "tba-bases-protected-artifact==0.4.0.dev2",
+    "tba-bases-signing==0.4.0.dev2",
+    "tba-bases-key==0.4.0.dev2",
+    "tba-bases-encryption==0.4.0.dev2",
+    "tba-bases-proof-of-possession==0.4.0.dev2",
+    "tba-bases-identity-document==0.4.0.dev2",
+    "tba-bases-protected-envelope==0.4.0.dev2",
+    "tba-bases-token-introspection==0.4.0.dev2",
+    "tba-bases-digital-credential==0.4.0.dev2",
+    "tba-bases-attestation==0.4.0.dev2",
+    "tba-bases-cose==0.4.0.dev2",
+    "tba-bases-security-event==0.4.0.dev2",
+    "tba-bases-token==0.4.0.dev2",
+    "tba-bases-capability==0.4.0.dev2",
+    "tba-bases-replay==0.4.0.dev2",
+    "tba-bases-authentication-assurance==0.4.0.dev2",
+    "tba-bases-authentication-context==0.4.0.dev2",
+    "tba-bases-identity-assurance==0.4.0.dev2",
+    "tba-bases-security-artifact==0.4.0.dev2",
+    "tba-concrete-claim-issuer==0.4.0.dev2",
+    "tba-concrete-claim-subject==0.4.0.dev2",
+    "tba-concrete-claim-audience==0.4.0.dev2",
+    "tba-concrete-claim-expiration==0.4.0.dev2",
+    "tba-concrete-claim-not-before==0.4.0.dev2",
+    "tba-concrete-claim-issued-at==0.4.0.dev2",
+    "tba-concrete-claim-jwt-id==0.4.0.dev2",
+    "tba-protocol-jwt==0.4.0.dev2",
+    "tba-concrete-claim-authentication-time==0.4.0.dev2",
+    "tba-concrete-claim-nonce==0.4.0.dev2",
+    "tba-concrete-claim-authentication-context==0.4.0.dev2",
+    "tba-concrete-claim-authentication-methods==0.4.0.dev2",
+    "tba-concrete-claim-authorized-party==0.4.0.dev2",
+    "tba-concrete-claim-confirmation==0.4.0.dev2",
+    "tba-concrete-claim-cwt-confirmation==0.4.0.dev2",
+    "tba-concrete-claim-workload-token-hash==0.4.0.dev2",
+    "tba-concrete-claim-transaction-token-hash==0.4.0.dev2",
+    "tba-concrete-claim-other-token-hashes==0.4.0.dev2",
+    "tba-concrete-claim-scope==0.4.0.dev2",
+    "tba-concrete-claim-client-id==0.4.0.dev2",
+    "tba-concrete-claim-verified-claims==0.4.0.dev2",
+    "tba-concrete-claim-place-of-birth==0.4.0.dev2",
+    "tba-concrete-claim-nationalities==0.4.0.dev2",
+    "tba-concrete-claim-birth-family-name==0.4.0.dev2",
+    "tba-concrete-claim-birth-given-name==0.4.0.dev2",
+    "tba-concrete-claim-birth-middle-name==0.4.0.dev2",
+    "tba-concrete-claim-salutation==0.4.0.dev2",
+    "tba-concrete-claim-title==0.4.0.dev2",
+    "tba-concrete-claim-msisdn==0.4.0.dev2",
+    "tba-concrete-claim-also-known-as==0.4.0.dev2",
+    "tba-concrete-claim-address-country-code==0.4.0.dev2",
+    "tba-concrete-claim-credential-type==0.4.0.dev2",
+    "tba-concrete-claim-credential-status==0.4.0.dev2",
+    "tba-concrete-claim-security-events==0.4.0.dev2",
+    "tba-concrete-claim-transaction-id==0.4.0.dev2",
+    "tba-concrete-claim-eat-profile==0.4.0.dev2",
+    "tba-concrete-claim-http-method==0.4.0.dev2",
+    "tba-concrete-claim-http-uri==0.4.0.dev2",
+    "tba-concrete-claim-access-token-hash==0.4.0.dev2",
+    "tba-concrete-claim-access-token-digest==0.4.0.dev2",
+    "tba-concrete-claim-sd-hash==0.4.0.dev2",
+    "tba-concrete-claim-eat-nonce==0.4.0.dev2",
+    "tba-concrete-claim-ueid==0.4.0.dev2",
+    "tba-concrete-claim-eat-submodules==0.4.0.dev2",
+    "tba-concrete-claim-actor==0.4.0.dev2",
+    "tba-concrete-claim-may-act==0.4.0.dev2",
+    "tba-concrete-claim-name==0.4.0.dev2",
+    "tba-concrete-claim-given-name==0.4.0.dev2",
+    "tba-concrete-claim-family-name==0.4.0.dev2",
+    "tba-concrete-claim-middle-name==0.4.0.dev2",
+    "tba-concrete-claim-nickname==0.4.0.dev2",
+    "tba-concrete-claim-preferred-username==0.4.0.dev2",
+    "tba-concrete-claim-profile-uri==0.4.0.dev2",
+    "tba-concrete-claim-picture-uri==0.4.0.dev2",
+    "tba-concrete-claim-website-uri==0.4.0.dev2",
+    "tba-concrete-claim-email==0.4.0.dev2",
+    "tba-concrete-claim-email-verified==0.4.0.dev2",
+    "tba-concrete-claim-gender==0.4.0.dev2",
+    "tba-concrete-claim-birthdate==0.4.0.dev2",
+    "tba-concrete-claim-zoneinfo==0.4.0.dev2",
+    "tba-concrete-claim-locale==0.4.0.dev2",
+    "tba-concrete-claim-phone-number==0.4.0.dev2",
+    "tba-concrete-claim-phone-number-verified==0.4.0.dev2",
+    "tba-concrete-claim-address==0.4.0.dev2",
+    "tba-concrete-claim-updated-at==0.4.0.dev2",
+    "tba-concrete-claim-subject-identifiers==0.4.0.dev2",
+    "tba-concrete-claim-assertions==0.4.0.dev2",
+    "tba-concrete-claim-updated-at-rfc3339==0.4.0.dev2",
+    "tba-concrete-claim-authorization-code-hash==0.4.0.dev2",
+    "tba-concrete-claim-state-hash==0.4.0.dev2",
+    "tba-concrete-claim-session-id==0.4.0.dev2",
+    "tba-concrete-claim-cwt-issuer==0.4.0.dev2",
+    "tba-concrete-claim-cwt-subject==0.4.0.dev2",
+    "tba-concrete-claim-cwt-audience==0.4.0.dev2",
+    "tba-concrete-claim-cwt-expiration==0.4.0.dev2",
+    "tba-concrete-claim-cwt-not-before==0.4.0.dev2",
+    "tba-concrete-claim-cwt-issued-at==0.4.0.dev2",
+    "tba-concrete-claim-cwt-id==0.4.0.dev2",
+    "tba-protocol-cwt==0.4.0.dev2",
+    "tba-protocol-workload-spiffe-svid==0.4.0.dev2",
+    "tba-example-workload-credential-profiles==0.4.0.dev2",
+    "tba-testkit-workload-credential-conformance==0.4.0.dev2",
+    "tba-protocol-workload-spiffe-broker-api==0.4.0.dev2",
+    "tba-protocol-workload-spiffe-workload-api==0.4.0.dev2",
+    "tba-profile-workload-credential-cwt-svid-extension==0.4.0.dev2",
+    "tba-profile-workload-credential-spiffe-wit-svid==0.4.0.dev2",
+    "tba-profile-workload-proof-wimse-wpt==0.4.0.dev2",
+    "tba-profile-workload-credential-wimse-wit==0.4.0.dev2",
+    "tba-protocol-gnap==0.4.0.dev2",
+    "tba-profile-haip==0.4.0.dev2",
+    "tba-profile-fido2-server==0.4.0.dev2",
+    "tba-protocol-security-event-set==0.4.0.dev2",
+    "tba-protocol-attestation-eat==0.4.0.dev2",
+    "tba-protocol-attestation-corim==0.4.0.dev2",
+    "tba-profile-credential-sd-jwt-vc==0.4.0.dev2",
+    "tba-profile-credential-vc-jose-cose==0.4.0.dev2",
+    "tba-protocol-credential-iso-mdoc==0.4.0.dev2",
+    "tba-protocol-credential-w3c-vcdm==0.4.0.dev2",
+    "tba-concrete-authorization-scope-set-matcher==0.4.0.dev2",
+    "tba-concrete-public-subject-identifier==0.4.0.dev2",
+    "tba-concrete-pairwise-subject-identifier==0.4.0.dev2",
+    "tba-concrete-acr-evaluator-basic==0.4.0.dev2",
+    "tba-concrete-amr-evaluator-basic==0.4.0.dev2",
+    "tba-concrete-authorization-provenance==0.4.0.dev2",
+    "tba-concrete-dpop-confirmation-binding==0.4.0.dev2",
+    "tba-concrete-mtls-confirmation-binding==0.4.0.dev2",
+    "tba-concrete-pkce==0.4.0.dev2",
+    "tba-concrete-identity-assurance==0.4.0.dev2",
+    "tba-concrete-capability==0.4.0.dev2",
+    "tba-concrete-capability-default==0.4.0.dev2",
+    "tba-capability-access-governance==0.4.0.dev2",
+    "tba-capability-adaptive-authentication==0.4.0.dev2",
+    "tba-capability-mfa-challenge==0.4.0.dev2",
+    "tba-capability-key-administration==0.4.0.dev2",
+    "tba-capability-policy-administration==0.4.0.dev2",
+    "tba-capability-policy-assurance==0.4.0.dev2",
+    "tba-durability-authorization-policy-authority-derivation-graph==0.4.0.dev2",
+    "tba-concrete-authority-graph==0.4.0.dev2",
+    "tba-provider-authorization-policy-decision-engine==0.4.0.dev2",
+    "tba-contracts-authorization==0.4.0.dev3",
+    "tba-runtime-relying-party-session==0.4.0.dev3",
+    "tba-client-authorization-admin==0.4.0.dev3",
+    "tba-client-policy-decision==0.4.0.dev3",
+    "tba-client-relying-party-session==0.4.0.dev3",
+    "tba-middleware-policy-enforcement-asgi==0.4.0.dev3",
+    "tba-router-authorization-admin==0.4.0.dev3",
+    "tba-router-policy-decision==0.4.0.dev3",
+    "tba-router-relying-party-session==0.4.0.dev3",
+    "tba-app-backend-policy-decision==0.4.0.dev3",
+    "tba-app-backend-relying-party==0.4.0.dev3",
+    "tba-contracts-release==0.1.0",
+    "tba-certification-release==0.4.0.dev2",
+    "tba-contracts-security-trust==0.1.0",
+    "tba-bases-security-trust-domain==0.1.0",
+    "tba-bases-security-provenance==0.1.0",
+    "tba-bases-authorization-policy==0.4.0.dev2",
+    "tba-bases-identity-model==0.4.0.dev2",
+    "tba-bases-jose==0.4.0.dev2",
+    "tba-bases-resource-server==0.4.0.dev2",
+    "tba-provider-security-certificate-mtls==0.1.0",
+    "tba-provider-security-dpop-cnf-binding-validator==0.1.0",
+    "tba-provider-security-mtls-cnf-binding-validator==0.1.0",
+    "tba-provider-security-proof-dpop==0.1.0",
+    "tba-provider-security-proof-pkce==0.1.0",
+    "tba-provider-authentication-context-acr-basic==0.1.0",
+    "tba-provider-authentication-context-amr-basic==0.1.0",
+    "tba-provider-security-claims-provider-local==0.1.0",
+    "tba-provider-security-subject-pairwise==0.1.0",
+    "tba-provider-security-webfinger==0.1.0",
+    "tba-provider-security-oidc-federation==0.1.0",
+    "tba-provider-security-signing-pqc==0.1.0",
+    "tba-provider-cose-cryptography==0.4.0.dev2",
+    "tba-provider-security-token-introspection-client==0.1.0",
+    "tba-provider-security-token-jwks-cache==0.1.0",
+    "tba-bases-identity-authenticator==0.1.0",
+    "tba-bases-public-key-authenticator==0.4.0.dev2",
+    "tba-provider-authenticator-password-local==0.1.0",
+    "tba-provider-authenticator-api-key-local==0.1.0",
+    "tba-provider-authenticator-service-key-local==0.1.0",
+    "tba-provider-authenticator-client-secret-local==0.1.0",
+    "tba-provider-secret-hashing-bcrypt==0.1.0",
+    "tba-provider-authenticator-session-local==0.1.0",
+    "tba-provider-authenticator-otp-local==0.1.0",
+    "tba-provider-authenticator-recovery-code-local==0.1.0",
+    "tba-provider-authenticator-mtls-client-cert==0.1.0",
+    "tba-provider-authenticator-dpop-proof==0.1.0",
+    "tba-provider-authenticator-remote-introspection==0.1.0",
+    "tba-provider-authenticator-federated-oidc==0.1.0",
+    "tba-provider-authorization-resource-server-verifier==0.4.0.dev2",
+    "tba-auth==0.4.0.dev2",
+    "tba-protocol-oauth==0.4.0.dev2",
+    "tba-profile-oauth-jwt-access-token==0.4.0.dev2",
+    "tba-protocol-oidc==0.4.0.dev2",
+    "tba-protocol-webauthn==0.4.0.dev2",
+    "tba-protocol-security-jose==0.4.0.dev2",
+    "tba-protocol-identity-did-core==0.4.0.dev2",
+    "tba-protocol-security-cose==0.4.0.dev2",
+    "tba-protocol-security-jws==0.4.0.dev2",
+    "tba-protocol-security-jwe==0.4.0.dev2",
+    "tba-protocol-oid4vci==0.4.0.dev2",
+    "tba-protocol-oid4vp==0.4.0.dev2",
+    "tba-protocol-authzen==0.4.0.dev2",
+    "tba-protocol-oidc-relying-party==0.4.0.dev2",
+    "tba-credentials==0.4.0.dev2",
+    "tba-capability-digital-credential-issuance==0.4.0.dev2",
+    "tba-capability-digital-credential-presentation==0.4.0.dev2",
+    "tba-capability-delegated-access-negotiation==0.4.0.dev2",
+    "tba-capability-attestation-appraisal==0.4.0.dev2",
+    "tba-capability-security-event-delivery==0.4.0.dev2",
+    "tba-capability-workload-identity==0.4.0.dev2",
+    "tba-capability-identity-document==0.4.0.dev2",
+    "tba-capability-protected-envelope==0.4.0.dev2",
+    "tba-capability-possession-proof==0.4.0.dev2",
+    "tba-capability-workload-credential-brokering==0.4.0.dev2",
+    "tba-router-admin-gate==0.4.0.dev2",
+    "tba-runtime-authorization-policy==0.4.0.dev2",
+    "tba-plugin-tigrbl==0.4.0.dev2",
+    "tba-protocol-authorization-resource-server==0.4.0.dev2",
+    "tba-cli-identity==0.4.0.dev2",
+    "tba-testkit-identity==0.4.0.dev2",
+    "tba-runtime-identity-administration==0.4.0.dev2",
+    "tba-runtime-identity-authoring==0.4.0.dev2",
+    "tba-primitives-identity==0.4.0.dev2",
+    "tba-provider-identity-jose==0.4.0.dev2",
+    "tba-provider-jose-cryptography==0.4.0.dev2",
+    "tba-provider-digital-credential-status==0.4.0.dev2",
+    "tba-provider-digital-credential-trust==0.4.0.dev2",
+    "tba-provider-eat-verifier==0.4.0.dev2",
+    "tba-provider-attestation-reference==0.4.0.dev2",
+    "tba-provider-attestation-appraiser==0.4.0.dev2",
+    "tba-provider-corim-reference-memory==0.4.0.dev2",
+    "tba-provider-spiffe-workload-api==0.4.0.dev2",
+    "tba-provider-spiffe-bundle==0.4.0.dev2",
+    "tba-provider-did-resolver==0.4.0.dev2",
+    "tba-provider-did-controller==0.4.0.dev2",
+    "tba-provider-trust-anchor==0.4.0.dev2",
+    "tba-provider-certificate-status==0.4.0.dev2",
+    "tba-provider-certificate-path-validator==0.4.0.dev2",
+    "tba-provider-security-cose==0.4.0.dev2",
+    "tba-provider-attestation-packed==0.4.0.dev2",
+    "tba-provider-attestation-u2f==0.4.0.dev2",
+    "tba-provider-attestation-tpm==0.4.0.dev2",
+    "tba-provider-fido-metadata-service==0.4.0.dev2",
+    "tba-provider-mdoc-issuer==0.4.0.dev2",
+    "tba-provider-mdoc-verifier==0.4.0.dev2",
+    "tba-provider-replay-memory==0.4.0.dev2",
+    "tba-capability-replay-protection==0.4.0.dev2",
+    "tba-capability-token-introspection==0.4.0.dev2",
+    "tba-capability-token-issuance==0.4.0.dev2",
+    "tba-capability-public-key-registration==0.4.0.dev2",
+    "tba-capability-public-key-authentication==0.4.0.dev2",
+    "tba-capability-public-key-credential-management==0.4.0.dev2",
+    "tba-capability-authenticator-attestation==0.4.0.dev2",
+    "tba-capability-token-exchange==0.4.0.dev2",
+    "tba-capability-token-revocation==0.4.0.dev2",
+    "tba-capability-api-key-authentication==0.4.0.dev2",
+    "tba-capability-client-secret-authentication==0.4.0.dev2",
+    "tba-capability-password-authentication==0.4.0.dev2",
+    "tba-capability-service-key-authentication==0.4.0.dev2",
+    "tba-capability-policy-evaluation==0.4.0.dev2",
+    "tba-capability-artifact-processing==0.4.0.dev2",
+    "tba-capability-authorization-request-staging==0.4.0.dev2",
+    "tba-capability-protected-resource-authorization==0.4.0.dev2",
+    "tba-capability-client-registration==0.4.0.dev2",
+    "tba-router-oauth-authorization==0.4.0.dev2",
+    "tba-router-oauth-device-authorization==0.4.0.dev2",
+    "tba-router-oauth-token-exchange==0.4.0.dev2",
+    "tba-router-oidc-userinfo==0.4.0.dev2",
+    "tba-router-oidc-logout==0.4.0.dev2",
+      "tba-router-oidc-discovery==0.4.0.dev2",
+      "tba-router-oauth-authorization-server-metadata==0.4.0.dev2",
+      "tba-router-oauth-protected-resource-metadata==0.4.0.dev2",
+      "tba-router-resource-validation-metadata==0.4.0.dev2",
+    "tba-router-session-login==0.4.0.dev2",
+    "tba-router-webauthn==0.4.0.dev2",
+    "tba-router-oauth-introspection==0.4.0.dev2",
+    "tba-router-oauth-revocation==0.4.0.dev2",
+    "tba-router-oauth-pushed-authorization-request==0.4.0.dev2",
+    "tba-router-oauth-registration==0.4.0.dev2",
+    "tba-router-oauth-token==0.4.0.dev2",
+    "tba-app-backend-core==0.4.0.dev2",
+    "tba-app-backend-developer==0.4.0.dev2",
+    "tba-app-backend-my-account==0.4.0.dev2",
+    "tba-app-backend-platform-admin==0.4.0.dev2",
+    "tba-app-backend-public==0.4.0.dev2",
+    "tba-app-backend-resource-validation==0.4.0.dev2",
+    "tba-app-backend-service-admin==0.4.0.dev2",
+    "tba-app-backend-tenant-admin==0.4.0.dev2",
+    "tba-provider-set-transmitter==0.4.0.dev2",
+    "tba-provider-set-receiver==0.4.0.dev2",
+    "tba-provider-wallet-attestation-verifier==0.4.0.dev2",
+    "tba-provider-key-attestation-verifier==0.4.0.dev2",
+    "tba-provider-platform-attestation==0.4.0.dev2",
+    "tba-concrete-identity-principals==0.4.0.dev2",
+    "tba-operator-identity==0.4.0.dev2",
+    "tba-runtime-identity==0.4.0.dev2",
+    "tba-server-identity==0.4.0.dev2",
+    "tba-storage-core==0.4.0.dev2",
     "tigrbl-migrations==0.4.5.dev4",
-    "tigrbl-identity-storage-access-governance==0.4.0.dev2",
-    "tigrbl-identity-storage-attestation==0.4.0.dev2",
-    "tigrbl-identity-storage-audit==0.4.0.dev2",
-    "tigrbl-identity-storage-authentication==0.4.0.dev2",
-    "tigrbl-identity-storage-authority-graph==0.4.0.dev2",
-    "tigrbl-identity-storage-authorization-policy==0.4.0.dev2",
-    "tigrbl-identity-storage-certificate==0.4.0.dev2",
-    "tigrbl-identity-storage-claims==0.4.0.dev2",
-    "tigrbl-identity-storage-consent==0.4.0.dev2",
-    "tigrbl-identity-storage-delegation==0.4.0.dev2",
-    "tigrbl-identity-storage-did==0.4.0.dev2",
-    "tigrbl-identity-storage-digital-credential==0.4.0.dev2",
-    "tigrbl-identity-storage-federation==0.4.0.dev2",
-    "tigrbl-identity-storage-principals==0.4.0.dev2",
-    "tigrbl-identity-storage-gnap==0.4.0.dev2",
-    "tigrbl-identity-storage-key-material==0.4.0.dev2",
-    "tigrbl-identity-storage-oauth==0.4.0.dev2",
-    "tigrbl-identity-storage-oidc==0.4.0.dev2",
-    "tigrbl-identity-storage-operator==0.4.0.dev2",
-    "tigrbl-identity-storage-presentation==0.4.0.dev2",
-    "tigrbl-identity-storage-release-governance==0.4.0.dev2",
-    "tigrbl-identity-storage-replay-protection==0.4.0.dev2",
-    "tigrbl-identity-storage-residency==0.4.0.dev2",
-    "tigrbl-identity-storage-scim==0.4.0.dev2",
-    "tigrbl-identity-storage-security-event==0.4.0.dev2",
-    "tigrbl-identity-storage-token==0.4.0.dev2",
-    "tigrbl-identity-storage-tenancy==0.4.0.dev2",
-    "tigrbl-identity-storage-trust-federation-graph==0.4.0.dev2",
-    "tigrbl-identity-storage-webauthn==0.4.0.dev2",
-    "tigrbl-identity-storage-workload-identity==0.4.0.dev2",
-    "tigrbl-identity-storage-runtime==0.4.0.dev2",
-    "tigrbl-identity-durability==0.4.0.dev2",
-    "tigrbl-session-durability==0.4.0.dev2",
-    "tigrbl-consent-durability==0.4.0.dev2",
-    "tigrbl-token-durability==0.4.0.dev2",
-    "tigrbl-oauth-state-durability==0.4.0.dev2",
-    "tigrbl-oidc-state-durability==0.4.0.dev2",
-    "tigrbl-delegation-durability==0.4.0.dev2",
-    "tigrbl-authorization-policy-durability==0.4.0.dev2",
-    "tigrbl-digital-credential-durability==0.4.0.dev2",
-    "tigrbl-presentation-durability==0.4.0.dev2",
-    "tigrbl-attestation-durability==0.4.0.dev2",
-    "tigrbl-security-event-durability==0.4.0.dev2",
-    "tigrbl-workload-identity-durability==0.4.0.dev2",
-    "tigrbl-replay-protection-durability==0.4.0.dev2",
-    "tigrbl-webauthn-durability==0.4.0.dev2",
-    "tigrbl-gnap-state-durability==0.4.0.dev2",
-    "tigrbl-audit-durability==0.4.0.dev2",
-    "tigrbl-key-material-durability==0.4.0.dev2",
-    "tigrbl-authority-graph-durability==0.4.0.dev2",
-    "tigrbl-trust-federation-graph-durability==0.4.0.dev2",
+    "tba-storage-access-governance==0.4.0.dev2",
+    "tba-storage-attestation==0.4.0.dev2",
+    "tba-storage-audit==0.4.0.dev2",
+    "tba-storage-authentication==0.4.0.dev2",
+    "tba-storage-authority-graph==0.4.0.dev2",
+    "tba-storage-authorization-policy==0.4.0.dev2",
+    "tba-storage-certificate==0.4.0.dev2",
+    "tba-storage-claims==0.4.0.dev2",
+    "tba-storage-consent==0.4.0.dev2",
+    "tba-storage-delegation==0.4.0.dev2",
+    "tba-storage-did==0.4.0.dev2",
+    "tba-storage-digital-credential==0.4.0.dev2",
+    "tba-storage-federation==0.4.0.dev2",
+    "tba-storage-principals==0.4.0.dev2",
+    "tba-storage-gnap==0.4.0.dev2",
+    "tba-storage-key-material==0.4.0.dev2",
+    "tba-storage-oauth==0.4.0.dev2",
+    "tba-storage-oidc==0.4.0.dev2",
+    "tba-storage-operator==0.4.0.dev2",
+    "tba-storage-presentation==0.4.0.dev2",
+    "tba-storage-release-governance==0.4.0.dev2",
+    "tba-storage-replay-protection==0.4.0.dev2",
+    "tba-storage-residency==0.4.0.dev2",
+    "tba-storage-scim==0.4.0.dev2",
+    "tba-storage-security-event==0.4.0.dev2",
+    "tba-storage-token==0.4.0.dev2",
+    "tba-storage-tenancy==0.4.0.dev2",
+    "tba-storage-trust-federation-graph==0.4.0.dev2",
+    "tba-storage-webauthn==0.4.0.dev2",
+    "tba-storage-workload-identity==0.4.0.dev2",
+    "tba-runtime-identity-storage==0.4.0.dev2",
+    "tba-durability-identity==0.4.0.dev2",
+    "tba-durability-session==0.4.0.dev2",
+    "tba-durability-consent==0.4.0.dev2",
+    "tba-durability-token==0.4.0.dev2",
+    "tba-durability-oauth-state==0.4.0.dev2",
+    "tba-durability-oidc-state==0.4.0.dev2",
+    "tba-durability-delegation==0.4.0.dev2",
+    "tba-durability-authorization-policy==0.4.0.dev2",
+    "tba-durability-digital-credential==0.4.0.dev2",
+    "tba-durability-presentation==0.4.0.dev2",
+    "tba-durability-attestation==0.4.0.dev2",
+    "tba-durability-security-event==0.4.0.dev2",
+    "tba-durability-workload-identity==0.4.0.dev2",
+    "tba-durability-replay-protection==0.4.0.dev2",
+    "tba-durability-webauthn==0.4.0.dev2",
+    "tba-durability-gnap-state==0.4.0.dev2",
+    "tba-durability-audit==0.4.0.dev2",
+    "tba-durability-key-material==0.4.0.dev2",
+    "tba-durability-authority-graph==0.4.0.dev2",
+    "tba-durability-trust-federation-graph==0.4.0.dev2",
     "tomli==2.4.0; python_version < '3.11'",
 ]
 
@@ -531,7 +496,7 @@ test = [
     "ssot-registry==0.2.17",
 ]
 examples = [
-    "oauth-device-authorization-cli-example==0.1.0",
+    "tba-example-oauth-device-authorization-cli==0.1.0",
 ]
 postgres = [
     "asyncpg==0.31.0",
@@ -541,17 +506,17 @@ sqlite = [
     "aiosqlite==0.22.1",
 ]
 uvicorn = [
-    "tigrbl-identity-runtime[uvicorn]==0.4.0.dev2",
+    "tba-runtime-identity[uvicorn]==0.4.0.dev2",
 ]
 hypercorn = [
-    "tigrbl-identity-runtime[hypercorn]==0.4.0.dev2",
+    "tba-runtime-identity[hypercorn]==0.4.0.dev2",
 ]
 tigrcorn = [
-    "tigrbl-identity-runtime[tigrcorn]==0.4.0.dev2",
+    "tba-runtime-identity[tigrcorn]==0.4.0.dev2",
 ]
-# Aggregate runner extra delegates concrete runner pins to tigrbl-identity-runtime.
+# Aggregate runner extra delegates concrete runner pins to tba-runtime-identity.
 servers = [
-    "tigrbl-identity-runtime[servers]==0.4.0.dev2",
+    "tba-runtime-identity[servers]==0.4.0.dev2",
 ]
 
 [project.urls]
@@ -559,7 +524,7 @@ Repository = "https://github.com/swarmauri/swarmauri-sdk"
 Homepage = "https://github.com/swarmauri/swarmauri-sdk"
 
 [tool.pytest.ini_options]
-pythonpath = ["pkgs/60-runtime/tigrbl-identity-cli/src"]
+pythonpath = ["pkgs/60-runtime/tba-cli-identity/src"]
 testpaths = ["tests"]
 norecursedirs = ["combined", "scripts", ".pytest_cache", "__pycache__", ".uv-cache", ".venv", "dist", ".benchmarks"]
 markers = [
@@ -591,9 +556,9 @@ addopts = "--import-mode=importlib --basetemp=.pytest-tmp"
 
 [tool.ruff.lint.per-file-ignores]
 "pkgs/**/src/**/__init__.py" = ["F401", "F403", "F405"]
-"pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/**/_ops.py" = ["E402"]
-"pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/token_record/_ops/__init__.py" = ["E402"]
-"pkgs/60-runtime/tigrbl-identity-cli/src/tigrbl_identity_cli/cli/*/_*.py" = [
+"pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/**/_ops.py" = ["E402"]
+"pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/token_record/_ops/__init__.py" = ["E402"]
+"pkgs/60-runtime/tba-cli-identity/src/tba_cli_identity/cli/*/_*.py" = [
     "E402",
     "F401",
     "F405",
@@ -625,509 +590,466 @@ package = false
 
 [tool.uv.sources]
 tigrbl = { git = "https://github.com/tigrbl/tigrbl.git", rev = "1368ad888277926e3a5e322081d0306cbbc7ebf3", subdirectory = "pkgs/80_facade/tigrbl" }
-tigrbl-authenticator-webauthn-local = { path = "pkgs/deprecated/tigrbl-authenticator-webauthn-local", editable = true }
-tigrbl-claim-access-token-hash-oidc-concrete = { path = "pkgs/deprecated/tigrbl-claim-access-token-hash-oidc-concrete", editable = true }
-tigrbl-eap-acr-concrete = { path = "pkgs/deprecated/tigrbl-eap-acr-concrete", editable = true }
-tigrbl-oauth-bases = { path = "pkgs/deprecated/tigrbl-oauth-bases", editable = true }
-tigrbl-oauth-scope-matcher = { path = "pkgs/deprecated/tigrbl-oauth-scope-matcher", editable = true }
-tigrbl-oidc-bases = { path = "pkgs/deprecated/tigrbl-oidc-bases", editable = true }
-tigrbl-oidc-claims-concrete = { path = "pkgs/deprecated/tigrbl-oidc-claims-concrete", editable = true }
-tigrbl-oidc-subject-strategy = { path = "pkgs/deprecated/tigrbl-oidc-subject-strategy", editable = true }
-tigrbl-release-contracts = { path = "pkgs/02-contracts/tigrbl-release-contracts", editable = true }
-tigrbl-auth-release-certification = { path = "pkgs/60-runtime/tigrbl-auth-release-certification", editable = true }
-tigrbl-security-trust-contracts = { path = "pkgs/02-contracts/tigrbl-security-trust-contracts", editable = true }
-tigrbl-security-trust-domain-bases = { path = "pkgs/05-bases/tigrbl-security-trust-domain-bases", editable = true }
-tigrbl-claim-bases = { path = "pkgs/05-bases/tigrbl-claim-bases", editable = true }
-tigrbl-identity-bases = { path = "pkgs/05-bases/tigrbl-identity-bases", editable = true }
-tigrbl-authentication-credential-bases = { path = "pkgs/05-bases/tigrbl-authentication-credential-bases", editable = true }
-tigrbl-authenticator-bases = { path = "pkgs/05-bases/tigrbl-authenticator-bases", editable = true }
-tigrbl-public-key-authentication-bases = { path = "pkgs/05-bases/tigrbl-public-key-authentication-bases", editable = true }
-tigrbl-did-bases = { path = "pkgs/05-bases/tigrbl-did-bases", editable = true }
-tigrbl-workload-identity-bases = { path = "pkgs/05-bases/tigrbl-workload-identity-bases", editable = true }
-tigrbl-certificate-bases = { path = "pkgs/05-bases/tigrbl-certificate-bases", editable = true }
-tigrbl-trust-bases = { path = "pkgs/05-bases/tigrbl-trust-bases", editable = true }
-tigrbl-protected-artifact-bases = { path = "pkgs/05-bases/tigrbl-protected-artifact-bases", editable = true }
-tigrbl-signing-bases = { path = "pkgs/05-bases/tigrbl-signing-bases", editable = true }
-tigrbl-key-bases = { path = "pkgs/05-bases/tigrbl-key-bases", editable = true }
-tigrbl-encryption-bases = { path = "pkgs/05-bases/tigrbl-encryption-bases", editable = true }
-tigrbl-proof-of-possession-bases = { path = "pkgs/05-bases/tigrbl-proof-of-possession-bases", editable = true }
-tigrbl-identity-document-bases = { path = "pkgs/05-bases/tigrbl-identity-document-bases", editable = true }
-tigrbl-protected-envelope-bases = { path = "pkgs/05-bases/tigrbl-protected-envelope-bases", editable = true }
-tigrbl-token-introspection-bases = { path = "pkgs/05-bases/tigrbl-token-introspection-bases", editable = true }
-tigrbl-security-provenance-bases = { path = "pkgs/05-bases/tigrbl-security-provenance-bases", editable = true }
-tigrbl-authz-policy-bases = { path = "pkgs/05-bases/tigrbl-authz-policy-bases", editable = true }
-tigrbl-identity-model-bases = { path = "pkgs/05-bases/tigrbl-identity-model-bases", editable = true }
-tigrbl-jose-bases = { path = "pkgs/05-bases/tigrbl-jose-bases", editable = true }
-tigrbl-cose-bases = { path = "pkgs/05-bases/tigrbl-cose-bases", editable = true }
-tigrbl-resource-server-bases = { path = "pkgs/05-bases/tigrbl-resource-server-bases", editable = true }
-tigrbl-acr-evaluator-basic-concrete = { path = "pkgs/10-concrete/tigrbl-acr-evaluator-basic-concrete", editable = true }
-tigrbl-amr-evaluator-basic-concrete = { path = "pkgs/10-concrete/tigrbl-amr-evaluator-basic-concrete", editable = true }
-tigrbl-authorization-provenance-concrete = { path = "pkgs/10-concrete/tigrbl-authorization-provenance-concrete", editable = true }
-tigrbl-dpop-confirmation-binding-concrete = { path = "pkgs/10-concrete/tigrbl-dpop-confirmation-binding-concrete", editable = true }
-tigrbl-mtls-confirmation-binding-concrete = { path = "pkgs/10-concrete/tigrbl-mtls-confirmation-binding-concrete", editable = true }
-tigrbl-pkce-concrete = { path = "pkgs/10-concrete/tigrbl-pkce-concrete", editable = true }
-tigrbl-security-certificate-mtls = { path = "pkgs/20-providers/tigrbl-security-certificate-mtls", editable = true }
-tigrbl-security-dpop-cnf-binding-validator = { path = "pkgs/20-providers/tigrbl-security-dpop-cnf-binding-validator", editable = true }
-tigrbl-security-mtls-cnf-binding-validator = { path = "pkgs/20-providers/tigrbl-security-mtls-cnf-binding-validator", editable = true }
-tigrbl-security-proof-dpop = { path = "pkgs/20-providers/tigrbl-security-proof-dpop", editable = true }
-tigrbl-security-proof-pkce = { path = "pkgs/20-providers/tigrbl-security-proof-pkce", editable = true }
-tigrbl-security-auth-context-acr-basic = { path = "pkgs/20-providers/tigrbl-security-auth-context-acr-basic", editable = true }
-tigrbl-security-auth-context-amr-basic = { path = "pkgs/20-providers/tigrbl-security-auth-context-amr-basic", editable = true }
-tigrbl-security-claims-provider-local = { path = "pkgs/20-providers/tigrbl-security-claims-provider-local", editable = true }
-tigrbl-security-subject-pairwise-provider = { path = "pkgs/20-providers/tigrbl-security-subject-pairwise-provider", editable = true }
-tigrbl-security-webfinger-provider = { path = "pkgs/20-providers/tigrbl-security-webfinger-provider", editable = true }
-tigrbl-security-oidc-federation-provider = { path = "pkgs/20-providers/tigrbl-security-oidc-federation-provider", editable = true }
-tigrbl-security-sender-constraint-validator = { path = "pkgs/deprecated/tigrbl-security-sender-constraint-validator", editable = true }
-tigrbl-security-signing-pqc = { path = "pkgs/20-providers/tigrbl-security-signing-pqc", editable = true }
-tigrbl-cose-cryptography-provider = { path = "pkgs/20-providers/tigrbl-cose-cryptography-provider", editable = true }
-tigrbl-jose-swarmauri-provider = { path = "pkgs/20-providers/tigrbl-jose-swarmauri-provider", editable = true }
-tigrbl-security-token-introspection-client = { path = "pkgs/20-providers/tigrbl-security-token-introspection-client", editable = true }
-tigrbl-security-token-jwks-cache = { path = "pkgs/20-providers/tigrbl-security-token-jwks-cache", editable = true }
-tigrbl-identity-authenticator-bases = { path = "pkgs/05-bases/tigrbl-identity-authenticator-bases", editable = true }
-tigrbl-public-key-authenticator-bases = { path = "pkgs/05-bases/tigrbl-public-key-authenticator-bases", editable = true }
-tigrbl-authenticator-password-local = { path = "pkgs/20-providers/tigrbl-authenticator-password-local", editable = true }
-tigrbl-authenticator-api-key-local = { path = "pkgs/20-providers/tigrbl-authenticator-api-key-local", editable = true }
-tigrbl-authenticator-service-key-local = { path = "pkgs/20-providers/tigrbl-authenticator-service-key-local", editable = true }
-tigrbl-authenticator-client-secret-local = { path = "pkgs/20-providers/tigrbl-authenticator-client-secret-local", editable = true }
-tigrbl-secret-hashing-bcrypt-provider = { path = "pkgs/20-providers/tigrbl-secret-hashing-bcrypt-provider", editable = true }
-tigrbl-authenticator-session-local = { path = "pkgs/20-providers/tigrbl-authenticator-session-local", editable = true }
-tigrbl-authenticator-otp-local = { path = "pkgs/20-providers/tigrbl-authenticator-otp-local", editable = true }
-tigrbl-authenticator-recovery-code-local = { path = "pkgs/20-providers/tigrbl-authenticator-recovery-code-local", editable = true }
-tigrbl-authenticator-mtls-client-cert = { path = "pkgs/20-providers/tigrbl-authenticator-mtls-client-cert", editable = true }
-tigrbl-authenticator-dpop-proof = { path = "pkgs/20-providers/tigrbl-authenticator-dpop-proof", editable = true }
-tigrbl-authenticator-remote-introspection = { path = "pkgs/20-providers/tigrbl-authenticator-remote-introspection", editable = true }
-tigrbl-authenticator-federated-oidc = { path = "pkgs/20-providers/tigrbl-authenticator-federated-oidc", editable = true }
-tigrbl-auth = { path = "pkgs/70-facade/tigrbl-auth", editable = true }
+tba-contracts-release = { path = "pkgs/02-contracts/tba-contracts-release", editable = true }
+tba-certification-release = { path = "pkgs/60-runtime/tba-certification-release", editable = true }
+tba-contracts-security-trust = { path = "pkgs/02-contracts/tba-contracts-security-trust", editable = true }
+tba-bases-security-trust-domain = { path = "pkgs/05-bases/tba-bases-security-trust-domain", editable = true }
+tba-bases-claim = { path = "pkgs/05-bases/tba-bases-claim", editable = true }
+tba-bases-identity = { path = "pkgs/05-bases/tba-bases-identity", editable = true }
+tba-bases-authentication-credential = { path = "pkgs/05-bases/tba-bases-authentication-credential", editable = true }
+tba-bases-authenticator = { path = "pkgs/05-bases/tba-bases-authenticator", editable = true }
+tba-bases-public-key-authentication = { path = "pkgs/05-bases/tba-bases-public-key-authentication", editable = true }
+tba-bases-did = { path = "pkgs/05-bases/tba-bases-did", editable = true }
+tba-bases-workload-identity = { path = "pkgs/05-bases/tba-bases-workload-identity", editable = true }
+tba-bases-certificate = { path = "pkgs/05-bases/tba-bases-certificate", editable = true }
+tba-bases-trust = { path = "pkgs/05-bases/tba-bases-trust", editable = true }
+tba-bases-protected-artifact = { path = "pkgs/05-bases/tba-bases-protected-artifact", editable = true }
+tba-bases-signing = { path = "pkgs/05-bases/tba-bases-signing", editable = true }
+tba-bases-key = { path = "pkgs/05-bases/tba-bases-key", editable = true }
+tba-bases-encryption = { path = "pkgs/05-bases/tba-bases-encryption", editable = true }
+tba-bases-proof-of-possession = { path = "pkgs/05-bases/tba-bases-proof-of-possession", editable = true }
+tba-bases-identity-document = { path = "pkgs/05-bases/tba-bases-identity-document", editable = true }
+tba-bases-protected-envelope = { path = "pkgs/05-bases/tba-bases-protected-envelope", editable = true }
+tba-bases-token-introspection = { path = "pkgs/05-bases/tba-bases-token-introspection", editable = true }
+tba-bases-security-provenance = { path = "pkgs/05-bases/tba-bases-security-provenance", editable = true }
+tba-bases-authorization-policy = { path = "pkgs/05-bases/tba-bases-authorization-policy", editable = true }
+tba-bases-identity-model = { path = "pkgs/05-bases/tba-bases-identity-model", editable = true }
+tba-bases-jose = { path = "pkgs/05-bases/tba-bases-jose", editable = true }
+tba-bases-cose = { path = "pkgs/05-bases/tba-bases-cose", editable = true }
+tba-bases-resource-server = { path = "pkgs/05-bases/tba-bases-resource-server", editable = true }
+tba-concrete-acr-evaluator-basic = { path = "pkgs/10-concrete/tba-concrete-acr-evaluator-basic", editable = true }
+tba-concrete-amr-evaluator-basic = { path = "pkgs/10-concrete/tba-concrete-amr-evaluator-basic", editable = true }
+tba-concrete-authorization-provenance = { path = "pkgs/10-concrete/tba-concrete-authorization-provenance", editable = true }
+tba-concrete-dpop-confirmation-binding = { path = "pkgs/10-concrete/tba-concrete-dpop-confirmation-binding", editable = true }
+tba-concrete-mtls-confirmation-binding = { path = "pkgs/10-concrete/tba-concrete-mtls-confirmation-binding", editable = true }
+tba-concrete-pkce = { path = "pkgs/10-concrete/tba-concrete-pkce", editable = true }
+tba-provider-security-certificate-mtls = { path = "pkgs/20-providers/tba-provider-security-certificate-mtls", editable = true }
+tba-provider-security-dpop-cnf-binding-validator = { path = "pkgs/20-providers/tba-provider-security-dpop-cnf-binding-validator", editable = true }
+tba-provider-security-mtls-cnf-binding-validator = { path = "pkgs/20-providers/tba-provider-security-mtls-cnf-binding-validator", editable = true }
+tba-provider-security-proof-dpop = { path = "pkgs/20-providers/tba-provider-security-proof-dpop", editable = true }
+tba-provider-security-proof-pkce = { path = "pkgs/20-providers/tba-provider-security-proof-pkce", editable = true }
+tba-provider-authentication-context-acr-basic = { path = "pkgs/20-providers/tba-provider-authentication-context-acr-basic", editable = true }
+tba-provider-authentication-context-amr-basic = { path = "pkgs/20-providers/tba-provider-authentication-context-amr-basic", editable = true }
+tba-provider-security-claims-provider-local = { path = "pkgs/20-providers/tba-provider-security-claims-provider-local", editable = true }
+tba-provider-security-subject-pairwise = { path = "pkgs/20-providers/tba-provider-security-subject-pairwise", editable = true }
+tba-provider-security-webfinger = { path = "pkgs/20-providers/tba-provider-security-webfinger", editable = true }
+tba-provider-security-oidc-federation = { path = "pkgs/20-providers/tba-provider-security-oidc-federation", editable = true }
+tba-provider-security-signing-pqc = { path = "pkgs/20-providers/tba-provider-security-signing-pqc", editable = true }
+tba-provider-cose-cryptography = { path = "pkgs/20-providers/tba-provider-cose-cryptography", editable = true }
+tba-provider-jose-swarmauri = { path = "pkgs/20-providers/tba-provider-jose-swarmauri", editable = true }
+tba-provider-security-token-introspection-client = { path = "pkgs/20-providers/tba-provider-security-token-introspection-client", editable = true }
+tba-provider-security-token-jwks-cache = { path = "pkgs/20-providers/tba-provider-security-token-jwks-cache", editable = true }
+tba-bases-identity-authenticator = { path = "pkgs/05-bases/tba-bases-identity-authenticator", editable = true }
+tba-bases-public-key-authenticator = { path = "pkgs/05-bases/tba-bases-public-key-authenticator", editable = true }
+tba-provider-authenticator-password-local = { path = "pkgs/20-providers/tba-provider-authenticator-password-local", editable = true }
+tba-provider-authenticator-api-key-local = { path = "pkgs/20-providers/tba-provider-authenticator-api-key-local", editable = true }
+tba-provider-authenticator-service-key-local = { path = "pkgs/20-providers/tba-provider-authenticator-service-key-local", editable = true }
+tba-provider-authenticator-client-secret-local = { path = "pkgs/20-providers/tba-provider-authenticator-client-secret-local", editable = true }
+tba-provider-secret-hashing-bcrypt = { path = "pkgs/20-providers/tba-provider-secret-hashing-bcrypt", editable = true }
+tba-provider-authenticator-session-local = { path = "pkgs/20-providers/tba-provider-authenticator-session-local", editable = true }
+tba-provider-authenticator-otp-local = { path = "pkgs/20-providers/tba-provider-authenticator-otp-local", editable = true }
+tba-provider-authenticator-recovery-code-local = { path = "pkgs/20-providers/tba-provider-authenticator-recovery-code-local", editable = true }
+tba-provider-authenticator-mtls-client-cert = { path = "pkgs/20-providers/tba-provider-authenticator-mtls-client-cert", editable = true }
+tba-provider-authenticator-dpop-proof = { path = "pkgs/20-providers/tba-provider-authenticator-dpop-proof", editable = true }
+tba-provider-authenticator-remote-introspection = { path = "pkgs/20-providers/tba-provider-authenticator-remote-introspection", editable = true }
+tba-provider-authenticator-federated-oidc = { path = "pkgs/20-providers/tba-provider-authenticator-federated-oidc", editable = true }
+tba-auth = { path = "pkgs/70-facade/tba-auth", editable = true }
 tba = { path = "pkgs/70-facade/tba", editable = true }
 tbauth = { path = "pkgs/70-facade/tbauth", editable = true }
-tigrbl-auth-protocol-oauth = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oauth", editable = true }
-tigrbl-auth-protocol-oidc-backchannel-replay-store = { path = "pkgs/deprecated/tigrbl-auth-protocol-oidc-backchannel-replay-store", editable = true }
-tigrbl-set-concrete = { path = "pkgs/10-concrete/tigrbl-set-concrete", editable = true }
-tigrbl-auth-protocol-oidc = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oidc", editable = true }
-tigrbl-auth-protocol-webauthn = { path = "pkgs/50-protocols/tigrbl-auth-protocol-webauthn", editable = true }
-tigrbl-security-protocol-jose = { path = "pkgs/50-protocols/tigrbl-security-protocol-jose", editable = true }
-tigrbl-auth-protocol-oid4vci = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oid4vci", editable = true }
-tigrbl-auth-protocol-oid4vp = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oid4vp", editable = true }
-tigrbl-auth-protocol-authzen = { path = "pkgs/50-protocols/tigrbl-auth-protocol-authzen", editable = true }
-tigrbl-auth-protocol-rp = { path = "pkgs/50-protocols/tigrbl-auth-protocol-rp", editable = true }
-tigrbl-authorization-contracts = { path = "pkgs/02-contracts/tigrbl-authorization-contracts", editable = true }
-tigrbl-rp-session-runtime = { path = "pkgs/30-storage-runtime/tigrbl-rp-session-runtime", editable = true }
-tigrbl-authorization-admin-client = { path = "pkgs/75-clients/tigrbl-authorization-admin-client", editable = true }
-tigrbl-policy-decision-client = { path = "pkgs/75-clients/tigrbl-policy-decision-client", editable = true }
-tigrbl-rp-session-client = { path = "pkgs/75-clients/tigrbl-rp-session-client", editable = true }
-tigrbl-policy-enforcement-asgi = { path = "pkgs/75-clients/tigrbl-policy-enforcement-asgi", editable = true }
-tigrbl-auth-router-authorization-admin = { path = "pkgs/80-routers/tigrbl-auth-router-authorization-admin", editable = true }
-tigrbl-auth-router-policy-decision = { path = "pkgs/80-routers/tigrbl-auth-router-policy-decision", editable = true }
-tigrbl-auth-router-rp-session = { path = "pkgs/80-routers/tigrbl-auth-router-rp-session", editable = true }
-tigrbl-auth-backend-app-policy-decision = { path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-policy-decision", editable = true }
-tigrbl-auth-backend-app-rp = { path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-rp", editable = true }
-tigrbl-credentials = { path = "pkgs/70-facade/tigrbl-credentials", editable = true }
-tigrbl-digital-credential-issuance = { path = "pkgs/deprecated/tigrbl-digital-credential-issuance", editable = true }
-tigrbl-digital-credential-issuance-capability = { path = "pkgs/40-capabilities/tigrbl-digital-credential-issuance-capability", editable = true }
-tigrbl-digital-credential-presentation = { path = "pkgs/deprecated/tigrbl-digital-credential-presentation", editable = true }
-tigrbl-digital-credential-presentation-capability = { path = "pkgs/40-capabilities/tigrbl-digital-credential-presentation-capability", editable = true }
-tigrbl-grant-negotiation-capability = { path = "pkgs/deprecated/tigrbl-grant-negotiation-capability", editable = true }
-tigrbl-delegated-access-negotiation-capability = { path = "pkgs/40-capabilities/tigrbl-delegated-access-negotiation-capability", editable = true }
-tigrbl-attestation-appraisal = { path = "pkgs/deprecated/tigrbl-attestation-appraisal", editable = true }
-tigrbl-attestation-appraisal-capability = { path = "pkgs/40-capabilities/tigrbl-attestation-appraisal-capability", editable = true }
-tigrbl-security-events = { path = "pkgs/deprecated/tigrbl-security-events", editable = true }
-tigrbl-security-event-delivery-capability = { path = "pkgs/40-capabilities/tigrbl-security-event-delivery-capability", editable = true }
-tigrbl-workload-identity = { path = "pkgs/deprecated/tigrbl-workload-identity", editable = true }
-tigrbl-workload-identity-capability = { path = "pkgs/40-capabilities/tigrbl-workload-identity-capability", editable = true }
-tigrbl-identity-document-capability = { path = "pkgs/40-capabilities/tigrbl-identity-document-capability", editable = true }
-tigrbl-protected-envelope-capability = { path = "pkgs/40-capabilities/tigrbl-protected-envelope-capability", editable = true }
-tigrbl-possession-proof-capability = { path = "pkgs/40-capabilities/tigrbl-possession-proof-capability", editable = true }
-tigrbl-workload-credential-brokering-capability = { path = "pkgs/40-capabilities/tigrbl-workload-credential-brokering-capability", editable = true }
-tigrbl-authz-policy-admin-gate = { path = "pkgs/deprecated/tigrbl-authz-policy-admin-gate", editable = true }
-tigrbl-auth-router-admin-gate = { path = "pkgs/80-routers/tigrbl-auth-router-admin-gate", editable = true }
-tigrbl-authz-policy-authority-derivation-graph = { path = "pkgs/30-storage-runtime/tigrbl-authz-policy-authority-derivation-graph", editable = true }
-tigrbl-authority-graph-concrete = { path = "pkgs/10-concrete/tigrbl-authority-graph-concrete", editable = true }
-tigrbl-authz-policy = { path = "pkgs/60-runtime/tigrbl-authz-policy", editable = true }
-tigrbl-authz-policy-decision-engine = { path = "pkgs/20-providers/tigrbl-authz-policy-decision-engine", editable = true }
-tigrbl-authz-policy-invariant-registry = { path = "pkgs/deprecated/tigrbl-authz-policy-invariant-registry", editable = true }
-tigrbl-auth-plugin = { path = "pkgs/60-runtime/tigrbl-auth-plugin", editable = true }
-tigrbl-authz-resource-server-verifier = { path = "pkgs/20-providers/tigrbl-authz-resource-server-verifier", editable = true }
-tigrbl-authz-resource-server = { path = "pkgs/50-protocols/tigrbl-authz-resource-server", editable = true }
-tigrbl-identity-cli = { path = "pkgs/60-runtime/tigrbl-identity-cli", editable = true }
-tigrbl-identity-testkit = { path = "pkgs/120-tests/tigrbl-identity-testkit", editable = true }
-oauth-device-authorization-cli-example = { path = "pkgs/110-examples/oauth-device-authorization-cli-example", editable = true }
-tigrbl-identity-admin = { path = "pkgs/60-runtime/tigrbl-identity-admin", editable = true }
-tigrbl-identity-author = { path = "pkgs/60-runtime/tigrbl-identity-author", editable = true }
-tigrbl-identity-contracts = { path = "pkgs/02-contracts/tigrbl-identity-contracts", editable = true }
-tigrbl-identity-assurance-contracts = { path = "pkgs/02-contracts/tigrbl-identity-assurance-contracts", editable = true }
-tigrbl-token-contracts = { path = "pkgs/02-contracts/tigrbl-token-contracts", editable = true }
-tigrbl-attestation-contracts = { path = "pkgs/02-contracts/tigrbl-attestation-contracts", editable = true }
-tigrbl-claim-contracts = { path = "pkgs/02-contracts/tigrbl-claim-contracts", editable = true }
-tigrbl-did-contracts = { path = "pkgs/02-contracts/tigrbl-did-contracts", editable = true }
-tigrbl-digital-credential-contracts = { path = "pkgs/02-contracts/tigrbl-digital-credential-contracts", editable = true }
-tigrbl-public-key-authentication-contracts = { path = "pkgs/02-contracts/tigrbl-public-key-authentication-contracts", editable = true }
-tigrbl-replay-contracts = { path = "pkgs/02-contracts/tigrbl-replay-contracts", editable = true }
-tigrbl-security-event-contracts = { path = "pkgs/02-contracts/tigrbl-security-event-contracts", editable = true }
-tigrbl-workload-identity-contracts = { path = "pkgs/02-contracts/tigrbl-workload-identity-contracts", editable = true }
-tigrbl-identity-document-contracts = { path = "pkgs/02-contracts/tigrbl-identity-document-contracts", editable = true }
-tigrbl-protected-envelope-contracts = { path = "pkgs/02-contracts/tigrbl-protected-envelope-contracts", editable = true }
-tigrbl-proof-of-possession-contracts = { path = "pkgs/02-contracts/tigrbl-proof-of-possession-contracts", editable = true }
-tigrbl-authz-policy-rules-concrete = { path = "pkgs/10-concrete/tigrbl-authz-policy-rules-concrete", editable = true }
-tigrbl-authz-policy-combiner-default = { path = "pkgs/10-concrete/tigrbl-authz-policy-combiner-default", editable = true }
-tigrbl-authz-policy-evaluators-default = { path = "pkgs/10-concrete/tigrbl-authz-policy-evaluators-default", editable = true }
-tigrbl-authz-policy-attributes-mapping = { path = "pkgs/10-concrete/tigrbl-authz-policy-attributes-mapping", editable = true }
-tigrbl-authz-policy-obligations-concrete = { path = "pkgs/10-concrete/tigrbl-authz-policy-obligations-concrete", editable = true }
-tigrbl-policy-decision-engine-default = { path = "pkgs/10-concrete/tigrbl-policy-decision-engine-default", editable = true }
-tigrbl-cose-concrete = { path = "pkgs/10-concrete/tigrbl-cose-concrete", editable = true }
-tigrbl-jws-concrete = { path = "pkgs/10-concrete/tigrbl-jws-concrete", editable = true }
-tigrbl-jwe-concrete = { path = "pkgs/10-concrete/tigrbl-jwe-concrete", editable = true }
-tigrbl-jwt-concrete = { path = "pkgs/10-concrete/tigrbl-jwt-concrete", editable = true }
-tigrbl-cwt-concrete = { path = "pkgs/10-concrete/tigrbl-cwt-concrete", editable = true }
-tigrbl-oidc-id-token-concrete = { path = "pkgs/10-concrete/tigrbl-oidc-id-token-concrete", editable = true }
-tigrbl-did-document-concrete = { path = "pkgs/10-concrete/tigrbl-did-document-concrete", editable = true }
-tigrbl-vc-jose-credential-concrete = { path = "pkgs/10-concrete/tigrbl-vc-jose-credential-concrete", editable = true }
-tigrbl-vc-cose-credential-concrete = { path = "pkgs/10-concrete/tigrbl-vc-cose-credential-concrete", editable = true }
-tigrbl-wit-concrete = { path = "pkgs/10-concrete/tigrbl-wit-concrete", editable = true }
-tigrbl-wit-svid-credential-concrete = { path = "pkgs/10-concrete/tigrbl-wit-svid-credential-concrete", editable = true }
-tigrbl-wpt-concrete = { path = "pkgs/10-concrete/tigrbl-wpt-concrete", editable = true }
-tigrbl-x509-svid-credential-concrete = { path = "pkgs/10-concrete/tigrbl-x509-svid-credential-concrete", editable = true }
-tigrbl-jwt-svid-credential-concrete = { path = "pkgs/10-concrete/tigrbl-jwt-svid-credential-concrete", editable = true }
-tigrbl-cwt-svid-extension-credential-concrete = { path = "pkgs/10-concrete/tigrbl-cwt-svid-extension-credential-concrete", editable = true }
-tigrbl-security-authorization-provenance-builder = { path = "pkgs/20-providers/tigrbl-security-authorization-provenance-builder", editable = true }
-tigrbl-identity-identities-concrete = { path = "pkgs/deprecated/tigrbl-identity-identities-concrete", editable = true }
-tigrbl-identity-credentials-concrete = { path = "pkgs/deprecated/tigrbl-identity-credentials-concrete", editable = true }
-tigrbl-identity-claims-bases = { path = "pkgs/05-bases/tigrbl-identity-claims-bases", editable = true }
-tigrbl-jose-concrete = { path = "pkgs/10-concrete/tigrbl-jose-concrete", editable = true }
-tigrbl-sd-jwt-concrete = { path = "pkgs/10-concrete/tigrbl-sd-jwt-concrete", editable = true }
-tigrbl-svid-concrete = { path = "pkgs/10-concrete/tigrbl-svid-concrete", editable = true }
-tigrbl-did-concrete = { path = "pkgs/10-concrete/tigrbl-did-concrete", editable = true }
-tigrbl-digital-credential-bases = { path = "pkgs/05-bases/tigrbl-digital-credential-bases", editable = true }
-tigrbl-attestation-bases = { path = "pkgs/05-bases/tigrbl-attestation-bases", editable = true }
-tigrbl-security-event-bases = { path = "pkgs/05-bases/tigrbl-security-event-bases", editable = true }
-tigrbl-token-bases = { path = "pkgs/05-bases/tigrbl-token-bases", editable = true }
-tigrbl-capability-bases = { path = "pkgs/05-bases/tigrbl-capability-bases", editable = true }
-tigrbl-replay-bases = { path = "pkgs/05-bases/tigrbl-replay-bases", editable = true }
-tigrbl-authentication-assurance-bases = { path = "pkgs/05-bases/tigrbl-authentication-assurance-bases", editable = true }
-tigrbl-authentication-context-bases = { path = "pkgs/05-bases/tigrbl-authentication-context-bases", editable = true }
-tigrbl-identity-assurance-bases = { path = "pkgs/05-bases/tigrbl-identity-assurance-bases", editable = true }
-tigrbl-security-artifact-bases = { path = "pkgs/05-bases/tigrbl-security-artifact-bases", editable = true }
-tigrbl-claim-issuer-concrete = { path = "pkgs/10-concrete/tigrbl-claim-issuer-concrete", editable = true }
-tigrbl-claim-subject-concrete = { path = "pkgs/10-concrete/tigrbl-claim-subject-concrete", editable = true }
-tigrbl-claim-audience-concrete = { path = "pkgs/10-concrete/tigrbl-claim-audience-concrete", editable = true }
-tigrbl-claim-expiration-concrete = { path = "pkgs/10-concrete/tigrbl-claim-expiration-concrete", editable = true }
-tigrbl-claim-not-before-concrete = { path = "pkgs/10-concrete/tigrbl-claim-not-before-concrete", editable = true }
-tigrbl-claim-issued-at-concrete = { path = "pkgs/10-concrete/tigrbl-claim-issued-at-concrete", editable = true }
-tigrbl-claim-jwt-id-concrete = { path = "pkgs/10-concrete/tigrbl-claim-jwt-id-concrete", editable = true }
-tigrbl-auth-protocol-jwt = { path = "pkgs/50-protocols/tigrbl-auth-protocol-jwt", editable = true }
-tigrbl-claim-authentication-time-concrete = { path = "pkgs/10-concrete/tigrbl-claim-authentication-time-concrete", editable = true }
-tigrbl-claim-nonce-concrete = { path = "pkgs/10-concrete/tigrbl-claim-nonce-concrete", editable = true }
-tigrbl-claim-authentication-context-concrete = { path = "pkgs/10-concrete/tigrbl-claim-authentication-context-concrete", editable = true }
-tigrbl-claim-authentication-methods-concrete = { path = "pkgs/10-concrete/tigrbl-claim-authentication-methods-concrete", editable = true }
-tigrbl-claim-authorized-party-concrete = { path = "pkgs/10-concrete/tigrbl-claim-authorized-party-concrete", editable = true }
-tigrbl-claim-confirmation-concrete = { path = "pkgs/10-concrete/tigrbl-claim-confirmation-concrete", editable = true }
-tigrbl-claim-cwt-confirmation-concrete = { path = "pkgs/10-concrete/tigrbl-claim-cwt-confirmation-concrete", editable = true }
-tigrbl-claim-workload-token-hash-concrete = { path = "pkgs/10-concrete/tigrbl-claim-workload-token-hash-concrete", editable = true }
-tigrbl-claim-transaction-token-hash-concrete = { path = "pkgs/10-concrete/tigrbl-claim-transaction-token-hash-concrete", editable = true }
-tigrbl-claim-other-token-hashes-concrete = { path = "pkgs/10-concrete/tigrbl-claim-other-token-hashes-concrete", editable = true }
-tigrbl-claim-scope-concrete = { path = "pkgs/10-concrete/tigrbl-claim-scope-concrete", editable = true }
-tigrbl-claim-client-id-concrete = { path = "pkgs/10-concrete/tigrbl-claim-client-id-concrete", editable = true }
-tigrbl-claim-verified-claims-concrete = { path = "pkgs/10-concrete/tigrbl-claim-verified-claims-concrete", editable = true }
-tigrbl-claim-place-of-birth-concrete = { path = "pkgs/10-concrete/tigrbl-claim-place-of-birth-concrete", editable = true }
-tigrbl-claim-nationalities-concrete = { path = "pkgs/10-concrete/tigrbl-claim-nationalities-concrete", editable = true }
-tigrbl-claim-birth-family-name-concrete = { path = "pkgs/10-concrete/tigrbl-claim-birth-family-name-concrete", editable = true }
-tigrbl-claim-birth-given-name-concrete = { path = "pkgs/10-concrete/tigrbl-claim-birth-given-name-concrete", editable = true }
-tigrbl-claim-birth-middle-name-concrete = { path = "pkgs/10-concrete/tigrbl-claim-birth-middle-name-concrete", editable = true }
-tigrbl-claim-salutation-concrete = { path = "pkgs/10-concrete/tigrbl-claim-salutation-concrete", editable = true }
-tigrbl-claim-title-concrete = { path = "pkgs/10-concrete/tigrbl-claim-title-concrete", editable = true }
-tigrbl-claim-msisdn-concrete = { path = "pkgs/10-concrete/tigrbl-claim-msisdn-concrete", editable = true }
-tigrbl-claim-also-known-as-concrete = { path = "pkgs/10-concrete/tigrbl-claim-also-known-as-concrete", editable = true }
-tigrbl-claim-address-country-code-concrete = { path = "pkgs/10-concrete/tigrbl-claim-address-country-code-concrete", editable = true }
-tigrbl-claim-credential-type-concrete = { path = "pkgs/10-concrete/tigrbl-claim-credential-type-concrete", editable = true }
-tigrbl-claim-credential-status-concrete = { path = "pkgs/10-concrete/tigrbl-claim-credential-status-concrete", editable = true }
-tigrbl-claim-security-events-concrete = { path = "pkgs/10-concrete/tigrbl-claim-security-events-concrete", editable = true }
-tigrbl-claim-transaction-id-concrete = { path = "pkgs/10-concrete/tigrbl-claim-transaction-id-concrete", editable = true }
-tigrbl-claim-eat-profile-concrete = { path = "pkgs/10-concrete/tigrbl-claim-eat-profile-concrete", editable = true }
-tigrbl-claim-http-method-concrete = { path = "pkgs/10-concrete/tigrbl-claim-http-method-concrete", editable = true }
-tigrbl-claim-http-uri-concrete = { path = "pkgs/10-concrete/tigrbl-claim-http-uri-concrete", editable = true }
-tigrbl-claim-access-token-hash-concrete = { path = "pkgs/10-concrete/tigrbl-claim-access-token-hash-concrete", editable = true }
-tigrbl-claim-access-token-digest-concrete = { path = "pkgs/10-concrete/tigrbl-claim-access-token-digest-concrete", editable = true }
-tigrbl-claim-sd-hash-concrete = { path = "pkgs/10-concrete/tigrbl-claim-sd-hash-concrete", editable = true }
-tigrbl-claim-eat-nonce-concrete = { path = "pkgs/10-concrete/tigrbl-claim-eat-nonce-concrete", editable = true }
-tigrbl-claim-ueid-concrete = { path = "pkgs/10-concrete/tigrbl-claim-ueid-concrete", editable = true }
-tigrbl-claim-eat-submodules-concrete = { path = "pkgs/10-concrete/tigrbl-claim-eat-submodules-concrete", editable = true }
-tigrbl-claim-actor-concrete = { path = "pkgs/10-concrete/tigrbl-claim-actor-concrete", editable = true }
-tigrbl-claim-may-act-concrete = { path = "pkgs/10-concrete/tigrbl-claim-may-act-concrete", editable = true }
-tigrbl-claim-name-concrete = { path = "pkgs/10-concrete/tigrbl-claim-name-concrete", editable = true }
-tigrbl-claim-given-name-concrete = { path = "pkgs/10-concrete/tigrbl-claim-given-name-concrete", editable = true }
-tigrbl-claim-family-name-concrete = { path = "pkgs/10-concrete/tigrbl-claim-family-name-concrete", editable = true }
-tigrbl-claim-middle-name-concrete = { path = "pkgs/10-concrete/tigrbl-claim-middle-name-concrete", editable = true }
-tigrbl-claim-nickname-concrete = { path = "pkgs/10-concrete/tigrbl-claim-nickname-concrete", editable = true }
-tigrbl-claim-preferred-username-concrete = { path = "pkgs/10-concrete/tigrbl-claim-preferred-username-concrete", editable = true }
-tigrbl-claim-profile-uri-concrete = { path = "pkgs/10-concrete/tigrbl-claim-profile-uri-concrete", editable = true }
-tigrbl-claim-picture-uri-concrete = { path = "pkgs/10-concrete/tigrbl-claim-picture-uri-concrete", editable = true }
-tigrbl-claim-website-uri-concrete = { path = "pkgs/10-concrete/tigrbl-claim-website-uri-concrete", editable = true }
-tigrbl-claim-email-concrete = { path = "pkgs/10-concrete/tigrbl-claim-email-concrete", editable = true }
-tigrbl-claim-email-verified-concrete = { path = "pkgs/10-concrete/tigrbl-claim-email-verified-concrete", editable = true }
-tigrbl-claim-gender-concrete = { path = "pkgs/10-concrete/tigrbl-claim-gender-concrete", editable = true }
-tigrbl-claim-birthdate-concrete = { path = "pkgs/10-concrete/tigrbl-claim-birthdate-concrete", editable = true }
-tigrbl-claim-zoneinfo-concrete = { path = "pkgs/10-concrete/tigrbl-claim-zoneinfo-concrete", editable = true }
-tigrbl-claim-locale-concrete = { path = "pkgs/10-concrete/tigrbl-claim-locale-concrete", editable = true }
-tigrbl-claim-phone-number-concrete = { path = "pkgs/10-concrete/tigrbl-claim-phone-number-concrete", editable = true }
-tigrbl-claim-phone-number-verified-concrete = { path = "pkgs/10-concrete/tigrbl-claim-phone-number-verified-concrete", editable = true }
-tigrbl-claim-address-concrete = { path = "pkgs/10-concrete/tigrbl-claim-address-concrete", editable = true }
-tigrbl-claim-updated-at-concrete = { path = "pkgs/10-concrete/tigrbl-claim-updated-at-concrete", editable = true }
-tigrbl-claim-subject-identifiers-concrete = { path = "pkgs/10-concrete/tigrbl-claim-subject-identifiers-concrete", editable = true }
-tigrbl-claim-assertions-concrete = { path = "pkgs/10-concrete/tigrbl-claim-assertions-concrete", editable = true }
-tigrbl-claim-updated-at-rfc3339-concrete = { path = "pkgs/10-concrete/tigrbl-claim-updated-at-rfc3339-concrete", editable = true }
-tigrbl-claim-authorization-code-hash-concrete = { path = "pkgs/10-concrete/tigrbl-claim-authorization-code-hash-concrete", editable = true }
-tigrbl-claim-state-hash-concrete = { path = "pkgs/10-concrete/tigrbl-claim-state-hash-concrete", editable = true }
-tigrbl-claim-session-id-concrete = { path = "pkgs/10-concrete/tigrbl-claim-session-id-concrete", editable = true }
-tigrbl-claim-cwt-issuer-concrete = { path = "pkgs/10-concrete/tigrbl-claim-cwt-issuer-concrete", editable = true }
-tigrbl-claim-cwt-subject-concrete = { path = "pkgs/10-concrete/tigrbl-claim-cwt-subject-concrete", editable = true }
-tigrbl-claim-cwt-audience-concrete = { path = "pkgs/10-concrete/tigrbl-claim-cwt-audience-concrete", editable = true }
-tigrbl-claim-cwt-expiration-concrete = { path = "pkgs/10-concrete/tigrbl-claim-cwt-expiration-concrete", editable = true }
-tigrbl-claim-cwt-not-before-concrete = { path = "pkgs/10-concrete/tigrbl-claim-cwt-not-before-concrete", editable = true }
-tigrbl-claim-cwt-issued-at-concrete = { path = "pkgs/10-concrete/tigrbl-claim-cwt-issued-at-concrete", editable = true }
-tigrbl-claim-cwt-id-concrete = { path = "pkgs/10-concrete/tigrbl-claim-cwt-id-concrete", editable = true }
-tigrbl-auth-protocol-cwt = { path = "pkgs/50-protocols/tigrbl-auth-protocol-cwt", editable = true }
-tigrbl-auth-protocol-gnap = { path = "pkgs/50-protocols/tigrbl-auth-protocol-gnap", editable = true }
-tigrbl-auth-profile-haip = { path = "pkgs/50-protocols/tigrbl-auth-profile-haip", editable = true }
-tigrbl-auth-profile-fido2-server = { path = "pkgs/50-protocols/tigrbl-auth-profile-fido2-server", editable = true }
-tigrbl-security-event-protocol-set = { path = "pkgs/50-protocols/tigrbl-security-event-protocol-set", editable = true }
-tigrbl-attestation-protocol-eat = { path = "pkgs/50-protocols/tigrbl-attestation-protocol-eat", editable = true }
-tigrbl-attestation-protocol-corim = { path = "pkgs/50-protocols/tigrbl-attestation-protocol-corim", editable = true }
-tigrbl-credential-profile-sd-jwt-vc = { path = "pkgs/50-protocols/tigrbl-credential-profile-sd-jwt-vc", editable = true }
-tigrbl-credential-protocol-iso-mdoc = { path = "pkgs/50-protocols/tigrbl-credential-protocol-iso-mdoc", editable = true }
-tigrbl-credential-protocol-w3c-vcdm = { path = "pkgs/50-protocols/tigrbl-credential-protocol-w3c-vcdm", editable = true }
-tigrbl-authorization-scope-set-matcher-concrete = { path = "pkgs/10-concrete/tigrbl-authorization-scope-set-matcher-concrete", editable = true }
-tigrbl-public-subject-identifier-concrete = { path = "pkgs/10-concrete/tigrbl-public-subject-identifier-concrete", editable = true }
-tigrbl-pairwise-subject-identifier-concrete = { path = "pkgs/10-concrete/tigrbl-pairwise-subject-identifier-concrete", editable = true }
-tigrbl-identity-assurance-concrete = { path = "pkgs/10-concrete/tigrbl-identity-assurance-concrete", editable = true }
-tigrbl-capability = { path = "pkgs/10-concrete/tigrbl-capability", editable = true }
-tigrbl-default-capability = { path = "pkgs/10-concrete/tigrbl-default-capability", editable = true }
-tigrbl-user-identity-concrete = { path = "pkgs/10-concrete/tigrbl-user-identity-concrete", editable = true }
-tigrbl-admin-identity-concrete = { path = "pkgs/10-concrete/tigrbl-admin-identity-concrete", editable = true }
-tigrbl-service-identity-concrete = { path = "pkgs/10-concrete/tigrbl-service-identity-concrete", editable = true }
-tigrbl-client-identity-concrete = { path = "pkgs/10-concrete/tigrbl-client-identity-concrete", editable = true }
-tigrbl-machine-identity-concrete = { path = "pkgs/10-concrete/tigrbl-machine-identity-concrete", editable = true }
-tigrbl-workload-identity-concrete = { path = "pkgs/10-concrete/tigrbl-workload-identity-concrete", editable = true }
-tigrbl-device-identity-concrete = { path = "pkgs/10-concrete/tigrbl-device-identity-concrete", editable = true }
-tigrbl-credential-password-concrete = { path = "pkgs/10-concrete/tigrbl-credential-password-concrete", editable = true }
-tigrbl-credential-password-reset-concrete = { path = "pkgs/10-concrete/tigrbl-credential-password-reset-concrete", editable = true }
-tigrbl-credential-api-key-concrete = { path = "pkgs/10-concrete/tigrbl-credential-api-key-concrete", editable = true }
-tigrbl-credential-service-key-concrete = { path = "pkgs/10-concrete/tigrbl-credential-service-key-concrete", editable = true }
-tigrbl-credential-client-secret-concrete = { path = "pkgs/10-concrete/tigrbl-credential-client-secret-concrete", editable = true }
-tigrbl-credential-mfa-concrete = { path = "pkgs/10-concrete/tigrbl-credential-mfa-concrete", editable = true }
-tigrbl-credential-passkey-concrete = { path = "pkgs/10-concrete/tigrbl-credential-passkey-concrete", editable = true }
-tigrbl-service-credential-concrete = { path = "pkgs/10-concrete/tigrbl-service-credential-concrete", editable = true }
-tigrbl-webauthn-credential-concrete = { path = "pkgs/10-concrete/tigrbl-webauthn-credential-concrete", editable = true }
-tigrbl-passwordless-credential-concrete = { path = "pkgs/10-concrete/tigrbl-passwordless-credential-concrete", editable = true }
-tigrbl-mfa-factor-concrete = { path = "pkgs/10-concrete/tigrbl-mfa-factor-concrete", editable = true }
-tigrbl-credential-mtls-certificate-concrete = { path = "pkgs/10-concrete/tigrbl-credential-mtls-certificate-concrete", editable = true }
-tigrbl-credential-dpop-key-concrete = { path = "pkgs/10-concrete/tigrbl-credential-dpop-key-concrete", editable = true }
-tigrbl-sd-jwt-vc-concrete = { path = "pkgs/deprecated/tigrbl-sd-jwt-vc-concrete", editable = true }
-tigrbl-sd-jwt-vc-credential-concrete = { path = "pkgs/10-concrete/tigrbl-sd-jwt-vc-credential-concrete", editable = true }
-tigrbl-mdoc-credential-concrete = { path = "pkgs/10-concrete/tigrbl-mdoc-credential-concrete", editable = true }
-tigrbl-verifiable-credential-concrete = { path = "pkgs/10-concrete/tigrbl-verifiable-credential-concrete", editable = true }
-tigrbl-verifiable-presentation-concrete = { path = "pkgs/10-concrete/tigrbl-verifiable-presentation-concrete", editable = true }
-tigrbl-eat-evidence-concrete = { path = "pkgs/10-concrete/tigrbl-eat-evidence-concrete", editable = true }
-tigrbl-mdoc-concrete = { path = "pkgs/10-concrete/tigrbl-mdoc-concrete", editable = true }
-tigrbl-vcdm-concrete = { path = "pkgs/deprecated/tigrbl-vcdm-concrete", editable = true }
-tigrbl-eat-concrete = { path = "pkgs/10-concrete/tigrbl-eat-concrete", editable = true }
-tigrbl-corim-concrete = { path = "pkgs/10-concrete/tigrbl-corim-concrete", editable = true }
-tigrbl-security-key-rotation-policy-contracts = { path = "pkgs/02-contracts/tigrbl-security-key-rotation-policy-contracts", editable = true }
-tigrbl-identity-admin-advanced-authenticator-registry = { path = "pkgs/deprecated/tigrbl-identity-admin-advanced-authenticator-registry", editable = true }
-tigrbl-identity-admin-auth-anomaly-detector = { path = "pkgs/20-providers/tigrbl-identity-admin-auth-anomaly-detector", editable = true }
-tigrbl-account-self-service = { path = "pkgs/deprecated/tigrbl-account-self-service", editable = true }
-tigrbl-account-self-service-capability = { path = "pkgs/40-capabilities/tigrbl-account-self-service-capability", editable = true }
-tigrbl-administrative-resource-capability = { path = "pkgs/40-capabilities/tigrbl-administrative-resource-capability", editable = true }
-tigrbl-identity-administration-capability = { path = "pkgs/40-capabilities/tigrbl-identity-administration-capability", editable = true }
-tigrbl-operator-administration-capability = { path = "pkgs/40-capabilities/tigrbl-operator-administration-capability", editable = true }
-tigrbl-realm-administration-capability = { path = "pkgs/40-capabilities/tigrbl-realm-administration-capability", editable = true }
-tigrbl-tenant-administration-capability = { path = "pkgs/40-capabilities/tigrbl-tenant-administration-capability", editable = true }
-tigrbl-access-governance-capability = { path = "pkgs/40-capabilities/tigrbl-access-governance-capability", editable = true }
-tigrbl-adaptive-authentication-capability = { path = "pkgs/40-capabilities/tigrbl-adaptive-authentication-capability", editable = true }
-tigrbl-advanced-authentication-capability = { path = "pkgs/deprecated/tigrbl-advanced-authentication-capability", editable = true }
-tigrbl-mfa-challenge-capability = { path = "pkgs/40-capabilities/tigrbl-mfa-challenge-capability", editable = true }
-tigrbl-key-administration-capability = { path = "pkgs/40-capabilities/tigrbl-key-administration-capability", editable = true }
-tigrbl-policy-administration-capability = { path = "pkgs/40-capabilities/tigrbl-policy-administration-capability", editable = true }
-tigrbl-policy-assurance-capability = { path = "pkgs/40-capabilities/tigrbl-policy-assurance-capability", editable = true }
-tigrbl-identity-admin-control-plane = { path = "pkgs/deprecated/tigrbl-identity-admin-control-plane", editable = true }
-tigrbl-identity-admin-federation-registry = { path = "pkgs/deprecated/tigrbl-identity-admin-federation-registry", editable = true }
-tigrbl-identity-admin-policy-registry = { path = "pkgs/deprecated/tigrbl-identity-admin-policy-registry", editable = true }
-tigrbl-identity-admin-relationship-graph = { path = "pkgs/20-providers/tigrbl-identity-admin-relationship-graph", editable = true }
-tigrbl-identity-admin-trust-federation-graph = { path = "pkgs/30-storage-runtime/tigrbl-identity-admin-trust-federation-graph", editable = true }
-tigrbl-trust-federation-graph-concrete = { path = "pkgs/10-concrete/tigrbl-trust-federation-graph-concrete", editable = true }
-tigrbl-identity-core = { path = "pkgs/00-primitives/tigrbl-identity-core", editable = true }
-tigrbl-authn-credentials = { path = "pkgs/deprecated/tigrbl-authn-credentials", editable = true }
-tigrbl-identity-credentials = { path = "pkgs/deprecated/tigrbl-identity-credentials", editable = true }
-tigrbl-identity-jose = { path = "pkgs/20-providers/tigrbl-identity-jose", editable = true }
-tigrbl-digital-credential-issuer-local = { path = "pkgs/deprecated/tigrbl-digital-credential-issuer-local", editable = true }
-tigrbl-digital-credential-status-provider = { path = "pkgs/20-providers/tigrbl-digital-credential-status-provider", editable = true }
-tigrbl-digital-credential-trust-provider = { path = "pkgs/20-providers/tigrbl-digital-credential-trust-provider", editable = true }
-tigrbl-digital-presentation-verifier = { path = "pkgs/deprecated/tigrbl-digital-presentation-verifier", editable = true }
-tigrbl-eat-verifier-provider = { path = "pkgs/20-providers/tigrbl-eat-verifier-provider", editable = true }
-tigrbl-attestation-reference-provider = { path = "pkgs/20-providers/tigrbl-attestation-reference-provider", editable = true }
-tigrbl-attestation-appraiser = { path = "pkgs/20-providers/tigrbl-attestation-appraiser", editable = true }
-tigrbl-corim-store-provider = { path = "pkgs/deprecated/tigrbl-corim-store-provider", editable = true }
-tigrbl-corim-reference-memory-provider = { path = "pkgs/20-providers/tigrbl-corim-reference-memory-provider", editable = true }
-tigrbl-spiffe-workload-api-provider = { path = "pkgs/20-providers/tigrbl-spiffe-workload-api-provider", editable = true }
-tigrbl-spiffe-bundle-provider = { path = "pkgs/20-providers/tigrbl-spiffe-bundle-provider", editable = true }
-tigrbl-svid-verifier-provider = { path = "pkgs/deprecated/tigrbl-svid-verifier-provider", editable = true }
-tigrbl-did-resolver-provider = { path = "pkgs/20-providers/tigrbl-did-resolver-provider", editable = true }
-tigrbl-did-controller-provider = { path = "pkgs/20-providers/tigrbl-did-controller-provider", editable = true }
-tigrbl-trust-anchor-provider = { path = "pkgs/20-providers/tigrbl-trust-anchor-provider", editable = true }
-tigrbl-certificate-status-provider = { path = "pkgs/20-providers/tigrbl-certificate-status-provider", editable = true }
-tigrbl-certificate-path-validator = { path = "pkgs/20-providers/tigrbl-certificate-path-validator", editable = true }
-tigrbl-security-cose = { path = "pkgs/20-providers/tigrbl-security-cose", editable = true }
-tigrbl-attestation-packed-provider = { path = "pkgs/20-providers/tigrbl-attestation-packed-provider", editable = true }
-tigrbl-attestation-u2f-provider = { path = "pkgs/20-providers/tigrbl-attestation-u2f-provider", editable = true }
-tigrbl-attestation-tpm-provider = { path = "pkgs/20-providers/tigrbl-attestation-tpm-provider", editable = true }
-tigrbl-fido-metadata-service-provider = { path = "pkgs/20-providers/tigrbl-fido-metadata-service-provider", editable = true }
-tigrbl-mdoc-issuer-provider = { path = "pkgs/20-providers/tigrbl-mdoc-issuer-provider", editable = true }
-tigrbl-mdoc-verifier-provider = { path = "pkgs/20-providers/tigrbl-mdoc-verifier-provider", editable = true }
-tigrbl-security-event-replay-store = { path = "pkgs/deprecated/tigrbl-security-event-replay-store", editable = true }
-tigrbl-replay-memory-provider = { path = "pkgs/20-providers/tigrbl-replay-memory-provider", editable = true }
-tigrbl-replay-protection-capability = { path = "pkgs/40-capabilities/tigrbl-replay-protection-capability", editable = true }
-tigrbl-token-introspection-capability = { path = "pkgs/40-capabilities/tigrbl-token-introspection-capability", editable = true }
-tigrbl-token-issuance-capability = { path = "pkgs/40-capabilities/tigrbl-token-issuance-capability", editable = true }
-tigrbl-public-key-registration-capability = { path = "pkgs/40-capabilities/tigrbl-public-key-registration-capability", editable = true }
-tigrbl-public-key-authentication-capability = { path = "pkgs/40-capabilities/tigrbl-public-key-authentication-capability", editable = true }
-tigrbl-public-key-credential-management-capability = { path = "pkgs/40-capabilities/tigrbl-public-key-credential-management-capability", editable = true }
-tigrbl-authenticator-attestation-capability = { path = "pkgs/40-capabilities/tigrbl-authenticator-attestation-capability", editable = true }
-tigrbl-token-exchange-capability = { path = "pkgs/40-capabilities/tigrbl-token-exchange-capability", editable = true }
-tigrbl-token-revocation-capability = { path = "pkgs/40-capabilities/tigrbl-token-revocation-capability", editable = true }
-tigrbl-api-key-authentication-capability = { path = "pkgs/40-capabilities/tigrbl-api-key-authentication-capability", editable = true }
-tigrbl-client-secret-authentication-capability = { path = "pkgs/40-capabilities/tigrbl-client-secret-authentication-capability", editable = true }
-tigrbl-password-authentication-capability = { path = "pkgs/40-capabilities/tigrbl-password-authentication-capability", editable = true }
-tigrbl-service-key-authentication-capability = { path = "pkgs/40-capabilities/tigrbl-service-key-authentication-capability", editable = true }
-tigrbl-principal-authentication = { path = "pkgs/deprecated/tigrbl-principal-authentication", editable = true }
-tigrbl-policy-evaluation-capability = { path = "pkgs/40-capabilities/tigrbl-policy-evaluation-capability", editable = true }
-tigrbl-protocol-artifact-processing = { path = "pkgs/deprecated/tigrbl-protocol-artifact-processing", editable = true }
-tigrbl-artifact-processing-capability = { path = "pkgs/40-capabilities/tigrbl-artifact-processing-capability", editable = true }
-tigrbl-pushed-authorization-capability = { path = "pkgs/deprecated/tigrbl-pushed-authorization-capability", editable = true }
-tigrbl-authorization-request-staging-capability = { path = "pkgs/40-capabilities/tigrbl-authorization-request-staging-capability", editable = true }
-tigrbl-protected-resource-authorization-capability = { path = "pkgs/40-capabilities/tigrbl-protected-resource-authorization-capability", editable = true }
-tigrbl-client-registration-capability = { path = "pkgs/40-capabilities/tigrbl-client-registration-capability", editable = true }
-tigrbl-access-governance-memory-provider = { path = "pkgs/20-providers/tigrbl-access-governance-memory-provider", editable = true }
-tigrbl-policy-administration-memory-provider = { path = "pkgs/30-storage-runtime/tigrbl-policy-administration-memory-provider", editable = true }
-tigrbl-auth-router-oauth-authorization = { path = "pkgs/80-routers/tigrbl-auth-router-oauth-authorization", editable = true }
-tigrbl-auth-router-oauth-device-authorization = { path = "pkgs/80-routers/tigrbl-auth-router-oauth-device-authorization", editable = true }
-tigrbl-auth-router-oauth-token-exchange = { path = "pkgs/80-routers/tigrbl-auth-router-oauth-token-exchange", editable = true }
-tigrbl-auth-router-oidc-userinfo = { path = "pkgs/80-routers/tigrbl-auth-router-oidc-userinfo", editable = true }
-tigrbl-auth-router-oidc-logout = { path = "pkgs/80-routers/tigrbl-auth-router-oidc-logout", editable = true }
-tigrbl-auth-router-oidc-discovery = { path = "pkgs/80-routers/tigrbl-auth-router-oidc-discovery", editable = true }
-tigrbl-auth-router-oauth-authorization-server-metadata = { path = "pkgs/80-routers/tigrbl-auth-router-oauth-authorization-server-metadata", editable = true }
-tigrbl-auth-router-oauth-protected-resource-metadata = { path = "pkgs/80-routers/tigrbl-auth-router-oauth-protected-resource-metadata", editable = true }
-tigrbl-auth-router-resource-validation-metadata = { path = "pkgs/80-routers/tigrbl-auth-router-resource-validation-metadata", editable = true }
-tigrbl-auth-backend-app-core = { path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-core", editable = true }
-tigrbl-auth-backend-app-developer = { path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-developer", editable = true }
-tigrbl-auth-backend-app-my-account = { path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-my-account", editable = true }
-tigrbl-auth-backend-app-platform-admin = { path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-platform-admin", editable = true }
-tigrbl-auth-backend-app-public = { path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-public", editable = true }
-tigrbl-auth-backend-app-resource-validation = { path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-resource-validation", editable = true }
-tigrbl-auth-backend-app-service-admin = { path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-service-admin", editable = true }
-tigrbl-auth-backend-app-tenant-admin = { path = "pkgs/90-backend-apps/tigrbl-auth-backend-app-tenant-admin", editable = true }
-tigrbl-auth-router-session-login = { path = "pkgs/80-routers/tigrbl-auth-router-session-login", editable = true }
-tigrbl-auth-router-webauthn = { path = "pkgs/80-routers/tigrbl-auth-router-webauthn", editable = true }
-tigrbl-auth-router-oauth-introspection = { path = "pkgs/80-routers/tigrbl-auth-router-oauth-introspection", editable = true }
-tigrbl-auth-router-oauth-revocation = { path = "pkgs/80-routers/tigrbl-auth-router-oauth-revocation", editable = true }
-tigrbl-auth-router-oauth-par = { path = "pkgs/80-routers/tigrbl-auth-router-oauth-par", editable = true }
-tigrbl-auth-router-oauth-registration = { path = "pkgs/80-routers/tigrbl-auth-router-oauth-registration", editable = true }
-tigrbl-auth-router-oauth-token = { path = "pkgs/80-routers/tigrbl-auth-router-oauth-token", editable = true }
-tigrbl-set-transmitter-provider = { path = "pkgs/20-providers/tigrbl-set-transmitter-provider", editable = true }
-tigrbl-set-receiver-provider = { path = "pkgs/20-providers/tigrbl-set-receiver-provider", editable = true }
-tigrbl-wallet-attestation-verifier = { path = "pkgs/20-providers/tigrbl-wallet-attestation-verifier", editable = true }
-tigrbl-key-attestation-verifier = { path = "pkgs/20-providers/tigrbl-key-attestation-verifier", editable = true }
-tigrbl-platform-attestation-provider = { path = "pkgs/20-providers/tigrbl-platform-attestation-provider", editable = true }
-tigrbl-identity-oauth = { path = "pkgs/deprecated/tigrbl-identity-oauth", editable = true }
-tigrbl-identity-oidc = { path = "pkgs/deprecated/tigrbl-identity-oidc", editable = true }
-tigrbl-identity-principals = { path = "pkgs/10-concrete/tigrbl-identity-principals", editable = true }
-tigrbl-identity-operator = { path = "pkgs/60-runtime/tigrbl-identity-operator", editable = true }
-tigrbl-identity-policy = { path = "pkgs/deprecated/tigrbl-identity-policy", editable = true }
-tigrbl-identity-resource-server = { path = "pkgs/deprecated/tigrbl-identity-resource-server", editable = true }
-tigrbl-identity-rp = { path = "pkgs/deprecated/tigrbl-identity-rp", editable = true }
-tigrbl-identity-runtime = { path = "pkgs/60-runtime/tigrbl-identity-runtime", editable = true }
-tigrbl-identity-server = { path = "pkgs/60-runtime/tigrbl-identity-server", editable = true }
-tigrbl-identity-storage = { path = "pkgs/01-storage/tigrbl-identity-storage", editable = true }
+tba-protocol-oauth = { path = "pkgs/50-protocols/tba-protocol-oauth", editable = true }
+tba-concrete-set = { path = "pkgs/10-concrete/tba-concrete-set", editable = true }
+tba-protocol-oidc = { path = "pkgs/50-protocols/tba-protocol-oidc", editable = true }
+tba-protocol-webauthn = { path = "pkgs/50-protocols/tba-protocol-webauthn", editable = true }
+tba-protocol-security-jose = { path = "pkgs/50-protocols/tba-protocol-security-jose", editable = true }
+tba-protocol-oid4vci = { path = "pkgs/50-protocols/tba-protocol-oid4vci", editable = true }
+tba-protocol-oid4vp = { path = "pkgs/50-protocols/tba-protocol-oid4vp", editable = true }
+tba-protocol-authzen = { path = "pkgs/50-protocols/tba-protocol-authzen", editable = true }
+tba-protocol-oidc-relying-party = { path = "pkgs/50-protocols/tba-protocol-oidc-relying-party", editable = true }
+tba-contracts-authorization = { path = "pkgs/02-contracts/tba-contracts-authorization", editable = true }
+tba-runtime-relying-party-session = { path = "pkgs/30-storage-runtime/tba-runtime-relying-party-session", editable = true }
+tba-client-authorization-admin = { path = "pkgs/75-clients/tba-client-authorization-admin", editable = true }
+tba-client-policy-decision = { path = "pkgs/75-clients/tba-client-policy-decision", editable = true }
+tba-client-relying-party-session = { path = "pkgs/75-clients/tba-client-relying-party-session", editable = true }
+tba-middleware-policy-enforcement-asgi = { path = "pkgs/85-middleware/tba-middleware-policy-enforcement-asgi", editable = true }
+tba-router-authorization-admin = { path = "pkgs/80-routers/tba-router-authorization-admin", editable = true }
+tba-router-policy-decision = { path = "pkgs/80-routers/tba-router-policy-decision", editable = true }
+tba-router-relying-party-session = { path = "pkgs/80-routers/tba-router-relying-party-session", editable = true }
+tba-app-backend-policy-decision = { path = "pkgs/90-backend-apps/tba-app-backend-policy-decision", editable = true }
+tba-app-backend-relying-party = { path = "pkgs/90-backend-apps/tba-app-backend-relying-party", editable = true }
+tba-credentials = { path = "pkgs/70-facade/tba-credentials", editable = true }
+tba-capability-digital-credential-issuance = { path = "pkgs/40-capabilities/tba-capability-digital-credential-issuance", editable = true }
+tba-capability-digital-credential-presentation = { path = "pkgs/40-capabilities/tba-capability-digital-credential-presentation", editable = true }
+tba-capability-delegated-access-negotiation = { path = "pkgs/40-capabilities/tba-capability-delegated-access-negotiation", editable = true }
+tba-capability-attestation-appraisal = { path = "pkgs/40-capabilities/tba-capability-attestation-appraisal", editable = true }
+tba-capability-security-event-delivery = { path = "pkgs/40-capabilities/tba-capability-security-event-delivery", editable = true }
+tba-capability-workload-identity = { path = "pkgs/40-capabilities/tba-capability-workload-identity", editable = true }
+tba-capability-identity-document = { path = "pkgs/40-capabilities/tba-capability-identity-document", editable = true }
+tba-capability-protected-envelope = { path = "pkgs/40-capabilities/tba-capability-protected-envelope", editable = true }
+tba-capability-possession-proof = { path = "pkgs/40-capabilities/tba-capability-possession-proof", editable = true }
+tba-capability-workload-credential-brokering = { path = "pkgs/40-capabilities/tba-capability-workload-credential-brokering", editable = true }
+tba-router-admin-gate = { path = "pkgs/80-routers/tba-router-admin-gate", editable = true }
+tba-durability-authorization-policy-authority-derivation-graph = { path = "pkgs/30-storage-runtime/tba-durability-authorization-policy-authority-derivation-graph", editable = true }
+tba-concrete-authority-graph = { path = "pkgs/10-concrete/tba-concrete-authority-graph", editable = true }
+tba-runtime-authorization-policy = { path = "pkgs/60-runtime/tba-runtime-authorization-policy", editable = true }
+tba-provider-authorization-policy-decision-engine = { path = "pkgs/20-providers/tba-provider-authorization-policy-decision-engine", editable = true }
+tba-plugin-tigrbl = { path = "pkgs/60-runtime/tba-plugin-tigrbl", editable = true }
+tba-provider-authorization-resource-server-verifier = { path = "pkgs/20-providers/tba-provider-authorization-resource-server-verifier", editable = true }
+tba-protocol-authorization-resource-server = { path = "pkgs/50-protocols/tba-protocol-authorization-resource-server", editable = true }
+tba-cli-identity = { path = "pkgs/60-runtime/tba-cli-identity", editable = true }
+tba-testkit-identity = { path = "pkgs/120-tests/tba-testkit-identity", editable = true }
+tba-example-oauth-device-authorization-cli = { path = "pkgs/110-examples/tba-example-oauth-device-authorization-cli", editable = true }
+tba-runtime-identity-administration = { path = "pkgs/60-runtime/tba-runtime-identity-administration", editable = true }
+tba-runtime-identity-authoring = { path = "pkgs/60-runtime/tba-runtime-identity-authoring", editable = true }
+tba-contracts-identity = { path = "pkgs/02-contracts/tba-contracts-identity", editable = true }
+tba-contracts-identity-assurance = { path = "pkgs/02-contracts/tba-contracts-identity-assurance", editable = true }
+tba-contracts-token = { path = "pkgs/02-contracts/tba-contracts-token", editable = true }
+tba-contracts-attestation = { path = "pkgs/02-contracts/tba-contracts-attestation", editable = true }
+tba-contracts-claim = { path = "pkgs/02-contracts/tba-contracts-claim", editable = true }
+tba-contracts-did = { path = "pkgs/02-contracts/tba-contracts-did", editable = true }
+tba-contracts-digital-credential = { path = "pkgs/02-contracts/tba-contracts-digital-credential", editable = true }
+tba-contracts-public-key-authentication = { path = "pkgs/02-contracts/tba-contracts-public-key-authentication", editable = true }
+tba-contracts-replay = { path = "pkgs/02-contracts/tba-contracts-replay", editable = true }
+tba-contracts-security-event = { path = "pkgs/02-contracts/tba-contracts-security-event", editable = true }
+tba-contracts-workload-identity = { path = "pkgs/02-contracts/tba-contracts-workload-identity", editable = true }
+tba-contracts-identity-document = { path = "pkgs/02-contracts/tba-contracts-identity-document", editable = true }
+tba-contracts-protected-envelope = { path = "pkgs/02-contracts/tba-contracts-protected-envelope", editable = true }
+tba-contracts-proof-of-possession = { path = "pkgs/02-contracts/tba-contracts-proof-of-possession", editable = true }
+tba-concrete-authorization-policy-rules = { path = "pkgs/10-concrete/tba-concrete-authorization-policy-rules", editable = true }
+tba-concrete-authorization-policy-combiner-default = { path = "pkgs/10-concrete/tba-concrete-authorization-policy-combiner-default", editable = true }
+tba-concrete-authorization-policy-evaluators-default = { path = "pkgs/10-concrete/tba-concrete-authorization-policy-evaluators-default", editable = true }
+tba-concrete-authorization-policy-attributes-mapping = { path = "pkgs/10-concrete/tba-concrete-authorization-policy-attributes-mapping", editable = true }
+tba-concrete-authorization-policy-obligations = { path = "pkgs/10-concrete/tba-concrete-authorization-policy-obligations", editable = true }
+tba-concrete-policy-decision-engine-default = { path = "pkgs/10-concrete/tba-concrete-policy-decision-engine-default", editable = true }
+tba-concrete-cose = { path = "pkgs/10-concrete/tba-concrete-cose", editable = true }
+tba-concrete-jws = { path = "pkgs/10-concrete/tba-concrete-jws", editable = true }
+tba-concrete-jwe = { path = "pkgs/10-concrete/tba-concrete-jwe", editable = true }
+tba-concrete-jwt = { path = "pkgs/10-concrete/tba-concrete-jwt", editable = true }
+tba-concrete-cwt = { path = "pkgs/10-concrete/tba-concrete-cwt", editable = true }
+tba-concrete-oidc-id-token = { path = "pkgs/10-concrete/tba-concrete-oidc-id-token", editable = true }
+tba-concrete-did-document = { path = "pkgs/10-concrete/tba-concrete-did-document", editable = true }
+tba-concrete-vc-jose-credential = { path = "pkgs/10-concrete/tba-concrete-vc-jose-credential", editable = true }
+tba-concrete-vc-cose-credential = { path = "pkgs/10-concrete/tba-concrete-vc-cose-credential", editable = true }
+tba-concrete-wit = { path = "pkgs/10-concrete/tba-concrete-wit", editable = true }
+tba-concrete-wit-svid-credential = { path = "pkgs/10-concrete/tba-concrete-wit-svid-credential", editable = true }
+tba-concrete-wpt = { path = "pkgs/10-concrete/tba-concrete-wpt", editable = true }
+tba-concrete-x509-svid-credential = { path = "pkgs/10-concrete/tba-concrete-x509-svid-credential", editable = true }
+tba-concrete-jwt-svid-credential = { path = "pkgs/10-concrete/tba-concrete-jwt-svid-credential", editable = true }
+tba-concrete-cwt-svid-extension-credential = { path = "pkgs/10-concrete/tba-concrete-cwt-svid-extension-credential", editable = true }
+tba-provider-security-authorization-provenance-builder = { path = "pkgs/20-providers/tba-provider-security-authorization-provenance-builder", editable = true }
+tba-bases-identity-claims = { path = "pkgs/05-bases/tba-bases-identity-claims", editable = true }
+tba-concrete-jose = { path = "pkgs/10-concrete/tba-concrete-jose", editable = true }
+tba-concrete-sd-jwt = { path = "pkgs/10-concrete/tba-concrete-sd-jwt", editable = true }
+tba-concrete-svid = { path = "pkgs/10-concrete/tba-concrete-svid", editable = true }
+tba-concrete-did = { path = "pkgs/10-concrete/tba-concrete-did", editable = true }
+tba-bases-digital-credential = { path = "pkgs/05-bases/tba-bases-digital-credential", editable = true }
+tba-bases-attestation = { path = "pkgs/05-bases/tba-bases-attestation", editable = true }
+tba-bases-security-event = { path = "pkgs/05-bases/tba-bases-security-event", editable = true }
+tba-bases-token = { path = "pkgs/05-bases/tba-bases-token", editable = true }
+tba-bases-capability = { path = "pkgs/05-bases/tba-bases-capability", editable = true }
+tba-bases-replay = { path = "pkgs/05-bases/tba-bases-replay", editable = true }
+tba-bases-authentication-assurance = { path = "pkgs/05-bases/tba-bases-authentication-assurance", editable = true }
+tba-bases-authentication-context = { path = "pkgs/05-bases/tba-bases-authentication-context", editable = true }
+tba-bases-identity-assurance = { path = "pkgs/05-bases/tba-bases-identity-assurance", editable = true }
+tba-bases-security-artifact = { path = "pkgs/05-bases/tba-bases-security-artifact", editable = true }
+tba-concrete-claim-issuer = { path = "pkgs/10-concrete/tba-concrete-claim-issuer", editable = true }
+tba-concrete-claim-subject = { path = "pkgs/10-concrete/tba-concrete-claim-subject", editable = true }
+tba-concrete-claim-audience = { path = "pkgs/10-concrete/tba-concrete-claim-audience", editable = true }
+tba-concrete-claim-expiration = { path = "pkgs/10-concrete/tba-concrete-claim-expiration", editable = true }
+tba-concrete-claim-not-before = { path = "pkgs/10-concrete/tba-concrete-claim-not-before", editable = true }
+tba-concrete-claim-issued-at = { path = "pkgs/10-concrete/tba-concrete-claim-issued-at", editable = true }
+tba-concrete-claim-jwt-id = { path = "pkgs/10-concrete/tba-concrete-claim-jwt-id", editable = true }
+tba-protocol-jwt = { path = "pkgs/50-protocols/tba-protocol-jwt", editable = true }
+tba-concrete-claim-authentication-time = { path = "pkgs/10-concrete/tba-concrete-claim-authentication-time", editable = true }
+tba-concrete-claim-nonce = { path = "pkgs/10-concrete/tba-concrete-claim-nonce", editable = true }
+tba-concrete-claim-authentication-context = { path = "pkgs/10-concrete/tba-concrete-claim-authentication-context", editable = true }
+tba-concrete-claim-authentication-methods = { path = "pkgs/10-concrete/tba-concrete-claim-authentication-methods", editable = true }
+tba-concrete-claim-authorized-party = { path = "pkgs/10-concrete/tba-concrete-claim-authorized-party", editable = true }
+tba-concrete-claim-confirmation = { path = "pkgs/10-concrete/tba-concrete-claim-confirmation", editable = true }
+tba-concrete-claim-cwt-confirmation = { path = "pkgs/10-concrete/tba-concrete-claim-cwt-confirmation", editable = true }
+tba-concrete-claim-workload-token-hash = { path = "pkgs/10-concrete/tba-concrete-claim-workload-token-hash", editable = true }
+tba-concrete-claim-transaction-token-hash = { path = "pkgs/10-concrete/tba-concrete-claim-transaction-token-hash", editable = true }
+tba-concrete-claim-other-token-hashes = { path = "pkgs/10-concrete/tba-concrete-claim-other-token-hashes", editable = true }
+tba-concrete-claim-scope = { path = "pkgs/10-concrete/tba-concrete-claim-scope", editable = true }
+tba-concrete-claim-client-id = { path = "pkgs/10-concrete/tba-concrete-claim-client-id", editable = true }
+tba-concrete-claim-verified-claims = { path = "pkgs/10-concrete/tba-concrete-claim-verified-claims", editable = true }
+tba-concrete-claim-place-of-birth = { path = "pkgs/10-concrete/tba-concrete-claim-place-of-birth", editable = true }
+tba-concrete-claim-nationalities = { path = "pkgs/10-concrete/tba-concrete-claim-nationalities", editable = true }
+tba-concrete-claim-birth-family-name = { path = "pkgs/10-concrete/tba-concrete-claim-birth-family-name", editable = true }
+tba-concrete-claim-birth-given-name = { path = "pkgs/10-concrete/tba-concrete-claim-birth-given-name", editable = true }
+tba-concrete-claim-birth-middle-name = { path = "pkgs/10-concrete/tba-concrete-claim-birth-middle-name", editable = true }
+tba-concrete-claim-salutation = { path = "pkgs/10-concrete/tba-concrete-claim-salutation", editable = true }
+tba-concrete-claim-title = { path = "pkgs/10-concrete/tba-concrete-claim-title", editable = true }
+tba-concrete-claim-msisdn = { path = "pkgs/10-concrete/tba-concrete-claim-msisdn", editable = true }
+tba-concrete-claim-also-known-as = { path = "pkgs/10-concrete/tba-concrete-claim-also-known-as", editable = true }
+tba-concrete-claim-address-country-code = { path = "pkgs/10-concrete/tba-concrete-claim-address-country-code", editable = true }
+tba-concrete-claim-credential-type = { path = "pkgs/10-concrete/tba-concrete-claim-credential-type", editable = true }
+tba-concrete-claim-credential-status = { path = "pkgs/10-concrete/tba-concrete-claim-credential-status", editable = true }
+tba-concrete-claim-security-events = { path = "pkgs/10-concrete/tba-concrete-claim-security-events", editable = true }
+tba-concrete-claim-transaction-id = { path = "pkgs/10-concrete/tba-concrete-claim-transaction-id", editable = true }
+tba-concrete-claim-eat-profile = { path = "pkgs/10-concrete/tba-concrete-claim-eat-profile", editable = true }
+tba-concrete-claim-http-method = { path = "pkgs/10-concrete/tba-concrete-claim-http-method", editable = true }
+tba-concrete-claim-http-uri = { path = "pkgs/10-concrete/tba-concrete-claim-http-uri", editable = true }
+tba-concrete-claim-access-token-hash = { path = "pkgs/10-concrete/tba-concrete-claim-access-token-hash", editable = true }
+tba-concrete-claim-access-token-digest = { path = "pkgs/10-concrete/tba-concrete-claim-access-token-digest", editable = true }
+tba-concrete-claim-sd-hash = { path = "pkgs/10-concrete/tba-concrete-claim-sd-hash", editable = true }
+tba-concrete-claim-eat-nonce = { path = "pkgs/10-concrete/tba-concrete-claim-eat-nonce", editable = true }
+tba-concrete-claim-ueid = { path = "pkgs/10-concrete/tba-concrete-claim-ueid", editable = true }
+tba-concrete-claim-eat-submodules = { path = "pkgs/10-concrete/tba-concrete-claim-eat-submodules", editable = true }
+tba-concrete-claim-actor = { path = "pkgs/10-concrete/tba-concrete-claim-actor", editable = true }
+tba-concrete-claim-may-act = { path = "pkgs/10-concrete/tba-concrete-claim-may-act", editable = true }
+tba-concrete-claim-name = { path = "pkgs/10-concrete/tba-concrete-claim-name", editable = true }
+tba-concrete-claim-given-name = { path = "pkgs/10-concrete/tba-concrete-claim-given-name", editable = true }
+tba-concrete-claim-family-name = { path = "pkgs/10-concrete/tba-concrete-claim-family-name", editable = true }
+tba-concrete-claim-middle-name = { path = "pkgs/10-concrete/tba-concrete-claim-middle-name", editable = true }
+tba-concrete-claim-nickname = { path = "pkgs/10-concrete/tba-concrete-claim-nickname", editable = true }
+tba-concrete-claim-preferred-username = { path = "pkgs/10-concrete/tba-concrete-claim-preferred-username", editable = true }
+tba-concrete-claim-profile-uri = { path = "pkgs/10-concrete/tba-concrete-claim-profile-uri", editable = true }
+tba-concrete-claim-picture-uri = { path = "pkgs/10-concrete/tba-concrete-claim-picture-uri", editable = true }
+tba-concrete-claim-website-uri = { path = "pkgs/10-concrete/tba-concrete-claim-website-uri", editable = true }
+tba-concrete-claim-email = { path = "pkgs/10-concrete/tba-concrete-claim-email", editable = true }
+tba-concrete-claim-email-verified = { path = "pkgs/10-concrete/tba-concrete-claim-email-verified", editable = true }
+tba-concrete-claim-gender = { path = "pkgs/10-concrete/tba-concrete-claim-gender", editable = true }
+tba-concrete-claim-birthdate = { path = "pkgs/10-concrete/tba-concrete-claim-birthdate", editable = true }
+tba-concrete-claim-zoneinfo = { path = "pkgs/10-concrete/tba-concrete-claim-zoneinfo", editable = true }
+tba-concrete-claim-locale = { path = "pkgs/10-concrete/tba-concrete-claim-locale", editable = true }
+tba-concrete-claim-phone-number = { path = "pkgs/10-concrete/tba-concrete-claim-phone-number", editable = true }
+tba-concrete-claim-phone-number-verified = { path = "pkgs/10-concrete/tba-concrete-claim-phone-number-verified", editable = true }
+tba-concrete-claim-address = { path = "pkgs/10-concrete/tba-concrete-claim-address", editable = true }
+tba-concrete-claim-updated-at = { path = "pkgs/10-concrete/tba-concrete-claim-updated-at", editable = true }
+tba-concrete-claim-subject-identifiers = { path = "pkgs/10-concrete/tba-concrete-claim-subject-identifiers", editable = true }
+tba-concrete-claim-assertions = { path = "pkgs/10-concrete/tba-concrete-claim-assertions", editable = true }
+tba-concrete-claim-updated-at-rfc3339 = { path = "pkgs/10-concrete/tba-concrete-claim-updated-at-rfc3339", editable = true }
+tba-concrete-claim-authorization-code-hash = { path = "pkgs/10-concrete/tba-concrete-claim-authorization-code-hash", editable = true }
+tba-concrete-claim-state-hash = { path = "pkgs/10-concrete/tba-concrete-claim-state-hash", editable = true }
+tba-concrete-claim-session-id = { path = "pkgs/10-concrete/tba-concrete-claim-session-id", editable = true }
+tba-concrete-claim-cwt-issuer = { path = "pkgs/10-concrete/tba-concrete-claim-cwt-issuer", editable = true }
+tba-concrete-claim-cwt-subject = { path = "pkgs/10-concrete/tba-concrete-claim-cwt-subject", editable = true }
+tba-concrete-claim-cwt-audience = { path = "pkgs/10-concrete/tba-concrete-claim-cwt-audience", editable = true }
+tba-concrete-claim-cwt-expiration = { path = "pkgs/10-concrete/tba-concrete-claim-cwt-expiration", editable = true }
+tba-concrete-claim-cwt-not-before = { path = "pkgs/10-concrete/tba-concrete-claim-cwt-not-before", editable = true }
+tba-concrete-claim-cwt-issued-at = { path = "pkgs/10-concrete/tba-concrete-claim-cwt-issued-at", editable = true }
+tba-concrete-claim-cwt-id = { path = "pkgs/10-concrete/tba-concrete-claim-cwt-id", editable = true }
+tba-protocol-cwt = { path = "pkgs/50-protocols/tba-protocol-cwt", editable = true }
+tba-protocol-gnap = { path = "pkgs/50-protocols/tba-protocol-gnap", editable = true }
+tba-profile-haip = { path = "pkgs/55-profiles/tba-profile-haip", editable = true }
+tba-profile-fido2-server = { path = "pkgs/55-profiles/tba-profile-fido2-server", editable = true }
+tba-protocol-security-event-set = { path = "pkgs/50-protocols/tba-protocol-security-event-set", editable = true }
+tba-protocol-attestation-eat = { path = "pkgs/50-protocols/tba-protocol-attestation-eat", editable = true }
+tba-protocol-attestation-corim = { path = "pkgs/50-protocols/tba-protocol-attestation-corim", editable = true }
+tba-profile-credential-sd-jwt-vc = { path = "pkgs/55-profiles/tba-profile-credential-sd-jwt-vc", editable = true }
+tba-protocol-credential-iso-mdoc = { path = "pkgs/50-protocols/tba-protocol-credential-iso-mdoc", editable = true }
+tba-protocol-credential-w3c-vcdm = { path = "pkgs/50-protocols/tba-protocol-credential-w3c-vcdm", editable = true }
+tba-concrete-authorization-scope-set-matcher = { path = "pkgs/10-concrete/tba-concrete-authorization-scope-set-matcher", editable = true }
+tba-concrete-public-subject-identifier = { path = "pkgs/10-concrete/tba-concrete-public-subject-identifier", editable = true }
+tba-concrete-pairwise-subject-identifier = { path = "pkgs/10-concrete/tba-concrete-pairwise-subject-identifier", editable = true }
+tba-concrete-identity-assurance = { path = "pkgs/10-concrete/tba-concrete-identity-assurance", editable = true }
+tba-concrete-capability = { path = "pkgs/10-concrete/tba-concrete-capability", editable = true }
+tba-concrete-capability-default = { path = "pkgs/10-concrete/tba-concrete-capability-default", editable = true }
+tba-concrete-user-identity = { path = "pkgs/10-concrete/tba-concrete-user-identity", editable = true }
+tba-concrete-admin-identity = { path = "pkgs/10-concrete/tba-concrete-admin-identity", editable = true }
+tba-concrete-service-identity = { path = "pkgs/10-concrete/tba-concrete-service-identity", editable = true }
+tba-concrete-client-identity = { path = "pkgs/10-concrete/tba-concrete-client-identity", editable = true }
+tba-concrete-machine-identity = { path = "pkgs/10-concrete/tba-concrete-machine-identity", editable = true }
+tba-concrete-workload-identity = { path = "pkgs/10-concrete/tba-concrete-workload-identity", editable = true }
+tba-concrete-device-identity = { path = "pkgs/10-concrete/tba-concrete-device-identity", editable = true }
+tba-concrete-credential-password = { path = "pkgs/10-concrete/tba-concrete-credential-password", editable = true }
+tba-concrete-credential-password-reset = { path = "pkgs/10-concrete/tba-concrete-credential-password-reset", editable = true }
+tba-concrete-credential-api-key = { path = "pkgs/10-concrete/tba-concrete-credential-api-key", editable = true }
+tba-concrete-credential-service-key = { path = "pkgs/10-concrete/tba-concrete-credential-service-key", editable = true }
+tba-concrete-credential-client-secret = { path = "pkgs/10-concrete/tba-concrete-credential-client-secret", editable = true }
+tba-concrete-credential-mfa = { path = "pkgs/10-concrete/tba-concrete-credential-mfa", editable = true }
+tba-concrete-credential-passkey = { path = "pkgs/10-concrete/tba-concrete-credential-passkey", editable = true }
+tba-concrete-service-credential = { path = "pkgs/10-concrete/tba-concrete-service-credential", editable = true }
+tba-concrete-webauthn-credential = { path = "pkgs/10-concrete/tba-concrete-webauthn-credential", editable = true }
+tba-concrete-passwordless-credential = { path = "pkgs/10-concrete/tba-concrete-passwordless-credential", editable = true }
+tba-concrete-mfa-factor = { path = "pkgs/10-concrete/tba-concrete-mfa-factor", editable = true }
+tba-concrete-credential-mtls-certificate = { path = "pkgs/10-concrete/tba-concrete-credential-mtls-certificate", editable = true }
+tba-concrete-credential-dpop-key = { path = "pkgs/10-concrete/tba-concrete-credential-dpop-key", editable = true }
+tba-concrete-sd-jwt-vc-credential = { path = "pkgs/10-concrete/tba-concrete-sd-jwt-vc-credential", editable = true }
+tba-concrete-mdoc-credential = { path = "pkgs/10-concrete/tba-concrete-mdoc-credential", editable = true }
+tba-concrete-verifiable-credential = { path = "pkgs/10-concrete/tba-concrete-verifiable-credential", editable = true }
+tba-concrete-verifiable-presentation = { path = "pkgs/10-concrete/tba-concrete-verifiable-presentation", editable = true }
+tba-concrete-eat-evidence = { path = "pkgs/10-concrete/tba-concrete-eat-evidence", editable = true }
+tba-concrete-mdoc = { path = "pkgs/10-concrete/tba-concrete-mdoc", editable = true }
+tba-concrete-eat = { path = "pkgs/10-concrete/tba-concrete-eat", editable = true }
+tba-concrete-corim = { path = "pkgs/10-concrete/tba-concrete-corim", editable = true }
+tba-contracts-security-key-rotation-policy = { path = "pkgs/02-contracts/tba-contracts-security-key-rotation-policy", editable = true }
+tba-provider-identity-admin-auth-anomaly-detector = { path = "pkgs/20-providers/tba-provider-identity-admin-auth-anomaly-detector", editable = true }
+tba-capability-account-self-service = { path = "pkgs/40-capabilities/tba-capability-account-self-service", editable = true }
+tba-capability-administrative-resource = { path = "pkgs/40-capabilities/tba-capability-administrative-resource", editable = true }
+tba-capability-identity-administration = { path = "pkgs/40-capabilities/tba-capability-identity-administration", editable = true }
+tba-capability-operator-administration = { path = "pkgs/40-capabilities/tba-capability-operator-administration", editable = true }
+tba-capability-realm-administration = { path = "pkgs/40-capabilities/tba-capability-realm-administration", editable = true }
+tba-capability-tenant-administration = { path = "pkgs/40-capabilities/tba-capability-tenant-administration", editable = true }
+tba-capability-access-governance = { path = "pkgs/40-capabilities/tba-capability-access-governance", editable = true }
+tba-capability-adaptive-authentication = { path = "pkgs/40-capabilities/tba-capability-adaptive-authentication", editable = true }
+tba-capability-mfa-challenge = { path = "pkgs/40-capabilities/tba-capability-mfa-challenge", editable = true }
+tba-capability-key-administration = { path = "pkgs/40-capabilities/tba-capability-key-administration", editable = true }
+tba-capability-policy-administration = { path = "pkgs/40-capabilities/tba-capability-policy-administration", editable = true }
+tba-capability-policy-assurance = { path = "pkgs/40-capabilities/tba-capability-policy-assurance", editable = true }
+tba-provider-identity-admin-relationship-graph = { path = "pkgs/20-providers/tba-provider-identity-admin-relationship-graph", editable = true }
+tba-durability-identity-admin-trust-federation-graph = { path = "pkgs/30-storage-runtime/tba-durability-identity-admin-trust-federation-graph", editable = true }
+tba-concrete-trust-federation-graph = { path = "pkgs/10-concrete/tba-concrete-trust-federation-graph", editable = true }
+tba-primitives-identity = { path = "pkgs/00-primitives/tba-primitives-identity", editable = true }
+tba-provider-identity-jose = { path = "pkgs/20-providers/tba-provider-identity-jose", editable = true }
+tba-provider-digital-credential-status = { path = "pkgs/20-providers/tba-provider-digital-credential-status", editable = true }
+tba-provider-digital-credential-trust = { path = "pkgs/20-providers/tba-provider-digital-credential-trust", editable = true }
+tba-provider-eat-verifier = { path = "pkgs/20-providers/tba-provider-eat-verifier", editable = true }
+tba-provider-attestation-reference = { path = "pkgs/20-providers/tba-provider-attestation-reference", editable = true }
+tba-provider-attestation-appraiser = { path = "pkgs/20-providers/tba-provider-attestation-appraiser", editable = true }
+tba-provider-corim-reference-memory = { path = "pkgs/20-providers/tba-provider-corim-reference-memory", editable = true }
+tba-provider-spiffe-workload-api = { path = "pkgs/20-providers/tba-provider-spiffe-workload-api", editable = true }
+tba-provider-spiffe-bundle = { path = "pkgs/20-providers/tba-provider-spiffe-bundle", editable = true }
+tba-provider-did-resolver = { path = "pkgs/20-providers/tba-provider-did-resolver", editable = true }
+tba-provider-did-controller = { path = "pkgs/20-providers/tba-provider-did-controller", editable = true }
+tba-provider-trust-anchor = { path = "pkgs/20-providers/tba-provider-trust-anchor", editable = true }
+tba-provider-certificate-status = { path = "pkgs/20-providers/tba-provider-certificate-status", editable = true }
+tba-provider-certificate-path-validator = { path = "pkgs/20-providers/tba-provider-certificate-path-validator", editable = true }
+tba-provider-security-cose = { path = "pkgs/20-providers/tba-provider-security-cose", editable = true }
+tba-provider-attestation-packed = { path = "pkgs/20-providers/tba-provider-attestation-packed", editable = true }
+tba-provider-attestation-u2f = { path = "pkgs/20-providers/tba-provider-attestation-u2f", editable = true }
+tba-provider-attestation-tpm = { path = "pkgs/20-providers/tba-provider-attestation-tpm", editable = true }
+tba-provider-fido-metadata-service = { path = "pkgs/20-providers/tba-provider-fido-metadata-service", editable = true }
+tba-provider-mdoc-issuer = { path = "pkgs/20-providers/tba-provider-mdoc-issuer", editable = true }
+tba-provider-mdoc-verifier = { path = "pkgs/20-providers/tba-provider-mdoc-verifier", editable = true }
+tba-provider-replay-memory = { path = "pkgs/20-providers/tba-provider-replay-memory", editable = true }
+tba-capability-replay-protection = { path = "pkgs/40-capabilities/tba-capability-replay-protection", editable = true }
+tba-capability-token-introspection = { path = "pkgs/40-capabilities/tba-capability-token-introspection", editable = true }
+tba-capability-token-issuance = { path = "pkgs/40-capabilities/tba-capability-token-issuance", editable = true }
+tba-capability-public-key-registration = { path = "pkgs/40-capabilities/tba-capability-public-key-registration", editable = true }
+tba-capability-public-key-authentication = { path = "pkgs/40-capabilities/tba-capability-public-key-authentication", editable = true }
+tba-capability-public-key-credential-management = { path = "pkgs/40-capabilities/tba-capability-public-key-credential-management", editable = true }
+tba-capability-authenticator-attestation = { path = "pkgs/40-capabilities/tba-capability-authenticator-attestation", editable = true }
+tba-capability-token-exchange = { path = "pkgs/40-capabilities/tba-capability-token-exchange", editable = true }
+tba-capability-token-revocation = { path = "pkgs/40-capabilities/tba-capability-token-revocation", editable = true }
+tba-capability-api-key-authentication = { path = "pkgs/40-capabilities/tba-capability-api-key-authentication", editable = true }
+tba-capability-client-secret-authentication = { path = "pkgs/40-capabilities/tba-capability-client-secret-authentication", editable = true }
+tba-capability-password-authentication = { path = "pkgs/40-capabilities/tba-capability-password-authentication", editable = true }
+tba-capability-service-key-authentication = { path = "pkgs/40-capabilities/tba-capability-service-key-authentication", editable = true }
+tba-capability-policy-evaluation = { path = "pkgs/40-capabilities/tba-capability-policy-evaluation", editable = true }
+tba-capability-artifact-processing = { path = "pkgs/40-capabilities/tba-capability-artifact-processing", editable = true }
+tba-capability-authorization-request-staging = { path = "pkgs/40-capabilities/tba-capability-authorization-request-staging", editable = true }
+tba-capability-protected-resource-authorization = { path = "pkgs/40-capabilities/tba-capability-protected-resource-authorization", editable = true }
+tba-capability-client-registration = { path = "pkgs/40-capabilities/tba-capability-client-registration", editable = true }
+tba-provider-access-governance-memory = { path = "pkgs/20-providers/tba-provider-access-governance-memory", editable = true }
+tba-provider-policy-administration-memory = { path = "pkgs/30-storage-runtime/tba-provider-policy-administration-memory", editable = true }
+tba-router-oauth-authorization = { path = "pkgs/80-routers/tba-router-oauth-authorization", editable = true }
+tba-router-oauth-device-authorization = { path = "pkgs/80-routers/tba-router-oauth-device-authorization", editable = true }
+tba-router-oauth-token-exchange = { path = "pkgs/80-routers/tba-router-oauth-token-exchange", editable = true }
+tba-router-oidc-userinfo = { path = "pkgs/80-routers/tba-router-oidc-userinfo", editable = true }
+tba-router-oidc-logout = { path = "pkgs/80-routers/tba-router-oidc-logout", editable = true }
+tba-router-oidc-discovery = { path = "pkgs/80-routers/tba-router-oidc-discovery", editable = true }
+tba-router-oauth-authorization-server-metadata = { path = "pkgs/80-routers/tba-router-oauth-authorization-server-metadata", editable = true }
+tba-router-oauth-protected-resource-metadata = { path = "pkgs/80-routers/tba-router-oauth-protected-resource-metadata", editable = true }
+tba-router-resource-validation-metadata = { path = "pkgs/80-routers/tba-router-resource-validation-metadata", editable = true }
+tba-app-backend-core = { path = "pkgs/90-backend-apps/tba-app-backend-core", editable = true }
+tba-app-backend-developer = { path = "pkgs/90-backend-apps/tba-app-backend-developer", editable = true }
+tba-app-backend-my-account = { path = "pkgs/90-backend-apps/tba-app-backend-my-account", editable = true }
+tba-app-backend-platform-admin = { path = "pkgs/90-backend-apps/tba-app-backend-platform-admin", editable = true }
+tba-app-backend-public = { path = "pkgs/90-backend-apps/tba-app-backend-public", editable = true }
+tba-app-backend-resource-validation = { path = "pkgs/90-backend-apps/tba-app-backend-resource-validation", editable = true }
+tba-app-backend-service-admin = { path = "pkgs/90-backend-apps/tba-app-backend-service-admin", editable = true }
+tba-app-backend-tenant-admin = { path = "pkgs/90-backend-apps/tba-app-backend-tenant-admin", editable = true }
+tba-router-session-login = { path = "pkgs/80-routers/tba-router-session-login", editable = true }
+tba-router-webauthn = { path = "pkgs/80-routers/tba-router-webauthn", editable = true }
+tba-router-oauth-introspection = { path = "pkgs/80-routers/tba-router-oauth-introspection", editable = true }
+tba-router-oauth-revocation = { path = "pkgs/80-routers/tba-router-oauth-revocation", editable = true }
+tba-router-oauth-pushed-authorization-request = { path = "pkgs/80-routers/tba-router-oauth-pushed-authorization-request", editable = true }
+tba-router-oauth-registration = { path = "pkgs/80-routers/tba-router-oauth-registration", editable = true }
+tba-router-oauth-token = { path = "pkgs/80-routers/tba-router-oauth-token", editable = true }
+tba-provider-set-transmitter = { path = "pkgs/20-providers/tba-provider-set-transmitter", editable = true }
+tba-provider-set-receiver = { path = "pkgs/20-providers/tba-provider-set-receiver", editable = true }
+tba-provider-wallet-attestation-verifier = { path = "pkgs/20-providers/tba-provider-wallet-attestation-verifier", editable = true }
+tba-provider-key-attestation-verifier = { path = "pkgs/20-providers/tba-provider-key-attestation-verifier", editable = true }
+tba-provider-platform-attestation = { path = "pkgs/20-providers/tba-provider-platform-attestation", editable = true }
+tba-concrete-identity-principals = { path = "pkgs/10-concrete/tba-concrete-identity-principals", editable = true }
+tba-operator-identity = { path = "pkgs/60-runtime/tba-operator-identity", editable = true }
+tba-runtime-identity = { path = "pkgs/60-runtime/tba-runtime-identity", editable = true }
+tba-server-identity = { path = "pkgs/60-runtime/tba-server-identity", editable = true }
+tba-storage-core = { path = "pkgs/01-storage/tba-storage-core", editable = true }
 tigrbl-migrations = { path = "../tigrbl/pkgs/10_core/tigrbl_migrations", editable = true }
 tigrbl-ops-realtime = { git = "https://github.com/tigrbl/tigrbl.git", rev = "1368ad888277926e3a5e322081d0306cbbc7ebf3", subdirectory = "pkgs/60_ops/tigrbl_ops_realtime" }
-tigrbl-identity-storage-access-governance = { path = "pkgs/01-storage/tigrbl-identity-storage-access-governance", editable = true }
-tigrbl-identity-storage-attestation = { path = "pkgs/01-storage/tigrbl-identity-storage-attestation", editable = true }
-tigrbl-identity-storage-audit = { path = "pkgs/01-storage/tigrbl-identity-storage-audit", editable = true }
-tigrbl-identity-storage-authentication = { path = "pkgs/01-storage/tigrbl-identity-storage-authentication", editable = true }
-tigrbl-identity-storage-authority-graph = { path = "pkgs/01-storage/tigrbl-identity-storage-authority-graph", editable = true }
-tigrbl-identity-storage-authorization-policy = { path = "pkgs/01-storage/tigrbl-identity-storage-authorization-policy", editable = true }
-tigrbl-identity-storage-certificate = { path = "pkgs/01-storage/tigrbl-identity-storage-certificate", editable = true }
-tigrbl-identity-storage-claims = { path = "pkgs/01-storage/tigrbl-identity-storage-claims", editable = true }
-tigrbl-identity-storage-consent = { path = "pkgs/01-storage/tigrbl-identity-storage-consent", editable = true }
-tigrbl-identity-storage-delegation = { path = "pkgs/01-storage/tigrbl-identity-storage-delegation", editable = true }
-tigrbl-identity-storage-did = { path = "pkgs/01-storage/tigrbl-identity-storage-did", editable = true }
-tigrbl-identity-storage-digital-credential = { path = "pkgs/01-storage/tigrbl-identity-storage-digital-credential", editable = true }
-tigrbl-identity-storage-federation = { path = "pkgs/01-storage/tigrbl-identity-storage-federation", editable = true }
-tigrbl-identity-storage-principals = { path = "pkgs/01-storage/tigrbl-identity-storage-principals", editable = true }
-tigrbl-identity-storage-gnap = { path = "pkgs/01-storage/tigrbl-identity-storage-gnap", editable = true }
-tigrbl-identity-storage-key-material = { path = "pkgs/01-storage/tigrbl-identity-storage-key-material", editable = true }
-tigrbl-identity-storage-oauth = { path = "pkgs/01-storage/tigrbl-identity-storage-oauth", editable = true }
-tigrbl-identity-storage-oidc = { path = "pkgs/01-storage/tigrbl-identity-storage-oidc", editable = true }
-tigrbl-identity-storage-operator = { path = "pkgs/01-storage/tigrbl-identity-storage-operator", editable = true }
-tigrbl-identity-storage-presentation = { path = "pkgs/01-storage/tigrbl-identity-storage-presentation", editable = true }
-tigrbl-identity-storage-release-governance = { path = "pkgs/01-storage/tigrbl-identity-storage-release-governance", editable = true }
-tigrbl-identity-storage-replay-protection = { path = "pkgs/01-storage/tigrbl-identity-storage-replay-protection", editable = true }
-tigrbl-identity-storage-residency = { path = "pkgs/01-storage/tigrbl-identity-storage-residency", editable = true }
-tigrbl-identity-storage-scim = { path = "pkgs/01-storage/tigrbl-identity-storage-scim", editable = true }
-tigrbl-identity-storage-security-event = { path = "pkgs/01-storage/tigrbl-identity-storage-security-event", editable = true }
-tigrbl-identity-storage-token = { path = "pkgs/01-storage/tigrbl-identity-storage-token", editable = true }
-tigrbl-identity-storage-tenancy = { path = "pkgs/01-storage/tigrbl-identity-storage-tenancy", editable = true }
-tigrbl-identity-storage-trust-federation-graph = { path = "pkgs/01-storage/tigrbl-identity-storage-trust-federation-graph", editable = true }
-tigrbl-identity-storage-webauthn = { path = "pkgs/01-storage/tigrbl-identity-storage-webauthn", editable = true }
-tigrbl-identity-storage-workload-identity = { path = "pkgs/01-storage/tigrbl-identity-storage-workload-identity", editable = true }
-tigrbl-identity-storage-runtime = { path = "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime", editable = true }
-tigrbl-identity-durability = { path = "pkgs/30-storage-runtime/tigrbl-identity-durability", editable = true }
-tigrbl-session-durability = { path = "pkgs/30-storage-runtime/tigrbl-session-durability", editable = true }
-tigrbl-consent-durability = { path = "pkgs/30-storage-runtime/tigrbl-consent-durability", editable = true }
-tigrbl-token-durability = { path = "pkgs/30-storage-runtime/tigrbl-token-durability", editable = true }
-tigrbl-oauth-state-durability = { path = "pkgs/30-storage-runtime/tigrbl-oauth-state-durability", editable = true }
-tigrbl-oidc-state-durability = { path = "pkgs/30-storage-runtime/tigrbl-oidc-state-durability", editable = true }
-tigrbl-delegation-durability = { path = "pkgs/30-storage-runtime/tigrbl-delegation-durability", editable = true }
-tigrbl-authorization-policy-durability = { path = "pkgs/30-storage-runtime/tigrbl-authorization-policy-durability", editable = true }
-tigrbl-digital-credential-durability = { path = "pkgs/30-storage-runtime/tigrbl-digital-credential-durability", editable = true }
-tigrbl-presentation-durability = { path = "pkgs/30-storage-runtime/tigrbl-presentation-durability", editable = true }
-tigrbl-attestation-durability = { path = "pkgs/30-storage-runtime/tigrbl-attestation-durability", editable = true }
-tigrbl-security-event-durability = { path = "pkgs/30-storage-runtime/tigrbl-security-event-durability", editable = true }
-tigrbl-workload-identity-durability = { path = "pkgs/30-storage-runtime/tigrbl-workload-identity-durability", editable = true }
-tigrbl-replay-protection-durability = { path = "pkgs/30-storage-runtime/tigrbl-replay-protection-durability", editable = true }
-tigrbl-webauthn-durability = { path = "pkgs/30-storage-runtime/tigrbl-webauthn-durability", editable = true }
-tigrbl-gnap-state-durability = { path = "pkgs/30-storage-runtime/tigrbl-gnap-state-durability", editable = true }
-tigrbl-audit-durability = { path = "pkgs/30-storage-runtime/tigrbl-audit-durability", editable = true }
-tigrbl-key-material-durability = { path = "pkgs/30-storage-runtime/tigrbl-key-material-durability", editable = true }
-tigrbl-authority-graph-durability = { path = "pkgs/30-storage-runtime/tigrbl-authority-graph-durability", editable = true }
-tigrbl-trust-federation-graph-durability = { path = "pkgs/30-storage-runtime/tigrbl-trust-federation-graph-durability", editable = true }
+tba-storage-access-governance = { path = "pkgs/01-storage/tba-storage-access-governance", editable = true }
+tba-storage-attestation = { path = "pkgs/01-storage/tba-storage-attestation", editable = true }
+tba-storage-audit = { path = "pkgs/01-storage/tba-storage-audit", editable = true }
+tba-storage-authentication = { path = "pkgs/01-storage/tba-storage-authentication", editable = true }
+tba-storage-authority-graph = { path = "pkgs/01-storage/tba-storage-authority-graph", editable = true }
+tba-storage-authorization-policy = { path = "pkgs/01-storage/tba-storage-authorization-policy", editable = true }
+tba-storage-certificate = { path = "pkgs/01-storage/tba-storage-certificate", editable = true }
+tba-storage-claims = { path = "pkgs/01-storage/tba-storage-claims", editable = true }
+tba-storage-consent = { path = "pkgs/01-storage/tba-storage-consent", editable = true }
+tba-storage-delegation = { path = "pkgs/01-storage/tba-storage-delegation", editable = true }
+tba-storage-did = { path = "pkgs/01-storage/tba-storage-did", editable = true }
+tba-storage-digital-credential = { path = "pkgs/01-storage/tba-storage-digital-credential", editable = true }
+tba-storage-federation = { path = "pkgs/01-storage/tba-storage-federation", editable = true }
+tba-storage-principals = { path = "pkgs/01-storage/tba-storage-principals", editable = true }
+tba-storage-gnap = { path = "pkgs/01-storage/tba-storage-gnap", editable = true }
+tba-storage-key-material = { path = "pkgs/01-storage/tba-storage-key-material", editable = true }
+tba-storage-oauth = { path = "pkgs/01-storage/tba-storage-oauth", editable = true }
+tba-storage-oidc = { path = "pkgs/01-storage/tba-storage-oidc", editable = true }
+tba-storage-operator = { path = "pkgs/01-storage/tba-storage-operator", editable = true }
+tba-storage-presentation = { path = "pkgs/01-storage/tba-storage-presentation", editable = true }
+tba-storage-release-governance = { path = "pkgs/01-storage/tba-storage-release-governance", editable = true }
+tba-storage-replay-protection = { path = "pkgs/01-storage/tba-storage-replay-protection", editable = true }
+tba-storage-residency = { path = "pkgs/01-storage/tba-storage-residency", editable = true }
+tba-storage-scim = { path = "pkgs/01-storage/tba-storage-scim", editable = true }
+tba-storage-security-event = { path = "pkgs/01-storage/tba-storage-security-event", editable = true }
+tba-storage-token = { path = "pkgs/01-storage/tba-storage-token", editable = true }
+tba-storage-tenancy = { path = "pkgs/01-storage/tba-storage-tenancy", editable = true }
+tba-storage-trust-federation-graph = { path = "pkgs/01-storage/tba-storage-trust-federation-graph", editable = true }
+tba-storage-webauthn = { path = "pkgs/01-storage/tba-storage-webauthn", editable = true }
+tba-storage-workload-identity = { path = "pkgs/01-storage/tba-storage-workload-identity", editable = true }
+tba-runtime-identity-storage = { path = "pkgs/30-storage-runtime/tba-runtime-identity-storage", editable = true }
+tba-durability-identity = { path = "pkgs/30-storage-runtime/tba-durability-identity", editable = true }
+tba-durability-session = { path = "pkgs/30-storage-runtime/tba-durability-session", editable = true }
+tba-durability-consent = { path = "pkgs/30-storage-runtime/tba-durability-consent", editable = true }
+tba-durability-token = { path = "pkgs/30-storage-runtime/tba-durability-token", editable = true }
+tba-durability-oauth-state = { path = "pkgs/30-storage-runtime/tba-durability-oauth-state", editable = true }
+tba-durability-oidc-state = { path = "pkgs/30-storage-runtime/tba-durability-oidc-state", editable = true }
+tba-durability-delegation = { path = "pkgs/30-storage-runtime/tba-durability-delegation", editable = true }
+tba-durability-authorization-policy = { path = "pkgs/30-storage-runtime/tba-durability-authorization-policy", editable = true }
+tba-durability-digital-credential = { path = "pkgs/30-storage-runtime/tba-durability-digital-credential", editable = true }
+tba-durability-presentation = { path = "pkgs/30-storage-runtime/tba-durability-presentation", editable = true }
+tba-durability-attestation = { path = "pkgs/30-storage-runtime/tba-durability-attestation", editable = true }
+tba-durability-security-event = { path = "pkgs/30-storage-runtime/tba-durability-security-event", editable = true }
+tba-durability-workload-identity = { path = "pkgs/30-storage-runtime/tba-durability-workload-identity", editable = true }
+tba-durability-replay-protection = { path = "pkgs/30-storage-runtime/tba-durability-replay-protection", editable = true }
+tba-durability-webauthn = { path = "pkgs/30-storage-runtime/tba-durability-webauthn", editable = true }
+tba-durability-gnap-state = { path = "pkgs/30-storage-runtime/tba-durability-gnap-state", editable = true }
+tba-durability-audit = { path = "pkgs/30-storage-runtime/tba-durability-audit", editable = true }
+tba-durability-key-material = { path = "pkgs/30-storage-runtime/tba-durability-key-material", editable = true }
+tba-durability-authority-graph = { path = "pkgs/30-storage-runtime/tba-durability-authority-graph", editable = true }
+tba-durability-trust-federation-graph = { path = "pkgs/30-storage-runtime/tba-durability-trust-federation-graph", editable = true }
 
-tigrbl-security-protocol-jwe = { path = "pkgs/50-protocols/tigrbl-security-protocol-jwe", editable = true }
-tigrbl-security-protocol-jws = { path = "pkgs/50-protocols/tigrbl-security-protocol-jws", editable = true }
-tigrbl-security-protocol-cose = { path = "pkgs/50-protocols/tigrbl-security-protocol-cose", editable = true }
+tba-protocol-security-jwe = { path = "pkgs/50-protocols/tba-protocol-security-jwe", editable = true }
+tba-protocol-security-jws = { path = "pkgs/50-protocols/tba-protocol-security-jws", editable = true }
+tba-protocol-security-cose = { path = "pkgs/50-protocols/tba-protocol-security-cose", editable = true }
 
-tigrbl-identity-protocol-did-core = { path = "pkgs/50-protocols/tigrbl-identity-protocol-did-core", editable = true }
+tba-protocol-identity-did-core = { path = "pkgs/50-protocols/tba-protocol-identity-did-core", editable = true }
 
-tigrbl-oauth-profile-jwt-access-token = { path = "pkgs/50-protocols/tigrbl-oauth-profile-jwt-access-token", editable = true }
+tba-profile-oauth-jwt-access-token = { path = "pkgs/55-profiles/tba-profile-oauth-jwt-access-token", editable = true }
 
-tigrbl-credential-profile-vc-jose-cose = { path = "pkgs/50-protocols/tigrbl-credential-profile-vc-jose-cose", editable = true }
+tba-profile-credential-vc-jose-cose = { path = "pkgs/55-profiles/tba-profile-credential-vc-jose-cose", editable = true }
 
-tigrbl-workload-protocol-spiffe-svid = { path = "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-svid", editable = true }
+tba-protocol-workload-spiffe-svid = { path = "pkgs/50-protocols/tba-protocol-workload-spiffe-svid", editable = true }
 
-tigrbl-workload-credential-profile-wimse-wit = { path = "pkgs/50-protocols/tigrbl-workload-credential-profile-wimse-wit", editable = true }
+tba-profile-workload-credential-wimse-wit = { path = "pkgs/55-profiles/tba-profile-workload-credential-wimse-wit", editable = true }
 
-tigrbl-workload-proof-profile-wimse-wpt = { path = "pkgs/50-protocols/tigrbl-workload-proof-profile-wimse-wpt", editable = true }
+tba-profile-workload-proof-wimse-wpt = { path = "pkgs/55-profiles/tba-profile-workload-proof-wimse-wpt", editable = true }
 
-tigrbl-workload-credential-profile-spiffe-wit-svid = { path = "pkgs/50-protocols/tigrbl-workload-credential-profile-spiffe-wit-svid", editable = true }
+tba-profile-workload-credential-spiffe-wit-svid = { path = "pkgs/55-profiles/tba-profile-workload-credential-spiffe-wit-svid", editable = true }
 
-tigrbl-workload-credential-profile-cwt-svid-extension = { path = "pkgs/50-protocols/tigrbl-workload-credential-profile-cwt-svid-extension", editable = true }
+tba-profile-workload-credential-cwt-svid-extension = { path = "pkgs/55-profiles/tba-profile-workload-credential-cwt-svid-extension", editable = true }
 
-tigrbl-workload-protocol-spiffe-workload-api = { path = "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-workload-api", editable = true }
+tba-protocol-workload-spiffe-workload-api = { path = "pkgs/50-protocols/tba-protocol-workload-spiffe-workload-api", editable = true }
 
-tigrbl-workload-protocol-spiffe-broker-api = { path = "pkgs/50-protocols/tigrbl-workload-protocol-spiffe-broker-api", editable = true }
+tba-protocol-workload-spiffe-broker-api = { path = "pkgs/50-protocols/tba-protocol-workload-spiffe-broker-api", editable = true }
 
-tigrbl-workload-credential-conformance-testkit = { path = "pkgs/120-tests/tigrbl-workload-credential-conformance-testkit", editable = true }
+tba-testkit-workload-credential-conformance = { path = "pkgs/120-tests/tba-testkit-workload-credential-conformance", editable = true }
 
-workload-credential-profiles-example = { path = "pkgs/110-examples/workload-credential-profiles-example", editable = true }
+tba-example-workload-credential-profiles = { path = "pkgs/110-examples/tba-example-workload-credential-profiles", editable = true }
 
-tigrbl-jose-cryptography-provider = { path = "pkgs/20-providers/tigrbl-jose-cryptography-provider", editable = true }
+tba-provider-jose-cryptography = { path = "pkgs/20-providers/tba-provider-jose-cryptography", editable = true }
 
 [project.scripts]
-tigrbl-auth = "tigrbl_identity_cli.cli.main:main"
+tba-auth = "tba_cli_identity.cli.main:main"

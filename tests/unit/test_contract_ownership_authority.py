@@ -33,13 +33,13 @@ def test_equivalent_compatibility_exports_preserve_class_identity() -> None:
 
 
 def test_renamed_contract_families_are_unambiguous() -> None:
-    from tigrbl_identity_contracts.adaptive_access import AdaptiveTrustDomain
-    from tigrbl_identity_contracts.credentials.errors import CredentialVerificationError
-    from tigrbl_identity_contracts.public_key_authentication.errors import (
+    from tba_contracts_identity.adaptive_access import AdaptiveTrustDomain
+    from tba_contracts_identity.credentials.errors import CredentialVerificationError
+    from tba_contracts_identity.public_key_authentication.errors import (
         PublicKeyCredentialVerificationError,
     )
-    from tigrbl_identity_contracts.workloads import TrustDomain
-    from tigrbl_security_trust_contracts import KeyAttestationEvidence
+    from tba_contracts_identity.workloads import TrustDomain
+    from tba_contracts_security_trust import KeyAttestationEvidence
 
     assert AdaptiveTrustDomain is not TrustDomain
     assert issubclass(PublicKeyCredentialVerificationError, RuntimeError)
@@ -48,18 +48,18 @@ def test_renamed_contract_families_are_unambiguous() -> None:
 
 
 def test_semantic_contracts_do_not_advertise_storage_implementations() -> None:
-    oauth = import_module("tigrbl_identity_contracts.oauth")
-    oidc = import_module("tigrbl_identity_contracts.oidc")
+    oauth = import_module("tba_contracts_identity.oauth")
+    oidc = import_module("tba_contracts_identity.oidc")
 
     assert not hasattr(oauth, "OAuthRepositoryPort")
     assert not hasattr(oidc, "BackchannelReplayStorePort")
 
 
 def test_neutral_contract_packages_are_the_canonical_authority() -> None:
-    token_facade = import_module("tigrbl_identity_contracts.tokens")
-    token_contracts = import_module("tigrbl_token_contracts")
-    assurance_facade = import_module("tigrbl_identity_contracts.assurance")
-    assurance_contracts = import_module("tigrbl_identity_assurance_contracts")
+    token_facade = import_module("tba_contracts_identity.tokens")
+    token_contracts = import_module("tba_contracts_token")
+    assurance_facade = import_module("tba_contracts_identity.assurance")
+    assurance_contracts = import_module("tba_contracts_identity_assurance")
 
     assert token_facade.TokenProfile is token_contracts.TokenProfile
     assert (

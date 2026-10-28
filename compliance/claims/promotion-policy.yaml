@@ -1,5 +1,5 @@
 schema_version: 1
-package: tigrbl_auth
+package: tba_auth
 promotion_rules:
   tier_1_to_2:
     requires:

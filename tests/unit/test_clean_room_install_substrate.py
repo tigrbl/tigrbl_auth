@@ -3,9 +3,9 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-from tigrbl_auth.cli import install_substrate
-from tigrbl_auth.cli.install_substrate import build_install_substrate_report
-from tigrbl_auth.cli.reports import _dependency_artifact_paths, generate_state_reports
+from tba_auth.cli import install_substrate
+from tba_auth.cli.install_substrate import build_install_substrate_report
+from tba_auth.cli.reports import _dependency_artifact_paths, generate_state_reports
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -107,7 +107,7 @@ def test_runtime_surface_probe_resolves_split_package_source_roots() -> None:
     assert results
     assert all(item["passed"] for item in results)
     assert {item["module"] for item in results} >= {
-        "tigrbl_identity_server.composition.app",
-        "tigrbl_auth_backend_app_core",
-        "tigrbl_auth_backend_app_public",
+        "tba_server_identity.composition.app",
+        "tba_app_backend_core",
+        "tba_app_backend_public",
     }

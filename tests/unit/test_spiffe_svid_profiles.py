@@ -1,5 +1,5 @@
 import pytest
-from tigrbl_workload_protocol_spiffe_svid import validate_jwt_svid, validate_spiffe_id, validate_x509_svid
+from tba_protocol_workload_spiffe_svid import validate_jwt_svid, validate_spiffe_id, validate_x509_svid
 
 def test_spiffe_id_and_stable_svid_profiles() -> None:
     assert validate_spiffe_id("spiffe://example.org/workload") == ("example.org", "/workload")

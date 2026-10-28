@@ -1,0 +1,10 @@
+# @tba/ui-developer
+
+Developer UIX for OIDC/OAuth client registration, redirect URI management, client metadata, secrets, and client JWKS.
+
+## API Boundary
+
+- Consumes `tba-app-backend-developer`.
+- Uses exactly one configured base URL: `VITE_TBA_AUTH_DEVELOPER_BACKEND_APP_BASE_URL`.
+- Allows client registration and developer-scoped RPC paths.
+- Blocks tenant lifecycle and service identity administration.

@@ -1,5 +1,5 @@
 schema_version: 1
-repository: Tigrbl/tigrbl_auth
+repository: Tigrbl/tba_auth
 effective_date: 2026-04-07
 objective: >-
   Treat GitHub repository settings as enforceable release controls for certification,

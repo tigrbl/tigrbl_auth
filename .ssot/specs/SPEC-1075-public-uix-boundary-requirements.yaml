@@ -8,7 +8,7 @@ status: "draft"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "The public UIX boundary MUST define the public end-user browser-facing authentication surface for `tigrbl_auth`."
+summary: "The public UIX boundary MUST define the public end-user browser-facing authentication surface for `tba_auth`."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -20,7 +20,7 @@ references: []
 body: |-
   ## Requirements
   
-  The public UIX boundary MUST define the public end-user browser-facing authentication surface for `tigrbl_auth`.
+  The public UIX boundary MUST define the public end-user browser-facing authentication surface for `tba_auth`.
   
   Required in-scope capabilities:
   - login

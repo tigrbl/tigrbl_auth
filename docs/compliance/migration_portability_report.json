@@ -244,7 +244,7 @@
     "sqlite": {
       "backend": "sqlite",
       "available": true,
-      "database_url": "sqlite+aiosqlite:///D:\\Code\\GitHub\\tigrbl\\tigrbl_auth\\dist\\migration-portability\\sqlite\\tigrbl_auth_migration_portability.db",
+      "database_url": "sqlite+aiosqlite:///D:\\Code\\GitHub\\tigrbl\\tba_auth\\dist\\migration-portability\\sqlite\\tba_auth_migration_portability.db",
       "passed": true,
       "upgrade_passed": true,
       "downgrade_passed": true,

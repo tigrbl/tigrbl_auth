@@ -1,7 +1,7 @@
 import pytest
 
-from tigrbl_auth_protocol_oidc.standards import id_token
-from tigrbl_identity_core.errors import InvalidTokenError
+from tba_protocol_oidc.standards import id_token
+from tba_primitives_identity.errors import InvalidTokenError
 
 
 class _Service:

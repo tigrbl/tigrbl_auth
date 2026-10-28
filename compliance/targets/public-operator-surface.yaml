@@ -1,9 +1,9 @@
 schema_version: 1
-package: tigrbl_auth
+package: tba_auth
 surfaces:
   public_auth_plane:
     checkpoint_current:
-      install_entrypoint: tigrbl_auth.plugin.TigrblAuthPlugin.install
+      install_entrypoint: tba_auth.plugin.TbaPlugin.install
       routes:
       - /login
       - /authorize
@@ -21,8 +21,8 @@ surfaces:
       - /.well-known/oauth-authorization-server
       - /.well-known/oauth-protected-resource
       - /.well-known/jwks.json
-      mounting_entrypoint: tigrbl_auth_backend_app_core.surfaces.attach_runtime_surfaces
-      capability_registry: tigrbl_auth/config/surfaces.py:PUBLIC_CAPABILITIES
+      mounting_entrypoint: tba_app_backend_core.surfaces.attach_runtime_surfaces
+      capability_registry: tba_auth/config/surfaces.py:PUBLIC_CAPABILITIES
       discovery_snapshots:
       - specs/discovery/profiles/baseline/openid-configuration.json
       - specs/discovery/profiles/production/openid-configuration.json

@@ -50,7 +50,7 @@ async def test_device_token_polling(async_client: AsyncClient) -> None:
     assert pending.status_code == status.HTTP_400_BAD_REQUEST
     assert pending.json()["error"] == "authorization_pending"
 
-    from tigrbl_auth.rfc.rfc8628 import approve_device_code
+    from tba_auth.rfc.rfc8628 import approve_device_code
 
     await approve_device_code.__wrapped__(
         {"payload": {"id": device_code, "sub": "user", "tid": "tenant"}}
@@ -66,8 +66,8 @@ async def test_device_token_polling(async_client: AsyncClient) -> None:
 @pytest.mark.asyncio
 async def test_device_code_flow_disabled(async_client: AsyncClient) -> None:
     """Disabling RFC 8628 should remove the device code grant."""
-    from tigrbl_identity_runtime.settings import settings
-    from tigrbl_identity_server.rest import shared
+    from tba_runtime_identity.settings import settings
+    from tba_server_identity.rest import shared
 
     original = settings.enable_rfc8628
     settings.enable_rfc8628 = False

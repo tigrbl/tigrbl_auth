@@ -8,15 +8,15 @@ import pytest
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tigrbl_auth import decode_jwt
-from tigrbl_auth_backend_app_core import build_app
-from tigrbl_auth.config.deployment import DEFAULT_VALUES, resolve_deployment
-from tigrbl_auth.crypto import hash_pw
-from tigrbl_auth.db import get_db as legacy_get_db
-from tigrbl_auth.tables import Client, Tenant, User
-from tigrbl_identity_storage_runtime.engine import get_db as tables_get_db
-from tigrbl_auth.tables.engine import get_db as engine_get_db
-from tigrbl_auth.rfc.rfc7636_pkce import makeCodeChallenge, makeCodeVerifier
+from tba_auth import decode_jwt
+from tba_app_backend_core import build_app
+from tba_auth.config.deployment import DEFAULT_VALUES, resolve_deployment
+from tba_auth.crypto import hash_pw
+from tba_auth.db import get_db as legacy_get_db
+from tba_auth.tables import Client, Tenant, User
+from tba_runtime_identity_storage.engine import get_db as tables_get_db
+from tba_auth.tables.engine import get_db as engine_get_db
+from tba_auth.rfc.rfc7636_pkce import makeCodeChallenge, makeCodeVerifier
 
 
 pytestmark = pytest.mark.integration

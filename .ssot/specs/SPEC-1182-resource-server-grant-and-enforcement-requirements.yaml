@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification defines first-class resource-server grant semantics and enforcement requirements for protected-resource access in `tigrbl_auth`."
+summary: "This specification defines first-class resource-server grant semantics and enforcement requirements for protected-resource access in `tba_auth`."
 supersedes: []
 superseded_by: []
 status_notes: []
@@ -17,7 +17,7 @@ body: |-
   ## Overview
 
   This specification defines first-class `ResourceServerGrant` semantics for
-  protected-resource access in `tigrbl_auth`.
+  protected-resource access in `tba_auth`.
 
   ## Decision Source
 

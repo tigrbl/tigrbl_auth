@@ -1,7 +1,7 @@
 import asyncio
 
 import pytest
-from tigrbl_auth_protocol_authzen import (
+from tba_protocol_authzen import (
     CAPABILITY_REQUIREMENTS as AUTHZEN_REQUIREMENTS,
     AuthzenProtocol,
     CURRENT_VERSION as AUTHZEN_CURRENT,
@@ -10,7 +10,7 @@ from tigrbl_auth_protocol_authzen import (
     migrate_evaluation,
     supports as authzen_supports,
 )
-from tigrbl_auth_protocol_oid4vci import (
+from tba_protocol_oid4vci import (
     CAPABILITY_REQUIREMENTS as OID4VCI_REQUIREMENTS,
     CURRENT_VERSION as OID4VCI_CURRENT,
     Oid4vciProtocol,
@@ -19,7 +19,7 @@ from tigrbl_auth_protocol_oid4vci import (
     migrate_request as migrate_issuance,
     supports as oid4vci_supports,
 )
-from tigrbl_auth_protocol_oid4vp import (
+from tba_protocol_oid4vp import (
     CAPABILITY_REQUIREMENTS as OID4VP_REQUIREMENTS,
     CURRENT_VERSION as OID4VP_CURRENT,
     Oid4vpProtocol,
@@ -28,17 +28,17 @@ from tigrbl_auth_protocol_oid4vp import (
     migrate_request as migrate_presentation,
     supports as oid4vp_supports,
 )
-from tigrbl_identity_contracts.digital_credentials import (
+from tba_contracts_identity.digital_credentials import (
     CredentialIssuanceResult,
     PresentationResult,
 )
-from tigrbl_identity_contracts.policy import (
+from tba_contracts_identity.policy import (
     PolicyDecision,
     PolicyEntity,
     PolicyEntitySearchResult,
     PolicyEvaluationResult,
 )
-from tigrbl_policy_evaluation_capability import PolicyEvaluationCapability
+from tba_capability_policy_evaluation import PolicyEvaluationCapability
 
 
 def test_protocol_packages_pin_independent_final_versions_and_features():

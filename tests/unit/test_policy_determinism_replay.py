@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import tests.unit.formal_auth_helpers  # noqa: F401
 
-from tigrbl_auth.services.formal_authorization import PolicyReplayCase as FacadePolicyReplayCase
-from tigrbl_authz_policy import PolicyReplayCase, replay_policy_determinism
+from tba_auth.services.formal_authorization import PolicyReplayCase as FacadePolicyReplayCase
+from tba_runtime_authorization_policy import PolicyReplayCase, replay_policy_determinism
 
 
 def test_policy_determinism_replay_t0_exports_facade_identity() -> None:

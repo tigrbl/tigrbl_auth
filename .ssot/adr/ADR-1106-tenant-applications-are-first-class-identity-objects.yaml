@@ -21,7 +21,7 @@ body: |-
   ## Decision
   
   `App` SHALL be a first-class identity object owned by
-  `tigrbl-identity-principals`.
+  `tba-concrete-identity-principals`.
   
   An app belongs to one tenant and MAY own:
   

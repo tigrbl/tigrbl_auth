@@ -2,14 +2,14 @@ from __future__ import annotations
 
 import pytest
 
-from tigrbl_capability import Capability
-from tigrbl_identity_contracts.capabilities import (
+from tba_concrete_capability import Capability
+from tba_contracts_identity.capabilities import (
     CapabilityDefinition,
     CapabilityOperation,
     ProtocolCapabilityRequirement,
 )
-from tigrbl_identity_server.composition import runtime_assembly as server_runtime_assembly
-from tigrbl_identity_runtime import (
+from tba_server_identity.composition import runtime_assembly as server_runtime_assembly
+from tba_runtime_identity import (
     CapabilityFactory,
     CapabilityRegistry,
     ProtocolCapabilityBindingError,

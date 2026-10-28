@@ -1,10 +1,10 @@
 targets:
 - Import/export portability
 modules:
-- tigrbl_auth/cli/metadata.py
-- tigrbl_auth/cli/handlers.py
-- tigrbl_auth/services/import_export_service.py
-- tigrbl_auth/services/operator_service.py
+- tba_auth/cli/metadata.py
+- tba_auth/cli/handlers.py
+- tba_auth/services/import_export_service.py
+- tba_auth/services/operator_service.py
 tests:
 - tests/conformance/operator/test_cli_import_export.py
 contracts:

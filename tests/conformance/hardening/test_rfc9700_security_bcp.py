@@ -1,8 +1,8 @@
-from tigrbl_auth.cli.artifacts import build_openapi_contract, deployment_from_options
-from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
+from tba_auth.cli.artifacts import build_openapi_contract, deployment_from_options
+from tba_protocol_oauth.standards.oauth_security_bcp import (
     runtime_security_profile,
 )
-from tigrbl_auth.standards.oidc.discovery_metadata import build_openid_config
+from tba_auth.standards.oidc.discovery_metadata import build_openid_config
 
 
 def test_rfc9700_hardening_contract_and_metadata_are_fail_closed() -> None:

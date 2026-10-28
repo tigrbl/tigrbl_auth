@@ -19,14 +19,14 @@ See also `docs/architecture/EDGE_APP_UIX_COMPOSITION_MATRICES.md` for the role s
 
 | Target app | Kind | Primary persona | Deployment role | Current implementation basis |
 |---|---|---|---|---|
-| `tigrbl-auth-idp` | backend app | platform, tenants, apps, users, services | shared multi-tenant identity and control plane | current `tigrbl_auth` backend |
-| `tigrbl-auth-public-portal` | edge app | tenant human users | public browser auth entrypoint | current `public-uix` |
-| `tigrbl-auth-platform-admin-console` | edge app | platform superusers | deployment-wide control-plane console | split from current `admin-uix` |
-| `tigrbl-auth-tenant-admin-console` | edge app | tenant admins | tenant-scoped admin console | split from current `admin-uix` |
-| `tigrbl-auth-developer-portal` | edge app | tenant app developers | app registration and integration console | partly present in backend and dormant UI components |
-| `tigrbl-auth-service-admin-surface` | edge app | workload and service operators | machine identity and service access console | future composition over partial backend capability |
+| `tba-auth-idp` | backend app | platform, tenants, apps, users, services | shared multi-tenant identity and control plane | current `tba_auth` backend |
+| `tba-auth-public-portal` | edge app | tenant human users | public browser auth entrypoint | current `public-uix` |
+| `tba-auth-platform-admin-console` | edge app | platform superusers | deployment-wide control-plane console | split from current `admin-uix` |
+| `tba-auth-tenant-admin-console` | edge app | tenant admins | tenant-scoped admin console | split from current `admin-uix` |
+| `tba-auth-developer-portal` | edge app | tenant app developers | app registration and integration console | partly present in backend and dormant UI components |
+| `tba-auth-service-admin-surface` | edge app | workload and service operators | machine identity and service access console | future composition over partial backend capability |
 
-## `tigrbl-auth-idp` matrix
+## `tba-auth-idp` matrix
 
 | Dimension | Future-state value |
 |---|---|
@@ -38,10 +38,10 @@ See also `docs/architecture/EDGE_APP_UIX_COMPOSITION_MATRICES.md` for the role s
 | Upstream dependencies | persistence, key material storage, email/provider integrations, policy/config, auth/session services |
 | Downstream dependents | all edge apps, RP SDKs, resource-server verifiers, CLI/device clients, tenant applications |
 | Boundary rule | no tenant-specific bespoke UI should live here; this app exposes APIs and protocol surfaces |
-| Current repo basis | `tigrbl_auth.app`, `tigrbl_auth.gateway`, REST routers, RPC methods, discovery and JWKS services |
+| Current repo basis | `tba_auth.app`, `tba_auth.gateway`, REST routers, RPC methods, discovery and JWKS services |
 | Main gap | app exists, but future-state deployment should be described and branded as the stable shared IDP plane |
 
-## `tigrbl-auth-public-portal` matrix
+## `tba-auth-public-portal` matrix
 
 | Dimension | Future-state value |
 |---|---|
@@ -52,12 +52,12 @@ See also `docs/architecture/EDGE_APP_UIX_COMPOSITION_MATRICES.md` for the role s
 | Backend paths consumed | `/authorize`, `/token`, `/userinfo`, `/logout`, `/register`, tenant discovery and JWKS metadata, recovery and verification endpoints |
 | Primary views owned | login, register, consent, callback, profile, forgot password, reset password, verify email, terms |
 | Functional block placement | public auth experience layer |
-| Talks to | `tigrbl-auth-idp` public lane only |
+| Talks to | `tba-auth-idp` public lane only |
 | Should not talk to | `/admin/*`, `/rpc` |
-| Current repo basis | `pkgs/105-ui/public-uix` plus its nginx route allowlist |
+| Current repo basis | `pkgs/105-ui/tba-ui-public` plus its nginx route allowlist |
 | Main gap | future-state deployment may need tenant branding, tenant selection, and per-tenant host/path strategy |
 
-## `tigrbl-auth-platform-admin-console` matrix
+## `tba-auth-platform-admin-console` matrix
 
 | Dimension | Future-state value |
 |---|---|
@@ -68,12 +68,12 @@ See also `docs/architecture/EDGE_APP_UIX_COMPOSITION_MATRICES.md` for the role s
 | Backend paths consumed | `/admin/auth/*`, `/admin/tenants`, `/admin/identities`, `/rpc` |
 | Primary views owned | platform dashboard, tenant list, tenant create, tenant delete, tenant detail, tenant admin assignment, platform identity administration, audit overview |
 | Functional block placement | platform operations layer |
-| Talks to | `tigrbl-auth-idp` admin REST and admin RPC lanes |
+| Talks to | `tba-auth-idp` admin REST and admin RPC lanes |
 | Should not own | tenant-local day-to-day user admin, end-user login, app developer self-service |
-| Current repo basis | platform-relevant parts of `pkgs/105-ui/admin-uix` |
+| Current repo basis | platform-relevant parts of `pkgs/105-ui/tba-ui-admin` |
 | Main gap | current `admin-uix` mixes deployment-wide and tenant-local actions |
 
-## `tigrbl-auth-tenant-admin-console` matrix
+## `tba-auth-tenant-admin-console` matrix
 
 | Dimension | Future-state value |
 |---|---|
@@ -84,12 +84,12 @@ See also `docs/architecture/EDGE_APP_UIX_COMPOSITION_MATRICES.md` for the role s
 | Backend paths consumed | `/admin/auth/*`, `/admin/identities`, `/rpc`, tenant discovery and tenant JWKS publication endpoints for parity/reference |
 | Primary views owned | tenant dashboard, tenant identities, principal detail, credential issuance flows, tenant signing keys, tenant JWKS publication, tenant policy/config |
 | Functional block placement | tenant administration layer |
-| Talks to | `tigrbl-auth-idp` admin REST, admin RPC, tenant discovery/JWKS surfaces |
+| Talks to | `tba-auth-idp` admin REST, admin RPC, tenant discovery/JWKS surfaces |
 | Should not own | platform-wide tenant lifecycle, cross-tenant authority assignment |
-| Current repo basis | tenant-relevant parts of `pkgs/105-ui/admin-uix` |
+| Current repo basis | tenant-relevant parts of `pkgs/105-ui/tba-ui-admin` |
 | Main gap | tenant-scoped authority and navigation need to be separated cleanly from platform authority |
 
-## `tigrbl-auth-developer-portal` matrix
+## `tba-auth-developer-portal` matrix
 
 | Dimension | Future-state value |
 |---|---|
@@ -100,12 +100,12 @@ See also `docs/architecture/EDGE_APP_UIX_COMPOSITION_MATRICES.md` for the role s
 | Backend paths consumed | `/register`, `/register/{client_id}`, `/rpc` client and client-registration methods, tenant discovery documents |
 | Primary views owned | app catalog, app create, OIDC client registration, redirect URI management, client auth method config, secret/JWKS rotation, discovery reference, integration docs |
 | Functional block placement | application integration layer |
-| Talks to | `tigrbl-auth-idp` public registration lane plus admin/client control plane |
+| Talks to | `tba-auth-idp` public registration lane plus admin/client control plane |
 | Should not own | human-user login UX, cross-tenant platform administration |
 | Current repo basis | `ClientManagement.tsx`, client registration RPC methods, dynamic registration endpoints |
 | Main gap | backend capability exists, but the dedicated portal and route model are not shipped yet |
 
-## `tigrbl-auth-service-admin-surface` matrix
+## `tba-auth-service-admin-surface` matrix
 
 | Dimension | Future-state value |
 |---|---|
@@ -116,7 +116,7 @@ See also `docs/architecture/EDGE_APP_UIX_COMPOSITION_MATRICES.md` for the role s
 | Backend paths consumed | `/token`, `/introspect`, JWKS endpoints, service-key and machine-principal control surfaces, future workload identity methods |
 | Primary views owned | service identities, machine principals, API keys, client credentials, workload federation setup, token inspection/testing, trust posture |
 | Functional block placement | machine access layer |
-| Talks to | `tigrbl-auth-idp` token, introspection, JWKS, and operator/control surfaces |
+| Talks to | `tba-auth-idp` token, introspection, JWKS, and operator/control surfaces |
 | Should not own | human-user profile and consent, platform tenant creation |
 | Current repo basis | auth backends, token plane, API-key/service-key capabilities, remote introspection support |
 | Main gap | no dedicated shipped UIX or stable operator surface exists yet |
@@ -125,31 +125,31 @@ See also `docs/architecture/EDGE_APP_UIX_COMPOSITION_MATRICES.md` for the role s
 
 | App | External origin/path | Consumes from IDP | Main role boundary |
 |---|---|---|---|
-| `tigrbl-auth-idp` | `id.example.com/*` | n/a | protocol and control-plane backend |
-| `tigrbl-auth-public-portal` | `login.example.com/` | public lane only | tenant end-user auth UX |
-| `tigrbl-auth-platform-admin-console` | `platform-auth-admin.example.com/` | admin REST and RPC | platform-wide administration |
-| `tigrbl-auth-tenant-admin-console` | `tenant-auth-admin.example.com/` | admin REST, RPC, tenant discovery parity | tenant-local administration |
-| `tigrbl-auth-developer-portal` | `developer-auth.example.com/` | registration, client control, discovery | app/developer integration |
-| `tigrbl-auth-service-admin-surface` | `service-auth.example.com/` | token, introspection, JWKS, machine control | machine/service administration |
+| `tba-auth-idp` | `id.example.com/*` | n/a | protocol and control-plane backend |
+| `tba-auth-public-portal` | `login.example.com/` | public lane only | tenant end-user auth UX |
+| `tba-auth-platform-admin-console` | `platform-auth-admin.example.com/` | admin REST and RPC | platform-wide administration |
+| `tba-auth-tenant-admin-console` | `tenant-auth-admin.example.com/` | admin REST, RPC, tenant discovery parity | tenant-local administration |
+| `tba-auth-developer-portal` | `developer-auth.example.com/` | registration, client control, discovery | app/developer integration |
+| `tba-auth-service-admin-surface` | `service-auth.example.com/` | token, introspection, JWKS, machine control | machine/service administration |
 
 ## Future-state app call-flow matrix
 
 | From app | To app/surface | Why the relationship exists |
 |---|---|---|
-| `tigrbl-auth-public-portal` | `tigrbl-auth-idp` public lane | executes browser auth flows and end-user recovery flows |
-| `tigrbl-auth-platform-admin-console` | `tigrbl-auth-idp` admin lane | creates tenants and assigns high-privilege authority |
-| `tigrbl-auth-tenant-admin-console` | `tigrbl-auth-idp` admin lane | manages tenant identities, credentials, and keys |
-| `tigrbl-auth-developer-portal` | `tigrbl-auth-idp` registration and client plane | creates and manages OIDC/OAuth applications |
-| `tigrbl-auth-service-admin-surface` | `tigrbl-auth-idp` token and machine plane | provisions and validates service access patterns |
-| Tenant applications | `tigrbl-auth-idp` plus `tigrbl-auth-public-portal` | rely on IDP protocols and optionally redirect humans into the public portal |
+| `tba-auth-public-portal` | `tba-auth-idp` public lane | executes browser auth flows and end-user recovery flows |
+| `tba-auth-platform-admin-console` | `tba-auth-idp` admin lane | creates tenants and assigns high-privilege authority |
+| `tba-auth-tenant-admin-console` | `tba-auth-idp` admin lane | manages tenant identities, credentials, and keys |
+| `tba-auth-developer-portal` | `tba-auth-idp` registration and client plane | creates and manages OIDC/OAuth applications |
+| `tba-auth-service-admin-surface` | `tba-auth-idp` token and machine plane | provisions and validates service access patterns |
+| Tenant applications | `tba-auth-idp` plus `tba-auth-public-portal` | rely on IDP protocols and optionally redirect humans into the public portal |
 
 ## Future-state app split matrix
 
 | Current repo surface | Future-state target app | Split action |
 |---|---|---|
-| `tigrbl_auth` backend | `tigrbl-auth-idp` | rename/brand as the stable shared IDP plane |
-| `pkgs/105-ui/public-uix` | `tigrbl-auth-public-portal` | preserve and tenant-brand |
-| `pkgs/105-ui/admin-uix` tenant creation and cross-tenant control | `tigrbl-auth-platform-admin-console` | extract into platform-only console |
-| `pkgs/105-ui/admin-uix` identities and JWKS tenant operations | `tigrbl-auth-tenant-admin-console` | extract into tenant-admin console |
-| dormant client-management UI and client APIs | `tigrbl-auth-developer-portal` | surface as first-class developer portal |
-| machine/service operator workflows not yet surfaced | `tigrbl-auth-service-admin-surface` | compose new focused app when service identity becomes first-class |
+| `tba_auth` backend | `tba-auth-idp` | rename/brand as the stable shared IDP plane |
+| `pkgs/105-ui/tba-ui-public` | `tba-auth-public-portal` | preserve and tenant-brand |
+| `pkgs/105-ui/tba-ui-admin` tenant creation and cross-tenant control | `tba-auth-platform-admin-console` | extract into platform-only console |
+| `pkgs/105-ui/tba-ui-admin` identities and JWKS tenant operations | `tba-auth-tenant-admin-console` | extract into tenant-admin console |
+| dormant client-management UI and client APIs | `tba-auth-developer-portal` | surface as first-class developer portal |
+| machine/service operator workflows not yet surfaced | `tba-auth-service-admin-surface` | compose new focused app when service identity becomes first-class |

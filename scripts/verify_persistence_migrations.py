@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from tigrbl_auth.migrations import apply_all_async, verify_schema_async
+from tba_auth.migrations import apply_all_async, verify_schema_async
 
 
 async def _main() -> int:

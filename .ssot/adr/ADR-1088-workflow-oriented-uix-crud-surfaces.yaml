@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "Decision: product UIX CRUD must be workflow-oriented and surface-scoped, not raw table administration. Shared reusable CRUD, mutation, error, drawer, toolbar, and form primitives live in @tigrbl-auth/uix-core. Product UIX packages compose those primitives only through their frontdoor API contracts and must preserve the product boundaries established by the surface-separated API architecture. Public UIX remains the hosted-login reference; admin, developer, service, tenant, my-account, and demo UIX surfaces may consume uix-core primitives for executable CRUD journeys."
+summary: "Decision: product UIX CRUD must be workflow-oriented and surface-scoped, not raw table administration. Shared reusable CRUD, mutation, error, drawer, toolbar, and form primitives live in @tba/ui-primitives. Product UIX packages compose those primitives only through their frontdoor API contracts and must preserve the product boundaries established by the surface-separated API architecture. Public UIX remains the hosted-login reference; admin, developer, service, tenant, my-account, and demo UIX surfaces may consume uix-core primitives for executable CRUD journeys."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -18,4 +18,4 @@ status_notes:
     at: "2026-05-31T02:56:05Z"
 references: []
 body: |-
-  Decision: product UIX CRUD must be workflow-oriented and surface-scoped, not raw table administration. Shared reusable CRUD, mutation, error, drawer, toolbar, and form primitives live in @tigrbl-auth/uix-core. Product UIX packages compose those primitives only through their frontdoor API contracts and must preserve the product boundaries established by the surface-separated API architecture. Public UIX remains the hosted-login reference; admin, developer, service, tenant, my-account, and demo UIX surfaces may consume uix-core primitives for executable CRUD journeys.
+  Decision: product UIX CRUD must be workflow-oriented and surface-scoped, not raw table administration. Shared reusable CRUD, mutation, error, drawer, toolbar, and form primitives live in @tba/ui-primitives. Product UIX packages compose those primitives only through their frontdoor API contracts and must preserve the product boundaries established by the surface-separated API architecture. Public UIX remains the hosted-login reference; admin, developer, service, tenant, my-account, and demo UIX surfaces may consume uix-core primitives for executable CRUD journeys.

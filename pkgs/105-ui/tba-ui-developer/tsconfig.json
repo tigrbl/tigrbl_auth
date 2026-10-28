@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "useDefineForClassFields": false,
+    "module": "ESNext",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+    "types": ["node"],
+    "moduleResolution": "bundler",
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "allowJs": true,
+    "jsx": "react-jsx",
+    "allowImportingTsExtensions": true,
+    "baseUrl": ".",
+    "paths": {
+      "@tba/ui-primitives": ["../../100-uix-core/tba-ui-primitives/index.ts"],
+      "@tba/ui-primitives/styles.css": ["../../100-uix-core/tba-ui-primitives/src/styles/core.css"]
+    },
+    "noEmit": true
+  }
+}

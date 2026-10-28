@@ -10,9 +10,9 @@ TABLES_DIR = (
     ROOT
     / "pkgs"
     / "01-storage"
-    / "tigrbl-identity-storage"
+    / "tba-storage-core"
     / "src"
-    / "tigrbl_identity_storage"
+    / "tba_storage_core"
     / "tables"
 )
 MATRIX_PATH = ROOT / "docs" / "refactor" / "01-storage-classmethod-refactor-matrix.md"
@@ -51,7 +51,7 @@ def _matrix_rows() -> list[dict[str, str]]:
 
 
 def _table_path(module_name: str) -> Path:
-    suffix = module_name.removeprefix("tigrbl_identity_storage.tables.").replace(".", "/")
+    suffix = module_name.removeprefix("tba_storage_core.tables.").replace(".", "/")
     return TABLES_DIR / f"{suffix}.py"
 
 
@@ -68,7 +68,7 @@ def _ops_paths() -> list[Path]:
 
 
 def _op_spec(attr: object) -> object | None:
-    return getattr(getattr(attr, "__func__", attr), "__tigrbl_op_spec__", None)
+    return getattr(getattr(attr, "__func__", attr), "__tba_op_spec__", None)
 
 
 def test_storage_table_modules_do_not_define_classmethod_ops() -> None:

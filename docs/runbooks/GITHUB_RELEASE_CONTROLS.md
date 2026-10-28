@@ -2,7 +2,7 @@
 
 ## Scope
 
-This runbook records the GitHub repository settings that must be enabled for `Tigrbl/tigrbl_auth` so the certification pipeline becomes an actual release control instead of a documentation-only intention.
+This runbook records the GitHub repository settings that must be enabled for `Tigrbl/tba_auth` so the certification pipeline becomes an actual release control instead of a documentation-only intention.
 
 ## Required branch protection or rulesets
 

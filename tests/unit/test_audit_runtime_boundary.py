@@ -5,8 +5,8 @@ import uuid
 import pytest
 
 from tigrbl import create_table_record
-from tigrbl_identity_storage.tables import AuditEvent, Tenant
-from tigrbl_identity_storage_runtime import (
+from tba_storage_core.tables import AuditEvent, Tenant
+from tba_runtime_identity_storage import (
     AuditEventRuntimeSpec,
     append_audit_event_record,
     initializeIdentityRuntimeTables,

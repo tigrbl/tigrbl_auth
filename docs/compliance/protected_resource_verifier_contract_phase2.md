@@ -4,9 +4,9 @@ This checkpoint captures the second runtime implementation slice for `feat:prote
 
 Implemented paths:
 
-- `tigrbl_auth/standards/oauth2/resource_verifier_contract.py`
-- `tigrbl_auth/standards/oauth2/rfc9728.py`
-- `tigrbl_auth/standards/oauth2/introspection.py`
+- `tba_auth/standards/oauth2/resource_verifier_contract.py`
+- `tba_auth/standards/oauth2/rfc9728.py`
+- `tba_auth/standards/oauth2/introspection.py`
 
 Coverage added or strengthened:
 

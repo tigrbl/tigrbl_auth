@@ -4,13 +4,13 @@ This checkpoint captures the first runtime implementation slice for `feat:reques
 
 Implemented paths:
 
-- `tigrbl_auth/ops/authorize.py`
-- `tigrbl_auth/ops/device_authorization.py`
-- `tigrbl_auth/ops/logout.py`
-- `tigrbl_auth/ops/par.py`
-- `tigrbl_auth/ops/register.py`
-- `tigrbl_auth/standards/oidc/rp_initiated_logout.py`
-- `tigrbl_auth/standards/oidc/session_mgmt.py`
+- `tba_auth/ops/authorize.py`
+- `tba_auth/ops/device_authorization.py`
+- `tba_auth/ops/logout.py`
+- `tba_auth/ops/par.py`
+- `tba_auth/ops/register.py`
+- `tba_auth/standards/oidc/rp_initiated_logout.py`
+- `tba_auth/standards/oidc/session_mgmt.py`
 
 Coverage added:
 

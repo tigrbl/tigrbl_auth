@@ -1,6 +1,6 @@
 import pytest
-from tigrbl_workload_credential_profile_wimse_wit import CURRENT_VERSION as WIT_VERSION, validate_wit
-from tigrbl_workload_proof_profile_wimse_wpt import CURRENT_VERSION as WPT_VERSION, validate_wpt
+from tba_profile_workload_credential_wimse_wit import CURRENT_VERSION as WIT_VERSION, validate_wit
+from tba_profile_workload_proof_wimse_wpt import CURRENT_VERSION as WPT_VERSION, validate_wpt
 
 def test_wit_and_wpt_are_distinct_revision_pinned_artifacts() -> None:
     assert WIT_VERSION.identifier == "draft-ietf-wimse-workload-creds-02"

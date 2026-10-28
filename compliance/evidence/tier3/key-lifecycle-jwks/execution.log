@@ -42,51 +42,51 @@ tests/interop/test_operator_profile_catalog_completeness.py::test_operator_peer_
     self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
 
 tests/conformance/operator/test_cli_serve_runtime.py:21
-  /mnt/data/capabilitywork/extracted/tigrbl_auth_capability_final_certification_closeout/tests/conformance/operator/test_cli_serve_runtime.py:21: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+  /mnt/data/capabilitywork/extracted/tba_auth_capability_final_certification_closeout/tests/conformance/operator/test_cli_serve_runtime.py:21: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
     @pytest.mark.conformance
 
 tests/conformance/operator/test_cli_serve_runtime.py:43
-  /mnt/data/capabilitywork/extracted/tigrbl_auth_capability_final_certification_closeout/tests/conformance/operator/test_cli_serve_runtime.py:43: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+  /mnt/data/capabilitywork/extracted/tba_auth_capability_final_certification_closeout/tests/conformance/operator/test_cli_serve_runtime.py:43: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
     @pytest.mark.conformance
 
 tests/conformance/operator/test_cli_serve_runtime.py:61
-  /mnt/data/capabilitywork/extracted/tigrbl_auth_capability_final_certification_closeout/tests/conformance/operator/test_cli_serve_runtime.py:61: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+  /mnt/data/capabilitywork/extracted/tba_auth_capability_final_certification_closeout/tests/conformance/operator/test_cli_serve_runtime.py:61: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
     @pytest.mark.conformance
 
 tests/conformance/operator/test_cli_resource_lifecycle.py:20
-  /mnt/data/capabilitywork/extracted/tigrbl_auth_capability_final_certification_closeout/tests/conformance/operator/test_cli_resource_lifecycle.py:20: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+  /mnt/data/capabilitywork/extracted/tba_auth_capability_final_certification_closeout/tests/conformance/operator/test_cli_resource_lifecycle.py:20: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
     @pytest.mark.conformance
 
 tests/conformance/operator/test_cli_keys_lifecycle.py:20
-  /mnt/data/capabilitywork/extracted/tigrbl_auth_capability_final_certification_closeout/tests/conformance/operator/test_cli_keys_lifecycle.py:20: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+  /mnt/data/capabilitywork/extracted/tba_auth_capability_final_certification_closeout/tests/conformance/operator/test_cli_keys_lifecycle.py:20: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
     @pytest.mark.conformance
 
 tests/conformance/operator/test_cli_import_export.py:20
-  /mnt/data/capabilitywork/extracted/tigrbl_auth_capability_final_certification_closeout/tests/conformance/operator/test_cli_import_export.py:20: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+  /mnt/data/capabilitywork/extracted/tba_auth_capability_final_certification_closeout/tests/conformance/operator/test_cli_import_export.py:20: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
     @pytest.mark.conformance
 
 tests/conformance/operator/test_cli_bootstrap_migrate.py:22
-  /mnt/data/capabilitywork/extracted/tigrbl_auth_capability_final_certification_closeout/tests/conformance/operator/test_cli_bootstrap_migrate.py:22: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+  /mnt/data/capabilitywork/extracted/tba_auth_capability_final_certification_closeout/tests/conformance/operator/test_cli_bootstrap_migrate.py:22: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
     @pytest.mark.conformance
 
 tests/negative/test_invalid_artifact_inputs.py:13
-  /mnt/data/capabilitywork/extracted/tigrbl_auth_capability_final_certification_closeout/tests/negative/test_invalid_artifact_inputs.py:13: PytestUnknownMarkWarning: Unknown pytest.mark.negative - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+  /mnt/data/capabilitywork/extracted/tba_auth_capability_final_certification_closeout/tests/negative/test_invalid_artifact_inputs.py:13: PytestUnknownMarkWarning: Unknown pytest.mark.negative - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
     @pytest.mark.negative
 
 tests/negative/test_invalid_artifact_inputs.py:21
-  /mnt/data/capabilitywork/extracted/tigrbl_auth_capability_final_certification_closeout/tests/negative/test_invalid_artifact_inputs.py:21: PytestUnknownMarkWarning: Unknown pytest.mark.negative - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+  /mnt/data/capabilitywork/extracted/tba_auth_capability_final_certification_closeout/tests/negative/test_invalid_artifact_inputs.py:21: PytestUnknownMarkWarning: Unknown pytest.mark.negative - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
     @pytest.mark.negative
 
 tests/negative/test_resource_exchange_abuse.py:8
-  /mnt/data/capabilitywork/extracted/tigrbl_auth_capability_final_certification_closeout/tests/negative/test_resource_exchange_abuse.py:8: PytestUnknownMarkWarning: Unknown pytest.mark.negative - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+  /mnt/data/capabilitywork/extracted/tba_auth_capability_final_certification_closeout/tests/negative/test_resource_exchange_abuse.py:8: PytestUnknownMarkWarning: Unknown pytest.mark.negative - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
     @pytest.mark.negative
 
 tests/security/test_sender_constraint_replay.py:27
-  /mnt/data/capabilitywork/extracted/tigrbl_auth_capability_final_certification_closeout/tests/security/test_sender_constraint_replay.py:27: PytestUnknownMarkWarning: Unknown pytest.mark.security - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+  /mnt/data/capabilitywork/extracted/tba_auth_capability_final_certification_closeout/tests/security/test_sender_constraint_replay.py:27: PytestUnknownMarkWarning: Unknown pytest.mark.security - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
     @pytest.mark.security
 
 tests/conformance/operator/test_cli_bootstrap_migrate.py: 18 warnings
-  /mnt/data/capabilitywork/extracted/tigrbl_auth_capability_final_certification_closeout/tigrbl_auth/cli/artifacts.py:588: PydanticDeprecatedSince20: The `__fields__` attribute is deprecated, use the `model_fields` class property instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  /mnt/data/capabilitywork/extracted/tba_auth_capability_final_certification_closeout/tba_auth/cli/artifacts.py:588: PydanticDeprecatedSince20: The `__fields__` attribute is deprecated, use the `model_fields` class property instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
     if not (getattr(model, "model_fields", None) or getattr(model, "__fields__", None)):
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html

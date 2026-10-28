@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "`tigrbl_auth` MUST govern policy decisioning, policy language, policy"
+summary: "`tba_auth` MUST govern policy decisioning, policy language, policy"
 supersedes: []
 superseded_by: []
 status_notes:
@@ -24,7 +24,7 @@ references: []
 body: |-
   ## Decision
   
-  `tigrbl_auth` MUST govern policy decisioning, policy language, policy
+  `tba_auth` MUST govern policy decisioning, policy language, policy
   versioning, policy simulation, policy audit, authorization mutation
   semantics, and access decision APIs as a policy control-plane boundary.
   

@@ -1,6 +1,6 @@
 import pytest
 
-from tigrbl_identity_runtime.composition.identity_artifacts import (
+from tba_runtime_identity.composition.identity_artifacts import (
     build_identity_artifact_composition,
 )
 

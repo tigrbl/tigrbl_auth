@@ -26,7 +26,7 @@ def _local_dependencies(path: Path) -> set[str]:
     for table in ("dependencies", "devDependencies", "peerDependencies"):
         values = data.get(table, {})
         if isinstance(values, dict):
-            result.update(name for name in values if name.startswith("@tigrbl-auth/"))
+            result.update(name for name in values if name.startswith("@tba/"))
     return result
 
 

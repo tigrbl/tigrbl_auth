@@ -1,15 +1,15 @@
 import pytest
 from types import SimpleNamespace
 
-from tigrbl_auth.config.deployment import DEFAULT_VALUES
-from tigrbl_auth.security.certification import (
+from tba_auth.config.deployment import DEFAULT_VALUES
+from tba_auth.security.certification import (
     CertificationError,
     TenantState,
     assert_tenant_isolation,
     deterministic_issuer,
 )
-from tigrbl_auth.config.deployment import resolve_deployment
-from tigrbl_auth.services.tenant_discovery import build_tenant_openid_config
+from tba_auth.config.deployment import resolve_deployment
+from tba_auth.services.tenant_discovery import build_tenant_openid_config
 
 
 def _tenant(realm_id: str, tenant_id: str, slug: str) -> TenantState:
@@ -77,5 +77,5 @@ def test_tenant_isolation_t2_integrates_with_same_and_cross_realm_metadata() -> 
     assert tenant_a["issuer"] == "https://auth.example.test/tenants/tenant-a"
     assert tenant_b["issuer"] == "https://auth.example.test/tenants/tenant-b"
     assert tenant_a["jwks_uri"] != tenant_b["jwks_uri"]
-    assert tenant_a["tigrbl_auth_signing_scope"] == "tenant:tenant-a"
-    assert tenant_b["tigrbl_auth_signing_scope"] == "tenant:tenant-b"
+    assert tenant_a["tba_auth_signing_scope"] == "tenant:tenant-a"
+    assert tenant_b["tba_auth_signing_scope"] == "tenant:tenant-b"

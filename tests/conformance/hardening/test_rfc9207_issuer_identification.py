@@ -1,5 +1,5 @@
-from tigrbl_auth.cli.artifacts import build_openapi_contract, deployment_from_options
-from tigrbl_auth.standards.oidc.discovery_metadata import build_openid_config
+from tba_auth.cli.artifacts import build_openapi_contract, deployment_from_options
+from tba_auth.standards.oidc.discovery_metadata import build_openid_config
 
 
 def test_rfc9207_issuer_identification_is_advertised_and_requires_iss_in_hardening():

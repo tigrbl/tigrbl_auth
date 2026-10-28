@@ -6,9 +6,9 @@ from uuid import uuid4
 
 import pytest
 
-from tigrbl_auth_protocol_oidc.standards import rp_initiated_logout as rp_logout
-from tigrbl_identity_server import logout_runtime as logout_ops
-from tigrbl_auth_protocol_oidc.standards.session_mgmt import (
+from tba_protocol_oidc.standards import rp_initiated_logout as rp_logout
+from tba_server_identity import logout_runtime as logout_ops
+from tba_protocol_oidc.standards.session_mgmt import (
     compute_session_state,
     describe as describe_session_management,
     validate_session_state,

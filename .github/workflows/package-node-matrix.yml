@@ -26,9 +26,9 @@ on:
         type: choice
         options:
           - all
-          - "@tigrbl-auth/admin-uix"
-          - "@tigrbl-auth/public-uix"
-          - "@tigrbl-auth/rp"
+          - "@tba/ui-admin"
+          - "@tba/ui-public"
+          - "@tba/client-oidc-relying-party"
       node-version:
         description: Optional single Node.js version to test.
         required: false
@@ -88,7 +88,7 @@ jobs:
           const selectedPackage = process.env.SELECTED_PACKAGE || "all";
           const selectedNode = process.env.SELECTED_NODE || "all";
           const nodeVersions = selectedNode === "all" ? ["22", "24", "26"] : [selectedNode];
-          const packageDirs = ["pkgs/105-ui/admin-uix", "pkgs/105-ui/public-uix", "pkgs/105-ui/rp"];
+          const packageDirs = ["pkgs/105-ui/tba-ui-admin", "pkgs/105-ui/tba-ui-public", "pkgs/75-clients/tba-typescript-client-oidc-relying-party"];
           const cells = [];
 
           for (const packagePath of packageDirs) {

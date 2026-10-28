@@ -8,8 +8,8 @@ from importlib.resources import as_file, files
 import pytest
 from sqlalchemy import create_engine, inspect
 
-from tigrbl_identity_storage.components import COMPONENT_IMPORT_ROOTS, load_full_composition
-from tigrbl_identity_storage.tables import TABLE_MODELS as COMPATIBILITY_MODELS
+from tba_storage_core.components import COMPONENT_IMPORT_ROOTS, load_full_composition
+from tba_storage_core.tables import TABLE_MODELS as COMPATIBILITY_MODELS
 from tigrbl_migrations import DeploymentLock, MigrationLedger, MigrationOrchestrator
 
 
@@ -124,7 +124,7 @@ def test_frozen_monolith_upgrade_matches_fresh_component_schema() -> None:
             composition, migrations, MigrationLedger(fresh), versions
         ).apply()
         versions_package = importlib.import_module(
-            "tigrbl_identity_storage.migrations.versions"
+            "tba_storage_core.migrations.versions"
         )
         modules = [
             importlib.import_module(module.name)
@@ -146,7 +146,7 @@ def test_frozen_monolith_upgrade_matches_fresh_component_schema() -> None:
 def test_legacy_adoption_preserves_data_and_claims_every_object(monkeypatch) -> None:
     engine, connection = _sqlite_connection()
     try:
-        versions_package = importlib.import_module("tigrbl_identity_storage.migrations.versions")
+        versions_package = importlib.import_module("tba_storage_core.migrations.versions")
         modules = [
             importlib.import_module(module.name)
             for module in pkgutil.iter_modules(
@@ -184,12 +184,12 @@ def test_standalone_sources_do_not_import_the_compatibility_package() -> None:
         source_root = storage_root / distribution / "src" / import_root
         for path in source_root.rglob("*.py"):
             text = path.read_text(encoding="utf-8")
-            assert "tigrbl_identity_storage." not in text
+            assert "tba_storage_core." not in text
 
 
 def test_checked_in_deployment_lock_matches_every_manifest_digest() -> None:
     composition, _migrations, _models = _model_inventory()
-    with as_file(files("tigrbl_identity_storage").joinpath("storage.lock.toml")) as path:
+    with as_file(files("tba_storage_core").joinpath("storage.lock.toml")) as path:
         lock = DeploymentLock.from_toml(path)
     lock.verify(
         composition,

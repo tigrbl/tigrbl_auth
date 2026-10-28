@@ -1,6 +1,6 @@
 # Supply-Chain Identity API + Provenance UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-router-supply-chain-identity` + `@tigrbl-auth/provenance-uix`<br>
+**Pairing:** `tba-router-supply-chain-identity` + `@tba/provenance-uix`<br>
 **Opportunity-map item:** 19<br>
 **Primary buyers:** software vendors, DevSecOps teams, regulated engineering organizations, AI/ML platforms, industrial firmware producers, and artifact consumers<br>
 **Status:** proposed product surface; internal identity, attestation, signing, policy, and release-evidence foundations exist, while SLSA/in-toto/Sigstore product support is currently absent
@@ -18,7 +18,7 @@ The product must integrate established ecosystems:
 - OCI registries and digest-addressed artifacts;
 - workload identity, attestation, admission control, and deployment systems.
 
-Tigrbl Auth should contribute identity, authorization, delegation, trust, policy, and evidence orchestration. It must not invent a competing signature, SBOM, provenance, or transparency format.
+TBA should contribute identity, authorization, delegation, trust, policy, and evidence orchestration. It must not invent a competing signature, SBOM, provenance, or transparency format.
 
 ## 2. Product Promise
 

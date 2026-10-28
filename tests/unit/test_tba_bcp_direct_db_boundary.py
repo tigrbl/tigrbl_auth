@@ -1,0 +1,299 @@
+from __future__ import annotations
+
+import ast
+import importlib
+from pathlib import Path
+
+import pytest
+
+
+ROOT = Path(__file__).resolve().parents[2]
+
+MIGRATED_RELEASE_PATHS = [
+    ROOT / "pkgs/70-facade/tba-credentials/src/tba_credentials/authenticators.py",
+    ROOT / "pkgs/70-facade/tba-credentials/src/tba_credentials/backends.py",
+    ROOT / "pkgs/50-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/discovery.py",
+    ROOT / "pkgs/60-runtime/tba-server-identity/src/tba_server_identity/authorization_runtime.py",
+    ROOT / "pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/auth_session/_table.py",
+    ROOT / "pkgs/90-backend-apps/tba-app-backend-my-account/src/tba_app_backend_my_account/routes.py",
+    ROOT / "pkgs/60-runtime/tba-server-identity/src/tba_server_identity/auth_flows.py",
+    ROOT / "pkgs/60-runtime/tba-server-identity/src/tba_server_identity/authz_surface.py",
+    ROOT / "pkgs/60-runtime/tba-server-identity/src/tba_server_identity/client_registration_surface.py",
+    ROOT / "pkgs/60-runtime/tba-server-identity/src/tba_server_identity/device_authorization_runtime.py",
+    ROOT / "pkgs/60-runtime/tba-server-identity/src/tba_server_identity/logout_runtime.py",
+    ROOT / "pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/introspection.py",
+    ROOT / "pkgs/60-runtime/tba-server-identity/src/tba_server_identity/par_surface.py",
+    ROOT / "pkgs/60-runtime/tba-server-identity/src/tba_server_identity/token_exchange_runtime.py",
+    ROOT / "pkgs/60-runtime/tba-server-identity/src/tba_server_identity/userinfo_runtime.py",
+    ROOT / "pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/revoked_token/_table.py",
+    ROOT / "pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/token_record/_table.py",
+    ROOT / "pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/user/_table.py",
+    ROOT / "pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/realm/_table.py",
+    ROOT / "pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/tenant/_table.py",
+    ROOT / "pkgs/60-runtime/tba-runtime-identity-administration/src/tba_runtime_identity_administration/bootstrap.py",
+    ROOT / "pkgs/60-runtime/tba-runtime-identity/src/tba_runtime_identity/backends.py",
+    ROOT / "pkgs/60-runtime/tba-server-identity/src/tba_server_identity/security/auth.py",
+    ROOT / "pkgs/60-runtime/tba-server-identity/src/tba_server_identity/security/security_deps.py",
+    ROOT / "pkgs/60-runtime/tba-server-identity/src/tba_server_identity/security/handler_records.py",
+    ROOT / "pkgs/60-runtime/tba-server-identity/src/tba_server_identity/security/user_lookup.py",
+]
+
+FORBIDDEN_FRAMEWORK_EXPORTS = {
+    "IntegrityError",
+    "Select",
+    "delete",
+    "or_",
+    "select",
+}
+FORBIDDEN_DB_METHODS = {
+    "add",
+    "commit",
+    "delete",
+    "execute",
+    "flush",
+    "refresh",
+    "rollback",
+    "scalar",
+    "scalars",
+}
+
+SEMANTIC_FACADE_PATHS = [
+    ROOT / "pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/token_exchange.py",
+    ROOT / "pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/dpop.py",
+    ROOT / "pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/oauth_security_bcp.py",
+    ROOT / "pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/_rfc8693/__init__.py",
+    ROOT / "pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/_dpop/__init__.py",
+    ROOT / "pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/_rfc9700/__init__.py",
+    ROOT / "pkgs/80-routers/tba-router-admin-gate/src/tba_router_admin_gate/gate.py",
+    ROOT / "pkgs/60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/assurance.py",
+    ROOT / "pkgs/60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/authority.py",
+    ROOT / "pkgs/60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/control_plane.py",
+    ROOT / "pkgs/60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/delegation.py",
+    ROOT / "pkgs/60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/governance_extension.py",
+    ROOT / "pkgs/60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/abac.py",
+    ROOT / "pkgs/60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/delegated_admin.py",
+    ROOT / "pkgs/60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/policy_engine.py",
+    ROOT / "pkgs/60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/rbac.py",
+    ROOT / "pkgs/60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/service_identity_registry.py",
+    ROOT / "pkgs/60-runtime/tba-runtime-identity/src/tba_runtime_identity/deployment.py",
+    ROOT / "pkgs/60-runtime/tba-runtime-identity/src/tba_runtime_identity/surfaces.py",
+    ROOT / "pkgs/60-runtime/tba-runtime-identity/src/tba_runtime_identity/_deployment/__init__.py",
+    ROOT / "pkgs/60-runtime/tba-runtime-identity/src/tba_runtime_identity/_surfaces/__init__.py",
+    ROOT / "pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/persistence.py",
+    ROOT / "pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/operator_store.py",
+    ROOT / "pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/sync.py",
+    ROOT / "pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/_operator_store/__init__.py",
+    ROOT / "pkgs/60-runtime/tba-server-identity/src/tba_server_identity/surfaces.py",
+    ROOT / "pkgs/60-runtime/tba-server-identity/src/tba_server_identity/_surfaces/__init__.py",
+    ROOT / "pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/resource_service.py",
+    ROOT / "pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/_resource_service/__init__.py",
+    ROOT / "pkgs/60-runtime/tba-operator-identity/src/tba_operator_identity/uix/admin_console.py",
+    ROOT / "pkgs/60-runtime/tba-operator-identity/src/tba_operator_identity/uix/_admin_console/__init__.py",
+]
+
+PERSISTENCE_HELPER_PATHS = [
+    ROOT / "pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/token_record/_table.py",
+    ROOT / "pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/auth_session/_table.py",
+    ROOT / "pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/logout_state/_table.py",
+    ROOT / "pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/client_registration/_table.py",
+    ROOT / "pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/consent/_table.py",
+    ROOT / "pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/audit_event/_table.py",
+]
+
+SYNC_COMPAT_PATHS = [
+    ROOT / "pkgs/20-providers/tba-provider-identity-jose/src/tba_provider_identity_jose/jwt_runtime.py",
+    ROOT / "pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/_dpop/primitives.py",
+    ROOT / "pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/jwtoken.py",
+    ROOT / "pkgs/20-providers/tba-provider-identity-jose/src/tba_provider_identity_jose/standards/rfc8037.py",
+    ROOT / "pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/sync.py",
+]
+
+ASYNC_REQUEST_TOKEN_PATHS = [
+    ROOT / "pkgs/70-facade/tba-credentials/src/tba_credentials/authenticators.py",
+    ROOT / "pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/token_exchange.py",
+    ROOT / "pkgs/50-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/userinfo.py",
+    ROOT / "pkgs/60-runtime/tba-server-identity/src/tba_server_identity/security/auth.py",
+    ROOT / "pkgs/60-runtime/tba-server-identity/src/tba_server_identity/security/security_deps.py",
+]
+
+AUTHN_TOKEN_SIGNER_PATHS = [
+    ROOT / "pkgs/20-providers/tba-provider-identity-jose/src/tba_provider_identity_jose/jwt_runtime.py",
+    ROOT / "pkgs/20-providers/tba-provider-identity-jose/src/tba_provider_identity_jose/jwt_coder.py",
+    ROOT / "pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/jwtoken.py",
+]
+
+
+def _root_name(node: ast.AST) -> str | None:
+    current = node
+    while isinstance(current, ast.Attribute):
+        current = current.value
+    if isinstance(current, ast.Name):
+        return current.id
+    return None
+
+
+def _enclosing_function_name(node: ast.AST) -> str | None:
+    parent = getattr(node, "_parent", None)
+    while parent is not None:
+        if isinstance(parent, (ast.AsyncFunctionDef, ast.FunctionDef)):
+            return parent.name
+        parent = getattr(parent, "_parent", None)
+    return None
+
+
+def _violations(path: Path, *, allow_session_transaction_boundary: bool = False) -> list[str]:
+    tree = ast.parse(path.read_text(encoding="utf-8"))
+    for parent in ast.walk(tree):
+        for child in ast.iter_child_nodes(parent):
+            setattr(child, "_parent", parent)
+    found: list[str] = []
+    for node in ast.walk(tree):
+        if isinstance(node, ast.ImportFrom):
+            module = node.module or ""
+            if module == "sqlalchemy" or module.startswith("sqlalchemy."):
+                names = ", ".join(alias.name for alias in node.names)
+                found.append(f"{path}:{node.lineno}: direct SQLAlchemy import {names}")
+            if module in {"tba_auth.framework", "tba_server_identity.framework"}:
+                leaked = sorted(
+                    alias.name for alias in node.names if alias.name in FORBIDDEN_FRAMEWORK_EXPORTS
+                )
+                if leaked:
+                    found.append(
+                        f"{path}:{node.lineno}: framework DB primitive import {', '.join(leaked)}"
+                    )
+        elif isinstance(node, ast.Call):
+            func = node.func
+            if isinstance(func, ast.Name) and func.id == "select":
+                found.append(f"{path}:{node.lineno}: direct select() call")
+            elif (
+                isinstance(func, ast.Attribute)
+                and func.attr in FORBIDDEN_DB_METHODS
+                and _root_name(func) in {"db", "session"}
+            ):
+                if (
+                    allow_session_transaction_boundary
+                    and path.name == "token_records.py"
+                    and func.attr in {"commit", "rollback"}
+                    and _root_name(func) == "session"
+                    and _enclosing_function_name(node) == "_session"
+                ):
+                    continue
+                found.append(f"{path}:{node.lineno}: direct {_root_name(func)}.{func.attr}() call")
+    return found
+
+
+@pytest.mark.unit
+def test_migrated_release_paths_use_tba_handlers_not_direct_db_or_sqla() -> None:
+    violations: list[str] = []
+    for path in MIGRATED_RELEASE_PATHS:
+        if not path.exists():
+            violations.append(f"{path}: migrated release path is missing")
+            continue
+        violations.extend(_violations(path))
+
+    assert violations == []
+
+
+@pytest.mark.unit
+def test_package_surfaces_do_not_use_generated_part_modules() -> None:
+    violations: list[str] = []
+    for base in (ROOT / "pkgs",):
+        for path in base.rglob("part_*.py"):
+            violations.append(f"{path}: generated part module remains in a package surface")
+
+    assert violations == []
+
+
+@pytest.mark.unit
+def test_semantic_facades_do_not_use_split_exec_loaders() -> None:
+    violations: list[str] = []
+    for path in SEMANTIC_FACADE_PATHS:
+        if not path.exists():
+            violations.append(f"{path}: semantic facade path is missing")
+            continue
+        source = path.read_text(encoding="utf-8")
+        if "exec(compile(" in source:
+            violations.append(f"{path}: release-path split loader uses exec(compile(...))")
+
+    assert violations == []
+
+
+@pytest.mark.unit
+def test_package_code_does_not_use_exec_compile_split_loaders() -> None:
+    violations: list[str] = []
+    for base in (ROOT / "pkgs",):
+        for path in base.rglob("*.py"):
+            source = path.read_text(encoding="utf-8")
+            if "exec(compile(" in source:
+                violations.append(f"{path}: package code uses exec(compile(...)) split loading")
+
+    assert violations == []
+
+
+@pytest.mark.unit
+def test_framework_public_surface_is_not_supported() -> None:
+    with pytest.raises(ModuleNotFoundError):
+        importlib.import_module("tba_server_identity.framework")
+
+
+@pytest.mark.unit
+def test_storage_persistence_helpers_use_handlers_not_direct_queries() -> None:
+    violations: list[str] = []
+    for path in PERSISTENCE_HELPER_PATHS:
+        if not path.exists():
+            violations.append(f"{path}: persistence helper path is missing")
+            continue
+        violations.extend(_violations(path, allow_session_transaction_boundary=True))
+
+    assert violations == []
+
+
+@pytest.mark.unit
+def test_sync_compat_surfaces_do_not_spawn_private_event_loop_threads() -> None:
+    violations: list[str] = []
+    forbidden_snippets = ("Thread(", "threading.Thread(", "asyncio.new_event_loop(")
+    for path in SYNC_COMPAT_PATHS:
+        if not path.exists():
+            violations.append(f"{path}: sync compatibility path is missing")
+            continue
+        source = path.read_text(encoding="utf-8")
+        for snippet in forbidden_snippets:
+            if snippet in source:
+                violations.append(f"{path}: sync compatibility surface uses {snippet}")
+
+    assert violations == []
+
+
+@pytest.mark.unit
+def test_async_request_token_paths_do_not_call_sync_jwt_default() -> None:
+    violations: list[str] = []
+    for path in ASYNC_REQUEST_TOKEN_PATHS:
+        if not path.exists():
+            violations.append(f"{path}: async request token path is missing")
+            continue
+        source = path.read_text(encoding="utf-8")
+        if "JWTCoder.default()" in source:
+            violations.append(f"{path}: async request path calls JWTCoder.default()")
+
+    assert violations == []
+
+
+@pytest.mark.unit
+def test_authn_token_signers_do_not_register_oauth_introspection_state() -> None:
+    violations: list[str] = []
+    forbidden_snippets = (
+        "register_token",
+        "register_token_async",
+        ".standards.introspection",
+        "standards.oauth2.introspection",
+    )
+    for path in AUTHN_TOKEN_SIGNER_PATHS:
+        if not path.exists():
+            violations.append(f"{path}: authn token signer path is missing")
+            continue
+        source = path.read_text(encoding="utf-8")
+        for snippet in forbidden_snippets:
+            if snippet in source:
+                violations.append(f"{path}: authn token signer owns OAuth introspection state via {snippet}")
+
+    assert violations == []

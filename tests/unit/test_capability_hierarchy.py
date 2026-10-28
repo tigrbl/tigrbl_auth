@@ -5,17 +5,17 @@ import time
 
 import pytest
 
-from tigrbl_attestation_appraisal import AttestationAppraisalCapability
-from tigrbl_capability import Capability
-from tigrbl_capability_bases import CapabilityBase
-from tigrbl_default_capability import DefaultCapability
-from tigrbl_digital_credential_issuance import DigitalCredentialIssuanceCapability
-from tigrbl_digital_credential_presentation import (
+from tba_capability_attestation_appraisal import AttestationAppraisalCapability
+from tba_concrete_capability import Capability
+from tba_bases_capability import CapabilityBase
+from tba_concrete_capability_default import DefaultCapability
+from tba_capability_digital_credential_issuance import DigitalCredentialIssuanceCapability
+from tba_capability_digital_credential_presentation import (
     DigitalCredentialPresentationCapability,
 )
-from tigrbl_identity_admin_control_plane import AdminControlPlane
-from tigrbl_identity_contracts.attestation import EvidenceVerificationResult
-from tigrbl_identity_contracts.capabilities import (
+from tba_runtime_identity_administration_control_plane import AdminControlPlane
+from tba_contracts_identity.attestation import EvidenceVerificationResult
+from tba_contracts_identity.capabilities import (
     CapabilityCallContext,
     CapabilityContextError,
     CapabilityDeadlineExceededError,
@@ -24,10 +24,10 @@ from tigrbl_identity_contracts.capabilities import (
     CapabilityState,
     ICapability,
 )
-from tigrbl_identity_runtime import CapabilityRegistry
-from tigrbl_replay_protection_capability import ReplayProtectionCapability
-from tigrbl_security_events import SecurityEventsCapability
-from tigrbl_workload_identity import WorkloadIdentityCapability
+from tba_runtime_identity import CapabilityRegistry
+from tba_capability_replay_protection import ReplayProtectionCapability
+from tba_capability_security_event_delivery import SecurityEventsCapability
+from tba_capability_workload_identity import WorkloadIdentityCapability
 
 
 class _Appraiser:

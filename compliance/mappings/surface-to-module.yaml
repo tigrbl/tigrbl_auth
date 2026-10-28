@@ -1,20 +1,20 @@
 public_auth_plane:
-- pkgs/80-routers/tigrbl-auth-router-session-login/src/tigrbl_auth_router_session_login/binding.py
-- pkgs/80-routers/tigrbl-auth-router-oauth-authorization/src/tigrbl_auth_router_oauth_authorization/binding.py
-- pkgs/80-routers/tigrbl-auth-router-oauth-token/src/tigrbl_auth_router_oauth_token/binding.py
-- pkgs/90-backend-apps/tigrbl-auth-backend-app-core/src/tigrbl_auth_backend_app_core/surfaces
+- pkgs/80-routers/tba-router-session-login/src/tba_router_session_login/binding.py
+- pkgs/80-routers/tba-router-oauth-authorization/src/tba_router_oauth_authorization/binding.py
+- pkgs/80-routers/tba-router-oauth-token/src/tba_router_oauth_token/binding.py
+- pkgs/90-backend-apps/tba-app-backend-core/src/tba_app_backend_core/surfaces
 admin_control_plane:
-- pkgs/90-backend-apps/tigrbl-auth-backend-app-platform-admin/src/tigrbl_auth_backend_app_platform_admin
-- pkgs/90-backend-apps/tigrbl-auth-backend-app-my-account/src/tigrbl_auth_backend_app_my_account
+- pkgs/90-backend-apps/tba-app-backend-platform-admin/src/tba_app_backend_platform_admin
+- pkgs/90-backend-apps/tba-app-backend-my-account/src/tba_app_backend_my_account
 operator_plane:
-- pkgs/60-runtime/tigrbl-identity-cli/src/tigrbl_identity_cli
-- pkgs/60-runtime/tigrbl-identity-operator/src/tigrbl_identity_operator
+- pkgs/60-runtime/tba-cli-identity/src/tba_cli_identity
+- pkgs/60-runtime/tba-operator-identity/src/tba_operator_identity
 rpc_control_plane:
-- pkgs/60-runtime/tigrbl-identity-cli/src/tigrbl_identity_cli/cli/artifacts/_schemas.py
-- specs/openrpc/tigrbl_auth.admin.openrpc.json
+- pkgs/60-runtime/tba-cli-identity/src/tba_cli_identity/cli/artifacts/_schemas.py
+- specs/openrpc/tba_auth.admin.openrpc.json
 diagnostics_plane:
-- pkgs/90-backend-apps/tigrbl-auth-backend-app-core/src/tigrbl_auth_backend_app_core/app.py
-- pkgs/90-backend-apps/tigrbl-auth-backend-app-core/src/tigrbl_auth_backend_app_core/plugin.py
+- pkgs/90-backend-apps/tba-app-backend-core/src/tba_app_backend_core/app.py
+- pkgs/90-backend-apps/tba-app-backend-core/src/tba_app_backend_core/plugin.py
 plugin_plane:
-- pkgs/60-runtime/tigrbl-auth-plugin/src/tigrbl_auth_plugin/plugin.py
-- pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/gateway.py
+- pkgs/60-runtime/tba-plugin-tigrbl/src/tba_plugin_tigrbl/plugin.py
+- pkgs/60-runtime/tba-server-identity/src/tba_server_identity/gateway.py

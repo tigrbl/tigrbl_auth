@@ -22,13 +22,13 @@ PROFILE_GROUPS = {
     "peer-claim": ("baseline", "production", "hardening"),
 }
 PUBLIC_ROUTE_SEARCH_ROOTS = (
-    "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables",
-    "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime",
-    "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server",
+    "pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables",
+    "pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage",
+    "pkgs/60-runtime/tba-server-identity/src/tba_server_identity",
     "pkgs/80-routers",
     "pkgs/90-backend-apps",
-    "pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/standards/oauth2",
-    "pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/standards/oidc",
+    "pkgs/70-facade/tba-auth/src/tba_auth/standards/oauth2",
+    "pkgs/70-facade/tba-auth/src/tba_auth/standards/oidc",
 )
 OPENAPI_TARGET_LABEL = "OpenAPI 3.1 / 3.2 compatible public contract"
 OPENRPC_TARGET_LABEL = "OpenRPC 1.4.x admin/control-plane contract"
@@ -105,14 +105,14 @@ def runtime_package_root(repo_root: Path) -> Path:
         repo_root
         / "pkgs"
         / "60-runtime"
-        / "tigrbl-identity-runtime"
+        / "tba-runtime-identity"
         / "src"
-        / "tigrbl_identity_runtime"
+        / "tba_runtime_identity"
     )
 
 
 def facade_package_root(repo_root: Path) -> Path:
-    return repo_root / "pkgs" / "70-facade" / "tigrbl-auth" / "src" / "tigrbl_auth"
+    return repo_root / "pkgs" / "70-facade" / "tba-auth" / "src" / "tba_auth"
 
 
 def load_public_capabilities(repo_root: Path) -> list[dict[str, Any]]:
@@ -218,7 +218,7 @@ def openapi_contract_path(repo_root: Path, profile: str) -> Path:
         / "openapi"
         / "profiles"
         / profile
-        / "tigrbl_auth.public.openapi.json"
+        / "tba_auth.public.openapi.json"
     )
 
 
@@ -229,7 +229,7 @@ def openrpc_contract_path(repo_root: Path, profile: str) -> Path:
         / "openrpc"
         / "profiles"
         / profile
-        / "tigrbl_auth.admin.openrpc.json"
+        / "tba_auth.admin.openrpc.json"
     )
 
 
@@ -885,8 +885,8 @@ def verify_feature_surface_modularity(repo_root: Path) -> dict[str, Any]:
         )
     if "attach_runtime_surfaces(" not in (
         repo_root
-        / "pkgs/90-backend-apps/tigrbl-auth-backend-app-core/src"
-        / "tigrbl_auth_backend_app_core/app.py"
+        / "pkgs/90-backend-apps/tba-app-backend-core/src"
+        / "tba_app_backend_core/app.py"
     ).read_text(encoding="utf-8"):
         failures.append(
             "backend-app core does not install surfaces through attach_runtime_surfaces"

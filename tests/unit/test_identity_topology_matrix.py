@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from tigrbl_identity_contracts.topology import (
+from tba_contracts_identity.topology import (
     IDENTITY_TOPOLOGY_BY_ID,
     IDENTITY_TOPOLOGY_SCENARIOS,
     cardinality_for_count,

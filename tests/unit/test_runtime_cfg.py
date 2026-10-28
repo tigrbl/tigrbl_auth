@@ -4,7 +4,7 @@ from importlib import reload
 
 import pytest
 
-from tigrbl_auth import runtime_cfg
+from tba_auth import runtime_cfg
 
 
 @pytest.mark.unit

@@ -20,7 +20,7 @@ Covered runtime behavior:
 Verification:
 
 ```powershell
-$env:UV_CACHE_DIR='E:\swarmauri_github\tigrbl_auth\.tmp\uv-cache'; uv run --no-sync pytest tests/unit/test_tenant_public_discovery_boundary.py tests/features/test_tenant_jwks_discovery.py
+$env:UV_CACHE_DIR='E:\swarmauri_github\tba_auth\.tmp\uv-cache'; uv run --no-sync pytest tests/unit/test_tenant_public_discovery_boundary.py tests/features/test_tenant_jwks_discovery.py
 ```
 
 Result: 18 passed.

@@ -1,8 +1,8 @@
 from datetime import datetime, timezone
 
-from tigrbl_certificate_path_validator import ProfiledCertificatePathValidator
-from tigrbl_certificate_status_provider import SnapshotCertificateStatusProvider
-from tigrbl_security_trust_contracts import (
+from tba_provider_certificate_path_validator import ProfiledCertificatePathValidator
+from tba_provider_certificate_status import SnapshotCertificateStatusProvider
+from tba_contracts_security_trust import (
     CertificateArtifact,
     CertificatePathValidationRequest,
     CertificatePathValidationResult,
@@ -10,7 +10,7 @@ from tigrbl_security_trust_contracts import (
     CertificateStatus,
     TrustAnchor,
 )
-from tigrbl_trust_anchor_provider import ProfiledTrustAnchorProvider
+from tba_provider_trust_anchor import ProfiledTrustAnchorProvider
 
 
 def _anchors():

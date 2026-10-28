@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "`tigrbl_auth` MUST separate pre-token authorization determinism from final"
+summary: "`tba_auth` MUST separate pre-token authorization determinism from final"
 supersedes: []
 superseded_by: []
 status_notes:
@@ -20,7 +20,7 @@ references: []
 body: |-
   ## Decision
   
-  `tigrbl_auth` MUST separate pre-token authorization determinism from final
+  `tba_auth` MUST separate pre-token authorization determinism from final
   JWT byte determinism.
   
   Issued tokens MAY remain nondeterministic because of `iat`, `exp`, `jti`,

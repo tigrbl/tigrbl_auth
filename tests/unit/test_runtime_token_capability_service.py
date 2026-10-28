@@ -4,8 +4,8 @@ from pathlib import Path
 
 import pytest
 
-from tigrbl_identity_contracts.capabilities import CapabilityDefinition
-from tigrbl_identity_contracts.tokens import (
+from tba_contracts_identity.capabilities import CapabilityDefinition
+from tba_contracts_identity.tokens import (
     IssuedTokenPair,
     RefreshTokenRedemptionRequest,
     TokenIntrospectionRequest,
@@ -14,11 +14,11 @@ from tigrbl_identity_contracts.tokens import (
     TokenRevocationRequest,
     TokenRevocationResult,
 )
-from tigrbl_identity_runtime import CapabilityFactory, CapabilityRegistry
-from tigrbl_identity_runtime.token_service import RuntimeTokenService
-from tigrbl_token_introspection_capability import TokenIntrospectionCapability
-from tigrbl_token_issuance_capability import TokenIssuanceCapability
-from tigrbl_token_revocation_capability import TokenRevocationCapability
+from tba_runtime_identity import CapabilityFactory, CapabilityRegistry
+from tba_runtime_identity.token_service import RuntimeTokenService
+from tba_capability_token_introspection import TokenIntrospectionCapability
+from tba_capability_token_issuance import TokenIssuanceCapability
+from tba_capability_token_revocation import TokenRevocationCapability
 
 
 def _registry() -> CapabilityRegistry:
@@ -70,12 +70,12 @@ async def test_runtime_token_service_dispatches_typed_capability_operations() ->
 
 def test_runtime_token_service_keeps_storage_imports_in_compatibility_module() -> None:
     package_root = (
-        Path("pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime")
+        Path("pkgs/60-runtime/tba-runtime-identity/src/tba_runtime_identity")
     )
     canonical = (package_root / "token_service.py").read_text(encoding="utf-8")
     compatibility = (package_root / "token_service_compat.py").read_text(
         encoding="utf-8"
     )
 
-    assert "tigrbl_identity_storage_runtime" not in canonical
-    assert "tigrbl_identity_storage_runtime" in compatibility
+    assert "tba_runtime_identity_storage" not in canonical
+    assert "tba_runtime_identity_storage" in compatibility

@@ -9,11 +9,11 @@ ROOT = Path(__file__).resolve().parents[2]
 CONCRETE_ROOT = ROOT / "pkgs" / "10-concrete"
 # Every package in 10-concrete must be an explicitly classified, stateless leaf.
 CONCRETE_PACKAGE_SHAPES = {
-    "tigrbl-authz-policy-attributes-mapping": "stateless-strategy",
-    "tigrbl-authz-policy-combiner-default": "stateless-strategy",
-    "tigrbl-authz-policy-evaluators-default": "stateless-strategy",
-    "tigrbl-authz-policy-obligations-concrete": "stateless-strategy",
-    "tigrbl-authz-policy-rules-concrete": "contract-dataclass",
+    "tba-concrete-authorization-policy-attributes-mapping": "stateless-strategy",
+    "tba-concrete-authorization-policy-combiner-default": "stateless-strategy",
+    "tba-concrete-authorization-policy-evaluators-default": "stateless-strategy",
+    "tba-concrete-authorization-policy-obligations": "stateless-strategy",
+    "tba-concrete-authorization-policy-rules": "contract-dataclass",
     "tigrbl-identity-credentials-concrete": "contract-dataclass",
     "tigrbl-identity-identities-concrete": "contract-dataclass",
     "tigrbl-oauth-scope-matcher": "stateless-strategy",
@@ -30,9 +30,9 @@ ALLOWED_IMPORT_ROOTS = {
     "hashlib",
     "typing",
     "uuid",
-    "tigrbl_authz_policy_bases",
-    "tigrbl_identity_contracts",
-    "tigrbl_identity_model_bases",
+    "tba_bases_authorization_policy",
+    "tba_contracts_identity",
+    "tba_bases_identity_model",
 }
 
 

@@ -18,8 +18,8 @@ Complete the browser-facing OIDC and HTTP session layer so the production auth f
 
 ## Completed in this checkpoint
 
-- implemented `tigrbl_auth/standards/http/cookies.py` as the domain-owned cookie policy module
-- expanded `tigrbl_auth/standards/oidc/session_mgmt.py` to own browser-session creation, resolution, client binding, rotation, and `session_state` emission
+- implemented `tba_auth/standards/http/cookies.py` as the domain-owned cookie policy module
+- expanded `tba_auth/standards/oidc/session_mgmt.py` to own browser-session creation, resolution, client binding, rotation, and `session_state` emission
 - implemented RP-initiated logout redirect validation and replay-safe logout planning
 - implemented front-channel and back-channel logout fanout planning from client registration metadata
 - linked authorization codes back to the durable browser session

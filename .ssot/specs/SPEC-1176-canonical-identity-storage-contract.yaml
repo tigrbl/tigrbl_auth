@@ -8,7 +8,7 @@ status: "draft"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This SPEC governs canonical persistence ownership for the identity package suite and the compatibility imports retained by the `tigrbl_auth` facade package."
+summary: "This SPEC governs canonical persistence ownership for the identity package suite and the compatibility imports retained by the `tba_auth` facade package."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -28,11 +28,11 @@ references: []
 body: |-
   ## Scope
   
-  This SPEC governs canonical persistence ownership for the identity package suite and the compatibility imports retained by the `tigrbl_auth` facade package.
+  This SPEC governs canonical persistence ownership for the identity package suite and the compatibility imports retained by the `tba_auth` facade package.
   
   ## Requirements
   
-  `tigrbl_identity_storage.tables` MUST own canonical table classes, `Base`, runtime table binding, engine exports, table module exports, and storage-table-owned domain operations.
+  `tba_storage_core.tables` MUST own canonical table classes, `Base`, runtime table binding, engine exports, table module exports, and storage-table-owned domain operations.
   
   Every durable operation whose primary subject is a storage table MUST be implemented directly on, or explicitly exported from, the owning table module. Examples include, but are not limited to:
   
@@ -47,9 +47,9 @@ body: |-
   - `LogoutState` logout-plan, channel-state, latest-for-session, and metadata update operations.
   - `Realm`, `Tenant`, and `User` discovery/admin/profile identity operations that persist or query table-owned state.
   
-  `tigrbl_identity_storage.db`, `tigrbl_identity_storage.persistence`, and `tigrbl_identity_storage.migrations` MUST consume canonical storage tables directly and MUST NOT import `tigrbl_auth.tables` compatibility facades.
+  `tba_storage_core.db`, `tba_storage_core.persistence`, and `tba_storage_core.migrations` MUST consume canonical storage tables directly and MUST NOT import `tba_auth.tables` compatibility facades.
   
-  Compatibility facades under `tigrbl_auth` MUST preserve object identity for canonical storage symbols where facades are intentionally retained. The legacy `orm` namespace is not required as a supported facade.
+  Compatibility facades under `tba_auth` MUST preserve object identity for canonical storage symbols where facades are intentionally retained. The legacy `orm` namespace is not required as a supported facade.
   
   Deployable frontdoor APIs MUST compose route resources from canonical storage table objects and keep product-specific behavior limited to route composition, tags, prefixes, capability filtering, request parsing, response shaping, and fail-closed exposure rules.
   
@@ -59,7 +59,7 @@ body: |-
   
   ## Verification
   
-  Verification MUST assert facade/storage symbol identity, absence of duplicate table class definitions under `tigrbl_auth.tables`, storage-owned migration imports, persistence facade parity, product API composition over canonical storage table resources, and boundary enforcement proving storage-table domain operations are not canonically owned by protocol, server, REST router, runtime, operator, or facade modules.
+  Verification MUST assert facade/storage symbol identity, absence of duplicate table class definitions under `tba_auth.tables`, storage-owned migration imports, persistence facade parity, product API composition over canonical storage table resources, and boundary enforcement proving storage-table domain operations are not canonically owned by protocol, server, REST router, runtime, operator, or facade modules.
 spec_kind: "normative"
 adr_ids:
   - "adr:1121"

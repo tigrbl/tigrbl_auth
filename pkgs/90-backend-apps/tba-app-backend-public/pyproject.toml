@@ -1,0 +1,38 @@
+[project]
+name = "tba-app-backend-public"
+version = "0.4.0.dev2"
+description = "Public OAuth/OIDC and human-login backend application for TBA."
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = [
+    "tba-auth==0.4.0.dev2",
+    "tba-app-backend-core==0.4.0.dev2",
+    "tba-router-oauth-authorization==0.4.0.dev2",
+    "tba-router-oauth-authorization-server-metadata==0.4.0.dev2",
+    "tba-router-oauth-device-authorization==0.4.0.dev2",
+    "tba-router-oauth-introspection==0.4.0.dev2",
+    "tba-router-oauth-pushed-authorization-request==0.4.0.dev2",
+    "tba-router-oauth-protected-resource-metadata==0.4.0.dev2",
+    "tba-router-oauth-registration==0.4.0.dev2",
+    "tba-router-oauth-revocation==0.4.0.dev2",
+    "tba-router-oauth-token==0.4.0.dev2",
+    "tba-router-oauth-token-exchange==0.4.0.dev2",
+    "tba-router-oidc-discovery==0.4.0.dev2",
+    "tba-router-oidc-logout==0.4.0.dev2",
+    "tba-router-oidc-userinfo==0.4.0.dev2",
+    "tba-router-session-login==0.4.0.dev2",
+    "tba-router-webauthn==0.4.0.dev2",
+]
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/90-backend-apps/tba-app-backend-public"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tba_app_backend_public", from = "src" }]

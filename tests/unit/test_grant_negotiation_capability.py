@@ -1,8 +1,8 @@
 import asyncio
 
 import pytest
-from tigrbl_grant_negotiation_capability import GrantNegotiationCapability
-from tigrbl_identity_contracts.gnap import (
+from tba_capability_delegated_access_negotiation import GrantNegotiationCapability
+from tba_contracts_identity.gnap import (
     GrantAccessRequest,
     GrantContinuationRequest,
     GrantNegotiationRequest,

@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from tigrbl_authz_policy.governance_extension import (
+from tba_runtime_authorization_policy.governance_extension import (
     AccessReviewWorkflow,
     EntitlementManager,
     PluginRuntimeRegistry,
@@ -24,7 +24,7 @@ def _sdk_catalog() -> SDKEcosystemCatalog:
     catalog = SDKEcosystemCatalog()
     catalog.register_sdk(
         "sdk-python",
-        package_name="tigrbl-auth-python",
+        package_name="tba-auth-python",
         language="python",
         version="0.3.4",
         compatible_runtime_range=("0.3.0", "0.3.9"),
@@ -34,7 +34,7 @@ def _sdk_catalog() -> SDKEcosystemCatalog:
     )
     catalog.register_sdk(
         "sdk-typescript",
-        package_name="tigrbl-auth-ts",
+        package_name="tba-auth-ts",
         language="typescript",
         version="0.3.4",
         compatible_runtime_range=("0.3.0", "0.3.9"),
@@ -101,8 +101,8 @@ def _entitlements() -> tuple[EntitlementManager, str]:
 
 
 def test_provisioning_governance_ecosystem_boundary_inventory_is_ssot_owned():
-    import tigrbl_authz_policy.governance_extension as governance_extension
-    import tigrbl_identity_contracts as management_contracts
+    import tba_runtime_authorization_policy.governance_extension as governance_extension
+    import tba_contracts_identity as management_contracts
 
     removed_inline_surfaces = {
         "GovernanceExtensionBoundaryFeature",
@@ -124,15 +124,15 @@ def test_contracts_and_authz_policy_use_identity_core_time_and_version_primitive
         ROOT
         / "pkgs"
         / "02-contracts"
-        / "tigrbl-identity-contracts"
+        / "tba-contracts-identity"
         / "src"
-        / "tigrbl_identity_contracts",
+        / "tba_contracts_identity",
         ROOT
         / "pkgs"
         / "40-capabilities"
-        / "tigrbl-authz-policy"
+        / "tba-runtime-authorization-policy"
         / "src"
-        / "tigrbl_authz_policy",
+        / "tba_runtime_authorization_policy",
     )
 
     for root in roots:

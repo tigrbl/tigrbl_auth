@@ -19,7 +19,7 @@ target_to_tests:
   - tests/runtime/test_runner_invariance.py
   - tests/conformance/operator/test_cli_serve_runtime.py
 required_artifacts:
-- tigrbl_auth/api/app.py
-- tigrbl_auth/gateway.py
+- tba_auth/api/app.py
+- tba_auth/gateway.py
 - tests/runtime/test_runner_tigrcorn.py
 counterpart_id: tigrcorn-runner

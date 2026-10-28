@@ -5,7 +5,7 @@ import httpx
 import pytest
 import uvicorn
 
-from tigrbl_auth.tables.credential_service_key import CredentialServiceKey
+from tba_auth.tables.credential_service_key import CredentialServiceKey
 
 TENANT_ID = UUID("ffffffff-0000-0000-0000-000000000000")
 
@@ -26,7 +26,7 @@ async def _wait_for_app(base_url: str) -> None:
 @pytest.fixture()
 async def running_app(override_get_db):
     cfg = uvicorn.Config(
-        "tigrbl_auth_backend_app_public:app", host="127.0.0.1", port=8000, log_level="warning"
+        "tba_app_backend_public:app", host="127.0.0.1", port=8000, log_level="warning"
     )
     server = uvicorn.Server(cfg)
     task = asyncio.create_task(server.serve())

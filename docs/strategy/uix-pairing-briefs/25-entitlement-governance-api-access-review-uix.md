@@ -1,6 +1,6 @@
 # Entitlement Governance API + Access Review UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-router-entitlement-governance` + `@tigrbl-auth/access-review-uix`<br>
+**Pairing:** `tba-router-entitlement-governance` + `@tba/access-review-uix`<br>
 **Opportunity-map item:** 15<br>
 **Primary buyers:** security, identity governance, compliance, internal audit, and application owners<br>
 **Best-fit verticals:** regulated enterprise, financial services, healthcare, government, and B2B SaaS<br>
@@ -102,7 +102,7 @@ Product language must distinguish **available primitive**, **integrated capabili
 
 ### Existing packages retain ownership
 
-- `tigrbl-authz-policy`: runtime authorization semantics and decision traces;
+- `tba-runtime-authorization-policy`: runtime authorization semantics and decision traces;
 - identity principals: canonical human and non-human principals;
 - identity storage: durable tables, migrations, repositories, and transactions;
 - delegation: who may act for whom and within what bounds;
@@ -527,13 +527,13 @@ Metrics must segment by risk and connector capability; faster bulk approval alon
 - `docs/strategy/uix-pairing-briefs/10-additional-api-uix-opportunity-map.md`
 - `docs/authorization-models-focus.md`
 - `docs/strategy/identity-market-roadmap.md`
-- `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/governance/`
-- `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/entitlement/`
-- `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/entitlement_assignment/`
-- `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/access_review_campaign/`
-- `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/access_review_item/`
-- `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/access_review_decision/`
-- `pkgs/20-providers/tigrbl-authz-policy/src/tigrbl_authz_policy/governance_extension.py`
+- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/governance/`
+- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/entitlement/`
+- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/entitlement_assignment/`
+- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/access_review_campaign/`
+- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/access_review_item/`
+- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/access_review_decision/`
+- `pkgs/20-providers/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/governance_extension.py`
 - `tests/unit/test_governance_extension_plane_phase5.py`
 - `tests/unit/test_provisioning_governance_ecosystem_boundary.py`
 

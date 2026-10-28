@@ -1,10 +1,10 @@
 # Legacy Admin UIX Extraction and Retirement Brief
 
-**Surface:** `@tigrbl-auth/admin-uix`<br>
+**Surface:** `@tba/ui-admin`<br>
 **Pairing:** Legacy aggregate admin contract; no approved one-to-one product API<br>
 **Status:** Migration source, security maintenance, and retirement<br>
 **Prepared:** July 11, 2026<br>
-**Current owner:** `pkgs/105-ui/admin-uix`
+**Current owner:** `pkgs/105-ui/tba-ui-admin`
 
 ## 1. Product Decision
 
@@ -42,7 +42,7 @@ These are transition liabilities and must not become requirements for replacemen
 - Loading intentionally waits through `setTimeout` rather than representing actual request state.
 - A 500 ms polling loop reads locally stored lockdown state.
 - Raw/simulated infrastructure, abuse, and policy controls can look operational.
-- Styling and components are largely separate from `@tigrbl-auth/uix-core`.
+- Styling and components are largely separate from `@tba/ui-primitives`.
 
 ## 3. Allowed Work
 
@@ -180,7 +180,7 @@ After the cutoff, serve a static migration page rather than the operational bund
 
 1. Build the parity ledger before moving additional components.
 2. Add environment-gated tests for debug reset tokens, stored admin keys, sample credentials, and simulated controls.
-3. Replace required shared behaviors with `@tigrbl-auth/uix-core`; do not refactor retired-only components for aesthetics.
+3. Replace required shared behaviors with `@tba/ui-primitives`; do not refactor retired-only components for aesthetics.
 4. Add exact replacement links only after route/authority/end-to-end proof.
 5. Instrument privacy-safe migration events without tenant/user/resource identifiers.
 6. Remove legacy routes, services, persistence stores, and dependencies incrementally after target gates pass.
@@ -232,13 +232,13 @@ The operational package may be retired when:
 
 ## 14. Source Evidence
 
-- `pkgs/105-ui/admin-uix/README.md`
-- `pkgs/105-ui/admin-uix/App.tsx`
-- `pkgs/105-ui/admin-uix/components/`
-- `pkgs/105-ui/admin-uix/services/backendService.ts`
-- `pkgs/105-ui/admin-uix/services/adminAuthService.ts`
-- `pkgs/105-ui/admin-uix/services/controlPlaneStateService.ts`
-- `pkgs/105-ui/admin-uix/services/persistence.ts`
+- `pkgs/105-ui/tba-ui-admin/README.md`
+- `pkgs/105-ui/tba-ui-admin/App.tsx`
+- `pkgs/105-ui/tba-ui-admin/components/`
+- `pkgs/105-ui/tba-ui-admin/services/backendService.ts`
+- `pkgs/105-ui/tba-ui-admin/services/adminAuthService.ts`
+- `pkgs/105-ui/tba-ui-admin/services/controlPlaneStateService.ts`
+- `pkgs/105-ui/tba-ui-admin/services/persistence.ts`
 - Admin UIX boundary, auth, resource, mutation, policy, and governance tests
 - Platform/Tenant/Developer/Service API/UIX pairing briefs
 - Admin UIX SSOT feature/claim/test/evidence/boundary records

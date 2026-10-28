@@ -4,32 +4,32 @@ from pathlib import Path
 
 import pytest
 
-from tigrbl_authenticator_api_key_local import ApiKeyLocalAuthenticator
-from tigrbl_authenticator_client_secret_local import ClientSecretLocalAuthenticator
-from tigrbl_authenticator_dpop_proof import DpopProofAuthenticator
-from tigrbl_authenticator_federated_oidc import FederatedOidcAuthenticator
-from tigrbl_authenticator_mtls_client_cert import MtlsClientCertAuthenticator
-from tigrbl_authenticator_otp_local import OtpLocalAuthenticator
-from tigrbl_authenticator_password_local import PasswordLocalAuthenticator
-from tigrbl_authenticator_recovery_code_local import RecoveryCodeLocalAuthenticator
-from tigrbl_authenticator_remote_introspection import RemoteIntrospectionAuthenticator
-from tigrbl_authenticator_service_key_local import ServiceKeyLocalAuthenticator
-from tigrbl_authenticator_session_local import SessionLocalAuthenticator
-from tigrbl_identity_authenticator_bases import (
+from tba_provider_authenticator_api_key_local import ApiKeyLocalAuthenticator
+from tba_provider_authenticator_client_secret_local import ClientSecretLocalAuthenticator
+from tba_provider_authenticator_dpop_proof import DpopProofAuthenticator
+from tba_provider_authenticator_federated_oidc import FederatedOidcAuthenticator
+from tba_provider_authenticator_mtls_client_cert import MtlsClientCertAuthenticator
+from tba_provider_authenticator_otp_local import OtpLocalAuthenticator
+from tba_provider_authenticator_password_local import PasswordLocalAuthenticator
+from tba_provider_authenticator_recovery_code_local import RecoveryCodeLocalAuthenticator
+from tba_provider_authenticator_remote_introspection import RemoteIntrospectionAuthenticator
+from tba_provider_authenticator_service_key_local import ServiceKeyLocalAuthenticator
+from tba_provider_authenticator_session_local import SessionLocalAuthenticator
+from tba_bases_identity_authenticator import (
     AuthenticatorBase,
     ChallengeAuthenticatorBase,
 )
-from tigrbl_identity_contracts.authenticators import (
+from tba_contracts_identity.authenticators import (
     AuthenticatorKind,
     IAuthenticator,
     IChallengeAuthenticator,
 )
-from tigrbl_identity_contracts.credentials import CredentialKind
+from tba_contracts_identity.credentials import CredentialKind
 
 
 def test_authenticator_contracts_do_not_define_composite_surface():
-    import tigrbl_identity_contracts.authenticators as contracts
-    import tigrbl_identity_authenticator_bases as bases
+    import tba_contracts_identity.authenticators as contracts
+    import tba_bases_identity_authenticator as bases
 
     assert not hasattr(contracts, "ICompositeAuthenticator")
     assert not hasattr(bases, "CompositeAuthenticatorBase")
@@ -123,5 +123,5 @@ def test_no_composite_provider_package_was_added():
     root = Path(__file__).resolve().parents[2]
 
     assert not (
-        root / "pkgs" / "20-providers" / "tigrbl-authenticator-composite"
+        root / "pkgs" / "20-providers" / "tba-authenticator-composite"
     ).exists()

@@ -26,25 +26,25 @@ body: |-
   
   `tigrbl-identity-resource-server` MAY import:
   
-  - `tigrbl-identity-core`
-  - `tigrbl-identity-contracts`
-  - `tigrbl-identity-principals`
+  - `tba-primitives-identity`
+  - `tba-contracts-identity`
+  - `tba-concrete-identity-principals`
   - `tigrbl-identity-credentials`
-  - `tigrbl-identity-jose`
+  - `tba-provider-identity-jose`
   - `tigrbl-identity-policy`
   - `tigrbl-identity-oauth`
   - selected `tigrbl-identity-oidc` metadata contracts
   
   `tigrbl-identity-rp` MAY import:
   
-  - `tigrbl-identity-core`
-  - `tigrbl-identity-contracts`
+  - `tba-primitives-identity`
+  - `tba-contracts-identity`
   - `tigrbl-identity-credentials`
-  - `tigrbl-identity-jose`
+  - `tba-provider-identity-jose`
   - `tigrbl-identity-oauth`
   - `tigrbl-identity-oidc`
   
-  `tigrbl-identity-testkit` MAY import RP and resource-server packages for
+  `tba-testkit-identity` MAY import RP and resource-server packages for
   non-production testing.
   
   ## Forbidden Edges

@@ -25,7 +25,7 @@ body: |-
   ## Overview
   
   This specification defines normative requirements for authorization models and
-  relationship graph capabilities in `tigrbl_auth`.
+  relationship graph capabilities in `tba_auth`.
   
   ## Decision Source
   

@@ -1,6 +1,6 @@
 import pytest
 
-from tigrbl_auth_protocol_cwt import (
+from tba_protocol_cwt import (
     CAPABILITY_REQUIREMENTS,
     CURRENT_VERSION,
     CWT_CARRIER,
@@ -15,7 +15,7 @@ from tigrbl_auth_protocol_cwt import (
     select_carrier,
     supports,
 )
-from tigrbl_claim_issuer_concrete import IssuerClaim
+from tba_concrete_claim_issuer import IssuerClaim
 
 
 def test_cwt_registered_claims_map_integer_labels_to_semantic_claims():

@@ -1,0 +1,10 @@
+[project]
+name="tba-profile-workload-credential-spiffe-wit-svid"
+version="0.4.0.dev2"
+requires-python=">=3.10,<3.15"
+dependencies=["tba-contracts-proof-of-possession==0.4.0.dev2","tba-profile-workload-credential-wimse-wit==0.4.0.dev2","tba-protocol-workload-spiffe-svid==0.4.0.dev2"]
+[build-system]
+requires=["poetry-core>=1.0.0"]
+build-backend="poetry.core.masonry.api"
+[tool.poetry]
+packages=[{include="tba_profile_workload_credential_spiffe_wit_svid",from="src"}]

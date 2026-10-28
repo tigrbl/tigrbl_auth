@@ -16,7 +16,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 STORAGE = ROOT / "pkgs/01-storage"
-LEGACY = STORAGE / "tigrbl-identity-storage/src/tigrbl_identity_storage/tables"
+LEGACY = STORAGE / "tba-storage-core/src/tba_storage_core/tables"
 NAMESPACE = uuid.UUID("72ced0b5-f90a-47ba-b7d5-da70a6b62d4f")
 
 COMPONENTS: dict[str, tuple[str, ...]] = {
@@ -71,15 +71,15 @@ def _sources() -> tuple[dict[str, Path], dict[str, str], dict[str, object]]:
                     if isinstance(statement.value, ast.Constant) and isinstance(statement.value.value, str):
                         table_names[node.name] = statement.value.value
     sys.path[:0] = [
-        str(STORAGE / "tigrbl-identity-storage/src"),
-        str(ROOT / "pkgs/00-primitives/tigrbl-identity-core/src"),
+        str(STORAGE / "tba-storage-core/src"),
+        str(ROOT / "pkgs/00-primitives/tba-primitives-identity/src"),
         *(
             str(path / "src")
-            for path in STORAGE.glob("tigrbl-identity-storage-*")
+            for path in STORAGE.glob("tba-storage-*")
             if (path / "src").is_dir()
         ),
     ]
-    from tigrbl_identity_storage.tables import TABLE_MODELS
+    from tba_storage_core.tables import TABLE_MODELS
 
     models = {model.__name__: model for model in TABLE_MODELS}
     table_names.update({name: model.__tablename__ for name, model in models.items()})
@@ -91,9 +91,9 @@ def _revision(component: str) -> str:
 
 
 def _rewrite(text: str, import_root: str) -> str:
-    text = text.replace("tigrbl_identity_storage.framework", "tigrbl_identity_core.orm")
-    text = text.replace("tigrbl_identity_storage_core.framework", "tigrbl_identity_core.orm")
-    text = text.replace("tigrbl_identity_storage.tables._graph_base", f"{import_root}.tables._graph_base")
+    text = text.replace("tba_storage_core.framework", "tba_primitives_identity.orm")
+    text = text.replace("tba_storage_core_core.framework", "tba_primitives_identity.orm")
+    text = text.replace("tba_storage_core.tables._graph_base", f"{import_root}.tables._graph_base")
     return text.rstrip() + "\n"
 
 
@@ -135,8 +135,8 @@ def main() -> None:
 
     for component, classes in COMPONENTS.items():
         slug = component
-        import_root = "tigrbl_identity_storage_" + slug.replace("-", "_")
-        distribution = "tigrbl-identity-storage-" + slug
+        import_root = "tba_storage_" + slug.replace("-", "_")
+        distribution = "tba-storage-" + slug
         component_id = "tigrbl.identity.storage." + slug
         package_root = STORAGE / distribution
         source_root = package_root / "src" / import_root
@@ -238,11 +238,11 @@ def main() -> None:
         (package_root / "component.toml").write_text(manifest_text, encoding="utf-8")
         (source_root / "component.toml").write_text(manifest_text, encoding="utf-8")
 
-        dependency_dists = ["tigrbl-identity-storage-" + item for item in sorted(dependency_components)]
+        dependency_dists = ["tba-storage-core-" + item for item in sorted(dependency_components)]
         dependency_rows = [
             '    "tigrbl>=0.4.4.dev1,<0.5",',
             '    "tigrbl-migrations>=0.4.5.dev4",',
-            '    "tigrbl-identity-core[storage]>=0.4.0.dev2",',
+            '    "tba-primitives-identity[storage]>=0.4.0.dev2",',
             *(f'    "{item}>=0.4.0.dev2",' for item in dependency_dists),
         ]
         pyproject = f'''[project]
@@ -319,15 +319,15 @@ MIGRATION = Migration(
         '"""Compatibility projection of independently owned storage components."""',
         "# ruff: noqa: F401,F403",
         "",
-        "from tigrbl_identity_core.orm import RestOltpTable",
+        "from tba_primitives_identity.orm import RestOltpTable",
     ]
     for component, classes in COMPONENTS.items():
-        import_root = "tigrbl_identity_storage_" + component.replace("-", "_")
+        import_root = "tba_storage_core_" + component.replace("-", "_")
         compatibility.append(f"from {import_root}.tables import {', '.join(classes)}")
     compatibility.extend(
         [
-            "from tigrbl_identity_storage_oauth.tables.client import _CLIENT_ID_RE",
-            "from tigrbl_identity_storage_delegation.tables.delegation_grant import DelegationGrantRecord",
+            "from tba_storage_oauth.tables.client import _CLIENT_ID_RE",
+            "from tba_storage_delegation.tables.delegation_grant import DelegationGrantRecord",
             "",
             "_TABLE_MODELS = (",
             *(f"    {name}," for names in COMPONENTS.values() for name in names),
@@ -340,7 +340,7 @@ MIGRATION = Migration(
     from tigrbl_migrations import DeploymentLock, StorageComposition, StorageManifest
 
     manifests = tuple(
-        StorageManifest.from_toml(STORAGE / ("tigrbl-identity-storage-" + component) / "component.toml")
+        StorageManifest.from_toml(STORAGE / ("tba-storage-core-" + component) / "component.toml")
         for component in COMPONENTS
     )
     composition = StorageComposition.from_manifests(*manifests)

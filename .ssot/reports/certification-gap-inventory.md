@@ -1,6 +1,6 @@
 # Certification Gap Inventory
 
-- package: `tigrbl_auth`
+- package: `tba_auth`
 - SSOT validation passed: `True`
 - registry counts: `{'features': 1160, 'profiles': 6, 'tests': 752, 'claims': 1766, 'evidence': 552, 'issues': 35, 'risks': 1}`
 - current partial or absent features: `336`
@@ -44,7 +44,7 @@
 - `feat:identity-runtime-execution-boundary`: absent - Identity runtime execution package boundary
 - `feat:identity-operator-boundary`: absent - Identity operator package boundary
 - `feat:identity-testkit-boundary`: absent - Identity testkit package boundary
-- `feat:tigrbl-auth-facade-boundary`: absent - tigrbl-auth facade package boundary
+- `feat:tba-auth-facade-boundary`: absent - tba-auth facade package boundary
 - `feat:identity-resource-server-boundary`: absent - Identity resource server consumer package boundary
 - `feat:identity-rp-boundary`: absent - Identity relying-party consumer package boundary
 - `feat:identity-model-account`: absent - Identity model Account

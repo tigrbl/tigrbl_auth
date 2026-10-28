@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TAG_RE = re.compile(r"^(?P<name>[A-Za-z0-9_.-]+)==(?P<version>\d+\.\d+\.\d+(?:\.dev\d+)?(?:[-+][A-Za-z0-9_.-]+)?)$")
 REQ_NAME_RE = re.compile(r"^\s*([A-Za-z0-9_.-]+)")
 SUPPORTED_PYTHON_VERSIONS = ("3.10", "3.11", "3.12", "3.13", "3.14")
-TESTKIT_PACKAGE_NAME = "tigrbl-identity-testkit"
+TESTKIT_PACKAGE_NAME = "tba-testkit-identity"
 SWARMAURI_PYTHON_CEILING = (3, 13)
 TIGRBL_PYTHON_CEILING = (3, 14)
 
@@ -61,6 +61,8 @@ def _package_import_root(package_path: Path, name: str) -> str:
 def discover_packages() -> list[Package]:
     packages: list[Package] = []
     for pyproject in sorted((ROOT / "pkgs").rglob("pyproject.toml")):
+        if pyproject.relative_to(ROOT / "pkgs").parts[0] == "deprecated":
+            continue
         data = _load_pyproject(pyproject)
         project = data.get("project", {})
         name = str(project.get("name") or "").strip()
@@ -347,9 +349,9 @@ def _build_local_dependency_wheels(package: Package, wheelhouse: Path) -> list[P
 
 def _root_project_package() -> Package:
     project = _load_pyproject(ROOT / "pyproject.toml").get("project", {})
-    name = str(project.get("name") or "tigrbl-auth")
+    name = str(project.get("name") or "tba-auth")
     version = str(project.get("version") or "0.0.0")
-    return Package(name=name, version=version, path=Path("."), import_root="tigrbl_auth")
+    return Package(name=name, version=version, path=Path("."), import_root="tba_auth")
 
 
 def _build_testkit_root_dependency_wheels(wheelhouse: Path) -> list[Path]:
@@ -489,9 +491,9 @@ print(json.dumps({"package": dist_name, "import_root": import_root, "version": v
                 "PACKAGE_UNDER_TEST": package.name,
                 "IMPORT_ROOT_UNDER_TEST": package.import_root,
                 "PACKAGE_VERSION_UNDER_TEST": package.version,
-                "TIGRBL_AUTH_PACKAGE_UNDER_TEST": package.name,
-                "TIGRBL_AUTH_IMPORT_ROOT_UNDER_TEST": package.import_root,
-                "TIGRBL_AUTH_PACKAGE_VERSION_UNDER_TEST": package.version,
+                "TBA_AUTH_PACKAGE_UNDER_TEST": package.name,
+                "TBA_AUTH_IMPORT_ROOT_UNDER_TEST": package.import_root,
+                "TBA_AUTH_PACKAGE_VERSION_UNDER_TEST": package.version,
                 "VENV_PYTHON": str(python),
                 "VENV_BIN": str(python.parent),
             }

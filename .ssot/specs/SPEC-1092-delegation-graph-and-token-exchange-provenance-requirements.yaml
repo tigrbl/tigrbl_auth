@@ -25,7 +25,7 @@ body: |-
   ## Overview
   
   This specification defines durable delegation lineage requirements for token
-  exchange and related authorization flows in `tigrbl_auth`.
+  exchange and related authorization flows in `tba_auth`.
   
   ## Decision Source
   

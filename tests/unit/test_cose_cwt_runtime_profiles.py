@@ -1,11 +1,11 @@
 from cryptography.hazmat.primitives.asymmetric import ed25519
 from cryptography.hazmat.primitives import serialization
-from tigrbl_auth_protocol_cwt.profile import CwtProfile
-from tigrbl_auth_protocol_cwt.protocol import CwtProtocol
-from tigrbl_cose_cryptography_provider import CoseSign1CryptographyProvider
-from tigrbl_cwt_concrete import CwtClaimsSet
-from tigrbl_protected_envelope_capability import ProtectedEnvelopeCapability
-from tigrbl_security_protocol_cose import COSEProfile, CoseProtocol
+from tba_protocol_cwt.profile import CwtProfile
+from tba_protocol_cwt.protocol import CwtProtocol
+from tba_provider_cose_cryptography import CoseSign1CryptographyProvider
+from tba_concrete_cwt import CwtClaimsSet
+from tba_capability_protected_envelope import ProtectedEnvelopeCapability
+from tba_protocol_security_cose import COSEProfile, CoseProtocol
 
 
 def test_cose_sign1_and_cwt_execute_end_to_end() -> None:

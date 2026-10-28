@@ -14,11 +14,11 @@ from cryptography import x509
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.x509.oid import NameOID
-from tigrbl_auth.errors import InvalidTokenError
+from tba_auth.errors import InvalidTokenError
 
-import tigrbl_auth.runtime_cfg as runtime_cfg
-from tigrbl_auth.jwtoken import JWTCoder
-from tigrbl_auth.rfc.rfc8705 import (
+import tba_auth.runtime_cfg as runtime_cfg
+from tba_auth.jwtoken import JWTCoder
+from tba_auth.rfc.rfc8705 import (
     RFC8705_SPEC_URL,
     thumbprint_from_cert_pem,
     validate_certificate_binding,

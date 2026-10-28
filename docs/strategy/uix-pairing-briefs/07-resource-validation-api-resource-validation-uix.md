@@ -1,10 +1,10 @@
 # Resource Validation API + UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-backend-app-resource-validation` + proposed `@tigrbl-auth/resource-validation-uix`<br>
+**Pairing:** `tba-app-backend-resource-validation` + proposed `@tba/ui-resource-validation`<br>
 **Status:** New UIX required; API exists<br>
 **Prepared:** July 11, 2026<br>
-**Backend app owner:** `pkgs/90-backend-apps/tigrbl-auth-backend-app-resource-validation`<br>
-**Proposed UIX owner:** `pkgs/105-ui/resource-validation-uix`
+**Backend app owner:** `pkgs/90-backend-apps/tba-app-backend-resource-validation`<br>
+**Proposed UIX owner:** `pkgs/105-ui/tba-ui-resource-validation`
 
 ## 1. Product Decision
 
@@ -105,7 +105,7 @@ The UIX must never sit in the protected API’s production request path.
 
 - Capture expected issuer, resource/audience, scopes/permissions, algorithms, clock tolerance, tenant, token type, introspection/JWKS strategy, and sender constraints only where supported.
 - Source choices from live metadata/profile and distinguish required, recommended, and unsupported values.
-- Generate copyable configuration for `tigrbl-authz-resource-server`, Python middleware examples, and common gateway formats where maintained.
+- Generate copyable configuration for `tba-protocol-authorization-resource-server`, Python middleware examples, and common gateway formats where maintained.
 - Mark generated configuration with package/version/profile compatibility and productionization notes.
 - This builder does not save or mutate runtime policy unless a future, separately owned configuration API exists.
 
@@ -198,7 +198,7 @@ Every fixture must state expected stage/result and be resettable.
 
 ## 8. Frontend Engineering Instructions
 
-1. Scaffold `pkgs/105-ui/resource-validation-uix` using `@tigrbl-auth/uix-core` and a single resource-validation base URL.
+1. Scaffold `pkgs/105-ui/tba-ui-resource-validation` using `@tba/ui-primitives` and a single resource-validation base URL.
 2. Implement strict endpoint/method allowlists matching `RESOURCE_VALIDATION_BACKEND_APP_CONTRACT`.
 3. Separate static metadata mode from authenticated introspection mode at routing, capability, and deployment layers.
 4. Use a server-mediated session for confidential introspection authentication; never ship credentials to the browser.
@@ -244,11 +244,11 @@ Produce a route-level copy deck containing:
 
 ## 12. Source Evidence
 
-- `pkgs/90-backend-apps/tigrbl-auth-backend-app-resource-validation/README.md`
-- `pkgs/90-backend-apps/tigrbl-auth-backend-app-resource-validation/src/tigrbl_auth_backend_app_resource_validation/contract.py`
+- `pkgs/90-backend-apps/tba-app-backend-resource-validation/README.md`
+- `pkgs/90-backend-apps/tba-app-backend-resource-validation/src/tba_app_backend_resource_validation/contract.py`
 - `docker/docker-compose.resource-validation-app.yml`
-- `pkgs/105-ui/demo-hub-uix/surfaces.ts`
-- `pkgs/105-ui/demo-hub-uix/demoState.ts`
+- `pkgs/105-ui/tba-ui-demo-hub/surfaces.ts`
+- `pkgs/105-ui/tba-ui-demo-hub/demoState.ts`
 - Resource-validation API unit/integration/conformance tests
-- `tigrbl-authz-resource-server` package and verifier contract tests
+- `tba-protocol-authorization-resource-server` package and verifier contract tests
 - Resource-validation SSOT feature/claim/test/evidence/boundary records

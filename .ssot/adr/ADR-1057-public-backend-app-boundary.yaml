@@ -19,7 +19,7 @@ body: |-
   Status: proposed
   Date: 2026-05-04
   
-  `tigrbl_auth` MUST define the public API as a separate governed boundary. The
+  `tba_auth` MUST define the public API as a separate governed boundary. The
   public API boundary includes public OAuth, OIDC, and discovery routes, public
   registration and logout surfaces where in scope, and public contract
   publication derived from the effective deployment boundary.

@@ -4,14 +4,14 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-OPERATOR_SRC = ROOT / "pkgs" / "tigrbl-identity-operator" / "src"
+OPERATOR_SRC = ROOT / "pkgs" / "tba-operator-identity" / "src"
 if str(OPERATOR_SRC) not in sys.path:
     sys.path.append(str(OPERATOR_SRC))
 
-import tigrbl_identity_operator.uix as operator_uix  # noqa: E402
-from tigrbl_operator_administration_capability import OPERATOR_ADMINISTRATION_OPERATIONS  # noqa: E402
+import tba_operator_identity.uix as operator_uix  # noqa: E402
+from tba_capability_operator_administration import OPERATOR_ADMINISTRATION_OPERATIONS  # noqa: E402
 
-from tigrbl_auth.uix import (  # noqa: E402
+from tba_auth.uix import (  # noqa: E402
     ADMINISTRATIVE_RESOURCE_VIEW_FEATURES,
     RESOURCE_VIEW_OPERATIONS,
     administrative_resource_views_boundary_integrity,

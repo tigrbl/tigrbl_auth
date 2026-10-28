@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "`tigrbl_auth` MUST govern RBAC, ABAC, ReBAC, relationship modeling, graph authorization, fine-grained permissions, and dynamic conditions as authorization-model capabilities with explicit runtime and policy semantics."
+summary: "`tba_auth` MUST govern RBAC, ABAC, ReBAC, relationship modeling, graph authorization, fine-grained permissions, and dynamic conditions as authorization-model capabilities with explicit runtime and policy semantics."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -20,7 +20,7 @@ references: []
 body: |-
   ## Decision
   
-  `tigrbl_auth` MUST govern RBAC, ABAC, ReBAC, relationship modeling, graph authorization, fine-grained permissions, and dynamic conditions as authorization-model capabilities with explicit runtime and policy semantics.
+  `tba_auth` MUST govern RBAC, ABAC, ReBAC, relationship modeling, graph authorization, fine-grained permissions, and dynamic conditions as authorization-model capabilities with explicit runtime and policy semantics.
   
   ## Current Implementation Status
   

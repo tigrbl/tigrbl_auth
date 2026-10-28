@@ -3,7 +3,7 @@ from __future__ import annotations
 import asyncio
 
 import pytest
-from tigrbl_identity_storage.tables import (
+from tba_storage_core.tables import (
     AttestationEvidence,
     CredentialIssuanceTransaction,
     CredentialOffer,
@@ -21,7 +21,7 @@ from tigrbl_identity_storage.tables import (
     SpiffeTrustBundle,
     SvidRecord,
 )
-from tigrbl_identity_storage_runtime import (
+from tba_runtime_identity_storage import (
     AttestationEvidenceRuntimeSpec,
     CredentialIssuanceTransactionRuntimeSpec,
     CredentialOfferRuntimeSpec,
@@ -40,12 +40,12 @@ from tigrbl_identity_storage_runtime import (
     SvidRecordRuntimeSpec,
     make_attestation_appraisal_recorder,
 )
-from tigrbl_identity_contracts.attestation import (
+from tba_contracts_identity.attestation import (
     AppraisalResult,
     AttestationEvidence as AttestationEvidenceContract,
     VerifiedAttestationEvidence,
 )
-from tigrbl_identity_contracts.tokens import (
+from tba_contracts_identity.tokens import (
     ProtectedTokenEnvelope,
     TokenEnvelopeFormat,
     TokenProfile,
@@ -79,7 +79,7 @@ def test_runtime_specs_target_authoritative_layer_01_tables() -> None:
 
     for spec, table in pairs:
         assert spec.model is table
-        assert table.__module__.startswith("tigrbl_identity_storage.tables")
+        assert table.__module__.startswith("tba_storage_core.tables")
 
 
 def test_family_operations_are_carrier_neutral_table_operations() -> None:
@@ -133,7 +133,7 @@ def test_gnap_continuation_runtime_refuses_raw_tokens() -> None:
 def test_attestation_recorder_adapts_verified_evidence_to_durable_operations(
     monkeypatch,
 ) -> None:
-    from tigrbl_identity_storage_runtime.ops import attestation as operations
+    from tba_runtime_identity_storage.ops import attestation as operations
 
     recorded = []
 

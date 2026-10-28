@@ -22,7 +22,7 @@ body: |-
   
   Split protocol standards into three packages:
   
-  - `tigrbl-identity-jose` owns JOSE/JWT/JWK/JWS/JWE/JWKS signing,
+  - `tba-provider-identity-jose` owns JOSE/JWT/JWK/JWS/JWE/JWKS signing,
     verification, key selection, publication, rotation primitives, and
     algorithm policy.
   - `tigrbl-identity-oauth` owns OAuth 2.x protocol flows, grants, token

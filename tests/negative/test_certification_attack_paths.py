@@ -6,17 +6,17 @@ import pytest
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ed25519
 
-from tigrbl_auth.config.deployment import resolve_deployment
-from tigrbl_auth.errors import InvalidTokenError
-from tigrbl_auth.standards.oauth2.dpop import jwk_from_public_key, jwk_thumbprint, make_proof
-from tigrbl_auth_protocol_oauth.standards.issuer_identification import (
+from tba_auth.config.deployment import resolve_deployment
+from tba_auth.errors import InvalidTokenError
+from tba_auth.standards.oauth2.dpop import jwk_from_public_key, jwk_thumbprint, make_proof
+from tba_protocol_oauth.standards.issuer_identification import (
     IssuerIdentificationError,
     extract_issuer_from_redirect_uri,
 )
-from tigrbl_auth_protocol_oauth.standards.jwt_access_tokens import (
+from tba_protocol_oauth.standards.jwt_access_tokens import (
     validate_jwt_access_token_claims,
 )
-from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
+from tba_protocol_oauth.standards.oauth_security_bcp import (
     OAuthPolicyViolation,
     assert_authorization_request_allowed,
     assert_token_request_allowed,

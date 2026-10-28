@@ -10,14 +10,14 @@ import pytest
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tigrbl_auth_backend_app_core import build_app
-from tigrbl_auth.config.deployment import DEFAULT_VALUES, VALID_PROFILES, resolve_deployment
-from tigrbl_auth.crypto import hash_pw
-from tigrbl_auth.db import get_db as legacy_get_db
-from tigrbl_auth.tables import Tenant, User
-from tigrbl_identity_storage_runtime.resource_service import get_record
-from tigrbl_identity_storage_runtime.engine import get_db as tables_get_db
-from tigrbl_auth.tables.engine import get_db as engine_get_db
+from tba_app_backend_core import build_app
+from tba_auth.config.deployment import DEFAULT_VALUES, VALID_PROFILES, resolve_deployment
+from tba_auth.crypto import hash_pw
+from tba_auth.db import get_db as legacy_get_db
+from tba_auth.tables import Tenant, User
+from tba_runtime_identity_storage.resource_service import get_record
+from tba_runtime_identity_storage.engine import get_db as tables_get_db
+from tba_auth.tables.engine import get_db as engine_get_db
 
 
 pytestmark = pytest.mark.integration
@@ -38,7 +38,7 @@ def _profile_settings(profile: str, tmp_path) -> SimpleNamespace:
 
 
 def _apply_runtime_settings(monkeypatch: pytest.MonkeyPatch, settings_obj: SimpleNamespace, deployment) -> None:
-    from tigrbl_auth.runtime_cfg import settings as runtime_settings
+    from tba_auth.runtime_cfg import settings as runtime_settings
 
     for name, value in vars(settings_obj).items():
         if hasattr(runtime_settings, name):
@@ -173,7 +173,7 @@ async def _exercise_profile_operations(
         assert response.status_code == HTTPStatus.OK, response.text
         payload = response.json()
         assert payload["issuer"] == f"{deployment.issuer}/tenants/{tenant.slug}"
-        assert payload["tigrbl_auth_subject_namespace"] == f"{tenant.slug}:subjects"
+        assert payload["tba_auth_subject_namespace"] == f"{tenant.slug}:subjects"
 
     tenant_jwks_path = f"/tenants/{tenant.slug}/.well-known/jwks.json"
     operation = ("get", "/tenants/{tenant_slug}/.well-known/jwks.json")

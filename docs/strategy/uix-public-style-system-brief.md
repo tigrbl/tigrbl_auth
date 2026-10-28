@@ -2,11 +2,11 @@
 
 ## Intent
 
-Adopt the current `@tigrbl-auth/public-uix` visual and interaction direction as the shared UIX style target across all Tigrbl Auth UIX products. The goal is not to make every product page identical, but to give every surface the same polished hosted-identity product language: clean, approachable, brandable, precise, and consistent.
+Adopt the current `@tba/ui-public` visual and interaction direction as the shared UIX style target across all TBA UIX products. The goal is not to make every product page identical, but to give every surface the same polished hosted-identity product language: clean, approachable, brandable, precise, and consistent.
 
 ## Source Surface
 
-Primary source: `pkgs/105-ui/public-uix`
+Primary source: `pkgs/105-ui/tba-ui-public`
 
 The public UIX already has the strongest visual identity in the repo:
 
@@ -20,13 +20,13 @@ The public UIX already has the strongest visual identity in the repo:
 
 This style should become the baseline for:
 
-- `@tigrbl-auth/public-uix`
-- `@tigrbl-auth/my-account-uix`
-- `@tigrbl-auth/platform-admin-uix`
-- `@tigrbl-auth/tenant-admin-uix`
-- `@tigrbl-auth/developer-uix`
-- `@tigrbl-auth/service-admin-uix`
-- legacy `@tigrbl-auth/admin-uix` only as an extraction/reference source
+- `@tba/ui-public`
+- `@tba/ui-my-account`
+- `@tba/ui-platform-admin`
+- `@tba/ui-tenant-admin`
+- `@tba/ui-developer`
+- `@tba/ui-service-admin`
+- legacy `@tba/ui-admin` only as an extraction/reference source
 
 ## Style Direction
 
@@ -65,7 +65,7 @@ Admin and operator surfaces should use the shared app shell, but restyle it to m
 - Tables/forms inside card surfaces.
 - Detail panels with consistent spacing and hierarchy.
 
-The app shell from `@tigrbl-auth/uix-core` should evolve to support both patterns:
+The app shell from `@tba/ui-primitives` should evolve to support both patterns:
 
 - `AuthShell` for centered public/self-service flows.
 - `AppShell` for admin/operator/developer/service surfaces.
@@ -98,7 +98,7 @@ Carry these behaviors across the UIX ecosystem:
 
 ## Core Package Requirements
 
-`@tigrbl-auth/uix-core` should absorb shared visual primitives from public UIX and become the canonical UIX component package.
+`@tba/ui-primitives` should absorb shared visual primitives from public UIX and become the canonical UIX component package.
 
 Add or evolve core exports for:
 
@@ -152,7 +152,7 @@ Use the same product-console variant, tuned for M2M/workload identity: service p
 
 ## Implementation Order
 
-1. Extend `@tigrbl-auth/uix-core` with public-style primitives and tokens.
+1. Extend `@tba/ui-primitives` with public-style primitives and tokens.
 2. Refactor `public-uix` to consume those primitives while preserving current behavior.
 3. Restyle `my-account-uix` with the public/self-service variant.
 4. Restyle platform, tenant, developer, and service admin UIX shells and pages.
@@ -161,7 +161,7 @@ Use the same product-console variant, tuned for M2M/workload identity: service p
 
 ## Acceptance Criteria
 
-- All UIX apps share `@tigrbl-auth/uix-core` for common layout, form, feedback, modal, table, and card primitives.
+- All UIX apps share `@tba/ui-primitives` for common layout, form, feedback, modal, table, and card primitives.
 - Public UIX visual quality is preserved or improved.
 - Admin UIX apps no longer feel like placeholders or raw route inventories.
 - Product boundaries remain intact per API surface.

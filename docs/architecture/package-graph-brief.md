@@ -1,4 +1,4 @@
-# tigrbl_auth Package Graph Brief
+# tba_auth Package Graph Brief
 
 This brief grounds the architecture image in the live package inventory in this checkout.
 
@@ -6,39 +6,39 @@ This brief grounds the architecture image in the live package inventory in this 
 
 ### Runtime and compatibility shell
 
-- `tigrbl-auth`: compatibility facade preserving legacy `app`, `gateway`, `plugin`, CLI, and RFC import paths over the split package suite.
-- `tigrbl-identity-server`: ASGI composition layer that builds public REST and admin RPC surfaces.
-- `tigrbl-identity-runtime`: runtime planning, profile resolution, feature flags, deployment resolution, and runner adapters.
-- `tigrbl-identity-operator`: operator CLI, repo truth, evidence workflows, and admin console helpers.
+- `tba-auth`: compatibility facade preserving legacy `app`, `gateway`, `plugin`, CLI, and RFC import paths over the split package suite.
+- `tba-server-identity`: ASGI composition layer that builds public REST and admin RPC surfaces.
+- `tba-runtime-identity`: runtime planning, profile resolution, feature flags, deployment resolution, and runner adapters.
+- `tba-operator-identity`: operator CLI, repo truth, evidence workflows, and admin console helpers.
 
 ### Domain, protocol, and control-plane packages
 
-- `tigrbl-identity-admin`: tenant, user, client, key, session, token, consent, audit, profile, and governance control-plane operations.
-- `tigrbl-auth-protocol-oauth`: OAuth 2.x protocol flows including device authorization, PAR, token exchange, DPoP, and related RFC helpers.
-- `tigrbl-auth-protocol-oidc`: OIDC discovery, ID token, userinfo, logout, session, and OIDC standards helpers.
-- `tigrbl-credentials`: password, API key, auth context, session, and token lifecycle helpers.
-- `tigrbl-authz-policy`: RBAC, ABAC, delegated administration, provenance, and governance policy controls.
-- `tigrbl-identity-principals`: tenant, principal, subject context, and trust-domain discovery helpers.
-- `tigrbl-identity-jose`: JOSE, JWT, JWS, JWE, JWK, JWKS, key rotation, and signing helpers.
-- `tigrbl-identity-contracts`: Pydantic REST and JSON-RPC contracts for public and admin APIs.
+- `tba-runtime-identity-administration`: tenant, user, client, key, session, token, consent, audit, profile, and governance control-plane operations.
+- `tba-protocol-oauth`: OAuth 2.x protocol flows including device authorization, PAR, token exchange, DPoP, and related RFC helpers.
+- `tba-protocol-oidc`: OIDC discovery, ID token, userinfo, logout, session, and OIDC standards helpers.
+- `tba-credentials`: password, API key, auth context, session, and token lifecycle helpers.
+- `tba-runtime-authorization-policy`: RBAC, ABAC, delegated administration, provenance, and governance policy controls.
+- `tba-concrete-identity-principals`: tenant, principal, subject context, and trust-domain discovery helpers.
+- `tba-provider-identity-jose`: JOSE, JWT, JWS, JWE, JWK, JWKS, key rotation, and signing helpers.
+- `tba-contracts-identity`: Pydantic REST and JSON-RPC contracts for public and admin APIs.
 
 ### Foundation and persistence packages
 
-- `tigrbl-identity-storage`: SQLAlchemy tables, ORM models, migrations, persistence helpers, and operator state storage.
-- `tigrbl-identity-core`: dependency-light primitives, typed helpers, path safety, and RFC 8785 canonicalization.
+- `tba-storage-core`: SQLAlchemy tables, ORM models, migrations, persistence helpers, and operator state storage.
+- `tba-primitives-identity`: dependency-light primitives, typed helpers, path safety, and RFC 8785 canonicalization.
 
 ### Consumer and verification packages
 
-- `tigrbl-auth-protocol-rp`: Python relying-party helpers for discovery, userinfo, logout, and RP integration.
-- `tigrbl-authz-resource-server`: protected API token-validation and resource-server contracts.
-- `tigrbl-identity-testkit`: fake identity components, vectors, fixtures, and integration harnesses.
+- `tba-protocol-oidc-relying-party`: Python relying-party helpers for discovery, userinfo, logout, and RP integration.
+- `tba-protocol-authorization-resource-server`: protected API token-validation and resource-server contracts.
+- `tba-testkit-identity`: fake identity components, vectors, fixtures, and integration harnesses.
 - `acme-notes-cli`: example consumer showing device-login usage.
 
 ### UI and browser packages
 
-- `@tigrbl-auth/public-uix`: public end-user UI built against generated OpenAPI and OIDC discovery surfaces.
-- `@tigrbl-auth/admin-uix`: admin UI built against generated OpenRPC admin/control-plane surfaces.
-- `@tigrbl-auth/rp`: browser-safe TypeScript relying-party SDK.
+- `@tba/ui-public`: public end-user UI built against generated OpenAPI and OIDC discovery surfaces.
+- `@tba/ui-admin`: admin UI built against generated OpenRPC admin/control-plane surfaces.
+- `@tba/client-oidc-relying-party`: browser-safe TypeScript relying-party SDK.
 
 ## Production block model
 
@@ -49,9 +49,9 @@ This brief grounds the architecture image in the live package inventory in this 
 
 ### Runtime composition block
 
-- `tigrbl-identity-server` is the main composition package for the running identity provider.
-- `tigrbl-identity-runtime` resolves profiles, surfaces, flags, deployment style, and runner choice before the server is started.
-- `tigrbl-auth` remains the compatibility shell that preserves older import and entrypoint paths across the split architecture.
+- `tba-server-identity` is the main composition package for the running identity provider.
+- `tba-runtime-identity` resolves profiles, surfaces, flags, deployment style, and runner choice before the server is started.
+- `tba-auth` remains the compatibility shell that preserves older import and entrypoint paths across the split architecture.
 
 ### Domain services block
 
@@ -70,10 +70,10 @@ This brief grounds the architecture image in the live package inventory in this 
 
 ## High-level flow edges
 
-1. Public users and consumer apps enter through `@tigrbl-auth/public-uix`, `@tigrbl-auth/rp`, `tigrbl-auth-protocol-rp`, or the example CLI.
-2. Administrative operators enter through `@tigrbl-auth/admin-uix` and `tigrbl-identity-operator`.
-3. Those clients call the `tigrbl-identity-server` public REST or admin RPC surfaces.
+1. Public users and consumer apps enter through `@tba/ui-public`, `@tba/client-oidc-relying-party`, `tba-protocol-oidc-relying-party`, or the example CLI.
+2. Administrative operators enter through `@tba/ui-admin` and `tba-operator-identity`.
+3. Those clients call the `tba-server-identity` public REST or admin RPC surfaces.
 4. The server delegates protocol and domain work to OAuth, OIDC, admin, credentials, policy, principals, JOSE, and contracts packages.
-5. Domain logic persists and reads state through `tigrbl-identity-storage`.
-6. Runtime startup and deployment behavior are resolved by `tigrbl-identity-runtime`.
-7. Legacy consumers can still enter through `tigrbl-auth`, which forwards to the split runtime and server entrypoints.
+5. Domain logic persists and reads state through `tba-storage-core`.
+6. Runtime startup and deployment behavior are resolved by `tba-runtime-identity`.
+7. Legacy consumers can still enter through `tba-auth`, which forwards to the split runtime and server entrypoints.

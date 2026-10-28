@@ -96,7 +96,7 @@
   "device_authorization_endpoint": "https://authn.example.com/device_authorization",
   "pushed_authorization_request_endpoint": "https://authn.example.com/par",
   "protected_resource_metadata": "https://authn.example.com/.well-known/oauth-protected-resource",
-  "tigrbl_auth_capabilities": [
+  "tba_auth_capabilities": [
     "account-consents",
     "account-credentials",
     "account-profile",

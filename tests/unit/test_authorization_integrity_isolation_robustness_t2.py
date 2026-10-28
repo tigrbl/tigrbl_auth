@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import tests.unit.formal_auth_helpers  # noqa: F401
 
-from tigrbl_authz_policy import (
+from tba_runtime_authorization_policy import (
     AuthorizationReference,
     ReferenceCatalog,
     TrustEdge,
@@ -10,7 +10,7 @@ from tigrbl_authz_policy import (
     validate_tenant_realm_isolation,
     validate_trust_graph_integrity,
 )
-from tigrbl_authz_policy_authority_derivation_graph import (
+from tba_durability_authorization_policy_authority_derivation_graph import (
     AuthorityDerivationGraph,
     AuthorityEdge,
     AuthorityNode,

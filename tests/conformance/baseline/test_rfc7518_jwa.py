@@ -1,6 +1,6 @@
 """Tests for RFC 7518: JSON Web Algorithms (JWA)."""
 
-from tigrbl_auth import supported_algorithms
+from tba_auth import supported_algorithms
 
 
 def test_supported_algorithms_contains_eddsa() -> None:

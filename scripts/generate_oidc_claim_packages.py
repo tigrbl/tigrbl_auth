@@ -37,8 +37,8 @@ CLAIMS = (
 TEMPLATE = '''from datetime import date
 from urllib.parse import urlsplit
 
-from tigrbl_identity_claims_bases import ClaimBase
-from tigrbl_identity_core import ClaimType, ClaimValueType
+from tba_bases_identity_claims import ClaimBase
+from tba_primitives_identity import ClaimType, ClaimValueType
 
 
 def _absolute_uri(value):
@@ -74,13 +74,13 @@ __all__ = ["{class_name}"]
 
 def main() -> None:
     for slug, class_name, label, claim_type, value_type, validator in CLAIMS:
-        distribution = f"tigrbl-claim-{slug}-concrete"
+        distribution = f"tba-concrete-claim-{slug}"
         module = distribution.replace("-", "_")
         package = PACKAGES / distribution
         source = package / "src" / module
         source.mkdir(parents=True, exist_ok=True)
         (package / "pyproject.toml").write_text(
-            f'''[project]\nname="{distribution}"\nversion="0.4.0.dev2"\nrequires-python=">=3.10,<3.15"\ndependencies=["tigrbl-identity-core==0.4.0.dev2","tigrbl-identity-claims-bases==0.4.0.dev2"]\n[build-system]\nrequires=["poetry-core>=1.0.0"]\nbuild-backend="poetry.core.masonry.api"\n[tool.poetry]\npackages=[{{include="{module}",from="src"}}]\n''',
+            f'''[project]\nname="{distribution}"\nversion="0.4.0.dev2"\nrequires-python=">=3.10,<3.15"\ndependencies=["tba-primitives-identity==0.4.0.dev2","tba-bases-identity-claims==0.4.0.dev2"]\n[build-system]\nrequires=["poetry-core>=1.0.0"]\nbuild-backend="poetry.core.masonry.api"\n[tool.poetry]\npackages=[{{include="{module}",from="src"}}]\n''',
             encoding="utf-8",
         )
         (source / "__init__.py").write_text(

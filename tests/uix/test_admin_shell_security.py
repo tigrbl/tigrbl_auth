@@ -1,6 +1,6 @@
 import pytest
 
-from tigrbl_auth.uix import (
+from tba_auth.uix import (
     AdminAuthorizationError,
     AdminConsoleShell,
     AdminPrincipal,
@@ -55,7 +55,7 @@ def test_admin_shell_redacts_secret_configuration_values():
         session=AdminSession(
             session_id="sess-admin",
             authenticated=True,
-            principal=AdminPrincipal(subject="admin@example.com", scopes=("tigrbl_auth:admin",)),
+            principal=AdminPrincipal(subject="admin@example.com", scopes=("tba_auth:admin",)),
         ),
         selection=_selection(),
         readiness={

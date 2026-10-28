@@ -1,7 +1,7 @@
 import importlib
 from sqlalchemy import create_engine, inspect
-from tigrbl_identity_storage.tables import SvidRecord
-migration=importlib.import_module("tigrbl_identity_storage.migrations.versions.0036_workload_credentials_artifacts_and_proof_replay")
+from tba_storage_core.tables import SvidRecord
+migration=importlib.import_module("tba_storage_core.migrations.versions.0036_workload_credentials_artifacts_and_proof_replay")
 
 def test_0036_upgrade_downgrade_reapply()->None:
     engine=create_engine("sqlite:///:memory:")

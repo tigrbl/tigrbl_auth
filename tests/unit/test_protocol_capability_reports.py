@@ -2,25 +2,25 @@ from __future__ import annotations
 
 import importlib
 
-from tigrbl_protocol_artifact_processing import ProtocolArtifactProcessingCapability
+from tba_capability_artifact_processing import ProtocolArtifactProcessingCapability
 
 
 PROTOCOL_MODULES = (
-    "tigrbl_attestation_protocol_corim",
-    "tigrbl_attestation_protocol_eat",
-    "tigrbl_auth_profile_haip",
-    "tigrbl_auth_protocol_authzen",
-    "tigrbl_auth_protocol_cwt",
-    "tigrbl_auth_protocol_gnap",
-    "tigrbl_auth_protocol_jwt",
-    "tigrbl_auth_protocol_oauth",
-    "tigrbl_auth_protocol_oid4vci",
-    "tigrbl_auth_protocol_oid4vp",
-    "tigrbl_auth_protocol_oidc",
-    "tigrbl_auth_protocol_rp",
-    "tigrbl_authz_resource_server",
-    "tigrbl_credential_profile_sd_jwt_vc",
-    "tigrbl_security_event_protocol_set",
+    "tba_protocol_attestation_corim",
+    "tba_protocol_attestation_eat",
+    "tba_profile_haip",
+    "tba_protocol_authzen",
+    "tba_protocol_cwt",
+    "tba_protocol_gnap",
+    "tba_protocol_jwt",
+    "tba_protocol_oauth",
+    "tba_protocol_oid4vci",
+    "tba_protocol_oid4vp",
+    "tba_protocol_oidc",
+    "tba_protocol_oidc_relying_party",
+    "tba_protocol_authorization_resource_server",
+    "tba_profile_credential_sd_jwt_vc",
+    "tba_protocol_security_event_set",
 )
 
 

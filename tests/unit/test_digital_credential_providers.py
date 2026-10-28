@@ -1,8 +1,8 @@
 from tigrbl_digital_credential_issuer_local import LocalDigitalCredentialIssuer
-from tigrbl_digital_credential_status_provider import InMemoryCredentialStatusProvider
-from tigrbl_digital_credential_trust_provider import PinnedIssuerTrustProvider
+from tba_provider_digital_credential_status import InMemoryCredentialStatusProvider
+from tba_provider_digital_credential_trust import PinnedIssuerTrustProvider
 from tigrbl_digital_presentation_verifier import DispatchingPresentationVerifier
-from tigrbl_identity_contracts.digital_credentials import (
+from tba_contracts_identity.digital_credentials import (
     CredentialConfiguration,
     CredentialFormat,
     CredentialIssuanceRequest,

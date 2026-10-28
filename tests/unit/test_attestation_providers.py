@@ -1,12 +1,12 @@
-from tigrbl_attestation_appraiser import ReferenceBackedAttestationAppraiser
-from tigrbl_attestation_reference_provider import InMemoryReferenceMaterialProvider
+from tba_provider_attestation_appraiser import ReferenceBackedAttestationAppraiser
+from tba_provider_attestation_reference import InMemoryReferenceMaterialProvider
 from tigrbl_corim_store_provider import InMemoryCorimStore
-from tigrbl_eat_verifier_provider import EatVerifierProvider
-from tigrbl_identity_contracts.attestation import (
+from tba_provider_eat_verifier import EatVerifierProvider
+from tba_contracts_identity.attestation import (
     AttestationEvidence,
     ReferenceIntegrityManifest,
 )
-from tigrbl_identity_contracts.tokens import (
+from tba_contracts_identity.tokens import (
     IssuerTrustResult,
     ReplayValidation,
     TokenProfile,

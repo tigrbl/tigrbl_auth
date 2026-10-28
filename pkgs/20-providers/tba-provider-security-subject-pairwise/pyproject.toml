@@ -1,0 +1,20 @@
+[project]
+name = "tba-provider-security-subject-pairwise"
+version = "0.1.0"
+description = "Pairwise subject identifier provider for the TBA package suite."
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = [
+    "tba-contracts-identity==0.4.0.dev2",
+    "tba-bases-identity==0.4.0.dev2",
+    "tba-concrete-pairwise-subject-identifier==0.4.0.dev2",
+    "tba-contracts-security-trust==0.1.0",
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tba_provider_security_subject_pairwise", from = "src" }]

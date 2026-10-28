@@ -3,8 +3,8 @@ from urllib.parse import parse_qs, urlparse
 from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tigrbl_auth.tables import Tenant, User, Client
-from tigrbl_auth.crypto import hash_pw
+from tba_auth.tables import Tenant, User, Client
+from tba_auth.crypto import hash_pw
 
 
 async def _prepare(db: AsyncSession) -> None:

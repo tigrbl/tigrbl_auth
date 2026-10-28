@@ -27,7 +27,7 @@ body: |-
   - Status: Accepted
   - Date: 2026-03-20
   
-  `tigrbl_auth` shall treat the following as governed installable surfaces:
+  `tba_auth` shall treat the following as governed installable surfaces:
   
   - public auth plane,
   - admin/control plane,

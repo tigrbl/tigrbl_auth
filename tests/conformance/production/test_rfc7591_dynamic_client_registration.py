@@ -1,4 +1,4 @@
-from tigrbl_auth import rfc7591
+from tba_auth import rfc7591
 
 
 def test_rfc7591_protocol_owner_is_published() -> None:

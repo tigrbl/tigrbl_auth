@@ -1,12 +1,12 @@
 targets:
 - RFC 8628
 modules:
-- tigrbl_auth/standards/oauth2/device_authorization.py
-- tigrbl_auth/ops/device_authorization.py
-- tigrbl_auth/ops/token.py
-- tigrbl_auth/api/rest/routers/device_authorization.py
-- tigrbl_auth/services/persistence.py
-- tigrbl_auth/tables/device_code.py
+- tba_auth/standards/oauth2/device_authorization.py
+- tba_auth/ops/device_authorization.py
+- tba_auth/ops/token.py
+- tba_auth/api/rest/routers/device_authorization.py
+- tba_auth/services/persistence.py
+- tba_auth/tables/device_code.py
 tests:
 - tests/unit/test_hardening_cluster_a.py
 - tests/conformance/hardening/test_rfc8628_device_authorization.py

@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from tigrbl_identity_contracts.protocol_processing import ArtifactProcessingResult
-from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_server.composition.runtime_assembly import (
+from tba_contracts_identity.protocol_processing import ArtifactProcessingResult
+from tba_runtime_identity.settings import settings
+from tba_server_identity.composition.runtime_assembly import (
     DatabaseReplayProvider,
     build_server_runtime_assembly,
 )

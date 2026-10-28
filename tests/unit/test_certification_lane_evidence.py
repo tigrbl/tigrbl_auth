@@ -5,8 +5,8 @@ from pathlib import Path
 
 from scripts.collect_validated_artifact_downloads import collect_validated_artifact_downloads
 from tests.lanes import test_file_requires_runtime_stack as file_requires_runtime_stack
-from tigrbl_auth.cli.certification_evidence import lane_identity
-from tigrbl_auth.cli.reports import load_validated_execution_status
+from tba_auth.cli.certification_evidence import lane_identity
+from tba_auth.cli.reports import load_validated_execution_status
 
 
 def _write_json(path: Path, payload: dict) -> None:
@@ -121,7 +121,7 @@ def test_runtime_stack_detection_catches_dynamic_import_targets(tmp_path: Path) 
     path.write_text(
         "import importlib\n\n"
         "def test_runtime_import():\n"
-        "    importlib.import_module('tigrbl_auth_protocol_oauth.standards.introspection')\n",
+        "    importlib.import_module('tba_protocol_oauth.standards.introspection')\n",
         encoding="utf-8",
     )
 

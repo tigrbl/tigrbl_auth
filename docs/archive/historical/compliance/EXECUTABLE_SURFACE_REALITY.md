@@ -23,7 +23,7 @@ contracts, and modularity reports to reflect the same executable reality.
 
 The authoritative public/auth surface is now described once in:
 
-- `tigrbl_auth/config/surfaces.py:PUBLIC_CAPABILITIES`
+- `tba_auth/config/surfaces.py:PUBLIC_CAPABILITIES`
 
 That registry records, per capability:
 
@@ -50,14 +50,14 @@ route is active.
 
 ### 3. Runtime mounting is centralized
 
-` tigrbl_auth.api.surfaces.attach_runtime_surfaces(...) ` now installs:
+` tba_auth.api.surfaces.attach_runtime_surfaces(...) ` now installs:
 
 - REST routers
 - standards-owned publishers such as UserInfo, introspection, token exchange, and discovery/JWKS surfaces
 - JSON-RPC mounting
 - diagnostics mounting
 
-Both `tigrbl_auth/plugin.py` and `tigrbl_auth/api/app.py` now use that same
+Both `tba_auth/plugin.py` and `tba_auth/api/app.py` now use that same
 attachment path.
 
 ### 4. Discovery snapshots are committed by profile

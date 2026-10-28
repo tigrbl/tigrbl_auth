@@ -5,13 +5,13 @@ from pathlib import Path
 
 import yaml
 
-from tigrbl_auth.cli.claims import REQUIRED_BUCKET_LABELS
-from tigrbl_auth.cli.feature_surface import REQUIRED_TARGET_BUCKETS
-from tigrbl_auth.cli.truth import materialize_truth_chain, verify_truth_chain
-from tigrbl_auth.config import deployment
-from tigrbl_auth.config.deployment import resolve_deployment
-from tigrbl_auth.config.settings import Settings
-from tigrbl_identity_operator.document_authority import SSOT_DOCUMENT_AUTHORITY_SPEC
+from tba_auth.cli.claims import REQUIRED_BUCKET_LABELS
+from tba_auth.cli.feature_surface import REQUIRED_TARGET_BUCKETS
+from tba_auth.cli.truth import materialize_truth_chain, verify_truth_chain
+from tba_auth.config import deployment
+from tba_auth.config.deployment import resolve_deployment
+from tba_auth.config.settings import Settings
+from tba_operator_identity.document_authority import SSOT_DOCUMENT_AUTHORITY_SPEC
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -219,9 +219,9 @@ def test_truth_materializer_is_only_root_status_markdown_writer() -> None:
         ROOT
         / "pkgs"
         / "60-runtime"
-        / "tigrbl-identity-cli"
+        / "tba-cli-identity"
         / "src"
-        / "tigrbl_identity_cli"
+        / "tba_cli_identity"
         / "cli"
         / "truth"
         / "_materialize.py"

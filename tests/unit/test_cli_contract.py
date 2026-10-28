@@ -3,10 +3,10 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from tigrbl_auth.cli.main import main
-from tigrbl_auth.cli.metadata import build_cli_conformance_snapshot, build_cli_contract_manifest, build_parser
-from tigrbl_auth.cli.reports import generate_state_reports
-from tigrbl_identity_storage_runtime.operator_store import resource_state_path, operator_state_root
+from tba_auth.cli.main import main
+from tba_auth.cli.metadata import build_cli_conformance_snapshot, build_cli_contract_manifest, build_parser
+from tba_auth.cli.reports import generate_state_reports
+from tba_runtime_identity_storage.operator_store import resource_state_path, operator_state_root
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -46,12 +46,12 @@ def test_cli_contract_manifest_includes_outputs_exit_codes_and_help_snapshots():
     assert any(code["code"] == 3 for code in create["exit_codes"])
 
     help_snapshots = build_cli_conformance_snapshot()["help_snapshots"]
-    assert "tigrbl-auth tenant create" in help_snapshots
-    assert "--set" in help_snapshots["tigrbl-auth tenant create"]
-    assert "--if-exists" in help_snapshots["tigrbl-auth tenant create"]
-    assert "--timeout" in help_snapshots["tigrbl-auth tenant create"]
-    assert "tigrbl-auth keys generate" in help_snapshots
-    assert "--publish" in help_snapshots["tigrbl-auth keys generate"]
+    assert "tba-auth tenant create" in help_snapshots
+    assert "--set" in help_snapshots["tba-auth tenant create"]
+    assert "--if-exists" in help_snapshots["tba-auth tenant create"]
+    assert "--timeout" in help_snapshots["tba-auth tenant create"]
+    assert "tba-auth keys generate" in help_snapshots
+    assert "--publish" in help_snapshots["tba-auth keys generate"]
 
 
 def test_stateful_resource_handlers_are_durable_and_not_catalog_only(tmp_path: Path):

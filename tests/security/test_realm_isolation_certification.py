@@ -1,15 +1,15 @@
 import pytest
 from types import SimpleNamespace
 
-from tigrbl_auth.config.deployment import DEFAULT_VALUES
-from tigrbl_auth.security.certification import (
+from tba_auth.config.deployment import DEFAULT_VALUES
+from tba_auth.security.certification import (
     CertificationError,
     RealmState,
     assert_realm_isolation,
     deterministic_issuer,
 )
-from tigrbl_auth.config.deployment import resolve_deployment
-from tigrbl_auth.services.tenant_discovery import (
+from tba_auth.config.deployment import resolve_deployment
+from tba_auth.services.tenant_discovery import (
     build_realm_openid_config,
     build_tenant_openid_config,
 )

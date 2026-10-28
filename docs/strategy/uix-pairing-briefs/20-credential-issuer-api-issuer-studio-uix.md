@@ -1,10 +1,10 @@
 # Credential Issuer API + Issuer Studio UIX Requirements Brief
 
-**Proposed pairing:** `tigrbl-auth-router-credential-issuer` + `@tigrbl-auth/credential-issuer-uix`<br>
+**Proposed pairing:** `tba-router-credential-issuer` + `@tba/credential-issuer-uix`<br>
 **Status:** New product surface; OAuth/OIDC, JOSE, credentials, policy, attestation, status, storage, and issuer foundations are reusable, but digital credential issuance is absent<br>
 **Prepared:** July 11, 2026<br>
-**Proposed router owner:** `pkgs/80-routers/tigrbl-auth-router-credential-issuer`<br>
-**Proposed protocol owner:** `pkgs/50-protocols/tigrbl-openid4vci`<br>
+**Proposed router owner:** `pkgs/80-routers/tba-router-credential-issuer`<br>
+**Proposed protocol owner:** `pkgs/50-protocols/tba-openid4vci`<br>
 **Proposed UIX owner:** `pkgs/105-ui/credential-issuer-uix`
 
 ## 1. Product Decision
@@ -567,7 +567,7 @@ Guardrails include false issuance, claim provenance loss, offer theft, weak bind
 
 - OAuth/OIDC protocol, token, metadata, authorization, client-authentication, PKCE, JOSE, DPoP, mTLS, and key lifecycle packages;
 - principal, federation, provisioning, entitlement, policy, audit, provenance, tenant/realm authority, storage, and runtime packages;
-- `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/credentials/` as an authentication-credential domain that must remain separate;
+- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/credentials/` as an authentication-credential domain that must remain separate;
 - Attestation, Token Service, Certificate, Policy, and Provisioning pairing briefs;
 - repository opportunity map, which identifies issuer/wallet/verifier as missing distinct pairings.
 

@@ -2,7 +2,7 @@
 
 ## Decision
 
-Tigrbl Auth owns three related but distinct product planes: the identity provider,
+TBA owns three related but distinct product planes: the identity provider,
 customer-scoped platform IAM, and internal workforce/platform IAM. Authentication
 establishes a stable principal and assurance context. Authorization is evaluated
 separately from current roles, grants, policies, resource scope, and request

@@ -1,31 +1,31 @@
 import pytest
 
-from tigrbl_authz_policy_bases import (
+from tba_bases_authorization_policy import (
     AuthzenEvaluationAdapterBase,
     XacmlRequestMapperBase,
 )
-from tigrbl_identity_contracts.delegation import (
+from tba_contracts_identity.delegation import (
     DelegatedCapability,
     DelegationActor,
     DelegationActorChain,
     DelegationConstraint,
     DelegationConstraints,
 )
-from tigrbl_identity_contracts.did import (
+from tba_contracts_identity.did import (
     Did,
     DidDocument,
     DidService,
     DidUrl,
     DidVerificationMethod,
 )
-from tigrbl_identity_contracts.policy import (
+from tba_contracts_identity.policy import (
     PolicyEntity,
     PolicyEntityChain,
     PolicyEvaluationRequest,
     XacmlDecision,
 )
-from tigrbl_identity_contracts.workloads import SpiffeId, Svid, SvidFormat, TrustDomain
-from tigrbl_security_trust_domain_bases import (
+from tba_contracts_identity.workloads import SpiffeId, Svid, SvidFormat, TrustDomain
+from tba_bases_security_trust_domain import (
     CertificatePathValidatorBase,
     DidResolverBase,
     SvidProviderBase,

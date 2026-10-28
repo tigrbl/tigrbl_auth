@@ -13,7 +13,7 @@
 - `ADR-0011-evidence-model-and-tier-promotion` — Evidence bundles are required for tier promotion (docs\adr\ADR-0011-evidence-model-and-tier-promotion.md)
 - `ADR-0012-independent-peer-claims` — Independent peer claims are a separate certification boundary (docs\adr\ADR-0012-independent-peer-claims.md)
 - `ADR-0013-vendor-removal-and-no-private-shims` — Remove vendor directories and forbid private framework shims (docs\adr\ADR-0013-vendor-removal-and-no-private-shims.md)
-- `ADR-0014-tigrbl-public-api-only-composition` — Tigrbl public-API-only composition is mandatory in release paths (docs\adr\ADR-0014-tigrbl-public-api-only-composition.md)
+- `ADR-0014-tba-public-api-only-composition` — Tigrbl public-API-only composition is mandatory in release paths (docs\adr\ADR-0014-tba-public-api-only-composition.md)
 - `ADR-0015-feature-flags-and-profile-gating` — Feature flags and profile gating are release-governed surfaces (docs\adr\ADR-0015-feature-flags-and-profile-gating.md)
 - `ADR-0016-installable-surfaces-and-partial-feature-consumption` — Installable surfaces and partial feature consumption are first-class boundaries (docs\adr\ADR-0016-installable-surfaces-and-partial-feature-consumption.md)
 - `ADR-0017-plane-modularity` — Runtime planes own one concern each (docs\adr\ADR-0017-plane-modularity.md)

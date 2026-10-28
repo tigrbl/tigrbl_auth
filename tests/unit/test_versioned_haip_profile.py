@@ -1,6 +1,6 @@
 import pytest
 
-from tigrbl_auth_profile_haip import (
+from tba_profile_haip import (
     CAPABILITY_REQUIREMENTS,
     CURRENT_VERSION,
     HAIP_PROOF_CLAIM_CLASSES,

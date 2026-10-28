@@ -7,10 +7,10 @@ targets:
     status: evidenced-release-gated
     profile: production
   modules:
-  - tigrbl_auth/standards/oauth2/introspection.py
-  - tigrbl_auth/services/persistence.py
-  - tigrbl_auth/tables/token_record.py
-  - tigrbl_auth/tables/revoked_token.py
+  - tba_auth/standards/oauth2/introspection.py
+  - tba_auth/services/persistence.py
+  - tba_auth/tables/token_record.py
+  - tba_auth/tables/revoked_token.py
   tests:
   - tests/conformance/production/test_rfc7662_introspection.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
@@ -54,7 +54,7 @@ reports:
 - docs/compliance/certification_state_report.json
 - docs/compliance/certification_state_report.md
 contracts:
-- specs/openapi/profiles/production/tigrbl_auth.public.openapi.json
+- specs/openapi/profiles/production/tba_auth.public.openapi.json
 - specs/discovery/profiles/production/oauth-authorization-server.json
 scenario_ids:
 - rfc-7662

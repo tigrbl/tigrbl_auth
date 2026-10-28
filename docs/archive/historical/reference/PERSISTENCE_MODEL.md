@@ -7,12 +7,12 @@
 ## Overview
 
 This repository checkpoint establishes a durable persistence foundation for the
-authoritative `tigrbl_auth` implementation path. The persistence model now owns
+authoritative `tba_auth` implementation path. The persistence model now owns
 state that was previously absent, partially modeled, or implemented only in
 process memory.
 
-The authoritative persistence modules live under `tigrbl_auth/tables/*`, with
-runtime lifecycle access consolidated in `tigrbl_auth/services/persistence.py`.
+The authoritative persistence modules live under `tba_auth/tables/*`, with
+runtime lifecycle access consolidated in `tba_auth/services/persistence.py`.
 
 ## Persistence domains
 
@@ -52,7 +52,7 @@ These tables close the previously missing lifecycle domains:
 
 ### `authn.sessions`
 
-Owner module: `tigrbl_auth/tables/auth_session.py`
+Owner module: `tba_auth/tables/auth_session.py`
 
 Purpose:
 
@@ -76,7 +76,7 @@ Key fields:
 
 ### `authn.token_records`
 
-Owner module: `tigrbl_auth/tables/token_record.py`
+Owner module: `tba_auth/tables/token_record.py`
 
 Purpose:
 
@@ -110,7 +110,7 @@ Security note:
 
 ### `authn.revoked_tokens`
 
-Owner module: `tigrbl_auth/tables/revoked_token.py`
+Owner module: `tba_auth/tables/revoked_token.py`
 
 Purpose:
 
@@ -129,7 +129,7 @@ Key fields:
 
 ### `authn.consents`
 
-Owner module: `tigrbl_auth/tables/consent.py`
+Owner module: `tba_auth/tables/consent.py`
 
 Purpose:
 
@@ -151,7 +151,7 @@ Key fields:
 
 ### `authn.client_registrations`
 
-Owner module: `tigrbl_auth/tables/client_registration.py`
+Owner module: `tba_auth/tables/client_registration.py`
 
 Purpose:
 
@@ -175,7 +175,7 @@ Key fields:
 
 ### `authn.logout_state`
 
-Owner module: `tigrbl_auth/tables/logout_state.py`
+Owner module: `tba_auth/tables/logout_state.py`
 
 Purpose:
 
@@ -200,7 +200,7 @@ Key fields:
 
 ### `authn.audit_events`
 
-Owner module: `tigrbl_auth/tables/audit_event.py`
+Owner module: `tba_auth/tables/audit_event.py`
 
 Purpose:
 
@@ -223,7 +223,7 @@ Key fields:
 
 ### `authn.device_codes`
 
-Owner module: `tigrbl_auth/tables/device_code.py`
+Owner module: `tba_auth/tables/device_code.py`
 
 Purpose:
 
@@ -238,7 +238,7 @@ Key fields added/used in this checkpoint:
 
 ### `authn.par_requests`
 
-Owner module: `tigrbl_auth/tables/pushed_authorization_request.py`
+Owner module: `tba_auth/tables/pushed_authorization_request.py`
 
 Purpose:
 
@@ -255,7 +255,7 @@ Key fields added/used in this checkpoint:
 
 Authoritative runtime lifecycle access now lives in:
 
-- `tigrbl_auth/services/persistence.py`
+- `tba_auth/services/persistence.py`
 
 The service provides repository-owned operations for:
 
@@ -275,9 +275,9 @@ when available and falls back to the repository engine export otherwise.
 
 Executable migration ownership lives under:
 
-- `tigrbl_auth/migrations/helpers.py`
-- `tigrbl_auth/migrations/runtime.py`
-- `tigrbl_auth/migrations/versions/*.py`
+- `tba_auth/migrations/helpers.py`
+- `tba_auth/migrations/runtime.py`
+- `tba_auth/migrations/versions/*.py`
 
 Migration versions are intentionally aligned to domain families:
 

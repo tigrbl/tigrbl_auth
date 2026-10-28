@@ -1,7 +1,7 @@
 import asyncio
 
 import pytest
-from tigrbl_identity_contracts.policy import (
+from tba_contracts_identity.policy import (
     PolicyDecision,
     PolicyEntity,
     PolicyEntityChain,
@@ -12,7 +12,7 @@ from tigrbl_identity_contracts.policy import (
     PolicyEvaluationResult,
     PolicyServiceCapabilities,
 )
-from tigrbl_policy_evaluation_capability import PolicyEvaluationCapability
+from tba_capability_policy_evaluation import PolicyEvaluationCapability
 
 
 def _request(identifier: str = "alice") -> PolicyEvaluationRequest:

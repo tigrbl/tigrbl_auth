@@ -1,109 +1,109 @@
 capture_mode: contract-derived-snapshot
 profile: production
-source_contract: specs/openrpc/profiles/production/tigrbl_auth.admin.openrpc.json
+source_contract: specs/openrpc/profiles/production/tba_auth.admin.openrpc.json
 methods:
 - name: audit.export
   summary: Export durable audit events.
-  owner_module: tigrbl_auth/api/rpc/methods/audit.py
+  owner_module: tba_auth/api/rpc/methods/audit.py
 - name: audit.list
   summary: List durable audit events.
-  owner_module: tigrbl_auth/api/rpc/methods/audit.py
+  owner_module: tba_auth/api/rpc/methods/audit.py
 - name: claims.lint
   summary: Run claims lint against the governance plane.
-  owner_module: tigrbl_auth/api/rpc/methods/governance.py
+  owner_module: tba_auth/api/rpc/methods/governance.py
 - name: claims.show
   summary: Return effective claims for the active deployment profile.
-  owner_module: tigrbl_auth/api/rpc/methods/governance.py
+  owner_module: tba_auth/api/rpc/methods/governance.py
 - name: client.list
   summary: List OAuth/OIDC clients in the admin plane.
-  owner_module: tigrbl_auth/api/rpc/methods/directory.py
+  owner_module: tba_auth/api/rpc/methods/directory.py
 - name: client.registration.delete
   summary: Delete a durable client-registration record.
-  owner_module: tigrbl_auth/api/rpc/methods/client_registration.py
+  owner_module: tba_auth/api/rpc/methods/client_registration.py
 - name: client.registration.list
   summary: List durable client-registration records.
-  owner_module: tigrbl_auth/api/rpc/methods/client_registration.py
+  owner_module: tba_auth/api/rpc/methods/client_registration.py
 - name: client.registration.show
   summary: Show a durable client-registration record.
-  owner_module: tigrbl_auth/api/rpc/methods/client_registration.py
+  owner_module: tba_auth/api/rpc/methods/client_registration.py
 - name: client.registration.upsert
   summary: Create or update a durable client-registration record.
-  owner_module: tigrbl_auth/api/rpc/methods/client_registration.py
+  owner_module: tba_auth/api/rpc/methods/client_registration.py
 - name: client.show
   summary: Show a client in the admin plane.
-  owner_module: tigrbl_auth/api/rpc/methods/directory.py
+  owner_module: tba_auth/api/rpc/methods/directory.py
 - name: consent.list
   summary: List durable consent records.
-  owner_module: tigrbl_auth/api/rpc/methods/consent.py
+  owner_module: tba_auth/api/rpc/methods/consent.py
 - name: consent.revoke
   summary: Revoke a durable consent record.
-  owner_module: tigrbl_auth/api/rpc/methods/consent.py
+  owner_module: tba_auth/api/rpc/methods/consent.py
 - name: consent.show
   summary: Show a durable consent record.
-  owner_module: tigrbl_auth/api/rpc/methods/consent.py
+  owner_module: tba_auth/api/rpc/methods/consent.py
 - name: discovery.show
   summary: Show effective OIDC discovery metadata for the deployment.
-  owner_module: tigrbl_auth/api/rpc/methods/governance.py
+  owner_module: tba_auth/api/rpc/methods/governance.py
 - name: evidence.status
   summary: Summarize evidence-plane status.
-  owner_module: tigrbl_auth/api/rpc/methods/governance.py
+  owner_module: tba_auth/api/rpc/methods/governance.py
 - name: flow.list
   summary: List effective protocol flow slices for the current deployment.
-  owner_module: tigrbl_auth/api/rpc/methods/governance.py
+  owner_module: tba_auth/api/rpc/methods/governance.py
 - name: gate.run
   summary: Run a named release gate.
-  owner_module: tigrbl_auth/api/rpc/methods/governance.py
+  owner_module: tba_auth/api/rpc/methods/governance.py
 - name: identity.list
   summary: List identities in the admin plane.
-  owner_module: tigrbl_auth/api/rpc/methods/directory.py
+  owner_module: tba_auth/api/rpc/methods/directory.py
 - name: identity.show
   summary: Show an identity in the admin plane.
-  owner_module: tigrbl_auth/api/rpc/methods/directory.py
+  owner_module: tba_auth/api/rpc/methods/directory.py
 - name: jwks.show
   summary: Show the effective JWKS document.
-  owner_module: tigrbl_auth/api/rpc/methods/keys.py
+  owner_module: tba_auth/api/rpc/methods/keys.py
 - name: keys.list
   summary: List durable service keys and key-rotation history.
-  owner_module: tigrbl_auth/api/rpc/methods/keys.py
+  owner_module: tba_auth/api/rpc/methods/keys.py
 - name: keys.rotate
   summary: Rotate the signing key and persist a key-rotation event.
-  owner_module: tigrbl_auth/api/rpc/methods/keys.py
+  owner_module: tba_auth/api/rpc/methods/keys.py
 - name: profile.show
   summary: Show the effective deployment/profile posture.
-  owner_module: tigrbl_auth/api/rpc/methods/profile.py
+  owner_module: tba_auth/api/rpc/methods/profile.py
 - name: release.bundle
   summary: Build a release bundle.
-  owner_module: tigrbl_auth/api/rpc/methods/governance.py
+  owner_module: tba_auth/api/rpc/methods/governance.py
 - name: rpc.discover
   summary: Return the active implementation-backed RPC method catalog.
-  owner_module: tigrbl_auth/api/rpc/methods/governance.py
+  owner_module: tba_auth/api/rpc/methods/governance.py
 - name: session.list
   summary: List durable browser and auth sessions.
-  owner_module: tigrbl_auth/api/rpc/methods/session.py
+  owner_module: tba_auth/api/rpc/methods/session.py
 - name: session.show
   summary: Show a durable session and its latest logout state.
-  owner_module: tigrbl_auth/api/rpc/methods/session.py
+  owner_module: tba_auth/api/rpc/methods/session.py
 - name: session.terminate
   summary: Terminate a durable session and persist logout state.
-  owner_module: tigrbl_auth/api/rpc/methods/session.py
+  owner_module: tba_auth/api/rpc/methods/session.py
 - name: target.list
   summary: List certification-scope targets.
-  owner_module: tigrbl_auth/api/rpc/methods/profile.py
+  owner_module: tba_auth/api/rpc/methods/profile.py
 - name: target.show
   summary: Show a certification-scope target.
-  owner_module: tigrbl_auth/api/rpc/methods/profile.py
+  owner_module: tba_auth/api/rpc/methods/profile.py
 - name: tenant.list
   summary: List tenants in the admin plane.
-  owner_module: tigrbl_auth/api/rpc/methods/directory.py
+  owner_module: tba_auth/api/rpc/methods/directory.py
 - name: tenant.show
   summary: Show a tenant in the admin plane.
-  owner_module: tigrbl_auth/api/rpc/methods/directory.py
+  owner_module: tba_auth/api/rpc/methods/directory.py
 - name: token.exchange
   summary: Create a durable token exchange record.
-  owner_module: tigrbl_auth/api/rpc/methods/token.py
+  owner_module: tba_auth/api/rpc/methods/token.py
 - name: token.inspect
   summary: Inspect token posture and current introspection state.
-  owner_module: tigrbl_auth/api/rpc/methods/token.py
+  owner_module: tba_auth/api/rpc/methods/token.py
 - name: token.list
   summary: List durable token records.
-  owner_module: tigrbl_auth/api/rpc/methods/token.py
+  owner_module: tba_auth/api/rpc/methods/token.py

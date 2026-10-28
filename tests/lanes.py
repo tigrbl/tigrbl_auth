@@ -17,10 +17,10 @@ OPTIONAL_RUNTIME_MODULES = (
     "pqcrypto",
 )
 RUNTIME_STACK_SOURCE_PREFIXES = (
-    "tigrbl_auth",
-    "tigrbl_auth_protocol_oauth",
-    "tigrbl_auth_protocol_oidc",
-    "tigrbl_identity_server",
+    "tba_auth",
+    "tba_protocol_oauth",
+    "tba_protocol_oidc",
+    "tba_server_identity",
     "tests",
 )
 EXTENSION_TEST_PREFIXES = (
@@ -115,7 +115,7 @@ def missing_optional_runtime_modules() -> tuple[str, ...]:
 
 
 def active_lane(explicit_lane: str | None = None) -> str:
-    lane = explicit_lane or os.getenv("TIGRBL_AUTH_TEST_LANE", "core")
+    lane = explicit_lane or os.getenv("TBA_AUTH_TEST_LANE", "core")
     return lane.strip().lower() or "core"
 
 
@@ -150,7 +150,7 @@ def lane_allows_path(selected_lane: str, path: Path) -> bool:
         return selected_lane in {"all", "*", "extension"}
     lane = classify_test_path(path)
     if lane == "package":
-        package_context = os.getenv("PACKAGE_UNDER_TEST") or os.getenv("TIGRBL_AUTH_PACKAGE_UNDER_TEST")
+        package_context = os.getenv("PACKAGE_UNDER_TEST") or os.getenv("TBA_AUTH_PACKAGE_UNDER_TEST")
         return bool(package_context) or selected_lane in {"all", "*"}
     if selected_lane in {"all", "*"}:
         return True

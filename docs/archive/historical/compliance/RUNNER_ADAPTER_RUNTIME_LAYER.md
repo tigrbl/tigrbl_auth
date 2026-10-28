@@ -19,14 +19,14 @@ Separate the ASGI application from any single server process and introduce a com
 ## Completed in this checkpoint
 
 - added a dedicated runtime package:
-  - `tigrbl_auth/runtime/__init__.py`
-  - `tigrbl_auth/runtime/types.py`
-  - `tigrbl_auth/runtime/base.py`
-  - `tigrbl_auth/runtime/plan.py`
-  - `tigrbl_auth/runtime/registry.py`
-  - `tigrbl_auth/runtime/uvicorn.py`
-  - `tigrbl_auth/runtime/hypercorn.py`
-  - `tigrbl_auth/runtime/tigrcorn.py`
+  - `tba_auth/runtime/__init__.py`
+  - `tba_auth/runtime/types.py`
+  - `tba_auth/runtime/base.py`
+  - `tba_auth/runtime/plan.py`
+  - `tba_auth/runtime/registry.py`
+  - `tba_auth/runtime/uvicorn.py`
+  - `tba_auth/runtime/hypercorn.py`
+  - `tba_auth/runtime/tigrcorn.py`
 - introduced a `RunnerAdapter` abstraction with:
   - adapter-declared capabilities
   - adapter-declared flag metadata
@@ -38,10 +38,10 @@ Separate the ASGI application from any single server process and introduce a com
   - application hash
   - runtime hash
 - added runtime-plan hashing so the application hash is runner-invariant while runtime hashes remain runner-qualified
-- refactored `tigrbl_auth/api/app.py` so the exported ASGI object is lazy and server-agnostic at import time
-- refactored `tigrbl_auth/app.py` to re-export the lazy package app and runtime-plan helpers
-- refactored `tigrbl_auth/plugin.py` to remove top-level Tigrbl coupling and keep deployment/app installation lazy
-- refactored `tigrbl_auth/gateway.py` to expose a lazy gateway app and runtime-plan helper
+- refactored `tba_auth/api/app.py` so the exported ASGI object is lazy and server-agnostic at import time
+- refactored `tba_auth/app.py` to re-export the lazy package app and runtime-plan helpers
+- refactored `tba_auth/plugin.py` to remove top-level Tigrbl coupling and keep deployment/app installation lazy
+- refactored `tba_auth/gateway.py` to expose a lazy gateway app and runtime-plan helper
 - updated the CLI metadata and handlers so `serve` now produces a runner-qualified runtime plan rather than a runner-agnostic plan payload
 - updated the doctor and state reports to include runner registry and runtime-application-hash invariance data
 - added unit coverage for the runtime adapter layer and CLI parser integration
@@ -76,4 +76,4 @@ Remaining blockers still include:
 
 ## Boundary note
 
-The new `tigrbl_auth/runtime/**` package is mapped into the certified core boundary in this checkpoint so the runtime adapter layer is treated as an in-scope certified implementation substrate rather than an orphaned implementation path.
+The new `tba_auth/runtime/**` package is mapped into the certified core boundary in this checkpoint so the runtime adapter layer is treated as an in-scope certified implementation substrate rather than an orphaned implementation path.

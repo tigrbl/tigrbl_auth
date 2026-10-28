@@ -47,7 +47,7 @@ def test_orders_are_scoped_to_layers_and_exactly_derived() -> None:
 
 def test_storage_boundaries_have_no_scaffolding_components() -> None:
     by_name = {package.name: package for package in _module().discover()}
-    assert "tigrbl-identity-storage-core" not in by_name
-    assert "tigrbl-identity-storage-foundation" not in by_name
-    assert by_name["tigrbl-identity-storage-tenancy"].order == 0
-    assert by_name["tigrbl-identity-storage-principals"].order == 1
+    assert "tba-storage-core-core" not in by_name
+    assert "tba-storage-core-foundation" not in by_name
+    assert by_name["tba-storage-tenancy"].order == 0
+    assert by_name["tba-storage-principals"].order == 1

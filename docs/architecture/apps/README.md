@@ -9,12 +9,12 @@ This directory contains one note per target `tigrbl` app in the proposed future-
 
 ## Target apps
 
-- `tigrbl-auth-idp` in `tigrbl-auth-idp.md`
-- `tigrbl-auth-public-portal` in `tigrbl-auth-public-portal.md`
-- `tigrbl-auth-platform-admin-console` in `tigrbl-auth-platform-admin-console.md`
-- `tigrbl-auth-tenant-admin-console` in `tigrbl-auth-tenant-admin-console.md`
-- `tigrbl-auth-developer-portal` in `tigrbl-auth-developer-portal.md`
-- `tigrbl-auth-service-admin-surface` in `tigrbl-auth-service-admin-surface.md`
+- `tba-auth-idp` in `tba-auth-idp.md`
+- `tba-auth-public-portal` in `tba-auth-public-portal.md`
+- `tba-auth-platform-admin-console` in `tba-auth-platform-admin-console.md`
+- `tba-auth-tenant-admin-console` in `tba-auth-tenant-admin-console.md`
+- `tba-auth-developer-portal` in `tba-auth-developer-portal.md`
+- `tba-auth-service-admin-surface` in `tba-auth-service-admin-surface.md`
 
 ## Related notes
 

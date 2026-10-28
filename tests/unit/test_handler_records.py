@@ -5,9 +5,9 @@ from uuid import uuid4
 
 import pytest
 
-import tigrbl_identity_server.security.handler_records as handler_records
+import tba_server_identity.security.handler_records as handler_records
 
-from tigrbl_identity_server.security.handler_records import (
+from tba_server_identity.security.handler_records import (
     delete_handler_record,
     read_handler_record,
     update_handler_record,

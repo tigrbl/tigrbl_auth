@@ -21,7 +21,7 @@ body: |-
   ## Overview
   
   This specification defines administration-plane requirements for key rotation
-  workflows in `tigrbl_auth` while preserving governance ownership of key
+  workflows in `tba_auth` while preserving governance ownership of key
   rotation policy.
   
   ## Decision Source

@@ -18,7 +18,7 @@ Covered runtime behavior:
 Verification:
 
 ```powershell
-$env:UV_CACHE_DIR='E:\swarmauri_github\tigrbl_auth\.tmp\uv-cache'; uv run --no-sync pytest tests/uix/test_priority1_admin_console_shell_boundary.py tests/uix/test_admin_shell.py tests/uix/test_admin_shell_security.py
+$env:UV_CACHE_DIR='E:\swarmauri_github\tba_auth\.tmp\uv-cache'; uv run --no-sync pytest tests/uix/test_priority1_admin_console_shell_boundary.py tests/uix/test_admin_shell.py tests/uix/test_admin_shell_security.py
 ```
 
 Result: 8 passed.

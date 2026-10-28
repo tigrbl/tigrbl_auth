@@ -1,10 +1,10 @@
 # Platform Admin API + UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-backend-app-platform-admin` + `@tigrbl-auth/platform-admin-uix`<br>
+**Pairing:** `tba-app-backend-platform-admin` + `@tba/ui-platform-admin`<br>
 **Status:** Delivery brief<br>
 **Prepared:** July 11, 2026<br>
-**Backend app owner:** `pkgs/90-backend-apps/tigrbl-auth-backend-app-platform-admin`<br>
-**UIX owner:** `pkgs/105-ui/platform-admin-uix`
+**Backend app owner:** `pkgs/90-backend-apps/tba-app-backend-platform-admin`<br>
+**UIX owner:** `pkgs/105-ui/tba-ui-platform-admin`
 
 ## 1. Product Decision
 
@@ -31,7 +31,7 @@ It must make scope and consequence unmistakable. Operators should always know wh
 
 ## 3. API Boundary
 
-The UIX consumes exactly one configured platform-admin backend-app base URL through `VITE_TIGRBL_AUTH_PLATFORM_ADMIN_BACKEND_APP_BASE_URL`.
+The UIX consumes exactly one configured platform-admin backend-app base URL through `VITE_TBA_AUTH_PLATFORM_ADMIN_BACKEND_APP_BASE_URL`.
 
 ### Owned resources
 
@@ -223,13 +223,13 @@ Produce a route-level copy deck containing:
 
 ## 11. Source Evidence
 
-- `pkgs/90-backend-apps/tigrbl-auth-backend-app-platform-admin/README.md`
-- `pkgs/90-backend-apps/tigrbl-auth-backend-app-platform-admin/src/tigrbl_auth_backend_app_platform_admin/contract.py`
-- `pkgs/105-ui/platform-admin-uix/README.md`
-- `pkgs/105-ui/platform-admin-uix/App.tsx`
-- `pkgs/105-ui/platform-admin-uix/services/platformAdminClient.ts`
-- `pkgs/105-ui/platform-admin-uix/services/workflowCrud.test.ts`
-- `pkgs/105-ui/platform-admin-uix/pages/platformCrudPages.test.tsx`
-- `tests/packages/tigrbl-auth-backend-app-platform-admin/`
+- `pkgs/90-backend-apps/tba-app-backend-platform-admin/README.md`
+- `pkgs/90-backend-apps/tba-app-backend-platform-admin/src/tba_app_backend_platform_admin/contract.py`
+- `pkgs/105-ui/tba-ui-platform-admin/README.md`
+- `pkgs/105-ui/tba-ui-platform-admin/App.tsx`
+- `pkgs/105-ui/tba-ui-platform-admin/services/platformAdminClient.ts`
+- `pkgs/105-ui/tba-ui-platform-admin/services/workflowCrud.test.ts`
+- `pkgs/105-ui/tba-ui-platform-admin/pages/platformCrudPages.test.tsx`
+- `tests/packages/tba-app-backend-platform-admin/`
 - `tests/unit/test_product_api_surfaces.py`
 - Platform-admin SSOT feature/claim/test/evidence/boundary records

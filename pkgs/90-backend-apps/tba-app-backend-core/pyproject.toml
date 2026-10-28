@@ -1,0 +1,52 @@
+[project]
+name = "tba-app-backend-core"
+version = "0.4.0.dev2"
+description = "Shared layer-90 ASGI and router composition for TBA backend applications."
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = [
+    "tigrbl==0.4.5.dev4",
+    "tba-protocol-gnap==0.4.0.dev2",
+    "tba-protocol-oauth==0.4.0.dev2",
+    "tba-plugin-tigrbl==0.4.0.dev2",
+    "tba-router-admin-gate==0.4.0.dev2",
+    "tba-router-oauth-authorization==0.4.0.dev2",
+    "tba-router-oauth-authorization-server-metadata==0.4.0.dev2",
+    "tba-router-oauth-device-authorization==0.4.0.dev2",
+    "tba-router-oauth-introspection==0.4.0.dev2",
+    "tba-router-oauth-pushed-authorization-request==0.4.0.dev2",
+    "tba-router-oauth-protected-resource-metadata==0.4.0.dev2",
+    "tba-router-oauth-registration==0.4.0.dev2",
+    "tba-router-oauth-revocation==0.4.0.dev2",
+    "tba-router-oauth-token==0.4.0.dev2",
+    "tba-router-oauth-token-exchange==0.4.0.dev2",
+    "tba-router-oidc-discovery==0.4.0.dev2",
+    "tba-router-oidc-logout==0.4.0.dev2",
+    "tba-router-oidc-userinfo==0.4.0.dev2",
+    "tba-router-resource-validation-metadata==0.4.0.dev2",
+    "tba-router-session-login==0.4.0.dev2",
+    "tba-capability-client-secret-authentication==0.4.0.dev2",
+    "tba-contracts-identity==0.4.0.dev2",
+    "tba-primitives-identity==0.4.0.dev2",
+    "tba-operator-identity==0.4.0.dev2",
+    "tba-runtime-identity==0.4.0.dev2",
+    "tba-server-identity==0.4.0.dev2",
+    "tba-storage-core==0.4.0.dev2",
+    "tba-storage-oauth==0.4.0.dev2",
+    "tba-storage-tenancy==0.4.0.dev2",
+    "tba-runtime-identity-storage==0.4.0.dev2",
+    "tba-provider-secret-hashing-bcrypt==0.1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/90-backend-apps/tba-app-backend-core"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tba_app_backend_core", from = "src" }]

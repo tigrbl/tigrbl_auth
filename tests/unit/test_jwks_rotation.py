@@ -1,7 +1,7 @@
 import pytest
 from http import HTTPStatus as status
 
-from tigrbl_auth.oidc_id_token import rotate_rsa_jwt_key
+from tba_auth.oidc_id_token import rotate_rsa_jwt_key
 
 
 @pytest.mark.unit

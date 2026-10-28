@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from tigrbl_identity_storage.tables import (
+from tba_storage_core.tables import (
     AccessReviewCampaign,
     AccessReviewDecision,
     AccessReviewItem,

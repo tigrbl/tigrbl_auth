@@ -7,7 +7,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   modules:
-  - tigrbl_auth/standards/jose/rfc7519.py
+  - tba_auth/standards/jose/rfc7519.py
   tests:
   - tests/conformance/baseline/test_rfc7519_jwt.py
   - tests/unit/test_jwtoken.py

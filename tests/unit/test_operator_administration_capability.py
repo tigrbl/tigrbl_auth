@@ -5,18 +5,18 @@ from pathlib import Path
 
 import pytest
 
-from tigrbl_identity_admin_control_plane import (
+from tba_runtime_identity_administration_control_plane import (
     OPERATOR_ADMINISTRATION_OPERATIONS,
     OperatorAdministrationCapability,
 )
-from tigrbl_identity_cli.operator_administration import (
+from tba_cli_identity.operator_administration import (
     operator_administration_registry,
 )
 
 
 ROOT = Path(__file__).resolve().parents[2]
 HANDLERS = (
-    ROOT / "pkgs/60-runtime/tigrbl-identity-cli/src/tigrbl_identity_cli/cli/handlers"
+    ROOT / "pkgs/60-runtime/tba-cli-identity/src/tba_cli_identity/cli/handlers"
 )
 
 
@@ -89,9 +89,9 @@ def test_cli_reports_the_effective_operator_capability_set() -> None:
 
 def test_cli_handlers_do_not_import_durable_mutation_modules_directly() -> None:
     banned = (
-        "tigrbl_identity_storage_runtime.operator_store",
-        "tigrbl_identity_storage_runtime.resource_service",
-        "tigrbl_identity_storage_runtime.key_management",
+        "tba_runtime_identity_storage.operator_store",
+        "tba_runtime_identity_storage.resource_service",
+        "tba_runtime_identity_storage.key_management",
     )
     sources = {path: path.read_text(encoding="utf-8") for path in HANDLERS.glob("*.py")}
 

@@ -8,11 +8,11 @@ from types import SimpleNamespace
 import pytest
 from httpx import ASGITransport, AsyncClient
 
-from tigrbl_auth_backend_app_core import build_app
-from tigrbl_auth.cli.artifacts import build_openapi_contract, deployment_from_options, write_discovery_artifacts
-from tigrbl_identity_storage_runtime.operator_store import OperationContext
-from tigrbl_identity_storage_runtime.resource_service import create_resource, generate_key_record, publish_jwks_document
-from tigrbl_auth.services.tenant_discovery import (
+from tba_app_backend_core import build_app
+from tba_auth.cli.artifacts import build_openapi_contract, deployment_from_options, write_discovery_artifacts
+from tba_runtime_identity_storage.operator_store import OperationContext
+from tba_runtime_identity_storage.resource_service import create_resource, generate_key_record, publish_jwks_document
+from tba_auth.services.tenant_discovery import (
     TENANT_JWKS_PATH,
     TENANT_OPENID_CONFIGURATION_PATH,
     require_tenant_issuer,
@@ -20,7 +20,7 @@ from tigrbl_auth.services.tenant_discovery import (
     tenant_issuer,
     tenant_trust_domain_authority_from_root_issuer,
 )
-from tigrbl_auth.uix import build_tenant_jwks_publication_view
+from tba_auth.uix import build_tenant_jwks_publication_view
 
 ROOT_ISSUER = "https://id.example.com"
 TENANT_A = "tenant-a"
@@ -40,7 +40,7 @@ def _context(tmp_path: Path, resource: str, command: str, *, tenant: str | None 
 
 
 def _seed_operator_state(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setenv("TIGRBL_AUTH_OPERATOR_STATE_DIR", str(tmp_path / ".operator-state"))
+    monkeypatch.setenv("TBA_AUTH_OPERATOR_STATE_DIR", str(tmp_path / ".operator-state"))
     monkeypatch.chdir(tmp_path)
 
     tenant_ctx = _context(tmp_path, "tenant", "tenant.create")

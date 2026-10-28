@@ -6,8 +6,8 @@ from uuid import uuid4
 
 import pytest
 
-from tigrbl_auth.standards.http.cookies import parse_session_cookie_value
-from tigrbl_auth_protocol_oidc.standards import rp_initiated_logout as rp_logout
+from tba_auth.standards.http.cookies import parse_session_cookie_value
+from tba_protocol_oidc.standards import rp_initiated_logout as rp_logout
 
 
 

@@ -1,6 +1,6 @@
 """Tests for RFC 7517: JSON Web Key (JWK)."""
 
-from tigrbl_auth import load_signing_jwk, load_public_jwk
+from tba_auth import load_signing_jwk, load_public_jwk
 
 
 def test_jwk_contains_required_fields() -> None:

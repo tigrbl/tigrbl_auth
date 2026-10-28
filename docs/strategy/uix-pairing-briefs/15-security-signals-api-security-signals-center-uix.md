@@ -1,10 +1,10 @@
 # Security Signals API + Security Signals Center UIX Requirements Brief
 
-**Proposed pairing:** `tigrbl-auth-router-security-signals` + `@tigrbl-auth/security-signals-center-uix`<br>
+**Proposed pairing:** `tba-router-security-signals` + `@tba/security-signals-center-uix`<br>
 **Status:** New product surface; telemetry, anomaly, audit, session, revocation, policy, JOSE, and provenance foundations exist<br>
 **Prepared:** July 11, 2026<br>
-**Proposed router owner:** `pkgs/80-routers/tigrbl-auth-router-security-signals`<br>
-**Proposed protocol owner:** `pkgs/50-protocols/tigrbl-security-shared-signals`<br>
+**Proposed router owner:** `pkgs/80-routers/tba-router-security-signals`<br>
+**Proposed protocol owner:** `pkgs/50-protocols/tba-security-shared-signals`<br>
 **Proposed UIX owner:** `pkgs/105-ui/security-signals-center-uix`
 
 ## 1. Product Decision
@@ -39,7 +39,7 @@ The missing product surface includes canonical event contracts, RFC 8417 validat
 
 ### Required standards correction
 
-The repository contains `tests/unit/test_rfc7952_security_event_token.py`, whose text labels Security Event Tokens as RFC 7952 and imports a removed `tigrbl_auth.rfc.rfc7952` implementation. This is incorrect: Security Event Tokens are defined by **RFC 8417**. RFC 7952 concerns YANG metadata. The stale test must not be treated as conformance evidence or revived under its old namespace. A future implementation needs correctly named RFC 8417 contracts, negative tests, and migration/removal of the misleading test.
+The repository contains `tests/unit/test_rfc7952_security_event_token.py`, whose text labels Security Event Tokens as RFC 7952 and imports a removed `tba_auth.rfc.rfc7952` implementation. This is incorrect: Security Event Tokens are defined by **RFC 8417**. RFC 7952 concerns YANG metadata. The stale test must not be treated as conformance evidence or revived under its old namespace. A future implementation needs correctly named RFC 8417 contracts, negative tests, and migration/removal of the misleading test.
 
 OpenID Shared Signals Framework 1.0, CAEP 1.0, and RISC 1.0 reached final-specification status in 2025. The implementation should pin exact versions and profiles at delivery time and keep extension event types namespaced.
 
@@ -500,11 +500,11 @@ Guardrails include false containment, cross-tenant correlation, replay side effe
 
 ### Repository
 
-- `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/adaptive_access.py`
-- `pkgs/20-providers/tigrbl-identity-admin-auth-anomaly-detector/`
-- `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/audit_event/`
+- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/adaptive_access.py`
+- `pkgs/20-providers/tba-provider-identity-admin-auth-anomaly-detector/`
+- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/audit_event/`
 - credential, operator, policy, session, token, delegation, and authorization audit/provenance packages;
-- `pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime/revocation.py`
+- `pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/revocation.py`
 - session/login/logout runtime services and resource-validation/JOSE packages;
 - `tests/security/test_authorization_observability.py`
 - `tests/unit/test_rfc7952_security_event_token.py` as stale/misnamed planning evidence only;

@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 
-from tigrbl_authorization_contracts import (
+from tba_contracts_authorization import (
     ActionDefinition,
     AuthorizationEffect,
     AuthorizationRequest,
@@ -9,10 +9,10 @@ from tigrbl_authorization_contracts import (
     RoleDefinition,
     RoleGrant,
 )
-from tigrbl_authz_policy_decision_engine import PlatformPolicyDecisionEngine
-from tigrbl_auth_router_authorization_admin import assert_tenant_scope
-from tigrbl_auth_router_rp_session import SECURE_COOKIE, require_csrf
-from tigrbl_auth_backend_app_rp import RPDeployment, validate_separation
+from tba_provider_authorization_policy_decision_engine import PlatformPolicyDecisionEngine
+from tba_router_authorization_admin import assert_tenant_scope
+from tba_router_relying_party_session import SECURE_COOKIE, require_csrf
+from tba_app_backend_relying_party import RPDeployment, validate_separation
 import pytest
 
 

@@ -9,41 +9,41 @@ CONTRACTS_ROOT = (
     ROOT
     / "pkgs"
     / "02-contracts"
-    / "tigrbl-identity-contracts"
+    / "tba-contracts-identity"
     / "src"
-    / "tigrbl_identity_contracts"
+    / "tba_contracts_identity"
 )
 CONCRETE_ROOTS = (
     ROOT
     / "pkgs"
     / "10-concrete"
-    / "tigrbl-authz-policy-rules-concrete"
+    / "tba-concrete-authorization-policy-rules"
     / "src"
-    / "tigrbl_authz_policy_rules_concrete",
+    / "tba_concrete_authorization_policy_rules",
     ROOT
     / "pkgs"
     / "10-concrete"
-    / "tigrbl-authz-policy-combiner-default"
+    / "tba-concrete-authorization-policy-combiner-default"
     / "src"
-    / "tigrbl_authz_policy_combiner_default",
+    / "tba_concrete_authorization_policy_combiner_default",
     ROOT
     / "pkgs"
     / "10-concrete"
-    / "tigrbl-authz-policy-evaluators-default"
+    / "tba-concrete-authorization-policy-evaluators-default"
     / "src"
-    / "tigrbl_authz_policy_evaluators_default",
+    / "tba_concrete_authorization_policy_evaluators_default",
     ROOT
     / "pkgs"
     / "10-concrete"
-    / "tigrbl-authz-policy-attributes-mapping"
+    / "tba-concrete-authorization-policy-attributes-mapping"
     / "src"
-    / "tigrbl_authz_policy_attributes_mapping",
+    / "tba_concrete_authorization_policy_attributes_mapping",
     ROOT
     / "pkgs"
     / "10-concrete"
-    / "tigrbl-authz-policy-obligations-concrete"
+    / "tba-concrete-authorization-policy-obligations"
     / "src"
-    / "tigrbl_authz_policy_obligations_concrete",
+    / "tba_concrete_authorization_policy_obligations",
 )
 
 
@@ -59,7 +59,7 @@ def _imports(path: Path) -> set[str]:
 
 
 def test_contracts_do_not_own_concrete_policy_rule_variants() -> None:
-    import tigrbl_identity_contracts.policy.rules as rules
+    import tba_contracts_identity.policy.rules as rules
 
     concrete_names = {
         "AdminPolicy",
@@ -69,13 +69,13 @@ def test_contracts_do_not_own_concrete_policy_rule_variants() -> None:
         "RolePolicy",
     }
 
-    assert rules.PolicyRule.__module__ == "tigrbl_identity_contracts.policy.rules"
+    assert rules.PolicyRule.__module__ == "tba_contracts_identity.policy.rules"
     assert not (concrete_names & set(dir(rules)))
 
 
 def test_policy_variants_subclass_contract_dataclass() -> None:
-    import tigrbl_authz_policy_rules_concrete as concrete
-    from tigrbl_identity_contracts.policy.rules import PolicyRule
+    import tba_concrete_authorization_policy_rules as concrete
+    from tba_contracts_identity.policy.rules import PolicyRule
 
     for name in (
         "AdminPolicy",
@@ -92,8 +92,8 @@ def test_policy_concrete_layer_only_imports_lower_contract_surfaces() -> None:
         "__future__",
         "dataclasses",
         "typing",
-        "tigrbl_authz_policy_bases",
-        "tigrbl_identity_contracts",
+        "tba_bases_authorization_policy",
+        "tba_contracts_identity",
     }
 
     offenders = {

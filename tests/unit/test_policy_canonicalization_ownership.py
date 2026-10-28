@@ -3,8 +3,8 @@ from __future__ import annotations
 import ast
 from pathlib import Path
 
-from tigrbl_authz_policy import assurance, provenance
-from tigrbl_identity_core.json_canonicalization import canonical_hash, canonical_json
+from tba_runtime_authorization_policy import assurance, provenance
+from tba_primitives_identity.json_canonicalization import canonical_hash, canonical_json
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -22,18 +22,18 @@ def test_policy_canonicalization_helpers_are_owned_by_identity_core() -> None:
 
 def test_policy_provenance_builders_are_concrete_backed() -> None:
     assert provenance.build_authorization_decision_trace.__module__ == (
-        "tigrbl_authorization_provenance_concrete"
+        "tba_concrete_authorization_provenance"
     )
     assert provenance.build_delegation_provenance.__module__ == (
-        "tigrbl_authorization_provenance_concrete"
+        "tba_concrete_authorization_provenance"
     )
 
 
 def test_authz_policy_no_longer_defines_canonicalization_helpers() -> None:
     helper_names = {"_normalize", "canonical_json", "canonical_hash"}
     for relative_path in (
-        "pkgs/60-runtime/tigrbl-authz-policy/src/tigrbl_authz_policy/provenance.py",
-        "pkgs/60-runtime/tigrbl-authz-policy/src/tigrbl_authz_policy/assurance.py",
+        "pkgs/60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/provenance.py",
+        "pkgs/60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/assurance.py",
     ):
         tree = ast.parse((ROOT / relative_path).read_text(encoding="utf-8"))
         defined = {

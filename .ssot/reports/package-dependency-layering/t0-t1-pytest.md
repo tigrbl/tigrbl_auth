@@ -15,6 +15,6 @@ Result:
 Scope:
 
 - classifies every Python package under `pkgs/` into foundation, facade, or downstream backend;
-- verifies foundational imports of `tigrbl_auth` are limited to the T1 exception ledger;
-- verifies new authn/authz/protocol packages do not import the `tigrbl_auth` facade;
+- verifies foundational imports of `tba_auth` are limited to the T1 exception ledger;
+- verifies new authn/authz/protocol packages do not import the `tba_auth` facade;
 - verifies frontend UIX workspaces do not import Python facade modules.

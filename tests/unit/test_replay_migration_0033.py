@@ -3,7 +3,7 @@ import importlib
 from sqlalchemy import create_engine, inspect
 
 migration = importlib.import_module(
-    "tigrbl_identity_storage.migrations.versions.0033_replay_reservations"
+    "tba_storage_core.migrations.versions.0033_replay_reservations"
 )
 
 

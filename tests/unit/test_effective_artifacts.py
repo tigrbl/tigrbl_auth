@@ -2,12 +2,12 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from tigrbl_auth.cli.artifacts import (
+from tba_auth.cli.artifacts import (
     build_effective_claims_manifest,
     build_openapi_contract,
     deployment_from_options,
 )
-from tigrbl_auth.config.deployment import ROUTE_REGISTRY
+from tba_auth.config.deployment import ROUTE_REGISTRY
 
 
 def test_effective_claims_do_not_exceed_profile_boundary() -> None:

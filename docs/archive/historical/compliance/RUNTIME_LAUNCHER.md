@@ -92,8 +92,8 @@ Runtime startup/shutdown evidence now writes under:
 
 Validated in this environment:
 
-- `python -m tigrbl_auth.cli.main serve --server uvicorn --dry-run` returns success and emits a runtime plan without launch
-- `python -m tigrbl_auth.cli.main doctor` returns success and reports runner-profile state
+- `python -m tba_auth.cli.main serve --server uvicorn --dry-run` returns success and emits a runtime plan without launch
+- `python -m tba_auth.cli.main doctor` returns success and reports runner-profile state
 - generated CLI docs include the new serve flags and backend-scoped runner flags
 
 ### Direct runner validation
@@ -122,9 +122,9 @@ Reasons:
 
 ## Exit-criteria status for this checkpoint
 
-- `tigrbl-auth serve --server uvicorn` launches a live process: **implemented**, adapter-level validated, environment app probe still blocked by missing dependencies
-- `tigrbl-auth serve --server hypercorn` launches a live process: **implemented**, adapter-level validated, environment app probe still blocked by missing dependencies
-- `tigrbl-auth serve --server tigrcorn` launches a live process: **implemented through adapter contract**, installed-environment validation still pending
+- `tba-auth serve --server uvicorn` launches a live process: **implemented**, adapter-level validated, environment app probe still blocked by missing dependencies
+- `tba-auth serve --server hypercorn` launches a live process: **implemented**, adapter-level validated, environment app probe still blocked by missing dependencies
+- `tba-auth serve --server tigrcorn` launches a live process: **implemented through adapter contract**, installed-environment validation still pending
 - `--dry-run` produces a runtime plan without launch: **complete**
 - `doctor` reports installed / missing / invalid runner profiles: **complete**
 

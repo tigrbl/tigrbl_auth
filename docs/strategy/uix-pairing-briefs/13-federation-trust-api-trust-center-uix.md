@@ -1,9 +1,9 @@
 # Federation and Trust API + Trust Center UIX Requirements Brief
 
-**Proposed pairing:** `tigrbl-auth-router-federation-trust` + `@tigrbl-auth/trust-center-uix`<br>
+**Proposed pairing:** `tba-router-federation-trust` + `@tba/ui-trust-center`<br>
 **Status:** New product surface; relevant contracts, providers, graphs, discovery, JOSE, storage, and tenant authority foundations exist<br>
 **Prepared:** July 11, 2026<br>
-**Proposed router owner:** `pkgs/80-routers/tigrbl-auth-router-federation-trust`<br>
+**Proposed router owner:** `pkgs/80-routers/tba-router-federation-trust`<br>
 **Proposed UIX owner:** `pkgs/105-ui/trust-center-uix`
 
 ## 1. Product Decision
@@ -100,7 +100,7 @@ This is also a timely standards opportunity. OpenID Federation 1.0 became a Fina
 
 ### Existing packages retain ownership
 
-- identity and federation contracts remain in `tigrbl-identity-contracts`;
+- identity and federation contracts remain in `tba-contracts-identity`;
 - cryptographic implementation remains in JOSE/security provider packages;
 - protocol flow remains in OAuth, OIDC, and RP packages;
 - durable graph and identity records remain in storage;
@@ -475,13 +475,13 @@ Guardrails include account-link collisions, cross-tenant disclosure, unreviewed 
 
 ### Repository evidence
 
-- `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/federation/`
-- `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/oidc/federation.py`
-- `pkgs/20-providers/tigrbl-security-oidc-federation-provider/`
-- `pkgs/30-storage-runtime/tigrbl-identity-admin-trust-federation-graph/`
-- `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/trust_federation_graph/`
-- `pkgs/20-providers/tigrbl-identity-jose/`
-- `pkgs/20-providers/tigrbl-security-token-jwks-cache/`
+- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/federation/`
+- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/oidc/federation.py`
+- `pkgs/20-providers/tba-provider-security-oidc-federation/`
+- `pkgs/30-storage-runtime/tba-durability-identity-admin-trust-federation-graph/`
+- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/trust_federation_graph/`
+- `pkgs/20-providers/tba-provider-identity-jose/`
+- `pkgs/20-providers/tba-provider-security-token-jwks-cache/`
 - `docs/compliance/tenant_trust_domain_authority_phase3.md`
 - `docs/oidc-party-vendor-support-matrix.md`
 - `docs/iam-ciam-pam-focus.md`

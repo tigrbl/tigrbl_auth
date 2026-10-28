@@ -7,7 +7,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   modules:
-  - tigrbl_auth/standards/oauth2/rfc7636_pkce.py
+  - tba_auth/standards/oauth2/rfc7636_pkce.py
   tests:
   - tests/conformance/baseline/test_rfc7636_pkce.py
   - tests/integration/test_authorization_code_flow.py
@@ -47,6 +47,6 @@ reports:
 - docs/compliance/certification_state_report.json
 - docs/compliance/certification_state_report.md
 contracts:
-- specs/openapi/profiles/baseline/tigrbl_auth.public.openapi.json
+- specs/openapi/profiles/baseline/tba_auth.public.openapi.json
 scenario_ids:
 - rfc-7636

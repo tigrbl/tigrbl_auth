@@ -8,41 +8,41 @@ from types import SimpleNamespace
 import pytest
 from httpx import ASGITransport, AsyncClient
 
-from tigrbl_auth.config.deployment import (
+from tba_auth.config.deployment import (
     DEFAULT_VALUES,
     PRODUCT_SURFACE_REGISTRY,
     SURFACE_SET_REGISTRY,
     resolve_deployment,
 )
-from tigrbl_auth_backend_app_core.surfaces import admin_resource_path_prefixes
-from tigrbl_auth_backend_app_core import surfaces
+from tba_app_backend_core.surfaces import admin_resource_path_prefixes
+from tba_app_backend_core import surfaces
 
 
 ROOT = Path(__file__).resolve().parents[2]
 BACKEND_APP_PACKAGES = {
     "public-app": (
-        "tigrbl_auth_backend_app_public",
-        ROOT / "pkgs/90-backend-apps/tigrbl-auth-backend-app-public/src",
+        "tba_app_backend_public",
+        ROOT / "pkgs/90-backend-apps/tba-app-backend-public/src",
     ),
     "platform-admin-app": (
-        "tigrbl_auth_backend_app_platform_admin",
-        ROOT / "pkgs/90-backend-apps/tigrbl-auth-backend-app-platform-admin/src",
+        "tba_app_backend_platform_admin",
+        ROOT / "pkgs/90-backend-apps/tba-app-backend-platform-admin/src",
     ),
     "tenant-admin-app": (
-        "tigrbl_auth_backend_app_tenant_admin",
-        ROOT / "pkgs/90-backend-apps/tigrbl-auth-backend-app-tenant-admin/src",
+        "tba_app_backend_tenant_admin",
+        ROOT / "pkgs/90-backend-apps/tba-app-backend-tenant-admin/src",
     ),
     "developer-app": (
-        "tigrbl_auth_backend_app_developer",
-        ROOT / "pkgs/90-backend-apps/tigrbl-auth-backend-app-developer/src",
+        "tba_app_backend_developer",
+        ROOT / "pkgs/90-backend-apps/tba-app-backend-developer/src",
     ),
     "service-admin-app": (
-        "tigrbl_auth_backend_app_service_admin",
-        ROOT / "pkgs/90-backend-apps/tigrbl-auth-backend-app-service-admin/src",
+        "tba_app_backend_service_admin",
+        ROOT / "pkgs/90-backend-apps/tba-app-backend-service-admin/src",
     ),
     "resource-validation-app": (
-        "tigrbl_auth_backend_app_resource_validation",
-        ROOT / "pkgs/90-backend-apps/tigrbl-auth-backend-app-resource-validation/src",
+        "tba_app_backend_resource_validation",
+        ROOT / "pkgs/90-backend-apps/tba-app-backend-resource-validation/src",
     ),
 }
 
@@ -73,8 +73,8 @@ def test_product_surfaces_are_registered_as_named_surface_sets() -> None:
 def test_backend_app_surface_resources_are_canonical_storage_tables() -> None:
     for resource in surfaces.TABLE_RESOURCES:
         module_name = resource.__module__
-        assert module_name.startswith("tigrbl_identity_storage_")
-        assert not module_name.startswith("tigrbl_identity_storage.tables.")
+        assert module_name.startswith("tba_storage_core_")
+        assert not module_name.startswith("tba_storage_core.tables.")
 
 
 @pytest.mark.parametrize("product_surface", sorted(BACKEND_APP_PACKAGES))

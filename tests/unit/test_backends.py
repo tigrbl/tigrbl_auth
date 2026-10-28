@@ -10,9 +10,9 @@ from uuid import uuid4
 
 import pytest
 
-from tigrbl_credentials.backends import AuthError, PasswordBackend, ApiKeyBackend
-from tigrbl_identity_jose.key_management import hash_pw
-from tigrbl_identity_storage.tables import (
+from tba_credentials.backends import AuthError, PasswordBackend, ApiKeyBackend
+from tba_provider_identity_jose.key_management import hash_pw
+from tba_storage_core.tables import (
     CredentialApiKey,
     CredentialServiceKey,
     ServiceIdentity,

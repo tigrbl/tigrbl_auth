@@ -36,15 +36,15 @@ def _enum_class_names(path: Path) -> set[str]:
 
 
 def test_reusable_enums_resolve_from_contract_packages() -> None:
-    from tigrbl_identity_contracts import (
+    from tba_contracts_identity import (
         AdminResourceKind,
         AdminResourceStatus,
     )
-    from tigrbl_identity_admin._control_plane import models as legacy_admin_models
-    from tigrbl_identity_admin_control_plane import models as admin_models
-    from tigrbl_identity_jose import boundary, keys
-    from tigrbl_identity_principals import factories as principal_factories
-    from tigrbl_identity_contracts import (
+    from tba_runtime_identity_administration._control_plane import models as legacy_admin_models
+    from tba_runtime_identity_administration_control_plane import models as admin_models
+    from tba_provider_identity_jose import boundary, keys
+    from tba_concrete_identity_principals import factories as principal_factories
+    from tba_contracts_identity import (
         BrowserStoragePolicy,
         OAuthGrantStatus,
         OidcSessionStatus,
@@ -52,10 +52,10 @@ def test_reusable_enums_resolve_from_contract_packages() -> None:
         PrincipalStatus,
         TokenType,
     )
-    from tigrbl_auth_protocol_oauth import protocol as oauth_protocol
-    from tigrbl_auth_protocol_oauth.standards._rfc8693 import runtime as token_exchange
-    from tigrbl_auth_protocol_oidc import provider as oidc_provider
-    from tigrbl_auth_protocol_rp import client as rp_client
+    from tba_protocol_oauth import protocol as oauth_protocol
+    from tba_protocol_oauth.standards._rfc8693 import runtime as token_exchange
+    from tba_protocol_oidc import provider as oidc_provider
+    from tba_protocol_oidc_relying_party import client as rp_client
 
     assert boundary.JoseKeyStatus is keys.JoseKeyStatus
     assert boundary.JoseKeyUse is keys.JoseKeyUse

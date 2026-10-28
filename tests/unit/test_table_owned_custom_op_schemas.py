@@ -11,15 +11,15 @@ STORAGE_SRC = (
     ROOT
     / "pkgs"
     / "01-storage"
-    / "tigrbl-identity-storage"
+    / "tba-storage-core"
     / "src"
-    / "tigrbl_identity_storage"
+    / "tba_storage_core"
 )
 
 
 def test_protocol_wire_schemas_are_not_owned_by_storage_tables() -> None:
-    from tigrbl_auth_protocol_oauth import schemas as oauth_schemas
-    from tigrbl_auth_protocol_oidc import schemas as oidc_schemas
+    from tba_protocol_oauth import schemas as oauth_schemas
+    from tba_protocol_oidc import schemas as oidc_schemas
 
     assert oauth_schemas.TokenPair.__module__ == oauth_schemas.__name__
     assert (
@@ -46,15 +46,15 @@ def test_protocol_wire_schemas_are_not_owned_by_storage_tables() -> None:
     )
     for module_name in storage_modules:
         module = importlib.import_module(
-            f"tigrbl_identity_storage.tables.{module_name}"
+            f"tba_storage_core.tables.{module_name}"
         )
         assert forbidden_schema_names.isdisjoint(vars(module))
 
 
 def test_admin_auth_schemas_are_owned_by_the_server_runtime() -> None:
-    from tigrbl_identity_server import admin_auth
-    from tigrbl_identity_storage.tables import User
-    from tigrbl_identity_storage.tables import user as storage_user
+    from tba_server_identity import admin_auth
+    from tba_storage_core.tables import User
+    from tba_storage_core.tables import user as storage_user
 
     assert admin_auth.CredsIn.__module__ == admin_auth.__name__
     assert admin_auth.AdminSessionOut.__module__ == admin_auth.__name__
@@ -65,8 +65,8 @@ def test_admin_auth_schemas_are_owned_by_the_server_runtime() -> None:
 
 
 def test_storage_tables_export_table_inventory_without_schema_namespaces() -> None:
-    storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
-    auth_tables = importlib.import_module("tigrbl_auth.tables")
+    storage_tables = importlib.import_module("tba_storage_core.tables")
+    auth_tables = importlib.import_module("tba_auth.tables")
 
     assert storage_tables.Role in storage_tables.TABLE_MODELS
     assert storage_tables.TABLE_MODEL_BY_NAME["Role"] is storage_tables.Role
@@ -80,18 +80,18 @@ def test_storage_tables_export_table_inventory_without_schema_namespaces() -> No
     assert "RoleCreateRequest" not in storage_tables.__all__
 
     with pytest.raises(ImportError):
-        exec("from tigrbl_identity_storage.tables import RoleSchemas", {})
+        exec("from tba_storage_core.tables import RoleSchemas", {})
 
 
 def test_storage_package_has_no_openapi_schema_registry() -> None:
-    assert importlib.util.find_spec("tigrbl_identity_storage.schemas") is None
-    assert importlib.util.find_spec("tigrbl_identity_storage.schema_registry") is None
+    assert importlib.util.find_spec("tba_storage_core.schemas") is None
+    assert importlib.util.find_spec("tba_storage_core.schema_registry") is None
 
 
 def test_protocol_schema_owner_covers_mounted_token_component() -> None:
-    from tigrbl_auth_protocol_oauth.schemas import TokenPair
-    from tigrbl_identity_runtime.deployment import resolve_deployment
-    from tigrbl_auth_backend_app_core.surfaces import build_public_router
+    from tba_protocol_oauth.schemas import TokenPair
+    from tba_runtime_identity.deployment import resolve_deployment
+    from tba_app_backend_core.surfaces import build_public_router
 
     surface_api = build_public_router(
         deployment=resolve_deployment(plugin_mode="mixed")
@@ -108,7 +108,7 @@ def test_storage_package_does_not_import_identity_contract_schemas() -> None:
     offenders = []
     for path in STORAGE_SRC.rglob("*.py"):
         source = path.read_text(encoding="utf-8")
-        if "tigrbl_identity_contracts" in source:
+        if "tba_contracts_identity" in source:
             offenders.append(path.relative_to(ROOT).as_posix())
 
     assert offenders == []
@@ -116,13 +116,13 @@ def test_storage_package_does_not_import_identity_contract_schemas() -> None:
 
 def test_storage_package_metadata_does_not_depend_on_higher_layers() -> None:
     pyproject = (
-        ROOT / "pkgs" / "01-storage" / "tigrbl-identity-storage" / "pyproject.toml"
+        ROOT / "pkgs" / "01-storage" / "tba-storage-core" / "pyproject.toml"
     )
     source = pyproject.read_text(encoding="utf-8")
 
-    assert "tigrbl-authz-resource-server" not in source
-    assert "tigrbl-identity-contracts" not in source
-    assert "tigrbl-identity-storage-runtime" not in source
+    assert "tba-protocol-authorization-resource-server" not in source
+    assert "tba-contracts-identity" not in source
+    assert "tba-runtime-identity-storage" not in source
 
 
 def test_storage_does_not_define_a_parallel_directional_schema_helper() -> None:

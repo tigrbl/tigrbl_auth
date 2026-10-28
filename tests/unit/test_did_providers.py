@@ -1,7 +1,7 @@
 import pytest
-from tigrbl_did_concrete import parse_did, parse_did_document, parse_did_url
-from tigrbl_did_controller_provider import DidControllerProvider
-from tigrbl_did_resolver_provider import VersionedDidResolverProvider
+from tba_concrete_did import parse_did, parse_did_document, parse_did_url
+from tba_provider_did_controller import DidControllerProvider
+from tba_provider_did_resolver import VersionedDidResolverProvider
 
 
 def _document(key: str = "abc"):

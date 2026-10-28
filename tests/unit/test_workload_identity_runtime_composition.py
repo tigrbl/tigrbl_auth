@@ -1,5 +1,5 @@
 import pytest
-from tigrbl_identity_runtime.composition.workload_identity import WorkloadIdentityRuntimeConfig, build_workload_identity_composition
+from tba_runtime_identity.composition.workload_identity import WorkloadIdentityRuntimeConfig, build_workload_identity_composition
 
 def deps(): return {"credential_provider": object(), "credential_verifier": object()}
 

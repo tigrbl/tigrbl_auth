@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import pytest
 
-from tigrbl_identity_contracts.tokens import TokenRevocationRequest
-from tigrbl_token_revocation_capability import TokenRevocationCapability
+from tba_contracts_identity.tokens import TokenRevocationRequest
+from tba_capability_token_revocation import TokenRevocationCapability
 
 
 def test_revocation_capability_requires_durable_target() -> None:

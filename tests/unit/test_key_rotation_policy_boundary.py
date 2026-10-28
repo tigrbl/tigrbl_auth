@@ -9,8 +9,8 @@ for src in (ROOT / "pkgs").glob("*/src"):
     if value not in sys.path:
         sys.path.insert(0, value)
 
-import tigrbl_identity_jose as jose
-from tigrbl_identity_contracts.evidence.key_rotation import KeyRotationAuditEvidence
+import tba_provider_identity_jose as jose
+from tba_contracts_identity.evidence.key_rotation import KeyRotationAuditEvidence
 
 
 SCOPE = {

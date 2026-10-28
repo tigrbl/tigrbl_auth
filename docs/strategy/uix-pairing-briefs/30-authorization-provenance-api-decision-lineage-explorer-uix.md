@@ -1,6 +1,6 @@
 # Authorization Provenance API + Decision Lineage Explorer UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-router-authorization-provenance` + `@tigrbl-auth/decision-lineage-explorer-uix`<br>
+**Pairing:** `tba-router-authorization-provenance` + `@tba/decision-lineage-explorer-uix`<br>
 **Additional opportunity:** Authorization/delegation/sovereignty extension 1<br>
 **Primary buyers:** security engineering, authorization platform teams, application owners, audit/compliance, incident response, and regulated operations<br>
 **Status:** proposed product surface; deterministic trace, replay, policy, authority graph, token persistence, and audit foundations exist
@@ -674,13 +674,13 @@ Faster investigation is useful only if explanations remain correct, privacy-safe
 - `docs/strategy/uix-pairing-briefs/12-authorization-decision-api-policy-studio-uix.md`
 - `.ssot/specs/SPEC-1093-authorization-decision-trace-and-reproducibility-requirements.yaml`
 - `.ssot/specs/SPEC-1212-policy-determinism-and-decision-stability-contract.yaml`
-- `pkgs/20-providers/tigrbl-security-authorization-provenance-builder/`
-- `pkgs/05-bases/tigrbl-security-provenance-bases/`
-- `pkgs/20-providers/tigrbl-authz-policy/`
-- `pkgs/20-providers/tigrbl-authz-policy-decision-engine/`
-- `pkgs/30-storage-runtime/tigrbl-authz-policy-authority-derivation-graph/`
-- `pkgs/02-contracts/tigrbl-security-trust-contracts/`
-- `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/replay/`
+- `pkgs/20-providers/tba-provider-security-authorization-provenance-builder/`
+- `pkgs/05-bases/tba-bases-security-provenance/`
+- `pkgs/20-providers/tba-runtime-authorization-policy/`
+- `pkgs/20-providers/tba-provider-authorization-policy-decision-engine/`
+- `pkgs/30-storage-runtime/tba-durability-authorization-policy-authority-derivation-graph/`
+- `pkgs/02-contracts/tba-contracts-security-trust/`
+- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/replay/`
 - `tests/unit/test_authorization_provenance.py`
 - `tests/unit/test_policy_determinism_replay.py`
 - `tests/unit/test_decision_stability_policy_versions.py`

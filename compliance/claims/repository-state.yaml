@@ -12,7 +12,7 @@ repository_state:
   evidence_plane_initialized: true
   waiver_plane_initialized: true
   adr_index_present: true
-  tigrbl_public_api_only_runtime: true
+  tba_public_api_only_runtime: true
   release_path_framework_fallbacks_removed: true
   no_fastapi_starlette_verified_scopes:
   - runtime_package

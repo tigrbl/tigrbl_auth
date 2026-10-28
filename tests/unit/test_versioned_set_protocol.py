@@ -1,10 +1,10 @@
 import pytest
 
-from tigrbl_claim_audience_concrete import AudienceClaim
-from tigrbl_claim_issued_at_concrete import IssuedAtClaim
-from tigrbl_claim_issuer_concrete import IssuerClaim
-from tigrbl_claim_jwt_id_concrete import JwtIdClaim
-from tigrbl_security_event_protocol_set import (
+from tba_concrete_claim_audience import AudienceClaim
+from tba_concrete_claim_issued_at import IssuedAtClaim
+from tba_concrete_claim_issuer import IssuerClaim
+from tba_concrete_claim_jwt_id import JwtIdClaim
+from tba_protocol_security_event_set import (
     CAPABILITY_REQUIREMENTS,
     CURRENT_VERSION,
     SET_JWT_CARRIER,
@@ -16,7 +16,7 @@ from tigrbl_security_event_protocol_set import (
     select_carrier,
     supports,
 )
-from tigrbl_claim_security_events_concrete import SecurityEventsClaim
+from tba_concrete_claim_security_events import SecurityEventsClaim
 
 
 def test_set_owns_rfc_8417_version_and_features() -> None:

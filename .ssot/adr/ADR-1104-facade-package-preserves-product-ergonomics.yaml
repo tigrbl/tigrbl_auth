@@ -8,30 +8,30 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "Keep `tigrbl-auth` as the product and compatibility facade."
+summary: "Keep `tba-auth` as the product and compatibility facade."
 supersedes: []
 superseded_by: []
 status_notes:
   -
     at: "2026-05-18T08:13:08Z"
-    note: "Retain tigrbl-auth as a public facade and compatibility package."
+    note: "Retain tba-auth as a public facade and compatibility package."
     status: "accepted"
   -
     at: "2026-05-27T16:58:22Z"
-    note: "Clarified by adr:1121: tigrbl_auth.tables, tigrbl_auth.orm, DB helpers, and persistence helpers are permanent compatibility facades over canonical identity storage symbols."
+    note: "Clarified by adr:1121: tba_auth.tables, tba_auth.orm, DB helpers, and persistence helpers are permanent compatibility facades over canonical identity storage symbols."
     status: "accepted"
   -
     status: "accepted"
-    note: "Facade ergonomics now has a hard boundary guard: tigrbl_auth remains above foundational packages and cannot be imported by them except named T1 migration exceptions slated for T2 removal."
+    note: "Facade ergonomics now has a hard boundary guard: tba_auth remains above foundational packages and cannot be imported by them except named T1 migration exceptions slated for T2 removal."
     at: "2026-06-14T22:51:18Z"
 references: []
 body: |-
   ## Decision
-  
-  Keep `tigrbl-auth` as the product and compatibility facade.
-  
+
+  Keep `tba-auth` as the product and compatibility facade.
+
   It may expose:
-  
+
   - `create_app`
   - `create_gateway`
   - `install_plugin`
@@ -40,27 +40,27 @@ body: |-
   - selected public contracts
   - install extras for common profiles
   - compatibility imports during migration
-  
+
   ## Context
-  
-  Existing users know the package as `tigrbl-auth` and `tigrbl_auth`. A split
+
+  Existing users know the package as `tba-auth` and `tba_auth`. A split
   package suite improves boundaries, but external consumers still need stable
   ergonomic entrypoints.
-  
+
   A facade also lets the project publish common install profiles without
   exposing internal package layout as the primary user experience.
-  
+
   ## Constraints
-  
+
   The facade MUST NOT become an internal module graveyard.
-  
+
   Compatibility re-exports MUST be explicit, tested, and staged for deprecation
   where appropriate.
-  
-  New implementation ownership belongs in the `tigrbl-identity-*` packages.
-  
+
+  New implementation ownership belongs in the `tba-identity-*` packages.
+
   ## Consequences
-  
+
   The project can improve internal architecture without forcing immediate
   consumer churn. The facade remains the public ergonomic layer, not the
   implementation home.

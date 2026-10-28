@@ -6,12 +6,12 @@ import json
 
 import pytest
 
-from tigrbl_auth import load_pqc_public_jwk, load_pqc_signing_jwk, sign_jws, verify_jws
-from tigrbl_auth.jwtoken import JWTCoder
-from tigrbl_auth.runtime_cfg import settings as facade_settings
-from tigrbl_auth_protocol_oauth.standards._rfc9700.sender_constraints import discovery_policy_metadata
-from tigrbl_identity_jose import key_management
-from tigrbl_identity_jose.pqc import (
+from tba_auth import load_pqc_public_jwk, load_pqc_signing_jwk, sign_jws, verify_jws
+from tba_auth.jwtoken import JWTCoder
+from tba_auth.runtime_cfg import settings as facade_settings
+from tba_protocol_oauth.standards._rfc9700.sender_constraints import discovery_policy_metadata
+from tba_provider_identity_jose import key_management
+from tba_provider_identity_jose.pqc import (
     ML_DSA_65_ALG,
     PQC_REQUIRED_DEPENDENCY,
     generate_pqc_signature_keypair,
@@ -21,8 +21,8 @@ from tigrbl_identity_jose.pqc import (
     sign_pqc_payload,
     verify_pqc_signature,
 )
-from tigrbl_identity_runtime.deployment import resolve_deployment
-from tigrbl_identity_runtime.settings import settings as runtime_settings
+from tba_runtime_identity.deployment import resolve_deployment
+from tba_runtime_identity.settings import settings as runtime_settings
 
 
 def _jwt_header(token: str) -> dict[str, object]:
@@ -38,7 +38,7 @@ def test_pqc_signature_round_trip_uses_required_backend() -> None:
     assert report["available"] is True
 
     keypair = generate_pqc_signature_keypair()
-    payload = b"tigrbl-auth-pqc-runtime"
+    payload = b"tba-auth-pqc-runtime"
     signature = sign_pqc_payload(payload, keypair.secret_key)
 
     assert keypair.algorithm == ML_DSA_65_ALG

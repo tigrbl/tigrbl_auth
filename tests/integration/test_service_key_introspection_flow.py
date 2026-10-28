@@ -23,12 +23,12 @@ async def _wait_for_app(base_url: str) -> None:
 
 @pytest.fixture()
 async def running_app(override_get_db):
-    from tigrbl_auth.runtime_cfg import settings
+    from tba_auth.runtime_cfg import settings
 
     original = settings.enable_rfc7662
     settings.enable_rfc7662 = True
     cfg = uvicorn.Config(
-        "tigrbl_auth_backend_app_public:app", host="127.0.0.1", port=8001, log_level="warning"
+        "tba_app_backend_public:app", host="127.0.0.1", port=8001, log_level="warning"
     )
     server = uvicorn.Server(cfg)
     task = asyncio.create_task(server.serve())

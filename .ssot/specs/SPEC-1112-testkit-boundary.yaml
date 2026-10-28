@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification governs `tigrbl-identity-testkit`."
+summary: "This specification governs `tba-testkit-identity`."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -20,7 +20,7 @@ references: []
 body: |-
   ## Scope
   
-  This specification governs `tigrbl-identity-testkit`.
+  This specification governs `tba-testkit-identity`.
   
   ## First-Class Objects
   
@@ -52,7 +52,7 @@ body: |-
   ## Verification
   
   Verification MUST include a production import scan that fails if any
-  production package imports `tigrbl_identity.testkit`.
+  production package imports `tba_identity.testkit`.
 spec_kind: "operational"
 adr_ids:
   - "adr:1096"

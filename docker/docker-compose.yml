@@ -1,24 +1,24 @@
 services:
-  tigrbl-auth:
+  tba-auth:
     build:
       context: ..
       dockerfile: docker/Dockerfile.dev-tigrbl
-    image: tigrbl-auth-local:latest
-    container_name: tigrbl-auth-local
+    image: tba-auth-local:latest
+    container_name: tba-auth-local
     ports:
       - "8001:8000"
     environment:
-      TIGRBL_AUTH_INSTALL_PROFILE: tigrcorn
+      TBA_AUTH_INSTALL_PROFILE: tigrcorn
       AUTHN_ISSUER: ${AUTHN_ISSUER:-http://localhost:8001}
-      TIGRBL_AUTH_PROTECTED_RESOURCE_IDENTIFIER: ${TIGRBL_AUTH_PROTECTED_RESOURCE_IDENTIFIER:-http://localhost:8001/resource}
-      TIGRBL_AUTH_REQUIRE_TLS: "false"
-      TIGRBL_AUTH_SESSION_COOKIE_FORCE_SECURE: "false"
-      TIGRBL_AUTH_BOOTSTRAP_ADMIN_USERNAME: ${TIGRBL_AUTH_BOOTSTRAP_ADMIN_USERNAME:-admin}
-      TIGRBL_AUTH_BOOTSTRAP_ADMIN_EMAIL: ${TIGRBL_AUTH_BOOTSTRAP_ADMIN_EMAIL:-admin@example.test}
-      TIGRBL_AUTH_BOOTSTRAP_ADMIN_PASSWORD: ${TIGRBL_AUTH_BOOTSTRAP_ADMIN_PASSWORD:-AdminPass123!}
-      TIGRBL_AUTH_BOOTSTRAP_ADMIN_FORCE_PASSWORD_CHANGE: ${TIGRBL_AUTH_BOOTSTRAP_ADMIN_FORCE_PASSWORD_CHANGE:-true}
-      TIGRBL_AUTH_ADMIN_PASSWORD_RESET_DEBUG_DISCLOSURE: "true"
-      TIGRBL_AUTH_ADMIN_API_KEY: ${TIGRBL_AUTH_ADMIN_API_KEY:-}
+      TBA_AUTH_PROTECTED_RESOURCE_IDENTIFIER: ${TBA_AUTH_PROTECTED_RESOURCE_IDENTIFIER:-http://localhost:8001/resource}
+      TBA_AUTH_REQUIRE_TLS: "false"
+      TBA_AUTH_SESSION_COOKIE_FORCE_SECURE: "false"
+      TBA_AUTH_BOOTSTRAP_ADMIN_USERNAME: ${TBA_AUTH_BOOTSTRAP_ADMIN_USERNAME:-admin}
+      TBA_AUTH_BOOTSTRAP_ADMIN_EMAIL: ${TBA_AUTH_BOOTSTRAP_ADMIN_EMAIL:-admin@example.test}
+      TBA_AUTH_BOOTSTRAP_ADMIN_PASSWORD: ${TBA_AUTH_BOOTSTRAP_ADMIN_PASSWORD:-AdminPass123!}
+      TBA_AUTH_BOOTSTRAP_ADMIN_FORCE_PASSWORD_CHANGE: ${TBA_AUTH_BOOTSTRAP_ADMIN_FORCE_PASSWORD_CHANGE:-true}
+      TBA_AUTH_ADMIN_PASSWORD_RESET_DEBUG_DISCLOSURE: "true"
+      TBA_AUTH_ADMIN_API_KEY: ${TBA_AUTH_ADMIN_API_KEY:-}
       PG_HOST: ""
       PG_PORT: "5432"
       PG_DB: ""
@@ -30,28 +30,28 @@ services:
 
   admin-uix:
     build:
-      context: ../pkgs/105-ui/admin-uix
+      context: ../pkgs/105-ui/tba-ui-admin
       dockerfile: Dockerfile
-    image: tigrbl-auth-admin-uix-local:latest
-    container_name: tigrbl-auth-admin-uix-local
+    image: tba-auth-admin-uix-local:latest
+    container_name: tba-auth-admin-uix-local
     ports:
       - "8081:80"
     environment:
-      TIGRBL_AUTH_BACKEND_UPSTREAM: http://tigrbl-auth:8000
+      TBA_AUTH_BACKEND_UPSTREAM: http://tba-auth:8000
     depends_on:
-      - tigrbl-auth
+      - tba-auth
     restart: unless-stopped
 
   public-uix:
     build:
-      context: ../pkgs/105-ui/public-uix
+      context: ../pkgs/105-ui/tba-ui-public
       dockerfile: Dockerfile
-    image: tigrbl-auth-public-uix-local:latest
-    container_name: tigrbl-auth-public-uix-local
+    image: tba-auth-public-uix-local:latest
+    container_name: tba-auth-public-uix-local
     ports:
       - "8082:80"
     environment:
-      TIGRBL_AUTH_BACKEND_UPSTREAM: http://tigrbl-auth:8000
+      TBA_AUTH_BACKEND_UPSTREAM: http://tba-auth:8000
     depends_on:
-      - tigrbl-auth
+      - tba-auth
     restart: unless-stopped

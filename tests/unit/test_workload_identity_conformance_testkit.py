@@ -1,4 +1,4 @@
-from tigrbl_workload_credential_conformance_testkit import VECTORS
+from tba_testkit_workload_credential_conformance import VECTORS
 from workload_credential_profiles_example import run_example
 
 def test_vectors_cover_required_confusion_boundaries() -> None:

@@ -19,9 +19,9 @@ This checkpoint converts runtime validation from a **declared metadata posture**
 The repository now contains runnable clean-room commands that perform all of the following in supported environments:
 
 - application-factory import and build
-- `tigrbl-auth serve --check --server uvicorn`
-- `tigrbl-auth serve --check --server hypercorn`
-- `tigrbl-auth serve --check --server tigrcorn` for the kept Tigrcorn profile on Python 3.11 / 3.12
+- `tba-auth serve --check --server uvicorn`
+- `tba-auth serve --check --server hypercorn`
+- `tba-auth serve --check --server tigrcorn` for the kept Tigrcorn profile on Python 3.11 / 3.12
 - smoke probes for discovery, JWKS, and public contract endpoints against the ASGI application
 
 These commands are now wired into both `tox.ini` and the clean-room CI workflows so the runtime path is exercised rather than inferred from metadata alone.

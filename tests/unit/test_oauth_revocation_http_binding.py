@@ -4,14 +4,14 @@ from types import SimpleNamespace
 
 import pytest
 
-from tigrbl_auth_router_oauth_revocation.binding import (
+from tba_router_oauth_revocation.binding import (
     _request_form_data,
     build_revocation_router,
 )
-from tigrbl_auth_protocol_oauth.standards.revocation import (
+from tba_protocol_oauth.standards.revocation import (
     RFC7009RevocationService,
 )
-from tigrbl_token_revocation_capability import TokenRevocationCapability
+from tba_capability_token_revocation import TokenRevocationCapability
 
 
 @pytest.mark.asyncio

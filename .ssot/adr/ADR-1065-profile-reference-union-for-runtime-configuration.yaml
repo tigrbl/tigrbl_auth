@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "`tigrbl_auth` shall treat `--profile` as the single runtime configuration selector."
+summary: "`tba_auth` shall treat `--profile` as the single runtime configuration selector."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -20,7 +20,7 @@ references: []
 body: |-
   ## Decision
   
-  `tigrbl_auth` shall treat `--profile` as the single runtime configuration selector.
+  `tba_auth` shall treat `--profile` as the single runtime configuration selector.
   
   The `--profile` value shall be a profile reference union:
   

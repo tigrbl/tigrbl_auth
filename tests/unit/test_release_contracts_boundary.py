@@ -16,10 +16,10 @@ for src in sorted((ROOT / "pkgs").glob("*/*/src")):
 
 
 def test_release_contracts_export_release_assurance_dtos() -> None:
-    import tigrbl_release_contracts as contracts
+    import tba_contracts_release as contracts
     import tigrbl_identity_identities_concrete as identity_concrete
-    from tigrbl_auth_release_certification.certification import AlgorithmPolicy, CertificationError
-    from tigrbl_auth_release_certification.certification import MachineIdentity
+    from tba_certification_release.certification import AlgorithmPolicy, CertificationError
+    from tba_certification_release.certification import MachineIdentity
 
     assert contracts.ReleaseAssuranceError is contracts.CertificationError
     assert CertificationError is contracts.CertificationError
@@ -40,9 +40,9 @@ def test_release_certification_modules_do_not_define_moved_contract_classes() ->
         ROOT
         / "pkgs"
         / "60-runtime"
-        / "tigrbl-auth-release-certification"
+        / "tba-certification-release"
         / "src"
-        / "tigrbl_auth_release_certification"
+        / "tba_certification_release"
         / "certification"
     )
     moved = {
@@ -76,9 +76,9 @@ def test_authz_policy_no_longer_exposes_release_certification_or_posture_modules
         ROOT
         / "pkgs"
         / "40-capabilities"
-        / "tigrbl-authz-policy"
+        / "tba-runtime-authorization-policy"
         / "src"
-        / "tigrbl_authz_policy"
+        / "tba_runtime_authorization_policy"
     )
     removed_paths = (
         authz_root / "certification.py",
@@ -90,10 +90,10 @@ def test_authz_policy_no_longer_exposes_release_certification_or_posture_modules
     assert not any(path.exists() for path in removed_paths)
 
     for module_name in (
-        "tigrbl_authz_policy.certification",
-        "tigrbl_authz_policy._certification",
-        "tigrbl_authz_policy.release_posture",
-        "tigrbl_authz_policy._release_posture",
+        "tba_runtime_authorization_policy.certification",
+        "tba_runtime_authorization_policy._certification",
+        "tba_runtime_authorization_policy.release_posture",
+        "tba_runtime_authorization_policy._release_posture",
     ):
         sys.modules.pop(module_name, None)
         with pytest.raises(ModuleNotFoundError):
@@ -105,17 +105,17 @@ def test_release_contracts_do_not_import_runtime_or_capability_packages() -> Non
         ROOT
         / "pkgs"
         / "02-contracts"
-        / "tigrbl-release-contracts"
+        / "tba-contracts-release"
         / "src"
-        / "tigrbl_release_contracts"
+        / "tba_contracts_release"
     )
     forbidden = {
-        "tigrbl_auth",
-        "tigrbl_authz_policy",
-        "tigrbl_identity_author",
-        "tigrbl_identity_cli",
-        "tigrbl_identity_storage",
-        "tigrbl_auth_release_certification",
+        "tba_auth",
+        "tba_runtime_authorization_policy",
+        "tba_runtime_identity_authoring",
+        "tba_cli_identity",
+        "tba_storage_core",
+        "tba_certification_release",
     }
 
     for path in contracts_root.rglob("*.py"):

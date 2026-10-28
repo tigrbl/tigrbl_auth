@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from tigrbl_auth.cli.certification_evidence import current_environment_identity
+from tba_auth.cli.certification_evidence import current_environment_identity
 
 REVISION_0007 = "0007_browser_session_cookie_and_auth_code_linkage"
 SESSION_COLUMNS = {"session_state_salt", "cookie_secret_hash", "cookie_issued_at", "cookie_rotated_at"}
@@ -43,7 +43,7 @@ def _write_json(path: Path, payload: dict[str, Any]) -> None:
 
 
 async def _column_snapshot() -> dict[str, list[str]]:
-    from tigrbl_auth.migrations import column_names_async
+    from tba_auth.migrations import column_names_async
 
     return {
         "sessions": sorted(await column_names_async("sessions")),
@@ -54,14 +54,14 @@ async def _column_snapshot() -> dict[str, list[str]]:
 
 
 async def _schema_snapshot() -> dict[str, Any]:
-    from tigrbl_auth.migrations import verify_schema_async
+    from tba_auth.migrations import verify_schema_async
 
     verification = await verify_schema_async()
     return asdict(verification)
 
 
 def _revision_inventory() -> list[dict[str, Any]]:
-    from tigrbl_auth.migrations import iter_migration_modules
+    from tba_auth.migrations import iter_migration_modules
 
     inventory: list[dict[str, Any]] = []
     for module in iter_migration_modules():
@@ -77,9 +77,9 @@ def _revision_inventory() -> list[dict[str, Any]]:
 
 
 async def _applied_revision_snapshot(revision_order: list[str]) -> list[str]:
-    from tigrbl_auth_backend_app_core.surfaces import surface_api
-    from tigrbl_auth.migrations.helpers import applied_revisions
-    from tigrbl_auth.runtime.engine_resolver import resolve_api_provider
+    from tba_app_backend_core.surfaces import surface_api
+    from tba_auth.migrations.helpers import applied_revisions
+    from tba_auth.runtime.engine_resolver import resolve_api_provider
 
     provider = resolve_api_provider(surface_api)
     if provider is None:
@@ -106,10 +106,10 @@ async def _exercise_backend(
     downgrade_target_revision: str | None,
 ) -> dict[str, Any]:
     from tigrbl.engine import Engine, EngineSpec
-    from tigrbl_auth.app import app
-    from tigrbl_auth_backend_app_core.surfaces import surface_api
-    from tigrbl_auth.migrations import apply_all_async, downgrade_one_async
-    from tigrbl_auth.runtime.engine_resolver import register_api_provider, resolve_api_provider
+    from tba_auth.app import app
+    from tba_app_backend_core.surfaces import surface_api
+    from tba_auth.migrations import apply_all_async, downgrade_one_async
+    from tba_auth.runtime.engine_resolver import register_api_provider, resolve_api_provider
 
     backend_dir = artifact_dir / backend
     backend_dir.mkdir(parents=True, exist_ok=True)
@@ -372,7 +372,7 @@ def main() -> int:
 
     artifact_dir = Path(args.artifact_dir).resolve()
     artifact_dir.mkdir(parents=True, exist_ok=True)
-    os.environ.setdefault("TIGRBL_AUTH_OPERATOR_STATE_DIR", str(artifact_dir / "operator-state"))
+    os.environ.setdefault("TBA_AUTH_OPERATOR_STATE_DIR", str(artifact_dir / "operator-state"))
 
     revision_inventory = _revision_inventory()
     revision_order = [str(item["revision"]) for item in revision_inventory if item.get("revision")]
@@ -381,7 +381,7 @@ def main() -> int:
 
     sqlite_dir = artifact_dir / "sqlite"
     sqlite_dir.mkdir(parents=True, exist_ok=True)
-    sqlite_db = sqlite_dir / "tigrbl_auth_migration_portability.db"
+    sqlite_db = sqlite_dir / "tba_auth_migration_portability.db"
     if sqlite_db.exists():
         sqlite_db.unlink()
     sqlite_result = asyncio.run(

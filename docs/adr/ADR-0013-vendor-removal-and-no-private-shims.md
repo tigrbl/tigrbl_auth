@@ -19,15 +19,15 @@ boundary.
 
 ## Decision
 
-Release-eligible paths in `tigrbl_auth` must not introduce:
+Release-eligible paths in `tba_auth` must not introduce:
 - a `vendor/` directory,
 - copied framework code,
 - private routing or lifecycle shims that impersonate Tigrbl public APIs,
 - boundary-blurring re-export modules that hide the real implementation source.
 
 The supported composition surface is:
-- `tigrbl_auth.plugin`
-- `tigrbl_auth.gateway`
+- `tba_auth.plugin`
+- `tba_auth.gateway`
 - other package modules that use declared Tigrbl public APIs directly.
 
 ## Consequences

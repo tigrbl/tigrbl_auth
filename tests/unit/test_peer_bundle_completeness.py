@@ -3,7 +3,7 @@ from __future__ import annotations
 import shutil
 from pathlib import Path
 
-from tigrbl_auth.cli.reports import verify_peer_bundle_completeness
+from tba_auth.cli.reports import verify_peer_bundle_completeness
 
 
 ROOT = Path(__file__).resolve().parents[2]

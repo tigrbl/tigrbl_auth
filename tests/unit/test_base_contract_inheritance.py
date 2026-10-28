@@ -6,11 +6,11 @@ def _explicitly_inherits(base: type, contract: type) -> bool:
 
 
 def test_authenticator_bases_explicitly_inherit_contracts() -> None:
-    from tigrbl_identity_authenticator_bases import (
+    from tba_bases_identity_authenticator import (
         AuthenticatorBase,
         ChallengeAuthenticatorBase,
     )
-    from tigrbl_identity_contracts.authenticators import (
+    from tba_contracts_identity.authenticators import (
         IAuthenticator,
         IChallengeAuthenticator,
     )
@@ -20,8 +20,8 @@ def test_authenticator_bases_explicitly_inherit_contracts() -> None:
 
 
 def test_security_bases_explicitly_inherit_contracts() -> None:
-    import tigrbl_security_trust_contracts as contracts
-    import tigrbl_security_trust_domain_bases as bases
+    import tba_contracts_security_trust as contracts
+    import tba_bases_security_trust_domain as bases
 
     expected = {
         "CapabilityProviderBase": "ICapabilityProvider",
@@ -55,7 +55,7 @@ def test_security_bases_explicitly_inherit_contracts() -> None:
 
 
 def test_domain_bases_explicitly_inherit_identity_contracts() -> None:
-    from tigrbl_authz_policy_bases import (
+    from tba_bases_authorization_policy import (
         AdviceHandlerBase,
         AttributeResolverBase,
         AttributeSelectorBase,
@@ -65,8 +65,8 @@ def test_domain_bases_explicitly_inherit_identity_contracts() -> None:
         PolicyRuleBase,
         RuleEvaluatorBase,
     )
-    from tigrbl_identity_contracts import Credential, Identity
-    from tigrbl_identity_contracts.policy import (
+    from tba_contracts_identity import Credential, Identity
+    from tba_contracts_identity.policy import (
         AdviceHandlerPort,
         AttributeResolverPort,
         AttributeSelectorPort,
@@ -76,9 +76,9 @@ def test_domain_bases_explicitly_inherit_identity_contracts() -> None:
         PolicyRule,
         RuleEvaluatorPort,
     )
-    from tigrbl_identity_model_bases import CredentialBase, IdentityBase
-    from tigrbl_authz_policy_bases import ScopeMatcherBase
-    from tigrbl_identity_contracts.oauth import ScopeMatcherPort
+    from tba_bases_identity_model import CredentialBase, IdentityBase
+    from tba_bases_authorization_policy import ScopeMatcherBase
+    from tba_contracts_identity.oauth import ScopeMatcherPort
 
     pairs = (
         (IdentityBase, Identity),

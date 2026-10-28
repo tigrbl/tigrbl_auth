@@ -17,9 +17,9 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from tigrbl_auth.cli.artifacts import deployment_from_options, write_effective_claims_manifest, write_effective_evidence_manifest
-from tigrbl_auth.cli.reports import build_evidence_bundle, generate_state_reports, run_release_gates, summarize_evidence_status
-from tigrbl_auth.cli.truth import materialize_truth_chain
+from tba_auth.cli.artifacts import deployment_from_options, write_effective_claims_manifest, write_effective_evidence_manifest
+from tba_auth.cli.reports import build_evidence_bundle, generate_state_reports, run_release_gates, summarize_evidence_status
+from tba_auth.cli.truth import materialize_truth_chain
 from scripts.generate_certification_scope import build_scope, write_boundary_docs, write_yaml as write_scope_yaml
 
 PROMOTED_BASELINE_TARGETS = [
@@ -210,8 +210,8 @@ for group in EVIDENCE_GROUPS:
         TARGET_TO_GROUP[target] = group
 
 CONTRACT_MAP = {
-    "openapi": lambda profile: ROOT / "specs" / "openapi" / "profiles" / profile / "tigrbl_auth.public.openapi.json",
-    "openrpc": lambda profile: ROOT / "specs" / "openrpc" / "profiles" / profile / "tigrbl_auth.admin.openrpc.json",
+    "openapi": lambda profile: ROOT / "specs" / "openapi" / "profiles" / profile / "tba_auth.public.openapi.json",
+    "openrpc": lambda profile: ROOT / "specs" / "openrpc" / "profiles" / profile / "tba_auth.admin.openrpc.json",
     "openid_config": lambda profile: ROOT / "specs" / "discovery" / "profiles" / profile / "openid-configuration.json",
     "oauth_metadata": lambda profile: ROOT / "specs" / "discovery" / "profiles" / profile / "oauth-authorization-server.json",
     "protected_resource": lambda profile: ROOT / "specs" / "discovery" / "profiles" / profile / "oauth-protected-resource.json",
@@ -253,8 +253,8 @@ def sha256_file(path: Path) -> str:
 
 def find_source_zip() -> Path | None:
     candidates = [
-        ROOT.parent / "tigrbl_auth_test_plane_checkpoint_updated.zip",
-        Path("/mnt/data/tigrbl_auth_test_plane_checkpoint_updated.zip"),
+        ROOT.parent / "tba_auth_test_plane_checkpoint_updated.zip",
+        Path("/mnt/data/tba_auth_test_plane_checkpoint_updated.zip"),
     ]
     for candidate in candidates:
         if candidate.exists():
@@ -418,7 +418,7 @@ def rpc_transcript_for_group(group: dict[str, Any]) -> dict[str, Any] | None:
             {
                 "name": method.get("name"),
                 "summary": method.get("summary"),
-                "owner_module": (method.get("x-tigrbl-auth") or {}).get("owner_module"),
+                "owner_module": (method.get("x-tba-auth") or {}).get("owner_module"),
             }
         )
     return {
@@ -472,8 +472,8 @@ def augment_bundle(bundle_dir: Path, promoted_targets: list[str], profile: str, 
             _copy(src, bundle_dir / rel)
             _copy(src, report_dir / Path(rel).name)
     for rel in [
-        f"specs/openapi/profiles/{profile}/tigrbl_auth.public.openapi.json",
-        f"specs/openrpc/profiles/{profile}/tigrbl_auth.admin.openrpc.json",
+        f"specs/openapi/profiles/{profile}/tba_auth.public.openapi.json",
+        f"specs/openrpc/profiles/{profile}/tba_auth.admin.openrpc.json",
         f"specs/discovery/profiles/{profile}/openid-configuration.json",
         f"specs/discovery/profiles/{profile}/oauth-authorization-server.json",
         f"specs/discovery/profiles/{profile}/jwks.json",

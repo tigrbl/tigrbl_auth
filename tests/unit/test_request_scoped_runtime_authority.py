@@ -4,14 +4,14 @@ import asyncio
 from types import SimpleNamespace
 from uuid import uuid4
 
-from tigrbl_auth_protocol_oauth.schemas import DynamicClientRegistrationIn
-import tigrbl_auth_backend_app_core.surfaces.par_surface as par_ops
-import tigrbl_auth_backend_app_core.surfaces.client_registration_surface as register_ops
-import tigrbl_identity_server.device_authorization_runtime as device_auth_ops
-import tigrbl_identity_server.logout_runtime as logout_ops
-import tigrbl_identity_storage_runtime.session_service as session_service
-from tigrbl_auth_protocol_oidc.standards import rp_initiated_logout as rp_logout
-from tigrbl_auth_protocol_oidc.standards.session_mgmt import (
+from tba_protocol_oauth.schemas import DynamicClientRegistrationIn
+import tba_app_backend_core.surfaces.par_surface as par_ops
+import tba_app_backend_core.surfaces.client_registration_surface as register_ops
+import tba_server_identity.device_authorization_runtime as device_auth_ops
+import tba_server_identity.logout_runtime as logout_ops
+import tba_runtime_identity_storage.session_service as session_service
+from tba_protocol_oidc.standards import rp_initiated_logout as rp_logout
+from tba_protocol_oidc.standards.session_mgmt import (
     compute_session_state,
     session_state_for_client,
 )
@@ -173,7 +173,7 @@ def test_logout_request_uses_request_scoped_deployment_for_issuer_binding(
     )
 
     request = SimpleNamespace(
-        app=SimpleNamespace(state=SimpleNamespace(tigrbl_auth_deployment=deployment)),
+        app=SimpleNamespace(state=SimpleNamespace(tba_auth_deployment=deployment)),
         query_params={},
         body=b"",
         cookies={},
@@ -190,7 +190,7 @@ def test_logout_request_uses_request_scoped_deployment_for_issuer_binding(
 def test_logout_wrapper_awaits_async_response_observer(monkeypatch) -> None:
     response = SimpleNamespace(
         body=b"",
-        headers={"x-tigrbl-auth-logout-status": "logged_out"},
+        headers={"x-tba-auth-logout-status": "logged_out"},
     )
     observed: dict[str, object] = {}
 
@@ -340,7 +340,7 @@ def test_register_client_uses_request_scoped_registration_client_uri(
         register_ops.register_client(
             request=SimpleNamespace(
                 app=SimpleNamespace(
-                    state=SimpleNamespace(tigrbl_auth_deployment=deployment)
+                    state=SimpleNamespace(tba_auth_deployment=deployment)
                 )
             ),
             db=_DB(),
@@ -384,7 +384,7 @@ def test_device_authorization_uses_request_scoped_verification_uri(monkeypatch) 
     monkeypatch.setattr(device_auth_ops, "create_record", _create_record)
 
     request = SimpleNamespace(
-        app=SimpleNamespace(state=SimpleNamespace(tigrbl_auth_deployment=deployment)),
+        app=SimpleNamespace(state=SimpleNamespace(tba_auth_deployment=deployment)),
         body=b"client_id=00000000-0000-0000-0000-000000000001&scope=openid",
     )
     result = asyncio.run(

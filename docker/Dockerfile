@@ -19,7 +19,7 @@ RUN uv pip install --system \
 EXPOSE 8000
 
 ENV \
-    TIGRBL_AUTH_INSTALL_PROFILE="sqlite+uvicorn" \
+    TBA_AUTH_INSTALL_PROFILE="sqlite+uvicorn" \
     PG_HOST="" \
     PG_PORT="5432" \
     PG_DB="" \
@@ -28,4 +28,4 @@ ENV \
     REDIS_HOST="" \
     REDIS_PASSWORD=""
 
-CMD ["python", "-m", "uvicorn", "tigrbl_auth_backend_app_public:app", "--host", "0.0.0.0", "--port", "8000", "--log-level", "info", "--proxy-headers"]
+CMD ["python", "-m", "uvicorn", "tba_app_backend_public:app", "--host", "0.0.0.0", "--port", "8000", "--log-level", "info", "--proxy-headers"]

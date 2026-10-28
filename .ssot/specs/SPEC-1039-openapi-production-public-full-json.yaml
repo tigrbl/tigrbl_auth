@@ -3,7 +3,7 @@ kind: "spec"
 id: "spc:1039"
 number: 1039
 slug: "openapi-production-public-full-json"
-title: "Repo spec: specs/openapi/profiles/production/tigrbl_auth.public.openapi.json"
+title: "Repo spec: specs/openapi/profiles/production/tba_auth.public.openapi.json"
 status: "draft"
 origin: "repo-local"
 decision_date: null
@@ -17,7 +17,7 @@ body: |-
   {
     "openapi": "3.1.0",
     "info": {
-      "title": "tigrbl_auth public auth server",
+      "title": "tba_auth public auth server",
       "version": "0.3.4",
       "description": "Generated public contract filtered by the effective deployment boundary."
     },
@@ -1870,7 +1870,7 @@ body: |-
         }
       }
     },
-    "x-tigrbl-auth": {
+    "x-tba-auth": {
       "profile": "production",
       "plugin_mode": "mixed",
       "runtime_style": "standalone",

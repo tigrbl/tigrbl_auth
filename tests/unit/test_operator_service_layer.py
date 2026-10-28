@@ -2,11 +2,11 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from tigrbl_identity_storage_runtime.operator_store import (
+from tba_runtime_identity_storage.operator_store import (
     OperationContext,
     operator_store_summary,
 )
-from tigrbl_identity_storage_runtime.resource_service import (
+from tba_runtime_identity_storage.resource_service import (
     create_resource,
     delete_resource,
     generate_key_record,
@@ -20,12 +20,12 @@ from tigrbl_identity_storage_runtime.resource_service import (
     validate_import_artifact,
     set_identity_password,
 )
-from tigrbl_identity_storage_runtime.session_service import (
+from tba_runtime_identity_storage.session_service import (
     observe_token_response,
     token_hash,
 )
-from tigrbl_identity_cli.discovery_service import diff_discovery, show_discovery
-from tigrbl_identity_storage_runtime.portability import validate_export_plan
+from tba_cli_identity.discovery_service import diff_discovery, show_discovery
+from tba_runtime_identity_storage.portability import validate_export_plan
 
 
 def _context(repo_root: Path, resource: str, command: str) -> OperationContext:

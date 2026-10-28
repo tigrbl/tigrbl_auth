@@ -3,7 +3,7 @@ import importlib
 from sqlalchemy import create_engine, inspect
 
 migration = importlib.import_module(
-    "tigrbl_identity_storage.migrations.versions.0034_dpop_replay_nonce_tables"
+    "tba_storage_core.migrations.versions.0034_dpop_replay_nonce_tables"
 )
 
 

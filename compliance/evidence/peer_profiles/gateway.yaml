@@ -11,8 +11,8 @@ required_targets:
 - RFC 9728
 - OIDC Discovery 1.0
 required_artifacts:
-- tigrbl_auth/plugin.py
-- tigrbl_auth/gateway.py
+- tba_auth/plugin.py
+- tba_auth/gateway.py
 - tests/unit/test_openid_configuration.py
 - tests/unit/test_rfc9728_metadata_checkpoint.py
 - tests/unit/test_profile_discovery_runtime.py

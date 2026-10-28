@@ -17,7 +17,7 @@ the package cannot truthfully certify what is and is not exposed.
 
 ## Decision
 
-`tigrbl_auth` shall treat the following as governed installable surfaces:
+`tba_auth` shall treat the following as governed installable surfaces:
 
 - public auth plane,
 - admin/control plane,

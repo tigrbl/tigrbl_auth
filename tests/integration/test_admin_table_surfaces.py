@@ -12,26 +12,26 @@ import pytest
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tigrbl_auth_backend_app_core import build_app
-from tigrbl_auth_backend_app_core.surfaces import TABLE_RESOURCES, admin_resource_path_prefixes
-from tigrbl_auth_backend_app_core.surfaces import surface_api as composed_surface_api
-from tigrbl_auth.config.deployment import DEFAULT_VALUES, resolve_deployment
-from tigrbl_auth.crypto import hash_pw
-from tigrbl_auth.db import get_db as legacy_get_db
-from tigrbl_auth.tables import Tenant, User
-from tigrbl_auth_backend_app_core.surfaces import AdminRouter
-from tigrbl_auth.runtime.engine_resolver import (
+from tba_app_backend_core import build_app
+from tba_app_backend_core.surfaces import TABLE_RESOURCES, admin_resource_path_prefixes
+from tba_app_backend_core.surfaces import surface_api as composed_surface_api
+from tba_auth.config.deployment import DEFAULT_VALUES, resolve_deployment
+from tba_auth.crypto import hash_pw
+from tba_auth.db import get_db as legacy_get_db
+from tba_auth.tables import Tenant, User
+from tba_app_backend_core.surfaces import AdminRouter
+from tba_auth.runtime.engine_resolver import (
     register_api_provider,
     resolve_api_provider,
     resolve_default_provider,
     set_default_provider,
 )
-from tigrbl_identity_storage_runtime.operator_store import OperationContext
-from tigrbl_identity_storage_runtime.resource_service import create_resource
-from tigrbl_auth.services.session_service import observe_token_response
-from tigrbl_auth.tables import AuditEvent, Client, Consent, RestOltpTable
-from tigrbl_identity_storage_runtime.engine import get_db as tables_get_db
-from tigrbl_auth.tables.engine import get_db as engine_get_db
+from tba_runtime_identity_storage.operator_store import OperationContext
+from tba_runtime_identity_storage.resource_service import create_resource
+from tba_auth.services.session_service import observe_token_response
+from tba_auth.tables import AuditEvent, Client, Consent, RestOltpTable
+from tba_runtime_identity_storage.engine import get_db as tables_get_db
+from tba_auth.tables.engine import get_db as engine_get_db
 
 
 pytestmark = pytest.mark.integration
@@ -253,7 +253,7 @@ def _rpc_table_methods(openrpc: dict[str, Any]) -> dict[str, dict[str, Any]]:
         method_name = str(item["name"])
         if method_name.split(".", 1)[0] not in resource_names:
             continue
-        bindings = item.get("x-tigrbl-surface", {}).get("bindings", [])
+        bindings = item.get("x-tba-surface", {}).get("bindings", [])
         has_table_binding = any(
             binding.get("proto") == "http.rest"
             and isinstance(binding.get("path"), str)

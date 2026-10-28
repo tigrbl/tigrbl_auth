@@ -4,8 +4,8 @@ import uuid
 
 import pytest
 
-from tigrbl_auth import rfc7592
-from tigrbl_auth.tables import Client
+from tba_auth import rfc7592
+from tba_auth.tables import Client
 from sqlalchemy.exc import NoResultFound
 from tigrbl import (
     create_record,
@@ -13,7 +13,7 @@ from tigrbl import (
     read_record,
     update_record,
 )
-from tigrbl_identity_jose.key_management import hash_pw
+from tba_provider_identity_jose.key_management import hash_pw
 
 
 def test_rfc7592_spec_url() -> None:

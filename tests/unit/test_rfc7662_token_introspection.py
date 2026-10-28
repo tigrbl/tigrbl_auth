@@ -6,11 +6,11 @@ import pytest
 from httpx import ASGITransport, AsyncClient
 
 from tigrbl import TigrblApp
-from tigrbl_auth_router_oauth_introspection import build_introspection_router
-from tigrbl_auth_protocol_oauth.standards.introspection import (
+from tba_router_oauth_introspection import build_introspection_router
+from tba_protocol_oauth.standards.introspection import (
     RFC7662IntrospectionService,
 )
-from tigrbl_token_introspection_capability import TokenIntrospectionCapability
+from tba_capability_token_introspection import TokenIntrospectionCapability
 
 
 def _router(*, authorized: bool = True):

@@ -13,14 +13,14 @@ for src in (ROOT / "pkgs").rglob("src"):
     if value not in sys.path:
         sys.path.insert(0, value)
 
-from tigrbl_identity_admin import (  # noqa: E402
+from tba_runtime_identity_administration import (  # noqa: E402
     AdminControlPlane,
     AdminControlPlaneError,
     AdminResourceKind,
     AdminResourceStatus,
     App,
 )
-from tigrbl_identity_admin_control_plane import (  # noqa: E402
+from tba_runtime_identity_administration_control_plane import (  # noqa: E402
     AdminControlPlane as CanonicalAdminControlPlane,
 )
 
@@ -227,26 +227,26 @@ def test_admin_t2_tenant_isolation_delete_and_audit_guardrails() -> None:
 def test_admin_t2_public_boundary_has_no_forbidden_imports() -> None:
     files = [
             Path(
-                "pkgs/40-capabilities/tigrbl-administrative-resource-capability/src/tigrbl_administrative_resource_capability/__init__.py"
+                "pkgs/40-capabilities/tba-capability-administrative-resource/src/tba_capability_administrative_resource/__init__.py"
             ),
             Path(
-                "pkgs/40-capabilities/tigrbl-administrative-resource-capability/src/tigrbl_administrative_resource_capability/models.py"
+                "pkgs/40-capabilities/tba-capability-administrative-resource/src/tba_capability_administrative_resource/models.py"
             ),
             Path(
-                "pkgs/40-capabilities/tigrbl-administrative-resource-capability/src/tigrbl_administrative_resource_capability/capability.py"
+                "pkgs/40-capabilities/tba-capability-administrative-resource/src/tba_capability_administrative_resource/capability.py"
             ),
         Path(
-            "pkgs/60-runtime/tigrbl-identity-admin/src/tigrbl_identity_admin/__init__.py"
+            "pkgs/60-runtime/tba-runtime-identity-administration/src/tba_runtime_identity_administration/__init__.py"
         ),
         Path(
-            "pkgs/60-runtime/tigrbl-identity-admin/src/tigrbl_identity_admin/control_plane.py"
+            "pkgs/60-runtime/tba-runtime-identity-administration/src/tba_runtime_identity_administration/control_plane.py"
         ),
     ]
     forbidden = {
-        "tigrbl_auth",
-        "tigrbl_identity_server",
-        "tigrbl_identity_runtime",
-        "tigrbl_identity_operator",
+        "tba_auth",
+        "tba_server_identity",
+        "tba_runtime_identity",
+        "tba_operator_identity",
     }
 
     imports: set[str] = set()

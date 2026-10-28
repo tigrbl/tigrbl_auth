@@ -7,9 +7,9 @@ from pathlib import Path
 
 import pytest
 
-from tigrbl_auth.cli.main import main
-from tigrbl_auth.cli.metadata import ARGUMENT_SPECS, GLOBAL_ARGUMENT_KEYS, build_cli_contract_manifest, build_parser
-from tigrbl_auth.config.profile_loader import RuntimeProfileError, load_profile_reference
+from tba_auth.cli.main import main
+from tba_auth.cli.metadata import ARGUMENT_SPECS, GLOBAL_ARGUMENT_KEYS, build_cli_contract_manifest, build_parser
+from tba_auth.config.profile_loader import RuntimeProfileError, load_profile_reference
 
 
 ROOT = Path(__file__).resolve().parents[2]

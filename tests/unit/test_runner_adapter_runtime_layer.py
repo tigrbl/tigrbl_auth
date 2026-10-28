@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-from tigrbl_auth_backend_app_core import app as api_app, build_application_runtime_plan
-from tigrbl_auth_backend_app_public import app as package_app
-from tigrbl_auth.config.deployment import resolve_deployment
-from tigrbl_auth.gateway import build_gateway_runtime_plan
-from tigrbl_auth.runtime import build_runtime_hash_matrix, get_runner_adapter, registered_runner_names
-from tigrbl_auth.cli.main import build_parser
+from tba_app_backend_core import app as api_app, build_application_runtime_plan
+from tba_app_backend_public import app as package_app
+from tba_auth.config.deployment import resolve_deployment
+from tba_auth.gateway import build_gateway_runtime_plan
+from tba_auth.runtime import build_runtime_hash_matrix, get_runner_adapter, registered_runner_names
+from tba_auth.cli.main import build_parser
 
 
 EXPECTED_RUNNERS = {"uvicorn", "hypercorn", "tigrcorn"}
@@ -32,7 +32,7 @@ def test_runtime_plans_separate_carrier_neutral_and_composed_factories():
 
     assert plan.runner == "uvicorn"
     assert gateway_plan.runner == "hypercorn"
-    assert plan.app_factory == "tigrbl_auth_backend_app_core.app.build_app"
+    assert plan.app_factory == "tba_app_backend_core.app.build_app"
     assert gateway_plan.app_factory == "unbound"
     assert len(plan.runner_capabilities) > 0
     assert len(gateway_plan.runner_flag_metadata) > 0

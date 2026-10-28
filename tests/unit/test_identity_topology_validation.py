@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from types import SimpleNamespace
 
-from tigrbl_identity_contracts.topology import IDENTITY_TOPOLOGY_SCENARIOS
-from tigrbl_identity_storage_runtime.topology_validation import (
+from tba_contracts_identity.topology import IDENTITY_TOPOLOGY_SCENARIOS
+from tba_runtime_identity_storage.topology_validation import (
     IdentityTopologySnapshot,
     validate_identity_topology_snapshot,
 )

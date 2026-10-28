@@ -96,8 +96,8 @@ Reconciled artifact classes:
 - `compliance/targets/target-buckets.yaml`
 - `compliance/claims/declared-target-claims.yaml`
 - `compliance/targets/public-operator-surface.yaml`
-- `tigrbl_auth/cli/claims.py`
-- `tigrbl_auth/cli/feature_surface.py`
+- `tba_auth/cli/claims.py`
+- `tba_auth/cli/feature_surface.py`
 - regenerated effective-claim, scope, RFC-family, state, and decision reports
 
 This update collected **no new certification evidence**. Final certification remains blocked by the same runtime/test/migration/Tier 4 gaps listed above.

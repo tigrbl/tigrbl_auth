@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta, timezone
 
-from tigrbl_authorization_contracts import (
+from tba_contracts_authorization import (
     ActionDefinition,
     AuthorizationEffect,
     AuthorizationRequest,
@@ -10,7 +10,7 @@ from tigrbl_authorization_contracts import (
     RoleDefinition,
     RoleGrant,
 )
-from tigrbl_authz_policy_decision_engine import PlatformPolicyDecisionEngine
+from tba_provider_authorization_policy_decision_engine import PlatformPolicyDecisionEngine
 
 
 def _engine(*, expires_at=None, required_acr=None, effect="allow"):

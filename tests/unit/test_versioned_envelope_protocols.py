@@ -1,15 +1,15 @@
 import pytest
-from tigrbl_auth_protocol_cwt.profile import CwtProfile
-from tigrbl_auth_protocol_jwt.profile import JwtProfile
-from tigrbl_security_protocol_cose import COSEProfile
-from tigrbl_security_protocol_jwe import JWEProfile
-from tigrbl_security_protocol_jws import JWSProfile
+from tba_protocol_cwt.profile import CwtProfile
+from tba_protocol_jwt.profile import JwtProfile
+from tba_protocol_security_cose import COSEProfile
+from tba_protocol_security_jwe import JWEProfile
+from tba_protocol_security_jws import JWSProfile
 
 
 def test_each_envelope_standard_has_an_exact_version_owner() -> None:
-    from tigrbl_security_protocol_cose import CURRENT_VERSION as cose
-    from tigrbl_security_protocol_jwe import CURRENT_VERSION as jwe
-    from tigrbl_security_protocol_jws import CURRENT_VERSION as jws
+    from tba_protocol_security_cose import CURRENT_VERSION as cose
+    from tba_protocol_security_jwe import CURRENT_VERSION as jwe
+    from tba_protocol_security_jws import CURRENT_VERSION as jws
     assert (jws.identifier, jwe.identifier, cose.identifier) == ("RFC7515", "RFC7516", "RFC9052")
 
 

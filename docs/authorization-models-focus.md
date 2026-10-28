@@ -2,13 +2,13 @@
 
 Research date: 2026-05-28
 
-Scope: this note frames RBAC, ABAC, delegated/delegation-based access control, PBAC, ReBAC, scope-based authorization, tenant isolation, and contextual policy for `tigrbl_auth`.
+Scope: this note frames RBAC, ABAC, delegated/delegation-based access control, PBAC, ReBAC, scope-based authorization, tenant isolation, and contextual policy for `tba_auth`.
 
 The main distinction: these are not competing features where one replaces the others. Mature identity systems compose them. Roles provide coarse authority, attributes and context constrain decisions, permissions/scopes name allowed operations, delegation explains who granted authority, relationships answer graph-shaped access, and policy ties the decision together with auditable reasons.
 
 ## Vocabulary
 
-| Model | Meaning in `tigrbl_auth` | Primary use |
+| Model | Meaning in `tba_auth` | Primary use |
 | --- | --- | --- |
 | RBAC | Role-based access control: subject has role, role grants permissions or authority. | Tenant admin, platform admin, service owner, developer, group-like access. |
 | ABAC | Attribute-based access control: subject/resource/context attributes must match policy. | Region, tenant, environment, risk posture, MFA state, device trust, app type. |
@@ -19,17 +19,17 @@ The main distinction: these are not competing features where one replaces the ot
 | Tenant isolation | Tenant boundary is a mandatory authorization dimension, not just metadata. | Every admin, token, key, client, service, and user operation. |
 | Contextual / risk policy | Decision uses runtime facts such as MFA, IP, device, time, anomaly, session assurance. | Step-up, deny risky actions, high-assurance admin operations. |
 
-## Current `tigrbl_auth` State
+## Current `tba_auth` State
 
 | Area | Current state | Evidence | Interpretation |
 | --- | --- | --- | --- |
-| Policy package boundary | `tigrbl-authz-policy` explicitly owns authorization decisions and prevents policy logic from leaking into OAuth, OIDC, admin, server, and principals code. | [ADR-1099](../.ssot/adr/ADR-1099-policy-is-an-explicit-package-boundary.yaml), [`tigrbl-authz-policy` README](../pkgs/20-providers/tigrbl-authz-policy/README.md) | This is the right architectural center for RBAC/ABAC/PBAC/delegation decisions. |
-| Executable RBAC/ABAC/PBAC/delegation | Unit coverage exercises `RolePolicy`, `AttributePolicy`, `PermissionPolicy`, `DelegationPolicy`, `AdminPolicy`, `PolicyRequest`, `PolicyDecisionEngine`, and decision traces. | [`test_jose_policy_boundary.py`](../tests/unit/test_jose_policy_boundary.py) | `PolicyDecisionEngine` now lives in `tigrbl-authz-policy-decision-engine`; product-level admin/API surfaces and storage contracts still sit outside this executable engine. |
+| Policy package boundary | `tba-runtime-authorization-policy` explicitly owns authorization decisions and prevents policy logic from leaking into OAuth, OIDC, admin, server, and principals code. | [ADR-1099](../.ssot/adr/ADR-1099-policy-is-an-explicit-package-boundary.yaml), [`tba-runtime-authorization-policy` README](../pkgs/20-providers/tba-runtime-authorization-policy/README.md) | This is the right architectural center for RBAC/ABAC/PBAC/delegation decisions. |
+| Executable RBAC/ABAC/PBAC/delegation | Unit coverage exercises `RolePolicy`, `AttributePolicy`, `PermissionPolicy`, `DelegationPolicy`, `AdminPolicy`, `PolicyRequest`, `PolicyDecisionEngine`, and decision traces. | [`test_jose_policy_boundary.py`](../tests/unit/test_jose_policy_boundary.py) | `PolicyDecisionEngine` now lives in `tba-provider-authorization-policy-decision-engine`; product-level admin/API surfaces and storage contracts still sit outside this executable engine. |
 | Decision trace | Policy engine records trace IDs, matched policies, evaluated kinds, and denial reasons. | [`test_jose_policy_boundary.py`](../tests/unit/test_jose_policy_boundary.py) | Strong foundation for explainable authorization and audit. |
 | ReBAC / graph authorization | Phase 4 tests include `RelationshipGraph`, relationship definitions, tuples, and graph-based access decisions. | [`test_phase4_advanced_identity_boundary.py`](../tests/unit/test_phase4_advanced_identity_boundary.py) | ReBAC exists as advanced identity behavior, not yet a canonical product/storage/API surface. |
 | Policy language / versioning | Phase 4 tests publish policy versions and reject unsafe policy source. | [`test_phase4_advanced_identity_boundary.py`](../tests/unit/test_phase4_advanced_identity_boundary.py) | There is a policy-language direction, but it needs formal spec, parser/runtime boundaries, and admin lifecycle. |
 | Resource-server authorization | Resource servers are distinct from clients/apps and policy owns scope, permission, tenant, proof-binding, and resource authorization decisions. | [ADR-1108](../.ssot/adr/ADR-1108-resource-servers-are-distinct-from-clients-and-apps.yaml) | Scope and permission models must be tied to resource-server objects, not free-floating strings. |
-| Principal authority | Principals model roles, tenant memberships, service principals, workload principals, developers, admins, owners, and superusers. | [Principal Interaction Matrices](architecture/PRINCIPAL_INTERACTION_MATRICES.md), [`models.py`](../pkgs/10-domain/tigrbl-identity-principals/src/tigrbl_identity_principals/models.py) | Authorization needs principal facts but should not be embedded inside principal models. |
+| Principal authority | Principals model roles, tenant memberships, service principals, workload principals, developers, admins, owners, and superusers. | [Principal Interaction Matrices](architecture/PRINCIPAL_INTERACTION_MATRICES.md), [`models.py`](../pkgs/10-domain/tba-concrete-identity-principals/src/tba_concrete_identity_principals/models.py) | Authorization needs principal facts but should not be embedded inside principal models. |
 
 ## Model Composition
 
@@ -48,12 +48,12 @@ The main distinction: these are not competing features where one replaces the ot
 
 | Layer | Owns | Does not own |
 | --- | --- | --- |
-| `tigrbl-authz-policy` | Policy request/decision contracts, RBAC, ABAC, PBAC, delegation, tenant isolation, scope/permission decisions, decision traces. | Credential verification, token signing, route mounting, DB sessions. |
-| `tigrbl-identity-principals` | Principal facts: user, admin, owner, service, workload, client, tenant membership, roles as facts. | Final authorization decisions. |
-| `tigrbl-credentials` | Credential facts and proof posture: password, API key, service key, client secret, MFA/passkey status. | Whether a credential grants permission to perform an action. |
-| `tigrbl-auth-protocol-oauth` | OAuth scopes, resource indicators, consent inputs, token issuance hooks. | Tenant/admin authorization policy itself. |
-| `tigrbl-authz-resource-server` | Downstream enforcement of audience, scope, token validity, proof binding, and policy hooks. | Issuing tokens or managing policy definitions. |
-| `tigrbl-identity-storage` | Canonical policy, role, permission, grant, relationship, assignment, audit, and version tables. | Policy semantics. |
+| `tba-runtime-authorization-policy` | Policy request/decision contracts, RBAC, ABAC, PBAC, delegation, tenant isolation, scope/permission decisions, decision traces. | Credential verification, token signing, route mounting, DB sessions. |
+| `tba-concrete-identity-principals` | Principal facts: user, admin, owner, service, workload, client, tenant membership, roles as facts. | Final authorization decisions. |
+| `tba-credentials` | Credential facts and proof posture: password, API key, service key, client secret, MFA/passkey status. | Whether a credential grants permission to perform an action. |
+| `tba-protocol-oauth` | OAuth scopes, resource indicators, consent inputs, token issuance hooks. | Tenant/admin authorization policy itself. |
+| `tba-protocol-authorization-resource-server` | Downstream enforcement of audience, scope, token validity, proof binding, and policy hooks. | Issuing tokens or managing policy definitions. |
+| `tba-storage-core` | Canonical policy, role, permission, grant, relationship, assignment, audit, and version tables. | Policy semantics. |
 | Admin frontdoors | Product-scoped policy configuration and assignment under platform, tenant, developer, or service authority. | Low-level policy evaluation internals. |
 
 ## Authorization Object Model
@@ -75,7 +75,7 @@ The main distinction: these are not competing features where one replaces the ot
 
 ## Capability Matrix
 
-| Capability | Current / target in `tigrbl_auth` | Priority |
+| Capability | Current / target in `tba_auth` | Priority |
 | --- | --- | --- |
 | RBAC evaluation | Executable primitive exists. Needs canonical storage and admin assignment surface. | P0 |
 | ABAC evaluation | Executable primitive exists for required attributes. Needs richer operators, resource attributes, and context normalization. | P1 |
@@ -150,7 +150,7 @@ The policy engine should evaluate requests as a structured decision, not as scat
 
 ## Key Takeaway
 
-`tigrbl_auth` should not choose RBAC versus ABAC versus PBAC versus delegation versus ReBAC. The right product stance is a composable authorization decision system:
+`tba_auth` should not choose RBAC versus ABAC versus PBAC versus delegation versus ReBAC. The right product stance is a composable authorization decision system:
 
 ```text
 principal facts + credential facts + tenant boundary + roles + permissions

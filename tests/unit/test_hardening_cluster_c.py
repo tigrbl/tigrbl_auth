@@ -10,28 +10,28 @@ from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import ed25519, rsa
 from cryptography.x509.oid import NameOID
 
-from tigrbl_auth.cli.artifacts import build_openapi_contract, deployment_from_options
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.standards.oauth2.dpop import (
+from tba_auth.cli.artifacts import build_openapi_contract, deployment_from_options
+from tba_auth.config.settings import settings
+from tba_auth.standards.oauth2.dpop import (
     issue_nonce,
     jwk_from_public_key,
     jwk_thumbprint,
     make_proof,
     verify_proof,
 )
-from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import (
+from tba_protocol_oauth.standards.mutual_tls_client_authentication import (
     authenticate_mtls_client,
     presented_certificate_thumbprint,
     thumbprint_from_cert_pem,
     validate_request_certificate_binding,
 )
-from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
+from tba_protocol_oauth.standards.oauth_security_bcp import (
     OAuthPolicyViolation,
     runtime_security_profile,
     validate_sender_constraint,
 )
-from tigrbl_auth_protocol_oidc.standards import backchannel_logout, frontchannel_logout
-from tigrbl_auth_protocol_oidc.standards.discovery_metadata import build_openid_config
+from tba_protocol_oidc.standards import backchannel_logout, frontchannel_logout
+from tba_protocol_oidc.standards.discovery_metadata import build_openid_config
 
 
 def _generate_cert_pem() -> bytes:

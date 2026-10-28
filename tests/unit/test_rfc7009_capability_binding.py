@@ -2,12 +2,12 @@ from __future__ import annotations
 
 import pytest
 
-from tigrbl_auth_protocol_oauth import CAPABILITY_REQUIREMENTS
-from tigrbl_auth_protocol_oauth.standards.revocation import (
+from tba_protocol_oauth import CAPABILITY_REQUIREMENTS
+from tba_protocol_oauth.standards.revocation import (
     RFC7009RevocationService,
     RevocationDisabledError,
 )
-from tigrbl_token_revocation_capability import TokenRevocationCapability
+from tba_capability_token_revocation import TokenRevocationCapability
 
 
 def test_rfc7009_maps_wire_operation_to_revocation_capability() -> None:

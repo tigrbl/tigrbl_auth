@@ -10,11 +10,11 @@ import pytest
 from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tigrbl_auth_backend_app_public import app
-from tigrbl_auth.crypto import hash_pw
-from tigrbl_auth.tables import Tenant, User
-from tigrbl_identity_storage_runtime.operator_store import OperationContext
-from tigrbl_identity_storage_runtime.resource_service import create_resource
+from tba_app_backend_public import app
+from tba_auth.crypto import hash_pw
+from tba_auth.tables import Tenant, User
+from tba_runtime_identity_storage.operator_store import OperationContext
+from tba_runtime_identity_storage.resource_service import create_resource
 
 
 EXPECTED_DEFAULT_OPERATIONS = {

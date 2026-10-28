@@ -6,8 +6,8 @@ from uuid import uuid4
 
 import pytest
 
-from tigrbl_identity_contracts.admin_tenants import TenantAdministrator
-from tigrbl_identity_server.platform_tenant_administration import (
+from tba_contracts_identity.admin_tenants import TenantAdministrator
+from tba_server_identity.platform_tenant_administration import (
     build_tenant_administration_capability,
 )
 

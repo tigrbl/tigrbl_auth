@@ -9,9 +9,9 @@ The split package release lane is package-scoped. A release tag must match:
 Examples:
 
 ```text
-tigrbl-auth==0.3.5
-tigrbl-identity-core==0.3.5
-tigrbl-auth-protocol-oauth==0.3.5
+tba-auth==0.3.5
+tba-primitives-identity==0.3.5
+tba-protocol-oauth==0.3.5
 ```
 
 The authoritative package version is the package-local `pyproject.toml` under
@@ -27,7 +27,7 @@ On `workflow_dispatch`, it creates package tags:
 
 ```text
 package=all
-package=tigrbl-identity-core
+package=tba-primitives-identity
 ```
 
 On a pushed package tag, it:
@@ -46,7 +46,7 @@ Each PyPI project should configure GitHub Trusted Publishing with:
 
 ```text
 owner: tigrbl
-repository: tigrbl_auth
+repository: tba_auth
 workflow: monorepo-package-release.yml
 environment: pypi
 ```
@@ -98,7 +98,7 @@ IMPORT_ROOT_UNDER_TEST
 PACKAGE_VERSION_UNDER_TEST
 ```
 
-The `tigrbl-identity-testkit` package is the cross-cutting package-test owner.
+The `tba-testkit-identity` package is the cross-cutting package-test owner.
 Its package matrix cells additionally include:
 
 ```text
@@ -120,6 +120,6 @@ $VENV_PYTHON -m pip install -e ".[test,sqlite,postgres,servers]"
 Manual dispatch supports narrowing the matrix:
 
 ```text
-package=tigrbl-auth-protocol-oauth
+package=tba-protocol-oauth
 python-version=3.12
 ```

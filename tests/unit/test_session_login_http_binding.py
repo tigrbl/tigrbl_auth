@@ -5,7 +5,7 @@ import importlib.util
 import pytest
 from httpx import ASGITransport, AsyncClient
 from tigrbl import TigrblApp
-from tigrbl_auth_router_session_login import (
+from tba_router_session_login import (
     CredsIn,
     RequiredPasswordChangeIn,
     build_login_router,
@@ -28,7 +28,7 @@ def test_http_binding_builds_post_login_carrier() -> None:
     )
 
     assert route.methods == {"POST"}
-    assert importlib.util.find_spec("tigrbl_identity_storage_runtime.login") is None
+    assert importlib.util.find_spec("tba_runtime_identity_storage.login") is None
 
 
 @pytest.mark.asyncio

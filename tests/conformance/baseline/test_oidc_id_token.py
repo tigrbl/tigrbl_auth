@@ -4,7 +4,7 @@ import json
 import asyncio
 import pytest
 
-from tigrbl_auth.oidc_id_token import mint_id_token, verify_id_token
+from tba_auth.oidc_id_token import mint_id_token, verify_id_token
 
 
 @pytest.mark.unit

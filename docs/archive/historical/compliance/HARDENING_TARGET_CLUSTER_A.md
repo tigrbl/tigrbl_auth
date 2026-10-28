@@ -68,18 +68,18 @@ These fixes were necessary to make the checkpoint honest and testable:
 
 Primary implementation surfaces:
 
-- `tigrbl_auth/standards/oauth2/client_registration_management.py`
-- `tigrbl_auth/standards/oauth2/device_authorization.py`
-- `tigrbl_auth/standards/oauth2/token_exchange.py`
-- `tigrbl_auth/standards/oauth2/resource_indicators.py`
-- `tigrbl_auth/ops/token.py`
-- `tigrbl_auth/ops/device_authorization.py`
-- `tigrbl_auth/ops/par.py`
-- `tigrbl_auth/api/rpc/methods/client_registration.py`
-- `tigrbl_auth/api/rpc/schemas/client_registration.py`
-- `tigrbl_auth/api/rpc/methods/token.py`
-- `tigrbl_auth/api/rpc/schemas/token.py`
-- `tigrbl_auth/tables/device_code.py`
+- `tba_auth/standards/oauth2/client_registration_management.py`
+- `tba_auth/standards/oauth2/device_authorization.py`
+- `tba_auth/standards/oauth2/token_exchange.py`
+- `tba_auth/standards/oauth2/resource_indicators.py`
+- `tba_auth/ops/token.py`
+- `tba_auth/ops/device_authorization.py`
+- `tba_auth/ops/par.py`
+- `tba_auth/api/rpc/methods/client_registration.py`
+- `tba_auth/api/rpc/schemas/client_registration.py`
+- `tba_auth/api/rpc/methods/token.py`
+- `tba_auth/api/rpc/schemas/token.py`
+- `tba_auth/tables/device_code.py`
 - `tests/unit/test_8_hardening_cluster_a.py`
 
 Claims / mappings / evidence:

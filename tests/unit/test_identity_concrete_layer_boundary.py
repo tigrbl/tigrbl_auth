@@ -9,9 +9,9 @@ CONTRACTS_ROOT = (
     ROOT
     / "pkgs"
     / "02-contracts"
-    / "tigrbl-identity-contracts"
+    / "tba-contracts-identity"
     / "src"
-    / "tigrbl_identity_contracts"
+    / "tba_contracts_identity"
 )
 CONCRETE_ROOTS = (
     ROOT
@@ -41,7 +41,7 @@ def _imports(path: Path) -> set[str]:
 
 
 def test_contracts_do_not_own_concrete_identity_or_credential_variants() -> None:
-    import tigrbl_identity_contracts as contracts
+    import tba_contracts_identity as contracts
 
     concrete_names = {
         "ApiKeyCredential",
@@ -70,7 +70,7 @@ def test_contracts_do_not_own_concrete_identity_or_credential_variants() -> None
 def test_concrete_variants_subclass_contract_dataclasses() -> None:
     import tigrbl_identity_credentials_concrete as credential_concrete
     import tigrbl_identity_identities_concrete as identity_concrete
-    import tigrbl_identity_contracts as contracts
+    import tba_contracts_identity as contracts
 
     for name in (
         "AdminIdentity",
@@ -113,8 +113,8 @@ def test_concrete_layer_only_imports_lower_contract_surfaces() -> None:
         "datetime",
         "typing",
         "uuid",
-        "tigrbl_identity_contracts",
-        "tigrbl_identity_model_bases",
+        "tba_contracts_identity",
+        "tba_bases_identity_model",
     }
 
     offenders = {

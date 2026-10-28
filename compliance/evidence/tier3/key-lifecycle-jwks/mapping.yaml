@@ -1,12 +1,12 @@
 targets:
 - Key lifecycle and JWKS publication
 modules:
-- tigrbl_auth/cli/metadata.py
-- tigrbl_auth/cli/handlers.py
-- tigrbl_auth/api/rpc/methods/keys.py
-- tigrbl_auth/standards/jose/rfc7517.py
-- tigrbl_auth/services/key_management.py
-- tigrbl_auth/services/operator_service.py
+- tba_auth/cli/metadata.py
+- tba_auth/cli/handlers.py
+- tba_auth/api/rpc/methods/keys.py
+- tba_auth/standards/jose/rfc7517.py
+- tba_auth/services/key_management.py
+- tba_auth/services/operator_service.py
 tests:
 - tests/conformance/operator/test_cli_keys_lifecycle.py
 - tests/security/test_sender_constraint_replay.py

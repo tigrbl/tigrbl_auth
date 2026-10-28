@@ -9,15 +9,15 @@ import pytest
 from http import HTTPStatus as status
 from httpx import ASGITransport, AsyncClient
 
-from tigrbl_auth_backend_app_public import app
-from tigrbl_auth.rfc.rfc8932 import (
+from tba_app_backend_public import app
+from tba_auth.rfc.rfc8932 import (
     RFC8932_SPEC_URL,
     include_rfc8932,
     get_enhanced_authorization_server_metadata,
     validate_metadata_consistency,
     get_capability_matrix,
 )
-from tigrbl_auth.runtime_cfg import settings
+from tba_auth.runtime_cfg import settings
 
 
 @pytest.mark.unit
@@ -227,7 +227,7 @@ def test_validate_metadata_consistency_device_inconsistency():
     with patch.object(settings, "enable_rfc8628", True):
         # Mock metadata that has device endpoint but missing grant type
         with patch(
-            "tigrbl_auth.rfc.rfc8932.get_enhanced_authorization_server_metadata"
+            "tba_auth.rfc.rfc8932.get_enhanced_authorization_server_metadata"
         ) as mock_metadata:
             mock_metadata.return_value = {
                 "device_authorization_endpoint": "https://example.com/device_codes/device_authorization",
@@ -249,7 +249,7 @@ def test_validate_metadata_consistency_introspection_inconsistency():
     with patch.object(settings, "enable_rfc7662", False):
         # Mock metadata that has introspection endpoint but RFC disabled
         with patch(
-            "tigrbl_auth.rfc.rfc8932.get_enhanced_authorization_server_metadata"
+            "tba_auth.rfc.rfc8932.get_enhanced_authorization_server_metadata"
         ) as mock_metadata:
             mock_metadata.return_value = {
                 "introspection_endpoint": "https://example.com/introspect",
@@ -267,7 +267,7 @@ def test_validate_metadata_consistency_introspection_inconsistency():
 def test_validate_metadata_consistency_mtls_inconsistency():
     """RFC 8932: Detect mTLS configuration inconsistency."""
     with patch(
-        "tigrbl_auth.rfc.rfc8932.get_enhanced_authorization_server_metadata"
+        "tba_auth.rfc.rfc8932.get_enhanced_authorization_server_metadata"
     ) as mock_metadata:
         mock_metadata.return_value = {
             "tls_client_certificate_bound_access_tokens": True,

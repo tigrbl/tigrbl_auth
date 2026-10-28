@@ -7,4 +7,4 @@ packages.
 
 Current package:
 
-- `oauth-device-authorization-cli-example`
+- `tba-example-oauth-device-authorization-cli`

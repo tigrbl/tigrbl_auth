@@ -3,12 +3,12 @@ import json
 import cbor2
 import pytest
 
-from tigrbl_cose_concrete import CoseMessageKind, decode_cose_message
-from tigrbl_cwt_concrete import CwtClaimsSet, decode_cwt_claims
-from tigrbl_identity_core.base64url import base64url_encode
-from tigrbl_jwe_concrete import parse_jwe_compact
-from tigrbl_jws_concrete import parse_jws_compact
-from tigrbl_jwt_concrete import decode_jwt_unverified
+from tba_concrete_cose import CoseMessageKind, decode_cose_message
+from tba_concrete_cwt import CwtClaimsSet, decode_cwt_claims
+from tba_primitives_identity.base64url import base64url_encode
+from tba_concrete_jwe import parse_jwe_compact
+from tba_concrete_jws import parse_jws_compact
+from tba_concrete_jwt import decode_jwt_unverified
 
 
 def _json_segment(value: object) -> str:

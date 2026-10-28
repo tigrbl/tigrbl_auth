@@ -8,7 +8,7 @@ from unittest.mock import patch, MagicMock
 import pytest
 from tigrbl import TigrblApp
 
-from tigrbl_auth_protocol_oauth.standards.token_exchange import (
+from tba_protocol_oauth.standards.token_exchange import (
     RFC8693_SPEC_URL,
     TokenType,
     TokenExchangeRequest,
@@ -20,9 +20,9 @@ from tigrbl_auth_protocol_oauth.standards.token_exchange import (
     makeDelegationToken,
     TOKEN_EXCHANGE_GRANT_TYPE,
 )
-from tigrbl_auth_backend_app_core.surfaces.token_exchange_surface import include_rfc8693
-from tigrbl_identity_runtime.settings import settings
-from tigrbl_auth_protocol_oauth.standards.json_web_token import encode_jwt
+from tba_app_backend_core.surfaces.token_exchange_surface import include_rfc8693
+from tba_runtime_identity.settings import settings
+from tba_protocol_oauth.standards.json_web_token import encode_jwt
 import time
 
 pytestmark = pytest.mark.usefixtures("enable_rfc8693")
@@ -247,7 +247,7 @@ def test_exchange_token():
         scope="read",  # Narrower scope
     )
 
-    with patch("tigrbl_auth_protocol_oauth.standards._rfc8693.runtime.JWTCoder") as mock_jwt_coder:
+    with patch("tba_protocol_oauth.standards._rfc8693.runtime.JWTCoder") as mock_jwt_coder:
         mock_instance = MagicMock()
         mock_jwt_coder.default.return_value = mock_instance
         mock_instance.sign.return_value = "new-access-token-xyz"
@@ -281,7 +281,7 @@ def test_exchange_token_with_actor():
         actor_token_type=TokenType.ACCESS_TOKEN.value,
     )
 
-    with patch("tigrbl_auth_protocol_oauth.standards._rfc8693.runtime.JWTCoder") as mock_jwt_coder:
+    with patch("tba_protocol_oauth.standards._rfc8693.runtime.JWTCoder") as mock_jwt_coder:
         mock_instance = MagicMock()
         mock_jwt_coder.default.return_value = mock_instance
         mock_instance.sign.return_value = "impersonation-token"
@@ -297,7 +297,7 @@ def test_make_impersonation_token():
     subject_jwt = encode_jwt(sub="user123", tid="tenant-1", exp=int(time.time()) + 3600)
     actor_jwt = encode_jwt(sub="admin456", tid="tenant-1", exp=int(time.time()) + 3600)
 
-    with patch("tigrbl_auth_protocol_oauth.standards._rfc8693.endpoint.exchange_token") as mock_exchange:
+    with patch("tba_protocol_oauth.standards._rfc8693.endpoint.exchange_token") as mock_exchange:
         mock_response = TokenExchangeResponse(access_token="impersonation-token")
         mock_exchange.return_value = mock_response
 
@@ -329,7 +329,7 @@ def test_make_delegation_token():
         exp=int(time.time()) + 3600,
     )
 
-    with patch("tigrbl_auth_protocol_oauth.standards._rfc8693.endpoint.exchange_token") as mock_exchange:
+    with patch("tba_protocol_oauth.standards._rfc8693.endpoint.exchange_token") as mock_exchange:
         mock_response = TokenExchangeResponse(
             access_token="delegation-token", scope="read"
         )

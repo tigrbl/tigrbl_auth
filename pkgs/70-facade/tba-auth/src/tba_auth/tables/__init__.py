@@ -1,0 +1,85 @@
+"""Compatibility facade for `tba_storage_core.tables`."""
+
+from tba_auth._split_imports import alias_module as _alias_module
+
+_SUBMODULES = (
+    "access_review_campaign",
+    "access_review_decision",
+    "access_review_item",
+    "attribute_policy",
+    "audit_event",
+    "auth_code",
+    "auth_session",
+    "authentication_challenge",
+    "authority_derivation_graph",
+    "authorization_server",
+    "client",
+    "client_registration",
+    "consent",
+    "credential",
+    "credential_audit_event",
+    "credential_api_key",
+    "credential_client_secret",
+    "credential_dpop_key",
+    "credential_mfa_factor",
+    "credential_mtls_certificate",
+    "credential_password",
+    "credential_recovery_code",
+    "credential_service_key",
+    "credential_webauthn_passkey",
+    "crypto_key",
+    "crypto_key_version",
+    "delegation_grant",
+    "delegated_admin_scope",
+    "device_code",
+    "dpop_nonce",
+    "dpop_replay",
+    "entitlement",
+    "entitlement_assignment",
+    "key_attestation_evidence",
+    "key_envelope",
+    "key_rotation_event",
+    "key_rotation_policy",
+    "logout_state",
+    "backchannel_logout_replay",
+    "machine_identity",
+    "policy",
+    "policy_condition",
+    "policy_set",
+    "policy_set_member",
+    "policy_target",
+    "policy_version",
+    "principal",
+    "principal_key_binding",
+    "pushed_authorization_request",
+    "realm",
+    "revoked_token",
+    "residency_zone",
+    "role",
+    "service_identity",
+    "subject_alias",
+    "tenant",
+    "tenant_membership",
+    "tenant_residency",
+    "token_record",
+    "trust_federation_graph",
+    "user",
+    "workload_identity",
+)
+
+_LEGACY_NAME = __name__
+_module = _alias_module(__name__, "tba_storage_core.tables", "tba-storage-core")
+globals().update(_module.__dict__)
+
+for _submodule in _SUBMODULES:
+    _alias_module(
+        f"{_LEGACY_NAME}.{_submodule}",
+        f"tba_storage_core.tables.{_submodule}",
+        "tba-storage-core",
+    )
+
+_alias_module(
+    f"{_LEGACY_NAME}.engine",
+    "tba_runtime_identity_storage.engine",
+    "tba-runtime-identity-storage",
+)

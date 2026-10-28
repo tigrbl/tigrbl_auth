@@ -2,54 +2,54 @@ version: 1
 layer: 02-contracts
 owners:
   Did:
-    canonical: tigrbl_did_contracts.identifiers.Did
-    compatibility: [tigrbl_identity_contracts.did.identifiers.Did, tigrbl_identity_contracts.decentralized.Did]
+    canonical: tba_contracts_did.identifiers.Did
+    compatibility: [tba_contracts_identity.did.identifiers.Did, tba_contracts_identity.decentralized.Did]
   DidResolutionResult:
-    canonical: tigrbl_did_contracts.resolution.DidResolutionResult
-    compatibility: [tigrbl_identity_contracts.did.resolution.DidResolutionResult, tigrbl_identity_contracts.decentralized.DidResolutionResult]
+    canonical: tba_contracts_did.resolution.DidResolutionResult
+    compatibility: [tba_contracts_identity.did.resolution.DidResolutionResult, tba_contracts_identity.decentralized.DidResolutionResult]
   SpiffeId:
-    canonical: tigrbl_workload_identity_contracts.spiffe.SpiffeId
-    compatibility: [tigrbl_identity_contracts.workloads.spiffe.SpiffeId, tigrbl_identity_contracts.workload_identity.SpiffeId]
+    canonical: tba_contracts_workload_identity.spiffe.SpiffeId
+    compatibility: [tba_contracts_identity.workloads.spiffe.SpiffeId, tba_contracts_identity.workload_identity.SpiffeId]
   Svid:
-    canonical: tigrbl_workload_identity_contracts.svid.Svid
-    compatibility: [tigrbl_identity_contracts.workloads.svid.Svid, tigrbl_identity_contracts.workload_identity.Svid]
+    canonical: tba_contracts_workload_identity.svid.Svid
+    compatibility: [tba_contracts_identity.workloads.svid.Svid, tba_contracts_identity.workload_identity.Svid]
   SvidFormat:
-    canonical: tigrbl_workload_identity_contracts.svid.SvidFormat
-    compatibility: [tigrbl_identity_contracts.workloads.svid.SvidFormat, tigrbl_identity_contracts.workload_identity.SvidFormat]
+    canonical: tba_contracts_workload_identity.svid.SvidFormat
+    compatibility: [tba_contracts_identity.workloads.svid.SvidFormat, tba_contracts_identity.workload_identity.SvidFormat]
   SpiffeTrustDomain:
-    canonical: tigrbl_workload_identity_contracts.spiffe.TrustDomain
-    compatibility: [tigrbl_identity_contracts.workloads.spiffe.TrustDomain]
+    canonical: tba_contracts_workload_identity.spiffe.TrustDomain
+    compatibility: [tba_contracts_identity.workloads.spiffe.TrustDomain]
   AdaptiveTrustDomain:
-    canonical: tigrbl_identity_contracts.adaptive_access.AdaptiveTrustDomain
+    canonical: tba_contracts_identity.adaptive_access.AdaptiveTrustDomain
   XacmlDecisionValue:
-    canonical: tigrbl_identity_contracts.policy.xacml_mapping.XacmlDecisionValue
+    canonical: tba_contracts_identity.policy.xacml_mapping.XacmlDecisionValue
   XacmlDecisionResult:
-    canonical: tigrbl_identity_contracts.policy.xacml_mapping.XacmlDecisionResult
+    canonical: tba_contracts_identity.policy.xacml_mapping.XacmlDecisionResult
   CredentialVerificationError:
-    canonical: tigrbl_identity_contracts.credentials.errors.CredentialVerificationError
+    canonical: tba_contracts_identity.credentials.errors.CredentialVerificationError
   PublicKeyCredentialVerificationError:
-    canonical: tigrbl_public_key_authentication_contracts.errors.PublicKeyCredentialVerificationError
-    compatibility: [tigrbl_identity_contracts.public_key_authentication.errors.PublicKeyCredentialVerificationError]
+    canonical: tba_contracts_public_key_authentication.errors.PublicKeyCredentialVerificationError
+    compatibility: [tba_contracts_identity.public_key_authentication.errors.PublicKeyCredentialVerificationError]
   AttestationEvidence:
-    canonical: tigrbl_attestation_contracts.AttestationEvidence
-    compatibility: [tigrbl_identity_contracts.attestation.AttestationEvidence]
+    canonical: tba_contracts_attestation.AttestationEvidence
+    compatibility: [tba_contracts_identity.attestation.AttestationEvidence]
   KeyAttestationEvidence:
-    canonical: tigrbl_security_trust_contracts.KeyAttestationEvidence
+    canonical: tba_contracts_security_trust.KeyAttestationEvidence
   DigitalCredential:
-    canonical: tigrbl_digital_credential_contracts.artifacts.DigitalCredential
-    compatibility: [tigrbl_identity_contracts.digital_credentials.artifacts.DigitalCredential]
+    canonical: tba_contracts_digital_credential.artifacts.DigitalCredential
+    compatibility: [tba_contracts_identity.digital_credentials.artifacts.DigitalCredential]
   Claim:
-    canonical: tigrbl_claim_contracts.Claim
-    compatibility: [tigrbl_identity_contracts.claims.Claim]
+    canonical: tba_contracts_claim.Claim
+    compatibility: [tba_contracts_identity.claims.Claim]
   SecurityEvent:
-    canonical: tigrbl_security_event_contracts.SecurityEvent
-    compatibility: [tigrbl_identity_contracts.security_events.SecurityEvent]
+    canonical: tba_contracts_security_event.SecurityEvent
+    compatibility: [tba_contracts_identity.security_events.SecurityEvent]
   VerifiedClaims:
-    canonical: tigrbl_identity_assurance_contracts.VerifiedClaims
-    compatibility: [tigrbl_identity_contracts.assurance.VerifiedClaims]
+    canonical: tba_contracts_identity_assurance.VerifiedClaims
+    compatibility: [tba_contracts_identity.assurance.VerifiedClaims]
   IdentityAssuranceRequest:
-    canonical: tigrbl_identity_assurance_contracts.IdentityAssuranceRequest
-    compatibility: [tigrbl_identity_contracts.oidc.identity_assurance.IdentityAssuranceRequest]
+    canonical: tba_contracts_identity_assurance.IdentityAssuranceRequest
+    compatibility: [tba_contracts_identity.oidc.identity_assurance.IdentityAssuranceRequest]
   ReplayReservationPort:
-    canonical: tigrbl_replay_contracts.ReplayReservationPort
-    compatibility: [tigrbl_identity_contracts.replay.reservations.ReplayReservationPort]
+    canonical: tba_contracts_replay.ReplayReservationPort
+    compatibility: [tba_contracts_identity.replay.reservations.ReplayReservationPort]

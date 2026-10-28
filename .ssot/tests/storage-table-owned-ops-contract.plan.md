@@ -1,6 +1,6 @@
 # Storage Table Owned Operations Contract Test Plan
 
-Planned tests will verify that durable table-specific operations are implemented on the owning `tigrbl_identity_storage.tables.*` modules and that protocol, REST route, server, runtime, operator, and facade modules only adapt and delegate.
+Planned tests will verify that durable table-specific operations are implemented on the owning `tba_storage_core.tables.*` modules and that protocol, REST route, server, runtime, operator, and facade modules only adapt and delegate.
 
 The planned checks cover:
 

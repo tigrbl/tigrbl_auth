@@ -23,7 +23,7 @@ body: |-
   Status: proposed
   Date: 2026-05-04
   
-  `tigrbl_auth` MUST normalize tenant isolation and client policy semantics
+  `tba_auth` MUST normalize tenant isolation and client policy semantics
   across admin API, public API, admin UIX, and any in-scope public UIX surfaces.
   The repository MUST distinguish administrative visibility, public-facing
   exposure, mutation authority, and tenant/client scoping rules per surface.

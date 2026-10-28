@@ -35,23 +35,23 @@ The current runtime has concrete `User`, `Client`, `Service`, `ApiKey`, `Service
 
 | Principal | What they should do | Primary UIX | Primary app | Backend surfaces | Interacts with |
 |---|---|---|---|---|---|
-| Platform superuser | create/delete tenants, assign tenant owners/admins, bootstrap authority, inspect cross-tenant posture | `platform-admin-uix` | `tigrbl-auth-platform-admin-console` | `/admin/auth/*`, `/admin/tenants`, `/admin/identities`, `/rpc` | tenants, tenant admins, platform admins, IDP control plane |
-| Platform admin | operate permitted platform workflows, inspect tenant/control-plane state, support tenant operations without root tenant authority | `platform-admin-uix` | `tigrbl-auth-platform-admin-console` | `/admin/auth/*`, `/admin/tenants`, `/admin/identities`, `/rpc` | tenants, audit/control-plane views |
-| Tenant owner | own the tenant boundary, delegate tenant admins, approve sensitive tenant policy/key posture | `tenant-admin-uix` | `tigrbl-auth-tenant-admin-console` | `/admin/auth/*`, `/admin/identities`, `/rpc`, tenant discovery/JWKS | tenant admins, developers, service owners, tenant keys |
-| Tenant admin | create users/principals, issue credentials, rotate tenant keys, manage tenant clients/policy inside the tenant | `tenant-admin-uix` | `tigrbl-auth-tenant-admin-console` | `/admin/auth/*`, `/admin/identities`, `/rpc`, tenant discovery/JWKS | tenant users, tenant developers, service principals, OIDC clients |
-| Tenant human user | log in, register, consent, recover account, manage profile, use tenant applications | `public-uix` | `tigrbl-auth-public-portal` | `/authorize`, `/token`, `/userinfo`, `/logout`, `/register`, tenant discovery | tenant apps, public portal, IDP public lane |
-| Tenant developer / app owner | register apps, manage redirect URIs, rotate client secrets/JWKS metadata, read integration metadata | `developer-uix` | `tigrbl-auth-developer-portal` | `/register`, `/register/{client_id}`, `/rpc` client methods, tenant discovery | OIDC clients, tenant admin delegation, public portal via app login flows |
-| User of a developer-created app | use the tenant app and authenticate through the tenant namespace | `public-uix` during auth only | tenant-owned application, then `tigrbl-auth-public-portal` for auth | `/authorize`, `/token`, `/userinfo`, tenant discovery | tenant app, public portal, IDP public lane |
+| Platform superuser | create/delete tenants, assign tenant owners/admins, bootstrap authority, inspect cross-tenant posture | `platform-admin-uix` | `tba-auth-platform-admin-console` | `/admin/auth/*`, `/admin/tenants`, `/admin/identities`, `/rpc` | tenants, tenant admins, platform admins, IDP control plane |
+| Platform admin | operate permitted platform workflows, inspect tenant/control-plane state, support tenant operations without root tenant authority | `platform-admin-uix` | `tba-auth-platform-admin-console` | `/admin/auth/*`, `/admin/tenants`, `/admin/identities`, `/rpc` | tenants, audit/control-plane views |
+| Tenant owner | own the tenant boundary, delegate tenant admins, approve sensitive tenant policy/key posture | `tenant-admin-uix` | `tba-auth-tenant-admin-console` | `/admin/auth/*`, `/admin/identities`, `/rpc`, tenant discovery/JWKS | tenant admins, developers, service owners, tenant keys |
+| Tenant admin | create users/principals, issue credentials, rotate tenant keys, manage tenant clients/policy inside the tenant | `tenant-admin-uix` | `tba-auth-tenant-admin-console` | `/admin/auth/*`, `/admin/identities`, `/rpc`, tenant discovery/JWKS | tenant users, tenant developers, service principals, OIDC clients |
+| Tenant human user | log in, register, consent, recover account, manage profile, use tenant applications | `public-uix` | `tba-auth-public-portal` | `/authorize`, `/token`, `/userinfo`, `/logout`, `/register`, tenant discovery | tenant apps, public portal, IDP public lane |
+| Tenant developer / app owner | register apps, manage redirect URIs, rotate client secrets/JWKS metadata, read integration metadata | `developer-uix` | `tba-auth-developer-portal` | `/register`, `/register/{client_id}`, `/rpc` client methods, tenant discovery | OIDC clients, tenant admin delegation, public portal via app login flows |
+| User of a developer-created app | use the tenant app and authenticate through the tenant namespace | `public-uix` during auth only | tenant-owned application, then `tba-auth-public-portal` for auth | `/authorize`, `/token`, `/userinfo`, tenant discovery | tenant app, public portal, IDP public lane |
 
 ## Non-human principal matrix
 
 | Principal | What they should do | Primary UIX or owner surface | Primary app | Backend surfaces | Interacts with |
 |---|---|---|---|---|---|
-| OAuth/OIDC app client | initiate auth redirects, exchange codes, use client credentials when configured, receive tokens, identify itself to the IDP | `developer-uix` for management | `tigrbl-auth-developer-portal` for management, `tigrbl-auth-idp` at runtime | `/authorize`, `/token`, `/register`, `/register/{client_id}`, `/par`, `/introspect`, discovery | tenant users, public portal, protected APIs, developer owners |
-| Service principal | authenticate as a named service, hold service keys, access protected resources, support automation | `service-admin-uix` | `tigrbl-auth-service-admin-surface` | API-key/service-key auth, `/token`, `/introspect`, JWKS | protected APIs, tenant admins, service owners |
-| Machine principal | represent a host, runner, node, or automation process with bounded trust | `service-admin-uix` | `tigrbl-auth-service-admin-surface` | future machine control methods, `/token`, `/introspect`, JWKS | service principals, workloads, protected APIs |
-| Workload principal | exchange workload assertions for tokens, bind runtime identity to tenant trust | `service-admin-uix` | `tigrbl-auth-service-admin-surface` | JWT bearer assertion grant, future workload federation methods, `/token` | workload provider, IDP token service, protected APIs |
-| Device principal | request device authorization, poll for completion, receive tokens after human approval | `public-uix` for human approval; no full admin UIX by default | device/CLI client plus `tigrbl-auth-public-portal` for verification | `/device_authorization`, `/token`, public verification flow | tenant human user, OAuth client, IDP token service |
+| OAuth/OIDC app client | initiate auth redirects, exchange codes, use client credentials when configured, receive tokens, identify itself to the IDP | `developer-uix` for management | `tba-auth-developer-portal` for management, `tba-auth-idp` at runtime | `/authorize`, `/token`, `/register`, `/register/{client_id}`, `/par`, `/introspect`, discovery | tenant users, public portal, protected APIs, developer owners |
+| Service principal | authenticate as a named service, hold service keys, access protected resources, support automation | `service-admin-uix` | `tba-auth-service-admin-surface` | API-key/service-key auth, `/token`, `/introspect`, JWKS | protected APIs, tenant admins, service owners |
+| Machine principal | represent a host, runner, node, or automation process with bounded trust | `service-admin-uix` | `tba-auth-service-admin-surface` | future machine control methods, `/token`, `/introspect`, JWKS | service principals, workloads, protected APIs |
+| Workload principal | exchange workload assertions for tokens, bind runtime identity to tenant trust | `service-admin-uix` | `tba-auth-service-admin-surface` | JWT bearer assertion grant, future workload federation methods, `/token` | workload provider, IDP token service, protected APIs |
+| Device principal | request device authorization, poll for completion, receive tokens after human approval | `public-uix` for human approval; no full admin UIX by default | device/CLI client plus `tba-auth-public-portal` for verification | `/device_authorization`, `/token`, public verification flow | tenant human user, OAuth client, IDP token service |
 
 ## Credential and relationship object matrix
 
@@ -104,7 +104,7 @@ flowchart TB
   publicUIX["public-uix"]
   developerUIX["developer-uix"]
   serviceUIX["service-admin-uix"]
-  idp["tigrbl-auth-idp"]
+  idp["tba-auth-idp"]
   tenantApp["Tenant application"]
   protectedAPI["Protected API / resource server"]
 

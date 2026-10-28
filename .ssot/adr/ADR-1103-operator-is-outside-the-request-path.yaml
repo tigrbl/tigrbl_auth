@@ -8,7 +8,7 @@ status: "superseded"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "Create `tigrbl-identity-operator` for CLI and operator workflows."
+summary: "Create `tba-operator-identity` for CLI and operator workflows."
 supersedes: []
 superseded_by:
   - "adr:1132"
@@ -25,7 +25,7 @@ references: []
 body: |-
   ## Decision
   
-  Create `tigrbl-identity-operator` for CLI and operator workflows.
+  Create `tba-operator-identity` for CLI and operator workflows.
   
   It owns:
   

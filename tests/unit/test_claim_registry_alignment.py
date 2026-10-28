@@ -4,8 +4,8 @@ from pathlib import Path
 
 import yaml
 
-from tigrbl_auth.cli.claim_registry import verify_claim_registries
-from tigrbl_auth.config.deployment import resolve_deployment
+from tba_auth.cli.claim_registry import verify_claim_registries
+from tba_auth.config.deployment import resolve_deployment
 
 
 ROOT = Path(__file__).resolve().parents[2]

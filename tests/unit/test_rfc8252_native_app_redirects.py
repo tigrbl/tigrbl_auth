@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from tigrbl_auth.rfc.rfc8252 import (
+from tba_auth.rfc.rfc8252 import (
     RFC8252_SPEC_URL,
     classify_native_redirect_uri,
     is_native_redirect_uri,

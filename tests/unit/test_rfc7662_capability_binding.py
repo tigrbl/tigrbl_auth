@@ -2,12 +2,12 @@ from __future__ import annotations
 
 import pytest
 
-from tigrbl_auth_protocol_oauth import CAPABILITY_REQUIREMENTS
-from tigrbl_auth_protocol_oauth.standards.introspection import (
+from tba_protocol_oauth import CAPABILITY_REQUIREMENTS
+from tba_protocol_oauth.standards.introspection import (
     IntrospectionDisabledError,
     RFC7662IntrospectionService,
 )
-from tigrbl_token_introspection_capability import TokenIntrospectionCapability
+from tba_capability_token_introspection import TokenIntrospectionCapability
 
 
 def test_rfc7662_maps_its_wire_operation_to_the_introspection_capability() -> None:

@@ -6,9 +6,9 @@ from types import SimpleNamespace
 import pytest
 from httpx import ASGITransport, AsyncClient
 
-from tigrbl_auth_backend_app_core import build_app
-from tigrbl_auth.cli.artifacts import build_openrpc_contract, deployment_from_options
-from tigrbl_auth.config.deployment import resolve_deployment
+from tba_app_backend_core import build_app
+from tba_auth.cli.artifacts import build_openrpc_contract, deployment_from_options
+from tba_auth.config.deployment import resolve_deployment
 
 
 PROFILES = ("baseline", "production", "hardening", "fapi2-security", "peer-claim")
@@ -22,7 +22,7 @@ def _assert_openrpc_contract_valid(contract: dict, deployment: object) -> None:
     assert contract.get("info", {}).get("version")
     assert contract.get("servers") == []
 
-    xmeta = contract.get("x-tigrbl-auth", {})
+    xmeta = contract.get("x-tba-auth", {})
     assert xmeta.get("profile") == getattr(deployment, "profile")
     assert xmeta.get("generation_mode") == "rest-only-no-rpc"
 

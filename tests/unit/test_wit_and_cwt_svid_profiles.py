@@ -1,12 +1,12 @@
 import pytest
 
-from tigrbl_proof_of_possession_contracts import PossessionProofVerificationResult
-from tigrbl_workload_credential_profile_cwt_svid_extension import (
+from tba_contracts_proof_of_possession import PossessionProofVerificationResult
+from tba_profile_workload_credential_cwt_svid_extension import (
     EXPERIMENTAL_EXTENSION,
     SPIFFE_CONFORMANT,
     validate_cwt_svid_extension,
 )
-from tigrbl_workload_credential_profile_spiffe_wit_svid import (
+from tba_profile_workload_credential_spiffe_wit_svid import (
     CURRENT_VERSION,
     validate_wit_svid,
 )

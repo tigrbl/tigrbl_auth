@@ -1,4 +1,4 @@
-from tigrbl_auth.uix import (
+from tba_auth.uix import (
     ADMIN_NAVIGATION,
     AdminConsoleShell,
     AdminPrincipal,

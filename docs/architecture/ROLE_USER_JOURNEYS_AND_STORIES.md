@@ -5,7 +5,7 @@
 
 # Role User Journeys and Stories
 
-This note captures proposed user journeys and user stories for the future-state `tigrbl_auth` platform roles.
+This note captures proposed user journeys and user stories for the future-state `tba_auth` platform roles.
 
 Assumption: `direct customer` means a customer using Acme's identity platform directly, not a customer of one of Acme's tenants.
 
@@ -42,7 +42,7 @@ Assumption: `direct customer` means a customer using Acme's identity platform di
 ## 3. Platform operators
 
 1. Journey: run the shared platform.
-   1. As a platform operator, I want to deploy and monitor `tigrbl-auth-idp`, `public-uix`, and admin consoles so that authentication remains available.
+   1. As a platform operator, I want to deploy and monitor `tba-auth-idp`, `public-uix`, and admin consoles so that authentication remains available.
    2. As a platform operator, I want to manage scaling, backups, and restore procedures so that the shared platform can survive expected failures.
    3. As a platform operator, I want runtime smoke checks for public, admin, discovery, JWKS, and token surfaces so that deployments are validated quickly.
 2. Journey: maintain security posture.
@@ -107,7 +107,7 @@ Assumption: `direct customer` means a customer using Acme's identity platform di
    3. As a tenant developer, I want to select public or confidential client posture so that my app's credential model matches its runtime.
 2. Journey: operate app integration.
    1. As a tenant developer, I want to rotate client secrets or JWKS metadata so that app credentials can be maintained safely.
-   2. As a tenant developer, I want discovery URLs and SDK examples so that I can implement login with `@tigrbl-auth/rp` or `tigrbl-auth-protocol-rp`.
+   2. As a tenant developer, I want discovery URLs and SDK examples so that I can implement login with `@tba/client-oidc-relying-party` or `tba-protocol-oidc-relying-party`.
    3. As a tenant developer, I want test and production client records so that I can validate integration before affecting users.
 3. Journey: debug and evolve tenant apps.
    1. As a tenant developer, I want to inspect authorization, callback, token, and logout failures so that I can resolve integration issues.
@@ -165,12 +165,12 @@ Assumption: `direct customer` means a customer using Acme's identity platform di
 
 Product columns:
 
-- `IDP`: `tigrbl-auth-idp`
-- `Platform Admin`: `tigrbl-auth-platform-admin-console` / `platform-admin-uix`
-- `Tenant Admin`: `tigrbl-auth-tenant-admin-console` / `tenant-admin-uix`
-- `Public Portal`: `tigrbl-auth-public-portal` / `public-uix`
-- `Developer Portal`: `tigrbl-auth-developer-portal` / `developer-uix`
-- `Service Admin`: `tigrbl-auth-service-admin-surface` / `service-admin-uix`
+- `IDP`: `tba-auth-idp`
+- `Platform Admin`: `tba-auth-platform-admin-console` / `platform-admin-uix`
+- `Tenant Admin`: `tba-auth-tenant-admin-console` / `tenant-admin-uix`
+- `Public Portal`: `tba-auth-public-portal` / `public-uix`
+- `Developer Portal`: `tba-auth-developer-portal` / `developer-uix`
+- `Service Admin`: `tba-auth-service-admin-surface` / `service-admin-uix`
 - `SDK/API`: RP SDKs, resource-server helpers, protected API integration, or protocol-facing integration docs
 
 Cell legend:

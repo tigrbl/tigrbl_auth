@@ -1,9 +1,9 @@
 # Authorization Decision API + Policy Studio UIX Requirements Brief
 
-**Proposed pairing:** `tigrbl-auth-router-authorization` + `@tigrbl-auth/policy-studio-uix`<br>
+**Proposed pairing:** `tba-router-authorization` + `@tba/policy-studio-uix`<br>
 **Status:** New product surface; substantial engine, contract, graph, and storage foundations exist<br>
 **Prepared:** July 11, 2026<br>
-**Proposed router owner:** `pkgs/80-routers/tigrbl-auth-router-authorization`<br>
+**Proposed router owner:** `pkgs/80-routers/tba-router-authorization`<br>
 **Proposed UIX owner:** `pkgs/105-ui/policy-studio-uix`
 
 ## 1. Product Decision
@@ -452,20 +452,20 @@ Produce:
 
 ## 16. Source Evidence
 
-- `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/policy/`
-- `pkgs/02-contracts/tigrbl-identity-contracts/src/tigrbl_identity_contracts/authority/`
-- `pkgs/05-bases/tigrbl-authz-policy-bases/`
-- `pkgs/10-concrete/tigrbl-authz-policy-rules-concrete/`
-- `pkgs/10-concrete/tigrbl-authz-policy-evaluators-default/`
-- `pkgs/10-concrete/tigrbl-authz-policy-combiner-default/`
-- `pkgs/10-concrete/tigrbl-authz-policy-obligations-concrete/`
-- `pkgs/10-concrete/tigrbl-authz-policy-attributes-mapping/`
-- `pkgs/20-providers/tigrbl-security-authorization-provenance-builder/`
-- `pkgs/20-providers/tigrbl-authz-policy/`
-- `pkgs/20-providers/tigrbl-authz-policy-decision-engine/`
-- `pkgs/30-storage-runtime/tigrbl-authz-policy-authority-derivation-graph/`
-- `pkgs/20-providers/tigrbl-identity-admin-relationship-graph/`
-- `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/`
+- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/policy/`
+- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/authority/`
+- `pkgs/05-bases/tba-bases-authorization-policy/`
+- `pkgs/10-concrete/tba-concrete-authorization-policy-rules/`
+- `pkgs/10-concrete/tba-concrete-authorization-policy-evaluators-default/`
+- `pkgs/10-concrete/tba-concrete-authorization-policy-combiner-default/`
+- `pkgs/10-concrete/tba-concrete-authorization-policy-obligations/`
+- `pkgs/10-concrete/tba-concrete-authorization-policy-attributes-mapping/`
+- `pkgs/20-providers/tba-provider-security-authorization-provenance-builder/`
+- `pkgs/20-providers/tba-runtime-authorization-policy/`
+- `pkgs/20-providers/tba-provider-authorization-policy-decision-engine/`
+- `pkgs/30-storage-runtime/tba-durability-authorization-policy-authority-derivation-graph/`
+- `pkgs/20-providers/tba-provider-identity-admin-relationship-graph/`
+- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/`
 - `docs/authorization-models-focus.md`
 - Policy, delegation, authority, graph, simulation, provenance, UIX, isolation, and monotonicity tests/SSOT records
 - OpenID AuthZEN Authorization API 1.0 specification

@@ -3,7 +3,7 @@ from uuid import uuid4
 
 import pytest
 
-from tigrbl_auth_protocol_oidc.standards import backchannel_logout
+from tba_protocol_oidc.standards import backchannel_logout
 
 
 class _Registration:

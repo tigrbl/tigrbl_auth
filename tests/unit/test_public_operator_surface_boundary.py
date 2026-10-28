@@ -29,19 +29,19 @@ def test_public_operator_surface_means_public_python_exports_not_state_store() -
 def test_facade_does_not_expose_operator_storage_services_as_public_surface() -> None:
     with _package_src_paths_first():
         for module_name in (
-            "tigrbl_auth.services._operator_store",
-            "tigrbl_auth.services.operator_service",
-            "tigrbl_auth.services.audit_service",
+            "tba_auth.services._operator_store",
+            "tba_auth.services.operator_service",
+            "tba_auth.services.audit_service",
         ):
             try:
                 importlib.import_module(module_name)
             except ModuleNotFoundError:
                 continue
-            raise AssertionError(f"{module_name} must not be a public tigrbl_auth service facade")
+            raise AssertionError(f"{module_name} must not be a public tba_auth service facade")
 
 
-def test_operator_store_names_are_not_in_tigrbl_auth_facade_modules() -> None:
-    facade_root = ROOT / "pkgs" / "70-facade" / "tigrbl-auth" / "src" / "tigrbl_auth"
+def test_operator_store_names_are_not_in_tba_auth_facade_modules() -> None:
+    facade_root = ROOT / "pkgs" / "70-facade" / "tba-auth" / "src" / "tba_auth"
     offenders: list[str] = []
     for path in facade_root.rglob("*.py"):
         source = path.read_text(encoding="utf-8")
@@ -61,7 +61,7 @@ def _package_src_paths_first():
         removed = {
             name: module
             for name, module in sys.modules.items()
-            if name == "tigrbl_auth" or name.startswith("tigrbl_auth.")
+            if name == "tba_auth" or name.startswith("tba_auth.")
         }
         for name in list(removed):
             sys.modules.pop(name, None)
@@ -75,7 +75,7 @@ def _package_src_paths_first():
             yield
         finally:
             for name in list(sys.modules):
-                if name == "tigrbl_auth" or name.startswith("tigrbl_auth."):
+                if name == "tba_auth" or name.startswith("tba_auth."):
                     sys.modules.pop(name, None)
             sys.modules.update(removed)
             sys.path = original_path

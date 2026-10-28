@@ -6,9 +6,9 @@ from uuid import uuid4
 import pytest
 from sqlalchemy import select
 
-from tigrbl_identity_jose.key_management import hash_pw
-from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
-from tigrbl_identity_storage_runtime import (
+from tba_provider_identity_jose.key_management import hash_pw
+from tba_provider_secret_hashing_bcrypt import BcryptSecretHasher
+from tba_runtime_identity_storage import (
     append_audit_event_async,
     create_session_async,
     get_active_session_async,
@@ -26,13 +26,13 @@ from tigrbl_identity_storage_runtime import (
     upsert_client_registration_async,
     upsert_token_record_async,
 )
-from tigrbl_auth.services.token_service import (
+from tba_auth.services.token_service import (
     JWTCoder,
     RefreshTokenReuseError,
     issue_persisted_token_pair,
     redeem_refresh_token,
 )
-from tigrbl_auth.tables import (
+from tba_auth.tables import (
     AuditEvent,
     AuthSession,
     Client,

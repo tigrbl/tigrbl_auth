@@ -2,9 +2,9 @@ import asyncio
 
 import pytest_asyncio
 
-from tigrbl_auth_backend_app_public import app
-from tigrbl_auth_backend_app_core.surfaces import PublicRouter
-from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import JWKS_PATH
+from tba_app_backend_public import app
+from tba_app_backend_core.surfaces import PublicRouter
+from tba_protocol_oauth.standards.authorization_server_metadata import JWKS_PATH
 
 
 @pytest_asyncio.fixture()

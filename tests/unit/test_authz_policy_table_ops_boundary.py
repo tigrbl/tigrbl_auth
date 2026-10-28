@@ -5,8 +5,8 @@ from pathlib import Path
 
 import pytest
 from tigrbl import first_table_record, list_table_records
-from tigrbl_identity_storage.tables.delegated_admin_scope import DelegatedAdminScope
-from tigrbl_identity_storage_runtime import (
+from tba_storage_core.tables.delegated_admin_scope import DelegatedAdminScope
+from tba_runtime_identity_storage import (
     assign_role,
     list_active_attribute_policies,
     grant_delegated_scope,
@@ -30,15 +30,15 @@ async def _runtime_op(operation, db, **payload):
 
 def test_authz_policy_store_facade_is_removed() -> None:
     assert (
-        importlib.util.find_spec("tigrbl_identity_storage.authz_policy_store") is None
+        importlib.util.find_spec("tba_storage_core.authz_policy_store") is None
     )
     assert not (
         ROOT
         / "pkgs"
         / "01-storage"
-        / "tigrbl-identity-storage"
+        / "tba-storage-core"
         / "src"
-        / "tigrbl_identity_storage"
+        / "tba_storage_core"
         / "authz_policy_store.py"
     ).exists()
 

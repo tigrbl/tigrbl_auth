@@ -4,7 +4,7 @@ from pathlib import Path
 
 import yaml
 
-from tigrbl_auth.cli.boundary import validate_scope_freeze_metadata
+from tba_auth.cli.boundary import validate_scope_freeze_metadata
 
 ROOT = Path(__file__).resolve().parents[2]
 

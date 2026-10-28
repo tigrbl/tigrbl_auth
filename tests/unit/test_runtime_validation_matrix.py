@@ -4,9 +4,9 @@ import json
 from pathlib import Path
 from types import SimpleNamespace
 
-from tigrbl_auth.cli import runtime as runtime_module
-from tigrbl_auth.config.deployment import resolve_deployment
-from tigrbl_auth.cli.reports import generate_state_reports
+from tba_auth.cli import runtime as runtime_module
+from tba_auth.config.deployment import resolve_deployment
+from tba_auth.cli.reports import generate_state_reports
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -37,7 +37,7 @@ async def _surface_probe_app(scope, receive, send):
 
 class _SurfaceProbeAppWithState:
     def __init__(self, deployment):
-        self.state = SimpleNamespace(tigrbl_auth_deployment=deployment)
+        self.state = SimpleNamespace(tba_auth_deployment=deployment)
 
     async def __call__(self, scope, receive, send):
         await _surface_probe_app(scope, receive, send)
@@ -89,9 +89,9 @@ def test_tox_and_workflows_execute_real_runtime_validation_steps() -> None:
     install_workflow = (ROOT / ".github" / "workflows" / "ci-install-profiles.yml").read_text(encoding="utf-8")
     release_workflow = (ROOT / ".github" / "workflows" / "ci-release-gates.yml").read_text(encoding="utf-8")
 
-    assert "tigrbl-auth serve --check --server uvicorn" in tox_text
-    assert "tigrbl-auth serve --check --server hypercorn" in tox_text
-    assert "tigrbl-auth serve --check --server tigrcorn" in tox_text
+    assert "tba-auth serve --check --server uvicorn" in tox_text
+    assert "tba-auth serve --check --server hypercorn" in tox_text
+    assert "tba-auth serve --check --server tigrcorn" in tox_text
     assert "--probe-surfaces --require-surface-probes" in tox_text
     assert "dist/runtime-smoke" in install_workflow
     assert "dist/runtime-smoke" in release_workflow

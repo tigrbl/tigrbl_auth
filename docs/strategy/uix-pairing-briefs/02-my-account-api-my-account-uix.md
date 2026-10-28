@@ -1,10 +1,10 @@
 # My Account API + UIX Requirements Brief
 
-**Pairing:** `tigrbl-auth-backend-app-my-account` + `@tigrbl-auth/my-account-uix`<br>
+**Pairing:** `tba-app-backend-my-account` + `@tba/ui-my-account`<br>
 **Status:** Delivery brief<br>
 **Prepared:** July 11, 2026<br>
-**Backend app owner:** `pkgs/90-backend-apps/tigrbl-auth-backend-app-my-account`<br>
-**UIX owner:** `pkgs/105-ui/my-account-uix`
+**Backend app owner:** `pkgs/90-backend-apps/tba-app-backend-my-account`<br>
+**UIX owner:** `pkgs/105-ui/tba-ui-my-account`
 
 ## 1. Product Decision
 
@@ -161,7 +161,7 @@ Every page must cover initial, loading, empty, partial-data, validation-error, m
 6. Detect and label the current session using contracted evidence rather than assumptions based on list order.
 7. Add boundary tests proving all mutations remain under `/account/*` and forbidden paths cannot be requested.
 8. Add deterministic tests for identifier encoding, expired sessions, stale resources, repeated revocation, and partial list failures.
-9. Use shared `@tigrbl-auth/uix-core` shells, forms, tables, confirmation dialogs, problem details, copy controls, and responsive record views.
+9. Use shared `@tba/ui-primitives` shells, forms, tables, confirmation dialogs, problem details, copy controls, and responsive record views.
 
 ## 8. UIX Designer Instructions
 
@@ -196,11 +196,11 @@ Produce a route-level copy deck containing:
 
 ## 11. Source Evidence
 
-- `pkgs/90-backend-apps/tigrbl-auth-backend-app-my-account/README.md`
-- `pkgs/90-backend-apps/tigrbl-auth-backend-app-my-account/src/tigrbl_auth_backend_app_my_account/contract.py`
-- `pkgs/105-ui/my-account-uix/README.md`
-- `pkgs/105-ui/my-account-uix/App.tsx`
-- `pkgs/105-ui/my-account-uix/services/myAccountClient.ts`
-- `pkgs/105-ui/my-account-uix/services/workflowCrud.test.ts`
-- `pkgs/105-ui/my-account-uix/pages/myAccountCrudPages.test.tsx`
+- `pkgs/90-backend-apps/tba-app-backend-my-account/README.md`
+- `pkgs/90-backend-apps/tba-app-backend-my-account/src/tba_app_backend_my_account/contract.py`
+- `pkgs/105-ui/tba-ui-my-account/README.md`
+- `pkgs/105-ui/tba-ui-my-account/App.tsx`
+- `pkgs/105-ui/tba-ui-my-account/services/myAccountClient.ts`
+- `pkgs/105-ui/tba-ui-my-account/services/workflowCrud.test.ts`
+- `pkgs/105-ui/tba-ui-my-account/pages/myAccountCrudPages.test.tsx`
 - My Account API product-boundary tests and SSOT feature/claim/test/evidence records

@@ -1,6 +1,6 @@
 # runtime-foundation checkpoint3 Independent Peer Program and Strict Public Claims
 
-This checkpoint extends the independent peer program for `tigrbl_auth`, installs full retained target-to-peer coverage, and preserves Tier 4 bundle normalization logic that fails closed when external artifacts are absent, incomplete, self-attested, or repository-staged.
+This checkpoint extends the independent peer program for `tba_auth`, installs full retained target-to-peer coverage, and preserves Tier 4 bundle normalization logic that fails closed when external artifacts are absent, incomplete, self-attested, or repository-staged.
 
 ## Implemented in this checkpoint
 

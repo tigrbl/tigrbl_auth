@@ -3,14 +3,14 @@ from __future__ import annotations
 
 import pytest
 
-from tigrbl_identity_storage.tables import (
+from tba_storage_core.tables import (
     AuthCode,
     Client,
     ClientRegistration,
     PushedAuthorizationRequest,
     RevokedToken,
 )
-from tigrbl_identity_storage_runtime import (
+from tba_runtime_identity_storage import (
     AuthCodeRuntimeSpec,
     ClientRegistrationRuntimeSpec,
     PushedAuthorizationRequestRuntimeSpec,

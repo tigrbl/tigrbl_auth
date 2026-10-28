@@ -1,9 +1,9 @@
 import pytest
 
-from tigrbl_claim_subject_concrete import SubjectClaim
-from tigrbl_identity_claims_bases import ClaimSetComposerBase
-from tigrbl_identity_contracts.claims import Claim, ClaimDisclosure, ClaimProvenance
-from tigrbl_identity_core import (
+from tba_concrete_claim_subject import SubjectClaim
+from tba_bases_identity_claims import ClaimSetComposerBase
+from tba_contracts_identity.claims import Claim, ClaimDisclosure, ClaimProvenance
+from tba_primitives_identity import (
     ClaimDisclosureMode,
     ClaimIdentifier,
     ClaimNameKind,
@@ -11,7 +11,7 @@ from tigrbl_identity_core import (
     ClaimType,
     ClaimValueType,
 )
-from tigrbl_identity_storage.tables.claim_state import (
+from tba_storage_core.tables.claim_state import (
     ClaimDefinition,
     ClaimProvenanceRecord,
     ClaimReleasePolicy,

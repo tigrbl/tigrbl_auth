@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import importlib
 
-from tigrbl_auth_backend_app_core.surfaces.revocation_surface import (
+from tba_app_backend_core.surfaces.revocation_surface import (
     include_revocation_endpoint,
     router,
 )
@@ -10,7 +10,7 @@ from tigrbl_auth_backend_app_core.surfaces.revocation_surface import (
 
 def test_runtime_surface_mounts_layer_80_revocation_carrier() -> None:
     surface_api = importlib.import_module(
-        "tigrbl_auth_backend_app_core.surfaces.surface_api"
+        "tba_app_backend_core.surfaces.surface_api"
     )
     binding = next(
         item

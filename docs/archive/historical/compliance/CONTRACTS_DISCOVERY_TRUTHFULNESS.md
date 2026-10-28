@@ -14,7 +14,7 @@
 
 ## Scope completed in this checkpoint
 
-This checkpoint completed the external peer validation checkpoint truthfulness and artifact-generation work for the current `tigrbl_auth` repository state.
+This checkpoint completed the external peer validation checkpoint truthfulness and artifact-generation work for the current `tba_auth` repository state.
 
 The implementation updated the repository so that the primary public artifacts now derive from executable deployment, CLI, and target metadata rather than hand-maintained prose or stale static generators.
 
@@ -24,9 +24,9 @@ The implementation updated the repository so that the primary public artifacts n
 
 Updated:
 
-- `tigrbl_auth/config/deployment.py`
-- `tigrbl_auth/config/surfaces.py`
-- `tigrbl_auth/api/surfaces.py`
+- `tba_auth/config/deployment.py`
+- `tba_auth/config/surfaces.py`
+- `tba_auth/api/surfaces.py`
 
 Implemented:
 
@@ -40,7 +40,7 @@ Implemented:
 
 Updated:
 
-- `tigrbl_auth/cli/artifacts.py`
+- `tba_auth/cli/artifacts.py`
 - `scripts/generate_effective_release_manifests.py`
 - `scripts/generate_state_reports.py`
 - `scripts/generate_package_review_gap_analysis.py`
@@ -50,7 +50,7 @@ Updated:
 Implemented:
 
 - generation of OpenAPI, OpenRPC, and discovery artifacts from executable deployment metadata
-- generation of CLI docs, CLI contract artifacts, and CLI conformance snapshots from `tigrbl_auth/cli/metadata.py`
+- generation of CLI docs, CLI contract artifacts, and CLI conformance snapshots from `tba_auth/cli/metadata.py`
 - generated root `CURRENT_STATE.md` and `CERTIFICATION_STATUS.md`
 - generated artifact-truthfulness reporting
 - generated discovery reference documentation for committed profile snapshots

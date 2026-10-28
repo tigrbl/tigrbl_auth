@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from tigrbl_identity_storage_runtime import (
+from tba_runtime_identity_storage import (
     DelegationGrantEdgeRuntimeSpec,
     DelegationGrantProofRuntimeSpec,
     DelegationGrantRuntimeSpec,

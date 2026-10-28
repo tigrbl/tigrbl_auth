@@ -5,8 +5,8 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 from http import HTTPStatus as status
 
-from tigrbl_auth_backend_app_public import app
-from tigrbl_identity_server.security.security_deps import get_current_principal
+from tba_app_backend_public import app
+from tba_server_identity.security.security_deps import get_current_principal
 
 
 @pytest.mark.unit
@@ -40,7 +40,7 @@ async def test_userinfo_returns_claims_json(async_client):
     )
 
     headers = {"Authorization": "Bearer token"}
-    with patch("tigrbl_auth.oidc_userinfo.JWTCoder.default", return_value=mock_coder):
+    with patch("tba_auth.oidc_userinfo.JWTCoder.default", return_value=mock_coder):
         resp = await async_client.get("/userinfo", headers=headers)
 
     app.router.dependency_overrides.pop(get_current_principal, None)
@@ -74,8 +74,8 @@ async def test_userinfo_signed_jwt(async_client):
 
     headers = {"Authorization": "Bearer token", "Accept": "application/jwt"}
     with (
-        patch("tigrbl_auth.oidc_userinfo.JWTCoder.default", return_value=mock_coder),
-        patch("tigrbl_auth.oidc_userinfo._svc", return_value=(mock_svc, "kid1")),
+        patch("tba_auth.oidc_userinfo.JWTCoder.default", return_value=mock_coder),
+        patch("tba_auth.oidc_userinfo._svc", return_value=(mock_svc, "kid1")),
     ):
         resp = await async_client.get("/userinfo", headers=headers)
 

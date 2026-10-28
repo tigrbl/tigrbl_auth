@@ -3,14 +3,14 @@ from __future__ import annotations
 
 import pytest
 
-from tigrbl_identity_server.composition import lifecycle
-from tigrbl_auth_backend_app_core.surfaces import (
+from tba_server_identity.composition import lifecycle
+from tba_app_backend_core.surfaces import (
     TableInitializationScopeError,
     assert_table_initialization_scope,
     build_surface_api,
     table_initialization_manifest,
 )
-from tigrbl_auth.config.deployment import PRODUCT_SURFACE_REGISTRY, resolve_deployment
+from tba_auth.config.deployment import PRODUCT_SURFACE_REGISTRY, resolve_deployment
 
 
 def _route_model_names(router: object) -> set[str]:

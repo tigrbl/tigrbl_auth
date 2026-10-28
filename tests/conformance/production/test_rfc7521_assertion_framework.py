@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import time
 
-from tigrbl_auth import encode_jwt
-from tigrbl_auth.rfc.rfc7521 import (
+from tba_auth import encode_jwt
+from tba_auth.rfc.rfc7521 import (
     JWT_BEARER_ASSERTION_TYPE,
     JWT_BEARER_GRANT_TYPE,
     build_assertion_contract_examples,

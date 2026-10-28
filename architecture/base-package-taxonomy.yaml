@@ -11,60 +11,60 @@ rules:
   network_and_storage_io: forbidden
 families:
   foundational:
-    capability: tigrbl-capability-bases
-    claim: tigrbl-claim-bases
-    identity: tigrbl-identity-bases
-    authentication_credential: tigrbl-authentication-credential-bases
-    authenticator: tigrbl-authenticator-bases
-    token: tigrbl-token-bases
-    replay: tigrbl-replay-bases
+    capability: tba-bases-capability
+    claim: tba-bases-claim
+    identity: tba-bases-identity
+    authentication_credential: tba-bases-authentication-credential
+    authenticator: tba-bases-authenticator
+    token: tba-bases-token
+    replay: tba-bases-replay
   identity_security:
-    authentication_context: tigrbl-authentication-context-bases
-    identity_assurance: tigrbl-identity-assurance-bases
-    public_key_authentication: tigrbl-public-key-authentication-bases
-    did: tigrbl-did-bases
-    workload_identity: tigrbl-workload-identity-bases
-    digital_credential: tigrbl-digital-credential-bases
-    attestation: tigrbl-attestation-bases
-    security_event: tigrbl-security-event-bases
+    authentication_context: tba-bases-authentication-context
+    identity_assurance: tba-bases-identity-assurance
+    public_key_authentication: tba-bases-public-key-authentication
+    did: tba-bases-did
+    workload_identity: tba-bases-workload-identity
+    digital_credential: tba-bases-digital-credential
+    attestation: tba-bases-attestation
+    security_event: tba-bases-security-event
   artifact_and_trust:
-    protected_artifact: tigrbl-protected-artifact-bases
-    certificate: tigrbl-certificate-bases
-    trust: tigrbl-trust-bases
-    key: tigrbl-key-bases
-    signing: tigrbl-signing-bases
-    encryption: tigrbl-encryption-bases
-    proof_of_possession: tigrbl-proof-of-possession-bases
-    token_introspection: tigrbl-token-introspection-bases
+    protected_artifact: tba-bases-protected-artifact
+    certificate: tba-bases-certificate
+    trust: tba-bases-trust
+    key: tba-bases-key
+    signing: tba-bases-signing
+    encryption: tba-bases-encryption
+    proof_of_possession: tba-bases-proof-of-possession
+    token_introspection: tba-bases-token-introspection
   mechanisms:
-    jose: tigrbl-jose-bases
-    cose: tigrbl-cose-bases
+    jose: tba-bases-jose
+    cose: tba-bases-cose
 compatibility_aggregates:
-  tigrbl-identity-claims-bases:
-    canonical: tigrbl-claim-bases
-  tigrbl-identity-model-bases:
+  tba-bases-identity-claims:
+    canonical: tba-bases-claim
+  tba-bases-identity-model:
     canonical:
-      - tigrbl-identity-bases
-      - tigrbl-authentication-credential-bases
-      - tigrbl-identity-core
-  tigrbl-identity-authenticator-bases:
-    canonical: tigrbl-authenticator-bases
-  tigrbl-public-key-authenticator-bases:
-    canonical: tigrbl-public-key-authentication-bases
-  tigrbl-security-artifact-bases:
-    canonical: tigrbl-protected-artifact-bases
-  tigrbl-security-trust-domain-bases:
+      - tba-bases-identity
+      - tba-bases-authentication-credential
+      - tba-primitives-identity
+  tba-bases-identity-authenticator:
+    canonical: tba-bases-authenticator
+  tba-bases-public-key-authenticator:
+    canonical: tba-bases-public-key-authentication
+  tba-bases-security-artifact:
+    canonical: tba-bases-protected-artifact
+  tba-bases-security-trust-domain:
     canonical:
-      - tigrbl-certificate-bases
-      - tigrbl-did-bases
-      - tigrbl-encryption-bases
-      - tigrbl-key-bases
-      - tigrbl-proof-of-possession-bases
-      - tigrbl-signing-bases
-      - tigrbl-token-introspection-bases
-      - tigrbl-trust-bases
-      - tigrbl-workload-identity-bases
+      - tba-bases-certificate
+      - tba-bases-did
+      - tba-bases-encryption
+      - tba-bases-key
+      - tba-bases-proof-of-possession
+      - tba-bases-signing
+      - tba-bases-token-introspection
+      - tba-bases-trust
+      - tba-bases-workload-identity
 pending_extraction:
-  authorization: tigrbl-authorization-bases
-  delegation: tigrbl-delegation-bases
-  release_assurance: tigrbl-release-assurance-bases
+  authorization: tba-authorization-bases
+  delegation: tba-delegation-bases
+  release_assurance: tba-release-assurance-bases

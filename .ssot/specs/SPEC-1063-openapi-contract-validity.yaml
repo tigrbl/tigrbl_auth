@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification defines the conformance contract for generated OpenAPI output in `tigrbl_auth`."
+summary: "This specification defines the conformance contract for generated OpenAPI output in `tba_auth`."
 supersedes: []
 superseded_by: []
 status_notes: []
@@ -16,7 +16,7 @@ references: []
 body: |-
   ## Overview
   
-  This specification defines the conformance contract for generated OpenAPI output in `tigrbl_auth`.
+  This specification defines the conformance contract for generated OpenAPI output in `tba_auth`.
   
   Decision source: `adr:1044`.
   
@@ -36,7 +36,7 @@ body: |-
   - declare an OpenAPI 3.x version,
   - conform to OpenAPI 3.1 expectations for `jsonSchemaDialect` by omitting the field, setting it to `https://spec.openapis.org/oas/3.1/dialect/base`, or preserving an upstream Tigrbl-supported JSON Schema dialect such as `https://json-schema.org/draft/2020-12/schema`,
   - include non-empty `info.title` and `info.version`,
-  - include `x-tigrbl-auth.profile` matching the resolved deployment profile,
+  - include `x-tba-auth.profile` matching the resolved deployment profile,
   - include only public REST routes that are active for the resolved deployment,
   - exclude disabled diagnostics and other hidden control-plane path families from public runtime payloads,
   - include security schemes required by the resolved deployment flags,
@@ -52,7 +52,7 @@ body: |-
   
   If the endpoint is hidden, the generated OpenAPI artifact must still satisfy this specification through the builder and committed artifact paths.
   
-  If the endpoint is exposed, the HTTP payload must satisfy the same conformance requirements without downstream mutation by `tigrbl_auth`.
+  If the endpoint is exposed, the HTTP payload must satisfy the same conformance requirements without downstream mutation by `tba_auth`.
   
   ## Verification
   

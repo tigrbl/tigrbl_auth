@@ -1,6 +1,6 @@
 import pytest
 
-from tigrbl_auth.security.certification import (
+from tba_auth.security.certification import (
     CertificationError,
     DelegationStep,
     assert_delegation_provenance,

@@ -8,7 +8,7 @@ status: "draft"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This SPEC governs browser UIX clients that consume the separated Tigrbl Auth product APIs."
+summary: "This SPEC governs browser UIX clients that consume the separated TBA product APIs."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -24,7 +24,7 @@ references: []
 body: |-
   ## Scope
   
-  This SPEC governs browser UIX clients that consume the separated Tigrbl Auth product APIs.
+  This SPEC governs browser UIX clients that consume the separated TBA product APIs.
   
   ## Requirements
   

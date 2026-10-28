@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification defines normative boundary requirements for non-human and device identity capabilities in `tigrbl_auth`."
+summary: "This specification defines normative boundary requirements for non-human and device identity capabilities in `tba_auth`."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -21,7 +21,7 @@ body: |-
   ## Overview
 
   This specification defines normative boundary requirements for non-human and
-  device identity capabilities in `tigrbl_auth`.
+  device identity capabilities in `tba_auth`.
 
   ## Decision Source
 
@@ -36,7 +36,7 @@ body: |-
 
   ## Normative Requirements
 
-  `tigrbl_auth` MUST distinguish human users, service identities, device
+  `tba_auth` MUST distinguish human users, service identities, device
   identities, and workload identities as separate identity classes.
 
   Service identities MUST have lifecycle semantics for creation, rotation,

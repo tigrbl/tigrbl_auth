@@ -15,5 +15,5 @@ uv add tba
 
 ## Project links
 
-- [Tigrbl Auth repository](https://github.com/tigrbl/tigrbl_auth)
+- [TBA repository](https://github.com/tigrbl/tigrbl_auth)
 - [PyPI project](https://pypi.org/project/tba/)

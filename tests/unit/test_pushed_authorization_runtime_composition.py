@@ -4,7 +4,7 @@ from types import SimpleNamespace
 
 import pytest
 
-import tigrbl_identity_server.security.pushed_authorization as composition
+import tba_server_identity.security.pushed_authorization as composition
 
 
 @pytest.mark.asyncio

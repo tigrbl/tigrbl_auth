@@ -1,6 +1,6 @@
 # Temporary Identity Package Boundary Proposal
 
-This note captures the current working proposal for splitting `tigrbl_auth`
+This note captures the current working proposal for splitting `tba_auth`
 into smaller Python distributions. It is intentionally temporary and should be
 promoted into SSOT ADR/SPEC rows before it becomes binding.
 
@@ -28,23 +28,23 @@ roles but require more work.
 
 | Package | Boundary |
 | --- | --- |
-| `tigrbl-identity-core` | Shared IDs, errors, value objects, tenant and issuer primitives, base interfaces. |
-| `tigrbl-identity-contracts` | OpenAPI, OpenRPC, JSON Schema, discovery schemas, compliance target metadata, generated contract artifacts. |
-| `tigrbl-identity-principals` | Actor taxonomy: users, clients, apps, services, devices, workloads, machines, federated subjects. |
-| `tigrbl-credentials` | Credential taxonomy and lifecycle: passwords, API keys, service keys, client secrets, JWT assertions, certificate bindings, DPoP keys, passkeys/WebAuthn credentials, recovery codes, sessions. |
-| `tigrbl-identity-jose` | JWT, JWK, JWS, JWE, JWA, JWKS, signing, encryption, key material, key selection primitives. |
-| `tigrbl-authz-policy` | Tenant isolation, RBAC/ABAC decisions, scope authorization, admin authorization, audit/provenance policy, credential-use policy. |
-| `tigrbl-auth-protocol-oauth` | OAuth protocol semantics: authorization, token, revocation, introspection, client registration, device authorization, token exchange, PAR, JAR, RAR, DPoP, mTLS, resource indicators. |
-| `tigrbl-auth-protocol-oidc` | OIDC provider semantics: discovery, ID token, UserInfo, sessions, logout, `acr`/`amr` claim emission. |
-| `tigrbl-identity-admin` | Control-plane APIs for tenants, users, apps, clients, services, credentials, policies, key rotation, and governed mutations. |
-| `tigrbl-identity-storage` | Tigrbl/SQLAlchemy table mappings, migrations, repositories, SQLite/Postgres support, database bootstrap, migration portability. SQLAlchemy is the default implementation substrate, not part of the package boundary name. |
-| `tigrbl-identity-server` | Default runnable Authorization Server / OIDC Provider / IdP distribution. |
-| `tigrbl-identity-runtime` | Process/runtime layer: runner profiles, ASGI runtime adapters, lifecycle hooks, runtime manifests, health and diagnostics wiring. |
-| `tigrbl-identity-operator` | CLI/operator workflows over admin, runtime, contracts, and evidence surfaces. |
-| `tigrbl-authz-resource-server` | Protected API toolkit: token validation, JWKS cache, introspection, scope/permission enforcement, DPoP/mTLS/resource checks. |
-| `tigrbl-auth-protocol-rp` | Relying-party/client SDK: discovery, authorization URL, PKCE, callback handling, token exchange, ID-token validation, UserInfo, logout. |
-| `tigrbl-identity-testkit` | Conformance fixtures, fake providers, fake clients, fake resource servers, protocol vectors, downstream harnesses. |
-| `tigrbl-auth` | Backward-compatible facade/default install. |
+| `tba-primitives-identity` | Shared IDs, errors, value objects, tenant and issuer primitives, base interfaces. |
+| `tba-contracts-identity` | OpenAPI, OpenRPC, JSON Schema, discovery schemas, compliance target metadata, generated contract artifacts. |
+| `tba-concrete-identity-principals` | Actor taxonomy: users, clients, apps, services, devices, workloads, machines, federated subjects. |
+| `tba-credentials` | Credential taxonomy and lifecycle: passwords, API keys, service keys, client secrets, JWT assertions, certificate bindings, DPoP keys, passkeys/WebAuthn credentials, recovery codes, sessions. |
+| `tba-provider-identity-jose` | JWT, JWK, JWS, JWE, JWA, JWKS, signing, encryption, key material, key selection primitives. |
+| `tba-runtime-authorization-policy` | Tenant isolation, RBAC/ABAC decisions, scope authorization, admin authorization, audit/provenance policy, credential-use policy. |
+| `tba-protocol-oauth` | OAuth protocol semantics: authorization, token, revocation, introspection, client registration, device authorization, token exchange, PAR, JAR, RAR, DPoP, mTLS, resource indicators. |
+| `tba-protocol-oidc` | OIDC provider semantics: discovery, ID token, UserInfo, sessions, logout, `acr`/`amr` claim emission. |
+| `tba-runtime-identity-administration` | Control-plane APIs for tenants, users, apps, clients, services, credentials, policies, key rotation, and governed mutations. |
+| `tba-storage-core` | Tigrbl/SQLAlchemy table mappings, migrations, repositories, SQLite/Postgres support, database bootstrap, migration portability. SQLAlchemy is the default implementation substrate, not part of the package boundary name. |
+| `tba-server-identity` | Default runnable Authorization Server / OIDC Provider / IdP distribution. |
+| `tba-runtime-identity` | Process/runtime layer: runner profiles, ASGI runtime adapters, lifecycle hooks, runtime manifests, health and diagnostics wiring. |
+| `tba-operator-identity` | CLI/operator workflows over admin, runtime, contracts, and evidence surfaces. |
+| `tba-protocol-authorization-resource-server` | Protected API toolkit: token validation, JWKS cache, introspection, scope/permission enforcement, DPoP/mTLS/resource checks. |
+| `tba-protocol-oidc-relying-party` | Relying-party/client SDK: discovery, authorization URL, PKCE, callback handling, token exchange, ID-token validation, UserInfo, logout. |
+| `tba-testkit-identity` | Conformance fixtures, fake providers, fake clients, fake resource servers, protocol vectors, downstream harnesses. |
+| `tba-auth` | Backward-compatible facade/default install. |
 
 ## First-Class Objects By Package
 
@@ -54,23 +54,23 @@ on day one.
 
 | Package | First-class objects |
 | --- | --- |
-| `tigrbl-identity-core` | `TenantId`, `PrincipalId`, `CredentialId`, `ClientId`, `Issuer`, `Subject`, `Audience`, `Scope`, `Permission`, `GrantType`, `ResponseType`, `TokenType`, `Nonce`, `Clock`, `TimeWindow`, `ErrorCode`, `Result`, `CapabilityName`, `FeatureFlagName`, `RuntimeProfileName`. |
-| `tigrbl-identity-contracts` | `AuthorizeRequest`, `AuthorizeResponse`, `TokenRequest`, `TokenResponse`, `IntrospectionRequest`, `IntrospectionResponse`, `RevocationRequest`, `DeviceAuthorizationRequest`, `DeviceAuthorizationResponse`, `OpenIDConfiguration`, `OAuthAuthorizationServerMetadata`, `ProtectedResourceMetadata`, `JwksDocument`, `AdminRequest`, `AdminResponse`, `ErrorResponse`, `CapabilityManifest`, `OpenApiContractInput`, `OpenRpcContractInput`. |
-| `tigrbl-identity-principals` | `Principal`, `UserPrincipal`, `ClientPrincipal`, `AppPrincipal`, `ServicePrincipal`, `DevicePrincipal`, `MachinePrincipal`, `WorkloadPrincipal`, `FederatedSubjectPrincipal`, `Group`, `Role`, `Membership`, `PrincipalAlias`, `Tenant`, `TenantMembership`, `Ownership`, `Delegation`, `AdminAuthority`, `OwnerAuthority`, `SuperuserAuthority`. |
-| `tigrbl-credentials` | `Credential`, `CredentialBinding`, `CredentialVerificationResult`, `CredentialStatus`, `PasswordCredential`, `ApiKeyCredential`, `ServiceKeyCredential`, `ClientSecretCredential`, `JwtAssertionCredential`, `MtlsCertificateCredential`, `DpopKeyCredential`, `WebAuthnCredential`, `PasskeyCredential`, `RecoveryCodeCredential`, `SessionCookieCredential`, `RefreshTokenCredential`, `DeviceCodeCredential`, `CredentialRotation`, `CredentialRevocation`, `CredentialPosture`. |
-| `tigrbl-identity-jose` | `Jwk`, `Jwks`, `Jws`, `Jwe`, `Jwt`, `JoseHeader`, `KeyId`, `SigningKey`, `VerificationKey`, `EncryptionKey`, `KeySet`, `KeyRotationPlan`, `KeySelectionPolicy`, `TokenSigner`, `TokenVerifier`, `JwksPublisher`, `JoseAlgorithmPolicy`. |
-| `tigrbl-authz-policy` | `Policy`, `PolicyDecision`, `PolicyRequest`, `PolicyContext`, `RbacPolicy`, `AbacPolicy`, `ScopePolicy`, `TenantIsolationPolicy`, `DelegatedAdminPolicy`, `ClientExposurePolicy`, `CredentialUsePolicy`, `AuthorizationTrace`, `PolicyVersion`, `PolicyRegistry`, `AuditPolicy`. |
-| `tigrbl-auth-protocol-oauth` | `AuthorizationGrant`, `AuthorizationCode`, `AccessToken`, `RefreshToken`, `ClientRegistration`, `ClientAuthentication`, `TokenExchange`, `DeviceAuthorization`, `DeviceCode`, `UserCode`, `PushedAuthorizationRequest`, `JwtSecuredAuthorizationRequest`, `RichAuthorizationRequest`, `ResourceIndicator`, `DpopProof`, `MtlsClientBinding`, `TokenRevocation`, `TokenIntrospection`, `OAuthError`. |
-| `tigrbl-auth-protocol-oidc` | `IdToken`, `UserInfo`, `OidcClaims`, `Acr`, `Amr`, `AuthenticationContext`, `OidcProviderMetadata`, `OidcSession`, `SessionState`, `LogoutRequest`, `RpInitiatedLogout`, `FrontChannelLogout`, `BackChannelLogout`, `FederatedLoginResult`. |
-| `tigrbl-identity-admin` | `AdminOperation`, `TenantAdminService`, `UserAdminService`, `ClientAdminService`, `AppAdminService`, `ServiceAdminService`, `CredentialAdminService`, `KeyAdminService`, `SessionAdminService`, `TokenAdminService`, `PolicyAdminService`, `DelegatedAdminService`, `SafeMutation`, `AdminAuditEvent`. |
-| `tigrbl-identity-storage` | `UserTable`, `ClientTable`, `AppTable`, `ServiceTable`, `DeviceTable`, `MachineTable`, `WorkloadTable`, `CredentialTable`, `ApiKeyTable`, `ServiceKeyTable`, `SessionTable`, `TenantTable`, `AuthorizationCodeTable`, `DeviceCodeTable`, `ConsentTable`, `AuditEventTable`, `Repository`, `UnitOfWork`, `Migration`, `DatabaseBootstrap`, `SqliteProfile`, `PostgresProfile`. |
-| `tigrbl-identity-server` | `IdentityApp`, `AppFactory`, `GatewayFactory`, `PluginInstaller`, `RouteManifest`, `SurfaceManifest`, `PublicRestSurface`, `AdminRpcSurface`, `DiagnosticsSurface`, `ProtocolPublisher`, `OpenApiPublisher`, `OpenRpcPublisher`, `DiscoveryPublisher`, `ServerSettings`. |
-| `tigrbl-identity-runtime` | `RuntimeProfile`, `RuntimeConfig`, `RuntimeManifest`, `RunnerProfile`, `UvicornRuntime`, `HypercornRuntime`, `TigrcornRuntime`, `LifecycleHook`, `HealthCheck`, `DiagnosticsEndpoint`, `RuntimeAdapter`, `ServeCommandPlan`, `RuntimeState`. |
-| `tigrbl-identity-operator` | `OperatorCommand`, `BootstrapCommand`, `MigrateCommand`, `ImportCommand`, `ExportCommand`, `KeyRotationCommand`, `ClientCommand`, `ServiceCommand`, `TenantCommand`, `ProfileInspectCommand`, `ClaimsLintCommand`, `ReleaseGateCommand`, `EvidenceBundleCommand`, `CertificationReportCommand`, `OperatorReport`. |
-| `tigrbl-authz-resource-server` | `ResourceServer`, `ResourceMetadata`, `Audience`, `ScopeRequirement`, `PermissionRequirement`, `TokenValidator`, `JwksCache`, `IntrospectionClient`, `SenderConstraintValidator`, `DpopCnfBindingValidator`, `MtlsCnfBindingValidator`, `ResourceAuthorizationResult`. |
-| `tigrbl-auth-protocol-rp` | `RelyingParty`, `LoginRequest`, `AuthorizationUrlBuilder`, `CallbackHandler`, `PkceVerifier`, `TokenExchangeClient`, `IdTokenValidator`, `UserInfoClient`, `LogoutClient`, `RpSession`, `RpConfiguration`. |
-| `tigrbl-identity-testkit` | `FakeClock`, `FakeKeyStore`, `FakeRepository`, `FakePrincipalFactory`, `FakeCredentialFactory`, `FakeIdp`, `FakeOAuthClient`, `FakeResourceServer`, `ProtocolTestVector`, `ConformanceHarness`, `PeerProfileHarness`, `TestTenantFactory`, `TestAppFactory`, `TokenFixture`, `JoseFixture`. |
-| `tigrbl-auth` | `app`, `create_app`, `create_gateway`, `install_plugin`, `IdentityServer`, `DefaultRuntime`, selected public re-exports, install extras, compatibility entrypoints. |
+| `tba-primitives-identity` | `TenantId`, `PrincipalId`, `CredentialId`, `ClientId`, `Issuer`, `Subject`, `Audience`, `Scope`, `Permission`, `GrantType`, `ResponseType`, `TokenType`, `Nonce`, `Clock`, `TimeWindow`, `ErrorCode`, `Result`, `CapabilityName`, `FeatureFlagName`, `RuntimeProfileName`. |
+| `tba-contracts-identity` | `AuthorizeRequest`, `AuthorizeResponse`, `TokenRequest`, `TokenResponse`, `IntrospectionRequest`, `IntrospectionResponse`, `RevocationRequest`, `DeviceAuthorizationRequest`, `DeviceAuthorizationResponse`, `OpenIDConfiguration`, `OAuthAuthorizationServerMetadata`, `ProtectedResourceMetadata`, `JwksDocument`, `AdminRequest`, `AdminResponse`, `ErrorResponse`, `CapabilityManifest`, `OpenApiContractInput`, `OpenRpcContractInput`. |
+| `tba-concrete-identity-principals` | `Principal`, `UserPrincipal`, `ClientPrincipal`, `AppPrincipal`, `ServicePrincipal`, `DevicePrincipal`, `MachinePrincipal`, `WorkloadPrincipal`, `FederatedSubjectPrincipal`, `Group`, `Role`, `Membership`, `PrincipalAlias`, `Tenant`, `TenantMembership`, `Ownership`, `Delegation`, `AdminAuthority`, `OwnerAuthority`, `SuperuserAuthority`. |
+| `tba-credentials` | `Credential`, `CredentialBinding`, `CredentialVerificationResult`, `CredentialStatus`, `PasswordCredential`, `ApiKeyCredential`, `ServiceKeyCredential`, `ClientSecretCredential`, `JwtAssertionCredential`, `MtlsCertificateCredential`, `DpopKeyCredential`, `WebAuthnCredential`, `PasskeyCredential`, `RecoveryCodeCredential`, `SessionCookieCredential`, `RefreshTokenCredential`, `DeviceCodeCredential`, `CredentialRotation`, `CredentialRevocation`, `CredentialPosture`. |
+| `tba-provider-identity-jose` | `Jwk`, `Jwks`, `Jws`, `Jwe`, `Jwt`, `JoseHeader`, `KeyId`, `SigningKey`, `VerificationKey`, `EncryptionKey`, `KeySet`, `KeyRotationPlan`, `KeySelectionPolicy`, `TokenSigner`, `TokenVerifier`, `JwksPublisher`, `JoseAlgorithmPolicy`. |
+| `tba-runtime-authorization-policy` | `Policy`, `PolicyDecision`, `PolicyRequest`, `PolicyContext`, `RbacPolicy`, `AbacPolicy`, `ScopePolicy`, `TenantIsolationPolicy`, `DelegatedAdminPolicy`, `ClientExposurePolicy`, `CredentialUsePolicy`, `AuthorizationTrace`, `PolicyVersion`, `PolicyRegistry`, `AuditPolicy`. |
+| `tba-protocol-oauth` | `AuthorizationGrant`, `AuthorizationCode`, `AccessToken`, `RefreshToken`, `ClientRegistration`, `ClientAuthentication`, `TokenExchange`, `DeviceAuthorization`, `DeviceCode`, `UserCode`, `PushedAuthorizationRequest`, `JwtSecuredAuthorizationRequest`, `RichAuthorizationRequest`, `ResourceIndicator`, `DpopProof`, `MtlsClientBinding`, `TokenRevocation`, `TokenIntrospection`, `OAuthError`. |
+| `tba-protocol-oidc` | `IdToken`, `UserInfo`, `OidcClaims`, `Acr`, `Amr`, `AuthenticationContext`, `OidcProviderMetadata`, `OidcSession`, `SessionState`, `LogoutRequest`, `RpInitiatedLogout`, `FrontChannelLogout`, `BackChannelLogout`, `FederatedLoginResult`. |
+| `tba-runtime-identity-administration` | `AdminOperation`, `TenantAdminService`, `UserAdminService`, `ClientAdminService`, `AppAdminService`, `ServiceAdminService`, `CredentialAdminService`, `KeyAdminService`, `SessionAdminService`, `TokenAdminService`, `PolicyAdminService`, `DelegatedAdminService`, `SafeMutation`, `AdminAuditEvent`. |
+| `tba-storage-core` | `UserTable`, `ClientTable`, `AppTable`, `ServiceTable`, `DeviceTable`, `MachineTable`, `WorkloadTable`, `CredentialTable`, `ApiKeyTable`, `ServiceKeyTable`, `SessionTable`, `TenantTable`, `AuthorizationCodeTable`, `DeviceCodeTable`, `ConsentTable`, `AuditEventTable`, `Repository`, `UnitOfWork`, `Migration`, `DatabaseBootstrap`, `SqliteProfile`, `PostgresProfile`. |
+| `tba-server-identity` | `IdentityApp`, `AppFactory`, `GatewayFactory`, `PluginInstaller`, `RouteManifest`, `SurfaceManifest`, `PublicRestSurface`, `AdminRpcSurface`, `DiagnosticsSurface`, `ProtocolPublisher`, `OpenApiPublisher`, `OpenRpcPublisher`, `DiscoveryPublisher`, `ServerSettings`. |
+| `tba-runtime-identity` | `RuntimeProfile`, `RuntimeConfig`, `RuntimeManifest`, `RunnerProfile`, `UvicornRuntime`, `HypercornRuntime`, `TigrcornRuntime`, `LifecycleHook`, `HealthCheck`, `DiagnosticsEndpoint`, `RuntimeAdapter`, `ServeCommandPlan`, `RuntimeState`. |
+| `tba-operator-identity` | `OperatorCommand`, `BootstrapCommand`, `MigrateCommand`, `ImportCommand`, `ExportCommand`, `KeyRotationCommand`, `ClientCommand`, `ServiceCommand`, `TenantCommand`, `ProfileInspectCommand`, `ClaimsLintCommand`, `ReleaseGateCommand`, `EvidenceBundleCommand`, `CertificationReportCommand`, `OperatorReport`. |
+| `tba-protocol-authorization-resource-server` | `ResourceServer`, `ResourceMetadata`, `Audience`, `ScopeRequirement`, `PermissionRequirement`, `TokenValidator`, `JwksCache`, `IntrospectionClient`, `SenderConstraintValidator`, `DpopCnfBindingValidator`, `MtlsCnfBindingValidator`, `ResourceAuthorizationResult`. |
+| `tba-protocol-oidc-relying-party` | `RelyingParty`, `LoginRequest`, `AuthorizationUrlBuilder`, `CallbackHandler`, `PkceVerifier`, `TokenExchangeClient`, `IdTokenValidator`, `UserInfoClient`, `LogoutClient`, `RpSession`, `RpConfiguration`. |
+| `tba-testkit-identity` | `FakeClock`, `FakeKeyStore`, `FakeRepository`, `FakePrincipalFactory`, `FakeCredentialFactory`, `FakeIdp`, `FakeOAuthClient`, `FakeResourceServer`, `ProtocolTestVector`, `ConformanceHarness`, `PeerProfileHarness`, `TestTenantFactory`, `TestAppFactory`, `TokenFixture`, `JoseFixture`. |
+| `tba-auth` | `app`, `create_app`, `create_gateway`, `install_plugin`, `IdentityServer`, `DefaultRuntime`, selected public re-exports, install extras, compatibility entrypoints. |
 
 The package-boundary rule is:
 
@@ -92,139 +92,139 @@ Distribution names use hyphens. Import names should use independent top-level
 packages with underscores:
 
 ```text
-dist:   tigrbl-auth-protocol-oauth
-import: tigrbl_auth_protocol_oauth
+dist:   tba-protocol-oauth
+import: tba_protocol_oauth
 ```
 
-Do not use a shared `tigrbl_identity.*` namespace package. Each distribution
-owns its own import root, such as `tigrbl_identity_core`,
-`tigrbl_auth_protocol_oauth`, and `tigrbl_identity_storage`. Also avoid
+Do not use a shared `tba_identity.*` namespace package. Each distribution
+owns its own import root, such as `tba_primitives_identity`,
+`tba_protocol_oauth`, and `tba_storage_core`. Also avoid
 `tigrbl.identity.*` unless the existing `tigrbl` package is deliberately
 converted into a namespace package.
 
 `A -> B` means package `A` may import package `B`.
 
 ```text
-tigrbl-identity-contracts
-  -> tigrbl-identity-core
+tba-contracts-identity
+  -> tba-primitives-identity
 
-tigrbl-identity-principals
-  -> tigrbl-identity-core
+tba-concrete-identity-principals
+  -> tba-primitives-identity
 
-tigrbl-credentials
-  -> tigrbl-identity-core
-  -> tigrbl-identity-contracts
-  -> tigrbl-identity-principals
+tba-credentials
+  -> tba-primitives-identity
+  -> tba-contracts-identity
+  -> tba-concrete-identity-principals
 
-tigrbl-identity-jose
-  -> tigrbl-identity-core
-  -> tigrbl-identity-contracts
+tba-provider-identity-jose
+  -> tba-primitives-identity
+  -> tba-contracts-identity
 
-tigrbl-authz-policy
-  -> tigrbl-identity-core
-  -> tigrbl-identity-contracts
-  -> tigrbl-identity-principals
-  -> tigrbl-credentials
+tba-runtime-authorization-policy
+  -> tba-primitives-identity
+  -> tba-contracts-identity
+  -> tba-concrete-identity-principals
+  -> tba-credentials
 
-tigrbl-auth-protocol-oauth
-  -> tigrbl-identity-core
-  -> tigrbl-identity-contracts
-  -> tigrbl-identity-principals
-  -> tigrbl-credentials
-  -> tigrbl-identity-jose
-  -> tigrbl-authz-policy
+tba-protocol-oauth
+  -> tba-primitives-identity
+  -> tba-contracts-identity
+  -> tba-concrete-identity-principals
+  -> tba-credentials
+  -> tba-provider-identity-jose
+  -> tba-runtime-authorization-policy
 
-tigrbl-auth-protocol-oidc
-  -> tigrbl-identity-core
-  -> tigrbl-identity-contracts
-  -> tigrbl-identity-principals
-  -> tigrbl-credentials
-  -> tigrbl-identity-jose
-  -> tigrbl-auth-protocol-oauth
-  -> tigrbl-authz-policy
+tba-protocol-oidc
+  -> tba-primitives-identity
+  -> tba-contracts-identity
+  -> tba-concrete-identity-principals
+  -> tba-credentials
+  -> tba-provider-identity-jose
+  -> tba-protocol-oauth
+  -> tba-runtime-authorization-policy
 
-tigrbl-identity-admin
-  -> tigrbl-identity-core
-  -> tigrbl-identity-contracts
-  -> tigrbl-identity-principals
-  -> tigrbl-credentials
-  -> tigrbl-identity-jose
-  -> tigrbl-authz-policy
-  -> tigrbl-auth-protocol-oauth
-  -> tigrbl-auth-protocol-oidc
+tba-runtime-identity-administration
+  -> tba-primitives-identity
+  -> tba-contracts-identity
+  -> tba-concrete-identity-principals
+  -> tba-credentials
+  -> tba-provider-identity-jose
+  -> tba-runtime-authorization-policy
+  -> tba-protocol-oauth
+  -> tba-protocol-oidc
 
-tigrbl-identity-storage
-  -> tigrbl-identity-core
-  -> tigrbl-identity-contracts
-  -> tigrbl-identity-principals
-  -> tigrbl-credentials
-  -> tigrbl-authz-policy
-  -> tigrbl-auth-protocol-oauth
-  -> tigrbl-auth-protocol-oidc
+tba-storage-core
+  -> tba-primitives-identity
+  -> tba-contracts-identity
+  -> tba-concrete-identity-principals
+  -> tba-credentials
+  -> tba-runtime-authorization-policy
+  -> tba-protocol-oauth
+  -> tba-protocol-oidc
 
-tigrbl-identity-server
-  -> tigrbl-identity-core
-  -> tigrbl-identity-contracts
-  -> tigrbl-identity-principals
-  -> tigrbl-credentials
-  -> tigrbl-identity-jose
-  -> tigrbl-authz-policy
-  -> tigrbl-auth-protocol-oauth
-  -> tigrbl-auth-protocol-oidc
-  -> tigrbl-identity-admin
-  -> tigrbl-identity-storage
+tba-server-identity
+  -> tba-primitives-identity
+  -> tba-contracts-identity
+  -> tba-concrete-identity-principals
+  -> tba-credentials
+  -> tba-provider-identity-jose
+  -> tba-runtime-authorization-policy
+  -> tba-protocol-oauth
+  -> tba-protocol-oidc
+  -> tba-runtime-identity-administration
+  -> tba-storage-core
 
-tigrbl-identity-runtime
-  -> tigrbl-identity-core
-  -> tigrbl-identity-contracts
-  -> tigrbl-identity-server
+tba-runtime-identity
+  -> tba-primitives-identity
+  -> tba-contracts-identity
+  -> tba-server-identity
 
-tigrbl-identity-operator
-  -> tigrbl-identity-core
-  -> tigrbl-identity-contracts
-  -> tigrbl-identity-admin
-  -> tigrbl-identity-storage
-  -> tigrbl-identity-server
-  -> tigrbl-identity-runtime
+tba-operator-identity
+  -> tba-primitives-identity
+  -> tba-contracts-identity
+  -> tba-runtime-identity-administration
+  -> tba-storage-core
+  -> tba-server-identity
+  -> tba-runtime-identity
 
-tigrbl-authz-resource-server
-  -> tigrbl-identity-core
-  -> tigrbl-identity-contracts
-  -> tigrbl-identity-principals
-  -> tigrbl-credentials
-  -> tigrbl-identity-jose
-  -> tigrbl-authz-policy
-  -> tigrbl-auth-protocol-oauth
-  -> tigrbl-auth-protocol-oidc
+tba-protocol-authorization-resource-server
+  -> tba-primitives-identity
+  -> tba-contracts-identity
+  -> tba-concrete-identity-principals
+  -> tba-credentials
+  -> tba-provider-identity-jose
+  -> tba-runtime-authorization-policy
+  -> tba-protocol-oauth
+  -> tba-protocol-oidc
 
-tigrbl-auth-protocol-rp
-  -> tigrbl-identity-core
-  -> tigrbl-identity-contracts
-  -> tigrbl-credentials
-  -> tigrbl-identity-jose
-  -> tigrbl-auth-protocol-oauth
-  -> tigrbl-auth-protocol-oidc
+tba-protocol-oidc-relying-party
+  -> tba-primitives-identity
+  -> tba-contracts-identity
+  -> tba-credentials
+  -> tba-provider-identity-jose
+  -> tba-protocol-oauth
+  -> tba-protocol-oidc
 
-tigrbl-identity-testkit
-  -> tigrbl-identity-core
-  -> tigrbl-identity-contracts
-  -> tigrbl-identity-principals
-  -> tigrbl-credentials
-  -> tigrbl-identity-jose
-  -> tigrbl-authz-policy
-  -> tigrbl-auth-protocol-oauth
-  -> tigrbl-auth-protocol-oidc
-  -> tigrbl-identity-admin
-  -> tigrbl-identity-storage
-  -> tigrbl-identity-server
-  -> tigrbl-authz-resource-server
-  -> tigrbl-auth-protocol-rp
+tba-testkit-identity
+  -> tba-primitives-identity
+  -> tba-contracts-identity
+  -> tba-concrete-identity-principals
+  -> tba-credentials
+  -> tba-provider-identity-jose
+  -> tba-runtime-authorization-policy
+  -> tba-protocol-oauth
+  -> tba-protocol-oidc
+  -> tba-runtime-identity-administration
+  -> tba-storage-core
+  -> tba-server-identity
+  -> tba-protocol-authorization-resource-server
+  -> tba-protocol-oidc-relying-party
 
-tigrbl-auth
-  -> tigrbl-identity-core
-  -> tigrbl-identity-contracts
-  -> tigrbl-identity-server
-  -> tigrbl-identity-runtime
+tba-auth
+  -> tba-primitives-identity
+  -> tba-contracts-identity
+  -> tba-server-identity
+  -> tba-runtime-identity
 ```
 
 ### One-Way Edges
@@ -297,11 +297,11 @@ the request path.
 
 | Package | Status |
 | --- | --- |
-| `tigrbl-identity-federation` | Later extension for social/SSO providers, OIDC Federation, external provider trust, account linking, and cross-cloud trust. |
-| `tigrbl-identity-provisioning` | Later only if SCIM provisioning comes back into scope. |
-| `tigrbl-identity-saml` | Do not create now; SAML IdP/SP is explicitly out of scope. |
-| `tigrbl-identity-webauthn` | Do not create now; keep passkeys/WebAuthn under credentials until it is large enough to split. |
-| `tigrbl-identity-browser` | Do not create now for Python distributions; browser helpers belong under RP or a future non-Python SDK. |
+| `tba-identity-federation` | Later extension for social/SSO providers, OIDC Federation, external provider trust, account linking, and cross-cloud trust. |
+| `tba-identity-provisioning` | Later only if SCIM provisioning comes back into scope. |
+| `tba-identity-saml` | Do not create now; SAML IdP/SP is explicitly out of scope. |
+| `tba-identity-webauthn` | Do not create now; keep passkeys/WebAuthn under credentials until it is large enough to split. |
+| `tba-identity-browser` | Do not create now for Python distributions; browser helpers belong under RP or a future non-Python SDK. |
 
 ## Tenant, App, Client, And User Flows
 
@@ -314,9 +314,9 @@ The desired product flow is:
 5. Tenant admins can create apps.
 6. Each app can own one or more OAuth/OIDC clients.
 7. App clients define redirect URIs, grant types, scopes, consent policy, secret/public-client posture, and allowed login behavior.
-8. End users can log into those tenant apps using the `tigrbl-identity-server` as the OAuth/OIDC provider.
-9. The app uses `tigrbl-auth-protocol-rp` to initiate login and handle callback/token validation.
-10. The app's APIs use `tigrbl-authz-resource-server` to validate access tokens and enforce authorization.
+8. End users can log into those tenant apps using the `tba-server-identity` as the OAuth/OIDC provider.
+9. The app uses `tba-protocol-oidc-relying-party` to initiate login and handle callback/token validation.
+10. The app's APIs use `tba-protocol-authorization-resource-server` to validate access tokens and enforce authorization.
 
 This is the Google/GitHub-style platform pattern:
 
@@ -408,22 +408,22 @@ human identity record.
 
 | Object | Package that owns model semantics | Persisted/admin ownership |
 | --- | --- | --- |
-| `Tenant` | `tigrbl-identity-core` or `tigrbl-identity-principals` | `tigrbl-identity-admin` creates and manages it. |
-| `User` / `Account` | `tigrbl-identity-principals` | `tigrbl-identity-admin` and self-registration flows manage lifecycle. |
-| `TenantMembership` | `tigrbl-identity-principals` and `tigrbl-authz-policy` | `tigrbl-identity-admin` manages membership and tenant-scoped authority. |
-| `Role` / `Entitlement` | `tigrbl-authz-policy` | `tigrbl-identity-admin` governs assignment. |
-| `App` | `tigrbl-identity-principals` | `tigrbl-identity-admin` creates and manages app registration. |
-| `OAuthClient` | `tigrbl-identity-principals` and `tigrbl-auth-protocol-oauth` | `tigrbl-identity-admin` manages persisted client records; dynamic client registration belongs to OAuth protocol behavior. |
-| `RelyingParty` | Runtime role of an app/client, not usually persisted separately | `tigrbl-auth-protocol-rp` provides the SDK used by consuming apps. |
-| `ResourceServer` | `tigrbl-identity-principals` and `tigrbl-authz-resource-server` | `tigrbl-identity-admin` registers resource/audience metadata. |
-| `Service` | `tigrbl-identity-principals` | `tigrbl-identity-admin` manages lifecycle. |
-| `Machine` | `tigrbl-identity-principals` | `tigrbl-identity-admin` or workload trust integration manages lifecycle. |
-| `Workload` | `tigrbl-identity-principals` | `tigrbl-identity-admin` or future workload registry manages lifecycle. |
-| `Device` | `tigrbl-identity-principals` | User enrollment and/or admin enrollment manages lifecycle. |
-| `Credential` | `tigrbl-credentials` | `tigrbl-identity-admin` manages issue, bind, rotate, revoke, expire. |
-| `Policy` | `tigrbl-authz-policy` | `tigrbl-identity-admin` governs policy lifecycle. |
-| Runtime profile/config | `tigrbl-identity-runtime` | Operator/runtime config owns deployment selection and overrides. |
-| OAuth/OIDC protocol behavior | `tigrbl-auth-protocol-oauth`, `tigrbl-auth-protocol-oidc`, `tigrbl-identity-jose` | Used by server, RP, and resource-server packages. |
+| `Tenant` | `tba-primitives-identity` or `tba-concrete-identity-principals` | `tba-runtime-identity-administration` creates and manages it. |
+| `User` / `Account` | `tba-concrete-identity-principals` | `tba-runtime-identity-administration` and self-registration flows manage lifecycle. |
+| `TenantMembership` | `tba-concrete-identity-principals` and `tba-runtime-authorization-policy` | `tba-runtime-identity-administration` manages membership and tenant-scoped authority. |
+| `Role` / `Entitlement` | `tba-runtime-authorization-policy` | `tba-runtime-identity-administration` governs assignment. |
+| `App` | `tba-concrete-identity-principals` | `tba-runtime-identity-administration` creates and manages app registration. |
+| `OAuthClient` | `tba-concrete-identity-principals` and `tba-protocol-oauth` | `tba-runtime-identity-administration` manages persisted client records; dynamic client registration belongs to OAuth protocol behavior. |
+| `RelyingParty` | Runtime role of an app/client, not usually persisted separately | `tba-protocol-oidc-relying-party` provides the SDK used by consuming apps. |
+| `ResourceServer` | `tba-concrete-identity-principals` and `tba-protocol-authorization-resource-server` | `tba-runtime-identity-administration` registers resource/audience metadata. |
+| `Service` | `tba-concrete-identity-principals` | `tba-runtime-identity-administration` manages lifecycle. |
+| `Machine` | `tba-concrete-identity-principals` | `tba-runtime-identity-administration` or workload trust integration manages lifecycle. |
+| `Workload` | `tba-concrete-identity-principals` | `tba-runtime-identity-administration` or future workload registry manages lifecycle. |
+| `Device` | `tba-concrete-identity-principals` | User enrollment and/or admin enrollment manages lifecycle. |
+| `Credential` | `tba-credentials` | `tba-runtime-identity-administration` manages issue, bind, rotate, revoke, expire. |
+| `Policy` | `tba-runtime-authorization-policy` | `tba-runtime-identity-administration` governs policy lifecycle. |
+| Runtime profile/config | `tba-runtime-identity` | Operator/runtime config owns deployment selection and overrides. |
+| OAuth/OIDC protocol behavior | `tba-protocol-oauth`, `tba-protocol-oidc`, `tba-provider-identity-jose` | Used by server, RP, and resource-server packages. |
 
 ## Service And Machine Identity Flows
 

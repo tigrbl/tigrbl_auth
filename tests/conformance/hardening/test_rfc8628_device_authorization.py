@@ -1,6 +1,6 @@
 
-from tigrbl_auth.cli.artifacts import build_openapi_contract, deployment_from_options
-from tigrbl_auth.standards.oidc.discovery_metadata import build_openid_config
+from tba_auth.cli.artifacts import build_openapi_contract, deployment_from_options
+from tba_auth.standards.oidc.discovery_metadata import build_openid_config
 
 
 def test_rfc8628_device_authorization_is_published():

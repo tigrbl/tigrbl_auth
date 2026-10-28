@@ -1,18 +1,18 @@
 """Tests for EdDSA helpers (RFC 8037).
 
 These tests exercise the minimal Ed25519 signing utilities and feature
-flag behaviour defined in :mod:`tigrbl_auth.rfc.rfc8037`.
+flag behaviour defined in :mod:`tba_auth.rfc.rfc8037`.
 """
 
 import pytest
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 
-from tigrbl_auth.rfc.rfc8037 import (
+from tba_auth.rfc.rfc8037 import (
     RFC8037_SPEC_URL,
     sign_eddsa,
     verify_eddsa,
 )
-from tigrbl_auth.runtime_cfg import settings
+from tba_auth.runtime_cfg import settings
 
 
 @pytest.mark.unit

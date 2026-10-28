@@ -30,12 +30,12 @@ peer_identity:
   peer_version: 2026.03.25+fixture
   peer_operator: checkpoint-staged-external-root
 peer_runtime:
-  image_ref: ghcr.io/tigrbl-auth/peer-fixtures/par-jar-rar-client:2026-03-25
+  image_ref: ghcr.io/tba-auth/peer-fixtures/par-jar-rar-client:2026-03-25
   image_digest: sha256:b7e7e02fe90e0a84b2be8c9e5525afd80b1d694552151e384c70bc53b9cfb33c
   execution_style: black-box-http
 independence_attestation:
   attestation_class: repository-fixture-nonindependent
-  attesting_organization: tigrbl_auth checkpoint fixture generator
+  attesting_organization: tba_auth checkpoint fixture generator
   attesting_contact: repository-local-fixture@invalid.example
   attestation_timestamp: '2026-03-26T23:28:15+00:00'
   counterpart_identified: true

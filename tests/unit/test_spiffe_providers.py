@@ -1,5 +1,5 @@
 import pytest
-from tigrbl_identity_contracts.workloads import (
+from tba_contracts_identity.workloads import (
     SpiffeId,
     SpiffeTrustBundle,
     Svid,
@@ -7,9 +7,9 @@ from tigrbl_identity_contracts.workloads import (
     TrustDomain,
     WorkloadSelector,
 )
-from tigrbl_spiffe_bundle_provider import VersionedSpiffeBundleProvider
-from tigrbl_spiffe_workload_api_provider import LocalSpiffeWorkloadApiProvider
-from tigrbl_svid_concrete import X509SvidStructure
+from tba_provider_spiffe_bundle import VersionedSpiffeBundleProvider
+from tba_provider_spiffe_workload_api import LocalSpiffeWorkloadApiProvider
+from tba_concrete_svid import X509SvidStructure
 from tigrbl_svid_verifier_provider import ProfiledSvidVerifier
 
 

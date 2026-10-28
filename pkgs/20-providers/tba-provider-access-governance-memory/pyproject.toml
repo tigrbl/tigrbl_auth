@@ -1,0 +1,14 @@
+[project]
+name = "tba-provider-access-governance-memory"
+version = "0.4.0.dev2"
+description = "In-memory access governance, provisioning, review, and service-identity providers."
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+dependencies = ["tba-concrete-service-credential==0.4.0.dev2", "tba-concrete-service-identity==0.4.0.dev2", "tba-contracts-identity==0.4.0.dev2", "tba-primitives-identity==0.4.0.dev2"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tba_provider_access_governance_memory", from = "src" }]

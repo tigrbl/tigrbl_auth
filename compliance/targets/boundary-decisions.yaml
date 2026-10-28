@@ -1,5 +1,5 @@
 schema_version: 1
-package: tigrbl_auth
+package: tba_auth
 decisions:
 - id: BND-001
   statement: Only declared targets are certifiable.
@@ -44,7 +44,7 @@ decisions:
 - id: BND-005
   statement: Only Tigrbl public APIs may be used for release-path composition and
     runtime integration.
-  adr: docs/adr/ADR-0014-tigrbl-public-app-only-composition.md
+  adr: docs/adr/ADR-0014-tba-public-app-only-composition.md
   enforced_by_checks:
   - framework_leakage_scan
   - boundary-import-scan

@@ -29,6 +29,6 @@ The following profile-specific discovery snapshots are committed from executable
 
 ## Notes
 
-- snapshot files are generated from `tigrbl_auth.cli.artifacts.write_discovery_artifacts` using executable deployment metadata
+- snapshot files are generated from `tba_auth.cli.artifacts.write_discovery_artifacts` using executable deployment metadata
 - JWKS snapshots intentionally omit live signing material and record only a deterministic public-artifact shape
 - current authoritative CLI/runtime/discovery docs are those listed in `docs/reference/README.md`

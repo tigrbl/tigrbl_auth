@@ -4,18 +4,18 @@ from __future__ import annotations
 def test_all_concrete_implementations_inherit_05_bases() -> None:
     from inspect import isclass
 
-    import tigrbl_authz_policy_attributes_mapping as attributes
-    import tigrbl_authz_policy_combiner_default as combining
-    import tigrbl_authz_policy_evaluators_default as evaluators
-    import tigrbl_authz_policy_obligations_concrete as obligations
-    import tigrbl_authz_policy_rules_concrete as rules
+    import tba_concrete_authorization_policy_attributes_mapping as attributes
+    import tba_concrete_authorization_policy_combiner_default as combining
+    import tba_concrete_authorization_policy_evaluators_default as evaluators
+    import tba_concrete_authorization_policy_obligations as obligations
+    import tba_concrete_authorization_policy_rules as rules
     import tigrbl_identity_credentials_concrete as credentials
     import tigrbl_identity_identities_concrete as identities
-    import tigrbl_authorization_scope_set_matcher_concrete as scopes
-    import tigrbl_security_claims_provider_local as claims
-    import tigrbl_pairwise_subject_identifier_concrete as pairwise_subjects
-    import tigrbl_public_subject_identifier_concrete as public_subjects
-    from tigrbl_authz_policy_bases import (
+    import tba_concrete_authorization_scope_set_matcher as scopes
+    import tba_provider_security_claims_provider_local as claims
+    import tba_concrete_pairwise_subject_identifier as pairwise_subjects
+    import tba_concrete_public_subject_identifier as public_subjects
+    from tba_bases_authorization_policy import (
         AdviceHandlerBase,
         AttributeResolverBase,
         AttributeSelectorBase,
@@ -25,11 +25,11 @@ def test_all_concrete_implementations_inherit_05_bases() -> None:
         PolicyRuleBase,
         RuleEvaluatorBase,
     )
-    from tigrbl_identity_model_bases import CredentialBase, IdentityBase
-    from tigrbl_authz_policy_bases import ScopeMatcherBase
-    from tigrbl_identity_claims_bases import ClaimsProviderBase
-    from tigrbl_digital_credential_bases import CredentialFormatBase
-    from tigrbl_identity_model_bases import SubjectIdentifierStrategyBase
+    from tba_bases_identity_model import CredentialBase, IdentityBase
+    from tba_bases_authorization_policy import ScopeMatcherBase
+    from tba_bases_identity_claims import ClaimsProviderBase
+    from tba_bases_digital_credential import CredentialFormatBase
+    from tba_bases_identity_model import SubjectIdentifierStrategyBase
 
     groups = {
         IdentityBase: [getattr(identities, name) for name in identities.__all__],

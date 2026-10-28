@@ -2,12 +2,12 @@ from __future__ import annotations
 
 import pytest
 
-from tigrbl_auth_protocol_oauth import CAPABILITY_REQUIREMENTS
-from tigrbl_auth_protocol_oauth.standards.pushed_authorization_requests import (
+from tba_protocol_oauth import CAPABILITY_REQUIREMENTS
+from tba_protocol_oauth.standards.pushed_authorization_requests import (
     PushedAuthorizationDisabledError,
     RFC9126PushedAuthorizationService,
 )
-from tigrbl_pushed_authorization_capability import PushedAuthorizationCapability
+from tba_capability_authorization_request_staging import PushedAuthorizationCapability
 
 
 def test_rfc9126_maps_wire_operation_to_pushed_authorization_capability() -> None:

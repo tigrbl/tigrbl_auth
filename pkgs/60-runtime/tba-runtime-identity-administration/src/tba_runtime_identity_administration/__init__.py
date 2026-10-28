@@ -1,0 +1,21 @@
+"""Admin control-plane surfaces for the TBA identity package suite."""
+
+from __future__ import annotations
+
+from ._control_plane import (
+    AdminControlPlane,
+    AdminControlPlaneError,
+    AdminResource,
+    AdminResourceKind,
+    AdminResourceStatus,
+    App,
+)
+
+__all__ = [
+    "AdminControlPlane",
+    "AdminControlPlaneError",
+    "AdminResource",
+    "AdminResourceKind",
+    "AdminResourceStatus",
+    "App",
+]

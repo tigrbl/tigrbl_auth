@@ -29,10 +29,12 @@ EXPECTED_LAYER_ORDER = (
     "30-storage-runtime",
     "40-capabilities",
     "50-protocols",
+    "55-profiles",
     "60-runtime",
     "70-facade",
     "75-clients",
     "80-routers",
+    "85-middleware",
     "90-backend-apps",
     "100-uix-core",
     "105-ui",
@@ -87,23 +89,23 @@ def test_package_exceptions_are_eliminated_and_path_classification_is_authoritat
 
     assert classify_layer(ROOT / "pkgs" / "80-routers" / "example", policy) == "80-routers"
     assert not package_dependency_allowed(
-        "tigrbl-identity-runtime",
+        "tba-runtime-identity",
         "60-runtime",
-        "tigrbl-auth-router-webauthn",
+        "tba-router-webauthn",
         "80-routers",
         policy,
     )
     assert not package_dependency_allowed(
-        "tigrbl-identity-server",
+        "tba-server-identity",
         "60-runtime",
-        "tigrbl-auth-router-session-login",
+        "tba-router-session-login",
         "80-routers",
         policy,
     )
     assert package_dependency_allowed(
-        "tigrbl-auth-backend-app-core",
+        "tba-app-backend-core",
         "90-backend-apps",
-        "tigrbl-auth-router-session-login",
+        "tba-router-session-login",
         "80-routers",
         policy,
     )

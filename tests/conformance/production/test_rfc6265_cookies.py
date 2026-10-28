@@ -1,4 +1,4 @@
-from tigrbl_auth.standards.http.cookies import (
+from tba_auth.standards.http.cookies import (
     COOKIE_VALUE_VERSION,
     build_session_cookie_value,
     extract_session_cookie,

@@ -1,6 +1,6 @@
 import pytest
 
-from tigrbl_auth_protocol_oauth import (
+from tba_protocol_oauth import (
     CAPABILITY_REQUIREMENTS as OAUTH_CAPABILITY_REQUIREMENTS,
     CURRENT_VERSION as OAUTH_VERSION,
     EXTENSION_SPECIFICATIONS,
@@ -9,7 +9,7 @@ from tigrbl_auth_protocol_oauth import (
     migrate_client,
     supports as oauth_supports,
 )
-from tigrbl_auth_protocol_oidc import (
+from tba_protocol_oidc import (
     CAPABILITY_REQUIREMENTS as OIDC_CAPABILITY_REQUIREMENTS,
     CURRENT_VERSION as OIDC_VERSION,
     capability_report as oidc_capability_report,
