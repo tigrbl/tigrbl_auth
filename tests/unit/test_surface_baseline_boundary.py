@@ -51,7 +51,7 @@ def _settings(tmp_path: Path) -> SimpleNamespace:
 def test_surface_baseline_boundary_t0_inventory_classifies_all_admin_public_api_and_uix_surfaces():
     manifest = surface_baseline_boundary_manifest()
     registry = surface_registry()
-    admin_uix_pkg = json.loads((ROOT / "pkgs/105-ui/tba-ui-admin/package.json").read_text())
+    admin_uix_pkg = json.loads((ROOT / "pkgs/105-ui/tba-ui-administration/package.json").read_text())
     public_uix_pkg = json.loads((ROOT / "pkgs/105-ui/tba-ui-public/package.json").read_text())
 
     assert set(manifest) == BOUNDARY_FEATURE_IDS
@@ -59,7 +59,7 @@ def test_surface_baseline_boundary_t0_inventory_classifies_all_admin_public_api_
     assert registry["public_auth_plane"]["surface_set"] == "public-rest"
     assert manifest["feat:uix-admin-boundary"]["audience"] == "admin"
     assert manifest["feat:uix-public-boundary"]["audience"] == "public"
-    assert admin_uix_pkg["name"] == "@tba/ui-admin"
+    assert admin_uix_pkg["name"] == "@tba/ui-administration"
     assert public_uix_pkg["name"] == "@tba/ui-public"
     assert "/register" in public_contract_paths()
     assert "/logout" in public_contract_paths()

@@ -40,7 +40,7 @@ The primary product outcome is that an evaluator can move from a credible demons
 
 - PyPI reports `tba-auth` `0.3.4` as the latest stable release and `0.4.0.dev2` as an available prerelease.
 - GitHub Releases publishes the split `tba-identity-*==0.4.0.dev2` packages as prereleases dated May 22, 2026.
-- npm returned `404 Not Found` for the reviewed `@tba/client-oidc-relying-party`, `@tba/ui-primitives`, `@tba/ui-public`, and `@tba/ui-admin` packages. Treat all UIX npm install instructions as future work until publication is verified.
+- npm returned `404 Not Found` for the reviewed `@tba/client-oidc-relying-party`, `@tba/ui-primitives`, `@tba/ui-public`, and `@tba/ui-administration` packages. Treat all UIX npm install instructions as future work until publication is verified.
 - Current repository documentation still prohibits “fully compliant,” “independently certified,” and equivalent global claims.
 
 ### Required maturity language
@@ -182,7 +182,7 @@ Required routes/workflows:
 
 Acceptance: all current CRUD tests remain authoritative; current-subject boundary is enforced; empty and single-session states are credible; no tenant-wide administration leaks into the client.
 
-### D. Platform Admin UIX (`@tba/ui-platform-admin` → platform-admin API)
+### D. Platform Admin UIX (`@tba/ui-platform-administration` → platform-admin API)
 
 **Users:** platform owners and operators.
 **Job:** govern realms, tenants, authority, platform identities, keys, and operational posture.
@@ -199,7 +199,7 @@ Copy direction: operational, precise, and consequence-led. Never call a tenant d
 
 Acceptance: member deep links, high-volume filtering/pagination, authority boundary proof, safe lifecycle mutations, and parity decision against legacy admin.
 
-### E. Tenant Admin UIX (`@tba/ui-tenant-admin` → tenant-admin API)
+### E. Tenant Admin UIX (`@tba/ui-tenant-administration` → tenant-admin API)
 
 **Users:** delegated tenant administrators.
 **Job:** administer tenant-local identities, clients, consent, roles/groups, sessions, keys, and audit.
@@ -231,7 +231,7 @@ Required routes/workflows:
 
 Acceptance: successful app registration and edit/delete proof, invalid redirect and unsafe browser-secret rejection, accessible protocol trace, and a five-minute first-app journey.
 
-### G. Service Admin UIX (`@tba/ui-service-admin` → service-admin API)
+### G. Service Admin UIX (`@tba/ui-service-administration` → service-admin API)
 
 **Users:** platform engineers, SRE, security engineers, and service owners.
 **Job:** govern workload identities, service keys, API keys, token inspection, and validation.
@@ -276,7 +276,7 @@ Required routes/workflows:
 
 Acceptance: one-command Docker startup, deterministic reset, health degradation behavior, static walkthrough when services are offline, stable screenshot states, and privacy-safe event instrumentation.
 
-### J. Legacy Admin UIX (`@tba/ui-admin`)
+### J. Legacy Admin UIX (`@tba/ui-administration`)
 
 **Users:** maintainers during extraction only.
 **Job:** provide behavioral source material until separated product UIX reach approved parity.

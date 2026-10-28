@@ -34,7 +34,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
-    "tba-concrete-admin-identity==0.4.0.dev2",
+    "tba-concrete-administrator-identity==0.4.0.dev2",
     "tba-concrete-client-identity==0.4.0.dev2",
     "tba-concrete-device-identity==0.4.0.dev2",
     "tba-concrete-machine-identity==0.4.0.dev2",

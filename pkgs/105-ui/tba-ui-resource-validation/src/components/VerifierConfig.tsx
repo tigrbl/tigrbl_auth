@@ -9,7 +9,7 @@ export function VerifierConfig() {
   const [clockTolerance, setClockTolerance] = useState('30');
 
   const pythonSnippet = `
-from tba_protocol_authorization_resource_server import Verifier, Config
+from tba_protocol_oauth_protected_resource import Verifier, Config
 
 config = Config(
     issuer="${MOCK_METADATA.issuer}",
@@ -114,7 +114,7 @@ async def auth_middleware(request: Request, call_next):
               </pre>
             </div>
             <div className="bg-slate-950 p-3 text-xs text-slate-500 border-t border-slate-800">
-              Compatible with <code>tba_protocol_authorization_resource_server &gt;= 2.0.0</code>
+              Compatible with <code>tba_protocol_oauth_protected_resource &gt;= 2.0.0</code>
             </div>
           </div>
         </div>

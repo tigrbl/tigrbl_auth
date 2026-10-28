@@ -501,7 +501,7 @@ Guardrails include false containment, cross-tenant correlation, replay side effe
 ### Repository
 
 - `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/adaptive_access.py`
-- `pkgs/20-providers/tba-provider-identity-admin-auth-anomaly-detector/`
+- `pkgs/20-providers/tba-provider-authentication-anomaly-detector/`
 - `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/audit_event/`
 - credential, operator, policy, session, token, delegation, and authorization audit/provenance packages;
 - `pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/revocation.py`

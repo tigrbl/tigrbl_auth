@@ -10,7 +10,7 @@ from tba_contracts_authorization import (
     RoleGrant,
 )
 from tba_provider_authorization_policy_decision_engine import PlatformPolicyDecisionEngine
-from tba_router_authorization_admin import assert_tenant_scope
+from tba_router_authorization_administration import assert_tenant_scope
 from tba_router_relying_party_session import SECURE_COOKIE, require_csrf
 from tba_app_backend_relying_party import RPDeployment, validate_separation
 import pytest

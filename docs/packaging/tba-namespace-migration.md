@@ -17,6 +17,16 @@ OAuth and WebAuthn remain intact. Generic suite-level `auth` is omitted from
 router, backend app, plugin, and release-certification names. The domain term
 `authorization` is spelled out instead of abbreviated as `authz`.
 
+Implementation names spell out `administration` (or `administrator` for an
+actor), and distinguish `authentication` from `authorization`. Avoid document
+title words such as `requirements` and `brief`, the redundant UI label `uix`,
+conjunctions, and repeating the role within the subject. Standard identifiers
+such as OAuth, WebAuthn, OIDC, JWT, and AMR remain intact. Private prototypes use
+an explicit `prototype` qualifier when needed to distinguish a production UI.
+See [`naming-review-fixes.json`](naming-review-fixes.json) for the follow-up
+corrections; the namespace tests enforce vocabulary, uniqueness, and complete
+coverage of the active package inventory.
+
 The separately packaged compatibility facade and CLI retain `tba-auth`; merging
 that facade into the existing `tba` planning package is not part of this rename.
 All four facades (`tba`, `tbauth`, `tba-auth`, and `tba-credentials`) are explicit

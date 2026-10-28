@@ -30,14 +30,14 @@ This brief grounds the architecture image in the live package inventory in this 
 ### Consumer and verification packages
 
 - `tba-protocol-oidc-relying-party`: Python relying-party helpers for discovery, userinfo, logout, and RP integration.
-- `tba-protocol-authorization-resource-server`: protected API token-validation and resource-server contracts.
+- `tba-protocol-oauth-protected-resource`: protected API token-validation and resource-server contracts.
 - `tba-testkit-identity`: fake identity components, vectors, fixtures, and integration harnesses.
 - `acme-notes-cli`: example consumer showing device-login usage.
 
 ### UI and browser packages
 
 - `@tba/ui-public`: public end-user UI built against generated OpenAPI and OIDC discovery surfaces.
-- `@tba/ui-admin`: admin UI built against generated OpenRPC admin/control-plane surfaces.
+- `@tba/ui-administration`: admin UI built against generated OpenRPC admin/control-plane surfaces.
 - `@tba/client-oidc-relying-party`: browser-safe TypeScript relying-party SDK.
 
 ## Production block model
@@ -71,7 +71,7 @@ This brief grounds the architecture image in the live package inventory in this 
 ## High-level flow edges
 
 1. Public users and consumer apps enter through `@tba/ui-public`, `@tba/client-oidc-relying-party`, `tba-protocol-oidc-relying-party`, or the example CLI.
-2. Administrative operators enter through `@tba/ui-admin` and `tba-operator-identity`.
+2. Administrative operators enter through `@tba/ui-administration` and `tba-operator-identity`.
 3. Those clients call the `tba-server-identity` public REST or admin RPC surfaces.
 4. The server delegates protocol and domain work to OAuth, OIDC, admin, credentials, policy, principals, JOSE, and contracts packages.
 5. Domain logic persists and reads state through `tba-storage-core`.

@@ -5,7 +5,7 @@ from tba_concrete_identity_assurance import (
     parse_verified_claims,
     serialize_verified_claims,
 )
-from tba_provider_security_claims_provider_local import LocalClaimsProvider
+from tba_provider_claims_local import LocalClaimsProvider
 from tba_concrete_pairwise_subject_identifier import (
     PairwiseSubjectIdentifierStrategy,
 )

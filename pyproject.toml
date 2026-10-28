@@ -77,7 +77,7 @@ dependencies = [
     "tba-concrete-cwt-svid-extension-credential==0.4.0.dev2",
     "tba-provider-security-authorization-provenance-builder==0.1.0",
     "tba-concrete-user-identity==0.4.0.dev2",
-    "tba-concrete-admin-identity==0.4.0.dev2",
+    "tba-concrete-administrator-identity==0.4.0.dev2",
     "tba-concrete-service-identity==0.4.0.dev2",
     "tba-concrete-client-identity==0.4.0.dev2",
     "tba-concrete-machine-identity==0.4.0.dev2",
@@ -109,7 +109,7 @@ dependencies = [
     "tba-concrete-eat==0.4.0.dev2",
     "tba-concrete-corim==0.4.0.dev2",
     "tba-contracts-security-key-rotation-policy==0.1.0",
-    "tba-provider-identity-admin-auth-anomaly-detector==0.4.0.dev2",
+    "tba-provider-authentication-anomaly-detector==0.4.0.dev2",
     "tba-provider-access-governance-memory==0.4.0.dev2",
     "tba-provider-policy-administration-memory==0.4.0.dev2",
     "tba-capability-account-self-service==0.4.0.dev2",
@@ -118,8 +118,8 @@ dependencies = [
     "tba-capability-operator-administration==0.4.0.dev2",
     "tba-capability-realm-administration==0.4.0.dev2",
     "tba-capability-tenant-administration==0.4.0.dev2",
-    "tba-provider-identity-admin-relationship-graph==0.4.0.dev2",
-    "tba-durability-identity-admin-trust-federation-graph==0.4.0.dev2",
+    "tba-provider-identity-administration-relationship-graph==0.4.0.dev2",
+    "tba-durability-identity-administration-trust-federation-graph==0.4.0.dev2",
     "tba-concrete-trust-federation-graph==0.4.0.dev2",
     "tba-concrete-set==0.4.0.dev2",
     "tba-bases-identity-claims==0.4.0.dev2",
@@ -272,11 +272,11 @@ dependencies = [
     "tba-provider-authorization-policy-decision-engine==0.4.0.dev2",
     "tba-contracts-authorization==0.4.0.dev3",
     "tba-runtime-relying-party-session==0.4.0.dev3",
-    "tba-client-authorization-admin==0.4.0.dev3",
+    "tba-client-authorization-administration==0.4.0.dev3",
     "tba-client-policy-decision==0.4.0.dev3",
     "tba-client-relying-party-session==0.4.0.dev3",
     "tba-middleware-policy-enforcement-asgi==0.4.0.dev3",
-    "tba-router-authorization-admin==0.4.0.dev3",
+    "tba-router-authorization-administration==0.4.0.dev3",
     "tba-router-policy-decision==0.4.0.dev3",
     "tba-router-relying-party-session==0.4.0.dev3",
     "tba-app-backend-policy-decision==0.4.0.dev3",
@@ -297,13 +297,13 @@ dependencies = [
     "tba-provider-security-proof-pkce==0.1.0",
     "tba-provider-authentication-context-acr-basic==0.1.0",
     "tba-provider-authentication-context-amr-basic==0.1.0",
-    "tba-provider-security-claims-provider-local==0.1.0",
+    "tba-provider-claims-local==0.1.0",
     "tba-provider-security-subject-pairwise==0.1.0",
     "tba-provider-security-webfinger==0.1.0",
     "tba-provider-security-oidc-federation==0.1.0",
     "tba-provider-security-signing-pqc==0.1.0",
     "tba-provider-cose-cryptography==0.4.0.dev2",
-    "tba-provider-security-token-introspection-client==0.1.0",
+    "tba-provider-token-introspection==0.1.0",
     "tba-provider-security-token-jwks-cache==0.1.0",
     "tba-bases-identity-authenticator==0.1.0",
     "tba-bases-public-key-authenticator==0.4.0.dev2",
@@ -345,10 +345,10 @@ dependencies = [
     "tba-capability-protected-envelope==0.4.0.dev2",
     "tba-capability-possession-proof==0.4.0.dev2",
     "tba-capability-workload-credential-brokering==0.4.0.dev2",
-    "tba-router-admin-gate==0.4.0.dev2",
+    "tba-router-administration-gate==0.4.0.dev2",
     "tba-runtime-authorization-policy==0.4.0.dev2",
     "tba-plugin-tigrbl==0.4.0.dev2",
-    "tba-protocol-authorization-resource-server==0.4.0.dev2",
+    "tba-protocol-oauth-protected-resource==0.4.0.dev2",
     "tba-cli-identity==0.4.0.dev2",
     "tba-testkit-identity==0.4.0.dev2",
     "tba-runtime-identity-administration==0.4.0.dev2",
@@ -414,11 +414,11 @@ dependencies = [
     "tba-app-backend-core==0.4.0.dev2",
     "tba-app-backend-developer==0.4.0.dev2",
     "tba-app-backend-my-account==0.4.0.dev2",
-    "tba-app-backend-platform-admin==0.4.0.dev2",
+    "tba-app-backend-platform-administration==0.4.0.dev2",
     "tba-app-backend-public==0.4.0.dev2",
     "tba-app-backend-resource-validation==0.4.0.dev2",
-    "tba-app-backend-service-admin==0.4.0.dev2",
-    "tba-app-backend-tenant-admin==0.4.0.dev2",
+    "tba-app-backend-service-administration==0.4.0.dev2",
+    "tba-app-backend-tenant-administration==0.4.0.dev2",
     "tba-provider-set-transmitter==0.4.0.dev2",
     "tba-provider-set-receiver==0.4.0.dev2",
     "tba-provider-wallet-attestation-verifier==0.4.0.dev2",
@@ -630,14 +630,14 @@ tba-provider-security-proof-dpop = { path = "pkgs/20-providers/tba-provider-secu
 tba-provider-security-proof-pkce = { path = "pkgs/20-providers/tba-provider-security-proof-pkce", editable = true }
 tba-provider-authentication-context-acr-basic = { path = "pkgs/20-providers/tba-provider-authentication-context-acr-basic", editable = true }
 tba-provider-authentication-context-amr-basic = { path = "pkgs/20-providers/tba-provider-authentication-context-amr-basic", editable = true }
-tba-provider-security-claims-provider-local = { path = "pkgs/20-providers/tba-provider-security-claims-provider-local", editable = true }
+tba-provider-claims-local = { path = "pkgs/20-providers/tba-provider-claims-local", editable = true }
 tba-provider-security-subject-pairwise = { path = "pkgs/20-providers/tba-provider-security-subject-pairwise", editable = true }
 tba-provider-security-webfinger = { path = "pkgs/20-providers/tba-provider-security-webfinger", editable = true }
 tba-provider-security-oidc-federation = { path = "pkgs/20-providers/tba-provider-security-oidc-federation", editable = true }
 tba-provider-security-signing-pqc = { path = "pkgs/20-providers/tba-provider-security-signing-pqc", editable = true }
 tba-provider-cose-cryptography = { path = "pkgs/20-providers/tba-provider-cose-cryptography", editable = true }
 tba-provider-jose-swarmauri = { path = "pkgs/20-providers/tba-provider-jose-swarmauri", editable = true }
-tba-provider-security-token-introspection-client = { path = "pkgs/20-providers/tba-provider-security-token-introspection-client", editable = true }
+tba-provider-token-introspection = { path = "pkgs/20-providers/tba-provider-token-introspection", editable = true }
 tba-provider-security-token-jwks-cache = { path = "pkgs/20-providers/tba-provider-security-token-jwks-cache", editable = true }
 tba-bases-identity-authenticator = { path = "pkgs/05-bases/tba-bases-identity-authenticator", editable = true }
 tba-bases-public-key-authenticator = { path = "pkgs/05-bases/tba-bases-public-key-authenticator", editable = true }
@@ -667,11 +667,11 @@ tba-protocol-authzen = { path = "pkgs/50-protocols/tba-protocol-authzen", editab
 tba-protocol-oidc-relying-party = { path = "pkgs/50-protocols/tba-protocol-oidc-relying-party", editable = true }
 tba-contracts-authorization = { path = "pkgs/02-contracts/tba-contracts-authorization", editable = true }
 tba-runtime-relying-party-session = { path = "pkgs/30-storage-runtime/tba-runtime-relying-party-session", editable = true }
-tba-client-authorization-admin = { path = "pkgs/75-clients/tba-client-authorization-admin", editable = true }
+tba-client-authorization-administration = { path = "pkgs/75-clients/tba-client-authorization-administration", editable = true }
 tba-client-policy-decision = { path = "pkgs/75-clients/tba-client-policy-decision", editable = true }
 tba-client-relying-party-session = { path = "pkgs/75-clients/tba-client-relying-party-session", editable = true }
 tba-middleware-policy-enforcement-asgi = { path = "pkgs/85-middleware/tba-middleware-policy-enforcement-asgi", editable = true }
-tba-router-authorization-admin = { path = "pkgs/80-routers/tba-router-authorization-admin", editable = true }
+tba-router-authorization-administration = { path = "pkgs/80-routers/tba-router-authorization-administration", editable = true }
 tba-router-policy-decision = { path = "pkgs/80-routers/tba-router-policy-decision", editable = true }
 tba-router-relying-party-session = { path = "pkgs/80-routers/tba-router-relying-party-session", editable = true }
 tba-app-backend-policy-decision = { path = "pkgs/90-backend-apps/tba-app-backend-policy-decision", editable = true }
@@ -687,14 +687,14 @@ tba-capability-identity-document = { path = "pkgs/40-capabilities/tba-capability
 tba-capability-protected-envelope = { path = "pkgs/40-capabilities/tba-capability-protected-envelope", editable = true }
 tba-capability-possession-proof = { path = "pkgs/40-capabilities/tba-capability-possession-proof", editable = true }
 tba-capability-workload-credential-brokering = { path = "pkgs/40-capabilities/tba-capability-workload-credential-brokering", editable = true }
-tba-router-admin-gate = { path = "pkgs/80-routers/tba-router-admin-gate", editable = true }
+tba-router-administration-gate = { path = "pkgs/80-routers/tba-router-administration-gate", editable = true }
 tba-durability-authorization-policy-authority-derivation-graph = { path = "pkgs/30-storage-runtime/tba-durability-authorization-policy-authority-derivation-graph", editable = true }
 tba-concrete-authority-graph = { path = "pkgs/10-concrete/tba-concrete-authority-graph", editable = true }
 tba-runtime-authorization-policy = { path = "pkgs/60-runtime/tba-runtime-authorization-policy", editable = true }
 tba-provider-authorization-policy-decision-engine = { path = "pkgs/20-providers/tba-provider-authorization-policy-decision-engine", editable = true }
 tba-plugin-tigrbl = { path = "pkgs/60-runtime/tba-plugin-tigrbl", editable = true }
 tba-provider-authorization-resource-server-verifier = { path = "pkgs/20-providers/tba-provider-authorization-resource-server-verifier", editable = true }
-tba-protocol-authorization-resource-server = { path = "pkgs/50-protocols/tba-protocol-authorization-resource-server", editable = true }
+tba-protocol-oauth-protected-resource = { path = "pkgs/50-protocols/tba-protocol-oauth-protected-resource", editable = true }
 tba-cli-identity = { path = "pkgs/60-runtime/tba-cli-identity", editable = true }
 tba-testkit-identity = { path = "pkgs/120-tests/tba-testkit-identity", editable = true }
 tba-example-oauth-device-authorization-cli = { path = "pkgs/110-examples/tba-example-oauth-device-authorization-cli", editable = true }
@@ -846,7 +846,7 @@ tba-concrete-identity-assurance = { path = "pkgs/10-concrete/tba-concrete-identi
 tba-concrete-capability = { path = "pkgs/10-concrete/tba-concrete-capability", editable = true }
 tba-concrete-capability-default = { path = "pkgs/10-concrete/tba-concrete-capability-default", editable = true }
 tba-concrete-user-identity = { path = "pkgs/10-concrete/tba-concrete-user-identity", editable = true }
-tba-concrete-admin-identity = { path = "pkgs/10-concrete/tba-concrete-admin-identity", editable = true }
+tba-concrete-administrator-identity = { path = "pkgs/10-concrete/tba-concrete-administrator-identity", editable = true }
 tba-concrete-service-identity = { path = "pkgs/10-concrete/tba-concrete-service-identity", editable = true }
 tba-concrete-client-identity = { path = "pkgs/10-concrete/tba-concrete-client-identity", editable = true }
 tba-concrete-machine-identity = { path = "pkgs/10-concrete/tba-concrete-machine-identity", editable = true }
@@ -874,7 +874,7 @@ tba-concrete-mdoc = { path = "pkgs/10-concrete/tba-concrete-mdoc", editable = tr
 tba-concrete-eat = { path = "pkgs/10-concrete/tba-concrete-eat", editable = true }
 tba-concrete-corim = { path = "pkgs/10-concrete/tba-concrete-corim", editable = true }
 tba-contracts-security-key-rotation-policy = { path = "pkgs/02-contracts/tba-contracts-security-key-rotation-policy", editable = true }
-tba-provider-identity-admin-auth-anomaly-detector = { path = "pkgs/20-providers/tba-provider-identity-admin-auth-anomaly-detector", editable = true }
+tba-provider-authentication-anomaly-detector = { path = "pkgs/20-providers/tba-provider-authentication-anomaly-detector", editable = true }
 tba-capability-account-self-service = { path = "pkgs/40-capabilities/tba-capability-account-self-service", editable = true }
 tba-capability-administrative-resource = { path = "pkgs/40-capabilities/tba-capability-administrative-resource", editable = true }
 tba-capability-identity-administration = { path = "pkgs/40-capabilities/tba-capability-identity-administration", editable = true }
@@ -887,8 +887,8 @@ tba-capability-mfa-challenge = { path = "pkgs/40-capabilities/tba-capability-mfa
 tba-capability-key-administration = { path = "pkgs/40-capabilities/tba-capability-key-administration", editable = true }
 tba-capability-policy-administration = { path = "pkgs/40-capabilities/tba-capability-policy-administration", editable = true }
 tba-capability-policy-assurance = { path = "pkgs/40-capabilities/tba-capability-policy-assurance", editable = true }
-tba-provider-identity-admin-relationship-graph = { path = "pkgs/20-providers/tba-provider-identity-admin-relationship-graph", editable = true }
-tba-durability-identity-admin-trust-federation-graph = { path = "pkgs/30-storage-runtime/tba-durability-identity-admin-trust-federation-graph", editable = true }
+tba-provider-identity-administration-relationship-graph = { path = "pkgs/20-providers/tba-provider-identity-administration-relationship-graph", editable = true }
+tba-durability-identity-administration-trust-federation-graph = { path = "pkgs/30-storage-runtime/tba-durability-identity-administration-trust-federation-graph", editable = true }
 tba-concrete-trust-federation-graph = { path = "pkgs/10-concrete/tba-concrete-trust-federation-graph", editable = true }
 tba-primitives-identity = { path = "pkgs/00-primitives/tba-primitives-identity", editable = true }
 tba-provider-identity-jose = { path = "pkgs/20-providers/tba-provider-identity-jose", editable = true }
@@ -945,11 +945,11 @@ tba-router-resource-validation-metadata = { path = "pkgs/80-routers/tba-router-r
 tba-app-backend-core = { path = "pkgs/90-backend-apps/tba-app-backend-core", editable = true }
 tba-app-backend-developer = { path = "pkgs/90-backend-apps/tba-app-backend-developer", editable = true }
 tba-app-backend-my-account = { path = "pkgs/90-backend-apps/tba-app-backend-my-account", editable = true }
-tba-app-backend-platform-admin = { path = "pkgs/90-backend-apps/tba-app-backend-platform-admin", editable = true }
+tba-app-backend-platform-administration = { path = "pkgs/90-backend-apps/tba-app-backend-platform-administration", editable = true }
 tba-app-backend-public = { path = "pkgs/90-backend-apps/tba-app-backend-public", editable = true }
 tba-app-backend-resource-validation = { path = "pkgs/90-backend-apps/tba-app-backend-resource-validation", editable = true }
-tba-app-backend-service-admin = { path = "pkgs/90-backend-apps/tba-app-backend-service-admin", editable = true }
-tba-app-backend-tenant-admin = { path = "pkgs/90-backend-apps/tba-app-backend-tenant-admin", editable = true }
+tba-app-backend-service-administration = { path = "pkgs/90-backend-apps/tba-app-backend-service-administration", editable = true }
+tba-app-backend-tenant-administration = { path = "pkgs/90-backend-apps/tba-app-backend-tenant-administration", editable = true }
 tba-router-session-login = { path = "pkgs/80-routers/tba-router-session-login", editable = true }
 tba-router-webauthn = { path = "pkgs/80-routers/tba-router-webauthn", editable = true }
 tba-router-oauth-introspection = { path = "pkgs/80-routers/tba-router-oauth-introspection", editable = true }

@@ -10,7 +10,7 @@ dependencies = [
     "tba-protocol-gnap==0.4.0.dev2",
     "tba-protocol-oauth==0.4.0.dev2",
     "tba-plugin-tigrbl==0.4.0.dev2",
-    "tba-router-admin-gate==0.4.0.dev2",
+    "tba-router-administration-gate==0.4.0.dev2",
     "tba-router-oauth-authorization==0.4.0.dev2",
     "tba-router-oauth-authorization-server-metadata==0.4.0.dev2",
     "tba-router-oauth-device-authorization==0.4.0.dev2",

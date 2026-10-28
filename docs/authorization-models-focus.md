@@ -52,7 +52,7 @@ The main distinction: these are not competing features where one replaces the ot
 | `tba-concrete-identity-principals` | Principal facts: user, admin, owner, service, workload, client, tenant membership, roles as facts. | Final authorization decisions. |
 | `tba-credentials` | Credential facts and proof posture: password, API key, service key, client secret, MFA/passkey status. | Whether a credential grants permission to perform an action. |
 | `tba-protocol-oauth` | OAuth scopes, resource indicators, consent inputs, token issuance hooks. | Tenant/admin authorization policy itself. |
-| `tba-protocol-authorization-resource-server` | Downstream enforcement of audience, scope, token validity, proof binding, and policy hooks. | Issuing tokens or managing policy definitions. |
+| `tba-protocol-oauth-protected-resource` | Downstream enforcement of audience, scope, token validity, proof binding, and policy hooks. | Issuing tokens or managing policy definitions. |
 | `tba-storage-core` | Canonical policy, role, permission, grant, relationship, assignment, audit, and version tables. | Policy semantics. |
 | Admin frontdoors | Product-scoped policy configuration and assignment under platform, tenant, developer, or service authority. | Low-level policy evaluation internals. |
 

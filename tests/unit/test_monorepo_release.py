@@ -27,11 +27,11 @@ REMOVED_HELPER_PACKAGES = {
     "tba-runtime-authorization-policy-engine",
     "tba-runtime-authorization-policy-rbac-administrator",
     "tba-runtime-authorization-policy-service-identity-registry",
-    "tba-protocol-authorization-resource-server-dpop-cnf-binding-validator",
-    "tba-protocol-authorization-resource-server-introspection-client",
-    "tba-protocol-authorization-resource-server-jwks-cache",
-    "tba-protocol-authorization-resource-server-mtls-cnf-binding-validator",
-    "tba-protocol-authorization-resource-server-sender-constraint-validator",
+    "tba-protocol-oauth-protected-resource-dpop-cnf-binding-validator",
+    "tba-protocol-oauth-protected-resource-introspection-client",
+    "tba-protocol-oauth-protected-resource-jwks-cache",
+    "tba-protocol-oauth-protected-resource-mtls-cnf-binding-validator",
+    "tba-protocol-oauth-protected-resource-sender-constraint-validator",
 }
 
 
@@ -64,7 +64,7 @@ def test_monorepo_release_discovers_split_packages() -> None:
     )
     assert packages["tba-runtime-authorization-policy"].path.as_posix() == "pkgs/60-runtime/tba-runtime-authorization-policy"
     assert packages["tba-runtime-identity-administration"].path.as_posix() == "pkgs/60-runtime/tba-runtime-identity-administration"
-    assert packages["tba-protocol-authorization-resource-server"].path.as_posix() == "pkgs/50-protocols/tba-protocol-authorization-resource-server"
+    assert packages["tba-protocol-oauth-protected-resource"].path.as_posix() == "pkgs/50-protocols/tba-protocol-oauth-protected-resource"
 
 
 def test_monorepo_release_accepts_package_version_tag() -> None:
@@ -215,10 +215,10 @@ def test_monorepo_release_resolves_root_first_party_dependency_closure() -> None
     }
 
     assert REMOVED_HELPER_PACKAGES.isdisjoint(root_dependency_names)
-    assert "tba-protocol-authorization-resource-server" in root_dependency_names
+    assert "tba-protocol-oauth-protected-resource" in root_dependency_names
     assert "tba-provider-authorization-resource-server-verifier" in root_dependency_names
     assert "tba-provider-security-token-jwks-cache" in root_dependency_names
-    assert "tba-router-admin-gate" in root_dependency_names
+    assert "tba-router-administration-gate" in root_dependency_names
     assert "tba-concrete-authorization-policy-rules" in root_dependency_names
     assert "tigrbl-identity-identities-concrete" not in root_dependency_names
     assert "tba-runtime-identity-authoring" in root_dependency_names

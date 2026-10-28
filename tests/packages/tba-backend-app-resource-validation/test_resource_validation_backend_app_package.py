@@ -47,7 +47,7 @@ def test_resource_validation_contract_matches_product_surface_registry() -> None
 
     assert PRODUCT_SURFACE == "resource-validation-app"
     assert RESOURCE_VALIDATION_BACKEND_APP_CONTRACT.product_surface == PRODUCT_SURFACE
-    assert "tba-protocol-authorization-resource-server" in (
+    assert "tba-protocol-oauth-protected-resource" in (
         RESOURCE_VALIDATION_BACKEND_APP_CONTRACT.intended_consumers
     )
     assert deployment.plugin_mode == "public-only"

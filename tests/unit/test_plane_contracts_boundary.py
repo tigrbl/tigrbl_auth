@@ -486,7 +486,7 @@ def test_contract_packages_do_not_import_capability_runtime_or_storage_packages(
         "tba_credentials",
         "tba_authn_credentials",
         "tba_runtime_authorization_policy",
-        "tba_protocol_authorization_resource_server",
+        "tba_protocol_oauth_protected_resource",
         "tba_runtime_identity",
         "tba_storage_core",
         "tba_certification_release",

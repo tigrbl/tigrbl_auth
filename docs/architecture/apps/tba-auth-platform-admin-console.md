@@ -51,7 +51,7 @@ It should not own tenant-local day-to-day admin or end-user auth.
 
 ## Repo basis
 
-- platform-relevant portions of current `pkgs/105-ui/tba-ui-admin`
+- platform-relevant portions of current `pkgs/105-ui/tba-ui-administration`
 - current tenant and identity management surfaces
 
 ## Main split rule

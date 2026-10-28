@@ -56,7 +56,7 @@ For `tba_auth`, the target product shape should be:
 | Principal facts and memberships | `tba-concrete-identity-principals` |
 | Credential and assurance facts | `tba-credentials` |
 | OAuth scopes and resource indicators | `tba-protocol-oauth` |
-| Resource-server grants and enforcement | `tba-protocol-authorization-resource-server`, `tba-app-backend-resource-validation` |
+| Resource-server grants and enforcement | `tba-protocol-oauth-protected-resource`, `tba-app-backend-resource-validation` |
 | Canonical role/policy/grant/relationship tables | `tba-storage-core` |
 | Admin lifecycle | Platform-admin, tenant-admin, developer, and service-admin frontdoors as scoped Management API slices |
 | Policy UI | Platform-admin and tenant-admin UIX first, developer/service-admin UIX where delegated |

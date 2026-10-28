@@ -25,20 +25,20 @@ BACKEND_APP_PACKAGES = {
         ROOT / "pkgs/90-backend-apps/tba-app-backend-public/src",
     ),
     "platform-admin-app": (
-        "tba_app_backend_platform_admin",
-        ROOT / "pkgs/90-backend-apps/tba-app-backend-platform-admin/src",
+        "tba_app_backend_platform_administration",
+        ROOT / "pkgs/90-backend-apps/tba-app-backend-platform-administration/src",
     ),
     "tenant-admin-app": (
-        "tba_app_backend_tenant_admin",
-        ROOT / "pkgs/90-backend-apps/tba-app-backend-tenant-admin/src",
+        "tba_app_backend_tenant_administration",
+        ROOT / "pkgs/90-backend-apps/tba-app-backend-tenant-administration/src",
     ),
     "developer-app": (
         "tba_app_backend_developer",
         ROOT / "pkgs/90-backend-apps/tba-app-backend-developer/src",
     ),
     "service-admin-app": (
-        "tba_app_backend_service_admin",
-        ROOT / "pkgs/90-backend-apps/tba-app-backend-service-admin/src",
+        "tba_app_backend_service_administration",
+        ROOT / "pkgs/90-backend-apps/tba-app-backend-service-administration/src",
     ),
     "resource-validation-app": (
         "tba_app_backend_resource_validation",

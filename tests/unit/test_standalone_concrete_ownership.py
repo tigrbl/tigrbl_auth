@@ -16,7 +16,7 @@ CLAIM_PACKAGE_ROOT = ROOT / "pkgs" / "10-concrete"
 def test_identity_classes_have_standalone_layer_10_owners() -> None:
     expected = {
         "UserIdentity": "tba_concrete_user_identity",
-        "AdminIdentity": "tba_concrete_admin_identity",
+        "AdminIdentity": "tba_concrete_administrator_identity",
         "ServiceIdentity": "tba_concrete_service_identity",
         "ClientIdentity": "tba_concrete_client_identity",
         "MachineIdentity": "tba_concrete_machine_identity",

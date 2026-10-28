@@ -39,10 +39,10 @@ Demo Hub covers:
 |---|---|---|
 | Public identity | `tba-app-backend-public` | `@tba/ui-public` |
 | My Account | `tba-app-backend-my-account` | `@tba/ui-my-account` |
-| Platform Admin | `tba-app-backend-platform-admin` | `@tba/ui-platform-admin` |
-| Tenant Admin | `tba-app-backend-tenant-admin` | `@tba/ui-tenant-admin` |
+| Platform Admin | `tba-app-backend-platform-administration` | `@tba/ui-platform-administration` |
+| Tenant Admin | `tba-app-backend-tenant-administration` | `@tba/ui-tenant-administration` |
 | Developer | `tba-app-backend-developer` | `@tba/ui-developer` |
-| Service Admin | `tba-app-backend-service-admin` | `@tba/ui-service-admin` |
+| Service Admin | `tba-app-backend-service-administration` | `@tba/ui-service-administration` |
 | Resource Validation | `tba-app-backend-resource-validation` | proposed `@tba/ui-resource-validation` |
 
 Demo Hub must preserve each surface’s authentication, authorization, path allowlist, and data ownership. It may deep-link across surfaces; it must not call a product API directly from the browser with shared administrator secrets.

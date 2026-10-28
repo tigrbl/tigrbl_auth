@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from tba_protocol_authorization_resource_server import (
+from tba_protocol_oauth_protected_resource import (
     CAPABILITY_REQUIREMENTS,
     CURRENT_VERSION,
     RESOURCE_SERVER_ACCESS_TOKEN_CLAIM_CLASSES,

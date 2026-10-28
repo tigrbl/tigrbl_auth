@@ -32,7 +32,7 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
         "admin_rest_groups": (),
     },
     "platform-admin-app": {
-        "router_packages": ("tba-router-admin-gate",),
+        "router_packages": ("tba-router-administration-gate",),
         "surface_sets": ("admin-rest",),
         "allowed_capabilities": (),
         "admin_resources": (
@@ -50,7 +50,7 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
         "admin_rest_groups": ("admin_auth", "admin_realms", "admin_identities"),
     },
     "tenant-admin-app": {
-        "router_packages": ("tba-router-admin-gate",),
+        "router_packages": ("tba-router-administration-gate",),
         "surface_sets": ("admin-rest",),
         "allowed_capabilities": (),
         "admin_resources": (
@@ -70,7 +70,7 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
     },
     "developer-app": {
         "router_packages": (
-            "tba-router-admin-gate",
+            "tba-router-administration-gate",
             "tba-router-oauth-authorization-server-metadata",
             "tba-router-oauth-registration",
             "tba-router-oidc-discovery",
@@ -92,7 +92,7 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
     },
     "service-admin-app": {
         "router_packages": (
-            "tba-router-admin-gate",
+            "tba-router-administration-gate",
             "tba-router-oauth-introspection",
             "tba-router-oauth-protected-resource-metadata",
             "tba-router-oidc-discovery",

@@ -51,8 +51,8 @@ dependencies = [
     "tba-durability-identity==0.4.0.dev2",
     "tba-durability-webauthn==0.4.0.dev2",
     "tba-durability-authorization-policy==0.4.0.dev2",
-    "tba-provider-identity-admin-relationship-graph==0.4.0.dev2",
-    "tba-provider-identity-admin-auth-anomaly-detector==0.4.0.dev2",
+    "tba-provider-identity-administration-relationship-graph==0.4.0.dev2",
+    "tba-provider-authentication-anomaly-detector==0.4.0.dev2",
     "tba-concrete-trust-federation-graph==0.4.0.dev2",
     "tba-server-identity==0.4.0.dev2",
 ]

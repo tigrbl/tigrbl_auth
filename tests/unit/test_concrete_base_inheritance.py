@@ -12,7 +12,7 @@ def test_all_concrete_implementations_inherit_05_bases() -> None:
     import tigrbl_identity_credentials_concrete as credentials
     import tigrbl_identity_identities_concrete as identities
     import tba_concrete_authorization_scope_set_matcher as scopes
-    import tba_provider_security_claims_provider_local as claims
+    import tba_provider_claims_local as claims
     import tba_concrete_pairwise_subject_identifier as pairwise_subjects
     import tba_concrete_public_subject_identifier as public_subjects
     from tba_bases_authorization_policy import (

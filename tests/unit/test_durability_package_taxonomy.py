@@ -41,7 +41,7 @@ def test_canonical_durability_packages_have_no_higher_layer_imports() -> None:
     forbidden = (
         "tba_router_",
         "tba_protocol_",
-        "tba_protocol_authorization_resource_server",
+        "tba_protocol_oauth_protected_resource",
         "tba_runtime_identity",
         "tba_server_identity",
         "tba_runtime_identity_storage",

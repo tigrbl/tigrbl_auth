@@ -51,7 +51,7 @@ canonical_providers:
   credentials_and_claims:
   - tba-provider-digital-credential-status
   - tba-provider-digital-credential-trust
-  - tba-provider-security-claims-provider-local
+  - tba-provider-claims-local
   cryptography_and_trust:
   - tba-provider-certificate-path-validator
   - tba-provider-certificate-status
@@ -66,7 +66,7 @@ canonical_providers:
   remote_and_resolution:
   - tba-provider-did-resolver
   - tba-provider-security-oidc-federation
-  - tba-provider-security-token-introspection-client
+  - tba-provider-token-introspection
   - tba-provider-security-token-jwks-cache
   - tba-provider-security-webfinger
   - tba-provider-spiffe-bundle
@@ -89,10 +89,10 @@ compatibility_or_migration_packages:
   tba-provider-did-controller:
     target: did-controller-capability
     target_layer: 40-capabilities
-  tba-provider-identity-admin-auth-anomaly-detector:
+  tba-provider-authentication-anomaly-detector:
     target: anomaly-rules-tables-ops-and-capability
     target_layer: 10-01-30-40
-  tba-provider-identity-admin-relationship-graph:
+  tba-provider-identity-administration-relationship-graph:
     target: relationship-graph-tables-ops-and-capability
     target_layer: 10-01-30-40
   tba-provider-identity-jose:

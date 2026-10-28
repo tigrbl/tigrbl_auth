@@ -10,7 +10,7 @@ on:
         type: choice
         options:
           - all
-          - "@tba/ui-admin"
+          - "@tba/ui-administration"
           - "@tba/ui-public"
           - "@tba/client-oidc-relying-party"
       version:
@@ -62,7 +62,7 @@ jobs:
           const selectedPackage = process.env.SELECTED_PACKAGE || "all";
           const selectedVersion = process.env.SELECTED_VERSION || "";
           const force = process.env.FORCE_TAG === "true";
-          const packageDirs = ["pkgs/105-ui/tba-ui-admin", "pkgs/105-ui/tba-ui-public", "pkgs/75-clients/tba-typescript-client-oidc-relying-party"];
+          const packageDirs = ["pkgs/105-ui/tba-ui-administration", "pkgs/105-ui/tba-ui-public", "pkgs/75-clients/tba-typescript-client-oidc-relying-party"];
           const created = [];
 
           function run(args) {
@@ -132,7 +132,7 @@ jobs:
           }
           const packageName = match[1];
           const version = match[2];
-          const packageDirs = ["pkgs/105-ui/tba-ui-admin", "pkgs/105-ui/tba-ui-public", "pkgs/75-clients/tba-typescript-client-oidc-relying-party"];
+          const packageDirs = ["pkgs/105-ui/tba-ui-administration", "pkgs/105-ui/tba-ui-public", "pkgs/75-clients/tba-typescript-client-oidc-relying-party"];
           let found = null;
           for (const packagePath of packageDirs) {
             const manifest = JSON.parse(fs.readFileSync(path.join(packagePath, "package.json"), "utf8"));

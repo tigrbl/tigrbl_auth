@@ -39,7 +39,7 @@ ROUTER_DEPRECATION_TARGETS = {
     "admin_auth.py": "tba_storage_core.tables.user",
     "admin_identities.py": "tba_storage_core.tables.user",
     "admin_realms.py": "tba_storage_core.tables.realm",
-    "admin_tenants.py": "tba_app_backend_platform_admin.tenants",
+    "admin_tenants.py": "tba_app_backend_platform_administration.tenants",
     "auth_flows.py": "tba_storage_core.tables.auth_session",
     "authorize.py": "tba_storage_core.tables.auth_code",
     "device_authorization.py": "tba_storage_core.tables.device_code",
@@ -129,7 +129,7 @@ def test_remaining_table_backed_rest_routers_import_schemas_from_table_modules(
 
 
 def test_realm_admin_routes_live_in_platform_backend_app_package() -> None:
-    app_module = importlib.import_module("tba_app_backend_platform_admin.realms")
+    app_module = importlib.import_module("tba_app_backend_platform_administration.realms")
     storage_module = importlib.import_module("tba_storage_core.tables.realm")
     route_names = {
         "admin_list_realms",
@@ -151,7 +151,7 @@ def test_realm_admin_routes_live_in_platform_backend_app_package() -> None:
 
 
 def test_tenant_admin_routes_and_dtos_live_in_platform_backend_app_package() -> None:
-    runtime_module = importlib.import_module("tba_app_backend_platform_admin.tenants")
+    runtime_module = importlib.import_module("tba_app_backend_platform_administration.tenants")
     storage_module = importlib.import_module("tba_storage_core.tables.tenant")
     table_class = storage_module.Tenant
     route_names = {
@@ -209,7 +209,7 @@ def test_admin_auth_routes_live_in_server_runtime() -> None:
 
 
 def test_identity_admin_routes_live_in_platform_backend_app_package() -> None:
-    app_module = importlib.import_module("tba_app_backend_platform_admin.identities")
+    app_module = importlib.import_module("tba_app_backend_platform_administration.identities")
     storage_module = importlib.import_module("tba_storage_core.tables.user")
     route_names = {
         "admin_list_identities",

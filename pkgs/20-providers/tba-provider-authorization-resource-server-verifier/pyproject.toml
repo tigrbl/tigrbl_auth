@@ -10,7 +10,7 @@ dependencies = [
     "tba-bases-resource-server==0.4.0.dev2",
     "tba-provider-security-dpop-cnf-binding-validator==0.1.0",
     "tba-provider-security-mtls-cnf-binding-validator==0.1.0",
-    "tba-provider-security-token-introspection-client==0.1.0",
+    "tba-provider-token-introspection==0.1.0",
     "tba-provider-security-token-jwks-cache==0.1.0",
     "tba-contracts-security-trust==0.1.0",
 ]

@@ -23,7 +23,7 @@ PACKAGE_MATURITY_FEATURE_ALIASES = {
     "tba-protocol-oidc-relying-party": "rp",
     "tba-credentials": "credentials",
     "tba-runtime-authorization-policy": "policy",
-    "tba-protocol-authorization-resource-server": "resource-server",
+    "tba-protocol-oauth-protected-resource": "resource-server",
     "tba-auth": "facade",
     "tba-cli-identity": "cli",
 }

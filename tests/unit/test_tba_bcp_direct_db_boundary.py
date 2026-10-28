@@ -64,7 +64,7 @@ SEMANTIC_FACADE_PATHS = [
     ROOT / "pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/_rfc8693/__init__.py",
     ROOT / "pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/_dpop/__init__.py",
     ROOT / "pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/_rfc9700/__init__.py",
-    ROOT / "pkgs/80-routers/tba-router-admin-gate/src/tba_router_admin_gate/gate.py",
+    ROOT / "pkgs/80-routers/tba-router-administration-gate/src/tba_router_administration_gate/gate.py",
     ROOT / "pkgs/60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/assurance.py",
     ROOT / "pkgs/60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/authority.py",
     ROOT / "pkgs/60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/control_plane.py",

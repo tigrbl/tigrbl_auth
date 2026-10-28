@@ -46,6 +46,6 @@ def test_safe_display_path_prefers_repo_relative_paths(tmp_path: Path) -> None:
     repo_root.mkdir()
 
     assert (
-        safe_display_path(repo_root / "pkgs" / "105-ui" / "tba-ui-admin", repo_root)
-        == "pkgs/105-ui/tba-ui-admin"
+        safe_display_path(repo_root / "pkgs" / "105-ui" / "tba-ui-administration", repo_root)
+        == "pkgs/105-ui/tba-ui-administration"
     )

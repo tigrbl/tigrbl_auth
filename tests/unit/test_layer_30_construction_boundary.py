@@ -48,7 +48,7 @@ def test_layer_30_has_no_http_or_protocol_provider_ownership() -> None:
         "tba_router_",
         "tba_protocol_",
         "tba_authenticator_",
-        "tba_protocol_authorization_resource_server",
+        "tba_protocol_oauth_protected_resource",
         "tba_provider_identity_jose",
         "tba_runtime_identity",
         "tba_server_identity",

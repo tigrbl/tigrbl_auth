@@ -106,7 +106,7 @@ def test_identity_contracts_rest_schema_bridge_is_removed() -> None:
 
 
 def test_platform_api_owns_tenant_admin_rest_shapes() -> None:
-    api_module = importlib.import_module("tba_app_backend_platform_admin.tenants")
+    api_module = importlib.import_module("tba_app_backend_platform_administration.tenants")
     storage_module = importlib.import_module("tba_storage_core.tables.tenant")
     dto_names = {
         "AdminTenantOut",
@@ -136,7 +136,7 @@ def test_my_account_api_owns_its_rest_shapes() -> None:
 
 
 def test_platform_admin_api_owns_control_plane_rest_shapes() -> None:
-    api_module = importlib.import_module("tba_app_backend_platform_admin")
+    api_module = importlib.import_module("tba_app_backend_platform_administration")
     storage_module = importlib.import_module("tba_storage_core.tables.user")
     names = {
         "AdminIdentityOut",

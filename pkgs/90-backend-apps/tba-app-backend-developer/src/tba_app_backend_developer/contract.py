@@ -72,7 +72,7 @@ DEVELOPER_BACKEND_APP_CONTRACT = DeveloperBackendAppContract(
         "tba-protocol-oidc",
     ),
     mounted_router_packages=(
-        "tba-router-admin-gate",
+        "tba-router-administration-gate",
         "tba-router-oauth-authorization-server-metadata",
         "tba-router-oauth-registration",
         "tba-router-oidc-discovery",

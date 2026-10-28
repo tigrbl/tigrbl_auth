@@ -28,7 +28,7 @@ families:
     cardinality: one-claim-class
   identity:
     packages:
-      - tba-concrete-admin-identity
+      - tba-concrete-administrator-identity
       - tba-concrete-client-identity
       - tba-concrete-device-identity
       - tba-concrete-machine-identity

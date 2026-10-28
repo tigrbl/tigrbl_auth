@@ -78,14 +78,14 @@ def test_active_package_directories_have_suite_prefixes():
 def test_layer_75_contains_only_explicit_client_names():
     layer = ROOT / "pkgs/75-clients"
     expected = {
-        "tba-client-authorization-admin",
+        "tba-client-authorization-administration",
         "tba-client-policy-decision",
         "tba-client-relying-party-session",
         "tba-typescript-client-oidc-relying-party",
         "tba-typescript-client-relying-party-session",
         "tba-typescript-client-policy-decision",
-        "tba-typescript-client-platform-admin",
-        "tba-typescript-client-tenant-admin",
+        "tba-typescript-client-platform-administration",
+        "tba-typescript-client-tenant-administration",
     }
     actual = {p.parent.name for name in ("pyproject.toml", "package.json") for p in layer.glob(f"*/{name}")}
     assert actual == expected
@@ -125,6 +125,33 @@ def test_approved_role_first_matrix_matches_live_packages():
             stem = name.removeprefix("@tba/").removeprefix("tba-")
             role, separator, subject = stem.partition("-")
             assert role in roles and separator and subject, name
+    live = set()
+    for registry, filename in (("Python", "pyproject.toml"), ("npm", "package.json")):
+        for path in (ROOT / "pkgs").glob(f"*/*/{filename}"):
+            if "deprecated" in path.parts:
+                continue
+            name = tomllib.loads(path.read_text())["project"]["name"] if registry == "Python" else json.loads(path.read_text())["name"]
+            live.add((registry, name))
+    assert live == seen
+
+
+def test_implementation_names_use_unambiguous_vocabulary():
+    forbidden = {"admin", "auth", "authz", "uix", "requirements", "brief", "and"}
+    seen = set()
+    for registry, filename in (("Python", "pyproject.toml"), ("npm", "package.json")):
+        for path in (ROOT / "pkgs").glob(f"*/*/{filename}"):
+            if "deprecated" in path.parts:
+                continue
+            name = tomllib.loads(path.read_text())["project"]["name"] if registry == "Python" else json.loads(path.read_text())["name"]
+            assert (registry, name) not in seen, name
+            seen.add((registry, name))
+            if "70-facade" in path.parts:
+                continue
+            stem = name.removeprefix("@tba/").removeprefix("tba-")
+            role, _, subject = stem.partition("-")
+            tokens = subject.split("-")
+            assert not forbidden.intersection(tokens), name
+            assert role not in tokens, name
 
 
 def test_middleware_is_above_clients_with_narrow_dependencies():

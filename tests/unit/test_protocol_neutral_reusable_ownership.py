@@ -14,7 +14,7 @@ def test_protocol_packages_compose_protocol_neutral_concretes() -> None:
     assert (
         ScopeSetMatcher.__module__ == "tba_concrete_authorization_scope_set_matcher"
     )
-    assert LocalClaimsProvider.__module__ == "tba_provider_security_claims_provider_local"
+    assert LocalClaimsProvider.__module__ == "tba_provider_claims_local"
     assert (
         PublicSubjectIdentifierStrategy.__module__
         == "tba_concrete_public_subject_identifier"

@@ -123,9 +123,9 @@ def test_authz_policy_admin_gate_package_uses_identity_core_primitives() -> None
         ROOT
         / "pkgs"
         / "80-routers"
-        / "tba-router-admin-gate"
+        / "tba-router-administration-gate"
         / "src"
-        / "tba_router_admin_gate"
+        / "tba_router_administration_gate"
         / "gate.py"
     )
     tree = ast.parse(gate_path.read_text(encoding="utf-8"))
@@ -276,7 +276,7 @@ def test_contracts_do_not_export_wire_request_response_models() -> None:
 
 
 def test_platform_api_owns_tenant_admin_contracts() -> None:
-    from tba_app_backend_platform_admin.tenants import AdminTenantOut, AdminTenantProvisionIn
+    from tba_app_backend_platform_administration.tenants import AdminTenantOut, AdminTenantProvisionIn
 
     tenant_request = AdminTenantProvisionIn(slug="test", name="Test", email="admin@example.test")
     assert tenant_request.slug == "test"

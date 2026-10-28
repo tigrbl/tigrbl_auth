@@ -14,11 +14,11 @@ from tba_auth.config.deployment import DEFAULT_VALUES, resolve_deployment
 
 
 ROOT = Path(__file__).resolve().parents[3]
-PKG_SRC = ROOT / "pkgs" / "tba-app-backend-tenant-admin" / "src"
+PKG_SRC = ROOT / "pkgs" / "tba-app-backend-tenant-administration" / "src"
 if str(PKG_SRC) not in sys.path:
     sys.path.insert(0, str(PKG_SRC))
 
-tenant_admin_package = import_module("tba_app_backend_tenant_admin")
+tenant_admin_package = import_module("tba_app_backend_tenant_administration")
 PRODUCT_SURFACE = tenant_admin_package.PRODUCT_SURFACE
 TENANT_ADMIN_BACKEND_APP_CONTRACT = tenant_admin_package.TENANT_ADMIN_BACKEND_APP_CONTRACT
 build_app = tenant_admin_package.build_app
@@ -45,7 +45,7 @@ def test_tenant_admin_contract_matches_product_surface_registry() -> None:
     assert PRODUCT_SURFACE == "tenant-admin-app"
     assert TENANT_ADMIN_BACKEND_APP_CONTRACT.product_surface == PRODUCT_SURFACE
     assert TENANT_ADMIN_BACKEND_APP_CONTRACT.intended_uix == (
-        "@tba/ui-tenant-admin"
+        "@tba/ui-tenant-administration"
     )
     assert deployment.plugin_mode == "admin-only"
     assert deployment.surface_enabled("admin-rest")

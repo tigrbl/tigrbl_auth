@@ -28,7 +28,7 @@ Normative anchors:
 | Public authorization-server frontdoor | `tba-app-backend-public` exposes login, authorize, token, logout, registration, discovery, JWKS, and public OAuth/OIDC helpers. | [`tba-app-backend-public` README](../pkgs/90-backend-apps/tba-app-backend-public/README.md) | This is the deployable AS frontdoor for OAuth/OIDC protocol endpoints. |
 | Resource validation frontdoor | `tba-app-backend-resource-validation` exposes validation and metadata surfaces such as JWKS, introspection, and protected-resource metadata. | [`tba-app-backend-resource-validation` README](../pkgs/90-backend-apps/tba-app-backend-resource-validation/README.md), [Target Reality Matrix](compliance/TARGET_REALITY_MATRIX.md) | This is the protected-resource / resource-server integration surface. |
 | Developer frontdoor | `tba-app-backend-developer` owns developer-facing client registration and client management. | [`tba-app-backend-developer` README](../pkgs/90-backend-apps/tba-app-backend-developer/README.md) | OAuth client policy belongs here, while public protocol endpoints stay in public-app. |
-| Service admin frontdoor | `tba-app-backend-service-admin` owns service/workload identity administration. | [`tba-app-backend-service-admin` README](../pkgs/90-backend-apps/tba-app-backend-service-admin/README.md) | Client credentials, M2M, workload credentials, and service keys are product concerns here. |
+| Service admin frontdoor | `tba-app-backend-service-administration` owns service/workload identity administration. | [`tba-app-backend-service-administration` README](../pkgs/90-backend-apps/tba-app-backend-service-administration/README.md) | Client credentials, M2M, workload credentials, and service keys are product concerns here. |
 | RP package | `tba-protocol-oidc-relying-party` is the app-side relying-party integration. | [`tba-protocol-oidc-relying-party` README](../pkgs/50-protocols/tba-protocol-oidc-relying-party/README.md) | Client/RP behavior should be tested separately from AS behavior. |
 | OAuth 2.1 profile | Tracked only as alignment, not a final standard claim. | [Target Reality Matrix](compliance/TARGET_REALITY_MATRIX.md) | This is correct and should remain true until OAuth 2.1 exits draft state. |
 | Password grant signal | A table-owned `PasswordGrantForm` schema exists today. | [`token_record.py`](../pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/token_record.py) | This must be explicitly excluded from any OAuth 2.1 profile, except tightly labeled dev/backcompat modes. |
@@ -84,9 +84,9 @@ Normative anchors:
 | Authorization server metadata | `tba-app-backend-public` | `/.well-known/oauth-authorization-server` | Must be profile-specific and issuer-correct. |
 | JWKS | `tba-app-backend-resource-validation` and public issuer metadata | `/.well-known/jwks.json`, tenant JWKS | Signing-key metadata supports resource-server validation. |
 | Dynamic registration | Public API for protocol endpoint, developer API for product lifecycle | `/register`, client-management routes | Developer API should own policy, lifecycle, UI-facing registration management. |
-| M2M / client credentials | `tba-app-backend-service-admin`, `tba-app-backend-developer`, token endpoint | service clients, workload credentials, `/token` | Product lane needs explicit scopes, resources, rotation, and audit. |
+| M2M / client credentials | `tba-app-backend-service-administration`, `tba-app-backend-developer`, token endpoint | service clients, workload credentials, `/token` | Product lane needs explicit scopes, resources, rotation, and audit. |
 | RP behavior | `tba-protocol-oidc-relying-party`, `@tba/client-oidc-relying-party` | SDK/client integration | Should verify metadata consumption, PKCE, state/nonce, token exchange, and logout behavior. |
-| Resource server behavior | `tba-protocol-authorization-resource-server`, resource validation API | API middleware/integration | Should validate JWT/opaque tokens, issuer, audience/resource, scopes, DPoP/mTLS where enabled. |
+| Resource server behavior | `tba-protocol-oauth-protected-resource`, resource validation API | API middleware/integration | Should validate JWT/opaque tokens, issuer, audience/resource, scopes, DPoP/mTLS where enabled. |
 
 ## Competitor Surface Comparison
 
@@ -152,9 +152,9 @@ tba-protocol-oauth                    # OAuth 2.0 + extension RFC logic, OAuth 2
 tba-app-backend-public                   # authorize/token/revoke/register/discovery/JWKS protocol frontdoor
 tba-app-backend-resource-validation      # introspection, JWKS, protected-resource metadata
 tba-app-backend-developer                # client registration, redirect/grant/client policy
-tba-app-backend-service-admin            # M2M/workload/service identity lifecycle
+tba-app-backend-service-administration            # M2M/workload/service identity lifecycle
 tba-protocol-oidc-relying-party / @tba/client-oidc-relying-party     # OAuth/OIDC client and RP behavior
-tba-protocol-authorization-resource-server          # protected API token validation integration
+tba-protocol-oauth-protected-resource          # protected API token validation integration
 ```
 
 The practical course is to keep OAuth 2.0 broad and interoperable, then add a stricter OAuth 2.1 alignment profile that operators can enable and tests can certify without overstating draft-standard status.

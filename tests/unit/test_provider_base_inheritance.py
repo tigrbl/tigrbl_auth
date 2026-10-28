@@ -25,14 +25,14 @@ PROVIDER_BASES = {
     "tba_concrete_acr_evaluator_basic.BasicAcrEvaluator": "tba_bases_authentication_context.AcrEvaluatorBase",
     "tba_concrete_amr_evaluator_basic.BasicAmrEvaluator": "tba_bases_authentication_context.AmrEvaluatorBase",
     "tba_concrete_mtls_confirmation_binding.MtlsBindingValidator": "tba_bases_security_trust_domain.CertificateServiceDomainBase",
-    "tba_provider_security_claims_provider_local.LocalSecurityClaimsProvider": "tba_bases_identity_claims.ClaimsProviderBase",
+    "tba_provider_claims_local.LocalSecurityClaimsProvider": "tba_bases_identity_claims.ClaimsProviderBase",
     "tba_concrete_dpop_confirmation_binding.DpopCnfBindingValidator": "tba_bases_security_trust_domain.ConfirmationBindingValidatorBase",
     "tba_concrete_mtls_confirmation_binding.MtlsCnfBindingValidator": "tba_bases_security_trust_domain.ConfirmationBindingValidatorBase",
     "tba_concrete_dpop_confirmation_binding.DpopBindingValidator": "tba_bases_security_trust_domain.ProofOfPossessionDomainBase",
     "tba_concrete_pkce.PkceProofProvider": "tba_bases_security_trust_domain.ProofOfPossessionDomainBase",
     "tba_provider_security_signing_pqc.PQCSigningProvider": "tba_bases_security_trust_domain.SigningProviderBase",
     "tba_concrete_pairwise_subject_identifier.PairwiseSubjectIdentifierStrategy": "tba_bases_identity_model.SubjectIdentifierStrategyBase",
-    "tba_provider_security_token_introspection_client.IntrospectionClient": "tba_bases_security_trust_domain.TokenIntrospectionClientBase",
+    "tba_provider_token_introspection.IntrospectionClient": "tba_bases_security_trust_domain.TokenIntrospectionClientBase",
     "tba_provider_security_token_jwks_cache.JWKSCache": "tba_bases_security_trust_domain.VerificationKeyCacheBase",
 }
 

@@ -149,7 +149,7 @@ def test_provider_white_label_t2_public_boundary_has_no_forbidden_imports() -> N
     forbidden = {
         "tba_auth",
         "tba_runtime_identity_administration",
-        "tba_protocol_authorization_resource_server",
+        "tba_protocol_oauth_protected_resource",
         "tba_protocol_oidc_relying_party",
         "tba_server_identity",
     }

@@ -1,10 +1,10 @@
 # Platform Admin API + UIX Requirements Brief
 
-**Pairing:** `tba-app-backend-platform-admin` + `@tba/ui-platform-admin`<br>
+**Pairing:** `tba-app-backend-platform-administration` + `@tba/ui-platform-administration`<br>
 **Status:** Delivery brief<br>
 **Prepared:** July 11, 2026<br>
-**Backend app owner:** `pkgs/90-backend-apps/tba-app-backend-platform-admin`<br>
-**UIX owner:** `pkgs/105-ui/tba-ui-platform-admin`
+**Backend app owner:** `pkgs/90-backend-apps/tba-app-backend-platform-administration`<br>
+**UIX owner:** `pkgs/105-ui/tba-ui-platform-administration`
 
 ## 1. Product Decision
 
@@ -223,13 +223,13 @@ Produce a route-level copy deck containing:
 
 ## 11. Source Evidence
 
-- `pkgs/90-backend-apps/tba-app-backend-platform-admin/README.md`
-- `pkgs/90-backend-apps/tba-app-backend-platform-admin/src/tba_app_backend_platform_admin/contract.py`
-- `pkgs/105-ui/tba-ui-platform-admin/README.md`
-- `pkgs/105-ui/tba-ui-platform-admin/App.tsx`
-- `pkgs/105-ui/tba-ui-platform-admin/services/platformAdminClient.ts`
-- `pkgs/105-ui/tba-ui-platform-admin/services/workflowCrud.test.ts`
-- `pkgs/105-ui/tba-ui-platform-admin/pages/platformCrudPages.test.tsx`
-- `tests/packages/tba-app-backend-platform-admin/`
+- `pkgs/90-backend-apps/tba-app-backend-platform-administration/README.md`
+- `pkgs/90-backend-apps/tba-app-backend-platform-administration/src/tba_app_backend_platform_administration/contract.py`
+- `pkgs/105-ui/tba-ui-platform-administration/README.md`
+- `pkgs/105-ui/tba-ui-platform-administration/App.tsx`
+- `pkgs/105-ui/tba-ui-platform-administration/services/platformAdminClient.ts`
+- `pkgs/105-ui/tba-ui-platform-administration/services/workflowCrud.test.ts`
+- `pkgs/105-ui/tba-ui-platform-administration/pages/platformCrudPages.test.tsx`
+- `tests/packages/tba-app-backend-platform-administration/`
 - `tests/unit/test_product_api_surfaces.py`
 - Platform-admin SSOT feature/claim/test/evidence/boundary records

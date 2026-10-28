@@ -12,7 +12,7 @@ for src in (ROOT / "pkgs").rglob("src"):
     if value not in sys.path:
         sys.path.insert(0, value)
 
-from tba_protocol_authorization_resource_server import (  # noqa: E402
+from tba_protocol_oauth_protected_resource import (  # noqa: E402
     AccessTokenClaims,
     DPoPBinding,
     DpopCnfBindingValidator,
@@ -32,7 +32,7 @@ from tba_protocol_authorization_resource_server import (  # noqa: E402
 from tba_provider_security_dpop_cnf_binding_validator import (  # noqa: E402
     DpopCnfBindingValidator as CanonicalDpopCnfBindingValidator,
 )
-from tba_provider_security_token_introspection_client import (  # noqa: E402
+from tba_provider_token_introspection import (  # noqa: E402
     IntrospectionClient as CanonicalIntrospectionClient,
 )
 from tba_provider_security_token_jwks_cache import (  # noqa: E402
@@ -246,12 +246,12 @@ def test_resource_server_t2_rejects_bad_dpop_mtls_and_missing_bearer() -> None:
 @pytest.mark.unit
 def test_resource_server_t2_public_boundary_has_no_provider_imports() -> None:
     files = [
-        Path("pkgs/50-protocols/tba-protocol-authorization-resource-server/src/tba_protocol_authorization_resource_server/__init__.py"),
-        Path("pkgs/50-protocols/tba-protocol-authorization-resource-server/src/tba_protocol_authorization_resource_server/verifier.py"),
-        Path("pkgs/50-protocols/tba-protocol-authorization-resource-server/src/tba_protocol_authorization_resource_server/sender_constraints.py"),
+        Path("pkgs/50-protocols/tba-protocol-oauth-protected-resource/src/tba_protocol_oauth_protected_resource/__init__.py"),
+        Path("pkgs/50-protocols/tba-protocol-oauth-protected-resource/src/tba_protocol_oauth_protected_resource/verifier.py"),
+        Path("pkgs/50-protocols/tba-protocol-oauth-protected-resource/src/tba_protocol_oauth_protected_resource/sender_constraints.py"),
         Path("pkgs/20-providers/tba-provider-authorization-resource-server-verifier/src/tba_provider_authorization_resource_server_verifier/__init__.py"),
         Path("pkgs/20-providers/tba-provider-security-token-jwks-cache/src/tba_provider_security_token_jwks_cache/__init__.py"),
-        Path("pkgs/20-providers/tba-provider-security-token-introspection-client/src/tba_provider_security_token_introspection_client/__init__.py"),
+        Path("pkgs/20-providers/tba-provider-token-introspection/src/tba_provider_token_introspection/__init__.py"),
         Path("pkgs/20-providers/tba-provider-security-dpop-cnf-binding-validator/src/tba_provider_security_dpop_cnf_binding_validator/__init__.py"),
         Path("pkgs/20-providers/tba-provider-security-mtls-cnf-binding-validator/src/tba_provider_security_mtls_cnf_binding_validator/__init__.py"),
         Path("pkgs/deprecated/tigrbl-security-sender-constraint-validator/src/tigrbl_security_sender_constraint_validator/__init__.py"),

@@ -86,7 +86,7 @@ FACADE_EXTRAS: Mapping[str, tuple[str, ...]] = {
         "tba-protocol-oidc",
         "tba-provider-identity-jose",
     ),
-    "consumer": ("tba-protocol-authorization-resource-server", "tba-protocol-oidc-relying-party"),
+    "consumer": ("tba-protocol-oauth-protected-resource", "tba-protocol-oidc-relying-party"),
     "all": (
         "tba-primitives-identity",
         "tba-contracts-identity",
@@ -102,7 +102,7 @@ FACADE_EXTRAS: Mapping[str, tuple[str, ...]] = {
         "tba-plugin-tigrbl",
         "tba-runtime-identity",
         "tba-operator-identity",
-        "tba-protocol-authorization-resource-server",
+        "tba-protocol-oauth-protected-resource",
         "tba-protocol-oidc-relying-party",
         "tba-testkit-identity",
     ),
@@ -111,7 +111,7 @@ FACADE_EXTRAS: Mapping[str, tuple[str, ...]] = {
 
 def warn_legacy_import(name: str, *, stacklevel: int = 2) -> None:
     warnings.warn(
-        f"{name} is a tba-auth compatibility facade; import the split tba_identity_* package directly for new code.",
+        f"{name} is a tba-auth compatibility facade; import the owning role-first tba_<role>_<subject> package directly for new code.",
         TbaAuthFacadeWarning,
         stacklevel=stacklevel,
     )

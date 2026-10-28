@@ -7,10 +7,10 @@ describe("demo hub surface catalog", () => {
     expect(surfaces.map((surface) => surface.api)).toEqual([
       "tba-app-backend-public",
       "tba-app-backend-my-account",
-      "tba-app-backend-platform-admin",
-      "tba-app-backend-tenant-admin",
+      "tba-app-backend-platform-administration",
+      "tba-app-backend-tenant-administration",
       "tba-app-backend-developer",
-      "tba-app-backend-service-admin",
+      "tba-app-backend-service-administration",
       "tba-app-backend-resource-validation"
     ]);
   });

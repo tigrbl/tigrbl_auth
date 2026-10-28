@@ -17,7 +17,7 @@ from tba_contracts_identity.resource_server import (
 )
 from tba_provider_security_dpop_cnf_binding_validator import DpopCnfBindingValidator
 from tba_provider_security_mtls_cnf_binding_validator import MtlsCnfBindingValidator
-from tba_provider_security_token_introspection_client import IntrospectionClient
+from tba_provider_token_introspection import IntrospectionClient
 from tba_provider_security_token_jwks_cache import JWKSCache
 from tba_contracts_security_trust import DPoPBinding, MTLSBinding
 

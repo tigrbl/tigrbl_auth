@@ -54,7 +54,7 @@ For `tba_auth`, the clean product split is:
 | MFA requirement decisions | `tba-runtime-authorization-policy` |
 | Challenge/session continuation | `tba-app-backend-public`, `tba-protocol-oauth`, `tba-protocol-oidc` |
 | Factor and challenge storage | `tba-storage-core` |
-| Tenant policy and support reset | `tba-app-backend-tenant-admin` |
+| Tenant policy and support reset | `tba-app-backend-tenant-administration` |
 | Hosted login MFA UI | `@tba/ui-public` |
 | Assurance claims | `tba-provider-identity-jose`, `tba-protocol-oidc` |
 

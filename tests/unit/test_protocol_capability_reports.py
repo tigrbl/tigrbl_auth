@@ -18,7 +18,7 @@ PROTOCOL_MODULES = (
     "tba_protocol_oid4vp",
     "tba_protocol_oidc",
     "tba_protocol_oidc_relying_party",
-    "tba_protocol_authorization_resource_server",
+    "tba_protocol_oauth_protected_resource",
     "tba_profile_credential_sd_jwt_vc",
     "tba_protocol_security_event_set",
 )

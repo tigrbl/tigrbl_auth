@@ -105,7 +105,7 @@ The UIX must never sit in the protected API’s production request path.
 
 - Capture expected issuer, resource/audience, scopes/permissions, algorithms, clock tolerance, tenant, token type, introspection/JWKS strategy, and sender constraints only where supported.
 - Source choices from live metadata/profile and distinguish required, recommended, and unsupported values.
-- Generate copyable configuration for `tba-protocol-authorization-resource-server`, Python middleware examples, and common gateway formats where maintained.
+- Generate copyable configuration for `tba-protocol-oauth-protected-resource`, Python middleware examples, and common gateway formats where maintained.
 - Mark generated configuration with package/version/profile compatibility and productionization notes.
 - This builder does not save or mutate runtime policy unless a future, separately owned configuration API exists.
 
@@ -250,5 +250,5 @@ Produce a route-level copy deck containing:
 - `pkgs/105-ui/tba-ui-demo-hub/surfaces.ts`
 - `pkgs/105-ui/tba-ui-demo-hub/demoState.ts`
 - Resource-validation API unit/integration/conformance tests
-- `tba-protocol-authorization-resource-server` package and verifier contract tests
+- `tba-protocol-oauth-protected-resource` package and verifier contract tests
 - Resource-validation SSOT feature/claim/test/evidence/boundary records

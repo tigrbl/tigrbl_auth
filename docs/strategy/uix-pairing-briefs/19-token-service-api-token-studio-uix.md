@@ -566,7 +566,7 @@ Guardrails include token confusion, privilege escalation, cross-tenant exchange,
 - `pkgs/20-providers/tba-provider-security-proof-dpop/`
 - `pkgs/20-providers/tba-provider-security-dpop-cnf-binding-validator/`
 - `pkgs/20-providers/tba-provider-security-mtls-cnf-binding-validator/`
-- `pkgs/20-providers/tba-provider-security-token-introspection-client/`
+- `pkgs/20-providers/tba-provider-token-introspection/`
 - JOSE, credentials, resource validation, delegation, authorization provenance, audit, and key-rotation packages;
 - RFC 7009/7662/8693/8705/9449 and refresh/token persistence tests.
 

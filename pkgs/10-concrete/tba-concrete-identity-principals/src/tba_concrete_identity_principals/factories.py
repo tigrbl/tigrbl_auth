@@ -17,7 +17,7 @@ from tba_contracts_identity.principals import (
     TenantBoundary,
     TenantMembership,
 )
-from tba_concrete_admin_identity import AdminIdentity
+from tba_concrete_administrator_identity import AdminIdentity
 from tba_concrete_client_identity import ClientIdentity
 from tba_concrete_device_identity import DeviceIdentity
 from tba_concrete_machine_identity import MachineIdentity

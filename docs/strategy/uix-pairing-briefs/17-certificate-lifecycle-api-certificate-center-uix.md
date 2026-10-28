@@ -513,7 +513,7 @@ Guardrails include false-valid verification, SAN/usage escalation, key leakage, 
 - `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/key_rotation_policy/`
 - `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/key_rotation_event/`
 - key provider/lifecycle, JOSE, attestation, trust-domain, audit, service/workload, OAuth mTLS, and resource-validation packages;
-- `pkgs/105-ui/tba-ui-platform-admin/pages/KeyRotationPage.tsx`;
+- `pkgs/105-ui/tba-ui-platform-administration/pages/KeyRotationPage.tsx`;
 - mTLS, key-rotation, and certificate-credential tests.
 
 ### Standards and primary sources

@@ -26,8 +26,8 @@ The app names here match the target composition set in
 |---|---|---|
 | `tba-auth-idp` | `tba_auth` backend deployment | Shared multi-tenant identity provider and control plane |
 | `tba-auth-public-portal` | `pkgs/105-ui/tba-ui-public` | Tenant human-user public auth UX |
-| `tba-auth-platform-admin-console` | split from `pkgs/105-ui/tba-ui-admin` | Platform-wide tenant and authority administration |
-| `tba-auth-tenant-admin-console` | split from `pkgs/105-ui/tba-ui-admin` | Tenant-scoped identity, key, and local configuration administration |
+| `tba-auth-platform-admin-console` | split from `pkgs/105-ui/tba-ui-administration` | Platform-wide tenant and authority administration |
+| `tba-auth-tenant-admin-console` | split from `pkgs/105-ui/tba-ui-administration` | Tenant-scoped identity, key, and local configuration administration |
 | `tba-auth-developer-portal` | not fully shipped; partial client-management code exists | Tenant app and OIDC client self-service |
 | `tba-auth-service-admin-surface` | not fully shipped; backend capability is partial | Machine/service/workload identity administration |
 
@@ -63,7 +63,7 @@ The app names here match the target composition set in
 
 | Dependency class | Dependencies |
 |---|---|
-| Runtime package dependencies | split subset of `@tba/ui-admin`, React, React DOM, Vite, TypeScript; backend support from `tba-runtime-identity-administration`, `tba-operator-identity`, `tba-contracts-identity`, `tba-runtime-authorization-policy` |
+| Runtime package dependencies | split subset of `@tba/ui-administration`, React, React DOM, Vite, TypeScript; backend support from `tba-runtime-identity-administration`, `tba-operator-identity`, `tba-contracts-identity`, `tba-runtime-authorization-policy` |
 | Surface dependencies | `/admin/auth/*`, `/admin/tenants`, `/admin/identities`, `/rpc` methods for directory, profile, governance, keys, and operator status |
 | UIX dependencies | `platform-admin-uix` |
 | Data and state dependencies | admin session state, tenant records, platform-wide user records, admin authority flags, delegated-admin policy summaries, audit and governance state |
@@ -76,7 +76,7 @@ The app names here match the target composition set in
 
 | Dependency class | Dependencies |
 |---|---|
-| Runtime package dependencies | split subset of `@tba/ui-admin`, React, React DOM, Vite, TypeScript; backend support from `tba-runtime-identity-administration`, `tba-operator-identity`, `tba-runtime-authorization-policy`, `tba-contracts-identity` |
+| Runtime package dependencies | split subset of `@tba/ui-administration`, React, React DOM, Vite, TypeScript; backend support from `tba-runtime-identity-administration`, `tba-operator-identity`, `tba-runtime-authorization-policy`, `tba-contracts-identity` |
 | Surface dependencies | `/admin/auth/*`, `/admin/identities`, tenant discovery routes, `/rpc` directory methods, `tenant.keys.*`, `keys.list`, `jwks.show`, client and policy control-plane methods |
 | UIX dependencies | `tenant-admin-uix` |
 | Data and state dependencies | tenant-scoped admin session, tenant visibility filters, tenant identities, tenant JWKS inventory and publication state, tenant client records, tenant policy state |
@@ -89,7 +89,7 @@ The app names here match the target composition set in
 
 | Dependency class | Dependencies |
 |---|---|
-| Runtime package dependencies | future dedicated portal UIX, plus existing backend support from `tba-protocol-oauth`, `tba-runtime-identity-administration`, `tba-contracts-identity`, `tba-runtime-authorization-policy`; existing partial frontend basis in `pkgs/105-ui/tba-ui-admin/components/ClientManagement.tsx` |
+| Runtime package dependencies | future dedicated portal UIX, plus existing backend support from `tba-protocol-oauth`, `tba-runtime-identity-administration`, `tba-contracts-identity`, `tba-runtime-authorization-policy`; existing partial frontend basis in `pkgs/105-ui/tba-ui-administration/components/ClientManagement.tsx` |
 | Surface dependencies | `/register`, `/register/{client_id}`, OIDC discovery metadata, tenant discovery metadata, client control-plane methods (`client.list`, `client.show`, `client.registration.*`, and any future `client.create/update/delete` RPC methods that are formally shipped) |
 | UIX dependencies | `developer-uix` |
 | Data and state dependencies | client registration records, redirect URIs, grant types, token endpoint auth methods, client secrets or client JWKS metadata, software metadata, tenant ownership and delegated admin policy |
@@ -102,7 +102,7 @@ The app names here match the target composition set in
 
 | Dependency class | Dependencies |
 |---|---|
-| Runtime package dependencies | future dedicated UIX or automation surface; backend support from `tba-credentials`, `tba-runtime-authorization-policy`, `tba-concrete-identity-principals`, `tba-protocol-oauth`, `tba-protocol-authorization-resource-server`, and operator/service-key workflows |
+| Runtime package dependencies | future dedicated UIX or automation surface; backend support from `tba-credentials`, `tba-runtime-authorization-policy`, `tba-concrete-identity-principals`, `tba-protocol-oauth`, `tba-protocol-oauth-protected-resource`, and operator/service-key workflows |
 | Surface dependencies | token endpoint, introspection endpoint, JWKS publication, service-key and API-key administration surfaces, workload-identity and advanced-identity control surfaces where promoted into the release path |
 | UIX dependencies | `service-admin-uix` if browser-based; may also depend on CLI or automation surfaces rather than a browser UI alone |
 | Data and state dependencies | service identities, service keys, API keys, workload identity records, token introspection state, machine principal metadata, trust-domain and scope policy |
@@ -130,8 +130,8 @@ The app names here match the target composition set in
 |---|---|---|
 | `tba-auth-idp` | `tba_auth` backend package and split Python packages | already concrete |
 | `tba-auth-public-portal` | `pkgs/105-ui/tba-ui-public` | tenant-branded composition and deployment wiring |
-| `tba-auth-platform-admin-console` | platform subset of `pkgs/105-ui/tba-ui-admin` | explicit split from tenant-admin concerns |
-| `tba-auth-tenant-admin-console` | tenant subset of `pkgs/105-ui/tba-ui-admin` | explicit split from platform-admin concerns |
+| `tba-auth-platform-admin-console` | platform subset of `pkgs/105-ui/tba-ui-administration` | explicit split from tenant-admin concerns |
+| `tba-auth-tenant-admin-console` | tenant subset of `pkgs/105-ui/tba-ui-administration` | explicit split from platform-admin concerns |
 | `tba-auth-developer-portal` | partial `ClientManagement` component plus backend registration/control-plane support | dedicated UIX, formal routing, and tighter client-management contract surface |
 | `tba-auth-service-admin-surface` | partial backend service/workload capability only | dedicated surface definition, promoted workflows, and possibly a non-browser-first operator experience |
 

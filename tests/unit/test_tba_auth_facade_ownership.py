@@ -49,7 +49,7 @@ FACADE_MODULES = {
     "tba_auth.rfc.rfc8725": "tba_protocol_oauth.standards.jwt_best_practices",
     "tba_auth.rfc.rfc7517": "tba_provider_identity_jose.standards.rfc7517",
     "tba_auth.rfc.rfc7518": "tba_provider_identity_jose.standards.rfc7518",
-    "tba_auth.security.admin_gate": "tba_router_admin_gate",
+    "tba_auth.security.admin_gate": "tba_router_administration_gate",
     "tba_auth.security.certification": "tba_certification_release.certification",
     "tba_auth.security.runtime_metadata": "tba_certification_release.runtime_metadata",
     "tba_auth.services.advanced_identity_plane": "tba_runtime_identity_administration.advanced_identity_plane",

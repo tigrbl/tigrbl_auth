@@ -19,10 +19,10 @@ from tba_contracts_identity.admin_tenants import PlatformAdministrator
 ROOT = Path(__file__).resolve().parents[2]
 IDENTITY_API = (
     ROOT
-    / "pkgs/90-backend-apps/tba-app-backend-platform-admin/src/tba_app_backend_platform_admin/identities.py"
+    / "pkgs/90-backend-apps/tba-app-backend-platform-administration/src/tba_app_backend_platform_administration/identities.py"
 )
 PLATFORM_ADMIN_PROJECT = (
-    ROOT / "pkgs/90-backend-apps/tba-app-backend-platform-admin/pyproject.toml"
+    ROOT / "pkgs/90-backend-apps/tba-app-backend-platform-administration/pyproject.toml"
 )
 
 

@@ -8,7 +8,7 @@ status: "draft"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification governs the \tba-app-backend-service-admin product API surface."
+summary: "This specification governs the \tba-app-backend-service-administration product API surface."
 supersedes: []
 superseded_by: []
 status_notes:

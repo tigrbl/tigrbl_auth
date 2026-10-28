@@ -75,7 +75,7 @@ services = ServiceIdentityRegistry()
 - [tba-provider-authorization-policy-decision-engine](https://pypi.org/project/tba-provider-authorization-policy-decision-engine/), [tba-durability-authorization-policy-authority-derivation-graph](https://pypi.org/project/tba-durability-authorization-policy-authority-derivation-graph/), and [tigrbl-authz-policy-invariant-registry](https://pypi.org/project/tigrbl-authz-policy-invariant-registry/) own their respective concrete implementations.
 - [tba-storage-core](https://pypi.org/project/tba-storage-core/) owns durable role, tenant membership, attribute policy, policy condition, and delegated admin scope records.
 - [tba-credentials](https://pypi.org/project/tba-credentials/) provides the credential facade.
-- [tba-protocol-authorization-resource-server](https://pypi.org/project/tba-protocol-authorization-resource-server/) owns protected-resource token validation and enforcement integration.
+- [tba-protocol-oauth-protected-resource](https://pypi.org/project/tba-protocol-oauth-protected-resource/) owns protected-resource token validation and enforcement integration.
 
 ## Governance
 

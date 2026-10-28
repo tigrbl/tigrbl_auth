@@ -33,8 +33,8 @@ These UIX names match the target UIX composition in
 | UIX | Current repo basis | Primary role |
 |---|---|---|
 | `public-uix` | `pkgs/105-ui/tba-ui-public` | Tenant human-user authentication and consent UX |
-| `platform-admin-uix` | split from `pkgs/105-ui/tba-ui-admin` | Platform superuser administration UX |
-| `tenant-admin-uix` | split from `pkgs/105-ui/tba-ui-admin` | Tenant-scoped administration UX |
+| `platform-admin-uix` | split from `pkgs/105-ui/tba-ui-administration` | Platform superuser administration UX |
+| `tenant-admin-uix` | split from `pkgs/105-ui/tba-ui-administration` | Tenant-scoped administration UX |
 | `developer-uix` | not fully shipped; partial basis in `ClientManagement` and discovery helpers | Tenant app developer and OIDC client self-service UX |
 | `service-admin-uix` | not fully shipped; backend-only partial basis today | Service/workload/machine identity administration UX |
 
@@ -57,7 +57,7 @@ These UIX names match the target UIX composition in
 
 | Dependency class | Dependencies |
 |---|---|
-| Frontend package dependencies | split subset of `@tba/ui-admin`, React, React DOM, Vite, TypeScript, `adminAuthService`, `backendService`, `jsonRpcService`, `governancePolicy`, tenant-management and identity-management components, platform-only navigation shell |
+| Frontend package dependencies | split subset of `@tba/ui-administration`, React, React DOM, Vite, TypeScript, `adminAuthService`, `backendService`, `jsonRpcService`, `governancePolicy`, tenant-management and identity-management components, platform-only navigation shell |
 | Backend surface dependencies | `/admin/auth/login`, `/admin/auth/session`, `/admin/auth/logout`, `/admin/auth/forgot-password`, `/admin/auth/reset-password`, `/admin/auth/change-password`, `/admin/tenants`, `/admin/identities`, `/rpc` directory/profile/governance surfaces as needed for platform context |
 | Identity and session dependencies | authenticated admin browser session, superuser flag, platform actor identity, delegated-admin policy awareness where platform users can grant or inspect scopes |
 | Domain data dependencies | tenant records, platform-visible user records, admin authority flags, tenant provisioning payloads, bootstrap/deletion decisions, audit and governance summaries |
@@ -70,7 +70,7 @@ These UIX names match the target UIX composition in
 
 | Dependency class | Dependencies |
 |---|---|
-| Frontend package dependencies | split subset of `@tba/ui-admin`, React, React DOM, Vite, TypeScript, `adminAuthService`, `backendService`, `jsonRpcService`, `governancePolicy`, `IdentityManagement`, `TenantJwksPublicationView`, tenant-scoped navigation shell |
+| Frontend package dependencies | split subset of `@tba/ui-administration`, React, React DOM, Vite, TypeScript, `adminAuthService`, `backendService`, `jsonRpcService`, `governancePolicy`, `IdentityManagement`, `TenantJwksPublicationView`, tenant-scoped navigation shell |
 | Backend surface dependencies | `/admin/auth/*`, `/admin/identities`, tenant-scoped discovery routes, `tenant.keys.seed`, `tenant.keys.create`, `tenant.keys.update`, `tenant.keys.delete`, `keys.list`, `jwks.show`, tenant directory and policy RPC methods |
 | Identity and session dependencies | authenticated admin browser session, tenant selection state, delegated tenant scope, tenant visibility filtering, tenant-scoped mutation authorization |
 | Domain data dependencies | tenant identity records, tenant admin privileges, tenant JWKS lifecycle state, tenant client inventory, tenant-local policy summaries |
@@ -126,8 +126,8 @@ These UIX names match the target UIX composition in
 | Target UIX | Current concrete basis in this repo | Main dependency gap |
 |---|---|---|
 | `public-uix` | `pkgs/105-ui/tba-ui-public` | tenant-branded composition and deployment wiring only |
-| `platform-admin-uix` | platform subset of `pkgs/105-ui/tba-ui-admin` | explicit removal of tenant-local workflows and a dedicated platform nav/state model |
-| `tenant-admin-uix` | tenant subset of `pkgs/105-ui/tba-ui-admin` | explicit removal of platform-global workflows and tenant-local client/policy completion |
+| `platform-admin-uix` | platform subset of `pkgs/105-ui/tba-ui-administration` | explicit removal of tenant-local workflows and a dedicated platform nav/state model |
+| `tenant-admin-uix` | tenant subset of `pkgs/105-ui/tba-ui-administration` | explicit removal of platform-global workflows and tenant-local client/policy completion |
 | `developer-uix` | `ClientManagement.tsx` plus discovery/client backend support | dedicated UI shell, formal route model, stronger app-owner workflow model |
 | `service-admin-uix` | partial backend-only service/workload capability | dedicated UI model, promoted service identity workflows, and possibly CLI-first rather than browser-first delivery |
 

@@ -94,7 +94,7 @@ def build_app(
         admin_resource_path_prefixes,
         attach_runtime_surfaces,
     )
-    from tba_router_admin_gate import AdminGate
+    from tba_router_administration_gate import AdminGate
     from tba_runtime_identity_storage.engine import dsn
 
     app = TigrblApp(

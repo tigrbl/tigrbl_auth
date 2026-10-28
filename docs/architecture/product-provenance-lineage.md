@@ -27,18 +27,18 @@ for one migration window.
 | 12 | `tba-runtime-identity` | Backend package | Runtime/profile/runner configuration. |
 | 13 | `tba-app-backend-public` | API front door | First deployable public identity/provider surface. |
 | 14 | `tba-app-backend-resource-validation` | API front door | Read-only validation/metadata surface derived from public issuer state. |
-| 15 | `tba-app-backend-platform-admin` | API front door | Platform control plane: creates tenants and assigns authority. |
-| 16 | `tba-app-backend-tenant-admin` | API front door | Tenant-scoped administration derived from platform-created tenants. |
+| 15 | `tba-app-backend-platform-administration` | API front door | Platform control plane: creates tenants and assigns authority. |
+| 16 | `tba-app-backend-tenant-administration` | API front door | Tenant-scoped administration derived from platform-created tenants. |
 | 17 | `tba-app-backend-developer` | API front door | Developer app/client registration inside a tenant context. |
-| 18 | `tba-app-backend-service-admin` | API front door | Service/workload identity administration inside a tenant/platform context. |
+| 18 | `tba-app-backend-service-administration` | API front door | Service/workload identity administration inside a tenant/platform context. |
 | 19 | `@tba/ui-public` | UIX app | Public hosted-login UI over `public-app`. |
-| 20 | `@tba/ui-platform-admin` | UIX app | Platform owner/admin/operator UI over `platform-admin-app`. |
-| 21 | `@tba/ui-tenant-admin` | UIX app | Tenant owner/admin UI over `tenant-admin-app`. |
+| 20 | `@tba/ui-platform-administration` | UIX app | Platform owner/admin/operator UI over `platform-admin-app`. |
+| 21 | `@tba/ui-tenant-administration` | UIX app | Tenant owner/admin UI over `tenant-admin-app`. |
 | 22 | `@tba/ui-developer` | UIX app | Tenant developer UI over `developer-app`. |
-| 23 | `@tba/ui-service-admin` | UIX app | Service/workload admin UI over `service-admin-app`. |
+| 23 | `@tba/ui-service-administration` | UIX app | Service/workload admin UI over `service-admin-app`. |
 | 24 | `tba-protocol-oidc-relying-party` | Consumer package | App-side relying-party integration consuming the public issuer. |
 | 25 | `@tba/client-oidc-relying-party` | Consumer UI/package | Browser/client RP integration consuming public issuer behavior. |
-| 26 | `tba-protocol-authorization-resource-server` | Consumer package | Protected API token-validation integration consuming resource-validation metadata. |
+| 26 | `tba-protocol-oauth-protected-resource` | Consumer package | Protected API token-validation integration consuming resource-validation metadata. |
 | 27 | `tba-operator-identity` | Tooling package | Operational tooling over assembled deployments. |
 | 28 | `tba-testkit-identity` | Test package | Cross-cutting fixtures, conformance, and integration harnesses. |
-| 29 | `@tba/ui-admin` | Legacy UIX app | Temporary ancestor/extraction source, not a final product surface. |
+| 29 | `@tba/ui-administration` | Legacy UIX app | Temporary ancestor/extraction source, not a final product surface. |

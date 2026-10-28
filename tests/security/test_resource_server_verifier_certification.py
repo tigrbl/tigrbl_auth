@@ -21,7 +21,7 @@ from tba_auth.config.deployment import DEFAULT_VALUES  # noqa: E402
 from tba_auth.standards.oauth2.resource_verifier_contract import (  # noqa: E402
     build_protected_resource_verifier_contract,
 )
-from tba_protocol_authorization_resource_server import (  # noqa: E402
+from tba_protocol_oauth_protected_resource import (  # noqa: E402
     AccessTokenClaims,
     ResourceServerVerifier,
     verifier_contract_from_metadata,

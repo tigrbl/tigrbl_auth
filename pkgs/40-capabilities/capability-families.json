@@ -700,7 +700,7 @@
       ],
       "package": "tba-capability-protected-resource-authorization",
       "protocol_packages": [
-        "tba-protocol-authorization-resource-server"
+        "tba-protocol-oauth-protected-resource"
       ],
       "purpose": "coordinate normalized protected-resource token and claims authorization"
     },

@@ -62,17 +62,17 @@ FRONTEND_WORKSPACES = {
     ROOT / "pkgs" / "100-uix-core" / "tba-ui-primitives",
     ROOT / "pkgs" / "75-clients" / "tba-typescript-client-oidc-relying-party",
     ROOT / "pkgs" / "75-clients" / "tba-typescript-client-relying-party-session",
-    ROOT / "pkgs" / "75-clients" / "tba-typescript-client-tenant-admin",
-    ROOT / "pkgs" / "75-clients" / "tba-typescript-client-platform-admin",
+    ROOT / "pkgs" / "75-clients" / "tba-typescript-client-tenant-administration",
+    ROOT / "pkgs" / "75-clients" / "tba-typescript-client-platform-administration",
     ROOT / "pkgs" / "75-clients" / "tba-typescript-client-policy-decision",
-    ROOT / "pkgs" / "105-ui" / "tba-ui-admin",
+    ROOT / "pkgs" / "105-ui" / "tba-ui-administration",
     ROOT / "pkgs" / "105-ui" / "tba-ui-demo-hub",
     ROOT / "pkgs" / "105-ui" / "tba-ui-developer",
     ROOT / "pkgs" / "105-ui" / "tba-ui-my-account",
-    ROOT / "pkgs" / "105-ui" / "tba-ui-platform-admin",
+    ROOT / "pkgs" / "105-ui" / "tba-ui-platform-administration",
     ROOT / "pkgs" / "105-ui" / "tba-ui-public",
-    ROOT / "pkgs" / "105-ui" / "tba-ui-service-admin",
-    ROOT / "pkgs" / "105-ui" / "tba-ui-tenant-admin",
+    ROOT / "pkgs" / "105-ui" / "tba-ui-service-administration",
+    ROOT / "pkgs" / "105-ui" / "tba-ui-tenant-administration",
 }
 FRONTEND_WORKSPACES.update(
     path.parent

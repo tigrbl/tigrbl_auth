@@ -41,7 +41,7 @@ roles but require more work.
 | `tba-server-identity` | Default runnable Authorization Server / OIDC Provider / IdP distribution. |
 | `tba-runtime-identity` | Process/runtime layer: runner profiles, ASGI runtime adapters, lifecycle hooks, runtime manifests, health and diagnostics wiring. |
 | `tba-operator-identity` | CLI/operator workflows over admin, runtime, contracts, and evidence surfaces. |
-| `tba-protocol-authorization-resource-server` | Protected API toolkit: token validation, JWKS cache, introspection, scope/permission enforcement, DPoP/mTLS/resource checks. |
+| `tba-protocol-oauth-protected-resource` | Protected API toolkit: token validation, JWKS cache, introspection, scope/permission enforcement, DPoP/mTLS/resource checks. |
 | `tba-protocol-oidc-relying-party` | Relying-party/client SDK: discovery, authorization URL, PKCE, callback handling, token exchange, ID-token validation, UserInfo, logout. |
 | `tba-testkit-identity` | Conformance fixtures, fake providers, fake clients, fake resource servers, protocol vectors, downstream harnesses. |
 | `tba-auth` | Backward-compatible facade/default install. |
@@ -67,7 +67,7 @@ on day one.
 | `tba-server-identity` | `IdentityApp`, `AppFactory`, `GatewayFactory`, `PluginInstaller`, `RouteManifest`, `SurfaceManifest`, `PublicRestSurface`, `AdminRpcSurface`, `DiagnosticsSurface`, `ProtocolPublisher`, `OpenApiPublisher`, `OpenRpcPublisher`, `DiscoveryPublisher`, `ServerSettings`. |
 | `tba-runtime-identity` | `RuntimeProfile`, `RuntimeConfig`, `RuntimeManifest`, `RunnerProfile`, `UvicornRuntime`, `HypercornRuntime`, `TigrcornRuntime`, `LifecycleHook`, `HealthCheck`, `DiagnosticsEndpoint`, `RuntimeAdapter`, `ServeCommandPlan`, `RuntimeState`. |
 | `tba-operator-identity` | `OperatorCommand`, `BootstrapCommand`, `MigrateCommand`, `ImportCommand`, `ExportCommand`, `KeyRotationCommand`, `ClientCommand`, `ServiceCommand`, `TenantCommand`, `ProfileInspectCommand`, `ClaimsLintCommand`, `ReleaseGateCommand`, `EvidenceBundleCommand`, `CertificationReportCommand`, `OperatorReport`. |
-| `tba-protocol-authorization-resource-server` | `ResourceServer`, `ResourceMetadata`, `Audience`, `ScopeRequirement`, `PermissionRequirement`, `TokenValidator`, `JwksCache`, `IntrospectionClient`, `SenderConstraintValidator`, `DpopCnfBindingValidator`, `MtlsCnfBindingValidator`, `ResourceAuthorizationResult`. |
+| `tba-protocol-oauth-protected-resource` | `ResourceServer`, `ResourceMetadata`, `Audience`, `ScopeRequirement`, `PermissionRequirement`, `TokenValidator`, `JwksCache`, `IntrospectionClient`, `SenderConstraintValidator`, `DpopCnfBindingValidator`, `MtlsCnfBindingValidator`, `ResourceAuthorizationResult`. |
 | `tba-protocol-oidc-relying-party` | `RelyingParty`, `LoginRequest`, `AuthorizationUrlBuilder`, `CallbackHandler`, `PkceVerifier`, `TokenExchangeClient`, `IdTokenValidator`, `UserInfoClient`, `LogoutClient`, `RpSession`, `RpConfiguration`. |
 | `tba-testkit-identity` | `FakeClock`, `FakeKeyStore`, `FakeRepository`, `FakePrincipalFactory`, `FakeCredentialFactory`, `FakeIdp`, `FakeOAuthClient`, `FakeResourceServer`, `ProtocolTestVector`, `ConformanceHarness`, `PeerProfileHarness`, `TestTenantFactory`, `TestAppFactory`, `TokenFixture`, `JoseFixture`. |
 | `tba-auth` | `app`, `create_app`, `create_gateway`, `install_plugin`, `IdentityServer`, `DefaultRuntime`, selected public re-exports, install extras, compatibility entrypoints. |
@@ -187,7 +187,7 @@ tba-operator-identity
   -> tba-server-identity
   -> tba-runtime-identity
 
-tba-protocol-authorization-resource-server
+tba-protocol-oauth-protected-resource
   -> tba-primitives-identity
   -> tba-contracts-identity
   -> tba-concrete-identity-principals
@@ -217,7 +217,7 @@ tba-testkit-identity
   -> tba-runtime-identity-administration
   -> tba-storage-core
   -> tba-server-identity
-  -> tba-protocol-authorization-resource-server
+  -> tba-protocol-oauth-protected-resource
   -> tba-protocol-oidc-relying-party
 
 tba-auth
@@ -316,7 +316,7 @@ The desired product flow is:
 7. App clients define redirect URIs, grant types, scopes, consent policy, secret/public-client posture, and allowed login behavior.
 8. End users can log into those tenant apps using the `tba-server-identity` as the OAuth/OIDC provider.
 9. The app uses `tba-protocol-oidc-relying-party` to initiate login and handle callback/token validation.
-10. The app's APIs use `tba-protocol-authorization-resource-server` to validate access tokens and enforce authorization.
+10. The app's APIs use `tba-protocol-oauth-protected-resource` to validate access tokens and enforce authorization.
 
 This is the Google/GitHub-style platform pattern:
 
@@ -415,7 +415,7 @@ human identity record.
 | `App` | `tba-concrete-identity-principals` | `tba-runtime-identity-administration` creates and manages app registration. |
 | `OAuthClient` | `tba-concrete-identity-principals` and `tba-protocol-oauth` | `tba-runtime-identity-administration` manages persisted client records; dynamic client registration belongs to OAuth protocol behavior. |
 | `RelyingParty` | Runtime role of an app/client, not usually persisted separately | `tba-protocol-oidc-relying-party` provides the SDK used by consuming apps. |
-| `ResourceServer` | `tba-concrete-identity-principals` and `tba-protocol-authorization-resource-server` | `tba-runtime-identity-administration` registers resource/audience metadata. |
+| `ResourceServer` | `tba-concrete-identity-principals` and `tba-protocol-oauth-protected-resource` | `tba-runtime-identity-administration` registers resource/audience metadata. |
 | `Service` | `tba-concrete-identity-principals` | `tba-runtime-identity-administration` manages lifecycle. |
 | `Machine` | `tba-concrete-identity-principals` | `tba-runtime-identity-administration` or workload trust integration manages lifecycle. |
 | `Workload` | `tba-concrete-identity-principals` | `tba-runtime-identity-administration` or future workload registry manages lifecycle. |

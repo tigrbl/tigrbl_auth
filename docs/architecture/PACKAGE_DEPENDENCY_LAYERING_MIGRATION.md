@@ -40,7 +40,7 @@ Current T1 exception packages:
 - `tba-protocol-oauth`
 - `tba-protocol-oidc`
 - `tba-runtime-authorization-policy`
-- `tba-protocol-authorization-resource-server`
+- `tba-protocol-oauth-protected-resource`
 - `tba-protocol-oidc-relying-party`
 - `tba-runtime-identity`
 - `tba-server-identity`

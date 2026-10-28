@@ -10,7 +10,7 @@ from httpx import ASGITransport, AsyncClient
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tba_app_backend_platform_admin.app import build_app
+from tba_app_backend_platform_administration.app import build_app
 from tba_auth.config.deployment import DEFAULT_VALUES, resolve_deployment
 from tba_auth.crypto import hash_pw
 from tba_auth.db import get_db as legacy_get_db

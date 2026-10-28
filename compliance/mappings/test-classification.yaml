@@ -72,18 +72,18 @@ categories:
   - tests/packages/tba-app-backend-developer/test_developer_api_package.py
   - tests/packages/tba-app-backend-my-account/test_my_account_api_dev_deployment_proof.py
   - tests/packages/tba-app-backend-my-account/test_my_account_api_package.py
-  - tests/packages/tba-app-backend-platform-admin/test_platform_admin_api_dev_deployment_proof.py
-  - tests/packages/tba-app-backend-platform-admin/test_platform_admin_api_package.py
-  - tests/packages/tba-app-backend-platform-admin/test_platform_admin_realm_api.py
+  - tests/packages/tba-app-backend-platform-administration/test_platform_admin_api_dev_deployment_proof.py
+  - tests/packages/tba-app-backend-platform-administration/test_platform_admin_api_package.py
+  - tests/packages/tba-app-backend-platform-administration/test_platform_admin_realm_api.py
   - tests/packages/tba-app-backend-public/test_public_api_dev_deployment_proof.py
   - tests/packages/tba-app-backend-public/test_public_api_package.py
   - tests/packages/tba-app-backend-public/test_public_api_realm_issuer.py
   - tests/packages/tba-app-backend-resource-validation/test_resource_validation_api_dev_deployment_proof.py
   - tests/packages/tba-app-backend-resource-validation/test_resource_validation_api_package.py
   - tests/packages/tba-app-backend-resource-validation/test_resource_validation_realm_metadata.py
-  - tests/packages/tba-app-backend-service-admin/test_service_admin_api_package.py
-  - tests/packages/tba-app-backend-tenant-admin/test_tenant_admin_api_dev_deployment_proof.py
-  - tests/packages/tba-app-backend-tenant-admin/test_tenant_admin_api_package.py
+  - tests/packages/tba-app-backend-service-administration/test_service_admin_api_package.py
+  - tests/packages/tba-app-backend-tenant-administration/test_tenant_admin_api_dev_deployment_proof.py
+  - tests/packages/tba-app-backend-tenant-administration/test_tenant_admin_api_package.py
   - tests/packages/tba-testkit-identity/test_identity_testkit_package.py
   - tests/unit/test_adapters.py
   - tests/unit/test_admin_control_plane_boundary.py

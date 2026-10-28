@@ -4,7 +4,7 @@ public_auth_plane:
 - pkgs/80-routers/tba-router-oauth-token/src/tba_router_oauth_token/binding.py
 - pkgs/90-backend-apps/tba-app-backend-core/src/tba_app_backend_core/surfaces
 admin_control_plane:
-- pkgs/90-backend-apps/tba-app-backend-platform-admin/src/tba_app_backend_platform_admin
+- pkgs/90-backend-apps/tba-app-backend-platform-administration/src/tba_app_backend_platform_administration
 - pkgs/90-backend-apps/tba-app-backend-my-account/src/tba_app_backend_my_account
 operator_plane:
 - pkgs/60-runtime/tba-cli-identity/src/tba_cli_identity

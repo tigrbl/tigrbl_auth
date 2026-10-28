@@ -22,11 +22,11 @@ This style should become the baseline for:
 
 - `@tba/ui-public`
 - `@tba/ui-my-account`
-- `@tba/ui-platform-admin`
-- `@tba/ui-tenant-admin`
+- `@tba/ui-platform-administration`
+- `@tba/ui-tenant-administration`
 - `@tba/ui-developer`
-- `@tba/ui-service-admin`
-- legacy `@tba/ui-admin` only as an extraction/reference source
+- `@tba/ui-service-administration`
+- legacy `@tba/ui-administration` only as an extraction/reference source
 
 ## Style Direction
 

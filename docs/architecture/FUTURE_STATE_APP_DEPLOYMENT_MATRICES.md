@@ -70,7 +70,7 @@ See also `docs/architecture/EDGE_APP_UIX_COMPOSITION_MATRICES.md` for the role s
 | Functional block placement | platform operations layer |
 | Talks to | `tba-auth-idp` admin REST and admin RPC lanes |
 | Should not own | tenant-local day-to-day user admin, end-user login, app developer self-service |
-| Current repo basis | platform-relevant parts of `pkgs/105-ui/tba-ui-admin` |
+| Current repo basis | platform-relevant parts of `pkgs/105-ui/tba-ui-administration` |
 | Main gap | current `admin-uix` mixes deployment-wide and tenant-local actions |
 
 ## `tba-auth-tenant-admin-console` matrix
@@ -86,7 +86,7 @@ See also `docs/architecture/EDGE_APP_UIX_COMPOSITION_MATRICES.md` for the role s
 | Functional block placement | tenant administration layer |
 | Talks to | `tba-auth-idp` admin REST, admin RPC, tenant discovery/JWKS surfaces |
 | Should not own | platform-wide tenant lifecycle, cross-tenant authority assignment |
-| Current repo basis | tenant-relevant parts of `pkgs/105-ui/tba-ui-admin` |
+| Current repo basis | tenant-relevant parts of `pkgs/105-ui/tba-ui-administration` |
 | Main gap | tenant-scoped authority and navigation need to be separated cleanly from platform authority |
 
 ## `tba-auth-developer-portal` matrix
@@ -149,7 +149,7 @@ See also `docs/architecture/EDGE_APP_UIX_COMPOSITION_MATRICES.md` for the role s
 |---|---|---|
 | `tba_auth` backend | `tba-auth-idp` | rename/brand as the stable shared IDP plane |
 | `pkgs/105-ui/tba-ui-public` | `tba-auth-public-portal` | preserve and tenant-brand |
-| `pkgs/105-ui/tba-ui-admin` tenant creation and cross-tenant control | `tba-auth-platform-admin-console` | extract into platform-only console |
-| `pkgs/105-ui/tba-ui-admin` identities and JWKS tenant operations | `tba-auth-tenant-admin-console` | extract into tenant-admin console |
+| `pkgs/105-ui/tba-ui-administration` tenant creation and cross-tenant control | `tba-auth-platform-admin-console` | extract into platform-only console |
+| `pkgs/105-ui/tba-ui-administration` identities and JWKS tenant operations | `tba-auth-tenant-admin-console` | extract into tenant-admin console |
 | dormant client-management UI and client APIs | `tba-auth-developer-portal` | surface as first-class developer portal |
 | machine/service operator workflows not yet surfaced | `tba-auth-service-admin-surface` | compose new focused app when service identity becomes first-class |

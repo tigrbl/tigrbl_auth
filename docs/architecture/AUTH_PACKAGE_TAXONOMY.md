@@ -18,7 +18,7 @@ This taxonomy separates identity, authentication, authorization, protocol, and c
 | --- | --- | --- |
 | Credential proof and lifecycle | `tba-credentials` | `tba-credentials` |
 | Authorization policy and authority | `tba-runtime-authorization-policy` | `tba-runtime-authorization-policy` |
-| Protected-resource enforcement | `tba-protocol-authorization-resource-server` | `tba-protocol-authorization-resource-server` |
+| Protected-resource enforcement | `tba-protocol-oauth-protected-resource` | `tba-protocol-oauth-protected-resource` |
 | OAuth protocol behavior | `tba-protocol-oauth` | `tba-protocol-oauth` |
 | OIDC provider protocol behavior | `tba-protocol-oidc` | `tba-protocol-oidc` |
 | OIDC RP / OAuth client behavior | `tba-protocol-oidc-relying-party` | `tba-protocol-oidc-relying-party` |

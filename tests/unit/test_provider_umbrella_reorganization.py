@@ -25,7 +25,7 @@ def test_provider_taxonomy_names_canonical_destinations() -> None:
 
 
 def test_compatibility_packages_reexport_canonical_objects() -> None:
-    from tba_router_admin_gate import AdminGate as CanonicalAdminGate
+    from tba_router_administration_gate import AdminGate as CanonicalAdminGate
     from tba_runtime_authorization_policy_admin_gate import AdminGate as LegacyAdminGate
     from tba_concrete_cose import decode_cose_key as canonical_decode
     from tba_credentials.lifecycle import hash_secret as canonical_hash

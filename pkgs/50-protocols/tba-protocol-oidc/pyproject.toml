@@ -40,7 +40,7 @@ dependencies = [
     "tba-primitives-identity==0.4.0.dev2",
     "tba-provider-identity-jose==0.4.0.dev2",
     "tba-concrete-identity-assurance==0.4.0.dev2",
-    "tba-provider-security-claims-provider-local==0.1.0",
+    "tba-provider-claims-local==0.1.0",
     "tba-concrete-public-subject-identifier==0.4.0.dev2",
     "tba-concrete-pairwise-subject-identifier==0.4.0.dev2",
     "tba-concrete-claim-authentication-time==0.4.0.dev2",

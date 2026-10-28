@@ -103,7 +103,7 @@ def test_security_trust_contracts_bases_and_implementations_import_cleanly() -> 
     importlib.import_module("tba_concrete_pairwise_subject_identifier")
     importlib.import_module("tba_provider_authentication_context_acr_basic")
     importlib.import_module("tba_provider_authentication_context_amr_basic")
-    importlib.import_module("tba_provider_security_claims_provider_local")
+    importlib.import_module("tba_provider_claims_local")
     importlib.import_module("tba_provider_security_oidc_federation")
     importlib.import_module("tba_provider_security_subject_pairwise")
     importlib.import_module("tba_provider_security_webfinger")

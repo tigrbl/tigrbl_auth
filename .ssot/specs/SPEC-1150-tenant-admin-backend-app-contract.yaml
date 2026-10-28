@@ -8,7 +8,7 @@ status: "draft"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification governs the \tba-app-backend-tenant-admin product API surface."
+summary: "This specification governs the \tba-app-backend-tenant-administration product API surface."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -28,7 +28,7 @@ body: |-
   
   ## Requirements
   
-  The tenant-admin API MUST expose only tenant-scoped administration capabilities through the 	enant-admin-api product surface. It MUST use the admin-rpc primitive surface set, MUST require administrative authentication and tenant-scoped authorization, and MUST be consumable by @tba/ui-tenant-admin.
+  The tenant-admin API MUST expose only tenant-scoped administration capabilities through the 	enant-admin-api product surface. It MUST use the admin-rpc primitive surface set, MUST require administrative authentication and tenant-scoped authorization, and MUST be consumable by @tba/ui-tenant-administration.
   
   The tenant-admin API MAY expose tenant identities, tenant admins, tenant-local clients, consents, sessions, tenant key and JWKS administration, tenant-local audit, and tenant-local policy/configuration. It MUST NOT expose platform tenant creation, deletion, suspension, restoration, or cross-tenant authority assignment.
   

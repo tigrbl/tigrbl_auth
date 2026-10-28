@@ -9,8 +9,8 @@ ROOT = Path(__file__).resolve().parents[2]
 def test_runtime_capability_metadata_is_owned_by_layer_60_certification() -> None:
     old_owner = (
         ROOT
-        / "pkgs/50-protocols/tba-protocol-authorization-resource-server/src"
-        / "tba_protocol_authorization_resource_server/runtime_metadata.py"
+        / "pkgs/50-protocols/tba-protocol-oauth-protected-resource/src"
+        / "tba_protocol_oauth_protected_resource/runtime_metadata.py"
     )
     canonical_owner = (
         ROOT
@@ -38,13 +38,13 @@ def test_runtime_metadata_consumers_target_the_layer_60_owner() -> None:
     target = "tba_certification_release.runtime_metadata"
     assert target in facade
     assert target in server
-    assert "tba_protocol_authorization_resource_server.runtime_metadata" not in facade
-    assert "tba_protocol_authorization_resource_server.runtime_metadata" not in server
+    assert "tba_protocol_oauth_protected_resource.runtime_metadata" not in facade
+    assert "tba_protocol_oauth_protected_resource.runtime_metadata" not in server
 
 
 def test_layer_50_resource_server_has_no_certification_runtime_dependency() -> None:
     resource_manifest = (
-        ROOT / "pkgs/50-protocols/tba-protocol-authorization-resource-server/pyproject.toml"
+        ROOT / "pkgs/50-protocols/tba-protocol-oauth-protected-resource/pyproject.toml"
     ).read_text(encoding="utf-8")
     certification_manifest = (
         ROOT / "pkgs/60-runtime/tba-certification-release/pyproject.toml"
@@ -60,8 +60,8 @@ def test_resource_server_contract_module_is_a_runtime_neutral_compatibility_expo
 ):
     source = (
         ROOT
-        / "pkgs/50-protocols/tba-protocol-authorization-resource-server/src"
-        / "tba_protocol_authorization_resource_server/contracts.py"
+        / "pkgs/50-protocols/tba-protocol-oauth-protected-resource/src"
+        / "tba_protocol_oauth_protected_resource/contracts.py"
     ).read_text(encoding="utf-8")
 
     assert "tba_protocol_oauth.standards.resource_verifier_contract" in source

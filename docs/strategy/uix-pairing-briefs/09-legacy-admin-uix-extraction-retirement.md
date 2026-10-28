@@ -1,10 +1,10 @@
 # Legacy Admin UIX Extraction and Retirement Brief
 
-**Surface:** `@tba/ui-admin`<br>
+**Surface:** `@tba/ui-administration`<br>
 **Pairing:** Legacy aggregate admin contract; no approved one-to-one product API<br>
 **Status:** Migration source, security maintenance, and retirement<br>
 **Prepared:** July 11, 2026<br>
-**Current owner:** `pkgs/105-ui/tba-ui-admin`
+**Current owner:** `pkgs/105-ui/tba-ui-administration`
 
 ## 1. Product Decision
 
@@ -232,13 +232,13 @@ The operational package may be retired when:
 
 ## 14. Source Evidence
 
-- `pkgs/105-ui/tba-ui-admin/README.md`
-- `pkgs/105-ui/tba-ui-admin/App.tsx`
-- `pkgs/105-ui/tba-ui-admin/components/`
-- `pkgs/105-ui/tba-ui-admin/services/backendService.ts`
-- `pkgs/105-ui/tba-ui-admin/services/adminAuthService.ts`
-- `pkgs/105-ui/tba-ui-admin/services/controlPlaneStateService.ts`
-- `pkgs/105-ui/tba-ui-admin/services/persistence.ts`
+- `pkgs/105-ui/tba-ui-administration/README.md`
+- `pkgs/105-ui/tba-ui-administration/App.tsx`
+- `pkgs/105-ui/tba-ui-administration/components/`
+- `pkgs/105-ui/tba-ui-administration/services/backendService.ts`
+- `pkgs/105-ui/tba-ui-administration/services/adminAuthService.ts`
+- `pkgs/105-ui/tba-ui-administration/services/controlPlaneStateService.ts`
+- `pkgs/105-ui/tba-ui-administration/services/persistence.ts`
 - Admin UIX boundary, auth, resource, mutation, policy, and governance tests
 - Platform/Tenant/Developer/Service API/UIX pairing briefs
 - Admin UIX SSOT feature/claim/test/evidence/boundary records

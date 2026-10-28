@@ -542,7 +542,7 @@ Standardize `credential`, `lease`, `role`, `target`, `delivery`, `renewal`, `rot
 - `pkgs/01-storage/tba-storage-core/`
 - `pkgs/70-facade/tba-credentials/`
 - `pkgs/20-providers/tba-runtime-authorization-policy/`
-- `pkgs/90-backend-apps/tba-app-backend-service-admin/`
+- `pkgs/90-backend-apps/tba-app-backend-service-administration/`
 - `tests/integration/test_service_key_creation.py`
 - prior workload, attestation, certificate, token-service, agent-delegation, and entitlement-governance pairing briefs.
 

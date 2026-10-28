@@ -20,8 +20,8 @@ See also `docs/architecture/EDGE_APP_UIX_COMPOSITION_MATRICES.md` for the role s
 | UIX | Primary actor | Main job | Current implementation basis |
 |---|---|---|---|
 | `public-uix` | tenant human user | login and end-user auth experience | current `pkgs/105-ui/tba-ui-public` |
-| `platform-admin-uix` | platform superuser | deployment-wide control-plane administration | split from current `pkgs/105-ui/tba-ui-admin` |
-| `tenant-admin-uix` | tenant admin | tenant-scoped administration | split from current `pkgs/105-ui/tba-ui-admin` |
+| `platform-admin-uix` | platform superuser | deployment-wide control-plane administration | split from current `pkgs/105-ui/tba-ui-administration` |
+| `tenant-admin-uix` | tenant admin | tenant-scoped administration | split from current `pkgs/105-ui/tba-ui-administration` |
 | `developer-uix` | tenant app developer | app registration and federation integration management | future extraction over partial current basis |
 | `service-admin-uix` | service or workload operator | machine identity and service-access administration | future UIX over partial backend basis |
 
@@ -52,7 +52,7 @@ See also `docs/architecture/EDGE_APP_UIX_COMPOSITION_MATRICES.md` for the role s
 | Backend surfaces consumed | `/admin/auth/*`, `/admin/tenants`, `/admin/identities`, `/rpc` |
 | Navigation scope | deployment-wide only |
 | Explicit exclusions | no tenant end-user auth, no tenant app self-service, no tenant-local day-to-day operations |
-| Current repo basis | `pkgs/105-ui/tba-ui-admin` auth shell plus tenant and identity management slices |
+| Current repo basis | `pkgs/105-ui/tba-ui-administration` auth shell plus tenant and identity management slices |
 | Main future-state gap | current component tree needs separation between platform-only and tenant-local views |
 
 ## `tenant-admin-uix` matrix

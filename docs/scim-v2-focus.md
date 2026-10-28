@@ -106,9 +106,9 @@ The clean target is:
 ```text
 tba-identity-scim                 # RFC 7643/7644 schemas, protocol logic, filters, PATCH, errors
 tba-router-scim                 # Deployable SCIM v2 frontdoor
-@tba/ui-tenant-admin        # SCIM connection setup/status UI
+@tba/ui-tenant-administration        # SCIM connection setup/status UI
 tba-storage-core              # Canonical users, groups, memberships, mappings, audit
-tba-protocol-authorization-resource-server      # Token/scope validation integration for SCIM API
+tba-protocol-oauth-protected-resource      # Token/scope validation integration for SCIM API
 ```
 
 This keeps the split consistent with the repo's current direction: canonical storage owns tables, protocol packages own protocol semantics, and frontdoor APIs own route composition and product filtering.

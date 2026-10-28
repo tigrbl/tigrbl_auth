@@ -34,11 +34,11 @@ def test_pyproject_uses_published_pins_and_extras():
         "tba-runtime-authorization-policy-engine==0.4.0.dev2",
         "tba-runtime-authorization-policy-rbac-administrator==0.4.0.dev2",
         "tba-runtime-authorization-policy-service-identity-registry==0.4.0.dev2",
-        "tba-protocol-authorization-resource-server-dpop-cnf-binding-validator==0.4.0.dev2",
-        "tba-protocol-authorization-resource-server-introspection-client==0.4.0.dev2",
-        "tba-protocol-authorization-resource-server-jwks-cache==0.4.0.dev2",
-        "tba-protocol-authorization-resource-server-mtls-cnf-binding-validator==0.4.0.dev2",
-        "tba-protocol-authorization-resource-server-sender-constraint-validator==0.4.0.dev2",
+        "tba-protocol-oauth-protected-resource-dpop-cnf-binding-validator==0.4.0.dev2",
+        "tba-protocol-oauth-protected-resource-introspection-client==0.4.0.dev2",
+        "tba-protocol-oauth-protected-resource-jwks-cache==0.4.0.dev2",
+        "tba-protocol-oauth-protected-resource-mtls-cnf-binding-validator==0.4.0.dev2",
+        "tba-protocol-oauth-protected-resource-sender-constraint-validator==0.4.0.dev2",
     }
 
     assert "tigrbl==0.4.4.dev1" in dependencies
@@ -52,7 +52,7 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tba-provider-authorization-resource-server-verifier==0.4.0.dev2" in dependencies
     assert "tba-security-token-verification==0.4.0.dev2" not in dependencies
     assert "tba-provider-security-token-jwks-cache==0.1.0" in dependencies
-    assert "tba-provider-security-token-introspection-client==0.1.0" in dependencies
+    assert "tba-provider-token-introspection==0.1.0" in dependencies
     assert "tigrbl-security-sender-constraint-validator==0.1.0" in dependencies
     assert "tba-runtime-authorization-policy-concrete==0.4.0.dev2" not in dependencies
     assert "tba-identity-concrete==0.4.0.dev2" not in dependencies
@@ -123,7 +123,7 @@ def test_pyproject_uses_published_pins_and_extras():
         ]["dependencies"]
     )
     trust_graph_dependencies = set(
-        _load_package_pyproject("tba-durability-identity-admin-trust-federation-graph")[
+        _load_package_pyproject("tba-durability-identity-administration-trust-federation-graph")[
             "project"
         ]["dependencies"]
     )
@@ -141,7 +141,7 @@ def test_pyproject_uses_published_pins_and_extras():
         ]
     )
     introspection_dependencies = set(
-        _load_package_pyproject("tba-provider-security-token-introspection-client")[
+        _load_package_pyproject("tba-provider-token-introspection")[
             "project"
         ]["dependencies"]
     )
@@ -151,7 +151,7 @@ def test_pyproject_uses_published_pins_and_extras():
         ]["dependencies"]
     )
     resource_server_dependencies = set(
-        _load_package_pyproject("tba-protocol-authorization-resource-server")["project"][
+        _load_package_pyproject("tba-protocol-oauth-protected-resource")["project"][
             "dependencies"
         ]
     )
@@ -191,7 +191,7 @@ def test_pyproject_uses_published_pins_and_extras():
     assert facade_dependencies.isdisjoint(removed_helper_pins)
     assert "pqcrypto==0.4.0" in pqc_provider_dependencies
     assert "pqcrypto==0.4.0" not in admin_gate_dependencies
-    assert admin_gate_dependencies == {"tba-router-admin-gate==0.4.0.dev2"}
+    assert admin_gate_dependencies == {"tba-router-administration-gate==0.4.0.dev2"}
     assert "pqcrypto==0.4.0" not in authz_rules_dependencies
     assert "tba-contracts-identity==0.4.0.dev2" in authz_rules_dependencies
     assert "tba-primitives-identity==0.4.0.dev2" not in authz_rules_dependencies
@@ -228,7 +228,7 @@ def test_pyproject_uses_published_pins_and_extras():
     )
     assert "tba-storage-core==0.4.0.dev2" not in trust_graph_dependencies
     assert (
-        "tba-provider-identity-admin-relationship-graph==0.4.0.dev2"
+        "tba-provider-identity-administration-relationship-graph==0.4.0.dev2"
         in identity_admin_dependencies
     )
     assert "tba-provider-identity-jose==0.4.0.dev2" not in identity_admin_dependencies
@@ -256,13 +256,13 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tba-runtime-authorization-policy==0.4.0.dev2" not in storage_dependencies
     assert "tba-protocol-oauth==0.4.0.dev2" not in storage_runtime_dependencies
     assert "tba-protocol-oidc==0.4.0.dev2" not in storage_runtime_dependencies
-    assert "tba-protocol-authorization-resource-server==0.4.0.dev2" not in storage_runtime_dependencies
+    assert "tba-protocol-oauth-protected-resource==0.4.0.dev2" not in storage_runtime_dependencies
     assert "tba-runtime-identity==0.4.0.dev2" not in storage_runtime_dependencies
     assert "pqcrypto==0.4.0" not in verifier_dependencies
     assert "tba-contracts-identity==0.4.0.dev2" in verifier_dependencies
     assert "tba-provider-security-token-jwks-cache==0.1.0" in verifier_dependencies
-    assert "tba-provider-security-token-introspection-client==0.1.0" in verifier_dependencies
-    assert "tba-protocol-authorization-resource-server==0.4.0.dev2" not in verifier_dependencies
+    assert "tba-provider-token-introspection==0.1.0" in verifier_dependencies
+    assert "tba-protocol-oauth-protected-resource==0.4.0.dev2" not in verifier_dependencies
     assert "tba-bases-token-introspection==0.4.0.dev2" in jwks_cache_dependencies
     assert "tba-bases-token-introspection==0.4.0.dev2" in introspection_dependencies
     assert "tba-bases-security-trust-domain==0.1.0" not in jwks_cache_dependencies

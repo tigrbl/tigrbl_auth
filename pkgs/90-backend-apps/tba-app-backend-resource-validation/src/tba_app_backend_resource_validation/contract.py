@@ -22,7 +22,7 @@ class ResourceValidationBackendAppContract:
 RESOURCE_VALIDATION_BACKEND_APP_CONTRACT = ResourceValidationBackendAppContract(
     product_surface="resource-validation-app",
     intended_consumers=(
-        "tba-protocol-authorization-resource-server",
+        "tba-protocol-oauth-protected-resource",
         "protected API gateways",
         "resource-server validation middleware",
     ),
@@ -64,7 +64,7 @@ RESOURCE_VALIDATION_BACKEND_APP_CONTRACT = ResourceValidationBackendAppContract(
         "tba-server-identity",
         "tba-runtime-identity",
         "tba-provider-identity-jose",
-        "tba-protocol-authorization-resource-server",
+        "tba-protocol-oauth-protected-resource",
     ),
     mounted_router_packages=(
         "tba-router-oauth-introspection",

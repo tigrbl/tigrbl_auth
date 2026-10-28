@@ -30,15 +30,15 @@ Scope: this matrix compares `tba_auth` with Auth0, Okta, Keycloak, FusionAuth, a
 
 The vendor pattern is consistent: M2M is not a single endpoint or just OAuth `client_credentials`. It is a cross-surface product spanning authorization-server token issuance, service/client lifecycle, credential management, API/resource permissions, token validation, audit, and an admin/developer setup experience.
 
-For `tba_auth`, the product should be named explicitly as **M2M / Workload Identity**. The `tba-app-backend-service-admin` package is the lifecycle frontdoor for service/workload principals and credentials, not the entire product. The complete M2M product also uses:
+For `tba_auth`, the product should be named explicitly as **M2M / Workload Identity**. The `tba-app-backend-service-administration` package is the lifecycle frontdoor for service/workload principals and credentials, not the entire product. The complete M2M product also uses:
 
 | Product layer | tba_auth owner |
 | --- | --- |
 | Token issuance | `tba-app-backend-public` |
 | Token validation and issuer metadata | `tba-app-backend-resource-validation` |
-| Service/workload lifecycle | `tba-app-backend-service-admin` |
+| Service/workload lifecycle | `tba-app-backend-service-administration` |
 | Developer app/client setup | `tba-app-backend-developer` |
-| Tenant/platform authority boundaries | `tba-app-backend-platform-admin`, `tba-app-backend-tenant-admin` |
+| Tenant/platform authority boundaries | `tba-app-backend-platform-administration`, `tba-app-backend-tenant-administration` |
 | Persistence and canonical tables | `tba-storage-core` |
 | Signing and token crypto | `tba-provider-identity-jose` |
 | Authorization decisions | `tba-runtime-authorization-policy` |

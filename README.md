@@ -89,7 +89,7 @@ Use these boundaries:
   downstream ASGI app.
 - Keep provenance order: backend capability first, API front door second, UIX
   third. The platform-admin path is `tba-runtime-identity-administration` ->
-  `tba-app-backend-platform-admin` -> `@tba/ui-platform-admin`; apply
+  `tba-app-backend-platform-administration` -> `@tba/ui-platform-administration`; apply
   the same pattern to tenant-admin, developer, service-admin, public,
   my-account, and resource-validation surfaces.
 

@@ -47,10 +47,10 @@ The key point: IAM, CIAM, and PAM are product categories, not single protocols. 
 | --- | --- | --- | --- | --- | --- | --- |
 | `tba-app-backend-public` | Partial | Strong | No | No | Token issuance only | Strong |
 | `@tba/ui-public` | Partial | Strong | No | No | No | Strong for app login testing |
-| `tba-app-backend-platform-admin` | Strong platform control | Partial | Privileged admin basis only | Partial | Partial | No |
-| `tba-app-backend-tenant-admin` | Strong tenant control | Strong for tenant-owned customer/user admin | Privileged admin basis only | Partial | Partial | Partial |
+| `tba-app-backend-platform-administration` | Strong platform control | Partial | Privileged admin basis only | Partial | Partial | No |
+| `tba-app-backend-tenant-administration` | Strong tenant control | Strong for tenant-owned customer/user admin | Privileged admin basis only | Partial | Partial | Partial |
 | `tba-app-backend-developer` | Partial | Strong for app integration | No | No | M2M client setup partial | Strong |
-| `tba-app-backend-service-admin` | Strong for NHI | Partial | PAM-adjacent but not PAM | Partial | Strong | Partial |
+| `tba-app-backend-service-administration` | Strong for NHI | Partial | PAM-adjacent but not PAM | Partial | Strong | Partial |
 | `tba-app-backend-resource-validation` | Strong for API IAM | Strong for protected APIs | No | No | Strong | Strong |
 | `tba-runtime-authorization-policy` | Strong foundation | Strong foundation | Foundation only | Foundation only | Strong foundation | Strong foundation |
 | `tba-operator-identity` | Strong operator tooling | Partial | PAM-adjacent only | Partial | Partial | No |

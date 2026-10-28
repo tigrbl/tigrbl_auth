@@ -48,7 +48,7 @@ def test_graph_algorithms_are_storage_neutral_and_layer_30_specs_bind_tables() -
     authority_concrete = importlib.import_module("tba_concrete_authority_graph")
     trust_concrete = importlib.import_module("tba_concrete_trust_federation_graph")
     authority = importlib.import_module("tba_durability_authorization_policy_authority_derivation_graph")
-    trust = importlib.import_module("tba_durability_identity_admin_trust_federation_graph")
+    trust = importlib.import_module("tba_durability_identity_administration_trust_federation_graph")
 
     assert not hasattr(authority_concrete.AuthorityDerivationGraph, "graph_table")
     assert not hasattr(trust_concrete.TrustFederationGraph, "graph_table")
@@ -70,7 +70,7 @@ def test_graph_storage_does_not_introduce_repository_wrappers() -> None:
     modules = (
         importlib.import_module("tba_storage_core.tables"),
         importlib.import_module("tba_durability_authorization_policy_authority_derivation_graph"),
-        importlib.import_module("tba_durability_identity_admin_trust_federation_graph"),
+        importlib.import_module("tba_durability_identity_administration_trust_federation_graph"),
     )
 
     for module in modules:

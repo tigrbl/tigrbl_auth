@@ -56,7 +56,7 @@ For `tba_auth`, the clean architecture is:
 | Provider credentials and secret material | `tba-credentials` plus `tba-storage-core` |
 | Subject aliasing and account linking | `tba-concrete-identity-principals` plus canonical storage |
 | Tenant/app/provider policy | `tba-runtime-authorization-policy`, tenant-admin/developer frontdoors |
-| Provider configuration surfaces | `tba-app-backend-tenant-admin`, `tba-app-backend-developer`, and their UIX apps |
+| Provider configuration surfaces | `tba-app-backend-tenant-administration`, `tba-app-backend-developer`, and their UIX apps |
 | Hosted provider selection | `@tba/ui-public` over public issuer behavior |
 
 Recommended near-term stance:

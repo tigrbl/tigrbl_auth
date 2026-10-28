@@ -478,7 +478,7 @@ Guardrails include account-link collisions, cross-tenant disclosure, unreviewed 
 - `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/federation/`
 - `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/oidc/federation.py`
 - `pkgs/20-providers/tba-provider-security-oidc-federation/`
-- `pkgs/30-storage-runtime/tba-durability-identity-admin-trust-federation-graph/`
+- `pkgs/30-storage-runtime/tba-durability-identity-administration-trust-federation-graph/`
 - `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/trust_federation_graph/`
 - `pkgs/20-providers/tba-provider-identity-jose/`
 - `pkgs/20-providers/tba-provider-security-token-jwks-cache/`

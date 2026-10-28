@@ -8,7 +8,7 @@ license = "Apache-2.0"
 dependencies = [
     "tba-auth==0.4.0.dev2",
     "tba-app-backend-core==0.4.0.dev2",
-    "tba-router-admin-gate==0.4.0.dev2",
+    "tba-router-administration-gate==0.4.0.dev2",
     "tba-router-oauth-authorization-server-metadata==0.4.0.dev2",
     "tba-router-oauth-registration==0.4.0.dev2",
     "tba-router-oidc-discovery==0.4.0.dev2",

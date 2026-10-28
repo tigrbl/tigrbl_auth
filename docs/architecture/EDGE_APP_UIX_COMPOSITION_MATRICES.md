@@ -27,7 +27,7 @@ In the current checkout, the backend is shared and multi-tenant, `public-uix` is
 | `public-uix` | frontend app / UIX | tenant human users | public REST/OIDC | shipped | Covers login, registration, consent, callback, logout, and profile flows. |
 | `@tba/client-oidc-relying-party` | browser client package | browser application developers | public REST/OIDC | shipped | Browser-safe RP SDK, not an operator console. |
 | `tba-protocol-oidc-relying-party` | Python client package | backend application developers | public REST/OIDC | shipped | Server-side RP helper library, not a deployable portal. |
-| `tba-protocol-authorization-resource-server` | API integration package | protected API developers | JWKS and introspection | shipped | Validation helper for downstream protected APIs. |
+| `tba-protocol-oauth-protected-resource` | API integration package | protected API developers | JWKS and introspection | shipped | Validation helper for downstream protected APIs. |
 | `acme-notes-cli` | example client app | CLI users / integrators | device authorization and token | shipped example | Example consumer, not a platform control-plane app. |
 
 ## Target app composition matrix
@@ -70,7 +70,7 @@ In the current checkout, the backend is shared and multi-tenant, `public-uix` is
 | CLI device login | CLI user | device authorization and token | consumer CLI | not a UIX | example exists as `acme-notes-cli` |
 | Browser app login integration | tenant app developer | authorize and token | browser app using RP SDK | not a UIX | package exists as `@tba/client-oidc-relying-party` |
 | Backend app login integration | backend app developer | discovery, authorize, token, userinfo | backend app using RP helpers | not a UIX | package exists as `tba-protocol-oidc-relying-party` |
-| Protected API token validation | API developer | JWKS and introspection | protected API using verifier package | not a UIX | package exists as `tba-protocol-authorization-resource-server` |
+| Protected API token validation | API developer | JWKS and introspection | protected API using verifier package | not a UIX | package exists as `tba-protocol-oauth-protected-resource` |
 | Register OIDC application | tenant developer or tenant admin | `/register` or client control plane | developer portal | `developer-uix` | backend supported; shipped UIX incomplete |
 | Rotate client credentials or metadata | tenant developer or tenant admin | client control plane | developer portal | `developer-uix` | backend/client component exists; not fully exposed in shipped admin nav |
 | Manage machine identities | service operator | token, service-key, operator plane | service admin surface | `service-admin-uix` | partial backend support; no dedicated UIX |

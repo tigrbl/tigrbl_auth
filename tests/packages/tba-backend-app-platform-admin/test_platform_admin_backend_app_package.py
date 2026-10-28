@@ -14,11 +14,11 @@ from tba_auth.config.deployment import DEFAULT_VALUES, resolve_deployment
 
 
 ROOT = Path(__file__).resolve().parents[3]
-PKG_SRC = ROOT / "pkgs" / "tba-app-backend-platform-admin" / "src"
+PKG_SRC = ROOT / "pkgs" / "tba-app-backend-platform-administration" / "src"
 if str(PKG_SRC) not in sys.path:
     sys.path.insert(0, str(PKG_SRC))
 
-platform_admin_package = import_module("tba_app_backend_platform_admin")
+platform_admin_package = import_module("tba_app_backend_platform_administration")
 PRODUCT_SURFACE = platform_admin_package.PRODUCT_SURFACE
 PLATFORM_ADMIN_BACKEND_APP_CONTRACT = platform_admin_package.PLATFORM_ADMIN_BACKEND_APP_CONTRACT
 build_app = platform_admin_package.build_app
@@ -45,7 +45,7 @@ def test_platform_admin_contract_matches_product_surface_registry() -> None:
     assert PRODUCT_SURFACE == "platform-admin-app"
     assert PLATFORM_ADMIN_BACKEND_APP_CONTRACT.product_surface == PRODUCT_SURFACE
     assert PLATFORM_ADMIN_BACKEND_APP_CONTRACT.intended_uix == (
-        "@tba/ui-platform-admin"
+        "@tba/ui-platform-administration"
     )
     assert deployment.plugin_mode == "admin-only"
     assert deployment.surface_enabled("admin-rest")

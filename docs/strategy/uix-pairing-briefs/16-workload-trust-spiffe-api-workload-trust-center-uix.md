@@ -510,7 +510,7 @@ Guardrails include selector overmatch, cross-tenant issuance, false attestation,
 - `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/machine_identity/`
 - `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/credential_mtls_certificate/`
 - `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/authority/trust_domains.py`
-- `pkgs/30-storage-runtime/tba-durability-identity-admin-trust-federation-graph/`
+- `pkgs/30-storage-runtime/tba-durability-identity-administration-trust-federation-graph/`
 - `pkgs/20-providers/tba-provider-security-certificate-mtls/`
 - `pkgs/20-providers/tba-provider-security-mtls-cnf-binding-validator/`
 - OAuth token-exchange, client-credentials, resource-validation, JOSE, credential, and audit packages;

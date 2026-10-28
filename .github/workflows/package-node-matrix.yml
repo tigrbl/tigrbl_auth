@@ -26,7 +26,7 @@ on:
         type: choice
         options:
           - all
-          - "@tba/ui-admin"
+          - "@tba/ui-administration"
           - "@tba/ui-public"
           - "@tba/client-oidc-relying-party"
       node-version:
@@ -88,7 +88,7 @@ jobs:
           const selectedPackage = process.env.SELECTED_PACKAGE || "all";
           const selectedNode = process.env.SELECTED_NODE || "all";
           const nodeVersions = selectedNode === "all" ? ["22", "24", "26"] : [selectedNode];
-          const packageDirs = ["pkgs/105-ui/tba-ui-admin", "pkgs/105-ui/tba-ui-public", "pkgs/75-clients/tba-typescript-client-oidc-relying-party"];
+          const packageDirs = ["pkgs/105-ui/tba-ui-administration", "pkgs/105-ui/tba-ui-public", "pkgs/75-clients/tba-typescript-client-oidc-relying-party"];
           const cells = [];
 
           for (const packagePath of packageDirs) {

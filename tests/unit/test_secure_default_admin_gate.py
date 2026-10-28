@@ -15,7 +15,7 @@ def _settings(tmp_path, key: str = "test-admin-key") -> SimpleNamespace:
 
 
 def test_admin_gate_canonical_package_owns_public_surface():
-    canonical = importlib.import_module("tba_router_admin_gate")
+    canonical = importlib.import_module("tba_router_administration_gate")
     facade = importlib.import_module("tba_auth.security.admin_gate")
 
     assert facade is canonical

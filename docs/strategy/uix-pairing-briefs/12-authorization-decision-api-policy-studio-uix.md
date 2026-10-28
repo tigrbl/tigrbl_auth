@@ -464,7 +464,7 @@ Produce:
 - `pkgs/20-providers/tba-runtime-authorization-policy/`
 - `pkgs/20-providers/tba-provider-authorization-policy-decision-engine/`
 - `pkgs/30-storage-runtime/tba-durability-authorization-policy-authority-derivation-graph/`
-- `pkgs/20-providers/tba-provider-identity-admin-relationship-graph/`
+- `pkgs/20-providers/tba-provider-identity-administration-relationship-graph/`
 - `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/`
 - `docs/authorization-models-focus.md`
 - Policy, delegation, authority, graph, simulation, provenance, UIX, isolation, and monotonicity tests/SSOT records

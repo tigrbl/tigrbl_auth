@@ -23,7 +23,7 @@ from tba_contracts_identity.admin_tenants import (
 ROOT = Path(__file__).resolve().parents[2]
 REALM_API = (
     ROOT
-    / "pkgs/90-backend-apps/tba-app-backend-platform-admin/src/tba_app_backend_platform_admin/realms.py"
+    / "pkgs/90-backend-apps/tba-app-backend-platform-administration/src/tba_app_backend_platform_administration/realms.py"
 )
 
 

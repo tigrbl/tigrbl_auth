@@ -1,0 +1,163 @@
+[
+  {
+    "registry": "Python",
+    "old_name": "tba-concrete-admin-identity",
+    "new_name": "tba-concrete-administrator-identity",
+    "old_path": "pkgs/10-concrete/tba-concrete-admin-identity",
+    "new_path": "pkgs/10-concrete/tba-concrete-administrator-identity"
+  },
+  {
+    "registry": "Python",
+    "old_name": "tba-provider-identity-admin-auth-anomaly-detector",
+    "new_name": "tba-provider-authentication-anomaly-detector",
+    "old_path": "pkgs/20-providers/tba-provider-identity-admin-auth-anomaly-detector",
+    "new_path": "pkgs/20-providers/tba-provider-authentication-anomaly-detector"
+  },
+  {
+    "registry": "Python",
+    "old_name": "tba-provider-identity-admin-relationship-graph",
+    "new_name": "tba-provider-identity-administration-relationship-graph",
+    "old_path": "pkgs/20-providers/tba-provider-identity-admin-relationship-graph",
+    "new_path": "pkgs/20-providers/tba-provider-identity-administration-relationship-graph"
+  },
+  {
+    "registry": "Python",
+    "old_name": "tba-provider-security-claims-provider-local",
+    "new_name": "tba-provider-claims-local",
+    "old_path": "pkgs/20-providers/tba-provider-security-claims-provider-local",
+    "new_path": "pkgs/20-providers/tba-provider-claims-local"
+  },
+  {
+    "registry": "Python",
+    "old_name": "tba-provider-security-token-introspection-client",
+    "new_name": "tba-provider-token-introspection",
+    "old_path": "pkgs/20-providers/tba-provider-security-token-introspection-client",
+    "new_path": "pkgs/20-providers/tba-provider-token-introspection"
+  },
+  {
+    "registry": "Python",
+    "old_name": "tba-durability-identity-admin-trust-federation-graph",
+    "new_name": "tba-durability-identity-administration-trust-federation-graph",
+    "old_path": "pkgs/30-storage-runtime/tba-durability-identity-admin-trust-federation-graph",
+    "new_path": "pkgs/30-storage-runtime/tba-durability-identity-administration-trust-federation-graph"
+  },
+  {
+    "registry": "Python",
+    "old_name": "tba-protocol-authorization-resource-server",
+    "new_name": "tba-protocol-oauth-protected-resource",
+    "old_path": "pkgs/50-protocols/tba-protocol-authorization-resource-server",
+    "new_path": "pkgs/50-protocols/tba-protocol-oauth-protected-resource"
+  },
+  {
+    "registry": "Python",
+    "old_name": "tba-client-authorization-admin",
+    "new_name": "tba-client-authorization-administration",
+    "old_path": "pkgs/75-clients/tba-client-authorization-admin",
+    "new_path": "pkgs/75-clients/tba-client-authorization-administration"
+  },
+  {
+    "registry": "Python",
+    "old_name": "tba-router-admin-gate",
+    "new_name": "tba-router-administration-gate",
+    "old_path": "pkgs/80-routers/tba-router-admin-gate",
+    "new_path": "pkgs/80-routers/tba-router-administration-gate"
+  },
+  {
+    "registry": "Python",
+    "old_name": "tba-router-authorization-admin",
+    "new_name": "tba-router-authorization-administration",
+    "old_path": "pkgs/80-routers/tba-router-authorization-admin",
+    "new_path": "pkgs/80-routers/tba-router-authorization-administration"
+  },
+  {
+    "registry": "Python",
+    "old_name": "tba-app-backend-platform-admin",
+    "new_name": "tba-app-backend-platform-administration",
+    "old_path": "pkgs/90-backend-apps/tba-app-backend-platform-admin",
+    "new_path": "pkgs/90-backend-apps/tba-app-backend-platform-administration"
+  },
+  {
+    "registry": "Python",
+    "old_name": "tba-app-backend-service-admin",
+    "new_name": "tba-app-backend-service-administration",
+    "old_path": "pkgs/90-backend-apps/tba-app-backend-service-admin",
+    "new_path": "pkgs/90-backend-apps/tba-app-backend-service-administration"
+  },
+  {
+    "registry": "Python",
+    "old_name": "tba-app-backend-tenant-admin",
+    "new_name": "tba-app-backend-tenant-administration",
+    "old_path": "pkgs/90-backend-apps/tba-app-backend-tenant-admin",
+    "new_path": "pkgs/90-backend-apps/tba-app-backend-tenant-administration"
+  },
+  {
+    "registry": "npm",
+    "old_name": "@tba/ui-face-biometric-authenticator-and-amr-evidence-manager",
+    "new_name": "@tba/ui-face-biometric-authentication-evidence",
+    "old_path": "pkgs/104-authenticator-uis/tba-ui-face-biometric-authenticator-and-amr-evidence-manager",
+    "new_path": "pkgs/104-authenticator-uis/tba-ui-face-biometric-authentication-evidence"
+  },
+  {
+    "registry": "npm",
+    "old_name": "@tba/ui-admin",
+    "new_name": "@tba/ui-administration",
+    "old_path": "pkgs/105-ui/tba-ui-admin",
+    "new_path": "pkgs/105-ui/tba-ui-administration"
+  },
+  {
+    "registry": "npm",
+    "old_name": "@tba/ui-platform-admin",
+    "new_name": "@tba/ui-platform-administration",
+    "old_path": "pkgs/105-ui/tba-ui-platform-admin",
+    "new_path": "pkgs/105-ui/tba-ui-platform-administration"
+  },
+  {
+    "registry": "npm",
+    "old_name": "@tba/ui-service-admin",
+    "new_name": "@tba/ui-service-administration",
+    "old_path": "pkgs/105-ui/tba-ui-service-admin",
+    "new_path": "pkgs/105-ui/tba-ui-service-administration"
+  },
+  {
+    "registry": "npm",
+    "old_name": "@tba/ui-tenant-admin",
+    "new_name": "@tba/ui-tenant-administration",
+    "old_path": "pkgs/105-ui/tba-ui-tenant-admin",
+    "new_path": "pkgs/105-ui/tba-ui-tenant-administration"
+  },
+  {
+    "registry": "npm",
+    "old_name": "@tba/ui-provisioning-and-directory-api-directory-and-scim-center",
+    "new_name": "@tba/ui-directory-provisioning-scim",
+    "old_path": "pkgs/106-ui/tba-ui-provisioning-and-directory-api-directory-and-scim-center",
+    "new_path": "pkgs/106-ui/tba-ui-directory-provisioning-scim"
+  },
+  {
+    "registry": "npm",
+    "old_name": "@tba/ui-public-identity-api-uix-requirements",
+    "new_name": "@tba/ui-public-identity",
+    "old_path": "pkgs/106-ui/tba-ui-public-identity-api-uix-requirements",
+    "new_path": "pkgs/106-ui/tba-ui-public-identity"
+  },
+  {
+    "registry": "npm",
+    "old_name": "@tba/ui-service-admin-api-uix-requirements-brief",
+    "new_name": "@tba/ui-service-administration-prototype",
+    "old_path": "pkgs/106-ui/tba-ui-service-admin-api-uix-requirements-brief",
+    "new_path": "pkgs/106-ui/tba-ui-service-administration-prototype"
+  },
+  {
+    "registry": "npm",
+    "old_name": "@tba/client-platform-admin",
+    "new_name": "@tba/client-platform-administration",
+    "old_path": "pkgs/75-clients/tba-typescript-client-platform-admin",
+    "new_path": "pkgs/75-clients/tba-typescript-client-platform-administration"
+  },
+  {
+    "registry": "npm",
+    "old_name": "@tba/client-tenant-admin",
+    "new_name": "@tba/client-tenant-administration",
+    "old_path": "pkgs/75-clients/tba-typescript-client-tenant-admin",
+    "new_path": "pkgs/75-clients/tba-typescript-client-tenant-administration"
+  }
+]

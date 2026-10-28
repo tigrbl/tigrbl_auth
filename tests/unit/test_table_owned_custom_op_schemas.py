@@ -120,7 +120,7 @@ def test_storage_package_metadata_does_not_depend_on_higher_layers() -> None:
     )
     source = pyproject.read_text(encoding="utf-8")
 
-    assert "tba-protocol-authorization-resource-server" not in source
+    assert "tba-protocol-oauth-protected-resource" not in source
     assert "tba-contracts-identity" not in source
     assert "tba-runtime-identity-storage" not in source
 

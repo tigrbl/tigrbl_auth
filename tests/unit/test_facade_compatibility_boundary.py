@@ -88,7 +88,7 @@ def test_facade_t0_public_surfaces_and_entrypoint_manifest_are_importable() -> N
         assert compat.STABLE_ENTRYPOINTS["TbaPlugin"].package == "tba-plugin-tigrbl"
         assert compat.STABLE_ENTRYPOINTS["plugin_install"].module == "tba_plugin_tigrbl"
         assert compat.STABLE_ENTRYPOINTS["plugin_install"].package == "tba-plugin-tigrbl"
-        assert compat.extras_for("consumer") == ("tba-protocol-authorization-resource-server", "tba-protocol-oidc-relying-party")
+        assert compat.extras_for("consumer") == ("tba-protocol-oauth-protected-resource", "tba-protocol-oidc-relying-party")
         assert facade.security is importlib.import_module("tba_auth.security")
         assert facade.standards is importlib.import_module("tba_auth.standards")
 

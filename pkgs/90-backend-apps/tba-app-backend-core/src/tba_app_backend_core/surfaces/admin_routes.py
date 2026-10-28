@@ -15,7 +15,7 @@ from typing import Any, Final
 from tigrbl import TigrblRouter
 from tba_server_identity.admin_auth import admin_api as admin_auth_api
 from tba_runtime_identity.deployment import ResolvedDeployment, resolve_deployment
-from tba_router_admin_gate import ADMIN_OPENAPI_SECURITY_DEPENDENCIES
+from tba_router_administration_gate import ADMIN_OPENAPI_SECURITY_DEPENDENCIES
 from tba_storage_core import ensure_identity_storage_importable
 from tba_storage_core.tables import (
     AuditEvent,
