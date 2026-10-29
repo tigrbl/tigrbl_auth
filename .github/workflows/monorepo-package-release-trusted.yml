@@ -221,6 +221,12 @@ jobs:
           files: |
             dist/${{ matrix.package.name }}/*.whl
             dist/${{ matrix.package.name }}/*.tar.gz
-          draft: "false"
+          draft: "true"
           prerelease: ${{ contains(matrix.package.version, '.dev') && 'true' || 'false' }}
           make-latest: "false"
+      - name: Publish release after all assets are uploaded
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ matrix.package.tag }}
+        run: gh release edit "$RELEASE_TAG" --draft=false
