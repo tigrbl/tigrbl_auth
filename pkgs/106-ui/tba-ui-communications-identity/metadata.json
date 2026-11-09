@@ -1,0 +1,6 @@
+{
+  "name": "TBA Communications Identity & Attestation Control Plane",
+  "description": "Profile-driven communications identity control plane and verification workbench for STIR/SHAKEN voice, BIMI/VMC brand indicators, S/MIME 4.0 email, PAdES/CMS document signing, and RFC 9421 HTTP message signatures.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
