@@ -1,0 +1,133 @@
+name: Bug report
+description: Report a reproducible problem in a TBA Auth package.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug. The details below let us
+        reproduce the problem without a round of follow-up questions.
+
+        **Never paste credentials into this form.** That includes passwords,
+        client secrets, API keys, service keys, access / refresh / ID tokens,
+        authorization codes, DPoP proofs, private keys, and JWT signing
+        secrets. Redact them before submitting.
+
+  - type: input
+    id: package
+    attributes:
+      label: Affected package
+      description: >-
+        The distribution name of the package where you see the problem. If you
+        are unsure, give the package you installed or imported.
+      placeholder: tba-auth, tba-router-oauth-token, tba-storage-core, ...
+    validations:
+      required: true
+
+  - type: input
+    id: package-version
+    attributes:
+      label: Package version
+      description: >-
+        Output of `pip show <package>` or `pip freeze | grep tba`. If you are
+        running from a checkout, give the commit SHA instead.
+      placeholder: 0.4.0.dev2
+    validations:
+      required: true
+
+  - type: dropdown
+    id: python-version
+    attributes:
+      label: Python version
+      description: Output of `python --version`.
+      options:
+        - "3.10"
+        - "3.11"
+        - "3.12"
+        - "3.13"
+        - "3.14"
+        - "3.15"
+        - Other (specify under additional context)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: install-profile
+    attributes:
+      label: Install profile
+      description: >-
+        The profile you installed, matching the extras and tox environments in
+        the README. Choose the closest match.
+      options:
+        - base (`pip install .`)
+        - sqlite + uvicorn (`.[sqlite,uvicorn]`)
+        - postgres + hypercorn (`.[postgres,hypercorn]`)
+        - tigrcorn (`.[tigrcorn]`)
+        - all runners (`.[servers]`)
+        - devtest (workspace / test dependencies)
+        - Other or custom (specify under additional context)
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: >-
+        Numbered steps, or a minimal script or command sequence, starting from
+        a clean environment. Include configuration and environment variables
+        that matter, with secret values replaced by placeholders.
+      placeholder: |
+        1. pip install '.[sqlite,uvicorn]'
+        2. Run `tba-auth serve --server uvicorn ...`
+        3. Request ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What you expected to happen, with a link to the relevant spec or RFC section if there is one.
+    validations:
+      required: true
+
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed behavior
+      description: What actually happened, including status codes, error messages, and exception types.
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Sanitized logs
+      description: |
+        Relevant log output or traceback. **Remove credentials and tokens
+        before pasting.** Check request and response headers
+        (`Authorization`, `DPoP`, `Cookie`, `Set-Cookie`), query strings,
+        form bodies, and connection URLs that embed passwords.
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Operating system, container image, database version, anything you tried, or anything else that may help.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Before submitting
+      options:
+        - label: I removed all credentials, secrets, and tokens from this report, including logs and configuration.
+          required: true
+        - label: I searched existing issues and did not find a duplicate.
+          required: true
