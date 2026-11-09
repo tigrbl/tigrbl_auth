@@ -95,6 +95,13 @@ Use these boundaries:
 
 ## Installation profiles
 
+### Python support
+
+- **Declared package range** — the root `pyproject.toml` declares Python `>=3.10,<3.16`. A checkout also needs an interpreter compatible with its pinned dependencies.
+- **Clean-room runtime profiles** — `tox.ini` defines CPython 3.10, 3.11, and 3.12 lanes for base, `sqlite-uvicorn`, and `postgres-hypercorn`. The `tigrcorn` profile has 3.11 and 3.12 lanes.
+- **Package CI** — the separate package matrix covers CPython 3.10 through 3.14 for eligible packages, subject to each package's Python metadata.
+- **Certification evidence** — preserved runtime evidence is incomplete. The Tigrcorn lanes are pinned and included in the clean-room matrix, with independent validation artifacts still missing. See [CERTIFICATION_STATUS.md](CERTIFICATION_STATUS.md) and the [certification state report](docs/compliance/certification_state_report.md) for the evidence and remaining gaps.
+
 ### Base install
 
 ```bash
@@ -179,7 +186,7 @@ plugin.install(app)
 - validated in-scope certification lane evidence is not yet fully preserved as passing
 - SQLite and PostgreSQL migration portability has not yet been preserved as passing in the final validated execution report
 - Tier 3 evidence has not yet been explicitly rebuilt from validated-run manifests in a fully green final gate set
-- the supported interpreter range remains Python `3.10`â€“`3.12`; this local checkpoint container only provides Python `3.13`, so it cannot truthfully generate the required preserved supported-matrix evidence by itself
+- preserved execution evidence is still required for the clean-room runtime profiles listed under [Python support](#python-support)
 - release bundles and attestation verification can be rebuilt from this checkpoint, but the result remains a final-release **candidate**, not a truthful final certification release
 
 ## License
