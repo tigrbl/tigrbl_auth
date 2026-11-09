@@ -50,7 +50,7 @@ jobs:
       matrix: ${{ steps.matrix.outputs.matrix }}
       count: ${{ steps.matrix.outputs.count }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
@@ -91,7 +91,7 @@ jobs:
         package: ${{ fromJSON(needs.discover-package-matrix.outputs.matrix) }}
     name: ${{ matrix.package.name }} / Python ${{ matrix.package.python_version }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.package.python_version }}

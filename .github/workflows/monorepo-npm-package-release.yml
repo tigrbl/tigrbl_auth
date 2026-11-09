@@ -43,7 +43,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - name: Create npm package release tags
@@ -115,7 +115,7 @@ jobs:
       npm-tag: ${{ steps.resolve.outputs.npm_tag }}
       scope: ${{ steps.resolve.outputs.scope }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Resolve and validate npm package tag
         id: resolve
         shell: bash
@@ -167,7 +167,7 @@ jobs:
     needs: resolve-npm-package-tag
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Test npm package before publication
         uses: cobycloud/actions/actions/js-framework-ci@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
@@ -193,7 +193,7 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Publish npm package
         uses: cobycloud/actions/actions/npm-publish@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
@@ -219,7 +219,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Create npm package GitHub release
         uses: cobycloud/actions/actions/github-release@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
