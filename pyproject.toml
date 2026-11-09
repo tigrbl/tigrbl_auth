@@ -323,6 +323,8 @@ dependencies = [
     "tba-provider-secret-hashing-bcrypt==0.1.0",
     "tba-provider-authenticator-session-local==0.1.0",
     "tba-provider-authenticator-otp-local==0.1.0",
+    "tba-provider-authenticator-totp-local==0.1.0",
+    "tba-concrete-totp==0.1.0",
     "tba-provider-authenticator-recovery-code-local==0.1.0",
     "tba-provider-authenticator-mtls-client-cert==0.1.0",
     "tba-provider-authenticator-dpop-proof==0.1.0",
@@ -692,6 +694,8 @@ tba-provider-authenticator-client-secret-local = { path = "pkgs/20-providers/tba
 tba-provider-secret-hashing-bcrypt = { path = "pkgs/20-providers/tba-provider-secret-hashing-bcrypt", editable = true }
 tba-provider-authenticator-session-local = { path = "pkgs/20-providers/tba-provider-authenticator-session-local", editable = true }
 tba-provider-authenticator-otp-local = { path = "pkgs/20-providers/tba-provider-authenticator-otp-local", editable = true }
+tba-provider-authenticator-totp-local = { path = "pkgs/20-providers/tba-provider-authenticator-totp-local", editable = true }
+tba-concrete-totp = { path = "pkgs/10-concrete/tba-concrete-totp", editable = true }
 tba-provider-authenticator-recovery-code-local = { path = "pkgs/20-providers/tba-provider-authenticator-recovery-code-local", editable = true }
 tba-provider-authenticator-mtls-client-cert = { path = "pkgs/20-providers/tba-provider-authenticator-mtls-client-cert", editable = true }
 tba-provider-authenticator-dpop-proof = { path = "pkgs/20-providers/tba-provider-authenticator-dpop-proof", editable = true }

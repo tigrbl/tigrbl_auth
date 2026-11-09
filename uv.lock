@@ -4222,6 +4222,7 @@ dependencies = [
     { name = "tba-concrete-service-identity" },
     { name = "tba-concrete-set" },
     { name = "tba-concrete-svid" },
+    { name = "tba-concrete-totp" },
     { name = "tba-concrete-trust-federation-graph" },
     { name = "tba-concrete-user-identity" },
     { name = "tba-concrete-vc-cose-credential" },
@@ -4335,6 +4336,7 @@ dependencies = [
     { name = "tba-provider-authenticator-remote-introspection" },
     { name = "tba-provider-authenticator-service-key-local" },
     { name = "tba-provider-authenticator-session-local" },
+    { name = "tba-provider-authenticator-totp-local" },
     { name = "tba-provider-authorization-policy-decision-engine" },
     { name = "tba-provider-authorization-resource-server-verifier" },
     { name = "tba-provider-certificate-path-validator" },
@@ -4781,6 +4783,7 @@ requires-dist = [
     { name = "tba-concrete-service-identity", editable = "pkgs/10-concrete/tba-concrete-service-identity" },
     { name = "tba-concrete-set", editable = "pkgs/10-concrete/tba-concrete-set" },
     { name = "tba-concrete-svid", editable = "pkgs/10-concrete/tba-concrete-svid" },
+    { name = "tba-concrete-totp", editable = "pkgs/10-concrete/tba-concrete-totp" },
     { name = "tba-concrete-trust-federation-graph", editable = "pkgs/10-concrete/tba-concrete-trust-federation-graph" },
     { name = "tba-concrete-user-identity", editable = "pkgs/10-concrete/tba-concrete-user-identity" },
     { name = "tba-concrete-vc-cose-credential", editable = "pkgs/10-concrete/tba-concrete-vc-cose-credential" },
@@ -4903,6 +4906,7 @@ requires-dist = [
     { name = "tba-provider-authenticator-remote-introspection", editable = "pkgs/20-providers/tba-provider-authenticator-remote-introspection" },
     { name = "tba-provider-authenticator-service-key-local", editable = "pkgs/20-providers/tba-provider-authenticator-service-key-local" },
     { name = "tba-provider-authenticator-session-local", editable = "pkgs/20-providers/tba-provider-authenticator-session-local" },
+    { name = "tba-provider-authenticator-totp-local", editable = "pkgs/20-providers/tba-provider-authenticator-totp-local" },
     { name = "tba-provider-authorization-policy-decision-engine", editable = "pkgs/20-providers/tba-provider-authorization-policy-decision-engine" },
     { name = "tba-provider-authorization-resource-server-verifier", editable = "pkgs/20-providers/tba-provider-authorization-resource-server-verifier" },
     { name = "tba-provider-bimi-mark-certificate", marker = "extra == 'bimi'", editable = "pkgs/20-providers/tba-provider-bimi-mark-certificate" },
@@ -11672,4 +11676,26 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/e6/dd/60a51b3f4782ba271673b6ec65c9205a8a2aa71a92fd47608b9aa6b7e0a3/tigrbl_ops_realtime-0.4.5.dev4.tar.gz", hash = "sha256:001cb1cb2bb0bb365c45cd0d7ad59c9e5b61922783a54426e98f39f71df115c8", size = 9237, upload-time = "2026-06-27T11:07:24.219Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/fb/e9/a7b5570509ed70344b62adf40c1e5bfad766e5d305bec5e64d1971d51b7f/tigrbl_ops_realtime-0.4.5.dev4-py3-none-any.whl", hash = "sha256:51435b1616d130a88c4497b50378b03c8e6fe4fb5d14b1a2c969bd8c8b143c29", size = 13305, upload-time = "2026-06-27T11:07:23.162Z" },
+]
+
+[[package]]
+name = "tba-concrete-totp"
+version = "0.1.0"
+source = { editable = "pkgs/10-concrete/tba-concrete-totp" }
+
+[[package]]
+name = "tba-provider-authenticator-totp-local"
+version = "0.1.0"
+source = { editable = "pkgs/20-providers/tba-provider-authenticator-totp-local" }
+dependencies = [
+    { name = "tba-bases-authenticator" },
+    { name = "tba-concrete-totp" },
+    { name = "tba-contracts-identity" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tba-bases-authenticator", specifier = "==0.1.0" },
+    { name = "tba-concrete-totp", specifier = "==0.1.0" },
+    { name = "tba-contracts-identity", specifier = "==0.4.0.dev2" },
 ]
