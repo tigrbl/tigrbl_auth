@@ -1,7 +1,29 @@
 name: Publish Portwyrm a31 Auth dependencies
 
+run-name: Publish ${{ inputs.package }} to PyPI
+
 on:
   workflow_dispatch:
+    inputs:
+      package:
+        description: Package to build, publish, and verify
+        required: true
+        type: choice
+        options:
+          - tigrbl-did-contracts
+          - tigrbl-identity-core
+          - tigrbl-digital-credential-contracts
+          - tigrbl-identity-assurance-contracts
+          - tigrbl-public-key-authentication-contracts
+          - tigrbl-replay-contracts
+          - tigrbl-security-event-contracts
+          - tigrbl-security-trust-contracts
+          - tigrbl-claim-contracts
+          - tigrbl-token-contracts
+          - tigrbl-workload-identity-contracts
+          - tigrbl-attestation-contracts
+          - tigrbl-identity-contracts
+          - tigrbl-secret-hashing-bcrypt-provider
 
 permissions:
   contents: read
@@ -28,11 +50,14 @@ jobs:
           enable-cache: false
       - name: Build pinned compatibility distributions
         shell: bash
+        env:
+          RELEASE_PACKAGE: ${{ inputs.package }}
         run: |
           set -euo pipefail
           export SOURCE_DATE_EPOCH
           SOURCE_DATE_EPOCH=$(git show -s --format=%ct HEAD)
           uv run --no-project --python 3.12 python - <<'PY'
+          import os
           import subprocess
           import tomllib
           from pathlib import Path
@@ -53,23 +78,22 @@ jobs:
               ("02-contracts/tigrbl-identity-contracts", "0.4.0.dev3"),
               ("20-providers/tigrbl-secret-hashing-bcrypt-provider", "0.1.1"),
           ]
+          package = os.environ["RELEASE_PACKAGE"]
+          directory, version = next(entry for entry in packages if Path(entry[0]).name == package)
+          path = Path("pkgs") / directory
+          project = tomllib.loads((path / "pyproject.toml").read_text())["project"]
+          assert (project["name"], project["version"]) == (package, version)
+          assert all(" @ " not in dep for dep in project.get("dependencies", ()))
+
           out = Path("release-artifacts")
-          out.mkdir()
-          release_order = []
-          for directory, version in packages:
-              path = Path("pkgs") / directory
-              project = tomllib.loads((path / "pyproject.toml").read_text())["project"]
-              assert (project["name"], project["version"]) == (path.name, version)
-              assert all(" @ " not in dep for dep in project.get("dependencies", ()))
-              destination = out / path.name
-              subprocess.run(
-                  ["uv", "build", "--no-sources", str(path), "--out-dir", str(destination)],
-                  check=True,
-              )
-              assert len(list(destination.glob("*.whl"))) == 1
-              assert len(list(destination.glob("*.tar.gz"))) == 1
-              release_order.append(f"{path.name} {version}\n")
-          (out / "order.txt").write_text("".join(release_order))
+          destination = out / package
+          subprocess.run(
+              ["uv", "build", "--no-sources", str(path), "--out-dir", str(destination)],
+              check=True,
+          )
+          assert len(list(destination.glob("*.whl"))) == 1
+          assert len(list(destination.glob("*.tar.gz"))) == 1
+          (out / "release.txt").write_text(f"{package} {version}\n")
           PY
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
@@ -83,8 +107,9 @@ jobs:
       group: sad-lewin-tigrbl-auth-release
       labels: [sad-lewin, tigrbl-shortlived]
     timeout-minutes: 20
-    environment: pypi
-    permissions: {}
+    environment: portwyrm-a31-pypi
+    permissions:
+      id-token: write
     steps:
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
@@ -94,17 +119,12 @@ jobs:
         with:
           version: "0.13.6"
           enable-cache: false
-      - name: Publish in dependency order and verify each upload
+      - name: Publish with Trusted Publishing and verify on PyPI
         shell: bash
         env:
           RELEASE_ARTIFACTS: ${{ runner.temp }}/auth-${{ github.run_id }}-${{ github.run_attempt }}
-          UV_PUBLISH_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
         run: |
           set -euo pipefail
-          if [[ -z "${UV_PUBLISH_TOKEN:-}" ]]; then
-            echo "::error::PYPI_API_TOKEN is unavailable in the pypi environment."
-            exit 1
-          fi
           uv run --no-project --python 3.12 python - <<'PY'
           import hashlib
           import json
@@ -116,30 +136,34 @@ jobs:
           from pathlib import Path
 
           root = Path(os.environ["RELEASE_ARTIFACTS"])
-          for line in (root / "order.txt").read_text().splitlines():
-              name, version = line.split()
-              files = sorted((root / name).iterdir())
-              expected = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
-              subprocess.run(
-                  ["uv", "publish", "--check-url", "https://pypi.org/simple/", *map(str, files)],
-                  check=True,
-              )
-              for attempt in range(12):
-                  try:
-                      with urllib.request.urlopen(
-                          f"https://pypi.org/pypi/{name}/{version}/json", timeout=15
-                      ) as response:
-                          published = {
-                              item["filename"]: item["digests"]["sha256"]
-                              for item in json.load(response)["urls"]
-                          }
-                      if all(published.get(file) == digest for file, digest in expected.items()):
-                          print(f"Verified {name}=={version}", flush=True)
-                          break
-                  except urllib.error.HTTPError as exc:
-                      if exc.code != 404:
-                          raise
-                  time.sleep(5)
-              else:
-                  raise SystemExit(f"PyPI did not return the expected files for {name}=={version}")
+          name, version = (root / "release.txt").read_text().split()
+          directory = root / name
+          files = [*directory.glob("*.whl"), *directory.glob("*.tar.gz")]
+          assert len(files) == 2
+          expected = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
+          subprocess.run(
+              [
+                  "uv", "publish", "--trusted-publishing", "always",
+                  "--check-url", "https://pypi.org/simple/", *map(str, files),
+              ],
+              check=True,
+          )
+          for attempt in range(12):
+              try:
+                  with urllib.request.urlopen(
+                      f"https://pypi.org/pypi/{name}/{version}/json", timeout=15
+                  ) as response:
+                      published = {
+                          item["filename"]: item["digests"]["sha256"]
+                          for item in json.load(response)["urls"]
+                      }
+                  if all(published.get(file) == digest for file, digest in expected.items()):
+                      print(f"Verified {name}=={version}", flush=True)
+                      break
+              except urllib.error.HTTPError as exc:
+                  if exc.code != 404:
+                      raise
+              time.sleep(5)
+          else:
+              raise SystemExit(f"PyPI did not return the expected files for {name}=={version}")
           PY
