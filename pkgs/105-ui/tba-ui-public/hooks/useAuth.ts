@@ -48,6 +48,7 @@ export const useAuth = () => {
     verificationEmailSent: registrationActions.verificationEmailSent,
     resendSuccess: verificationActions.resendSuccess,
     resetRequestSent: recoveryActions.resetRequestSent,
+    recoveryError: recoveryActions.error,
     isLoading,
     error,
 

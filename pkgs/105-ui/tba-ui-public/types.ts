@@ -102,6 +102,8 @@ export interface OidcDiscoveryMetadata {
   token_endpoint?: string;
   userinfo_endpoint?: string;
   registration_endpoint?: string;
+  // Private discovery extension for end-user accounts. The standard key above registers OAuth clients.
+  account_registration_endpoint?: string;
   password_recovery_endpoint?: string;
   password_reset_endpoint?: string;
   mfa_verification_endpoint?: string;

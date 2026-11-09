@@ -8,13 +8,14 @@ export const useRegister = (onUserCreated: (user: User) => void) => {
   const [error, setError] = useState<string | null>(null);
   const [verificationEmailSent, setVerificationEmailSent] = useState(false);
 
-  const register = useCallback(async (name: string, email: string) => {
+  const register = useCallback(async (name: string, email: string, password: string) => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await postDiscoveredJson<Partial<User>>('registration_endpoint', 'registration', {
+      const response = await postDiscoveredJson<Partial<User>>('account_registration_endpoint', 'account registration', {
         name,
         email,
+        password,
       });
       const user: User = {
         id: String(response?.id || email),
