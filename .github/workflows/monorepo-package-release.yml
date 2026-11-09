@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   build:
-    if: github.ref == 'refs/tags/portwyrm-a31-auth-publish-v1'
+    if: github.ref == 'refs/heads/fxxx/portwyrm-a31-auth-compat'
     runs-on:
       group: sad-lewin-tigrbl-auth-release
       labels: [sad-lewin, tigrbl-shortlived]
@@ -20,6 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          ref: 1e3752aaf3603a39e39db8c66bae1eb61339e167
           persist-credentials: false
       - uses: astral-sh/setup-uv@ae62891fec2bb8e7d6c99fc78c9fec3a63790f8d # v10.0.0
         with:
