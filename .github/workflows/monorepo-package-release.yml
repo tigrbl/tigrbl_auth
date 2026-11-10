@@ -1,4 +1,4 @@
-name: Publish Portwyrm a31 Auth dependencies
+name: Publish Tigrbl Auth compatibility packages
 
 run-name: Publish ${{ inputs.package }} to PyPI
 
@@ -29,7 +29,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: portwyrm-a31-auth-publish
+  group: tigrbl-auth-compat-publish
   cancel-in-progress: false
 
 jobs:
@@ -107,7 +107,7 @@ jobs:
       group: sad-lewin-tigrbl-auth-release
       labels: [sad-lewin, tigrbl-shortlived]
     timeout-minutes: 20
-    environment: portwyrm-a31-pypi
+    environment: pypi
     permissions:
       id-token: write
     steps:
