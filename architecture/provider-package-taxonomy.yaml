@@ -36,6 +36,7 @@ canonical_providers:
   - tba-provider-authenticator-remote-introspection
   - tba-provider-authenticator-service-key-local
   - tba-provider-authenticator-session-local
+  - tba-provider-authenticator-totp-local
   attestation:
   - tba-provider-attestation-appraiser
   - tba-provider-attestation-packed

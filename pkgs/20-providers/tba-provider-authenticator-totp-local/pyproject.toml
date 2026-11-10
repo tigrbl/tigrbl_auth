@@ -1,0 +1,19 @@
+[project]
+name = "tba-provider-authenticator-totp-local"
+version = "0.1.0"
+description = "Local time-based OTP authenticator provider for TBA."
+readme = "README.md"
+requires-python = ">=3.10,<3.16"
+license = "Apache-2.0"
+dependencies = [
+    "tba-bases-authenticator==0.1.0",
+    "tba-contracts-identity==0.4.0.dev2",
+    "tba-concrete-totp==0.1.0",
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tba_provider_authenticator_totp_local", from = "src" }]
