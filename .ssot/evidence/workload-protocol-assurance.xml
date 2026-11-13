@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuites name="pytest tests">
+  <testsuite name="pytest" errors="0" failures="0" skipped="0" tests="11">
+    <testcase classname="tests.unit.test_workload_protocol_assurance" name="test_t0_specification_ownership" file="tests\unit\test_workload_protocol_assurance.py" line="143">
+      <properties>
+        <property name="requirement_test_mapping" value="{&quot;SPIFFE ID and SVID profile checks&quot;: [&quot;tba-protocol-workload-spiffe-svid&quot;, &quot;5d15e3ee8782e205048d1f206fbf944e075f7bae&quot;, &quot;exercise_spiffe&quot;], &quot;WIT confirmation and audience&quot;: [&quot;tba-profile-workload-credential-wimse-wit&quot;, &quot;draft-ietf-wimse-workload-creds-02&quot;, &quot;exercise_wimse&quot;], &quot;WPT WIT binding&quot;: [&quot;tba-profile-workload-proof-wimse-wpt&quot;, &quot;draft-ietf-wimse-wpt-01&quot;, &quot;exercise_wimse&quot;]}" />
+      </properties>
+    </testcase>
+    <testcase classname="tests.unit.test_workload_protocol_assurance" name="test_t1_specification_ownership[exercise_wimse]" file="tests\unit\test_workload_protocol_assurance.py" line="187" />
+    <testcase classname="tests.unit.test_workload_protocol_assurance" name="test_t1_specification_ownership[exercise_spiffe]" file="tests\unit\test_workload_protocol_assurance.py" line="187" />
+    <testcase classname="tests.unit.test_workload_protocol_assurance" name="test_t1_package_independence[exercise_wimse-excluded0]" file="tests\unit\test_workload_protocol_assurance.py" line="192" />
+    <testcase classname="tests.unit.test_workload_protocol_assurance" name="test_t1_package_independence[exercise_spiffe-excluded1]" file="tests\unit\test_workload_protocol_assurance.py" line="192" />
+    <testcase classname="tests.unit.test_workload_protocol_assurance" name="test_t2_package_independence[wimse]" file="tests\unit\test_workload_protocol_assurance.py" line="321">
+      <properties>
+        <property name="wheel_inventory" value="{&quot;tba-profile-workload-credential-wimse-wit&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-profile-workload-proof-wimse-wpt&quot;: &quot;0.4.0.dev2&quot;}" />
+        <property name="entry_point_check" value="exercise_wimse" />
+      </properties>
+    </testcase>
+    <testcase classname="tests.unit.test_workload_protocol_assurance" name="test_t2_package_independence[spiffe]" file="tests\unit\test_workload_protocol_assurance.py" line="321">
+      <properties>
+        <property name="wheel_inventory" value="{&quot;tba-bases-digital-credential&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-jws&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-jwt&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-jwt-svid-credential&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-x509-svid-credential&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-contracts-digital-credential&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-primitives-identity&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-protocol-workload-spiffe-svid&quot;: &quot;0.4.0.dev2&quot;}" />
+        <property name="entry_point_check" value="exercise_spiffe" />
+      </properties>
+    </testcase>
+    <testcase classname="tests.unit.test_workload_protocol_assurance" name="test_t2_specification_ownership" file="tests\unit\test_workload_protocol_assurance.py" line="337">
+      <properties>
+        <property name="wheel_inventory" value="{&quot;tba-bases-digital-credential&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-bases-jose&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-bases-protected-envelope&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-bases-token&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-bases-workload-identity&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-jose&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-jws&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-jwt&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-jwt-svid-credential&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-svid&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-x509-svid-credential&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-contracts-attestation&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-contracts-claim&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-contracts-did&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-contracts-digital-credential&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-contracts-identity&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-contracts-identity-assurance&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-contracts-protected-envelope&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-contracts-public-key-authentication&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-contracts-replay&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-contracts-security-event&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-contracts-security-key-rotation-policy&quot;: &quot;0.1.0&quot;, &quot;tba-contracts-security-trust&quot;: &quot;0.1.0&quot;, &quot;tba-contracts-token&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-contracts-workload-identity&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-primitives-identity&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-protocol-workload-spiffe-svid&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-provider-spiffe-bundle&quot;: &quot;0.4.0.dev3&quot;, &quot;tba-provider-spiffe-workload-api&quot;: &quot;0.4.0.dev2&quot;}" />
+        <property name="spiffe_specification_revision" value="5d15e3ee8782e205048d1f206fbf944e075f7bae" />
+        <property name="entry_point_check" value="exercise_spiffe + exercise_spiffe_providers" />
+      </properties>
+    </testcase>
+    <testcase classname="tests.unit.test_workload_protocol_composition" name="test_standalone_workload_protocol_dependency_closure[standalone-wimse]" file="tests\unit\test_workload_protocol_composition.py" line="29" />
+    <testcase classname="tests.unit.test_workload_protocol_composition" name="test_standalone_workload_protocol_dependency_closure[standalone-spiffe]" file="tests\unit\test_workload_protocol_composition.py" line="29" />
+    <testcase classname="tests.unit.test_workload_protocol_composition" name="test_wit_svid_declares_both_protocol_dependencies" file="tests\unit\test_workload_protocol_composition.py" line="70" />
+  </testsuite>
+</testsuites>

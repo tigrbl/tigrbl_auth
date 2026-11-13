@@ -5,6 +5,7 @@ class CertificateProfile(StrEnum):
     GENERIC_PKIX = "generic-pkix"
     OAUTH_MTLS = "oauth-mtls"
     X509_SVID = "x509-svid"
+    WIMSE_WIC = "wimse-wic"
     MDOC_ISSUER = "mdoc-issuer"
     MDOC_READER = "mdoc-reader"
     HAIP_ISSUER = "haip-issuer"

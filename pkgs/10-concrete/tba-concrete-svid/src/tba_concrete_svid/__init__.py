@@ -11,3 +11,7 @@ __all__ = [
     "parse_jwt_svid_claims",
     "validate_x509_svid_structure",
 ]
+
+from .svid import SvidIdentity
+
+__all__ += ["SvidIdentity"]

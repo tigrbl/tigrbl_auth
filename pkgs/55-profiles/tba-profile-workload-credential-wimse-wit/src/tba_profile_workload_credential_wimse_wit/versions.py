@@ -8,9 +8,14 @@ class WitVersion:
     specification_uri: str
 
 
-CURRENT_VERSION = WitVersion(
+LEGACY_VERSION = WitVersion(
     "draft-ietf-wimse-workload-creds-02",
     "IETF-draft",
     "https://datatracker.ietf.org/doc/draft-ietf-wimse-workload-creds/02/",
 )
-VERSION_HISTORY = (CURRENT_VERSION,)
+CURRENT_VERSION = WitVersion(
+    "draft-ietf-wimse-workload-creds-03",
+    "IETF-draft",
+    "https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-creds-03",
+)
+VERSION_HISTORY = (LEGACY_VERSION, CURRENT_VERSION)

@@ -9,3 +9,7 @@ __all__ = [
     "WptVersion",
     "validate_wpt",
 ]
+
+from .verification import verify_wpt, authenticate_wpt_request
+
+__all__ += ["verify_wpt", "authenticate_wpt_request"]

@@ -1,0 +1,20 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1137"
+number: 1137
+slug: "workload-protocol-composition"
+title: "Separate WIMSE and SPIFFE capabilities"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "TbA provides WIMSE and SPIFFE as independently composable capabilities. A downstream selects the packages required for its use case. Standalone WIMSE capabilities MUST work without SPIFFE packages or SPIRE services. Standalone SPIFFE capabilities MUST work without WIMSE packages or SPIRE services. SPIRE-specific integration belongs in an explicitly selected provider or adapter."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+  TbA provides WIMSE and SPIFFE as independently composable capabilities. A downstream selects the packages required for its use case. Standalone WIMSE capabilities MUST work without SPIFFE packages or SPIRE services. Standalone SPIFFE capabilities MUST work without WIMSE packages or SPIRE services. SPIRE-specific integration belongs in an explicitly selected provider or adapter.
+  
+  Both protocols MAY reuse shared TbA capabilities for keys, credentials, certificates, attestation, proof of possession, and authorization. A composition that uses both protocols MUST declare those dependencies explicitly.

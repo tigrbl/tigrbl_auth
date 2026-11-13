@@ -68,6 +68,8 @@ families:
     packages:
       - tba-concrete-eat
       - tba-concrete-mdoc
+      - tba-concrete-certificate-x509
+      - tba-concrete-wic
     cardinality: one-format-model-family
   capability_core:
     packages:

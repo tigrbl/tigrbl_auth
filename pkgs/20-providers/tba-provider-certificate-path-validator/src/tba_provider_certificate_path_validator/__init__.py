@@ -24,8 +24,11 @@ class ProfiledCertificatePathValidator(CertificatePathValidatorBase):
         status_provider: CertificateStatusProviderPort,
         backends: dict[CertificateProfile, PathValidationBackend],
         allow_unknown_status: set[CertificateProfile] | None = None,
+        *,
+        trust_domain: str | None = None,
     ):
         self._anchors = anchors
+        self._trust_domain = trust_domain
         self._status = status_provider
         self._backends = dict(backends)
         self._allow_unknown = set(allow_unknown_status or ())
@@ -44,7 +47,11 @@ class ProfiledCertificatePathValidator(CertificatePathValidatorBase):
             return CertificatePathValidationResult(
                 False, profile, errors=("no path-validation backend for profile",)
             )
-        anchors = self._anchors.anchors_for(profile)
+        if self._trust_domain is None:
+            anchors = self._anchors.anchors_for(profile)
+        else:
+            resolve = getattr(self._anchors, "anchors_for_domain", None)
+            anchors = () if resolve is None else resolve(self._trust_domain, profile)
         if not anchors:
             return CertificatePathValidationResult(
                 False, profile, errors=("no trust anchors for profile",)

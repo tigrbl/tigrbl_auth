@@ -1,6 +1,6 @@
 from collections.abc import Iterable
 
-from tba_contracts_identity.workloads import WorkloadSelector
+from tba_contracts_workload_identity import WorkloadSelector
 
 
 def normalize_selectors(

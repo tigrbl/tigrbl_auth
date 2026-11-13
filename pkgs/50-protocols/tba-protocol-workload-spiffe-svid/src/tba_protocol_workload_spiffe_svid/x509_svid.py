@@ -9,7 +9,7 @@ def validate_x509_svid(
     basic_constraints_ca: bool,
 ) -> str:
     spiffe_ids = tuple(value for value in uri_sans if value.startswith("spiffe://"))
-    if len(spiffe_ids) != 1:
+    if len(uri_sans) != 1 or len(spiffe_ids) != 1:
         raise ValueError("X.509-SVID requires exactly one SPIFFE URI SAN")
     validate_spiffe_id(spiffe_ids[0])
     if dns_sans:

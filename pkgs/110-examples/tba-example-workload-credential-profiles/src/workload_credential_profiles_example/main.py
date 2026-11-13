@@ -8,7 +8,15 @@ def run_example() -> tuple[str, ...]:
     wit = {
         "iss": "https://issuer",
         "sub": "spiffe://example.org/workload",
-        "cnf": {"jkt": "key"},
+        "cnf": {
+            "jwk": {
+                "alg": "ES256",
+                "kty": "EC",
+                "crv": "P-256",
+                "x": "f83OJ3D2xF1Bg8vub9tLe1gHMzV76e8Tus9uPHvRVEU",
+                "y": "x_FEzRu9m36HLNFyp2oK5uLrX6FJe2GIhK4tdX7ISJY",
+            },
+        },
         "exp": 2,
         "iat": 1,
     }
@@ -16,6 +24,7 @@ def run_example() -> tuple[str, ...]:
     validate_wit_svid(
         {"typ": "wit+jwt", "alg": "ES256", "kid": "wit-key"},
         wit,
+        now=1,
         proof_result=PossessionProofVerificationResult(
             True,
             replay_accepted=True,

@@ -90,6 +90,7 @@ FEATURE_FLAG_GROUPS: Final[dict[str, dict[str, object]]] = {
             "enable_spiffe_jwt_svid": "Stable SPIFFE JWT-SVID profile",
             "enable_spiffe_workload_api": "Stable SPIFFE Workload API",
             "enable_spiffe_broker_api": "Incubating SPIFFE Broker API v1.15.1",
+            "enable_wimse_mtls": "IETF draft WIMSE mutual TLS",
             "enable_wimse_wit": "IETF draft WIMSE WIT",
             "enable_wimse_wpt": "IETF draft WIMSE WPT",
             "enable_spiffe_wit_svid": "Incubating SPIFFE WIT-SVID",

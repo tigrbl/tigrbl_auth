@@ -10,6 +10,7 @@ from .spiffe import SpiffeId
 class SvidFormat(StrEnum):
     X509 = "x509-svid"
     JWT = "jwt-svid"
+    WIT = "wit-svid"
 
 
 @dataclass(frozen=True, slots=True)
