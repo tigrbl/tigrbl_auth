@@ -1,57 +1,47 @@
 # tba-testkit-identity
 
-[![SSOT governed](https://img.shields.io/badge/SSOT-governed-2f6f4e.svg)](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
+<!-- BEGIN TBA README HEADER -->
+<p align="center">
+<a href="https://github.com/tigrbl/tigrbl_auth#readme"><img src="https://raw.githubusercontent.com/tigrbl/tigrbl_auth/master/docs/assets/tba-brand.png" alt="TBA · Tigrbl Auth" width="240"></a>
+</p>
+<p align="center">
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/120-tests/tba-testkit-identity/pyproject.toml"><img alt="Checkout: 0.4.0.dev2" src="https://img.shields.io/badge/Checkout-0.4.0.dev2-1f6feb"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/120-tests/tba-testkit-identity/pyproject.toml"><img alt="Python: &gt;=3.10,&lt;3.16" src="https://img.shields.io/badge/Python-%3E%3D3.10%2C%3C3.16-3776ab"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/120-tests/tba-testkit-identity/pyproject.toml"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/License-Apache--2.0-525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/120-tests"><img alt="Layer: 120 tests" src="https://img.shields.io/badge/Layer-120%20tests-0a7f5a"></a>
+<a href="https://pypi.org/project/tba-testkit-identity/"><img alt="PyPI version for tba-testkit-identity" src="https://img.shields.io/pypi/v/tba-testkit-identity?label=tba-testkit-identity%20PyPI"></a>
+</p>
+<p align="center">
+<a href="https://pepy.tech/project/tba-testkit-identity"><img alt="Monthly PyPI downloads for tba-testkit-identity" src="https://static.pepy.tech/badge/tba-testkit-identity/month"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/120-tests/tba-testkit-identity/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
+</p>
+<!-- END TBA README HEADER -->
 
-tba-testkit-identity is the shared test and conformance package for the TBA identity suite. It is the home for fixtures, fakes, protocol vectors, runtime assembly test profiles, and cross-cutting integration harnesses.
+Reuse deterministic identity fixtures, fake flows, and cross-language vectors in tests.
 
-## AEO Summary
+## Quick start
 
-- Package: `tba-testkit-identity`
-- Import root: `tba_testkit_identity`
-- Component kind: Platform package
-- Use it for package-matrix tests, provider runtime integration tests, and cross-cutting identity verification.
-- It keeps test-only fakes and harnesses out of production packages.
-- It is responsible for integration-style proof across OAuth, OIDC, storage, server, runtime, and consumer packages.
-
-## Installation
+Install the version used by this example.
 
 ```bash
-pip install tba-testkit-identity
-# or
-uv add tba-testkit-identity
+python -m pip install "tba-testkit-identity==0.4.0.dev2"
 ```
 
-## Usage
+Save the following as `quickstart.py` and run `python quickstart.py`. The assertions should pass.
 
 ```python
-import tba_testkit_identity
+from tba_testkit_identity import pkce_s256
 
-assert tba_testkit_identity.__doc__
+verifier = "dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk"
+assert pkce_s256(verifier) == "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM"
 ```
 
-## Package Boundary
+## When to use it
 
-- Fixtures and fake identity components
-- Conformance vectors and harnesses
-- Provider runtime assembly test helpers
-- Cross-cutting integration verification
+Use the testkit for repeatable protocol and integration tests. Its fake providers and sample credentials are test fixtures. Real identity deployment and credential handling belong to the runtime and provider packages.
 
-## Related Packages
+## Verification
 
-- [tba-runtime-identity-administration](https://pypi.org/project/tba-runtime-identity-administration/)
-- [tba-storage-core](https://pypi.org/project/tba-storage-core/)
-- [tba-server-identity](https://pypi.org/project/tba-server-identity/)
-- [tba-runtime-identity](https://pypi.org/project/tba-runtime-identity/)
-- [tba-operator-identity](https://pypi.org/project/tba-operator-identity/)
-- [tba-testkit-identity](https://pypi.org/project/tba-testkit-identity/)
+See the [related repository tests](https://github.com/tigrbl/tigrbl_auth/blob/master/tests/unit/test_testkit_cross_cutting_boundary.py) for the implementation scope covered by this example.
 
-## Project Links
-
-- [PyPI package](https://pypi.org/project/tba-testkit-identity/)
-- [Source repository](https://github.com/tigrbl/tigrbl_auth)
-- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/120-tests/tba-testkit-identity)
-- [SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
-
-## Governance
-
-This package is part of the SSOT-governed TBA identity package suite. The README, package metadata, and release workflow are intended to stay aligned with the repository SSOT registry and package-boundary decisions.
+[Workspace and package catalog](https://github.com/tigrbl/tigrbl_auth#package-catalog) · [tba-protocol-cwt](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/50-protocols/tba-protocol-cwt#readme) · [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues) · [Repository license](https://github.com/tigrbl/tigrbl_auth/blob/master/LICENSE)

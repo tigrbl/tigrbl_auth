@@ -1,6 +1,7 @@
 [project]
 name = "tba-concrete-claim-cwt-confirmation"
 version = "0.4.0.dev2"
+readme = "README.md"
 description = "Standalone RFC 8747 CWT cnf claim implementation."
 requires-python = ">=3.10,<3.16"
 classifiers = [

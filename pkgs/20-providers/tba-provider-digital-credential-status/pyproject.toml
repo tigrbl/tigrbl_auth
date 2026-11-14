@@ -1,6 +1,7 @@
 [project]
 name = "tba-provider-digital-credential-status"
 version = "0.4.0.dev3"
+readme = "README.md"
 description = "Digital credential status resolution provider."
 requires-python = ">=3.10,<3.16"
 classifiers = [

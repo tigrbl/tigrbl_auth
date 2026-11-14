@@ -1,6 +1,7 @@
 [project]
 name = "tba-capability-digital-credential-presentation"
 version = "0.4.0.dev2"
+readme = "README.md"
 description = "Digital credential presentation capability composition."
 requires-python = ">=3.10,<3.16"
 classifiers = [

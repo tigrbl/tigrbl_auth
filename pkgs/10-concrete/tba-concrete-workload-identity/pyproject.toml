@@ -1,6 +1,7 @@
 [project]
 name = "tba-concrete-workload-identity"
 version = "0.4.0.dev2"
+readme = "README.md"
 description = "Standalone concrete workload identity model."
 requires-python = ">=3.10,<3.16"
 classifiers = [

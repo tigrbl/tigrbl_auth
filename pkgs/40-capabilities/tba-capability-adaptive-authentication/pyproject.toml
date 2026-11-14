@@ -1,6 +1,7 @@
 [project]
 name = "tba-capability-adaptive-authentication"
 version = "0.4.0.dev2"
+readme = "README.md"
 description = "Adaptive-authentication decision capability."
 requires-python = ">=3.10,<3.16"
 classifiers = [

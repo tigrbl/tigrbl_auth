@@ -1,6 +1,7 @@
 [project]
 name = "tba-capability-realm-administration"
 version = "0.4.0.dev2"
+readme = "README.md"
 description = "Realm administration capability over injected durable operations."
 requires-python = ">=3.10,<3.16"
 classifiers = [
