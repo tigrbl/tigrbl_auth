@@ -47,3 +47,16 @@ def validate_catalog(factors, scenarios, exclusions):
     for rule in exclusions.get("trace_exclusions", []):
         if not rule["variants"] or not set(rule["variants"]) <= families.get(rule["scenario_id"], set()):
             raise ValueError(f"Unknown variant in {rule['id']}")
+
+
+def validate_fixture_manifest(manifest, families, profiles):
+    covered = set()
+    for section in ("local", "peer"):
+        for name, binding in manifest[section].items():
+            if (binding["profile"] not in profiles or not binding["observations"]
+                    or not set(binding["families"]) <= families):
+                raise ValueError(f"Invalid fixture binding {name}")
+            covered.update(binding["families"])
+    unbound = set(manifest["unbound"]["families"])
+    if covered & unbound or covered | unbound != families:
+        raise ValueError("Fixture manifest must account for every family")

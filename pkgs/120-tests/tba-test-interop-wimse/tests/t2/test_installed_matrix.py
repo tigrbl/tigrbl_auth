@@ -14,7 +14,9 @@ def test_installed_wheel_catalog_and_matrix(tmp_path):
     if not location:
         pytest.skip("TBA_WIMSE_INTEROP_WHEEL must point to a built wheel")
     with zipfile.ZipFile(Path(location)) as wheel:
-        assert sum(name.endswith(".toml") for name in wheel.namelist()) == 4
+        assert sum(name.endswith(".toml") for name in wheel.namelist()) == 5
+        scripts = next(name for name in wheel.namelist() if name.endswith("/entry_points.txt"))
+        assert b"tba-wimse-wpt-fixture = tba_test_interop_wimse.wpt_cli:main" in wheel.read(scripts)
         # Load the distribution exactly as shipped, with no source package on sys.path.
         wheel.extractall(tmp_path)
     command = [sys.executable, "-I", "-c",

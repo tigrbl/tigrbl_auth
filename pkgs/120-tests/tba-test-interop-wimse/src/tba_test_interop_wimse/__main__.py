@@ -11,6 +11,8 @@ except ModuleNotFoundError:  # Python 3.10
     import tomli as tomllib
 
 from .matrix import generate_matrix
+from .coverage import inventory_report
+from pathlib import Path
 
 
 def matches(expression, assignment):
@@ -124,7 +126,15 @@ def main():
     parser = argparse.ArgumentParser(description="Generate WIMSE interop coverage")
     parser.add_argument("--json", action="store_true", help="export scenario and execution rows")
     parser.add_argument("--legacy-count", action="store_true", help="count the flat factor model")
+    parser.add_argument("--coverage", action="store_true", help="export coverage and attempt status by ID")
+    parser.add_argument("--attempts", type=Path, help="JSON array of peer execution attempts")
     options = parser.parse_args()
+    if options.attempts and not options.coverage:
+        parser.error("--attempts requires --coverage")
+    if options.coverage:
+        attempts = json.loads(options.attempts.read_text(encoding="utf-8")) if options.attempts else []
+        print(json.dumps(inventory_report(generate_matrix(), attempts), ensure_ascii=True))
+        return
     if not options.legacy_count:
         matrix = generate_matrix()
         if options.json:

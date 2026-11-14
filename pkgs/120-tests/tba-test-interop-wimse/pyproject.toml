@@ -7,8 +7,26 @@ requires-python = ">=3.10,<3.16"
 license = "Apache-2.0"
 dependencies = ["tomli>=2; python_version < '3.11'"]
 
+[project.optional-dependencies]
+wic = [
+    "cryptography>=45",
+    "tba-concrete-certificate-x509==0.4.0.dev2",
+    "tba-contracts-security-trust==0.1.0",
+    "tba-profile-workload-authentication-wimse-mtls==0.4.0.dev2",
+    "tba-provider-certificate-status==0.4.0.dev2",
+]
+
+wpt = [
+    "cryptography>=45",
+    "tba-profile-workload-proof-wimse-wpt==0.4.0.dev2",
+    "tba-provider-jose-cryptography==0.4.0.dev2",
+    "tba-provider-replay-memory==0.4.0.dev2",
+]
+
 [project.scripts]
 tba-test-interop-wimse = "tba_test_interop_wimse.__main__:main"
+tba-wimse-wic-fixture = "tba_test_interop_wimse.wic_cli:main"
+tba-wimse-wpt-fixture = "tba_test_interop_wimse.wpt_cli:main"
 
 [build-system]
 requires = ["setuptools>=77"]
@@ -18,4 +36,4 @@ build-backend = "setuptools.build_meta"
 where = ["src"]
 
 [tool.setuptools.package-data]
-tba_test_interop_wimse = ["factors.toml", "exclusions.toml", "scenarios.toml", "peers.toml"]
+tba_test_interop_wimse = ["factors.toml", "exclusions.toml", "scenarios.toml", "peers.toml", "fixtures.toml"]

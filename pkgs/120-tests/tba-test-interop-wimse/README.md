@@ -37,6 +37,108 @@ The 3,148 structural keys are exhaustive for the options declared by the current
 
 ## Candidate peer runs
 
+### Run either side of the WIC/mTLS fixture
+
+Install the package with the `wic` extra using the selected TbA wheels. For
+example, with a fixture wheelhouse use
+`pip install --no-index --find-links ./wheelhouse "tba-test-interop-wimse[wic]==0.4.0.dev2"`.
+The Python API exposes `WicCaller`, `WicReceiver`, and `WorkloadVerifier` from
+`tba_test_interop_wimse.wic`. `WorkloadVerifier` accepts a certificate status
+provider. `WicReceiver` accepts a resource implementing `commit(identity)`
+and `snapshot()` and defaults to an in-memory ledger.
+
+Give each role a JSON configuration with its own leaf and key, the TLS trust
+anchor, its expected peer URI, and explicitly approved peer leaf certificates.
+The fixture currently accepts direct issuance by the configured domain anchor.
+Example caller configuration:
+
+```json
+{
+  "tls": {
+    "certificate": "caller.pem",
+    "private_key": "caller.key",
+    "trust_anchor": "test-ca.pem"
+  },
+  "expected_peer": "wimse://example.org/receiver",
+  "domain_anchors": {"example.org": "test-ca.pem"},
+  "good_certificates": ["receiver.pem"],
+  "host": "127.0.0.1",
+  "port": 8443,
+  "dns_name": "receiver.example.org"
+}
+```
+
+For the receiver configuration, supply its leaf and key, the expected caller
+URI, and the caller certificate under `good_certificates`. Match the server
+leaf's DNS SAN to the caller's `dns_name`. Run:
+
+```sh
+tba-wimse-wic-fixture receive receiver.json
+tba-wimse-wic-fixture call caller.json
+tba-wimse-wic-fixture readback caller.json
+```
+
+The receiver listens on loopback and prints its port as JSON. Use `"port": 0`
+to allocate one automatically. A partner caller can use its own mTLS client to
+send `POST /writes` and `GET /effects`. A partner receiver can implement those
+same endpoints for the TbA caller. An allowed write returns HTTP 201 and the
+authenticated workload URI. Readback returns HTTP 200 and the committed
+identities. A workload identity refusal after a TLS handshake returns HTTP 403
+from the receiver, or a `server-identity` denial from the TbA caller. If a
+partner receiver provides a different contract, use its own resource readback.
+
+### Run either side of the WIT/WPT fixture
+
+Install `tba-test-interop-wimse[wpt]` from the selected wheelhouse. Import
+`WptCaller` or `WptReceiver` from `tba_test_interop_wimse.wpt`, or use
+`tba-wimse-wpt-fixture receive receiver.json`, `call caller.json`, and
+`readback caller.json`. The receiver binds loopback. Both roles share the
+WIC fixture's protected write and readback routes. HTTPS authenticates the
+server by its DNS name. TbA authenticates the caller using WIT/WPT.
+
+Receiver JSON takes `certificate`, `private_key`, `dns_name`, optional
+`port` (zero selects a port), and `trust_by_domain` (a map from trust domain
+to trusted issuer JWKs). Caller JSON takes `host` (defaults to loopback),
+`port`, `dns_name`, `trust_anchor`, `wit_file`, and `private_key` (the PEM
+proof key bound to the WIT). TLS file paths and key files are supplied by the
+operator. The receiver checks the audience against its configured DNS name,
+listening port, and the requested fixture route.
+
+The local T3 suite uses TbA for both endpoints with separate TLS, issuer,
+and proof keys. The eight baseline WIT/WPT rows cover valid presentation,
+trust-domain and issuer rejection, proof validation, and replay. The replay
+case checks that the first write commits and the duplicate adds no effect.
+The native WIC suite remains on the same local track.
+
+### Run the candidate inventory
+
+Run `tba-test-interop-wimse --coverage` for a JSON inventory of every
+structural scenario and peer execution ID. Add `--attempts attempts.json`
+to reconcile peer results. The file is a JSON array with an `execution_id`,
+positive integer `attempt`, and `status` per entry. Component tests are
+evidence for the behavior they exercise and do not populate this file as
+complete execution attempts.
+
+The first component slices are opt-in:
+
+- Set `TBA_WIMSEY_CHECKOUT` to a checkout of
+  `56b070582f3e380c5006630698fb4ca808c08b04` built with
+  `cargo build --locked -p wimsey-cli`. Run
+  `tests/peer/test_wimsey_wic_component.py` with the
+  WIC dependencies and Layer 120 certificate fixture available. This pairs
+  the wimsey WIC verifier with TbA's verifier over the shared TLS fixture,
+  recording which engine made the decision at the checked endpoint.
+- Set `CRED_SDK_CHECKOUT` to the built revision described in the Cred
+  testkit README and make that testkit and its WIT/WPT dependencies
+  available. Run `tests/peer/test_baselines.py`. This exercises the pinned
+  Cred verifier over loopback HTTP and checks the protected read response
+  for the control, proof refusals, and duplicate presentation.
+
+These checks belong to the external interop evidence track. The fixture
+manifest identifies them as component bindings. Complete
+candidate runs still require the pinned endpoint configuration and
+directional baseline defined in the peer catalog.
+
 From the repository root, run:
 
 ```sh

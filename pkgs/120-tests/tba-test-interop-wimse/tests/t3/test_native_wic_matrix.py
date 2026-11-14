@@ -1,64 +1,17 @@
-"""Exercise native WIC checks through the TLS peer identity handoff."""
+"""Native WIC cases using the same TCP fixtures exposed to partners."""
 
 import json
+import os
+import subprocess
+import sys
+from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager
+from dataclasses import asdict
 from importlib.metadata import version
-
-from cryptography import x509
-from tba_concrete_certificate_x509 import parse_x509_certificate
-from tba_contracts_security_trust import CertificatePathValidationResult, CertificateStatus
-from tba_profile_workload_authentication_wimse_mtls import TLSPeer, verify_wimse_peer
-from tba_provider_certificate_status import SnapshotCertificateStatusProvider
-from tba_testkit_workload_credential_conformance.fixtures import _mutual_tls_peers
-
 from tba_test_interop_wimse.matrix import generate_matrix
-from tba_test_interop_wimse.observations import Observation
 from tba_test_interop_wimse.runner import run_inventory
 
-
-IDENTITY = "wimse://example.org/workload"
-
-
-class WicFixture:
-    def __init__(self, directory, case):
-        self.case = case
-        variant = case["variant"]
-        subjects = {
-            "missing-workload-uri": (),
-            "multiple-workload-uris": (IDENTITY, IDENTITY + "/other"),
-        }.get(variant)
-        self.ca, self.client, self.server = _mutual_tls_peers(
-            directory, IDENTITY, client_identifiers=subjects
-        )
-        self.effects = []
-
-    def observe(self):
-        server = self.case["checker"] == "caller"
-        der = self.server if server else self.client
-        expected = IDENTITY + "/different-server" if server else IDENTITY
-        ca = self.ca
-
-        class DirectPath:
-            def validate(self, request):
-                leaf = x509.load_der_x509_certificate(request.leaf.der)
-                leaf.verify_directly_issued_by(ca)
-                return CertificatePathValidationResult(True, request.leaf.profile)
-
-        status = SnapshotCertificateStatusProvider()
-        status.publish(der, CertificateStatus.GOOD, "test-ca")
-        try:
-            identity = verify_wimse_peer(
-                TLSPeer(parse_x509_certificate(der),
-                        server_name="service.example.org" if server else None),
-                expected_identity=expected,
-                validators_by_domain={"example.org": DirectPath()},
-                status_provider=status,
-            ).workload_identifier
-        except ValueError as error:
-            return Observation("deny", self.case["target_hop"], reason=str(error))
-        self.effects.append(identity)
-        return Observation("allow", self.case["target_hop"], effects=len(self.effects),
-                           reason=identity)
+from support.wic_fixture import DNS, IDENTITY, SERVER, WicFixture
 
 
 class NativeWicAdapter:
@@ -75,7 +28,8 @@ class NativeWicAdapter:
     def check_setup(self, case, execution):
         control = dict(case, variant="valid-peer", checker="receiver")
         with self.isolated(control, execution) as fixture:
-            assert fixture.observe().reason == IDENTITY
+            observed = fixture.observe()
+            assert observed.decision == "allow" and observed.effects == 1
 
     @contextmanager
     def isolated(self, case, execution):
@@ -90,20 +44,57 @@ def test_native_wic_setup_and_effects(tmp_path, record_property):
     adapter = NativeWicAdapter(tmp_path)
     cases = [case for case in generate_matrix()["scenarios"]
              if case["scenario_id"] in {"01", "03"} and adapter.supports(case)]
-    assert {case["variant"] for case in cases} == {
-        "valid-peer", "missing-workload-uri", "multiple-workload-uris", "wrong-server-identity",
+    reasons = {
+        "valid-peer": IDENTITY, "missing-workload-uri": "exactly one",
+        "multiple-workload-uris": "exactly one", "wrong-server-identity": "unexpected WIMSE peer identity",
     }
+    assert {case["variant"] for case in cases} == reasons.keys()
     runs = [{"id": case["id"], "scenario_id": case["id"], "status": "qualified"} for case in cases]
     actual = list(run_inventory(cases, runs, {"01": adapter, "03": adapter}))
     assert {item["status"] for item in actual} == {"passed"}, actual
-    reasons = {
-        "valid-peer": IDENTITY,
-        "missing-workload-uri": "exactly one",
-        "multiple-workload-uris": "exactly one",
-        "wrong-server-identity": "unexpected WIMSE peer identity",
-    }
     for case, item in zip(cases, actual):
         assert reasons[case["variant"]] in item["observation"]["reason"]
     record_property("installed_wimse_mtls_version",
                     version("tba-profile-workload-authentication-wimse-mtls"))
     record_property("native_results", json.dumps(actual, sort_keys=True))
+
+
+def test_partner_cli_roles(tmp_path):
+    fixture = WicFixture(tmp_path, {"variant": "valid-peer"})
+    command = [sys.executable, "-B", "-m", "tba_test_interop_wimse.wic_cli"]
+    package_root = os.path.dirname(os.path.dirname(sys.modules["tba_test_interop_wimse"].__file__))
+    env = {**os.environ, "PYTHONPATH": os.pathsep.join(
+        filter(None, (package_root, os.getenv("PYTHONPATH")))
+    )}
+
+    def config(tls, expected, good):
+        return {
+            "tls": asdict(tls), "expected_peer": expected,
+            "domain_anchors": {"example.org": tls.trust_anchor},
+            "good_certificates": [good.certificate], "dns_name": DNS,
+        }
+
+    server = tmp_path / "receiver.json"
+    client = tmp_path / "caller.json"
+    server.write_text(json.dumps(config(fixture.server_tls, IDENTITY, fixture.client_tls)),
+                      encoding="utf-8")
+    receiver = subprocess.Popen([*command, "receive", str(server)], env=env,
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    with ThreadPoolExecutor(max_workers=1) as executor:
+        try:
+            line = executor.submit(receiver.stdout.readline).result(timeout=10)
+            assert line, receiver.stderr.read()
+            address = json.loads(line)
+            client.write_text(json.dumps({
+                **config(fixture.client_tls, SERVER, fixture.server_tls), **address,
+            }), encoding="utf-8")
+            for role, status, payload in [
+                ("call", 201, {"decision": "allow", "identity": IDENTITY}),
+                ("readback", 200, {"decision": "allow", "writes": [IDENTITY]}),
+            ]:
+                output = subprocess.run([*command, role, str(client)], check=True, env=env,
+                                        capture_output=True, text=True, timeout=10)
+                assert json.loads(output.stdout) == {"http_status": status, "response": payload}
+        finally:
+            receiver.terminate()
+            receiver.communicate(timeout=10)
