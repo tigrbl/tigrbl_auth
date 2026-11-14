@@ -13,7 +13,7 @@ from tba_auth.cli.reports import generate_state_reports
 from tba_auth.config.deployment import resolve_deployment
 from tba_auth.runtime import build_runtime_plan, get_runner_adapter
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 
 
 async def _dummy_asgi_app(scope, receive, send):

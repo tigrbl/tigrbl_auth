@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 CLI_ROOT = ROOT / "pkgs" / "tba-cli-identity" / "src" / "tba_cli_identity"
 
 

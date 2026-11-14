@@ -21,7 +21,7 @@ def test_runner_profile_hashes_and_registry_are_complete_and_invariant() -> None
     assert all(item["flag_metadata"] for item in registry)
 
     report = build_runner_profile_report(
-        __import__("pathlib").Path(__file__).resolve().parents[2],
+        __import__("pathlib").Path(__file__).resolve().parents[5],
         deployment=deployment,
         report_mode="live-probe",
     )

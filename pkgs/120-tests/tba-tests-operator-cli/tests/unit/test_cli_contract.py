@@ -9,7 +9,7 @@ from tba_auth.cli.reports import generate_state_reports
 from tba_runtime_identity_storage.operator_store import resource_state_path, operator_state_root
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 
 
 def _nested_choices(parser, command: str) -> set[str]:

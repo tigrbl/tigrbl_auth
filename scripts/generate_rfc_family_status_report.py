@@ -6,6 +6,11 @@ from typing import Any
 
 import yaml
 
+if __package__:
+    from ._surface_checks import infer_test_category as infer_category
+else:
+    from _surface_checks import infer_test_category as infer_category
+
 ROOT = Path(__file__).resolve().parents[1]
 REPORT_DIR = ROOT / 'docs' / 'compliance'
 
@@ -29,25 +34,6 @@ CATEGORY_TO_LANE = {
 
 def load_yaml(path: Path) -> Any:
     return yaml.safe_load(path.read_text(encoding='utf-8'))
-
-
-def infer_category(rel: str) -> str | None:
-    rel = rel.replace('\\', '/')
-    prefixes = {
-        'tests/unit/': 'unit',
-        'tests/integration/': 'integration',
-        'tests/runtime/': 'integration',
-        'tests/conformance/': 'conformance',
-        'tests/interop/': 'interop',
-        'tests/security/': 'security',
-        'tests/negative/': 'negative',
-        'tests/e2e/': 'e2e',
-        'tests/perf/': 'perf',
-    }
-    for prefix, category in prefixes.items():
-        if rel.startswith(prefix):
-            return category
-    return None
 
 
 def main() -> int:

@@ -196,7 +196,7 @@ Produce a route-level copy deck containing:
 - `pkgs/105-ui/tba-ui-public/App.tsx`
 - `pkgs/105-ui/tba-ui-public/services/publicRouting.ts`
 - `pkgs/105-ui/tba-ui-public/services/publicUxPolicy.ts`
-- `tests/unit/test_public_route_contracts.py`
+- `pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py`
 - `tests/unit/test_public_operator_surface_boundary.py`
 - `tests/uix/` public UIX boundary and browser-security coverage
 - SSOT public API/UIX features, claims, tests, evidence, boundaries, and release records

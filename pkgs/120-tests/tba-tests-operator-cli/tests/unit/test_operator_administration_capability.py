@@ -14,7 +14,7 @@ from tba_cli_identity.operator_administration import (
 )
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 HANDLERS = (
     ROOT / "pkgs/60-runtime/tba-cli-identity/src/tba_cli_identity/cli/handlers"
 )

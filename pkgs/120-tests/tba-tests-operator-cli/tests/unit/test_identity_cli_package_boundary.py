@@ -9,7 +9,7 @@ except ModuleNotFoundError:  # pragma: no cover - Python < 3.11
     import tomli as tomllib
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 FACADE_SRC = ROOT / "pkgs" / "70-facade" / "tba-auth" / "src"
 CLI_SRC = ROOT / "pkgs" / "60-runtime" / "tba-cli-identity" / "src"
 OPERATOR_SRC = ROOT / "pkgs" / "60-runtime" / "tba-operator-identity" / "src"

@@ -62,7 +62,7 @@
       "passed": true,
       "summary": "Client records can be created, updated, listed, fetched, and deleted through storage-backed administration workflows.",
       "evidence": [
-        "tests/conformance/operator/test_cli_resource_lifecycle.py",
+        "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "tests/unit/test_operator_control_plane.py"
       ],
       "details": {
@@ -86,7 +86,7 @@
       "passed": true,
       "summary": "Key lifecycle workflows generate, rotate, retire, and publish JWKS artifacts.",
       "evidence": [
-        "tests/conformance/operator/test_cli_keys_lifecycle.py",
+        "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "dist/jwks/jwks.json"
       ],
       "details": {
@@ -112,7 +112,7 @@
       "passed": true,
       "summary": "Portability workflows export a versioned artifact and import it into a new storage-backed identity state root.",
       "evidence": [
-        "tests/conformance/operator/test_cli_import_export.py",
+        "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py",
         "dist/feature-completeness-sandbox-5qt_79i_/exports/portable-export.json"
       ],
       "details": {
@@ -176,8 +176,8 @@
       "summary": "The runtime boundary declares all supported runners, but this checkpoint still requires supported-matrix readiness evidence for a full pass.",
       "evidence": [
         "docs/compliance/runtime_profile_report.md",
-        "tests/runtime/test_runner_invariance.py",
-        "tests/conformance/operator/test_cli_serve_runtime.py"
+        "pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py",
+        "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py"
       ],
       "details": {
         "registered_runners": [

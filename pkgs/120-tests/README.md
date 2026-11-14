@@ -18,6 +18,9 @@ the migrated suites and the remaining root tests.
 | `tba-tests-platform-iam` | IAM contracts, conformance, policy decisions, RP sessions, performance, and UI wiring |
 | `tba-tests-administration` | Admin authentication, identity and tenant operations, and account self service |
 | `tba-tests-admin-uix` | Admin shell, access controls, resource views, and safe mutations |
+| `tba-tests-runtime` | Server runners, runtime settings, and capability composition |
+| `tba-tests-operator-cli` | CLI contracts, operator commands, and lifecycle conformance |
+| `tba-tests-api-contracts` | OpenAPI, OpenRPC, route schemas, and router ownership |
 | `tba-tests-jose` | JOSE/JWT and related signing, encryption, and key handling |
 | `tba-tests-wire-codecs` | JSON canonicalization, multibase, CID, and DAG-CBOR |
 | `tba-tests-did` | DID Core documents, resolution, dereferencing, and controller behavior |

@@ -7,7 +7,7 @@ modules:
 - tba_auth/cli/project_tree.py
 - tba_auth/services/persistence.py
 tests:
-- tests/conformance/operator/test_cli_bootstrap_migrate.py
+- pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
 contracts:
 - contracts\cli_contract.json
 - contracts\CLI_SURFACE.md

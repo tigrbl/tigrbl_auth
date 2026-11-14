@@ -10,7 +10,7 @@ import pytest
 from tba_auth.cli.main import main
 
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[6]
 
 
 def _invoke_json(argv: list[str]) -> tuple[int, dict[str, object] | None]:

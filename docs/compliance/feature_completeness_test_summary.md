@@ -2,20 +2,20 @@
 
 ## Targeted validation suite
 
-- tests/conformance/operator/test_cli_resource_lifecycle.py
-- tests/conformance/operator/test_cli_keys_lifecycle.py
-- tests/conformance/operator/test_cli_import_export.py
-- tests/conformance/operator/test_cli_bootstrap_migrate.py
-- tests/conformance/operator/test_cli_serve_runtime.py
-- tests/conformance/operator/test_cli_release_lifecycle.py
+- pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
+- pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
+- pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
+- pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
+- pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
+- pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_release_lifecycle.py
 - tests/security/test_release_bundle_signing.py
 - tests/e2e/test_release_gate_catalog.py
 - tests/unit/test_operator_service_layer.py
 - tests/unit/test_operator_control_plane.py
-- tests/runtime/test_runner_invariance.py
-- tests/unit/test_cli_contract.py
-- tests/unit/test_cli_surface_checkpoint.py
-- tests/unit/test_contract_generation_live.py
+- pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+- pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
+- pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
+- pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
 - tests/unit/test_feature_completeness_checkpoint.py
 
 ## Result

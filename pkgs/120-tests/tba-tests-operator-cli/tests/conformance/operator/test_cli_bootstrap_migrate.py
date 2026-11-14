@@ -21,7 +21,7 @@ def _invoke_json(argv: list[str]) -> tuple[int, dict[str, object] | None]:
 
 @pytest.mark.conformance
 def test_cli_bootstrap_and_migrate_lifecycle_commands_round_trip(tmp_path: Path) -> None:
-    repo_root = Path(__file__).resolve().parents[3]
+    repo_root = Path(__file__).resolve().parents[6]
 
     rc, payload = _invoke_json(["bootstrap", "status", "--repo-root", str(repo_root), "--format", "json"])
     assert rc == 0

@@ -8,7 +8,7 @@ modules:
 - tba_auth/services/key_management.py
 - tba_auth/services/operator_service.py
 tests:
-- tests/conformance/operator/test_cli_keys_lifecycle.py
+- pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
 contracts:
 - contracts\cli_contract.json

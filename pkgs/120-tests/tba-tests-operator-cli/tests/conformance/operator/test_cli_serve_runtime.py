@@ -24,7 +24,7 @@ def test_cli_serve_dry_run_emits_runtime_plan_for_each_runner(tmp_path: Path, ru
     rc, payload = _invoke_json([
         "serve",
         "--repo-root",
-        str(Path(__file__).resolve().parents[3]),
+        str(Path(__file__).resolve().parents[6]),
         "--server",
         runner,
         "--format",
@@ -45,7 +45,7 @@ def test_cli_serve_check_reports_runner_readiness_in_current_environment() -> No
     rc, payload = _invoke_json([
         "serve",
         "--repo-root",
-        str(Path(__file__).resolve().parents[3]),
+        str(Path(__file__).resolve().parents[6]),
         "--server",
         "uvicorn",
         "--format",

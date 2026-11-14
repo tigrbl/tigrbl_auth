@@ -18,7 +18,7 @@ from tba_auth.config.profile_loader import (
 )
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 
 
 def test_packaged_runtime_profiles_load_and_validate() -> None:

@@ -16,7 +16,7 @@ targets:
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc7662.py
-  - tests/unit/test_public_route_contracts.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
   endpoint_mapping:
     current:
     - /introspect

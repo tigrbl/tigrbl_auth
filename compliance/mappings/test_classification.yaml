@@ -171,8 +171,8 @@ categories:
   - tests/unit/test_claim_object_taxonomy.py
   - tests/unit/test_claim_registry_alignment.py
   - tests/unit/test_clean_room_install_substrate.py
-  - tests/unit/test_cli_contract.py
-  - tests/unit/test_cli_surface_checkpoint.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
   - tests/unit/test_client_identity_runtime_boundary.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_client_registration_capability.py
   - tests/unit/test_collect_validated_artifact_downloads.py
@@ -183,7 +183,7 @@ categories:
   - tests/unit/test_concrete_package_taxonomy.py
   - tests/unit/test_contract_durable_storage_tables.py
   - tests/unit/test_contract_enum_ownership.py
-  - tests/unit/test_contract_generation_live.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
   - tests/unit/test_contract_ownership_authority.py
   - tests/unit/test_contract_package_taxonomy.py
   - tests/unit/test_contract_payloads_deferred_upstream.py
@@ -245,8 +245,8 @@ categories:
   - tests/unit/test_identity_artifact_confusion_vectors.py
   - tests/unit/test_identity_artifact_runtime_composition.py
   - tests/unit/test_identity_author_release_signing_boundary.py
-  - tests/unit/test_identity_cli_file_size_guard.py
-  - tests/unit/test_identity_cli_package_boundary.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_identity_cli_file_size_guard.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_identity_cli_package_boundary.py
   - tests/unit/test_identity_concrete_layer_boundary.py
   - tests/unit/test_identity_contracts_rest_only_boundary.py
   - tests/unit/test_identity_contracts_unified_plane_access.py
@@ -254,7 +254,7 @@ categories:
   - tests/unit/test_identity_package_file_size_guard.py
   - tests/unit/test_identity_package_split_imports.py
   - tests/unit/test_identity_primitives_contracts_boundary.py
-  - tests/unit/test_identity_server_named_routers.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_identity_server_named_routers.py
   - tests/unit/test_identity_topology_matrix.py
   - tests/unit/test_identity_topology_validation.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_introspection_surface_ownership.py
@@ -305,13 +305,13 @@ categories:
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_standalone_claim_packages.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_userinfo_http_binding.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_userinfo_protocol_owner.py
-  - tests/unit/test_openapi_contract_validity.py
-  - tests/unit/test_openapi_examples.py
-  - tests/unit/test_openapi_well_known_endpoints.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_openapi_contract_validity.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_openapi_examples.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_openapi_well_known_endpoints.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_openid_configuration.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_openid_userinfo_endpoint.py
-  - tests/unit/test_openrpc_contract_validity.py
-  - tests/unit/test_operator_administration_capability.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_openrpc_contract_validity.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_administration_capability.py
   - tests/unit/test_operator_control_plane.py
   - tests/unit/test_operator_service_layer.py
   - tests/unit/test_operator_store_table_owned_boundary.py
@@ -346,7 +346,7 @@ categories:
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_provider_white_label_login_boundary.py
   - tests/unit/test_provisioning_governance_ecosystem_boundary.py
   - tests/unit/test_public_operator_surface_boundary.py
-  - tests/unit/test_public_route_contracts.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
   - tests/unit/test_published_dependency_model.py
   - tests/unit/test_pushed_authorization_capability.py
   - tests/unit/test_pushed_authorization_runtime_composition.py
@@ -410,14 +410,14 @@ categories:
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py
   - tests/unit/test_router_backend_app_layers.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_rp_consumer_boundary.py
-  - tests/unit/test_rpc_registry_live.py
-  - tests/unit/test_runner_adapter_runtime_layer.py
-  - tests/unit/test_runtime_capability_assembly.py
-  - tests/unit/test_runtime_cfg.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/unit/test_runtime_lifecycle_capability_assembly.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_rpc_registry_live.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_capability_assembly.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_lifecycle_capability_assembly.py
   - tests/unit/test_runtime_metadata_layer_ownership.py
-  - tests/unit/test_runtime_profile_configuration.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_profile_configuration.py
   - tests/unit/test_runtime_standards_manifest.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_runtime_token_capability_service.py
   - tests/unit/test_runtime_validation_matrix.py
@@ -428,9 +428,9 @@ categories:
   - pkgs/120-tests/tba-tests-storage/tests/unit/test_security_event_migration_0029.py
   - tests/unit/test_security_trust_contract_boundary.py
   - tests/unit/test_security_user_lookup.py
-  - tests/unit/test_server_router_schema_ownership.py
-  - tests/unit/test_server_runtime_capability_assembly.py
-  - tests/unit/test_server_runtime_operator_boundary.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_server_router_schema_ownership.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_server_runtime_capability_assembly.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_server_runtime_operator_boundary.py
   - pkgs/120-tests/tba-tests-browser-session/tests/unit/test_session_consent_logout_runtime_boundary.py
   - pkgs/120-tests/tba-tests-browser-session/tests/unit/test_session_login_http_binding.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
@@ -508,7 +508,7 @@ categories:
   - pkgs/120-tests/tba-tests-webauthn/tests/unit/test_webauthn_foundation_delivery.py
   - pkgs/120-tests/tba-tests-storage/tests/unit/test_webauthn_migration_0035.py
   - pkgs/120-tests/tba-tests-webauthn/tests/unit/test_webauthn_protocol_delivery.py
-  - tests/unit/test_well_known_endpoints_behavior.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_well_known_endpoints_behavior.py
   - pkgs/120-tests/tba-tests-storage/tests/test_workload_artifact_durability.py
   - pkgs/120-tests/tba-tests-storage/tests/test_workload_artifact_migration_0036.py
   - pkgs/120-tests/tba-tests-wimse/tests/test_workload_proof_claims.py
@@ -525,7 +525,7 @@ categories:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - tests/integration/test_crud_api.py
-  - tests/integration/test_default_openapi_endpoints.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_default_openapi_endpoints.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
   - tests/integration/test_full_workflow.py
   - pkgs/120-tests/tba-tests-browser-session/tests/integration/test_login_session_authorize.py
@@ -540,15 +540,15 @@ categories:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc9126_par_runtime_surface.py
-  - tests/integration/test_runtime_issuer_alignment.py
+  - pkgs/120-tests/tba-tests-runtime/tests/integration/test_runtime_issuer_alignment.py
   - tests/integration/test_service_key_creation.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_service_key_introspection_flow.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_sqlite_attachment_admin_directory.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py
-  - tests/runtime/test_runner_hypercorn.py
-  - tests/runtime/test_runner_invariance.py
-  - tests/runtime/test_runner_tigrcorn.py
-  - tests/runtime/test_runner_uvicorn.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_hypercorn.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_tigrcorn.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_uvicorn.py
   conformance:
   - pkgs/120-tests/tba-tests-platform-iam/tests/conformance/test_platform_iam_conformance.py
   - pkgs/120-tests/tba-tests-wire-codecs/tests/conformance/backlog/test_rfc8785_jcs.py
@@ -577,12 +577,12 @@ categories:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9449_dpop.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py
-  - tests/conformance/operator/test_cli_bootstrap_migrate.py
-  - tests/conformance/operator/test_cli_import_export.py
-  - tests/conformance/operator/test_cli_keys_lifecycle.py
-  - tests/conformance/operator/test_cli_release_lifecycle.py
-  - tests/conformance/operator/test_cli_resource_lifecycle.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_release_lifecycle.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
   - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py

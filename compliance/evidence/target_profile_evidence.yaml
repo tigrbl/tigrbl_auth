@@ -5,10 +5,10 @@ bundles:
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/unit/test_deployment_resolver.py
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_runner_adapter_runtime_layer.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/runtime/test_runner_invariance.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
   evidence_refs:
   - compliance/evidence/tier3/asgi-application/
 - profile: baseline
@@ -16,32 +16,32 @@ bundles:
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
   - tests/e2e/test_release_gate_catalog.py
-  - tests/unit/test_cli_contract.py
-  - tests/conformance/operator/test_cli_bootstrap_migrate.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
   evidence_refs:
   - compliance/evidence/tier3/bootstrap-migration/
 - profile: baseline
   target: CLI operator surface
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_cli_surface_checkpoint.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/unit/test_cli_contract.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - tests/unit/test_operator_service_layer.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
-  - tests/conformance/operator/test_cli_resource_lifecycle.py
-  - tests/conformance/operator/test_cli_keys_lifecycle.py
-  - tests/conformance/operator/test_cli_import_export.py
-  - tests/conformance/operator/test_cli_bootstrap_migrate.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
   evidence_refs:
   - compliance/evidence/tier3/cli-operator-surface/
 - profile: baseline
   target: Import/export portability
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_cli_contract.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - tests/unit/test_operator_service_layer.py
-  - tests/conformance/operator/test_cli_import_export.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
   evidence_refs:
   - compliance/evidence/tier3/import-export-portability/
 - profile: baseline
@@ -49,10 +49,10 @@ bundles:
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
-  - tests/unit/test_rpc_registry_live.py
-  - tests/unit/test_cli_contract.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_rpc_registry_live.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - tests/unit/test_operator_service_layer.py
-  - tests/conformance/operator/test_cli_keys_lifecycle.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
   evidence_refs:
   - compliance/evidence/tier3/key-lifecycle-jwks/
 - profile: baseline
@@ -95,7 +95,7 @@ bundles:
   tests:
   - tests/e2e/test_release_gate_catalog.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/unit/test_contract_generation_live.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
   evidence_refs:
   - compliance/evidence/tier3/contracts/openapi/
 - profile: baseline
@@ -197,7 +197,7 @@ bundles:
   tests:
   - tests/conformance/production/test_rfc8615_well_known_uris.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/unit/test_well_known_endpoints_behavior.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_well_known_endpoints_behavior.py
   evidence_refs:
   - compliance/evidence/tier3/well-known/
 - profile: baseline
@@ -213,36 +213,36 @@ bundles:
   target: 'Runner profile: Hypercorn'
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_runner_adapter_runtime_layer.py
-  - tests/unit/test_runtime_cfg.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/runtime/test_runner_hypercorn.py
-  - tests/runtime/test_runner_invariance.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_hypercorn.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
   evidence_refs:
   - compliance/evidence/tier3/runner-hypercorn/
 - profile: baseline
   target: 'Runner profile: Tigrcorn'
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_runner_adapter_runtime_layer.py
-  - tests/unit/test_runtime_cfg.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/runtime/test_runner_tigrcorn.py
-  - tests/runtime/test_runner_invariance.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_tigrcorn.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
   evidence_refs:
   - compliance/evidence/tier3/runner-tigrcorn/
 - profile: baseline
   target: 'Runner profile: Uvicorn'
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_runner_adapter_runtime_layer.py
-  - tests/unit/test_runtime_cfg.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/runtime/test_runner_uvicorn.py
-  - tests/runtime/test_runner_invariance.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_uvicorn.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
   evidence_refs:
   - compliance/evidence/tier3/runner-uvicorn/
 - profile: production
@@ -251,10 +251,10 @@ bundles:
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/unit/test_deployment_resolver.py
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_runner_adapter_runtime_layer.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/runtime/test_runner_invariance.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
   evidence_refs:
   - compliance/evidence/tier3/asgi-application/
 - profile: production
@@ -262,32 +262,32 @@ bundles:
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
   - tests/e2e/test_release_gate_catalog.py
-  - tests/unit/test_cli_contract.py
-  - tests/conformance/operator/test_cli_bootstrap_migrate.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
   evidence_refs:
   - compliance/evidence/tier3/bootstrap-migration/
 - profile: production
   target: CLI operator surface
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_cli_surface_checkpoint.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/unit/test_cli_contract.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - tests/unit/test_operator_service_layer.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
-  - tests/conformance/operator/test_cli_resource_lifecycle.py
-  - tests/conformance/operator/test_cli_keys_lifecycle.py
-  - tests/conformance/operator/test_cli_import_export.py
-  - tests/conformance/operator/test_cli_bootstrap_migrate.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
   evidence_refs:
   - compliance/evidence/tier3/cli-operator-surface/
 - profile: production
   target: Import/export portability
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_cli_contract.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - tests/unit/test_operator_service_layer.py
-  - tests/conformance/operator/test_cli_import_export.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
   evidence_refs:
   - compliance/evidence/tier3/import-export-portability/
 - profile: production
@@ -295,10 +295,10 @@ bundles:
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
-  - tests/unit/test_rpc_registry_live.py
-  - tests/unit/test_cli_contract.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_rpc_registry_live.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - tests/unit/test_operator_service_layer.py
-  - tests/conformance/operator/test_cli_keys_lifecycle.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
   evidence_refs:
   - compliance/evidence/tier3/key-lifecycle-jwks/
 - profile: production
@@ -359,7 +359,7 @@ bundles:
   tests:
   - tests/e2e/test_release_gate_catalog.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/unit/test_contract_generation_live.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
   evidence_refs:
   - compliance/evidence/tier3/contracts/openapi/
 - profile: production
@@ -401,7 +401,7 @@ bundles:
   - tests/integration/test_full_workflow.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
-  - tests/unit/test_public_route_contracts.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
   evidence_refs:
   - compliance/evidence/tier3/revocation/
 - profile: production
@@ -468,7 +468,7 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7591_dynamic_client_registration.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/unit/test_public_route_contracts.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7591_client_registration_endpoint.py
   evidence_refs:
   - compliance/evidence/tier3/client-registration/
@@ -500,7 +500,7 @@ bundles:
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc7662.py
-  - tests/unit/test_public_route_contracts.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
   evidence_refs:
   - compliance/evidence/tier3/introspection/
 - profile: production
@@ -525,7 +525,7 @@ bundles:
   tests:
   - tests/conformance/production/test_rfc8615_well_known_uris.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/unit/test_well_known_endpoints_behavior.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_well_known_endpoints_behavior.py
   evidence_refs:
   - compliance/evidence/tier3/well-known/
 - profile: production
@@ -574,36 +574,36 @@ bundles:
   target: 'Runner profile: Hypercorn'
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_runner_adapter_runtime_layer.py
-  - tests/unit/test_runtime_cfg.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/runtime/test_runner_hypercorn.py
-  - tests/runtime/test_runner_invariance.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_hypercorn.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
   evidence_refs:
   - compliance/evidence/tier3/runner-hypercorn/
 - profile: production
   target: 'Runner profile: Tigrcorn'
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_runner_adapter_runtime_layer.py
-  - tests/unit/test_runtime_cfg.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/runtime/test_runner_tigrcorn.py
-  - tests/runtime/test_runner_invariance.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_tigrcorn.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
   evidence_refs:
   - compliance/evidence/tier3/runner-tigrcorn/
 - profile: production
   target: 'Runner profile: Uvicorn'
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_runner_adapter_runtime_layer.py
-  - tests/unit/test_runtime_cfg.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/runtime/test_runner_uvicorn.py
-  - tests/runtime/test_runner_invariance.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_uvicorn.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
   evidence_refs:
   - compliance/evidence/tier3/runner-uvicorn/
 - profile: hardening
@@ -612,10 +612,10 @@ bundles:
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/unit/test_deployment_resolver.py
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_runner_adapter_runtime_layer.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/runtime/test_runner_invariance.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
   evidence_refs:
   - compliance/evidence/tier3/asgi-application/
 - profile: hardening
@@ -623,32 +623,32 @@ bundles:
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
   - tests/e2e/test_release_gate_catalog.py
-  - tests/unit/test_cli_contract.py
-  - tests/conformance/operator/test_cli_bootstrap_migrate.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
   evidence_refs:
   - compliance/evidence/tier3/bootstrap-migration/
 - profile: hardening
   target: CLI operator surface
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_cli_surface_checkpoint.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/unit/test_cli_contract.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - tests/unit/test_operator_service_layer.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
-  - tests/conformance/operator/test_cli_resource_lifecycle.py
-  - tests/conformance/operator/test_cli_keys_lifecycle.py
-  - tests/conformance/operator/test_cli_import_export.py
-  - tests/conformance/operator/test_cli_bootstrap_migrate.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
   evidence_refs:
   - compliance/evidence/tier3/cli-operator-surface/
 - profile: hardening
   target: Import/export portability
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_cli_contract.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - tests/unit/test_operator_service_layer.py
-  - tests/conformance/operator/test_cli_import_export.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
   evidence_refs:
   - compliance/evidence/tier3/import-export-portability/
 - profile: hardening
@@ -656,10 +656,10 @@ bundles:
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
-  - tests/unit/test_rpc_registry_live.py
-  - tests/unit/test_cli_contract.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_rpc_registry_live.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - tests/unit/test_operator_service_layer.py
-  - tests/conformance/operator/test_cli_keys_lifecycle.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
   evidence_refs:
   - compliance/evidence/tier3/key-lifecycle-jwks/
 - profile: hardening
@@ -738,7 +738,7 @@ bundles:
   tests:
   - tests/e2e/test_release_gate_catalog.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/unit/test_contract_generation_live.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
   evidence_refs:
   - compliance/evidence/tier3/contracts/openapi/
 - profile: hardening
@@ -780,7 +780,7 @@ bundles:
   - tests/integration/test_full_workflow.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
-  - tests/unit/test_public_route_contracts.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
   evidence_refs:
   - compliance/evidence/tier3/revocation/
 - profile: hardening
@@ -847,7 +847,7 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7591_dynamic_client_registration.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/unit/test_public_route_contracts.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7591_client_registration_endpoint.py
   evidence_refs:
   - compliance/evidence/tier3/client-registration/
@@ -879,7 +879,7 @@ bundles:
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc7662.py
-  - tests/unit/test_public_route_contracts.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
   evidence_refs:
   - compliance/evidence/tier3/introspection/
 - profile: hardening
@@ -904,7 +904,7 @@ bundles:
   tests:
   - tests/conformance/production/test_rfc8615_well_known_uris.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/unit/test_well_known_endpoints_behavior.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_well_known_endpoints_behavior.py
   evidence_refs:
   - compliance/evidence/tier3/well-known/
 - profile: hardening
@@ -915,7 +915,7 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py
-  - tests/unit/test_public_route_contracts.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
   - tests/interop/test_peer_counterpart_catalog.py
   - tests/interop/test_peer_matrix_artifacts.py
   - tests/interop/test_tier4_promotion_fail_closed.py
@@ -929,7 +929,7 @@ bundles:
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py
-  - tests/unit/test_public_route_contracts.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
   - tests/interop/test_peer_counterpart_catalog.py
   - tests/interop/test_peer_matrix_artifacts.py
   - tests/interop/test_tier4_promotion_fail_closed.py
@@ -972,7 +972,7 @@ bundles:
   tests:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9126_par.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/unit/test_public_route_contracts.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
   - tests/interop/test_peer_counterpart_catalog.py
   - tests/interop/test_peer_matrix_artifacts.py
   - tests/interop/test_tier4_promotion_fail_closed.py
@@ -1049,36 +1049,36 @@ bundles:
   target: 'Runner profile: Hypercorn'
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_runner_adapter_runtime_layer.py
-  - tests/unit/test_runtime_cfg.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/runtime/test_runner_hypercorn.py
-  - tests/runtime/test_runner_invariance.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_hypercorn.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
   evidence_refs:
   - compliance/evidence/tier3/runner-hypercorn/
 - profile: hardening
   target: 'Runner profile: Tigrcorn'
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_runner_adapter_runtime_layer.py
-  - tests/unit/test_runtime_cfg.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/runtime/test_runner_tigrcorn.py
-  - tests/runtime/test_runner_invariance.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_tigrcorn.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
   evidence_refs:
   - compliance/evidence/tier3/runner-tigrcorn/
 - profile: hardening
   target: 'Runner profile: Uvicorn'
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_runner_adapter_runtime_layer.py
-  - tests/unit/test_runtime_cfg.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/runtime/test_runner_uvicorn.py
-  - tests/runtime/test_runner_invariance.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_uvicorn.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
   evidence_refs:
   - compliance/evidence/tier3/runner-uvicorn/
 - profile: fapi2-security
@@ -1087,10 +1087,10 @@ bundles:
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/unit/test_deployment_resolver.py
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_runner_adapter_runtime_layer.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/runtime/test_runner_invariance.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
   evidence_refs:
   - compliance/evidence/tier3/asgi-application/
 - profile: fapi2-security
@@ -1098,32 +1098,32 @@ bundles:
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
   - tests/e2e/test_release_gate_catalog.py
-  - tests/unit/test_cli_contract.py
-  - tests/conformance/operator/test_cli_bootstrap_migrate.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
   evidence_refs:
   - compliance/evidence/tier3/bootstrap-migration/
 - profile: fapi2-security
   target: CLI operator surface
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_cli_surface_checkpoint.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/unit/test_cli_contract.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - tests/unit/test_operator_service_layer.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
-  - tests/conformance/operator/test_cli_resource_lifecycle.py
-  - tests/conformance/operator/test_cli_keys_lifecycle.py
-  - tests/conformance/operator/test_cli_import_export.py
-  - tests/conformance/operator/test_cli_bootstrap_migrate.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
   evidence_refs:
   - compliance/evidence/tier3/cli-operator-surface/
 - profile: fapi2-security
   target: Import/export portability
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_cli_contract.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - tests/unit/test_operator_service_layer.py
-  - tests/conformance/operator/test_cli_import_export.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
   evidence_refs:
   - compliance/evidence/tier3/import-export-portability/
 - profile: fapi2-security
@@ -1131,10 +1131,10 @@ bundles:
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
-  - tests/unit/test_rpc_registry_live.py
-  - tests/unit/test_cli_contract.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_rpc_registry_live.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - tests/unit/test_operator_service_layer.py
-  - tests/conformance/operator/test_cli_keys_lifecycle.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
   evidence_refs:
   - compliance/evidence/tier3/key-lifecycle-jwks/
 - profile: fapi2-security
@@ -1213,7 +1213,7 @@ bundles:
   tests:
   - tests/e2e/test_release_gate_catalog.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/unit/test_contract_generation_live.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
   evidence_refs:
   - compliance/evidence/tier3/contracts/openapi/
 - profile: fapi2-security
@@ -1255,7 +1255,7 @@ bundles:
   - tests/integration/test_full_workflow.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
-  - tests/unit/test_public_route_contracts.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
   evidence_refs:
   - compliance/evidence/tier3/revocation/
 - profile: fapi2-security
@@ -1322,7 +1322,7 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7591_dynamic_client_registration.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/unit/test_public_route_contracts.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7591_client_registration_endpoint.py
   evidence_refs:
   - compliance/evidence/tier3/client-registration/
@@ -1354,7 +1354,7 @@ bundles:
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc7662.py
-  - tests/unit/test_public_route_contracts.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
   evidence_refs:
   - compliance/evidence/tier3/introspection/
 - profile: fapi2-security
@@ -1379,7 +1379,7 @@ bundles:
   tests:
   - tests/conformance/production/test_rfc8615_well_known_uris.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/unit/test_well_known_endpoints_behavior.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_well_known_endpoints_behavior.py
   evidence_refs:
   - compliance/evidence/tier3/well-known/
 - profile: fapi2-security
@@ -1390,7 +1390,7 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py
-  - tests/unit/test_public_route_contracts.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
   - tests/interop/test_peer_counterpart_catalog.py
   - tests/interop/test_peer_matrix_artifacts.py
   - tests/interop/test_tier4_promotion_fail_closed.py
@@ -1404,7 +1404,7 @@ bundles:
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py
-  - tests/unit/test_public_route_contracts.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
   - tests/interop/test_peer_counterpart_catalog.py
   - tests/interop/test_peer_matrix_artifacts.py
   - tests/interop/test_tier4_promotion_fail_closed.py
@@ -1459,7 +1459,7 @@ bundles:
   tests:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9126_par.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/unit/test_public_route_contracts.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
   - tests/interop/test_peer_counterpart_catalog.py
   - tests/interop/test_peer_matrix_artifacts.py
   - tests/interop/test_tier4_promotion_fail_closed.py
@@ -1536,36 +1536,36 @@ bundles:
   target: 'Runner profile: Hypercorn'
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_runner_adapter_runtime_layer.py
-  - tests/unit/test_runtime_cfg.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/runtime/test_runner_hypercorn.py
-  - tests/runtime/test_runner_invariance.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_hypercorn.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
   evidence_refs:
   - compliance/evidence/tier3/runner-hypercorn/
 - profile: fapi2-security
   target: 'Runner profile: Tigrcorn'
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_runner_adapter_runtime_layer.py
-  - tests/unit/test_runtime_cfg.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/runtime/test_runner_tigrcorn.py
-  - tests/runtime/test_runner_invariance.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_tigrcorn.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
   evidence_refs:
   - compliance/evidence/tier3/runner-tigrcorn/
 - profile: fapi2-security
   target: 'Runner profile: Uvicorn'
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_runner_adapter_runtime_layer.py
-  - tests/unit/test_runtime_cfg.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/runtime/test_runner_uvicorn.py
-  - tests/runtime/test_runner_invariance.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_uvicorn.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
   evidence_refs:
   - compliance/evidence/tier3/runner-uvicorn/
 - profile: peer-claim
@@ -1574,10 +1574,10 @@ bundles:
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/unit/test_deployment_resolver.py
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_runner_adapter_runtime_layer.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/runtime/test_runner_invariance.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
   evidence_refs:
   - compliance/evidence/tier3/asgi-application/
 - profile: peer-claim
@@ -1585,32 +1585,32 @@ bundles:
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
   - tests/e2e/test_release_gate_catalog.py
-  - tests/unit/test_cli_contract.py
-  - tests/conformance/operator/test_cli_bootstrap_migrate.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
   evidence_refs:
   - compliance/evidence/tier3/bootstrap-migration/
 - profile: peer-claim
   target: CLI operator surface
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_cli_surface_checkpoint.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/unit/test_cli_contract.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - tests/unit/test_operator_service_layer.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
-  - tests/conformance/operator/test_cli_resource_lifecycle.py
-  - tests/conformance/operator/test_cli_keys_lifecycle.py
-  - tests/conformance/operator/test_cli_import_export.py
-  - tests/conformance/operator/test_cli_bootstrap_migrate.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
   evidence_refs:
   - compliance/evidence/tier3/cli-operator-surface/
 - profile: peer-claim
   target: Import/export portability
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_cli_contract.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - tests/unit/test_operator_service_layer.py
-  - tests/conformance/operator/test_cli_import_export.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
   evidence_refs:
   - compliance/evidence/tier3/import-export-portability/
 - profile: peer-claim
@@ -1618,10 +1618,10 @@ bundles:
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
-  - tests/unit/test_rpc_registry_live.py
-  - tests/unit/test_cli_contract.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_rpc_registry_live.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - tests/unit/test_operator_service_layer.py
-  - tests/conformance/operator/test_cli_keys_lifecycle.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
   evidence_refs:
   - compliance/evidence/tier3/key-lifecycle-jwks/
 - profile: peer-claim
@@ -1700,7 +1700,7 @@ bundles:
   tests:
   - tests/e2e/test_release_gate_catalog.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/unit/test_contract_generation_live.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
   evidence_refs:
   - compliance/evidence/tier3/contracts/openapi/
 - profile: peer-claim
@@ -1742,7 +1742,7 @@ bundles:
   - tests/integration/test_full_workflow.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
-  - tests/unit/test_public_route_contracts.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
   evidence_refs:
   - compliance/evidence/tier3/revocation/
 - profile: peer-claim
@@ -1809,7 +1809,7 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7591_dynamic_client_registration.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/unit/test_public_route_contracts.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7591_client_registration_endpoint.py
   evidence_refs:
   - compliance/evidence/tier3/client-registration/
@@ -1841,7 +1841,7 @@ bundles:
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc7662.py
-  - tests/unit/test_public_route_contracts.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
   evidence_refs:
   - compliance/evidence/tier3/introspection/
 - profile: peer-claim
@@ -1866,7 +1866,7 @@ bundles:
   tests:
   - tests/conformance/production/test_rfc8615_well_known_uris.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/unit/test_well_known_endpoints_behavior.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_well_known_endpoints_behavior.py
   evidence_refs:
   - compliance/evidence/tier3/well-known/
 - profile: peer-claim
@@ -1877,7 +1877,7 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py
-  - tests/unit/test_public_route_contracts.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
   - tests/interop/test_peer_counterpart_catalog.py
   - tests/interop/test_peer_matrix_artifacts.py
   - tests/interop/test_tier4_promotion_fail_closed.py
@@ -1891,7 +1891,7 @@ bundles:
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py
-  - tests/unit/test_public_route_contracts.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
   - tests/interop/test_peer_counterpart_catalog.py
   - tests/interop/test_peer_matrix_artifacts.py
   - tests/interop/test_tier4_promotion_fail_closed.py
@@ -1934,7 +1934,7 @@ bundles:
   tests:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9126_par.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/unit/test_public_route_contracts.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
   - tests/interop/test_peer_counterpart_catalog.py
   - tests/interop/test_peer_matrix_artifacts.py
   - tests/interop/test_tier4_promotion_fail_closed.py
@@ -2011,35 +2011,35 @@ bundles:
   target: 'Runner profile: Hypercorn'
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_runner_adapter_runtime_layer.py
-  - tests/unit/test_runtime_cfg.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/runtime/test_runner_hypercorn.py
-  - tests/runtime/test_runner_invariance.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_hypercorn.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
   evidence_refs:
   - compliance/evidence/tier3/runner-hypercorn/
 - profile: peer-claim
   target: 'Runner profile: Tigrcorn'
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_runner_adapter_runtime_layer.py
-  - tests/unit/test_runtime_cfg.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/runtime/test_runner_tigrcorn.py
-  - tests/runtime/test_runner_invariance.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_tigrcorn.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
   evidence_refs:
   - compliance/evidence/tier3/runner-tigrcorn/
 - profile: peer-claim
   target: 'Runner profile: Uvicorn'
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_runner_adapter_runtime_layer.py
-  - tests/unit/test_runtime_cfg.py
-  - tests/unit/test_runtime_launcher.py
-  - tests/runtime/test_runner_uvicorn.py
-  - tests/runtime/test_runner_invariance.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_uvicorn.py
+  - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
   evidence_refs:
   - compliance/evidence/tier3/runner-uvicorn/

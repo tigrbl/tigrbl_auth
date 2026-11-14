@@ -678,7 +678,7 @@
         "tests": [
           "tests/e2e/test_release_gate_catalog.py",
           "tests/integration/test_profile_surface_and_contract_alignment.py",
-          "tests/unit/test_contract_generation_live.py"
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py"
         ],
         "test_categories": [
           "e2e",
@@ -749,8 +749,8 @@
         ],
         "tests": [
           "tests/e2e/test_release_gate_catalog.py",
-          "tests/unit/test_contract_generation_live.py",
-          "tests/unit/test_rpc_registry_live.py"
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_rpc_registry_live.py"
         ],
         "test_categories": [
           "e2e",
@@ -829,10 +829,10 @@
           "tests/integration/test_profile_surface_and_contract_alignment.py",
           "tests/unit/test_deployment_resolver.py",
           "tests/unit/test_claim_boundary_rebaseline.py",
-          "tests/unit/test_runner_adapter_runtime_layer.py",
-          "tests/unit/test_runtime_launcher.py",
-          "tests/runtime/test_runner_invariance.py",
-          "tests/conformance/operator/test_cli_serve_runtime.py"
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py"
         ],
         "test_categories": [
           "conformance",
@@ -906,12 +906,12 @@
         ],
         "tests": [
           "tests/unit/test_claim_boundary_rebaseline.py",
-          "tests/unit/test_runner_adapter_runtime_layer.py",
-          "tests/unit/test_runtime_cfg.py",
-          "tests/unit/test_runtime_launcher.py",
-          "tests/runtime/test_runner_uvicorn.py",
-          "tests/runtime/test_runner_invariance.py",
-          "tests/conformance/operator/test_cli_serve_runtime.py"
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_uvicorn.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py"
         ],
         "test_categories": [
           "conformance",
@@ -983,12 +983,12 @@
         ],
         "tests": [
           "tests/unit/test_claim_boundary_rebaseline.py",
-          "tests/unit/test_runner_adapter_runtime_layer.py",
-          "tests/unit/test_runtime_cfg.py",
-          "tests/unit/test_runtime_launcher.py",
-          "tests/runtime/test_runner_hypercorn.py",
-          "tests/runtime/test_runner_invariance.py",
-          "tests/conformance/operator/test_cli_serve_runtime.py"
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_hypercorn.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py"
         ],
         "test_categories": [
           "conformance",
@@ -1060,12 +1060,12 @@
         ],
         "tests": [
           "tests/unit/test_claim_boundary_rebaseline.py",
-          "tests/unit/test_runner_adapter_runtime_layer.py",
-          "tests/unit/test_runtime_cfg.py",
-          "tests/unit/test_runtime_launcher.py",
-          "tests/runtime/test_runner_tigrcorn.py",
-          "tests/runtime/test_runner_invariance.py",
-          "tests/conformance/operator/test_cli_serve_runtime.py"
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_tigrcorn.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py"
         ],
         "test_categories": [
           "conformance",
@@ -1138,15 +1138,15 @@
         ],
         "tests": [
           "tests/unit/test_claim_boundary_rebaseline.py",
-          "tests/unit/test_cli_surface_checkpoint.py",
-          "tests/unit/test_runtime_launcher.py",
-          "tests/unit/test_cli_contract.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
           "tests/unit/test_operator_service_layer.py",
-          "tests/conformance/operator/test_cli_serve_runtime.py",
-          "tests/conformance/operator/test_cli_resource_lifecycle.py",
-          "tests/conformance/operator/test_cli_keys_lifecycle.py",
-          "tests/conformance/operator/test_cli_import_export.py",
-          "tests/conformance/operator/test_cli_bootstrap_migrate.py"
+          "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py"
         ],
         "test_categories": [
           "conformance",
@@ -1214,8 +1214,8 @@
         "tests": [
           "tests/unit/test_claim_boundary_rebaseline.py",
           "tests/e2e/test_release_gate_catalog.py",
-          "tests/unit/test_cli_contract.py",
-          "tests/conformance/operator/test_cli_bootstrap_migrate.py"
+          "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py"
         ],
         "test_categories": [
           "conformance",
@@ -1285,10 +1285,10 @@
         "tests": [
           "tests/unit/test_claim_boundary_rebaseline.py",
           "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py",
-          "tests/unit/test_rpc_registry_live.py",
-          "tests/unit/test_cli_contract.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_rpc_registry_live.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
           "tests/unit/test_operator_service_layer.py",
-          "tests/conformance/operator/test_cli_keys_lifecycle.py"
+          "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py"
         ],
         "test_categories": [
           "conformance",
@@ -1354,9 +1354,9 @@
         ],
         "tests": [
           "tests/unit/test_claim_boundary_rebaseline.py",
-          "tests/unit/test_cli_contract.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
           "tests/unit/test_operator_service_layer.py",
-          "tests/conformance/operator/test_cli_import_export.py"
+          "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py"
         ],
         "test_categories": [
           "conformance",

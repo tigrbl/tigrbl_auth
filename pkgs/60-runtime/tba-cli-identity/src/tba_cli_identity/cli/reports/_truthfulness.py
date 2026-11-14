@@ -83,7 +83,7 @@ def build_feature_completeness_report(repo_root: Path, *, report_dir: Path | Non
         "register/manage clients",
         passed=client_passed,
         summary="Client records can be created, updated, listed, fetched, and deleted through storage-backed administration workflows.",
-        evidence=["tests/conformance/operator/test_cli_resource_lifecycle.py", "tests/unit/test_operator_control_plane.py"],
+        evidence=["pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py", "tests/unit/test_operator_control_plane.py"],
         details_payload={"create_status": client_create.status, "update_status": client_update.status, "delete_status": client_delete.status, "client_verbs": sorted(client_verbs)},
     )
 
@@ -104,7 +104,7 @@ def build_feature_completeness_report(repo_root: Path, *, report_dir: Path | Non
             and {"generate", "import", "export", "rotate", "retire", "publish-jwks", "get", "list", "delete"} <= keys_verbs
         ),
         summary="Key lifecycle workflows generate, rotate, retire, and publish JWKS artifacts.",
-        evidence=["tests/conformance/operator/test_cli_keys_lifecycle.py", "dist/jwks/jwks.json"],
+        evidence=["pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py", "dist/jwks/jwks.json"],
         details_payload={"generate_status": key_create.status, "rotate_status": key_rotate.status, "retire_status": key_retire.status, "jwks_status": jwks.status, "keys_verbs": sorted(keys_verbs)},
     )
 
@@ -123,7 +123,7 @@ def build_feature_completeness_report(repo_root: Path, *, report_dir: Path | Non
         "export/import state",
         passed=export_result.status == "exported" and import_validation.get("valid") is True and import_result.status == "imported" and bool(imported_tenant.record),
         summary="Portability workflows export a versioned artifact and import it into a new storage-backed identity state root.",
-        evidence=["tests/conformance/operator/test_cli_import_export.py", str(export_path.relative_to(repo_root)) if export_path.exists() else ""],
+        evidence=["pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py", str(export_path.relative_to(repo_root)) if export_path.exists() else ""],
         details_payload={"export_status": export_result.status, "import_valid": import_validation.get("valid"), "import_status": import_result.status},
     )
 
@@ -190,7 +190,7 @@ def build_feature_completeness_report(repo_root: Path, *, report_dir: Path | Non
             and bool(runtime_report.get("summary", {}).get("surface_probe_passed", False))
         ),
         summary="The runtime boundary declares all supported runners, but this checkpoint still requires supported-matrix readiness evidence for a full pass.",
-        evidence=["docs/compliance/runtime_profile_report.md", "tests/runtime/test_runner_invariance.py", "tests/conformance/operator/test_cli_serve_runtime.py"],
+        evidence=["docs/compliance/runtime_profile_report.md", "pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py", "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py"],
         details_payload={"registered_runners": sorted(runner_names), "runtime_summary": runtime_report.get("summary", {})},
     )
 
