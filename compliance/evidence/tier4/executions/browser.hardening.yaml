@@ -16,12 +16,12 @@ required_targets:
 - OIDC Discovery 1.0
 - OIDC UserInfo
 required_artifacts:
-- tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py
-- tests/conformance/baseline/test_rfc7636_pkce.py
-- tests/conformance/baseline/test_openid_configuration.py
-- tests/conformance/baseline/test_openid_userinfo_endpoint.py
-- tests/unit/test_oidc_id_token_encryption.py
-- tests/conformance/hardening/test_rfc9207_issuer_identification.py
+- pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py
+- pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc7636_pkce.py
+- pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_configuration.py
+- pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py
+- pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
 required_peer_artifacts:
 - http-transcript.yaml
 - browser-trace.json

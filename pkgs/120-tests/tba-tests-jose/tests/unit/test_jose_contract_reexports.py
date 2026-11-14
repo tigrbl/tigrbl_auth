@@ -3,7 +3,7 @@ from __future__ import annotations
 import ast
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 JOSE_ROOT = ROOT / "pkgs" / "20-providers" / "tba-provider-identity-jose"
 
 ALLOWED_JOSE_DATACLASSES: set[str] = {

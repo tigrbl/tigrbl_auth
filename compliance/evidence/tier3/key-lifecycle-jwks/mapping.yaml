@@ -9,7 +9,7 @@ modules:
 - tba_auth/services/operator_service.py
 tests:
 - tests/conformance/operator/test_cli_keys_lifecycle.py
-- tests/security/test_sender_constraint_replay.py
+- pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
 contracts:
 - contracts\cli_contract.json
 - contracts\jwks.json

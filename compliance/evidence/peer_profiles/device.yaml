@@ -5,7 +5,7 @@ counterpart_id: device-client
 required_targets:
 - RFC 8628
 required_artifacts:
-- tests/conformance/hardening/test_rfc8628_device_authorization.py
+- pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8628_device_authorization.py
 - tests/negative/test_resource_exchange_abuse.py
 scenario_ids:
 - device-authorization

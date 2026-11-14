@@ -10,10 +10,10 @@ targets:
   - tba_auth/standards/oidc/core.py
   - tba_auth/standards/oidc/id_token.py
   tests:
-  - tests/conformance/baseline/test_oidc_id_token.py
-  - tests/conformance/baseline/test_openid_userinfo_endpoint.py
+  - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_oidc_id_token.py
+  - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py
   - tests/integration/test_authorization_response_types.py
-  - tests/integration/test_oidc_endpoints.py
+  - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   endpoint_mapping: {}
 profile: baseline
 reports:

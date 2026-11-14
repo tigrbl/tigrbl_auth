@@ -10,10 +10,10 @@ targets:
   - tba_auth/standards/oauth2/rfc6749.py
   - tba_auth/standards/oauth2/rfc6749_token.py
   tests:
-  - tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py
-  - tests/conformance/baseline/test_rfc6749_token_endpoint.py
-  - tests/integration/test_auth_flows.py
-  - tests/integration/test_authorization_code_flow.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_token_endpoint.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/interop/test_peer_counterpart_catalog.py
   - tests/interop/test_peer_matrix_artifacts.py

@@ -9,8 +9,8 @@ targets:
   modules:
   - tba_auth/standards/oauth2/rfc6750.py
   tests:
-  - tests/conformance/baseline/test_rfc6750_bearer_token.py
-  - tests/integration/test_auth_flows.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - tests/interop/test_peer_counterpart_catalog.py
   - tests/interop/test_peer_matrix_artifacts.py
   - tests/interop/test_tier4_promotion_fail_closed.py

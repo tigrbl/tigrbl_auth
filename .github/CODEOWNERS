@@ -18,6 +18,8 @@
 /tba_auth/release_signing.py @Tigrbl/security
 /tests/security/ @Tigrbl/security
 /tests/negative/ @Tigrbl/security
+/pkgs/120-tests/*/tests/security/ @Tigrbl/security
+/pkgs/120-tests/*/tests/negative/ @Tigrbl/security
 
 # Workflow and automation controls
 /.github/ @Tigrbl/platform-admins @Tigrbl/compliance

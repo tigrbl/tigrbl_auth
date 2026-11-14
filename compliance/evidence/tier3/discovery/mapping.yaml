@@ -10,8 +10,8 @@ targets:
   - tba_auth/standards/oauth2/rfc8414.py
   - tba_auth/standards/oauth2/rfc8414_metadata.py
   tests:
-  - tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py
-  - tests/integration/test_rfc8414_metadata.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py
   endpoint_mapping:
     current:
     - /.well-known/oauth-authorization-server
@@ -26,10 +26,10 @@ targets:
   modules:
   - tba_auth/standards/oidc/discovery.py
   tests:
-  - tests/conformance/baseline/test_openid_configuration.py
-  - tests/integration/test_oidc_endpoints.py
+  - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_configuration.py
+  - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/integration/test_rfc8414_metadata.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py
   - tests/interop/test_peer_counterpart_catalog.py
   - tests/interop/test_peer_matrix_artifacts.py
   - tests/interop/test_tier4_promotion_fail_closed.py

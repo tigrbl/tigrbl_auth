@@ -10,7 +10,7 @@ modules:
 - tba_auth/tables/client_registration.py
 tests:
 - tests/unit/test_hardening_cluster_a.py
-- tests/conformance/hardening/test_rfc7592_client_registration_management.py
+- pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc7592_client_registration_management.py
 contracts:
 - contracts/oauth-authorization-server.json
 - contracts/openid-configuration.json

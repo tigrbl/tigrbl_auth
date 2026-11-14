@@ -12,10 +12,10 @@ targets:
   - tba_auth/tables/token_record.py
   - tba_auth/tables/revoked_token.py
   tests:
-  - tests/conformance/production/test_rfc7662_introspection.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7662_introspection.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
-  - tests/integration/test_rfc7662.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc7662.py
   - tests/unit/test_public_route_contracts.py
   endpoint_mapping:
     current:

@@ -74,7 +74,7 @@ and contract publication through the OpenAPI generation pipeline.
 public-route checkpoint adds contract-visible checks for the canonical route set:
 
 - `tests/unit/test_public_route_contracts.py`
-- `tests/conformance/production/test_oidc_rp_initiated_logout.py`
+- `pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py`
 
 Expanded RFC-targeted conformance coverage is now mapped for:
 

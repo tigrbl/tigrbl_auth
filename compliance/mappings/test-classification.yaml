@@ -29,45 +29,45 @@ auxiliary_directory_aliases:
   tests/examples: e2e
 profiles:
   baseline:
-  - tests/conformance/baseline/test_oidc_id_token.py
-  - tests/conformance/baseline/test_openid_configuration.py
-  - tests/conformance/baseline/test_openid_userinfo_endpoint.py
-  - tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py
-  - tests/conformance/baseline/test_rfc6749_token_endpoint.py
-  - tests/conformance/baseline/test_rfc6750_bearer_token.py
-  - tests/conformance/baseline/test_rfc7515_jws.py
-  - tests/conformance/baseline/test_rfc7517_jwk.py
-  - tests/conformance/baseline/test_rfc7518_jwa.py
-  - tests/conformance/baseline/test_rfc7519_jwt.py
-  - tests/conformance/baseline/test_rfc7636_pkce.py
-  - tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py
+  - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_oidc_id_token.py
+  - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_configuration.py
+  - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_token_endpoint.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py
+  - pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7515_jws.py
+  - pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7517_jwk.py
+  - pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7518_jwa.py
+  - pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7519_jwt.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc7636_pkce.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py
   production:
-  - tests/conformance/production/test_oidc_rp_initiated_logout.py
-  - tests/conformance/production/test_oidc_session_management.py
+  - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
+  - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
   - tests/conformance/production/test_rfc6265_cookies.py
-  - tests/conformance/production/test_rfc7009_token_revocation.py
-  - tests/conformance/production/test_rfc7591_dynamic_client_registration.py
-  - tests/conformance/production/test_rfc7662_introspection.py
-  - tests/conformance/production/test_rfc8252_native_apps.py
-  - tests/conformance/production/test_rfc9068_jwt_profile.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7591_dynamic_client_registration.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7662_introspection.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc8252_native_apps.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py
   hardening:
-  - tests/conformance/hardening/test_oidc_backchannel_logout.py
-  - tests/conformance/hardening/test_oidc_frontchannel_logout.py
-  - tests/conformance/hardening/test_rfc7592_client_registration_management.py
-  - tests/conformance/hardening/test_rfc8628_device_authorization.py
-  - tests/conformance/hardening/test_rfc8693_token_exchange.py
-  - tests/conformance/hardening/test_rfc8705_mtls.py
-  - tests/conformance/hardening/test_rfc8707_resource_indicators.py
-  - tests/conformance/hardening/test_rfc9101_jar.py
-  - tests/conformance/hardening/test_rfc9126_par.py
-  - tests/conformance/hardening/test_rfc9396_rar.py
-  - tests/conformance/hardening/test_rfc9449_dpop.py
+  - pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_backchannel_logout.py
+  - pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_frontchannel_logout.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc7592_client_registration_management.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8628_device_authorization.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8693_token_exchange.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8705_mtls.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8707_resource_indicators.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9101_jar.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9126_par.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9449_dpop.py
 categories:
   unit:
   - tests/features/test_profile_reference_union.py
   - tests/features/test_t0_tracked_targets.py
-  - tests/features/test_tenant_jwks_discovery.py
-  - tests/features/test_tenant_jwks_key_administration.py
+  - pkgs/120-tests/tba-tests-oidc/tests/features/test_tenant_jwks_discovery.py
+  - pkgs/120-tests/tba-tests-oidc/tests/features/test_tenant_jwks_key_administration.py
   - tests/packages/tba-app-backend-developer/test_developer_api_dev_deployment_proof.py
   - tests/packages/tba-app-backend-developer/test_developer_api_package.py
   - tests/packages/tba-app-backend-my-account/test_my_account_api_dev_deployment_proof.py
@@ -92,7 +92,7 @@ categories:
   - tests/unit/test_advanced_identity_plane_phase4.py
   - tests/unit/test_advanced_surface_contracts.py
   - tests/unit/test_app_factory_materialization.py
-  - tests/unit/test_auth_code_exchange_pkce.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py
   - tests/unit/test_auth_package_taxonomy_boundary.py
   - tests/unit/test_authority_closure_monotonicity.py
   - tests/unit/test_authority_closure_monotonicity_robustness_t2.py
@@ -104,8 +104,8 @@ categories:
   - tests/unit/test_authorization_provenance.py
   - tests/unit/test_authorization_referential_integrity.py
   - tests/unit/test_authorization_safety_property_evaluator.py
-  - tests/unit/test_authorize_id_token_hashes.py
-  - tests/unit/test_authorize_response_modes.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_authorize_response_modes.py
   - tests/unit/test_backends.py
   - tests/unit/test_bootstrap_secret_scrub.py
   - tests/unit/test_bootstrappable_user_defaults.py
@@ -132,11 +132,11 @@ categories:
   - tests/unit/test_delegation_grant_lifecycle_contract.py
   - tests/unit/test_deployment_resolver.py
   - tests/unit/test_deps_imports.py
-  - tests/unit/test_dpop_key_credentials.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_dpop_key_credentials.py
   - tests/unit/test_effective_artifacts.py
   - tests/unit/test_engine_initialization.py
   - tests/unit/test_facade_compatibility_boundary.py
-  - tests/unit/test_fapi_runtime_profile.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_fapi_runtime_profile.py
   - tests/unit/test_feature_completeness_checkpoint.py
   - tests/unit/test_feature_flag_registry.py
   - tests/unit/test_final_aggregation.py
@@ -149,10 +149,10 @@ categories:
   - tests/unit/test_identity_cli_package_boundary.py
   - tests/unit/test_identity_package_file_size_guard.py
   - tests/unit/test_identity_package_split_imports.py
-  - tests/unit/test_jose_pqc_mldsa.py
-  - tests/unit/test_jose_policy_boundary.py
-  - tests/unit/test_jwks_rotation.py
-  - tests/unit/test_jwtoken.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_pqc_mldsa.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_policy_boundary.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py
   - tests/unit/test_key_rotation_policy_boundary.py
   - tests/unit/test_key_rotation_policy_governance.py
   - tests/unit/test_least_authority_minimality.py
@@ -162,16 +162,16 @@ categories:
   - tests/unit/test_monorepo_release.py
   - tests/unit/test_mtls_certificate_credentials.py
   - tests/unit/test_non_rfc_track_checkpoint.py
-  - tests/unit/test_oauth_oidc_protocol_boundary.py
-  - tests/unit/test_oidc_authorization_code_token_claims.py
-  - tests/unit/test_oidc_authorize_scope_nonce.py
-  - tests/unit/test_oidc_id_token.py
-  - tests/unit/test_oidc_id_token_encryption.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_oauth_oidc_protocol_boundary.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_authorization_code_token_claims.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_authorize_scope_nonce.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py
   - tests/unit/test_openapi_contract_validity.py
   - tests/unit/test_openapi_examples.py
   - tests/unit/test_openapi_well_known_endpoints.py
-  - tests/unit/test_openid_configuration.py
-  - tests/unit/test_openid_userinfo_endpoint.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_openid_configuration.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_openid_userinfo_endpoint.py
   - tests/unit/test_openrpc_contract_validity.py
   - tests/unit/test_operator_control_plane.py
   - tests/unit/test_operator_service_layer.py
@@ -199,52 +199,52 @@ categories:
   - tests/unit/test_request_scoped_runtime_authority.py
   - tests/unit/test_resource_server_consumer_boundary.py
   - tests/unit/test_retained_target_test_evidence.py
-  - tests/unit/test_rfc6749_auth_flow_endpoints.py
-  - tests/unit/test_rfc6749_token_endpoint.py
-  - tests/unit/test_rfc6749_validators.py
-  - tests/unit/test_rfc6750_bearer_token.py
-  - tests/unit/test_rfc7009_token_revocation.py
-  - tests/unit/test_rfc7515_jws.py
-  - tests/unit/test_rfc7516_jwe.py
-  - tests/unit/test_rfc7517_jwk.py
-  - tests/unit/test_rfc7518_jwa.py
-  - tests/unit/test_rfc7519_jwt.py
-  - tests/unit/test_rfc7520_examples.py
-  - tests/unit/test_rfc7521_assertion_framework.py
-  - tests/unit/test_rfc7523_jwt_profile.py
-  - tests/unit/test_rfc7591_client_registration_endpoint.py
-  - tests/unit/test_rfc7591_dynamic_client_registration.py
-  - tests/unit/test_rfc7592_client_management_endpoint.py
-  - tests/unit/test_rfc7592_client_registration_management.py
-  - tests/unit/test_rfc7636_pkce.py
-  - tests/unit/test_rfc7638_jwk_thumbprint.py
-  - tests/unit/test_rfc7662_token_introspection.py
-  - tests/unit/test_rfc7662_unit.py
-  - tests/unit/test_rfc7800_proof_of_possession.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6749_auth_flow_endpoints.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6749_token_endpoint.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6749_validators.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7009_token_revocation.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7515_jws.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7516_jwe.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7517_jwk.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7518_jwa.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7519_jwt.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7520_examples.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7521_assertion_framework.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7523_jwt_profile.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7591_client_registration_endpoint.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7591_dynamic_client_registration.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7592_client_management_endpoint.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7592_client_registration_management.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7636_pkce.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7638_jwk_thumbprint.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7662_token_introspection.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7662_unit.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7800_proof_of_possession.py
   - pkgs/10-concrete/tba-concrete-set/tests/test_rfc8417.py
-  - tests/unit/test_rfc8037_eddsa.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc8037_eddsa.py
   - tests/unit/test_rfc8176_amr.py
-  - tests/unit/test_rfc8252_native_app_redirects.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8252_native_app_redirects.py
   - tests/unit/test_rfc8291_webpush_encryption.py
-  - tests/unit/test_rfc8414_authorization_server_metadata.py
-  - tests/unit/test_rfc8523_jwt_client_auth.py
-  - tests/unit/test_rfc8628_device_authorization.py
-  - tests/unit/test_rfc8693_token_exchange.py
-  - tests/unit/test_rfc8705_compliance.py
-  - tests/unit/test_rfc8705_mtls_runtime.py
-  - tests/unit/test_rfc8707_resource_indicators.py
-  - tests/unit/test_rfc8725_jwt_best_practices.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8414_authorization_server_metadata.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8523_jwt_client_auth.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8628_device_authorization.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8693_token_exchange.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8705_compliance.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8705_mtls_runtime.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8707_resource_indicators.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc8725_jwt_best_practices.py
   - tests/unit/test_rfc8812_webauthn_algorithms.py
   - tests/unit/test_rfc8932_dns_privacy.py
   - tests/unit/test_rfc8932_enhanced_metadata.py
-  - tests/unit/test_rfc9068_jwt_profile.py
-  - tests/unit/test_rfc9101_jwt_secured_authorization_request.py
-  - tests/unit/test_rfc9126_pushed_authorization_requests.py
-  - tests/unit/test_rfc9207_issuer_identification.py
-  - tests/unit/test_rfc9396_authorization_details.py
-  - tests/unit/test_rfc9449_dpop.py
-  - tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
-  - tests/unit/test_rfc9728_metadata_checkpoint.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9068_jwt_profile.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9101_jwt_secured_authorization_request.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9126_pushed_authorization_requests.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9396_authorization_details.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9449_dpop.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py
   - tests/unit/test_rp_consumer_boundary.py
   - tests/unit/test_rpc_registry_live.py
   - tests/unit/test_runner_adapter_runtime_layer.py
@@ -273,7 +273,7 @@ categories:
   - tests/unit/test_tier4_checkpoint.py
   - tests/unit/test_tba_auth_facade_ownership.py
   - tests/unit/test_tba_bcp_direct_db_boundary.py
-  - tests/unit/test_token_endpoint_minimal_storage.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_token_endpoint_minimal_storage.py
   - tests/unit/test_tox_pip_install.py
   - tests/unit/test_trust_graph_integrity_guards.py
   - tests/unit/test_truth_chain_hashing.py
@@ -286,79 +286,79 @@ categories:
   - tests/integration/test_admin_auth_session.py
   - tests/integration/test_admin_table_issue_regressions.py
   - tests/integration/test_admin_table_surfaces.py
-  - tests/integration/test_auth_flows.py
-  - tests/integration/test_authorization_code_flow.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
   - tests/integration/test_authorization_response_types.py
   - tests/integration/test_crud_api.py
   - tests/integration/test_default_openapi_endpoints.py
-  - tests/integration/test_device_code_flow.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
   - tests/integration/test_full_workflow.py
   - tests/integration/test_login_session_authorize.py
   - tests/integration/test_long_lived_worker_flow.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
-  - tests/integration/test_oidc_endpoints.py
+  - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - tests/integration/test_profile_all_documented_endpoints.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/integration/test_rfc7662.py
-  - tests/integration/test_rfc8414_metadata.py
-  - tests/integration/test_rfc8628.py
-  - tests/integration/test_rfc8693_token_exchange_endpoint.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc7662.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py
   - tests/integration/test_runtime_issuer_alignment.py
   - tests/integration/test_service_key_creation.py
-  - tests/integration/test_service_key_introspection_flow.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_service_key_introspection_flow.py
   - tests/integration/test_sqlite_attachment_admin_directory.py
-  - tests/integration/test_token_exchange_flow.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py
   - tests/runtime/test_runner_hypercorn.py
   - tests/runtime/test_runner_invariance.py
   - tests/runtime/test_runner_tigrcorn.py
   - tests/runtime/test_runner_uvicorn.py
   conformance:
   - tests/conformance/backlog/test_rfc8785_jcs.py
-  - tests/conformance/baseline/test_oidc_id_token.py
-  - tests/conformance/baseline/test_openid_configuration.py
-  - tests/conformance/baseline/test_openid_userinfo_endpoint.py
-  - tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py
-  - tests/conformance/baseline/test_rfc6749_token_endpoint.py
-  - tests/conformance/baseline/test_rfc6750_bearer_token.py
-  - tests/conformance/baseline/test_rfc7515_jws.py
-  - tests/conformance/baseline/test_rfc7517_jwk.py
-  - tests/conformance/baseline/test_rfc7518_jwa.py
-  - tests/conformance/baseline/test_rfc7519_jwt.py
-  - tests/conformance/baseline/test_rfc7636_pkce.py
-  - tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py
-  - tests/conformance/hardening/test_oidc_backchannel_logout.py
-  - tests/conformance/hardening/test_oidc_frontchannel_logout.py
-  - tests/conformance/hardening/test_rfc7592_client_registration_management.py
-  - tests/conformance/hardening/test_rfc8628_device_authorization.py
-  - tests/conformance/hardening/test_rfc8693_token_exchange.py
-  - tests/conformance/hardening/test_rfc8705_mtls.py
-  - tests/conformance/hardening/test_rfc8707_resource_indicators.py
-  - tests/conformance/hardening/test_rfc9101_jar.py
-  - tests/conformance/hardening/test_rfc9126_par.py
-  - tests/conformance/hardening/test_rfc9207_issuer_identification.py
-  - tests/conformance/hardening/test_rfc9396_rar.py
-  - tests/conformance/hardening/test_rfc9449_dpop.py
-  - tests/conformance/hardening/test_rfc9700_security_bcp.py
+  - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_oidc_id_token.py
+  - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_configuration.py
+  - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_token_endpoint.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py
+  - pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7515_jws.py
+  - pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7517_jwk.py
+  - pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7518_jwa.py
+  - pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7519_jwt.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc7636_pkce.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py
+  - pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_backchannel_logout.py
+  - pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_frontchannel_logout.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc7592_client_registration_management.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8628_device_authorization.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8693_token_exchange.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8705_mtls.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8707_resource_indicators.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9101_jar.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9126_par.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9449_dpop.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py
   - tests/conformance/operator/test_cli_bootstrap_migrate.py
   - tests/conformance/operator/test_cli_import_export.py
   - tests/conformance/operator/test_cli_keys_lifecycle.py
   - tests/conformance/operator/test_cli_release_lifecycle.py
   - tests/conformance/operator/test_cli_resource_lifecycle.py
   - tests/conformance/operator/test_cli_serve_runtime.py
-  - tests/conformance/production/test_oidc_rp_initiated_logout.py
-  - tests/conformance/production/test_oidc_session_management.py
+  - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
+  - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
   - tests/conformance/production/test_rfc6265_cookies.py
-  - tests/conformance/production/test_rfc7009_token_revocation.py
-  - tests/conformance/production/test_rfc7516_jwe_profile.py
-  - tests/conformance/production/test_rfc7521_assertion_framework.py
-  - tests/conformance/production/test_rfc7523_jwt_profile.py
-  - tests/conformance/production/test_rfc7591_dynamic_client_registration.py
-  - tests/conformance/production/test_rfc7662_introspection.py
-  - tests/conformance/production/test_rfc8252_native_apps.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
+  - pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7521_assertion_framework.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7523_jwt_profile.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7591_dynamic_client_registration.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7662_introspection.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc8252_native_apps.py
   - tests/conformance/production/test_rfc8615_well_known_uris.py
-  - tests/conformance/production/test_rfc9068_jwt_profile.py
-  - tests/conformance/production/test_rfc9728_protected_resource_metadata.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9728_protected_resource_metadata.py
   interop:
   - tests/interop/test_operator_profile_catalog_completeness.py
   - tests/interop/test_peer_counterpart_catalog.py
@@ -402,7 +402,7 @@ categories:
   - tests/security/test_crypto_boundary_governance.py
   - tests/security/test_delegation_provenance.py
   - tests/security/test_issuer_confusion_resistance.py
-  - tests/security/test_jose_negative_security.py
+  - pkgs/120-tests/tba-tests-jose/tests/security/test_jose_negative_security.py
   - tests/security/test_machine_identity_governance.py
   - tests/security/test_realm_isolation_certification.py
   - tests/security/test_release_bundle_signing.py
@@ -410,12 +410,12 @@ categories:
   - tests/security/test_resource_server_verifier_certification.py
   - tests/security/test_runtime_capability_truth.py
   - tests/security/test_runtime_qualification.py
-  - tests/security/test_sender_constraint_replay.py
+  - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
   - tests/security/test_tenant_isolation_certification.py
   negative:
   - tests/negative/test_certification_attack_paths.py
   - tests/negative/test_contract_diff_detects_drift.py
-  - tests/negative/test_cookie_and_logout_abuse_cases.py
+  - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
   - tests/negative/test_hardening_runtime_enforcement.py
   - tests/negative/test_invalid_artifact_inputs.py
   - tests/negative/test_resource_exchange_abuse.py

@@ -9,8 +9,8 @@ required_targets:
 - RFC 9449
 - RFC 9700
 required_artifacts:
-- tests/conformance/hardening/test_rfc9449_dpop.py
-- tests/security/test_sender_constraint_replay.py
+- pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9449_dpop.py
+- pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
 required_peer_artifacts:
 - http-transcript.yaml
 - proof-jwts.json

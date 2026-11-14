@@ -113,10 +113,10 @@
           "tba_auth/standards/oidc/id_token.py"
         ],
         "tests": [
-          "tests/conformance/baseline/test_oidc_id_token.py",
-          "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_oidc_id_token.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py",
           "tests/integration/test_authorization_response_types.py",
-          "tests/integration/test_oidc_endpoints.py"
+          "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py"
         ],
         "test_categories": [
           "conformance",
@@ -179,10 +179,10 @@
           "tba_auth/standards/oidc/discovery.py"
         ],
         "tests": [
-          "tests/conformance/baseline/test_openid_configuration.py",
-          "tests/integration/test_oidc_endpoints.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_configuration.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
           "tests/integration/test_profile_surface_and_contract_alignment.py",
-          "tests/integration/test_rfc8414_metadata.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
           "tests/interop/test_peer_counterpart_catalog.py",
           "tests/interop/test_peer_matrix_artifacts.py",
           "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -260,9 +260,9 @@
           "tba_auth/standards/oidc/userinfo.py"
         ],
         "tests": [
-          "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
-          "tests/integration/test_oidc_endpoints.py",
-          "tests/unit/test_openid_userinfo_endpoint.py"
+          "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/unit/test_openid_userinfo_endpoint.py"
         ],
         "test_categories": [
           "conformance",
@@ -340,10 +340,10 @@
           "tba_auth/services/persistence.py"
         ],
         "tests": [
-          "tests/conformance/production/test_oidc_session_management.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py",
           "tests/integration/test_migration_upgrade_downgrade_safety.py",
           "tests/integration/test_persistence_lifecycle_durability.py",
-          "tests/negative/test_cookie_and_logout_abuse_cases.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
           "tests/unit/test_session_logout_cluster_b.py"
         ],
         "test_categories": [
@@ -432,10 +432,10 @@
           "tba_auth/services/persistence.py"
         ],
         "tests": [
-          "tests/conformance/production/test_oidc_rp_initiated_logout.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py",
           "tests/integration/test_migration_upgrade_downgrade_safety.py",
           "tests/integration/test_persistence_lifecycle_durability.py",
-          "tests/negative/test_cookie_and_logout_abuse_cases.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
           "tests/unit/test_session_logout_cluster_b.py"
         ],
         "test_categories": [
@@ -516,9 +516,9 @@
           "tba_auth/cli/artifacts.py"
         ],
         "tests": [
-          "tests/conformance/hardening/test_oidc_frontchannel_logout.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_frontchannel_logout.py",
           "tests/integration/test_persistence_lifecycle_durability.py",
-          "tests/negative/test_cookie_and_logout_abuse_cases.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
           "tests/unit/test_hardening_cluster_c.py"
         ],
         "test_categories": [
@@ -599,9 +599,9 @@
           "tba_auth/cli/artifacts.py"
         ],
         "tests": [
-          "tests/conformance/hardening/test_oidc_backchannel_logout.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_backchannel_logout.py",
           "tests/integration/test_persistence_lifecycle_durability.py",
-          "tests/negative/test_cookie_and_logout_abuse_cases.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
           "tests/unit/test_hardening_cluster_c.py"
         ],
         "test_categories": [
@@ -1283,7 +1283,7 @@
         ],
         "tests": [
           "tests/unit/test_claim_boundary_rebaseline.py",
-          "tests/unit/test_jwks_rotation.py",
+          "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py",
           "tests/unit/test_rpc_registry_live.py",
           "tests/unit/test_cli_contract.py",
           "tests/unit/test_operator_service_layer.py",
@@ -1422,7 +1422,7 @@
           "tests/unit/test_claim_boundary_rebaseline.py",
           "tests/security/test_release_bundle_signing.py",
           "tests/unit/test_published_dependency_model.py",
-          "tests/security/test_sender_constraint_replay.py"
+          "pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py"
         ],
         "test_categories": [
           "security",

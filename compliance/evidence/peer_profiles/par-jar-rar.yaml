@@ -8,10 +8,10 @@ required_targets:
 - RFC 9396
 - RFC 8707
 required_artifacts:
-- tests/conformance/hardening/test_rfc9101_jar.py
-- tests/conformance/hardening/test_rfc9126_par.py
-- tests/conformance/hardening/test_rfc9396_rar.py
-- tests/conformance/hardening/test_rfc8707_resource_indicators.py
+- pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9101_jar.py
+- pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9126_par.py
+- pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py
+- pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8707_resource_indicators.py
 scenario_ids:
 - par-submit
 - jar-authorize

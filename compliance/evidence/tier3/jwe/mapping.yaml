@@ -5,8 +5,8 @@ modules:
 - tba_auth/standards/oidc/id_token.py
 - tba_auth/standards/oidc/discovery_metadata.py
 tests:
-- tests/unit/test_rfc7516_jwe.py
-- tests/unit/test_oidc_id_token_encryption.py
+- pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7516_jwe.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py
 contracts:
 - contracts/openid-configuration.json
 - contracts/oauth-authorization-server.json

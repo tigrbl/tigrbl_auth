@@ -17,7 +17,7 @@ targets:
   - tests/conformance/production/test_rfc6265_cookies.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
-  - tests/negative/test_cookie_and_logout_abuse_cases.py
+  - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
   endpoint_mapping:
     current:
     - /login

@@ -9,8 +9,8 @@ required_targets:
 - RFC 8705
 - RFC 9700
 required_artifacts:
-- tests/conformance/hardening/test_rfc8705_mtls.py
-- tests/security/test_sender_constraint_replay.py
+- pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8705_mtls.py
+- pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
 required_peer_artifacts:
 - http-transcript.yaml
 - certificate-chain.pem

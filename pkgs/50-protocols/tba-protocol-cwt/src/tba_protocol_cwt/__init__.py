@@ -37,7 +37,7 @@ def capability_report() -> dict[str, object]:
         protocol="cwt",
         revision=CURRENT_VERSION.value,
         features=tuple(FEATURES_BY_VERSION[CURRENT_VERSION.value]),
-        evidence_links=("tests/unit/test_cwt_standalone_claim_packages.py",),
+        evidence_links=("pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_standalone_claim_packages.py",),
         extra_requirements=CAPABILITY_REQUIREMENTS,
         include_default_artifact_requirements=False,
     )

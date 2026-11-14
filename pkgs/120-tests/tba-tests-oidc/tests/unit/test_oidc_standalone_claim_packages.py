@@ -11,7 +11,7 @@ from tba_concrete_claim_email_verified import EmailVerifiedClaim
 from tba_concrete_claim_name import NameClaim
 from tba_bases_identity_claims import ClaimBase
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 
 
 def test_oidc_core_claims_are_standalone_layer_10_packages():

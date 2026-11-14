@@ -13,7 +13,7 @@ targets:
   - tba_auth/ops/token.py
   - tba_auth/standards/oauth2/token_exchange.py
   tests:
-  - tests/conformance/production/test_rfc9068_jwt_profile.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/unit/test_advanced_surface_contracts.py
   - tests/interop/test_peer_counterpart_catalog.py

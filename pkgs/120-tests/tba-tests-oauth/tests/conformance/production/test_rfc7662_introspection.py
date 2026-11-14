@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from tba_auth.config.deployment import resolve_deployment
-from tba_auth.standards.oauth2.introspection import _protected_resource_verifier_contract
+from tba_app_backend_core.surfaces.introspection_surface import _protected_resource_verifier_contract
 from tba_auth.standards.oauth2.resource_verifier_contract import build_protected_resource_verifier_contract
 
 

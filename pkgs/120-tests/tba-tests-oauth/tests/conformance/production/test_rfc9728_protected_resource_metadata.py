@@ -8,7 +8,7 @@ from tba_auth.standards.oauth2.resource_verifier_contract import build_protected
 from tba_protocol_oauth.standards.protected_resource_metadata import build_protected_resource_metadata
 
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[6]
 
 
 def test_rfc9728_protected_resource_metadata_surface_is_published() -> None:

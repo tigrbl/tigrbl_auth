@@ -9,8 +9,8 @@ targets:
   modules:
   - tba_auth/standards/jose/rfc7519.py
   tests:
-  - tests/conformance/baseline/test_rfc7519_jwt.py
-  - tests/unit/test_jwtoken.py
+  - pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7519_jwt.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py
   endpoint_mapping: {}
 profile: baseline
 reports:

@@ -9,7 +9,7 @@ modules:
 - tba_auth/api/rpc/schemas/token.py
 tests:
 - tests/unit/test_hardening_cluster_a.py
-- tests/conformance/hardening/test_rfc8693_token_exchange.py
+- pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8693_token_exchange.py
 contracts:
 - contracts/openid-configuration.json
 - contracts/token-exchange-openapi-path.json

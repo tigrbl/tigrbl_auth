@@ -48,6 +48,6 @@ Call this helper as part of an access-token verification pipeline. Pair it with 
 
 ## Verification
 
-See the [related repository tests](https://github.com/tigrbl/tigrbl_auth/blob/master/tests/unit/test_oidc_id_and_jwt_access_token_profiles.py) for the implementation scope covered by this example.
+See the [related repository tests](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_and_jwt_access_token_profiles.py) for the implementation scope covered by this example.
 
 [Workspace and package catalog](https://github.com/tigrbl/tigrbl_auth#package-catalog) · [tba-app-backend-public](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/90-backend-apps/tba-app-backend-public#readme) · [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues) · [Repository license](https://github.com/tigrbl/tigrbl_auth/blob/master/LICENSE)

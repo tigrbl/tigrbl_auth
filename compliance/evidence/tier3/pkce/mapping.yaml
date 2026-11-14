@@ -9,9 +9,9 @@ targets:
   modules:
   - tba_auth/standards/oauth2/rfc7636_pkce.py
   tests:
-  - tests/conformance/baseline/test_rfc7636_pkce.py
-  - tests/integration/test_authorization_code_flow.py
-  - tests/unit/test_auth_code_exchange_pkce.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc7636_pkce.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py
   - tests/interop/test_peer_counterpart_catalog.py
   - tests/interop/test_peer_matrix_artifacts.py
   - tests/interop/test_tier4_promotion_fail_closed.py

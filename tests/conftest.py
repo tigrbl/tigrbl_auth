@@ -208,19 +208,6 @@ def sample_tenant_data():
 
 
 
-def pytest_addoption(parser: pytest.Parser) -> None:
-    parser.addoption(
-        "--certification-lane",
-        action="store",
-        default=None,
-        choices=["core", "integration", "conformance", "security-negative", "interop", "extension", "all"],
-        help=(
-            "Select the certification lane to collect and run. Defaults to the "
-            "TBA_AUTH_TEST_LANE environment variable, falling back to 'core'."
-        ),
-    )
-
-
 def pytest_configure(config: pytest.Config) -> None:
     config.addinivalue_line("markers", "extension: optional extension lane tests")
     config.addinivalue_line("markers", "deferred: tests outside the default certification boundary")
@@ -617,7 +604,9 @@ def temp_key_file(tmp_path_factory: pytest.TempPathFactory):
     temp_dir = tmp_path_factory.mktemp("runtime-keys")
     temp_kid = temp_dir / "jwt_ed25519.kid"
 
+    import tba_auth.oidc_id_token as oidc_facade
     import tba_provider_identity_jose.crypto as crypto_module
+    import tba_provider_identity_jose.oidc_key_runtime as key_runtime
     import tba_protocol_oidc.id_token as oidc_module
     import tba_protocol_oidc.standards.id_token as canonical_oidc_module
 
@@ -625,6 +614,8 @@ def temp_key_file(tmp_path_factory: pytest.TempPathFactory):
     original_path = crypto_module._DEFAULT_KEY_PATH
     original_rsa_path = oidc_module._RSA_KEY_PATH
     original_canonical_rsa_path = canonical_oidc_module._RSA_KEY_PATH
+    original_facade_rsa_path = oidc_facade._RSA_KEY_PATH
+    original_runtime_rsa_path = key_runtime._RSA_KEY_PATH
 
     crypto_module._DEFAULT_KEY_DIR = temp_dir
     crypto_module._DEFAULT_KEY_PATH = temp_kid
@@ -635,6 +626,9 @@ def temp_key_file(tmp_path_factory: pytest.TempPathFactory):
     oidc_module._provider.cache_clear()
     oidc_module._service_cache = None
     canonical_oidc_module._RSA_KEY_PATH = oidc_module._RSA_KEY_PATH
+    oidc_facade._RSA_KEY_PATH = oidc_module._RSA_KEY_PATH
+    key_runtime._RSA_KEY_PATH = oidc_module._RSA_KEY_PATH
+    key_runtime._service_cache = None
     canonical_oidc_module._provider.cache_clear()
     canonical_oidc_module._service_cache = None
 
@@ -650,6 +644,9 @@ def temp_key_file(tmp_path_factory: pytest.TempPathFactory):
     oidc_module._provider.cache_clear()
     oidc_module._service_cache = None
     canonical_oidc_module._RSA_KEY_PATH = original_canonical_rsa_path
+    oidc_facade._RSA_KEY_PATH = original_facade_rsa_path
+    key_runtime._RSA_KEY_PATH = original_runtime_rsa_path
+    key_runtime._service_cache = None
     canonical_oidc_module._provider.cache_clear()
     canonical_oidc_module._service_cache = None
 

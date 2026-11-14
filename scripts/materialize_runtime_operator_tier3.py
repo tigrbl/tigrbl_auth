@@ -218,7 +218,7 @@ BUNDLE_SPECS = [
         ],
         tests=[
             "tests/conformance/operator/test_cli_keys_lifecycle.py",
-            "tests/security/test_sender_constraint_replay.py",
+            "pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py",
         ],
     ),
     BundleSpec(
@@ -416,7 +416,7 @@ Source artifact: {_capability_scoped_text(_source_zip() or 'unknown')}
 Primary verification commands:
 - python scripts/generate_effective_release_manifests.py
 - python scripts/generate_state_reports.py
-- pytest -q tests/runtime/test_runner_uvicorn.py tests/runtime/test_runner_hypercorn.py tests/runtime/test_runner_tigrcorn.py tests/runtime/test_runner_invariance.py tests/conformance/operator/test_cli_serve_runtime.py tests/conformance/operator/test_cli_resource_lifecycle.py tests/conformance/operator/test_cli_keys_lifecycle.py tests/conformance/operator/test_cli_import_export.py tests/conformance/operator/test_cli_bootstrap_migrate.py tests/negative/test_invalid_artifact_inputs.py tests/negative/test_resource_exchange_abuse.py tests/security/test_sender_constraint_replay.py tests/interop/test_peer_profile_catalog.py tests/interop/test_runner_profile_catalog_completeness.py tests/interop/test_operator_profile_catalog_completeness.py
+- pytest -q tests/runtime/test_runner_uvicorn.py tests/runtime/test_runner_hypercorn.py tests/runtime/test_runner_tigrcorn.py tests/runtime/test_runner_invariance.py tests/conformance/operator/test_cli_serve_runtime.py tests/conformance/operator/test_cli_resource_lifecycle.py tests/conformance/operator/test_cli_keys_lifecycle.py tests/conformance/operator/test_cli_import_export.py tests/conformance/operator/test_cli_bootstrap_migrate.py tests/negative/test_invalid_artifact_inputs.py tests/negative/test_resource_exchange_abuse.py pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py tests/interop/test_peer_profile_catalog.py tests/interop/test_runner_profile_catalog_completeness.py tests/interop/test_operator_profile_catalog_completeness.py
 - python scripts/run_release_gates.py
 
 Target-associated tests:

@@ -10,11 +10,11 @@ required_targets:
 - OIDC Back-Channel Logout
 required_artifacts:
 - tests/conformance/production/test_rfc6265_cookies.py
-- tests/conformance/production/test_oidc_session_management.py
-- tests/conformance/production/test_oidc_rp_initiated_logout.py
-- tests/conformance/hardening/test_oidc_frontchannel_logout.py
-- tests/conformance/hardening/test_oidc_backchannel_logout.py
-- tests/negative/test_cookie_and_logout_abuse_cases.py
+- pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
+- pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
+- pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_frontchannel_logout.py
+- pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_backchannel_logout.py
+- pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
 scenario_ids:
 - session-state-check
 - rp-initiated-logout

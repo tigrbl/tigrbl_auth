@@ -87,7 +87,11 @@ def _certification_partition_for_test(path: str) -> str:
     normalized = path.replace("\\", "/")
     parts = normalized.split("/")
     if len(parts) >= 5 and parts[:2] == ["pkgs", "120-tests"] and parts[3] == "tests":
-        return "interop" if parts[2].endswith("-interop") else "unit"
+        if parts[2].endswith("-interop"):
+            return "interop"
+        if len(parts) == 5:
+            return "unit"
+        normalized = "/".join(parts[3:])
     if "tests/interop/" in normalized:
         return "peer" if "peer_" in normalized or "tier4_" in normalized else "interop"
     if "migration" in normalized:

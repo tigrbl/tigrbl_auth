@@ -9,9 +9,9 @@ targets:
   modules:
   - tba_auth/standards/oidc/userinfo.py
   tests:
-  - tests/conformance/baseline/test_openid_userinfo_endpoint.py
-  - tests/integration/test_oidc_endpoints.py
-  - tests/unit/test_openid_userinfo_endpoint.py
+  - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py
+  - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_openid_userinfo_endpoint.py
   endpoint_mapping:
     current:
     - /userinfo

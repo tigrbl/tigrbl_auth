@@ -9,7 +9,7 @@ from tba_app_backend_core import build_app
 from tba_auth.config.deployment import resolve_deployment
 from tba_auth.db import get_db as legacy_get_db
 from tba_provider_identity_jose.key_management import hash_pw
-from tba_auth.rfc.rfc8628 import approve_device_code
+from tba_durability_oauth_state.operations.device_codes import approve_device_code
 from tba_auth.tables import Client, Tenant, User
 from tba_runtime_identity_storage.engine import get_db as tables_get_db
 from tba_auth.tables.engine import get_db as engine_get_db
@@ -73,7 +73,7 @@ async def test_device_code_flow(db_session) -> None:
         assert pending.status_code == status.HTTP_400_BAD_REQUEST
         assert pending.json()["error"] == "authorization_pending"
 
-        await approve_device_code.__wrapped__(
+        await approve_device_code(
             {"db": db_session, "payload": {"device_code": device_code, "sub": str(user.id), "tid": str(tenant.id)}}
         )
         success = await async_client.post("/token", data=payload)

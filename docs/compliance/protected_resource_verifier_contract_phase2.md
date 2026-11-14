@@ -11,13 +11,13 @@ Implemented paths:
 Coverage added or strengthened:
 
 - `tests/unit/test_protected_resource_verifier_contract.py`
-- `tests/conformance/production/test_rfc9728_protected_resource_metadata.py`
-- `tests/conformance/production/test_rfc7662_introspection.py`
+- `pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9728_protected_resource_metadata.py`
+- `pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7662_introspection.py`
 
 Validated commands:
 
 ```text
-uv run pytest tests/unit/test_protected_resource_verifier_contract.py tests/conformance/production/test_rfc9728_protected_resource_metadata.py tests/conformance/production/test_rfc7662_introspection.py tests/unit/test_rfc7662_token_introspection.py tests/integration/test_rfc7662.py tests/integration/test_auth_flows.py -k "introspect or protected_resource or verifier_contract or rfc9728"
+uv run pytest tests/unit/test_protected_resource_verifier_contract.py pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9728_protected_resource_metadata.py pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7662_introspection.py pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7662_token_introspection.py pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc7662.py pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py -k "introspect or protected_resource or verifier_contract or rfc9728"
 ```
 
 Observed result:

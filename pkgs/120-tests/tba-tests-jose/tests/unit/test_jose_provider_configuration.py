@@ -11,7 +11,7 @@ from tba_provider_identity_jose.configuration import (
 from tba_concrete_jose import verify_certificate_thumbprint_confirmation
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 
 
 def test_provider_configuration_is_injected_without_runtime_import() -> None:

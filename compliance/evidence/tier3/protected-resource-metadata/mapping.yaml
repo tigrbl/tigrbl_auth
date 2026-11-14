@@ -10,8 +10,8 @@ targets:
   - tba_auth/standards/oauth2/rfc9728.py
   tests:
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/integration/test_rfc8414_metadata.py
-  - tests/unit/test_rfc9728_metadata_checkpoint.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py
   - tests/interop/test_peer_counterpart_catalog.py
   - tests/interop/test_peer_matrix_artifacts.py
   - tests/interop/test_tier4_promotion_fail_closed.py

@@ -63,7 +63,7 @@ def capability_report() -> dict[str, object]:
         protocol="oauth",
         revision=CURRENT_VERSION.identifier,
         features=tuple(FEATURES_BY_VERSION[CURRENT_VERSION.identifier]),
-        evidence_links=("tests/unit/test_versioned_oauth_oidc_protocols.py",),
+        evidence_links=("pkgs/120-tests/tba-tests-oauth/tests/unit/test_versioned_oauth_oidc_protocols.py",),
         extra_requirements=CAPABILITY_REQUIREMENTS,
         include_default_artifact_requirements=False,
     )

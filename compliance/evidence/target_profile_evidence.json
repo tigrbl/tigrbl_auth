@@ -66,7 +66,7 @@
       "target": "Key lifecycle and JWKS publication",
       "tests": [
         "tests/unit/test_claim_boundary_rebaseline.py",
-        "tests/unit/test_jwks_rotation.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py",
         "tests/unit/test_rpc_registry_live.py",
         "tests/unit/test_cli_contract.py",
         "tests/unit/test_operator_service_layer.py",
@@ -80,13 +80,13 @@
       "profile": "baseline",
       "target": "OIDC Core 1.0",
       "tests": [
-        "tests/conformance/baseline/test_oidc_id_token.py",
-        "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
-        "tests/unit/test_oidc_id_token_canonical_verification.py",
-        "tests/unit/test_authorize_id_token_hashes.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_oidc_id_token.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
         "tests/unit/test_identity_artifact_confusion_vectors.py",
         "tests/integration/test_authorization_response_types.py",
-        "tests/integration/test_oidc_endpoints.py"
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-core/"
@@ -96,10 +96,10 @@
       "profile": "baseline",
       "target": "OIDC Discovery 1.0",
       "tests": [
-        "tests/conformance/baseline/test_openid_configuration.py",
-        "tests/integration/test_oidc_endpoints.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_configuration.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/integration/test_rfc8414_metadata.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -112,10 +112,10 @@
       "profile": "baseline",
       "target": "OIDC Session Management",
       "tests": [
-        "tests/conformance/production/test_oidc_session_management.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/negative/test_cookie_and_logout_abuse_cases.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/unit/test_session_logout_cluster_b.py"
       ],
       "evidence_refs": [
@@ -141,7 +141,7 @@
         "tests/conformance/production/test_rfc6265_cookies.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/negative/test_cookie_and_logout_abuse_cases.py"
+        "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/cookies/"
@@ -151,10 +151,10 @@
       "profile": "baseline",
       "target": "RFC 6749",
       "tests": [
-        "tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py",
-        "tests/conformance/baseline/test_rfc6749_token_endpoint.py",
-        "tests/integration/test_auth_flows.py",
-        "tests/integration/test_authorization_code_flow.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_token_endpoint.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
@@ -168,8 +168,8 @@
       "profile": "baseline",
       "target": "RFC 6750",
       "tests": [
-        "tests/conformance/baseline/test_rfc6750_bearer_token.py",
-        "tests/integration/test_auth_flows.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -182,10 +182,10 @@
       "profile": "baseline",
       "target": "RFC 7515",
       "tests": [
-        "tests/conformance/baseline/test_rfc7515_jws.py",
-        "tests/unit/test_rfc7515_jws.py",
+        "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7515_jws.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7515_jws.py",
         "tests/unit/test_complete_wire_objects.py",
-        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
@@ -196,11 +196,11 @@
       "profile": "baseline",
       "target": "RFC 7516",
       "tests": [
-        "tests/conformance/production/test_rfc7516_jwe_profile.py",
-        "tests/unit/test_rfc7516_jwe.py",
-        "tests/unit/test_oidc_id_token_encryption.py",
+        "pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7516_jwe.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py",
         "tests/unit/test_complete_wire_objects.py",
-        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
@@ -211,8 +211,8 @@
       "profile": "baseline",
       "target": "RFC 7517",
       "tests": [
-        "tests/conformance/baseline/test_rfc7517_jwk.py",
-        "tests/unit/test_jwks_rotation.py"
+        "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7517_jwk.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwks/"
@@ -222,8 +222,8 @@
       "profile": "baseline",
       "target": "RFC 7518",
       "tests": [
-        "tests/conformance/baseline/test_rfc7518_jwa.py",
-        "tests/unit/test_rfc7518_jwa.py"
+        "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7518_jwa.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7518_jwa.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jose/"
@@ -233,8 +233,8 @@
       "profile": "baseline",
       "target": "RFC 7519",
       "tests": [
-        "tests/conformance/baseline/test_rfc7519_jwt.py",
-        "tests/unit/test_jwtoken.py",
+        "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7519_jwt.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py",
         "tests/unit/test_complete_wire_objects.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -246,9 +246,9 @@
       "profile": "baseline",
       "target": "RFC 7636",
       "tests": [
-        "tests/conformance/baseline/test_rfc7636_pkce.py",
-        "tests/integration/test_authorization_code_flow.py",
-        "tests/unit/test_auth_code_exchange_pkce.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc7636_pkce.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -261,8 +261,8 @@
       "profile": "baseline",
       "target": "RFC 8414",
       "tests": [
-        "tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py",
-        "tests/integration/test_rfc8414_metadata.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/discovery/"
@@ -287,7 +287,7 @@
         "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/security/test_release_bundle_signing.py",
         "tests/unit/test_published_dependency_model.py",
-        "tests/security/test_sender_constraint_replay.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/release-bundle-signing/"
@@ -407,7 +407,7 @@
       "target": "Key lifecycle and JWKS publication",
       "tests": [
         "tests/unit/test_claim_boundary_rebaseline.py",
-        "tests/unit/test_jwks_rotation.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py",
         "tests/unit/test_rpc_registry_live.py",
         "tests/unit/test_cli_contract.py",
         "tests/unit/test_operator_service_layer.py",
@@ -421,13 +421,13 @@
       "profile": "production",
       "target": "OIDC Core 1.0",
       "tests": [
-        "tests/conformance/baseline/test_oidc_id_token.py",
-        "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
-        "tests/unit/test_oidc_id_token_canonical_verification.py",
-        "tests/unit/test_authorize_id_token_hashes.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_oidc_id_token.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
         "tests/unit/test_identity_artifact_confusion_vectors.py",
         "tests/integration/test_authorization_response_types.py",
-        "tests/integration/test_oidc_endpoints.py"
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-core/"
@@ -437,10 +437,10 @@
       "profile": "production",
       "target": "OIDC Discovery 1.0",
       "tests": [
-        "tests/conformance/baseline/test_openid_configuration.py",
-        "tests/integration/test_oidc_endpoints.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_configuration.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/integration/test_rfc8414_metadata.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -453,10 +453,10 @@
       "profile": "production",
       "target": "OIDC RP-Initiated Logout",
       "tests": [
-        "tests/conformance/production/test_oidc_rp_initiated_logout.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/negative/test_cookie_and_logout_abuse_cases.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/unit/test_session_logout_cluster_b.py"
       ],
       "evidence_refs": [
@@ -467,10 +467,10 @@
       "profile": "production",
       "target": "OIDC Session Management",
       "tests": [
-        "tests/conformance/production/test_oidc_session_management.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/negative/test_cookie_and_logout_abuse_cases.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/unit/test_session_logout_cluster_b.py"
       ],
       "evidence_refs": [
@@ -481,9 +481,9 @@
       "profile": "production",
       "target": "OIDC UserInfo",
       "tests": [
-        "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
-        "tests/integration/test_oidc_endpoints.py",
-        "tests/unit/test_openid_userinfo_endpoint.py"
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_openid_userinfo_endpoint.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-userinfo/"
@@ -508,7 +508,7 @@
         "tests/conformance/production/test_rfc6265_cookies.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/negative/test_cookie_and_logout_abuse_cases.py"
+        "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/cookies/"
@@ -518,10 +518,10 @@
       "profile": "production",
       "target": "RFC 6749",
       "tests": [
-        "tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py",
-        "tests/conformance/baseline/test_rfc6749_token_endpoint.py",
-        "tests/integration/test_auth_flows.py",
-        "tests/integration/test_authorization_code_flow.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_token_endpoint.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
@@ -535,8 +535,8 @@
       "profile": "production",
       "target": "RFC 6750",
       "tests": [
-        "tests/conformance/baseline/test_rfc6750_bearer_token.py",
-        "tests/integration/test_auth_flows.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -549,7 +549,7 @@
       "profile": "production",
       "target": "RFC 7009",
       "tests": [
-        "tests/conformance/production/test_rfc7009_token_revocation.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py",
         "tests/integration/test_full_workflow.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
@@ -563,10 +563,10 @@
       "profile": "production",
       "target": "RFC 7515",
       "tests": [
-        "tests/conformance/baseline/test_rfc7515_jws.py",
-        "tests/unit/test_rfc7515_jws.py",
+        "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7515_jws.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7515_jws.py",
         "tests/unit/test_complete_wire_objects.py",
-        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
@@ -577,11 +577,11 @@
       "profile": "production",
       "target": "RFC 7516",
       "tests": [
-        "tests/conformance/production/test_rfc7516_jwe_profile.py",
-        "tests/unit/test_rfc7516_jwe.py",
-        "tests/unit/test_oidc_id_token_encryption.py",
+        "pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7516_jwe.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py",
         "tests/unit/test_complete_wire_objects.py",
-        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
@@ -592,8 +592,8 @@
       "profile": "production",
       "target": "RFC 7517",
       "tests": [
-        "tests/conformance/baseline/test_rfc7517_jwk.py",
-        "tests/unit/test_jwks_rotation.py"
+        "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7517_jwk.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwks/"
@@ -603,8 +603,8 @@
       "profile": "production",
       "target": "RFC 7518",
       "tests": [
-        "tests/conformance/baseline/test_rfc7518_jwa.py",
-        "tests/unit/test_rfc7518_jwa.py"
+        "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7518_jwa.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7518_jwa.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jose/"
@@ -614,8 +614,8 @@
       "profile": "production",
       "target": "RFC 7519",
       "tests": [
-        "tests/conformance/baseline/test_rfc7519_jwt.py",
-        "tests/unit/test_jwtoken.py",
+        "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7519_jwt.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py",
         "tests/unit/test_complete_wire_objects.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -627,8 +627,8 @@
       "profile": "production",
       "target": "RFC 7521",
       "tests": [
-        "tests/conformance/production/test_rfc7521_assertion_framework.py",
-        "tests/unit/test_rfc7521_assertion_framework.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7521_assertion_framework.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7521_assertion_framework.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/assertion-framework/"
@@ -638,8 +638,8 @@
       "profile": "production",
       "target": "RFC 7523",
       "tests": [
-        "tests/conformance/production/test_rfc7523_jwt_profile.py",
-        "tests/unit/test_rfc7523_jwt_profile.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7523_jwt_profile.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7523_jwt_profile.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwt-client-auth/"
@@ -649,11 +649,11 @@
       "profile": "production",
       "target": "RFC 7591",
       "tests": [
-        "tests/conformance/production/test_rfc7591_dynamic_client_registration.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7591_dynamic_client_registration.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_public_route_contracts.py",
-        "tests/unit/test_rfc7591_client_registration_endpoint.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7591_client_registration_endpoint.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/client-registration/"
@@ -664,10 +664,10 @@
       "target": "RFC 7592",
       "tests": [
         "tests/unit/test_hardening_cluster_a.py",
-        "tests/conformance/hardening/test_rfc7592_client_registration_management.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc7592_client_registration_management.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
-        "tests/unit/test_rfc7592_client_management_endpoint.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7592_client_management_endpoint.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/client-registration-management/"
@@ -677,9 +677,9 @@
       "profile": "production",
       "target": "RFC 7636",
       "tests": [
-        "tests/conformance/baseline/test_rfc7636_pkce.py",
-        "tests/integration/test_authorization_code_flow.py",
-        "tests/unit/test_auth_code_exchange_pkce.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc7636_pkce.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -692,10 +692,10 @@
       "profile": "production",
       "target": "RFC 7662",
       "tests": [
-        "tests/conformance/production/test_rfc7662_introspection.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7662_introspection.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/integration/test_rfc7662.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc7662.py",
         "tests/unit/test_public_route_contracts.py"
       ],
       "evidence_refs": [
@@ -706,8 +706,8 @@
       "profile": "production",
       "target": "RFC 8252",
       "tests": [
-        "tests/unit/test_rfc8252_native_app_redirects.py",
-        "tests/conformance/production/test_rfc8252_native_apps.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8252_native_app_redirects.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc8252_native_apps.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -720,8 +720,8 @@
       "profile": "production",
       "target": "RFC 8414",
       "tests": [
-        "tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py",
-        "tests/integration/test_rfc8414_metadata.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/discovery/"
@@ -743,7 +743,7 @@
       "profile": "production",
       "target": "RFC 9068",
       "tests": [
-        "tests/conformance/production/test_rfc9068_jwt_profile.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
@@ -758,10 +758,10 @@
       "profile": "production",
       "target": "RFC 9207",
       "tests": [
-        "tests/conformance/hardening/test_rfc9207_issuer_identification.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_profile_discovery_runtime.py",
-        "tests/unit/test_rfc9207_issuer_identification.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py",
         "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
@@ -772,10 +772,10 @@
       "profile": "production",
       "target": "RFC 9728",
       "tests": [
-        "tests/conformance/production/test_rfc9728_protected_resource_metadata.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9728_protected_resource_metadata.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/integration/test_rfc8414_metadata.py",
-        "tests/unit/test_rfc9728_metadata_checkpoint.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -791,7 +791,7 @@
         "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/security/test_release_bundle_signing.py",
         "tests/unit/test_published_dependency_model.py",
-        "tests/security/test_sender_constraint_replay.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/release-bundle-signing/"
@@ -911,7 +911,7 @@
       "target": "Key lifecycle and JWKS publication",
       "tests": [
         "tests/unit/test_claim_boundary_rebaseline.py",
-        "tests/unit/test_jwks_rotation.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py",
         "tests/unit/test_rpc_registry_live.py",
         "tests/unit/test_cli_contract.py",
         "tests/unit/test_operator_service_layer.py",
@@ -925,9 +925,9 @@
       "profile": "hardening",
       "target": "OIDC Back-Channel Logout",
       "tests": [
-        "tests/conformance/hardening/test_oidc_backchannel_logout.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_backchannel_logout.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/negative/test_cookie_and_logout_abuse_cases.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
@@ -938,13 +938,13 @@
       "profile": "hardening",
       "target": "OIDC Core 1.0",
       "tests": [
-        "tests/conformance/baseline/test_oidc_id_token.py",
-        "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
-        "tests/unit/test_oidc_id_token_canonical_verification.py",
-        "tests/unit/test_authorize_id_token_hashes.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_oidc_id_token.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
         "tests/unit/test_identity_artifact_confusion_vectors.py",
         "tests/integration/test_authorization_response_types.py",
-        "tests/integration/test_oidc_endpoints.py"
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-core/"
@@ -954,10 +954,10 @@
       "profile": "hardening",
       "target": "OIDC Discovery 1.0",
       "tests": [
-        "tests/conformance/baseline/test_openid_configuration.py",
-        "tests/integration/test_oidc_endpoints.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_configuration.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/integration/test_rfc8414_metadata.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -970,9 +970,9 @@
       "profile": "hardening",
       "target": "OIDC Front-Channel Logout",
       "tests": [
-        "tests/conformance/hardening/test_oidc_frontchannel_logout.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_frontchannel_logout.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/negative/test_cookie_and_logout_abuse_cases.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
@@ -983,10 +983,10 @@
       "profile": "hardening",
       "target": "OIDC RP-Initiated Logout",
       "tests": [
-        "tests/conformance/production/test_oidc_rp_initiated_logout.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/negative/test_cookie_and_logout_abuse_cases.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/unit/test_session_logout_cluster_b.py"
       ],
       "evidence_refs": [
@@ -997,10 +997,10 @@
       "profile": "hardening",
       "target": "OIDC Session Management",
       "tests": [
-        "tests/conformance/production/test_oidc_session_management.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/negative/test_cookie_and_logout_abuse_cases.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/unit/test_session_logout_cluster_b.py"
       ],
       "evidence_refs": [
@@ -1011,9 +1011,9 @@
       "profile": "hardening",
       "target": "OIDC UserInfo",
       "tests": [
-        "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
-        "tests/integration/test_oidc_endpoints.py",
-        "tests/unit/test_openid_userinfo_endpoint.py"
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_openid_userinfo_endpoint.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-userinfo/"
@@ -1038,7 +1038,7 @@
         "tests/conformance/production/test_rfc6265_cookies.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/negative/test_cookie_and_logout_abuse_cases.py"
+        "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/cookies/"
@@ -1048,10 +1048,10 @@
       "profile": "hardening",
       "target": "RFC 6749",
       "tests": [
-        "tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py",
-        "tests/conformance/baseline/test_rfc6749_token_endpoint.py",
-        "tests/integration/test_auth_flows.py",
-        "tests/integration/test_authorization_code_flow.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_token_endpoint.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
@@ -1065,8 +1065,8 @@
       "profile": "hardening",
       "target": "RFC 6750",
       "tests": [
-        "tests/conformance/baseline/test_rfc6750_bearer_token.py",
-        "tests/integration/test_auth_flows.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -1079,7 +1079,7 @@
       "profile": "hardening",
       "target": "RFC 7009",
       "tests": [
-        "tests/conformance/production/test_rfc7009_token_revocation.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py",
         "tests/integration/test_full_workflow.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
@@ -1093,10 +1093,10 @@
       "profile": "hardening",
       "target": "RFC 7515",
       "tests": [
-        "tests/conformance/baseline/test_rfc7515_jws.py",
-        "tests/unit/test_rfc7515_jws.py",
+        "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7515_jws.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7515_jws.py",
         "tests/unit/test_complete_wire_objects.py",
-        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
@@ -1107,11 +1107,11 @@
       "profile": "hardening",
       "target": "RFC 7516",
       "tests": [
-        "tests/conformance/production/test_rfc7516_jwe_profile.py",
-        "tests/unit/test_rfc7516_jwe.py",
-        "tests/unit/test_oidc_id_token_encryption.py",
+        "pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7516_jwe.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py",
         "tests/unit/test_complete_wire_objects.py",
-        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
@@ -1122,8 +1122,8 @@
       "profile": "hardening",
       "target": "RFC 7517",
       "tests": [
-        "tests/conformance/baseline/test_rfc7517_jwk.py",
-        "tests/unit/test_jwks_rotation.py"
+        "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7517_jwk.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwks/"
@@ -1133,8 +1133,8 @@
       "profile": "hardening",
       "target": "RFC 7518",
       "tests": [
-        "tests/conformance/baseline/test_rfc7518_jwa.py",
-        "tests/unit/test_rfc7518_jwa.py"
+        "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7518_jwa.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7518_jwa.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jose/"
@@ -1144,8 +1144,8 @@
       "profile": "hardening",
       "target": "RFC 7519",
       "tests": [
-        "tests/conformance/baseline/test_rfc7519_jwt.py",
-        "tests/unit/test_jwtoken.py",
+        "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7519_jwt.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py",
         "tests/unit/test_complete_wire_objects.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -1157,8 +1157,8 @@
       "profile": "hardening",
       "target": "RFC 7521",
       "tests": [
-        "tests/conformance/production/test_rfc7521_assertion_framework.py",
-        "tests/unit/test_rfc7521_assertion_framework.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7521_assertion_framework.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7521_assertion_framework.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/assertion-framework/"
@@ -1168,8 +1168,8 @@
       "profile": "hardening",
       "target": "RFC 7523",
       "tests": [
-        "tests/conformance/production/test_rfc7523_jwt_profile.py",
-        "tests/unit/test_rfc7523_jwt_profile.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7523_jwt_profile.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7523_jwt_profile.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwt-client-auth/"
@@ -1179,11 +1179,11 @@
       "profile": "hardening",
       "target": "RFC 7591",
       "tests": [
-        "tests/conformance/production/test_rfc7591_dynamic_client_registration.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7591_dynamic_client_registration.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_public_route_contracts.py",
-        "tests/unit/test_rfc7591_client_registration_endpoint.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7591_client_registration_endpoint.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/client-registration/"
@@ -1194,10 +1194,10 @@
       "target": "RFC 7592",
       "tests": [
         "tests/unit/test_hardening_cluster_a.py",
-        "tests/conformance/hardening/test_rfc7592_client_registration_management.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc7592_client_registration_management.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
-        "tests/unit/test_rfc7592_client_management_endpoint.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7592_client_management_endpoint.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/client-registration-management/"
@@ -1207,9 +1207,9 @@
       "profile": "hardening",
       "target": "RFC 7636",
       "tests": [
-        "tests/conformance/baseline/test_rfc7636_pkce.py",
-        "tests/integration/test_authorization_code_flow.py",
-        "tests/unit/test_auth_code_exchange_pkce.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc7636_pkce.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -1222,10 +1222,10 @@
       "profile": "hardening",
       "target": "RFC 7662",
       "tests": [
-        "tests/conformance/production/test_rfc7662_introspection.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7662_introspection.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/integration/test_rfc7662.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc7662.py",
         "tests/unit/test_public_route_contracts.py"
       ],
       "evidence_refs": [
@@ -1236,8 +1236,8 @@
       "profile": "hardening",
       "target": "RFC 8252",
       "tests": [
-        "tests/unit/test_rfc8252_native_app_redirects.py",
-        "tests/conformance/production/test_rfc8252_native_apps.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8252_native_app_redirects.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc8252_native_apps.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -1250,8 +1250,8 @@
       "profile": "hardening",
       "target": "RFC 8414",
       "tests": [
-        "tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py",
-        "tests/integration/test_rfc8414_metadata.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/discovery/"
@@ -1274,10 +1274,10 @@
       "target": "RFC 8628",
       "tests": [
         "tests/unit/test_hardening_cluster_a.py",
-        "tests/conformance/hardening/test_rfc8628_device_authorization.py",
-        "tests/integration/test_device_code_flow.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8628_device_authorization.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/integration/test_rfc8628.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py",
         "tests/unit/test_public_route_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
@@ -1292,10 +1292,10 @@
       "target": "RFC 8693",
       "tests": [
         "tests/unit/test_hardening_cluster_a.py",
-        "tests/conformance/hardening/test_rfc8693_token_exchange.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8693_token_exchange.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/integration/test_rfc8693_token_exchange_endpoint.py",
-        "tests/integration/test_token_exchange_flow.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py",
         "tests/unit/test_public_route_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
@@ -1310,7 +1310,7 @@
       "target": "RFC 8707",
       "tests": [
         "tests/unit/test_hardening_cluster_a.py",
-        "tests/conformance/hardening/test_rfc8707_resource_indicators.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8707_resource_indicators.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py"
       ],
@@ -1322,7 +1322,7 @@
       "profile": "hardening",
       "target": "RFC 9068",
       "tests": [
-        "tests/conformance/production/test_rfc9068_jwt_profile.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
@@ -1337,7 +1337,7 @@
       "profile": "hardening",
       "target": "RFC 9101",
       "tests": [
-        "tests/conformance/hardening/test_rfc9101_jar.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9101_jar.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
@@ -1353,7 +1353,7 @@
       "profile": "hardening",
       "target": "RFC 9126",
       "tests": [
-        "tests/conformance/hardening/test_rfc9126_par.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9126_par.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_public_route_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
@@ -1369,10 +1369,10 @@
       "profile": "hardening",
       "target": "RFC 9207",
       "tests": [
-        "tests/conformance/hardening/test_rfc9207_issuer_identification.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_profile_discovery_runtime.py",
-        "tests/unit/test_rfc9207_issuer_identification.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py",
         "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
@@ -1383,7 +1383,7 @@
       "profile": "hardening",
       "target": "RFC 9396",
       "tests": [
-        "tests/conformance/hardening/test_rfc9396_rar.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
@@ -1399,7 +1399,7 @@
       "profile": "hardening",
       "target": "RFC 9449",
       "tests": [
-        "tests/conformance/hardening/test_rfc9449_dpop.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9449_dpop.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
@@ -1415,11 +1415,11 @@
       "profile": "hardening",
       "target": "RFC 9700",
       "tests": [
-        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/negative/test_hardening_runtime_enforcement.py",
         "tests/unit/test_profile_discovery_runtime.py",
-        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
         "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
@@ -1430,10 +1430,10 @@
       "profile": "hardening",
       "target": "RFC 9728",
       "tests": [
-        "tests/conformance/production/test_rfc9728_protected_resource_metadata.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9728_protected_resource_metadata.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/integration/test_rfc8414_metadata.py",
-        "tests/unit/test_rfc9728_metadata_checkpoint.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -1449,7 +1449,7 @@
         "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/security/test_release_bundle_signing.py",
         "tests/unit/test_published_dependency_model.py",
-        "tests/security/test_sender_constraint_replay.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/release-bundle-signing/"
@@ -1569,7 +1569,7 @@
       "target": "Key lifecycle and JWKS publication",
       "tests": [
         "tests/unit/test_claim_boundary_rebaseline.py",
-        "tests/unit/test_jwks_rotation.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py",
         "tests/unit/test_rpc_registry_live.py",
         "tests/unit/test_cli_contract.py",
         "tests/unit/test_operator_service_layer.py",
@@ -1583,9 +1583,9 @@
       "profile": "fapi2-security",
       "target": "OIDC Back-Channel Logout",
       "tests": [
-        "tests/conformance/hardening/test_oidc_backchannel_logout.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_backchannel_logout.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/negative/test_cookie_and_logout_abuse_cases.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
@@ -1596,13 +1596,13 @@
       "profile": "fapi2-security",
       "target": "OIDC Core 1.0",
       "tests": [
-        "tests/conformance/baseline/test_oidc_id_token.py",
-        "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
-        "tests/unit/test_oidc_id_token_canonical_verification.py",
-        "tests/unit/test_authorize_id_token_hashes.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_oidc_id_token.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
         "tests/unit/test_identity_artifact_confusion_vectors.py",
         "tests/integration/test_authorization_response_types.py",
-        "tests/integration/test_oidc_endpoints.py"
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-core/"
@@ -1612,10 +1612,10 @@
       "profile": "fapi2-security",
       "target": "OIDC Discovery 1.0",
       "tests": [
-        "tests/conformance/baseline/test_openid_configuration.py",
-        "tests/integration/test_oidc_endpoints.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_configuration.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/integration/test_rfc8414_metadata.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -1628,9 +1628,9 @@
       "profile": "fapi2-security",
       "target": "OIDC Front-Channel Logout",
       "tests": [
-        "tests/conformance/hardening/test_oidc_frontchannel_logout.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_frontchannel_logout.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/negative/test_cookie_and_logout_abuse_cases.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
@@ -1641,10 +1641,10 @@
       "profile": "fapi2-security",
       "target": "OIDC RP-Initiated Logout",
       "tests": [
-        "tests/conformance/production/test_oidc_rp_initiated_logout.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/negative/test_cookie_and_logout_abuse_cases.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/unit/test_session_logout_cluster_b.py"
       ],
       "evidence_refs": [
@@ -1655,10 +1655,10 @@
       "profile": "fapi2-security",
       "target": "OIDC Session Management",
       "tests": [
-        "tests/conformance/production/test_oidc_session_management.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/negative/test_cookie_and_logout_abuse_cases.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/unit/test_session_logout_cluster_b.py"
       ],
       "evidence_refs": [
@@ -1669,9 +1669,9 @@
       "profile": "fapi2-security",
       "target": "OIDC UserInfo",
       "tests": [
-        "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
-        "tests/integration/test_oidc_endpoints.py",
-        "tests/unit/test_openid_userinfo_endpoint.py"
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_openid_userinfo_endpoint.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-userinfo/"
@@ -1696,7 +1696,7 @@
         "tests/conformance/production/test_rfc6265_cookies.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/negative/test_cookie_and_logout_abuse_cases.py"
+        "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/cookies/"
@@ -1706,10 +1706,10 @@
       "profile": "fapi2-security",
       "target": "RFC 6749",
       "tests": [
-        "tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py",
-        "tests/conformance/baseline/test_rfc6749_token_endpoint.py",
-        "tests/integration/test_auth_flows.py",
-        "tests/integration/test_authorization_code_flow.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_token_endpoint.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
@@ -1723,8 +1723,8 @@
       "profile": "fapi2-security",
       "target": "RFC 6750",
       "tests": [
-        "tests/conformance/baseline/test_rfc6750_bearer_token.py",
-        "tests/integration/test_auth_flows.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -1737,7 +1737,7 @@
       "profile": "fapi2-security",
       "target": "RFC 7009",
       "tests": [
-        "tests/conformance/production/test_rfc7009_token_revocation.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py",
         "tests/integration/test_full_workflow.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
@@ -1751,10 +1751,10 @@
       "profile": "fapi2-security",
       "target": "RFC 7515",
       "tests": [
-        "tests/conformance/baseline/test_rfc7515_jws.py",
-        "tests/unit/test_rfc7515_jws.py",
+        "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7515_jws.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7515_jws.py",
         "tests/unit/test_complete_wire_objects.py",
-        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
@@ -1765,11 +1765,11 @@
       "profile": "fapi2-security",
       "target": "RFC 7516",
       "tests": [
-        "tests/conformance/production/test_rfc7516_jwe_profile.py",
-        "tests/unit/test_rfc7516_jwe.py",
-        "tests/unit/test_oidc_id_token_encryption.py",
+        "pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7516_jwe.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py",
         "tests/unit/test_complete_wire_objects.py",
-        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
@@ -1780,8 +1780,8 @@
       "profile": "fapi2-security",
       "target": "RFC 7517",
       "tests": [
-        "tests/conformance/baseline/test_rfc7517_jwk.py",
-        "tests/unit/test_jwks_rotation.py"
+        "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7517_jwk.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwks/"
@@ -1791,8 +1791,8 @@
       "profile": "fapi2-security",
       "target": "RFC 7518",
       "tests": [
-        "tests/conformance/baseline/test_rfc7518_jwa.py",
-        "tests/unit/test_rfc7518_jwa.py"
+        "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7518_jwa.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7518_jwa.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jose/"
@@ -1802,8 +1802,8 @@
       "profile": "fapi2-security",
       "target": "RFC 7519",
       "tests": [
-        "tests/conformance/baseline/test_rfc7519_jwt.py",
-        "tests/unit/test_jwtoken.py",
+        "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7519_jwt.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py",
         "tests/unit/test_complete_wire_objects.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -1815,8 +1815,8 @@
       "profile": "fapi2-security",
       "target": "RFC 7521",
       "tests": [
-        "tests/conformance/production/test_rfc7521_assertion_framework.py",
-        "tests/unit/test_rfc7521_assertion_framework.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7521_assertion_framework.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7521_assertion_framework.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/assertion-framework/"
@@ -1826,8 +1826,8 @@
       "profile": "fapi2-security",
       "target": "RFC 7523",
       "tests": [
-        "tests/conformance/production/test_rfc7523_jwt_profile.py",
-        "tests/unit/test_rfc7523_jwt_profile.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7523_jwt_profile.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7523_jwt_profile.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwt-client-auth/"
@@ -1837,11 +1837,11 @@
       "profile": "fapi2-security",
       "target": "RFC 7591",
       "tests": [
-        "tests/conformance/production/test_rfc7591_dynamic_client_registration.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7591_dynamic_client_registration.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_public_route_contracts.py",
-        "tests/unit/test_rfc7591_client_registration_endpoint.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7591_client_registration_endpoint.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/client-registration/"
@@ -1852,10 +1852,10 @@
       "target": "RFC 7592",
       "tests": [
         "tests/unit/test_hardening_cluster_a.py",
-        "tests/conformance/hardening/test_rfc7592_client_registration_management.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc7592_client_registration_management.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
-        "tests/unit/test_rfc7592_client_management_endpoint.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7592_client_management_endpoint.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/client-registration-management/"
@@ -1865,9 +1865,9 @@
       "profile": "fapi2-security",
       "target": "RFC 7636",
       "tests": [
-        "tests/conformance/baseline/test_rfc7636_pkce.py",
-        "tests/integration/test_authorization_code_flow.py",
-        "tests/unit/test_auth_code_exchange_pkce.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc7636_pkce.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -1880,10 +1880,10 @@
       "profile": "fapi2-security",
       "target": "RFC 7662",
       "tests": [
-        "tests/conformance/production/test_rfc7662_introspection.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7662_introspection.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/integration/test_rfc7662.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc7662.py",
         "tests/unit/test_public_route_contracts.py"
       ],
       "evidence_refs": [
@@ -1894,8 +1894,8 @@
       "profile": "fapi2-security",
       "target": "RFC 8252",
       "tests": [
-        "tests/unit/test_rfc8252_native_app_redirects.py",
-        "tests/conformance/production/test_rfc8252_native_apps.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8252_native_app_redirects.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc8252_native_apps.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -1908,8 +1908,8 @@
       "profile": "fapi2-security",
       "target": "RFC 8414",
       "tests": [
-        "tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py",
-        "tests/integration/test_rfc8414_metadata.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/discovery/"
@@ -1932,10 +1932,10 @@
       "target": "RFC 8628",
       "tests": [
         "tests/unit/test_hardening_cluster_a.py",
-        "tests/conformance/hardening/test_rfc8628_device_authorization.py",
-        "tests/integration/test_device_code_flow.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8628_device_authorization.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/integration/test_rfc8628.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py",
         "tests/unit/test_public_route_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
@@ -1950,10 +1950,10 @@
       "target": "RFC 8693",
       "tests": [
         "tests/unit/test_hardening_cluster_a.py",
-        "tests/conformance/hardening/test_rfc8693_token_exchange.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8693_token_exchange.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/integration/test_rfc8693_token_exchange_endpoint.py",
-        "tests/integration/test_token_exchange_flow.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py",
         "tests/unit/test_public_route_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
@@ -1967,7 +1967,7 @@
       "profile": "fapi2-security",
       "target": "RFC 8705",
       "tests": [
-        "tests/conformance/hardening/test_rfc8705_mtls.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8705_mtls.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
@@ -1984,7 +1984,7 @@
       "target": "RFC 8707",
       "tests": [
         "tests/unit/test_hardening_cluster_a.py",
-        "tests/conformance/hardening/test_rfc8707_resource_indicators.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8707_resource_indicators.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py"
       ],
@@ -1996,7 +1996,7 @@
       "profile": "fapi2-security",
       "target": "RFC 9068",
       "tests": [
-        "tests/conformance/production/test_rfc9068_jwt_profile.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
@@ -2011,7 +2011,7 @@
       "profile": "fapi2-security",
       "target": "RFC 9101",
       "tests": [
-        "tests/conformance/hardening/test_rfc9101_jar.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9101_jar.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
@@ -2027,7 +2027,7 @@
       "profile": "fapi2-security",
       "target": "RFC 9126",
       "tests": [
-        "tests/conformance/hardening/test_rfc9126_par.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9126_par.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_public_route_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
@@ -2043,10 +2043,10 @@
       "profile": "fapi2-security",
       "target": "RFC 9207",
       "tests": [
-        "tests/conformance/hardening/test_rfc9207_issuer_identification.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_profile_discovery_runtime.py",
-        "tests/unit/test_rfc9207_issuer_identification.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py",
         "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
@@ -2057,7 +2057,7 @@
       "profile": "fapi2-security",
       "target": "RFC 9396",
       "tests": [
-        "tests/conformance/hardening/test_rfc9396_rar.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
@@ -2073,7 +2073,7 @@
       "profile": "fapi2-security",
       "target": "RFC 9449",
       "tests": [
-        "tests/conformance/hardening/test_rfc9449_dpop.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9449_dpop.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
@@ -2089,11 +2089,11 @@
       "profile": "fapi2-security",
       "target": "RFC 9700",
       "tests": [
-        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/negative/test_hardening_runtime_enforcement.py",
         "tests/unit/test_profile_discovery_runtime.py",
-        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
         "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
@@ -2104,10 +2104,10 @@
       "profile": "fapi2-security",
       "target": "RFC 9728",
       "tests": [
-        "tests/conformance/production/test_rfc9728_protected_resource_metadata.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9728_protected_resource_metadata.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/integration/test_rfc8414_metadata.py",
-        "tests/unit/test_rfc9728_metadata_checkpoint.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -2123,7 +2123,7 @@
         "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/security/test_release_bundle_signing.py",
         "tests/unit/test_published_dependency_model.py",
-        "tests/security/test_sender_constraint_replay.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/release-bundle-signing/"
@@ -2243,7 +2243,7 @@
       "target": "Key lifecycle and JWKS publication",
       "tests": [
         "tests/unit/test_claim_boundary_rebaseline.py",
-        "tests/unit/test_jwks_rotation.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py",
         "tests/unit/test_rpc_registry_live.py",
         "tests/unit/test_cli_contract.py",
         "tests/unit/test_operator_service_layer.py",
@@ -2257,9 +2257,9 @@
       "profile": "peer-claim",
       "target": "OIDC Back-Channel Logout",
       "tests": [
-        "tests/conformance/hardening/test_oidc_backchannel_logout.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_backchannel_logout.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/negative/test_cookie_and_logout_abuse_cases.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
@@ -2270,13 +2270,13 @@
       "profile": "peer-claim",
       "target": "OIDC Core 1.0",
       "tests": [
-        "tests/conformance/baseline/test_oidc_id_token.py",
-        "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
-        "tests/unit/test_oidc_id_token_canonical_verification.py",
-        "tests/unit/test_authorize_id_token_hashes.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_oidc_id_token.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
         "tests/unit/test_identity_artifact_confusion_vectors.py",
         "tests/integration/test_authorization_response_types.py",
-        "tests/integration/test_oidc_endpoints.py"
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-core/"
@@ -2286,10 +2286,10 @@
       "profile": "peer-claim",
       "target": "OIDC Discovery 1.0",
       "tests": [
-        "tests/conformance/baseline/test_openid_configuration.py",
-        "tests/integration/test_oidc_endpoints.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_configuration.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/integration/test_rfc8414_metadata.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -2302,9 +2302,9 @@
       "profile": "peer-claim",
       "target": "OIDC Front-Channel Logout",
       "tests": [
-        "tests/conformance/hardening/test_oidc_frontchannel_logout.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_frontchannel_logout.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/negative/test_cookie_and_logout_abuse_cases.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
@@ -2315,10 +2315,10 @@
       "profile": "peer-claim",
       "target": "OIDC RP-Initiated Logout",
       "tests": [
-        "tests/conformance/production/test_oidc_rp_initiated_logout.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/negative/test_cookie_and_logout_abuse_cases.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/unit/test_session_logout_cluster_b.py"
       ],
       "evidence_refs": [
@@ -2329,10 +2329,10 @@
       "profile": "peer-claim",
       "target": "OIDC Session Management",
       "tests": [
-        "tests/conformance/production/test_oidc_session_management.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/negative/test_cookie_and_logout_abuse_cases.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/unit/test_session_logout_cluster_b.py"
       ],
       "evidence_refs": [
@@ -2343,9 +2343,9 @@
       "profile": "peer-claim",
       "target": "OIDC UserInfo",
       "tests": [
-        "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
-        "tests/integration/test_oidc_endpoints.py",
-        "tests/unit/test_openid_userinfo_endpoint.py"
+        "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_openid_userinfo_endpoint.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-userinfo/"
@@ -2370,7 +2370,7 @@
         "tests/conformance/production/test_rfc6265_cookies.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/negative/test_cookie_and_logout_abuse_cases.py"
+        "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/cookies/"
@@ -2380,10 +2380,10 @@
       "profile": "peer-claim",
       "target": "RFC 6749",
       "tests": [
-        "tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py",
-        "tests/conformance/baseline/test_rfc6749_token_endpoint.py",
-        "tests/integration/test_auth_flows.py",
-        "tests/integration/test_authorization_code_flow.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_token_endpoint.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
@@ -2397,8 +2397,8 @@
       "profile": "peer-claim",
       "target": "RFC 6750",
       "tests": [
-        "tests/conformance/baseline/test_rfc6750_bearer_token.py",
-        "tests/integration/test_auth_flows.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -2411,7 +2411,7 @@
       "profile": "peer-claim",
       "target": "RFC 7009",
       "tests": [
-        "tests/conformance/production/test_rfc7009_token_revocation.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py",
         "tests/integration/test_full_workflow.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
@@ -2425,10 +2425,10 @@
       "profile": "peer-claim",
       "target": "RFC 7515",
       "tests": [
-        "tests/conformance/baseline/test_rfc7515_jws.py",
-        "tests/unit/test_rfc7515_jws.py",
+        "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7515_jws.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7515_jws.py",
         "tests/unit/test_complete_wire_objects.py",
-        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
@@ -2439,11 +2439,11 @@
       "profile": "peer-claim",
       "target": "RFC 7516",
       "tests": [
-        "tests/conformance/production/test_rfc7516_jwe_profile.py",
-        "tests/unit/test_rfc7516_jwe.py",
-        "tests/unit/test_oidc_id_token_encryption.py",
+        "pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7516_jwe.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py",
         "tests/unit/test_complete_wire_objects.py",
-        "tests/unit/test_jose_cose_cryptography_providers.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
@@ -2454,8 +2454,8 @@
       "profile": "peer-claim",
       "target": "RFC 7517",
       "tests": [
-        "tests/conformance/baseline/test_rfc7517_jwk.py",
-        "tests/unit/test_jwks_rotation.py"
+        "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7517_jwk.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwks/"
@@ -2465,8 +2465,8 @@
       "profile": "peer-claim",
       "target": "RFC 7518",
       "tests": [
-        "tests/conformance/baseline/test_rfc7518_jwa.py",
-        "tests/unit/test_rfc7518_jwa.py"
+        "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7518_jwa.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7518_jwa.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jose/"
@@ -2476,8 +2476,8 @@
       "profile": "peer-claim",
       "target": "RFC 7519",
       "tests": [
-        "tests/conformance/baseline/test_rfc7519_jwt.py",
-        "tests/unit/test_jwtoken.py",
+        "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7519_jwt.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py",
         "tests/unit/test_complete_wire_objects.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -2489,8 +2489,8 @@
       "profile": "peer-claim",
       "target": "RFC 7521",
       "tests": [
-        "tests/conformance/production/test_rfc7521_assertion_framework.py",
-        "tests/unit/test_rfc7521_assertion_framework.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7521_assertion_framework.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7521_assertion_framework.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/assertion-framework/"
@@ -2500,8 +2500,8 @@
       "profile": "peer-claim",
       "target": "RFC 7523",
       "tests": [
-        "tests/conformance/production/test_rfc7523_jwt_profile.py",
-        "tests/unit/test_rfc7523_jwt_profile.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7523_jwt_profile.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7523_jwt_profile.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwt-client-auth/"
@@ -2511,11 +2511,11 @@
       "profile": "peer-claim",
       "target": "RFC 7591",
       "tests": [
-        "tests/conformance/production/test_rfc7591_dynamic_client_registration.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7591_dynamic_client_registration.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_public_route_contracts.py",
-        "tests/unit/test_rfc7591_client_registration_endpoint.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7591_client_registration_endpoint.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/client-registration/"
@@ -2526,10 +2526,10 @@
       "target": "RFC 7592",
       "tests": [
         "tests/unit/test_hardening_cluster_a.py",
-        "tests/conformance/hardening/test_rfc7592_client_registration_management.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc7592_client_registration_management.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
-        "tests/unit/test_rfc7592_client_management_endpoint.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7592_client_management_endpoint.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/client-registration-management/"
@@ -2539,9 +2539,9 @@
       "profile": "peer-claim",
       "target": "RFC 7636",
       "tests": [
-        "tests/conformance/baseline/test_rfc7636_pkce.py",
-        "tests/integration/test_authorization_code_flow.py",
-        "tests/unit/test_auth_code_exchange_pkce.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc7636_pkce.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -2554,10 +2554,10 @@
       "profile": "peer-claim",
       "target": "RFC 7662",
       "tests": [
-        "tests/conformance/production/test_rfc7662_introspection.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7662_introspection.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/integration/test_rfc7662.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc7662.py",
         "tests/unit/test_public_route_contracts.py"
       ],
       "evidence_refs": [
@@ -2568,8 +2568,8 @@
       "profile": "peer-claim",
       "target": "RFC 8252",
       "tests": [
-        "tests/unit/test_rfc8252_native_app_redirects.py",
-        "tests/conformance/production/test_rfc8252_native_apps.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8252_native_app_redirects.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc8252_native_apps.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -2582,8 +2582,8 @@
       "profile": "peer-claim",
       "target": "RFC 8414",
       "tests": [
-        "tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py",
-        "tests/integration/test_rfc8414_metadata.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/discovery/"
@@ -2606,10 +2606,10 @@
       "target": "RFC 8628",
       "tests": [
         "tests/unit/test_hardening_cluster_a.py",
-        "tests/conformance/hardening/test_rfc8628_device_authorization.py",
-        "tests/integration/test_device_code_flow.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8628_device_authorization.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/integration/test_rfc8628.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py",
         "tests/unit/test_public_route_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
@@ -2624,10 +2624,10 @@
       "target": "RFC 8693",
       "tests": [
         "tests/unit/test_hardening_cluster_a.py",
-        "tests/conformance/hardening/test_rfc8693_token_exchange.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8693_token_exchange.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/integration/test_rfc8693_token_exchange_endpoint.py",
-        "tests/integration/test_token_exchange_flow.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py",
         "tests/unit/test_public_route_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
@@ -2642,7 +2642,7 @@
       "target": "RFC 8707",
       "tests": [
         "tests/unit/test_hardening_cluster_a.py",
-        "tests/conformance/hardening/test_rfc8707_resource_indicators.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8707_resource_indicators.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py"
       ],
@@ -2654,7 +2654,7 @@
       "profile": "peer-claim",
       "target": "RFC 9068",
       "tests": [
-        "tests/conformance/production/test_rfc9068_jwt_profile.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
@@ -2669,7 +2669,7 @@
       "profile": "peer-claim",
       "target": "RFC 9101",
       "tests": [
-        "tests/conformance/hardening/test_rfc9101_jar.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9101_jar.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
@@ -2685,7 +2685,7 @@
       "profile": "peer-claim",
       "target": "RFC 9126",
       "tests": [
-        "tests/conformance/hardening/test_rfc9126_par.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9126_par.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_public_route_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
@@ -2701,10 +2701,10 @@
       "profile": "peer-claim",
       "target": "RFC 9207",
       "tests": [
-        "tests/conformance/hardening/test_rfc9207_issuer_identification.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_profile_discovery_runtime.py",
-        "tests/unit/test_rfc9207_issuer_identification.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py",
         "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
@@ -2715,7 +2715,7 @@
       "profile": "peer-claim",
       "target": "RFC 9396",
       "tests": [
-        "tests/conformance/hardening/test_rfc9396_rar.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
@@ -2731,7 +2731,7 @@
       "profile": "peer-claim",
       "target": "RFC 9449",
       "tests": [
-        "tests/conformance/hardening/test_rfc9449_dpop.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9449_dpop.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
@@ -2747,11 +2747,11 @@
       "profile": "peer-claim",
       "target": "RFC 9700",
       "tests": [
-        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/negative/test_hardening_runtime_enforcement.py",
         "tests/unit/test_profile_discovery_runtime.py",
-        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
         "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
@@ -2762,10 +2762,10 @@
       "profile": "peer-claim",
       "target": "RFC 9728",
       "tests": [
-        "tests/conformance/production/test_rfc9728_protected_resource_metadata.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9728_protected_resource_metadata.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/integration/test_rfc8414_metadata.py",
-        "tests/unit/test_rfc9728_metadata_checkpoint.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -2781,7 +2781,7 @@
         "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/security/test_release_bundle_signing.py",
         "tests/unit/test_published_dependency_model.py",
-        "tests/security/test_sender_constraint_replay.py"
+        "pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/release-bundle-signing/"

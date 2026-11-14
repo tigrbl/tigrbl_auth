@@ -9,7 +9,7 @@ modules:
 - tba_auth/standards/oauth2/token_exchange.py
 tests:
 - tests/unit/test_hardening_cluster_a.py
-- tests/conformance/hardening/test_rfc8707_resource_indicators.py
+- pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8707_resource_indicators.py
 contracts:
 - contracts/authorize-openapi-path.json
 - contracts/device-authorization-openapi-path.json

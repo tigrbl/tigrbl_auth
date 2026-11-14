@@ -9,7 +9,7 @@ modules:
 - tba_auth/tables/device_code.py
 tests:
 - tests/unit/test_hardening_cluster_a.py
-- tests/conformance/hardening/test_rfc8628_device_authorization.py
+- pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8628_device_authorization.py
 contracts:
 - contracts/device-authorization-openapi-path.json
 - contracts/device-flow-runtime.json
