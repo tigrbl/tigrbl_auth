@@ -15,6 +15,8 @@ the migrated suites and the remaining root tests.
 | `tba-tests-oauth` | OAuth grants, extensions, HTTP bindings, and security profiles |
 | `tba-tests-oidc` | OpenID Connect discovery, ID tokens, UserInfo, and logout |
 | `tba-tests-jose` | JOSE/JWT and related signing, encryption, and key handling |
+| `tba-tests-wire-codecs` | JSON canonicalization, multibase, CID, and DAG-CBOR |
+| `tba-tests-webpush` | Legacy Web Push message encryption checks, pending a supported implementation |
 | `tba-tests-did` | DID Core documents, resolution, dereferencing, and controller behavior |
 | `tba-tests-gnap` | Grant Negotiation and Authorization Protocol versions and capability binding |
 | `tba-tests-ucan` | UCAN delegation and invocation verification |

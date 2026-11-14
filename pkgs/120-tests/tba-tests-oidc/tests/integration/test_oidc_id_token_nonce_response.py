@@ -1,4 +1,5 @@
 import pytest
+from uuid import uuid4
 from urllib.parse import parse_qs, urlparse
 from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -7,7 +8,7 @@ from tba_auth.tables import Tenant, User, Client
 from tba_auth.crypto import hash_pw
 
 
-async def _prepare(db: AsyncSession) -> None:
+async def _prepare(db: AsyncSession) -> str:
     tenant = Tenant(slug="t1", name="T1", email="t1@example.com")
     db.add(tenant)
     await db.commit()
@@ -19,37 +20,15 @@ async def _prepare(db: AsyncSession) -> None:
     )
     db.add(user)
     await db.commit()
-    client = Client.new(
+    client = Client(
         tenant_id=tenant.id,
-        client_id="client123",
-        client_secret="secret",
-        redirects=["https://client.example.com/cb"],
+        id=uuid4(),
+        client_secret_hash=hash_pw("secret"),
+        redirect_uris="https://client.example.com/cb",
     )
     db.add(client)
     await db.commit()
-
-
-@pytest.mark.integration
-@pytest.mark.asyncio
-async def test_authorize_token_flow(
-    async_client: AsyncClient, db_session: AsyncSession
-):
-    await _prepare(db_session)
-    params = {
-        "response_type": "token",
-        "client_id": "client123",
-        "redirect_uri": "https://client.example.com/cb",
-        "scope": "openid",
-        "state": "xyz",
-        "username": "alice",
-        "password": "Passw0rd!",
-    }
-    resp = await async_client.get("/authorize", params=params, follow_redirects=False)
-    assert resp.status_code in {302, 307}
-    qs = parse_qs(urlparse(resp.headers["location"]).query)
-    assert "access_token" in qs
-    assert qs.get("token_type", [None])[0] == "bearer"
-    assert qs.get("state", [None])[0] == "xyz"
+    return str(client.id)
 
 
 @pytest.mark.integration
@@ -57,19 +36,21 @@ async def test_authorize_token_flow(
 async def test_authorize_id_token_requires_nonce(
     async_client: AsyncClient, db_session: AsyncSession
 ):
-    await _prepare(db_session)
+    client_id = await _prepare(db_session)
+    login = await async_client.post(
+        "/login", json={"identifier": "alice", "password": "Passw0rd!"}
+    )
+    assert login.status_code == 200, login.text
     params = {
         "response_type": "id_token",
-        "client_id": "client123",
+        "client_id": client_id,
         "redirect_uri": "https://client.example.com/cb",
         "scope": "openid",
-        "username": "alice",
-        "password": "Passw0rd!",
     }
     resp = await async_client.get("/authorize", params=params, follow_redirects=False)
     assert resp.status_code == 400
     params["nonce"] = "n-0S6_WzA2Mj"
     resp2 = await async_client.get("/authorize", params=params, follow_redirects=False)
     assert resp2.status_code in {302, 307}
-    qs = parse_qs(urlparse(resp2.headers["location"]).query)
+    qs = parse_qs(urlparse(resp2.headers["location"]).fragment)
     assert "id_token" in qs

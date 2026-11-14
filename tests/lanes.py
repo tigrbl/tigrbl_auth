@@ -29,10 +29,12 @@ EXTENSION_TEST_PREFIXES = (
     "test_rfc8291_",
     "test_rfc8812_",
     "test_rfc8932_",
+    "test_enhanced_oauth_metadata_legacy.py",
 )
 DEFERRED_INTEGRATION_FILES = {
     "test_auth_flows.py",
-    "test_authorization_response_types.py",
+    "test_oauth_access_token_response.py",
+    "test_oidc_id_token_nonce_response.py",
     "test_crud_api.py",
     "test_device_code_flow.py",
     "test_full_workflow.py",

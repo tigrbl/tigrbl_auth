@@ -571,6 +571,8 @@ testpaths = [
     "pkgs/120-tests/tba-tests-oauth/tests",
     "pkgs/120-tests/tba-tests-oidc/tests",
     "pkgs/120-tests/tba-tests-jose/tests",
+    "pkgs/120-tests/tba-tests-wire-codecs/tests",
+    "pkgs/120-tests/tba-tests-webpush/tests",
     "pkgs/120-tests/tba-tests-did/tests",
     "pkgs/120-tests/tba-tests-gnap/tests",
     "pkgs/120-tests/tba-tests-ucan/tests",

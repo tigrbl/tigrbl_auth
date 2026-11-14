@@ -49,7 +49,7 @@ def capability_report() -> dict[str, object]:
         protocol="rp",
         revision=CURRENT_VERSION.identifier,
         features=tuple(FEATURES_BY_VERSION[CURRENT_VERSION.identifier]),
-        evidence_links=("tests/unit/test_rp_consumer_boundary.py",),
+        evidence_links=("pkgs/120-tests/tba-tests-oidc/tests/unit/test_rp_consumer_boundary.py",),
         extra_requirements=CAPABILITY_REQUIREMENTS,
         include_default_artifact_requirements=False,
     )

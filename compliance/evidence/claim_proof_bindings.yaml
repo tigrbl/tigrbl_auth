@@ -3670,8 +3670,7 @@ bindings:
   - RFC 8932
   profile: null
   positive_tests:
-  - tests/unit/test_rfc8932_dns_privacy.py
-  - tests/unit/test_rfc8932_enhanced_metadata.py
+  - pkgs/120-tests/tba-tests-dns/tests/unit/test_rfc8932_dns_privacy.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/discovery/
@@ -3708,7 +3707,7 @@ bindings:
   - RFC 8291
   profile: null
   positive_tests:
-  - tests/unit/test_rfc8291_webpush_encryption.py
+  - pkgs/120-tests/tba-tests-webpush/tests/unit/test_rfc8291_webpush_encryption.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/jwe/
@@ -3760,7 +3759,8 @@ bindings:
   - tests/e2e/test_release_gate_catalog.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
-  - tests/integration/test_authorization_response_types.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
+  - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
   - tests/integration/test_full_workflow.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
@@ -3905,7 +3905,8 @@ bindings:
   - tests/e2e/test_release_gate_catalog.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
-  - tests/integration/test_authorization_response_types.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
+  - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
   - tests/integration/test_full_workflow.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
@@ -4051,7 +4052,8 @@ bindings:
   - tests/e2e/test_release_gate_catalog.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
-  - tests/integration/test_authorization_response_types.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
+  - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
   - tests/integration/test_full_workflow.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
@@ -4195,7 +4197,8 @@ bindings:
   - tests/e2e/test_release_gate_catalog.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
-  - tests/integration/test_authorization_response_types.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
+  - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
   - tests/integration/test_full_workflow.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
@@ -4341,7 +4344,8 @@ bindings:
   - tests/e2e/test_release_gate_catalog.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
-  - tests/integration/test_authorization_response_types.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
+  - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
   - tests/integration/test_full_workflow.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
@@ -4479,7 +4483,8 @@ bindings:
   - tests/e2e/test_release_gate_catalog.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
-  - tests/integration/test_authorization_response_types.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
+  - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
   - tests/integration/test_full_workflow.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
@@ -6104,7 +6109,8 @@ bindings:
   - tests/e2e/test_release_gate_catalog.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
-  - tests/integration/test_authorization_response_types.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
+  - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
   - tests/integration/test_full_workflow.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
@@ -6146,7 +6152,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py
   - tests/unit/test_session_logout_cluster_b.py
   - tests/unit/test_well_known_endpoints_behavior.py
-  - tests/unit/test_complete_wire_objects.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py
   - tests/unit/test_profile_protocol_bindings.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
@@ -6385,7 +6391,8 @@ bindings:
   - tests/e2e/test_release_gate_catalog.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
-  - tests/integration/test_authorization_response_types.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
+  - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
   - tests/integration/test_full_workflow.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
@@ -6428,7 +6435,7 @@ bindings:
   - tests/unit/test_rpc_registry_live.py
   - tests/unit/test_session_logout_cluster_b.py
   - tests/unit/test_well_known_endpoints_behavior.py
-  - tests/unit/test_complete_wire_objects.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py
   - tests/unit/test_profile_protocol_bindings.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
@@ -6668,7 +6675,8 @@ bindings:
   - tests/e2e/test_release_gate_catalog.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
-  - tests/integration/test_authorization_response_types.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
+  - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
   - tests/integration/test_full_workflow.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
@@ -6711,7 +6719,7 @@ bindings:
   - tests/unit/test_rpc_registry_live.py
   - tests/unit/test_session_logout_cluster_b.py
   - tests/unit/test_well_known_endpoints_behavior.py
-  - tests/unit/test_complete_wire_objects.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py
   - tests/unit/test_profile_protocol_bindings.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
@@ -6954,7 +6962,8 @@ bindings:
   - tests/e2e/test_release_gate_catalog.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
-  - tests/integration/test_authorization_response_types.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
+  - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
   - tests/integration/test_full_workflow.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
@@ -6997,7 +7006,7 @@ bindings:
   - tests/unit/test_rpc_registry_live.py
   - tests/unit/test_session_logout_cluster_b.py
   - tests/unit/test_well_known_endpoints_behavior.py
-  - tests/unit/test_complete_wire_objects.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py
   - tests/unit/test_profile_protocol_bindings.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
@@ -7172,7 +7181,8 @@ bindings:
   - tests/e2e/test_release_gate_catalog.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
-  - tests/integration/test_authorization_response_types.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
+  - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
   - tests/integration/test_full_workflow.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
@@ -7215,7 +7225,7 @@ bindings:
   - tests/unit/test_rpc_registry_live.py
   - tests/unit/test_session_logout_cluster_b.py
   - tests/unit/test_well_known_endpoints_behavior.py
-  - tests/unit/test_complete_wire_objects.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py
   - tests/unit/test_profile_protocol_bindings.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
@@ -7378,7 +7388,8 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_token_endpoint.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
-  - tests/integration/test_authorization_response_types.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
+  - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/interop/test_peer_counterpart_catalog.py
@@ -7405,7 +7416,8 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_token_endpoint.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
-  - tests/integration/test_authorization_response_types.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
+  - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/interop/test_peer_counterpart_catalog.py
@@ -7432,7 +7444,8 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_token_endpoint.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
-  - tests/integration/test_authorization_response_types.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
+  - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/interop/test_peer_counterpart_catalog.py
@@ -7459,7 +7472,8 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_token_endpoint.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
-  - tests/integration/test_authorization_response_types.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
+  - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/interop/test_peer_counterpart_catalog.py
@@ -7513,7 +7527,8 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py
   - tests/conformance/production/test_rfc6265_cookies.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
-  - tests/integration/test_authorization_response_types.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
+  - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - tests/integration/test_persistence_lifecycle_durability.py
@@ -7610,7 +7625,8 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc8252_native_apps.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
-  - tests/integration/test_authorization_response_types.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
+  - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - tests/integration/test_persistence_lifecycle_durability.py
@@ -8737,7 +8753,8 @@ bindings:
   positive_tests:
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_oidc_id_token.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py
-  - tests/integration/test_authorization_response_types.py
+  - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
+  - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py
@@ -8935,7 +8952,7 @@ bindings:
   positive_tests:
   - pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7515_jws.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7515_jws.py
-  - tests/unit/test_complete_wire_objects.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py
   - tests/unit/test_profile_protocol_bindings.py
   negative_tests: []
@@ -8951,7 +8968,7 @@ bindings:
   - pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7516_jwe.py
-  - tests/unit/test_complete_wire_objects.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py
   - tests/unit/test_profile_protocol_bindings.py
   negative_tests: []
@@ -8990,7 +9007,7 @@ bindings:
   positive_tests:
   - pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7519_jwt.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py
-  - tests/unit/test_complete_wire_objects.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py
   - tests/unit/test_profile_protocol_bindings.py
   negative_tests: []
   evidence_refs:
@@ -9113,7 +9130,7 @@ bindings:
   - RFC 8291
   profile: null
   positive_tests:
-  - tests/unit/test_rfc8291_webpush_encryption.py
+  - pkgs/120-tests/tba-tests-webpush/tests/unit/test_rfc8291_webpush_encryption.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/jwe/
@@ -9264,8 +9281,7 @@ bindings:
   - RFC 8932
   profile: null
   positive_tests:
-  - tests/unit/test_rfc8932_dns_privacy.py
-  - tests/unit/test_rfc8932_enhanced_metadata.py
+  - pkgs/120-tests/tba-tests-dns/tests/unit/test_rfc8932_dns_privacy.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/discovery/

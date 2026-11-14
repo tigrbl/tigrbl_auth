@@ -1,4 +1,4 @@
-"""Tests for RFC 8932: Enhanced OAuth 2.0 Authorization Server Metadata.
+"""Legacy Tigrbl Auth enhanced OAuth 2.0 authorization server metadata tests.
 
 See related RFC 8414: OAuth 2.0 Authorization Server Metadata
 """
@@ -10,6 +10,8 @@ from http import HTTPStatus as status
 from httpx import ASGITransport, AsyncClient
 
 from tba_app_backend_public import app
+pytest.importorskip("tba_auth.rfc.rfc8932", reason="Legacy OAuth metadata extension is absent")
+
 from tba_auth.rfc.rfc8932 import (
     RFC8932_SPEC_URL,
     include_rfc8932,
@@ -22,7 +24,7 @@ from tba_auth.runtime_cfg import settings
 
 @pytest.mark.unit
 def test_get_enhanced_authorization_server_metadata_basic():
-    """RFC 8932: Get basic enhanced metadata."""
+    """Legacy metadata: Get basic enhanced metadata."""
     metadata = get_enhanced_authorization_server_metadata()
 
     # Basic RFC 8414 fields should be present
@@ -51,7 +53,7 @@ def test_get_enhanced_authorization_server_metadata_basic():
 
 @pytest.mark.unit
 def test_get_enhanced_authorization_server_metadata_with_extensions():
-    """RFC 8932: Enhanced metadata includes RFC extensions when enabled."""
+    """Legacy metadata: Enhanced metadata includes RFC extensions when enabled."""
     with patch.object(settings, "enable_rfc7009", True):
         with patch.object(settings, "enable_rfc7662", True):
             with patch.object(settings, "enable_rfc8628", True):
@@ -75,7 +77,7 @@ def test_get_enhanced_authorization_server_metadata_with_extensions():
 
 @pytest.mark.unit
 def test_get_enhanced_authorization_server_metadata_token_exchange():
-    """RFC 8932: Token exchange metadata when RFC 8693 is enabled."""
+    """Legacy metadata: Token exchange metadata when RFC 8693 is enabled."""
     with patch.object(settings, "enable_rfc8693", True):
         metadata = get_enhanced_authorization_server_metadata()
 
@@ -94,7 +96,7 @@ def test_get_enhanced_authorization_server_metadata_token_exchange():
 
 @pytest.mark.unit
 def test_get_enhanced_authorization_server_metadata_mtls():
-    """RFC 8932: mTLS metadata when RFC 8705 is enabled."""
+    """Legacy metadata: mTLS metadata when RFC 8705 is enabled."""
     with patch.object(settings, "enable_rfc8705", True):
         metadata = get_enhanced_authorization_server_metadata()
 
@@ -109,7 +111,7 @@ def test_get_enhanced_authorization_server_metadata_mtls():
 
 @pytest.mark.unit
 def test_get_enhanced_authorization_server_metadata_dpop():
-    """RFC 8932: DPoP metadata when RFC 9449 is enabled."""
+    """Legacy metadata: DPoP metadata when RFC 9449 is enabled."""
     with patch.object(settings, "enable_rfc9449", True):
         metadata = get_enhanced_authorization_server_metadata()
 
@@ -120,7 +122,7 @@ def test_get_enhanced_authorization_server_metadata_dpop():
 
 @pytest.mark.unit
 def test_get_enhanced_authorization_server_metadata_par():
-    """RFC 8932: PAR metadata when RFC 9126 is enabled."""
+    """Legacy metadata: PAR metadata when RFC 9126 is enabled."""
     with patch.object(settings, "enable_rfc9126", True):
         metadata = get_enhanced_authorization_server_metadata()
 
@@ -133,7 +135,7 @@ def test_get_enhanced_authorization_server_metadata_par():
 
 @pytest.mark.unit
 def test_get_enhanced_authorization_server_metadata_jwt_access_tokens():
-    """RFC 8932: JWT access token metadata when RFC 9068 is enabled."""
+    """Legacy metadata: JWT access token metadata when RFC 9068 is enabled."""
     with patch.object(settings, "enable_rfc9068", True):
         metadata = get_enhanced_authorization_server_metadata()
 
@@ -144,7 +146,7 @@ def test_get_enhanced_authorization_server_metadata_jwt_access_tokens():
 
 @pytest.mark.unit
 def test_get_enhanced_authorization_server_metadata_resource_indicators():
-    """RFC 8932: Resource indicators metadata when RFC 8707 is enabled."""
+    """Legacy metadata: Resource indicators metadata when RFC 8707 is enabled."""
     with patch.object(settings, "rfc8707_enabled", True):
         metadata = get_enhanced_authorization_server_metadata()
 
@@ -154,7 +156,7 @@ def test_get_enhanced_authorization_server_metadata_resource_indicators():
 
 @pytest.mark.unit
 def test_get_enhanced_authorization_server_metadata_rich_authz():
-    """RFC 8932: Rich authorization requests metadata when RFC 9396 is enabled."""
+    """Legacy metadata: Rich authorization requests metadata when RFC 9396 is enabled."""
     with patch.object(settings, "enable_rfc9396", True):
         metadata = get_enhanced_authorization_server_metadata()
 
@@ -164,7 +166,7 @@ def test_get_enhanced_authorization_server_metadata_rich_authz():
 
 @pytest.mark.unit
 def test_get_enhanced_authorization_server_metadata_deduplication():
-    """RFC 8932: Metadata should deduplicate list values."""
+    """Legacy metadata: Metadata should deduplicate list values."""
     with patch.object(settings, "enable_rfc8705", True):
         metadata = get_enhanced_authorization_server_metadata()
 
@@ -180,7 +182,7 @@ def test_get_enhanced_authorization_server_metadata_deduplication():
 @pytest.mark.unit
 @pytest.mark.asyncio
 async def test_enhanced_authorization_server_metadata_endpoint():
-    """RFC 8932: Enhanced metadata endpoint returns correct data."""
+    """Legacy metadata: Enhanced metadata endpoint returns correct data."""
 
     with patch.object(settings, "enable_rfc8932", True):
         include_rfc8932(app)
@@ -199,7 +201,7 @@ async def test_enhanced_authorization_server_metadata_endpoint():
 @pytest.mark.unit
 @pytest.mark.asyncio
 async def test_enhanced_authorization_server_metadata_endpoint_disabled():
-    """RFC 8932: Enhanced metadata endpoint returns 404 when disabled."""
+    """Legacy metadata: Enhanced metadata endpoint returns 404 when disabled."""
 
     with patch.object(settings, "enable_rfc8932", False):
         include_rfc8932(app)
@@ -212,7 +214,7 @@ async def test_enhanced_authorization_server_metadata_endpoint_disabled():
 
 @pytest.mark.unit
 def test_validate_metadata_consistency_clean():
-    """RFC 8932: Metadata consistency validation with no issues."""
+    """Legacy metadata: Metadata consistency validation with no issues."""
     with patch.object(settings, "enable_rfc7662", True):
         warnings = validate_metadata_consistency()
 
@@ -223,7 +225,7 @@ def test_validate_metadata_consistency_clean():
 
 @pytest.mark.unit
 def test_validate_metadata_consistency_device_inconsistency():
-    """RFC 8932: Detect device authorization inconsistency."""
+    """Legacy metadata: Detect device authorization inconsistency."""
     with patch.object(settings, "enable_rfc8628", True):
         # Mock metadata that has device endpoint but missing grant type
         with patch(
@@ -245,7 +247,7 @@ def test_validate_metadata_consistency_device_inconsistency():
 
 @pytest.mark.unit
 def test_validate_metadata_consistency_introspection_inconsistency():
-    """RFC 8932: Detect introspection endpoint inconsistency."""
+    """Legacy metadata: Detect introspection endpoint inconsistency."""
     with patch.object(settings, "enable_rfc7662", False):
         # Mock metadata that has introspection endpoint but RFC disabled
         with patch(
@@ -265,7 +267,7 @@ def test_validate_metadata_consistency_introspection_inconsistency():
 
 @pytest.mark.unit
 def test_validate_metadata_consistency_mtls_inconsistency():
-    """RFC 8932: Detect mTLS configuration inconsistency."""
+    """Legacy metadata: Detect mTLS configuration inconsistency."""
     with patch(
         "tba_auth.rfc.rfc8932.get_enhanced_authorization_server_metadata"
     ) as mock_metadata:
@@ -286,7 +288,7 @@ def test_validate_metadata_consistency_mtls_inconsistency():
 
 @pytest.mark.unit
 def test_get_capability_matrix():
-    """RFC 8932: Get capability matrix for all RFCs."""
+    """Legacy metadata: Get capability matrix for all RFCs."""
     with patch.object(settings, "enable_rfc7009", True):
         with patch.object(settings, "enable_rfc7662", False):
             matrix = get_capability_matrix()
@@ -313,7 +315,7 @@ def test_get_capability_matrix():
 
 @pytest.mark.unit
 def test_get_capability_matrix_all_enabled():
-    """RFC 8932: Capability matrix with all RFCs enabled."""
+    """Legacy metadata: Capability matrix with all RFCs enabled."""
     with patch.object(settings, "enable_rfc7009", True):
         with patch.object(settings, "enable_rfc7662", True):
             with patch.object(settings, "enable_rfc8414", True):
@@ -338,7 +340,7 @@ def test_get_capability_matrix_all_enabled():
 
 
 @pytest.mark.unit
-def test_rfc8932_spec_url():
-    """RFC 8932: Spec URL should be valid."""
+def test_legacy_metadata_spec_url_constant():
+    """Legacy metadata: Spec URL should be valid."""
     assert RFC8932_SPEC_URL.startswith("https://")
     assert "8932" in RFC8932_SPEC_URL

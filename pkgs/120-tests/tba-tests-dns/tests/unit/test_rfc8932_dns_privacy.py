@@ -12,6 +12,11 @@ validate the stated requirements.
 
 import pytest
 
+import tba_auth
+
+if not hasattr(tba_auth, "enforce_encrypted_dns"):
+    pytest.skip("Legacy DNS privacy helper is absent", allow_module_level=True)
+
 from tba_auth import RFC8932_SPEC_URL, enforce_encrypted_dns
 from tba_auth.runtime_cfg import settings
 

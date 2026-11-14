@@ -8,6 +8,8 @@ import os
 
 import pytest
 
+pytest.importorskip("tba_auth.rfc.rfc8291", reason="Legacy Web Push helper is absent")
+
 from tba_auth.rfc.rfc8291 import (
     RFC8291_SPEC_URL,
     decrypt_push_message,

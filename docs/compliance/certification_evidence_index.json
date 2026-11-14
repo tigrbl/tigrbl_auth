@@ -185,7 +185,7 @@
         "pkgs/50-protocols/tba-protocol-workload-spiffe-workload-api/src/tba_protocol_workload_spiffe_workload_api/versions.py",
         "scripts/validate_layer_boundaries.py",
         "tests/unit/test_auth_package_taxonomy_boundary.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_cose_cwt_runtime_profiles.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py",
@@ -247,7 +247,7 @@
   },
   "test_partitions": {
     "conformance": [
-      "tests/conformance/backlog/test_rfc8785_jcs.py",
+      "pkgs/120-tests/tba-tests-wire-codecs/tests/conformance/backlog/test_rfc8785_jcs.py",
       "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_oidc_id_token.py",
       "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_configuration.py",
       "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py",
@@ -294,6 +294,8 @@
       "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9728_protected_resource_metadata.py"
     ],
     "unit": [
+      "pkgs/120-tests/tba-tests-wire-codecs/tests/unit/test_multibase_codec.py",
+      "pkgs/120-tests/tba-tests-wire-codecs/tests/unit/test_wire_codecs.py",
       "pkgs/120-tests/tba-tests-ucan/tests/unit/test_ucan_protocol.py",
       "pkgs/120-tests/tba-tests-zcap/tests/unit/test_zcap_protocol.py",
       "pkgs/120-tests/tba-tests-bimi/tests/unit/test_bimi_factorization.py",
@@ -385,7 +387,7 @@
       "tests/unit/test_canonical_package_layer_index.py",
       "tests/unit/test_capability_family_registry.py",
       "tests/unit/test_capability_hierarchy.py",
-      "tests/unit/test_certificate_providers.py",
+      "pkgs/120-tests/tba-tests-x509/tests/unit/test_certificate_providers.py",
       "tests/unit/test_certification_evidence_negative_proofs.py",
       "tests/unit/test_certification_gap_inventory.py",
       "tests/unit/test_certification_lane_evidence.py",
@@ -400,7 +402,7 @@
       "tests/unit/test_client_identity_runtime_boundary.py",
       "pkgs/120-tests/tba-tests-oauth/tests/unit/test_client_registration_capability.py",
       "tests/unit/test_collect_validated_artifact_downloads.py",
-      "tests/unit/test_complete_wire_objects.py",
+      "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
       "tests/unit/test_concrete_base_inheritance.py",
       "tests/unit/test_concrete_digital_artifact_ownership.py",
       "tests/unit/test_concrete_layer_taxonomy.py",
@@ -606,9 +608,9 @@
       "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7662_unit.py",
       "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7800_proof_of_possession.py",
       "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc8037_eddsa.py",
-      "tests/unit/test_rfc8176_amr.py",
+      "pkgs/120-tests/tba-tests-oidc/tests/unit/test_rfc8176_amr.py",
       "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8252_native_app_redirects.py",
-      "tests/unit/test_rfc8291_webpush_encryption.py",
+      "pkgs/120-tests/tba-tests-webpush/tests/unit/test_rfc8291_webpush_encryption.py",
       "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8414_authorization_server_metadata.py",
       "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8523_jwt_client_auth.py",
       "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8628_device_authorization.py",
@@ -618,8 +620,8 @@
       "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8707_resource_indicators.py",
       "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc8725_jwt_best_practices.py",
       "pkgs/120-tests/tba-tests-webauthn/tests/unit/test_rfc8812_webauthn_algorithms.py",
-      "tests/unit/test_rfc8932_dns_privacy.py",
-      "tests/unit/test_rfc8932_enhanced_metadata.py",
+      "pkgs/120-tests/tba-tests-dns/tests/unit/test_rfc8932_dns_privacy.py",
+      "pkgs/120-tests/tba-tests-oauth/tests/unit/test_enhanced_oauth_metadata_legacy.py",
       "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9068_jwt_profile.py",
       "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9101_jwt_secured_authorization_request.py",
       "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9126_capability_binding.py",
@@ -630,7 +632,7 @@
       "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
       "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py",
       "tests/unit/test_router_backend_app_layers.py",
-      "tests/unit/test_rp_consumer_boundary.py",
+      "pkgs/120-tests/tba-tests-oidc/tests/unit/test_rp_consumer_boundary.py",
       "tests/unit/test_rpc_registry_live.py",
       "tests/unit/test_runner_adapter_runtime_layer.py",
       "tests/unit/test_runtime_capability_assembly.py",
@@ -681,7 +683,7 @@
       "pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_concrete.py",
       "tests/unit/test_table_owned_custom_op_schemas.py",
       "tests/unit/test_tenant_administration_capability.py",
-      "tests/unit/test_tenant_public_discovery_boundary.py",
+      "pkgs/120-tests/tba-tests-oidc/tests/unit/test_tenant_public_discovery_boundary.py",
       "tests/unit/test_tenant_realm_isolation_invariants.py",
       "tests/unit/test_terminal_package_layers.py",
       "tests/unit/test_testkit_cross_cutting_boundary.py",
@@ -713,7 +715,7 @@
       "pkgs/120-tests/tba-tests-vcdm/tests/unit/test_vcdm_concrete.py",
       "pkgs/120-tests/tba-tests-eat/tests/unit/test_versioned_eat_profile.py",
       "pkgs/120-tests/tba-tests-sd-jwt-vc/tests/unit/test_versioned_sd_jwt_vc_profile.py",
-      "tests/unit/test_versioned_envelope_protocols.py",
+      "pkgs/120-tests/tba-tests-jose/tests/unit/test_versioned_envelope_protocols.py",
       "pkgs/120-tests/tba-tests-gnap/tests/unit/test_versioned_gnap_protocol.py",
       "pkgs/120-tests/tba-tests-haip/tests/unit/test_versioned_haip_profile.py",
       "pkgs/120-tests/tba-tests-jose/tests/unit/test_versioned_jose_protocol.py",
@@ -744,7 +746,8 @@
       "tests/integration/test_admin_table_surfaces.py",
       "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
       "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
-      "tests/integration/test_authorization_response_types.py",
+      "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+      "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
       "tests/integration/test_crud_api.py",
       "tests/integration/test_default_openapi_endpoints.py",
       "pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py",
@@ -772,18 +775,18 @@
     ],
     "migration-portability": [
       "tests/integration/test_migration_upgrade_downgrade_safety.py",
-      "tests/unit/test_artifact_profile_migration_0023.py",
+      "pkgs/120-tests/tba-tests-storage/tests/unit/test_artifact_profile_migration_0023.py",
       "pkgs/120-tests/tba-tests-storage/tests/unit/test_attestation_migration_0027.py",
-      "tests/unit/test_certificate_migration_0031.py",
-      "tests/unit/test_claim_migration_0032.py",
+      "pkgs/120-tests/tba-tests-storage/tests/unit/test_certificate_migration_0031.py",
+      "pkgs/120-tests/tba-tests-storage/tests/unit/test_claim_migration_0032.py",
       "pkgs/120-tests/tba-tests-storage/tests/unit/test_credential_issuance_migration_0025.py",
       "pkgs/120-tests/tba-tests-storage/tests/unit/test_credential_registry_migration_0024.py",
       "pkgs/120-tests/tba-tests-storage/tests/unit/test_did_gnap_migration_0030.py",
-      "tests/unit/test_dpop_migration_0034.py",
+      "pkgs/120-tests/tba-tests-storage/tests/unit/test_dpop_migration_0034.py",
       "tests/unit/test_migration_portability_evidence.py",
       "pkgs/120-tests/tba-tests-storage/tests/unit/test_presentation_migration_0026.py",
-      "tests/unit/test_replay_migration_0033.py",
-      "tests/unit/test_security_event_migration_0029.py",
+      "pkgs/120-tests/tba-tests-storage/tests/unit/test_replay_migration_0033.py",
+      "pkgs/120-tests/tba-tests-storage/tests/unit/test_security_event_migration_0029.py",
       "pkgs/120-tests/tba-tests-storage/tests/test_spiffe_migration_0028.py",
       "pkgs/120-tests/tba-tests-storage/tests/unit/test_webauthn_migration_0035.py",
       "pkgs/120-tests/tba-tests-storage/tests/test_workload_artifact_migration_0036.py"
@@ -5380,8 +5383,7 @@
       ],
       "profile": null,
       "positive_tests": [
-        "tests/unit/test_rfc8932_dns_privacy.py",
-        "tests/unit/test_rfc8932_enhanced_metadata.py"
+        "pkgs/120-tests/tba-tests-dns/tests/unit/test_rfc8932_dns_privacy.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -5433,7 +5435,7 @@
       ],
       "profile": null,
       "positive_tests": [
-        "tests/unit/test_rfc8291_webpush_encryption.py"
+        "pkgs/120-tests/tba-tests-webpush/tests/unit/test_rfc8291_webpush_encryption.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -5490,7 +5492,8 @@
         "tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py",
         "tests/integration/test_full_workflow.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
@@ -5641,7 +5644,8 @@
         "tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py",
         "tests/integration/test_full_workflow.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
@@ -5793,7 +5797,8 @@
         "tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py",
         "tests/integration/test_full_workflow.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
@@ -5943,7 +5948,8 @@
         "tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py",
         "tests/integration/test_full_workflow.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
@@ -6095,7 +6101,8 @@
         "tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py",
         "tests/integration/test_full_workflow.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
@@ -6239,7 +6246,8 @@
         "tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py",
         "tests/integration/test_full_workflow.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
@@ -8208,7 +8216,8 @@
         "tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py",
         "tests/integration/test_full_workflow.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
@@ -8250,7 +8259,7 @@
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py",
         "tests/unit/test_session_logout_cluster_b.py",
         "tests/unit/test_well_known_endpoints_behavior.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
@@ -8513,7 +8522,8 @@
         "tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py",
         "tests/integration/test_full_workflow.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
@@ -8556,7 +8566,7 @@
         "tests/unit/test_rpc_registry_live.py",
         "tests/unit/test_session_logout_cluster_b.py",
         "tests/unit/test_well_known_endpoints_behavior.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
@@ -8820,7 +8830,8 @@
         "tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py",
         "tests/integration/test_full_workflow.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
@@ -8863,7 +8874,7 @@
         "tests/unit/test_rpc_registry_live.py",
         "tests/unit/test_session_logout_cluster_b.py",
         "tests/unit/test_well_known_endpoints_behavior.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
@@ -9136,7 +9147,8 @@
         "tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py",
         "tests/integration/test_full_workflow.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
@@ -9179,7 +9191,7 @@
         "tests/unit/test_rpc_registry_live.py",
         "tests/unit/test_session_logout_cluster_b.py",
         "tests/unit/test_well_known_endpoints_behavior.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
@@ -9360,7 +9372,8 @@
         "tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py",
         "tests/integration/test_full_workflow.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
@@ -9403,7 +9416,7 @@
         "tests/unit/test_rpc_registry_live.py",
         "tests/unit/test_session_logout_cluster_b.py",
         "tests/unit/test_well_known_endpoints_behavior.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
@@ -9593,7 +9606,8 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_token_endpoint.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/interop/test_peer_counterpart_catalog.py",
@@ -9625,7 +9639,8 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_token_endpoint.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/interop/test_peer_counterpart_catalog.py",
@@ -9657,7 +9672,8 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_token_endpoint.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/interop/test_peer_counterpart_catalog.py",
@@ -9689,7 +9705,8 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_token_endpoint.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/interop/test_peer_counterpart_catalog.py",
@@ -9754,7 +9771,8 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py",
         "tests/conformance/production/test_rfc6265_cookies.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
@@ -9870,7 +9888,8 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc8252_native_apps.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
@@ -11249,7 +11268,8 @@
       "positive_tests": [
         "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_oidc_id_token.py",
         "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
@@ -11513,7 +11533,7 @@
       "positive_tests": [
         "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7515_jws.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7515_jws.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -11534,7 +11554,7 @@
         "pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7516_jwe.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -11588,7 +11608,7 @@
       "positive_tests": [
         "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7519_jwt.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
       "negative_tests": [],
@@ -11756,7 +11776,7 @@
       ],
       "profile": null,
       "positive_tests": [
-        "tests/unit/test_rfc8291_webpush_encryption.py"
+        "pkgs/120-tests/tba-tests-webpush/tests/unit/test_rfc8291_webpush_encryption.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -11955,8 +11975,7 @@
       ],
       "profile": null,
       "positive_tests": [
-        "tests/unit/test_rfc8932_dns_privacy.py",
-        "tests/unit/test_rfc8932_enhanced_metadata.py"
+        "pkgs/120-tests/tba-tests-dns/tests/unit/test_rfc8932_dns_privacy.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -12395,7 +12414,8 @@
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
         "tests/unit/test_identity_artifact_confusion_vectors.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py"
       ],
       "evidence_refs": [
@@ -12494,7 +12514,7 @@
       "tests": [
         "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7515_jws.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7515_jws.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -12509,7 +12529,7 @@
         "pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7516_jwe.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -12545,7 +12565,7 @@
       "tests": [
         "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7519_jwt.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
@@ -12736,7 +12756,8 @@
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
         "tests/unit/test_identity_artifact_confusion_vectors.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py"
       ],
       "evidence_refs": [
@@ -12875,7 +12896,7 @@
       "tests": [
         "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7515_jws.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7515_jws.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -12890,7 +12911,7 @@
         "pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7516_jwe.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -12926,7 +12947,7 @@
       "tests": [
         "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7519_jwt.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
@@ -13253,7 +13274,8 @@
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
         "tests/unit/test_identity_artifact_confusion_vectors.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py"
       ],
       "evidence_refs": [
@@ -13405,7 +13427,7 @@
       "tests": [
         "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7515_jws.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7515_jws.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -13420,7 +13442,7 @@
         "pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7516_jwe.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -13456,7 +13478,7 @@
       "tests": [
         "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7519_jwt.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
@@ -13911,7 +13933,8 @@
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
         "tests/unit/test_identity_artifact_confusion_vectors.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py"
       ],
       "evidence_refs": [
@@ -14063,7 +14086,7 @@
       "tests": [
         "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7515_jws.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7515_jws.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -14078,7 +14101,7 @@
         "pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7516_jwe.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -14114,7 +14137,7 @@
       "tests": [
         "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7519_jwt.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
@@ -14585,7 +14608,8 @@
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
         "tests/unit/test_identity_artifact_confusion_vectors.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py"
       ],
       "evidence_refs": [
@@ -14737,7 +14761,7 @@
       "tests": [
         "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7515_jws.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7515_jws.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -14752,7 +14776,7 @@
         "pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7516_jwe.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -14788,7 +14812,7 @@
       "tests": [
         "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7519_jwt.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [

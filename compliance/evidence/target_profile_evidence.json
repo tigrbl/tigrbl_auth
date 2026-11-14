@@ -85,7 +85,8 @@
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
         "tests/unit/test_identity_artifact_confusion_vectors.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py"
       ],
       "evidence_refs": [
@@ -184,7 +185,7 @@
       "tests": [
         "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7515_jws.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7515_jws.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -199,7 +200,7 @@
         "pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7516_jwe.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -235,7 +236,7 @@
       "tests": [
         "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7519_jwt.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
@@ -426,7 +427,8 @@
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
         "tests/unit/test_identity_artifact_confusion_vectors.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py"
       ],
       "evidence_refs": [
@@ -565,7 +567,7 @@
       "tests": [
         "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7515_jws.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7515_jws.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -580,7 +582,7 @@
         "pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7516_jwe.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -616,7 +618,7 @@
       "tests": [
         "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7519_jwt.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
@@ -943,7 +945,8 @@
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
         "tests/unit/test_identity_artifact_confusion_vectors.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py"
       ],
       "evidence_refs": [
@@ -1095,7 +1098,7 @@
       "tests": [
         "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7515_jws.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7515_jws.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -1110,7 +1113,7 @@
         "pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7516_jwe.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -1146,7 +1149,7 @@
       "tests": [
         "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7519_jwt.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
@@ -1601,7 +1604,8 @@
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
         "tests/unit/test_identity_artifact_confusion_vectors.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py"
       ],
       "evidence_refs": [
@@ -1753,7 +1757,7 @@
       "tests": [
         "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7515_jws.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7515_jws.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -1768,7 +1772,7 @@
         "pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7516_jwe.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -1804,7 +1808,7 @@
       "tests": [
         "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7519_jwt.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [
@@ -2275,7 +2279,8 @@
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
         "tests/unit/test_identity_artifact_confusion_vectors.py",
-        "tests/integration/test_authorization_response_types.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py"
       ],
       "evidence_refs": [
@@ -2427,7 +2432,7 @@
       "tests": [
         "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7515_jws.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7515_jws.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -2442,7 +2447,7 @@
         "pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7516_jwe.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
@@ -2478,7 +2483,7 @@
       "tests": [
         "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7519_jwt.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py",
-        "tests/unit/test_complete_wire_objects.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "tests/unit/test_profile_protocol_bindings.py"
       ],
       "evidence_refs": [

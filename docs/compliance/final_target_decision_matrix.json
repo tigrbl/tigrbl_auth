@@ -1428,7 +1428,8 @@
         "paths": [
           "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_oidc_id_token.py",
           "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py",
-          "tests/integration/test_authorization_response_types.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
           "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py"
         ]
       },

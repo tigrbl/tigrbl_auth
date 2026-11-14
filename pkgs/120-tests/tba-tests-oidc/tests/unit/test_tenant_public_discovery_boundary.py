@@ -9,7 +9,7 @@ from types import SimpleNamespace
 import pytest
 from httpx import ASGITransport, AsyncClient
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 for src in sorted((ROOT / "pkgs").glob("**/src"), reverse=True):
     value = str(src)
     if value in sys.path:

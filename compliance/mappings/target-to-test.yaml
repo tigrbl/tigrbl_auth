@@ -30,7 +30,7 @@ RFC 8615:
 RFC 7515:
 - pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7515_jws.py
 - pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7515_jws.py
-- tests/unit/test_complete_wire_objects.py
+- pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py
 - pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py
 - tests/unit/test_profile_protocol_bindings.py
 RFC 7517:
@@ -42,7 +42,7 @@ RFC 7518:
 RFC 7519:
 - pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7519_jwt.py
 - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py
-- tests/unit/test_complete_wire_objects.py
+- pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py
 - tests/unit/test_profile_protocol_bindings.py
 OIDC Discovery 1.0:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_configuration.py
@@ -58,7 +58,8 @@ OIDC Core 1.0:
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py
 - tests/unit/test_identity_artifact_confusion_vectors.py
-- tests/integration/test_authorization_response_types.py
+- pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
+- pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
 - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
 RFC 7009:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
@@ -189,7 +190,7 @@ RFC 7516:
 - pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py
 - pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7516_jwe.py
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py
-- tests/unit/test_complete_wire_objects.py
+- pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py
 - pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py
 - tests/unit/test_profile_protocol_bindings.py
 RFC 9207:
@@ -357,7 +358,7 @@ RFC 7800:
 RFC 8417:
 - pkgs/10-concrete/tba-concrete-set/tests/test_rfc8417.py
 RFC 8291:
-- tests/unit/test_rfc8291_webpush_encryption.py
+- pkgs/120-tests/tba-tests-webpush/tests/unit/test_rfc8291_webpush_encryption.py
 RFC 8812:
 - pkgs/120-tests/tba-tests-webauthn/tests/unit/test_rfc8812_webauthn_algorithms.py
 WebAuthn Level 2 relying-party implementation:
@@ -370,5 +371,4 @@ FIDO2 server implementation profile:
 - pkgs/120-tests/tba-tests-webauthn/tests/unit/test_webauthn_protocol_delivery.py
 - pkgs/120-tests/tba-tests-webauthn/tests/unit/test_webauthn_attestation_delivery.py
 RFC 8932:
-- tests/unit/test_rfc8932_dns_privacy.py
-- tests/unit/test_rfc8932_enhanced_metadata.py
+- pkgs/120-tests/tba-tests-dns/tests/unit/test_rfc8932_dns_privacy.py
