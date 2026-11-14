@@ -40,7 +40,8 @@ the migrated suites and the remaining root tests.
 | `tba-tests-oid4vp` | OpenID for Verifiable Presentations |
 | `tba-tests-haip` | OpenID High Assurance Interoperability Profile |
 | `tba-tests-authzen` | AuthZEN access evaluation, batch evaluation, and search |
-| `tba-tests-credential-composition` | Shared issuer and verifier dispatch, credential status, and issuer trust |
+| `tba-tests-credential-composition` | Credential lifecycle, issuer and verifier dispatch, credential status, and issuer trust |
+| `tba-tests-authentication` | Authentication backends, authenticator contracts, principal checks, and password hashing |
 | `tba-tests-eat` | Entity Attestation Token claims, carriers, and evidence verification |
 | `tba-tests-corim` | CoRIM model, reference material storage, and versioning |
 | `tba-tests-attestation-composition` | Evidence appraisal and wallet, key, and platform attestation providers |

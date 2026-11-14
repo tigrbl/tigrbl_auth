@@ -62,7 +62,11 @@ bundles:
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py
-  - tests/unit/test_identity_artifact_confusion_vectors.py
+  - pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py
+  - pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py
+  - pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
@@ -308,7 +312,11 @@ bundles:
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py
-  - tests/unit/test_identity_artifact_confusion_vectors.py
+  - pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py
+  - pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py
+  - pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
@@ -680,7 +688,11 @@ bundles:
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py
-  - tests/unit/test_identity_artifact_confusion_vectors.py
+  - pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py
+  - pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py
+  - pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
@@ -1163,7 +1175,11 @@ bundles:
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py
-  - tests/unit/test_identity_artifact_confusion_vectors.py
+  - pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py
+  - pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py
+  - pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
@@ -1660,7 +1676,11 @@ bundles:
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py
-  - tests/unit/test_identity_artifact_confusion_vectors.py
+  - pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py
+  - pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py
+  - pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py

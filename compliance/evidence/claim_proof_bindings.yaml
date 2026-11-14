@@ -2637,8 +2637,9 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py
   - pkgs/120-tests/tba-tests-jose/tests/security/test_crypto_boundary_governance.py
-  - tests/unit/test_backends.py
-  - tests/unit/test_crypto.py
+  - pkgs/120-tests/tba-tests-authentication/tests/unit/test_backends.py
+  - pkgs/120-tests/tba-tests-authentication/tests/unit/test_password_crypto.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwt_key_crypto.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_crypto_key_dependency_boundary.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_crypto_key_runtime_boundary.py
   - pkgs/120-tests/tba-tests-storage/tests/unit/test_crypto_key_storage_runtime_boundary.py
@@ -4892,7 +4893,7 @@ bindings:
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_resource_server_consumer_boundary.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py
-  - tests/unit/test_security_deps.py
+  - pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py
   evidence_refs:
   - compliance/evidence/tier3/cli-operator-surface/
   security_sensitive: false
@@ -4923,7 +4924,7 @@ bindings:
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_resource_server_consumer_boundary.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py
-  - tests/unit/test_security_deps.py
+  - pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py
@@ -4961,7 +4962,7 @@ bindings:
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_resource_server_consumer_boundary.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py
-  - tests/unit/test_security_deps.py
+  - pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py
@@ -6193,7 +6194,11 @@ bindings:
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_profile_protocol_bindings.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py
-  - tests/unit/test_identity_artifact_confusion_vectors.py
+  - pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py
+  - pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py
+  - pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py
   negative_tests:
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
@@ -6228,7 +6233,7 @@ bindings:
   - pkgs/120-tests/tba-tests-runtime/tests/integration/test_runtime_issuer_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py
-  - tests/unit/test_security_deps.py
+  - pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8693_token_exchange.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8693_token_exchange.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_token_exchange_capability.py
@@ -6484,7 +6489,11 @@ bindings:
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_profile_protocol_bindings.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py
-  - tests/unit/test_identity_artifact_confusion_vectors.py
+  - pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py
+  - pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py
+  - pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py
   negative_tests:
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
@@ -6519,7 +6528,7 @@ bindings:
   - pkgs/120-tests/tba-tests-runtime/tests/integration/test_runtime_issuer_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py
-  - tests/unit/test_security_deps.py
+  - pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8693_token_exchange.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8693_token_exchange.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_token_exchange_capability.py
@@ -6776,7 +6785,11 @@ bindings:
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_profile_protocol_bindings.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py
-  - tests/unit/test_identity_artifact_confusion_vectors.py
+  - pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py
+  - pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py
+  - pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py
   negative_tests:
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
@@ -6811,7 +6824,7 @@ bindings:
   - pkgs/120-tests/tba-tests-runtime/tests/integration/test_runtime_issuer_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py
-  - tests/unit/test_security_deps.py
+  - pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8693_token_exchange.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8693_token_exchange.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_token_exchange_capability.py
@@ -7067,7 +7080,11 @@ bindings:
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_profile_protocol_bindings.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py
-  - tests/unit/test_identity_artifact_confusion_vectors.py
+  - pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py
+  - pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py
+  - pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py
   negative_tests:
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
@@ -7102,7 +7119,7 @@ bindings:
   - pkgs/120-tests/tba-tests-runtime/tests/integration/test_runtime_issuer_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py
-  - tests/unit/test_security_deps.py
+  - pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8693_token_exchange.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8693_token_exchange.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_token_exchange_capability.py
@@ -7290,7 +7307,11 @@ bindings:
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_profile_protocol_bindings.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py
-  - tests/unit/test_identity_artifact_confusion_vectors.py
+  - pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py
+  - pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py
+  - pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py
   negative_tests:
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
@@ -7325,7 +7346,7 @@ bindings:
   - pkgs/120-tests/tba-tests-runtime/tests/integration/test_runtime_issuer_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py
-  - tests/unit/test_security_deps.py
+  - pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8693_token_exchange.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8693_token_exchange.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_token_exchange_capability.py
@@ -7459,7 +7480,11 @@ bindings:
   - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py
-  - tests/unit/test_identity_artifact_confusion_vectors.py
+  - pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py
+  - pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py
+  - pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/oauth2-core/
@@ -7487,7 +7512,11 @@ bindings:
   - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py
-  - tests/unit/test_identity_artifact_confusion_vectors.py
+  - pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py
+  - pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py
+  - pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/oauth2-core/
@@ -7515,7 +7544,11 @@ bindings:
   - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py
-  - tests/unit/test_identity_artifact_confusion_vectors.py
+  - pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py
+  - pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py
+  - pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/oauth2-core/
@@ -7543,7 +7576,11 @@ bindings:
   - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py
-  - tests/unit/test_identity_artifact_confusion_vectors.py
+  - pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py
+  - pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py
+  - pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/oauth2-core/
@@ -7567,8 +7604,9 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py
   - pkgs/120-tests/tba-tests-jose/tests/security/test_crypto_boundary_governance.py
-  - tests/unit/test_backends.py
-  - tests/unit/test_crypto.py
+  - pkgs/120-tests/tba-tests-authentication/tests/unit/test_backends.py
+  - pkgs/120-tests/tba-tests-authentication/tests/unit/test_password_crypto.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwt_key_crypto.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_crypto_key_dependency_boundary.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_crypto_key_runtime_boundary.py
   - pkgs/120-tests/tba-tests-storage/tests/unit/test_crypto_key_storage_runtime_boundary.py
@@ -7600,7 +7638,11 @@ bindings:
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py
-  - tests/unit/test_identity_artifact_confusion_vectors.py
+  - pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py
+  - pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py
+  - pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py
   negative_tests:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
@@ -7608,7 +7650,7 @@ bindings:
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_resource_server_consumer_boundary.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py
-  - tests/unit/test_security_deps.py
+  - pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py
   evidence_refs:
   - compliance/evidence/tier3/bearer/
   - compliance/evidence/tier3/cookies/
@@ -7713,7 +7755,11 @@ bindings:
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py
-  - tests/unit/test_identity_artifact_confusion_vectors.py
+  - pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py
+  - pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py
+  - pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py
   negative_tests:
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9101_jar.py
@@ -7813,7 +7859,7 @@ bindings:
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_resource_server_consumer_boundary.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py
-  - tests/unit/test_security_deps.py
+  - pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py
   evidence_refs:
   - compliance/evidence/tier3/bearer/
   - compliance/evidence/tier3/introspection/
@@ -7847,8 +7893,9 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py
   - pkgs/120-tests/tba-tests-jose/tests/security/test_crypto_boundary_governance.py
-  - tests/unit/test_backends.py
-  - tests/unit/test_crypto.py
+  - pkgs/120-tests/tba-tests-authentication/tests/unit/test_backends.py
+  - pkgs/120-tests/tba-tests-authentication/tests/unit/test_password_crypto.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwt_key_crypto.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_crypto_key_dependency_boundary.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_crypto_key_runtime_boundary.py
   - pkgs/120-tests/tba-tests-storage/tests/unit/test_crypto_key_storage_runtime_boundary.py
@@ -8217,7 +8264,7 @@ bindings:
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_resource_server_consumer_boundary.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py
-  - tests/unit/test_security_deps.py
+  - pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py
@@ -8272,7 +8319,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9449_dpop.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py
-  - tests/unit/test_security_deps.py
+  - pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8693_token_exchange.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8693_token_exchange.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_token_exchange_capability.py
@@ -8307,7 +8354,7 @@ bindings:
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_resource_server_consumer_boundary.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py
-  - tests/unit/test_security_deps.py
+  - pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py
   evidence_refs:
   - compliance/evidence/tier3/bearer/
   - compliance/evidence/tier3/oidc-userinfo/
@@ -8876,7 +8923,11 @@ bindings:
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py
-  - tests/unit/test_identity_artifact_confusion_vectors.py
+  - pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py
+  - pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py
+  - pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/oidc-core/
@@ -9047,7 +9098,7 @@ bindings:
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_resource_server_consumer_boundary.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py
-  - tests/unit/test_security_deps.py
+  - pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py
   evidence_refs:
   - compliance/evidence/tier3/bearer/
   security_sensitive: false

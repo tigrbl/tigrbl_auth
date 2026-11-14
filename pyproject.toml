@@ -595,6 +595,7 @@ testpaths = [
     "pkgs/120-tests/tba-tests-communications-identity/tests",
     "pkgs/120-tests/tba-tests-corim/tests",
     "pkgs/120-tests/tba-tests-credential-composition/tests",
+    "pkgs/120-tests/tba-tests-authentication/tests",
     "pkgs/120-tests/tba-tests-dns/tests",
     "pkgs/120-tests/tba-tests-eat/tests",
     "pkgs/120-tests/tba-tests-haip/tests",

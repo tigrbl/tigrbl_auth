@@ -106,7 +106,7 @@ categories:
   - pkgs/120-tests/tba-tests-authorization/tests/unit/test_authorization_safety_property_evaluator.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_authorize_response_modes.py
-  - tests/unit/test_backends.py
+  - pkgs/120-tests/tba-tests-authentication/tests/unit/test_backends.py
   - tests/unit/test_bootstrap_secret_scrub.py
   - tests/unit/test_bootstrappable_user_defaults.py
   - tests/unit/test_boundary_freeze_checkpoint.py
@@ -124,8 +124,9 @@ categories:
   - tests/unit/test_contract_payloads_deferred_upstream.py
   - pkgs/120-tests/tba-tests-authorization/tests/unit/test_control_plane_correctness_properties.py
   - tests/unit/test_core_contracts_boundary.py
-  - tests/unit/test_credentials_lifecycle_boundary.py
-  - tests/unit/test_crypto.py
+  - pkgs/120-tests/tba-tests-credential-composition/tests/unit/test_credentials_lifecycle_boundary.py
+  - pkgs/120-tests/tba-tests-authentication/tests/unit/test_password_crypto.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwt_key_crypto.py
   - pkgs/120-tests/tba-tests-authorization/tests/unit/test_decision_stability_policy_versions.py
   - pkgs/120-tests/tba-tests-authorization/tests/unit/test_delegation_attenuation_proof.py
   - pkgs/120-tests/tba-tests-authorization/tests/unit/test_delegation_attenuation_robustness_t2.py
@@ -253,7 +254,7 @@ categories:
   - pkgs/120-tests/tba-tests-certification/tests/unit/test_runtime_validation_matrix.py
   - tests/unit/test_runtime_version_truthfulness.py
   - pkgs/120-tests/tba-tests-administration/tests/unit/test_secure_default_admin_gate.py
-  - tests/unit/test_security_deps.py
+  - pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py
   - tests/unit/test_security_user_lookup.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_server_runtime_operator_boundary.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py

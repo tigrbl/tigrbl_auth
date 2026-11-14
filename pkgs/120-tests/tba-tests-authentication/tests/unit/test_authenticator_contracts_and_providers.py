@@ -120,7 +120,7 @@ def test_challenge_authenticator_marker_is_limited_to_challenge_based_providers(
 
 
 def test_no_composite_provider_package_was_added():
-    root = Path(__file__).resolve().parents[2]
+    root = Path(__file__).resolve().parents[5]
 
     assert not (
         root / "pkgs" / "20-providers" / "tba-authenticator-composite"

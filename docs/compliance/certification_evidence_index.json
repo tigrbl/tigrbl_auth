@@ -368,7 +368,7 @@
       "tests/unit/test_audit_runtime_boundary.py",
       "pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py",
       "pkgs/120-tests/tba-tests-architecture/tests/unit/test_auth_package_taxonomy_boundary.py",
-      "tests/unit/test_authenticator_contracts_and_providers.py",
+      "pkgs/120-tests/tba-tests-authentication/tests/unit/test_authenticator_contracts_and_providers.py",
       "pkgs/120-tests/tba-tests-authorization/tests/unit/test_authority_closure_monotonicity.py",
       "pkgs/120-tests/tba-tests-authorization/tests/unit/test_authority_closure_monotonicity_robustness_t2.py",
       "pkgs/120-tests/tba-tests-authorization/tests/unit/test_authority_derivation_graph.py",
@@ -384,7 +384,7 @@
       "pkgs/120-tests/tba-tests-authorization/tests/unit/test_authz_policy_table_ops_boundary.py",
       "tests/unit/test_backend_app_surfaces.py",
       "tests/unit/test_backend_app_table_initialization.py",
-      "tests/unit/test_backends.py",
+      "pkgs/120-tests/tba-tests-authentication/tests/unit/test_backends.py",
       "tests/unit/test_base_contract_inheritance.py",
       "pkgs/120-tests/tba-tests-architecture/tests/unit/test_base_package_taxonomy.py",
       "tests/unit/test_bootstrap_secret_scrub.py",
@@ -426,8 +426,9 @@
       "pkgs/120-tests/tba-tests-jose/tests/unit/test_cose_cwt_runtime_profiles.py",
       "pkgs/120-tests/tba-tests-jose/tests/unit/test_cose_provider_backend_requirement.py",
       "pkgs/120-tests/tba-tests-mdoc/tests/unit/test_mdoc_providers.py",
-      "tests/unit/test_credentials_lifecycle_boundary.py",
-      "tests/unit/test_crypto.py",
+      "pkgs/120-tests/tba-tests-credential-composition/tests/unit/test_credentials_lifecycle_boundary.py",
+      "pkgs/120-tests/tba-tests-authentication/tests/unit/test_password_crypto.py",
+      "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwt_key_crypto.py",
       "pkgs/120-tests/tba-tests-jose/tests/unit/test_crypto_key_dependency_boundary.py",
       "pkgs/120-tests/tba-tests-jose/tests/unit/test_crypto_key_runtime_boundary.py",
       "pkgs/120-tests/tba-tests-storage/tests/unit/test_crypto_key_storage_runtime_boundary.py",
@@ -473,8 +474,12 @@
       "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py",
       "pkgs/120-tests/tba-tests-administration/tests/unit/test_identity_administration_capability.py",
       "tests/unit/test_identity_artifact_capabilities.py",
-      "tests/unit/test_identity_artifact_confusion_vectors.py",
-      "tests/unit/test_identity_artifact_runtime_composition.py",
+      "pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py",
+      "pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py",
+      "pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py",
+      "pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py",
+      "pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py",
+      "pkgs/120-tests/tba-tests-runtime/tests/unit/test_identity_artifact_runtime_composition.py",
       "pkgs/120-tests/tba-tests-release/tests/unit/test_identity_author_release_signing_boundary.py",
       "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_identity_cli_file_size_guard.py",
       "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_identity_cli_package_boundary.py",
@@ -559,7 +564,7 @@
       "pkgs/120-tests/tba-tests-authorization/tests/unit/test_policy_determinism_replay.py",
       "pkgs/120-tests/tba-tests-authorization/tests/unit/test_policy_evaluation_capability.py",
       "pkgs/120-tests/tba-tests-authorization/tests/unit/test_policy_replay_stability_robustness_t2.py",
-      "tests/unit/test_principal_authentication_capability.py",
+      "pkgs/120-tests/tba-tests-authentication/tests/unit/test_principal_authentication_capability.py",
       "tests/unit/test_principals_model_boundary.py",
       "tests/unit/test_profile_discovery_runtime.py",
       "pkgs/120-tests/tba-tests-jose/tests/unit/test_profile_protocol_bindings.py",
@@ -653,7 +658,7 @@
       "tests/unit/test_runtime_version_truthfulness.py",
       "pkgs/120-tests/tba-tests-sd-jwt-vc/tests/unit/test_sd_jwt_vc_concrete.py",
       "pkgs/120-tests/tba-tests-administration/tests/unit/test_secure_default_admin_gate.py",
-      "tests/unit/test_security_deps.py",
+      "pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py",
       "tests/unit/test_security_trust_contract_boundary.py",
       "tests/unit/test_security_user_lookup.py",
       "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_server_router_schema_ownership.py",
@@ -663,7 +668,7 @@
       "pkgs/120-tests/tba-tests-browser-session/tests/unit/test_session_login_http_binding.py",
       "pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py",
       "pkgs/120-tests/tba-tests-set/tests/unit/test_set_providers.py",
-      "tests/unit/test_shared_secret_provider.py",
+      "pkgs/120-tests/tba-tests-authentication/tests/unit/test_shared_secret_provider.py",
       "tests/unit/test_spiffe_providers.py",
       "tests/unit/test_spiffe_svid_profiles.py",
       "tests/unit/test_spiffe_workload_and_broker_api_profiles.py",
@@ -673,7 +678,11 @@
       "pkgs/120-tests/tba-tests-architecture/tests/unit/test_ssot_registry_integrity.py",
       "pkgs/120-tests/tba-tests-architecture/tests/unit/test_ssot_work_item_traceability.py",
       "tests/unit/test_standalone_concrete_ownership.py",
-      "tests/unit/test_standalone_identity_credential_artifacts.py",
+      "pkgs/120-tests/tba-tests-oidc/tests/unit/test_standalone_id_token.py",
+      "pkgs/120-tests/tba-tests-did/tests/unit/test_standalone_did_document.py",
+      "pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_standalone_vc_formats.py",
+      "pkgs/120-tests/tba-tests-workload-composition/tests/unit/test_standalone_workload_artifact_boundaries.py",
+      "pkgs/120-tests/tba-tests-spiffe/tests/unit/test_standalone_svid_formats.py",
       "tests/unit/test_standard_owner_metadata.py",
       "pkgs/120-tests/tba-tests-storage/tests/unit/test_storage_canonical_facades.py",
       "pkgs/120-tests/tba-tests-storage/tests/unit/test_storage_repository_boundary.py",
@@ -4129,8 +4138,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py",
         "pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py",
         "pkgs/120-tests/tba-tests-jose/tests/security/test_crypto_boundary_governance.py",
-        "tests/unit/test_backends.py",
-        "tests/unit/test_crypto.py",
+        "pkgs/120-tests/tba-tests-authentication/tests/unit/test_backends.py",
+        "pkgs/120-tests/tba-tests-authentication/tests/unit/test_password_crypto.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwt_key_crypto.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_crypto_key_dependency_boundary.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_crypto_key_runtime_boundary.py",
         "pkgs/120-tests/tba-tests-storage/tests/unit/test_crypto_key_storage_runtime_boundary.py",
@@ -6730,7 +6740,7 @@
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_resource_server_consumer_boundary.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py",
-        "tests/unit/test_security_deps.py"
+        "pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/cli-operator-surface/"
@@ -6767,7 +6777,7 @@
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_resource_server_consumer_boundary.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py",
-        "tests/unit/test_security_deps.py",
+        "pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py",
         "pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py",
         "pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py",
@@ -6811,7 +6821,7 @@
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_resource_server_consumer_boundary.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py",
-        "tests/unit/test_security_deps.py",
+        "pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py",
         "pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py",
         "pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py",
@@ -8308,7 +8318,11 @@
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_profile_protocol_bindings.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
-        "tests/unit/test_identity_artifact_confusion_vectors.py"
+        "pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py",
+        "pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py",
+        "pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py"
       ],
       "negative_tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py",
@@ -8344,7 +8358,7 @@
         "pkgs/120-tests/tba-tests-runtime/tests/integration/test_runtime_issuer_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py",
-        "tests/unit/test_security_deps.py",
+        "pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8693_token_exchange.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8693_token_exchange.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_token_exchange_capability.py",
@@ -8623,7 +8637,11 @@
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_profile_protocol_bindings.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
-        "tests/unit/test_identity_artifact_confusion_vectors.py"
+        "pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py",
+        "pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py",
+        "pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py"
       ],
       "negative_tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py",
@@ -8659,7 +8677,7 @@
         "pkgs/120-tests/tba-tests-runtime/tests/integration/test_runtime_issuer_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py",
-        "tests/unit/test_security_deps.py",
+        "pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8693_token_exchange.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8693_token_exchange.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_token_exchange_capability.py",
@@ -8939,7 +8957,11 @@
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_profile_protocol_bindings.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
-        "tests/unit/test_identity_artifact_confusion_vectors.py"
+        "pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py",
+        "pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py",
+        "pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py"
       ],
       "negative_tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py",
@@ -8975,7 +8997,7 @@
         "pkgs/120-tests/tba-tests-runtime/tests/integration/test_runtime_issuer_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py",
-        "tests/unit/test_security_deps.py",
+        "pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8693_token_exchange.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8693_token_exchange.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_token_exchange_capability.py",
@@ -9260,7 +9282,11 @@
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_profile_protocol_bindings.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
-        "tests/unit/test_identity_artifact_confusion_vectors.py"
+        "pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py",
+        "pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py",
+        "pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py"
       ],
       "negative_tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py",
@@ -9296,7 +9322,7 @@
         "pkgs/120-tests/tba-tests-runtime/tests/integration/test_runtime_issuer_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py",
-        "tests/unit/test_security_deps.py",
+        "pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8693_token_exchange.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8693_token_exchange.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_token_exchange_capability.py",
@@ -9489,7 +9515,11 @@
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_profile_protocol_bindings.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
-        "tests/unit/test_identity_artifact_confusion_vectors.py"
+        "pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py",
+        "pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py",
+        "pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py"
       ],
       "negative_tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py",
@@ -9525,7 +9555,7 @@
         "pkgs/120-tests/tba-tests-runtime/tests/integration/test_runtime_issuer_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py",
-        "tests/unit/test_security_deps.py",
+        "pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8693_token_exchange.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8693_token_exchange.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_token_exchange_capability.py",
@@ -9685,7 +9715,11 @@
         "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
-        "tests/unit/test_identity_artifact_confusion_vectors.py"
+        "pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py",
+        "pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py",
+        "pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -9718,7 +9752,11 @@
         "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
-        "tests/unit/test_identity_artifact_confusion_vectors.py"
+        "pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py",
+        "pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py",
+        "pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -9751,7 +9789,11 @@
         "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
-        "tests/unit/test_identity_artifact_confusion_vectors.py"
+        "pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py",
+        "pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py",
+        "pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -9784,7 +9826,11 @@
         "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
-        "tests/unit/test_identity_artifact_confusion_vectors.py"
+        "pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py",
+        "pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py",
+        "pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -9814,8 +9860,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py",
         "pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py",
         "pkgs/120-tests/tba-tests-jose/tests/security/test_crypto_boundary_governance.py",
-        "tests/unit/test_backends.py",
-        "tests/unit/test_crypto.py",
+        "pkgs/120-tests/tba-tests-authentication/tests/unit/test_backends.py",
+        "pkgs/120-tests/tba-tests-authentication/tests/unit/test_password_crypto.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwt_key_crypto.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_crypto_key_dependency_boundary.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_crypto_key_runtime_boundary.py",
         "pkgs/120-tests/tba-tests-storage/tests/unit/test_crypto_key_storage_runtime_boundary.py",
@@ -9852,7 +9899,11 @@
         "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
-        "tests/unit/test_identity_artifact_confusion_vectors.py"
+        "pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py",
+        "pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py",
+        "pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py"
       ],
       "negative_tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py",
@@ -9861,7 +9912,7 @@
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_resource_server_consumer_boundary.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py",
-        "tests/unit/test_security_deps.py"
+        "pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/bearer/",
@@ -9984,7 +10035,11 @@
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
-        "tests/unit/test_identity_artifact_confusion_vectors.py"
+        "pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py",
+        "pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py",
+        "pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py"
       ],
       "negative_tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py",
@@ -10102,7 +10157,7 @@
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_resource_server_consumer_boundary.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py",
-        "tests/unit/test_security_deps.py"
+        "pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/bearer/",
@@ -10142,8 +10197,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py",
         "pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py",
         "pkgs/120-tests/tba-tests-jose/tests/security/test_crypto_boundary_governance.py",
-        "tests/unit/test_backends.py",
-        "tests/unit/test_crypto.py",
+        "pkgs/120-tests/tba-tests-authentication/tests/unit/test_backends.py",
+        "pkgs/120-tests/tba-tests-authentication/tests/unit/test_password_crypto.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwt_key_crypto.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_crypto_key_dependency_boundary.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_crypto_key_runtime_boundary.py",
         "pkgs/120-tests/tba-tests-storage/tests/unit/test_crypto_key_storage_runtime_boundary.py",
@@ -10577,7 +10633,7 @@
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_resource_server_consumer_boundary.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py",
-        "tests/unit/test_security_deps.py",
+        "pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py",
         "pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py",
         "pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py",
@@ -10638,7 +10694,7 @@
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9449_dpop.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py",
-        "tests/unit/test_security_deps.py",
+        "pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8693_token_exchange.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8693_token_exchange.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_token_exchange_capability.py",
@@ -10679,7 +10735,7 @@
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_resource_server_consumer_boundary.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py",
-        "tests/unit/test_security_deps.py"
+        "pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/bearer/",
@@ -11399,7 +11455,11 @@
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
-        "tests/unit/test_identity_artifact_confusion_vectors.py"
+        "pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py",
+        "pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py",
+        "pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -11626,7 +11686,7 @@
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_resource_server_consumer_boundary.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py",
-        "tests/unit/test_security_deps.py"
+        "pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/bearer/"
@@ -12553,7 +12613,11 @@
         "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
-        "tests/unit/test_identity_artifact_confusion_vectors.py",
+        "pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py",
+        "pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py",
+        "pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py"
@@ -12895,7 +12959,11 @@
         "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
-        "tests/unit/test_identity_artifact_confusion_vectors.py",
+        "pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py",
+        "pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py",
+        "pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py"
@@ -13415,7 +13483,11 @@
         "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
-        "tests/unit/test_identity_artifact_confusion_vectors.py",
+        "pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py",
+        "pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py",
+        "pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py"
@@ -14082,7 +14154,11 @@
         "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
-        "tests/unit/test_identity_artifact_confusion_vectors.py",
+        "pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py",
+        "pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py",
+        "pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py"
@@ -14767,7 +14843,11 @@
         "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
-        "tests/unit/test_identity_artifact_confusion_vectors.py",
+        "pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py",
+        "pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py",
+        "pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py",
+        "pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py"

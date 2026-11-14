@@ -216,7 +216,7 @@ def test_server_api_key_authentication_uses_capability_composition() -> None:
 
     for module_name in ("auth.py", "security_deps.py", "../rest/shared.py"):
         path = (
-            __import__("pathlib").Path(__file__).resolve().parents[2]
+            __import__("pathlib").Path(__file__).resolve().parents[5]
             / "pkgs"
             / "60-runtime"
             / "tba-server-identity"
@@ -230,7 +230,7 @@ def test_server_api_key_authentication_uses_capability_composition() -> None:
         )
 
     token_runtime = (
-        __import__("pathlib").Path(__file__).resolve().parents[2]
+        __import__("pathlib").Path(__file__).resolve().parents[5]
         / "pkgs"
         / "60-runtime"
         / "tba-server-identity"
