@@ -24,6 +24,7 @@ the migrated suites and the remaining root tests.
 | `tba-tests-certification` | Certification evidence, validated execution, and peer catalogs |
 | `tba-tests-release` | Release gates, signing, package matrices, and installation checks |
 | `tba-tests-architecture` | Package taxonomy, layer boundaries, and SSOT governance |
+| `tba-tests-backend-apps` | Backend application package, realm, and live deployment checks |
 | `tba-tests-jose` | JOSE/JWT and related signing, encryption, and key handling |
 | `tba-tests-wire-codecs` | JSON canonicalization, multibase, CID, and DAG-CBOR |
 | `tba-tests-did` | DID Core documents, resolution, dereferencing, and controller behavior |

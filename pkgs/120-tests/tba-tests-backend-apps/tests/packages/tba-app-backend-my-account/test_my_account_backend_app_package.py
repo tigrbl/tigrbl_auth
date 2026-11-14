@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-import sys
 from importlib import import_module
-from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 from uuid import uuid4
@@ -16,11 +14,6 @@ from tba_auth.tables import AuthSession, Client, Consent, Tenant, User
 from tba_provider_identity_jose.key_management import hash_pw
 from tba_provider_secret_hashing_bcrypt import BcryptSecretHasher
 from tba_contracts_identity.account_self_service import AccountPrincipal
-
-ROOT = Path(__file__).resolve().parents[3]
-PKG_SRC = ROOT / "pkgs" / "80-routers" / "tba-app-backend-my-account" / "src"
-if str(PKG_SRC) not in sys.path:
-    sys.path.insert(0, str(PKG_SRC))
 
 my_account_package = import_module("tba_app_backend_my_account")
 PRODUCT_SURFACE = my_account_package.PRODUCT_SURFACE

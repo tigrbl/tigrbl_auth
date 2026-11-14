@@ -15,6 +15,7 @@ from scripts.monorepo_release import (
     TESTKIT_ROOT_EXTRAS,
     _local_dependency_closure,
     _materialize_testkit_interop_artifacts,
+    _package_test_paths,
     _root_project_package,
     discover_packages,
 )
@@ -185,10 +186,30 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
     testkit_cells = [cell for cell in matrix if cell["name"] == "tba-testkit-identity"]
     assert len(testkit_cells) == 3
     assert all(cell["cross_cutting"] == "true" for cell in testkit_cells)
-    assert all("tests/packages/tba-testkit-identity" in cell["package_test_paths"] for cell in testkit_cells)
+    assert all("pkgs/120-tests/tba-testkit-identity/tests" in cell["package_test_paths"] for cell in testkit_cells)
     assert all("tests/integration" not in cell["package_test_paths"] for cell in testkit_cells)
     assert all("pkgs/120-tests/tba-tests-certification/tests/interop" in cell["package_test_paths"] for cell in testkit_cells)
     assert all(cell["pytest_args"] == "--certification-lane\nall" for cell in testkit_cells)
+
+
+    backend_suites = {
+        "tba-app-backend-developer",
+        "tba-app-backend-my-account",
+        "tba-app-backend-platform-administration",
+        "tba-app-backend-public",
+        "tba-app-backend-resource-validation",
+        "tba-app-backend-service-administration",
+        "tba-app-backend-tenant-administration",
+    }
+    packages = {package.name: package for package in discover_packages()}
+    for name in backend_suites:
+        expected = f"pkgs/120-tests/tba-tests-backend-apps/tests/packages/{name}"
+        paths = _package_test_paths(packages[name])
+        assert paths == [ROOT / expected]
+        assert any(paths[0].glob("test_*.py"))
+        assert {cell["package_test_paths"] for cell in matrix if cell["name"] == name} == {expected}
+    testkit_paths = "\n".join(path.relative_to(ROOT).as_posix() for path in _package_test_paths(packages["tba-testkit-identity"]))
+    assert {cell["package_test_paths"] for cell in testkit_cells} == {testkit_paths}
 
 
 def test_monorepo_release_filters_package_python_test_matrix() -> None:
@@ -223,7 +244,7 @@ def test_monorepo_release_filters_package_python_test_matrix() -> None:
             "python_tag": "py312",
             "cell_id": "tba-protocol-oauth-py312",
             "workspace_source_globs": "pkgs/*/*/src\npkgs/deprecated/*/src",
-            "package_test_paths": "tests/packages/tba-protocol-oauth\ntests/packages/tba_protocol_oauth",
+            "package_test_paths": "",
             "pre_test_command": "",
             "pytest_args": "",
             "cross_cutting": "false",

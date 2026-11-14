@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import sys
 from importlib import import_module
 from pathlib import Path
 from types import SimpleNamespace
@@ -12,11 +11,6 @@ from httpx import ASGITransport, AsyncClient
 from tba_app_backend_core.surfaces import admin_resource_path_prefixes
 from tba_auth.config.deployment import DEFAULT_VALUES, resolve_deployment
 
-
-ROOT = Path(__file__).resolve().parents[3]
-PKG_SRC = ROOT / "pkgs" / "tba-app-backend-platform-administration" / "src"
-if str(PKG_SRC) not in sys.path:
-    sys.path.insert(0, str(PKG_SRC))
 
 platform_admin_package = import_module("tba_app_backend_platform_administration")
 PRODUCT_SURFACE = platform_admin_package.PRODUCT_SURFACE

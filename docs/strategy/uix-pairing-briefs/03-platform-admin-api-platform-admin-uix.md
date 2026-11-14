@@ -230,6 +230,6 @@ Produce a route-level copy deck containing:
 - `pkgs/105-ui/tba-ui-platform-administration/services/platformAdminClient.ts`
 - `pkgs/105-ui/tba-ui-platform-administration/services/workflowCrud.test.ts`
 - `pkgs/105-ui/tba-ui-platform-administration/pages/platformCrudPages.test.tsx`
-- `tests/packages/tba-app-backend-platform-administration/`
+- `pkgs/120-tests/tba-tests-backend-apps/tests/packages/tba-app-backend-platform-administration/`
 - `tests/unit/test_product_api_surfaces.py`
 - Platform-admin SSOT feature/claim/test/evidence/boundary records

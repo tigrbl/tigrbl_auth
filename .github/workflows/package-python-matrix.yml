@@ -6,7 +6,6 @@ on:
       - ".github/workflows/package-python-matrix.yml"
       - "pkgs/**"
       - "scripts/monorepo_release.py"
-      - "tests/packages/**"
       - "pkgs/120-tests/tba-tests-release/tests/unit/test_monorepo_release.py"
   push:
     branches:
@@ -15,7 +14,6 @@ on:
       - ".github/workflows/package-python-matrix.yml"
       - "pkgs/**"
       - "scripts/monorepo_release.py"
-      - "tests/packages/**"
       - "pkgs/120-tests/tba-tests-release/tests/unit/test_monorepo_release.py"
   workflow_dispatch:
     inputs:

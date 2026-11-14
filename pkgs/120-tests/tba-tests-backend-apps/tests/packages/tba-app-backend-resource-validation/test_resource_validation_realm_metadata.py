@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-import sys
 from importlib import import_module
-from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
@@ -10,11 +8,6 @@ from httpx import ASGITransport, AsyncClient
 
 from tba_auth.config.deployment import DEFAULT_VALUES
 
-
-ROOT = Path(__file__).resolve().parents[3]
-PKG_SRC = ROOT / "pkgs" / "tba-app-backend-resource-validation" / "src"
-if str(PKG_SRC) not in sys.path:
-    sys.path.insert(0, str(PKG_SRC))
 
 build_app = import_module("tba_app_backend_resource_validation").build_app
 

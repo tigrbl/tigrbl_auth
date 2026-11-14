@@ -45,6 +45,6 @@ Use `tba_app_backend_public:app` for ASGI serving or `build_app` for explicit co
 
 ## Verification
 
-See the [related repository tests](https://github.com/tigrbl/tigrbl_auth/blob/master/tests/packages/tba-backend-app-public/test_public_backend_app_package.py) for the implementation scope covered by this example.
+See the [related repository tests](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/120-tests/tba-tests-backend-apps/tests/packages/tba-app-backend-public/test_public_backend_app_package.py) for the implementation scope covered by this example.
 
 [Workspace and package catalog](https://github.com/tigrbl/tigrbl_auth#package-catalog) · [tba-cli-identity](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/60-runtime/tba-cli-identity#readme) · [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues) · [Repository license](https://github.com/tigrbl/tigrbl_auth/blob/master/LICENSE)

@@ -68,7 +68,10 @@ def test_identity_testkit_package_fails_closed_for_bad_vectors() -> None:
 def test_identity_testkit_package_matrix_cells_cover_supported_versions() -> None:
     cells = PackageMatrixHarness().cells_for(
         "tba-testkit-identity",
-        test_paths=("tests/packages/tba-testkit-identity", "tests/interop"),
+        test_paths=(
+            "pkgs/120-tests/tba-testkit-identity/tests",
+            "pkgs/120-tests/tba-tests-certification/tests/interop",
+        ),
         cross_cutting=True,
     )
 

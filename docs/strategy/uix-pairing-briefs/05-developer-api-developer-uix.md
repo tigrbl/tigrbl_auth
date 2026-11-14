@@ -231,6 +231,6 @@ Produce a route-level copy deck containing:
 - `pkgs/105-ui/tba-ui-developer/services/workflowCrud.test.ts`
 - `pkgs/105-ui/tba-ui-developer/pages/developerCrudPages.test.tsx`
 - `pkgs/105-ui/tba-ui-developer/pages/OAuthFlowTesterPage.tsx`
-- `tests/packages/tba-app-backend-developer/`
+- `pkgs/120-tests/tba-tests-backend-apps/tests/packages/tba-app-backend-developer/`
 - `tests/unit/test_product_api_surfaces.py`
 - Developer API/UIX SSOT feature/claim/test/evidence/boundary records

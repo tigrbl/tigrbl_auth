@@ -73,23 +73,19 @@ Each matrix cell:
 
 1. discovers `pkgs/*` with `cobycloud/actions/actions/monorepo-discover`;
 2. validates package metadata with `cobycloud/actions/actions/package-metadata`;
-3. builds the target package with `cobycloud/actions/actions/python-package-build`
-   on that cell's Python version;
+3. builds the target package with `uv build` on that cell's Python version;
 4. creates a clean virtual environment;
-5. exposes sibling workspace package members from source through a `.pth` file;
-6. installs the target package from the built wheel with `--no-deps`;
+5. builds wheels for the target package's local dependencies;
+6. installs those wheels and the target wheel;
 7. runs `pip check`;
 8. imports the package's declared import root and verifies installed package
    metadata.
 
-Package-specific pytest suites can be added under either:
+Backend application suites live under
+`pkgs/120-tests/tba-tests-backend-apps/tests/packages/<distribution-name>/`.
 
-```text
-tests/packages/<package-name>/
-tests/packages/<import-root>/
-```
-
-When either path exists for a package, the isolated cell installs `pytest` in
+When a backend suite exists for a package, the isolated cell installs the pinned
+pytest, HTTP client, and SQLite test dependencies in
 the clean environment and runs those tests with:
 
 ```text
@@ -102,13 +98,11 @@ The `tba-testkit-identity` package is the cross-cutting package-test owner.
 Its package matrix cells additionally include:
 
 ```text
-tests/integration
+pkgs/120-tests/tba-testkit-identity/tests
 pkgs/120-tests/tba-tests-certification/tests/interop
 ```
 
-Those cells pass `--certification-lane all` through the cobycloud isolated
-package test action so the repo lane filter collects integration and interop
-tests instead of the default core-only lane.
+Those cells pass `--certification-lane all` through the isolated runner so pytest collects the testkit's interop checks.
 
 Before running those cross-cutting tests, the isolated cell installs the local
 workspace facade with test/runtime extras into the isolated venv:

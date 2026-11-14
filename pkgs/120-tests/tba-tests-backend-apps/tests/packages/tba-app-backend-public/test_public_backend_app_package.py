@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import sys
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
@@ -11,12 +10,7 @@ from httpx import ASGITransport, AsyncClient
 from tba_auth.config.deployment import DEFAULT_VALUES, resolve_deployment
 
 
-ROOT = Path(__file__).resolve().parents[3]
-PKG_SRC = ROOT / "pkgs" / "tba-app-backend-public" / "src"
-if str(PKG_SRC) not in sys.path:
-    sys.path.insert(0, str(PKG_SRC))
-
-from tba_app_backend_public import (  # noqa: E402
+from tba_app_backend_public import (
     PRODUCT_SURFACE,
     PUBLIC_BACKEND_APP_CONTRACT,
     build_app,

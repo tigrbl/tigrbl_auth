@@ -105,18 +105,21 @@ def discover_package_manifests(repo_root: Path) -> list[PackageManifest]:
 def build_package_python_matrix(
     packages: Iterable[PackageManifest],
     python_versions: Iterable[str] = SUPPORTED_PYTHON_VERSIONS,
+    *,
+    repo_root: Path = Path("."),
 ) -> list[dict[str, str]]:
     cells: list[dict[str, str]] = []
     for package in packages:
+        cross_cutting = package.name == "tba-testkit-identity"
+        test_paths = [f"pkgs/120-tests/tba-tests-backend-apps/tests/packages/{package.name}"]
+        if cross_cutting:
+            test_paths.extend((
+                "pkgs/120-tests/tba-testkit-identity/tests",
+                "pkgs/120-tests/tba-tests-certification/tests/interop",
+            ))
+        test_paths = [path for path in test_paths if (repo_root / path).is_dir()]
         for python_version in python_versions:
             python_tag = f"py{python_version.replace('.', '')}"
-            cross_cutting = package.name == "tba-testkit-identity"
-            test_paths = [
-                f"tests/packages/{package.name}",
-                f"tests/packages/{package.import_root}",
-            ]
-            if cross_cutting:
-                test_paths.append("pkgs/120-tests/tba-tests-certification/tests/interop")
             cells.append(
                 {
                     "name": package.name,
@@ -151,7 +154,7 @@ def evaluate_package_maturity(repo_root: Path, *, target_tier: str = "T2") -> di
     test_by_id = _by_id(registry.get("tests", []))
     boundary = _by_id(registry.get("boundaries", [])).get(PACKAGE_MATURITY_BOUNDARY_ID, {})
     boundary_feature_ids = set(boundary.get("feature_ids", []))
-    matrix = build_package_python_matrix(packages)
+    matrix = build_package_python_matrix(packages, repo_root=root)
     expected_cells = len(packages) * len(SUPPORTED_PYTHON_VERSIONS)
 
     failures: list[str] = []

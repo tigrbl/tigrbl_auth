@@ -228,6 +228,6 @@ Produce a route-level copy deck containing:
 - `pkgs/105-ui/tba-ui-tenant-administration/services/backendSurface.ts`
 - `pkgs/105-ui/tba-ui-tenant-administration/services/workflowCrud.test.ts`
 - `pkgs/105-ui/tba-ui-tenant-administration/pages/tenantCrudPages.test.tsx`
-- `tests/packages/tba-app-backend-tenant-administration/`
+- `pkgs/120-tests/tba-tests-backend-apps/tests/packages/tba-app-backend-tenant-administration/`
 - `tests/unit/test_product_api_surfaces.py`
 - Tenant-admin SSOT feature/claim/test/evidence/boundary records

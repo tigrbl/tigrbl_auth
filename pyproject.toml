@@ -580,6 +580,8 @@ testpaths = [
     "pkgs/120-tests/tba-tests-certification/tests",
     "pkgs/120-tests/tba-tests-release/tests",
     "pkgs/120-tests/tba-tests-architecture/tests",
+    "pkgs/120-tests/tba-tests-backend-apps/tests",
+    "pkgs/120-tests/tba-testkit-identity/tests",
     "pkgs/120-tests/tba-tests-jose/tests",
     "pkgs/120-tests/tba-tests-wire-codecs/tests",
     "pkgs/120-tests/tba-tests-did/tests",

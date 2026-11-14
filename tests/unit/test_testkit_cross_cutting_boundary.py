@@ -75,7 +75,10 @@ def test_testkit_t1_seeded_fixtures_vectors_and_package_matrix() -> None:
     harness = PackageMatrixHarness()
     cells = harness.cells_for(
         "tba-testkit-identity",
-        test_paths=("tests/integration", "tests/interop", "tests/unit/test_testkit_cross_cutting_boundary.py"),
+        test_paths=(
+            "pkgs/120-tests/tba-testkit-identity/tests",
+            "pkgs/120-tests/tba-tests-certification/tests/interop",
+        ),
         cross_cutting=True,
     )
 
