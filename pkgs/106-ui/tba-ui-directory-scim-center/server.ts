@@ -12,7 +12,7 @@ import {
 } from "./src/types";
 
 const app = express();
-const PORT = 3000;
+const PORT = Number(process.env.PORT ?? 3000);
 
 // Enable JSON parser that also supports SCIM content type (application/scim+json)
 app.use(express.json({ type: ["application/json", "application/scim+json"] }));
@@ -1730,6 +1730,9 @@ app.post("/api/admin/quarantine/:id/resolve", (req, res) => {
     return res.json({ status: "resolved", action: "link", user: existingUser });
 
   } else if (action === "force-separate") {
+    if (typeof qRecord.payload.userName !== "string" || !qRecord.payload.userName.trim()) {
+      return res.status(400).json({ error: "The quarantined record has no username." });
+    }
     // Generate a unique userName to separate them, e.g. suffixing with connection name or string
     const newUserName = `${qRecord.payload.userName.split("@")[0]}_${qRecord.connectionName.toLowerCase().replace(/\s+/g, "_")}@acme.com`;
     
@@ -1821,7 +1824,7 @@ app.post("/api/admin/reset", (req, res) => {
 // CLIENT-SIDE SPA DEV/PROD VITE ROUTING
 // ==========================================
 async function startServer() {
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.NODE_ENV !== "production" && !process.argv.includes("--production")) {
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa"
@@ -1835,7 +1838,7 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
+  app.listen(PORT, "127.0.0.1", () => {
     console.log(`Server successfully booted on port ${PORT}`);
   });
 }

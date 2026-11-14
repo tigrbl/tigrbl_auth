@@ -1460,7 +1460,7 @@ app.post('/api/console/test', async (req: Request, res: Response) => {
 // ==========================================
 
 async function startServer() {
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV !== 'production' && !process.argv.includes('--production')) {
     // Integrate Vite as a dev middleware
     const vite = await createViteServer({
       server: { middlewareMode: true },
@@ -1476,9 +1476,9 @@ async function startServer() {
     });
   }
 
-  const PORT = 3000;
-  app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server fully operational on http://0.0.0.0:${PORT}`);
+  const PORT = Number(process.env.PORT ?? 3000);
+  app.listen(PORT, '127.0.0.1', () => {
+    console.log(`Server fully operational on http://127.0.0.1:${PORT}`);
     console.log(`SCIM Base Protocol Root: /tenants/{tenant_slug}/scim/v2`);
   });
 }

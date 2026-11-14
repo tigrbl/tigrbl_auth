@@ -7,18 +7,22 @@ import express from "express";
 import fs from "fs";
 import path from "path";
 import dotenv from "dotenv";
-import { INITIAL_DECISIONS, MockPolicyEngine, generateStableKey, calculateSimpleHash } from "./src/data.ts";
-import { DecisionTrace, EvaluationOutcome, ReplayJob, ReplayMode, ComparisonReport, StepOutcome, AuthorityType } from "./src/types.ts";
+import { randomUUID } from "node:crypto";
+import { MockPolicyEngine, generateStableKey, calculateSimpleHash } from "./src/data.ts";
+import { DecisionTrace, EvaluationOutcome, ReplayJob, ReplayMode, ComparisonReport, AuthorityType } from "./src/types.ts";
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 
-const PORT = 3000;
+const PORT = Number(process.env.PORT ?? 3000);
 
 // In-Memory Database State
-let decisions: DecisionTrace[] = [...INITIAL_DECISIONS];
+const decisions = [
+  createTrace({ subject: { id: "alice" }, resource: { id: "sample-brief" }, action: "read" }),
+  createTrace({ subject: { id: "bob" }, resource: { id: "restricted-notes", classification: "restricted" }, action: "read" }),
+];
 let replayJobs: ReplayJob[] = [];
 
 // API: Search & Bounded Query Filter for Decisions
@@ -129,14 +133,16 @@ app.get("/api/decisions/:id/enforcement", (req, res) => {
 });
 
 // API: Ingest dynamic new Trace
-app.post("/api/ingest", (req, res) => {
-  const traceInput = req.body;
-  if (!traceInput.subject || !traceInput.resource || !traceInput.action) {
-    return res.status(400).json({ error: "Invalid ingestion envelope. Missing subject, resource, or action." });
-  }
+function createTrace(traceInput: {
+  subject: { id: string; roles?: string[] };
+  resource: { id: string; type?: string; classification?: string; attributes?: Record<string, string> };
+  action: string; context?: Record<string, string>; policyVersion?: string; tenantId?: string;
+  environment?: string; region?: string; correlationId?: string; requestId?: string;
+  sessionId?: string; transactionId?: string; pepId?: string;
+}): DecisionTrace {
 
   // Calculate deterministic keys and hashes
-  const decisionId = `dec-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+  const decisionId = `dec-${randomUUID()}`;
   const timestamp = new Date().toISOString();
   const policyVersion = traceInput.policyVersion || "1.0.0";
   
@@ -262,20 +268,35 @@ app.post("/api/ingest", (req, res) => {
     retentionExpiresAt: new Date(Date.now() + 315360000000).toISOString() // 10 years
   };
 
-  decisions.unshift(newTrace);
-  res.status(201).json(newTrace);
+  return newTrace;
+}
+
+app.post("/api/ingest", (req, res) => {
+  const input = req.body;
+  if (![input?.subject?.id, input?.resource?.id, input?.action]
+      .every(value => typeof value === "string" && value.trim() !== "") ||
+      (input?.subject?.roles !== undefined &&
+        (!Array.isArray(input.subject.roles) || input.subject.roles.some(role => typeof role !== "string")))) {
+    return res.status(400).json({ error: "Provide subject ID, resource ID, action, and optional string roles." });
+  }
+  const trace = createTrace(input);
+  decisions.unshift(trace);
+  res.status(201).json(trace);
 });
 
 // API: Replay Workbench Trigger
 app.post("/api/replays", (req, res) => {
-  const { mode, targetDecisionId, substitutions, policyBundleVersion, purpose } = req.body;
+  const { mode, targetDecisionId, substitutions = {}, policyBundleVersion, purpose } = req.body;
+  if (!Object.values(ReplayMode).includes(mode) || !substitutions || typeof substitutions !== "object" || Array.isArray(substitutions)) {
+    return res.status(400).json({ error: "Provide a supported replay mode and an optional substitutions object." });
+  }
   
   const targetTrace = decisions.find(d => d.id === targetDecisionId);
   if (!targetTrace) {
     return res.status(404).json({ error: "Target decision trace for replay not found" });
   }
 
-  const jobId = `job-${Date.now()}`;
+  const jobId = `job-${randomUUID()}`;
   const timestamp = new Date().toISOString();
 
   // Mode calculations
@@ -345,7 +366,7 @@ app.post("/api/replays", (req, res) => {
     mode,
     targetDecisionId,
     timestamp,
-    runBy: "jick.68.0@gmail.com",
+    runBy: "local-demo",
     status: "completed",
     substitutions: substitutions || {},
     policyBundleVersionUsed: targetVersion,
@@ -561,7 +582,7 @@ app.post("/api/retention/:id", (req, res) => {
 
 // Serve frontend build static files in production
 async function startServer() {
-  if (process.env.NODE_ENV === "production") {
+  if (process.env.NODE_ENV === "production" || process.argv.includes("--production")) {
     const distPath = path.resolve(process.cwd(), "dist");
     app.use(express.static(distPath));
     app.get("*", (req, res) => {
@@ -590,7 +611,7 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
+  app.listen(PORT, "127.0.0.1", () => {
     console.log(`[Auth Provenance Server] plane running on port ${PORT}`);
   });
 }
