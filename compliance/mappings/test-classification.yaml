@@ -86,8 +86,8 @@ categories:
   - tests/packages/tba-app-backend-tenant-administration/test_tenant_admin_api_package.py
   - tests/packages/tba-testkit-identity/test_identity_testkit_package.py
   - tests/unit/test_adapters.py
-  - tests/unit/test_admin_control_plane_boundary.py
-  - tests/unit/test_admin_policy_boundary.py
+  - pkgs/120-tests/tba-tests-administration/tests/unit/test_admin_control_plane_boundary.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_admin_policy_boundary.py
   - tests/unit/test_advanced_identity_graph_auth_boundary.py
   - tests/unit/test_advanced_identity_plane_phase4.py
   - tests/unit/test_advanced_surface_contracts.py
@@ -250,7 +250,7 @@ categories:
   - tests/unit/test_runtime_profile_configuration.py
   - tests/unit/test_runtime_validation_matrix.py
   - tests/unit/test_runtime_version_truthfulness.py
-  - tests/unit/test_secure_default_admin_gate.py
+  - pkgs/120-tests/tba-tests-administration/tests/unit/test_secure_default_admin_gate.py
   - tests/unit/test_security_deps.py
   - tests/unit/test_security_user_lookup.py
   - tests/unit/test_server_runtime_operator_boundary.py
@@ -280,9 +280,9 @@ categories:
   - tests/unit/test_validated_execution_runtime_matrix.py
   - tests/unit/test_well_known_endpoints_behavior.py
   integration:
-  - tests/integration/test_admin_auth_session.py
-  - tests/integration/test_admin_table_issue_regressions.py
-  - tests/integration/test_admin_table_surfaces.py
+  - pkgs/120-tests/tba-tests-administration/tests/integration/test_admin_auth_session.py
+  - pkgs/120-tests/tba-tests-administration/tests/integration/test_admin_table_issue_regressions.py
+  - pkgs/120-tests/tba-tests-administration/tests/integration/test_admin_table_surfaces.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
@@ -305,7 +305,7 @@ categories:
   - tests/integration/test_runtime_issuer_alignment.py
   - tests/integration/test_service_key_creation.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_service_key_introspection_flow.py
-  - tests/integration/test_sqlite_attachment_admin_directory.py
+  - pkgs/120-tests/tba-tests-storage/tests/integration/test_sqlite_attachment_admin_directory.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py
   - tests/runtime/test_runner_hypercorn.py
   - tests/runtime/test_runner_invariance.py
@@ -373,21 +373,21 @@ categories:
   - tests/e2e/test_release_gate_catalog.py
   - tests/examples/test_python_cli_device_login.py
   - tests/examples/test_readme_usage.py
-  - tests/uix/test_abac_admin.py
-  - tests/uix/test_admin_enterprise_boundary.py
-  - tests/uix/test_admin_golden_path.py
-  - tests/uix/test_admin_shell.py
-  - tests/uix/test_admin_shell_security.py
-  - tests/uix/test_policy_simulation.py
-  - tests/uix/test_priority1_admin_console_shell_boundary.py
-  - tests/uix/test_priority1_administrative_resource_views_boundary.py
-  - tests/uix/test_priority1_administrative_safe_mutations_boundary.py
-  - tests/uix/test_priority1_enterprise_readiness_boundary.py
-  - tests/uix/test_rbac_admin.py
-  - tests/uix/test_readiness_dashboard.py
-  - tests/uix/test_resource_views_contract.py
-  - tests/uix/test_resource_views_states.py
-  - tests/uix/test_safe_mutations.py
+  - pkgs/120-tests/tba-tests-admin-uix/tests/uix/test_abac_admin.py
+  - pkgs/120-tests/tba-tests-admin-uix/tests/uix/test_admin_enterprise_boundary.py
+  - pkgs/120-tests/tba-tests-admin-uix/tests/uix/test_admin_golden_path.py
+  - pkgs/120-tests/tba-tests-admin-uix/tests/uix/test_admin_shell.py
+  - pkgs/120-tests/tba-tests-admin-uix/tests/uix/test_admin_shell_security.py
+  - pkgs/120-tests/tba-tests-admin-uix/tests/uix/test_policy_simulation.py
+  - pkgs/120-tests/tba-tests-admin-uix/tests/uix/test_priority1_admin_console_shell_boundary.py
+  - pkgs/120-tests/tba-tests-admin-uix/tests/uix/test_priority1_administrative_resource_views_boundary.py
+  - pkgs/120-tests/tba-tests-admin-uix/tests/uix/test_priority1_administrative_safe_mutations_boundary.py
+  - pkgs/120-tests/tba-tests-admin-uix/tests/uix/test_priority1_enterprise_readiness_boundary.py
+  - pkgs/120-tests/tba-tests-admin-uix/tests/uix/test_rbac_admin.py
+  - pkgs/120-tests/tba-tests-admin-uix/tests/uix/test_readiness_dashboard.py
+  - pkgs/120-tests/tba-tests-admin-uix/tests/uix/test_resource_views_contract.py
+  - pkgs/120-tests/tba-tests-admin-uix/tests/uix/test_resource_views_states.py
+  - pkgs/120-tests/tba-tests-admin-uix/tests/uix/test_safe_mutations.py
   security:
   - pkgs/120-tests/tba-tests-authorization/tests/security/planning/test_authorization_budgets_planning.py
   - tests/security/planning/test_constraint_native_authorization_planning.py

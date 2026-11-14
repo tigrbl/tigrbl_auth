@@ -16,6 +16,8 @@ the migrated suites and the remaining root tests.
 | `tba-tests-oidc` | OpenID Connect discovery, ID tokens, UserInfo, and logout |
 | `tba-tests-browser-session` | Browser login, cookies, consent, and session lifecycle |
 | `tba-tests-platform-iam` | IAM contracts, conformance, policy decisions, RP sessions, performance, and UI wiring |
+| `tba-tests-administration` | Admin authentication, identity and tenant operations, and account self service |
+| `tba-tests-admin-uix` | Admin shell, access controls, resource views, and safe mutations |
 | `tba-tests-jose` | JOSE/JWT and related signing, encryption, and key handling |
 | `tba-tests-wire-codecs` | JSON canonicalization, multibase, CID, and DAG-CBOR |
 | `tba-tests-did` | DID Core documents, resolution, dereferencing, and controller behavior |

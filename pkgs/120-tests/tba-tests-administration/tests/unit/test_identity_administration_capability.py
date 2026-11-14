@@ -16,7 +16,7 @@ from tba_contracts_identity.admin_identities import (
 from tba_contracts_identity.admin_tenants import PlatformAdministrator
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 IDENTITY_API = (
     ROOT
     / "pkgs/90-backend-apps/tba-app-backend-platform-administration/src/tba_app_backend_platform_administration/identities.py"

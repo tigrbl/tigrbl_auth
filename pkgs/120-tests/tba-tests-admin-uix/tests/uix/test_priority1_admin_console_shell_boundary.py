@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 OPERATOR_SRC = ROOT / "pkgs" / "tba-operator-identity" / "src"
 if str(OPERATOR_SRC) not in sys.path:
     sys.path.append(str(OPERATOR_SRC))

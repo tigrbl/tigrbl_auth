@@ -16,7 +16,7 @@ from tba_contracts_identity.account_self_service import (
 )
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 PRINCIPAL = AccountPrincipal("identity", "tenant")
 PROFILE = AccountProfile("identity", "tenant", "alice", "alice@example.test")
 SESSION = AccountSession("session", "tenant", "identity", "alice")

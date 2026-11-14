@@ -4,7 +4,7 @@ import json
 import re
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 PKGS = ROOT / "pkgs"
 CORE = PKGS / "100-uix-core"
 PRODUCT_UI = PKGS / "105-ui"

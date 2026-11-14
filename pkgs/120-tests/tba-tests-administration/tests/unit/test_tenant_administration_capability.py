@@ -16,7 +16,7 @@ from tba_contracts_identity.admin_tenants import (
 )
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 TENANT_API = (
     ROOT
     / "pkgs/90-backend-apps/tba-app-backend-platform-administration/src"

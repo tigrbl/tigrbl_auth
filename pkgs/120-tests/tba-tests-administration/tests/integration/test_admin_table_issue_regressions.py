@@ -12,7 +12,7 @@ from tba_auth.crypto import hash_pw
 from tba_auth.tables import Client, LogoutState, PushedAuthorizationRequest
 from tba_auth.tables import RevokedToken, Tenant, TokenRecord, User
 
-from tests.integration.test_admin_table_surfaces import _admin_client, _invoke_rpc
+from tba_testkit_identity.admin_http import _admin_client, _invoke_rpc
 
 
 pytestmark = pytest.mark.integration
