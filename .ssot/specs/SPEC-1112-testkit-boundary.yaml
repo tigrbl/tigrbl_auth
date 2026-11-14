@@ -13,9 +13,9 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Define non-production testkit package ownership."
     at: "2026-05-18T08:20:38Z"
+    note: "Define non-production testkit package ownership."
+    status: "accepted"
 references: []
 body: |-
   ## Scope
@@ -53,6 +53,9 @@ body: |-
   
   Verification MUST include a production import scan that fails if any
   production package imports `tba_identity.testkit`.
+  
+  ## Executable test packages
+  Layer 120 owns repository-wide test suites grouped by protocol or capability and reusable test-only support. Package-local unit tests may live alongside their owning code. The root test runner collects migrated native suites during the transition. Independent peer fixtures are selected explicitly. SSOT test IDs and their proof links are preserved when a test moves, and executable paths and selectors must follow the relocated cases.
 spec_kind: "operational"
 adr_ids:
   - "adr:1096"

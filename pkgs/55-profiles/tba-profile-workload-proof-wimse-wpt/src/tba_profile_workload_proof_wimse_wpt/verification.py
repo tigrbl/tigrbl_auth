@@ -12,6 +12,17 @@ def _hash_token(value: str) -> str:
     return base64url_encode(hashlib.sha256(value.encode("ascii")).digest())
 
 
+def _target_audience(uri: str) -> str:
+    target = urlsplit(uri)
+    if (
+        target.scheme not in {"http", "https"}
+        or not target.hostname
+        or target.username is not None
+    ):
+        raise ValueError("WPT audience requires an absolute HTTP target URI")
+    return target._replace(path=target.path or "/", query="", fragment="").geturl()
+
+
 def verify_wpt(
     proof: str,
     *,
@@ -32,8 +43,7 @@ def verify_wpt(
     if headers["alg"] != confirmation_key.get("alg"):
         raise ValueError("WPT algorithm does not match the confirmation key")
     claims = token.claims
-    uri = urlsplit(audience)
-    target = uri._replace(query="", fragment="").geturl()
+    target = _target_audience(audience)
     audiences = claims.get("aud")
     if isinstance(audiences, str):
         audiences = [audiences]

@@ -10050,6 +10050,16 @@ name = "tba-testkit-workload-credential-conformance"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/120-tests/tba-testkit-workload-credential-conformance" }
 
+[package.metadata]
+requires-dist = [
+    { name = "cryptography", marker = "extra == 'runner'", specifier = ">=45.0.0" },
+    { name = "packaging", marker = "extra == 'runner'", specifier = ">=24.0" },
+    { name = "pytest", marker = "extra == 'runner'", specifier = ">=8.0" },
+    { name = "tba-primitives-identity", marker = "extra == 'runner'", specifier = "==0.4.0.dev2" },
+    { name = "tomli", marker = "python_full_version < '3.11' and extra == 'runner'", specifier = ">=2.0" },
+]
+provides-extras = ["runner"]
+
 [[package]]
 name = "tba-workspace"
 version = "0.4.0.dev2"

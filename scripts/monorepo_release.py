@@ -8,6 +8,7 @@ import shutil
 import subprocess
 import sys
 from dataclasses import dataclass
+from functools import cache
 from pathlib import Path
 
 try:
@@ -58,12 +59,15 @@ def _package_import_root(package_path: Path, name: str) -> str:
     return name.replace("-", "_")
 
 
-def discover_packages(*, include_deprecated: bool = False) -> list[Package]:
+@cache
+def _discover_packages(*, include_deprecated: bool) -> tuple[Package, ...]:
     packages: list[Package] = []
-    for pyproject in sorted((ROOT / "pkgs").rglob("pyproject.toml")):
+    for pyproject in sorted((ROOT / "pkgs").glob("*/*/pyproject.toml")):
         if not include_deprecated and pyproject.relative_to(ROOT / "pkgs").parts[0] == "deprecated":
             continue
         data = _load_pyproject(pyproject)
+        if data.get("tool", {}).get("uv", {}).get("package") is False:
+            continue
         project = data.get("project", {})
         name = str(project.get("name") or "").strip()
         version = str(project.get("version") or "").strip()
@@ -78,7 +82,11 @@ def discover_packages(*, include_deprecated: bool = False) -> list[Package]:
                 import_root=_package_import_root(pyproject.parent, name),
             )
         )
-    return packages
+    return tuple(packages)
+
+
+def discover_packages(*, include_deprecated: bool = False) -> list[Package]:
+    return list(_discover_packages(include_deprecated=include_deprecated))
 
 
 def _find_package(name: str) -> Package:

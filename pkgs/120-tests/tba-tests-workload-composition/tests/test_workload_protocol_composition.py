@@ -11,8 +11,7 @@ except ModuleNotFoundError:  # Python 3.10
 
 from packaging.requirements import Requirement
 
-
-PACKAGES = Path(__file__).resolve().parents[2] / "pkgs"
+PACKAGES = Path(__file__).resolve().parents[3]
 
 
 @pytest.fixture(scope="module")
@@ -22,7 +21,8 @@ def dependencies():
         project = tomllib.loads(manifest.read_text(encoding="utf-8")).get("project")
         if project:
             projects[project["name"]] = {
-                Requirement(requirement).name for requirement in project.get("dependencies", [])
+                Requirement(requirement).name
+                for requirement in project.get("dependencies", [])
             }
     return projects
 

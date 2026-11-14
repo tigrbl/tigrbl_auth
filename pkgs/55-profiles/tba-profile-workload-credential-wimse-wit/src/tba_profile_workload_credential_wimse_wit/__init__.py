@@ -10,5 +10,6 @@ __all__ = [
 ]
 
 from .verification import verify_wit
+from .issuance import issue_wit
 
-__all__ += ["verify_wit"]
+__all__ += ["issue_wit", "verify_wit"]

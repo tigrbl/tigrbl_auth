@@ -44,6 +44,23 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  workload-suites:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install uv
+        run: python -m pip install uv
+      - name: Run Layer 120 workload suites
+        run: >-
+          uv run --locked --extra test pytest
+          pkgs/120-tests/tba-tests-wimse/tests
+          pkgs/120-tests/tba-tests-spiffe/tests
+          pkgs/120-tests/tba-tests-workload-composition/tests
+          pkgs/120-tests/tba-testkit-workload-credential-conformance/tests
+
   discover-package-matrix:
     runs-on: ubuntu-latest
     outputs:

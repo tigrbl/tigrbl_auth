@@ -7,10 +7,15 @@ from tba_contracts_identity.workloads import (
     TrustDomain,
     WorkloadSelector,
 )
+from tba_protocol_workload_spiffe_svid import verify_jwt_svid, verify_x509_svid
 from tba_provider_spiffe_bundle import VersionedSpiffeBundleProvider
 from tba_provider_spiffe_workload_api import LocalSpiffeWorkloadApiProvider
-from tba_concrete_svid import X509SvidStructure
-from tigrbl_svid_verifier_provider import ProfiledSvidVerifier
+from tba_testkit_workload_credential_conformance.fixtures import (
+    PathValidator,
+    _certificate,
+    _jwk,
+    _jwt,
+)
 
 
 def _identity():
@@ -49,34 +54,33 @@ def test_bundle_versions_must_advance_and_contain_authorities():
 
 
 def test_jwt_svid_verification_requires_profile_specific_token_verifier_and_audience():
-    svid = Svid(_identity(), SvidFormat.JWT, "a.b.c")
-    with pytest.raises(ValueError, match="not configured"):
-        ProfiledSvidVerifier(_bundle_provider()).verify_svid(svid, "service-a")
-    verifier = ProfiledSvidVerifier(
-        _bundle_provider(),
-        jwt_verifier=lambda token, audience, bundle: {
-            "sub": str(_identity()),
-            "aud": [audience],
-            "exp": 100,
-        },
+    from cryptography.hazmat.primitives.asymmetric import ec
+
+    key = ec.generate_private_key(ec.SECP256R1())
+    token = _jwt(
+        key, {"sub": str(_identity()), "aud": ["service-a"], "exp": 100}, kid="key"
     )
-    assert verifier.verify_svid(svid, "service-a") == _identity()
+    anchors = {"example.org": [_jwk(key, kid="key", use="jwt-svid")]}
+    with pytest.raises(ValueError, match="audience"):
+        verify_jwt_svid(
+            token, expected_audience="service-b", keys_by_domain=anchors, now=50
+        )
+    assert verify_jwt_svid(
+        token, expected_audience="service-a", keys_by_domain=anchors, now=50
+    ) == str(_identity())
 
 
 def test_x509_svid_verification_requires_path_validation_and_identity_match():
-    svid = Svid(_identity(), SvidFormat.X509, b"certificate")
-    verifier = ProfiledSvidVerifier(
-        _bundle_provider(),
-        x509_verifier=lambda certificate, bundle: X509SvidStructure(
-            (str(_identity()),)
-        ),
-    )
-    assert verifier.verify_svid(svid) == _identity()
-    mismatch = ProfiledSvidVerifier(
-        _bundle_provider(),
-        x509_verifier=lambda certificate, bundle: X509SvidStructure(
-            ("spiffe://example.org/workload/other",)
-        ),
-    )
-    with pytest.raises(ValueError, match="does not match"):
-        mismatch.verify_svid(svid)
+    from cryptography.hazmat.primitives import serialization
+
+    root = _certificate(())
+    leaf, _ = _certificate((str(_identity()),), issuer=root)
+    chain = (leaf.public_bytes(serialization.Encoding.DER),)
+    anchors = {"example.org": PathValidator(root[0])}
+    assert verify_x509_svid(chain, validators_by_domain=anchors) == str(_identity())
+    with pytest.raises(ValueError, match="identity"):
+        verify_x509_svid(
+            chain,
+            validators_by_domain=anchors,
+            expected_identity="spiffe://example.org/workload/other",
+        )

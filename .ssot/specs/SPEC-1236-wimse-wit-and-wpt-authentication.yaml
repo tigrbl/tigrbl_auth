@@ -18,11 +18,14 @@ body: |-
   https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-creds-03
   https://datatracker.ietf.org/doc/html/draft-ietf-wimse-wpt-02
   
-  ## Requirements
-  The WIT profile MUST validate the workload identifier, credential type, confirmation key, issuer signature, and validity using the trust anchors configured for the subject's trust domain. The WPT profile MUST enforce the specified HTTP presentation, proof signature and algorithm binding to the WIT confirmation key, audience, lifetime, and exact WIT hash. Define replay handling for the composed verifier. The WIT and WPT packages MUST remain independently composable with the required verification capabilities.
+  ## Sender
+  The WIT issuer MUST sign a compact JWT with a configured asymmetric trust-domain key and bind the workload identity to a public confirmation JWK. The workload MUST sign a short-lived WPT with that confirmation key, bind the exact serialized WIT with SHA-256, set the target HTTP URI without query or fragment as audience, and generate a fresh proof ID. The workload presents the WIT in Workload-Identity-Token and the WPT using the WPT authorization scheme.
+  
+  ## Receiver
+  The WIT profile MUST validate the workload identifier, credential type, confirmation key, issuer signature, and validity using trust anchors configured for the subject trust domain. The WPT profile MUST enforce HTTP presentation, proof signature and algorithm binding, audience, lifetime, and exact WIT hash. The verifier MUST atomically reject a repeated proof ID scoped to its workload identity while the proof remains valid. The WIT and WPT packages MUST remain independently composable.
   
   ## Verification
-  Test signed WITs and WPTs separately and together on the HTTP verifier path. Cover wrong domain anchors, mismatched confirmation keys, proof bound to a different WIT, wrong audience, expiry, and replay behavior. Record the exact revisions and prove native operation without SPIFFE or SPIRE.
+  T3 exercises both roles with Tigrbl Auth release-candidate packages over HTTP using configured trust and the real replay provider. Cover wrong domain anchors, issuer and proof keys, proof bound to a different WIT, wrong audience, expiry, and replay. Native verification runs without SPIFFE, SPIRE, or Cred. The optional pinned Cred peer suite exercises the Tigrbl Auth sender for a separate T4 claim.
 spec_kind: "normative"
 adr_ids:
   - "adr:1140"

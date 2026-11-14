@@ -552,8 +552,14 @@ Repository = "https://github.com/swarmauri/swarmauri-sdk"
 Homepage = "https://github.com/swarmauri/swarmauri-sdk"
 
 [tool.pytest.ini_options]
-pythonpath = ["pkgs/60-runtime/tba-cli-identity/src"]
-testpaths = ["tests"]
+pythonpath = [".", "pkgs/60-runtime/tba-cli-identity/src"]
+testpaths = [
+    "tests",
+    "pkgs/120-tests/tba-tests-wimse/tests",
+    "pkgs/120-tests/tba-tests-spiffe/tests",
+    "pkgs/120-tests/tba-tests-workload-composition/tests",
+    "pkgs/120-tests/tba-testkit-workload-credential-conformance/tests",
+]
 norecursedirs = ["combined", "scripts", ".pytest_cache", "__pycache__", ".uv-cache", ".venv", "dist", ".benchmarks"]
 markers = [
     "test: standard test",

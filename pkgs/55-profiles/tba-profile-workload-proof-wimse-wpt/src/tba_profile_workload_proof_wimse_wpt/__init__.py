@@ -11,5 +11,6 @@ __all__ = [
 ]
 
 from .verification import verify_wpt, authenticate_wpt_request
+from .presentation import present_wit
 
-__all__ += ["verify_wpt", "authenticate_wpt_request"]
+__all__ += ["verify_wpt", "authenticate_wpt_request", "present_wit"]
