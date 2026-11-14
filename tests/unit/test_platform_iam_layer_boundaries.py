@@ -1,7 +1,6 @@
 from pathlib import Path
 import sys
 
-import tomllib
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -9,10 +8,11 @@ sys.path.insert(0, str(ROOT))
 
 
 def test_client_layer_is_canonical_and_not_a_facade_or_uix_layer() -> None:
-    policy = tomllib.loads((ROOT / "pkgs/layers.toml").read_text(encoding="utf-8"))
-    layers = {row["id"]: row for row in policy["layers"]}
-    assert layers["75-clients"]["category"] == "client"
-    assert layers["75-clients"]["order"] == 75
+    from scripts.package_layer_policy import load_layer_policy
+
+    layer = load_layer_policy().by_id["75-clients"]
+    assert layer.category == "client"
+    assert layer.order == 75
 
 
 def test_required_python_and_typescript_clients_live_in_layer_75() -> None:

@@ -625,6 +625,7 @@ dev = [
     "pytest-benchmark>=4.0.0",
     "tox>=4.23.2",
     "ssot-registry>=0.2.8",
+    "index-toml==0.3.0",
 ]
 
 [tool.setuptools]

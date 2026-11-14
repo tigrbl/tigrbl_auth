@@ -8,7 +8,7 @@ import re
 import tomllib
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_POLICY_PATH = ROOT / "pkgs" / "layers.toml"
+DEFAULT_POLICY_PATH = ROOT / "index.toml"
 
 
 @dataclass(frozen=True, slots=True)
@@ -69,6 +69,27 @@ def _normalize_distribution(value: str) -> str:
 def load_layer_policy(path: Path = DEFAULT_POLICY_PATH) -> LayerPolicy:
     payload = tomllib.loads(path.read_text(encoding="utf-8"))
     schema_version = payload.get("schema_version")
+    if schema_version == "1.1.0":
+        indexed_layers = payload["layers"]
+        payload = {
+            "schema_version": 1,
+            "layers": [
+                {**layer["metadata"]["tba"], "id": layer["id"], "order": layer["order"]}
+                for layer in indexed_layers
+            ],
+            "dependency_rules": [
+                {
+                    "consumer_layer": layer["id"],
+                    "allowed_target_layers": [
+                        *layer["allowed_dependency_layers"],
+                        *([layer["id"]] if layer["same_layer_dependencies"] != "forbidden" else []),
+                    ],
+                }
+                for layer in indexed_layers
+            ],
+            "dependency_exceptions": payload.get("metadata", {}).get("tba", {}).get("dependency_exceptions", []),
+        }
+        schema_version = 1
     if schema_version != 1:
         raise ValueError(f"unsupported package-layer schema: {schema_version!r}")
     raw_layers = payload.get("layers")

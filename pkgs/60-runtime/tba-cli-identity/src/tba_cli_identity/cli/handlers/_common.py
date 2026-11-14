@@ -71,7 +71,9 @@ def _repo_root(arg: str | None) -> Path:
         return Path(arg).resolve()
     cwd = Path.cwd()
     for parent in (cwd, *cwd.parents, *Path(__file__).resolve().parents):
-        if (parent / "pkgs" / "layers.toml").is_file() and (parent / "pyproject.toml").is_file():
+        packages = parent / "pkgs"
+        has_index = (parent / "index.toml").is_file() or (packages / "layers.toml").is_file()
+        if has_index and packages.is_dir() and (parent / "pyproject.toml").is_file():
             return parent
     return cwd
 

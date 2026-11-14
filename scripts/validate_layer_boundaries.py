@@ -37,7 +37,7 @@ except ModuleNotFoundError:  # direct script execution
 ROOT = Path(__file__).resolve().parents[1]
 PKGS = ROOT / "pkgs"
 
-LAYER_POLICY = load_layer_policy(PKGS / "layers.toml")
+LAYER_POLICY = load_layer_policy()
 LAYER_ORDER = LAYER_POLICY.layer_ids
 NON_PRODUCTION_LAYERS = LAYER_POLICY.terminal_layers
 ROUTER_LAYER = "80-routers"
@@ -410,7 +410,7 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
                 )
 
     # Apply the canonical policy to every first-party manifest and source import.
-    # Package-scoped exceptions are finite migration entries in pkgs/layers.toml.
+    # Package-scoped exceptions are finite migration entries in index.toml.
     observed_edges: set[tuple[str, str]] = set()
     for package in packages:
         manifest = package.path / "pyproject.toml"
@@ -436,7 +436,7 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
                 detail = "production cannot consume terminal packages; examples cannot consume tests"
             else:
                 kind = "forbidden-layer-dependency"
-                detail = "target layer is not allowed by pkgs/layers.toml"
+                detail = "target layer is not allowed by index.toml"
             violations.append(
                 Violation(
                     kind=kind,
@@ -527,7 +527,7 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
                 ),
                 target=target,
                 target_layer=(target_package.layer if target_package else "missing"),
-                path="pkgs/layers.toml",
+                path="index.toml",
                 line=None,
                 detail="remove migration exception that no longer covers a forbidden live edge",
             )
