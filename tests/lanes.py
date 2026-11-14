@@ -26,10 +26,7 @@ RUNTIME_STACK_SOURCE_PREFIXES = (
 EXTENSION_TEST_PREFIXES = (
     "test_rfc7800_",
     "test_rfc8417_",
-    "test_rfc8291_",
     "test_rfc8812_",
-    "test_rfc8932_",
-    "test_enhanced_oauth_metadata_legacy.py",
 )
 DEFERRED_INTEGRATION_FILES = {
     "test_auth_flows.py",

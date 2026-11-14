@@ -4546,9 +4546,7 @@
         "RFC 8932"
       ],
       "profile": null,
-      "positive_tests": [
-        "pkgs/120-tests/tba-tests-dns/tests/unit/test_rfc8932_dns_privacy.py"
-      ],
+      "positive_tests": [],
       "negative_tests": [],
       "evidence_refs": [
         "compliance/evidence/tier3/discovery/"
@@ -4598,9 +4596,7 @@
         "RFC 8291"
       ],
       "profile": null,
-      "positive_tests": [
-        "pkgs/120-tests/tba-tests-webpush/tests/unit/test_rfc8291_webpush_encryption.py"
-      ],
+      "positive_tests": [],
       "negative_tests": [],
       "evidence_refs": [
         "compliance/evidence/tier3/jwe/"
@@ -10939,9 +10935,7 @@
         "RFC 8291"
       ],
       "profile": null,
-      "positive_tests": [
-        "pkgs/120-tests/tba-tests-webpush/tests/unit/test_rfc8291_webpush_encryption.py"
-      ],
+      "positive_tests": [],
       "negative_tests": [],
       "evidence_refs": [
         "compliance/evidence/tier3/jwe/"
@@ -11138,9 +11132,7 @@
         "RFC 8932"
       ],
       "profile": null,
-      "positive_tests": [
-        "pkgs/120-tests/tba-tests-dns/tests/unit/test_rfc8932_dns_privacy.py"
-      ],
+      "positive_tests": [],
       "negative_tests": [],
       "evidence_refs": [
         "compliance/evidence/tier3/discovery/"
