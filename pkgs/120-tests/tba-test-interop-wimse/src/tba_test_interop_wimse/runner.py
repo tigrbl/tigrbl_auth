@@ -4,15 +4,17 @@ from dataclasses import asdict
 from .observations import mismatches
 
 
-def run_inventory(scenarios, executions, adapters):
+def run_inventory(scenarios, executions, adapters, *, setup_cache=None):
     cases = {case["id"]: case for case in scenarios}
-    setup = {}
+    setup = {} if setup_cache is None else setup_cache
     for execution in executions:
         case = cases[execution["scenario_id"]]
         result = {"execution_id": execution["id"], "scenario_id": case["id"]}
         adapter = adapters.get(case["scenario_id"])
         if execution["status"] != "qualified":
-            yield {**result, "status": "blocked", "reason": "qualification pending"}
+            roles = ", ".join(execution.get("pending_roles", ()))
+            reason = f"qualification pending ({roles})" if roles else "qualification pending"
+            yield {**result, "status": "blocked", "reason": reason}
             continue
         if adapter is None or not adapter.supports(case):
             yield {**result, "status": "blocked", "reason": "runtime adapter unavailable"}

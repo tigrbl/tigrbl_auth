@@ -35,6 +35,27 @@ Run the tier suites explicitly with `python -m pytest pkgs/120-tests/tba-test-in
 
 The 3,148 structural keys are exhaustive for the options declared by the current templates. The 20 flat axes are retained for comparison and are not all active independent axes in the templates. Runtime adapters and qualifying evidence for the remaining profiles and families are pending. No external peer pair is qualified. The spreadsheet is a snapshot of the current candidate inventory.
 
+## Candidate peer runs
+
+From the repository root, run:
+
+```sh
+python -m pytest pkgs/120-tests/tba-test-interop-wimse/tests/peer --collect-only -q
+python -m pytest pkgs/120-tests/tba-test-interop-wimse/tests/peer -o junit_family=xunit1 --junitxml=peer-runs.xml
+```
+
+Pytest collects one item per generated execution ID. A single test function joins
+each row to its scenario and calls the same runner used by the pilot. The report
+retains the full execution ID, scenario ID, and runner result. Blocked items are
+reported as skipped with their reason. A skipped item provides no runtime evidence.
+
+Register real peer bindings in the `peer_adapters` fixture. An adapter can cover
+multiple variants and families. The runner checks qualification, checks adapter
+support, reuses setup controls within each worker, and opens an isolated context
+for each row. Its setup key must include every setting that affects the control,
+including ordered peer and issuer pins, configuration, and topology. Local
+reference adapters belong in the internal tier tests.
+
 The 31 flat rules remain available for comparison through `--legacy-count`. In the scoped model, hop layout handles the topology rules. Profile expansion handles WIC URI and issuer applicability. Variant definitions handle transaction, authority, accounting, and event ordering. The peer join handles role and profile matching. The broker trace exclusion stays explicit in `exclusions.toml`.
 
 | Flat rule IDs | Scoped owner |

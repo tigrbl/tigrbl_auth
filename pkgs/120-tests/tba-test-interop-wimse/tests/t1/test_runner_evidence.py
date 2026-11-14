@@ -52,3 +52,25 @@ def test_failed_control_blocks_batch_and_preserves_attempts():
     assert report["b"]["status"] == "not-run"
     with pytest.raises(ValueError, match="duplicate"):
         reconcile(["a"], [first, first])
+
+
+def test_per_item_calls_reuse_control_but_isolate_observations():
+    case = next(row for row in generate_matrix()["scenarios"] if row["variant"] == "no-revocation")
+    adapter = type(REFERENCE_ADAPTERS["12"])()
+    controls = []
+    original = adapter.check_setup
+
+    def capture(case, execution):
+        controls.append(execution["id"])
+        original(case, execution)
+
+    adapter.check_setup = capture
+    cache = {}
+    results = []
+    for identifier in ("first", "second"):
+        execution = {"id": identifier, "scenario_id": case["id"], "status": "qualified"}
+        result, = run_inventory([case], [execution], {"12": adapter}, setup_cache=cache)
+        results.append(result)
+    assert controls == ["first"]
+    assert [result["status"] for result in results] == ["passed", "passed"]
+    assert [result["observation"]["effects"] for result in results] == [1, 1]
