@@ -1986,11 +1986,11 @@ extension:dns-privacy:
 extension:set:
 - pkgs/10-concrete/tba-concrete-set/tests/test_rfc8417.py
 extension:webauthn-passkeys:
-- tests/unit/test_rfc8812_webauthn_algorithms.py
-- tests/unit/test_webauthn_foundation_delivery.py
-- tests/unit/test_webauthn_protocol_delivery.py
-- tests/unit/test_webauthn_api_delivery.py
-- tests/unit/test_webauthn_attestation_delivery.py
+- pkgs/120-tests/tba-tests-webauthn/tests/unit/test_rfc8812_webauthn_algorithms.py
+- pkgs/120-tests/tba-tests-webauthn/tests/unit/test_webauthn_foundation_delivery.py
+- pkgs/120-tests/tba-tests-webauthn/tests/unit/test_webauthn_protocol_delivery.py
+- pkgs/120-tests/tba-tests-webauthn/tests/unit/test_webauthn_api_delivery.py
+- pkgs/120-tests/tba-tests-webauthn/tests/unit/test_webauthn_attestation_delivery.py
 extension:webpush:
 - tests/unit/test_rfc8291_webpush_encryption.py
 profile:baseline:
@@ -3883,7 +3883,7 @@ target:rfc-8707:
 - tests/unit/test_advanced_surface_contracts.py
 - tests/unit/test_hardening_cluster_a.py
 target:rfc-8812:
-- tests/unit/test_rfc8812_webauthn_algorithms.py
+- pkgs/120-tests/tba-tests-webauthn/tests/unit/test_rfc8812_webauthn_algorithms.py
 target:rfc-8932:
 - tests/unit/test_rfc8932_dns_privacy.py
 - tests/unit/test_rfc8932_enhanced_metadata.py

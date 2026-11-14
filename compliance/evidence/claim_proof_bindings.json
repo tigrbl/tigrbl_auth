@@ -4580,11 +4580,11 @@
       ],
       "profile": null,
       "positive_tests": [
-        "tests/unit/test_rfc8812_webauthn_algorithms.py",
-        "tests/unit/test_webauthn_foundation_delivery.py",
-        "tests/unit/test_webauthn_protocol_delivery.py",
-        "tests/unit/test_webauthn_api_delivery.py",
-        "tests/unit/test_webauthn_attestation_delivery.py"
+        "pkgs/120-tests/tba-tests-webauthn/tests/unit/test_rfc8812_webauthn_algorithms.py",
+        "pkgs/120-tests/tba-tests-webauthn/tests/unit/test_webauthn_foundation_delivery.py",
+        "pkgs/120-tests/tba-tests-webauthn/tests/unit/test_webauthn_protocol_delivery.py",
+        "pkgs/120-tests/tba-tests-webauthn/tests/unit/test_webauthn_api_delivery.py",
+        "pkgs/120-tests/tba-tests-webauthn/tests/unit/test_webauthn_attestation_delivery.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -11106,7 +11106,7 @@
       ],
       "profile": null,
       "positive_tests": [
-        "tests/unit/test_rfc8812_webauthn_algorithms.py"
+        "pkgs/120-tests/tba-tests-webauthn/tests/unit/test_rfc8812_webauthn_algorithms.py"
       ],
       "negative_tests": [],
       "evidence_refs": [

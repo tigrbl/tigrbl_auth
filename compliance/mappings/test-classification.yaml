@@ -234,7 +234,7 @@ categories:
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8705_mtls_runtime.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8707_resource_indicators.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc8725_jwt_best_practices.py
-  - tests/unit/test_rfc8812_webauthn_algorithms.py
+  - pkgs/120-tests/tba-tests-webauthn/tests/unit/test_rfc8812_webauthn_algorithms.py
   - tests/unit/test_rfc8932_dns_privacy.py
   - tests/unit/test_rfc8932_enhanced_metadata.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9068_jwt_profile.py

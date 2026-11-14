@@ -29,7 +29,7 @@ def capability_report() -> dict[str, object]:
         protocol="corim",
         revision=CURRENT_VERSION.identifier,
         features=tuple(FEATURES_BY_VERSION[CURRENT_VERSION.identifier]),
-        evidence_links=("tests/unit/test_corim_protocol_versioning.py",),
+        evidence_links=("pkgs/120-tests/tba-tests-corim/tests/unit/test_corim_protocol_versioning.py",),
         extra_requirements=CAPABILITY_REQUIREMENTS,
         include_default_artifact_requirements=False,
     )
