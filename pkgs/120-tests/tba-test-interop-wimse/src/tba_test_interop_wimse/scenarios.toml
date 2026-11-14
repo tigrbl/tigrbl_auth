@@ -1,0 +1,300 @@
+schema_version = 1
+
+[[scenarios]]
+id = "01"
+name = "Peer identity"
+topology = "direct"
+setup = "Direct inside A, valid credential and authorized autonomous operation"
+oracle = "Expected identity is authenticated and exactly one intended effect occurs per execution."
+hops = ["enforcing"]
+profiles = ["wic-mtls","wit-wpt","wit-http-signature","wic-mtls-wpt","wic-mtls-http-signature"]
+support_roles = []
+variants = [
+    { id = "valid-peer", decision = "allow", effect = "one-intended-effect" },
+]
+
+[[scenarios]]
+id = "02"
+name = "Trust isolation"
+topology = "direct"
+setup = "Valid credential from an untrusted domain, or wrong trust anchor for its claimed domain"
+oracle = "Reject at the affected authentication layer. No effect. In CP/CS, vary each layer independently."
+hops = ["enforcing"]
+profiles = ["wic-mtls","wit-wpt","wit-http-signature","wic-mtls-wpt","wic-mtls-http-signature"]
+support_roles = []
+variants = [
+    { id = "untrusted-domain", decision = "deny", effect = "zero-effects", layers = ["tls","application"] },
+    { id = "wrong-anchor", decision = "deny", effect = "zero-effects", layers = ["tls","application"] },
+]
+
+[[scenarios]]
+id = "03"
+name = "WIC identity selection"
+topology = "direct"
+setup = "{Missing workload URI SAN, multiple workload URI SANs, wrong expected server identity}"
+oracle = "Reject during peer validation, before granting protected access."
+hops = ["enforcing"]
+profiles = ["wic-mtls","wic-mtls-wpt","wic-mtls-http-signature"]
+support_roles = []
+variants = [
+    { id = "missing-workload-uri", decision = "deny", effect = "zero-effects", layers = ["tls"] },
+    { id = "multiple-workload-uris", decision = "deny", effect = "zero-effects", layers = ["tls"] },
+    { id = "wrong-server-identity", decision = "deny", effect = "zero-effects", layers = ["tls"], checker = "caller" },
+]
+
+[[scenarios]]
+id = "04"
+name = "TLS termination"
+topology = "terminating-gateway"
+setup = "Gateway terminates and re-establishes TLS. Run with a valid configured origin proof or handoff, and with it absent."
+oracle = "B always identifies the gateway as the outbound TLS peer. An operation requiring original caller identity succeeds only with the independently validated proof or handoff."
+hops = ["ingress","enforcing"]
+profiles = ["wic-mtls","wic-mtls-wpt","wic-mtls-http-signature"]
+support_roles = []
+variants = [
+    { id = "validated-origin-proof", decision = "allow", effect = "one-intended-effect", hops = ["ingress","enforcing"], target = "enforcing" },
+    { id = "trusted-origin-handoff", decision = "allow", effect = "one-intended-effect", hops = ["ingress","enforcing"], target = "enforcing" },
+    { id = "missing-origin-identity", decision = "deny", effect = "zero-effects", hops = ["ingress","enforcing"], target = "enforcing" },
+]
+
+[[scenarios]]
+id = "05"
+name = "Application proof required"
+topology = "direct"
+setup = "{Missing proof, wrong proof key, wrong audience}"
+oracle = "Reject the request. A valid TLS session alone does not satisfy this profile's application policy."
+hops = ["enforcing"]
+profiles = ["wit-wpt","wit-http-signature","wic-mtls-wpt","wic-mtls-http-signature"]
+support_roles = []
+variants = [
+    { id = "missing-proof", decision = "deny", effect = "zero-effects", layers = ["application"] },
+    { id = "wrong-proof-key", decision = "deny", effect = "zero-effects", layers = ["application"] },
+    { id = "wrong-audience", decision = "deny", effect = "zero-effects", layers = ["application"] },
+]
+
+[[scenarios]]
+id = "06"
+name = "Application replay"
+topology = "direct"
+setup = "Repeated proof within the validity window with replay rejection enabled"
+oracle = "The first request succeeds. The duplicate produces zero additional effects. Record the replay policy and enforcement point."
+hops = ["enforcing"]
+profiles = ["wit-wpt","wit-http-signature","wic-mtls-wpt","wic-mtls-http-signature"]
+support_roles = []
+variants = [
+    { id = "first-presentation", decision = "allow", effect = "one-intended-effect", layers = ["application"] },
+    { id = "duplicate-presentation", decision = "allow-then-deny", effect = "zero-additional-effects", layers = ["application"], events = ["initial-allow","initial-effect","duplicate-refused"] },
+]
+
+[[scenarios]]
+id = "07"
+name = "Transaction binding"
+topology = "direct"
+setup = "Valid local Txn-Token, then a second otherwise valid token substituted after proof generation"
+oracle = "Control succeeds. Substitution fails WPT hash or HTTP signature verification. No effect from the substituted request."
+hops = ["enforcing"]
+profiles = ["wit-wpt","wit-http-signature","wic-mtls-wpt","wic-mtls-http-signature"]
+support_roles = []
+variants = [
+    { id = "local-token", decision = "allow", effect = "one-intended-effect", layers = ["application"] },
+    { id = "token-binding-mismatch", decision = "deny", effect = "zero-effects", layers = ["application"] },
+]
+
+[[scenarios]]
+id = "08"
+name = "Cross-domain chain"
+topology = "cross-domain"
+setup = "A → B with configured peer trust and destination access token. Pair with a foreign Txn-Token presented to B."
+oracle = "Valid exchange succeeds and trace evidence shows the Txn-Token stayed in A. Foreign token cannot authorize B's action. P/S/CP/CS verify the applicable token binding on each request."
+hops = ["ingress","enforcing"]
+profiles = ["wic-mtls","wit-wpt","wit-http-signature","wic-mtls-wpt","wic-mtls-http-signature"]
+support_roles = ["source-token-issuer","destination-access-token-issuer"]
+variants = [
+    { id = "destination-access-token", decision = "allow", effect = "one-intended-effect", events = ["local-token-issued","destination-access-token-issued","operation-allowed"] },
+    { id = "foreign-transaction-token", decision = "deny", effect = "zero-effects" },
+]
+
+[[scenarios]]
+id = "09"
+name = "Authority selection"
+topology = "direct"
+setup = "{Autonomous call to delegated-only operation, delegated operation with insufficient scope, in-scope delegated control}"
+oracle = "First two cases have no effect. Control produces the intended effect."
+hops = ["enforcing"]
+profiles = ["wic-mtls","wit-wpt","wit-http-signature","wic-mtls-wpt","wic-mtls-http-signature"]
+support_roles = []
+variants = [
+    { id = "autonomous-delegated-only", decision = "deny", effect = "zero-effects" },
+    { id = "delegated-outside-scope", decision = "deny", effect = "zero-effects" },
+    { id = "delegated-in-scope", decision = "allow", effect = "one-intended-effect" },
+]
+
+[[scenarios]]
+id = "10"
+name = "Prompt policy"
+topology = "direct"
+setup = "Untrusted model input asks for a protected read or credential disclosure. Test harness uses inert input and synthetic protected values."
+oracle = "Authorization or disclosure policy denies the operation. Observe the protected resource and all output sinks in scope."
+hops = ["enforcing"]
+profiles = ["wic-mtls","wit-wpt","wit-http-signature"]
+support_roles = []
+variants = [
+    { id = "protected-read-refused", decision = "deny", effect = "zero-effects" },
+    { id = "credential-disclosure-refused", decision = "deny", effect = "zero-effects" },
+]
+
+[[scenarios]]
+id = "11"
+name = "P1 Status evidence"
+topology = "direct"
+setup = "Delegated action with {current, revoked, stale, unavailable} status under a declared fail-closed policy"
+oracle = "Current control succeeds. Other cases have no effect. Preserve the reason where observable, or attach controls that establish the cause. Test bounded grace separately only when the selected policy permits it."
+hops = ["enforcing"]
+profiles = ["wic-mtls","wit-wpt","wit-http-signature"]
+support_roles = []
+variants = [
+    { id = "current-status", decision = "allow", effect = "one-intended-effect" },
+    { id = "confirmed-revoked", decision = "deny", effect = "zero-effects" },
+    { id = "stale-cache", decision = "deny", effect = "zero-effects" },
+    { id = "unavailable-status", decision = "deny", effect = "zero-effects" },
+    { id = "grace-period-expired", decision = "deny", effect = "zero-effects" },
+    { id = "within-bounded-grace", decision = "allow", effect = "one-intended-effect" },
+]
+
+[[scenarios]]
+id = "12"
+name = "P2 Before effect"
+topology = "cross-domain"
+setup = "A delegates to B, initial authorization passes, then revoke A and make the update visible before B commits. Pair with no revocation."
+oracle = "Revoked case has zero effects after observation. Control commits once. Measure publication-to-observation and revocation-to-first-refusal separately. Include an already-established mTLS session for C."
+hops = ["ingress","enforcing"]
+profiles = ["wic-mtls","wit-wpt","wit-http-signature","wic-mtls-wpt","wic-mtls-http-signature"]
+support_roles = ["status-authority","effect-store"]
+variants = [
+    { id = "no-revocation", decision = "allow", effect = "one-intended-effect", events = ["initial-allow","commit"] },
+    { id = "revocation-before-effect", decision = "deny", effect = "zero-effects", events = ["initial-allow","revocation-observed","commit-refused"] },
+]
+
+[[scenarios]]
+id = "13"
+name = "P3 Child grant"
+topology = "direct"
+setup = "{Narrower child control, wider host, extra method, longer expiry}"
+oracle = "Accept the valid control. Reject each wider grant at receipt validation. No effect from the rejected requests."
+hops = ["enforcing"]
+profiles = ["wic-mtls","wit-wpt","wit-http-signature"]
+support_roles = []
+variants = [
+    { id = "narrower-child-grant", decision = "allow", effect = "one-intended-effect" },
+    { id = "wider-host", decision = "deny", effect = "zero-effects" },
+    { id = "extra-method", decision = "deny", effect = "zero-effects" },
+    { id = "longer-expiry", decision = "deny", effect = "zero-effects" },
+]
+
+[[scenarios]]
+id = "14"
+name = "P4 Shared budget"
+topology = "shared-budget"
+setup = "Two services, {independent counters, one authoritative accounting service}; include concurrent requests at the limit"
+oracle = "Independent counters demonstrate that a per-service limit does not enforce a shared bound. In the authoritative case, the total committed debits and effects stay at or below N. Also exercise rejection of an ambiguous accounting audience if required by the selected receipt profile."
+hops = ["ingress","enforcing"]
+profiles = ["wic-mtls","wit-wpt","wit-http-signature"]
+support_roles = ["accounting-authority","second-resource-service"]
+variants = [
+    { id = "independent-sequential", decision = "measure", effect = "shared-limit-may-be-exceeded", accounting = "independent", schedule = "sequential" },
+    { id = "independent-concurrent", decision = "measure", effect = "shared-limit-may-be-exceeded", accounting = "independent", schedule = "concurrent" },
+    { id = "authoritative-sequential", decision = "measure", effect = "committed-effects-at-or-below-limit", accounting = "authoritative", schedule = "sequential" },
+    { id = "authoritative-concurrent", decision = "measure", effect = "committed-effects-at-or-below-limit", accounting = "authoritative", schedule = "concurrent" },
+    { id = "ambiguous-accounting-audience", decision = "deny", effect = "zero-effects" },
+]
+
+[[scenarios]]
+id = "15"
+name = "P5 Proxy rewrite"
+topology = "proxied-request"
+setup = "{Unchanged request, changed signed authority, changed signed path} through proxy"
+oracle = "Original signature verifies only for the unchanged control. A trusted proxy verification handoff, if configured, is a separate case with its own policy and trace."
+hops = ["enforcing"]
+profiles = ["wit-http-signature","wic-mtls-http-signature"]
+support_roles = []
+variants = [
+    { id = "unchanged", decision = "allow", effect = "one-intended-effect", layers = ["application"] },
+    { id = "signed-authority-changed", decision = "deny", effect = "zero-effects", layers = ["application"] },
+    { id = "signed-path-changed", decision = "deny", effect = "zero-effects", layers = ["application"] },
+    { id = "trusted-proxy-verification", decision = "allow", effect = "one-intended-effect", layers = ["application"] },
+]
+
+[[scenarios]]
+id = "16"
+name = "P6 Tool/build drift"
+topology = "direct"
+setup = "{Matching control, changed tool digest, changed build claim} under the pinning policy"
+oracle = "Control succeeds. Call-time mismatch prevents the effect. Claim comparison establishes what the issuer asserted. Runtime attestation needs its own evidence."
+hops = ["enforcing"]
+profiles = ["wic-mtls","wit-wpt","wit-http-signature"]
+support_roles = []
+variants = [
+    { id = "matching-digests", decision = "allow", effect = "one-intended-effect" },
+    { id = "tool-digest-mismatch", decision = "deny", effect = "zero-effects" },
+    { id = "build-claim-mismatch", decision = "deny", effect = "zero-effects" },
+]
+
+[[scenarios]]
+id = "17"
+name = "P7 Approval display"
+topology = "direct"
+setup = "{Matching control, OASNT R2 display mismatch} under the approval profile"
+oracle = "Valid approval succeeds. R2 fails with display mismatch and no effect."
+hops = ["enforcing"]
+profiles = ["wic-mtls","wit-wpt","wit-http-signature"]
+support_roles = ["approval-verifier"]
+variants = [
+    { id = "matching-approval", decision = "allow", effect = "one-intended-effect" },
+    { id = "oasnt-r2-display-mismatch", decision = "deny", effect = "zero-effects" },
+]
+
+[[scenarios]]
+id = "18"
+name = "P8 Bearer release"
+topology = "direct"
+setup = "{Valid delegated control, no delegation, read-only grant + write, revocation visible before token release, revocation after token release}"
+oracle = "The control succeeds. Three invalid cases release no token and produce no action. After release, record provider behavior separately and measure exposure using provider expiry or revocation controls."
+hops = ["enforcing"]
+profiles = ["wic-mtls","wit-wpt","wit-http-signature"]
+support_roles = ["bearer-broker","provider"]
+variants = [
+    { id = "valid-grant", decision = "allow", effect = "one-intended-effect", events = ["initial-allow","bearer-released","provider-effect"] },
+    { id = "missing-delegation", decision = "deny", effect = "zero-effects", events = ["broker-refused","no-bearer-release"] },
+    { id = "readonly-grant-write", decision = "deny", effect = "zero-effects", events = ["broker-refused","no-bearer-release"] },
+    { id = "revocation-before-release", decision = "deny", effect = "zero-effects", events = ["initial-allow","revocation-observed","release-refused"] },
+    { id = "revocation-after-release", decision = "provider-policy", effect = "observe-provider-effect", events = ["initial-allow","bearer-released","revocation-observed","provider-decision"] },
+]
+
+[[scenarios]]
+id = "19"
+name = "Credential composition"
+topology = "direct"
+setup = "Both layers valid with different principals. Run under {required equality, explicitly allowed gateway-to-origin mapping}."
+oracle = "Equality policy rejects. Gateway mapping accepts only the configured pair and records both principals. Treat the composition rule as test policy."
+hops = ["enforcing"]
+profiles = ["wic-mtls-wpt","wic-mtls-http-signature"]
+support_roles = []
+variants = [
+    { id = "identity-equality-policy", decision = "deny", effect = "zero-effects" },
+    { id = "trusted-gateway-mapping", decision = "allow", effect = "one-intended-effect", hops = ["ingress","enforcing"], target = "enforcing" },
+]
+
+[[scenarios]]
+id = "20"
+name = "Cross-domain direction"
+topology = "cross-domain"
+setup = "Repeat the passing boundary and representative trust and authority refusals with the peer implementations swapped where they implement both roles"
+oracle = "Record each direction independently. Mark unsupported role combinations inapplicable with a reason."
+hops = ["ingress","enforcing"]
+profiles = ["wic-mtls","wit-wpt","wit-http-signature"]
+support_roles = ["source-token-issuer","destination-access-token-issuer"]
+variants = [
+    { id = "valid-boundary", decision = "allow", effect = "one-intended-effect" },
+    { id = "trust-refused", decision = "deny", effect = "zero-effects", layers = ["tls","application"] },
+    { id = "authority-refused", decision = "deny", effect = "zero-effects" },
+]

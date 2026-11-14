@@ -1,0 +1,33 @@
+# Exclude incompatible combinations. Expected protocol denials stay in the scenario matrix.
+schema_version = 1
+
+[[trace_exclusions]]
+id = "provider-denial-no-release"
+scenario_id = "18"
+variants = ["missing-delegation", "readonly-grant-write", "revocation-before-release"]
+event = "bearer-released"
+basis = "The scenario's broker policy denies release for these variants."
+
+[[rules]]
+id = "gateway-hops"
+basis = "Scenario 04. The modeled terminating gateway or trusted handoff has a distinct outbound hop."
+when = { factor = "intermediary", in = ["Terminate TLS and reconnect", "Trusted identity or verification handoff"] }
+excludes = { factor = "second_hop", in = ["No second hop"] }
+
+[[rules]]
+id = "read-only-write"
+basis = "Scenario 18. The challenged operation must be a write."
+when = { factor = "grant", in = ["Read-only grant used for write"] }
+excludes = { factor = "effect", in = ["Protected read"] }
+
+[[rules]]
+id = "denied-broker-no-release"
+basis = "Scenario 18 broker policy. The modeled grant governs the intended provider operation. Keep the attempted call with no release."
+when = { any = [{ factor = "authority", in = ["Delegation required but absent"] }, { factor = "grant", in = ["Out of scope", "Read-only grant used for write"] }] }
+excludes = { factor = "bearer", in = ["Bearer token delivered to provider"] }
+
+[[rules]]
+id = "fail-closed-broker-visible-revocation"
+basis = "Scenario 18 fail-closed broker policy. If revocation of the modeled grant is already visible before authorization, the broker cannot release the token in the expected trace. The provider-call denial with no release remains applicable."
+when = { all = [{ factor = "effect", in = ["Bearer-only provider call"] }, { factor = "revocation", in = ["Visible before authorization"] }, { factor = "status_policy", in = ["Fail closed"] }] }
+excludes = { factor = "bearer", in = ["Bearer token delivered to provider"] }

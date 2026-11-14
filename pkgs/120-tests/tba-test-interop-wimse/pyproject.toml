@@ -1,0 +1,21 @@
+[project]
+name = "tba-test-interop-wimse"
+version = "0.4.0.dev2"
+description = "WIMSE interoperability test matrices and combination counter for Tigrbl Auth"
+readme = "README.md"
+requires-python = ">=3.10,<3.16"
+license = "Apache-2.0"
+dependencies = ["tomli>=2; python_version < '3.11'"]
+
+[project.scripts]
+tba-test-interop-wimse = "tba_test_interop_wimse.__main__:main"
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+tba_test_interop_wimse = ["factors.toml", "exclusions.toml", "scenarios.toml", "peers.toml"]

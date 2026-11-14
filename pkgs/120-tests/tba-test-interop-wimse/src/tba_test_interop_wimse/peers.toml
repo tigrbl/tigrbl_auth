@@ -1,0 +1,253 @@
+# Endpoint capabilities require evidence for the exact role, profile, scheme and version.
+# Add version and evidence when marking a row qualified.
+# [qualified_support."enforcing:wic_issuer:baseline"]
+# implementation = "..."
+# version = "..."
+# configuration = "..."
+# evidence = "..."
+schema_version = 1
+
+[implementations.tba]
+name = "Tigrbl Auth"
+
+[implementations.wimsey]
+name = "wimsey"
+
+[implementations.cred]
+name = "Cred"
+candidate_ref = "hackathon/ietf127"
+
+[implementations.cofide]
+name = "Cofide WIMSE PoC"
+
+[implementations.combined-wpt-candidate]
+name = "Independent WIC/WPT peer to select"
+placeholder = true
+
+[implementations.combined-signature-candidate]
+name = "Independent WIC/HTTP signature peer to select"
+placeholder = true
+
+[[capabilities]]
+implementation = "tba"
+role = "caller"
+profile = "wic-mtls"
+identifier_scheme = "wimse"
+status = "pending"
+
+[[capabilities]]
+implementation = "tba"
+role = "receiver"
+profile = "wic-mtls"
+identifier_scheme = "wimse"
+status = "pending"
+
+[[capabilities]]
+implementation = "wimsey"
+role = "caller"
+profile = "wic-mtls"
+identifier_scheme = "wimse"
+status = "pending"
+
+[[capabilities]]
+implementation = "wimsey"
+role = "receiver"
+profile = "wic-mtls"
+identifier_scheme = "wimse"
+status = "pending"
+
+[[capabilities]]
+implementation = "tba"
+role = "caller"
+profile = "wic-mtls"
+identifier_scheme = "spiffe"
+status = "pending"
+
+[[capabilities]]
+implementation = "tba"
+role = "receiver"
+profile = "wic-mtls"
+identifier_scheme = "spiffe"
+status = "pending"
+
+[[capabilities]]
+implementation = "wimsey"
+role = "caller"
+profile = "wic-mtls"
+identifier_scheme = "spiffe"
+status = "pending"
+
+[[capabilities]]
+implementation = "wimsey"
+role = "receiver"
+profile = "wic-mtls"
+identifier_scheme = "spiffe"
+status = "pending"
+
+[[capabilities]]
+implementation = "tba"
+role = "caller"
+profile = "wit-wpt"
+identifier_scheme = "none"
+status = "pending"
+
+[[capabilities]]
+implementation = "tba"
+role = "receiver"
+profile = "wit-wpt"
+identifier_scheme = "none"
+status = "pending"
+
+[[capabilities]]
+implementation = "cred"
+role = "caller"
+profile = "wit-wpt"
+identifier_scheme = "none"
+status = "pending"
+
+[[capabilities]]
+implementation = "cred"
+role = "receiver"
+profile = "wit-wpt"
+identifier_scheme = "none"
+status = "pending"
+
+[[capabilities]]
+implementation = "tba"
+role = "caller"
+profile = "wit-http-signature"
+identifier_scheme = "none"
+status = "pending"
+
+[[capabilities]]
+implementation = "tba"
+role = "receiver"
+profile = "wit-http-signature"
+identifier_scheme = "none"
+status = "pending"
+
+[[capabilities]]
+implementation = "cofide"
+role = "caller"
+profile = "wit-http-signature"
+identifier_scheme = "none"
+status = "pending"
+
+[[capabilities]]
+implementation = "cofide"
+role = "receiver"
+profile = "wit-http-signature"
+identifier_scheme = "none"
+status = "pending"
+
+[[capabilities]]
+implementation = "tba"
+role = "caller"
+profile = "wic-mtls-wpt"
+identifier_scheme = "wimse"
+status = "pending"
+
+[[capabilities]]
+implementation = "tba"
+role = "receiver"
+profile = "wic-mtls-wpt"
+identifier_scheme = "wimse"
+status = "pending"
+
+[[capabilities]]
+implementation = "combined-wpt-candidate"
+role = "caller"
+profile = "wic-mtls-wpt"
+identifier_scheme = "wimse"
+status = "pending"
+
+[[capabilities]]
+implementation = "combined-wpt-candidate"
+role = "receiver"
+profile = "wic-mtls-wpt"
+identifier_scheme = "wimse"
+status = "pending"
+
+[[capabilities]]
+implementation = "tba"
+role = "caller"
+profile = "wic-mtls-wpt"
+identifier_scheme = "spiffe"
+status = "pending"
+
+[[capabilities]]
+implementation = "tba"
+role = "receiver"
+profile = "wic-mtls-wpt"
+identifier_scheme = "spiffe"
+status = "pending"
+
+[[capabilities]]
+implementation = "combined-wpt-candidate"
+role = "caller"
+profile = "wic-mtls-wpt"
+identifier_scheme = "spiffe"
+status = "pending"
+
+[[capabilities]]
+implementation = "combined-wpt-candidate"
+role = "receiver"
+profile = "wic-mtls-wpt"
+identifier_scheme = "spiffe"
+status = "pending"
+
+[[capabilities]]
+implementation = "tba"
+role = "caller"
+profile = "wic-mtls-http-signature"
+identifier_scheme = "wimse"
+status = "pending"
+
+[[capabilities]]
+implementation = "tba"
+role = "receiver"
+profile = "wic-mtls-http-signature"
+identifier_scheme = "wimse"
+status = "pending"
+
+[[capabilities]]
+implementation = "combined-signature-candidate"
+role = "caller"
+profile = "wic-mtls-http-signature"
+identifier_scheme = "wimse"
+status = "pending"
+
+[[capabilities]]
+implementation = "combined-signature-candidate"
+role = "receiver"
+profile = "wic-mtls-http-signature"
+identifier_scheme = "wimse"
+status = "pending"
+
+[[capabilities]]
+implementation = "tba"
+role = "caller"
+profile = "wic-mtls-http-signature"
+identifier_scheme = "spiffe"
+status = "pending"
+
+[[capabilities]]
+implementation = "tba"
+role = "receiver"
+profile = "wic-mtls-http-signature"
+identifier_scheme = "spiffe"
+status = "pending"
+
+[[capabilities]]
+implementation = "combined-signature-candidate"
+role = "caller"
+profile = "wic-mtls-http-signature"
+identifier_scheme = "spiffe"
+status = "pending"
+
+[[capabilities]]
+implementation = "combined-signature-candidate"
+role = "receiver"
+profile = "wic-mtls-http-signature"
+identifier_scheme = "spiffe"
+status = "pending"

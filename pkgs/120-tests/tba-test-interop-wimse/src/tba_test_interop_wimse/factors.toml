@@ -1,0 +1,381 @@
+# Factor levels are listed in workbook order.
+schema_version = 1
+scope = "Applicability rules for the existing workbook catalog. The count measures tuples allowed by these rules, including deliberate denials. Peer role qualification, multi-fault ordering and per-hop role binding are follow-up dimensions."
+sources = ["wimse-interop-coverage.xlsx / Factor Levels", "wimse-interop-scenario-matrix.md", "wimse-interop-execution-matrix.md"]
+exclusions_file = "exclusions.toml"
+
+[hop_profiles.wic-mtls]
+tls = "WIC mutual TLS"
+proof = "None"
+
+[hop_profiles.wit-wpt]
+tls = "Server-authenticated TLS"
+proof = "WIT + WPT"
+
+[hop_profiles.wit-http-signature]
+tls = "Server-authenticated TLS"
+proof = "WIT + HTTP Message Signature"
+
+[hop_profiles.wic-mtls-wpt]
+tls = "WIC mutual TLS"
+proof = "WIT + WPT"
+
+[hop_profiles.wic-mtls-http-signature]
+tls = "WIC mutual TLS"
+proof = "WIT + HTTP Message Signature"
+
+[factors.tls]
+name = "Primary hop TLS"
+levels = [
+    "Server-authenticated TLS",
+    "WIC mutual TLS",
+]
+
+[factors.proof]
+name = "Primary hop application proof"
+levels = [
+    "None",
+    "WIT + WPT",
+    "WIT + HTTP Message Signature",
+]
+
+[factors.second_hop]
+name = "Second hop profile"
+levels = [
+    "No second hop",
+    "Server TLS only",
+    "WIC/mTLS",
+    "WIT/WPT",
+    "WIT/HTTP signatures",
+    "WIC/mTLS + WIT/WPT",
+    "WIC/mTLS + WIT/HTTP signatures",
+]
+
+[factors.topology]
+name = "Call topology"
+levels = [
+    "Direct inside A",
+    "Chain inside A",
+    "Direct A to B",
+    "Chain across A and B",
+]
+
+[factors.intermediary]
+name = "Intermediary"
+levels = [
+    "None",
+    "Pass through",
+    "Terminate TLS and reconnect",
+    "Rewrite request",
+    "Trusted identity or verification handoff",
+]
+
+[factors.wic_uri]
+name = "WIC URI scheme"
+levels = [
+    "Inapplicable",
+    "Native wimse://",
+    "SPIFFE spiffe://",
+]
+
+[factors.authority]
+name = "Authority source"
+levels = [
+    "Autonomous workload policy",
+    "User delegation",
+    "User delegation with human approval",
+    "Delegation required but absent",
+]
+
+[factors.grant]
+name = "Grant and action scope"
+levels = [
+    "In scope",
+    "Out of scope",
+    "Narrower child grant",
+    "Wider host",
+    "Extra method",
+    "Longer expiry",
+    "Read-only grant used for write",
+]
+
+[factors.transaction]
+name = "Transaction context"
+levels = [
+    "Absent",
+    "Valid domain-local token",
+    "Valid cross-domain exchange",
+    "Foreign Transaction Token",
+    "Binding mismatch",
+]
+
+[factors.bearer]
+name = "Final credential handoff"
+levels = [
+    "None",
+    "Bearer token delivered to provider",
+]
+
+[factors.status]
+name = "Status condition"
+levels = [
+    "Current",
+    "Confirmed revoked",
+    "Stale",
+    "Unavailable",
+]
+
+[factors.status_policy]
+name = "Status policy"
+levels = [
+    "Default or inapplicable",
+    "Fail closed",
+    "Bounded grace",
+]
+
+[factors.revocation]
+name = "Revocation timing"
+levels = [
+    "No revocation",
+    "Visible before authorization",
+    "Visible after authorization before effect",
+    "Visible after bearer release",
+]
+
+[factors.effect]
+name = "Effect"
+levels = [
+    "Protected read",
+    "Local write",
+    "Shared-budget operation",
+    "Human-approved write",
+    "Bearer-only provider call",
+]
+
+[factors.accounting]
+name = "Accounting"
+levels = [
+    "Inapplicable",
+    "Independent counters",
+    "One authoritative service",
+]
+
+[factors.schedule]
+name = "Request schedule"
+levels = [
+    "Sequential",
+    "Concurrent at the limit",
+]
+
+[factors.fault]
+name = "Fault"
+levels = [
+    "None",
+    "Untrusted domain",
+    "Wrong anchor",
+    "Missing workload URI SAN",
+    "Multiple workload URI SANs",
+    "Wrong expected server identity",
+    "Missing original-caller proof or handoff",
+    "Missing application proof",
+    "Wrong proof key",
+    "Wrong audience",
+    "Repeated proof",
+    "Protected-read request from untrusted input",
+    "Credential disclosure request from untrusted input",
+    "Ambiguous accounting audience",
+    "Signed authority changed",
+    "Signed path changed",
+    "Tool digest mismatch",
+    "Build claim mismatch",
+    "Approval display mismatch",
+    "TLS and application identities differ",
+]
+
+[factors.peer]
+name = "Peer assignment"
+levels = [
+    "WIC with native identifiers",
+    "WIC with SPIFFE identifiers",
+    "Workload Proof Tokens",
+    "HTTP Message Signatures",
+    "WIC with Workload Proof Tokens",
+    "WIC with HTTP Message Signatures",
+]
+
+[factors.direction]
+name = "Implementation direction"
+levels = [
+    "Forward",
+    "Reverse",
+]
+
+[factors.issuer]
+name = "Issuer mode"
+levels = [
+    "Baseline issuer",
+    "SPIRE WIT-SVID substitution",
+    "SPIRE X.509-SVID",
+]
+
+[[rules]]
+id = "chain-hops"
+basis = "Scenario topology. Each modeled chain has a second authenticated hop."
+when = { factor = "topology", in = ["Chain inside A", "Chain across A and B"] }
+requires = { not = { factor = "second_hop", in = ["No second hop"] } }
+
+[[rules]]
+id = "direct-hops"
+basis = "Scenario topology. A direct call without termination or identity handoff uses one authenticated hop."
+when = { all = [{ factor = "topology", in = ["Direct inside A", "Direct A to B"] }, { not = { factor = "intermediary", in = ["Terminate TLS and reconnect", "Trusted identity or verification handoff"] } }] }
+requires = { factor = "second_hop", in = ["No second hop"] }
+
+[[rules]]
+id = "wic-uri-required"
+basis = "Scenario 03 and workload-creds-03 §6.1. A test certificate with an invalid SAN still uses an intended identifier profile."
+when = { any = [{ factor = "tls", in = ["WIC mutual TLS"] }, { factor = "second_hop", in = ["WIC/mTLS", "WIC/mTLS + WIT/WPT", "WIC/mTLS + WIT/HTTP signatures"] }] }
+requires = { factor = "wic_uri", in = ["Native wimse://", "SPIFFE spiffe://"] }
+
+[[rules]]
+id = "wic-uri-inapplicable"
+basis = "WIC URI scope. Without WIC the certificate URI scheme is inapplicable."
+when = { not = { any = [{ factor = "tls", in = ["WIC mutual TLS"] }, { factor = "second_hop", in = ["WIC/mTLS", "WIC/mTLS + WIT/WPT", "WIC/mTLS + WIT/HTTP signatures"] }] } }
+requires = { factor = "wic_uri", in = ["Inapplicable"] }
+
+[[rules]]
+id = "wic-faults"
+basis = "Scenario 03. These faults need a WIC validation path."
+when = { factor = "fault", in = ["Missing workload URI SAN", "Multiple workload URI SANs", "Wrong expected server identity"] }
+requires = { any = [{ factor = "tls", in = ["WIC mutual TLS"] }, { factor = "second_hop", in = ["WIC/mTLS", "WIC/mTLS + WIT/WPT", "WIC/mTLS + WIT/HTTP signatures"] }] }
+
+[[rules]]
+id = "missing-origin-identity"
+basis = "Scenario 04. The missing origin proof or trusted handoff variant requires the gateway boundary whose receiver expects original caller identity."
+when = { factor = "fault", in = ["Missing original-caller proof or handoff"] }
+requires = { factor = "intermediary", in = ["Terminate TLS and reconnect", "Trusted identity or verification handoff"] }
+
+[[rules]]
+id = "protected-read-attempt"
+basis = "Scenario 10. The selected fault attempts a protected read. Effect records the targeted operation even when the read is denied."
+when = { factor = "fault", in = ["Protected-read request from untrusted input"] }
+requires = { factor = "effect", in = ["Protected read"] }
+
+[[rules]]
+id = "application-faults"
+basis = "Scenarios 05–06. The factor describes the verifier's configured proof even if the message omits it."
+when = { factor = "fault", in = ["Missing application proof", "Wrong proof key", "Wrong audience", "Repeated proof"] }
+requires = { any = [{ factor = "proof", in = ["WIT + WPT", "WIT + HTTP Message Signature"] }, { factor = "second_hop", in = ["WIT/WPT", "WIT/HTTP signatures", "WIC/mTLS + WIT/WPT", "WIC/mTLS + WIT/HTTP signatures"] }] }
+
+[[rules]]
+id = "signature-rewrite"
+basis = "Scenario 15. An HTTP signature must cover the challenged component on the affected hop."
+when = { factor = "fault", in = ["Signed authority changed", "Signed path changed"] }
+requires = { all = [{ factor = "intermediary", in = ["Rewrite request"] }, { any = [{ factor = "proof", in = ["WIT + HTTP Message Signature"] }, { factor = "second_hop", in = ["WIT/HTTP signatures", "WIC/mTLS + WIT/HTTP signatures"] }] }] }
+
+[[rules]]
+id = "identity-comparison"
+basis = "Scenario 19. The same hop must have both identity layers."
+when = { factor = "fault", in = ["TLS and application identities differ"] }
+requires = { any = [{ all = [{ factor = "tls", in = ["WIC mutual TLS"] }, { factor = "proof", in = ["WIT + WPT", "WIT + HTTP Message Signature"] }] }, { factor = "second_hop", in = ["WIC/mTLS + WIT/WPT", "WIC/mTLS + WIT/HTTP signatures"] }] }
+
+[[rules]]
+id = "token-domain"
+basis = "Scenario 08. The receiving domain must exist even for a test expected to deny."
+when = { factor = "transaction", in = ["Valid cross-domain exchange", "Foreign Transaction Token"] }
+requires = { factor = "topology", in = ["Direct A to B", "Chain across A and B"] }
+
+[[rules]]
+id = "token-binding"
+basis = "Scenario 07. The current catalog exercises token binding using WPT or HTTP signatures."
+when = { factor = "transaction", in = ["Binding mismatch"] }
+requires = { any = [{ factor = "proof", in = ["WIT + WPT", "WIT + HTTP Message Signature"] }, { factor = "second_hop", in = ["WIT/WPT", "WIT/HTTP signatures", "WIC/mTLS + WIT/WPT", "WIC/mTLS + WIT/HTTP signatures"] }] }
+
+[[rules]]
+id = "child-grant"
+basis = "Scenarios 13 and 18. These grant cases require a delegated grant to inspect."
+when = { factor = "grant", in = ["Narrower child grant", "Wider host", "Extra method", "Longer expiry", "Read-only grant used for write"] }
+requires = { factor = "authority", in = ["User delegation", "User delegation with human approval"] }
+
+[[rules]]
+id = "human-display"
+basis = "Scenario 17. The fixture needs the displayed approval and the protected action."
+when = { factor = "fault", in = ["Approval display mismatch"] }
+requires = { all = [{ factor = "authority", in = ["User delegation with human approval"] }, { factor = "effect", in = ["Human-approved write"] }] }
+
+[[rules]]
+id = "human-effect"
+basis = "Scenario 17 catalog convention. A missing-approval variant needs its own explicit level."
+when = { factor = "effect", in = ["Human-approved write"] }
+requires = { factor = "authority", in = ["User delegation with human approval"] }
+
+[[rules]]
+id = "bearer-release"
+basis = "Scenario 18. The effect column specifies the intended operation and the handoff column specifies actual release."
+when = { factor = "bearer", in = ["Bearer token delivered to provider"] }
+requires = { factor = "effect", in = ["Bearer-only provider call"] }
+
+[[rules]]
+id = "post-release"
+basis = "Scenario 18. Release must occur before the revocation is visible."
+when = { factor = "revocation", in = ["Visible after bearer release"] }
+requires = { factor = "bearer", in = ["Bearer token delivered to provider"] }
+
+[[rules]]
+id = "shared-accounting"
+basis = "Scenario 14. These levels exercise a shared budget."
+when = { any = [{ factor = "accounting", in = ["Independent counters", "One authoritative service"] }, { factor = "schedule", in = ["Concurrent at the limit"] }, { factor = "fault", in = ["Ambiguous accounting audience"] }] }
+requires = { factor = "effect", in = ["Shared-budget operation"] }
+
+[[rules]]
+id = "shared-counter"
+basis = "Scenario 14. Both counter configurations are meaningful test cases."
+when = { factor = "effect", in = ["Shared-budget operation"] }
+requires = { factor = "accounting", in = ["Independent counters", "One authoritative service"] }
+
+[[rules]]
+id = "issuer-wit"
+basis = "Execution matrix. SPIRE WIT-SVID applies to a WIT hop."
+when = { factor = "issuer", in = ["SPIRE WIT-SVID substitution"] }
+requires = { any = [{ factor = "proof", in = ["WIT + WPT", "WIT + HTTP Message Signature"] }, { factor = "second_hop", in = ["WIT/WPT", "WIT/HTTP signatures", "WIC/mTLS + WIT/WPT", "WIC/mTLS + WIT/HTTP signatures"] }] }
+
+[[rules]]
+id = "issuer-wic"
+basis = "Execution matrix. This SPIRE issuer mode uses a SPIFFE URI in a WIC-compatible certificate."
+when = { factor = "issuer", in = ["SPIRE X.509-SVID"] }
+requires = { all = [{ any = [{ factor = "tls", in = ["WIC mutual TLS"] }, { factor = "second_hop", in = ["WIC/mTLS", "WIC/mTLS + WIT/WPT", "WIC/mTLS + WIT/HTTP signatures"] }] }, { factor = "wic_uri", in = ["SPIFFE spiffe://"] }] }
+
+[[rules]]
+id = "peer-profile-1"
+basis = "Execution matrix. Pair assignment applies to the primary hop. The TLS-only test can reuse an endpoint with the workload credential omitted; qualification is tracked independently."
+when = { factor = "peer", in = ["WIC with native identifiers"] }
+requires = { any = [{ all = [{ factor = "tls", in = ["WIC mutual TLS"] }, { factor = "proof", in = ["None"] }, { factor = "wic_uri", in = ["Native wimse://"] }] }, { all = [{ factor = "tls", in = ["Server-authenticated TLS"] }, { factor = "proof", in = ["None"] }] }] }
+
+[[rules]]
+id = "peer-profile-2"
+basis = "Execution matrix. Pair assignment applies to the primary hop. The TLS-only test can reuse an endpoint with the workload credential omitted; qualification is tracked independently."
+when = { factor = "peer", in = ["WIC with SPIFFE identifiers"] }
+requires = { any = [{ all = [{ factor = "tls", in = ["WIC mutual TLS"] }, { factor = "proof", in = ["None"] }, { factor = "wic_uri", in = ["SPIFFE spiffe://"] }] }, { all = [{ factor = "tls", in = ["Server-authenticated TLS"] }, { factor = "proof", in = ["None"] }] }] }
+
+[[rules]]
+id = "peer-profile-3"
+basis = "Execution matrix. Pair assignment applies to the primary hop. The TLS-only test can reuse an endpoint with the workload credential omitted; qualification is tracked independently."
+when = { factor = "peer", in = ["Workload Proof Tokens"] }
+requires = { any = [{ all = [{ factor = "tls", in = ["Server-authenticated TLS"] }, { factor = "proof", in = ["WIT + WPT"] }] }, { all = [{ factor = "tls", in = ["Server-authenticated TLS"] }, { factor = "proof", in = ["None"] }] }] }
+
+[[rules]]
+id = "peer-profile-4"
+basis = "Execution matrix. Pair assignment applies to the primary hop. The TLS-only test can reuse an endpoint with the workload credential omitted; qualification is tracked independently."
+when = { factor = "peer", in = ["HTTP Message Signatures"] }
+requires = { any = [{ all = [{ factor = "tls", in = ["Server-authenticated TLS"] }, { factor = "proof", in = ["WIT + HTTP Message Signature"] }] }, { all = [{ factor = "tls", in = ["Server-authenticated TLS"] }, { factor = "proof", in = ["None"] }] }] }
+
+[[rules]]
+id = "peer-profile-5"
+basis = "Execution matrix. Pair assignment applies to the primary hop. The TLS-only test can reuse an endpoint with the workload credential omitted; qualification is tracked independently."
+when = { factor = "peer", in = ["WIC with Workload Proof Tokens"] }
+requires = { any = [{ all = [{ factor = "tls", in = ["WIC mutual TLS"] }, { factor = "proof", in = ["WIT + WPT"] }] }, { all = [{ factor = "tls", in = ["Server-authenticated TLS"] }, { factor = "proof", in = ["None"] }] }] }
+
+[[rules]]
+id = "peer-profile-6"
+basis = "Execution matrix. Pair assignment applies to the primary hop. The TLS-only test can reuse an endpoint with the workload credential omitted; qualification is tracked independently."
+when = { factor = "peer", in = ["WIC with HTTP Message Signatures"] }
+requires = { any = [{ all = [{ factor = "tls", in = ["WIC mutual TLS"] }, { factor = "proof", in = ["WIT + HTTP Message Signature"] }] }, { all = [{ factor = "tls", in = ["Server-authenticated TLS"] }, { factor = "proof", in = ["None"] }] }] }
