@@ -43,6 +43,6 @@ Use the exported operation inventory when wiring a runtime. This package owns du
 
 ## Verification
 
-See the [related repository tests](https://github.com/tigrbl/tigrbl_auth/blob/master/tests/unit/test_replay_layer_ownership.py) for the implementation scope covered by this example.
+See the [related repository tests](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/120-tests/tba-tests-authorization/tests/unit/test_replay_layer_ownership.py) for the implementation scope covered by this example.
 
 [Workspace and package catalog](https://github.com/tigrbl/tigrbl_auth#package-catalog) · [tba-storage-core](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/01-storage/tba-storage-core#readme) · [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues) · [Repository license](https://github.com/tigrbl/tigrbl_auth/blob/master/LICENSE)

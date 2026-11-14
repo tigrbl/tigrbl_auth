@@ -627,7 +627,7 @@ Guardrails include default credentials, cloned identity, false attestation, unsa
 - `pkgs/10-concrete/tba-concrete-identity-principals/src/tba_concrete_identity_principals/factories.py`;
 - `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/machine_identity/`;
 - `tests/planned/identity_model/device-principal.md`;
-- `tests/security/test_machine_identity_governance.py`;
+- `pkgs/120-tests/tba-tests-authorization/tests/security/test_machine_identity_governance.py`;
 - certificate, credential, key attestation, workload, trust-domain, OAuth token/proof, resource-validation, policy, audit, and security-signal foundations;
 - RFC 8628 device authorization code/tests as a separate user authorization feature;
 - Device/IoT opportunity-map entry.

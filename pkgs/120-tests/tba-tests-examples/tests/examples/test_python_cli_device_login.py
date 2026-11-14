@@ -23,7 +23,7 @@ from tba_runtime_identity_storage.initialize import initializeIdentityRuntimeTab
 
 
 def _load_example_module(module_name: str, relative_path: str):
-    repo_root = Path(__file__).resolve().parents[2]
+    repo_root = Path(__file__).resolve().parents[5]
     module_path = repo_root / relative_path
     spec = importlib.util.spec_from_file_location(module_name, module_path)
     assert spec is not None and spec.loader is not None
@@ -34,8 +34,8 @@ def _load_example_module(module_name: str, relative_path: str):
 
 
 def _install_example_package_path() -> None:
-    repo_root = Path(__file__).resolve().parents[2]
-    src_path = repo_root / "pkgs" / "110-examples" / "acme-notes-cli" / "src"
+    repo_root = Path(__file__).resolve().parents[5]
+    src_path = repo_root / "pkgs" / "110-examples" / "tba-example-oauth-device-authorization-cli" / "src"
     if str(src_path) not in sys.path:
         sys.path.insert(0, str(src_path))
 
@@ -142,8 +142,8 @@ async def test_python_cli_package_can_login_via_tba_auth_device_flow(
 ) -> None:
     _install_example_package_path()
     device_login = _load_example_module(
-        "acme_notes_cli.device_login",
-        "pkgs/110-examples/acme-notes-cli/src/acme_notes_cli/device_login.py",
+        "oauth_device_authorization_cli_example.device_login",
+        "pkgs/110-examples/tba-example-oauth-device-authorization-cli/src/oauth_device_authorization_cli_example/device_login.py",
     )
     monkeypatch.setattr(runtime_settings, "deployment_profile", "hardening")
     monkeypatch.setattr(runtime_settings, "enable_rfc8628", True)

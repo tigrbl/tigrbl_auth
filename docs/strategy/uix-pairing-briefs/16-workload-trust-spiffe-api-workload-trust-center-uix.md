@@ -514,7 +514,7 @@ Guardrails include selector overmatch, cross-tenant issuance, false attestation,
 - `pkgs/20-providers/tba-provider-security-certificate-mtls/`
 - `pkgs/20-providers/tba-provider-security-mtls-cnf-binding-validator/`
 - OAuth token-exchange, client-credentials, resource-validation, JOSE, credential, and audit packages;
-- `tests/security/test_machine_identity_governance.py` and workload/trust-domain planned tests.
+- `pkgs/120-tests/tba-tests-authorization/tests/security/test_machine_identity_governance.py` and workload/trust-domain planned tests.
 
 ### Standards and primary sources
 

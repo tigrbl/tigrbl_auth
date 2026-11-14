@@ -29,6 +29,9 @@ the migrated suites and the remaining root tests.
 | `tba-tests-wire-codecs` | JSON canonicalization, multibase, CID, and DAG-CBOR |
 | `tba-tests-did` | DID Core documents, resolution, dereferencing, and controller behavior |
 | `tba-tests-gnap` | Grant Negotiation and Authorization Protocol versions and capability binding |
+| `tba-tests-examples` | Device-login CLI and README usage tests. |
+| `tba-tests-governance-composition` | Provisioning boundaries, entitlements, access reviews, and delivery summaries. |
+| `tba-tests-scim` | Schema registration, PATCH operations, and group membership. |
 | `tba-tests-ucan` | UCAN delegation and invocation verification |
 | `tba-tests-zcap` | ZCAP delegation and HTTP invocation verification |
 | `tba-tests-set` | Security Event Token claims, transmission, reception, and replay handling |

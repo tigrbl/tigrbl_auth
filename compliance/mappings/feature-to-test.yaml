@@ -2035,7 +2035,7 @@ profile:baseline:
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
 - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
-- tests/integration/test_full_workflow.py
+- pkgs/120-tests/tba-tests-administration/tests/integration/test_full_workflow.py
 - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
 - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
 - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
@@ -2134,7 +2134,7 @@ profile:fapi2-security:
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
 - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
-- tests/integration/test_full_workflow.py
+- pkgs/120-tests/tba-tests-administration/tests/integration/test_full_workflow.py
 - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
 - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
 - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
@@ -2234,7 +2234,7 @@ profile:hardening:
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
 - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
-- tests/integration/test_full_workflow.py
+- pkgs/120-tests/tba-tests-administration/tests/integration/test_full_workflow.py
 - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
 - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
 - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
@@ -2338,7 +2338,7 @@ profile:peer-claim:
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
 - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
-- tests/integration/test_full_workflow.py
+- pkgs/120-tests/tba-tests-administration/tests/integration/test_full_workflow.py
 - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
 - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
 - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
@@ -2426,7 +2426,7 @@ profile:production:
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
 - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
-- tests/integration/test_full_workflow.py
+- pkgs/120-tests/tba-tests-administration/tests/integration/test_full_workflow.py
 - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
 - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
 - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
@@ -2810,7 +2810,7 @@ route:register-client-id:
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
 route:revoke:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
-- tests/integration/test_full_workflow.py
+- pkgs/120-tests/tba-tests-administration/tests/integration/test_full_workflow.py
 - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
 - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
@@ -3826,7 +3826,7 @@ target:rfc-6750:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
 target:rfc-7009:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
-- tests/integration/test_full_workflow.py
+- pkgs/120-tests/tba-tests-administration/tests/integration/test_full_workflow.py
 - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
 - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py

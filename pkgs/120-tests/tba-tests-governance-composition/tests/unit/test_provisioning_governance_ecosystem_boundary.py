@@ -17,7 +17,7 @@ from tba_runtime_authorization_policy.governance_extension import (
 )
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 
 
 def _sdk_catalog() -> SDKEcosystemCatalog:

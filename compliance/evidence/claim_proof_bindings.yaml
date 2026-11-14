@@ -690,8 +690,8 @@ bindings:
   negative_tests:
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_issuer_confusion_resistance.py
-  - tests/security/test_realm_isolation_certification.py
-  - tests/security/test_tenant_isolation_certification.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_realm_isolation_certification.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_tenant_isolation_certification.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
@@ -3763,7 +3763,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
-  - tests/integration/test_full_workflow.py
+  - pkgs/120-tests/tba-tests-administration/tests/integration/test_full_workflow.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
@@ -3809,8 +3809,8 @@ bindings:
   negative_tests:
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_issuer_confusion_resistance.py
-  - tests/security/test_realm_isolation_certification.py
-  - tests/security/test_tenant_isolation_certification.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_realm_isolation_certification.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_tenant_isolation_certification.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
@@ -3913,7 +3913,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
-  - tests/integration/test_full_workflow.py
+  - pkgs/120-tests/tba-tests-administration/tests/integration/test_full_workflow.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
@@ -4064,7 +4064,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
-  - tests/integration/test_full_workflow.py
+  - pkgs/120-tests/tba-tests-administration/tests/integration/test_full_workflow.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
@@ -4213,7 +4213,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
-  - tests/integration/test_full_workflow.py
+  - pkgs/120-tests/tba-tests-administration/tests/integration/test_full_workflow.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
@@ -4364,7 +4364,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
-  - tests/integration/test_full_workflow.py
+  - pkgs/120-tests/tba-tests-administration/tests/integration/test_full_workflow.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
@@ -4507,7 +4507,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
-  - tests/integration/test_full_workflow.py
+  - pkgs/120-tests/tba-tests-administration/tests/integration/test_full_workflow.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
@@ -6147,7 +6147,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
-  - tests/integration/test_full_workflow.py
+  - pkgs/120-tests/tba-tests-administration/tests/integration/test_full_workflow.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
@@ -6225,8 +6225,8 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9396_authorization_details.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_issuer_confusion_resistance.py
-  - tests/security/test_realm_isolation_certification.py
-  - tests/security/test_tenant_isolation_certification.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_realm_isolation_certification.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_tenant_isolation_certification.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-authorization/tests/unit/test_tenant_realm_isolation_invariants.py
@@ -6441,7 +6441,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
-  - tests/integration/test_full_workflow.py
+  - pkgs/120-tests/tba-tests-administration/tests/integration/test_full_workflow.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
@@ -6520,8 +6520,8 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9396_authorization_details.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_issuer_confusion_resistance.py
-  - tests/security/test_realm_isolation_certification.py
-  - tests/security/test_tenant_isolation_certification.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_realm_isolation_certification.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_tenant_isolation_certification.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-authorization/tests/unit/test_tenant_realm_isolation_invariants.py
@@ -6737,7 +6737,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
-  - tests/integration/test_full_workflow.py
+  - pkgs/120-tests/tba-tests-administration/tests/integration/test_full_workflow.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
@@ -6816,8 +6816,8 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9396_authorization_details.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_issuer_confusion_resistance.py
-  - tests/security/test_realm_isolation_certification.py
-  - tests/security/test_tenant_isolation_certification.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_realm_isolation_certification.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_tenant_isolation_certification.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-authorization/tests/unit/test_tenant_realm_isolation_invariants.py
@@ -7032,7 +7032,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
-  - tests/integration/test_full_workflow.py
+  - pkgs/120-tests/tba-tests-administration/tests/integration/test_full_workflow.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
@@ -7111,8 +7111,8 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9396_authorization_details.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_issuer_confusion_resistance.py
-  - tests/security/test_realm_isolation_certification.py
-  - tests/security/test_tenant_isolation_certification.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_realm_isolation_certification.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_tenant_isolation_certification.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-authorization/tests/unit/test_tenant_realm_isolation_invariants.py
@@ -7259,7 +7259,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
-  - tests/integration/test_full_workflow.py
+  - pkgs/120-tests/tba-tests-administration/tests/integration/test_full_workflow.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
@@ -7338,8 +7338,8 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9396_authorization_details.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_issuer_confusion_resistance.py
-  - tests/security/test_realm_isolation_certification.py
-  - tests/security/test_tenant_isolation_certification.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_realm_isolation_certification.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_tenant_isolation_certification.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-authorization/tests/unit/test_tenant_realm_isolation_invariants.py
@@ -7768,8 +7768,8 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9396_authorization_details.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_issuer_confusion_resistance.py
-  - tests/security/test_realm_isolation_certification.py
-  - tests/security/test_tenant_isolation_certification.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_realm_isolation_certification.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_tenant_isolation_certification.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-authorization/tests/unit/test_tenant_realm_isolation_invariants.py
@@ -8046,8 +8046,8 @@ bindings:
   negative_tests:
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_issuer_confusion_resistance.py
-  - tests/security/test_realm_isolation_certification.py
-  - tests/security/test_tenant_isolation_certification.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_realm_isolation_certification.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_tenant_isolation_certification.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
@@ -8130,7 +8130,7 @@ bindings:
   profile: null
   positive_tests:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
-  - tests/integration/test_full_workflow.py
+  - pkgs/120-tests/tba-tests-administration/tests/integration/test_full_workflow.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
@@ -8210,8 +8210,8 @@ bindings:
   negative_tests:
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_issuer_confusion_resistance.py
-  - tests/security/test_realm_isolation_certification.py
-  - tests/security/test_tenant_isolation_certification.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_realm_isolation_certification.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_tenant_isolation_certification.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
@@ -8441,8 +8441,8 @@ bindings:
   negative_tests:
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_issuer_confusion_resistance.py
-  - tests/security/test_realm_isolation_certification.py
-  - tests/security/test_tenant_isolation_certification.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_realm_isolation_certification.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_tenant_isolation_certification.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
@@ -9109,7 +9109,7 @@ bindings:
   profile: null
   positive_tests:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
-  - tests/integration/test_full_workflow.py
+  - pkgs/120-tests/tba-tests-administration/tests/integration/test_full_workflow.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
@@ -9540,8 +9540,8 @@ bindings:
   negative_tests:
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_issuer_confusion_resistance.py
-  - tests/security/test_realm_isolation_certification.py
-  - tests/security/test_tenant_isolation_certification.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_realm_isolation_certification.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_tenant_isolation_certification.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py

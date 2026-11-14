@@ -519,7 +519,7 @@ Guardrails include cross-tenant mutation, accidental account merge, unauthorized
 - `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/scim_group/`
 - `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/scim_patch_event/`
 - canonical user, tenant-membership, subject-alias, entitlement, session, credential, and audit tables;
-- `tests/unit/test_provisioning_governance_ecosystem_boundary.py` and SCIM/governance/storage tests.
+- `pkgs/120-tests/tba-tests-governance-composition/tests/unit/test_provisioning_governance_ecosystem_boundary.py` and SCIM/governance/storage tests.
 
 ### Standards
 
