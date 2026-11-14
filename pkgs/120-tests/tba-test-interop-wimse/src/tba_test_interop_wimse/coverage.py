@@ -21,6 +21,10 @@ def inventory_report(matrix, attempts=()):
             and (item["profile"], item["identifier_scheme"]) == (hop["profile"], hop["identifier_scheme"])
             and item.get("direction", direction) == direction
             and item["issuer"] in (hop["wic_issuer"], hop["wit_issuer"])
+            and ("variants" not in item or case["variant"] in item["variants"])
+            and (not item.get("require_baseline_issuers") or all(
+                hop[key] in {"baseline", "none"} for key in ("wic_issuer", "wit_issuer")
+            ))
         ]
 
     return {

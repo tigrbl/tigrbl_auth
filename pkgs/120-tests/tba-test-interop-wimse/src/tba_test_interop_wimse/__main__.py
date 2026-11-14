@@ -12,6 +12,7 @@ except ModuleNotFoundError:  # Python 3.10
 
 from .matrix import generate_matrix
 from .coverage import inventory_report
+from .evidence import audit_pytest_report
 from pathlib import Path
 
 
@@ -128,9 +129,25 @@ def main():
     parser.add_argument("--legacy-count", action="store_true", help="count the flat factor model")
     parser.add_argument("--coverage", action="store_true", help="export coverage and attempt status by ID")
     parser.add_argument("--attempts", type=Path, help="JSON array of peer execution attempts")
+    parser.add_argument("--audit-peer-junit", type=Path,
+                        help="audit per-execution results and require every candidate to pass")
+    parser.add_argument("--peer-snapshot", type=Path, help="audit against an explicit lab qualification snapshot")
     options = parser.parse_args()
     if options.attempts and not options.coverage:
         parser.error("--attempts requires --coverage")
+    if options.audit_peer_junit:
+        try:
+            peers = (json.loads(options.peer_snapshot.read_text(encoding="utf-8"))["peers"]
+                     if options.peer_snapshot else None)
+            report = audit_pytest_report(generate_matrix(peers=peers)["executions"], options.audit_peer_junit)
+        except (ValueError, KeyError, OSError) as error:
+            parser.error(str(error))
+        if not options.json:
+            report.pop("results")
+        print(json.dumps(report, ensure_ascii=True))
+        if not report["complete"]:
+            raise SystemExit(1)
+        return
     if options.coverage:
         attempts = json.loads(options.attempts.read_text(encoding="utf-8")) if options.attempts else []
         print(json.dumps(inventory_report(generate_matrix(), attempts), ensure_ascii=True))

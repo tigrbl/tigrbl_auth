@@ -12,12 +12,23 @@ def run_inventory(scenarios, executions, adapters, *, setup_cache=None):
         result = {"execution_id": execution["id"], "scenario_id": case["id"]}
         adapter = adapters.get(case["scenario_id"])
         if execution["status"] != "qualified":
-            roles = ", ".join(execution.get("pending_roles", ()))
-            reason = f"qualification pending ({roles})" if roles else "qualification pending"
+            gaps = [
+                label + ": " + ", ".join(execution[key])
+                for key, label in (
+                    ("pending_endpoints", "endpoints"),
+                    ("missing_baselines", "directional baselines"),
+                    ("pending_roles", "support roles"),
+                )
+                if execution.get(key)
+            ]
+            reason = "qualification pending" + (" (" + "; ".join(gaps) + ")" if gaps else "")
             yield {**result, "status": "blocked", "reason": reason}
             continue
         if adapter is None or not adapter.supports(case):
             yield {**result, "status": "blocked", "reason": "runtime adapter unavailable"}
+            continue
+        if hasattr(adapter, "supports_execution") and not adapter.supports_execution(case, execution):
+            yield {**result, "status": "blocked", "reason": "adapter does not implement assigned endpoints"}
             continue
         key = (case["scenario_id"], adapter.setup_key(case, execution))
         if key not in setup:

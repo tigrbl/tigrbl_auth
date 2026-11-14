@@ -23,6 +23,8 @@ wpt = [
     "tba-provider-replay-memory==0.4.0.dev2",
 ]
 
+spiffe-wic = ["tba-protocol-workload-spiffe-svid==0.4.0.dev2"]
+
 [project.scripts]
 tba-test-interop-wimse = "tba_test_interop_wimse.__main__:main"
 tba-wimse-wic-fixture = "tba_test_interop_wimse.wic_cli:main"

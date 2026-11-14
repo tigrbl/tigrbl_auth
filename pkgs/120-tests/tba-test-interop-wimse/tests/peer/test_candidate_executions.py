@@ -1,6 +1,8 @@
 """Collect one independently reportable pytest item per peer execution."""
 
 import json
+import os
+from pathlib import Path
 
 import pytest
 
@@ -11,7 +13,20 @@ from tba_test_interop_wimse.runner import run_inventory
 def pytest_generate_tests(metafunc):
     if "candidate" not in metafunc.fixturenames:
         return
-    matrix = generate_matrix()
+    snapshot = os.getenv("TBA_WIMSE_PEER_SNAPSHOT")
+    peers = json.loads(Path(snapshot).read_text(encoding="utf-8"))["peers"] if snapshot else None
+    matrix = generate_matrix(peers=peers)
+    if peers is not None:
+        def candidate_key(row):
+            return row["scenario_id"], tuple(
+                (pair["caller"]["implementation"], pair["receiver"]["implementation"])
+                for pair in row["pairs"].values()
+            )
+
+        original = {candidate_key(row) for row in generate_matrix()["executions"]}
+        current = {candidate_key(row) for row in matrix["executions"]}
+        if original != current or len(matrix["executions"]) != len(original):
+            raise ValueError("Qualification snapshot changed the candidate inventory")
     cases = {row["id"]: row for row in matrix["scenarios"]}
     metafunc.parametrize(
         "candidate",

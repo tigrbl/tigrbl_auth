@@ -105,10 +105,24 @@ operator. The receiver checks the audience against its configured DNS name,
 listening port, and the requested fixture route.
 
 The local T3 suite uses TbA for both endpoints with separate TLS, issuer,
-and proof keys. The eight baseline WIT/WPT rows cover valid presentation,
-trust-domain and issuer rejection, proof validation, and replay. The replay
-case checks that the first write commits and the duplicate adds no effect.
-The native WIC suite remains on the same local track.
+and proof keys. It exercises all five profiles and all eight profile/scheme
+configurations in the baseline inventory. The 52 structural rows include
+positive writes and readback, applicable identity and proof refusals, replay,
+and the combined-profile identity equality policy. The replay case verifies
+one committed write and no additional effect from the duplicate.
+
+For WIT/HTTP signatures, use `SignatureCaller` and `SignatureReceiver` from
+`tba_test_interop_wimse.httpsig`. This is the Ed25519, single-signature,
+bodyless GET/POST subset of [the WIMSE HTTP signature draft -08](https://www.ietf.org/archive/id/draft-ietf-wimse-http-signature-08.html).
+It does not implement signed responses, CONNECT, or the general signature
+grammar. For a composition, use `CombinedCaller` with a WIC verifier and
+the selected application caller. Supply both transport credentials and a
+client verifier to the receiver. It requires the identities to be equal or
+to match an exact configured pair. Use the `spiffe-wic` extra alongside
+`wic` for `SpiffeWicVerifier`. The mixed SPIFFE setup keeps the WIT in the
+native WIMSE namespace and configures the corresponding pair explicitly.
+The SPIFFE client authenticates the expected workload URI after TLS chain
+validation. The native WIMSE fixture also validates the TLS DNS name.
 
 ### Run the candidate inventory
 
@@ -128,6 +142,8 @@ The first component slices are opt-in:
   WIC dependencies and Layer 120 certificate fixture available. This pairs
   the wimsey WIC verifier with TbA's verifier over the shared TLS fixture,
   recording which engine made the decision at the checked endpoint.
+  `tests/peer/test_wimsey_http_signature.py` verifies request signatures
+  in both directions against the same pinned CLI with synthetic inputs.
 - Set `CRED_SDK_CHECKOUT` to the built revision described in the Cred
   testkit README and make that testkit and its WIT/WPT dependencies
   available. Run `tests/peer/test_baselines.py`. This exercises the pinned
@@ -145,6 +161,145 @@ From the repository root, run:
 python -m pytest pkgs/120-tests/tba-test-interop-wimse/tests/peer --collect-only -q
 python -m pytest pkgs/120-tests/tba-test-interop-wimse/tests/peer -o junit_family=xunit1 --junitxml=peer-runs.xml
 ```
+
+For full-inventory validation, report only the candidate execution tests and
+audit their results against the current catalog:
+
+```sh
+python -m pytest pkgs/120-tests/tba-test-interop-wimse/tests/peer/test_candidate_executions.py -o junit_family=xunit1 --junitxml=candidates.xml
+tba-test-interop-wimse --audit-peer-junit candidates.xml
+```
+
+The audit exits 1 for an incomplete inventory. Use `--json` with the audit
+to include each execution's status and observations.
+
+For a local peer lab run, put the package's `src` and `tests` directories
+on the Python path and configure `TBA_WIMSEY_CHECKOUT` and
+`TBA_WIMSE_PEER_SNAPSHOT` (an output JSON path). Run
+`python -m support.qualification_overlay` before pytest. This runs four
+positive controls for the native WIMSE and SPIFFE WIC configurations,
+in both directions, and captures the exact fixture source and wimsey
+binary digests. It also records qualification of the ephemeral direct
+test CA for that WIC configuration. The peer suite consumes the snapshot
+through the same environment variable. Pass its path to the auditor
+with `--peer-snapshot` so evidence is matched to the pinned execution IDs.
+These are local lab results. Independent operator evidence and promotion
+follow ADR-1011 and ADR-1023.
+
+The direct WIC lab adapter also runs scenarios 09, 10, 11, 13, and 16
+with baseline CA trust in both TbA/wimsey directions and both identifier
+schemes. Peer verifiers run over mutual TLS. The shared test resource
+owns the application policies, including synthetic delegation status,
+protected operations, child grants, and tool and build claim checks.
+The harness checks the rejection reason and reads back the resource
+ledger over HTTPS after each policy request.
+
+The same lab snapshot qualifies the shared support fixtures for gateway
+origin handling, token exchange, revocation before effect, shared
+accounting, approval display, and bearer release. Qualification executes
+issuer controls in both directions and exercises every supported policy
+variant before recording a role. The approval fixture verifies the
+published V5 and R2 vectors from OASNT draft -02 Appendix A against its
+enrolled test key and fixed clock.
+
+Set `TBA_WIMSE_SPIRE=1` when building the snapshot to include the
+SPIRE issuer. The lab uses the pinned local SPIRE 1.16.0 server image in a
+disposable container with no external network. It exercises server-minted
+X.509-SVIDs and their trust bundle. For malformed SAN and foreign domain
+cases, it injects a separate fixture leaf into the peer input while keeping
+the receiver's SPIRE workload trust pin. The issuer role covers the
+server-mint path. Agent attestation and Workload API delivery are outside
+that qualification. Cross-domain application issuers, budget and status
+authorities, and the bearer provider are local test fixtures.
+
+Set `TBA_WIMSE_COMBINED_SIGNATURE=1` to fill the combined-signature
+candidate slot for the SPIFFE profile in the lab snapshot. In each direction
+the control sends a signed write and independently reads the ledger over
+mutual TLS. The wimsey side uses its pinned WIC verifier and HTTP signature
+CLI. The shared fixture supplies the HTTPS resource, replay state, and
+the mapping between the authenticated SPIFFE identity and the WIMSE WIT.
+The controls cover the lab CA and, when enabled, SPIRE server-minted
+X.509-SVIDs. Set `TBA_WIMSE_SPIRE_WIT=1` alongside
+`TBA_WIMSE_SPIRE=1` to qualify the separate SPIRE WIT-SVID issuer. The
+SPIRE server mints ES256 WIT-SVIDs with SPIFFE subjects, and the fixture
+loads the matching WIT authority from the SPIFFE bundle. Separate
+ephemeral SPIRE servers provide wrong-anchor and foreign-domain
+credentials for denial cases. These controls exercise the SPIRE server
+mint interface. Workload API delivery requires its own qualification.
+
+Set `TBA_WIMSE_COMBINED_SIGNATURE_WIMSE=1` to qualify the WIMSE URI
+variant in both directions. A lab CA issues the WIMSE transport
+certificates. The application identity is either a lab-issued WIMSE
+WIT or a server-minted SPIFFE WIT-SVID. The latter uses an explicit
+mapping from the WIMSE transport identity to the SPIFFE subject.
+When the other combined profiles are enabled, the support controls
+exercise both orders of the eligible mixed-profile and mixed-identifier
+chains.
+
+The combined adapter also covers gateway origin handling, transaction
+binding, delegated authority, proxy rewrites, cross-domain exchange,
+revocation before effect, and gateway identity mapping. Its two-hop
+controls exercise the supported arrangements of WIC-only and
+combined-signature endpoints. The cross-domain token issuers, status
+authority, effect store, and proxy handoff use local test fixtures.
+
+Set `TBA_WIMSE_COMBINED_WPT=1` to also qualify the SPIFFE combined WPT
+candidate slot with wimsey. This builds a small offline command-line
+bridge against the pinned wimsey WIT and WPT crates. The bridge receives
+the request's Txn-Token and destination access token and uses wimsey's
+WPT binding APIs. The suite pins the bridge binary digest in the
+qualification snapshot. Both directions exercise the four baseline
+and SPIRE issuer combinations. The support controls also cover
+chains with WPT, WIC-only, and HTTP-signature hops. The lab harness
+provides HTTPS, replay state, the local support services, and ES256
+proof signing on the TbA side for SPIRE-minted WIT-SVIDs.
+
+Set `TBA_WIMSE_COMBINED_WPT_WIMSE=1` to qualify the WIMSE transport URI
+variant in both directions using the same bridge. The lab CA issues
+the transport certificates. The application proof uses a lab-issued WIMSE
+WIT or a SPIRE server-minted WIT-SVID with a mapped SPIFFE subject.
+With the other combined profiles enabled, qualification also exercises
+WIMSE and SPIFFE hops together and both orders of the eligible mixed
+WPT and HTTP-signature chains.
+
+Set `TBA_WIMSE_COFIDE_BRIDGE` to the path of the compiled
+`tests/support/cofide_bridge.go` executable to qualify Cofide in the
+shared HTTPS lab. Build it in a temporary Go module using the pinned
+Cofide checkout at `7984a60105002dc65b31e9cd08572cd5d10ed9d6` as the
+replacement for `github.com/cofide/wimse-s2s-httpsig-poc`. Seed the
+temporary module with the checkout's `go.mod` and `go.sum`, change its
+module name, add a requirement on the replaced module, and build the
+bridge with Go 1.25.3. The qualification snapshot pins the resulting
+binary digest.
+
+The bridge uses the prototype's Go signing function and its pinned
+P-256 verification library. The lab profile signs the method,
+request target, destination authority, WIT, and any applicable
+authorization or transaction token headers. TbA checks the WIT issuer,
+freshness, and replay state. The lab uses its own HTTPS endpoints and
+support services. This qualification covers request signatures with
+a lab-issued WIT or SPIRE server-minted WIT-SVID.
+
+Set `TBA_WIMSE_CRED_CHECKOUT` to a clean Cred SDK checkout at
+`586e1a76f487c2376e0ba0a4687bb2de8d3eb588` with its pinned dependencies
+installed. Qualification builds Cred's identity modules and exposes its
+demo client's signing function in a temporary adapter beside the snapshot.
+The snapshot pins the generated modules and bridge. The adapter uses
+Cred's WIT and WPT verification, with the lab supplying HTTPS, replay
+state, token issuance and resource effects. Its caller signs the WPT for
+the lab request URI and binds any transaction or destination access token.
+
+After the candidate run, use
+`python -m support.blocker_report snapshot.json candidates.xml` to count
+remaining blockers. It reports the overlap between missing runtime
+adapters, directional baselines, and issuer or support roles, so one row
+can appear in several categories. Trust isolation is exercised by
+holding the TLS CA fixed and varying the workload identity or its
+configured workload anchor.
+
+Run `tests/t3/test_structural_runtime.py` for one native result per
+structural scenario. The native adapter registry is separate from the
+peer lab registry. Rows without a runtime binding appear as skipped.
 
 Pytest collects one item per generated execution ID. A single test function joins
 each row to its scenario and calls the same runner used by the pilot. The report

@@ -1,5 +1,5 @@
 """Evaluate scenario outcomes against observed state."""
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 
 @dataclass(frozen=True)
@@ -12,6 +12,7 @@ class Observation:
     additional_effects: int = 0
     budget_limit: int | None = None
     reason: str = ""
+    measurements: dict[str, int] = field(default_factory=dict)
 
 
 def mismatches(case, observed):

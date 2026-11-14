@@ -2,7 +2,7 @@ schema_version = 1
 
 # A binding lists the families it can serve. Its adapter still checks the exact profile and variant.
 [local.native_wic]
-families = ["01", "03"]
+families = ["01", "02", "03"]
 profile = "wic-mtls"
 identifier_scheme = "wimse"
 issuer = "baseline"
@@ -14,6 +14,56 @@ profile = "wit-wpt"
 identifier_scheme = "none"
 issuer = "baseline"
 observations = ["decision", "enforcing-hop", "resource-readback"]
+
+[local.native_wic_spiffe]
+families = ["01", "02", "03"]
+profile = "wic-mtls"
+identifier_scheme = "spiffe"
+issuer = "baseline"
+observations = ["decision", "enforcing-hop", "resource-readback"]
+
+[local.native_signature]
+families = ["01","02","05","06"]
+profile = "wit-http-signature"
+identifier_scheme = "none"
+issuer = "baseline"
+observations = ["decision", "enforcing-hop", "resource-readback"]
+
+[local.wic_mtls_wpt_wimse]
+families = ["01","05","06","19"]
+profile = "wic-mtls-wpt"
+identifier_scheme = "wimse"
+issuer = "baseline"
+observations = ["decision", "enforcing-hop", "resource-readback"]
+variants = ["valid-peer", "missing-proof", "wrong-proof-key", "wrong-audience", "first-presentation", "duplicate-presentation", "identity-equality-policy"]
+require_baseline_issuers = true
+
+[local.wic_mtls_http_signature_wimse]
+families = ["01","05","06","19"]
+profile = "wic-mtls-http-signature"
+identifier_scheme = "wimse"
+issuer = "baseline"
+observations = ["decision", "enforcing-hop", "resource-readback"]
+variants = ["valid-peer", "missing-proof", "wrong-proof-key", "wrong-audience", "first-presentation", "duplicate-presentation", "identity-equality-policy"]
+require_baseline_issuers = true
+
+[local.wic_mtls_wpt_spiffe]
+families = ["01","05","06","19"]
+profile = "wic-mtls-wpt"
+identifier_scheme = "spiffe"
+issuer = "baseline"
+observations = ["decision", "enforcing-hop", "resource-readback"]
+variants = ["valid-peer", "missing-proof", "wrong-proof-key", "wrong-audience", "first-presentation", "duplicate-presentation", "identity-equality-policy"]
+require_baseline_issuers = true
+
+[local.wic_mtls_http_signature_spiffe]
+families = ["01","05","06","19"]
+profile = "wic-mtls-http-signature"
+identifier_scheme = "spiffe"
+issuer = "baseline"
+observations = ["decision", "enforcing-hop", "resource-readback"]
+variants = ["valid-peer", "missing-proof", "wrong-proof-key", "wrong-audience", "first-presentation", "duplicate-presentation", "identity-equality-policy"]
+require_baseline_issuers = true
 
 [peer.wimsey_wic_component]
 families = ["01", "03"]
@@ -33,5 +83,5 @@ observations = ["decision", "protected-response"]
 gap = "The pinned Cred fixture uses HTTP. Full candidate qualification needs server-authenticated TLS and the requested resource oracle."
 
 [unbound]
-families = ["04", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
+families = ["04", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "20"]
 gap = "Runtime fixtures or profile compositions are needed."

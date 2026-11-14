@@ -5,55 +5,34 @@ import os
 import subprocess
 import sys
 from concurrent.futures import ThreadPoolExecutor
-from contextlib import contextmanager
 from dataclasses import asdict
 from importlib.metadata import version
 from tba_test_interop_wimse.matrix import generate_matrix
+from tba_test_interop_wimse.coverage import inventory_report
 from tba_test_interop_wimse.runner import run_inventory
 
-from support.wic_fixture import DNS, IDENTITY, SERVER, WicFixture
-
-
-class NativeWicAdapter:
-    def __init__(self, tmp_path):
-        self.tmp_path = tmp_path
-
-    def supports(self, case):
-        return all(hop["profile"] == "wic-mtls" and hop["identifier_scheme"] == "wimse"
-                   and hop["wic_issuer"] == "baseline" for hop in case["hops"].values())
-
-    def setup_key(self, case, execution):
-        return "native-wimse-wic"
-
-    def check_setup(self, case, execution):
-        control = dict(case, variant="valid-peer", checker="receiver")
-        with self.isolated(control, execution) as fixture:
-            observed = fixture.observe()
-            assert observed.decision == "allow" and observed.effects == 1
-
-    @contextmanager
-    def isolated(self, case, execution):
-        from tempfile import TemporaryDirectory
-        from pathlib import Path
-
-        with TemporaryDirectory(dir=self.tmp_path) as directory:
-            yield WicFixture(Path(directory), case)
+from support.wic_fixture import DNS, IDENTITY, SERVER, NativeWicAdapter, WicFixture
 
 
 def test_native_wic_setup_and_effects(tmp_path, record_property):
     adapter = NativeWicAdapter(tmp_path)
     cases = [case for case in generate_matrix()["scenarios"]
-             if case["scenario_id"] in {"01", "03"} and adapter.supports(case)]
+             if adapter.supports(case)]
     reasons = {
         "valid-peer": IDENTITY, "missing-workload-uri": "exactly one",
         "multiple-workload-uris": "exactly one", "wrong-server-identity": "unexpected WIMSE peer identity",
+        "untrusted-domain": "unexpected WIMSE peer identity", "wrong-anchor": "path",
     }
     assert {case["variant"] for case in cases} == reasons.keys()
+    declared = {row["id"] for row in inventory_report(generate_matrix())["scenarios"]
+                if any(binding.startswith("native_wic") for binding in row["local_fixtures"])}
+    assert declared == {case["id"] for case in cases}
     runs = [{"id": case["id"], "scenario_id": case["id"], "status": "qualified"} for case in cases]
-    actual = list(run_inventory(cases, runs, {"01": adapter, "03": adapter}))
+    actual = list(run_inventory(cases, runs, dict.fromkeys(("01", "02", "03"), adapter)))
     assert {item["status"] for item in actual} == {"passed"}, actual
     for case, item in zip(cases, actual):
-        assert reasons[case["variant"]] in item["observation"]["reason"]
+        reason = reasons[case["variant"]].replace("wimse:", adapter.setup_key(case, None) + ":")
+        assert reason in item["observation"]["reason"]
     record_property("installed_wimse_mtls_version",
                     version("tba-profile-workload-authentication-wimse-mtls"))
     record_property("native_results", json.dumps(actual, sort_keys=True))

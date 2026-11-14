@@ -20,11 +20,13 @@ class TlsFiles:
     private_key: str
     trust_anchor: str
 
-    def context(self, *, server):
+    def context(self, *, server, workload_name_only=False):
         purpose = ssl.Purpose.CLIENT_AUTH if server else ssl.Purpose.SERVER_AUTH
         context = ssl.create_default_context(purpose, cafile=self.trust_anchor)
         context.minimum_version = ssl.TLSVersion.TLSv1_2
         context.verify_mode = ssl.CERT_REQUIRED
+        if not server and workload_name_only:
+            context.check_hostname = False
         context.load_cert_chain(self.certificate, self.private_key)
         return context
 
@@ -53,6 +55,7 @@ def certificate_status(good_certificates):
 
 
 class WorkloadVerifier:
+    workload_name_only = False
     def __init__(self, expected_identity, domain_anchors, status_provider):
         self.expected_identity = expected_identity
         self.validators = {
@@ -74,17 +77,26 @@ class WicReceiver(FixtureServer):
 
     denial_status = 403
 
-    def __init__(self, port, tls, verifier, ledger=None):
+    def __init__(self, port, tls, verifier, ledger=None, *, authorize_write=None, authorize_read=None):
         self.verifier = verifier
+        self.authorize_write = authorize_write
+        self.authorize_read = authorize_read
         super().__init__(port, tls.context(server=True), ledger)
 
     def authenticate(self, request, path):
-        return self.verifier.verify(request.connection.getpeercert(binary_form=True))
+        identity = self.verifier.verify(request.connection.getpeercert(binary_form=True))
+        if path == "/writes" and self.authorize_write is not None:
+            self.authorize_write(identity, request.headers)
+        if path == "/effects" and self.authorize_read is not None:
+            request.read_payload = self.authorize_read(identity, request.headers) or {}
+        return identity
 
 
 class _VerifiedConnection(FixtureConnection):
     def __init__(self, host, port, dns_name, tls, verifier):
-        super().__init__(host, port, dns_name, tls.context(server=False))
+        super().__init__(host, port, dns_name, tls.context(
+            server=False, workload_name_only=getattr(verifier, "workload_name_only", False)
+        ))
         self.verifier = verifier
 
     def connect(self):
@@ -108,6 +120,9 @@ class WicCaller:
     tls: TlsFiles
     verifier: WorkloadVerifier
 
-    def request(self, host, port, dns_name, *, readback=False):
-        connection = _VerifiedConnection(host, port, dns_name, self.tls, self.verifier)
-        return call_resource(connection, readback=readback)
+    def request(self, host, port, dns_name, *, readback=False, headers=None):
+        connection = self.connection(host, port, dns_name)
+        return call_resource(connection, readback=readback, headers=headers)
+
+    def connection(self, host, port, dns_name):
+        return _VerifiedConnection(host, port, dns_name, self.tls, self.verifier)

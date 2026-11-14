@@ -12,13 +12,21 @@ name = "Tigrbl Auth"
 
 [implementations.wimsey]
 name = "wimsey"
+candidate_ref = "56b070582f3e380c5006630698fb4ca808c08b04"
+component_tests = ["tests/peer/test_wimsey_wic_component.py", "tests/peer/test_wimsey_http_signature.py"]
+qualification_gap = "WIC and HTTP signature components validated. A complete peer endpoint needs explicit transport, identity policy, and resource configuration."
 
 [implementations.cred]
 name = "Cred"
 candidate_ref = "hackathon/ietf127"
+candidate_revision = "586e1a76f487c2376e0ba0a4687bb2de8d3eb588"
+component_tests = ["tests/peer/test_baselines.py"]
+qualification_gap = "The available fixture verifies WIT/WPT over loopback HTTP and returns a protected read. HTTPS, write readback, and caller-role evidence are pending."
 
 [implementations.cofide]
 name = "Cofide WIMSE PoC"
+candidate_ref = "7984a60105002dc65b31e9cd08572cd5d10ed9d6"
+qualification_gap = "This revision uses @request-target and P-256 for its demo client. The current TbA fixture targets the draft-08 @path and @query request profile with Ed25519."
 
 [implementations.combined-wpt-candidate]
 name = "Independent WIC/WPT peer to select"

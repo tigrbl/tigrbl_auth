@@ -25,6 +25,8 @@ class FixtureServer(ThreadingHTTPServer):
 
 
 class ResourceHandler(BaseHTTPRequestHandler):
+    protocol_version = "HTTP/1.1"
+
     def log_message(self, format, *args):
         pass
 
@@ -49,7 +51,9 @@ class ResourceHandler(BaseHTTPRequestHandler):
             self.server.ledger.commit(identity)
             self.reply(201, {"decision": "allow", "identity": identity})
         else:
-            self.reply(200, {"decision": "allow", "writes": self.server.ledger.snapshot()})
+            payload = {"decision": "allow", "writes": self.server.ledger.snapshot()}
+            payload.update(getattr(self, "read_payload", {}))
+            self.reply(200, payload)
 
     def do_POST(self):
         self.request_resource("/writes", write=True)
@@ -74,7 +78,7 @@ class FixtureConnection(HTTPSConnection):
             raise
 
 
-def call_resource(connection, *, readback=False, headers=None):
+def call_resource(connection, *, readback=False, headers=None, close=True):
     try:
         connection.request("GET" if readback else "POST", "/effects" if readback else "/writes",
                            headers={} if headers is None else headers)
@@ -84,4 +88,5 @@ def call_resource(connection, *, readback=False, headers=None):
                    else {"body": body.decode("utf-8", errors="replace")})
         return {"http_status": response.status, "response": payload}
     finally:
-        connection.close()
+        if close:
+            connection.close()

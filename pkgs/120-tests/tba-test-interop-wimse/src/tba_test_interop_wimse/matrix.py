@@ -119,8 +119,9 @@ def expand_executions(scenario, peers):
     for pairs in product(*choices):
         if any(
             left["receiver"]["implementation"] != right["caller"]["implementation"]
-            or left["receiver"].get("version") != right["caller"].get("version")
-            or left["receiver"].get("configuration") != right["caller"].get("configuration")
+            or any(left["receiver"].get(field) and right["caller"].get(field)
+                   and left["receiver"][field] != right["caller"][field]
+                   for field in ("version", "configuration"))
             for left, right in zip(pairs, pairs[1:])
         ):
             continue
@@ -132,7 +133,7 @@ def expand_executions(scenario, peers):
         ]
         pending_roles = [
             role for role in issuer_roles + scenario["support_roles"]
-            if role not in peers.get("qualified_support", {})
+            if not support_is_qualified(peers, role, dict(zip(hop_ids, pairs)), scenario)
         ]
         endpoints_qualified = all(
             row["status"] == "qualified" for pair in pairs for row in pair.values()
@@ -151,14 +152,51 @@ def expand_executions(scenario, peers):
             "direction": direction,
             "pairs": dict(zip(hop_ids, pairs)),
             "pending_roles": pending_roles,
+            "pending_endpoints": [
+                f"{name}:{side}:{endpoint['implementation']}"
+                for name, pair in zip(hop_ids, pairs) for side, endpoint in pair.items()
+                if endpoint["status"] != "qualified"
+            ],
+            "missing_baselines": [
+                name for name, pair in zip(hop_ids, pairs) if not pair_has_baseline(peers, pair)
+            ],
             "status": status,
         }
 
 
-def generate_matrix():
+def support_is_qualified(peers, role, pairs, scenario):
+    support = peers.get("qualified_support", {}).get(role)
+    if support is None:
+        return False
+    if "bindings" in support:
+        hop = role.partition(":")[0]
+        if hop in pairs:
+            return any(support_matches(binding, role, pairs, scenario) for binding in support["bindings"])
+        return all(any(support_matches(binding, role, {name: pair}, scenario)
+                       for binding in support["bindings"]) for name, pair in pairs.items())
+    return support_matches(support, role, pairs, scenario)
+
+
+def support_matches(support, role, pairs, scenario):
+    if "profile" not in support:
+        return True
+    hop = role.partition(":")[0]
+    names = (hop,) if hop in pairs else tuple(pairs)
+    if "scenario_families" in support and scenario["scenario_id"] not in support["scenario_families"]:
+        return False
+    return all(
+        endpoint["profile"] == support["profile"]
+        and endpoint.get("configuration") == support.get("endpoint_configuration", support["configuration"])
+        and endpoint["identifier_scheme"] in support.get("identifier_schemes", ())
+        for name in names for endpoint in pairs[name].values()
+    )
+
+
+def generate_matrix(*, peers=None):
     factors = read_catalog("factors.toml")
     exclusions = read_catalog("exclusions.toml")
-    peers = read_catalog("peers.toml")
+    if peers is None:
+        peers = read_catalog("peers.toml")
     catalog = read_catalog("scenarios.toml")
     validate_catalog(factors, catalog, exclusions)
     keys = set()
