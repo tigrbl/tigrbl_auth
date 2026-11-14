@@ -46,7 +46,7 @@ profiles:
   production:
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7591_dynamic_client_registration.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7662_introspection.py
@@ -66,6 +66,8 @@ profiles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9449_dpop.py
 categories:
   unit:
+  - pkgs/120-tests/tba-tests-platform-iam/tests/unit/test_platform_iam_layer_boundaries.py
+  - pkgs/120-tests/tba-tests-platform-iam/tests/unit/test_platform_iam_contracts.py
   - pkgs/120-tests/tba-tests-wire-codecs/tests/unit/test_multibase_codec.py
   - pkgs/120-tests/tba-tests-wire-codecs/tests/unit/test_wire_codecs.py
   - pkgs/120-tests/tba-tests-ucan/tests/unit/test_ucan_protocol.py
@@ -341,7 +343,7 @@ categories:
   - tests/unit/test_provider_package_taxonomy.py
   - tests/unit/test_provider_packages_implement_trust_domain_bases.py
   - tests/unit/test_provider_umbrella_reorganization.py
-  - tests/unit/test_provider_white_label_login_boundary.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_provider_white_label_login_boundary.py
   - tests/unit/test_provisioning_governance_ecosystem_boundary.py
   - tests/unit/test_public_operator_surface_boundary.py
   - tests/unit/test_public_route_contracts.py
@@ -429,9 +431,9 @@ categories:
   - tests/unit/test_server_router_schema_ownership.py
   - tests/unit/test_server_runtime_capability_assembly.py
   - tests/unit/test_server_runtime_operator_boundary.py
-  - tests/unit/test_session_consent_logout_runtime_boundary.py
-  - tests/unit/test_session_login_http_binding.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/unit/test_session_consent_logout_runtime_boundary.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/unit/test_session_login_http_binding.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   - pkgs/120-tests/tba-tests-set/tests/unit/test_set_providers.py
   - tests/unit/test_shared_secret_provider.py
   - pkgs/120-tests/tba-tests-storage/tests/test_spiffe_migration_0028.py
@@ -512,6 +514,9 @@ categories:
   - pkgs/120-tests/tba-tests-wimse/tests/test_workload_proof_claims.py
   - tests/unit/test_workspace_layer_sources.py
   integration:
+  - pkgs/120-tests/tba-tests-platform-iam/tests/integration/test_platform_iam_rp_session.py
+  - pkgs/120-tests/tba-tests-platform-iam/tests/integration/test_platform_iam_policy_decision.py
+  - pkgs/120-tests/tba-tests-storage/tests/integration/test_platform_iam_migration.py
   - tests/integration/test_admin_auth_session.py
   - tests/integration/test_admin_table_issue_regressions.py
   - tests/integration/test_admin_table_surfaces.py
@@ -523,7 +528,7 @@ categories:
   - tests/integration/test_default_openapi_endpoints.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
   - tests/integration/test_full_workflow.py
-  - tests/integration/test_login_session_authorize.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/integration/test_login_session_authorize.py
   - tests/integration/test_long_lived_worker_flow.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
@@ -545,6 +550,7 @@ categories:
   - tests/runtime/test_runner_tigrcorn.py
   - tests/runtime/test_runner_uvicorn.py
   conformance:
+  - pkgs/120-tests/tba-tests-platform-iam/tests/conformance/test_platform_iam_conformance.py
   - pkgs/120-tests/tba-tests-wire-codecs/tests/conformance/backlog/test_rfc8785_jcs.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_oidc_id_token.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_configuration.py
@@ -579,7 +585,7 @@ categories:
   - tests/conformance/operator/test_cli_serve_runtime.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
   - pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7521_assertion_framework.py
@@ -604,6 +610,7 @@ categories:
   - tests/interop/test_tier4_promotion_fail_closed.py
   - tests/unit/test_peer_bundle_completeness.py
   e2e:
+  - pkgs/120-tests/tba-tests-platform-iam/tests/uix/test_platform_iam_uix_contract.py
   - tests/e2e/test_release_gate_catalog.py
   - tests/examples/test_python_cli_device_login.py
   - tests/examples/test_readme_usage.py
@@ -652,4 +659,5 @@ categories:
   - tests/negative/test_invalid_artifact_inputs.py
   - tests/negative/test_resource_exchange_abuse.py
   perf:
+  - pkgs/120-tests/tba-tests-platform-iam/tests/performance/test_platform_iam_decision_performance.py
   - tests/perf/test_bundle_manifest_size.py

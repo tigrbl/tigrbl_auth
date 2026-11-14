@@ -44,7 +44,7 @@ profiles:
   production:
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7591_dynamic_client_registration.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7662_introspection.py
@@ -188,7 +188,7 @@ categories:
   - tests/unit/test_profile_discovery_runtime.py
   - tests/unit/test_protected_resource_verifier_contract.py
   - tests/unit/test_provenance_naming_guard.py
-  - tests/unit/test_provider_white_label_login_boundary.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_provider_white_label_login_boundary.py
   - tests/unit/test_provisioning_governance_ecosystem_boundary.py
   - tests/unit/test_public_route_contracts.py
   - tests/unit/test_published_dependency_model.py
@@ -254,7 +254,7 @@ categories:
   - tests/unit/test_security_deps.py
   - tests/unit/test_security_user_lookup.py
   - tests/unit/test_server_runtime_operator_boundary.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   - tests/unit/test_ssot_dependency_maintenance_traceability.py
   - tests/unit/test_ssot_document_authority.py
   - tests/unit/test_ssot_registry_integrity.py
@@ -291,7 +291,7 @@ categories:
   - tests/integration/test_default_openapi_endpoints.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
   - tests/integration/test_full_workflow.py
-  - tests/integration/test_login_session_authorize.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/integration/test_login_session_authorize.py
   - tests/integration/test_long_lived_worker_flow.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
@@ -346,7 +346,7 @@ categories:
   - tests/conformance/operator/test_cli_serve_runtime.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
   - pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7521_assertion_framework.py

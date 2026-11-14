@@ -10,7 +10,7 @@ modules:
 - tba_auth/tables/auth_code.py
 - tba_auth/services/persistence.py
 tests:
-- tests/unit/test_session_logout_cluster_b.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
 contracts:

@@ -570,6 +570,8 @@ testpaths = [
     "pkgs/120-tests/tba-tests-authorization/tests",
     "pkgs/120-tests/tba-tests-oauth/tests",
     "pkgs/120-tests/tba-tests-oidc/tests",
+    "pkgs/120-tests/tba-tests-browser-session/tests",
+    "pkgs/120-tests/tba-tests-platform-iam/tests",
     "pkgs/120-tests/tba-tests-jose/tests",
     "pkgs/120-tests/tba-tests-wire-codecs/tests",
     "pkgs/120-tests/tba-tests-did/tests",

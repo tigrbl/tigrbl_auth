@@ -540,6 +540,7 @@ def infer_test_category(rel_path: str) -> str | None:
         "tests/security/": "security",
         "tests/negative/": "negative",
         "tests/perf/": "perf",
+        "tests/performance/": "perf",
     }
     for prefix, category in prefixes.items():
         if normalized.startswith(prefix):

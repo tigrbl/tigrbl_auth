@@ -87,7 +87,7 @@ bundles:
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   evidence_refs:
   - compliance/evidence/tier3/oidc-session-management/
 - profile: baseline
@@ -101,7 +101,7 @@ bundles:
 - profile: baseline
   target: RFC 6265
   tests:
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
@@ -333,7 +333,7 @@ bundles:
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   evidence_refs:
   - compliance/evidence/tier3/oidc-rp-initiated-logout/
 - profile: production
@@ -343,7 +343,7 @@ bundles:
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   evidence_refs:
   - compliance/evidence/tier3/oidc-session-management/
 - profile: production
@@ -365,7 +365,7 @@ bundles:
 - profile: production
   target: RFC 6265
   tests:
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
@@ -712,7 +712,7 @@ bundles:
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   evidence_refs:
   - compliance/evidence/tier3/oidc-rp-initiated-logout/
 - profile: hardening
@@ -722,7 +722,7 @@ bundles:
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   evidence_refs:
   - compliance/evidence/tier3/oidc-session-management/
 - profile: hardening
@@ -744,7 +744,7 @@ bundles:
 - profile: hardening
   target: RFC 6265
   tests:
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
@@ -1187,7 +1187,7 @@ bundles:
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   evidence_refs:
   - compliance/evidence/tier3/oidc-rp-initiated-logout/
 - profile: fapi2-security
@@ -1197,7 +1197,7 @@ bundles:
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   evidence_refs:
   - compliance/evidence/tier3/oidc-session-management/
 - profile: fapi2-security
@@ -1219,7 +1219,7 @@ bundles:
 - profile: fapi2-security
   target: RFC 6265
   tests:
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
@@ -1674,7 +1674,7 @@ bundles:
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   evidence_refs:
   - compliance/evidence/tier3/oidc-rp-initiated-logout/
 - profile: peer-claim
@@ -1684,7 +1684,7 @@ bundles:
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   evidence_refs:
   - compliance/evidence/tier3/oidc-session-management/
 - profile: peer-claim
@@ -1706,7 +1706,7 @@ bundles:
 - profile: peer-claim
   target: RFC 6265
   tests:
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py

@@ -9,7 +9,7 @@ required_targets:
 - OIDC Front-Channel Logout
 - OIDC Back-Channel Logout
 required_artifacts:
-- tests/conformance/production/test_rfc6265_cookies.py
+- pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_frontchannel_logout.py

@@ -3743,7 +3743,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
   - pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7521_assertion_framework.py
@@ -3799,7 +3799,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py
   - tests/unit/test_rpc_registry_live.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   - tests/unit/test_well_known_endpoints_behavior.py
   negative_tests:
   - tests/negative/test_certification_attack_paths.py
@@ -3889,7 +3889,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
   - pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7521_assertion_framework.py
@@ -3945,7 +3945,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py
   - tests/unit/test_rpc_registry_live.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   - tests/unit/test_well_known_endpoints_behavior.py
   negative_tests:
   - tests/negative/test_certification_attack_paths.py
@@ -4036,7 +4036,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
   - pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7521_assertion_framework.py
@@ -4092,7 +4092,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py
   - tests/unit/test_rpc_registry_live.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   - tests/unit/test_well_known_endpoints_behavior.py
   negative_tests:
   - tests/negative/test_certification_attack_paths.py
@@ -4181,7 +4181,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
   - pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7521_assertion_framework.py
@@ -4237,7 +4237,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py
   - tests/unit/test_rpc_registry_live.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   - tests/unit/test_well_known_endpoints_behavior.py
   negative_tests:
   - tests/negative/test_certification_attack_paths.py
@@ -4328,7 +4328,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
   - pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7521_assertion_framework.py
@@ -4384,7 +4384,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py
   - tests/unit/test_rpc_registry_live.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   - tests/unit/test_well_known_endpoints_behavior.py
   negative_tests:
   - tests/negative/test_certification_attack_paths.py
@@ -4467,7 +4467,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
   - pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7521_assertion_framework.py
@@ -4523,7 +4523,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py
   - tests/unit/test_rpc_registry_live.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   - tests/unit/test_well_known_endpoints_behavior.py
   negative_tests:
   - tests/negative/test_certification_attack_paths.py
@@ -5700,11 +5700,11 @@ bindings:
   positive_tests:
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/cookies/
@@ -5721,11 +5721,11 @@ bindings:
   positive_tests:
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/cookies/
@@ -5742,11 +5742,11 @@ bindings:
   positive_tests:
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/cookies/
@@ -5763,11 +5763,11 @@ bindings:
   positive_tests:
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/cookies/
@@ -5784,11 +5784,11 @@ bindings:
   positive_tests:
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/cookies/
@@ -5805,11 +5805,11 @@ bindings:
   positive_tests:
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/cookies/
@@ -5826,11 +5826,11 @@ bindings:
   positive_tests:
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/cookies/
@@ -5847,11 +5847,11 @@ bindings:
   positive_tests:
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/cookies/
@@ -6093,7 +6093,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
   - pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7521_assertion_framework.py
@@ -6148,7 +6148,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   - tests/unit/test_well_known_endpoints_behavior.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py
@@ -6375,7 +6375,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
   - pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7521_assertion_framework.py
@@ -6431,7 +6431,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py
   - tests/unit/test_rpc_registry_live.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   - tests/unit/test_well_known_endpoints_behavior.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py
@@ -6659,7 +6659,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
   - pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7521_assertion_framework.py
@@ -6715,7 +6715,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py
   - tests/unit/test_rpc_registry_live.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   - tests/unit/test_well_known_endpoints_behavior.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py
@@ -6946,7 +6946,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
   - pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7521_assertion_framework.py
@@ -7002,7 +7002,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py
   - tests/unit/test_rpc_registry_live.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   - tests/unit/test_well_known_endpoints_behavior.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py
@@ -7165,7 +7165,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
   - pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7521_assertion_framework.py
@@ -7221,7 +7221,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py
   - tests/unit/test_rpc_registry_live.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   - tests/unit/test_well_known_endpoints_behavior.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py
@@ -7523,7 +7523,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_oidc_id_token.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
@@ -7556,11 +7556,11 @@ bindings:
   profile: null
   positive_tests:
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/cookies/
@@ -7574,11 +7574,11 @@ bindings:
   profile: null
   positive_tests:
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/cookies/
@@ -7619,7 +7619,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc8252_native_apps.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
@@ -7642,7 +7642,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8252_native_app_redirects.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py
   - tests/unit/test_identity_artifact_confusion_vectors.py
@@ -7758,7 +7758,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_token_endpoint.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
@@ -7770,7 +7770,7 @@ bindings:
   - tests/interop/test_tier4_promotion_fail_closed.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
   - tests/unit/test_advanced_surface_contracts.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   negative_tests:
   - tests/negative/test_certification_attack_paths.py
   - tests/negative/test_hardening_runtime_enforcement.py
@@ -7801,12 +7801,12 @@ bindings:
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_frontchannel_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
   - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
   - tests/unit/test_hardening_cluster_c.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/cookies/
@@ -7958,7 +7958,7 @@ bindings:
   - tests/unit/test_public_route_contracts.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7591_client_registration_endpoint.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8252_native_app_redirects.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/client-registration/
@@ -7987,7 +7987,7 @@ bindings:
   - tests/unit/test_hardening_cluster_a.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7592_client_management_endpoint.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8252_native_app_redirects.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/client-registration-management/
@@ -8802,7 +8802,7 @@ bindings:
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/oidc-rp-initiated-logout/
@@ -8817,7 +8817,7 @@ bindings:
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-  - tests/unit/test_session_logout_cluster_b.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/oidc-session-management/
@@ -8881,7 +8881,7 @@ bindings:
   - RFC 6265
   profile: null
   positive_tests:
-  - tests/conformance/production/test_rfc6265_cookies.py
+  - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py

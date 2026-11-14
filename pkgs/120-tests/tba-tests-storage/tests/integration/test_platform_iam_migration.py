@@ -4,7 +4,7 @@ import tomllib
 
 from tba_durability_authorization_policy import normalize_legacy_authorization
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 
 
 def test_legacy_json_roles_are_normalized_to_permissions_and_tenant_grants() -> None:
