@@ -17,6 +17,8 @@ def test_package_python_matrix_builds_wheels_with_repo_uv_step() -> None:
         "tba-tests-wimse",
         "tba-tests-spiffe",
         "tba-tests-workload-composition",
+        "tba-tests-storage",
+        "tba-tests-authorization",
         "tba-testkit-workload-credential-conformance",
     ):
         assert f"pkgs/120-tests/{suite}/tests" in workflow

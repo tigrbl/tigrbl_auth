@@ -198,7 +198,7 @@ categories:
   - tests/unit/test_did_core_protocol.py
   - tests/unit/test_did_gnap_migration_0030.py
   - tests/unit/test_did_providers.py
-  - tests/unit/test_did_workload_policy_contracts.py
+  - pkgs/120-tests/tba-tests-authorization/tests/test_did_workload_policy_contracts.py
   - tests/unit/test_digital_credential_providers.py
   - tests/unit/test_dpop_key_credentials.py
   - tests/unit/test_dpop_migration_0034.py
@@ -421,7 +421,7 @@ categories:
   - tests/unit/test_session_logout_cluster_b.py
   - tests/unit/test_set_providers.py
   - tests/unit/test_shared_secret_provider.py
-  - tests/unit/test_spiffe_migration_0028.py
+  - pkgs/120-tests/tba-tests-storage/tests/test_spiffe_migration_0028.py
   - tests/unit/test_ssot_dependency_maintenance_traceability.py
   - tests/unit/test_ssot_document_authority.py
   - tests/unit/test_ssot_operator_vocabulary_boundary.py
@@ -490,9 +490,9 @@ categories:
   - tests/unit/test_webauthn_migration_0035.py
   - tests/unit/test_webauthn_protocol_delivery.py
   - tests/unit/test_well_known_endpoints_behavior.py
-  - tests/unit/test_workload_artifact_durability.py
-  - tests/unit/test_workload_artifact_migration_0036.py
-  - tests/unit/test_workload_proof_claims.py
+  - pkgs/120-tests/tba-tests-storage/tests/test_workload_artifact_durability.py
+  - pkgs/120-tests/tba-tests-storage/tests/test_workload_artifact_migration_0036.py
+  - pkgs/120-tests/tba-tests-wimse/tests/test_workload_proof_claims.py
   - tests/unit/test_workspace_layer_sources.py
   integration:
   - tests/integration/test_admin_auth_session.py

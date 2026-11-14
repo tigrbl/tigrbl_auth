@@ -7,9 +7,11 @@ the migrated suites and the remaining root tests.
 
 | Package | Scope |
 | --- | --- |
-| `tba-tests-wimse` | WIMSE identifiers, WIC, mTLS, WIT and WPT |
+| `tba-tests-wimse` | WIMSE identifiers, WIC, mTLS, WIT, WPT, and workload proof claims |
 | `tba-tests-spiffe` | SPIFFE providers and SVID profiles, including the separately marked CWT extension module |
 | `tba-tests-workload-composition` | Workload protocol boundaries, specification ownership and runtime composition |
+| `tba-tests-storage` | Workload artifact durability and WIMSE/SPIFFE storage migrations |
+| `tba-tests-authorization` | DID and workload policy contracts |
 | `tba-testkit-workload-credential-conformance` | Shared workload vectors, certificate fixtures and clean-wheel runner |
 | `tba-testkit-wimse-cred-interop` | Opt-in Cred peer suite |
 | `tba-testkit-identity` | Shared identity fixtures |

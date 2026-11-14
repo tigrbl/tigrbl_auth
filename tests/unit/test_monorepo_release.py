@@ -170,6 +170,8 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
         "tba-tests-wimse",
         "tba-tests-spiffe",
         "tba-tests-workload-composition",
+        "tba-tests-storage",
+        "tba-tests-authorization",
     }.isdisjoint(names)
     assert "tba-security-token-verification" not in names
     assert "tba-provider-authorization-resource-server-verifier" in names

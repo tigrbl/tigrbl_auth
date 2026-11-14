@@ -190,7 +190,7 @@ partitions:
   - tests/unit/test_did_core_canonical_document.py
   - tests/unit/test_did_core_protocol.py
   - tests/unit/test_did_providers.py
-  - tests/unit/test_did_workload_policy_contracts.py
+  - pkgs/120-tests/tba-tests-authorization/tests/test_did_workload_policy_contracts.py
   - tests/unit/test_digital_credential_providers.py
   - tests/unit/test_dpop_key_credentials.py
   - tests/unit/test_durability_package_taxonomy.py
@@ -476,8 +476,8 @@ partitions:
   - tests/unit/test_webauthn_foundation_delivery.py
   - tests/unit/test_webauthn_protocol_delivery.py
   - tests/unit/test_well_known_endpoints_behavior.py
-  - tests/unit/test_workload_artifact_durability.py
-  - tests/unit/test_workload_proof_claims.py
+  - pkgs/120-tests/tba-tests-storage/tests/test_workload_artifact_durability.py
+  - pkgs/120-tests/tba-tests-wimse/tests/test_workload_proof_claims.py
   - tests/unit/test_workspace_layer_sources.py
   integration:
   - tests/integration/test_admin_auth_session.py
@@ -524,9 +524,9 @@ partitions:
   - tests/unit/test_presentation_migration_0026.py
   - tests/unit/test_replay_migration_0033.py
   - tests/unit/test_security_event_migration_0029.py
-  - tests/unit/test_spiffe_migration_0028.py
+  - pkgs/120-tests/tba-tests-storage/tests/test_spiffe_migration_0028.py
   - tests/unit/test_webauthn_migration_0035.py
-  - tests/unit/test_workload_artifact_migration_0036.py
+  - pkgs/120-tests/tba-tests-storage/tests/test_workload_artifact_migration_0036.py
   interop:
   - pkgs/120-tests/tba-testkit-wimse-cred-interop/tests/test_cred_wit_wpt.py
   - tests/interop/test_operator_profile_catalog_completeness.py

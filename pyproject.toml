@@ -566,6 +566,8 @@ testpaths = [
     "pkgs/120-tests/tba-tests-wimse/tests",
     "pkgs/120-tests/tba-tests-spiffe/tests",
     "pkgs/120-tests/tba-tests-workload-composition/tests",
+    "pkgs/120-tests/tba-tests-storage/tests",
+    "pkgs/120-tests/tba-tests-authorization/tests",
     "pkgs/120-tests/tba-testkit-workload-credential-conformance/tests",
 ]
 norecursedirs = ["combined", "scripts", ".pytest_cache", "__pycache__", ".uv-cache", ".venv", "dist", ".benchmarks"]
