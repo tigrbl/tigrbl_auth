@@ -1,0 +1,27 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1235"
+number: 1235
+slug: "wimse-wic-mutual-tls"
+title: "WIMSE WIC authentication over mTLS"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "https://datatracker.ietf.org/doc/html/draft-ietf-wimse-mutual-tls-03"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Normative target
+  https://datatracker.ietf.org/doc/html/draft-ietf-wimse-mutual-tls-03
+  
+  ## Requirements
+  The WIMSE mTLS profile MUST compose WIC validation with trust anchors configured for the expected peer's workload trust domain. Validate certificate path, applicable key usage, revocation status, and expected peer identity. Apply TLS server name validation when connecting by DNS name. Require the TLS handshake to authenticate the client certificate where client workload identity is used for authorization. If the application receives identity from a TLS terminator, define the trusted channel and how it conveys authenticated peer identity. Authorize the application operation through the local principal and grant policy.
+  
+  ## Verification
+  Exercise native wimse WICs in a real handshake with an accepted peer and rejection for wrong trust domain or anchor, wrong peer identity, and invalid certificate status. Capture the verified identity handoff and use separate evidence for each advertised peer role.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1140"

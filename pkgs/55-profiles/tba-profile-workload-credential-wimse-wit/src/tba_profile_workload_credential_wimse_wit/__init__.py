@@ -8,3 +8,8 @@ __all__ = [
     "WitVersion",
     "validate_wit",
 ]
+
+from .verification import verify_wit
+from .issuance import issue_wit
+
+__all__ += ["issue_wit", "verify_wit"]

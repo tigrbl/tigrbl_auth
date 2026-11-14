@@ -13,4 +13,10 @@ class TrustAnchorProviderPort(Protocol):
     def anchors_for(self, profile: str, /) -> Sequence[TrustAnchor]: ...
 
 
-__all__ = ["TrustAnchor", "TrustAnchorProviderPort"]
+class DomainTrustAnchorProviderPort(TrustAnchorProviderPort, Protocol):
+    def anchors_for_domain(
+        self, trust_domain: str, profile: str, /
+    ) -> Sequence[TrustAnchor]: ...
+
+
+__all__ = ["TrustAnchor", "TrustAnchorProviderPort", "DomainTrustAnchorProviderPort"]

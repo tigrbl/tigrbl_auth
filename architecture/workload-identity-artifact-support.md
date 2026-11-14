@@ -9,8 +9,9 @@
 | DID Document | `tba-protocol-identity-did-core` | DID Core 1.0 Recommendation | canonical parse/resolve/verify path, document syntax, controllers, key material, and verification relationships | method-specific resolution and interoperability |
 | VC-JOSE-COSE | `tba-profile-credential-vc-jose-cose` | W3C Recommendation 2025-05-15 | VC issuance and verification over JOSE and COSE with claims reconstructed from verified bytes; unsupported VP formats are not advertised | independent VC-JOSE-COSE interoperability; VP delivery remains separate |
 | X.509-SVID / JWT-SVID | `tba-protocol-workload-spiffe-svid` | stable SPIFFE | SPIFFE ID and format-specific profile validation | SPIRE interoperability |
-| WIT | `tba-profile-workload-credential-wimse-wit` | IETF draft `-02` | confirmation-bound workload credential | standards-track stability |
-| WPT | `tba-profile-workload-proof-wimse-wpt` | IETF draft `-01` | audience/replay/WIT and context token hashes | standards-track stability |
+| WIC / WIMSE mTLS | `tba-profile-workload-credential-wimse-wic`, `tba-profile-workload-authentication-wimse-mtls` | IETF workload-creds `-03` / mutual-tls `-03` | native WIMSE certificate profile and peer verification through configured path and status providers | independent interoperability |
+| WIT | `tba-profile-workload-credential-wimse-wit` | IETF draft `-03` | signed confirmation-bound workload credential | standards-track stability |
+| WPT | `tba-profile-workload-proof-wimse-wpt` | IETF draft `-02` | signed HTTP proof, audience, replay and token bindings | standards-track stability |
 | WIT-SVID | `tba-profile-workload-credential-spiffe-wit-svid` | SPIFFE v1.15.1 Incubating | SPIFFE-subject WIT plus mandatory PoP input | stable SPIFFE conformance |
 | CWT-SVID extension | `tba-profile-workload-credential-cwt-svid-extension` | Tigrbl experiment 1 | CWT/COSE/RFC 8747 confirmation plus PoP | any SPIFFE conformance |
 | Workload API | `tba-protocol-workload-spiffe-workload-api` | stable service contract | exact closed RPC set and stream rules | generated protobuf/gRPC and SPIRE interop |

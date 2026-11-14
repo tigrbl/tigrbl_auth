@@ -1,6 +1,7 @@
 [project]
 name = "tba-bases-identity-assurance"
 version = "0.4.0.dev2"
+readme = "README.md"
 description = "Protocol-neutral identity assurance bases."
 requires-python = ">=3.10,<3.16"
 classifiers = [

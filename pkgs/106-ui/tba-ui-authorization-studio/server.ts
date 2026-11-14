@@ -21,7 +21,7 @@ import {
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = Number(process.env.PORT ?? 3000);
 
   // Middleware for body parsing
   app.use(express.json());
@@ -42,10 +42,7 @@ async function startServer() {
     try {
       const evaluationRequest = req.body as AuthZenEvaluationRequest;
       const state = dbInstance.get();
-      const engine = new AuthorizationEngine({
-        ...state,
-        tuples: state.relationshipTuples
-      });
+      const engine = new AuthorizationEngine(state);
 
       const result = engine.evaluate(evaluationRequest);
 
@@ -81,10 +78,7 @@ async function startServer() {
       }
 
       const state = dbInstance.get();
-      const engine = new AuthorizationEngine({
-        ...state,
-        tuples: state.relationshipTuples
-      });
+      const engine = new AuthorizationEngine(state);
       const responses = requests.map((item) => {
         const result = engine.evaluate(item);
         dbInstance.logDecisionResult(result.trace, result.receipt);
@@ -260,10 +254,7 @@ async function startServer() {
       }
 
       const state = dbInstance.get();
-      const currentEngine = new AuthorizationEngine({
-        ...state,
-        tuples: state.relationshipTuples
-      });
+      const currentEngine = new AuthorizationEngine(state);
 
       // Create an overridden policy list for proposed simulation dry-runs
       let proposedPolicies = [...state.policies];
@@ -276,10 +267,7 @@ async function startServer() {
         }
       }
 
-      const simulationEngine = new AuthorizationEngine({
-        ...state,
-        tuples: state.relationshipTuples
-      });
+      const simulationEngine = new AuthorizationEngine(state);
 
       const results = fixtures.map((reqFixture) => {
         // Evaluate active engine
@@ -326,7 +314,7 @@ async function startServer() {
 
   // --- STATIC ASSET SERVING & SPA ROUTING ---
 
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.NODE_ENV !== "production" && !process.argv.includes("--production")) {
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa"
@@ -340,8 +328,8 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`[Tigrbl Server] Running at http://0.0.0.0:${PORT}`);
+  app.listen(PORT, "127.0.0.1", () => {
+    console.log(`[Tigrbl Server] Running at http://127.0.0.1:${PORT}`);
   });
 }
 

@@ -7,9 +7,10 @@ interface ForgotPasswordPageProps {
   onRequestReset: (email: string) => Promise<void>;
   isLoading: boolean;
   isSent?: boolean;
+  requestError?: string | null;
 }
 
-export const ForgotPasswordPage: React.FC<ForgotPasswordPageProps> = ({ onRequestReset, isLoading, isSent }) => {
+export const ForgotPasswordPage: React.FC<ForgotPasswordPageProps> = ({ onRequestReset, isLoading, isSent, requestError }) => {
   const [email, setEmail] = useState('');
   const [error, setError] = useState<string>();
 
@@ -60,6 +61,7 @@ export const ForgotPasswordPage: React.FC<ForgotPasswordPageProps> = ({ onReques
 
         <Card className="forgot-card">
           <form className="forgot-form" onSubmit={handleSubmit}>
+            {requestError && <p role="alert">{requestError}</p>}
             <Input
               label="Work Email"
               placeholder="name@company.com"

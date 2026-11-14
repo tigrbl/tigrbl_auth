@@ -12,9 +12,9 @@ CURRENT_VERSION = SpiffeSvidVersion(
     "SPIFFE-1.0",
     "stable",
     (
-        "https://github.com/spiffe/spiffe/blob/main/standards/SPIFFE-ID.md",
-        "https://github.com/spiffe/spiffe/blob/main/standards/X509-SVID.md",
-        "https://github.com/spiffe/spiffe/blob/main/standards/JWT-SVID.md",
+        "https://github.com/spiffe/spiffe/blob/5d15e3ee8782e205048d1f206fbf944e075f7bae/standards/SPIFFE-ID.md",
+        "https://github.com/spiffe/spiffe/blob/5d15e3ee8782e205048d1f206fbf944e075f7bae/standards/X509-SVID.md",
+        "https://github.com/spiffe/spiffe/blob/5d15e3ee8782e205048d1f206fbf944e075f7bae/standards/JWT-SVID.md",
     ),
 )
 VERSION_HISTORY = (CURRENT_VERSION,)

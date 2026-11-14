@@ -11,6 +11,6 @@ class WitSvidVersion:
 CURRENT_VERSION = WitSvidVersion(
     "SPIFFE-v1.15.1-WIT-SVID",
     "Incubating",
-    "https://github.com/spiffe/spiffe/blob/v1.15.1/standards/WIT-SVID.md",
+    "https://github.com/spiffe/spiffe/blob/5d15e3ee8782e205048d1f206fbf944e075f7bae/standards/WIT-SVID.md",
 )
 VERSION_HISTORY = (CURRENT_VERSION,)

@@ -86,6 +86,7 @@ describe("tigrblAuthDiscovery", () => {
         json: async () => ({
           issuer: "https://authn.example.com",
           registration_endpoint: "http://localhost:3000/register",
+          account_registration_endpoint: "http://localhost:3000/accounts/register",
         }),
       })
       .mockResolvedValueOnce({
@@ -95,12 +96,14 @@ describe("tigrblAuthDiscovery", () => {
       });
     vi.stubGlobal("fetch", fetchMock);
 
-    await expect(postDiscoveredJson("registration_endpoint", "registration", { email: "user@example.com" })).resolves.toEqual({ id: "user-1" });
+    const payload = { name: "Example User", email: "user@example.com", password: "synthetic test password" };
+    await expect(postDiscoveredJson("account_registration_endpoint", "account registration", payload)).resolves.toEqual({ id: "user-1" });
 
     expect(fetchMock).toHaveBeenLastCalledWith(
-      "http://localhost:3000/register",
+      "http://localhost:3000/accounts/register",
       expect.objectContaining({
         method: "POST",
+        body: JSON.stringify(payload),
         credentials: "include",
         headers: expect.objectContaining({
           Accept: "application/json",

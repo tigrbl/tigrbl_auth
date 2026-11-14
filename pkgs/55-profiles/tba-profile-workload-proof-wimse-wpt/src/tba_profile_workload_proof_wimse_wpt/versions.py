@@ -8,9 +8,14 @@ class WptVersion:
     specification_uri: str
 
 
-CURRENT_VERSION = WptVersion(
+LEGACY_VERSION = WptVersion(
     "draft-ietf-wimse-wpt-01",
     "IETF-draft",
     "https://datatracker.ietf.org/doc/draft-ietf-wimse-wpt/01/",
 )
-VERSION_HISTORY = (CURRENT_VERSION,)
+CURRENT_VERSION = WptVersion(
+    "draft-ietf-wimse-wpt-02",
+    "IETF-draft",
+    "https://datatracker.ietf.org/doc/html/draft-ietf-wimse-wpt-02",
+)
+VERSION_HISTORY = (LEGACY_VERSION, CURRENT_VERSION)

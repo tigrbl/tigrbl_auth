@@ -2,6 +2,7 @@
 name = "tba-concrete-claim-access-token-digest"
 version = "0.4.0.dev3"
 license = { text = "Apache-2.0" }
+readme = "README.md"
 description = "Standalone RFC 9449 ath claim implementation."
 requires-python = ">=3.10,<3.16"
 classifiers = [

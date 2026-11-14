@@ -1,6 +1,7 @@
 [project]
 name = "tba-concrete-dpop-confirmation-binding"
 version = "0.4.0.dev2"
+readme = "README.md"
 description = "Deterministic DPoP confirmation binding validation."
 requires-python = ">=3.10,<3.16"
 classifiers = [

@@ -1,0 +1,31 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1236"
+number: 1236
+slug: "wimse-wit-and-wpt-authentication"
+title: "WIMSE WIT and WPT authentication"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-creds-03"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Normative targets
+  https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-creds-03
+  https://datatracker.ietf.org/doc/html/draft-ietf-wimse-wpt-02
+  
+  ## Sender
+  The WIT issuer MUST sign a compact JWT with a configured asymmetric trust-domain key and bind the workload identity to a public confirmation JWK. The workload MUST sign a short-lived WPT with that confirmation key, bind the exact serialized WIT with SHA-256, set the target HTTP URI without query or fragment as audience, and generate a fresh proof ID. The workload presents the WIT in Workload-Identity-Token and the WPT using the WPT authorization scheme.
+  
+  ## Receiver
+  The WIT profile MUST validate the workload identifier, credential type, confirmation key, issuer signature, and validity using trust anchors configured for the subject trust domain. The WPT profile MUST enforce HTTP presentation, proof signature and algorithm binding, audience, lifetime, and exact WIT hash. The verifier MUST atomically reject a repeated proof ID scoped to its workload identity while the proof remains valid. The WIT and WPT packages MUST remain independently composable.
+  
+  ## Verification
+  T3 exercises both roles with Tigrbl Auth release-candidate packages over HTTP using configured trust and the real replay provider. Cover wrong domain anchors, issuer and proof keys, proof bound to a different WIT, wrong audience, expiry, and replay. Native verification runs without SPIFFE, SPIRE, or Cred. The optional pinned Cred peer suite exercises the Tigrbl Auth sender for a separate T4 claim.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1140"

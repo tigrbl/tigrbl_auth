@@ -2,6 +2,7 @@
 name="tba-protocol-credential-w3c-vcdm"
 version="0.4.0.dev2"
 description = "Version authority, feature selection, compatibility, migration, and semantic object mapping for W3C Verifiable Credentials Data Model revisions."
+readme = "README.md"
 requires-python=">=3.10,<3.16"
 classifiers = [
     "Programming Language :: Python :: 3.10",

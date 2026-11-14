@@ -13,10 +13,31 @@ from tba_bases_protected_envelope import (
 )
 from tba_contracts_protected_envelope import (
     EnvelopeProtectionRequest,
+    ProtectedEnvelopeIssuerPort,
     EnvelopeVerificationRequest,
     EnvelopeVerificationResult,
     ProtectedEnvelope,
 )
+from tba_primitives_identity import ProtectedEnvelopeKind
+
+
+def sign_compact_jwt(
+    signer: ProtectedEnvelopeIssuerPort,
+    claims: Mapping[str, object],
+    *,
+    headers: Mapping[str, str],
+    key_reference: str,
+) -> str:
+    return str(
+        signer.protect(
+            EnvelopeProtectionRequest(
+                kind=ProtectedEnvelopeKind.JWS,
+                payload=json.dumps(claims, separators=(",", ":")).encode("utf-8"),
+                protected_headers=dict(headers),
+                key_reference=key_reference,
+            )
+        ).serialization
+    )
 
 
 class JwsCryptographyProvider(

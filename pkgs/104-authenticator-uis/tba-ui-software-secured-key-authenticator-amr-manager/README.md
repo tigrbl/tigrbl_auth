@@ -1,20 +1,36 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# @tba/ui-software-secured-key-authenticator-amr-manager
 
-# Run and deploy your AI Studio app
+<!-- BEGIN TBA README HEADER -->
+<p align="center">
+<a href="https://github.com/tigrbl/tigrbl_auth#readme"><img src="https://raw.githubusercontent.com/tigrbl/tigrbl_auth/master/docs/assets/tba-brand.png" alt="TBA · Tigrbl Auth" width="240"></a>
+</p>
+<p align="center">
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-software-secured-key-authenticator-amr-manager/package.json"><img alt="Checkout: 0.0.0" src="https://img.shields.io/badge/Checkout-0.0.0-1f6feb"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/104-authenticator-uis"><img alt="Layer: 104 authenticator uis" src="https://img.shields.io/badge/Layer-104%20authenticator%20uis-0a7f5a"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-software-secured-key-authenticator-amr-manager/package.json"><img alt="Distribution: private source" src="https://img.shields.io/badge/Distribution-private%20source-6e7781"></a>
+</p>
+<p align="center">
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-software-secured-key-authenticator-amr-manager/package.json"><img alt="Direct dependencies: 10" src="https://img.shields.io/badge/Direct%20dependencies-10-0969da"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-software-secured-key-authenticator-amr-manager/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
+</p>
+<!-- END TBA README HEADER -->
 
-This contains everything you need to run your app locally.
+Source prototype for Software-Secured Key AMR Manager.
 
-View your app in AI Studio: https://ai.studio/apps/dff4f5ca-6d2f-4a7d-914d-d0f1a50cf1d9
+## Quick start
 
-## Run Locally
+Use Node 22 or newer and run these commands from the repository root.
 
-**Prerequisites:**  Node.js
+```bash
+cd pkgs/104-authenticator-uis/tba-ui-software-secured-key-authenticator-amr-manager
+npm install --no-package-lock --no-audit --no-fund
+npm run build
+```
 
+Expect `dist/index.html` and bundled assets.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Verification
+
+The [build command](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-software-secured-key-authenticator-amr-manager/package.json) completed in an isolated source checkout using Node 24. The check covers bundling.
+
+[Workspace and package catalog](https://github.com/tigrbl/tigrbl_auth#package-catalog) · [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues) · [Repository license](https://github.com/tigrbl/tigrbl_auth/blob/master/LICENSE)

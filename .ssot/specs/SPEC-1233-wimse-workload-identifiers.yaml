@@ -1,0 +1,27 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1233"
+number: 1233
+slug: "wimse-workload-identifiers"
+title: "WIMSE workload identifiers"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "https://datatracker.ietf.org/doc/html/draft-ietf-wimse-identifier-04"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Normative target
+  https://datatracker.ietf.org/doc/html/draft-ietf-wimse-identifier-04
+  
+  ## Requirements
+  The WIMSE identifier protocol package MUST own URI parsing, normalization, and interpretation for WIC and WIT. It MUST support the native wimse scheme and enforce the draft's scheme, authority, and path requirements and URI restrictions. Preserve the scheme and trust domain in the resulting identity. Any additional scheme must be explicitly supported and governed by its own scheme rules.
+  
+  ## Verification
+  Use valid and invalid URI vectors and prove that WIC and WIT use the same identifier rules. Verify native operation without SPIFFE or SPIRE.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1140"

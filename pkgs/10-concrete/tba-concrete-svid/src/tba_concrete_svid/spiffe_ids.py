@@ -1,4 +1,4 @@
-from tba_contracts_identity.workloads import SpiffeId
+from tba_contracts_workload_identity import SpiffeId
 
 
 def normalize_spiffe_id(value: str | SpiffeId) -> SpiffeId:

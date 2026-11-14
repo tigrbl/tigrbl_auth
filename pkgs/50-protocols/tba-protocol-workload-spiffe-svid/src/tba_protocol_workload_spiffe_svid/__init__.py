@@ -11,3 +11,7 @@ __all__ = [
     "validate_spiffe_id",
     "validate_x509_svid",
 ]
+
+from .verification import verify_x509_svid, verify_jwt_svid
+
+__all__ += ["verify_x509_svid", "verify_jwt_svid"]

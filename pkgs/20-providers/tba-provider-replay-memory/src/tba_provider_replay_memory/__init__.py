@@ -102,7 +102,7 @@ class MemoryRPSessionProvider:
 
 
 class MemoryReplayCheckProvider:
-    """Synchronous non-durable atomic replay provider."""
+    """Atomically store new proofs and return whether they were accepted."""
 
     provider_id = "replay-check:memory"
     persistence = "ephemeral-process-local"
@@ -122,7 +122,7 @@ class MemoryReplayCheckProvider:
             duplicate = key in self._entries
             if not duplicate:
                 self._entries[key] = current + max(int(ttl_s), 1)
-            return duplicate
+            return not duplicate
 
     def snapshot(self) -> dict[str, int]:
         with self._lock:

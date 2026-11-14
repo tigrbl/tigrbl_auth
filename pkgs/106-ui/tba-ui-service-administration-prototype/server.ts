@@ -407,7 +407,7 @@ seedDatabase();
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = Number(process.env.PORT ?? 3000);
 
   app.use(express.json());
 
@@ -1222,7 +1222,7 @@ async function startServer() {
   });
 
   // Vite development integration
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.NODE_ENV !== "production" && !process.argv.includes("--production")) {
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
@@ -1236,7 +1236,7 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
+  app.listen(PORT, "127.0.0.1", () => {
     console.log(`Server running on http://localhost:${PORT}`);
   });
 }

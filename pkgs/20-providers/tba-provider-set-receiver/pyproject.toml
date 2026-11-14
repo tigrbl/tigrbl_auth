@@ -1,6 +1,7 @@
 [project]
 name = "tba-provider-set-receiver"
 version = "0.4.0.dev2"
+readme = "README.md"
 description = "RFC 8417 Security Event Token receiver provider."
 requires-python = ">=3.10,<3.16"
 classifiers = [

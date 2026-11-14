@@ -41,6 +41,7 @@ const App: React.FC = () => {
     requestPasswordReset,
     resetPassword,
     resetRequestSent,
+    recoveryError,
     mfaPending,
     verifyMfa,
     verifyEmail,
@@ -102,10 +103,10 @@ const App: React.FC = () => {
         return <CallbackPage onHandleCallback={handleCallback} />;
 
       case '#/forgot-password':
-        return <ForgotPasswordPage onRequestReset={requestPasswordReset} isLoading={isLoading} isSent={resetRequestSent} />;
+        return <ForgotPasswordPage onRequestReset={requestPasswordReset} isLoading={isLoading} isSent={resetRequestSent} requestError={recoveryError} />;
 
       case '#/reset-password':
-        return <ResetPasswordPage onReset={resetPassword} isLoading={isLoading} />;
+        return <ResetPasswordPage onReset={resetPassword} isLoading={isLoading} error={recoveryError} />;
 
       case '#/terms':
         return <TermsOfServicePage />;

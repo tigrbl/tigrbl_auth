@@ -85,6 +85,9 @@ def verify_test_classification(repo_root: Path, *, strict: bool = True) -> dict[
 
 def _certification_partition_for_test(path: str) -> str:
     normalized = path.replace("\\", "/")
+    parts = normalized.split("/")
+    if len(parts) >= 5 and parts[:2] == ["pkgs", "120-tests"] and parts[3] == "tests":
+        return "interop" if parts[2].endswith("-interop") else "unit"
     if "tests/interop/" in normalized:
         return "peer" if "peer_" in normalized or "tier4_" in normalized else "interop"
     if "migration" in normalized:
@@ -280,7 +283,11 @@ def generate_certification_evidence_index(repo_root: Path) -> dict[str, Any]:
     feature_to_evidence = _load_yaml(repo_root / "compliance" / "mappings" / "feature-to-evidence.yaml")
     classification = _load_yaml(repo_root / "compliance" / "mappings" / "test_classification.yaml")
     profiles = ("baseline", "production", "hardening", "fapi2-security", "peer-claim")
-    discovered_tests = sorted(str(path.relative_to(repo_root)).replace("\\", "/") for path in (repo_root / "tests").rglob("test_*.py"))
+    test_paths = (
+        *(repo_root / "tests").rglob("test_*.py"),
+        *(repo_root / "pkgs" / "120-tests").glob("*/tests/**/test_*.py"),
+    )
+    discovered_tests = sorted(path.relative_to(repo_root).as_posix() for path in test_paths)
     partitioned_tests: dict[str, list[str]] = {}
     for path in discovered_tests:
         partitioned_tests.setdefault(_certification_partition_for_test(path), []).append(path)

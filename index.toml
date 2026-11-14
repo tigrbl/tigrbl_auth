@@ -291,6 +291,14 @@ local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
+name = "tba-contracts-dns"
+path = "pkgs/02-contracts/tba-contracts-dns"
+layer = "02-contracts"
+order = "00"
+local_dependencies = []
+same_layer_dependencies = []
+
+[[packages]]
 name = "tba-contracts-identity-assurance"
 path = "pkgs/02-contracts/tba-contracts-identity-assurance"
 layer = "02-contracts"
@@ -399,7 +407,7 @@ name = "tba-contracts-identity"
 path = "pkgs/02-contracts/tba-contracts-identity"
 layer = "02-contracts"
 order = "02"
-local_dependencies = ["tba-contracts-attestation", "tba-contracts-claim", "tba-contracts-did", "tba-contracts-digital-credential", "tba-contracts-identity-assurance", "tba-primitives-identity", "tba-contracts-public-key-authentication", "tba-contracts-replay", "tba-contracts-security-event", "tba-contracts-security-trust", "tba-contracts-token", "tba-contracts-workload-identity"]
+local_dependencies = ["tba-contracts-attestation", "tba-contracts-claim", "tba-contracts-did", "tba-contracts-digital-credential", "tba-contracts-identity-assurance", "tba-contracts-public-key-authentication", "tba-contracts-replay", "tba-contracts-security-event", "tba-contracts-security-trust", "tba-contracts-token", "tba-contracts-workload-identity", "tba-primitives-identity"]
 same_layer_dependencies = ["tba-contracts-attestation", "tba-contracts-claim", "tba-contracts-did", "tba-contracts-digital-credential", "tba-contracts-identity-assurance", "tba-contracts-public-key-authentication", "tba-contracts-replay", "tba-contracts-security-event", "tba-contracts-security-trust", "tba-contracts-token", "tba-contracts-workload-identity"]
 
 [[packages]]
@@ -413,6 +421,14 @@ same_layer_dependencies = []
 [[packages]]
 name = "tba-codec-multibase"
 path = "pkgs/03-codecs/tba-codec-multibase"
+layer = "03-codecs"
+order = "00"
+local_dependencies = []
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-codec-x509-logotype"
+path = "pkgs/03-codecs/tba-codec-x509-logotype"
 layer = "03-codecs"
 order = "00"
 local_dependencies = []
@@ -507,19 +523,19 @@ local_dependencies = ["tba-contracts-digital-credential"]
 same_layer_dependencies = []
 
 [[packages]]
-name = "tba-bases-identity-assurance"
-path = "pkgs/05-bases/tba-bases-identity-assurance"
-layer = "05-bases"
-order = "00"
-local_dependencies = ["tba-contracts-identity-assurance"]
-same_layer_dependencies = []
-
-[[packages]]
 name = "tba-bases-identity"
 path = "pkgs/05-bases/tba-bases-identity"
 layer = "05-bases"
 order = "00"
 local_dependencies = ["tba-contracts-identity"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-bases-identity-assurance"
+path = "pkgs/05-bases/tba-bases-identity-assurance"
+layer = "05-bases"
+order = "00"
+local_dependencies = ["tba-contracts-identity-assurance"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -643,22 +659,6 @@ local_dependencies = ["tba-bases-protected-artifact", "tba-contracts-security-tr
 same_layer_dependencies = ["tba-bases-protected-artifact"]
 
 [[packages]]
-name = "tba-bases-identity-authenticator"
-path = "pkgs/deprecated/tba-bases-identity-authenticator"
-layer = "deprecated"
-order = "00"
-local_dependencies = ["tba-bases-authenticator"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tba-bases-identity-claims"
-path = "pkgs/deprecated/tba-bases-identity-claims"
-layer = "deprecated"
-order = "00"
-local_dependencies = ["tba-bases-claim"]
-same_layer_dependencies = []
-
-[[packages]]
 name = "tba-bases-identity-model"
 path = "pkgs/05-bases/tba-bases-identity-model"
 layer = "05-bases"
@@ -671,7 +671,7 @@ name = "tba-bases-jose"
 path = "pkgs/05-bases/tba-bases-jose"
 layer = "05-bases"
 order = "01"
-local_dependencies = ["tba-contracts-identity", "tba-bases-protected-envelope", "tba-bases-token"]
+local_dependencies = ["tba-bases-protected-envelope", "tba-bases-token", "tba-contracts-identity"]
 same_layer_dependencies = ["tba-bases-protected-envelope", "tba-bases-token"]
 
 [[packages]]
@@ -679,24 +679,8 @@ name = "tba-bases-proof-of-possession"
 path = "pkgs/05-bases/tba-bases-proof-of-possession"
 layer = "05-bases"
 order = "01"
-local_dependencies = ["tba-contracts-proof-of-possession", "tba-bases-protected-artifact", "tba-contracts-security-trust"]
+local_dependencies = ["tba-bases-protected-artifact", "tba-contracts-proof-of-possession", "tba-contracts-security-trust"]
 same_layer_dependencies = ["tba-bases-protected-artifact"]
-
-[[packages]]
-name = "tba-bases-public-key-authenticator"
-path = "pkgs/deprecated/tba-bases-public-key-authenticator"
-layer = "deprecated"
-order = "00"
-local_dependencies = ["tba-bases-public-key-authentication"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tba-bases-security-artifact"
-path = "pkgs/deprecated/tba-bases-security-artifact"
-layer = "deprecated"
-order = "00"
-local_dependencies = ["tba-bases-protected-artifact"]
-same_layer_dependencies = []
 
 [[packages]]
 name = "tba-bases-security-provenance"
@@ -719,7 +703,7 @@ name = "tba-bases-key"
 path = "pkgs/05-bases/tba-bases-key"
 layer = "05-bases"
 order = "02"
-local_dependencies = ["tba-contracts-security-trust", "tba-bases-signing"]
+local_dependencies = ["tba-bases-signing", "tba-contracts-security-trust"]
 same_layer_dependencies = ["tba-bases-signing"]
 
 [[packages]]
@@ -727,7 +711,7 @@ name = "tba-bases-security-trust-domain"
 path = "pkgs/05-bases/tba-bases-security-trust-domain"
 layer = "05-bases"
 order = "03"
-local_dependencies = ["tba-bases-authentication-context", "tba-bases-capability", "tba-bases-certificate", "tba-bases-claim", "tba-bases-did", "tba-bases-encryption", "tba-bases-identity", "tba-contracts-identity", "tba-bases-key", "tba-bases-proof-of-possession", "tba-bases-protected-artifact", "tba-contracts-security-trust", "tba-bases-signing", "tba-bases-token-introspection", "tba-bases-trust", "tba-bases-workload-identity"]
+local_dependencies = ["tba-bases-authentication-context", "tba-bases-capability", "tba-bases-certificate", "tba-bases-claim", "tba-bases-did", "tba-bases-encryption", "tba-bases-identity", "tba-bases-key", "tba-bases-proof-of-possession", "tba-bases-protected-artifact", "tba-bases-signing", "tba-bases-token-introspection", "tba-bases-trust", "tba-bases-workload-identity", "tba-contracts-identity", "tba-contracts-security-trust"]
 same_layer_dependencies = ["tba-bases-authentication-context", "tba-bases-capability", "tba-bases-certificate", "tba-bases-claim", "tba-bases-did", "tba-bases-encryption", "tba-bases-identity", "tba-bases-key", "tba-bases-proof-of-possession", "tba-bases-protected-artifact", "tba-bases-signing", "tba-bases-token-introspection", "tba-bases-trust", "tba-bases-workload-identity"]
 
 [[packages]]
@@ -760,22 +744,6 @@ path = "pkgs/10-concrete/tba-concrete-authority-graph"
 layer = "10-concrete"
 order = "00"
 local_dependencies = ["tba-contracts-identity"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tba-concrete-authorization-provenance"
-path = "pkgs/10-concrete/tba-concrete-authorization-provenance"
-layer = "10-concrete"
-order = "00"
-local_dependencies = ["tba-primitives-identity", "tba-bases-security-provenance", "tba-contracts-security-trust"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tba-concrete-authorization-scope-set-matcher"
-path = "pkgs/10-concrete/tba-concrete-authorization-scope-set-matcher"
-layer = "10-concrete"
-order = "00"
-local_dependencies = ["tba-bases-authorization-policy", "tba-contracts-identity"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -819,11 +787,35 @@ local_dependencies = ["tba-bases-authorization-policy", "tba-contracts-identity"
 same_layer_dependencies = []
 
 [[packages]]
+name = "tba-concrete-authorization-provenance"
+path = "pkgs/10-concrete/tba-concrete-authorization-provenance"
+layer = "10-concrete"
+order = "00"
+local_dependencies = ["tba-bases-security-provenance", "tba-contracts-security-trust", "tba-primitives-identity"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-concrete-authorization-scope-set-matcher"
+path = "pkgs/10-concrete/tba-concrete-authorization-scope-set-matcher"
+layer = "10-concrete"
+order = "00"
+local_dependencies = ["tba-bases-authorization-policy", "tba-contracts-identity"]
+same_layer_dependencies = []
+
+[[packages]]
 name = "tba-concrete-capability"
 path = "pkgs/10-concrete/tba-concrete-capability"
 layer = "10-concrete"
 order = "00"
 local_dependencies = ["tba-bases-capability", "tba-contracts-identity", "tba-primitives-identity"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-concrete-certificate-x509"
+path = "pkgs/10-concrete/tba-concrete-certificate-x509"
+layer = "10-concrete"
+order = "00"
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -917,6 +909,14 @@ same_layer_dependencies = []
 [[packages]]
 name = "tba-concrete-claim-authorization-code-hash"
 path = "pkgs/10-concrete/tba-concrete-claim-authorization-code-hash"
+layer = "10-concrete"
+order = "00"
+local_dependencies = ["tba-bases-claim", "tba-primitives-identity"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-concrete-claim-authorization-context"
+path = "pkgs/10-concrete/tba-concrete-claim-authorization-context"
 layer = "10-concrete"
 order = "00"
 local_dependencies = ["tba-bases-claim", "tba-primitives-identity"]
@@ -1519,7 +1519,7 @@ name = "tba-concrete-dpop-confirmation-binding"
 path = "pkgs/10-concrete/tba-concrete-dpop-confirmation-binding"
 layer = "10-concrete"
 order = "00"
-local_dependencies = ["tba-contracts-identity", "tba-bases-proof-of-possession", "tba-contracts-security-trust"]
+local_dependencies = ["tba-bases-proof-of-possession", "tba-contracts-identity", "tba-contracts-security-trust"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -1543,7 +1543,7 @@ name = "tba-concrete-jose"
 path = "pkgs/10-concrete/tba-concrete-jose"
 layer = "10-concrete"
 order = "00"
-local_dependencies = ["tba-contracts-identity", "tba-primitives-identity", "tba-bases-jose", "tba-contracts-security-key-rotation-policy"]
+local_dependencies = ["tba-bases-jose", "tba-contracts-identity", "tba-contracts-security-key-rotation-policy", "tba-primitives-identity"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -1591,7 +1591,7 @@ name = "tba-concrete-mtls-confirmation-binding"
 path = "pkgs/10-concrete/tba-concrete-mtls-confirmation-binding"
 layer = "10-concrete"
 order = "00"
-local_dependencies = ["tba-bases-certificate", "tba-contracts-identity", "tba-bases-proof-of-possession", "tba-contracts-security-trust"]
+local_dependencies = ["tba-bases-certificate", "tba-bases-proof-of-possession", "tba-contracts-identity", "tba-contracts-security-trust"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -1651,6 +1651,14 @@ local_dependencies = ["tba-primitives-identity"]
 same_layer_dependencies = []
 
 [[packages]]
+name = "tba-concrete-svid"
+path = "pkgs/10-concrete/tba-concrete-svid"
+layer = "10-concrete"
+order = "00"
+local_dependencies = ["tba-contracts-workload-identity"]
+same_layer_dependencies = []
+
+[[packages]]
 name = "tba-concrete-trust-federation-graph"
 path = "pkgs/10-concrete/tba-concrete-trust-federation-graph"
 layer = "10-concrete"
@@ -1699,12 +1707,12 @@ local_dependencies = ["tba-bases-identity", "tba-contracts-identity"]
 same_layer_dependencies = []
 
 [[packages]]
-name = "tba-concrete-x509-svid-credential"
-path = "pkgs/10-concrete/tba-concrete-x509-svid-credential"
+name = "tba-concrete-capability-default"
+path = "pkgs/10-concrete/tba-concrete-capability-default"
 layer = "10-concrete"
-order = "00"
-local_dependencies = ["tba-bases-digital-credential"]
-same_layer_dependencies = []
+order = "01"
+local_dependencies = ["tba-concrete-capability", "tba-contracts-identity"]
+same_layer_dependencies = ["tba-concrete-capability"]
 
 [[packages]]
 name = "tba-concrete-claim-cwt-audience"
@@ -1767,16 +1775,8 @@ name = "tba-concrete-cwt-svid-extension-credential"
 path = "pkgs/10-concrete/tba-concrete-cwt-svid-extension-credential"
 layer = "10-concrete"
 order = "01"
-local_dependencies = ["tba-concrete-cwt", "tba-bases-digital-credential"]
+local_dependencies = ["tba-bases-digital-credential", "tba-concrete-cwt"]
 same_layer_dependencies = ["tba-concrete-cwt"]
-
-[[packages]]
-name = "tba-concrete-capability-default"
-path = "pkgs/10-concrete/tba-concrete-capability-default"
-layer = "10-concrete"
-order = "01"
-local_dependencies = ["tba-concrete-capability", "tba-contracts-identity"]
-same_layer_dependencies = ["tba-concrete-capability"]
 
 [[packages]]
 name = "tba-concrete-eat"
@@ -1791,7 +1791,7 @@ name = "tba-concrete-identity-principals"
 path = "pkgs/10-concrete/tba-concrete-identity-principals"
 layer = "10-concrete"
 order = "01"
-local_dependencies = ["tba-concrete-administrator-identity", "tba-concrete-client-identity", "tba-concrete-device-identity", "tba-contracts-identity", "tba-concrete-machine-identity", "tba-concrete-service-identity", "tba-concrete-user-identity", "tba-concrete-workload-identity"]
+local_dependencies = ["tba-concrete-administrator-identity", "tba-concrete-client-identity", "tba-concrete-device-identity", "tba-concrete-machine-identity", "tba-concrete-service-identity", "tba-concrete-user-identity", "tba-concrete-workload-identity", "tba-contracts-identity"]
 same_layer_dependencies = ["tba-concrete-administrator-identity", "tba-concrete-client-identity", "tba-concrete-device-identity", "tba-concrete-machine-identity", "tba-concrete-service-identity", "tba-concrete-user-identity", "tba-concrete-workload-identity"]
 
 [[packages]]
@@ -1827,19 +1827,11 @@ local_dependencies = ["tba-concrete-jose"]
 same_layer_dependencies = ["tba-concrete-jose"]
 
 [[packages]]
-name = "tba-concrete-svid"
-path = "pkgs/10-concrete/tba-concrete-svid"
-layer = "10-concrete"
-order = "01"
-local_dependencies = ["tba-contracts-identity", "tba-concrete-jose"]
-same_layer_dependencies = ["tba-concrete-jose"]
-
-[[packages]]
 name = "tba-concrete-vc-cose-credential"
 path = "pkgs/10-concrete/tba-concrete-vc-cose-credential"
 layer = "10-concrete"
 order = "01"
-local_dependencies = ["tba-concrete-cose", "tba-bases-digital-credential"]
+local_dependencies = ["tba-bases-digital-credential", "tba-concrete-cose"]
 same_layer_dependencies = ["tba-concrete-cose"]
 
 [[packages]]
@@ -1851,12 +1843,28 @@ local_dependencies = ["tba-bases-digital-credential", "tba-concrete-jws"]
 same_layer_dependencies = ["tba-concrete-jws"]
 
 [[packages]]
+name = "tba-concrete-wic"
+path = "pkgs/10-concrete/tba-concrete-wic"
+layer = "10-concrete"
+order = "01"
+local_dependencies = ["tba-concrete-certificate-x509"]
+same_layer_dependencies = ["tba-concrete-certificate-x509"]
+
+[[packages]]
+name = "tba-concrete-x509-svid-credential"
+path = "pkgs/10-concrete/tba-concrete-x509-svid-credential"
+layer = "10-concrete"
+order = "01"
+local_dependencies = ["tba-bases-digital-credential", "tba-concrete-certificate-x509", "tba-concrete-svid", "tba-contracts-workload-identity"]
+same_layer_dependencies = ["tba-concrete-certificate-x509", "tba-concrete-svid"]
+
+[[packages]]
 name = "tba-concrete-jwt-svid-credential"
 path = "pkgs/10-concrete/tba-concrete-jwt-svid-credential"
 layer = "10-concrete"
 order = "02"
-local_dependencies = ["tba-bases-digital-credential", "tba-concrete-jwt"]
-same_layer_dependencies = ["tba-concrete-jwt"]
+local_dependencies = ["tba-bases-digital-credential", "tba-concrete-jwt", "tba-concrete-svid", "tba-contracts-workload-identity"]
+same_layer_dependencies = ["tba-concrete-jwt", "tba-concrete-svid"]
 
 [[packages]]
 name = "tba-concrete-oidc-id-token"
@@ -1895,8 +1903,8 @@ name = "tba-concrete-wit-svid-credential"
 path = "pkgs/10-concrete/tba-concrete-wit-svid-credential"
 layer = "10-concrete"
 order = "03"
-local_dependencies = ["tba-bases-digital-credential", "tba-concrete-wit"]
-same_layer_dependencies = ["tba-concrete-wit"]
+local_dependencies = ["tba-bases-digital-credential", "tba-concrete-svid", "tba-concrete-wit", "tba-contracts-workload-identity"]
+same_layer_dependencies = ["tba-concrete-svid", "tba-concrete-wit"]
 
 [[packages]]
 name = "tba-example-oauth-device-authorization-cli"
@@ -1935,7 +1943,7 @@ name = "tba-provider-access-governance-memory"
 path = "pkgs/20-providers/tba-provider-access-governance-memory"
 layer = "20-providers"
 order = "00"
-local_dependencies = ["tba-contracts-identity", "tba-primitives-identity", "tba-concrete-service-credential", "tba-concrete-service-identity"]
+local_dependencies = ["tba-concrete-service-credential", "tba-concrete-service-identity", "tba-contracts-identity", "tba-primitives-identity"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -1951,7 +1959,31 @@ name = "tba-provider-attestation-reference"
 path = "pkgs/20-providers/tba-provider-attestation-reference"
 layer = "20-providers"
 order = "00"
-local_dependencies = ["tba-bases-attestation"]
+local_dependencies = ["tba-bases-attestation", "tba-contracts-identity"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-provider-authentication-anomaly-detector"
+path = "pkgs/20-providers/tba-provider-authentication-anomaly-detector"
+layer = "20-providers"
+order = "00"
+local_dependencies = ["tba-contracts-identity", "tba-primitives-identity"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-provider-authentication-context-acr-basic"
+path = "pkgs/20-providers/tba-provider-authentication-context-acr-basic"
+layer = "20-providers"
+order = "00"
+local_dependencies = ["tba-concrete-acr-evaluator-basic"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-provider-authentication-context-amr-basic"
+path = "pkgs/20-providers/tba-provider-authentication-context-amr-basic"
+layer = "20-providers"
+order = "00"
+local_dependencies = ["tba-concrete-amr-evaluator-basic"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2031,7 +2063,15 @@ name = "tba-provider-authorization-policy-decision-engine"
 path = "pkgs/20-providers/tba-provider-authorization-policy-decision-engine"
 layer = "20-providers"
 order = "00"
-local_dependencies = ["tba-contracts-authorization", "tba-contracts-identity", "tba-primitives-identity", "tba-concrete-policy-decision-engine-default"]
+local_dependencies = ["tba-concrete-policy-decision-engine-default", "tba-contracts-authorization", "tba-contracts-identity", "tba-primitives-identity"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-provider-certificate-evidence"
+path = "pkgs/20-providers/tba-provider-certificate-evidence"
+layer = "20-providers"
+order = "00"
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -2048,6 +2088,14 @@ path = "pkgs/20-providers/tba-provider-certificate-status"
 layer = "20-providers"
 order = "00"
 local_dependencies = ["tba-contracts-security-trust"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-provider-claims-local"
+path = "pkgs/20-providers/tba-provider-claims-local"
+layer = "20-providers"
+order = "00"
+local_dependencies = ["tba-bases-claim", "tba-contracts-identity", "tba-contracts-security-trust"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2087,7 +2135,7 @@ name = "tba-provider-digital-credential-status"
 path = "pkgs/20-providers/tba-provider-digital-credential-status"
 layer = "20-providers"
 order = "00"
-local_dependencies = ["tba-bases-digital-credential"]
+local_dependencies = ["tba-bases-digital-credential", "tba-contracts-identity"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2096,6 +2144,14 @@ path = "pkgs/20-providers/tba-provider-digital-credential-trust"
 layer = "20-providers"
 order = "00"
 local_dependencies = ["tba-contracts-security-trust"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-provider-dns-txt"
+path = "pkgs/20-providers/tba-provider-dns-txt"
+layer = "20-providers"
+order = "00"
+local_dependencies = ["tba-contracts-dns"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2111,15 +2167,7 @@ name = "tba-provider-fido-metadata-service"
 path = "pkgs/20-providers/tba-provider-fido-metadata-service"
 layer = "20-providers"
 order = "00"
-local_dependencies = ["tba-contracts-identity", "tba-bases-public-key-authentication"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tba-provider-authentication-anomaly-detector"
-path = "pkgs/20-providers/tba-provider-authentication-anomaly-detector"
-layer = "20-providers"
-order = "00"
-local_dependencies = ["tba-contracts-identity", "tba-primitives-identity"]
+local_dependencies = ["tba-bases-public-key-authentication", "tba-contracts-identity"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2135,7 +2183,7 @@ name = "tba-provider-jose-cryptography"
 path = "pkgs/20-providers/tba-provider-jose-cryptography"
 layer = "20-providers"
 order = "00"
-local_dependencies = ["tba-concrete-jwe", "tba-concrete-jws", "tba-bases-protected-envelope", "tba-contracts-protected-envelope"]
+local_dependencies = ["tba-bases-protected-envelope", "tba-concrete-jwe", "tba-concrete-jws", "tba-contracts-protected-envelope", "tba-primitives-identity"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2151,7 +2199,7 @@ name = "tba-provider-mdoc-issuer"
 path = "pkgs/20-providers/tba-provider-mdoc-issuer"
 layer = "20-providers"
 order = "00"
-local_dependencies = ["tba-bases-digital-credential", "tba-contracts-identity", "tba-concrete-mdoc"]
+local_dependencies = ["tba-bases-digital-credential", "tba-concrete-mdoc", "tba-contracts-identity"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2159,7 +2207,7 @@ name = "tba-provider-mdoc-verifier"
 path = "pkgs/20-providers/tba-provider-mdoc-verifier"
 layer = "20-providers"
 order = "00"
-local_dependencies = ["tba-bases-digital-credential", "tba-contracts-identity", "tba-concrete-mdoc"]
+local_dependencies = ["tba-bases-digital-credential", "tba-concrete-mdoc", "tba-contracts-identity"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2179,22 +2227,6 @@ local_dependencies = ["tba-contracts-identity"]
 same_layer_dependencies = []
 
 [[packages]]
-name = "tba-provider-authentication-context-acr-basic"
-path = "pkgs/20-providers/tba-provider-authentication-context-acr-basic"
-layer = "20-providers"
-order = "00"
-local_dependencies = ["tba-concrete-acr-evaluator-basic"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tba-provider-authentication-context-amr-basic"
-path = "pkgs/20-providers/tba-provider-authentication-context-amr-basic"
-layer = "20-providers"
-order = "00"
-local_dependencies = ["tba-concrete-amr-evaluator-basic"]
-same_layer_dependencies = []
-
-[[packages]]
 name = "tba-provider-security-authorization-provenance-builder"
 path = "pkgs/20-providers/tba-provider-security-authorization-provenance-builder"
 layer = "20-providers"
@@ -2208,14 +2240,6 @@ path = "pkgs/20-providers/tba-provider-security-certificate-mtls"
 layer = "20-providers"
 order = "00"
 local_dependencies = ["tba-concrete-mtls-confirmation-binding"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tba-provider-claims-local"
-path = "pkgs/20-providers/tba-provider-claims-local"
-layer = "20-providers"
-order = "00"
-local_dependencies = ["tba-bases-claim", "tba-contracts-identity", "tba-contracts-security-trust"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2239,7 +2263,7 @@ name = "tba-provider-security-oidc-federation"
 path = "pkgs/20-providers/tba-provider-security-oidc-federation"
 layer = "20-providers"
 order = "00"
-local_dependencies = ["tba-contracts-identity", "tba-contracts-security-trust", "tba-bases-security-trust-domain"]
+local_dependencies = ["tba-bases-security-trust-domain", "tba-contracts-identity", "tba-contracts-security-trust"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2263,7 +2287,7 @@ name = "tba-provider-security-signing-pqc"
 path = "pkgs/20-providers/tba-provider-security-signing-pqc"
 layer = "20-providers"
 order = "00"
-local_dependencies = ["tba-contracts-security-trust", "tba-bases-signing"]
+local_dependencies = ["tba-bases-signing", "tba-contracts-security-trust"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2271,15 +2295,7 @@ name = "tba-provider-security-subject-pairwise"
 path = "pkgs/20-providers/tba-provider-security-subject-pairwise"
 layer = "20-providers"
 order = "00"
-local_dependencies = ["tba-bases-identity", "tba-contracts-identity", "tba-concrete-pairwise-subject-identifier", "tba-contracts-security-trust"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tba-provider-token-introspection"
-path = "pkgs/20-providers/tba-provider-token-introspection"
-layer = "20-providers"
-order = "00"
-local_dependencies = ["tba-contracts-identity", "tba-contracts-security-trust", "tba-bases-token-introspection"]
+local_dependencies = ["tba-bases-identity", "tba-concrete-pairwise-subject-identifier", "tba-contracts-identity", "tba-contracts-security-trust"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2287,7 +2303,7 @@ name = "tba-provider-security-token-jwks-cache"
 path = "pkgs/20-providers/tba-provider-security-token-jwks-cache"
 layer = "20-providers"
 order = "00"
-local_dependencies = ["tba-contracts-identity", "tba-contracts-security-trust", "tba-bases-token-introspection"]
+local_dependencies = ["tba-bases-token-introspection", "tba-contracts-identity", "tba-contracts-security-trust"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2295,7 +2311,7 @@ name = "tba-provider-security-webfinger"
 path = "pkgs/20-providers/tba-provider-security-webfinger"
 layer = "20-providers"
 order = "00"
-local_dependencies = ["tba-contracts-identity", "tba-contracts-security-trust", "tba-bases-security-trust-domain"]
+local_dependencies = ["tba-bases-security-trust-domain", "tba-contracts-identity", "tba-contracts-security-trust"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2303,7 +2319,7 @@ name = "tba-provider-set-receiver"
 path = "pkgs/20-providers/tba-provider-set-receiver"
 layer = "20-providers"
 order = "00"
-local_dependencies = ["tba-contracts-identity", "tba-bases-security-event", "tba-concrete-set"]
+local_dependencies = ["tba-bases-security-event", "tba-concrete-set", "tba-contracts-identity"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2311,7 +2327,7 @@ name = "tba-provider-set-transmitter"
 path = "pkgs/20-providers/tba-provider-set-transmitter"
 layer = "20-providers"
 order = "00"
-local_dependencies = ["tba-contracts-identity", "tba-bases-security-event", "tba-concrete-set"]
+local_dependencies = ["tba-bases-security-event", "tba-concrete-set", "tba-contracts-identity"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2327,7 +2343,15 @@ name = "tba-provider-spiffe-workload-api"
 path = "pkgs/20-providers/tba-provider-spiffe-workload-api"
 layer = "20-providers"
 order = "00"
-local_dependencies = ["tba-concrete-svid", "tba-bases-workload-identity", "tba-contracts-workload-identity"]
+local_dependencies = ["tba-bases-workload-identity", "tba-concrete-svid", "tba-contracts-workload-identity"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-provider-token-introspection"
+path = "pkgs/20-providers/tba-provider-token-introspection"
+layer = "20-providers"
+order = "00"
+local_dependencies = ["tba-bases-token-introspection", "tba-contracts-identity", "tba-contracts-security-trust"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2351,7 +2375,7 @@ name = "tba-provider-attestation-packed"
 path = "pkgs/20-providers/tba-provider-attestation-packed"
 layer = "20-providers"
 order = "01"
-local_dependencies = ["tba-concrete-cose", "tba-provider-cose-cryptography", "tba-contracts-identity", "tba-bases-public-key-authentication"]
+local_dependencies = ["tba-bases-public-key-authentication", "tba-concrete-cose", "tba-contracts-identity", "tba-provider-cose-cryptography"]
 same_layer_dependencies = ["tba-provider-cose-cryptography"]
 
 [[packages]]
@@ -2359,7 +2383,7 @@ name = "tba-provider-attestation-tpm"
 path = "pkgs/20-providers/tba-provider-attestation-tpm"
 layer = "20-providers"
 order = "01"
-local_dependencies = ["tba-concrete-cose", "tba-provider-cose-cryptography", "tba-contracts-identity", "tba-bases-public-key-authentication"]
+local_dependencies = ["tba-bases-public-key-authentication", "tba-concrete-cose", "tba-contracts-identity", "tba-provider-cose-cryptography"]
 same_layer_dependencies = ["tba-provider-cose-cryptography"]
 
 [[packages]]
@@ -2367,7 +2391,7 @@ name = "tba-provider-attestation-u2f"
 path = "pkgs/20-providers/tba-provider-attestation-u2f"
 layer = "20-providers"
 order = "01"
-local_dependencies = ["tba-concrete-cose", "tba-provider-cose-cryptography", "tba-contracts-identity", "tba-bases-public-key-authentication"]
+local_dependencies = ["tba-bases-public-key-authentication", "tba-concrete-cose", "tba-contracts-identity", "tba-provider-cose-cryptography"]
 same_layer_dependencies = ["tba-provider-cose-cryptography"]
 
 [[packages]]
@@ -2391,15 +2415,23 @@ name = "tba-provider-authorization-resource-server-verifier"
 path = "pkgs/20-providers/tba-provider-authorization-resource-server-verifier"
 layer = "20-providers"
 order = "01"
-local_dependencies = ["tba-contracts-identity", "tba-bases-resource-server", "tba-provider-security-dpop-cnf-binding-validator", "tba-provider-security-mtls-cnf-binding-validator", "tba-provider-token-introspection", "tba-provider-security-token-jwks-cache", "tba-contracts-security-trust"]
-same_layer_dependencies = ["tba-provider-security-dpop-cnf-binding-validator", "tba-provider-security-mtls-cnf-binding-validator", "tba-provider-token-introspection", "tba-provider-security-token-jwks-cache"]
+local_dependencies = ["tba-bases-resource-server", "tba-contracts-identity", "tba-contracts-security-trust", "tba-provider-security-dpop-cnf-binding-validator", "tba-provider-security-mtls-cnf-binding-validator", "tba-provider-security-token-jwks-cache", "tba-provider-token-introspection"]
+same_layer_dependencies = ["tba-provider-security-dpop-cnf-binding-validator", "tba-provider-security-mtls-cnf-binding-validator", "tba-provider-security-token-jwks-cache", "tba-provider-token-introspection"]
+
+[[packages]]
+name = "tba-provider-bimi-mark-certificate"
+path = "pkgs/20-providers/tba-provider-bimi-mark-certificate"
+layer = "20-providers"
+order = "01"
+local_dependencies = ["tba-contracts-security-trust", "tba-provider-certificate-evidence"]
+same_layer_dependencies = ["tba-provider-certificate-evidence"]
 
 [[packages]]
 name = "tba-provider-identity-jose"
 path = "pkgs/20-providers/tba-provider-identity-jose"
 layer = "20-providers"
 order = "01"
-local_dependencies = ["tba-contracts-identity", "tba-primitives-identity", "tba-bases-jose", "tba-concrete-jose", "tba-provider-secret-hashing-bcrypt", "tba-contracts-security-key-rotation-policy", "tba-provider-security-signing-pqc"]
+local_dependencies = ["tba-bases-jose", "tba-concrete-jose", "tba-contracts-identity", "tba-contracts-security-key-rotation-policy", "tba-primitives-identity", "tba-provider-secret-hashing-bcrypt", "tba-provider-security-signing-pqc"]
 same_layer_dependencies = ["tba-provider-secret-hashing-bcrypt", "tba-provider-security-signing-pqc"]
 
 [[packages]]
@@ -2407,24 +2439,8 @@ name = "tba-provider-replay-memory"
 path = "pkgs/20-providers/tba-provider-replay-memory"
 layer = "20-providers"
 order = "01"
-local_dependencies = ["tba-contracts-identity", "tba-bases-replay", "tba-provider-security-proof-pkce", "tba-contracts-security-trust"]
+local_dependencies = ["tba-bases-replay", "tba-contracts-identity", "tba-contracts-security-trust", "tba-provider-security-proof-pkce"]
 same_layer_dependencies = ["tba-provider-security-proof-pkce"]
-
-[[packages]]
-name = "tba-provider-security-cose"
-path = "pkgs/deprecated/tba-provider-security-cose"
-layer = "deprecated"
-order = "00"
-local_dependencies = ["tba-concrete-cose", "tba-provider-cose-cryptography"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tba-provider-jose-swarmauri"
-path = "pkgs/deprecated/tba-provider-jose-swarmauri"
-layer = "deprecated"
-order = "00"
-local_dependencies = ["tba-provider-identity-jose"]
-same_layer_dependencies = []
 
 [[packages]]
 name = "tba-durability-attestation"
@@ -2523,14 +2539,6 @@ local_dependencies = ["tba-bases-replay", "tba-contracts-identity", "tba-contrac
 same_layer_dependencies = []
 
 [[packages]]
-name = "tba-provider-policy-administration-memory"
-path = "pkgs/30-storage-runtime/tba-provider-policy-administration-memory"
-layer = "30-storage-runtime"
-order = "00"
-local_dependencies = ["tba-provider-access-governance-memory", "tba-contracts-identity", "tba-primitives-identity"]
-same_layer_dependencies = []
-
-[[packages]]
 name = "tba-durability-presentation"
 path = "pkgs/30-storage-runtime/tba-durability-presentation"
 layer = "30-storage-runtime"
@@ -2544,14 +2552,6 @@ path = "pkgs/30-storage-runtime/tba-durability-replay-protection"
 layer = "30-storage-runtime"
 order = "00"
 local_dependencies = ["tba-bases-replay", "tba-contracts-identity", "tba-contracts-security-trust", "tba-primitives-identity", "tba-storage-replay-protection"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tba-runtime-relying-party-session"
-path = "pkgs/30-storage-runtime/tba-runtime-relying-party-session"
-layer = "30-storage-runtime"
-order = "00"
-local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -2603,6 +2603,14 @@ local_dependencies = ["tba-bases-replay", "tba-contracts-identity", "tba-contrac
 same_layer_dependencies = []
 
 [[packages]]
+name = "tba-runtime-relying-party-session"
+path = "pkgs/30-storage-runtime/tba-runtime-relying-party-session"
+layer = "30-storage-runtime"
+order = "00"
+local_dependencies = []
+same_layer_dependencies = []
+
+[[packages]]
 name = "tba-durability-authorization-policy-authority-derivation-graph"
 path = "pkgs/30-storage-runtime/tba-durability-authorization-policy-authority-derivation-graph"
 layer = "30-storage-runtime"
@@ -2619,6 +2627,14 @@ local_dependencies = ["tba-concrete-trust-federation-graph", "tba-durability-tru
 same_layer_dependencies = ["tba-durability-trust-federation-graph"]
 
 [[packages]]
+name = "tba-provider-policy-administration-memory"
+path = "pkgs/30-storage-runtime/tba-provider-policy-administration-memory"
+layer = "30-storage-runtime"
+order = "01"
+local_dependencies = ["tba-concrete-authorization-policy-rules", "tba-contracts-identity", "tba-durability-authorization-policy", "tba-primitives-identity", "tba-provider-access-governance-memory"]
+same_layer_dependencies = ["tba-durability-authorization-policy"]
+
+[[packages]]
 name = "tba-runtime-identity-storage"
 path = "pkgs/30-storage-runtime/tba-runtime-identity-storage"
 layer = "30-storage-runtime"
@@ -2631,7 +2647,7 @@ name = "tba-capability-access-governance"
 path = "pkgs/40-capabilities/tba-capability-access-governance"
 layer = "40-capabilities"
 order = "00"
-local_dependencies = ["tba-provider-access-governance-memory", "tba-concrete-capability", "tba-contracts-identity", "tba-primitives-identity"]
+local_dependencies = ["tba-concrete-capability", "tba-contracts-identity", "tba-primitives-identity", "tba-provider-access-governance-memory"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2663,7 +2679,7 @@ name = "tba-capability-api-key-authentication"
 path = "pkgs/40-capabilities/tba-capability-api-key-authentication"
 layer = "40-capabilities"
 order = "00"
-local_dependencies = ["tba-provider-authenticator-api-key-local", "tba-concrete-capability", "tba-contracts-identity"]
+local_dependencies = ["tba-concrete-capability", "tba-contracts-identity", "tba-provider-authenticator-api-key-local"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2711,7 +2727,15 @@ name = "tba-capability-client-secret-authentication"
 path = "pkgs/40-capabilities/tba-capability-client-secret-authentication"
 layer = "40-capabilities"
 order = "00"
-local_dependencies = ["tba-provider-authenticator-client-secret-local", "tba-concrete-capability", "tba-contracts-identity"]
+local_dependencies = ["tba-concrete-capability", "tba-contracts-identity", "tba-provider-authenticator-client-secret-local"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-capability-communications-identity"
+path = "pkgs/40-capabilities/tba-capability-communications-identity"
+layer = "40-capabilities"
+order = "00"
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -2783,7 +2807,7 @@ name = "tba-capability-password-authentication"
 path = "pkgs/40-capabilities/tba-capability-password-authentication"
 layer = "40-capabilities"
 order = "00"
-local_dependencies = ["tba-provider-authenticator-password-local", "tba-concrete-capability", "tba-contracts-identity"]
+local_dependencies = ["tba-concrete-capability", "tba-contracts-identity", "tba-provider-authenticator-password-local"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2791,7 +2815,7 @@ name = "tba-capability-policy-administration"
 path = "pkgs/40-capabilities/tba-capability-policy-administration"
 layer = "40-capabilities"
 order = "00"
-local_dependencies = ["tba-durability-authorization-policy", "tba-concrete-authorization-policy-rules", "tba-concrete-capability", "tba-contracts-identity", "tba-primitives-identity", "tba-provider-policy-administration-memory"]
+local_dependencies = ["tba-concrete-authorization-policy-rules", "tba-concrete-capability", "tba-contracts-identity", "tba-durability-authorization-policy", "tba-primitives-identity", "tba-provider-policy-administration-memory"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2799,7 +2823,7 @@ name = "tba-capability-policy-assurance"
 path = "pkgs/40-capabilities/tba-capability-policy-assurance"
 layer = "40-capabilities"
 order = "00"
-local_dependencies = ["tba-concrete-authority-graph", "tba-durability-authorization-policy", "tba-concrete-capability", "tba-contracts-identity", "tba-primitives-identity"]
+local_dependencies = ["tba-concrete-authority-graph", "tba-concrete-capability", "tba-contracts-identity", "tba-durability-authorization-policy", "tba-primitives-identity"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2831,7 +2855,7 @@ name = "tba-capability-protected-resource-authorization"
 path = "pkgs/40-capabilities/tba-capability-protected-resource-authorization"
 layer = "40-capabilities"
 order = "00"
-local_dependencies = ["tba-concrete-capability", "tba-concrete-dpop-confirmation-binding", "tba-contracts-identity", "tba-concrete-mtls-confirmation-binding", "tba-contracts-security-trust"]
+local_dependencies = ["tba-concrete-capability", "tba-concrete-dpop-confirmation-binding", "tba-concrete-mtls-confirmation-binding", "tba-contracts-identity", "tba-contracts-security-trust"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2943,7 +2967,7 @@ name = "tba-capability-service-key-authentication"
 path = "pkgs/40-capabilities/tba-capability-service-key-authentication"
 layer = "40-capabilities"
 order = "01"
-local_dependencies = ["tba-capability-api-key-authentication", "tba-provider-authenticator-service-key-local", "tba-concrete-capability", "tba-contracts-identity"]
+local_dependencies = ["tba-capability-api-key-authentication", "tba-concrete-capability", "tba-contracts-identity", "tba-provider-authenticator-service-key-local"]
 same_layer_dependencies = ["tba-capability-api-key-authentication"]
 
 [[packages]]
@@ -2967,7 +2991,31 @@ name = "tba-protocol-authzen"
 path = "pkgs/50-protocols/tba-protocol-authzen"
 layer = "50-protocols"
 order = "00"
-local_dependencies = ["tba-contracts-identity", "tba-capability-policy-evaluation"]
+local_dependencies = ["tba-capability-policy-evaluation", "tba-contracts-identity"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-protocol-bimi"
+path = "pkgs/50-protocols/tba-protocol-bimi"
+layer = "50-protocols"
+order = "00"
+local_dependencies = ["tba-contracts-dns"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-protocol-credential-iso-mdoc"
+path = "pkgs/50-protocols/tba-protocol-credential-iso-mdoc"
+layer = "50-protocols"
+order = "00"
+local_dependencies = ["tba-bases-digital-credential", "tba-concrete-mdoc", "tba-concrete-mdoc-credential", "tba-contracts-identity", "tba-provider-mdoc-issuer", "tba-provider-mdoc-verifier"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-protocol-credential-w3c-vcdm"
+path = "pkgs/50-protocols/tba-protocol-credential-w3c-vcdm"
+layer = "50-protocols"
+order = "00"
+local_dependencies = ["tba-concrete-verifiable-credential", "tba-concrete-verifiable-presentation"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2975,7 +3023,15 @@ name = "tba-protocol-cwt"
 path = "pkgs/50-protocols/tba-protocol-cwt"
 layer = "50-protocols"
 order = "00"
-local_dependencies = ["tba-concrete-claim-audience", "tba-bases-claim", "tba-concrete-claim-expiration", "tba-concrete-claim-issued-at", "tba-concrete-claim-issuer", "tba-concrete-claim-jwt-id", "tba-concrete-claim-not-before", "tba-concrete-claim-subject", "tba-concrete-cwt", "tba-contracts-identity"]
+local_dependencies = ["tba-bases-claim", "tba-concrete-claim-access-token-digest", "tba-concrete-claim-audience", "tba-concrete-claim-authorization-context", "tba-concrete-claim-expiration", "tba-concrete-claim-issued-at", "tba-concrete-claim-issuer", "tba-concrete-claim-jwt-id", "tba-concrete-claim-not-before", "tba-concrete-claim-subject", "tba-concrete-cwt", "tba-contracts-identity"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-protocol-dmarc"
+path = "pkgs/50-protocols/tba-protocol-dmarc"
+layer = "50-protocols"
+order = "00"
+local_dependencies = ["tba-contracts-dns"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2983,7 +3039,15 @@ name = "tba-protocol-gnap"
 path = "pkgs/50-protocols/tba-protocol-gnap"
 layer = "50-protocols"
 order = "00"
-local_dependencies = ["tba-concrete-claim-assertions", "tba-concrete-claim-subject-identifiers", "tba-concrete-claim-updated-at-rfc3339", "tba-capability-delegated-access-negotiation", "tba-contracts-identity"]
+local_dependencies = ["tba-capability-delegated-access-negotiation", "tba-concrete-claim-assertions", "tba-concrete-claim-subject-identifiers", "tba-concrete-claim-updated-at-rfc3339", "tba-contracts-identity"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-protocol-identity-did-core"
+path = "pkgs/50-protocols/tba-protocol-identity-did-core"
+layer = "50-protocols"
+order = "00"
+local_dependencies = ["tba-concrete-did-document", "tba-contracts-identity-document"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2991,7 +3055,7 @@ name = "tba-protocol-jwt"
 path = "pkgs/50-protocols/tba-protocol-jwt"
 layer = "50-protocols"
 order = "00"
-local_dependencies = ["tba-concrete-claim-audience", "tba-concrete-claim-expiration", "tba-concrete-claim-issued-at", "tba-concrete-claim-issuer", "tba-concrete-claim-jwt-id", "tba-concrete-claim-not-before", "tba-concrete-claim-subject", "tba-contracts-identity", "tba-concrete-jwt", "tba-contracts-protected-envelope"]
+local_dependencies = ["tba-concrete-claim-audience", "tba-concrete-claim-expiration", "tba-concrete-claim-issued-at", "tba-concrete-claim-issuer", "tba-concrete-claim-jwt-id", "tba-concrete-claim-not-before", "tba-concrete-claim-subject", "tba-concrete-jwt", "tba-contracts-identity", "tba-contracts-protected-envelope"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2999,7 +3063,7 @@ name = "tba-protocol-oid4vci"
 path = "pkgs/50-protocols/tba-protocol-oid4vci"
 layer = "50-protocols"
 order = "00"
-local_dependencies = ["tba-concrete-claim-audience", "tba-concrete-claim-issued-at", "tba-concrete-claim-nonce", "tba-capability-digital-credential-issuance", "tba-contracts-identity"]
+local_dependencies = ["tba-capability-digital-credential-issuance", "tba-concrete-claim-audience", "tba-concrete-claim-issued-at", "tba-concrete-claim-nonce", "tba-contracts-identity"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -3007,7 +3071,47 @@ name = "tba-protocol-oid4vp"
 path = "pkgs/50-protocols/tba-protocol-oid4vp"
 layer = "50-protocols"
 order = "00"
-local_dependencies = ["tba-concrete-claim-client-id", "tba-concrete-claim-nonce", "tba-concrete-claim-transaction-id", "tba-capability-digital-credential-presentation", "tba-contracts-identity"]
+local_dependencies = ["tba-capability-digital-credential-presentation", "tba-concrete-claim-client-id", "tba-concrete-claim-nonce", "tba-concrete-claim-transaction-id", "tba-contracts-identity"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-protocol-security-cose"
+path = "pkgs/50-protocols/tba-protocol-security-cose"
+layer = "50-protocols"
+order = "00"
+local_dependencies = ["tba-contracts-protected-envelope", "tba-primitives-identity"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-protocol-security-event-set"
+path = "pkgs/50-protocols/tba-protocol-security-event-set"
+layer = "50-protocols"
+order = "00"
+local_dependencies = ["tba-bases-security-event", "tba-concrete-claim-audience", "tba-concrete-claim-issued-at", "tba-concrete-claim-issuer", "tba-concrete-claim-jwt-id", "tba-concrete-claim-security-events", "tba-concrete-claim-subject", "tba-concrete-set", "tba-contracts-identity", "tba-provider-set-receiver", "tba-provider-set-transmitter"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-protocol-security-jose"
+path = "pkgs/50-protocols/tba-protocol-security-jose"
+layer = "50-protocols"
+order = "00"
+local_dependencies = ["tba-concrete-jose", "tba-contracts-identity"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-protocol-security-jwe"
+path = "pkgs/50-protocols/tba-protocol-security-jwe"
+layer = "50-protocols"
+order = "00"
+local_dependencies = ["tba-contracts-protected-envelope", "tba-primitives-identity"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-protocol-security-jws"
+path = "pkgs/50-protocols/tba-protocol-security-jws"
+layer = "50-protocols"
+order = "00"
+local_dependencies = ["tba-contracts-protected-envelope", "tba-primitives-identity"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -3023,103 +3127,7 @@ name = "tba-protocol-webauthn"
 path = "pkgs/50-protocols/tba-protocol-webauthn"
 layer = "50-protocols"
 order = "00"
-local_dependencies = ["tba-concrete-cose", "tba-provider-cose-cryptography", "tba-contracts-identity", "tba-primitives-identity", "tba-capability-public-key-authentication", "tba-capability-public-key-registration"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tba-profile-credential-sd-jwt-vc"
-path = "pkgs/55-profiles/tba-profile-credential-sd-jwt-vc"
-layer = "50-protocols"
-order = "00"
-local_dependencies = ["tba-concrete-claim-credential-status", "tba-concrete-claim-credential-type", "tba-contracts-identity", "tba-concrete-sd-jwt", "tba-concrete-sd-jwt-vc-credential"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tba-protocol-credential-iso-mdoc"
-path = "pkgs/50-protocols/tba-protocol-credential-iso-mdoc"
-layer = "50-protocols"
-order = "00"
-local_dependencies = ["tba-bases-digital-credential", "tba-contracts-identity", "tba-concrete-mdoc", "tba-concrete-mdoc-credential", "tba-provider-mdoc-issuer", "tba-provider-mdoc-verifier"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tba-protocol-credential-w3c-vcdm"
-path = "pkgs/50-protocols/tba-protocol-credential-w3c-vcdm"
-layer = "50-protocols"
-order = "00"
-local_dependencies = ["tba-concrete-verifiable-credential", "tba-concrete-verifiable-presentation"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tba-protocol-identity-did-core"
-path = "pkgs/50-protocols/tba-protocol-identity-did-core"
-layer = "50-protocols"
-order = "00"
-local_dependencies = ["tba-concrete-did-document", "tba-contracts-identity-document"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tba-profile-oauth-jwt-access-token"
-path = "pkgs/55-profiles/tba-profile-oauth-jwt-access-token"
-layer = "50-protocols"
-order = "00"
-local_dependencies = []
-same_layer_dependencies = []
-
-[[packages]]
-name = "tba-protocol-security-event-set"
-path = "pkgs/50-protocols/tba-protocol-security-event-set"
-layer = "50-protocols"
-order = "00"
-local_dependencies = ["tba-concrete-claim-audience", "tba-concrete-claim-issued-at", "tba-concrete-claim-issuer", "tba-concrete-claim-jwt-id", "tba-concrete-claim-security-events", "tba-concrete-claim-subject", "tba-contracts-identity", "tba-bases-security-event", "tba-concrete-set", "tba-provider-set-receiver", "tba-provider-set-transmitter"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tba-protocol-security-cose"
-path = "pkgs/50-protocols/tba-protocol-security-cose"
-layer = "50-protocols"
-order = "00"
-local_dependencies = ["tba-primitives-identity", "tba-contracts-protected-envelope"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tba-protocol-security-jose"
-path = "pkgs/50-protocols/tba-protocol-security-jose"
-layer = "50-protocols"
-order = "00"
-local_dependencies = ["tba-contracts-identity", "tba-concrete-jose"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tba-protocol-security-jwe"
-path = "pkgs/50-protocols/tba-protocol-security-jwe"
-layer = "50-protocols"
-order = "00"
-local_dependencies = ["tba-primitives-identity", "tba-contracts-protected-envelope"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tba-protocol-security-jws"
-path = "pkgs/50-protocols/tba-protocol-security-jws"
-layer = "50-protocols"
-order = "00"
-local_dependencies = ["tba-primitives-identity", "tba-contracts-protected-envelope"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tba-profile-workload-credential-wimse-wit"
-path = "pkgs/55-profiles/tba-profile-workload-credential-wimse-wit"
-layer = "50-protocols"
-order = "00"
-local_dependencies = []
-same_layer_dependencies = []
-
-[[packages]]
-name = "tba-profile-workload-proof-wimse-wpt"
-path = "pkgs/55-profiles/tba-profile-workload-proof-wimse-wpt"
-layer = "50-protocols"
-order = "00"
-local_dependencies = []
+local_dependencies = ["tba-capability-public-key-authentication", "tba-capability-public-key-registration", "tba-concrete-cose", "tba-contracts-identity", "tba-primitives-identity", "tba-provider-cose-cryptography"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -3135,7 +3143,7 @@ name = "tba-protocol-workload-spiffe-svid"
 path = "pkgs/50-protocols/tba-protocol-workload-spiffe-svid"
 layer = "50-protocols"
 order = "00"
-local_dependencies = ["tba-concrete-jwt-svid-credential", "tba-concrete-x509-svid-credential"]
+local_dependencies = ["tba-concrete-certificate-x509", "tba-concrete-jwt", "tba-concrete-jwt-svid-credential", "tba-concrete-x509-svid-credential", "tba-contracts-security-trust", "tba-provider-jose-cryptography"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -3147,20 +3155,12 @@ local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
-name = "tba-profile-fido2-server"
-path = "pkgs/55-profiles/tba-profile-fido2-server"
+name = "tba-protocol-workload-wimse-identifier"
+path = "pkgs/50-protocols/tba-protocol-workload-wimse-identifier"
 layer = "50-protocols"
-order = "01"
-local_dependencies = ["tba-protocol-webauthn", "tba-contracts-identity"]
-same_layer_dependencies = ["tba-protocol-webauthn"]
-
-[[packages]]
-name = "tba-profile-haip"
-path = "pkgs/55-profiles/tba-profile-haip"
-layer = "50-protocols"
-order = "01"
-local_dependencies = ["tba-protocol-oid4vci", "tba-protocol-oid4vp", "tba-contracts-identity"]
-same_layer_dependencies = ["tba-protocol-oid4vci", "tba-protocol-oid4vp"]
+order = "00"
+local_dependencies = []
+same_layer_dependencies = []
 
 [[packages]]
 name = "tba-protocol-zcap"
@@ -3175,63 +3175,143 @@ name = "tba-protocol-oauth"
 path = "pkgs/50-protocols/tba-protocol-oauth"
 layer = "50-protocols"
 order = "01"
-local_dependencies = ["tba-protocol-gnap", "tba-capability-authorization-request-staging", "tba-concrete-authorization-scope-set-matcher", "tba-concrete-claim-access-token-digest", "tba-concrete-claim-actor", "tba-concrete-claim-client-id", "tba-concrete-claim-confirmation", "tba-concrete-claim-http-method", "tba-concrete-claim-http-uri", "tba-concrete-claim-issued-at", "tba-concrete-claim-jwt-id", "tba-concrete-claim-may-act", "tba-concrete-claim-nonce", "tba-concrete-claim-scope", "tba-capability-client-registration", "tba-contracts-identity", "tba-primitives-identity", "tba-provider-identity-jose", "tba-provider-security-proof-pkce", "tba-contracts-security-trust", "tba-capability-token-introspection", "tba-capability-token-issuance", "tba-capability-token-revocation"]
+local_dependencies = ["tba-capability-authorization-request-staging", "tba-capability-client-registration", "tba-capability-token-introspection", "tba-capability-token-issuance", "tba-capability-token-revocation", "tba-concrete-authorization-scope-set-matcher", "tba-concrete-claim-access-token-digest", "tba-concrete-claim-actor", "tba-concrete-claim-client-id", "tba-concrete-claim-confirmation", "tba-concrete-claim-http-method", "tba-concrete-claim-http-uri", "tba-concrete-claim-issued-at", "tba-concrete-claim-jwt-id", "tba-concrete-claim-may-act", "tba-concrete-claim-nonce", "tba-concrete-claim-scope", "tba-contracts-identity", "tba-contracts-security-trust", "tba-primitives-identity", "tba-protocol-gnap", "tba-provider-identity-jose", "tba-provider-security-proof-pkce"]
 same_layer_dependencies = ["tba-protocol-gnap"]
-
-[[packages]]
-name = "tba-profile-credential-vc-jose-cose"
-path = "pkgs/55-profiles/tba-profile-credential-vc-jose-cose"
-layer = "50-protocols"
-order = "01"
-local_dependencies = ["tba-primitives-identity", "tba-contracts-protected-envelope", "tba-protocol-security-cose", "tba-protocol-security-jws", "tba-concrete-vc-cose-credential", "tba-concrete-vc-jose-credential"]
-same_layer_dependencies = ["tba-protocol-security-cose", "tba-protocol-security-jws"]
-
-[[packages]]
-name = "tba-profile-workload-credential-cwt-svid-extension"
-path = "pkgs/55-profiles/tba-profile-workload-credential-cwt-svid-extension"
-layer = "50-protocols"
-order = "01"
-local_dependencies = ["tba-protocol-cwt", "tba-contracts-proof-of-possession", "tba-protocol-security-cose", "tba-protocol-workload-spiffe-svid"]
-same_layer_dependencies = ["tba-protocol-cwt", "tba-protocol-security-cose", "tba-protocol-workload-spiffe-svid"]
-
-[[packages]]
-name = "tba-profile-workload-credential-spiffe-wit-svid"
-path = "pkgs/55-profiles/tba-profile-workload-credential-spiffe-wit-svid"
-layer = "50-protocols"
-order = "01"
-local_dependencies = ["tba-contracts-proof-of-possession", "tba-profile-workload-credential-wimse-wit", "tba-protocol-workload-spiffe-svid"]
-same_layer_dependencies = ["tba-profile-workload-credential-wimse-wit", "tba-protocol-workload-spiffe-svid"]
-
-[[packages]]
-name = "tba-protocol-oidc"
-path = "pkgs/50-protocols/tba-protocol-oidc"
-layer = "50-protocols"
-order = "02"
-local_dependencies = ["tba-protocol-oauth", "tba-concrete-claim-access-token-hash", "tba-concrete-claim-address", "tba-concrete-claim-address-country-code", "tba-concrete-claim-also-known-as", "tba-concrete-claim-authentication-context", "tba-concrete-claim-authentication-methods", "tba-concrete-claim-authentication-time", "tba-concrete-claim-authorization-code-hash", "tba-concrete-claim-authorized-party", "tba-concrete-claim-birth-family-name", "tba-concrete-claim-birth-given-name", "tba-concrete-claim-birth-middle-name", "tba-concrete-claim-birthdate", "tba-concrete-claim-email", "tba-concrete-claim-email-verified", "tba-concrete-claim-family-name", "tba-concrete-claim-gender", "tba-concrete-claim-given-name", "tba-concrete-claim-locale", "tba-concrete-claim-middle-name", "tba-concrete-claim-msisdn", "tba-concrete-claim-name", "tba-concrete-claim-nationalities", "tba-concrete-claim-nickname", "tba-concrete-claim-nonce", "tba-concrete-claim-phone-number", "tba-concrete-claim-phone-number-verified", "tba-concrete-claim-picture-uri", "tba-concrete-claim-place-of-birth", "tba-concrete-claim-preferred-username", "tba-concrete-claim-profile-uri", "tba-concrete-claim-salutation", "tba-concrete-claim-session-id", "tba-concrete-claim-state-hash", "tba-concrete-claim-title", "tba-concrete-claim-transaction-id", "tba-concrete-claim-updated-at", "tba-concrete-claim-verified-claims", "tba-concrete-claim-website-uri", "tba-concrete-claim-zoneinfo", "tba-concrete-identity-assurance", "tba-contracts-identity", "tba-primitives-identity", "tba-provider-identity-jose", "tba-concrete-pairwise-subject-identifier", "tba-concrete-public-subject-identifier", "tba-provider-claims-local"]
-same_layer_dependencies = ["tba-protocol-oauth"]
 
 [[packages]]
 name = "tba-protocol-oauth-protected-resource"
 path = "pkgs/50-protocols/tba-protocol-oauth-protected-resource"
 layer = "50-protocols"
 order = "02"
-local_dependencies = ["tba-protocol-jwt", "tba-protocol-oauth", "tba-provider-authorization-resource-server-verifier", "tba-contracts-identity", "tba-capability-protected-resource-authorization", "tba-provider-security-dpop-cnf-binding-validator", "tba-provider-security-mtls-cnf-binding-validator", "tba-contracts-security-trust"]
+local_dependencies = ["tba-capability-protected-resource-authorization", "tba-contracts-identity", "tba-contracts-security-trust", "tba-protocol-jwt", "tba-protocol-oauth", "tba-provider-authorization-resource-server-verifier", "tba-provider-security-dpop-cnf-binding-validator", "tba-provider-security-mtls-cnf-binding-validator"]
 same_layer_dependencies = ["tba-protocol-jwt", "tba-protocol-oauth"]
+
+[[packages]]
+name = "tba-protocol-oidc"
+path = "pkgs/50-protocols/tba-protocol-oidc"
+layer = "50-protocols"
+order = "02"
+local_dependencies = ["tba-concrete-claim-access-token-hash", "tba-concrete-claim-address", "tba-concrete-claim-address-country-code", "tba-concrete-claim-also-known-as", "tba-concrete-claim-authentication-context", "tba-concrete-claim-authentication-methods", "tba-concrete-claim-authentication-time", "tba-concrete-claim-authorization-code-hash", "tba-concrete-claim-authorized-party", "tba-concrete-claim-birth-family-name", "tba-concrete-claim-birth-given-name", "tba-concrete-claim-birth-middle-name", "tba-concrete-claim-birthdate", "tba-concrete-claim-email", "tba-concrete-claim-email-verified", "tba-concrete-claim-family-name", "tba-concrete-claim-gender", "tba-concrete-claim-given-name", "tba-concrete-claim-locale", "tba-concrete-claim-middle-name", "tba-concrete-claim-msisdn", "tba-concrete-claim-name", "tba-concrete-claim-nationalities", "tba-concrete-claim-nickname", "tba-concrete-claim-nonce", "tba-concrete-claim-phone-number", "tba-concrete-claim-phone-number-verified", "tba-concrete-claim-picture-uri", "tba-concrete-claim-place-of-birth", "tba-concrete-claim-preferred-username", "tba-concrete-claim-profile-uri", "tba-concrete-claim-salutation", "tba-concrete-claim-session-id", "tba-concrete-claim-state-hash", "tba-concrete-claim-title", "tba-concrete-claim-transaction-id", "tba-concrete-claim-updated-at", "tba-concrete-claim-verified-claims", "tba-concrete-claim-website-uri", "tba-concrete-claim-zoneinfo", "tba-concrete-identity-assurance", "tba-concrete-pairwise-subject-identifier", "tba-concrete-public-subject-identifier", "tba-contracts-identity", "tba-primitives-identity", "tba-protocol-oauth", "tba-provider-claims-local", "tba-provider-identity-jose"]
+same_layer_dependencies = ["tba-protocol-oauth"]
 
 [[packages]]
 name = "tba-protocol-oidc-relying-party"
 path = "pkgs/50-protocols/tba-protocol-oidc-relying-party"
 layer = "50-protocols"
 order = "03"
-local_dependencies = ["tba-protocol-oidc", "tba-concrete-claim-audience", "tba-concrete-claim-authentication-context", "tba-concrete-claim-authentication-methods", "tba-concrete-claim-authentication-time", "tba-concrete-claim-authorized-party", "tba-concrete-claim-expiration", "tba-concrete-claim-issued-at", "tba-concrete-claim-issuer", "tba-concrete-claim-nonce", "tba-concrete-claim-subject", "tba-contracts-identity", "tba-provider-security-proof-pkce"]
+local_dependencies = ["tba-concrete-claim-audience", "tba-concrete-claim-authentication-context", "tba-concrete-claim-authentication-methods", "tba-concrete-claim-authentication-time", "tba-concrete-claim-authorized-party", "tba-concrete-claim-expiration", "tba-concrete-claim-issued-at", "tba-concrete-claim-issuer", "tba-concrete-claim-nonce", "tba-concrete-claim-subject", "tba-contracts-identity", "tba-protocol-oidc", "tba-provider-security-proof-pkce"]
 same_layer_dependencies = ["tba-protocol-oidc"]
+
+[[packages]]
+name = "tba-profile-communications-identity-bimi"
+path = "pkgs/55-profiles/tba-profile-communications-identity-bimi"
+layer = "55-profiles"
+order = "00"
+local_dependencies = ["tba-codec-x509-logotype", "tba-contracts-dns", "tba-contracts-security-trust", "tba-protocol-bimi", "tba-protocol-dmarc"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-profile-credential-sd-jwt-vc"
+path = "pkgs/55-profiles/tba-profile-credential-sd-jwt-vc"
+layer = "55-profiles"
+order = "00"
+local_dependencies = ["tba-concrete-claim-credential-status", "tba-concrete-claim-credential-type", "tba-concrete-sd-jwt", "tba-concrete-sd-jwt-vc-credential", "tba-contracts-identity"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-profile-credential-vc-jose-cose"
+path = "pkgs/55-profiles/tba-profile-credential-vc-jose-cose"
+layer = "55-profiles"
+order = "00"
+local_dependencies = ["tba-concrete-vc-cose-credential", "tba-concrete-vc-jose-credential", "tba-contracts-protected-envelope", "tba-primitives-identity", "tba-protocol-security-cose", "tba-protocol-security-jws"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-profile-fido2-server"
+path = "pkgs/55-profiles/tba-profile-fido2-server"
+layer = "55-profiles"
+order = "00"
+local_dependencies = ["tba-contracts-identity", "tba-protocol-webauthn"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-profile-haip"
+path = "pkgs/55-profiles/tba-profile-haip"
+layer = "55-profiles"
+order = "00"
+local_dependencies = ["tba-contracts-identity", "tba-protocol-oid4vci", "tba-protocol-oid4vp"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-profile-oauth-jwt-access-token"
+path = "pkgs/55-profiles/tba-profile-oauth-jwt-access-token"
+layer = "55-profiles"
+order = "00"
+local_dependencies = []
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-profile-workload-credential-cwt-svid-extension"
+path = "pkgs/55-profiles/tba-profile-workload-credential-cwt-svid-extension"
+layer = "55-profiles"
+order = "00"
+local_dependencies = ["tba-contracts-proof-of-possession", "tba-protocol-cwt", "tba-protocol-security-cose", "tba-protocol-workload-spiffe-svid"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-profile-workload-credential-wimse-wic"
+path = "pkgs/55-profiles/tba-profile-workload-credential-wimse-wic"
+layer = "55-profiles"
+order = "00"
+local_dependencies = ["tba-concrete-certificate-x509", "tba-concrete-wic", "tba-protocol-workload-wimse-identifier"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-profile-workload-credential-wimse-wit"
+path = "pkgs/55-profiles/tba-profile-workload-credential-wimse-wit"
+layer = "55-profiles"
+order = "00"
+local_dependencies = ["tba-concrete-jwt", "tba-concrete-wit", "tba-protocol-workload-wimse-identifier", "tba-provider-jose-cryptography"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-profile-workload-authentication-wimse-mtls"
+path = "pkgs/55-profiles/tba-profile-workload-authentication-wimse-mtls"
+layer = "55-profiles"
+order = "01"
+local_dependencies = ["tba-concrete-certificate-x509", "tba-concrete-wic", "tba-contracts-security-trust", "tba-profile-workload-credential-wimse-wic", "tba-protocol-workload-wimse-identifier"]
+same_layer_dependencies = ["tba-profile-workload-credential-wimse-wic"]
+
+[[packages]]
+name = "tba-profile-workload-proof-wimse-wpt"
+path = "pkgs/55-profiles/tba-profile-workload-proof-wimse-wpt"
+layer = "55-profiles"
+order = "01"
+local_dependencies = ["tba-concrete-jwt", "tba-primitives-identity", "tba-profile-workload-credential-wimse-wit", "tba-provider-jose-cryptography"]
+same_layer_dependencies = ["tba-profile-workload-credential-wimse-wit"]
+
+[[packages]]
+name = "tba-profile-workload-credential-spiffe-wit-svid"
+path = "pkgs/55-profiles/tba-profile-workload-credential-spiffe-wit-svid"
+layer = "55-profiles"
+order = "02"
+local_dependencies = ["tba-concrete-jwt", "tba-contracts-proof-of-possession", "tba-profile-workload-credential-wimse-wit", "tba-profile-workload-proof-wimse-wpt", "tba-protocol-workload-spiffe-svid", "tba-provider-jose-cryptography"]
+same_layer_dependencies = ["tba-profile-workload-credential-wimse-wit", "tba-profile-workload-proof-wimse-wpt"]
 
 [[packages]]
 name = "tba-runtime-authorization-policy"
 path = "pkgs/60-runtime/tba-runtime-authorization-policy"
 layer = "60-runtime"
 order = "00"
-local_dependencies = ["tba-capability-access-governance", "tba-concrete-authority-graph", "tba-concrete-authorization-policy-rules", "tba-contracts-identity", "tba-primitives-identity", "tba-capability-policy-administration", "tba-capability-policy-assurance", "tba-concrete-policy-decision-engine-default", "tba-contracts-release", "tba-provider-security-authorization-provenance-builder"]
+local_dependencies = ["tba-capability-access-governance", "tba-capability-policy-administration", "tba-capability-policy-assurance", "tba-concrete-authority-graph", "tba-concrete-authorization-policy-rules", "tba-concrete-policy-decision-engine-default", "tba-contracts-identity", "tba-contracts-release", "tba-primitives-identity", "tba-provider-authorization-policy-decision-engine", "tba-provider-security-authorization-provenance-builder"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-runtime-identity"
+path = "pkgs/60-runtime/tba-runtime-identity"
+layer = "60-runtime"
+order = "00"
+local_dependencies = ["tba-capability-protected-envelope", "tba-capability-public-key-authentication", "tba-capability-public-key-credential-management", "tba-capability-public-key-registration", "tba-contracts-identity", "tba-profile-credential-vc-jose-cose", "tba-profile-workload-authentication-wimse-mtls", "tba-profile-workload-credential-cwt-svid-extension", "tba-protocol-cwt", "tba-protocol-identity-did-core", "tba-protocol-security-cose", "tba-protocol-security-jws", "tba-protocol-webauthn", "tba-provider-identity-jose", "tba-provider-secret-hashing-bcrypt", "tba-runtime-identity-storage", "tba-storage-core"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -3243,19 +3323,11 @@ local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
-name = "tba-runtime-identity"
-path = "pkgs/60-runtime/tba-runtime-identity"
-layer = "60-runtime"
-order = "00"
-local_dependencies = ["tba-capability-protected-envelope", "tba-capability-public-key-authentication", "tba-capability-public-key-credential-management", "tba-capability-public-key-registration", "tba-contracts-identity", "tba-profile-credential-vc-jose-cose", "tba-profile-workload-credential-cwt-svid-extension", "tba-protocol-cwt", "tba-protocol-identity-did-core", "tba-protocol-security-cose", "tba-protocol-security-jws", "tba-protocol-webauthn", "tba-provider-identity-jose", "tba-provider-secret-hashing-bcrypt", "tba-runtime-identity-storage", "tba-storage-core"]
-same_layer_dependencies = []
-
-[[packages]]
 name = "tba-certification-release"
 path = "pkgs/60-runtime/tba-certification-release"
 layer = "60-runtime"
 order = "01"
-local_dependencies = ["tba-contracts-identity", "tba-runtime-identity", "tba-concrete-machine-identity", "tba-contracts-release"]
+local_dependencies = ["tba-concrete-machine-identity", "tba-contracts-identity", "tba-contracts-release", "tba-runtime-identity"]
 same_layer_dependencies = ["tba-runtime-identity"]
 
 [[packages]]
@@ -3263,23 +3335,23 @@ name = "tba-cli-identity"
 path = "pkgs/60-runtime/tba-cli-identity"
 layer = "60-runtime"
 order = "01"
-local_dependencies = ["tba-runtime-identity-authoring", "tba-runtime-identity", "tba-runtime-identity-storage", "tba-capability-operator-administration", "tba-provider-secret-hashing-bcrypt"]
-same_layer_dependencies = ["tba-runtime-identity-authoring", "tba-runtime-identity"]
+local_dependencies = ["tba-capability-operator-administration", "tba-provider-secret-hashing-bcrypt", "tba-runtime-identity", "tba-runtime-identity-authoring", "tba-runtime-identity-storage"]
+same_layer_dependencies = ["tba-runtime-identity", "tba-runtime-identity-authoring"]
 
 [[packages]]
 name = "tba-operator-identity"
 path = "pkgs/60-runtime/tba-operator-identity"
 layer = "60-runtime"
 order = "02"
-local_dependencies = ["tba-certification-release", "tba-runtime-authorization-policy", "tba-cli-identity"]
-same_layer_dependencies = ["tba-certification-release", "tba-runtime-authorization-policy", "tba-cli-identity"]
+local_dependencies = ["tba-certification-release", "tba-cli-identity", "tba-runtime-authorization-policy"]
+same_layer_dependencies = ["tba-certification-release", "tba-cli-identity", "tba-runtime-authorization-policy"]
 
 [[packages]]
 name = "tba-server-identity"
 path = "pkgs/60-runtime/tba-server-identity"
 layer = "60-runtime"
 order = "02"
-local_dependencies = ["tba-capability-account-self-service", "tba-capability-api-key-authentication", "tba-capability-artifact-processing", "tba-protocol-gnap", "tba-protocol-oauth", "tba-protocol-oidc", "tba-certification-release", "tba-capability-authorization-request-staging", "tba-capability-client-registration", "tba-capability-client-secret-authentication", "tba-capability-identity-administration", "tba-contracts-identity", "tba-provider-identity-jose", "tba-runtime-identity", "tba-storage-audit", "tba-storage-oauth", "tba-storage-operator", "tba-storage-principals", "tba-runtime-identity-storage", "tba-storage-tenancy", "tba-capability-password-authentication", "tba-capability-realm-administration", "tba-provider-replay-memory", "tba-capability-replay-protection", "tba-provider-secret-hashing-bcrypt", "tba-capability-service-key-authentication", "tba-capability-tenant-administration", "tba-capability-token-exchange", "tba-capability-token-introspection", "tba-capability-token-issuance", "tba-capability-token-revocation"]
+local_dependencies = ["tba-capability-account-self-service", "tba-capability-api-key-authentication", "tba-capability-artifact-processing", "tba-capability-authorization-request-staging", "tba-capability-client-registration", "tba-capability-client-secret-authentication", "tba-capability-identity-administration", "tba-capability-password-authentication", "tba-capability-realm-administration", "tba-capability-replay-protection", "tba-capability-service-key-authentication", "tba-capability-tenant-administration", "tba-capability-token-exchange", "tba-capability-token-introspection", "tba-capability-token-issuance", "tba-capability-token-revocation", "tba-certification-release", "tba-contracts-identity", "tba-protocol-gnap", "tba-protocol-oauth", "tba-protocol-oidc", "tba-provider-identity-jose", "tba-provider-replay-memory", "tba-provider-secret-hashing-bcrypt", "tba-runtime-identity", "tba-runtime-identity-storage", "tba-storage-audit", "tba-storage-oauth", "tba-storage-operator", "tba-storage-principals", "tba-storage-tenancy"]
 same_layer_dependencies = ["tba-certification-release", "tba-runtime-identity"]
 
 [[packages]]
@@ -3295,7 +3367,7 @@ name = "tba-runtime-identity-administration"
 path = "pkgs/60-runtime/tba-runtime-identity-administration"
 layer = "60-runtime"
 order = "03"
-local_dependencies = ["tba-capability-adaptive-authentication", "tba-capability-administrative-resource", "tba-durability-authorization-policy", "tba-concrete-capability", "tba-concrete-device-identity", "tba-provider-authentication-anomaly-detector", "tba-provider-identity-administration-relationship-graph", "tba-capability-identity-administration", "tba-contracts-identity", "tba-primitives-identity", "tba-durability-identity", "tba-server-identity", "tba-concrete-jose", "tba-concrete-mfa-factor", "tba-capability-operator-administration", "tba-concrete-passwordless-credential", "tba-capability-realm-administration", "tba-capability-tenant-administration", "tba-concrete-trust-federation-graph", "tba-concrete-webauthn-credential", "tba-durability-webauthn", "tba-concrete-workload-identity"]
+local_dependencies = ["tba-capability-adaptive-authentication", "tba-capability-administrative-resource", "tba-capability-identity-administration", "tba-capability-operator-administration", "tba-capability-realm-administration", "tba-capability-tenant-administration", "tba-concrete-capability", "tba-concrete-device-identity", "tba-concrete-jose", "tba-concrete-mfa-factor", "tba-concrete-passwordless-credential", "tba-concrete-trust-federation-graph", "tba-concrete-webauthn-credential", "tba-concrete-workload-identity", "tba-contracts-identity", "tba-durability-authorization-policy", "tba-durability-identity", "tba-durability-webauthn", "tba-primitives-identity", "tba-provider-authentication-anomaly-detector", "tba-provider-identity-administration-relationship-graph", "tba-server-identity"]
 same_layer_dependencies = ["tba-server-identity"]
 
 [[packages]]
@@ -3307,19 +3379,19 @@ local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
+name = "tba-credentials"
+path = "pkgs/70-facade/tba-credentials"
+layer = "70-facade"
+order = "00"
+local_dependencies = ["tba-concrete-credential-api-key", "tba-concrete-credential-client-secret", "tba-concrete-credential-dpop-key", "tba-concrete-credential-mfa", "tba-concrete-credential-mtls-certificate", "tba-concrete-credential-passkey", "tba-concrete-credential-password", "tba-concrete-credential-password-reset", "tba-concrete-credential-service-key", "tba-contracts-digital-credential", "tba-contracts-identity", "tba-contracts-workload-identity", "tba-provider-identity-jose", "tba-provider-secret-hashing-bcrypt"]
+same_layer_dependencies = []
+
+[[packages]]
 name = "tbauth"
 path = "pkgs/70-facade/tbauth"
 layer = "70-facade"
 order = "00"
 local_dependencies = []
-same_layer_dependencies = []
-
-[[packages]]
-name = "tba-credentials"
-path = "pkgs/70-facade/tba-credentials"
-layer = "70-facade"
-order = "00"
-local_dependencies = ["tba-concrete-credential-api-key", "tba-concrete-credential-client-secret", "tba-concrete-credential-dpop-key", "tba-concrete-credential-mfa", "tba-concrete-credential-mtls-certificate", "tba-concrete-credential-passkey", "tba-concrete-credential-password", "tba-concrete-credential-password-reset", "tba-concrete-credential-service-key", "tba-contracts-digital-credential", "tba-contracts-identity", "tba-provider-identity-jose", "tba-provider-secret-hashing-bcrypt", "tba-contracts-workload-identity"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -3353,14 +3425,6 @@ layer = "75-clients"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
-
-[[packages]]
-name = "tba-middleware-policy-enforcement-asgi"
-path = "pkgs/85-middleware/tba-middleware-policy-enforcement-asgi"
-layer = "75-clients"
-order = "01"
-local_dependencies = ["tba-client-policy-decision"]
-same_layer_dependencies = ["tba-client-policy-decision"]
 
 [[packages]]
 name = "tba-router-administration-gate"
@@ -3411,19 +3475,19 @@ local_dependencies = ["tba-protocol-oauth"]
 same_layer_dependencies = []
 
 [[packages]]
-name = "tba-router-oauth-pushed-authorization-request"
-path = "pkgs/80-routers/tba-router-oauth-pushed-authorization-request"
-layer = "80-routers"
-order = "00"
-local_dependencies = ["tba-protocol-oauth", "tba-contracts-identity"]
-same_layer_dependencies = []
-
-[[packages]]
 name = "tba-router-oauth-protected-resource-metadata"
 path = "pkgs/80-routers/tba-router-oauth-protected-resource-metadata"
 layer = "80-routers"
 order = "00"
 local_dependencies = ["tba-protocol-oauth"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-router-oauth-pushed-authorization-request"
+path = "pkgs/80-routers/tba-router-oauth-pushed-authorization-request"
+layer = "80-routers"
+order = "00"
+local_dependencies = ["tba-contracts-identity", "tba-protocol-oauth"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -3491,19 +3555,19 @@ local_dependencies = ["tba-contracts-authorization", "tba-provider-authorization
 same_layer_dependencies = []
 
 [[packages]]
-name = "tba-router-resource-validation-metadata"
-path = "pkgs/80-routers/tba-router-resource-validation-metadata"
-layer = "80-routers"
-order = "00"
-local_dependencies = ["tba-contracts-identity"]
-same_layer_dependencies = []
-
-[[packages]]
 name = "tba-router-relying-party-session"
 path = "pkgs/80-routers/tba-router-relying-party-session"
 layer = "80-routers"
 order = "00"
 local_dependencies = ["tba-protocol-oidc-relying-party", "tba-runtime-relying-party-session"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-router-resource-validation-metadata"
+path = "pkgs/80-routers/tba-router-resource-validation-metadata"
+layer = "80-routers"
+order = "00"
+local_dependencies = ["tba-contracts-identity"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -3520,6 +3584,14 @@ path = "pkgs/80-routers/tba-router-webauthn"
 layer = "80-routers"
 order = "00"
 local_dependencies = ["tba-protocol-webauthn"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-middleware-policy-enforcement-asgi"
+path = "pkgs/85-middleware/tba-middleware-policy-enforcement-asgi"
+layer = "85-middleware"
+order = "00"
+local_dependencies = ["tba-client-policy-decision"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -3551,7 +3623,7 @@ name = "tba-app-backend-developer"
 path = "pkgs/90-backend-apps/tba-app-backend-developer"
 layer = "90-backend-apps"
 order = "01"
-local_dependencies = ["tba-auth", "tba-app-backend-core", "tba-router-administration-gate", "tba-router-oauth-authorization-server-metadata", "tba-router-oauth-registration", "tba-router-oidc-discovery"]
+local_dependencies = ["tba-app-backend-core", "tba-auth", "tba-router-administration-gate", "tba-router-oauth-authorization-server-metadata", "tba-router-oauth-registration", "tba-router-oidc-discovery"]
 same_layer_dependencies = ["tba-app-backend-core"]
 
 [[packages]]
@@ -3559,7 +3631,7 @@ name = "tba-app-backend-my-account"
 path = "pkgs/90-backend-apps/tba-app-backend-my-account"
 layer = "90-backend-apps"
 order = "01"
-local_dependencies = ["tba-capability-account-self-service", "tba-auth", "tba-app-backend-core", "tba-router-oidc-discovery", "tba-contracts-identity", "tba-server-identity"]
+local_dependencies = ["tba-app-backend-core", "tba-auth", "tba-capability-account-self-service", "tba-contracts-identity", "tba-router-oidc-discovery", "tba-server-identity"]
 same_layer_dependencies = ["tba-app-backend-core"]
 
 [[packages]]
@@ -3567,7 +3639,7 @@ name = "tba-app-backend-platform-administration"
 path = "pkgs/90-backend-apps/tba-app-backend-platform-administration"
 layer = "90-backend-apps"
 order = "01"
-local_dependencies = ["tba-auth", "tba-app-backend-core", "tba-router-administration-gate", "tba-contracts-identity", "tba-server-identity"]
+local_dependencies = ["tba-app-backend-core", "tba-auth", "tba-contracts-identity", "tba-router-administration-gate", "tba-server-identity"]
 same_layer_dependencies = ["tba-app-backend-core"]
 
 [[packages]]
@@ -3575,7 +3647,7 @@ name = "tba-app-backend-public"
 path = "pkgs/90-backend-apps/tba-app-backend-public"
 layer = "90-backend-apps"
 order = "01"
-local_dependencies = ["tba-auth", "tba-app-backend-core", "tba-router-oauth-authorization", "tba-router-oauth-authorization-server-metadata", "tba-router-oauth-device-authorization", "tba-router-oauth-introspection", "tba-router-oauth-pushed-authorization-request", "tba-router-oauth-protected-resource-metadata", "tba-router-oauth-registration", "tba-router-oauth-revocation", "tba-router-oauth-token", "tba-router-oauth-token-exchange", "tba-router-oidc-discovery", "tba-router-oidc-logout", "tba-router-oidc-userinfo", "tba-router-session-login", "tba-router-webauthn"]
+local_dependencies = ["tba-app-backend-core", "tba-auth", "tba-router-oauth-authorization", "tba-router-oauth-authorization-server-metadata", "tba-router-oauth-device-authorization", "tba-router-oauth-introspection", "tba-router-oauth-protected-resource-metadata", "tba-router-oauth-pushed-authorization-request", "tba-router-oauth-registration", "tba-router-oauth-revocation", "tba-router-oauth-token", "tba-router-oauth-token-exchange", "tba-router-oidc-discovery", "tba-router-oidc-logout", "tba-router-oidc-userinfo", "tba-router-session-login", "tba-router-webauthn"]
 same_layer_dependencies = ["tba-app-backend-core"]
 
 [[packages]]
@@ -3583,7 +3655,7 @@ name = "tba-app-backend-resource-validation"
 path = "pkgs/90-backend-apps/tba-app-backend-resource-validation"
 layer = "90-backend-apps"
 order = "01"
-local_dependencies = ["tba-auth", "tba-app-backend-core", "tba-router-oauth-introspection", "tba-router-oauth-protected-resource-metadata", "tba-router-oidc-discovery", "tba-router-resource-validation-metadata"]
+local_dependencies = ["tba-app-backend-core", "tba-auth", "tba-router-oauth-introspection", "tba-router-oauth-protected-resource-metadata", "tba-router-oidc-discovery", "tba-router-resource-validation-metadata"]
 same_layer_dependencies = ["tba-app-backend-core"]
 
 [[packages]]
@@ -3591,7 +3663,7 @@ name = "tba-app-backend-service-administration"
 path = "pkgs/90-backend-apps/tba-app-backend-service-administration"
 layer = "90-backend-apps"
 order = "01"
-local_dependencies = ["tba-auth", "tba-app-backend-core", "tba-router-administration-gate", "tba-router-oauth-introspection", "tba-router-oauth-protected-resource-metadata", "tba-router-oidc-discovery"]
+local_dependencies = ["tba-app-backend-core", "tba-auth", "tba-router-administration-gate", "tba-router-oauth-introspection", "tba-router-oauth-protected-resource-metadata", "tba-router-oidc-discovery"]
 same_layer_dependencies = ["tba-app-backend-core"]
 
 [[packages]]
@@ -3599,15 +3671,63 @@ name = "tba-app-backend-tenant-administration"
 path = "pkgs/90-backend-apps/tba-app-backend-tenant-administration"
 layer = "90-backend-apps"
 order = "01"
-local_dependencies = ["tba-auth", "tba-app-backend-core", "tba-router-administration-gate"]
+local_dependencies = ["tba-app-backend-core", "tba-auth", "tba-router-administration-gate"]
 same_layer_dependencies = ["tba-app-backend-core"]
+
+[[packages]]
+name = "tba-bases-identity-authenticator"
+path = "pkgs/deprecated/tba-bases-identity-authenticator"
+layer = "deprecated"
+order = "00"
+local_dependencies = ["tba-bases-authenticator"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-bases-identity-claims"
+path = "pkgs/deprecated/tba-bases-identity-claims"
+layer = "deprecated"
+order = "00"
+local_dependencies = ["tba-bases-claim"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-bases-public-key-authenticator"
+path = "pkgs/deprecated/tba-bases-public-key-authenticator"
+layer = "deprecated"
+order = "00"
+local_dependencies = ["tba-bases-public-key-authentication"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-bases-security-artifact"
+path = "pkgs/deprecated/tba-bases-security-artifact"
+layer = "deprecated"
+order = "00"
+local_dependencies = ["tba-bases-protected-artifact"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-provider-jose-swarmauri"
+path = "pkgs/deprecated/tba-provider-jose-swarmauri"
+layer = "deprecated"
+order = "00"
+local_dependencies = ["tba-provider-identity-jose"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-provider-security-cose"
+path = "pkgs/deprecated/tba-provider-security-cose"
+layer = "deprecated"
+order = "00"
+local_dependencies = ["tba-concrete-cose", "tba-provider-cose-cryptography"]
+same_layer_dependencies = []
 
 [[packages]]
 name = "tigrbl-account-self-service"
 path = "pkgs/deprecated/tigrbl-account-self-service"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-capability-account-self-service"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3615,7 +3735,7 @@ name = "tigrbl-attestation-appraisal"
 path = "pkgs/deprecated/tigrbl-attestation-appraisal"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-capability-attestation-appraisal"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3623,7 +3743,7 @@ name = "tigrbl-auth-protocol-oidc-backchannel-replay-store"
 path = "pkgs/deprecated/tigrbl-auth-protocol-oidc-backchannel-replay-store"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-contracts-identity"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3631,7 +3751,7 @@ name = "tigrbl-authenticator-webauthn-local"
 path = "pkgs/deprecated/tigrbl-authenticator-webauthn-local"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-bases-identity-authenticator", "tba-contracts-identity"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3639,7 +3759,7 @@ name = "tigrbl-authn-credentials"
 path = "pkgs/deprecated/tigrbl-authn-credentials"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-credentials"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3647,7 +3767,7 @@ name = "tigrbl-authz-policy-admin-gate"
 path = "pkgs/deprecated/tigrbl-authz-policy-admin-gate"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-router-administration-gate"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3655,7 +3775,7 @@ name = "tigrbl-authz-policy-invariant-registry"
 path = "pkgs/deprecated/tigrbl-authz-policy-invariant-registry"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-contracts-identity", "tba-primitives-identity"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3663,7 +3783,7 @@ name = "tigrbl-claim-access-token-hash-oidc-concrete"
 path = "pkgs/deprecated/tigrbl-claim-access-token-hash-oidc-concrete"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-concrete-claim-access-token-hash"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3671,7 +3791,7 @@ name = "tigrbl-corim-store-provider"
 path = "pkgs/deprecated/tigrbl-corim-store-provider"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-provider-corim-reference-memory"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3679,7 +3799,7 @@ name = "tigrbl-digital-credential-issuance"
 path = "pkgs/deprecated/tigrbl-digital-credential-issuance"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-capability-digital-credential-issuance"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3687,7 +3807,7 @@ name = "tigrbl-digital-credential-issuer-local"
 path = "pkgs/deprecated/tigrbl-digital-credential-issuer-local"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-capability-digital-credential-issuance"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3695,7 +3815,7 @@ name = "tigrbl-digital-credential-presentation"
 path = "pkgs/deprecated/tigrbl-digital-credential-presentation"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-capability-digital-credential-presentation"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3703,7 +3823,7 @@ name = "tigrbl-digital-presentation-verifier"
 path = "pkgs/deprecated/tigrbl-digital-presentation-verifier"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-capability-digital-credential-presentation"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3711,7 +3831,7 @@ name = "tigrbl-eap-acr-concrete"
 path = "pkgs/deprecated/tigrbl-eap-acr-concrete"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-protocol-oidc"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3719,7 +3839,7 @@ name = "tigrbl-grant-negotiation-capability"
 path = "pkgs/deprecated/tigrbl-grant-negotiation-capability"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-capability-delegated-access-negotiation"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3727,7 +3847,7 @@ name = "tigrbl-identity-admin-advanced-authenticator-registry"
 path = "pkgs/deprecated/tigrbl-identity-admin-advanced-authenticator-registry"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-runtime-identity-administration"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3735,7 +3855,7 @@ name = "tigrbl-identity-admin-control-plane"
 path = "pkgs/deprecated/tigrbl-identity-admin-control-plane"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-capability-administrative-resource", "tba-capability-identity-administration", "tba-capability-operator-administration", "tba-capability-realm-administration", "tba-capability-tenant-administration"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3743,7 +3863,7 @@ name = "tigrbl-identity-admin-federation-registry"
 path = "pkgs/deprecated/tigrbl-identity-admin-federation-registry"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-contracts-identity", "tba-primitives-identity"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3751,7 +3871,7 @@ name = "tigrbl-identity-admin-policy-registry"
 path = "pkgs/deprecated/tigrbl-identity-admin-policy-registry"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-contracts-identity", "tba-primitives-identity"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3759,7 +3879,7 @@ name = "tigrbl-identity-credentials"
 path = "pkgs/deprecated/tigrbl-identity-credentials"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-credentials", "tba-provider-identity-jose", "tba-runtime-identity", "tba-server-identity", "tba-storage-core"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3767,7 +3887,7 @@ name = "tigrbl-identity-credentials-concrete"
 path = "pkgs/deprecated/tigrbl-identity-credentials-concrete"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-bases-authentication-credential", "tba-concrete-corim", "tba-concrete-credential-api-key", "tba-concrete-credential-client-secret", "tba-concrete-credential-dpop-key", "tba-concrete-credential-mfa", "tba-concrete-credential-mtls-certificate", "tba-concrete-credential-passkey", "tba-concrete-credential-password", "tba-concrete-credential-password-reset", "tba-profile-credential-sd-jwt-vc", "tba-protocol-credential-iso-mdoc", "tba-protocol-credential-w3c-vcdm", "tba-concrete-credential-service-key", "tba-concrete-eat", "tba-contracts-identity", "tba-concrete-mdoc-credential", "tba-concrete-mfa-factor", "tba-concrete-passwordless-credential", "tba-concrete-sd-jwt-vc-credential", "tba-concrete-service-credential", "tba-concrete-webauthn-credential"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3775,7 +3895,7 @@ name = "tigrbl-identity-identities-concrete"
 path = "pkgs/deprecated/tigrbl-identity-identities-concrete"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-concrete-administrator-identity", "tba-bases-authentication-credential", "tba-concrete-client-identity", "tba-concrete-device-identity", "tba-contracts-identity", "tba-concrete-machine-identity", "tba-concrete-service-identity", "tba-concrete-user-identity", "tba-concrete-workload-identity"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3783,7 +3903,7 @@ name = "tigrbl-identity-oauth"
 path = "pkgs/deprecated/tigrbl-identity-oauth"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-app-backend-core", "tba-protocol-oauth", "tba-server-identity"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3791,7 +3911,7 @@ name = "tigrbl-identity-oidc"
 path = "pkgs/deprecated/tigrbl-identity-oidc"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-protocol-oidc", "tba-cli-identity"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3799,7 +3919,7 @@ name = "tigrbl-identity-resource-server"
 path = "pkgs/deprecated/tigrbl-identity-resource-server"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-protocol-oauth-protected-resource"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3807,7 +3927,7 @@ name = "tigrbl-identity-rp"
 path = "pkgs/deprecated/tigrbl-identity-rp"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-protocol-oidc-relying-party"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3815,7 +3935,7 @@ name = "tigrbl-oauth-bases"
 path = "pkgs/deprecated/tigrbl-oauth-bases"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-bases-authorization-policy", "tba-bases-token"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3823,7 +3943,7 @@ name = "tigrbl-oauth-scope-matcher"
 path = "pkgs/deprecated/tigrbl-oauth-scope-matcher"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-concrete-authorization-scope-set-matcher"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3831,7 +3951,7 @@ name = "tigrbl-oidc-bases"
 path = "pkgs/deprecated/tigrbl-oidc-bases"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-bases-authentication-assurance", "tba-bases-identity-claims", "tba-bases-identity-model"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3839,7 +3959,7 @@ name = "tigrbl-oidc-claims-concrete"
 path = "pkgs/deprecated/tigrbl-oidc-claims-concrete"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-protocol-oidc", "tba-concrete-identity-assurance"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3847,7 +3967,7 @@ name = "tigrbl-oidc-subject-strategy"
 path = "pkgs/deprecated/tigrbl-oidc-subject-strategy"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-concrete-pairwise-subject-identifier", "tba-concrete-public-subject-identifier"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3855,7 +3975,7 @@ name = "tigrbl-protocol-artifact-processing"
 path = "pkgs/deprecated/tigrbl-protocol-artifact-processing"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-capability-artifact-processing"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3863,7 +3983,7 @@ name = "tigrbl-pushed-authorization-capability"
 path = "pkgs/deprecated/tigrbl-pushed-authorization-capability"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-capability-authorization-request-staging"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3871,7 +3991,7 @@ name = "tigrbl-sd-jwt-vc-concrete"
 path = "pkgs/deprecated/tigrbl-sd-jwt-vc-concrete"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-profile-credential-sd-jwt-vc", "tba-concrete-sd-jwt-vc-credential"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3879,7 +3999,7 @@ name = "tigrbl-security-event-replay-store"
 path = "pkgs/deprecated/tigrbl-security-event-replay-store"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-contracts-identity", "tba-provider-replay-memory", "tba-bases-security-event"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3887,7 +4007,7 @@ name = "tigrbl-security-events"
 path = "pkgs/deprecated/tigrbl-security-events"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-capability-security-event-delivery"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3895,7 +4015,7 @@ name = "tigrbl-security-sender-constraint-validator"
 path = "pkgs/deprecated/tigrbl-security-sender-constraint-validator"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-capability-protected-resource-authorization"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3903,7 +4023,7 @@ name = "tigrbl-svid-verifier-provider"
 path = "pkgs/deprecated/tigrbl-svid-verifier-provider"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-concrete-svid", "tba-bases-workload-identity", "tba-contracts-workload-identity"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3911,7 +4031,7 @@ name = "tigrbl-vcdm-concrete"
 path = "pkgs/deprecated/tigrbl-vcdm-concrete"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-protocol-credential-w3c-vcdm", "tba-concrete-verifiable-credential", "tba-concrete-verifiable-presentation"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3919,7 +4039,7 @@ name = "tigrbl-workload-identity"
 path = "pkgs/deprecated/tigrbl-workload-identity"
 layer = "deprecated"
 order = "00"
-local_dependencies = ["tba-capability-workload-identity"]
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3927,7 +4047,7 @@ name = "tigrbl-advanced-authentication-capability"
 path = "pkgs/deprecated/tigrbl-advanced-authentication-capability"
 layer = "deprecated"
 order = "01"
-local_dependencies = ["tba-capability-adaptive-authentication", "tba-durability-authorization-policy", "tba-concrete-capability", "tba-provider-authentication-anomaly-detector", "tba-provider-identity-administration-relationship-graph", "tba-contracts-identity", "tba-primitives-identity", "tigrbl-identity-credentials-concrete", "tba-durability-identity", "tigrbl-identity-identities-concrete", "tba-concrete-jose", "tba-capability-mfa-challenge", "tba-concrete-trust-federation-graph", "tba-durability-webauthn"]
+local_dependencies = ["tigrbl-identity-credentials-concrete", "tigrbl-identity-identities-concrete"]
 same_layer_dependencies = ["tigrbl-identity-credentials-concrete", "tigrbl-identity-identities-concrete"]
 
 [[packages]]
@@ -3935,7 +4055,7 @@ name = "tigrbl-identity-policy"
 path = "pkgs/deprecated/tigrbl-identity-policy"
 layer = "deprecated"
 order = "01"
-local_dependencies = ["tba-certification-release", "tba-router-administration-gate", "tba-runtime-authorization-policy", "tigrbl-authz-policy-invariant-registry"]
+local_dependencies = ["tigrbl-authz-policy-invariant-registry"]
 same_layer_dependencies = ["tigrbl-authz-policy-invariant-registry"]
 
 [[packages]]
@@ -3943,5 +4063,5 @@ name = "tigrbl-principal-authentication"
 path = "pkgs/deprecated/tigrbl-principal-authentication"
 layer = "deprecated"
 order = "01"
-local_dependencies = ["tba-capability-api-key-authentication", "tba-provider-authenticator-api-key-local", "tba-provider-authenticator-client-secret-local", "tba-provider-authenticator-password-local", "tba-provider-authenticator-service-key-local", "tba-concrete-capability", "tba-capability-client-secret-authentication", "tba-credentials", "tba-contracts-identity", "tigrbl-identity-credentials-concrete", "tba-capability-password-authentication", "tba-provider-secret-hashing-bcrypt", "tba-capability-service-key-authentication"]
+local_dependencies = ["tigrbl-identity-credentials-concrete"]
 same_layer_dependencies = ["tigrbl-identity-credentials-concrete"]

@@ -1,6 +1,7 @@
 [project]
 name = "tba-capability-artifact-processing"
 version = "0.4.0.dev2"
+readme = "README.md"
 description = "Protocol-neutral artifact decode, validate, encode, and error-mapping capability."
 requires-python = ">=3.10,<3.16"
 classifiers = [

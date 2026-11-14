@@ -5,12 +5,14 @@ import './ResetPasswordPage.css';
 interface ResetPasswordPageProps {
   onReset: (password: string, token: string) => Promise<void>;
   isLoading: boolean;
+  error?: string | null;
 }
 
-export const ResetPasswordPage: React.FC<ResetPasswordPageProps> = ({ onReset, isLoading }) => {
+export const ResetPasswordPage: React.FC<ResetPasswordPageProps> = ({ onReset, isLoading, error }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errors, setErrors] = useState<{password?: string, confirm?: string}>({});
+  const token = new URLSearchParams(window.location.hash.split('?')[1]).get('token');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,12 +20,9 @@ export const ResetPasswordPage: React.FC<ResetPasswordPageProps> = ({ onReset, i
     if (password.length < 8) newErrors.password = 'Must be at least 8 characters';
     if (password !== confirmPassword) newErrors.confirm = 'Passwords do not match';
 
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0 || !token) return;
 
-    const token = new URLSearchParams(window.location.hash.split('?')[1]).get('token') || 'INVALID';
     onReset(password, token);
   };
 
@@ -36,10 +35,12 @@ export const ResetPasswordPage: React.FC<ResetPasswordPageProps> = ({ onReset, i
         </div>
 
         <Card className="reset-card">
-          <form className="reset-form" onSubmit={handleSubmit}>
+          {token ? <form className="reset-form" onSubmit={handleSubmit}>
+            {error && <p role="alert">{error}</p>}
             <Input
               label="New Password"
               type="password"
+              autoComplete="new-password"
               placeholder="********"
               value={password}
               error={errors.password}
@@ -48,6 +49,7 @@ export const ResetPasswordPage: React.FC<ResetPasswordPageProps> = ({ onReset, i
             <Input
               label="Confirm New Password"
               type="password"
+              autoComplete="new-password"
               placeholder="********"
               value={confirmPassword}
               error={errors.confirm}
@@ -60,7 +62,7 @@ export const ResetPasswordPage: React.FC<ResetPasswordPageProps> = ({ onReset, i
             >
               {isLoading ? 'Updating...' : 'Reset Password'}
             </button>
-          </form>
+          </form> : <p role="alert">Use the reset link from your email or <a href="#/forgot-password">request a new link</a>.</p>}
         </Card>
       </div>
     </div>

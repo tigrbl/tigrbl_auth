@@ -4,7 +4,7 @@ import { usePlatform } from '../hooks/usePlatform';
 import './RegisterPage.css';
 
 interface RegisterPageProps {
-  onRegister: (name: string, email: string) => Promise<void>;
+  onRegister: (name: string, email: string, password: string) => Promise<void>;
   isLoading: boolean;
   error: string | null;
 }
@@ -39,7 +39,7 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({ onRegister, isLoadin
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (validate()) onRegister(name, email);
+    if (validate()) onRegister(name, email, password);
   };
 
   const navigateToLogin = () => {
@@ -63,7 +63,7 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({ onRegister, isLoadin
         <Card className="register-card">
           <form className="register-form" onSubmit={handleSubmit}>
             {error && (
-              <div className="register-error">
+              <div className="register-error" role="alert">
                 {error}
               </div>
             )}
@@ -71,7 +71,7 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({ onRegister, isLoadin
             <Input label="Email Identity" placeholder="you@company.com" value={email} error={errors.email} onChange={e => setEmail(e.target.value)} />
 
             <div className="register-secret">
-              <Input label="Secret Key" type="password" placeholder="********" value={password} error={errors.password} onChange={e => setPassword(e.target.value)} />
+              <Input label="Password" type="password" autoComplete="new-password" placeholder="********" value={password} error={errors.password} onChange={e => setPassword(e.target.value)} />
               {password && (
                 <div className="register-strength">
                   {[1, 2, 3, 4].map(i => (
@@ -81,7 +81,7 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({ onRegister, isLoadin
               )}
             </div>
 
-            <Input label="Verify Secret" type="password" placeholder="********" value={confirmPassword} error={errors.confirm} onChange={e => setConfirmPassword(e.target.value)} />
+            <Input label="Confirm password" type="password" autoComplete="new-password" placeholder="********" value={confirmPassword} error={errors.confirm} onChange={e => setConfirmPassword(e.target.value)} />
 
             <div className="register-action">
               <button

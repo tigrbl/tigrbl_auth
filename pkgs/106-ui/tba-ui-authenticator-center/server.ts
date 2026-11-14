@@ -15,7 +15,7 @@ import {
 
 const app = express();
 app.use(express.json());
-const PORT = 3000;
+const PORT = Number(process.env.PORT ?? 3000);
 
 // ==========================================
 // IN-MEMORY DATABASE & SEED DATA
@@ -1251,7 +1251,8 @@ app.get("/api/admin/authenticators/audit", (req, res) => {
 // ==========================================
 
 async function startServer() {
-  if (process.env.NODE_ENV !== "production") {
+  const production = process.env.NODE_ENV === "production" || process.argv.includes("--production");
+  if (!production) {
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa"
@@ -1265,8 +1266,8 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on port ${PORT} in ${process.env.NODE_ENV || 'development'} mode`);
+  app.listen(PORT, "127.0.0.1", () => {
+    console.log(`Server running on port ${PORT} in ${production ? "production" : "development"} mode`);
   });
 }
 

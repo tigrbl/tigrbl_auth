@@ -15,6 +15,9 @@ classifiers = [
 license = "Apache-2.0"
 dependencies = [
     "tba-bases-digital-credential==0.4.0.dev2",
+    "tba-concrete-svid==0.4.0.dev2",
+    "tba-contracts-workload-identity==0.4.0.dev2",
+    "tba-concrete-certificate-x509==0.4.0.dev2",
 ]
 
 [build-system]

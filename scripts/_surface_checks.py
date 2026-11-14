@@ -513,6 +513,8 @@ def collect_test_files(repo_root: Path) -> set[str]:
     discovered: set[str] = set()
     for path in sorted((repo_root / "tests").glob("**/test_*.py")):
         discovered.add(str(path.relative_to(repo_root)).replace("\\", "/"))
+    for path in (repo_root / "pkgs" / "120-tests").glob("*/tests/**/test_*.py"):
+        discovered.add(path.relative_to(repo_root).as_posix())
     return discovered
 
 
@@ -521,6 +523,9 @@ def infer_test_category(rel_path: str) -> str | None:
     explicit = _AUXILIARY_TEST_CATEGORY_BY_PATH.get(normalized)
     if explicit is not None:
         return explicit
+    parts = normalized.split("/")
+    if len(parts) >= 5 and parts[:2] == ["pkgs", "120-tests"] and parts[3] == "tests":
+        return "interop" if parts[2].endswith("-interop") else "unit"
     prefixes = {
         "tests/unit/": "unit",
         "tests/integration/": "integration",

@@ -1,6 +1,7 @@
 [project]
 name = "tba-concrete-pkce"
 version = "0.4.0.dev2"
+readme = "README.md"
 description = "Deterministic RFC 7636 PKCE S256 implementation."
 requires-python = ">=3.10,<3.16"
 classifiers = [

@@ -1,0 +1,43 @@
+[project]
+name = "tba-testkit-wimse-cred-interop"
+version = "0.4.0.dev2"
+description = "Tigrbl Auth WIT/WPT acceptance tests against the Cred hackathon peer"
+readme = "README.md"
+requires-python = ">=3.10,<3.16"
+license = "Apache-2.0"
+dependencies = [
+    "cryptography>=45.0.0",
+    "tba-primitives-identity==0.4.0.dev2",
+    "tba-profile-workload-credential-wimse-wit==0.4.0.dev2",
+    "tba-profile-workload-proof-wimse-wpt==0.4.0.dev2",
+    "tba-provider-jose-cryptography==0.4.0.dev2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest==9.0.3",
+    "tba-protocol-workload-wimse-identifier==0.4.0.dev2",
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tba_testkit_wimse_cred_interop", from = "src" }]
+
+[tool.uv.sources]
+tba-bases-protected-envelope = { path = "../../05-bases/tba-bases-protected-envelope" }
+tba-concrete-jwe = { path = "../../10-concrete/tba-concrete-jwe" }
+tba-concrete-jws = { path = "../../10-concrete/tba-concrete-jws" }
+tba-concrete-jwt = { path = "../../10-concrete/tba-concrete-jwt" }
+tba-concrete-wit = { path = "../../10-concrete/tba-concrete-wit" }
+tba-contracts-protected-envelope = { path = "../../02-contracts/tba-contracts-protected-envelope" }
+tba-primitives-identity = { path = "../../00-primitives/tba-primitives-identity" }
+tba-profile-workload-credential-wimse-wit = { path = "../../55-profiles/tba-profile-workload-credential-wimse-wit" }
+tba-profile-workload-proof-wimse-wpt = { path = "../../55-profiles/tba-profile-workload-proof-wimse-wpt" }
+tba-protocol-workload-wimse-identifier = { path = "../../50-protocols/tba-protocol-workload-wimse-identifier" }
+tba-provider-jose-cryptography = { path = "../../20-providers/tba-provider-jose-cryptography", editable = true }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

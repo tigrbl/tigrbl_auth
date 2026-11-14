@@ -46,6 +46,21 @@ partitions:
   - tests/conformance/production/test_rfc9068_jwt_profile.py
   - tests/conformance/production/test_rfc9728_protected_resource_metadata.py
   unit:
+  - pkgs/120-tests/tba-testkit-workload-credential-conformance/tests/test_workload_identity_conformance_testkit.py
+  - pkgs/120-tests/tba-tests-spiffe/tests/test_cwt_svid_extension.py
+  - pkgs/120-tests/tba-tests-spiffe/tests/test_spiffe_assurance.py
+  - pkgs/120-tests/tba-tests-spiffe/tests/test_spiffe_providers.py
+  - pkgs/120-tests/tba-tests-spiffe/tests/test_spiffe_signed_credentials.py
+  - pkgs/120-tests/tba-tests-spiffe/tests/test_spiffe_svid_profiles.py
+  - pkgs/120-tests/tba-tests-spiffe/tests/test_spiffe_workload_and_broker_api_profiles.py
+  - pkgs/120-tests/tba-tests-spiffe/tests/test_wit_svid_profile.py
+  - pkgs/120-tests/tba-tests-wimse/tests/test_wimse_assurance.py
+  - pkgs/120-tests/tba-tests-wimse/tests/test_wimse_signed_credentials.py
+  - pkgs/120-tests/tba-tests-wimse/tests/test_wimse_wic_mtls.py
+  - pkgs/120-tests/tba-tests-wimse/tests/test_wimse_wit_wpt_profiles.py
+  - pkgs/120-tests/tba-tests-workload-composition/tests/test_workload_identity_runtime_composition.py
+  - pkgs/120-tests/tba-tests-workload-composition/tests/test_workload_protocol_assurance.py
+  - pkgs/120-tests/tba-tests-workload-composition/tests/test_workload_protocol_composition.py
   - tests/e2e/test_release_gate_catalog.py
   - tests/examples/test_python_cli_device_login.py
   - tests/examples/test_readme_usage.py
@@ -394,9 +409,6 @@ partitions:
   - tests/unit/test_session_logout_cluster_b.py
   - tests/unit/test_set_providers.py
   - tests/unit/test_shared_secret_provider.py
-  - tests/unit/test_spiffe_providers.py
-  - tests/unit/test_spiffe_svid_profiles.py
-  - tests/unit/test_spiffe_workload_and_broker_api_profiles.py
   - tests/unit/test_ssot_dependency_maintenance_traceability.py
   - tests/unit/test_ssot_document_authority.py
   - tests/unit/test_ssot_operator_vocabulary_boundary.py
@@ -417,6 +429,9 @@ partitions:
   - tests/unit/test_surface_baseline_boundary.py
   - tests/unit/test_svid_did_concrete.py
   - tests/unit/test_table_owned_custom_op_schemas.py
+  - tests/unit/test_tba_auth_facade_ownership.py
+  - tests/unit/test_tba_bcp_direct_db_boundary.py
+  - tests/unit/test_tba_plugin_tigrbl_package.py
   - tests/unit/test_tenant_administration_capability.py
   - tests/unit/test_tenant_public_discovery_boundary.py
   - tests/unit/test_tenant_realm_isolation_invariants.py
@@ -424,9 +439,6 @@ partitions:
   - tests/unit/test_testkit_cross_cutting_boundary.py
   - tests/unit/test_tier3_validated_rebuild.py
   - tests/unit/test_tier4_checkpoint.py
-  - tests/unit/test_tba_auth_facade_ownership.py
-  - tests/unit/test_tba_plugin_tigrbl_package.py
-  - tests/unit/test_tba_bcp_direct_db_boundary.py
   - tests/unit/test_token_endpoint_minimal_storage.py
   - tests/unit/test_token_exchange_capability.py
   - tests/unit/test_token_introspection_capability.py
@@ -464,11 +476,7 @@ partitions:
   - tests/unit/test_webauthn_foundation_delivery.py
   - tests/unit/test_webauthn_protocol_delivery.py
   - tests/unit/test_well_known_endpoints_behavior.py
-  - tests/unit/test_wimse_wit_wpt_profiles.py
-  - tests/unit/test_wit_and_cwt_svid_profiles.py
   - tests/unit/test_workload_artifact_durability.py
-  - tests/unit/test_workload_identity_conformance_testkit.py
-  - tests/unit/test_workload_identity_runtime_composition.py
   - tests/unit/test_workload_proof_claims.py
   - tests/unit/test_workspace_layer_sources.py
   integration:
@@ -520,6 +528,7 @@ partitions:
   - tests/unit/test_webauthn_migration_0035.py
   - tests/unit/test_workload_artifact_migration_0036.py
   interop:
+  - pkgs/120-tests/tba-testkit-wimse-cred-interop/tests/test_cred_wit_wpt.py
   - tests/interop/test_operator_profile_catalog_completeness.py
   - tests/interop/test_runner_profile_catalog_completeness.py
   peer:

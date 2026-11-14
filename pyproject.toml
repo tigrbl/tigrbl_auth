@@ -20,6 +20,11 @@ classifiers = [
 authors = [{ name = "Jacob Stewart", email = "jacob@swarmauri.com" }]
 keywords = ["oidc", "oauth2", "identity-provider", "jwks", "jwt", "tigrbl", "sdk", "standards", "auth", "authentication"]
 dependencies = [
+    "tba-concrete-certificate-x509==0.4.0.dev2",
+    "tba-concrete-wic==0.4.0.dev2",
+    "tba-protocol-workload-wimse-identifier==0.4.0.dev2",
+    "tba-profile-workload-credential-wimse-wic==0.4.0.dev2",
+    "tba-profile-workload-authentication-wimse-mtls==0.4.0.dev2",
     "tigrbl==0.4.5.dev8",
     "tigrbl-atoms==0.4.5.dev6",
     "tigrbl-base==0.4.5.dev6",
@@ -555,8 +560,14 @@ Repository = "https://github.com/swarmauri/swarmauri-sdk"
 Homepage = "https://github.com/swarmauri/swarmauri-sdk"
 
 [tool.pytest.ini_options]
-pythonpath = ["pkgs/60-runtime/tba-cli-identity/src"]
-testpaths = ["tests"]
+pythonpath = [".", "pkgs/60-runtime/tba-cli-identity/src"]
+testpaths = [
+    "tests",
+    "pkgs/120-tests/tba-tests-wimse/tests",
+    "pkgs/120-tests/tba-tests-spiffe/tests",
+    "pkgs/120-tests/tba-tests-workload-composition/tests",
+    "pkgs/120-tests/tba-testkit-workload-credential-conformance/tests",
+]
 norecursedirs = ["combined", "scripts", ".pytest_cache", "__pycache__", ".uv-cache", ".venv", "dist", ".benchmarks"]
 markers = [
     "test: standard test",
@@ -623,6 +634,11 @@ packages = []
 package = false
 
 [tool.uv.sources]
+tba-concrete-certificate-x509 = { path = "pkgs/10-concrete/tba-concrete-certificate-x509", editable = true }
+tba-concrete-wic = { path = "pkgs/10-concrete/tba-concrete-wic", editable = true }
+tba-protocol-workload-wimse-identifier = { path = "pkgs/50-protocols/tba-protocol-workload-wimse-identifier", editable = true }
+tba-profile-workload-credential-wimse-wic = { path = "pkgs/55-profiles/tba-profile-workload-credential-wimse-wic", editable = true }
+tba-profile-workload-authentication-wimse-mtls = { path = "pkgs/55-profiles/tba-profile-workload-authentication-wimse-mtls", editable = true }
 tba-contracts-dns = { path = "pkgs/02-contracts/tba-contracts-dns", editable = true }
 tba-codec-x509-logotype = { path = "pkgs/03-codecs/tba-codec-x509-logotype", editable = true }
 tba-provider-certificate-evidence = { path = "pkgs/20-providers/tba-provider-certificate-evidence", editable = true }

@@ -1,87 +1,48 @@
 # tba-auth
 
-[![SSOT governed](https://img.shields.io/badge/SSOT-governed-2f6f4e.svg)](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
+<!-- BEGIN TBA README HEADER -->
+<p align="center">
+<a href="https://github.com/tigrbl/tigrbl_auth#readme"><img src="https://raw.githubusercontent.com/tigrbl/tigrbl_auth/master/docs/assets/tba-brand.png" alt="TBA · Tigrbl Auth" width="240"></a>
+</p>
+<p align="center">
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/70-facade/tba-auth/pyproject.toml"><img alt="Checkout: 0.4.0.dev2" src="https://img.shields.io/badge/Checkout-0.4.0.dev2-1f6feb"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/70-facade/tba-auth/pyproject.toml"><img alt="Python: &gt;=3.10,&lt;3.16" src="https://img.shields.io/badge/Python-%3E%3D3.10%2C%3C3.16-3776ab"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/70-facade/tba-auth/pyproject.toml"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/License-Apache--2.0-525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/70-facade"><img alt="Layer: 70 facade" src="https://img.shields.io/badge/Layer-70%20facade-0a7f5a"></a>
+<a href="https://pypi.org/project/tba-auth/"><img alt="PyPI version for tba-auth" src="https://img.shields.io/pypi/v/tba-auth?label=tba-auth%20PyPI"></a>
+</p>
+<p align="center">
+<a href="https://pepy.tech/project/tba-auth"><img alt="Monthly PyPI downloads for tba-auth" src="https://static.pepy.tech/badge/tba-auth/month"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/70-facade/tba-auth/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
+</p>
+<!-- END TBA README HEADER -->
 
-tba-auth is the compatibility facade for the split TBA identity package suite. It keeps stable legacy imports for app, gateway, plugin, CLI, and selected RFC helpers while implementation ownership lives in the focused tba-identity-* packages.
+Keep existing applications working with the compatibility facade for the split TBA identity suite.
 
-## AEO Summary
+## Quick start
 
-- Package: `tba-auth`
-- Import root: `tba_auth`
-- Component kind: Facade package
-- Use it when upgrading existing tba_auth consumers to the split package suite.
-- New implementation work should prefer focused packages such as tba-protocol-oauth, tba-protocol-oidc, tba-plugin-tigrbl, tba-server-identity, or tba-runtime-identity.
-- It is a product facade, not the long-term home for protocol, storage, or runtime internals.
-
-## Installation
+Install the version used by this example.
 
 ```bash
-pip install tba-auth
-# or
-uv add tba-auth
+python -m pip install "tba-auth==0.4.0.dev2"
 ```
 
-## Usage
+Save the following as `quickstart.py` and run `python quickstart.py`. The assertions should pass.
 
 ```python
-from tba_auth.app import build_app
-from tba_auth.plugin import install
+from tba_auth.app import build_application_runtime_plan
 
-app = build_app()
+plan = build_application_runtime_plan(runner="uvicorn", host="127.0.0.1", port=8000)
+assert plan.runner == "uvicorn"
+assert plan.port == 8000
 ```
 
-## Package Boundary
+## When to use it
 
-- Legacy import compatibility
-- Stable app, gateway, plugin, and CLI re-exports
-- Selected RFC helper compatibility
-- Facade entrypoint for the identity suite
+Use this distribution when maintaining code with `tba_auth` imports. New integrations can use the focused public backend, server, or Tigrbl plugin packages directly. The example plans a local runner without starting it.
 
-## Downstream Usage Guidance
+## Verification
 
-Use this facade when a downstream product needs the complete TBA app or
-legacy `tba_auth` import root. Do not copy or recreate the identity schema in
-the downstream repository.
+See the [related repository tests](https://github.com/tigrbl/tigrbl_auth/blob/master/tests/unit/test_facade_compatibility_boundary.py) for the implementation scope covered by this example.
 
-Best-practice boundaries:
-
-- Import the app/plugin/facade from `tba_auth` and focused capabilities from
-  the split `tba-identity-*` packages.
-- Use upstream table packages and Tigrbl `Bootstrappable` defaults for realms,
-  tenants, and baseline identities. Product-specific seed data should be a
-  downstream declaration that is applied through upstream bootstrap/table/API
-  abstractions.
-- Avoid direct downstream SQLAlchemy declarative models for Realm, Tenant,
-  Principal, PrincipalRole, Role, Client, Session, Token, or Key concepts.
-- Prefer Tigrcorn for Tigrcorn-targeted deployments:
-
-```bash
-uv run tba-auth serve --server tigrcorn --profile production --host 127.0.0.1 --port 8000 --no-require-tls
-```
-
-If the downstream wraps the app, serve the wrapper directly:
-
-```bash
-uv run tigrcorn downstream_package.app:app --host 127.0.0.1 --port 8000
-```
-
-## Related Packages
-
-- [tba-auth](https://pypi.org/project/tba-auth/)
-- [tba-plugin-tigrbl](https://pypi.org/project/tba-plugin-tigrbl/)
-- [tba-server-identity](https://pypi.org/project/tba-server-identity/)
-- [tba-runtime-identity](https://pypi.org/project/tba-runtime-identity/)
-- [tba-operator-identity](https://pypi.org/project/tba-operator-identity/)
-- [tba-protocol-oauth](https://pypi.org/project/tba-protocol-oauth/)
-- [tba-protocol-oidc](https://pypi.org/project/tba-protocol-oidc/)
-
-## Project Links
-
-- [PyPI package](https://pypi.org/project/tba-auth/)
-- [Source repository](https://github.com/tigrbl/tigrbl_auth)
-- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/70-facade/tba-auth)
-- [SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
-
-## Governance
-
-This package is part of the SSOT-governed TBA identity package suite. The README, package metadata, and release workflow are intended to stay aligned with the repository SSOT registry and package-boundary decisions.
+[Workspace and package catalog](https://github.com/tigrbl/tigrbl_auth#package-catalog) · [tba-app-backend-public](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/90-backend-apps/tba-app-backend-public#readme) · [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues) · [Repository license](https://github.com/tigrbl/tigrbl_auth/blob/master/LICENSE)
