@@ -176,4 +176,4 @@ The rollback policy for this revision is explicit:
 2. preserve all rows in `sessions` and `auth_codes` during downgrade
 3. immediately verify that the downgraded schema still contains the full retained table set
 4. re-apply the revision before resuming normal forward motion unless the rollback window is still active
-5. treat PostgreSQL and SQLite downgrade+reapply as certification evidence only when the integration test `tests/integration/test_migration_upgrade_downgrade_safety.py` has passed on both backends
+5. treat PostgreSQL and SQLite downgrade+reapply as certification evidence only when the integration test `pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py` has passed on both backends

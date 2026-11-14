@@ -441,7 +441,9 @@ def main() -> int:
             "-m",
             "pytest",
             "-q",
-            "tests/integration/test_migration_upgrade_downgrade_safety.py",
+            "--certification-lane",
+            "integration",
+            "pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py",
             "--json-report",
             f"--json-report-file={pytest_report_path}",
         ]

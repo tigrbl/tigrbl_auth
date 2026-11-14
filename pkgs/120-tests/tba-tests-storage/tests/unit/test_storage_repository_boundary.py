@@ -11,7 +11,7 @@ from tba_storage_core.tables import Client, Tenant, TokenRecord, User
 from tba_runtime_identity_storage.engine import dsn
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 STORAGE_SRC = (
     ROOT
     / "pkgs"

@@ -158,7 +158,7 @@ categories:
   - pkgs/120-tests/tba-tests-authorization/tests/unit/test_least_authority_minimality.py
   - pkgs/120-tests/tba-tests-authorization/tests/unit/test_liveness_control_plane_robustness_t2.py
   - pkgs/120-tests/tba-tests-certification/tests/unit/test_migration_portability_evidence.py
-  - tests/unit/test_models.py
+  - pkgs/120-tests/tba-tests-storage/tests/unit/test_models.py
   - pkgs/120-tests/tba-tests-release/tests/unit/test_monorepo_release.py
   - tests/unit/test_mtls_certificate_credentials.py
   - tests/unit/test_non_rfc_track_checkpoint.py
@@ -259,9 +259,9 @@ categories:
   - pkgs/120-tests/tba-tests-architecture/tests/unit/test_ssot_document_authority.py
   - pkgs/120-tests/tba-tests-architecture/tests/unit/test_ssot_registry_integrity.py
   - pkgs/120-tests/tba-tests-architecture/tests/unit/test_ssot_work_item_traceability.py
-  - tests/unit/test_storage_canonical_facades.py
-  - tests/unit/test_storage_repository_boundary.py
-  - tests/unit/test_storage_sqlite_uuid_coercion.py
+  - pkgs/120-tests/tba-tests-storage/tests/unit/test_storage_canonical_facades.py
+  - pkgs/120-tests/tba-tests-storage/tests/unit/test_storage_repository_boundary.py
+  - pkgs/120-tests/tba-tests-storage/tests/unit/test_storage_sqlite_uuid_coercion.py
   - tests/unit/test_surface_baseline_boundary.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_tenant_public_discovery_boundary.py
   - pkgs/120-tests/tba-tests-authorization/tests/unit/test_tenant_realm_isolation_invariants.py
@@ -293,9 +293,9 @@ categories:
   - tests/integration/test_full_workflow.py
   - pkgs/120-tests/tba-tests-browser-session/tests/integration/test_login_session_authorize.py
   - tests/integration/test_long_lived_worker_flow.py
-  - tests/integration/test_migration_upgrade_downgrade_safety.py
+  - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
-  - tests/integration/test_persistence_lifecycle_durability.py
+  - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
   - tests/integration/test_profile_all_documented_endpoints.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc7662.py

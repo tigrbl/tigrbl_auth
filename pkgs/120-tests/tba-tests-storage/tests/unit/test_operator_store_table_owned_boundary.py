@@ -8,7 +8,7 @@ from sqlalchemy import create_engine
 from tba_storage_operator.tables import OperatorRecord
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 STORAGE_ROOT = ROOT / "pkgs/01-storage/tba-storage-core/src/tba_storage_core"
 RUNTIME_ROOT = (
     ROOT

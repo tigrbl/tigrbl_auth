@@ -10,7 +10,7 @@ the migrated suites and the remaining root tests.
 | `tba-tests-wimse` | WIMSE identifiers, WIC, mTLS, WIT, WPT, and workload proof claims |
 | `tba-tests-spiffe` | SPIFFE providers and SVID profiles, including the separately marked CWT extension module |
 | `tba-tests-workload-composition` | Workload protocol boundaries, specification ownership and runtime composition |
-| `tba-tests-storage` | Artifact durability and workload, credential, attestation, and WebAuthn storage migrations |
+| `tba-tests-storage` | Storage components, migration portability, persistence durability, and table ownership and operations |
 | `tba-tests-authorization` | Authorization invariants, policy evaluation and replay, delegation, and DID and workload policy contracts |
 | `tba-tests-oauth` | OAuth grants, extensions, HTTP bindings, and security profiles |
 | `tba-tests-oidc` | OpenID Connect discovery, ID tokens, UserInfo, and logout |

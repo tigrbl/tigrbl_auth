@@ -230,7 +230,7 @@
       "summary": "Migration portability remains blocked until both SQLite and PostgreSQL preserve upgrade/downgrade/reapply evidence.",
       "evidence": [
         "docs/compliance/migration_portability_report.md",
-        "tests/integration/test_migration_upgrade_downgrade_safety.py"
+        "pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py"
       ],
       "details": {
         "migration_report_passed": true,

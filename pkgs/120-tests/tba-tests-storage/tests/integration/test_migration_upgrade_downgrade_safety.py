@@ -79,6 +79,12 @@ async def test_downgrade_then_reapply_is_schema_safe_on_sqlite_and_postgres(runt
             downgraded_newer_revisions: list[str] = []
             while True:
                 downgraded_latest = await downgrade_one_async()
+                assert downgraded_latest is not None, (
+                    f"{backend}: exhausted migration chain before reaching {REVISION_0010}"
+                )
+                assert downgraded_latest not in downgraded_newer_revisions, (
+                    f"{backend}: downgrade stopped progressing at {downgraded_latest}"
+                )
                 downgraded_newer_revisions.append(downgraded_latest)
                 if downgraded_latest == REVISION_0010:
                     break

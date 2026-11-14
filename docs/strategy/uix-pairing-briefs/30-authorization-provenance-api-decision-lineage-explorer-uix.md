@@ -684,7 +684,7 @@ Faster investigation is useful only if explanations remain correct, privacy-safe
 - `tests/unit/test_authorization_provenance.py`
 - `tests/unit/test_policy_determinism_replay.py`
 - `tests/unit/test_decision_stability_policy_versions.py`
-- `tests/integration/test_persistence_lifecycle_durability.py`
+- `pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py`
 
 ### Standards and primary guidance
 

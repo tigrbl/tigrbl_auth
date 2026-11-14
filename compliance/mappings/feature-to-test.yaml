@@ -2036,9 +2036,9 @@ profile:baseline:
 - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
 - tests/integration/test_full_workflow.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
 - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - tests/integration/test_profile_surface_and_contract_alignment.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc7662.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py
@@ -2133,9 +2133,9 @@ profile:fapi2-security:
 - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
 - tests/integration/test_full_workflow.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
 - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - tests/integration/test_profile_surface_and_contract_alignment.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc7662.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py
@@ -2231,9 +2231,9 @@ profile:hardening:
 - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
 - tests/integration/test_full_workflow.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
 - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - tests/integration/test_profile_surface_and_contract_alignment.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc7662.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py
@@ -2333,9 +2333,9 @@ profile:peer-claim:
 - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
 - tests/integration/test_full_workflow.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
 - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - tests/integration/test_profile_surface_and_contract_alignment.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc7662.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py
@@ -2419,9 +2419,9 @@ profile:production:
 - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
 - tests/integration/test_full_workflow.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
 - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - tests/integration/test_profile_surface_and_contract_alignment.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc7662.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py
@@ -2605,9 +2605,9 @@ route:account-profile:
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
 - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
 - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
@@ -2615,15 +2615,15 @@ route:account-profile:
 route:account-sessions:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
 - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
 route:account-sessions-session-id:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
 - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
 route:attestations-appraise: []
@@ -2644,9 +2644,9 @@ route:authorize:
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
 - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
 - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - tests/integration/test_profile_surface_and_contract_alignment.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
@@ -2680,8 +2680,8 @@ route:introspect:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7662_introspection.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc7662.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
@@ -2695,8 +2695,8 @@ route:login:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - tests/integration/test_profile_surface_and_contract_alignment.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
@@ -2710,8 +2710,8 @@ route:logout:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
 - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
 - tests/unit/test_hardening_cluster_c.py
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
@@ -2759,8 +2759,8 @@ route:register:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7591_dynamic_client_registration.py
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc8252_native_apps.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - tests/integration/test_profile_surface_and_contract_alignment.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
@@ -2774,8 +2774,8 @@ route:register-client-id:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc7592_client_registration_management.py
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc8252_native_apps.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - tests/integration/test_profile_surface_and_contract_alignment.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
@@ -2789,8 +2789,8 @@ route:register-client-id:
 route:revoke:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
 - tests/integration/test_full_workflow.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
 route:security-events-receive:
 - pkgs/10-concrete/tba-concrete-set/tests/test_rfc8417.py
@@ -3488,64 +3488,64 @@ flag:session_cookie_cross_site:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
 - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
 flag:session_cookie_domain:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
 - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
 flag:session_cookie_force_secure:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
 - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
 flag:session_cookie_max_age_seconds:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
 - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
 flag:session_cookie_name:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
 - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
 flag:session_cookie_path:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
 - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
 flag:session_cookie_renewal_seconds:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
 - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
 flag:session_cookie_samesite:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
 - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
 flag:strict_boundary_enforcement:
@@ -3715,7 +3715,7 @@ target:oauth-2-1-alignment-profile:
 - tests/unit/test_feature_flag_registry.py
 target:oidc-back-channel-logout:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_backchannel_logout.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
 - tests/unit/test_hardening_cluster_c.py
 target:oidc-core-1-0:
@@ -3734,19 +3734,19 @@ target:oidc-discovery-1-0:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
 target:oidc-front-channel-logout:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_frontchannel_logout.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
 - tests/unit/test_hardening_cluster_c.py
 target:oidc-rp-initiated-logout:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
 target:oidc-session-management:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
 target:oidc-userinfo:
@@ -3768,8 +3768,8 @@ target:release-bundle-and-signature-verification:
 - tests/unit/test_published_dependency_model.py
 target:rfc-6265:
 - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
 target:rfc-6749:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py
@@ -3789,8 +3789,8 @@ target:rfc-6750:
 target:rfc-7009:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
 - tests/integration/test_full_workflow.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
 target:rfc-7515:
 - pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7515_jws.py
@@ -3816,7 +3816,7 @@ target:rfc-7523:
 - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7523_jwt_profile.py
 target:rfc-7591:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7591_dynamic_client_registration.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - tests/integration/test_profile_surface_and_contract_alignment.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
 - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7591_client_registration_endpoint.py
@@ -3835,8 +3835,8 @@ target:rfc-7636:
 - pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py
 target:rfc-7662:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7662_introspection.py
-- tests/integration/test_migration_upgrade_downgrade_safety.py
-- tests/integration/test_persistence_lifecycle_durability.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+- pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc7662.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
 target:rfc-7800:

@@ -12,7 +12,7 @@ from tba_provider_replay_memory import (
 )
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 
 
 def test_layer_50_contains_no_implicit_store_implementations() -> None:

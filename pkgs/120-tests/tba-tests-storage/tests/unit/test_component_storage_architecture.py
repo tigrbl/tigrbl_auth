@@ -178,7 +178,7 @@ def test_legacy_adoption_preserves_data_and_claims_every_object(monkeypatch) -> 
 
 
 def test_standalone_sources_do_not_import_the_compatibility_package() -> None:
-    storage_root = Path(__file__).parents[2] / "pkgs/01-storage"
+    storage_root = Path(__file__).resolve().parents[5] / "pkgs/01-storage"
     for import_root in COMPONENT_IMPORT_ROOTS:
         distribution = import_root.replace("_", "-")
         source_root = storage_root / distribution / "src" / import_root

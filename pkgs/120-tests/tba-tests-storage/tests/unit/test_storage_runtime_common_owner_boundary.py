@@ -6,7 +6,7 @@ from pathlib import Path
 from tigrbl import create_table_record, field_value, list_table_records
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 
 
 def test_layer30_common_adapter_is_removed() -> None:

@@ -47,6 +47,7 @@ partitions:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9728_protected_resource_metadata.py
   unit:
+  - pkgs/120-tests/tba-tests-storage/tests/unit/test_component_storage_architecture.py
   - pkgs/120-tests/tba-tests-architecture/tests/unit/test_package_index.py
   - pkgs/120-tests/tba-tests-platform-iam/tests/unit/test_platform_iam_layer_boundaries.py
   - pkgs/120-tests/tba-tests-platform-iam/tests/unit/test_platform_iam_contracts.py
@@ -180,7 +181,7 @@ partitions:
   - tests/unit/test_concrete_digital_artifact_ownership.py
   - tests/unit/test_concrete_layer_taxonomy.py
   - pkgs/120-tests/tba-tests-architecture/tests/unit/test_concrete_package_taxonomy.py
-  - tests/unit/test_contract_durable_storage_tables.py
+  - pkgs/120-tests/tba-tests-storage/tests/unit/test_contract_durable_storage_tables.py
   - tests/unit/test_contract_enum_ownership.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
   - tests/unit/test_contract_ownership_authority.py
@@ -196,7 +197,7 @@ partitions:
   - tests/unit/test_crypto.py
   - tests/unit/test_crypto_key_dependency_boundary.py
   - tests/unit/test_crypto_key_runtime_boundary.py
-  - tests/unit/test_crypto_key_storage_runtime_boundary.py
+  - pkgs/120-tests/tba-tests-storage/tests/unit/test_crypto_key_storage_runtime_boundary.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_standalone_claim_packages.py
   - pkgs/120-tests/tba-tests-authorization/tests/unit/test_decision_stability_policy_versions.py
   - pkgs/120-tests/tba-tests-authorization/tests/unit/test_delegation_attenuation_proof.py
@@ -230,7 +231,7 @@ partitions:
   - tests/unit/test_final_aggregation.py
   - tests/unit/test_governance_extension_plane_phase5.py
   - tests/unit/test_grant_negotiation_capability.py
-  - tests/unit/test_graph_storage_table_ownership.py
+  - pkgs/120-tests/tba-tests-storage/tests/unit/test_graph_storage_table_ownership.py
   - tests/unit/test_handler_records.py
   - tests/unit/test_hardening_cluster_a.py
   - tests/unit/test_hardening_cluster_b.py
@@ -264,13 +265,13 @@ partitions:
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py
   - tests/unit/test_key_rotation_policy_boundary.py
   - tests/unit/test_key_rotation_policy_governance.py
-  - tests/unit/test_key_token_table_owned_lifecycle.py
+  - pkgs/120-tests/tba-tests-storage/tests/unit/test_key_token_table_owned_lifecycle.py
   - tests/unit/test_layer_30_construction_boundary.py
   - tests/unit/test_layer_40_capability_boundary.py
   - pkgs/120-tests/tba-tests-authorization/tests/unit/test_least_authority_minimality.py
   - pkgs/120-tests/tba-tests-authorization/tests/unit/test_liveness_control_plane_robustness_t2.py
   - pkgs/120-tests/tba-tests-mdoc/tests/unit/test_mdoc_concrete.py
-  - tests/unit/test_models.py
+  - pkgs/120-tests/tba-tests-storage/tests/unit/test_models.py
   - pkgs/120-tests/tba-tests-release/tests/unit/test_monorepo_release.py
   - tests/unit/test_mtls_certificate_credentials.py
   - pkgs/120-tests/tba-tests-administration/tests/unit/test_my_account_table_owned_ops.py
@@ -308,8 +309,8 @@ partitions:
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_administration_capability.py
   - tests/unit/test_operator_control_plane.py
   - tests/unit/test_operator_service_layer.py
-  - tests/unit/test_operator_store_table_owned_boundary.py
-  - tests/unit/test_optional_contract_state_tables.py
+  - pkgs/120-tests/tba-tests-storage/tests/unit/test_operator_store_table_owned_boundary.py
+  - pkgs/120-tests/tba-tests-storage/tests/unit/test_optional_contract_state_tables.py
   - pkgs/120-tests/tba-tests-architecture/tests/unit/test_package_dependency_layering.py
   - tests/unit/test_package_maturity_governance.py
   - pkgs/120-tests/tba-tests-release/tests/unit/test_package_python_matrix_workflow.py
@@ -331,7 +332,7 @@ partitions:
   - tests/unit/test_protected_resource_verifier_contract.py
   - tests/unit/test_protocol_capability_reports.py
   - tests/unit/test_protocol_neutral_reusable_ownership.py
-  - tests/unit/test_protocol_state_provider_boundaries.py
+  - pkgs/120-tests/tba-tests-storage/tests/unit/test_protocol_state_provider_boundaries.py
   - tests/unit/test_provenance_naming_guard.py
   - tests/unit/test_provider_base_inheritance.py
   - pkgs/120-tests/tba-tests-architecture/tests/unit/test_provider_package_taxonomy.py
@@ -346,7 +347,7 @@ partitions:
   - tests/unit/test_pushed_authorization_runtime_composition.py
   - tests/unit/test_pytest_workspace_temp_root.py
   - pkgs/120-tests/tba-tests-administration/tests/unit/test_realm_administration_capability.py
-  - tests/unit/test_registry_state_table_ownership.py
+  - pkgs/120-tests/tba-tests-storage/tests/unit/test_registry_state_table_ownership.py
   - pkgs/120-tests/tba-tests-release/tests/unit/test_release_contracts_boundary.py
   - pkgs/120-tests/tba-tests-release/tests/unit/test_release_posture_plane.py
   - tests/unit/test_remote_adapter.py
@@ -436,19 +437,19 @@ partitions:
   - tests/unit/test_standalone_concrete_ownership.py
   - tests/unit/test_standalone_identity_credential_artifacts.py
   - tests/unit/test_standard_owner_metadata.py
-  - tests/unit/test_storage_canonical_facades.py
-  - tests/unit/test_storage_repository_boundary.py
-  - tests/unit/test_storage_runtime_common_owner_boundary.py
-  - tests/unit/test_storage_runtime_factory_surface.py
-  - tests/unit/test_storage_runtime_table_families.py
-  - tests/unit/test_storage_sqlite_uuid_coercion.py
-  - tests/unit/test_storage_table_ops_boundary.py
-  - tests/unit/test_storage_table_ops_import_contract.py
-  - tests/unit/test_storage_table_ops_inventory.py
+  - pkgs/120-tests/tba-tests-storage/tests/unit/test_storage_canonical_facades.py
+  - pkgs/120-tests/tba-tests-storage/tests/unit/test_storage_repository_boundary.py
+  - pkgs/120-tests/tba-tests-storage/tests/unit/test_storage_runtime_common_owner_boundary.py
+  - pkgs/120-tests/tba-tests-storage/tests/unit/test_storage_runtime_factory_surface.py
+  - pkgs/120-tests/tba-tests-storage/tests/unit/test_storage_runtime_table_families.py
+  - pkgs/120-tests/tba-tests-storage/tests/unit/test_storage_sqlite_uuid_coercion.py
+  - pkgs/120-tests/tba-tests-storage/tests/unit/test_storage_table_ops_boundary.py
+  - pkgs/120-tests/tba-tests-storage/tests/unit/test_storage_table_ops_import_contract.py
+  - pkgs/120-tests/tba-tests-storage/tests/unit/test_storage_table_ops_inventory.py
   - tests/unit/test_surface_baseline_boundary.py
   - pkgs/120-tests/tba-tests-spiffe/tests/unit/test_svid_concrete.py
   - pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_concrete.py
-  - tests/unit/test_table_owned_custom_op_schemas.py
+  - pkgs/120-tests/tba-tests-storage/tests/unit/test_table_owned_custom_op_schemas.py
   - tests/unit/test_tba_auth_facade_ownership.py
   - tests/unit/test_tba_bcp_direct_db_boundary.py
   - tests/unit/test_tba_plugin_tigrbl_package.py
@@ -519,7 +520,7 @@ partitions:
   - pkgs/120-tests/tba-tests-browser-session/tests/integration/test_login_session_authorize.py
   - tests/integration/test_long_lived_worker_flow.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
-  - tests/integration/test_persistence_lifecycle_durability.py
+  - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
   - tests/integration/test_profile_all_documented_endpoints.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc7662.py
@@ -538,7 +539,7 @@ partitions:
   - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_uvicorn.py
   migration-portability:
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_platform_iam_migration.py
-  - tests/integration/test_migration_upgrade_downgrade_safety.py
+  - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
   - pkgs/120-tests/tba-tests-storage/tests/unit/test_artifact_profile_migration_0023.py
   - pkgs/120-tests/tba-tests-storage/tests/unit/test_attestation_migration_0027.py
   - pkgs/120-tests/tba-tests-storage/tests/unit/test_certificate_migration_0031.py

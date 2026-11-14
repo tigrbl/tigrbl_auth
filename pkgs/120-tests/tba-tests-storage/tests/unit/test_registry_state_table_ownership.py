@@ -4,7 +4,7 @@ import importlib
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 
 
 def test_registry_state_has_storage_tables_without_runtime_repositories() -> None:

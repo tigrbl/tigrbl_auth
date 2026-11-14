@@ -200,7 +200,7 @@ def build_feature_completeness_report(repo_root: Path, *, report_dir: Path | Non
         "migrate up/down/reapply",
         passed=bool(migration_report.get("passed", False)) and {"status", "plan", "apply", "verify"} <= migrate_verbs,
         summary="Migration portability remains blocked until both SQLite and PostgreSQL preserve upgrade/downgrade/reapply evidence.",
-        evidence=["docs/compliance/migration_portability_report.md", "tests/integration/test_migration_upgrade_downgrade_safety.py"],
+        evidence=["docs/compliance/migration_portability_report.md", "pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py"],
         details_payload={
             "migration_report_passed": bool(migration_report.get("passed", False)),
             "validated_backends": migration_report.get("validated_backends", []),
