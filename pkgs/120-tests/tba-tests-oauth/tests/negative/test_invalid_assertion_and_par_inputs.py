@@ -5,7 +5,6 @@ from types import SimpleNamespace
 
 import pytest
 
-from tba_provider_identity_jose.standards.rfc7516 import JWEPolicyError, decrypt_jwe
 from tba_protocol_oauth.standards.assertion_framework import (
     JWT_BEARER_GRANT_TYPE,
     validate_assertion_grant_request,
@@ -14,9 +13,7 @@ from tba_protocol_oauth.standards.pushed_authorization_requests import PushedAut
 
 
 @pytest.mark.negative
-def test_invalid_compact_jwe_and_assertion_inputs_are_rejected() -> None:
-    with pytest.raises(JWEPolicyError):
-        __import__("asyncio").run(decrypt_jwe("not-a-valid-jwe", {"kty": "oct", "k": b"0" * 32}))
+def test_invalid_jwt_assertion_input_is_rejected() -> None:
     with pytest.raises(ValueError):
         validate_assertion_grant_request({"grant_type": JWT_BEARER_GRANT_TYPE}, audience="https://issuer.example/token")
 

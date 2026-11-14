@@ -163,7 +163,8 @@ def _negative_tests_for_claim(claim: Mapping[str, Any], partitioned_tests: Mappi
             "mtls",
             "resource_server_consumer_boundary",
             "certification_attack_paths",
-            "hardening_cluster_c",
+            "hardening_sender_constraints",
+            "hardening_discovery_contract",
         )
     if "par" in claim_text or "rfc 9126" in claim_text:
         _match(
@@ -192,7 +193,7 @@ def _negative_tests_for_claim(claim: Mapping[str, Any], partitioned_tests: Mappi
             "rfc6750_bearer_token",
             "resource_server_consumer_boundary",
             "security_deps",
-            "hardening_cluster_c",
+            "hardening_discovery_contract",
         )
     if "password" in claim_text:
         _match("certification_attack_paths", "hardening_runtime_enforcement", "backends", "crypto")
@@ -205,7 +206,8 @@ def _negative_tests_for_claim(claim: Mapping[str, Any], partitioned_tests: Mappi
             "rfc9700",
             "fapi_runtime_profile",
             "profile_discovery_runtime",
-            "hardening_cluster_c",
+            "hardening_sender_constraints",
+            "hardening_discovery_contract",
         )
     if claim_id.startswith("profile:"):
         _match("peer_counterpart_catalog", "peer_matrix_artifacts", "tier4_promotion_fail_closed")
@@ -215,7 +217,7 @@ def _negative_tests_for_claim(claim: Mapping[str, Any], partitioned_tests: Mappi
             "hardening_runtime_enforcement",
             "issuer_confusion",
             "rfc6750_bearer_token",
-            "hardening_cluster_c",
+            "hardening_sender_constraints",
             "peer_counterpart_catalog",
             "tier4_promotion_fail_closed",
         )

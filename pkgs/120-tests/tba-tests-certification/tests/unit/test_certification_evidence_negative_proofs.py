@@ -5,9 +5,9 @@ from tba_cli_identity.cli.reports._execution_status import _clean_check_ignored,
 
 PARTITIONED_TESTS = {
     "security-negative": [
-        "tests/negative/test_certification_attack_paths.py",
-        "tests/negative/test_hardening_runtime_enforcement.py",
-        "tests/security/test_issuer_confusion_resistance.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/security/test_issuer_confusion_resistance.py",
     ],
     "conformance": [
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py",
@@ -15,8 +15,10 @@ PARTITIONED_TESTS = {
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py",
     ],
     "unit": [
-        "tests/unit/test_resource_server_consumer_boundary.py",
-        "tests/unit/test_hardening_cluster_c.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_resource_server_consumer_boundary.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py",
+        "pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py",
+        "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py",
     ],
     "interop": [
         "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
@@ -34,7 +36,7 @@ def test_negative_proof_classifier_matches_real_attack_path_files() -> None:
 
     selected = _negative_tests_for_claim(claim, PARTITIONED_TESTS)
 
-    assert "tests/negative/test_certification_attack_paths.py" in selected
+    assert "pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py" in selected
     assert "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9126_par.py" in selected
 
 
@@ -48,7 +50,7 @@ def test_negative_proof_classifier_matches_issuer_confusion_files() -> None:
 
     selected = _negative_tests_for_claim(claim, PARTITIONED_TESTS)
 
-    assert "tests/security/test_issuer_confusion_resistance.py" in selected
+    assert "pkgs/120-tests/tba-tests-oauth/tests/security/test_issuer_confusion_resistance.py" in selected
 
 
 def test_negative_proof_classifier_matches_bearer_form_query_files() -> None:

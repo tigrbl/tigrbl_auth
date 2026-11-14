@@ -1,6 +1,6 @@
 import pytest
 
-from tba_auth.services.key_rotation_policy import (
+from tba_concrete_jose.key_rotation_policy import (
     EffectiveKeyRotationPolicy,
     KeyRotationAdministration,
     KeyRotationPolicyGovernance,

@@ -2049,13 +2049,15 @@ profile:baseline:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-- tests/negative/test_hardening_runtime_enforcement.py
+- pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py
 - tests/unit/test_advanced_surface_contracts.py
 - pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
-- tests/unit/test_hardening_cluster_a.py
-- tests/unit/test_hardening_cluster_b.py
-- tests/unit/test_hardening_cluster_c.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+- pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
 - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
 - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py
@@ -2146,13 +2148,15 @@ profile:fapi2-security:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-- tests/negative/test_hardening_runtime_enforcement.py
+- pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py
 - tests/unit/test_advanced_surface_contracts.py
 - pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
-- tests/unit/test_hardening_cluster_a.py
-- tests/unit/test_hardening_cluster_b.py
-- tests/unit/test_hardening_cluster_c.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+- pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
 - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
 - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py
@@ -2244,13 +2248,15 @@ profile:hardening:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-- tests/negative/test_hardening_runtime_enforcement.py
+- pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py
 - tests/unit/test_advanced_surface_contracts.py
 - pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
-- tests/unit/test_hardening_cluster_a.py
-- tests/unit/test_hardening_cluster_b.py
-- tests/unit/test_hardening_cluster_c.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+- pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
 - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
 - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py
@@ -2346,13 +2352,15 @@ profile:peer-claim:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-- tests/negative/test_hardening_runtime_enforcement.py
+- pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py
 - tests/unit/test_advanced_surface_contracts.py
 - pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
-- tests/unit/test_hardening_cluster_a.py
-- tests/unit/test_hardening_cluster_b.py
-- tests/unit/test_hardening_cluster_c.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+- pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
 - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
 - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py
@@ -2432,13 +2440,15 @@ profile:production:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-- tests/negative/test_hardening_runtime_enforcement.py
+- pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py
 - tests/unit/test_advanced_surface_contracts.py
 - pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
-- tests/unit/test_hardening_cluster_a.py
-- tests/unit/test_hardening_cluster_b.py
-- tests/unit/test_hardening_cluster_c.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+- pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
 - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
 - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py
@@ -2479,7 +2489,7 @@ slice:device:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
-- tests/unit/test_hardening_cluster_a.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
 slice:dpop:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9449_dpop.py
@@ -2488,7 +2498,9 @@ slice:dpop:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
 - tests/unit/test_advanced_surface_contracts.py
-- tests/unit/test_hardening_cluster_c.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+- pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
 slice:jar:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9101_jar.py
 - tests/integration/test_profile_surface_and_contract_alignment.py
@@ -2496,7 +2508,7 @@ slice:jar:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
 - tests/unit/test_advanced_surface_contracts.py
-- tests/unit/test_hardening_cluster_b.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py
 slice:mtls:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8705_mtls.py
 - tests/integration/test_profile_surface_and_contract_alignment.py
@@ -2504,14 +2516,16 @@ slice:mtls:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
 - tests/unit/test_advanced_surface_contracts.py
-- tests/unit/test_hardening_cluster_c.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+- pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
 slice:par:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9126_par.py
 - tests/integration/test_profile_surface_and_contract_alignment.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
-- tests/unit/test_hardening_cluster_b.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
 slice:rar:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py
@@ -2520,7 +2534,7 @@ slice:rar:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
 - tests/unit/test_advanced_surface_contracts.py
-- tests/unit/test_hardening_cluster_b.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py
 slice:token-exchange:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8693_token_exchange.py
 - tests/integration/test_profile_surface_and_contract_alignment.py
@@ -2529,7 +2543,7 @@ slice:token-exchange:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
-- tests/unit/test_hardening_cluster_a.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
 route:access-v1-evaluation: []
 route:account-authorized-apps:
@@ -2652,11 +2666,13 @@ route:authorize:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-- tests/negative/test_hardening_runtime_enforcement.py
+- pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py
 - tests/unit/test_advanced_surface_contracts.py
-- tests/unit/test_hardening_cluster_a.py
-- tests/unit/test_hardening_cluster_b.py
-- tests/unit/test_hardening_cluster_c.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+- pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
 - tests/unit/test_profile_discovery_runtime.py
 - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8252_native_app_redirects.py
 - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
@@ -2673,7 +2689,7 @@ route:device-authorization:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
 - tests/unit/test_advanced_surface_contracts.py
-- tests/unit/test_hardening_cluster_a.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
 route:gnap-tx: []
 route:introspect:
@@ -2713,7 +2729,9 @@ route:logout:
 - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
 - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-- tests/unit/test_hardening_cluster_c.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+- pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
 route:par:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8707_resource_indicators.py
@@ -2725,11 +2743,13 @@ route:par:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
-- tests/negative/test_hardening_runtime_enforcement.py
+- pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py
 - tests/unit/test_advanced_surface_contracts.py
-- tests/unit/test_hardening_cluster_a.py
-- tests/unit/test_hardening_cluster_b.py
-- tests/unit/test_hardening_cluster_c.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+- pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
 - tests/unit/test_profile_discovery_runtime.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
 - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
@@ -2750,8 +2770,10 @@ route:realms-realm-slug-well-known-openid-configuration:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
-- tests/negative/test_hardening_runtime_enforcement.py
-- tests/unit/test_hardening_cluster_c.py
+- pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+- pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
 - tests/unit/test_profile_discovery_runtime.py
 - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_well_known_endpoints_behavior.py
@@ -2782,7 +2804,7 @@ route:register-client-id:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
 - tests/unit/test_advanced_surface_contracts.py
-- tests/unit/test_hardening_cluster_a.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py
 - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7592_client_management_endpoint.py
 - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8252_native_app_redirects.py
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
@@ -2811,8 +2833,10 @@ route:tenants-tenant-slug-well-known-openid-configuration:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
-- tests/negative/test_hardening_runtime_enforcement.py
-- tests/unit/test_hardening_cluster_c.py
+- pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+- pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
 - tests/unit/test_profile_discovery_runtime.py
 - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_well_known_endpoints_behavior.py
@@ -2828,9 +2852,11 @@ route:token:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
-- tests/negative/test_hardening_runtime_enforcement.py
+- pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py
 - tests/unit/test_advanced_surface_contracts.py
-- tests/unit/test_hardening_cluster_c.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+- pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
 - tests/unit/test_profile_discovery_runtime.py
 - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
 route:token-exchange:
@@ -2846,8 +2872,10 @@ route:token-exchange:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
 - tests/unit/test_advanced_surface_contracts.py
-- tests/unit/test_hardening_cluster_a.py
-- tests/unit/test_hardening_cluster_c.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+- pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
 route:userinfo:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py
@@ -2890,8 +2918,10 @@ route:well-known-openid-configuration:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
-- tests/negative/test_hardening_runtime_enforcement.py
-- tests/unit/test_hardening_cluster_c.py
+- pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+- pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
 - tests/unit/test_profile_discovery_runtime.py
 - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_well_known_endpoints_behavior.py
@@ -3061,8 +3091,10 @@ flag:enable_rfc6750_form:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
-- tests/negative/test_hardening_runtime_enforcement.py
-- tests/unit/test_hardening_cluster_c.py
+- pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+- pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
 - tests/unit/test_profile_discovery_runtime.py
 - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
 flag:enable_rfc6750_query:
@@ -3073,8 +3105,10 @@ flag:enable_rfc6750_query:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
-- tests/negative/test_hardening_runtime_enforcement.py
-- tests/unit/test_hardening_cluster_c.py
+- pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+- pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
 - tests/unit/test_profile_discovery_runtime.py
 - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
 flag:enable_rfc7009:
@@ -3468,7 +3502,7 @@ flag:rfc8707_enabled:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8707_resource_indicators.py
 - tests/integration/test_profile_surface_and_contract_alignment.py
 - tests/unit/test_advanced_surface_contracts.py
-- tests/unit/test_hardening_cluster_a.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py
 flag:runtime_style:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
@@ -3717,7 +3751,9 @@ target:oidc-back-channel-logout:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_backchannel_logout.py
 - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-- tests/unit/test_hardening_cluster_c.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+- pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
 target:oidc-core-1-0:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_oidc_id_token.py
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py
@@ -3736,7 +3772,9 @@ target:oidc-front-channel-logout:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_frontchannel_logout.py
 - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
 - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
-- tests/unit/test_hardening_cluster_c.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+- pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
 target:oidc-rp-initiated-logout:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
 - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
@@ -3824,7 +3862,7 @@ target:rfc-7592:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc7592_client_registration_management.py
 - tests/integration/test_profile_surface_and_contract_alignment.py
 - tests/unit/test_advanced_surface_contracts.py
-- tests/unit/test_hardening_cluster_a.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py
 - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7592_client_management_endpoint.py
 target:rfc-7636:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc7636_pkce.py
@@ -3865,7 +3903,7 @@ target:rfc-8628:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
-- tests/unit/test_hardening_cluster_a.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
 target:rfc-8693:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8693_token_exchange.py
@@ -3875,7 +3913,7 @@ target:rfc-8693:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
-- tests/unit/test_hardening_cluster_a.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
 target:rfc-8705:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8705_mtls.py
@@ -3884,12 +3922,14 @@ target:rfc-8705:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
 - tests/unit/test_advanced_surface_contracts.py
-- tests/unit/test_hardening_cluster_c.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+- pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
 target:rfc-8707:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8707_resource_indicators.py
 - tests/integration/test_profile_surface_and_contract_alignment.py
 - tests/unit/test_advanced_surface_contracts.py
-- tests/unit/test_hardening_cluster_a.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py
 target:rfc-8812:
 - pkgs/120-tests/tba-tests-webauthn/tests/unit/test_rfc8812_webauthn_algorithms.py
 target:rfc-8932: []
@@ -3907,19 +3947,19 @@ target:rfc-9101:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
 - tests/unit/test_advanced_surface_contracts.py
-- tests/unit/test_hardening_cluster_b.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py
 target:rfc-9126:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9126_par.py
 - tests/integration/test_profile_surface_and_contract_alignment.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
-- tests/unit/test_hardening_cluster_b.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
 target:rfc-9207:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
 - tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_hardening_cluster_b.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py
 - tests/unit/test_profile_discovery_runtime.py
 - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
 target:rfc-9396:
@@ -3929,7 +3969,7 @@ target:rfc-9396:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
 - tests/unit/test_advanced_surface_contracts.py
-- tests/unit/test_hardening_cluster_b.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py
 target:rfc-9449:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9449_dpop.py
 - tests/integration/test_profile_surface_and_contract_alignment.py
@@ -3937,12 +3977,16 @@ target:rfc-9449:
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
 - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
 - tests/unit/test_advanced_surface_contracts.py
-- tests/unit/test_hardening_cluster_c.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+- pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
 target:rfc-9700:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py
 - tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/negative/test_hardening_runtime_enforcement.py
-- tests/unit/test_hardening_cluster_c.py
+- pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+- pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
 - tests/unit/test_profile_discovery_runtime.py
 - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
 target:rfc-9728:

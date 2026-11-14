@@ -3,7 +3,7 @@ import pytest
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 for src in (ROOT / "pkgs").glob("*/src"):
     value = str(src)
     if value not in sys.path:

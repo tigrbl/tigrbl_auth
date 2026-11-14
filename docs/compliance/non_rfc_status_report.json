@@ -520,7 +520,9 @@
           "pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_frontchannel_logout.py",
           "pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py",
           "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
-          "tests/unit/test_hardening_cluster_c.py"
+          "pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py"
         ],
         "test_categories": [
           "conformance",
@@ -603,7 +605,9 @@
           "pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_backchannel_logout.py",
           "pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py",
           "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
-          "tests/unit/test_hardening_cluster_c.py"
+          "pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py"
         ],
         "test_categories": [
           "conformance",

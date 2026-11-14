@@ -6,7 +6,7 @@ from pathlib import Path
 import yaml
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 PACKAGE_DIR = ROOT / "pkgs" / "75-clients" / "tba-typescript-client-oidc-relying-party"
 
 
