@@ -5,7 +5,7 @@ from tba_contracts_identity.security_events import (
     SecurityEvent,
     SecurityEventSubject,
 )
-from tigrbl_security_event_replay_store import InMemorySecurityEventReplayStore
+from tba_provider_replay_memory import MemoryReplayCheckProvider
 from tba_provider_set_receiver import SetReceiverProvider, VerifiedSetToken
 from tba_provider_set_transmitter import SetTransmitterProvider
 
@@ -54,7 +54,7 @@ def test_set_receiver_verifies_profile_typ_claims_and_replay_once():
         lambda value, profile: VerifiedSetToken(
             captured["header"], captured["claims"], captured["profile"]
         ),
-        InMemorySecurityEventReplayStore(),
+        MemoryReplayCheckProvider(),
         "https://issuer.example",
         "https://receiver.example",
     )
@@ -80,7 +80,7 @@ def test_set_receiver_rejects_id_access_or_untyped_jwt_profiles(typ, profile):
     }
     receiver = SetReceiverProvider(
         lambda value, expected: VerifiedSetToken({"typ": typ}, claims, profile),
-        InMemorySecurityEventReplayStore(),
+        MemoryReplayCheckProvider(),
         "https://issuer.example",
         "https://receiver.example",
     )
@@ -89,7 +89,32 @@ def test_set_receiver_rejects_id_access_or_untyped_jwt_profiles(typ, profile):
 
 
 def test_replay_key_is_issuer_and_jti_not_jti_alone():
-    store = InMemorySecurityEventReplayStore()
-    assert store.consume_once("issuer-a", "same")
-    assert store.consume_once("issuer-b", "same")
-    assert not store.consume_once("issuer-a", "same")
+    store = MemoryReplayCheckProvider()
+    claims = {
+        "iss": "https://issuer-a.example",
+        "aud": "https://receiver.example",
+        "iat": 1,
+        "jti": "same",
+        "events": {EVENT_TYPE: {}},
+    }
+
+    def receiver(issuer):
+        return SetReceiverProvider(
+            lambda value, profile: VerifiedSetToken(
+                {"typ": "secevent+jwt"}, {**claims, "iss": issuer}, profile
+            ),
+            store,
+            issuer,
+            "https://receiver.example",
+        )
+
+    first = receiver("https://issuer-a.example")
+    assert (
+        first.receive("header.payload.signature").issuer == "https://issuer-a.example"
+    )
+    assert (
+        receiver("https://issuer-b.example").receive("header.payload.signature").issuer
+        == "https://issuer-b.example"
+    )
+    with pytest.raises(ValueError, match="replay"):
+        first.receive("header.payload.signature")

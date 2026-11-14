@@ -66,6 +66,8 @@ profiles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9449_dpop.py
 categories:
   unit:
+  - pkgs/120-tests/tba-tests-ucan/tests/unit/test_ucan_protocol.py
+  - pkgs/120-tests/tba-tests-zcap/tests/unit/test_zcap_protocol.py
   - pkgs/120-tests/tba-tests-bimi/tests/unit/test_bimi_factorization.py
   - pkgs/120-tests/tba-tests-bimi/tests/unit/test_bimi_mark_certificate.py
   - pkgs/120-tests/tba-tests-bimi/tests/unit/test_bimi_readiness.py
@@ -205,10 +207,10 @@ categories:
   - tests/unit/test_deprecated_compatibility_windows.py
   - tests/unit/test_deps_imports.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_device_code_runtime_boundary.py
-  - tests/unit/test_did_core_canonical_document.py
-  - tests/unit/test_did_core_protocol.py
-  - tests/unit/test_did_gnap_migration_0030.py
-  - tests/unit/test_did_providers.py
+  - pkgs/120-tests/tba-tests-did/tests/unit/test_did_core_canonical_document.py
+  - pkgs/120-tests/tba-tests-did/tests/unit/test_did_core_protocol.py
+  - pkgs/120-tests/tba-tests-storage/tests/unit/test_did_gnap_migration_0030.py
+  - pkgs/120-tests/tba-tests-did/tests/unit/test_did_providers.py
   - pkgs/120-tests/tba-tests-authorization/tests/test_did_workload_policy_contracts.py
   - pkgs/120-tests/tba-tests-credential-composition/tests/unit/test_digital_credential_providers.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_dpop_key_credentials.py
@@ -431,7 +433,7 @@ categories:
   - tests/unit/test_session_consent_logout_runtime_boundary.py
   - tests/unit/test_session_login_http_binding.py
   - tests/unit/test_session_logout_cluster_b.py
-  - tests/unit/test_set_providers.py
+  - pkgs/120-tests/tba-tests-set/tests/unit/test_set_providers.py
   - tests/unit/test_shared_secret_provider.py
   - pkgs/120-tests/tba-tests-storage/tests/test_spiffe_migration_0028.py
   - tests/unit/test_ssot_dependency_maintenance_traceability.py
@@ -452,7 +454,8 @@ categories:
   - tests/unit/test_storage_table_ops_import_contract.py
   - tests/unit/test_storage_table_ops_inventory.py
   - tests/unit/test_surface_baseline_boundary.py
-  - tests/unit/test_svid_did_concrete.py
+  - pkgs/120-tests/tba-tests-spiffe/tests/unit/test_svid_concrete.py
+  - pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_concrete.py
   - tests/unit/test_table_owned_custom_op_schemas.py
   - tests/unit/test_tba_auth_facade_ownership.py
   - tests/unit/test_tba_bcp_direct_db_boundary.py
@@ -488,7 +491,7 @@ categories:
   - pkgs/120-tests/tba-tests-eat/tests/unit/test_versioned_eat_profile.py
   - pkgs/120-tests/tba-tests-sd-jwt-vc/tests/unit/test_versioned_sd_jwt_vc_profile.py
   - tests/unit/test_versioned_envelope_protocols.py
-  - tests/unit/test_versioned_gnap_protocol.py
+  - pkgs/120-tests/tba-tests-gnap/tests/unit/test_versioned_gnap_protocol.py
   - pkgs/120-tests/tba-tests-haip/tests/unit/test_versioned_haip_profile.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_versioned_jose_protocol.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_versioned_jwt_protocol.py
@@ -497,7 +500,7 @@ categories:
   - pkgs/120-tests/tba-tests-oid4vp/tests/unit/test_versioned_oid4vp_protocol.py
   - pkgs/120-tests/tba-tests-authzen/tests/unit/test_versioned_authzen_protocol.py
   - tests/unit/test_versioned_resource_server_profile.py
-  - tests/unit/test_versioned_set_protocol.py
+  - pkgs/120-tests/tba-tests-set/tests/unit/test_versioned_set_protocol.py
   - pkgs/120-tests/tba-tests-attestation-composition/tests/unit/test_wallet_key_platform_attestation_providers.py
   - pkgs/120-tests/tba-tests-webauthn/tests/unit/test_webauthn_api_delivery.py
   - pkgs/120-tests/tba-tests-webauthn/tests/unit/test_webauthn_attestation_delivery.py

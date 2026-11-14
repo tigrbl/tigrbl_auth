@@ -21,7 +21,7 @@ def capability_report() -> dict[str, object]:
         protocol="set",
         revision=CURRENT_VERSION.identifier,
         features=tuple(FEATURES_BY_VERSION[CURRENT_VERSION.identifier]),
-        evidence_links=("tests/unit/test_versioned_set_protocol.py",),
+        evidence_links=("pkgs/120-tests/tba-tests-set/tests/unit/test_versioned_set_protocol.py",),
         extra_requirements=CAPABILITY_REQUIREMENTS,
         include_default_artifact_requirements=False,
     )

@@ -15,6 +15,11 @@ the migrated suites and the remaining root tests.
 | `tba-tests-oauth` | OAuth grants, extensions, HTTP bindings, and security profiles |
 | `tba-tests-oidc` | OpenID Connect discovery, ID tokens, UserInfo, and logout |
 | `tba-tests-jose` | JOSE/JWT and related signing, encryption, and key handling |
+| `tba-tests-did` | DID Core documents, resolution, dereferencing, and controller behavior |
+| `tba-tests-gnap` | Grant Negotiation and Authorization Protocol versions and capability binding |
+| `tba-tests-ucan` | UCAN delegation and invocation verification |
+| `tba-tests-zcap` | ZCAP delegation and HTTP invocation verification |
+| `tba-tests-set` | Security Event Token claims, transmission, reception, and replay handling |
 | `tba-tests-vcdm` | W3C Verifiable Credentials Data Model and presentation structure |
 | `tba-tests-sd-jwt-vc` | SD-JWT VC format and versioned profile |
 | `tba-tests-mdoc` | ISO mdoc structure, issuance, and verification |
