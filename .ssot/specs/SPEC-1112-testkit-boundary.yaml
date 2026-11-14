@@ -56,6 +56,8 @@ body: |-
   
   ## Executable test packages
   Layer 120 owns repository-wide test suites grouped by protocol or capability and reusable test-only support. Package-local unit tests may live alongside their owning code. The root test runner collects migrated native suites during the transition. Independent peer fixtures are selected explicitly. SSOT test IDs and their proof links are preserved when a test moves, and executable paths and selectors must follow the relocated cases.
+  
+  The Layer 120 `tba-test-interop-wimse` package owns the WIMSE interop catalogs, matrix generator, runner, and test-only adapters under ADR-1141 and SPEC-1237 through SPEC-1239. Production packages MUST NOT depend on it.
 spec_kind: "operational"
 adr_ids:
   - "adr:1096"

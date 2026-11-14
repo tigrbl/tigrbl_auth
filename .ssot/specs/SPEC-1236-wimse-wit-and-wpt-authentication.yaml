@@ -26,6 +26,8 @@ body: |-
   
   ## Verification
   T3 exercises both roles with Tigrbl Auth release-candidate packages over HTTP using configured trust and the real replay provider. Cover wrong domain anchors, issuer and proof keys, proof bound to a different WIT, wrong audience, expiry, and replay. Native verification runs without SPIFFE, SPIRE, or Cred. The optional pinned Cred peer suite exercises the Tigrbl Auth sender for a separate T4 claim.
+  
+  Link WIT/WPT peer scenarios and any explicit WIC plus WIT/WPT composition under SPEC-1237. Qualify each profile and direction under SPEC-1238 and record scoped results under SPEC-1239. The optional Cred sender suite does not establish the TbA receiver or reverse-direction result.
 spec_kind: "normative"
 adr_ids:
   - "adr:1140"
