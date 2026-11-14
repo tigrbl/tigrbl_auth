@@ -8,7 +8,7 @@ from tba_runtime_authorization_policy import assurance, provenance
 from tba_primitives_identity.json_canonicalization import canonical_hash, canonical_json
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 
 
 def test_policy_canonicalization_helpers_are_owned_by_identity_core() -> None:

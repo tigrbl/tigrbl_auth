@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 root_value = str(ROOT)
 if root_value not in sys.path:
     sys.path.insert(0, root_value)

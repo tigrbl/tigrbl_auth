@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import tests.unit.formal_auth_helpers  # noqa: F401
+import tba_testkit_identity.formal_auth_helpers  # noqa: F401
 
 from tba_auth.services.formal_authorization import (
     build_control_plane_correctness_report as facade_build_report,

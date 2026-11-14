@@ -132,19 +132,19 @@ categories:
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py
   - tests/unit/test_auth_package_taxonomy_boundary.py
   - tests/unit/test_authenticator_contracts_and_providers.py
-  - tests/unit/test_authority_closure_monotonicity.py
-  - tests/unit/test_authority_closure_monotonicity_robustness_t2.py
-  - tests/unit/test_authority_derivation_graph.py
-  - tests/unit/test_authority_graph_robustness_t2.py
-  - tests/unit/test_authorization_integrity_isolation_robustness_t2.py
-  - tests/unit/test_authorization_invariant_guards.py
-  - tests/unit/test_authorization_liveness_convergence.py
-  - tests/unit/test_authorization_provenance.py
-  - tests/unit/test_authorization_referential_integrity.py
-  - tests/unit/test_authorization_safety_property_evaluator.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_authority_closure_monotonicity.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_authority_closure_monotonicity_robustness_t2.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_authority_derivation_graph.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_authority_graph_robustness_t2.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_authorization_integrity_isolation_robustness_t2.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_authorization_invariant_guards.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_authorization_liveness_convergence.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_authorization_provenance.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_authorization_referential_integrity.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_authorization_safety_property_evaluator.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_authorize_response_modes.py
-  - tests/unit/test_authz_policy_table_ops_boundary.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_authz_policy_table_ops_boundary.py
   - tests/unit/test_backend_app_surfaces.py
   - tests/unit/test_backend_app_table_initialization.py
   - tests/unit/test_backends.py
@@ -185,7 +185,7 @@ categories:
   - tests/unit/test_contract_ownership_authority.py
   - tests/unit/test_contract_package_taxonomy.py
   - tests/unit/test_contract_payloads_deferred_upstream.py
-  - tests/unit/test_control_plane_correctness_properties.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_control_plane_correctness_properties.py
   - pkgs/120-tests/tba-tests-corim/tests/unit/test_corim_protocol_versioning.py
   - pkgs/120-tests/tba-tests-corim/tests/unit/test_corim_reference_material_runtime.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_cose_cwt_runtime_profiles.py
@@ -199,12 +199,12 @@ categories:
   - tests/unit/test_crypto_key_runtime_boundary.py
   - tests/unit/test_crypto_key_storage_runtime_boundary.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_standalone_claim_packages.py
-  - tests/unit/test_decision_stability_policy_versions.py
-  - tests/unit/test_delegation_attenuation_proof.py
-  - tests/unit/test_delegation_attenuation_robustness_t2.py
-  - tests/unit/test_delegation_grant_lifecycle_contract.py
-  - tests/unit/test_delegation_runtime_boundary.py
-  - tests/unit/test_delegation_table_owned_ops_contract.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_decision_stability_policy_versions.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_delegation_attenuation_proof.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_delegation_attenuation_robustness_t2.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_delegation_grant_lifecycle_contract.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_delegation_runtime_boundary.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_delegation_table_owned_ops_contract.py
   - tests/unit/test_deployment_resolver.py
   - tests/unit/test_deprecated_compatibility_windows.py
   - tests/unit/test_deps_imports.py
@@ -270,8 +270,8 @@ categories:
   - tests/unit/test_key_token_table_owned_lifecycle.py
   - tests/unit/test_layer_30_construction_boundary.py
   - tests/unit/test_layer_40_capability_boundary.py
-  - tests/unit/test_least_authority_minimality.py
-  - tests/unit/test_liveness_control_plane_robustness_t2.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_least_authority_minimality.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_liveness_control_plane_robustness_t2.py
   - pkgs/120-tests/tba-tests-mdoc/tests/unit/test_mdoc_concrete.py
   - tests/unit/test_migration_portability_evidence.py
   - tests/unit/test_models.py
@@ -320,18 +320,18 @@ categories:
   - tests/unit/test_path_safety.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_pkce_provider_boundary.py
   - tests/unit/test_plane_contracts_boundary.py
-  - tests/unit/test_policy_canonicalization_ownership.py
-  - tests/unit/test_policy_concrete_layer_boundary.py
-  - tests/unit/test_policy_control_plane_phase3.py
-  - tests/unit/test_policy_determinism_replay.py
-  - tests/unit/test_policy_evaluation_capability.py
-  - tests/unit/test_policy_replay_stability_robustness_t2.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_policy_canonicalization_ownership.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_policy_concrete_layer_boundary.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_policy_control_plane_phase3.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_policy_determinism_replay.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_policy_evaluation_capability.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_policy_replay_stability_robustness_t2.py
   - pkgs/120-tests/tba-tests-storage/tests/unit/test_presentation_migration_0026.py
   - tests/unit/test_principal_authentication_capability.py
   - tests/unit/test_principals_model_boundary.py
   - tests/unit/test_profile_discovery_runtime.py
   - tests/unit/test_profile_protocol_bindings.py
-  - tests/unit/test_protected_resource_authorization_capability.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_protected_resource_authorization_capability.py
   - tests/unit/test_protected_resource_verifier_contract.py
   - tests/unit/test_protocol_capability_reports.py
   - tests/unit/test_protocol_neutral_reusable_ownership.py
@@ -461,7 +461,7 @@ categories:
   - tests/unit/test_tba_plugin_tigrbl_package.py
   - tests/unit/test_tenant_administration_capability.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_tenant_public_discovery_boundary.py
-  - tests/unit/test_tenant_realm_isolation_invariants.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_tenant_realm_isolation_invariants.py
   - tests/unit/test_terminal_package_layers.py
   - tests/unit/test_testkit_cross_cutting_boundary.py
   - tests/unit/test_tier3_validated_rebuild.py
@@ -476,7 +476,7 @@ categories:
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_token_revocation_capability.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_token_revocation_runtime_composition.py
   - tests/unit/test_tox_pip_install.py
-  - tests/unit/test_trust_graph_integrity_guards.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_trust_graph_integrity_guards.py
   - tests/unit/test_truth_chain_hashing.py
   - tests/unit/test_truthfulness_alignment.py
   - tests/unit/test_typed_artifact_verification_results.py
@@ -623,16 +623,16 @@ categories:
   - tests/uix/test_resource_views_states.py
   - tests/uix/test_safe_mutations.py
   security:
-  - tests/security/planning/test_authorization_budgets_planning.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/planning/test_authorization_budgets_planning.py
   - tests/security/planning/test_constraint_native_authorization_planning.py
   - tests/security/planning/test_credential_privacy_correlation_planning.py
   - tests/security/planning/test_cross_issuer_trust_domain_planning.py
   - tests/security/planning/test_future_standards_nonblocking_roadmap.py
   - tests/security/test_algorithm_policy_readiness.py
-  - tests/security/test_authorization_mutation_freshness.py
-  - tests/security/test_authorization_observability.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_authorization_mutation_freshness.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_authorization_observability.py
   - tests/security/test_crypto_boundary_governance.py
-  - tests/security/test_delegation_provenance.py
+  - pkgs/120-tests/tba-tests-authorization/tests/security/test_delegation_provenance.py
   - tests/security/test_issuer_confusion_resistance.py
   - pkgs/120-tests/tba-tests-jose/tests/security/test_jose_negative_security.py
   - tests/security/test_machine_identity_governance.py

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import tests.unit.formal_auth_helpers  # noqa: F401
+import tba_testkit_identity.formal_auth_helpers  # noqa: F401
 
 from tba_runtime_authorization_policy import (
     AuthorizationInvariant,

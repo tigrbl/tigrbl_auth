@@ -37,7 +37,7 @@ RETAINED_PHASE_TEST_IDS = {
     "tst:phase5-admin-uix-governance-workflows",
 }
 RETAINED_PHASE_TEST_PATHS = {
-    "tests/unit/test_policy_control_plane_phase3.py",
+    "pkgs/120-tests/tba-tests-authorization/tests/unit/test_policy_control_plane_phase3.py",
     "tests/unit/test_advanced_identity_plane_phase4.py",
     "tests/unit/test_governance_extension_plane_phase5.py",
     "tests/unit/test_release_posture_plane.py",

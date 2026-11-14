@@ -17,7 +17,7 @@ from tba_runtime_identity_storage import (
 )
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 
 
 async def _op(model, operation: str, db, **payload):

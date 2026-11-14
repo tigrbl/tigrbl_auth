@@ -693,7 +693,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
   - tests/unit/test_hardening_cluster_b.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
-  - tests/unit/test_tenant_realm_isolation_invariants.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_tenant_realm_isolation_invariants.py
   - tests/integration/test_runtime_issuer_alignment.py
   evidence_refs:
   - compliance/evidence/tier3/cli-operator-surface/
@@ -3809,7 +3809,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
   - tests/unit/test_hardening_cluster_b.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
-  - tests/unit/test_tenant_realm_isolation_invariants.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_tenant_realm_isolation_invariants.py
   - tests/integration/test_runtime_issuer_alignment.py
   - tests/negative/test_hardening_runtime_enforcement.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py
@@ -6184,7 +6184,7 @@ bindings:
   - tests/security/test_tenant_isolation_certification.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
-  - tests/unit/test_tenant_realm_isolation_invariants.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_tenant_realm_isolation_invariants.py
   - tests/integration/test_runtime_issuer_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py
@@ -6467,7 +6467,7 @@ bindings:
   - tests/security/test_tenant_isolation_certification.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
-  - tests/unit/test_tenant_realm_isolation_invariants.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_tenant_realm_isolation_invariants.py
   - tests/integration/test_runtime_issuer_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py
@@ -6751,7 +6751,7 @@ bindings:
   - tests/security/test_tenant_isolation_certification.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
-  - tests/unit/test_tenant_realm_isolation_invariants.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_tenant_realm_isolation_invariants.py
   - tests/integration/test_runtime_issuer_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py
@@ -7038,7 +7038,7 @@ bindings:
   - tests/security/test_tenant_isolation_certification.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
-  - tests/unit/test_tenant_realm_isolation_invariants.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_tenant_realm_isolation_invariants.py
   - tests/integration/test_runtime_issuer_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py
@@ -7257,7 +7257,7 @@ bindings:
   - tests/security/test_tenant_isolation_certification.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
-  - tests/unit/test_tenant_realm_isolation_invariants.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_tenant_realm_isolation_invariants.py
   - tests/integration/test_runtime_issuer_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py
@@ -7658,7 +7658,7 @@ bindings:
   - tests/security/test_tenant_isolation_certification.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
-  - tests/unit/test_tenant_realm_isolation_invariants.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_tenant_realm_isolation_invariants.py
   - tests/integration/test_runtime_issuer_alignment.py
   - tests/negative/test_hardening_runtime_enforcement.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py
@@ -7924,7 +7924,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
   - tests/unit/test_hardening_cluster_b.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
-  - tests/unit/test_tenant_realm_isolation_invariants.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_tenant_realm_isolation_invariants.py
   - tests/integration/test_runtime_issuer_alignment.py
   - tests/negative/test_hardening_runtime_enforcement.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py
@@ -8082,7 +8082,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
   - tests/unit/test_hardening_cluster_b.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
-  - tests/unit/test_tenant_realm_isolation_invariants.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_tenant_realm_isolation_invariants.py
   - tests/integration/test_runtime_issuer_alignment.py
   - tests/negative/test_hardening_runtime_enforcement.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py
@@ -8299,7 +8299,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
   - tests/unit/test_hardening_cluster_b.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
-  - tests/unit/test_tenant_realm_isolation_invariants.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_tenant_realm_isolation_invariants.py
   - tests/integration/test_runtime_issuer_alignment.py
   - tests/negative/test_hardening_runtime_enforcement.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py
@@ -9364,7 +9364,7 @@ bindings:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
   - tests/unit/test_hardening_cluster_b.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
-  - tests/unit/test_tenant_realm_isolation_invariants.py
+  - pkgs/120-tests/tba-tests-authorization/tests/unit/test_tenant_realm_isolation_invariants.py
   - tests/integration/test_runtime_issuer_alignment.py
   evidence_refs:
   - compliance/evidence/tier3/issuer-identification/
