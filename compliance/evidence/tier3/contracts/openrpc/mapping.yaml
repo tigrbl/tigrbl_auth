@@ -16,7 +16,7 @@ targets:
   - tba_auth/cli/reports.py
   - tba_auth/config/deployment.py
   tests:
-  - tests/e2e/test_release_gate_catalog.py
+  - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_rpc_registry_live.py
   endpoint_mapping:

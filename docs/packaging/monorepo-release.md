@@ -103,7 +103,7 @@ Its package matrix cells additionally include:
 
 ```text
 tests/integration
-tests/interop
+pkgs/120-tests/tba-tests-certification/tests/interop
 ```
 
 Those cells pass `--certification-lane all` through the cobycloud isolated

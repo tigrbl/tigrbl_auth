@@ -21,6 +21,9 @@ the migrated suites and the remaining root tests.
 | `tba-tests-runtime` | Server runners, runtime settings, and capability composition |
 | `tba-tests-operator-cli` | CLI contracts, operator commands, and lifecycle conformance |
 | `tba-tests-api-contracts` | OpenAPI, OpenRPC, route schemas, and router ownership |
+| `tba-tests-certification` | Certification evidence, validated execution, and peer catalogs |
+| `tba-tests-release` | Release gates, signing, package matrices, and installation checks |
+| `tba-tests-architecture` | Package taxonomy, layer boundaries, and SSOT governance |
 | `tba-tests-jose` | JOSE/JWT and related signing, encryption, and key handling |
 | `tba-tests-wire-codecs` | JSON canonicalization, multibase, CID, and DAG-CBOR |
 | `tba-tests-did` | DID Core documents, resolution, dereferencing, and controller behavior |

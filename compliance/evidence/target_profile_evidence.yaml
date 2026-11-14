@@ -15,7 +15,7 @@ bundles:
   target: Bootstrap and migration lifecycle
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/e2e/test_release_gate_catalog.py
+  - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
   evidence_refs:
@@ -75,9 +75,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/discovery/
 - profile: baseline
@@ -93,7 +93,7 @@ bundles:
 - profile: baseline
   target: OpenAPI 3.1 / 3.2 compatible public contract
   tests:
-  - tests/e2e/test_release_gate_catalog.py
+  - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
   evidence_refs:
@@ -115,9 +115,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/oauth2-core/
 - profile: baseline
@@ -125,9 +125,9 @@ bundles:
   tests:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/bearer/
 - profile: baseline
@@ -180,9 +180,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc7636_pkce.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/pkce/
 - profile: baseline
@@ -204,7 +204,7 @@ bundles:
   target: Release bundle and signature verification
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/security/test_release_bundle_signing.py
+  - pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
   - tests/unit/test_published_dependency_model.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
   evidence_refs:
@@ -261,7 +261,7 @@ bundles:
   target: Bootstrap and migration lifecycle
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/e2e/test_release_gate_catalog.py
+  - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
   evidence_refs:
@@ -321,9 +321,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/discovery/
 - profile: production
@@ -357,7 +357,7 @@ bundles:
 - profile: production
   target: OpenAPI 3.1 / 3.2 compatible public contract
   tests:
-  - tests/e2e/test_release_gate_catalog.py
+  - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
   evidence_refs:
@@ -379,9 +379,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/oauth2-core/
 - profile: production
@@ -389,9 +389,9 @@ bundles:
   tests:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/bearer/
 - profile: production
@@ -488,9 +488,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc7636_pkce.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/pkce/
 - profile: production
@@ -508,9 +508,9 @@ bundles:
   tests:
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8252_native_app_redirects.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc8252_native_apps.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/native-apps/
 - profile: production
@@ -534,9 +534,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/unit/test_advanced_surface_contracts.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/jwt-access-token-profile/
 - profile: production
@@ -556,16 +556,16 @@ bundles:
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/protected-resource-metadata/
 - profile: production
   target: Release bundle and signature verification
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/security/test_release_bundle_signing.py
+  - pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
   - tests/unit/test_published_dependency_model.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
   evidence_refs:
@@ -622,7 +622,7 @@ bundles:
   target: Bootstrap and migration lifecycle
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/e2e/test_release_gate_catalog.py
+  - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
   evidence_refs:
@@ -691,9 +691,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/discovery/
 - profile: hardening
@@ -736,7 +736,7 @@ bundles:
 - profile: hardening
   target: OpenAPI 3.1 / 3.2 compatible public contract
   tests:
-  - tests/e2e/test_release_gate_catalog.py
+  - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
   evidence_refs:
@@ -758,9 +758,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/oauth2-core/
 - profile: hardening
@@ -768,9 +768,9 @@ bundles:
   tests:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/bearer/
 - profile: hardening
@@ -867,9 +867,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc7636_pkce.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/pkce/
 - profile: hardening
@@ -887,9 +887,9 @@ bundles:
   tests:
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8252_native_app_redirects.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc8252_native_apps.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/native-apps/
 - profile: hardening
@@ -916,9 +916,9 @@ bundles:
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/device-flow/
 - profile: hardening
@@ -930,9 +930,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/token-exchange/
 - profile: hardening
@@ -950,9 +950,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/unit/test_advanced_surface_contracts.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/jwt-access-token-profile/
 - profile: hardening
@@ -961,9 +961,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9101_jar.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/unit/test_advanced_surface_contracts.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   - tests/unit/test_hardening_cluster_b.py
   evidence_refs:
   - compliance/evidence/tier3/jar/
@@ -973,9 +973,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9126_par.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   - tests/unit/test_hardening_cluster_b.py
   evidence_refs:
   - compliance/evidence/tier3/par/
@@ -995,9 +995,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/unit/test_advanced_surface_contracts.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   - tests/unit/test_hardening_cluster_b.py
   evidence_refs:
   - compliance/evidence/tier3/rar/
@@ -1007,9 +1007,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9449_dpop.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/unit/test_advanced_surface_contracts.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   - tests/unit/test_hardening_cluster_c.py
   evidence_refs:
   - compliance/evidence/tier3/dpop/
@@ -1031,16 +1031,16 @@ bundles:
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/protected-resource-metadata/
 - profile: hardening
   target: Release bundle and signature verification
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/security/test_release_bundle_signing.py
+  - pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
   - tests/unit/test_published_dependency_model.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
   evidence_refs:
@@ -1097,7 +1097,7 @@ bundles:
   target: Bootstrap and migration lifecycle
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/e2e/test_release_gate_catalog.py
+  - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
   evidence_refs:
@@ -1166,9 +1166,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/discovery/
 - profile: fapi2-security
@@ -1211,7 +1211,7 @@ bundles:
 - profile: fapi2-security
   target: OpenAPI 3.1 / 3.2 compatible public contract
   tests:
-  - tests/e2e/test_release_gate_catalog.py
+  - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
   evidence_refs:
@@ -1233,9 +1233,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/oauth2-core/
 - profile: fapi2-security
@@ -1243,9 +1243,9 @@ bundles:
   tests:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/bearer/
 - profile: fapi2-security
@@ -1342,9 +1342,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc7636_pkce.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/pkce/
 - profile: fapi2-security
@@ -1362,9 +1362,9 @@ bundles:
   tests:
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8252_native_app_redirects.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc8252_native_apps.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/native-apps/
 - profile: fapi2-security
@@ -1391,9 +1391,9 @@ bundles:
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/device-flow/
 - profile: fapi2-security
@@ -1405,9 +1405,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/token-exchange/
 - profile: fapi2-security
@@ -1416,9 +1416,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8705_mtls.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/unit/test_advanced_surface_contracts.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   - tests/unit/test_hardening_cluster_c.py
   evidence_refs:
   - compliance/evidence/tier3/mtls/
@@ -1437,9 +1437,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/unit/test_advanced_surface_contracts.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/jwt-access-token-profile/
 - profile: fapi2-security
@@ -1448,9 +1448,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9101_jar.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/unit/test_advanced_surface_contracts.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   - tests/unit/test_hardening_cluster_b.py
   evidence_refs:
   - compliance/evidence/tier3/jar/
@@ -1460,9 +1460,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9126_par.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   - tests/unit/test_hardening_cluster_b.py
   evidence_refs:
   - compliance/evidence/tier3/par/
@@ -1482,9 +1482,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/unit/test_advanced_surface_contracts.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   - tests/unit/test_hardening_cluster_b.py
   evidence_refs:
   - compliance/evidence/tier3/rar/
@@ -1494,9 +1494,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9449_dpop.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/unit/test_advanced_surface_contracts.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   - tests/unit/test_hardening_cluster_c.py
   evidence_refs:
   - compliance/evidence/tier3/dpop/
@@ -1518,16 +1518,16 @@ bundles:
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/protected-resource-metadata/
 - profile: fapi2-security
   target: Release bundle and signature verification
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/security/test_release_bundle_signing.py
+  - pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
   - tests/unit/test_published_dependency_model.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
   evidence_refs:
@@ -1584,7 +1584,7 @@ bundles:
   target: Bootstrap and migration lifecycle
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/e2e/test_release_gate_catalog.py
+  - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
   evidence_refs:
@@ -1653,9 +1653,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/discovery/
 - profile: peer-claim
@@ -1698,7 +1698,7 @@ bundles:
 - profile: peer-claim
   target: OpenAPI 3.1 / 3.2 compatible public contract
   tests:
-  - tests/e2e/test_release_gate_catalog.py
+  - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
   evidence_refs:
@@ -1720,9 +1720,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/oauth2-core/
 - profile: peer-claim
@@ -1730,9 +1730,9 @@ bundles:
   tests:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/bearer/
 - profile: peer-claim
@@ -1829,9 +1829,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc7636_pkce.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/pkce/
 - profile: peer-claim
@@ -1849,9 +1849,9 @@ bundles:
   tests:
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8252_native_app_redirects.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc8252_native_apps.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/native-apps/
 - profile: peer-claim
@@ -1878,9 +1878,9 @@ bundles:
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/device-flow/
 - profile: peer-claim
@@ -1892,9 +1892,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/token-exchange/
 - profile: peer-claim
@@ -1912,9 +1912,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/unit/test_advanced_surface_contracts.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/jwt-access-token-profile/
 - profile: peer-claim
@@ -1923,9 +1923,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9101_jar.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/unit/test_advanced_surface_contracts.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   - tests/unit/test_hardening_cluster_b.py
   evidence_refs:
   - compliance/evidence/tier3/jar/
@@ -1935,9 +1935,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9126_par.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   - tests/unit/test_hardening_cluster_b.py
   evidence_refs:
   - compliance/evidence/tier3/par/
@@ -1957,9 +1957,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/unit/test_advanced_surface_contracts.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   - tests/unit/test_hardening_cluster_b.py
   evidence_refs:
   - compliance/evidence/tier3/rar/
@@ -1969,9 +1969,9 @@ bundles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9449_dpop.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/unit/test_advanced_surface_contracts.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   - tests/unit/test_hardening_cluster_c.py
   evidence_refs:
   - compliance/evidence/tier3/dpop/
@@ -1993,16 +1993,16 @@ bundles:
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py
-  - tests/interop/test_peer_counterpart_catalog.py
-  - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
   evidence_refs:
   - compliance/evidence/tier3/protected-resource-metadata/
 - profile: peer-claim
   target: Release bundle and signature verification
   tests:
   - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/security/test_release_bundle_signing.py
+  - pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
   - tests/unit/test_published_dependency_model.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
   evidence_refs:

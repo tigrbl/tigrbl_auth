@@ -174,7 +174,7 @@ def build_feature_completeness_report(repo_root: Path, *, report_dir: Path | Non
         "build, sign, and verify release bundles",
         passed=bundle.exists() and signed.get("verification", {}).get("passed") is True and verified.get("passed") is True and {"bundle", "sign", "verify", "status"} <= release_verbs,
         summary="Release bundles can be materialized, signed, and verified from repository state.",
-        evidence=["tests/security/test_release_bundle_signing.py", str(bundle.relative_to(repo_root))],
+        evidence=["pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py", str(bundle.relative_to(repo_root))],
         details_payload={"bundle_dir": str(bundle.relative_to(repo_root)), "sign_status": signed.get("status"), "release_verbs": sorted(release_verbs)},
     )
 

@@ -155,7 +155,7 @@
       "passed": true,
       "summary": "Release bundles can be materialized, signed, and verified from repository state.",
       "evidence": [
-        "tests/security/test_release_bundle_signing.py",
+        "pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py",
         "dist/feature-completeness-sandbox-5qt_79i_/release-bundle"
       ],
       "details": {

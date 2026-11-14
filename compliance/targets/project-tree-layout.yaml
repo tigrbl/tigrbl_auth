@@ -20,7 +20,7 @@ project_tree:
   - tests/unit
   - tests/integration
   - tests/conformance
-  - tests/interop
+  - pkgs/120-tests/tba-tests-certification/tests/interop
   - tests/negative
   - tests/security
   - tests/e2e

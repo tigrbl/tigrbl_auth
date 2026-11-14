@@ -98,7 +98,7 @@ BUNDLE_SPECS = [
         tests=[
             "pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_uvicorn.py",
             "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-            "tests/interop/test_runner_profile_catalog_completeness.py",
+            "pkgs/120-tests/tba-tests-certification/tests/interop/test_runner_profile_catalog_completeness.py",
         ],
     ),
     BundleSpec(
@@ -123,7 +123,7 @@ BUNDLE_SPECS = [
         tests=[
             "pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_hypercorn.py",
             "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-            "tests/interop/test_runner_profile_catalog_completeness.py",
+            "pkgs/120-tests/tba-tests-certification/tests/interop/test_runner_profile_catalog_completeness.py",
         ],
     ),
     BundleSpec(
@@ -148,7 +148,7 @@ BUNDLE_SPECS = [
         tests=[
             "pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_tigrcorn.py",
             "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-            "tests/interop/test_runner_profile_catalog_completeness.py",
+            "pkgs/120-tests/tba-tests-certification/tests/interop/test_runner_profile_catalog_completeness.py",
         ],
     ),
     BundleSpec(
@@ -174,7 +174,7 @@ BUNDLE_SPECS = [
         tests=[
             "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
             "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-            "tests/interop/test_operator_profile_catalog_completeness.py",
+            "pkgs/120-tests/tba-tests-certification/tests/interop/test_operator_profile_catalog_completeness.py",
         ],
     ),
     BundleSpec(
@@ -259,7 +259,7 @@ BUNDLE_SPECS = [
             TARGETED_RUNTIME_OPERATOR_REPORT,
         ],
         tests=[
-            "tests/security/test_release_bundle_signing.py",
+            "pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py",
             "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py",
         ],
     ),
@@ -416,7 +416,7 @@ Source artifact: {_capability_scoped_text(_source_zip() or 'unknown')}
 Primary verification commands:
 - python scripts/generate_effective_release_manifests.py
 - python scripts/generate_state_reports.py
-- pytest -q pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_uvicorn.py pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_hypercorn.py pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_tigrcorn.py pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py tests/negative/test_invalid_artifact_inputs.py tests/negative/test_resource_exchange_abuse.py pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py tests/interop/test_peer_profile_catalog.py tests/interop/test_runner_profile_catalog_completeness.py tests/interop/test_operator_profile_catalog_completeness.py
+- pytest -q --certification-lane all pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_uvicorn.py pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_hypercorn.py pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_tigrcorn.py pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py tests/negative/test_invalid_artifact_inputs.py tests/negative/test_resource_exchange_abuse.py pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_profile_catalog.py pkgs/120-tests/tba-tests-certification/tests/interop/test_runner_profile_catalog_completeness.py pkgs/120-tests/tba-tests-certification/tests/interop/test_operator_profile_catalog_completeness.py
 - python scripts/run_release_gates.py
 
 Target-associated tests:

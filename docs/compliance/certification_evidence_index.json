@@ -184,7 +184,7 @@
         "pkgs/50-protocols/tba-protocol-workload-spiffe-workload-api/src/tba_protocol_workload_spiffe_workload_api/streams.py",
         "pkgs/50-protocols/tba-protocol-workload-spiffe-workload-api/src/tba_protocol_workload_spiffe_workload_api/versions.py",
         "scripts/validate_layer_boundaries.py",
-        "tests/unit/test_auth_package_taxonomy_boundary.py",
+        "pkgs/120-tests/tba-tests-architecture/tests/unit/test_auth_package_taxonomy_boundary.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_cose_cwt_runtime_profiles.py",
         "pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py",
@@ -295,6 +295,7 @@
       "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9728_protected_resource_metadata.py"
     ],
     "unit": [
+      "pkgs/120-tests/tba-tests-architecture/tests/unit/test_package_index.py",
       "pkgs/120-tests/tba-tests-platform-iam/tests/unit/test_platform_iam_layer_boundaries.py",
       "pkgs/120-tests/tba-tests-platform-iam/tests/unit/test_platform_iam_contracts.py",
       "pkgs/120-tests/tba-tests-platform-iam/tests/uix/test_platform_iam_uix_contract.py",
@@ -311,7 +312,7 @@
       "pkgs/120-tests/tba-tests-dns/tests/unit/test_dns_txt_provider.py",
       "pkgs/120-tests/tba-tests-totp/tests/unit/test_native_totp.py",
       "pkgs/120-tests/tba-tests-x509/tests/unit/test_x509_evidence_boundaries.py",
-      "tests/e2e/test_release_gate_catalog.py",
+      "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
       "tests/examples/test_python_cli_device_login.py",
       "tests/examples/test_readme_usage.py",
       "tests/features/test_profile_reference_union.py",
@@ -335,7 +336,7 @@
       "tests/packages/tba-app-backend-tenant-administration/test_tenant_admin_backend_app_dev_deployment_proof.py",
       "tests/packages/tba-app-backend-tenant-administration/test_tenant_admin_backend_app_package.py",
       "tests/packages/tba-testkit-identity/test_identity_testkit_package.py",
-      "tests/perf/test_bundle_manifest_size.py",
+      "pkgs/120-tests/tba-tests-release/tests/perf/test_bundle_manifest_size.py",
       "pkgs/120-tests/tba-tests-admin-uix/tests/uix/test_abac_admin.py",
       "pkgs/120-tests/tba-tests-admin-uix/tests/uix/test_admin_enterprise_boundary.py",
       "pkgs/120-tests/tba-tests-admin-uix/tests/uix/test_admin_golden_path.py",
@@ -352,7 +353,7 @@
       "pkgs/120-tests/tba-tests-admin-uix/tests/uix/test_resource_views_states.py",
       "pkgs/120-tests/tba-tests-admin-uix/tests/uix/test_safe_mutations.py",
       "pkgs/120-tests/tba-tests-administration/tests/unit/test_account_self_service_capability.py",
-      "tests/unit/test_active_layer_path_hygiene.py",
+      "pkgs/120-tests/tba-tests-architecture/tests/unit/test_active_layer_path_hygiene.py",
       "tests/unit/test_adapters.py",
       "pkgs/120-tests/tba-tests-administration/tests/unit/test_admin_control_plane_boundary.py",
       "pkgs/120-tests/tba-tests-authorization/tests/unit/test_admin_policy_boundary.py",
@@ -365,7 +366,7 @@
       "pkgs/120-tests/tba-tests-attestation-composition/tests/unit/test_attestation_appraisal.py",
       "tests/unit/test_audit_runtime_boundary.py",
       "pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py",
-      "tests/unit/test_auth_package_taxonomy_boundary.py",
+      "pkgs/120-tests/tba-tests-architecture/tests/unit/test_auth_package_taxonomy_boundary.py",
       "tests/unit/test_authenticator_contracts_and_providers.py",
       "pkgs/120-tests/tba-tests-authorization/tests/unit/test_authority_closure_monotonicity.py",
       "pkgs/120-tests/tba-tests-authorization/tests/unit/test_authority_closure_monotonicity_robustness_t2.py",
@@ -384,24 +385,24 @@
       "tests/unit/test_backend_app_table_initialization.py",
       "tests/unit/test_backends.py",
       "tests/unit/test_base_contract_inheritance.py",
-      "tests/unit/test_base_package_taxonomy.py",
+      "pkgs/120-tests/tba-tests-architecture/tests/unit/test_base_package_taxonomy.py",
       "tests/unit/test_bootstrap_secret_scrub.py",
       "tests/unit/test_bootstrappable_user_defaults.py",
       "tests/unit/test_boundary_freeze_checkpoint.py",
       "tests/unit/test_bulk_schema_fields.py",
-      "tests/unit/test_canonical_package_layer_index.py",
+      "pkgs/120-tests/tba-tests-architecture/tests/unit/test_canonical_package_layer_index.py",
       "tests/unit/test_capability_family_registry.py",
       "tests/unit/test_capability_hierarchy.py",
       "pkgs/120-tests/tba-tests-x509/tests/unit/test_certificate_providers.py",
-      "tests/unit/test_certification_evidence_negative_proofs.py",
-      "tests/unit/test_certification_gap_inventory.py",
-      "tests/unit/test_certification_lane_evidence.py",
+      "pkgs/120-tests/tba-tests-certification/tests/unit/test_certification_evidence_negative_proofs.py",
+      "pkgs/120-tests/tba-tests-certification/tests/unit/test_certification_gap_inventory.py",
+      "pkgs/120-tests/tba-tests-certification/tests/unit/test_certification_lane_evidence.py",
       "tests/unit/test_claim_boundary_rebaseline.py",
       "tests/unit/test_claim_foundation_layers.py",
       "tests/unit/test_claim_object_layers.py",
       "tests/unit/test_claim_object_taxonomy.py",
       "tests/unit/test_claim_registry_alignment.py",
-      "tests/unit/test_clean_room_install_substrate.py",
+      "pkgs/120-tests/tba-tests-release/tests/unit/test_clean_room_install_substrate.py",
       "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
       "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py",
       "tests/unit/test_client_identity_runtime_boundary.py",
@@ -411,12 +412,12 @@
       "tests/unit/test_concrete_base_inheritance.py",
       "tests/unit/test_concrete_digital_artifact_ownership.py",
       "tests/unit/test_concrete_layer_taxonomy.py",
-      "tests/unit/test_concrete_package_taxonomy.py",
+      "pkgs/120-tests/tba-tests-architecture/tests/unit/test_concrete_package_taxonomy.py",
       "tests/unit/test_contract_durable_storage_tables.py",
       "tests/unit/test_contract_enum_ownership.py",
       "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py",
       "tests/unit/test_contract_ownership_authority.py",
-      "tests/unit/test_contract_package_taxonomy.py",
+      "pkgs/120-tests/tba-tests-architecture/tests/unit/test_contract_package_taxonomy.py",
       "tests/unit/test_contract_payloads_deferred_upstream.py",
       "pkgs/120-tests/tba-tests-authorization/tests/unit/test_control_plane_correctness_properties.py",
       "pkgs/120-tests/tba-tests-corim/tests/unit/test_corim_protocol_versioning.py",
@@ -446,7 +447,7 @@
       "pkgs/120-tests/tba-tests-authorization/tests/test_did_workload_policy_contracts.py",
       "pkgs/120-tests/tba-tests-credential-composition/tests/unit/test_digital_credential_providers.py",
       "pkgs/120-tests/tba-tests-oauth/tests/unit/test_dpop_key_credentials.py",
-      "tests/unit/test_durability_package_taxonomy.py",
+      "pkgs/120-tests/tba-tests-architecture/tests/unit/test_durability_package_taxonomy.py",
       "pkgs/120-tests/tba-tests-eat/tests/unit/test_eat_concrete.py",
       "pkgs/120-tests/tba-tests-corim/tests/unit/test_corim_concrete.py",
       "pkgs/120-tests/tba-tests-eat/tests/unit/test_eat_cross_aspect_contracts.py",
@@ -471,7 +472,7 @@
       "tests/unit/test_identity_artifact_capabilities.py",
       "tests/unit/test_identity_artifact_confusion_vectors.py",
       "tests/unit/test_identity_artifact_runtime_composition.py",
-      "tests/unit/test_identity_author_release_signing_boundary.py",
+      "pkgs/120-tests/tba-tests-release/tests/unit/test_identity_author_release_signing_boundary.py",
       "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_identity_cli_file_size_guard.py",
       "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_identity_cli_package_boundary.py",
       "tests/unit/test_identity_concrete_layer_boundary.py",
@@ -503,13 +504,13 @@
       "pkgs/120-tests/tba-tests-authorization/tests/unit/test_liveness_control_plane_robustness_t2.py",
       "pkgs/120-tests/tba-tests-mdoc/tests/unit/test_mdoc_concrete.py",
       "tests/unit/test_models.py",
-      "tests/unit/test_monorepo_release.py",
+      "pkgs/120-tests/tba-tests-release/tests/unit/test_monorepo_release.py",
       "tests/unit/test_mtls_certificate_credentials.py",
       "pkgs/120-tests/tba-tests-administration/tests/unit/test_my_account_table_owned_ops.py",
       "tests/unit/test_neutral_identity_artifact_bases.py",
       "tests/unit/test_neutral_identity_artifact_contracts.py",
       "tests/unit/test_new_capability_packages.py",
-      "tests/unit/test_node_workspace_layers.py",
+      "pkgs/120-tests/tba-tests-architecture/tests/unit/test_node_workspace_layers.py",
       "tests/unit/test_non_rfc_track_checkpoint.py",
       "pkgs/120-tests/tba-tests-oauth/tests/unit/test_oauth_authorization_http_binding.py",
       "pkgs/120-tests/tba-tests-oauth/tests/unit/test_oauth_device_authorization_http_binding.py",
@@ -542,11 +543,11 @@
       "tests/unit/test_operator_service_layer.py",
       "tests/unit/test_operator_store_table_owned_boundary.py",
       "tests/unit/test_optional_contract_state_tables.py",
-      "tests/unit/test_package_dependency_layering.py",
+      "pkgs/120-tests/tba-tests-architecture/tests/unit/test_package_dependency_layering.py",
       "tests/unit/test_package_maturity_governance.py",
-      "tests/unit/test_package_python_matrix_workflow.py",
+      "pkgs/120-tests/tba-tests-release/tests/unit/test_package_python_matrix_workflow.py",
       "tests/unit/test_path_safety.py",
-      "tests/unit/test_peer_bundle_completeness.py",
+      "pkgs/120-tests/tba-tests-certification/tests/unit/test_peer_bundle_completeness.py",
       "pkgs/120-tests/tba-tests-oauth/tests/unit/test_pkce_provider_boundary.py",
       "tests/unit/test_plane_contracts_boundary.py",
       "pkgs/120-tests/tba-tests-authorization/tests/unit/test_policy_canonicalization_ownership.py",
@@ -566,7 +567,7 @@
       "tests/unit/test_protocol_state_provider_boundaries.py",
       "tests/unit/test_provenance_naming_guard.py",
       "tests/unit/test_provider_base_inheritance.py",
-      "tests/unit/test_provider_package_taxonomy.py",
+      "pkgs/120-tests/tba-tests-architecture/tests/unit/test_provider_package_taxonomy.py",
       "tests/unit/test_provider_packages_implement_trust_domain_bases.py",
       "tests/unit/test_provider_umbrella_reorganization.py",
       "pkgs/120-tests/tba-tests-oidc/tests/unit/test_provider_white_label_login_boundary.py",
@@ -579,14 +580,14 @@
       "tests/unit/test_pytest_workspace_temp_root.py",
       "pkgs/120-tests/tba-tests-administration/tests/unit/test_realm_administration_capability.py",
       "tests/unit/test_registry_state_table_ownership.py",
-      "tests/unit/test_release_contracts_boundary.py",
-      "tests/unit/test_release_posture_plane.py",
+      "pkgs/120-tests/tba-tests-release/tests/unit/test_release_contracts_boundary.py",
+      "pkgs/120-tests/tba-tests-release/tests/unit/test_release_posture_plane.py",
       "tests/unit/test_remote_adapter.py",
       "tests/unit/test_replay_layer_ownership.py",
       "tests/unit/test_repo_truth_helpers.py",
       "tests/unit/test_request_scoped_runtime_authority.py",
       "tests/unit/test_resource_server_consumer_boundary.py",
-      "tests/unit/test_retained_target_test_evidence.py",
+      "pkgs/120-tests/tba-tests-certification/tests/unit/test_retained_target_test_evidence.py",
       "pkgs/120-tests/tba-tests-oauth/tests/unit/test_revocation_surface_ownership.py",
       "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6749_auth_flow_endpoints.py",
       "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6749_token_endpoint.py",
@@ -645,7 +646,7 @@
       "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_profile_configuration.py",
       "tests/unit/test_runtime_standards_manifest.py",
       "pkgs/120-tests/tba-tests-oauth/tests/unit/test_runtime_token_capability_service.py",
-      "tests/unit/test_runtime_validation_matrix.py",
+      "pkgs/120-tests/tba-tests-certification/tests/unit/test_runtime_validation_matrix.py",
       "tests/unit/test_runtime_version_truthfulness.py",
       "pkgs/120-tests/tba-tests-sd-jwt-vc/tests/unit/test_sd_jwt_vc_concrete.py",
       "pkgs/120-tests/tba-tests-administration/tests/unit/test_secure_default_admin_gate.py",
@@ -664,10 +665,10 @@
       "tests/unit/test_spiffe_svid_profiles.py",
       "tests/unit/test_spiffe_workload_and_broker_api_profiles.py",
       "tests/unit/test_ssot_dependency_maintenance_traceability.py",
-      "tests/unit/test_ssot_document_authority.py",
+      "pkgs/120-tests/tba-tests-architecture/tests/unit/test_ssot_document_authority.py",
       "tests/unit/test_ssot_operator_vocabulary_boundary.py",
-      "tests/unit/test_ssot_registry_integrity.py",
-      "tests/unit/test_ssot_work_item_traceability.py",
+      "pkgs/120-tests/tba-tests-architecture/tests/unit/test_ssot_registry_integrity.py",
+      "pkgs/120-tests/tba-tests-architecture/tests/unit/test_ssot_work_item_traceability.py",
       "tests/unit/test_standalone_concrete_ownership.py",
       "tests/unit/test_standalone_identity_credential_artifacts.py",
       "tests/unit/test_standard_owner_metadata.py",
@@ -689,8 +690,8 @@
       "pkgs/120-tests/tba-tests-authorization/tests/unit/test_tenant_realm_isolation_invariants.py",
       "tests/unit/test_terminal_package_layers.py",
       "tests/unit/test_testkit_cross_cutting_boundary.py",
-      "tests/unit/test_tier3_validated_rebuild.py",
-      "tests/unit/test_tier4_checkpoint.py",
+      "pkgs/120-tests/tba-tests-certification/tests/unit/test_tier3_validated_rebuild.py",
+      "pkgs/120-tests/tba-tests-certification/tests/unit/test_tier4_checkpoint.py",
       "tests/unit/test_tba_auth_facade_ownership.py",
       "tests/unit/test_tba_plugin_tigrbl_package.py",
       "tests/unit/test_tba_bcp_direct_db_boundary.py",
@@ -703,7 +704,7 @@
       "tests/unit/test_token_record_runtime_boundary.py",
       "pkgs/120-tests/tba-tests-oauth/tests/unit/test_token_revocation_capability.py",
       "pkgs/120-tests/tba-tests-oauth/tests/unit/test_token_revocation_runtime_composition.py",
-      "tests/unit/test_tox_pip_install.py",
+      "pkgs/120-tests/tba-tests-release/tests/unit/test_tox_pip_install.py",
       "pkgs/120-tests/tba-tests-authorization/tests/unit/test_trust_graph_integrity_guards.py",
       "tests/unit/test_truth_chain_hashing.py",
       "tests/unit/test_truthfulness_alignment.py",
@@ -711,7 +712,7 @@
       "tests/unit/test_typescript_rp_node_package_boundary.py",
       "pkgs/120-tests/tba-tests-admin-uix/tests/unit/test_uix_layer_boundaries.py",
       "tests/unit/test_user_register_schema.py",
-      "tests/unit/test_validated_execution_runtime_matrix.py",
+      "pkgs/120-tests/tba-tests-certification/tests/unit/test_validated_execution_runtime_matrix.py",
       "pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_jose_cose_profile.py",
       "pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_jose_cose_protocol.py",
       "pkgs/120-tests/tba-tests-vcdm/tests/unit/test_vcdm_concrete.py",
@@ -740,7 +741,7 @@
       "tests/unit/test_workload_identity_conformance_testkit.py",
       "tests/unit/test_workload_identity_runtime_composition.py",
       "pkgs/120-tests/tba-tests-wimse/tests/test_workload_proof_claims.py",
-      "tests/unit/test_workspace_layer_sources.py"
+      "pkgs/120-tests/tba-tests-architecture/tests/unit/test_workspace_layer_sources.py"
     ],
     "integration": [
       "pkgs/120-tests/tba-tests-platform-iam/tests/integration/test_platform_iam_rp_session.py",
@@ -788,7 +789,7 @@
       "pkgs/120-tests/tba-tests-storage/tests/unit/test_credential_registry_migration_0024.py",
       "pkgs/120-tests/tba-tests-storage/tests/unit/test_did_gnap_migration_0030.py",
       "pkgs/120-tests/tba-tests-storage/tests/unit/test_dpop_migration_0034.py",
-      "tests/unit/test_migration_portability_evidence.py",
+      "pkgs/120-tests/tba-tests-certification/tests/unit/test_migration_portability_evidence.py",
       "pkgs/120-tests/tba-tests-storage/tests/unit/test_presentation_migration_0026.py",
       "pkgs/120-tests/tba-tests-storage/tests/unit/test_replay_migration_0033.py",
       "pkgs/120-tests/tba-tests-storage/tests/unit/test_security_event_migration_0029.py",
@@ -797,18 +798,18 @@
       "pkgs/120-tests/tba-tests-storage/tests/test_workload_artifact_migration_0036.py"
     ],
     "interop": [
-      "tests/interop/test_operator_profile_catalog_completeness.py",
-      "tests/interop/test_runner_profile_catalog_completeness.py"
+      "pkgs/120-tests/tba-tests-certification/tests/interop/test_operator_profile_catalog_completeness.py",
+      "pkgs/120-tests/tba-tests-certification/tests/interop/test_runner_profile_catalog_completeness.py"
     ],
     "peer": [
-      "tests/interop/test_peer_counterpart_catalog.py",
-      "tests/interop/test_peer_matrix_artifacts.py",
-      "tests/interop/test_peer_matrix_external_status.py",
-      "tests/interop/test_peer_profile_catalog.py",
-      "tests/interop/test_peer_target_coverage.py",
-      "tests/interop/test_tier4_external_handoff_templates.py",
-      "tests/interop/test_tier4_fixture_rejection.py",
-      "tests/interop/test_tier4_promotion_fail_closed.py"
+      "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+      "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+      "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_external_status.py",
+      "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_profile_catalog.py",
+      "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_target_coverage.py",
+      "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_external_handoff_templates.py",
+      "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_fixture_rejection.py",
+      "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
     ],
     "security-negative": [
       "tests/negative/test_certification_attack_paths.py",
@@ -831,7 +832,7 @@
       "pkgs/120-tests/tba-tests-jose/tests/security/test_jose_negative_security.py",
       "tests/security/test_machine_identity_governance.py",
       "tests/security/test_realm_isolation_certification.py",
-      "tests/security/test_release_bundle_signing.py",
+      "pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py",
       "tests/security/test_residency_sovereignty_policy.py",
       "tests/security/test_resource_server_verifier_certification.py",
       "tests/security/test_runtime_capability_truth.py",
@@ -2326,7 +2327,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/security/test_release_bundle_signing.py",
+        "pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py",
         "pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
@@ -2638,7 +2639,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
@@ -3070,7 +3071,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py",
@@ -3098,7 +3099,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py",
@@ -3126,7 +3127,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py",
@@ -3154,7 +3155,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py",
@@ -4540,7 +4541,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py",
@@ -4568,7 +4569,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py",
@@ -4596,7 +4597,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py",
@@ -4624,7 +4625,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py",
@@ -4652,7 +4653,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/security/test_release_bundle_signing.py",
+        "pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py",
         "pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
@@ -4682,7 +4683,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/security/test_release_bundle_signing.py",
+        "pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py",
         "pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
@@ -4712,7 +4713,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/security/test_release_bundle_signing.py",
+        "pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py",
         "pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
@@ -4742,7 +4743,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/security/test_release_bundle_signing.py",
+        "pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py",
         "pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
@@ -4772,7 +4773,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/security/test_release_bundle_signing.py",
+        "pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py",
         "pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
@@ -4928,7 +4929,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
@@ -4971,7 +4972,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
@@ -5004,7 +5005,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
@@ -5037,7 +5038,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
@@ -5490,7 +5491,7 @@
         "tests/conformance/production/test_rfc8615_well_known_uris.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9728_protected_resource_metadata.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
@@ -5506,9 +5507,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/negative/test_hardening_runtime_enforcement.py",
         "tests/unit/test_advanced_surface_contracts.py",
@@ -5642,7 +5643,7 @@
         "tests/conformance/production/test_rfc8615_well_known_uris.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9728_protected_resource_metadata.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
@@ -5658,9 +5659,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/negative/test_hardening_runtime_enforcement.py",
         "tests/unit/test_advanced_surface_contracts.py",
@@ -5795,7 +5796,7 @@
         "tests/conformance/production/test_rfc8615_well_known_uris.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9728_protected_resource_metadata.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
@@ -5811,9 +5812,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/negative/test_hardening_runtime_enforcement.py",
         "tests/unit/test_advanced_surface_contracts.py",
@@ -5946,7 +5947,7 @@
         "tests/conformance/production/test_rfc8615_well_known_uris.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9728_protected_resource_metadata.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
@@ -5962,9 +5963,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/negative/test_hardening_runtime_enforcement.py",
         "tests/unit/test_advanced_surface_contracts.py",
@@ -6099,7 +6100,7 @@
         "tests/conformance/production/test_rfc8615_well_known_uris.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9728_protected_resource_metadata.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
@@ -6115,9 +6116,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/negative/test_hardening_runtime_enforcement.py",
         "tests/unit/test_advanced_surface_contracts.py",
@@ -6244,7 +6245,7 @@
         "tests/conformance/production/test_rfc8615_well_known_uris.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9728_protected_resource_metadata.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
@@ -6260,9 +6261,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/negative/test_hardening_runtime_enforcement.py",
         "tests/unit/test_advanced_surface_contracts.py",
@@ -6457,7 +6458,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/security/test_release_bundle_signing.py",
+        "pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py",
         "pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
@@ -6717,9 +6718,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/negative/test_hardening_runtime_enforcement.py",
         "tests/unit/test_hardening_cluster_c.py",
         "tests/unit/test_profile_discovery_runtime.py",
@@ -6757,9 +6758,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/negative/test_hardening_runtime_enforcement.py",
         "tests/unit/test_hardening_cluster_c.py",
         "tests/unit/test_profile_discovery_runtime.py",
@@ -7618,9 +7619,9 @@
       "profile": null,
       "positive_tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc8252_native_apps.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8252_native_app_redirects.py"
       ],
       "negative_tests": [],
@@ -7662,7 +7663,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/security/test_release_bundle_signing.py",
+        "pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py",
         "pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
@@ -7950,7 +7951,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/security/test_release_bundle_signing.py",
+        "pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py",
         "pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
@@ -7981,7 +7982,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
@@ -8014,7 +8015,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
@@ -8047,7 +8048,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
@@ -8080,7 +8081,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
@@ -8113,7 +8114,7 @@
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
@@ -8214,7 +8215,7 @@
         "tests/conformance/production/test_rfc8615_well_known_uris.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9728_protected_resource_metadata.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
@@ -8230,9 +8231,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/negative/test_hardening_runtime_enforcement.py",
         "tests/unit/test_advanced_surface_contracts.py",
@@ -8309,9 +8310,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_fapi_runtime_profile.py",
         "tests/unit/test_profile_discovery_runtime.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/assertion-framework/",
@@ -8373,9 +8374,9 @@
         "tests/unit/test_hardening_cluster_c.py",
         "tests/unit/test_profile_discovery_runtime.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
@@ -8403,9 +8404,9 @@
         "tests/unit/test_hardening_cluster_c.py",
         "tests/unit/test_profile_discovery_runtime.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
@@ -8426,9 +8427,9 @@
         "tests/unit/test_feature_flag_registry.py"
       ],
       "negative_tests": [
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
@@ -8520,7 +8521,7 @@
         "tests/conformance/production/test_rfc8615_well_known_uris.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9728_protected_resource_metadata.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
@@ -8536,9 +8537,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/negative/test_hardening_runtime_enforcement.py",
         "tests/unit/test_advanced_surface_contracts.py",
@@ -8616,9 +8617,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_fapi_runtime_profile.py",
         "tests/unit/test_profile_discovery_runtime.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/assertion-framework/",
@@ -8681,9 +8682,9 @@
         "tests/unit/test_hardening_cluster_c.py",
         "tests/unit/test_profile_discovery_runtime.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
@@ -8711,9 +8712,9 @@
         "tests/unit/test_hardening_cluster_c.py",
         "tests/unit/test_profile_discovery_runtime.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
@@ -8734,9 +8735,9 @@
         "tests/unit/test_feature_flag_registry.py"
       ],
       "negative_tests": [
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
@@ -8828,7 +8829,7 @@
         "tests/conformance/production/test_rfc8615_well_known_uris.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9728_protected_resource_metadata.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
@@ -8844,9 +8845,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/negative/test_hardening_runtime_enforcement.py",
         "tests/unit/test_advanced_surface_contracts.py",
@@ -8924,9 +8925,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_fapi_runtime_profile.py",
         "tests/unit/test_profile_discovery_runtime.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/assertion-framework/",
@@ -8982,9 +8983,9 @@
         "tests/unit/test_feature_flag_registry.py"
       ],
       "negative_tests": [
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
@@ -9005,9 +9006,9 @@
         "tests/unit/test_feature_flag_registry.py"
       ],
       "negative_tests": [
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
@@ -9028,9 +9029,9 @@
         "tests/unit/test_feature_flag_registry.py"
       ],
       "negative_tests": [
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
@@ -9051,9 +9052,9 @@
         "tests/unit/test_feature_flag_registry.py"
       ],
       "negative_tests": [
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
@@ -9145,7 +9146,7 @@
         "tests/conformance/production/test_rfc8615_well_known_uris.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9728_protected_resource_metadata.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
@@ -9161,9 +9162,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/negative/test_hardening_runtime_enforcement.py",
         "tests/unit/test_advanced_surface_contracts.py",
@@ -9241,9 +9242,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_fapi_runtime_profile.py",
         "tests/unit/test_profile_discovery_runtime.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/assertion-framework/",
@@ -9370,7 +9371,7 @@
         "tests/conformance/production/test_rfc8615_well_known_uris.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9728_protected_resource_metadata.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
@@ -9386,9 +9387,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/negative/test_hardening_runtime_enforcement.py",
         "tests/unit/test_advanced_surface_contracts.py",
@@ -9466,9 +9467,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_fapi_runtime_profile.py",
         "tests/unit/test_profile_discovery_runtime.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/assertion-framework/",
@@ -9524,9 +9525,9 @@
         "tests/unit/test_feature_flag_registry.py"
       ],
       "negative_tests": [
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
@@ -9547,9 +9548,9 @@
         "tests/unit/test_feature_flag_registry.py"
       ],
       "negative_tests": [
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
@@ -9570,9 +9571,9 @@
         "tests/unit/test_feature_flag_registry.py"
       ],
       "negative_tests": [
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
@@ -9611,9 +9612,9 @@
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
         "tests/unit/test_identity_artifact_confusion_vectors.py"
@@ -9644,9 +9645,9 @@
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
         "tests/unit/test_identity_artifact_confusion_vectors.py"
@@ -9677,9 +9678,9 @@
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
         "tests/unit/test_identity_artifact_confusion_vectors.py"
@@ -9710,9 +9711,9 @@
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
         "tests/unit/test_identity_artifact_confusion_vectors.py"
@@ -9737,9 +9738,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "negative_tests": [
         "tests/negative/test_certification_attack_paths.py",
@@ -9777,9 +9778,9 @@
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py",
@@ -9895,9 +9896,9 @@
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/negative/test_hardening_runtime_enforcement.py",
         "tests/unit/test_advanced_surface_contracts.py",
@@ -9974,9 +9975,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/unit/test_hardening_cluster_a.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py"
@@ -10015,9 +10016,9 @@
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc7662.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py"
       ],
       "negative_tests": [
@@ -10054,9 +10055,9 @@
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py"
@@ -10131,9 +10132,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/negative/test_hardening_runtime_enforcement.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/unit/test_hardening_cluster_a.py",
@@ -10222,9 +10223,9 @@
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/negative/test_hardening_runtime_enforcement.py",
         "tests/unit/test_hardening_cluster_c.py",
         "tests/unit/test_profile_discovery_runtime.py",
@@ -10271,9 +10272,9 @@
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7591_client_registration_endpoint.py",
@@ -10304,9 +10305,9 @@
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/unit/test_hardening_cluster_a.py",
@@ -10414,9 +10415,9 @@
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/negative/test_hardening_runtime_enforcement.py",
         "tests/unit/test_hardening_cluster_c.py",
         "tests/unit/test_profile_discovery_runtime.py",
@@ -10466,9 +10467,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/negative/test_hardening_runtime_enforcement.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/unit/test_hardening_cluster_c.py",
@@ -10516,9 +10517,9 @@
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/unit/test_hardening_cluster_a.py",
         "tests/unit/test_hardening_cluster_c.py",
@@ -10566,9 +10567,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_openid_userinfo_endpoint.py"
       ],
       "negative_tests": [
@@ -10641,9 +10642,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9728_protected_resource_metadata.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py",
         "pkgs/120-tests/tba-tests-oidc/tests/unit/test_well_known_endpoints_behavior.py"
       ],
@@ -10670,9 +10671,9 @@
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/negative/test_hardening_runtime_enforcement.py",
         "tests/unit/test_hardening_cluster_c.py",
         "tests/unit/test_profile_discovery_runtime.py",
@@ -10715,9 +10716,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_hardening_cluster_a.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py"
       ],
@@ -10737,9 +10738,9 @@
       "positive_tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9449_dpop.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/unit/test_hardening_cluster_c.py"
       ],
@@ -10770,9 +10771,9 @@
       "positive_tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9101_jar.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/unit/test_hardening_cluster_b.py"
       ],
@@ -10797,9 +10798,9 @@
       "positive_tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8705_mtls.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/unit/test_hardening_cluster_c.py"
       ],
@@ -10830,9 +10831,9 @@
       "positive_tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9126_par.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_hardening_cluster_b.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py"
       ],
@@ -10862,9 +10863,9 @@
       "positive_tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/unit/test_hardening_cluster_b.py"
       ],
@@ -10891,9 +10892,9 @@
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_hardening_cluster_a.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py"
       ],
@@ -10942,7 +10943,7 @@
       "profile": null,
       "positive_tests": [
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py"
       ],
@@ -11042,8 +11043,8 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py",
         "tests/unit/test_hardening_cluster_c.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6750_bearer_token.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
@@ -11294,9 +11295,9 @@
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -11389,7 +11390,7 @@
       ],
       "profile": null,
       "positive_tests": [
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py"
       ],
@@ -11407,7 +11408,7 @@
       ],
       "profile": null,
       "positive_tests": [
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_rpc_registry_live.py"
       ],
@@ -11425,7 +11426,7 @@
       ],
       "profile": null,
       "positive_tests": [
-        "tests/security/test_release_bundle_signing.py",
+        "pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py",
         "pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py",
         "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/unit/test_published_dependency_model.py"
@@ -11468,9 +11469,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "negative_tests": [],
       "evidence_refs": [
@@ -11488,9 +11489,9 @@
       "positive_tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "negative_tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py",
@@ -11702,9 +11703,9 @@
       "positive_tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc7636_pkce.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py"
       ],
       "negative_tests": [],
@@ -11758,9 +11759,9 @@
       "profile": null,
       "positive_tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc8252_native_apps.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8252_native_app_redirects.py"
       ],
       "negative_tests": [],
@@ -11854,9 +11855,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_hardening_cluster_a.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py"
       ],
@@ -11878,9 +11879,9 @@
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_hardening_cluster_a.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py"
       ],
@@ -11908,9 +11909,9 @@
       "positive_tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8705_mtls.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/unit/test_hardening_cluster_c.py"
       ],
@@ -11990,9 +11991,9 @@
       "positive_tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_advanced_surface_contracts.py"
       ],
       "negative_tests": [],
@@ -12011,9 +12012,9 @@
       "positive_tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9101_jar.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/unit/test_hardening_cluster_b.py"
       ],
@@ -12038,9 +12039,9 @@
       "positive_tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9126_par.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_hardening_cluster_b.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py"
       ],
@@ -12100,9 +12101,9 @@
       "positive_tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/unit/test_hardening_cluster_b.py"
       ],
@@ -12127,9 +12128,9 @@
       "positive_tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9449_dpop.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/unit/test_hardening_cluster_c.py"
       ],
@@ -12190,9 +12191,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9728_protected_resource_metadata.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py"
       ],
       "negative_tests": [],
@@ -12347,7 +12348,7 @@
       "target": "Bootstrap and migration lifecycle",
       "tests": [
         "tests/unit/test_claim_boundary_rebaseline.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py"
       ],
@@ -12427,9 +12428,9 @@
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/discovery/"
@@ -12453,7 +12454,7 @@
       "profile": "baseline",
       "target": "OpenAPI 3.1 / 3.2 compatible public contract",
       "tests": [
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py"
       ],
@@ -12483,9 +12484,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oauth2-core/"
@@ -12497,9 +12498,9 @@
       "tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/bearer/"
@@ -12576,9 +12577,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc7636_pkce.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/pkce/"
@@ -12612,7 +12613,7 @@
       "target": "Release bundle and signature verification",
       "tests": [
         "tests/unit/test_claim_boundary_rebaseline.py",
-        "tests/security/test_release_bundle_signing.py",
+        "pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py",
         "tests/unit/test_published_dependency_model.py",
         "pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py"
       ],
@@ -12689,7 +12690,7 @@
       "target": "Bootstrap and migration lifecycle",
       "tests": [
         "tests/unit/test_claim_boundary_rebaseline.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py"
       ],
@@ -12769,9 +12770,9 @@
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/discovery/"
@@ -12821,7 +12822,7 @@
       "profile": "production",
       "target": "OpenAPI 3.1 / 3.2 compatible public contract",
       "tests": [
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py"
       ],
@@ -12851,9 +12852,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oauth2-core/"
@@ -12865,9 +12866,9 @@
       "tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/bearer/"
@@ -13008,9 +13009,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc7636_pkce.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/pkce/"
@@ -13036,9 +13037,9 @@
       "tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8252_native_app_redirects.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc8252_native_apps.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/native-apps/"
@@ -13074,9 +13075,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwt-access-token-profile/"
@@ -13104,9 +13105,9 @@
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/protected-resource-metadata/"
@@ -13117,7 +13118,7 @@
       "target": "Release bundle and signature verification",
       "tests": [
         "tests/unit/test_claim_boundary_rebaseline.py",
-        "tests/security/test_release_bundle_signing.py",
+        "pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py",
         "tests/unit/test_published_dependency_model.py",
         "pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py"
       ],
@@ -13194,7 +13195,7 @@
       "target": "Bootstrap and migration lifecycle",
       "tests": [
         "tests/unit/test_claim_boundary_rebaseline.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py"
       ],
@@ -13287,9 +13288,9 @@
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/discovery/"
@@ -13352,7 +13353,7 @@
       "profile": "hardening",
       "target": "OpenAPI 3.1 / 3.2 compatible public contract",
       "tests": [
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py"
       ],
@@ -13382,9 +13383,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oauth2-core/"
@@ -13396,9 +13397,9 @@
       "tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/bearer/"
@@ -13539,9 +13540,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc7636_pkce.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/pkce/"
@@ -13567,9 +13568,9 @@
       "tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8252_native_app_redirects.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc8252_native_apps.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/native-apps/"
@@ -13608,9 +13609,9 @@
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/device-flow/"
@@ -13626,9 +13627,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/token-exchange/"
@@ -13654,9 +13655,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwt-access-token-profile/"
@@ -13669,9 +13670,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9101_jar.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
@@ -13685,9 +13686,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9126_par.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
@@ -13715,9 +13716,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
@@ -13731,9 +13732,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9449_dpop.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
@@ -13763,9 +13764,9 @@
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/protected-resource-metadata/"
@@ -13776,7 +13777,7 @@
       "target": "Release bundle and signature verification",
       "tests": [
         "tests/unit/test_claim_boundary_rebaseline.py",
-        "tests/security/test_release_bundle_signing.py",
+        "pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py",
         "tests/unit/test_published_dependency_model.py",
         "pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py"
       ],
@@ -13853,7 +13854,7 @@
       "target": "Bootstrap and migration lifecycle",
       "tests": [
         "tests/unit/test_claim_boundary_rebaseline.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py"
       ],
@@ -13946,9 +13947,9 @@
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/discovery/"
@@ -14011,7 +14012,7 @@
       "profile": "fapi2-security",
       "target": "OpenAPI 3.1 / 3.2 compatible public contract",
       "tests": [
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py"
       ],
@@ -14041,9 +14042,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oauth2-core/"
@@ -14055,9 +14056,9 @@
       "tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/bearer/"
@@ -14198,9 +14199,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc7636_pkce.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/pkce/"
@@ -14226,9 +14227,9 @@
       "tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8252_native_app_redirects.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc8252_native_apps.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/native-apps/"
@@ -14267,9 +14268,9 @@
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/device-flow/"
@@ -14285,9 +14286,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/token-exchange/"
@@ -14300,9 +14301,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8705_mtls.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
@@ -14329,9 +14330,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwt-access-token-profile/"
@@ -14344,9 +14345,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9101_jar.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
@@ -14360,9 +14361,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9126_par.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
@@ -14390,9 +14391,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
@@ -14406,9 +14407,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9449_dpop.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
@@ -14438,9 +14439,9 @@
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/protected-resource-metadata/"
@@ -14451,7 +14452,7 @@
       "target": "Release bundle and signature verification",
       "tests": [
         "tests/unit/test_claim_boundary_rebaseline.py",
-        "tests/security/test_release_bundle_signing.py",
+        "pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py",
         "tests/unit/test_published_dependency_model.py",
         "pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py"
       ],
@@ -14528,7 +14529,7 @@
       "target": "Bootstrap and migration lifecycle",
       "tests": [
         "tests/unit/test_claim_boundary_rebaseline.py",
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py"
       ],
@@ -14621,9 +14622,9 @@
         "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/discovery/"
@@ -14686,7 +14687,7 @@
       "profile": "peer-claim",
       "target": "OpenAPI 3.1 / 3.2 compatible public contract",
       "tests": [
-        "tests/e2e/test_release_gate_catalog.py",
+        "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py"
       ],
@@ -14716,9 +14717,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oauth2-core/"
@@ -14730,9 +14731,9 @@
       "tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/bearer/"
@@ -14873,9 +14874,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc7636_pkce.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/pkce/"
@@ -14901,9 +14902,9 @@
       "tests": [
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8252_native_app_redirects.py",
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc8252_native_apps.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/native-apps/"
@@ -14942,9 +14943,9 @@
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/device-flow/"
@@ -14960,9 +14961,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/token-exchange/"
@@ -14988,9 +14989,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwt-access-token-profile/"
@@ -15003,9 +15004,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9101_jar.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
@@ -15019,9 +15020,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9126_par.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
@@ -15049,9 +15050,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
@@ -15065,9 +15066,9 @@
         "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9449_dpop.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_advanced_surface_contracts.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
@@ -15097,9 +15098,9 @@
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
         "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py",
-        "tests/interop/test_peer_counterpart_catalog.py",
-        "tests/interop/test_peer_matrix_artifacts.py",
-        "tests/interop/test_tier4_promotion_fail_closed.py"
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py",
+        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/protected-resource-metadata/"
@@ -15110,7 +15111,7 @@
       "target": "Release bundle and signature verification",
       "tests": [
         "tests/unit/test_claim_boundary_rebaseline.py",
-        "tests/security/test_release_bundle_signing.py",
+        "pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py",
         "tests/unit/test_published_dependency_model.py",
         "pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py"
       ],

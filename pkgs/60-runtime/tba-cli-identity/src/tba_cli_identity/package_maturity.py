@@ -78,6 +78,8 @@ def discover_package_manifests(repo_root: Path) -> list[PackageManifest]:
         if pyproject.parent.parent.name == "deprecated":
             continue
         metadata = _load_toml(pyproject)
+        if metadata.get("tool", {}).get("uv", {}).get("package") is False:
+            continue
         project = metadata.get("project", {})
         name = str(project.get("name") or "").strip()
         version = str(project.get("version") or "").strip()
@@ -114,7 +116,7 @@ def build_package_python_matrix(
                 f"tests/packages/{package.import_root}",
             ]
             if cross_cutting:
-                test_paths.append("tests/interop")
+                test_paths.append("pkgs/120-tests/tba-tests-certification/tests/interop")
             cells.append(
                 {
                     "name": package.name,

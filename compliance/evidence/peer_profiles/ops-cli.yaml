@@ -20,7 +20,7 @@ required_artifacts:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
-- tests/security/test_release_bundle_signing.py
+- pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
 scenario_ids:
 - cli-surface
 - bootstrap-migration

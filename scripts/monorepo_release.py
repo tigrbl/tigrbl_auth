@@ -312,7 +312,7 @@ def cmd_test_matrix(args: argparse.Namespace) -> int:
             pytest_args = ""
             cross_cutting = package.name == TESTKIT_PACKAGE_NAME
             if cross_cutting:
-                package_test_paths.append("tests/interop")
+                package_test_paths.append("pkgs/120-tests/tba-tests-certification/tests/interop")
                 pre_test_command = '$VENV_PYTHON -m pip install -e ".[test,sqlite,postgres,servers]"'
                 pytest_args = "--certification-lane\nall"
             cell = package.as_cell()

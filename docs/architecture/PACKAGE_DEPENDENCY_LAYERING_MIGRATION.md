@@ -28,7 +28,7 @@ Classify every Python package under `pkgs/` into exactly one of foundation, faca
 
 ### T1: Drift Guard
 
-Allow current foundational imports of `tba_auth` only when named in the migration exception ledger in `tests/unit/test_package_dependency_layering.py`. New foundational packages, including the new authn/authz/protocol package names, cannot import the facade. Any new upward import fails the boundary test.
+Allow current foundational imports of `tba_auth` only when named in the migration exception ledger in `pkgs/120-tests/tba-tests-architecture/tests/unit/test_package_dependency_layering.py`. New foundational packages, including the new authn/authz/protocol package names, cannot import the facade. Any new upward import fails the boundary test.
 
 Current T1 exception packages:
 
@@ -50,7 +50,7 @@ Current T1 exception packages:
 
 Remove the exception ledger by moving facade-owned imports down into the owning foundational packages or by replacing them with lower-layer contracts. At T2, no foundational package imports `tba_auth`; only `tba-auth` and `tba-router-*` packages do.
 
-Status: complete for direct Python imports. The exception ledger in `tests/unit/test_package_dependency_layering.py` is empty, and foundational packages now import the canonical split package roots directly.
+Status: complete for direct Python imports. The exception ledger in `pkgs/120-tests/tba-tests-architecture/tests/unit/test_package_dependency_layering.py` is empty, and foundational packages now import the canonical split package roots directly.
 
 ## SSOT Entity Changes
 

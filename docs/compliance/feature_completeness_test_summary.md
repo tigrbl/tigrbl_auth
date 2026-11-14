@@ -8,8 +8,8 @@
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_release_lifecycle.py
-- tests/security/test_release_bundle_signing.py
-- tests/e2e/test_release_gate_catalog.py
+- pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
+- pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
 - tests/unit/test_operator_service_layer.py
 - tests/unit/test_operator_control_plane.py
 - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py

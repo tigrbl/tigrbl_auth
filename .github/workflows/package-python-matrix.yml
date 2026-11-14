@@ -7,7 +7,7 @@ on:
       - "pkgs/**"
       - "scripts/monorepo_release.py"
       - "tests/packages/**"
-      - "tests/unit/test_monorepo_release.py"
+      - "pkgs/120-tests/tba-tests-release/tests/unit/test_monorepo_release.py"
   push:
     branches:
       - master
@@ -16,7 +16,7 @@ on:
       - "pkgs/**"
       - "scripts/monorepo_release.py"
       - "tests/packages/**"
-      - "tests/unit/test_monorepo_release.py"
+      - "pkgs/120-tests/tba-tests-release/tests/unit/test_monorepo_release.py"
   workflow_dispatch:
     inputs:
       package:
