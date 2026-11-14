@@ -23,6 +23,7 @@ EXPECTED_LAYER_ORDER = (
     "00-primitives",
     "01-storage",
     "02-contracts",
+    "03-codecs",
     "05-bases",
     "10-concrete",
     "20-providers",
@@ -46,7 +47,7 @@ EXPECTED_LAYER_ORDER = (
 
 
 def test_canonical_package_layer_index_is_exact() -> None:
-    policy = load_layer_policy(ROOT / "pkgs" / "layers.toml")
+    policy = load_layer_policy()
 
     assert policy.layer_ids == EXPECTED_LAYER_ORDER
     assert LAYER_ORDER == EXPECTED_LAYER_ORDER
@@ -62,7 +63,7 @@ def test_every_python_distribution_has_one_recognized_layer() -> None:
 
 
 def test_terminal_dependency_policy_is_directional() -> None:
-    policy = load_layer_policy(ROOT / "pkgs" / "layers.toml")
+    policy = load_layer_policy()
 
     assert dependency_allowed("110-examples", "70-facade", policy)
     assert dependency_allowed("120-tests", "70-facade", policy)
@@ -74,7 +75,7 @@ def test_terminal_dependency_policy_is_directional() -> None:
 
 
 def test_dependency_rules_cover_every_layer_and_reject_upward_edges() -> None:
-    policy = load_layer_policy(ROOT / "pkgs" / "layers.toml")
+    policy = load_layer_policy()
 
     assert all(isinstance(rule, DependencyRule) for rule in policy.dependency_rules)
     assert set(policy.rules_by_consumer) == set(EXPECTED_LAYER_ORDER)
@@ -85,7 +86,7 @@ def test_dependency_rules_cover_every_layer_and_reject_upward_edges() -> None:
 
 
 def test_package_exceptions_are_eliminated_and_path_classification_is_authoritative() -> None:
-    policy = load_layer_policy(ROOT / "pkgs" / "layers.toml")
+    policy = load_layer_policy()
 
     assert classify_layer(ROOT / "pkgs" / "80-routers" / "example", policy) == "80-routers"
     assert not package_dependency_allowed(

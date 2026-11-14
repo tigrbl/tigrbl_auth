@@ -204,6 +204,30 @@ wheels = [
 ]
 
 [[package]]
+name = "bracex"
+version = "3.1"
+source = { registry = "https://pypi.org/simple" }
+resolution-markers = [
+    "python_full_version < '3.11'",
+]
+sdist = { url = "https://files.pythonhosted.org/packages/e1/60/e2a6409041cb3f8ce7ac3d6917b5b30c39f81a0a5b2d414ec30f36fd96bf/bracex-3.1.tar.gz", hash = "sha256:35c69fc105f08d77c02722e8ae707c656ff298dd4d26c89bcb3c98fca8bc3614", size = 29040, upload-time = "2026-10-11T15:26:07.143Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/05/79/c1ba46e1acd235affd36ce1d3346320ddcda663c9482a9e5f34727db1d11/bracex-3.1-py3-none-any.whl", hash = "sha256:52002b8455658c21f3b6e5eb0f662b57ec9085f42709e58bc86eeab5bc4c37d7", size = 11925, upload-time = "2026-10-11T15:26:05.683Z" },
+]
+
+[[package]]
+name = "bracex"
+version = "3.2.2"
+source = { registry = "https://pypi.org/simple" }
+resolution-markers = [
+    "python_full_version >= '3.11'",
+]
+sdist = { url = "https://files.pythonhosted.org/packages/2d/1f/b7ce2efe406b87bb3693d587b91bcd8fa9030888870ceff29e4a0d233cb2/bracex-3.2.2.tar.gz", hash = "sha256:d18976160b3ba01a57d5c53a5c8c3aa2506efa9e0a3a62467251f82b8f563fde", size = 34980, upload-time = "2026-11-07T21:28:25.433Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/21/b5/52a750a062db07ba056cde1c52c802b898a96b70953389a0b2247e18f210/bracex-3.2.2-py3-none-any.whl", hash = "sha256:284d59c4656e5a0421ff691402074bd5847049d50410535764a2c522a47095bc", size = 14151, upload-time = "2026-11-07T21:28:24.028Z" },
+]
+
+[[package]]
 name = "cachetools"
 version = "7.0.5"
 source = { registry = "https://pypi.org/simple" }
@@ -826,6 +850,102 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/6f/6d/0703ccc57f3a7233505399edb88de3cbd678da106337b9fcde432b65ed60/idna-3.11.tar.gz", hash = "sha256:795dafcc9c04ed0c1fb032c2aa73654d8e8c5023a7df64a53f39190ada629902", size = 194582, upload-time = "2025-10-12T14:55:20.501Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/0e/61/66938bbb5fc52dbdf84594873d5b51fb1f7c7794e9c0f5bd885f30bc507b/idna-3.11-py3-none-any.whl", hash = "sha256:771a87f49d9defaf64091e6e6fe9c18d4833f140bd19464795bc32d966ca37ea", size = 71008, upload-time = "2025-10-12T14:55:18.883Z" },
+]
+
+[[package]]
+name = "index-toml"
+version = "0.3.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "index-toml-cli" },
+    { name = "index-toml-core" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/2d/aa/b91bd007826a92af62aefb032889ea67b62509cb27f3904c6da3cf0b7851/index_toml-0.3.0.tar.gz", hash = "sha256:fcb1c1c9d2b17b5d3c27dad6798abcae1f055b9eb149fbf76b1030bf35afb320", size = 1823, upload-time = "2026-11-14T11:54:24.237Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e2/02/22790e9ce02e5c3c61db8a843546942b32946f5b34e64dc108d2564904d3/index_toml-0.3.0-py3-none-any.whl", hash = "sha256:9fdb34d95c98eb4f67672e11a6926aca98affd06d8fadebdab1d1e97291dc14a", size = 2505, upload-time = "2026-11-14T11:54:23.288Z" },
+]
+
+[[package]]
+name = "index-toml-adapter-cargo"
+version = "0.3.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "index-toml-contracts" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/4a/02/6e9a95a83d5dab5ca3068f36959021d4def71dc1557700e5891e55e9e057/index_toml_adapter_cargo-0.3.0.tar.gz", hash = "sha256:3d2466e629f9bbc97ba5e289ca32735df55bd625de8d1d8b4c363885b0421c87", size = 2450, upload-time = "2026-11-14T11:50:30.848Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/77/a4/57b690254ec3cd73ec36c5c6b9b8f11c597e483bc3f0b58234159fdbe96d/index_toml_adapter_cargo-0.3.0-py3-none-any.whl", hash = "sha256:9cb15c4073b9086f3396079954bb272e271104b3faaed2733c452d028437d068", size = 3170, upload-time = "2026-11-14T11:50:29.851Z" },
+]
+
+[[package]]
+name = "index-toml-adapter-pnpm"
+version = "0.3.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "index-toml-contracts" },
+    { name = "pyyaml" },
+    { name = "wcmatch" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/14/13/add74aa796f8f385140a0cdc87808439770bbceb35388ee64251a25ae775/index_toml_adapter_pnpm-0.3.0.tar.gz", hash = "sha256:bbbe7d9611e4f5e3cc57f994b784698d1833a04460cf510f5213abd48dc9c238", size = 2564, upload-time = "2026-11-14T11:51:49.136Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/38/84/dcd2cd94d9c9964e67bc7021dff01c49fbe8098dc72cb8a809ae1dea806a/index_toml_adapter_pnpm-0.3.0-py3-none-any.whl", hash = "sha256:5fda727563c93fe2505b53ba7ecaaa3e6818ab6553ce50da4770c04891c182d2", size = 3259, upload-time = "2026-11-14T11:51:48.335Z" },
+]
+
+[[package]]
+name = "index-toml-adapter-python"
+version = "0.3.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "index-toml-contracts" },
+    { name = "packaging" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/90/2c/f5e34aea02c8b7085cd3b41993209b3cef5be45c3de280bfde77e16e8910/index_toml_adapter_python-0.3.0.tar.gz", hash = "sha256:45666131d937cbba2aca00a79ce740a2e68dd31b18bb8cca2a5f7a120671def0", size = 3014, upload-time = "2026-11-14T11:49:13.626Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/82/c2/dd24d5d0372d13f55724bc784f23968fcf4324a56a9d0e2a79400e6c232f/index_toml_adapter_python-0.3.0-py3-none-any.whl", hash = "sha256:6130325840a1a0a1523ffd621416a6c7ae4706257a0bda36b4f463321f0afb5a", size = 3734, upload-time = "2026-11-14T11:49:12.889Z" },
+]
+
+[[package]]
+name = "index-toml-cli"
+version = "0.3.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "filelock" },
+    { name = "index-toml-adapter-cargo" },
+    { name = "index-toml-adapter-pnpm" },
+    { name = "index-toml-adapter-python" },
+    { name = "index-toml-core" },
+    { name = "tomlkit" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/0c/6a/a5978e4635a4592b3c83fcba1671d5e2037a29c2d46fc8ab2a0fef761bb0/index_toml_cli-0.3.0.tar.gz", hash = "sha256:bec2dfd43bc23d60ca62634a76b40ae8368938ee8989eeed8fcd7650ce01c1ca", size = 3081, upload-time = "2026-11-14T11:53:07.244Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/69/93/b78b5dbaa7acffbac326b246db74a664f70a639b09665654872f625c363d/index_toml_cli-0.3.0-py3-none-any.whl", hash = "sha256:6c6da009279bedce4fdd5309863b8bd378cf2b64e9ea1b65126ac69ccc528c7d", size = 4037, upload-time = "2026-11-14T11:53:06.472Z" },
+]
+
+[[package]]
+name = "index-toml-contracts"
+version = "0.3.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "jsonschema" },
+    { name = "tomli", marker = "python_full_version < '3.11'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/30/2a/ab36bcc7dfaa2bc3672f8284550cf46e1c7371d172c0c6e954bbfab50608/index_toml_contracts-0.3.0.tar.gz", hash = "sha256:eb47dced712e70bce644ed6fad822b5c036d7287c1d47d0fde09e1d40b33f185", size = 4649, upload-time = "2026-11-14T11:46:36.343Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/10/ba/25179c41bc8644f216c49d19f3152ef65db576f553525bdc5516daf92cc1/index_toml_contracts-0.3.0-py3-none-any.whl", hash = "sha256:124360bc396e854a19d9770d31932d2adc7d222d434bc79b36a88a21e1ce3fe3", size = 6089, upload-time = "2026-11-14T11:46:35.375Z" },
+]
+
+[[package]]
+name = "index-toml-core"
+version = "0.3.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "filelock" },
+    { name = "index-toml-contracts" },
+    { name = "tomlkit" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/57/e3/23c378d37949e198ce276b9daacb6557b765bbe0def44e5a12a9a3340075/index_toml_core-0.3.0.tar.gz", hash = "sha256:4c637945ca7833ce2b0fab96c924f8c1a4a7e43d5cb948bee97598d5ae58da2a", size = 5515, upload-time = "2026-11-14T11:47:54.736Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/6d/ca/c63c4db00b88a8b8eceb6784e4a14e848f7113e202475dddd49e90c42c8f/index_toml_core-0.3.0-py3-none-any.whl", hash = "sha256:3548ee077081e3ffd26d7533132d2e81c4e633c1c18eab49ee043c424fc6eae2", size = 6332, upload-time = "2026-11-14T11:47:53.941Z" },
 ]
 
 [[package]]
@@ -10662,6 +10782,7 @@ uvicorn = [
 [package.dev-dependencies]
 dev = [
     { name = "flake8" },
+    { name = "index-toml" },
     { name = "pytest" },
     { name = "pytest-asyncio" },
     { name = "pytest-benchmark" },
@@ -11194,6 +11315,7 @@ provides-extras = ["bimi", "test", "examples", "postgres", "sqlite", "uvicorn", 
 [package.metadata.requires-dev]
 dev = [
     { name = "flake8", specifier = ">=7.0" },
+    { name = "index-toml", specifier = "==0.3.0" },
     { name = "pytest", specifier = ">=8.0" },
     { name = "pytest-asyncio", specifier = ">=0.24.0" },
     { name = "pytest-benchmark", specifier = ">=4.0.0" },
@@ -11523,6 +11645,15 @@ wheels = [
 ]
 
 [[package]]
+name = "tomlkit"
+version = "0.15.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/08/72/fc01563df95c189a9f65850096bdc205bc2fe37da6c740cd64afaf18d07e/tomlkit-0.15.2.tar.gz", hash = "sha256:83e32755ba1d20d9340bd069ee97e9f6232ba2346b63ffcba425de01f7e327a6", size = 190522, upload-time = "2026-10-16T04:07:08.166Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/da/46/7d84138a60a8bd796825b2d38ebe92d0d16501ca57d501b7c5d677401bbc/tomlkit-0.15.2-py3-none-any.whl", hash = "sha256:05562412163a3037b94497385fb7f9204c637bc605af7a48199e41cf2272f437", size = 52225, upload-time = "2026-10-16T04:07:09.216Z" },
+]
+
+[[package]]
 name = "tox"
 version = "4.52.0"
 source = { registry = "https://pypi.org/simple" }
@@ -11761,6 +11892,19 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/bd/95/615e72cd27b85b61eec764a5ca51bd94d40b5adea5ff47567d9ebc4d275a/watchfiles-1.1.1-pp311-pypy311_pp73-macosx_11_0_arm64.whl", hash = "sha256:89eef07eee5e9d1fda06e38822ad167a044153457e6fd997f8a858ab7564a336", size = 396117, upload-time = "2025-10-14T15:06:11.28Z" },
     { url = "https://files.pythonhosted.org/packages/c9/81/e7fe958ce8a7fb5c73cc9fb07f5aeaf755e6aa72498c57d760af760c91f8/watchfiles-1.1.1-pp311-pypy311_pp73-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:ce19e06cbda693e9e7686358af9cd6f5d61312ab8b00488bc36f5aabbaf77e24", size = 450493, upload-time = "2025-10-14T15:06:12.321Z" },
     { url = "https://files.pythonhosted.org/packages/6e/d4/ed38dd3b1767193de971e694aa544356e63353c33a85d948166b5ff58b9e/watchfiles-1.1.1-pp311-pypy311_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:3e6f39af2eab0118338902798b5aa6664f46ff66bc0280de76fca67a7f262a49", size = 457546, upload-time = "2025-10-14T15:06:13.372Z" },
+]
+
+[[package]]
+name = "wcmatch"
+version = "10.2.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "bracex", version = "3.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "bracex", version = "3.2.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/11/15/dc61746d8c0852f6d711ad09c774b63cf7c8211aa49e30871ac3d342b7e2/wcmatch-10.2.1.tar.gz", hash = "sha256:ecac70a5c70e62ba854b78318d3a1408e8651f8f1c96e5837743b71aa6a4fb92", size = 132497, upload-time = "2026-07-02T17:21:48.484Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/82/ba/20b48eedeab5316bf9a502bb9eb7e3b1588bd61d0f565822fefa8f06e10b/wcmatch-10.2.1-py3-none-any.whl", hash = "sha256:2d775395b93f233af66690f62cb9d52b084ec159a31cc4084f4069d72f437acd", size = 39763, upload-time = "2026-07-02T17:21:47.134Z" },
 ]
 
 [[package]]

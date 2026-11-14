@@ -3,14 +3,20 @@
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import tomllib
 from dataclasses import dataclass
 from pathlib import Path
 
+try:
+    from scripts.package_layer_policy import load_layer_policy
+except ModuleNotFoundError:
+    from package_layer_policy import load_layer_policy
+
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "index.toml"
-FORMAT_VERSION = "1.0.0"
+FORMAT_VERSION = "1.1.0"
 _DEPENDENCY_NAME = re.compile(r"^\s*([A-Za-z0-9][A-Za-z0-9._-]*)")
 
 
@@ -97,40 +103,70 @@ def discover() -> tuple[Package, ...]:
 
 
 def render(packages: tuple[Package, ...]) -> str:
-    lines = [
-        f"format_version = {_quote(FORMAT_VERSION)}",
-        'order_scope = "layer"',
-        'order_rule = "00 when no same-layer dependency; otherwise 1 + maximum dependency order"',
-        "",
-    ]
+    policy = load_layer_policy()
+    lines = [f"schema_version = {_quote(FORMAT_VERSION)}", ""]
+    for item in policy.dependency_exceptions:
+        lines.extend([
+            "[[metadata.tba.dependency_exceptions]]",
+            f"consumer = {_quote(item.consumer)}",
+            f"target = {_quote(item.target)}",
+            f"reason = {_quote(item.reason)}",
+            "",
+        ])
+    for layer in policy.layers:
+        targets = policy.rules_by_consumer[layer.id].allowed_target_layers
+        same_layer = "ordered" if layer.id in targets else "forbidden"
+        lines.extend([
+            "[[layers]]",
+            f"id = {_quote(layer.id)}",
+            f"order = {layer.order}",
+            f"path = {_quote('pkgs/' + layer.id)}",
+            'order_strategy = "dependency_depth"',
+            f"same_layer_dependencies = {_quote(same_layer)}",
+            f"allowed_dependency_layers = {json.dumps(sorted(targets - {layer.id}))}",
+            "[layers.metadata.tba]",
+            f"category = {_quote(layer.category)}",
+        ])
+        if layer.terminal:
+            lines.append("terminal = true")
+        if layer.javascript:
+            lines.append("javascript = true")
+        if layer.distribution_prefix is not None:
+            lines.append(f"distribution_prefix = {_quote(layer.distribution_prefix)}")
+        lines.append("")
     for package in packages:
+        exceptions = [
+            target for target in package.local_dependencies if (package.name, target) in policy.exception_pairs
+        ]
         lines.extend(
             [
                 "[[packages]]",
+                f"id = {_quote(package.name)}",
                 f"name = {_quote(package.name)}",
                 f"path = {_quote(package.path)}",
                 f"layer = {_quote(package.layer)}",
-                f"order = {_quote(f'{package.order:02d}')}",
-                "local_dependencies = ["
-                + ", ".join(_quote(item) for item in package.local_dependencies)
-                + "]",
-                "same_layer_dependencies = ["
-                + ", ".join(_quote(item) for item in package.same_layer_dependencies)
-                + "]",
-                "",
+                f"order = {package.order}",
+                'ecosystem = "pypi"',
+                f"dependencies = {json.dumps(package.local_dependencies)}",
             ]
         )
+        if exceptions:
+            lines.append(f"dependency_exceptions = {json.dumps(exceptions)}")
+        lines.append("")
     return "\n".join(lines)
 
 
 def main() -> int:
+    from index_toml import loads
+
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="fail if index.toml is stale")
     args = parser.parse_args()
     expected = render(discover())
+    loads(expected)
     if args.check:
         if not INDEX.exists() or INDEX.read_text(encoding="utf-8") != expected:
-            raise SystemExit("index.toml is stale; run python scripts/package_index.py")
+            raise SystemExit("index.toml is stale; run uv run python scripts/package_index.py")
         return 0
     INDEX.write_text(expected, encoding="utf-8", newline="\n")
     return 0

@@ -48,6 +48,10 @@ Applications compose routers and runtime services over protocol packages, capabi
 
 ## Package catalog
 
+[`index.toml`](index.toml) records the Python package inventory and the layer
+policy. Run `uv run python scripts/package_index.py --check` to verify the
+inventory against the package manifests.
+
 Start with a representative package below or browse the [full package tree](pkgs/). Each active package has its own README. Active Python distributions and imports use `tba-*` and `tba_*`. UI packages use `@tba/*`. See the [namespace migration guide](docs/packaging/tba-namespace-migration.md) for legacy names and environment variables.
 
 | Layer | Start here |
