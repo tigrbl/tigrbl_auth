@@ -9,7 +9,7 @@ from tba_auth import standard_version, standards_manifest
 sys.path.insert(
     0,
     str(
-        Path(__file__).resolve().parents[2] / "pkgs/90-backend-apps/tba-app-backend-public/src"
+        Path(__file__).resolve().parents[5] / "pkgs/90-backend-apps/tba-app-backend-public/src"
     ),
 )
 from tba_app_backend_public import PUBLIC_BACKEND_APP_CONTRACT  # noqa: E402

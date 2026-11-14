@@ -14,13 +14,13 @@ Implemented paths:
 
 Coverage added:
 
-- `tests/unit/test_request_scoped_runtime_authority.py`
+- `pkgs/120-tests/tba-tests-runtime/tests/unit/test_request_scoped_runtime_authority.py`
 
 Validated commands:
 
 ```text
-uv run pytest tests/unit/test_request_scoped_runtime_authority.py
-uv run pytest tests/unit/test_request_scoped_runtime_authority.py pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
+uv run pytest pkgs/120-tests/tba-tests-runtime/tests/unit/test_request_scoped_runtime_authority.py
+uv run pytest pkgs/120-tests/tba-tests-runtime/tests/unit/test_request_scoped_runtime_authority.py pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
 uv run pytest pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py -k "register_client_success or logout_post_clears_session_cookie"
 ```
 

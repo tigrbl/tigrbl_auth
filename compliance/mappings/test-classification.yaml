@@ -64,7 +64,9 @@ profiles:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9449_dpop.py
 categories:
   unit:
-  - tests/features/test_profile_reference_union.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_profile_reference_resolution.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_profile_reference_cli.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_profile_reference_discovery_contract.py
   - tests/features/test_t0_tracked_targets.py
   - pkgs/120-tests/tba-tests-oidc/tests/features/test_tenant_jwks_discovery.py
   - pkgs/120-tests/tba-tests-oidc/tests/features/test_tenant_jwks_key_administration.py
@@ -85,13 +87,13 @@ categories:
   - pkgs/120-tests/tba-tests-backend-apps/tests/packages/tba-app-backend-tenant-administration/test_tenant_admin_backend_app_dev_deployment_proof.py
   - pkgs/120-tests/tba-tests-backend-apps/tests/packages/tba-app-backend-tenant-administration/test_tenant_admin_backend_app_package.py
   - pkgs/120-tests/tba-testkit-identity/tests/test_identity_testkit_package.py
-  - tests/unit/test_adapters.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_adapters.py
   - pkgs/120-tests/tba-tests-administration/tests/unit/test_admin_control_plane_boundary.py
   - pkgs/120-tests/tba-tests-authorization/tests/unit/test_admin_policy_boundary.py
-  - tests/unit/test_advanced_identity_graph_auth_boundary.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_advanced_identity_graph_auth_boundary.py
   - tests/unit/test_advanced_identity_plane_phase4.py
-  - tests/unit/test_advanced_surface_contracts.py
-  - tests/unit/test_app_factory_materialization.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_advanced_surface_contracts.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_app_factory_materialization.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py
   - pkgs/120-tests/tba-tests-architecture/tests/unit/test_auth_package_taxonomy_boundary.py
   - pkgs/120-tests/tba-tests-authorization/tests/unit/test_authority_closure_monotonicity.py
@@ -107,10 +109,10 @@ categories:
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_authorize_response_modes.py
   - pkgs/120-tests/tba-tests-authentication/tests/unit/test_backends.py
-  - tests/unit/test_bootstrap_secret_scrub.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_bootstrap_secret_scrub.py
   - tests/unit/test_bootstrappable_user_defaults.py
   - tests/unit/test_boundary_freeze_checkpoint.py
-  - tests/unit/test_bulk_schema_fields.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_bulk_schema_fields.py
   - pkgs/120-tests/tba-tests-certification/tests/unit/test_certification_gap_inventory.py
   - pkgs/120-tests/tba-tests-certification/tests/unit/test_certification_lane_evidence.py
   - pkgs/120-tests/tba-tests-certification/tests/unit/test_certification_evidence_negative_proofs.py
@@ -131,16 +133,16 @@ categories:
   - pkgs/120-tests/tba-tests-authorization/tests/unit/test_delegation_attenuation_proof.py
   - pkgs/120-tests/tba-tests-authorization/tests/unit/test_delegation_attenuation_robustness_t2.py
   - pkgs/120-tests/tba-tests-authorization/tests/unit/test_delegation_grant_lifecycle_contract.py
-  - tests/unit/test_deployment_resolver.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_deployment_resolver.py
   - tests/unit/test_deps_imports.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_dpop_key_credentials.py
   - tests/unit/test_effective_artifacts.py
-  - tests/unit/test_engine_initialization.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_engine_initialization.py
   - tests/unit/test_facade_compatibility_boundary.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_fapi_runtime_profile.py
   - tests/unit/test_feature_completeness_checkpoint.py
   - tests/unit/test_feature_flag_registry.py
-  - tests/unit/test_final_aggregation.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_final_aggregation.py
   - tests/unit/test_governance_extension_plane_phase5.py
   - tests/unit/test_handler_records.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py
@@ -176,8 +178,8 @@ categories:
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_openid_configuration.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_openid_userinfo_endpoint.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_openrpc_contract_validity.py
-  - tests/unit/test_operator_control_plane.py
-  - tests/unit/test_operator_service_layer.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_control_plane.py
+  - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
   - pkgs/120-tests/tba-tests-architecture/tests/unit/test_package_dependency_layering.py
   - tests/unit/test_package_maturity_governance.py
   - pkgs/120-tests/tba-tests-release/tests/unit/test_package_python_matrix_workflow.py
@@ -188,7 +190,7 @@ categories:
   - tests/unit/test_principals_model_boundary.py
   - tests/unit/test_product_api_surfaces.py
   - tests/unit/test_product_api_table_initialization.py
-  - tests/unit/test_profile_discovery_runtime.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_profile_discovery_runtime.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_protected_resource_verifier_contract.py
   - tests/unit/test_provenance_naming_guard.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_provider_white_label_login_boundary.py
@@ -197,9 +199,9 @@ categories:
   - tests/unit/test_published_dependency_model.py
   - tests/unit/test_pytest_workspace_temp_root.py
   - pkgs/120-tests/tba-tests-release/tests/unit/test_release_posture_plane.py
-  - tests/unit/test_remote_adapter.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_remote_adapter.py
   - tests/unit/test_repo_truth_helpers.py
-  - tests/unit/test_request_scoped_runtime_authority.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_request_scoped_runtime_authority.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_resource_server_consumer_boundary.py
   - pkgs/120-tests/tba-tests-certification/tests/unit/test_retained_target_test_evidence.py
   - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc6749_auth_flow_endpoints.py
@@ -252,7 +254,7 @@ categories:
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_profile_configuration.py
   - pkgs/120-tests/tba-tests-certification/tests/unit/test_runtime_validation_matrix.py
-  - tests/unit/test_runtime_version_truthfulness.py
+  - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_version_truthfulness.py
   - pkgs/120-tests/tba-tests-administration/tests/unit/test_secure_default_admin_gate.py
   - pkgs/120-tests/tba-tests-authentication/tests/unit/test_security_deps.py
   - tests/unit/test_security_user_lookup.py
@@ -265,7 +267,7 @@ categories:
   - pkgs/120-tests/tba-tests-storage/tests/unit/test_storage_canonical_facades.py
   - pkgs/120-tests/tba-tests-storage/tests/unit/test_storage_repository_boundary.py
   - pkgs/120-tests/tba-tests-storage/tests/unit/test_storage_sqlite_uuid_coercion.py
-  - tests/unit/test_surface_baseline_boundary.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_surface_baseline_boundary.py
   - pkgs/120-tests/tba-tests-oidc/tests/unit/test_tenant_public_discovery_boundary.py
   - pkgs/120-tests/tba-tests-authorization/tests/unit/test_tenant_realm_isolation_invariants.py
   - tests/unit/test_testkit_cross_cutting_boundary.py
@@ -290,7 +292,7 @@ categories:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
-  - tests/integration/test_crud_api.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_crud_api.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_default_openapi_endpoints.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
   - tests/integration/test_full_workflow.py
@@ -299,8 +301,8 @@ categories:
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
   - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
   - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
-  - tests/integration/test_profile_all_documented_endpoints.py
-  - tests/integration/test_profile_surface_and_contract_alignment.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_all_documented_endpoints.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc7662.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py
@@ -357,7 +359,7 @@ categories:
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7591_dynamic_client_registration.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7662_introspection.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc8252_native_apps.py
-  - tests/conformance/production/test_rfc8615_well_known_uris.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/conformance/production/test_rfc8615_well_known_uris.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py
   - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9728_protected_resource_metadata.py
   interop:
@@ -409,13 +411,13 @@ categories:
   - pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
   - tests/security/test_residency_sovereignty_policy.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_resource_server_verifier_certification.py
-  - tests/security/test_runtime_capability_truth.py
-  - tests/security/test_runtime_qualification.py
+  - pkgs/120-tests/tba-tests-runtime/tests/security/test_runtime_capability_truth.py
+  - pkgs/120-tests/tba-tests-runtime/tests/security/test_runtime_qualification.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
   - tests/security/test_tenant_isolation_certification.py
   negative:
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py
-  - tests/negative/test_contract_diff_detects_drift.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/negative/test_contract_diff_detects_drift.py
   - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py
   - pkgs/120-tests/tba-tests-oauth/tests/negative/test_invalid_assertion_and_par_inputs.py

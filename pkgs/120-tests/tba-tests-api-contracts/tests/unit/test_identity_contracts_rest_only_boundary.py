@@ -9,7 +9,7 @@ import pytest
 from tba_contracts_identity.models import ContractProjection
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 TARGET_PACKAGES = (
     "tba-contracts-identity",
     "tba-runtime-identity-administration",

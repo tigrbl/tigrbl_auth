@@ -1,19 +1,17 @@
-"""Profile reference union contract tests."""
-
 from __future__ import annotations
 
-import json
 from pathlib import Path
 
 import pytest
 
-from tba_auth.cli.main import main
-from tba_auth.cli.metadata import ARGUMENT_SPECS, GLOBAL_ARGUMENT_KEYS, build_cli_contract_manifest, build_parser
 from tba_auth.config.profile_loader import RuntimeProfileError, load_profile_reference
 
 
-ROOT = Path(__file__).resolve().parents[2]
-EXTERNAL_PROFILE = ROOT / "tests" / "fixtures" / "profiles" / "external-production.yaml"
+ROOT = Path(__file__).resolve().parents[5]
+EXTERNAL_PROFILE = (
+    ROOT
+    / "pkgs/120-tests/tba-tests-runtime/tests/fixtures/profiles/external-production.yaml"
+)
 
 
 def test_profile_reference_union_accepts_packaged_profile_ids() -> None:
@@ -99,7 +97,9 @@ unexpected: true
 
 
 def test_profile_reference_fail_closed_errors_are_actionable() -> None:
-    with pytest.raises(RuntimeProfileError, match="unknown packaged runtime profile id"):
+    with pytest.raises(
+        RuntimeProfileError, match="unknown packaged runtime profile id"
+    ):
         load_profile_reference("unknown-profile")
 
 
@@ -110,47 +110,3 @@ def test_profile_provenance_output_reports_source_and_overrides() -> None:
     assert deployment.profile_source["base_profile"] == "production"
     assert "enable_rfc6749" in deployment.profile_source["applied_override_keys"]
     assert deployment.profile_source["redaction"] == "no-secret-values-emitted"
-
-
-def test_cli_profile_runtime_wiring_uses_resolved_deployment(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
-    rc = main([
-        "discovery",
-        "show",
-        "--repo-root",
-        str(ROOT),
-        "--profile",
-        str(EXTERNAL_PROFILE),
-        "--format",
-        "json",
-    ])
-    payload = json.loads(capsys.readouterr().out)
-
-    assert rc == 0
-    assert payload["profile"] == "production"
-    assert payload["profile_source"]["kind"] == "external-profile-path"
-
-
-def test_cli_config_is_removed_as_duplicate_selector() -> None:
-    parser = build_parser()
-    contract = build_cli_contract_manifest()
-
-    assert "config" not in ARGUMENT_SPECS
-    assert "config" not in GLOBAL_ARGUMENT_KEYS
-    assert "--config" not in parser.format_help()
-    assert all(flag["key"] != "config" for flag in contract["global_flags"])
-    with pytest.raises(SystemExit):
-        parser.parse_args(["status", "--config", "profile.yaml"])
-
-
-def test_profile_reference_negative_coverage() -> None:
-    parser = build_parser()
-
-    args = parser.parse_args(["serve", "--profile", str(EXTERNAL_PROFILE), "--check"])
-    assert args.profile == str(EXTERNAL_PROFILE)
-
-
-def test_profile_reference_discovery_contract_alignment() -> None:
-    deployment = load_profile_reference(str(EXTERNAL_PROFILE)).resolve()
-
-    assert "/.well-known/openid-configuration" in deployment.active_contract_routes
-    assert deployment.profile == "production"

@@ -7,7 +7,7 @@ from pathlib import Path
 import yaml
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 REGISTRY_PATH = ROOT / ".ssot" / "registry.json"
 
 GUARDRAIL_DOCUMENT_IDS = {

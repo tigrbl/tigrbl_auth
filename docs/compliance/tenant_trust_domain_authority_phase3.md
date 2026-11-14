@@ -14,7 +14,7 @@ Coverage strengthened:
 Validated commands:
 
 ```text
-uv run pytest pkgs/120-tests/tba-tests-oidc/tests/features/test_tenant_jwks_discovery.py tests/integration/test_profile_surface_and_contract_alignment.py -k "tenant or jwks or issuer"
+uv run pytest pkgs/120-tests/tba-tests-oidc/tests/features/test_tenant_jwks_discovery.py pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py -k "tenant or jwks or issuer"
 ```
 
 Observed result:

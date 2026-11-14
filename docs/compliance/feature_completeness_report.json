@@ -38,7 +38,7 @@
       "summary": "The storage-backed administration workflow materializes durable sqlite-backed state outside the repository tree.",
       "evidence": [
         "pkgs/01-storage/tba-storage-core/src/tba_storage_core/operator_store.py",
-        "tests/unit/test_operator_control_plane.py"
+        "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_control_plane.py"
       ],
       "details": {
         "schema_version": 1,
@@ -63,7 +63,7 @@
       "summary": "Client records can be created, updated, listed, fetched, and deleted through storage-backed administration workflows.",
       "evidence": [
         "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
-        "tests/unit/test_operator_control_plane.py"
+        "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_control_plane.py"
       ],
       "details": {
         "create_status": "created",

@@ -18,7 +18,7 @@ from tba_app_backend_core.surfaces import admin_resource_path_prefixes
 from tba_app_backend_core import surfaces
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 BACKEND_APP_PACKAGES = {
     "public-app": (
         "tba_app_backend_public",

@@ -126,7 +126,7 @@ def test_operator_secret_mutations_persist_only_provider_outputs(
 
 
 def test_runtime_observation_and_discovery(repo_root: Path | None = None) -> None:
-    repo_root = Path(repo_root or Path(__file__).resolve().parents[2])
+    repo_root = Path(repo_root or Path(__file__).resolve().parents[5])
     temp_root = repo_root / "dist" / "capability-test-observation"
     temp_root.mkdir(parents=True, exist_ok=True)
     observe = observe_token_response(
@@ -149,10 +149,10 @@ def test_runtime_observation_and_discovery(repo_root: Path | None = None) -> Non
     assert summary["backend"] == "sqlite-authoritative"
     assert summary["repo_mutation_dependency"] is False
 
-    discovery = show_discovery(Path(__file__).resolve().parents[2], profile="baseline")
+    discovery = show_discovery(Path(__file__).resolve().parents[5], profile="baseline")
     assert "openid-configuration.json" in discovery["documents"]
     diff = diff_discovery(
-        Path(__file__).resolve().parents[2],
+        Path(__file__).resolve().parents[5],
         left_profile="baseline",
         right_profile="production",
     )

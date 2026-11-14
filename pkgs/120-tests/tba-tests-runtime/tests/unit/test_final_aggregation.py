@@ -6,7 +6,7 @@ from types import SimpleNamespace
 
 from tba_auth.cli.runtime import write_runtime_profile_report
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 
 
 def _write_json(path: Path, payload: dict) -> None:

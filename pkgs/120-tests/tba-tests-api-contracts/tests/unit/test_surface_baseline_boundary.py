@@ -22,7 +22,7 @@ from tba_auth.config.surfaces import (
 )
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 
 BOUNDARY_FEATURE_IDS = {
     "feat:uix-admin-boundary",

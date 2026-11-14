@@ -10,8 +10,8 @@
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_release_lifecycle.py
 - pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
 - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_operator_service_layer.py
-- tests/unit/test_operator_control_plane.py
+- pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
+- pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_control_plane.py
 - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py

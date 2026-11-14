@@ -75,7 +75,7 @@ def build_feature_completeness_report(repo_root: Path, *, report_dir: Path | Non
         summary="The storage-backed administration workflow materializes durable sqlite-backed state outside the repository tree.",
         evidence=[
             "pkgs/01-storage/tba-storage-core/src/tba_storage_core/operator_store.py",
-            "tests/unit/test_operator_control_plane.py",
+            "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_control_plane.py",
         ],
         details_payload=operator_summary,
     )
@@ -83,7 +83,7 @@ def build_feature_completeness_report(repo_root: Path, *, report_dir: Path | Non
         "register/manage clients",
         passed=client_passed,
         summary="Client records can be created, updated, listed, fetched, and deleted through storage-backed administration workflows.",
-        evidence=["pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py", "tests/unit/test_operator_control_plane.py"],
+        evidence=["pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py", "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_control_plane.py"],
         details_payload={"create_status": client_create.status, "update_status": client_update.status, "delete_status": client_delete.status, "client_verbs": sorted(client_verbs)},
     )
 

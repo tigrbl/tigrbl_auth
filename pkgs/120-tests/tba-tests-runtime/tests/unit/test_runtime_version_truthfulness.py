@@ -5,7 +5,7 @@ from pathlib import Path
 from tba_app_backend_core.app import _runtime_package_version
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 
 
 def test_runtime_package_version_matches_pyproject_version() -> None:

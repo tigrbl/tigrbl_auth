@@ -9,7 +9,7 @@ import pytest
 pytestmark = pytest.mark.integration
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[5]
 
 
 def _openapi(profile: str) -> dict:
