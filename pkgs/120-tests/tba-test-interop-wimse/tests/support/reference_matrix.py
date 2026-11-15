@@ -4,8 +4,8 @@ from itertools import product
 
 def structural_keys(catalog, factors, exclusions):
     profiles = factors["hop_profiles"]
-    canonical = {(item["tls"], item["proof"]): key for key, item in profiles.items()}
-    raw = product(factors["factors"]["tls"]["levels"], factors["factors"]["proof"]["levels"],
+    canonical = {(item["tls"], item["application_proof"]): key for key, item in profiles.items()}
+    raw = product(factors["factors"]["tls"]["levels"], factors["factors"]["application_proof"]["levels"],
                   ("none", "wimse", "spiffe"), ("none", "baseline", "spire-x509-svid"),
                   ("none", "baseline", "spire-wit-svid"))
     options = []

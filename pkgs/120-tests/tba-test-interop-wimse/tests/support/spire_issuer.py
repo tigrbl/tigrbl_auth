@@ -6,10 +6,11 @@ from pathlib import Path
 import json
 import subprocess
 from tempfile import TemporaryDirectory
-from time import monotonic, sleep
+from time import monotonic, sleep, time
 from uuid import uuid4
 
 from tba_testkit_workload_credential_conformance.fixtures import _certificate
+from cryptography import x509
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ec
 
@@ -55,8 +56,9 @@ class SpireIssuer:
         self.bundle.write_text(docker("exec", container, SPIRE, "bundle", "show").stdout, encoding="ascii")
 
     def mint(self, identity):
-        if identity in self.minted:
-            return self.minted[identity]
+        cached = self.minted.get(identity)
+        if cached is not None and cached[1] > time() + 60:
+            return cached[0]
         local = self.directory / uuid4().hex
         local.mkdir()
         output = "/tmp/wic-data"
@@ -65,13 +67,15 @@ class SpireIssuer:
         docker("cp", f"{self.container}:{output}/svid.pem", local)
         docker("cp", f"{self.container}:{output}/key.pem", local)
         material = TlsFiles(str(local / "svid.pem"), str(local / "key.pem"), str(self.bundle))
-        self.minted[identity] = material
+        leaf = x509.load_pem_x509_certificates(Path(material.certificate).read_bytes())[0]
+        self.minted[identity] = material, leaf.not_valid_after_utc.timestamp()
         return material
 
     def mint_wit(self, identity, *, alternate=False):
         if alternate:
             return self.alternate.mint_wit(identity)
-        if identity not in self.wits:
+        cached = self.wits.get(identity)
+        if cached is None or cached[1] <= time() + 60:
             local = self.directory / uuid4().hex
             local.mkdir()
             output = "/tmp/wic-data"
@@ -89,11 +93,12 @@ class SpireIssuer:
                                        "-format", "spiffe").stdout)
             from tba_concrete_jwt import decode_jwt_unverified
 
-            kid = decode_jwt_unverified(token).jws.protected_headers["kid"]
+            decoded = decode_jwt_unverified(token)
+            kid = decoded.jws.protected_headers["kid"]
             jwk, = (entry for entry in bundle["keys"]
                     if entry.get("use") == "wit-svid" and entry.get("kid") == kid)
-            self.wits[identity] = token, key, {**jwk, "alg": "ES256"}
-        return self.wits[identity]
+            self.wits[identity] = (token, key, {**jwk, "alg": "ES256"}), decoded.claims["exp"]
+        return self.wits[identity][0]
 
     def issue_pair(self, directory, subjects, receiver):
         server = self.mint(receiver)

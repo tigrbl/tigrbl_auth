@@ -29,11 +29,12 @@ def verify_spiffe_wit(serialized, *, trust_by_domain, now):
 
 
 class SignatureHop:
-    def __init__(self, fixture, *, operation_variant="valid-peer"):
+    def __init__(self, fixture, *, operation_variant="valid-peer", read_variant="valid-peer"):
         self.fixture = fixture
         self.identity = fixture.identity
         self.server_identity = fixture.server_identity
         self.operation_variant = operation_variant
+        self.read_variant = read_variant
         self.context_token_header = ("X-Destination-Access-Token" if not fixture.signed else "Authorization")
 
     @contextmanager
@@ -41,11 +42,13 @@ class SignatureHop:
         application = self.fixture.caller("valid-peer")
         operation = (application if self.operation_variant == "valid-peer" else
                      self.fixture.caller(self.operation_variant))
+        read = (application if self.read_variant == "valid-peer" else
+                self.fixture.caller(self.read_variant))
         caller = self.fixture.combined_caller(application) if self.fixture.wic else application
 
         def proof_headers(port, *, readback=False, headers=None, dns=DNS, signed_path=None, signed_authority=None):
             options = {"signed_path": signed_path, "signed_authority": signed_authority} if self.fixture.signed else {}
-            signer = application if readback else operation
+            signer = read if readback else operation
             return signer.present(dns, port, readback=readback, extra_headers=headers, **options)
 
         def send(host, port, dns, *, readback=False, headers=None):

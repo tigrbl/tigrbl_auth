@@ -1,0 +1,342 @@
+schema_version = 1
+max_hops = 3
+# Current scenario hops are the workload calls expanded against endpoint peers.
+existing_scenario_hop_type = "workload-call"
+
+[composition]
+counting = "Count one arrow at the chosen level of detail. A separately modeled support request counts as an arrow."
+continuity = "The next caller can be the previous receiver or an earlier actor that receives the output it needs."
+authorization = "Check actor identity, trust domain, audience, scope, and freshness before consuming an output."
+early_denial = "A denial can end the trace. Record planned hops, reached hops, the decision hop, and the observed effect."
+participants = "The caller and receiver fields identify participants within the flow. Reuse an identifier when the same participant appears on another arrow. Multiple participants can use the same implementation."
+
+[entity_types]
+workload = "An application participant that calls or receives a request, including an agent, gateway, broker, or resource."
+delegation-authority = "A service that issues or narrows authority for a delegate."
+token-service = "A service that issues a token or exchanges a grant or token."
+credential-delivery-service = "A service that delivers workload credentials and trust material."
+status-policy-service = "A service that evaluates status, approval, or other policy evidence."
+
+# Roles describe a participant's function on one arrow. Workload caller and
+# receiver capabilities use the operation's profile and identifier scheme.
+[entity_roles]
+caller = "workload"
+receiver = "workload"
+delegator = "workload"
+delegate = "workload"
+delegation-authority = "delegation-authority"
+token-client = "workload"
+token-issuer = "token-service"
+transaction-token-issuer = "token-service"
+credential-requester = "workload"
+credential-delivery = "credential-delivery-service"
+policy-client = "workload"
+status-authority = "status-policy-service"
+before-effect-enforcer = "status-policy-service"
+delegation-receipt-verifier = "status-policy-service"
+approval-verifier = "status-policy-service"
+
+# Planned TbA equivalents for the separate all-TbA projection.
+[native.issuers]
+spire-x509-svid = "tba-x509-svid"
+spire-wit-svid = "tba-wit-svid"
+
+[native.equivalent_operations]
+authgent-issue = { operation = "tba-txn-issue", support = "tba-transaction-token-issuer", following_receiver = "tba" }
+mintid-check = { operation = "tba-proof-status-check", support = "tba-non-revocation-status" }
+emilia-check = { operation = "tba-before-effect-check", support = "tba-before-effect-enforcer" }
+redthread-check = { operation = "tba-delegation-status-check", support = "tba-delegation-enforcer" }
+redthread-receipt-check = { operation = "tba-receipt-check", support = "tba-delegation-receipt-verifier" }
+omniarx-check = { operation = "tba-approval-check", support = "tba-approval-verifier" }
+
+[native.overrides]
+broker = { receiver = "tba" }
+provider = { support = "planned-tba-bearer-provider" }
+acquire = { support = "planned-tba-workload-api" }
+
+# Planning contracts for the lab. The allowed following operations express
+# which produced context the next operation can use. Operations marked start
+# may also run using the explicitly declared fixture input.
+[operations.call]
+type = "workload-call"
+source_role = "caller"
+destination_role = "receiver"
+initial_input = "authenticated workload and protected operation"
+next = ["call", "check", "mintid-check", "emilia-check", "redthread-check", "omniarx-check"]
+advances_actor = true
+success = "operation-authorized"
+refusals = ["peer-identity-refused", "operation-scope-refused"]
+
+[operations.boundary-call]
+type = "workload-call"
+source_role = "caller"
+destination_role = "receiver"
+initial_input = "destination access token bound to the request and a downstream provider delegation"
+next = ["broker"]
+advances_actor = true
+profile_requirement = "application-proof"
+terminal = false
+success = "cross-domain-worker-admitted"
+refusals = ["foreign-domain-token-refused"]
+
+[operations.broker]
+type = "workload-call"
+source_role = "caller"
+destination_role = "receiver"
+initial_input = "eligible delegated context for a bearer-only provider"
+next = ["provider"]
+advances_actor = true
+receiver = "cred"
+terminal = false
+success = "broker-authorized-credential-use"
+refusals = ["broker-grant-refused", "revocation-before-provider-call"]
+
+[operations.provider]
+type = "workload-call"
+source_role = "caller"
+destination_role = "receiver"
+next = []
+support = "planned-bearer-provider-endpoint"
+success = "provider-committed-one-effect"
+refusals = ["provider-credential-refused"]
+
+[operations.delegate]
+type = "delegation"
+source_role = "delegator"
+destination_role = "delegate"
+support_role = "delegation-authority"
+initial_input = "delegator with a parent grant"
+next = ["delegate", "redeem-delegation", "call", "redthread-receipt-check"]
+advances_actor = true
+following_call = "application-proof"
+support = "lab-delegation-authority"
+caller_implementation = "tba"
+receiver_implementation = "tba"
+success = "narrowed-authority-issued"
+refusals = ["delegation-widens-parent-scope"]
+
+[operations.redeem-delegation]
+type = "token-exchange"
+source_role = "token-client"
+destination_role = "token-issuer"
+next = ["call"]
+following_call = "application-proof"
+support = "lab-delegation-token-server"
+caller_implementation = "tba"
+success = "delegate-access-token-issued"
+refusals = ["grant-not-bound-to-delegate"]
+
+[operations.source-exchange]
+type = "token-exchange"
+source_role = "token-client"
+destination_role = "token-issuer"
+initial_input = "domain-A transaction token and configured destination"
+next = ["destination-exchange"]
+support = "source-token-issuer"
+caller_implementation = "tba"
+success = "destination-authorization-grant-issued"
+refusals = ["source-transaction-token-refused"]
+
+[operations.destination-exchange]
+type = "token-exchange"
+source_role = "token-client"
+destination_role = "token-issuer"
+initial_input = "valid destination authorization grant"
+next = ["call"]
+following_call = "application-proof"
+support = "destination-access-token-issuer"
+caller_implementation = "tba"
+success = "destination-access-token-issued"
+refusals = ["authorization-grant-refused"]
+
+[operations.acquire]
+type = "credential-acquisition"
+source_role = "credential-requester"
+destination_role = "credential-delivery"
+initial_input = "registered workload and reachable credential delivery endpoint"
+next = ["call"]
+following_call = "spire-x509-svid"
+support = "planned-spire-agent-workload-api"
+caller_implementation = "tba"
+success = "x509-svid-delivered"
+refusals = ["workload-not-entitled-to-svid"]
+
+[operations.check]
+type = "status-policy-check"
+source_role = "policy-client"
+destination_role = "status-authority"
+initial_input = "verifier with a credential or operation requiring a fresh decision"
+next = ["call"]
+support = "status-authority"
+caller_implementation = "tba"
+success = "fresh-status-accepted"
+refusals = ["revoked-status-refused", "stale-status-refused", "unavailable-status-refused"]
+
+[operations.teleport-acquire]
+candidate = "teleport-tbot"
+candidate_role = "credential-delivery"
+type = "credential-acquisition"
+source_role = "credential-requester"
+destination_role = "credential-delivery"
+initial_input = "Teleport workload registration and tbot Workload API configuration"
+next = ["call"]
+following_call = "spire-x509-svid"
+following_issuer = "teleport-x509-svid"
+support = "teleport-tbot"
+caller_implementation = "tba"
+success = "x509-svid-delivered"
+refusals = ["workload-not-entitled-to-svid"]
+
+[operations.authgent-issue]
+candidate = "authgent"
+candidate_role = "transaction-token-issuer"
+type = "token-exchange"
+source_role = "token-client"
+destination_role = "transaction-token-issuer"
+initial_input = "authorized TbA client and domain-local transaction context"
+next = ["call", "source-exchange"]
+following_call = "application-proof"
+following_profile = "wit-proof"
+following_receiver = "cred"
+support = "authgent"
+caller_implementation = "tba"
+success = "transaction-token-issued"
+refusals = ["transaction-token-request-refused"]
+
+[operations.mintid-check]
+candidate = "mintid"
+candidate_role = "status-authority"
+type = "status-policy-check"
+source_role = "policy-client"
+destination_role = "status-authority"
+next = []
+support = "mintid"
+caller_implementation = "tba"
+success = "current-non-revocation-proof-accepted"
+refusals = ["issuer-revocation-refused", "holder-self-revocation-refused"]
+gates_effect = true
+
+[operations.emilia-check]
+candidate = "emilia"
+candidate_role = "before-effect-enforcer"
+type = "status-policy-check"
+source_role = "policy-client"
+destination_role = "before-effect-enforcer"
+next = []
+support = "emilia"
+caller_implementation = "tba"
+success = "fresh-authority-accepted-before-effect"
+refusals = ["revocation-before-effect-refused"]
+gates_effect = true
+
+[operations.redthread-check]
+candidate = "redthread"
+candidate_role = "before-effect-enforcer"
+type = "status-policy-check"
+source_role = "policy-client"
+destination_role = "before-effect-enforcer"
+next = []
+support = "redthread"
+caller_implementation = "tba"
+success = "current-delegation-accepted-before-effect"
+refusals = ["revocation-before-effect-refused"]
+gates_effect = true
+
+[operations.redthread-receipt-check]
+candidate = "redthread"
+candidate_role = "delegation-receipt-verifier"
+type = "status-policy-check"
+source_role = "policy-client"
+destination_role = "delegation-receipt-verifier"
+next = []
+support = "redthread"
+caller_implementation = "tba"
+success = "narrowed-receipt-accepted"
+refusals = ["invalid-delegation-receipt-refused"]
+
+[operations.omniarx-check]
+candidate = "omniarx"
+candidate_role = "approval-verifier"
+type = "status-policy-check"
+source_role = "policy-client"
+destination_role = "approval-verifier"
+next = []
+support = "omniarx"
+caller_implementation = "tba"
+success = "matching-approval-display-accepted"
+refusals = ["approval-display-mismatch-refused"]
+gates_effect = true
+
+[types.workload-call]
+label = "Workload call"
+requires = "A caller can reach the receiving workload and request an operation."
+produces = "An authorization decision and, when allowed, an operation result."
+binding_gap = "Needs a scenario that binds the ordered workload endpoints and defines the effect or refusal."
+
+[types.delegation]
+label = "Delegation"
+requires = "The delegator has authority to grant the requested scope to the delegate."
+produces = "Authority bound to the delegate and limited by the parent grant."
+binding_gap = "Needs a bound delegator and delegate, a parent grant, and an observable scope decision."
+
+[types.token-exchange]
+label = "Token exchange"
+requires = "An authorization server accepts the caller and the presented grant or token."
+produces = "A grant or access token for the configured recipient."
+binding_gap = "Needs a bound exchange client and authorization server, with accepted input and output credential types."
+
+[types.credential-acquisition]
+label = "Credential acquisition"
+requires = "The requesting workload has an enrollment or retrieval path to the issuer."
+produces = "An identity credential and, where applicable, trust material."
+binding_gap = "Needs a bound workload and credential delivery endpoint with a declared credential and trust bundle."
+
+[types.status-policy-check]
+label = "Status or policy check"
+requires = "A decision depends on evidence or policy evaluated by another entity."
+produces = "A status or policy decision associated with the relevant subject or operation."
+binding_gap = "Needs a bound verifier and external decision endpoint with observable status or policy results."
+
+[[shapes]]
+sequence = ["workload-call", "workload-call", "workload-call"]
+example = "Agent A calls agent B across domains; agent B calls a broker; the broker calls a bearer-only provider."
+
+[[shapes]]
+sequence = ["delegation"]
+example = "A parent grants a child limited authority."
+
+[[shapes]]
+sequence = ["token-exchange"]
+example = "An agent redeems an existing grant at its authorization server."
+
+[[shapes]]
+sequence = ["credential-acquisition"]
+example = "A workload fetches an SVID from the Workload API."
+
+[[shapes]]
+sequence = ["status-policy-check"]
+example = "A verifier asks a status service for credential status."
+
+[[shapes]]
+sequence = ["delegation", "workload-call"]
+example = "A parent delegates to a child, then the child calls a resource using that authority."
+
+[[shapes]]
+sequence = ["token-exchange", "workload-call"]
+example = "The same agent obtains a token from an authorization server and then calls the intended resource."
+
+[[shapes]]
+sequence = ["workload-call", "status-policy-check"]
+example = "A resource receives a workload request and consults a separate status service before acting."
+
+[[shapes]]
+sequence = ["delegation", "token-exchange", "workload-call"]
+example = "A parent authorizes a child, the child redeems that grant, and the child calls the resource."
+
+[[shapes]]
+sequence = ["token-exchange", "token-exchange", "workload-call"]
+example = "An agent obtains a grant in domain A, redeems it in B, then calls a resource in B."
+
+[[shapes]]
+sequence = ["workload-call", "workload-call", "status-policy-check"]
+example = "A caller reaches a worker, the worker calls a resource, and the resource consults a separate policy service."

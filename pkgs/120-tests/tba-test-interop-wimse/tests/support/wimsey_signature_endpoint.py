@@ -272,7 +272,8 @@ class WimseySignatureAdapter:
                 fixture = WicSupportFixture(case, endpoints)
                 yield SignatureBoundaryCase(case, endpoints["enforcing"], gateway=fixture) if family == "19" else fixture
             elif family in POLICY_INPUTS:
-                yield WicPolicyFixture(SignatureHop(enforcing), family, case["variant"])
+                transport = SignatureHop(enforcing) if isinstance(enforcing, WptFixture) else enforcing
+                yield WicPolicyFixture(transport, family, case["variant"])
             elif family in {"07", "15"}:
                 yield SignatureBoundaryCase(case, SignatureHop(enforcing))
             else:

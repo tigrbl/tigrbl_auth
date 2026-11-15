@@ -22,7 +22,7 @@ def validate_catalog(factors, scenarios, exclusions):
             raise ValueError(f"Empty or duplicate levels in {key}")
     profiles = factors["hop_profiles"]
     for name, profile in profiles.items():
-        for key in ("tls", "proof"):
+        for key in ("tls", "application_proof"):
             if profile[key] not in factors["factors"][key]["levels"]:
                 raise ValueError(f"Unknown {key} in {name}")
     families = {}

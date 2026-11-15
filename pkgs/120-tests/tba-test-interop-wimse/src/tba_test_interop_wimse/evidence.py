@@ -3,6 +3,8 @@ from collections import Counter
 import json
 from xml.etree import ElementTree
 
+from .hop_runner import hop_mismatches
+
 
 def audit_pytest_report(executions, report):
     """Check the exact current inventory against individual JUnit outcomes."""
@@ -11,28 +13,30 @@ def audit_pytest_report(executions, report):
     for item in ElementTree.parse(report).iter("testcase"):
         values = {}
         for prop in item.findall("./properties/property"):
-            if prop.get("name") in {"execution_id", "scenario_id", "execution_result"}:
+            if prop.get("name") in {"execution_id", "scenario_id", "hop_sequence_id", "execution_result"}:
                 name = prop.get("name")
                 if name in values:
                     raise ValueError(f"Repeated JUnit property: {name}")
                 values[name] = prop.get("value")
-        if set(values) != {"execution_id", "scenario_id", "execution_result"}:
+        if not {"execution_id", "execution_result"} <= values.keys():
             raise ValueError("JUnit item lacks peer execution evidence")
         result = json.loads(values["execution_result"])
         key = values["execution_id"]
         row = expected.get(key)
-        if (row is None or result["execution_id"] != key
-                or row["scenario_id"] != values["scenario_id"]
-                or result["scenario_id"] != values["scenario_id"]):
+        association = "hop_sequence_id" if row and "scenario_id" not in row else "scenario_id"
+        if (row is None or result["execution_id"] != key or association not in values
+                or row[association] != values[association]
+                or result.get(association) != values[association]):
             raise ValueError(f"Unexpected execution or scenario association: {key}")
         skipped = item.find("skipped") is not None
         unsuccessful = item.find("failure") is not None or item.find("error") is not None
         status = result["status"]
-        if status == "passed" and (
-            skipped or unsuccessful or row["status"] != "qualified"
-            or not isinstance(result.get("observation"), dict)
-        ):
-            raise ValueError(f"Invalid pass evidence: {key}")
+        if status == "passed":
+            observation = result.get("observation")
+            if (skipped or unsuccessful or not isinstance(observation, dict)
+                    or (association == "scenario_id" and row["status"] != "qualified")
+                    or (association == "hop_sequence_id" and hop_mismatches(row, observation))):
+                raise ValueError(f"Invalid pass evidence: {key}")
         if (status in {"failed", "setup-failure"} and not unsuccessful
                 or status == "blocked" and not skipped
                 or status not in {"passed", "blocked", "failed", "setup-failure"}):

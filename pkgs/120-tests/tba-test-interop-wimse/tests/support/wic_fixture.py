@@ -55,7 +55,7 @@ class WicFixture:
         else:
             self.client_tls, self.server_tls = issue_pair(directory, subjects, self.server_identity)
             anchor = Path(self.client_tls.trust_anchor)
-        client_anchor = anchor
+        client_anchor = Path(self.server_tls.trust_anchor)
         if variant == "wrong-anchor":
             # Keep the TLS CA fixed while varying the workload trust configuration.
             client_anchor = directory / "wrong-ca.pem"

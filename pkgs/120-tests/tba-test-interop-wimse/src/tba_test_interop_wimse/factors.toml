@@ -6,23 +6,23 @@ exclusions_file = "exclusions.toml"
 
 [hop_profiles.wic-mtls]
 tls = "WIC mutual TLS"
-proof = "None"
+application_proof = "None"
 
 [hop_profiles.wit-wpt]
 tls = "Server-authenticated TLS"
-proof = "WIT + WPT"
+application_proof = "WPT"
 
 [hop_profiles.wit-http-signature]
 tls = "Server-authenticated TLS"
-proof = "WIT + HTTP Message Signature"
+application_proof = "HTTP Message Signatures"
 
 [hop_profiles.wic-mtls-wpt]
 tls = "WIC mutual TLS"
-proof = "WIT + WPT"
+application_proof = "WPT"
 
 [hop_profiles.wic-mtls-http-signature]
 tls = "WIC mutual TLS"
-proof = "WIT + HTTP Message Signature"
+application_proof = "HTTP Message Signatures"
 
 [factors.tls]
 name = "Primary hop TLS"
@@ -31,12 +31,12 @@ levels = [
     "WIC mutual TLS",
 ]
 
-[factors.proof]
-name = "Primary hop application proof"
+[factors.application_proof]
+name = "Application proof"
 levels = [
     "None",
-    "WIT + WPT",
-    "WIT + HTTP Message Signature",
+    "WPT",
+    "HTTP Message Signatures",
 ]
 
 [factors.second_hop]
@@ -197,10 +197,10 @@ name = "Peer assignment"
 levels = [
     "WIC with native identifiers",
     "WIC with SPIFFE identifiers",
-    "Workload Proof Tokens",
-    "HTTP Message Signatures",
-    "WIC with Workload Proof Tokens",
-    "WIC with HTTP Message Signatures",
+    "WIT + WPT (Workload Proof Token)",
+    "WIT + HTTP Message Signatures",
+    "WIC/mTLS + WIT + WPT",
+    "WIC/mTLS + WIT + HTTP Message Signatures",
 ]
 
 [factors.direction]
@@ -264,19 +264,19 @@ requires = { factor = "effect", in = ["Protected read"] }
 id = "application-faults"
 basis = "Scenarios 05–06. The factor describes the verifier's configured proof even if the message omits it."
 when = { factor = "fault", in = ["Missing application proof", "Wrong proof key", "Wrong audience", "Repeated proof"] }
-requires = { any = [{ factor = "proof", in = ["WIT + WPT", "WIT + HTTP Message Signature"] }, { factor = "second_hop", in = ["WIT/WPT", "WIT/HTTP signatures", "WIC/mTLS + WIT/WPT", "WIC/mTLS + WIT/HTTP signatures"] }] }
+requires = { any = [{ factor = "application_proof", in = ["WPT", "HTTP Message Signatures"] }, { factor = "second_hop", in = ["WIT/WPT", "WIT/HTTP signatures", "WIC/mTLS + WIT/WPT", "WIC/mTLS + WIT/HTTP signatures"] }] }
 
 [[rules]]
 id = "signature-rewrite"
 basis = "Scenario 15. An HTTP signature must cover the challenged component on the affected hop."
 when = { factor = "fault", in = ["Signed authority changed", "Signed path changed"] }
-requires = { all = [{ factor = "intermediary", in = ["Rewrite request"] }, { any = [{ factor = "proof", in = ["WIT + HTTP Message Signature"] }, { factor = "second_hop", in = ["WIT/HTTP signatures", "WIC/mTLS + WIT/HTTP signatures"] }] }] }
+requires = { all = [{ factor = "intermediary", in = ["Rewrite request"] }, { any = [{ factor = "application_proof", in = ["HTTP Message Signatures"] }, { factor = "second_hop", in = ["WIT/HTTP signatures", "WIC/mTLS + WIT/HTTP signatures"] }] }] }
 
 [[rules]]
 id = "identity-comparison"
 basis = "Scenario 19. The same hop must have both identity layers."
 when = { factor = "fault", in = ["TLS and application identities differ"] }
-requires = { any = [{ all = [{ factor = "tls", in = ["WIC mutual TLS"] }, { factor = "proof", in = ["WIT + WPT", "WIT + HTTP Message Signature"] }] }, { factor = "second_hop", in = ["WIC/mTLS + WIT/WPT", "WIC/mTLS + WIT/HTTP signatures"] }] }
+requires = { any = [{ all = [{ factor = "tls", in = ["WIC mutual TLS"] }, { factor = "application_proof", in = ["WPT", "HTTP Message Signatures"] }] }, { factor = "second_hop", in = ["WIC/mTLS + WIT/WPT", "WIC/mTLS + WIT/HTTP signatures"] }] }
 
 [[rules]]
 id = "token-domain"
@@ -288,7 +288,7 @@ requires = { factor = "topology", in = ["Direct A to B", "Chain across A and B"]
 id = "token-binding"
 basis = "Scenario 07. The current catalog exercises token binding using WPT or HTTP signatures."
 when = { factor = "transaction", in = ["Binding mismatch"] }
-requires = { any = [{ factor = "proof", in = ["WIT + WPT", "WIT + HTTP Message Signature"] }, { factor = "second_hop", in = ["WIT/WPT", "WIT/HTTP signatures", "WIC/mTLS + WIT/WPT", "WIC/mTLS + WIT/HTTP signatures"] }] }
+requires = { any = [{ factor = "application_proof", in = ["WPT", "HTTP Message Signatures"] }, { factor = "second_hop", in = ["WIT/WPT", "WIT/HTTP signatures", "WIC/mTLS + WIT/WPT", "WIC/mTLS + WIT/HTTP signatures"] }] }
 
 [[rules]]
 id = "child-grant"
@@ -336,7 +336,7 @@ requires = { factor = "accounting", in = ["Independent counters", "One authorita
 id = "issuer-wit"
 basis = "Execution matrix. SPIRE WIT-SVID applies to a WIT hop."
 when = { factor = "issuer", in = ["SPIRE WIT-SVID substitution"] }
-requires = { any = [{ factor = "proof", in = ["WIT + WPT", "WIT + HTTP Message Signature"] }, { factor = "second_hop", in = ["WIT/WPT", "WIT/HTTP signatures", "WIC/mTLS + WIT/WPT", "WIC/mTLS + WIT/HTTP signatures"] }] }
+requires = { any = [{ factor = "application_proof", in = ["WPT", "HTTP Message Signatures"] }, { factor = "second_hop", in = ["WIT/WPT", "WIT/HTTP signatures", "WIC/mTLS + WIT/WPT", "WIC/mTLS + WIT/HTTP signatures"] }] }
 
 [[rules]]
 id = "issuer-wic"
@@ -348,34 +348,34 @@ requires = { all = [{ any = [{ factor = "tls", in = ["WIC mutual TLS"] }, { fact
 id = "peer-profile-1"
 basis = "Execution matrix. Pair assignment applies to the primary hop. The TLS-only test can reuse an endpoint with the workload credential omitted; qualification is tracked independently."
 when = { factor = "peer", in = ["WIC with native identifiers"] }
-requires = { any = [{ all = [{ factor = "tls", in = ["WIC mutual TLS"] }, { factor = "proof", in = ["None"] }, { factor = "wic_uri", in = ["Native wimse://"] }] }, { all = [{ factor = "tls", in = ["Server-authenticated TLS"] }, { factor = "proof", in = ["None"] }] }] }
+requires = { any = [{ all = [{ factor = "tls", in = ["WIC mutual TLS"] }, { factor = "application_proof", in = ["None"] }, { factor = "wic_uri", in = ["Native wimse://"] }] }, { all = [{ factor = "tls", in = ["Server-authenticated TLS"] }, { factor = "application_proof", in = ["None"] }] }] }
 
 [[rules]]
 id = "peer-profile-2"
 basis = "Execution matrix. Pair assignment applies to the primary hop. The TLS-only test can reuse an endpoint with the workload credential omitted; qualification is tracked independently."
 when = { factor = "peer", in = ["WIC with SPIFFE identifiers"] }
-requires = { any = [{ all = [{ factor = "tls", in = ["WIC mutual TLS"] }, { factor = "proof", in = ["None"] }, { factor = "wic_uri", in = ["SPIFFE spiffe://"] }] }, { all = [{ factor = "tls", in = ["Server-authenticated TLS"] }, { factor = "proof", in = ["None"] }] }] }
+requires = { any = [{ all = [{ factor = "tls", in = ["WIC mutual TLS"] }, { factor = "application_proof", in = ["None"] }, { factor = "wic_uri", in = ["SPIFFE spiffe://"] }] }, { all = [{ factor = "tls", in = ["Server-authenticated TLS"] }, { factor = "application_proof", in = ["None"] }] }] }
 
 [[rules]]
 id = "peer-profile-3"
 basis = "Execution matrix. Pair assignment applies to the primary hop. The TLS-only test can reuse an endpoint with the workload credential omitted; qualification is tracked independently."
-when = { factor = "peer", in = ["Workload Proof Tokens"] }
-requires = { any = [{ all = [{ factor = "tls", in = ["Server-authenticated TLS"] }, { factor = "proof", in = ["WIT + WPT"] }] }, { all = [{ factor = "tls", in = ["Server-authenticated TLS"] }, { factor = "proof", in = ["None"] }] }] }
+when = { factor = "peer", in = ["WIT + WPT (Workload Proof Token)"] }
+requires = { any = [{ all = [{ factor = "tls", in = ["Server-authenticated TLS"] }, { factor = "application_proof", in = ["WPT"] }] }, { all = [{ factor = "tls", in = ["Server-authenticated TLS"] }, { factor = "application_proof", in = ["None"] }] }] }
 
 [[rules]]
 id = "peer-profile-4"
 basis = "Execution matrix. Pair assignment applies to the primary hop. The TLS-only test can reuse an endpoint with the workload credential omitted; qualification is tracked independently."
-when = { factor = "peer", in = ["HTTP Message Signatures"] }
-requires = { any = [{ all = [{ factor = "tls", in = ["Server-authenticated TLS"] }, { factor = "proof", in = ["WIT + HTTP Message Signature"] }] }, { all = [{ factor = "tls", in = ["Server-authenticated TLS"] }, { factor = "proof", in = ["None"] }] }] }
+when = { factor = "peer", in = ["WIT + HTTP Message Signatures"] }
+requires = { any = [{ all = [{ factor = "tls", in = ["Server-authenticated TLS"] }, { factor = "application_proof", in = ["HTTP Message Signatures"] }] }, { all = [{ factor = "tls", in = ["Server-authenticated TLS"] }, { factor = "application_proof", in = ["None"] }] }] }
 
 [[rules]]
 id = "peer-profile-5"
 basis = "Execution matrix. Pair assignment applies to the primary hop. The TLS-only test can reuse an endpoint with the workload credential omitted; qualification is tracked independently."
-when = { factor = "peer", in = ["WIC with Workload Proof Tokens"] }
-requires = { any = [{ all = [{ factor = "tls", in = ["WIC mutual TLS"] }, { factor = "proof", in = ["WIT + WPT"] }] }, { all = [{ factor = "tls", in = ["Server-authenticated TLS"] }, { factor = "proof", in = ["None"] }] }] }
+when = { factor = "peer", in = ["WIC/mTLS + WIT + WPT"] }
+requires = { any = [{ all = [{ factor = "tls", in = ["WIC mutual TLS"] }, { factor = "application_proof", in = ["WPT"] }] }, { all = [{ factor = "tls", in = ["Server-authenticated TLS"] }, { factor = "application_proof", in = ["None"] }] }] }
 
 [[rules]]
 id = "peer-profile-6"
 basis = "Execution matrix. Pair assignment applies to the primary hop. The TLS-only test can reuse an endpoint with the workload credential omitted; qualification is tracked independently."
-when = { factor = "peer", in = ["WIC with HTTP Message Signatures"] }
-requires = { any = [{ all = [{ factor = "tls", in = ["WIC mutual TLS"] }, { factor = "proof", in = ["WIT + HTTP Message Signature"] }] }, { all = [{ factor = "tls", in = ["Server-authenticated TLS"] }, { factor = "proof", in = ["None"] }] }] }
+when = { factor = "peer", in = ["WIC/mTLS + WIT + HTTP Message Signatures"] }
+requires = { any = [{ all = [{ factor = "tls", in = ["WIC mutual TLS"] }, { factor = "application_proof", in = ["HTTP Message Signatures"] }] }, { all = [{ factor = "tls", in = ["Server-authenticated TLS"] }, { factor = "application_proof", in = ["None"] }] }] }

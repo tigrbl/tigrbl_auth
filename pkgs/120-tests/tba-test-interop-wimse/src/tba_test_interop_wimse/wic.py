@@ -93,16 +93,19 @@ class WicReceiver(FixtureServer):
 
 
 class _VerifiedConnection(FixtureConnection):
-    def __init__(self, host, port, dns_name, tls, verifier):
+    def __init__(self, host, port, dns_name, tls, verifier, response_timeout=None):
         super().__init__(host, port, dns_name, tls.context(
             server=False, workload_name_only=getattr(verifier, "workload_name_only", False)
         ))
         self.verifier = verifier
+        self.response_timeout = response_timeout
 
     def connect(self):
         super().connect()
         try:
             self.verifier.verify(self.sock.getpeercert(binary_form=True), dns_name=self.dns_name)
+            if self.response_timeout is not None:
+                self.sock.settimeout(self.response_timeout)
         except ValueError as error:
             self.close()
             raise RejectedServerIdentity(str(error)) from error
@@ -119,10 +122,11 @@ class RejectedServerIdentity(ValueError):
 class WicCaller:
     tls: TlsFiles
     verifier: WorkloadVerifier
+    response_timeout: float | None = None
 
     def request(self, host, port, dns_name, *, readback=False, headers=None):
         connection = self.connection(host, port, dns_name)
         return call_resource(connection, readback=readback, headers=headers)
 
     def connection(self, host, port, dns_name):
-        return _VerifiedConnection(host, port, dns_name, self.tls, self.verifier)
+        return _VerifiedConnection(host, port, dns_name, self.tls, self.verifier, self.response_timeout)

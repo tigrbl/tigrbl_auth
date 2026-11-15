@@ -1,0 +1,6 @@
+{
+  "name": "tba-emilia-interop-fixture",
+  "private": true,
+  "type": "module",
+  "dependencies": { "@emilia-protocol/gate": "0.30.0" }
+}

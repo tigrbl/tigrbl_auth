@@ -3,7 +3,16 @@
 import json
 from itertools import product
 from .catalog import read_catalog, validate_catalog
+from .hop_matrix import sequence_id
 from .qualification import pair_has_baseline
+
+
+# Keep the original generated hop field readable by existing JSON consumers.
+_LEGACY_PROOF_LABELS = {
+    "None": "None",
+    "WPT": "WIT + WPT",
+    "HTTP Message Signatures": "WIT + HTTP Message Signature",
+}
 
 
 def profile_options(profiles, factors):
@@ -11,7 +20,8 @@ def profile_options(profiles, factors):
     for name in profiles:
         profile = factors["hop_profiles"][name]
         uses_wic = profile["tls"] == "WIC mutual TLS"
-        uses_wit = profile["proof"] != "None"
+        application_proof = profile["application_proof"]
+        uses_wit = application_proof != "None"
         for scheme in (("wimse", "spiffe") if uses_wic else ("none",)):
             wic_issuers = ["baseline"] if uses_wic else ["none"]
             if scheme == "spiffe":
@@ -21,6 +31,7 @@ def profile_options(profiles, factors):
                 yield {
                     "profile": name,
                     **profile,
+                    "proof": _LEGACY_PROOF_LABELS[application_proof],
                     "identifier_scheme": scheme,
                     "wic_issuer": wic_issuer,
                     "wit_issuer": wit_issuer,
@@ -97,7 +108,7 @@ def expand_scenarios(catalog, factors, exclusions):
                     }
 
 
-def endpoint_pairs(peers, hop, *, scenario_family=None):
+def endpoint_pairs(peers, hop, *, native_only=False, scenario_family=None):
     capabilities = [
         row for row in peers["capabilities"]
         if row["profile"] == hop["profile"]
@@ -108,17 +119,18 @@ def endpoint_pairs(peers, hop, *, scenario_family=None):
     for caller, receiver in product(capabilities, repeat=2):
         if caller["role"] != "caller" or receiver["role"] != "receiver":
             continue
-        if (caller["implementation"] == "tba") == (receiver["implementation"] == "tba"):
+        tba_sides = sum(endpoint["implementation"] == "tba" for endpoint in (caller, receiver))
+        if tba_sides != (2 if native_only else 1):
             continue
         if "unsupported" in (caller["status"], receiver["status"]):
             continue
         yield {"caller": caller, "receiver": receiver}
 
 
-def expand_executions(scenario, peers):
+def expand_executions(scenario, peers, *, native_only=False):
     hop_ids = list(scenario["hops"])
     choices = [
-        list(endpoint_pairs(peers, hop, scenario_family=scenario["scenario_id"]))
+        list(endpoint_pairs(peers, hop, native_only=native_only, scenario_family=scenario["scenario_id"]))
         for hop in scenario["hops"].values()
     ]
     for pairs in product(*choices):
@@ -146,6 +158,8 @@ def expand_executions(scenario, peers):
         baselines = all(pair_has_baseline(peers, pair) for pair in pairs)
         status = "qualified" if endpoints_qualified and baselines and not pending_roles else "pending"
         direction = "forward" if pairs[0]["caller"]["implementation"] == "tba" else "reverse"
+        if native_only:
+            direction = "native"
         endpoints = ";".join(
             json.dumps([pair[side]["implementation"], pair[side].get("version"),
                         pair[side].get("configuration")], separators=(",", ":"))
@@ -197,7 +211,7 @@ def support_matches(support, role, pairs, scenario):
     )
 
 
-def generate_matrix(*, peers=None):
+def generate_matrix(*, peers=None, native_only=False):
     factors = read_catalog("factors.toml")
     exclusions = read_catalog("exclusions.toml")
     if peers is None:
@@ -222,7 +236,16 @@ def generate_matrix(*, peers=None):
             raise ValueError(f"Unpinned, placeholder, or unevidenced qualification {key}")
         keys.add(key)
     scenarios = list(expand_scenarios(catalog, factors, exclusions))
-    executions = [row for scenario in scenarios for row in expand_executions(scenario, peers)]
+    workload_hop = read_catalog("hops.toml")["existing_scenario_hop_type"]
+    executions = []
+    for scenario in scenarios:
+        hop_count = len(scenario["hops"])
+        metadata = {
+            "hop_count": hop_count,
+            "hop_sequence_id": sequence_id([workload_hop] * hop_count),
+        }
+        scenario.update(metadata)
+        executions.extend({**row, **metadata} for row in expand_executions(scenario, peers, native_only=native_only))
     if len({row["id"] for row in scenarios}) != len(scenarios):
         raise ValueError("Duplicate structural scenario ID")
     if len({row["id"] for row in executions}) != len(executions):
@@ -237,5 +260,6 @@ def generate_matrix(*, peers=None):
         },
         "scenarios": scenarios,
         "executions": executions,
+        "implementations": peers["implementations"],
         "capabilities": peers["capabilities"],
     }
