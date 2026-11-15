@@ -1,4 +1,4 @@
-schema_version: "0.1.0"
+schema_version: "0.4.0"
 kind: "spec"
 id: "spc:1051"
 number: 1051
@@ -27,8 +27,8 @@ body: |-
   
   ## Verification
   
-  - `tests/unit/test_published_dependency_model.py`
-  - `tests/unit/test_ssot_work_item_traceability.py`
-  - `tests/unit/test_ssot_dependency_maintenance_traceability.py`
+  - `pkgs/120-tests/tba-tests-release/tests/unit/test_published_dependency_model.py`
+  - `pkgs/120-tests/tba-tests-architecture/tests/unit/test_ssot_work_item_traceability.py`
+  - `pkgs/120-tests/tba-tests-architecture/tests/unit/test_ssot_dependency_maintenance_traceability.py`
 spec_kind: "governance"
 adr_ids: []

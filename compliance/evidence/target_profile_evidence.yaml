@@ -4,7 +4,7 @@ bundles:
   tests:
   - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_deployment_resolver.py
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
   - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
@@ -14,7 +14,7 @@ bundles:
 - profile: baseline
   target: Bootstrap and migration lifecycle
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
@@ -23,7 +23,7 @@ bundles:
 - profile: baseline
   target: CLI operator surface
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
@@ -38,7 +38,7 @@ bundles:
 - profile: baseline
   target: Import/export portability
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
@@ -47,7 +47,7 @@ bundles:
 - profile: baseline
   target: Key lifecycle and JWKS publication
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_rpc_registry_live.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
@@ -207,16 +207,16 @@ bundles:
 - profile: baseline
   target: Release bundle and signature verification
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
-  - tests/unit/test_published_dependency_model.py
+  - pkgs/120-tests/tba-tests-release/tests/unit/test_published_dependency_model.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
   evidence_refs:
   - compliance/evidence/tier3/release-bundle-signing/
 - profile: baseline
   target: 'Runner profile: Hypercorn'
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
@@ -228,7 +228,7 @@ bundles:
 - profile: baseline
   target: 'Runner profile: Tigrcorn'
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
@@ -240,7 +240,7 @@ bundles:
 - profile: baseline
   target: 'Runner profile: Uvicorn'
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
@@ -254,7 +254,7 @@ bundles:
   tests:
   - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_deployment_resolver.py
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
   - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
@@ -264,7 +264,7 @@ bundles:
 - profile: production
   target: Bootstrap and migration lifecycle
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
@@ -273,7 +273,7 @@ bundles:
 - profile: production
   target: CLI operator surface
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
@@ -288,7 +288,7 @@ bundles:
 - profile: production
   target: Import/export portability
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
@@ -297,7 +297,7 @@ bundles:
 - profile: production
   target: Key lifecycle and JWKS publication
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_rpc_registry_live.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
@@ -572,16 +572,16 @@ bundles:
 - profile: production
   target: Release bundle and signature verification
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
-  - tests/unit/test_published_dependency_model.py
+  - pkgs/120-tests/tba-tests-release/tests/unit/test_published_dependency_model.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
   evidence_refs:
   - compliance/evidence/tier3/release-bundle-signing/
 - profile: production
   target: 'Runner profile: Hypercorn'
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
@@ -593,7 +593,7 @@ bundles:
 - profile: production
   target: 'Runner profile: Tigrcorn'
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
@@ -605,7 +605,7 @@ bundles:
 - profile: production
   target: 'Runner profile: Uvicorn'
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
@@ -619,7 +619,7 @@ bundles:
   tests:
   - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_deployment_resolver.py
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
   - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
@@ -629,7 +629,7 @@ bundles:
 - profile: hardening
   target: Bootstrap and migration lifecycle
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
@@ -638,7 +638,7 @@ bundles:
 - profile: hardening
   target: CLI operator surface
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
@@ -653,7 +653,7 @@ bundles:
 - profile: hardening
   target: Import/export portability
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
@@ -662,7 +662,7 @@ bundles:
 - profile: hardening
   target: Key lifecycle and JWKS publication
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_rpc_registry_live.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
@@ -1059,16 +1059,16 @@ bundles:
 - profile: hardening
   target: Release bundle and signature verification
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
-  - tests/unit/test_published_dependency_model.py
+  - pkgs/120-tests/tba-tests-release/tests/unit/test_published_dependency_model.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
   evidence_refs:
   - compliance/evidence/tier3/release-bundle-signing/
 - profile: hardening
   target: 'Runner profile: Hypercorn'
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
@@ -1080,7 +1080,7 @@ bundles:
 - profile: hardening
   target: 'Runner profile: Tigrcorn'
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
@@ -1092,7 +1092,7 @@ bundles:
 - profile: hardening
   target: 'Runner profile: Uvicorn'
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
@@ -1106,7 +1106,7 @@ bundles:
   tests:
   - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_deployment_resolver.py
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
   - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
@@ -1116,7 +1116,7 @@ bundles:
 - profile: fapi2-security
   target: Bootstrap and migration lifecycle
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
@@ -1125,7 +1125,7 @@ bundles:
 - profile: fapi2-security
   target: CLI operator surface
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
@@ -1140,7 +1140,7 @@ bundles:
 - profile: fapi2-security
   target: Import/export portability
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
@@ -1149,7 +1149,7 @@ bundles:
 - profile: fapi2-security
   target: Key lifecycle and JWKS publication
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_rpc_registry_live.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
@@ -1560,16 +1560,16 @@ bundles:
 - profile: fapi2-security
   target: Release bundle and signature verification
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
-  - tests/unit/test_published_dependency_model.py
+  - pkgs/120-tests/tba-tests-release/tests/unit/test_published_dependency_model.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
   evidence_refs:
   - compliance/evidence/tier3/release-bundle-signing/
 - profile: fapi2-security
   target: 'Runner profile: Hypercorn'
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
@@ -1581,7 +1581,7 @@ bundles:
 - profile: fapi2-security
   target: 'Runner profile: Tigrcorn'
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
@@ -1593,7 +1593,7 @@ bundles:
 - profile: fapi2-security
   target: 'Runner profile: Uvicorn'
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
@@ -1607,7 +1607,7 @@ bundles:
   tests:
   - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_deployment_resolver.py
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
   - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
@@ -1617,7 +1617,7 @@ bundles:
 - profile: peer-claim
   target: Bootstrap and migration lifecycle
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
@@ -1626,7 +1626,7 @@ bundles:
 - profile: peer-claim
   target: CLI operator surface
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
@@ -1641,7 +1641,7 @@ bundles:
 - profile: peer-claim
   target: Import/export portability
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
@@ -1650,7 +1650,7 @@ bundles:
 - profile: peer-claim
   target: Key lifecycle and JWKS publication
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_rpc_registry_live.py
   - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
@@ -2047,16 +2047,16 @@ bundles:
 - profile: peer-claim
   target: Release bundle and signature verification
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
-  - tests/unit/test_published_dependency_model.py
+  - pkgs/120-tests/tba-tests-release/tests/unit/test_published_dependency_model.py
   - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
   evidence_refs:
   - compliance/evidence/tier3/release-bundle-signing/
 - profile: peer-claim
   target: 'Runner profile: Hypercorn'
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
@@ -2068,7 +2068,7 @@ bundles:
 - profile: peer-claim
   target: 'Runner profile: Tigrcorn'
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
@@ -2080,7 +2080,7 @@ bundles:
 - profile: peer-claim
   target: 'Runner profile: Uvicorn'
   tests:
-  - tests/unit/test_claim_boundary_rebaseline.py
+  - pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
   - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py

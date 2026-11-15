@@ -11,7 +11,7 @@ Implementation packages follow `tba-<role>-<subject>[-<qualifier>...]`, with a
 single-token role: `tba-protocol-webauthn`, `tba-storage-token`,
 `tba-provider-secret-hashing-bcrypt`, and `tba-profile-fido2-server`.
 The role vocabulary and approved package mapping are checked in
-`tests/unit/test_tba_namespace.py` and
+`pkgs/120-tests/tba-tests-architecture/tests/unit/test_tba_namespace.py` and
 [`role-first-renaming.json`](role-first-renaming.json). Standard names such as
 OAuth and WebAuthn remain intact. Generic suite-level `auth` is omitted from
 router, backend app, plugin, and release-certification names. The domain term

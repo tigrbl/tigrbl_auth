@@ -48,6 +48,6 @@ Use `IdentityDocument` at provider boundaries and the resolver, verifier, and pu
 
 ## Verification
 
-See the [related repository tests](https://github.com/tigrbl/tigrbl_auth/blob/master/tests/unit/test_neutral_identity_artifact_contracts.py) for the implementation scope covered by this example.
+See the [related repository tests](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/120-tests/tba-tests-architecture/tests/unit/test_neutral_identity_artifact_contracts.py) for the implementation scope covered by this example.
 
 [Workspace and package catalog](https://github.com/tigrbl/tigrbl_auth#package-catalog) · [tba-primitives-identity](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/00-primitives/tba-primitives-identity#readme) · [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues) · [Repository license](https://github.com/tigrbl/tigrbl_auth/blob/master/LICENSE)

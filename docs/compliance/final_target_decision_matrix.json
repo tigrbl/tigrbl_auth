@@ -1874,7 +1874,7 @@
         "paths": [
           "pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py",
           "pkgs/120-tests/tba-tests-runtime/tests/unit/test_deployment_resolver.py",
-          "tests/unit/test_claim_boundary_rebaseline.py",
+          "pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py",
           "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py",
           "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py",
           "pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py",
@@ -1925,7 +1925,7 @@
       "test_evidence": {
         "classes": "unit, integration, conformance",
         "paths": [
-          "tests/unit/test_claim_boundary_rebaseline.py",
+          "pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py",
           "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py",
           "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py",
           "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py",
@@ -1978,7 +1978,7 @@
       "test_evidence": {
         "classes": "unit, integration, conformance",
         "paths": [
-          "tests/unit/test_claim_boundary_rebaseline.py",
+          "pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py",
           "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py",
           "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py",
           "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py",
@@ -2031,7 +2031,7 @@
       "test_evidence": {
         "classes": "unit, integration, conformance",
         "paths": [
-          "tests/unit/test_claim_boundary_rebaseline.py",
+          "pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py",
           "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py",
           "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py",
           "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py",
@@ -2085,7 +2085,7 @@
       "test_evidence": {
         "classes": "unit, conformance",
         "paths": [
-          "tests/unit/test_claim_boundary_rebaseline.py",
+          "pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py",
           "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py",
           "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py",
           "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
@@ -2137,7 +2137,7 @@
       "test_evidence": {
         "classes": "unit, conformance, e2e",
         "paths": [
-          "tests/unit/test_claim_boundary_rebaseline.py",
+          "pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py",
           "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
           "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
           "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py"
@@ -2184,7 +2184,7 @@
       "test_evidence": {
         "classes": "unit, conformance",
         "paths": [
-          "tests/unit/test_claim_boundary_rebaseline.py",
+          "pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py",
           "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py",
           "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_rpc_registry_live.py",
           "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
@@ -2231,7 +2231,7 @@
       "test_evidence": {
         "classes": "unit, conformance",
         "paths": [
-          "tests/unit/test_claim_boundary_rebaseline.py",
+          "pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py",
           "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
           "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py",
           "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py"
@@ -2275,9 +2275,9 @@
       "test_evidence": {
         "classes": "unit, security",
         "paths": [
-          "tests/unit/test_claim_boundary_rebaseline.py",
+          "pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py",
           "pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py",
-          "tests/unit/test_published_dependency_model.py",
+          "pkgs/120-tests/tba-tests-release/tests/unit/test_published_dependency_model.py",
           "pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py"
         ]
       },

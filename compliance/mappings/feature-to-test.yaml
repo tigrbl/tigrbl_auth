@@ -4,7 +4,7 @@ cli-flag:access_log:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -15,7 +15,7 @@ cli-flag:activate:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -26,7 +26,7 @@ cli-flag:admin:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -37,7 +37,7 @@ cli-flag:alg:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -48,7 +48,7 @@ cli-flag:artifact:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -59,7 +59,7 @@ cli-flag:baseline_file:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -70,7 +70,7 @@ cli-flag:bundle_dir:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -81,7 +81,7 @@ cli-flag:check:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -92,7 +92,7 @@ cli-flag:checksum:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -103,7 +103,7 @@ cli-flag:color:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -114,7 +114,7 @@ cli-flag:cookies:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -125,7 +125,7 @@ cli-flag:curve:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -136,7 +136,7 @@ cli-flag:db_safe_start:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -147,7 +147,7 @@ cli-flag:diagnostics:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -158,7 +158,7 @@ cli-flag:dry_run:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -169,7 +169,7 @@ cli-flag:enable_mtls:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -180,7 +180,7 @@ cli-flag:env_file:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -191,7 +191,7 @@ cli-flag:environment:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -202,7 +202,7 @@ cli-flag:execution_mode:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -213,7 +213,7 @@ cli-flag:extension:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -224,7 +224,7 @@ cli-flag:filter:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -235,7 +235,7 @@ cli-flag:format:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -246,7 +246,7 @@ cli-flag:from_file:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -257,7 +257,7 @@ cli-flag:graceful_timeout:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -268,7 +268,7 @@ cli-flag:health:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -279,7 +279,7 @@ cli-flag:host:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -290,7 +290,7 @@ cli-flag:hypercorn_http2:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -301,7 +301,7 @@ cli-flag:hypercorn_worker_class:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -312,7 +312,7 @@ cli-flag:id:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -323,7 +323,7 @@ cli-flag:if_exists:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -334,7 +334,7 @@ cli-flag:if_missing:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -345,7 +345,7 @@ cli-flag:include_secrets:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -356,7 +356,7 @@ cli-flag:input_path:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -367,7 +367,7 @@ cli-flag:issuer:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -378,7 +378,7 @@ cli-flag:jwks_refresh_seconds:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -389,7 +389,7 @@ cli-flag:kid:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -400,7 +400,7 @@ cli-flag:kind:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -411,7 +411,7 @@ cli-flag:kty:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -422,7 +422,7 @@ cli-flag:lifespan:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -433,7 +433,7 @@ cli-flag:limit:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -444,7 +444,7 @@ cli-flag:log_level:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -455,7 +455,7 @@ cli-flag:metrics:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -466,7 +466,7 @@ cli-flag:name:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -477,7 +477,7 @@ cli-flag:no_strict:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -488,7 +488,7 @@ cli-flag:offline:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -499,7 +499,7 @@ cli-flag:offset:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -510,7 +510,7 @@ cli-flag:output:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -521,7 +521,7 @@ cli-flag:peer_profile:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -532,7 +532,7 @@ cli-flag:pid_file:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -543,7 +543,7 @@ cli-flag:plugin_mode:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -554,7 +554,7 @@ cli-flag:port:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -565,7 +565,7 @@ cli-flag:profile:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -576,7 +576,7 @@ cli-flag:proxy_headers:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -587,7 +587,7 @@ cli-flag:public:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -598,7 +598,7 @@ cli-flag:publish:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -609,7 +609,7 @@ cli-flag:redact:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -620,7 +620,7 @@ cli-flag:repo_root:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -631,7 +631,7 @@ cli-flag:report_dir:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -644,11 +644,11 @@ cli-flag:require_tls:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
 - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
-- tests/unit/test_published_dependency_model.py
+- pkgs/120-tests/tba-tests-release/tests/unit/test_published_dependency_model.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
 cli-flag:retire_after:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
@@ -656,7 +656,7 @@ cli-flag:retire_after:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -667,7 +667,7 @@ cli-flag:rpc:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -680,7 +680,7 @@ cli-flag:runtime_style:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
 - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_deployment_resolver.py
@@ -693,7 +693,7 @@ cli-flag:scope:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -704,7 +704,7 @@ cli-flag:server:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -715,7 +715,7 @@ cli-flag:set_item:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -726,7 +726,7 @@ cli-flag:signing_key:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -737,7 +737,7 @@ cli-flag:slice:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -748,7 +748,7 @@ cli-flag:sort:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -759,7 +759,7 @@ cli-flag:status_filter:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -770,7 +770,7 @@ cli-flag:strict:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -783,7 +783,7 @@ cli-flag:surface_set:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
@@ -796,7 +796,7 @@ cli-flag:tenant:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -807,7 +807,7 @@ cli-flag:tier:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -818,7 +818,7 @@ cli-flag:tigrcorn_contract:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -829,7 +829,7 @@ cli-flag:tigrcorn_mode:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -840,7 +840,7 @@ cli-flag:timeout:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -851,7 +851,7 @@ cli-flag:title:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -862,7 +862,7 @@ cli-flag:trace:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -873,7 +873,7 @@ cli-flag:uds:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -884,7 +884,7 @@ cli-flag:use:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -895,7 +895,7 @@ cli-flag:uvicorn_http:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -906,7 +906,7 @@ cli-flag:uvicorn_loop:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -917,7 +917,7 @@ cli-flag:uvicorn_ws:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -928,7 +928,7 @@ cli-flag:verbose:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -939,7 +939,7 @@ cli-flag:wait:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -950,7 +950,7 @@ cli-flag:workers:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -961,7 +961,7 @@ cli-flag:yes:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -973,7 +973,7 @@ cli-verb:bootstrap.apply:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -985,7 +985,7 @@ cli-verb:bootstrap.manifest:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -997,7 +997,7 @@ cli-verb:bootstrap.status:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1009,7 +1009,7 @@ cli-verb:bootstrap.verify:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1020,7 +1020,7 @@ cli-verb:claims.lint:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1031,7 +1031,7 @@ cli-verb:claims.show:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1042,7 +1042,7 @@ cli-verb:claims.status:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1053,7 +1053,7 @@ cli-verb:client.create:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1064,7 +1064,7 @@ cli-verb:client.delete:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1075,7 +1075,7 @@ cli-verb:client.disable:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1086,7 +1086,7 @@ cli-verb:client.enable:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1097,7 +1097,7 @@ cli-verb:client.get:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1108,7 +1108,7 @@ cli-verb:client.list:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1119,7 +1119,7 @@ cli-verb:client.rotate-secret:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1130,7 +1130,7 @@ cli-verb:client.update:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1141,7 +1141,7 @@ cli-verb:discovery.diff:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1152,7 +1152,7 @@ cli-verb:discovery.publish:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1163,7 +1163,7 @@ cli-verb:discovery.show:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1174,7 +1174,7 @@ cli-verb:discovery.validate:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1185,7 +1185,7 @@ cli-verb:doctor:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1196,7 +1196,7 @@ cli-verb:evidence.bundle:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1207,7 +1207,7 @@ cli-verb:evidence.peer-execute:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1218,7 +1218,7 @@ cli-verb:evidence.peer-status:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1229,7 +1229,7 @@ cli-verb:evidence.status:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1240,7 +1240,7 @@ cli-verb:evidence.verify:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1251,7 +1251,7 @@ cli-verb:export.run:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1262,7 +1262,7 @@ cli-verb:export.status:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1273,7 +1273,7 @@ cli-verb:export.validate:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1284,7 +1284,7 @@ cli-verb:flow.create:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1295,7 +1295,7 @@ cli-verb:flow.delete:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1306,7 +1306,7 @@ cli-verb:flow.disable:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1317,7 +1317,7 @@ cli-verb:flow.enable:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1328,7 +1328,7 @@ cli-verb:flow.get:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1339,7 +1339,7 @@ cli-verb:flow.list:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1350,7 +1350,7 @@ cli-verb:flow.update:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1361,7 +1361,7 @@ cli-verb:gate:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1372,7 +1372,7 @@ cli-verb:identity.create:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1383,7 +1383,7 @@ cli-verb:identity.delete:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1394,7 +1394,7 @@ cli-verb:identity.get:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1405,7 +1405,7 @@ cli-verb:identity.list:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1416,7 +1416,7 @@ cli-verb:identity.lock:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1427,7 +1427,7 @@ cli-verb:identity.set-password:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1438,7 +1438,7 @@ cli-verb:identity.unlock:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1449,7 +1449,7 @@ cli-verb:identity.update:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1460,7 +1460,7 @@ cli-verb:import.run:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1471,7 +1471,7 @@ cli-verb:import.status:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1482,7 +1482,7 @@ cli-verb:import.validate:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1493,7 +1493,7 @@ cli-verb:keys.delete:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
@@ -1506,7 +1506,7 @@ cli-verb:keys.export:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
@@ -1519,7 +1519,7 @@ cli-verb:keys.generate:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
@@ -1532,7 +1532,7 @@ cli-verb:keys.get:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
@@ -1545,7 +1545,7 @@ cli-verb:keys.import:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
@@ -1558,7 +1558,7 @@ cli-verb:keys.list:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
@@ -1571,7 +1571,7 @@ cli-verb:keys.publish-jwks:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
@@ -1584,7 +1584,7 @@ cli-verb:keys.retire:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
@@ -1597,7 +1597,7 @@ cli-verb:keys.rotate:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
@@ -1611,7 +1611,7 @@ cli-verb:migrate.apply:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1623,7 +1623,7 @@ cli-verb:migrate.plan:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1635,7 +1635,7 @@ cli-verb:migrate.status:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1647,7 +1647,7 @@ cli-verb:migrate.verify:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1660,11 +1660,11 @@ cli-verb:release.bundle:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
 - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
-- tests/unit/test_published_dependency_model.py
+- pkgs/120-tests/tba-tests-release/tests/unit/test_published_dependency_model.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
 cli-verb:release.recertify:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
@@ -1674,11 +1674,11 @@ cli-verb:release.recertify:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
 - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
-- tests/unit/test_published_dependency_model.py
+- pkgs/120-tests/tba-tests-release/tests/unit/test_published_dependency_model.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
 cli-verb:release.sign:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
@@ -1688,11 +1688,11 @@ cli-verb:release.sign:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
 - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
-- tests/unit/test_published_dependency_model.py
+- pkgs/120-tests/tba-tests-release/tests/unit/test_published_dependency_model.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
 cli-verb:release.status:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
@@ -1702,11 +1702,11 @@ cli-verb:release.status:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
 - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
-- tests/unit/test_published_dependency_model.py
+- pkgs/120-tests/tba-tests-release/tests/unit/test_published_dependency_model.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
 cli-verb:release.verify:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
@@ -1716,11 +1716,11 @@ cli-verb:release.verify:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
 - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
-- tests/unit/test_published_dependency_model.py
+- pkgs/120-tests/tba-tests-release/tests/unit/test_published_dependency_model.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
 cli-verb:serve:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
@@ -1728,7 +1728,7 @@ cli-verb:serve:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1739,7 +1739,7 @@ cli-verb:session.get:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1750,7 +1750,7 @@ cli-verb:session.list:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1761,7 +1761,7 @@ cli-verb:session.revoke:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1772,7 +1772,7 @@ cli-verb:session.revoke-all:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1785,7 +1785,7 @@ cli-verb:spec.diff:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
@@ -1800,7 +1800,7 @@ cli-verb:spec.generate:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
@@ -1815,7 +1815,7 @@ cli-verb:spec.report:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
@@ -1830,7 +1830,7 @@ cli-verb:spec.validate:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
@@ -1843,7 +1843,7 @@ cli-verb:tenant.create:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1854,7 +1854,7 @@ cli-verb:tenant.delete:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1865,7 +1865,7 @@ cli-verb:tenant.disable:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1876,7 +1876,7 @@ cli-verb:tenant.enable:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1887,7 +1887,7 @@ cli-verb:tenant.get:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1898,7 +1898,7 @@ cli-verb:tenant.list:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1909,7 +1909,7 @@ cli-verb:tenant.update:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1920,7 +1920,7 @@ cli-verb:token.exchange:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1931,7 +1931,7 @@ cli-verb:token.get:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1942,7 +1942,7 @@ cli-verb:token.introspect:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1953,7 +1953,7 @@ cli-verb:token.list:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1964,7 +1964,7 @@ cli-verb:token.revoke:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -1975,7 +1975,7 @@ cli-verb:verify:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -2079,16 +2079,16 @@ profile:baseline:
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_well_known_endpoints_behavior.py
 profile:camara-security-interoperability:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 profile:confidential-spa-pattern:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 profile:fapi2-message-signing:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 profile:fapi2-security:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_oidc_id_token.py
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_configuration.py
@@ -2179,16 +2179,16 @@ profile:fapi2-security:
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_well_known_endpoints_behavior.py
 profile:fast-udap-security:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 profile:fdx-csdf-security-model:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 profile:gnap-core-rs:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 profile:hardening:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_oidc_id_token.py
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_configuration.py
@@ -2279,20 +2279,20 @@ profile:hardening:
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_well_known_endpoints_behavior.py
 profile:ihe-iua:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 profile:nist-sp-800-63b-4:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 profile:nist-sp-800-63c-4:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 profile:oauth-2-1:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 profile:peer-claim:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_oidc_id_token.py
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_configuration.py
@@ -2471,16 +2471,16 @@ profile:production:
 - pkgs/120-tests/tba-tests-oidc/tests/unit/test_well_known_endpoints_behavior.py
 profile:smart-app-launch:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 profile:smart-backend-services:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 profile:webauthn-passkey-oauth-patterns:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 slice:device:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8628_device_authorization.py
 - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
@@ -2933,7 +2933,7 @@ flag:active_extensions:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
 - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_deployment_resolver.py
@@ -2948,7 +2948,7 @@ flag:active_protocol_slices:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
 - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_deployment_resolver.py
@@ -2963,7 +2963,7 @@ flag:active_surface_sets:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
 - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_deployment_resolver.py
@@ -2978,11 +2978,11 @@ flag:enable_id_token_encryption:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
 - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
-- tests/unit/test_published_dependency_model.py
+- pkgs/120-tests/tba-tests-release/tests/unit/test_published_dependency_model.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
 flag:enable_oidc_backchannel_logout:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
@@ -2990,7 +2990,7 @@ flag:enable_oidc_backchannel_logout:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3001,7 +3001,7 @@ flag:enable_oidc_core:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3012,7 +3012,7 @@ flag:enable_oidc_discovery:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3023,7 +3023,7 @@ flag:enable_oidc_frontchannel_logout:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3034,7 +3034,7 @@ flag:enable_oidc_rp_initiated_logout:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3045,7 +3045,7 @@ flag:enable_oidc_session_management:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3056,7 +3056,7 @@ flag:enable_oidc_userinfo:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3067,7 +3067,7 @@ flag:enable_rfc6749:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3078,7 +3078,7 @@ flag:enable_rfc6750:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3117,7 +3117,7 @@ flag:enable_rfc7009:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3128,7 +3128,7 @@ flag:enable_rfc7515:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3139,7 +3139,7 @@ flag:enable_rfc7516:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3150,7 +3150,7 @@ flag:enable_rfc7517:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3161,7 +3161,7 @@ flag:enable_rfc7518:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3172,7 +3172,7 @@ flag:enable_rfc7519:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3183,7 +3183,7 @@ flag:enable_rfc7521:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3194,7 +3194,7 @@ flag:enable_rfc7523:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3205,7 +3205,7 @@ flag:enable_rfc7591:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3216,7 +3216,7 @@ flag:enable_rfc7592:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3227,7 +3227,7 @@ flag:enable_rfc7636:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3238,7 +3238,7 @@ flag:enable_rfc7662:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3249,7 +3249,7 @@ flag:enable_rfc7800:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3260,7 +3260,7 @@ flag:enable_rfc8252:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3271,7 +3271,7 @@ flag:enable_rfc8291:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3282,7 +3282,7 @@ flag:enable_rfc8414:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3293,7 +3293,7 @@ flag:enable_rfc8417:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3304,7 +3304,7 @@ flag:enable_rfc8523:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3315,7 +3315,7 @@ flag:enable_rfc8615:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3326,7 +3326,7 @@ flag:enable_rfc8628:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3337,7 +3337,7 @@ flag:enable_rfc8693:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3348,7 +3348,7 @@ flag:enable_rfc8705:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3359,7 +3359,7 @@ flag:enable_rfc8707:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3370,7 +3370,7 @@ flag:enable_rfc8812:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3381,7 +3381,7 @@ flag:enable_rfc8932:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3392,7 +3392,7 @@ flag:enable_rfc9068:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3403,7 +3403,7 @@ flag:enable_rfc9101:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3414,7 +3414,7 @@ flag:enable_rfc9126:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3425,7 +3425,7 @@ flag:enable_rfc9207:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3436,7 +3436,7 @@ flag:enable_rfc9396:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3447,7 +3447,7 @@ flag:enable_rfc9449:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3458,7 +3458,7 @@ flag:enable_rfc9700:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3469,7 +3469,7 @@ flag:enable_rfc9728:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
@@ -3482,8 +3482,8 @@ flag:enforce_rfc8252:
 - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8252_native_app_redirects.py
 flag:oauth21_alignment_mode:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 flag:require_tls:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
@@ -3492,11 +3492,11 @@ flag:require_tls:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
 - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
-- tests/unit/test_published_dependency_model.py
+- pkgs/120-tests/tba-tests-release/tests/unit/test_published_dependency_model.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
 flag:rfc8707_enabled:
 - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8707_resource_indicators.py
@@ -3511,7 +3511,7 @@ flag:runtime_style:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
 - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_deployment_resolver.py
@@ -3590,11 +3590,11 @@ flag:strict_boundary_enforcement:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
 - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
-- tests/unit/test_published_dependency_model.py
+- pkgs/120-tests/tba-tests-release/tests/unit/test_published_dependency_model.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
 flag:surface_admin_enabled:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
@@ -3604,7 +3604,7 @@ flag:surface_admin_enabled:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
@@ -3619,7 +3619,7 @@ flag:surface_diagnostics_enabled:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
@@ -3634,7 +3634,7 @@ flag:surface_operator_enabled:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
@@ -3649,7 +3649,7 @@ flag:surface_plugin_mode:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
@@ -3664,7 +3664,7 @@ flag:surface_public_enabled:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
@@ -3675,78 +3675,78 @@ target:asgi-3-application-package:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
 - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_deployment_resolver.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
 target:bootstrap-and-migration-lifecycle:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
 - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 target:camara-security-and-interoperability-profile:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 target:cli-operator-surface:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
 target:confidential-spa-profile-pattern:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 target:fapi-2-0-message-signing-profile:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 target:fast-udap-security-profile:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 target:fdx-csdf-security-model-and-profile:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 target:gnap-core-resource-server-profile:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 target:ihe-iua-profile:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 target:import-export-portability:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
 target:key-lifecycle-and-jwks-publication:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_rpc_registry_live.py
 target:nist-sp-800-63b-4-profile:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 target:nist-sp-800-63c-4-profile:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 target:oauth-2-1-alignment-profile:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 target:oidc-back-channel-logout:
 - pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_backchannel_logout.py
 - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
@@ -3802,8 +3802,8 @@ target:openrpc-1-4-x-admin-control-plane-contract:
 target:release-bundle-and-signature-verification:
 - pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
 - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
-- tests/unit/test_claim_boundary_rebaseline.py
-- tests/unit/test_published_dependency_model.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-release/tests/unit/test_published_dependency_model.py
 target:rfc-6265:
 - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
 - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
@@ -4001,7 +4001,7 @@ target:runner-profile-hypercorn:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_hypercorn.py
 - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
@@ -4009,7 +4009,7 @@ target:runner-profile-tigrcorn:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
 - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_tigrcorn.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
@@ -4017,19 +4017,19 @@ target:runner-profile-uvicorn:
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
 - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_uvicorn.py
-- tests/unit/test_claim_boundary_rebaseline.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_claim_boundary_rebaseline.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
 - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
 target:smart-app-launch-profile:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 target:smart-backend-services-profile:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py
 target:webauthn-and-passkey-bound-oauth-patterns:
 - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-- tests/unit/test_boundary_freeze_checkpoint.py
-- tests/unit/test_feature_flag_registry.py
+- pkgs/120-tests/tba-tests-certification/tests/unit/test_boundary_freeze_checkpoint.py
+- pkgs/120-tests/tba-tests-architecture/tests/unit/test_feature_flag_registry.py

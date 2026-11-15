@@ -42,6 +42,6 @@ Use the testkit for repeatable protocol and integration tests. Its fake provider
 
 ## Verification
 
-See the [related repository tests](https://github.com/tigrbl/tigrbl_auth/blob/master/tests/unit/test_testkit_cross_cutting_boundary.py) for the implementation scope covered by this example.
+See the [related repository tests](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/120-tests/tba-testkit-identity/tests/unit/test_testkit_cross_cutting_boundary.py) for the implementation scope covered by this example.
 
 [Workspace and package catalog](https://github.com/tigrbl/tigrbl_auth#package-catalog) · [tba-protocol-cwt](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/50-protocols/tba-protocol-cwt#readme) · [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues) · [Repository license](https://github.com/tigrbl/tigrbl_auth/blob/master/LICENSE)

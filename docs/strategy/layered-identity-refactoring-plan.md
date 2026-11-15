@@ -959,7 +959,7 @@ to these capabilities. Remove imports of `tba_storage_core.tables`,
 - MOVE `parse_verified_claims` and `serialize_verified_claims` from
   `identity_assurance.py` to `tba-concrete-identity-assurance` because the
   evidence structure is reusable below the OIDC wire profile;
-- UPDATE `tests/unit/test_protocol_neutral_reusable_ownership.py`,
+- UPDATE `pkgs/120-tests/tba-tests-architecture/tests/unit/test_protocol_neutral_reusable_ownership.py`,
   `test_standalone_concrete_ownership.py`, package-local tests, and imports;
 - retain warning exports for one release, then REMOVE the package, root
   dependency/source entries, package tests, and lock record.

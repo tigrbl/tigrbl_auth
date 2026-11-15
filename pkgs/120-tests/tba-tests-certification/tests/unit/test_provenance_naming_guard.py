@@ -1,0 +1,175 @@
+import json
+import re
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[5]
+FORBIDDEN_FRAGMENTS = ("".join(("pha", "se")), "".join(("st", "ep")))
+FORBIDDEN_PATTERN = re.compile(
+    rf"(?i)(?:{FORBIDDEN_FRAGMENTS[0]}|{FORBIDDEN_FRAGMENTS[1]})[_-]?\d+"
+)
+RETAINED_BOUNDARY_BUNDLES = (
+    "asgi-application",
+    "bootstrap-migration",
+    "cli-operator-surface",
+    "import-export-portability",
+    "key-lifecycle-jwks",
+    "release-bundle-signing",
+    "runner-hypercorn",
+    "runner-tigrcorn",
+    "runner-uvicorn",
+)
+GENERATOR_OWNED_BUNDLE_FILES = (
+    "README.md",
+    "execution.log",
+    "manifest.yaml",
+    "mapping.yaml",
+    "environment.yaml",
+    "hashes.yaml",
+    "signatures.yaml",
+)
+RETAINED_PHASE_TEST_IDS = {
+    "tst:phase3-policy-control-plane-py",
+    "tst:phase3-admin-uix-governance",
+    "tst:phase4-advanced-identity-plane-py",
+    "tst:phase4-public-uix-advanced-identity",
+    "tst:phase5-governance-extension-plane-py",
+    "tst:phase5-admin-uix-governance-workflows",
+}
+RETAINED_PHASE_TEST_PATHS = {
+    "pkgs/120-tests/tba-tests-authorization/tests/unit/test_policy_control_plane_phase3.py",
+    "pkgs/120-tests/tba-tests-release/tests/unit/test_release_posture_plane.py",
+    "pkgs/120-tests/tba-tests-governance-composition/tests/unit/test_entitlements_and_access_reviews.py",
+    "pkgs/120-tests/tba-tests-runtime/tests/unit/test_advanced_identity_delivery_summary.py",
+    "pkgs/120-tests/tba-tests-certification/tests/unit/test_provenance_naming_guard.py",
+}
+
+
+def test_ssot_test_rows_use_capability_scoped_names() -> None:
+    registry = json.loads((ROOT / ".ssot" / "registry.json").read_text())
+
+    offenders = []
+    for row in registry["tests"]:
+        if row.get("id") in RETAINED_PHASE_TEST_IDS:
+            continue
+        for field in ("id", "title", "path"):
+            value = str(row.get(field, ""))
+            if FORBIDDEN_PATTERN.search(value):
+                offenders.append(f"{row['id']}:{field}={value}")
+
+    assert offenders == []
+
+
+def test_active_test_sources_use_capability_scoped_names() -> None:
+    offenders = []
+    paths = (
+        *(ROOT / "tests").rglob("*.py"),
+        *(ROOT / "pkgs" / "120-tests").glob("*/tests/**/*.py"),
+    )
+    for path in paths:
+        if "__pycache__" in path.parts:
+            continue
+        relpath = path.relative_to(ROOT).as_posix()
+        if relpath in RETAINED_PHASE_TEST_PATHS:
+            continue
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        if FORBIDDEN_PATTERN.search(path.as_posix()) or FORBIDDEN_PATTERN.search(text):
+            offenders.append(relpath)
+
+    assert offenders == []
+
+
+def test_active_tier3_evidence_reports_use_capability_scoped_names() -> None:
+    offenders = []
+    tier3_root = ROOT / "compliance" / "evidence" / "tier3"
+    for path in tier3_root.rglob("*"):
+        if path.is_file() and FORBIDDEN_PATTERN.search(path.relative_to(ROOT).as_posix()):
+            offenders.append(path.relative_to(ROOT).as_posix())
+
+    assert offenders == []
+
+
+def test_active_tier3_evidence_metadata_uses_capability_scoped_names() -> None:
+    offenders = []
+    tier3_root = ROOT / "compliance" / "evidence" / "tier3"
+    metadata_globs = (
+        "*/contracts/*.json",
+        "*/manifest.yaml",
+        "*/mapping.yaml",
+        "*/hashes.yaml",
+        "*/signatures.yaml",
+    )
+    for glob in metadata_globs:
+        for path in tier3_root.glob(glob):
+            text = path.read_text(encoding="utf-8", errors="ignore")
+            if FORBIDDEN_PATTERN.search(text):
+                offenders.append(path.relative_to(ROOT).as_posix())
+
+    assert offenders == []
+
+
+def test_retained_boundary_bundle_metadata_uses_capability_scoped_names() -> None:
+    offenders = []
+    tier3_root = ROOT / "compliance" / "evidence" / "tier3"
+    forbidden = re.compile(
+        rf"(?i)(?:checkpoint|source_checkpoint|{FORBIDDEN_FRAGMENTS[0]}\d+|{FORBIDDEN_FRAGMENTS[1]}\d+)"
+    )
+
+    for bundle in RETAINED_BOUNDARY_BUNDLES:
+        bundle_root = tier3_root / bundle
+        for name in GENERATOR_OWNED_BUNDLE_FILES:
+            path = bundle_root / name
+            text = path.read_text(encoding="utf-8", errors="ignore")
+            if forbidden.search(text):
+                offenders.append(path.relative_to(ROOT).as_posix())
+
+    assert offenders == []
+
+
+def test_active_runtime_status_values_use_capability_scoped_names() -> None:
+    offenders = []
+    for path in (ROOT / "tba_auth").rglob("*.py"):
+        if "__pycache__" in path.parts:
+            continue
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        for match in re.finditer(r"runtime_status\s*=\s*[\"']([^\"']+)[\"']|STATUS:\s*Final\[str\]\s*=\s*[\"']([^\"']+)[\"']", text):
+            value = match.group(1) or match.group(2) or ""
+            if FORBIDDEN_PATTERN.search(value):
+                offenders.append(f"{path.relative_to(ROOT).as_posix()}:{value}")
+
+    assert offenders == []
+
+
+def test_current_document_authority_projection_uses_capability_scoped_names() -> None:
+    offenders = []
+    paths = (
+        ROOT / "compliance" / "targets" / "document-authority.yaml",
+        ROOT / "docs" / "compliance" / "AUTHORITATIVE_CURRENT_DOCS.json",
+        ROOT / "docs" / "compliance" / "AUTHORITATIVE_CURRENT_DOCS.md",
+        ROOT / "docs" / "compliance" / "PACKAGE_REVIEW_GAP_ANALYSIS.json",
+        ROOT / "docs" / "compliance" / "PACKAGE_REVIEW_GAP_ANALYSIS.md",
+        ROOT / "docs" / "compliance" / "non_rfc_status_report.json",
+        ROOT / "docs" / "compliance" / "non_rfc_status_report.md",
+    )
+    for path in paths:
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        if FORBIDDEN_PATTERN.search(path.relative_to(ROOT).as_posix()) or FORBIDDEN_PATTERN.search(text):
+            offenders.append(path.relative_to(ROOT).as_posix())
+
+    assert offenders == []
+
+
+def test_active_repository_state_uses_capability_scoped_names() -> None:
+    offenders = []
+    paths = (
+        ROOT / "compliance" / "claims" / "repository-state.yaml",
+        ROOT / "compliance" / "evidence" / "manifest.yaml",
+    )
+    for path in paths:
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        if FORBIDDEN_PATTERN.search(text):
+            offenders.append(path.relative_to(ROOT).as_posix())
+
+    assert offenders == []

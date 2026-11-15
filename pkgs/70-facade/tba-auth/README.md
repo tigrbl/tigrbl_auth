@@ -43,6 +43,6 @@ Use this distribution when maintaining code with `tba_auth` imports. New integra
 
 ## Verification
 
-See the [related repository tests](https://github.com/tigrbl/tigrbl_auth/blob/master/tests/unit/test_facade_compatibility_boundary.py) for the implementation scope covered by this example.
+See the [related repository tests](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/120-tests/tba-tests-architecture/tests/unit/test_facade_compatibility_boundary.py) for the implementation scope covered by this example.
 
 [Workspace and package catalog](https://github.com/tigrbl/tigrbl_auth#package-catalog) · [tba-app-backend-public](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/90-backend-apps/tba-app-backend-public#readme) · [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues) · [Repository license](https://github.com/tigrbl/tigrbl_auth/blob/master/LICENSE)

@@ -105,7 +105,7 @@ Run:
 
 ```shell
 python scripts/validate_layer_boundaries.py
-pytest -q tests/unit/test_layer_40_capability_boundary.py
+pytest -q pkgs/120-tests/tba-tests-architecture/tests/unit/test_layer_40_capability_boundary.py
 ```
 
 The validator checks live package metadata and Python ASTs. It rejects:

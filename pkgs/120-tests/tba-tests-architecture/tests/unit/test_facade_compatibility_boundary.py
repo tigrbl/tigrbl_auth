@@ -1,0 +1,182 @@
+from __future__ import annotations
+
+import ast
+import importlib
+import re
+import sys
+import warnings
+from contextlib import contextmanager
+from pathlib import Path
+
+import pytest
+
+try:
+    import tomllib
+except ModuleNotFoundError:  # pragma: no cover - Python 3.10 fallback
+    import tomli as tomllib  # type: ignore[no-redef]
+
+
+ROOT = Path(__file__).resolve().parents[5]
+
+
+def _load_pyproject(path: Path) -> dict:
+    return tomllib.loads(path.read_text(encoding="utf-8"))
+
+
+def _normalized_dist_name(name: str) -> str:
+    return re.sub(r"[-_.]+", "-", name).lower()
+
+
+@contextmanager
+def isolated_facade_import():
+    original_path = list(sys.path)
+    removed_modules = {name: module for name, module in sys.modules.items() if name == "tba_auth" or name.startswith("tba_auth.")}
+    for name in list(removed_modules):
+        sys.modules.pop(name, None)
+    try:
+        root_values = {str(ROOT), ""}
+        sys.path = [value for value in sys.path if value not in root_values]
+        for src in (ROOT / "pkgs").glob("*/src"):
+            value = str(src)
+            if value not in sys.path:
+                sys.path.insert(0, value)
+        yield
+    finally:
+        for name in list(sys.modules):
+            if name == "tba_auth" or name.startswith("tba_auth."):
+                sys.modules.pop(name, None)
+        sys.modules.update(removed_modules)
+        sys.path = original_path
+
+
+@pytest.mark.unit
+def test_root_project_does_not_claim_tba_auth_facade_distribution() -> None:
+    root_pyproject = _load_pyproject(ROOT / "pyproject.toml")
+    root_project = root_pyproject["project"]
+    facade_project = _load_pyproject(
+        ROOT / "pkgs" / "70-facade" / "tba-auth" / "pyproject.toml"
+    )["project"]
+
+    assert _normalized_dist_name(facade_project["name"]) == "tba-auth"
+    assert _normalized_dist_name(root_project["name"]) != "tba-auth"
+    assert _normalized_dist_name(root_project["name"]).endswith("-workspace")
+    assert "tba-auth==0.4.0.dev2" in root_project["dependencies"]
+    assert root_pyproject["tool"]["uv"]["package"] is False
+    assert "poetry" not in root_pyproject["tool"]
+    assert not (ROOT / "tba_auth").exists()
+    assert not (ROOT / "tba_auth_workspace").exists()
+    assert (
+        ROOT
+        / "pkgs"
+        / "70-facade"
+        / "tba-auth"
+        / "src"
+        / "tba_auth"
+        / "__init__.py"
+    ).exists()
+
+
+@pytest.mark.unit
+def test_facade_t0_public_surfaces_and_entrypoint_manifest_are_importable() -> None:
+    with isolated_facade_import():
+        facade = importlib.import_module("tba_auth")
+        compat = importlib.import_module("tba_auth.compat")
+
+        assert facade.__file__ and "pkgs" in facade.__file__
+        assert "app" not in compat.STABLE_ENTRYPOINTS
+        assert compat.STABLE_ENTRYPOINTS["TbaPlugin"].module == "tba_plugin_tigrbl"
+        assert compat.STABLE_ENTRYPOINTS["TbaPlugin"].package == "tba-plugin-tigrbl"
+        assert compat.STABLE_ENTRYPOINTS["plugin_install"].module == "tba_plugin_tigrbl"
+        assert compat.STABLE_ENTRYPOINTS["plugin_install"].package == "tba-plugin-tigrbl"
+        assert compat.extras_for("consumer") == ("tba-protocol-oauth-protected-resource", "tba-protocol-oidc-relying-party")
+        assert facade.security is importlib.import_module("tba_auth.security")
+        assert facade.standards is importlib.import_module("tba_auth.standards")
+
+
+@pytest.mark.unit
+def test_facade_t1_legacy_imports_are_stable_and_lazy() -> None:
+    with isolated_facade_import():
+        with warnings.catch_warnings(record=True) as captured:
+            warnings.simplefilter("always")
+            app_module = importlib.import_module("tba_auth.app")
+            gateway_module = importlib.import_module("tba_auth.gateway")
+            plugin_module = importlib.import_module("tba_auth.plugin")
+            cli_module = importlib.import_module("tba_auth.cli")
+
+        assert app_module.__all__ == ["build_application_runtime_plan"]
+        assert "build_gateway" not in gateway_module.__all__
+        assert "install" in plugin_module.__all__
+        assert "main" in cli_module.__all__
+        assert any("compatibility facade" in str(item.message) for item in captured)
+
+
+@pytest.mark.unit
+def test_facade_cli_proxy_prefers_workspace_split_cli() -> None:
+    with isolated_facade_import():
+        install_substrate = importlib.import_module("tba_auth.cli.install_substrate")
+
+        assert install_substrate.SUPPORTED_PYTHON_VERSIONS == ("3.10", "3.11", "3.12")
+        loaded = sys.modules["tba_auth.cli.install_substrate"]
+        assert Path(loaded.__file__).resolve().is_relative_to(
+            ROOT / "pkgs" / "60-runtime" / "tba-cli-identity" / "src"
+        )
+
+
+@pytest.mark.unit
+def test_facade_t1_extras_map_covers_product_install_groups() -> None:
+    with isolated_facade_import():
+        compat = importlib.import_module("tba_auth.compat")
+
+        assert "tba-server-identity" in compat.extras_for("server")
+        assert "tba-plugin-tigrbl" in compat.extras_for("server")
+        assert "tba-operator-identity" in compat.extras_for("operator")
+        assert "tba-protocol-oauth" in compat.extras_for("oauth")
+        assert "tba-protocol-oidc-relying-party" in compat.extras_for("consumer")
+        assert set(compat.extras_for("all")).issuperset(set(compat.extras_for("server")))
+
+
+@pytest.mark.unit
+def test_facade_t2_fail_closed_unknowns_and_unavailable_targets(monkeypatch: pytest.MonkeyPatch) -> None:
+    with isolated_facade_import():
+        compat = importlib.import_module("tba_auth.compat")
+
+        with pytest.raises(compat.FacadeImportError, match="unknown tba-auth extra"):
+            compat.extras_for("missing")
+        with pytest.raises(compat.FacadeImportError, match="unknown tba-auth facade entrypoint"):
+            compat.resolve_entrypoint("missing")
+
+        monkeypatch.setitem(
+            compat.STABLE_ENTRYPOINTS,
+            "broken",
+            compat.StableEntrypoint("broken", "missing.module", "target", "missing-package"),
+        )
+        with pytest.raises(compat.FacadeImportError, match="requires missing-package"):
+            compat.resolve_entrypoint("broken")
+
+
+@pytest.mark.unit
+def test_facade_t2_import_boundary_does_not_eagerly_import_split_runtime() -> None:
+    files = [
+        Path("pkgs/70-facade/tba-auth/src/tba_auth/__init__.py"),
+        Path("pkgs/70-facade/tba-auth/src/tba_auth/app.py"),
+        Path("pkgs/70-facade/tba-auth/src/tba_auth/gateway.py"),
+        Path("pkgs/70-facade/tba-auth/src/tba_auth/plugin.py"),
+        Path("pkgs/70-facade/tba-auth/src/tba_auth/cli/__init__.py"),
+        Path("pkgs/70-facade/tba-auth/src/tba_auth/compat.py"),
+    ]
+    forbidden_imports = {
+        "tba_server_identity",
+        "tba_runtime_identity",
+        "tba_operator_identity",
+    }
+
+    imports: set[str] = set()
+    for file in files:
+        tree = ast.parse(file.read_text(encoding="utf-8"))
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                imports.update(alias.name.split(".")[0] for alias in node.names)
+            elif isinstance(node, ast.ImportFrom) and node.module and node.level == 0:
+                imports.add(node.module.split(".")[0])
+
+    assert imports.isdisjoint(forbidden_imports)

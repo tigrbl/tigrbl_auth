@@ -124,7 +124,9 @@ def active_lane(explicit_lane: str | None = None) -> str:
 def classify_test_path(path: Path) -> str:
     name = path.name
     parts = path.parts
-    if "packages" in parts or "tba-testkit-identity" in parts:
+    if "packages" in parts:
+        return "package"
+    if "tba-testkit-identity" in parts and path.parent.name == "tests":
         return "package"
     if name in DEFERRED_FACADE_COMPAT_UNIT_FILES:
         return "extension"
