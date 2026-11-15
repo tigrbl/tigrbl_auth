@@ -97,8 +97,16 @@ class SpireIssuer:
 
     def issue_pair(self, directory, subjects, receiver):
         server = self.mint(receiver)
-        if len(subjects) == 1 and subjects[0].startswith("spiffe://example.org/"):
-            return self.mint(subjects[0]), server
+        if len(subjects) == 1:
+            from tba_protocol_workload_spiffe_svid import validate_spiffe_id
+
+            try:
+                trust_domain, workload_path = validate_spiffe_id(subjects[0])
+            except ValueError:
+                pass
+            else:
+                if trust_domain == "example.org" and workload_path:
+                    return self.mint(subjects[0]), server
         # SPIRE does not issue missing/multiple URI SANs. Inject a foreign leaf
         # only at the peer input, with a separate TLS test anchor for that leaf.
         foreign = _certificate(())

@@ -1,5 +1,22 @@
 # TBA WIMSE interop tests
 
+<!-- BEGIN TBA README HEADER -->
+<p align="center">
+<a href="https://github.com/tigrbl/tigrbl_auth#readme"><img src="https://raw.githubusercontent.com/tigrbl/tigrbl_auth/master/docs/assets/tba-brand.png" alt="TBA · Tigrbl Auth" width="240"></a>
+</p>
+<p align="center">
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/120-tests/tba-test-interop-wimse/pyproject.toml"><img alt="Checkout: 0.4.0.dev2" src="https://img.shields.io/badge/Checkout-0.4.0.dev2-1f6feb"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/120-tests/tba-test-interop-wimse/pyproject.toml"><img alt="Python: &gt;=3.10,&lt;3.16" src="https://img.shields.io/badge/Python-%3E%3D3.10%2C%3C3.16-3776ab"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/120-tests/tba-test-interop-wimse/pyproject.toml"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/License-Apache--2.0-525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/120-tests"><img alt="Layer: 120 tests" src="https://img.shields.io/badge/Layer-120%20tests-0a7f5a"></a>
+<a href="https://pypi.org/project/tba-test-interop-wimse/"><img alt="PyPI version for tba-test-interop-wimse" src="https://img.shields.io/pypi/v/tba-test-interop-wimse?label=tba-test-interop-wimse%20PyPI"></a>
+</p>
+<p align="center">
+<a href="https://pepy.tech/project/tba-test-interop-wimse"><img alt="Monthly PyPI downloads for tba-test-interop-wimse" src="https://static.pepy.tech/badge/tba-test-interop-wimse/month"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/120-tests/tba-test-interop-wimse/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
+</p>
+<!-- END TBA README HEADER -->
+
 This Layer 120 test project contains the WIMSE scenario definitions, peer execution plans, and rules for counting combinations.
 
 | File | Purpose |
@@ -335,3 +352,11 @@ The 31 flat rules remain available for comparison through `--legacy-count`. In t
 | `shared-accounting`, `shared-counter` | Shared budget variants and explicit accounting and schedule levels |
 | `bearer-release`, `post-release`, `denied-broker-no-release`, `fail-closed-broker-visible-revocation` | Ordered provider events and the broker trace exclusion |
 | `peer-profile-1` through `peer-profile-6` | Capability matching by profile, scheme, version, and role |
+
+## Quick start
+
+Run the suite from the repository root.
+
+```bash
+uv run --extra test python -m pytest pkgs/120-tests/tba-test-interop-wimse/tests
+```
