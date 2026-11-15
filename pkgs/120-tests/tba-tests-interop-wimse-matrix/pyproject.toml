@@ -1,4 +1,6 @@
 [project]
+description = "Offline WIMSE interoperability matrix and wheel validation for TbA"
+readme = "README.md"
 name = "tba-tests-interop-wimse-matrix"
 version = "0.4.0.dev2"
 requires-python = ">=3.10,<3.16"
