@@ -1,5 +1,5 @@
 [project]
-name = "tba-testkit-identity"
+name = "tba-tests-identity"
 version = "0.4.0.dev2"
 description = "Test fixtures, fake identity components, conformance vectors, integration harnesses, and cross-cutting verification helpers."
 readme = "README.md"
@@ -38,13 +38,13 @@ classifiers = [
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"
 Repository = "https://github.com/tigrbl/tigrbl_auth"
-Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/120-tests/tba-testkit-identity"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/120-tests/tba-tests-identity"
 SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
-PyPI = "https://pypi.org/project/tba-testkit-identity/"
+PyPI = "https://pypi.org/project/tba-tests-identity/"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-packages = [{ include = "tba_testkit_identity", from = "src" }]
+packages = [{ include = "tba_tests_identity", from = "src" }]

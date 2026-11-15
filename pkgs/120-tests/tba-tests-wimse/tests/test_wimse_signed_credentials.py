@@ -6,7 +6,7 @@ from tba_profile_workload_credential_wimse_wic import validate_wic
 from tba_profile_workload_credential_wimse_wit import verify_wit
 from tba_profile_workload_proof_wimse_wpt import authenticate_wpt_request
 from tba_protocol_workload_wimse_identifier import WorkloadIdentifier
-from tba_testkit_workload_credential_conformance.fixtures import (
+from tba_tests_workload_credential_conformance.fixtures import (
     AUDIENCE,
     WIMSE,
     Replay,

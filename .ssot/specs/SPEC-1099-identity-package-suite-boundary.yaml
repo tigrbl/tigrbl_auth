@@ -49,7 +49,7 @@ body: |-
   - `tba-server-identity`
   - `tba-runtime-identity`
   - `tba-operator-identity`
-  - `tba-testkit-identity`
+  - `tba-tests-identity`
   - `tba-auth`
 
   Distribution names MUST use hyphens. Import names MUST use independent

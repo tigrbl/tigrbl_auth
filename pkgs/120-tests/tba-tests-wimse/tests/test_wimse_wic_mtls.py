@@ -4,7 +4,7 @@ from tba_concrete_certificate_x509 import parse_x509_certificate
 from tba_contracts_security_trust import CertificateStatus
 from tba_profile_workload_authentication_wimse_mtls import TLSPeer, verify_wimse_peer
 from tba_profile_workload_credential_wimse_wic import validate_wic
-from tba_testkit_workload_credential_conformance.fixtures import (
+from tba_tests_workload_credential_conformance.fixtures import (
     WIMSE,
     PathValidator,
     StatusProvider,

@@ -240,7 +240,7 @@ dependencies = [
     "tba-protocol-cwt==0.4.0.dev3",
     "tba-protocol-workload-spiffe-svid==0.4.0.dev2",
     "tba-example-workload-credential-profiles==0.4.0.dev2",
-    "tba-testkit-workload-credential-conformance==0.4.0.dev2",
+    "tba-tests-workload-credential-conformance==0.4.0.dev2",
     "tba-protocol-workload-spiffe-broker-api==0.4.0.dev2",
     "tba-protocol-workload-spiffe-workload-api==0.4.0.dev2",
     "tba-profile-workload-credential-cwt-svid-extension==0.4.0.dev2",
@@ -367,7 +367,7 @@ dependencies = [
     "tba-plugin-tigrbl==0.4.0.dev2",
     "tba-protocol-oauth-protected-resource==0.4.0.dev2",
     "tba-cli-identity==0.4.0.dev2",
-    "tba-testkit-identity==0.4.0.dev2",
+    "tba-tests-identity==0.4.0.dev2",
     "tba-runtime-identity-administration==0.4.0.dev2",
     "tba-runtime-identity-authoring==0.4.0.dev2",
     "tba-primitives-identity==0.4.0.dev2",
@@ -567,7 +567,7 @@ testpaths = [
     "pkgs/120-tests/tba-tests-wimse/tests",
     "pkgs/120-tests/tba-tests-spiffe/tests",
     "pkgs/120-tests/tba-tests-workload-composition/tests",
-    "pkgs/120-tests/tba-testkit-workload-credential-conformance/tests",
+    "pkgs/120-tests/tba-tests-workload-credential-conformance/tests",
 ]
 norecursedirs = ["combined", "scripts", ".pytest_cache", "__pycache__", ".uv-cache", ".venv", "dist", ".benchmarks"]
 markers = [
@@ -761,7 +761,7 @@ tba-plugin-tigrbl = { path = "pkgs/60-runtime/tba-plugin-tigrbl", editable = tru
 tba-provider-authorization-resource-server-verifier = { path = "pkgs/20-providers/tba-provider-authorization-resource-server-verifier", editable = true }
 tba-protocol-oauth-protected-resource = { path = "pkgs/50-protocols/tba-protocol-oauth-protected-resource", editable = true }
 tba-cli-identity = { path = "pkgs/60-runtime/tba-cli-identity", editable = true }
-tba-testkit-identity = { path = "pkgs/120-tests/tba-testkit-identity", editable = true }
+tba-tests-identity = { path = "pkgs/120-tests/tba-tests-identity", editable = true }
 tba-example-oauth-device-authorization-cli = { path = "pkgs/110-examples/tba-example-oauth-device-authorization-cli", editable = true }
 tba-runtime-identity-administration = { path = "pkgs/60-runtime/tba-runtime-identity-administration", editable = true }
 tba-runtime-identity-authoring = { path = "pkgs/60-runtime/tba-runtime-identity-authoring", editable = true }
@@ -1112,7 +1112,7 @@ tba-protocol-workload-spiffe-workload-api = { path = "pkgs/50-protocols/tba-prot
 
 tba-protocol-workload-spiffe-broker-api = { path = "pkgs/50-protocols/tba-protocol-workload-spiffe-broker-api", editable = true }
 
-tba-testkit-workload-credential-conformance = { path = "pkgs/120-tests/tba-testkit-workload-credential-conformance", editable = true }
+tba-tests-workload-credential-conformance = { path = "pkgs/120-tests/tba-tests-workload-credential-conformance", editable = true }
 
 tba-example-workload-credential-profiles = { path = "pkgs/110-examples/tba-example-workload-credential-profiles", editable = true }
 

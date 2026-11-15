@@ -37,7 +37,7 @@ These packages remain under `tba-identity-*` because their primary responsibilit
 - `tba-runtime-identity`
 - `tba-operator-identity`
 - `tba-cli-identity`
-- `tba-testkit-identity`
+- `tba-tests-identity`
 
 ## Principal Narrowing
 

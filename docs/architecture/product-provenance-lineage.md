@@ -40,5 +40,5 @@ for one migration window.
 | 25 | `@tba/client-oidc-relying-party` | Consumer UI/package | Browser/client RP integration consuming public issuer behavior. |
 | 26 | `tba-protocol-oauth-protected-resource` | Consumer package | Protected API token-validation integration consuming resource-validation metadata. |
 | 27 | `tba-operator-identity` | Tooling package | Operational tooling over assembled deployments. |
-| 28 | `tba-testkit-identity` | Test package | Cross-cutting fixtures, conformance, and integration harnesses. |
+| 28 | `tba-tests-identity` | Test package | Cross-cutting fixtures, conformance, and integration harnesses. |
 | 29 | `@tba/ui-administration` | Legacy UIX app | Temporary ancestor/extraction source, not a final product surface. |

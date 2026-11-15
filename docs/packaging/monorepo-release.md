@@ -98,7 +98,7 @@ IMPORT_ROOT_UNDER_TEST
 PACKAGE_VERSION_UNDER_TEST
 ```
 
-The `tba-testkit-identity` package is the cross-cutting package-test owner.
+The `tba-tests-identity` package is the cross-cutting package-test owner.
 Its package matrix cells additionally include:
 
 ```text

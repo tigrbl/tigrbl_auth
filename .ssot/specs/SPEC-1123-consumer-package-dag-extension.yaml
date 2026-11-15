@@ -44,7 +44,7 @@ body: |-
   - `tigrbl-identity-oauth`
   - `tigrbl-identity-oidc`
   
-  `tba-testkit-identity` MAY import RP and resource-server packages for
+  `tba-tests-identity` MAY import RP and resource-server packages for
   non-production testing.
   
   ## Forbidden Edges

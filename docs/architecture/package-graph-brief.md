@@ -32,7 +32,7 @@ This brief grounds the architecture image in the live package inventory in this 
 
 - `tba-protocol-oidc-relying-party`: Python relying-party helpers for discovery, userinfo, logout, and RP integration.
 - `tba-protocol-oauth-protected-resource`: protected API token-validation and resource-server contracts.
-- `tba-testkit-identity`: fake identity components, vectors, fixtures, and integration harnesses.
+- `tba-tests-identity`: fake identity components, vectors, fixtures, and integration harnesses.
 - `acme-notes-cli`: example consumer showing device-login usage.
 
 ### UI and browser packages

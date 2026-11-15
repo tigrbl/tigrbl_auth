@@ -1,5 +1,5 @@
 [project]
-name="tba-testkit-workload-credential-conformance"
+name="tba-tests-workload-credential-conformance"
 version="0.4.0.dev2"
 description = "Reusable structural and negative vectors."
 license = { text = "Apache-2.0" }
@@ -27,4 +27,4 @@ runner = [
 requires=["poetry-core>=1.0.0"]
 build-backend="poetry.core.masonry.api"
 [tool.poetry]
-packages=[{include="tba_testkit_workload_credential_conformance",from="src"}]
+packages=[{include="tba_tests_workload_credential_conformance",from="src"}]

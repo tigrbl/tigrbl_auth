@@ -1,4 +1,4 @@
-from tba_testkit_workload_credential_conformance import VECTORS
+from tba_tests_workload_credential_conformance import VECTORS
 from workload_credential_profiles_example import run_example
 
 

@@ -10,10 +10,10 @@ the migrated suites and the remaining root tests.
 | `tba-tests-wimse` | WIMSE identifiers, WIC, mTLS, WIT and WPT |
 | `tba-tests-spiffe` | SPIFFE providers and SVID profiles, including the separately marked CWT extension module |
 | `tba-tests-workload-composition` | Workload protocol boundaries, specification ownership and runtime composition |
-| `tba-testkit-workload-credential-conformance` | Shared workload vectors, certificate fixtures and clean-wheel runner |
+| `tba-tests-workload-credential-conformance` | Shared workload vectors, certificate fixtures and clean-wheel runner |
 | `tba-tests-interop-wimse-cred` | Opt-in Cred peer suite |
 | [`tba-tests-interop-wimse`](https://github.com/tigrbl/tba-tests-interop-wimse) | WIMSE interop matrices, factor rules, exclusions, and combination counter |
-| `tba-testkit-identity` | Shared identity fixtures |
+| `tba-tests-identity` | Shared identity fixtures |
 
 Run a native suite from the repository root with
 `uv run --extra test pytest pkgs/120-tests/tba-tests-wimse/tests`.

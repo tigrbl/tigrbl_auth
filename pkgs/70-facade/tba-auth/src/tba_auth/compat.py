@@ -80,7 +80,7 @@ FACADE_EXTRAS: Mapping[str, tuple[str, ...]] = {
         "tba-runtime-identity",
         "tba-storage-core",
     ),
-    "operator": ("tba-operator-identity", "tba-testkit-identity"),
+    "operator": ("tba-operator-identity", "tba-tests-identity"),
     "oauth": (
         "tba-protocol-oauth",
         "tba-protocol-oidc",
@@ -104,7 +104,7 @@ FACADE_EXTRAS: Mapping[str, tuple[str, ...]] = {
         "tba-operator-identity",
         "tba-protocol-oauth-protected-resource",
         "tba-protocol-oidc-relying-party",
-        "tba-testkit-identity",
+        "tba-tests-identity",
     ),
 }
 

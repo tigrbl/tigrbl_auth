@@ -10118,14 +10118,14 @@ requires-dist = [
 ]
 
 [[package]]
-name = "tba-testkit-identity"
+name = "tba-tests-identity"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/120-tests/tba-testkit-identity" }
+source = { editable = "pkgs/120-tests/tba-tests-identity" }
 
 [[package]]
-name = "tba-testkit-workload-credential-conformance"
+name = "tba-tests-workload-credential-conformance"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/120-tests/tba-testkit-workload-credential-conformance" }
+source = { editable = "pkgs/120-tests/tba-tests-workload-credential-conformance" }
 
 [package.metadata]
 requires-dist = [
@@ -10604,8 +10604,8 @@ dependencies = [
     { name = "tba-storage-trust-federation-graph" },
     { name = "tba-storage-webauthn" },
     { name = "tba-storage-workload-identity" },
-    { name = "tba-testkit-identity" },
-    { name = "tba-testkit-workload-credential-conformance" },
+    { name = "tba-tests-identity" },
+    { name = "tba-tests-workload-credential-conformance" },
     { name = "tigrbl" },
     { name = "tigrbl-atoms" },
     { name = "tigrbl-base" },
@@ -11190,8 +11190,8 @@ requires-dist = [
     { name = "tba-storage-trust-federation-graph", editable = "pkgs/01-storage/tba-storage-trust-federation-graph" },
     { name = "tba-storage-webauthn", editable = "pkgs/01-storage/tba-storage-webauthn" },
     { name = "tba-storage-workload-identity", editable = "pkgs/01-storage/tba-storage-workload-identity" },
-    { name = "tba-testkit-identity", editable = "pkgs/120-tests/tba-testkit-identity" },
-    { name = "tba-testkit-workload-credential-conformance", editable = "pkgs/120-tests/tba-testkit-workload-credential-conformance" },
+    { name = "tba-tests-identity", editable = "pkgs/120-tests/tba-tests-identity" },
+    { name = "tba-tests-workload-credential-conformance", editable = "pkgs/120-tests/tba-tests-workload-credential-conformance" },
     { name = "tigrbl", specifier = "==0.4.5.dev8" },
     { name = "tigrbl-atoms", specifier = "==0.4.5.dev6" },
     { name = "tigrbl-base", specifier = "==0.4.5.dev6" },

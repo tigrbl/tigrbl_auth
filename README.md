@@ -73,7 +73,7 @@ Start with a representative package below or browse the [full package tree](pkgs
 | 105 · Product UIs | [@tba/ui-my-account](pkgs/105-ui/tba-ui-my-account/README.md) |
 | 106 · UI prototypes | [@tba/ui-trust-center](pkgs/106-ui/tba-ui-trust-center/README.md) |
 | 110 · Examples | [tba-example-oauth-device-authorization-cli](pkgs/110-examples/tba-example-oauth-device-authorization-cli/README.md) |
-| 120 · Testkits | [tba-testkit-identity](pkgs/120-tests/tba-testkit-identity/README.md) |
+| 120 · Testkits | [tba-tests-identity](pkgs/120-tests/tba-tests-identity/README.md) |
 
 ## Release and certification evidence
 

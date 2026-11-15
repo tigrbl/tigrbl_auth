@@ -3051,22 +3051,22 @@
     "current_layer": "120-tests",
     "proposed_layer": "120-tests",
     "current_name": "tba-identity-testkit",
-    "proposed_name": "tba-testkit-identity",
+    "proposed_name": "tba-tests-identity",
     "status": "proposed",
     "note": "",
     "old_path": "pkgs/120-tests/tba-identity-testkit",
-    "new_path": "pkgs/120-tests/tba-testkit-identity"
+    "new_path": "pkgs/120-tests/tba-tests-identity"
   },
   {
     "registry": "Python",
     "current_layer": "120-tests",
     "proposed_layer": "120-tests",
     "current_name": "tba-workload-credential-conformance-testkit",
-    "proposed_name": "tba-testkit-workload-credential-conformance",
+    "proposed_name": "tba-tests-workload-credential-conformance",
     "status": "proposed",
     "note": "",
     "old_path": "pkgs/120-tests/tba-workload-credential-conformance-testkit",
-    "new_path": "pkgs/120-tests/tba-testkit-workload-credential-conformance"
+    "new_path": "pkgs/120-tests/tba-tests-workload-credential-conformance"
   },
   {
     "registry": "Python",

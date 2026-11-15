@@ -180,10 +180,10 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
         for cell in matrix
         if cell["name"] == "tba-provider-authorization-resource-server-verifier"
     } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
-    testkit_cells = [cell for cell in matrix if cell["name"] == "tba-testkit-identity"]
+    testkit_cells = [cell for cell in matrix if cell["name"] == "tba-tests-identity"]
     assert len(testkit_cells) == 3
     assert all(cell["cross_cutting"] == "true" for cell in testkit_cells)
-    assert all("tests/packages/tba-testkit-identity" in cell["package_test_paths"] for cell in testkit_cells)
+    assert all("tests/packages/tba-tests-identity" in cell["package_test_paths"] for cell in testkit_cells)
     assert all("tests/integration" not in cell["package_test_paths"] for cell in testkit_cells)
     assert all("tests/interop" in cell["package_test_paths"] for cell in testkit_cells)
     assert all(cell["pytest_args"] == "--certification-lane\nall" for cell in testkit_cells)

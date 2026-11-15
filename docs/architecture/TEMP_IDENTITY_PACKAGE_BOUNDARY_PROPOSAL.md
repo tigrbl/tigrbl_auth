@@ -43,7 +43,7 @@ roles but require more work.
 | `tba-operator-identity` | CLI/operator workflows over admin, runtime, contracts, and evidence surfaces. |
 | `tba-protocol-oauth-protected-resource` | Protected API toolkit: token validation, JWKS cache, introspection, scope/permission enforcement, DPoP/mTLS/resource checks. |
 | `tba-protocol-oidc-relying-party` | Relying-party/client SDK: discovery, authorization URL, PKCE, callback handling, token exchange, ID-token validation, UserInfo, logout. |
-| `tba-testkit-identity` | Conformance fixtures, fake providers, fake clients, fake resource servers, protocol vectors, downstream harnesses. |
+| `tba-tests-identity` | Conformance fixtures, fake providers, fake clients, fake resource servers, protocol vectors, downstream harnesses. |
 | `tba-auth` | Backward-compatible facade/default install. |
 
 ## First-Class Objects By Package
@@ -69,7 +69,7 @@ on day one.
 | `tba-operator-identity` | `OperatorCommand`, `BootstrapCommand`, `MigrateCommand`, `ImportCommand`, `ExportCommand`, `KeyRotationCommand`, `ClientCommand`, `ServiceCommand`, `TenantCommand`, `ProfileInspectCommand`, `ClaimsLintCommand`, `ReleaseGateCommand`, `EvidenceBundleCommand`, `CertificationReportCommand`, `OperatorReport`. |
 | `tba-protocol-oauth-protected-resource` | `ResourceServer`, `ResourceMetadata`, `Audience`, `ScopeRequirement`, `PermissionRequirement`, `TokenValidator`, `JwksCache`, `IntrospectionClient`, `SenderConstraintValidator`, `DpopCnfBindingValidator`, `MtlsCnfBindingValidator`, `ResourceAuthorizationResult`. |
 | `tba-protocol-oidc-relying-party` | `RelyingParty`, `LoginRequest`, `AuthorizationUrlBuilder`, `CallbackHandler`, `PkceVerifier`, `TokenExchangeClient`, `IdTokenValidator`, `UserInfoClient`, `LogoutClient`, `RpSession`, `RpConfiguration`. |
-| `tba-testkit-identity` | `FakeClock`, `FakeKeyStore`, `FakeRepository`, `FakePrincipalFactory`, `FakeCredentialFactory`, `FakeIdp`, `FakeOAuthClient`, `FakeResourceServer`, `ProtocolTestVector`, `ConformanceHarness`, `PeerProfileHarness`, `TestTenantFactory`, `TestAppFactory`, `TokenFixture`, `JoseFixture`. |
+| `tba-tests-identity` | `FakeClock`, `FakeKeyStore`, `FakeRepository`, `FakePrincipalFactory`, `FakeCredentialFactory`, `FakeIdp`, `FakeOAuthClient`, `FakeResourceServer`, `ProtocolTestVector`, `ConformanceHarness`, `PeerProfileHarness`, `TestTenantFactory`, `TestAppFactory`, `TokenFixture`, `JoseFixture`. |
 | `tba-auth` | `app`, `create_app`, `create_gateway`, `install_plugin`, `IdentityServer`, `DefaultRuntime`, selected public re-exports, install extras, compatibility entrypoints. |
 
 The package-boundary rule is:
@@ -205,7 +205,7 @@ tba-protocol-oidc-relying-party
   -> tba-protocol-oauth
   -> tba-protocol-oidc
 
-tba-testkit-identity
+tba-tests-identity
   -> tba-primitives-identity
   -> tba-contracts-identity
   -> tba-concrete-identity-principals

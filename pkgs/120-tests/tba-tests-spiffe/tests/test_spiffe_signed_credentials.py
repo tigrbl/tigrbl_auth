@@ -3,7 +3,7 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ec
 from tba_profile_workload_credential_spiffe_wit_svid import verify_wit_svid
 from tba_protocol_workload_spiffe_svid import verify_jwt_svid, verify_x509_svid
-from tba_testkit_workload_credential_conformance.fixtures import (
+from tba_tests_workload_credential_conformance.fixtures import (
     AUDIENCE,
     SPIFFE,
     PathValidator,

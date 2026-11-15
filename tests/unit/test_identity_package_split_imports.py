@@ -91,7 +91,7 @@ PACKAGE_ROOTS = [
     "tba_cli_identity",
     "tigrbl_identity_resource_server",
     "tigrbl_identity_rp",
-    "tba_testkit_identity",
+    "tba_tests_identity",
     "tba_provider_security_authorization_provenance_builder",
     "tba_contracts_security_key_rotation_policy",
 ]
@@ -154,7 +154,7 @@ DIST_TO_IMPORT_ROOT = {
     "tba-cli-identity": "tba_cli_identity",
     "tigrbl-identity-resource-server": "tigrbl_identity_resource_server",
     "tigrbl-identity-rp": "tigrbl_identity_rp",
-    "tba-testkit-identity": "tba_testkit_identity",
+    "tba-tests-identity": "tba_tests_identity",
     "tba-auth": "tba_auth",
     "tba-provider-security-authorization-provenance-builder": "tba_provider_security_authorization_provenance_builder",
     "tba-contracts-security-key-rotation-policy": "tba_contracts_security_key_rotation_policy",

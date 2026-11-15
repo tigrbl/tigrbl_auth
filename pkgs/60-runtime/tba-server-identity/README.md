@@ -76,7 +76,7 @@ Plugin installation is owned by `tba-plugin-tigrbl`; `tba_server_identity.plugin
 - [tba-server-identity](https://pypi.org/project/tba-server-identity/)
 - [tba-runtime-identity](https://pypi.org/project/tba-runtime-identity/)
 - [tba-operator-identity](https://pypi.org/project/tba-operator-identity/)
-- [tba-testkit-identity](https://pypi.org/project/tba-testkit-identity/)
+- [tba-tests-identity](https://pypi.org/project/tba-tests-identity/)
 
 ## Project Links
 

@@ -1,0 +1,20 @@
+[project]
+name = "tba-testkit-identity"
+version = "0.4.0.dev3"
+description = "Deprecated compatibility package. Use tba-tests-identity."
+readme = "README.md"
+requires-python = ">=3.10,<3.16"
+license = "Apache-2.0"
+classifiers = ["Development Status :: 7 - Inactive"]
+dependencies = []
+
+[project.urls]
+Replacement = "https://pypi.org/project/tba-tests-identity/"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/120-tests/tba-tests-identity"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tba_testkit_identity", from = "src" }]

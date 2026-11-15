@@ -76,7 +76,7 @@ from tba_runtime_identity_administration import AdminControlPlane
 - [tba-storage-core](https://pypi.org/project/tba-storage-core/)
 - [tba-server-identity](https://pypi.org/project/tba-server-identity/)
 - [tba-runtime-identity](https://pypi.org/project/tba-runtime-identity/)
-- [tba-testkit-identity](https://pypi.org/project/tba-testkit-identity/)
+- [tba-tests-identity](https://pypi.org/project/tba-tests-identity/)
 
 ## Project Links
 

@@ -1,0 +1,29 @@
+[project]
+name = "tba-testkit-workload-credential-conformance"
+version = "0.4.0.dev3"
+description = "Deprecated compatibility package. Use tba-tests-workload-credential-conformance."
+readme = "README.md"
+requires-python = ">=3.10,<3.16"
+license = "Apache-2.0"
+classifiers = ["Development Status :: 7 - Inactive"]
+dependencies = []
+
+[project.optional-dependencies]
+runner = [
+    "cryptography>=45.0.0",
+    "packaging>=24.0",
+    "pytest>=8.0",
+    "tba-primitives-identity==0.4.0.dev2",
+    "tomli>=2.0; python_version < '3.11'",
+]
+
+[project.urls]
+Replacement = "https://pypi.org/project/tba-tests-workload-credential-conformance/"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/120-tests/tba-tests-workload-credential-conformance"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tba_testkit_workload_credential_conformance", from = "src" }]

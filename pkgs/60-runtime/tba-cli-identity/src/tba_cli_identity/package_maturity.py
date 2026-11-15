@@ -108,7 +108,7 @@ def build_package_python_matrix(
     for package in packages:
         for python_version in python_versions:
             python_tag = f"py{python_version.replace('.', '')}"
-            cross_cutting = package.name == "tba-testkit-identity"
+            cross_cutting = package.name == "tba-tests-identity"
             test_paths = [
                 f"tests/packages/{package.name}",
                 f"tests/packages/{package.import_root}",

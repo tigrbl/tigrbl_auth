@@ -66,7 +66,7 @@ profiles:
   - tests/conformance/hardening/test_rfc9449_dpop.py
 categories:
   unit:
-  - pkgs/120-tests/tba-testkit-workload-credential-conformance/tests/test_workload_identity_conformance_testkit.py
+  - pkgs/120-tests/tba-tests-workload-credential-conformance/tests/test_workload_identity_conformance_testkit.py
   - pkgs/120-tests/tba-tests-spiffe/tests/test_cwt_svid_extension.py
   - pkgs/120-tests/tba-tests-spiffe/tests/test_spiffe_assurance.py
   - pkgs/120-tests/tba-tests-spiffe/tests/test_spiffe_providers.py
@@ -101,7 +101,7 @@ categories:
   - tests/packages/tba-app-backend-service-administration/test_service_admin_backend_app_package.py
   - tests/packages/tba-app-backend-tenant-administration/test_tenant_admin_backend_app_dev_deployment_proof.py
   - tests/packages/tba-app-backend-tenant-administration/test_tenant_admin_backend_app_package.py
-  - tests/packages/tba-testkit-identity/test_identity_testkit_package.py
+  - tests/packages/tba-tests-identity/test_identity_testkit_package.py
   - tests/unit/test_account_self_service_capability.py
   - tests/unit/test_active_layer_path_hygiene.py
   - tests/unit/test_adapters.py

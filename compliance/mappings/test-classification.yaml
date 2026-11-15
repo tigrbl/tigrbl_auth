@@ -84,7 +84,7 @@ categories:
   - tests/packages/tba-app-backend-service-administration/test_service_admin_api_package.py
   - tests/packages/tba-app-backend-tenant-administration/test_tenant_admin_api_dev_deployment_proof.py
   - tests/packages/tba-app-backend-tenant-administration/test_tenant_admin_api_package.py
-  - tests/packages/tba-testkit-identity/test_identity_testkit_package.py
+  - tests/packages/tba-tests-identity/test_identity_testkit_package.py
   - tests/unit/test_adapters.py
   - tests/unit/test_admin_control_plane_boundary.py
   - tests/unit/test_admin_policy_boundary.py
