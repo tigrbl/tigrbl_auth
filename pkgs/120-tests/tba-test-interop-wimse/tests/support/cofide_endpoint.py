@@ -12,8 +12,9 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ec
 from tba_profile_workload_credential_wimse_wit import verify_wit
 from tba_test_interop_wimse.httpsig import SignatureCaller, SignatureReceiver
-from tba_test_interop_wimse.signatures import authenticate_signature, covered, normalize, sign_request
-from tba_test_interop_wimse.wpt import audience
+from tba_profile_workload_proof_wimse_http_signature.request import (
+    _authenticate_signature, _covered, _sign_request, normalize,
+)
 
 from support.signature_cases import verify_spiffe_wit
 from support.wpt_fixture import WptFixture, public_jwk, sign_es256_jwt
@@ -21,6 +22,7 @@ from support.wpt_fixture import WptFixture, public_jwk, sign_es256_jwt
 PROFILE = "wit-http-signature"
 SLOT = "cofide"
 REVISION = "7984a60105002dc65b31e9cd08572cd5d10ed9d6"
+COFIDE_FIELDS = ("@method", "@request-target", "@authority")
 
 
 def binary_digest(binary):
@@ -59,27 +61,28 @@ def cofide_hop(directory, case, direction, binary, issuer, names):
             method = "GET" if readback else "POST"
             now = int(time())
             if direction == "forward":
-                return sign_request(self.signer, self.wit, method, target, audience(dns_name, port, path),
-                                    now, extra_headers=extra_headers, authority=authority, cofide=True)
+                return _sign_request(self.signer, self.wit, method, target, now, extra_headers=extra_headers,
+                                     authority=authority, derived=COFIDE_FIELDS, binding="keyid", value="wimse")
             headers = {**(extra_headers or {}), "workload-identity-token": self.wit}
             key = self.signer.private_bytes(serialization.Encoding.DER, serialization.PrivateFormat.PKCS8,
                                             serialization.NoEncryption())
             proof = call_bridge(binary, command="sign", privateKey=base64.b64encode(key).decode("ascii"),
                                 headers=headers, method=method, authority=authority, target=target,
                                 nonce=token_urlsafe(16), expires=now + 60,
-                                fields=covered(normalize(headers.items()), cofide=True))
+                                fields=_covered(normalize(headers.items()), COFIDE_FIELDS))
             return {**headers, **proof}
 
     class Receiver(SignatureReceiver):
         def authenticate_proof(self, request, path):
             if request.headers.get("Transfer-Encoding") or request.headers.get("Content-Length", "0") != "0":
                 raise ValueError("signature fixture accepts bodyless requests only")
-            return authenticate_signature(
+            return _authenticate_signature(
                 request.headers.items(), method=request.command, path=request.path,
-                audience=audience(self.dns_name, self.server_port, path), now=int(time()),
+                now=int(time()),
                 trust_by_domain=self.trust_by_domain, replay_store=self.replay_store,
                 verify_credential=credential_verifier, authority=f"{self.dns_name}:{self.server_port}",
-                cofide=True, proof_verifier=verify_with_cofide if direction == "forward" else None,
+                derived=COFIDE_FIELDS, binding="keyid", expected_binding="wimse",
+                required_algorithm="ES256", proof_verifier=verify_with_cofide if direction == "forward" else None,
             )
 
     authority = ec.generate_private_key(ec.SECP256R1())

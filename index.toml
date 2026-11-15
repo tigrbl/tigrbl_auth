@@ -1923,6 +1923,14 @@ local_dependencies = ["tba-profile-workload-credential-spiffe-wit-svid", "tba-pr
 same_layer_dependencies = []
 
 [[packages]]
+name = "tba-test-interop-wimse"
+path = "pkgs/120-tests/tba-test-interop-wimse"
+layer = "120-tests"
+order = "00"
+local_dependencies = []
+same_layer_dependencies = []
+
+[[packages]]
 name = "tba-testkit-identity"
 path = "pkgs/120-tests/tba-testkit-identity"
 layer = "120-tests"
@@ -1931,8 +1939,40 @@ local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
+name = "tba-testkit-wimse-cred-interop"
+path = "pkgs/120-tests/tba-testkit-wimse-cred-interop"
+layer = "120-tests"
+order = "00"
+local_dependencies = ["tba-primitives-identity", "tba-profile-workload-credential-wimse-wit", "tba-profile-workload-proof-wimse-wpt", "tba-provider-jose-cryptography"]
+same_layer_dependencies = []
+
+[[packages]]
 name = "tba-testkit-workload-credential-conformance"
 path = "pkgs/120-tests/tba-testkit-workload-credential-conformance"
+layer = "120-tests"
+order = "00"
+local_dependencies = []
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-tests-spiffe"
+path = "pkgs/120-tests/tba-tests-spiffe"
+layer = "120-tests"
+order = "00"
+local_dependencies = []
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-tests-wimse"
+path = "pkgs/120-tests/tba-tests-wimse"
+layer = "120-tests"
+order = "00"
+local_dependencies = []
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-tests-workload-composition"
+path = "pkgs/120-tests/tba-tests-workload-composition"
 layer = "120-tests"
 order = "00"
 local_dependencies = []
@@ -3281,6 +3321,14 @@ layer = "55-profiles"
 order = "01"
 local_dependencies = ["tba-concrete-certificate-x509", "tba-concrete-wic", "tba-contracts-security-trust", "tba-profile-workload-credential-wimse-wic", "tba-protocol-workload-wimse-identifier"]
 same_layer_dependencies = ["tba-profile-workload-credential-wimse-wic"]
+
+[[packages]]
+name = "tba-profile-workload-proof-wimse-http-signature"
+path = "pkgs/55-profiles/tba-profile-workload-proof-wimse-http-signature"
+layer = "55-profiles"
+order = "01"
+local_dependencies = ["tba-profile-workload-credential-wimse-wit", "tba-provider-jose-cryptography"]
+same_layer_dependencies = ["tba-profile-workload-credential-wimse-wit"]
 
 [[packages]]
 name = "tba-profile-workload-proof-wimse-wpt"

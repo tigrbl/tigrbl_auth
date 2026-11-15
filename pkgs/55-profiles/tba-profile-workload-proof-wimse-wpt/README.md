@@ -35,6 +35,11 @@ uv run --isolated --no-project --python 3.12 --with "tba-profile-workload-proof-
 
 The command prints the declared current revision.
 
+When presenting a transaction token, pass its exact value as
+`transaction_token` to `present_wit()`. Send the returned headers together.
+They include `Txn-Token` and a signed WPT whose `tth` claim binds that token
+according to [WPT draft-02 §2](https://datatracker.ietf.org/doc/html/draft-ietf-wimse-wpt-02#section-2).
+
 ## Verification
 
 The quick start was run with the pinned distribution from PyPI and its declared dependencies. See the [public package entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/55-profiles/tba-profile-workload-proof-wimse-wpt/src/tba_profile_workload_proof_wimse_wpt/__init__.py).

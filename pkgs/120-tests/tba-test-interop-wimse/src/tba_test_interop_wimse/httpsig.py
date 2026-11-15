@@ -3,7 +3,7 @@
 from time import time
 
 from tba_profile_workload_credential_wimse_wit import verify_wit
-from .signatures import authenticate_signature, sign_request
+from tba_profile_workload_proof_wimse_http_signature import authenticate_signature, sign_request
 from .wpt import WptCaller, WptReceiver, audience
 
 

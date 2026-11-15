@@ -246,6 +246,7 @@ dependencies = [
     "tba-protocol-workload-spiffe-workload-api==0.4.0.dev2",
     "tba-profile-workload-credential-cwt-svid-extension==0.4.0.dev2",
     "tba-profile-workload-credential-spiffe-wit-svid==0.4.0.dev2",
+    "tba-profile-workload-proof-wimse-http-signature==0.4.0.dev2",
     "tba-profile-workload-proof-wimse-wpt==0.4.0.dev2",
     "tba-profile-workload-credential-wimse-wit==0.4.0.dev2",
     "tba-protocol-gnap==0.4.0.dev2",
@@ -1090,6 +1091,7 @@ tba-protocol-workload-spiffe-svid = { path = "pkgs/50-protocols/tba-protocol-wor
 
 tba-profile-workload-credential-wimse-wit = { path = "pkgs/55-profiles/tba-profile-workload-credential-wimse-wit", editable = true }
 
+tba-profile-workload-proof-wimse-http-signature = { path = "pkgs/55-profiles/tba-profile-workload-proof-wimse-http-signature", editable = true }
 tba-profile-workload-proof-wimse-wpt = { path = "pkgs/55-profiles/tba-profile-workload-proof-wimse-wpt", editable = true }
 
 tba-profile-workload-credential-spiffe-wit-svid = { path = "pkgs/55-profiles/tba-profile-workload-credential-spiffe-wit-svid", editable = true }

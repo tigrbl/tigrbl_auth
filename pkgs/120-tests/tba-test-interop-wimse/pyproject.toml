@@ -19,6 +19,7 @@ wic = [
 wpt = [
     "cryptography>=45",
     "tba-profile-workload-proof-wimse-wpt==0.4.0.dev2",
+    "tba-profile-workload-proof-wimse-http-signature==0.4.0.dev2",
     "tba-provider-jose-cryptography==0.4.0.dev2",
     "tba-provider-replay-memory==0.4.0.dev2",
 ]

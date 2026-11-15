@@ -31,11 +31,18 @@ from support.cred_endpoint import (
 
 def wic_source_digest():
     package = Path(__file__).resolve().parents[2]
-    roots = [package / "src/tba_test_interop_wimse", Path(__file__).parent]
+    packages = package.parents[1]
+    profiles = packages / "55-profiles"
+    roots = [
+        package / "src/tba_test_interop_wimse",
+        Path(__file__).parent,
+        profiles / "tba-profile-workload-proof-wimse-http-signature" / "src",
+        profiles / "tba-profile-workload-proof-wimse-wpt" / "src",
+    ]
     files = sorted(path for root in roots for pattern in ("*.py", "*.rs", "*.go", "*.mjs") for path in root.rglob(pattern))
     digest = sha256()
     for path in files:
-        digest.update(path.relative_to(package).as_posix().encode() + b"\0" + path.read_bytes())
+        digest.update(path.relative_to(packages).as_posix().encode() + b"\0" + path.read_bytes())
     return digest.hexdigest()
 
 

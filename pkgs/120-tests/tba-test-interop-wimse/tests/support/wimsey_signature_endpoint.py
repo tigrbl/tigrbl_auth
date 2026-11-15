@@ -92,7 +92,7 @@ class WimseySignatureAdapter:
                  {"none"} if hop["profile"] in STANDALONE_PROFILES else self.wpt_schemes
              )
              and (hop["wit_issuer"] == "baseline" or self.issuer is not None and self.issuer.alternate))
-            and (hop["wic_issuer"] == "baseline" or self.issuer is not None)
+            and (hop["wic_issuer"] in {"baseline", "none"} or self.issuer is not None)
             for hop in case["hops"].values()
         )
 

@@ -19,6 +19,7 @@ def present_wit(
     target_uri: str,
     now: int,
     lifetime_seconds: int = 60,
+    transaction_token: str | None = None,
 ) -> dict[str, str]:
     """Sign and present a proof for an already provisioned WIT."""
     if (
@@ -41,6 +42,14 @@ def present_wit(
         "jti": token_urlsafe(16),
         "wth": _hash_token(wit),
     }
+    request_headers = {"Workload-Identity-Token": wit}
+    if transaction_token is not None:
+        if (not isinstance(transaction_token, str) or not transaction_token
+                or not transaction_token.isascii()
+                or any(not 33 <= ord(char) <= 126 or char == "," for char in transaction_token)):
+            raise ValueError("expected a single ASCII transaction token")
+        claims["tth"] = _hash_token(transaction_token)
+        request_headers["Txn-Token"] = transaction_token
     proof = sign_compact_jwt(
         signer,
         claims,
@@ -48,4 +57,4 @@ def present_wit(
         key_reference=workload_key_reference,
     )
     verify_public_jws(proof, jwk)
-    return {"Workload-Identity-Token": wit, "Authorization": f"WPT {proof}"}
+    return {**request_headers, "Authorization": f"WPT {proof}"}

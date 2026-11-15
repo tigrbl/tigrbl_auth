@@ -7045,6 +7045,23 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tba-profile-workload-proof-wimse-http-signature"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/55-profiles/tba-profile-workload-proof-wimse-http-signature" }
+dependencies = [
+    { name = "cryptography" },
+    { name = "tba-profile-workload-credential-wimse-wit" },
+    { name = "tba-provider-jose-cryptography" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "cryptography", specifier = ">=45" },
+    { name = "tba-profile-workload-credential-wimse-wit", specifier = "==0.4.0.dev2" },
+    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tba-profile-workload-proof-wimse-wpt"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/55-profiles/tba-profile-workload-proof-wimse-wpt" }
@@ -10376,6 +10393,7 @@ dependencies = [
     { name = "tba-profile-workload-credential-spiffe-wit-svid" },
     { name = "tba-profile-workload-credential-wimse-wic" },
     { name = "tba-profile-workload-credential-wimse-wit" },
+    { name = "tba-profile-workload-proof-wimse-http-signature" },
     { name = "tba-profile-workload-proof-wimse-wpt" },
     { name = "tba-protocol-attestation-corim" },
     { name = "tba-protocol-attestation-eat" },
@@ -10935,6 +10953,7 @@ requires-dist = [
     { name = "tba-profile-workload-credential-spiffe-wit-svid", editable = "pkgs/55-profiles/tba-profile-workload-credential-spiffe-wit-svid" },
     { name = "tba-profile-workload-credential-wimse-wic", editable = "pkgs/55-profiles/tba-profile-workload-credential-wimse-wic" },
     { name = "tba-profile-workload-credential-wimse-wit", editable = "pkgs/55-profiles/tba-profile-workload-credential-wimse-wit" },
+    { name = "tba-profile-workload-proof-wimse-http-signature", editable = "pkgs/55-profiles/tba-profile-workload-proof-wimse-http-signature" },
     { name = "tba-profile-workload-proof-wimse-wpt", editable = "pkgs/55-profiles/tba-profile-workload-proof-wimse-wpt" },
     { name = "tba-protocol-attestation-corim", editable = "pkgs/50-protocols/tba-protocol-attestation-corim" },
     { name = "tba-protocol-attestation-eat", editable = "pkgs/50-protocols/tba-protocol-attestation-eat" },
