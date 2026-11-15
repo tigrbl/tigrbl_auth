@@ -17,7 +17,7 @@
 </p>
 <!-- END TBA README HEADER -->
 
-T0–T2 checks for the [interop distribution](https://github.com/tigrbl/tba-test-interop-wimse).
+T0–T2 checks for the [interop distribution](https://github.com/tigrbl/tba-tests-interop-wimse).
 
 ## Quick start
 

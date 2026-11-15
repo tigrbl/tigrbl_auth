@@ -8,7 +8,7 @@ status: "draft"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "Layer 120 owns the WIMSE interop catalogs, matrix generator, runner, and test-only adapters in `tba-test-interop-wimse`. Production packages must remain independent of this package. Protocol package ownership remains governed by ADR-1137, ADR-1138, and ADR-1140."
+summary: "Layer 120 owns the WIMSE interop catalogs, matrix generator, runner, and test-only adapters in `tba-tests-interop-wimse`. Production packages must remain independent of this package. Protocol package ownership remains governed by ADR-1137, ADR-1138, and ADR-1140."
 supersedes: []
 superseded_by: []
 status_notes: []
@@ -16,7 +16,7 @@ references: []
 body: |-
   ## Decision
   
-  Layer 120 owns the WIMSE interop catalogs, matrix generator, runner, and test-only adapters in `tba-test-interop-wimse`. Production packages must remain independent of this package. Protocol package ownership remains governed by ADR-1137, ADR-1138, and ADR-1140.
+  Layer 120 owns the WIMSE interop catalogs, matrix generator, runner, and test-only adapters in `tba-tests-interop-wimse`. Production packages must remain independent of this package. Protocol package ownership remains governed by ADR-1137, ADR-1138, and ADR-1140.
   
   Keep native WIMSE and SPIFFE conformance evidence distinct from named peer interop. SPIRE integration is an explicit composition. A scoped peer result establishes only the profile, roles, direction, configuration, and versions exercised. A qualified baseline permits execution. Each scenario requires its own result.
   

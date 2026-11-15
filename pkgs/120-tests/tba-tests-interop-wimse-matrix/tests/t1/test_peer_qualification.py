@@ -1,6 +1,6 @@
-from tba_test_interop_wimse.catalog import read_catalog
-from tba_test_interop_wimse.matrix import endpoint_pairs, profile_options
-from tba_test_interop_wimse.qualification import pair_has_baseline
+from tba_tests_interop_wimse.catalog import read_catalog
+from tba_tests_interop_wimse.matrix import endpoint_pairs, profile_options
+from tba_tests_interop_wimse.qualification import pair_has_baseline
 
 
 def test_endpoint_catalog_and_directional_joins():

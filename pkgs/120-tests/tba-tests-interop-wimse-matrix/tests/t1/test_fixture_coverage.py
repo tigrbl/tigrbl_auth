@@ -1,5 +1,5 @@
-from tba_test_interop_wimse.coverage import inventory_report
-from tba_test_interop_wimse.matrix import generate_matrix
+from tba_tests_interop_wimse.coverage import inventory_report
+from tba_tests_interop_wimse.matrix import generate_matrix
 
 
 def test_inventory_reports_every_id_without_qualifying_component_runs():

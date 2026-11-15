@@ -1,8 +1,8 @@
 import pytest
 
-from tba_test_interop_wimse.__main__ import accepts, load_catalog, references
-from tba_test_interop_wimse.catalog import read_catalog, validate_catalog
-from tba_test_interop_wimse.matrix import validate_events
+from tba_tests_interop_wimse.__main__ import accepts, load_catalog, references
+from tba_tests_interop_wimse.catalog import read_catalog, validate_catalog
+from tba_tests_interop_wimse.matrix import validate_events
 
 FACTORS, RULES = load_catalog()
 DOMAINS = {key: factor["levels"] for key, factor in FACTORS.items()}

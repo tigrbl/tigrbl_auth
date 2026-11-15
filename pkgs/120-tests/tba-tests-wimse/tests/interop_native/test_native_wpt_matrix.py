@@ -11,9 +11,9 @@ import sys
 import pytest
 from cryptography.hazmat.primitives import serialization
 
-from tba_test_interop_wimse.coverage import inventory_report
-from tba_test_interop_wimse.matrix import generate_matrix
-from tba_test_interop_wimse.runner import run_inventory
+from tba_tests_interop_wimse.coverage import inventory_report
+from tba_tests_interop_wimse.matrix import generate_matrix
+from tba_tests_interop_wimse.runner import run_inventory
 
 from support.wic_fixture import DNS, IDENTITY
 from support.wpt_fixture import NativeWptAdapter, WptFixture
@@ -66,11 +66,11 @@ def test_wpt_cli_roles(tmp_path):
         "certificate": fixture.tls.certificate, "private_key": fixture.tls.private_key,
         "dns_name": DNS, "trust_by_domain": fixture.trust,
     }), encoding="utf-8")
-    package = Path(sys.modules["tba_test_interop_wimse"].__file__).resolve().parents[1]
+    package = Path(sys.modules["tba_tests_interop_wimse"].__file__).resolve().parents[1]
     env = {**os.environ, "PYTHONPATH": os.pathsep.join(
         filter(None, (str(package), os.getenv("PYTHONPATH")))
     )}
-    cmd = [sys.executable, "-B", "-m", "tba_test_interop_wimse.wpt_cli"]
+    cmd = [sys.executable, "-B", "-m", "tba_tests_interop_wimse.wpt_cli"]
     from concurrent.futures import ThreadPoolExecutor
 
     with subprocess.Popen([*cmd, "receive", str(receiver_config)], env=env,

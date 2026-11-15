@@ -7,9 +7,9 @@ import sys
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import asdict
 from importlib.metadata import version
-from tba_test_interop_wimse.matrix import generate_matrix
-from tba_test_interop_wimse.coverage import inventory_report
-from tba_test_interop_wimse.runner import run_inventory
+from tba_tests_interop_wimse.matrix import generate_matrix
+from tba_tests_interop_wimse.coverage import inventory_report
+from tba_tests_interop_wimse.runner import run_inventory
 
 from support.wic_fixture import DNS, IDENTITY, SERVER, NativeWicAdapter, WicFixture
 
@@ -40,8 +40,8 @@ def test_native_wic_setup_and_effects(tmp_path, record_property):
 
 def test_partner_cli_roles(tmp_path):
     fixture = WicFixture(tmp_path, {"variant": "valid-peer"})
-    command = [sys.executable, "-B", "-m", "tba_test_interop_wimse.wic_cli"]
-    package_root = os.path.dirname(os.path.dirname(sys.modules["tba_test_interop_wimse"].__file__))
+    command = [sys.executable, "-B", "-m", "tba_tests_interop_wimse.wic_cli"]
+    package_root = os.path.dirname(os.path.dirname(sys.modules["tba_tests_interop_wimse"].__file__))
     env = {**os.environ, "PYTHONPATH": os.pathsep.join(
         filter(None, (package_root, os.getenv("PYTHONPATH")))
     )}

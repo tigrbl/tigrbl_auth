@@ -21,7 +21,7 @@ jobs:
         run: echo "ref=$(cat pkgs/120-tests/tba-tests-interop-wimse-matrix/interop-revision.txt)" >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@v6
         with:
-          repository: tigrbl/tba-test-interop-wimse
+          repository: tigrbl/tba-tests-interop-wimse
           ref: ${{ steps.pin.outputs.ref }}
           path: .tmp/wimse-interop
           persist-credentials: false
@@ -33,7 +33,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          export TBA_WIMSE_INTEROP_PACKAGE="$PWD/.tmp/wimse-interop/pkgs/tba-test-interop-wimse"
+          export TBA_WIMSE_INTEROP_PACKAGE="$PWD/.tmp/wimse-interop/pkgs/tba-tests-interop-wimse"
           uv build --project "$TBA_WIMSE_INTEROP_PACKAGE" --wheel --out-dir "$PWD/.tmp/wimse-wheel"
           export TBA_WIMSE_INTEROP_WHEEL="$(find "$PWD/.tmp/wimse-wheel" -name '*.whl' -type f)"
           uv run --locked --extra test --with grpcio --with protobuf pytest \

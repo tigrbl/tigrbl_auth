@@ -3,7 +3,7 @@ from xml.etree import ElementTree
 
 import pytest
 
-from tba_test_interop_wimse.evidence import audit_pytest_report
+from tba_tests_interop_wimse.evidence import audit_pytest_report
 
 
 def write_report(path, *, omit=False, skipped=False, duplicate=False):

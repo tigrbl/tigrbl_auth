@@ -3,11 +3,11 @@ from contextlib import contextmanager
 
 import pytest
 
-from tba_test_interop_wimse.adapters import REFERENCE_ADAPTERS
-from tba_test_interop_wimse.evidence import reconcile
-from tba_test_interop_wimse.matrix import generate_matrix
-from tba_test_interop_wimse.observations import Observation, mismatches
-from tba_test_interop_wimse.runner import run_inventory
+from tba_tests_interop_wimse.adapters import REFERENCE_ADAPTERS
+from tba_tests_interop_wimse.evidence import reconcile
+from tba_tests_interop_wimse.matrix import generate_matrix
+from tba_tests_interop_wimse.observations import Observation, mismatches
+from tba_tests_interop_wimse.runner import run_inventory
 
 
 def test_release_and_revocation_reference_effects():

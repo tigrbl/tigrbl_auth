@@ -3,7 +3,7 @@
 import pytest
 
 from support.typed_workload_chain import native_workload_hop
-from tba_test_interop_wimse.native_expansion import COMBINED_SCOPE
+from tba_tests_interop_wimse.native_expansion import COMBINED_SCOPE
 
 
 @pytest.mark.parametrize("profile", ["wic-mtls-wpt", "wic-mtls-http-signature"])

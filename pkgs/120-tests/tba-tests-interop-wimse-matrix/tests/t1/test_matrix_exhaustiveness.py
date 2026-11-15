@@ -1,9 +1,9 @@
 from pathlib import Path
 import sys
 
-from tba_test_interop_wimse.catalog import read_catalog
-from tba_test_interop_wimse.coverage import coverage_report
-from tba_test_interop_wimse.matrix import generate_matrix
+from tba_tests_interop_wimse.catalog import read_catalog
+from tba_tests_interop_wimse.coverage import coverage_report
+from tba_tests_interop_wimse.matrix import generate_matrix
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from support.reference_matrix import structural_keys

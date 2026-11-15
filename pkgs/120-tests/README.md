@@ -12,7 +12,7 @@ the migrated suites and the remaining root tests.
 | `tba-tests-workload-composition` | Workload protocol boundaries, specification ownership and runtime composition |
 | `tba-testkit-workload-credential-conformance` | Shared workload vectors, certificate fixtures and clean-wheel runner |
 | `tba-tests-interop-wimse-cred` | Opt-in Cred peer suite |
-| [`tba-test-interop-wimse`](https://github.com/tigrbl/tba-test-interop-wimse) | WIMSE interop matrices, factor rules, exclusions, and combination counter |
+| [`tba-tests-interop-wimse`](https://github.com/tigrbl/tba-tests-interop-wimse) | WIMSE interop matrices, factor rules, exclusions, and combination counter |
 | `tba-testkit-identity` | Shared identity fixtures |
 
 Run a native suite from the repository root with

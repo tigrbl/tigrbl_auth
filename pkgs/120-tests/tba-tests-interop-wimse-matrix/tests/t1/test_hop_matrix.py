@@ -1,10 +1,10 @@
 from collections import Counter
 
-from tba_test_interop_wimse.catalog import read_catalog
-from tba_test_interop_wimse.hop_expansion import include_candidate_endpoints, plan_hop_expansion
-from tba_test_interop_wimse.hop_matrix import generate_hop_matrix
-from tba_test_interop_wimse.matrix import generate_matrix
-from tba_test_interop_wimse.native_expansion import (
+from tba_tests_interop_wimse.catalog import read_catalog
+from tba_tests_interop_wimse.hop_expansion import include_candidate_endpoints, plan_hop_expansion
+from tba_tests_interop_wimse.hop_matrix import generate_hop_matrix
+from tba_tests_interop_wimse.matrix import generate_matrix
+from tba_tests_interop_wimse.native_expansion import (
     COMBINED_RECORD, COMBINED_SCOPE, expanded_plan, native_issuer_rows, native_operation_catalog,
 )
 

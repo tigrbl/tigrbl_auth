@@ -4,8 +4,8 @@ import json
 
 import pytest
 
-from tba_test_interop_wimse.matrix import generate_matrix
-from tba_test_interop_wimse.runner import run_inventory
+from tba_tests_interop_wimse.matrix import generate_matrix
+from tba_tests_interop_wimse.runner import run_inventory
 
 from support.wic_fixture import NativeWicAdapter
 from support.wpt_fixture import NativeWptAdapter
