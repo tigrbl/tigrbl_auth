@@ -1931,14 +1931,6 @@ local_dependencies = ["tba-profile-workload-credential-spiffe-wit-svid", "tba-pr
 same_layer_dependencies = []
 
 [[packages]]
-name = "tba-test-interop-wimse"
-path = "pkgs/120-tests/tba-test-interop-wimse"
-layer = "120-tests"
-order = "00"
-local_dependencies = []
-same_layer_dependencies = []
-
-[[packages]]
 name = "tba-testkit-identity"
 path = "pkgs/120-tests/tba-testkit-identity"
 layer = "120-tests"
@@ -1947,8 +1939,8 @@ local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
-name = "tba-testkit-wimse-cred-interop"
-path = "pkgs/120-tests/tba-testkit-wimse-cred-interop"
+name = "tba-tests-interop-wimse-cred"
+path = "pkgs/120-tests/tba-tests-interop-wimse-cred"
 layer = "120-tests"
 order = "00"
 local_dependencies = ["tba-primitives-identity", "tba-profile-workload-credential-wimse-wit", "tba-profile-workload-proof-wimse-wpt", "tba-provider-jose-cryptography"]
@@ -4129,3 +4121,11 @@ layer = "deprecated"
 order = "01"
 local_dependencies = ["tigrbl-identity-credentials-concrete"]
 same_layer_dependencies = ["tigrbl-identity-credentials-concrete"]
+
+[[packages]]
+name = "tba-tests-interop-wimse-matrix"
+path = "pkgs/120-tests/tba-tests-interop-wimse-matrix"
+layer = "120-tests"
+order = "00"
+local_dependencies = []
+same_layer_dependencies = []

@@ -1,8 +1,0 @@
-{
-  "name": "tba-defakto-interop-fixture",
-  "private": true,
-  "type": "module",
-  "dependencies": {
-    "@defakto/spiffe": "0.7.0"
-  }
-}
