@@ -1,0 +1,212 @@
+{
+  "peer": "agentmaurice",
+  "release": "v2.2.18",
+  "linux_amd64_sha256": "a2b79f0565e05b8a2de1692d102e808b5b69e65954f2ea8aa7963e1bf8544bff",
+  "source": "https://github.com/agentmaurice/maurice/releases/tag/v2.2.18",
+  "scope": "Disposable local labs. Controls used ordinary WIT and ES256 proofs. No matrix execution IDs were attempted.",
+  "deployment": {
+    "verified": true,
+    "status": "applied",
+    "blocking_tests_passed": true
+  },
+  "inbound": {
+    "workflow": "text-stats",
+    "method": "POST",
+    "route": "/api/v2/agents/{agentId}/workflows/{workflowId}/executions",
+    "transport": "loopback HTTP",
+    "grant": {
+      "holder": "workload:wimse://example.org/tba-workload",
+      "agent": "{agentId}",
+      "workflow": "text-stats"
+    },
+    "trust_domain": "example.org",
+    "audience": "https://receiver.example.org",
+    "controls": [
+      {
+        "trial": 0,
+        "status": 401,
+        "error": "authentication is required"
+      },
+      {
+        "trial": 1,
+        "status": 401
+      },
+      {
+        "trial": 2,
+        "status": 200
+      },
+      {
+        "trial": 3,
+        "status": 401
+      },
+      {
+        "trial": 4,
+        "status": 400
+      },
+      {
+        "trial": 5,
+        "status": 200
+      },
+      {
+        "trial": 6,
+        "status": 401
+      },
+      {
+        "trial": 7,
+        "status": 400
+      }
+    ],
+    "journal": [
+      {
+        "ts": "2026-11-15T21:39:44.811903638Z",
+        "direction": "inbound",
+        "route": "/api/v2/agents/:agentId/workflows/:workflowId/executions",
+        "mechanism": "wit+wpt",
+        "decision": "reject",
+        "reason": "audience-mismatch",
+        "status": 401
+      },
+      {
+        "ts": "2026-11-15T21:39:44.813345864Z",
+        "direction": "inbound",
+        "route": "/api/v2/agents/:agentId/workflows/:workflowId/executions",
+        "mechanism": "wit+wpt",
+        "decision": "accept",
+        "reason": "",
+        "status": 200
+      },
+      {
+        "ts": "2026-11-15T21:39:45.04291641Z",
+        "direction": "inbound",
+        "route": "/api/v2/agents/:agentId/workflows/:workflowId/executions",
+        "mechanism": "wit+wpt",
+        "decision": "reject",
+        "reason": "audience-mismatch",
+        "status": 401
+      },
+      {
+        "ts": "2026-11-15T21:39:45.043785814Z",
+        "direction": "inbound",
+        "route": "/api/v2/agents/:agentId/workflows/:workflowId/executions",
+        "mechanism": "wit+http-sig",
+        "decision": "reject",
+        "reason": "audience-mismatch",
+        "status": 400
+      },
+      {
+        "ts": "2026-11-15T21:39:45.045260437Z",
+        "direction": "inbound",
+        "route": "/api/v2/agents/:agentId/workflows/:workflowId/executions",
+        "mechanism": "wit+http-sig",
+        "decision": "accept",
+        "reason": "",
+        "status": 200
+      },
+      {
+        "ts": "2026-11-15T21:39:45.255561216Z",
+        "direction": "inbound",
+        "route": "/api/v2/agents/:agentId/workflows/:workflowId/executions",
+        "mechanism": "wit+wpt",
+        "decision": "reject",
+        "reason": "replay",
+        "status": 401
+      },
+      {
+        "ts": "2026-11-15T21:39:45.256413337Z",
+        "direction": "inbound",
+        "route": "/api/v2/agents/:agentId/workflows/:workflowId/executions",
+        "mechanism": "wit+http-sig",
+        "decision": "reject",
+        "reason": "replay",
+        "status": 400
+      }
+    ]
+  },
+  "outbound": {
+    "workflow": "interop-outbound",
+    "transport": "loopback HTTPS with dedicated test CA",
+    "fixture": "POST https://127.0.0.1:15001/writes",
+    "workflow_code": "const {wimseFetch} = await import('./tools/nats_bridge.ts'); const mode = {{ json .mode }}; const response = await wimseFetch('https://127.0.0.1:15001/writes', {mode, method:'POST'}); return {status:response.status, outcome: await response.json()};",
+    "http_status": {
+      "workflow": 200,
+      "capture_receiver": 200
+    },
+    "verification": "Native TbA verification of captured requests after completion using the runtime's public JWKS.",
+    "controls": [
+      {
+        "mode": "http-sig",
+        "native_proof_verifier": "accepted",
+        "identity_matches_runtime": true,
+        "negative_controls": {
+          "replay": "HTTP signature replay rejected",
+          "wrong_audience": "incorrect signature tag or audience"
+        }
+      },
+      {
+        "mode": "wpt",
+        "native_proof_verifier": "accepted",
+        "identity_matches_runtime": true,
+        "negative_controls": {
+          "replay": "WPT replay rejected",
+          "wrong_audience": "WPT audience mismatch"
+        }
+      }
+    ],
+    "http_refusals": [
+      {
+        "ts": "2026-11-15T21:40:11.190352155Z",
+        "direction": "outbound",
+        "route": "POST http://127.0.0.1:15001/writes",
+        "mechanism": "wit+wpt",
+        "decision": "reject",
+        "reason": "HTTP_URL_REFUSED",
+        "status": 0
+      },
+      {
+        "ts": "2026-11-15T21:40:11.666643432Z",
+        "direction": "outbound",
+        "route": "POST http://127.0.0.1:15001/writes",
+        "mechanism": "wit+http-sig",
+        "decision": "reject",
+        "reason": "HTTP_URL_REFUSED",
+        "status": 0
+      }
+    ]
+  },
+  "spire_wit_svid": {
+    "grant_config_test": "AgentMaurice rejected a spiffe:// holder. The grant parser requires a wimse:// identifier.",
+    "agentmaurice_hop_rows": 10112,
+    "by_agentmaurice_role_on_spire_hops": {
+      "receiver": 4070,
+      "caller": 4078,
+      "caller + receiver": 1964
+    }
+  },
+  "matrix": {
+    "inventory": 16296,
+    "workload_matrix_rows": 2120,
+    "typed_flow_rows": 14176,
+    "attempted": 0,
+    "passed": 0,
+    "failed": 0,
+    "blocked": 16296,
+    "by_candidate_peers": {
+      "agentmaurice": 14312,
+      "agentmaurice + defakto": 992,
+      "agentmaurice + go-spiffe": 992
+    },
+    "by_agentmaurice_wit_issuers": {
+      "baseline": 6184,
+      "spire-wit-svid": 6184,
+      "baseline + spire-wit-svid": 3928
+    },
+    "by_missing_external_support": {
+      "none": 15828,
+      "mintid": 132,
+      "emilia": 112,
+      "redthread": 112,
+      "omniarx": 112
+    },
+    "per_id_file": "wimse-agentmaurice-per-id.csv"
+  }
+}
