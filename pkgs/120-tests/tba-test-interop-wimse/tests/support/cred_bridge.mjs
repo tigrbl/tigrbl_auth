@@ -27,7 +27,34 @@ if (process.argv[2] === 'build') {
   const input = JSON.parse(readFileSync(0, 'utf8'));
   const digest = value => createHash('sha256').update(value, 'ascii').digest('base64url');
   let result;
-  if (input.command === 'sign') {
+  const trustConfig = () => ({
+    trustDomains: Object.fromEntries(Object.entries(input.trust).map(([domain, keys]) =>
+      [domain, new Map(keys.map(jwk => [jwk.kid, { key: createPublicKey({ key: jwk, format: 'jwk' }), alg: jwk.alg }]))])),
+    now: () => input.now,
+    clockSkewSec: 0,
+  });
+  if (input.command === 'sign-http') {
+    const { signWimseRequest } = await import('./http-signature.js');
+    const privateKey = createPrivateKey({ key: input.key, format: 'jwk' });
+    result = { headers: signWimseRequest({
+      method: input.method, path: input.path, headers: input.headers,
+      wit: input.wit, privateKey, alg: input.key.alg, audience: input.audience, created: input.now,
+    }) };
+  } else if (input.command === 'verify-http') {
+    const { verifyWimseRequestSignature } = await import('./http-signature.js');
+    const { IdentityRefusal } = await import('./types.js');
+    try {
+      const proof = verifyWimseRequestSignature(
+        { method: input.method, path: input.path, headers: input.headers },
+        { ...trustConfig(), audiences: [input.audience] },
+      );
+      result = proof ? { sub: proof.wit.subject, nonce: proof.nonce, exp: proof.expires }
+        : { denied: 'no tagged WIMSE signature' };
+    } catch (error) {
+      if (!(error instanceof IdentityRefusal)) throw error;
+      result = { denied: error.code + ': ' + error.detail };
+    }
+  } else if (input.command === 'sign') {
     const { signJws } = await import('./client.mjs');
     const key = createPrivateKey({ key: input.key, format: 'jwk' });
     const claims = { aud: input.audience, exp: input.now + 60, jti: input.jti, wth: digest(input.wit) };
@@ -37,10 +64,8 @@ if (process.argv[2] === 'build') {
   } else if (input.command === 'verify') {
     const { verifyWit, verifyWpt } = await import('./wimse.js');
     const { IdentityRefusal } = await import('./types.js');
-    const trustDomains = Object.fromEntries(Object.entries(input.trust).map(([domain, keys]) =>
-      [domain, new Map(keys.map(jwk => [jwk.kid, { key: createPublicKey({ key: jwk, format: 'jwk' }), alg: jwk.alg }]))]));
     try {
-      const cfg = { trustDomains, now: () => input.now, clockSkewSec: 0 };
+      const cfg = trustConfig();
       const wit = verifyWit(input.wit, cfg);
       const proof = verifyWpt(input.proof, wit, { headers: input.headers, targetUri: input.audience }, cfg);
       if (input.headers[input.context_header] !== undefined &&

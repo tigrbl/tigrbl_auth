@@ -68,8 +68,9 @@ class SignatureHop:
 
 
 class SignatureBoundaryCase:
-    def __init__(self, case, enforcing, *, gateway=None):
+    def __init__(self, case, enforcing, *, gateway=None, transaction_issuer=None):
         self.case, self.enforcing, self.gateway = case, enforcing, gateway
+        self.transaction_issuer = transaction_issuer
 
     def observe(self):
         variant = self.case["variant"]
@@ -80,7 +81,7 @@ class SignatureBoundaryCase:
         return self.proxy(variant)
 
     def transaction(self, variant):
-        issuer = TokenIssuer("local-transaction", self.enforcing.server_identity)
+        issuer = self.transaction_issuer or TokenIssuer("local-transaction", self.enforcing.server_identity)
 
         def enforce(identity, headers):
             claims = issuer.verify(headers.get("Txn-Token"))
@@ -90,6 +91,7 @@ class SignatureBoundaryCase:
         with self.enforcing.running(authorize_write=enforce) as endpoint:
             caller, server = endpoint
             token = issuer.issue(self.enforcing.identity, "write")
+            issuer.verify(token)
             headers = caller.proof_headers(server.server_port, headers={"txn-token": token})
             if variant == "token-binding-mismatch":
                 headers["txn-token"] = issuer.issue(self.enforcing.identity, "write", nonce="substitute")

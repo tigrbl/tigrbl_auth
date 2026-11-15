@@ -15,6 +15,24 @@ def peer_snapshot():
 
 
 @pytest.fixture(scope="session")
+def cred_http_signature_adapter(peer_snapshot, tmp_path_factory):
+    from support.cred_endpoint import CredHttpSignatureAdapter, bridge_digest
+    from support.qualification_overlay import wic_source_digest
+
+    if not peer_snapshot.get("cred_http_signature_controls"):
+        pytest.fail("Snapshot lacks Cred HTTP signature controls")
+    location = Path(os.environ["TBA_WIMSE_PEER_SNAPSHOT"]).resolve()
+    bridge = location.with_suffix(".cred") / "cred_bridge.mjs"
+    if bridge_digest(bridge) != peer_snapshot["cred_bridge_sha256"]:
+        pytest.fail("Cred bridge differs from the qualified snapshot")
+    if not any(row["implementation"] == "tba" and row["profile"] == "wit-http-signature"
+               and row.get("version") == "sha256:" + wic_source_digest()
+               for row in peer_snapshot["peers"]["capabilities"]):
+        pytest.fail("TbA fixture sources differ from the qualified snapshot")
+    return CredHttpSignatureAdapter(tmp_path_factory.mktemp("cred-httpsig"), bridge)
+
+
+@pytest.fixture(scope="session")
 def peer_adapters(peer_snapshot, tmp_path_factory):
     """Map scenario family IDs to adapters backed by real peer deployments."""
     if not peer_snapshot:

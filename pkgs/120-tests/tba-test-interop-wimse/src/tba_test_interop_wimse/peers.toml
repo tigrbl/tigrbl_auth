@@ -21,7 +21,7 @@ name = "Cred"
 candidate_ref = "hackathon/ietf127"
 candidate_revision = "586e1a76f487c2376e0ba0a4687bb2de8d3eb588"
 component_tests = ["tests/peer/test_baselines.py"]
-qualification_gap = "The available fixture verifies WIT/WPT over loopback HTTP and returns a protected read. HTTPS, write readback, and caller-role evidence are pending."
+qualification_gap = "WIT/WPT and draft-08 HTTP signatures are qualified separately by the pinned HTTPS lab. HTTP signatures cover direct requests and transaction binding with a lab-issued WIT."
 
 [implementations.cofide]
 name = "Cofide WIMSE PoC"
@@ -252,6 +252,24 @@ role = "caller"
 profile = "wic-mtls-http-signature"
 identifier_scheme = "spiffe"
 status = "pending"
+
+[[capabilities]]
+implementation = "cred"
+role = "caller"
+profile = "wit-http-signature"
+identifier_scheme = "none"
+status = "pending"
+scenario_families = ["01", "07"]
+wit_issuers = ["baseline"]
+
+[[capabilities]]
+implementation = "cred"
+role = "receiver"
+profile = "wit-http-signature"
+identifier_scheme = "none"
+status = "pending"
+scenario_families = ["01", "07"]
+wit_issuers = ["baseline"]
 
 [[capabilities]]
 implementation = "combined-signature-candidate"

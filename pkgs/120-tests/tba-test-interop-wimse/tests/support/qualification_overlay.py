@@ -24,8 +24,9 @@ from support.wimsey_signature_endpoint import (
 from support.wimsey_wpt import PROFILE as WPT_PROFILE, SLOT as WPT_SLOT, build_bridge
 from support.cofide_endpoint import PROFILE as COFIDE_PROFILE, SLOT as COFIDE_SLOT, REVISION as COFIDE_REVISION, binary_digest
 from support.cred_endpoint import (
-    PROFILE as CRED_PROFILE, SLOT as CRED_SLOT, REVISION as CRED_REVISION,
-    bridge_digest, build_cred_bridge,
+    HTTP_PROFILE as CRED_HTTP_PROFILE, PROFILE as CRED_PROFILE,
+    SLOT as CRED_SLOT, REVISION as CRED_REVISION,
+    CredHttpSignatureAdapter, bridge_digest, build_cred_bridge,
 )
 
 
@@ -264,6 +265,46 @@ def qualify_combined(wic, snapshot, evidence, *, profile=SIGNATURE_PROFILE, brid
             add_binding(role, "wic-lab-fixture", pins["tba"], scenario_families=[family])
 
 
+def qualify_cred_http(adapter, snapshot, evidence):
+    peers = snapshot["peers"]
+    pins = {"tba": "sha256:" + wic_source_digest(), CRED_SLOT: CRED_REVISION}
+    endpoints = {}
+    fields = ("implementation", "version", "configuration", "profile", "identifier_scheme")
+    for row in peers["capabilities"]:
+        name = row["implementation"]
+        if row["profile"] == CRED_HTTP_PROFILE and name in pins:
+            row.update(status="qualified", version=pins[name], configuration=SIGNATURE_CONFIGURATION,
+                       evidence=evidence)
+            endpoints[name, row["role"]] = {field: row[field] for field in fields}
+
+    controls = []
+    for direction, caller, receiver in (("forward", "tba", CRED_SLOT), ("reverse", CRED_SLOT, "tba")):
+        pair = {"caller": endpoints[caller, "caller"], "receiver": endpoints[receiver, "receiver"]}
+        for case in generate_matrix()["scenarios"]:
+            if not adapter.supports(case):
+                continue
+            execution = {"direction": direction, "pairs": {case["target_hop"]: pair}}
+            with adapter.isolated(case, execution) as fixture:
+                observed = fixture.observe()
+            errors = mismatches(case, observed)
+            if errors:
+                raise ValueError(f"Cred HTTP signature control {case['id']} failed: {errors}; {observed}")
+            controls.append({"direction": direction, "case": case["id"], "pair": pair,
+                             "observation": asdict(observed)})
+        peers.setdefault("baselines", []).append(dict(pair, evidence=evidence, outcome="pass"))
+
+    assert len(controls) == 6, controls
+    snapshot["cred_http_signature_controls"] = controls
+    role = "enforcing:wit_issuer:baseline"
+    binding = {"implementation": "lab-wit-issuer", "version": pins["tba"],
+               "configuration": SIGNATURE_CONFIGURATION, "evidence": evidence,
+               "profile": CRED_HTTP_PROFILE, "identifier_schemes": ["none"],
+               "scenario_families": sorted(adapter.families)}
+    support = peers.setdefault("qualified_support", {})
+    existing = support.get(role)
+    support[role] = {**binding, "bindings": [*existing.get("bindings", [existing]), binding]} if existing else binding
+
+
 def main():
     destination = Path(os.environ["TBA_WIMSE_PEER_SNAPSHOT"]).resolve()
     with TemporaryDirectory(dir=destination.parent) as directory:
@@ -298,6 +339,7 @@ def main():
                 cred_bridge = build_cred_bridge(cred_checkout, destination.with_suffix(".cred"))
                 qualify_combined(adapter, snapshot, destination.name, profile=CRED_PROFILE,
                                  bridge=bridge, scheme="none", cofide_binary=cofide_binary, cred_bridge=cred_bridge)
+                qualify_cred_http(CredHttpSignatureAdapter(directory, cred_bridge), snapshot, destination.name)
                 snapshot["cred_bridge_sha256"] = bridge_digest(cred_bridge)
     destination.write_text(json.dumps(snapshot, indent=2), encoding="utf-8")
     print(f"Passed controls: {len(snapshot['controls'])} baseline, {len(snapshot['support_controls'])} issuer/support")
@@ -307,6 +349,7 @@ def main():
     print(f"WIMSE-ID WPT controls: {len(snapshot.get('combined_wpt_wimse_controls', ()))}")
     print(f"Cofide controls: {len(snapshot.get('cofide_controls', ()))}")
     print(f"Cred controls: {len(snapshot.get('cred_controls', ()))}")
+    print(f"Cred HTTP signature controls: {len(snapshot.get('cred_http_signature_controls', ()))}")
 
 
 if __name__ == "__main__":

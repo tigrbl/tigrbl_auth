@@ -289,6 +289,17 @@ Cred's WIT and WPT verification, with the lab supplying HTTPS, replay
 state, token issuance and resource effects. Its caller signs the WPT for
 the lab request URI and binds any transaction or destination access token.
 
+The same checkout qualifies Cred independently as a second WIT + HTTP
+Message Signatures peer alongside Cofide. For draft-08 requests, both
+TbA → Cred and Cred → TbA exercise a baseline request, a request with a
+valid signed transaction JWT, and a request with a second valid
+transaction JWT substituted after signing. Each valid request records
+one write. Each substitution fails signature verification and records
+zero writes. These controls use direct HTTPS with a lab-issued WIT and
+bodyless requests. To run them without building the other peers, run
+`python -m pytest tests/peer/test_cred_http_signature.py` from the
+package directory with `TBA_WIMSE_CRED_CHECKOUT` set.
+
 After the candidate run, use
 `python -m support.blocker_report snapshot.json candidates.xml` to count
 remaining blockers. It reports the overlap between missing runtime

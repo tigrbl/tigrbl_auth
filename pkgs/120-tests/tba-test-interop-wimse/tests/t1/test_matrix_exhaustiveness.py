@@ -21,4 +21,4 @@ def test_exact_exhaustive_scenario_keys():
 def test_adapter_and_qualification_gaps_remain_visible():
     report = coverage_report(generate_matrix(), {})
     assert len(report["no_adapter"]) == 3148
-    assert len(report["unqualified"]) == 4448
+    assert len(report["unqualified"]) == 4454

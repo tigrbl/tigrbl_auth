@@ -97,11 +97,13 @@ def expand_scenarios(catalog, factors, exclusions):
                     }
 
 
-def endpoint_pairs(peers, hop):
+def endpoint_pairs(peers, hop, *, scenario_family=None):
     capabilities = [
         row for row in peers["capabilities"]
         if row["profile"] == hop["profile"]
         and row["identifier_scheme"] == hop["identifier_scheme"]
+        and ("scenario_families" not in row or scenario_family in row["scenario_families"])
+        and ("wit_issuers" not in row or hop.get("wit_issuer") in row["wit_issuers"])
     ]
     for caller, receiver in product(capabilities, repeat=2):
         if caller["role"] != "caller" or receiver["role"] != "receiver":
@@ -115,7 +117,10 @@ def endpoint_pairs(peers, hop):
 
 def expand_executions(scenario, peers):
     hop_ids = list(scenario["hops"])
-    choices = [list(endpoint_pairs(peers, hop)) for hop in scenario["hops"].values()]
+    choices = [
+        list(endpoint_pairs(peers, hop, scenario_family=scenario["scenario_id"]))
+        for hop in scenario["hops"].values()
+    ]
     for pairs in product(*choices):
         if any(
             left["receiver"]["implementation"] != right["caller"]["implementation"]
