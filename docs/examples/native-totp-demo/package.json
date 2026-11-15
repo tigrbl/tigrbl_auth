@@ -1,0 +1,8 @@
+{
+  "name": "tba-native-totp-demo",
+  "private": true,
+  "type": "module",
+  "scripts": {"build": "vite build"},
+  "dependencies": {"react": "19.2.5", "react-dom": "19.2.5"},
+  "devDependencies": {"vite": "6.4.2"}
+}

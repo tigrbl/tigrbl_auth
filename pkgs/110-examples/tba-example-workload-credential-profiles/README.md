@@ -37,3 +37,17 @@ The example validates the structural WIT, WIT-SVID, and WPT fixtures.
 ## Verification
 
 The quick start was run with the pinned distribution from PyPI and its declared dependencies. See the [public package entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/110-examples/tba-example-workload-credential-profiles/src/workload_credential_profiles_example/__init__.py).
+
+## Run from the checkout
+
+From the repository checkout, sync the workspace — the example is a root
+dependency and installs editable — then call `run_example`:
+
+```shell
+uv sync
+uv run python -c "from workload_credential_profiles_example.main import run_example; print(run_example())"
+```
+
+The call returns `('wit', 'wit-svid', 'wpt')`, one label for each validated
+credential profile.
+
