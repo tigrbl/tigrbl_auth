@@ -6802,8 +6802,8 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "tba-profile-workload-credential-spiffe-wit-svid", specifier = "==0.4.0.dev2" },
-    { name = "tba-profile-workload-credential-wimse-wit", specifier = "==0.4.0.dev2" },
-    { name = "tba-profile-workload-proof-wimse-wpt", specifier = "==0.4.0.dev2" },
+    { name = "tba-profile-workload-credential-wimse-wit", specifier = "==0.4.0.dev3" },
+    { name = "tba-profile-workload-proof-wimse-wpt", specifier = "==0.4.0.dev3" },
 ]
 
 [[package]]
@@ -7031,10 +7031,10 @@ dependencies = [
 requires-dist = [
     { name = "tba-concrete-jwt", specifier = "==0.4.0.dev2" },
     { name = "tba-contracts-proof-of-possession", specifier = "==0.4.0.dev2" },
-    { name = "tba-profile-workload-credential-wimse-wit", specifier = "==0.4.0.dev2" },
-    { name = "tba-profile-workload-proof-wimse-wpt", specifier = "==0.4.0.dev2" },
+    { name = "tba-profile-workload-credential-wimse-wit", specifier = "==0.4.0.dev3" },
+    { name = "tba-profile-workload-proof-wimse-wpt", specifier = "==0.4.0.dev3" },
     { name = "tba-protocol-workload-spiffe-svid", specifier = "==0.4.0.dev2" },
-    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev2" },
+    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev3" },
 ]
 
 [[package]]
@@ -7056,7 +7056,7 @@ requires-dist = [
 
 [[package]]
 name = "tba-profile-workload-credential-wimse-wit"
-version = "0.4.0.dev2"
+version = "0.4.0.dev3"
 source = { editable = "pkgs/55-profiles/tba-profile-workload-credential-wimse-wit" }
 dependencies = [
     { name = "tba-concrete-jwt" },
@@ -7070,7 +7070,7 @@ requires-dist = [
     { name = "tba-concrete-jwt", specifier = "==0.4.0.dev2" },
     { name = "tba-concrete-wit", specifier = "==0.4.0.dev2" },
     { name = "tba-protocol-workload-wimse-identifier", specifier = "==0.4.0.dev2" },
-    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev2" },
+    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev3" },
 ]
 
 [[package]]
@@ -7086,13 +7086,13 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "cryptography", specifier = ">=45" },
-    { name = "tba-profile-workload-credential-wimse-wit", specifier = "==0.4.0.dev2" },
-    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev2" },
+    { name = "tba-profile-workload-credential-wimse-wit", specifier = "==0.4.0.dev3" },
+    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev3" },
 ]
 
 [[package]]
 name = "tba-profile-workload-proof-wimse-wpt"
-version = "0.4.0.dev2"
+version = "0.4.0.dev3"
 source = { editable = "pkgs/55-profiles/tba-profile-workload-proof-wimse-wpt" }
 dependencies = [
     { name = "tba-concrete-jwt" },
@@ -7105,8 +7105,8 @@ dependencies = [
 requires-dist = [
     { name = "tba-concrete-jwt", specifier = "==0.4.0.dev2" },
     { name = "tba-primitives-identity", specifier = "==0.4.0.dev2" },
-    { name = "tba-profile-workload-credential-wimse-wit", specifier = "==0.4.0.dev2" },
-    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev2" },
+    { name = "tba-profile-workload-credential-wimse-wit", specifier = "==0.4.0.dev3" },
+    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev3" },
 ]
 
 [[package]]
@@ -7780,7 +7780,7 @@ requires-dist = [
     { name = "tba-concrete-jwt-svid-credential", specifier = "==0.4.0.dev2" },
     { name = "tba-concrete-x509-svid-credential", specifier = "==0.4.0.dev2" },
     { name = "tba-contracts-security-trust", specifier = "==0.1.0" },
-    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev2" },
+    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev3" },
 ]
 
 [[package]]
@@ -8455,7 +8455,7 @@ requires-dist = [
 
 [[package]]
 name = "tba-provider-jose-cryptography"
-version = "0.4.0.dev2"
+version = "0.4.0.dev3"
 source = { editable = "pkgs/20-providers/tba-provider-jose-cryptography" }
 dependencies = [
     { name = "cryptography" },

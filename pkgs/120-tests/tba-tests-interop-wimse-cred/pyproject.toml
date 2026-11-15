@@ -8,9 +8,9 @@ license = "Apache-2.0"
 dependencies = [
     "cryptography>=45.0.0",
     "tba-primitives-identity==0.4.0.dev2",
-    "tba-profile-workload-credential-wimse-wit==0.4.0.dev2",
-    "tba-profile-workload-proof-wimse-wpt==0.4.0.dev2",
-    "tba-provider-jose-cryptography==0.4.0.dev2",
+    "tba-profile-workload-credential-wimse-wit==0.4.0.dev3",
+    "tba-profile-workload-proof-wimse-wpt==0.4.0.dev3",
+    "tba-provider-jose-cryptography==0.4.0.dev3",
 ]
 
 [dependency-groups]
