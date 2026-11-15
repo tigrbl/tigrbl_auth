@@ -29,7 +29,7 @@ body: |-
   
   ## Verification
   
-  - `pkgs/120-tests/tba-tests-certification/tests/unit/test_truthfulness_alignment.py`
+  - `pkgs/120-tests/tba-tests-governance-release-certification/tests/unit/test_truthfulness_alignment.py`
   - `pkgs/120-tests/tba-tests-architecture/tests/unit/test_ssot_document_authority.py`
 spec_kind: "governance"
 adr_ids: []

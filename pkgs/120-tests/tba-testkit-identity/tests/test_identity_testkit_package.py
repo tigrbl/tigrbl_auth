@@ -70,7 +70,7 @@ def test_identity_testkit_package_matrix_cells_cover_supported_versions() -> Non
         "tba-testkit-identity",
         test_paths=(
             "pkgs/120-tests/tba-testkit-identity/tests",
-            "pkgs/120-tests/tba-tests-certification/tests/interop",
+            "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop",
         ),
         cross_cutting=True,
     )

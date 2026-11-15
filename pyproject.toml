@@ -577,7 +577,7 @@ testpaths = [
     "pkgs/120-tests/tba-tests-runtime/tests",
     "pkgs/120-tests/tba-tests-operator-cli/tests",
     "pkgs/120-tests/tba-tests-api-contracts/tests",
-    "pkgs/120-tests/tba-tests-certification/tests",
+    "pkgs/120-tests/tba-tests-governance-release-certification/tests",
     "pkgs/120-tests/tba-tests-release/tests",
     "pkgs/120-tests/tba-tests-architecture/tests",
     "pkgs/120-tests/tba-tests-backend-apps/tests",
@@ -610,7 +610,7 @@ testpaths = [
     "pkgs/120-tests/tba-tests-vc-jose-cose/tests",
     "pkgs/120-tests/tba-tests-vcdm/tests",
     "pkgs/120-tests/tba-tests-webauthn/tests",
-    "pkgs/120-tests/tba-tests-x509/tests",
+    "pkgs/120-tests/tba-tests-x509-certificates/tests",
     "pkgs/120-tests/tba-testkit-workload-credential-conformance/tests",
 ]
 norecursedirs = ["combined", "scripts", ".pytest_cache", "__pycache__", ".uv-cache", ".venv", "dist", ".benchmarks"]

@@ -1,0 +1,9 @@
+[project]
+name = "tba-tests-x509-certificates"
+version = "0.4.0.dev2"
+description = "X.509 certificate parsing, trust anchors, revocation, and path validation."
+requires-python = ">=3.10,<3.16"
+license = "Apache-2.0"
+
+[tool.uv]
+package = false

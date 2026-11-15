@@ -423,7 +423,7 @@ def _package_test_paths(package: Package) -> list[Path]:
     if package.name == TESTKIT_PACKAGE_NAME:
         candidates.extend((
             layer / "tba-testkit-identity" / "tests",
-            layer / "tba-tests-certification" / "tests" / "interop",
+            layer / "tba-tests-governance-release-certification" / "tests" / "interop",
         ))
     return [path for path in candidates if path.is_dir()]
 

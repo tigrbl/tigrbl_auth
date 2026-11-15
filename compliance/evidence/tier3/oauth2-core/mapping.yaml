@@ -15,9 +15,9 @@ targets:
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
   - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
   - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
-  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py
-  - pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_matrix_artifacts.py
-  - pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py
+  - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py
+  - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py
+  - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py
   endpoint_mapping:
     current:
     - /authorize

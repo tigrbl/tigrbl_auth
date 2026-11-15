@@ -478,7 +478,7 @@ _AUXILIARY_TEST_CATEGORY_BY_PREFIX = {
     "tests/uix/": "e2e",
 }
 _AUXILIARY_TEST_CATEGORY_BY_PATH = {
-    "pkgs/120-tests/tba-tests-certification/tests/unit/test_peer_bundle_completeness.py": "interop",
+    "pkgs/120-tests/tba-tests-governance-release-certification/tests/unit/test_peer_bundle_completeness.py": "interop",
 }
 
 

@@ -162,25 +162,25 @@ def _negative_tests_for_claim(claim: Mapping[str, Any], partitioned_tests: Mappi
             "dpop",
             "mtls",
             "resource_server_consumer_boundary",
-            "certification_attack_paths",
+            "oauth_security_policy_rejections",
             "hardening_sender_constraints",
             "hardening_discovery_contract",
         )
     if "par" in claim_text or "rfc 9126" in claim_text:
         _match(
-            "certification_attack_paths",
+            "oauth_security_policy_rejections",
             "hardening_runtime_enforcement",
             "rfc9126",
             "pushed_authorization",
             "hardening_cluster_b",
         )
     if "jar" in claim_text or "rfc 9101" in claim_text:
-        _match("certification_attack_paths", "rfc9101", "hardening_cluster_b")
+        _match("oauth_security_policy_rejections", "rfc9101", "hardening_cluster_b")
     if "rar" in claim_text or "rfc 9396" in claim_text:
-        _match("certification_attack_paths", "rfc9396", "hardening_cluster_b")
+        _match("oauth_security_policy_rejections", "rfc9396", "hardening_cluster_b")
     if any(token in claim_text for token in ("issuer", "mix", "rfc 9207", "openid_configuration")):
         _match(
-            "certification_attack_paths",
+            "oauth_security_policy_rejections",
             "issuer_confusion",
             "rfc9207",
             "realm_isolation",
@@ -196,12 +196,12 @@ def _negative_tests_for_claim(claim: Mapping[str, Any], partitioned_tests: Mappi
             "hardening_discovery_contract",
         )
     if "password" in claim_text:
-        _match("certification_attack_paths", "hardening_runtime_enforcement", "backends", "crypto")
+        _match("oauth_security_policy_rejections", "hardening_runtime_enforcement", "backends", "crypto")
     if "token_exchange" in claim_text or "rfc 8693" in claim_text:
-        _match("token_exchange", "certification_attack_paths", "resource_server_consumer_boundary")
+        _match("token_exchange", "oauth_security_policy_rejections", "resource_server_consumer_boundary")
     if any(token in claim_text for token in ("security_bcp", "rfc 9700", "hardening", "fapi2_security", "security")):
         _match(
-            "certification_attack_paths",
+            "oauth_security_policy_rejections",
             "hardening_runtime_enforcement",
             "rfc9700",
             "fapi_runtime_profile",
@@ -213,7 +213,7 @@ def _negative_tests_for_claim(claim: Mapping[str, Any], partitioned_tests: Mappi
         _match("peer_counterpart_catalog", "peer_matrix_artifacts", "tier4_promotion_fail_closed")
     if not selected and _security_sensitive_claim(claim):
         _match(
-            "certification_attack_paths",
+            "oauth_security_policy_rejections",
             "hardening_runtime_enforcement",
             "issuer_confusion",
             "rfc6750_bearer_token",

@@ -13,7 +13,7 @@ modules:
 tests:
 - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_tigrcorn.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
-- pkgs/120-tests/tba-tests-certification/tests/interop/test_runner_profile_catalog_completeness.py
+- pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_runner_profile_catalog_completeness.py
 contracts:
 - contracts\runtime_profile_report.json
 - contracts\cli_contract.json

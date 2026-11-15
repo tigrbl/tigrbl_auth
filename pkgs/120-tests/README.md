@@ -5,14 +5,20 @@ Production packages must not depend on this layer. Repository-wide suites move
 here by capability. During migration the root pytest configuration collects both
 the migrated suites and the remaining root tests.
 
+Use **governance certification** for claim and evidence checks and **release
+certification** for release evidence and validation gates. Use **X.509
+certificate** for parsing, trust, revocation, and path validation. Use the
+protocol name with **mTLS** or **WIC** for certificate-based authentication
+checks. The pytest option `--certification-lane` selects the evidence lane.
+
 | Package | Scope |
 | --- | --- |
-| `tba-tests-wimse` | WIMSE identifiers, WIC, mTLS, WIT, WPT, and workload proof claims |
+| `tba-tests-wimse` | WIMSE identifiers, WIC certificate profiles, mTLS peer authentication, WIT, and WPT |
 | `tba-tests-spiffe` | SPIFFE providers and SVID profiles, including the separately marked CWT extension module |
 | `tba-tests-workload-composition` | Workload protocol boundaries, specification ownership and runtime composition |
 | `tba-tests-storage` | Storage components, migration portability, persistence durability, and table ownership and operations |
 | `tba-tests-authorization` | Authorization invariants, policy evaluation and replay, delegation, and DID and workload policy contracts |
-| `tba-tests-oauth` | OAuth grants, extensions, HTTP bindings, and security profiles |
+| `tba-tests-oauth` | OAuth grants, HTTP bindings, security policies, and RFC 8705 mTLS client authentication |
 | `tba-tests-oidc` | OpenID Connect discovery, ID tokens, UserInfo, and logout |
 | `tba-tests-browser-session` | Browser login, cookies, consent, and session lifecycle |
 | `tba-tests-platform-iam` | IAM contracts, conformance, policy decisions, RP sessions, performance, and UI wiring |
@@ -21,7 +27,7 @@ the migrated suites and the remaining root tests.
 | `tba-tests-runtime` | Server runners, runtime settings, and capability composition |
 | `tba-tests-operator-cli` | CLI contracts, operator commands, and lifecycle conformance |
 | `tba-tests-api-contracts` | OpenAPI, OpenRPC, route schemas, and router ownership |
-| `tba-tests-certification` | Certification evidence, validated execution, and peer catalogs |
+| `tba-tests-governance-release-certification` | Governance claims, release certification evidence, validated execution, and peer catalogs |
 | `tba-tests-release` | Release gates, signing, package matrices, and installation checks |
 | `tba-tests-architecture` | Package taxonomy, layer boundaries, and SSOT governance |
 | `tba-tests-backend-apps` | Backend application package, realm, and live deployment checks |
@@ -53,7 +59,7 @@ the migrated suites and the remaining root tests.
 | `tba-tests-bimi` | BIMI discovery, DNS/DMARC readiness, VMC and CMC verification, and audit integration |
 | `tba-tests-communications-identity` | Shared sending-domain assessment and auditing |
 | `tba-tests-dns` | TXT record resolution and DNS contract compatibility |
-| `tba-tests-x509` | X.509 logotype parsing and certificate path evidence |
+| `tba-tests-x509-certificates` | X.509 certificate parsing, trust anchors, revocation status, and path validation |
 | `tba-testkit-workload-credential-conformance` | Shared workload vectors, certificate fixtures and clean-wheel runner |
 | `tba-testkit-wimse-cred-interop` | Opt-in Cred peer suite |
 | `tba-testkit-identity` | Shared identity fixtures |

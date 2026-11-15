@@ -16,7 +16,7 @@
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
 - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
 - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
-- pkgs/120-tests/tba-tests-certification/tests/unit/test_feature_completeness_checkpoint.py
+- pkgs/120-tests/tba-tests-governance-release-certification/tests/unit/test_feature_completeness_checkpoint.py
 
 ## Result
 

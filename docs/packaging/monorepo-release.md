@@ -99,7 +99,7 @@ Its package matrix cells additionally include:
 
 ```text
 pkgs/120-tests/tba-testkit-identity/tests
-pkgs/120-tests/tba-tests-certification/tests/interop
+pkgs/120-tests/tba-tests-governance-release-certification/tests/interop
 ```
 
 Those cells pass `--certification-lane all` through the isolated runner so pytest collects the testkit's interop checks.

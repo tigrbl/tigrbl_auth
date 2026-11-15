@@ -115,7 +115,7 @@ def build_package_python_matrix(
         if cross_cutting:
             test_paths.extend((
                 "pkgs/120-tests/tba-testkit-identity/tests",
-                "pkgs/120-tests/tba-tests-certification/tests/interop",
+                "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop",
             ))
         test_paths = [path for path in test_paths if (repo_root / path).is_dir()]
         for python_version in python_versions:

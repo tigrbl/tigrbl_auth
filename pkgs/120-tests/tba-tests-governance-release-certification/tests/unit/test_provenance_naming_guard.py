@@ -41,7 +41,7 @@ RETAINED_PHASE_TEST_PATHS = {
     "pkgs/120-tests/tba-tests-release/tests/unit/test_release_posture_plane.py",
     "pkgs/120-tests/tba-tests-governance-composition/tests/unit/test_entitlements_and_access_reviews.py",
     "pkgs/120-tests/tba-tests-runtime/tests/unit/test_advanced_identity_delivery_summary.py",
-    "pkgs/120-tests/tba-tests-certification/tests/unit/test_provenance_naming_guard.py",
+    "pkgs/120-tests/tba-tests-governance-release-certification/tests/unit/test_provenance_naming_guard.py",
 }
 
 

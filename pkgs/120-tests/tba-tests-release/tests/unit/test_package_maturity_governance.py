@@ -61,7 +61,7 @@ def test_package_maturity_t2_builds_complete_package_python_matrix() -> None:
     assert all(cell["cross_cutting"] == "true" for cell in testkit_cells)
     assert all("pkgs/120-tests/tba-testkit-identity/tests" in cell["package_test_paths"] for cell in testkit_cells)
     assert all("tests/integration" not in cell["package_test_paths"] for cell in testkit_cells)
-    assert all("pkgs/120-tests/tba-tests-certification/tests/interop" in cell["package_test_paths"] for cell in testkit_cells)
+    assert all("pkgs/120-tests/tba-tests-governance-release-certification/tests/interop" in cell["package_test_paths"] for cell in testkit_cells)
 
 
 def test_package_maturity_t2_gate_passes_with_claim_test_links() -> None:

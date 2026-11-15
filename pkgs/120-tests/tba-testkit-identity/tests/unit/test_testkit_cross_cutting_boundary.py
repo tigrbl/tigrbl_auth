@@ -77,7 +77,7 @@ def test_testkit_t1_seeded_fixtures_vectors_and_package_matrix() -> None:
         "tba-testkit-identity",
         test_paths=(
             "pkgs/120-tests/tba-testkit-identity/tests",
-            "pkgs/120-tests/tba-tests-certification/tests/interop",
+            "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop",
         ),
         cross_cutting=True,
     )

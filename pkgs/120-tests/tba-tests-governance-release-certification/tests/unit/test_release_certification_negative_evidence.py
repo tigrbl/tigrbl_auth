@@ -5,7 +5,7 @@ from tba_cli_identity.cli.reports._execution_status import _clean_check_ignored,
 
 PARTITIONED_TESTS = {
     "security-negative": [
-        "pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py",
+        "pkgs/120-tests/tba-tests-oauth/tests/negative/test_oauth_security_policy_rejections.py",
         "pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py",
         "pkgs/120-tests/tba-tests-oauth/tests/security/test_issuer_confusion_resistance.py",
     ],
@@ -21,8 +21,8 @@ PARTITIONED_TESTS = {
         "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py",
     ],
     "interop": [
-        "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py",
-        "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py",
+        "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py",
+        "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py",
     ],
 }
 
@@ -36,7 +36,7 @@ def test_negative_proof_classifier_matches_real_attack_path_files() -> None:
 
     selected = _negative_tests_for_claim(claim, PARTITIONED_TESTS)
 
-    assert "pkgs/120-tests/tba-tests-oauth/tests/negative/test_certification_attack_paths.py" in selected
+    assert "pkgs/120-tests/tba-tests-oauth/tests/negative/test_oauth_security_policy_rejections.py" in selected
     assert "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9126_par.py" in selected
 
 
@@ -75,8 +75,8 @@ def test_negative_proof_classifier_matches_external_profile_fail_closed_files() 
 
     selected = _negative_tests_for_claim(claim, PARTITIONED_TESTS)
 
-    assert "pkgs/120-tests/tba-tests-certification/tests/interop/test_peer_counterpart_catalog.py" in selected
-    assert "pkgs/120-tests/tba-tests-certification/tests/interop/test_tier4_promotion_fail_closed.py" in selected
+    assert "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py" in selected
+    assert "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py" in selected
 
 
 def test_generated_issue_registry_is_not_release_signing_source_dirtiness() -> None:
