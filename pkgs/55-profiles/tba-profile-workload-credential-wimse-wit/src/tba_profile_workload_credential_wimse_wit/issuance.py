@@ -1,4 +1,5 @@
 from collections.abc import Mapping
+from urllib.parse import urlsplit
 
 from tba_protocol_workload_wimse_identifier import WorkloadIdentifier
 from tba_provider_jose_cryptography.jws import (
@@ -12,12 +13,13 @@ def issue_wit(
     signer: ProtectedEnvelopeIssuerPort,
     *,
     subject: str,
-    confirmation_jwk: Mapping[str, str],
+    confirmation_jwk: Mapping[str, object],
     issuer_key_reference: str,
     issuer_key_id: str,
     issuer_algorithm: str,
     issued_at: int,
     expires_at: int,
+    issuer: str | None = None,
 ) -> str:
     """Issue a workload credential using the configured trust-domain signer."""
     if (
@@ -44,6 +46,10 @@ def issue_wit(
         "iat": issued_at,
         "exp": expires_at,
     }
+    if issuer is not None:
+        if not urlsplit(issuer).scheme:
+            raise ValueError("WIT issuer must be a URI")
+        claims["iss"] = issuer
     return sign_compact_jwt(
         signer,
         claims,

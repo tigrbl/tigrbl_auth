@@ -21,6 +21,11 @@ from .capability_assembly import (
     validate_protocol_capabilities,
 )
 from .composition.webauthn import WebAuthnComposition, build_webauthn_composition
+from .composition.workload_identity import (
+    WorkloadIdentityComposition,
+    WorkloadIdentityRuntimeConfig,
+    build_workload_identity_composition,
+)
 from .registry import (
     get_runner_adapter,
     iter_runner_adapters,
@@ -65,6 +70,9 @@ __all__ = [
     "validate_protocol_capabilities",
     "WebAuthnComposition",
     "build_webauthn_composition",
+    "WorkloadIdentityComposition",
+    "WorkloadIdentityRuntimeConfig",
+    "build_workload_identity_composition",
     "ENGINE",
     "bootstrap_runtime_engine",
     "dsn",

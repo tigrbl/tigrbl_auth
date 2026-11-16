@@ -36,11 +36,46 @@ def verify_wpt(
     presented_headers=(),
     bound_token_headers=(),
 ):
+    # Keep the public subject argument for existing callers. The replay key uses
+    # the signed WIT digest, which is also available to the carrier-neutral port.
+    token_digests = {}
+    for name, value in presented_headers:
+        name = name.lower()
+        token_digests[name] = None if name in token_digests else value.strip()
+    required = {name.lower() for name in bound_token_headers} & token_digests.keys()
+    return _verify_wpt(
+        proof,
+        wit_digest=_hash_token(wit_serialized),
+        confirmation_key=confirmation_key,
+        audience=audience,
+        now=now,
+        replay_store=replay_store,
+        max_lifetime=max_lifetime,
+        token_digests=token_digests,
+        required=required,
+        digest_values=True,
+    )
+
+
+def _verify_wpt(
+    proof,
+    *,
+    wit_digest,
+    confirmation_key,
+    audience,
+    now,
+    replay_store,
+    token_digests,
+    max_lifetime=300,
+    required=(),
+    digest_values=False,
+    expected_proof_id=None,
+):
     token = decode_jwt_unverified(proof)
     headers = token.jws.protected_headers
     if headers.get("typ") not in ("wpt+jwt", "application/wpt+jwt"):
         raise ValueError("invalid WPT media type")
-    if headers["alg"] != confirmation_key.get("alg"):
+    if not headers.get("alg") or headers["alg"] != confirmation_key.get("alg"):
         raise ValueError("WPT algorithm does not match the confirmation key")
     claims = token.claims
     target = _target_audience(audience)
@@ -65,41 +100,35 @@ def verify_wpt(
     if (
         not isinstance(proof_id, str)
         or not proof_id
-        or claims.get("wth") != _hash_token(wit_serialized)
+        or (expected_proof_id is not None and proof_id != expected_proof_id)
+        or claims.get("wth") != wit_digest
     ):
         raise ValueError("invalid WPT identifier or WIT binding")
-    transaction_tokens = [
-        value.strip()
-        for name, value in presented_headers
-        if name.lower() == "txn-token"
-    ]
-    if transaction_tokens or "tth" in claims:
-        if len(transaction_tokens) != 1 or claims.get("tth") != _hash_token(
-            transaction_tokens[0]
-        ):
+
+    def digest(name):
+        value = token_digests.get(name)
+        return _hash_token(value) if digest_values and value is not None else value
+
+    if "txn-token" in token_digests or "tth" in claims:
+        transaction_digest = digest("txn-token")
+        if not transaction_digest or claims.get("tth") != transaction_digest:
             raise ValueError("WPT transaction token binding mismatch")
-    required_bindings = {
-        name.lower()
-        for name in bound_token_headers
-        if any(field.lower() == name.lower() for field, _ in presented_headers)
-    }
-    if required_bindings or "oth" in claims:
+    if required or "oth" in claims:
         other = claims.get("oth")
-        if not isinstance(other, dict) or not required_bindings.issubset(other):
+        if not isinstance(other, dict) or not set(required).issubset(other):
             raise ValueError("WPT required token binding is missing")
-        for name, digest in other.items():
-            values = [
-                value.strip()
-                for field, value in presented_headers
-                if field.lower() == name
-            ]
-            if len(values) != 1 or digest != _hash_token(values[0]):
+        for name, expected_digest in other.items():
+            actual_digest = digest(name)
+            if not actual_digest or expected_digest != actual_digest:
                 raise ValueError("WPT additional token binding mismatch")
     verify_public_jws(proof, confirmation_key)
-    replay_key = _hash_token(f"{subject}\n{proof_id}")
-    if not replay_store.check_and_store(
+    replay_key = base64url_encode(
+        hashlib.sha256(f"{wit_digest}\n{proof_id}".encode()).digest()
+    )
+    accepted = replay_store.check_and_store(
         f"wimse-wpt:{replay_key}", now=int(now), ttl_s=ceil(expires) - int(now)
-    ):
+    )
+    if accepted is not True:
         raise ValueError("WPT replay rejected")
     return token
 

@@ -1,4 +1,5 @@
 import pytest
+from tba_provider_replay_memory import MemoryReplayCheckProvider
 from tba_runtime_identity.composition.workload_identity import (
     WorkloadIdentityRuntimeConfig,
     build_workload_identity_composition,
@@ -25,8 +26,15 @@ def test_wit_svid_requires_wit_wpt_and_exact_revisions() -> None:
     config = WorkloadIdentityRuntimeConfig(
         enable_wimse_wit=True, enable_wimse_wpt=True, enable_spiffe_wit_svid=True
     )
+    with pytest.raises(ValueError, match="wpt_replay_store"):
+        build_workload_identity_composition(config, dependencies=deps())
     assert build_workload_identity_composition(
-        config, dependencies=deps()
+        config,
+        dependencies={
+            **deps(),
+            "wit_trust_by_domain": {"example.org": [{"kid": "fixture"}]},
+            "wpt_replay_store": MemoryReplayCheckProvider(),
+        },
     ).active_profiles == ("wit", "wpt", "wit-svid")
 
 

@@ -1,6 +1,6 @@
 from collections.abc import Mapping
 
-REQUIRED_WIT_CLAIMS = frozenset({"iss", "sub", "cnf", "exp", "iat"})
+REQUIRED_WIT_CLAIMS = frozenset({"sub", "cnf", "exp"})
 
 
 def validate_wit(headers: Mapping[str, object], claims: Mapping[str, object]) -> None:
