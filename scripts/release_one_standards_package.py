@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import shutil
 import re
@@ -109,8 +110,10 @@ def main() -> None:
         clean_install=result,
         publisher=dict(
             repository="tigrbl/tigrbl_auth",
-            workflow="monorepo-package-release.yml",
-            environment=f"pypi-{row['name']}",
+            workflow=os.environ.get(
+                "PUBLISHER_WORKFLOW", "monorepo-package-release.yml"
+            ),
+            environment=os.environ.get("PUBLISHER_ENVIRONMENT", f"pypi-{row['name']}"),
         ),
         source_artifact_run=args.source_artifact_run,
         source_commit=manifest["source_commit"],

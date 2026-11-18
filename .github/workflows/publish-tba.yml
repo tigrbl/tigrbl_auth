@@ -2,38 +2,69 @@ name: publish-tba
 
 on:
   workflow_dispatch:
+    inputs:
+      standards_artifact_run:
+        description: Validated repaired-package artifact build run.
+        required: true
 
 permissions:
   contents: read
 
+concurrency:
+  group: monorepo-package-release-trusted-sequential
+  cancel-in-progress: false
+
 jobs:
-  build:
+  publish-one-standards-package:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: pypi
+      url: https://pypi.org/project/tba/
+    permissions:
+      actions: read
+      contents: write
+      id-token: write
+    env:
+      PUBLISHER_WORKFLOW: publish-tba.yml
+      PUBLISHER_ENVIRONMENT: pypi
     steps:
       - uses: actions/checkout@v6
-      - name: Build tba distributions
-        uses: cobycloud/actions/actions/python-package-build@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v6
         with:
           python-version: "3.12"
-          project-path: pkgs/70-facade/tba
-          out-dir: dist/tba
-          upload-artifact: "true"
-          artifact-name: python-dist-tba
-
-  publish:
-    needs: build
-    runs-on: ubuntu-latest
-    environment: pypi
-    permissions:
-      contents: read
-      id-token: write
-    steps:
       - uses: actions/download-artifact@v8
         with:
-          name: python-dist-tba
-          path: dist/tba
-      - name: Publish tba to PyPI with Trusted Publishing
+          name: package-standards-distributions
+          run-id: ${{ inputs.standards_artifact_run }}
+          github-token: ${{ github.token }}
+          path: standards-dist
+      - name: Inspect and stage exactly one previously validated release
+        env:
+          STANDARDS_PLAN: .ssot/evidence/trusted-readme-release-plan-20261118.json
+          SELECTED_PACKAGE: tba
+          SOURCE_ARTIFACT_RUN: ${{ inputs.standards_artifact_run }}
+        run: |
+          uv run --no-project python scripts/verify_readme_standards.py
+          uv run --no-project python scripts/release_one_standards_package.py --plan "$STANDARDS_PLAN" --dist standards-dist --package "$SELECTED_PACKAGE" --phase prepare --source-artifact-run "$SOURCE_ARTIFACT_RUN"
+      - name: Publish the selected package with Trusted Publishing
         uses: cobycloud/actions/actions/pypi-trusted-publish@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
-          packages-dir: dist/tba
+          packages-dir: prepared-dist
           skip-existing: "true"
+      - name: Verify exact PyPI hashes and a clean PyPI-only installation
+        env:
+          STANDARDS_PLAN: .ssot/evidence/trusted-readme-release-plan-20261118.json
+          SELECTED_PACKAGE: tba
+          SOURCE_ARTIFACT_RUN: ${{ inputs.standards_artifact_run }}
+        run: uv run --no-project python scripts/release_one_standards_package.py --plan "$STANDARDS_PLAN" --dist standards-dist --package "$SELECTED_PACKAGE" --phase verify --source-artifact-run "$SOURCE_ARTIFACT_RUN"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: trusted-release-tba
+          path: |
+            trusted-release-receipt.json
+            clean-install-check/*/install.log
+          if-no-files-found: warn
