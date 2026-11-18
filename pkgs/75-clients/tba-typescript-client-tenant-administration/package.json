@@ -6,7 +6,23 @@
   "exports": "./src/index.ts",
   "files": [
     "src",
-    "package.json"
+    "package.json",
+    "LICENSE",
+    "NOTICE",
+    "README.md"
   ],
-  "description": "Transport-injected TypeScript client for tenant administration APIs."
+  "description": "Transport-injected TypeScript client for tenant administration APIs.",
+  "author": {
+    "name": "Jacob Stewart",
+    "email": "jacob@swarmauri.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tigrbl/tigrbl_auth.git",
+    "directory": "pkgs/75-clients/tba-typescript-client-tenant-administration"
+  },
+  "homepage": "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/75-clients/tba-typescript-client-tenant-administration#readme",
+  "bugs": {
+    "url": "https://github.com/tigrbl/tigrbl_auth/issues"
+  }
 }

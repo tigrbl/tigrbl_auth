@@ -43,6 +43,10 @@ jobs:
           python-version: ${{ inputs.python-version }}
       - name: Verify shared README headers
         run: python scripts/render_readme_branding.py --check
+      - name: Verify package metadata, legal files, and counters
+        run: python scripts/verify_package_standards.py
+      - name: Verify complete README sections, branding, and badges
+        run: python scripts/verify_readme_standards.py
       - name: Install toolchain
         shell: bash
         run: python -m pip install --upgrade pip tox uv

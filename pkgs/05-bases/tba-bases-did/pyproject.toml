@@ -1,6 +1,6 @@
 [project]
 name = "tba-bases-did"
-version = "0.4.0.dev2"
+version = "0.4.0.dev3"
 description = "Reusable DID resolution and dereferencing bases."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -11,11 +11,29 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3.15",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Development Status :: 3 - Alpha",
+    "Typing :: Typed",
 ]
 license = "Apache-2.0"
-dependencies = ["tba-contracts-did==0.4.0.dev2"]
+dependencies = ["tba-contracts-did==0.4.0.dev3"]
+license-files = ["LICENSE", "NOTICE"]
+keywords = ["tigrbl", "tba", "identity"]
+
+[[project.authors]]
+name = "Jacob Stewart"
+email = "jacob@swarmauri.com"
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/05-bases/tba-bases-did#readme"
+Documentation = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/05-bases/tba-bases-did#readme"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/05-bases/tba-bases-did"
+Issues = "https://github.com/tigrbl/tigrbl_auth/issues"
+PyPI = "https://pypi.org/project/tba-bases-did/"
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=2.2.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 [tool.poetry]
 packages = [{ include = "tba_bases_did", from = "src" }]

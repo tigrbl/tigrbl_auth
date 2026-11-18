@@ -1,6 +1,6 @@
 [project]
 name = "tba-app-backend-policy-decision"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 description = "Deployable platform policy decision service composition."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -11,11 +11,28 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3.15",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Development Status :: 3 - Alpha",
 ]
 license = "Apache-2.0"
-dependencies = ["tba-router-policy-decision==0.4.0.dev3"]
+dependencies = ["tba-router-policy-decision==0.4.0.dev4"]
+license-files = ["LICENSE", "NOTICE"]
+keywords = ["tigrbl", "tba", "identity"]
+
+[[project.authors]]
+name = "Jacob Stewart"
+email = "jacob@swarmauri.com"
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/90-backend-apps/tba-app-backend-policy-decision#readme"
+Documentation = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/90-backend-apps/tba-app-backend-policy-decision#readme"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/90-backend-apps/tba-app-backend-policy-decision"
+Issues = "https://github.com/tigrbl/tigrbl_auth/issues"
+PyPI = "https://pypi.org/project/tba-app-backend-policy-decision/"
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=2.2.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 [tool.poetry]
 packages = [{include = "tba_app_backend_policy_decision", from = "src"}]

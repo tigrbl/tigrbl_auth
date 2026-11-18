@@ -1,13 +1,13 @@
 import json
 
-from tba_testkit_workload_credential_conformance.fixtures import (
+from tba_tests_workload_credential_conformance.fixtures import (
     exercise_wimse_mtls_round_trip,
 )
-from tba_testkit_workload_credential_conformance.profiles import (
+from tba_tests_workload_credential_conformance.profiles import (
     exercise_wic,
     exercise_wimse,
 )
-from tba_testkit_workload_credential_conformance.wheels import run_installed
+from tba_tests_workload_credential_conformance.wheels import run_installed
 
 WIMSE = (
     "tba-profile-workload-credential-wimse-wit",
@@ -399,7 +399,7 @@ def test_t3_wimse_http_round_trip(wheelhouse, tmp_path, record_property):
 
 
 def test_t3_wimse_mtls_round_trip(wheelhouse, tmp_path, record_property):
-    from tba_testkit_workload_credential_conformance.fixtures import (
+    from tba_tests_workload_credential_conformance.fixtures import (
         _certificate,
         _mutual_tls_peers,
         _tls_context,

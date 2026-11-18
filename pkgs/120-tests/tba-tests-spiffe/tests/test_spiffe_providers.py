@@ -10,7 +10,7 @@ from tba_contracts_identity.workloads import (
 from tba_protocol_workload_spiffe_svid import verify_jwt_svid, verify_x509_svid
 from tba_provider_spiffe_bundle import VersionedSpiffeBundleProvider
 from tba_provider_spiffe_workload_api import LocalSpiffeWorkloadApiProvider
-from tba_testkit_workload_credential_conformance.fixtures import (
+from tba_tests_workload_credential_conformance.fixtures import (
     PathValidator,
     _certificate,
     _jwk,

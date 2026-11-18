@@ -1,14 +1,27 @@
-name: monorepo-package-release-token
+name: monorepo-package-release-trusted-sequential
 
 on:
   workflow_dispatch:
     inputs:
+      standards_plan:
+        description: Committed standards plan; package must select exactly one prepared release.
+        required: false
+        default: ""
       package:
         description: Package name to tag, or all.
         required: false
         default: all
+      bump_type:
+        description: Semver bump to apply before build, publish, and release.
+        required: false
+        default: patch
+        type: choice
+        options:
+          - patch
+          - minor
+          - finalize
       version:
-        description: Optional version. When set, it must match the package pyproject version.
+        description: Optional exact version to set before release. Overrides bump_type.
         required: false
         default: ""
       force:
@@ -19,26 +32,98 @@ on:
         options:
           - "false"
           - "true"
-  push:
-    tags:
-      - "*==*"
 
 permissions:
   contents: read
 
 concurrency:
-  group: monorepo-package-release-token-${{ github.ref }}
+  group: monorepo-package-release-trusted-sequential
   cancel-in-progress: false
 
 jobs:
+  bump-package-versions:
+    if: ${{ inputs.standards_plan == '' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+      count: ${{ steps.matrix.outputs.count }}
+      sha: ${{ steps.revision.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Configure git identity
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Bump selected package versions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib
+          import subprocess
+          import sys
+          import tomllib
+
+          root = pathlib.Path(".").resolve()
+          selected = "${{ inputs.package }}"
+          exact_version = "${{ inputs.version }}"
+          bump_type = "${{ inputs.bump_type }}"
+          packages = []
+          for pyproject in sorted((root / "pkgs").glob("*/*/pyproject.toml")):
+              if selected == "all" and pyproject.relative_to(root / "pkgs").parts[0] == "deprecated":
+                  continue
+              data = tomllib.loads(pyproject.read_text(encoding="utf-8"))
+              name = data["project"]["name"]
+              if selected == "all" or selected == name:
+                  packages.append((name, pyproject))
+          if not packages:
+              raise SystemExit(f"unknown package {selected!r}")
+          for name, pyproject in packages:
+              args = [sys.executable, "scripts/bump_pyproject_version.py"]
+              if exact_version:
+                  args.extend(["--set", exact_version])
+              else:
+                  args.extend(["--bump", bump_type])
+              args.append(str(pyproject))
+              print(f"::notice::Bumping {name} via {' '.join(args)}")
+              subprocess.run(args, check=True)
+          PY
+      - name: Commit and push version bumps
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add pkgs/*/*/pyproject.toml
+          if git diff --cached --quiet; then
+            echo "::notice::No version changes to commit."
+          else
+            git commit -m "Bump trusted release package versions"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+      - name: Build bumped package matrix
+        id: matrix
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/monorepo_release.py release-matrix --package "${{ inputs.package }}"
+      - name: Capture bumped revision
+        id: revision
+        shell: bash
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
   create-package-tags:
-    if: ${{ github.event_name == 'workflow_dispatch' }}
+    needs: bump-package-versions
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v6
         with:
+          ref: ${{ needs.bump-package-versions.outputs.sha }}
           fetch-depth: 0
       - name: Configure git identity
         shell: bash
@@ -50,32 +135,26 @@ jobs:
         run: |
           set -euo pipefail
           args=(--package "${{ inputs.package }}")
-          if [[ -n "${{ inputs.version }}" ]]; then
-            args+=(--version "${{ inputs.version }}")
-          fi
           if [[ "${{ inputs.force }}" == "true" ]]; then
             args+=(--force)
           fi
           python scripts/monorepo_release.py create-tags "${args[@]}"
 
   resolve-dispatch-matrix:
-    if: ${{ github.event_name == 'workflow_dispatch' }}
-    needs: create-package-tags
+    needs:
+      - bump-package-versions
+      - create-package-tags
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.matrix.outputs.matrix }}
-      count: ${{ steps.matrix.outputs.count }}
+      matrix: ${{ needs.bump-package-versions.outputs.matrix }}
+      count: ${{ needs.bump-package-versions.outputs.count }}
+      sha: ${{ needs.bump-package-versions.outputs.sha }}
     steps:
-      - uses: actions/checkout@v6
-      - name: Build dispatch package matrix
-        id: matrix
-        shell: bash
-        run: |
-          set -euo pipefail
-          python scripts/monorepo_release.py test-matrix --package "${{ inputs.package }}" --python-version 3.12
+      - name: Use bumped matrix
+        run: echo "Using bumped package matrix."
 
   build-dispatch-package:
-    if: ${{ github.event_name == 'workflow_dispatch' && needs.resolve-dispatch-matrix.outputs.count != '0' }}
+    if: ${{ needs.resolve-dispatch-matrix.outputs.count != '0' }}
     needs: resolve-dispatch-matrix
     runs-on: ubuntu-latest
     strategy:
@@ -84,17 +163,25 @@ jobs:
         package: ${{ fromJSON(needs.resolve-dispatch-matrix.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.resolve-dispatch-matrix.outputs.sha }}
+      - name: Resolve package metadata at bumped revision
+        id: package
+        env:
+          SELECTED_PACKAGE: ${{ inputs.package }}
+          PACKAGE_INDEX: ${{ matrix.package.index }}
+        run: python scripts/monorepo_release.py resolve-release-index --index "$PACKAGE_INDEX" --package "$SELECTED_PACKAGE"
       - name: Build package distribution
         uses: cobycloud/actions/actions/python-package-build@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           python-version: "3.12"
-          project-path: ${{ matrix.package.path }}
-          out-dir: dist/${{ matrix.package.name }}
+          project-path: ${{ steps.package.outputs.path }}
+          out-dir: dist/${{ steps.package.outputs.name }}
           upload-artifact: "true"
-          artifact-name: python-dist-${{ matrix.package.name }}
+          artifact-name: python-dist-${{ steps.package.outputs.name }}
 
   publish-dispatch-package:
-    if: ${{ github.event_name == 'workflow_dispatch' && needs.resolve-dispatch-matrix.outputs.count != '0' }}
+    if: ${{ needs.resolve-dispatch-matrix.outputs.count != '0' }}
     needs:
       - resolve-dispatch-matrix
       - build-dispatch-package
@@ -108,19 +195,27 @@ jobs:
       matrix:
         package: ${{ fromJSON(needs.resolve-dispatch-matrix.outputs.matrix) }}
     steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.resolve-dispatch-matrix.outputs.sha }}
+      - name: Resolve package metadata at bumped revision
+        id: package
+        env:
+          SELECTED_PACKAGE: ${{ inputs.package }}
+          PACKAGE_INDEX: ${{ matrix.package.index }}
+        run: python scripts/monorepo_release.py resolve-release-index --index "$PACKAGE_INDEX" --package "$SELECTED_PACKAGE"
       - uses: actions/download-artifact@v8
         with:
-          name: python-dist-${{ matrix.package.name }}
-          path: dist/${{ matrix.package.name }}
-      - name: Publish package to PyPI
-        uses: cobycloud/actions/actions/pypi-token-publish@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
+          name: python-dist-${{ steps.package.outputs.name }}
+          path: dist/${{ steps.package.outputs.name }}
+      - name: Publish package to PyPI with Trusted Publishing
+        uses: cobycloud/actions/actions/pypi-trusted-publish@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
-          packages-dir: dist/${{ matrix.package.name }}
-          token: ${{ secrets.PYPI_API_TOKEN }}
+          packages-dir: dist/${{ steps.package.outputs.name }}
           skip-existing: "true"
 
   github-release-dispatch:
-    if: ${{ github.event_name == 'workflow_dispatch' && needs.resolve-dispatch-matrix.outputs.count != '0' }}
+    if: ${{ needs.resolve-dispatch-matrix.outputs.count != '0' }}
     needs:
       - resolve-dispatch-matrix
       - publish-dispatch-package
@@ -132,157 +227,85 @@ jobs:
       matrix:
         package: ${{ fromJSON(needs.resolve-dispatch-matrix.outputs.matrix) }}
     steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.resolve-dispatch-matrix.outputs.sha }}
+      - name: Resolve package metadata at bumped revision
+        id: package
+        env:
+          SELECTED_PACKAGE: ${{ inputs.package }}
+          PACKAGE_INDEX: ${{ matrix.package.index }}
+        run: python scripts/monorepo_release.py resolve-release-index --index "$PACKAGE_INDEX" --package "$SELECTED_PACKAGE"
       - uses: actions/download-artifact@v8
         with:
-          name: python-dist-${{ matrix.package.name }}
-          path: dist/${{ matrix.package.name }}
+          name: python-dist-${{ steps.package.outputs.name }}
+          path: dist/${{ steps.package.outputs.name }}
       - name: Create package GitHub release
         uses: cobycloud/actions/actions/github-release@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
-          tag-name: ${{ matrix.package.tag }}
-          name: ${{ matrix.package.tag }}
+          tag-name: ${{ steps.package.outputs.tag }}
+          name: ${{ steps.package.outputs.tag }}
           body: |
-            Package: `${{ matrix.package.name }}`
-            Version: `${{ matrix.package.version }}`
-            Distribution path: `${{ matrix.package.path }}`
+            Package: `${{ steps.package.outputs.name }}`
+            Version: `${{ steps.package.outputs.version }}`
+            Distribution path: `${{ steps.package.outputs.path }}`
           files: |
-            dist/${{ matrix.package.name }}/*.whl
-            dist/${{ matrix.package.name }}/*.tar.gz
-          draft: "false"
-          prerelease: "true"
+            dist/${{ steps.package.outputs.name }}/*.whl
+            dist/${{ steps.package.outputs.name }}/*.tar.gz
+          draft: "true"
+          prerelease: ${{ contains(steps.package.outputs.version, '.dev') && 'true' || 'false' }}
           make-latest: "false"
+      - name: Publish release after all assets are uploaded
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ steps.package.outputs.tag }}
+        run: gh release edit "$RELEASE_TAG" --draft=false
 
-  validate-package-metadata:
-    if: ${{ github.event_name == 'push' }}
+  publish-one-standards-package:
+    if: ${{ inputs.standards_plan != '' }}
     runs-on: ubuntu-latest
-    outputs:
-      package-count: ${{ steps.discover.outputs.package-count }}
+    timeout-minutes: 20
+    environment:
+      name: pypi-${{ inputs.package }}
+      url: https://pypi.org/project/${{ inputs.package }}/
+    permissions:
+      actions: read
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v6
-      - name: Discover split Python packages
-        id: discover
-        uses: cobycloud/actions/actions/monorepo-discover@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
-        with:
-          package-globs: pkgs/*
-          ecosystem: python
-      - name: Validate split package metadata
-        uses: cobycloud/actions/actions/package-metadata@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
-        with:
-          manifest-globs: |
-            pkgs/*/*/pyproject.toml
-          require-description: "true"
-          require-license: "true"
-          require-readme: "true"
-          require-url: "false"
-          report-json: reports/package-metadata.json
-          report-md: reports/package-metadata.md
-
-  resolve-package-tag:
-    if: ${{ github.event_name == 'push' }}
-    needs: validate-package-metadata
-    runs-on: ubuntu-latest
-    outputs:
-      package-name: ${{ steps.resolve.outputs.package_name }}
-      package-version: ${{ steps.resolve.outputs.package_version }}
-      package-path: ${{ steps.resolve.outputs.package_path }}
-      tag: ${{ steps.resolve.outputs.tag }}
-      matrix: ${{ steps.resolve.outputs.matrix }}
-    steps:
-      - uses: actions/checkout@v6
-      - name: Resolve and validate package tag
-        id: resolve
-        shell: bash
-        run: python scripts/monorepo_release.py resolve-tag "${GITHUB_REF_NAME}"
-
-  build-package:
-    if: ${{ github.event_name == 'push' }}
-    needs: resolve-package-tag
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        package: ${{ fromJSON(needs.resolve-package-tag.outputs.matrix) }}
-    steps:
-      - uses: actions/checkout@v6
-      - name: Build package distribution
-        uses: cobycloud/actions/actions/python-package-build@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
+      - uses: astral-sh/setup-uv@v6
         with:
           python-version: "3.12"
-          project-path: ${{ matrix.package.path }}
-          out-dir: dist/${{ matrix.package.name }}
-          upload-artifact: "true"
-          artifact-name: python-dist-${{ matrix.package.name }}
-
-  attest-package:
-    if: ${{ github.event_name == 'push' }}
-    needs:
-      - resolve-package-tag
-      - build-package
-    runs-on: ubuntu-latest
-    permissions:
-      attestations: write
-      contents: read
-      id-token: write
-    steps:
       - uses: actions/download-artifact@v8
         with:
-          name: python-dist-${{ needs.resolve-package-tag.outputs.package-name }}
-          path: dist/${{ needs.resolve-package-tag.outputs.package-name }}
-      - name: Attest package distributions
-        uses: actions/attest-build-provenance@v4
+          name: package-standards-distributions
+          run-id: 44296198410
+          github-token: ${{ github.token }}
+          path: standards-dist
+      - name: Inspect and stage exactly one previously validated release
+        env:
+          STANDARDS_PLAN: ${{ inputs.standards_plan }}
+          SELECTED_PACKAGE: ${{ inputs.package }}
+        run: |
+          uv run --no-project python scripts/verify_readme_standards.py
+          uv run --no-project python scripts/release_one_standards_package.py --plan "$STANDARDS_PLAN" --dist standards-dist --package "$SELECTED_PACKAGE" --phase prepare
+      - name: Publish the selected package with Trusted Publishing
+        uses: cobycloud/actions/actions/pypi-trusted-publish@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
-          subject-name: ${{ needs.resolve-package-tag.outputs.package-name }}
-          subject-path: |
-            dist/${{ needs.resolve-package-tag.outputs.package-name }}/*.whl
-            dist/${{ needs.resolve-package-tag.outputs.package-name }}/*.tar.gz
-
-  publish-package:
-    if: ${{ github.event_name == 'push' }}
-    needs:
-      - resolve-package-tag
-      - attest-package
-    runs-on: ubuntu-latest
-    environment: pypi
-    permissions:
-      contents: read
-      id-token: write
-    steps:
-      - uses: actions/download-artifact@v8
-        with:
-          name: python-dist-${{ needs.resolve-package-tag.outputs.package-name }}
-          path: dist/${{ needs.resolve-package-tag.outputs.package-name }}
-      - name: Publish package to PyPI
-        uses: cobycloud/actions/actions/pypi-token-publish@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
-        with:
-          packages-dir: dist/${{ needs.resolve-package-tag.outputs.package-name }}
-          token: ${{ secrets.PYPI_API_TOKEN }}
+          packages-dir: prepared-dist
           skip-existing: "true"
-
-  github-release:
-    if: ${{ github.event_name == 'push' }}
-    needs:
-      - resolve-package-tag
-      - publish-package
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/download-artifact@v8
+      - name: Verify exact PyPI hashes and a clean PyPI-only installation
+        env:
+          STANDARDS_PLAN: ${{ inputs.standards_plan }}
+          SELECTED_PACKAGE: ${{ inputs.package }}
+        run: uv run --no-project python scripts/release_one_standards_package.py --plan "$STANDARDS_PLAN" --dist standards-dist --package "$SELECTED_PACKAGE" --phase verify
+      - uses: actions/upload-artifact@v7
+        if: always()
         with:
-          name: python-dist-${{ needs.resolve-package-tag.outputs.package-name }}
-          path: dist/${{ needs.resolve-package-tag.outputs.package-name }}
-      - name: Create package GitHub release
-        uses: cobycloud/actions/actions/github-release@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
-        with:
-          tag-name: ${{ needs.resolve-package-tag.outputs.tag }}
-          name: ${{ needs.resolve-package-tag.outputs.tag }}
-          body: |
-            Package: `${{ needs.resolve-package-tag.outputs.package-name }}`
-            Version: `${{ needs.resolve-package-tag.outputs.package-version }}`
-            Distribution path: `${{ needs.resolve-package-tag.outputs.package-path }}`
-          files: |
-            dist/${{ needs.resolve-package-tag.outputs.package-name }}/*.whl
-            dist/${{ needs.resolve-package-tag.outputs.package-name }}/*.tar.gz
-          draft: "false"
-          prerelease: "false"
-          make-latest: "false"
+          name: trusted-release-${{ inputs.package }}
+          path: |
+            trusted-release-receipt.json
+            clean-install-check/*/install.log
+          if-no-files-found: warn

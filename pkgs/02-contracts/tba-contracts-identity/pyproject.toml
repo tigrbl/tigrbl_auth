@@ -1,6 +1,6 @@
 [project]
 name = "tba-contracts-identity"
-version = "0.4.0.dev2"
+version = "0.4.0.dev3"
 description = "Dependency-light identity contract dataclasses, enums, protocols, and plane access metadata."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -18,7 +18,6 @@ keywords = [
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: Apache Software License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
     "Typing :: Typed",
@@ -32,30 +31,23 @@ classifiers = [
     "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3.15",
 ]
-dependencies = [
-    "tba-primitives-identity==0.4.0.dev2",
-    "tba-contracts-identity-assurance==0.4.0.dev2",
-    "tba-contracts-attestation==0.4.0.dev2",
-    "tba-contracts-claim==0.4.0.dev2",
-    "tba-contracts-did==0.4.0.dev2",
-    "tba-contracts-digital-credential==0.4.0.dev2",
-    "tba-contracts-public-key-authentication==0.4.0.dev2",
-    "tba-contracts-replay==0.4.0.dev2",
-    "tba-contracts-security-event==0.4.0.dev2",
-    "tba-contracts-security-trust==0.1.0",
-    "tba-contracts-token==0.4.0.dev2",
-    "tba-contracts-workload-identity==0.4.0.dev2",
-]
+dependencies = ["tba-primitives-identity==0.4.0.dev3", "tba-contracts-identity-assurance==0.4.0.dev3", "tba-contracts-attestation==0.4.0.dev3", "tba-contracts-claim==0.4.0.dev3", "tba-contracts-did==0.4.0.dev3", "tba-contracts-digital-credential==0.4.0.dev3", "tba-contracts-public-key-authentication==0.4.0.dev3", "tba-contracts-replay==0.4.0.dev3", "tba-contracts-security-event==0.4.0.dev3", "tba-contracts-security-trust==0.1.1.dev1", "tba-contracts-token==0.4.0.dev3", "tba-contracts-workload-identity==0.4.0.dev3"]
+license-files = ["LICENSE", "NOTICE"]
 
 [project.urls]
-Homepage = "https://github.com/tigrbl/tigrbl_auth"
+Homepage = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/02-contracts/tba-contracts-identity#readme"
 Repository = "https://github.com/tigrbl/tigrbl_auth"
 Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/02-contracts/tba-contracts-identity"
 SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
 PyPI = "https://pypi.org/project/tba-contracts-identity/"
+Documentation = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/02-contracts/tba-contracts-identity#readme"
+Issues = "https://github.com/tigrbl/tigrbl_auth/issues"
 
+[[project.authors]]
+name = "Jacob Stewart"
+email = "jacob@swarmauri.com"
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=2.2.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]

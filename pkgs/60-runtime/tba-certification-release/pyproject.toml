@@ -1,6 +1,6 @@
 [project]
 name = "tba-certification-release"
-version = "0.4.0.dev2"
+version = "0.4.0.dev3"
 description = "Executable release certification and release posture helpers for the TBA package suite."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -16,7 +16,6 @@ keywords = [
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: Apache Software License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
     "Typing :: Typed",
@@ -29,22 +28,23 @@ classifiers = [
     "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3.15",
 ]
-dependencies = [
-    "tba-contracts-identity==0.4.0.dev2",
-    "tba-concrete-machine-identity==0.4.0.dev2",
-    "tba-runtime-identity==0.4.0.dev3",
-    "tba-contracts-release==0.1.0",
-]
+dependencies = ["tba-contracts-identity==0.4.0.dev3", "tba-concrete-machine-identity==0.4.0.dev3", "tba-runtime-identity==0.4.0.dev4", "tba-contracts-release==0.1.1.dev1"]
+license-files = ["LICENSE", "NOTICE"]
 
 [project.urls]
-Homepage = "https://github.com/tigrbl/tigrbl_auth"
+Homepage = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/60-runtime/tba-certification-release#readme"
 Repository = "https://github.com/tigrbl/tigrbl_auth"
 Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/60-runtime/tba-certification-release"
 SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
 PyPI = "https://pypi.org/project/tba-certification-release/"
+Documentation = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/60-runtime/tba-certification-release#readme"
+Issues = "https://github.com/tigrbl/tigrbl_auth/issues"
 
+[[project.authors]]
+name = "Jacob Stewart"
+email = "jacob@swarmauri.com"
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=2.2.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]

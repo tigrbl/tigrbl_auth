@@ -1931,16 +1931,16 @@ local_dependencies = ["tba-profile-workload-credential-spiffe-wit-svid", "tba-pr
 same_layer_dependencies = []
 
 [[packages]]
-name = "tba-testkit-identity"
-path = "pkgs/120-tests/tba-testkit-identity"
+name = "tba-tests-identity"
+path = "pkgs/120-tests/tba-tests-identity"
 layer = "120-tests"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
-name = "tba-testkit-workload-credential-conformance"
-path = "pkgs/120-tests/tba-testkit-workload-credential-conformance"
+name = "tba-tests-workload-credential-conformance"
+path = "pkgs/120-tests/tba-tests-workload-credential-conformance"
 layer = "120-tests"
 order = "00"
 local_dependencies = []

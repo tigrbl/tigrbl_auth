@@ -1,17 +1,38 @@
 [project]
 name = "tba-provider-dns-txt"
-version = "0.4.0.dev2"
+version = "0.4.0.dev3"
 description = "Typed DNS TXT lookup provider."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
 license = "Apache-2.0"
-dependencies = [
-    "dnspython>=2.7,<3",
-    "tba-contracts-dns==0.4.0.dev2",
+dependencies = ["dnspython>=2.7,<3", "tba-contracts-dns==0.4.0.dev3"]
+license-files = ["LICENSE", "NOTICE"]
+keywords = ["tigrbl", "tba", "identity"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
 ]
 
+[[project.authors]]
+name = "Jacob Stewart"
+email = "jacob@swarmauri.com"
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/20-providers/tba-provider-dns-txt#readme"
+Documentation = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/20-providers/tba-provider-dns-txt#readme"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/20-providers/tba-provider-dns-txt"
+Issues = "https://github.com/tigrbl/tigrbl_auth/issues"
+PyPI = "https://pypi.org/project/tba-provider-dns-txt/"
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=2.2.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]

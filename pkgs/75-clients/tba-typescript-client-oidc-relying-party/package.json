@@ -18,7 +18,9 @@
   "files": [
     "dist",
     "README.md",
-    "package.json"
+    "package.json",
+    "LICENSE",
+    "NOTICE"
   ],
   "exports": {
     ".": {
@@ -39,5 +41,12 @@
   },
   "engines": {
     "node": ">=22"
+  },
+  "author": {
+    "name": "Jacob Stewart",
+    "email": "jacob@swarmauri.com"
+  },
+  "bugs": {
+    "url": "https://github.com/tigrbl/tigrbl_auth/issues"
   }
 }

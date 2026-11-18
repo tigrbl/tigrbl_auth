@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TAG_RE = re.compile(r"^(?P<name>[A-Za-z0-9_.-]+)==(?P<version>\d+\.\d+\.\d+(?:\.dev\d+)?(?:[-+][A-Za-z0-9_.-]+)?)$")
 REQ_NAME_RE = re.compile(r"^\s*([A-Za-z0-9_.-]+)")
 SUPPORTED_PYTHON_VERSIONS = ("3.10", "3.11", "3.12", "3.13", "3.14")
-TESTKIT_PACKAGE_NAME = "tba-testkit-identity"
+TESTKIT_PACKAGE_NAME = "tba-tests-identity"
 TESTKIT_ROOT_EXTRAS = ("test", "sqlite", "postgres", "servers")
 SWARMAURI_PYTHON_CEILING = (3, 13)
 TIGRBL_PYTHON_CEILING = (3, 14)
