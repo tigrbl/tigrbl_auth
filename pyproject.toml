@@ -250,8 +250,8 @@ dependencies = [
     "tba-profile-workload-credential-cwt-svid-extension==0.4.0.dev2",
     "tba-profile-workload-credential-spiffe-wit-svid==0.4.0.dev2",
     "tba-profile-workload-proof-wimse-http-signature==0.4.0.dev2",
-    "tba-profile-workload-proof-wimse-wpt==0.4.0.dev3",
-    "tba-profile-workload-credential-wimse-wit==0.4.0.dev3",
+    "tba-profile-workload-proof-wimse-wpt==0.4.0.dev4",
+    "tba-profile-workload-credential-wimse-wit==0.4.0.dev4",
     "tba-protocol-gnap==0.4.0.dev2",
     "tba-codec-cid==0.4.0.dev2",
     "tba-codec-dag-cbor==0.4.0.dev2",
@@ -447,7 +447,7 @@ dependencies = [
     "tba-provider-platform-attestation==0.4.0.dev2",
     "tba-concrete-identity-principals==0.4.0.dev2",
     "tba-operator-identity==0.4.0.dev2",
-    "tba-runtime-identity==0.4.0.dev2",
+    "tba-runtime-identity==0.4.0.dev3",
     "tba-server-identity==0.4.0.dev2",
     "tba-storage-core==0.4.0.dev4",
     "tigrbl-migrations==0.4.5.dev6",
@@ -547,17 +547,17 @@ sqlite = [
     "aiosqlite==0.22.1",
 ]
 uvicorn = [
-    "tba-runtime-identity[uvicorn]==0.4.0.dev2",
+    "tba-runtime-identity[uvicorn]==0.4.0.dev3",
 ]
 hypercorn = [
-    "tba-runtime-identity[hypercorn]==0.4.0.dev2",
+    "tba-runtime-identity[hypercorn]==0.4.0.dev3",
 ]
 tigrcorn = [
-    "tba-runtime-identity[tigrcorn]==0.4.0.dev2",
+    "tba-runtime-identity[tigrcorn]==0.4.0.dev3",
 ]
 # Aggregate runner extra delegates concrete runner pins to tba-runtime-identity.
 servers = [
-    "tba-runtime-identity[servers]==0.4.0.dev2",
+    "tba-runtime-identity[servers]==0.4.0.dev3",
 ]
 
 [project.urls]

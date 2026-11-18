@@ -15,9 +15,9 @@ classifiers = [
 ]
 dependencies = [
     "tba-contracts-proof-of-possession==0.4.0.dev2",
-    "tba-profile-workload-credential-wimse-wit==0.4.0.dev3",
+    "tba-profile-workload-credential-wimse-wit==0.4.0.dev4",
     "tba-protocol-workload-spiffe-svid==0.4.0.dev2",
-    "tba-profile-workload-proof-wimse-wpt==0.4.0.dev3",
+    "tba-profile-workload-proof-wimse-wpt==0.4.0.dev4",
     "tba-concrete-jwt==0.4.0.dev2",
     "tba-provider-jose-cryptography==0.4.0.dev3",
 ]

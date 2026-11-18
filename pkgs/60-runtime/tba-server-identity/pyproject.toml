@@ -46,7 +46,7 @@ dependencies = [
     "tba-capability-realm-administration==0.4.0.dev2",
     "tba-capability-tenant-administration==0.4.0.dev2",
     "tba-provider-identity-jose==0.4.0.dev2",
-    "tba-runtime-identity==0.4.0.dev2",
+    "tba-runtime-identity==0.4.0.dev3",
     "email-validator>=2.0",
     "tigrbl==0.4.5.dev8",
     "tigrbl-core==0.4.5.dev6",

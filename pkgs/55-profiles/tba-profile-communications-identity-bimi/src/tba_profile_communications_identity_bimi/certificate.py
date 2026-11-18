@@ -7,7 +7,6 @@ from tba_contracts_security_trust import (
     CertificateArtifact,
     CertificatePathValidationRequest,
     CertificatePathValidatorPort,
-    CertificateProfile,
 )
 
 from .logotype import verify_subject_logo
@@ -99,7 +98,7 @@ def verify_certificate(
             CertificateOutcome.INVALID, sha256=fingerprint, errors=(str(exc),)
         )
 
-    profile = CertificateProfile.BIMI_MARK
+    profile = "bimi-mark"
     result = validator.validate(
         CertificatePathValidationRequest(
             leaf=CertificateArtifact(der, profile),
@@ -116,7 +115,7 @@ def verify_certificate(
             fingerprint,
             errors=("validator returned the wrong certificate profile",),
         )
-    if result.indeterminate:
+    if getattr(result, "indeterminate", False):
         outcome = CertificateOutcome.INDETERMINATE
     else:
         outcome = (

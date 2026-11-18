@@ -38,7 +38,7 @@ dependencies = [
     "tba-contracts-identity==0.4.0.dev2",
     "tba-primitives-identity==0.4.0.dev2",
     "tba-operator-identity==0.4.0.dev2",
-    "tba-runtime-identity==0.4.0.dev2",
+    "tba-runtime-identity==0.4.0.dev3",
     "tba-server-identity==0.4.0.dev2",
     "tba-storage-core==0.4.0.dev4",
     "tba-storage-oauth==0.4.0.dev2",

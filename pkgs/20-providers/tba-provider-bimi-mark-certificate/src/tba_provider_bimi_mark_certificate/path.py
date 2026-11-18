@@ -1,4 +1,5 @@
 from collections.abc import Iterable, Sequence
+from dataclasses import dataclass
 from datetime import datetime, timezone
 
 from cryptography import x509
@@ -8,7 +9,6 @@ from cryptography.hazmat.primitives.asymmetric import ec, rsa
 from tba_contracts_security_trust import (
     CertificatePathValidationRequest,
     CertificatePathValidationResult,
-    CertificateProfile,
     TrustAnchor,
     TrustAnchorProviderPort,
 )
@@ -23,11 +23,19 @@ from tba_provider_certificate_evidence import (
     verify_transparency,
 )
 
-_PROFILE = CertificateProfile.BIMI_MARK
+# The trust contract accepts extensible string profiles, including in 0.1.0.
+_PROFILE = "bimi-mark"
 _BIMI_EKU = x509.ObjectIdentifier("1.3.6.1.5.5.7.3.31")
 _MAX_CHAIN = 10
 _MAX_CERT_BYTES = 256 * 1024
 _ALLOWED_HASHES = {"sha256", "sha384", "sha512"}
+
+
+@dataclass(frozen=True, slots=True)
+class _MarkPathValidationResult(CertificatePathValidationResult):
+    """Extend the published trust DTO with the BIMI evidence disposition."""
+
+    indeterminate: bool = False
 
 
 def _check_bimi_chain(chain: list[x509.Certificate]) -> None:
@@ -98,7 +106,7 @@ class MarkCertificatePathBackend:
         def failure(
             reason: str, *, indeterminate: bool = False
         ) -> CertificatePathValidationResult:
-            return CertificatePathValidationResult(
+            return _MarkPathValidationResult(
                 False,
                 request.leaf.profile,
                 errors=(reason,),
@@ -163,4 +171,4 @@ class MarkCertificatePathBackend:
             return failure(f"invalid CT evidence: {exc}")
 
         anchor_der = chain[-1].public_bytes(serialization.Encoding.DER)
-        return CertificatePathValidationResult(True, _PROFILE, trusted[anchor_der])
+        return _MarkPathValidationResult(True, _PROFILE, trusted[anchor_der])

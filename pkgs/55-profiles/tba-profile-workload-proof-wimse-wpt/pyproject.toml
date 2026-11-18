@@ -1,6 +1,6 @@
 [project]
 name="tba-profile-workload-proof-wimse-wpt"
-version="0.4.0.dev3"
+version="0.4.0.dev4"
 description = "WIMSE Workload Proof Token."
 license = { text = "Apache-2.0" }
 readme = "README.md"
@@ -16,7 +16,7 @@ classifiers = [
 dependencies = [
     "tba-contracts-proof-of-possession==0.4.0.dev2",
     "tba-contracts-replay==0.4.0.dev2",
-    "tba-profile-workload-credential-wimse-wit==0.4.0.dev3",
+    "tba-profile-workload-credential-wimse-wit==0.4.0.dev4",
     "tba-concrete-jwt==0.4.0.dev2",
     "tba-primitives-identity==0.4.0.dev2",
     "tba-provider-jose-cryptography==0.4.0.dev3",
