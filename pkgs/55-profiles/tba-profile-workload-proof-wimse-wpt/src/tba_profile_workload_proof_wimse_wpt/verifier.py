@@ -35,7 +35,14 @@ class WptProofVerifier:
         self._replay_store = replay_store
         self._clock = clock
 
-    def authenticate_request(self, headers, *, audience: str, bound_token_headers=()):
+    def authenticate_request(
+        self,
+        headers,
+        *,
+        audience: str,
+        bound_token_headers=(),
+        required_token_headers=(),
+    ):
         """Verify the WIT and WPT from HTTP using a trusted recipient audience."""
         return authenticate_wpt_request(
             headers,
@@ -44,6 +51,7 @@ class WptProofVerifier:
             now=self._clock(),
             replay_store=self._replay_store,
             bound_token_headers=bound_token_headers,
+            required_token_headers=required_token_headers,
         )
 
     def verify(

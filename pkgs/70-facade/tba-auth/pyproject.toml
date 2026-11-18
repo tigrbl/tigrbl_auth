@@ -59,7 +59,7 @@ dependencies = [
     "tba-certification-release==0.4.0.dev2",
     "tba-protocol-oidc-relying-party==0.4.0.dev2",
     "tba-plugin-tigrbl==0.4.0.dev2",
-    "tba-runtime-identity==0.4.0.dev2",
+    "tba-runtime-identity==0.4.0.dev3",
     "tba-server-identity==0.4.0.dev2",
     "tba-storage-core==0.4.0.dev4",
     "tba-runtime-identity-storage==0.4.0.dev2",

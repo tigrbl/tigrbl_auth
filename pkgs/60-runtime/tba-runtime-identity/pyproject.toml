@@ -1,6 +1,6 @@
 [project]
 name = "tba-runtime-identity"
-version = "0.4.0.dev2"
+version = "0.4.0.dev3"
 description = "Runtime assembly, profile loading, feature flags, deployment resolution, runner adapters, and diagnostics for TBA identity apps."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -40,8 +40,8 @@ dependencies = [
     "tba-concrete-certificate-x509==0.4.0.dev2",
     "tba-contracts-security-trust==0.1.0",
     "tba-profile-workload-credential-wimse-wic==0.4.0.dev2",
-    "tba-profile-workload-credential-wimse-wit==0.4.0.dev3",
-    "tba-profile-workload-proof-wimse-wpt==0.4.0.dev3",
+    "tba-profile-workload-credential-wimse-wit==0.4.0.dev4",
+    "tba-profile-workload-proof-wimse-wpt==0.4.0.dev4",
     "tba-protocol-workload-wimse-identifier==0.4.0.dev2",
     "tba-provider-jose-cryptography==0.4.0.dev3",
     "tba-profile-workload-authentication-wimse-mtls==0.4.0.dev2",

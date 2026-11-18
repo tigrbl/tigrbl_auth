@@ -20,6 +20,9 @@ classifiers = [
 authors = [{ name = "Jacob Stewart", email = "jacob@swarmauri.com" }]
 keywords = ["oidc", "oauth2", "identity-provider", "jwks", "jwt", "tigrbl", "sdk", "standards", "auth", "authentication"]
 dependencies = [
+    "tba-app-backend-wpt-verifier==0.4.0.dev2",
+    "tba-app-backend-wit-issuance==0.4.0.dev2",
+    "tba-router-wpt-verification==0.4.0.dev2",
     "tba-provider-certificate-issuer-x509==0.4.0.dev2",
     "tba-router-wic-ca==0.4.0.dev2",
     "tba-router-wit-issuance==0.4.0.dev2",
@@ -250,8 +253,8 @@ dependencies = [
     "tba-profile-workload-credential-cwt-svid-extension==0.4.0.dev2",
     "tba-profile-workload-credential-spiffe-wit-svid==0.4.0.dev2",
     "tba-profile-workload-proof-wimse-http-signature==0.4.0.dev2",
-    "tba-profile-workload-proof-wimse-wpt==0.4.0.dev3",
-    "tba-profile-workload-credential-wimse-wit==0.4.0.dev3",
+    "tba-profile-workload-proof-wimse-wpt==0.4.0.dev4",
+    "tba-profile-workload-credential-wimse-wit==0.4.0.dev4",
     "tba-protocol-gnap==0.4.0.dev2",
     "tba-codec-cid==0.4.0.dev2",
     "tba-codec-dag-cbor==0.4.0.dev2",
@@ -447,7 +450,7 @@ dependencies = [
     "tba-provider-platform-attestation==0.4.0.dev2",
     "tba-concrete-identity-principals==0.4.0.dev2",
     "tba-operator-identity==0.4.0.dev2",
-    "tba-runtime-identity==0.4.0.dev2",
+    "tba-runtime-identity==0.4.0.dev3",
     "tba-server-identity==0.4.0.dev2",
     "tba-storage-core==0.4.0.dev4",
     "tigrbl-migrations==0.4.5.dev6",
@@ -547,17 +550,17 @@ sqlite = [
     "aiosqlite==0.22.1",
 ]
 uvicorn = [
-    "tba-runtime-identity[uvicorn]==0.4.0.dev2",
+    "tba-runtime-identity[uvicorn]==0.4.0.dev3",
 ]
 hypercorn = [
-    "tba-runtime-identity[hypercorn]==0.4.0.dev2",
+    "tba-runtime-identity[hypercorn]==0.4.0.dev3",
 ]
 tigrcorn = [
-    "tba-runtime-identity[tigrcorn]==0.4.0.dev2",
+    "tba-runtime-identity[tigrcorn]==0.4.0.dev3",
 ]
 # Aggregate runner extra delegates concrete runner pins to tba-runtime-identity.
 servers = [
-    "tba-runtime-identity[servers]==0.4.0.dev2",
+    "tba-runtime-identity[servers]==0.4.0.dev3",
 ]
 
 [project.urls]
@@ -639,6 +642,9 @@ packages = []
 package = false
 
 [tool.uv.sources]
+tba-app-backend-wpt-verifier = { path = "pkgs/90-backend-apps/tba-app-backend-wpt-verifier", editable = true }
+tba-app-backend-wit-issuance = { path = "pkgs/90-backend-apps/tba-app-backend-wit-issuance", editable = true }
+tba-router-wpt-verification = { path = "pkgs/80-routers/tba-router-wpt-verification", editable = true }
 tba-provider-certificate-issuer-x509 = { path = "pkgs/20-providers/tba-provider-certificate-issuer-x509", editable = true }
 tba-router-wic-ca = { path = "pkgs/80-routers/tba-router-wic-ca", editable = true }
 tba-router-wit-issuance = { path = "pkgs/80-routers/tba-router-wit-issuance", editable = true }

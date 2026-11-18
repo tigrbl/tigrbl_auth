@@ -2387,7 +2387,7 @@ requires-dist = [
     { name = "tba-router-oidc-userinfo", specifier = "==0.4.0.dev2" },
     { name = "tba-router-resource-validation-metadata", specifier = "==0.4.0.dev2" },
     { name = "tba-router-session-login", specifier = "==0.4.0.dev2" },
-    { name = "tba-runtime-identity", specifier = "==0.4.0.dev2" },
+    { name = "tba-runtime-identity", specifier = "==0.4.0.dev3" },
     { name = "tba-runtime-identity-storage", specifier = "==0.4.0.dev2" },
     { name = "tba-server-identity", specifier = "==0.4.0.dev2" },
     { name = "tba-storage-core", specifier = "==0.4.0.dev4" },
@@ -2616,7 +2616,45 @@ dependencies = [
 requires-dist = [
     { name = "tba-provider-certificate-issuer-x509", specifier = "==0.4.0.dev2" },
     { name = "tba-router-wic-ca", specifier = "==0.4.0.dev2" },
-    { name = "tba-runtime-identity", specifier = "==0.4.0.dev2" },
+    { name = "tba-runtime-identity", specifier = "==0.4.0.dev3" },
+    { name = "tigrbl", specifier = "==0.4.5.dev8" },
+]
+
+[[package]]
+name = "tba-app-backend-wit-issuance"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/90-backend-apps/tba-app-backend-wit-issuance" }
+dependencies = [
+    { name = "tba-provider-jose-cryptography" },
+    { name = "tba-router-wit-issuance" },
+    { name = "tba-runtime-identity" },
+    { name = "tigrbl" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev3" },
+    { name = "tba-router-wit-issuance", specifier = "==0.4.0.dev2" },
+    { name = "tba-runtime-identity", specifier = "==0.4.0.dev3" },
+    { name = "tigrbl", specifier = "==0.4.5.dev8" },
+]
+
+[[package]]
+name = "tba-app-backend-wpt-verifier"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/90-backend-apps/tba-app-backend-wpt-verifier" }
+dependencies = [
+    { name = "tba-contracts-replay" },
+    { name = "tba-profile-workload-proof-wimse-wpt" },
+    { name = "tba-router-wpt-verification" },
+    { name = "tigrbl" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tba-contracts-replay", specifier = "==0.4.0.dev2" },
+    { name = "tba-profile-workload-proof-wimse-wpt", specifier = "==0.4.0.dev4" },
+    { name = "tba-router-wpt-verification", specifier = "==0.4.0.dev2" },
     { name = "tigrbl", specifier = "==0.4.5.dev8" },
 ]
 
@@ -2681,7 +2719,7 @@ requires-dist = [
     { name = "tba-provider-security-authorization-provenance-builder", specifier = "==0.1.0" },
     { name = "tba-provider-security-signing-pqc", specifier = "==0.1.0" },
     { name = "tba-runtime-authorization-policy", specifier = "==0.4.0.dev3" },
-    { name = "tba-runtime-identity", specifier = "==0.4.0.dev2" },
+    { name = "tba-runtime-identity", specifier = "==0.4.0.dev3" },
     { name = "tba-runtime-identity-administration", specifier = "==0.4.0.dev2" },
     { name = "tba-runtime-identity-authoring", specifier = "==0.4.0.dev2" },
     { name = "tba-runtime-identity-storage", specifier = "==0.4.0.dev2" },
@@ -3853,7 +3891,7 @@ requires-dist = [
     { name = "tba-concrete-machine-identity", specifier = "==0.4.0.dev2" },
     { name = "tba-contracts-identity", specifier = "==0.4.0.dev2" },
     { name = "tba-contracts-release", specifier = "==0.1.0" },
-    { name = "tba-runtime-identity", specifier = "==0.4.0.dev2" },
+    { name = "tba-runtime-identity", specifier = "==0.4.0.dev3" },
 ]
 
 [[package]]
@@ -3873,7 +3911,7 @@ dependencies = [
 requires-dist = [
     { name = "tba-capability-operator-administration", specifier = "==0.4.0.dev2" },
     { name = "tba-provider-secret-hashing-bcrypt", specifier = "==0.1.0" },
-    { name = "tba-runtime-identity", specifier = "==0.4.0.dev2" },
+    { name = "tba-runtime-identity", specifier = "==0.4.0.dev3" },
     { name = "tba-runtime-identity-authoring", specifier = "==0.4.0.dev2" },
     { name = "tba-runtime-identity-storage", specifier = "==0.4.0.dev2" },
     { name = "tomli", marker = "python_full_version < '3.11'", specifier = ">=2.0" },
@@ -6821,8 +6859,8 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "tba-profile-workload-credential-spiffe-wit-svid", specifier = "==0.4.0.dev2" },
-    { name = "tba-profile-workload-credential-wimse-wit", specifier = "==0.4.0.dev3" },
-    { name = "tba-profile-workload-proof-wimse-wpt", specifier = "==0.4.0.dev3" },
+    { name = "tba-profile-workload-credential-wimse-wit", specifier = "==0.4.0.dev4" },
+    { name = "tba-profile-workload-proof-wimse-wpt", specifier = "==0.4.0.dev4" },
 ]
 
 [[package]]
@@ -6864,7 +6902,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "tba-runtime-identity", specifier = "==0.4.0.dev2" },
+    { name = "tba-runtime-identity", specifier = "==0.4.0.dev3" },
     { name = "tba-server-identity", specifier = "==0.4.0.dev2" },
 ]
 
@@ -7050,8 +7088,8 @@ dependencies = [
 requires-dist = [
     { name = "tba-concrete-jwt", specifier = "==0.4.0.dev2" },
     { name = "tba-contracts-proof-of-possession", specifier = "==0.4.0.dev2" },
-    { name = "tba-profile-workload-credential-wimse-wit", specifier = "==0.4.0.dev3" },
-    { name = "tba-profile-workload-proof-wimse-wpt", specifier = "==0.4.0.dev3" },
+    { name = "tba-profile-workload-credential-wimse-wit", specifier = "==0.4.0.dev4" },
+    { name = "tba-profile-workload-proof-wimse-wpt", specifier = "==0.4.0.dev4" },
     { name = "tba-protocol-workload-spiffe-svid", specifier = "==0.4.0.dev2" },
     { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev3" },
 ]
@@ -7075,7 +7113,7 @@ requires-dist = [
 
 [[package]]
 name = "tba-profile-workload-credential-wimse-wit"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 source = { editable = "pkgs/55-profiles/tba-profile-workload-credential-wimse-wit" }
 dependencies = [
     { name = "tba-concrete-jwt" },
@@ -7105,13 +7143,13 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "cryptography", specifier = ">=45" },
-    { name = "tba-profile-workload-credential-wimse-wit", specifier = "==0.4.0.dev3" },
+    { name = "tba-profile-workload-credential-wimse-wit", specifier = "==0.4.0.dev4" },
     { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev3" },
 ]
 
 [[package]]
 name = "tba-profile-workload-proof-wimse-wpt"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 source = { editable = "pkgs/55-profiles/tba-profile-workload-proof-wimse-wpt" }
 dependencies = [
     { name = "tba-concrete-jwt" },
@@ -7128,7 +7166,7 @@ requires-dist = [
     { name = "tba-contracts-proof-of-possession", specifier = "==0.4.0.dev2" },
     { name = "tba-contracts-replay", specifier = "==0.4.0.dev2" },
     { name = "tba-primitives-identity", specifier = "==0.4.0.dev2" },
-    { name = "tba-profile-workload-credential-wimse-wit", specifier = "==0.4.0.dev3" },
+    { name = "tba-profile-workload-credential-wimse-wit", specifier = "==0.4.0.dev4" },
     { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev3" },
 ]
 
@@ -8913,7 +8951,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "tba-primitives-identity", specifier = "==0.4.0.dev2" },
-    { name = "tba-runtime-identity", specifier = "==0.4.0.dev2" },
+    { name = "tba-runtime-identity", specifier = "==0.4.0.dev3" },
     { name = "tigrbl", specifier = "==0.4.5.dev8" },
 ]
 
@@ -9207,7 +9245,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "pydantic", specifier = ">=2,<3" },
-    { name = "tba-runtime-identity", specifier = "==0.4.0.dev2" },
+    { name = "tba-runtime-identity", specifier = "==0.4.0.dev3" },
     { name = "tigrbl", specifier = "==0.4.5.dev8" },
 ]
 
@@ -9224,7 +9262,26 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "pydantic", specifier = ">=2,<3" },
-    { name = "tba-runtime-identity", specifier = "==0.4.0.dev2" },
+    { name = "tba-runtime-identity", specifier = "==0.4.0.dev3" },
+    { name = "tigrbl", specifier = "==0.4.5.dev8" },
+]
+
+[[package]]
+name = "tba-router-wpt-verification"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/80-routers/tba-router-wpt-verification" }
+dependencies = [
+    { name = "pydantic" },
+    { name = "tba-concrete-jwt" },
+    { name = "tba-profile-workload-proof-wimse-wpt" },
+    { name = "tigrbl" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "pydantic", specifier = ">=2,<3" },
+    { name = "tba-concrete-jwt", specifier = "==0.4.0.dev2" },
+    { name = "tba-profile-workload-proof-wimse-wpt", specifier = "==0.4.0.dev4" },
     { name = "tigrbl", specifier = "==0.4.5.dev8" },
 ]
 
@@ -9265,7 +9322,7 @@ requires-dist = [
 
 [[package]]
 name = "tba-runtime-identity"
-version = "0.4.0.dev2"
+version = "0.4.0.dev3"
 source = { editable = "pkgs/60-runtime/tba-runtime-identity" }
 dependencies = [
     { name = "cryptography" },
@@ -9330,8 +9387,8 @@ requires-dist = [
     { name = "tba-profile-workload-authentication-wimse-mtls", specifier = "==0.4.0.dev2" },
     { name = "tba-profile-workload-credential-cwt-svid-extension", specifier = "==0.4.0.dev2" },
     { name = "tba-profile-workload-credential-wimse-wic", specifier = "==0.4.0.dev2" },
-    { name = "tba-profile-workload-credential-wimse-wit", specifier = "==0.4.0.dev3" },
-    { name = "tba-profile-workload-proof-wimse-wpt", specifier = "==0.4.0.dev3" },
+    { name = "tba-profile-workload-credential-wimse-wit", specifier = "==0.4.0.dev4" },
+    { name = "tba-profile-workload-proof-wimse-wpt", specifier = "==0.4.0.dev4" },
     { name = "tba-protocol-cwt", specifier = "==0.4.0.dev3" },
     { name = "tba-protocol-identity-did-core", specifier = "==0.4.0.dev2" },
     { name = "tba-protocol-security-cose", specifier = "==0.4.0.dev2" },
@@ -9571,7 +9628,7 @@ requires-dist = [
     { name = "tba-provider-identity-jose", specifier = "==0.4.0.dev2" },
     { name = "tba-provider-replay-memory", specifier = "==0.4.0.dev2" },
     { name = "tba-provider-secret-hashing-bcrypt", specifier = "==0.1.0" },
-    { name = "tba-runtime-identity", specifier = "==0.4.0.dev2" },
+    { name = "tba-runtime-identity", specifier = "==0.4.0.dev3" },
     { name = "tba-runtime-identity-storage", specifier = "==0.4.0.dev2" },
     { name = "tba-storage-audit", specifier = "==0.4.0.dev2" },
     { name = "tba-storage-oauth", specifier = "==0.4.0.dev2" },
@@ -10254,6 +10311,8 @@ dependencies = [
     { name = "tba-app-backend-service-administration" },
     { name = "tba-app-backend-tenant-administration" },
     { name = "tba-app-backend-wic-ca" },
+    { name = "tba-app-backend-wit-issuance" },
+    { name = "tba-app-backend-wpt-verifier" },
     { name = "tba-auth" },
     { name = "tba-bases-attestation" },
     { name = "tba-bases-authentication-assurance" },
@@ -10662,6 +10721,7 @@ dependencies = [
     { name = "tba-router-webauthn" },
     { name = "tba-router-wic-ca" },
     { name = "tba-router-wit-issuance" },
+    { name = "tba-router-wpt-verification" },
     { name = "tba-runtime-authorization-policy" },
     { name = "tba-runtime-identity" },
     { name = "tba-runtime-identity-administration" },
@@ -10821,6 +10881,8 @@ requires-dist = [
     { name = "tba-app-backend-service-administration", editable = "pkgs/90-backend-apps/tba-app-backend-service-administration" },
     { name = "tba-app-backend-tenant-administration", editable = "pkgs/90-backend-apps/tba-app-backend-tenant-administration" },
     { name = "tba-app-backend-wic-ca", editable = "pkgs/90-backend-apps/tba-app-backend-wic-ca" },
+    { name = "tba-app-backend-wit-issuance", editable = "pkgs/90-backend-apps/tba-app-backend-wit-issuance" },
+    { name = "tba-app-backend-wpt-verifier", editable = "pkgs/90-backend-apps/tba-app-backend-wpt-verifier" },
     { name = "tba-auth", editable = "pkgs/70-facade/tba-auth" },
     { name = "tba-bases-attestation", editable = "pkgs/05-bases/tba-bases-attestation" },
     { name = "tba-bases-authentication-assurance", editable = "pkgs/05-bases/tba-bases-authentication-assurance" },
@@ -11248,6 +11310,7 @@ requires-dist = [
     { name = "tba-router-webauthn", editable = "pkgs/80-routers/tba-router-webauthn" },
     { name = "tba-router-wic-ca", editable = "pkgs/80-routers/tba-router-wic-ca" },
     { name = "tba-router-wit-issuance", editable = "pkgs/80-routers/tba-router-wit-issuance" },
+    { name = "tba-router-wpt-verification", editable = "pkgs/80-routers/tba-router-wpt-verification" },
     { name = "tba-runtime-authorization-policy", editable = "pkgs/60-runtime/tba-runtime-authorization-policy" },
     { name = "tba-runtime-identity", editable = "pkgs/60-runtime/tba-runtime-identity" },
     { name = "tba-runtime-identity", extras = ["hypercorn"], marker = "extra == 'hypercorn'", editable = "pkgs/60-runtime/tba-runtime-identity" },

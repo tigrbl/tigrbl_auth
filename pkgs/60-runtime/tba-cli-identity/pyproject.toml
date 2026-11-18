@@ -33,7 +33,7 @@ classifiers = [
 dependencies = [
     "tba-capability-operator-administration==0.4.0.dev2",
     "tba-runtime-identity-authoring==0.4.0.dev2",
-    "tba-runtime-identity==0.4.0.dev2",
+    "tba-runtime-identity==0.4.0.dev3",
     "tba-runtime-identity-storage==0.4.0.dev2",
     "tba-provider-secret-hashing-bcrypt==0.1.0",
     "tomli>=2.0; python_version < '3.11'",
