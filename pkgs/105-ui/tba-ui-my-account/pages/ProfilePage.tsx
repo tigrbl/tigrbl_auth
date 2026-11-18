@@ -1,4 +1,4 @@
-import { Button, Card, DetailPanel, FormField, InlineMutationResult, PageHeader, ResourceForm, StatusBadge } from "@tba/ui-primitives";
+import { Button, Card, DetailPanel, FormField, InlineMutationResult, PageHeader, ResourceForm, StatusBadge } from "@tbauth/ui-primitives";
 import { useEffect, useState } from "react";
 import type { AccountProfile } from "../types";
 

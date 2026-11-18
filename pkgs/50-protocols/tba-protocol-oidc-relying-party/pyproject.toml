@@ -1,6 +1,6 @@
 [project]
 name = "tba-protocol-oidc-relying-party"
-version = "0.4.0.dev2"
+version = "0.4.0.dev3"
 description = "OpenID Connect relying-party and OAuth client protocol implementation package for the TBA package suite."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -47,6 +47,8 @@ dependencies = [
     "tba-concrete-claim-nonce==0.4.0.dev2",
     "tba-concrete-claim-subject==0.4.0.dev2",
     "tba-contracts-identity==0.4.0.dev2",
+    "tba-concrete-jws==0.4.0.dev2",
+    "tba-provider-jose-cryptography==0.4.0.dev3",
     "tba-provider-security-proof-pkce==0.1.0",
 ]
 [project.urls]

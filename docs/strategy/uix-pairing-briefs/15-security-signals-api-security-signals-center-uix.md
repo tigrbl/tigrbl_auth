@@ -1,6 +1,6 @@
 # Security Signals API + Security Signals Center UIX Requirements Brief
 
-**Proposed pairing:** `tba-router-security-signals` + `@tba/security-signals-center-uix`<br>
+**Proposed pairing:** `tba-router-security-signals` + `@tbauth/security-signals-center-uix`<br>
 **Status:** New product surface; telemetry, anomaly, audit, session, revocation, policy, JOSE, and provenance foundations exist<br>
 **Prepared:** July 11, 2026<br>
 **Proposed router owner:** `pkgs/80-routers/tba-router-security-signals`<br>

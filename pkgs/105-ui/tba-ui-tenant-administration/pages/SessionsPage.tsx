@@ -1,4 +1,4 @@
-import { DetailPanel, JsonViewer, PageHeader, StatusBadge } from "@tba/ui-primitives";
+import { DetailPanel, JsonViewer, PageHeader, StatusBadge } from "@tbauth/ui-primitives";
 import type { TenantAdminSession } from "../types";
 
 export function SessionsPage({ session }: { session: TenantAdminSession | null }) {

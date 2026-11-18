@@ -1,6 +1,6 @@
 # Agent Identity and Delegation API + Agent Trust UIX Requirements Brief
 
-**Proposed pairing:** `tba-router-agent-delegation` + `@tba/agent-trust-uix`<br>
+**Proposed pairing:** `tba-router-agent-delegation` + `@tbauth/agent-trust-uix`<br>
 **Status:** New product surface; delegation, attenuation, authority graph, token exchange, proof binding, policy, workload, audit, and provenance foundations exist<br>
 **Prepared:** July 11, 2026<br>
 **Proposed router owner:** `pkgs/80-routers/tba-router-agent-delegation`<br>

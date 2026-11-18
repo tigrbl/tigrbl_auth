@@ -1,4 +1,4 @@
-# @tba/ui-authorization-studio
+# @tbauth/ui-authorization-studio
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

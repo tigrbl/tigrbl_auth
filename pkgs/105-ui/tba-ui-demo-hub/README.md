@@ -1,4 +1,4 @@
-# @tba/ui-demo-hub
+# @tbauth/ui-demo-hub
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">
@@ -21,7 +21,7 @@ Demo hub UIX for presenting TBA product surfaces as one cohesive identity system
 Local development:
 
 ```bash
-npm run dev -w @tba/ui-demo-hub
+npm run dev -w @tbauth/ui-demo-hub
 ```
 
 Docker deployment:
@@ -38,8 +38,8 @@ Use Node 22 or newer and run these commands from the repository root.
 
 ```bash
 npm ci --no-audit --no-fund
-npm run build -w @tba/ui-primitives
-npm run build -w @tba/ui-demo-hub
+npm run build -w @tbauth/ui-primitives
+npm run build -w @tbauth/ui-demo-hub
 ```
 
 Expect a Vite build with `dist/index.html` in this package.

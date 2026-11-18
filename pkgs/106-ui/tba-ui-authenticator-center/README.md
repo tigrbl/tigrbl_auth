@@ -1,4 +1,4 @@
-# @tba/ui-authenticator-center
+# @tbauth/ui-authenticator-center
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

@@ -1,4 +1,4 @@
-# @tba/ui-smart-card-authenticator-portal
+# @tbauth/ui-smart-card-authenticator-portal
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

@@ -1,4 +1,4 @@
-# @tba/ui-amr-user-presence-authenticator-ceremony-suite
+# @tbauth/ui-amr-user-presence-authenticator-ceremony-suite
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

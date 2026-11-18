@@ -1,6 +1,6 @@
 # Developer API + UIX Requirements Brief
 
-**Pairing:** `tba-app-backend-developer` + `@tba/ui-developer`<br>
+**Pairing:** `tba-app-backend-developer` + `@tbauth/ui-developer`<br>
 **Status:** Delivery brief<br>
 **Prepared:** July 11, 2026<br>
 **Backend app owner:** `pkgs/90-backend-apps/tba-app-backend-developer`<br>
@@ -117,7 +117,7 @@ The OAuth tester may navigate the browser to the discovered public authorization
 ### Discovery and integration snippets
 
 - Render issuer, authorization/token endpoints, JWKS URI, supported scopes/grants/responses/auth methods, and profile/version context.
-- Provide tested snippets for `@tba/client-oidc-relying-party` workspace usage, server-side Python, and curl where appropriate.
+- Provide tested snippets for `@tbauth/client-oidc-relying-party` workspace usage, server-side Python, and curl where appropriate.
 - Separate stable public install instructions from repository/prerelease instructions; reviewed npm packages are not currently public.
 - Add expected output, productionization notes, copy feedback, and version markers.
 

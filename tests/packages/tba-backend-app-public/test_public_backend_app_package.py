@@ -38,7 +38,7 @@ def test_public_backend_app_contract_matches_product_surface_registry() -> None:
 
     assert PRODUCT_SURFACE == "public-app"
     assert PUBLIC_BACKEND_APP_CONTRACT.product_surface == PRODUCT_SURFACE
-    assert PUBLIC_BACKEND_APP_CONTRACT.intended_uix == "@tba/ui-public"
+    assert PUBLIC_BACKEND_APP_CONTRACT.intended_uix == "@tbauth/ui-public"
     assert deployment.plugin_mode == "public-only"
     assert deployment.surface_enabled("public-rest")
     assert not deployment.surface_enabled("admin-rest")

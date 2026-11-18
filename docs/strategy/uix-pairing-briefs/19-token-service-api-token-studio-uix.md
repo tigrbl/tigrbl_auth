@@ -1,6 +1,6 @@
 # Token Service API + Token Studio UIX Requirements Brief
 
-**Proposed pairing:** `tba-router-token-service` + `@tba/token-studio-uix`<br>
+**Proposed pairing:** `tba-router-token-service` + `@tbauth/token-studio-uix`<br>
 **Status:** New governed product surface over substantial existing OAuth, JOSE, storage, exchange, validation, and revocation behavior<br>
 **Prepared:** July 11, 2026<br>
 **Proposed router owner:** `pkgs/80-routers/tba-router-token-service`<br>

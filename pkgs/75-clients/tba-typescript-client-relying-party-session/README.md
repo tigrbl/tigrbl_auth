@@ -1,4 +1,4 @@
-# @tba/client-relying-party-session
+# @tbauth/client-relying-party-session
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

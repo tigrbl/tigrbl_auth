@@ -1,4 +1,4 @@
-# @tba/ui-fingerprint-authenticator-amr-governor
+# @tbauth/ui-fingerprint-authenticator-amr-governor
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

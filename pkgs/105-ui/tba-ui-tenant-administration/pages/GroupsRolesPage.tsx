@@ -1,4 +1,4 @@
-import { DataTable, DetailPanel, EmptyState, PageHeader, StatusBadge } from "@tba/ui-primitives";
+import { DataTable, DetailPanel, EmptyState, PageHeader, StatusBadge } from "@tbauth/ui-primitives";
 import type { TenantIdentity } from "../types";
 
 export function GroupsRolesPage({ identities }: { identities: TenantIdentity[] }) {

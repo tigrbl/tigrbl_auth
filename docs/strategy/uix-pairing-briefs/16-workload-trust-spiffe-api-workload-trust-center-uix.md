@@ -1,6 +1,6 @@
 # Workload Trust and SPIFFE API + Workload Trust Center UIX Requirements Brief
 
-**Proposed pairing:** `tba-router-workload-trust` + `@tba/workload-trust-center-uix`<br>
+**Proposed pairing:** `tba-router-workload-trust` + `@tbauth/workload-trust-center-uix`<br>
 **Status:** New product surface; workload/machine records, credentials, trust domains, graphs, token exchange, mTLS, and governance foundations exist<br>
 **Prepared:** July 11, 2026<br>
 **Proposed router owner:** `pkgs/80-routers/tba-router-workload-trust`<br>

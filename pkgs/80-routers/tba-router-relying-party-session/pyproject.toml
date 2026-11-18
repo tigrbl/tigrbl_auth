@@ -13,7 +13,7 @@ classifiers = [
     "Programming Language :: Python :: 3.15",
 ]
 license = "Apache-2.0"
-dependencies = ["tba-protocol-oidc-relying-party==0.4.0.dev2", "tba-runtime-relying-party-session==0.4.0.dev3"]
+dependencies = ["tba-protocol-oidc-relying-party==0.4.0.dev3", "tba-runtime-relying-party-session==0.4.0.dev3"]
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"

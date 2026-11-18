@@ -10,9 +10,9 @@ on:
         type: choice
         options:
           - all
-          - "@tba/ui-administration"
-          - "@tba/ui-public"
-          - "@tba/client-oidc-relying-party"
+          - "@tbauth/ui-administration"
+          - "@tbauth/ui-public"
+          - "@tbauth/client-oidc-relying-party"
       version:
         description: Optional version. When set, it must match package.json.
         required: false

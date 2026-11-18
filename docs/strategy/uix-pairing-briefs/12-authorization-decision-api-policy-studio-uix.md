@@ -1,6 +1,6 @@
 # Authorization Decision API + Policy Studio UIX Requirements Brief
 
-**Proposed pairing:** `tba-router-authorization` + `@tba/policy-studio-uix`<br>
+**Proposed pairing:** `tba-router-authorization` + `@tbauth/policy-studio-uix`<br>
 **Status:** New product surface; substantial engine, contract, graph, and storage foundations exist<br>
 **Prepared:** July 11, 2026<br>
 **Proposed router owner:** `pkgs/80-routers/tba-router-authorization`<br>

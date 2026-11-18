@@ -1,4 +1,4 @@
-# @tba/ui-universal-authenticator
+# @tbauth/ui-universal-authenticator
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

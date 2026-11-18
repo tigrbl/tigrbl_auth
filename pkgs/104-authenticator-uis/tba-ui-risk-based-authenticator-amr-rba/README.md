@@ -1,4 +1,4 @@
-# @tba/ui-risk-based-authenticator-amr-rba
+# @tbauth/ui-risk-based-authenticator-amr-rba
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

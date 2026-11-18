@@ -1,6 +1,6 @@
 # Entitlement Governance API + Access Review UIX Requirements Brief
 
-**Pairing:** `tba-router-entitlement-governance` + `@tba/access-review-uix`<br>
+**Pairing:** `tba-router-entitlement-governance` + `@tbauth/access-review-uix`<br>
 **Opportunity-map item:** 15<br>
 **Primary buyers:** security, identity governance, compliance, internal audit, and application owners<br>
 **Best-fit verticals:** regulated enterprise, financial services, healthcare, government, and B2B SaaS<br>

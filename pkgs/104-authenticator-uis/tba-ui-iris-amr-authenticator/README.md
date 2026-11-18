@@ -1,4 +1,4 @@
-# @tba/ui-iris-amr-authenticator
+# @tbauth/ui-iris-amr-authenticator
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

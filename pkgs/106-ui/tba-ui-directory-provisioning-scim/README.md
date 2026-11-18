@@ -1,4 +1,4 @@
-# @tba/ui-directory-provisioning-scim
+# @tbauth/ui-directory-provisioning-scim
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

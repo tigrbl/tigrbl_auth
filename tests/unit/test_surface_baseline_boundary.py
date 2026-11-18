@@ -59,8 +59,8 @@ def test_surface_baseline_boundary_t0_inventory_classifies_all_admin_public_api_
     assert registry["public_auth_plane"]["surface_set"] == "public-rest"
     assert manifest["feat:uix-admin-boundary"]["audience"] == "admin"
     assert manifest["feat:uix-public-boundary"]["audience"] == "public"
-    assert admin_uix_pkg["name"] == "@tba/ui-administration"
-    assert public_uix_pkg["name"] == "@tba/ui-public"
+    assert admin_uix_pkg["name"] == "@tbauth/ui-administration"
+    assert public_uix_pkg["name"] == "@tbauth/ui-public"
     assert "/register" in public_contract_paths()
     assert "/logout" in public_contract_paths()
 

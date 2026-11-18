@@ -1,4 +1,4 @@
-# @tba/ui-service-administration-prototype
+# @tbauth/ui-service-administration-prototype
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

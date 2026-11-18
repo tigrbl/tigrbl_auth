@@ -1,4 +1,4 @@
-# @tba/ui-public-identity
+# @tbauth/ui-public-identity
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

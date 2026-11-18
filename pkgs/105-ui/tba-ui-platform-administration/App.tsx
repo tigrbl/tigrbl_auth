@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { AppShell, AuthProvider, AuthShell, ErrorState, RequireAuth, Toast, describeSession } from "@tba/ui-primitives";
-import "@tba/ui-primitives/styles.css";
+import { AppShell, AuthProvider, AuthShell, ErrorState, RequireAuth, Toast, describeSession } from "@tbauth/ui-primitives";
+import "@tbauth/ui-primitives/styles.css";
 import { usePlatformAdmin } from "./hooks/usePlatformAdmin";
 import { AuditPage } from "./pages/AuditPage";
 import { AuthorityPage } from "./pages/AuthorityPage";

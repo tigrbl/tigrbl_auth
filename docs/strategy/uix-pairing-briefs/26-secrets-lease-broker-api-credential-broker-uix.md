@@ -1,6 +1,6 @@
 # Secrets Lease/Broker API + Credential Broker UIX Requirements Brief
 
-**Pairing:** `tba-router-credential-broker` + `@tba/credential-broker-uix`<br>
+**Pairing:** `tba-router-credential-broker` + `@tbauth/credential-broker-uix`<br>
 **Opportunity-map item:** 16<br>
 **Primary buyers:** platform engineering, DevOps, security engineering, data infrastructure, and CI/CD teams<br>
 **Best-fit verticals:** cloud platforms, data/AI infrastructure, software delivery, regulated operations, and multi-cloud enterprise<br>

@@ -41,7 +41,7 @@ For a local API deployment, see the [Docker Compose configuration](https://githu
 
 ## When to use it
 
-Use `tba_app_backend_public:app` for ASGI serving or `build_app` for explicit composition. The public backend pairs with `@tba/ui-public`. It assembles discovery, authorization, and token routes from the protocol and runtime packages. Tenant and platform administration use separate backends.
+Use `tba_app_backend_public:app` for ASGI serving or `build_app` for explicit composition. The public backend pairs with `@tbauth/ui-public`. It assembles discovery, authorization, and token routes from the protocol and runtime packages. Tenant and platform administration use separate backends.
 
 ## Verification
 

@@ -1,4 +1,4 @@
-# @tba/ui-administration
+# @tbauth/ui-administration
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">
@@ -33,7 +33,7 @@ Use Node 22 or newer and run these commands from the repository root.
 
 ```bash
 npm ci --no-audit --no-fund
-npm run build -w @tba/ui-administration
+npm run build -w @tbauth/ui-administration
 ```
 
 Expect a Vite build with `dist/index.html` in this package.

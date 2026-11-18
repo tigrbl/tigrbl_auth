@@ -1,4 +1,4 @@
-import { DetailPanel, PageHeader, ResourceTable, StatusBadge } from "@tba/ui-primitives";
+import { DetailPanel, PageHeader, ResourceTable, StatusBadge } from "@tbauth/ui-primitives";
 import { ShortId } from "../components/ShortId";
 import type { Identity, Realm, Tenant } from "../types";
 

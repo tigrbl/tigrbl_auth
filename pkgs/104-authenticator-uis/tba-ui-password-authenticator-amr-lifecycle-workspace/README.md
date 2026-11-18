@@ -1,4 +1,4 @@
-# @tba/ui-password-authenticator-amr-lifecycle-workspace
+# @tbauth/ui-password-authenticator-amr-lifecycle-workspace
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

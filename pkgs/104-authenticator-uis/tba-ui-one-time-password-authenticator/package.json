@@ -1,5 +1,5 @@
 {
-  "name": "@tba/ui-one-time-password-authenticator",
+  "name": "@tbauth/ui-one-time-password-authenticator",
   "private": true,
   "version": "0.0.0",
   "type": "module",

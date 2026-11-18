@@ -1,6 +1,6 @@
 # Authorization Provenance API + Decision Lineage Explorer UIX Requirements Brief
 
-**Pairing:** `tba-router-authorization-provenance` + `@tba/decision-lineage-explorer-uix`<br>
+**Pairing:** `tba-router-authorization-provenance` + `@tbauth/decision-lineage-explorer-uix`<br>
 **Additional opportunity:** Authorization/delegation/sovereignty extension 1<br>
 **Primary buyers:** security engineering, authorization platform teams, application owners, audit/compliance, incident response, and regulated operations<br>
 **Status:** proposed product surface; deterministic trace, replay, policy, authority graph, token persistence, and audit foundations exist

@@ -85,7 +85,7 @@ Normative anchors:
 | JWKS | `tba-app-backend-resource-validation` and public issuer metadata | `/.well-known/jwks.json`, tenant JWKS | Signing-key metadata supports resource-server validation. |
 | Dynamic registration | Public API for protocol endpoint, developer API for product lifecycle | `/register`, client-management routes | Developer API should own policy, lifecycle, UI-facing registration management. |
 | M2M / client credentials | `tba-app-backend-service-administration`, `tba-app-backend-developer`, token endpoint | service clients, workload credentials, `/token` | Product lane needs explicit scopes, resources, rotation, and audit. |
-| RP behavior | `tba-protocol-oidc-relying-party`, `@tba/client-oidc-relying-party` | SDK/client integration | Should verify metadata consumption, PKCE, state/nonce, token exchange, and logout behavior. |
+| RP behavior | `tba-protocol-oidc-relying-party`, `@tbauth/client-oidc-relying-party` | SDK/client integration | Should verify metadata consumption, PKCE, state/nonce, token exchange, and logout behavior. |
 | Resource server behavior | `tba-protocol-oauth-protected-resource`, resource validation API | API middleware/integration | Should validate JWT/opaque tokens, issuer, audience/resource, scopes, DPoP/mTLS where enabled. |
 
 ## Competitor Surface Comparison
@@ -153,7 +153,7 @@ tba-app-backend-public                   # authorize/token/revoke/register/disco
 tba-app-backend-resource-validation      # introspection, JWKS, protected-resource metadata
 tba-app-backend-developer                # client registration, redirect/grant/client policy
 tba-app-backend-service-administration            # M2M/workload/service identity lifecycle
-tba-protocol-oidc-relying-party / @tba/client-oidc-relying-party     # OAuth/OIDC client and RP behavior
+tba-protocol-oidc-relying-party / @tbauth/client-oidc-relying-party     # OAuth/OIDC client and RP behavior
 tba-protocol-oauth-protected-resource          # protected API token validation integration
 ```
 

@@ -5,7 +5,7 @@
 <a href="https://github.com/tigrbl/tigrbl_auth#readme"><img src="https://raw.githubusercontent.com/tigrbl/tigrbl_auth/master/docs/assets/tba-brand.png" alt="TBA · Tigrbl Auth" width="240"></a>
 </p>
 <p align="center">
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/50-protocols/tba-protocol-oidc-relying-party/pyproject.toml"><img alt="Checkout: 0.4.0.dev2" src="https://img.shields.io/badge/Checkout-0.4.0.dev2-1f6feb"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/50-protocols/tba-protocol-oidc-relying-party/pyproject.toml"><img alt="Checkout: 0.4.0.dev3" src="https://img.shields.io/badge/Checkout-0.4.0.dev3-1f6feb"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/50-protocols/tba-protocol-oidc-relying-party/pyproject.toml"><img alt="Python: &gt;=3.10,&lt;3.16" src="https://img.shields.io/badge/Python-%3E%3D3.10%2C%3C3.16-3776ab"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/50-protocols/tba-protocol-oidc-relying-party/pyproject.toml"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/License-Apache--2.0-525252"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/50-protocols"><img alt="Layer: 50 protocols" src="https://img.shields.io/badge/Layer-50%20protocols-0a7f5a"></a>
@@ -32,7 +32,7 @@ print(sorted(report))
 ```
 
 ```bash
-uv run --isolated --no-project --python 3.12 --with "tba-protocol-oidc-relying-party==0.4.0.dev2" python quickstart.py
+uv run --isolated --no-project --python 3.12 --with "tba-protocol-oidc-relying-party==0.4.0.dev3" python quickstart.py
 ```
 
 The command prints the keys in the package's capability report.
@@ -64,6 +64,33 @@ config = RPConfiguration(issuer="https://id.example.com", client_id="app")
 rp = RelyingParty(config)
 verifier = make_pkce_verifier()
 ```
+
+## Public authorization code with S256
+
+Build a `RelyingParty` with an HTTPS issuer, public client ID, registered
+HTTPS callback, and an app-owned state and session store. Supply asynchronous
+JSON GET and form POST functions that verify TLS, reject redirects, and use
+bounded timeouts. Use an issuer selected by trusted app configuration.
+
+```python
+# Login route. Bind login.state to the current browser session before redirecting.
+authorization_url, login = await rp.begin_public_login(get_json)
+
+# Callback route. Read expected_state from that browser session.
+result = await rp.complete_public_callback(
+    callback_url,
+    expected_state=expected_state,
+    get_json=get_json,
+    post_form=post_form,
+)
+subject = result.identity.subject
+```
+
+The state store must atomically consume unexpired requests scoped to the
+configured issuer and client. Callback completion checks the registered
+redirect, sends the S256 verifier without a client secret, and verifies the
+RS256 ID token with a key from the issuer's JWKS. Create the user's app session
+only after completion, using the verified issuer and subject.
 
 ## Package Boundary
 

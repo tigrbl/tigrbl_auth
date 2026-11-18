@@ -37,7 +37,7 @@ For `tba_auth`, the strongest next move is an OAuth 2.1 alignment profile over t
 - `tba-app-backend-developer` owns client/app registration policy and should enforce OAuth 2.1-safe defaults.
 - `tba-app-backend-service-administration` owns M2M/workload identity lifecycle around client credentials.
 - `tba-app-backend-resource-validation` owns resource-server metadata, JWKS, introspection, and token validation integration.
-- `tba-protocol-oidc-relying-party` and `@tba/client-oidc-relying-party` own client-side OAuth/OIDC behavior, including PKCE defaults.
+- `tba-protocol-oidc-relying-party` and `@tbauth/client-oidc-relying-party` own client-side OAuth/OIDC behavior, including PKCE defaults.
 
 ## Bibliography
 

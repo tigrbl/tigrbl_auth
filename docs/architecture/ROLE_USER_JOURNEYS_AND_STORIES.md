@@ -107,7 +107,7 @@ Assumption: `direct customer` means a customer using Acme's identity platform di
    3. As a tenant developer, I want to select public or confidential client posture so that my app's credential model matches its runtime.
 2. Journey: operate app integration.
    1. As a tenant developer, I want to rotate client secrets or JWKS metadata so that app credentials can be maintained safely.
-   2. As a tenant developer, I want discovery URLs and SDK examples so that I can implement login with `@tba/client-oidc-relying-party` or `tba-protocol-oidc-relying-party`.
+   2. As a tenant developer, I want discovery URLs and SDK examples so that I can implement login with `@tbauth/client-oidc-relying-party` or `tba-protocol-oidc-relying-party`.
    3. As a tenant developer, I want test and production client records so that I can validate integration before affecting users.
 3. Journey: debug and evolve tenant apps.
    1. As a tenant developer, I want to inspect authorization, callback, token, and logout failures so that I can resolve integration issues.

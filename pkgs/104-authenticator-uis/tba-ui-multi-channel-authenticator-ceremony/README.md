@@ -1,4 +1,4 @@
-# @tba/ui-multi-channel-authenticator-ceremony
+# @tbauth/ui-multi-channel-authenticator-ceremony
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

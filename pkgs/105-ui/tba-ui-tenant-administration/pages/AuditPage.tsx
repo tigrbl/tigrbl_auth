@@ -1,4 +1,4 @@
-import { DetailPanel, EmptyState, PageHeader, StatusBadge } from "@tba/ui-primitives";
+import { DetailPanel, EmptyState, PageHeader, StatusBadge } from "@tbauth/ui-primitives";
 import type { TenantAdminSession } from "../types";
 
 export function AuditPage({ session }: { session: TenantAdminSession | null }) {

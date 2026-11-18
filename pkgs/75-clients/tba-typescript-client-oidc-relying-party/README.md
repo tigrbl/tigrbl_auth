@@ -1,4 +1,4 @@
-# @tba/client-oidc-relying-party
+# @tbauth/client-oidc-relying-party
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">
@@ -41,7 +41,7 @@ The assertion passes using a local fixture.
 ## Usage
 
 ```ts
-import { buildAuthorizationUrl, createLoginRequest } from "@tba/client-oidc-relying-party";
+import { buildAuthorizationUrl, createLoginRequest } from "@tbauth/client-oidc-relying-party";
 
 const config = {
   issuer: "https://issuer.example.test",
@@ -56,8 +56,27 @@ const url = await buildAuthorizationUrl(config, "https://issuer.example.test/aut
 
 The package rejects browser-side client secrets and unsafe token storage policies.
 
+## Public authorization code with S256
+
+```ts
+import { PublicRelyingParty } from "@tbauth/client-oidc-relying-party";
+
+const rp = new PublicRelyingParty(config);
+const { url, login } = await rp.beginLogin();
+// Save login with an expiry in the current browser's app session, then redirect to url.
+
+// In the callback route, read expectedState from that browser session.
+const { identity, tokens } = await rp.completeCallback(callbackUrl, expectedState, consumeLogin);
+```
+
+Configure the issuer on the app server. The `consumeLogin` function atomically
+removes the unexpired transaction for that issuer and client, returning
+`undefined` for missing or expired transactions. The client uses fetch and
+Web Crypto to verify the RS256 ID token against the issuer's JWKS. Create the
+app session using the verified issuer and subject and keep tokens server-side.
+
 ## Verification
 
-The [TypeScript entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/75-clients/tba-typescript-client-oidc-relying-party/src/index.ts) was exercised with Node 24. Build the workspace package with `npm ci` followed by `npm run build -w @tba/client-oidc-relying-party`.
+The [TypeScript entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/75-clients/tba-typescript-client-oidc-relying-party/src/index.ts) was exercised with Node 24. Build the workspace package with `npm ci` followed by `npm run build -w @tbauth/client-oidc-relying-party`.
 
 [Workspace and package catalog](https://github.com/tigrbl/tigrbl_auth#package-catalog) · [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues) · [Repository license](https://github.com/tigrbl/tigrbl_auth/blob/master/LICENSE)

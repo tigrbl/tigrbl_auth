@@ -1,4 +1,4 @@
-# @tba/client-platform-administration
+# @tbauth/client-platform-administration
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

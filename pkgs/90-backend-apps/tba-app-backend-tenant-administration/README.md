@@ -40,7 +40,7 @@ The import and assertion succeed when the TenantAdminBackendAppContract entry po
 | Property | Value |
 | --- | --- |
 | Product surface | `tenant-admin-app` |
-| Intended UIX | `@tba/ui-tenant-administration` |
+| Intended UIX | `@tbauth/ui-tenant-administration` |
 | Exposes | Tenant identities, clients, consents, sessions, tenant keys/JWKS, tenant-local audit |
 | Excludes | Platform tenant creation/deletion and cross-tenant authority assignment |
 

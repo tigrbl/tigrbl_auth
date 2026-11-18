@@ -78,7 +78,7 @@ For `tba_auth`, M2M should be a first-class product lane spanning the existing f
 | `tba-app-backend-developer` | App/client registration, client type, allowed grants, redirect-free M2M client setup, developer-facing credentials. | Operational service ownership, production workload rotation, platform-wide policy. |
 | `tba-app-backend-resource-validation` | JWKS, introspection, protected-resource metadata, issuer/resource/audience validation contracts. | Token issuance and credential lifecycle. |
 | `tba-protocol-oauth-protected-resource` | Protected API integration package: validate tokens, scopes, audience/resource, DPoP/mTLS confirmation claims. | Authorization-server route composition. |
-| `@tba/ui-service-administration` | Inventory, status, credential posture, rotation, revocation, audit, access grants. | Hosted login or end-user self-service. |
+| `@tbauth/ui-service-administration` | Inventory, status, credential posture, rotation, revocation, audit, access grants. | Hosted login or end-user self-service. |
 
 ## Minimum Viable M2M Slice
 
@@ -141,7 +141,7 @@ tba-app-backend-service-administration       # Service/workload lifecycle, crede
 tba-app-backend-developer           # Developer client/app registration and M2M setup
 tba-app-backend-resource-validation # Resource validation, introspection, protected-resource metadata
 tba-protocol-oauth-protected-resource     # Protected API integration
-@tba/ui-service-administration      # M2M inventory, grants, credential posture, rotation, audit
+@tbauth/ui-service-administration      # M2M inventory, grants, credential posture, rotation, audit
 ```
 
 This is the same architecture pattern competitors use, even when their packaging names differ: M2M is a product lane made of authorization-server behavior, client/service lifecycle, resource/API authorization, credential lifecycle, and operational governance.

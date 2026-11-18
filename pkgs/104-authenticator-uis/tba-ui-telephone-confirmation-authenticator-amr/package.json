@@ -1,5 +1,5 @@
 {
-  "name": "@tba/ui-telephone-confirmation-authenticator-amr",
+  "name": "@tbauth/ui-telephone-confirmation-authenticator-amr",
   "private": true,
   "version": "0.0.0",
   "type": "module",

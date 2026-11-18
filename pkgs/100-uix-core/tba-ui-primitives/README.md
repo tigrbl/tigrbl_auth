@@ -1,4 +1,4 @@
-# @tba/ui-primitives
+# @tbauth/ui-primitives
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">
@@ -36,4 +36,4 @@ Use the workspace package for reusable layouts, forms, tables, and feedback. Pro
 
 See the [related repository tests](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/100-uix-core/tba-ui-primitives/src/components/publicStylePrimitives.test.tsx) for the implementation scope covered by this example.
 
-[Workspace and package catalog](https://github.com/tigrbl/tigrbl_auth#package-catalog) · [@tba/ui-my-account](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/105-ui/tba-ui-my-account#readme) · [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues) · [Repository license](https://github.com/tigrbl/tigrbl_auth/blob/master/LICENSE)
+[Workspace and package catalog](https://github.com/tigrbl/tigrbl_auth#package-catalog) · [@tbauth/ui-my-account](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/105-ui/tba-ui-my-account#readme) · [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues) · [Repository license](https://github.com/tigrbl/tigrbl_auth/blob/master/LICENSE)

@@ -1,4 +1,4 @@
-# @tba/client-policy-decision
+# @tbauth/client-policy-decision
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

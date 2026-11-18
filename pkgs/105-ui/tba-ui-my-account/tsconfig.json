@@ -17,8 +17,8 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@tba/ui-primitives": ["../../100-uix-core/tba-ui-primitives/index.ts"],
-      "@tba/ui-primitives/styles.css": ["../../100-uix-core/tba-ui-primitives/src/styles/core.css"]
+      "@tbauth/ui-primitives": ["../../100-uix-core/tba-ui-primitives/index.ts"],
+      "@tbauth/ui-primitives/styles.css": ["../../100-uix-core/tba-ui-primitives/src/styles/core.css"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "vite-env.d.ts"],

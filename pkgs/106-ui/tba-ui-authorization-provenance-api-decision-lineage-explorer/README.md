@@ -1,4 +1,4 @@
-# @tba/ui-authorization-provenance-api-decision-lineage-explorer
+# @tbauth/ui-authorization-provenance-api-decision-lineage-explorer
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

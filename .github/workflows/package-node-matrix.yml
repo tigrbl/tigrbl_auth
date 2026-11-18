@@ -26,9 +26,9 @@ on:
         type: choice
         options:
           - all
-          - "@tba/ui-administration"
-          - "@tba/ui-public"
-          - "@tba/client-oidc-relying-party"
+          - "@tbauth/ui-administration"
+          - "@tbauth/ui-public"
+          - "@tbauth/client-oidc-relying-party"
       node-version:
         description: Optional single Node.js version to test.
         required: false

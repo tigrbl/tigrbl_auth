@@ -1,6 +1,6 @@
 # Device and IoT Identity API + Fleet Trust UIX Requirements Brief
 
-**Proposed pairing:** `tba-router-device-identity` + `@tba/fleet-trust-uix`<br>
+**Proposed pairing:** `tba-router-device-identity` + `@tbauth/fleet-trust-uix`<br>
 **Status:** New product surface; device/machine principal, credential, certificate, attestation, policy, token, and storage foundations exist<br>
 **Prepared:** July 11, 2026<br>
 **Proposed router owner:** `pkgs/80-routers/tba-router-device-identity`<br>

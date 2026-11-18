@@ -1,4 +1,4 @@
-import { DetailPanel, JsonViewer, PageHeader, StatusBadge } from "@tba/ui-primitives";
+import { DetailPanel, JsonViewer, PageHeader, StatusBadge } from "@tbauth/ui-primitives";
 import type { AdminSession } from "../types";
 import { BACKEND_APP_BASE_URL, BACKEND_APP } from "../services/backendSurface";
 

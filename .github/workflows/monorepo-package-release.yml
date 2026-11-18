@@ -113,10 +113,17 @@ jobs:
           name: python-dist-${{ matrix.package.name }}
           path: dist/${{ matrix.package.name }}
       - name: Publish package to PyPI
+        if: ${{ matrix.package.name != 'tba-protocol-oidc-relying-party' }}
         uses: cobycloud/actions/actions/pypi-token-publish@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           packages-dir: dist/${{ matrix.package.name }}
           token: ${{ secrets.PYPI_API_TOKEN }}
+          skip-existing: "true"
+      - name: Publish the OIDC relying-party package with scoped Trusted Publishing
+        if: ${{ matrix.package.name == 'tba-protocol-oidc-relying-party' }}
+        uses: cobycloud/actions/actions/pypi-trusted-publish@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
+        with:
+          packages-dir: dist/${{ matrix.package.name }}
           skip-existing: "true"
 
   github-release-dispatch:

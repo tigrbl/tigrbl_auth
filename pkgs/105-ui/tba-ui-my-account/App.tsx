@@ -1,5 +1,5 @@
-import { AppShell, AuthProvider, AuthShell, Button, Card, ErrorState, RequireAuth, Toast, describeSession } from "@tba/ui-primitives";
-import "@tba/ui-primitives/styles.css";
+import { AppShell, AuthProvider, AuthShell, Button, Card, ErrorState, RequireAuth, Toast, describeSession } from "@tbauth/ui-primitives";
+import "@tbauth/ui-primitives/styles.css";
 import { useEffect, useState } from "react";
 import { BACKEND_APP_BASE_URL, BACKEND_APP, PUBLIC_LOGIN_URL } from "./defaults";
 import { useConsents } from "./hooks/useConsents";

@@ -1,4 +1,4 @@
-# @tba/ui-telephone-confirmation-authenticator-amr
+# @tbauth/ui-telephone-confirmation-authenticator-amr
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

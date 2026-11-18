@@ -1,4 +1,4 @@
-# @tba/ui-hardware-secured-key-authenticator-amr-workbench
+# @tbauth/ui-hardware-secured-key-authenticator-amr-workbench
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

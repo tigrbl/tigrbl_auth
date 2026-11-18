@@ -1,5 +1,5 @@
 {
-  "name": "@tba/ui-fingerprint-authenticator-amr-governor",
+  "name": "@tbauth/ui-fingerprint-authenticator-amr-governor",
   "private": true,
   "version": "0.0.0",
   "type": "module",
