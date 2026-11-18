@@ -95,12 +95,22 @@ def build_workload_identity_composition(
         )
     resolved = dict(dependencies)
     if config.enable_wimse_wpt:
-        from tba_profile_workload_proof_wimse_wpt import WptProofVerifier
+        from tba_profile_workload_proof_wimse_wpt import WptProofIssuer, WptProofVerifier
 
         resolved["wimse_wpt_verifier"] = WptProofVerifier(
             trust_by_domain=resolved["wit_trust_by_domain"],
             replay_store=resolved["wpt_replay_store"],
         )
+        issuer_inputs = {"wpt_signer", "wpt_wit", "wpt_workload_key_reference"}
+        if issuer_inputs.intersection(resolved):
+            missing_issuer = issuer_inputs.difference(resolved)
+            if missing_issuer:
+                raise ValueError(f"missing WPT issuer dependencies: {sorted(missing_issuer)}")
+            resolved["wimse_wpt_issuer"] = WptProofIssuer(
+                resolved["wpt_signer"],
+                resolved["wpt_wit"],
+                workload_key_reference=resolved["wpt_workload_key_reference"],
+            )
     if config.enable_wimse_mtls:
         from functools import partial
 

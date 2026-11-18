@@ -13,5 +13,8 @@ __all__ = [
 from .verification import verify_wpt, authenticate_wpt_request
 from .presentation import present_wit
 from .verifier import WptProofVerifier
+from .issuance import WptProofIssuer, issue_wpt
+from .verification import _target_audience as normalize_wpt_audience
 
 __all__ += ["verify_wpt", "authenticate_wpt_request", "present_wit", "WptProofVerifier"]
+__all__ += ["WptProofIssuer", "issue_wpt", "normalize_wpt_audience"]

@@ -42,4 +42,28 @@ according to [WPT draft-02 §2](https://datatracker.ietf.org/doc/html/draft-ietf
 
 ## Verification
 
+`issue_wpt(signer, wit, workload_key_reference=..., audience=..., now=...)`
+returns a compact signed WPT without HTTP headers. It generates a fresh `jti`,
+binds the exact WIT, checks that the signing key matches the WIT's confirmation
+key, and caps expiry at the earlier of the requested lifetime and WIT expiry.
+WPT lifetime is limited to 1–300 seconds. The recipient authenticates the WIT issuer.
+
+`WptProofIssuer(signer, wit, workload_key_reference=...).issue(context)`
+implements `PossessionProofIssuerPort` and returns a `PossessionProof` with
+its populated credential digest, proof ID, expiry, and bound context.
+`context` is a `PossessionProofContext` with `audience` or `target_uri`.
+Conflicting audiences, a different WIT digest, and requested HTTP method binding
+are rejected. This WPT profile binds audience, not HTTP method. Audiences follow
+the pinned HTTP profile: absolute HTTP(S) URIs normalized without query or fragment.
+
+For additional bindings, supply lowercase header names and SHA-256 base64url
+digests through `accompanying_token_digests`. `txn-token` becomes `tth`; other
+tokens become `oth`. `present_wit()` retains its HTTP headers interface and
+delegates signing to `issue_wpt()`. `normalize_wpt_audience()` exposes the shared
+audience normalization used by issuers and remote-verifier configuration.
+
+The receiver's configured `bound_token_headers` are required even when the
+sender omits both the header and its proof claim. `WptProofVerifier` reserves
+replay state only after validating trust, signature, audience and token bindings.
+
 The quick start was run with the pinned distribution from PyPI and its declared dependencies. See the [public package entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/55-profiles/tba-profile-workload-proof-wimse-wpt/src/tba_profile_workload_proof_wimse_wpt/__init__.py).

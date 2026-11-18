@@ -20,6 +20,9 @@ classifiers = [
 authors = [{ name = "Jacob Stewart", email = "jacob@swarmauri.com" }]
 keywords = ["oidc", "oauth2", "identity-provider", "jwks", "jwt", "tigrbl", "sdk", "standards", "auth", "authentication"]
 dependencies = [
+    "tba-app-backend-wpt-verifier==0.4.0.dev2",
+    "tba-app-backend-wit-issuance==0.4.0.dev2",
+    "tba-router-wpt-verification==0.4.0.dev2",
     "tba-provider-certificate-issuer-x509==0.4.0.dev2",
     "tba-router-wic-ca==0.4.0.dev2",
     "tba-router-wit-issuance==0.4.0.dev2",
@@ -639,6 +642,9 @@ packages = []
 package = false
 
 [tool.uv.sources]
+tba-app-backend-wpt-verifier = { path = "pkgs/90-backend-apps/tba-app-backend-wpt-verifier", editable = true }
+tba-app-backend-wit-issuance = { path = "pkgs/90-backend-apps/tba-app-backend-wit-issuance", editable = true }
+tba-router-wpt-verification = { path = "pkgs/80-routers/tba-router-wpt-verification", editable = true }
 tba-provider-certificate-issuer-x509 = { path = "pkgs/20-providers/tba-provider-certificate-issuer-x509", editable = true }
 tba-router-wic-ca = { path = "pkgs/80-routers/tba-router-wic-ca", editable = true }
 tba-router-wit-issuance = { path = "pkgs/80-routers/tba-router-wit-issuance", editable = true }

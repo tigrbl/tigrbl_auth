@@ -104,4 +104,10 @@ This package is part of the SSOT-governed TBA identity package suite. The README
 
 ## Verification
 
+When WIMSE WPT verification is enabled, workload composition also constructs
+`wimse_wpt_issuer` if `wpt_signer`, `wpt_wit`, and
+`wpt_workload_key_reference` are supplied together. Partial issuer configuration
+is rejected. Existing verifier-only composition is unchanged; direct use of the
+profile's `WptProofIssuer` remains available for sender-only processes.
+
 The quick start was run with the pinned distribution from PyPI and its declared dependencies. See the [public package entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/60-runtime/tba-runtime-identity/src/tba_runtime_identity/__init__.py).

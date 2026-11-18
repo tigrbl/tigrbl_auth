@@ -42,7 +42,7 @@ def verify_wpt(
     for name, value in presented_headers:
         name = name.lower()
         token_digests[name] = None if name in token_digests else value.strip()
-    required = {name.lower() for name in bound_token_headers} & token_digests.keys()
+    required = {name.lower() for name in bound_token_headers}
     return _verify_wpt(
         proof,
         wit_digest=_hash_token(wit_serialized),
@@ -108,6 +108,10 @@ def _verify_wpt(
     def digest(name):
         value = token_digests.get(name)
         return _hash_token(value) if digest_values and value is not None else value
+
+    if any(not digest(name) for name in required):
+        raise ValueError("WPT required token binding is missing")
+    required = set(required) - {"txn-token"}
 
     if "txn-token" in token_digests or "tth" in claims:
         transaction_digest = digest("txn-token")

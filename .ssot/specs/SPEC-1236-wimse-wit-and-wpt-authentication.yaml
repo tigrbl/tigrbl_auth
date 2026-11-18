@@ -25,9 +25,16 @@ body: |-
   The WIT profile MUST validate the workload identifier, credential type, confirmation key, issuer signature, and validity using trust anchors configured for the subject trust domain. The WPT profile MUST enforce HTTP presentation, proof signature and algorithm binding, audience, lifetime, and exact WIT hash. The verifier MUST atomically reject a repeated proof ID scoped to its workload identity while the proof remains valid. The WIT and WPT packages MUST remain independently composable.
   
   ## Verification
-  T3 exercises both roles with Tigrbl Auth release-candidate packages over HTTP using configured trust and the real replay provider. Cover wrong domain anchors, issuer and proof keys, proof bound to a different WIT, wrong audience, expiry, and replay. Native verification runs without SPIFFE, SPIRE, or Cred. The optional pinned Cred peer suite exercises the Tigrbl Auth sender for a separate T4 claim.
+  T3 exercises both roles with Tigrbl Auth release-candidate packages over HTTP using configured trust and the real replay provider. Cover wrong domain anchors, issuer and proof keys, proof bound to a different WIT, wrong audience, expiry, and replay. Native verification runs without SPIFFE, SPIRE, or Cred.
   
-  Link WIT/WPT peer scenarios and any explicit WIC plus WIT/WPT composition under SPEC-1237. Qualify each profile and direction under SPEC-1238 and record scoped results under SPEC-1239. The optional Cred sender suite does not establish the TbA receiver or reverse-direction result.
+  ## WIT issuer application
+  tba-app-backend-wit-issuance MUST compose the native issuance router and token service with explicit signer, workload authentication, enrollment resolution, and confirmation-key authorization. No caller-supplied workload subject may override enrollment.
+  ## WPT issuance API
+  The WPT profile MUST expose issue_wpt for compact JWT issuance and WptProofIssuer implementing PossessionProofIssuerPort. Both MUST use the configured workload key, create a fresh proof ID, bind the exact WIT and any supplied token digests, and cap expiry at the WIT expiry and configured short lifetime. The carrier-neutral issuer MUST reject a conflicting audience, credential digest or unsupported method binding. present_wit MUST reuse the same issuance implementation.
+  ## Delegated verification
+  tba-router-wpt-verification and tba-app-backend-wpt-verifier MUST expose POST /wpt/verify for authenticated, explicitly authorized recipient services. The deployment MUST fix audience, trust keys and required token bindings. The caller MUST NOT replace those policies. The API MUST preserve original token-header multiplicity, reject invalid or duplicate bound tokens, and require configured bindings even if absent from both the request and proof. Replay state MUST be atomically reserved once after successful cryptographic and context validation, and shared across verifier replicas. Success returns only valid, subject, audience, proof_id and expires_at with caching disabled. Verification consumes replay state; it is not a non-consuming inspection or resource-authorization decision.
+  ## Runtime composition
+  Existing verifier-only composition MUST remain usable. If any of wpt_signer, wpt_wit or wpt_workload_key_reference is supplied, all three MUST be present before constructing wimse_wpt_issuer. Sender-only use of the profile API MUST remain possible without constructing a backend app.
 spec_kind: "normative"
 adr_ids:
   - "adr:1140"

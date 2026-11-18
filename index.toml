@@ -1947,6 +1947,14 @@ local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
+name = "tba-tests-interop-wimse-matrix"
+path = "pkgs/120-tests/tba-tests-interop-wimse-matrix"
+layer = "120-tests"
+order = "00"
+local_dependencies = []
+same_layer_dependencies = []
+
+[[packages]]
 name = "tba-tests-spiffe"
 path = "pkgs/120-tests/tba-tests-spiffe"
 layer = "120-tests"
@@ -2112,6 +2120,14 @@ path = "pkgs/20-providers/tba-provider-certificate-evidence"
 layer = "20-providers"
 order = "00"
 local_dependencies = []
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-provider-certificate-issuer-x509"
+path = "pkgs/20-providers/tba-provider-certificate-issuer-x509"
+layer = "20-providers"
+order = "00"
+local_dependencies = ["tba-bases-certificate", "tba-contracts-security-trust"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -3335,7 +3351,7 @@ name = "tba-profile-workload-proof-wimse-wpt"
 path = "pkgs/55-profiles/tba-profile-workload-proof-wimse-wpt"
 layer = "55-profiles"
 order = "01"
-local_dependencies = ["tba-concrete-jwt", "tba-primitives-identity", "tba-profile-workload-credential-wimse-wit", "tba-provider-jose-cryptography"]
+local_dependencies = ["tba-concrete-jwt", "tba-contracts-proof-of-possession", "tba-contracts-replay", "tba-primitives-identity", "tba-profile-workload-credential-wimse-wit", "tba-provider-jose-cryptography"]
 same_layer_dependencies = ["tba-profile-workload-credential-wimse-wit"]
 
 [[packages]]
@@ -3359,7 +3375,7 @@ name = "tba-runtime-identity"
 path = "pkgs/60-runtime/tba-runtime-identity"
 layer = "60-runtime"
 order = "00"
-local_dependencies = ["tba-capability-protected-envelope", "tba-capability-public-key-authentication", "tba-capability-public-key-credential-management", "tba-capability-public-key-registration", "tba-contracts-identity", "tba-profile-credential-vc-jose-cose", "tba-profile-workload-authentication-wimse-mtls", "tba-profile-workload-credential-cwt-svid-extension", "tba-protocol-cwt", "tba-protocol-identity-did-core", "tba-protocol-security-cose", "tba-protocol-security-jws", "tba-protocol-webauthn", "tba-provider-identity-jose", "tba-provider-secret-hashing-bcrypt", "tba-runtime-identity-storage", "tba-storage-core"]
+local_dependencies = ["tba-bases-certificate", "tba-capability-protected-envelope", "tba-capability-public-key-authentication", "tba-capability-public-key-credential-management", "tba-capability-public-key-registration", "tba-concrete-certificate-x509", "tba-contracts-identity", "tba-contracts-security-trust", "tba-profile-credential-vc-jose-cose", "tba-profile-workload-authentication-wimse-mtls", "tba-profile-workload-credential-cwt-svid-extension", "tba-profile-workload-credential-wimse-wic", "tba-profile-workload-credential-wimse-wit", "tba-profile-workload-proof-wimse-wpt", "tba-protocol-cwt", "tba-protocol-identity-did-core", "tba-protocol-security-cose", "tba-protocol-security-jws", "tba-protocol-webauthn", "tba-protocol-workload-wimse-identifier", "tba-provider-identity-jose", "tba-provider-jose-cryptography", "tba-provider-secret-hashing-bcrypt", "tba-runtime-identity-storage", "tba-storage-core"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -3635,6 +3651,30 @@ local_dependencies = ["tba-protocol-webauthn"]
 same_layer_dependencies = []
 
 [[packages]]
+name = "tba-router-wic-ca"
+path = "pkgs/80-routers/tba-router-wic-ca"
+layer = "80-routers"
+order = "00"
+local_dependencies = ["tba-runtime-identity"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-router-wit-issuance"
+path = "pkgs/80-routers/tba-router-wit-issuance"
+layer = "80-routers"
+order = "00"
+local_dependencies = ["tba-runtime-identity"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-router-wpt-verification"
+path = "pkgs/80-routers/tba-router-wpt-verification"
+layer = "80-routers"
+order = "00"
+local_dependencies = ["tba-concrete-jwt", "tba-profile-workload-proof-wimse-wpt"]
+same_layer_dependencies = []
+
+[[packages]]
 name = "tba-middleware-policy-enforcement-asgi"
 path = "pkgs/85-middleware/tba-middleware-policy-enforcement-asgi"
 layer = "85-middleware"
@@ -3664,6 +3704,30 @@ path = "pkgs/90-backend-apps/tba-app-backend-relying-party"
 layer = "90-backend-apps"
 order = "00"
 local_dependencies = ["tba-router-relying-party-session"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-app-backend-wic-ca"
+path = "pkgs/90-backend-apps/tba-app-backend-wic-ca"
+layer = "90-backend-apps"
+order = "00"
+local_dependencies = ["tba-provider-certificate-issuer-x509", "tba-router-wic-ca", "tba-runtime-identity"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-app-backend-wit-issuance"
+path = "pkgs/90-backend-apps/tba-app-backend-wit-issuance"
+layer = "90-backend-apps"
+order = "00"
+local_dependencies = ["tba-provider-jose-cryptography", "tba-router-wit-issuance", "tba-runtime-identity"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-app-backend-wpt-verifier"
+path = "pkgs/90-backend-apps/tba-app-backend-wpt-verifier"
+layer = "90-backend-apps"
+order = "00"
+local_dependencies = ["tba-contracts-replay", "tba-profile-workload-proof-wimse-wpt", "tba-router-wpt-verification"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -4113,11 +4177,3 @@ layer = "deprecated"
 order = "01"
 local_dependencies = ["tigrbl-identity-credentials-concrete"]
 same_layer_dependencies = ["tigrbl-identity-credentials-concrete"]
-
-[[packages]]
-name = "tba-tests-interop-wimse-matrix"
-path = "pkgs/120-tests/tba-tests-interop-wimse-matrix"
-layer = "120-tests"
-order = "00"
-local_dependencies = []
-same_layer_dependencies = []

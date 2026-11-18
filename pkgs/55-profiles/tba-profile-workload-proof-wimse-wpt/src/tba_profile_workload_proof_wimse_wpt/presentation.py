@@ -1,14 +1,7 @@
-from collections.abc import Mapping
-from secrets import token_urlsafe
+from tba_provider_jose_cryptography.jws import ProtectedEnvelopeIssuerPort
 
-from tba_concrete_jwt import decode_jwt_unverified
-from tba_provider_jose_cryptography.jws import (
-    ProtectedEnvelopeIssuerPort,
-    sign_compact_jwt,
-)
-from tba_provider_jose_cryptography.public_jws import verify_public_jws
-
-from .verification import _hash_token, _target_audience
+from .issuance import issue_wpt
+from .verification import _hash_token
 
 
 def present_wit(
@@ -22,39 +15,27 @@ def present_wit(
     transaction_token: str | None = None,
 ) -> dict[str, str]:
     """Sign and present a proof for an already provisioned WIT."""
-    if (
-        type(now) is not int
-        or type(lifetime_seconds) is not int
-        or not 0 < lifetime_seconds <= 300
-    ):
-        raise ValueError("WPT lifetime must be between 1 and 300 seconds")
-    token = decode_jwt_unverified(wit)
-    if token.jws.protected_headers.get("typ") not in ("wit+jwt", "application/wit+jwt"):
-        raise ValueError("expected a WIT")
-    confirmation = token.claims.get("cnf")
-    jwk = confirmation.get("jwk") if isinstance(confirmation, Mapping) else None
-    algorithm = jwk.get("alg") if isinstance(jwk, Mapping) else None
-    if not isinstance(algorithm, str):
-        raise ValueError("WIT confirmation JWK requires a signing algorithm")
-    claims = {
-        "aud": _target_audience(target_uri),
-        "exp": now + lifetime_seconds,
-        "jti": token_urlsafe(16),
-        "wth": _hash_token(wit),
-    }
+    digests = {}
     request_headers = {"Workload-Identity-Token": wit}
     if transaction_token is not None:
-        if (not isinstance(transaction_token, str) or not transaction_token
-                or not transaction_token.isascii()
-                or any(not 33 <= ord(char) <= 126 or char == "," for char in transaction_token)):
+        if (
+            not isinstance(transaction_token, str)
+            or not transaction_token
+            or not transaction_token.isascii()
+            or any(
+                not 33 <= ord(char) <= 126 or char == "," for char in transaction_token
+            )
+        ):
             raise ValueError("expected a single ASCII transaction token")
-        claims["tth"] = _hash_token(transaction_token)
+        digests["txn-token"] = _hash_token(transaction_token)
         request_headers["Txn-Token"] = transaction_token
-    proof = sign_compact_jwt(
+    proof = issue_wpt(
         signer,
-        claims,
-        headers={"typ": "wpt+jwt", "alg": algorithm},
-        key_reference=workload_key_reference,
+        wit,
+        workload_key_reference=workload_key_reference,
+        audience=target_uri,
+        now=now,
+        lifetime_seconds=lifetime_seconds,
+        accompanying_token_digests=digests,
     )
-    verify_public_jws(proof, jwk)
     return {**request_headers, "Authorization": f"WPT {proof}"}
