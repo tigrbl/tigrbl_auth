@@ -3,6 +3,10 @@ name: monorepo-package-release-scoped-batch
 on:
   workflow_dispatch:
     inputs:
+      standards_plan:
+        description: Optional committed package standards plan; bypasses version bumping.
+        required: false
+        default: ""
       package:
         description: Package name to tag, or all.
         required: false
@@ -38,6 +42,7 @@ concurrency:
 
 jobs:
   bump-package-versions:
+    if: ${{ inputs.standards_plan == '' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -256,3 +261,78 @@ jobs:
           GH_REPO: ${{ github.repository }}
           RELEASE_TAG: ${{ steps.package.outputs.tag }}
         run: gh release edit "$RELEASE_TAG" --draft=false
+
+  build-standards-batch:
+    if: ${{ inputs.standards_plan != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+      - name: Validate source and build every planned release
+        env:
+          STANDARDS_PLAN: ${{ inputs.standards_plan }}
+        run: |
+          export SOURCE_DATE_EPOCH=$(git show -s --format=%ct HEAD)
+          uv run --no-project python scripts/verify_package_standards.py
+          uv run --no-project python scripts/render_readme_branding.py --check
+          uv run --no-project --with pytest python -I -m pytest tests/unit/test_package_standards.py tests/unit/test_standards_release_artifacts.py --confcutdir=tests/unit -c /dev/null -q
+          uv run --no-project python scripts/build_standards_release.py --plan "$STANDARDS_PLAN" --out standards-dist --workers 8
+          uv run --no-project --with twine twine check --strict standards-dist/*/*.whl standards-dist/*/*.tar.gz
+      - uses: actions/upload-artifact@v7
+        with:
+          name: package-standards-distributions
+          path: standards-dist
+          retention-days: 30
+
+  publish-standards-batch:
+    needs: build-standards-batch
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    environment: pypi
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@v8
+        with:
+          name: package-standards-distributions
+          path: standards-dist
+      - name: Create immutable package source tags
+        env:
+          STANDARDS_PLAN: ${{ inputs.standards_plan }}
+        run: |
+          uv run --no-project python - <<'PY'
+          import json, os, subprocess
+          plan = json.load(open(os.environ['STANDARDS_PLAN']))
+          head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
+          tags = []
+          for package in plan['packages']:
+              tag = package['name'] + '==' + package['version']
+              prior = subprocess.run(['git', 'rev-parse', '-q', '--verify', 'refs/tags/' + tag], capture_output=True, text=True)
+              if prior.returncode == 0:
+                  if prior.stdout.strip() != head:
+                      raise SystemExit('Refusing to replace existing tag ' + tag)
+              else:
+                  subprocess.run(['git', 'tag', tag, head], check=True)
+              tags.append('refs/tags/' + tag)
+          subprocess.run(['git', 'push', '--atomic', 'origin', *tags], check=True)
+          PY
+      - name: Publish inspected artifacts using the existing PyPI release credential
+        env:
+          UV_PUBLISH_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+          STANDARDS_PLAN: ${{ inputs.standards_plan }}
+        run: uv run --no-project python scripts/publish_standards_release.py --plan "$STANDARDS_PLAN" --dist standards-dist
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: package-standards-pypi-verification
+          path: standards-dist/pypi-verification.json
+          if-no-files-found: warn

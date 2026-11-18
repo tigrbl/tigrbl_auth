@@ -1,6 +1,6 @@
 [project]
 name="tba-concrete-credential-service-key"
-version="0.4.0.dev2"
+version="0.4.0.dev3"
 description = "Concrete credential service key value types for Tigrbl Auth."
 readme = "README.md"
 requires-python=">=3.10,<3.16"
@@ -11,11 +11,29 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3.15",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Development Status :: 3 - Alpha",
+    "Typing :: Typed",
 ]
 license="Apache-2.0"
-dependencies=["tba-contracts-identity==0.4.0.dev2","tba-bases-authentication-credential==0.4.0.dev2"]
+dependencies=["tba-contracts-identity==0.4.0.dev3", "tba-bases-authentication-credential==0.4.0.dev3"]
+license-files = ["LICENSE", "NOTICE"]
+keywords = ["tigrbl", "tba", "identity"]
+
+[[project.authors]]
+name = "Jacob Stewart"
+email = "jacob@swarmauri.com"
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/10-concrete/tba-concrete-credential-service-key#readme"
+Documentation = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/10-concrete/tba-concrete-credential-service-key#readme"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/10-concrete/tba-concrete-credential-service-key"
+Issues = "https://github.com/tigrbl/tigrbl_auth/issues"
+PyPI = "https://pypi.org/project/tba-concrete-credential-service-key/"
 [build-system]
-requires=["poetry-core>=1.0.0"]
+requires=["poetry-core>=2.2.0,<3.0.0"]
 build-backend="poetry.core.masonry.api"
 [tool.poetry]
 packages=[{include="tba_concrete_credential_service_key",from="src"}]

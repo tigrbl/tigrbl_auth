@@ -59,7 +59,7 @@ jobs:
           pkgs/120-tests/tba-tests-wimse/tests
           pkgs/120-tests/tba-tests-spiffe/tests
           pkgs/120-tests/tba-tests-workload-composition/tests
-          pkgs/120-tests/tba-testkit-workload-credential-conformance/tests
+          pkgs/120-tests/tba-tests-workload-credential-conformance/tests
 
   discover-package-matrix:
     runs-on: ubuntu-latest

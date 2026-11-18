@@ -7,11 +7,13 @@
 <p align="center">
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pyproject.toml"><img alt="Workspace: 0.4.0.dev2" src="https://img.shields.io/badge/Workspace-0.4.0.dev2-1f6feb"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pyproject.toml"><img alt="Python: &gt;=3.10,&lt;3.16" src="https://img.shields.io/badge/Python-%3E%3D3.10%2C%3C3.16-3776ab"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pyproject.toml"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/License-Apache--2.0-525252"></a>
+<a href="LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/License-Apache--2.0-525252"></a>
+<a href="NOTICE"><img alt="Notice: attribution" src="https://img.shields.io/badge/Notice-attribution-525252"></a>
 <a href="https://pypi.org/project/tba-auth/"><img alt="PyPI version for tba-auth" src="https://img.shields.io/pypi/v/tba-auth?label=tba-auth%20PyPI"></a>
 </p>
 <p align="center">
 <a href="https://pepy.tech/project/tba-auth"><img alt="Monthly PyPI downloads for tba-auth" src="https://static.pepy.tech/badge/tba-auth/month"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/README.md"><img alt="README hits for tba-workspace" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/README.md.svg?label=hits"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/actions/workflows/master.yml"><img alt="Workspace CI on master" src="https://github.com/tigrbl/tigrbl_auth/actions/workflows/master.yml/badge.svg?branch=master"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"><img alt="SSOT: registry" src="https://img.shields.io/badge/SSOT-registry-2f6f4e"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/CERTIFICATION_STATUS.md"><img alt="Certification: status report" src="https://img.shields.io/badge/Certification-status%20report-8250df"></a>
@@ -25,7 +27,7 @@ TBA is the Tigrbl authentication and authorization suite. Use it to serve OAuth 
 From a checkout, use [uv](https://docs.astral.sh/uv/) to inspect the baseline OAuth and OpenID Connect discovery snapshots. This runs the published TBA distribution in an isolated Python 3.12 environment and reads the snapshots in this repository.
 
 ```bash
-uv run --isolated --no-project --python 3.12 --with tba-auth==0.4.0.dev2 tba-auth discovery --format json show --repo-root .
+uv run --isolated --no-project --python 3.12 --with tba-auth==0.4.0.dev3 tba-auth discovery --format json show --repo-root .
 ```
 
 Expect a JSON object with `"command": "discovery.show"` and a `documents` object containing `openid-configuration.json`, `oauth-authorization-server.json`, and `jwks.json`. The baseline snapshots use an example issuer and an empty key set.
@@ -73,7 +75,7 @@ Start with a representative package below or browse the [full package tree](pkgs
 | 105 · Product UIs | [@tba/ui-my-account](pkgs/105-ui/tba-ui-my-account/README.md) |
 | 106 · UI prototypes | [@tba/ui-trust-center](pkgs/106-ui/tba-ui-trust-center/README.md) |
 | 110 · Examples | [tba-example-oauth-device-authorization-cli](pkgs/110-examples/tba-example-oauth-device-authorization-cli/README.md) |
-| 120 · Testkits | [tba-testkit-identity](pkgs/120-tests/tba-testkit-identity/README.md) |
+| 120 · Testkits | [tba-tests-identity](pkgs/120-tests/tba-tests-identity/README.md) |
 
 ## Release and certification evidence
 

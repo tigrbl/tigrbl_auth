@@ -1,6 +1,6 @@
 [project]
 name = "tba-protocol-ucan"
-version = "0.4.0.dev2"
+version = "0.4.0.dev3"
 description = "UCAN delegation and invocation verification for the TBA Ed25519 development profile."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -11,18 +11,29 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3.15",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Development Status :: 3 - Alpha",
+    "Typing :: Typed",
 ]
 license = "Apache-2.0"
-dependencies = [
-    "cryptography>=45",
-    "tba-codec-cid==0.4.0.dev2",
-    "tba-codec-dag-cbor==0.4.0.dev2",
-    "tba-codec-multibase==0.4.0.dev2",
-    "tba-contracts-replay==0.4.0.dev2",
-]
+dependencies = ["cryptography>=45", "tba-codec-cid==0.4.0.dev3", "tba-codec-dag-cbor==0.4.0.dev3", "tba-codec-multibase==0.4.0.dev3", "tba-contracts-replay==0.4.0.dev3"]
+license-files = ["LICENSE", "NOTICE"]
+keywords = ["tigrbl", "tba", "identity"]
 
+[[project.authors]]
+name = "Jacob Stewart"
+email = "jacob@swarmauri.com"
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/50-protocols/tba-protocol-ucan#readme"
+Documentation = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/50-protocols/tba-protocol-ucan#readme"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/50-protocols/tba-protocol-ucan"
+Issues = "https://github.com/tigrbl/tigrbl_auth/issues"
+PyPI = "https://pypi.org/project/tba-protocol-ucan/"
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=2.2.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]

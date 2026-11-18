@@ -5,14 +5,16 @@
 <a href="https://github.com/tigrbl/tigrbl_auth#readme"><img src="https://raw.githubusercontent.com/tigrbl/tigrbl_auth/master/docs/assets/tba-brand.png" alt="TBA · Tigrbl Auth" width="240"></a>
 </p>
 <p align="center">
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/05-bases/tba-bases-authenticator/pyproject.toml"><img alt="Checkout: 0.1.0" src="https://img.shields.io/badge/Checkout-0.1.0-1f6feb"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/05-bases/tba-bases-authenticator/pyproject.toml"><img alt="Checkout: 0.1.1.dev1" src="https://img.shields.io/badge/Checkout-0.1.1.dev1-1f6feb"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/05-bases/tba-bases-authenticator/pyproject.toml"><img alt="Python: &gt;=3.10,&lt;3.16" src="https://img.shields.io/badge/Python-%3E%3D3.10%2C%3C3.16-3776ab"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/05-bases/tba-bases-authenticator/pyproject.toml"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/License-Apache--2.0-525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/tba-bases-authenticator%3D%3D0.1.1.dev1/pkgs/05-bases/tba-bases-authenticator/LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/License-Apache--2.0-525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/tba-bases-authenticator%3D%3D0.1.1.dev1/pkgs/05-bases/tba-bases-authenticator/NOTICE"><img alt="Notice: attribution" src="https://img.shields.io/badge/Notice-attribution-525252"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/05-bases"><img alt="Layer: 05 bases" src="https://img.shields.io/badge/Layer-05%20bases-0a7f5a"></a>
 <a href="https://pypi.org/project/tba-bases-authenticator/"><img alt="PyPI version for tba-bases-authenticator" src="https://img.shields.io/pypi/v/tba-bases-authenticator?label=tba-bases-authenticator%20PyPI"></a>
 </p>
 <p align="center">
 <a href="https://pepy.tech/project/tba-bases-authenticator"><img alt="Monthly PyPI downloads for tba-bases-authenticator" src="https://static.pepy.tech/badge/tba-bases-authenticator/month"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/05-bases/tba-bases-authenticator/README.md"><img alt="README hits for tba-bases-authenticator" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/05-bases/tba-bases-authenticator/README.md.svg?label=hits"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/05-bases/tba-bases-authenticator/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
 </p>
 <!-- END TBA README HEADER -->
@@ -24,7 +26,7 @@ Build authenticator providers with shared metadata, evidence, and challenge inte
 Install the version used by this example.
 
 ```bash
-python -m pip install "tba-bases-authenticator==0.1.0"
+python -m pip install "tba-bases-authenticator==0.1.1.dev1"
 ```
 
 Save the following as `quickstart.py` and run `python quickstart.py`. The assertions should pass.

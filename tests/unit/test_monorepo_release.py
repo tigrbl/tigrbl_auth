@@ -125,8 +125,9 @@ def test_monorepo_release_discovers_split_packages() -> None:
 
 
 def test_monorepo_release_accepts_package_version_tag() -> None:
+    package = next(p for p in discover_packages() if p.name == "tba-auth")
     completed = subprocess.run(
-        [sys.executable, str(SCRIPT), "resolve-tag", "tba-auth==0.4.0.dev2"],
+        [sys.executable, str(SCRIPT), "resolve-tag", f"tba-auth=={package.version}"],
         cwd=ROOT,
         text=True,
         capture_output=True,
@@ -134,7 +135,7 @@ def test_monorepo_release_accepts_package_version_tag() -> None:
     )
 
     assert '"name": "tba-auth"' in completed.stdout
-    assert '"tag": "tba-auth==0.4.0.dev2"' in completed.stdout
+    assert f'"tag": "tba-auth=={package.version}"' in completed.stdout
 
 
 def test_monorepo_release_rejects_stale_version_for_split_package() -> None:
@@ -180,10 +181,10 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
         for cell in matrix
         if cell["name"] == "tba-provider-authorization-resource-server-verifier"
     } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
-    testkit_cells = [cell for cell in matrix if cell["name"] == "tba-testkit-identity"]
+    testkit_cells = [cell for cell in matrix if cell["name"] == "tba-tests-identity"]
     assert len(testkit_cells) == 3
     assert all(cell["cross_cutting"] == "true" for cell in testkit_cells)
-    assert all("tests/packages/tba-testkit-identity" in cell["package_test_paths"] for cell in testkit_cells)
+    assert all("tests/packages/tba-tests-identity" in cell["package_test_paths"] for cell in testkit_cells)
     assert all("tests/integration" not in cell["package_test_paths"] for cell in testkit_cells)
     assert all("tests/interop" in cell["package_test_paths"] for cell in testkit_cells)
     assert all(cell["pytest_args"] == "--certification-lane\nall" for cell in testkit_cells)
@@ -210,13 +211,14 @@ def test_monorepo_release_filters_package_python_test_matrix() -> None:
     matrix = json.loads(payload["matrix"])
 
     assert payload["count"] == "1"
+    package = next(p for p in discover_packages() if p.name == "tba-protocol-oauth")
     assert matrix == [
         {
             "name": "tba-protocol-oauth",
-            "version": "0.4.0.dev2",
+            "version": package.version,
             "path": "pkgs/50-protocols/tba-protocol-oauth",
             "import_root": "tba_protocol_oauth",
-            "tag": "tba-protocol-oauth==0.4.0.dev2",
+            "tag": f"tba-protocol-oauth=={package.version}",
             "python_version": "3.12",
             "python_tag": "py312",
             "cell_id": "tba-protocol-oauth-py312",
@@ -310,13 +312,15 @@ def test_monorepo_release_materializes_testkit_interop_templates_with_isolated_p
 
 
 
-def test_testkit_wheel_closure_includes_local_compatibility_packages_and_extras() -> None:
+def test_testkit_wheel_closure_uses_active_replacements_and_extras() -> None:
     names = {
         package.name
         for package in _local_dependency_closure(
             _root_project_package(), extras=TESTKIT_ROOT_EXTRAS
         )
     }
-    assert "tba-provider-security-cose" in names
+    assert "tba-provider-security-cose" not in names
+    assert "tba-concrete-cose" in names
+    assert "tba-provider-cose-cryptography" in names
     assert "tba-contracts-dns" in names
     assert "tba-profile-communications-identity-bimi" in names

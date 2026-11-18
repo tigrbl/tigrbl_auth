@@ -1,6 +1,6 @@
 [project]
 name = "tba-provider-attestation-reference"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 readme = "README.md"
 description = "Attestation reference material provider."
 requires-python = ">=3.10,<3.16"
@@ -11,12 +11,29 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3.15",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Development Status :: 3 - Alpha",
+    "Typing :: Typed",
 ]
 license = "Apache-2.0"
-dependencies = ["tba-bases-attestation==0.4.0.dev2", "tba-contracts-identity==0.4.0.dev2"]
+dependencies = ["tba-bases-attestation==0.4.0.dev3", "tba-contracts-identity==0.4.0.dev3"]
+license-files = ["LICENSE", "NOTICE"]
+keywords = ["tigrbl", "tba", "identity"]
 
+[[project.authors]]
+name = "Jacob Stewart"
+email = "jacob@swarmauri.com"
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/20-providers/tba-provider-attestation-reference#readme"
+Documentation = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/20-providers/tba-provider-attestation-reference#readme"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/20-providers/tba-provider-attestation-reference"
+Issues = "https://github.com/tigrbl/tigrbl_auth/issues"
+PyPI = "https://pypi.org/project/tba-provider-attestation-reference/"
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=2.2.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]

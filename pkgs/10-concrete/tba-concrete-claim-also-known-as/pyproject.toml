@@ -1,8 +1,8 @@
 [project]
 name="tba-concrete-claim-also-known-as"
-version="0.4.0.dev2"
+version="0.4.0.dev3"
 description = "Owns AlsoKnownAsClaim as protocol-neutral layer-10 value semantics."
-license = { text = "Apache-2.0" }
+license = "Apache-2.0"
 readme = "README.md"
 requires-python=">=3.10,<3.16"
 classifiers = [
@@ -12,10 +12,28 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3.15",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Development Status :: 3 - Alpha",
+    "Typing :: Typed",
 ]
-dependencies=["tba-bases-claim==0.4.0.dev2"]
+dependencies=["tba-bases-claim==0.4.0.dev3"]
+license-files = ["LICENSE", "NOTICE"]
+keywords = ["tigrbl", "tba", "identity"]
+
+[[project.authors]]
+name = "Jacob Stewart"
+email = "jacob@swarmauri.com"
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/10-concrete/tba-concrete-claim-also-known-as#readme"
+Documentation = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/10-concrete/tba-concrete-claim-also-known-as#readme"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/10-concrete/tba-concrete-claim-also-known-as"
+Issues = "https://github.com/tigrbl/tigrbl_auth/issues"
+PyPI = "https://pypi.org/project/tba-concrete-claim-also-known-as/"
 [build-system]
-requires=["poetry-core>=1.0.0"]
+requires=["poetry-core>=2.2.0,<3.0.0"]
 build-backend="poetry.core.masonry.api"
 [tool.poetry]
 packages=[{include="tba_concrete_claim_also_known_as",from="src"}]

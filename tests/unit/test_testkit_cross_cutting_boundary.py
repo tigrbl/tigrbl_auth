@@ -13,7 +13,7 @@ for src in (ROOT / "pkgs").glob("*/src"):
     if value not in sys.path:
         sys.path.insert(0, value)
 
-from tba_testkit_identity import (  # noqa: E402
+from tba_tests_identity import (  # noqa: E402
     FakeIdentityProvider,
     FakeResourceServer,
     MatrixCellStatus,
@@ -74,12 +74,12 @@ def test_testkit_t1_seeded_fixtures_vectors_and_package_matrix() -> None:
     vectors = cross_language_vectors()
     harness = PackageMatrixHarness()
     cells = harness.cells_for(
-        "tba-testkit-identity",
+        "tba-tests-identity",
         test_paths=("tests/integration", "tests/interop", "tests/unit/test_testkit_cross_cutting_boundary.py"),
         cross_cutting=True,
     )
 
-    harness.assert_complete(cells, package="tba-testkit-identity")
+    harness.assert_complete(cells, package="tba-tests-identity")
 
     assert seeds.user("user:123").username == "alice"
     assert vectors["authorization_required_params"] == (
@@ -159,14 +159,14 @@ def test_testkit_t2_rejects_replay_bad_pkce_resource_server_and_matrix_gaps() ->
     with pytest.raises(TestkitError, match="missing scopes"):
         FakeResourceServer(idp=idp, required_scopes=("admin",)).verify(f"Bearer {token.access_token}")
     with pytest.raises(TestkitError, match="missing Python versions"):
-        PackageMatrixHarness().assert_complete([], package="tba-testkit-identity")
+        PackageMatrixHarness().assert_complete([], package="tba-tests-identity")
 
 
 @pytest.mark.unit
 def test_testkit_t2_public_boundary_imports_are_package_safe() -> None:
     files = [
-        Path("pkgs/120-tests/tba-testkit-identity/src/tba_testkit_identity/__init__.py"),
-        Path("pkgs/120-tests/tba-testkit-identity/src/tba_testkit_identity/cross_cutting.py"),
+        Path("pkgs/120-tests/tba-tests-identity/src/tba_tests_identity/__init__.py"),
+        Path("pkgs/120-tests/tba-tests-identity/src/tba_tests_identity/cross_cutting.py"),
     ]
     forbidden = {
         "tba_auth",

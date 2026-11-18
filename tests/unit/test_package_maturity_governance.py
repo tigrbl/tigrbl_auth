@@ -29,7 +29,7 @@ def test_package_maturity_t0_discovers_all_split_packages() -> None:
         "tba-primitives-identity",
         "tba-cli-identity",
         "tba-operator-identity",
-        "tba-testkit-identity",
+        "tba-tests-identity",
     }
     assert all(package.version for package in packages)
     assert all(package.path.startswith("pkgs/") for package in packages)
@@ -56,10 +56,10 @@ def test_package_maturity_t2_builds_complete_package_python_matrix() -> None:
         for cell in matrix
         if cell["name"] == "tba-primitives-identity"
     } == set(SUPPORTED_PYTHON_VERSIONS)
-    testkit_cells = [cell for cell in matrix if cell["name"] == "tba-testkit-identity"]
+    testkit_cells = [cell for cell in matrix if cell["name"] == "tba-tests-identity"]
     assert len(testkit_cells) == len(SUPPORTED_PYTHON_VERSIONS)
     assert all(cell["cross_cutting"] == "true" for cell in testkit_cells)
-    assert all("tests/packages/tba-testkit-identity" in cell["package_test_paths"] for cell in testkit_cells)
+    assert all("tests/packages/tba-tests-identity" in cell["package_test_paths"] for cell in testkit_cells)
     assert all("tests/integration" not in cell["package_test_paths"] for cell in testkit_cells)
     assert all("tests/interop" in cell["package_test_paths"] for cell in testkit_cells)
 

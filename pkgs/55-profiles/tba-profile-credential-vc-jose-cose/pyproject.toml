@@ -1,8 +1,8 @@
 [project]
 name="tba-profile-credential-vc-jose-cose"
-version="0.4.0.dev2"
+version="0.4.0.dev3"
 description = "Versioned W3C VC-JOSE-COSE Recommendation ownership for secured Verifiable Credentials and Presentations."
-license = { text = "Apache-2.0" }
+license = "Apache-2.0"
 readme = "README.md"
 requires-python=">=3.10,<3.16"
 classifiers = [
@@ -12,10 +12,28 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3.15",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Development Status :: 3 - Alpha",
+    "Typing :: Typed",
 ]
-dependencies=["cbor2>=5.6.0", "tba-primitives-identity==0.4.0.dev2", "tba-contracts-protected-envelope==0.4.0.dev2", "tba-concrete-vc-jose-credential==0.4.0.dev2", "tba-concrete-vc-cose-credential==0.4.0.dev2", "tba-protocol-security-jws==0.4.0.dev2", "tba-protocol-security-cose==0.4.0.dev2"]
+dependencies=["cbor2>=5.6.0", "tba-primitives-identity==0.4.0.dev3", "tba-contracts-protected-envelope==0.4.0.dev3", "tba-concrete-vc-jose-credential==0.4.0.dev3", "tba-concrete-vc-cose-credential==0.4.0.dev3", "tba-protocol-security-jws==0.4.0.dev3", "tba-protocol-security-cose==0.4.0.dev3"]
+license-files = ["LICENSE", "NOTICE"]
+keywords = ["tigrbl", "tba", "identity"]
+
+[[project.authors]]
+name = "Jacob Stewart"
+email = "jacob@swarmauri.com"
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/55-profiles/tba-profile-credential-vc-jose-cose#readme"
+Documentation = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/55-profiles/tba-profile-credential-vc-jose-cose#readme"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/55-profiles/tba-profile-credential-vc-jose-cose"
+Issues = "https://github.com/tigrbl/tigrbl_auth/issues"
+PyPI = "https://pypi.org/project/tba-profile-credential-vc-jose-cose/"
 [build-system]
-requires=["poetry-core>=1.0.0"]
+requires=["poetry-core>=2.2.0,<3.0.0"]
 build-backend="poetry.core.masonry.api"
 [tool.poetry]
 packages=[{include="tba_profile_credential_vc_jose_cose",from="src"}]

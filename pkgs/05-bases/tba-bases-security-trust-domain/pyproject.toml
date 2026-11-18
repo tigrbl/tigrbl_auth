@@ -1,6 +1,6 @@
 [project]
 name = "tba-bases-security-trust-domain"
-version = "0.1.0"
+version = "0.1.1.dev1"
 description = "Draft domain base classes composed from tigrbl security/trust contracts."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -9,7 +9,6 @@ authors = [{ name = "Jacob Stewart", email = "jacob@swarmauri.com" }]
 keywords = ["tigrbl", "security", "trust", "domain-bases", "crypto", "signing", "tokens", "certificates", "cipher-suites"]
 classifiers = [
     "Development Status :: 3 - Alpha",
-    "License :: OSI Approved :: Apache Software License",
     "Programming Language :: Python :: 3",
     "Typing :: Typed",
     "Topic :: Security",
@@ -19,28 +18,20 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3.15",
+    "Intended Audience :: Developers",
 ]
-dependencies = [
-    "tba-bases-certificate==0.4.0.dev2",
-    "tba-bases-capability==0.4.0.dev2",
-    "tba-bases-did==0.4.0.dev2",
-    "tba-bases-encryption==0.4.0.dev2",
-    "tba-bases-claim==0.4.0.dev2",
-    "tba-contracts-identity==0.4.0.dev2",
-    "tba-bases-identity==0.4.0.dev2",
-    "tba-bases-authentication-context==0.4.0.dev2",
-    "tba-bases-protected-artifact==0.4.0.dev2",
-    "tba-contracts-security-trust==0.1.0",
-    "tba-bases-key==0.4.0.dev2",
-    "tba-bases-proof-of-possession==0.4.0.dev2",
-    "tba-bases-signing==0.4.0.dev2",
-    "tba-bases-token-introspection==0.4.0.dev2",
-    "tba-bases-trust==0.4.0.dev2",
-    "tba-bases-workload-identity==0.4.0.dev2",
-]
+dependencies = ["tba-bases-certificate==0.4.0.dev3", "tba-bases-capability==0.4.0.dev3", "tba-bases-did==0.4.0.dev3", "tba-bases-encryption==0.4.0.dev3", "tba-bases-claim==0.4.0.dev3", "tba-contracts-identity==0.4.0.dev3", "tba-bases-identity==0.4.0.dev3", "tba-bases-authentication-context==0.4.0.dev3", "tba-bases-protected-artifact==0.4.0.dev3", "tba-contracts-security-trust==0.1.1.dev1", "tba-bases-key==0.4.0.dev3", "tba-bases-proof-of-possession==0.4.0.dev3", "tba-bases-signing==0.4.0.dev3", "tba-bases-token-introspection==0.4.0.dev3", "tba-bases-trust==0.4.0.dev3", "tba-bases-workload-identity==0.4.0.dev3"]
+license-files = ["LICENSE", "NOTICE"]
 
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/05-bases/tba-bases-security-trust-domain#readme"
+Documentation = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/05-bases/tba-bases-security-trust-domain#readme"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/05-bases/tba-bases-security-trust-domain"
+Issues = "https://github.com/tigrbl/tigrbl_auth/issues"
+PyPI = "https://pypi.org/project/tba-bases-security-trust-domain/"
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=2.2.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]

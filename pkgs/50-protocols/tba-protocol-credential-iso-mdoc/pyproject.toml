@@ -1,6 +1,6 @@
 [project]
 name="tba-protocol-credential-iso-mdoc"
-version="0.4.0.dev2"
+version="0.4.0.dev3"
 description = "Version authority, feature selection, compatibility, migration, and schema mapping for ISO/IEC 18013-5 mdoc artifacts."
 readme = "README.md"
 requires-python=">=3.10,<3.16"
@@ -11,11 +11,29 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3.15",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Development Status :: 3 - Alpha",
+    "Typing :: Typed",
 ]
 license="Apache-2.0"
-dependencies=["tba-primitives-identity==0.4.0.dev2", "tba-concrete-mdoc==0.4.0.dev2","tba-concrete-mdoc-credential==0.4.0.dev2", "tba-bases-digital-credential==0.4.0.dev2", "tba-contracts-identity==0.4.0.dev2", "tba-provider-mdoc-issuer==0.4.0.dev2", "tba-provider-mdoc-verifier==0.4.0.dev2"]
+dependencies=["tba-primitives-identity==0.4.0.dev3", "tba-concrete-mdoc==0.4.0.dev3", "tba-concrete-mdoc-credential==0.4.0.dev3", "tba-bases-digital-credential==0.4.0.dev3", "tba-contracts-identity==0.4.0.dev3", "tba-provider-mdoc-issuer==0.4.0.dev3", "tba-provider-mdoc-verifier==0.4.0.dev3"]
+license-files = ["LICENSE", "NOTICE"]
+keywords = ["tigrbl", "tba", "identity"]
+
+[[project.authors]]
+name = "Jacob Stewart"
+email = "jacob@swarmauri.com"
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/50-protocols/tba-protocol-credential-iso-mdoc#readme"
+Documentation = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/50-protocols/tba-protocol-credential-iso-mdoc#readme"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/50-protocols/tba-protocol-credential-iso-mdoc"
+Issues = "https://github.com/tigrbl/tigrbl_auth/issues"
+PyPI = "https://pypi.org/project/tba-protocol-credential-iso-mdoc/"
 [build-system]
-requires=["poetry-core>=1.0.0"]
+requires=["poetry-core>=2.2.0,<3.0.0"]
 build-backend="poetry.core.masonry.api"
 [tool.poetry]
 packages=[{include="tba_protocol_credential_iso_mdoc",from="src"}]

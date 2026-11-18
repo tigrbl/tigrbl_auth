@@ -1,7 +1,7 @@
 [project]
 name = "tba-example-oauth-device-authorization-cli"
-version = "0.1.0"
-license = { text = "Apache-2.0" }
+version = "0.1.1.dev1"
+license = "Apache-2.0"
 readme = "README.md"
 description = "Example consumer package showing CLI login against tba_auth device authorization."
 requires-python = ">=3.10,<3.16"
@@ -12,14 +12,28 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3.15",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Development Status :: 3 - Alpha",
 ]
-dependencies = [
-    "httpx>=0.28,<0.29",
-]
+dependencies = ["httpx>=0.28,<0.29"]
+license-files = ["LICENSE", "NOTICE"]
+keywords = ["tigrbl", "tba", "identity"]
 
 [project.scripts]
 oauth-device-login = "oauth_device_authorization_cli_example.main:main"
 
+[[project.authors]]
+name = "Jacob Stewart"
+email = "jacob@swarmauri.com"
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/110-examples/tba-example-oauth-device-authorization-cli#readme"
+Documentation = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/110-examples/tba-example-oauth-device-authorization-cli#readme"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/110-examples/tba-example-oauth-device-authorization-cli"
+Issues = "https://github.com/tigrbl/tigrbl_auth/issues"
+PyPI = "https://pypi.org/project/tba-example-oauth-device-authorization-cli/"
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77.0.3"]
 build-backend = "setuptools.build_meta"

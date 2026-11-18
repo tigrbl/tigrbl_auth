@@ -5,14 +5,16 @@
 <a href="https://github.com/tigrbl/tigrbl_auth#readme"><img src="https://raw.githubusercontent.com/tigrbl/tigrbl_auth/master/docs/assets/tba-brand.png" alt="TBA · Tigrbl Auth" width="240"></a>
 </p>
 <p align="center">
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/01-storage/tba-storage-core/pyproject.toml"><img alt="Checkout: 0.4.0.dev4" src="https://img.shields.io/badge/Checkout-0.4.0.dev4-1f6feb"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/01-storage/tba-storage-core/pyproject.toml"><img alt="Checkout: 0.4.0.dev5" src="https://img.shields.io/badge/Checkout-0.4.0.dev5-1f6feb"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/01-storage/tba-storage-core/pyproject.toml"><img alt="Python: &gt;=3.10,&lt;3.16" src="https://img.shields.io/badge/Python-%3E%3D3.10%2C%3C3.16-3776ab"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/01-storage/tba-storage-core/pyproject.toml"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/License-Apache--2.0-525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/tba-storage-core%3D%3D0.4.0.dev5/pkgs/01-storage/tba-storage-core/LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/License-Apache--2.0-525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/tba-storage-core%3D%3D0.4.0.dev5/pkgs/01-storage/tba-storage-core/NOTICE"><img alt="Notice: attribution" src="https://img.shields.io/badge/Notice-attribution-525252"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/01-storage"><img alt="Layer: 01 storage" src="https://img.shields.io/badge/Layer-01%20storage-0a7f5a"></a>
 <a href="https://pypi.org/project/tba-storage-core/"><img alt="PyPI version for tba-storage-core" src="https://img.shields.io/pypi/v/tba-storage-core?label=tba-storage-core%20PyPI"></a>
 </p>
 <p align="center">
 <a href="https://pepy.tech/project/tba-storage-core"><img alt="Monthly PyPI downloads for tba-storage-core" src="https://static.pepy.tech/badge/tba-storage-core/month"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/01-storage/tba-storage-core/README.md"><img alt="README hits for tba-storage-core" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/01-storage/tba-storage-core/README.md.svg?label=hits"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/01-storage/tba-storage-core/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
 </p>
 <!-- END TBA README HEADER -->
@@ -24,7 +26,7 @@ Inspect the packaged identity storage migration history and access compatibility
 Install the version used by this example.
 
 ```bash
-python -m pip install "tba-storage-core==0.4.0.dev4"
+python -m pip install "tba-storage-core==0.4.0.dev5"
 ```
 
 Save the following as `quickstart.py` and run `python quickstart.py`. The assertions should pass.

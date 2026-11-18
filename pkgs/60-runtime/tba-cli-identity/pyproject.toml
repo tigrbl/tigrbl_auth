@@ -1,6 +1,6 @@
 [project]
 name = "tba-cli-identity"
-version = "0.4.0.dev2"
+version = "0.4.0.dev3"
 description = "Dedicated command-line package for TBA identity operator workflows, governance checks, evidence, and release gates."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -17,7 +17,6 @@ keywords = [
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: Apache Software License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
     "Typing :: Typed",
@@ -30,28 +29,27 @@ classifiers = [
     "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3.15",
 ]
-dependencies = [
-    "tba-capability-operator-administration==0.4.0.dev2",
-    "tba-runtime-identity-authoring==0.4.0.dev2",
-    "tba-runtime-identity==0.4.0.dev3",
-    "tba-runtime-identity-storage==0.4.0.dev2",
-    "tba-provider-secret-hashing-bcrypt==0.1.0",
-    "tomli>=2.0; python_version < '3.11'",
-]
+dependencies = ["tba-capability-operator-administration==0.4.0.dev3", "tba-runtime-identity-authoring==0.4.0.dev3", "tba-runtime-identity==0.4.0.dev4", "tba-runtime-identity-storage==0.4.0.dev3", "tba-provider-secret-hashing-bcrypt==0.1.1.dev1", "tomli>=2.0; python_version < '3.11'"]
+license-files = ["LICENSE", "NOTICE"]
 
 [project.urls]
-Homepage = "https://github.com/tigrbl/tigrbl_auth"
+Homepage = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/60-runtime/tba-cli-identity#readme"
 Repository = "https://github.com/tigrbl/tigrbl_auth"
 Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/60-runtime/tba-cli-identity"
 SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
 PyPI = "https://pypi.org/project/tba-cli-identity/"
+Documentation = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/60-runtime/tba-cli-identity#readme"
+Issues = "https://github.com/tigrbl/tigrbl_auth/issues"
 
 [project.scripts]
 tba-identity = "tba_cli_identity.cli.main:main"
 tba-auth = "tba_cli_identity.cli.main:main"
 
+[[project.authors]]
+name = "Jacob Stewart"
+email = "jacob@swarmauri.com"
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=2.2.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]

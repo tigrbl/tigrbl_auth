@@ -40,8 +40,11 @@ def header(readme: Path, original: str) -> str:
     manifest = "pyproject.toml" if python else "package.json"
     path = folder / manifest
     manifest_url = f"{BLOB}/{path.relative_to(ROOT).as_posix()}"
+    publishable = False
     if python:
-        meta = tomllib.loads(path.read_text(encoding="utf-8"))["project"]
+        document = tomllib.loads(path.read_text(encoding="utf-8"))
+        meta = document["project"]
+        publishable = document.get("tool", {}).get("uv", {}).get("package", True)
         requirement = meta.get("requires-python")
     else:
         meta = json.loads(path.read_text(encoding="utf-8"))
@@ -57,8 +60,13 @@ def header(readme: Path, original: str) -> str:
             badge("Python" if python else "Node", requirement, "3776ab", manifest_url)
         )
     license_id = meta.get("license")
+    legal_base = ""
+    if python and publishable and not root:
+        release_tag = quote(f"{meta['name']}=={meta['version']}", safe="")
+        legal_base = f"{REPO}/blob/{release_tag}/{folder.relative_to(ROOT).as_posix()}/"
     if isinstance(license_id, str):
-        metadata.append(badge("License", license_id, "525252", manifest_url))
+        metadata.append(badge("License", license_id, "525252", f"{legal_base}LICENSE"))
+        metadata.append(badge("Notice", "attribution", "525252", f"{legal_base}NOTICE"))
     if not root:
         layer_name = folder.parent.name
         layer = layer_name.replace("-", " ")
@@ -69,7 +77,7 @@ def header(readme: Path, original: str) -> str:
         metadata.append(badge("Distribution", "private source", "6e7781", manifest_url))
 
     metrics = []
-    if python:
+    if python and (root or publishable):
         package = "tba-auth" if root else meta["name"]
         registry = f"https://pypi.org/project/{package}/"
         metadata.append(
@@ -87,6 +95,9 @@ def header(readme: Path, original: str) -> str:
             )
         )
     else:
+        source_url = f"{REPO}/tree/master/{folder.relative_to(ROOT).as_posix()}"
+        metrics.append(badge("Downloads", "source checkout", "0969da", source_url))
+    if not python:
         metrics.append(
             badge(
                 "Direct dependencies",
@@ -95,6 +106,12 @@ def header(readme: Path, original: str) -> str:
                 manifest_url,
             )
         )
+
+    readme_path = readme.relative_to(ROOT).as_posix()
+    counter_key = f"github.com/tigrbl/tigrbl_auth/blob/master/{readme_path}"
+    counter_url = f"https://hits.sh/{quote(counter_key, safe='/')}.svg?label=hits"
+    metrics.append(image_link(f"README hits for {meta['name']}", counter_url,
+                              f"{BLOB}/{readme_path}"))
 
     if root:
         workflow = f"{REPO}/actions/workflows/master.yml"
@@ -160,6 +177,11 @@ def main() -> int:
         for manifest in ("pyproject.toml", "package.json")
         for path in packages.glob(f"[0-9]*/*/{manifest}")
     }
+    package_readmes.update(
+        ROOT / "pkgs/deprecated" / name / "README.md"
+        for name in ("tba-testkit-identity", "tba-testkit-workload-credential-conformance")
+        if (ROOT / "pkgs/deprecated" / name / "pyproject.toml").is_file()
+    )
     stale = []
     readmes = [ROOT / "README.md", *sorted(package_readmes)]
     for readme in readmes:

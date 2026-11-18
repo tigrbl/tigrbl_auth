@@ -17,7 +17,7 @@ from scripts.validate_layer_boundaries import (
 def test_test_and_example_packages_have_terminal_layer_ownership() -> None:
     packages = {package.distribution: package for package in discover_packages(ROOT)}
 
-    assert packages["tba-testkit-identity"].layer == "120-tests"
+    assert packages["tba-tests-identity"].layer == "120-tests"
     assert packages["tba-example-oauth-device-authorization-cli"].layer == "110-examples"
     assert NON_PRODUCTION_LAYERS == {"120-tests", "110-examples"}
 

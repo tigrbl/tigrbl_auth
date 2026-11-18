@@ -5,14 +5,16 @@
 <a href="https://github.com/tigrbl/tigrbl_auth#readme"><img src="https://raw.githubusercontent.com/tigrbl/tigrbl_auth/master/docs/assets/tba-brand.png" alt="TBA · Tigrbl Auth" width="240"></a>
 </p>
 <p align="center">
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/80-routers/tba-router-oauth-registration/pyproject.toml"><img alt="Checkout: 0.4.0.dev2" src="https://img.shields.io/badge/Checkout-0.4.0.dev2-1f6feb"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/80-routers/tba-router-oauth-registration/pyproject.toml"><img alt="Checkout: 0.4.0.dev3" src="https://img.shields.io/badge/Checkout-0.4.0.dev3-1f6feb"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/80-routers/tba-router-oauth-registration/pyproject.toml"><img alt="Python: &gt;=3.10,&lt;3.16" src="https://img.shields.io/badge/Python-%3E%3D3.10%2C%3C3.16-3776ab"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/80-routers/tba-router-oauth-registration/pyproject.toml"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/License-Apache--2.0-525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/tba-router-oauth-registration%3D%3D0.4.0.dev3/pkgs/80-routers/tba-router-oauth-registration/LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/License-Apache--2.0-525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/tba-router-oauth-registration%3D%3D0.4.0.dev3/pkgs/80-routers/tba-router-oauth-registration/NOTICE"><img alt="Notice: attribution" src="https://img.shields.io/badge/Notice-attribution-525252"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/80-routers"><img alt="Layer: 80 routers" src="https://img.shields.io/badge/Layer-80%20routers-0a7f5a"></a>
 <a href="https://pypi.org/project/tba-router-oauth-registration/"><img alt="PyPI version for tba-router-oauth-registration" src="https://img.shields.io/pypi/v/tba-router-oauth-registration?label=tba-router-oauth-registration%20PyPI"></a>
 </p>
 <p align="center">
 <a href="https://pepy.tech/project/tba-router-oauth-registration"><img alt="Monthly PyPI downloads for tba-router-oauth-registration" src="https://static.pepy.tech/badge/tba-router-oauth-registration/month"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/80-routers/tba-router-oauth-registration/README.md"><img alt="README hits for tba-router-oauth-registration" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/80-routers/tba-router-oauth-registration/README.md.svg?label=hits"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/80-routers/tba-router-oauth-registration/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
 </p>
 <!-- END TBA README HEADER -->
@@ -50,7 +52,7 @@ assert '/register' in paths
 ```
 
 ```bash
-uv run --isolated --no-project --python 3.12 --with "tba-router-oauth-registration==0.4.0.dev2" python quickstart.py
+uv run --isolated --no-project --python 3.12 --with "tba-router-oauth-registration==0.4.0.dev3" python quickstart.py
 ```
 
 The router registers `/register`. No request is sent and no database is opened.

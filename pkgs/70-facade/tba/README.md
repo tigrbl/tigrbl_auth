@@ -5,14 +5,16 @@
 <a href="https://github.com/tigrbl/tigrbl_auth#readme"><img src="https://raw.githubusercontent.com/tigrbl/tigrbl_auth/master/docs/assets/tba-brand.png" alt="TBA · Tigrbl Auth" width="240"></a>
 </p>
 <p align="center">
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/70-facade/tba/pyproject.toml"><img alt="Checkout: 0.1.0" src="https://img.shields.io/badge/Checkout-0.1.0-1f6feb"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/70-facade/tba/pyproject.toml"><img alt="Checkout: 0.1.1.dev1" src="https://img.shields.io/badge/Checkout-0.1.1.dev1-1f6feb"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/70-facade/tba/pyproject.toml"><img alt="Python: &gt;=3.10,&lt;3.16" src="https://img.shields.io/badge/Python-%3E%3D3.10%2C%3C3.16-3776ab"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/70-facade/tba/pyproject.toml"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/License-Apache--2.0-525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/tba%3D%3D0.1.1.dev1/pkgs/70-facade/tba/LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/License-Apache--2.0-525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/tba%3D%3D0.1.1.dev1/pkgs/70-facade/tba/NOTICE"><img alt="Notice: attribution" src="https://img.shields.io/badge/Notice-attribution-525252"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/70-facade"><img alt="Layer: 70 facade" src="https://img.shields.io/badge/Layer-70%20facade-0a7f5a"></a>
 <a href="https://pypi.org/project/tba/"><img alt="PyPI version for tba" src="https://img.shields.io/pypi/v/tba?label=tba%20PyPI"></a>
 </p>
 <p align="center">
 <a href="https://pepy.tech/project/tba"><img alt="Monthly PyPI downloads for tba" src="https://static.pepy.tech/badge/tba/month"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/70-facade/tba/README.md"><img alt="README hits for tba" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/70-facade/tba/README.md.svg?label=hits"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/70-facade/tba/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
 </p>
 <!-- END TBA README HEADER -->
@@ -35,7 +37,7 @@ assert __version__ == '0.1.0'
 ```
 
 ```bash
-uv run --isolated --no-project --python 3.12 --with "tba==0.1.0" python quickstart.py
+uv run --isolated --no-project --python 3.12 --with "tba==0.1.1.dev1" python quickstart.py
 ```
 
 The placeholder reports the installed distribution version `0.1.0`.
