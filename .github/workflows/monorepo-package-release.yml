@@ -256,4 +256,3 @@ jobs:
           GH_REPO: ${{ github.repository }}
           RELEASE_TAG: ${{ steps.package.outputs.tag }}
         run: gh release edit "$RELEASE_TAG" --draft=false
-
