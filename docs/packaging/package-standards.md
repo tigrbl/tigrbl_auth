@@ -69,11 +69,9 @@ legal-file fixes without registry publication.
 
 `scripts/build_standards_release.py` builds each planned wheel and sdist,
 inspects SPDX metadata, README fragments and actual archived legal files,
-and records file hashes. `scripts/publish_standards_release.py` rejects
-existing PyPI hash conflicts before uploading and verifies all release file
-hashes afterward. The prepared-release mode of
+and records file hashes, the source commit, and the CI run. The prepared-release mode of
 `monorepo-package-release.yml` stages exactly one package from the successful
-CI artifact batch in run `44296198410`. Each project trusts
+CI artifact batch selected explicitly with `standards_artifact_run`. Each project trusts
 `tigrbl/tigrbl_auth`, workflow `monorepo-package-release.yml`, and its own
 environment `pypi-<distribution-name>`. These environments retain the existing
 `pypi` environment's configuration (no protection rules or deployment branch
@@ -83,11 +81,18 @@ Only after that verification succeeds does the sequence advance to the next
 package, in dependency order. This mode neither bumps versions nor replaces
 existing source tags. Workflow concurrency serializes the release sequence.
 
+Existing dedicated publishers can be reused. For example, `tba` uses its
+already-authorized `publish-tba.yml` workflow and `pypi` environment with the
+same immutable artifact staging and verification steps. This avoids granting
+additional publishing authority where a suitable publisher already exists.
+
 The extensive README repair supersedes the README payloads in that earlier CI
 batch. Those artifacts remain historical build evidence, not publishable
 artifacts for the repaired source. The archive/source equality check blocks
 their publication. A subsequent release must rebuild the repaired READMEs and
-bind its approved versions and source tags to that new build.
+bind its approved versions and source tags to that new build. The replacement
+plan is `.ssot/evidence/trusted-readme-release-plan-20261118.json`; per-package
+progress is recorded in the adjacent `trusted-readme-release-progress-20261118.json`.
 
 `scripts/verify_standards_installs.py` installs each exact version in its own
 temporary Python 3.12 environment, checks dependency consistency, and imports
