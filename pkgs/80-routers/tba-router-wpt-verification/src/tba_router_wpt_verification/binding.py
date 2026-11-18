@@ -18,7 +18,7 @@ def build_wpt_verification_router(
     audience: str,
     authenticate: Callable[[Request], Awaitable[str | None]],
     authorize_verification: Callable[[str], Awaitable[bool]],
-    bound_token_headers: tuple[str, ...] = (),
+    required_token_headers: tuple[str, ...] = (),
 ) -> TigrblRouter:
     """Authenticate the delegating service before consuming any proof replay state.
 
@@ -27,7 +27,7 @@ def build_wpt_verification_router(
     this is not a non-consuming token-inspection endpoint.
     """
     recipient = normalize_wpt_audience(audience)
-    required = tuple(name.lower() for name in bound_token_headers)
+    required = tuple(name.lower() for name in required_token_headers)
     if any(name in {"authorization", "workload-identity-token"} for name in required):
         raise ValueError("credential headers cannot be additional token bindings")
     router = TigrblRouter()
@@ -64,7 +64,7 @@ def build_wpt_verification_router(
         ]
         try:
             wit = verifier.authenticate_request(
-                headers, audience=recipient, bound_token_headers=required
+                headers, audience=recipient, required_token_headers=required
             )
         except (ValueError, TypeError, KeyError, UnicodeError):
             return reject(401, "workload proof verification failed")

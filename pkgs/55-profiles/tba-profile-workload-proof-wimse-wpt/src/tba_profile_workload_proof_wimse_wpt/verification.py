@@ -35,6 +35,7 @@ def verify_wpt(
     max_lifetime: int = 300,
     presented_headers=(),
     bound_token_headers=(),
+    required_token_headers=(),
 ):
     # Keep the public subject argument for existing callers. The replay key uses
     # the signed WIT digest, which is also available to the carrier-neutral port.
@@ -42,7 +43,12 @@ def verify_wpt(
     for name, value in presented_headers:
         name = name.lower()
         token_digests[name] = None if name in token_digests else value.strip()
-    required = {name.lower() for name in bound_token_headers}
+    # Existing callers use bound_token_headers as an allowlist of headers to
+    # bind when present, not as a presence requirement. Keep strict recipient
+    # policy separate so optional context headers remain interoperable.
+    required = (
+        {name.lower() for name in bound_token_headers} & token_digests.keys()
+    ) | {name.lower() for name in required_token_headers}
     return _verify_wpt(
         proof,
         wit_digest=_hash_token(wit_serialized),
@@ -145,6 +151,7 @@ def authenticate_wpt_request(
     now: float,
     replay_store,
     bound_token_headers=(),
+    required_token_headers=(),
 ):
     """Authenticate HTTP headers using the application's configured target audience."""
     headers = tuple(headers)
@@ -172,5 +179,6 @@ def authenticate_wpt_request(
         replay_store=replay_store,
         presented_headers=headers,
         bound_token_headers=bound_token_headers,
+        required_token_headers=required_token_headers,
     )
     return wit

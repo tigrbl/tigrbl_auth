@@ -62,8 +62,10 @@ tokens become `oth`. `present_wit()` retains its HTTP headers interface and
 delegates signing to `issue_wpt()`. `normalize_wpt_audience()` exposes the shared
 audience normalization used by issuers and remote-verifier configuration.
 
-The receiver's configured `bound_token_headers` are required even when the
-sender omits both the header and its proof claim. `WptProofVerifier` reserves
+The receiver's configured `bound_token_headers` select headers to bind **when
+present**, preserving the existing receiver contract. Use `required_token_headers`
+to require presence and binding even when the sender omits both the header and
+its proof claim. `WptProofVerifier` reserves
 replay state only after validating trust, signature, audience and token bindings.
 
 The quick start was run with the pinned distribution from PyPI and its declared dependencies. See the [public package entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/55-profiles/tba-profile-workload-proof-wimse-wpt/src/tba_profile_workload_proof_wimse_wpt/__init__.py).

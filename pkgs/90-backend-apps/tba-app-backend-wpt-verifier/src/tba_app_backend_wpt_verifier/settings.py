@@ -10,7 +10,7 @@ from tba_profile_workload_proof_wimse_wpt import normalize_wpt_audience
 class WptVerifierSettings:
     audience: str
     trust_by_domain: Mapping[str, Sequence[Mapping[str, object]]]
-    bound_token_headers: tuple[str, ...] = ()
+    required_token_headers: tuple[str, ...] = ()
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "audience", normalize_wpt_audience(self.audience))

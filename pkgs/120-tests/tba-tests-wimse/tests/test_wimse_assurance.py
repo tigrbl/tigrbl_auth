@@ -112,26 +112,43 @@ def test_t1_wimse_sender_binds_transaction_token():
 
     import pytest
     from tba_concrete_jwt import decode_jwt_unverified
-    from tba_profile_workload_proof_wimse_wpt import authenticate_wpt_request, present_wit
+    from tba_profile_workload_proof_wimse_wpt import (
+        authenticate_wpt_request,
+        present_wit,
+    )
     from tba_provider_replay_memory import MemoryReplayCheckProvider
 
     signer, wit, trust = wimse_credentials()
     target = "https://service.example.org/work"
     transaction = "fixture.txn.token"
     headers = present_wit(
-        signer, wit, workload_key_reference="workload", target_uri=target,
-        now=100, transaction_token=transaction,
+        signer,
+        wit,
+        workload_key_reference="workload",
+        target_uri=target,
+        now=100,
+        transaction_token=transaction,
     )
     assert headers["Txn-Token"] == transaction
     proof = decode_jwt_unverified(headers["Authorization"].split(" ", 1)[1])
-    expected = urlsafe_b64encode(sha256(transaction.encode("ascii")).digest()).decode("ascii").rstrip("=")
+    expected = (
+        urlsafe_b64encode(sha256(transaction.encode("ascii")).digest())
+        .decode("ascii")
+        .rstrip("=")
+    )
     assert proof.claims["tth"] == expected
     options = dict(audience=target, trust_by_domain=trust, now=100)
     for invalid in ({"Txn-Token": "replacement.txn.token"}, {}):
-        request = {name: value for name, value in headers.items() if name != "Txn-Token"} | invalid
+        request = {
+            name: value for name, value in headers.items() if name != "Txn-Token"
+        } | invalid
         with pytest.raises(ValueError, match="transaction token binding mismatch"):
-            authenticate_wpt_request(request.items(), replay_store=MemoryReplayCheckProvider(), **options)
-    credential = authenticate_wpt_request(headers.items(), replay_store=MemoryReplayCheckProvider(), **options)
+            authenticate_wpt_request(
+                request.items(), replay_store=MemoryReplayCheckProvider(), **options
+            )
+    credential = authenticate_wpt_request(
+        headers.items(), replay_store=MemoryReplayCheckProvider(), **options
+    )
     assert credential.claims["sub"] == "wimse://example.org/workload"
 
 
@@ -227,7 +244,36 @@ def exercise_wimse_http_round_trip():
                 present(reissue(subject="wimse://unknown.example/workload")),
                 "trust domain",
             )
-            refused(present(reissue(expires_at=99)), "validity period")
+            # Deliberately forge this negative control below the production
+            # sender API: issue_wpt/present_wit correctly reject an expired WIT.
+            # Keep the WPT unexpired and correctly bound so the wire receiver
+            # must reject the WIT's validity period, rather than its proof.
+            from hashlib import sha256
+            from tba_primitives_identity import base64url_encode
+
+            expired_wit = reissue(expires_at=99)
+            expired_headers = present()
+            expired_claims = decode_jwt_unverified(
+                expired_headers["Authorization"].split(" ", 1)[1]
+            ).claims
+            expired_proof = sign_compact_jwt(
+                signer,
+                {
+                    **expired_claims,
+                    "wth": base64url_encode(
+                        sha256(expired_wit.encode("ascii")).digest()
+                    ),
+                },
+                headers={"typ": "wpt+jwt", "alg": "EdDSA"},
+                key_reference="workload",
+            )
+            refused(
+                {
+                    "Workload-Identity-Token": expired_wit,
+                    "Authorization": f"WPT {expired_proof}",
+                },
+                "validity period",
+            )
             fresh = present()
             refused({**fresh, "Workload-Identity-Token": reissue()}, "WIT binding")
             proof = decode_jwt_unverified(fresh["Authorization"].split(" ", 1)[1])

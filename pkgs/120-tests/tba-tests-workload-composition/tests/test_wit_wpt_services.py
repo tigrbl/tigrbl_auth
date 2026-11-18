@@ -121,7 +121,7 @@ async def authorize(principal):
 
 def remote_app(material, store, *, required=()):
     return build_verifier(
-        WptVerifierSettings(AUDIENCE, material[3], required),
+        WptVerifierSettings(AUDIENCE, material[3], required_token_headers=required),
         replay_store=store,
         authenticate=authenticate,
         authorize_verification=authorize,
@@ -202,6 +202,14 @@ def test_issue_wpt_caps_expiry_and_rejects_expired_wit_and_wrong_key(material):
             wit,
             workload_key_reference="workload",
             audience=AUDIENCE,
+            now=NOW + 900,
+        )
+    with pytest.raises(ValueError, match="expired"):
+        present_wit(
+            signer,
+            wit,
+            workload_key_reference="workload",
+            target_uri=AUDIENCE,
             now=NOW + 900,
         )
     with pytest.raises(ValueError):
@@ -475,6 +483,51 @@ async def test_required_binding_cannot_be_omitted_from_both_proof_and_request(ma
             headers={"Authorization": "Bearer recipient"},
         )
     assert response.status_code == 401
+
+
+@pytest.mark.parametrize(
+    "present,signed,duplicate,accepted",
+    [
+        (False, False, False, True),
+        (True, True, False, True),
+        (True, False, False, False),
+        (False, True, False, False),
+        (True, True, True, False),
+    ],
+)
+def test_optional_binding_headers_preserve_existing_receiver_contract(
+    material, present, signed, duplicate, accepted
+):
+    body = proof_body(
+        material,
+        accompanying_token_digests={"x-context": digest("context")} if signed else {},
+    )
+    headers = [
+        ("Workload-Identity-Token", body["workload_identity_token"]),
+        ("Authorization", "WPT " + body["workload_proof_token"]),
+    ]
+    if present:
+        headers.append(("X-Context", "context"))
+    if duplicate:
+        headers.append(("x-context", "context"))
+    store = RecordingReplayStore()
+    verifier = WptProofVerifier(
+        trust_by_domain=material[3], replay_store=store, clock=lambda: NOW
+    )
+    if accepted:
+        assert (
+            verifier.authenticate_request(
+                headers, audience=AUDIENCE, bound_token_headers=("X-Context",)
+            ).claims["sub"]
+            == SUBJECT
+        )
+        assert store.calls == 1
+    else:
+        with pytest.raises(ValueError, match="binding"):
+            verifier.authenticate_request(
+                headers, audience=AUDIENCE, bound_token_headers=("X-Context",)
+            )
+        assert store.calls == 0
 
 
 @pytest.mark.asyncio

@@ -41,7 +41,10 @@ verification for the configured audience. These checks precede proof validation.
 are rejected when used as bindings. Do not collapse duplicates before forwarding.
 Caller authentication belongs in this API request's headers, separately from
 the submitted workload proof. Submitted audiences and trust configuration are rejected.
-The audience and any required `bound_token_headers` are selected when mounting.
+The audience and `required_token_headers` are selected when mounting. Required
+headers must be present and cryptographically bound; clients cannot disable this
+policy by omitting a header. This strict presence policy is separate from the
+profile's optional `bound_token_headers` binding selector.
 
 A successful response contains `valid`, `subject`, `audience`, `proof_id`, and
 `expires_at`. Missing/denied caller credentials return 401/403, malformed requests

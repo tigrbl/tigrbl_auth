@@ -29,7 +29,7 @@ def build_app(
             audience=settings.audience,
             authenticate=authenticate,
             authorize_verification=authorize_verification,
-            bound_token_headers=settings.bound_token_headers,
+            required_token_headers=settings.required_token_headers,
         )
     )
     return app
