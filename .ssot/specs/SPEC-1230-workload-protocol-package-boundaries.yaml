@@ -28,8 +28,6 @@ body: |-
   
   ## SSOT verification
   Track package independence and protocol behavior as separate features with linked tests and evidence. A dependency test establishes the declared package boundary. Isolated runtime tests establish the behavior of the selected package subset. Protocol conformance requires test evidence against the pinned specification. A SPIRE interoperability claim requires a run against a named SPIRE release and recorded configuration. Record the package versions, roles, and applicable specification revisions in the evidence.
-  
-  WIMSE interoperability scenarios, peer qualification, and runner evidence are governed by SPEC-1237 through SPEC-1239. Link independent results to the exact package closure, profile, roles, direction, and peer configuration. Keep standalone conformance and explicitly selected SPIRE composition evidence separate.
 spec_kind: "normative"
 adr_ids:
   - "adr:1137"
