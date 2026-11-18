@@ -66,9 +66,17 @@ legal-file fixes without registry publication.
 inspects SPDX metadata, README fragments and actual archived legal files,
 and records file hashes. `scripts/publish_standards_release.py` rejects
 existing PyPI hash conflicts before uploading and verifies all release file
-hashes afterward. The batch mode of `monorepo-package-release.yml` uses the
-existing `pypi` environment and existing `PYPI_API_TOKEN` release credential.
-It does not bump versions during publication or replace existing source tags.
+hashes afterward. The prepared-release mode of
+`monorepo-package-release.yml` stages exactly one package from the successful
+CI artifact batch in run `44296198410`. Each project trusts
+`tigrbl/tigrbl_auth`, workflow `monorepo-package-release.yml`, and its own
+environment `pypi-<distribution-name>`. These environments retain the existing
+`pypi` environment's configuration (no protection rules or deployment branch
+policy). The publisher is configured first, then the exact package is released
+using OIDC and checked against its CI hashes and a clean PyPI installation.
+Only after that verification succeeds does the sequence advance to the next
+package, in dependency order. This mode neither bumps versions nor replaces
+existing source tags. Workflow concurrency serializes the release sequence.
 
 `scripts/verify_standards_installs.py` installs each exact version in its own
 temporary Python 3.12 environment, checks dependency consistency, and imports
