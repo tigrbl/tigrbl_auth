@@ -1,0 +1,44 @@
+name: TbA WIMSE matrix validation
+
+on:
+  pull_request:
+    paths: ['pkgs/120-tests/**', '.github/workflows/wimse-matrix-validation.yml']
+  push:
+    branches: [master, 'fix/tba-public-account-registration-recovery']
+    paths: ['pkgs/120-tests/**', '.github/workflows/wimse-matrix-validation.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Read interop revision
+        id: pin
+        run: echo "ref=$(cat pkgs/120-tests/tba-tests-interop-wimse-matrix/interop-revision.txt)" >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@v6
+        with:
+          repository: tigrbl/tba-tests-interop-wimse
+          ref: ${{ steps.pin.outputs.ref }}
+          path: .tmp/wimse-interop
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: python -m pip install uv
+      - name: Build interop wheel and run TbA T0–T3
+        shell: bash
+        run: |
+          set -euo pipefail
+          export TBA_WIMSE_INTEROP_PACKAGE="$PWD/.tmp/wimse-interop/pkgs/tba-tests-interop-wimse"
+          uv build --project "$TBA_WIMSE_INTEROP_PACKAGE" --wheel --out-dir "$PWD/.tmp/wimse-wheel"
+          export TBA_WIMSE_INTEROP_WHEEL="$(find "$PWD/.tmp/wimse-wheel" -name '*.whl' -type f)"
+          uv run --locked --extra test --with grpcio --with protobuf pytest \
+            -o addopts= \
+            pkgs/120-tests/tba-tests-interop-wimse-matrix/tests \
+            pkgs/120-tests/tba-tests-spiffe/tests/interop_native \
+            pkgs/120-tests/tba-tests-wimse/tests/interop_native \
+            pkgs/120-tests/tba-tests-workload-composition/tests/interop_native

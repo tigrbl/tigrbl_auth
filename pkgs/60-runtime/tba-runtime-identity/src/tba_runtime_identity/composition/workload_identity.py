@@ -86,12 +86,21 @@ def build_workload_identity_composition(
     )
     if config.enable_wimse_mtls:
         required.update(("wic_path_validators", "certificate_status_provider"))
+    if config.enable_wimse_wpt:
+        required.update(("wit_trust_by_domain", "wpt_replay_store"))
     missing = required.difference(dependencies)
     if missing:
         raise ValueError(
             f"missing workload composition dependencies: {sorted(missing)}"
         )
     resolved = dict(dependencies)
+    if config.enable_wimse_wpt:
+        from tba_profile_workload_proof_wimse_wpt import WptProofVerifier
+
+        resolved["wimse_wpt_verifier"] = WptProofVerifier(
+            trust_by_domain=resolved["wit_trust_by_domain"],
+            replay_store=resolved["wpt_replay_store"],
+        )
     if config.enable_wimse_mtls:
         from functools import partial
 

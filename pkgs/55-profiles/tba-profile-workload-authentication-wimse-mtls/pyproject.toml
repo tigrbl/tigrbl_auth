@@ -1,4 +1,6 @@
 [project]
+description = "WIMSE mutual TLS workload authentication profile"
+license = "Apache-2.0"
 name = "tba-profile-workload-authentication-wimse-mtls"
 version = "0.4.0.dev2"
 readme = "README.md"

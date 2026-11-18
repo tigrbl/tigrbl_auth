@@ -1,0 +1,19 @@
+[project]
+name = "tba-provider-certificate-issuer-x509"
+version = "0.4.0.dev2"
+description = "Generic CSR-based X.509 leaf certificate issuer."
+readme = "README.md"
+requires-python = ">=3.10,<3.16"
+license = "Apache-2.0"
+dependencies = [
+    "cryptography>=45",
+    "tba-bases-certificate==0.4.0.dev2",
+    "tba-contracts-security-trust==0.1.0",
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tba_provider_certificate_issuer_x509", from = "src" }]

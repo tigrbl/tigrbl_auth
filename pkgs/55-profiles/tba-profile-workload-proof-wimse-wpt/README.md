@@ -5,7 +5,7 @@
 <a href="https://github.com/tigrbl/tigrbl_auth#readme"><img src="https://raw.githubusercontent.com/tigrbl/tigrbl_auth/master/docs/assets/tba-brand.png" alt="TBA · Tigrbl Auth" width="240"></a>
 </p>
 <p align="center">
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/55-profiles/tba-profile-workload-proof-wimse-wpt/pyproject.toml"><img alt="Checkout: 0.4.0.dev2" src="https://img.shields.io/badge/Checkout-0.4.0.dev2-1f6feb"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/55-profiles/tba-profile-workload-proof-wimse-wpt/pyproject.toml"><img alt="Checkout: 0.4.0.dev3" src="https://img.shields.io/badge/Checkout-0.4.0.dev3-1f6feb"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/55-profiles/tba-profile-workload-proof-wimse-wpt/pyproject.toml"><img alt="Python: &gt;=3.10,&lt;3.16" src="https://img.shields.io/badge/Python-%3E%3D3.10%2C%3C3.16-3776ab"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/55-profiles"><img alt="Layer: 55 profiles" src="https://img.shields.io/badge/Layer-55%20profiles-0a7f5a"></a>
 <a href="https://pypi.org/project/tba-profile-workload-proof-wimse-wpt/"><img alt="PyPI version for tba-profile-workload-proof-wimse-wpt" src="https://img.shields.io/pypi/v/tba-profile-workload-proof-wimse-wpt?label=tba-profile-workload-proof-wimse-wpt%20PyPI"></a>
@@ -34,6 +34,11 @@ uv run --isolated --no-project --python 3.12 --with "tba-profile-workload-proof-
 ```
 
 The command prints the declared current revision.
+
+When presenting a transaction token, pass its exact value as
+`transaction_token` to `present_wit()`. Send the returned headers together.
+They include `Txn-Token` and a signed WPT whose `tth` claim binds that token
+according to [WPT draft-02 §2](https://datatracker.ietf.org/doc/html/draft-ietf-wimse-wpt-02#section-2).
 
 ## Verification
 

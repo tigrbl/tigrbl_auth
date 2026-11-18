@@ -155,7 +155,7 @@ def _tls_context(tmp_path, name, leaf, root, *, server):
     return context
 
 
-def _mutual_tls_peers(tmp_path, identity):
+def _mutual_tls_peers(tmp_path, identity, *, client_identifiers=None):
     import ssl
 
     root = _certificate(())
@@ -173,7 +173,10 @@ def _mutual_tls_peers(tmp_path, identity):
     client_context = _tls_context(
         tmp_path,
         "client",
-        _certificate((identity,), issuer=root),
+        _certificate(
+            (identity,) if client_identifiers is None else client_identifiers,
+            issuer=root,
+        ),
         root[0],
         server=False,
     )

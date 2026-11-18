@@ -106,6 +106,35 @@ def exercise_wimse_sender_signatures():
         raise AssertionError("sender signed with an unrelated workload key")
 
 
+def test_t1_wimse_sender_binds_transaction_token():
+    from base64 import urlsafe_b64encode
+    from hashlib import sha256
+
+    import pytest
+    from tba_concrete_jwt import decode_jwt_unverified
+    from tba_profile_workload_proof_wimse_wpt import authenticate_wpt_request, present_wit
+    from tba_provider_replay_memory import MemoryReplayCheckProvider
+
+    signer, wit, trust = wimse_credentials()
+    target = "https://service.example.org/work"
+    transaction = "fixture.txn.token"
+    headers = present_wit(
+        signer, wit, workload_key_reference="workload", target_uri=target,
+        now=100, transaction_token=transaction,
+    )
+    assert headers["Txn-Token"] == transaction
+    proof = decode_jwt_unverified(headers["Authorization"].split(" ", 1)[1])
+    expected = urlsafe_b64encode(sha256(transaction.encode("ascii")).digest()).decode("ascii").rstrip("=")
+    assert proof.claims["tth"] == expected
+    options = dict(audience=target, trust_by_domain=trust, now=100)
+    for invalid in ({"Txn-Token": "replacement.txn.token"}, {}):
+        request = {name: value for name, value in headers.items() if name != "Txn-Token"} | invalid
+        with pytest.raises(ValueError, match="transaction token binding mismatch"):
+            authenticate_wpt_request(request.items(), replay_store=MemoryReplayCheckProvider(), **options)
+    credential = authenticate_wpt_request(headers.items(), replay_store=MemoryReplayCheckProvider(), **options)
+    assert credential.claims["sub"] == "wimse://example.org/workload"
+
+
 def exercise_wimse_http_round_trip():
     from http.client import HTTPConnection
     from http.server import BaseHTTPRequestHandler, HTTPServer

@@ -22,6 +22,8 @@ body: |-
   
   ## Verification
   Exercise native wimse WICs in a real handshake with an accepted peer and rejection for wrong trust domain or anchor, wrong peer identity, and invalid certificate status. Capture the verified identity handoff and use separate evidence for each advertised peer role.
+  
+  For independent peer verification, link the WIC/mTLS matrix profile and any explicit WIC plus application-proof composition under SPEC-1237. Apply SPEC-1238 for exact identifier scheme, direction, and peer qualification and SPEC-1239 for observed handshake identity, decision, and resource effect.
 spec_kind: "normative"
 adr_ids:
   - "adr:1140"

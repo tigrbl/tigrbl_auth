@@ -69,6 +69,19 @@ runners = registered_runner_names()
 - Runner adapters and runtime manifests
 - Health, diagnostics, and runtime plan helpers
 
+## WIMSE workload identity
+
+The `workload.wic_service` and `workload.wit_token_service` modules expose
+issuance to applications with an authenticated workload enrollment principal.
+Each service resolves the authorized identity in its configured trust domain.
+
+Receiving applications can call `build_workload_identity_composition()` with
+`enable_wimse_wpt=True`. Supply `wit_trust_by_domain` and `wpt_replay_store`
+along with the workload credential dependencies. Composition exposes
+`wimse_wpt_verifier` for HTTP authentication and proof verification. Set the
+expected recipient audience from application configuration. Use a shared
+atomic replay store when multiple replicas receive the same audience.
+
 ## Related Packages
 
 - [tba-runtime-identity-administration](https://pypi.org/project/tba-runtime-identity-administration/)
