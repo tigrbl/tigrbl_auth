@@ -1939,14 +1939,6 @@ local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
-name = "tba-tests-interop-wimse-cred"
-path = "pkgs/120-tests/tba-tests-interop-wimse-cred"
-layer = "120-tests"
-order = "00"
-local_dependencies = ["tba-primitives-identity", "tba-profile-workload-credential-wimse-wit", "tba-profile-workload-proof-wimse-wpt", "tba-provider-jose-cryptography"]
-same_layer_dependencies = []
-
-[[packages]]
 name = "tba-testkit-workload-credential-conformance"
 path = "pkgs/120-tests/tba-testkit-workload-credential-conformance"
 layer = "120-tests"

@@ -17,8 +17,6 @@ def pytest_configure(config):
 def pytest_ignore_collect(collection_path: Path, config):
     if collection_path.suffix != ".py" or not collection_path.name.startswith("test_"):
         return None
-    if "tba-tests-interop-wimse-cred" in collection_path.parts:
-        return None
     if {"interop_native", "tba-tests-interop-wimse-matrix"} & set(collection_path.parts):
         if not os.environ.get("TBA_WIMSE_INTEROP_PACKAGE"):
             return True
