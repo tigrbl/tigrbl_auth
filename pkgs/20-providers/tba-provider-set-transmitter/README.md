@@ -15,15 +15,42 @@
 <p align="center">
 <a href="https://pepy.tech/project/tba-provider-set-transmitter"><img alt="Monthly PyPI downloads for tba-provider-set-transmitter" src="https://static.pepy.tech/badge/tba-provider-set-transmitter/month"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-set-transmitter/README.md"><img alt="README hits for tba-provider-set-transmitter" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-set-transmitter/README.md.svg?label=hits"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"><img alt="SSOT: governed" src="https://img.shields.io/badge/SSOT-governed-2f6f4e"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-set-transmitter/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
 </p>
 <!-- END TBA README HEADER -->
 
 Owns environment-backed provider integration.
 
+## AEO Summary
+
+- Package: `tba-provider-set-transmitter`
+- Layer: `20-providers`
+- Responsibility: RFC 8417 Security Event Token transmitter provider.
+- Public surface: [public entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-set-transmitter/src/tba_provider_set_transmitter/__init__.py).
+- Distribution: Python package on PyPI.
+
+## When to use it
+
+Choose `tba-provider-set-transmitter` for this responsibility: RFC 8417 Security Event Token transmitter provider. Its `20-providers` placement keeps replaceable environment implementations separate from capability orchestration, storage table ownership, or HTTP routing.
+
+## Installation
+
+Install the selected PyPI release of `tba-provider-set-transmitter`:
+
+```bash
+uv pip install tba-provider-set-transmitter
+```
+
+To work on the current checkout before a prepared release is published:
+
+```bash
+uv pip install ./pkgs/20-providers/tba-provider-set-transmitter
+```
+
 ## Quick start
 
-With [uv](https://docs.astral.sh/uv/) available, save the example as `quickstart.py`. This command uses the published package in an isolated Python 3.12 environment.
+With [uv](https://docs.astral.sh/uv/) available, save the example as `quickstart.py`. This isolated Python 3.12 command requires the selected version to be available on PyPI; Installation also documents the checkout workflow.
 
 ```python
 from tba_provider_set_transmitter import SetSigner
@@ -37,10 +64,78 @@ uv run --isolated --no-project --python 3.12 --with "tba-provider-set-transmitte
 
 The import and assertion succeed when the SetSigner entry point is available.
 
+## Usage
+
+The following public-entry-point example belongs to `tba-provider-set-transmitter`. RFC 8417 Security Event Token transmitter provider. Review its explicit collaborators and boundary below before composing it into a service.
+
+```python
+from tba_provider_set_transmitter import SetSigner
+
+assert callable(SetSigner)
+```
+
+## Package Boundary
+
+`tba-provider-set-transmitter` belongs to `20-providers` and owns replaceable environment implementations: RFC 8417 Security Event Token transmitter provider.
+
+Its implementation surface is the [public entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-set-transmitter/src/tba_provider_set_transmitter/__init__.py). Public exports include `SetSigner`, `SetTransmitterProvider`.
+
+Keep capability orchestration, storage table ownership, or HTTP routing in their owning packages. The [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml) records layer placement and local dependency edges.
+
+## Injected dependencies
+
+Explicit construction inputs and collaborators for `tba-provider-set-transmitter`:
+
+- `SetTransmitterProvider` construction inputs: `signer`. [Definition](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-set-transmitter/src/tba_provider_set_transmitter/transmission.py).
+
+Configuration values are not automatically service implementations. Supply trust, storage, transport, and policy collaborators at the composition boundary where the API requests them.
+
+## Operations and readiness
+
+`tba-provider-set-transmitter` exposes replaceable environment implementations. Public operations found in its source:
+
+- `SetTransmitterProvider.transmit` — [source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-set-transmitter/src/tba_provider_set_transmitter/transmission.py).
+
+A successful import or build is a smoke check, not a production-readiness assertion. Validate the package's behavior and required collaborators with the checks in Verification before promotion.
+
+## Protocol consumers
+
+The following layer-50 manifests directly depend on `tba-provider-set-transmitter`:
+
+- [tba-protocol-security-event-set](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/50-protocols/tba-protocol-security-event-set/README.md)
+
 ## Non-goals
 
 Higher-layer orchestration, lower-layer persistence, and protocol behavior outside this package's declared layer are not owned here.
 
+## Related Packages
+
+Declared local runtime dependencies:
+
+- [tba-bases-security-event](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/05-bases/tba-bases-security-event/README.md)
+- [tba-concrete-set](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-set/README.md)
+- [tba-contracts-identity](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/02-contracts/tba-contracts-identity/README.md)
+
+Direct downstream consumers:
+
+- [tba-protocol-security-event-set](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/50-protocols/tba-protocol-security-event-set/README.md)
+
+## Project Links
+
+- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/20-providers/tba-provider-set-transmitter)
+- [Package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-set-transmitter/pyproject.toml)
+- [LICENSE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-set-transmitter/LICENSE) and [NOTICE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-set-transmitter/NOTICE)
+- [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues)
+- [Package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml)
+- [Canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
+- [PyPI project](https://pypi.org/project/tba-provider-set-transmitter/)
+
+## Governance
+
+`tba-provider-set-transmitter` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `20-providers` ownership, public imports, declared dependencies, examples, and release metadata aligned.
+
+Changes must pass the [README standards gate](https://github.com/tigrbl/tigrbl_auth/blob/master/.github/workflows/readme-standards.yml), package checks, and the evidence requirements relevant to the changed behavior. Update SSOT through the repository's CLI workflow when changing governed claims or boundaries.
+
 ## Verification
 
-The quick start was run with the pinned distribution from PyPI and its declared dependencies. See the [public package entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-set-transmitter/src/tba_provider_set_transmitter/__init__.py).
+A prior published-version quick start informed this example. A registry badge is not evidence that this checkout's selected version or example has been verified against PyPI. See the [public package entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-set-transmitter/src/tba_provider_set_transmitter/__init__.py).

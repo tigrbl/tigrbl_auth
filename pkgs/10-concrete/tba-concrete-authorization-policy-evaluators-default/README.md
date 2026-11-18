@@ -15,6 +15,7 @@
 <p align="center">
 <a href="https://pepy.tech/project/tba-concrete-authorization-policy-evaluators-default"><img alt="Monthly PyPI downloads for tba-concrete-authorization-policy-evaluators-default" src="https://static.pepy.tech/badge/tba-concrete-authorization-policy-evaluators-default/month"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-authorization-policy-evaluators-default/README.md"><img alt="README hits for tba-concrete-authorization-policy-evaluators-default" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-authorization-policy-evaluators-default/README.md.svg?label=hits"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"><img alt="SSOT: governed" src="https://img.shields.io/badge/SSOT-governed-2f6f4e"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-authorization-policy-evaluators-default/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
 </p>
 <!-- END TBA README HEADER -->
@@ -23,9 +24,35 @@ Default concrete authorization policy rule and condition evaluators.
 
 Import root: `tba_concrete_authorization_policy_evaluators_default`.
 
+## AEO Summary
+
+- Package: `tba-concrete-authorization-policy-evaluators-default`
+- Layer: `10-concrete`
+- Responsibility: Default concrete authorization policy rule and condition evaluators.
+- Public surface: [public entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-authorization-policy-evaluators-default/src/tba_concrete_authorization_policy_evaluators_default/__init__.py).
+- Distribution: Python package on PyPI.
+
+## When to use it
+
+Choose `tba-concrete-authorization-policy-evaluators-default` for this responsibility: Default concrete authorization policy rule and condition evaluators. Its `10-concrete` placement keeps focused concrete types and algorithms separate from application hosting or ownership of environment-specific providers.
+
+## Installation
+
+Install the selected PyPI release of `tba-concrete-authorization-policy-evaluators-default`:
+
+```bash
+uv pip install tba-concrete-authorization-policy-evaluators-default
+```
+
+To work on the current checkout before a prepared release is published:
+
+```bash
+uv pip install ./pkgs/10-concrete/tba-concrete-authorization-policy-evaluators-default
+```
+
 ## Quick start
 
-With [uv](https://docs.astral.sh/uv/) available, save the example as `quickstart.py`. This command uses the published package in an isolated Python 3.12 environment.
+With [uv](https://docs.astral.sh/uv/) available, save the example as `quickstart.py`. This isolated Python 3.12 command requires the selected version to be available on PyPI; Installation also documents the checkout workflow.
 
 ```python
 from tba_concrete_authorization_policy_evaluators_default import DefaultConditionEvaluator
@@ -39,6 +66,78 @@ uv run --isolated --no-project --python 3.12 --with "tba-concrete-authorization-
 
 The import and assertion succeed when the DefaultConditionEvaluator entry point is available.
 
+## Usage
+
+The following public-entry-point example belongs to `tba-concrete-authorization-policy-evaluators-default`. Default concrete authorization policy rule and condition evaluators. Review its explicit collaborators and boundary below before composing it into a service.
+
+```python
+from tba_concrete_authorization_policy_evaluators_default import DefaultConditionEvaluator
+
+assert callable(DefaultConditionEvaluator)
+```
+
+## Package Boundary
+
+`tba-concrete-authorization-policy-evaluators-default` belongs to `10-concrete` and owns focused concrete types and algorithms: Default concrete authorization policy rule and condition evaluators.
+
+Its implementation surface is the [public entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-authorization-policy-evaluators-default/src/tba_concrete_authorization_policy_evaluators_default/__init__.py). Public exports include `DefaultConditionEvaluator`, `DefaultRuleEvaluator`.
+
+Keep application hosting or ownership of environment-specific providers in their owning packages. The [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml) records layer placement and local dependency edges.
+
+## Injected dependencies
+
+The [public entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-authorization-policy-evaluators-default/src/tba_concrete_authorization_policy_evaluators_default/__init__.py) for `tba-concrete-authorization-policy-evaluators-default` does not declare an explicit service-constructor or keyword-only factory hook in the inspected source. Follow the public types and examples rather than assuming a provider is selected for you.
+
+Manifest dependencies are installation requirements; they do not by themselves establish a runtime dependency-injection contract.
+
+## Operations and readiness
+
+`tba-concrete-authorization-policy-evaluators-default` exposes focused concrete types and algorithms. Public operations found in its source:
+
+- `DefaultConditionEvaluator.evaluate_condition` — [source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-authorization-policy-evaluators-default/src/tba_concrete_authorization_policy_evaluators_default/__init__.py).
+- `DefaultRuleEvaluator.evaluate_rule` — [source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-authorization-policy-evaluators-default/src/tba_concrete_authorization_policy_evaluators_default/__init__.py).
+
+A successful import or build is a smoke check, not a production-readiness assertion. Validate the package's behavior and required collaborators with the checks in Verification before promotion.
+
+## Protocol consumers
+
+No active layer-50 manifest declares a direct runtime dependency on `tba-concrete-authorization-policy-evaluators-default`. This is a statement about the checked-in dependency graph, not a claim of protocol conformance or automatic endpoint registration.
+
+Other direct consumers include [tba-auth](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/70-facade/tba-auth/README.md).
+
+## Non-goals
+
+`tba-concrete-authorization-policy-evaluators-default` does not take ownership of application hosting or ownership of environment-specific providers.
+
+Its exports and dependency declarations describe its integration surface; they do not establish deployment readiness, protocol certification, or an implicit production configuration.
+
+## Related Packages
+
+Declared local runtime dependencies:
+
+- [tba-bases-authorization-policy](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/05-bases/tba-bases-authorization-policy/README.md)
+- [tba-contracts-identity](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/02-contracts/tba-contracts-identity/README.md)
+
+Direct downstream consumers:
+
+- [tba-auth](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/70-facade/tba-auth/README.md)
+
+## Project Links
+
+- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/10-concrete/tba-concrete-authorization-policy-evaluators-default)
+- [Package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-authorization-policy-evaluators-default/pyproject.toml)
+- [LICENSE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-authorization-policy-evaluators-default/LICENSE) and [NOTICE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-authorization-policy-evaluators-default/NOTICE)
+- [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues)
+- [Package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml)
+- [Canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
+- [PyPI project](https://pypi.org/project/tba-concrete-authorization-policy-evaluators-default/)
+
+## Governance
+
+`tba-concrete-authorization-policy-evaluators-default` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `10-concrete` ownership, public imports, declared dependencies, examples, and release metadata aligned.
+
+Changes must pass the [README standards gate](https://github.com/tigrbl/tigrbl_auth/blob/master/.github/workflows/readme-standards.yml), package checks, and the evidence requirements relevant to the changed behavior. Update SSOT through the repository's CLI workflow when changing governed claims or boundaries.
+
 ## Verification
 
-The quick start was run with the pinned distribution from PyPI and its declared dependencies. See the [public package entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-authorization-policy-evaluators-default/src/tba_concrete_authorization_policy_evaluators_default/__init__.py).
+A prior published-version quick start informed this example. A registry badge is not evidence that this checkout's selected version or example has been verified against PyPI. See the [public package entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-authorization-policy-evaluators-default/src/tba_concrete_authorization_policy_evaluators_default/__init__.py).

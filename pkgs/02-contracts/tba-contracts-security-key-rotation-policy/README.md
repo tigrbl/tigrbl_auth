@@ -15,6 +15,7 @@
 <p align="center">
 <a href="https://pepy.tech/project/tba-contracts-security-key-rotation-policy"><img alt="Monthly PyPI downloads for tba-contracts-security-key-rotation-policy" src="https://static.pepy.tech/badge/tba-contracts-security-key-rotation-policy/month"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/02-contracts/tba-contracts-security-key-rotation-policy/README.md"><img alt="README hits for tba-contracts-security-key-rotation-policy" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/02-contracts/tba-contracts-security-key-rotation-policy/README.md.svg?label=hits"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"><img alt="SSOT: governed" src="https://img.shields.io/badge/SSOT-governed-2f6f4e"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/02-contracts/tba-contracts-security-key-rotation-policy/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
 </p>
 <!-- END TBA README HEADER -->
@@ -23,9 +24,35 @@ Key rotation policy contract dataclasses.
 
 Import root: `tba_contracts_security_key_rotation_policy`.
 
+## AEO Summary
+
+- Package: `tba-contracts-security-key-rotation-policy`
+- Layer: `02-contracts`
+- Responsibility: Key rotation policy contract dataclasses.
+- Public surface: [public entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/02-contracts/tba-contracts-security-key-rotation-policy/src/tba_contracts_security_key_rotation_policy/__init__.py).
+- Distribution: Python package on PyPI.
+
+## When to use it
+
+Choose `tba-contracts-security-key-rotation-policy` for this responsibility: Key rotation policy contract dataclasses. Its `02-contracts` placement keeps shared types and structural ports separate from environment-specific service implementations or HTTP routing.
+
+## Installation
+
+Install the selected PyPI release of `tba-contracts-security-key-rotation-policy`:
+
+```bash
+uv pip install tba-contracts-security-key-rotation-policy
+```
+
+To work on the current checkout before a prepared release is published:
+
+```bash
+uv pip install ./pkgs/02-contracts/tba-contracts-security-key-rotation-policy
+```
+
 ## Quick start
 
-With [uv](https://docs.astral.sh/uv/) available, save the example as `quickstart.py`. This command uses the published package in an isolated Python 3.12 environment.
+With [uv](https://docs.astral.sh/uv/) available, save the example as `quickstart.py`. This isolated Python 3.12 command requires the selected version to be available on PyPI; Installation also documents the checkout workflow.
 
 ```python
 from tba_contracts_security_key_rotation_policy import KeyRotationPolicyVersion
@@ -39,6 +66,71 @@ uv run --isolated --no-project --python 3.12 --with "tba-contracts-security-key-
 
 The import and assertion succeed when the KeyRotationPolicyVersion entry point is available.
 
+## Usage
+
+The following public-entry-point example belongs to `tba-contracts-security-key-rotation-policy`. Key rotation policy contract dataclasses. Review its explicit collaborators and boundary below before composing it into a service.
+
+```python
+from tba_contracts_security_key_rotation_policy import KeyRotationPolicyVersion
+
+assert callable(KeyRotationPolicyVersion)
+```
+
+## Package Boundary
+
+`tba-contracts-security-key-rotation-policy` belongs to `02-contracts` and owns shared types and structural ports: Key rotation policy contract dataclasses.
+
+Its implementation surface is the [public entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/02-contracts/tba-contracts-security-key-rotation-policy/src/tba_contracts_security_key_rotation_policy/__init__.py). Public exports include `EffectiveKeyRotationPolicy`, `KeyRotationPolicyVersion`.
+
+Keep environment-specific service implementations or HTTP routing in their owning packages. The [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml) records layer placement and local dependency edges.
+
+## Injected dependencies
+
+The [public entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/02-contracts/tba-contracts-security-key-rotation-policy/src/tba_contracts_security_key_rotation_policy/__init__.py) for `tba-contracts-security-key-rotation-policy` does not declare an explicit service-constructor or keyword-only factory hook in the inspected source. Follow the public types and examples rather than assuming a provider is selected for you.
+
+Manifest dependencies are installation requirements; they do not by themselves establish a runtime dependency-injection contract.
+
+## Operations and readiness
+
+`tba-contracts-security-key-rotation-policy` exposes shared types and structural ports. Inspect the [public entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/02-contracts/tba-contracts-security-key-rotation-policy/src/tba_contracts_security_key_rotation_policy/__init__.py) for the exported types and composition surface.
+
+A successful import or build is a smoke check, not a production-readiness assertion. Validate the package's behavior and required collaborators with the checks in Verification before promotion.
+
+## Protocol consumers
+
+No active layer-50 manifest declares a direct runtime dependency on `tba-contracts-security-key-rotation-policy`. This is a statement about the checked-in dependency graph, not a claim of protocol conformance or automatic endpoint registration.
+
+Other direct consumers include [tba-concrete-jose](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-jose/README.md), [tba-provider-identity-jose](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-identity-jose/README.md).
+
+## Non-goals
+
+`tba-contracts-security-key-rotation-policy` does not take ownership of environment-specific service implementations or HTTP routing.
+
+Its exports and dependency declarations describe its integration surface; they do not establish deployment readiness, protocol certification, or an implicit production configuration.
+
+## Related Packages
+
+Direct downstream consumers:
+
+- [tba-concrete-jose](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-jose/README.md)
+- [tba-provider-identity-jose](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-identity-jose/README.md)
+
+## Project Links
+
+- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/02-contracts/tba-contracts-security-key-rotation-policy)
+- [Package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/02-contracts/tba-contracts-security-key-rotation-policy/pyproject.toml)
+- [LICENSE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/02-contracts/tba-contracts-security-key-rotation-policy/LICENSE) and [NOTICE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/02-contracts/tba-contracts-security-key-rotation-policy/NOTICE)
+- [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues)
+- [Package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml)
+- [Canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
+- [PyPI project](https://pypi.org/project/tba-contracts-security-key-rotation-policy/)
+
+## Governance
+
+`tba-contracts-security-key-rotation-policy` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `02-contracts` ownership, public imports, declared dependencies, examples, and release metadata aligned.
+
+Changes must pass the [README standards gate](https://github.com/tigrbl/tigrbl_auth/blob/master/.github/workflows/readme-standards.yml), package checks, and the evidence requirements relevant to the changed behavior. Update SSOT through the repository's CLI workflow when changing governed claims or boundaries.
+
 ## Verification
 
-The quick start was run with the pinned distribution from PyPI and its declared dependencies. See the [public package entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/02-contracts/tba-contracts-security-key-rotation-policy/src/tba_contracts_security_key_rotation_policy/__init__.py).
+A prior published-version quick start informed this example. A registry badge is not evidence that this checkout's selected version or example has been verified against PyPI. See the [public package entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/02-contracts/tba-contracts-security-key-rotation-policy/src/tba_contracts_security_key_rotation_policy/__init__.py).

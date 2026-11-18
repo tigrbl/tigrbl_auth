@@ -23,6 +23,11 @@ Author attribution comes from the existing repository metadata.
 
 ## README fragments and metrics
 
+The [complete README contract](readme-standard.md) requires 14 substantive
+sections for every active package and maintained testkit alias. The dedicated
+`README standards` workflow checks it on every push and pull request; the
+shared quality workflow and prepared release workflow enforce it as well.
+
 Use the shared `docs/assets/tba-brand.png` artwork through the managed
 `BEGIN TBA README HEADER` / `END TBA README HEADER` fragment. Keep the package's
 existing quick start, verification scope, and evidence labels.
@@ -77,6 +82,12 @@ using OIDC and checked against its CI hashes and a clean PyPI installation.
 Only after that verification succeeds does the sequence advance to the next
 package, in dependency order. This mode neither bumps versions nor replaces
 existing source tags. Workflow concurrency serializes the release sequence.
+
+The extensive README repair supersedes the README payloads in that earlier CI
+batch. Those artifacts remain historical build evidence, not publishable
+artifacts for the repaired source. The archive/source equality check blocks
+their publication. A subsequent release must rebuild the repaired READMEs and
+bind its approved versions and source tags to that new build.
 
 `scripts/verify_standards_installs.py` installs each exact version in its own
 temporary Python 3.12 environment, checks dependency consistency, and imports

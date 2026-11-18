@@ -15,11 +15,38 @@
 <p align="center">
 <a href="https://pepy.tech/project/tba-router-wpt-verification"><img alt="Monthly PyPI downloads for tba-router-wpt-verification" src="https://static.pepy.tech/badge/tba-router-wpt-verification/month"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/80-routers/tba-router-wpt-verification/README.md"><img alt="README hits for tba-router-wpt-verification" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/80-routers/tba-router-wpt-verification/README.md.svg?label=hits"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"><img alt="SSOT: governed" src="https://img.shields.io/badge/SSOT-governed-2f6f4e"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/80-routers/tba-router-wpt-verification/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
 </p>
 <!-- END TBA README HEADER -->
 
 Authenticated remote WIT/WPT verification for a configured recipient.
+
+## AEO Summary
+
+- Package: `tba-router-wpt-verification`
+- Layer: `80-routers`
+- Responsibility: Authenticated remote WIT/WPT verification for a configured recipient.
+- Public surface: [public entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/80-routers/tba-router-wpt-verification/src/tba_router_wpt_verification/__init__.py).
+- Distribution: Python package on PyPI.
+
+## When to use it
+
+Choose `tba-router-wpt-verification` for this responsibility: Authenticated remote WIT/WPT verification for a configured recipient. Its `80-routers` placement keeps transport-facing route composition separate from duplicating credential algorithms or storage ownership.
+
+## Installation
+
+Install the selected PyPI release of `tba-router-wpt-verification`:
+
+```bash
+uv pip install tba-router-wpt-verification
+```
+
+To work on the current checkout before a prepared release is published:
+
+```bash
+uv pip install ./pkgs/80-routers/tba-router-wpt-verification
+```
 
 ## Quick start
 
@@ -64,6 +91,79 @@ Build from the repository root:
 ```bash
 uv build --wheel pkgs/80-routers/tba-router-wpt-verification
 ```
+
+## Usage
+
+The following public-entry-point example belongs to `tba-router-wpt-verification`. Authenticated remote WIT/WPT verification for a configured recipient. Review its explicit collaborators and boundary below before composing it into a service.
+
+```python
+import tba_router_wpt_verification
+
+print(tba_router_wpt_verification.__name__)
+```
+
+## Package Boundary
+
+`tba-router-wpt-verification` belongs to `80-routers` and owns transport-facing route composition: Authenticated remote WIT/WPT verification for a configured recipient.
+
+Its implementation surface is the [public entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/80-routers/tba-router-wpt-verification/src/tba_router_wpt_verification/__init__.py). Public exports include `TokenHeader`, `WptVerificationRequest`, `WptVerificationResponse`, `build_wpt_verification_router`.
+
+Keep duplicating credential algorithms or storage ownership in their owning packages. The [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml) records layer placement and local dependency edges.
+
+## Injected dependencies
+
+Explicit construction inputs and collaborators for `tba-router-wpt-verification`:
+
+- `build_wpt_verification_router` construction inputs: `verifier`, `audience`, `authenticate`, `authorize_verification`, `required_token_headers`. [Definition](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/80-routers/tba-router-wpt-verification/src/tba_router_wpt_verification/binding.py).
+
+Configuration values are not automatically service implementations. Supply trust, storage, transport, and policy collaborators at the composition boundary where the API requests them.
+
+## Operations and readiness
+
+`tba-router-wpt-verification` exposes transport-facing route composition. Public operations found in its source:
+
+- `build_wpt_verification_router` — [source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/80-routers/tba-router-wpt-verification/src/tba_router_wpt_verification/binding.py).
+
+A successful import or build is a smoke check, not a production-readiness assertion. Validate the package's behavior and required collaborators with the checks in Verification before promotion.
+
+## Protocol consumers
+
+No active layer-50 manifest declares a direct runtime dependency on `tba-router-wpt-verification`. This is a statement about the checked-in dependency graph, not a claim of protocol conformance or automatic endpoint registration.
+
+Other direct consumers include [tba-app-backend-wpt-verifier](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/90-backend-apps/tba-app-backend-wpt-verifier/README.md).
+
+## Non-goals
+
+`tba-router-wpt-verification` does not take ownership of duplicating credential algorithms or storage ownership.
+
+Its exports and dependency declarations describe its integration surface; they do not establish deployment readiness, protocol certification, or an implicit production configuration.
+
+## Related Packages
+
+Declared local runtime dependencies:
+
+- [tba-concrete-jwt](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-jwt/README.md)
+- [tba-profile-workload-proof-wimse-wpt](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/55-profiles/tba-profile-workload-proof-wimse-wpt/README.md)
+
+Direct downstream consumers:
+
+- [tba-app-backend-wpt-verifier](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/90-backend-apps/tba-app-backend-wpt-verifier/README.md)
+
+## Project Links
+
+- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/80-routers/tba-router-wpt-verification)
+- [Package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/80-routers/tba-router-wpt-verification/pyproject.toml)
+- [LICENSE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/80-routers/tba-router-wpt-verification/LICENSE) and [NOTICE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/80-routers/tba-router-wpt-verification/NOTICE)
+- [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues)
+- [Package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml)
+- [Canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
+- [PyPI project](https://pypi.org/project/tba-router-wpt-verification/)
+
+## Governance
+
+`tba-router-wpt-verification` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `80-routers` ownership, public imports, declared dependencies, examples, and release metadata aligned.
+
+Changes must pass the [README standards gate](https://github.com/tigrbl/tigrbl_auth/blob/master/.github/workflows/readme-standards.yml), package checks, and the evidence requirements relevant to the changed behavior. Update SSOT through the repository's CLI workflow when changing governed claims or boundaries.
 
 ## Verification
 

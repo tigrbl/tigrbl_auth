@@ -15,6 +15,7 @@
 <p align="center">
 <a href="https://pepy.tech/project/tba-provider-fido-metadata-service"><img alt="Monthly PyPI downloads for tba-provider-fido-metadata-service" src="https://static.pepy.tech/badge/tba-provider-fido-metadata-service/month"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-fido-metadata-service/README.md"><img alt="README hits for tba-provider-fido-metadata-service" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-fido-metadata-service/README.md.svg?label=hits"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"><img alt="SSOT: governed" src="https://img.shields.io/badge/SSOT-governed-2f6f4e"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-fido-metadata-service/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
 </p>
 <!-- END TBA README HEADER -->
@@ -22,9 +23,35 @@
 Consumes an injected fetcher, signed-blob verifier, and cache. It resolves
 AAGUID metadata and reports status; application policy makes acceptance decisions.
 
+## AEO Summary
+
+- Package: `tba-provider-fido-metadata-service`
+- Layer: `20-providers`
+- Responsibility: FIDO Metadata Service signed-blob and authenticator status provider.
+- Public surface: [public entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-fido-metadata-service/src/tba_provider_fido_metadata_service/__init__.py).
+- Distribution: Python package on PyPI.
+
+## When to use it
+
+Choose `tba-provider-fido-metadata-service` for this responsibility: FIDO Metadata Service signed-blob and authenticator status provider. Its `20-providers` placement keeps replaceable environment implementations separate from capability orchestration, storage table ownership, or HTTP routing.
+
+## Installation
+
+Install the selected PyPI release of `tba-provider-fido-metadata-service`:
+
+```bash
+uv pip install tba-provider-fido-metadata-service
+```
+
+To work on the current checkout before a prepared release is published:
+
+```bash
+uv pip install ./pkgs/20-providers/tba-provider-fido-metadata-service
+```
+
 ## Quick start
 
-With [uv](https://docs.astral.sh/uv/) available, save the example as `quickstart.py`. This command uses the published package in an isolated Python 3.12 environment.
+With [uv](https://docs.astral.sh/uv/) available, save the example as `quickstart.py`. This isolated Python 3.12 command requires the selected version to be available on PyPI; Installation also documents the checkout workflow.
 
 ```python
 from tba_provider_fido_metadata_service import FidoMetadataServiceProvider
@@ -38,6 +65,74 @@ uv run --isolated --no-project --python 3.12 --with "tba-provider-fido-metadata-
 
 The import and assertion succeed when the FidoMetadataServiceProvider entry point is available.
 
+## Usage
+
+The following public-entry-point example belongs to `tba-provider-fido-metadata-service`. FIDO Metadata Service signed-blob and authenticator status provider. Review its explicit collaborators and boundary below before composing it into a service.
+
+```python
+from tba_provider_fido_metadata_service import FidoMetadataServiceProvider
+
+assert callable(FidoMetadataServiceProvider)
+```
+
+## Package Boundary
+
+`tba-provider-fido-metadata-service` belongs to `20-providers` and owns replaceable environment implementations: FIDO Metadata Service signed-blob and authenticator status provider.
+
+Its implementation surface is the [public entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-fido-metadata-service/src/tba_provider_fido_metadata_service/__init__.py). Public exports include `FidoMetadataServiceProvider`, `MetadataBlob`, `MetadataEntry`, `StatusReport`.
+
+Keep capability orchestration, storage table ownership, or HTTP routing in their owning packages. The [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml) records layer placement and local dependency edges.
+
+## Injected dependencies
+
+Explicit construction inputs and collaborators for `tba-provider-fido-metadata-service`:
+
+- `FidoMetadataServiceProvider` construction inputs: `fetch_blob`, `verify_signed_blob`, `cache`. [Definition](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-fido-metadata-service/src/tba_provider_fido_metadata_service/provider.py).
+
+Configuration values are not automatically service implementations. Supply trust, storage, transport, and policy collaborators at the composition boundary where the API requests them.
+
+## Operations and readiness
+
+`tba-provider-fido-metadata-service` exposes replaceable environment implementations. Public operations found in its source:
+
+- `FidoMetadataServiceProvider.refresh` — [source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-fido-metadata-service/src/tba_provider_fido_metadata_service/provider.py).
+- `FidoMetadataServiceProvider.resolve` — [source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-fido-metadata-service/src/tba_provider_fido_metadata_service/provider.py).
+
+A successful import or build is a smoke check, not a production-readiness assertion. Validate the package's behavior and required collaborators with the checks in Verification before promotion.
+
+## Protocol consumers
+
+No active layer-50 manifest declares a direct runtime dependency on `tba-provider-fido-metadata-service`. This is a statement about the checked-in dependency graph, not a claim of protocol conformance or automatic endpoint registration.
+
+## Non-goals
+
+`tba-provider-fido-metadata-service` does not take ownership of capability orchestration, storage table ownership, or HTTP routing.
+
+Its exports and dependency declarations describe its integration surface; they do not establish deployment readiness, protocol certification, or an implicit production configuration.
+
+## Related Packages
+
+Declared local runtime dependencies:
+
+- [tba-bases-public-key-authentication](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/05-bases/tba-bases-public-key-authentication/README.md)
+- [tba-contracts-identity](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/02-contracts/tba-contracts-identity/README.md)
+
+## Project Links
+
+- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/20-providers/tba-provider-fido-metadata-service)
+- [Package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-fido-metadata-service/pyproject.toml)
+- [LICENSE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-fido-metadata-service/LICENSE) and [NOTICE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-fido-metadata-service/NOTICE)
+- [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues)
+- [Package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml)
+- [Canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
+- [PyPI project](https://pypi.org/project/tba-provider-fido-metadata-service/)
+
+## Governance
+
+`tba-provider-fido-metadata-service` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `20-providers` ownership, public imports, declared dependencies, examples, and release metadata aligned.
+
+Changes must pass the [README standards gate](https://github.com/tigrbl/tigrbl_auth/blob/master/.github/workflows/readme-standards.yml), package checks, and the evidence requirements relevant to the changed behavior. Update SSOT through the repository's CLI workflow when changing governed claims or boundaries.
+
 ## Verification
 
-The quick start was run with the pinned distribution from PyPI and its declared dependencies. See the [public package entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-fido-metadata-service/src/tba_provider_fido_metadata_service/__init__.py).
+A prior published-version quick start informed this example. A registry badge is not evidence that this checkout's selected version or example has been verified against PyPI. See the [public package entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-fido-metadata-service/src/tba_provider_fido_metadata_service/__init__.py).

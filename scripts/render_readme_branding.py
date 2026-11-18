@@ -33,13 +33,14 @@ def badge(label: str, value: str, color: str, target: str) -> str:
     return image_link(f"{label}: {value}", url, target)
 
 
-def header(readme: Path, original: str) -> str:
+def header(readme: Path, original: str, root_path: Path | None = None) -> str:
+    repository_root = root_path or ROOT
     folder = readme.parent
-    root = folder == ROOT
+    root = folder == repository_root
     python = (folder / "pyproject.toml").is_file()
     manifest = "pyproject.toml" if python else "package.json"
     path = folder / manifest
-    manifest_url = f"{BLOB}/{path.relative_to(ROOT).as_posix()}"
+    manifest_url = f"{BLOB}/{path.relative_to(repository_root).as_posix()}"
     publishable = False
     if python:
         document = tomllib.loads(path.read_text(encoding="utf-8"))
@@ -48,7 +49,7 @@ def header(readme: Path, original: str) -> str:
         requirement = meta.get("requires-python")
     else:
         meta = json.loads(path.read_text(encoding="utf-8"))
-        requirement = meta.get("engines", {}).get("node")
+        requirement = meta.get("engines", {}).get("node", "not declared")
 
     metadata = [
         badge(
@@ -63,7 +64,7 @@ def header(readme: Path, original: str) -> str:
     legal_base = ""
     if python and publishable and not root:
         release_tag = quote(f"{meta['name']}=={meta['version']}", safe="")
-        legal_base = f"{REPO}/blob/{release_tag}/{folder.relative_to(ROOT).as_posix()}/"
+        legal_base = f"{REPO}/blob/{release_tag}/{folder.relative_to(repository_root).as_posix()}/"
     if isinstance(license_id, str):
         metadata.append(badge("License", license_id, "525252", f"{legal_base}LICENSE"))
         metadata.append(badge("Notice", "attribution", "525252", f"{legal_base}NOTICE"))
@@ -95,7 +96,9 @@ def header(readme: Path, original: str) -> str:
             )
         )
     else:
-        source_url = f"{REPO}/tree/master/{folder.relative_to(ROOT).as_posix()}"
+        source_url = (
+            f"{REPO}/tree/master/{folder.relative_to(repository_root).as_posix()}"
+        )
         metrics.append(badge("Downloads", "source checkout", "0969da", source_url))
     if not python:
         metrics.append(
@@ -107,11 +110,14 @@ def header(readme: Path, original: str) -> str:
             )
         )
 
-    readme_path = readme.relative_to(ROOT).as_posix()
+    readme_path = readme.relative_to(repository_root).as_posix()
     counter_key = f"github.com/tigrbl/tigrbl_auth/blob/master/{readme_path}"
     counter_url = f"https://hits.sh/{quote(counter_key, safe='/')}.svg?label=hits"
-    metrics.append(image_link(f"README hits for {meta['name']}", counter_url,
-                              f"{BLOB}/{readme_path}"))
+    metrics.append(
+        image_link(
+            f"README hits for {meta['name']}", counter_url, f"{BLOB}/{readme_path}"
+        )
+    )
 
     if root:
         workflow = f"{REPO}/actions/workflows/master.yml"
@@ -130,7 +136,7 @@ def header(readme: Path, original: str) -> str:
             ),
         ]
     else:
-        readme_url = f"{BLOB}/{readme.relative_to(ROOT).as_posix()}"
+        readme_url = f"{BLOB}/{readme.relative_to(repository_root).as_posix()}"
         evidence_status = "verification"
         if "<!-- TBA QUICK START: browser-verified -->" in original:
             evidence_status = "browser verified"
@@ -139,7 +145,8 @@ def header(readme: Path, original: str) -> str:
         elif "<!-- TBA QUICK START: blocked -->" in original:
             evidence_status = "quick start blocked"
         evidence = [
-            badge("Evidence", evidence_status, "8250df", f"{readme_url}#verification")
+            badge("SSOT", "governed", "2f6f4e", f"{BLOB}/.ssot/registry.json"),
+            badge("Evidence", evidence_status, "8250df", f"{readme_url}#verification"),
         ]
 
     brand_url = BRAND if root else f"{RAW}/{BRAND}"
@@ -179,7 +186,10 @@ def main() -> int:
     }
     package_readmes.update(
         ROOT / "pkgs/deprecated" / name / "README.md"
-        for name in ("tba-testkit-identity", "tba-testkit-workload-credential-conformance")
+        for name in (
+            "tba-testkit-identity",
+            "tba-testkit-workload-credential-conformance",
+        )
         if (ROOT / "pkgs/deprecated" / name / "pyproject.toml").is_file()
     )
     stale = []

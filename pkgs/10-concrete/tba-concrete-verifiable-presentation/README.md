@@ -15,6 +15,7 @@
 <p align="center">
 <a href="https://pepy.tech/project/tba-concrete-verifiable-presentation"><img alt="Monthly PyPI downloads for tba-concrete-verifiable-presentation" src="https://static.pepy.tech/badge/tba-concrete-verifiable-presentation/month"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-verifiable-presentation/README.md"><img alt="README hits for tba-concrete-verifiable-presentation" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-verifiable-presentation/README.md.svg?label=hits"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"><img alt="SSOT: governed" src="https://img.shields.io/badge/SSOT-governed-2f6f4e"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-verifiable-presentation/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
 </p>
 <!-- END TBA README HEADER -->
@@ -22,9 +23,35 @@
 Owns the standalone semantic Verifiable Presentation object. Versioned W3C
 wire schemas, proof rules, and protocol bindings belong to layer 50.
 
+## AEO Summary
+
+- Package: `tba-concrete-verifiable-presentation`
+- Layer: `10-concrete`
+- Responsibility: Owns the standalone semantic Verifiable Presentation object.
+- Public surface: [public entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-verifiable-presentation/src/tba_concrete_verifiable_presentation/__init__.py).
+- Distribution: Python package on PyPI.
+
+## When to use it
+
+Choose `tba-concrete-verifiable-presentation` for this responsibility: Owns the standalone semantic Verifiable Presentation object. Its `10-concrete` placement keeps focused concrete types and algorithms separate from application hosting or ownership of environment-specific providers.
+
+## Installation
+
+Install the selected PyPI release of `tba-concrete-verifiable-presentation`:
+
+```bash
+uv pip install tba-concrete-verifiable-presentation
+```
+
+To work on the current checkout before a prepared release is published:
+
+```bash
+uv pip install ./pkgs/10-concrete/tba-concrete-verifiable-presentation
+```
+
 ## Quick start
 
-With [uv](https://docs.astral.sh/uv/) available, save the example as `quickstart.py`. This command uses the published package in an isolated Python 3.12 environment.
+With [uv](https://docs.astral.sh/uv/) available, save the example as `quickstart.py`. This isolated Python 3.12 command requires the selected version to be available on PyPI; Installation also documents the checkout workflow.
 
 ```python
 from tba_concrete_verifiable_presentation import VerifiablePresentation
@@ -38,6 +65,74 @@ uv run --isolated --no-project --python 3.12 --with "tba-concrete-verifiable-pre
 
 The import and assertion succeed when the VerifiablePresentation entry point is available.
 
+## Usage
+
+The following public-entry-point example belongs to `tba-concrete-verifiable-presentation`. Owns the standalone semantic Verifiable Presentation object. Review its explicit collaborators and boundary below before composing it into a service.
+
+```python
+from tba_concrete_verifiable_presentation import VerifiablePresentation
+
+assert callable(VerifiablePresentation)
+```
+
+## Package Boundary
+
+`tba-concrete-verifiable-presentation` belongs to `10-concrete` and owns focused concrete types and algorithms: Owns the standalone semantic Verifiable Presentation object.
+
+Its implementation surface is the [public entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-verifiable-presentation/src/tba_concrete_verifiable_presentation/__init__.py). Public exports include `VerifiablePresentation`.
+
+Keep application hosting or ownership of environment-specific providers in their owning packages. The [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml) records layer placement and local dependency edges.
+
+## Injected dependencies
+
+The [public entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-verifiable-presentation/src/tba_concrete_verifiable_presentation/__init__.py) for `tba-concrete-verifiable-presentation` does not declare an explicit service-constructor or keyword-only factory hook in the inspected source. Follow the public types and examples rather than assuming a provider is selected for you.
+
+Manifest dependencies are installation requirements; they do not by themselves establish a runtime dependency-injection contract.
+
+## Operations and readiness
+
+`tba-concrete-verifiable-presentation` exposes focused concrete types and algorithms. Inspect the [public entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-verifiable-presentation/src/tba_concrete_verifiable_presentation/__init__.py) for the exported types and composition surface.
+
+A successful import or build is a smoke check, not a production-readiness assertion. Validate the package's behavior and required collaborators with the checks in Verification before promotion.
+
+## Protocol consumers
+
+The following layer-50 manifests directly depend on `tba-concrete-verifiable-presentation`:
+
+- [tba-protocol-credential-w3c-vcdm](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/50-protocols/tba-protocol-credential-w3c-vcdm/README.md)
+
+## Non-goals
+
+`tba-concrete-verifiable-presentation` does not take ownership of application hosting or ownership of environment-specific providers.
+
+Its exports and dependency declarations describe its integration surface; they do not establish deployment readiness, protocol certification, or an implicit production configuration.
+
+## Related Packages
+
+Declared local runtime dependencies:
+
+- [tba-bases-digital-credential](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/05-bases/tba-bases-digital-credential/README.md)
+
+Direct downstream consumers:
+
+- [tba-protocol-credential-w3c-vcdm](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/50-protocols/tba-protocol-credential-w3c-vcdm/README.md)
+
+## Project Links
+
+- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/10-concrete/tba-concrete-verifiable-presentation)
+- [Package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-verifiable-presentation/pyproject.toml)
+- [LICENSE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-verifiable-presentation/LICENSE) and [NOTICE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-verifiable-presentation/NOTICE)
+- [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues)
+- [Package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml)
+- [Canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
+- [PyPI project](https://pypi.org/project/tba-concrete-verifiable-presentation/)
+
+## Governance
+
+`tba-concrete-verifiable-presentation` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `10-concrete` ownership, public imports, declared dependencies, examples, and release metadata aligned.
+
+Changes must pass the [README standards gate](https://github.com/tigrbl/tigrbl_auth/blob/master/.github/workflows/readme-standards.yml), package checks, and the evidence requirements relevant to the changed behavior. Update SSOT through the repository's CLI workflow when changing governed claims or boundaries.
+
 ## Verification
 
-The quick start was run with the pinned distribution from PyPI and its declared dependencies. See the [public package entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-verifiable-presentation/src/tba_concrete_verifiable_presentation/__init__.py).
+A prior published-version quick start informed this example. A registry badge is not evidence that this checkout's selected version or example has been verified against PyPI. See the [public package entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-verifiable-presentation/src/tba_concrete_verifiable_presentation/__init__.py).

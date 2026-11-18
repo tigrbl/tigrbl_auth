@@ -14,11 +14,34 @@
 <p align="center">
 <a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/120-tests/tba-tests-spiffe"><img alt="Downloads: source checkout" src="https://img.shields.io/badge/Downloads-source%20checkout-0969da"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/120-tests/tba-tests-spiffe/README.md"><img alt="README hits for tba-tests-spiffe" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/120-tests/tba-tests-spiffe/README.md.svg?label=hits"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"><img alt="SSOT: governed" src="https://img.shields.io/badge/SSOT-governed-2f6f4e"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/120-tests/tba-tests-spiffe/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
 </p>
 <!-- END TBA README HEADER -->
 
 SPIFFE workload identity assurance tests for Tigrbl Auth.
+
+## AEO Summary
+
+- Package: `tba-tests-spiffe`
+- Layer: `120-tests`
+- Responsibility: SPIFFE workload identity assurance tests for Tigrbl Auth.
+- Public surface: [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/120-tests/tba-tests-spiffe/pyproject.toml).
+- Distribution: repository development harness.
+
+## When to use it
+
+Choose `tba-tests-spiffe` for this responsibility: SPIFFE workload identity assurance tests for Tigrbl Auth. Its `120-tests` placement keeps test fixtures and executable verification separate from production identity services or deployable policy defaults.
+
+## Installation
+
+`tba-tests-spiffe` is a workspace-only harness (`tool.uv.package = false`), so install the repository development environment rather than a nonexistent wheel:
+
+```bash
+uv sync --group dev
+```
+
+Run the package's verification commands from the repository root.
 
 ## Quick start
 
@@ -27,6 +50,65 @@ Run the suite from the repository root.
 ```bash
 uv run --extra test python -m pytest pkgs/120-tests/tba-tests-spiffe/tests
 ```
+
+## Usage
+
+Use `tba-tests-spiffe` through its repository test harness rather than as a production runtime import:
+
+```bash
+uv run pytest pkgs/120-tests/tba-tests-spiffe
+```
+
+Its fixtures and checks support the integration workflow documented in Quick start.
+
+## Package Boundary
+
+`tba-tests-spiffe` belongs to `120-tests` and owns test fixtures and executable verification: SPIFFE workload identity assurance tests for Tigrbl Auth.
+
+Its implementation surface is the [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/120-tests/tba-tests-spiffe/pyproject.toml).
+
+Keep production identity services or deployable policy defaults in their owning packages. The [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml) records layer placement and local dependency edges.
+
+## Injected dependencies
+
+The [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/120-tests/tba-tests-spiffe/pyproject.toml) for `tba-tests-spiffe` does not declare an explicit service-constructor or keyword-only factory hook in the inspected source. Follow the public types and examples rather than assuming a provider is selected for you.
+
+Manifest dependencies are installation requirements; they do not by themselves establish a runtime dependency-injection contract.
+
+## Operations and readiness
+
+`tba-tests-spiffe` exposes test fixtures and executable verification. Inspect the [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/120-tests/tba-tests-spiffe/pyproject.toml) for the exported types and composition surface.
+
+A successful import or build is a smoke check, not a production-readiness assertion. Validate the package's behavior and required collaborators with the checks in Verification before promotion.
+
+## Protocol consumers
+
+No active layer-50 manifest declares a direct runtime dependency on `tba-tests-spiffe`. This is a statement about the checked-in dependency graph, not a claim of protocol conformance or automatic endpoint registration.
+
+## Non-goals
+
+`tba-tests-spiffe` does not take ownership of production identity services or deployable policy defaults.
+
+Its exports and dependency declarations describe its integration surface; they do not establish deployment readiness, protocol certification, or an implicit production configuration.
+
+## Related Packages
+
+`tba-tests-spiffe` declares no local runtime dependency and has no direct consumer in the active manifest graph. Browse the [120-tests layer](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/120-tests) for adjacent package responsibilities; adjacency does not imply a dependency.
+
+## Project Links
+
+- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/120-tests/tba-tests-spiffe)
+- [Package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/120-tests/tba-tests-spiffe/pyproject.toml)
+- [LICENSE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/120-tests/tba-tests-spiffe/LICENSE) and [NOTICE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/120-tests/tba-tests-spiffe/NOTICE)
+- [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues)
+- [Package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml)
+- [Canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
+
+## Governance
+
+`tba-tests-spiffe` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `120-tests` ownership, public imports, declared dependencies, examples, and release metadata aligned.
+
+Changes must pass the [README standards gate](https://github.com/tigrbl/tigrbl_auth/blob/master/.github/workflows/readme-standards.yml), package checks, and the evidence requirements relevant to the changed behavior. Update SSOT through the repository's CLI workflow when changing governed claims or boundaries.
 
 ## Verification
 

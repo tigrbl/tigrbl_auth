@@ -74,6 +74,17 @@ def test_valid_artifacts_accept_backend_normalized_manifest(artifact_factory):
     assert len(archives.inspect_artifacts(*artifact_factory())) == 2
 
 
+def test_release_artifacts_cannot_publish_a_readme_older_than_current_source(
+    artifact_factory,
+):
+    row, directory = artifact_factory()
+    (archives.ROOT / row["path"] / "README.md").write_text(
+        "Repaired README with additional governance and boundary guidance.\n"
+    )
+    with pytest.raises(AssertionError):
+        archives.inspect_artifacts(row, directory)
+
+
 @pytest.mark.parametrize(
     "change",
     [

@@ -1,0 +1,28 @@
+name: README standards
+
+on:
+  pull_request:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  readme-standards:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+      - name: Check the complete package README standard
+        run: uv run --no-project python scripts/verify_readme_standards.py --report artifacts/readme-standards.json
+      - name: Check package metadata, legal files, and metric ownership
+        run: uv run --no-project python scripts/verify_package_standards.py
+      - name: Exercise README gate regressions
+        run: uv run --no-project --with pytest python -I -m pytest tests/unit/test_readme_standards.py tests/unit/test_package_standards.py --confcutdir=tests/unit -c /dev/null -q
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: readme-standards-report
+          path: artifacts/readme-standards.json
