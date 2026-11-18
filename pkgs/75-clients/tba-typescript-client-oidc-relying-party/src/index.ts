@@ -132,7 +132,8 @@ export async function buildAuthorizationUrl(
     code_challenge: request.codeChallenge,
     code_challenge_method: "S256",
   });
-  return `${authorizationEndpoint}?${params.toString()}`;
+  const separator = authorizationEndpoint.includes("?") ? "&" : "?";
+  return `${authorizationEndpoint}${separator}${params.toString()}`;
 }
 
 export function parseCallback(url: string): CallbackResult {
@@ -226,13 +227,13 @@ export class BrowserMemorySession {
   }
 }
 
-export function nodeVersionMatrix(packageName = "@tba/client-oidc-relying-party", versions = ["22", "24", "26"]): readonly string[] {
+export function nodeVersionMatrix(packageName = "@tbauth/client-oidc-relying-party", versions = ["22", "24", "26"]): readonly string[] {
   return versions.map((version) => `${packageName}@node${version}`);
 }
 
 export function npmProvenanceManifest(): Readonly<Record<string, string | boolean>> {
   return {
-    package: "@tba/client-oidc-relying-party",
+    package: "@tbauth/client-oidc-relying-party",
     workflow: "monorepo-npm-package-release.yml",
     provenance: true,
     publishConfigAccess: "public",
@@ -246,3 +247,5 @@ export function sharedVectorManifest(): Readonly<Record<string, string>> {
     callbackRequiredParams: "code,state",
   };
 }
+
+export { PublicRelyingParty, type VerifiedCallback } from "./public-client.js";

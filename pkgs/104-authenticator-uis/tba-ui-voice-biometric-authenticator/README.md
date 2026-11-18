@@ -1,4 +1,4 @@
-# @tba/ui-voice-biometric-authenticator
+# @tbauth/ui-voice-biometric-authenticator
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

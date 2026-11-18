@@ -1,4 +1,4 @@
-# @tba/ui-windows-integrated-authenticator-wia-hub
+# @tbauth/ui-windows-integrated-authenticator-wia-hub
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

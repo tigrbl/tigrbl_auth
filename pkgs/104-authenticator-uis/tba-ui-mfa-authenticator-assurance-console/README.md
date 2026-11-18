@@ -1,4 +1,4 @@
-# @tba/ui-mfa-authenticator-assurance-console
+# @tbauth/ui-mfa-authenticator-assurance-console
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

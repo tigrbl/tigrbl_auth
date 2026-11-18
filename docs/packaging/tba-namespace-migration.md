@@ -1,8 +1,13 @@
 # TBA package namespace
 
 Active downstream identity packages use the `tba-` distribution prefix, `tba_`
-Python import prefix, and `@tba/` npm scope. The short facades `tba` and `tbauth`
+Python import prefix, and `@tbauth/` npm scope. The short facades `tba` and `tbauth`
 retain their names. Both example distributions now also have the `tba-` prefix.
+
+Publish TBA npm packages through the [tbauth npm organization](https://www.npmjs.com/settings/tbauth/).
+For npm imports, workspace commands, and release tags, replace `@tba/` with
+`@tbauth/`. Release tags use `npm/@tbauth/<package>==<version>`. Prior evidence
+and superseded naming records may still show the earlier scope.
 
 Active package directories have the `tba-` prefix. TypeScript clients in layer 75
 use `tba-typescript-` directory names to distinguish them from Python clients.
@@ -39,8 +44,8 @@ this layer; claim subjects containing the word `profile` remain concrete claims.
 
 | Previous package | Current package |
 | --- | --- |
-| `@tigrbl-auth/rp` | `@tba/client-oidc-relying-party` |
-| `@tigrbl-auth/session-client` | `@tba/client-relying-party-session` |
+| `@tigrbl-auth/rp` | `@tbauth/client-oidc-relying-party` |
+| `@tigrbl-auth/session-client` | `@tbauth/client-relying-party-session` |
 | `tigrbl-rp-session-client` | `tba-client-relying-party-session` |
 | `tigrbl-policy-enforcement-asgi` | `tba-middleware-policy-enforcement-asgi` |
 | `tigrbl-auth` | `tba-auth` |

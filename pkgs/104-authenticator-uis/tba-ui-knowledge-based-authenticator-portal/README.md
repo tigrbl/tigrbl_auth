@@ -1,4 +1,4 @@
-# @tba/ui-knowledge-based-authenticator-portal
+# @tbauth/ui-knowledge-based-authenticator-portal
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

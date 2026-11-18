@@ -1,4 +1,4 @@
-# @tba/ui-my-account
+# @tbauth/ui-my-account
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

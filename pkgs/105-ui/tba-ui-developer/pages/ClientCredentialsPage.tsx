@@ -1,4 +1,4 @@
-import { DetailPanel, EmptyState, JsonViewer, PageHeader, SecretField, StatusBadge } from "@tba/ui-primitives";
+import { DetailPanel, EmptyState, JsonViewer, PageHeader, SecretField, StatusBadge } from "@tbauth/ui-primitives";
 import type { ClientRegistration, DeveloperApplication } from "../types";
 
 export function ClientCredentialsPage({ application, registration }: { application: DeveloperApplication | null; registration: ClientRegistration | null }) {

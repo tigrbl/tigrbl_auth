@@ -44,7 +44,7 @@ These UIX names match the target UIX composition in
 
 | Dependency class | Dependencies |
 |---|---|
-| Frontend package dependencies | `@tba/ui-public`, React, React DOM, Vite, TypeScript, `useAuth`, `useAuthSession`, `useLogin`, `useRegister`, `useOidcActions`, `tigrblAuthDiscovery`, OIDC adapter modules, public UX policy helpers |
+| Frontend package dependencies | `@tbauth/ui-public`, React, React DOM, Vite, TypeScript, `useAuth`, `useAuthSession`, `useLogin`, `useRegister`, `useOidcActions`, `tigrblAuthDiscovery`, OIDC adapter modules, public UX policy helpers |
 | Backend surface dependencies | `/.well-known/openid-configuration`, tenant-scoped `/.well-known/openid-configuration`, `/authorize`, `/token`, `/userinfo`, `/logout`, `/register`, discovery-advertised registration endpoint, tenant-scoped JWKS URI |
 | Identity and session dependencies | public session cookie, browser-local user/session storage, callback state, post-login redirect target, optional MFA and email-verification state |
 | Domain data dependencies | end-user identity profile, consent view model, login request context, registration payloads, logout redirect state |
@@ -57,7 +57,7 @@ These UIX names match the target UIX composition in
 
 | Dependency class | Dependencies |
 |---|---|
-| Frontend package dependencies | split subset of `@tba/ui-administration`, React, React DOM, Vite, TypeScript, `adminAuthService`, `backendService`, `jsonRpcService`, `governancePolicy`, tenant-management and identity-management components, platform-only navigation shell |
+| Frontend package dependencies | split subset of `@tbauth/ui-administration`, React, React DOM, Vite, TypeScript, `adminAuthService`, `backendService`, `jsonRpcService`, `governancePolicy`, tenant-management and identity-management components, platform-only navigation shell |
 | Backend surface dependencies | `/admin/auth/login`, `/admin/auth/session`, `/admin/auth/logout`, `/admin/auth/forgot-password`, `/admin/auth/reset-password`, `/admin/auth/change-password`, `/admin/tenants`, `/admin/identities`, `/rpc` directory/profile/governance surfaces as needed for platform context |
 | Identity and session dependencies | authenticated admin browser session, superuser flag, platform actor identity, delegated-admin policy awareness where platform users can grant or inspect scopes |
 | Domain data dependencies | tenant records, platform-visible user records, admin authority flags, tenant provisioning payloads, bootstrap/deletion decisions, audit and governance summaries |
@@ -70,7 +70,7 @@ These UIX names match the target UIX composition in
 
 | Dependency class | Dependencies |
 |---|---|
-| Frontend package dependencies | split subset of `@tba/ui-administration`, React, React DOM, Vite, TypeScript, `adminAuthService`, `backendService`, `jsonRpcService`, `governancePolicy`, `IdentityManagement`, `TenantJwksPublicationView`, tenant-scoped navigation shell |
+| Frontend package dependencies | split subset of `@tbauth/ui-administration`, React, React DOM, Vite, TypeScript, `adminAuthService`, `backendService`, `jsonRpcService`, `governancePolicy`, `IdentityManagement`, `TenantJwksPublicationView`, tenant-scoped navigation shell |
 | Backend surface dependencies | `/admin/auth/*`, `/admin/identities`, tenant-scoped discovery routes, `tenant.keys.seed`, `tenant.keys.create`, `tenant.keys.update`, `tenant.keys.delete`, `keys.list`, `jwks.show`, tenant directory and policy RPC methods |
 | Identity and session dependencies | authenticated admin browser session, tenant selection state, delegated tenant scope, tenant visibility filtering, tenant-scoped mutation authorization |
 | Domain data dependencies | tenant identity records, tenant admin privileges, tenant JWKS lifecycle state, tenant client inventory, tenant-local policy summaries |

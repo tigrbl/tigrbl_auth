@@ -1,11 +1,17 @@
 from __future__ import annotations
 
 import ast
+import asyncio
+import base64
+import json
 import sys
 from pathlib import Path
+from time import time
 from urllib.parse import parse_qs, urlparse
 
 import pytest
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.asymmetric import padding, rsa
 
 ROOT = Path(__file__).resolve().parents[2]
 for src in (ROOT / "pkgs").glob("*/src"):
@@ -57,6 +63,150 @@ def _rp(*, secret: str | None = "secret") -> RelyingParty:
         state_store=MemoryRPStateProvider(),
         session_store=MemoryRPSessionProvider(),
     )
+
+
+@pytest.fixture(scope="module")
+def public_keys():
+    return (
+        rsa.generate_private_key(public_exponent=65537, key_size=2048),
+        rsa.generate_private_key(public_exponent=65537, key_size=2048),
+    )
+
+
+@pytest.mark.unit
+@pytest.mark.parametrize(
+    "case",
+    [
+        "success",
+        "issuer",
+        "audience",
+        "extra-audience",
+        "nonce",
+        "expired",
+        "signature",
+    ],
+)
+def test_public_callback_exchanges_pkce_and_requires_verified_identity(
+    case, public_keys
+) -> None:
+    issuer = "https://issuer.example.test"
+    rp = _rp(secret=None)
+    signing_key, unrelated_key = public_keys
+
+    def encode(value: bytes) -> str:
+        return base64.urlsafe_b64encode(value).rstrip(b"=").decode("ascii")
+
+    numbers = signing_key.public_key().public_numbers()
+    jwk = {
+        "kty": "RSA",
+        "kid": "key-1",
+        "alg": "RS256",
+        "use": "sig",
+        **{
+            name: encode(number.to_bytes((number.bit_length() + 7) // 8, "big"))
+            for name, number in (("n", numbers.n), ("e", numbers.e))
+        },
+    }
+    metadata = {
+        "issuer": issuer,
+        "authorization_endpoint": issuer + "/authorize",
+        "token_endpoint": issuer + "/token",
+        "jwks_uri": issuer + "/jwks",
+        "token_endpoint_auth_methods_supported": ["none"],
+    }
+    requests = []
+
+    async def get_json(url):
+        return {
+            issuer + "/.well-known/openid-configuration": metadata,
+            issuer + "/jwks": {"keys": [jwk]},
+        }[url]
+
+    async def exercise():
+        url, login = await rp.begin_public_login(get_json)
+        assert parse_qs(urlparse(url).query)["code_challenge"] == [
+            pkce_s256_challenge(login.code_verifier)
+        ]
+        now = int(time())
+        claims = {
+            "iss": issuer,
+            "aud": "client-a",
+            "iat": now,
+            "exp": now + 60,
+            "nonce": login.nonce,
+            "sub": "verified-subject",
+        }
+        overrides = {
+            "issuer": {"iss": issuer + "/"},
+            "audience": {"aud": "other"},
+            "extra-audience": {"aud": ["client-a", "other"], "azp": "client-a"},
+            "nonce": {"nonce": "other"},
+            "expired": {"exp": now - 1},
+        }
+        claims.update(overrides.get(case, {}))
+        signing_input = ".".join(
+            encode(json.dumps(part).encode())
+            for part in (
+                {"alg": "RS256", "kid": "key-1"},
+                claims,
+            )
+        )
+        key = unrelated_key if case == "signature" else signing_key
+        signature = key.sign(
+            signing_input.encode(), padding.PKCS1v15(), hashes.SHA256()
+        )
+
+        async def post_form(url, form):
+            requests.append((url, form))
+            return {
+                "access_token": "access",
+                "id_token": signing_input + "." + encode(signature),
+                "token_type": "Bearer",
+                "sub": "untrusted-token-response-subject",
+            }
+
+        callback = rp.config.redirect_uri + "?code=code&state=" + login.state
+
+        async def complete(url, state=login.state):
+            return await rp.complete_public_callback(
+                url,
+                expected_state=state,
+                get_json=get_json,
+                post_form=post_form,
+            )
+
+        with pytest.raises(RPError, match="state mismatch"):
+            await complete(callback, "another-browser")
+        with pytest.raises(RPError, match="duplicate"):
+            await complete(callback + "&state=second")
+        assert not requests
+        if case == "success":
+            result = await complete(callback)
+            assert (
+                result.identity.subject == result.session.subject == "verified-subject"
+            )
+            assert rp.token_store.get(login.state) == result.session
+        else:
+            with pytest.raises(RPError):
+                await complete(callback)
+            with pytest.raises(ValueError, match="unknown RP session"):
+                rp.token_store.get(login.state)
+        with pytest.raises(RPError, match="already consumed"):
+            await complete(callback)
+        assert requests == [
+            (
+                issuer + "/token",
+                {
+                    "grant_type": "authorization_code",
+                    "client_id": "client-a",
+                    "redirect_uri": rp.config.redirect_uri,
+                    "code": "code",
+                    "code_verifier": login.code_verifier,
+                },
+            )
+        ]
+
+    asyncio.run(exercise())
 
 
 @pytest.mark.unit

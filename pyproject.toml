@@ -357,7 +357,7 @@ dependencies = [
     "tba-protocol-oid4vci==0.4.0.dev2",
     "tba-protocol-oid4vp==0.4.0.dev2",
     "tba-protocol-authzen==0.4.0.dev2",
-    "tba-protocol-oidc-relying-party==0.4.0.dev2",
+    "tba-protocol-oidc-relying-party==0.4.0.dev3",
     "tba-credentials==0.4.0.dev2",
     "tba-capability-digital-credential-issuance==0.4.0.dev2",
     "tba-capability-digital-credential-presentation==0.4.0.dev2",

@@ -1,4 +1,4 @@
-# @tba/ui-pin-amr-authenticator-lifecycle
+# @tbauth/ui-pin-amr-authenticator-lifecycle
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

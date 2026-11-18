@@ -1,6 +1,6 @@
 # Policy Obligation API + Enforcement Receipt UIX Requirements Brief
 
-**Pairing:** `tba-router-policy-obligations` + `@tba/enforcement-receipt-uix`<br>
+**Pairing:** `tba-router-policy-obligations` + `@tbauth/enforcement-receipt-uix`<br>
 **Additional opportunity:** Authorization/delegation/sovereignty extension 4<br>
 **Primary buyers:** authorization platform teams, API and application security, data governance, regulated operations, workload/agent platforms, and audit/compliance<br>
 **Status:** proposed product surface; obligation/advice contracts and handler ports exist, but production enforcement and receipts do not

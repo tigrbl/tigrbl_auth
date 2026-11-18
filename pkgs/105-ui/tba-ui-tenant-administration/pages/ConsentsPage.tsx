@@ -5,7 +5,7 @@ import {
   PageHeader,
   ResourceTable,
   StatusBadge
-} from "@tba/ui-primitives";
+} from "@tbauth/ui-primitives";
 import { useState } from "react";
 import type { TenantConsent } from "../types";
 

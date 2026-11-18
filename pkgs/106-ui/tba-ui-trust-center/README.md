@@ -1,4 +1,4 @@
-# @tba/ui-trust-center
+# @tbauth/ui-trust-center
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">
@@ -35,4 +35,4 @@ Use this source app to explore the proposed trust-center workflows. It includes 
 
 See the [declared build command](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/106-ui/tba-ui-trust-center/package.json) for the implementation scope covered by this example.
 
-[Workspace and package catalog](https://github.com/tigrbl/tigrbl_auth#package-catalog) · [@tba/ui-my-account](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/105-ui/tba-ui-my-account#readme) · [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues) · [Repository license](https://github.com/tigrbl/tigrbl_auth/blob/master/LICENSE)
+[Workspace and package catalog](https://github.com/tigrbl/tigrbl_auth#package-catalog) · [@tbauth/ui-my-account](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/105-ui/tba-ui-my-account#readme) · [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues) · [Repository license](https://github.com/tigrbl/tigrbl_auth/blob/master/LICENSE)

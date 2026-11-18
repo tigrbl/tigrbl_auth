@@ -1,4 +1,4 @@
-# @tba/ui-communications-identity
+# @tbauth/ui-communications-identity
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

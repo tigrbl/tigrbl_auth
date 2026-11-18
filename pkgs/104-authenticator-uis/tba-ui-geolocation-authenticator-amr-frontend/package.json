@@ -1,5 +1,5 @@
 {
-  "name": "@tba/ui-geolocation-authenticator-amr-frontend",
+  "name": "@tbauth/ui-geolocation-authenticator-amr-frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",

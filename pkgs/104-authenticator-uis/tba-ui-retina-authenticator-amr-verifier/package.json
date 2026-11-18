@@ -1,5 +1,5 @@
 {
-  "name": "@tba/ui-retina-authenticator-amr-verifier",
+  "name": "@tbauth/ui-retina-authenticator-amr-verifier",
   "private": true,
   "version": "0.0.0",
   "type": "module",

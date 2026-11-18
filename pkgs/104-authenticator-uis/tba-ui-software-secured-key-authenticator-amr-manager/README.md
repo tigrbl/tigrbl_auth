@@ -1,4 +1,4 @@
-# @tba/ui-software-secured-key-authenticator-amr-manager
+# @tbauth/ui-software-secured-key-authenticator-amr-manager
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

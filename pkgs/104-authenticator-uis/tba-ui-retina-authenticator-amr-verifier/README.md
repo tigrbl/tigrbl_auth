@@ -1,4 +1,4 @@
-# @tba/ui-retina-authenticator-amr-verifier
+# @tbauth/ui-retina-authenticator-amr-verifier
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

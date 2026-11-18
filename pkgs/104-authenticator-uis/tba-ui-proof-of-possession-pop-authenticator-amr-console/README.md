@@ -1,4 +1,4 @@
-# @tba/ui-proof-of-possession-pop-authenticator-amr-console
+# @tbauth/ui-proof-of-possession-pop-authenticator-amr-console
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

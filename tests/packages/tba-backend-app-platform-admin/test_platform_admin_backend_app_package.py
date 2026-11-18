@@ -45,7 +45,7 @@ def test_platform_admin_contract_matches_product_surface_registry() -> None:
     assert PRODUCT_SURFACE == "platform-admin-app"
     assert PLATFORM_ADMIN_BACKEND_APP_CONTRACT.product_surface == PRODUCT_SURFACE
     assert PLATFORM_ADMIN_BACKEND_APP_CONTRACT.intended_uix == (
-        "@tba/ui-platform-administration"
+        "@tbauth/ui-platform-administration"
     )
     assert deployment.plugin_mode == "admin-only"
     assert deployment.surface_enabled("admin-rest")

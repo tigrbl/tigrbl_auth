@@ -1,5 +1,5 @@
 {
-  "name": "@tba/ui-authorization-provenance-decision-lineage-explorer",
+  "name": "@tbauth/ui-authorization-provenance-decision-lineage-explorer",
   "private": true,
   "version": "0.0.0",
   "type": "module",

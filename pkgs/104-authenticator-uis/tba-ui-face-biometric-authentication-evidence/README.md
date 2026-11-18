@@ -1,4 +1,4 @@
-# @tba/ui-face-biometric-authentication-evidence
+# @tbauth/ui-face-biometric-authentication-evidence
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

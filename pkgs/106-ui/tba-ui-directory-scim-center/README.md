@@ -1,4 +1,4 @@
-# @tba/ui-directory-scim-center
+# @tbauth/ui-directory-scim-center
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

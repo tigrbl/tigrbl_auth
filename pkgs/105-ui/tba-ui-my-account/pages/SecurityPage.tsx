@@ -1,4 +1,4 @@
-import { Button, Card, DetailPanel, FormField, InlineMutationResult, PageHeader, ResourceForm, StatusBadge, Toast } from "@tba/ui-primitives";
+import { Button, Card, DetailPanel, FormField, InlineMutationResult, PageHeader, ResourceForm, StatusBadge, Toast } from "@tbauth/ui-primitives";
 import { useState } from "react";
 
 export function SecurityPage({

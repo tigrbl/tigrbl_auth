@@ -1,4 +1,4 @@
-# @tba/ui-one-time-password-authenticator
+# @tbauth/ui-one-time-password-authenticator
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

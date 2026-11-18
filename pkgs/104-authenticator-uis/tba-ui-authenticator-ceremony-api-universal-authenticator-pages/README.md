@@ -1,4 +1,4 @@
-# @tba/ui-authenticator-ceremony-api-universal-authenticator-pages
+# @tbauth/ui-authenticator-ceremony-api-universal-authenticator-pages
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

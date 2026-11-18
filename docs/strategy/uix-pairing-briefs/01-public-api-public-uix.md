@@ -1,6 +1,6 @@
 # Public Identity API + UIX Requirements Brief
 
-**Pairing:** `tba-app-backend-public` + `@tba/ui-public`<br>
+**Pairing:** `tba-app-backend-public` + `@tbauth/ui-public`<br>
 **Status:** Delivery brief<br>
 **Prepared:** July 11, 2026<br>
 **Backend app owner:** `pkgs/90-backend-apps/tba-app-backend-public`<br>
@@ -149,7 +149,7 @@ Never ask users to trust a raw `client_id`, redirect URL, or protocol error as t
 
 1. Keep the generated public OpenAPI and OIDC discovery documents authoritative for endpoint and capability availability.
 2. Centralize routes, auth guards, callback normalization, redirect allowlisting, and capability gates.
-3. Move reusable cards, fields, buttons, validation, problem details, brand configuration, and auth shell behavior into `@tba/ui-primitives` without lowering current visual quality.
+3. Move reusable cards, fields, buttons, validation, problem details, brand configuration, and auth shell behavior into `@tbauth/ui-primitives` without lowering current visual quality.
 4. Replace route-level `null` rendering during redirects with accessible progress states that prevent flashes of protected or incorrect content.
 5. Model authentication as an explicit state machine covering anonymous, authenticating, MFA pending, verification pending, consent pending, authenticated, callback processing, recovery, error, and logout.
 6. Keep My Account as the owner of extended profile, session, consent, and security-method administration.

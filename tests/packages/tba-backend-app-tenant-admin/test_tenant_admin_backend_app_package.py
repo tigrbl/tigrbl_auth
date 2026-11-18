@@ -45,7 +45,7 @@ def test_tenant_admin_contract_matches_product_surface_registry() -> None:
     assert PRODUCT_SURFACE == "tenant-admin-app"
     assert TENANT_ADMIN_BACKEND_APP_CONTRACT.product_surface == PRODUCT_SURFACE
     assert TENANT_ADMIN_BACKEND_APP_CONTRACT.intended_uix == (
-        "@tba/ui-tenant-administration"
+        "@tbauth/ui-tenant-administration"
     )
     assert deployment.plugin_mode == "admin-only"
     assert deployment.surface_enabled("admin-rest")

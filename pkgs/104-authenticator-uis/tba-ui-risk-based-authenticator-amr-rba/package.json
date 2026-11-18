@@ -1,5 +1,5 @@
 {
-  "name": "@tba/ui-risk-based-authenticator-amr-rba",
+  "name": "@tbauth/ui-risk-based-authenticator-amr-rba",
   "private": true,
   "version": "0.0.0",
   "type": "module",

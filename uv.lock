@@ -2713,7 +2713,7 @@ requires-dist = [
     { name = "tba-protocol-oauth", specifier = "==0.4.0.dev2" },
     { name = "tba-protocol-oauth-protected-resource", specifier = "==0.4.0.dev2" },
     { name = "tba-protocol-oidc", specifier = "==0.4.0.dev2" },
-    { name = "tba-protocol-oidc-relying-party", specifier = "==0.4.0.dev2" },
+    { name = "tba-protocol-oidc-relying-party", specifier = "==0.4.0.dev3" },
     { name = "tba-protocol-webauthn", specifier = "==0.4.0.dev2" },
     { name = "tba-provider-identity-jose", specifier = "==0.4.0.dev2" },
     { name = "tba-provider-security-authorization-provenance-builder", specifier = "==0.1.0" },
@@ -7640,7 +7640,7 @@ requires-dist = [
 
 [[package]]
 name = "tba-protocol-oidc-relying-party"
-version = "0.4.0.dev2"
+version = "0.4.0.dev3"
 source = { editable = "pkgs/50-protocols/tba-protocol-oidc-relying-party" }
 dependencies = [
     { name = "tba-concrete-claim-audience" },
@@ -7653,8 +7653,10 @@ dependencies = [
     { name = "tba-concrete-claim-issuer" },
     { name = "tba-concrete-claim-nonce" },
     { name = "tba-concrete-claim-subject" },
+    { name = "tba-concrete-jws" },
     { name = "tba-contracts-identity" },
     { name = "tba-protocol-oidc" },
+    { name = "tba-provider-jose-cryptography" },
     { name = "tba-provider-security-proof-pkce" },
 ]
 
@@ -7670,8 +7672,10 @@ requires-dist = [
     { name = "tba-concrete-claim-issuer", specifier = "==0.4.0.dev2" },
     { name = "tba-concrete-claim-nonce", specifier = "==0.4.0.dev2" },
     { name = "tba-concrete-claim-subject", specifier = "==0.4.0.dev2" },
+    { name = "tba-concrete-jws", specifier = "==0.4.0.dev2" },
     { name = "tba-contracts-identity", specifier = "==0.4.0.dev2" },
     { name = "tba-protocol-oidc", specifier = "==0.4.0.dev2" },
+    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev3" },
     { name = "tba-provider-security-proof-pkce", specifier = "==0.1.0" },
 ]
 
@@ -9179,7 +9183,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "tba-protocol-oidc-relying-party", specifier = "==0.4.0.dev2" },
+    { name = "tba-protocol-oidc-relying-party", specifier = "==0.4.0.dev3" },
     { name = "tba-runtime-relying-party-session", specifier = "==0.4.0.dev3" },
 ]
 

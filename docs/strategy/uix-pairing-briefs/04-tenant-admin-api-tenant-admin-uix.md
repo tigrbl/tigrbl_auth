@@ -1,6 +1,6 @@
 # Tenant Admin API + UIX Requirements Brief
 
-**Pairing:** `tba-app-backend-tenant-administration` + `@tba/ui-tenant-administration`<br>
+**Pairing:** `tba-app-backend-tenant-administration` + `@tbauth/ui-tenant-administration`<br>
 **Status:** Delivery brief<br>
 **Prepared:** July 11, 2026<br>
 **Backend app owner:** `pkgs/90-backend-apps/tba-app-backend-tenant-administration`<br>

@@ -1,4 +1,4 @@
-import { Button, DetailPanel, EmptyState, FormField, JsonViewer, PageHeader, ResourceForm } from "@tba/ui-primitives";
+import { Button, DetailPanel, EmptyState, FormField, JsonViewer, PageHeader, ResourceForm } from "@tbauth/ui-primitives";
 import { useState } from "react";
 import type { FormEvent } from "react";
 import type { IntrospectionResult, ResourceMetadata } from "../types";

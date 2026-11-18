@@ -1,5 +1,5 @@
 {
-  "name": "@tba/ui-amr-user-presence-authenticator-ceremony-suite",
+  "name": "@tbauth/ui-amr-user-presence-authenticator-ceremony-suite",
   "private": true,
   "version": "0.0.0",
   "type": "module",

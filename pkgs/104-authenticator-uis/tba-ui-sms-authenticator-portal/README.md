@@ -1,4 +1,4 @@
-# @tba/ui-sms-authenticator-portal
+# @tbauth/ui-sms-authenticator-portal
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

@@ -1,5 +1,5 @@
 {
-  "name": "@tba/ui-public-identity",
+  "name": "@tbauth/ui-public-identity",
   "private": true,
   "version": "0.0.0",
   "type": "module",

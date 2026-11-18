@@ -50,7 +50,7 @@ The app names here match the target composition set in
 
 | Dependency class | Dependencies |
 |---|---|
-| Runtime package dependencies | `@tba/ui-public`, React, React DOM, Vite, TypeScript |
+| Runtime package dependencies | `@tbauth/ui-public`, React, React DOM, Vite, TypeScript |
 | Surface dependencies | OIDC discovery, `/authorize`, `/token`, `/userinfo`, `/logout`, `/register`, tenant-scoped `/.well-known/openid-configuration`, tenant-scoped JWKS URI discovery |
 | UIX dependencies | `public-uix` |
 | Data and state dependencies | browser session state, public session cookie, end-user profile state, consent context, callback state, PKCE or browser RP flow state |
@@ -63,7 +63,7 @@ The app names here match the target composition set in
 
 | Dependency class | Dependencies |
 |---|---|
-| Runtime package dependencies | split subset of `@tba/ui-administration`, React, React DOM, Vite, TypeScript; backend support from `tba-runtime-identity-administration`, `tba-operator-identity`, `tba-contracts-identity`, `tba-runtime-authorization-policy` |
+| Runtime package dependencies | split subset of `@tbauth/ui-administration`, React, React DOM, Vite, TypeScript; backend support from `tba-runtime-identity-administration`, `tba-operator-identity`, `tba-contracts-identity`, `tba-runtime-authorization-policy` |
 | Surface dependencies | `/admin/auth/*`, `/admin/tenants`, `/admin/identities`, `/rpc` methods for directory, profile, governance, keys, and operator status |
 | UIX dependencies | `platform-admin-uix` |
 | Data and state dependencies | admin session state, tenant records, platform-wide user records, admin authority flags, delegated-admin policy summaries, audit and governance state |
@@ -76,7 +76,7 @@ The app names here match the target composition set in
 
 | Dependency class | Dependencies |
 |---|---|
-| Runtime package dependencies | split subset of `@tba/ui-administration`, React, React DOM, Vite, TypeScript; backend support from `tba-runtime-identity-administration`, `tba-operator-identity`, `tba-runtime-authorization-policy`, `tba-contracts-identity` |
+| Runtime package dependencies | split subset of `@tbauth/ui-administration`, React, React DOM, Vite, TypeScript; backend support from `tba-runtime-identity-administration`, `tba-operator-identity`, `tba-runtime-authorization-policy`, `tba-contracts-identity` |
 | Surface dependencies | `/admin/auth/*`, `/admin/identities`, tenant discovery routes, `/rpc` directory methods, `tenant.keys.*`, `keys.list`, `jwks.show`, client and policy control-plane methods |
 | UIX dependencies | `tenant-admin-uix` |
 | Data and state dependencies | tenant-scoped admin session, tenant visibility filters, tenant identities, tenant JWKS inventory and publication state, tenant client records, tenant policy state |

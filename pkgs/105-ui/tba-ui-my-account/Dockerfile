@@ -5,7 +5,7 @@ COPY package*.json ./
 COPY pkgs/105-ui/tba-ui-my-account/package.json pkgs/105-ui/tba-ui-my-account/package.json
 RUN npm install
 COPY pkgs/105-ui/tba-ui-my-account pkgs/105-ui/tba-ui-my-account
-RUN npm run build -w @tba/ui-my-account
+RUN npm run build -w @tbauth/ui-my-account
 
 FROM nginx:1.27-alpine
 COPY --from=build /app/pkgs/105-ui/tba-ui-my-account/dist /usr/share/nginx/html

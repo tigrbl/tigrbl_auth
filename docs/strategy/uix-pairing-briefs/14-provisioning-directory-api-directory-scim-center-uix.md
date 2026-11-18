@@ -1,6 +1,6 @@
 # Provisioning and Directory API + Directory and SCIM Center UIX Requirements Brief
 
-**Proposed pairing:** `tba-router-provisioning` + `@tba/directory-scim-center-uix`<br>
+**Proposed pairing:** `tba-router-provisioning` + `@tbauth/directory-scim-center-uix`<br>
 **Protocol frontdoor:** tenant-scoped SCIM 2.0 under `/tenants/{tenant_slug}/scim/v2`<br>
 **Status:** New product surface; contracts, helper behavior, durable projections, principals, memberships, and audit foundations exist<br>
 **Prepared:** July 11, 2026<br>

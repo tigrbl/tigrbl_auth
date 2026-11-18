@@ -1,4 +1,4 @@
-# @tba/client-tenant-administration
+# @tbauth/client-tenant-administration
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

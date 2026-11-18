@@ -22,7 +22,7 @@ class PlatformAdminBackendAppContract:
 
 PLATFORM_ADMIN_BACKEND_APP_CONTRACT = PlatformAdminBackendAppContract(
     product_surface="platform-admin-app",
-    intended_uix="@tba/ui-platform-administration",
+    intended_uix="@tbauth/ui-platform-administration",
     admin_resources=(
         "Realm",
         "Tenant",

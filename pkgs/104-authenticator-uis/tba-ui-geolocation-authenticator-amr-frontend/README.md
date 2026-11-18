@@ -1,4 +1,4 @@
-# @tba/ui-geolocation-authenticator-amr-frontend
+# @tbauth/ui-geolocation-authenticator-amr-frontend
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">

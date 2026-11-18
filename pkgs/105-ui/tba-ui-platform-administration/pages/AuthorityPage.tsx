@@ -1,4 +1,4 @@
-import { DataTable, DetailPanel, EmptyState, MetricCard, PageHeader, StatusBadge } from "@tba/ui-primitives";
+import { DataTable, DetailPanel, EmptyState, MetricCard, PageHeader, StatusBadge } from "@tbauth/ui-primitives";
 import type { Identity, Tenant } from "../types";
 
 export function AuthorityPage({ identities, selectedTenant, tenants }: { identities: Identity[]; selectedTenant: Tenant | null; tenants: Tenant[] }) {

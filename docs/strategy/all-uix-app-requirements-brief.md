@@ -4,11 +4,11 @@
 **Prepared:** July 11, 2026
 **Scope:** Every UIX and browser-facing integration surface in `tba_auth`
 **Repository checkpoint:** `0.4.0.dev2`
-**Public distribution baseline:** PyPI `tba-auth` `0.3.4`; no reviewed `@tba/*` npm package is publicly available
+**Public distribution baseline:** PyPI `tba-auth` `0.3.4`; no reviewed `@tbauth/*` npm package is publicly available
 
 ## 1. Decision
 
-Enhance all TBA UIX as one coherent identity product portfolio while preserving the strict boundary between each UIX and its paired API. Do not turn the separated applications into one privileged universal console. Share design language, components, terminology, telemetry, and evidence conventions through `@tba/ui-primitives`; keep data access, permissions, routes, and workflows product-specific.
+Enhance all TBA UIX as one coherent identity product portfolio while preserving the strict boundary between each UIX and its paired API. Do not turn the separated applications into one privileged universal console. Share design language, components, terminology, telemetry, and evidence conventions through `@tbauth/ui-primitives`; keep data access, permissions, routes, and workflows product-specific.
 
 The delivery has ten distinct workstreams:
 
@@ -40,7 +40,7 @@ The primary product outcome is that an evaluator can move from a credible demons
 
 - PyPI reports `tba-auth` `0.3.4` as the latest stable release and `0.4.0.dev2` as an available prerelease.
 - GitHub Releases publishes the split `tba-identity-*==0.4.0.dev2` packages as prereleases dated May 22, 2026.
-- npm returned `404 Not Found` for the reviewed `@tba/client-oidc-relying-party`, `@tba/ui-primitives`, `@tba/ui-public`, and `@tba/ui-administration` packages. Treat all UIX npm install instructions as future work until publication is verified.
+- npm returned `404 Not Found` for the reviewed `@tbauth/client-oidc-relying-party`, `@tbauth/ui-primitives`, `@tbauth/ui-public`, and `@tbauth/ui-administration` packages. Treat all UIX npm install instructions as future work until publication is verified.
 - Current repository documentation still prohibits “fully compliant,” “independently certified,” and equivalent global claims.
 
 ### Required maturity language
@@ -94,7 +94,7 @@ All applications must provide:
 
 Use the public UIX visual direction as the source language: calm neutral backgrounds, white surfaces, a deployment brand accent, clear typography, restrained shadows, consistent radii, visible validation, and purposeful motion. Operational consoles should be denser than hosted identity pages without becoming raw database browsers.
 
-`@tba/ui-primitives` must own tokens and canonical implementations for auth/app shells, navigation, page headers, cards, forms, tables, detail panels, status/maturity badges, confirmation dialogs, secret/copy controls, JSON and protocol viewers, toasts, skeletons, error/empty states, filters, pagination, and responsive behavior.
+`@tbauth/ui-primitives` must own tokens and canonical implementations for auth/app shells, navigation, page headers, cards, forms, tables, detail panels, status/maturity badges, confirmation dialogs, secret/copy controls, JSON and protocol viewers, toasts, skeletons, error/empty states, filters, pagination, and responsive behavior.
 
 ## 4. Stakeholder Requirements
 
@@ -135,7 +135,7 @@ Use the public UIX visual direction as the source language: calm neutral backgro
 
 ## 5. Unique Application Briefs
 
-### A. Shared UIX Core (`@tba/ui-primitives`)
+### A. Shared UIX Core (`@tbauth/ui-primitives`)
 
 **Users:** all UIX teams and downstream integrators.
 **Job:** make every surface consistent without weakening API boundaries.
@@ -150,7 +150,7 @@ Required delivery:
 
 Acceptance: every non-legacy UIX consumes core for shared primitives; no local component fork changes common behavior; accessibility and visual regression tests cover every primitive state.
 
-### B. Public Identity UIX (`@tba/ui-public` → public API)
+### B. Public Identity UIX (`@tbauth/ui-public` → public API)
 
 **Users:** end users authenticating or granting consent.
 **Job:** complete identity flows with clear trust, tenant branding, and safe recovery.
@@ -167,7 +167,7 @@ Copy direction: reassuring and concise; identify the requesting app and action; 
 
 Acceptance: deterministic authorization-code + PKCE journey, recovery and cancellation paths, branded/neutral variants, mobile and keyboard proof, and safe rendered failures.
 
-### C. My Account UIX (`@tba/ui-my-account` → my-account API)
+### C. My Account UIX (`@tbauth/ui-my-account` → my-account API)
 
 **Users:** currently authenticated subjects.
 **Job:** understand and control personal identity, security, sessions, applications, and consent.
@@ -182,7 +182,7 @@ Required routes/workflows:
 
 Acceptance: all current CRUD tests remain authoritative; current-subject boundary is enforced; empty and single-session states are credible; no tenant-wide administration leaks into the client.
 
-### D. Platform Admin UIX (`@tba/ui-platform-administration` → platform-admin API)
+### D. Platform Admin UIX (`@tbauth/ui-platform-administration` → platform-admin API)
 
 **Users:** platform owners and operators.
 **Job:** govern realms, tenants, authority, platform identities, keys, and operational posture.
@@ -199,7 +199,7 @@ Copy direction: operational, precise, and consequence-led. Never call a tenant d
 
 Acceptance: member deep links, high-volume filtering/pagination, authority boundary proof, safe lifecycle mutations, and parity decision against legacy admin.
 
-### E. Tenant Admin UIX (`@tba/ui-tenant-administration` → tenant-admin API)
+### E. Tenant Admin UIX (`@tbauth/ui-tenant-administration` → tenant-admin API)
 
 **Users:** delegated tenant administrators.
 **Job:** administer tenant-local identities, clients, consent, roles/groups, sessions, keys, and audit.
@@ -215,7 +215,7 @@ Required routes/workflows:
 
 Acceptance: no platform lifecycle calls, cross-tenant leakage tests, clear delegated authority, safe consent/client/key actions, and an honest partial-state treatment for missing workflows.
 
-### F. Developer UIX (`@tba/ui-developer` → developer API)
+### F. Developer UIX (`@tbauth/ui-developer` → developer API)
 
 **Users:** application developers and integration engineers.
 **Job:** register, configure, test, and troubleshoot OAuth/OIDC applications.
@@ -231,7 +231,7 @@ Required routes/workflows:
 
 Acceptance: successful app registration and edit/delete proof, invalid redirect and unsafe browser-secret rejection, accessible protocol trace, and a five-minute first-app journey.
 
-### G. Service Admin UIX (`@tba/ui-service-administration` → service-admin API)
+### G. Service Admin UIX (`@tbauth/ui-service-administration` → service-admin API)
 
 **Users:** platform engineers, SRE, security engineers, and service owners.
 **Job:** govern workload identities, service keys, API keys, token inspection, and validation.
@@ -261,7 +261,7 @@ Required delivery:
 
 Acceptance: successful and failed validation journeys, deterministic fixtures, resource-server quickstart, raw contract link, and evidence/maturity context.
 
-### I. Demo Hub UIX (`@tba/ui-demo-hub`)
+### I. Demo Hub UIX (`@tbauth/ui-demo-hub`)
 
 **Users:** evaluators, technical marketers, DevRel, sales, and account teams.
 **Job:** present all product surfaces as one system and guide repeatable demonstrations.
@@ -276,7 +276,7 @@ Required routes/workflows:
 
 Acceptance: one-command Docker startup, deterministic reset, health degradation behavior, static walkthrough when services are offline, stable screenshot states, and privacy-safe event instrumentation.
 
-### J. Legacy Admin UIX (`@tba/ui-administration`)
+### J. Legacy Admin UIX (`@tbauth/ui-administration`)
 
 **Users:** maintainers during extraction only.
 **Job:** provide behavioral source material until separated product UIX reach approved parity.
@@ -291,7 +291,7 @@ Required delivery:
 
 Acceptance: no unique required workflow remains unowned; no production navigation depends on legacy admin; package is archived or explicitly marked deprecated.
 
-### K. Browser RP SDK (`@tba/client-oidc-relying-party`)
+### K. Browser RP SDK (`@tbauth/client-oidc-relying-party`)
 
 This is not a standalone UIX, but it is a required browser-experience dependency and must have its own integration brief.
 

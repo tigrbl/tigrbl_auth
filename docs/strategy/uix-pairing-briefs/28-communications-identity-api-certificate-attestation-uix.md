@@ -1,6 +1,6 @@
 # Communications Identity API + Certificate/Attestation UIX Requirements Brief
 
-**Pairing:** `tba-router-communications-identity` + `@tba/communications-identity-uix`<br>
+**Pairing:** `tba-router-communications-identity` + `@tbauth/communications-identity-uix`<br>
 **Opportunity-map item:** 18<br>
 **Primary buyers:** telecom operators, regulated communications teams, customer-support platforms, brand/email security teams, legal operations, and API platform teams<br>
 **Status:** proposed profile/orchestration surface; certificate, JOSE, trust, attestation, policy, and audit foundations exist

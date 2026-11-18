@@ -25,7 +25,7 @@ In the current checkout, the backend is shared and multi-tenant, `public-uix` is
 | `tba_auth` identity deployment | backend app | platform, tenants, tenant apps, end users | public REST/OIDC and admin REST/RPC | shipped | Shared multi-tenant backend deployment. |
 | `admin-uix` | frontend app / UIX | platform admins, tenant admins | `/admin/*` and `/rpc` | shipped | Currently combines platform-admin and tenant-admin responsibilities. |
 | `public-uix` | frontend app / UIX | tenant human users | public REST/OIDC | shipped | Covers login, registration, consent, callback, logout, and profile flows. |
-| `@tba/client-oidc-relying-party` | browser client package | browser application developers | public REST/OIDC | shipped | Browser-safe RP SDK, not an operator console. |
+| `@tbauth/client-oidc-relying-party` | browser client package | browser application developers | public REST/OIDC | shipped | Browser-safe RP SDK, not an operator console. |
 | `tba-protocol-oidc-relying-party` | Python client package | backend application developers | public REST/OIDC | shipped | Server-side RP helper library, not a deployable portal. |
 | `tba-protocol-oauth-protected-resource` | API integration package | protected API developers | JWKS and introspection | shipped | Validation helper for downstream protected APIs. |
 | `acme-notes-cli` | example client app | CLI users / integrators | device authorization and token | shipped example | Example consumer, not a platform control-plane app. |
@@ -68,7 +68,7 @@ In the current checkout, the backend is shared and multi-tenant, `public-uix` is
 | Manage tenant JWKS | tenant admin | admin RPC plus public tenant discovery parity | tenant admin console | `tenant-admin-uix` | currently done in `admin-uix` |
 | Human user login | tenant human user | public REST/OIDC | public portal | `public-uix` | already aligned |
 | CLI device login | CLI user | device authorization and token | consumer CLI | not a UIX | example exists as `acme-notes-cli` |
-| Browser app login integration | tenant app developer | authorize and token | browser app using RP SDK | not a UIX | package exists as `@tba/client-oidc-relying-party` |
+| Browser app login integration | tenant app developer | authorize and token | browser app using RP SDK | not a UIX | package exists as `@tbauth/client-oidc-relying-party` |
 | Backend app login integration | backend app developer | discovery, authorize, token, userinfo | backend app using RP helpers | not a UIX | package exists as `tba-protocol-oidc-relying-party` |
 | Protected API token validation | API developer | JWKS and introspection | protected API using verifier package | not a UIX | package exists as `tba-protocol-oauth-protected-resource` |
 | Register OIDC application | tenant developer or tenant admin | `/register` or client control plane | developer portal | `developer-uix` | backend supported; shipped UIX incomplete |
