@@ -1,6 +1,6 @@
 [project]
 name = "tba-codec-multibase"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 description = "Multibase encoding and decoding for the base58btc alphabet."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"

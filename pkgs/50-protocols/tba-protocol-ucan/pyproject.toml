@@ -1,6 +1,6 @@
 [project]
 name = "tba-protocol-ucan"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 description = "UCAN delegation and invocation verification for the TBA Ed25519 development profile."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -17,7 +17,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 license = "Apache-2.0"
-dependencies = ["cryptography>=45", "tba-codec-cid==0.4.0.dev3", "tba-codec-dag-cbor==0.4.0.dev3", "tba-codec-multibase==0.4.0.dev3", "tba-contracts-replay==0.4.0.dev3"]
+dependencies = ["cryptography>=45", "tba-codec-cid==0.4.0.dev4", "tba-codec-dag-cbor==0.4.0.dev4", "tba-codec-multibase==0.4.0.dev4", "tba-contracts-replay==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

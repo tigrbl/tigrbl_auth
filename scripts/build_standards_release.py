@@ -132,6 +132,10 @@ def main() -> int:
                     flush=True,
                 )
     report = dict(
+        source_commit=subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
+        ).strip(),
+        workflow_run=os.environ.get("GITHUB_RUN_ID"),
         passed=not failures,
         packages=sorted(rows, key=lambda r: r["name"]),
         failures=failures,

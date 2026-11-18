@@ -1,11 +1,11 @@
 [project]
 name = "tba-provider-certificate-issuer-x509"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 description = "Generic CSR-based X.509 leaf certificate issuer."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
 license = "Apache-2.0"
-dependencies = ["cryptography>=45", "tba-bases-certificate==0.4.0.dev3", "tba-contracts-security-trust==0.1.1.dev1"]
+dependencies = ["cryptography>=45", "tba-bases-certificate==0.4.0.dev4", "tba-contracts-security-trust==0.1.1.dev2"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 classifiers = [

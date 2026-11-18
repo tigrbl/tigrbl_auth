@@ -1,6 +1,6 @@
 [project]
 name = "tba-contracts-replay"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 description = "Protocol-neutral replay protection contracts."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"

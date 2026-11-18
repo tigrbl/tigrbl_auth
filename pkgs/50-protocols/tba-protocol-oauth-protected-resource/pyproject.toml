@@ -1,6 +1,6 @@
 [project]
 name = "tba-protocol-oauth-protected-resource"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 description = "OAuth protected-resource facade over token, DPoP, mTLS, and policy validators for the TBA package suite."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -33,7 +33,7 @@ classifiers = [
     "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3.15",
 ]
-dependencies = ["tba-protocol-oauth==0.4.0.dev3", "tba-protocol-jwt==0.4.0.dev3", "tba-provider-authorization-resource-server-verifier==0.4.0.dev3", "tba-contracts-identity==0.4.0.dev3", "tba-capability-protected-resource-authorization==0.4.0.dev3", "tba-provider-security-dpop-cnf-binding-validator==0.1.1.dev1", "tba-provider-security-mtls-cnf-binding-validator==0.1.1.dev1", "tba-capability-protected-resource-authorization==0.4.0.dev3", "tba-contracts-security-trust==0.1.1.dev1"]
+dependencies = ["tba-protocol-oauth==0.4.0.dev4", "tba-protocol-jwt==0.4.0.dev4", "tba-provider-authorization-resource-server-verifier==0.4.0.dev4", "tba-contracts-identity==0.4.0.dev4", "tba-capability-protected-resource-authorization==0.4.0.dev4", "tba-provider-security-dpop-cnf-binding-validator==0.1.1.dev2", "tba-provider-security-mtls-cnf-binding-validator==0.1.1.dev2", "tba-capability-protected-resource-authorization==0.4.0.dev4", "tba-contracts-security-trust==0.1.1.dev2"]
 license-files = ["LICENSE", "NOTICE"]
 
 [project.urls]

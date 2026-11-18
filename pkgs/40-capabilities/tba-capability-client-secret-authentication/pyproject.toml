@@ -1,6 +1,6 @@
 [project]
 name = "tba-capability-client-secret-authentication"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 readme = "README.md"
 description = "Client-secret authentication capability."
 requires-python = ">=3.10,<3.16"
@@ -17,7 +17,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 license = "Apache-2.0"
-dependencies = ["tba-concrete-capability==0.4.0.dev3", "tba-contracts-identity==0.4.0.dev3", "tba-provider-authenticator-client-secret-local==0.1.1.dev1"]
+dependencies = ["tba-concrete-capability==0.4.0.dev4", "tba-contracts-identity==0.4.0.dev4", "tba-provider-authenticator-client-secret-local==0.1.1.dev2"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

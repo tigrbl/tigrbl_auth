@@ -1,6 +1,6 @@
 [project]
 name = "tba-bases-cose"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 description = "Protocol-neutral CBOR, COSE, and CWT extension bases."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -17,7 +17,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 license = "Apache-2.0"
-dependencies = ["tba-bases-protected-envelope==0.4.0.dev3", "tba-bases-token==0.4.0.dev3", "tba-contracts-token==0.4.0.dev3"]
+dependencies = ["tba-bases-protected-envelope==0.4.0.dev4", "tba-bases-token==0.4.0.dev4", "tba-contracts-token==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

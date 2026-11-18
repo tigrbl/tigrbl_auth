@@ -1,6 +1,6 @@
 [project]
 name = "tba-provider-secret-hashing-bcrypt"
-version = "0.1.1.dev1"
+version = "0.1.1.dev2"
 description = "Bcrypt shared-secret hashing and verification provider for TBA."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -17,7 +17,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 license = "Apache-2.0"
-dependencies = ["bcrypt==5.0.0", "tba-contracts-identity==0.4.0.dev3"]
+dependencies = ["bcrypt==5.0.0", "tba-contracts-identity==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

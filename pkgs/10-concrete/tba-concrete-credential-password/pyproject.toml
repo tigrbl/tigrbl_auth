@@ -1,6 +1,6 @@
 [project]
 name="tba-concrete-credential-password"
-version="0.4.0.dev3"
+version="0.4.0.dev4"
 description = "Concrete credential password value types for Tigrbl Auth."
 readme = "README.md"
 requires-python=">=3.10,<3.16"
@@ -17,7 +17,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 license="Apache-2.0"
-dependencies=["tba-contracts-identity==0.4.0.dev3", "tba-bases-authentication-credential==0.4.0.dev3"]
+dependencies=["tba-contracts-identity==0.4.0.dev4", "tba-bases-authentication-credential==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

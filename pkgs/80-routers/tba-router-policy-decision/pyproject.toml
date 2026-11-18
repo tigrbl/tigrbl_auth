@@ -1,6 +1,6 @@
 [project]
 name = "tba-router-policy-decision"
-version = "0.4.0.dev4"
+version = "0.4.0.dev5"
 description = "Reusable platform policy decision HTTP router."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -16,7 +16,7 @@ classifiers = [
     "Development Status :: 3 - Alpha",
 ]
 license = "Apache-2.0"
-dependencies = ["tba-contracts-authorization==0.4.0.dev4", "tba-provider-authorization-policy-decision-engine==0.4.0.dev3"]
+dependencies = ["tba-contracts-authorization==0.4.0.dev5", "tba-provider-authorization-policy-decision-engine==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

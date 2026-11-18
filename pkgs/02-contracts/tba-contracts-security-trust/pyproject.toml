@@ -1,6 +1,6 @@
 [project]
 name = "tba-contracts-security-trust"
-version = "0.1.1.dev1"
+version = "0.1.1.dev2"
 description = "Draft horizontal contracts and DTOs for security, trust, key, crypto, and cipher-suite components."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -20,7 +20,7 @@ classifiers = [
     "Programming Language :: Python :: 3.15",
     "Intended Audience :: Developers",
 ]
-dependencies = ["tba-primitives-identity==0.4.0.dev3"]
+dependencies = ["tba-primitives-identity==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 
 [project.urls]

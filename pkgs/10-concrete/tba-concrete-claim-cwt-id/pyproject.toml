@@ -1,6 +1,6 @@
 [project]
 name="tba-concrete-claim-cwt-id"
-version="0.4.0.dev3"
+version="0.4.0.dev4"
 description = "Owns CwtIdClaim integer-labelled CWT semantics."
 license = "Apache-2.0"
 readme = "README.md"
@@ -17,7 +17,7 @@ classifiers = [
     "Development Status :: 3 - Alpha",
     "Typing :: Typed",
 ]
-dependencies=["tba-concrete-claim-jwt-id==0.4.0.dev3"]
+dependencies=["tba-concrete-claim-jwt-id==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

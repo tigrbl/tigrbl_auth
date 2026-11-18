@@ -1,6 +1,6 @@
 [project]
 name = "tba-router-oauth-device-authorization"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 description = "HTTP carrier binding for RFC 8628 device authorization."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -17,7 +17,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 license = "Apache-2.0"
-dependencies = ["tigrbl==0.4.5.dev8", "tba-protocol-oauth==0.4.0.dev3"]
+dependencies = ["tigrbl==0.4.5.dev8", "tba-protocol-oauth==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

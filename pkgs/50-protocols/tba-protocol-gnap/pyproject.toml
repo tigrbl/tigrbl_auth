@@ -1,6 +1,6 @@
 [project]
 name = "tba-protocol-gnap"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 readme = "README.md"
 description = "Versioned RFC 9635 Grant Negotiation and Authorization Protocol mapping."
 requires-python = ">=3.10,<3.16"
@@ -17,7 +17,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 license = "Apache-2.0"
-dependencies = ["tba-concrete-claim-assertions==0.4.0.dev3", "tba-concrete-claim-subject-identifiers==0.4.0.dev3", "tba-concrete-claim-updated-at-rfc3339==0.4.0.dev3", "tba-capability-delegated-access-negotiation==0.4.0.dev3", "tba-contracts-identity==0.4.0.dev3"]
+dependencies = ["tba-concrete-claim-assertions==0.4.0.dev4", "tba-concrete-claim-subject-identifiers==0.4.0.dev4", "tba-concrete-claim-updated-at-rfc3339==0.4.0.dev4", "tba-capability-delegated-access-negotiation==0.4.0.dev4", "tba-contracts-identity==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

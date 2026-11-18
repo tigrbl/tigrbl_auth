@@ -1,6 +1,6 @@
 [project]
 name = "tba-concrete-totp"
-version = "0.1.1.dev1"
+version = "0.1.1.dev2"
 description = "Stateless HOTP and TOTP algorithms for TBA."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"

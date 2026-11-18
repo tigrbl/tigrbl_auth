@@ -1,6 +1,6 @@
 [project]
 name = "tba-protocol-oid4vp"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 readme = "README.md"
 description = "OpenID for Verifiable Presentations protocol package."
 requires-python = ">=3.10,<3.16"
@@ -17,7 +17,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 license = "Apache-2.0"
-dependencies = ["tba-concrete-claim-client-id==0.4.0.dev3", "tba-concrete-claim-nonce==0.4.0.dev3", "tba-concrete-claim-transaction-id==0.4.0.dev3", "tba-capability-digital-credential-presentation==0.4.0.dev3", "tba-contracts-identity==0.4.0.dev3"]
+dependencies = ["tba-concrete-claim-client-id==0.4.0.dev4", "tba-concrete-claim-nonce==0.4.0.dev4", "tba-concrete-claim-transaction-id==0.4.0.dev4", "tba-capability-digital-credential-presentation==0.4.0.dev4", "tba-contracts-identity==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

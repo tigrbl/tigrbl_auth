@@ -1,6 +1,6 @@
 [project]
 name="tba-profile-workload-credential-spiffe-wit-svid"
-version="0.4.0.dev3"
+version="0.4.0.dev4"
 description = "Incubating SPIFFE WIT-SVID profile pinned to the SPIFFE v1.15.1 publication."
 license = "Apache-2.0"
 readme = "README.md"
@@ -17,7 +17,7 @@ classifiers = [
     "Development Status :: 3 - Alpha",
     "Typing :: Typed",
 ]
-dependencies = ["tba-contracts-proof-of-possession==0.4.0.dev3", "tba-profile-workload-credential-wimse-wit==0.4.0.dev5", "tba-protocol-workload-spiffe-svid==0.4.0.dev3", "tba-profile-workload-proof-wimse-wpt==0.4.0.dev5", "tba-concrete-jwt==0.4.0.dev3", "tba-provider-jose-cryptography==0.4.0.dev4"]
+dependencies = ["tba-contracts-proof-of-possession==0.4.0.dev4", "tba-profile-workload-credential-wimse-wit==0.4.0.dev6", "tba-protocol-workload-spiffe-svid==0.4.0.dev4", "tba-profile-workload-proof-wimse-wpt==0.4.0.dev6", "tba-concrete-jwt==0.4.0.dev4", "tba-provider-jose-cryptography==0.4.0.dev5"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

@@ -1,11 +1,11 @@
 [project]
 name = "tba-protocol-dmarc"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 description = "DMARC TXT record parsing, DNS discovery and policy selection."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
 license = "Apache-2.0"
-dependencies = ["tba-contracts-dns==0.4.0.dev3"]
+dependencies = ["tba-contracts-dns==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 classifiers = [

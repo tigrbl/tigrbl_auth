@@ -2,10 +2,10 @@
 description = "WIMSE mutual TLS workload authentication profile"
 license = "Apache-2.0"
 name = "tba-profile-workload-authentication-wimse-mtls"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
-dependencies = ["tba-profile-workload-credential-wimse-wic==0.4.0.dev3", "tba-concrete-certificate-x509==0.4.0.dev3", "tba-concrete-wic==0.4.0.dev3", "tba-protocol-workload-wimse-identifier==0.4.0.dev3", "tba-contracts-security-trust==0.1.1.dev1"]
+dependencies = ["tba-profile-workload-credential-wimse-wic==0.4.0.dev4", "tba-concrete-certificate-x509==0.4.0.dev4", "tba-concrete-wic==0.4.0.dev4", "tba-protocol-workload-wimse-identifier==0.4.0.dev4", "tba-contracts-security-trust==0.1.1.dev2"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 classifiers = [

@@ -8,7 +8,7 @@ import sys
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts"))
-from release_one_standards_package import select_release
+from release_one_standards_package import ensure_source_tag, select_release
 
 
 @pytest.fixture
@@ -16,6 +16,7 @@ def release():
     row = dict(name="example", version="1.0.1", path="pkgs/02-contracts/example")
     plan = json.dumps(dict(packages=[row])).encode()
     manifest = dict(
+        source_commit="a" * 40,
         passed=True,
         failures=[],
         plan_sha256=hashlib.sha256(plan).hexdigest(),
@@ -54,6 +55,33 @@ def test_rejects_a_failed_artifact_batch(release):
     manifest["passed"] = False
     with pytest.raises(ValueError, match="validation"):
         select_release(plan, manifest, "example")
+
+
+@pytest.mark.parametrize("commit", [None, "", "old-build", "a" * 39])
+def test_rejects_artifacts_without_immutable_source(release, commit):
+    plan, manifest = release
+    if commit is None:
+        manifest.pop("source_commit")
+    else:
+        manifest["source_commit"] = commit
+    with pytest.raises(ValueError, match="immutable source"):
+        select_release(plan, manifest, "example")
+
+
+def test_refuses_to_move_an_existing_source_tag(monkeypatch):
+    from types import SimpleNamespace
+    import release_one_standards_package as publisher
+
+    calls = []
+
+    def run(command, **kwargs):
+        calls.append(command)
+        return SimpleNamespace(returncode=0, stdout="b" * 40)
+
+    monkeypatch.setattr(publisher.subprocess, "run", run)
+    with pytest.raises(ValueError, match="Refusing to replace"):
+        ensure_source_tag(dict(name="example", version="1.0.1"), "a" * 40)
+    assert len(calls) == 1
 
 
 def test_workflow_uses_oidc_and_the_selected_project_environment():

@@ -1,6 +1,6 @@
 [project]
 name="tba-protocol-workload-spiffe-broker-api"
-version="0.4.0.dev3"
+version="0.4.0.dev4"
 description = "Incubating SPIFFE Broker API v1.15.1 service contract."
 license = "Apache-2.0"
 readme = "README.md"

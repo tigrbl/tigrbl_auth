@@ -1,6 +1,6 @@
 [project]
 name = "tba-client-policy-decision"
-version = "0.4.0.dev4"
+version = "0.4.0.dev5"
 description = "Typed client for platform authorization decisions."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -16,7 +16,7 @@ classifiers = [
     "Development Status :: 3 - Alpha",
 ]
 license = "Apache-2.0"
-dependencies = ["tba-contracts-authorization==0.4.0.dev4"]
+dependencies = ["tba-contracts-authorization==0.4.0.dev5"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

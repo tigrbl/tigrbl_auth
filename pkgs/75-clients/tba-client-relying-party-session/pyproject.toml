@@ -1,6 +1,6 @@
 [project]
 name = "tba-client-relying-party-session"
-version = "0.4.0.dev4"
+version = "0.4.0.dev5"
 description = "Typed client for server-owned RP sessions."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"

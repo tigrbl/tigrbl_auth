@@ -1,6 +1,6 @@
 [project]
 name = "tba-contracts-token"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 readme = "README.md"
 description = "Protocol-neutral token contracts for the TBA identity stack."
 requires-python = ">=3.10,<3.16"
@@ -17,7 +17,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 license = "Apache-2.0"
-dependencies = ["tba-primitives-identity==0.4.0.dev3"]
+dependencies = ["tba-primitives-identity==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

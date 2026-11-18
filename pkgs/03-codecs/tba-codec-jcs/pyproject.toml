@@ -1,6 +1,6 @@
 [project]
 name = "tba-codec-jcs"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 description = "RFC 8785 JSON Canonicalization Scheme codec."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"

@@ -1,6 +1,6 @@
 [project]
 name="tba-profile-workload-credential-wimse-wit"
-version="0.4.0.dev5"
+version="0.4.0.dev6"
 description = "WIMSE Workload Identity Token."
 license = "Apache-2.0"
 readme = "README.md"
@@ -17,7 +17,7 @@ classifiers = [
     "Development Status :: 3 - Alpha",
     "Typing :: Typed",
 ]
-dependencies = ["tba-concrete-jwt==0.4.0.dev3", "tba-concrete-wit==0.4.0.dev3", "tba-protocol-workload-wimse-identifier==0.4.0.dev3", "tba-provider-jose-cryptography==0.4.0.dev4"]
+dependencies = ["tba-concrete-jwt==0.4.0.dev4", "tba-concrete-wit==0.4.0.dev4", "tba-protocol-workload-wimse-identifier==0.4.0.dev4", "tba-provider-jose-cryptography==0.4.0.dev5"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

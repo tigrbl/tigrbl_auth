@@ -1,6 +1,6 @@
 [project]
 name = "tba-operator-identity"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 description = "Repository truth, document authority, evidence workflows, and admin console helpers for Tigrbl IAM."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -31,7 +31,7 @@ classifiers = [
     "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3.15",
 ]
-dependencies = ["tba-cli-identity==0.4.0.dev3", "tba-certification-release==0.4.0.dev3", "tba-runtime-authorization-policy==0.4.0.dev4"]
+dependencies = ["tba-cli-identity==0.4.0.dev4", "tba-certification-release==0.4.0.dev4", "tba-runtime-authorization-policy==0.4.0.dev5"]
 license-files = ["LICENSE", "NOTICE"]
 
 [project.urls]

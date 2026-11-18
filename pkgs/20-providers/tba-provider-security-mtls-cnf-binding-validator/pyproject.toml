@@ -1,6 +1,6 @@
 [project]
 name = "tba-provider-security-mtls-cnf-binding-validator"
-version = "0.1.1.dev1"
+version = "0.1.1.dev2"
 description = "mTLS cnf confirmation binding validator provider."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -17,7 +17,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 license = "Apache-2.0"
-dependencies = ["tba-concrete-mtls-confirmation-binding==0.4.0.dev3"]
+dependencies = ["tba-concrete-mtls-confirmation-binding==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

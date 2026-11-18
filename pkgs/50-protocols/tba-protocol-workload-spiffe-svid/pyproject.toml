@@ -1,6 +1,6 @@
 [project]
 name="tba-protocol-workload-spiffe-svid"
-version="0.4.0.dev3"
+version="0.4.0.dev4"
 description = "Stable SPIFFE ID, X.509-SVID, and JWT-SVID profile ownership."
 license = "Apache-2.0"
 readme = "README.md"
@@ -17,7 +17,7 @@ classifiers = [
     "Development Status :: 3 - Alpha",
     "Typing :: Typed",
 ]
-dependencies = ["tba-concrete-x509-svid-credential==0.4.0.dev3", "tba-concrete-jwt-svid-credential==0.4.0.dev3", "tba-concrete-certificate-x509==0.4.0.dev3", "tba-concrete-jwt==0.4.0.dev3", "tba-contracts-security-trust==0.1.1.dev1", "tba-provider-jose-cryptography==0.4.0.dev4"]
+dependencies = ["tba-concrete-x509-svid-credential==0.4.0.dev4", "tba-concrete-jwt-svid-credential==0.4.0.dev4", "tba-concrete-certificate-x509==0.4.0.dev4", "tba-concrete-jwt==0.4.0.dev4", "tba-contracts-security-trust==0.1.1.dev2", "tba-provider-jose-cryptography==0.4.0.dev5"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

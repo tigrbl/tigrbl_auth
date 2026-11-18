@@ -1,6 +1,6 @@
 [project]
 name = "tbauth"
-version = "0.1.1.dev1"
+version = "0.1.1.dev2"
 description = "Reserved planning facade for the TBA package suite."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"

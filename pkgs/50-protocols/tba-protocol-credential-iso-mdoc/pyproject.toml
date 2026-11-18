@@ -1,6 +1,6 @@
 [project]
 name="tba-protocol-credential-iso-mdoc"
-version="0.4.0.dev3"
+version="0.4.0.dev4"
 description = "Version authority, feature selection, compatibility, migration, and schema mapping for ISO/IEC 18013-5 mdoc artifacts."
 readme = "README.md"
 requires-python=">=3.10,<3.16"
@@ -17,7 +17,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 license="Apache-2.0"
-dependencies=["tba-primitives-identity==0.4.0.dev3", "tba-concrete-mdoc==0.4.0.dev3", "tba-concrete-mdoc-credential==0.4.0.dev3", "tba-bases-digital-credential==0.4.0.dev3", "tba-contracts-identity==0.4.0.dev3", "tba-provider-mdoc-issuer==0.4.0.dev3", "tba-provider-mdoc-verifier==0.4.0.dev3"]
+dependencies=["tba-primitives-identity==0.4.0.dev4", "tba-concrete-mdoc==0.4.0.dev4", "tba-concrete-mdoc-credential==0.4.0.dev4", "tba-bases-digital-credential==0.4.0.dev4", "tba-contracts-identity==0.4.0.dev4", "tba-provider-mdoc-issuer==0.4.0.dev4", "tba-provider-mdoc-verifier==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

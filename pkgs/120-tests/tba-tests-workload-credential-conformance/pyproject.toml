@@ -1,6 +1,6 @@
 [project]
 name="tba-tests-workload-credential-conformance"
-version="0.4.0.dev3"
+version="0.4.0.dev4"
 description = "Reusable structural and negative vectors."
 license = "Apache-2.0"
 readme = "README.md"
@@ -22,7 +22,7 @@ license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 
 [project.optional-dependencies]
-runner = ["cryptography>=45.0.0", "packaging>=24.0", "pytest>=8.0", "tba-primitives-identity==0.4.0.dev3", "tomli>=2.0; python_version < '3.11'"]
+runner = ["cryptography>=45.0.0", "packaging>=24.0", "pytest>=8.0", "tba-primitives-identity==0.4.0.dev4", "tomli>=2.0; python_version < '3.11'"]
 
 [[project.authors]]
 name = "Jacob Stewart"

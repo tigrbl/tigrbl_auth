@@ -1,6 +1,6 @@
 [project]
 name="tba-example-workload-credential-profiles"
-version="0.4.0.dev3"
+version="0.4.0.dev4"
 description = "Runs structural WIT, WPT, and WIT-SVID validation."
 license = "Apache-2.0"
 readme = "README.md"
@@ -17,7 +17,7 @@ classifiers = [
     "Development Status :: 3 - Alpha",
     "Typing :: Typed",
 ]
-dependencies=["tba-profile-workload-credential-wimse-wit==0.4.0.dev5", "tba-profile-workload-proof-wimse-wpt==0.4.0.dev5", "tba-profile-workload-credential-spiffe-wit-svid==0.4.0.dev3"]
+dependencies=["tba-profile-workload-credential-wimse-wit==0.4.0.dev6", "tba-profile-workload-proof-wimse-wpt==0.4.0.dev6", "tba-profile-workload-credential-spiffe-wit-svid==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

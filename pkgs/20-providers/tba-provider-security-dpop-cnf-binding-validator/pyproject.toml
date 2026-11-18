@@ -1,6 +1,6 @@
 [project]
 name = "tba-provider-security-dpop-cnf-binding-validator"
-version = "0.1.1.dev1"
+version = "0.1.1.dev2"
 description = "DPoP cnf confirmation binding validator provider."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -17,7 +17,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 license = "Apache-2.0"
-dependencies = ["tba-concrete-dpop-confirmation-binding==0.4.0.dev3"]
+dependencies = ["tba-concrete-dpop-confirmation-binding==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

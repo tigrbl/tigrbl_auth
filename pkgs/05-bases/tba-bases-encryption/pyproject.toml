@@ -1,6 +1,6 @@
 [project]
 name = "tba-bases-encryption"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 description = "Reusable encryption, decryption, and cipher-policy bases."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -17,7 +17,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 license = "Apache-2.0"
-dependencies = ["tba-bases-protected-artifact==0.4.0.dev3", "tba-contracts-security-trust==0.1.1.dev1"]
+dependencies = ["tba-bases-protected-artifact==0.4.0.dev4", "tba-contracts-security-trust==0.1.1.dev2"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

@@ -1,6 +1,6 @@
 [project]
 name = "tba-provider-policy-administration-memory"
-version = "0.4.0.dev4"
+version = "0.4.0.dev5"
 readme = "README.md"
 description = "In-memory RBAC, ABAC, delegated-administration, and policy engine providers."
 requires-python = ">=3.10,<3.16"
@@ -17,7 +17,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 license = "Apache-2.0"
-dependencies = ["tba-provider-access-governance-memory==0.4.0.dev3", "tba-contracts-identity==0.4.0.dev3", "tba-primitives-identity==0.4.0.dev3", "tba-durability-authorization-policy==0.4.0.dev3", "tba-concrete-authorization-policy-rules==0.4.0.dev3"]
+dependencies = ["tba-provider-access-governance-memory==0.4.0.dev4", "tba-contracts-identity==0.4.0.dev4", "tba-primitives-identity==0.4.0.dev4", "tba-durability-authorization-policy==0.4.0.dev4", "tba-concrete-authorization-policy-rules==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

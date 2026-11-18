@@ -1,6 +1,6 @@
 [project]
 name = "tba-provider-certificate-evidence"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 description = "X.509 path, CRL, and RFC 6962 SCT verification."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"

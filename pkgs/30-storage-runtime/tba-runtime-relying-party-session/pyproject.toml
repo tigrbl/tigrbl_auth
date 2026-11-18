@@ -1,6 +1,6 @@
 [project]
 name = "tba-runtime-relying-party-session"
-version = "0.4.0.dev4"
+version = "0.4.0.dev5"
 description = "Server-side RP login transaction and one-time state runtime."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"

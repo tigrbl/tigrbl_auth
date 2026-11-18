@@ -1,6 +1,6 @@
 [project]
 name = "tba-router-relying-party-session"
-version = "0.4.0.dev4"
+version = "0.4.0.dev5"
 description = "Reusable RP/BFF login and session routes."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -16,7 +16,7 @@ classifiers = [
     "Development Status :: 3 - Alpha",
 ]
 license = "Apache-2.0"
-dependencies = ["tba-protocol-oidc-relying-party==0.4.0.dev3", "tba-runtime-relying-party-session==0.4.0.dev4"]
+dependencies = ["tba-protocol-oidc-relying-party==0.4.0.dev4", "tba-runtime-relying-party-session==0.4.0.dev5"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

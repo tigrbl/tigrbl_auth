@@ -1,6 +1,6 @@
 [project]
 name = "tba-middleware-policy-enforcement-asgi"
-version = "0.4.0.dev4"
+version = "0.4.0.dev5"
 description = "ASGI policy enforcement point using an injected decision client."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -16,7 +16,7 @@ classifiers = [
     "Development Status :: 3 - Alpha",
 ]
 license = "Apache-2.0"
-dependencies = ["tba-client-policy-decision==0.4.0.dev4"]
+dependencies = ["tba-client-policy-decision==0.4.0.dev5"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

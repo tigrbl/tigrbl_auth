@@ -7,6 +7,8 @@ import hashlib
 import json
 from pathlib import Path
 import shutil
+import re
+import subprocess
 import tempfile
 import time
 
@@ -23,6 +25,10 @@ def select_release(plan_bytes: bytes, manifest: dict, name: str) -> tuple[dict, 
         raise ValueError("The source artifact batch did not pass validation")
     if manifest.get("plan_sha256") != hashlib.sha256(plan_bytes).hexdigest():
         raise ValueError("Artifact manifest does not match the committed release plan")
+    if not re.fullmatch(r"[a-f0-9]{40}", manifest.get("source_commit", "")):
+        raise ValueError(
+            "Fresh CI artifacts must identify their immutable source commit"
+        )
     planned = [row for row in plan["packages"] if row["name"] == name]
     built = [row for row in manifest["packages"] if row["name"] == name]
     if len(planned) != 1 or len(built) != 1:
@@ -35,18 +41,36 @@ def select_release(plan_bytes: bytes, manifest: dict, name: str) -> tuple[dict, 
     return row, artifact
 
 
+def ensure_source_tag(row: dict, source_commit: str) -> None:
+    tag = f"{row['name']}=={row['version']}"
+    prior = subprocess.run(
+        ["git", "rev-parse", "-q", "--verify", f"refs/tags/{tag}^{{commit}}"],
+        capture_output=True,
+        text=True,
+    )
+    if prior.returncode == 0:
+        if prior.stdout.strip() != source_commit:
+            raise ValueError(f"Refusing to replace an existing source tag: {tag}")
+    else:
+        subprocess.run(["git", "tag", tag, source_commit], check=True)
+    subprocess.run(["git", "push", "origin", f"refs/tags/{tag}"], check=True)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--plan", required=True, type=Path)
     parser.add_argument("--dist", required=True, type=Path)
     parser.add_argument("--package", required=True)
     parser.add_argument("--phase", choices=("prepare", "verify"), required=True)
+    parser.add_argument("--source-artifact-run", required=True, type=int)
     parser.add_argument("--out", type=Path, default=Path("prepared-dist"))
     parser.add_argument(
         "--receipt", type=Path, default=Path("trusted-release-receipt.json")
     )
     args = parser.parse_args()
     manifest = json.loads((args.dist / "manifest.json").read_text(encoding="utf-8"))
+    if str(manifest.get("workflow_run")) != str(args.source_artifact_run):
+        raise ValueError("Distribution manifest does not identify the selected CI run")
     row, artifact = select_release(args.plan.read_bytes(), manifest, args.package)
     directory = args.dist / row["name"]
     if inspect_artifacts(row, directory) != artifact["files"]:
@@ -60,6 +84,7 @@ def main() -> None:
             raise ValueError("Selected-package staging directory must start empty")
         for file in artifact["files"]:
             shutil.copyfile(directory / file["filename"], args.out / file["filename"])
+        ensure_source_tag(row, manifest["source_commit"])
         print(f"Prepared only {row['name']}=={row['version']}", flush=True)
         return
     for attempt in range(6):
@@ -87,7 +112,8 @@ def main() -> None:
             workflow="monorepo-package-release.yml",
             environment=f"pypi-{row['name']}",
         ),
-        source_artifact_run=44296198410,
+        source_artifact_run=args.source_artifact_run,
+        source_commit=manifest["source_commit"],
         plan_sha256=manifest["plan_sha256"],
     )
     args.receipt.write_text(

@@ -1,6 +1,6 @@
 [project]
 name="tba-profile-workload-credential-cwt-svid-extension"
-version="0.4.0.dev3"
+version="0.4.0.dev4"
 description = "Experimental Tigrbl CWT/COSE workload credential using SPIFFE IDs."
 license = "Apache-2.0"
 readme = "README.md"
@@ -17,7 +17,7 @@ classifiers = [
     "Development Status :: 3 - Alpha",
     "Typing :: Typed",
 ]
-dependencies=["tba-contracts-proof-of-possession==0.4.0.dev3", "tba-protocol-cwt==0.4.0.dev4", "tba-protocol-security-cose==0.4.0.dev3", "tba-protocol-workload-spiffe-svid==0.4.0.dev3"]
+dependencies=["tba-contracts-proof-of-possession==0.4.0.dev4", "tba-protocol-cwt==0.4.0.dev5", "tba-protocol-security-cose==0.4.0.dev4", "tba-protocol-workload-spiffe-svid==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

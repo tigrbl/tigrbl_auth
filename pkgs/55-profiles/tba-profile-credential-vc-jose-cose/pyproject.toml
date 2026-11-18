@@ -1,6 +1,6 @@
 [project]
 name="tba-profile-credential-vc-jose-cose"
-version="0.4.0.dev3"
+version="0.4.0.dev4"
 description = "Versioned W3C VC-JOSE-COSE Recommendation ownership for secured Verifiable Credentials and Presentations."
 license = "Apache-2.0"
 readme = "README.md"
@@ -17,7 +17,7 @@ classifiers = [
     "Development Status :: 3 - Alpha",
     "Typing :: Typed",
 ]
-dependencies=["cbor2>=5.6.0", "tba-primitives-identity==0.4.0.dev3", "tba-contracts-protected-envelope==0.4.0.dev3", "tba-concrete-vc-jose-credential==0.4.0.dev3", "tba-concrete-vc-cose-credential==0.4.0.dev3", "tba-protocol-security-jws==0.4.0.dev3", "tba-protocol-security-cose==0.4.0.dev3"]
+dependencies=["cbor2>=5.6.0", "tba-primitives-identity==0.4.0.dev4", "tba-contracts-protected-envelope==0.4.0.dev4", "tba-concrete-vc-jose-credential==0.4.0.dev4", "tba-concrete-vc-cose-credential==0.4.0.dev4", "tba-protocol-security-jws==0.4.0.dev4", "tba-protocol-security-cose==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

@@ -1,6 +1,6 @@
 [project]
 name="tba-protocol-identity-did-core"
-version="0.4.0.dev3"
+version="0.4.0.dev4"
 description = "Versioned W3C DID Core 1.0 ownership."
 license = "Apache-2.0"
 readme = "README.md"
@@ -17,7 +17,7 @@ classifiers = [
     "Development Status :: 3 - Alpha",
     "Typing :: Typed",
 ]
-dependencies=["tba-concrete-did-document==0.4.0.dev3", "tba-contracts-identity-document==0.4.0.dev3"]
+dependencies=["tba-concrete-did-document==0.4.0.dev4", "tba-contracts-identity-document==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

@@ -1,6 +1,6 @@
 [project]
 name = "tba-provider-set-transmitter"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 readme = "README.md"
 description = "RFC 8417 Security Event Token transmitter provider."
 requires-python = ">=3.10,<3.16"
@@ -17,7 +17,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 license = "Apache-2.0"
-dependencies = ["tba-contracts-identity==0.4.0.dev3", "tba-bases-security-event==0.4.0.dev3", "tba-concrete-set==0.4.0.dev3"]
+dependencies = ["tba-contracts-identity==0.4.0.dev4", "tba-bases-security-event==0.4.0.dev4", "tba-concrete-set==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

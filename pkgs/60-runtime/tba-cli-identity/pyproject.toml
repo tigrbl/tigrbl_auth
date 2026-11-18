@@ -1,6 +1,6 @@
 [project]
 name = "tba-cli-identity"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 description = "Dedicated command-line package for TBA identity operator workflows, governance checks, evidence, and release gates."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -29,7 +29,7 @@ classifiers = [
     "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3.15",
 ]
-dependencies = ["tba-capability-operator-administration==0.4.0.dev3", "tba-runtime-identity-authoring==0.4.0.dev3", "tba-runtime-identity==0.4.0.dev4", "tba-runtime-identity-storage==0.4.0.dev3", "tba-provider-secret-hashing-bcrypt==0.1.1.dev1", "tomli>=2.0; python_version < '3.11'"]
+dependencies = ["tba-capability-operator-administration==0.4.0.dev4", "tba-runtime-identity-authoring==0.4.0.dev4", "tba-runtime-identity==0.4.0.dev5", "tba-runtime-identity-storage==0.4.0.dev4", "tba-provider-secret-hashing-bcrypt==0.1.1.dev2", "tomli>=2.0; python_version < '3.11'"]
 license-files = ["LICENSE", "NOTICE"]
 
 [project.urls]

@@ -1,11 +1,11 @@
 [project]
 name = "tba-provider-authenticator-totp-local"
-version = "0.1.1.dev1"
+version = "0.1.1.dev2"
 description = "Local time-based OTP authenticator provider for TBA."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
 license = "Apache-2.0"
-dependencies = ["tba-bases-authenticator==0.1.1.dev1", "tba-contracts-identity==0.4.0.dev3", "tba-concrete-totp==0.1.1.dev1"]
+dependencies = ["tba-bases-authenticator==0.1.1.dev2", "tba-contracts-identity==0.4.0.dev4", "tba-concrete-totp==0.1.1.dev2"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 classifiers = [

@@ -1,6 +1,6 @@
 [project]
 name = "tba-contracts-security-key-rotation-policy"
-version = "0.1.1.dev1"
+version = "0.1.1.dev2"
 description = "Key rotation policy contract dataclasses."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"

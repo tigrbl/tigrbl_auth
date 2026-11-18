@@ -1,6 +1,6 @@
 [project]
 name="tba-concrete-claim-phone-number-verified"
-version="0.4.0.dev3"
+version="0.4.0.dev4"
 description = "Owns the protocol-neutral PhoneNumberVerifiedClaim value object."
 license = "Apache-2.0"
 readme = "README.md"
@@ -17,7 +17,7 @@ classifiers = [
     "Development Status :: 3 - Alpha",
     "Typing :: Typed",
 ]
-dependencies=["tba-primitives-identity==0.4.0.dev3", "tba-bases-claim==0.4.0.dev3"]
+dependencies=["tba-primitives-identity==0.4.0.dev4", "tba-bases-claim==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

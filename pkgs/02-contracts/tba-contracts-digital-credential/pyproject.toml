@@ -1,6 +1,6 @@
 [project]
 name = "tba-contracts-digital-credential"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 description = "Representation-neutral digital credential contracts."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"

@@ -1,11 +1,11 @@
 [project]
 name = "tba-provider-bimi-mark-certificate"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 description = "BIMI Mark Certificate path and evidence verification."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
 license = "Apache-2.0"
-dependencies = ["cryptography>=46", "tba-contracts-security-trust==0.1.1.dev1", "tba-provider-certificate-evidence==0.4.0.dev3"]
+dependencies = ["cryptography>=46", "tba-contracts-security-trust==0.1.1.dev2", "tba-provider-certificate-evidence==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 classifiers = [

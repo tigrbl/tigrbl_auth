@@ -1,6 +1,6 @@
 [project]
 name = "tba-tests-identity"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 description = "Test fixtures, fake identity components, conformance vectors, integration harnesses, and cross-cutting verification helpers."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"

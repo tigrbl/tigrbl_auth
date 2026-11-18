@@ -1,6 +1,6 @@
 [project]
 name = "tba-contracts-authorization"
-version = "0.4.0.dev4"
+version = "0.4.0.dev5"
 description = "Canonical platform authorization request, role, grant, and decision contracts."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"

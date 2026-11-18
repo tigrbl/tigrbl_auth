@@ -1,6 +1,6 @@
 [project]
 name = "tba-bases-public-key-authentication"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 description = "Protocol-neutral public-key authenticator extension bases."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -17,7 +17,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 license = "Apache-2.0"
-dependencies = ["tba-contracts-public-key-authentication==0.4.0.dev3"]
+dependencies = ["tba-contracts-public-key-authentication==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

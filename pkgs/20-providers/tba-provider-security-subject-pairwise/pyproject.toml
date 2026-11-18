@@ -1,6 +1,6 @@
 [project]
 name = "tba-provider-security-subject-pairwise"
-version = "0.1.1.dev1"
+version = "0.1.1.dev2"
 description = "Pairwise subject identifier provider for the TBA package suite."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -17,7 +17,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 license = "Apache-2.0"
-dependencies = ["tba-contracts-identity==0.4.0.dev3", "tba-bases-identity==0.4.0.dev3", "tba-concrete-pairwise-subject-identifier==0.4.0.dev3", "tba-contracts-security-trust==0.1.1.dev1"]
+dependencies = ["tba-contracts-identity==0.4.0.dev4", "tba-bases-identity==0.4.0.dev4", "tba-concrete-pairwise-subject-identifier==0.4.0.dev4", "tba-contracts-security-trust==0.1.1.dev2"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

@@ -1,6 +1,6 @@
 [project]
 name = "tba-app-backend-resource-validation"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 description = "JWKS, introspection, and protected-resource validation backend application for TBA."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -17,7 +17,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 license = "Apache-2.0"
-dependencies = ["tba-auth==0.4.0.dev3", "tba-app-backend-core==0.4.0.dev3", "tba-router-oauth-introspection==0.4.0.dev3", "tba-router-oauth-protected-resource-metadata==0.4.0.dev3", "tba-router-oidc-discovery==0.4.0.dev3", "tba-router-resource-validation-metadata==0.4.0.dev3"]
+dependencies = ["tba-auth==0.4.0.dev4", "tba-app-backend-core==0.4.0.dev4", "tba-router-oauth-introspection==0.4.0.dev4", "tba-router-oauth-protected-resource-metadata==0.4.0.dev4", "tba-router-oidc-discovery==0.4.0.dev4", "tba-router-resource-validation-metadata==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

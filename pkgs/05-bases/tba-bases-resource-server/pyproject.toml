@@ -1,6 +1,6 @@
 [project]
 name = "tba-bases-resource-server"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 description = "Base classes for Tigrbl resource-server providers."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -17,7 +17,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 license = "Apache-2.0"
-dependencies = ["tba-contracts-identity==0.4.0.dev3"]
+dependencies = ["tba-contracts-identity==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

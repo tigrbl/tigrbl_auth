@@ -27,7 +27,7 @@ TBA is the Tigrbl authentication and authorization suite. Use it to serve OAuth 
 From a checkout, use [uv](https://docs.astral.sh/uv/) to inspect the baseline OAuth and OpenID Connect discovery snapshots. This runs the published TBA distribution in an isolated Python 3.12 environment and reads the snapshots in this repository.
 
 ```bash
-uv run --isolated --no-project --python 3.12 --with tba-auth==0.4.0.dev3 tba-auth discovery --format json show --repo-root .
+uv run --isolated --no-project --python 3.12 --with tba-auth==0.4.0.dev4 tba-auth discovery --format json show --repo-root .
 ```
 
 Expect a JSON object with `"command": "discovery.show"` and a `documents` object containing `openid-configuration.json`, `oauth-authorization-server.json`, and `jwks.json`. The baseline snapshots use an example issuer and an empty key set.

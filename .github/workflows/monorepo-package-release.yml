@@ -3,6 +3,15 @@ name: monorepo-package-release-trusted-sequential
 on:
   workflow_dispatch:
     inputs:
+      standards_build:
+        description: Build and validate the committed standards plan without publishing.
+        type: boolean
+        required: false
+        default: false
+      standards_artifact_run:
+        description: Successful CI build run containing the selected immutable release artifacts.
+        required: false
+        default: ""
       standards_plan:
         description: Committed standards plan; package must select exactly one prepared release.
         required: false
@@ -42,7 +51,7 @@ concurrency:
 
 jobs:
   bump-package-versions:
-    if: ${{ inputs.standards_plan == '' }}
+    if: ${{ inputs.standards_plan == '' && !inputs.standards_build }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -262,8 +271,35 @@ jobs:
           RELEASE_TAG: ${{ steps.package.outputs.tag }}
         run: gh release edit "$RELEASE_TAG" --draft=false
 
+  build-standards-artifacts:
+    if: ${{ inputs.standards_build && inputs.standards_plan != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+      - name: Validate repaired source and release protocol
+        run: |
+          uv run --no-project python scripts/verify_readme_standards.py
+          uv run --no-project python scripts/verify_package_standards.py
+          uv run --no-project --with pytest python -I -m pytest tests/unit/test_readme_standards.py tests/unit/test_package_standards.py tests/unit/test_standards_release_artifacts.py tests/unit/test_sequential_standards_release.py --confcutdir=tests/unit -c /dev/null -q
+      - name: Build and inspect all prepared artifacts without publishing
+        env:
+          STANDARDS_PLAN: ${{ inputs.standards_plan }}
+        run: |
+          export SOURCE_DATE_EPOCH=$(git show -s --format=%ct HEAD)
+          uv run --no-project python scripts/build_standards_release.py --plan "$STANDARDS_PLAN" --out standards-dist --workers 8
+          uv run --no-project --with twine twine check --strict standards-dist/*/*.whl standards-dist/*/*.tar.gz
+      - uses: actions/upload-artifact@v7
+        with:
+          name: package-standards-distributions
+          path: standards-dist
+          retention-days: 30
+
   publish-one-standards-package:
-    if: ${{ inputs.standards_plan != '' }}
+    if: ${{ inputs.standards_plan != '' && !inputs.standards_build }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     environment:
@@ -271,26 +307,29 @@ jobs:
       url: https://pypi.org/project/${{ inputs.package }}/
     permissions:
       actions: read
-      contents: read
+      contents: write
       id-token: write
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
       - uses: astral-sh/setup-uv@v6
         with:
           python-version: "3.12"
       - uses: actions/download-artifact@v8
         with:
           name: package-standards-distributions
-          run-id: 44296198410
+          run-id: ${{ inputs.standards_artifact_run }}
           github-token: ${{ github.token }}
           path: standards-dist
       - name: Inspect and stage exactly one previously validated release
         env:
           STANDARDS_PLAN: ${{ inputs.standards_plan }}
           SELECTED_PACKAGE: ${{ inputs.package }}
+          SOURCE_ARTIFACT_RUN: ${{ inputs.standards_artifact_run }}
         run: |
           uv run --no-project python scripts/verify_readme_standards.py
-          uv run --no-project python scripts/release_one_standards_package.py --plan "$STANDARDS_PLAN" --dist standards-dist --package "$SELECTED_PACKAGE" --phase prepare
+          uv run --no-project python scripts/release_one_standards_package.py --plan "$STANDARDS_PLAN" --dist standards-dist --package "$SELECTED_PACKAGE" --phase prepare --source-artifact-run "$SOURCE_ARTIFACT_RUN"
       - name: Publish the selected package with Trusted Publishing
         uses: cobycloud/actions/actions/pypi-trusted-publish@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
@@ -300,7 +339,8 @@ jobs:
         env:
           STANDARDS_PLAN: ${{ inputs.standards_plan }}
           SELECTED_PACKAGE: ${{ inputs.package }}
-        run: uv run --no-project python scripts/release_one_standards_package.py --plan "$STANDARDS_PLAN" --dist standards-dist --package "$SELECTED_PACKAGE" --phase verify
+          SOURCE_ARTIFACT_RUN: ${{ inputs.standards_artifact_run }}
+        run: uv run --no-project python scripts/release_one_standards_package.py --plan "$STANDARDS_PLAN" --dist standards-dist --package "$SELECTED_PACKAGE" --phase verify --source-artifact-run "$SOURCE_ARTIFACT_RUN"
       - uses: actions/upload-artifact@v7
         if: always()
         with:
