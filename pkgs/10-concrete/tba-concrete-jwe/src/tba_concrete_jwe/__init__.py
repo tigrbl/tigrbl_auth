@@ -43,7 +43,7 @@ def parse_jwe_compact(value: str) -> JweCompact:
     if not isinstance(value, str):
         raise TypeError("compact JWE must be text")
     parts = value.split(".")
-    if len(parts) != 5 or not parts[0] or not all(parts[index] for index in (2, 3, 4)):
+    if len(parts) != 5 or not (parts[0] and parts[2] and parts[4]):
         raise ValueError("compact JWE requires five valid segments")
     try:
         protected = json.loads(_decode(parts[0], name="protected header"))
@@ -61,7 +61,7 @@ def parse_jwe_compact(value: str) -> JweCompact:
         protected,
         _decode(parts[1], name="encrypted key", allow_empty=True),
         _decode(parts[2], name="initialization vector"),
-        _decode(parts[3], name="ciphertext"),
+        _decode(parts[3], name="ciphertext", allow_empty=True),
         _decode(parts[4], name="authentication tag"),
     )
 

@@ -74,6 +74,28 @@ from tba_provider_jose_cryptography import JweCryptographyProvider
 assert callable(JweCryptographyProvider)
 ```
 
+### Opt-in X448 JWE
+
+Inject `JweCipherPolicy` from `tba-concrete-jose` to enable compact
+`ECDH-ES` with `A256GCM`. Configure the sender with the recipient's
+`X448PublicKey` and the recipient with its `X448PrivateKey`. Both key
+maps are indexed by the protected `kid`.
+
+```python
+from cryptography.hazmat.primitives.asymmetric.x448 import X448PrivateKey
+from tba_concrete_jose import JweCipherPolicy
+from tba_provider_jose_cryptography import JweCryptographyProvider
+
+recipient = X448PrivateKey.generate()
+policy = JweCipherPolicy()
+issuer = JweCryptographyProvider(
+    cipher_policy=policy, x448_public_keys={"recipient": recipient.public_key()}
+)
+verifier = JweCryptographyProvider(
+    cipher_policy=policy, x448_private_keys={"recipient": recipient}
+)
+```
+
 ## Package Boundary
 
 `tba-provider-jose-cryptography` belongs to `20-providers` and owns replaceable environment implementations: Neutral cryptography-backed JWS and JWE provider.
@@ -86,7 +108,7 @@ Keep capability orchestration, storage table ownership, or HTTP routing in their
 
 Explicit construction inputs and collaborators for `tba-provider-jose-cryptography`:
 
-- `JweCryptographyProvider` construction inputs: `keys`. [Definition](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-jose-cryptography/src/tba_provider_jose_cryptography/jwe.py).
+- `JweCryptographyProvider` accepts `keys`, `cipher_policy`, `x448_public_keys`, and `x448_private_keys`. [Definition](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-jose-cryptography/src/tba_provider_jose_cryptography/jwe.py).
 - `JwsCryptographyProvider` construction inputs: `keys`. [Definition](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-jose-cryptography/src/tba_provider_jose_cryptography/jws.py).
 
 Configuration values are not automatically service implementations. Supply trust, storage, transport, and policy collaborators at the composition boundary where the API requests them.
@@ -124,6 +146,7 @@ Declared local runtime dependencies:
 - [tba-concrete-jwe](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-jwe/README.md)
 - [tba-concrete-jws](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/10-concrete/tba-concrete-jws/README.md)
 - [tba-contracts-protected-envelope](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/02-contracts/tba-contracts-protected-envelope/README.md)
+- [tba-contracts-security-trust](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/02-contracts/tba-contracts-security-trust/README.md)
 - [tba-primitives-identity](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/00-primitives/tba-primitives-identity/README.md)
 
 Direct downstream consumers:
@@ -155,3 +178,7 @@ Changes must pass the [README standards gate](https://github.com/tigrbl/tigrbl_a
 ## Verification
 
 A prior published-version quick start informed this example. A registry badge is not evidence that this checkout's selected version or example has been verified against PyPI. See the [public package entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/20-providers/tba-provider-jose-cryptography/src/tba_provider_jose_cryptography/__init__.py).
+
+Set `SWARMAURI_SDK_ROOT` to the Swarmauri SDK checkout containing X448
+support and run `python -m pytest tests/unit/test_x448_jwe_swarmauri_interop.py`
+from the TbA checkout to test compact JWE in both directions.

@@ -127,9 +127,11 @@ Higher-layer orchestration, lower-layer persistence, and protocol behavior outsi
 
 Declared local runtime dependencies:
 
+- [tba-bases-encryption](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/05-bases/tba-bases-encryption/README.md)
 - [tba-bases-jose](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/05-bases/tba-bases-jose/README.md)
 - [tba-contracts-identity](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/02-contracts/tba-contracts-identity/README.md)
 - [tba-contracts-security-key-rotation-policy](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/02-contracts/tba-contracts-security-key-rotation-policy/README.md)
+- [tba-contracts-security-trust](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/02-contracts/tba-contracts-security-trust/README.md)
 - [tba-primitives-identity](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/00-primitives/tba-primitives-identity/README.md)
 
 Direct downstream consumers:

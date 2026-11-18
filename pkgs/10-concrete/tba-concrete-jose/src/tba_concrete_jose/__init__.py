@@ -8,6 +8,7 @@ from .confirmation import (
     verify_proof_of_possession,
 )
 from .jwk_thumbprints import jwk_thumbprint, verify_jwk_thumbprint
+from .jwe_cipher_policy import JweCipherPolicy
 from .jwe_policy import JWEPolicy
 from .key_material import JWK_PRIVATE_PARAMETERS, materialize_public_key_record
 from .key_sets import (
@@ -35,6 +36,7 @@ __all__ = [
     "AMR_VALUES",
     "CompactJose",
     "JWEPolicy",
+    "JweCipherPolicy",
     "JWK_PRIVATE_PARAMETERS",
     "JoseKey",
     "JoseKeyRotationResult",
