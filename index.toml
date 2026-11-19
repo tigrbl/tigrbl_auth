@@ -4076,12 +4076,12 @@ deprecation_state = "dead"
 
 [[packages]]
 name = "tigrbl-identity-policy"
-path = "pkgs/deprecated/undead/tigrbl-identity-policy"
+path = "pkgs/deprecated/dead/tigrbl-identity-policy"
 layer = "deprecated"
 order = "00"
 local_dependencies = ["tba-certification-release", "tba-router-administration-gate", "tba-runtime-authorization-policy"]
 same_layer_dependencies = []
-deprecation_state = "undead"
+deprecation_state = "dead"
 
 [[packages]]
 name = "tigrbl-identity-resource-server"
