@@ -160,7 +160,9 @@ def test_preferred_taxonomy_package_metadata_is_declared() -> None:
 
 def test_deprecated_taxonomy_package_metadata_lives_under_deprecated_folder() -> None:
     for dist_name, import_root in DEPRECATED_DIST_TO_IMPORT_ROOT.items():
-        package_path = PKGS / "deprecated" / dist_name
+        package_path = next(
+            (PKGS / "deprecated").glob(f"*/{dist_name}/pyproject.toml")
+        ).parent
         pyproject = package_path / "pyproject.toml"
         metadata = tomllib.loads(pyproject.read_text(encoding="utf-8"))
 
@@ -176,7 +178,11 @@ def test_deprecated_taxonomy_roots_delegate_to_preferred_roots() -> None:
     deprecated_imports = set(COMPAT_TO_PREFERRED)
 
     for dist_name, import_root in DEPRECATED_DIST_TO_IMPORT_ROOT.items():
-        package_root = PKGS / "deprecated" / dist_name / "src" / import_root
+        package_root = (
+            next((PKGS / "deprecated").glob(f"*/{dist_name}/pyproject.toml")).parent
+            / "src"
+            / import_root
+        )
         preferred_root = COMPAT_TO_PREFERRED[import_root]
         for path in package_root.rglob("*.py"):
             text = path.read_text(encoding="utf-8")

@@ -27,7 +27,10 @@ def test_repo_wide_index_is_current_and_complete() -> None:
     indexed_paths = {item["path"] for item in index["packages"]}
     physical_paths = {
         path.parent.relative_to(ROOT).as_posix()
-        for path in (ROOT / "pkgs").glob("*/*/pyproject.toml")
+        for path in [
+            *(ROOT / "pkgs").glob("[0-9]*/*/pyproject.toml"),
+            *(ROOT / "pkgs/deprecated").glob("*/*/pyproject.toml"),
+        ]
         if "name" in tomllib.loads(path.read_text(encoding="utf-8")).get("project", {})
     }
     assert indexed_paths == physical_paths
@@ -39,7 +42,11 @@ def test_orders_are_scoped_to_layers_and_exactly_derived() -> None:
 
     for package in packages:
         dependencies = package.same_layer_dependencies
-        expected = 0 if not dependencies else 1 + max(by_name[item].order for item in dependencies)
+        expected = (
+            0
+            if not dependencies
+            else 1 + max(by_name[item].order for item in dependencies)
+        )
         assert package.order == expected
         assert all(by_name[item].layer == package.layer for item in dependencies)
         assert all(by_name[item].order < package.order for item in dependencies)

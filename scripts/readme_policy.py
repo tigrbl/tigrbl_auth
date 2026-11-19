@@ -24,7 +24,6 @@ REQUIRED_SECTIONS = (
     "Governance",
     "Verification",
 )
-COMPATIBILITY = ("tba-testkit-identity", "tba-testkit-workload-credential-conformance")
 
 
 @dataclass
@@ -63,11 +62,6 @@ def packages(root: Path) -> list[Package]:
         for pattern in ("pkgs/[0-9]*/*/pyproject.toml", "pkgs/[0-9]*/*/package.json")
         for p in root.glob(pattern)
     }
-    folders.update(
-        root / "pkgs/deprecated" / name
-        for name in COMPATIBILITY
-        if (root / "pkgs/deprecated" / name / "pyproject.toml").is_file()
-    )
     result = []
     for folder in sorted(folders):
         python = (folder / "pyproject.toml").is_file()

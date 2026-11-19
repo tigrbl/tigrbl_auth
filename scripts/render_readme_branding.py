@@ -184,14 +184,6 @@ def main() -> int:
         for manifest in ("pyproject.toml", "package.json")
         for path in packages.glob(f"[0-9]*/*/{manifest}")
     }
-    package_readmes.update(
-        ROOT / "pkgs/deprecated" / name / "README.md"
-        for name in (
-            "tba-testkit-identity",
-            "tba-testkit-workload-credential-conformance",
-        )
-        if (ROOT / "pkgs/deprecated" / name / "pyproject.toml").is_file()
-    )
     stale = []
     readmes = [ROOT / "README.md", *sorted(package_readmes)]
     for readme in readmes:

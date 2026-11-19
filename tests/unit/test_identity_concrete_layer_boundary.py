@@ -17,12 +17,14 @@ CONCRETE_ROOTS = (
     ROOT
     / "pkgs"
     / "deprecated"
+    / "never-lived"
     / "tigrbl-identity-identities-concrete"
     / "src"
     / "tigrbl_identity_identities_concrete",
     ROOT
     / "pkgs"
     / "deprecated"
+    / "never-lived"
     / "tigrbl-identity-credentials-concrete"
     / "src"
     / "tigrbl_identity_credentials_concrete",

@@ -60,12 +60,25 @@ internal dependency pins, and clean installation checks.
 
 ## Metadata release batch
 
-The 2026-11-18 release plan covers 471 Python distributions: 469 active
-distributions and the two maintained `tba-testkit-*` compatibility aliases.
+The original 2026-11-18 release artifact plan covers 471 Python distributions:
+469 active distributions and two `tba-testkit-*` compatibility aliases.
+The aliases now reside in `pkgs/deprecated/dead/`: their deprecation releases
+were already published and verified. They are excluded from remaining uploads,
+leaving 469 eligible active distributions in this metadata batch. Historical
+artifact manifests and their source paths remain immutable.
 The active implementations use their already-published `tba-tests-*` names.
 Deprecated compatibility imports and warnings remain available. Four
 workspace-only Python harnesses and 48 Node packages receive document and
 legal-file fixes without registry publication.
+
+Retired packages follow [the deprecated lifecycle policy](../../pkgs/deprecated/AGENTS.md):
+`never-lived` names are never published; `undead` names need a verified final
+deprecation and migration release; `dead` is the verified graveyard. The six
+currently undead packages need separate final-release preparation and evidence
+before moving to the graveyard. Their final releases are not part of the
+historical metadata artifact batch. `scripts/verify_deprecated_lifecycle.py`
+checks placement and evidence, and release tooling rejects never-lived and
+dead selections, including stale prepared artifacts.
 
 `scripts/build_standards_release.py` builds each planned wheel and sdist,
 inspects SPDX metadata, README fragments and actual archived legal files,

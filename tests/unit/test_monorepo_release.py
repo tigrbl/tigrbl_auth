@@ -27,7 +27,7 @@ def test_deprecated_release_requires_explicit_package_selection(monkeypatch, cap
     from argparse import Namespace
     from scripts import monorepo_release as release
 
-    name = "tba-provider-jose-swarmauri"
+    name = "tigrbl-identity-credentials"
     assert name not in {p.name for p in release.discover_packages()}
     assert release._find_package(name).path.parts[1] == "deprecated"
     monkeypatch.delenv("GITHUB_OUTPUT", raising=False)
@@ -38,7 +38,7 @@ def test_deprecated_release_requires_explicit_package_selection(monkeypatch, cap
     release.cmd_resolve_release_index(Namespace(package=name, index=cells[0]["index"]))
     resolved = json.loads(capsys.readouterr().out)
     assert resolved["name"] == name
-    assert resolved["path"] == "pkgs/deprecated/" + name
+    assert resolved["path"] == "pkgs/deprecated/undead/" + name
     release.cmd_release_matrix(Namespace(package="all"))
     all_cells = json.loads(json.loads(capsys.readouterr().out)["matrix"])
     assert len(all_cells) == len(release.discover_packages())
@@ -222,7 +222,7 @@ def test_monorepo_release_filters_package_python_test_matrix() -> None:
             "python_version": "3.12",
             "python_tag": "py312",
             "cell_id": "tba-protocol-oauth-py312",
-            "workspace_source_globs": "pkgs/*/*/src\npkgs/deprecated/*/src",
+            "workspace_source_globs": "pkgs/*/*/src\npkgs/deprecated/*/*/src",
             "package_test_paths": "tests/packages/tba-protocol-oauth\ntests/packages/tba_protocol_oauth",
             "pre_test_command": "",
             "pytest_args": "",

@@ -88,7 +88,7 @@ jobs:
           exact_version = "${{ inputs.version }}"
           bump_type = "${{ inputs.bump_type }}"
           packages = []
-          for pyproject in sorted((root / "pkgs").glob("*/*/pyproject.toml")):
+          for pyproject in sorted([*(root / "pkgs").glob("[0-9]*/*/pyproject.toml"), *(root / "pkgs/deprecated/undead").glob("*/pyproject.toml")]):
               if selected == "all" and pyproject.relative_to(root / "pkgs").parts[0] == "deprecated":
                   continue
               data = tomllib.loads(pyproject.read_text(encoding="utf-8"))

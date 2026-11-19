@@ -11,7 +11,7 @@ DEPRECATED = ROOT / "pkgs" / "deprecated"
 def _deprecated_import_roots() -> set[str]:
     return {
         child.name
-        for package in DEPRECATED.iterdir()
+        for package in DEPRECATED.glob("*/*")
         if package.is_dir()
         for source in (package / "src",)
         if source.is_dir()
@@ -46,12 +46,11 @@ def test_canonical_packages_do_not_depend_on_compatibility_import_roots() -> Non
 
 
 def test_compatibility_packages_remain_isolated_until_a_release_boundary() -> None:
-    packages = tuple(
-        sorted(path.name for path in DEPRECATED.iterdir() if path.is_dir())
-    )
-
+    packages = [p.parent for p in DEPRECATED.glob("*/*/pyproject.toml")]
     assert packages
-    assert all(
-        (DEPRECATED / package / "pyproject.toml").is_file() for package in packages
-    )
-    assert all((DEPRECATED / package / "src").is_dir() for package in packages)
+    assert {p.name for p in DEPRECATED.iterdir() if p.is_dir()} == {
+        "never-lived",
+        "undead",
+        "dead",
+    }
+    assert all((package / "src").is_dir() for package in packages)

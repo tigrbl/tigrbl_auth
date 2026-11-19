@@ -415,7 +415,7 @@ def main() -> None:
     inventory = packages(ROOT)
     by_name = {p.name: p for p in inventory}
     known_names = set(by_name) | {
-        p.parent.name for p in ROOT.glob("pkgs/deprecated/*/pyproject.toml")
+        p.parent.name for p in ROOT.glob("pkgs/deprecated/*/*/pyproject.toml")
     }
     reverse = defaultdict(list)
     for package in inventory:

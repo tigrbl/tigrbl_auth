@@ -16,7 +16,6 @@ import tomlkit
 from bump_pyproject_version import bump_version
 
 ROOT = Path(__file__).resolve().parents[1]
-COMPATIBILITY = ("tba-testkit-identity", "tba-testkit-workload-credential-conformance")
 
 
 def main() -> None:
@@ -30,11 +29,6 @@ def main() -> None:
         )
     published = {r["name"]: r for r in json.loads(args.published_versions.read_text())}
     manifests = sorted((ROOT / "pkgs").glob("[0-9]*/*/pyproject.toml"))
-    manifests.extend(
-        ROOT / "pkgs/deprecated" / n / "pyproject.toml"
-        for n in COMPATIBILITY
-        if (ROOT / "pkgs/deprecated" / n / "pyproject.toml").exists()
-    )
     documents = {p: tomlkit.parse(p.read_text(encoding="utf-8")) for p in manifests}
     rows = []
     for path, data in documents.items():
@@ -60,7 +54,7 @@ def main() -> None:
                 version=target,
                 path=path.parent.relative_to(ROOT).as_posix(),
                 import_root=roots[0],
-                compatibility_alias=name in COMPATIBILITY,
+                compatibility_alias=False,
             )
         )
         project["version"] = target
@@ -101,7 +95,6 @@ def main() -> None:
     for readme in [
         ROOT / "README.md",
         *ROOT.glob("pkgs/[0-9]*/*/README.md"),
-        *(ROOT / "pkgs/deprecated" / n / "README.md" for n in COMPATIBILITY),
     ]:
         if not readme.is_file():
             continue

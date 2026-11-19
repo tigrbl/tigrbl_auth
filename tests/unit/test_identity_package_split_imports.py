@@ -170,7 +170,7 @@ def _install_package_src_paths() -> None:
 
 def _package_path(dist_name: str) -> Path:
     if dist_name in DEPRECATED_DIST_NAMES:
-        return PKGS / "deprecated" / dist_name
+        return next((PKGS / "deprecated").glob(f"*/{dist_name}/pyproject.toml")).parent
     matches = sorted(PKGS.glob(f"**/{dist_name}/pyproject.toml"))
     assert matches, dist_name
     return matches[0].parent
@@ -182,8 +182,12 @@ def test_identity_split_uses_independent_import_roots() -> None:
 
     _install_package_src_paths()
 
-    legacy_roots = {path.name for path in (PKGS / "deprecated").glob("*/src/*") if path.is_dir()}
-    legacy_roots.update("tba" + name[6:] for name in tuple(legacy_roots) if name.startswith("tigrbl_"))
+    legacy_roots = {
+        path.name for path in (PKGS / "deprecated").glob("*/*/src/*") if path.is_dir()
+    }
+    legacy_roots.update(
+        "tba" + name[6:] for name in tuple(legacy_roots) if name.startswith("tigrbl_")
+    )
     for package_root in PACKAGE_ROOTS:
         if package_root in legacy_roots:
             continue
@@ -305,9 +309,7 @@ def test_runtime_token_service_uses_provider_jwt_coder() -> None:
 def test_credentials_facade_does_not_own_token_or_session_service_modules() -> None:
     _install_package_src_paths()
 
-    credentials_root = (
-        _package_path("tba-credentials") / "src" / "tba_credentials"
-    )
+    credentials_root = _package_path("tba-credentials") / "src" / "tba_credentials"
 
     assert not (credentials_root / "token_service.py").exists()
     assert not (credentials_root / "session_service.py").exists()
@@ -367,9 +369,7 @@ def test_jose_token_paths_require_injected_async_revocation_hooks() -> None:
 def test_oauth_revocation_exports_protocol_service_only() -> None:
     _install_package_src_paths()
 
-    split_module = importlib.import_module(
-        "tba_protocol_oauth.standards.revocation"
-    )
+    split_module = importlib.import_module("tba_protocol_oauth.standards.revocation")
     runtime_source = (
         _package_path("tba-provider-identity-jose")
         / "src"
@@ -388,9 +388,7 @@ def test_oauth_revocation_exports_protocol_service_only() -> None:
 def test_oauth_introspection_exports_protocol_service_only() -> None:
     _install_package_src_paths()
 
-    split_module = importlib.import_module(
-        "tba_protocol_oauth.standards.introspection"
-    )
+    split_module = importlib.import_module("tba_protocol_oauth.standards.introspection")
     runtime_source = (
         _package_path("tba-provider-identity-jose")
         / "src"

@@ -158,8 +158,12 @@ def test_admin_capability_models_are_contract_reexports() -> None:
     import tba_contracts_identity as user_contracts
     import tigrbl_identity_credentials_concrete as credential_concrete
     import tigrbl_identity_identities_concrete as identity_concrete
-    from tba_runtime_identity_administration._advanced_identity_plane import models as advanced_models
-    from tba_runtime_identity_administration._control_plane import models as legacy_admin_models
+    from tba_runtime_identity_administration._advanced_identity_plane import (
+        models as advanced_models,
+    )
+    from tba_runtime_identity_administration._control_plane import (
+        models as legacy_admin_models,
+    )
     from tba_runtime_identity_administration_control_plane import models as admin_models
 
     assert admin_models.AdminResource is management_contracts.AdminResource
@@ -211,6 +215,7 @@ def test_advanced_identity_contracts_are_domain_packaged() -> None:
         ROOT
         / "pkgs"
         / "deprecated"
+        / "never-lived"
         / "tigrbl-identity-identities-concrete"
         / "src"
         / "tigrbl_identity_identities_concrete"
@@ -219,6 +224,7 @@ def test_advanced_identity_contracts_are_domain_packaged() -> None:
         ROOT
         / "pkgs"
         / "deprecated"
+        / "never-lived"
         / "tigrbl-identity-credentials-concrete"
         / "src"
         / "tigrbl_identity_credentials_concrete"
@@ -514,12 +520,7 @@ def test_target_capability_packages_no_longer_own_contract_classes() -> None:
         / "tba-runtime-identity-administration"
         / "src"
         / "tba_runtime_identity_administration",
-        ROOT
-        / "pkgs"
-        / "70-facade"
-        / "tba-credentials"
-        / "src"
-        / "tba_credentials",
+        ROOT / "pkgs" / "70-facade" / "tba-credentials" / "src" / "tba_credentials",
         ROOT
         / "pkgs"
         / "20-providers"

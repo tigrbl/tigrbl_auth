@@ -16,8 +16,15 @@ try:
 except ModuleNotFoundError:  # pragma: no cover - exercised by Python 3.10 CI
     import tomli as tomllib  # type: ignore[no-redef]
 
+if __package__:
+    from .deprecated_lifecycle import inventory, ensure_release_allowed
+else:
+    from deprecated_lifecycle import inventory, ensure_release_allowed
+
 ROOT = Path(__file__).resolve().parents[1]
-TAG_RE = re.compile(r"^(?P<name>[A-Za-z0-9_.-]+)==(?P<version>\d+\.\d+\.\d+(?:\.dev\d+)?(?:[-+][A-Za-z0-9_.-]+)?)$")
+TAG_RE = re.compile(
+    r"^(?P<name>[A-Za-z0-9_.-]+)==(?P<version>\d+\.\d+\.\d+(?:\.dev\d+)?(?:[-+][A-Za-z0-9_.-]+)?)$"
+)
 REQ_NAME_RE = re.compile(r"^\s*([A-Za-z0-9_.-]+)")
 SUPPORTED_PYTHON_VERSIONS = ("3.10", "3.11", "3.12", "3.13", "3.14")
 TESTKIT_PACKAGE_NAME = "tba-tests-identity"
@@ -63,8 +70,20 @@ def _package_import_root(package_path: Path, name: str) -> str:
 @cache
 def _discover_packages(*, include_deprecated: bool) -> tuple[Package, ...]:
     packages: list[Package] = []
-    for pyproject in sorted((ROOT / "pkgs").glob("*/*/pyproject.toml")):
-        if not include_deprecated and pyproject.relative_to(ROOT / "pkgs").parts[0] == "deprecated":
+    for pyproject in sorted(
+        [
+            *(ROOT / "pkgs").glob("[0-9]*/*/pyproject.toml"),
+            *(
+                (ROOT / "pkgs/deprecated/undead").glob("*/pyproject.toml")
+                if include_deprecated
+                else []
+            ),
+        ]
+    ):
+        if (
+            not include_deprecated
+            and pyproject.relative_to(ROOT / "pkgs").parts[0] == "deprecated"
+        ):
             continue
         data = _load_pyproject(pyproject)
         if data.get("tool", {}).get("uv", {}).get("package") is False:
@@ -73,7 +92,9 @@ def _discover_packages(*, include_deprecated: bool) -> tuple[Package, ...]:
         name = str(project.get("name") or "").strip()
         version = str(project.get("version") or "").strip()
         if not name or not version:
-            raise SystemExit(f"missing project.name or project.version in {pyproject.relative_to(ROOT)}")
+            raise SystemExit(
+                f"missing project.name or project.version in {pyproject.relative_to(ROOT)}"
+            )
         package_path = pyproject.parent.relative_to(ROOT)
         packages.append(
             Package(
@@ -91,7 +112,17 @@ def discover_packages(*, include_deprecated: bool = False) -> list[Package]:
 
 
 def _find_package(name: str) -> Package:
-    matches = [item for item in discover_packages(include_deprecated=True) if item.name == name]
+    ledger = ROOT / "pkgs/deprecated/lifecycle.json"
+    if ledger.exists():
+        for row in inventory(ROOT):
+            if row["name"] == name:
+                try:
+                    ensure_release_allowed(row["path"], ROOT)
+                except ValueError as error:
+                    raise SystemExit(str(error)) from error
+    matches = [
+        item for item in discover_packages(include_deprecated=True) if item.name == name
+    ]
     if not matches:
         known = ", ".join(item.name for item in discover_packages())
         raise SystemExit(f"unknown package {name!r}; known packages: {known}")
@@ -119,6 +150,8 @@ def cmd_matrix(args: argparse.Namespace) -> int:
 
 
 def cmd_release_matrix(args: argparse.Namespace) -> int:
+    if args.package != "all":
+        _find_package(args.package)
     packages = discover_packages(include_deprecated=args.package != "all")
     if args.package != "all" and not any(p.name == args.package for p in packages):
         raise SystemExit(f"unknown package {args.package!r}")
@@ -130,7 +163,9 @@ def cmd_release_matrix(args: argparse.Namespace) -> int:
         if (args.package == "all" or package.name == args.package)
         and _supported_package_python_versions(package, ["3.12"])
     ]
-    _write_github_output({"matrix": json.dumps(cells, separators=(",", ":")), "count": str(len(cells))})
+    _write_github_output(
+        {"matrix": json.dumps(cells, separators=(",", ":")), "count": str(len(cells))}
+    )
     return 0
 
 
@@ -175,7 +210,9 @@ def _run(args: list[str]) -> None:
 
 
 def _run_capture(args: list[str], cwd: Path | None = None) -> str:
-    result = subprocess.run(args, cwd=cwd or ROOT, check=True, text=True, stdout=subprocess.PIPE)
+    result = subprocess.run(
+        args, cwd=cwd or ROOT, check=True, text=True, stdout=subprocess.PIPE
+    )
     return result.stdout.strip()
 
 
@@ -241,19 +278,27 @@ def _declared_dependency_requirements(package: Package) -> list[str]:
     return requirements
 
 
-def _supported_package_python_versions(package: Package, versions: list[str]) -> list[str]:
+def _supported_package_python_versions(
+    package: Package, versions: list[str]
+) -> list[str]:
     requirements = _declared_dependency_requirements(package)
     compatible: list[str] = []
     for version in versions:
         python_minor = _python_minor(version)
-        if package.name == TESTKIT_PACKAGE_NAME and python_minor >= SWARMAURI_PYTHON_CEILING:
+        if (
+            package.name == TESTKIT_PACKAGE_NAME
+            and python_minor >= SWARMAURI_PYTHON_CEILING
+        ):
             continue
         blocked = False
         for requirement in requirements:
             dep_name = _dependency_name(requirement)
             if dep_name is None:
                 continue
-            if dep_name.startswith("swarmauri-") and python_minor >= SWARMAURI_PYTHON_CEILING:
+            if (
+                dep_name.startswith("swarmauri-")
+                and python_minor >= SWARMAURI_PYTHON_CEILING
+            ):
                 blocked = True
                 break
             if dep_name == "tigrbl" and python_minor >= TIGRBL_PYTHON_CEILING:
@@ -265,7 +310,9 @@ def _supported_package_python_versions(package: Package, versions: list[str]) ->
 
 
 def cmd_create_tags(args: argparse.Namespace) -> int:
-    packages = discover_packages() if args.package == "all" else [_find_package(args.package)]
+    packages = (
+        discover_packages() if args.package == "all" else [_find_package(args.package)]
+    )
     created: list[str] = []
     for package in packages:
         version = args.version or package.version
@@ -274,13 +321,16 @@ def cmd_create_tags(args: argparse.Namespace) -> int:
                 f"requested version {version!r} does not match {package.name} pyproject version {package.version!r}"
             )
         tag = f"{package.name}=={version}"
-        exists = subprocess.run(
-            ["git", "rev-parse", "-q", "--verify", f"refs/tags/{tag}"],
-            cwd=ROOT,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-            check=False,
-        ).returncode == 0
+        exists = (
+            subprocess.run(
+                ["git", "rev-parse", "-q", "--verify", f"refs/tags/{tag}"],
+                cwd=ROOT,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                check=False,
+            ).returncode
+            == 0
+        )
         if exists and not args.force:
             print(f"tag exists, skipping: {tag}")
             continue
@@ -295,7 +345,9 @@ def cmd_create_tags(args: argparse.Namespace) -> int:
 
 
 def cmd_test_matrix(args: argparse.Namespace) -> int:
-    packages = discover_packages() if args.package == "all" else [_find_package(args.package)]
+    packages = (
+        discover_packages() if args.package == "all" else [_find_package(args.package)]
+    )
     versions = args.python_version or list(SUPPORTED_PYTHON_VERSIONS)
     unknown = sorted(set(versions) - set(SUPPORTED_PYTHON_VERSIONS))
     if unknown:
@@ -313,7 +365,9 @@ def cmd_test_matrix(args: argparse.Namespace) -> int:
             cross_cutting = package.name == TESTKIT_PACKAGE_NAME
             if cross_cutting:
                 package_test_paths.append("tests/interop")
-                pre_test_command = '$VENV_PYTHON -m pip install -e ".[test,sqlite,postgres,servers]"'
+                pre_test_command = (
+                    '$VENV_PYTHON -m pip install -e ".[test,sqlite,postgres,servers]"'
+                )
                 pytest_args = "--certification-lane\nall"
             cell = package.as_cell()
             cell.update(
@@ -321,7 +375,7 @@ def cmd_test_matrix(args: argparse.Namespace) -> int:
                     "python_version": version,
                     "python_tag": _python_tag(version),
                     "cell_id": f"{package.name}-{_python_tag(version)}",
-                    "workspace_source_globs": "pkgs/*/*/src\npkgs/deprecated/*/src",
+                    "workspace_source_globs": "pkgs/*/*/src\npkgs/deprecated/*/*/src",
                     "package_test_paths": "\n".join(package_test_paths),
                     "pre_test_command": pre_test_command,
                     "pytest_args": pytest_args,
@@ -347,7 +401,11 @@ def _find_built_wheel(package: Package, dist_dir: Path) -> Path:
     if not wheels:
         raise SystemExit(f"no wheel found for {package.name} in {dist_dir}")
     normalized = package.name.replace("-", "_")
-    matching = [wheel for wheel in wheels if wheel.name.startswith(f"{normalized}-{package.version}-")]
+    matching = [
+        wheel
+        for wheel in wheels
+        if wheel.name.startswith(f"{normalized}-{package.version}-")
+    ]
     if matching:
         return matching[0]
     return wheels[0]
@@ -457,7 +515,9 @@ def cmd_isolated_test(args: argparse.Namespace) -> int:
 
     dist_dir = (ROOT / args.dist_dir).resolve()
     wheel = _find_built_wheel(package, dist_dir)
-    work_dir = (ROOT / args.work_dir / package.name / _python_tag(args.python_version)).resolve()
+    work_dir = (
+        ROOT / args.work_dir / package.name / _python_tag(args.python_version)
+    ).resolve()
     work_dir.mkdir(parents=True, exist_ok=True)
     venv = work_dir / ".venv"
     if venv.exists():
@@ -497,7 +557,14 @@ assert version == expected_version, version
 print(json.dumps({"package": dist_name, "import_root": import_root, "version": version}))
 """
     output = _run_capture(
-        [str(python), "-c", check_code, package.name, package.import_root, package.version],
+        [
+            str(python),
+            "-c",
+            check_code,
+            package.name,
+            package.import_root,
+            package.version,
+        ],
         cwd=work_dir,
     )
     print(output)
@@ -589,19 +656,25 @@ def build_parser() -> argparse.ArgumentParser:
 
     tags = subparsers.add_parser("create-tags")
     tags.add_argument("--package", default="all", help="Package name or 'all'.")
-    tags.add_argument("--version", default="", help="Optional explicit version; must match pyproject.")
+    tags.add_argument(
+        "--version", default="", help="Optional explicit version; must match pyproject."
+    )
     tags.add_argument("--force", action="store_true", help="Replace existing tags.")
     tags.set_defaults(func=cmd_create_tags)
 
     test_matrix = subparsers.add_parser("test-matrix")
     test_matrix.add_argument("--package", default="all", help="Package name or 'all'.")
-    test_matrix.add_argument("--python-version", action="append", choices=SUPPORTED_PYTHON_VERSIONS)
+    test_matrix.add_argument(
+        "--python-version", action="append", choices=SUPPORTED_PYTHON_VERSIONS
+    )
     test_matrix.add_argument("--print", action="store_true")
     test_matrix.set_defaults(func=cmd_test_matrix)
 
     isolated = subparsers.add_parser("isolated-test")
     isolated.add_argument("--package", required=True)
-    isolated.add_argument("--python-version", required=True, choices=SUPPORTED_PYTHON_VERSIONS)
+    isolated.add_argument(
+        "--python-version", required=True, choices=SUPPORTED_PYTHON_VERSIONS
+    )
     isolated.add_argument("--dist-dir", required=True)
     isolated.add_argument("--work-dir", default=".tmp/package-isolation")
     isolated.set_defaults(func=cmd_isolated_test)

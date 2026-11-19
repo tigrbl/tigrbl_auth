@@ -33,7 +33,9 @@ from tba_runtime_authorization_policy import (
     PolicyRequest,
     RolePolicy,
 )
-from tba_provider_authorization_policy_decision_engine import PolicyDecisionEngine as CanonicalPolicyDecisionEngine
+from tba_provider_authorization_policy_decision_engine import (
+    PolicyDecisionEngine as CanonicalPolicyDecisionEngine,
+)
 
 
 PUBLIC_JWK = {
@@ -108,7 +110,9 @@ def test_jose_t1_vectors_rotation_and_tenant_jwks_publication() -> None:
 def test_policy_t1_rbac_abac_pbac_delegation_admin_and_trace() -> None:
     engine = PolicyDecisionEngine(
         roles=[
-            RolePolicy(role="tenant-admin", tenant_id="tenant-a", permissions=("tenant.*",)),
+            RolePolicy(
+                role="tenant-admin", tenant_id="tenant-a", permissions=("tenant.*",)
+            ),
         ],
         attributes=[
             AttributePolicy(
@@ -156,7 +160,13 @@ def test_policy_t1_rbac_abac_pbac_delegation_admin_and_trace() -> None:
 
     assert decision.allowed is True
     assert decision.trace_id == "poltrace:1"
-    assert engine.traces[0].matched == ("abac:same-region", "pbac:tenant-update", "tenant-admin", "user:delegate", "user:owner")
+    assert engine.traces[0].matched == (
+        "abac:same-region",
+        "pbac:tenant-update",
+        "tenant-admin",
+        "user:delegate",
+        "user:owner",
+    )
     assert engine.traces[0].evaluated_kinds == (
         PolicyKind.DELEGATION,
         PolicyKind.ADMIN,
@@ -169,7 +179,11 @@ def test_policy_t1_rbac_abac_pbac_delegation_admin_and_trace() -> None:
 @pytest.mark.unit
 def test_policy_t2_denies_out_of_scope_delegation_and_admin() -> None:
     engine = PolicyDecisionEngine(
-        roles=[RolePolicy(role="tenant-admin", tenant_id="tenant-a", permissions=("tenant.*",))],
+        roles=[
+            RolePolicy(
+                role="tenant-admin", tenant_id="tenant-a", permissions=("tenant.*",)
+            )
+        ],
         delegations=[
             DelegationPolicy(
                 delegate="user:delegate",
@@ -178,7 +192,13 @@ def test_policy_t2_denies_out_of_scope_delegation_and_admin() -> None:
                 actions=("tenant.update",),
             )
         ],
-        admins=[AdminPolicy(subject="user:delegate", tenant_ids=("tenant-a",), actions=("tenant.update",))],
+        admins=[
+            AdminPolicy(
+                subject="user:delegate",
+                tenant_ids=("tenant-a",),
+                actions=("tenant.update",),
+            )
+        ],
     )
 
     delegated = engine.evaluate(
@@ -212,20 +232,37 @@ def test_policy_t2_denies_out_of_scope_delegation_and_admin() -> None:
 def test_jose_policy_t2_public_boundary_has_no_forbidden_imports() -> None:
     root = Path("pkgs")
     files = [
-        root / "20-providers/tba-provider-identity-jose/src/tba_provider_identity_jose/__init__.py",
-        root / "20-providers/tba-provider-identity-jose/src/tba_provider_identity_jose/boundary.py",
-        root / "30-storage-runtime/tba-durability-authorization-policy-authority-derivation-graph/src/tba_durability_authorization_policy_authority_derivation_graph/__init__.py",
-        root / "20-providers/tba-provider-authorization-policy-decision-engine/src/tba_provider_authorization_policy_decision_engine/__init__.py",
-        root / "deprecated/tigrbl-authz-policy-invariant-registry/src/tba_runtime_authorization_policy_invariant_registry/__init__.py",
-        root / "60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/abac.py",
-        root / "60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/delegated_admin.py",
-        root / "60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/__init__.py",
-        root / "60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/decisions.py",
-        root / "60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/policy_engine.py",
-        root / "60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/rbac.py",
-        root / "60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/service_identity_registry.py",
+        root
+        / "20-providers/tba-provider-identity-jose/src/tba_provider_identity_jose/__init__.py",
+        root
+        / "20-providers/tba-provider-identity-jose/src/tba_provider_identity_jose/boundary.py",
+        root
+        / "30-storage-runtime/tba-durability-authorization-policy-authority-derivation-graph/src/tba_durability_authorization_policy_authority_derivation_graph/__init__.py",
+        root
+        / "20-providers/tba-provider-authorization-policy-decision-engine/src/tba_provider_authorization_policy_decision_engine/__init__.py",
+        root
+        / "deprecated/never-lived/tigrbl-authz-policy-invariant-registry/src/tba_runtime_authorization_policy_invariant_registry/__init__.py",
+        root
+        / "60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/abac.py",
+        root
+        / "60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/delegated_admin.py",
+        root
+        / "60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/__init__.py",
+        root
+        / "60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/decisions.py",
+        root
+        / "60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/policy_engine.py",
+        root
+        / "60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/rbac.py",
+        root
+        / "60-runtime/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/service_identity_registry.py",
     ]
-    forbidden = {"tba_auth", "tba_protocol_oauth", "tba_protocol_oidc", "tba_server_identity"}
+    forbidden = {
+        "tba_auth",
+        "tba_protocol_oauth",
+        "tba_protocol_oidc",
+        "tba_server_identity",
+    }
 
     imports: set[str] = set()
     for file in files:

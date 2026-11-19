@@ -41,11 +41,21 @@ for _layer, _folder in PYTHON_LAYER_FOLDERS.items():
     _root = PKGS / _folder
     PYTHON_PACKAGE_LAYERS[_layer] = {
         child.name
-        for child in _root.iterdir()
+        for child in (
+            [p.parent for p in _root.glob("*/*/pyproject.toml")]
+            if _layer == "deprecated"
+            else _root.iterdir()
+        )
         if child.is_dir() and (child / "pyproject.toml").is_file()
     }
 
-FRONTEND_LAYER_FOLDERS = {"75-clients", "100-uix-core", "104-authenticator-uis", "105-ui", "106-ui"}
+FRONTEND_LAYER_FOLDERS = {
+    "75-clients",
+    "100-uix-core",
+    "104-authenticator-uis",
+    "105-ui",
+    "106-ui",
+}
 
 REQUIRED_PROTOCOL_MODULES = {
     "bindings.py",
@@ -175,7 +185,9 @@ def test_protocol_packages_own_complete_versioned_specification_surfaces() -> No
     violations: list[str] = []
     protocol_root = PKGS / PYTHON_LAYER_FOLDERS["protocols"]
 
-    for package_dir in sorted(path for path in protocol_root.iterdir() if path.is_dir()):
+    for package_dir in sorted(
+        path for path in protocol_root.iterdir() if path.is_dir()
+    ):
         package_roots = sorted(
             path
             for path in (package_dir / "src").iterdir()
@@ -230,7 +242,11 @@ def test_layer_children_are_packages_or_declared_frontend_workspaces() -> None:
     offenders: list[str] = []
 
     for layer_dir in sorted(path for path in PKGS.iterdir() if path.is_dir()):
-        for child in sorted(path for path in layer_dir.iterdir() if path.is_dir()):
+        children = [path for path in layer_dir.iterdir() if path.is_dir()]
+        if layer_dir.name == "deprecated":
+            assert {p.name for p in children} == {"never-lived", "undead", "dead"}
+            children = [p.parent for p in layer_dir.glob("*/*/pyproject.toml")]
+        for child in sorted(children):
             if (child / "pyproject.toml").is_file():
                 continue
             if child.resolve() in frontend_workspaces:

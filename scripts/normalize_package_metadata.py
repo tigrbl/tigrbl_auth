@@ -12,10 +12,6 @@ import tomlkit
 
 ROOT = Path(__file__).resolve().parents[1]
 REPOSITORY = "https://github.com/tigrbl/tigrbl_auth"
-MAINTAINED_COMPATIBILITY = (
-    "tba-testkit-identity",
-    "tba-testkit-workload-credential-conformance",
-)
 NOTICE = """Tigrbl Auth (TBA)
 
 Project: https://github.com/tigrbl/tigrbl_auth
@@ -92,11 +88,6 @@ def main() -> None:
     normalize_python(ROOT / "pyproject.toml", authors)
     package_roots = set()
     manifests = sorted((ROOT / "pkgs").glob("[0-9]*/*/pyproject.toml"))
-    manifests.extend(
-        ROOT / "pkgs/deprecated" / name / "pyproject.toml"
-        for name in MAINTAINED_COMPATIBILITY
-        if (ROOT / "pkgs/deprecated" / name / "pyproject.toml").is_file()
-    )
     for manifest in manifests:
         normalize_python(manifest, authors)
         package_roots.add(manifest.parent)
@@ -152,24 +143,6 @@ def main() -> None:
                 for line in lines
             ]
             notice.write_text("\n".join(lines) + "\n", encoding="utf-8")
-        if name in MAINTAINED_COMPATIBILITY:
-            readme = folder / "README.md"
-            text = readme.read_text(encoding="utf-8")
-            if "<!-- BEGIN TBA README HEADER -->" not in text:
-                title, rest = text.split("\n", 1)
-                text = (
-                    title
-                    + "\n\n<!-- BEGIN TBA README HEADER -->\n<!-- END TBA README HEADER -->\n"
-                    + rest
-                )
-            if "## Quick start" not in text:
-                version = tomlkit.parse(
-                    (folder / "pyproject.toml").read_text(encoding="utf-8")
-                )["project"]["version"]
-                text += f'\n## Quick start\n\n```bash\nuv pip install "{name}=={version}"\n```\n'
-            if "## Verification" not in text:
-                text += "\n## Verification\n\nPackage metadata, legal files, and README fragments are checked with\n`uv run python scripts/verify_package_standards.py`. Compatibility imports\nand deprecation warnings retain the already-published migration behavior.\n"
-            readme.write_text(text, encoding="utf-8")
     print(
         f"Normalized metadata and legal files for {len(package_roots)} active packages"
     )

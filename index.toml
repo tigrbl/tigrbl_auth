@@ -1939,14 +1939,6 @@ local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
-name = "tba-tests-workload-credential-conformance"
-path = "pkgs/120-tests/tba-tests-workload-credential-conformance"
-layer = "120-tests"
-order = "00"
-local_dependencies = []
-same_layer_dependencies = []
-
-[[packages]]
 name = "tba-tests-interop-wimse-matrix"
 path = "pkgs/120-tests/tba-tests-interop-wimse-matrix"
 layer = "120-tests"
@@ -1973,6 +1965,14 @@ same_layer_dependencies = []
 [[packages]]
 name = "tba-tests-workload-composition"
 path = "pkgs/120-tests/tba-tests-workload-composition"
+layer = "120-tests"
+order = "00"
+local_dependencies = []
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-tests-workload-credential-conformance"
+path = "pkgs/120-tests/tba-tests-workload-credential-conformance"
 layer = "120-tests"
 order = "00"
 local_dependencies = []
@@ -3788,392 +3788,459 @@ same_layer_dependencies = ["tba-app-backend-core"]
 
 [[packages]]
 name = "tba-bases-identity-authenticator"
-path = "pkgs/deprecated/tba-bases-identity-authenticator"
+path = "pkgs/deprecated/dead/tba-bases-identity-authenticator"
 layer = "deprecated"
 order = "00"
 local_dependencies = ["tba-bases-authenticator"]
 same_layer_dependencies = []
+deprecation_state = "dead"
 
 [[packages]]
 name = "tba-bases-identity-claims"
-path = "pkgs/deprecated/tba-bases-identity-claims"
+path = "pkgs/deprecated/dead/tba-bases-identity-claims"
 layer = "deprecated"
 order = "00"
 local_dependencies = ["tba-bases-claim"]
 same_layer_dependencies = []
+deprecation_state = "dead"
 
 [[packages]]
 name = "tba-bases-public-key-authenticator"
-path = "pkgs/deprecated/tba-bases-public-key-authenticator"
+path = "pkgs/deprecated/dead/tba-bases-public-key-authenticator"
 layer = "deprecated"
 order = "00"
 local_dependencies = ["tba-bases-public-key-authentication"]
 same_layer_dependencies = []
+deprecation_state = "dead"
 
 [[packages]]
 name = "tba-bases-security-artifact"
-path = "pkgs/deprecated/tba-bases-security-artifact"
+path = "pkgs/deprecated/dead/tba-bases-security-artifact"
 layer = "deprecated"
 order = "00"
 local_dependencies = ["tba-bases-protected-artifact"]
 same_layer_dependencies = []
+deprecation_state = "dead"
 
 [[packages]]
 name = "tba-provider-jose-swarmauri"
-path = "pkgs/deprecated/tba-provider-jose-swarmauri"
+path = "pkgs/deprecated/dead/tba-provider-jose-swarmauri"
 layer = "deprecated"
 order = "00"
 local_dependencies = ["tba-provider-identity-jose"]
 same_layer_dependencies = []
+deprecation_state = "dead"
 
 [[packages]]
 name = "tba-provider-security-cose"
-path = "pkgs/deprecated/tba-provider-security-cose"
+path = "pkgs/deprecated/never-lived/tba-provider-security-cose"
 layer = "deprecated"
 order = "00"
 local_dependencies = ["tba-concrete-cose", "tba-provider-cose-cryptography"]
 same_layer_dependencies = []
+deprecation_state = "never-lived"
+
+[[packages]]
+name = "tba-testkit-identity"
+path = "pkgs/deprecated/dead/tba-testkit-identity"
+layer = "deprecated"
+order = "00"
+local_dependencies = []
+same_layer_dependencies = []
+deprecation_state = "dead"
+
+[[packages]]
+name = "tba-testkit-workload-credential-conformance"
+path = "pkgs/deprecated/dead/tba-testkit-workload-credential-conformance"
+layer = "deprecated"
+order = "00"
+local_dependencies = []
+same_layer_dependencies = []
+deprecation_state = "dead"
 
 [[packages]]
 name = "tigrbl-account-self-service"
-path = "pkgs/deprecated/tigrbl-account-self-service"
+path = "pkgs/deprecated/never-lived/tigrbl-account-self-service"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-attestation-appraisal"
-path = "pkgs/deprecated/tigrbl-attestation-appraisal"
+path = "pkgs/deprecated/never-lived/tigrbl-attestation-appraisal"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-auth-protocol-oidc-backchannel-replay-store"
-path = "pkgs/deprecated/tigrbl-auth-protocol-oidc-backchannel-replay-store"
+path = "pkgs/deprecated/never-lived/tigrbl-auth-protocol-oidc-backchannel-replay-store"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-authenticator-webauthn-local"
-path = "pkgs/deprecated/tigrbl-authenticator-webauthn-local"
+path = "pkgs/deprecated/never-lived/tigrbl-authenticator-webauthn-local"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-authn-credentials"
-path = "pkgs/deprecated/tigrbl-authn-credentials"
+path = "pkgs/deprecated/never-lived/tigrbl-authn-credentials"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-authz-policy-admin-gate"
-path = "pkgs/deprecated/tigrbl-authz-policy-admin-gate"
+path = "pkgs/deprecated/never-lived/tigrbl-authz-policy-admin-gate"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-authz-policy-invariant-registry"
-path = "pkgs/deprecated/tigrbl-authz-policy-invariant-registry"
+path = "pkgs/deprecated/never-lived/tigrbl-authz-policy-invariant-registry"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-claim-access-token-hash-oidc-concrete"
-path = "pkgs/deprecated/tigrbl-claim-access-token-hash-oidc-concrete"
+path = "pkgs/deprecated/never-lived/tigrbl-claim-access-token-hash-oidc-concrete"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-corim-store-provider"
-path = "pkgs/deprecated/tigrbl-corim-store-provider"
+path = "pkgs/deprecated/never-lived/tigrbl-corim-store-provider"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-digital-credential-issuance"
-path = "pkgs/deprecated/tigrbl-digital-credential-issuance"
+path = "pkgs/deprecated/never-lived/tigrbl-digital-credential-issuance"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-digital-credential-issuer-local"
-path = "pkgs/deprecated/tigrbl-digital-credential-issuer-local"
+path = "pkgs/deprecated/never-lived/tigrbl-digital-credential-issuer-local"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-digital-credential-presentation"
-path = "pkgs/deprecated/tigrbl-digital-credential-presentation"
+path = "pkgs/deprecated/never-lived/tigrbl-digital-credential-presentation"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-digital-presentation-verifier"
-path = "pkgs/deprecated/tigrbl-digital-presentation-verifier"
+path = "pkgs/deprecated/never-lived/tigrbl-digital-presentation-verifier"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-eap-acr-concrete"
-path = "pkgs/deprecated/tigrbl-eap-acr-concrete"
+path = "pkgs/deprecated/never-lived/tigrbl-eap-acr-concrete"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-grant-negotiation-capability"
-path = "pkgs/deprecated/tigrbl-grant-negotiation-capability"
+path = "pkgs/deprecated/never-lived/tigrbl-grant-negotiation-capability"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-identity-admin-advanced-authenticator-registry"
-path = "pkgs/deprecated/tigrbl-identity-admin-advanced-authenticator-registry"
+path = "pkgs/deprecated/never-lived/tigrbl-identity-admin-advanced-authenticator-registry"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-identity-admin-control-plane"
-path = "pkgs/deprecated/tigrbl-identity-admin-control-plane"
+path = "pkgs/deprecated/never-lived/tigrbl-identity-admin-control-plane"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-identity-admin-federation-registry"
-path = "pkgs/deprecated/tigrbl-identity-admin-federation-registry"
+path = "pkgs/deprecated/never-lived/tigrbl-identity-admin-federation-registry"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-identity-admin-policy-registry"
-path = "pkgs/deprecated/tigrbl-identity-admin-policy-registry"
+path = "pkgs/deprecated/never-lived/tigrbl-identity-admin-policy-registry"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-identity-credentials"
-path = "pkgs/deprecated/tigrbl-identity-credentials"
+path = "pkgs/deprecated/undead/tigrbl-identity-credentials"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "undead"
 
 [[packages]]
 name = "tigrbl-identity-credentials-concrete"
-path = "pkgs/deprecated/tigrbl-identity-credentials-concrete"
+path = "pkgs/deprecated/never-lived/tigrbl-identity-credentials-concrete"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-identity-identities-concrete"
-path = "pkgs/deprecated/tigrbl-identity-identities-concrete"
+path = "pkgs/deprecated/never-lived/tigrbl-identity-identities-concrete"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-identity-oauth"
-path = "pkgs/deprecated/tigrbl-identity-oauth"
+path = "pkgs/deprecated/undead/tigrbl-identity-oauth"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "undead"
 
 [[packages]]
 name = "tigrbl-identity-oidc"
-path = "pkgs/deprecated/tigrbl-identity-oidc"
+path = "pkgs/deprecated/undead/tigrbl-identity-oidc"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "undead"
 
 [[packages]]
 name = "tigrbl-identity-resource-server"
-path = "pkgs/deprecated/tigrbl-identity-resource-server"
+path = "pkgs/deprecated/undead/tigrbl-identity-resource-server"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "undead"
 
 [[packages]]
 name = "tigrbl-identity-rp"
-path = "pkgs/deprecated/tigrbl-identity-rp"
+path = "pkgs/deprecated/undead/tigrbl-identity-rp"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "undead"
 
 [[packages]]
 name = "tigrbl-oauth-bases"
-path = "pkgs/deprecated/tigrbl-oauth-bases"
+path = "pkgs/deprecated/never-lived/tigrbl-oauth-bases"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-oauth-scope-matcher"
-path = "pkgs/deprecated/tigrbl-oauth-scope-matcher"
+path = "pkgs/deprecated/never-lived/tigrbl-oauth-scope-matcher"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-oidc-bases"
-path = "pkgs/deprecated/tigrbl-oidc-bases"
+path = "pkgs/deprecated/never-lived/tigrbl-oidc-bases"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-oidc-claims-concrete"
-path = "pkgs/deprecated/tigrbl-oidc-claims-concrete"
+path = "pkgs/deprecated/never-lived/tigrbl-oidc-claims-concrete"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-oidc-subject-strategy"
-path = "pkgs/deprecated/tigrbl-oidc-subject-strategy"
+path = "pkgs/deprecated/never-lived/tigrbl-oidc-subject-strategy"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-protocol-artifact-processing"
-path = "pkgs/deprecated/tigrbl-protocol-artifact-processing"
+path = "pkgs/deprecated/never-lived/tigrbl-protocol-artifact-processing"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-pushed-authorization-capability"
-path = "pkgs/deprecated/tigrbl-pushed-authorization-capability"
+path = "pkgs/deprecated/never-lived/tigrbl-pushed-authorization-capability"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-sd-jwt-vc-concrete"
-path = "pkgs/deprecated/tigrbl-sd-jwt-vc-concrete"
+path = "pkgs/deprecated/never-lived/tigrbl-sd-jwt-vc-concrete"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-security-event-replay-store"
-path = "pkgs/deprecated/tigrbl-security-event-replay-store"
+path = "pkgs/deprecated/never-lived/tigrbl-security-event-replay-store"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-security-events"
-path = "pkgs/deprecated/tigrbl-security-events"
+path = "pkgs/deprecated/never-lived/tigrbl-security-events"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-security-sender-constraint-validator"
-path = "pkgs/deprecated/tigrbl-security-sender-constraint-validator"
+path = "pkgs/deprecated/never-lived/tigrbl-security-sender-constraint-validator"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-svid-verifier-provider"
-path = "pkgs/deprecated/tigrbl-svid-verifier-provider"
+path = "pkgs/deprecated/never-lived/tigrbl-svid-verifier-provider"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-vcdm-concrete"
-path = "pkgs/deprecated/tigrbl-vcdm-concrete"
+path = "pkgs/deprecated/never-lived/tigrbl-vcdm-concrete"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-workload-identity"
-path = "pkgs/deprecated/tigrbl-workload-identity"
+path = "pkgs/deprecated/never-lived/tigrbl-workload-identity"
 layer = "deprecated"
 order = "00"
 local_dependencies = []
 same_layer_dependencies = []
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-advanced-authentication-capability"
-path = "pkgs/deprecated/tigrbl-advanced-authentication-capability"
+path = "pkgs/deprecated/never-lived/tigrbl-advanced-authentication-capability"
 layer = "deprecated"
 order = "01"
 local_dependencies = ["tigrbl-identity-credentials-concrete", "tigrbl-identity-identities-concrete"]
 same_layer_dependencies = ["tigrbl-identity-credentials-concrete", "tigrbl-identity-identities-concrete"]
+deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-identity-policy"
-path = "pkgs/deprecated/tigrbl-identity-policy"
+path = "pkgs/deprecated/undead/tigrbl-identity-policy"
 layer = "deprecated"
 order = "01"
 local_dependencies = ["tigrbl-authz-policy-invariant-registry"]
 same_layer_dependencies = ["tigrbl-authz-policy-invariant-registry"]
+deprecation_state = "undead"
 
 [[packages]]
 name = "tigrbl-principal-authentication"
-path = "pkgs/deprecated/tigrbl-principal-authentication"
+path = "pkgs/deprecated/never-lived/tigrbl-principal-authentication"
 layer = "deprecated"
 order = "01"
 local_dependencies = ["tigrbl-identity-credentials-concrete"]
 same_layer_dependencies = ["tigrbl-identity-credentials-concrete"]
+deprecation_state = "never-lived"

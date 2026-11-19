@@ -60,14 +60,6 @@ def verify(root: Path = ROOT) -> dict:
             *root.glob("pkgs/[0-9]*/*/package.json"),
         }
     )
-    manifests.extend(
-        root / "pkgs/deprecated" / name / "pyproject.toml"
-        for name in (
-            "tba-testkit-identity",
-            "tba-testkit-workload-credential-conformance",
-        )
-        if (root / "pkgs/deprecated" / name / "pyproject.toml").is_file()
-    )
     for path in manifests:
         folder = path.parent
         relative = folder.relative_to(root).as_posix()

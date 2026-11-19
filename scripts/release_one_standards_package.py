@@ -14,6 +14,7 @@ import tempfile
 import time
 
 from build_standards_release import inspect_artifacts
+from deprecated_lifecycle import ensure_release_allowed
 from publish_standards_release import ReleaseIncompleteError, check
 from verify_standards_installs import verify
 
@@ -39,6 +40,7 @@ def select_release(plan_bytes: bytes, manifest: dict, name: str) -> tuple[dict, 
         raise ValueError(
             "Selected artifact version or source path disagrees with the plan"
         )
+    ensure_release_allowed(row["path"])
     return row, artifact
 
 
