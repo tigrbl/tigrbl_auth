@@ -42,8 +42,16 @@ def test_optional_contract_state_tables_are_storage_owned() -> None:
         ProviderArtifact: "provider_artifacts",
     }
 
+    owners = {
+        ProviderArtifact: "tba_storage_federation",
+        ScimGroupRecord: "tba_storage_scim",
+        ScimPatchEvent: "tba_storage_scim",
+        ScimSchemaRecord: "tba_storage_scim",
+        ScimUserRecord: "tba_storage_scim",
+    }
     for model, table_name in expected.items():
-        assert model.__module__.startswith("tba_storage_core.tables.")
+        owner = owners.get(model, "tba_storage_release_governance")
+        assert model.__module__.startswith(f"{owner}.tables.")
         assert model.__tablename__ == table_name
         assert getattr(model, "__table__", None) is not None
         assert getattr(model, "handlers", None) is not None

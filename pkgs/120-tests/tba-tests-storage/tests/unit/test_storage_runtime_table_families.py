@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import asyncio
+from pathlib import Path
 
 import pytest
 from tba_storage_core.tables import (
@@ -57,7 +58,7 @@ def _operation(spec, alias: str):
     return next(operation for operation in spec.ops if operation.alias == alias)
 
 
-def test_runtime_specs_target_authoritative_layer_01_tables() -> None:
+def test_runtime_specs_target_authoritative_layer_001_tables() -> None:
     pairs = (
         (CredentialOfferRuntimeSpec, CredentialOffer),
         (CredentialIssuanceTransactionRuntimeSpec, CredentialIssuanceTransaction),
@@ -79,7 +80,11 @@ def test_runtime_specs_target_authoritative_layer_01_tables() -> None:
 
     for spec, table in pairs:
         assert spec.model is table
-        assert table.__module__.startswith("tba_storage_core.tables")
+        owner, namespace, *_ = table.__module__.split(".")
+        distribution = owner.replace("_", "-")
+        assert owner.startswith("tba_storage_") and namespace == "tables"
+        package = Path(__file__).resolve().parents[5] / "pkgs/001-storage" / distribution
+        assert (package / "pyproject.toml").is_file()
 
 
 def test_family_operations_are_carrier_neutral_table_operations() -> None:

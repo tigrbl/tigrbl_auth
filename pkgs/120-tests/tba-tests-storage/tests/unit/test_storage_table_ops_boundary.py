@@ -157,7 +157,7 @@ def test_route_and_hook_declarations_are_owned_by_executable_layers() -> None:
     storage_runtime_root = STORAGE_RUNTIME_ROOT / "tba_runtime_identity_storage"
     executable_roots = tuple(
         root.resolve()
-        for layer in ("050-protocols", "060-runtime", "080-routers")
+        for layer in ("050-protocols", "060-runtime", "080-routers", "090-backend-apps")
         for root in (PKGS / layer).glob("*/src")
     )
     for root in sorted(PKGS.glob("**/src")):

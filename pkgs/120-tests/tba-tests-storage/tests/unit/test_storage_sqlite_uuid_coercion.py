@@ -25,7 +25,7 @@ async def test_bound_record_list_preserves_schema_materialized_filters():
     captured: dict[str, object] = {}
 
     async def list_core(ctx):
-        captured.update(ctx["payload"]["filters"])
+        captured.update(ctx["payload"])
         return [SimpleNamespace(id=uuid4(), session_id=session_id)]
 
     model = SimpleNamespace(handlers=SimpleNamespace(list=_Core(list_core)))

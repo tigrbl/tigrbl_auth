@@ -33,7 +33,13 @@ class _FakeTableHandlers:
         return payload
 
     async def _list(self, ctx: dict[str, object]) -> dict[str, object]:
-        return {"items": list(self.rows)}
+        filters = dict(ctx.get("payload") or {})
+        return {
+            "items": [
+                row for row in self.rows
+                if all(row.get(key) == value for key, value in filters.items())
+            ]
+        }
 
     async def _read(self, ctx: dict[str, object]) -> dict[str, object] | None:
         ident = (ctx.get("path_params") or {}).get("id")  # type: ignore[union-attr]

@@ -236,6 +236,7 @@ def test_executable_migration_runtime_lives_above_storage() -> None:
 
 
 def test_executable_metadata_publishers_live_above_storage() -> None:
+    assert importlib.util.find_spec("tba_runtime_identity_storage.metadata") is None
     old_modules = (
         "tba_storage_core.tables.realm._oidc_discovery",
         "tba_storage_core.tables.realm._oauth_authorization_server_metadata",
@@ -248,27 +249,18 @@ def test_executable_metadata_publishers_live_above_storage() -> None:
     oidc_surface = importlib.import_module(
         "tba_app_backend_core.surfaces.oidc_discovery_surface"
     )
-    assert importlib.util.find_spec(
-        "tba_runtime_identity_storage.metadata.oidc_discovery"
-    ) is None
     assert oidc_surface.include_openid_configuration.__module__ == (
         "tba_app_backend_core.surfaces.oidc_discovery_surface"
     )
     rfc8414_surface = importlib.import_module(
         "tba_app_backend_core.surfaces.authorization_server_metadata_surface"
     )
-    assert importlib.util.find_spec(
-        "tba_runtime_identity_storage.metadata.authorization_server_metadata"
-    ) is None
     assert rfc8414_surface.include_rfc8414.__module__ == (
         "tba_app_backend_core.surfaces.authorization_server_metadata_surface"
     )
     rfc9728_surface = importlib.import_module(
         "tba_app_backend_core.surfaces.protected_resource_metadata_surface"
     )
-    assert importlib.util.find_spec(
-        "tba_runtime_identity_storage.metadata.protected_resource_metadata"
-    ) is None
     assert rfc9728_surface.include_rfc9728.__module__ == (
         "tba_app_backend_core.surfaces.protected_resource_metadata_surface"
     )

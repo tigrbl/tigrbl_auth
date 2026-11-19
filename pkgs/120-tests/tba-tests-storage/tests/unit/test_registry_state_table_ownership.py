@@ -142,13 +142,15 @@ def test_dpop_table_factories_live_in_storage_runtime() -> None:
 
 def test_deprecated_state_registries_are_marked_for_compatibility_only() -> None:
     compatibility_modules = {
-        "tba_runtime_identity_administration_policy_registry": "PolicyRegistry",
-        "tba_runtime_identity_administration_federation_registry": "FederationRegistry",
-        "tba_runtime_authorization_policy_invariant_registry": "InvariantRegistry",
+        "tigrbl-identity-admin-policy-registry": "PolicyRegistry",
+        "tigrbl-identity-admin-federation-registry": "FederationRegistry",
+        "tigrbl-authz-policy-invariant-registry": "InvariantRegistry",
     }
-    for module_name, class_name in compatibility_modules.items():
-        module = importlib.import_module(module_name)
-        assert hasattr(module, class_name)
+    for distribution, class_name in compatibility_modules.items():
+        package = ROOT / "pkgs/deprecated" / distribution
+        assert (package / "pyproject.toml").is_file()
+        source = package / "src" / distribution.replace("-", "_") / "__init__.py"
+        assert f"class {class_name}:" in source.read_text(encoding="utf-8")
 
     for removed_module in (
         "tba_runtime_identity_storage.policy_repository",

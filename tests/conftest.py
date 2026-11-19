@@ -99,7 +99,7 @@ class _InMemoryTableStorage:
 
     def handlers_for(self, model: type) -> SimpleNamespace:
         async def list_core(request: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
-            filters = dict((request.get("payload") or {}).get("filters") or {})
+            filters = dict(request.get("payload") or {})
             return {"items": [dict(row) for row in self._bucket(model) if self._matches(row, filters)]}
 
         async def create_core(request: dict[str, Any]) -> dict[str, dict[str, Any]]:

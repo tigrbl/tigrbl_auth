@@ -107,6 +107,9 @@ def test_matrix_table_ops_are_collapsed_from_table_classes() -> None:
             continue
         if hasattr(cls, method_name):
             attr = getattr(cls, method_name)
+            operation = getattr(attr, "__func__", attr)
+            if (getattr(operation, "__module__", "") or "").startswith("tigrbl_concrete."):
+                continue
             spec = _op_spec(attr)
             if spec is None:
                 unexpected_semantic_methods.append(f"{row['class']}.{method_name}")

@@ -9,7 +9,7 @@ from tba_storage_operator.tables import OperatorRecord
 
 
 ROOT = Path(__file__).resolve().parents[5]
-STORAGE_ROOT = ROOT / "pkgs/001-storage/tba-storage-core/src/tba_storage_core"
+STORAGE_ROOT = ROOT / "pkgs/001-storage/tba-storage-operator/src/tba_storage_operator"
 RUNTIME_ROOT = (
     ROOT
     / "pkgs/030-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage"
@@ -39,9 +39,7 @@ def test_operator_store_tables_own_operator_record_surfaces() -> None:
         "operator_activity.py": "OperatorActivity",
     }
     for filename, symbol in expected.items():
-        path = STORAGE_ROOT / "tables" / filename
-        if not path.exists():
-            path = STORAGE_ROOT / "tables" / filename.removesuffix(".py") / "_table.py"
+        path = STORAGE_ROOT / "tables" / filename.removesuffix(".py") / "_table.py"
         source = path.read_text(encoding="utf-8")
         assert f"class {symbol}" in source
 

@@ -17,10 +17,16 @@ from tba_runtime_identity_storage.security_context import (
     stash_security_providers,
 )
 from tba_provider_identity_jose import materialize_public_key_record
-from tba_runtime_identity_storage import normalize_key_usage_values
+from tba_runtime_identity_storage import (
+    CryptoKeyRuntimeSpec,
+    CryptoKeyVersionRuntimeSpec,
+    initializeIdentityRuntimeTables,
+    normalize_key_usage_values,
+)
 
 
 def test_key_tables_are_storage_owned_and_exported() -> None:
+    initializeIdentityRuntimeTables((CryptoKeyRuntimeSpec, CryptoKeyVersionRuntimeSpec))
     key_columns = CryptoKey.__table__.columns
 
     assert CryptoKey.__tablename__ == "crypto_keys"
