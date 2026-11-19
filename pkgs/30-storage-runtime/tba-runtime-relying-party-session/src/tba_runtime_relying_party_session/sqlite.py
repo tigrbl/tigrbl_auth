@@ -26,6 +26,7 @@ class SQLiteRPStore:
     def __init__(self, database: str | Path, *, realm: str) -> None:
         self.database = Path(database).resolve()
         self.realm = realm
+        self.database.touch(mode=0o600, exist_ok=True)
         with self._connection() as db:
             db.executescript(
                 """
