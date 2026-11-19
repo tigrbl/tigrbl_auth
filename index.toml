@@ -4031,12 +4031,12 @@ deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-identity-credentials"
-path = "pkgs/deprecated/undead/tigrbl-identity-credentials"
+path = "pkgs/deprecated/dead/tigrbl-identity-credentials"
 layer = "deprecated"
 order = "00"
 local_dependencies = ["tba-credentials", "tba-provider-identity-jose", "tba-runtime-identity", "tba-runtime-identity-storage", "tba-server-identity"]
 same_layer_dependencies = []
-deprecation_state = "undead"
+deprecation_state = "dead"
 
 [[packages]]
 name = "tigrbl-identity-credentials-concrete"

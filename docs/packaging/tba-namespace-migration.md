@@ -64,13 +64,17 @@ There are no old-name compatibility aliases for the renamed active packages.
 Upstream Tigrbl framework dependencies, framework classes such as `TigrblApp`,
 the GitHub repository identity, and the checkout directory retain their names.
 
-Retired package payloads retain their distribution names, imports and metadata.
-Their directories now live under `pkgs/deprecated/never-lived`, `undead`, or
+Retired distributions retain their published names and historical import roots.
+Previously published compatibility packages receive a final release with repaired
+forwarding targets, deprecation warnings, and complete module migration tables
+before archival. Never-published retired names receive no deprecation release.
+Their directories live under `pkgs/deprecated/never-lived`, `undead`, or
 `dead`, according to the [lifecycle policy](../../pkgs/deprecated/AGENTS.md).
 They are excluded from active development and bulk releases. Only explicitly
 selected undead packages may receive a final deprecation and migration release;
-never-lived and dead packages cannot be published. Historical snapshots retain
-their original import behavior.
+never-lived and dead packages cannot be published. The
+[lifecycle ledger](../../pkgs/deprecated/lifecycle.json) records exact verified final versions and PyPI artifact hashes. The immutable release tags
+preserve each published source snapshot after its directory moves to `dead`.
 
 After updating a checkout, run `uv sync --locked --all-extras --dev` and
 `npm ci` to refresh editable paths and npm workspace links. Configure new PyPI
