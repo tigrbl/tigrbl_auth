@@ -85,6 +85,15 @@ Existing dedicated publishers can be reused. For example, `tba` uses its
 already-authorized `publish-tba.yml` workflow and `pypi` environment with the
 same immutable artifact staging and verification steps. This avoids granting
 additional publishing authority where a suitable publisher already exists.
+For an existing publisher matching `monorepo-package-release.yml` and `pypi`,
+set `reuse_pypi_environment=true`; otherwise retain the package-specific
+environment and configure its publisher first.
+
+Before dispatch, create and push only the selected package's source tag at
+the artifact manifest's `source_commit`, using the authorized operator Git
+session. CI confirms the same tag and refuses any conflicting target. This
+also avoids granting workflow-write privileges to the CI token when the
+release workflow has changed since the artifact source commit.
 
 The extensive README repair supersedes the README payloads in that earlier CI
 batch. Those artifacts remain historical build evidence, not publishable
@@ -99,6 +108,10 @@ temporary Python 3.12 environment, checks dependency consistency, and imports
 its public package. A `--wheels` directory enables preflight testing; omitting
 it verifies installations from PyPI alone. Use `--environment-root` with a
 short path on Windows to avoid DLL loader path-length limits.
+Release verification allows up to five minutes for PyPI's release metadata
+to expose both uploaded files and rejects hash conflicts immediately. Each
+clean installation refreshes index data so the publisher's earlier lookup
+cannot leave a cached negative result for the newly published version.
 
 References: [PyPA project metadata](https://packaging.python.org/en/latest/specifications/pyproject-toml/),
 [PEP 639 backend support](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license-and-license-files),
