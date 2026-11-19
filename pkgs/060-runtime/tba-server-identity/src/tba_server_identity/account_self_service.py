@@ -21,6 +21,7 @@ from tba_runtime_identity_storage.engine import get_db
 from tigrbl import (
     field_value,
     list_table_records,
+    maybe_await,
     read_table_record,
     update_table_record,
 )
@@ -105,6 +106,30 @@ def _uuid(value: str) -> UUID | None:
         return None
 
 
+async def _account_sessions(
+    db: object, principal: AccountPrincipal, *, session_id: UUID | None = None
+) -> list[Any]:
+    user_id = _uuid(principal.identity_id)
+    tenant_id = _uuid(principal.tenant_id)
+    if user_id is None or tenant_id is None:
+        return []
+    filters = {"user_id": user_id, "tenant_id": tenant_id}
+    if session_id is not None:
+        filters["id"] = session_id
+
+    # Internal account selectors must reach the query as equality filters.
+    if callable(getattr(db, "execute", None)):
+        table = AuthSession.__table__
+        statement = table.select().where(*(table.c[key] == value for key, value in filters.items()))
+        result = await maybe_await(db.execute(statement))
+        return list(result.mappings().all())
+    rows = await list_table_records(AuthSession, db, filters)
+    return [
+        row for row in rows
+        if all(str(field_value(row, key)) == str(value) for key, value in filters.items())
+    ]
+
+
 def build_account_self_service_capability(db: object) -> AccountSelfServiceCapability:
     async def user_row(principal: AccountPrincipal) -> object:
         identifier = _uuid(principal.identity_id)
@@ -156,14 +181,7 @@ def build_account_self_service_capability(db: object) -> AccountSelfServiceCapab
         return AccountMutation("changed", str(field_value(row, "id")))
 
     async def session_lister(principal: AccountPrincipal) -> tuple[AccountSession, ...]:
-        rows = await list_table_records(
-            AuthSession,
-            db,
-            {
-                "user_id": _uuid(principal.identity_id),
-                "tenant_id": _uuid(principal.tenant_id),
-            },
-        )
+        rows = await _account_sessions(db, principal)
         return tuple(_session(row) for row in rows)
 
     async def session_revoker(
@@ -172,15 +190,7 @@ def build_account_self_service_capability(db: object) -> AccountSelfServiceCapab
         identifier = _uuid(session_id)
         if identifier is None:
             return None
-        rows = await list_table_records(
-            AuthSession,
-            db,
-            {
-                "id": identifier,
-                "user_id": _uuid(principal.identity_id),
-                "tenant_id": _uuid(principal.tenant_id),
-            },
-        )
+        rows = await _account_sessions(db, principal, session_id=identifier)
         if not rows:
             return None
         updated = await terminate_session(

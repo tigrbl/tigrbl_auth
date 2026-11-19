@@ -9,6 +9,7 @@ import sys
 import time
 import types
 from contextlib import asynccontextmanager
+from importlib.util import find_spec
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any, AsyncGenerator, Generator
@@ -256,10 +257,9 @@ def _require_runtime_stack() -> None:
     pytest.importorskip("tigrbl")
 
 
-def _import_runtime_objects() -> dict[str, Any]:
+def _import_runtime_objects(*, require_public_app: bool = True) -> dict[str, Any]:
     _require_runtime_stack()
     from tigrbl.engine import Engine, EngineSpec
-    from tba_app_backend_public import app
     from tba_app_backend_core.surfaces import surface_api as composed_surface_api
     from tba_runtime_identity_storage.engine import get_db
     from tba_runtime_identity.engine_resolver import (
@@ -268,6 +268,10 @@ def _import_runtime_objects() -> dict[str, Any]:
         resolve_default_provider,
         set_default_provider,
     )
+    app = None
+    if require_public_app or find_spec("tba_app_backend_public") is not None:
+        from tba_app_backend_public import app
+
     surface_api = composed_surface_api
     canonical_legacy_surface_api = composed_surface_api
 
@@ -324,7 +328,7 @@ def disable_tls_requirement():
 
 @asynccontextmanager
 async def _runtime_engine_context(database_url: str):
-    runtime = _import_runtime_objects()
+    runtime = _import_runtime_objects(require_public_app=False)
     Engine = runtime["Engine"]
     EngineSpec = runtime["EngineSpec"]
     register_api_provider = runtime["register_api_provider"]
@@ -342,12 +346,13 @@ async def _runtime_engine_context(database_url: str):
     original_surface = resolve_api_provider(surface_api)
     original_composed_surface = resolve_api_provider(composed_surface_api)
     original_canonical_legacy_surface = resolve_api_provider(canonical_legacy_surface_api)
-    original_app = resolve_api_provider(app)
+    original_app = resolve_api_provider(app) if app is not None else None
     original_default_provider = resolve_default_provider()
     register_api_provider(surface_api, provider)
     register_api_provider(composed_surface_api, provider)
     register_api_provider(canonical_legacy_surface_api, provider)
-    register_api_provider(app, provider)
+    if app is not None:
+        register_api_provider(app, provider)
     set_default_provider(provider)
     setattr(surface_api, "_ddl_executed", False)
     await surface_api.initialize()
@@ -397,7 +402,8 @@ async def _runtime_engine_context(database_url: str):
             canonical_legacy_surface_api,
             original_canonical_legacy_surface or provider,
         )
-        register_api_provider(app, original_app or provider)
+        if app is not None:
+            register_api_provider(app, original_app or provider)
         set_default_provider(original_default_provider or provider)
         setattr(surface_api, "_ddl_executed", False)
 
