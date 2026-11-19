@@ -1571,6 +1571,14 @@ local_dependencies = ["tba-bases-identity", "tba-contracts-identity"]
 same_layer_dependencies = []
 
 [[packages]]
+name = "tba-concrete-mcp-delegation"
+path = "pkgs/10-concrete/tba-concrete-mcp-delegation"
+layer = "10-concrete"
+order = "00"
+local_dependencies = []
+same_layer_dependencies = []
+
+[[packages]]
 name = "tba-concrete-mdoc-credential"
 path = "pkgs/10-concrete/tba-concrete-mdoc-credential"
 layer = "10-concrete"
@@ -2840,14 +2848,6 @@ path = "pkgs/40-capabilities/tba-capability-key-administration"
 layer = "40-capabilities"
 order = "00"
 local_dependencies = ["tba-concrete-capability", "tba-contracts-identity"]
-same_layer_dependencies = []
-
-[[packages]]
-name = "tba-capability-mcp-delegation"
-path = "pkgs/40-capabilities/tba-capability-mcp-delegation"
-layer = "40-capabilities"
-order = "00"
-local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]

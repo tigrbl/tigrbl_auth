@@ -6,5 +6,5 @@ Attribution: Jacob Stewart and the Tigrbl Auth contributors.
 Distributed under the Apache License, Version 2.0.
 See the accompanying LICENSE file for the license terms.
 
-Distribution: tba-capability-mcp-delegation
-Source: https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/40-capabilities/tba-capability-mcp-delegation
+Distribution: tba-concrete-mcp-delegation
+Source: https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/10-concrete/tba-concrete-mcp-delegation
