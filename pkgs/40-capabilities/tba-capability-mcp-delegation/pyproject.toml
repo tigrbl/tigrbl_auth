@@ -1,0 +1,24 @@
+[project]
+name = "tba-capability-mcp-delegation"
+version = "0.4.0.dev1"
+description = "Identity-bound permission decisions for MCP app connections."
+requires-python = ">=3.10,<3.16"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+readme = "README.md"
+
+[[project.authors]]
+name = "Jacob Stewart"
+email = "jacob@swarmauri.com"
+
+[project.urls]
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/40-capabilities/tba-capability-mcp-delegation"
+PyPI = "https://pypi.org/project/tba-capability-mcp-delegation/"
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/tba_capability_mcp_delegation"]

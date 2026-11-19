@@ -1543,7 +1543,7 @@ name = "tba-concrete-jose"
 path = "pkgs/10-concrete/tba-concrete-jose"
 layer = "10-concrete"
 order = "00"
-local_dependencies = ["tba-bases-jose", "tba-contracts-identity", "tba-contracts-security-key-rotation-policy", "tba-primitives-identity"]
+local_dependencies = ["tba-bases-encryption", "tba-bases-jose", "tba-contracts-identity", "tba-contracts-security-key-rotation-policy", "tba-contracts-security-trust", "tba-primitives-identity"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -1939,14 +1939,6 @@ local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
-name = "tba-tests-workload-credential-conformance"
-path = "pkgs/120-tests/tba-tests-workload-credential-conformance"
-layer = "120-tests"
-order = "00"
-local_dependencies = []
-same_layer_dependencies = []
-
-[[packages]]
 name = "tba-tests-interop-wimse-matrix"
 path = "pkgs/120-tests/tba-tests-interop-wimse-matrix"
 layer = "120-tests"
@@ -1973,6 +1965,14 @@ same_layer_dependencies = []
 [[packages]]
 name = "tba-tests-workload-composition"
 path = "pkgs/120-tests/tba-tests-workload-composition"
+layer = "120-tests"
+order = "00"
+local_dependencies = []
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-tests-workload-credential-conformance"
+path = "pkgs/120-tests/tba-tests-workload-credential-conformance"
 layer = "120-tests"
 order = "00"
 local_dependencies = []
@@ -2239,7 +2239,7 @@ name = "tba-provider-jose-cryptography"
 path = "pkgs/20-providers/tba-provider-jose-cryptography"
 layer = "20-providers"
 order = "00"
-local_dependencies = ["tba-bases-protected-envelope", "tba-concrete-jwe", "tba-concrete-jws", "tba-contracts-protected-envelope", "tba-primitives-identity"]
+local_dependencies = ["tba-bases-protected-envelope", "tba-concrete-jwe", "tba-concrete-jws", "tba-contracts-protected-envelope", "tba-contracts-security-trust", "tba-primitives-identity"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2663,7 +2663,7 @@ name = "tba-runtime-relying-party-session"
 path = "pkgs/30-storage-runtime/tba-runtime-relying-party-session"
 layer = "30-storage-runtime"
 order = "00"
-local_dependencies = []
+local_dependencies = ["tba-contracts-identity", "tba-provider-security-proof-pkce"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2840,6 +2840,14 @@ path = "pkgs/40-capabilities/tba-capability-key-administration"
 layer = "40-capabilities"
 order = "00"
 local_dependencies = ["tba-concrete-capability", "tba-contracts-identity"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-capability-mcp-delegation"
+path = "pkgs/40-capabilities/tba-capability-mcp-delegation"
+layer = "40-capabilities"
+order = "00"
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
@@ -3255,7 +3263,7 @@ name = "tba-protocol-oidc-relying-party"
 path = "pkgs/50-protocols/tba-protocol-oidc-relying-party"
 layer = "50-protocols"
 order = "03"
-local_dependencies = ["tba-concrete-claim-audience", "tba-concrete-claim-authentication-context", "tba-concrete-claim-authentication-methods", "tba-concrete-claim-authentication-time", "tba-concrete-claim-authorized-party", "tba-concrete-claim-expiration", "tba-concrete-claim-issued-at", "tba-concrete-claim-issuer", "tba-concrete-claim-nonce", "tba-concrete-claim-subject", "tba-contracts-identity", "tba-protocol-oidc", "tba-provider-security-proof-pkce"]
+local_dependencies = ["tba-concrete-claim-audience", "tba-concrete-claim-authentication-context", "tba-concrete-claim-authentication-methods", "tba-concrete-claim-authentication-time", "tba-concrete-claim-authorized-party", "tba-concrete-claim-expiration", "tba-concrete-claim-issued-at", "tba-concrete-claim-issuer", "tba-concrete-claim-nonce", "tba-concrete-claim-subject", "tba-concrete-jws", "tba-contracts-identity", "tba-protocol-oidc", "tba-provider-jose-cryptography", "tba-provider-security-proof-pkce"]
 same_layer_dependencies = ["tba-protocol-oidc"]
 
 [[packages]]
@@ -3623,7 +3631,7 @@ name = "tba-router-relying-party-session"
 path = "pkgs/80-routers/tba-router-relying-party-session"
 layer = "80-routers"
 order = "00"
-local_dependencies = ["tba-protocol-oidc-relying-party", "tba-runtime-relying-party-session"]
+local_dependencies = ["tba-concrete-jws", "tba-protocol-oidc-relying-party", "tba-provider-jose-cryptography", "tba-runtime-relying-party-session"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -3832,6 +3840,22 @@ path = "pkgs/deprecated/tba-provider-security-cose"
 layer = "deprecated"
 order = "00"
 local_dependencies = ["tba-concrete-cose", "tba-provider-cose-cryptography"]
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-testkit-identity"
+path = "pkgs/deprecated/tba-testkit-identity"
+layer = "deprecated"
+order = "00"
+local_dependencies = []
+same_layer_dependencies = []
+
+[[packages]]
+name = "tba-testkit-workload-credential-conformance"
+path = "pkgs/deprecated/tba-testkit-workload-credential-conformance"
+layer = "deprecated"
+order = "00"
+local_dependencies = []
 same_layer_dependencies = []
 
 [[packages]]
