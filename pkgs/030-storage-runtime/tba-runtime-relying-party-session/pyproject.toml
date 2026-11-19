@@ -1,6 +1,6 @@
 [project]
 name = "tba-runtime-relying-party-session"
-version = "0.4.0.dev4"
+version = "0.4.0.dev5"
 description = "Server-side RP login transaction and one-time state runtime."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -16,7 +16,7 @@ classifiers = [
     "Development Status :: 3 - Alpha",
 ]
 license = "Apache-2.0"
-dependencies = []
+dependencies = ["tba-contracts-identity>=0.4.0.dev2,<=0.4.0.dev3", "tba-provider-security-proof-pkce>=0.1.0,<=0.1.1.dev1"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

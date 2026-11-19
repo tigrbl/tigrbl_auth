@@ -2536,7 +2536,7 @@ dependencies = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tba-router-relying-party-session", specifier = "==0.4.0.dev4" }]
+requires-dist = [{ name = "tba-router-relying-party-session", specifier = "==0.4.0.dev5" }]
 
 [[package]]
 name = "tba-app-backend-resource-validation"
@@ -2713,7 +2713,7 @@ requires-dist = [
     { name = "tba-protocol-oauth", specifier = "==0.4.0.dev3" },
     { name = "tba-protocol-oauth-protected-resource", specifier = "==0.4.0.dev3" },
     { name = "tba-protocol-oidc", specifier = "==0.4.0.dev3" },
-    { name = "tba-protocol-oidc-relying-party", specifier = "==0.4.0.dev3" },
+    { name = "tba-protocol-oidc-relying-party", specifier = "==0.4.0.dev4" },
     { name = "tba-protocol-webauthn", specifier = "==0.4.0.dev3" },
     { name = "tba-provider-identity-jose", specifier = "==0.4.0.dev3" },
     { name = "tba-provider-security-authorization-provenance-builder", specifier = "==0.1.1.dev1" },
@@ -7600,7 +7600,7 @@ requires-dist = [
 
 [[package]]
 name = "tba-protocol-oidc-relying-party"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 source = { editable = "pkgs/050-protocols/tba-protocol-oidc-relying-party" }
 dependencies = [
     { name = "tba-concrete-claim-audience" },
@@ -7613,26 +7613,30 @@ dependencies = [
     { name = "tba-concrete-claim-issuer" },
     { name = "tba-concrete-claim-nonce" },
     { name = "tba-concrete-claim-subject" },
+    { name = "tba-concrete-jws" },
     { name = "tba-contracts-identity" },
     { name = "tba-protocol-oidc" },
+    { name = "tba-provider-jose-cryptography" },
     { name = "tba-provider-security-proof-pkce" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "tba-concrete-claim-audience", specifier = "==0.4.0.dev3" },
-    { name = "tba-concrete-claim-authentication-context", specifier = "==0.4.0.dev3" },
-    { name = "tba-concrete-claim-authentication-methods", specifier = "==0.4.0.dev3" },
-    { name = "tba-concrete-claim-authentication-time", specifier = "==0.4.0.dev3" },
-    { name = "tba-concrete-claim-authorized-party", specifier = "==0.4.0.dev3" },
-    { name = "tba-concrete-claim-expiration", specifier = "==0.4.0.dev3" },
-    { name = "tba-concrete-claim-issued-at", specifier = "==0.4.0.dev3" },
-    { name = "tba-concrete-claim-issuer", specifier = "==0.4.0.dev3" },
-    { name = "tba-concrete-claim-nonce", specifier = "==0.4.0.dev3" },
-    { name = "tba-concrete-claim-subject", specifier = "==0.4.0.dev3" },
-    { name = "tba-contracts-identity", specifier = "==0.4.0.dev3" },
-    { name = "tba-protocol-oidc", specifier = "==0.4.0.dev3" },
-    { name = "tba-provider-security-proof-pkce", specifier = "==0.1.1.dev1" },
+    { name = "tba-concrete-claim-audience", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
+    { name = "tba-concrete-claim-authentication-context", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
+    { name = "tba-concrete-claim-authentication-methods", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
+    { name = "tba-concrete-claim-authentication-time", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
+    { name = "tba-concrete-claim-authorized-party", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
+    { name = "tba-concrete-claim-expiration", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
+    { name = "tba-concrete-claim-issued-at", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
+    { name = "tba-concrete-claim-issuer", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
+    { name = "tba-concrete-claim-nonce", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
+    { name = "tba-concrete-claim-subject", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
+    { name = "tba-concrete-jws", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
+    { name = "tba-contracts-identity", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
+    { name = "tba-protocol-oidc", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
+    { name = "tba-provider-jose-cryptography", specifier = ">=0.4.0.dev3,<=0.4.0.dev4" },
+    { name = "tba-provider-security-proof-pkce", specifier = ">=0.1.0,<=0.1.1.dev1" },
 ]
 
 [[package]]
@@ -9121,17 +9125,21 @@ requires-dist = [
 
 [[package]]
 name = "tba-router-relying-party-session"
-version = "0.4.0.dev4"
+version = "0.4.0.dev5"
 source = { editable = "pkgs/080-routers/tba-router-relying-party-session" }
 dependencies = [
+    { name = "tba-concrete-jws" },
     { name = "tba-protocol-oidc-relying-party" },
+    { name = "tba-provider-jose-cryptography" },
     { name = "tba-runtime-relying-party-session" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "tba-protocol-oidc-relying-party", specifier = "==0.4.0.dev3" },
-    { name = "tba-runtime-relying-party-session", specifier = "==0.4.0.dev4" },
+    { name = "tba-concrete-jws", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
+    { name = "tba-protocol-oidc-relying-party", specifier = "==0.4.0.dev4" },
+    { name = "tba-provider-jose-cryptography", specifier = ">=0.4.0.dev3,<=0.4.0.dev4" },
+    { name = "tba-runtime-relying-party-session", specifier = "==0.4.0.dev5" },
 ]
 
 [[package]]
@@ -9508,8 +9516,18 @@ requires-dist = [
 
 [[package]]
 name = "tba-runtime-relying-party-session"
-version = "0.4.0.dev4"
+version = "0.4.0.dev5"
 source = { editable = "pkgs/030-storage-runtime/tba-runtime-relying-party-session" }
+dependencies = [
+    { name = "tba-contracts-identity" },
+    { name = "tba-provider-security-proof-pkce" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tba-contracts-identity", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
+    { name = "tba-provider-security-proof-pkce", specifier = ">=0.1.0,<=0.1.1.dev1" },
+]
 
 [[package]]
 name = "tba-server-identity"

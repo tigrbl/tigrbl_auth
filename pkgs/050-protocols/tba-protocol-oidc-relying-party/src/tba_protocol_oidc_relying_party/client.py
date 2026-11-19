@@ -1,9 +1,13 @@
 from __future__ import annotations
 
+from collections.abc import Awaitable, Callable, Mapping
 from dataclasses import dataclass
-from typing import Any, Callable, Mapping
+from hmac import compare_digest
+from time import time
+from typing import Any
 from urllib.parse import parse_qs, urlencode, urlparse
 
+from tba_contracts_identity.protocols import BrowserStoragePolicy
 from tba_contracts_identity.rp import (
     CallbackResult,
     LoginRequest,
@@ -12,10 +16,13 @@ from tba_contracts_identity.rp import (
     RPSessionPort,
     RPStatePort,
 )
-from tba_contracts_identity.protocols import BrowserStoragePolicy
 
-from .pkce import PkceVerifier, make_pkce_verifier, pkce_s256_challenge
 from .errors import RPError
+from .pkce import PkceVerifier, make_pkce_verifier, pkce_s256_challenge
+from .public_client import check_callback, check_discovery, https_url, token_claims
+
+JsonGetter = Callable[[str], Awaitable[Mapping[str, Any]]]
+FormPoster = Callable[[str, Mapping[str, str]], Awaitable[Mapping[str, Any]]]
 
 
 class BrowserMemorySession:
@@ -111,7 +118,7 @@ class RelyingParty:
         config: RPConfiguration,
         *,
         state_store: RPStatePort,
-        session_store: RPSessionPort,
+        session_store: RPSessionPort | None = None,
     ) -> None:
         self.config = config
         self.state_store = state_store
@@ -133,7 +140,8 @@ class RelyingParty:
             "nonce": login.nonce,
             **pkce.authorization_params(),
         }
-        return f"{authorization_endpoint}?{urlencode(params)}", login
+        separator = "&" if "?" in authorization_endpoint else "?"
+        return f"{authorization_endpoint}{separator}{urlencode(params)}", login
 
     def parse_callback(self, callback_url: str) -> CallbackResult:
         parsed = urlparse(callback_url)
@@ -154,6 +162,104 @@ class RelyingParty:
         except (KeyError, ValueError) as exc:
             raise RPError(str(exc)) from exc
 
+    async def _public_metadata(self, get_json: JsonGetter) -> Mapping[str, Any]:
+        assert_browser_no_client_secret(self.config)
+        issuer = https_url(self.config.issuer, "issuer")
+        if urlparse(issuer).query or "?" in issuer:
+            raise RPError("invalid issuer URL")
+        https_url(self.config.redirect_uri, "redirect URI")
+        if "openid" not in self.config.scopes:
+            raise RPError("public OIDC login requires the openid scope")
+        metadata = await get_json(issuer + "/.well-known/openid-configuration")
+        check_discovery(metadata, issuer)
+        return metadata
+
+    async def begin_public_login(
+        self, get_json: JsonGetter
+    ) -> tuple[str, LoginRequest]:
+        """Discover the issuer and start a public S256 login via the configured state store."""
+        metadata = await self._public_metadata(get_json)
+        return self.build_authorization_url(metadata["authorization_endpoint"])
+
+    async def complete_public_callback(
+        self,
+        callback_url: str,
+        *,
+        expected_state: str,
+        get_json: JsonGetter,
+        post_form: FormPoster,
+    ) -> VerifiedCallback:
+        """Redeem a browser-bound callback and save tokens only after ID-token verification.
+
+        Pass expected_state from the app's browser session. The state store must
+        atomically consume unexpired requests scoped to this issuer and client.
+        The transport must enforce HTTPS certificate verification and reject redirects.
+        """
+        assert_browser_no_client_secret(self.config)
+        if self.token_store is None:
+            raise RPError("public callback requires a token store")
+        check_callback(callback_url, self.config.redirect_uri)
+        if "error" in parse_qs(urlparse(callback_url).query, keep_blank_values=True):
+            raise RPError("authorization was not completed")
+        callback = self.parse_callback(callback_url)
+        if not expected_state or callback.state != expected_state:
+            raise RPError("callback state mismatch")
+        if callback.iss is not None and callback.iss != self.config.issuer:
+            raise RPError("callback issuer mismatch")
+        login = self.validate_callback(callback)
+        if (
+            login.state != callback.state
+            or login.redirect_uri != self.config.redirect_uri
+            or not login.nonce
+        ):
+            raise RPError("callback does not match the stored login request")
+        verifier = PkceVerifier(login.code_verifier)
+        metadata = await self._public_metadata(get_json)
+        tokens = await post_form(
+            metadata["token_endpoint"],
+            {
+                "grant_type": "authorization_code",
+                "client_id": self.config.client_id,
+                "redirect_uri": login.redirect_uri,
+                "code": callback.code,
+                "code_verifier": verifier.value,
+            },
+        )
+        if not isinstance(tokens, Mapping) or tokens.get("error"):
+            raise RPError("token exchange was rejected")
+        access_token = tokens.get("access_token")
+        id_token = tokens.get("id_token")
+        refresh_token = tokens.get("refresh_token")
+        token_type = tokens.get("token_type")
+        if (
+            not isinstance(access_token, str)
+            or not access_token
+            or not isinstance(id_token, str)
+            or not id_token
+            or not isinstance(token_type, str)
+            or token_type.lower() != "bearer"
+            or (
+                "refresh_token" in tokens
+                and (not isinstance(refresh_token, str) or not refresh_token)
+            )
+        ):
+            raise RPError("token response is missing valid OIDC tokens")
+        jwks = await get_json(metadata["jwks_uri"])
+        claims = token_claims(id_token, jwks)
+        if claims.get("iss") != self.config.issuer:
+            raise RPError("ID token issuer mismatch")
+        if claims["aud"] not in (self.config.client_id, [self.config.client_id]):
+            raise RPError("ID token audience mismatch")
+        if "azp" in claims and claims["azp"] != self.config.client_id:
+            raise RPError("ID token authorized party mismatch")
+        identity = verify_id_token(
+            id_token, verifier=lambda _: claims, issuer=self.config.issuer,
+            audience=self.config.client_id, nonce=login.nonce, now=int(time()),
+        )
+        session = RPSession(identity.subject, id_token, access_token, refresh_token)
+        self.token_store.save(login.state, session)
+        return VerifiedCallback(identity, session)
+
     def build_logout_url(
         self, end_session_endpoint: str, *, id_token_hint: str, state: str | None = None
     ) -> str:
@@ -172,21 +278,13 @@ class RelyingParty:
         exchange: Callable[[Mapping[str, str]], Mapping[str, str]],
         callback: CallbackResult,
     ) -> RPSession:
-        if self.config.client_secret is None:
+        if self.token_store is None:
+            raise RPError("this exchange requires a token store")
+        secret = self.config.client_secret
+        if secret is None:
             raise RPError("confidential token exchange requires a client secret")
         login = self.validate_callback(callback)
-        token_response = dict(
-            exchange(
-                {
-                    "grant_type": "authorization_code",
-                    "code": callback.code,
-                    "redirect_uri": login.redirect_uri,
-                    "client_id": self.config.client_id,
-                    "client_secret": self.config.client_secret,
-                    "code_verifier": login.code_verifier,
-                }
-            )
-        )
+        token_response = dict(self._exchange_confidential(exchange, callback, login, secret))
         session = RPSession(
             subject=token_response.get("sub", ""),
             id_token=token_response["id_token"],
@@ -196,9 +294,74 @@ class RelyingParty:
         self.token_store.save(login.state, session)
         return session
 
+    def complete_confidential_callback(
+        self,
+        exchange: Callable[[Mapping[str, str]], Mapping[str, str]],
+        callback: CallbackResult,
+        *,
+        browser_state: str,
+        verifier: Callable[[str], Mapping[str, Any]],
+        now: int,
+    ) -> VerifiedExternalIdentity:
+        """Verify a browser-bound login before the app establishes a session.
+
+        Supply browser_state from the initiating browser's transaction cookie
+        and a verifier that checks the configured issuer's signing keys.
+        Provider tokens are discarded after verifying the identity.
+        """
+        secret = self.config.client_secret
+        if not secret:
+            raise RPError("confidential token exchange requires a client secret")
+        if not browser_state or not compare_digest(
+            browser_state.encode("utf-8"), callback.state.encode("utf-8")
+        ):
+            raise RPError("callback does not match the browser transaction")
+        if callback.iss is not None and callback.iss != self.config.issuer:
+            raise RPError("callback issuer mismatch")
+        login = self.validate_callback(callback)
+        if (
+            login.state != callback.state
+            or login.redirect_uri != self.config.redirect_uri
+            or not login.nonce
+        ):
+            raise RPError("callback does not match the stored login request")
+        PkceVerifier(login.code_verifier)
+        response = self._exchange_confidential(exchange, callback, login, secret)
+        token = response.get("id_token")
+        if not isinstance(token, str) or not token:
+            raise RPError("token response must include an ID token")
+        return verify_id_token(
+            token,
+            verifier=verifier,
+            issuer=self.config.issuer,
+            audience=self.config.client_id,
+            nonce=login.nonce,
+            now=now,
+        )
+
+    def _exchange_confidential(
+        self,
+        exchange: Callable[[Mapping[str, str]], Mapping[str, str]],
+        callback: CallbackResult,
+        login: LoginRequest,
+        secret: str,
+    ) -> Mapping[str, str]:
+        return exchange(
+            {
+                "grant_type": "authorization_code",
+                "code": callback.code,
+                "redirect_uri": login.redirect_uri,
+                "client_id": self.config.client_id,
+                "client_secret": secret,
+                "code_verifier": login.code_verifier,
+            }
+        )
+
     def refresh(
         self, refresh: Callable[[str], Mapping[str, str]], session_id: str
     ) -> RPSession:
+        if self.token_store is None:
+            raise RPError("refresh requires a token store")
         current = self.token_store.get(session_id)
         if not current.refresh_token:
             raise RPError("refresh token is not available")
@@ -235,6 +398,12 @@ class VerifiedExternalIdentity:
     issuer: str
     claims: Mapping[str, Any]
     userinfo: Mapping[str, Any] | None = None
+
+
+@dataclass(frozen=True, slots=True)
+class VerifiedCallback:
+    identity: VerifiedExternalIdentity
+    session: RPSession
 
 
 def verify_id_token(
@@ -323,11 +492,12 @@ __all__ = [
     "RPSession",
     "RelyingParty",
     "UserInfoClient",
+    "VerifiedCallback",
     "VerifiedExternalIdentity",
     "assert_browser_no_client_secret",
     "example_app_manifest",
-    "framework_login_adapter",
     "framework_callback_adapter",
+    "framework_login_adapter",
     "make_pkce_verifier",
     "pkce_s256_challenge",
     "shared_vector_manifest",
