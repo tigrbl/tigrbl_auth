@@ -4094,12 +4094,12 @@ deprecation_state = "dead"
 
 [[packages]]
 name = "tigrbl-identity-rp"
-path = "pkgs/deprecated/undead/tigrbl-identity-rp"
+path = "pkgs/deprecated/dead/tigrbl-identity-rp"
 layer = "deprecated"
 order = "00"
 local_dependencies = ["tba-protocol-oidc-relying-party"]
 same_layer_dependencies = []
-deprecation_state = "undead"
+deprecation_state = "dead"
 
 [[packages]]
 name = "tigrbl-oauth-bases"

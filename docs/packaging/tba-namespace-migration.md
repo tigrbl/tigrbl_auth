@@ -76,6 +76,26 @@ never-lived and dead packages cannot be published. The
 [lifecycle ledger](../../pkgs/deprecated/lifecycle.json) records exact verified final versions and PyPI artifact hashes. The immutable release tags
 preserve each published source snapshot after its directory moves to `dead`.
 
+## Verified final compatibility releases
+
+All six compatibility distributions have published final deprecation releases at
+`0.4.0.dev3` and now live in `dead`. Verification covered the exact PyPI wheel
+and source hashes, isolated installations, warnings, and public-object identity
+for all 140 forwarding modules. The [closure evidence](../../.ssot/evidence/final-deprecation-closure-20261119.json)
+links each release to its verification receipt.
+
+The primary replacement is the new starting point; consult each module map for
+imports split into other owning distributions.
+
+| Final compatibility distribution | Primary replacement | Complete migration instructions |
+| --- | --- | --- |
+| [tigrbl-identity-credentials](https://pypi.org/project/tigrbl-identity-credentials/0.4.0.dev3/) | `tba-credentials` | [Module map](../../pkgs/deprecated/dead/tigrbl-identity-credentials/README.md#usage) |
+| [tigrbl-identity-oauth](https://pypi.org/project/tigrbl-identity-oauth/0.4.0.dev3/) | `tba-protocol-oauth` | [Module map](../../pkgs/deprecated/dead/tigrbl-identity-oauth/README.md#usage) |
+| [tigrbl-identity-oidc](https://pypi.org/project/tigrbl-identity-oidc/0.4.0.dev3/) | `tba-protocol-oidc` | [Module map](../../pkgs/deprecated/dead/tigrbl-identity-oidc/README.md#usage) |
+| [tigrbl-identity-policy](https://pypi.org/project/tigrbl-identity-policy/0.4.0.dev3/) | `tba-runtime-authorization-policy` | [Module map](../../pkgs/deprecated/dead/tigrbl-identity-policy/README.md#usage) |
+| [tigrbl-identity-resource-server](https://pypi.org/project/tigrbl-identity-resource-server/0.4.0.dev3/) | `tba-protocol-oauth-protected-resource` | [Module map](../../pkgs/deprecated/dead/tigrbl-identity-resource-server/README.md#usage) |
+| [tigrbl-identity-rp](https://pypi.org/project/tigrbl-identity-rp/0.4.0.dev3/) | `tba-protocol-oidc-relying-party` | [Module map](../../pkgs/deprecated/dead/tigrbl-identity-rp/README.md#usage) |
+
 After updating a checkout, run `uv sync --locked --all-extras --dev` and
 `npm ci` to refresh editable paths and npm workspace links. Configure new PyPI
 publishers for the new distribution names; existing registrations do not move
