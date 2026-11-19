@@ -4058,12 +4058,12 @@ deprecation_state = "never-lived"
 
 [[packages]]
 name = "tigrbl-identity-oauth"
-path = "pkgs/deprecated/undead/tigrbl-identity-oauth"
+path = "pkgs/deprecated/dead/tigrbl-identity-oauth"
 layer = "deprecated"
 order = "00"
 local_dependencies = ["tba-app-backend-core", "tba-protocol-oauth", "tba-runtime-identity-storage", "tba-storage-core"]
 same_layer_dependencies = []
-deprecation_state = "undead"
+deprecation_state = "dead"
 
 [[packages]]
 name = "tigrbl-identity-oidc"
