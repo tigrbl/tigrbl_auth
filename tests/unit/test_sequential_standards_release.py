@@ -166,3 +166,49 @@ def test_clean_install_refreshes_publishers_negative_index_cache(tmp_path, monke
     assert result["passed"] is False
     assert "real install command" in result["error"]
     assert any("install" in command for command in commands)
+
+
+def test_install_waits_for_selected_release_in_pypi_index(monkeypatch):
+    import verify_standards_installs as installs
+
+    outcomes = iter([False, False, True])
+    sleeps = []
+
+    def run(command):
+        if not next(outcomes):
+            raise RuntimeError("Because there is no version of example==1.0.1")
+        return "installed"
+
+    monkeypatch.setattr(installs, "run", run)
+    monkeypatch.setattr(installs.time, "sleep", sleeps.append)
+    result = installs.install_release(
+        [], dict(name="example", version="1.0.1"), attempts=3
+    )
+    assert result == "installed"
+    assert sleeps == [10, 10]
+
+
+@pytest.mark.parametrize(
+    "error,expected_calls",
+    [
+        ("there is no version of dependency==2.0", 1),
+        ("there is no version of example==1.0.1", 3),
+    ],
+)
+def test_install_wait_is_bounded_and_rejects_other_dependency_errors(
+    monkeypatch, error, expected_calls
+):
+    import verify_standards_installs as installs
+
+    calls, sleeps = [], []
+
+    def run(command):
+        calls.append(command)
+        raise RuntimeError(error)
+
+    monkeypatch.setattr(installs, "run", run)
+    monkeypatch.setattr(installs.time, "sleep", sleeps.append)
+    with pytest.raises(RuntimeError, match=error):
+        installs.install_release([], dict(name="example", version="1.0.1"), attempts=3)
+    assert len(calls) == expected_calls
+    assert sleeps == [10] * (expected_calls - 1)

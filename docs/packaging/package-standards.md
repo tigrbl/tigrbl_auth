@@ -112,6 +112,10 @@ Release verification allows up to five minutes for PyPI's release metadata
 to expose both uploaded files and rejects hash conflicts immediately. Each
 clean installation refreshes index data so the publisher's earlier lookup
 cannot leave a cached negative result for the newly published version.
+If the selected version is still unavailable in PyPI's separate install
+index, verification retries that exact resolution for up to five minutes.
+Missing dependencies, incompatible constraints, and import errors fail
+without this propagation retry.
 
 References: [PyPA project metadata](https://packaging.python.org/en/latest/specifications/pyproject-toml/),
 [PEP 639 backend support](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license-and-license-files),

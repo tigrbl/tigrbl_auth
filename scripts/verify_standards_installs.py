@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 import subprocess
 import tempfile
+import time
 
 
 def run(command: list[str]) -> str:
@@ -23,6 +24,25 @@ def run(command: list[str]) -> str:
     if process.returncode:
         raise RuntimeError(process.stdout + process.stderr)
     return process.stdout
+
+
+def install_release(
+    command: list[str], row: dict, attempts: int = 31, interval: int = 10
+) -> str:
+    """Wait only for the selected new version to reach PyPI's install index."""
+    unavailable = f"there is no version of {row['name']}=={row['version']}"
+    for attempt in range(attempts):
+        try:
+            return run(command)
+        except RuntimeError as error:
+            if unavailable not in str(error) or attempt == attempts - 1:
+                raise
+            print(
+                f"Waiting for {row['name']}=={row['version']} in PyPI's install index",
+                flush=True,
+            )
+            time.sleep(interval)
+    raise AssertionError("Install attempts must be positive")
 
 
 def verify(
@@ -69,7 +89,8 @@ def verify(
             if wheels:
                 command += ["--find-links", str(wheels)]
             command.append(f"{row['name']}=={row['version']}")
-            (destination / "install.log").write_text(run(command), encoding="utf-8")
+            installed = run(command) if wheels else install_release(command, row)
+            (destination / "install.log").write_text(installed, encoding="utf-8")
             run(["uv", "pip", "check", "--python", str(python)])
             code = (
                 "import importlib,importlib.metadata,json;"
