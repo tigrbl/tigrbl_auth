@@ -105,7 +105,7 @@ class TestCredentialApiKeyModel:
         digest = CredentialApiKey.digest_of(test_key)
 
         assert isinstance(digest, str)
-        assert len(digest) == 64  # blake2b with digest_size=32 produces 64 hex chars
+        assert digest.startswith("v2$") and len(digest) == 67
 
         # Should be deterministic
         assert CredentialApiKey.digest_of(test_key) == digest
@@ -141,7 +141,7 @@ class TestCredentialServiceKeyModel:
         digest = CredentialServiceKey.digest_of(test_key)
 
         assert isinstance(digest, str)
-        assert len(digest) == 64
+        assert digest.startswith("v2$") and len(digest) == 67
 
         # Should be deterministic
         assert CredentialServiceKey.digest_of(test_key) == digest

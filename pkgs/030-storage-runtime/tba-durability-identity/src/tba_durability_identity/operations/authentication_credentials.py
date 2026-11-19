@@ -7,7 +7,7 @@ from typing import Any
 from tba_storage_authentication.tables import CredentialApiKey, CredentialServiceKey
 from tba_storage_principals.tables import User
 
-from tigrbl import list_table_records, maybe_await, read_table_record
+from tigrbl import field_value, first_table_record, list_table_records, maybe_await, read_table_record
 from tba_durability_identity.operations.identities import (
     lookup_identity_by_identifier,
 )
@@ -20,12 +20,20 @@ async def find_password_principals(db: Any, identifier: str) -> list[Any]:
     return [row] if row is not None else []
 
 
+async def _find_credential(model: type, db: Any, digest: str) -> list[Any]:
+    if callable(getattr(db, "execute", None)):
+        row = await first_table_record(model, db, {"digest": digest})
+        return [row] if row is not None else []
+    rows = await list_table_records(model, db, {"digest": digest})
+    return [row for row in rows if field_value(row, "digest") == digest]
+
+
 async def find_api_keys(db: Any, digest: str) -> list[Any]:
-    return await list_table_records(CredentialApiKey, db, {"digest": digest})
+    return await _find_credential(CredentialApiKey, db, digest)
 
 
 async def find_service_keys(db: Any, digest: str) -> list[Any]:
-    return await list_table_records(CredentialServiceKey, db, {"digest": digest})
+    return await _find_credential(CredentialServiceKey, db, digest)
 
 
 async def resolve_user_principal(db: Any, key_row: Any) -> Any | None:

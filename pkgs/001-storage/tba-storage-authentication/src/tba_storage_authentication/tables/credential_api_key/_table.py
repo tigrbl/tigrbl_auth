@@ -9,7 +9,6 @@ from tba_primitives_identity.orm import (
     F,
     GUIDPk,
     IO,
-    KeyDigest,
     LastUsed,
     ValidityWindow,
     RestOltpTable,
@@ -19,8 +18,10 @@ from tba_primitives_identity.orm import (
     String,
 )
 
+from .._key_digest import CredentialKeyDigest
 
-class CredentialApiKey(RestOltpTable, GUIDPk, Created, LastUsed, ValidityWindow, KeyDigest):
+
+class CredentialApiKey(RestOltpTable, GUIDPk, Created, LastUsed, ValidityWindow, CredentialKeyDigest):
     __tablename__ = "credential_api_keys"
     __table_args__ = {"extend_existing": True, "schema": "authn"}
 

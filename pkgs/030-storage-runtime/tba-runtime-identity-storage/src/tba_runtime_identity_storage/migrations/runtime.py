@@ -183,7 +183,13 @@ async def apply_all_async() -> MigrationResult:
         )
         component_plan = orchestrator.plan()
         pending_before.extend(item.revision for item in component_plan.ordered)
-        applied_now.extend(item.revision for item in orchestrator.apply().ordered)
+        # The built-in credential upgrade is forward-only. Future revisions
+        # still require an independent decision before this entry point applies them.
+        approved_forward_only = {"f52f17d5-c59d-4901-974b-64f3c1c19221"}
+        applied = orchestrator.apply(
+            acknowledge_forward_only=set(component_plan.forward_only) <= approved_forward_only
+        )
+        applied_now.extend(item.revision for item in applied.ordered)
         verification = verify_schema_sync(sync_conn)
         return MigrationResult(
             applied=applied_now,

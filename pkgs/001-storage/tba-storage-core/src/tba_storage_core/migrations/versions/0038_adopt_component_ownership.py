@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import importlib
 import importlib.metadata
+from dataclasses import replace
 
 from sqlalchemy import inspect
 
@@ -49,6 +50,12 @@ def upgrade(conn) -> None:
     try:
         for manifest in composition.manifests:
             artifact_version = importlib.metadata.version(manifest.distribution)
+            if manifest.component_id == "tigrbl.identity.storage.authentication":
+                # Adoption stamps the schema that the monolith actually created.
+                # The orchestrator must still execute the credential data upgrade.
+                manifest = replace(
+                    manifest, migration_head="79c73e01-df92-5166-844d-b2e96bcae30b"
+                )
             migration = by_revision[manifest.migration_head]
             ledger.record_migration(
                 migration,

@@ -90,3 +90,30 @@ async def test_admin_enabled_runtime_openapi_declares_tba_security_dependencies(
     assert security_schemes["AdminBearer"] == {"type": "http", "scheme": "bearer"}
     assert "/tenant" in openapi["paths"]
     assert "security" not in openapi["paths"]["/.well-known/openid-configuration"]["get"]
+
+
+@pytest.mark.asyncio
+async def test_admin_key_is_verified_without_a_persisted_digest(tmp_path, monkeypatch):
+    from tba_router_administration_gate import ADMIN_API_KEY_ENV, AdminGate
+
+    async def inner(scope, receive, send):
+        await send({"type": "http.response.start", "status": 204, "headers": []})
+        await send({"type": "http.response.body", "body": b""})
+
+    deployment = resolve_deployment(product_surface="developer-app")
+    monkeypatch.setenv(ADMIN_API_KEY_ENV, "existing-configured-key")
+    gate = AdminGate(
+        inner, deployment=deployment, settings_obj=_settings(tmp_path),
+        admin_path_prefixes=("/client",),
+    )
+    async with AsyncClient(transport=ASGITransport(app=gate), base_url="http://test") as client:
+        for credential in (
+            {"X-API-Key": "existing-configured-key"},
+            {"Authorization": "Bearer existing-configured-key"},
+        ):
+            assert (await client.get("/client", headers=credential)).status_code == 204
+        assert (await client.get("/client", headers={"X-API-Key": "test-admin-key"})).status_code == 403
+
+    monkeypatch.delenv(ADMIN_API_KEY_ENV)
+    AdminGate(inner, deployment=deployment, settings_obj=_settings(tmp_path, key=""))
+    assert not list(tmp_path.iterdir())

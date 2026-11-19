@@ -1,13 +1,17 @@
 from __future__ import annotations
 
+import hashlib
 import importlib
 import pkgutil
 from pathlib import Path
 from importlib.resources import as_file, files
+from uuid import uuid4
 
 import pytest
 from sqlalchemy import create_engine, inspect
 
+from tba_primitives_identity.credential_digests import credential_digest
+from tba_storage_authentication.tables import CredentialApiKey, CredentialServiceKey
 from tba_storage_core.components import COMPONENT_IMPORT_ROOTS, load_full_composition
 from tba_storage_core.tables import TABLE_MODELS as COMPATIBILITY_MODELS
 from tigrbl_migrations import DeploymentLock, MigrationLedger, MigrationOrchestrator
@@ -55,7 +59,7 @@ def test_all_tables_have_one_component_identity_and_one_object_identity() -> Non
     composition, migrations, models = _model_inventory()
     objects = [owned for manifest in composition.manifests for owned in manifest.objects]
     assert len(composition.manifests) == 30
-    assert len(migrations) == 31
+    assert len(migrations) == 32
     assert len(models) == 161
     assert len(COMPATIBILITY_MODELS) == 161
     assert {id(model) for model in models} == {id(model) for model in COMPATIBILITY_MODELS}
@@ -100,9 +104,9 @@ def test_fresh_component_install_is_repeatable_and_records_ownership() -> None:
         ledger = MigrationLedger(connection)
         versions = {manifest.component_id: "0.4.0.dev2" for manifest in composition.manifests}
         orchestrator = MigrationOrchestrator(composition, migrations, ledger, versions)
-        first = orchestrator.apply()
+        first = orchestrator.apply(acknowledge_forward_only=True)
         second = orchestrator.apply()
-        assert len(first.ordered) == 31
+        assert len(first.ordered) == 32
         assert not second.ordered
         assert len(_schema_signature(connection)) == 161
         ownership = connection.exec_driver_sql(
@@ -122,7 +126,7 @@ def test_frozen_monolith_upgrade_matches_fresh_component_schema() -> None:
         versions = {manifest.component_id: "0.4.0.dev2" for manifest in composition.manifests}
         MigrationOrchestrator(
             composition, migrations, MigrationLedger(fresh), versions
-        ).apply()
+        ).apply(acknowledge_forward_only=True)
         versions_package = importlib.import_module(
             "tba_storage_core.migrations.versions"
         )
@@ -161,6 +165,17 @@ def test_legacy_adoption_preserves_data_and_claims_every_object(monkeypatch) -> 
             "INSERT INTO operator_metadata (key, value_json, updated_at) VALUES (?, ?, ?)",
             ("cutover-proof", '{"preserved":true}', "2026-08-05T00:00:00+00:00"),
         )
+        api_id, service_id = uuid4(), uuid4()
+        api = CredentialApiKey.__table__
+        service = CredentialServiceKey.__table__
+        raw = "existing-key-π"
+        old_digest = hashlib.sha256(raw.encode("utf-8")).hexdigest()
+        connection.execute(api.insert().values(
+            id=api_id, principal_id=str(uuid4()), label="existing API", digest=old_digest,
+        ))
+        connection.execute(service.insert().values(
+            id=service_id, service_identity_id=uuid4(), label="existing service", digest=old_digest,
+        ))
         monkeypatch.setattr(importlib.metadata, "version", lambda _distribution: "0.4.0.dev2")
         adoption.upgrade(connection)
         assert connection.exec_driver_sql(
@@ -172,6 +187,18 @@ def test_legacy_adoption_preserves_data_and_claims_every_object(monkeypatch) -> 
         assert connection.exec_driver_sql(
             "SELECT COUNT(*) FROM tigrbl_schema_migrations WHERE application_mode = 'adopted'"
         ).scalar_one() == 30
+        composition, migrations = load_full_composition()
+        versions = {manifest.component_id: "0.4.0.dev2" for manifest in composition.manifests}
+        orchestrator = MigrationOrchestrator(composition, migrations, MigrationLedger(connection), versions)
+        assert len(orchestrator.plan().forward_only) == 1
+        orchestrator.apply(acknowledge_forward_only=True)
+        for table, row_id in ((api, api_id), (service, service_id)):
+            stored = connection.execute(
+                table.select().with_only_columns(table.c.digest).where(table.c.id == row_id)
+            ).scalar_one()
+            assert stored == credential_digest(raw) == credential_digest(raw.encode("utf-8"))
+            assert stored != old_digest
+        assert not orchestrator.apply().ordered
     finally:
         connection.close()
         engine.dispose()

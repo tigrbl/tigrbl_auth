@@ -4,14 +4,12 @@ import hmac
 import logging
 import os
 import secrets
-from pathlib import Path
 from typing import Any, Iterable
 
 from tigrbl.security import APIKey, HTTPBearer, Security
 from tba_primitives_identity import (
     headers_from_scope as _headers,
     json_response as _json_response,
-    sha256_text_digest as _digest,
 )
 from tba_runtime_identity.deployment import ResolvedDeployment
 from tba_runtime_identity.http_standards.admin_security import (
@@ -64,33 +62,23 @@ def _control_plane_enabled(deployment: ResolvedDeployment) -> bool:
     )
 
 
-def _bootstrap_digest(settings_obj: object | None, enabled: bool) -> str | None:
+def _bootstrap_verifier(
+    settings_obj: object | None, enabled: bool, verifier_key: bytes
+) -> bytes | None:
     configured = os.environ.get(ADMIN_API_KEY_ENV) or getattr(
         settings_obj, "admin_api_key", None
     )
     if configured:
-        return _digest(str(configured))
+        return hmac.digest(verifier_key, str(configured).encode("utf-8"), "sha256")
     if not enabled:
         return None
 
     key = secrets.token_urlsafe(32)
-    digest = _digest(key)
-    secret_dir = Path(
-        str(getattr(settings_obj, "admin_api_key_dir", "runtime_secrets"))
-    )
-    secret_dir.mkdir(parents=True, exist_ok=True)
-    digest_path = secret_dir / "admin_api_key.sha256"
-    digest_path.write_text(digest + "\n", encoding="utf-8")
-    try:
-        digest_path.chmod(0o600)
-    except OSError:
-        pass
     logger.warning(
-        "Generated bootstrap admin API key for local control-plane surfaces. "
-        "Set TBA_AUTH_ADMIN_API_KEY to replace it. bootstrap_key_sha256=%s",
-        digest,
+        "Generated an in-memory bootstrap admin API key for local control-plane "
+        "surfaces. Set TBA_AUTH_ADMIN_API_KEY to replace it."
     )
-    return digest
+    return hmac.digest(verifier_key, key.encode("utf-8"), "sha256")
 
 
 def _path_has_prefix(path: str, prefix: str) -> bool:
@@ -162,7 +150,8 @@ class AdminGate:
         self.admin_path_prefixes = tuple(dict.fromkeys(admin_path_prefixes))
         self.diagnostics_prefix = diagnostics_prefix
         self.enabled = _control_plane_enabled(deployment)
-        self._digest = _bootstrap_digest(settings_obj, self.enabled)
+        self._verifier_key = secrets.token_bytes(32)
+        self._digest = _bootstrap_verifier(settings_obj, self.enabled, self._verifier_key)
 
     def __getattr__(self, name: str) -> Any:
         return getattr(self.app, name)
@@ -221,7 +210,10 @@ class AdminGate:
             if (
                 credential
                 and self._digest
-                and hmac.compare_digest(_digest(credential), self._digest)
+                and hmac.compare_digest(
+                    hmac.digest(self._verifier_key, credential.encode("utf-8"), "sha256"),
+                    self._digest,
+                )
             ):
                 authorized = True
             if not authorized:

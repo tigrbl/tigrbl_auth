@@ -25,8 +25,8 @@ manifest_digest = "sha256:b0c1110a94b86aa0f2ca5f6285fa5282150f3abe9d37f4b82bd0bb
 distribution = "tba-storage-authentication"
 artifact = "0.4.0.dev2"
 schema_contract = "1.0.0"
-migration_head = "79c73e01-df92-5166-844d-b2e96bcae30b"
-manifest_digest = "sha256:b7bdb3d1b433223893abe7a31784d6c80cfb37b10e3600bb1ebdd4723286c5f5"
+migration_head = "f52f17d5-c59d-4901-974b-64f3c1c19221"
+manifest_digest = "sha256:2e89d0d437c5418c5c7065a99f3566755772ff4b0956f7f2146691670ff2db52"
 
 [components."tigrbl.identity.storage.authority-graph"]
 distribution = "tba-storage-authority-graph"

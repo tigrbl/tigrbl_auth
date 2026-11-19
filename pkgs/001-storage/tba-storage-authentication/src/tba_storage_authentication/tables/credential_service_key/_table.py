@@ -8,7 +8,6 @@ from tba_primitives_identity.orm import (
     ForeignKeySpec,
     Created,
     GUIDPk,
-    KeyDigest,
     LastUsed,
     ValidityWindow,
     RestOltpTable,
@@ -22,8 +21,10 @@ from tba_primitives_identity.orm import (
     relationship,
 )
 
+from .._key_digest import CredentialKeyDigest
 
-class CredentialServiceKey(RestOltpTable, GUIDPk, Created, LastUsed, ValidityWindow, KeyDigest):
+
+class CredentialServiceKey(RestOltpTable, GUIDPk, Created, LastUsed, ValidityWindow, CredentialKeyDigest):
     __tablename__ = "credential_service_keys"
     __table_args__ = {"extend_existing": True, "schema": "authn"}
 

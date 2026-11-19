@@ -139,3 +139,16 @@ Changes must pass the [README standards gate](https://github.com/tigrbl/tigrbl_a
 ## Verification
 
 A prior published-version quick start informed this example. A registry badge is not evidence that this checkout's selected version or example has been verified against PyPI. See the [public package entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/001-storage/tba-storage-authentication/src/tba_storage_authentication/__init__.py).
+
+
+## Upgrading API and service key verifiers
+
+The authentication component includes a forward-only data migration that replaces
+legacy SHA-256 verifiers with versioned PBKDF2-HMAC-SHA256 verifiers. The migration
+uses the existing verifier, so clients keep presenting the same keys.
+
+Back up the database and stop older writers before applying the migration. The
+TbA server applies the migration during storage initialization. Standalone
+component deployments should apply the authentication component migration with
+forward-only acknowledgement before serving key authentication. Roll back by
+restoring the database snapshot together with the previous application version.

@@ -7,7 +7,7 @@ import_root = "tba_storage_authentication"
 
 [schema]
 contract = "1.0.0"
-migration_head = "79c73e01-df92-5166-844d-b2e96bcae30b"
+migration_head = "f52f17d5-c59d-4901-974b-64f3c1c19221"
 migrations_package = "tba_storage_authentication.migrations.versions"
 
 [[schema.objects]]

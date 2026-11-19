@@ -7,6 +7,7 @@ import pytest
 from tba_provider_authenticator_client_secret_local import ClientSecretLocalAuthenticator
 from tba_provider_authenticator_password_local import PasswordLocalAuthenticator
 from tba_capability_api_key_authentication import ApiKeyAuthenticationCapability
+from tba_primitives_identity.credential_digests import credential_digest
 from tba_capability_client_secret_authentication import ClientSecretAuthenticationCapability
 from tba_capability_password_authentication import PasswordAuthenticationCapability
 from tba_capability_service_key_authentication import ServiceKeyAuthenticationCapability
@@ -127,7 +128,7 @@ async def test_api_key_capability_authenticates_user_and_records_evidence() -> N
     user = {"id": "user-1", "is_active": True}
     credential = {
         "id": "api-key-1",
-        "digest": __import__("hashlib").sha256(b"correct").hexdigest(),
+        "digest": credential_digest("correct"),
         "user": user,
         "status": "active",
     }
@@ -154,7 +155,7 @@ async def test_api_key_capability_authenticates_service_identity() -> None:
     service = {"id": "service-1", "is_active": True}
     credential = {
         "id": "service-key-1",
-        "digest": __import__("hashlib").sha256(b"correct").hexdigest(),
+        "digest": credential_digest("correct"),
         "service_identity": service,
         "status": "active",
     }
@@ -176,7 +177,7 @@ async def test_api_key_capability_authenticates_service_identity() -> None:
 async def test_api_key_capability_rejects_expired_or_inactive_records() -> None:
     expired = {
         "id": "api-key-expired",
-        "digest": __import__("hashlib").sha256(b"correct").hexdigest(),
+        "digest": credential_digest("correct"),
         "user": {"id": "user-1", "is_active": True},
         "valid_to": datetime.now(timezone.utc) - timedelta(seconds=1),
     }
