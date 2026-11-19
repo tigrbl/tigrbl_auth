@@ -9,6 +9,7 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts"))
 from release_one_standards_package import ensure_source_tag, select_release
+import release_one_standards_package as publisher
 
 
 @pytest.fixture
@@ -97,3 +98,41 @@ def test_workflow_uses_oidc_and_the_selected_project_environment():
     assert "PYPI_API_TOKEN" not in workflow
     assert "--phase verify" in selected
     assert "group: monorepo-package-release-trusted-sequential" in workflow
+
+
+def test_waits_for_pypi_metadata_propagation(monkeypatch):
+    outcomes = iter([False, False, True])
+    sleeps = []
+
+    def check(artifact, required):
+        assert required
+        if not next(outcomes):
+            raise publisher.ReleaseIncompleteError("not visible yet")
+        return True
+
+    monkeypatch.setattr(publisher, "check", check)
+    monkeypatch.setattr(publisher.time, "sleep", sleeps.append)
+    publisher.wait_for_pypi_release({}, attempts=3, interval=10)
+    assert sleeps == [10, 10]
+
+
+@pytest.mark.parametrize(
+    "error",
+    [ValueError("PyPI hash conflict"), publisher.ReleaseIncompleteError("incomplete")],
+)
+def test_propagation_wait_is_bounded_and_never_retries_hash_conflicts(
+    monkeypatch, error
+):
+    calls, sleeps = [], []
+
+    def check(artifact, required):
+        calls.append(artifact)
+        raise error
+
+    monkeypatch.setattr(publisher, "check", check)
+    monkeypatch.setattr(publisher.time, "sleep", sleeps.append)
+    with pytest.raises(type(error)):
+        publisher.wait_for_pypi_release({}, attempts=3, interval=10)
+    expected = 3 if isinstance(error, publisher.ReleaseIncompleteError) else 1
+    assert len(calls) == expected
+    assert sleeps == [10] * (expected - 1)

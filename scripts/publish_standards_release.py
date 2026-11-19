@@ -15,6 +15,10 @@ from urllib.request import urlopen
 from build_standards_release import inspect_artifacts
 
 
+class ReleaseIncompleteError(ValueError):
+    """PyPI has not exposed both uploaded distribution files yet."""
+
+
 def remote_files(row: dict) -> dict:
     try:
         with urlopen(
@@ -38,7 +42,9 @@ def check(row: dict, required: bool = False) -> bool:
             raise ValueError(f"PyPI hash conflict: {file['filename']}")
     complete = all(file["filename"] in files for file in row["files"])
     if required and not complete:
-        raise ValueError(f"PyPI release incomplete: {row['name']}=={row['version']}")
+        raise ReleaseIncompleteError(
+            f"PyPI release incomplete: {row['name']}=={row['version']}"
+        )
     return complete
 
 

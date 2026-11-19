@@ -14,7 +14,7 @@ import tempfile
 import time
 
 from build_standards_release import inspect_artifacts
-from publish_standards_release import check
+from publish_standards_release import ReleaseIncompleteError, check
 from verify_standards_installs import verify
 
 
@@ -57,6 +57,24 @@ def ensure_source_tag(row: dict, source_commit: str) -> None:
     subprocess.run(["git", "push", "origin", f"refs/tags/{tag}"], check=True)
 
 
+def wait_for_pypi_release(
+    artifact: dict, attempts: int = 31, interval: int = 10
+) -> None:
+    """Allow five minutes for PyPI metadata propagation, rejecting hash conflicts."""
+    for attempt in range(attempts):
+        try:
+            check(artifact, required=True)
+            return
+        except ReleaseIncompleteError:
+            if attempt == attempts - 1:
+                raise
+            print(
+                "Waiting for both distribution files in PyPI release metadata",
+                flush=True,
+            )
+            time.sleep(interval)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--plan", required=True, type=Path)
@@ -88,14 +106,7 @@ def main() -> None:
         ensure_source_tag(row, manifest["source_commit"])
         print(f"Prepared only {row['name']}=={row['version']}", flush=True)
         return
-    for attempt in range(6):
-        try:
-            check(artifact, required=True)
-            break
-        except ValueError:
-            if attempt == 5:
-                raise
-            time.sleep(10)
+    wait_for_pypi_release(artifact)
     result = verify(
         row,
         Path("clean-install-check").resolve(),
