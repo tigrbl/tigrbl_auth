@@ -6,8 +6,7 @@ on:
       - ".github/workflows/package-python-matrix.yml"
       - "pkgs/**"
       - "scripts/monorepo_release.py"
-      - "tests/packages/**"
-      - "tests/unit/test_monorepo_release.py"
+      - "pkgs/120-tests/tba-tests-release/tests/unit/test_monorepo_release.py"
   push:
     branches:
       - master
@@ -15,8 +14,7 @@ on:
       - ".github/workflows/package-python-matrix.yml"
       - "pkgs/**"
       - "scripts/monorepo_release.py"
-      - "tests/packages/**"
-      - "tests/unit/test_monorepo_release.py"
+      - "pkgs/120-tests/tba-tests-release/tests/unit/test_monorepo_release.py"
   workflow_dispatch:
     inputs:
       package:
@@ -59,7 +57,28 @@ jobs:
           pkgs/120-tests/tba-tests-wimse/tests
           pkgs/120-tests/tba-tests-spiffe/tests
           pkgs/120-tests/tba-tests-workload-composition/tests
+          pkgs/120-tests/tba-tests-storage/tests
+          pkgs/120-tests/tba-tests-authorization/tests
           pkgs/120-tests/tba-tests-workload-credential-conformance/tests
+
+  jose-interop:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6
+        with:
+          repository: swarmauri/swarmauri-sdk
+          ref: e44091135947f859dd60d249cf20fbffc104effc
+          path: .interop/swarmauri-sdk
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.12'
+      - name: Run bidirectional compact JWE interoperability
+        env:
+          SWARMAURI_SDK_ROOT: ${{ github.workspace }}/.interop/swarmauri-sdk
+        run: >-
+          uv run --locked --extra test pytest
+          --tba-suite tba-tests-interop-jose --jose-interop-mode source
 
   discover-package-matrix:
     runs-on: ubuntu-latest

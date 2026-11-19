@@ -2,7 +2,7 @@
 
 Evidence for `feat:target-rfc-8785` and `feat:jcs-canonical-json` is the
 pytest conformance suite for `tba-codec-jcs` at
-`tests/conformance/backlog/test_rfc8785_jcs.py`.
+`pkgs/120-tests/tba-tests-wire-codecs/tests/conformance/backlog/test_rfc8785_jcs.py`.
 
 Verified command:
 

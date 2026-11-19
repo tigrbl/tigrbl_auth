@@ -3,7 +3,7 @@
 **Pairing:** `tba-app-backend-developer` + `@tba/ui-developer`<br>
 **Status:** Delivery brief<br>
 **Prepared:** July 11, 2026<br>
-**Backend app owner:** `pkgs/90-backend-apps/tba-app-backend-developer`<br>
+**Backend app owner:** `pkgs/090-backend-apps/tba-app-backend-developer`<br>
 **UIX owner:** `pkgs/105-ui/tba-ui-developer`
 
 ## 1. Product Decision
@@ -222,8 +222,8 @@ Produce a route-level copy deck containing:
 
 ## 11. Source Evidence
 
-- `pkgs/90-backend-apps/tba-app-backend-developer/README.md`
-- `pkgs/90-backend-apps/tba-app-backend-developer/src/tba_app_backend_developer/contract.py`
+- `pkgs/090-backend-apps/tba-app-backend-developer/README.md`
+- `pkgs/090-backend-apps/tba-app-backend-developer/src/tba_app_backend_developer/contract.py`
 - `pkgs/105-ui/tba-ui-developer/README.md`
 - `pkgs/105-ui/tba-ui-developer/App.tsx`
 - `pkgs/105-ui/tba-ui-developer/services/developerClient.ts`
@@ -231,6 +231,6 @@ Produce a route-level copy deck containing:
 - `pkgs/105-ui/tba-ui-developer/services/workflowCrud.test.ts`
 - `pkgs/105-ui/tba-ui-developer/pages/developerCrudPages.test.tsx`
 - `pkgs/105-ui/tba-ui-developer/pages/OAuthFlowTesterPage.tsx`
-- `tests/packages/tba-app-backend-developer/`
+- `pkgs/120-tests/tba-tests-backend-apps/tests/packages/tba-app-backend-developer/`
 - `tests/unit/test_product_api_surfaces.py`
 - Developer API/UIX SSOT feature/claim/test/evidence/boundary records

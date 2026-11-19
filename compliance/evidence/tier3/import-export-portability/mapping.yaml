@@ -6,7 +6,7 @@ modules:
 - tba_auth/services/import_export_service.py
 - tba_auth/services/operator_service.py
 tests:
-- tests/conformance/operator/test_cli_import_export.py
+- pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
 contracts:
 - contracts\cli_contract.json
 reports:

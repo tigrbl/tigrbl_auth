@@ -1,11 +1,11 @@
 routers:
-- pkgs/80-routers
+- pkgs/080-routers
 backend_apps:
-- pkgs/90-backend-apps
+- pkgs/090-backend-apps
 runtime:
-- pkgs/60-runtime
+- pkgs/060-runtime
 facade:
-- pkgs/70-facade
+- pkgs/070-facade
 uix_core:
 - pkgs/100-uix-core
 ui_apps:

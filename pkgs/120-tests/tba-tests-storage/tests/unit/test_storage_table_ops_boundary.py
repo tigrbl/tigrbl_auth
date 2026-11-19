@@ -1,0 +1,211 @@
+from __future__ import annotations
+
+import ast
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[5]
+PKGS = ROOT / "pkgs"
+
+
+def package_src(name: str) -> Path:
+    matches = sorted(PKGS.glob(f"**/{name}/src"))
+    assert matches, f"missing package src for {name}"
+    return matches[0]
+
+
+STORAGE_ROOT = package_src("tba-storage-core")
+NON_STORAGE_SOURCE_ROOTS = [
+    package_src("tba-app-backend-my-account"),
+    package_src("tba-app-backend-public"),
+    package_src("tba-protocol-oauth"),
+    package_src("tba-credentials"),
+    package_src("tba-operator-identity"),
+    package_src("tba-server-identity"),
+]
+STORAGE_RUNTIME_ROOT = package_src("tba-runtime-identity-storage")
+
+RAW_HANDLER_TOKENS = (
+    ".handlers.create.core",
+    ".handlers.update.core",
+    ".handlers.delete.core",
+    ".handlers.clear.core",
+)
+
+RAW_HANDLER_ALLOWLIST = {
+    "pkgs/060-runtime/tba-server-identity/src/tba_server_identity/security/handler_records.py",
+}
+
+TABLE_ROUTE_FUNCTION_ALLOWLIST = {
+    "profiles.py": {
+        "change_account_password",
+        "get_account_profile",
+        "update_account_profile",
+    },
+    "_user_admin_auth_routes.py": {
+        "admin_change_password",
+        "admin_forgot_password",
+        "admin_login",
+        "admin_login_browser_redirect",
+        "admin_logout",
+        "admin_reset_password",
+        "admin_session",
+    },
+    "identities.py": {
+        "admin_create_identity",
+        "admin_delete_identity",
+        "admin_list_identities",
+        "admin_update_identity",
+    },
+    "auth_code.py": {
+        "authorize",
+    },
+    "consents.py": {
+        "list_account_authorized_apps",
+        "list_account_consents",
+        "revoke_account_authorized_app",
+        "revoke_account_consent",
+    },
+    "device_code.py": {
+        "device_authorization",
+    },
+    "pushed_authorization_request.py": {
+        "par",
+    },
+    "realms.py": {
+        "admin_create_realm",
+        "admin_create_realm_tenant",
+        "admin_delete_realm",
+        "admin_get_realm",
+        "admin_list_realm_tenants",
+        "admin_list_realms",
+        "admin_update_realm",
+    },
+    "user.py": {
+        "admin_change_password",
+        "admin_create_identity",
+        "admin_delete_identity",
+        "admin_forgot_password",
+        "admin_list_identities",
+        "admin_login",
+        "admin_login_browser_redirect",
+        "admin_logout",
+        "admin_reset_password",
+        "admin_session",
+        "admin_update_identity",
+        "change_account_password",
+        "get_account_profile",
+        "update_account_profile",
+    },
+    "logout_state.py": {
+        "logout",
+    },
+    "revoked_token.py": {
+        "revoke",
+    },
+    "token_record.py": {
+        "token",
+    },
+}
+
+
+def _python_files(root: Path) -> list[Path]:
+    return [path for path in root.rglob("*.py") if "__pycache__" not in path.parts]
+
+
+def test_non_storage_packages_do_not_own_raw_durable_table_mutations() -> None:
+    offenders: list[str] = []
+    for root in NON_STORAGE_SOURCE_ROOTS:
+        if not root.exists():
+            continue
+        for path in _python_files(root):
+            rel = path.relative_to(ROOT).as_posix()
+            if rel in RAW_HANDLER_ALLOWLIST:
+                continue
+            source = path.read_text(encoding="utf-8")
+            for token in RAW_HANDLER_TOKENS:
+                if token in source:
+                    offenders.append(f"{rel} uses {token}")
+
+    assert offenders == []
+
+
+def test_no_rpc_support_is_reintroduced_in_product_api_packages() -> None:
+    offenders: list[str] = []
+    for root in [package_src("tba-app-backend-my-account"), package_src("tba-app-backend-public")]:
+        if not root.exists():
+            continue
+        for path in _python_files(root):
+            source = path.read_text(encoding="utf-8")
+            if "openrpc" in source.lower() or '"/rpc"' in source or "'/rpc'" in source:
+                offenders.append(path.relative_to(ROOT).as_posix())
+
+    assert offenders == []
+
+
+def test_protocol_and_facade_ops_packages_are_not_supported() -> None:
+    assert not (package_src("tba-protocol-oauth") / "tba_protocol_oauth" / "ops").exists()
+    assert not (package_src("tba-auth") / "tba_auth" / "ops").exists()
+    assert not (package_src("tba-server-identity") / "tba_server_identity" / "ops").exists()
+    assert not (package_src("tba-server-identity") / "tba_server_identity" / "rest" / "routers").exists()
+    assert not (package_src("tba-auth") / "tba_auth" / "api" / "rest" / "routers").exists()
+
+
+def test_route_and_hook_declarations_are_owned_by_executable_layers() -> None:
+    offenders: list[str] = []
+    storage_tables_root = package_src("tba-storage-core") / "tba_storage_core" / "tables"
+    storage_runtime_root = STORAGE_RUNTIME_ROOT / "tba_runtime_identity_storage"
+    executable_roots = tuple(
+        root.resolve()
+        for layer in ("050-protocols", "060-runtime", "080-routers")
+        for root in (PKGS / layer).glob("*/src")
+    )
+    for root in sorted(PKGS.glob("**/src")):
+        for path in _python_files(root):
+            source = path.read_text(encoding="utf-8")
+            if "@api.route" not in source and "hook_ctx(" not in source:
+                continue
+            resolved = path.resolve()
+            if (
+                storage_tables_root not in path.parents
+                and storage_runtime_root not in path.parents
+                and not any(root in resolved.parents for root in executable_roots)
+            ):
+                rel = path.relative_to(ROOT).as_posix()
+                if "@api.route" in source:
+                    offenders.append(f"{rel} declares route")
+                if "hook_ctx(" in source:
+                    offenders.append(f"{rel} declares hook")
+
+    assert offenders == []
+
+
+def test_protocol_packages_do_not_import_removed_oauth_ops() -> None:
+    offenders: list[str] = []
+    for root in [
+        package_src("tba-protocol-oauth"),
+        package_src("tba-protocol-oidc"),
+        package_src("tba-protocol-oidc-relying-party"),
+    ]:
+        for path in _python_files(root):
+            rel = path.relative_to(ROOT).as_posix()
+            source = path.read_text(encoding="utf-8")
+            if "tba_protocol_oauth.ops" in source:
+                offenders.append(f"{rel} imports removed oauth ops")
+
+    assert offenders == []
+
+
+def test_storage_table_ops_are_not_hidden_in_module_level_free_functions() -> None:
+    offenders: list[str] = []
+    for path in (STORAGE_ROOT / "tba_storage_core" / "tables").glob("*.py"):
+        if path.name in {"__init__.py", "engine.py"} or path.name.startswith("_"):
+            continue
+        tree = ast.parse(path.read_text(encoding="utf-8"))
+        for node in tree.body:
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and not node.name.startswith("_"):
+                if node.name in TABLE_ROUTE_FUNCTION_ALLOWLIST.get(path.name, set()):
+                    continue
+                offenders.append(f"{path.relative_to(ROOT).as_posix()}::{node.name}")
+
+    assert offenders == []

@@ -593,7 +593,7 @@
   "extras_consistency": {
     "passed": true,
     "mismatches": [],
-    "runtime_pyproject": "pkgs/60-runtime/tba-runtime-identity/pyproject.toml",
+    "runtime_pyproject": "pkgs/060-runtime/tba-runtime-identity/pyproject.toml",
     "runtime_runner_extras": {
       "uvicorn": [
         "uvicorn[standard]==0.41.0"

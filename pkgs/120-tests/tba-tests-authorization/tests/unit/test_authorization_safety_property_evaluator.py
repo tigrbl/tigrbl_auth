@@ -1,0 +1,34 @@
+from __future__ import annotations
+
+import tba_tests_identity.formal_auth_helpers  # noqa: F401
+
+from tba_runtime_authorization_policy import (
+    AuthorizationInvariant,
+    AuthorizationSafetyPropertyEvaluator,
+    InvariantEvaluation,
+    VerificationMethod,
+)
+
+
+def test_authorization_safety_property_evaluator_t1_reports_invariant_failures() -> None:
+    invariant = AuthorizationInvariant(
+        invariant_id="authz.no_escalation",
+        title="No escalation",
+        property_family="safety",
+        statement="Authority cannot exceed granted closure.",
+        verification_method=VerificationMethod.GRAPH,
+    )
+
+    result = AuthorizationSafetyPropertyEvaluator((invariant,)).evaluate(
+        (
+            InvariantEvaluation(
+                invariant_id="authz.no_escalation",
+                passed=False,
+                message="effective authority exceeded closure",
+                evaluated_at="2026-06-07T00:00:00+00:00",
+            ),
+        )
+    )
+
+    assert result.passed is False
+    assert result.failures == ("effective authority exceeded closure",)

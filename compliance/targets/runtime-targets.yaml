@@ -14,7 +14,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - pkgs/90-backend-apps/tba-app-backend-core/src/tba_app_backend_core/app.py
+  - pkgs/090-backend-apps/tba-app-backend-core/src/tba_app_backend_core/app.py
   - tba_auth/app.py
   - tba_auth/plugin.py
   - tba_auth/gateway.py
@@ -36,7 +36,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - pkgs/90-backend-apps/tba-app-backend-core/src/tba_app_backend_core/app.py
+  - pkgs/090-backend-apps/tba-app-backend-core/src/tba_app_backend_core/app.py
   - tba_auth/gateway.py
   - tba_auth/cli/handlers.py
   - tba_auth/config/deployment.py
@@ -55,7 +55,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - pkgs/90-backend-apps/tba-app-backend-core/src/tba_app_backend_core/app.py
+  - pkgs/090-backend-apps/tba-app-backend-core/src/tba_app_backend_core/app.py
   - tba_auth/gateway.py
   - tba_auth/cli/handlers.py
   - tba_auth/config/deployment.py
@@ -74,7 +74,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - pkgs/90-backend-apps/tba-app-backend-core/src/tba_app_backend_core/app.py
+  - pkgs/090-backend-apps/tba-app-backend-core/src/tba_app_backend_core/app.py
   - tba_auth/gateway.py
   - tba_auth/cli/handlers.py
   - tba_auth/config/deployment.py

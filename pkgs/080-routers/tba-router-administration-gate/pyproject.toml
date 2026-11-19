@@ -1,0 +1,40 @@
+[project]
+name = "tba-router-administration-gate"
+version = "0.4.0.dev3"
+readme = "README.md"
+description = "Reusable ASGI administration-gate router for TBA."
+requires-python = ">=3.10,<3.16"
+classifiers = [
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Development Status :: 3 - Alpha",
+    "Typing :: Typed",
+]
+license = "Apache-2.0"
+dependencies = ["tigrbl==0.4.5.dev8", "tba-primitives-identity==0.4.0.dev3", "tba-runtime-identity==0.4.0.dev4"]
+license-files = ["LICENSE", "NOTICE"]
+keywords = ["tigrbl", "tba", "identity"]
+
+[[project.authors]]
+name = "Jacob Stewart"
+email = "jacob@swarmauri.com"
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/080-routers/tba-router-administration-gate#readme"
+Documentation = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/080-routers/tba-router-administration-gate#readme"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/080-routers/tba-router-administration-gate"
+Issues = "https://github.com/tigrbl/tigrbl_auth/issues"
+PyPI = "https://pypi.org/project/tba-router-administration-gate/"
+[build-system]
+requires = ["poetry-core>=2.2.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tba_router_administration_gate", from = "src" }]

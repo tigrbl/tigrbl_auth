@@ -9,8 +9,8 @@ targets:
   modules:
   - tba_auth/standards/jose/rfc7515.py
   tests:
-  - tests/conformance/baseline/test_rfc7515_jws.py
-  - tests/unit/test_rfc7515_jws.py
+  - pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7515_jws.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7515_jws.py
   endpoint_mapping: {}
 - target: RFC 7518
   claim:
@@ -21,8 +21,8 @@ targets:
   modules:
   - tba_auth/standards/jose/rfc7518.py
   tests:
-  - tests/conformance/baseline/test_rfc7518_jwa.py
-  - tests/unit/test_rfc7518_jwa.py
+  - pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7518_jwa.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7518_jwa.py
   endpoint_mapping: {}
 profile: baseline
 reports:

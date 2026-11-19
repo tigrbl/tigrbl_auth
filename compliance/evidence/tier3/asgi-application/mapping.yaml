@@ -13,8 +13,8 @@ modules:
 - tba_auth/runtime/registry.py
 - tba_auth/cli/runtime.py
 tests:
-- tests/runtime/test_runner_invariance.py
-- tests/conformance/operator/test_cli_serve_runtime.py
+- pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+- pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
 contracts:
 - contracts\cli_contract.json
 - contracts\runtime_profile_report.json

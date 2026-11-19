@@ -1,13 +1,13 @@
 version: 1
-layer: 05-bases
+layer: 005-bases
 rules:
   ownership: one-canonical-package-per-behavioral-family
   contracts: inherit-layer-02-contracts-or-ports
   models: do-not-redeclare-layer-02-models
-  protocol_wire_models: 50-protocols
-  durability: 01-storage-and-30-storage-runtime
-  deterministic_completion: 10-concrete
-  environment_completion: 20-providers
+  protocol_wire_models: 050-protocols
+  durability: 01-storage-and-030-storage-runtime
+  deterministic_completion: 010-concrete
+  environment_completion: 020-providers
   network_and_storage_io: forbidden
 families:
   foundational:

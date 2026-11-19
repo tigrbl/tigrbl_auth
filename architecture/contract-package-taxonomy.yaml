@@ -1,11 +1,11 @@
 version: 1
-layer: 02-contracts
+layer: 002-contracts
 rules:
   ownership: one-canonical-package-per-semantic-family
   ports: capability-shaped-not-storage-shaped
-  protocol_wire_models: 50-protocols
-  durability: 01-storage-and-30-storage-runtime
-  implementations: 05-bases-10-concrete-20-providers
+  protocol_wire_models: 050-protocols
+  durability: 01-storage-and-030-storage-runtime
+  implementations: 05-bases-10-concrete-020-providers
 families:
   foundational:
     claim: tba-contracts-claim

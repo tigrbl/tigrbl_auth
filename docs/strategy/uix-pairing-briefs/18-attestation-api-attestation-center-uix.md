@@ -3,7 +3,7 @@
 **Proposed pairing:** `tba-router-attestation` + `@tba/attestation-center-uix`<br>
 **Status:** New product surface; key-attestation contracts/runtime/storage and adjacent evidence foundations exist<br>
 **Prepared:** July 11, 2026<br>
-**Proposed router owner:** `pkgs/80-routers/tba-router-attestation`<br>
+**Proposed router owner:** `pkgs/080-routers/tba-router-attestation`<br>
 **Proposed capability owners:** verifier-neutral attestation contracts, appraisal engine, and format/provider adapters<br>
 **Proposed UIX owner:** `pkgs/105-ui/attestation-center-uix`
 
@@ -522,15 +522,15 @@ Guardrails include evidence substitution, weak freshness, false compliance, comp
 
 ### Repository
 
-- `pkgs/02-contracts/tba-contracts-security-trust/src/tba_contracts_security_trust/keys.py`
-- `pkgs/02-contracts/tba-contracts-security-trust/src/tba_contracts_security_trust/protocols.py`
-- `pkgs/05-bases/tba-bases-security-trust-domain/`
-- `pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/crypto_keys.py`
-- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/key_attestation_evidence/`
-- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/machine_identity/`
-- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/workload_identity/`
-- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/release_attestation_event/`
-- `pkgs/60-runtime/tba-runtime-identity-authoring/src/tba_runtime_identity_authoring/release_signing/attestations.py`
+- `pkgs/002-contracts/tba-contracts-security-trust/src/tba_contracts_security_trust/keys.py`
+- `pkgs/002-contracts/tba-contracts-security-trust/src/tba_contracts_security_trust/protocols.py`
+- `pkgs/005-bases/tba-bases-security-trust-domain/`
+- `pkgs/030-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/crypto_keys.py`
+- `pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables/key_attestation_evidence/`
+- `pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables/machine_identity/`
+- `pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables/workload_identity/`
+- `pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables/release_attestation_event/`
+- `pkgs/060-runtime/tba-runtime-identity-authoring/src/tba_runtime_identity_authoring/release_signing/attestations.py`
 - API contract manifests currently exposing `KeyAttestationEvidence`;
 - planned workload-attestation/verifier-trust-policy tests and evidence/certification docs.
 
