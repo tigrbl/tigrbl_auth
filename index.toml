@@ -4034,7 +4034,7 @@ name = "tigrbl-identity-credentials"
 path = "pkgs/deprecated/undead/tigrbl-identity-credentials"
 layer = "deprecated"
 order = "00"
-local_dependencies = []
+local_dependencies = ["tba-credentials", "tba-provider-identity-jose", "tba-runtime-identity", "tba-runtime-identity-storage", "tba-server-identity"]
 same_layer_dependencies = []
 deprecation_state = "undead"
 
@@ -4061,7 +4061,7 @@ name = "tigrbl-identity-oauth"
 path = "pkgs/deprecated/undead/tigrbl-identity-oauth"
 layer = "deprecated"
 order = "00"
-local_dependencies = []
+local_dependencies = ["tba-app-backend-core", "tba-protocol-oauth", "tba-runtime-identity-storage", "tba-storage-core"]
 same_layer_dependencies = []
 deprecation_state = "undead"
 
@@ -4070,7 +4070,16 @@ name = "tigrbl-identity-oidc"
 path = "pkgs/deprecated/undead/tigrbl-identity-oidc"
 layer = "deprecated"
 order = "00"
-local_dependencies = []
+local_dependencies = ["tba-cli-identity", "tba-protocol-oidc"]
+same_layer_dependencies = []
+deprecation_state = "undead"
+
+[[packages]]
+name = "tigrbl-identity-policy"
+path = "pkgs/deprecated/undead/tigrbl-identity-policy"
+layer = "deprecated"
+order = "00"
+local_dependencies = ["tba-certification-release", "tba-router-administration-gate", "tba-runtime-authorization-policy"]
 same_layer_dependencies = []
 deprecation_state = "undead"
 
@@ -4079,7 +4088,7 @@ name = "tigrbl-identity-resource-server"
 path = "pkgs/deprecated/undead/tigrbl-identity-resource-server"
 layer = "deprecated"
 order = "00"
-local_dependencies = []
+local_dependencies = ["tba-protocol-oauth-protected-resource"]
 same_layer_dependencies = []
 deprecation_state = "undead"
 
@@ -4088,7 +4097,7 @@ name = "tigrbl-identity-rp"
 path = "pkgs/deprecated/undead/tigrbl-identity-rp"
 layer = "deprecated"
 order = "00"
-local_dependencies = []
+local_dependencies = ["tba-protocol-oidc-relying-party"]
 same_layer_dependencies = []
 deprecation_state = "undead"
 
@@ -4226,15 +4235,6 @@ order = "01"
 local_dependencies = ["tigrbl-identity-credentials-concrete", "tigrbl-identity-identities-concrete"]
 same_layer_dependencies = ["tigrbl-identity-credentials-concrete", "tigrbl-identity-identities-concrete"]
 deprecation_state = "never-lived"
-
-[[packages]]
-name = "tigrbl-identity-policy"
-path = "pkgs/deprecated/undead/tigrbl-identity-policy"
-layer = "deprecated"
-order = "01"
-local_dependencies = ["tigrbl-authz-policy-invariant-registry"]
-same_layer_dependencies = ["tigrbl-authz-policy-invariant-registry"]
-deprecation_state = "undead"
 
 [[packages]]
 name = "tigrbl-principal-authentication"

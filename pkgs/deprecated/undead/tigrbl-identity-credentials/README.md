@@ -102,7 +102,7 @@ This package owns only the historical `tigrbl_identity_credentials` namespace an
 
 ## Injected dependencies
 
-The package declares each canonical owner used by its shims with compatible prerelease ranges. The server owner requires `tba-server-identity>=0.4.0.dev3,<0.5` for its corrected Tigrbl auth-context integration; other owners start at `0.4.0.dev2`. Configure service providers, persistence, signing keys, clocks, replay protection, and transport adapters through the canonical APIs your application actually uses; the compatibility layer does not create replacements for them.
+The package declares each canonical owner used by its shims with compatible prerelease ranges. The server owner requires `tba-server-identity>=0.4.0.dev4,<0.5` for its corrected Tigrbl auth-context integration; other owners start at `0.4.0.dev2`. Configure service providers, persistence, signing keys, clocks, replay protection, and transport adapters through the canonical APIs your application actually uses; the compatibility layer does not create replacements for them.
 
 ## Operations and readiness
 

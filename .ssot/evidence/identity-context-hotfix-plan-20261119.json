@@ -1,1 +1,1 @@
-{"packages":[{"functional_checks":["identity-auth-context"],"import_root":"tba_server_identity","name":"tba-server-identity","path":"pkgs/60-runtime/tba-server-identity","version":"0.4.0.dev3"}],"purpose":"Repair the published migration dependency before final credential deprecation"}
+{"packages":[{"functional_checks":["identity-auth-context"],"import_root":"tba_server_identity","name":"tba-server-identity","path":"pkgs/60-runtime/tba-server-identity","version":"0.4.0.dev4"}],"purpose":"Repair the published migration dependency before final credential deprecation"}
