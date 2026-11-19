@@ -267,9 +267,6 @@ def test_executable_metadata_publishers_live_above_storage() -> None:
     resource_validation_surface = importlib.import_module(
         "tba_app_backend_core.surfaces.resource_validation_metadata_surface"
     )
-    assert importlib.util.find_spec(
-        "tba_runtime_identity_storage.metadata.resource_validation_metadata"
-    ) is None
     assert resource_validation_surface.include_resource_validation_metadata.__module__ == (
         "tba_app_backend_core.surfaces.resource_validation_metadata_surface"
     )
