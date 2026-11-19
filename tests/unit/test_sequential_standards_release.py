@@ -92,7 +92,11 @@ def test_workflow_uses_oidc_and_the_selected_project_environment():
     ).read_text()
     selected = workflow.split("  publish-one-standards-package:", 1)[1]
     assert "id-token: write" in selected
-    assert "name: pypi-${{ inputs.package }}" in selected
+    assert (
+        "inputs.reuse_pypi_environment && 'pypi' || format('pypi-{0}', inputs.package)"
+        in selected
+    )
+    assert "PUBLISHER_ENVIRONMENT:" in selected
     assert "pypi-trusted-publish@" in selected
     assert "packages-dir: prepared-dist" in selected
     assert "PYPI_API_TOKEN" not in workflow

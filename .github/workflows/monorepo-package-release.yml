@@ -3,6 +3,11 @@ name: monorepo-package-release-trusted-sequential
 on:
   workflow_dispatch:
     inputs:
+      reuse_pypi_environment:
+        description: Reuse an existing publisher for this workflow and the pypi environment.
+        type: boolean
+        required: false
+        default: false
       standards_build:
         description: Build and validate the committed standards plan without publishing.
         type: boolean
@@ -303,12 +308,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     environment:
-      name: pypi-${{ inputs.package }}
+      name: ${{ inputs.reuse_pypi_environment && 'pypi' || format('pypi-{0}', inputs.package) }}
       url: https://pypi.org/project/${{ inputs.package }}/
     permissions:
       actions: read
       contents: write
       id-token: write
+    env:
+      PUBLISHER_ENVIRONMENT: ${{ inputs.reuse_pypi_environment && 'pypi' || format('pypi-{0}', inputs.package) }}
     steps:
       - uses: actions/checkout@v6
         with:
