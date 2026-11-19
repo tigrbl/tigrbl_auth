@@ -1,4 +1,4 @@
-name: Publish CWDO TbA release recovery
+name: publish-tba
 
 on:
   workflow_dispatch:
@@ -7,46 +7,33 @@ permissions:
   contents: read
 
 jobs:
-  publish:
-    if: github.repository == 'tigrbl/tigrbl_auth' && github.ref == 'refs/heads/fxxx/cwdo-pypi-recovery'
+  build:
     runs-on: ubuntu-latest
-    environment: pypi
     steps:
       - uses: actions/checkout@v6
+      - name: Build tba distributions
+        uses: cobycloud/actions/actions/python-package-build@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
-          ref: 8336ed4eb6b76940653742fbf58ce0dba08049e7
-          persist-credentials: false
-      - uses: actions/setup-python@v6
+          python-version: "3.12"
+          project-path: pkgs/70-facade/tba
+          out-dir: dist/tba
+          upload-artifact: "true"
+          artifact-name: python-dist-tba
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v8
         with:
-          python-version: '3.12'
-      - name: Build and verify the three merged packages
-        shell: bash
-        run: |
-          set -euo pipefail
-          test "$(git rev-parse HEAD)" = 8336ed4eb6b76940653742fbf58ce0dba08049e7
-          python -m pip install uv==0.11.28
-          uv build --no-sources pkgs/50-protocols/tba-protocol-oidc-relying-party --out-dir "$PWD/dist/protocol"
-          uv build --no-sources pkgs/30-storage-runtime/tba-runtime-relying-party-session --out-dir "$PWD/dist/runtime"
-          uv build --no-sources pkgs/80-routers/tba-router-relying-party-session --out-dir "$PWD/dist/router"
-          python - <<'PY'
-          from pathlib import Path
-          for directory, name, version in (
-              ("protocol", "tba_protocol_oidc_relying_party", "0.4.0.dev4"),
-              ("runtime", "tba_runtime_relying_party_session", "0.4.0.dev5"),
-              ("router", "tba_router_relying_party_session", "0.4.0.dev5"),
-          ):
-              expected = {f"{name}-{version}-py3-none-any.whl", f"{name}-{version}.tar.gz"}
-              actual = {path.name for path in Path("dist", directory).iterdir() if path.name != ".gitignore"}
-              if actual != expected:
-                  raise SystemExit(f"Unexpected release files in {directory}: {actual}")
-          PY
-      - name: Upload the approved releases to PyPI
-        shell: bash
-        env:
-          UV_PUBLISH_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
-        run: |
-          set -euo pipefail
-          test -n "${UV_PUBLISH_TOKEN:-}"
-          for package in protocol runtime router; do
-            uv publish --check-url https://pypi.org/simple/ "dist/$package"/*
-          done
+          name: python-dist-tba
+          path: dist/tba
+      - name: Publish tba to PyPI with Trusted Publishing
+        uses: cobycloud/actions/actions/pypi-trusted-publish@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
+        with:
+          packages-dir: dist/tba
+          skip-existing: "true"
