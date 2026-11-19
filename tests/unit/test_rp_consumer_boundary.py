@@ -145,6 +145,72 @@ def test_rp_t1_authorization_callback_confidential_exchange_and_refresh() -> Non
 
 
 @pytest.mark.unit
+def test_confidential_callback_verifies_identity_without_persisting_tokens() -> None:
+    rp = _rp()
+    _, login = rp.build_authorization_url("https://issuer.example.test/authorize")
+    callback = rp.parse_callback(
+        f"https://rp.example.test/callback?code=abc&state={login.state}"
+    )
+
+    def exchange(payload):
+        assert payload["code_verifier"] == login.code_verifier
+        assert payload["redirect_uri"] == rp.config.redirect_uri
+        return {"id_token": "signed-token", "sub": "unverified-subject"}
+
+    def verifier(token):
+        assert token == "signed-token"
+        return {
+            "iss": rp.config.issuer,
+            "aud": rp.config.client_id,
+            "nonce": login.nonce,
+            "exp": 200,
+            "sub": "verified-subject",
+        }
+
+    with pytest.raises(RPError, match="browser transaction"):
+        rp.complete_confidential_callback(
+            exchange, callback, browser_state="other-browser", verifier=verifier, now=100
+        )
+
+    identity = rp.complete_confidential_callback(
+        exchange, callback, browser_state=login.state, verifier=verifier, now=100
+    )
+    assert identity.subject == "verified-subject"
+    with pytest.raises(ValueError, match="unknown RP session"):
+        rp.token_store.get(login.state)
+    with pytest.raises(RPError):
+        rp.complete_confidential_callback(
+            exchange, callback, browser_state=login.state, verifier=verifier, now=100
+        )
+
+
+@pytest.mark.unit
+def test_confidential_callback_rejects_nonce_mismatch_without_saving_tokens() -> None:
+    rp = _rp()
+    _, login = rp.build_authorization_url("https://issuer.example.test/authorize")
+    callback = rp.parse_callback(
+        f"https://rp.example.test/callback?code=abc&state={login.state}"
+    )
+
+    with pytest.raises(RPError, match="nonce mismatch"):
+        rp.complete_confidential_callback(
+            lambda _: {"id_token": "signed-token"},
+            callback,
+            browser_state=login.state,
+            verifier=lambda _: {
+                "iss": rp.config.issuer,
+                "aud": rp.config.client_id,
+                "nonce": "other-transaction",
+                "exp": 200,
+                "sub": "verified-subject",
+            },
+            now=100,
+        )
+    with pytest.raises(ValueError, match="unknown RP session"):
+        rp.token_store.get(login.state)
+
+
+@pytest.mark.unit
 def test_rp_t1_discovery_jwks_id_token_userinfo_logout_and_adapter() -> None:
     rp = _rp()
     discovery = DiscoveryClient(
