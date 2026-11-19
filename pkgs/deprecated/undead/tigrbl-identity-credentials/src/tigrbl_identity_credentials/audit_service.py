@@ -1,4 +1,4 @@
-"""Deprecated compatibility module for `tigrbl_identity_storage_runtime.audit`."""
+"""Deprecated compatibility module for `tba_runtime_identity_storage.audit`."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ from importlib import import_module as _import_module
 import warnings as _warnings
 
 _DEPRECATED_MODULE = "tigrbl_identity_credentials.audit_service"
-_CANONICAL_MODULE = "tigrbl_identity_storage_runtime.audit"
+_CANONICAL_MODULE = "tba_runtime_identity_storage.audit"
 
 _warnings.warn(
     f"{_DEPRECATED_MODULE} is deprecated; import {_CANONICAL_MODULE} instead.",

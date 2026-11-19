@@ -6,7 +6,7 @@ from importlib import import_module as _import_module
 import warnings as _warnings
 
 _DEPRECATED_MODULE = "tigrbl_identity_oidc.discovery_service"
-_CANONICAL_MODULE = "tigrbl_identity_cli.discovery_service"
+_CANONICAL_MODULE = "tba_cli_identity.discovery_service"
 
 _warnings.warn(
     f"{_DEPRECATED_MODULE} is deprecated; import {_CANONICAL_MODULE} instead.",

@@ -5,10 +5,10 @@
 <a href="https://github.com/tigrbl/tigrbl_auth#readme"><img src="https://raw.githubusercontent.com/tigrbl/tigrbl_auth/master/docs/assets/tba-brand.png" alt="TBA · Tigrbl Auth" width="240"></a>
 </p>
 <p align="center">
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/60-runtime/tba-server-identity/pyproject.toml"><img alt="Checkout: 0.4.0.dev4" src="https://img.shields.io/badge/Checkout-0.4.0.dev4-1f6feb"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/60-runtime/tba-server-identity/pyproject.toml"><img alt="Checkout: 0.4.0.dev3" src="https://img.shields.io/badge/Checkout-0.4.0.dev3-1f6feb"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/60-runtime/tba-server-identity/pyproject.toml"><img alt="Python: &gt;=3.10,&lt;3.16" src="https://img.shields.io/badge/Python-%3E%3D3.10%2C%3C3.16-3776ab"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/tba-server-identity%3D%3D0.4.0.dev4/pkgs/60-runtime/tba-server-identity/LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/License-Apache--2.0-525252"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/tba-server-identity%3D%3D0.4.0.dev4/pkgs/60-runtime/tba-server-identity/NOTICE"><img alt="Notice: attribution" src="https://img.shields.io/badge/Notice-attribution-525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/tba-server-identity%3D%3D0.4.0.dev3/pkgs/60-runtime/tba-server-identity/LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/License-Apache--2.0-525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/tba-server-identity%3D%3D0.4.0.dev3/pkgs/60-runtime/tba-server-identity/NOTICE"><img alt="Notice: attribution" src="https://img.shields.io/badge/Notice-attribution-525252"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/60-runtime"><img alt="Layer: 60 runtime" src="https://img.shields.io/badge/Layer-60%20runtime-0a7f5a"></a>
 <a href="https://pypi.org/project/tba-server-identity/"><img alt="PyPI version for tba-server-identity" src="https://img.shields.io/pypi/v/tba-server-identity?label=tba-server-identity%20PyPI"></a>
 </p>
@@ -91,13 +91,13 @@ Manifest dependencies are installation requirements; they do not by themselves e
 
 `tba-server-identity` exposes runtime composition and operator entry points. Public operations found in its source:
 
-- `AssemblyManifest.public_routes` — [source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/60-runtime/tba-server-identity/src/tba_server_identity/assembly.py).
-- `AssemblyManifest.admin_routes` — [source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/60-runtime/tba-server-identity/src/tba_server_identity/assembly.py).
-- `AssemblyManifest.route_names` — [source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/60-runtime/tba-server-identity/src/tba_server_identity/assembly.py).
-- `build_route_surface_registry` — [source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/60-runtime/tba-server-identity/src/tba_server_identity/assembly.py).
-- `compose_server_manifest` — [source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/60-runtime/tba-server-identity/src/tba_server_identity/assembly.py).
-- `assert_public_admin_separation` — [source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/60-runtime/tba-server-identity/src/tba_server_identity/assembly.py).
-- `provider_server_profile` — [source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/60-runtime/tba-server-identity/src/tba_server_identity/assembly.py).
+- `AssemblyManifest.public_routes` â€” [source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/60-runtime/tba-server-identity/src/tba_server_identity/assembly.py).
+- `AssemblyManifest.admin_routes` â€” [source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/60-runtime/tba-server-identity/src/tba_server_identity/assembly.py).
+- `AssemblyManifest.route_names` â€” [source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/60-runtime/tba-server-identity/src/tba_server_identity/assembly.py).
+- `build_route_surface_registry` â€” [source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/60-runtime/tba-server-identity/src/tba_server_identity/assembly.py).
+- `compose_server_manifest` â€” [source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/60-runtime/tba-server-identity/src/tba_server_identity/assembly.py).
+- `assert_public_admin_separation` â€” [source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/60-runtime/tba-server-identity/src/tba_server_identity/assembly.py).
+- `provider_server_profile` â€” [source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/60-runtime/tba-server-identity/src/tba_server_identity/assembly.py).
 
 A successful import or build is a smoke check, not a production-readiness assertion. Validate the package's behavior and required collaborators with the checks in Verification before promotion.
 

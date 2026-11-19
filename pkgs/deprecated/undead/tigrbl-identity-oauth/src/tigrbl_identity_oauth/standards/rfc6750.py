@@ -6,7 +6,7 @@ from importlib import import_module as _import_module
 import warnings as _warnings
 
 _DEPRECATED_MODULE = "tigrbl_identity_oauth.standards.rfc6750"
-_CANONICAL_MODULE = "tigrbl_auth_protocol_oauth.standards.bearer_token_usage"
+_CANONICAL_MODULE = "tba_protocol_oauth.standards.bearer_token_usage"
 
 _warnings.warn(
     f"{_DEPRECATED_MODULE} is deprecated; import {_CANONICAL_MODULE} instead.",

@@ -6,7 +6,7 @@ from importlib import import_module as _import_module
 import warnings as _warnings
 
 _DEPRECATED_MODULE = "tigrbl_identity_oauth.ops.device_authorization"
-_CANONICAL_MODULE = "tigrbl_auth_backend_app_core.surfaces.device_authorization_surface"
+_CANONICAL_MODULE = "tba_app_backend_core.surfaces.device_authorization_surface"
 
 _warnings.warn(
     f"{_DEPRECATED_MODULE} is deprecated; import {_CANONICAL_MODULE} instead.",

@@ -11,6 +11,51 @@ import tempfile
 import time
 
 
+MIGRATION_PROBE = """
+import importlib, json, pathlib, sys, warnings
+rows = json.loads(sys.argv[1])
+environment = pathlib.Path(sys.prefix).resolve()
+checks = []
+for row in rows:
+    # A parent may have imported a child; execute each shim again to observe
+    # its own warning, without replacing or copying the canonical objects.
+    sys.modules.pop(row['legacy'], None)
+    with warnings.catch_warnings(record=True) as observed:
+        warnings.simplefilter('always', DeprecationWarning)
+        legacy = importlib.import_module(row['legacy'])
+    canonical = importlib.import_module(row['replacement'])
+    expected = f"{row['legacy']} is deprecated; import {row['replacement']} instead."
+    assert any(issubclass(w.category, DeprecationWarning) and str(w.message) == expected
+               for w in observed), f"Missing migration warning: {expected}"
+    for module in (legacy, canonical):
+        origin = pathlib.Path(module.__file__).resolve()
+        assert origin.is_relative_to(environment), f'Non-isolated module: {origin}'
+    exports = getattr(canonical, '__all__', [n for n in vars(canonical) if not n.startswith('_')])
+    for name in exports:
+        assert getattr(legacy, name) is getattr(canonical, name), f"Changed public object: {row['legacy']}.{name}"
+    checks.append(dict(legacy=row['legacy'], replacement=row['replacement'],
+                       warning_verified=True, exports_verified=True, isolated=True))
+print(json.dumps(dict(passed=True, module_count=len(checks), modules=checks)))
+"""
+
+
+FUNCTIONAL_PROBES = {
+    "identity-auth-context": """
+import json
+from types import SimpleNamespace
+from tigrbl.config.constants import TIGRBL_AUTH_CONTEXT_ATTR
+from tba_server_identity.security.authn_adapters.context import set_auth_context
+request = SimpleNamespace(state=SimpleNamespace())
+for principal, expected in [({'tid': 'tenant', 'sub': 'user'}, {'tenant_id': 'tenant', 'user_id': 'user'}),
+                            ({'tenant_id': 'tenant', 'user_id': 'user'}, {'tenant_id': 'tenant', 'user_id': 'user'}),
+                            (None, {})]:
+    set_auth_context(request, principal)
+    assert getattr(request.state, TIGRBL_AUTH_CONTEXT_ATTR) == expected
+print(json.dumps({'passed': True, 'cases': 3}))
+"""
+}
+
+
 def run(command: list[str]) -> str:
     process = subprocess.run(
         command,
@@ -58,6 +103,13 @@ def verify(
             prior["version"] == row["version"]
             and prior["mode"] == mode
             and prior["passed"]
+            and (
+                not row.get("migration_modules")
+                or prior.get("migration_check", {}).get("module_count")
+                == len(row["migration_modules"])
+            )
+            and set(prior.get("functional_checks", {}))
+            == set(row.get("functional_checks", []))
         ):
             return prior
     try:
@@ -125,6 +177,27 @@ def verify(
                 imported=imported,
                 dependency_check="passed",
             )
+            if row.get("migration_modules"):
+                result["migration_check"] = json.loads(
+                    run(
+                        [
+                            str(python),
+                            "-I",
+                            "-c",
+                            MIGRATION_PROBE,
+                            json.dumps(row["migration_modules"]),
+                        ]
+                    ).splitlines()[-1]
+                )
+            if row.get("functional_checks"):
+                result["functional_checks"] = {
+                    name: json.loads(
+                        run(
+                            [str(python), "-I", "-c", FUNCTIONAL_PROBES[name]]
+                        ).splitlines()[-1]
+                    )
+                    for name in row["functional_checks"]
+                }
     except Exception as error:
         result = dict(
             name=row["name"],

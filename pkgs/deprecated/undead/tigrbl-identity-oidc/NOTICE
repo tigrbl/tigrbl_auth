@@ -1,0 +1,10 @@
+Tigrbl Auth (TBA)
+
+Project: https://github.com/tigrbl/tigrbl_auth
+Attribution: Jacob Stewart and the Tigrbl Auth contributors.
+
+Distributed under the Apache License, Version 2.0.
+See the accompanying LICENSE file for the license terms.
+
+Distribution: tigrbl-identity-oidc
+Source: https://github.com/tigrbl/tigrbl_auth/tree/tigrbl-identity-oidc%3D%3D0.4.0.dev3/pkgs/deprecated/undead/tigrbl-identity-oidc

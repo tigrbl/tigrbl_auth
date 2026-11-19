@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from tigrbl.config.constants import TBA_AUTH_CONTEXT_ATTR
+from tigrbl.config.constants import TIGRBL_AUTH_CONTEXT_ATTR
 from tigrbl.requests import Request
 
 
@@ -23,7 +23,7 @@ def set_auth_context(request: Request, principal: dict | None) -> None:
             ctx["tenant_id"] = tid
         if uid is not None:
             ctx["user_id"] = uid
-    setattr(request.state, TBA_AUTH_CONTEXT_ATTR, ctx)
+    setattr(request.state, TIGRBL_AUTH_CONTEXT_ATTR, ctx)
 
 
 __all__ = ["set_auth_context"]

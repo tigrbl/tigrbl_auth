@@ -1,4 +1,4 @@
-"""Deprecated compatibility module for `tigrbl_authz_policy.delegation`."""
+"""Deprecated compatibility module for `tba_runtime_authorization_policy.delegation`."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ from importlib import import_module as _import_module
 import warnings as _warnings
 
 _DEPRECATED_MODULE = "tigrbl_identity_policy.delegation_proofs"
-_CANONICAL_MODULE = "tigrbl_authz_policy.delegation"
+_CANONICAL_MODULE = "tba_runtime_authorization_policy.delegation"
 
 _warnings.warn(
     f"{_DEPRECATED_MODULE} is deprecated; import {_CANONICAL_MODULE} instead.",

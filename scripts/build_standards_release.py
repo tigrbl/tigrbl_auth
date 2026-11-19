@@ -37,6 +37,28 @@ def inspect_artifacts(row: dict, directory: Path) -> list[dict]:
         assert f"https://static.pepy.tech/badge/{row['name']}/month" in description
         assert f"{row['path']}/README.md.svg" in description
         assert "docs/assets/tba-brand.png" in description
+        if row.get("deprecation"):
+            assert "Development Status :: 7 - Inactive" in metadata.get_all(
+                "Classifier", []
+            )
+            assert "Deprecated compatibility package" in metadata["Summary"]
+            assert "**Deprecated:**" in description
+            assert "### Migration" in description
+            assert any(
+                value
+                == f"Replacement, https://pypi.org/project/{row['primary_replacement']}/"
+                for value in metadata.get_all("Project-URL", [])
+            )
+            for module in row["migration_modules"]:
+                assert f"`{module['legacy']}`" in description
+                assert f"`{module['replacement']}`" in description
+                module_path = module["legacy"].replace(".", "/")
+                candidates = [module_path + ".py", module_path + "/__init__.py"]
+                payload = archive.read(
+                    next(p for p in candidates if p in archive.namelist())
+                ).decode()
+                assert f'_CANONICAL_MODULE = "{module["replacement"]}"' in payload
+                assert "DeprecationWarning" in payload
         base = metadata_path.removesuffix("METADATA") + "licenses/"
         for name in ("LICENSE", "NOTICE"):
             assert archive.read(base + name) == (source / name).read_bytes()

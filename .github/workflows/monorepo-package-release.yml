@@ -289,7 +289,7 @@ jobs:
         run: |
           uv run --no-project python scripts/verify_readme_standards.py
           uv run --no-project python scripts/verify_package_standards.py
-          uv run --no-project --with pytest python -I -m pytest tests/unit/test_readme_standards.py tests/unit/test_package_standards.py tests/unit/test_standards_release_artifacts.py tests/unit/test_sequential_standards_release.py --confcutdir=tests/unit -c /dev/null -q
+          uv run --no-project --with pytest python -I -m pytest tests/unit/test_readme_standards.py tests/unit/test_package_standards.py tests/unit/test_standards_release_artifacts.py tests/unit/test_sequential_standards_release.py tests/unit/test_final_deprecation_release.py --confcutdir=tests/unit -c /dev/null -q
       - name: Build and inspect all prepared artifacts without publishing
         env:
           STANDARDS_PLAN: ${{ inputs.standards_plan }}
