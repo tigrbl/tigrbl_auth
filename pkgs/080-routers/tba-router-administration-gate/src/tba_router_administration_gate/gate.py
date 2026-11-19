@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import asyncio
+import hashlib
 import hmac
 import logging
 import os
@@ -62,14 +64,18 @@ def _control_plane_enabled(deployment: ResolvedDeployment) -> bool:
     )
 
 
+def _derive_admin_verifier(credential: str, salt: bytes) -> bytes:
+    return hashlib.pbkdf2_hmac("sha256", credential.encode("utf-8"), salt, 600_000)
+
+
 def _bootstrap_verifier(
-    settings_obj: object | None, enabled: bool, verifier_key: bytes
+    settings_obj: object | None, enabled: bool, salt: bytes
 ) -> bytes | None:
     configured = os.environ.get(ADMIN_API_KEY_ENV) or getattr(
         settings_obj, "admin_api_key", None
     )
     if configured:
-        return hmac.digest(verifier_key, str(configured).encode("utf-8"), "sha256")
+        return _derive_admin_verifier(str(configured), salt)
     if not enabled:
         return None
 
@@ -78,7 +84,7 @@ def _bootstrap_verifier(
         "Generated an in-memory bootstrap admin API key for local control-plane "
         "surfaces. Set TBA_AUTH_ADMIN_API_KEY to replace it."
     )
-    return hmac.digest(verifier_key, key.encode("utf-8"), "sha256")
+    return _derive_admin_verifier(key, salt)
 
 
 def _path_has_prefix(path: str, prefix: str) -> bool:
@@ -150,8 +156,8 @@ class AdminGate:
         self.admin_path_prefixes = tuple(dict.fromkeys(admin_path_prefixes))
         self.diagnostics_prefix = diagnostics_prefix
         self.enabled = _control_plane_enabled(deployment)
-        self._verifier_key = secrets.token_bytes(32)
-        self._digest = _bootstrap_verifier(settings_obj, self.enabled, self._verifier_key)
+        self._verifier_salt = secrets.token_bytes(32)
+        self._digest = _bootstrap_verifier(settings_obj, self.enabled, self._verifier_salt)
 
     def __getattr__(self, name: str) -> Any:
         return getattr(self.app, name)
@@ -211,7 +217,7 @@ class AdminGate:
                 credential
                 and self._digest
                 and hmac.compare_digest(
-                    hmac.digest(self._verifier_key, credential.encode("utf-8"), "sha256"),
+                    await asyncio.to_thread(_derive_admin_verifier, credential, self._verifier_salt),
                     self._digest,
                 )
             ):

@@ -55,3 +55,15 @@ def test_api_and_service_key_authenticators_own_digest_verification() -> None:
     assert not api_key.matches_digest("wrong", api_digest)
     assert service_key.matches_digest("service-secret", service_digest)
     assert not service_key.matches_digest("wrong", service_digest)
+
+
+def test_binary_keys_match_after_transforming_the_legacy_digest() -> None:
+    from hashlib import sha256
+
+    from tba_primitives_identity.credential_digests import harden_legacy_credential_digest
+
+    existing = b"opaque\xffkey"
+    migrated = harden_legacy_credential_digest(sha256(existing).hexdigest())
+    for provider in (ApiKeyLocalAuthenticator(), ServiceKeyLocalAuthenticator()):
+        assert provider.matches_digest(existing, migrated)
+        assert not provider.matches_digest(b"wrong", migrated)

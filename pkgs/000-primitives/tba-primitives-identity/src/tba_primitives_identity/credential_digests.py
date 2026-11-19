@@ -26,11 +26,21 @@ def harden_legacy_credential_digest(digest: str) -> str:
     return CREDENTIAL_DIGEST_V2_PREFIX + derived.hex()
 
 
-def credential_digest(value: str | bytes) -> str:
-    """Derive the same verifier for a presented key as the data migration."""
+def text_credential_digest(value: str) -> str:
+    """Use the text encoding and prehash that created the legacy records."""
+    from .orm import KeyDigest
+
     if not value:
         raise ValueError("credential key is required")
-    material = value.encode("utf-8") if isinstance(value, str) else bytes(value)
-    # The prehash is required for compatibility. A bare prehash is never
-    # returned or written as a credential verifier.
-    return harden_legacy_credential_digest(sha256_digest(material).hex())
+    return harden_legacy_credential_digest(KeyDigest.digest_of(value))
+
+
+def credential_digest(value: str | bytes) -> str:
+    """Derive a stored verifier from text or opaque binary key material."""
+    if isinstance(value, str):
+        return text_credential_digest(value)
+    if not value:
+        raise ValueError("credential key is required")
+    # Opaque bytes can be used by standalone providers. HTTP key entry
+    # points use the existing text format and its canonical prehash.
+    return harden_legacy_credential_digest(sha256_digest(bytes(value)).hex())

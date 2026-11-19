@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import inspect
 from collections.abc import Awaitable, Callable, Mapping
 from datetime import datetime, timezone
@@ -45,7 +46,8 @@ class ApiKeyAuthenticationCapability(Capability):
         super().__init__(CapabilityDefinition("principal.authentication.api-key", "1.0"), operations={"authenticate_api_key": CapabilityOperation(target=self.authenticate_api_key, delegated=True)})
 
     async def authenticate_api_key(self, *, api_key: str, db: object) -> RecordAuthenticationResult:
-        credential = _valid_key(await _resolve(self._find_api_keys(db, self._authenticator.digest_key(api_key))))
+        digest = await asyncio.to_thread(self._authenticator.digest_text_key, api_key)
+        credential = _valid_key(await _resolve(self._find_api_keys(db, digest)))
         if credential is None:
             return RecordAuthenticationResult(False, reason="API key invalid, revoked, or expired")
         principal = await _resolve(self._resolve_user(db, credential))

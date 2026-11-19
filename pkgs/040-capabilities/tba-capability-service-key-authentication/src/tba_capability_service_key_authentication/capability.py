@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 from tba_capability_api_key_authentication.capability import CredentialTouch, KeyLookup, _field, _resolve, _valid_key
 from tba_provider_authenticator_service_key_local import ServiceKeyLocalAuthenticator
 from tba_concrete_capability import Capability
@@ -21,7 +22,8 @@ class ServiceKeyAuthenticationCapability(Capability):
         return _field(record, "service_identity") or _field(record, "_service_identity") or _field(record, "service") or _field(record, "_service")
 
     async def authenticate_service_key(self, *, service_key: str, db: object) -> RecordAuthenticationResult:
-        credential = _valid_key(await _resolve(self._find_service_keys(db, self._authenticator.digest_key(service_key))))
+        digest = await asyncio.to_thread(self._authenticator.digest_text_key, service_key)
+        credential = _valid_key(await _resolve(self._find_service_keys(db, digest)))
         if credential is None:
             return RecordAuthenticationResult(False, reason="service key invalid, revoked, or expired")
         principal = self._service_principal(credential)

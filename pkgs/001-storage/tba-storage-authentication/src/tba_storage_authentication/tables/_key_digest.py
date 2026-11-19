@@ -7,14 +7,14 @@ from secrets import token_urlsafe
 from tigrbl._spec.io_spec import Pair
 from tba_primitives_identity.credential_digests import (
     CREDENTIAL_DIGEST_LENGTH,
-    credential_digest,
+    text_credential_digest,
 )
 from tba_primitives_identity.orm import F, IO, S, KeyDigest, Mapped, String, acol
 
 
 def _generate_pair(_context: dict | None = None) -> Pair:
     raw = token_urlsafe(32)
-    return Pair(raw=raw, stored=credential_digest(raw))
+    return Pair(raw=raw, stored=text_credential_digest(raw))
 
 
 class CredentialKeyDigest(KeyDigest):
@@ -31,4 +31,4 @@ class CredentialKeyDigest(KeyDigest):
         ),
     )
 
-    digest_of = staticmethod(credential_digest)
+    digest_of = staticmethod(text_credential_digest)
