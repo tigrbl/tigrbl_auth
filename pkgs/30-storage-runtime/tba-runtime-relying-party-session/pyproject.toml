@@ -16,7 +16,7 @@ classifiers = [
     "Development Status :: 3 - Alpha",
 ]
 license = "Apache-2.0"
-dependencies = ["tba-contracts-identity==0.4.0.dev3", "tba-provider-security-proof-pkce==0.1.1.dev1"]
+dependencies = ["tba-contracts-identity>=0.4.0.dev2,<=0.4.0.dev3", "tba-provider-security-proof-pkce>=0.1.0,<=0.1.1.dev1"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 
