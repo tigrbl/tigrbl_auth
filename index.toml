@@ -4067,12 +4067,12 @@ deprecation_state = "dead"
 
 [[packages]]
 name = "tigrbl-identity-oidc"
-path = "pkgs/deprecated/undead/tigrbl-identity-oidc"
+path = "pkgs/deprecated/dead/tigrbl-identity-oidc"
 layer = "deprecated"
 order = "00"
 local_dependencies = ["tba-cli-identity", "tba-protocol-oidc"]
 same_layer_dependencies = []
-deprecation_state = "undead"
+deprecation_state = "dead"
 
 [[packages]]
 name = "tigrbl-identity-policy"
