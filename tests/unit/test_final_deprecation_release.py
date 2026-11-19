@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
 from readme_policy import section_errors
 from verify_standards_installs import MIGRATION_PROBE
+from verify_final_deprecation_release import validate_receipt
 
 PLAN = json.loads(
     (ROOT / ".ssot/evidence/undead-final-release-plan-20261119.json").read_text()
@@ -92,3 +93,80 @@ def test_installed_migration_probe_rejects_broken_contracts(
     finally:
         sys.modules.pop(legacy, None)
         sys.modules.pop(canonical, None)
+
+
+@pytest.mark.parametrize(
+    "defect",
+    [
+        None,
+        "local-install",
+        "missing-module",
+        "no-warning",
+        "wrong-source",
+        "wrong-publisher",
+    ],
+)
+def test_burial_requires_exact_published_migration_receipt(defect):
+    row = dict(
+        name="example",
+        version="1.0",
+        path="pkgs/deprecated/undead/example",
+        migration_modules=[dict(legacy="old", replacement="new")],
+    )
+    artifact = dict(
+        name=row["name"],
+        version=row["version"],
+        path=row["path"],
+        files=[dict(filename="example.whl", sha256="a" * 64)],
+    )
+    manifest = dict(source_commit="b" * 40, plan_sha256="c" * 64, workflow_run="123")
+    migration = dict(
+        passed=True,
+        module_count=1,
+        modules=[
+            dict(
+                legacy="old",
+                replacement="new",
+                warning_verified=True,
+                exports_verified=True,
+                isolated=True,
+            )
+        ],
+    )
+    receipt = dict(
+        package="example",
+        version="1.0",
+        files=artifact["files"],
+        source_commit=manifest["source_commit"],
+        plan_sha256=manifest["plan_sha256"],
+        source_artifact_run=123,
+        pypi_hashes="passed",
+        publisher=dict(
+            repository="tigrbl/tigrbl_auth",
+            workflow="monorepo-package-release.yml",
+            environment="pypi-example",
+        ),
+        clean_install=dict(
+            name="example",
+            version="1.0",
+            passed=True,
+            mode="pypi-only",
+            dependency_check="passed",
+            migration_check=migration,
+        ),
+    )
+    if defect == "local-install":
+        receipt["clean_install"]["mode"] = "local-wheel-preflight"
+    if defect == "missing-module":
+        migration["modules"] = []
+    if defect == "no-warning":
+        migration["modules"][0]["warning_verified"] = False
+    if defect == "wrong-source":
+        receipt["source_commit"] = "d" * 40
+    if defect == "wrong-publisher":
+        receipt["publisher"]["environment"] = "unrelated"
+    if defect:
+        with pytest.raises(ValueError):
+            validate_receipt(row, artifact, manifest, receipt)
+    else:
+        validate_receipt(row, artifact, manifest, receipt)

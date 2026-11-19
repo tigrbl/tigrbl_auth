@@ -22,7 +22,7 @@ jobs:
       - name: Check deprecated lifecycle and graveyard evidence
         run: uv run --no-project python scripts/verify_deprecated_lifecycle.py
       - name: Exercise README gate regressions
-        run: uv run --no-project --with pytest python -I -m pytest tests/unit/test_readme_standards.py tests/unit/test_package_standards.py tests/unit/test_deprecated_lifecycle.py --confcutdir=tests/unit -c /dev/null -q
+        run: uv run --no-project --with pytest python -I -m pytest tests/unit/test_readme_standards.py tests/unit/test_package_standards.py tests/unit/test_deprecated_lifecycle.py tests/unit/test_final_deprecation_release.py --confcutdir=tests/unit -c /dev/null -q
       - uses: actions/upload-artifact@v7
         if: always()
         with:

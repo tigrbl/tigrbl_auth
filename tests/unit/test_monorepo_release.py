@@ -23,25 +23,37 @@ from scripts.monorepo_release import (
 SCRIPT = ROOT / "scripts" / "monorepo_release.py"
 
 
-def test_deprecated_release_requires_explicit_package_selection(monkeypatch, capsys) -> None:
+def test_deprecated_release_requires_explicit_package_selection(monkeypatch, capsys, tmp_path) -> None:
     from argparse import Namespace
     from scripts import monorepo_release as release
 
-    name = "tigrbl-identity-credentials"
-    assert name not in {p.name for p in release.discover_packages()}
-    assert release._find_package(name).path.parts[1] == "deprecated"
-    monkeypatch.delenv("GITHUB_OUTPUT", raising=False)
-    release.cmd_release_matrix(Namespace(package=name))
-    output = json.loads(capsys.readouterr().out)
-    cells = json.loads(output["matrix"])
-    assert output["count"] == "1"
-    release.cmd_resolve_release_index(Namespace(package=name, index=cells[0]["index"]))
-    resolved = json.loads(capsys.readouterr().out)
-    assert resolved["name"] == name
-    assert resolved["path"] == "pkgs/deprecated/undead/" + name
-    release.cmd_release_matrix(Namespace(package="all"))
-    all_cells = json.loads(json.loads(capsys.readouterr().out)["matrix"])
-    assert len(all_cells) == len(release.discover_packages())
+    folder = tmp_path / "pkgs/deprecated/undead/example-retired"
+    folder.mkdir(parents=True)
+    (folder / "pyproject.toml").write_text('[project]\nname="example-retired"\nversion="1.0.0"\n')
+    (folder.parent.parent / "lifecycle.json").write_text(json.dumps(dict(packages=[dict(
+        name="example-retired", path="pkgs/deprecated/undead/example-retired",
+        stage="undead", pypi=dict(published=True),
+    )])))
+    monkeypatch.setattr(release, "ROOT", tmp_path)
+    release._discover_packages.cache_clear()
+    try:
+        name = "example-retired"
+        assert name not in {p.name for p in release.discover_packages()}
+        assert release._find_package(name).path.parts[1] == "deprecated"
+        monkeypatch.delenv("GITHUB_OUTPUT", raising=False)
+        release.cmd_release_matrix(Namespace(package=name))
+        output = json.loads(capsys.readouterr().out)
+        cells = json.loads(output["matrix"])
+        assert output["count"] == "1"
+        release.cmd_resolve_release_index(Namespace(package=name, index=cells[0]["index"]))
+        resolved = json.loads(capsys.readouterr().out)
+        assert resolved["name"] == name
+        assert resolved["path"] == "pkgs/deprecated/undead/" + name
+        release.cmd_release_matrix(Namespace(package="all"))
+        all_cells = json.loads(json.loads(capsys.readouterr().out)["matrix"])
+        assert len(all_cells) == len(release.discover_packages())
+    finally:
+        release._discover_packages.cache_clear()
 
 
 def test_release_indices_round_trip_without_package_metadata() -> None:
