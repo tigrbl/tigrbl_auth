@@ -36,7 +36,7 @@ jobs:
               ("router", "tba_router_relying_party_session", "0.4.0.dev5"),
           ):
               expected = {f"{name}-{version}-py3-none-any.whl", f"{name}-{version}.tar.gz"}
-              actual = {path.name for path in Path("dist", directory).iterdir() if path.is_file()}
+              actual = {path.name for path in Path("dist", directory).iterdir() if path.name != ".gitignore"}
               if actual != expected:
                   raise SystemExit(f"Unexpected release files in {directory}: {actual}")
           PY
