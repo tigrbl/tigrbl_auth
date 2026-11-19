@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+from collections.abc import Callable, Mapping
 from dataclasses import dataclass
-from typing import Any, Callable, Mapping
+from hmac import compare_digest
+from typing import Any
 from urllib.parse import parse_qs, urlencode, urlparse
 
+from tba_contracts_identity.protocols import BrowserStoragePolicy
 from tba_contracts_identity.rp import (
     CallbackResult,
     LoginRequest,
@@ -12,10 +15,9 @@ from tba_contracts_identity.rp import (
     RPSessionPort,
     RPStatePort,
 )
-from tba_contracts_identity.protocols import BrowserStoragePolicy
 
-from .pkce import PkceVerifier, make_pkce_verifier, pkce_s256_challenge
 from .errors import RPError
+from .pkce import PkceVerifier, make_pkce_verifier, pkce_s256_challenge
 
 
 class BrowserMemorySession:
@@ -111,7 +113,7 @@ class RelyingParty:
         config: RPConfiguration,
         *,
         state_store: RPStatePort,
-        session_store: RPSessionPort,
+        session_store: RPSessionPort | None = None,
     ) -> None:
         self.config = config
         self.state_store = state_store
@@ -172,21 +174,13 @@ class RelyingParty:
         exchange: Callable[[Mapping[str, str]], Mapping[str, str]],
         callback: CallbackResult,
     ) -> RPSession:
-        if self.config.client_secret is None:
+        if self.token_store is None:
+            raise RPError("this exchange requires a token store")
+        secret = self.config.client_secret
+        if secret is None:
             raise RPError("confidential token exchange requires a client secret")
         login = self.validate_callback(callback)
-        token_response = dict(
-            exchange(
-                {
-                    "grant_type": "authorization_code",
-                    "code": callback.code,
-                    "redirect_uri": login.redirect_uri,
-                    "client_id": self.config.client_id,
-                    "client_secret": self.config.client_secret,
-                    "code_verifier": login.code_verifier,
-                }
-            )
-        )
+        token_response = dict(self._exchange_confidential(exchange, callback, login, secret))
         session = RPSession(
             subject=token_response.get("sub", ""),
             id_token=token_response["id_token"],
@@ -196,9 +190,69 @@ class RelyingParty:
         self.token_store.save(login.state, session)
         return session
 
+    def complete_confidential_callback(
+        self,
+        exchange: Callable[[Mapping[str, str]], Mapping[str, str]],
+        callback: CallbackResult,
+        *,
+        browser_state: str,
+        verifier: Callable[[str], Mapping[str, Any]],
+        now: int,
+    ) -> VerifiedExternalIdentity:
+        """Verify a browser-bound login before the app establishes a session.
+
+        Supply browser_state from the initiating browser's transaction cookie
+        and a verifier that checks the configured issuer's signing keys.
+        Provider tokens are discarded after verifying the identity.
+        """
+        secret = self.config.client_secret
+        if not secret:
+            raise RPError("confidential token exchange requires a client secret")
+        if not browser_state or not compare_digest(
+            browser_state.encode("utf-8"), callback.state.encode("utf-8")
+        ):
+            raise RPError("callback does not match the browser transaction")
+        if callback.iss is not None and callback.iss != self.config.issuer:
+            raise RPError("callback issuer mismatch")
+        login = self.validate_callback(callback)
+        if login.redirect_uri != self.config.redirect_uri:
+            raise RPError("callback redirect URI mismatch")
+        response = self._exchange_confidential(exchange, callback, login, secret)
+        token = response.get("id_token")
+        if not isinstance(token, str) or not token:
+            raise RPError("token response must include an ID token")
+        return verify_id_token(
+            token,
+            verifier=verifier,
+            issuer=self.config.issuer,
+            audience=self.config.client_id,
+            nonce=login.nonce,
+            now=now,
+        )
+
+    def _exchange_confidential(
+        self,
+        exchange: Callable[[Mapping[str, str]], Mapping[str, str]],
+        callback: CallbackResult,
+        login: LoginRequest,
+        secret: str,
+    ) -> Mapping[str, str]:
+        return exchange(
+            {
+                "grant_type": "authorization_code",
+                "code": callback.code,
+                "redirect_uri": login.redirect_uri,
+                "client_id": self.config.client_id,
+                "client_secret": secret,
+                "code_verifier": login.code_verifier,
+            }
+        )
+
     def refresh(
         self, refresh: Callable[[str], Mapping[str, str]], session_id: str
     ) -> RPSession:
+        if self.token_store is None:
+            raise RPError("refresh requires a token store")
         current = self.token_store.get(session_id)
         if not current.refresh_token:
             raise RPError("refresh token is not available")
@@ -326,8 +380,8 @@ __all__ = [
     "VerifiedExternalIdentity",
     "assert_browser_no_client_secret",
     "example_app_manifest",
-    "framework_login_adapter",
     "framework_callback_adapter",
+    "framework_login_adapter",
     "make_pkce_verifier",
     "pkce_s256_challenge",
     "shared_vector_manifest",
