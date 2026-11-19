@@ -17,7 +17,15 @@ classifiers = [
     "Development Status :: 3 - Alpha",
     "Typing :: Typed",
 ]
-dependencies = ["cryptography>=45.0.0", "tba-bases-protected-envelope==0.4.0.dev3", "tba-contracts-protected-envelope==0.4.0.dev3", "tba-concrete-jws==0.4.0.dev3", "tba-concrete-jwe==0.4.0.dev3", "tba-primitives-identity==0.4.0.dev3"]
+dependencies = [
+    "cryptography>=45.0.0",
+    "tba-bases-protected-envelope==0.4.0.dev3",
+    "tba-contracts-protected-envelope==0.4.0.dev3",
+    "tba-contracts-security-trust==0.1.1.dev1",
+    "tba-concrete-jws==0.4.0.dev3",
+    "tba-concrete-jwe==0.4.0.dev3",
+    "tba-primitives-identity==0.4.0.dev3",
+]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 

@@ -5598,17 +5598,21 @@ name = "tba-concrete-jose"
 version = "0.4.0.dev3"
 source = { editable = "pkgs/10-concrete/tba-concrete-jose" }
 dependencies = [
+    { name = "tba-bases-encryption" },
     { name = "tba-bases-jose" },
     { name = "tba-contracts-identity" },
     { name = "tba-contracts-security-key-rotation-policy" },
+    { name = "tba-contracts-security-trust" },
     { name = "tba-primitives-identity" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "tba-bases-encryption", specifier = "==0.4.0.dev3" },
     { name = "tba-bases-jose", specifier = "==0.4.0.dev3" },
     { name = "tba-contracts-identity", specifier = "==0.4.0.dev3" },
     { name = "tba-contracts-security-key-rotation-policy", specifier = "==0.1.1.dev1" },
+    { name = "tba-contracts-security-trust", specifier = "==0.1.1.dev1" },
     { name = "tba-primitives-identity", specifier = "==0.4.0.dev3" },
 ]
 
@@ -8497,6 +8501,7 @@ dependencies = [
     { name = "tba-concrete-jwe" },
     { name = "tba-concrete-jws" },
     { name = "tba-contracts-protected-envelope" },
+    { name = "tba-contracts-security-trust" },
     { name = "tba-primitives-identity" },
 ]
 
@@ -8507,6 +8512,7 @@ requires-dist = [
     { name = "tba-concrete-jwe", specifier = "==0.4.0.dev3" },
     { name = "tba-concrete-jws", specifier = "==0.4.0.dev3" },
     { name = "tba-contracts-protected-envelope", specifier = "==0.4.0.dev3" },
+    { name = "tba-contracts-security-trust", specifier = "==0.1.1.dev1" },
     { name = "tba-primitives-identity", specifier = "==0.4.0.dev3" },
 ]
 
