@@ -136,3 +136,29 @@ def test_propagation_wait_is_bounded_and_never_retries_hash_conflicts(
     expected = 3 if isinstance(error, publisher.ReleaseIncompleteError) else 1
     assert len(calls) == expected
     assert sleeps == [10] * (expected - 1)
+
+
+def test_clean_install_refreshes_publishers_negative_index_cache(tmp_path, monkeypatch):
+    import verify_standards_installs as installs
+
+    commands = []
+
+    def run(command):
+        commands.append(command)
+        if "install" in command:
+            assert "--refresh" in command
+            assert "--no-config" in command
+            assert "https://pypi.org/simple/" in command
+            raise RuntimeError("stop after checking the real install command")
+        return ""
+
+    monkeypatch.setattr(installs, "run", run)
+    result = installs.verify(
+        dict(name="example", version="1.0.1", import_root="example"),
+        tmp_path / "receipts",
+        None,
+        tmp_path,
+    )
+    assert result["passed"] is False
+    assert "real install command" in result["error"]
+    assert any("install" in command for command in commands)

@@ -59,6 +59,7 @@ def verify(
                 "uv",
                 "pip",
                 "install",
+                "--refresh",
                 "--python",
                 str(python),
                 "--no-config",
