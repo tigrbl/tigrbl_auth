@@ -4,9 +4,7 @@ import importlib
 import inspect
 from pathlib import Path
 
-import tigrbl_identity_credentials_concrete as credentials
-import tigrbl_identity_identities_concrete as identities
-from tba_bases_identity_claims import ClaimBase
+from tba_bases_claim import ClaimBase
 
 
 ROOT = Path(__file__).resolve().parents[5]
@@ -23,7 +21,8 @@ def test_identity_classes_have_standalone_layer_10_owners() -> None:
         "WorkloadIdentity": "tba_concrete_workload_identity",
         "DeviceIdentity": "tba_concrete_device_identity",
     }
-    assert {name: getattr(identities, name).__module__ for name in expected} == expected
+    for name, owner in expected.items():
+        assert getattr(importlib.import_module(owner), name).__module__.split(".", 1)[0] == owner
 
 
 def test_credential_classes_have_standalone_layer_10_owners() -> None:
@@ -41,21 +40,19 @@ def test_credential_classes_have_standalone_layer_10_owners() -> None:
         "MfaFactor": "tba_concrete_mfa_factor",
         "MtlsCertificateCredential": "tba_concrete_credential_mtls_certificate",
         "DpopKeyCredential": "tba_concrete_credential_dpop_key",
-        "SdJwtVc": "tba_concrete_sd_jwt_vc_credential",
-        "Mdoc": "tba_concrete_mdoc_credential",
+        "SdJwtVcCredential": "tba_concrete_sd_jwt_vc_credential",
+        "MdocCredential": "tba_concrete_mdoc_credential",
     }
-    assert {
-        name: getattr(credentials, name).__module__.split(".", 1)[0]
-        for name in expected
-    } == expected
+    for name, owner in expected.items():
+        assert getattr(importlib.import_module(owner), name).__module__.split(".", 1)[0] == owner
 
 
 def test_claims_classes_have_standalone_layer_10_owners() -> None:
     ownership: dict[str, tuple[str, str | None]] = {}
     package_dirs = (
         path
-        for path in CLAIM_PACKAGE_ROOT.glob("tba-claim-*-concrete")
-        if (path / "pyproject.toml").is_file() and "tba-claim-cwt-" not in path.name
+        for path in CLAIM_PACKAGE_ROOT.glob("tba-concrete-claim-*")
+        if (path / "pyproject.toml").is_file() and "tba-concrete-claim-cwt-" not in path.name
     )
     for package_dir in sorted(package_dirs):
         module_name = package_dir.name.replace("-", "_")

@@ -41,7 +41,7 @@ def test_reusable_enums_resolve_from_contract_packages() -> None:
         AdminResourceStatus,
     )
     from tba_runtime_identity_administration._control_plane import models as legacy_admin_models
-    from tba_runtime_identity_administration_control_plane import models as admin_models
+    from tba_capability_administrative_resource import models as admin_models
     from tba_provider_identity_jose import boundary, keys
     from tba_concrete_identity_principals import factories as principal_factories
     from tba_contracts_identity import (

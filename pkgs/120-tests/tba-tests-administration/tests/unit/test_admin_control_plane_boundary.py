@@ -20,7 +20,7 @@ from tba_runtime_identity_administration import (  # noqa: E402
     AdminResourceStatus,
     App,
 )
-from tba_runtime_identity_administration_control_plane import (  # noqa: E402
+from tba_capability_administrative_resource import (  # noqa: E402
     AdminControlPlane as CanonicalAdminControlPlane,
 )
 

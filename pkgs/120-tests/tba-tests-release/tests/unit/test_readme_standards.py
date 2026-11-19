@@ -151,7 +151,7 @@ def test_wrong_layer_badge_fails_even_with_correct_section_headings(package_fixt
     root, readme = package_fixture
     readme.write_text(
         readme.read_text().replace(
-            'alt="Layer: 02 contracts"', 'alt="Layer: 40 capabilities"'
+            'alt="Layer: 002 contracts"', 'alt="Layer: 040 capabilities"'
         ),
         encoding="utf-8",
     )

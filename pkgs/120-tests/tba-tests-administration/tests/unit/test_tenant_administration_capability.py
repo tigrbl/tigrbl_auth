@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from tba_runtime_identity_administration_control_plane import TenantAdministrationCapability
+from tba_capability_tenant_administration import TenantAdministrationCapability
 from tba_contracts_identity.admin_tenants import (
     AdminTenant,
     AdminTenantCreate,

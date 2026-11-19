@@ -13,7 +13,7 @@ from tba_capability_digital_credential_issuance import DigitalCredentialIssuance
 from tba_capability_digital_credential_presentation import (
     DigitalCredentialPresentationCapability,
 )
-from tba_runtime_identity_administration_control_plane import AdminControlPlane
+from tba_capability_administrative_resource import AdminControlPlane
 from tba_contracts_identity.attestation import EvidenceVerificationResult
 from tba_contracts_identity.capabilities import (
     CapabilityCallContext,

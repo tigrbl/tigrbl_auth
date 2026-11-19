@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from tba_runtime_identity_administration_control_plane import IdentityAdministrationCapability
+from tba_capability_identity_administration import IdentityAdministrationCapability
 from tba_contracts_identity.admin_identities import (
     AdminIdentity,
     AdminIdentityCreate,

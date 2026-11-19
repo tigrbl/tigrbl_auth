@@ -160,7 +160,7 @@ def test_admin_capability_models_are_contract_reexports() -> None:
     import tigrbl_identity_identities_concrete as identity_concrete
     from tba_runtime_identity_administration._advanced_identity_plane import models as advanced_models
     from tba_runtime_identity_administration._control_plane import models as legacy_admin_models
-    from tba_runtime_identity_administration_control_plane import models as admin_models
+    from tba_capability_administrative_resource import models as admin_models
 
     assert admin_models.AdminResource is management_contracts.AdminResource
     assert admin_models.App is management_contracts.App
@@ -505,12 +505,12 @@ def test_target_capability_packages_no_longer_own_contract_classes() -> None:
         ROOT
         / "pkgs"
         / "040-capabilities"
-        / "tigrbl-identity-admin-control-plane"
+        / "tba-capability-administrative-resource"
         / "src"
-        / "tba_runtime_identity_administration_control_plane",
+        / "tba_capability_administrative_resource",
         ROOT
         / "pkgs"
-        / "020-providers"
+        / "060-runtime"
         / "tba-runtime-identity-administration"
         / "src"
         / "tba_runtime_identity_administration",
@@ -522,7 +522,7 @@ def test_target_capability_packages_no_longer_own_contract_classes() -> None:
         / "tba_credentials",
         ROOT
         / "pkgs"
-        / "020-providers"
+        / "060-runtime"
         / "tba-runtime-authorization-policy"
         / "src"
         / "tba_runtime_authorization_policy",
@@ -530,6 +530,7 @@ def test_target_capability_packages_no_longer_own_contract_classes() -> None:
     offenders: list[str] = []
 
     for package_root in capability_roots:
+        assert package_root.is_dir(), package_root
         for path in package_root.rglob("*.py"):
             tree = ast.parse(path.read_text(encoding="utf-8"))
             decorators = {

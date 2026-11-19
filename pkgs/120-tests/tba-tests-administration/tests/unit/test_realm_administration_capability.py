@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from tba_runtime_identity_administration_control_plane import RealmAdministrationCapability
+from tba_capability_realm_administration import RealmAdministrationCapability
 from tba_contracts_identity.admin_realms import (
     AdminRealm,
     AdminRealmCreate,

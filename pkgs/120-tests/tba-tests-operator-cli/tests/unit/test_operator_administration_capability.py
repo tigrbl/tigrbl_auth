@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from tba_runtime_identity_administration_control_plane import (
+from tba_capability_operator_administration import (
     OPERATOR_ADMINISTRATION_OPERATIONS,
     OperatorAdministrationCapability,
 )
