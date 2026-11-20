@@ -3,8 +3,8 @@
 **Proposed pairing:** `tba-router-workload-trust` + `@tba/workload-trust-center-uix`<br>
 **Status:** New product surface; workload/machine records, credentials, trust domains, graphs, token exchange, mTLS, and governance foundations exist<br>
 **Prepared:** July 11, 2026<br>
-**Proposed router owner:** `pkgs/80-routers/tba-router-workload-trust`<br>
-**Proposed protocol/provider owner:** `pkgs/50-protocols/tba-workload-spiffe` and SPIFFE-compatible providers<br>
+**Proposed router owner:** `pkgs/080-routers/tba-router-workload-trust`<br>
+**Proposed protocol/provider owner:** `pkgs/050-protocols/tba-workload-spiffe` and SPIFFE-compatible providers<br>
 **Proposed UIX owner:** `pkgs/105-ui/workload-trust-center-uix`
 
 ## 1. Product Decision
@@ -506,15 +506,15 @@ Guardrails include selector overmatch, cross-tenant issuance, false attestation,
 ### Repository
 
 - `docs/m2m-workload-identity-focus.md`
-- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/workload_identity/`
-- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/machine_identity/`
-- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/credential_mtls_certificate/`
-- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/authority/trust_domains.py`
-- `pkgs/30-storage-runtime/tba-durability-identity-administration-trust-federation-graph/`
-- `pkgs/20-providers/tba-provider-security-certificate-mtls/`
-- `pkgs/20-providers/tba-provider-security-mtls-cnf-binding-validator/`
+- `pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables/workload_identity/`
+- `pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables/machine_identity/`
+- `pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables/credential_mtls_certificate/`
+- `pkgs/002-contracts/tba-contracts-identity/src/tba_contracts_identity/authority/trust_domains.py`
+- `pkgs/030-storage-runtime/tba-durability-identity-administration-trust-federation-graph/`
+- `pkgs/020-providers/tba-provider-security-certificate-mtls/`
+- `pkgs/020-providers/tba-provider-security-mtls-cnf-binding-validator/`
 - OAuth token-exchange, client-credentials, resource-validation, JOSE, credential, and audit packages;
-- `tests/security/test_machine_identity_governance.py` and workload/trust-domain planned tests.
+- `pkgs/120-tests/tba-tests-authorization/tests/security/test_machine_identity_governance.py` and workload/trust-domain planned tests.
 
 ### Standards and primary sources
 

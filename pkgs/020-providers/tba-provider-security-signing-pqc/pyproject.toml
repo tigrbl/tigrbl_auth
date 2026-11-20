@@ -1,0 +1,38 @@
+[project]
+name = "tba-provider-security-signing-pqc"
+version = "0.1.1.dev1"
+description = "Concrete PQC signing provider for Tigrbl security trust domains."
+readme = "README.md"
+requires-python = ">=3.10,<3.16"
+license = "Apache-2.0"
+authors = [{ name = "Jacob Stewart", email = "jacob@swarmauri.com" }]
+keywords = ["tigrbl", "security", "pqc", "signing", "provider", "trust-domain"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
+    "Typing :: Typed",
+    "Topic :: Security",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
+    "Intended Audience :: Developers",
+]
+dependencies = ["pqcrypto==0.4.0", "tba-contracts-security-trust==0.1.1.dev1", "tba-bases-signing==0.4.0.dev3"]
+license-files = ["LICENSE", "NOTICE"]
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/020-providers/tba-provider-security-signing-pqc#readme"
+Documentation = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/020-providers/tba-provider-security-signing-pqc#readme"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/020-providers/tba-provider-security-signing-pqc"
+Issues = "https://github.com/tigrbl/tigrbl_auth/issues"
+PyPI = "https://pypi.org/project/tba-provider-security-signing-pqc/"
+[build-system]
+requires = ["poetry-core>=2.2.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tba_provider_security_signing_pqc", from = "src" }]

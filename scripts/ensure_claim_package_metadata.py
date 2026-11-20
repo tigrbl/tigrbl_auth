@@ -4,7 +4,7 @@ from pathlib import Path
 import tomllib
 
 ROOT = Path(__file__).resolve().parents[1]
-CLAIM_PACKAGES = ROOT / "pkgs" / "10-concrete"
+CLAIM_PACKAGES = ROOT / "pkgs" / "010-concrete"
 
 
 def main() -> None:

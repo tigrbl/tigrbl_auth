@@ -120,4 +120,4 @@ Changes must pass the [README standards gate](https://github.com/tigrbl/tigrbl_a
 
 See the [related repository tests](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-my-account/services/myAccountClient.test.ts) for the implementation scope covered by this example.
 
-[Workspace and package catalog](https://github.com/tigrbl/tigrbl_auth#package-catalog) · [tba-capability-account-self-service](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/40-capabilities/tba-capability-account-self-service#readme) · [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues) · [Repository license](https://github.com/tigrbl/tigrbl_auth/blob/master/LICENSE)
+[Workspace and package catalog](https://github.com/tigrbl/tigrbl_auth#package-catalog) · [tba-capability-account-self-service](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/040-capabilities/tba-capability-account-self-service#readme) · [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues) · [Repository license](https://github.com/tigrbl/tigrbl_auth/blob/master/LICENSE)

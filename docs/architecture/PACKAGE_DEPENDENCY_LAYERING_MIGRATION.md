@@ -18,7 +18,7 @@ This plan makes the package rename work enforceable. The target graph is directi
 | Foundation | `tba-identity-*`, `tba-authn-*`, `tba-authorization-*`, `tba-*-protocol` | May depend sideways/downward only through owned package contracts. Must not import `tba_auth`. |
 | Facade | `tba-auth` | May import foundational packages and preserve compatibility paths. Must not become canonical truth for identity, authn, authz, protocol, storage, or policy. |
 | Downstream backend | `tba-router-*` | May import `tba_auth` and product-local code. Should not reach around the facade into storage or lower internals unless a product contract requires it. |
-| Downstream frontend | `pkgs/105-ui/*-uix`, `pkgs/75-clients/tba-typescript-client-oidc-relying-party`, `pkgs/100-uix-core/tba-ui-primitives` | May consume API contracts, discovery metadata, generated clients, and browser-safe UIX packages. Must not import Python `tba_auth` modules. |
+| Downstream frontend | `pkgs/105-ui/*-uix`, `pkgs/075-clients/tba-typescript-client-oidc-relying-party`, `pkgs/100-uix-core/tba-ui-primitives` | May consume API contracts, discovery metadata, generated clients, and browser-safe UIX packages. Must not import Python `tba_auth` modules. |
 
 ## Staged Enforcement
 
@@ -28,7 +28,7 @@ Classify every Python package under `pkgs/` into exactly one of foundation, faca
 
 ### T1: Drift Guard
 
-Allow current foundational imports of `tba_auth` only when named in the migration exception ledger in `tests/unit/test_package_dependency_layering.py`. New foundational packages, including the new authn/authz/protocol package names, cannot import the facade. Any new upward import fails the boundary test.
+Allow current foundational imports of `tba_auth` only when named in the migration exception ledger in `pkgs/120-tests/tba-tests-architecture/tests/unit/test_package_dependency_layering.py`. New foundational packages, including the new authn/authz/protocol package names, cannot import the facade. Any new upward import fails the boundary test.
 
 Current T1 exception packages:
 
@@ -50,7 +50,7 @@ Current T1 exception packages:
 
 Remove the exception ledger by moving facade-owned imports down into the owning foundational packages or by replacing them with lower-layer contracts. At T2, no foundational package imports `tba_auth`; only `tba-auth` and `tba-router-*` packages do.
 
-Status: complete for direct Python imports. The exception ledger in `tests/unit/test_package_dependency_layering.py` is empty, and foundational packages now import the canonical split package roots directly.
+Status: complete for direct Python imports. The exception ledger in `pkgs/120-tests/tba-tests-architecture/tests/unit/test_package_dependency_layering.py` is empty, and foundational packages now import the canonical split package roots directly.
 
 ## SSOT Entity Changes
 

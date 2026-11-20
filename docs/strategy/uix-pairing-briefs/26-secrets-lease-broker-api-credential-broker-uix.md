@@ -539,11 +539,11 @@ Standardize `credential`, `lease`, `role`, `target`, `delivery`, `renewal`, `rot
 - `docs/m2m-workload-identity-focus.md`
 - `docs/strategy/identity-market-roadmap.md`
 - `docs/architecture/TEMP_IDENTITY_PACKAGE_BOUNDARY_PROPOSAL.md`
-- `pkgs/01-storage/tba-storage-core/`
-- `pkgs/70-facade/tba-credentials/`
-- `pkgs/20-providers/tba-runtime-authorization-policy/`
-- `pkgs/90-backend-apps/tba-app-backend-service-administration/`
-- `tests/integration/test_service_key_creation.py`
+- `pkgs/001-storage/tba-storage-core/`
+- `pkgs/070-facade/tba-credentials/`
+- `pkgs/020-providers/tba-runtime-authorization-policy/`
+- `pkgs/090-backend-apps/tba-app-backend-service-administration/`
+- `pkgs/120-tests/tba-tests-administration/tests/integration/test_service_key_creation.py`
 - prior workload, attestation, certificate, token-service, agent-delegation, and entitlement-governance pairing briefs.
 
 ### Standards and primary product references

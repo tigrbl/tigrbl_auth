@@ -5,7 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-PACKAGES = ROOT / "pkgs" / "10-concrete"
+PACKAGES = ROOT / "pkgs" / "010-concrete"
 
 # slug, class name, claim label, semantic type, value type, validation body
 CLAIMS = (

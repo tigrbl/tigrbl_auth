@@ -16,8 +16,8 @@ targets:
   quarantine_reason: Outside the default OAuth 2.0 / OIDC auth-server certification
     boundary.
   modules:
-  - pkgs/10-concrete/tba-concrete-set/src/tba_concrete_set/__init__.py
-  - pkgs/50-protocols/tba-protocol-security-event-set/src/tba_protocol_security_event_set/__init__.py
+  - pkgs/010-concrete/tba-concrete-set/src/tba_concrete_set/__init__.py
+  - pkgs/050-protocols/tba-protocol-security-event-set/src/tba_protocol_security_event_set/__init__.py
 - id: webpush.encryption
   label: RFC 8291
   title: Message Encryption for Web Push
@@ -36,14 +36,14 @@ targets:
   title: W3C Web Authentication Level 2 relying-party ceremonies
   quarantine_reason: Implementation is tested internally but no external FIDO conformance or certification claim is made.
   modules:
-  - pkgs/50-protocols/tba-protocol-webauthn/src/tba_protocol_webauthn
-  - pkgs/80-routers/tba-router-webauthn/src/tba_router_webauthn
+  - pkgs/050-protocols/tba-protocol-webauthn/src/tba_protocol_webauthn
+  - pkgs/080-routers/tba-router-webauthn/src/tba_router_webauthn
 - id: fido2.server-profile
   label: FIDO2 server implementation profile
   title: FIDO2 server requirements and capability mapping
   quarantine_reason: Profile mapping is implemented but external certification evidence is not yet attached.
   modules:
-  - pkgs/55-profiles/tba-profile-fido2-server/src/tba_profile_fido2_server
+  - pkgs/055-profiles/tba-profile-fido2-server/src/tba_profile_fido2_server
 - id: dns.privacy
   label: RFC 8932
   title: Recommendations for DNS Privacy Service Operators

@@ -3,7 +3,7 @@
 **Pairing:** `tba-app-backend-public` + `@tba/ui-public`<br>
 **Status:** Delivery brief<br>
 **Prepared:** July 11, 2026<br>
-**Backend app owner:** `pkgs/90-backend-apps/tba-app-backend-public`<br>
+**Backend app owner:** `pkgs/090-backend-apps/tba-app-backend-public`<br>
 **UIX owner:** `pkgs/105-ui/tba-ui-public`
 
 ## 1. Product Decision
@@ -189,14 +189,14 @@ Produce a route-level copy deck containing:
 
 ## 11. Source Evidence
 
-- `pkgs/90-backend-apps/tba-app-backend-public/README.md`
-- `pkgs/90-backend-apps/tba-app-backend-public/src/tba_app_backend_public/contract.py`
-- `pkgs/90-backend-apps/tba-app-backend-public/src/tba_app_backend_public/openapi.py`
+- `pkgs/090-backend-apps/tba-app-backend-public/README.md`
+- `pkgs/090-backend-apps/tba-app-backend-public/src/tba_app_backend_public/contract.py`
+- `pkgs/090-backend-apps/tba-app-backend-public/src/tba_app_backend_public/openapi.py`
 - `pkgs/105-ui/tba-ui-public/README.md`
 - `pkgs/105-ui/tba-ui-public/App.tsx`
 - `pkgs/105-ui/tba-ui-public/services/publicRouting.ts`
 - `pkgs/105-ui/tba-ui-public/services/publicUxPolicy.ts`
-- `tests/unit/test_public_route_contracts.py`
-- `tests/unit/test_public_operator_surface_boundary.py`
+- `pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py`
+- `pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_public_operator_surface_boundary.py`
 - `tests/uix/` public UIX boundary and browser-security coverage
 - SSOT public API/UIX features, claims, tests, evidence, boundaries, and release records

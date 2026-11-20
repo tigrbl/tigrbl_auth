@@ -11,9 +11,9 @@ required_targets:
 - RFC 7516
 - RFC 9207
 required_artifacts:
-- tests/conformance/production/test_rfc8252_native_apps.py
-- tests/unit/test_oidc_id_token_encryption.py
-- tests/conformance/hardening/test_rfc9207_issuer_identification.py
+- pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc8252_native_apps.py
+- pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py
+- pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
 required_peer_artifacts:
 - http-transcript.yaml
 - stdout.log

@@ -47,7 +47,7 @@ targets:
   modules:
   - tba_auth/cli/metadata.py
   - tba_auth/cli/handlers.py
-  - pkgs/60-runtime/tba-cli-identity/src/tba_cli_identity/operator_administration.py
+  - pkgs/060-runtime/tba-cli-identity/src/tba_cli_identity/operator_administration.py
   - tba_auth/standards/jose/rfc7517.py
   status: evidenced-release-gated
 - id: operator.import-export

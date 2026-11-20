@@ -15,59 +15,59 @@ replacement_order:
 - cli/contracts/evidence/release automation
 moves:
 - source: tba_auth/app.py
-  target: pkgs/60-runtime/tba-server-identity/src/tba_server_identity/app.py
+  target: pkgs/060-runtime/tba-server-identity/src/tba_server_identity/app.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tba_auth/routers/surface.py
-  target: pkgs/60-runtime/tba-server-identity/src/tba_server_identity/surfaces.py
+  target: pkgs/060-runtime/tba-server-identity/src/tba_server_identity/surfaces.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tba_auth/routers/auth_flows.py
-  target: pkgs/60-runtime/tba-server-identity/src/tba_server_identity/login_surface.py
+  target: pkgs/060-runtime/tba-server-identity/src/tba_server_identity/login_surface.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tba_auth/routers/authz/oidc.py
-  target: pkgs/60-runtime/tba-server-identity/src/tba_server_identity/authorization_surface.py
+  target: pkgs/060-runtime/tba-server-identity/src/tba_server_identity/authorization_surface.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tba_auth/orm
-  target: pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables
+  target: pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables
   status: completed
   legacy_boundary: legacy_transition
 - source: tba_auth/db.py
-  target: pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/engine.py
+  target: pkgs/030-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/engine.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tba_auth/runtime_cfg.py
-  target: pkgs/60-runtime/tba-runtime-identity/src/tba_runtime_identity/settings.py
+  target: pkgs/060-runtime/tba-runtime-identity/src/tba_runtime_identity/settings.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tba_auth/backends.py
-  target: pkgs/60-runtime/tba-server-identity/src/tba_server_identity/security/auth.py
+  target: pkgs/060-runtime/tba-server-identity/src/tba_server_identity/security/auth.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tba_auth/crypto.py
-  target: pkgs/20-providers/tba-provider-identity-jose/src/tba_provider_identity_jose/key_management.py
+  target: pkgs/020-providers/tba-provider-identity-jose/src/tba_provider_identity_jose/key_management.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tba_auth/jwtoken.py
-  target: pkgs/40-capabilities/tba-capability-token-issuance/src/tba_capability_token_issuance/__init__.py
+  target: pkgs/040-capabilities/tba-capability-token-issuance/src/tba_capability_token_issuance/__init__.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tba_auth/oidc_discovery.py
-  target: pkgs/50-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/discovery_metadata.py
+  target: pkgs/050-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/discovery_metadata.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tba_auth/oidc_id_token.py
-  target: pkgs/50-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/id_token.py
+  target: pkgs/050-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/id_token.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tba_auth/oidc_userinfo.py
-  target: pkgs/60-runtime/tba-server-identity/src/tba_server_identity/userinfo_runtime.py
+  target: pkgs/060-runtime/tba-server-identity/src/tba_server_identity/userinfo_runtime.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tba_auth/rfc
-  target: pkgs/50-protocols
+  target: pkgs/050-protocols
   status: completed
   legacy_boundary: legacy_transition
 - source: tests/i9n

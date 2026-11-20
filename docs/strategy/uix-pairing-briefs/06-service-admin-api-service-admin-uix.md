@@ -3,7 +3,7 @@
 **Pairing:** `tba-app-backend-service-administration` + `@tba/ui-service-administration`<br>
 **Status:** Delivery brief<br>
 **Prepared:** July 11, 2026<br>
-**Backend app owner:** `pkgs/90-backend-apps/tba-app-backend-service-administration`<br>
+**Backend app owner:** `pkgs/090-backend-apps/tba-app-backend-service-administration`<br>
 **UIX owner:** `pkgs/105-ui/tba-ui-service-administration`
 
 ## 1. Product Decision
@@ -218,14 +218,14 @@ Produce a route-level copy deck containing:
 
 ## 11. Source Evidence
 
-- `pkgs/90-backend-apps/tba-app-backend-service-administration/README.md`
-- `pkgs/90-backend-apps/tba-app-backend-service-administration/src/tba_app_backend_service_administration/contract.py`
+- `pkgs/090-backend-apps/tba-app-backend-service-administration/README.md`
+- `pkgs/090-backend-apps/tba-app-backend-service-administration/src/tba_app_backend_service_administration/contract.py`
 - `pkgs/105-ui/tba-ui-service-administration/README.md`
 - `pkgs/105-ui/tba-ui-service-administration/App.tsx`
 - `pkgs/105-ui/tba-ui-service-administration/services/serviceAdminClient.ts`
 - `pkgs/105-ui/tba-ui-service-administration/services/workflowCrud.test.ts`
 - `pkgs/105-ui/tba-ui-service-administration/pages/serviceCrudPages.test.tsx`
 - `pkgs/105-ui/tba-ui-service-administration/pages/ValidationToolsPage.tsx`
-- `tests/packages/tba-app-backend-service-administration/`
+- `pkgs/120-tests/tba-tests-backend-apps/tests/packages/tba-app-backend-service-administration/`
 - `tests/unit/test_product_api_surfaces.py`
 - Service-admin SSOT feature/claim/test/evidence/boundary records

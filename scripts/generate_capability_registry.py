@@ -64,7 +64,7 @@ def build_registry() -> dict[str, object]:
     packages = discover_packages(ROOT)
     by_import_root = {root: item for item in packages for root in item.import_roots}
     protocol_consumers: dict[str, set[str]] = {}
-    for protocol in (item for item in packages if item.layer == "50-protocols"):
+    for protocol in (item for item in packages if item.layer == "050-protocols"):
         for dependency in protocol.dependencies:
             protocol_consumers.setdefault(dependency, set()).add(protocol.distribution)
         for source in (protocol.path / "src").rglob("*.py"):
@@ -77,7 +77,7 @@ def build_registry() -> dict[str, object]:
                         protocol_consumers.setdefault(owner.distribution, set()).add(protocol.distribution)
 
     records: list[dict[str, object]] = []
-    for package in (item for item in packages if item.layer == "40-capabilities"):
+    for package in (item for item in packages if item.layer == "040-capabilities"):
         implementations: list[dict[str, object]] = []
         for source in sorted((package.path / "src").rglob("*.py")):
             tree = ast.parse(source.read_text(encoding="utf-8-sig"))
@@ -106,9 +106,9 @@ def build_registry() -> dict[str, object]:
                 "compatibility_aggregator": package.distribution in CAPABILITY_COMPATIBILITY_AGGREGATORS,
                 "implementations": implementations,
                 "dependencies": {
-                    "providers": sorted(dep for dep in package.dependencies if (owner := next((candidate for candidate in packages if candidate.distribution == dep), None)) and owner.layer == "20-providers"),
-                    "durability": sorted(dep for dep in package.dependencies if (owner := next((candidate for candidate in packages if candidate.distribution == dep), None)) and owner.layer == "30-storage-runtime"),
-                    "capabilities": sorted(dep for dep in package.dependencies if (owner := next((candidate for candidate in packages if candidate.distribution == dep), None)) and owner.layer == "40-capabilities"),
+                    "providers": sorted(dep for dep in package.dependencies if (owner := next((candidate for candidate in packages if candidate.distribution == dep), None)) and owner.layer == "020-providers"),
+                    "durability": sorted(dep for dep in package.dependencies if (owner := next((candidate for candidate in packages if candidate.distribution == dep), None)) and owner.layer == "030-storage-runtime"),
+                    "capabilities": sorted(dep for dep in package.dependencies if (owner := next((candidate for candidate in packages if candidate.distribution == dep), None)) and owner.layer == "040-capabilities"),
                 },
                 "protocol_packages": sorted(protocol_consumers.get(package.distribution, ())),
             }

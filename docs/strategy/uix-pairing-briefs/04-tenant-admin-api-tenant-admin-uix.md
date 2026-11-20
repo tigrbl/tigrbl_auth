@@ -3,7 +3,7 @@
 **Pairing:** `tba-app-backend-tenant-administration` + `@tba/ui-tenant-administration`<br>
 **Status:** Delivery brief<br>
 **Prepared:** July 11, 2026<br>
-**Backend app owner:** `pkgs/90-backend-apps/tba-app-backend-tenant-administration`<br>
+**Backend app owner:** `pkgs/090-backend-apps/tba-app-backend-tenant-administration`<br>
 **UIX owner:** `pkgs/105-ui/tba-ui-tenant-administration`
 
 ## 1. Product Decision
@@ -220,14 +220,14 @@ Produce a route-level copy deck containing:
 
 ## 11. Source Evidence
 
-- `pkgs/90-backend-apps/tba-app-backend-tenant-administration/README.md`
-- `pkgs/90-backend-apps/tba-app-backend-tenant-administration/src/tba_app_backend_tenant_administration/contract.py`
+- `pkgs/090-backend-apps/tba-app-backend-tenant-administration/README.md`
+- `pkgs/090-backend-apps/tba-app-backend-tenant-administration/src/tba_app_backend_tenant_administration/contract.py`
 - `pkgs/105-ui/tba-ui-tenant-administration/README.md`
 - `pkgs/105-ui/tba-ui-tenant-administration/App.tsx`
 - `pkgs/105-ui/tba-ui-tenant-administration/services/tenantAdminClient.ts`
 - `pkgs/105-ui/tba-ui-tenant-administration/services/backendSurface.ts`
 - `pkgs/105-ui/tba-ui-tenant-administration/services/workflowCrud.test.ts`
 - `pkgs/105-ui/tba-ui-tenant-administration/pages/tenantCrudPages.test.tsx`
-- `tests/packages/tba-app-backend-tenant-administration/`
+- `pkgs/120-tests/tba-tests-backend-apps/tests/packages/tba-app-backend-tenant-administration/`
 - `tests/unit/test_product_api_surfaces.py`
 - Tenant-admin SSOT feature/claim/test/evidence/boundary records

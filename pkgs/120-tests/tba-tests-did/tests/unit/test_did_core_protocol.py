@@ -1,0 +1,26 @@
+import pytest
+from tba_protocol_identity_did_core import CURRENT_VERSION, validate_document
+
+
+def test_did_core_document_relationships_resolve() -> None:
+    document = {
+        "id": "did:example:123",
+        "verificationMethod": [
+            {
+                "id": "did:example:123#key-1",
+                "controller": "did:example:123",
+                "type": "JsonWebKey2020",
+                "publicKeyJwk": {"kty": "OKP", "crv": "Ed25519", "x": "abc"},
+            }
+        ],
+        "authentication": ["did:example:123#key-1"],
+    }
+    validate_document(document)
+    assert CURRENT_VERSION.identifier == "DID-Core-1.0"
+
+
+def test_did_core_rejects_unresolved_relationships() -> None:
+    with pytest.raises(ValueError):
+        validate_document(
+            {"id": "did:example:123", "authentication": ["did:example:123#missing"]}
+        )

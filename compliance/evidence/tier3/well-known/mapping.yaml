@@ -9,8 +9,8 @@ targets:
   modules:
   - tba_auth/standards/http/well_known.py
   tests:
-  - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/unit/test_well_known_endpoints_behavior.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_well_known_endpoints_behavior.py
   endpoint_mapping:
     current:
     - /.well-known/openid-configuration

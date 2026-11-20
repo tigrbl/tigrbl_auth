@@ -1,0 +1,44 @@
+[project]
+name = "tba-contracts-security-key-rotation-policy"
+version = "0.1.1.dev1"
+description = "Key rotation policy contract dataclasses."
+readme = "README.md"
+requires-python = ">=3.10,<3.16"
+license = "Apache-2.0"
+keywords = ["tigrbl", "identity", "auth", "security"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Typing :: Typed",
+    "Topic :: Security",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
+]
+dependencies = []
+license-files = ["LICENSE", "NOTICE"]
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/002-contracts/tba-contracts-security-key-rotation-policy#readme"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/002-contracts/tba-contracts-security-key-rotation-policy"
+SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
+PyPI = "https://pypi.org/project/tba-contracts-security-key-rotation-policy/"
+Documentation = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/002-contracts/tba-contracts-security-key-rotation-policy#readme"
+Issues = "https://github.com/tigrbl/tigrbl_auth/issues"
+
+[[project.authors]]
+name = "Jacob Stewart"
+email = "jacob@swarmauri.com"
+[build-system]
+requires = ["poetry-core>=2.2.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tba_contracts_security_key_rotation_policy", from = "src" }]

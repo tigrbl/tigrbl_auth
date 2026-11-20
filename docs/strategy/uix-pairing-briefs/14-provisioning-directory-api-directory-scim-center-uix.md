@@ -4,8 +4,8 @@
 **Protocol frontdoor:** tenant-scoped SCIM 2.0 under `/tenants/{tenant_slug}/scim/v2`<br>
 **Status:** New product surface; contracts, helper behavior, durable projections, principals, memberships, and audit foundations exist<br>
 **Prepared:** July 11, 2026<br>
-**Proposed router owner:** `pkgs/80-routers/tba-router-provisioning`<br>
-**Proposed protocol owner:** `pkgs/50-protocols/tba-identity-scim`<br>
+**Proposed router owner:** `pkgs/080-routers/tba-router-provisioning`<br>
+**Proposed protocol owner:** `pkgs/050-protocols/tba-identity-scim`<br>
 **Proposed UIX owner:** `pkgs/105-ui/directory-scim-center-uix`
 
 ## 1. Product Decision
@@ -511,15 +511,15 @@ Guardrails include cross-tenant mutation, accidental account merge, unauthorized
 
 - `docs/scim-v2-focus.md`
 - `docs/scim-v2-vendor-coverage-matrix.md`
-- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/governance/scim/`
-- `pkgs/20-providers/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/governance_extension.py`
-- `pkgs/10-concrete/tba-concrete-identity-principals/src/tba_concrete_identity_principals/directory.py`
-- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/scim_schema/`
-- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/scim_user/`
-- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/scim_group/`
-- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/scim_patch_event/`
+- `pkgs/002-contracts/tba-contracts-identity/src/tba_contracts_identity/governance/scim/`
+- `pkgs/020-providers/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/governance_extension.py`
+- `pkgs/010-concrete/tba-concrete-identity-principals/src/tba_concrete_identity_principals/directory.py`
+- `pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables/scim_schema/`
+- `pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables/scim_user/`
+- `pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables/scim_group/`
+- `pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables/scim_patch_event/`
 - canonical user, tenant-membership, subject-alias, entitlement, session, credential, and audit tables;
-- `tests/unit/test_provisioning_governance_ecosystem_boundary.py` and SCIM/governance/storage tests.
+- `pkgs/120-tests/tba-tests-governance-composition/tests/unit/test_provisioning_governance_ecosystem_boundary.py` and SCIM/governance/storage tests.
 
 ### Standards
 

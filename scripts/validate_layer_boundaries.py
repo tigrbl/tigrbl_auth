@@ -40,8 +40,8 @@ PKGS = ROOT / "pkgs"
 LAYER_POLICY = load_layer_policy(PKGS / "layers.toml")
 LAYER_ORDER = LAYER_POLICY.layer_ids
 NON_PRODUCTION_LAYERS = LAYER_POLICY.terminal_layers
-ROUTER_LAYER = "80-routers"
-BACKEND_APP_LAYER = "90-backend-apps"
+ROUTER_LAYER = "080-routers"
+BACKEND_APP_LAYER = "090-backend-apps"
 EXAMPLE_LAYER = "110-examples"
 TEST_LAYER = "120-tests"
 
@@ -53,17 +53,17 @@ TEST_LAYER = "120-tests"
 # in layer 10 and concrete integrations belong in layer 20.
 CAPABILITY_ALLOWED_LAYERS = frozenset(
     {
-        "00-primitives",
-        "02-contracts",
-        "10-concrete",
-        "20-providers",
-        "30-storage-runtime",
-        "40-capabilities",
+        "000-primitives",
+        "002-contracts",
+        "010-concrete",
+        "020-providers",
+        "030-storage-runtime",
+        "040-capabilities",
     }
 )
-CAPABILITY_FORBIDDEN_LAYERS = frozenset({"01-storage", "05-bases"})
+CAPABILITY_FORBIDDEN_LAYERS = frozenset({"001-storage", "005-bases"})
 CAPABILITY_FORBIDDEN_BASE_LAYERS = frozenset(
-    {"00-primitives", "01-storage", "02-contracts", "05-bases"}
+    {"000-primitives", "001-storage", "002-contracts", "005-bases"}
 )
 CAPABILITY_IMPLEMENTATION_ROOTS = frozenset(
     {"tba_concrete_capability", "tba_concrete_capability_default"}
@@ -534,9 +534,9 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
         )
 
     capability_packages = {
-        item.distribution for item in packages if item.layer == "40-capabilities"
+        item.distribution for item in packages if item.layer == "040-capabilities"
     }
-    registry_path = root / "pkgs" / "40-capabilities" / "capability-families.json"
+    registry_path = root / "pkgs" / "040-capabilities" / "capability-families.json"
     registry = json.loads(registry_path.read_text(encoding="utf-8"))
     registered_packages = {
         str(item["package"]) for item in registry.get("capabilities", ())
@@ -545,8 +545,8 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
         violations.append(
             Violation(
                 kind="stale-capability-family-registry",
-                package="40-capabilities",
-                package_layer="40-capabilities",
+                package="040-capabilities",
+                package_layer="040-capabilities",
                 target="capability-families.json",
                 target_layer="architecture-policy",
                 path=registry_path.relative_to(root).as_posix(),
@@ -576,7 +576,7 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
             Violation(
                 kind="stale-capability-registration",
                 package=package_name,
-                package_layer="40-capabilities",
+                package_layer="040-capabilities",
                 target="capability-purpose-registry",
                 target_layer="architecture-policy",
                 path="scripts/validate_layer_boundaries.py",
@@ -586,7 +586,7 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
         )
 
     for package in packages:
-        if package.layer != "40-capabilities":
+        if package.layer != "040-capabilities":
             continue
 
         manifest = package.path / "pyproject.toml"
@@ -606,7 +606,7 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
                     package=package.distribution,
                     package_layer=package.layer,
                     target="tba-concrete-capability",
-                    target_layer="10-concrete",
+                    target_layer="010-concrete",
                     path=manifest.relative_to(root).as_posix(),
                     line=None,
                     detail="layer-40 capabilities inherit layer-10.1 Capability or layer-10.2 DefaultCapability",
@@ -716,7 +716,7 @@ def validate(root: Path = ROOT) -> tuple[Violation, ...]:
                     package=package.distribution,
                     package_layer=package.layer,
                     target="Capability",
-                    target_layer="10-concrete",
+                    target_layer="010-concrete",
                     path=package.path.relative_to(root).as_posix(),
                     line=None,
                     detail="no class inherits layer-10.1 Capability or layer-10.2 DefaultCapability",
@@ -771,7 +771,7 @@ def report(violations: tuple[Violation, ...]) -> dict[str, object]:
             ],
         },
         "policy": {
-            "consumer": "40-capabilities",
+            "consumer": "040-capabilities",
             "allowed_target_layers": sorted(CAPABILITY_ALLOWED_LAYERS),
             "forbidden_target_layers": sorted(CAPABILITY_FORBIDDEN_LAYERS),
             "forbidden_inheritance_layers": sorted(CAPABILITY_FORBIDDEN_BASE_LAYERS),

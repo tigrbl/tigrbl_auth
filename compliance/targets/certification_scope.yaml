@@ -168,8 +168,8 @@ deferred_targets:
   kind: extension-quarantine
   reason: Outside the default OAuth 2.0 / OIDC auth-server certification boundary.
   modules:
-  - pkgs/10-concrete/tba-concrete-set/src/tba_concrete_set/__init__.py
-  - pkgs/50-protocols/tba-protocol-security-event-set/src/tba_protocol_security_event_set/__init__.py
+  - pkgs/010-concrete/tba-concrete-set/src/tba_concrete_set/__init__.py
+  - pkgs/050-protocols/tba-protocol-security-event-set/src/tba_protocol_security_event_set/__init__.py
 - label: RFC 8291
   kind: extension-quarantine
   reason: Web Push is not part of the certified auth-core boundary.
@@ -185,14 +185,14 @@ deferred_targets:
   reason: Implementation is tested internally but no external FIDO conformance or
     certification claim is made.
   modules:
-  - pkgs/50-protocols/tba-protocol-webauthn/src/tba_protocol_webauthn
-  - pkgs/80-routers/tba-router-webauthn/src/tba_router_webauthn
+  - pkgs/050-protocols/tba-protocol-webauthn/src/tba_protocol_webauthn
+  - pkgs/080-routers/tba-router-webauthn/src/tba_router_webauthn
 - label: FIDO2 server implementation profile
   kind: extension-quarantine
   reason: Profile mapping is implemented but external certification evidence is not
     yet attached.
   modules:
-  - pkgs/55-profiles/tba-profile-fido2-server/src/tba_profile_fido2_server
+  - pkgs/055-profiles/tba-profile-fido2-server/src/tba_profile_fido2_server
 - label: RFC 8932
   kind: extension-quarantine
   reason: RFC 8932 is not an OAuth/OIDC auth-core target and remains quarantined from
@@ -298,7 +298,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/authorization_framework.py
+  - pkgs/050-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/authorization_framework.py
   endpoint_surface:
     current:
     - /authorize
@@ -309,14 +309,14 @@ targets:
     status: tracked
   tests:
     paths:
-    - tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py
-    - tests/conformance/baseline/test_rfc6749_token_endpoint.py
-    - tests/integration/test_auth_flows.py
-    - tests/integration/test_authorization_code_flow.py
-    - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/interop/test_peer_counterpart_catalog.py
-    - tests/interop/test_peer_matrix_artifacts.py
-    - tests/interop/test_tier4_promotion_fail_closed.py
+    - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py
+    - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_token_endpoint.py
+    - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
+    - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py
     classes:
     - conformance
     - integration
@@ -360,7 +360,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/bearer_token_usage.py
+  - pkgs/050-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/bearer_token_usage.py
   endpoint_surface:
     current:
     - /token
@@ -373,11 +373,11 @@ targets:
     status: mounted-shared-bearer-token-surface
   tests:
     paths:
-    - tests/conformance/baseline/test_rfc6750_bearer_token.py
-    - tests/integration/test_auth_flows.py
-    - tests/interop/test_peer_counterpart_catalog.py
-    - tests/interop/test_peer_matrix_artifacts.py
-    - tests/interop/test_tier4_promotion_fail_closed.py
+    - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py
+    - pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py
     classes:
     - conformance
     - integration
@@ -422,7 +422,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/proof_key_for_code_exchange.py
+  - pkgs/050-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/proof_key_for_code_exchange.py
   endpoint_surface:
     current:
     - /authorize
@@ -433,12 +433,12 @@ targets:
     status: mounted-pkce-enforced-auth-code-surface
   tests:
     paths:
-    - tests/conformance/baseline/test_rfc7636_pkce.py
-    - tests/integration/test_authorization_code_flow.py
-    - tests/unit/test_auth_code_exchange_pkce.py
-    - tests/interop/test_peer_counterpart_catalog.py
-    - tests/interop/test_peer_matrix_artifacts.py
-    - tests/interop/test_tier4_promotion_fail_closed.py
+    - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc7636_pkce.py
+    - pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py
+    - pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py
     classes:
     - conformance
     - integration
@@ -483,7 +483,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/authorization_server_metadata.py
+  - pkgs/050-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/authorization_server_metadata.py
   endpoint_surface:
     current:
     - /.well-known/oauth-authorization-server
@@ -492,8 +492,8 @@ targets:
     status: tracked
   tests:
     paths:
-    - tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py
-    - tests/integration/test_rfc8414_metadata.py
+    - pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py
+    - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py
     classes:
     - conformance
     - integration
@@ -533,7 +533,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/60-runtime/tba-runtime-identity/src/tba_runtime_identity/http_standards/well_known.py
+  - pkgs/060-runtime/tba-runtime-identity/src/tba_runtime_identity/http_standards/well_known.py
   endpoint_surface:
     current:
     - /.well-known/openid-configuration
@@ -548,9 +548,9 @@ targets:
     status: tracked
   tests:
     paths:
-    - tests/conformance/production/test_rfc8615_well_known_uris.py
-    - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/unit/test_well_known_endpoints_behavior.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/conformance/production/test_rfc8615_well_known_uris.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
+    - pkgs/120-tests/tba-tests-oidc/tests/unit/test_well_known_endpoints_behavior.py
     classes:
     - conformance
     - integration
@@ -599,20 +599,20 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/10-concrete/tba-concrete-jws/src/tba_concrete_jws
-  - pkgs/20-providers/tba-provider-jose-cryptography/src/tba_provider_jose_cryptography
-  - pkgs/50-protocols/tba-protocol-security-jws/src/tba_protocol_security_jws
+  - pkgs/010-concrete/tba-concrete-jws/src/tba_concrete_jws
+  - pkgs/020-providers/tba-provider-jose-cryptography/src/tba_provider_jose_cryptography
+  - pkgs/050-protocols/tba-protocol-security-jws/src/tba_protocol_security_jws
   endpoint_surface:
     current: []
     target: []
     status: tracked
   tests:
     paths:
-    - tests/conformance/baseline/test_rfc7515_jws.py
-    - tests/unit/test_rfc7515_jws.py
-    - tests/unit/test_complete_wire_objects.py
-    - tests/unit/test_jose_cose_cryptography_providers.py
-    - tests/unit/test_profile_protocol_bindings.py
+    - pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7515_jws.py
+    - pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7515_jws.py
+    - pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py
+    - pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py
+    - pkgs/120-tests/tba-tests-jose/tests/unit/test_profile_protocol_bindings.py
     classes:
     - conformance
     - unit
@@ -649,21 +649,21 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/10-concrete/tba-concrete-jwe/src/tba_concrete_jwe
-  - pkgs/20-providers/tba-provider-jose-cryptography/src/tba_provider_jose_cryptography
-  - pkgs/50-protocols/tba-protocol-security-jwe/src/tba_protocol_security_jwe
+  - pkgs/010-concrete/tba-concrete-jwe/src/tba_concrete_jwe
+  - pkgs/020-providers/tba-provider-jose-cryptography/src/tba_provider_jose_cryptography
+  - pkgs/050-protocols/tba-protocol-security-jwe/src/tba_protocol_security_jwe
   endpoint_surface:
     current: []
     target: []
     status: runtime-integrated-encrypted-id-token-profile
   tests:
     paths:
-    - tests/conformance/production/test_rfc7516_jwe_profile.py
-    - tests/unit/test_rfc7516_jwe.py
-    - tests/unit/test_oidc_id_token_encryption.py
-    - tests/unit/test_complete_wire_objects.py
-    - tests/unit/test_jose_cose_cryptography_providers.py
-    - tests/unit/test_profile_protocol_bindings.py
+    - pkgs/120-tests/tba-tests-jose/tests/conformance/production/test_rfc7516_jwe_profile.py
+    - pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7516_jwe.py
+    - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py
+    - pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py
+    - pkgs/120-tests/tba-tests-jose/tests/unit/test_jose_cose_cryptography_providers.py
+    - pkgs/120-tests/tba-tests-jose/tests/unit/test_profile_protocol_bindings.py
     classes:
     - conformance
     - unit
@@ -700,7 +700,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/20-providers/tba-provider-identity-jose/src/tba_provider_identity_jose
+  - pkgs/020-providers/tba-provider-identity-jose/src/tba_provider_identity_jose
   endpoint_surface:
     current:
     - /.well-known/jwks.json
@@ -709,8 +709,8 @@ targets:
     status: tracked
   tests:
     paths:
-    - tests/conformance/baseline/test_rfc7517_jwk.py
-    - tests/unit/test_jwks_rotation.py
+    - pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7517_jwk.py
+    - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
     classes:
     - conformance
     - unit
@@ -750,15 +750,15 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/20-providers/tba-provider-identity-jose/src/tba_provider_identity_jose
+  - pkgs/020-providers/tba-provider-identity-jose/src/tba_provider_identity_jose
   endpoint_surface:
     current: []
     target: []
     status: tracked
   tests:
     paths:
-    - tests/conformance/baseline/test_rfc7518_jwa.py
-    - tests/unit/test_rfc7518_jwa.py
+    - pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7518_jwa.py
+    - pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7518_jwa.py
     classes:
     - conformance
     - unit
@@ -795,18 +795,18 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/10-concrete/tba-concrete-jwt/src/tba_concrete_jwt
-  - pkgs/50-protocols/tba-protocol-jwt/src/tba_protocol_jwt
+  - pkgs/010-concrete/tba-concrete-jwt/src/tba_concrete_jwt
+  - pkgs/050-protocols/tba-protocol-jwt/src/tba_protocol_jwt
   endpoint_surface:
     current: []
     target: []
     status: tracked
   tests:
     paths:
-    - tests/conformance/baseline/test_rfc7519_jwt.py
-    - tests/unit/test_jwtoken.py
-    - tests/unit/test_complete_wire_objects.py
-    - tests/unit/test_profile_protocol_bindings.py
+    - pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7519_jwt.py
+    - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py
+    - pkgs/120-tests/tba-tests-jose/tests/unit/test_complete_wire_objects.py
+    - pkgs/120-tests/tba-tests-jose/tests/unit/test_profile_protocol_bindings.py
     classes:
     - conformance
     - unit
@@ -843,7 +843,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/revocation.py
+  - pkgs/050-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/revocation.py
   endpoint_surface:
     current:
     - /revoke
@@ -852,11 +852,11 @@ targets:
     status: mounted
   tests:
     paths:
-    - tests/conformance/production/test_rfc7009_token_revocation.py
-    - tests/integration/test_full_workflow.py
-    - tests/integration/test_migration_upgrade_downgrade_safety.py
-    - tests/integration/test_persistence_lifecycle_durability.py
-    - tests/unit/test_public_route_contracts.py
+    - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
+    - pkgs/120-tests/tba-tests-administration/tests/integration/test_full_workflow.py
+    - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+    - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
     classes:
     - conformance
     - integration
@@ -896,7 +896,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/dynamic_client_registration.py
+  - pkgs/050-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/dynamic_client_registration.py
   endpoint_surface:
     current:
     - /register
@@ -905,11 +905,11 @@ targets:
     status: mounted
   tests:
     paths:
-    - tests/conformance/production/test_rfc7591_dynamic_client_registration.py
-    - tests/integration/test_persistence_lifecycle_durability.py
-    - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/unit/test_public_route_contracts.py
-    - tests/unit/test_rfc7591_client_registration_endpoint.py
+    - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7591_dynamic_client_registration.py
+    - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
+    - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7591_client_registration_endpoint.py
     classes:
     - conformance
     - integration
@@ -949,7 +949,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/client_registration_management.py
+  - pkgs/050-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/client_registration_management.py
   endpoint_surface:
     current:
     - /register/{client_id}
@@ -958,11 +958,11 @@ targets:
     status: mounted
   tests:
     paths:
-    - tests/unit/test_hardening_cluster_a.py
-    - tests/conformance/hardening/test_rfc7592_client_registration_management.py
-    - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/unit/test_advanced_surface_contracts.py
-    - tests/unit/test_rfc7592_client_management_endpoint.py
+    - pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py
+    - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc7592_client_registration_management.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_advanced_surface_contracts.py
+    - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7592_client_management_endpoint.py
     classes:
     - unit
     - conformance
@@ -1002,7 +1002,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/introspection.py
+  - pkgs/050-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/introspection.py
   endpoint_surface:
     current:
     - /introspect
@@ -1011,11 +1011,11 @@ targets:
     status: mounted
   tests:
     paths:
-    - tests/conformance/production/test_rfc7662_introspection.py
-    - tests/integration/test_migration_upgrade_downgrade_safety.py
-    - tests/integration/test_persistence_lifecycle_durability.py
-    - tests/integration/test_rfc7662.py
-    - tests/unit/test_public_route_contracts.py
+    - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7662_introspection.py
+    - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+    - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
+    - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc7662.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
     classes:
     - conformance
     - integration
@@ -1055,7 +1055,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/native_apps.py
+  - pkgs/050-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/native_apps.py
   endpoint_surface:
     current:
     - /authorize
@@ -1070,11 +1070,11 @@ targets:
     status: runtime-validated-native-app-profile
   tests:
     paths:
-    - tests/unit/test_rfc8252_native_app_redirects.py
-    - tests/conformance/production/test_rfc8252_native_apps.py
-    - tests/interop/test_peer_counterpart_catalog.py
-    - tests/interop/test_peer_matrix_artifacts.py
-    - tests/interop/test_tier4_promotion_fail_closed.py
+    - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8252_native_app_redirects.py
+    - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc8252_native_apps.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py
     classes:
     - unit
     - conformance
@@ -1122,7 +1122,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/device_authorization.py
+  - pkgs/050-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/device_authorization.py
   endpoint_surface:
     current:
     - /device_authorization
@@ -1131,15 +1131,15 @@ targets:
     status: mounted
   tests:
     paths:
-    - tests/unit/test_hardening_cluster_a.py
-    - tests/conformance/hardening/test_rfc8628_device_authorization.py
-    - tests/integration/test_device_code_flow.py
-    - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/integration/test_rfc8628.py
-    - tests/unit/test_public_route_contracts.py
-    - tests/interop/test_peer_counterpart_catalog.py
-    - tests/interop/test_peer_matrix_artifacts.py
-    - tests/interop/test_tier4_promotion_fail_closed.py
+    - pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py
+    - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8628_device_authorization.py
+    - pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
+    - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py
     classes:
     - unit
     - conformance
@@ -1179,7 +1179,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/token_exchange.py
+  - pkgs/050-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/token_exchange.py
   endpoint_surface:
     current:
     - /token/exchange
@@ -1188,15 +1188,15 @@ targets:
     status: mounted
   tests:
     paths:
-    - tests/unit/test_hardening_cluster_a.py
-    - tests/conformance/hardening/test_rfc8693_token_exchange.py
-    - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/integration/test_rfc8693_token_exchange_endpoint.py
-    - tests/integration/test_token_exchange_flow.py
-    - tests/unit/test_public_route_contracts.py
-    - tests/interop/test_peer_counterpart_catalog.py
-    - tests/interop/test_peer_matrix_artifacts.py
-    - tests/interop/test_tier4_promotion_fail_closed.py
+    - pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py
+    - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8693_token_exchange.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
+    - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py
+    - pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py
     classes:
     - unit
     - conformance
@@ -1236,7 +1236,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/mutual_tls_client_authentication.py
+  - pkgs/050-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/mutual_tls_client_authentication.py
   endpoint_surface:
     current:
     - /token
@@ -1247,13 +1247,15 @@ targets:
     status: runtime-enforced-sender-constraint
   tests:
     paths:
-    - tests/conformance/hardening/test_rfc8705_mtls.py
-    - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/unit/test_advanced_surface_contracts.py
-    - tests/interop/test_peer_counterpart_catalog.py
-    - tests/interop/test_peer_matrix_artifacts.py
-    - tests/interop/test_tier4_promotion_fail_closed.py
-    - tests/unit/test_hardening_cluster_c.py
+    - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8705_mtls.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_advanced_surface_contracts.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py
+    - pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+    - pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
     classes:
     - conformance
     - integration
@@ -1296,7 +1298,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/resource_indicators.py
+  - pkgs/050-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/resource_indicators.py
   endpoint_surface:
     current:
     - /authorize
@@ -1313,10 +1315,10 @@ targets:
     status: mounted
   tests:
     paths:
-    - tests/unit/test_hardening_cluster_a.py
-    - tests/conformance/hardening/test_rfc8707_resource_indicators.py
-    - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/unit/test_advanced_surface_contracts.py
+    - pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py
+    - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8707_resource_indicators.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_advanced_surface_contracts.py
     classes:
     - unit
     - conformance
@@ -1363,7 +1365,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/jwt_access_tokens.py
+  - pkgs/050-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/jwt_access_tokens.py
   endpoint_surface:
     current:
     - /login
@@ -1376,12 +1378,12 @@ targets:
     status: mounted-jwt-access-token-profile
   tests:
     paths:
-    - tests/conformance/production/test_rfc9068_jwt_profile.py
-    - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/unit/test_advanced_surface_contracts.py
-    - tests/interop/test_peer_counterpart_catalog.py
-    - tests/interop/test_peer_matrix_artifacts.py
-    - tests/interop/test_tier4_promotion_fail_closed.py
+    - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_advanced_surface_contracts.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py
     classes:
     - conformance
     - integration
@@ -1427,7 +1429,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/jwt_secured_authorization_requests.py
+  - pkgs/050-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/jwt_secured_authorization_requests.py
   endpoint_surface:
     current:
     - /authorize
@@ -1438,13 +1440,13 @@ targets:
     status: mounted
   tests:
     paths:
-    - tests/conformance/hardening/test_rfc9101_jar.py
-    - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/unit/test_advanced_surface_contracts.py
-    - tests/interop/test_peer_counterpart_catalog.py
-    - tests/interop/test_peer_matrix_artifacts.py
-    - tests/interop/test_tier4_promotion_fail_closed.py
-    - tests/unit/test_hardening_cluster_b.py
+    - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9101_jar.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_advanced_surface_contracts.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py
+    - pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py
     classes:
     - conformance
     - integration
@@ -1487,7 +1489,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/pushed_authorization_requests.py
+  - pkgs/050-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/pushed_authorization_requests.py
   endpoint_surface:
     current:
     - /par
@@ -1496,13 +1498,13 @@ targets:
     status: mounted-normalized-request-surface
   tests:
     paths:
-    - tests/conformance/hardening/test_rfc9126_par.py
-    - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/unit/test_public_route_contracts.py
-    - tests/interop/test_peer_counterpart_catalog.py
-    - tests/interop/test_peer_matrix_artifacts.py
-    - tests/interop/test_tier4_promotion_fail_closed.py
-    - tests/unit/test_hardening_cluster_b.py
+    - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9126_par.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py
+    - pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py
     classes:
     - conformance
     - integration
@@ -1542,7 +1544,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/issuer_identification.py
+  - pkgs/050-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/issuer_identification.py
   endpoint_surface:
     current:
     - /authorize
@@ -1553,11 +1555,11 @@ targets:
     status: mounted
   tests:
     paths:
-    - tests/conformance/hardening/test_rfc9207_issuer_identification.py
-    - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/unit/test_profile_discovery_runtime.py
-    - tests/unit/test_rfc9207_issuer_identification.py
-    - tests/unit/test_hardening_cluster_b.py
+    - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
+    - pkgs/120-tests/tba-tests-runtime/tests/unit/test_profile_discovery_runtime.py
+    - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py
+    - pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py
     classes:
     - conformance
     - integration
@@ -1601,7 +1603,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/rich_authorization_requests.py
+  - pkgs/050-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/rich_authorization_requests.py
   endpoint_surface:
     current:
     - /authorize
@@ -1612,13 +1614,13 @@ targets:
     status: mounted
   tests:
     paths:
-    - tests/conformance/hardening/test_rfc9396_rar.py
-    - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/unit/test_advanced_surface_contracts.py
-    - tests/interop/test_peer_counterpart_catalog.py
-    - tests/interop/test_peer_matrix_artifacts.py
-    - tests/interop/test_tier4_promotion_fail_closed.py
-    - tests/unit/test_hardening_cluster_b.py
+    - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_advanced_surface_contracts.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py
+    - pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py
     classes:
     - conformance
     - integration
@@ -1661,7 +1663,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/dpop.py
+  - pkgs/050-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/dpop.py
   endpoint_surface:
     current:
     - /token
@@ -1672,13 +1674,15 @@ targets:
     status: runtime-enforced-dpop
   tests:
     paths:
-    - tests/conformance/hardening/test_rfc9449_dpop.py
-    - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/unit/test_advanced_surface_contracts.py
-    - tests/interop/test_peer_counterpart_catalog.py
-    - tests/interop/test_peer_matrix_artifacts.py
-    - tests/interop/test_tier4_promotion_fail_closed.py
-    - tests/unit/test_hardening_cluster_c.py
+    - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9449_dpop.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_advanced_surface_contracts.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py
+    - pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+    - pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
     classes:
     - conformance
     - integration
@@ -1721,7 +1725,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/60-runtime/tba-runtime-identity/src/tba_runtime_identity/http_standards/cookies.py
+  - pkgs/060-runtime/tba-runtime-identity/src/tba_runtime_identity/http_standards/cookies.py
   endpoint_surface:
     current:
     - /login
@@ -1734,10 +1738,10 @@ targets:
     status: mounted
   tests:
     paths:
-    - tests/conformance/production/test_rfc6265_cookies.py
-    - tests/integration/test_migration_upgrade_downgrade_safety.py
-    - tests/integration/test_persistence_lifecycle_durability.py
-    - tests/negative/test_cookie_and_logout_abuse_cases.py
+    - pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py
+    - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+    - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
+    - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
     classes:
     - conformance
     - integration
@@ -1783,7 +1787,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/assertion_framework.py
+  - pkgs/050-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/assertion_framework.py
   endpoint_surface:
     current:
     - /token
@@ -1792,8 +1796,8 @@ targets:
     status: runtime-integrated-token-endpoint
   tests:
     paths:
-    - tests/conformance/production/test_rfc7521_assertion_framework.py
-    - tests/unit/test_rfc7521_assertion_framework.py
+    - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7521_assertion_framework.py
+    - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7521_assertion_framework.py
     classes:
     - conformance
     - unit
@@ -1833,7 +1837,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/jwt_client_auth.py
+  - pkgs/050-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/jwt_client_auth.py
   endpoint_surface:
     current:
     - /token
@@ -1846,8 +1850,8 @@ targets:
     status: runtime-integrated-token-endpoint-and-registration-metadata
   tests:
     paths:
-    - tests/conformance/production/test_rfc7523_jwt_profile.py
-    - tests/unit/test_rfc7523_jwt_profile.py
+    - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7523_jwt_profile.py
+    - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7523_jwt_profile.py
     classes:
     - conformance
     - unit
@@ -1891,7 +1895,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/protected_resource_metadata.py
+  - pkgs/050-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/protected_resource_metadata.py
   endpoint_surface:
     current:
     - /.well-known/oauth-protected-resource
@@ -1900,13 +1904,13 @@ targets:
     status: tracked
   tests:
     paths:
-    - tests/conformance/production/test_rfc9728_protected_resource_metadata.py
-    - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/integration/test_rfc8414_metadata.py
-    - tests/unit/test_rfc9728_metadata_checkpoint.py
-    - tests/interop/test_peer_counterpart_catalog.py
-    - tests/interop/test_peer_matrix_artifacts.py
-    - tests/interop/test_tier4_promotion_fail_closed.py
+    - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9728_protected_resource_metadata.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
+    - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py
+    - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py
     classes:
     - conformance
     - integration
@@ -1947,7 +1951,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/oauth_security_bcp.py
+  - pkgs/050-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/oauth_security_bcp.py
   endpoint_surface:
     current:
     - /authorize
@@ -1960,12 +1964,14 @@ targets:
     status: implemented-core-runtime-enforcement
   tests:
     paths:
-    - tests/conformance/hardening/test_rfc9700_security_bcp.py
-    - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/negative/test_hardening_runtime_enforcement.py
-    - tests/unit/test_profile_discovery_runtime.py
-    - tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
-    - tests/unit/test_hardening_cluster_c.py
+    - pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9700_security_bcp.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
+    - pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py
+    - pkgs/120-tests/tba-tests-runtime/tests/unit/test_profile_discovery_runtime.py
+    - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
+    - pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+    - pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
     classes:
     - conformance
     - integration
@@ -2013,22 +2019,27 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/core.py
-  - pkgs/50-protocols/tba-protocol-oidc/src/tba_protocol_oidc/id_token_profile.py
-  - pkgs/50-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/id_token.py
+  - pkgs/050-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/core.py
+  - pkgs/050-protocols/tba-protocol-oidc/src/tba_protocol_oidc/id_token_profile.py
+  - pkgs/050-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/id_token.py
   endpoint_surface:
     current: []
     target: []
     status: tracked
   tests:
     paths:
-    - tests/conformance/baseline/test_oidc_id_token.py
-    - tests/conformance/baseline/test_openid_userinfo_endpoint.py
-    - tests/unit/test_oidc_id_token_canonical_verification.py
-    - tests/unit/test_authorize_id_token_hashes.py
-    - tests/unit/test_identity_artifact_confusion_vectors.py
-    - tests/integration/test_authorization_response_types.py
-    - tests/integration/test_oidc_endpoints.py
+    - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_oidc_id_token.py
+    - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py
+    - pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_canonical_verification.py
+    - pkgs/120-tests/tba-tests-oidc/tests/unit/test_authorize_id_token_hashes.py
+    - pkgs/120-tests/tba-tests-vc-jose-cose/tests/unit/test_vc_profile_confusion.py
+    - pkgs/120-tests/tba-tests-did/tests/unit/test_did_document_relationship_rejection.py
+    - pkgs/120-tests/tba-tests-oidc/tests/unit/test_id_token_type_confusion.py
+    - pkgs/120-tests/tba-tests-jose/tests/unit/test_cwt_carrier_rejection.py
+    - pkgs/120-tests/tba-tests-spiffe/tests/unit/test_cwt_svid_proof_rejection.py
+    - pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py
+    - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py
+    - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
     classes:
     - conformance
     - unit
@@ -2066,7 +2077,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/discovery.py
+  - pkgs/050-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/discovery.py
   endpoint_surface:
     current:
     - /.well-known/openid-configuration
@@ -2075,13 +2086,13 @@ targets:
     status: tracked
   tests:
     paths:
-    - tests/conformance/baseline/test_openid_configuration.py
-    - tests/integration/test_oidc_endpoints.py
-    - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/integration/test_rfc8414_metadata.py
-    - tests/interop/test_peer_counterpart_catalog.py
-    - tests/interop/test_peer_matrix_artifacts.py
-    - tests/interop/test_tier4_promotion_fail_closed.py
+    - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_configuration.py
+    - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
+    - pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py
     classes:
     - conformance
     - integration
@@ -2122,7 +2133,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/userinfo.py
+  - pkgs/050-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/userinfo.py
   endpoint_surface:
     current:
     - /userinfo
@@ -2131,9 +2142,9 @@ targets:
     status: mounted
   tests:
     paths:
-    - tests/conformance/baseline/test_openid_userinfo_endpoint.py
-    - tests/integration/test_oidc_endpoints.py
-    - tests/unit/test_openid_userinfo_endpoint.py
+    - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py
+    - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
+    - pkgs/120-tests/tba-tests-oidc/tests/unit/test_openid_userinfo_endpoint.py
     classes:
     - conformance
     - integration
@@ -2173,7 +2184,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/session_mgmt.py
+  - pkgs/050-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/session_mgmt.py
   endpoint_surface:
     current:
     - /login
@@ -2186,11 +2197,11 @@ targets:
     status: mounted
   tests:
     paths:
-    - tests/conformance/production/test_oidc_session_management.py
-    - tests/integration/test_migration_upgrade_downgrade_safety.py
-    - tests/integration/test_persistence_lifecycle_durability.py
-    - tests/negative/test_cookie_and_logout_abuse_cases.py
-    - tests/unit/test_session_logout_cluster_b.py
+    - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py
+    - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+    - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
+    - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
+    - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
     classes:
     - conformance
     - integration
@@ -2237,7 +2248,7 @@ targets:
     status: evidenced-release-gated
     profile: production
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/rp_initiated_logout.py
+  - pkgs/050-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/rp_initiated_logout.py
   endpoint_surface:
     current:
     - /logout
@@ -2246,11 +2257,11 @@ targets:
     status: mounted
   tests:
     paths:
-    - tests/conformance/production/test_oidc_rp_initiated_logout.py
-    - tests/integration/test_migration_upgrade_downgrade_safety.py
-    - tests/integration/test_persistence_lifecycle_durability.py
-    - tests/negative/test_cookie_and_logout_abuse_cases.py
-    - tests/unit/test_session_logout_cluster_b.py
+    - pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
+    - pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py
+    - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
+    - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
+    - pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py
     classes:
     - conformance
     - integration
@@ -2291,7 +2302,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/frontchannel_logout.py
+  - pkgs/050-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/frontchannel_logout.py
   endpoint_surface:
     current:
     - /logout
@@ -2300,10 +2311,12 @@ targets:
     status: fanout-planned-on-mounted-logout-route
   tests:
     paths:
-    - tests/conformance/hardening/test_oidc_frontchannel_logout.py
-    - tests/integration/test_persistence_lifecycle_durability.py
-    - tests/negative/test_cookie_and_logout_abuse_cases.py
-    - tests/unit/test_hardening_cluster_c.py
+    - pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_frontchannel_logout.py
+    - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
+    - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
+    - pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+    - pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
     classes:
     - conformance
     - integration
@@ -2344,7 +2357,7 @@ targets:
     status: evidenced-release-gated
     profile: hardening
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/backchannel_logout.py
+  - pkgs/050-protocols/tba-protocol-oidc/src/tba_protocol_oidc/standards/backchannel_logout.py
   endpoint_surface:
     current:
     - /logout
@@ -2353,10 +2366,12 @@ targets:
     status: fanout-planned-on-mounted-logout-route
   tests:
     paths:
-    - tests/conformance/hardening/test_oidc_backchannel_logout.py
-    - tests/integration/test_persistence_lifecycle_durability.py
-    - tests/negative/test_cookie_and_logout_abuse_cases.py
-    - tests/unit/test_hardening_cluster_c.py
+    - pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_backchannel_logout.py
+    - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
+    - pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py
+    - pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py
+    - pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py
     classes:
     - conformance
     - integration
@@ -2397,16 +2412,16 @@ targets:
     status: generated-live-from-deployment-metadata
     profile: baseline
   owner_modules:
-  - pkgs/90-backend-apps/tba-app-backend-public/src/tba_app_backend_public/openapi.py
+  - pkgs/090-backend-apps/tba-app-backend-public/src/tba_app_backend_public/openapi.py
   endpoint_surface:
     current: []
     target: []
     status: tracked
   tests:
     paths:
-    - tests/e2e/test_release_gate_catalog.py
-    - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/unit/test_contract_generation_live.py
+    - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
     classes:
     - e2e
     - integration
@@ -2444,7 +2459,7 @@ targets:
     status: implementation-backed-generated-from-rpc-registry
     profile: production
   owner_modules:
-  - pkgs/60-runtime/tba-cli-identity/src/tba_cli_identity/cli/artifacts/_schemas.py
+  - pkgs/060-runtime/tba-cli-identity/src/tba_cli_identity/cli/artifacts/_schemas.py
   endpoint_surface:
     current:
     - /rpc
@@ -2453,9 +2468,9 @@ targets:
     status: implementation-backed
   tests:
     paths:
-    - tests/e2e/test_release_gate_catalog.py
-    - tests/unit/test_contract_generation_live.py
-    - tests/unit/test_rpc_registry_live.py
+    - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_rpc_registry_live.py
     classes:
     - e2e
     - unit
@@ -2492,20 +2507,20 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/90-backend-apps/tba-app-backend-public/src/tba_app_backend_public/app.py
+  - pkgs/090-backend-apps/tba-app-backend-public/src/tba_app_backend_public/app.py
   endpoint_surface:
     current: []
     target: []
     status: tracked
   tests:
     paths:
-    - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/unit/test_deployment_resolver.py
-    - tests/unit/test_claim_boundary_rebaseline.py
-    - tests/unit/test_runner_adapter_runtime_layer.py
-    - tests/unit/test_runtime_launcher.py
-    - tests/runtime/test_runner_invariance.py
-    - tests/conformance/operator/test_cli_serve_runtime.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
+    - pkgs/120-tests/tba-tests-runtime/tests/unit/test_deployment_resolver.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/unit/test_claim_boundary_rebaseline.py
+    - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
+    - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+    - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+    - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
     classes:
     - integration
     - unit
@@ -2543,20 +2558,20 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/60-runtime/tba-runtime-identity/src/tba_runtime_identity/uvicorn.py
+  - pkgs/060-runtime/tba-runtime-identity/src/tba_runtime_identity/uvicorn.py
   endpoint_surface:
     current: []
     target: []
     status: tracked
   tests:
     paths:
-    - tests/unit/test_claim_boundary_rebaseline.py
-    - tests/unit/test_runner_adapter_runtime_layer.py
-    - tests/unit/test_runtime_cfg.py
-    - tests/unit/test_runtime_launcher.py
-    - tests/runtime/test_runner_uvicorn.py
-    - tests/runtime/test_runner_invariance.py
-    - tests/conformance/operator/test_cli_serve_runtime.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/unit/test_claim_boundary_rebaseline.py
+    - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
+    - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
+    - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+    - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_uvicorn.py
+    - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+    - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
     classes:
     - unit
     - integration
@@ -2594,20 +2609,20 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/60-runtime/tba-runtime-identity/src/tba_runtime_identity/hypercorn.py
+  - pkgs/060-runtime/tba-runtime-identity/src/tba_runtime_identity/hypercorn.py
   endpoint_surface:
     current: []
     target: []
     status: tracked
   tests:
     paths:
-    - tests/unit/test_claim_boundary_rebaseline.py
-    - tests/unit/test_runner_adapter_runtime_layer.py
-    - tests/unit/test_runtime_cfg.py
-    - tests/unit/test_runtime_launcher.py
-    - tests/runtime/test_runner_hypercorn.py
-    - tests/runtime/test_runner_invariance.py
-    - tests/conformance/operator/test_cli_serve_runtime.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/unit/test_claim_boundary_rebaseline.py
+    - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
+    - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
+    - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+    - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_hypercorn.py
+    - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+    - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
     classes:
     - unit
     - integration
@@ -2645,20 +2660,20 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/60-runtime/tba-runtime-identity/src/tba_runtime_identity/tigrcorn.py
+  - pkgs/060-runtime/tba-runtime-identity/src/tba_runtime_identity/tigrcorn.py
   endpoint_surface:
     current: []
     target: []
     status: tracked
   tests:
     paths:
-    - tests/unit/test_claim_boundary_rebaseline.py
-    - tests/unit/test_runner_adapter_runtime_layer.py
-    - tests/unit/test_runtime_cfg.py
-    - tests/unit/test_runtime_launcher.py
-    - tests/runtime/test_runner_tigrcorn.py
-    - tests/runtime/test_runner_invariance.py
-    - tests/conformance/operator/test_cli_serve_runtime.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/unit/test_claim_boundary_rebaseline.py
+    - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py
+    - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py
+    - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+    - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_tigrcorn.py
+    - pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py
+    - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
     classes:
     - unit
     - integration
@@ -2696,23 +2711,23 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/60-runtime/tba-cli-identity/src/tba_cli_identity/cli
+  - pkgs/060-runtime/tba-cli-identity/src/tba_cli_identity/cli
   endpoint_surface:
     current: []
     target: []
     status: tracked
   tests:
     paths:
-    - tests/unit/test_claim_boundary_rebaseline.py
-    - tests/unit/test_cli_surface_checkpoint.py
-    - tests/unit/test_runtime_launcher.py
-    - tests/unit/test_cli_contract.py
-    - tests/unit/test_operator_service_layer.py
-    - tests/conformance/operator/test_cli_serve_runtime.py
-    - tests/conformance/operator/test_cli_resource_lifecycle.py
-    - tests/conformance/operator/test_cli_keys_lifecycle.py
-    - tests/conformance/operator/test_cli_import_export.py
-    - tests/conformance/operator/test_cli_bootstrap_migrate.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/unit/test_claim_boundary_rebaseline.py
+    - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py
+    - pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py
+    - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
+    - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
+    - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
+    - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
+    - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
+    - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
+    - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
     classes:
     - unit
     - conformance
@@ -2749,17 +2764,17 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/migrations
+  - pkgs/030-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/migrations
   endpoint_surface:
     current: []
     target: []
     status: tracked
   tests:
     paths:
-    - tests/unit/test_claim_boundary_rebaseline.py
-    - tests/e2e/test_release_gate_catalog.py
-    - tests/unit/test_cli_contract.py
-    - tests/conformance/operator/test_cli_bootstrap_migrate.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/unit/test_claim_boundary_rebaseline.py
+    - pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py
+    - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
+    - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
     classes:
     - unit
     - e2e
@@ -2797,19 +2812,19 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/50-protocols/tba-protocol-oidc/src/tba_protocol_oidc/jwks_service.py
+  - pkgs/050-protocols/tba-protocol-oidc/src/tba_protocol_oidc/jwks_service.py
   endpoint_surface:
     current: []
     target: []
     status: tracked
   tests:
     paths:
-    - tests/unit/test_claim_boundary_rebaseline.py
-    - tests/unit/test_jwks_rotation.py
-    - tests/unit/test_rpc_registry_live.py
-    - tests/unit/test_cli_contract.py
-    - tests/unit/test_operator_service_layer.py
-    - tests/conformance/operator/test_cli_keys_lifecycle.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/unit/test_claim_boundary_rebaseline.py
+    - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
+    - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_rpc_registry_live.py
+    - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
+    - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
+    - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py
     classes:
     - unit
     - conformance
@@ -2846,17 +2861,17 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/portability.py
+  - pkgs/030-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/portability.py
   endpoint_surface:
     current: []
     target: []
     status: tracked
   tests:
     paths:
-    - tests/unit/test_claim_boundary_rebaseline.py
-    - tests/unit/test_cli_contract.py
-    - tests/unit/test_operator_service_layer.py
-    - tests/conformance/operator/test_cli_import_export.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/unit/test_claim_boundary_rebaseline.py
+    - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py
+    - pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py
+    - pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
     classes:
     - unit
     - conformance
@@ -2893,17 +2908,17 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - pkgs/60-runtime/tba-certification-release/src/tba_certification_release
+  - pkgs/060-runtime/tba-certification-release/src/tba_certification_release
   endpoint_surface:
     current: []
     target: []
     status: tracked
   tests:
     paths:
-    - tests/unit/test_claim_boundary_rebaseline.py
-    - tests/security/test_release_bundle_signing.py
-    - tests/unit/test_published_dependency_model.py
-    - tests/security/test_sender_constraint_replay.py
+    - pkgs/120-tests/tba-tests-governance-release-certification/tests/unit/test_claim_boundary_rebaseline.py
+    - pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
+    - pkgs/120-tests/tba-tests-release/tests/unit/test_published_dependency_model.py
+    - pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
     classes:
     - unit
     - security

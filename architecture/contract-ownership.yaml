@@ -1,5 +1,5 @@
 version: 1
-layer: 02-contracts
+layer: 002-contracts
 owners:
   Did:
     canonical: tba_contracts_did.identifiers.Did

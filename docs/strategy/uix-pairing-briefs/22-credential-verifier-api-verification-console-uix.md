@@ -3,8 +3,8 @@
 **Proposed pairing:** `tba-router-credential-verifier` + `@tba/credential-verifier-uix`<br>
 **Status:** New product surface; planned verification-result/boundary work and reusable trust, JOSE, policy, status, audit, and API foundations exist<br>
 **Prepared:** July 11, 2026<br>
-**Proposed router owner:** `pkgs/80-routers/tba-router-credential-verifier`<br>
-**Proposed protocol owner:** `pkgs/50-protocols/tba-openid4vp-verifier`<br>
+**Proposed router owner:** `pkgs/080-routers/tba-router-credential-verifier`<br>
+**Proposed protocol owner:** `pkgs/050-protocols/tba-openid4vp-verifier`<br>
 **Proposed UIX owner:** `pkgs/105-ui/credential-verifier-uix`
 
 ## 1. Product Decision

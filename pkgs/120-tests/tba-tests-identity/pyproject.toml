@@ -51,5 +51,8 @@ email = "jacob@swarmauri.com"
 requires = ["poetry-core>=2.2.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
+[project.entry-points.pytest11]
+"tba_tests_identity.pytest_plugin" = "tba_tests_identity.pytest_plugin"
+
 [tool.poetry]
 packages = [{ include = "tba_tests_identity", from = "src" }]

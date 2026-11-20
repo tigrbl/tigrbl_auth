@@ -75,7 +75,7 @@
     "docs/compliance/certification_state_report.json": "4a0d8f183620500e81cbc82033e350756411418b3826376346bd8f58b4ec43fa",
     "docs/compliance/release_gate_report.json": "2748344d7282a50874463868e2d55c3b7fa7e8c299bb29467b4ce94cc3e3a3b4",
     "docs/compliance/final_release_gate_report.json": "43526484a5a25b65668c9a42005bef8c3fd25b502e01d8ce8b9b7197d4e09353",
-    "docs/compliance/non_rfc_status_report.json": "07818eaebee7d82e286098ed417b5881db3ec38ec26dc57b3fae858f1c91c1ee"
+    "docs/compliance/non_rfc_status_report.json": "292e6be857813c52b044e6c8f990b26dcc25ed97c51c913a7b81aa3ac843c6f7"
   },
   "explicitly_deauthorized_current_adjacent_docs": [
     "docs/compliance/BOUNDARY_FREEZE_DECISION_2026-03-26.md",

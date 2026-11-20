@@ -3,7 +3,7 @@
 **Proposed pairing:** `tba-router-federation-trust` + `@tba/ui-trust-center`<br>
 **Status:** New product surface; relevant contracts, providers, graphs, discovery, JOSE, storage, and tenant authority foundations exist<br>
 **Prepared:** July 11, 2026<br>
-**Proposed router owner:** `pkgs/80-routers/tba-router-federation-trust`<br>
+**Proposed router owner:** `pkgs/080-routers/tba-router-federation-trust`<br>
 **Proposed UIX owner:** `pkgs/105-ui/trust-center-uix`
 
 ## 1. Product Decision
@@ -475,13 +475,13 @@ Guardrails include account-link collisions, cross-tenant disclosure, unreviewed 
 
 ### Repository evidence
 
-- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/federation/`
-- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/oidc/federation.py`
-- `pkgs/20-providers/tba-provider-security-oidc-federation/`
-- `pkgs/30-storage-runtime/tba-durability-identity-administration-trust-federation-graph/`
-- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/trust_federation_graph/`
-- `pkgs/20-providers/tba-provider-identity-jose/`
-- `pkgs/20-providers/tba-provider-security-token-jwks-cache/`
+- `pkgs/002-contracts/tba-contracts-identity/src/tba_contracts_identity/federation/`
+- `pkgs/002-contracts/tba-contracts-identity/src/tba_contracts_identity/oidc/federation.py`
+- `pkgs/020-providers/tba-provider-security-oidc-federation/`
+- `pkgs/030-storage-runtime/tba-durability-identity-administration-trust-federation-graph/`
+- `pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables/trust_federation_graph/`
+- `pkgs/020-providers/tba-provider-identity-jose/`
+- `pkgs/020-providers/tba-provider-security-token-jwks-cache/`
 - `docs/compliance/tenant_trust_domain_authority_phase3.md`
 - `docs/oidc-party-vendor-support-matrix.md`
 - `docs/iam-ciam-pam-focus.md`
