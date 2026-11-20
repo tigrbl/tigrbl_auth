@@ -18,7 +18,8 @@
     "pkgs/105-ui/tba-ui-my-account",
     "pkgs/105-ui/tba-ui-demo-hub",
     "pkgs/105-ui/tba-ui-public",
-    "pkgs/105-ui/tba-ui-resource-validation"
+    "pkgs/105-ui/tba-ui-resource-validation",
+    "pkgs/105-ui/tba-ui-app-connections"
   ],
   "scripts": {
     "build:uix-core": "npm run build -w @tba/ui-primitives",
