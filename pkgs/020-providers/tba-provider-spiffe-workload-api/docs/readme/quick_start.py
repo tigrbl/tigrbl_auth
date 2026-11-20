@@ -1,0 +1,3 @@
+from tba_provider_spiffe_workload_api import LocalSpiffeWorkloadApiProvider
+
+assert callable(LocalSpiffeWorkloadApiProvider)

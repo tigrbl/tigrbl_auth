@@ -1,0 +1,3 @@
+from tba_capability_operator_administration import OperatorAdministrationAuthorizer
+
+assert callable(OperatorAdministrationAuthorizer)

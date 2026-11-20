@@ -1,0 +1,3 @@
+from tba_capability_mfa_challenge import MfaChallengeCapability
+
+assert callable(MfaChallengeCapability)

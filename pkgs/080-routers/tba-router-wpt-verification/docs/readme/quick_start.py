@@ -1,0 +1,3 @@
+import tba_router_wpt_verification
+
+print(tba_router_wpt_verification.__name__)

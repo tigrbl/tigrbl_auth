@@ -22,7 +22,7 @@ permissions:
 jobs:
   dependency-review:
     if: ${{ inputs.run-dependency-review && github.event_name == 'pull_request' }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/docs/readme-standards-20261119' || (github.event_name == 'pull_request' && github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository)) && fromJSON('["self-hosted","Linux","X64","trusted-public-ci"]') || 'ubuntu-24.04' }}
     permissions:
       contents: read
       pull-requests: read
@@ -33,20 +33,26 @@ jobs:
           fail-on-severity: high
 
   governance-and-devtest:
-    runs-on: ubuntu-latest
+    runs-on: ${{ (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/docs/readme-standards-20261119' || (github.event_name == 'pull_request' && github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository)) && fromJSON('["self-hosted","Linux","X64","trusted-public-ci"]') || 'ubuntu-24.04' }}
     permissions:
       contents: read
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
         with:
-          python-version: ${{ inputs.python-version }}
+          python-version: "3.12"
+      - name: Install the shared README policy checker
+        run: python -m pip install readme-standards==0.1.1
       - name: Verify shared README headers
         run: python scripts/render_readme_branding.py --check
       - name: Verify package metadata, legal files, and counters
         run: python scripts/verify_package_standards.py
       - name: Verify complete README sections, branding, and badges
         run: python scripts/verify_readme_standards.py
+      - name: Select the requested runtime test interpreter
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ inputs.python-version }}
       - name: Install toolchain
         shell: bash
         run: python -m pip install --upgrade pip tox uv
@@ -70,7 +76,7 @@ jobs:
 
   codeql:
     if: ${{ inputs.run-codeql }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/docs/readme-standards-20261119' || (github.event_name == 'pull_request' && github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository)) && fromJSON('["self-hosted","Linux","X64","trusted-public-ci"]') || 'ubuntu-24.04' }}
     permissions:
       actions: read
       contents: read

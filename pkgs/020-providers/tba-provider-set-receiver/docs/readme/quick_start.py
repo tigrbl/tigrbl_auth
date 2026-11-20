@@ -1,0 +1,3 @@
+from tba_provider_set_receiver import SetReceiverProvider
+
+assert callable(SetReceiverProvider)

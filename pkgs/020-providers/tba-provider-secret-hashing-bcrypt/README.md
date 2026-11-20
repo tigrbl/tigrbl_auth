@@ -1,30 +1,41 @@
 # tba-provider-secret-hashing-bcrypt
 
-<!-- BEGIN TBA README HEADER -->
+<!-- readme-standards:begin branding -->
+<p align="center"><a href="https://github.com/tigrbl/tigrbl_auth"><img src="https://raw.githubusercontent.com/tigrbl/tigrbl_auth/master/docs/assets/tba-brand.png" alt="TBA · Tigrbl Auth" width="300"></a></p>
+<p align="center"><strong>tba-provider-secret-hashing-bcrypt</strong></p>
+<p align="center">Bcrypt shared-secret hashing and verification provider for TBA.</p>
 <p align="center">
-<a href="https://github.com/tigrbl/tigrbl_auth#readme"><img src="https://raw.githubusercontent.com/tigrbl/tigrbl_auth/master/docs/assets/tba-brand.png" alt="TBA · Tigrbl Auth" width="240"></a>
+<a href="https://pypi.org/project/tba-provider-secret-hashing-bcrypt/"><img alt="pypi: tba-provider-secret-hashing-bcrypt" src="https://img.shields.io/pypi/v/tba-provider-secret-hashing-bcrypt"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/pyproject.toml"><img alt="Source version: 0.1.1.dev1" src="https://img.shields.io/static/v1?label=Source%20version&amp;message=0.1.1.dev1&amp;color=525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/pyproject.toml"><img alt="Python: &gt;=3.10,&lt;3.16" src="https://img.shields.io/static/v1?label=Python&amp;message=%3E%3D3.10%2C%3C3.16&amp;color=525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/pyproject.toml"><img alt="Layer: 020-providers" src="https://img.shields.io/static/v1?label=Layer&amp;message=020-providers&amp;color=525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/README.md#lifecycle-and-migration"><img alt="Lifecycle: active" src="https://img.shields.io/static/v1?label=Lifecycle&amp;message=active&amp;color=525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/static/v1?label=License&amp;message=Apache-2.0&amp;color=525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/NOTICE"><img alt="Notice: attribution" src="https://img.shields.io/static/v1?label=Notice&amp;message=attribution&amp;color=525252"></a>
 </p>
 <p align="center">
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/pyproject.toml"><img alt="Checkout: 0.1.1.dev1" src="https://img.shields.io/badge/Checkout-0.1.1.dev1-1f6feb"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/pyproject.toml"><img alt="Python: &gt;=3.10,&lt;3.16" src="https://img.shields.io/badge/Python-%3E%3D3.10%2C%3C3.16-3776ab"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/tba-provider-secret-hashing-bcrypt%3D%3D0.1.1.dev1/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/License-Apache--2.0-525252"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/tba-provider-secret-hashing-bcrypt%3D%3D0.1.1.dev1/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/NOTICE"><img alt="Notice: attribution" src="https://img.shields.io/badge/Notice-attribution-525252"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/020-providers"><img alt="Layer: 020 providers" src="https://img.shields.io/badge/Layer-020%20providers-0a7f5a"></a>
-<a href="https://pypi.org/project/tba-provider-secret-hashing-bcrypt/"><img alt="PyPI version for tba-provider-secret-hashing-bcrypt" src="https://img.shields.io/pypi/v/tba-provider-secret-hashing-bcrypt?label=tba-provider-secret-hashing-bcrypt%20PyPI"></a>
+<a href="https://pypi.org/project/tba-provider-secret-hashing-bcrypt/"><img alt="Monthly PyPI downloads: tba-provider-secret-hashing-bcrypt" src="https://img.shields.io/pypi/dm/tba-provider-secret-hashing-bcrypt"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/README.md"><img alt="README hits: tba-provider-secret-hashing-bcrypt" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/README.md.svg?label=README%20hits"></a>
 </p>
 <p align="center">
-<a href="https://pepy.tech/project/tba-provider-secret-hashing-bcrypt"><img alt="Monthly PyPI downloads for tba-provider-secret-hashing-bcrypt" src="https://static.pepy.tech/badge/tba-provider-secret-hashing-bcrypt/month"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/README.md"><img alt="README hits for tba-provider-secret-hashing-bcrypt" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/README.md.svg?label=hits"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"><img alt="SSOT: governed" src="https://img.shields.io/badge/SSOT-governed-2f6f4e"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"><img alt="README standards: CI gate" src="https://img.shields.io/static/v1?label=README%20standards&amp;message=CI%20gate&amp;color=525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/docs/readme/test_examples.py"><img alt="Tests: example source" src="https://img.shields.io/static/v1?label=Tests&amp;message=example%20source&amp;color=525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/README.md#certification-status"><img alt="Certification: not certified" src="https://img.shields.io/static/v1?label=Certification&amp;message=not%20certified&amp;color=525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/tools/readme/POLICY.md"><img alt="Governance: repository policy" src="https://img.shields.io/static/v1?label=Governance&amp;message=repository%20policy&amp;color=525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"><img alt="Evidence: source and CI" src="https://img.shields.io/static/v1?label=Evidence&amp;message=source%20and%20CI&amp;color=525252"></a>
 </p>
-<!-- END TBA README HEADER -->
+<p align="center"><a href="#overview">Overview</a> · <a href="#installation">Installation</a> · <a href="#quick-start">Quick Start</a> · <a href="#usage">Usage</a> · <a href="#public-api-and-import-surfaces">API</a> · <a href="#contributing">Contributing</a> · <a href="#governance">Governance</a> · <a href="#license">License</a></p>
+<!-- readme-standards:end branding -->
+
+---
+
+## Overview
+
+### Summary
 
 Environment-backed bcrypt hashing and verification for passwords and other
 shared secrets. This package does not query principals, own durable records, or
 perform an authentication ceremony.
-
-## AEO Summary
 
 - Package: `tba-provider-secret-hashing-bcrypt`
 - Layer: `020-providers`
@@ -32,11 +43,33 @@ perform an authentication ceremony.
 - Public surface: [public entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/src/tba_provider_secret_hashing_bcrypt/__init__.py).
 - Distribution: Python package on PyPI.
 
-## When to use it
+### Why This Package
+
+`tba-provider-secret-hashing-bcrypt` isolates this responsibility: Bcrypt shared-secret hashing and verification provider for TBA. Its [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/src/tba_provider_secret_hashing_bcrypt/__init__.py) exposes `BcryptSecretHasher`, `hash_pw`, `verify_pw`, allowing consumers to select this package without treating adjacent packages as part of its public contract.
+
+### When to Use
 
 Choose `tba-provider-secret-hashing-bcrypt` for this responsibility: Bcrypt shared-secret hashing and verification provider for TBA. Its `020-providers` placement keeps replaceable environment implementations separate from capability orchestration, storage table ownership, or HTTP routing.
 
-## Installation
+### Features
+
+- `BcryptSecretHasher`: declared in src/tba_provider_secret_hashing_bcrypt/__init__.py
+
+### Non-Goals
+
+`tba-provider-secret-hashing-bcrypt` does not take ownership of capability orchestration, storage table ownership, or HTTP routing.
+
+Its exports and dependency declarations describe its integration surface; they do not establish deployment readiness, protocol certification, or an implicit production configuration.
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+Python `>=3.10,<3.16` is required. The [manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/pyproject.toml) declares runtime dependencies including `bcrypt`, `tba-contracts-identity`. Read the example’s inputs and service requirements before execution.
+
+### Installation
 
 Install the selected PyPI release of `tba-provider-secret-hashing-bcrypt`:
 
@@ -50,15 +83,34 @@ To work on the current checkout before a prepared release is published:
 uv pip install ./pkgs/020-providers/tba-provider-secret-hashing-bcrypt
 ```
 
-## Quick start
+#### uv
+
+<!-- readme-standards:begin installation.uv -->
+```bash
+uv add tba-provider-secret-hashing-bcrypt
+```
+<!-- readme-standards:end installation.uv -->
+
+#### pip
+
+<!-- readme-standards:begin installation.pip -->
+```bash
+python -m pip install tba-provider-secret-hashing-bcrypt
+```
+<!-- readme-standards:end installation.pip -->
+
+#### Poetry
+
+<!-- readme-standards:begin installation.poetry -->
+```bash
+poetry add tba-provider-secret-hashing-bcrypt
+```
+<!-- readme-standards:end installation.poetry -->
+
+### Quick Start
 
 With [uv](https://docs.astral.sh/uv/) available, save the example as `quickstart.py`. This isolated Python 3.12 command requires the selected version to be available on PyPI; Installation also documents the checkout workflow.
 
-```python
-from tba_provider_secret_hashing_bcrypt import BcryptSecretHasher
-
-assert callable(BcryptSecretHasher)
-```
 
 ```bash
 uv run --isolated --no-project --python 3.12 --with "tba-provider-secret-hashing-bcrypt==0.1.1.dev1" python quickstart.py
@@ -66,17 +118,57 @@ uv run --isolated --no-project --python 3.12 --with "tba-provider-secret-hashing
 
 The import and assertion succeed when the BcryptSecretHasher entry point is available.
 
-## Usage
+#### Example
 
-The following public-entry-point example belongs to `tba-provider-secret-hashing-bcrypt`. Bcrypt shared-secret hashing and verification provider for TBA. Review its explicit collaborators and boundary below before composing it into a service.
+<!-- readme-standards:begin example.quick-start -->
+Source: [docs/readme/quick_start.py](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/docs/readme/quick_start.py).
 
 ```python
 from tba_provider_secret_hashing_bcrypt import BcryptSecretHasher
 
 assert callable(BcryptSecretHasher)
 ```
+<!-- readme-standards:end example.quick-start -->
+
+#### Expected Result
+
+The example demonstrates the documented `tba-provider-secret-hashing-bcrypt` source boundary or workflow. Complete its required configuration first. README CI checks the maintained source’s syntax and declarations; it does not claim that external services or the application workflow were exercised.
+
+---
+
+## Usage
+
+### Common Workflows
+
+<!-- readme-standards:begin example.usage -->
+Source: [docs/readme/usage.py](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/docs/readme/usage.py).
+
+```python
+from tba_provider_secret_hashing_bcrypt import BcryptSecretHasher
+
+assert callable(BcryptSecretHasher)
+```
+<!-- readme-standards:end example.usage -->
+
+The following public-entry-point example belongs to `tba-provider-secret-hashing-bcrypt`. Bcrypt shared-secret hashing and verification provider for TBA. Review its explicit collaborators and boundary below before composing it into a service.
+
+### Configuration
+
+Configure `tba-provider-secret-hashing-bcrypt` through the APIs in [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/src/tba_provider_secret_hashing_bcrypt/__init__.py); its [manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/pyproject.toml) describes installation requirements, not an implicit service configuration. No additional package-global configuration contract is inferred from dependencies.
+
+### Error Handling
+
+The inspected `tba-provider-secret-hashing-bcrypt` source raises `ValueError`. Handle these at the calling boundary and consult the implementation for the triggering conditions.
+
+### Best Practices
+
+Use the explicit `tba-provider-secret-hashing-bcrypt` imports documented below and keep collaborator configuration with the caller. Run the package’s relevant tests after changing `BcryptSecretHasher`, `hash_pw`, `verify_pw`; an import or successful installation alone does not establish its runtime guarantees.
+
+---
 
 ## Package Boundary
+
+### What It Owns
 
 `tba-provider-secret-hashing-bcrypt` belongs to `020-providers` and owns replaceable environment implementations: Bcrypt shared-secret hashing and verification provider for TBA.
 
@@ -84,7 +176,21 @@ Its implementation surface is the [public entry point](https://github.com/tigrbl
 
 Keep capability orchestration, storage table ownership, or HTTP routing in their owning packages. The [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml) records layer placement and local dependency edges.
 
-## Injected dependencies
+### Public API and Import Surfaces
+
+Import namespace: `tba_provider_secret_hashing_bcrypt`.
+
+Source-declared exports or types: `BcryptSecretHasher`, `hash_pw`, `verify_pw`.
+
+Inspect [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/src/tba_provider_secret_hashing_bcrypt/__init__.py) for exact signatures; this inventory does not designate every internal module as stable.
+
+### Entry Points
+
+<!-- readme-standards:begin entry-points -->
+This package declares no command-line, GUI, or plugin entry points in its manifest.
+<!-- readme-standards:end entry-points -->
+
+### Injected Dependencies
 
 Explicit construction inputs and collaborators for `tba-provider-secret-hashing-bcrypt`:
 
@@ -92,7 +198,19 @@ Explicit construction inputs and collaborators for `tba-provider-secret-hashing-
 
 Configuration values are not automatically service implementations. Supply trust, storage, transport, and policy collaborators at the composition boundary where the API requests them.
 
-## Operations and readiness
+### Protocol Consumers
+
+Direct consumers in this checkout’s package manifests include `tba-provider-authenticator-client-secret-local`, `tba-provider-authenticator-password-local`, `tba-provider-identity-jose`, `tba-cli-identity`, `tba-runtime-identity`, `tba-server-identity`, `tba-credentials`, `tba-app-backend-core`, `tba-workspace`. These edges describe declared dependencies, not protocol-conformance evidence.
+
+### Extensions
+
+For `tba-provider-secret-hashing-bcrypt`, use the source-declared public interfaces (`BcryptSecretHasher`, `hash_pw`, `verify_pw`) when composing or extending behavior. Its entry-point section below is authoritative for registered plugins; no additional extension loader is inferred from the package name.
+
+---
+
+## Operations and Readiness
+
+### Operational Requirements
 
 `tba-provider-secret-hashing-bcrypt` exposes replaceable environment implementations. Public operations found in its source:
 
@@ -103,19 +221,59 @@ Configuration values are not automatically service implementations. Supply trust
 
 A successful import or build is a smoke check, not a production-readiness assertion. Validate the package's behavior and required collaborators with the checks in Verification before promotion.
 
-## Protocol consumers
+### Health and Observability
 
-No active layer-50 manifest declares a direct runtime dependency on `tba-provider-secret-hashing-bcrypt`. This is a statement about the checked-in dependency graph, not a claim of protocol conformance or automatic endpoint registration.
+This README does not establish a standalone health endpoint for `tba-provider-secret-hashing-bcrypt`. Observe the concrete caller’s results, exceptions, and existing test reports. An application that embeds this package must define its own health and telemetry contract.
 
-Other direct consumers include [tba-app-backend-core](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/090-backend-apps/tba-app-backend-core/README.md), [tba-cli-identity](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/060-runtime/tba-cli-identity/README.md), [tba-credentials](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/070-facade/tba-credentials/README.md), [tba-provider-authenticator-client-secret-local](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-authenticator-client-secret-local/README.md), [tba-provider-authenticator-password-local](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-authenticator-password-local/README.md), [tba-provider-identity-jose](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-identity-jose/README.md), [tba-runtime-identity](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/060-runtime/tba-runtime-identity/README.md), [tba-server-identity](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/060-runtime/tba-server-identity/README.md).
+### Security and Resource Limits
 
-## Non-goals
+Apply the input, credential, and resource constraints implemented in [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/src/tba_provider_secret_hashing_bcrypt/__init__.py). The `tba-provider-secret-hashing-bcrypt` README gate is a documentation check, not a security review or a substitute for the implementation’s limits and caller authorization.
 
-`tba-provider-secret-hashing-bcrypt` does not take ownership of capability orchestration, storage table ownership, or HTTP routing.
+### Compatibility
 
-Its exports and dependency declarations describe its integration surface; they do not establish deployment readiness, protocol certification, or an implicit production configuration.
+This source version of `tba-provider-secret-hashing-bcrypt` declares Python `>=3.10,<3.16`. Consult its dependency constraints before upgrading. Source-version and registry-version badges have separate meanings; this migration makes no additional platform or interoperability certification claim.
 
-## Related Packages
+---
+
+## Verification
+
+### Tests
+
+A prior published-version quick start informed this example. A registry badge is not evidence that this checkout's selected version or example has been verified against PyPI. See the [public package entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/src/tba_provider_secret_hashing_bcrypt/__init__.py).
+
+### Certification Status
+
+No external certification is asserted for `tba-provider-secret-hashing-bcrypt` by this documentation migration. README conformance, example syntax, runtime tests, and protocol or security certification are distinct evidence scopes.
+
+### Evidence
+
+The [README standards CI](https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml) records mechanical documentation results for its tested commit. The [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/src/tba_provider_secret_hashing_bcrypt/__init__.py) and example sources support the package-boundary description; external runtime behavior requires its own test evidence.
+
+---
+
+## FAQ
+
+### Why
+
+**Why select this package?** `tba-provider-secret-hashing-bcrypt` provides bcrypt shared-secret hashing and verification provider for TBA; use its own API boundary rather than assuming neighboring packages are bundled or configured automatically.
+
+### How
+
+**How do I start?** Install or synchronize the environment under Getting Started, follow the maintained example for `tba-provider-secret-hashing-bcrypt`, and consult [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/src/tba_provider_secret_hashing_bcrypt/__init__.py) for the exact types and signatures involved.
+
+### When
+
+**When should I validate an upgrade?** Recheck `tba-provider-secret-hashing-bcrypt` whenever its source version, declared collaborators, configuration, or caller changes. Run relevant behavioral tests in addition to the README gate before promotion.
+
+---
+
+## Documentation and Related Packages
+
+### More Documentation
+
+The [repository contribution guide](https://github.com/tigrbl/tigrbl_auth/blob/master/CONTRIBUTING.md), [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/src/tba_provider_secret_hashing_bcrypt/__init__.py), and [manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/pyproject.toml) provide the supporting context for `tba-provider-secret-hashing-bcrypt`. The [README policy](https://github.com/groupsum/readme-standards/blob/master/docs/outline.md) defines the common document structure.
+
+### Related Packages
 
 Declared local runtime dependencies:
 
@@ -132,7 +290,17 @@ Direct downstream consumers:
 - [tba-runtime-identity](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/060-runtime/tba-runtime-identity/README.md)
 - [tba-server-identity](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/060-runtime/tba-server-identity/README.md)
 
-## Project Links
+### Project Links
+
+<!-- readme-standards:begin project-links -->
+- [Documentation](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt#readme)
+- [Homepage](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt#readme)
+- [Issues](https://github.com/tigrbl/tigrbl_auth/issues)
+- [PyPI](https://pypi.org/project/tba-provider-secret-hashing-bcrypt/)
+- [Repository](https://github.com/tigrbl/tigrbl_auth)
+- [Source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt)
+- [pypi: tba-provider-secret-hashing-bcrypt](https://pypi.org/project/tba-provider-secret-hashing-bcrypt/)
+<!-- readme-standards:end project-links -->
 
 - [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt)
 - [Package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/pyproject.toml)
@@ -142,12 +310,52 @@ Direct downstream consumers:
 - [Canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 - [PyPI project](https://pypi.org/project/tba-provider-secret-hashing-bcrypt/)
 
+---
+
+## Contributing
+
+### How to Contribute
+
+Follow the [contribution guide](https://github.com/tigrbl/tigrbl_auth/blob/master/CONTRIBUTING.md) and include a focused example or regression for changes to `tba-provider-secret-hashing-bcrypt`. Keep package behavior, its documented boundary, and its tests aligned.
+
+### Development Setup
+
+Work from the `pkgs/020-providers/tba-provider-secret-hashing-bcrypt` checkout. Synchronize its declared development environment with uv, then run the relevant package tests and `python -m pytest docs/readme/test_examples.py`. The repository’s dedicated README job installs `readme-standards==0.1.1` without resolving unrelated runtime packages.
+
+### Notes for Maintainers
+
+Edit authored prose directly in this `tba-provider-secret-hashing-bcrypt` README. Update source examples in `docs/readme/`, then run `readme-standards render --root . --write` from the package directory and review the diff. Required headings and generated blocks come from package-guide-v1.
+
+---
+
 ## Governance
+
+### Ownership and Decision Making
+
+Changes to `tba-provider-secret-hashing-bcrypt` follow the maintainer review process of [tigrbl/tigrbl_auth](https://github.com/tigrbl/tigrbl_auth) and its contribution guide. Author attribution remains in the [manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/pyproject.toml); this README does not assign new publishing or administrative authority.
+
+### Standards and Policies
 
 `tba-provider-secret-hashing-bcrypt` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `020-providers` ownership, public imports, declared dependencies, examples, and release metadata aligned.
 
 Changes must pass the [README standards gate](https://github.com/tigrbl/tigrbl_auth/blob/master/.github/workflows/readme-standards.yml), package checks, and the evidence requirements relevant to the changed behavior. Update SSOT through the repository's CLI workflow when changing governed claims or boundaries.
 
-## Verification
+### Lifecycle and Migration
 
-A prior published-version quick start informed this example. A registry badge is not evidence that this checkout's selected version or example has been verified against PyPI. See the [public package entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/src/tba_provider_secret_hashing_bcrypt/__init__.py).
+The `tba-provider-secret-hashing-bcrypt` source version is `0.1.1.dev1`. This change standardizes documentation and adds a development-only gate; it does not publish a new runtime version or declare a previously unpublished package released. Preserve explicit deprecation and replacement instructions where present.
+
+---
+
+## License and Attribution
+
+### License
+
+<!-- readme-standards:begin license -->
+Licensed under `Apache-2.0`. See [LICENSE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/LICENSE).
+<!-- readme-standards:end license -->
+
+### Notices
+
+<!-- readme-standards:begin notices -->
+See [NOTICE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-secret-hashing-bcrypt/NOTICE) for attribution.
+<!-- readme-standards:end notices -->

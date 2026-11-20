@@ -1,0 +1,3 @@
+from tba_provider_security_webfinger import WebFingerProvider
+
+assert callable(WebFingerProvider)

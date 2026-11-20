@@ -1,0 +1,3 @@
+from tba_concrete_svid import JwtSvidClaimSetPayload
+
+assert callable(JwtSvidClaimSetPayload)

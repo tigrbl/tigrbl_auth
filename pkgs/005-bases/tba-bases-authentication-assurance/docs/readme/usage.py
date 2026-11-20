@@ -1,0 +1,3 @@
+from tba_bases_authentication_assurance import EapAcrEvaluatorBase
+
+assert callable(EapAcrEvaluatorBase)

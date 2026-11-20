@@ -1,0 +1,3 @@
+from tba_bases_certificate import CertificateServiceBase
+
+assert callable(CertificateServiceBase)

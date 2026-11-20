@@ -1,0 +1,3 @@
+from tba_provider_key_attestation_verifier import ProfiledKeyAttestationVerifier
+
+assert callable(ProfiledKeyAttestationVerifier)

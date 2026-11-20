@@ -1,0 +1,3 @@
+from tba_contracts_workload_identity import DelegatedWorkloadCredentialProviderPort
+
+assert callable(DelegatedWorkloadCredentialProviderPort)

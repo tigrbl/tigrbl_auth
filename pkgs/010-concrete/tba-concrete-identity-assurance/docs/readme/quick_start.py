@@ -1,0 +1,3 @@
+from tba_concrete_identity_assurance import parse_verified_claims
+
+assert callable(parse_verified_claims)

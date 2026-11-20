@@ -1,0 +1,3 @@
+from tba_capability_api_key_authentication import ApiKeyAuthenticationCapability
+
+assert callable(ApiKeyAuthenticationCapability)

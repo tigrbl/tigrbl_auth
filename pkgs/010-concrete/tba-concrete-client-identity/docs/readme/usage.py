@@ -1,0 +1,3 @@
+from tba_concrete_client_identity import ClientIdentity
+
+assert callable(ClientIdentity)

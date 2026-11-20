@@ -1,0 +1,3 @@
+from tba_concrete_authority_graph import normalize_authority_roles
+
+assert callable(normalize_authority_roles)

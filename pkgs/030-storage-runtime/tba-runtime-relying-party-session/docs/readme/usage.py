@@ -1,0 +1,3 @@
+from tba_runtime_relying_party_session import RPTransaction
+
+assert callable(RPTransaction)

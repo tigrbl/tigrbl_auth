@@ -1,0 +1,3 @@
+from tba_concrete_authorization_policy_rules import RolePolicy
+
+assert callable(RolePolicy)

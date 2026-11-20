@@ -25,6 +25,7 @@ def package_fixture(tmp_path):
     brand.write_bytes(b"\x89PNG\r\n\x1a\n")
     relative = Path("pkgs/002-contracts/tba-contracts-dns")
     shutil.copytree(ROOT / relative, tmp_path / relative)
+    shutil.copytree(ROOT / "tools/readme", tmp_path / "tools/readme")
     return tmp_path, tmp_path / relative
 
 
@@ -56,12 +57,12 @@ def test_download_badge_cannot_count_another_project(package_fixture):
     readme = package / "README.md"
     readme.write_text(
         readme.read_text().replace(
-            "static.pepy.tech/badge/tba-contracts-dns/month",
-            "static.pepy.tech/badge/tba-auth/month",
+            "img.shields.io/pypi/dm/tba-contracts-dns",
+            "img.shields.io/pypi/dm/tba-auth",
         )
     )
     assert any(
-        "download counter" in failure for failure in standards.verify(root)["failures"]
+        "generated.stale" in failure for failure in standards.verify(root)["failures"]
     )
 
 
@@ -75,7 +76,7 @@ def test_hit_badge_cannot_count_another_readme(package_fixture):
         )
     )
     assert any(
-        "hit counter" in failure for failure in standards.verify(root)["failures"]
+        "generated.stale" in failure for failure in standards.verify(root)["failures"]
     )
 
 
@@ -98,3 +99,32 @@ def test_shared_brand_image_must_be_valid(package_fixture):
     root, _ = package_fixture
     (root / "docs/assets/tba-brand.png").write_text("not an image")
     assert any("not a PNG" in failure for failure in standards.verify(root)["failures"])
+
+
+@pytest.mark.parametrize("target", ["root", "package"])
+def test_branding_command_handles_managed_readmes_without_legacy_markers(
+    package_fixture, monkeypatch, target
+):
+    root, package = package_fixture
+    for relative in ("pyproject.toml", "README.md"):
+        shutil.copyfile(ROOT / relative, root / relative)
+    shutil.copytree(ROOT / "docs/readme", root / "docs/readme")
+    spec = importlib.util.spec_from_file_location(
+        "managed_branding", ROOT / "scripts/render_readme_branding.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    monkeypatch.setattr(module, "ROOT", root)
+    readme = (root if target == "root" else package) / "README.md"
+    original = readme.read_text("utf-8")
+    assert module.START not in original
+    readme.write_text(
+        original.replace("Source version", "Wrong version", 1), encoding="utf-8"
+    )
+    monkeypatch.setattr("sys.argv", ["render_readme_branding.py", "--check"])
+    assert module.main() == 1
+    monkeypatch.setattr("sys.argv", ["render_readme_branding.py"])
+    assert module.main() == 0
+    assert readme.read_text("utf-8") == original
+    monkeypatch.setattr("sys.argv", ["render_readme_branding.py", "--check"])
+    assert module.main() == 0

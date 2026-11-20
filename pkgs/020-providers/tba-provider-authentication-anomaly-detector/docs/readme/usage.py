@@ -1,0 +1,3 @@
+from tba_provider_authentication_anomaly_detector import AuthAnomalyDetector
+
+assert callable(AuthAnomalyDetector)

@@ -1,0 +1,3 @@
+from tba_concrete_cwt_svid_extension_credential import CwtSvidExtensionCredential
+
+assert callable(CwtSvidExtensionCredential)

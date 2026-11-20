@@ -1,0 +1,3 @@
+from tba_concrete_authorization_provenance import build_authorization_decision_trace
+
+assert callable(build_authorization_decision_trace)

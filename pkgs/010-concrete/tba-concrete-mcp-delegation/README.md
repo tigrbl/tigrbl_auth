@@ -1,26 +1,37 @@
 # tba-concrete-mcp-delegation
 
-<!-- BEGIN TBA README HEADER -->
+<!-- readme-standards:begin branding -->
+<p align="center"><a href="https://github.com/tigrbl/tigrbl_auth"><img src="https://raw.githubusercontent.com/tigrbl/tigrbl_auth/master/docs/assets/tba-brand.png" alt="TBA · Tigrbl Auth" width="300"></a></p>
+<p align="center"><strong>tba-concrete-mcp-delegation</strong></p>
+<p align="center">Identity-bound permission decisions for MCP app connections.</p>
 <p align="center">
-<a href="https://github.com/tigrbl/tigrbl_auth#readme"><img src="https://raw.githubusercontent.com/tigrbl/tigrbl_auth/master/docs/assets/tba-brand.png" alt="TBA · Tigrbl Auth" width="240"></a>
+<a href="https://pypi.org/project/tba-concrete-mcp-delegation/"><img alt="pypi: tba-concrete-mcp-delegation unpublished" src="https://img.shields.io/static/v1?label=pypi&amp;message=tba-concrete-mcp-delegation%20unpublished&amp;color=525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/pyproject.toml"><img alt="Source version: 0.4.0.dev1" src="https://img.shields.io/static/v1?label=Source%20version&amp;message=0.4.0.dev1&amp;color=525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/pyproject.toml"><img alt="Python: &gt;=3.10,&lt;3.16" src="https://img.shields.io/static/v1?label=Python&amp;message=%3E%3D3.10%2C%3C3.16&amp;color=525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/pyproject.toml"><img alt="Layer: 010-concrete" src="https://img.shields.io/static/v1?label=Layer&amp;message=010-concrete&amp;color=525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/README.md#lifecycle-and-migration"><img alt="Lifecycle: active" src="https://img.shields.io/static/v1?label=Lifecycle&amp;message=active&amp;color=525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/static/v1?label=License&amp;message=Apache-2.0&amp;color=525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/NOTICE"><img alt="Notice: attribution" src="https://img.shields.io/static/v1?label=Notice&amp;message=attribution&amp;color=525252"></a>
 </p>
 <p align="center">
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/pyproject.toml"><img alt="Checkout: 0.4.0.dev1" src="https://img.shields.io/badge/Checkout-0.4.0.dev1-1f6feb"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/pyproject.toml"><img alt="Python: &gt;=3.10,&lt;3.16" src="https://img.shields.io/badge/Python-%3E%3D3.10%2C%3C3.16-3776ab"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/tba-concrete-mcp-delegation%3D%3D0.4.0.dev1/pkgs/010-concrete/tba-concrete-mcp-delegation/LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/License-Apache--2.0-525252"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/tba-concrete-mcp-delegation%3D%3D0.4.0.dev1/pkgs/010-concrete/tba-concrete-mcp-delegation/NOTICE"><img alt="Notice: attribution" src="https://img.shields.io/badge/Notice-attribution-525252"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/010-concrete"><img alt="Layer: 010 concrete" src="https://img.shields.io/badge/Layer-010%20concrete-0a7f5a"></a>
-<a href="https://pypi.org/project/tba-concrete-mcp-delegation/"><img alt="PyPI version for tba-concrete-mcp-delegation" src="https://img.shields.io/pypi/v/tba-concrete-mcp-delegation?label=tba-concrete-mcp-delegation%20PyPI"></a>
+<a href="https://pypi.org/project/tba-concrete-mcp-delegation/"><img alt="pypi downloads: tba-concrete-mcp-delegation: unpublished" src="https://img.shields.io/static/v1?label=pypi%20downloads&amp;message=tba-concrete-mcp-delegation%3A%20unpublished&amp;color=525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/README.md"><img alt="README hits: tba-concrete-mcp-delegation" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/pkgs/010-concrete/tba-concrete-mcp-delegation/README.md.svg?label=README%20hits"></a>
 </p>
 <p align="center">
-<a href="https://pepy.tech/project/tba-concrete-mcp-delegation"><img alt="Monthly PyPI downloads for tba-concrete-mcp-delegation" src="https://static.pepy.tech/badge/tba-concrete-mcp-delegation/month"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/README.md"><img alt="README hits for tba-concrete-mcp-delegation" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/README.md.svg?label=hits"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"><img alt="SSOT: governed" src="https://img.shields.io/badge/SSOT-governed-2f6f4e"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"><img alt="README standards: CI gate" src="https://img.shields.io/static/v1?label=README%20standards&amp;message=CI%20gate&amp;color=525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/docs/readme/test_examples.py"><img alt="Tests: example source" src="https://img.shields.io/static/v1?label=Tests&amp;message=example%20source&amp;color=525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/README.md#certification-status"><img alt="Certification: not certified" src="https://img.shields.io/static/v1?label=Certification&amp;message=not%20certified&amp;color=525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/tools/readme/POLICY.md"><img alt="Governance: repository policy" src="https://img.shields.io/static/v1?label=Governance&amp;message=repository%20policy&amp;color=525252"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"><img alt="Evidence: source and CI" src="https://img.shields.io/static/v1?label=Evidence&amp;message=source%20and%20CI&amp;color=525252"></a>
 </p>
-<!-- END TBA README HEADER -->
+<p align="center"><a href="#overview">Overview</a> · <a href="#installation">Installation</a> · <a href="#quick-start">Quick Start</a> · <a href="#usage">Usage</a> · <a href="#public-api-and-import-surfaces">API</a> · <a href="#contributing">Contributing</a> · <a href="#governance">Governance</a> · <a href="#license">License</a></p>
+<!-- readme-standards:end branding -->
 
-## AEO Summary
+---
+
+## Overview
+
+### Summary
 
 Compose a product's account permissions, the requested OAuth scopes, and the
 selected bot's limits to present consent options. Resolve effective scopes for
@@ -28,11 +39,33 @@ each discovery or call using the token, durable grant, and current permissions.
 Persistence, OAuth endpoints, identity checks, and resource authorization are
 provided by the integrating service.
 
-## When to use it
+### Why This Package
+
+`tba-concrete-mcp-delegation` isolates this responsibility: Identity-bound permission decisions for MCP app connections. Its [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/src/tba_concrete_mcp_delegation/__init__.py) exposes `Iterable`, `Literal`, `Mapping`, `Permission`, `annotations`, `approve_scopes`, `consent_permissions`, `dataclass`, `effective_scopes`, allowing consumers to select this package without treating adjacent packages as part of its public contract.
+
+### When to Use
 
 Choose `tba-concrete-mcp-delegation` for this responsibility: Identity-bound permission decisions for MCP app connections. Its `10-concrete` placement keeps use-case orchestration through explicit collaborators separate from HTTP wire schemas, direct table ownership, or hidden provider selection.
 
-## Installation
+### Features
+
+- `Permission`: declared in src/tba_concrete_mcp_delegation/__init__.py
+
+### Non-Goals
+
+`tba-concrete-mcp-delegation` does not take ownership of HTTP wire schemas, direct table ownership, or hidden provider selection.
+
+Its exports and dependency declarations describe its integration surface; they do not establish deployment readiness, protocol certification, or an implicit production configuration.
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+Python `>=3.10,<3.16` is required. The [manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/pyproject.toml) declares no direct runtime dependencies. Read the example’s inputs and service requirements before execution.
+
+### Installation
 
 Install the selected PyPI release of `tba-concrete-mcp-delegation`:
 
@@ -46,7 +79,37 @@ To work on the current checkout before a prepared release is published:
 uv pip install ./pkgs/010-concrete/tba-concrete-mcp-delegation
 ```
 
-## Quick start
+#### uv
+
+<!-- readme-standards:begin installation.uv -->
+`tba-concrete-mcp-delegation` is not declared published. From the source checkout:
+
+```bash
+uv pip install .
+```
+<!-- readme-standards:end installation.uv -->
+
+#### pip
+
+<!-- readme-standards:begin installation.pip -->
+`tba-concrete-mcp-delegation` is not declared published. From the source checkout:
+
+```bash
+python -m pip install .
+```
+<!-- readme-standards:end installation.pip -->
+
+#### Poetry
+
+<!-- readme-standards:begin installation.poetry -->
+`tba-concrete-mcp-delegation` is not declared published. From a separate Poetry project, replace the path with your checkout:
+
+```bash
+poetry add /path/to/tba-concrete-mcp-delegation
+```
+<!-- readme-standards:end installation.poetry -->
+
+### Quick Start
 
 Install the selected PyPI release of `tba-concrete-mcp-delegation`:
 
@@ -60,17 +123,57 @@ To work on the current checkout before a prepared release is published:
 uv pip install ./pkgs/010-concrete/tba-concrete-mcp-delegation
 ```
 
-## Usage
+#### Example
 
-The following public-entry-point example belongs to `tba-concrete-mcp-delegation`. Identity-bound permission decisions for MCP app connections. Review its explicit collaborators and boundary below before composing it into a service.
+<!-- readme-standards:begin example.quick-start -->
+Source: [docs/readme/quick_start.py](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/docs/readme/quick_start.py).
 
 ```python
 import tba_concrete_mcp_delegation
 
 print(tba_concrete_mcp_delegation.__name__)
 ```
+<!-- readme-standards:end example.quick-start -->
+
+#### Expected Result
+
+The example demonstrates the documented `tba-concrete-mcp-delegation` source boundary or workflow. Complete its required configuration first. README CI checks the maintained source’s syntax and declarations; it does not claim that external services or the application workflow were exercised.
+
+---
+
+## Usage
+
+### Common Workflows
+
+<!-- readme-standards:begin example.usage -->
+Source: [docs/readme/usage.py](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/docs/readme/usage.py).
+
+```python
+import tba_concrete_mcp_delegation
+
+print(tba_concrete_mcp_delegation.__name__)
+```
+<!-- readme-standards:end example.usage -->
+
+The following public-entry-point example belongs to `tba-concrete-mcp-delegation`. Identity-bound permission decisions for MCP app connections. Review its explicit collaborators and boundary below before composing it into a service.
+
+### Configuration
+
+Configure `tba-concrete-mcp-delegation` through the APIs in [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/src/tba_concrete_mcp_delegation/__init__.py); its [manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/pyproject.toml) describes installation requirements, not an implicit service configuration. No additional package-global configuration contract is inferred from dependencies.
+
+### Error Handling
+
+The inspected `tba-concrete-mcp-delegation` source raises `ValueError`. Handle these at the calling boundary and consult the implementation for the triggering conditions.
+
+### Best Practices
+
+Use the explicit `tba-concrete-mcp-delegation` imports documented below and keep collaborator configuration with the caller. Run the package’s relevant tests after changing `Iterable`, `Literal`, `Mapping`, `Permission`, `annotations`, `approve_scopes`, `consent_permissions`, `dataclass`, `effective_scopes`; an import or successful installation alone does not establish its runtime guarantees.
+
+---
 
 ## Package Boundary
+
+### What It Owns
 
 `tba-concrete-mcp-delegation` belongs to `10-concrete` and owns use-case orchestration through explicit collaborators: Identity-bound permission decisions for MCP app connections.
 
@@ -78,7 +181,21 @@ Its implementation surface is the [public entry point](https://github.com/tigrbl
 
 Keep HTTP wire schemas, direct table ownership, or hidden provider selection in their owning packages. The [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml) records layer placement and local dependency edges.
 
-## Injected dependencies
+### Public API and Import Surfaces
+
+Import namespace: `tba_concrete_mcp_delegation`.
+
+Source-declared exports or types: `Iterable`, `Literal`, `Mapping`, `Permission`, `annotations`, `approve_scopes`, `consent_permissions`, `dataclass`, `effective_scopes`.
+
+Inspect [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/src/tba_concrete_mcp_delegation/__init__.py) for exact signatures; this inventory does not designate every internal module as stable.
+
+### Entry Points
+
+<!-- readme-standards:begin entry-points -->
+This package declares no command-line, GUI, or plugin entry points in its manifest.
+<!-- readme-standards:end entry-points -->
+
+### Injected Dependencies
 
 Explicit construction inputs and collaborators for `tba-concrete-mcp-delegation`:
 
@@ -86,7 +203,19 @@ Explicit construction inputs and collaborators for `tba-concrete-mcp-delegation`
 
 Configuration values are not automatically service implementations. Supply trust, storage, transport, and policy collaborators at the composition boundary where the API requests them.
 
-## Operations and readiness
+### Protocol Consumers
+
+No direct package-manifest dependency on `tba-concrete-mcp-delegation` was found in the audited three-repository inventory. External consumers may still use its documented imports or commands.
+
+### Extensions
+
+For `tba-concrete-mcp-delegation`, use the source-declared public interfaces (`Iterable`, `Literal`, `Mapping`, `Permission`, `annotations`, `approve_scopes`, `consent_permissions`, `dataclass`, `effective_scopes`) when composing or extending behavior. Its entry-point section below is authoritative for registered plugins; no additional extension loader is inferred from the package name.
+
+---
+
+## Operations and Readiness
+
+### Operational Requirements
 
 `tba-concrete-mcp-delegation` exposes use-case orchestration through explicit collaborators. Public operations found in its source:
 
@@ -96,37 +225,23 @@ Configuration values are not automatically service implementations. Supply trust
 
 A successful import or build is a smoke check, not a production-readiness assertion. Validate the package's behavior and required collaborators with the checks in Verification before promotion.
 
-## Protocol consumers
+### Health and Observability
 
-No active layer-50 manifest declares a direct runtime dependency on `tba-concrete-mcp-delegation`. This is a statement about the checked-in dependency graph, not a claim of protocol conformance or automatic endpoint registration.
+This README does not establish a standalone health endpoint for `tba-concrete-mcp-delegation`. Observe the concrete caller’s results, exceptions, and existing test reports. An application that embeds this package must define its own health and telemetry contract.
 
-## Non-goals
+### Security and Resource Limits
 
-`tba-concrete-mcp-delegation` does not take ownership of HTTP wire schemas, direct table ownership, or hidden provider selection.
+Apply the input, credential, and resource constraints implemented in [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/src/tba_concrete_mcp_delegation/__init__.py). The `tba-concrete-mcp-delegation` README gate is a documentation check, not a security review or a substitute for the implementation’s limits and caller authorization.
 
-Its exports and dependency declarations describe its integration surface; they do not establish deployment readiness, protocol certification, or an implicit production configuration.
+### Compatibility
 
-## Related Packages
+This source version of `tba-concrete-mcp-delegation` declares Python `>=3.10,<3.16`. Consult its dependency constraints before upgrading. Source-version and registry-version badges have separate meanings; this migration makes no additional platform or interoperability certification claim.
 
-`tba-concrete-mcp-delegation` declares no local runtime dependency and has no direct consumer in the active manifest graph. Browse the [10-concrete layer](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/010-concrete) for adjacent package responsibilities; adjacency does not imply a dependency.
-
-## Project Links
-
-- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/010-concrete/tba-concrete-mcp-delegation)
-- [Package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/pyproject.toml)
-- [LICENSE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/LICENSE) and [NOTICE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/NOTICE)
-- [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues)
-- [Package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml)
-- [Canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
-- [PyPI project](https://pypi.org/project/tba-concrete-mcp-delegation/)
-
-## Governance
-
-`tba-concrete-mcp-delegation` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `10-concrete` ownership, public imports, declared dependencies, examples, and release metadata aligned.
-
-Changes must pass the [README standards gate](https://github.com/tigrbl/tigrbl_auth/blob/master/.github/workflows/readme-standards.yml), package checks, and the evidence requirements relevant to the changed behavior. Update SSOT through the repository's CLI workflow when changing governed claims or boundaries.
+---
 
 ## Verification
+
+### Tests
 
 Run the README and package-standard checks from the repository root:
 
@@ -136,3 +251,106 @@ uv run --no-project python scripts/verify_package_standards.py
 ```
 
 These checks validate documentation structure, metadata, and branding for `tba-concrete-mcp-delegation`. Behavioral and integration assertions require the package's own tests and their recorded evidence.
+
+### Certification Status
+
+No external certification is asserted for `tba-concrete-mcp-delegation` by this documentation migration. README conformance, example syntax, runtime tests, and protocol or security certification are distinct evidence scopes.
+
+### Evidence
+
+The [README standards CI](https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml) records mechanical documentation results for its tested commit. The [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/src/tba_concrete_mcp_delegation/__init__.py) and example sources support the package-boundary description; external runtime behavior requires its own test evidence.
+
+---
+
+## FAQ
+
+### Why
+
+**Why select this package?** `tba-concrete-mcp-delegation` provides identity-bound permission decisions for MCP app connections; use its own API boundary rather than assuming neighboring packages are bundled or configured automatically.
+
+### How
+
+**How do I start?** Install or synchronize the environment under Getting Started, follow the maintained example for `tba-concrete-mcp-delegation`, and consult [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/src/tba_concrete_mcp_delegation/__init__.py) for the exact types and signatures involved.
+
+### When
+
+**When should I validate an upgrade?** Recheck `tba-concrete-mcp-delegation` whenever its source version, declared collaborators, configuration, or caller changes. Run relevant behavioral tests in addition to the README gate before promotion.
+
+---
+
+## Documentation and Related Packages
+
+### More Documentation
+
+The [repository contribution guide](https://github.com/tigrbl/tigrbl_auth/blob/master/CONTRIBUTING.md), [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/src/tba_concrete_mcp_delegation/__init__.py), and [manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/pyproject.toml) provide the supporting context for `tba-concrete-mcp-delegation`. The [README policy](https://github.com/groupsum/readme-standards/blob/master/docs/outline.md) defines the common document structure.
+
+### Related Packages
+
+`tba-concrete-mcp-delegation` declares no local runtime dependency and has no direct consumer in the active manifest graph. Browse the [10-concrete layer](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/010-concrete) for adjacent package responsibilities; adjacency does not imply a dependency.
+
+### Project Links
+
+<!-- readme-standards:begin project-links -->
+- [PyPI](https://pypi.org/project/tba-concrete-mcp-delegation/)
+- [Repository](https://github.com/tigrbl/tigrbl_auth)
+- [Source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/010-concrete/tba-concrete-mcp-delegation)
+- [pypi: tba-concrete-mcp-delegation](https://pypi.org/project/tba-concrete-mcp-delegation/)
+<!-- readme-standards:end project-links -->
+
+- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/010-concrete/tba-concrete-mcp-delegation)
+- [Package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/pyproject.toml)
+- [LICENSE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/LICENSE) and [NOTICE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/NOTICE)
+- [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues)
+- [Package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml)
+- [Canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
+- [PyPI project](https://pypi.org/project/tba-concrete-mcp-delegation/)
+
+---
+
+## Contributing
+
+### How to Contribute
+
+Follow the [contribution guide](https://github.com/tigrbl/tigrbl_auth/blob/master/CONTRIBUTING.md) and include a focused example or regression for changes to `tba-concrete-mcp-delegation`. Keep package behavior, its documented boundary, and its tests aligned.
+
+### Development Setup
+
+Work from the `pkgs/010-concrete/tba-concrete-mcp-delegation` checkout. Synchronize its declared development environment with uv, then run the relevant package tests and `python -m pytest docs/readme/test_examples.py`. The repository’s dedicated README job installs `readme-standards==0.1.1` without resolving unrelated runtime packages.
+
+### Notes for Maintainers
+
+Edit authored prose directly in this `tba-concrete-mcp-delegation` README. Update source examples in `docs/readme/`, then run `readme-standards render --root . --write` from the package directory and review the diff. Required headings and generated blocks come from package-guide-v1.
+
+---
+
+## Governance
+
+### Ownership and Decision Making
+
+Changes to `tba-concrete-mcp-delegation` follow the maintainer review process of [tigrbl/tigrbl_auth](https://github.com/tigrbl/tigrbl_auth) and its contribution guide. Author attribution remains in the [manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/pyproject.toml); this README does not assign new publishing or administrative authority.
+
+### Standards and Policies
+
+`tba-concrete-mcp-delegation` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `10-concrete` ownership, public imports, declared dependencies, examples, and release metadata aligned.
+
+Changes must pass the [README standards gate](https://github.com/tigrbl/tigrbl_auth/blob/master/.github/workflows/readme-standards.yml), package checks, and the evidence requirements relevant to the changed behavior. Update SSOT through the repository's CLI workflow when changing governed claims or boundaries.
+
+### Lifecycle and Migration
+
+The `tba-concrete-mcp-delegation` source version is `0.4.0.dev1`. This change standardizes documentation and adds a development-only gate; it does not publish a new runtime version or declare a previously unpublished package released. Preserve explicit deprecation and replacement instructions where present.
+
+---
+
+## License and Attribution
+
+### License
+
+<!-- readme-standards:begin license -->
+Licensed under `Apache-2.0`. See [LICENSE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/LICENSE).
+<!-- readme-standards:end license -->
+
+### Notices
+
+<!-- readme-standards:begin notices -->
+See [NOTICE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/NOTICE) for attribution.
+<!-- readme-standards:end notices -->

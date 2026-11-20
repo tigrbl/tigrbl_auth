@@ -1,0 +1,3 @@
+from tba_capability_public_key_registration import PublicKeyRegistrationCapability
+
+assert callable(PublicKeyRegistrationCapability)

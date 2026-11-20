@@ -1,20 +1,7 @@
 name: package-node-matrix
 
 on:
-  pull_request:
-    paths:
-      - ".github/workflows/package-node-matrix.yml"
-      - ".npmrc"
-      - "package.json"
-      - "package-lock.json"
-      - "pkgs/075-clients/**"
-      - "pkgs/100-uix-core/**"
-      - "pkgs/105-ui/**"
-      - "scripts/package_ci.py"
-      - "tsconfig.json"
-      - "tsconfig.base.json"
-      - "vite.config.ts"
-      - "vitest.config.ts"
+  workflow_call:
   push:
     branches:
       - master
@@ -45,7 +32,7 @@ concurrency:
 
 jobs:
   discover-node-matrix:
-    runs-on: ubuntu-latest
+    runs-on: ${{ (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/docs/readme-standards-20261119' || (github.event_name == 'pull_request' && github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository)) && fromJSON('["self-hosted","Linux","X64","trusted-public-ci"]') || 'ubuntu-24.04' }}
     outputs:
       matrix: ${{ steps.matrix.outputs.matrix }}
       count: ${{ steps.matrix.outputs.count }}
@@ -56,6 +43,14 @@ jobs:
       - uses: astral-sh/setup-uv@v6
         with:
           python-version: "3.12"
+      - name: Install Python for the shared metadata action
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install Node for the discovery and metadata actions
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
       - name: Discover UIX packages
         uses: cobycloud/actions/actions/monorepo-discover@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
@@ -88,7 +83,7 @@ jobs:
   isolated-node-package-tests:
     needs: discover-node-matrix
     if: ${{ needs.discover-node-matrix.outputs.count != '0' }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/docs/readme-standards-20261119' || (github.event_name == 'pull_request' && github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository)) && fromJSON('["self-hosted","Linux","X64","trusted-public-ci"]') || 'ubuntu-24.04' }}
     strategy:
       fail-fast: false
       matrix:

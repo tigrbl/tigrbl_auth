@@ -1,0 +1,3 @@
+from tba_capability_authorization_request_staging import PushedAuthorizationCapability
+
+assert callable(PushedAuthorizationCapability)

@@ -95,8 +95,57 @@ addopts = "--import-mode=importlib --basetemp=.pytest-tmp"
 "tests/**/*.py" = ["E402", "F403"]
 "pkgs/120-tests/tba-tests-{oauth,oidc,jose}/tests/**/*.py" = ["E402", "F403"]
 
+[tool.readme_standards]
+policy = "package-guide-v1"
+readme = "README.md"
+brand = "tigrbl-auth"
+brand_catalog = "tools/readme/brands.toml"
+repository = "https://github.com/tigrbl/tigrbl_auth"
+ref = "master"
+package_path = "."
+layer = "workspace"
+lifecycle = "active"
+license_file = "LICENSE"
+notice_file = "NOTICE"
+exclude = ["pkgs/deprecated", "pkgs/99_deprecated", "docs/notes/archive", "docs/examples/package-maintenance/src"]
+
+[tool.readme_standards.distributions.pypi]
+name = "tba-workspace"
+published = false
+
+[tool.readme_standards.examples.quick_start]
+source = "docs/readme/quick_start.sh"
+test = "docs/readme/test_examples.py"
+language = "bash"
+expected_exit_code = 0
+
+[tool.readme_standards.examples.usage]
+source = "docs/readme/usage.sh"
+test = "docs/readme/test_examples.py"
+language = "bash"
+expected_exit_code = 0
+
+[tool.readme_standards.statuses.readme]
+label = "CI gate"
+url = "https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"
+
+[tool.readme_standards.statuses.tests]
+label = "example source"
+url = "https://github.com/tigrbl/tigrbl_auth/blob/master/docs/readme/test_examples.py"
+
+[tool.readme_standards.statuses.certification]
+label = "not certified"
+url = "https://github.com/tigrbl/tigrbl_auth/blob/master/README.md#certification-status"
+
+[tool.readme_standards.statuses.governance]
+label = "repository policy"
+url = "https://github.com/tigrbl/tigrbl_auth/blob/master/tools/readme/POLICY.md"
+
+[tool.readme_standards.statuses.evidence]
+label = "source and CI"
+url = "https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"
 [dependency-groups]
-dev = ["pytest>=8.0", "pytest-asyncio>=0.24.0", "pytest-xdist>=3.6.1", "pytest-json-report>=1.5.0", "requests>=2.32.3", "flake8>=7.0", "pytest-timeout>=2.3.1", "ruff>=0.9.9", "pytest-benchmark>=4.0.0", "tox>=4.23.2", "ssot-registry>=0.2.8"]
+dev = ["pytest>=8.0", "pytest-asyncio>=0.24.0", "pytest-xdist>=3.6.1", "pytest-json-report>=1.5.0", "requests>=2.32.3", "flake8>=7.0", "pytest-timeout>=2.3.1", "ruff>=0.9.9", "pytest-benchmark>=4.0.0", "tox>=4.23.2", "ssot-registry>=0.2.8", "readme-standards==0.1.1; python_version >= \"3.11\""]
 
 [tool.setuptools]
 packages = []

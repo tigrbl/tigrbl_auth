@@ -1,0 +1,3 @@
+from tba_capability_token_introspection import TokenIntrospectionCapability
+
+assert callable(TokenIntrospectionCapability)

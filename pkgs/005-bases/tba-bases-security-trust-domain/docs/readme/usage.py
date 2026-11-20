@@ -1,0 +1,3 @@
+from tba_bases_security_trust_domain import ArtifactCodecBase
+
+assert callable(ArtifactCodecBase)

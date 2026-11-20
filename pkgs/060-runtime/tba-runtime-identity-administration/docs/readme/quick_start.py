@@ -1,0 +1,3 @@
+from tba_runtime_identity_administration import AdminControlPlane
+
+assert callable(AdminControlPlane)

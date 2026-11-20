@@ -1,0 +1,3 @@
+import tba_profile_workload_credential_wimse_wic
+
+print(tba_profile_workload_credential_wimse_wic.__name__)

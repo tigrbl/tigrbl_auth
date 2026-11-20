@@ -1,0 +1,3 @@
+from tba_contracts_public_key_authentication import AttestationFormat
+
+assert callable(AttestationFormat)

@@ -1,0 +1,3 @@
+from tba_provider_did_resolver import DidDocumentVersion
+
+assert callable(DidDocumentVersion)

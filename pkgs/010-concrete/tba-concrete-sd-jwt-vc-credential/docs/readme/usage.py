@@ -1,0 +1,3 @@
+from tba_concrete_sd_jwt_vc_credential import SdJwtVcCredential
+
+assert callable(SdJwtVcCredential)

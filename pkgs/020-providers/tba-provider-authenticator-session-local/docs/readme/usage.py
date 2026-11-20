@@ -1,0 +1,3 @@
+from tba_provider_authenticator_session_local import SessionLocalAuthenticator
+
+assert callable(SessionLocalAuthenticator)

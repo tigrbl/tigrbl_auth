@@ -1,0 +1,3 @@
+from tba_provider_attestation_tpm import TpmAttestationVerifier
+
+assert callable(TpmAttestationVerifier)
