@@ -9,8 +9,8 @@ targets:
   modules:
   - tba_auth/standards/jose/rfc7517.py
   tests:
-  - tests/conformance/baseline/test_rfc7517_jwk.py
-  - tests/unit/test_jwks_rotation.py
+  - pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7517_jwk.py
+  - pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py
   endpoint_mapping:
     current:
     - /.well-known/jwks.json

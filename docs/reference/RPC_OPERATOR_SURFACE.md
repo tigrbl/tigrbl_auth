@@ -9,8 +9,8 @@ The authoritative RPC surface is owned by `tba_auth/api/rpc/`:
 - `registry.py` owns method registration and deployment filtering
 - `methods/` owns executable operator/admin handlers
 - `schemas/` owns request/response models used by both handlers and OpenRPC
-- `pkgs/60-runtime/tba-cli-identity/src/tba_cli_identity/cli/artifacts/` generates OpenRPC directly from the live registry
-- `pkgs/60-runtime/tba-cli-identity/src/tba_cli_identity/cli/reports/` validates that committed OpenRPC methods match the implementation-backed registry exactly
+- `pkgs/060-runtime/tba-cli-identity/src/tba_cli_identity/cli/artifacts/` generates OpenRPC directly from the live registry
+- `pkgs/060-runtime/tba-cli-identity/src/tba_cli_identity/cli/reports/` validates that committed OpenRPC methods match the implementation-backed registry exactly
 
 ## Contract generation model
 

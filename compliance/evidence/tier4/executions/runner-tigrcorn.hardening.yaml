@@ -11,7 +11,7 @@ required_targets:
 required_artifacts:
 - tba_auth/api/app.py
 - tba_auth/gateway.py
-- tests/runtime/test_runner_tigrcorn.py
+- pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_tigrcorn.py
 required_peer_artifacts:
 - http-transcript.yaml
 - result.yaml

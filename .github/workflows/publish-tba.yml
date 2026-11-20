@@ -15,7 +15,7 @@ jobs:
         uses: cobycloud/actions/actions/python-package-build@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           python-version: "3.12"
-          project-path: pkgs/70-facade/tba
+          project-path: pkgs/070-facade/tba
           out-dir: dist/tba
           upload-artifact: "true"
           artifact-name: python-dist-tba

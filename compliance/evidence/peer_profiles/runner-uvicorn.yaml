@@ -8,7 +8,7 @@ required_targets:
 required_artifacts:
 - tba_auth/api/app.py
 - tba_auth/gateway.py
-- tests/runtime/test_runner_uvicorn.py
+- pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_uvicorn.py
 scenario_ids:
 - runner-launch
 - runner-health

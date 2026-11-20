@@ -1,0 +1,18 @@
+[project]
+license-files = ["LICENSE", "NOTICE"]
+name = "tba-tests-examples"
+version = "0.4.0.dev2"
+description = "Device-login CLI and README usage tests."
+requires-python = ">=3.10,<3.16"
+license = "Apache-2.0"
+readme = "README.md"
+
+[tool.uv]
+package = false
+
+[project.urls]
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/120-tests/tba-tests-examples"
+
+[[project.authors]]
+name = "Jacob Stewart"
+email = "jacob@swarmauri.com"

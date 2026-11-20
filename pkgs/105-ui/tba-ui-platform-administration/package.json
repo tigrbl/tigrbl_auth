@@ -28,7 +28,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@tba/client-platform-administration": "file:../../75-clients/tba-typescript-client-platform-administration",
+    "@tba/client-platform-administration": "file:../../075-clients/tba-typescript-client-platform-administration",
     "@tba/ui-primitives": "file:../../100-uix-core/tba-ui-primitives",
     "@vitejs/plugin-react": "^5.0.0",
     "vite": "^6.2.0",

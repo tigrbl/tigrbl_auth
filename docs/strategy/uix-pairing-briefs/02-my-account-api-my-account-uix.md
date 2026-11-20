@@ -3,7 +3,7 @@
 **Pairing:** `tba-app-backend-my-account` + `@tba/ui-my-account`<br>
 **Status:** Delivery brief<br>
 **Prepared:** July 11, 2026<br>
-**Backend app owner:** `pkgs/90-backend-apps/tba-app-backend-my-account`<br>
+**Backend app owner:** `pkgs/090-backend-apps/tba-app-backend-my-account`<br>
 **UIX owner:** `pkgs/105-ui/tba-ui-my-account`
 
 ## 1. Product Decision
@@ -196,8 +196,8 @@ Produce a route-level copy deck containing:
 
 ## 11. Source Evidence
 
-- `pkgs/90-backend-apps/tba-app-backend-my-account/README.md`
-- `pkgs/90-backend-apps/tba-app-backend-my-account/src/tba_app_backend_my_account/contract.py`
+- `pkgs/090-backend-apps/tba-app-backend-my-account/README.md`
+- `pkgs/090-backend-apps/tba-app-backend-my-account/src/tba_app_backend_my_account/contract.py`
 - `pkgs/105-ui/tba-ui-my-account/README.md`
 - `pkgs/105-ui/tba-ui-my-account/App.tsx`
 - `pkgs/105-ui/tba-ui-my-account/services/myAccountClient.ts`

@@ -2,9 +2,9 @@
 
 | Artifact or standard | Owner | Lifecycle | Delivered boundary | Not yet a conformance claim |
 |---|---|---|---|---|
-| JWT / JWS / JWE | `50-protocols/tba-protocol-jwt`, `tba-protocol-security-jws`, `tba-protocol-security-jwe` | RFC 7519 / 7515 / 7516 | deterministic compact/JSON objects, capability-backed signing/encryption, strict versioned profiles | independent JOSE interoperability and algorithm/provider certification |
-| CWT / COSE | `50-protocols/tba-protocol-cwt`, `tba-protocol-security-cose` | RFC 8392 / 9052 | tagged CWT claims, integer-label profiles, COSE_Sign1 issuance and cryptographic verification | independent COSE/CWT interoperability |
-| OIDC ID Token | `50-protocols/tba-protocol-oidc` | OIDC Core 1.0 | signature verification followed by issuer, subject, audience, azp, time, nonce, algorithm, and type validation | canonical runtime regression suite and OP certification |
+| JWT / JWS / JWE | `050-protocols/tba-protocol-jwt`, `tba-protocol-security-jws`, `tba-protocol-security-jwe` | RFC 7519 / 7515 / 7516 | deterministic compact/JSON objects, capability-backed signing/encryption, strict versioned profiles | independent JOSE interoperability and algorithm/provider certification |
+| CWT / COSE | `050-protocols/tba-protocol-cwt`, `tba-protocol-security-cose` | RFC 8392 / 9052 | tagged CWT claims, integer-label profiles, COSE_Sign1 issuance and cryptographic verification | independent COSE/CWT interoperability |
+| OIDC ID Token | `050-protocols/tba-protocol-oidc` | OIDC Core 1.0 | signature verification followed by issuer, subject, audience, azp, time, nonce, algorithm, and type validation | canonical runtime regression suite and OP certification |
 | OAuth JWT access token | `tba-profile-oauth-jwt-access-token` | RFC 9068 | distinct `at+jwt` profile | resource-server certification |
 | DID Document | `tba-protocol-identity-did-core` | DID Core 1.0 Recommendation | canonical parse/resolve/verify path, document syntax, controllers, key material, and verification relationships | method-specific resolution and interoperability |
 | VC-JOSE-COSE | `tba-profile-credential-vc-jose-cose` | W3C Recommendation 2025-05-15 | VC issuance and verification over JOSE and COSE with claims reconstructed from verified bytes; unsupported VP formats are not advertised | independent VC-JOSE-COSE interoperability; VP delivery remains separate |

@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "`75-clients` owns typed remote SDKs and consumer-side enforcement adapters."
+summary: "`075-clients` owns typed remote SDKs and consumer-side enforcement adapters."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -22,7 +22,7 @@ body: |-
 
   ## Normative requirements
 
-  `75-clients` owns typed remote SDKs and consumer-side enforcement adapters.
+  `075-clients` owns typed remote SDKs and consumer-side enforcement adapters.
   Client packages may depend on layer-02 contracts, layer-50 protocol wire models,
   and external transport libraries. They must not depend on storage, capabilities,
   runtime composition, routers, backend applications, facades, or UI packages.

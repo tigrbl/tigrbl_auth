@@ -29,7 +29,7 @@ body: |-
   
   ## Canonical layers
   
-  Implementations MUST use the exact layer ids and meanings recorded by `pkgs/layers.toml`: `00-primitives`, `01-storage`, `02-contracts`, `05-bases`, `10-concrete`, `20-providers`, `30-storage-runtime`, `40-capabilities`, `50-protocols`, `60-runtime`, `70-facade`, `80-routers`, `90-backend-apps`, `100-uix-core`, `105-ui`, `110-examples`, `120-tests`, and `deprecated`.
+  Implementations MUST use the exact layer ids and meanings recorded by `pkgs/layers.toml`: `000-primitives`, `001-storage`, `002-contracts`, `005-bases`, `010-concrete`, `020-providers`, `030-storage-runtime`, `040-capabilities`, `050-protocols`, `060-runtime`, `070-facade`, `080-routers`, `090-backend-apps`, `100-uix-core`, `105-ui`, `110-examples`, `120-tests`, and `deprecated`.
   
   Each Python distribution MUST resolve to exactly one layer from its path. Each JavaScript workspace MUST resolve to its declared JavaScript layer. Root editable sources and the lockfile MUST use the same canonical package paths.
   

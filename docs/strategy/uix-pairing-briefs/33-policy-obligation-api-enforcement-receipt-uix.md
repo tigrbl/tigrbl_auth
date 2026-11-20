@@ -757,10 +757,10 @@ Standardize `obligation`, `advice`, `phase`, `PEP`, `handler`, `execution plan`,
 
 ### Repository
 
-- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/policy/obligations.py`
-- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/policy/decisions.py`
-- `pkgs/05-bases/tba-bases-authorization-policy/`
-- `pkgs/10-concrete/tba-concrete-authorization-policy-obligations/`
+- `pkgs/002-contracts/tba-contracts-identity/src/tba_contracts_identity/policy/obligations.py`
+- `pkgs/002-contracts/tba-contracts-identity/src/tba_contracts_identity/policy/decisions.py`
+- `pkgs/005-bases/tba-bases-authorization-policy/`
+- `pkgs/010-concrete/tba-concrete-authorization-policy-obligations/`
 - `docs/strategy/uix-pairing-briefs/12-authorization-decision-api-policy-studio-uix.md`
 - `docs/strategy/uix-pairing-briefs/30-authorization-provenance-api-decision-lineage-explorer-uix.md`
 - `docs/strategy/uix-pairing-briefs/31-delegation-provenance-api-authority-chain-explorer-uix.md`

@@ -3,7 +3,7 @@
 **Proposed pairing:** `tba-router-token-service` + `@tba/token-studio-uix`<br>
 **Status:** New governed product surface over substantial existing OAuth, JOSE, storage, exchange, validation, and revocation behavior<br>
 **Prepared:** July 11, 2026<br>
-**Proposed router owner:** `pkgs/80-routers/tba-router-token-service`<br>
+**Proposed router owner:** `pkgs/080-routers/tba-router-token-service`<br>
 **Protocol owners:** OAuth/OIDC protocol packages and format-specific token providers<br>
 **Proposed UIX owner:** `pkgs/105-ui/token-studio-uix`
 
@@ -557,16 +557,16 @@ Guardrails include token confusion, privilege escalation, cross-tenant exchange,
 
 ### Repository
 
-- `pkgs/60-runtime/tba-runtime-identity/src/tba_runtime_identity/token_service.py`
-- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/token_record/`
-- `pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/token_exchange.py`
-- `pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/introspection.py`
-- `pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/revocation.py`
-- `pkgs/50-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/`
-- `pkgs/20-providers/tba-provider-security-proof-dpop/`
-- `pkgs/20-providers/tba-provider-security-dpop-cnf-binding-validator/`
-- `pkgs/20-providers/tba-provider-security-mtls-cnf-binding-validator/`
-- `pkgs/20-providers/tba-provider-token-introspection/`
+- `pkgs/060-runtime/tba-runtime-identity/src/tba_runtime_identity/token_service.py`
+- `pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables/token_record/`
+- `pkgs/030-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/token_exchange.py`
+- `pkgs/030-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/introspection.py`
+- `pkgs/030-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/revocation.py`
+- `pkgs/050-protocols/tba-protocol-oauth/src/tba_protocol_oauth/standards/`
+- `pkgs/020-providers/tba-provider-security-proof-dpop/`
+- `pkgs/020-providers/tba-provider-security-dpop-cnf-binding-validator/`
+- `pkgs/020-providers/tba-provider-security-mtls-cnf-binding-validator/`
+- `pkgs/020-providers/tba-provider-token-introspection/`
 - JOSE, credentials, resource validation, delegation, authorization provenance, audit, and key-rotation packages;
 - RFC 7009/7662/8693/8705/9449 and refresh/token persistence tests.
 

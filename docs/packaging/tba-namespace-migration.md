@@ -11,7 +11,7 @@ Implementation packages follow `tba-<role>-<subject>[-<qualifier>...]`, with a
 single-token role: `tba-protocol-webauthn`, `tba-storage-token`,
 `tba-provider-secret-hashing-bcrypt`, and `tba-profile-fido2-server`.
 The role vocabulary and approved package mapping are checked in
-`tests/unit/test_tba_namespace.py` and
+`pkgs/120-tests/tba-tests-architecture/tests/unit/test_tba_namespace.py` and
 [`role-first-renaming.json`](role-first-renaming.json). Standard names such as
 OAuth and WebAuthn remain intact. Generic suite-level `auth` is omitted from
 router, backend app, plugin, and release-certification names. The domain term
@@ -32,7 +32,7 @@ that facade into the existing `tba` planning package is not part of this rename.
 All four facades (`tba`, `tbauth`, `tba-auth`, and `tba-credentials`) are explicit
 public entry-point exceptions to the implementation naming grammar.
 
-Layer `55-profiles` is a separate profile index above layer `50-protocols`.
+Layer `055-profiles` is a separate profile index above layer `050-protocols`.
 Profiles may select, constrain, and compose protocol implementations. Protocols
 must not depend on the profile index. Nine existing profile packages moved to
 this layer; claim subjects containing the word `profile` remain concrete claims.
@@ -50,7 +50,7 @@ flows. The relying-party session clients call server-owned login and session
 APIs. The ASGI package provides policy enforcement middleware rather than a
 general-purpose API client.
 
-The middleware lives in `pkgs/85-middleware`, above clients and routers and
+The middleware lives in `pkgs/085-middleware`, above clients and routers and
 below backend application composition. Its dependency policy permits primitives,
 contracts, clients, and middleware; concrete router and backend app dependencies
 are forbidden. Layer 90 may compose all three surfaces.

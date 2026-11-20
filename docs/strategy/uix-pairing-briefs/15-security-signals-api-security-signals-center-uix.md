@@ -3,8 +3,8 @@
 **Proposed pairing:** `tba-router-security-signals` + `@tba/security-signals-center-uix`<br>
 **Status:** New product surface; telemetry, anomaly, audit, session, revocation, policy, JOSE, and provenance foundations exist<br>
 **Prepared:** July 11, 2026<br>
-**Proposed router owner:** `pkgs/80-routers/tba-router-security-signals`<br>
-**Proposed protocol owner:** `pkgs/50-protocols/tba-security-shared-signals`<br>
+**Proposed router owner:** `pkgs/080-routers/tba-router-security-signals`<br>
+**Proposed protocol owner:** `pkgs/050-protocols/tba-security-shared-signals`<br>
 **Proposed UIX owner:** `pkgs/105-ui/security-signals-center-uix`
 
 ## 1. Product Decision
@@ -500,11 +500,11 @@ Guardrails include false containment, cross-tenant correlation, replay side effe
 
 ### Repository
 
-- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/adaptive_access.py`
-- `pkgs/20-providers/tba-provider-authentication-anomaly-detector/`
-- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/audit_event/`
+- `pkgs/002-contracts/tba-contracts-identity/src/tba_contracts_identity/adaptive_access.py`
+- `pkgs/020-providers/tba-provider-authentication-anomaly-detector/`
+- `pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables/audit_event/`
 - credential, operator, policy, session, token, delegation, and authorization audit/provenance packages;
-- `pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/revocation.py`
+- `pkgs/030-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/revocation.py`
 - session/login/logout runtime services and resource-validation/JOSE packages;
 - `tests/security/test_authorization_observability.py`
 - `tests/unit/test_rfc7952_security_event_token.py` as stale/misnamed planning evidence only;

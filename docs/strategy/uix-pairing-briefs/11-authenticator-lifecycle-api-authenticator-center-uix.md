@@ -3,7 +3,7 @@
 **Proposed pairing:** `tba-router-authenticators` + `@tba/ui-authenticator-center-uix`<br>
 **Status:** New product surface; existing provider and contract foundations<br>
 **Prepared:** July 11, 2026<br>
-**Proposed router owner:** `pkgs/80-routers/tba-router-authenticators`<br>
+**Proposed router owner:** `pkgs/080-routers/tba-router-authenticators`<br>
 **Proposed UIX owner:** `pkgs/105-ui/authenticator-center-uix`
 
 ## 1. Product Decision
@@ -384,12 +384,12 @@ Produce:
 
 - `pkgs/deprecated/tba-bases-identity-authenticator/`
 - `pkgs/deprecated/tigrbl-identity-credentials-concrete/`
-- `pkgs/20-providers/tba-authenticator-*/`
-- `pkgs/20-providers/tba-provider-authentication-context-acr-basic/`
-- `pkgs/20-providers/tba-provider-authentication-context-amr-basic/`
-- `pkgs/70-facade/tba-credentials/`
-- `pkgs/60-runtime/tba-runtime-identity-administration/src/tba_runtime_identity_administration/_advanced_identity_plane/`
-- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/authenticators.py`
-- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/credentials/`
+- `pkgs/020-providers/tba-authenticator-*/`
+- `pkgs/020-providers/tba-provider-authentication-context-acr-basic/`
+- `pkgs/020-providers/tba-provider-authentication-context-amr-basic/`
+- `pkgs/070-facade/tba-credentials/`
+- `pkgs/060-runtime/tba-runtime-identity-administration/src/tba_runtime_identity_administration/_advanced_identity_plane/`
+- `pkgs/002-contracts/tba-contracts-identity/src/tba_contracts_identity/authenticators.py`
+- `pkgs/002-contracts/tba-contracts-identity/src/tba_contracts_identity/credentials/`
 - Public UIX, My Account, Tenant Admin, provider, WebAuthn, MFA, credential, and authentication-context tests
 - Authenticator/passkey/credential/context SSOT features, planned tests, claims, and evidence

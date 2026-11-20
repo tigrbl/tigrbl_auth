@@ -3,7 +3,7 @@
 **Proposed pairing:** `tba-router-device-identity` + `@tba/fleet-trust-uix`<br>
 **Status:** New product surface; device/machine principal, credential, certificate, attestation, policy, token, and storage foundations exist<br>
 **Prepared:** July 11, 2026<br>
-**Proposed router owner:** `pkgs/80-routers/tba-router-device-identity`<br>
+**Proposed router owner:** `pkgs/080-routers/tba-router-device-identity`<br>
 **Proposed protocol/provider owners:** device onboarding, attestation, ACE/CoAP, certificate, firmware, and vendor/cloud adapters<br>
 **Proposed UIX owner:** `pkgs/105-ui/fleet-trust-uix`
 
@@ -623,11 +623,11 @@ Guardrails include default credentials, cloned identity, false attestation, unsa
 
 ### Repository
 
-- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/principals/`;
-- `pkgs/10-concrete/tba-concrete-identity-principals/src/tba_concrete_identity_principals/factories.py`;
-- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/machine_identity/`;
+- `pkgs/002-contracts/tba-contracts-identity/src/tba_contracts_identity/principals/`;
+- `pkgs/010-concrete/tba-concrete-identity-principals/src/tba_concrete_identity_principals/factories.py`;
+- `pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables/machine_identity/`;
 - `tests/planned/identity_model/device-principal.md`;
-- `tests/security/test_machine_identity_governance.py`;
+- `pkgs/120-tests/tba-tests-authorization/tests/security/test_machine_identity_governance.py`;
 - certificate, credential, key attestation, workload, trust-domain, OAuth token/proof, resource-validation, policy, audit, and security-signal foundations;
 - RFC 8628 device authorization code/tests as a separate user authorization feature;
 - Device/IoT opportunity-map entry.

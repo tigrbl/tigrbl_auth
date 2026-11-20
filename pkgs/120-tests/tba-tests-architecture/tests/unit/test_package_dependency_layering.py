@@ -1,0 +1,301 @@
+from __future__ import annotations
+
+import ast
+import re
+from functools import cache
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[5]
+PKGS = ROOT / "pkgs"
+
+PYTHON_PACKAGE_LAYERS: dict[str, set[str]] = {}
+
+PYTHON_LAYER_FOLDERS = {
+    "primitives": "000-primitives",
+    "storage": "001-storage",
+    "contracts": "002-contracts",
+    "bases": "005-bases",
+    "concrete": "010-concrete",
+    "providers": "020-providers",
+    "storage-runtime": "030-storage-runtime",
+    "capabilities": "040-capabilities",
+    "protocols": "050-protocols",
+    "profiles": "055-profiles",
+    "runtime": "060-runtime",
+    "facade": "070-facade",
+    "clients": "075-clients",
+    "routers": "080-routers",
+    "middleware": "085-middleware",
+    "backend-apps": "090-backend-apps",
+    "tests": "120-tests",
+    "examples": "110-examples",
+    "deprecated": "deprecated",
+}
+
+# The layer directory is the package's authoritative ownership declaration.
+# Build the inventory from live package metadata so adding a correctly placed
+# standalone package cannot leave this boundary test's hand-maintained catalog
+# stale. The assertions below still reject packages outside a declared layer,
+# duplicate package names, and non-package children.
+for _layer, _folder in PYTHON_LAYER_FOLDERS.items():
+    _root = PKGS / _folder
+    PYTHON_PACKAGE_LAYERS[_layer] = {
+        child.name
+        for child in _root.iterdir()
+        if child.is_dir() and (child / "pyproject.toml").is_file()
+    }
+
+FRONTEND_LAYER_FOLDERS = {"075-clients", "100-uix-core", "104-authenticator-uis", "105-ui", "106-ui"}
+
+REQUIRED_PROTOCOL_MODULES = {
+    "bindings.py",
+    "claims.py",
+    "compatibility.py",
+    "errors.py",
+    "features.py",
+    "migrations.py",
+    "schemas.py",
+    "versions.py",
+}
+
+FRONTEND_WORKSPACES = {
+    ROOT / "pkgs" / "100-uix-core" / "tba-ui-primitives",
+    ROOT / "pkgs" / "075-clients" / "tba-typescript-client-oidc-relying-party",
+    ROOT / "pkgs" / "075-clients" / "tba-typescript-client-relying-party-session",
+    ROOT / "pkgs" / "075-clients" / "tba-typescript-client-tenant-administration",
+    ROOT / "pkgs" / "075-clients" / "tba-typescript-client-platform-administration",
+    ROOT / "pkgs" / "075-clients" / "tba-typescript-client-policy-decision",
+    ROOT / "pkgs" / "105-ui" / "tba-ui-administration",
+    ROOT / "pkgs" / "105-ui" / "tba-ui-demo-hub",
+    ROOT / "pkgs" / "105-ui" / "tba-ui-developer",
+    ROOT / "pkgs" / "105-ui" / "tba-ui-my-account",
+    ROOT / "pkgs" / "105-ui" / "tba-ui-platform-administration",
+    ROOT / "pkgs" / "105-ui" / "tba-ui-public",
+    ROOT / "pkgs" / "105-ui" / "tba-ui-service-administration",
+    ROOT / "pkgs" / "105-ui" / "tba-ui-tenant-administration",
+}
+FRONTEND_WORKSPACES.update(
+    path.parent
+    for layer_name in FRONTEND_LAYER_FOLDERS
+    for path in (ROOT / "pkgs" / layer_name).glob("*/package.json")
+)
+
+LOWER_LAYER_FACADE_IMPORT_EXCEPTIONS: dict[str, str] = {}
+
+JS_IMPORT_RE = re.compile(
+    r"""(?:from\s+["'](?P<from>[^"']+)["']|import\s*\(\s*["'](?P<dynamic>[^"']+)["']\s*\)|require\s*\(\s*["'](?P<require>[^"']+)["']\s*\))"""
+)
+
+
+@cache
+def _package_manifests() -> tuple[Path, ...]:
+    return tuple(PKGS.rglob("pyproject.toml"))
+
+
+def _declared_python_packages() -> set[str]:
+    return {path.parent.name for path in _package_manifests()}
+
+
+def _package_dir(package_name: str) -> Path:
+    matches = [
+        path.parent
+        for path in _package_manifests()
+        if path.parent.name == package_name
+    ]
+    assert len(matches) == 1, (package_name, matches)
+    return matches[0]
+
+
+def _absolute_import_roots(path: Path) -> set[str]:
+    tree = ast.parse(path.read_text(encoding="utf-8-sig"))
+    roots: set[str] = set()
+
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            roots.update(alias.name.split(".")[0] for alias in node.names)
+        elif isinstance(node, ast.ImportFrom) and node.level == 0 and node.module:
+            roots.add(node.module.split(".")[0])
+
+    return roots
+
+
+def _package_facade_imports(package_name: str) -> list[Path]:
+    package_dir = _package_dir(package_name)
+    return [
+        path.relative_to(ROOT)
+        for path in sorted((package_dir / "src").rglob("*.py"))
+        if "tba_auth" in _absolute_import_roots(path)
+    ]
+
+
+def _js_import_specifiers(path: Path) -> set[str]:
+    text = path.read_text(encoding="utf-8")
+    specifiers: set[str] = set()
+
+    for match in JS_IMPORT_RE.finditer(text):
+        specifier = (
+            match.group("from") or match.group("dynamic") or match.group("require")
+        )
+        if specifier:
+            specifiers.add(specifier)
+
+    return specifiers
+
+
+def test_all_python_packages_are_assigned_to_one_dependency_layer() -> None:
+    discovered = _declared_python_packages()
+    declared = set().union(*PYTHON_PACKAGE_LAYERS.values())
+
+    assert "core" not in PYTHON_PACKAGE_LAYERS
+    assert "foundation" not in PYTHON_PACKAGE_LAYERS
+    assert not (PKGS / "00-core").exists()
+    assert "domain" not in PYTHON_PACKAGE_LAYERS
+    assert not (PKGS / "10-domain").exists()
+    assert declared == discovered
+
+    layer_names = list(PYTHON_PACKAGE_LAYERS)
+    for index, layer in enumerate(layer_names):
+        for other in layer_names[index + 1 :]:
+            assert PYTHON_PACKAGE_LAYERS[layer].isdisjoint(PYTHON_PACKAGE_LAYERS[other])
+
+
+def test_protocol_packages_use_explicit_import_surfaces() -> None:
+    violations: list[str] = []
+    protocol_root = PKGS / PYTHON_LAYER_FOLDERS["protocols"]
+
+    for path in sorted(protocol_root.rglob("*.py")):
+        tree = ast.parse(path.read_text(encoding="utf-8-sig"))
+        for node in ast.walk(tree):
+            if isinstance(node, ast.ImportFrom) and any(
+                alias.name == "*" for alias in node.names
+            ):
+                violations.append(
+                    f"{path.relative_to(ROOT)}:{node.lineno}: wildcard import"
+                )
+
+    assert violations == []
+
+
+def test_protocol_packages_own_complete_versioned_specification_surfaces() -> None:
+    violations: list[str] = []
+    protocol_root = PKGS / PYTHON_LAYER_FOLDERS["protocols"]
+
+    for package_dir in sorted(path for path in protocol_root.iterdir() if path.is_dir()):
+        package_roots = sorted(
+            path
+            for path in (package_dir / "src").iterdir()
+            if path.is_dir() and (path / "__init__.py").is_file()
+        )
+        if len(package_roots) != 1:
+            violations.append(
+                f"{package_dir.relative_to(ROOT)}: expected one import package, "
+                f"found {len(package_roots)}"
+            )
+            continue
+        missing = sorted(
+            module
+            for module in REQUIRED_PROTOCOL_MODULES
+            if not (package_roots[0] / module).is_file()
+        )
+        if missing:
+            violations.append(
+                f"{package_dir.relative_to(ROOT)}: missing {', '.join(missing)}"
+            )
+
+    assert violations == []
+
+
+def test_python_package_layers_match_filesystem_layout() -> None:
+    assert set(PYTHON_LAYER_FOLDERS) == set(PYTHON_PACKAGE_LAYERS)
+
+    for layer, packages in PYTHON_PACKAGE_LAYERS.items():
+        expected_folder = PYTHON_LAYER_FOLDERS[layer]
+        for package in packages:
+            package_folder = _package_dir(package).relative_to(PKGS).parts[0]
+            assert package_folder == expected_folder, (
+                package,
+                expected_folder,
+                package_folder,
+            )
+
+
+def test_pkgs_tree_contains_only_declared_package_layers() -> None:
+    allowed_layers = set(PYTHON_LAYER_FOLDERS.values()) | FRONTEND_LAYER_FOLDERS
+    unexpected_layers = [
+        path.name
+        for path in sorted(PKGS.iterdir())
+        if path.is_dir() and path.name not in allowed_layers
+    ]
+
+    assert unexpected_layers == []
+
+
+def test_layer_children_are_packages_or_declared_frontend_workspaces() -> None:
+    frontend_workspaces = {path.resolve() for path in FRONTEND_WORKSPACES}
+    offenders: list[str] = []
+
+    for layer_dir in sorted(path for path in PKGS.iterdir() if path.is_dir()):
+        for child in sorted(path for path in layer_dir.iterdir() if path.is_dir()):
+            if (child / "pyproject.toml").is_file():
+                continue
+            if child.resolve() in frontend_workspaces:
+                continue
+            offenders.append(str(child.relative_to(ROOT)).replace("\\", "/"))
+
+    assert offenders == []
+
+
+def test_lower_layer_packages_do_not_import_tba_auth_facade() -> None:
+    facade_consumers = {
+        package
+        for package in _declared_python_packages()
+        if _package_facade_imports(package)
+    }
+    expected_upper_layers = (
+        PYTHON_PACKAGE_LAYERS["facade"] | PYTHON_PACKAGE_LAYERS["backend-apps"]
+    )
+    lower_layer_consumers = facade_consumers - expected_upper_layers
+
+    undeclared = lower_layer_consumers - set(LOWER_LAYER_FACADE_IMPORT_EXCEPTIONS)
+    stale = set(LOWER_LAYER_FACADE_IMPORT_EXCEPTIONS) - lower_layer_consumers
+
+    assert not undeclared, {
+        package: [str(path) for path in _package_facade_imports(package)]
+        for package in sorted(undeclared)
+    }
+    assert not stale
+
+
+def test_new_authn_authz_protocol_packages_do_not_import_tba_auth_facade() -> None:
+    split_packages = (
+        PYTHON_PACKAGE_LAYERS["capabilities"] | PYTHON_PACKAGE_LAYERS["protocols"]
+    )
+
+    offenders = {
+        package: [str(path) for path in _package_facade_imports(package)]
+        for package in sorted(split_packages)
+        if _package_facade_imports(package)
+    }
+
+    assert offenders == {}
+
+
+def test_frontend_workspaces_do_not_import_python_facade_modules() -> None:
+    frontend_source_suffixes = {".cjs", ".js", ".jsx", ".mjs", ".ts", ".tsx"}
+    offenders: dict[str, list[str]] = {}
+
+    for workspace in FRONTEND_WORKSPACES:
+        for path in sorted(workspace.rglob("*")):
+            if path.suffix not in frontend_source_suffixes:
+                continue
+
+            python_facade_specifiers = [
+                specifier
+                for specifier in sorted(_js_import_specifiers(path))
+                if specifier == "tba_auth" or specifier.startswith("tba_auth.")
+            ]
+            if python_facade_specifiers:
+                offenders[str(path.relative_to(ROOT))] = python_facade_specifiers
+
+    assert offenders == {}

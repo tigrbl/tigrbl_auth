@@ -1,0 +1,40 @@
+[project]
+name = "tba-contracts-token"
+version = "0.4.0.dev3"
+readme = "README.md"
+description = "Protocol-neutral token contracts for the TBA identity stack."
+requires-python = ">=3.10,<3.16"
+classifiers = [
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Development Status :: 3 - Alpha",
+    "Typing :: Typed",
+]
+license = "Apache-2.0"
+dependencies = ["tba-primitives-identity==0.4.0.dev3"]
+license-files = ["LICENSE", "NOTICE"]
+keywords = ["tigrbl", "tba", "identity"]
+
+[[project.authors]]
+name = "Jacob Stewart"
+email = "jacob@swarmauri.com"
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/002-contracts/tba-contracts-token#readme"
+Documentation = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/002-contracts/tba-contracts-token#readme"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/002-contracts/tba-contracts-token"
+Issues = "https://github.com/tigrbl/tigrbl_auth/issues"
+PyPI = "https://pypi.org/project/tba-contracts-token/"
+[build-system]
+requires = ["poetry-core>=2.2.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tba_contracts_token", from = "src" }]

@@ -36,11 +36,11 @@ Expect a JSON object with `"command": "discovery.show"` and a `documents` object
 
 | If you want to… | Start here |
 | --- | --- |
-| Run a public OAuth/OIDC API | [Public backend app](pkgs/90-backend-apps/tba-app-backend-public/README.md) and the [local Compose configuration](docker/docker-compose.public-app.yml) |
-| Embed identity in a Tigrbl app | [Tigrbl plugin](pkgs/60-runtime/tba-plugin-tigrbl/README.md) |
-| Maintain an app using `tba_auth` imports | [Compatibility facade](pkgs/70-facade/tba-auth/README.md) |
+| Run a public OAuth/OIDC API | [Public backend app](pkgs/090-backend-apps/tba-app-backend-public/README.md) and the [local Compose configuration](docker/docker-compose.public-app.yml) |
+| Embed identity in a Tigrbl app | [Tigrbl plugin](pkgs/060-runtime/tba-plugin-tigrbl/README.md) |
+| Maintain an app using `tba_auth` imports | [Compatibility facade](pkgs/070-facade/tba-auth/README.md) |
 | Try a client-side login flow | [OAuth device authorization CLI](pkgs/110-examples/tba-example-oauth-device-authorization-cli/README.md) |
-| Operate a deployment | [Identity CLI](pkgs/60-runtime/tba-cli-identity/README.md) and [CLI command reference](docs/reference/CLI_SURFACE.md) |
+| Operate a deployment | [Identity CLI](pkgs/060-runtime/tba-cli-identity/README.md) and [CLI command reference](docs/reference/CLI_SURFACE.md) |
 
 ## Architecture
 
@@ -54,22 +54,22 @@ Start with a representative package below or browse the [full package tree](pkgs
 
 | Layer | Start here |
 | --- | --- |
-| 00 · Primitives | [tba-primitives-identity](pkgs/00-primitives/tba-primitives-identity/README.md) |
-| 01 · Storage | [tba-storage-core](pkgs/01-storage/tba-storage-core/README.md) |
-| 02 · Contracts | [tba-contracts-identity-document](pkgs/02-contracts/tba-contracts-identity-document/README.md) |
-| 05 · Base classes | [tba-bases-authenticator](pkgs/05-bases/tba-bases-authenticator/README.md) |
-| 10 · Concrete implementations | [tba-concrete-amr-evaluator-basic](pkgs/10-concrete/tba-concrete-amr-evaluator-basic/README.md) |
-| 20 · Providers | [tba-provider-authenticator-password-local](pkgs/20-providers/tba-provider-authenticator-password-local/README.md) |
-| 30 · Durable operations | [tba-durability-replay-protection](pkgs/30-storage-runtime/tba-durability-replay-protection/README.md) |
-| 40 · Capabilities | [tba-capability-account-self-service](pkgs/40-capabilities/tba-capability-account-self-service/README.md) |
-| 50 · Protocols | [tba-protocol-cwt](pkgs/50-protocols/tba-protocol-cwt/README.md) |
-| 55 · Profiles | [tba-profile-oauth-jwt-access-token](pkgs/55-profiles/tba-profile-oauth-jwt-access-token/README.md) |
-| 60 · Runtime and CLI | [tba-cli-identity](pkgs/60-runtime/tba-cli-identity/README.md) |
-| 70 · Facade | [tba-auth](pkgs/70-facade/tba-auth/README.md) |
-| 75 · Clients | [tba-client-policy-decision](pkgs/75-clients/tba-client-policy-decision/README.md) |
-| 80 · Routers | [tba-router-oauth-protected-resource-metadata](pkgs/80-routers/tba-router-oauth-protected-resource-metadata/README.md) |
-| 85 · Middleware | [tba-middleware-policy-enforcement-asgi](pkgs/85-middleware/tba-middleware-policy-enforcement-asgi/README.md) |
-| 90 · Backend apps | [tba-app-backend-public](pkgs/90-backend-apps/tba-app-backend-public/README.md) |
+| 00 · Primitives | [tba-primitives-identity](pkgs/000-primitives/tba-primitives-identity/README.md) |
+| 01 · Storage | [tba-storage-core](pkgs/001-storage/tba-storage-core/README.md) |
+| 02 · Contracts | [tba-contracts-identity-document](pkgs/002-contracts/tba-contracts-identity-document/README.md) |
+| 05 · Base classes | [tba-bases-authenticator](pkgs/005-bases/tba-bases-authenticator/README.md) |
+| 10 · Concrete implementations | [tba-concrete-amr-evaluator-basic](pkgs/010-concrete/tba-concrete-amr-evaluator-basic/README.md) |
+| 20 · Providers | [tba-provider-authenticator-password-local](pkgs/020-providers/tba-provider-authenticator-password-local/README.md) |
+| 30 · Durable operations | [tba-durability-replay-protection](pkgs/030-storage-runtime/tba-durability-replay-protection/README.md) |
+| 40 · Capabilities | [tba-capability-account-self-service](pkgs/040-capabilities/tba-capability-account-self-service/README.md) |
+| 50 · Protocols | [tba-protocol-cwt](pkgs/050-protocols/tba-protocol-cwt/README.md) |
+| 55 · Profiles | [tba-profile-oauth-jwt-access-token](pkgs/055-profiles/tba-profile-oauth-jwt-access-token/README.md) |
+| 60 · Runtime and CLI | [tba-cli-identity](pkgs/060-runtime/tba-cli-identity/README.md) |
+| 70 · Facade | [tba-auth](pkgs/070-facade/tba-auth/README.md) |
+| 75 · Clients | [tba-client-policy-decision](pkgs/075-clients/tba-client-policy-decision/README.md) |
+| 80 · Routers | [tba-router-oauth-protected-resource-metadata](pkgs/080-routers/tba-router-oauth-protected-resource-metadata/README.md) |
+| 85 · Middleware | [tba-middleware-policy-enforcement-asgi](pkgs/085-middleware/tba-middleware-policy-enforcement-asgi/README.md) |
+| 90 · Backend apps | [tba-app-backend-public](pkgs/090-backend-apps/tba-app-backend-public/README.md) |
 | 100 · UI primitives | [@tba/ui-primitives](pkgs/100-uix-core/tba-ui-primitives/README.md) |
 | 104 · Authenticator UIs | [@tba/ui-mfa-authenticator-assurance-console](pkgs/104-authenticator-uis/tba-ui-mfa-authenticator-assurance-console/README.md) |
 | 105 · Product UIs | [@tba/ui-my-account](pkgs/105-ui/tba-ui-my-account/README.md) |
@@ -116,10 +116,10 @@ plugin.install(app)
 - OAuth 2.1 alignment is tracked as a profile, not as a formal RFC claim.
 - `keys` is the canonical certified command family; `key` is no longer part of the certified operator surface.
 - public "independent" wording remains disallowed until preserved Tier 4 external peer bundles exist and promote the retained boundary.
-- The authoritative executable CLI surface is `pkgs/60-runtime/tba-cli-identity/src/tba_cli_identity/cli/metadata/` plus the generated `docs/reference/CLI_SURFACE.md`.
+- The authoritative executable CLI surface is `pkgs/060-runtime/tba-cli-identity/src/tba_cli_identity/cli/metadata/` plus the generated `docs/reference/CLI_SURFACE.md`.
 - A current checkpoint gap review remains published at `docs/compliance/PACKAGE_REVIEW_GAP_ANALYSIS.md`.
 - Supplemental supporting review/plan docs remain available at `docs/compliance/INDEPENDENT_PACKAGE_REVIEW_2026-03-27.md` and `docs/compliance/CERTIFIABLE_DELIVERY_PLAN_2026-03-27.md`; the authoritative active document is the SSOT, and the generated reports and top-level current-state docs are its current projections.
-- Dependency provenance for this checkpoint is preserved in `pyproject.toml`, `pkgs/60-runtime/tba-runtime-identity/pyproject.toml`, and `uv.lock`.
+- Dependency provenance for this checkpoint is preserved in `pyproject.toml`, `pkgs/060-runtime/tba-runtime-identity/pyproject.toml`, and `uv.lock`.
 
 ## Known current blockers
 

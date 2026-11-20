@@ -7,7 +7,7 @@ modules:
 - tba_auth/standards/oidc/discovery_metadata.py
 - tba_auth/cli/artifacts.py
 tests:
-- tests/unit/test_rfc7523_jwt_profile.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7523_jwt_profile.py
 contracts:
 - contracts/openid-configuration.json
 - contracts/token-request-example.json

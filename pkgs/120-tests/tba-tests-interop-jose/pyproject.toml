@@ -1,0 +1,28 @@
+[project]
+name = "tba-tests-interop-jose"
+version = "0.1.0"
+description = "Bidirectional compact JWE interoperability tests for TbA and Swarmauri"
+readme = "README.md"
+requires-python = ">=3.10,<3.16"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+keywords = ["tigrbl", "pytest", "jwe", "x448", "interoperability"]
+dependencies = ["cryptography>=45.0.0", "pytest>=8.0", "pytest-asyncio>=0.24.0"]
+
+[[project.authors]]
+name = "Jacob Stewart"
+email = "jacob@swarmauri.com"
+
+[project.urls]
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/120-tests/tba-tests-interop-jose"
+PyPI = "https://pypi.org/project/tba-tests-interop-jose/"
+
+[project.entry-points.pytest11]
+"tba_tests_interop_jose.pytest_plugin" = "tba_tests_interop_jose.pytest_plugin"
+
+[build-system]
+requires = ["poetry-core>=2.2.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tba_tests_interop_jose", from = "src" }]

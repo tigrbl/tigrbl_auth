@@ -5,7 +5,7 @@ modules:
 - tba_auth/ops/token.py
 - tba_auth/cli/artifacts.py
 tests:
-- tests/unit/test_rfc7521_assertion_framework.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7521_assertion_framework.py
 contracts:
 - contracts/oauth-authorization-server.json
 - contracts/token-request-example.json

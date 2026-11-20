@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "index.toml"
 FORMAT_VERSION = "1.0.0"
 _DEPENDENCY_NAME = re.compile(r"^\s*([A-Za-z0-9][A-Za-z0-9._-]*)")
+_NUMBERED_LAYER = re.compile(r"^[0-9]{3}-[a-z][a-z0-9-]*$")
 
 
 def _normalize(name: str) -> str:
@@ -34,6 +35,15 @@ class Package:
 
 def discover() -> tuple[Package, ...]:
     raw: dict[str, tuple[str, str, tuple[str, ...]]] = {}
+    for layer_dir in (ROOT / "pkgs").iterdir():
+        if (
+            layer_dir.is_dir()
+            and layer_dir.name[0].isdigit()
+            and not _NUMBERED_LAYER.fullmatch(layer_dir.name)
+        ):
+            raise ValueError(
+                f"numbered package layer must have three digits: {layer_dir.name}"
+            )
     for pyproject in sorted((ROOT / "pkgs").glob("*/*/pyproject.toml")):
         data = tomllib.loads(pyproject.read_text(encoding="utf-8"))
         project = data.get("project", {})
@@ -49,10 +59,16 @@ def discover() -> tuple[Package, ...]:
             if match:
                 dependency_names.append(_normalize(match.group(1)))
         relative = pyproject.parent.relative_to(ROOT).as_posix()
-        raw[name] = (relative, pyproject.relative_to(ROOT).parts[1], tuple(dependency_names))
+        raw[name] = (
+            relative,
+            pyproject.relative_to(ROOT).parts[1],
+            tuple(dependency_names),
+        )
 
     local_dependencies = {
-        name: tuple(sorted({dependency for dependency in declared if dependency in raw}))
+        name: tuple(
+            sorted({dependency for dependency in declared if dependency in raw})
+        )
         for name, (_, _, declared) in raw.items()
     }
     same_layer_dependencies = {
@@ -75,7 +91,9 @@ def discover() -> tuple[Package, ...]:
             raise ValueError("same-layer dependency cycle: " + " -> ".join(cycle))
         visiting.append(name)
         dependencies = same_layer_dependencies[name]
-        order = 0 if not dependencies else 1 + max(order_for(item) for item in dependencies)
+        order = (
+            0 if not dependencies else 1 + max(order_for(item) for item in dependencies)
+        )
         visiting.pop()
         orders[name] = order
         return order
@@ -125,7 +143,9 @@ def render(packages: tuple[Package, ...]) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--check", action="store_true", help="fail if index.toml is stale")
+    parser.add_argument(
+        "--check", action="store_true", help="fail if index.toml is stale"
+    )
     args = parser.parse_args()
     expected = render(discover())
     if args.check:

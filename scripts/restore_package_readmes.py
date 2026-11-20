@@ -22,71 +22,71 @@ HISTORY = "733c127473bf0df07ed93606a5810aa70ac5f9f2^"
 REPO = "https://github.com/tigrbl/tigrbl_auth"
 BLOB = REPO + "/blob/master/"
 LAYER_SCOPE = {
-    "00-primitives": (
+    "000-primitives": (
         "shared identity primitives",
         "protocol flows, provider selection, or application hosting",
     ),
-    "01-storage": (
+    "001-storage": (
         "storage schema and table declarations",
         "protocol endpoints or deployment-specific provider selection",
     ),
-    "02-contracts": (
+    "002-contracts": (
         "shared types and structural ports",
         "environment-specific service implementations or HTTP routing",
     ),
-    "03-codecs": (
+    "003-codecs": (
         "representation encoding and decoding",
         "issuer trust policy, key lifecycle, or HTTP endpoints",
     ),
-    "05-bases": (
+    "005-bases": (
         "reusable component bases",
         "deployment composition or implicit provider selection",
     ),
-    "10-concrete": (
+    "010-concrete": (
         "focused concrete types and algorithms",
         "application hosting or ownership of environment-specific providers",
     ),
-    "20-providers": (
+    "020-providers": (
         "replaceable environment implementations",
         "capability orchestration, storage table ownership, or HTTP routing",
     ),
-    "30-storage-runtime": (
+    "030-storage-runtime": (
         "storage-backed runtime adapters",
         "protocol wire definitions or standalone application hosting",
     ),
-    "40-capabilities": (
+    "040-capabilities": (
         "use-case orchestration through explicit collaborators",
         "HTTP wire schemas, direct table ownership, or hidden provider selection",
     ),
-    "50-protocols": (
+    "050-protocols": (
         "protocol semantics and projections",
         "deployment hosting or ownership of persistence implementations",
     ),
-    "55-profiles": (
+    "055-profiles": (
         "focused protocol and credential profiles",
         "a universal deployment or implicit trust-policy selection",
     ),
-    "60-runtime": (
+    "060-runtime": (
         "runtime composition and operator entry points",
         "duplicating protocol grammars, table declarations, or provider implementations",
     ),
-    "70-facade": (
+    "070-facade": (
         "curated public entry points",
         "moving implementation ownership out of focused packages",
     ),
-    "75-clients": (
+    "075-clients": (
         "relying-party and client integration",
         "authority-side policy decisions or server-owned persistence",
     ),
-    "80-routers": (
+    "080-routers": (
         "transport-facing route composition",
         "duplicating credential algorithms or storage ownership",
     ),
-    "85-middleware": (
+    "085-middleware": (
         "request middleware integration",
         "implicit key storage or a complete identity deployment",
     ),
-    "90-backend-apps": (
+    "090-backend-apps": (
         "deployable backend composition",
         "new protocol grammars or independent persistence implementations",
     ),
@@ -316,7 +316,7 @@ def section_content(
         else f"Inspect the {entry_link} for the exported types and composition surface."
     )
     operations += "\n\nA successful import or build is a smoke check, not a production-readiness assertion. Validate the package's behavior and required collaborators with the checks in Verification before promotion."
-    protocols = [p for p in consumers if p.layer == "50-protocols"]
+    protocols = [p for p in consumers if p.layer == "050-protocols"]
     if capability:
         protocols = sorted(
             {
@@ -424,7 +424,7 @@ def main() -> None:
                 reverse[dependency].append(package)
     old = histories(inventory)
     capability_data = json.loads(
-        (ROOT / "pkgs/40-capabilities/capability-families.json").read_text()
+        (ROOT / "pkgs/040-capabilities/capability-families.json").read_text()
     )
     capabilities = {r["package"]: r for r in capability_data["capabilities"]}
     report = dict(history=HISTORY, packages=[])

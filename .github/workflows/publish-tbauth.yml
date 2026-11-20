@@ -15,7 +15,7 @@ jobs:
         uses: cobycloud/actions/actions/python-package-build@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           python-version: "3.12"
-          project-path: pkgs/70-facade/tbauth
+          project-path: pkgs/070-facade/tbauth
           out-dir: dist/tbauth
           upload-artifact: "true"
           artifact-name: python-dist-tbauth

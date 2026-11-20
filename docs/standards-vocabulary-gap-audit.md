@@ -179,8 +179,8 @@ The retained OAuth/OIDC/JOSE boundary is represented primarily in:
 - `compliance/targets/oidc-targets.yaml`;
 - `compliance/targets/extension-targets.yaml`;
 - `compliance/targets/alignment-targets.yaml`;
-- `pkgs/50-protocols/tba-protocol-oauth`;
-- `pkgs/50-protocols/tba-protocol-oidc`; and
+- `pkgs/050-protocols/tba-protocol-oauth`;
+- `pkgs/050-protocols/tba-protocol-oidc`; and
 - the associated compliance mappings, tests, evidence, and generated reports.
 
 Implemented/tracked OAuth vocabulary includes authorization and token endpoints, bearer-token use, PKCE, authorization-server metadata, protected-resource metadata, revocation, introspection, dynamic registration and registration management, native apps, device authorization, token exchange, mTLS client authentication and certificate-bound tokens, resource indicators, JWT access tokens, JAR, PAR, issuer identification, RAR `authorization_details`, DPoP, assertion grants/client authentication, and the OAuth Security BCP.

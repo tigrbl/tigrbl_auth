@@ -107,7 +107,7 @@ Its exports and dependency declarations describe its integration surface; they d
 
 Declared local runtime dependencies:
 
-- [@tba/client-tenant-administration](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/75-clients/tba-typescript-client-tenant-administration/README.md)
+- [@tba/client-tenant-administration](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/075-clients/tba-typescript-client-tenant-administration/README.md)
 - [@tba/ui-primitives](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/100-uix-core/tba-ui-primitives/README.md)
 
 ## Project Links

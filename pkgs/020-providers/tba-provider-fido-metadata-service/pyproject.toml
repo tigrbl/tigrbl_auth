@@ -1,0 +1,39 @@
+[project]
+name = "tba-provider-fido-metadata-service"
+version = "0.4.0.dev3"
+description = "FIDO Metadata Service signed-blob and authenticator status provider."
+readme = "README.md"
+requires-python = ">=3.10,<3.16"
+classifiers = [
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Development Status :: 3 - Alpha",
+    "Typing :: Typed",
+]
+license = "Apache-2.0"
+dependencies = ["tba-contracts-identity==0.4.0.dev3", "tba-bases-public-key-authentication==0.4.0.dev3"]
+license-files = ["LICENSE", "NOTICE"]
+keywords = ["tigrbl", "tba", "identity"]
+
+[[project.authors]]
+name = "Jacob Stewart"
+email = "jacob@swarmauri.com"
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/020-providers/tba-provider-fido-metadata-service#readme"
+Documentation = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/020-providers/tba-provider-fido-metadata-service#readme"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/020-providers/tba-provider-fido-metadata-service"
+Issues = "https://github.com/tigrbl/tigrbl_auth/issues"
+PyPI = "https://pypi.org/project/tba-provider-fido-metadata-service/"
+[build-system]
+requires = ["poetry-core>=2.2.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+[tool.poetry]
+packages = [{ include = "tba_provider_fido_metadata_service", from = "src" }]

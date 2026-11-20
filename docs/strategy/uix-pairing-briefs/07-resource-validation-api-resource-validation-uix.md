@@ -3,7 +3,7 @@
 **Pairing:** `tba-app-backend-resource-validation` + proposed `@tba/ui-resource-validation`<br>
 **Status:** New UIX required; API exists<br>
 **Prepared:** July 11, 2026<br>
-**Backend app owner:** `pkgs/90-backend-apps/tba-app-backend-resource-validation`<br>
+**Backend app owner:** `pkgs/090-backend-apps/tba-app-backend-resource-validation`<br>
 **Proposed UIX owner:** `pkgs/105-ui/tba-ui-resource-validation`
 
 ## 1. Product Decision
@@ -244,8 +244,8 @@ Produce a route-level copy deck containing:
 
 ## 12. Source Evidence
 
-- `pkgs/90-backend-apps/tba-app-backend-resource-validation/README.md`
-- `pkgs/90-backend-apps/tba-app-backend-resource-validation/src/tba_app_backend_resource_validation/contract.py`
+- `pkgs/090-backend-apps/tba-app-backend-resource-validation/README.md`
+- `pkgs/090-backend-apps/tba-app-backend-resource-validation/src/tba_app_backend_resource_validation/contract.py`
 - `docker/docker-compose.resource-validation-app.yml`
 - `pkgs/105-ui/tba-ui-demo-hub/surfaces.ts`
 - `pkgs/105-ui/tba-ui-demo-hub/demoState.ts`

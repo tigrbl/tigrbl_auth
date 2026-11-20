@@ -5,8 +5,8 @@ modules:
 - tba_auth/cli/handlers.py
 - tba_auth/cli/artifacts.py
 tests:
-- tests/security/test_release_bundle_signing.py
-- tests/conformance/operator/test_cli_bootstrap_migrate.py
+- pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py
+- pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py
 contracts:
 - contracts\cli_contract.json
 - contracts\release-bundle.json

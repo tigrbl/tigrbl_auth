@@ -244,7 +244,7 @@ Required ownership rules:
 
 ## 3. Layer 00: primitives
 
-Owner: `pkgs/00-primitives/tba-primitives-identity`.
+Owner: `pkgs/000-primitives/tba-primitives-identity`.
 
 ### Retain and finish
 
@@ -280,7 +280,7 @@ Owner: `pkgs/00-primitives/tba-primitives-identity`.
 
 ## 4. Layer 01: durable schemas only
 
-Owner: `pkgs/01-storage/tba-storage-core`.
+Owner: `pkgs/001-storage/tba-storage-core`.
 
 ### Keep
 
@@ -315,7 +315,7 @@ table modules.
 ### Move out of storage entirely
 
 - `tables/auth_session/_table.py` account router and session HTTP handlers ->
-  `pkgs/90-backend-apps/tba-app-backend-my-account`.
+  `pkgs/090-backend-apps/tba-app-backend-my-account`.
 - `tables/realm/_table.py` admin router and realm/tenant HTTP handlers -> the
   appropriate layer-80 admin API package.
 - `tables/user/_admin_identity_route.py` -> layer-80 admin API.
@@ -342,8 +342,8 @@ table modules.
 
 Primary owners:
 
-- `pkgs/02-contracts/tba-contracts-identity`
-- `pkgs/02-contracts/tba-contracts-security-trust`
+- `pkgs/002-contracts/tba-contracts-identity`
+- `pkgs/002-contracts/tba-contracts-security-trust`
 
 ### Claims
 
@@ -506,7 +506,7 @@ needs a stable extension point. Data objects do not receive ceremonial bases.
 
 ## 9. Layer 30: durable Tigrbl table runtime
 
-Owner: `pkgs/30-storage-runtime/tba-runtime-identity-storage`.
+Owner: `pkgs/030-storage-runtime/tba-runtime-identity-storage`.
 
 ### Canonical module shape
 
@@ -811,11 +811,11 @@ routers or persistence singletons.
 
 | Action | File | Required change |
 |---|---|---|
-| ADD | `pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/ops/clients.py` | Implement `lookup_client`, `set_client_enabled`, and `replace_client_secret_hash` using the common layer-30 table operations. The operation accepts an already-produced digest; it never hashes or verifies a secret. |
-| ADD | `pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/tables/clients.py` | Define `ClientRuntimeSpec` with aliases `lookup_client`, `enable`, `disable`, and `rotate_secret_hash`; preserve collection/member arity and read-only versus read-write transaction scope. |
+| ADD | `pkgs/030-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/ops/clients.py` | Implement `lookup_client`, `set_client_enabled`, and `replace_client_secret_hash` using the common layer-30 table operations. The operation accepts an already-produced digest; it never hashes or verifies a secret. |
+| ADD | `pkgs/030-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage/tables/clients.py` | Define `ClientRuntimeSpec` with aliases `lookup_client`, `enable`, `disable`, and `rotate_secret_hash`; preserve collection/member arity and read-only versus read-write transaction scope. |
 | UPDATE | `.../tables/__init__.py`, `.../ops/__init__.py` | Export and activate the client runtime family. |
 | UPDATE | `.../inventory.py` | Ensure the derived `ClientRuntimeSpec` is indexed by table and operation alias. Do not derive a second mapped class. |
-| MOVE | `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/client/_table.py` | Remove `verify_secret`, `rotate_secret`, `enable`, `disable`, `authenticate`, `op_ctx`, `_ops`, and `tba_provider_identity_jose` imports. Retain mapped fields, relationship, `_CLIENT_ID_RE`, and schema metadata. |
+| MOVE | `pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables/client/_table.py` | Remove `verify_secret`, `rotate_secret`, `enable`, `disable`, `authenticate`, `op_ctx`, `_ops`, and `tba_provider_identity_jose` imports. Retain mapped fields, relationship, `_CLIENT_ID_RE`, and schema metadata. |
 | UPDATE | `.../introspection.py`, `.../token_request.py` | Replace `client.verify_secret(...)` with an injected client-secret verification port; replace direct client lookup with the layer-30 operation. |
 | UPDATE | tests and examples currently calling `Client.new(...)` | Use a provider-backed client-record factory that hashes before invoking the layer-30 create operation. Do not restore `Client.new` on the mapped model. |
 
@@ -835,10 +835,10 @@ layer-50 token/introspection binding
 |---|---|---|
 | ADD | `.../ops/identities.py` | Implement `lookup_identity_by_identifier`, `replace_password_hash`, `set_identity_enabled`, and password-reset state mutations. Reads filter active records and preserve username/email lookup semantics. |
 | ADD | `.../tables/identities.py` | Define and derive `UserRuntimeSpec`; attach aliases without HTTP bindings. |
-| MOVE | `pkgs/01-storage/.../tables/user/_table.py` | Remove request/response models, `TigrblRouter`, route imports, static route method attachment, `verify_password`, `lookup_by_identifier`, `op_ctx`, and JOSE password imports. Keep mapped columns, relationships, passive `roles`/`scopes` projections, and bootstrap identifiers. |
-| MOVE | `pkgs/01-storage/.../tables/user/_account_route.py` | Move HTTP schemas and handlers to `pkgs/90-backend-apps/tba-app-backend-my-account/src/tba_app_backend_my_account/identities.py`; call the password-authentication capability and identity runtime operations. |
-| MOVE | `pkgs/01-storage/.../tables/user/_admin_identity_route.py` | Move to the appropriate tenant/platform admin API modules; delegate mutations to the identity-administration capability. |
-| UPDATE | `.../login.py`, `pkgs/60-runtime/tba-server-identity/src/tba_server_identity/admin_auth.py` | Replace `row.verify_password(...)` with `PasswordAuthenticationCapability.authenticate(...)`. |
+| MOVE | `pkgs/001-storage/.../tables/user/_table.py` | Remove request/response models, `TigrblRouter`, route imports, static route method attachment, `verify_password`, `lookup_by_identifier`, `op_ctx`, and JOSE password imports. Keep mapped columns, relationships, passive `roles`/`scopes` projections, and bootstrap identifiers. |
+| MOVE | `pkgs/001-storage/.../tables/user/_account_route.py` | Move HTTP schemas and handlers to `pkgs/090-backend-apps/tba-app-backend-my-account/src/tba_app_backend_my_account/identities.py`; call the password-authentication capability and identity runtime operations. |
+| MOVE | `pkgs/001-storage/.../tables/user/_admin_identity_route.py` | Move to the appropriate tenant/platform admin API modules; delegate mutations to the identity-administration capability. |
+| UPDATE | `.../login.py`, `pkgs/060-runtime/tba-server-identity/src/tba_server_identity/admin_auth.py` | Replace `row.verify_password(...)` with `PasswordAuthenticationCapability.authenticate(...)`. |
 | UPDATE | bootstrap composition | Hash the initial superuser password through the configured password provider during bootstrap. `User.DEFAULT_ROWS` must not execute provider cryptography at import time. |
 | REMOVE | old route files and layer-01 route exports | Delete only after OpenAPI equivalence and UI/API integration tests pass. |
 
@@ -849,7 +849,7 @@ layer-50 token/introspection binding
 | ADD | `.../ops/delegation.py` | Move `_create`, `_list`, `_read`, `_update`, `_create_grant`, transitions, recursive revoke, edge deactivation, provenance persistence, and token-link operations. Replace recursive dynamically attached model calls with direct local operation calls sharing one transaction. |
 | ADD | `.../tables/delegation.py` | Define runtime specs for `DelegationGrant`, `DelegationGrantEdge`, `DelegationGrantProof`, and `DelegationGrantTokenLink`. Preserve aliases `create_grant`, `inspect_grant`, `list_grants`, `activate_grant`, `expire_grant`, `replace_grant`, `revoke_grant`, `link_edge`, `deactivate_children`, `persist_provenance`, `link_token`, and `list_for_grant`. |
 | UPDATE | `.../tables/__init__.py`, `.../ops/__init__.py` | Export and include all four specs in `DURABLE_RUNTIME_TABLE_SPECS`. |
-| MOVE | `pkgs/01-storage/.../tables/delegation_grant/_table.py` | Retain only mapped table classes, a storage-domain terminal-status invariant if needed, and the compatibility type alias. Remove helpers, operations, `op_ctx`, and runtime imports. |
+| MOVE | `pkgs/001-storage/.../tables/delegation_grant/_table.py` | Retain only mapped table classes, a storage-domain terminal-status invariant if needed, and the compatibility type alias. Remove helpers, operations, `op_ctx`, and runtime imports. |
 | UPDATE | delegation providers/capabilities/protocol callers | Invoke typed delegation capability operations; no caller should call attached table methods directly. |
 
 Add transaction tests proving replacement and recursive revocation are atomic,
@@ -862,11 +862,11 @@ links/provenance remain queryable.
 |---|---|---|
 | ADD | `.../hooks/device_codes.py` | Move `approve_device_code` and `deny_device_code`; keep `HANDLER` stage, input identity rules, and default denial reason. |
 | UPDATE | `.../tables/oauth.py` | Attach hooks to a derived `DeviceCodeRuntimeSpec` and include approve/deny operations if not already materialized by the canonical table spec. |
-| REMOVE | `pkgs/01-storage/.../tables/device_code/_hooks.py` | Delete after hook-order equivalence tests pass; remove its imports/exports from `_table.py`. |
+| REMOVE | `pkgs/001-storage/.../tables/device_code/_hooks.py` | Delete after hook-order equivalence tests pass; remove its imports/exports from `_table.py`. |
 | ADD | `.../hooks/keys.py` | Move `normalize_key_usage_policy`, `seed_primary_key_version`, and `ensure_key_enabled`; retain PRE/POST stage ordering. |
 | ADD | `.../tables/keys.py` | Derive `CryptoKeyRuntimeSpec` and `CryptoKeyVersionRuntimeSpec`; attach hooks to create/update/rotate operations. |
-| MOVE | `pkgs/01-storage/.../tables/crypto_key/_usage.py` | Move deterministic normalization to a layer-10 key-policy concrete owner if used outside persistence; otherwise keep only a storage enum/value mapping. |
-| REMOVE | `pkgs/01-storage/.../tables/crypto_key/_hooks.py` | Delete after primary-version idempotency, disabled-key rejection, and lifecycle-order tests pass. |
+| MOVE | `pkgs/001-storage/.../tables/crypto_key/_usage.py` | Move deterministic normalization to a layer-10 key-policy concrete owner if used outside persistence; otherwise keep only a storage enum/value mapping. |
+| REMOVE | `pkgs/001-storage/.../tables/crypto_key/_hooks.py` | Delete after primary-version idempotency, disabled-key rejection, and lifecycle-order tests pass. |
 
 `scrub_key_material` belongs in the layer-20 key provider/serialization boundary,
 not a durable hook. Layer 30 persists only already-separated public material and
@@ -877,12 +877,12 @@ opaque provider references.
 | Action | File | Required change |
 |---|---|---|
 | ADD/UPDATE | `.../ops/audit.py`, `.../tables/audit.py` | Own append/list/filter operations and a typed audit-recorder adapter. |
-| MOVE | `pkgs/01-storage/.../tables/audit_event/__init__.py` | Retain table export only; remove executable append/list wrappers. |
+| MOVE | `pkgs/001-storage/.../tables/audit_event/__init__.py` | Retain table export only; remove executable append/list wrappers. |
 | UPDATE | `.../ops/common.py` | Become the only local adapter around canonical Tigrbl create/read/list/update/delete cores. Keep input/output unwrapping tested and private to layer 30. |
-| REMOVE | `pkgs/01-storage/.../tables/_ops.py` | Migrate all callers, including provider packages, then delete. |
-| MOVE | `pkgs/01-storage/.../tables/engine.py` | Move engine/session construction to layer-60 composition and layer-30 initialization. Layer 01 exposes mapped metadata only. |
-| UPDATE/REMOVE | `pkgs/01-storage/.../framework.py` | Remove `TigrblApp`, `TigrblRouter`, `op_ctx`, `hook_ctx`, engine/session, and API imports. Retain a storage-safe barrel only if mapped tables still need it; otherwise import the framework owners directly and delete it. |
-| FACADE | `pkgs/01-storage/.../persistence.py`, `_persistence_extended.py` | Warn and delegate to layer-30 operations for one release; prohibit new imports; then remove. |
+| REMOVE | `pkgs/001-storage/.../tables/_ops.py` | Migrate all callers, including provider packages, then delete. |
+| MOVE | `pkgs/001-storage/.../tables/engine.py` | Move engine/session construction to layer-60 composition and layer-30 initialization. Layer 01 exposes mapped metadata only. |
+| UPDATE/REMOVE | `pkgs/001-storage/.../framework.py` | Remove `TigrblApp`, `TigrblRouter`, `op_ctx`, `hook_ctx`, engine/session, and API imports. Retain a storage-safe barrel only if mapped tables still need it; otherwise import the framework owners directly and delete it. |
+| FACADE | `pkgs/001-storage/.../persistence.py`, `_persistence_extended.py` | Warn and delegate to layer-30 operations for one release; prohibit new imports; then remove. |
 
 No database migration is created for sections 17.1-17.5 unless a mapped column,
 constraint, index, or relationship changes.
@@ -893,10 +893,10 @@ constraint, index, or relationship changes.
 
 | Action | File/package | Required change |
 |---|---|---|
-| ADD | `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/shared_secrets.py` | Define `SecretHash`, `SecretHashingPort.hash_secret`, `SecretVerificationPort.verify_secret`, `SecretHashPolicy`, and a typed verification result/error. The contract carries encoded bytes/string without choosing bcrypt/PBKDF2. |
+| ADD | `pkgs/002-contracts/tba-contracts-identity/src/tba_contracts_identity/shared_secrets.py` | Define `SecretHash`, `SecretHashingPort.hash_secret`, `SecretVerificationPort.verify_secret`, `SecretHashPolicy`, and a typed verification result/error. The contract carries encoded bytes/string without choosing bcrypt/PBKDF2. |
 | UPDATE | `.../authenticators.py` and package `__init__.py` | Reference the shared-secret ports from password/client-secret authenticator contracts and export them. |
 | UPDATE | `pkgs/deprecated/tba-bases-identity-authenticator/.../mixins.py` | Make `SecretVerifierMixin` an adapter over an injected `SecretVerificationPort`, or remove it if it remains a method that only raises `NotImplementedError`. |
-| ADD | `pkgs/20-providers/tba-provider-secret-hashing-bcrypt` | Add `BcryptSecretHasher` implementing hash/verify for the existing `LargeBinary(60)` representation, cost policy, malformed-hash rejection, and optional rehash-needed detection. |
+| ADD | `pkgs/020-providers/tba-provider-secret-hashing-bcrypt` | Add `BcryptSecretHasher` implementing hash/verify for the existing `LargeBinary(60)` representation, cost policy, malformed-hash rejection, and optional rehash-needed detection. |
 | UPDATE | `tba-provider-authenticator-password-local` | `PasswordLocalAuthenticator` injects the hasher and implements typed authenticate/verify behavior; it does not query `User`. |
 | UPDATE | `tba-provider-authenticator-client-secret-local` | `ClientSecretLocalAuthenticator` injects the hasher and implements typed verify behavior; remove OAuth-specific implementation semantics. |
 | UPDATE | `tba-credentials/lifecycle.py` | Stop maintaining a competing PBKDF2 storage format unless explicitly supported as a versioned migration algorithm. Split deterministic lifecycle from provider hashing; remove `CredentialLedger` as an in-memory durable substitute. |
@@ -908,7 +908,7 @@ as another.
 
 ### 18.2 Authentication capabilities
 
-ADD `pkgs/40-capabilities/tigrbl-principal-authentication` with:
+ADD `pkgs/040-capabilities/tigrbl-principal-authentication` with:
 
 - `PasswordAuthenticationCapability`: injected identity lookup operation and
   `PasswordLocalAuthenticator`; operation `authenticate_password`;
@@ -920,7 +920,7 @@ ADD `pkgs/40-capabilities/tigrbl-principal-authentication` with:
   without exposing stored digests.
 
 MOVE the composition currently in
-`pkgs/70-facade/tba-credentials/src/tba_credentials/backends.py`
+`pkgs/070-facade/tba-credentials/src/tba_credentials/backends.py`
 to these capabilities. Remove imports of `tba_storage_core.tables`,
 `tables._ops`, `User.lookup_by_identifier`, `Client.authenticate`, and
 `tba_provider_identity_jose.key_management.verify_pw` from layer 20.
@@ -942,7 +942,7 @@ to these capabilities. Remove imports of `tba_storage_core.tables`,
   `tba_contracts_identity.claims` semantic objects/ports.
 - KEEP `tba-bases-identity-claims` as the protocol-neutral home of
   `ClaimBase`, `ClaimSetComposerBase`, and `ClaimsProviderBase`.
-- REQUIRE every `pkgs/10-concrete/tba-claim-*-concrete` class to subclass
+- REQUIRE every `pkgs/010-concrete/tba-claim-*-concrete` class to subclass
   `ClaimBase` and declare canonical name, name kind, claim type, and value type.
 - ADD a generated ownership test that discovers every standalone claim package,
   instantiates its exported claim class, rejects duplicate canonical names
@@ -959,7 +959,7 @@ to these capabilities. Remove imports of `tba_storage_core.tables`,
 - MOVE `parse_verified_claims` and `serialize_verified_claims` from
   `identity_assurance.py` to `tba-concrete-identity-assurance` because the
   evidence structure is reusable below the OIDC wire profile;
-- UPDATE `tests/unit/test_protocol_neutral_reusable_ownership.py`,
+- UPDATE `pkgs/120-tests/tba-tests-architecture/tests/unit/test_protocol_neutral_reusable_ownership.py`,
   `test_standalone_concrete_ownership.py`, package-local tests, and imports;
 - retain warning exports for one release, then REMOVE the package, root
   dependency/source entries, package tests, and lock record.

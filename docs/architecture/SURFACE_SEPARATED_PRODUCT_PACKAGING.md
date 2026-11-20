@@ -6,12 +6,12 @@ This slice packages TBA as separate API front doors and separate UIX apps while 
 
 | Package | Python entrypoint | Product surface | Primary consumers | Surface boundary |
 | --- | --- | --- | --- | --- |
-| `pkgs/90-backend-apps/tba-app-backend-public` | `tba_app_backend_public:app` | `public-app` | `pkgs/105-ui/tba-ui-public`, white-label login clients | Public OAuth/OIDC, login/logout, registration, discovery, JWKS; no `/rpc` or admin resources |
-| `pkgs/90-backend-apps/tba-app-backend-platform-administration` | `tba_app_backend_platform_administration:app` | `platform-admin-app` | `pkgs/105-ui/tba-ui-platform-administration` | Tenant lifecycle, platform authority, platform audit; no public login/register routes |
-| `pkgs/90-backend-apps/tba-app-backend-tenant-administration` | `tba_app_backend_tenant_administration:app` | `tenant-admin-app` | `pkgs/105-ui/tba-ui-tenant-administration` | Tenant-scoped users, clients, consents, JWKS, policy; no platform tenant lifecycle |
-| `pkgs/90-backend-apps/tba-app-backend-developer` | `tba_app_backend_developer:app` | `developer-app` | `pkgs/105-ui/tba-ui-developer` | Client registration and metadata; no tenant lifecycle or service identity admin |
-| `pkgs/90-backend-apps/tba-app-backend-service-administration` | `tba_app_backend_service_administration:app` | `service-admin-app` | `pkgs/105-ui/tba-ui-service-administration` | Services, service keys, API keys, token inspection, validation metadata; no human login/consent pages |
-| `pkgs/90-backend-apps/tba-app-backend-resource-validation` | `tba_app_backend_resource_validation:app` | `resource-validation-app` | Resource servers and gateways | JWKS, tenant JWKS, introspection, discovery, protected-resource metadata only |
+| `pkgs/090-backend-apps/tba-app-backend-public` | `tba_app_backend_public:app` | `public-app` | `pkgs/105-ui/tba-ui-public`, white-label login clients | Public OAuth/OIDC, login/logout, registration, discovery, JWKS; no `/rpc` or admin resources |
+| `pkgs/090-backend-apps/tba-app-backend-platform-administration` | `tba_app_backend_platform_administration:app` | `platform-admin-app` | `pkgs/105-ui/tba-ui-platform-administration` | Tenant lifecycle, platform authority, platform audit; no public login/register routes |
+| `pkgs/090-backend-apps/tba-app-backend-tenant-administration` | `tba_app_backend_tenant_administration:app` | `tenant-admin-app` | `pkgs/105-ui/tba-ui-tenant-administration` | Tenant-scoped users, clients, consents, JWKS, policy; no platform tenant lifecycle |
+| `pkgs/090-backend-apps/tba-app-backend-developer` | `tba_app_backend_developer:app` | `developer-app` | `pkgs/105-ui/tba-ui-developer` | Client registration and metadata; no tenant lifecycle or service identity admin |
+| `pkgs/090-backend-apps/tba-app-backend-service-administration` | `tba_app_backend_service_administration:app` | `service-admin-app` | `pkgs/105-ui/tba-ui-service-administration` | Services, service keys, API keys, token inspection, validation metadata; no human login/consent pages |
+| `pkgs/090-backend-apps/tba-app-backend-resource-validation` | `tba_app_backend_resource_validation:app` | `resource-validation-app` | Resource servers and gateways | JWKS, tenant JWKS, introspection, discovery, protected-resource metadata only |
 
 ## UIX Apps
 

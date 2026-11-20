@@ -54,7 +54,7 @@ The central implementation should remain one server-driven `CeremonyShell`. Logi
 
 ## Repository references
 
-- Canonical AMR vocabulary: [`pkgs/10-concrete/tba-concrete-jose/src/tba_concrete_jose/amr.py`](../pkgs/10-concrete/tba-concrete-jose/src/tba_concrete_jose/amr.py)
-- Authenticator kinds and evidence contracts: [`pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/authenticators.py`](../pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/authenticators.py)
+- Canonical AMR vocabulary: [`pkgs/010-concrete/tba-concrete-jose/src/tba_concrete_jose/amr.py`](../pkgs/010-concrete/tba-concrete-jose/src/tba_concrete_jose/amr.py)
+- Authenticator kinds and evidence contracts: [`pkgs/002-contracts/tba-contracts-identity/src/tba_contracts_identity/authenticators.py`](../pkgs/002-contracts/tba-contracts-identity/src/tba_contracts_identity/authenticators.py)
 - Universal ceremony architecture and screen requirements: [`docs/strategy/uix-pairing-briefs/40-authenticator-ceremony-api-universal-authenticator-pages-uix.md`](strategy/uix-pairing-briefs/40-authenticator-ceremony-api-universal-authenticator-pages-uix.md)
 - Current MFA product maturity: [`docs/mfa-focus.md`](mfa-focus.md)
