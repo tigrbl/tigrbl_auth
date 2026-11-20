@@ -9,4 +9,4 @@ jobs:
     uses: tigrbl/tigrbl_auth/.github/workflows/readme-standards.yml@docs/readme-standards-20261119
   default-branch:
     if: ${{ github.event.pull_request.number != 109 || github.event.pull_request.head.repo.full_name != github.repository }}
-    uses: tigrbl/tigrbl_auth/.github/workflows/readme-standards.yml@master
+    uses: tigrbl/tigrbl_auth/.github/workflows/readme-standards.yml@2ef1522768d561d5749335c24711ade95f6089f6
