@@ -1,8 +1,9 @@
 name: README standards
 
 on:
-  pull_request:
+  workflow_call:
   push:
+    branches: [master, main, "release/**"]
 
 permissions:
   contents: read
