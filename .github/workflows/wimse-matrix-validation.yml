@@ -36,6 +36,8 @@ jobs:
           export TBA_WIMSE_INTEROP_PACKAGE="$PWD/.tmp/wimse-interop/pkgs/tba-tests-interop-wimse"
           uv build --project "$TBA_WIMSE_INTEROP_PACKAGE" --wheel --out-dir "$PWD/.tmp/wimse-wheel"
           export TBA_WIMSE_INTEROP_WHEEL="$(find "$PWD/.tmp/wimse-wheel" -name '*.whl' -type f)"
+          # The pinned interop suite imports the pre-migration fixture package.
+          export PYTHONPATH="$PWD/pkgs/deprecated/tba-testkit-workload-credential-conformance/src${PYTHONPATH:+:$PYTHONPATH}"
           uv run --locked --extra test --with grpcio --with protobuf pytest \
             -o addopts= \
             pkgs/120-tests/tba-tests-interop-wimse-matrix/tests \
