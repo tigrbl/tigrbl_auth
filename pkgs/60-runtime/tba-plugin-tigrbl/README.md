@@ -80,6 +80,22 @@ from tba_plugin_tigrbl import TbaPlugin
 assert callable(TbaPlugin)
 ```
 
+## Operation authorization
+
+Declare an `OperationSecurity` action on each operation you want to protect. After
+mounting the routes, derive the catalog digest and publish it with the matching
+policy. Install `OperationAuthorizationAdapter` on the app with a credential
+verifier, a server-side resource resolver, and a current policy provider. The
+resolver can read trusted ownership and tenant attributes using the active
+transaction. Handlers that return collections must apply their row scope to the
+query using trusted identity or resource data.
+
+The adapter checks credential audience and optional action scope before evaluating
+a TBA decision. A missing or mismatched catalog fails closed. Declared public
+operations intentionally skip this adapter. Only operations that declare security
+participate. The adapter handles decisions without obligations, and an allow
+decision carrying an obligation is denied.
+
 ## Adoption Option
 
 `TbaPlugin` is one adoption option for downstream applications that already own a `TigrblApp` and want to mount the identity provider surfaces into that app. Other adoption options remain valid: build a complete provider app through `tba-server-identity`, build a gateway through `tba-server-identity`, or run those app factories through `tba-runtime-identity`.

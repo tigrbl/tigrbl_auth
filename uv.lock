@@ -6856,12 +6856,14 @@ name = "tba-plugin-tigrbl"
 version = "0.4.0.dev3"
 source = { editable = "pkgs/60-runtime/tba-plugin-tigrbl" }
 dependencies = [
+    { name = "tba-contracts-authorization" },
     { name = "tba-runtime-identity" },
     { name = "tba-server-identity" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "tba-contracts-authorization", specifier = "==0.4.0.dev4" },
     { name = "tba-runtime-identity", specifier = "==0.4.0.dev4" },
     { name = "tba-server-identity", specifier = "==0.4.0.dev3" },
 ]
