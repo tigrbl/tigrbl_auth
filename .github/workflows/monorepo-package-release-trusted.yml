@@ -1,258 +1,73 @@
-name: monorepo-package-release-trusted
+name: TbA X448 scoped release
 
 on:
   workflow_dispatch:
-    inputs:
-      package:
-        description: Package name to tag, or all.
-        required: false
-        default: all
-      bump_type:
-        description: Semver bump to apply before build, publish, and release.
-        required: false
-        default: patch
-        type: choice
-        options:
-          - patch
-          - minor
-          - finalize
-      version:
-        description: Optional exact version to set before release. Overrides bump_type.
-        required: false
-        default: ""
-      force:
-        description: Replace existing package tags.
-        required: false
-        default: "false"
-        type: choice
-        options:
-          - "false"
-          - "true"
 
 permissions:
   contents: read
 
 concurrency:
-  group: monorepo-package-release-trusted-${{ github.ref }}
+  group: tba-x448-scoped-publication
   cancel-in-progress: false
 
 jobs:
-  bump-package-versions:
+  build-and-verify:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    outputs:
-      matrix: ${{ steps.matrix.outputs.matrix }}
-      count: ${{ steps.matrix.outputs.count }}
-      sha: ${{ steps.revision.outputs.sha }}
     steps:
       - uses: actions/checkout@v6
         with:
-          fetch-depth: 0
-      - name: Configure git identity
-        shell: bash
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-      - name: Bump selected package versions
-        shell: bash
-        run: |
-          set -euo pipefail
-          python - <<'PY'
-          import pathlib
-          import subprocess
-          import sys
-          import tomllib
-
-          root = pathlib.Path(".").resolve()
-          selected = "${{ inputs.package }}"
-          exact_version = "${{ inputs.version }}"
-          bump_type = "${{ inputs.bump_type }}"
-          packages = []
-          for pyproject in sorted((root / "pkgs").glob("*/*/pyproject.toml")):
-              if selected == "all" and pyproject.relative_to(root / "pkgs").parts[0] == "deprecated":
-                  continue
-              data = tomllib.loads(pyproject.read_text(encoding="utf-8"))
-              name = data["project"]["name"]
-              if selected == "all" or selected == name:
-                  packages.append((name, pyproject))
-          if not packages:
-              raise SystemExit(f"unknown package {selected!r}")
-          for name, pyproject in packages:
-              args = [sys.executable, "scripts/bump_pyproject_version.py"]
-              if exact_version:
-                  args.extend(["--set", exact_version])
-              else:
-                  args.extend(["--bump", bump_type])
-              args.append(str(pyproject))
-              print(f"::notice::Bumping {name} via {' '.join(args)}")
-              subprocess.run(args, check=True)
-          PY
-      - name: Commit and push version bumps
-        shell: bash
-        run: |
-          set -euo pipefail
-          git add pkgs/*/*/pyproject.toml
-          if git diff --cached --quiet; then
-            echo "::notice::No version changes to commit."
-          else
-            git commit -m "Bump trusted release package versions"
-            git push origin "HEAD:${GITHUB_REF_NAME}"
-          fi
-      - name: Build bumped package matrix
-        id: matrix
-        shell: bash
-        run: |
-          set -euo pipefail
-          python scripts/monorepo_release.py release-matrix --package "${{ inputs.package }}"
-      - name: Capture bumped revision
-        id: revision
-        shell: bash
-        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
-
-  create-package-tags:
-    needs: bump-package-versions
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          ref: ${{ needs.bump-package-versions.outputs.sha }}
-          fetch-depth: 0
-      - name: Configure git identity
-        shell: bash
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-      - name: Create package release tags
-        shell: bash
-        run: |
-          set -euo pipefail
-          args=(--package "${{ inputs.package }}")
-          if [[ "${{ inputs.force }}" == "true" ]]; then
-            args+=(--force)
-          fi
-          python scripts/monorepo_release.py create-tags "${args[@]}"
-
-  resolve-dispatch-matrix:
-    needs:
-      - bump-package-versions
-      - create-package-tags
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ needs.bump-package-versions.outputs.matrix }}
-      count: ${{ needs.bump-package-versions.outputs.count }}
-      sha: ${{ needs.bump-package-versions.outputs.sha }}
-    steps:
-      - name: Use bumped matrix
-        run: echo "Using bumped package matrix."
-
-  build-dispatch-package:
-    if: ${{ needs.resolve-dispatch-matrix.outputs.count != '0' }}
-    needs: resolve-dispatch-matrix
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        package: ${{ fromJSON(needs.resolve-dispatch-matrix.outputs.matrix) }}
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          ref: ${{ needs.resolve-dispatch-matrix.outputs.sha }}
-      - name: Resolve package metadata at bumped revision
-        id: package
-        env:
-          SELECTED_PACKAGE: ${{ inputs.package }}
-          PACKAGE_INDEX: ${{ matrix.package.index }}
-        run: python scripts/monorepo_release.py resolve-release-index --index "$PACKAGE_INDEX" --package "$SELECTED_PACKAGE"
-      - name: Build package distribution
-        uses: cobycloud/actions/actions/python-package-build@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
+          ref: 123997e921a10d3db56ce00464cacb8bc784a04b
+      - uses: astral-sh/setup-uv@v6
         with:
           python-version: "3.12"
-          project-path: ${{ steps.package.outputs.path }}
-          out-dir: dist/${{ steps.package.outputs.name }}
-          upload-artifact: "true"
-          artifact-name: python-dist-${{ steps.package.outputs.name }}
+      - name: Build the four release candidates
+        shell: bash
+        run: |
+          set -euo pipefail
+          uv lock --check
+          uv build --no-sources --out-dir "$RUNNER_TEMP/x448-dist" --project pkgs/010-concrete/tba-concrete-jose
+          uv build --no-sources --out-dir "$RUNNER_TEMP/x448-dist" --project pkgs/010-concrete/tba-concrete-jwe
+          uv build --no-sources --out-dir "$RUNNER_TEMP/x448-dist" --project pkgs/020-providers/tba-provider-jose-cryptography
+          uv build --no-sources --out-dir "$RUNNER_TEMP/x448-dist" --project pkgs/120-tests/tba-tests-interop-jose
+          cd "$RUNNER_TEMP/x448-dist"
+          sha256sum *.whl *.tar.gz > SHA256SUMS
+      - name: Verify candidates with published dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP"
+          uv venv "$RUNNER_TEMP/x448-venv"
+          python="$RUNNER_TEMP/x448-venv/bin/python"
+          uv pip install --python "$python" --only-binary :all: x448-dist/*.whl \
+            'tba-capability-protected-envelope==0.4.0.dev2' \
+            'tba-protocol-security-jwe==0.4.0.dev2' \
+            'swarmauri-core==0.11.0.dev9' 'swarmauri-base==0.11.0.dev13' \
+            'swarmauri-crypto-jwe==0.11.0.dev4' 'swarmauri-cipher-suite-jwa==0.11.0.dev4'
+          uv pip check --python "$python"
+          "$python" -I -m pytest --pyargs tba_tests_interop_jose.tests --jose-interop-mode=installed -vv
+      - uses: actions/upload-artifact@v7
+        with:
+          name: x448-verified-distributions
+          path: ${{ runner.temp }}/x448-dist/*
+          if-no-files-found: error
 
-  publish-dispatch-package:
-    if: ${{ needs.resolve-dispatch-matrix.outputs.count != '0' }}
-    needs:
-      - resolve-dispatch-matrix
-      - build-dispatch-package
+  publish:
+    needs: build-and-verify
     runs-on: ubuntu-latest
     environment: pypi
-    permissions:
-      contents: read
-      id-token: write
-    strategy:
-      fail-fast: false
-      matrix:
-        package: ${{ fromJSON(needs.resolve-dispatch-matrix.outputs.matrix) }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          ref: ${{ needs.resolve-dispatch-matrix.outputs.sha }}
-      - name: Resolve package metadata at bumped revision
-        id: package
-        env:
-          SELECTED_PACKAGE: ${{ inputs.package }}
-          PACKAGE_INDEX: ${{ matrix.package.index }}
-        run: python scripts/monorepo_release.py resolve-release-index --index "$PACKAGE_INDEX" --package "$SELECTED_PACKAGE"
+      - uses: astral-sh/setup-uv@v6
       - uses: actions/download-artifact@v8
         with:
-          name: python-dist-${{ steps.package.outputs.name }}
-          path: dist/${{ steps.package.outputs.name }}
-      - name: Publish package to PyPI with Trusted Publishing
-        uses: cobycloud/actions/actions/pypi-trusted-publish@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
-        with:
-          packages-dir: dist/${{ steps.package.outputs.name }}
-          skip-existing: "true"
-
-  github-release-dispatch:
-    if: ${{ needs.resolve-dispatch-matrix.outputs.count != '0' }}
-    needs:
-      - resolve-dispatch-matrix
-      - publish-dispatch-package
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    strategy:
-      fail-fast: false
-      matrix:
-        package: ${{ fromJSON(needs.resolve-dispatch-matrix.outputs.matrix) }}
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          ref: ${{ needs.resolve-dispatch-matrix.outputs.sha }}
-      - name: Resolve package metadata at bumped revision
-        id: package
+          name: x448-verified-distributions
+          path: x448-dist
+      - name: Verify artifact hashes and publish to PyPI
+        shell: bash
         env:
-          SELECTED_PACKAGE: ${{ inputs.package }}
-          PACKAGE_INDEX: ${{ matrix.package.index }}
-        run: python scripts/monorepo_release.py resolve-release-index --index "$PACKAGE_INDEX" --package "$SELECTED_PACKAGE"
-      - uses: actions/download-artifact@v8
-        with:
-          name: python-dist-${{ steps.package.outputs.name }}
-          path: dist/${{ steps.package.outputs.name }}
-      - name: Create package GitHub release
-        uses: cobycloud/actions/actions/github-release@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
-        with:
-          tag-name: ${{ steps.package.outputs.tag }}
-          name: ${{ steps.package.outputs.tag }}
-          body: |
-            Package: `${{ steps.package.outputs.name }}`
-            Version: `${{ steps.package.outputs.version }}`
-            Distribution path: `${{ steps.package.outputs.path }}`
-          files: |
-            dist/${{ steps.package.outputs.name }}/*.whl
-            dist/${{ steps.package.outputs.name }}/*.tar.gz
-          draft: "true"
-          prerelease: ${{ contains(steps.package.outputs.version, '.dev') && 'true' || 'false' }}
-          make-latest: "false"
-      - name: Publish release after all assets are uploaded
-        env:
-          GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.repository }}
-          RELEASE_TAG: ${{ steps.package.outputs.tag }}
-        run: gh release edit "$RELEASE_TAG" --draft=false
+          UV_PUBLISH_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          cd x448-dist
+          sha256sum -c SHA256SUMS
+          test -n "$UV_PUBLISH_TOKEN"
+          uv publish --check-url https://pypi.org/simple *.whl *.tar.gz
