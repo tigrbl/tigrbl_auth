@@ -23,6 +23,7 @@ EXPECTED_LAYER_ORDER = (
     "00-primitives",
     "01-storage",
     "02-contracts",
+    "03-codecs",
     "05-bases",
     "10-concrete",
     "20-providers",
@@ -79,6 +80,11 @@ def test_dependency_rules_cover_every_layer_and_reject_upward_edges() -> None:
     assert all(isinstance(rule, DependencyRule) for rule in policy.dependency_rules)
     assert set(policy.rules_by_consumer) == set(EXPECTED_LAYER_ORDER)
     assert dependency_allowed("50-protocols", "40-capabilities", policy)
+    assert dependency_allowed("10-concrete", "03-codecs", policy)
+    assert dependency_allowed("20-providers", "03-codecs", policy)
+    assert dependency_allowed("30-storage-runtime", "03-codecs", policy)
+    assert dependency_allowed("120-tests", "03-codecs", policy)
+    assert not dependency_allowed("03-codecs", "20-providers", policy)
     assert not dependency_allowed("20-providers", "40-capabilities", policy)
     assert not dependency_allowed("60-runtime", "80-routers", policy)
     assert dependency_allowed("90-backend-apps", "80-routers", policy)

@@ -23,6 +23,13 @@ def _load_package_pyproject(name: str) -> dict:
     return tomllib.loads(matches[0].read_text(encoding="utf-8"))
 
 
+def test_workspace_dns_dependencies_exclude_dnspython():
+    with (ROOT / "uv.lock").open("rb") as lock_file:
+        lock = tomllib.load(lock_file)
+    packages = {package["name"].casefold() for package in lock["package"]}
+    assert "dnspython" not in packages
+
+
 def test_pyproject_uses_published_pins_and_extras():
     manifest = _load_pyproject()
     project = manifest["project"]
@@ -67,7 +74,7 @@ def test_pyproject_uses_published_pins_and_extras():
     ) <= set(extras)
     assert extras["uvicorn"] == ["tba-runtime-identity[uvicorn]==0.4.0.dev2"]
     assert "sqlalchemy[asyncio]==2.0.49" in dependencies
-    assert "pydantic[email]==2.12.5" in dependencies
+    assert "pydantic==2.12.5" in dependencies
     assert extras["hypercorn"] == ["tba-runtime-identity[hypercorn]==0.4.0.dev2"]
     assert extras["tigrcorn"] == ["tba-runtime-identity[tigrcorn]==0.4.0.dev2"]
     assert extras["servers"] == ["tba-runtime-identity[servers]==0.4.0.dev2"]

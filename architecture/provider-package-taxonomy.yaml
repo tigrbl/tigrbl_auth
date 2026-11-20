@@ -6,6 +6,7 @@ rules:
   allowed_dependencies:
   - 00-primitives
   - 02-contracts
+  - 03-codecs
   - 05-bases
   - 10-concrete
   - approved-20-provider-collaborators
@@ -66,6 +67,8 @@ canonical_providers:
   - tba-provider-authorization-policy-decision-engine
   remote_and_resolution:
   - tba-provider-did-resolver
+  - tba-provider-dns-resolver
+  - tba-provider-dns-txt
   - tba-provider-security-oidc-federation
   - tba-provider-token-introspection
   - tba-provider-security-token-jwks-cache
@@ -130,6 +133,7 @@ compatibility_or_migration_packages:
     target: tba-concrete-pairwise-subject-identifier
     target_layer: 10-concrete
 canonical_deterministic_extractions:
+- tba-concrete-dns-zone
 - tba-concrete-acr-evaluator-basic
 - tba-concrete-amr-evaluator-basic
 - tba-concrete-authorization-provenance

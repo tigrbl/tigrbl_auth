@@ -44,7 +44,7 @@ dependencies = [
     "tigrbl-typing==0.4.5.dev4",
     "python-multipart==0.0.27",
     "sqlalchemy[asyncio]==2.0.49",
-    "pydantic[email]==2.12.5",
+    "pydantic==2.12.5",
     "pydantic-settings==2.13.1",
     "python-dotenv==1.2.2",
     "PyYAML==6.0.3",
@@ -534,7 +534,12 @@ test = [
     "tba-capability-communications-identity==0.4.0.dev2",
     "tba-protocol-bimi==0.4.0.dev2",
     "tba-protocol-dmarc==0.4.0.dev2",
-    "tba-provider-dns-txt==0.4.0.dev2",
+    "tba-provider-dns-txt[http2,quic,trio]==0.4.0.dev2",
+    "tba-provider-dns-resolver==0.4.0.dev2",
+    "tba-concrete-dns-zone==0.4.0.dev2",
+    "tba-protocol-dns[dnssec]==0.4.0.dev2",
+    "tba-codec-dns==0.4.0.dev2",
+    "tba-primitives-dns-name==0.4.0.dev2",
 ]
 examples = [
     "tba-example-oauth-device-authorization-cli==0.1.0",
@@ -570,6 +575,7 @@ testpaths = [
     "tests",
     "pkgs/120-tests/tba-tests-wimse/tests",
     "pkgs/120-tests/tba-tests-spiffe/tests",
+    "pkgs/120-tests/tba-tests-dns/tests",
     "pkgs/120-tests/tba-tests-workload-composition/tests",
     "pkgs/120-tests/tba-testkit-workload-credential-conformance/tests",
 ]
@@ -649,6 +655,11 @@ tba-protocol-workload-wimse-identifier = { path = "pkgs/50-protocols/tba-protoco
 tba-profile-workload-credential-wimse-wic = { path = "pkgs/55-profiles/tba-profile-workload-credential-wimse-wic", editable = true }
 tba-profile-workload-authentication-wimse-mtls = { path = "pkgs/55-profiles/tba-profile-workload-authentication-wimse-mtls", editable = true }
 tba-contracts-dns = { path = "pkgs/02-contracts/tba-contracts-dns", editable = true }
+tba-primitives-dns-name = { path = "pkgs/00-primitives/tba-primitives-dns-name", editable = true }
+tba-concrete-dns-zone = { path = "pkgs/10-concrete/tba-concrete-dns-zone", editable = true }
+tba-protocol-dns = { path = "pkgs/50-protocols/tba-protocol-dns", editable = true }
+tba-codec-dns = { path = "pkgs/03-codecs/tba-codec-dns", editable = true }
+tba-provider-dns-resolver = { path = "pkgs/20-providers/tba-provider-dns-resolver", editable = true }
 tba-codec-x509-logotype = { path = "pkgs/03-codecs/tba-codec-x509-logotype", editable = true }
 tba-provider-certificate-evidence = { path = "pkgs/20-providers/tba-provider-certificate-evidence", editable = true }
 tba-capability-communications-identity = { path = "pkgs/40-capabilities/tba-capability-communications-identity", editable = true }

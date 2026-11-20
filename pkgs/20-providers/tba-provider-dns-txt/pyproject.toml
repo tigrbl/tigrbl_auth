@@ -6,9 +6,16 @@ readme = "README.md"
 requires-python = ">=3.10,<3.16"
 license = "Apache-2.0"
 dependencies = [
-    "dnspython>=2.7,<3",
     "tba-contracts-dns==0.4.0.dev2",
+    "tba-primitives-dns-name==0.4.0.dev2",
+    "tba-codec-dns==0.4.0.dev2",
+    "tba-provider-dns-resolver==0.4.0.dev2",
 ]
+
+[project.optional-dependencies]
+http2 = ["tba-provider-dns-resolver[http2]==0.4.0.dev2"]
+quic = ["tba-provider-dns-resolver[quic]==0.4.0.dev2"]
+trio = ["tba-provider-dns-resolver[trio]==0.4.0.dev2"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

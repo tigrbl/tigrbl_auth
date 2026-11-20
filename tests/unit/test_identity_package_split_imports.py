@@ -216,16 +216,23 @@ def test_split_package_metadata_declares_independent_import_roots() -> None:
         ]
 
 
-def test_email_schema_packages_declare_email_validator_dependency() -> None:
-    for dist_name in ("tba-server-identity",):
-        metadata = tomllib.loads(
-            (_package_path(dist_name) / "pyproject.toml").read_text(encoding="utf-8")
-        )
-        dependencies = set(metadata["project"].get("dependencies", []))
+def test_workspace_excludes_dnspython() -> None:
+    lock = tomllib.loads((ROOT / "uv.lock").read_text(encoding="utf-8"))
+    assert "dnspython" not in {package["name"] for package in lock["package"]}
 
-        assert any(item.startswith("email-validator") for item in dependencies), (
-            dist_name
-        )
+
+def test_oauth_registration_contact_email_validation() -> None:
+    from pydantic import ValidationError
+
+    from tba_protocol_oauth.schemas import DynamicClientRegistrationIn
+
+    metadata = {"redirect_uris": ["https://example.com/callback"]}
+    model = DynamicClientRegistrationIn(
+        **metadata, contacts=["Operations <Ops@EXAMPLE.COM>", "ops@xn--bcher-kva.de"]
+    )
+    assert model.contacts == ["Ops@example.com", "ops@bücher.de"]
+    with pytest.raises(ValidationError, match="invalid email"):
+        DynamicClientRegistrationIn(**metadata, contacts=["ops..team@example.com"])
 
 
 def test_identity_server_declares_tigrbl_framework_dependency() -> None:
