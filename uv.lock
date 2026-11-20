@@ -2633,7 +2633,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev4" },
+    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev5" },
     { name = "tba-router-wit-issuance", specifier = "==0.4.0.dev3" },
     { name = "tba-runtime-identity", specifier = "==0.4.0.dev4" },
     { name = "tigrbl", specifier = "==0.4.5.dev8" },
@@ -5595,7 +5595,7 @@ requires-dist = [
 
 [[package]]
 name = "tba-concrete-jose"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 source = { editable = "pkgs/010-concrete/tba-concrete-jose" }
 dependencies = [
     { name = "tba-bases-encryption" },
@@ -5608,24 +5608,24 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "tba-bases-encryption", specifier = "==0.4.0.dev3" },
-    { name = "tba-bases-jose", specifier = "==0.4.0.dev3" },
-    { name = "tba-contracts-identity", specifier = "==0.4.0.dev3" },
-    { name = "tba-contracts-security-key-rotation-policy", specifier = "==0.1.1.dev1" },
-    { name = "tba-contracts-security-trust", specifier = "==0.1.1.dev1" },
-    { name = "tba-primitives-identity", specifier = "==0.4.0.dev3" },
+    { name = "tba-bases-encryption", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
+    { name = "tba-bases-jose", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
+    { name = "tba-contracts-identity", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
+    { name = "tba-contracts-security-key-rotation-policy", specifier = ">=0.1.0,<=0.1.1.dev1" },
+    { name = "tba-contracts-security-trust", specifier = ">=0.1.0,<=0.1.1.dev1" },
+    { name = "tba-primitives-identity", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
 ]
 
 [[package]]
 name = "tba-concrete-jwe"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 source = { editable = "pkgs/010-concrete/tba-concrete-jwe" }
 dependencies = [
     { name = "tba-primitives-identity" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tba-primitives-identity", specifier = "==0.4.0.dev3" }]
+requires-dist = [{ name = "tba-primitives-identity", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" }]
 
 [[package]]
 name = "tba-concrete-jws"
@@ -5836,7 +5836,7 @@ dependencies = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tba-concrete-jose", specifier = "==0.4.0.dev3" }]
+requires-dist = [{ name = "tba-concrete-jose", specifier = "==0.4.0.dev4" }]
 
 [[package]]
 name = "tba-concrete-sd-jwt-vc-credential"
@@ -7051,7 +7051,7 @@ requires-dist = [
     { name = "tba-profile-workload-credential-wimse-wit", specifier = "==0.4.0.dev5" },
     { name = "tba-profile-workload-proof-wimse-wpt", specifier = "==0.4.0.dev5" },
     { name = "tba-protocol-workload-spiffe-svid", specifier = "==0.4.0.dev3" },
-    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev4" },
+    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev5" },
 ]
 
 [[package]]
@@ -7087,7 +7087,7 @@ requires-dist = [
     { name = "tba-concrete-jwt", specifier = "==0.4.0.dev3" },
     { name = "tba-concrete-wit", specifier = "==0.4.0.dev3" },
     { name = "tba-protocol-workload-wimse-identifier", specifier = "==0.4.0.dev3" },
-    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev4" },
+    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev5" },
 ]
 
 [[package]]
@@ -7104,7 +7104,7 @@ dependencies = [
 requires-dist = [
     { name = "cryptography", specifier = ">=45" },
     { name = "tba-profile-workload-credential-wimse-wit", specifier = "==0.4.0.dev5" },
-    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev4" },
+    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev5" },
 ]
 
 [[package]]
@@ -7127,7 +7127,7 @@ requires-dist = [
     { name = "tba-contracts-replay", specifier = "==0.4.0.dev3" },
     { name = "tba-primitives-identity", specifier = "==0.4.0.dev3" },
     { name = "tba-profile-workload-credential-wimse-wit", specifier = "==0.4.0.dev5" },
-    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev4" },
+    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev5" },
 ]
 
 [[package]]
@@ -7635,7 +7635,7 @@ requires-dist = [
     { name = "tba-concrete-jws", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
     { name = "tba-contracts-identity", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
     { name = "tba-protocol-oidc", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
-    { name = "tba-provider-jose-cryptography", specifier = ">=0.4.0.dev3,<=0.4.0.dev4" },
+    { name = "tba-provider-jose-cryptography", specifier = ">=0.4.0.dev3,<=0.4.0.dev5" },
     { name = "tba-provider-security-proof-pkce", specifier = ">=0.1.0,<=0.1.1.dev1" },
 ]
 
@@ -7699,7 +7699,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "tba-concrete-jose", specifier = "==0.4.0.dev3" },
+    { name = "tba-concrete-jose", specifier = "==0.4.0.dev4" },
     { name = "tba-contracts-identity", specifier = "==0.4.0.dev3" },
     { name = "tba-primitives-identity", specifier = "==0.4.0.dev3" },
 ]
@@ -7805,7 +7805,7 @@ requires-dist = [
     { name = "tba-concrete-jwt-svid-credential", specifier = "==0.4.0.dev3" },
     { name = "tba-concrete-x509-svid-credential", specifier = "==0.4.0.dev3" },
     { name = "tba-contracts-security-trust", specifier = "==0.1.1.dev1" },
-    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev4" },
+    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev5" },
 ]
 
 [[package]]
@@ -8491,7 +8491,7 @@ dependencies = [
 requires-dist = [
     { name = "cryptography", specifier = ">=45.0.0" },
     { name = "tba-bases-jose", specifier = "==0.4.0.dev3" },
-    { name = "tba-concrete-jose", specifier = "==0.4.0.dev3" },
+    { name = "tba-concrete-jose", specifier = "==0.4.0.dev4" },
     { name = "tba-contracts-identity", specifier = "==0.4.0.dev3" },
     { name = "tba-contracts-security-key-rotation-policy", specifier = "==0.1.1.dev1" },
     { name = "tba-primitives-identity", specifier = "==0.4.0.dev3" },
@@ -8501,7 +8501,7 @@ requires-dist = [
 
 [[package]]
 name = "tba-provider-jose-cryptography"
-version = "0.4.0.dev4"
+version = "0.4.0.dev5"
 source = { editable = "pkgs/020-providers/tba-provider-jose-cryptography" }
 dependencies = [
     { name = "cryptography" },
@@ -8516,12 +8516,12 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "cryptography", specifier = ">=45.0.0" },
-    { name = "tba-bases-protected-envelope", specifier = "==0.4.0.dev3" },
-    { name = "tba-concrete-jwe", specifier = "==0.4.0.dev3" },
-    { name = "tba-concrete-jws", specifier = "==0.4.0.dev3" },
-    { name = "tba-contracts-protected-envelope", specifier = "==0.4.0.dev3" },
-    { name = "tba-contracts-security-trust", specifier = "==0.1.1.dev1" },
-    { name = "tba-primitives-identity", specifier = "==0.4.0.dev3" },
+    { name = "tba-bases-protected-envelope", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
+    { name = "tba-concrete-jwe", specifier = "==0.4.0.dev4" },
+    { name = "tba-concrete-jws", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
+    { name = "tba-contracts-protected-envelope", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
+    { name = "tba-contracts-security-trust", specifier = ">=0.1.0,<=0.1.1.dev1" },
+    { name = "tba-primitives-identity", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
 ]
 
 [[package]]
@@ -9138,7 +9138,7 @@ dependencies = [
 requires-dist = [
     { name = "tba-concrete-jws", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
     { name = "tba-protocol-oidc-relying-party", specifier = "==0.4.0.dev4" },
-    { name = "tba-provider-jose-cryptography", specifier = ">=0.4.0.dev3,<=0.4.0.dev4" },
+    { name = "tba-provider-jose-cryptography", specifier = ">=0.4.0.dev3,<=0.4.0.dev5" },
     { name = "tba-runtime-relying-party-session", specifier = "==0.4.0.dev5" },
 ]
 
@@ -9355,7 +9355,7 @@ requires-dist = [
     { name = "tba-protocol-webauthn", specifier = "==0.4.0.dev3" },
     { name = "tba-protocol-workload-wimse-identifier", specifier = "==0.4.0.dev3" },
     { name = "tba-provider-identity-jose", specifier = "==0.4.0.dev3" },
-    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev4" },
+    { name = "tba-provider-jose-cryptography", specifier = "==0.4.0.dev5" },
     { name = "tba-provider-secret-hashing-bcrypt", specifier = "==0.1.1.dev1" },
     { name = "tba-runtime-identity-storage", specifier = "==0.4.0.dev3" },
     { name = "tba-storage-core", specifier = "==0.4.0.dev5" },
@@ -9406,7 +9406,7 @@ requires-dist = [
     { name = "tba-capability-tenant-administration", specifier = "==0.4.0.dev3" },
     { name = "tba-concrete-capability", specifier = "==0.4.0.dev3" },
     { name = "tba-concrete-device-identity", specifier = "==0.4.0.dev3" },
-    { name = "tba-concrete-jose", specifier = "==0.4.0.dev3" },
+    { name = "tba-concrete-jose", specifier = "==0.4.0.dev4" },
     { name = "tba-concrete-mfa-factor", specifier = "==0.4.0.dev3" },
     { name = "tba-concrete-passwordless-credential", specifier = "==0.4.0.dev3" },
     { name = "tba-concrete-trust-federation-graph", specifier = "==0.4.0.dev3" },

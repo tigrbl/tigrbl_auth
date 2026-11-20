@@ -1,6 +1,6 @@
 [project]
 name = "tba-concrete-jose"
-version = "0.4.0.dev3"
+version = "0.4.0.dev4"
 readme = "README.md"
 description = "Deterministic provider-free JOSE behavior."
 requires-python = ">=3.10,<3.16"
@@ -18,12 +18,12 @@ classifiers = [
 ]
 license = "Apache-2.0"
 dependencies = [
-    "tba-contracts-identity==0.4.0.dev3",
-    "tba-primitives-identity==0.4.0.dev3",
-    "tba-bases-jose==0.4.0.dev3",
-    "tba-bases-encryption==0.4.0.dev3",
-    "tba-contracts-security-key-rotation-policy==0.1.1.dev1",
-    "tba-contracts-security-trust==0.1.1.dev1",
+    "tba-contracts-identity>=0.4.0.dev2,<=0.4.0.dev3",
+    "tba-primitives-identity>=0.4.0.dev2,<=0.4.0.dev3",
+    "tba-bases-jose>=0.4.0.dev2,<=0.4.0.dev3",
+    "tba-bases-encryption>=0.4.0.dev2,<=0.4.0.dev3",
+    "tba-contracts-security-key-rotation-policy>=0.1.0,<=0.1.1.dev1",
+    "tba-contracts-security-trust>=0.1.0,<=0.1.1.dev1",
 ]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
