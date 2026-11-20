@@ -4,31 +4,27 @@ on:
   pull_request:
     paths:
       - ".github/workflows/package-node-matrix.yml"
+      - ".npmrc"
       - "package.json"
       - "package-lock.json"
+      - "pkgs/075-clients/**"
       - "pkgs/100-uix-core/**"
       - "pkgs/105-ui/**"
+      - "scripts/package_ci.py"
+      - "tsconfig.json"
+      - "tsconfig.base.json"
+      - "vite.config.ts"
+      - "vitest.config.ts"
   push:
     branches:
       - master
-    paths:
-      - ".github/workflows/package-node-matrix.yml"
-      - "package.json"
-      - "package-lock.json"
-      - "pkgs/100-uix-core/**"
-      - "pkgs/105-ui/**"
   workflow_dispatch:
     inputs:
       package:
         description: Node package to test, or all.
         required: false
         default: all
-        type: choice
-        options:
-          - all
-          - "@tba/ui-administration"
-          - "@tba/ui-public"
-          - "@tba/client-oidc-relying-party"
+        type: string
       node-version:
         description: Optional single Node.js version to test.
         required: false
@@ -55,6 +51,11 @@ jobs:
       count: ${{ steps.matrix.outputs.count }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
       - name: Discover UIX packages
         uses: cobycloud/actions/actions/monorepo-discover@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
@@ -76,45 +77,13 @@ jobs:
           report-md: reports/node-package-metadata.md
       - name: Build package x Node matrix
         id: matrix
-        shell: bash
-        run: |
-          set -euo pipefail
-          selected_package="${{ inputs.package || 'all' }}"
-          selected_node="${{ inputs['node-version'] || 'all' }}"
-          node <<'NODE'
-          const fs = require("fs");
-          const path = require("path");
-
-          const selectedPackage = process.env.SELECTED_PACKAGE || "all";
-          const selectedNode = process.env.SELECTED_NODE || "all";
-          const nodeVersions = selectedNode === "all" ? ["22", "24", "26"] : [selectedNode];
-          const packageDirs = ["pkgs/105-ui/tba-ui-administration", "pkgs/105-ui/tba-ui-public", "pkgs/075-clients/tba-typescript-client-oidc-relying-party"];
-          const cells = [];
-
-          for (const packagePath of packageDirs) {
-            const manifest = JSON.parse(fs.readFileSync(path.join(packagePath, "package.json"), "utf8"));
-            if (selectedPackage !== "all" && manifest.name !== selectedPackage) {
-              continue;
-            }
-            for (const nodeVersion of nodeVersions) {
-              cells.push({
-                name: manifest.name,
-                version: manifest.version,
-                path: packagePath,
-                workspace: manifest.name,
-                node_version: nodeVersion,
-                cell_id: `${manifest.name.replace(/^@/, "").replaceAll("/", "-")}-node${nodeVersion}`,
-                test_command: `npm run test -w ${manifest.name}`,
-                build_command: `npm run build -w ${manifest.name}`
-              });
-            }
-          }
-
-          fs.appendFileSync(process.env.GITHUB_OUTPUT, `matrix=${JSON.stringify(cells)}\ncount=${cells.length}\n`);
-          NODE
         env:
-          SELECTED_PACKAGE: ${{ inputs.package || 'all' }}
-          SELECTED_NODE: ${{ inputs['node-version'] || 'all' }}
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          CI_PACKAGE: ${{ inputs.package || 'all' }}
+          CI_VERSION: ${{ inputs['node-version'] || 'all' }}
+        run: >-
+          uv run --no-project python scripts/package_ci.py node
+          --base "$PR_BASE" --package "$CI_PACKAGE" --version "$CI_VERSION"
 
   isolated-node-package-tests:
     needs: discover-node-matrix
@@ -129,6 +98,8 @@ jobs:
       - uses: actions/checkout@v6
       - name: Run isolated UIX package checks
         uses: cobycloud/actions/actions/js-framework-ci@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
+        env:
+          TBA_WORKSPACE: ${{ matrix.package.name }}
         with:
           framework: vite
           node-version: ${{ matrix.package.node_version }}
@@ -136,7 +107,7 @@ jobs:
           install-command: npm ci
           lint-command: ""
           typecheck-command: ""
-          test-command: ${{ matrix.package.test_command }}
-          build-command: ${{ matrix.package.build_command }}
+          test-command: npm run test --if-present -w "$TBA_WORKSPACE"
+          build-command: npm run build --if-present -w "$TBA_WORKSPACE"
           cache: npm
           cache-dependency-path: package-lock.json
