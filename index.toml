@@ -1967,7 +1967,7 @@ name = "tba-provider-authenticator-api-key-local"
 path = "pkgs/020-providers/tba-provider-authenticator-api-key-local"
 layer = "020-providers"
 order = "00"
-local_dependencies = ["tba-bases-authenticator", "tba-contracts-identity"]
+local_dependencies = ["tba-bases-authenticator", "tba-contracts-identity", "tba-primitives-identity"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2023,7 +2023,7 @@ name = "tba-provider-authenticator-service-key-local"
 path = "pkgs/020-providers/tba-provider-authenticator-service-key-local"
 layer = "020-providers"
 order = "00"
-local_dependencies = ["tba-bases-authenticator", "tba-contracts-identity"]
+local_dependencies = ["tba-bases-authenticator", "tba-contracts-identity", "tba-primitives-identity"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -2599,7 +2599,7 @@ name = "tba-runtime-relying-party-session"
 path = "pkgs/030-storage-runtime/tba-runtime-relying-party-session"
 layer = "030-storage-runtime"
 order = "00"
-local_dependencies = []
+local_dependencies = ["tba-contracts-identity", "tba-provider-security-proof-pkce"]
 same_layer_dependencies = []
 
 [[packages]]
@@ -3191,7 +3191,7 @@ name = "tba-protocol-oidc-relying-party"
 path = "pkgs/050-protocols/tba-protocol-oidc-relying-party"
 layer = "050-protocols"
 order = "03"
-local_dependencies = ["tba-concrete-claim-audience", "tba-concrete-claim-authentication-context", "tba-concrete-claim-authentication-methods", "tba-concrete-claim-authentication-time", "tba-concrete-claim-authorized-party", "tba-concrete-claim-expiration", "tba-concrete-claim-issued-at", "tba-concrete-claim-issuer", "tba-concrete-claim-nonce", "tba-concrete-claim-subject", "tba-contracts-identity", "tba-protocol-oidc", "tba-provider-security-proof-pkce"]
+local_dependencies = ["tba-concrete-claim-audience", "tba-concrete-claim-authentication-context", "tba-concrete-claim-authentication-methods", "tba-concrete-claim-authentication-time", "tba-concrete-claim-authorized-party", "tba-concrete-claim-expiration", "tba-concrete-claim-issued-at", "tba-concrete-claim-issuer", "tba-concrete-claim-nonce", "tba-concrete-claim-subject", "tba-concrete-jws", "tba-contracts-identity", "tba-protocol-oidc", "tba-provider-jose-cryptography", "tba-provider-security-proof-pkce"]
 same_layer_dependencies = ["tba-protocol-oidc"]
 
 [[packages]]
@@ -3359,7 +3359,7 @@ name = "tba-plugin-tigrbl"
 path = "pkgs/060-runtime/tba-plugin-tigrbl"
 layer = "060-runtime"
 order = "03"
-local_dependencies = ["tba-runtime-identity", "tba-server-identity"]
+local_dependencies = ["tba-contracts-authorization", "tba-runtime-identity", "tba-server-identity"]
 same_layer_dependencies = ["tba-runtime-identity", "tba-server-identity"]
 
 [[packages]]
@@ -3559,7 +3559,7 @@ name = "tba-router-relying-party-session"
 path = "pkgs/080-routers/tba-router-relying-party-session"
 layer = "080-routers"
 order = "00"
-local_dependencies = ["tba-protocol-oidc-relying-party", "tba-runtime-relying-party-session"]
+local_dependencies = ["tba-concrete-jws", "tba-protocol-oidc-relying-party", "tba-provider-jose-cryptography", "tba-runtime-relying-party-session"]
 same_layer_dependencies = []
 
 [[packages]]

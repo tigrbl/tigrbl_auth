@@ -26,7 +26,6 @@ from tigrbl import (
     Column,
     HttpJsonRpcBindingSpec,
     HttpRestBindingSpec,
-    OperationSecurity,
     Table,
     TableProfileSpec,
     TigrblApp,
@@ -37,6 +36,8 @@ from tigrbl.factories.engine import mem
 
 @pytest.mark.asyncio
 async def test_policy_is_enforced_through_bound_rest_and_rpc():
+    security_specs = pytest.importorskip("tigrbl_core._spec.operation_security")
+    OperationSecurity = security_specs.OperationSecurity
     notes = {
         "alice-note": ("team", "alice", "A"),
         "bob-note": ("team", "bob", "B"),
