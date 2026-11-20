@@ -1,0 +1,3 @@
+import tba_provider_bimi_mark_certificate
+
+print(tba_provider_bimi_mark_certificate.__name__)

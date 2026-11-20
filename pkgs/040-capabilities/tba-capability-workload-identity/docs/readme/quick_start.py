@@ -1,0 +1,3 @@
+from tba_capability_workload_identity import WorkloadIdentityCapability
+
+assert callable(WorkloadIdentityCapability)

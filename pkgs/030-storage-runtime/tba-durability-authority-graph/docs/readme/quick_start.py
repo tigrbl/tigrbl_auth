@@ -1,0 +1,3 @@
+from tba_durability_authority_graph import AuthorityGraphTable
+
+assert callable(AuthorityGraphTable)

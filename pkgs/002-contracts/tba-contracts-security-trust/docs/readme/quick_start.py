@@ -1,0 +1,3 @@
+from tba_contracts_security_trust import AcrEvaluationRequest
+
+assert callable(AcrEvaluationRequest)

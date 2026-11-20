@@ -1,0 +1,3 @@
+from tba_concrete_mdoc_credential import MdocCredential
+
+assert callable(MdocCredential)

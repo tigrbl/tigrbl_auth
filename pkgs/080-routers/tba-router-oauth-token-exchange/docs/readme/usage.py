@@ -1,0 +1,3 @@
+from tba_router_oauth_token_exchange import TokenExchangeTarget
+
+assert callable(TokenExchangeTarget)

@@ -1,0 +1,3 @@
+from tba_bases_security_event import SecurityEventTransmitterBase
+
+assert callable(SecurityEventTransmitterBase)

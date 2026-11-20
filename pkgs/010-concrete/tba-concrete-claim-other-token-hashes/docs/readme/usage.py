@@ -1,0 +1,3 @@
+from tba_concrete_claim_other_token_hashes import OtherTokenHashesClaim
+
+assert callable(OtherTokenHashesClaim)

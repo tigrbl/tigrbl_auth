@@ -44,6 +44,11 @@ def header(readme: Path, original: str, root_path: Path | None = None) -> str:
     publishable = False
     if python:
         document = tomllib.loads(path.read_text(encoding="utf-8"))
+        if document.get("tool", {}).get("readme_standards"):
+            from readme_standards.config import load_package
+            from readme_standards.render import render
+
+            return render(original, load_package(folder))
         meta = document["project"]
         publishable = document.get("tool", {}).get("uv", {}).get("package", True)
         requirement = meta.get("requires-python")

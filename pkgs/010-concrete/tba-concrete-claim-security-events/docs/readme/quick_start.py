@@ -1,0 +1,3 @@
+from tba_concrete_claim_security_events import SecurityEventsClaim
+
+assert callable(SecurityEventsClaim)

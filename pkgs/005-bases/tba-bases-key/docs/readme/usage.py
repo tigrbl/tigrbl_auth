@@ -1,0 +1,3 @@
+from tba_bases_key import KeyLifecycleProviderBase
+
+assert callable(KeyLifecycleProviderBase)

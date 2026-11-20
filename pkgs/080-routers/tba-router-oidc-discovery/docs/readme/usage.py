@@ -1,0 +1,3 @@
+from tba_router_oidc_discovery import build_oidc_discovery_routers
+
+assert callable(build_oidc_discovery_routers)

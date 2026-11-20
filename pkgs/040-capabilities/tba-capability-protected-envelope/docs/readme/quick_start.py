@@ -1,0 +1,3 @@
+from tba_capability_protected_envelope import ProtectedEnvelopeCapability
+
+assert callable(ProtectedEnvelopeCapability)

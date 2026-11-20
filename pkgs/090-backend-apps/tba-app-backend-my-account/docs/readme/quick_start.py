@@ -1,0 +1,3 @@
+from tba_app_backend_my_account import MyAccountMutationOut
+
+assert callable(MyAccountMutationOut)

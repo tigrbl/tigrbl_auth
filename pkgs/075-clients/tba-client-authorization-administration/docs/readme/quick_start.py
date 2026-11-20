@@ -1,0 +1,3 @@
+from tba_client_authorization_administration import AuthorizationAdminClient
+
+assert callable(AuthorizationAdminClient)

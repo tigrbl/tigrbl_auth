@@ -1,0 +1,3 @@
+from tba_capability_artifact_processing import ProtocolArtifactProcessingCapability
+
+assert callable(ProtocolArtifactProcessingCapability)

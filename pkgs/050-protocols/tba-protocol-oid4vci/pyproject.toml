@@ -4,18 +4,7 @@ version = "0.4.0.dev3"
 readme = "README.md"
 description = "OpenID for Verifiable Credential Issuance protocol package."
 requires-python = ">=3.10,<3.16"
-classifiers = [
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
-    "Programming Language :: Python :: 3.14",
-    "Programming Language :: Python :: 3.15",
-    "Intended Audience :: Developers",
-    "Programming Language :: Python :: 3",
-    "Development Status :: 3 - Alpha",
-    "Typing :: Typed",
-]
+classifiers = ["Programming Language :: Python :: 3.10", "Programming Language :: Python :: 3.11", "Programming Language :: Python :: 3.12", "Programming Language :: Python :: 3.13", "Programming Language :: Python :: 3.14", "Programming Language :: Python :: 3.15", "Intended Audience :: Developers", "Programming Language :: Python :: 3", "Development Status :: 3 - Alpha", "Typing :: Typed"]
 license = "Apache-2.0"
 dependencies = ["tba-concrete-claim-audience==0.4.0.dev3", "tba-concrete-claim-issued-at==0.4.0.dev3", "tba-concrete-claim-nonce==0.4.0.dev3", "tba-capability-digital-credential-issuance==0.4.0.dev3", "tba-contracts-identity==0.4.0.dev3"]
 license-files = ["LICENSE", "NOTICE"]
@@ -38,3 +27,55 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 packages = [{ include = "tba_protocol_oid4vci", from = "src" }]
+
+[tool.readme_standards]
+policy = "package-guide-v1"
+readme = "README.md"
+brand = "tigrbl-auth"
+brand_catalog = "../../../tools/readme/brands.toml"
+repository = "https://github.com/tigrbl/tigrbl_auth"
+ref = "master"
+package_path = "pkgs/050-protocols/tba-protocol-oid4vci"
+layer = "050-protocols"
+lifecycle = "active"
+license_file = "LICENSE"
+notice_file = "NOTICE"
+
+[tool.readme_standards.distributions.pypi]
+name = "tba-protocol-oid4vci"
+published = true
+
+[tool.readme_standards.examples.quick_start]
+source = "docs/readme/quick_start.py"
+test = "docs/readme/test_examples.py"
+language = "python"
+expected_exit_code = 0
+
+[tool.readme_standards.examples.usage]
+source = "docs/readme/usage.py"
+test = "docs/readme/test_examples.py"
+language = "python"
+expected_exit_code = 0
+
+[tool.readme_standards.statuses.readme]
+label = "CI gate"
+url = "https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"
+
+[tool.readme_standards.statuses.tests]
+label = "example source"
+url = "https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-oid4vci/docs/readme/test_examples.py"
+
+[tool.readme_standards.statuses.certification]
+label = "not certified"
+url = "https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-oid4vci/README.md#certification-status"
+
+[tool.readme_standards.statuses.governance]
+label = "repository policy"
+url = "https://github.com/tigrbl/tigrbl_auth/blob/master/tools/readme/POLICY.md"
+
+[tool.readme_standards.statuses.evidence]
+label = "source and CI"
+url = "https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"
+
+[dependency-groups]
+dev = ["readme-standards==0.1.1; python_version >= \"3.11\""]

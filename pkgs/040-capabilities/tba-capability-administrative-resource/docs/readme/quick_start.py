@@ -1,0 +1,3 @@
+from tba_capability_administrative_resource import AdminAuditListOperation
+
+assert callable(AdminAuditListOperation)

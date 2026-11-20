@@ -1,0 +1,3 @@
+from tba_router_oauth_introspection import CallerAuthorizer
+
+assert callable(CallerAuthorizer)

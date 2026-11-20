@@ -1,0 +1,3 @@
+from tba_contracts_security_key_rotation_policy import KeyRotationPolicyVersion
+
+assert callable(KeyRotationPolicyVersion)

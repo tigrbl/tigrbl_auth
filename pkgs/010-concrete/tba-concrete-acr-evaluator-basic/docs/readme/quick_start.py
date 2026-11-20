@@ -1,0 +1,3 @@
+from tba_concrete_acr_evaluator_basic import BasicAcrEvaluator
+
+assert callable(BasicAcrEvaluator)

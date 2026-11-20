@@ -1,0 +1,3 @@
+from tba_runtime_identity import CapabilityRegistry
+
+assert callable(CapabilityRegistry)

@@ -1,0 +1,3 @@
+from tba_provider_token_introspection import IntrospectionClient
+
+assert callable(IntrospectionClient)

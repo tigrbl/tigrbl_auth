@@ -1,0 +1,3 @@
+from tba_concrete_claim_verified_claims import VerifiedClaimsClaim
+
+assert callable(VerifiedClaimsClaim)

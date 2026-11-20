@@ -17,22 +17,7 @@ keywords = [
     "deployment-profile",
     "iam",
 ]
-classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Intended Audience :: Developers",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3 :: Only",
-    "Typing :: Typed",
-    "Topic :: Internet :: WWW/HTTP",
-    "Topic :: Security",
-    "Topic :: Software Development :: Libraries :: Python Modules",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
-    "Programming Language :: Python :: 3.14",
-    "Programming Language :: Python :: 3.15",
-]
+classifiers = ["Development Status :: 3 - Alpha", "Intended Audience :: Developers", "Programming Language :: Python :: 3", "Programming Language :: Python :: 3 :: Only", "Typing :: Typed", "Topic :: Internet :: WWW/HTTP", "Topic :: Security", "Topic :: Software Development :: Libraries :: Python Modules", "Programming Language :: Python :: 3.10", "Programming Language :: Python :: 3.11", "Programming Language :: Python :: 3.12", "Programming Language :: Python :: 3.13", "Programming Language :: Python :: 3.14", "Programming Language :: Python :: 3.15"]
 dependencies = ["cryptography>=45", "tba-bases-certificate==0.4.0.dev3", "tba-concrete-certificate-x509==0.4.0.dev3", "tba-contracts-security-trust==0.1.1.dev1", "tba-profile-workload-credential-wimse-wic==0.4.0.dev3", "tba-profile-workload-credential-wimse-wit==0.4.0.dev5", "tba-profile-workload-proof-wimse-wpt==0.4.0.dev5", "tba-protocol-workload-wimse-identifier==0.4.0.dev3", "tba-provider-jose-cryptography==0.4.0.dev4", "tba-profile-workload-authentication-wimse-mtls==0.4.0.dev3", "tba-provider-secret-hashing-bcrypt==0.1.1.dev1", "tigrbl==0.4.5.dev8", "tba-contracts-identity==0.4.0.dev3", "tba-provider-identity-jose==0.4.0.dev3", "tba-storage-core==0.4.0.dev5", "tba-runtime-identity-storage==0.4.0.dev3", "tba-protocol-webauthn==0.4.0.dev3", "tba-protocol-cwt==0.4.0.dev4", "tba-profile-credential-vc-jose-cose==0.4.0.dev3", "tba-protocol-identity-did-core==0.4.0.dev3", "tba-capability-protected-envelope==0.4.0.dev3", "tba-protocol-security-cose==0.4.0.dev3", "tba-protocol-security-jws==0.4.0.dev3", "tba-profile-workload-credential-cwt-svid-extension==0.4.0.dev3", "tba-capability-public-key-registration==0.4.0.dev3", "tba-capability-public-key-authentication==0.4.0.dev3", "tba-capability-public-key-credential-management==0.4.0.dev3"]
 license-files = ["LICENSE", "NOTICE"]
 
@@ -61,3 +46,55 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry]
 packages = [{ include = "tba_runtime_identity", from = "src" }]
 include = ["src/tba_runtime_identity/profiles/*.yaml"]
+
+[tool.readme_standards]
+policy = "package-guide-v1"
+readme = "README.md"
+brand = "tigrbl-auth"
+brand_catalog = "../../../tools/readme/brands.toml"
+repository = "https://github.com/tigrbl/tigrbl_auth"
+ref = "master"
+package_path = "pkgs/060-runtime/tba-runtime-identity"
+layer = "060-runtime"
+lifecycle = "active"
+license_file = "LICENSE"
+notice_file = "NOTICE"
+
+[tool.readme_standards.distributions.pypi]
+name = "tba-runtime-identity"
+published = true
+
+[tool.readme_standards.examples.quick_start]
+source = "docs/readme/quick_start.py"
+test = "docs/readme/test_examples.py"
+language = "python"
+expected_exit_code = 0
+
+[tool.readme_standards.examples.usage]
+source = "docs/readme/usage.py"
+test = "docs/readme/test_examples.py"
+language = "python"
+expected_exit_code = 0
+
+[tool.readme_standards.statuses.readme]
+label = "CI gate"
+url = "https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"
+
+[tool.readme_standards.statuses.tests]
+label = "example source"
+url = "https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/060-runtime/tba-runtime-identity/docs/readme/test_examples.py"
+
+[tool.readme_standards.statuses.certification]
+label = "not certified"
+url = "https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/060-runtime/tba-runtime-identity/README.md#certification-status"
+
+[tool.readme_standards.statuses.governance]
+label = "repository policy"
+url = "https://github.com/tigrbl/tigrbl_auth/blob/master/tools/readme/POLICY.md"
+
+[tool.readme_standards.statuses.evidence]
+label = "source and CI"
+url = "https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"
+
+[dependency-groups]
+dev = ["readme-standards==0.1.1; python_version >= \"3.11\""]

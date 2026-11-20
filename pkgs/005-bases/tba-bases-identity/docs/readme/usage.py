@@ -1,0 +1,3 @@
+from tba_bases_identity import SubjectIdentifierStrategyBase
+
+assert callable(SubjectIdentifierStrategyBase)

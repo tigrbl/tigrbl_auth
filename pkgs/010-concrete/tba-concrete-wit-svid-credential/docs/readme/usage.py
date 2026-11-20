@@ -1,0 +1,3 @@
+from tba_concrete_wit_svid_credential import WitSvidCredential
+
+assert callable(WitSvidCredential)

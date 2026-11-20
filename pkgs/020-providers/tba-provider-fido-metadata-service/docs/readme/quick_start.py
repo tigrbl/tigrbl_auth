@@ -1,0 +1,3 @@
+from tba_provider_fido_metadata_service import FidoMetadataServiceProvider
+
+assert callable(FidoMetadataServiceProvider)

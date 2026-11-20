@@ -25,6 +25,7 @@ def package_fixture(tmp_path):
     brand.write_bytes(b"\x89PNG\r\n\x1a\n")
     relative = Path("pkgs/002-contracts/tba-contracts-dns")
     shutil.copytree(ROOT / relative, tmp_path / relative)
+    shutil.copytree(ROOT / "tools/readme", tmp_path / "tools/readme")
     return tmp_path, tmp_path / relative
 
 
@@ -56,12 +57,12 @@ def test_download_badge_cannot_count_another_project(package_fixture):
     readme = package / "README.md"
     readme.write_text(
         readme.read_text().replace(
-            "static.pepy.tech/badge/tba-contracts-dns/month",
-            "static.pepy.tech/badge/tba-auth/month",
+            "img.shields.io/pypi/dm/tba-contracts-dns",
+            "img.shields.io/pypi/dm/tba-auth",
         )
     )
     assert any(
-        "download counter" in failure for failure in standards.verify(root)["failures"]
+        "generated.stale" in failure for failure in standards.verify(root)["failures"]
     )
 
 
@@ -75,7 +76,7 @@ def test_hit_badge_cannot_count_another_readme(package_fixture):
         )
     )
     assert any(
-        "hit counter" in failure for failure in standards.verify(root)["failures"]
+        "generated.stale" in failure for failure in standards.verify(root)["failures"]
     )
 
 

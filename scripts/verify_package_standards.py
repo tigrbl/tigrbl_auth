@@ -26,7 +26,7 @@ class Fragment(HTMLParser):
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         values = dict(attrs)
-        if tag not in {"p", "a", "img"}:
+        if tag not in {"p", "a", "img", "strong"}:
             self.errors.append(f"unsupported branding tag {tag}")
         if tag == "img":
             if not values.get("src") or not values.get("alt"):
@@ -112,6 +112,24 @@ def verify(root: Path = ROOT) -> dict:
                 errors.append("PyPI URL does not identify this package")
             if any(c.startswith("License ::") for c in project.get("classifiers", [])):
                 errors.append("deprecated license classifier remains")
+        if python and document.get("tool", {}).get("readme_standards"):
+            from readme_standards.check import check_package
+            from readme_standards.render import region_spans
+
+            errors.extend(str(issue) for issue in check_package(folder))
+            if (folder / "README.md").is_file():
+                text = (folder / "README.md").read_text(encoding="utf-8")
+                for region, start, end in region_spans(text):
+                    if region == "branding":
+                        fragment = Fragment()
+                        fragment.feed(text[start:end])
+                        errors.extend(fragment.errors)
+                        if fragment.stack:
+                            errors.append("branding fragment has unclosed tags")
+                        counters.extend(image["src"] for image in fragment.images
+                                        if image.get("alt", "").startswith("README hits:"))
+            failures.extend(f"{relative}: {error}" for error in errors)
+            continue
         if (folder / "README.md").is_file():
             text = (folder / "README.md").read_text(encoding="utf-8")
             if text.count(START) != 1 or text.count(END) != 1:

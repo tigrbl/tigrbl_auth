@@ -1,0 +1,3 @@
+from tba_provider_authenticator_dpop_proof import DpopProofAuthenticator
+
+assert callable(DpopProofAuthenticator)

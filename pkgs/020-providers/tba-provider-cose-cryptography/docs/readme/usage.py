@@ -1,0 +1,3 @@
+from tba_provider_cose_cryptography import CoseSign1CryptographyProvider
+
+assert callable(CoseSign1CryptographyProvider)

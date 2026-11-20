@@ -1,0 +1,3 @@
+from tba_concrete_claim_subject_identifiers import SubjectIdentifiersClaim
+
+assert callable(SubjectIdentifiersClaim)

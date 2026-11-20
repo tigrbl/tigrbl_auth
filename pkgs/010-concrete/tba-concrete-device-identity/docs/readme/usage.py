@@ -1,0 +1,3 @@
+from tba_concrete_device_identity import DeviceIdentity
+
+assert callable(DeviceIdentity)

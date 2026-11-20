@@ -1,0 +1,3 @@
+from tba_capability_identity_administration import IdentityAdministrationCapability
+
+assert callable(IdentityAdministrationCapability)

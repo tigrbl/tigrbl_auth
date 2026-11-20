@@ -1,0 +1,3 @@
+from tba_provider_security_dpop_cnf_binding_validator import DpopCnfBindingValidator
+
+assert callable(DpopCnfBindingValidator)

@@ -1,0 +1,3 @@
+from tba_capability_tenant_administration import TenantAdministrationCapability
+
+assert callable(TenantAdministrationCapability)
