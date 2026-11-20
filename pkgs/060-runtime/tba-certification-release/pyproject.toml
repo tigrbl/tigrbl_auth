@@ -13,7 +13,21 @@ keywords = [
     "provenance",
     "runtime",
 ]
-classifiers = ["Development Status :: 3 - Alpha", "Intended Audience :: Developers", "Programming Language :: Python :: 3", "Programming Language :: Python :: 3 :: Only", "Typing :: Typed", "Topic :: Security", "Topic :: Software Development :: Libraries :: Python Modules", "Programming Language :: Python :: 3.10", "Programming Language :: Python :: 3.11", "Programming Language :: Python :: 3.12", "Programming Language :: Python :: 3.13", "Programming Language :: Python :: 3.14", "Programming Language :: Python :: 3.15"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Typing :: Typed",
+    "Topic :: Security",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
+]
 dependencies = ["tba-contracts-identity==0.4.0.dev3", "tba-concrete-machine-identity==0.4.0.dev3", "tba-runtime-identity==0.4.0.dev4", "tba-contracts-release==0.1.1.dev1"]
 license-files = ["LICENSE", "NOTICE"]
 

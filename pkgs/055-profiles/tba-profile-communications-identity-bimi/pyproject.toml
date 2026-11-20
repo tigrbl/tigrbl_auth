@@ -8,7 +8,17 @@ license = "Apache-2.0"
 dependencies = ["cryptography>=46", "tba-contracts-security-trust==0.1.1.dev1", "tba-contracts-dns==0.4.0.dev3", "tba-protocol-bimi==0.4.0.dev3", "tba-protocol-dmarc==0.4.0.dev3"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
-classifiers = ["Intended Audience :: Developers", "Programming Language :: Python :: 3", "Development Status :: 3 - Alpha", "Programming Language :: Python :: 3.10", "Programming Language :: Python :: 3.11", "Programming Language :: Python :: 3.12", "Programming Language :: Python :: 3.13", "Programming Language :: Python :: 3.14", "Programming Language :: Python :: 3.15"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
+]
 
 [project.optional-dependencies]
 workflow = ["tba-capability-communications-identity==0.4.0.dev3"]

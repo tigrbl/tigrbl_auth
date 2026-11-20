@@ -8,7 +8,18 @@ license = "Apache-2.0"
 dependencies = ["tigrbl==0.4.5.dev8", "tba-contracts-replay==0.4.0.dev3", "tba-profile-workload-proof-wimse-wpt==0.4.0.dev5", "tba-router-wpt-verification==0.4.0.dev3"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
-classifiers = ["Intended Audience :: Developers", "Programming Language :: Python :: 3", "Development Status :: 3 - Alpha", "Typing :: Typed", "Programming Language :: Python :: 3.10", "Programming Language :: Python :: 3.11", "Programming Language :: Python :: 3.12", "Programming Language :: Python :: 3.13", "Programming Language :: Python :: 3.14", "Programming Language :: Python :: 3.15"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Development Status :: 3 - Alpha",
+    "Typing :: Typed",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
+]
 
 [[project.authors]]
 name = "Jacob Stewart"

@@ -5,7 +5,18 @@ license = "Apache-2.0"
 readme = "README.md"
 description = "Standalone draft authorization context (actx) claim implementation."
 requires-python = ">=3.10,<3.16"
-classifiers = ["Programming Language :: Python :: 3.10", "Programming Language :: Python :: 3.11", "Programming Language :: Python :: 3.12", "Programming Language :: Python :: 3.13", "Programming Language :: Python :: 3.14", "Programming Language :: Python :: 3.15", "Intended Audience :: Developers", "Programming Language :: Python :: 3", "Development Status :: 3 - Alpha", "Typing :: Typed"]
+classifiers = [
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Development Status :: 3 - Alpha",
+    "Typing :: Typed",
+]
 dependencies = ["tba-primitives-identity==0.4.0.dev3", "tba-bases-claim==0.4.0.dev3"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
