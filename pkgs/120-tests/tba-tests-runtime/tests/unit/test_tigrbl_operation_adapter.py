@@ -37,7 +37,12 @@ from tigrbl.factories.engine import mem
 
 @pytest.mark.asyncio
 async def test_policy_is_enforced_through_bound_rest_and_rpc():
-    notes = {"alice-note": ("alice", "A"), "bob-note": ("bob", "B")}
+    notes = {
+        "alice-note": ("team", "alice", "A"),
+        "bob-note": ("team", "bob", "B"),
+        "foreign-note": ("other-team", "alice", "foreign"),
+    }
+    initial_notes = notes.copy()
     action = "proof.note.update"
 
     class Note(Table):
@@ -69,8 +74,8 @@ async def test_policy_is_enforced_through_bound_rest_and_rpc():
         )
         async def edit(cls, ctx):
             payload = ctx["payload"]
-            owner, _ = notes[payload["id"]]
-            notes[payload["id"]] = (owner, payload["text"])
+            tenant, owner, _ = notes[payload["id"]]
+            notes[payload["id"]] = (tenant, owner, payload["text"])
             return {"saved": payload["id"]}
 
         @op_ctx(
@@ -80,8 +85,11 @@ async def test_policy_is_enforced_through_bound_rest_and_rpc():
             security=OperationSecurity("proof.note.list", "note"),
         )
         async def owned(cls, ctx):
-            owner = ctx["operation_principal"].principal.principal_id
-            return sorted(key for key, row in notes.items() if row[0] == owner)
+            principal = ctx["operation_principal"].principal
+            return sorted(
+                key for key, (tenant, owner, _) in notes.items()
+                if (tenant, owner) == (principal.tenant_id, principal.principal_id)
+            )
 
         @op_ctx(
             alias="publish",
@@ -102,6 +110,7 @@ async def test_policy_is_enforced_through_bound_rest_and_rpc():
         digest_key("editor-key"): {"audience": "proof"},
         digest_key("list-key"): {"audience": "proof", "actions": frozenset({"proof.note.list"})},
         digest_key("wrong-audience"): {"audience": "different"},
+        digest_key("same-id-service"): {"audience": "proof", "principal_type": "service"},
         digest_key("step-up-key"): {"audience": "proof", "acr": "mfa"},
     }
     credentials = ApiKeyAuthenticationCapability(
@@ -120,7 +129,8 @@ async def test_policy_is_enforced_through_bound_rest_and_rpc():
             return None
         key = result.credential_record
         return OperationPrincipal(
-            alice, key["audience"], AuthenticationContext(acr=key.get("acr")),
+            replace(alice, principal_type=key.get("principal_type", "user")),
+            key["audience"], AuthenticationContext(acr=key.get("acr")),
             actions=key.get("actions"),
         )
 
@@ -129,7 +139,7 @@ async def test_policy_is_enforced_through_bound_rest_and_rpc():
             note_id = ctx["payload"].get("id")
             if not isinstance(note_id, str) or note_id not in notes:
                 return None
-            return ResourceRef("note", note_id, "team")
+            return ResourceRef("note", note_id, notes[note_id][0])
         return ResourceRef("note", principal.principal_id, "team")
 
     catalog = app.operation_security_catalog()
@@ -170,11 +180,14 @@ async def test_policy_is_enforced_through_bound_rest_and_rpc():
         OperationAuthorizationAdapter("proof", authenticate, resource, load_policy).install(app)
         assert (await client.post("/proof/edit", json=mine)).status_code == 401
         assert (await client.post("/proof/edit", json=mine, headers=bearer("wrong-audience"))).status_code == 401
+        assert (await client.post("/proof/edit", json=mine, headers=bearer("same-id-service"))).status_code == 403
         assert (await client.post("/proof/edit", json=mine, headers=bearer("list-key"))).status_code == 403
         assert (await client.post("/proof/edit", json=other, headers=editor)).status_code == 403
-        assert notes == {"alice-note": ("alice", "A"), "bob-note": ("bob", "B")}
+        foreign = {"id": "foreign-note", "text": "denied"}
+        assert (await client.post("/proof/edit", json=foreign, headers=editor)).status_code == 403
+        assert notes == initial_notes
         assert (await client.post("/proof/edit", json=mine, headers=editor)).is_success
-        assert notes["alice-note"] == ("alice", "saved")
+        assert notes["alice-note"] == ("team", "alice", "saved")
         assert (await client.get("/proof/owned?owner=bob", headers=editor)).json() == ["alice-note"]
         assert (await client.post("/proof/publish", headers=editor)).status_code == 403
         assert (await client.post("/proof/publish", headers=bearer("step-up-key"))).json() == {"published": True}
@@ -189,6 +202,6 @@ async def test_policy_is_enforced_through_bound_rest_and_rpc():
         grants[0] = replace(grants[0], revoked_at=datetime.now(timezone.utc))
         assert (await client.post("/proof/edit", json=mine, headers=editor)).status_code == 403
         assert "error" in await rpc(mine)
-        assert notes["bob-note"] == ("bob", "B")
+        assert notes["bob-note"] == initial_notes["bob-note"]
         published_digest = "old-catalog"
         assert (await client.get("/proof/owned", headers=editor)).status_code == 503
