@@ -2,7 +2,7 @@
   "policy": "package-guide-v1",
   "checker": "readme-standards==0.1.1",
   "scope": "Active PEP 621 Python projects; archived and retired projects excluded. No runtime releases.",
-  "package_count": 519,
+  "package_count": 520,
   "validation_limits": "Structure, managed fragments, source compilation and referenced files. External APIs and all provider workflows are not certified.",
   "packages": [
     {
@@ -1466,6 +1466,13 @@
       "manifest": "pkgs/010-concrete/tba-concrete-machine-identity/pyproject.toml",
       "before_sha256": "916bf6d372728f9dba395487ead81d24d4299d1699661f14ffd807cb09b00b27",
       "after_sha256": "7a22ad89cf861605429ffe621819b2641d20a9359ac89d3df34326002adbb6d7",
+      "example_origin": "existing README Python example"
+    },
+    {
+      "name": "tba-concrete-mcp-delegation",
+      "manifest": "pkgs/010-concrete/tba-concrete-mcp-delegation/pyproject.toml",
+      "before_sha256": "dbec569e5dc259e5101fdbf23ad868bf577af1c94b39977936169157827d7e55",
+      "after_sha256": "44ab61ca72205107714f4c7240fc28738502aa4773831df6cf3fffc60810f585",
       "example_origin": "existing README Python example"
     },
     {

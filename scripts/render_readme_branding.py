@@ -203,6 +203,16 @@ def main() -> int:
         if not readme.is_file():
             parser.error(f"README is missing: {readme.relative_to(ROOT)}")
         original = readme.read_text(encoding="utf-8")
+        manifest = readme.parent / "pyproject.toml"
+        if manifest.is_file() and tomllib.loads(manifest.read_text("utf-8")).get(
+            "tool", {}
+        ).get("readme_standards"):
+            updated = header(readme, original)
+            if updated != original:
+                stale.append(readme.relative_to(ROOT))
+                if not args.check:
+                    readme.write_text(updated, encoding="utf-8")
+            continue
         before, start, after = original.partition(START)
         _, end, rest = after.partition(END)
         if not (start and end) or START in after or END in rest or END in before:

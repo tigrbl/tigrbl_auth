@@ -1,0 +1,20 @@
+{
+  "name": "@tba/ui-app-connections",
+  "version": "0.4.0-dev.1",
+  "description": "React controls for TbA app consent and owned bot permissions.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tigrbl/tigrbl_auth.git",
+    "directory": "pkgs/105-ui/tba-ui-app-connections"
+  },
+  "publishConfig": { "access": "public" },
+  "files": ["dist", "README.md", "LICENSE", "NOTICE"],
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "types": "./dist/index.d.ts",
+  "scripts": { "build": "tsc", "test": "tsc --noEmit" },
+  "peerDependencies": { "react": "^19.0.0" },
+  "engines": { "node": ">=22" },
+  "devDependencies": { "@types/react": "^19.0.0", "typescript": "~5.8.2" }
+}
