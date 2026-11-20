@@ -43,6 +43,10 @@ jobs:
       - uses: astral-sh/setup-uv@v6
         with:
           python-version: "3.12"
+      - name: Install Node for the discovery and metadata actions
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
       - name: Discover UIX packages
         uses: cobycloud/actions/actions/monorepo-discover@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
