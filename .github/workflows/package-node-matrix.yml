@@ -1,20 +1,7 @@
 name: package-node-matrix
 
 on:
-  pull_request:
-    paths:
-      - ".github/workflows/package-node-matrix.yml"
-      - ".npmrc"
-      - "package.json"
-      - "package-lock.json"
-      - "pkgs/075-clients/**"
-      - "pkgs/100-uix-core/**"
-      - "pkgs/105-ui/**"
-      - "scripts/package_ci.py"
-      - "tsconfig.json"
-      - "tsconfig.base.json"
-      - "vite.config.ts"
-      - "vitest.config.ts"
+  workflow_call:
   push:
     branches:
       - master

@@ -1,18 +1,7 @@
 name: package-python-matrix
 
 on:
-  pull_request:
-    paths:
-      - ".github/workflows/package-python-matrix.yml"
-      - "pkgs/**"
-      - "pyproject.toml"
-      - "uv.lock"
-      - "conftest.py"
-      - "tox.ini"
-      - "tests/**"
-      - "scripts/monorepo_release.py"
-      - "scripts/package_ci.py"
-      - "scripts/test_package_ci.py"
+  workflow_call:
   push:
     branches:
       - master
