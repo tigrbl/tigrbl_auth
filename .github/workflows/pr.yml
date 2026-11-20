@@ -1,19 +1,17 @@
+# Call trusted reusable workflow refs so the restricted runner group can authenticate jobs.
+# Fallback definitions are immutable; the checkout still tests the pull request merge revision.
 name: pr
-
 on:
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
-
 permissions:
   contents: read
-
 concurrency:
-  group: pr-${{ github.event.pull_request.number }}
+  group: pull-request-ci-${{ github.event.pull_request.number }}
   cancel-in-progress: true
-
 jobs:
-  quality:
-    uses: ./.github/workflows/_quality.yml
+  quality-reviewed:
+    if: ${{ github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository }}
+    uses: tigrbl/tigrbl_auth/.github/workflows/_quality.yml@docs/readme-standards-20261119
     permissions:
       actions: read
       contents: read
@@ -23,11 +21,51 @@ jobs:
       python-version: '3.11'
       run-dependency-review: true
       run-codeql: true
-
-  contracts:
-    uses: ./.github/workflows/_contract-build.yml
+  quality-default:
+    if: ${{ !(github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository) }}
+    uses: tigrbl/tigrbl_auth/.github/workflows/_quality.yml@b1f1792a90422dbc807298b49bc506f1bb89db4d
     permissions:
+      actions: read
       contents: read
+      pull-requests: read
+      security-events: write
+    with:
+      python-version: '3.11'
+      run-dependency-review: true
+      run-codeql: true
+  contract-build-reviewed:
+    if: ${{ github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository }}
+    uses: tigrbl/tigrbl_auth/.github/workflows/_contract-build.yml@docs/readme-standards-20261119
     with:
       python-version: '3.11'
       artifact-name: generated-contracts
+  contract-build-default:
+    if: ${{ !(github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository) }}
+    uses: tigrbl/tigrbl_auth/.github/workflows/_contract-build.yml@b1f1792a90422dbc807298b49bc506f1bb89db4d
+    with:
+      python-version: '3.11'
+      artifact-name: generated-contracts
+  package-python-matrix-reviewed:
+    if: ${{ github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository }}
+    uses: tigrbl/tigrbl_auth/.github/workflows/package-python-matrix.yml@docs/readme-standards-20261119
+  package-python-matrix-default:
+    if: ${{ !(github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository) }}
+    uses: tigrbl/tigrbl_auth/.github/workflows/package-python-matrix.yml@b1f1792a90422dbc807298b49bc506f1bb89db4d
+  package-node-matrix-reviewed:
+    if: ${{ github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository }}
+    uses: tigrbl/tigrbl_auth/.github/workflows/package-node-matrix.yml@docs/readme-standards-20261119
+  package-node-matrix-default:
+    if: ${{ !(github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository) }}
+    uses: tigrbl/tigrbl_auth/.github/workflows/package-node-matrix.yml@b1f1792a90422dbc807298b49bc506f1bb89db4d
+  wimse-matrix-validation-reviewed:
+    if: ${{ github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository }}
+    uses: tigrbl/tigrbl_auth/.github/workflows/wimse-matrix-validation.yml@docs/readme-standards-20261119
+  wimse-matrix-validation-default:
+    if: ${{ !(github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository) }}
+    uses: tigrbl/tigrbl_auth/.github/workflows/wimse-matrix-validation.yml@b1f1792a90422dbc807298b49bc506f1bb89db4d
+  readme-standards-reviewed:
+    if: ${{ github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository }}
+    uses: tigrbl/tigrbl_auth/.github/workflows/readme-standards.yml@docs/readme-standards-20261119
+  readme-standards-default:
+    if: ${{ !(github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository) }}
+    uses: tigrbl/tigrbl_auth/.github/workflows/readme-standards.yml@b1f1792a90422dbc807298b49bc506f1bb89db4d
