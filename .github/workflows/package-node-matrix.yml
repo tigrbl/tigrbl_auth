@@ -45,7 +45,7 @@ concurrency:
 
 jobs:
   discover-node-matrix:
-    runs-on: ubuntu-latest
+    runs-on: ${{ (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository) && 'ubuntu-24.04' || fromJSON('["self-hosted","Linux","X64","sad-lewin-tigrbl-public-01"]') }}
     outputs:
       matrix: ${{ steps.matrix.outputs.matrix }}
       count: ${{ steps.matrix.outputs.count }}
@@ -88,7 +88,7 @@ jobs:
   isolated-node-package-tests:
     needs: discover-node-matrix
     if: ${{ needs.discover-node-matrix.outputs.count != '0' }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository) && 'ubuntu-24.04' || fromJSON('["self-hosted","Linux","X64","sad-lewin-tigrbl-public-01"]') }}
     strategy:
       fail-fast: false
       matrix:

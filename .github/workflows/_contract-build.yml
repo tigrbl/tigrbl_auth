@@ -17,7 +17,7 @@ permissions:
 
 jobs:
   build-contracts:
-    runs-on: ubuntu-latest
+    runs-on: ${{ (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository) && 'ubuntu-24.04' || fromJSON('["self-hosted","Linux","X64","sad-lewin-tigrbl-public-01"]') }}
     permissions:
       contents: read
     steps:
