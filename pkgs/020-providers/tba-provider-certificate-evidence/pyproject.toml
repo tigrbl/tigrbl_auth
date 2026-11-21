@@ -5,7 +5,7 @@ description = "X.509 path, CRL, and RFC 6962 SCT verification."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
 license = "Apache-2.0"
-dependencies = ["asn1crypto==1.5.1", "cryptography>=46", "pyOpenSSL>=25.3,<26"]
+dependencies = ["asn1crypto==1.5.1", "cryptography>=50,<51", "pyOpenSSL>=26.4,<27"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 classifiers = [
