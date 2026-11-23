@@ -1,0 +1,7 @@
+C1 provider runtime focused pytest
+
+PYTHONPATH=pkgs/060-runtime/tba-runtime-hosted-sign-in-continuation/src
+uv run --no-project --with pytest==9.2.0 pytest -q --disable-warnings -c pyproject.toml -o log_cli=false --confcutdir pkgs/060-runtime/tba-runtime-hosted-sign-in-continuation pkgs/060-runtime/tba-runtime-hosted-sign-in-continuation/tests pkgs/060-runtime/tba-runtime-hosted-sign-in-continuation/docs/readme/test_examples.py
+
+..............                                                           [100%]
+14 passed, 2 warnings in 0.05s

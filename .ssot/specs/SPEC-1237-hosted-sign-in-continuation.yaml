@@ -1,0 +1,28 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1237"
+number: 1237
+slug: "hosted-sign-in-continuation"
+title: "Hosted sign-in continuation contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "A continuation starts only after provider validation. The runtime persists a unique immutable record with issuer, tenant, active client, exact redirect, validated request parameters, opaque browser binding, required assurance, and timestamps."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Contract
+  
+  A continuation starts only after provider validation. The runtime persists a unique immutable record with issuer, tenant, active client, exact redirect, validated request parameters, opaque browser binding, required assurance, and timestamps.
+  
+  Resolve fails locally for an unknown, consumed, misbound, inactive, callback-mismatched, or insufficiently assured request. It yields the original request only after current binding, expiry, client and assurance checks and one successful atomic consume. An eligible expired flow may return the client identifier within its recovery window. It never supplies authorization parameters or a callback in the restart outcome.
+  
+  ## Verification
+  
+  Contract tests cover first enrollment, immutable request snapshot, replay, concurrent single consumption, expiration and bounded restart, isolation, live client and registered callback changes, and stale assurance. Production persistence and browser navigation are verified in the provider integration.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1141"

@@ -1,0 +1,29 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1141"
+number: 1141
+slug: "hosted-sign-in-continuation"
+title: "Provider-side hosted sign-in continuation"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Layer 060 owns provider-side hosted continuation of an authorization request that the provider already validated. The runtime accepts an immutable request snapshot and injected clock, browser binding, current client eligibility, session assurance, and storage contracts."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+  
+  Layer 060 owns provider-side hosted continuation of an authorization request that the provider already validated. The runtime accepts an immutable request snapshot and injected clock, browser binding, current client eligibility, session assurance, and storage contracts.
+  
+  Only successful atomic consumption returns the saved request. An expired record can suggest a client restart during a bounded browser-bound recovery window. An unavailable or untrusted flow stays on a provider-controlled surface.
+  
+  ## Boundaries
+  
+  The provider supplies browser and session evidence, checks the current exact registered redirect, and revalidates the authorization request before issuing a response. The relying-party callback transaction and browser session retain their independent lifecycles. The runtime supplies neither navigation nor token issuance.
+  
+  ## Consequences
+  
+  Every production storage adapter must implement atomic compare-and-consume across its workers. First enrollment, fresh assurance, product recovery destinations, and browser wiring require provider integration evidence.

@@ -3998,6 +3998,15 @@ ecosystem = "pypi"
 dependencies = ["tba-capability-access-governance", "tba-capability-policy-administration", "tba-capability-policy-assurance", "tba-concrete-authority-graph", "tba-concrete-authorization-policy-rules", "tba-concrete-policy-decision-engine-default", "tba-contracts-identity", "tba-contracts-release", "tba-primitives-identity", "tba-provider-authorization-policy-decision-engine", "tba-provider-security-authorization-provenance-builder"]
 
 [[packages]]
+id = "tba-runtime-hosted-sign-in-continuation"
+name = "tba-runtime-hosted-sign-in-continuation"
+path = "pkgs/060-runtime/tba-runtime-hosted-sign-in-continuation"
+layer = "060-runtime"
+order = 0
+ecosystem = "pypi"
+dependencies = []
+
+[[packages]]
 id = "tba-runtime-identity"
 name = "tba-runtime-identity"
 path = "pkgs/060-runtime/tba-runtime-identity"
