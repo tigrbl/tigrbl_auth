@@ -17,6 +17,7 @@ from tba_storage_core.tables import TokenRecord
 from tba_runtime_identity_storage import (
     TokenRecordRuntimeSpec,
     initializeIdentityRuntimeTables,
+    mark_refresh_token_rotated,
     read_token_record,
 )
 from tba_server_identity.security import token_issuance as runtime
@@ -156,8 +157,9 @@ async def test_refresh_rotation_preserves_lineage_and_uses_same_session(
 
     async def rotate(ctx):
         assert ctx["db"] is db
+        assert not persisted
         rotations.append(dict(ctx["payload"]))
-        return ctx["payload"]
+        return True
 
     async def audit(ctx):
         assert ctx["db"] is db
@@ -165,7 +167,7 @@ async def test_refresh_rotation_preserves_lineage_and_uses_same_session(
 
     monkeypatch.setattr(runtime, "read_token_record", read)
     monkeypatch.setattr(runtime, "persist_issued_token", persist)
-    monkeypatch.setattr(runtime, "mark_refresh_token_rotated", rotate)
+    monkeypatch.setattr(runtime, "claim_refresh_token_rotation", rotate)
     monkeypatch.setattr(runtime, "append_audit_event_record", audit)
 
     service = runtime.build_rfc6749_token_endpoint_service(
@@ -194,10 +196,39 @@ async def test_refresh_rotation_preserves_lineage_and_uses_same_session(
         {
             "token_hash": token_hash("presented-refresh"),
             "successor_hash": token_hash("refresh-1"),
-            "reason": "refresh_rotated",
+            "tenant_id": "tenant-1",
+            "client_id": "client-1",
+            "refresh_family_id": "family-1",
         }
     ]
     assert audits[0]["event_type"] == "token.refresh.rotated"
+
+
+@pytest.mark.asyncio
+async def test_lost_rotation_does_not_persist_successors(monkeypatch) -> None:
+    async def read(ctx):
+        return _refresh_record()
+
+    async def already_rotated(ctx):
+        return False
+
+    async def unexpected_persist(ctx):
+        pytest.fail("A lost rotation must not persist another successor pair")
+
+    monkeypatch.setattr(runtime, "read_token_record", read)
+    monkeypatch.setattr(runtime, "claim_refresh_token_rotation", already_rotated)
+    monkeypatch.setattr(runtime, "persist_issued_token", unexpected_persist)
+    service = runtime.build_rfc6749_token_endpoint_service(
+        db=object(), token_coder=_Coder()
+    )
+    with pytest.raises(InvalidRefreshTokenError, match="no longer active"):
+        await service.refresh(
+            RefreshTokenRedemptionRequest(
+                refresh_token="presented-refresh",
+                tenant_id="tenant-1",
+                client_id="client-1",
+            )
+        )
 
 
 @pytest.mark.asyncio
@@ -287,7 +318,13 @@ async def test_capability_issues_and_rotates_through_real_tba_aliases(
     async def ignore_audit(ctx):
         return None
 
+    async def claim_in_memory(ctx):
+        # Production uses a transactional CAS. This fixture exercises the
+        # existing Tigrbl record aliases on its single-transaction memory store.
+        return await mark_refresh_token_rotated(ctx) is not None
+
     monkeypatch.setattr(runtime, "append_audit_event_record", ignore_audit)
+    monkeypatch.setattr(runtime, "claim_refresh_token_rotation", claim_in_memory)
     capability = runtime.build_token_issuance_capability(
         db=administrator_storage,
         token_coder=_Coder(),

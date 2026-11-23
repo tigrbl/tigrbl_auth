@@ -27,7 +27,7 @@ from tba_runtime_identity_storage.ops.oauth_state import (
     record_revoked_token_hash,
 )
 from tba_runtime_identity_storage.ops.tokens import (
-    mark_refresh_token_rotated,
+    claim_refresh_token_rotation,
     persist_issued_token,
     read_token_record,
     revoke_refresh_token_family,
@@ -91,7 +91,11 @@ def build_token_issuance_capability(
 ) -> TokenIssuanceCapability:
     """Bind cryptography and durable aliases to one request-scoped session."""
 
-    async def issue(request: TokenPairIssueRequest) -> IssuedTokenPair:
+    async def issue(
+        request: TokenPairIssueRequest,
+        *,
+        rotation: Mapping[str, Any] | None = None,
+    ) -> IssuedTokenPair:
         claims = dict(request.extra_claims)
         if request.scope:
             claims["scope"] = request.scope
@@ -115,6 +119,14 @@ def build_token_issuance_capability(
             for name in ("authorization_trace", "delegation_provenance"):
                 if name in request.extra_claims:
                     issued_claims[name] = deepcopy(request.extra_claims[name])
+
+        if rotation is not None and not await claim_refresh_token_rotation(
+            {
+                "payload": {**rotation, "successor_hash": token_hash(refresh_token)},
+                "db": db,
+            }
+        ):
+            raise InvalidRefreshTokenError("refresh token is no longer active")
 
         family_id = request.refresh_family_id or str(uuid4())
         parent_hash = (
@@ -246,7 +258,7 @@ def build_token_issuance_capability(
         next_issuer = str(preserved.pop("iss", None) or claims.get("iss") or "")
         confirmation = claims.get("cnf")
 
-        result = await issue(
+        return await issue(
             TokenPairIssueRequest(
                 subject=str(claims.get("sub") or field_value(record, "subject") or ""),
                 tenant_id=str(
@@ -266,23 +278,14 @@ def build_token_issuance_capability(
                 refresh_parent_token=request.refresh_token,
                 token_type=request.token_type,
                 extra_claims=preserved,
-            )
+            ),
+            rotation={
+                "token_hash": digest,
+                "tenant_id": field_value(record, "tenant_id"),
+                "client_id": field_value(record, "client_id"),
+                "refresh_family_id": field_value(record, "refresh_family_id"),
+            },
         )
-        await mark_refresh_token_rotated(
-            {
-                "payload": {
-                    "token_hash": digest,
-                    "successor_hash": (
-                        token_hash(result.refresh_token)
-                        if result.refresh_token
-                        else None
-                    ),
-                    "reason": "refresh_rotated",
-                },
-                "db": db,
-            }
-        )
-        return result
 
     async def audit(event: Mapping[str, object]) -> None:
         details = event.get("details")
