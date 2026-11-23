@@ -1,11 +1,14 @@
 # @tba/ui-app-connections
 
+React controls for selecting a person or bot and reviewing the scopes an app
+has requested. The application supplies the verified request and its branding.
+
 <!-- BEGIN TBA README HEADER -->
 <p align="center">
 <a href="https://github.com/tigrbl/tigrbl_auth#readme"><img src="https://raw.githubusercontent.com/tigrbl/tigrbl_auth/master/docs/assets/tba-brand.png" alt="TBA · Tigrbl Auth" width="240"></a>
 </p>
 <p align="center">
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-app-connections/package.json"><img alt="Checkout: 0.4.0-dev.1" src="https://img.shields.io/badge/Checkout-0.4.0--dev.1-1f6feb"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-app-connections/package.json"><img alt="Checkout: 0.4.0-dev.2" src="https://img.shields.io/badge/Checkout-0.4.0--dev.2-1f6feb"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-app-connections/package.json"><img alt="Node: &gt;=22" src="https://img.shields.io/badge/Node-%3E%3D22-3776ab"></a>
 <a href="LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/License-Apache--2.0-525252"></a>
 <a href="NOTICE"><img alt="Notice: attribution" src="https://img.shields.io/badge/Notice-attribution-525252"></a>
@@ -13,7 +16,7 @@
 </p>
 <p align="center">
 <a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/105-ui/tba-ui-app-connections"><img alt="Downloads: source checkout" src="https://img.shields.io/badge/Downloads-source%20checkout-0969da"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-app-connections/package.json"><img alt="Direct dependencies: 0" src="https://img.shields.io/badge/Direct%20dependencies-0-0969da"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-app-connections/package.json"><img alt="Direct dependencies: 1" src="https://img.shields.io/badge/Direct%20dependencies-1-0969da"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-app-connections/README.md"><img alt="README hits for @tba/ui-app-connections" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-app-connections/README.md.svg?label=hits"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"><img alt="SSOT: governed" src="https://img.shields.io/badge/SSOT-governed-2f6f4e"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-app-connections/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
@@ -61,6 +64,13 @@ npm --prefix pkgs/105-ui/tba-ui-app-connections run build
 
 React controls for TbA app consent and owned bot permissions. The manifest is the authority for available scripts and entry points.
 
+`ConsentIdentityControls` combines the existing picker and permission matrix
+into a controlled component. Pass the approved request data from
+`@tba/client-app-connections` or an equivalent API service. Initialize the
+selection with `defaultConsentScopes` and keep approval, denial, and callback
+navigation in the host. On identity changes, the component removes selected
+scopes that the new identity cannot approve.
+
 ## Package Boundary
 
 `@tba/ui-app-connections` belongs to `105-ui` and owns browser-facing interface composition: React controls for TbA app consent and owned bot permissions.
@@ -93,7 +103,8 @@ Its exports and dependency declarations describe its integration surface; they d
 
 ## Related Packages
 
-`@tba/ui-app-connections` declares no local runtime dependency and has no direct consumer in the active manifest graph. Browse the [105-ui layer](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/105-ui) for adjacent package responsibilities; adjacency does not imply a dependency.
+`@tba/client-app-connections` supplies the shared consent and permission types.
+`@tba/ui-app-connections` supplies the React controls for those types.
 
 ## Project Links
 

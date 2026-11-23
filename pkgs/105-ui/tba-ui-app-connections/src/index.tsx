@@ -1,13 +1,11 @@
-export type PermissionStatus =
-  | "requested" | "available_to_request"
-  | "unavailable_for_account" | "unavailable_for_bot";
+import type {
+  AppConnectionBot,
+  AppConnectionPermission,
+  AppConnectionPermissionStatus,
+} from "@tba/client-app-connections";
 
-export type Permission = {
-  id: string;
-  label: string;
-  status: PermissionStatus;
-  explicit?: boolean;
-};
+export type PermissionStatus = AppConnectionPermissionStatus;
+export type Permission = AppConnectionPermission;
 
 type Identity = { id: string; name: string };
 
@@ -62,5 +60,59 @@ export function PermissionMatrix({ title, permissions, selected, onChange, class
         );
       })}
     </fieldset>
+  );
+}
+
+export function defaultConsentScopes(permissions: readonly Permission[]): string[] {
+  return permissions
+    .filter(permission => permission.status === "requested" && !permission.explicit)
+    .map(permission => permission.id);
+}
+
+export function ConsentIdentityControls({
+  accountName,
+  bots,
+  permissions,
+  value,
+  onChange,
+  title,
+  identityClassName,
+  inputClassName,
+  matrixClassName,
+  rowClassName,
+}: {
+  accountName: string;
+  bots: readonly AppConnectionBot[];
+  permissions: readonly Permission[];
+  value: { botId: string; scopes: readonly string[] };
+  onChange: (selection: { botId: string; scopes: string[] }) => void;
+  title: string;
+  identityClassName?: string;
+  inputClassName?: string;
+  matrixClassName?: string;
+  rowClassName?: string;
+}) {
+  function permissionsFor(botId: string): readonly Permission[] {
+    return botId ? bots.find(bot => bot.id === botId)?.permissions ?? [] : permissions;
+  }
+
+  function requestedScopes(botId: string, scopes: readonly string[]): string[] {
+    const eligible = new Set(
+      permissionsFor(botId).filter(permission => permission.status === "requested").map(permission => permission.id),
+    );
+    return scopes.filter(scope => eligible.has(scope));
+  }
+
+  return (
+    <>
+      <IdentityPicker accountName={accountName} bots={bots} value={value.botId}
+        onChange={botId => onChange({ botId, scopes: requestedScopes(botId, value.scopes) })}
+        className={identityClassName} inputClassName={inputClassName} />
+      <PermissionMatrix title={title} permissions={permissionsFor(value.botId)}
+        selected={requestedScopes(value.botId, value.scopes)}
+        onChange={scopes => onChange({ botId: value.botId, scopes: requestedScopes(value.botId, scopes) })}
+        className={matrixClassName}
+        rowClassName={rowClassName} />
+    </>
   );
 }
