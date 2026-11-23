@@ -6,7 +6,6 @@ from collections.abc import Iterator
 from contextlib import contextmanager
 from threading import RLock
 
-from tba_codec_dns.rdata import decoded
 from tba_codec_dns.wire import WireError
 from tba_primitives_dns_name.names import name_text
 
@@ -29,7 +28,10 @@ def override_system_resolver(resolver: Resolver | None = None) -> Iterator[Resol
         def _addresses(host, family=0):
             host = host.decode("ascii") if isinstance(host, bytes) else host
             try:
-                return resolver.resolve_name(host, family=family, search=True)
+                answers = resolver.resolve_name(host, family=family, search=True)
+                return tuple(
+                    ipaddress.ip_address(address) for address in answers.addresses()
+                )
             except (NoAnswer, NXDOMAIN) as exc:
                 raise socket.gaierror(
                     socket.EAI_NONAME, "name does not have a DNS address"
@@ -121,9 +123,7 @@ def override_system_resolver(resolver: Resolver | None = None) -> Iterator[Resol
             except (NoAnswer, NXDOMAIN, OSError, WireError) as exc:
                 raise socket.herror(1, "DNS address has no PTR record") from exc
             names = tuple(
-                dict.fromkeys(
-                    name_text(decoded(rr)[0]).removesuffix(".") for rr in pointers
-                )
+                dict.fromkeys(rr.target.to_text().removesuffix(".") for rr in pointers)
             )
             return names[0], list(names[1:]), [str(address)]
 

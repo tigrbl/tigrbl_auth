@@ -7,6 +7,7 @@ from contextlib import AsyncExitStack
 from dataclasses import replace
 from enum import IntEnum
 from importlib.metadata import entry_points
+from importlib.util import find_spec
 from time import monotonic, time
 from urllib.parse import urlsplit
 
@@ -14,35 +15,25 @@ from tba_codec_dns import message, wire
 
 from . import _doh, _quic
 from . import async_transport as transport
+from ._doh import HTTPVersion as HTTPVersion
+from ._doh import NoDOH as NoDOH
 from ._http3_tls import HTTP3SSLContext as HTTP3SSLContext
 from ._http3_tls import (
     configure_http3_client_identity as configure_http3_client_identity,
 )
 from ._http3_tls import configure_http3_crls as configure_http3_crls
+from ._socket_transport import BadResponse as BadResponse
 from .asyncbackend import get_default_backend
 
 
-class BadResponse(wire.WireError):
-    """The peer's DNS message does not answer the sent query."""
-
-
 UnexpectedSource = transport.transport.UnexpectedSource
+have_doh = find_spec("httpx") is not None
 
 
 class UDPMode(IntEnum):
     NEVER = 0
     TRY_FIRST = 1
     ONLY = 2
-
-
-class HTTPVersion(IntEnum):
-    DEFAULT = 0
-    HTTP_1 = 1
-    H1 = 1
-    HTTP_2 = 2
-    H2 = 2
-    HTTP_3 = 3
-    H3 = 3
 
 
 def _monotonic_expiration(expiration):
@@ -85,6 +76,16 @@ def _wire_query(q, packet):
     query = wire.Message.from_wire(packet)
     key = q.keyring if isinstance(q, message.Message) else q.tsig_key
     return replace(query, tsig_key=key), key
+
+
+def _prepare_zero_id_tsig(q):
+    """Set the transport identifier before rendering a TSIG-configured query."""
+    if isinstance(q, message.Message):
+        if q._state._sign_on_wire:
+            q.set_id(0)
+    elif q._sign_on_wire:
+        return _quic._zero_id_request(q)
+    return q
 
 
 def _result(q, received, elapsed):
@@ -400,6 +401,7 @@ async def https(
     http_version=HTTPVersion.DEFAULT,
 ):
     version = HTTPVersion(http_version)
+    use_h3, httpx, use_h2 = _doh._https_transport(version, client, have_doh)
     parse_options = dict(
         one_rr_per_rrset=one_rr_per_rrset, ignore_trailing=ignore_trailing
     )
@@ -410,24 +412,35 @@ async def https(
     if target.scheme != "https" or target.hostname is None:
         raise ValueError("DNS over HTTPS requires an HTTPS endpoint")
     begin = time()
+    if use_h3:
+        q = _prepare_zero_id_tsig(q)
     packet = _packet(q)
     query, key = _wire_query(q, packet)
-    if resolver is not None and bootstrap_address is None and client is None:
+    if (
+        bootstrap_address is None
+        and client is None
+        and (use_h3 or resolver is not None)
+    ):
         from .client import AsyncResolver
 
-        lookup_family = (
-            {socket.AF_UNSPEC: 0, socket.AF_INET: 4, socket.AF_INET6: 6}.get(
-                family, family
+        if use_h3:
+            bootstrap_address = _doh._literal_address(target.hostname)
+            if bootstrap_address is None and resolver is None:
+                from .asyncresolver import get_default_resolver
+
+                resolver = get_default_resolver()
+        if bootstrap_address is None:
+            lookup_family = (
+                {socket.AF_UNSPEC: 0, socket.AF_INET: 4, socket.AF_INET6: 6}.get(
+                    family, family
+                )
+                if isinstance(resolver, AsyncResolver)
+                else family
             )
-            if isinstance(resolver, AsyncResolver)
-            else family
-        )
-        answer = await resolver.resolve_name(target.hostname, family=lookup_family)
-        addresses = answer.addresses() if hasattr(answer, "addresses") else answer
-        bootstrap_address = str(next(iter(addresses)))
-    if version == HTTPVersion.HTTP_3 or (
-        version == HTTPVersion.DEFAULT and hasattr(client, "make_stream")
-    ):
+            answer = await resolver.resolve_name(target.hostname, family=lookup_family)
+            addresses = answer.addresses() if hasattr(answer, "addresses") else answer
+            bootstrap_address = str(next(iter(addresses)))
+    if use_h3:
         if key is not None:
             parse_options.update(keyring=key, request_mac=query.mac)
         if client is not None:
@@ -498,26 +511,23 @@ async def https(
                 source_port=source_port,
                 family=family,
                 http1=version != HTTPVersion.HTTP_2,
-                http2=version != HTTPVersion.HTTP_1,
+                http2=use_h2,
             )
 
         response = await _doh._wait_http_exchange(exchange, _doh._deadline(timeout))
         return _result(q, response, time() - begin)
 
-    import httpx
-
     _, method, request_path, headers, body = _doh._https_request(query, where, post)
     async with AsyncExitStack() as stack:
         if client is None:
             h1 = version in (HTTPVersion.DEFAULT, HTTPVersion.HTTP_1)
-            h2 = version in (HTTPVersion.DEFAULT, HTTPVersion.HTTP_2)
             factory = get_default_backend().get_transport_class()
             client = await stack.enter_async_context(
                 httpx.AsyncClient(
                     transport=factory(
                         verify=_tls_context(verify),
                         http1=h1,
-                        http2=h2,
+                        http2=use_h2,
                         local_address=source,
                     ),
                 )
@@ -560,6 +570,7 @@ async def quic(
     server_hostname=None,
 ):
     begin = time()
+    q = _prepare_zero_id_tsig(q)
     packet = _packet(q)
     query, key = _wire_query(q, packet)
     request = _quic._doq_request(query)

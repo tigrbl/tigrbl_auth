@@ -7,7 +7,7 @@ from collections.abc import Sequence
 from decimal import Decimal, InvalidOperation
 from struct import Struct
 
-from tba_primitives_dns_name.names import Name, name_text, parse_name
+from tba_primitives_dns_name.names import Name, encode_idna2003, name_text, parse_name
 
 from .tkey import Tkey
 from .wire import RecordType, ResourceRecord, WireError, _name_wire, _read_name
@@ -195,7 +195,9 @@ KINDS = frozenset(
 )
 
 
-def parse_special(kind: int, args: Sequence[str], origin: Name) -> bytes:
+def parse_special(
+    kind: int, args: Sequence[str], origin: Name, *, encode_label=encode_idna2003
+) -> bytes:
     if kind == RecordType.LOC:
         return _to_loc(args)
     if kind == RecordType.APL:
@@ -235,7 +237,7 @@ def parse_special(kind: int, args: Sequence[str], origin: Name) -> bytes:
             else base64.b64decode(other[0], validate=True)
         )
         return Tkey(
-            parse_name(algorithm, origin),
+            parse_name(algorithm, origin, encode_label=encode_label),
             _decimal(inception, 0xFFFFFFFF),
             _decimal(expiration, 0xFFFFFFFF),
             _decimal(mode, 65535),
@@ -253,7 +255,10 @@ def parse_special(kind: int, args: Sequence[str], origin: Name) -> bytes:
             _HIP.pack(len(hit), algorithm, len(key))
             + hit
             + key
-            + b"".join(_name_wire(parse_name(name, origin)) for name in args[3:])
+            + b"".join(
+                _name_wire(parse_name(name, origin, encode_label=encode_label))
+                for name in args[3:]
+            )
         )
     if len(args) < 4:
         raise ValueError("relay or gateway record is incomplete")

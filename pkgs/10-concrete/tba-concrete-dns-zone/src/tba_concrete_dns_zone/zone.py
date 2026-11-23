@@ -4,10 +4,12 @@ import re
 from collections.abc import Callable, Iterable, Iterator
 from contextlib import contextmanager
 from dataclasses import dataclass
+from itertools import chain
 from pathlib import Path
 from threading import RLock
 from types import MappingProxyType
 
+from tba_codec_dns.message import Message as EditableMessage
 from tba_codec_dns.node import Node
 from tba_codec_dns.rdata import (
     Rdata,
@@ -22,11 +24,12 @@ from tba_codec_dns.rdata import (
 from tba_codec_dns.rdataset import Rdataset
 from tba_codec_dns.rdataset import from_records as from_records
 from tba_codec_dns.rrset import RRset
-from tba_codec_dns.tokenizer import master_tokens
+from tba_codec_dns.tokenizer import Tokenizer, master_tokens
 from tba_codec_dns.wire import (
     RecordClass,
     RecordType,
     ResourceRecord,
+    WireError,
     record_class,
     record_type,
 )
@@ -43,6 +46,16 @@ from ._btree import ZoneIndex
 from ._immutable import ImmutableRdataset
 from ._immutable import ImmutableVersionedNode as ImmutableVersionedNode
 from ._immutable import VersionedNode as VersionedNode
+from .zonemd import (
+    DigestHashAlgorithm as DigestHashAlgorithm,
+    DigestScheme as DigestScheme,
+    DigestVerificationFailure as DigestVerificationFailure,
+    NoDigest as NoDigest,
+    UnsupportedDigestHashAlgorithm as UnsupportedDigestHashAlgorithm,
+    UnsupportedDigestScheme as UnsupportedDigestScheme,
+    make_zonemd,
+    verify_zonemd,
+)
 
 _Key = tuple[Name, int, int | None]
 _Index = dict[_Key, dict[bytes, ResourceRecord]] | ZoneIndex
@@ -105,6 +118,10 @@ class ZoneTransaction:
         self._delete_dataset_checks = []
         self._delete_name_checks = []
         self._checking = False
+
+    @property
+    def manager(self):
+        return self._zone
 
     def _ensure_open(self, *, write: bool = False) -> None:
         if self._closed:
@@ -601,11 +618,23 @@ class Zone:
             raise KeyError((name, rdtype, covers))
         return rrset
 
-    def get_soa(self):
-        soa = self.get_rdataset(self.origin, RecordType.SOA)
+    def get_soa(self, txn=None):
+        soa = (
+            self.get_rdataset(self.origin, RecordType.SOA)
+            if txn is None
+            else txn.get(self.origin, RecordType.SOA)
+        )
         if soa is None or len(soa) != 1:
             raise NoSOA("DNS zone requires exactly one apex SOA")
         return soa[0]
+
+    def compute_digest(self, hash_algorithm, scheme=1):
+        """Return ZONEMD RDATA computed from a consistent zone snapshot."""
+        return from_record(make_zonemd(self, hash_algorithm, scheme))
+
+    def verify_digest(self, zonemd=None) -> None:
+        """Verify an apex ZONEMD or a supplied ZONEMD RDATA."""
+        verify_zonemd(self, zonemd)
 
     def get_class(self) -> int:
         return self.rdclass
@@ -690,6 +719,7 @@ class Zone:
         check_origin: bool = True,
         rfc2308_ttl: bool = True,
         relativize: bool | None = None,
+        transaction_setup: Callable[[ZoneTransaction], None] | None = None,
     ) -> "Zone":
         source = path if hasattr(path, "read") else None
         loader = None
@@ -717,6 +747,7 @@ class Zone:
             check_origin=check_origin,
             rfc2308_ttl=rfc2308_ttl,
             relativize=relativize,
+            transaction_setup=transaction_setup,
         )
 
     @classmethod
@@ -730,21 +761,31 @@ class Zone:
         check_origin: bool = True,
         rfc2308_ttl: bool = True,
         relativize: bool | None = None,
+        transaction_setup: Callable[[ZoneTransaction], None] | None = None,
     ) -> "Zone":
         root = None if origin is None else _origin_labels(origin)
         reader = _MasterReader(root, record_class(rdclass), include, rfc2308_ttl)
-        records = tuple(reader.read(text, root))
-        if reader.root is None:
+        records = reader.read(text, root)
+        first = next(records, None) if root is None else None
+        root = reader.root
+        if root is None:
             raise ValueError("DNS zone origin was not provided")
         options = {} if relativize is None else {"relativize": relativize}
-        zone = cls(
-            reader.root,
-            (record for record in records if is_subdomain(record.name, reader.root)),
-            rdclass=rdclass,
-            **options,
-        )
-        if check_origin:
-            zone.check_origin()
+        if first is not None:
+            records = chain((first,), records)
+        records = (record for record in records if is_subdomain(record.name, root))
+        if transaction_setup is None:
+            zone = cls(root, records, rdclass=rdclass, **options)
+            if check_origin:
+                zone.check_origin()
+        else:
+            zone = cls(root, rdclass=rdclass, **options)
+            with zone.writer() as txn:
+                transaction_setup(txn)
+                for record in records:
+                    txn.add(record)
+                if check_origin:
+                    txn.check_origin()
         return zone
 
 
@@ -766,32 +807,69 @@ def from_file(source, origin=None, *, zone_factory=Zone, **kwargs) -> Zone:
     return zone_factory.from_file(source, origin, **kwargs)
 
 
+def from_xfr(xfr, zone_factory=Zone, relativize=True, check_origin=True) -> Zone:
+    """Build a zone from the answer sections of transfer messages."""
+    frames = iter(xfr)
+    first = next(frames, None)
+    if first is None:
+        raise ValueError("empty DNS transfer")
+    if isinstance(first, EditableMessage):
+        first = first._wire_message()
+    if not first.answers:
+        raise WireError("first DNS transfer frame requires an answer")
+    first_record = first.answers[0]
+    origin = first_record.name
+    if relativize and first.origin is not None:
+        origin = _origin_labels(first.origin)
+    rdclass = first_record.rdclass
+
+    def records():
+        for frame in chain((first,), frames):
+            if isinstance(frame, EditableMessage):
+                frame = frame._wire_message()
+            for rr in frame.answers:
+                if not is_subdomain(rr.name, origin):
+                    continue
+                if rr.rdclass != rdclass:
+                    raise WireError("wrong record class in DNS transfer")
+                if rr.type == RecordType.SOA and rr.name != origin:
+                    raise WireError("non-origin SOA in DNS transfer")
+                yield rr
+
+    factory = Zone if zone_factory is None else zone_factory
+    zone = factory(origin, records(), rdclass=rdclass, relativize=relativize)
+    if check_origin:
+        zone.check_origin()
+    return zone
+
+
 _GENERATE_RANGE = re.compile(r"([0-9]+)-([0-9]+)(?:/([0-9]+))?")
-_GENERATE_TOKEN = re.compile(r"\\.|\$(?:\{([^{}]+)\})?")
+_GENERATE_TOKEN = re.compile(
+    r"\\.|\$\$|\$(?:\{([+-]?[0-9]+)(?:,([0-9]+)(?:,([doxXnN]))?)?\})?"
+)
 
 
 def _expand(template: str, number: int) -> str:
     def substitute(match: re.Match[str]) -> str:
         if match[0].startswith("\\"):
             return match[0]
-        if match[1] is None:
-            return str(number)
-        fields = match[1].split(",")
-        if len(fields) > 3:
-            raise ValueError("invalid $GENERATE substitution")
-        offset, width, radix = (fields + ["", "", ""])[:3]
-        value = number + int(offset or "0")
-        digits = int(width or "0")
-        if (
-            value < 0
-            or not 0 <= digits <= 255
-            or radix not in ("", "d", "o", "x", "X", "n", "N")
-        ):
-            raise ValueError("invalid $GENERATE offset, width, or base")
+        if match[0] == "$$":
+            return "$"
+        if match[0] == "$" and template[match.end() :].startswith("{"):
+            raise ValueError("invalid $GENERATE modifier")
+        value = number + int(match[1] or "0")
+        width = int(match[2] or "0")
+        radix = match[3] or "d"
+        if width > 127:
+            raise ValueError("$GENERATE width exceeds 127 characters")
         if radix in ("n", "N"):
-            formatted = format(value, radix.lower().replace("n", "x")).zfill(digits)
-            return ".".join(reversed(formatted.upper() if radix == "N" else formatted))
-        return format(value, radix or "d").zfill(digits)
+            if value < 0:
+                raise ValueError("negative $GENERATE value in nibble mode")
+            hexadecimal = format(value, "X" if radix == "N" else "x")
+            return ".".join(reversed(hexadecimal.zfill((width + 1) // 2))).ljust(
+                width, "."
+            )
+        return format(value, radix).zfill(width)
 
     return _GENERATE_TOKEN.sub(substitute, template)
 
@@ -803,23 +881,51 @@ class _MasterReader:
         rdclass: int,
         include: Callable[[str], str] | None,
         rfc2308_ttl: bool,
+        *,
+        directives=None,
+        force_name=None,
+        force_ttl=None,
+        force_rdclass=None,
+        force_rdtype=None,
+        default_ttl=None,
     ):
         self.root = root
         self.rdclass = rdclass
         self.include = include
-        self.default_ttl: int | None = None
+        self.default_ttl = force_ttl if force_ttl is not None else default_ttl
+        self.directives = directives
+        self.force_name = force_name
+        self.force_ttl = force_ttl
+        self.force_rdclass = force_rdclass
+        self.force_rdtype = force_rdtype
         self.last_ttl: int | None = None
         self.soa_minimum: int | None = None
         self.rfc2308_ttl = rfc2308_ttl
 
     def read(
-        self, text: str, origin: Name | None, depth: int = 0, owner: Name | None = None
+        self,
+        text: str | Tokenizer,
+        origin: Name | None,
+        depth: int = 0,
+        owner: Name | None = None,
     ) -> Iterator[ResourceRecord]:
-        for lineno, omitted, tokens in master_tokens(text):
+        tokenizer = text if isinstance(text, Tokenizer) else Tokenizer(text)
+        for lineno, omitted, tokens in master_tokens(tokenizer):
+            encode_label = tokenizer.idna_codec.encode
             try:
                 directive, args = tokens[0].upper(), tokens[1:]
+                if (
+                    self.directives is not None
+                    and directive.startswith("$")
+                    and directive not in self.directives
+                ):
+                    raise ValueError(f"DNS directive {directive} is disabled")
+                if directive == "$UNICODE" and not args and self.directives is not None:
+                    continue
                 if directive == "$ORIGIN" and len(args) == 1:
-                    origin = parse_name(args[0], origin or (), canonical=True)
+                    origin = parse_name(
+                        args[0], origin or (), canonical=True, encode_label=encode_label
+                    )
                     if self.root is None:
                         self.root = origin
                     continue
@@ -834,11 +940,22 @@ class _MasterReader:
                             "$INCLUDE is disabled or exceeds nesting limit"
                         )
                     include_name = args[0].strip('"')
-                    subtree = origin if len(args) == 1 else parse_name(args[1], origin)
+                    subtree = (
+                        origin
+                        if len(args) == 1
+                        else parse_name(args[1], origin, encode_label=encode_label)
+                    )
                     previous = self.default_ttl, self.last_ttl, self.soa_minimum
                     try:
                         yield from self.read(
-                            self.include(include_name), subtree, depth + 1, owner
+                            Tokenizer(
+                                self.include(include_name),
+                                include_name,
+                                tokenizer.idna_codec,
+                            ),
+                            subtree,
+                            depth + 1,
+                            owner,
                         )
                     finally:
                         self.default_ttl, self.last_ttl, self.soa_minimum = previous
@@ -852,42 +969,71 @@ class _MasterReader:
                         raise ValueError("invalid or excessive $GENERATE range")
                     for number in range(first, last + 1, step):
                         expanded = tuple(_expand(token, number) for token in args[1:])
-                        owner = parse_name(expanded[0], origin)
-                        yield self._record(owner, expanded[1:], origin)
+                        owner = parse_name(
+                            expanded[0], origin, encode_label=encode_label
+                        )
+                        yield self._record(
+                            owner, expanded[1:], origin, tokenizer.idna_codec
+                        )
                     continue
                 if directive.startswith("$"):
                     raise ValueError(f"invalid DNS directive {tokens[0]}")
-                if not omitted:
-                    owner = parse_name(tokens[0], origin)
+                if self.force_name is not None:
+                    owner = self.force_name
+                elif not omitted:
+                    owner = parse_name(tokens[0], origin, encode_label=encode_label)
                     tokens = tokens[1:]
                 if owner is None:
                     raise ValueError("DNS record omits its first owner")
-                yield self._record(owner, tokens, origin)
+                yield self._record(owner, tokens, origin, tokenizer.idna_codec)
             except (ValueError, IndexError) as exc:
                 raise ValueError(f"DNS master-file line {lineno}: {exc}") from exc
 
     def _record(
-        self, owner: Name, tokens: tuple[str, ...], origin: Name
+        self, owner: Name, tokens: tuple[str, ...], origin: Name, idna_codec
     ) -> ResourceRecord:
         ttl = rdclass = None
         offset = 0
         for token in tokens:
-            if ttl is None and token[:1].isascii() and token[:1].isdigit():
+            if (
+                self.force_ttl is None
+                and ttl is None
+                and token[:1].isascii()
+                and token[:1].isdigit()
+            ):
                 ttl = parse_ttl(token)
-            elif rdclass is None and (
-                token.upper() in ("IN", "CH", "HS") or token.upper().startswith("CLASS")
+            elif (
+                self.force_rdclass is None
+                and rdclass is None
+                and (
+                    token.upper() in ("IN", "CH", "HS")
+                    or token.upper().startswith("CLASS")
+                )
             ):
                 rdclass = record_class(token)
             else:
                 break
             offset += 1
-        kind = record_type(tokens[offset])
-        effective_class = self.rdclass if rdclass is None else rdclass
-        fields = tokens[offset + 1 :]
+        kind = self.force_rdtype
+        if kind is None:
+            kind = record_type(tokens[offset])
+            offset += 1
+        effective_class = self.force_rdclass
+        if effective_class is None:
+            effective_class = self.rdclass if rdclass is None else rdclass
+        fields = tokens[offset:]
         if kind == RecordType.SOA and self.default_ttl is None:
             if fields and fields[0] == r"\#":
                 self.soa_minimum = decoded(
-                    from_tokens(owner, 0, effective_class, kind, fields, origin=origin)
+                    from_tokens(
+                        owner,
+                        0,
+                        effective_class,
+                        kind,
+                        fields,
+                        origin=origin,
+                        idna_codec=idna_codec,
+                    )
                 )[-1]
             else:
                 self.soa_minimum = parse_ttl(tokens[-1])
@@ -896,12 +1042,20 @@ class _MasterReader:
         if ttl is not None:
             self.last_ttl = ttl
         if ttl is None:
-            ttl = self.default_ttl
+            ttl = self.force_ttl if self.force_ttl is not None else self.default_ttl
         if ttl is None:
             ttl = self.last_ttl if self.last_ttl is not None else self.soa_minimum
         if ttl is None:
             raise ValueError("DNS record needs a TTL or $TTL directive")
-        return from_tokens(owner, ttl, effective_class, kind, fields, origin=origin)
+        return from_tokens(
+            owner,
+            ttl,
+            effective_class,
+            kind,
+            fields,
+            origin=origin,
+            idna_codec=idna_codec,
+        )
 
 
 class WritableVersion(ZoneTransaction):

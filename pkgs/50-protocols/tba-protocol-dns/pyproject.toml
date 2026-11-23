@@ -13,10 +13,12 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dnssec = ["cryptography>=46"]
+dnssec = ["cryptography>=47"]
 
 [project.entry-points."tba.dns.inbound_xfr"]
 protocol = "tba_protocol_dns.xfr:inbound_xfr"
+sync = "tba_protocol_dns.xfr:inbound_xfr_sync"
+xfr = "tba_protocol_dns.xfr:xfr"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

@@ -188,6 +188,8 @@ async def bootstrap_query(
     family=socket.AF_UNSPEC,
     http1=False,
     http2=True,
+    zero_id=True,
+    check_status=_check_https_status,
 ):
     backend = BootstrapBackend(address, ip, not http1, source_port, family)
     try:
@@ -209,11 +211,11 @@ async def bootstrap_query(
                     ),
                     "",
                 )
-                _check_https_status(response.status, content_type)
+                check_status(response.status, content_type)
                 data = bytearray()
                 async for chunk in response.aiter_stream():
                     _extend_https(data, chunk)
-                return _https_response(query, data, parse_options)
+                return _https_response(query, data, parse_options, zero_id=zero_id)
     except httpcore.TimeoutException as exc:
         raise TimeoutError("DNS HTTP/2 exchange timed out") from exc
     except (httpcore.NetworkError, httpcore.ProtocolError) as exc:

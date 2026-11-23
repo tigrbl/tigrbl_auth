@@ -11,13 +11,19 @@ from time import monotonic
 from tba_codec_dns.wire import Message, Truncated, WireError, response_flags
 
 
+class BadResponse(WireError):
+    """The peer's DNS message does not answer the sent query."""
+
+
 def deadline_after(timeout: float) -> float:
     if not math.isfinite(timeout) or timeout <= 0:
         raise ValueError("DNS timeout must be finite and positive")
     return monotonic() + timeout
 
 
-def remaining(deadline: float) -> float:
+def remaining(deadline: float | None) -> float | None:
+    if deadline is None:
+        return None
     delay = deadline - monotonic()
     if delay <= 0:
         raise TimeoutError("DNS query deadline elapsed")
@@ -25,7 +31,7 @@ def remaining(deadline: float) -> float:
 
 
 class DnsStream:
-    def __init__(self, sock: socket.socket, deadline: float):
+    def __init__(self, sock: socket.socket, deadline: float | None):
         self.sock = sock
         self.deadline = deadline
 
@@ -52,21 +58,37 @@ class DnsStream:
         return self._read(length)
 
 
+def _custom_query_sockets():
+    # Resolve the mutable public factory for resolver and protocol callers too.
+    from . import query
+
+    return None if query.socket_factory is query.default_socket_factory else query
+
+
 @contextmanager
 def stream(
     server: str,
     port: int,
-    deadline: float,
+    deadline: float | None,
     *,
     server_name: str | None = None,
     context: ssl.SSLContext | None = None,
     source: tuple[str, int] | None = None,
     certificate_ip: str | None = None,
+    connect=None,
 ) -> Iterator[DnsStream]:
-    options = {} if source is None else {"source_address": source}
-    with socket.create_connection(
-        (server, port), timeout=remaining(deadline), **options
-    ) as sock:
+    if connect is None:
+        custom = _custom_query_sockets()
+        if custom is not None:
+            connect = custom._connect_stream
+    if connect is None:
+        options = {} if source is None else {"source_address": source}
+        sock = socket.create_connection(
+            (server, port), timeout=remaining(deadline), **options
+        )
+    else:
+        sock = connect(server, port, deadline, source)
+    with sock:
         if server_name is None and context is None and certificate_ip is None:
             yield DnsStream(sock, deadline)
         else:
@@ -99,7 +121,9 @@ def _check_tls_peer_ip(certificate: dict | None, address: str) -> None:
 
 
 @contextmanager
-def _borrowed_stream(sock: socket.socket, deadline: float) -> Iterator[DnsStream]:
+def _borrowed_stream(
+    sock: socket.socket, deadline: float | None
+) -> Iterator[DnsStream]:
     initial = sock.gettimeout()
     try:
         yield DnsStream(sock, deadline)
@@ -150,7 +174,7 @@ def check_response(
             and not (allow_empty_question and not response.questions)
         )
     ):
-        raise WireError("DNS response does not match the request")
+        raise BadResponse("DNS response does not match the request")
 
 
 def exchange_udp_packet(
@@ -169,9 +193,15 @@ def exchange_udp_packet(
         server, port, type=socket.SOCK_DGRAM, flags=socket.AI_NUMERICHOST
     )[0]
     question = Message.from_wire(packet).questions[0]
-    with socket.socket(family, kind, protocol) as sock:
+    custom = _custom_query_sockets()
+    connection = (
+        socket.socket(family, kind, protocol)
+        if custom is None
+        else custom.make_socket(family, kind, source)
+    )
+    with connection as sock:
         sock.settimeout(remaining(deadline))
-        if source is not None:
+        if source is not None and custom is None:
             sock.bind(source)
         sock.connect(address)
         sock.send(packet)

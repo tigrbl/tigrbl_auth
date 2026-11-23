@@ -19,7 +19,15 @@ class AsyncLibraryNotFoundError(RuntimeError):
 
 class Backend(Protocol):
     async def query(
-        self, request: Message, server, *, port: int, timeout: float, tcp: bool
+        self,
+        request: Message,
+        server,
+        *,
+        port: int,
+        timeout: float,
+        tcp: bool,
+        source: str | None = None,
+        source_port: int = 0,
     ) -> Message: ...
 
     async def sleep(self, interval: float) -> None: ...
@@ -115,17 +123,35 @@ class _NativeBackend:
         self._check_runtime()
         return await async_transport._native_quic_query(query, server, **options)
 
-    async def query(self, request, server, *, port, timeout, tcp):
-        from .client import HttpsNameserver, QuicNameserver, TlsNameserver
+    async def query(
+        self, request, server, *, port, timeout, tcp, source=None, source_port=0
+    ):
+        from .client import (
+            HttpsNameserver,
+            QuicNameserver,
+            TlsNameserver,
+            _source_binding,
+        )
 
         self._check_runtime()
         if isinstance(server, str):
+            binding = _source_binding(server, source, source_port)
             if tcp:
                 return await async_transport.tcp_query(
-                    request, server, port=port, timeout=timeout, backend=self
+                    request,
+                    server,
+                    port=port,
+                    timeout=timeout,
+                    source=binding,
+                    backend=self,
                 )
             reply, _ = await async_transport.udp_with_fallback(
-                request, server, port=port, timeout=timeout, backend=self
+                request,
+                server,
+                port=port,
+                timeout=timeout,
+                source=binding,
+                backend=self,
             )
             return reply
         if isinstance(server, TlsNameserver):
@@ -136,6 +162,7 @@ class _NativeBackend:
                 timeout=timeout,
                 server_name=server.hostname,
                 context=server.context,
+                source=_source_binding(server.address, source, source_port),
                 certificate_ip=server.certificate_ip,
                 backend=self,
             )
@@ -152,6 +179,8 @@ class _NativeBackend:
                 bootstrap_address=server.bootstrap_address,
                 certificate_ip=server.certificate_ip,
                 session=server.session,
+                local_address=source,
+                local_port=source_port,
             )
         if isinstance(server, QuicNameserver):
             return await self.quic_query(
@@ -163,6 +192,8 @@ class _NativeBackend:
                 ca_file=server.ca_file,
                 ca_data=server.ca_data,
                 certificate_ip=server.certificate_ip,
+                local_address=source,
+                local_port=source_port,
             )
         raise TypeError("unsupported DNS nameserver")
 

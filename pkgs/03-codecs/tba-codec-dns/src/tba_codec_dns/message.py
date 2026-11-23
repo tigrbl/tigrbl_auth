@@ -360,6 +360,15 @@ class Message:
     def extended_errors(self):
         return list(self._wire_message().extended_errors())
 
+    def set_id(self, id: int) -> None:
+        self.id = id
+        if self._state._sign_on_wire:
+            self._state = replace(self._state, _original_id=id)
+            self._tsig = None
+
+    def set_random_id(self) -> None:
+        self.set_id(randbits(16))
+
     def use_tsig(
         self,
         keyring,
@@ -382,8 +391,10 @@ class Message:
             request_mac=self.request_mac,
         )
 
-    def is_response(self, other):
-        return self._wire_message().is_response(other._wire_message())
+    def is_response(self, other, xfr_continuation=False):
+        return self._wire_message().is_response(
+            other._wire_message(), xfr_continuation=xfr_continuation
+        )
 
     def to_wire(
         self,

@@ -533,21 +533,28 @@ class Message:
     def wire(self) -> bytes:
         return self._wire
 
-    def is_response(self, response: "Message") -> bool:
-        if self.flags & 0x8000 or not response.flags & 0x8000:
+    def is_response(self, response: "Message", xfr_continuation: bool = False) -> bool:
+        if not response.flags & 0x8000:
             return False
         if self.id != response.id or self.opcode != response.opcode:
             return False
-        if not response.questions and (
-            self.opcode == 5 or response.rcode in (1, 2, 4, 5)
-        ):
+        if self.opcode == 5:
             return True
+        if not response.questions:
+            if response.rcode in (1, 2, 4, 5):
+                return True
+            if (
+                xfr_continuation
+                and len(self.questions) == 1
+                and self.questions[0].type in (RecordType.AXFR, RecordType.IXFR)
+            ):
+                return True
 
         def normalized(questions):
-            return tuple(
+            return {
                 (tuple(label.lower() for label in q.name), q.type, q.rdclass)
                 for q in questions
-            )
+            }
 
         return normalized(self.questions) == normalized(response.questions)
 
@@ -909,7 +916,16 @@ class Message:
                         "TSIG must be the final record in the additional section"
                     )
                 if (
-                    continue_on_error
+                    (
+                        continue_on_error
+                        or rdtype
+                        in (
+                            RecordType.TLSA,
+                            RecordType.SMIMEA,
+                            RecordType.SSHFP,
+                            RecordType.NSEC3,
+                        )
+                    )
                     and rdtype not in (RecordType.OPT, RecordType.TSIG)
                     and (size or rdclass not in (RecordClass.ANY, RecordClass.NONE))
                 ):
@@ -921,6 +937,8 @@ class Message:
                         error = (
                             exc if isinstance(exc, WireError) else WireError(str(exc))
                         )
+                        if not continue_on_error:
+                            raise error
                         errors.append(MessageError(error, start))
                         continue
                 records.append(record)

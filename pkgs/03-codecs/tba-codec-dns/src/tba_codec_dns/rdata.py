@@ -17,6 +17,7 @@ from tba_primitives_dns_name.name import NameStyle
 from tba_primitives_dns_name.names import (
     ROOT,
     Name,
+    encode_idna2003,
     name_text,
     parse_name,
     parse_string,
@@ -25,7 +26,7 @@ from tba_primitives_dns_name.names import (
 
 from .record_formats import KINDS, parse_special, special_fields
 from .svcb import ServiceBinding
-from .tokenizer import master_tokens
+from .tokenizer import Tokenizer, master_tokens
 from .wire import (
     _EXTRA_TYPE_BY_NAME,
     _EXTRA_TYPE_BY_NUMBER,
@@ -229,7 +230,7 @@ def _codec(rdclass: int, rdtype: int) -> RecordCodec | None:
 def parse_ttl(text: str) -> int:
     ttl = offset = 0
     for part in _TTL_TOKEN.finditer(text):
-        if part.start() != offset or (not part[2] and part.end() < len(text)):
+        if part.start() != offset or (not part[2] and part[1] != text):
             raise ValueError(f"invalid DNS TTL {text!r}")
         ttl += int(part[1]) * _TTL_UNITS[part[2].lower()]
         offset = part.end()
@@ -292,7 +293,7 @@ def _counted(data: bytes) -> bytes:
     return bytes((len(data),)) + data
 
 
-def _parse_field(symbol: str, token: str, origin: Name) -> bytes:
+def _parse_field(symbol: str, token: str, origin: Name, encode_label) -> bytes:
     if symbol in _NUMBERS:
         if symbol == "r":
             value = record_type(token)
@@ -310,7 +311,7 @@ def _parse_field(symbol: str, token: str, origin: Name) -> bytes:
             raise ValueError("DNS integer field out of range")
         return _NUMBERS[symbol].pack(value)
     if symbol == "n":
-        return _name_wire(parse_name(token, origin))
+        return _name_wire(parse_name(token, origin, encode_label=encode_label))
     if symbol == "s":
         return _counted(parse_string(token))
     if symbol == "u":
@@ -329,7 +330,11 @@ def _parse_field(symbol: str, token: str, origin: Name) -> bytes:
     if symbol == "X":
         return _counted(b"" if token == "-" else bytes.fromhex(token))
     if symbol == "Y":
-        return _counted(base64.b32hexdecode(token.upper() + "=" * (-len(token) % 8)))
+        encoded = token.upper()
+        value = base64.b32hexdecode(encoded + "=" * (-len(encoded) % 8))
+        if base64.b32hexencode(value).decode().rstrip("=") != encoded:
+            raise ValueError("noncanonical DNS Base32hex encoding")
+        return _counted(value)
     if symbol == "j":
         if not re.fullmatch(r"[0-9A-Fa-f]{4}(?::[0-9A-Fa-f]{4}){3}", token):
             raise ValueError("DNS locator requires four 16-bit hexadecimal groups")
@@ -344,6 +349,13 @@ def _parse_field(symbol: str, token: str, origin: Name) -> bytes:
     return data
 
 
+_FINGERPRINT_LENGTHS = {
+    RecordType.TLSA: {1: 32, 2: 64},
+    RecordType.SMIMEA: {1: 32, 2: 64},
+    RecordType.SSHFP: {1: 20, 2: 32},
+}
+
+
 def from_tokens(
     owner: Name,
     ttl: int,
@@ -352,11 +364,13 @@ def from_tokens(
     tokens: Sequence[str],
     *,
     origin: Name = ROOT,
+    idna_codec=None,
 ) -> ResourceRecord:
     """Construct a record from master-file tokens or RFC 3597 hex data."""
     kind = record_type(rdtype)
     rdclass = record_class(rdclass)
     codec = _codec(rdclass, kind)
+    encode_label = encode_idna2003 if idna_codec is None else idna_codec.encode
     custom = _custom_class(rdclass, kind)
     if not 0 <= ttl <= 0xFFFFFFFF:
         raise ValueError("DNS TTL out of range")
@@ -374,9 +388,11 @@ def from_tokens(
     elif codec is not None:
         data = codec.from_tokens(tokens, origin)
     elif kind in (RecordType.SVCB, RecordType.HTTPS):
-        data = ServiceBinding.from_tokens(tokens, origin).to_wire()
+        data = ServiceBinding.from_tokens(
+            tokens, origin, encode_label=encode_label
+        ).to_wire()
     elif kind in KINDS:
-        data = parse_special(kind, tokens, origin)
+        data = parse_special(kind, tokens, origin, encode_label=encode_label)
     else:
         fields = _FORMATS.get(kind)
         if fields is None:
@@ -398,7 +414,11 @@ def from_tokens(
                 if offset >= len(tokens):
                     raise ValueError(f"incomplete {type_text(kind)} record")
                 end = len(tokens) if symbol in ("b", "x") else offset + 1
-                parts.append(_parse_field(symbol, "".join(tokens[offset:end]), origin))
+                parts.append(
+                    _parse_field(
+                        symbol, "".join(tokens[offset:end]), origin, encode_label
+                    )
+                )
                 offset = end
         if offset != len(tokens):
             raise ValueError(f"extra fields in {type_text(kind)} record")
@@ -408,6 +428,8 @@ def from_tokens(
     record = ResourceRecord(owner, kind, rdclass, ttl, data)
     if codec is not None:
         codec.decode(record)
+    elif kind in _FINGERPRINT_LENGTHS or kind == RecordType.NSEC3:
+        decoded(record)
     return record
 
 
@@ -467,6 +489,14 @@ def decoded(record: ResourceRecord) -> tuple:
             offset = len(data)
     if offset != len(data):
         raise WireError("trailing data in DNS record")
+    if record.type in _FINGERPRINT_LENGTHS:
+        expected = _FINGERPRINT_LENGTHS[record.type].get(values[-2])
+        if expected is not None and len(values[-1]) != expected:
+            raise WireError(
+                f"{type_text(record.type)} data must contain {expected} octets"
+            )
+    if record.type == RecordType.NSEC3 and not values[4]:
+        raise WireError("NSEC3 next owner hash must be nonempty")
     return tuple(values)
 
 
@@ -1140,16 +1170,32 @@ def _rdata(record: ResourceRecord) -> Rdata:
 def from_text(
     rdclass: int | str,
     rdtype: int | str,
-    text: str,
+    text: str | Tokenizer,
     origin: DomainName | str | None = None,
     relativize: bool = False,
     relativize_to: DomainName | str | None = None,
+    idna_codec=None,
 ) -> Rdata:
-    lines = tuple(master_tokens(text))
-    if len(lines) > 1:
-        raise ValueError("expected one DNS RDATA value")
-    tokens = lines[0][2] if lines else ()
-    result = _rdata(from_tokens((), 0, rdclass, rdtype, tokens, origin=_origin(origin)))
+    if isinstance(text, Tokenizer):
+        tokens = tuple(token.value for token in text._remaining(presentation=True))
+        if idna_codec is None:
+            idna_codec = text.idna_codec
+    else:
+        lines = tuple(master_tokens(text))
+        if len(lines) > 1:
+            raise ValueError("expected one DNS RDATA value")
+        tokens = lines[0][2] if lines else ()
+    result = _rdata(
+        from_tokens(
+            (),
+            0,
+            rdclass,
+            rdtype,
+            tokens,
+            origin=_origin(origin),
+            idna_codec=idna_codec,
+        )
+    )
     if relativize:
         display_origin = _origin(origin if relativize_to is None else relativize_to)
         object.__setattr__(

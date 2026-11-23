@@ -341,9 +341,12 @@ def test_typed_rdata_names_and_fields_round_trip():
     assert host.replace(txt="documentation.example.").txt == name.from_text(
         "documentation.example."
     )
-    fingerprint = rdata.from_text("IN", "SSHFP", "4 2 ABBA")
-    assert fingerprint.fingerprint == b"\xab\xba"
-    assert fingerprint.replace(fp_type=1).to_text() == "4 1 ABBA"
+    fingerprint = rdata.from_text("IN", "SSHFP", "4 2 " + "ABBA" * 16)
+    assert fingerprint.fingerprint == b"\xab\xba" * 16
+    assert (
+        fingerprint.replace(fp_type=1, fingerprint=b"\xab\xba" * 10).to_text()
+        == "4 1 " + "ABBA" * 10
+    )
     parameters = rdata.from_text("IN", "NSEC3PARAM", "1 0 10 AB")
     assert parameters.iterations == 10
     assert rdata.from_wire("IN", "NSEC3PARAM", parameters.to_wire()) == parameters
@@ -409,7 +412,7 @@ def test_resolver_answer_retains_aliases_and_configures_cache_and_edns():
         assert answer.rrset.ttl == 60
         assert start + 14 <= answer.expiration <= time() + 15
         assert len(answer) == 1
-        assert [rdata.from_record(rr) for rr in resolver.resolve("alias")] == [
+        assert list(resolver.resolve("alias")) == [
             rdata.from_record(rr) for rr in answer.records
         ]
         stats = cache.get_statistics_snapshot()
@@ -450,7 +453,7 @@ def test_resolver_servfail_retry_and_tsig_verification():
 
         completed = pool.submit(serve)
         records = resolver.resolve("example.")
-        assert rdata.from_record(records[0]).address == "192.0.2.9"
+        assert records[0].address == "192.0.2.9"
         completed.result(timeout=5)
 
 
@@ -471,7 +474,7 @@ def test_resolver_nodata_can_return_an_empty_answer(monkeypatch):
     assert before + 9 <= answer.expiration <= time() + 10
     with pytest.raises(NoAnswer) as error:
         resolver.resolve("example.", "TXT")
-    assert error.value.answer.response.rcode == 0
+    assert error.value.answer.response.rcode() == 0
 
 
 def test_dnssec_algorithm_and_digest_dataset_apis():

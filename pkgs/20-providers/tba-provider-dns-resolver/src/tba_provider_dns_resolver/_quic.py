@@ -2,15 +2,59 @@
 
 import asyncio
 import ipaddress
+import os
 import socket
 import ssl
 from collections.abc import Callable
 from contextlib import AsyncExitStack, asynccontextmanager
+from copy import copy
 from dataclasses import replace
 
 from tba_codec_dns.wire import Message, RecordType, WireError
 
+from ._http3_tls import client_identity, context_trust
 from ._socket_transport import check_response, deadline_after, remaining
+
+
+class UnexpectedEOF(WireError):
+    """The peer closed a QUIC stream before its message was complete."""
+
+
+def _client_configuration(conf, verify_mode, server_name, h3):
+    from aioquic.quic.configuration import QuicConfiguration
+
+    if conf is not None:
+        return copy(conf), None
+    alpn = ["doq"]
+    if h3:
+        from aioquic.h3.connection import H3_ALPN
+
+        alpn = H3_ALPN
+    options = {}
+    policy = None
+    if isinstance(verify_mode, (str, os.PathLike)):
+        options["cafile"] = os.fspath(verify_mode)
+        verify_mode = ssl.CERT_REQUIRED
+    elif h3 and isinstance(verify_mode, ssl.SSLContext):
+        verify, ca_data, policy, cipher_suites = context_trust(verify_mode)
+        identity = client_identity(verify_mode)
+        options.update(cadata=ca_data, cipher_suites=cipher_suites)
+        if identity is not None:
+            options.update(
+                certificate=identity.chain[0],
+                certificate_chain=list(identity.chain[1:]),
+                private_key=identity.private_key,
+            )
+        verify_mode = ssl.CERT_REQUIRED if verify else ssl.CERT_NONE
+    elif isinstance(verify_mode, bool):
+        verify_mode = ssl.CERT_REQUIRED if verify_mode else ssl.CERT_NONE
+    return QuicConfiguration(
+        is_client=True,
+        alpn_protocols=alpn,
+        server_name=server_name,
+        verify_mode=verify_mode,
+        **options,
+    ), policy
 
 
 def _has_tsig(message: Message) -> bool:
@@ -18,6 +62,8 @@ def _has_tsig(message: Message) -> bool:
 
 
 def _zero_id_request(query: Message) -> Message:
+    if query._sign_on_wire and not _has_tsig(query):
+        return replace(query, id=0, _original_id=0)
     if query.id == 0:
         return query
     if _has_tsig(query):
@@ -29,6 +75,22 @@ def _restore_id(response: Message, identifier: int) -> Message:
     if response.id == identifier or _has_tsig(response):
         return response
     return replace(response, id=identifier)
+
+
+def _check_certificate_ip(certificates, address):
+    from cryptography.x509 import ExtensionNotFound, IPAddress, SubjectAlternativeName
+
+    expected = ipaddress.ip_address(address)
+    if certificates:
+        try:
+            san = certificates[0].extensions.get_extension_for_class(
+                SubjectAlternativeName
+            )
+            if expected in san.value.get_values_for_type(IPAddress):
+                return
+        except ExtensionNotFound:
+            pass
+    raise WireError("QUIC certificate does not cover the original DNS resolver address")
 
 
 def _deadline(timeout):
@@ -205,7 +267,6 @@ async def _verified_quic_connection(
     from aioquic.asyncio import QuicConnectionProtocol, connect
     from aioquic.quic.configuration import QuicConfiguration
     from aioquic.quic.events import HandshakeCompleted
-    from cryptography.x509 import ExtensionNotFound, IPAddress, SubjectAlternativeName
 
     if certificate_ip is not None and not verify and peer_policy is None:
         raise ValueError("certificate IP checking requires QUIC verification")
@@ -250,21 +311,8 @@ async def _verified_quic_connection(
     def validate_peer(certificates):
         if peer_policy is not None:
             peer_policy(certificates)
-        if certificate_ip is None:
-            return
-        expected = ipaddress.ip_address(certificate_ip)
-        if certificates:
-            try:
-                san = certificates[0].extensions.get_extension_for_class(
-                    SubjectAlternativeName
-                )
-                if expected in san.value.get_values_for_type(IPAddress):
-                    return
-            except ExtensionNotFound:
-                pass
-        raise WireError(
-            "QUIC certificate does not cover the original DNS resolver address"
-        )
+        if certificate_ip is not None:
+            _check_certificate_ip(certificates, certificate_ip)
 
     options = dict(
         configuration=configuration,
@@ -288,42 +336,11 @@ async def _verified_quic_connection(
         yield peer
 
 
-@asynccontextmanager
-async def _connect_from(
-    server,
-    port,
-    local_address,
-    *,
-    configuration,
-    create_protocol,
-    token_handler,
-    local_port,
-    validate_peer=None,
+def _new_connection(
+    configuration, validate_peer, session_ticket_handler, token_handler
 ):
     from aioquic import tls
     from aioquic.quic.connection import QuicConnection
-
-    loop = asyncio.get_running_loop()
-    local = None
-    family = socket.AF_UNSPEC
-    if local_address is not None:
-        family, _, _, _, local = (
-            await loop.getaddrinfo(
-                local_address,
-                local_port,
-                type=socket.SOCK_DGRAM,
-                flags=socket.AI_NUMERICHOST,
-            )
-        )[0]
-    family, kind, proto, _, peer_address = (
-        await loop.getaddrinfo(server, port, family=family, type=socket.SOCK_DGRAM)
-    )[0]
-    if local is None:
-        local = (
-            ("::", local_port, 0, 0)
-            if family == socket.AF_INET6
-            else ("0.0.0.0", local_port)
-        )
 
     class AuthenticatedConnection(QuicConnection):
         def _initialize(self, peer_cid):
@@ -338,6 +355,7 @@ async def _connect_from(
                         (context._peer_certificate, *context._peer_certificate_chain)
                     )
                 except (WireError, ValueError) as exc:
+                    self._dns_peer_error = exc
                     raise tls.AlertBadCertificate(str(exc)) from exc
 
             # aioquic has no public per-connection certificate validation hook.
@@ -346,8 +364,53 @@ async def _connect_from(
             context._client_handle_certificate_verify = verify_before_client_identity
 
     cls = QuicConnection if validate_peer is None else AuthenticatedConnection
-    connection = cls(configuration=configuration, token_handler=token_handler)
-    sock = socket.socket(family, kind, proto)
+    return cls(
+        configuration=configuration,
+        token_handler=token_handler,
+        session_ticket_handler=session_ticket_handler,
+    )
+
+
+@asynccontextmanager
+async def _connect_from(
+    server,
+    port,
+    local_address,
+    *,
+    configuration,
+    create_protocol,
+    token_handler,
+    local_port,
+    validate_peer=None,
+    session_ticket_handler=None,
+    socket_factory=socket.socket,
+):
+    loop = asyncio.get_running_loop()
+    local = None
+    family = socket.AF_UNSPEC
+    if local_address is not None:
+        family, _, _, _, local = (
+            await loop.getaddrinfo(
+                local_address,
+                local_port,
+                type=socket.SOCK_DGRAM,
+                flags=socket.AI_NUMERICHOST,
+            )
+        )[0]
+    family, kind, _, _, peer_address = (
+        await loop.getaddrinfo(server, port, family=family, type=socket.SOCK_DGRAM)
+    )[0]
+    if local is None:
+        local = (
+            ("::", local_port, 0, 0)
+            if family == socket.AF_INET6
+            else ("0.0.0.0", local_port)
+        )
+
+    connection = _new_connection(
+        configuration, validate_peer, session_ticket_handler, token_handler
+    )
+    sock = socket_factory(family, kind, 0)
     try:
         sock.bind(local)
         transport, protocol = await loop.create_datagram_endpoint(

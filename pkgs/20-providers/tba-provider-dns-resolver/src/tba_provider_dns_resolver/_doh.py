@@ -3,9 +3,12 @@
 import asyncio
 import base64
 import http.client
+import ipaddress
 import socket
 import ssl
 from dataclasses import replace
+from enum import IntEnum
+from importlib.util import find_spec
 from urllib.parse import urlsplit, urlunsplit
 
 from tba_codec_dns.wire import Message, WireError
@@ -19,6 +22,56 @@ from ._socket_transport import (
     deadline_after,
     remaining,
 )
+
+
+class NoDOH(WireError):
+    """The requested DNS-over-HTTPS transport is unavailable."""
+
+
+class HTTPVersion(IntEnum):
+    DEFAULT = 0
+    HTTP_1 = 1
+    H1 = 1
+    HTTP_2 = 2
+    H2 = 2
+    HTTP_3 = 3
+    H3 = 3
+
+
+def _https_transport(version, client, have_doh):
+    """Select HTTP/3 or load the available HTTP/1.1 and HTTP/2 client."""
+    if version == HTTPVersion.H3 or (
+        version == HTTPVersion.DEFAULT and hasattr(client, "make_stream")
+    ):
+        use_h3 = True
+    else:
+        httpx = None
+        if have_doh:
+            try:
+                import httpx
+            except ImportError:
+                pass
+        if httpx is not None:
+            use_h2 = version != HTTPVersion.H1
+            if use_h2 and client is None and find_spec("h2") is None:
+                if version == HTTPVersion.H2:
+                    raise NoDOH("HTTP/2 requires the http2 extra")
+                use_h2 = False
+            return False, httpx, use_h2
+        use_h3 = version == HTTPVersion.DEFAULT and client is None
+    if not use_h3:
+        raise NoDOH("HTTP/1.1 and HTTP/2 require the http2 extra")
+    if client is None and find_spec("aioquic") is None:
+        raise NoDOH("HTTP/3 requires the quic extra")
+    return True, None, False
+
+
+def _literal_address(hostname):
+    try:
+        ipaddress.ip_address(hostname)
+    except ValueError:
+        return None
+    return hostname
 
 
 def _deadline(timeout):
@@ -43,6 +96,8 @@ def https_query(
     certificate_ip: str | None = None,
     token: bytes = b"",
     session=None,
+    local_address=None,
+    local_port=0,
 ) -> Message:
     if session is not None:
         _check_http_session_options(
@@ -53,6 +108,8 @@ def https_query(
             bootstrap_address,
             certificate_ip,
             token,
+            local_address,
+            local_port,
         )
         return _https_with_session(query, url, timeout, post, http_version, session)
     if token and http_version != 3:
@@ -71,6 +128,8 @@ def https_query(
                 certificate_ip=certificate_ip,
                 token=token,
                 context=context,
+                local_address=local_address,
+                local_port=local_port,
             )
         )
     if http_version == 2:
@@ -81,6 +140,8 @@ def https_query(
                 timeout=timeout,
                 post=post,
                 context=context,
+                local_address=local_address,
+                local_port=local_port,
                 bootstrap_address=bootstrap_address,
                 certificate_ip=certificate_ip,
             )
@@ -93,6 +154,8 @@ def https_query(
         context=context,
         bootstrap_address=bootstrap_address,
         certificate_ip=certificate_ip,
+        local_address=local_address,
+        local_port=local_port,
     )
 
 
@@ -194,15 +257,23 @@ def _https_context(http_version, context, ca_file, ca_data, certificate_ip):
 
 
 class _BootstrapHttpsConnection(http.client.HTTPSConnection):
-    def __init__(self, host, port, deadline, context, address, certificate_ip):
-        super().__init__(host, port, timeout=_remaining(deadline), context=context)
+    def __init__(self, host, port, deadline, context, address, certificate_ip, source):
+        super().__init__(
+            host,
+            port,
+            timeout=_remaining(deadline),
+            context=context,
+            source_address=source,
+        )
         self._deadline = deadline
         self._address = address
         self._certificate_ip = certificate_ip
 
     def connect(self):
         sock = socket.create_connection(
-            (self._address or self.host, self.port), timeout=_remaining(self._deadline)
+            (self._address or self.host, self.port),
+            timeout=_remaining(self._deadline),
+            source_address=self.source_address,
         )
         try:
             sock.settimeout(_remaining(self._deadline))
@@ -225,6 +296,8 @@ def _https1_query(
     bootstrap_address: str | None = None,
     certificate_ip: str | None = None,
     parse_options=None,
+    local_address=None,
+    local_port=0,
 ) -> Message:
     deadline = _deadline(timeout)
     target, method, request_uri, headers, body = _https_request(query, url, post)
@@ -235,6 +308,7 @@ def _https1_query(
         context,
         bootstrap_address,
         certificate_ip,
+        (local_address or "", local_port) if local_address or local_port else None,
     )
     try:
         connection.request(method, request_uri, body, headers)
@@ -260,7 +334,12 @@ def _https1_query(
         connection.close()
 
 
-def _https_request(query: Message, url: str, post: bool):
+def _https_request(query: Message, url: str, post: bool, *, zero_id=True):
+    packet = (_zero_id_request(query) if zero_id else query).to_wire()
+    return _https_request_fields(packet, url, post)
+
+
+def _https_request_fields(packet: bytes, url: str, post: bool):
     target = urlsplit(url)
     if (
         target.scheme != "https"
@@ -271,7 +350,6 @@ def _https_request(query: Message, url: str, post: bool):
         raise ValueError(
             "DoH requires an HTTPS endpoint without credentials or a fragment"
         )
-    packet = _zero_id_request(query).to_wire()
     headers = {"Accept": "application/dns-message"}
     params = target.query
     if post:
@@ -285,6 +363,18 @@ def _https_request(query: Message, url: str, post: bool):
         body = None
     request_uri = urlunsplit(("", "", target.path or "/", params, ""))
     return target, "POST" if post else "GET", request_uri, headers, body
+
+
+def _https3_request(query, url, post, parse_options):
+    packet = _zero_id_request(query).to_wire()
+    if query.tsig_key is not None:
+        sent = Message.from_wire(packet)
+        if sent.had_tsig:
+            parse_options = dict(parse_options or ())
+            parse_options.setdefault("keyring", query.tsig_key)
+            parse_options["request_mac"] = sent.mac
+    target, _, _, _, _ = _https_request_fields(packet, url, post)
+    return target, packet, parse_options
 
 
 def _extend_https(data: bytearray, chunk: bytes) -> None:
@@ -301,9 +391,11 @@ def _check_https_status(status: int, content_type: str) -> None:
         raise WireError(f"unexpected DNS HTTPS response ({status})")
 
 
-def _https_response(query: Message, data: bytearray, parse_options=None) -> Message:
+def _https_response(
+    query: Message, data: bytearray, parse_options=None, *, zero_id=True
+) -> Message:
     result = Message.from_wire(bytes(data), **(parse_options or {}))
-    check_response(replace(query, id=0), result)
+    check_response(replace(query, id=0) if zero_id else query, result)
     return _restore_id(result, query.id)
 
 
@@ -317,6 +409,8 @@ async def _https2_query(
     bootstrap_address: str | None = None,
     certificate_ip: str | None = None,
     parse_options=None,
+    local_address=None,
+    local_port=0,
 ) -> Message:
     import httpx
 
@@ -324,7 +418,12 @@ async def _https2_query(
     target, method, path, headers, body = _https_request(query, url, post)
 
     async def exchange() -> Message:
-        if bootstrap_address is not None or certificate_ip is not None:
+        if (
+            bootstrap_address is not None
+            or certificate_ip is not None
+            or local_address
+            or local_port
+        ):
             from ._https2 import bootstrap_query
 
             return await bootstrap_query(
@@ -337,6 +436,8 @@ async def _https2_query(
                 bootstrap_address,
                 certificate_ip,
                 parse_options,
+                source=local_address,
+                source_port=local_port,
             )
         try:
             async with httpx.AsyncClient(
@@ -397,11 +498,11 @@ async def https3_query(
     context=None,
     local_address=None,
     local_port=0,
+    check_status=_check_https_status,
 ) -> Message:
-    from aioquic.asyncio import QuicConnectionProtocol
-    from aioquic.h3.connection import H3_ALPN, H3Connection
-    from aioquic.h3.events import DataReceived, HeadersReceived
-    from aioquic.quic.events import ConnectionTerminated, StreamReset
+    from aioquic.h3.connection import H3_ALPN
+
+    from ._quic_h3 import H3Peer
 
     peer_policy = None
     identity = None
@@ -411,72 +512,7 @@ async def https3_query(
         verify, ca_data, peer_policy, cipher_suites = context_trust(context)
         identity = client_identity(context)
     deadline = _deadline(timeout)
-    target, method, path, headers, body = _https_request(query, url, post)
-
-    class Exchange(QuicConnectionProtocol):
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
-            self.http = H3Connection(self._quic)
-            self.result = asyncio.get_running_loop().create_future()
-            self.data = bytearray()
-            self.stream_id = None
-            self.got_headers = False
-
-        async def query(self) -> Message:
-            self.stream_id = self._quic.get_next_available_stream_id()
-            fields = [
-                (b":method", method.encode("ascii")),
-                (b":scheme", b"https"),
-                (b":authority", target.netloc.encode("ascii")),
-                (b":path", path.encode("ascii")),
-                *(
-                    (name.lower().encode("ascii"), value.encode("ascii"))
-                    for name, value in headers.items()
-                ),
-            ]
-            if body is not None:
-                fields.append((b"content-length", str(len(body)).encode("ascii")))
-            self.http.send_headers(self.stream_id, fields, end_stream=body is None)
-            if body is not None:
-                self.http.send_data(self.stream_id, body, end_stream=True)
-            self.transmit()
-            return await self.result
-
-        def quic_event_received(self, event) -> None:
-            if self.result.done() or self.stream_id is None:
-                return
-            if isinstance(event, ConnectionTerminated) or (
-                isinstance(event, StreamReset) and event.stream_id == self.stream_id
-            ):
-                self.result.set_exception(OSError("DNS HTTP/3 stream closed early"))
-                return
-            try:
-                for item in self.http.handle_event(event):
-                    if item.stream_id != self.stream_id:
-                        continue
-                    if isinstance(item, HeadersReceived) and not self.got_headers:
-                        fields = dict(item.headers)
-                        status = int(fields.get(b":status", b"0"))
-                        if 100 <= status < 200:
-                            continue
-                        _check_https_status(
-                            status, fields.get(b"content-type", b"").decode("ascii")
-                        )
-                        self.got_headers = True
-                    if isinstance(item, DataReceived):
-                        _extend_https(self.data, item.data)
-                    if (
-                        isinstance(item, (DataReceived, HeadersReceived))
-                        and item.stream_ended
-                    ):
-                        if not self.got_headers:
-                            raise WireError("missing DNS HTTP/3 response headers")
-                        self.result.set_result(
-                            _https_response(query, self.data, parse_options)
-                        )
-                        return
-            except ValueError as exc:
-                self.result.set_exception(exc)
+    target, packet, parse_options = _https3_request(query, url, post, parse_options)
 
     async def exchange() -> Message:
         async with _verified_quic_connection(
@@ -488,7 +524,7 @@ async def https3_query(
             ca_data=ca_data,
             certificate_ip=certificate_ip,
             token=token,
-            protocol=Exchange,
+            protocol=H3Peer,
             verify=verify,
             peer_policy=peer_policy,
             client_identity=identity,
@@ -496,6 +532,16 @@ async def https3_query(
             local_address=local_address,
             local_port=local_port,
         ) as peer:
-            return await peer.query()
+            stream = peer.send_dns(url, packet, post)
+            try:
+                data = await asyncio.shield(stream.result)
+                fields = dict(stream.headers)
+                check_status(
+                    int(fields.get(b":status", b"0")),
+                    fields.get(b"content-type", b"").decode("ascii"),
+                )
+                return _https_response(query, data, parse_options)
+            finally:
+                peer.close_exchange(stream)
 
     return await asyncio.wait_for(exchange(), timeout=_remaining(deadline))

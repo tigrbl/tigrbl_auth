@@ -367,19 +367,33 @@ def test_compat_asyncquery_doh_and_doq_borrow_sessions():
 
 
 @pytest.mark.parametrize(
-    ("incremental", "incomplete", "udp_first"),
+    ("incremental", "incomplete", "udp_first", "sync"),
     [
-        (False, False, False),
-        (True, False, False),
-        (True, True, False),
-        (True, False, True),
+        (False, False, False, False),
+        (True, False, False, False),
+        (True, True, False, False),
+        (True, False, True, False),
+        (False, False, False, True),
+        (True, False, False, True),
+        (True, True, False, True),
+        (True, False, True, True),
     ],
 )
 def test_inbound_xfr_commits_only_after_final_tcp_frame(
-    incremental, incomplete, udp_first
+    incremental, incomplete, udp_first, sync, monkeypatch
 ):
-    from tba_provider_dns_resolver import asyncquery
+    from tba_codec_dns.tsig import StreamSigner, TsigError, TsigKey, sign, verify
+    from tba_protocol_dns.xfr import UseTCP, make_query
+    from tba_provider_dns_resolver import asyncquery, query
 
+    created = []
+
+    def factory(af, kind, proto):
+        sock = socket.socket(af, kind, proto)
+        created.append((kind, proto, sock))
+        return sock
+
+    monkeypatch.setattr(query, "socket_factory", factory)
     zone_text = "$ORIGIN example.\n$TTL 60\n@ SOA ns admin {} 2 3 4 5\n@ NS ns\nns A 192.0.2.{}\n"
     before = Zone.from_text(zone_text.format(1, 1))
     after = Zone.from_text(zone_text.format(2, 2))
@@ -388,11 +402,14 @@ def test_inbound_xfr_commits_only_after_final_tcp_frame(
     old_soa = before.get("@", "SOA").records[0]
     old_ip = before.get("ns", "A").records[0]
     new_ip = after.get("ns", "A").records[0]
+    signed = sync and not udp_first
+    key = TsigKey((b"transfer", b"example"), b"transfer-fixture")
 
     async def serve(reader, writer):
         try:
             length = int.from_bytes(await reader.readexactly(2), "big")
-            query = wire.Message.from_wire(await reader.readexactly(length))
+            request = await reader.readexactly(length)
+            query = wire.Message.from_wire(request)
             if incremental:
                 assert query.questions[0].type == wire.RecordType.IXFR
                 first = (opening, old_soa, old_ip)
@@ -401,9 +418,16 @@ def test_inbound_xfr_commits_only_after_final_tcp_frame(
                 assert query.questions[0].type == wire.RecordType.AXFR
                 first = (opening, *after.get("@", "NS").records)
                 last = (new_ip, opening)
-            for answers in (first,) if incomplete else (first, last):
-                packet = wire.Message(query.id, 0x8400, query.questions, answers)
-                writer.write(packet.to_wire(prepend_length=True))
+            signer = StreamSigner(key) if signed else None
+            mac = verify(request, key).mac if signed else None
+            messages = (first,) if incomplete and not signed else (first, last)
+            for index, answers in enumerate(messages):
+                packet = wire.Message(
+                    query.id, 0x8400, query.questions, answers
+                ).to_wire()
+                if signed and (not incomplete or index == 0):
+                    packet, _ = sign(packet, key, request_mac=mac, context=signer)
+                writer.write(len(packet).to_bytes(2, "big") + packet)
                 await writer.drain()
         finally:
             writer.close()
@@ -441,9 +465,74 @@ def test_inbound_xfr_commits_only_after_final_tcp_frame(
         backend = TransferBackend() if udp_first else native
         async with await asyncio.start_server(serve, "127.0.0.1", 0) as peer:
             port = peer.sockets[0].getsockname()[1]
-            if udp_first:
-                from tba_protocol_dns.xfr import UseTCP
+            if sync:
+                if udp_first:
 
+                    class TruncatingPeer(asyncio.DatagramProtocol):
+                        def connection_made(self, transport):
+                            self.transport = transport
+
+                        def datagram_received(self, data, address):
+                            request = wire.Message.from_wire(data)
+                            answer = wire.Message(request.id, 0x8600, request.questions)
+                            self.transport.sendto(answer.to_wire(), address)
+
+                    (
+                        datagrams,
+                        _,
+                    ) = await asyncio.get_running_loop().create_datagram_endpoint(
+                        TruncatingPeer, local_addr=("127.0.0.1", port)
+                    )
+                try:
+                    options = dict(port=port, timeout=2, lifetime=3, source="127.0.0.1")
+                    if signed:
+                        options["query"], _ = make_query(zone, keyring=key)
+                    if udp_first:
+                        with pytest.raises(UseTCP):
+                            await asyncio.to_thread(
+                                query.inbound_xfr,
+                                "127.0.0.1",
+                                zone,
+                                udp_mode=query.UDPMode.ONLY,
+                                **options,
+                            )
+                        assert zone.get_soa().serial == 1
+                        options["udp_mode"] = query.UDPMode.TRY_FIRST
+                    if incomplete:
+                        with pytest.raises(TsigError if signed else wire.WireError):
+                            await asyncio.to_thread(
+                                query.inbound_xfr, "127.0.0.1", zone, **options
+                            )
+                    else:
+                        await asyncio.to_thread(
+                            query.inbound_xfr, "127.0.0.1", zone, **options
+                        )
+                    if not incremental:
+                        from tba_concrete_dns_zone.zone import from_xfr
+
+                        def fetch_zone():
+                            frames = list(
+                                query.xfr(
+                                    "127.0.0.1",
+                                    "example.",
+                                    port=port,
+                                    timeout=2,
+                                    keyring=key if signed else None,
+                                )
+                            )
+                            assert len(frames) == 2
+                            assert all(frame.had_tsig == signed for frame in frames)
+                            assert not frames[0].answer[0].name.is_absolute()
+                            return from_xfr(frames)
+
+                        assert (
+                            await asyncio.to_thread(fetch_zone)
+                        ).get_soa().serial == 2
+                finally:
+                    if udp_first:
+                        datagrams.close()
+                return
+            if udp_first:
                 with pytest.raises(UseTCP):
                     await asyncquery.inbound_xfr(
                         "127.0.0.1",
@@ -473,6 +562,15 @@ def test_inbound_xfr_commits_only_after_final_tcp_frame(
                 await transfer
 
     asyncio.run(exercise())
+    expected = []
+    if sync:
+        if udp_first:
+            expected.extend((socket.SOCK_DGRAM, socket.SOCK_DGRAM))
+        expected.append(socket.SOCK_STREAM)
+        if not incremental:
+            expected.append(socket.SOCK_STREAM)
+    assert [kind for kind, _, _ in created] == expected
+    assert all(proto == 0 and sock.fileno() == -1 for _, proto, sock in created)
     assert zone.get_soa().serial == (1 if incomplete else 2)
     assert zone.get("ns", "A").records[0].data == (
         old_ip.data if incomplete else new_ip.data
@@ -530,6 +628,63 @@ def test_borrowed_http3_stream_honors_headers_options_and_ownership(status):
                 await call
 
     asyncio.run(exercise())
+    assert released == [True]
+
+
+@pytest.mark.parametrize("use_http3", [False, True])
+def test_sync_borrows_quic_stream_and_checks_dns_reply(use_http3):
+    from contextlib import contextmanager
+
+    from tba_provider_dns_resolver import query
+
+    class Stream:
+        def send(self, packet, end):
+            self.request = message.from_wire(packet)
+            assert self.request.id == 0
+            assert end
+
+        def send_h3(self, url, packet, post):
+            assert url == "https://resolver.example:443/dns-query"
+            assert not post
+            self.send(packet, True)
+
+        def receive(self, timeout):
+            assert 0 < timeout <= 2
+            return message.make_response(self.request).to_wire() + b"trailing"
+
+        def headers(self):
+            return {b":status": b"202"}
+
+    released = []
+
+    class Connection:
+        @contextmanager
+        def make_stream(self, timeout):
+            assert timeout == 2
+            try:
+                yield Stream()
+            finally:
+                released.append(True)
+
+    request = message.make_query("example.", id=142)
+    if use_http3:
+        response = query.https(
+            request,
+            "resolver.example",
+            timeout=2,
+            session=Connection(),
+            ignore_trailing=True,
+            post=False,
+        )
+    else:
+        response = query.quic(
+            request,
+            "127.0.0.1",
+            timeout=2,
+            connection=Connection(),
+            ignore_trailing=True,
+        )
+    assert request.id == 0 and request.is_response(response)
     assert released == [True]
 
 

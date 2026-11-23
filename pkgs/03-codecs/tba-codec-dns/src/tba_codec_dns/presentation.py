@@ -2,6 +2,7 @@
 
 from tba_primitives_dns_name.names import name_text, parse_name
 
+from . import flags as dns_flags
 from .rdata import from_tokens, parse_ttl, record_text
 from .tokenizer import master_tokens
 from .wire import (
@@ -47,16 +48,6 @@ _RCODES = {
     "BADTRUNC": 22,
     "BADCOOKIE": 23,
 }
-_FLAGS = {
-    "QR": 0x8000,
-    "AA": 0x0400,
-    "TC": 0x0200,
-    "RD": 0x0100,
-    "RA": 0x0080,
-    "Z": 0x0040,
-    "AD": 0x0020,
-    "CD": 0x0010,
-}
 _SECTIONS = ("QUESTION", "ANSWER", "AUTHORITY", "ADDITIONAL")
 _UPDATE_SECTIONS = ("ZONE", "PREREQUISITE", "UPDATE", "ADDITIONAL")
 _CODES = {"id", "opcode", "rcode", "flags", "edns", "eflags", "payload", "option"}
@@ -75,7 +66,7 @@ def _code_text(code: int, values: dict[str, int]) -> str:
 
 
 def message_text(message: Message) -> str:
-    flags = " ".join(name for name, mask in _FLAGS.items() if message.flags & mask)
+    flags = dns_flags.to_text(message.flags & 0x87F0)
     lines = [
         f"id {message.id}",
         f"opcode {_code_text(message.opcode, _OPCODES)}",
@@ -84,7 +75,11 @@ def message_text(message: Message) -> str:
     ]
     if edns := message.edns:
         lines.extend(
-            (f"edns {edns.version}", f"eflags {edns.flags}", f"payload {edns.payload}")
+            (
+                f"edns {edns.version}",
+                f"eflags {dns_flags.edns_to_text(edns.flags)}".rstrip(),
+                f"payload {edns.payload}",
+            )
         )
         lines.extend(
             f"option {option.code} {option.data.hex().upper()}".rstrip()
@@ -125,8 +120,17 @@ def parse_message(text: str) -> Message:
                 if label not in _CODES:
                     raise ValueError(f"unknown DNS message header {label!r}")
                 if label == "flags":
-                    for flag in args:
-                        flags |= _FLAGS[flag.upper()]
+                    flags |= dns_flags.from_text(
+                        " ".join(
+                            "FLAG6" if flag.upper() == "Z" else flag for flag in args
+                        )
+                    )
+                elif label == "eflags":
+                    edns_flags = (
+                        _code(args[0], {}, 65535)
+                        if len(args) == 1 and args[0].isascii() and args[0].isdecimal()
+                        else dns_flags.edns_from_text(" ".join(args))
+                    )
                 elif label == "option":
                     if not args:
                         raise ValueError("missing EDNS option code")
@@ -147,8 +151,6 @@ def parse_message(text: str) -> Message:
                         rcode = _code(value, _RCODES, 4095)
                     elif label == "edns":
                         edns_version = _code(value, {}, 255)
-                    elif label == "eflags":
-                        edns_flags = _code(value, {"DO": 0x8000}, 65535)
                     elif label == "payload":
                         payload = _code(value, {}, 65535)
             elif section == 0:

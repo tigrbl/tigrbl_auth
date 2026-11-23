@@ -56,6 +56,8 @@ options {
 zone "interop.test" {
     type primary;
     file "db.interop";
+    allow-transfer { 127.0.0.1; };
+    max-ixfr-ratio unlimited;
     update-policy { grant "client@DNS-PEER.TEST" name allowed.interop.test. A; };
 };
 EOF

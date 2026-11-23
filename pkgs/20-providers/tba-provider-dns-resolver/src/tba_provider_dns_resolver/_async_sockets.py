@@ -49,6 +49,7 @@ class StreamSocket(Socket):
 class _DatagramProtocol(asyncio.DatagramProtocol):
     def __init__(self):
         self.incoming = asyncio.Queue()
+        self.closed = asyncio.Event()
 
     def datagram_received(self, data, addr):
         self.incoming.put_nowait((data, addr))
@@ -58,6 +59,7 @@ class _DatagramProtocol(asyncio.DatagramProtocol):
 
     def connection_lost(self, exc):
         self.incoming.put_nowait(exc or OSError("DNS datagram socket closed"))
+        self.closed.set()
 
 
 class AsyncioDatagram(DatagramSocket):
@@ -65,9 +67,11 @@ class AsyncioDatagram(DatagramSocket):
         super().__init__(family, type)
         self._transport = transport
         self._incoming = protocol.incoming
+        self._closed = protocol.closed
 
     async def close(self):
         self._transport.close()
+        await self._closed.wait()
 
     async def getpeername(self):
         return self._transport.get_extra_info("peername")

@@ -4,8 +4,9 @@ import time
 from importlib.util import find_spec
 
 import gssapi
-from tba_codec_dns.rdata import decoded
 from tba_codec_dns.wire import Message, RecordType
+from tba_concrete_dns_zone.zone import from_xfr
+from tba_provider_dns_resolver import query
 from tba_provider_dns_resolver.client import NXDOMAIN, NoAnswer, Resolver
 from tba_protocol_dns.gss_tsig import negotiate
 from tba_provider_dns_resolver.transport import tcp_query
@@ -58,7 +59,7 @@ def main() -> None:
     accepted = Message.from_wire(reply.to_wire(), key, request_mac=request.mac)
     assert accepted.had_tsig and accepted.tsig_key is key
     assert accepted.rcode == 0
-    assert str(decoded(resolver.resolve(allowed, "A", tcp=True)[0])[0]) == "192.0.2.8"
+    assert resolver.resolve(allowed, "A", tcp=True)[0].address == "192.0.2.8"
 
     denied = send_update(update_for(forbidden, "192.0.2.9"), SERVER, port=PORT, key=key)
     assert denied.rcode == 5
@@ -79,10 +80,30 @@ def main() -> None:
     assert rejected.rcode == 9
     token = next(rr for rr in rejected.additional if rr.type == RecordType.TSIG)
     assert TsigRecord.from_data(token.data).error == 16
-    assert str(decoded(resolver.resolve(allowed, "A", tcp=True)[0])[0]) == "192.0.2.8"
+    assert resolver.resolve(allowed, "A", tcp=True)[0].address == "192.0.2.8"
     print(
         "BIND GSS-TSIG passed TKEY negotiation, signed UPDATE and reply, policy denial, and BADSIG rejection"
     )
+    snapshot = from_xfr(query.xfr(SERVER, ZONE, port=PORT, timeout=2, lifetime=5))
+    initial = snapshot.get_soa().serial
+    assert snapshot.get_rdataset("allowed", "A")[0].address == "192.0.2.8"
+    updated = send_update(update_for(allowed, "192.0.2.12"), SERVER, port=PORT, key=key)
+    assert updated.rcode == 0
+    delta = query.xfr(
+        SERVER, ZONE, "IXFR", port=PORT, timeout=2, lifetime=5, serial=initial
+    )
+    serials = [
+        record.serial
+        for frame in delta
+        for rrset in frame.answer
+        if rrset.rdtype == RecordType.SOA
+        for record in rrset
+    ]
+    assert serials == [initial + 1, initial, initial + 1, initial + 1], serials
+    query.inbound_xfr(SERVER, snapshot, port=PORT, timeout=2, lifetime=5)
+    assert snapshot.get_soa().serial == initial + 1
+    assert snapshot.get_rdataset("allowed", "A")[0].address == "192.0.2.12"
+    print("BIND passed AXFR snapshot and IXFR update")
 
 
 if __name__ == "__main__":

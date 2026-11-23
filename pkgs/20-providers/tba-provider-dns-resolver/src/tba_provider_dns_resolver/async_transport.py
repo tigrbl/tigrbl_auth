@@ -384,6 +384,8 @@ async def https_query(
             bootstrap_address,
             certificate_ip,
             token,
+            local_address,
+            local_port,
         )
         return await _doh._async_https_with_session(
             query, url, timeout, post, http_version, session
@@ -403,8 +405,12 @@ async def https_query(
             bootstrap_address=bootstrap_address,
             certificate_ip=certificate_ip,
             parse_options=parse_options,
+            local_address=local_address,
+            local_port=local_port,
         )
     if http_version == 3:
+        from ._async_quic import query_h3
+
         options = dict(
             timeout=timeout,
             post=post,
@@ -419,13 +425,9 @@ async def https_query(
             local_address=local_address,
             local_port=local_port,
         )
-        if _asyncio_active():
-            return await transport.https3_query(query, url, **options)
-
-        def run():
-            return asyncio.run(transport.https3_query(query, url, **options))
-
-        return await run_blocking(run)
+        return await query_h3(
+            "asyncio" if _asyncio_active() else "trio", query, url, **options
+        )
     return await run_blocking(
         _doh._https1_query,
         query,
@@ -436,6 +438,8 @@ async def https_query(
         bootstrap_address=bootstrap_address,
         certificate_ip=certificate_ip,
         parse_options=parse_options,
+        local_address=local_address,
+        local_port=local_port,
     )
 
 
@@ -448,10 +452,8 @@ async def quic_query(query: Message, server: str, *, backend=None, **kwargs) -> 
 
 
 async def _native_quic_query(query: Message, server: str, **kwargs) -> Message:
-    if _asyncio_active():
-        return await transport.quic_query(query, server, **kwargs)
+    from ._async_quic import query_doq
 
-    def run() -> Message:
-        return asyncio.run(transport.quic_query(query, server, **kwargs))
-
-    return await run_blocking(run)
+    return await query_doq(
+        "asyncio" if _asyncio_active() else "trio", query, server, **kwargs
+    )

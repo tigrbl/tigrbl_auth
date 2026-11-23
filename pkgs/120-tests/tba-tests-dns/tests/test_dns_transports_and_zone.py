@@ -386,11 +386,11 @@ def test_dns_search_and_cache_over_udp(monkeypatch):
             search=["example."],
             cache=Cache(2),
         )
-        assert resolver.resolve("local", search=True)[0].ttl == 60
+        assert resolver.resolve("local", search=True).ttl == 60
         clock[0] += 5
-        assert resolver.resolve("local", search=True)[0].ttl == 55
+        assert resolver.resolve("local", search=True).ttl == 55
         clock[0] += 60
-        assert resolver.resolve("local", search=True)[0].ttl == 60
+        assert resolver.resolve("local", search=True).ttl == 60
         server.result(timeout=5)
 
 
@@ -443,13 +443,14 @@ def _address_response(packet):
     return _response(packet, answers=(_record(1, b"\xc0\x00\x02\x01"),))
 
 
-def _authenticated_address_response(packet, key):
+def _authenticated_address_response(packet, key, identifier=0):
     request = Message.from_wire(packet)
-    assert request.id == 0
-    request_mac = verify(packet, key).mac
+    assert request.id == identifier
+    authentication = verify(packet, key)
+    assert authentication.original_id == identifier
     address = from_tokens(request.questions[0].name, 60, "IN", "A", ("192.0.2.1",))
     response = replace(make_response(request), answers=(address,))
-    return sign(response.to_wire(), key, request_mac=request_mac)[0]
+    return sign(response.to_wire(), key, request_mac=authentication.mac)[0]
 
 
 def test_tcp_helpers_leave_persistent_socket_open_and_restore_timeout():
@@ -501,8 +502,8 @@ def test_caller_owned_udp_socket_ignores_bad_replies_and_remains_open():
         completion.result(timeout=5)
 
 
-@pytest.mark.parametrize("backend", ["sync", "trio"])
-def test_verified_dns_over_tls(dns_tls_identity, backend):
+@pytest.mark.parametrize("backend", ["sync", "trio", "sync-query"])
+def test_verified_dns_over_tls(dns_tls_identity, backend, monkeypatch):
     cert_file, key_file = dns_tls_identity
     server_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
     server_context.load_cert_chain(cert_file, key_file)
@@ -538,6 +539,25 @@ def test_verified_dns_over_tls(dns_tls_identity, backend):
                 )
 
             result = trio.run(exchange)
+        elif backend == "sync-query":
+            from tba_provider_dns_resolver import query as sync
+
+            calls = []
+
+            def factory(af, kind, proto):
+                calls.append((af, kind, proto))
+                return socket.socket(af, kind, proto)
+
+            monkeypatch.setattr(sync, "socket_factory", factory)
+            result = sync.tls(
+                query,
+                "127.0.0.1",
+                timeout=3,
+                port=options["port"],
+                ssl_context=client_context,
+                server_hostname="localhost",
+            )
+            assert calls == [(socket.AF_INET, socket.SOCK_STREAM, 0)]
         else:
             result = tls_query(query, "127.0.0.1", **options)
         assert result.id == 42
@@ -554,7 +574,8 @@ def _source_tcp_port():
 @pytest.mark.parametrize("post", [False, True])
 @pytest.mark.parametrize("signed", [False, True])
 @pytest.mark.parametrize("bound", [False, True])
-def test_verified_dns_over_https(dns_tls_identity, post, signed, bound):
+@pytest.mark.parametrize("sync_query", [False, True])
+def test_verified_dns_over_https(dns_tls_identity, post, signed, bound, sync_query):
     import base64
     from urllib.parse import parse_qs, urlsplit
 
@@ -575,12 +596,13 @@ def test_verified_dns_over_https(dns_tls_identity, post, signed, bound):
                 assert self.client_address == ("127.0.0.1", source_port)
             assert self.headers.get("Accept") == "application/dns-message"
             response = (
-                _authenticated_address_response(packet, key)
+                _authenticated_address_response(packet, key, 43 if sync_query else 0)
                 if signed
                 else _address_response(packet)
             )
-            self.send_response(200)
-            self.send_header("Content-Type", "application/dns-message")
+            self.send_response(202 if sync_query else 200)
+            if not sync_query:
+                self.send_header("Content-Type", "application/dns-message")
             self.send_header("Content-Length", str(len(response)))
             self.end_headers()
             self.wfile.write(response)
@@ -601,7 +623,22 @@ def test_verified_dns_over_https(dns_tls_identity, post, signed, bound):
         peer.timeout = 5
         server = worker.submit(peer.handle_request)
         url = f"https://127.0.0.1:{peer.server_port}/dns-query"
-        if bound:
+        if sync_query:
+            from tba_provider_dns_resolver import query as sync
+
+            result = sync.https(
+                query.use_tsig(key) if signed else query,
+                url,
+                timeout=3,
+                post=post,
+                verify=client_context,
+                http_version=1,
+                source="127.0.0.1" if bound else None,
+                source_port=source_port,
+            )
+            if signed:
+                assert result.tsig_key == key
+        elif bound:
             from tba_provider_dns_resolver import asyncquery
 
             if signed:
@@ -613,7 +650,6 @@ def test_verified_dns_over_https(dns_tls_identity, post, signed, bound):
                     timeout=3,
                     post=post,
                     verify=client_context,
-                    http_version=1,
                     source="127.0.0.1",
                     source_port=source_port,
                 )
@@ -628,12 +664,12 @@ def test_verified_dns_over_https(dns_tls_identity, post, signed, bound):
             result = resolver.query(query.questions[0])
         else:
             result = https_query(query, url, post=post, context=client_context)
-        assert result.id == (0 if signed else 43)
+        assert result.id == (0 if signed and not sync_query else 43)
         assert decoded(result.answers[0]) == (ipaddress.IPv4Address("192.0.2.1"),)
         server.result(timeout=5)
 
 
-@pytest.mark.parametrize("backend", ["sync", "asyncio"])
+@pytest.mark.parametrize("backend", ["sync", "asyncio", "sync-query"])
 def test_borrowed_https_session_reuses_tls_connection(dns_tls_identity, backend):
     import httpx
 
@@ -666,11 +702,15 @@ def test_borrowed_https_session_reuses_tls_connection(dns_tls_identity, backend)
         exchange = worker.submit(peer.handle_request)
         url = f"https://127.0.0.1:{peer.server_port}/dns-query"
         queries = [make_query("example.", identifier=i) for i in (1, 2)]
-        if backend == "sync":
+        if backend in ("sync", "sync-query"):
+            from tba_provider_dns_resolver import query as sync
+
+            exchange_query = sync.https if backend == "sync-query" else https_query
             with httpx.Client(verify=trust, trust_env=False) as session:
                 results = [
-                    https_query(query, url, session=session) for query in queries
+                    exchange_query(query, url, session=session) for query in queries
                 ]
+                assert not session.is_closed
         else:
 
             async def run():
@@ -688,9 +728,26 @@ def test_borrowed_https_session_reuses_tls_connection(dns_tls_identity, backend)
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize(
-    "mode", ["plain", "signed", "reuse", "source", "signed-asyncquery", "bad-mac"]
+    "mode",
+    [
+        "plain",
+        "signed",
+        "reuse",
+        "source",
+        "signed-asyncquery",
+        "signed-borrowed",
+        "signed-trio",
+        "signed-session",
+        "bad-mac",
+        "sync",
+        "sync-wire",
+        "sync-manager",
+        "asyncio-manager",
+        "trio-manager",
+        "trio-native",
+    ],
 )
-async def test_verified_dns_over_quic(dns_tls_identity, mode):
+async def test_verified_dns_over_quic(dns_tls_identity, mode, monkeypatch):
     pytest.importorskip("aioquic")
     from aioquic.asyncio import serve
     from aioquic.quic.configuration import QuicConfiguration
@@ -700,7 +757,14 @@ async def test_verified_dns_over_quic(dns_tls_identity, mode):
     config.load_cert_chain(cert_file, key_file)
     query = Message(44, 0x0100, (Question.from_text("example.", "A"),))
     key = TsigKey((b"fixture",), b"test QUIC TSIG secret")
-    signed = mode in ("signed", "signed-asyncquery", "bad-mac")
+    async_signed_modes = (
+        "signed-asyncquery",
+        "signed-borrowed",
+        "signed-trio",
+        "signed-session",
+        "bad-mac",
+    )
+    signed = mode in async_signed_modes or mode in ("signed", "sync", "sync-wire")
     tasks = []
 
     async def handle(reader, writer):
@@ -722,13 +786,20 @@ async def test_verified_dns_over_quic(dns_tls_identity, mode):
         tasks.append(asyncio.create_task(handle(reader, writer)))
 
     from aioquic.asyncio import QuicConnectionProtocol
+    from aioquic.quic.events import HandshakeCompleted
 
     sources = []
+    handshakes = []
 
     class SourceObservingProtocol(QuicConnectionProtocol):
         def datagram_received(self, data, addr):
             sources.append(addr)
             super().datagram_received(data, addr)
+
+        def quic_event_received(self, event):
+            if isinstance(event, HandshakeCompleted):
+                handshakes.append(event)
+            super().quic_event_received(event)
 
     server = await serve(
         "127.0.0.1",
@@ -748,15 +819,95 @@ async def test_verified_dns_over_quic(dns_tls_identity, mode):
                 )
                 assert first.id == 43
                 assert len(tasks) == 2
-        elif mode == "source":
+        elif mode in ("asyncio-manager", "trio-manager"):
+            from tba_provider_dns_resolver import asyncquery, quic
+
+            async def run():
+                context, make_manager = quic.factories_for_backend()
+                async with context() as backend_context:
+                    async with make_manager(
+                        backend_context, verify_mode=cert_file, server_name="localhost"
+                    ) as manager:
+                        connection = manager.connect(
+                            "127.0.0.1", port, source="127.0.0.1"
+                        )
+                        assert manager.connect("127.0.0.1", port) is connection
+                        replies = {}
+
+                        async def call(identifier):
+                            replies[identifier] = await asyncquery.quic(
+                                replace(query, id=identifier),
+                                "127.0.0.1",
+                                timeout=3,
+                                connection=connection,
+                            )
+
+                        if mode == "trio-manager":
+                            import trio
+
+                            async with trio.open_nursery() as nursery:
+                                nursery.start_soon(call, 43)
+                                nursery.start_soon(call, 44)
+                        else:
+                            await asyncio.gather(call(43), call(44))
+                        assert replies[43].id == 43
+                    with pytest.raises(RuntimeError, match="closed"):
+                        manager.connect("127.0.0.1", port)
+                return replies[44]
+
+            if mode == "trio-manager":
+                import trio
+
+                result = await asyncio.to_thread(trio.run, run)
+            else:
+                result = await run()
+            assert len(tasks) == 2 and len(handshakes) == 1
+        elif mode == "sync-manager":
+            from tba_provider_dns_resolver import query as sync
+            from tba_provider_dns_resolver import quic
+
+            created = []
+
+            def factory(af, kind, proto):
+                sock = socket.socket(af, kind, proto)
+                created.append(sock)
+                return sock
+
+            monkeypatch.setattr(quic, "socket_factory", factory)
+
+            def exchange():
+                manager = quic.SyncQuicManager(
+                    verify_mode=cert_file, server_name="localhost"
+                )
+                with manager, ThreadPoolExecutor(max_workers=2) as worker:
+                    connection = manager.connect("127.0.0.1", port, source="127.0.0.1")
+                    assert manager.connect("127.0.0.1", port) is connection
+                    replies = [
+                        worker.submit(
+                            sync.quic,
+                            replace(query, id=identifier),
+                            "127.0.0.1",
+                            timeout=3,
+                            connection=connection,
+                        )
+                        for identifier in (45, 44)
+                    ]
+                    first, last = [reply.result(timeout=5) for reply in replies]
+                    assert first.id == 45
+                with pytest.raises(RuntimeError, match="closed"):
+                    manager.connect("127.0.0.1", port)
+                return last
+
+            result = await asyncio.to_thread(exchange)
+            assert len(tasks) == 2 and len(handshakes) == 1
+            assert len(created) == 1 and created[0].fileno() == -1
+        elif mode in ("source", "sync", "sync-wire", "trio-native"):
             from tba_provider_dns_resolver import asyncquery
 
             with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as binding:
                 binding.bind(("127.0.0.1", 0))
                 expected = binding.getsockname()
-            result = await asyncquery.quic(
-                query,
-                "127.0.0.1",
+            options = dict(
                 timeout=3,
                 port=port,
                 source=expected[0],
@@ -764,27 +915,83 @@ async def test_verified_dns_over_quic(dns_tls_identity, mode):
                 hostname="localhost",
                 verify=cert_file,
             )
+            if mode == "sync":
+                from tba_codec_dns import message as editable
+                from tba_provider_dns_resolver import query as sync
+
+                signed_query = editable.make_query("example.", id=44)
+                signed_query.use_tsig(key)
+                result = await asyncio.to_thread(
+                    sync.quic, signed_query, "127.0.0.1", **options
+                )
+                assert signed_query.id == 0
+                assert result.keyring == key
+                result = result._wire_message()
+            elif mode == "sync-wire":
+                from tba_provider_dns_resolver import query as sync
+
+                result = await asyncio.to_thread(
+                    sync.quic, query.use_tsig(key), "127.0.0.1", **options
+                )
+                assert result.tsig_key == key
+            elif mode == "trio-native":
+                import trio
+
+                async def exchange():
+                    return await asyncquery.quic(query, "127.0.0.1", **options)
+
+                result = await asyncio.to_thread(trio.run, exchange)
+            else:
+                result = await asyncquery.quic(query, "127.0.0.1", **options)
             assert sources and set(sources) == {expected}
-        elif mode in ("signed-asyncquery", "bad-mac"):
+        elif mode in async_signed_modes:
             from tba_codec_dns.tsig import TsigError
             from tba_provider_dns_resolver import asyncquery
 
-            signed_query = replace(query, id=0).use_tsig(key)
-            call = asyncquery.quic(
-                signed_query,
-                "127.0.0.1",
+            signed_query = query.use_tsig(key, original_id=44)
+            options = dict(
                 timeout=3,
                 port=port,
                 hostname="localhost",
                 verify=cert_file,
             )
-            if mode == "bad-mac":
+            if mode == "signed-borrowed":
+                from tba_codec_dns import message as editable
+                from tba_provider_dns_resolver.quic import AsyncioQuicManager
+
+                signed_query = editable.make_query("example.", id=44)
+                signed_query.use_tsig(key)
+                assert verify(signed_query.to_wire(), key).original_id == 44
+                async with AsyncioQuicManager(
+                    verify_mode=cert_file, server_name="localhost"
+                ) as manager:
+                    connection = manager.connect("127.0.0.1", port)
+                    reply = await asyncquery.quic(
+                        signed_query, "127.0.0.1", connection=connection, **options
+                    )
+                assert signed_query.id == 0 and reply.keyring == key
+                result = reply._wire_message()
+            elif mode == "signed-trio":
+                import trio
+
+                async def exchange():
+                    return await asyncquery.quic(signed_query, "127.0.0.1", **options)
+
+                result = await asyncio.to_thread(trio.run, exchange)
+            elif mode == "signed-session":
+                async with quic_session(
+                    "127.0.0.1", port=port, server_name="localhost", ca_file=cert_file
+                ) as session:
+                    result = await session.query(signed_query)
+            elif mode == "bad-mac":
                 with pytest.raises(TsigError):
-                    await call
+                    await asyncquery.quic(signed_query, "127.0.0.1", **options)
                 await asyncio.gather(*tasks)
                 return
-            result = await call
+            else:
+                result = await asyncquery.quic(signed_query, "127.0.0.1", **options)
             assert result.tsig_key == key
+            assert signed_query.id == (0 if mode == "signed-borrowed" else 44)
         elif signed:
             from tba_provider_dns_resolver.client import QuicNameserver
 
@@ -808,6 +1015,56 @@ async def test_verified_dns_over_quic(dns_tls_identity, mode):
         server.close()
 
 
+def test_sync_quic_handshake_timeout_releases_owned_socket(monkeypatch):
+    from tba_provider_dns_resolver import quic
+
+    created = []
+
+    def factory(af, kind, proto):
+        sock = socket.socket(af, kind, proto)
+        created.append(sock)
+        return sock
+
+    monkeypatch.setattr(quic, "socket_factory", factory)
+    with socket.socket(type=socket.SOCK_DGRAM) as silent:
+        silent.bind(("127.0.0.1", 0))
+        with quic.SyncQuicManager(verify_mode=False) as manager:
+            connection = manager.connect(*silent.getsockname())
+            with pytest.raises(TimeoutError):
+                connection.make_stream(0.2)
+        assert len(created) == 1 and created[0].fileno() == -1
+
+
+@pytest.mark.parametrize("backend", ["asyncio", "trio"])
+def test_async_quic_handshake_timeout_releases_connection(backend):
+    from tba_provider_dns_resolver.quic import (
+        AsyncioQuicManager,
+        TrioQuicManager,
+        UnexpectedEOF,
+    )
+
+    with socket.socket(type=socket.SOCK_DGRAM) as silent:
+        silent.bind(("127.0.0.1", 0))
+        endpoint = silent.getsockname()
+
+        async def exercise():
+            cls = TrioQuicManager if backend == "trio" else AsyncioQuicManager
+            async with cls(verify_mode=False) as manager:
+                connection = manager.connect(*endpoint)
+                with pytest.raises(TimeoutError):
+                    await connection.make_stream(0.05)
+                assert manager.connect(*endpoint) is connection
+            with pytest.raises(UnexpectedEOF):
+                await connection.make_stream(0.05)
+
+        if backend == "trio":
+            import trio
+
+            trio.run(exercise)
+        else:
+            asyncio.run(exercise())
+
+
 @pytest.mark.parametrize(
     ("backend", "bootstrap"),
     [
@@ -818,6 +1075,7 @@ async def test_verified_dns_over_quic(dns_tls_identity, mode):
         ("trio", True),
         ("asyncio-bound", True),
         ("trio-bound", False),
+        ("sync-query-bound", True),
     ],
 )
 def test_verified_dns_over_http2(dns_tls_identity, backend, bootstrap):
@@ -889,6 +1147,20 @@ def test_verified_dns_over_http2(dns_tls_identity, backend, bootstrap):
         try:
             if backend == "sync":
                 answer = https_query(query, endpoint, **options)
+            elif backend == "sync-query-bound":
+                from tba_provider_dns_resolver import query as sync
+
+                answer = sync.https(
+                    query,
+                    endpoint,
+                    timeout=3,
+                    verify=cert_file,
+                    http_version=2,
+                    source="127.0.0.1",
+                    source_port=source_port,
+                    bootstrap_address=options["bootstrap_address"],
+                )
+                assert answer.id == 46
             else:
 
                 async def exchange():
@@ -964,7 +1236,22 @@ def test_https_bootstrap_pin_rejects_before_sending_dns(tmp_path, http_version):
         "file",
         "context",
         "sync-context",
+        "sync-query-context",
+        "sync-manager",
+        "asyncio-manager",
+        "trio-manager",
+        "trio-native",
         "wrong-name",
+        "fallback",
+        "fallback-resolver",
+        "sync-fallback",
+        "sync-fallback-resolver",
+        "tsig-native",
+        "tsig-borrowed",
+        "tsig-fallback",
+        "tsig-transport",
+        "tsig-legacy-transport",
+        "tsig-bad-mac",
         "missing-ca",
         "crl-leaf",
         "crl-chain",
@@ -973,7 +1260,7 @@ def test_https_bootstrap_pin_rejects_before_sending_dns(tmp_path, http_version):
         "no-hostname",
     ],
 )
-async def test_verified_dns_over_http3(dns_tls_identity, trust, tmp_path):
+async def test_verified_dns_over_http3(dns_tls_identity, trust, tmp_path, monkeypatch):
     pytest.importorskip("aioquic")
     from aioquic.asyncio import QuicConnectionProtocol, serve
     from aioquic.h3.connection import H3_ALPN, H3Connection
@@ -1042,20 +1329,32 @@ async def test_verified_dns_over_http3(dns_tls_identity, trust, tmp_path):
     else:
         config.load_cert_chain(cert_file, key_file)
     requests = []
+    key = TsigKey((b"fixture",), b"test HTTP/3 TSIG secret")
 
     class Peer(QuicConnectionProtocol):
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
             self.http = H3Connection(self._quic)
-            self.body = bytearray()
+            self.bodies = {}
 
         def quic_event_received(self, event):
             for item in self.http.handle_event(event):
                 if not isinstance(item, DataReceived):
                     continue
-                self.body.extend(item.data)
+                body = self.bodies.setdefault(item.stream_id, bytearray())
+                body.extend(item.data)
                 if item.stream_ended:
-                    requests.append(bytes(self.body))
+                    packet = bytes(self.bodies.pop(item.stream_id))
+                    requests.append(packet)
+                    response = (
+                        _authenticated_address_response(packet, key)
+                        if trust.startswith("tsig-")
+                        else _address_response(packet)
+                    )
+                    if trust == "tsig-bad-mac":
+                        response = (
+                            response[:-8] + bytes([response[-8] ^ 1]) + response[-7:]
+                        )
                     self.http.send_headers(
                         item.stream_id,
                         [
@@ -1065,7 +1364,7 @@ async def test_verified_dns_over_http3(dns_tls_identity, trust, tmp_path):
                     )
                     self.http.send_data(
                         item.stream_id,
-                        _address_response(bytes(self.body)),
+                        response,
                         end_stream=True,
                     )
                     self.transmit()
@@ -1077,7 +1376,50 @@ async def test_verified_dns_over_http3(dns_tls_identity, trust, tmp_path):
         from tba_provider_dns_resolver import asyncquery
 
         url = f"https://127.0.0.1:{port}/dns-query"
-        if trust == "file":
+        if trust.startswith("tsig-"):
+            from tba_codec_dns.tsig import TsigError
+
+            signed_query = query.use_tsig(key, original_id=query.id)
+            options = dict(timeout=3, verify=cert_file, http_version=3)
+            if trust == "tsig-borrowed":
+                from tba_codec_dns import message as editable
+                from tba_provider_dns_resolver.quic import AsyncioQuicManager
+
+                request = editable.make_query("example.", id=47)
+                request.use_tsig(key)
+                assert verify(request.to_wire(), key).original_id == 47
+                async with AsyncioQuicManager(
+                    verify_mode=cert_file, h3=True
+                ) as manager:
+                    connection = manager.connect("127.0.0.1", port)
+                    reply = await asyncquery.https(
+                        request, url, client=connection, timeout=3
+                    )
+                assert request.id == 0 and reply.keyring == key
+                answer = reply._wire_message()
+            elif trust == "tsig-transport":
+                answer = await async_transport.https_query(
+                    signed_query, url, timeout=3, ca_file=cert_file, http_version=3
+                )
+            elif trust == "tsig-legacy-transport":
+                from tba_provider_dns_resolver.transport import https3_query
+
+                answer = await https3_query(
+                    signed_query, url, timeout=3, ca_file=cert_file
+                )
+            elif trust == "tsig-bad-mac":
+                with pytest.raises(TsigError):
+                    await asyncquery.https(signed_query, url, **options)
+                assert len(requests) == 1
+                return
+            else:
+                if trust == "tsig-fallback":
+                    monkeypatch.setattr(asyncquery, "have_doh", False)
+                    del options["http_version"]
+                answer = await asyncquery.https(signed_query, url, **options)
+            assert signed_query.id == 47
+            assert len(requests) == 1 and answer.id == 0 and answer.tsig_key == key
+        elif trust == "file":
             answer = await async_transport.https_query(
                 query, url, ca_file=cert_file, http_version=3
             )
@@ -1088,6 +1430,144 @@ async def test_verified_dns_over_http3(dns_tls_identity, trust, tmp_path):
             answer = await asyncio.to_thread(
                 https_query, query, url, context=context, http_version=3
             )
+        elif trust == "sync-query-context":
+            from tba_provider_dns_resolver import query as sync
+
+            context = ssl.create_default_context(cafile=cert_file)
+            answer = await asyncio.to_thread(
+                sync.https, query, url, timeout=3, verify=context, http_version=3
+            )
+            assert answer.id == query.id
+        elif trust == "sync-manager":
+            from tba_provider_dns_resolver import query as sync
+            from tba_provider_dns_resolver.quic import SyncQuicManager
+
+            def exercise():
+                context = ssl.create_default_context(cafile=cert_file)
+                with SyncQuicManager(
+                    verify_mode=context, server_name="localhost", h3=True
+                ) as manager:
+                    peer = manager.connect("127.0.0.1", port)
+                    with ThreadPoolExecutor(max_workers=2) as worker:
+                        futures = [
+                            worker.submit(
+                                sync.https,
+                                replace(query, id=identifier),
+                                url,
+                                session=peer,
+                                timeout=3,
+                            )
+                            for identifier in (46, 47)
+                        ]
+                        first, last = [future.result(timeout=5) for future in futures]
+                    assert first.id == 46
+                    return last
+
+            answer = await asyncio.to_thread(exercise)
+            assert len(requests) == 2 and answer.id == 47
+        elif trust in ("asyncio-manager", "trio-manager"):
+            from tba_provider_dns_resolver.quic import (
+                AsyncioQuicManager,
+                TrioQuicManager,
+            )
+
+            async def exercise():
+                manager_cls = (
+                    TrioQuicManager if trust == "trio-manager" else AsyncioQuicManager
+                )
+                context = ssl.create_default_context(cafile=cert_file)
+                async with manager_cls(
+                    verify_mode=context, server_name="localhost", h3=True
+                ) as manager:
+                    connection = manager.connect("127.0.0.1", port)
+                    first = await asyncquery.https(
+                        replace(query, id=46), url, client=connection, timeout=3
+                    )
+                    assert first.id == 46
+                    return await asyncquery.https(
+                        query, url, client=connection, timeout=3
+                    )
+
+            if trust == "trio-manager":
+                import trio
+
+                answer = await asyncio.to_thread(trio.run, exercise)
+            else:
+                answer = await exercise()
+            assert len(requests) == 2 and answer.id == 47
+        elif trust == "trio-native":
+            import trio
+
+            async def exercise():
+                return await asyncquery.https(
+                    query, url, timeout=3, verify=cert_file, http_version=3
+                )
+
+            answer = await asyncio.to_thread(trio.run, exercise)
+            assert len(requests) == 1
+        elif trust in ("sync-fallback", "sync-fallback-resolver"):
+            from tba_provider_dns_resolver import query as sync
+            from tba_provider_dns_resolver import resolver
+
+            if sync.have_doh:
+                monkeypatch.setattr(sync, "have_doh", False)
+            calls = []
+
+            class BootstrapResolver:
+                def resolve_name(self, hostname, *, family):
+                    calls.append((hostname, family))
+                    return ["127.0.0.1"]
+
+            monkeypatch.setattr(resolver, "get_default_resolver", BootstrapResolver)
+            if trust == "sync-fallback-resolver":
+                url = f"https://localhost:{port}/dns-query"
+
+            def exchange():
+                options = dict(timeout=3, verify=cert_file, family=socket.AF_INET)
+                response = sync.https(query, url, **options)
+                for version in (sync.HTTPVersion.H1, sync.HTTPVersion.H2):
+                    with pytest.raises(sync.NoDOH):
+                        sync.https(query, url, http_version=version, **options)
+                return response
+
+            answer = await asyncio.to_thread(exchange)
+            expected = (
+                [("localhost", socket.AF_INET)]
+                if trust == "sync-fallback-resolver"
+                else []
+            )
+            assert calls == expected
+            assert len(requests) == 1 and answer.id == 47
+        elif trust in ("fallback", "fallback-resolver"):
+            from tba_provider_dns_resolver import asyncresolver
+
+            if asyncquery.have_doh:
+                monkeypatch.setattr(asyncquery, "have_doh", False)
+            calls = []
+
+            class BootstrapResolver:
+                async def resolve_name(self, hostname, *, family):
+                    calls.append((hostname, family))
+                    return ["127.0.0.1"]
+
+            monkeypatch.setattr(
+                asyncresolver, "get_default_resolver", BootstrapResolver
+            )
+            if trust == "fallback-resolver":
+                url = f"https://localhost:{port}/dns-query"
+            answer = await asyncquery.https(
+                query, url, timeout=3, verify=cert_file, family=socket.AF_INET
+            )
+            for version in (asyncquery.HTTPVersion.H1, asyncquery.HTTPVersion.H2):
+                with pytest.raises(asyncquery.NoDOH):
+                    await asyncquery.https(
+                        query, url, timeout=3, verify=cert_file, http_version=version
+                    )
+            expected = (
+                [("localhost", socket.AF_INET)] if trust == "fallback-resolver" else []
+            )
+            assert calls == expected
+            assert len(requests) == 1 and answer.id == 47
         else:
             context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
             if trust == "missing-ca":
@@ -1150,6 +1630,7 @@ async def test_verified_dns_over_http3(dns_tls_identity, trust, tmp_path):
     "identity",
     [
         "trusted",
+        "sync-query",
         "shared-context",
         "combined-pem",
         "missing",
@@ -1347,15 +1828,21 @@ async def test_native_http3_mutual_tls_against_quic_peer(
     port = server._transport.get_extra_info("sockname")[1]
     try:
         host = "wrong.invalid" if identity == "wrong-server" else "127.0.0.1"
-        request = asyncquery.https(
-            make_query("example."),
-            f"https://{host}:{port}/dns-query",
+        endpoint = f"https://{host}:{port}/dns-query"
+        question = make_query("example.")
+        options = dict(
             http_version=3,
             timeout=3,
             verify=context,
             bootstrap_address="127.0.0.1",
         )
-        if identity in ("trusted", "shared-context", "combined-pem"):
+        if identity == "sync-query":
+            from tba_provider_dns_resolver import query as sync
+
+            request = asyncio.to_thread(sync.https, question, endpoint, **options)
+        else:
+            request = asyncquery.https(question, endpoint, **options)
+        if identity in ("trusted", "sync-query", "shared-context", "combined-pem"):
             answer = await request
             assert decoded(answer.answers[0]) == (ipaddress.IPv4Address("192.0.2.1"),)
             assert authenticated == [(client_certificate.serial_number, 1)]
@@ -1625,7 +2112,7 @@ async def test_ddr_over_quic_uses_verified_certificate_and_bootstrap_address(
         assert isinstance(resolver.nameservers[0], expected)
         assert resolver.nameservers[0].certificate_ip == "127.0.0.1"
         result = await resolver.resolve("example.", "A", lifetime=5)
-        assert str(decoded(result[0])[0]) == "192.0.2.1"
+        assert result[0].address == "192.0.2.1"
         assert len(queries) == 1
     finally:
         bootstrap.close()
@@ -1650,9 +2137,7 @@ def test_trio_resolver_and_query_with_loopback_peer():
 
         async def check():
             resolver = AsyncResolver(["127.0.0.1"], port=port)
-            assert decoded((await resolver.resolve("example."))[0])[
-                0
-            ] == ipaddress.IPv4Address("192.0.2.1")
+            assert (await resolver.resolve("example."))[0].address == "192.0.2.1"
             query = Question.from_text("example.", "A").query_message(59)
             assert (
                 await async_transport.udp_query(query, "127.0.0.1", port=port)
@@ -1686,7 +2171,12 @@ def test_socket_override_preserves_numeric_resolution_and_restores_original(
 
     resolver = Resolver([])
     address = ipaddress.IPv4Address("192.0.2.1")
-    monkeypatch.setattr(resolver, "resolve_name", lambda *_, **__: (address,))
+
+    class Addresses:
+        def addresses(self):
+            return iter((str(address),))
+
+    monkeypatch.setattr(resolver, "resolve_name", lambda *_, **__: Addresses())
     monkeypatch.setattr(resolver, "canonical_name", lambda *_: parse_name("example."))
     original = socket.getaddrinfo
     with override_system_resolver(resolver):
@@ -1760,8 +2250,13 @@ def test_dnssec_supported_algorithm_families(algorithm):
     validate_rrsig((record,), signature, (key,), now=200, policy=policy)
 
 
-def test_signed_unchanged_ixfr_can_complete_over_udp():
+@pytest.mark.parametrize("api", ["transfer", "sync", "async"])
+def test_signed_unchanged_ixfr_can_complete_over_udp(api):
+    from tba_protocol_dns.xfr import make_query
+    from tba_provider_dns_resolver import asyncquery, query
+
     baseline = Zone.from_text(_ZONE)
+    original = baseline.to_text()
     soa = baseline.get("@", "SOA").records[0]
     key = TsigKey((b"fixture",), b"udp transfer fixture secret")
     with (
@@ -1782,15 +2277,22 @@ def test_signed_unchanged_ixfr_can_complete_over_udp():
             )
 
         peer = worker.submit(serve)
-        result = transfer(
-            "example.",
-            "127.0.0.1",
-            port=sock.getsockname()[1],
-            base_soa=soa,
-            key=key,
-            try_udp=True,
-        )
-        assert result.apply(baseline).to_text() == baseline.to_text()
+        port = sock.getsockname()[1]
+        if api == "transfer":
+            result = transfer(
+                "example.", "127.0.0.1", port=port, base_soa=soa, key=key, try_udp=True
+            )
+            assert result.apply(baseline).to_text() == original
+        else:
+            request, _ = make_query(baseline, keyring=key)
+            options = dict(
+                port=port, timeout=3, query=request, udp_mode=query.UDPMode.ONLY
+            )
+            if api == "sync":
+                query.inbound_xfr("127.0.0.1", baseline, **options)
+            else:
+                asyncio.run(asyncquery.inbound_xfr("127.0.0.1", baseline, **options))
+            assert baseline.to_text() == original
         peer.result(timeout=5)
 
 

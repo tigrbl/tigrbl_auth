@@ -10,6 +10,7 @@ from struct import Struct
 from tba_primitives_dns_name.names import (
     Name,
     name_text,
+    encode_idna2003,
     parse_name,
     parse_string,
     string_text,
@@ -164,7 +165,9 @@ class ServiceBinding:
             raise WireError("SVCB no-default-alpn requires an alpn list")
 
     @classmethod
-    def from_tokens(cls, tokens: Sequence[str], origin: Name) -> "ServiceBinding":
+    def from_tokens(
+        cls, tokens: Sequence[str], origin: Name, *, encode_label=encode_idna2003
+    ) -> "ServiceBinding":
         if len(tokens) < 2 or not tokens[0].isascii() or not tokens[0].isdecimal():
             raise ValueError("SVCB record requires a priority and target")
         params = []
@@ -176,7 +179,11 @@ class ServiceBinding:
         priority = int(tokens[0])
         if priority == 0 and params:
             raise ValueError("SVCB AliasMode records cannot specify parameters")
-        return cls(priority, parse_name(tokens[1], origin), tuple(sorted(params)))
+        return cls(
+            priority,
+            parse_name(tokens[1], origin, encode_label=encode_label),
+            tuple(sorted(params)),
+        )
 
     @classmethod
     def from_record(cls, rr: ResourceRecord) -> "ServiceBinding":
