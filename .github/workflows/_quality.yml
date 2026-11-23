@@ -42,7 +42,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install the shared README policy checker
-        run: python -m pip install readme-standards==0.1.1
+        run: python -m pip install readme-standards==0.1.3
       - name: Verify shared README headers
         run: python scripts/render_readme_branding.py --check
       - name: Verify package metadata, legal files, and counters

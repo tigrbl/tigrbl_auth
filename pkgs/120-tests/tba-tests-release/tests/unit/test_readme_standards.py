@@ -56,7 +56,7 @@ def test_push_pull_request_quality_and_release_workflows_keep_the_gate():
     ):
         source = (workflows / name).read_text("utf-8")
         assert "scripts/verify_readme_standards.py" in source
-        assert "readme-standards==0.1.1" in source
+        assert "readme-standards==0.1.3" in source
 
 
 @pytest.fixture

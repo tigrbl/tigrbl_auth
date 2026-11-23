@@ -289,7 +289,7 @@ jobs:
           STANDARDS_PLAN: ${{ inputs.standards_plan }}
           SELECTED_PACKAGE: ${{ inputs.package }}
         run: |
-          uv run --no-project --with readme-standards==0.1.1 python scripts/verify_readme_standards.py
+          uv run --no-project --with readme-standards==0.1.3 python scripts/verify_readme_standards.py
           uv run --no-project python scripts/release_one_standards_package.py --plan "$STANDARDS_PLAN" --dist standards-dist --package "$SELECTED_PACKAGE" --phase prepare
       - name: Publish the selected package with Trusted Publishing
         uses: cobycloud/actions/actions/pypi-trusted-publish@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
