@@ -2,7 +2,7 @@ import type {
   AppConnectionBot,
   AppConnectionPermission,
   AppConnectionPermissionStatus,
-} from "@tba/client-app-connections";
+} from "@tbauth/client-app-connections";
 
 export type PermissionStatus = AppConnectionPermissionStatus;
 export type Permission = AppConnectionPermission;

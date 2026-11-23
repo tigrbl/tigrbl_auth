@@ -13,8 +13,8 @@ on:
           - "@tba/ui-administration"
           - "@tba/ui-public"
           - "@tba/client-oidc-relying-party"
-          - "@tba/client-app-connections"
-          - "@tba/ui-app-connections"
+          - "@tbauth/client-app-connections"
+          - "@tbauth/ui-app-connections"
       version:
         description: Optional version. When set, it must match package.json.
         required: false
@@ -167,7 +167,7 @@ jobs:
             package_version: version,
             package_path: found.packagePath,
             release_tag: ref,
-            npm_tag: ["@tba/client-app-connections", "@tba/ui-app-connections"].includes(packageName)
+            npm_tag: ["@tbauth/client-app-connections", "@tbauth/ui-app-connections"].includes(packageName)
               && version.includes("-") ? "next" : "latest",
             scope
           };

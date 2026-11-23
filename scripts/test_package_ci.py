@@ -48,16 +48,16 @@ class PackageMatrixSelectionTest(unittest.TestCase):
         lock = {"packages": {
             **old_lock["packages"],
             "": manifest,
-            "node_modules/@tba/ui-app-connections": {"link": True, "resolved": ui},
-            ui: {"name": "@tba/ui-app-connections"},
+            "node_modules/@tbauth/ui-app-connections": {"link": True, "resolved": ui},
+            ui: {"name": "@tbauth/ui-app-connections"},
         }}
         for path, content in {
             "package.json": manifest,
             "package-lock.json": lock,
-            f"{ui}/package.json": {"name": "@tba/ui-app-connections"},
+            f"{ui}/package.json": {"name": "@tbauth/ui-app-connections"},
             f"{consumer}/package.json": {
                 "name": "@tba/ui-test-consumer",
-                "devDependencies": {"@tba/ui-app-connections": "file:../tba-ui-app-connections"},
+                "devDependencies": {"@tbauth/ui-app-connections": "file:../tba-ui-app-connections"},
             },
             f"{unrelated}/package.json": {"name": "@tba/test-client"},
         }.items():
@@ -70,7 +70,7 @@ class PackageMatrixSelectionTest(unittest.TestCase):
         paths = {"package.json", "package-lock.json", f"{ui}/package.json"}
         with patch.object(package_ci, "git", side_effect=lambda _, ref: base_files[ref]):
             selected = package_ci.node_selection("base", paths)
-            self.assertEqual({package["name"] for package in selected}, {"@tba/ui-app-connections", "@tba/ui-test-consumer"})
+            self.assertEqual({package["name"] for package in selected}, {"@tbauth/ui-app-connections", "@tba/ui-test-consumer"})
             lock["packages"]["node_modules/react"] = {"version": "19.2.0"}
             self.write("package-lock.json", json.dumps(lock))
             self.assertEqual(len(package_ci.node_selection("base", paths)), 3)

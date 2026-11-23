@@ -1,4 +1,4 @@
-# @tba/client-app-connections
+# @tbauth/client-app-connections
 
 Manage app consent and connected applications from a signed-in account using a
 shared TypeScript client and the API contract of the host application.
@@ -17,7 +17,7 @@ shared TypeScript client and the API contract of the host application.
 <p align="center">
 <a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/075-clients/tba-typescript-client-app-connections"><img alt="Downloads: source checkout" src="https://img.shields.io/badge/Downloads-source%20checkout-0969da"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/075-clients/tba-typescript-client-app-connections/package.json"><img alt="Direct dependencies: 0" src="https://img.shields.io/badge/Direct%20dependencies-0-0969da"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/075-clients/tba-typescript-client-app-connections/README.md"><img alt="README hits for @tba/client-app-connections" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/075-clients/tba-typescript-client-app-connections/README.md.svg?label=hits"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/075-clients/tba-typescript-client-app-connections/README.md"><img alt="README hits for @tbauth/client-app-connections" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/075-clients/tba-typescript-client-app-connections/README.md.svg?label=hits"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"><img alt="SSOT: governed" src="https://img.shields.io/badge/SSOT-governed-2f6f4e"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/075-clients/tba-typescript-client-app-connections/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
 </p>
@@ -39,7 +39,7 @@ Build the workspace package from the repository root.
 
 ```sh
 npm ci
-npm run build -w @tba/client-app-connections
+npm run build -w @tbauth/client-app-connections
 ```
 
 ## Quick start
@@ -48,7 +48,7 @@ Pass the application's consent protocol and request transport into the client.
 The request can be an opaque request ID or validated query fields.
 
 ```ts
-import { createAppConnectionsClient } from "@tba/client-app-connections";
+import { createAppConnectionsClient } from "@tbauth/client-app-connections";
 import { protocol, transport } from "./app-connections-api.js";
 
 const client = createAppConnectionsClient(protocol, transport);
@@ -61,7 +61,7 @@ If the API returns JSON, use the provided transport. The application supplies
 headers through its existing session integration when required.
 
 ```ts
-import { createJsonAppConnectionsTransport } from "@tba/client-app-connections";
+import { createJsonAppConnectionsTransport } from "@tbauth/client-app-connections";
 
 const transport = createJsonAppConnectionsTransport({
   baseUrl: "/forum-api",
@@ -102,7 +102,7 @@ grant policy, token lifecycle, and the final permission decision.
 
 ## Related Packages
 
-`@tba/ui-app-connections` provides React controls for the same permission and
+`@tbauth/ui-app-connections` provides React controls for the same permission and
 acting-identity data.
 
 ## Project Links
@@ -121,5 +121,5 @@ The tests cover both API shapes, permit and deny decisions, list and revoke,
 and the response-error contract.
 
 ```sh
-npm run test -w @tba/client-app-connections
+npm run test -w @tbauth/client-app-connections
 ```

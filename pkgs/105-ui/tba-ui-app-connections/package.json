@@ -1,5 +1,5 @@
 {
-  "name": "@tba/ui-app-connections",
+  "name": "@tbauth/ui-app-connections",
   "version": "0.4.0-dev.2",
   "description": "React controls for TbA app consent and owned bot permissions.",
   "license": "Apache-2.0",
@@ -14,11 +14,11 @@
   "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
   "types": "./dist/index.d.ts",
   "scripts": {
-    "prebuild": "npm run build -w @tba/client-app-connections",
+    "prebuild": "npm run build -w @tbauth/client-app-connections",
     "build": "tsc",
     "test": "npm run build && node --test test/*.test.mjs"
   },
-  "dependencies": { "@tba/client-app-connections": "0.4.0-dev.1" },
+  "dependencies": { "@tbauth/client-app-connections": "0.4.0-dev.1" },
   "peerDependencies": { "react": "^19.0.0" },
   "engines": { "node": ">=22" },
   "devDependencies": { "@types/react": "^19.0.0", "typescript": "~5.8.2" }
