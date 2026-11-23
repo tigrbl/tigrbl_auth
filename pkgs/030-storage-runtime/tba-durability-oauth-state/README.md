@@ -141,6 +141,8 @@ The example demonstrates the documented `tba-durability-oauth-state` source boun
 
 ### Common Workflows
 
+For authorization-code exchange, validate the OAuth request and PKCE first. Then call `consume_authorization_code` with the validated code ID, tenant, authenticated client, redirect URI, and stored code challenge. It returns whether the matching, unexpired row was consumed. Issue tokens only after a successful consume and keep both actions in the same caller-managed transaction so an issuance error can roll back the consume.
+
 <!-- readme-standards:begin example.usage -->
 Source: [docs/readme/usage.py](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/030-storage-runtime/tba-durability-oauth-state/docs/readme/usage.py).
 

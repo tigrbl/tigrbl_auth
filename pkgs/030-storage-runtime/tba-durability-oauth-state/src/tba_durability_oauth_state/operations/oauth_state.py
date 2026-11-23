@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import datetime as dt
+import inspect
 from collections.abc import Mapping
 from datetime import timezone
 from typing import Any
@@ -158,6 +159,34 @@ async def persist_authorization_code(ctx: Mapping[str, Any]) -> Any:
     )
 
 
+async def consume_authorization_code(ctx: Mapping[str, Any]) -> bool:
+    """Remove one validated, unexpired code within the caller's transaction.
+
+    The caller validates the OAuth request and PKCE before calling this operation
+    and keeps the transaction open through token creation.
+    """
+    from tba_storage_oauth.tables import AuthCode
+
+    table = AuthCode.__table__
+    payload = payload_from_context(ctx)
+    statement = (
+        table.delete()
+        .where(
+            table.c.id == payload["code_id"],
+            table.c.tenant_id == payload["tenant_id"],
+            table.c.client_id == payload["client_id"],
+            table.c.redirect_uri == payload["redirect_uri"],
+            table.c.code_challenge == payload["code_challenge"],
+            table.c.expires_at > dt.datetime.now(timezone.utc),
+        )
+        .returning(table.c.id)
+    )
+    result = database_from_context(ctx).execute(statement)
+    if inspect.isawaitable(result):
+        result = await result
+    return result.scalar_one_or_none() is not None
+
+
 async def persist_pushed_authorization_request(ctx: Mapping[str, Any]) -> Any:
     """Persist one already-normalized pushed authorization request."""
 
@@ -269,6 +298,7 @@ async def is_token_hash_revoked(ctx: Mapping[str, Any]) -> bool:
 
 
 __all__ = [
+    "consume_authorization_code",
     "create_client_registration",
     "disable_client_registration",
     "is_token_hash_revoked",

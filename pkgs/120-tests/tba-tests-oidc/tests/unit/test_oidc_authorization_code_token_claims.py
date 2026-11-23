@@ -14,7 +14,8 @@ import tba_server_identity.token_request as token_endpoint
 
 @pytest.mark.unit
 @pytest.mark.asyncio
-async def test_authorization_code_exchange_mints_session_bound_id_token_claims(monkeypatch):
+@pytest.mark.parametrize("consumed", [True, False])
+async def test_authorization_code_exchange_mints_session_bound_id_token_claims(monkeypatch, consumed):
     client_id = uuid.uuid4()
     tenant_id = uuid.uuid4()
     user_id = uuid.uuid4()
@@ -43,6 +44,7 @@ async def test_authorization_code_exchange_mints_session_bound_id_token_claims(m
         verify_secret=lambda _secret: True,
     )
     minted: dict[str, object] = {}
+    events: list[str] = []
 
     async def fake_parse_request_form(_request):
         return (
@@ -69,15 +71,23 @@ async def test_authorization_code_exchange_mints_session_bound_id_token_claims(m
         raise AssertionError(f"unexpected model lookup: {model!r}")
 
     async def fake_issue_token_pair_records(*_args, **_kwargs):
+        events.append("issue")
         return "access-token", "refresh-token"
 
     async def fake_mint_id_token(**kwargs):
         minted.update(kwargs)
         return "id-token"
 
-    async def fake_delete_handler_record(model, _db, row_id):
-        assert model is token_endpoint.AuthCode
-        assert row_id == code_id
+    async def fake_consume_authorization_code(ctx):
+        assert ctx["payload"] == {
+            "code_id": code_id,
+            "tenant_id": tenant_id,
+            "client_id": client_id,
+            "redirect_uri": auth_code.redirect_uri,
+            "code_challenge": challenge,
+        }
+        events.append("consume")
+        return consumed
 
     monkeypatch.setattr(token_endpoint, "_enforce_tls", lambda _request, _deployment: None)
     monkeypatch.setattr(token_endpoint, "_parse_request_form", fake_parse_request_form)
@@ -95,12 +105,19 @@ async def test_authorization_code_exchange_mints_session_bound_id_token_claims(m
     )
     monkeypatch.setattr(token_endpoint, "issue_token_pair_records", fake_issue_token_pair_records)
     monkeypatch.setattr(token_endpoint, "read_handler_record", fake_read_handler_record)
-    monkeypatch.setattr(token_endpoint, "delete_handler_record", fake_delete_handler_record)
+    monkeypatch.setattr(token_endpoint, "consume_authorization_code", fake_consume_authorization_code)
     monkeypatch.setattr(token_endpoint, "mint_id_token", fake_mint_id_token)
 
     request = Request({"type": "http", "scheme": "https", "headers": []})
     response = await token_endpoint.token_request(request=request, db=object())
 
+    if not consumed:
+        assert response.status_code == 400
+        assert events == ["consume"]
+        assert not minted
+        return
+
+    assert events == ["consume", "issue"]
     assert response["id_token"] == "id-token"
     assert minted["issuer"] in {
         "https://authn.example.com",

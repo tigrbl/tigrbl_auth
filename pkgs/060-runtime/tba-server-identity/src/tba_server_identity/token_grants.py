@@ -50,7 +50,7 @@ async def dispatch_token_grant(
     issue_pair,
     jwt_kwargs,
     read_record,
-    delete_record,
+    consume_code,
     authenticate_password_fn,
     mint_id_token_fn,
     validate_assertion_fn,
@@ -186,6 +186,22 @@ async def dispatch_token_grant(
                 },
                 status_code=status.HTTP_400_BAD_REQUEST,
             )
+        consumed = await consume_code(
+            {
+                "db": db,
+                "payload": {
+                    "code_id": code_uuid,
+                    "tenant_id": client.tenant_id,
+                    "client_id": client.id,
+                    "redirect_uri": auth_code.redirect_uri,
+                    "code_challenge": auth_code.code_challenge,
+                },
+            }
+        )
+        if not consumed:
+            return JSONResponse(
+                {"error": "invalid_grant"}, status_code=status.HTTP_400_BAD_REQUEST
+            )
         audience = stored_resource or request_audience
         authorization_details = auth_code_claims.pop("_authorization_details", None)
         access, refresh = await issue_pair(
@@ -232,7 +248,6 @@ async def dispatch_token_grant(
             issuer=str(deployment.issuer or ISSUER),
             **extra_claims,
         )
-        await delete_record(AuthCode, db, auth_code.id)
         return _token_pair_payload(
             access,
             refresh,
