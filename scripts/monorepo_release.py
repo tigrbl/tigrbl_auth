@@ -300,6 +300,14 @@ def _packages_changed_since(baseline: str) -> list[Package]:
     return packages
 
 
+def _advertised_python_versions(package: Package, versions: list[str]) -> list[str]:
+    from packaging.specifiers import SpecifierSet
+
+    project = _load_pyproject(ROOT / package.path / "pyproject.toml")["project"]
+    requires_python = SpecifierSet(project.get("requires-python", ""))
+    return [version for version in versions if version in requires_python]
+
+
 def cmd_test_matrix(args: argparse.Namespace) -> int:
     if args.package != "all":
         packages = [_find_package(args.package)]
@@ -314,7 +322,10 @@ def cmd_test_matrix(args: argparse.Namespace) -> int:
 
     cells = []
     for package in packages:
-        for version in _supported_package_python_versions(package, versions):
+        supported_versions = _supported_package_python_versions(package, versions)
+        if args.base_revision:
+            supported_versions = _advertised_python_versions(package, supported_versions)
+        for version in supported_versions:
             package_test_paths = [
                 f"tests/packages/{package.name}",
                 f"tests/packages/{package.import_root}",
@@ -340,6 +351,8 @@ def cmd_test_matrix(args: argparse.Namespace) -> int:
                 }
             )
             cells.append(cell)
+    if args.base_revision and not cells:
+        raise SystemExit("no selected backport package supports the requested Python versions")
     payload = json.dumps(cells, separators=(",", ":"))
     manifests = "\n".join((package.path / "pyproject.toml").as_posix() for package in packages)
     _write_github_output({"matrix": payload, "count": str(len(cells)), "manifests": manifests})

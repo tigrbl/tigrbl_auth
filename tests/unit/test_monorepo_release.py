@@ -242,12 +242,18 @@ def test_backport_matrix_and_metadata_include_source_only_package_changes(monkey
     )
     output = tmp_path / "output"
     monkeypatch.setenv("GITHUB_OUTPUT", str(output))
-    assert release.main(["test-matrix", "--base-revision", "baseline", "--python-version", "3.12"]) == 0
+    assert release.main([
+        "test-matrix",
+        "--base-revision", "baseline",
+        "--python-version", "3.10",
+        "--python-version", "3.12",
+    ]) == 0
 
     matrix_output, count, manifest_header, *manifests, delimiter = output.read_text().splitlines()
     cells = json.loads(matrix_output.removeprefix("matrix="))
     assert count == "count=2"
     assert {cell["name"] for cell in cells} == changed_packages
+    assert {cell["python_version"] for cell in cells} == {"3.12"}
     assert set(manifests) == {f'{cell["path"]}/pyproject.toml' for cell in cells}
     assert manifest_header == f"manifests<<{delimiter}"
 
