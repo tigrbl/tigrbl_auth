@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TAG_RE = re.compile(r"^(?P<name>[A-Za-z0-9_.-]+)==(?P<version>\d+\.\d+\.\d+(?:\.dev\d+)?(?:[-+][A-Za-z0-9_.-]+)?)$")
 REQ_NAME_RE = re.compile(r"^\s*([A-Za-z0-9_.-]+)")
 SUPPORTED_PYTHON_VERSIONS = ("3.10", "3.11", "3.12", "3.13", "3.14")
-TESTKIT_PACKAGE_NAME = "tba-testkit-identity"
+TESTKIT_PACKAGE_NAME = "tba-tests-identity"
 TESTKIT_ROOT_EXTRAS = ("test", "sqlite", "postgres", "servers")
 SWARMAURI_PYTHON_CEILING = (3, 13)
 TIGRBL_PYTHON_CEILING = (3, 14)
@@ -303,16 +303,12 @@ def cmd_test_matrix(args: argparse.Namespace) -> int:
 
     cells = []
     for package in packages:
+        package_test_paths = [path.relative_to(ROOT).as_posix() for path in _package_test_paths(package)]
         for version in _supported_package_python_versions(package, versions):
-            package_test_paths = [
-                f"tests/packages/{package.name}",
-                f"tests/packages/{package.import_root}",
-            ]
             pre_test_command = ""
             pytest_args = ""
             cross_cutting = package.name == TESTKIT_PACKAGE_NAME
             if cross_cutting:
-                package_test_paths.append("tests/interop")
                 pre_test_command = '$VENV_PYTHON -m pip install -e ".[test,sqlite,postgres,servers]"'
                 pytest_args = "--certification-lane\nall"
             cell = package.as_cell()
@@ -422,13 +418,14 @@ materialize_external_handoff_templates(load_peer_profiles(), load_counterparts()
 
 
 def _package_test_paths(package: Package) -> list[Path]:
-    candidates = [
-        ROOT / "tests" / "packages" / package.name,
-        ROOT / "tests" / "packages" / package.import_root,
-    ]
+    layer = ROOT / "pkgs" / "120-tests"
+    candidates = [layer / "tba-tests-backend-apps" / "tests" / "packages" / package.name]
     if package.name == TESTKIT_PACKAGE_NAME:
-        candidates.append(ROOT / "tests" / "interop")
-    return [path for path in candidates if path.exists()]
+        candidates.extend((
+            layer / TESTKIT_PACKAGE_NAME / "tests",
+            layer / "tba-tests-governance-release-certification" / "tests" / "interop",
+        ))
+    return [path for path in candidates if path.is_dir()]
 
 
 def _install_package_test_harness(python: Path) -> None:
@@ -444,6 +441,22 @@ def _install_package_test_harness(python: Path) -> None:
         cwd=ROOT,
         check=True,
     )
+
+
+def _install_wheels(python: Path, wheels: list[Path], requirements_file: Path) -> None:
+    requirements_file.write_text("".join(f"{wheel.resolve().as_uri()}\n" for wheel in wheels), encoding="utf-8")
+    _run([str(python), "-m", "pip", "install", "-r", str(requirements_file)])
+
+
+def _install_backend_test_harness(python: Path) -> None:
+    project = _load_pyproject(ROOT / "pyproject.toml")["project"]
+    extras = project["optional-dependencies"]
+    requirements = [
+        requirement
+        for requirement in (*extras["test"], *project["dependencies"])
+        if _dependency_name(requirement) in {"pytest", "pytest-asyncio", "aiosqlite", "httpx"}
+    ]
+    _run([str(python), "-m", "pip", "install", *requirements])
 
 
 def cmd_isolated_test(args: argparse.Namespace) -> int:
@@ -469,15 +482,7 @@ def cmd_isolated_test(args: argparse.Namespace) -> int:
     if wheelhouse.exists():
         shutil.rmtree(wheelhouse)
     local_dependency_wheels = _build_local_dependency_wheels(package, wheelhouse)
-    install_command = [
-        str(python),
-        "-m",
-        "pip",
-        "install",
-        *[str(path) for path in local_dependency_wheels],
-        str(wheel),
-    ]
-    subprocess.run(install_command, check=True)
+    _install_wheels(python, [*local_dependency_wheels, wheel], work_dir / "package-wheels.txt")
     subprocess.run([str(python), "-m", "pip", "check"], check=True)
 
     check_code = """
@@ -509,16 +514,7 @@ print(json.dumps({"package": dist_name, "import_root": import_root, "version": v
             for path in root_dependency_wheels:
                 if path not in local_dependency_wheels:
                     local_dependency_wheels.append(path)
-            subprocess.run(
-                [
-                    str(python),
-                    "-m",
-                    "pip",
-                    "install",
-                    *[str(path) for path in root_dependency_wheels],
-                ],
-                check=True,
-            )
+            _install_wheels(python, root_dependency_wheels, work_dir / "testkit-wheels.txt")
             subprocess.run(
                 [
                     str(python),
@@ -534,7 +530,10 @@ print(json.dumps({"package": dist_name, "import_root": import_root, "version": v
                 check=True,
             )
             _materialize_testkit_interop_artifacts(python)
-        _install_package_test_harness(python)
+        if package.path.parts[1] == "090-backend-apps":
+            _install_backend_test_harness(python)
+        else:
+            _install_package_test_harness(python)
         env = os.environ.copy()
         env.update(
             {

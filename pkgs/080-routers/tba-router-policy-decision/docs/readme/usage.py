@@ -1,0 +1,3 @@
+from tba_router_policy_decision import PolicyDecisionRouter
+
+assert callable(PolicyDecisionRouter)

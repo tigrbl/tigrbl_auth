@@ -1,0 +1,3 @@
+from tba_provider_authenticator_mtls_client_cert import MtlsClientCertAuthenticator
+
+assert callable(MtlsClientCertAuthenticator)

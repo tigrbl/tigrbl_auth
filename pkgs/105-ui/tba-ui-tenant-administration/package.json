@@ -9,12 +9,18 @@
     "url": "git+https://github.com/tigrbl/tigrbl_auth.git",
     "directory": "pkgs/105-ui/tba-ui-tenant-administration"
   },
-  "homepage": "https://github.com/tigrbl/tigrbl_auth#readme",
+  "homepage": "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/105-ui/tba-ui-tenant-administration#readme",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "files": ["dist", "README.md", "package.json"],
+  "files": [
+    "dist",
+    "README.md",
+    "package.json",
+    "LICENSE",
+    "NOTICE"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -22,7 +28,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@tba/client-tenant-administration": "file:../../75-clients/tba-typescript-client-tenant-administration",
+    "@tba/client-tenant-administration": "file:../../075-clients/tba-typescript-client-tenant-administration",
     "@tba/ui-primitives": "file:../../100-uix-core/tba-ui-primitives",
     "@vitejs/plugin-react": "^5.0.0",
     "vite": "^6.2.0",
@@ -38,5 +44,12 @@
   },
   "engines": {
     "node": ">=22"
+  },
+  "author": {
+    "name": "Jacob Stewart",
+    "email": "jacob@swarmauri.com"
+  },
+  "bugs": {
+    "url": "https://github.com/tigrbl/tigrbl_auth/issues"
   }
 }

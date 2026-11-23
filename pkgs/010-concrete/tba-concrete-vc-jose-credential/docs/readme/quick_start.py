@@ -1,0 +1,3 @@
+from tba_concrete_vc_jose_credential import VcJoseCredential
+
+assert callable(VcJoseCredential)

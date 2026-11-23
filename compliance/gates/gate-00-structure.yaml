@@ -7,8 +7,8 @@ required:
 - compliance/targets
 - compliance/waivers
 - docs/adr
-- pkgs/80-routers
-- pkgs/90-backend-apps
+- pkgs/080-routers
+- pkgs/090-backend-apps
 - tba_auth/security
 - tba_auth/standards
 checks:

@@ -1,0 +1,3 @@
+from tba_capability_authenticator_attestation import AuthenticatorAttestationCapability
+
+assert callable(AuthenticatorAttestationCapability)

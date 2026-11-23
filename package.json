@@ -5,11 +5,11 @@
   "type": "module",
   "workspaces": [
     "pkgs/100-uix-core/tba-ui-primitives",
-    "pkgs/75-clients/tba-typescript-client-oidc-relying-party",
-    "pkgs/75-clients/tba-typescript-client-relying-party-session",
-    "pkgs/75-clients/tba-typescript-client-tenant-administration",
-    "pkgs/75-clients/tba-typescript-client-platform-administration",
-    "pkgs/75-clients/tba-typescript-client-policy-decision",
+    "pkgs/075-clients/tba-typescript-client-oidc-relying-party",
+    "pkgs/075-clients/tba-typescript-client-relying-party-session",
+    "pkgs/075-clients/tba-typescript-client-tenant-administration",
+    "pkgs/075-clients/tba-typescript-client-platform-administration",
+    "pkgs/075-clients/tba-typescript-client-policy-decision",
     "pkgs/105-ui/tba-ui-administration",
     "pkgs/105-ui/tba-ui-platform-administration",
     "pkgs/105-ui/tba-ui-tenant-administration",
@@ -18,7 +18,8 @@
     "pkgs/105-ui/tba-ui-my-account",
     "pkgs/105-ui/tba-ui-demo-hub",
     "pkgs/105-ui/tba-ui-public",
-    "pkgs/105-ui/tba-ui-resource-validation"
+    "pkgs/105-ui/tba-ui-resource-validation",
+    "pkgs/105-ui/tba-ui-app-connections"
   ],
   "scripts": {
     "build:uix-core": "npm run build -w @tba/ui-primitives",

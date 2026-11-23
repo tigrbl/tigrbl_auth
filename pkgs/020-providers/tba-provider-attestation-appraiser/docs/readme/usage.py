@@ -1,0 +1,3 @@
+from tba_provider_attestation_appraiser import exact_reference_value_policy
+
+assert callable(exact_reference_value_policy)

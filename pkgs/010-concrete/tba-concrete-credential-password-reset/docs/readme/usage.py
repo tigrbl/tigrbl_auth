@@ -1,0 +1,3 @@
+from tba_concrete_credential_password_reset import PasswordResetCredential
+
+assert callable(PasswordResetCredential)

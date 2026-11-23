@@ -1,0 +1,3 @@
+from tba_provider_mdoc_verifier import CanonicalCborEncoder
+
+assert callable(CanonicalCborEncoder)

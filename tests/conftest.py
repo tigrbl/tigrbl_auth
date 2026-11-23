@@ -9,6 +9,7 @@ import sys
 import time
 import types
 from contextlib import asynccontextmanager
+from importlib.util import find_spec
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any, AsyncGenerator, Generator
@@ -16,7 +17,7 @@ from typing import Any, AsyncGenerator, Generator
 import pytest
 
 _REPO_ROOT = Path(__file__).resolve().parents[1]
-for _api_src in sorted((_REPO_ROOT / "pkgs" / "80-routers").glob("*/src")):
+for _api_src in sorted((_REPO_ROOT / "pkgs" / "080-routers").glob("*/src")):
     if str(_api_src) not in sys.path:
         sys.path.insert(0, str(_api_src))
 
@@ -99,7 +100,7 @@ class _InMemoryTableStorage:
 
     def handlers_for(self, model: type) -> SimpleNamespace:
         async def list_core(request: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
-            filters = dict((request.get("payload") or {}).get("filters") or {})
+            filters = dict(request.get("payload") or {})
             return {"items": [dict(row) for row in self._bucket(model) if self._matches(row, filters)]}
 
         async def create_core(request: dict[str, Any]) -> dict[str, dict[str, Any]]:
@@ -208,19 +209,6 @@ def sample_tenant_data():
 
 
 
-def pytest_addoption(parser: pytest.Parser) -> None:
-    parser.addoption(
-        "--certification-lane",
-        action="store",
-        default=None,
-        choices=["core", "integration", "conformance", "security-negative", "interop", "extension", "all"],
-        help=(
-            "Select the certification lane to collect and run. Defaults to the "
-            "TBA_AUTH_TEST_LANE environment variable, falling back to 'core'."
-        ),
-    )
-
-
 def pytest_configure(config: pytest.Config) -> None:
     config.addinivalue_line("markers", "extension: optional extension lane tests")
     config.addinivalue_line("markers", "deferred: tests outside the default certification boundary")
@@ -269,10 +257,9 @@ def _require_runtime_stack() -> None:
     pytest.importorskip("tigrbl")
 
 
-def _import_runtime_objects() -> dict[str, Any]:
+def _import_runtime_objects(*, require_public_app: bool = True) -> dict[str, Any]:
     _require_runtime_stack()
     from tigrbl.engine import Engine, EngineSpec
-    from tba_app_backend_public import app
     from tba_app_backend_core.surfaces import surface_api as composed_surface_api
     from tba_runtime_identity_storage.engine import get_db
     from tba_runtime_identity.engine_resolver import (
@@ -281,6 +268,10 @@ def _import_runtime_objects() -> dict[str, Any]:
         resolve_default_provider,
         set_default_provider,
     )
+    app = None
+    if require_public_app or find_spec("tba_app_backend_public") is not None:
+        from tba_app_backend_public import app
+
     surface_api = composed_surface_api
     canonical_legacy_surface_api = composed_surface_api
 
@@ -337,7 +328,7 @@ def disable_tls_requirement():
 
 @asynccontextmanager
 async def _runtime_engine_context(database_url: str):
-    runtime = _import_runtime_objects()
+    runtime = _import_runtime_objects(require_public_app=False)
     Engine = runtime["Engine"]
     EngineSpec = runtime["EngineSpec"]
     register_api_provider = runtime["register_api_provider"]
@@ -355,12 +346,13 @@ async def _runtime_engine_context(database_url: str):
     original_surface = resolve_api_provider(surface_api)
     original_composed_surface = resolve_api_provider(composed_surface_api)
     original_canonical_legacy_surface = resolve_api_provider(canonical_legacy_surface_api)
-    original_app = resolve_api_provider(app)
+    original_app = resolve_api_provider(app) if app is not None else None
     original_default_provider = resolve_default_provider()
     register_api_provider(surface_api, provider)
     register_api_provider(composed_surface_api, provider)
     register_api_provider(canonical_legacy_surface_api, provider)
-    register_api_provider(app, provider)
+    if app is not None:
+        register_api_provider(app, provider)
     set_default_provider(provider)
     setattr(surface_api, "_ddl_executed", False)
     await surface_api.initialize()
@@ -410,7 +402,8 @@ async def _runtime_engine_context(database_url: str):
             canonical_legacy_surface_api,
             original_canonical_legacy_surface or provider,
         )
-        register_api_provider(app, original_app or provider)
+        if app is not None:
+            register_api_provider(app, original_app or provider)
         set_default_provider(original_default_provider or provider)
         setattr(surface_api, "_ddl_executed", False)
 
@@ -617,7 +610,9 @@ def temp_key_file(tmp_path_factory: pytest.TempPathFactory):
     temp_dir = tmp_path_factory.mktemp("runtime-keys")
     temp_kid = temp_dir / "jwt_ed25519.kid"
 
+    import tba_auth.oidc_id_token as oidc_facade
     import tba_provider_identity_jose.crypto as crypto_module
+    import tba_provider_identity_jose.oidc_key_runtime as key_runtime
     import tba_protocol_oidc.id_token as oidc_module
     import tba_protocol_oidc.standards.id_token as canonical_oidc_module
 
@@ -625,6 +620,8 @@ def temp_key_file(tmp_path_factory: pytest.TempPathFactory):
     original_path = crypto_module._DEFAULT_KEY_PATH
     original_rsa_path = oidc_module._RSA_KEY_PATH
     original_canonical_rsa_path = canonical_oidc_module._RSA_KEY_PATH
+    original_facade_rsa_path = oidc_facade._RSA_KEY_PATH
+    original_runtime_rsa_path = key_runtime._RSA_KEY_PATH
 
     crypto_module._DEFAULT_KEY_DIR = temp_dir
     crypto_module._DEFAULT_KEY_PATH = temp_kid
@@ -635,6 +632,9 @@ def temp_key_file(tmp_path_factory: pytest.TempPathFactory):
     oidc_module._provider.cache_clear()
     oidc_module._service_cache = None
     canonical_oidc_module._RSA_KEY_PATH = oidc_module._RSA_KEY_PATH
+    oidc_facade._RSA_KEY_PATH = oidc_module._RSA_KEY_PATH
+    key_runtime._RSA_KEY_PATH = oidc_module._RSA_KEY_PATH
+    key_runtime._service_cache = None
     canonical_oidc_module._provider.cache_clear()
     canonical_oidc_module._service_cache = None
 
@@ -650,6 +650,9 @@ def temp_key_file(tmp_path_factory: pytest.TempPathFactory):
     oidc_module._provider.cache_clear()
     oidc_module._service_cache = None
     canonical_oidc_module._RSA_KEY_PATH = original_canonical_rsa_path
+    oidc_facade._RSA_KEY_PATH = original_facade_rsa_path
+    key_runtime._RSA_KEY_PATH = original_runtime_rsa_path
+    key_runtime._service_cache = None
     canonical_oidc_module._provider.cache_clear()
     canonical_oidc_module._service_cache = None
 

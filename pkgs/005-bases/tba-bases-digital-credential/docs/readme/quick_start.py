@@ -1,0 +1,3 @@
+from tba_bases_digital_credential import CredentialFormatBase
+
+assert callable(CredentialFormatBase)

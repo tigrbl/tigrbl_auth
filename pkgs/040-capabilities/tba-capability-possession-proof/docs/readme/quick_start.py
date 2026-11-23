@@ -1,0 +1,3 @@
+from tba_capability_possession_proof import PossessionProofCapability
+
+assert callable(PossessionProofCapability)

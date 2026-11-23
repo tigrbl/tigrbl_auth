@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-CAPABILITY_ROOT = ROOT / "pkgs" / "40-capabilities"
+CAPABILITY_ROOT = ROOT / "pkgs" / "040-capabilities"
 
 
 def _items(values: list[str], empty: str) -> str:

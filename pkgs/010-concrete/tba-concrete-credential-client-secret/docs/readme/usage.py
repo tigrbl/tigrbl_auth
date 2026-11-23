@@ -1,0 +1,3 @@
+from tba_concrete_credential_client_secret import ClientSecretCredential
+
+assert callable(ClientSecretCredential)

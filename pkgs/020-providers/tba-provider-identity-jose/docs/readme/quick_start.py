@@ -1,0 +1,3 @@
+from tba_provider_identity_jose import DefaultJoseProviderSettings
+
+assert callable(DefaultJoseProviderSettings)

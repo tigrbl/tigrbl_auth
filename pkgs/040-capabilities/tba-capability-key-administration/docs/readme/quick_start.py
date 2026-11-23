@@ -1,0 +1,3 @@
+from tba_capability_key_administration import KeyAdministrationCapability
+
+assert callable(KeyAdministrationCapability)

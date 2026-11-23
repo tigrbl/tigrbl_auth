@@ -1,0 +1,3 @@
+from tba_provider_eat_verifier import EatVerifierProvider
+
+assert callable(EatVerifierProvider)

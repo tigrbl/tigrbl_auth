@@ -22,13 +22,13 @@ PROFILE_GROUPS = {
     "peer-claim": ("baseline", "production", "hardening"),
 }
 PUBLIC_ROUTE_SEARCH_ROOTS = (
-    "pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables",
-    "pkgs/30-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage",
-    "pkgs/60-runtime/tba-server-identity/src/tba_server_identity",
-    "pkgs/80-routers",
-    "pkgs/90-backend-apps",
-    "pkgs/70-facade/tba-auth/src/tba_auth/standards/oauth2",
-    "pkgs/70-facade/tba-auth/src/tba_auth/standards/oidc",
+    "pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables",
+    "pkgs/030-storage-runtime/tba-runtime-identity-storage/src/tba_runtime_identity_storage",
+    "pkgs/060-runtime/tba-server-identity/src/tba_server_identity",
+    "pkgs/080-routers",
+    "pkgs/090-backend-apps",
+    "pkgs/070-facade/tba-auth/src/tba_auth/standards/oauth2",
+    "pkgs/070-facade/tba-auth/src/tba_auth/standards/oidc",
 )
 OPENAPI_TARGET_LABEL = "OpenAPI 3.1 / 3.2 compatible public contract"
 OPENRPC_TARGET_LABEL = "OpenRPC 1.4.x admin/control-plane contract"
@@ -104,7 +104,7 @@ def runtime_package_root(repo_root: Path) -> Path:
     return (
         repo_root
         / "pkgs"
-        / "60-runtime"
+        / "060-runtime"
         / "tba-runtime-identity"
         / "src"
         / "tba_runtime_identity"
@@ -112,7 +112,7 @@ def runtime_package_root(repo_root: Path) -> Path:
 
 
 def facade_package_root(repo_root: Path) -> Path:
-    return repo_root / "pkgs" / "70-facade" / "tba-auth" / "src" / "tba_auth"
+    return repo_root / "pkgs" / "070-facade" / "tba-auth" / "src" / "tba_auth"
 
 
 def load_public_capabilities(repo_root: Path) -> list[dict[str, Any]]:
@@ -382,7 +382,7 @@ def _extract_rpc_methods_from_methods_tuple(node: ast.AST) -> list[dict[str, Any
 
 def extract_rpc_method_definitions(repo_root: Path) -> dict[str, dict[str, Any]]:
     extracted: dict[str, dict[str, Any]] = {}
-    base = repo_root / "pkgs/90-backend-apps"
+    base = repo_root / "pkgs/090-backend-apps"
     for path in sorted(base.rglob("*.py")):
         if path.name.startswith("_") or path.name == "__init__.py":
             continue
@@ -478,7 +478,7 @@ _AUXILIARY_TEST_CATEGORY_BY_PREFIX = {
     "tests/uix/": "e2e",
 }
 _AUXILIARY_TEST_CATEGORY_BY_PATH = {
-    "tests/unit/test_peer_bundle_completeness.py": "interop",
+    "pkgs/120-tests/tba-tests-governance-release-certification/tests/unit/test_peer_bundle_completeness.py": "interop",
 }
 
 
@@ -525,7 +525,11 @@ def infer_test_category(rel_path: str) -> str | None:
         return explicit
     parts = normalized.split("/")
     if len(parts) >= 5 and parts[:2] == ["pkgs", "120-tests"] and parts[3] == "tests":
-        return "interop" if parts[2].endswith("-interop") else "unit"
+        if parts[2].endswith("-interop"):
+            return "interop"
+        if len(parts) > 5:
+            return infer_test_category("/".join(parts[3:]))
+        return "unit"
     prefixes = {
         "tests/unit/": "unit",
         "tests/integration/": "integration",
@@ -536,6 +540,7 @@ def infer_test_category(rel_path: str) -> str | None:
         "tests/security/": "security",
         "tests/negative/": "negative",
         "tests/perf/": "perf",
+        "tests/performance/": "perf",
     }
     for prefix, category in prefixes.items():
         if normalized.startswith(prefix):
@@ -890,7 +895,7 @@ def verify_feature_surface_modularity(repo_root: Path) -> dict[str, Any]:
         )
     if "attach_runtime_surfaces(" not in (
         repo_root
-        / "pkgs/90-backend-apps/tba-app-backend-core/src"
+        / "pkgs/090-backend-apps/tba-app-backend-core/src"
         / "tba_app_backend_core/app.py"
     ).read_text(encoding="utf-8"):
         failures.append(

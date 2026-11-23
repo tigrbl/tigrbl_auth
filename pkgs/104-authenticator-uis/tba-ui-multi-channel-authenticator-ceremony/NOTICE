@@ -1,0 +1,10 @@
+Tigrbl Auth (TBA)
+
+Project: https://github.com/tigrbl/tigrbl_auth
+Attribution: Jacob Stewart and the Tigrbl Auth contributors.
+
+Distributed under the Apache License, Version 2.0.
+See the accompanying LICENSE file for the license terms.
+
+Distribution: @tba/ui-multi-channel-authenticator-ceremony
+Source: https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/104-authenticator-uis/tba-ui-multi-channel-authenticator-ceremony

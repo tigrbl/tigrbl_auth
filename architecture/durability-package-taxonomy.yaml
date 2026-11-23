@@ -1,5 +1,5 @@
 version: 1
-layer: 30-storage-runtime
+layer: 030-storage-runtime
 purpose: carrier-neutral durable operations and derived specifications for canonical layer-01 tables
 rules:
   - canonical packages depend only on layers 00, 01, 02, 03, 05, 10, 20, and Tigrbl's public table factories and bound handlers

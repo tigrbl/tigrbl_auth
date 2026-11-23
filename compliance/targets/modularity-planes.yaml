@@ -4,22 +4,22 @@ planes:
   routers:
     responsibility: closed, mountable HTTP carriers over owned operations and tables
     modules:
-    - pkgs/80-routers
+    - pkgs/080-routers
     boundary: certified_core
   backend_apps:
     responsibility: deployable application composition of routers, tables, operations, and hooks
     modules:
-    - pkgs/90-backend-apps
+    - pkgs/090-backend-apps
     boundary: certified_core
   runtime:
     responsibility: carrier-neutral process and deployment composition
     modules:
-    - pkgs/60-runtime
+    - pkgs/060-runtime
     boundary: certified_core
   facade:
     responsibility: downward-only compatibility and stable public entrypoints
     modules:
-    - pkgs/70-facade
+    - pkgs/070-facade
     boundary: legacy_transition
   uix_core:
     responsibility: reusable frontend transport, authentication, and presentation primitives

@@ -26,13 +26,12 @@ RUNTIME_STACK_SOURCE_PREFIXES = (
 EXTENSION_TEST_PREFIXES = (
     "test_rfc7800_",
     "test_rfc8417_",
-    "test_rfc8291_",
     "test_rfc8812_",
-    "test_rfc8932_",
 )
 DEFERRED_INTEGRATION_FILES = {
     "test_auth_flows.py",
-    "test_authorization_response_types.py",
+    "test_oauth_access_token_response.py",
+    "test_oidc_id_token_nonce_response.py",
     "test_crud_api.py",
     "test_device_code_flow.py",
     "test_full_workflow.py",
@@ -54,12 +53,15 @@ DEFERRED_FACADE_COMPAT_UNIT_FILES = {
     "test_authorize_response_modes.py",
     "test_auth_code_exchange_pkce.py",
     "test_bootstrappable_user_defaults.py",
-    "test_crypto.py",
+    "test_password_crypto.py",
+    "test_jwt_key_crypto.py",
     "test_engine_initialization.py",
     "test_fapi_runtime_profile.py",
     "test_hardening_cluster_a.py",
     "test_hardening_cluster_b.py",
-    "test_hardening_cluster_c.py",
+    "test_hardening_sender_constraints.py",
+    "test_hardening_logout.py",
+    "test_hardening_discovery_contract.py",
     "test_jwks_rotation.py",
     "test_key_rotation_policy_governance.py",
     "test_models.py",
@@ -123,6 +125,8 @@ def classify_test_path(path: Path) -> str:
     name = path.name
     parts = path.parts
     if "packages" in parts:
+        return "package"
+    if "tba-tests-identity" in parts and path.parent.name == "tests":
         return "package"
     if name in DEFERRED_FACADE_COMPAT_UNIT_FILES:
         return "extension"

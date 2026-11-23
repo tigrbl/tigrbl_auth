@@ -1,0 +1,3 @@
+from tba_capability_realm_administration import RealmAdministrationCapability
+
+assert callable(RealmAdministrationCapability)

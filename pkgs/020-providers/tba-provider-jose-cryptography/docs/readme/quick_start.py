@@ -1,0 +1,3 @@
+from tba_provider_jose_cryptography import JweCryptographyProvider
+
+assert callable(JweCryptographyProvider)

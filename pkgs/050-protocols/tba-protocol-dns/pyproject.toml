@@ -1,0 +1,28 @@
+[project]
+name = "tba-protocol-dns"
+version = "0.4.0.dev3"
+description = "DNS zone transfers, updates, discovery, and authentication protocols."
+readme = "README.md"
+requires-python = ">=3.10,<3.16"
+license = "Apache-2.0"
+dependencies = [
+    "tba-primitives-dns-name==0.4.0.dev3",
+    "tba-codec-dns==0.4.0.dev3",
+    "tba-concrete-dns-zone==0.4.0.dev3",
+    "tba-provider-dns-resolver==0.4.0.dev3",
+]
+
+[project.optional-dependencies]
+dnssec = ["cryptography>=47"]
+
+[project.entry-points."tba.dns.inbound_xfr"]
+protocol = "tba_protocol_dns.xfr:inbound_xfr"
+sync = "tba_protocol_dns.xfr:inbound_xfr_sync"
+xfr = "tba_protocol_dns.xfr:xfr"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tba_protocol_dns", from = "src" }]

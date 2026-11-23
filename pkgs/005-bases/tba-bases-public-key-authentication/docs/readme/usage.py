@@ -1,0 +1,3 @@
+from tba_bases_public_key_authentication import AttestationStatementVerifierBase
+
+assert callable(AttestationStatementVerifierBase)

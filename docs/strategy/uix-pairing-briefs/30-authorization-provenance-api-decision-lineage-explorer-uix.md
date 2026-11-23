@@ -674,17 +674,17 @@ Faster investigation is useful only if explanations remain correct, privacy-safe
 - `docs/strategy/uix-pairing-briefs/12-authorization-decision-api-policy-studio-uix.md`
 - `.ssot/specs/SPEC-1093-authorization-decision-trace-and-reproducibility-requirements.yaml`
 - `.ssot/specs/SPEC-1212-policy-determinism-and-decision-stability-contract.yaml`
-- `pkgs/20-providers/tba-provider-security-authorization-provenance-builder/`
-- `pkgs/05-bases/tba-bases-security-provenance/`
-- `pkgs/20-providers/tba-runtime-authorization-policy/`
-- `pkgs/20-providers/tba-provider-authorization-policy-decision-engine/`
-- `pkgs/30-storage-runtime/tba-durability-authorization-policy-authority-derivation-graph/`
-- `pkgs/02-contracts/tba-contracts-security-trust/`
-- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/replay/`
+- `pkgs/020-providers/tba-provider-security-authorization-provenance-builder/`
+- `pkgs/005-bases/tba-bases-security-provenance/`
+- `pkgs/020-providers/tba-runtime-authorization-policy/`
+- `pkgs/020-providers/tba-provider-authorization-policy-decision-engine/`
+- `pkgs/030-storage-runtime/tba-durability-authorization-policy-authority-derivation-graph/`
+- `pkgs/002-contracts/tba-contracts-security-trust/`
+- `pkgs/002-contracts/tba-contracts-identity/src/tba_contracts_identity/replay/`
 - `tests/unit/test_authorization_provenance.py`
 - `tests/unit/test_policy_determinism_replay.py`
 - `tests/unit/test_decision_stability_policy_versions.py`
-- `tests/integration/test_persistence_lifecycle_durability.py`
+- `pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py`
 
 ### Standards and primary guidance
 

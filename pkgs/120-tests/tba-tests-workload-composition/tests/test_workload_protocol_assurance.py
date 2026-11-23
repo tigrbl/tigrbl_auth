@@ -8,12 +8,12 @@ try:
     import tomllib
 except ModuleNotFoundError:
     import tomli as tomllib
-from tba_testkit_workload_credential_conformance.profiles import (
+from tba_tests_workload_credential_conformance.profiles import (
     exercise_spiffe,
     exercise_wic,
     exercise_wimse,
 )
-from tba_testkit_workload_credential_conformance.wheels import run_installed
+from tba_tests_workload_credential_conformance.wheels import run_installed
 
 ROOT = Path(__file__).resolve().parents[4]
 WIMSE = (

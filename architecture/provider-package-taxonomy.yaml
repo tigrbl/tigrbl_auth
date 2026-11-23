@@ -1,29 +1,29 @@
 version: 1
-layer: 20-providers
+layer: 020-providers
 rules:
   ownership: one-replaceable-environment-implementation-per-package
   implements: layer-02-port-or-layer-05-base
   allowed_dependencies:
-  - 00-primitives
-  - 02-contracts
-  - 03-codecs
-  - 05-bases
-  - 10-concrete
+  - 000-primitives
+  - 002-contracts
+  - 003-codecs
+  - 005-bases
+  - 010-concrete
   - approved-20-provider-collaborators
   forbidden_dependencies:
-  - 01-storage
-  - 30-storage-runtime
-  - 40-capabilities
-  - 50-protocols
-  - 60-runtime
-  - 70-facade
-  - 80-routers
-  deterministic_behavior: 10-concrete
-  durability: 01-storage-and-30-storage-runtime
-  orchestration: 40-capabilities
-  protocol_versions: 50-protocols
-  runtime_mounting: 60-runtime
-  http_surfaces: 80-routers
+  - 001-storage
+  - 030-storage-runtime
+  - 040-capabilities
+  - 050-protocols
+  - 060-runtime
+  - 070-facade
+  - 080-routers
+  deterministic_behavior: 010-concrete
+  durability: 01-storage-and-030-storage-runtime
+  orchestration: 040-capabilities
+  protocol_versions: 050-protocols
+  runtime_mounting: 060-runtime
+  http_surfaces: 080-routers
 canonical_providers:
   authenticators:
   - tba-provider-authenticator-api-key-local
@@ -86,13 +86,13 @@ canonical_providers:
 compatibility_or_migration_packages:
   tigrbl-authn-credentials:
     target: tba-credentials
-    target_layer: 70-facade
+    target_layer: 070-facade
   tba-provider-authorization-resource-server-verifier:
     target: tba-capability-protected-resource-authorization
-    target_layer: 40-capabilities
+    target_layer: 040-capabilities
   tba-provider-did-controller:
     target: did-controller-capability
-    target_layer: 40-capabilities
+    target_layer: 040-capabilities
   tba-provider-authentication-anomaly-detector:
     target: anomaly-rules-tables-ops-and-capability
     target_layer: 10-01-30-40
@@ -107,31 +107,31 @@ compatibility_or_migration_packages:
     target_layer: 10-20
   tba-provider-authentication-context-acr-basic:
     target: tba-concrete-acr-evaluator-basic
-    target_layer: 10-concrete
+    target_layer: 010-concrete
   tba-provider-authentication-context-amr-basic:
     target: tba-concrete-amr-evaluator-basic
-    target_layer: 10-concrete
+    target_layer: 010-concrete
   tba-provider-security-authorization-provenance-builder:
     target: tba-concrete-authorization-provenance
-    target_layer: 10-concrete
+    target_layer: 010-concrete
   tba-provider-security-certificate-mtls:
     target: tba-concrete-mtls-confirmation-binding
-    target_layer: 10-concrete
+    target_layer: 010-concrete
   tba-provider-security-dpop-cnf-binding-validator:
     target: tba-concrete-dpop-confirmation-binding
-    target_layer: 10-concrete
+    target_layer: 010-concrete
   tba-provider-security-mtls-cnf-binding-validator:
     target: tba-concrete-mtls-confirmation-binding
-    target_layer: 10-concrete
+    target_layer: 010-concrete
   tba-provider-security-proof-dpop:
     target: tba-concrete-dpop-confirmation-binding
-    target_layer: 10-concrete
+    target_layer: 010-concrete
   tba-provider-security-proof-pkce:
     target: tba-concrete-pkce
-    target_layer: 10-concrete
+    target_layer: 010-concrete
   tba-provider-security-subject-pairwise:
     target: tba-concrete-pairwise-subject-identifier
-    target_layer: 10-concrete
+    target_layer: 010-concrete
 canonical_deterministic_extractions:
 - tba-concrete-dns-zone
 - tba-concrete-acr-evaluator-basic

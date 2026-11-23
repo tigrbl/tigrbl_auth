@@ -1,6 +1,6 @@
 import json
 
-from tba_testkit_workload_credential_conformance.wheels import run_installed
+from tba_tests_workload_credential_conformance.wheels import run_installed
 
 SPIFFE = ("tba-protocol-workload-spiffe-svid",)
 

@@ -1,0 +1,3 @@
+from tba_concrete_credential_dpop_key import DpopKeyCredential
+
+assert callable(DpopKeyCredential)

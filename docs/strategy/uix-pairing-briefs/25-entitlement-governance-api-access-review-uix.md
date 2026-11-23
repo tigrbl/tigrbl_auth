@@ -527,15 +527,15 @@ Metrics must segment by risk and connector capability; faster bulk approval alon
 - `docs/strategy/uix-pairing-briefs/10-additional-api-uix-opportunity-map.md`
 - `docs/authorization-models-focus.md`
 - `docs/strategy/identity-market-roadmap.md`
-- `pkgs/02-contracts/tba-contracts-identity/src/tba_contracts_identity/governance/`
-- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/entitlement/`
-- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/entitlement_assignment/`
-- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/access_review_campaign/`
-- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/access_review_item/`
-- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/access_review_decision/`
-- `pkgs/20-providers/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/governance_extension.py`
-- `tests/unit/test_governance_extension_plane_phase5.py`
-- `tests/unit/test_provisioning_governance_ecosystem_boundary.py`
+- `pkgs/002-contracts/tba-contracts-identity/src/tba_contracts_identity/governance/`
+- `pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables/entitlement/`
+- `pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables/entitlement_assignment/`
+- `pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables/access_review_campaign/`
+- `pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables/access_review_item/`
+- `pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables/access_review_decision/`
+- `pkgs/020-providers/tba-runtime-authorization-policy/src/tba_runtime_authorization_policy/governance_extension.py`
+- `pkgs/120-tests/tba-tests-governance-composition/tests/unit/test_entitlements_and_access_reviews.py`
+- `pkgs/120-tests/tba-tests-governance-composition/tests/unit/test_provisioning_governance_ecosystem_boundary.py`
 
 ### Standards and primary guidance
 

@@ -174,7 +174,7 @@ Profile support must identify deployment jurisdiction and governance authority. 
 
 ## 9. BIMI and Mark Certificate Profile
 
-The first library slice is available through the [BIMI profile](../../../pkgs/55-profiles/tba-profile-communications-identity-bimi/README.md) and the optional `bimi` workspace extra. It checks BIMI TXT and DMARC enforcement, verifies the Mark Certificate against configured roots, CRLs and CT keys, and binds the leaf to the assertion owner and its embedded logo. The requirements below cover the wider product surface.
+The first library slice is available through the [BIMI profile](../../../pkgs/055-profiles/tba-profile-communications-identity-bimi/README.md) and the optional `bimi` workspace extra. It checks BIMI TXT and DMARC enforcement, verifies the Mark Certificate against configured roots, CRLs and CT keys, and binds the leaf to the assertion owner and its embedded logo. The requirements below cover the wider product surface.
 
 The profile composes standalone BIMI and DMARC protocol packages, shared DNS contracts, an X.509 subject logotype decoder, and a certificate evidence provider. Its optional workflow adapter uses the shared Communications Identity capability to run and audit an initial domain assessment or a follow-up check.
 

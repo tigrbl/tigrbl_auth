@@ -1,0 +1,3 @@
+from tba_provider_policy_administration_memory import ABACAdministrator
+
+assert callable(ABACAdministrator)

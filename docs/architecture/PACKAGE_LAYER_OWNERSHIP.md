@@ -7,20 +7,20 @@ release phases and a package does not need to exist in every layer.
 
 | Layer | Responsibility | Must not own |
 | --- | --- | --- |
-| `00-primitives` | dependency-light values and deterministic utilities | domain implementations or integrations |
-| `01-storage` | storage schemas and persistence primitives | application workflows |
-| `02-contracts` | protocols, ports, enums, and transport-neutral contract values | concrete implementations |
-| `05-bases` | reusable abstract bases and mixins implementing contract structure, including `CapabilityBase` | deployable provider behavior |
-| `10-concrete` | first concrete domain implementations, including ordered generic capability implementations | external integrations or application workflows |
-| `20-providers` | concrete providers, algorithms, adapters, factories, and integrations | multi-provider application workflows |
-| `30-storage-runtime` | composed repositories, persistence services, and storage-backed runtimes | protocol or product composition |
-| `40-capabilities` | complete multi-component application use cases | single implementations, integrations, persistence, protocols, or app construction |
-| `50-protocols` | OAuth, OIDC, credential, attestation, and event protocol behavior | process construction |
-| `60-runtime` | dependency injection, process construction, runners, and runtime lifecycle | product API policy |
-| `70-facade` | compatibility and ergonomic suite entry point | canonical lower-layer behavior |
-| `75-clients` | independently versioned Python and TypeScript remote SDKs plus consumer-side enforcement adapters | server composition, storage, routers, backend apps, facades, or UI screens |
-| `80-routers` | reusable Tigrbl routers that close over one or more related tables, operations, schemas, and hooks | deployable backend application composition |
-| `90-backend-apps` | deployable backend applications composed from routers plus app-wide tables, operations, hooks, policy, configuration, and lifecycle | lower-layer implementation truth or router behavior duplicated inside an app |
+| `000-primitives` | dependency-light values and deterministic utilities | domain implementations or integrations |
+| `001-storage` | storage schemas and persistence primitives | application workflows |
+| `002-contracts` | protocols, ports, enums, and transport-neutral contract values | concrete implementations |
+| `005-bases` | reusable abstract bases and mixins implementing contract structure, including `CapabilityBase` | deployable provider behavior |
+| `010-concrete` | first concrete domain implementations, including ordered generic capability implementations | external integrations or application workflows |
+| `020-providers` | concrete providers, algorithms, adapters, factories, and integrations | multi-provider application workflows |
+| `030-storage-runtime` | composed repositories, persistence services, and storage-backed runtimes | protocol or product composition |
+| `040-capabilities` | complete multi-component application use cases | single implementations, integrations, persistence, protocols, or app construction |
+| `050-protocols` | OAuth, OIDC, credential, attestation, and event protocol behavior | process construction |
+| `060-runtime` | dependency injection, process construction, runners, and runtime lifecycle | product API policy |
+| `070-facade` | compatibility and ergonomic suite entry point | canonical lower-layer behavior |
+| `075-clients` | independently versioned Python and TypeScript remote SDKs plus consumer-side enforcement adapters | server composition, storage, routers, backend apps, facades, or UI screens |
+| `080-routers` | reusable Tigrbl routers that close over one or more related tables, operations, schemas, and hooks | deployable backend application composition |
+| `090-backend-apps` | deployable backend applications composed from routers plus app-wide tables, operations, hooks, policy, configuration, and lifecycle | lower-layer implementation truth or router behavior duplicated inside an app |
 | `100-uix-core` | browser-safe reusable UIX components and client utilities | product-specific screens or Python runtime behavior |
 | `105-ui` | product-specific user interfaces and browser applications | backend implementation truth |
 | `110-examples` | runnable consumer applications demonstrating supported public surfaces | canonical implementation logic or test-only dependencies |
@@ -105,7 +105,7 @@ Run:
 
 ```shell
 python scripts/validate_layer_boundaries.py
-pytest -q tests/unit/test_layer_40_capability_boundary.py
+pytest -q pkgs/120-tests/tba-tests-architecture/tests/unit/test_layer_40_capability_boundary.py
 ```
 
 The validator checks live package metadata and Python ASTs. It rejects:
@@ -138,8 +138,8 @@ specific to that app and has no reusable layer-80 identity.
 The dependency direction is one-way:
 
 ```text
-90-backend-apps -> 80-routers
-105-ui -> 75-clients -> 02-contracts / 50-protocols
+090-backend-apps -> 080-routers
+105-ui -> 075-clients -> 002-contracts / 050-protocols
 ```
 
 Routers may never declare or import backend-app packages. The layer-boundary

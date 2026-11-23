@@ -1,0 +1,91 @@
+[project]
+name="tba-profile-workload-credential-spiffe-wit-svid"
+version="0.4.0.dev3"
+description = "Incubating SPIFFE WIT-SVID profile pinned to the SPIFFE v1.15.1 publication."
+license = "Apache-2.0"
+readme = "README.md"
+requires-python=">=3.10,<3.16"
+classifiers = [
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Development Status :: 3 - Alpha",
+    "Typing :: Typed",
+]
+dependencies = ["tba-contracts-proof-of-possession==0.4.0.dev3", "tba-profile-workload-credential-wimse-wit==0.4.0.dev5", "tba-protocol-workload-spiffe-svid==0.4.0.dev3", "tba-profile-workload-proof-wimse-wpt==0.4.0.dev5", "tba-concrete-jwt==0.4.0.dev3", "tba-provider-jose-cryptography==0.4.0.dev4"]
+license-files = ["LICENSE", "NOTICE"]
+keywords = ["tigrbl", "tba", "identity"]
+
+[[project.authors]]
+name = "Jacob Stewart"
+email = "jacob@swarmauri.com"
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/055-profiles/tba-profile-workload-credential-spiffe-wit-svid#readme"
+Documentation = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/055-profiles/tba-profile-workload-credential-spiffe-wit-svid#readme"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/055-profiles/tba-profile-workload-credential-spiffe-wit-svid"
+Issues = "https://github.com/tigrbl/tigrbl_auth/issues"
+PyPI = "https://pypi.org/project/tba-profile-workload-credential-spiffe-wit-svid/"
+[build-system]
+requires=["poetry-core>=2.2.0,<3.0.0"]
+build-backend="poetry.core.masonry.api"
+[tool.poetry]
+packages=[{include="tba_profile_workload_credential_spiffe_wit_svid",from="src"}]
+
+[tool.readme_standards]
+policy = "package-guide-v1"
+readme = "README.md"
+brand = "tigrbl-auth"
+brand_catalog = "../../../tools/readme/brands.toml"
+repository = "https://github.com/tigrbl/tigrbl_auth"
+ref = "master"
+package_path = "pkgs/055-profiles/tba-profile-workload-credential-spiffe-wit-svid"
+layer = "055-profiles"
+lifecycle = "active"
+license_file = "LICENSE"
+notice_file = "NOTICE"
+
+[tool.readme_standards.distributions.pypi]
+name = "tba-profile-workload-credential-spiffe-wit-svid"
+published = true
+
+[tool.readme_standards.examples.quick_start]
+source = "docs/readme/quick_start.py"
+test = "docs/readme/test_examples.py"
+language = "python"
+expected_exit_code = 0
+
+[tool.readme_standards.examples.usage]
+source = "docs/readme/usage.py"
+test = "docs/readme/test_examples.py"
+language = "python"
+expected_exit_code = 0
+
+[tool.readme_standards.statuses.readme]
+label = "CI gate"
+url = "https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"
+
+[tool.readme_standards.statuses.tests]
+label = "example source"
+url = "https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/055-profiles/tba-profile-workload-credential-spiffe-wit-svid/docs/readme/test_examples.py"
+
+[tool.readme_standards.statuses.certification]
+label = "not certified"
+url = "https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/055-profiles/tba-profile-workload-credential-spiffe-wit-svid/README.md#certification-status"
+
+[tool.readme_standards.statuses.governance]
+label = "repository policy"
+url = "https://github.com/tigrbl/tigrbl_auth/blob/master/tools/readme/POLICY.md"
+
+[tool.readme_standards.statuses.evidence]
+label = "source and CI"
+url = "https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"
+
+[dependency-groups]
+dev = ["readme-standards==0.1.1; python_version >= \"3.11\""]

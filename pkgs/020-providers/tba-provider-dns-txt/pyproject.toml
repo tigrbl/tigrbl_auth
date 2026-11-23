@@ -1,0 +1,101 @@
+[project]
+name = "tba-provider-dns-txt"
+version = "0.4.0.dev3"
+description = "Typed DNS TXT lookup provider."
+readme = "README.md"
+requires-python = ">=3.10,<3.16"
+license = "Apache-2.0"
+dependencies = [
+    "tba-contracts-dns==0.4.0.dev3",
+    "tba-primitives-dns-name==0.4.0.dev3",
+    "tba-codec-dns==0.4.0.dev3",
+    "tba-provider-dns-resolver==0.4.0.dev3",
+]
+license-files = ["LICENSE", "NOTICE"]
+keywords = ["tigrbl", "tba", "identity"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
+]
+
+[[project.authors]]
+name = "Jacob Stewart"
+email = "jacob@swarmauri.com"
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/020-providers/tba-provider-dns-txt#readme"
+Documentation = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/020-providers/tba-provider-dns-txt#readme"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/020-providers/tba-provider-dns-txt"
+Issues = "https://github.com/tigrbl/tigrbl_auth/issues"
+PyPI = "https://pypi.org/project/tba-provider-dns-txt/"
+[project.optional-dependencies]
+http2 = ["tba-provider-dns-resolver[http2]==0.4.0.dev3"]
+quic = ["tba-provider-dns-resolver[quic]==0.4.0.dev3"]
+trio = ["tba-provider-dns-resolver[trio]==0.4.0.dev3"]
+
+[build-system]
+requires = ["poetry-core>=2.2.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tba_provider_dns_txt", from = "src" }]
+
+[tool.readme_standards]
+policy = "package-guide-v1"
+readme = "README.md"
+brand = "tigrbl-auth"
+brand_catalog = "../../../tools/readme/brands.toml"
+repository = "https://github.com/tigrbl/tigrbl_auth"
+ref = "master"
+package_path = "pkgs/020-providers/tba-provider-dns-txt"
+layer = "020-providers"
+lifecycle = "active"
+license_file = "LICENSE"
+notice_file = "NOTICE"
+
+[tool.readme_standards.distributions.pypi]
+name = "tba-provider-dns-txt"
+published = true
+
+[tool.readme_standards.examples.quick_start]
+source = "docs/readme/quick_start.py"
+test = "docs/readme/test_examples.py"
+language = "python"
+expected_exit_code = 0
+
+[tool.readme_standards.examples.usage]
+source = "docs/readme/usage.py"
+test = "docs/readme/test_examples.py"
+language = "python"
+expected_exit_code = 0
+
+[tool.readme_standards.statuses.readme]
+label = "CI gate"
+url = "https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"
+
+[tool.readme_standards.statuses.tests]
+label = "example source"
+url = "https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-dns-txt/docs/readme/test_examples.py"
+
+[tool.readme_standards.statuses.certification]
+label = "not certified"
+url = "https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-dns-txt/README.md#certification-status"
+
+[tool.readme_standards.statuses.governance]
+label = "repository policy"
+url = "https://github.com/tigrbl/tigrbl_auth/blob/master/tools/readme/POLICY.md"
+
+[tool.readme_standards.statuses.evidence]
+label = "source and CI"
+url = "https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"
+
+[dependency-groups]
+dev = ["readme-standards==0.1.1; python_version >= \"3.11\""]

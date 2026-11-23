@@ -1,0 +1,3 @@
+from tba_capability_access_governance import AccessGovernanceCapability
+
+assert callable(AccessGovernanceCapability)

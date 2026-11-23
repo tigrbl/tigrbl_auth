@@ -1,0 +1,3 @@
+from tba_provider_authentication_context_amr_basic import BasicAmrEvaluator
+
+assert callable(BasicAmrEvaluator)

@@ -1,0 +1,3 @@
+from tba_provider_digital_credential_trust import PinnedIssuerTrustProvider
+
+assert callable(PinnedIssuerTrustProvider)

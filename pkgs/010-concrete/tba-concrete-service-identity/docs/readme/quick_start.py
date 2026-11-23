@@ -1,0 +1,3 @@
+from tba_concrete_service_identity import ServiceIdentity
+
+assert callable(ServiceIdentity)

@@ -9,7 +9,7 @@ separately from current roles, grants, policies, resource scope, and request
 context. Customer and internal authority are never merged.
 
 Remote Python and TypeScript SDKs are first-class client packages. They live in a
-new `75-clients` layer, not in `70-facade`, `100-uix-core`, or `105-ui`.
+new `075-clients` layer, not in `070-facade`, `100-uix-core`, or `105-ui`.
 Clients and server routers share lower-layer contracts but never import each
 other's implementations.
 

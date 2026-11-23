@@ -3,7 +3,7 @@
 **Proposed pairing:** `tba-router-certificates` + `@tba/certificate-center-uix`<br>
 **Status:** New product surface; certificate DTOs/bases, mTLS credentials, key lifecycle, rotation policy, storage, and JOSE foundations exist<br>
 **Prepared:** July 11, 2026<br>
-**Proposed router owner:** `pkgs/80-routers/tba-router-certificates`<br>
+**Proposed router owner:** `pkgs/080-routers/tba-router-certificates`<br>
 **Proposed protocol/provider owners:** certificate domain providers plus optional ACME/EST adapters<br>
 **Proposed UIX owner:** `pkgs/105-ui/certificate-center-uix`
 
@@ -504,14 +504,14 @@ Guardrails include false-valid verification, SAN/usage escalation, key leakage, 
 
 ### Repository
 
-- `pkgs/02-contracts/tba-contracts-security-trust/src/tba_contracts_security_trust/types.py`
-- `pkgs/05-bases/tba-bases-security-trust-domain/src/tba_bases_security_trust_domain/bases.py`
-- `pkgs/20-providers/tba-provider-security-certificate-mtls/`
-- `pkgs/20-providers/tba-provider-security-mtls-cnf-binding-validator/`
-- `pkgs/20-providers/tba-provider-authenticator-mtls-client-cert/`
-- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/credential_mtls_certificate/`
-- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/key_rotation_policy/`
-- `pkgs/01-storage/tba-storage-core/src/tba_storage_core/tables/key_rotation_event/`
+- `pkgs/002-contracts/tba-contracts-security-trust/src/tba_contracts_security_trust/types.py`
+- `pkgs/005-bases/tba-bases-security-trust-domain/src/tba_bases_security_trust_domain/bases.py`
+- `pkgs/020-providers/tba-provider-security-certificate-mtls/`
+- `pkgs/020-providers/tba-provider-security-mtls-cnf-binding-validator/`
+- `pkgs/020-providers/tba-provider-authenticator-mtls-client-cert/`
+- `pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables/credential_mtls_certificate/`
+- `pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables/key_rotation_policy/`
+- `pkgs/001-storage/tba-storage-core/src/tba_storage_core/tables/key_rotation_event/`
 - key provider/lifecycle, JOSE, attestation, trust-domain, audit, service/workload, OAuth mTLS, and resource-validation packages;
 - `pkgs/105-ui/tba-ui-platform-administration/pages/KeyRotationPage.tsx`;
 - mTLS, key-rotation, and certificate-credential tests.

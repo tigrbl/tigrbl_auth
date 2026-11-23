@@ -1,0 +1,3 @@
+from tba_app_backend_service_administration import ServiceAdminBackendAppContract
+
+assert callable(ServiceAdminBackendAppContract)

@@ -1,0 +1,3 @@
+from tba_bases_replay import ReplayReservationBase
+
+assert callable(ReplayReservationBase)

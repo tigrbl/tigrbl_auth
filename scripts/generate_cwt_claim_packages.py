@@ -3,7 +3,7 @@
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-PACKAGES = ROOT / "pkgs" / "10-concrete"
+PACKAGES = ROOT / "pkgs" / "010-concrete"
 CLAIMS = (
     ("cwt-issuer", "CwtIssuerClaim", 1, "PROTOCOL", "STRING", "isinstance(value, str) and bool(value)"),
     ("cwt-subject", "CwtSubjectClaim", 2, "IDENTITY", "STRING", "isinstance(value, str) and bool(value)"),

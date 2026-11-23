@@ -86,8 +86,8 @@ for attempt in 1 2 3 4 5; do
 done
 
 uv pip install --offline --no-index --find-links /wheels --no-deps --python /opt/dns-peer/bin/python \
-    tba-primitives-dns-name==0.4.0.dev2 tba-codec-dns==0.4.0.dev2 \
-    tba-concrete-dns-zone==0.4.0.dev2 tba-provider-dns-resolver==0.4.0.dev2 tba-protocol-dns==0.4.0.dev2
+    tba-primitives-dns-name==0.4.0.dev3 tba-codec-dns==0.4.0.dev3 \
+    tba-concrete-dns-zone==0.4.0.dev3 tba-provider-dns-resolver==0.4.0.dev3 tba-protocol-dns==0.4.0.dev3
 
 if ! uv run --no-project --offline --python /opt/dns-peer/bin/python /opt/dns-interop/probe.py; then
     cat named.log

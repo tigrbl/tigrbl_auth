@@ -1,0 +1,3 @@
+from tba_provider_authenticator_service_key_local import ServiceKeyLocalAuthenticator
+
+assert callable(ServiceKeyLocalAuthenticator)

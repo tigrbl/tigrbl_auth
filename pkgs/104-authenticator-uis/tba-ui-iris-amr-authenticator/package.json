@@ -31,5 +31,19 @@
     "typescript": "~5.8.2",
     "vite": "^6.2.3",
     "@types/express": "^4.17.21"
+  },
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Jacob Stewart",
+    "email": "jacob@swarmauri.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tigrbl/tigrbl_auth.git",
+    "directory": "pkgs/104-authenticator-uis/tba-ui-iris-amr-authenticator"
+  },
+  "homepage": "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/104-authenticator-uis/tba-ui-iris-amr-authenticator#readme",
+  "bugs": {
+    "url": "https://github.com/tigrbl/tigrbl_auth/issues"
   }
 }

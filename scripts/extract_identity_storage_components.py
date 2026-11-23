@@ -15,7 +15,7 @@ import uuid
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-STORAGE = ROOT / "pkgs/01-storage"
+STORAGE = ROOT / "pkgs/001-storage"
 LEGACY = STORAGE / "tba-storage-core/src/tba_storage_core/tables"
 NAMESPACE = uuid.UUID("72ced0b5-f90a-47ba-b7d5-da70a6b62d4f")
 
@@ -72,7 +72,7 @@ def _sources() -> tuple[dict[str, Path], dict[str, str], dict[str, object]]:
                         table_names[node.name] = statement.value.value
     sys.path[:0] = [
         str(STORAGE / "tba-storage-core/src"),
-        str(ROOT / "pkgs/00-primitives/tba-primitives-identity/src"),
+        str(ROOT / "pkgs/000-primitives/tba-primitives-identity/src"),
         *(
             str(path / "src")
             for path in STORAGE.glob("tba-storage-*")

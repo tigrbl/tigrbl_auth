@@ -1,0 +1,3 @@
+from tba_concrete_mtls_confirmation_binding import MtlsBindingValidator
+
+assert callable(MtlsBindingValidator)

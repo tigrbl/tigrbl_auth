@@ -1,0 +1,69 @@
+from __future__ import annotations
+
+import pytest
+
+from tba_provider_authenticator_client_secret_local import ClientSecretLocalAuthenticator
+from tba_provider_authenticator_api_key_local import ApiKeyLocalAuthenticator
+from tba_provider_authenticator_password_local import PasswordLocalAuthenticator
+from tba_provider_authenticator_service_key_local import ServiceKeyLocalAuthenticator
+from tba_contracts_identity.shared_secrets import SecretHash
+from tba_provider_secret_hashing_bcrypt import BcryptSecretHasher
+
+
+def test_bcrypt_provider_hashes_verifies_and_detects_rehash() -> None:
+    legacy = BcryptSecretHasher(rounds=4)
+    current = BcryptSecretHasher(rounds=5)
+    encoded = legacy.hash_secret("correct horse battery staple")
+
+    assert isinstance(encoded, SecretHash)
+    assert current.verify_secret("wrong", encoded).verified is False
+    result = current.verify_secret("correct horse battery staple", encoded)
+    assert result.verified is True
+    assert result.needs_rehash is True
+
+
+def test_bcrypt_provider_rejects_empty_long_and_malformed_inputs() -> None:
+    provider = BcryptSecretHasher(rounds=4)
+
+    with pytest.raises(ValueError, match="required"):
+        provider.hash_secret("")
+    with pytest.raises(ValueError, match="72-byte"):
+        provider.hash_secret("x" * 73)
+    assert provider.verify_secret("presented", b"not-a-bcrypt-hash").verified is False
+    assert provider.verify_secret("presented", None).verified is False
+
+
+def test_local_authenticators_delegate_to_secret_provider() -> None:
+    provider = BcryptSecretHasher(rounds=4)
+    encoded = provider.hash_secret("shared-secret")
+    password = PasswordLocalAuthenticator(secret_verifier=provider)
+    client = ClientSecretLocalAuthenticator(secret_verifier=provider)
+
+    assert password.verify_secret("shared-secret", encoded)
+    assert client.verify_secret("shared-secret", encoded.encoded)
+    assert not password.verify_secret("wrong", encoded)
+
+
+def test_api_and_service_key_authenticators_own_digest_verification() -> None:
+    api_key = ApiKeyLocalAuthenticator()
+    service_key = ServiceKeyLocalAuthenticator()
+
+    api_digest = api_key.digest_key("api-secret")
+    service_digest = service_key.digest_key("service-secret")
+
+    assert api_key.matches_digest("api-secret", api_digest)
+    assert not api_key.matches_digest("wrong", api_digest)
+    assert service_key.matches_digest("service-secret", service_digest)
+    assert not service_key.matches_digest("wrong", service_digest)
+
+
+def test_binary_keys_match_after_transforming_the_legacy_digest() -> None:
+    from hashlib import sha256
+
+    from tba_primitives_identity.credential_digests import harden_legacy_credential_digest
+
+    existing = b"opaque\xffkey"
+    migrated = harden_legacy_credential_digest(sha256(existing).hexdigest())
+    for provider in (ApiKeyLocalAuthenticator(), ServiceKeyLocalAuthenticator()):
+        assert provider.matches_digest(existing, migrated)
+        assert not provider.matches_digest(b"wrong", migrated)

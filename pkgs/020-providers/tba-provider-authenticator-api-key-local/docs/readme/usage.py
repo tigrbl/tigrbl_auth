@@ -1,0 +1,3 @@
+from tba_provider_authenticator_api_key_local import ApiKeyLocalAuthenticator
+
+assert callable(ApiKeyLocalAuthenticator)

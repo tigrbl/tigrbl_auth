@@ -1,0 +1,3 @@
+from tba_concrete_identity_principals import AuthorityRole
+
+assert callable(AuthorityRole)

@@ -27,26 +27,26 @@ body: |-
   
   The package suite is governed by the following canonical dependency layers:
   
-  - `00-primitives`: dependency-light identifiers, enums, digests, nonces, media types, protocol tags, clocks, and URI helpers.
-  - `01-storage`: durable table schemas, migrations, and persistence-owned records.
-  - `02-contracts`: protocol-neutral semantic models, errors, enums, ports, and cross-package contracts.
-  - `05-bases`: reusable behavioral bases and mixins shared by multiple implementations.
-  - `10-concrete`: deterministic concrete objects and algorithms with no filesystem, network, database, HSM, or runtime configuration access.
-  - `20-providers`: environment-backed cryptography, key, attestation, metadata, certificate, and remote-service providers.
-  - `30-storage-runtime`: `make`, `define`, `derive`, and factory aliases over layer-01 tables, including hooks and atomic durable operations; it does not introduce a repository abstraction layer.
-  - `40-capabilities`: independently mountable and composable feature packages that bind semantic operations, delegate to injected implementations, and report their effective capability set.
-  - `50-protocols`: versioned standards/protocol packages that own revision history, feature selection, compatibility and migration paths, and mappings to layer-40 capabilities.
-  - `60-runtime`: process/runtime composition, settings, CLI/tooling, and lifecycle assembly below HTTP carriers.
-  - `70-facade`: stable public and compatibility exports that do not own router or backend-app implementation.
-  - `80-routers`: reusable Tigrbl HTTP carrier packages over lower-layer operations and schemas.
-  - `90-backend-apps`: deployable product applications that compose routers, tables, operations, hooks, middleware, configuration, startup, and shutdown behavior.
+  - `000-primitives`: dependency-light identifiers, enums, digests, nonces, media types, protocol tags, clocks, and URI helpers.
+  - `001-storage`: durable table schemas, migrations, and persistence-owned records.
+  - `002-contracts`: protocol-neutral semantic models, errors, enums, ports, and cross-package contracts.
+  - `005-bases`: reusable behavioral bases and mixins shared by multiple implementations.
+  - `010-concrete`: deterministic concrete objects and algorithms with no filesystem, network, database, HSM, or runtime configuration access.
+  - `020-providers`: environment-backed cryptography, key, attestation, metadata, certificate, and remote-service providers.
+  - `030-storage-runtime`: `make`, `define`, `derive`, and factory aliases over layer-01 tables, including hooks and atomic durable operations; it does not introduce a repository abstraction layer.
+  - `040-capabilities`: independently mountable and composable feature packages that bind semantic operations, delegate to injected implementations, and report their effective capability set.
+  - `050-protocols`: versioned standards/protocol packages that own revision history, feature selection, compatibility and migration paths, and mappings to layer-40 capabilities.
+  - `060-runtime`: process/runtime composition, settings, CLI/tooling, and lifecycle assembly below HTTP carriers.
+  - `070-facade`: stable public and compatibility exports that do not own router or backend-app implementation.
+  - `080-routers`: reusable Tigrbl HTTP carrier packages over lower-layer operations and schemas.
+  - `090-backend-apps`: deployable product applications that compose routers, tables, operations, hooks, middleware, configuration, startup, and shutdown behavior.
   - `100-uix-core`: reusable browser/client primitives and framework-neutral UIX services.
   - `105-ui`: product-specific UI applications built from UIX core.
   - `110-examples`: terminal example packages that may consume production and UI layers but are never production dependencies.
   - `120-tests`: terminal verification packages and suites that may consume all prior layers but are never production or example dependencies.
   - `deprecated`: compatibility-only packages with explicit migration destinations.
   
-  `pkgs/layers.toml` is the canonical machine-readable layer index. Package manifests, Python imports, TypeScript workspace dependencies, editable workspace sources, and active path references MUST agree with it.
+  `index.toml` is the canonical machine-readable layer index. Package manifests, Python imports, TypeScript workspace dependencies, editable workspace sources, and active path references MUST agree with it.
   
   ## Dependency direction
   

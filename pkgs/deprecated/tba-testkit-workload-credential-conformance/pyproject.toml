@@ -1,0 +1,44 @@
+[project]
+name = "tba-testkit-workload-credential-conformance"
+version = "0.4.0.dev4"
+description = "Deprecated compatibility package. Use tba-tests-workload-credential-conformance."
+readme = "README.md"
+requires-python = ">=3.10,<3.16"
+license = "Apache-2.0"
+classifiers = [
+    "Development Status :: 7 - Inactive",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
+    "Typing :: Typed",
+]
+dependencies = []
+license-files = ["LICENSE", "NOTICE"]
+keywords = ["tigrbl", "tba", "identity"]
+
+[project.optional-dependencies]
+runner = ["cryptography>=45.0.0", "packaging>=24.0", "pytest>=8.0", "tba-primitives-identity==0.4.0.dev3", "tomli>=2.0; python_version < '3.11'"]
+
+[project.urls]
+Replacement = "https://pypi.org/project/tba-tests-workload-credential-conformance/"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/deprecated/tba-testkit-workload-credential-conformance"
+Homepage = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/deprecated/tba-testkit-workload-credential-conformance#readme"
+Documentation = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/deprecated/tba-testkit-workload-credential-conformance#readme"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Issues = "https://github.com/tigrbl/tigrbl_auth/issues"
+PyPI = "https://pypi.org/project/tba-testkit-workload-credential-conformance/"
+
+[[project.authors]]
+name = "Jacob Stewart"
+email = "jacob@swarmauri.com"
+[build-system]
+requires = ["poetry-core>=2.2.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tba_testkit_workload_credential_conformance", from = "src" }]

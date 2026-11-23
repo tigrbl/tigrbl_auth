@@ -1,0 +1,3 @@
+from tba_bases_identity_assurance import IdentityAssuranceClaimsProviderBase
+
+assert callable(IdentityAssuranceClaimsProviderBase)

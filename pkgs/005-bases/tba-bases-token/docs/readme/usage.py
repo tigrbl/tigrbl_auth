@@ -1,0 +1,3 @@
+from tba_bases_token import ProfiledTokenIssuerBase
+
+assert callable(ProfiledTokenIssuerBase)

@@ -1,0 +1,3 @@
+from tba_capability_replay_protection import ReplayCapabilityDescriptor
+
+assert callable(ReplayCapabilityDescriptor)

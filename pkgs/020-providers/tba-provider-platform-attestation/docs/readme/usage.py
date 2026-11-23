@@ -1,0 +1,3 @@
+from tba_provider_platform_attestation import PlatformAttestationProvider
+
+assert callable(PlatformAttestationProvider)

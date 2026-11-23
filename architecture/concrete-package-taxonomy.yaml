@@ -1,26 +1,26 @@
 version: 1
-layer: 10-concrete
+layer: 010-concrete
 rules:
   ownership: one-primary-deterministic-concept-per-package
   contracts: materialize-layer-02-semantics
   bases: inherit-canonical-layer-05-family
   allowed_dependencies:
-    - 00-primitives
-    - 02-contracts
-    - 05-bases
+    - 000-primitives
+    - 002-contracts
+    - 005-bases
     - approved-10-refinements
   forbidden_dependencies:
-    - 20-providers
-    - 30-storage-runtime
-    - 40-capabilities
-    - 50-protocols
-    - 60-runtime
-    - 70-facade
-    - 80-routers
-  protocol_claim_sets: 50-protocols
-  protocol_versions: 50-protocols
-  durability: 01-storage-and-30-storage-runtime
-  environment_io: 20-providers
+    - 020-providers
+    - 030-storage-runtime
+    - 040-capabilities
+    - 050-protocols
+    - 060-runtime
+    - 070-facade
+    - 080-routers
+  protocol_claim_sets: 050-protocols
+  protocol_versions: 050-protocols
+  durability: 01-storage-and-030-storage-runtime
+  environment_io: 020-providers
 families:
   claim:
     package_pattern: tba-claim-*-concrete
@@ -78,9 +78,9 @@ families:
     base: tba-bases-capability
 deprecated_compatibility_aggregates:
   tigrbl-identity-credentials-concrete:
-    replacement: layer-70-facade
+    replacement: layer-070-facade
   tigrbl-identity-identities-concrete:
-    replacement: layer-70-facade
+    replacement: layer-070-facade
   tigrbl-vcdm-concrete:
     canonical:
       - tba-concrete-verifiable-credential

@@ -9,12 +9,18 @@
     "url": "git+https://github.com/tigrbl/tigrbl_auth.git",
     "directory": "pkgs/105-ui/tba-ui-developer"
   },
-  "homepage": "https://github.com/tigrbl/tigrbl_auth#readme",
+  "homepage": "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/105-ui/tba-ui-developer#readme",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "files": ["dist", "README.md", "package.json"],
+  "files": [
+    "dist",
+    "README.md",
+    "package.json",
+    "LICENSE",
+    "NOTICE"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -37,5 +43,12 @@
   },
   "engines": {
     "node": ">=22"
+  },
+  "author": {
+    "name": "Jacob Stewart",
+    "email": "jacob@swarmauri.com"
+  },
+  "bugs": {
+    "url": "https://github.com/tigrbl/tigrbl_auth/issues"
   }
 }

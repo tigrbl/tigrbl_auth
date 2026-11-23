@@ -1,0 +1,3 @@
+from tba_concrete_authorization_policy_combiner_default import DefaultPolicyCombiner
+
+assert callable(DefaultPolicyCombiner)

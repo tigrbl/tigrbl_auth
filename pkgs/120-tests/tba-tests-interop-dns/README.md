@@ -8,11 +8,11 @@ read-only mount.
 Run from the repository root.
 
 ```bash
-uv build --wheel --out-dir dist/dns pkgs/00-primitives/tba-primitives-dns-name
-uv build --wheel --out-dir dist/dns pkgs/03-codecs/tba-codec-dns
-uv build --wheel --out-dir dist/dns pkgs/10-concrete/tba-concrete-dns-zone
-uv build --wheel --out-dir dist/dns pkgs/20-providers/tba-provider-dns-resolver
-uv build --wheel --out-dir dist/dns pkgs/50-protocols/tba-protocol-dns
+uv build --wheel --out-dir dist/dns pkgs/000-primitives/tba-primitives-dns-name
+uv build --wheel --out-dir dist/dns pkgs/003-codecs/tba-codec-dns
+uv build --wheel --out-dir dist/dns pkgs/010-concrete/tba-concrete-dns-zone
+uv build --wheel --out-dir dist/dns pkgs/020-providers/tba-provider-dns-resolver
+uv build --wheel --out-dir dist/dns pkgs/050-protocols/tba-protocol-dns
 docker build -t tba-dns-gss-interop:local pkgs/120-tests/tba-tests-interop-dns
 docker run --rm --network none --mount "type=bind,source=${PWD}/dist/dns,target=/wheels,readonly" tba-dns-gss-interop:local
 ```

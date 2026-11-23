@@ -1,0 +1,108 @@
+[project]
+name = "tba-protocol-oauth-protected-resource"
+version = "0.4.0.dev3"
+description = "OAuth protected-resource facade over token, DPoP, mTLS, and policy validators for the TBA package suite."
+readme = "README.md"
+requires-python = ">=3.10,<3.16"
+license = "Apache-2.0"
+keywords = [
+    "tigrbl",
+    "authz",
+    "resource-server",
+    "protected-api",
+    "access-token",
+    "oauth",
+    "scopes",
+    "audience",
+    "introspection",
+    "iam",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Typing :: Typed",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Security",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
+]
+dependencies = ["tba-protocol-oauth==0.4.0.dev3", "tba-protocol-jwt==0.4.0.dev3", "tba-provider-authorization-resource-server-verifier==0.4.0.dev3", "tba-contracts-identity==0.4.0.dev3", "tba-capability-protected-resource-authorization==0.4.0.dev3", "tba-provider-security-dpop-cnf-binding-validator==0.1.1.dev1", "tba-provider-security-mtls-cnf-binding-validator==0.1.1.dev1", "tba-capability-protected-resource-authorization==0.4.0.dev3", "tba-contracts-security-trust==0.1.1.dev1"]
+license-files = ["LICENSE", "NOTICE"]
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/050-protocols/tba-protocol-oauth-protected-resource#readme"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/050-protocols/tba-protocol-oauth-protected-resource"
+SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
+PyPI = "https://pypi.org/project/tba-protocol-oauth-protected-resource/"
+Documentation = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/050-protocols/tba-protocol-oauth-protected-resource#readme"
+Issues = "https://github.com/tigrbl/tigrbl_auth/issues"
+
+[[project.authors]]
+name = "Jacob Stewart"
+email = "jacob@swarmauri.com"
+[build-system]
+requires = ["poetry-core>=2.2.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tba_protocol_oauth_protected_resource", from = "src" }]
+
+[tool.readme_standards]
+policy = "package-guide-v1"
+readme = "README.md"
+brand = "tigrbl-auth"
+brand_catalog = "../../../tools/readme/brands.toml"
+repository = "https://github.com/tigrbl/tigrbl_auth"
+ref = "master"
+package_path = "pkgs/050-protocols/tba-protocol-oauth-protected-resource"
+layer = "050-protocols"
+lifecycle = "active"
+license_file = "LICENSE"
+notice_file = "NOTICE"
+
+[tool.readme_standards.distributions.pypi]
+name = "tba-protocol-oauth-protected-resource"
+published = true
+
+[tool.readme_standards.examples.quick_start]
+source = "docs/readme/quick_start.py"
+test = "docs/readme/test_examples.py"
+language = "python"
+expected_exit_code = 0
+
+[tool.readme_standards.examples.usage]
+source = "docs/readme/usage.py"
+test = "docs/readme/test_examples.py"
+language = "python"
+expected_exit_code = 0
+
+[tool.readme_standards.statuses.readme]
+label = "CI gate"
+url = "https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"
+
+[tool.readme_standards.statuses.tests]
+label = "example source"
+url = "https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-oauth-protected-resource/docs/readme/test_examples.py"
+
+[tool.readme_standards.statuses.certification]
+label = "not certified"
+url = "https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-oauth-protected-resource/README.md#certification-status"
+
+[tool.readme_standards.statuses.governance]
+label = "repository policy"
+url = "https://github.com/tigrbl/tigrbl_auth/blob/master/tools/readme/POLICY.md"
+
+[tool.readme_standards.statuses.evidence]
+label = "source and CI"
+url = "https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"
+
+[dependency-groups]
+dev = ["readme-standards==0.1.1; python_version >= \"3.11\""]
