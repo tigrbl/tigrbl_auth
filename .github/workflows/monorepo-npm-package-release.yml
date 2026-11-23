@@ -13,6 +13,8 @@ on:
           - "@tba/ui-administration"
           - "@tba/ui-public"
           - "@tba/client-oidc-relying-party"
+          - "@tba/client-app-connections"
+          - "@tba/ui-app-connections"
       version:
         description: Optional version. When set, it must match package.json.
         required: false
@@ -62,7 +64,13 @@ jobs:
           const selectedPackage = process.env.SELECTED_PACKAGE || "all";
           const selectedVersion = process.env.SELECTED_VERSION || "";
           const force = process.env.FORCE_TAG === "true";
-          const packageDirs = ["pkgs/105-ui/tba-ui-administration", "pkgs/105-ui/tba-ui-public", "pkgs/075-clients/tba-typescript-client-oidc-relying-party"];
+          const packageDirs = [
+            "pkgs/105-ui/tba-ui-administration",
+            "pkgs/105-ui/tba-ui-public",
+            "pkgs/075-clients/tba-typescript-client-oidc-relying-party",
+            "pkgs/075-clients/tba-typescript-client-app-connections",
+            "pkgs/105-ui/tba-ui-app-connections"
+          ];
           const created = [];
 
           function run(args) {
@@ -132,7 +140,13 @@ jobs:
           }
           const packageName = match[1];
           const version = match[2];
-          const packageDirs = ["pkgs/105-ui/tba-ui-administration", "pkgs/105-ui/tba-ui-public", "pkgs/075-clients/tba-typescript-client-oidc-relying-party"];
+          const packageDirs = [
+            "pkgs/105-ui/tba-ui-administration",
+            "pkgs/105-ui/tba-ui-public",
+            "pkgs/075-clients/tba-typescript-client-oidc-relying-party",
+            "pkgs/075-clients/tba-typescript-client-app-connections",
+            "pkgs/105-ui/tba-ui-app-connections"
+          ];
           let found = null;
           for (const packagePath of packageDirs) {
             const manifest = JSON.parse(fs.readFileSync(path.join(packagePath, "package.json"), "utf8"));
@@ -153,7 +167,8 @@ jobs:
             package_version: version,
             package_path: found.packagePath,
             release_tag: ref,
-            npm_tag: "latest",
+            npm_tag: ["@tba/client-app-connections", "@tba/ui-app-connections"].includes(packageName)
+              && version.includes("-") ? "next" : "latest",
             scope
           };
           for (const [key, value] of Object.entries(out)) {
@@ -230,5 +245,5 @@ jobs:
             Version: `${{ needs.resolve-npm-package-tag.outputs.package-version }}`
             Package path: `${{ needs.resolve-npm-package-tag.outputs.package-path }}`
           draft: "false"
-          prerelease: "false"
+          prerelease: ${{ needs.resolve-npm-package-tag.outputs.npm-tag == 'next' }}
           make-latest: "false"

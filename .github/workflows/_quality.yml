@@ -67,6 +67,11 @@ jobs:
           else
             uv run python scripts/verify_truth_chain.py --mode current-state
           fi
+      - name: Verify the package index
+        shell: bash
+        run: |
+          uv run --locked --only-group dev index-toml --file index.toml validate
+          uv run --locked --only-group dev python scripts/package_index.py --check
       - name: Verify package layer ownership
         shell: bash
         run: uv run python scripts/validate_layer_boundaries.py

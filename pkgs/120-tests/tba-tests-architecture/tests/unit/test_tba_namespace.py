@@ -99,7 +99,7 @@ def test_protocol_and_profile_roles_are_prefixes_in_separate_layers():
             name = tomllib.loads(path.read_text(encoding="utf-8"))["project"]["name"]
             assert name.startswith(f"tba-{role}-"), name
     from scripts.package_layer_policy import dependency_allowed, load_layer_policy
-    policy = load_layer_policy(ROOT / "pkgs/layers.toml")
+    policy = load_layer_policy()
     assert policy.by_id["055-profiles"].category == "index"
     assert dependency_allowed("055-profiles", "050-protocols", policy)
     assert not dependency_allowed("050-protocols", "055-profiles", policy)
@@ -157,7 +157,7 @@ def test_implementation_names_use_unambiguous_vocabulary():
 def test_middleware_is_above_clients_with_narrow_dependencies():
     from scripts.package_layer_policy import dependency_allowed, load_layer_policy
 
-    policy = load_layer_policy(ROOT / "pkgs/layers.toml")
+    policy = load_layer_policy()
     assert policy.by_id["075-clients"].order < policy.by_id["080-routers"].order < policy.by_id["085-middleware"].order < policy.by_id["090-backend-apps"].order
     assert dependency_allowed("085-middleware", "002-contracts", policy)
     assert dependency_allowed("085-middleware", "075-clients", policy)
