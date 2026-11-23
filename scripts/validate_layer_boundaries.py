@@ -131,6 +131,10 @@ CAPABILITY_PURPOSES = {
     "tba-capability-key-administration": (
         "coordinate key rotation and publication through injected implementations"
     ),
+    "tba-capability-mcp-authorization": (
+        "coordinate active OAuth grants, account and bot scopes, resource authorization, "
+        "and owner-bound revocation across MCP resource servers"
+    ),
     "tba-capability-mfa-challenge": (
         "coordinate begin and complete operations for an MFA challenge"
     ),
