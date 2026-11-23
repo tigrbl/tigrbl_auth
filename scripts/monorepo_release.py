@@ -9,6 +9,7 @@ import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
+from uuid import uuid4
 
 try:
     import tomllib
@@ -97,7 +98,11 @@ def _write_github_output(values: dict[str, str]) -> None:
     output = Path(output_name)
     with output.open("a", encoding="utf-8") as handle:
         for key, value in values.items():
-            handle.write(f"{key}={value}\n")
+            if "\n" in value:
+                delimiter = uuid4().hex
+                handle.write(f"{key}<<{delimiter}\n{value}\n{delimiter}\n")
+            else:
+                handle.write(f"{key}={value}\n")
 
 
 def cmd_matrix(args: argparse.Namespace) -> int:
@@ -187,8 +192,10 @@ def _project_dependencies(package: Package) -> list[str]:
     return [str(item) for item in dependencies]
 
 
-def _local_dependency_closure(package: Package) -> list[Package]:
-    packages = discover_packages()
+def _local_dependency_closure(
+    package: Package, *, candidates: list[Package] | None = None
+) -> list[Package]:
+    packages = discover_packages() if candidates is None else candidates
     by_name = {_normalize_dist_name(item.name): item for item in packages}
     root_name = _normalize_dist_name(package.name)
     pending = [package]
@@ -275,8 +282,39 @@ def cmd_create_tags(args: argparse.Namespace) -> int:
     return 0
 
 
+def _packages_changed_since(baseline: str) -> list[Package]:
+    revision = _run_capture(
+        ["git", "rev-parse", "--verify", "--end-of-options", f"{baseline}^{{commit}}"]
+    ).strip()
+    diff = _run_capture(
+        ["git", "diff", "--name-only", "--no-renames", "-z", revision, "HEAD", "--", "pkgs/"]
+    )
+    paths = [Path(path) for path in diff.split("\0") if path]
+    packages = [
+        package
+        for package in discover_packages(include_deprecated=True)
+        if any(package.path in path.parents for path in paths)
+    ]
+    if not packages:
+        raise SystemExit(f"no Python package changes since {baseline}")
+    return packages
+
+
+def _advertised_python_versions(package: Package, versions: list[str]) -> list[str]:
+    from packaging.specifiers import SpecifierSet
+
+    project = _load_pyproject(ROOT / package.path / "pyproject.toml")["project"]
+    requires_python = SpecifierSet(project.get("requires-python", ""))
+    return [version for version in versions if version in requires_python]
+
+
 def cmd_test_matrix(args: argparse.Namespace) -> int:
-    packages = discover_packages() if args.package == "all" else [_find_package(args.package)]
+    if args.package != "all":
+        packages = [_find_package(args.package)]
+    elif args.base_revision:
+        packages = _packages_changed_since(args.base_revision)
+    else:
+        packages = discover_packages()
     versions = args.python_version or list(SUPPORTED_PYTHON_VERSIONS)
     unknown = sorted(set(versions) - set(SUPPORTED_PYTHON_VERSIONS))
     if unknown:
@@ -284,7 +322,10 @@ def cmd_test_matrix(args: argparse.Namespace) -> int:
 
     cells = []
     for package in packages:
-        for version in _supported_package_python_versions(package, versions):
+        supported_versions = _supported_package_python_versions(package, versions)
+        if args.base_revision:
+            supported_versions = _advertised_python_versions(package, supported_versions)
+        for version in supported_versions:
             package_test_paths = [
                 f"tests/packages/{package.name}",
                 f"tests/packages/{package.import_root}",
@@ -310,8 +351,11 @@ def cmd_test_matrix(args: argparse.Namespace) -> int:
                 }
             )
             cells.append(cell)
+    if args.base_revision and not cells:
+        raise SystemExit("no selected backport package supports the requested Python versions")
     payload = json.dumps(cells, separators=(",", ":"))
-    _write_github_output({"matrix": payload, "count": str(len(cells))})
+    manifests = "\n".join((package.path / "pyproject.toml").as_posix() for package in packages)
+    _write_github_output({"matrix": payload, "count": str(len(cells)), "manifests": manifests})
     if args.print:
         print(json.dumps(cells, indent=2))
     return 0
@@ -355,8 +399,10 @@ def _built_local_wheel_path(package: Package, wheelhouse: Path) -> Path:
     return candidates[-1]
 
 
-def _build_local_dependency_wheels(package: Package, wheelhouse: Path) -> list[Path]:
-    dependencies = _local_dependency_closure(package)
+def _build_local_dependency_wheels(
+    package: Package, wheelhouse: Path, *, candidates: list[Package] | None = None
+) -> list[Path]:
+    dependencies = _local_dependency_closure(package, candidates=candidates)
     wheelhouse.mkdir(parents=True, exist_ok=True)
     wheels: list[Path] = []
     for dependency in dependencies:
@@ -445,7 +491,14 @@ def cmd_isolated_test(args: argparse.Namespace) -> int:
     wheelhouse = work_dir / "local-wheelhouse"
     if wheelhouse.exists():
         shutil.rmtree(wheelhouse)
-    local_dependency_wheels = _build_local_dependency_wheels(package, wheelhouse)
+    candidates = (
+        _packages_changed_since(args.local_dependency_base)
+        if args.local_dependency_base
+        else None
+    )
+    local_dependency_wheels = _build_local_dependency_wheels(
+        package, wheelhouse, candidates=candidates
+    )
     install_command = [
         str(python),
         "-m",
@@ -572,6 +625,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     test_matrix = subparsers.add_parser("test-matrix")
     test_matrix.add_argument("--package", default="all", help="Package name or 'all'.")
+    test_matrix.add_argument("--base-revision", help="Limit 'all' to packages changed since this commit.")
     test_matrix.add_argument("--python-version", action="append", choices=SUPPORTED_PYTHON_VERSIONS)
     test_matrix.add_argument("--print", action="store_true")
     test_matrix.set_defaults(func=cmd_test_matrix)
@@ -580,6 +634,10 @@ def build_parser() -> argparse.ArgumentParser:
     isolated.add_argument("--package", required=True)
     isolated.add_argument("--python-version", required=True, choices=SUPPORTED_PYTHON_VERSIONS)
     isolated.add_argument("--dist-dir", required=True)
+    isolated.add_argument(
+        "--local-dependency-base",
+        help="Build changed dependencies from source and install unchanged dependencies from the registry.",
+    )
     isolated.add_argument("--work-dir", default=".tmp/package-isolation")
     isolated.set_defaults(func=cmd_isolated_test)
     return parser
