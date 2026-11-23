@@ -2765,6 +2765,15 @@ ecosystem = "pypi"
 dependencies = ["tba-contracts-identity"]
 
 [[packages]]
+id = "tba-provider-secret-hashing-pbkdf2"
+name = "tba-provider-secret-hashing-pbkdf2"
+path = "pkgs/020-providers/tba-provider-secret-hashing-pbkdf2"
+layer = "020-providers"
+order = 0
+ecosystem = "pypi"
+dependencies = ["tba-contracts-identity"]
+
+[[packages]]
 id = "tba-provider-security-authorization-provenance-builder"
 name = "tba-provider-security-authorization-provenance-builder"
 path = "pkgs/020-providers/tba-provider-security-authorization-provenance-builder"
