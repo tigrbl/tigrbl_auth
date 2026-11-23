@@ -20,7 +20,7 @@ on:
   workflow_dispatch:
     inputs:
       package:
-        description: Package name to test, or all.
+        description: Package name to test, or all packages changed by the backport.
         required: false
         default: all
       python-version:
@@ -39,6 +39,11 @@ on:
 permissions:
   contents: read
 
+# This maintenance branch tests the Python packages it changes from the
+# published OIDC baseline, including in workflow-only follow-up PRs.
+env:
+  PACKAGE_BASE_REVISION: 2747b65b4f024c4901ca4c36e04b8cbdc1c60b00
+
 concurrency:
   group: package-python-matrix-${{ github.ref }}
   cancel-in-progress: true
@@ -51,35 +56,33 @@ jobs:
       count: ${{ steps.matrix.outputs.count }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-      - name: Discover split Python packages
-        uses: cobycloud/actions/actions/monorepo-discover@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
-        with:
-          package-globs: pkgs/*
-          ecosystem: python
-      - name: Validate split package metadata
+      - name: Build package x Python matrix
+        id: matrix
+        shell: bash
+        env:
+          SELECTED_PACKAGE: ${{ inputs.package || 'all' }}
+          PYTHON_VERSION: ${{ inputs['python-version'] || 'all' }}
+        run: |
+          args=(--package "$SELECTED_PACKAGE" --base-revision "$PACKAGE_BASE_REVISION")
+          if [[ "$PYTHON_VERSION" != "all" ]]; then
+            args+=(--python-version "$PYTHON_VERSION")
+          fi
+          python scripts/monorepo_release.py test-matrix "${args[@]}"
+      - name: Validate matrix package metadata
         uses: cobycloud/actions/actions/package-metadata@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
-          manifest-globs: |
-            pkgs/*/*/pyproject.toml
+          manifest-globs: ${{ steps.matrix.outputs.manifests }}
           require-description: "true"
           require-license: "true"
           require-readme: "true"
           require-url: "false"
           report-json: reports/package-metadata.json
           report-md: reports/package-metadata.md
-      - name: Build package x Python matrix
-        id: matrix
-        shell: bash
-        run: |
-          set -euo pipefail
-          args=(--package "${{ inputs['package'] || 'all' }}")
-          if [[ "${{ inputs['python-version'] || 'all' }}" != "all" ]]; then
-            args+=(--python-version "${{ inputs['python-version'] }}")
-          fi
-          python scripts/monorepo_release.py test-matrix "${args[@]}"
 
   isolated-package-tests:
     needs: discover-package-matrix
@@ -92,6 +95,8 @@ jobs:
     name: ${{ matrix.package.name }} / Python ${{ matrix.package.python_version }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.package.python_version }}
@@ -111,4 +116,5 @@ jobs:
           python scripts/monorepo_release.py isolated-test \
             --package "${{ matrix.package.name }}" \
             --python-version "${{ matrix.package.python_version }}" \
-            --dist-dir "dist/${{ matrix.package.cell_id }}"
+            --dist-dir "dist/${{ matrix.package.cell_id }}" \
+            --local-dependency-base "$PACKAGE_BASE_REVISION"

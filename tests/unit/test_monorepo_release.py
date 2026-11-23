@@ -203,14 +203,16 @@ def test_monorepo_release_filters_package_python_test_matrix() -> None:
     payload = json.loads(completed.stdout)
     matrix = json.loads(payload["matrix"])
 
+    oauth = next(package for package in discover_packages() if package.name == "tba-protocol-oauth")
     assert payload["count"] == "1"
+    assert payload["manifests"] == "pkgs/50-protocols/tba-protocol-oauth/pyproject.toml"
     assert matrix == [
         {
             "name": "tba-protocol-oauth",
-            "version": "0.4.0.dev2",
+            "version": oauth.version,
             "path": "pkgs/50-protocols/tba-protocol-oauth",
             "import_root": "tba_protocol_oauth",
-            "tag": "tba-protocol-oauth==0.4.0.dev2",
+            "tag": f"tba-protocol-oauth=={oauth.version}",
             "python_version": "3.12",
             "python_tag": "py312",
             "cell_id": "tba-protocol-oauth-py312",
@@ -221,6 +223,33 @@ def test_monorepo_release_filters_package_python_test_matrix() -> None:
             "cross_cutting": "false",
         }
     ]
+
+
+def test_backport_matrix_and_metadata_include_source_only_package_changes(monkeypatch, tmp_path) -> None:
+    from scripts import monorepo_release as release
+
+    changed_packages = {"tba-protocol-oauth", "tba-protocol-oidc"}
+    changes = "\0".join(
+        [
+            "pkgs/50-protocols/tba-protocol-oauth/pyproject.toml",
+            "pkgs/50-protocols/tba-protocol-oidc/src/tba_protocol_oidc/__init__.py",
+            "pkgs/50-protocols/removed-package/pyproject.toml",
+            "",
+        ]
+    )
+    monkeypatch.setattr(
+        release, "_run_capture", lambda args: "a" * 40 if args[1] == "rev-parse" else changes
+    )
+    output = tmp_path / "output"
+    monkeypatch.setenv("GITHUB_OUTPUT", str(output))
+    assert release.main(["test-matrix", "--base-revision", "baseline", "--python-version", "3.12"]) == 0
+
+    matrix_output, count, manifest_header, *manifests, delimiter = output.read_text().splitlines()
+    cells = json.loads(matrix_output.removeprefix("matrix="))
+    assert count == "count=2"
+    assert {cell["name"] for cell in cells} == changed_packages
+    assert set(manifests) == {f'{cell["path"]}/pyproject.toml' for cell in cells}
+    assert manifest_header == f"manifests<<{delimiter}"
 
 
 def test_monorepo_release_resolves_local_dependency_closure() -> None:
