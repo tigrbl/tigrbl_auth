@@ -9,6 +9,7 @@ from .capability import (
     MCPResourceCheck,
     MCPSubject,
     MCPSubjectLookup,
+    resolve_mcp_grant,
 )
 
 __all__ = [
@@ -20,4 +21,5 @@ __all__ = [
     "MCPResourceCheck",
     "MCPSubject",
     "MCPSubjectLookup",
+    "resolve_mcp_grant",
 ]

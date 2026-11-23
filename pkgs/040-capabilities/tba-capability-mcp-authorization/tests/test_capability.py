@@ -10,6 +10,7 @@ from tba_capability_mcp_authorization import (
     MCPGrant,
     MCPGrantBinding,
     MCPSubject,
+    resolve_mcp_grant,
 )
 
 
@@ -123,3 +124,26 @@ def test_expired_grant_cannot_be_resolved(connection):
     capability, grants, _, read, _ = connection
     grants.grant = replace(grants.grant, expires_at=100)
     assert asyncio.run(capability.resolve(grants.grant.binding, {read})) is None
+
+
+def test_existing_store_snapshot_retains_current_binding_and_subject_checks(connection):
+    _, grants, subjects, read, write = connection
+    stored = grants.grant
+
+    async def load_subject(tenant_id, subject_id):
+        assert tenant_id == stored.binding.tenant_id
+        return subjects[subject_id]
+
+    principal = asyncio.run(
+        resolve_mcp_grant(
+            stored, stored.binding, {read, write}, load_subject=load_subject, clock=lambda: 100
+        )
+    )
+    assert principal is not None
+    assert principal.scopes == {read}
+    subjects["owner"] = replace(subjects["owner"], scopes=frozenset())
+    assert asyncio.run(
+        resolve_mcp_grant(
+            stored, stored.binding, {read, write}, load_subject=load_subject, clock=lambda: 100
+        )
+    ) is None

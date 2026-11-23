@@ -65,6 +65,54 @@ MCPSubjectLookup = Callable[[str, str], Awaitable[MCPSubject | None]]
 MCPResourceCheck = Callable[[MCPPrincipal], Awaitable[bool]]
 
 
+async def _current_subject(
+    load_subject: MCPSubjectLookup,
+    tenant_id: str,
+    subject_id: str,
+    owner_id: str | None,
+) -> MCPSubject | None:
+    subject = await load_subject(tenant_id, subject_id)
+    if (
+        subject is None
+        or not subject.active
+        or subject.tenant_id != tenant_id
+        or subject.subject_id != subject_id
+        or subject.owner_id != owner_id
+    ):
+        return None
+    return subject
+
+
+async def resolve_mcp_grant(
+    grant: MCPGrant,
+    binding: MCPGrantBinding,
+    token_scopes: Iterable[str],
+    *,
+    load_subject: MCPSubjectLookup,
+    clock: Callable[[], float] = time.time,
+) -> MCPPrincipal | None:
+    """Evaluate a current snapshot loaded by an application's own transaction."""
+    if grant.binding != binding or not grant.active:
+        return None
+    if grant.expires_at is not None and not grant.expires_at > clock():
+        return None
+    owner = await _current_subject(load_subject, binding.tenant_id, grant.owner_id, None)
+    if owner is None:
+        return None
+    actor = owner
+    bot_scopes = None
+    if grant.bot_id is not None:
+        bot = await _current_subject(
+            load_subject, binding.tenant_id, grant.bot_id, grant.owner_id
+        )
+        if bot is None:
+            return None
+        actor = bot
+        bot_scopes = bot.scopes
+    scopes = effective_scopes(token_scopes, grant.scopes, owner.scopes, bot_scopes)
+    return MCPPrincipal(grant, owner, actor, scopes) if scopes else None
+
+
 class MCPAuthorizationCapability(Capability):
     """Combine validated OAuth state, consent and current app authorization."""
 
@@ -88,20 +136,6 @@ class MCPAuthorizationCapability(Capability):
             },
         )
 
-    async def _current_subject(
-        self, tenant_id: str, subject_id: str, owner_id: str | None
-    ) -> MCPSubject | None:
-        subject = await self._load_subject(tenant_id, subject_id)
-        if (
-            subject is None
-            or not subject.active
-            or subject.tenant_id != tenant_id
-            or subject.subject_id != subject_id
-            or subject.owner_id != owner_id
-        ):
-            return None
-        return subject
-
     async def approve(
         self,
         *,
@@ -112,12 +146,12 @@ class MCPAuthorizationCapability(Capability):
         requested: Iterable[str],
     ) -> frozenset[str]:
         """Validate browser consent after OAuth and browser identity validation."""
-        owner = await self._current_subject(tenant_id, owner_id, None)
+        owner = await _current_subject(self._load_subject, tenant_id, owner_id, None)
         if owner is None:
             raise PermissionError("The authorizing account is unavailable.")
         bot = None
         if bot_id is not None:
-            bot = await self._current_subject(tenant_id, bot_id, owner_id)
+            bot = await _current_subject(self._load_subject, tenant_id, bot_id, owner_id)
             if bot is None:
                 raise PermissionError("The selected bot is unavailable.")
         return approve_scopes(
@@ -132,25 +166,11 @@ class MCPAuthorizationCapability(Capability):
     ) -> MCPPrincipal | None:
         """Resolve the acting identity after the token or grant is authenticated."""
         grant = await self._grants.load(binding)
-        if grant is None or grant.binding != binding or not grant.active:
+        if grant is None:
             return None
-        if grant.expires_at is not None and not grant.expires_at > self._clock():
-            return None
-        owner = await self._current_subject(binding.tenant_id, grant.owner_id, None)
-        if owner is None:
-            return None
-        actor = owner
-        bot_scopes = None
-        if grant.bot_id is not None:
-            bot = await self._current_subject(
-                binding.tenant_id, grant.bot_id, grant.owner_id
-            )
-            if bot is None:
-                return None
-            actor = bot
-            bot_scopes = bot.scopes
-        scopes = effective_scopes(token_scopes, grant.scopes, owner.scopes, bot_scopes)
-        return MCPPrincipal(grant, owner, actor, scopes) if scopes else None
+        return await resolve_mcp_grant(
+            grant, binding, token_scopes, load_subject=self._load_subject, clock=self._clock
+        )
 
     async def authorize_tool(
         self,

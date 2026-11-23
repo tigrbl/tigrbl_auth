@@ -182,7 +182,7 @@ Grant and subject binding comparison, current scope intersection, tool-scope enf
 
 ### Public API and Import Surfaces
 
-`tba_capability_mcp_authorization` exports `MCPAuthorizationCapability`, `MCPGrantBinding`, `MCPGrant`, `MCPSubject`, `MCPPrincipal`, and adapter types.
+`tba_capability_mcp_authorization` exports `MCPAuthorizationCapability`, `MCPGrantBinding`, `MCPGrant`, `MCPSubject`, `MCPPrincipal`, and adapter types. Use `resolve_mcp_grant` if the host already loads the current grant within its own token transaction.
 
 ### Entry Points
 
