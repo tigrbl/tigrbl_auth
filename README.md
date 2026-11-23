@@ -186,6 +186,10 @@ This source version of `tba-workspace` declares Python `>=3.10,<3.16`. Consult i
 
 ## Verification
 
+[`index.toml`](index.toml) records the Python package inventory and layer policy.
+Run `uv run python scripts/package_index.py --check` to verify the index against
+the package manifests.
+
 ### Tests
 
 Run `python -m pytest docs/readme/test_examples.py` from the `tba-workspace` package directory for the maintained example source checks (Python compilation and non-Python file presence). Behavioral tests may live in the repository’s shared suites; the new README syntax test is not presented as runtime coverage for workspace-only development harness for the split TBA identity package suite.

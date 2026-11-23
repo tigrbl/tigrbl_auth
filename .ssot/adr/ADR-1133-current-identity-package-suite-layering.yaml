@@ -46,7 +46,7 @@ body: |-
   - `120-tests`: terminal verification packages and suites that may consume all prior layers but are never production or example dependencies.
   - `deprecated`: compatibility-only packages with explicit migration destinations.
   
-  `pkgs/layers.toml` is the canonical machine-readable layer index. Package manifests, Python imports, TypeScript workspace dependencies, editable workspace sources, and active path references MUST agree with it.
+  `index.toml` is the canonical machine-readable layer index. Package manifests, Python imports, TypeScript workspace dependencies, editable workspace sources, and active path references MUST agree with it.
   
   ## Dependency direction
   
