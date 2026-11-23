@@ -1972,7 +1972,7 @@ wheels = [
 
 [[package]]
 name = "readme-standards"
-version = "0.1.1"
+version = "0.1.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "jsonschema" },
@@ -1980,9 +1980,9 @@ dependencies = [
     { name = "packaging" },
     { name = "pytest" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/0d/dc/b4b129d69751cdce37216ead0b19d4096f3bf1520d179b5bf3f80194bcdd/readme_standards-0.1.1.tar.gz", hash = "sha256:999aa59f1a05b1907482330dd4dfb3fccc1b9d6043ce66464e0cdb65e09f8e51", size = 107164, upload-time = "2026-11-20T02:35:18.393Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/0d/19/ab44248e15be5adf30a9da601cafb81c9ffc65bcaef6536bf96ae83eea01/readme_standards-0.1.3.tar.gz", hash = "sha256:e2e86a82c023f048abf8a046d0cdd1969dad06c88e9bbd537752de0507ac62d4", size = 109265, upload-time = "2026-11-23T09:43:31.328Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/41/a3/a8670b94531f6ffd246c370928b9018bed59822e308a8cb95786f56bd416/readme_standards-0.1.1-py3-none-any.whl", hash = "sha256:c7ecb960a5a7587bbbd0a81840bcb86ffff11f6930da1cdf2c0876a9f294327d", size = 31500, upload-time = "2026-11-20T02:35:17.433Z" },
+    { url = "https://files.pythonhosted.org/packages/4b/7c/fe1ff4c74994176bd1666768f68162d5722d132031ab5780f119c3f28c5d/readme_standards-0.1.3-py3-none-any.whl", hash = "sha256:e555b80b21f5878ad9136a8275c0fac0d0670f8e62c8967e0a76fb256e6fb6cc", size = 32259, upload-time = "2026-11-23T09:43:30.561Z" },
 ]
 
 [[package]]
@@ -2550,7 +2550,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-app-backend-developer"
@@ -2576,7 +2576,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-app-backend-my-account"
@@ -2606,7 +2606,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-app-backend-platform-administration"
@@ -2634,7 +2634,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-app-backend-policy-decision"
@@ -2648,7 +2648,7 @@ dependencies = [
 requires-dist = [{ name = "tba-router-policy-decision", specifier = "==0.4.0.dev4" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-app-backend-public"
@@ -2696,7 +2696,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-app-backend-relying-party"
@@ -2710,7 +2710,7 @@ dependencies = [
 requires-dist = [{ name = "tba-router-relying-party-session", specifier = "==0.4.0.dev5" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-app-backend-resource-validation"
@@ -2736,7 +2736,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-app-backend-service-administration"
@@ -2762,7 +2762,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-app-backend-tenant-administration"
@@ -2782,7 +2782,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-app-backend-wic-ca"
@@ -2804,7 +2804,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-app-backend-wit-issuance"
@@ -2826,7 +2826,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-app-backend-wpt-verifier"
@@ -2848,7 +2848,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-auth"
@@ -2920,7 +2920,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-attestation"
@@ -2934,7 +2934,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-attestation", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-authentication-assurance"
@@ -2952,7 +2952,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-authentication-context"
@@ -2966,7 +2966,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-security-trust", specifier = "==0.1.1.dev1" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-authentication-credential"
@@ -2980,7 +2980,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-identity", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-authenticator"
@@ -2998,7 +2998,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-authorization-policy"
@@ -3012,7 +3012,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-identity", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-capability"
@@ -3030,7 +3030,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-certificate"
@@ -3048,7 +3048,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-claim"
@@ -3062,7 +3062,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-claim", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-cose"
@@ -3082,7 +3082,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-did"
@@ -3096,7 +3096,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-did", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-digital-credential"
@@ -3110,7 +3110,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-digital-credential", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-encryption"
@@ -3128,7 +3128,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-identity"
@@ -3142,7 +3142,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-identity", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-identity-assurance"
@@ -3156,7 +3156,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-identity-assurance", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-identity-document"
@@ -3170,7 +3170,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-identity-document", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-identity-model"
@@ -3192,7 +3192,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-jose"
@@ -3212,7 +3212,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-key"
@@ -3230,7 +3230,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-proof-of-possession"
@@ -3250,7 +3250,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-protected-artifact"
@@ -3264,7 +3264,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-security-trust", specifier = "==0.1.1.dev1" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-protected-envelope"
@@ -3278,7 +3278,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-protected-envelope", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-public-key-authentication"
@@ -3292,7 +3292,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-public-key-authentication", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-replay"
@@ -3306,7 +3306,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-replay", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-resource-server"
@@ -3320,7 +3320,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-identity", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-security-event"
@@ -3334,7 +3334,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-security-event", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-security-provenance"
@@ -3352,7 +3352,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-security-trust-domain"
@@ -3398,7 +3398,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-signing"
@@ -3416,7 +3416,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-token"
@@ -3430,7 +3430,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-token", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-token-introspection"
@@ -3444,7 +3444,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-security-trust", specifier = "==0.1.1.dev1" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-trust"
@@ -3458,7 +3458,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-security-trust", specifier = "==0.1.1.dev1" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-bases-workload-identity"
@@ -3472,7 +3472,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-workload-identity", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-access-governance"
@@ -3494,7 +3494,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-account-self-service"
@@ -3512,7 +3512,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-adaptive-authentication"
@@ -3530,7 +3530,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-administrative-resource"
@@ -3548,7 +3548,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-api-key-authentication"
@@ -3568,7 +3568,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-artifact-processing"
@@ -3586,7 +3586,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-attestation-appraisal"
@@ -3604,7 +3604,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-authenticator-attestation"
@@ -3618,7 +3618,7 @@ dependencies = [
 requires-dist = [{ name = "tba-concrete-capability", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-authorization-request-staging"
@@ -3636,7 +3636,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-client-registration"
@@ -3654,7 +3654,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-client-secret-authentication"
@@ -3674,7 +3674,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-communications-identity"
@@ -3692,7 +3692,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-delegated-access-negotiation"
@@ -3710,7 +3710,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-digital-credential-issuance"
@@ -3728,7 +3728,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-digital-credential-presentation"
@@ -3746,7 +3746,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-identity-administration"
@@ -3764,7 +3764,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-identity-document"
@@ -3784,7 +3784,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-key-administration"
@@ -3802,7 +3802,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-mfa-challenge"
@@ -3820,7 +3820,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-operator-administration"
@@ -3838,7 +3838,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-password-authentication"
@@ -3858,7 +3858,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-policy-administration"
@@ -3884,7 +3884,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-policy-assurance"
@@ -3908,7 +3908,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-policy-evaluation"
@@ -3926,7 +3926,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-possession-proof"
@@ -3946,7 +3946,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-protected-envelope"
@@ -3966,7 +3966,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-protected-resource-authorization"
@@ -3990,7 +3990,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-public-key-authentication"
@@ -4008,7 +4008,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-public-key-credential-management"
@@ -4022,7 +4022,7 @@ dependencies = [
 requires-dist = [{ name = "tba-concrete-capability", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-public-key-registration"
@@ -4040,7 +4040,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-realm-administration"
@@ -4058,7 +4058,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-replay-protection"
@@ -4076,7 +4076,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-security-event-delivery"
@@ -4094,7 +4094,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-service-key-authentication"
@@ -4116,7 +4116,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-tenant-administration"
@@ -4134,7 +4134,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-token-exchange"
@@ -4152,7 +4152,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-token-introspection"
@@ -4170,7 +4170,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-token-issuance"
@@ -4188,7 +4188,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-token-revocation"
@@ -4206,7 +4206,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-workload-credential-brokering"
@@ -4226,7 +4226,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-capability-workload-identity"
@@ -4246,7 +4246,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-certification-release"
@@ -4268,7 +4268,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-cli-identity"
@@ -4294,7 +4294,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-client-authorization-administration"
@@ -4308,7 +4308,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-authorization", specifier = "==0.4.0.dev4" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-client-policy-decision"
@@ -4322,7 +4322,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-authorization", specifier = "==0.4.0.dev4" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-client-relying-party-session"
@@ -4332,7 +4332,7 @@ source = { editable = "pkgs/075-clients/tba-client-relying-party-session" }
 [package.metadata]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-codec-cid"
@@ -4346,7 +4346,7 @@ dependencies = [
 requires-dist = [{ name = "tba-codec-multibase", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-codec-dag-cbor"
@@ -4364,7 +4364,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-codec-jcs"
@@ -4378,7 +4378,7 @@ dependencies = [
 requires-dist = [{ name = "rfc8785", specifier = ">=0.1.4,<0.2" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-codec-multibase"
@@ -4388,7 +4388,7 @@ source = { editable = "pkgs/003-codecs/tba-codec-multibase" }
 [package.metadata]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-codec-x509-logotype"
@@ -4402,7 +4402,7 @@ dependencies = [
 requires-dist = [{ name = "asn1crypto", specifier = "==1.5.1" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-acr-evaluator-basic"
@@ -4420,7 +4420,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-administrator-identity"
@@ -4438,7 +4438,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-amr-evaluator-basic"
@@ -4456,7 +4456,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-authority-graph"
@@ -4470,7 +4470,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-identity", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-authorization-policy-attributes-mapping"
@@ -4488,7 +4488,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-authorization-policy-combiner-default"
@@ -4506,7 +4506,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-authorization-policy-evaluators-default"
@@ -4524,7 +4524,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-authorization-policy-obligations"
@@ -4542,7 +4542,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-authorization-policy-rules"
@@ -4560,7 +4560,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-authorization-provenance"
@@ -4580,7 +4580,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-authorization-scope-set-matcher"
@@ -4598,7 +4598,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-capability"
@@ -4618,7 +4618,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-capability-default"
@@ -4636,7 +4636,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-certificate-x509"
@@ -4650,7 +4650,7 @@ dependencies = [
 requires-dist = [{ name = "cryptography", specifier = ">=45" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-access-token-digest"
@@ -4668,7 +4668,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-access-token-hash"
@@ -4686,7 +4686,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-actor"
@@ -4704,7 +4704,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-address"
@@ -4722,7 +4722,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-address-country-code"
@@ -4736,7 +4736,7 @@ dependencies = [
 requires-dist = [{ name = "tba-bases-claim", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-also-known-as"
@@ -4750,7 +4750,7 @@ dependencies = [
 requires-dist = [{ name = "tba-bases-claim", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-assertions"
@@ -4768,7 +4768,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-audience"
@@ -4786,7 +4786,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-authentication-context"
@@ -4804,7 +4804,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-authentication-methods"
@@ -4822,7 +4822,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-authentication-time"
@@ -4840,7 +4840,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-authorization-code-hash"
@@ -4858,7 +4858,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-authorization-context"
@@ -4876,7 +4876,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-authorized-party"
@@ -4894,7 +4894,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-birth-family-name"
@@ -4908,7 +4908,7 @@ dependencies = [
 requires-dist = [{ name = "tba-bases-claim", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-birth-given-name"
@@ -4922,7 +4922,7 @@ dependencies = [
 requires-dist = [{ name = "tba-bases-claim", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-birth-middle-name"
@@ -4936,7 +4936,7 @@ dependencies = [
 requires-dist = [{ name = "tba-bases-claim", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-birthdate"
@@ -4954,7 +4954,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-client-id"
@@ -4972,7 +4972,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-confirmation"
@@ -4990,7 +4990,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-credential-status"
@@ -5008,7 +5008,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-credential-type"
@@ -5026,7 +5026,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-cwt-audience"
@@ -5040,7 +5040,7 @@ dependencies = [
 requires-dist = [{ name = "tba-concrete-claim-audience", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-cwt-confirmation"
@@ -5058,7 +5058,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-cwt-expiration"
@@ -5072,7 +5072,7 @@ dependencies = [
 requires-dist = [{ name = "tba-concrete-claim-expiration", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-cwt-id"
@@ -5086,7 +5086,7 @@ dependencies = [
 requires-dist = [{ name = "tba-concrete-claim-jwt-id", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-cwt-issued-at"
@@ -5100,7 +5100,7 @@ dependencies = [
 requires-dist = [{ name = "tba-concrete-claim-issued-at", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-cwt-issuer"
@@ -5114,7 +5114,7 @@ dependencies = [
 requires-dist = [{ name = "tba-concrete-claim-issuer", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-cwt-not-before"
@@ -5128,7 +5128,7 @@ dependencies = [
 requires-dist = [{ name = "tba-concrete-claim-not-before", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-cwt-subject"
@@ -5142,7 +5142,7 @@ dependencies = [
 requires-dist = [{ name = "tba-concrete-claim-subject", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-eat-nonce"
@@ -5160,7 +5160,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-eat-profile"
@@ -5178,7 +5178,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-eat-submodules"
@@ -5196,7 +5196,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-email"
@@ -5214,7 +5214,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-email-verified"
@@ -5232,7 +5232,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-expiration"
@@ -5250,7 +5250,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-family-name"
@@ -5268,7 +5268,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-gender"
@@ -5286,7 +5286,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-given-name"
@@ -5304,7 +5304,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-http-method"
@@ -5322,7 +5322,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-http-uri"
@@ -5340,7 +5340,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-issued-at"
@@ -5358,7 +5358,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-issuer"
@@ -5376,7 +5376,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-jwt-id"
@@ -5394,7 +5394,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-locale"
@@ -5412,7 +5412,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-may-act"
@@ -5430,7 +5430,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-middle-name"
@@ -5448,7 +5448,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-msisdn"
@@ -5462,7 +5462,7 @@ dependencies = [
 requires-dist = [{ name = "tba-bases-claim", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-name"
@@ -5480,7 +5480,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-nationalities"
@@ -5494,7 +5494,7 @@ dependencies = [
 requires-dist = [{ name = "tba-bases-claim", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-nickname"
@@ -5512,7 +5512,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-nonce"
@@ -5530,7 +5530,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-not-before"
@@ -5548,7 +5548,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-other-token-hashes"
@@ -5566,7 +5566,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-phone-number"
@@ -5584,7 +5584,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-phone-number-verified"
@@ -5602,7 +5602,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-picture-uri"
@@ -5620,7 +5620,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-place-of-birth"
@@ -5634,7 +5634,7 @@ dependencies = [
 requires-dist = [{ name = "tba-bases-claim", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-preferred-username"
@@ -5652,7 +5652,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-profile-uri"
@@ -5670,7 +5670,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-salutation"
@@ -5684,7 +5684,7 @@ dependencies = [
 requires-dist = [{ name = "tba-bases-claim", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-scope"
@@ -5702,7 +5702,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-sd-hash"
@@ -5720,7 +5720,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-security-events"
@@ -5738,7 +5738,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-session-id"
@@ -5756,7 +5756,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-state-hash"
@@ -5774,7 +5774,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-subject"
@@ -5792,7 +5792,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-subject-identifiers"
@@ -5810,7 +5810,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-title"
@@ -5824,7 +5824,7 @@ dependencies = [
 requires-dist = [{ name = "tba-bases-claim", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-transaction-id"
@@ -5842,7 +5842,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-transaction-token-hash"
@@ -5860,7 +5860,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-ueid"
@@ -5878,7 +5878,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-updated-at"
@@ -5896,7 +5896,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-updated-at-rfc3339"
@@ -5914,7 +5914,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-verified-claims"
@@ -5932,7 +5932,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-website-uri"
@@ -5950,7 +5950,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-workload-token-hash"
@@ -5968,7 +5968,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-claim-zoneinfo"
@@ -5986,7 +5986,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-client-identity"
@@ -6004,7 +6004,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-corim"
@@ -6018,7 +6018,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-identity", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-cose"
@@ -6036,7 +6036,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-credential-api-key"
@@ -6054,7 +6054,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-credential-client-secret"
@@ -6072,7 +6072,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-credential-dpop-key"
@@ -6090,7 +6090,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-credential-mfa"
@@ -6108,7 +6108,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-credential-mtls-certificate"
@@ -6126,7 +6126,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-credential-passkey"
@@ -6144,7 +6144,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-credential-password"
@@ -6162,7 +6162,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-credential-password-reset"
@@ -6180,7 +6180,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-credential-service-key"
@@ -6198,7 +6198,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-cwt"
@@ -6212,7 +6212,7 @@ dependencies = [
 requires-dist = [{ name = "cbor2", specifier = "==6.1.3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-cwt-svid-extension-credential"
@@ -6230,7 +6230,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-device-identity"
@@ -6248,7 +6248,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-did"
@@ -6262,7 +6262,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-identity", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-did-document"
@@ -6276,7 +6276,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-identity-document", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-dpop-confirmation-binding"
@@ -6296,7 +6296,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-eat"
@@ -6326,7 +6326,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-eat-evidence"
@@ -6340,7 +6340,7 @@ dependencies = [
 requires-dist = [{ name = "tba-bases-attestation", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-identity-assurance"
@@ -6354,7 +6354,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-identity", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-identity-principals"
@@ -6384,7 +6384,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-jose"
@@ -6410,7 +6410,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-jwe"
@@ -6424,7 +6424,7 @@ dependencies = [
 requires-dist = [{ name = "tba-primitives-identity", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-jws"
@@ -6438,7 +6438,7 @@ dependencies = [
 requires-dist = [{ name = "tba-primitives-identity", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-jwt"
@@ -6452,7 +6452,7 @@ dependencies = [
 requires-dist = [{ name = "tba-concrete-jws", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-jwt-svid-credential"
@@ -6474,7 +6474,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-machine-identity"
@@ -6492,7 +6492,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-mdoc"
@@ -6506,7 +6506,7 @@ dependencies = [
 requires-dist = [{ name = "tba-concrete-mdoc-credential", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-mdoc-credential"
@@ -6520,7 +6520,7 @@ dependencies = [
 requires-dist = [{ name = "tba-bases-digital-credential", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-mfa-factor"
@@ -6538,7 +6538,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-mtls-confirmation-binding"
@@ -6560,7 +6560,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-oidc-id-token"
@@ -6574,7 +6574,7 @@ dependencies = [
 requires-dist = [{ name = "tba-concrete-jwt", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-pairwise-subject-identifier"
@@ -6592,7 +6592,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-passwordless-credential"
@@ -6610,7 +6610,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-pkce"
@@ -6628,7 +6628,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-policy-decision-engine-default"
@@ -6648,7 +6648,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-public-subject-identifier"
@@ -6666,7 +6666,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-sd-jwt"
@@ -6680,7 +6680,7 @@ dependencies = [
 requires-dist = [{ name = "tba-concrete-jose", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-sd-jwt-vc-credential"
@@ -6698,7 +6698,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-service-credential"
@@ -6716,7 +6716,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-service-identity"
@@ -6734,7 +6734,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-set"
@@ -6748,7 +6748,7 @@ dependencies = [
 requires-dist = [{ name = "tba-primitives-identity", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-svid"
@@ -6762,7 +6762,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-workload-identity", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-totp"
@@ -6772,7 +6772,7 @@ source = { editable = "pkgs/010-concrete/tba-concrete-totp" }
 [package.metadata]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-trust-federation-graph"
@@ -6786,7 +6786,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-identity", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-user-identity"
@@ -6804,7 +6804,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-vc-cose-credential"
@@ -6822,7 +6822,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-vc-jose-credential"
@@ -6840,7 +6840,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-verifiable-credential"
@@ -6854,7 +6854,7 @@ dependencies = [
 requires-dist = [{ name = "tba-bases-digital-credential", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-verifiable-presentation"
@@ -6868,7 +6868,7 @@ dependencies = [
 requires-dist = [{ name = "tba-bases-digital-credential", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-webauthn-credential"
@@ -6886,7 +6886,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-wic"
@@ -6900,7 +6900,7 @@ dependencies = [
 requires-dist = [{ name = "tba-concrete-certificate-x509", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-wit"
@@ -6914,7 +6914,7 @@ dependencies = [
 requires-dist = [{ name = "tba-concrete-jwt", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-wit-svid-credential"
@@ -6936,7 +6936,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-workload-identity"
@@ -6954,7 +6954,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-wpt"
@@ -6968,7 +6968,7 @@ dependencies = [
 requires-dist = [{ name = "tba-concrete-jwt", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-concrete-x509-svid-credential"
@@ -6990,7 +6990,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-contracts-attestation"
@@ -7004,7 +7004,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-token", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-contracts-authorization"
@@ -7014,7 +7014,7 @@ source = { editable = "pkgs/002-contracts/tba-contracts-authorization" }
 [package.metadata]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-contracts-claim"
@@ -7028,7 +7028,7 @@ dependencies = [
 requires-dist = [{ name = "tba-primitives-identity", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-contracts-did"
@@ -7042,7 +7042,7 @@ dependencies = [
 requires-dist = [{ name = "tba-primitives-identity", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-contracts-digital-credential"
@@ -7052,7 +7052,7 @@ source = { editable = "pkgs/002-contracts/tba-contracts-digital-credential" }
 [package.metadata]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-contracts-dns"
@@ -7066,7 +7066,7 @@ dependencies = [
 requires-dist = [{ name = "idna", specifier = ">=3,<4" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-contracts-identity"
@@ -7104,7 +7104,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-contracts-identity-assurance"
@@ -7114,7 +7114,7 @@ source = { editable = "pkgs/002-contracts/tba-contracts-identity-assurance" }
 [package.metadata]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-contracts-identity-document"
@@ -7128,7 +7128,7 @@ dependencies = [
 requires-dist = [{ name = "tba-primitives-identity", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-contracts-proof-of-possession"
@@ -7142,7 +7142,7 @@ dependencies = [
 requires-dist = [{ name = "tba-primitives-identity", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-contracts-protected-envelope"
@@ -7156,7 +7156,7 @@ dependencies = [
 requires-dist = [{ name = "tba-primitives-identity", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-contracts-public-key-authentication"
@@ -7166,7 +7166,7 @@ source = { editable = "pkgs/002-contracts/tba-contracts-public-key-authenticatio
 [package.metadata]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-contracts-release"
@@ -7176,7 +7176,7 @@ source = { editable = "pkgs/002-contracts/tba-contracts-release" }
 [package.metadata]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-contracts-replay"
@@ -7186,7 +7186,7 @@ source = { editable = "pkgs/002-contracts/tba-contracts-replay" }
 [package.metadata]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-contracts-security-event"
@@ -7196,7 +7196,7 @@ source = { editable = "pkgs/002-contracts/tba-contracts-security-event" }
 [package.metadata]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-contracts-security-key-rotation-policy"
@@ -7206,7 +7206,7 @@ source = { editable = "pkgs/002-contracts/tba-contracts-security-key-rotation-po
 [package.metadata]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-contracts-security-trust"
@@ -7220,7 +7220,7 @@ dependencies = [
 requires-dist = [{ name = "tba-primitives-identity", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-contracts-token"
@@ -7234,7 +7234,7 @@ dependencies = [
 requires-dist = [{ name = "tba-primitives-identity", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-contracts-workload-identity"
@@ -7248,7 +7248,7 @@ dependencies = [
 requires-dist = [{ name = "tba-primitives-identity", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-credentials"
@@ -7290,7 +7290,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-durability-attestation"
@@ -7316,7 +7316,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-durability-audit"
@@ -7344,7 +7344,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-durability-authority-graph"
@@ -7362,7 +7362,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-durability-authorization-policy"
@@ -7390,7 +7390,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-durability-authorization-policy-authority-derivation-graph"
@@ -7410,7 +7410,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-durability-consent"
@@ -7436,7 +7436,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-durability-delegation"
@@ -7462,7 +7462,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-durability-digital-credential"
@@ -7488,7 +7488,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-durability-gnap-state"
@@ -7514,7 +7514,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-durability-identity"
@@ -7546,7 +7546,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-durability-identity-administration-trust-federation-graph"
@@ -7566,7 +7566,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-durability-key-material"
@@ -7586,7 +7586,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-durability-oauth-state"
@@ -7612,7 +7612,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-durability-oidc-state"
@@ -7638,7 +7638,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-durability-presentation"
@@ -7664,7 +7664,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-durability-replay-protection"
@@ -7690,7 +7690,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-durability-security-event"
@@ -7716,7 +7716,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-durability-session"
@@ -7742,7 +7742,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-durability-token"
@@ -7768,7 +7768,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-durability-trust-federation-graph"
@@ -7786,7 +7786,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-durability-webauthn"
@@ -7812,7 +7812,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-durability-workload-identity"
@@ -7838,7 +7838,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-example-oauth-device-authorization-cli"
@@ -7852,7 +7852,7 @@ dependencies = [
 requires-dist = [{ name = "httpx", specifier = ">=0.28,<0.29" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-example-workload-credential-profiles"
@@ -7872,7 +7872,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-middleware-policy-enforcement-asgi"
@@ -7886,7 +7886,7 @@ dependencies = [
 requires-dist = [{ name = "tba-client-policy-decision", specifier = "==0.4.0.dev4" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-operator-identity"
@@ -7906,7 +7906,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-plugin-tigrbl"
@@ -7924,7 +7924,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-primitives-identity"
@@ -7941,7 +7941,7 @@ requires-dist = [{ name = "tigrbl", marker = "extra == 'storage'", specifier = "
 provides-extras = ["storage"]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-profile-communications-identity-bimi"
@@ -7972,7 +7972,7 @@ requires-dist = [
 provides-extras = ["workflow"]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-profile-credential-sd-jwt-vc"
@@ -7996,7 +7996,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-profile-credential-vc-jose-cose"
@@ -8024,7 +8024,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-profile-fido2-server"
@@ -8042,7 +8042,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-profile-haip"
@@ -8062,7 +8062,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-profile-oauth-jwt-access-token"
@@ -8072,7 +8072,7 @@ source = { editable = "pkgs/055-profiles/tba-profile-oauth-jwt-access-token" }
 [package.metadata]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-profile-workload-authentication-wimse-mtls"
@@ -8096,7 +8096,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-profile-workload-credential-cwt-svid-extension"
@@ -8118,7 +8118,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-profile-workload-credential-spiffe-wit-svid"
@@ -8144,7 +8144,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-profile-workload-credential-wimse-wic"
@@ -8164,7 +8164,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-profile-workload-credential-wimse-wit"
@@ -8186,7 +8186,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-profile-workload-proof-wimse-http-signature"
@@ -8206,7 +8206,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-profile-workload-proof-wimse-wpt"
@@ -8232,7 +8232,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-attestation-corim"
@@ -8250,7 +8250,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-attestation-eat"
@@ -8280,7 +8280,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-authzen"
@@ -8298,7 +8298,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-bimi"
@@ -8318,7 +8318,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-credential-iso-mdoc"
@@ -8346,7 +8346,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-credential-w3c-vcdm"
@@ -8366,7 +8366,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-cwt"
@@ -8406,7 +8406,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-dmarc"
@@ -8420,7 +8420,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-dns", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-gnap"
@@ -8444,7 +8444,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-identity-did-core"
@@ -8462,7 +8462,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-jwt"
@@ -8496,7 +8496,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-oauth"
@@ -8558,7 +8558,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-oauth-protected-resource"
@@ -8588,7 +8588,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-oid4vci"
@@ -8612,7 +8612,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-oid4vp"
@@ -8636,7 +8636,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-oidc"
@@ -8748,7 +8748,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-oidc-relying-party"
@@ -8792,7 +8792,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-security-cose"
@@ -8810,7 +8810,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-security-event-set"
@@ -8846,7 +8846,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-security-jose"
@@ -8866,7 +8866,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-security-jwe"
@@ -8884,7 +8884,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-security-jws"
@@ -8902,7 +8902,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-ucan"
@@ -8926,7 +8926,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-webauthn"
@@ -8954,7 +8954,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-workload-spiffe-broker-api"
@@ -8964,7 +8964,7 @@ source = { editable = "pkgs/050-protocols/tba-protocol-workload-spiffe-broker-ap
 [package.metadata]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-workload-spiffe-svid"
@@ -8990,7 +8990,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-workload-spiffe-workload-api"
@@ -9000,7 +9000,7 @@ source = { editable = "pkgs/050-protocols/tba-protocol-workload-spiffe-workload-
 [package.metadata]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-workload-wimse-identifier"
@@ -9010,7 +9010,7 @@ source = { editable = "pkgs/050-protocols/tba-protocol-workload-wimse-identifier
 [package.metadata]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-protocol-zcap"
@@ -9032,7 +9032,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-access-governance-memory"
@@ -9054,7 +9054,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-attestation-appraiser"
@@ -9072,7 +9072,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-attestation-packed"
@@ -9098,7 +9098,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-attestation-reference"
@@ -9116,7 +9116,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-attestation-tpm"
@@ -9142,7 +9142,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-attestation-u2f"
@@ -9168,7 +9168,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-authentication-anomaly-detector"
@@ -9186,7 +9186,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-authentication-context-acr-basic"
@@ -9200,7 +9200,7 @@ dependencies = [
 requires-dist = [{ name = "tba-concrete-acr-evaluator-basic", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-authentication-context-amr-basic"
@@ -9214,7 +9214,7 @@ dependencies = [
 requires-dist = [{ name = "tba-concrete-amr-evaluator-basic", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-authenticator-api-key-local"
@@ -9234,7 +9234,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-authenticator-client-secret-local"
@@ -9254,7 +9254,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-authenticator-dpop-proof"
@@ -9272,7 +9272,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-authenticator-federated-oidc"
@@ -9290,7 +9290,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-authenticator-mtls-client-cert"
@@ -9308,7 +9308,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-authenticator-otp-local"
@@ -9326,7 +9326,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-authenticator-password-local"
@@ -9346,7 +9346,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-authenticator-recovery-code-local"
@@ -9364,7 +9364,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-authenticator-remote-introspection"
@@ -9382,7 +9382,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-authenticator-service-key-local"
@@ -9402,7 +9402,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-authenticator-session-local"
@@ -9420,7 +9420,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-authenticator-totp-local"
@@ -9440,7 +9440,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-authorization-policy-decision-engine"
@@ -9462,7 +9462,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-authorization-resource-server-verifier"
@@ -9490,7 +9490,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-bimi-mark-certificate"
@@ -9510,7 +9510,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-certificate-evidence"
@@ -9530,7 +9530,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-certificate-issuer-x509"
@@ -9550,7 +9550,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-certificate-path-validator"
@@ -9568,7 +9568,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-certificate-status"
@@ -9582,7 +9582,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-security-trust", specifier = "==0.1.1.dev1" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-claims-local"
@@ -9602,7 +9602,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-corim-reference-memory"
@@ -9620,7 +9620,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-cose-cryptography"
@@ -9640,7 +9640,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-did-controller"
@@ -9658,7 +9658,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-did-resolver"
@@ -9678,7 +9678,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-digital-credential-status"
@@ -9696,7 +9696,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-digital-credential-trust"
@@ -9710,7 +9710,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-security-trust", specifier = "==0.1.1.dev1" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-dns-txt"
@@ -9728,7 +9728,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-eat-verifier"
@@ -9748,7 +9748,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-fido-metadata-service"
@@ -9766,7 +9766,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-identity-administration-relationship-graph"
@@ -9784,7 +9784,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-identity-jose"
@@ -9814,7 +9814,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-jose-cryptography"
@@ -9842,7 +9842,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-key-attestation-verifier"
@@ -9856,7 +9856,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-identity", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-mdoc-issuer"
@@ -9876,7 +9876,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-mdoc-verifier"
@@ -9896,7 +9896,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-platform-attestation"
@@ -9910,7 +9910,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-identity", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-policy-administration-memory"
@@ -9934,7 +9934,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-replay-memory"
@@ -9956,7 +9956,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-secret-hashing-bcrypt"
@@ -9974,7 +9974,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-security-authorization-provenance-builder"
@@ -9988,7 +9988,7 @@ dependencies = [
 requires-dist = [{ name = "tba-concrete-authorization-provenance", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-security-certificate-mtls"
@@ -10002,7 +10002,7 @@ dependencies = [
 requires-dist = [{ name = "tba-concrete-mtls-confirmation-binding", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-security-dpop-cnf-binding-validator"
@@ -10016,7 +10016,7 @@ dependencies = [
 requires-dist = [{ name = "tba-concrete-dpop-confirmation-binding", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-security-mtls-cnf-binding-validator"
@@ -10030,7 +10030,7 @@ dependencies = [
 requires-dist = [{ name = "tba-concrete-mtls-confirmation-binding", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-security-oidc-federation"
@@ -10050,7 +10050,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-security-proof-dpop"
@@ -10064,7 +10064,7 @@ dependencies = [
 requires-dist = [{ name = "tba-concrete-dpop-confirmation-binding", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-security-proof-pkce"
@@ -10078,7 +10078,7 @@ dependencies = [
 requires-dist = [{ name = "tba-concrete-pkce", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-security-signing-pqc"
@@ -10098,7 +10098,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-security-subject-pairwise"
@@ -10120,7 +10120,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-security-token-jwks-cache"
@@ -10140,7 +10140,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-security-webfinger"
@@ -10160,7 +10160,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-set-receiver"
@@ -10180,7 +10180,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-set-transmitter"
@@ -10200,7 +10200,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-spiffe-bundle"
@@ -10218,7 +10218,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-spiffe-workload-api"
@@ -10238,7 +10238,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-token-introspection"
@@ -10258,7 +10258,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-trust-anchor"
@@ -10272,7 +10272,7 @@ dependencies = [
 requires-dist = [{ name = "tba-contracts-security-trust", specifier = "==0.1.1.dev1" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-provider-wallet-attestation-verifier"
@@ -10286,7 +10286,7 @@ dependencies = [
 requires-dist = [{ name = "tba-bases-digital-credential", specifier = "==0.4.0.dev3" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-router-administration-gate"
@@ -10306,7 +10306,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-router-authorization-administration"
@@ -10324,7 +10324,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-router-oauth-authorization"
@@ -10338,7 +10338,7 @@ dependencies = [
 requires-dist = [{ name = "tigrbl", specifier = "==0.4.5.dev8" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-router-oauth-authorization-server-metadata"
@@ -10356,7 +10356,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-router-oauth-device-authorization"
@@ -10374,7 +10374,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-router-oauth-introspection"
@@ -10392,7 +10392,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-router-oauth-protected-resource-metadata"
@@ -10410,7 +10410,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-router-oauth-pushed-authorization-request"
@@ -10430,7 +10430,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-router-oauth-registration"
@@ -10448,7 +10448,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-router-oauth-revocation"
@@ -10466,7 +10466,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-router-oauth-token"
@@ -10484,7 +10484,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-router-oauth-token-exchange"
@@ -10498,7 +10498,7 @@ dependencies = [
 requires-dist = [{ name = "tigrbl", specifier = "==0.4.5.dev8" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-router-oidc-discovery"
@@ -10518,7 +10518,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-router-oidc-logout"
@@ -10532,7 +10532,7 @@ dependencies = [
 requires-dist = [{ name = "tigrbl", specifier = "==0.4.5.dev8" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-router-oidc-userinfo"
@@ -10546,7 +10546,7 @@ dependencies = [
 requires-dist = [{ name = "tigrbl", specifier = "==0.4.5.dev8" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-router-policy-decision"
@@ -10564,7 +10564,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-router-relying-party-session"
@@ -10586,7 +10586,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-router-resource-validation-metadata"
@@ -10604,7 +10604,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-router-session-login"
@@ -10624,7 +10624,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-router-webauthn"
@@ -10644,7 +10644,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-router-wic-ca"
@@ -10664,7 +10664,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-router-wit-issuance"
@@ -10684,7 +10684,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-router-wpt-verification"
@@ -10706,7 +10706,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-runtime-authorization-policy"
@@ -10744,7 +10744,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-runtime-identity"
@@ -10835,7 +10835,7 @@ requires-dist = [
 provides-extras = ["uvicorn", "hypercorn", "tigrcorn", "servers"]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-runtime-identity-administration"
@@ -10893,7 +10893,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-runtime-identity-authoring"
@@ -10907,7 +10907,7 @@ dependencies = [
 requires-dist = [{ name = "cryptography", specifier = ">=45.0.0" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-runtime-identity-storage"
@@ -10991,7 +10991,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-runtime-relying-party-session"
@@ -11009,7 +11009,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-server-identity"
@@ -11091,7 +11091,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-access-governance"
@@ -11111,7 +11111,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-attestation"
@@ -11131,7 +11131,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-audit"
@@ -11157,7 +11157,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-authentication"
@@ -11179,7 +11179,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-authority-graph"
@@ -11199,7 +11199,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-authorization-policy"
@@ -11219,7 +11219,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-certificate"
@@ -11239,7 +11239,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-claims"
@@ -11261,7 +11261,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-consent"
@@ -11287,7 +11287,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-core"
@@ -11371,7 +11371,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-delegation"
@@ -11393,7 +11393,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-did"
@@ -11413,7 +11413,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-digital-credential"
@@ -11433,7 +11433,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-federation"
@@ -11453,7 +11453,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-gnap"
@@ -11473,7 +11473,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-key-material"
@@ -11499,7 +11499,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-oauth"
@@ -11523,7 +11523,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-oidc"
@@ -11545,7 +11545,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-operator"
@@ -11565,7 +11565,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-presentation"
@@ -11585,7 +11585,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-principals"
@@ -11607,7 +11607,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-release-governance"
@@ -11627,7 +11627,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-replay-protection"
@@ -11647,7 +11647,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-residency"
@@ -11667,7 +11667,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-scim"
@@ -11687,7 +11687,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-security-event"
@@ -11707,7 +11707,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-tenancy"
@@ -11727,7 +11727,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-token"
@@ -11751,7 +11751,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-trust-federation-graph"
@@ -11771,7 +11771,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-webauthn"
@@ -11791,7 +11791,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-storage-workload-identity"
@@ -11811,7 +11811,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-tests-identity"
@@ -11821,7 +11821,7 @@ source = { editable = "pkgs/120-tests/tba-tests-identity" }
 [package.metadata]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-tests-workload-credential-conformance"
@@ -11839,7 +11839,7 @@ requires-dist = [
 provides-extras = ["runner"]
 
 [package.metadata.requires-dev]
-dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" }]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
 name = "tba-workspace"
@@ -12930,7 +12930,7 @@ dev = [
     { name = "pytest-json-report", specifier = ">=1.5.0" },
     { name = "pytest-timeout", specifier = ">=2.3.1" },
     { name = "pytest-xdist", specifier = ">=3.6.1" },
-    { name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.1" },
+    { name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" },
     { name = "requests", specifier = ">=2.32.3" },
     { name = "ruff", specifier = ">=0.9.9" },
     { name = "ssot-registry", specifier = ">=0.2.8" },
