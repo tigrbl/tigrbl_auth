@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import inspect
+
 from tba_contracts_identity.tokens import RefreshTokenRedemptionRequest
 
 from .token_runtime import (
@@ -248,6 +250,13 @@ async def dispatch_token_grant(
             issuer=str(deployment.issuer or ISSUER),
             **extra_claims,
         )
+        # The HTTP database dependency closes the session. Commit the code
+        # consumption and token writes before returning any issued token.
+        commit = getattr(db, "commit", None)
+        if callable(commit):
+            result = commit()
+            if inspect.isawaitable(result):
+                await result
         return _token_pair_payload(
             access,
             refresh,
