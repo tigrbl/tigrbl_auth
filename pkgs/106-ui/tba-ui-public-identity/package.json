@@ -48,5 +48,8 @@
   "homepage": "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/106-ui/tba-ui-public-identity#readme",
   "bugs": {
     "url": "https://github.com/tigrbl/tigrbl_auth/issues"
+  },
+  "overrides": {
+    "postcss@>=8 <8.5.23": "8.5.23"
   }
 }
