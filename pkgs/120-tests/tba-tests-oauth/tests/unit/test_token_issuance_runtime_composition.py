@@ -23,6 +23,14 @@ from tba_runtime_identity_storage import (
 from tba_server_identity.security import token_issuance as runtime
 
 
+@pytest.fixture(autouse=True)
+def empty_revocation_ledger(monkeypatch):
+    async def is_revoked(ctx):
+        return False
+
+    monkeypatch.setattr(runtime, "is_token_hash_revoked", is_revoked)
+
+
 @dataclass
 class _Coder:
     issued: int = 0
@@ -229,6 +237,33 @@ async def test_lost_rotation_does_not_persist_successors(monkeypatch) -> None:
                 client_id="client-1",
             )
         )
+
+
+@pytest.mark.asyncio
+async def test_refresh_rejects_ledger_revocation_of_active_record(monkeypatch) -> None:
+    db = object()
+
+    async def read(ctx):
+        return _refresh_record()
+
+    async def is_revoked(ctx):
+        assert ctx["db"] is db
+        assert ctx["payload"]["token_hash"] == token_hash("presented-refresh")
+        return True
+
+    monkeypatch.setattr(runtime, "read_token_record", read)
+    monkeypatch.setattr(runtime, "is_token_hash_revoked", is_revoked)
+    coder = _Coder()
+    service = runtime.build_rfc6749_token_endpoint_service(db=db, token_coder=coder)
+    with pytest.raises(InvalidRefreshTokenError, match="revoked"):
+        await service.refresh(
+            RefreshTokenRedemptionRequest(
+                refresh_token="presented-refresh",
+                tenant_id="tenant-1",
+                client_id="client-1",
+            )
+        )
+    assert coder.issued == 0
 
 
 @pytest.mark.asyncio

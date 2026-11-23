@@ -19,11 +19,13 @@ from tba_contracts_identity.tokens import (
 from tba_primitives_identity.digests import token_hash
 from tba_primitives_identity.errors import (
     InvalidRefreshTokenError,
+    InvalidTokenError,
     RefreshTokenReuseError,
 )
 from tba_runtime_identity_storage.ops.audit import append_audit_event_record
 from tigrbl import field_value
 from tba_runtime_identity_storage.ops.oauth_state import (
+    is_token_hash_revoked,
     record_revoked_token_hash,
 )
 from tba_runtime_identity_storage.ops.tokens import (
@@ -68,7 +70,9 @@ def _audience_allows(stored: str | list[str] | None, requested: str | None) -> b
     return requested in stored
 
 
-async def _decode_issued_claims(coder: TokenCoder, token: str) -> dict[str, Any]:
+async def _decode_token_claims(
+    coder: TokenCoder, token: str, **kwargs: Any
+) -> dict[str, Any]:
     decode = coder.async_decode
     try:
         parameters = inspect.signature(decode).parameters
@@ -78,7 +82,6 @@ async def _decode_issued_claims(coder: TokenCoder, token: str) -> dict[str, Any]
         parameter.kind is inspect.Parameter.VAR_KEYWORD
         for parameter in parameters.values()
     )
-    kwargs: dict[str, object] = {"verify_exp": False}
     if supports_revocation_switch:
         kwargs["verify_revocation"] = False
     return dict(await decode(token, **kwargs))
@@ -112,8 +115,12 @@ def build_token_issuance_capability(
             persist_token=False,
             **claims,
         )
-        access_claims = await _decode_issued_claims(token_coder, access_token)
-        refresh_claims = await _decode_issued_claims(token_coder, refresh_token)
+        access_claims = await _decode_token_claims(
+            token_coder, access_token, verify_exp=False
+        )
+        refresh_claims = await _decode_token_claims(
+            token_coder, refresh_token, verify_exp=False
+        )
         for issued_claims in (access_claims, refresh_claims):
             issued_claims["client_id"] = request.client_id
             for name in ("authorization_trace", "delegation_provenance"):
@@ -217,13 +224,17 @@ def build_token_issuance_capability(
         ):
             raise InvalidRefreshTokenError("refresh token is inactive")
 
-        claims = dict(
-            await token_coder.async_decode(
+        if await is_token_hash_revoked({"payload": {"token_hash": digest}, "db": db}):
+            raise InvalidRefreshTokenError("refresh token is revoked")
+        try:
+            claims = await _decode_token_claims(
+                token_coder,
                 request.refresh_token,
                 verify_exp=True,
                 cert_thumbprint=request.certificate_thumbprint,
             )
-        )
+        except InvalidTokenError as exc:
+            raise InvalidRefreshTokenError("refresh token verification failed") from exc
         if claims.get("typ") != "refresh":
             raise InvalidRefreshTokenError("presented token is not a refresh token")
         token_client_id = str(claims.get("client_id") or record_client_id or "")
