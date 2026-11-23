@@ -25,6 +25,11 @@ on:
         required: false
         default: false
         type: boolean
+      diagnostic_only:
+        description: Check the token exchange without building, tagging, or publishing.
+        required: false
+        default: false
+        type: boolean
       force:
         description: Replace existing package tags.
         required: false
@@ -42,7 +47,36 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  verify-scoped-publisher:
+    if: ${{ inputs.diagnostic_only }}
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ format('pypi-{0}', inputs.package) }}
+    permissions:
+      id-token: write
+    steps:
+      - name: Report PyPI token exchange status
+        shell: bash
+        env:
+          RELEASE_PACKAGE: ${{ inputs.package }}
+        run: |
+          set -euo pipefail
+          if [[ "$RELEASE_PACKAGE" == "all" || ! "$RELEASE_PACKAGE" =~ ^[a-z0-9][a-z0-9-]*$ ]]; then
+            exit 1
+          fi
+          response="$(mktemp)"
+          trap 'rm -f "$response"' EXIT
+          github_token="$(curl -fsS -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=pypi" | jq -er .value)"
+          export PYPI_GITHUB_TOKEN="$github_token"
+          status="$(python3 -c 'import json,os; print(json.dumps({"token": os.environ["PYPI_GITHUB_TOKEN"]}))' | curl -sS -o "$response" -w '%{http_code}' -H 'Content-Type: application/json' --data-binary @- https://pypi.org/_/oidc/mint-token)"
+          unset PYPI_GITHUB_TOKEN github_token
+          printf 'PyPI token exchange status %s\n' "$status"
+          if [[ "$status" != 200 ]]; then
+            jq -c '[.errors[]? | {code, description}]' "$response"
+            exit 1
+          fi
   bump-package-versions:
+    if: ${{ !inputs.diagnostic_only }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
