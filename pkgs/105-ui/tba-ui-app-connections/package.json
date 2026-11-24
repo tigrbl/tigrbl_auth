@@ -9,6 +9,7 @@
     "url": "git+https://github.com/tigrbl/tigrbl_auth.git",
     "directory": "pkgs/105-ui/tba-ui-app-connections"
   },
+  "readmeStandards": { "npmPublished": true },
   "publishConfig": { "access": "public" },
   "files": ["dist", "README.md", "LICENSE", "NOTICE"],
   "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
