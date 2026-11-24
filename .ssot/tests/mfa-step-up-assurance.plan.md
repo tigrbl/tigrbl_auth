@@ -15,3 +15,7 @@ Use actual factor verifiers, a durable replay record, and two injected policies.
 ## T2
 
 Show the synthetic relying party resumes the same subject at the required assurance.
+
+## Executable tests
+
+- [Python tests](../../pkgs/120-tests/tba-tests-authentication/tests/unit/test_mfa_enrollment_step_up_runtime.py)

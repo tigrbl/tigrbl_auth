@@ -2905,7 +2905,7 @@ requires-dist = [
     { name = "tba-protocol-oauth", specifier = "==0.4.0.dev3" },
     { name = "tba-protocol-oauth-protected-resource", specifier = "==0.4.0.dev3" },
     { name = "tba-protocol-oidc", specifier = "==0.4.0.dev3" },
-    { name = "tba-protocol-oidc-relying-party", specifier = "==0.4.0.dev4" },
+    { name = "tba-protocol-oidc-relying-party", specifier = "==0.4.0.dev6" },
     { name = "tba-protocol-webauthn", specifier = "==0.4.0.dev3" },
     { name = "tba-provider-identity-jose", specifier = "==0.4.0.dev3" },
     { name = "tba-provider-security-authorization-provenance-builder", specifier = "==0.1.1.dev1" },
@@ -8752,7 +8752,7 @@ dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", sp
 
 [[package]]
 name = "tba-protocol-oidc-relying-party"
-version = "0.4.0.dev4"
+version = "0.4.0.dev6"
 source = { editable = "pkgs/050-protocols/tba-protocol-oidc-relying-party" }
 dependencies = [
     { name = "tba-concrete-claim-audience" },
@@ -8786,7 +8786,7 @@ requires-dist = [
     { name = "tba-concrete-claim-subject", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
     { name = "tba-concrete-jws", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
     { name = "tba-contracts-identity", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
-    { name = "tba-protocol-oidc", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
+    { name = "tba-protocol-oidc", specifier = ">=0.4.0.dev2,<=0.4.0.dev4" },
     { name = "tba-provider-jose-cryptography", specifier = ">=0.4.0.dev3,<=0.4.0.dev4" },
     { name = "tba-provider-security-proof-pkce", specifier = ">=0.1.0,<=0.1.1.dev1" },
 ]
@@ -10580,7 +10580,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "tba-concrete-jws", specifier = ">=0.4.0.dev2,<=0.4.0.dev3" },
-    { name = "tba-protocol-oidc-relying-party", specifier = "==0.4.0.dev4" },
+    { name = "tba-protocol-oidc-relying-party", specifier = "==0.4.0.dev6" },
     { name = "tba-provider-jose-cryptography", specifier = ">=0.4.0.dev3,<=0.4.0.dev4" },
     { name = "tba-runtime-relying-party-session", specifier = "==0.4.0.dev5" },
 ]
@@ -10742,6 +10742,16 @@ requires-dist = [
     { name = "tba-provider-security-authorization-provenance-builder", specifier = "==0.1.1.dev1" },
     { name = "tigrbl", specifier = "==0.4.5.dev8" },
 ]
+
+[package.metadata.requires-dev]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
+
+[[package]]
+name = "tba-runtime-hosted-authorization-continuation"
+version = "0.4.0.dev1"
+source = { editable = "pkgs/060-runtime/tba-runtime-hosted-authorization-continuation" }
+
+[package.metadata]
 
 [package.metadata.requires-dev]
 dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
@@ -10994,6 +11004,37 @@ requires-dist = [
 dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
 
 [[package]]
+name = "tba-runtime-mfa-lifecycle"
+version = "0.4.0.dev1"
+source = { editable = "pkgs/060-runtime/tba-runtime-mfa-lifecycle" }
+
+[package.optional-dependencies]
+webauthn = [
+    { name = "tba-contracts-identity" },
+    { name = "tba-protocol-webauthn" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tba-contracts-identity", marker = "extra == 'webauthn'", specifier = "==0.4.0.dev3" },
+    { name = "tba-protocol-webauthn", marker = "extra == 'webauthn'", specifier = "==0.4.0.dev3" },
+]
+provides-extras = ["webauthn"]
+
+[package.metadata.requires-dev]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
+
+[[package]]
+name = "tba-runtime-oidc-provider-logout"
+version = "0.4.0.dev0"
+source = { editable = "pkgs/060-runtime/tba-runtime-oidc-provider-logout" }
+
+[package.metadata]
+
+[package.metadata.requires-dev]
+dev = [{ name = "readme-standards", marker = "python_full_version >= '3.11'", specifier = "==0.1.3" }]
+
+[[package]]
 name = "tba-runtime-relying-party-session"
 version = "0.4.0.dev5"
 source = { editable = "pkgs/030-storage-runtime/tba-runtime-relying-party-session" }
@@ -11043,6 +11084,7 @@ dependencies = [
     { name = "tba-provider-secret-hashing-bcrypt" },
     { name = "tba-runtime-identity" },
     { name = "tba-runtime-identity-storage" },
+    { name = "tba-runtime-oidc-provider-logout" },
     { name = "tba-storage-audit" },
     { name = "tba-storage-oauth" },
     { name = "tba-storage-operator" },
@@ -11081,6 +11123,7 @@ requires-dist = [
     { name = "tba-provider-secret-hashing-bcrypt", specifier = "==0.1.1.dev1" },
     { name = "tba-runtime-identity", specifier = "==0.4.0.dev4" },
     { name = "tba-runtime-identity-storage", specifier = "==0.4.0.dev3" },
+    { name = "tba-runtime-oidc-provider-logout", specifier = "==0.4.0.dev0" },
     { name = "tba-storage-audit", specifier = "==0.4.0.dev3" },
     { name = "tba-storage-oauth", specifier = "==0.4.0.dev3" },
     { name = "tba-storage-operator", specifier = "==0.4.0.dev3" },
@@ -12399,6 +12442,11 @@ dev = [
     { name = "ssot-registry" },
     { name = "tox" },
 ]
+identity-lifecycle = [
+    { name = "tba-runtime-hosted-authorization-continuation" },
+    { name = "tba-runtime-mfa-lifecycle", extra = ["webauthn"] },
+    { name = "tba-runtime-oidc-provider-logout" },
+]
 
 [package.metadata]
 requires-dist = [
@@ -12935,6 +12983,11 @@ dev = [
     { name = "ruff", specifier = ">=0.9.9" },
     { name = "ssot-registry", specifier = ">=0.2.8" },
     { name = "tox", specifier = ">=4.23.2" },
+]
+identity-lifecycle = [
+    { name = "tba-runtime-hosted-authorization-continuation", editable = "pkgs/060-runtime/tba-runtime-hosted-authorization-continuation" },
+    { name = "tba-runtime-mfa-lifecycle", extras = ["webauthn"], editable = "pkgs/060-runtime/tba-runtime-mfa-lifecycle" },
+    { name = "tba-runtime-oidc-provider-logout", editable = "pkgs/060-runtime/tba-runtime-oidc-provider-logout" },
 ]
 
 [[package]]

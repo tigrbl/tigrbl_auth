@@ -15,3 +15,8 @@ Install each RP package cleanly. Exercise missing provider logout support, state
 ## T2
 
 Use both installed RP packages against the same repository-owned synthetic provider. Assert equivalent browser outcomes and a fresh subject after sign-out.
+
+## Executable tests
+
+- [Python tests](../../pkgs/120-tests/tba-tests-oidc/tests/unit/test_rp_session_vectors.py)
+- [TypeScript tests](../../pkgs/075-clients/tba-typescript-client-oidc-relying-party/src/index.test.ts)

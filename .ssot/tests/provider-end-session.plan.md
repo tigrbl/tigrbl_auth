@@ -15,3 +15,8 @@ Mount the actual router and runtime with durable adapter fixtures. Exercise GET 
 ## T2
 
 From installed packages, use a synthetic provider and relying party with two browser scopes. Assert the exact return and state, preserve the other scope, and sign in as a different subject.
+
+## Executable tests
+
+- [Python tests](../../pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_logout_http_binding.py)
+- [Python tests](../../pkgs/120-tests/tba-tests-browser-session/tests/integration/test_provider_logout_runtime.py)

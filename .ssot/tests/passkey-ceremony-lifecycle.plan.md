@@ -15,3 +15,7 @@ Compose WebAuthn verifier, router and durable store for registration and asserti
 ## T2
 
 Use a browser virtual authenticator to prove registration and assertion of the same credential in a repository-owned synthetic app.
+
+## Executable tests
+
+- [Python tests](../../pkgs/120-tests/tba-tests-webauthn/tests/unit/test_webauthn_protocol_delivery.py)

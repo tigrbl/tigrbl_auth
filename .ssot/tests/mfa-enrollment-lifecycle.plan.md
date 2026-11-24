@@ -15,3 +15,7 @@ Integrate TOTP and WebAuthn verification with transactional storage. Concurrent 
 ## T2
 
 Complete first enrollment and subsequent verification in the repository-owned browser fixture using synthetic accounts.
+
+## Executable tests
+
+- [Python tests](../../pkgs/120-tests/tba-tests-authentication/tests/unit/test_mfa_enrollment_step_up_runtime.py)

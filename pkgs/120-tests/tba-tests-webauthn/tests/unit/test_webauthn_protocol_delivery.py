@@ -25,7 +25,19 @@ from tba_protocol_webauthn import (
     verify_authentication_response,
     verify_registration_response,
 )
-from tba_provider_security_cose import decode_cose_key, verify_detached_signature
+from tba_concrete_cose import decode_cose_key
+from tba_provider_cose_cryptography import verify_detached_signature
+from tba_runtime_mfa_lifecycle import (
+    CeremonyKind,
+    EnrollmentRuntime,
+    FactorBinding,
+    LifecycleStatus,
+    StepUpRuntime,
+)
+from tba_runtime_mfa_lifecycle.webauthn import (
+    WebAuthnAssertionUpdate,
+    webauthn_verifier,
+)
 
 
 def _b64(value: bytes) -> str:
@@ -62,9 +74,8 @@ def _key_material():
     return private, cose
 
 
-def _registration_fixture():
+def _registration_fixture(challenge=b"r" * 32):
     private, cose = _key_material()
-    challenge = b"r" * 32
     raw_id = b"credential-identifier"
     client = _client_data("webauthn.create", challenge)
     auth = (
@@ -199,3 +210,126 @@ def test_options_and_level3_features_are_explicit():
     assert len(creation.challenge) == len(request.challenge) == 32
     assert "conditional-mediation" in features_for(WebAuthnVersion.LEVEL_3)
     assert "conditional-mediation" not in features_for(WebAuthnVersion.LEVEL_2)
+
+
+def test_passkey_enrollment_and_step_up_share_the_mfa_lifecycle():
+    class FactorStore:
+        def __init__(self):
+            self.attempts = {}
+            self.credential = None
+
+        def create(self, attempt):
+            self.attempts[attempt.attempt_id] = attempt
+
+        def get(self, attempt_id):
+            return self.attempts.get(attempt_id)
+
+        def commit(self, attempt, proof, *, now):
+            if (
+                self.attempts.get(attempt.attempt_id) != attempt
+                or now >= attempt.expires_at
+            ):
+                return False
+            if attempt.kind == CeremonyKind.ENROLLMENT:
+                self.credential = proof.credential
+            else:
+                assert isinstance(proof.credential, WebAuthnAssertionUpdate)
+                update = proof.credential
+                if update.previous != self.credential:
+                    return False
+                self.credential = replace(
+                    self.credential, sign_count=update.assertion.sign_count
+                )
+            del self.attempts[attempt.attempt_id]
+            return True
+
+    store = FactorStore()
+    allowlist = frozenset({"https://login.example"})
+    binding = FactorBinding("tenant:1", "principal:1", "passkey", "sign-in")
+    registration_expected = {}
+
+    def authentication(attempt):
+        return AuthenticationExpectation(
+            ceremony_id=attempt.attempt_id,
+            rp_id="login.example",
+            origin="https://login.example",
+            challenge=attempt.challenge,
+            credential=store.credential,
+            user_verification="required",
+        )
+
+    verifiers = {
+        "passkey": webauthn_verifier(
+            registration=lambda attempt: registration_expected.get(attempt.attempt_id),
+            authentication=authentication,
+            allowed_origins=allowlist,
+        )
+    }
+    enrollment = EnrollmentRuntime(store, verifiers)
+    pending = enrollment.begin(binding).attempt
+    private, response, expected = _registration_fixture(pending.challenge)
+    registration_expected[pending.attempt_id] = replace(
+        expected, ceremony_id=pending.attempt_id
+    )
+    wrong_origin = replace(
+        response,
+        response=replace(
+            response.response,
+            client_data_json=_client_data(
+                "webauthn.create", pending.challenge, "https://other.example"
+            ),
+        ),
+    )
+    assert (
+        enrollment.complete(pending.attempt_id, binding, wrong_origin).status
+        is LifecycleStatus.REJECTED
+    )
+    assert store.credential is None
+    assert (
+        enrollment.complete(pending.attempt_id, binding, response).status
+        is LifecycleStatus.COMPLETED
+    )
+    assert store.credential.sign_count == 0
+
+    step_up = StepUpRuntime(store, verifiers)
+    pending = step_up.begin(
+        binding, credential_reference=store.credential.credential_id
+    ).attempt
+    client_data = _client_data("webauthn.get", pending.challenge)
+    authenticator_data = (
+        hashlib.sha256(b"login.example").digest()
+        + bytes([0x05])
+        + (1).to_bytes(4, "big")
+    )
+    signature = private.sign(
+        authenticator_data + hashlib.sha256(client_data).digest(),
+        ec.ECDSA(hashes.SHA256()),
+    )
+    assertion = PublicKeyCredential(
+        id=response.id,
+        raw_id=response.raw_id,
+        response=AuthenticatorAssertionResponse(
+            client_data, authenticator_data, signature, b"user-handle"
+        ),
+    )
+    assert (
+        step_up.complete(
+            pending.attempt_id, replace(binding, subject="principal:2"), assertion
+        ).status
+        is LifecycleStatus.REJECTED
+    )
+    verified = step_up.complete(pending.attempt_id, binding, assertion)
+    assert verified.status is LifecycleStatus.COMPLETED
+    assert verified.assurance.method == "passkey"
+    assert store.credential.sign_count == 1
+    assert (
+        step_up.complete(pending.attempt_id, binding, assertion).status
+        is LifecycleStatus.REJECTED
+    )
+    retry = step_up.begin(
+        binding, credential_reference=store.credential.credential_id
+    ).attempt
+    assert (
+        step_up.complete(retry.attempt_id, binding, assertion).status
+        is LifecycleStatus.REJECTED
+    )

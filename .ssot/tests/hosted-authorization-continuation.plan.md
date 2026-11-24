@@ -15,3 +15,8 @@ Use durable transaction adapters through email verification and first MFA enroll
 ## T2
 
 Use a synthetic relying party and installed packages to resume the original callback after first enrollment, and verify a separately registered restart after expiry.
+
+## Executable tests
+
+- [Python tests](../../pkgs/120-tests/tba-tests-browser-session/tests/integration/test_hosted_authorization_continuation.py)
+- Set `TBA_TEST_CHROMIUM` to run the synthetic provider and relying party in Chromium.
