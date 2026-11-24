@@ -577,11 +577,11 @@ wheels = [
 
 [[package]]
 name = "distlib"
-version = "0.4.0"
+version = "0.4.4"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/96/8e/709914eb2b5749865801041647dc7f4e6d00b549cfe88b65ca192995f07c/distlib-0.4.0.tar.gz", hash = "sha256:feec40075be03a04501a973d81f633735b4b69f98b05450592310c0f401a4e0d", size = 614605, upload-time = "2025-07-17T16:52:00.465Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/68/bc/d36966de7304047a1001a7559fbf266c464bb5d8cc85464536ef8c9bcc32/distlib-0.4.4.tar.gz", hash = "sha256:ca4175b4ac7f71223cc30ed7248c45d2b38c2439d8ee6e498ab67ed63cf3508d", size = 621304, upload-time = "2026-10-16T13:56:34.203Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/33/6b/e0547afaf41bf2c42e52430072fa5658766e3d65bd4b03a563d1b6336f57/distlib-0.4.0-py2.py3-none-any.whl", hash = "sha256:9659f7d87e46584a30b5780e43ac7a2143098441670ff0a49d5f9034c54a6c16", size = 469047, upload-time = "2025-07-17T16:51:58.613Z" },
+    { url = "https://files.pythonhosted.org/packages/c1/2b/238f02a4927fa2e27aa995371d240a468b52e42eae44a678434aff736b38/distlib-0.4.4-py2.py3-none-any.whl", hash = "sha256:cf09d55b1e85a89576b036aeb71550bfd68320f3f21761ca329eadadad918638", size = 472099, upload-time = "2026-10-16T13:56:32.053Z" },
 ]
 
 [[package]]
@@ -629,11 +629,11 @@ wheels = [
 
 [[package]]
 name = "filelock"
-version = "3.25.2"
+version = "4.3.1"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/94/b8/00651a0f559862f3bb7d6f7477b192afe3f583cc5e26403b44e59a55ab34/filelock-3.25.2.tar.gz", hash = "sha256:b64ece2b38f4ca29dd3e810287aa8c48182bbecd1ae6e9ae126c9b35f1382694", size = 40480, upload-time = "2026-03-11T20:45:38.487Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/e6/86/a5b9ec254b90efb180e390e31a4fa50a93b714d6e4174fa9a4ee25607159/filelock-4.3.1.tar.gz", hash = "sha256:4c5ee627c401f1863ac6a0de9a14a28d3bb5f8c730b45e2fd6e5dbc79cf34b9e", size = 742330, upload-time = "2026-11-23T18:01:13.656Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a4/a5/842ae8f0c08b61d6484b52f99a03510a3a72d23141942d216ebe81fefbce/filelock-3.25.2-py3-none-any.whl", hash = "sha256:ca8afb0da15f229774c9ad1b455ed96e85a81373065fb10446672f64444ddf70", size = 26759, upload-time = "2026-03-11T20:45:37.437Z" },
+    { url = "https://files.pythonhosted.org/packages/53/7b/678c8fbd372ff96375ac0bbdd20b78f20ef8ba6ca5966c49548fa5886557/filelock-4.3.1-py3-none-any.whl", hash = "sha256:79e43df8e9fe509cd83a3899a7c186c8077cbbe4d200a1ed3705c2f3bb6bc487", size = 244559, upload-time = "2026-11-23T18:01:12.261Z" },
 ]
 
 [[package]]
@@ -851,98 +851,99 @@ wheels = [
 
 [[package]]
 name = "index-toml"
-version = "0.3.0"
+version = "0.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "index-toml-cli" },
     { name = "index-toml-core" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/2d/aa/b91bd007826a92af62aefb032889ea67b62509cb27f3904c6da3cf0b7851/index_toml-0.3.0.tar.gz", hash = "sha256:fcb1c1c9d2b17b5d3c27dad6798abcae1f055b9eb149fbf76b1030bf35afb320", size = 1823, upload-time = "2026-11-14T11:54:24.237Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ee/fc/fd503822369c127cccd1cf62e066676ba4abc4631d6193e4f2e0c62aa678/index_toml-0.3.1.tar.gz", hash = "sha256:8242a51ff3caebc7d7170bfbe620acb9e6ac666e0136bb6bde5e7f1947e7eecd", size = 1823, upload-time = "2026-11-24T04:31:01.161Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e2/02/22790e9ce02e5c3c61db8a843546942b32946f5b34e64dc108d2564904d3/index_toml-0.3.0-py3-none-any.whl", hash = "sha256:9fdb34d95c98eb4f67672e11a6926aca98affd06d8fadebdab1d1e97291dc14a", size = 2505, upload-time = "2026-11-14T11:54:23.288Z" },
+    { url = "https://files.pythonhosted.org/packages/cc/e0/fb74ec21ed0173b3bfd510767bce8f9c0e125a6b9cdbda3749440ff60a62/index_toml-0.3.1-py3-none-any.whl", hash = "sha256:dbd2b06df33ea49f67bb6589f9e6089537d2cee8c840dafb5055293788fcf9c4", size = 2506, upload-time = "2026-11-24T04:30:59.757Z" },
 ]
 
 [[package]]
 name = "index-toml-adapter-cargo"
-version = "0.3.0"
+version = "0.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "index-toml-contracts" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/4a/02/6e9a95a83d5dab5ca3068f36959021d4def71dc1557700e5891e55e9e057/index_toml_adapter_cargo-0.3.0.tar.gz", hash = "sha256:3d2466e629f9bbc97ba5e289ca32735df55bd625de8d1d8b4c363885b0421c87", size = 2450, upload-time = "2026-11-14T11:50:30.848Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ef/56/22dbf29195b1bf2f4bfa584406593f6f4f62288cae03fd62e8b8f1d31f8c/index_toml_adapter_cargo-0.3.1.tar.gz", hash = "sha256:6b8d43c7573262c4f493140713f0325337c5f69ec3652b69bfb7f0e196fa5416", size = 2451, upload-time = "2026-11-24T04:26:45.06Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/77/a4/57b690254ec3cd73ec36c5c6b9b8f11c597e483bc3f0b58234159fdbe96d/index_toml_adapter_cargo-0.3.0-py3-none-any.whl", hash = "sha256:9cb15c4073b9086f3396079954bb272e271104b3faaed2733c452d028437d068", size = 3170, upload-time = "2026-11-14T11:50:29.851Z" },
+    { url = "https://files.pythonhosted.org/packages/37/3a/ba9680f7211800a7e10f58b6df98fcea74bac30557b3faa1ab94b81849c9/index_toml_adapter_cargo-0.3.1-py3-none-any.whl", hash = "sha256:f099ff569e711ca805af5d89970804a966a5635c2275fb2d777a9cc661a0e845", size = 3171, upload-time = "2026-11-24T04:26:44.225Z" },
 ]
 
 [[package]]
 name = "index-toml-adapter-pnpm"
-version = "0.3.0"
+version = "0.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "index-toml-contracts" },
     { name = "pyyaml" },
     { name = "wcmatch" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/14/13/add74aa796f8f385140a0cdc87808439770bbceb35388ee64251a25ae775/index_toml_adapter_pnpm-0.3.0.tar.gz", hash = "sha256:bbbe7d9611e4f5e3cc57f994b784698d1833a04460cf510f5213abd48dc9c238", size = 2564, upload-time = "2026-11-14T11:51:49.136Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/c3/e3/328dae95af80ad80379466101c9f1f81ac6e1a1943dc996126e491f0c527/index_toml_adapter_pnpm-0.3.1.tar.gz", hash = "sha256:5e97918f95b7a37fcecddb5fb584c0db14fa32dd4ee92952ad0f256d1660e88a", size = 2566, upload-time = "2026-11-24T04:28:21.917Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/38/84/dcd2cd94d9c9964e67bc7021dff01c49fbe8098dc72cb8a809ae1dea806a/index_toml_adapter_pnpm-0.3.0-py3-none-any.whl", hash = "sha256:5fda727563c93fe2505b53ba7ecaaa3e6818ab6553ce50da4770c04891c182d2", size = 3259, upload-time = "2026-11-14T11:51:48.335Z" },
+    { url = "https://files.pythonhosted.org/packages/47/62/3bbb044998a560f02c71bb8f9de10924da9480ae42d3bba551c1a6213767/index_toml_adapter_pnpm-0.3.1-py3-none-any.whl", hash = "sha256:3bb23b0fe00d32f99c61bf4b9b900c43328afa26bf76ab9b01f78b943a7d7901", size = 3258, upload-time = "2026-11-24T04:28:21.008Z" },
 ]
 
 [[package]]
 name = "index-toml-adapter-python"
-version = "0.3.0"
+version = "0.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "index-toml-contracts" },
-    { name = "packaging" },
+    { name = "packaging", version = "26.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "packaging", version = "26.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/90/2c/f5e34aea02c8b7085cd3b41993209b3cef5be45c3de280bfde77e16e8910/index_toml_adapter_python-0.3.0.tar.gz", hash = "sha256:45666131d937cbba2aca00a79ce740a2e68dd31b18bb8cca2a5f7a120671def0", size = 3014, upload-time = "2026-11-14T11:49:13.626Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ee/64/8a280dea36a74061ec13fee027acd74af19ecb62341092c3bb81a7771e7f/index_toml_adapter_python-0.3.1.tar.gz", hash = "sha256:05fc9ac8ec3ec7ce248068ece8450cf7620384f6c81999597f1b74727ecd48c3", size = 3013, upload-time = "2026-11-24T04:25:12.64Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/82/c2/dd24d5d0372d13f55724bc784f23968fcf4324a56a9d0e2a79400e6c232f/index_toml_adapter_python-0.3.0-py3-none-any.whl", hash = "sha256:6130325840a1a0a1523ffd621416a6c7ae4706257a0bda36b4f463321f0afb5a", size = 3734, upload-time = "2026-11-14T11:49:12.889Z" },
+    { url = "https://files.pythonhosted.org/packages/7f/d7/2d95063452a45e0f08cf6bbf0cb939d210274f4676afb308ea10d0a1a34b/index_toml_adapter_python-0.3.1-py3-none-any.whl", hash = "sha256:eaac580559f67a4b62a14caa06aeed385d658bbde1912784cd0678b7fdcf5140", size = 3735, upload-time = "2026-11-24T04:25:11.006Z" },
 ]
 
 [[package]]
 name = "index-toml-cli"
-version = "0.3.0"
+version = "0.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "filelock" },
     { name = "index-toml-adapter-cargo" },
     { name = "index-toml-adapter-pnpm" },
     { name = "index-toml-adapter-python" },
     { name = "index-toml-core" },
+    { name = "portalocker" },
     { name = "tomlkit" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/0c/6a/a5978e4635a4592b3c83fcba1671d5e2037a29c2d46fc8ab2a0fef761bb0/index_toml_cli-0.3.0.tar.gz", hash = "sha256:bec2dfd43bc23d60ca62634a76b40ae8368938ee8989eeed8fcd7650ce01c1ca", size = 3081, upload-time = "2026-11-14T11:53:07.244Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/19/4b/d8d49a72140920f076d1e0e0333a510c437ccc041ca1763f0695e2f24631/index_toml_cli-0.3.1.tar.gz", hash = "sha256:d655fb3071c1972772096c5d06d4fd83ce0492ab01b1e14f486dd9ea0ce58de5", size = 3082, upload-time = "2026-11-24T04:29:31.957Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/69/93/b78b5dbaa7acffbac326b246db74a664f70a639b09665654872f625c363d/index_toml_cli-0.3.0-py3-none-any.whl", hash = "sha256:6c6da009279bedce4fdd5309863b8bd378cf2b64e9ea1b65126ac69ccc528c7d", size = 4037, upload-time = "2026-11-14T11:53:06.472Z" },
+    { url = "https://files.pythonhosted.org/packages/a9/b1/fb2d5bdd6d6c5c5fe56b0c88eb56db687eca82378c65aabad04f8e922d70/index_toml_cli-0.3.1-py3-none-any.whl", hash = "sha256:3d67808ee448dd3471461d95f71f8b23a132d0a5ee4327ad8747a1f466b216b5", size = 4050, upload-time = "2026-11-24T04:29:30.647Z" },
 ]
 
 [[package]]
 name = "index-toml-contracts"
-version = "0.3.0"
+version = "0.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "jsonschema" },
     { name = "tomli", marker = "python_full_version < '3.11'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/30/2a/ab36bcc7dfaa2bc3672f8284550cf46e1c7371d172c0c6e954bbfab50608/index_toml_contracts-0.3.0.tar.gz", hash = "sha256:eb47dced712e70bce644ed6fad822b5c036d7287c1d47d0fde09e1d40b33f185", size = 4649, upload-time = "2026-11-14T11:46:36.343Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/95/67/2fdba67108c1a8d81231168c0983e58371381fdb0d458aa59f5df67cae8e/index_toml_contracts-0.3.1.tar.gz", hash = "sha256:aca9f6b3a218b8ce5cf2ac9332e4f80f8e753ec89dacdc5d23ddf54a40f4e43a", size = 4648, upload-time = "2026-11-24T04:22:29.468Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/10/ba/25179c41bc8644f216c49d19f3152ef65db576f553525bdc5516daf92cc1/index_toml_contracts-0.3.0-py3-none-any.whl", hash = "sha256:124360bc396e854a19d9770d31932d2adc7d222d434bc79b36a88a21e1ce3fe3", size = 6089, upload-time = "2026-11-14T11:46:35.375Z" },
+    { url = "https://files.pythonhosted.org/packages/a3/cc/5069fa5ba46c11066cc0367df1e80d8b3cbd2cc0d15c9b68025b98fde27a/index_toml_contracts-0.3.1-py3-none-any.whl", hash = "sha256:856d5f70481b75ac435334098d348d7b37f5c35fb14da70d43029f9756f27ff5", size = 6090, upload-time = "2026-11-24T04:22:28.589Z" },
 ]
 
 [[package]]
 name = "index-toml-core"
-version = "0.3.0"
+version = "0.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "filelock" },
     { name = "index-toml-contracts" },
+    { name = "portalocker" },
     { name = "tomlkit" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/57/e3/23c378d37949e198ce276b9daacb6557b765bbe0def44e5a12a9a3340075/index_toml_core-0.3.0.tar.gz", hash = "sha256:4c637945ca7833ce2b0fab96c924f8c1a4a7e43d5cb948bee97598d5ae58da2a", size = 5515, upload-time = "2026-11-14T11:47:54.736Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/3b/83/345bbbe19e24803ae3d99a09c3ed61a914422cd455f5308ce748314dd79a/index_toml_core-0.3.1.tar.gz", hash = "sha256:5003c0e44dce76c6ab68a0ea85b18f906ceaac6249948e654f3e9d47a11dd01c", size = 5539, upload-time = "2026-11-24T04:23:49.711Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/6d/ca/c63c4db00b88a8b8eceb6784e4a14e848f7113e202475dddd49e90c42c8f/index_toml_core-0.3.0-py3-none-any.whl", hash = "sha256:3548ee077081e3ffd26d7533132d2e81c4e633c1c18eab49ee043c424fc6eae2", size = 6332, upload-time = "2026-11-14T11:47:53.941Z" },
+    { url = "https://files.pythonhosted.org/packages/34/91/694c59a01ef94fd94ab87b56caa0b5112e907738d8afdbcc61a2d3cbfc7a/index_toml_core-0.3.1-py3-none-any.whl", hash = "sha256:44d9ee319042bf0f862ddacc8e646bab0e056c7e44e5ea8d3d70b87b49b18d41", size = 6362, upload-time = "2026-11-24T04:23:48.871Z" },
 ]
 
 [[package]]
@@ -1410,9 +1411,24 @@ wheels = [
 name = "packaging"
 version = "26.0"
 source = { registry = "https://pypi.org/simple" }
+resolution-markers = [
+    "python_full_version < '3.11'",
+]
 sdist = { url = "https://files.pythonhosted.org/packages/65/ee/299d360cdc32edc7d2cf530f3accf79c4fca01e96ffc950d8a52213bd8e4/packaging-26.0.tar.gz", hash = "sha256:00243ae351a257117b6a241061796684b084ed1c516a08c48a3f7e147a9d80b4", size = 143416, upload-time = "2026-01-21T20:50:39.064Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/b7/b9/c538f279a4e237a006a2c98387d081e9eb060d203d8ed34467cc0f0b9b53/packaging-26.0-py3-none-any.whl", hash = "sha256:b36f1fef9334a5588b4166f8bcd26a14e521f2b55e6b9de3aaa80d3ff7a37529", size = 74366, upload-time = "2026-01-21T20:50:37.788Z" },
+]
+
+[[package]]
+name = "packaging"
+version = "26.4"
+source = { registry = "https://pypi.org/simple" }
+resolution-markers = [
+    "python_full_version >= '3.11'",
+]
+sdist = { url = "https://files.pythonhosted.org/packages/c3/75/ffb1dc0ed12352139fb4ca0e3fde4325a23e3d0f3f40efe89717bc4f557b/packaging-26.4.tar.gz", hash = "sha256:c4b671c41ddb9bf26e543c37723610d28fb6bf7affc4da17cf048d419d2c062a", size = 355877, upload-time = "2026-11-23T21:44:11.152Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ba/7b/5504f91c9c2733f693d7759e50ede5d27119d4da7e5836c46d3b5ff81d56/packaging-26.4-py3-none-any.whl", hash = "sha256:81383611a09c1bc0b08b76e0fd5829d7c6824c65b27a6aee339da133f4233ea2", size = 140049, upload-time = "2026-11-23T21:44:09.531Z" },
 ]
 
 [[package]]
@@ -1431,6 +1447,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/f9/e2/3e91f31a7d2b083fe6ef3fa267035b518369d9511ffab804f839851d2779/pluggy-1.6.0.tar.gz", hash = "sha256:7dcc130b76258d33b90f61b658791dede3486c3e6bfb003ee5c9bfb396dd22f3", size = 69412, upload-time = "2025-05-15T12:30:07.975Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/54/20/4d324d65cc6d9205fabedc306948156824eb9f0ee1633355a8f7ec5c66bf/pluggy-1.6.0-py3-none-any.whl", hash = "sha256:e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746", size = 20538, upload-time = "2025-05-15T12:30:06.134Z" },
+]
+
+[[package]]
+name = "portalocker"
+version = "4.4.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/7f/d9/586fb0510fdfbd95a86f9d5c5046463aca41a55f6573d1a5a082a62e0acb/portalocker-4.4.2.tar.gz", hash = "sha256:7ac85bb2aa3c7873bf2ac72586fc6154afa4671ac786994a16617a6b7ccb3e5e", size = 310698, upload-time = "2026-10-28T00:24:58.214Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e8/43/bca094221a0f9f592fe1e982d090a92075aa302ecaa92c94cc6268a39b2c/portalocker-4.4.2-py3-none-any.whl", hash = "sha256:e661b91af34fc1806740f8e0e42990fe55cd85cbae55675ac48a400a9656a51b", size = 129702, upload-time = "2026-10-28T00:24:56.625Z" },
 ]
 
 [[package]]
@@ -1772,8 +1797,7 @@ name = "pyproject-api"
 version = "1.10.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "packaging" },
-    { name = "tomli", marker = "python_full_version < '3.11'" },
+    { name = "packaging", version = "26.4", source = { registry = "https://pypi.org/simple" } },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/45/7b/c0e1333b61d41c69e59e5366e727b18c4992688caf0de1be10b3e5265f6b/pyproject_api-1.10.0.tar.gz", hash = "sha256:40c6f2d82eebdc4afee61c773ed208c04c19db4c4a60d97f8d7be3ebc0bbb330", size = 22785, upload-time = "2025-10-09T19:12:27.21Z" }
 wheels = [
@@ -1788,7 +1812,8 @@ dependencies = [
     { name = "colorama", marker = "sys_platform == 'win32'" },
     { name = "exceptiongroup", marker = "python_full_version < '3.11'" },
     { name = "iniconfig" },
-    { name = "packaging" },
+    { name = "packaging", version = "26.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "packaging", version = "26.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "pluggy" },
     { name = "pygments" },
     { name = "tomli", marker = "python_full_version < '3.11'" },
@@ -1877,15 +1902,14 @@ wheels = [
 
 [[package]]
 name = "python-discovery"
-version = "1.2.2"
+version = "1.9.7"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "filelock" },
-    { name = "platformdirs" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/de/ef/3bae0e537cfe91e8431efcba4434463d2c5a65f5a89edd47c6cf2f03c55f/python_discovery-1.2.2.tar.gz", hash = "sha256:876e9c57139eb757cb5878cbdd9ae5379e5d96266c99ef731119e04fffe533bb", size = 58872, upload-time = "2026-04-07T17:28:49.249Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/0c/72/8e1d062fa1eed059b49a981394ab3ae26fffea6bbcffa4f7545aa2fb8c4f/python_discovery-1.9.7.tar.gz", hash = "sha256:cea89e8a8b86e19731c67f8393f34eb1a2f96c9f97f3e406929a99c646a2358d", size = 148580, upload-time = "2026-11-23T18:24:40.767Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d8/db/795879cc3ddfe338599bddea6388cc5100b088db0a4caf6e6c1af1c27e04/python_discovery-1.2.2-py3-none-any.whl", hash = "sha256:e1ae95d9af875e78f15e19aed0c6137ab1bb49c200f21f5061786490c9585c7a", size = 31894, upload-time = "2026-04-07T17:28:48.09Z" },
+    { url = "https://files.pythonhosted.org/packages/6c/47/d4852249f59b263ff1bc66456c6ca13dfd5d67900ce72c0418389b33db5d/python_discovery-1.9.7-py3-none-any.whl", hash = "sha256:3add4a4dfc794f8e4a8c0fa0d9d6563172196d68709071a627e89fc36af39177", size = 99275, upload-time = "2026-11-23T18:24:39.415Z" },
 ]
 
 [[package]]
@@ -1977,7 +2001,7 @@ source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "jsonschema" },
     { name = "markdown-it-py" },
-    { name = "packaging" },
+    { name = "packaging", version = "26.4", source = { registry = "https://pypi.org/simple" } },
     { name = "pytest" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/0d/19/ab44248e15be5adf30a9da601cafb81c9ffc65bcaef6536bf96ae83eea01/readme_standards-0.1.3.tar.gz", hash = "sha256:e2e86a82c023f048abf8a046d0cdd1969dad06c88e9bbd537752de0507ac62d4", size = 109265, upload-time = "2026-11-23T09:43:31.328Z" }
@@ -12385,6 +12409,7 @@ uvicorn = [
 
 [package.dev-dependencies]
 dev = [
+    { name = "filelock", marker = "python_full_version >= '3.11'" },
     { name = "flake8" },
     { name = "index-toml" },
     { name = "pytest" },
@@ -12397,7 +12422,7 @@ dev = [
     { name = "requests" },
     { name = "ruff" },
     { name = "ssot-registry" },
-    { name = "tox" },
+    { name = "tox", marker = "python_full_version >= '3.11'" },
 ]
 
 [package.metadata]
@@ -12922,8 +12947,9 @@ provides-extras = ["bimi", "test", "examples", "postgres", "sqlite", "uvicorn", 
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "filelock", marker = "python_full_version >= '3.11'", specifier = ">=4.2.1,<5" },
     { name = "flake8", specifier = ">=7.0" },
-    { name = "index-toml", specifier = "==0.3.0" },
+    { name = "index-toml", specifier = "==0.3.1" },
     { name = "pytest", specifier = ">=8.0" },
     { name = "pytest-asyncio", specifier = ">=0.24.0" },
     { name = "pytest-benchmark", specifier = ">=4.0.0" },
@@ -12934,7 +12960,7 @@ dev = [
     { name = "requests", specifier = ">=2.32.3" },
     { name = "ruff", specifier = ">=0.9.9" },
     { name = "ssot-registry", specifier = ">=0.2.8" },
-    { name = "tox", specifier = ">=4.23.2" },
+    { name = "tox", marker = "python_full_version >= '3.11'", specifier = ">=4.23.2" },
 ]
 
 [[package]]
@@ -13075,7 +13101,8 @@ name = "tigrbl-migrations"
 version = "0.4.5.dev6"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "packaging" },
+    { name = "packaging", version = "26.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "packaging", version = "26.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "tomli", marker = "python_full_version < '3.11'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/0d/5d/c36b21638078d41e0bba0b5c985e9c2b3d6aea1b07c99a8cbe7668d7ffb3/tigrbl_migrations-0.4.5.dev6.tar.gz", hash = "sha256:c6dc500bcf572200dea6fa0d1d9f739fe5d3182ddfa1b9e00bf0baa0840adc64", size = 17138, upload-time = "2026-10-29T22:07:36.655Z" }
@@ -13270,14 +13297,12 @@ dependencies = [
     { name = "cachetools" },
     { name = "colorama" },
     { name = "filelock" },
-    { name = "packaging" },
+    { name = "packaging", version = "26.4", source = { registry = "https://pypi.org/simple" } },
     { name = "platformdirs" },
     { name = "pluggy" },
     { name = "pyproject-api" },
     { name = "python-discovery" },
-    { name = "tomli", marker = "python_full_version < '3.11'" },
     { name = "tomli-w" },
-    { name = "typing-extensions", marker = "python_full_version < '3.11'" },
     { name = "virtualenv" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/59/6e/ad613e2516a653dc6591186aab726d84d769c6352c0c3dc8fc8ed213168b/tox-4.52.0.tar.gz", hash = "sha256:6054abf5c8b61d58776fbec991f9bf0d34bb883862beb93d2fe55601ef3977c9", size = 273077, upload-time = "2026-03-30T20:33:26.958Z" }
@@ -13386,18 +13411,18 @@ wheels = [
 
 [[package]]
 name = "virtualenv"
-version = "21.2.0"
+version = "21.15.13"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "distlib" },
     { name = "filelock" },
+    { name = "packaging", version = "26.4", source = { registry = "https://pypi.org/simple" } },
     { name = "platformdirs" },
     { name = "python-discovery" },
-    { name = "typing-extensions", marker = "python_full_version < '3.11'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/aa/92/58199fe10049f9703c2666e809c4f686c54ef0a68b0f6afccf518c0b1eb9/virtualenv-21.2.0.tar.gz", hash = "sha256:1720dc3a62ef5b443092e3f499228599045d7fea4c79199770499df8becf9098", size = 5840618, upload-time = "2026-03-09T17:24:38.013Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/a1/89/e84f19b1a87f70637694494018fdedb395aed90da17872d31e1eb2314d41/virtualenv-21.15.13.tar.gz", hash = "sha256:f3ad23551343034e613f9c4d8279f282958a19729f5fc2bcb758afcf95fe3a01", size = 5735175, upload-time = "2026-11-23T19:54:07.74Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c6/59/7d02447a55b2e55755011a647479041bc92a82e143f96a8195cb33bd0a1c/virtualenv-21.2.0-py3-none-any.whl", hash = "sha256:1bd755b504931164a5a496d217c014d098426cddc79363ad66ac78125f9d908f", size = 5825084, upload-time = "2026-03-09T17:24:35.378Z" },
+    { url = "https://files.pythonhosted.org/packages/0f/d8/bc11d9ca589a030f9af2dd99f8329e250a9072d0e1d7dcaa4c291ed468ea/virtualenv-21.15.13-py3-none-any.whl", hash = "sha256:2744de3b2ba59027ed7eb87c773d4907f56287f4db23b459e8172dcdb41c208d", size = 5750972, upload-time = "2026-11-23T19:54:05.968Z" },
 ]
 
 [[package]]

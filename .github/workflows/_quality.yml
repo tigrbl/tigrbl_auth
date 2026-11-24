@@ -55,7 +55,7 @@ jobs:
           python-version: ${{ inputs.python-version }}
       - name: Install toolchain
         shell: bash
-        run: python -m pip install --upgrade pip tox uv
+        run: python -m pip install --upgrade pip uv
       - name: Verify canonical registries
         shell: bash
         run: uv run python scripts/generate_claim_registries.py --verify
@@ -77,7 +77,7 @@ jobs:
         run: uv run python scripts/validate_layer_boundaries.py
       - name: Run devtest lane
         shell: bash
-        run: tox -e py311-devtest
+        run: uv run --locked --only-group dev --python 3.11 tox run -e py311-devtest
 
   codeql:
     if: ${{ inputs.run-codeql }}
