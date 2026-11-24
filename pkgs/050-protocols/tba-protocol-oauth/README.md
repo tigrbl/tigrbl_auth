@@ -150,8 +150,6 @@ GNAP consumers can install `tba-protocol-gnap` separately and import
 `GnapRequest` or `parse_gnap_request` from `tba_protocol_gnap`. Update callers of
 the former `tba_protocol_oauth.standards.gnap` import to use that path.
 
-### Dynamic client registration scope ceilings
-
 HTTP adapters can call `resolve_client_registration_scopes` with the raw
 registration `scope` string, or `None` when the field is omitted. Supply the
 server's supported scopes and a default selected by trusted server configuration.
