@@ -3440,6 +3440,15 @@ ecosystem = "pypi"
 dependencies = ["tba-concrete-capability", "tba-contracts-identity"]
 
 [[packages]]
+id = "tba-capability-mcp-authorization"
+name = "tba-capability-mcp-authorization"
+path = "pkgs/040-capabilities/tba-capability-mcp-authorization"
+layer = "040-capabilities"
+order = 0
+ecosystem = "pypi"
+dependencies = ["tba-concrete-capability", "tba-concrete-mcp-delegation", "tba-contracts-identity"]
+
+[[packages]]
 id = "tba-capability-mfa-challenge"
 name = "tba-capability-mfa-challenge"
 path = "pkgs/040-capabilities/tba-capability-mfa-challenge"
