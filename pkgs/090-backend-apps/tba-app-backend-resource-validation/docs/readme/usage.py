@@ -1,0 +1,3 @@
+from tba_app_backend_resource_validation import ResourceValidationBackendAppContract
+
+assert callable(ResourceValidationBackendAppContract)

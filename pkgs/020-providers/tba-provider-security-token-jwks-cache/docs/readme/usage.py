@@ -1,0 +1,3 @@
+from tba_provider_security_token_jwks_cache import JWKSCache
+
+assert callable(JWKSCache)

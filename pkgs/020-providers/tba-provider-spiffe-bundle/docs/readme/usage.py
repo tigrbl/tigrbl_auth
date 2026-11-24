@@ -1,0 +1,3 @@
+from tba_provider_spiffe_bundle import VersionedSpiffeBundleProvider
+
+assert callable(VersionedSpiffeBundleProvider)

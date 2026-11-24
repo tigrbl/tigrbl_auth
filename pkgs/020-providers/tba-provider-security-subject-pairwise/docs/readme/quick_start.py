@@ -1,0 +1,3 @@
+from tba_provider_security_subject_pairwise import PairwiseSubjectProvider
+
+assert callable(PairwiseSubjectProvider)

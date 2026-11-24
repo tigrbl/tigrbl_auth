@@ -1,0 +1,3 @@
+from tba_concrete_dpop_confirmation_binding import DpopBindingValidator
+
+assert callable(DpopBindingValidator)

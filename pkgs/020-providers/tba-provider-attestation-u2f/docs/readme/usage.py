@@ -1,0 +1,3 @@
+from tba_provider_attestation_u2f import U2fAttestationVerifier
+
+assert callable(U2fAttestationVerifier)

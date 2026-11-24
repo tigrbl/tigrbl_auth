@@ -1,0 +1,3 @@
+from tba_app_backend_tenant_administration import TenantAdminBackendAppContract
+
+assert callable(TenantAdminBackendAppContract)

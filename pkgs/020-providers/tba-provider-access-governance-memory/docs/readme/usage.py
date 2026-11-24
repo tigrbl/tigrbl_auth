@@ -1,0 +1,3 @@
+from tba_provider_access_governance_memory import AccessReviewCampaign
+
+assert callable(AccessReviewCampaign)

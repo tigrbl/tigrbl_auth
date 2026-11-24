@@ -1,0 +1,3 @@
+from tba_provider_secret_hashing_bcrypt import BcryptSecretHasher
+
+assert callable(BcryptSecretHasher)

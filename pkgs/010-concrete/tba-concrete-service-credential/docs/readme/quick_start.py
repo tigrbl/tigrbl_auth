@@ -1,0 +1,3 @@
+from tba_concrete_service_credential import ServiceCredential
+
+assert callable(ServiceCredential)

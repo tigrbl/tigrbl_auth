@@ -1,0 +1,3 @@
+from tba_provider_security_mtls_cnf_binding_validator import MtlsCnfBindingValidator
+
+assert callable(MtlsCnfBindingValidator)

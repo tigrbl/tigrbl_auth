@@ -1,0 +1,3 @@
+from tba_provider_security_proof_dpop import DpopBindingValidator
+
+assert callable(DpopBindingValidator)

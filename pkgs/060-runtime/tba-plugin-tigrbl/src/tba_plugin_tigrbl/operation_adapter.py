@@ -48,13 +48,15 @@ class OperationAuthorizationAdapter:
     load_policy: Callable[..., Any]
 
     def install(self, app: Any) -> None:
-        """Bind the adapter to an assembled Tigrbl app."""
+        """Register the protected-operation dependency in Tigrbl's SECURITY phase."""
         from tigrbl import HTTPException
 
         async def authorize(operation: Any, ctx: Any) -> bool:
-            identity = self.authenticate(ctx)
-            if isawaitable(identity):
-                identity = await identity
+            identity = ctx.get("auth_context")
+            if not isinstance(identity, OperationPrincipal):
+                identity = self.authenticate(ctx)
+                if isawaitable(identity):
+                    identity = await identity
             if not isinstance(identity, OperationPrincipal) or identity.audience != self.audience:
                 raise HTTPException(status_code=401, detail="Authentication required")
             if identity.actions is not None and operation.action_id not in identity.actions:
@@ -94,4 +96,4 @@ class OperationAuthorizationAdapter:
             ctx["operation_principal"] = identity
             return True
 
-        app.set_operation_authorizer(authorize)
+        app.set_auth(operation_authorizer=authorize)

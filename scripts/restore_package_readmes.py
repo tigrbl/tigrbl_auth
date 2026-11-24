@@ -442,6 +442,16 @@ def main() -> None:
     for package in inventory:
         readme = package.folder / "README.md"
         original = readme.read_text(encoding="utf-8")
+        if package.python and package.document.get("tool", {}).get("readme_standards"):
+            from readme_standards.config import load_package
+            from readme_standards.render import repair
+
+            text = repair(original, load_package(package.folder))
+            readme.write_text(text, encoding="utf-8")
+            report["packages"].append(dict(name=package.name, path=package.relative,
+                                           recovered_sections=[], added_sections=[],
+                                           preserved_extra_sections=[], changed=text != original))
+            continue
         preamble, current, errors = split_sections(original)
         if errors:
             raise ValueError(f"{readme}: {errors}")

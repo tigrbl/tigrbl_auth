@@ -1,0 +1,3 @@
+from tba_concrete_wit import WorkloadIdentityToken
+
+assert callable(WorkloadIdentityToken)

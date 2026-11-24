@@ -1,16 +1,14 @@
+# Reusable CI policy is pinned to a reviewed immutable revision.
+# The checkout still tests the pull-request merge revision.
+# Update these pins when changing workflow definitions.
 name: pr
-
 on:
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
-
 permissions:
   contents: read
-
 concurrency:
-  group: pr-${{ github.event.pull_request.number }}
+  group: pull-request-ci-${{ github.event.pull_request.number }}
   cancel-in-progress: true
-
 jobs:
   tigrbl-operation-authorization:
     runs-on: ubuntu-latest
@@ -21,7 +19,7 @@ jobs:
       - uses: actions/checkout@v6
         with:
           repository: tigrbl/tigrbl
-          ref: bb4736e2729ac81df513d747022f0badc3ea9109
+          ref: e7411def3fa91479ec101e3e02e58476c73ed3bd
           path: .interop/tigrbl
           persist-credentials: false
       - uses: astral-sh/setup-uv@v6
@@ -32,12 +30,12 @@ jobs:
         run: |
           set -euo pipefail
           export PYTHONPATH="$(printf '%s:' "$PWD"/.interop/tigrbl/pkgs/*/*)"
-          uv run --locked --extra test python -c 'from tigrbl import OperationSecurity'
+          uv run --locked --extra test python -c 'from inspect import signature; from tigrbl import OperationSecurity, TigrblApp; assert "operation_authorizer" in signature(TigrblApp.set_auth).parameters'
           uv run --locked --extra test pytest --noconftest -q \
             pkgs/120-tests/tba-tests-runtime/tests/unit/test_tigrbl_operation_adapter.py
 
   quality:
-    uses: ./.github/workflows/_quality.yml
+    uses: tigrbl/tigrbl_auth/.github/workflows/_quality.yml@12ec516cfdd82546de4ce504e7672ab5062deac9
     permissions:
       actions: read
       contents: read
@@ -47,11 +45,16 @@ jobs:
       python-version: '3.11'
       run-dependency-review: true
       run-codeql: true
-
-  contracts:
-    uses: ./.github/workflows/_contract-build.yml
-    permissions:
-      contents: read
+  contract-build:
+    uses: tigrbl/tigrbl_auth/.github/workflows/_contract-build.yml@c48235311f1a4ec1b81543f3838c981943b1dc0e
     with:
       python-version: '3.11'
       artifact-name: generated-contracts
+  package-python-matrix:
+    uses: tigrbl/tigrbl_auth/.github/workflows/package-python-matrix.yml@c48235311f1a4ec1b81543f3838c981943b1dc0e
+  package-node-matrix:
+    uses: tigrbl/tigrbl_auth/.github/workflows/package-node-matrix.yml@c48235311f1a4ec1b81543f3838c981943b1dc0e
+  wimse-matrix-validation:
+    uses: tigrbl/tigrbl_auth/.github/workflows/wimse-matrix-validation.yml@c48235311f1a4ec1b81543f3838c981943b1dc0e
+  readme-standards:
+    uses: tigrbl/tigrbl_auth/.github/workflows/readme-standards.yml@12ec516cfdd82546de4ce504e7672ab5062deac9

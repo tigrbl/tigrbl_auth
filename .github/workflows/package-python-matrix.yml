@@ -1,20 +1,10 @@
 name: package-python-matrix
 
 on:
-  pull_request:
-    paths:
-      - ".github/workflows/package-python-matrix.yml"
-      - "pkgs/**"
-      - "scripts/monorepo_release.py"
-      - "pkgs/120-tests/tba-tests-release/tests/unit/test_monorepo_release.py"
+  workflow_call:
   push:
     branches:
       - master
-    paths:
-      - ".github/workflows/package-python-matrix.yml"
-      - "pkgs/**"
-      - "scripts/monorepo_release.py"
-      - "pkgs/120-tests/tba-tests-release/tests/unit/test_monorepo_release.py"
   workflow_dispatch:
     inputs:
       package:
@@ -43,7 +33,7 @@ concurrency:
 
 jobs:
   workload-suites:
-    runs-on: ubuntu-latest
+    runs-on: ${{ (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/docs/readme-standards-20261119' || (github.event_name == 'pull_request' && github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository)) && fromJSON('["sad-lewin","shortlived","testing","trusted-public-ci","Linux","X64"]') || 'ubuntu-24.04' }}
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
@@ -62,7 +52,7 @@ jobs:
           pkgs/120-tests/tba-tests-workload-credential-conformance/tests
 
   jose-interop:
-    runs-on: ubuntu-latest
+    runs-on: ${{ (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/docs/readme-standards-20261119' || (github.event_name == 'pull_request' && github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository)) && fromJSON('["sad-lewin","shortlived","testing","trusted-public-ci","Linux","X64"]') || 'ubuntu-24.04' }}
     steps:
       - uses: actions/checkout@v6
       - uses: actions/checkout@v6
@@ -81,15 +71,25 @@ jobs:
           --tba-suite tba-tests-interop-jose --jose-interop-mode source
 
   discover-package-matrix:
-    runs-on: ubuntu-latest
+    runs-on: ${{ (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/docs/readme-standards-20261119' || (github.event_name == 'pull_request' && github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository)) && fromJSON('["sad-lewin","shortlived","testing","trusted-public-ci","Linux","X64"]') || 'ubuntu-24.04' }}
     outputs:
       matrix: ${{ steps.matrix.outputs.matrix }}
       count: ${{ steps.matrix.outputs.count }}
     steps:
       - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v6
         with:
           python-version: "3.12"
+      - name: Install Python for the shared metadata action
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install Node for the discovery and metadata actions
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
       - name: Discover split Python packages
         uses: cobycloud/actions/actions/monorepo-discover@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
@@ -108,43 +108,16 @@ jobs:
           report-md: reports/package-metadata.md
       - name: Build package x Python matrix
         id: matrix
-        shell: bash
-        run: |
-          set -euo pipefail
-          args=(--package "${{ inputs['package'] || 'all' }}")
-          if [[ "${{ inputs['python-version'] || 'all' }}" != "all" ]]; then
-            args+=(--python-version "${{ inputs['python-version'] }}")
-          fi
-          GITHUB_OUTPUT="$RUNNER_TEMP/package-cells.out" \
-            python scripts/monorepo_release.py test-matrix "${args[@]}"
-          python - "$RUNNER_TEMP/package-cells.out" "$RUNNER_TEMP/package-test-plan.json" <<'PY'
-          import json
-          import math
-          import os
-          import sys
-          from collections import defaultdict
-          from pathlib import Path
-
-          raw = Path(sys.argv[1]).read_text(encoding="utf-8")
-          cells = json.loads(next(line[7:] for line in raw.splitlines() if line.startswith("matrix=")))
-          by_python = defaultdict(list)
-          for cell in cells:
-              by_python[cell["python_version"]].append(
-                  {field: cell[field] for field in ("name", "path", "cell_id")}
-              )
-          batch_size = max(20, math.ceil(len(cells) / 250))
-          plan = []
-          matrix = []
-          for version, group in sorted(by_python.items()):
-              for offset in range(0, len(group), batch_size):
-                  matrix.append({"batch": len(plan), "python": version})
-                  plan.append(group[offset:offset + batch_size])
-          assert len(matrix) <= 256
-          Path(sys.argv[2]).write_text(json.dumps(plan), encoding="utf-8")
-          with Path(os.environ["GITHUB_OUTPUT"]).open("a", encoding="utf-8") as output:
-              print(f"matrix={json.dumps(matrix, separators=(',', ':'))}", file=output)
-              print(f"count={len(matrix)}", file=output)
-          PY
+        env:
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          CI_PACKAGE: ${{ inputs.package || 'all' }}
+          CI_VERSION: ${{ inputs['python-version'] || 'all' }}
+        run: >-
+          uv run --no-project python scripts/package_ci.py python
+          --base "$PR_BASE" --package "$CI_PACKAGE" --version "$CI_VERSION"
+          --plan "$RUNNER_TEMP/package-test-plan.json"
+      - name: Verify affected package selection
+        run: uv run --no-project python scripts/test_package_ci.py
       - name: Upload package test plan
         if: ${{ steps.matrix.outputs.count != '0' }}
         uses: actions/upload-artifact@v7
@@ -156,7 +129,7 @@ jobs:
   isolated-package-tests:
     needs: discover-package-matrix
     if: ${{ needs.discover-package-matrix.outputs.count != '0' }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/docs/readme-standards-20261119' || (github.event_name == 'pull_request' && github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository)) && fromJSON('["sad-lewin","shortlived","testing","trusted-public-ci","Linux","X64"]') || 'ubuntu-24.04' }}
     strategy:
       fail-fast: false
       matrix:

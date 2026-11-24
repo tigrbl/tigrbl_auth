@@ -1,0 +1,3 @@
+from tba_provider_replay_memory import MemoryReplayProvider
+
+assert callable(MemoryReplayProvider)

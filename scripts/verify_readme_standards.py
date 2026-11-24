@@ -34,6 +34,18 @@ def verify(root: Path = ROOT) -> dict:
             failures.append(f"{package.relative}: missing README.md")
             continue
         text = readme.read_text(encoding="utf-8")
+        if package.python and package.document.get("tool", {}).get("readme_standards"):
+            from readme_standards.check import check_package
+            from readme_standards.document import parse
+
+            errors = [str(issue) for issue in check_package(package.folder)]
+            parsed, _ = parse(text)
+            titles = [heading.title for heading in parsed if heading.level > 1]
+            section_counts.update(titles)
+            records.append(dict(name=package.name, path=package.relative,
+                                policy="package-guide-v1", sections=titles, passed=not errors))
+            failures.extend(f"{package.relative}: {error}" for error in errors)
+            continue
         errors = section_errors(text)
         try:
             if fragment(text) != fragment(header(readme, text, root_path=root)):

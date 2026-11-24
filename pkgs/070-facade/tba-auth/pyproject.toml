@@ -33,7 +33,7 @@ classifiers = [
     "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3.15",
 ]
-dependencies = ["tba-concrete-authorization-policy-rules==0.4.0.dev3", "tba-concrete-authorization-policy-combiner-default==0.4.0.dev3", "tba-concrete-authorization-policy-evaluators-default==0.4.0.dev3", "tba-concrete-authorization-policy-attributes-mapping==0.4.0.dev3", "tba-concrete-authorization-policy-obligations==0.4.0.dev3", "tba-provider-security-authorization-provenance-builder==0.1.1.dev1", "tba-runtime-identity-administration==0.4.0.dev3", "tba-runtime-identity-authoring==0.4.0.dev3", "tba-cli-identity==0.4.0.dev3", "tba-contracts-identity==0.4.0.dev3", "tba-primitives-identity==0.4.0.dev3", "tba-credentials==0.4.0.dev3", "tba-provider-identity-jose==0.4.0.dev3", "tba-protocol-oauth==0.4.0.dev3", "tba-protocol-oidc==0.4.0.dev3", "tba-protocol-webauthn==0.4.0.dev3", "tba-concrete-identity-principals==0.4.0.dev3", "tba-operator-identity==0.4.0.dev3", "tba-concrete-authority-graph==0.4.0.dev3", "tba-runtime-authorization-policy==0.4.0.dev4", "tba-protocol-oauth-protected-resource==0.4.0.dev3", "tba-certification-release==0.4.0.dev3", "tba-protocol-oidc-relying-party==0.4.0.dev4", "tba-plugin-tigrbl==0.4.0.dev3", "tba-runtime-identity==0.4.0.dev4", "tba-server-identity==0.4.0.dev3", "tba-storage-core==0.4.0.dev5", "tba-runtime-identity-storage==0.4.0.dev3", "tba-provider-security-signing-pqc==0.1.1.dev1"]
+dependencies = ["tba-concrete-authorization-policy-rules==0.4.0.dev3", "tba-concrete-authorization-policy-combiner-default==0.4.0.dev3", "tba-concrete-authorization-policy-evaluators-default==0.4.0.dev3", "tba-concrete-authorization-policy-attributes-mapping==0.4.0.dev3", "tba-concrete-authorization-policy-obligations==0.4.0.dev3", "tba-provider-security-authorization-provenance-builder==0.1.1.dev1", "tba-runtime-identity-administration==0.4.0.dev3", "tba-runtime-identity-authoring==0.4.0.dev3", "tba-cli-identity==0.4.0.dev3", "tba-contracts-identity==0.4.0.dev3", "tba-primitives-identity==0.4.0.dev3", "tba-credentials==0.4.0.dev3", "tba-provider-identity-jose==0.4.0.dev3", "tba-protocol-oauth==0.4.0.dev3", "tba-protocol-oidc==0.4.0.dev3", "tba-protocol-webauthn==0.4.0.dev3", "tba-concrete-identity-principals==0.4.0.dev3", "tba-operator-identity==0.4.0.dev3", "tba-concrete-authority-graph==0.4.0.dev3", "tba-runtime-authorization-policy==0.4.0.dev4", "tba-protocol-oauth-protected-resource==0.4.0.dev3", "tba-certification-release==0.4.0.dev3", "tba-protocol-oidc-relying-party==0.4.0.dev6", "tba-plugin-tigrbl==0.4.0.dev3", "tba-runtime-identity==0.4.0.dev4", "tba-server-identity==0.4.0.dev3", "tba-storage-core==0.4.0.dev5", "tba-runtime-identity-storage==0.4.0.dev3", "tba-provider-security-signing-pqc==0.1.1.dev1"]
 license-files = ["LICENSE", "NOTICE"]
 
 [project.urls]
@@ -55,3 +55,55 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry]
 packages = [{ include = "tba_auth", from = "src" }]
 include = ["src/tba_auth/profiles/*.yaml"]
+
+[tool.readme_standards]
+policy = "package-guide-v1"
+readme = "README.md"
+brand = "tigrbl-auth"
+brand_catalog = "../../../tools/readme/brands.toml"
+repository = "https://github.com/tigrbl/tigrbl_auth"
+ref = "master"
+package_path = "pkgs/070-facade/tba-auth"
+layer = "070-facade"
+lifecycle = "active"
+license_file = "LICENSE"
+notice_file = "NOTICE"
+
+[tool.readme_standards.distributions.pypi]
+name = "tba-auth"
+published = true
+
+[tool.readme_standards.examples.quick_start]
+source = "docs/readme/quick_start.py"
+test = "docs/readme/test_examples.py"
+language = "python"
+expected_exit_code = 0
+
+[tool.readme_standards.examples.usage]
+source = "docs/readme/usage.py"
+test = "docs/readme/test_examples.py"
+language = "python"
+expected_exit_code = 0
+
+[tool.readme_standards.statuses.readme]
+label = "CI gate"
+url = "https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"
+
+[tool.readme_standards.statuses.tests]
+label = "example source"
+url = "https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/070-facade/tba-auth/docs/readme/test_examples.py"
+
+[tool.readme_standards.statuses.certification]
+label = "not certified"
+url = "https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/070-facade/tba-auth/README.md#certification-status"
+
+[tool.readme_standards.statuses.governance]
+label = "repository policy"
+url = "https://github.com/tigrbl/tigrbl_auth/blob/master/tools/readme/POLICY.md"
+
+[tool.readme_standards.statuses.evidence]
+label = "source and CI"
+url = "https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"
+
+[dependency-groups]
+dev = ["readme-standards==0.1.3; python_version >= \"3.11\""]

@@ -1,0 +1,3 @@
+from tba_provider_identity_administration_relationship_graph import RelationshipGraph
+
+assert callable(RelationshipGraph)

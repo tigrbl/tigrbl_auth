@@ -41,3 +41,6 @@ __pycache__/
 .tox/
 .nox/
 target/
+
+# Generated README gate reports
+readme-standards-results.xml

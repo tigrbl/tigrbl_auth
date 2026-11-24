@@ -1,0 +1,3 @@
+import oauth_device_authorization_cli_example
+
+print(oauth_device_authorization_cli_example.__name__)

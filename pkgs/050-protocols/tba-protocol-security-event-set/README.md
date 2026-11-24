@@ -1,28 +1,39 @@
 # tba-protocol-security-event-set
 
-<!-- BEGIN TBA README HEADER -->
+<!-- readme-standards:begin branding -->
+<p align="center"><a href="https://github.com/tigrbl/tigrbl_auth"><img src="https://raw.githubusercontent.com/tigrbl/tigrbl_auth/master/docs/assets/tba-brand.png" alt="TBA · Tigrbl Auth" width="300"></a></p>
+<p align="center"><strong>tba-protocol-security-event-set</strong></p>
+<p align="center">Security Event Token (SET) protocol composition.</p>
 <p align="center">
-<a href="https://github.com/tigrbl/tigrbl_auth#readme"><img src="https://raw.githubusercontent.com/tigrbl/tigrbl_auth/master/docs/assets/tba-brand.png" alt="TBA · Tigrbl Auth" width="240"></a>
+<a href="https://pypi.org/project/tba-protocol-security-event-set/"><img alt="pypi: tba-protocol-security-event-set" src="https://img.shields.io/pypi/v/tba-protocol-security-event-set?labelColor=1E293B&amp;color=1D4ED8"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/pyproject.toml"><img alt="Source version: 0.4.0.dev3" src="https://img.shields.io/static/v1?label=Source%20version&amp;message=0.4.0.dev3&amp;labelColor=1E293B&amp;color=4338CA"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/pyproject.toml"><img alt="Python: &gt;=3.10,&lt;3.16" src="https://img.shields.io/static/v1?label=Python&amp;message=%3E%3D3.10%2C%3C3.16&amp;labelColor=1E293B&amp;color=0F766E"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/pyproject.toml"><img alt="Layer: 050-protocols" src="https://img.shields.io/static/v1?label=Layer&amp;message=050-protocols&amp;labelColor=1E293B&amp;color=6D28D9"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/README.md#lifecycle-and-migration"><img alt="Lifecycle: active" src="https://img.shields.io/static/v1?label=Lifecycle&amp;message=active&amp;labelColor=1E293B&amp;color=166534"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/static/v1?label=License&amp;message=Apache-2.0&amp;labelColor=1E293B&amp;color=86198F"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/NOTICE"><img alt="Notice: attribution" src="https://img.shields.io/static/v1?label=Notice&amp;message=attribution&amp;labelColor=1E293B&amp;color=86198F"></a>
 </p>
 <p align="center">
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/pyproject.toml"><img alt="Checkout: 0.4.0.dev3" src="https://img.shields.io/badge/Checkout-0.4.0.dev3-1f6feb"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/pyproject.toml"><img alt="Python: &gt;=3.10,&lt;3.16" src="https://img.shields.io/badge/Python-%3E%3D3.10%2C%3C3.16-3776ab"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/tba-protocol-security-event-set%3D%3D0.4.0.dev3/pkgs/050-protocols/tba-protocol-security-event-set/LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/License-Apache--2.0-525252"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/tba-protocol-security-event-set%3D%3D0.4.0.dev3/pkgs/050-protocols/tba-protocol-security-event-set/NOTICE"><img alt="Notice: attribution" src="https://img.shields.io/badge/Notice-attribution-525252"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/050-protocols"><img alt="Layer: 050 protocols" src="https://img.shields.io/badge/Layer-050%20protocols-0a7f5a"></a>
-<a href="https://pypi.org/project/tba-protocol-security-event-set/"><img alt="PyPI version for tba-protocol-security-event-set" src="https://img.shields.io/pypi/v/tba-protocol-security-event-set?label=tba-protocol-security-event-set%20PyPI"></a>
+<a href="https://pypi.org/project/tba-protocol-security-event-set/"><img alt="Monthly PyPI downloads: tba-protocol-security-event-set" src="https://img.shields.io/pypi/dm/tba-protocol-security-event-set?labelColor=1E293B&amp;color=0E7490"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/README.md"><img alt="README hits: tba-protocol-security-event-set" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/pkgs/050-protocols/tba-protocol-security-event-set/README.md.svg?label=README%20hits&amp;labelColor=1E293B&amp;color=0E7490"></a>
 </p>
 <p align="center">
-<a href="https://pepy.tech/project/tba-protocol-security-event-set"><img alt="Monthly PyPI downloads for tba-protocol-security-event-set" src="https://static.pepy.tech/badge/tba-protocol-security-event-set/month"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/README.md"><img alt="README hits for tba-protocol-security-event-set" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/README.md.svg?label=hits"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"><img alt="SSOT: governed" src="https://img.shields.io/badge/SSOT-governed-2f6f4e"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"><img alt="README standards: CI gate" src="https://img.shields.io/static/v1?label=README%20standards&amp;message=CI%20gate&amp;labelColor=1E293B&amp;color=1D4ED8"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/docs/readme/test_examples.py"><img alt="Tests: example source" src="https://img.shields.io/static/v1?label=Tests&amp;message=example%20source&amp;labelColor=1E293B&amp;color=0F766E"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/README.md#certification-status"><img alt="Certification: not certified" src="https://img.shields.io/static/v1?label=Certification&amp;message=not%20certified&amp;labelColor=1E293B&amp;color=92400E"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/tools/readme/POLICY.md"><img alt="Governance: repository policy" src="https://img.shields.io/static/v1?label=Governance&amp;message=repository%20policy&amp;labelColor=1E293B&amp;color=4338CA"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"><img alt="Evidence: source and CI" src="https://img.shields.io/static/v1?label=Evidence&amp;message=source%20and%20CI&amp;labelColor=1E293B&amp;color=6D28D9"></a>
 </p>
-<!-- END TBA README HEADER -->
+<p align="center"><a href="#overview">Overview</a> · <a href="#installation">Installation</a> · <a href="#quick-start">Quick Start</a> · <a href="#usage">Usage</a> · <a href="#public-api-and-import-surfaces">API</a> · <a href="#contributing">Contributing</a> · <a href="#governance">Governance</a> · <a href="#license">License</a></p>
+<!-- readme-standards:end branding -->
+
+---
+
+## Overview
+
+### Summary
 
 Owns versioned protocol composition and compatibility.
-
-## AEO Summary
 
 - Package: `tba-protocol-security-event-set`
 - Layer: `050-protocols`
@@ -30,11 +41,36 @@ Owns versioned protocol composition and compatibility.
 - Public surface: [public entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/src/tba_protocol_security_event_set/__init__.py).
 - Distribution: Python package on PyPI.
 
-## When to use it
+### Why This Package
+
+`tba-protocol-security-event-set` isolates this responsibility: Security Event Token (SET) protocol composition. Its [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/src/tba_protocol_security_event_set/__init__.py) exposes `CAPABILITY_REQUIREMENTS`, `COMPATIBILITY_PATHS`, `CURRENT_VERSION`, `FEATURES_BY_VERSION`, `SET_CLAIM_CLASSES`, `SET_JWT_CARRIER`, `SetCarrier`, `SetCompatibility`, `SetProtocolError`, `SetReceiverProvider`, `SetSigner`, `SetTokenVerifier`, `SetTransmitterProvider`, `SetUsageError`, `SetVersion`, allowing consumers to select this package without treating adjacent packages as part of its public contract.
+
+### When to Use
 
 Choose `tba-protocol-security-event-set` for this responsibility: Security Event Token (SET) protocol composition. Its `050-protocols` placement keeps protocol semantics and projections separate from deployment hosting or ownership of persistence implementations.
 
-## Installation
+### Features
+
+- `SetCompatibility`: declared in src/tba_protocol_security_event_set/compatibility.py
+- `SetProtocolError`: Base error for an RFC 8417 mapping failure.
+- `UnsupportedSetMediaTypeError`: Raised for a carrier other than `application/secevent+jwt`.
+- `SetUsageError`: Raised when a SET is used as an ID or access token.
+- `SetCarrier`: declared in src/tba_protocol_security_event_set/schemas.py
+- `SetVersion`: declared in src/tba_protocol_security_event_set/versions.py
+
+### Non-Goals
+
+Higher-layer orchestration, lower-layer persistence, and protocol behavior outside this package's declared layer are not owned here.
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+Python `>=3.10,<3.16` is required. The [manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/pyproject.toml) declares runtime dependencies including `tba-contracts-identity`, `tba-bases-security-event`, `tba-concrete-set`, `tba-concrete-claim-issuer`, `tba-concrete-claim-audience`, `tba-concrete-claim-issued-at`, `tba-concrete-claim-jwt-id`, `tba-concrete-claim-subject`, `tba-concrete-claim-security-events`, `tba-provider-set-transmitter`, `tba-provider-set-receiver`. Read the example’s inputs and service requirements before execution.
+
+### Installation
 
 Install the selected PyPI release of `tba-protocol-security-event-set`:
 
@@ -48,17 +84,34 @@ To work on the current checkout before a prepared release is published:
 uv pip install ./pkgs/050-protocols/tba-protocol-security-event-set
 ```
 
-## Quick start
+#### uv
+
+<!-- readme-standards:begin installation.uv -->
+```bash
+uv add tba-protocol-security-event-set
+```
+<!-- readme-standards:end installation.uv -->
+
+#### pip
+
+<!-- readme-standards:begin installation.pip -->
+```bash
+python -m pip install tba-protocol-security-event-set
+```
+<!-- readme-standards:end installation.pip -->
+
+#### Poetry
+
+<!-- readme-standards:begin installation.poetry -->
+```bash
+poetry add tba-protocol-security-event-set
+```
+<!-- readme-standards:end installation.poetry -->
+
+### Quick Start
 
 With [uv](https://docs.astral.sh/uv/) available, save the example as `quickstart.py`. This isolated Python 3.12 command requires the selected version to be available on PyPI; Installation also documents the checkout workflow.
 
-```python
-from tba_protocol_security_event_set import capability_report
-
-report = capability_report()
-assert report
-print(sorted(report))
-```
 
 ```bash
 uv run --isolated --no-project --python 3.12 --with "tba-protocol-security-event-set==0.4.0.dev3" python quickstart.py
@@ -66,9 +119,10 @@ uv run --isolated --no-project --python 3.12 --with "tba-protocol-security-event
 
 The command prints the keys in the package's capability report.
 
-## Usage
+#### Example
 
-The following public-entry-point example belongs to `tba-protocol-security-event-set`. Security Event Token (SET) protocol composition. Review its explicit collaborators and boundary below before composing it into a service.
+<!-- readme-standards:begin example.quick-start -->
+Source: [docs/readme/quick_start.py](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/docs/readme/quick_start.py).
 
 ```python
 from tba_protocol_security_event_set import capability_report
@@ -77,8 +131,49 @@ report = capability_report()
 assert report
 print(sorted(report))
 ```
+<!-- readme-standards:end example.quick-start -->
+
+#### Expected Result
+
+The example demonstrates the documented `tba-protocol-security-event-set` source boundary or workflow. Complete its required configuration first. README CI checks the maintained source’s syntax and declarations; it does not claim that external services or the application workflow were exercised.
+
+---
+
+## Usage
+
+### Common Workflows
+
+<!-- readme-standards:begin example.usage -->
+Source: [docs/readme/usage.py](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/docs/readme/usage.py).
+
+```python
+from tba_protocol_security_event_set import capability_report
+
+report = capability_report()
+assert report
+print(sorted(report))
+```
+<!-- readme-standards:end example.usage -->
+
+The following public-entry-point example belongs to `tba-protocol-security-event-set`. Security Event Token (SET) protocol composition. Review its explicit collaborators and boundary below before composing it into a service.
+
+### Configuration
+
+Configure `tba-protocol-security-event-set` through the APIs in [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/src/tba_protocol_security_event_set/__init__.py); its [manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/pyproject.toml) describes installation requirements, not an implicit service configuration. No additional package-global configuration contract is inferred from dependencies.
+
+### Error Handling
+
+The inspected `tba-protocol-security-event-set` source raises `UnsupportedSetMediaTypeError`, `ValueError`. Handle these at the calling boundary and consult the implementation for the triggering conditions.
+
+### Best Practices
+
+Use the explicit `tba-protocol-security-event-set` imports documented below and keep collaborator configuration with the caller. Run the package’s relevant tests after changing `CAPABILITY_REQUIREMENTS`, `COMPATIBILITY_PATHS`, `CURRENT_VERSION`, `FEATURES_BY_VERSION`, `SET_CLAIM_CLASSES`, `SET_JWT_CARRIER`, `SetCarrier`, `SetCompatibility`, `SetProtocolError`, `SetReceiverProvider`, `SetSigner`, `SetTokenVerifier`, `SetTransmitterProvider`, `SetUsageError`, `SetVersion`; an import or successful installation alone does not establish its runtime guarantees.
+
+---
 
 ## Package Boundary
+
+### What It Owns
 
 `tba-protocol-security-event-set` belongs to `050-protocols` and owns protocol semantics and projections: Security Event Token (SET) protocol composition.
 
@@ -86,7 +181,21 @@ Its implementation surface is the [public entry point](https://github.com/tigrbl
 
 Keep deployment hosting or ownership of persistence implementations in their owning packages. The [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml) records layer placement and local dependency edges.
 
-## Injected dependencies
+### Public API and Import Surfaces
+
+Import namespace: `tba_protocol_security_event_set`.
+
+Source-declared exports or types: `CAPABILITY_REQUIREMENTS`, `COMPATIBILITY_PATHS`, `CURRENT_VERSION`, `FEATURES_BY_VERSION`, `SET_CLAIM_CLASSES`, `SET_JWT_CARRIER`, `SetCarrier`, `SetCompatibility`, `SetProtocolError`, `SetReceiverProvider`, `SetSigner`, `SetTokenVerifier`, `SetTransmitterProvider`, `SetUsageError`, `SetVersion`.
+
+Inspect [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/src/tba_protocol_security_event_set/__init__.py) for exact signatures; this inventory does not designate every internal module as stable.
+
+### Entry Points
+
+<!-- readme-standards:begin entry-points -->
+This package declares no command-line, GUI, or plugin entry points in its manifest.
+<!-- readme-standards:end entry-points -->
+
+### Injected Dependencies
 
 Explicit construction inputs and collaborators for `tba-protocol-security-event-set`:
 
@@ -94,7 +203,19 @@ Explicit construction inputs and collaborators for `tba-protocol-security-event-
 
 Configuration values are not automatically service implementations. Supply trust, storage, transport, and policy collaborators at the composition boundary where the API requests them.
 
-## Operations and readiness
+### Protocol Consumers
+
+Direct consumers in this checkout’s package manifests include `tba-workspace`. These edges describe declared dependencies, not protocol-conformance evidence.
+
+### Extensions
+
+For `tba-protocol-security-event-set`, use the source-declared public interfaces (`CAPABILITY_REQUIREMENTS`, `COMPATIBILITY_PATHS`, `CURRENT_VERSION`, `FEATURES_BY_VERSION`, `SET_CLAIM_CLASSES`, `SET_JWT_CARRIER`, `SetCarrier`, `SetCompatibility`, `SetProtocolError`, `SetReceiverProvider`, `SetSigner`, `SetTokenVerifier`, `SetTransmitterProvider`, `SetUsageError`, `SetVersion`) when composing or extending behavior. Its entry-point section below is authoritative for registered plugins; no additional extension loader is inferred from the package name.
+
+---
+
+## Operations and Readiness
+
+### Operational Requirements
 
 `tba-protocol-security-event-set` exposes protocol semantics and projections. Public operations found in its source:
 
@@ -108,15 +229,59 @@ Configuration values are not automatically service implementations. Supply trust
 
 A successful import or build is a smoke check, not a production-readiness assertion. Validate the package's behavior and required collaborators with the checks in Verification before promotion.
 
-## Protocol consumers
+### Health and Observability
 
-No active layer-50 manifest declares a direct runtime dependency on `tba-protocol-security-event-set`. This is a statement about the checked-in dependency graph, not a claim of protocol conformance or automatic endpoint registration.
+This README does not establish a standalone health endpoint for `tba-protocol-security-event-set`. Observe the concrete caller’s results, exceptions, and existing test reports. An application that embeds this package must define its own health and telemetry contract.
 
-## Non-goals
+### Security and Resource Limits
 
-Higher-layer orchestration, lower-layer persistence, and protocol behavior outside this package's declared layer are not owned here.
+Apply the input, credential, and resource constraints implemented in [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/src/tba_protocol_security_event_set/__init__.py). The `tba-protocol-security-event-set` README gate is a documentation check, not a security review or a substitute for the implementation’s limits and caller authorization.
 
-## Related Packages
+### Compatibility
+
+This source version of `tba-protocol-security-event-set` declares Python `>=3.10,<3.16`. Consult its dependency constraints before upgrading. Source-version and registry-version badges have separate meanings; this migration makes no additional platform or interoperability certification claim.
+
+---
+
+## Verification
+
+### Tests
+
+A prior published-version quick start informed this example. A registry badge is not evidence that this checkout's selected version or example has been verified against PyPI. See the [public package entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/src/tba_protocol_security_event_set/__init__.py).
+
+### Certification Status
+
+No external certification is asserted for `tba-protocol-security-event-set` by this documentation migration. README conformance, example syntax, runtime tests, and protocol or security certification are distinct evidence scopes.
+
+### Evidence
+
+The [README standards CI](https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml) records mechanical documentation results for its tested commit. The [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/src/tba_protocol_security_event_set/__init__.py) and example sources support the package-boundary description; external runtime behavior requires its own test evidence.
+
+---
+
+## FAQ
+
+### Why
+
+**Why select this package?** `tba-protocol-security-event-set` provides security Event Token (SET) protocol composition; use its own API boundary rather than assuming neighboring packages are bundled or configured automatically.
+
+### How
+
+**How do I start?** Install or synchronize the environment under Getting Started, follow the maintained example for `tba-protocol-security-event-set`, and consult [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/src/tba_protocol_security_event_set/__init__.py) for the exact types and signatures involved.
+
+### When
+
+**When should I validate an upgrade?** Recheck `tba-protocol-security-event-set` whenever its source version, declared collaborators, configuration, or caller changes. Run relevant behavioral tests in addition to the README gate before promotion.
+
+---
+
+## Documentation and Related Packages
+
+### More Documentation
+
+The [repository contribution guide](https://github.com/tigrbl/tigrbl_auth/blob/master/CONTRIBUTING.md), [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/src/tba_protocol_security_event_set/__init__.py), and [manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/pyproject.toml) provide the supporting context for `tba-protocol-security-event-set`. The [README policy](https://github.com/groupsum/readme-standards/blob/master/docs/outline.md) defines the common document structure.
+
+### Related Packages
 
 Declared local runtime dependencies:
 
@@ -132,7 +297,17 @@ Declared local runtime dependencies:
 - [tba-provider-set-receiver](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-set-receiver/README.md)
 - [tba-provider-set-transmitter](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-set-transmitter/README.md)
 
-## Project Links
+### Project Links
+
+<!-- readme-standards:begin project-links -->
+- [Documentation](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/050-protocols/tba-protocol-security-event-set#readme)
+- [Homepage](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/050-protocols/tba-protocol-security-event-set#readme)
+- [Issues](https://github.com/tigrbl/tigrbl_auth/issues)
+- [PyPI](https://pypi.org/project/tba-protocol-security-event-set/)
+- [Repository](https://github.com/tigrbl/tigrbl_auth)
+- [Source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/050-protocols/tba-protocol-security-event-set)
+- [pypi: tba-protocol-security-event-set](https://pypi.org/project/tba-protocol-security-event-set/)
+<!-- readme-standards:end project-links -->
 
 - [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/050-protocols/tba-protocol-security-event-set)
 - [Package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/pyproject.toml)
@@ -142,12 +317,52 @@ Declared local runtime dependencies:
 - [Canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 - [PyPI project](https://pypi.org/project/tba-protocol-security-event-set/)
 
+---
+
+## Contributing
+
+### How to Contribute
+
+Follow the [contribution guide](https://github.com/tigrbl/tigrbl_auth/blob/master/CONTRIBUTING.md) and include a focused example or regression for changes to `tba-protocol-security-event-set`. Keep package behavior, its documented boundary, and its tests aligned.
+
+### Development Setup
+
+Work from the `pkgs/050-protocols/tba-protocol-security-event-set` checkout. Synchronize its declared development environment with uv, then run the relevant package tests and `python -m pytest docs/readme/test_examples.py`. The repository’s dedicated README job installs `readme-standards==0.1.3` without resolving unrelated runtime packages.
+
+### Notes for Maintainers
+
+Edit authored prose directly in this `tba-protocol-security-event-set` README. Update source examples in `docs/readme/`, then run `readme-standards render --root . --write` from the package directory and review the diff. Required headings and generated blocks come from package-guide-v1.
+
+---
+
 ## Governance
+
+### Ownership and Decision Making
+
+Changes to `tba-protocol-security-event-set` follow the maintainer review process of [tigrbl/tigrbl_auth](https://github.com/tigrbl/tigrbl_auth) and its contribution guide. Author attribution remains in the [manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/pyproject.toml); this README does not assign new publishing or administrative authority.
+
+### Standards and Policies
 
 `tba-protocol-security-event-set` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `050-protocols` ownership, public imports, declared dependencies, examples, and release metadata aligned.
 
 Changes must pass the [README standards gate](https://github.com/tigrbl/tigrbl_auth/blob/master/.github/workflows/readme-standards.yml), package checks, and the evidence requirements relevant to the changed behavior. Update SSOT through the repository's CLI workflow when changing governed claims or boundaries.
 
-## Verification
+### Lifecycle and Migration
 
-A prior published-version quick start informed this example. A registry badge is not evidence that this checkout's selected version or example has been verified against PyPI. See the [public package entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/src/tba_protocol_security_event_set/__init__.py).
+The `tba-protocol-security-event-set` source version is `0.4.0.dev3`. This change standardizes documentation and adds a development-only gate; it does not publish a new runtime version or declare a previously unpublished package released. Preserve explicit deprecation and replacement instructions where present.
+
+---
+
+## License and Attribution
+
+### License
+
+<!-- readme-standards:begin license -->
+Licensed under `Apache-2.0`. See [LICENSE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/LICENSE).
+<!-- readme-standards:end license -->
+
+### Notices
+
+<!-- readme-standards:begin notices -->
+See [NOTICE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-security-event-set/NOTICE) for attribution.
+<!-- readme-standards:end notices -->

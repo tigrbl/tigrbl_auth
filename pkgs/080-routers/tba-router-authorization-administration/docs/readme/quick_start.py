@@ -1,0 +1,3 @@
+from tba_router_authorization_administration import assert_tenant_scope
+
+assert callable(assert_tenant_scope)

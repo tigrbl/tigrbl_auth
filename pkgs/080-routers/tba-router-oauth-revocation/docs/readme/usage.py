@@ -1,0 +1,3 @@
+from tba_router_oauth_revocation import RevocationServiceResolver
+
+assert callable(RevocationServiceResolver)

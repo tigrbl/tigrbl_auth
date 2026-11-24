@@ -1,0 +1,3 @@
+from tba_provider_certificate_path_validator import ProfiledCertificatePathValidator
+
+assert callable(ProfiledCertificatePathValidator)

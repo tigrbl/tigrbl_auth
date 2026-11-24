@@ -1,0 +1,3 @@
+from tba_bases_resource_server import ResourceServerVerifierBase
+
+assert callable(ResourceServerVerifierBase)

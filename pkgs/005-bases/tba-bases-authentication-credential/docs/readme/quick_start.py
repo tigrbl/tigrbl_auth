@@ -1,0 +1,3 @@
+from tba_bases_authentication_credential import CredentialBase
+
+assert callable(CredentialBase)

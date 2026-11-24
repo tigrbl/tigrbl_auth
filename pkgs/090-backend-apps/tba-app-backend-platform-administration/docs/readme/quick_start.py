@@ -1,0 +1,3 @@
+from tba_app_backend_platform_administration import AdminIdentityOut
+
+assert callable(AdminIdentityOut)

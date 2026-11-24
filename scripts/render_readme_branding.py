@@ -44,6 +44,11 @@ def header(readme: Path, original: str, root_path: Path | None = None) -> str:
     publishable = False
     if python:
         document = tomllib.loads(path.read_text(encoding="utf-8"))
+        if document.get("tool", {}).get("readme_standards"):
+            from readme_standards.config import load_package
+            from readme_standards.render import render
+
+            return render(original, load_package(folder))
         meta = document["project"]
         publishable = document.get("tool", {}).get("uv", {}).get("package", True)
         requirement = meta.get("requires-python")
@@ -76,6 +81,21 @@ def header(readme: Path, original: str, root_path: Path | None = None) -> str:
         )
     if meta.get("private"):
         metadata.append(badge("Distribution", "private source", "6e7781", manifest_url))
+
+    if (
+        not python
+        and not meta.get("private")
+        and meta.get("readmeStandards", {}).get("npmPublished")
+    ):
+        package = meta["name"]
+        registry_name = quote(package, safe="@/")
+        metadata.append(
+            image_link(
+                f"npm version for {package}",
+                f"https://img.shields.io/npm/v/{registry_name}",
+                f"https://www.npmjs.com/package/{registry_name}",
+            )
+        )
 
     metrics = []
     if python and (root or publishable):
@@ -198,6 +218,16 @@ def main() -> int:
         if not readme.is_file():
             parser.error(f"README is missing: {readme.relative_to(ROOT)}")
         original = readme.read_text(encoding="utf-8")
+        manifest = readme.parent / "pyproject.toml"
+        if manifest.is_file() and tomllib.loads(manifest.read_text("utf-8")).get(
+            "tool", {}
+        ).get("readme_standards"):
+            updated = header(readme, original)
+            if updated != original:
+                stale.append(readme.relative_to(ROOT))
+                if not args.check:
+                    readme.write_text(updated, encoding="utf-8")
+            continue
         before, start, after = original.partition(START)
         _, end, rest = after.partition(END)
         if not (start and end) or START in after or END in rest or END in before:

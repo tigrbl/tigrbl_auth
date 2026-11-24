@@ -1,0 +1,3 @@
+import tba_concrete_mcp_delegation
+
+print(tba_concrete_mcp_delegation.__name__)

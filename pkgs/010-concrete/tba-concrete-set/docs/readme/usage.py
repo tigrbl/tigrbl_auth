@@ -1,0 +1,3 @@
+from tba_concrete_set import SecurityEventTokenError
+
+assert callable(SecurityEventTokenError)

@@ -1,0 +1,4 @@
+from tba_profile_workload_credential_spiffe_wit_svid import CURRENT_VERSION
+
+assert CURRENT_VERSION is not None
+print(CURRENT_VERSION)

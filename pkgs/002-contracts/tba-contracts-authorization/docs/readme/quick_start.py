@@ -1,0 +1,3 @@
+from tba_contracts_authorization import AuthorizationEffect
+
+assert callable(AuthorizationEffect)

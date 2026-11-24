@@ -1,0 +1,3 @@
+from tba_concrete_authorization_scope_set_matcher import ScopeSetMatcher
+
+assert callable(ScopeSetMatcher)

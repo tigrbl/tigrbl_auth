@@ -38,6 +38,11 @@ from tigrbl.factories.engine import mem
 async def test_policy_is_enforced_through_bound_rest_and_rpc():
     security_specs = pytest.importorskip("tigrbl_core._spec.operation_security")
     OperationSecurity = security_specs.OperationSecurity
+    events: list[str] = []
+
+    def ordinary_dependency():
+        events.append("dependency")
+
     notes = {
         "alice-note": ("team", "alice", "A"),
         "bob-note": ("team", "bob", "B"),
@@ -72,8 +77,10 @@ async def test_policy_is_enforced_through_bound_rest_and_rpc():
                 HttpJsonRpcBindingSpec("http.jsonrpc", "Note.edit"),
             ),
             security=OperationSecurity(action, "note"),
+            deps=(ordinary_dependency,),
         )
         async def edit(cls, ctx):
+            events.append("handler")
             payload = ctx["payload"]
             tenant, owner, _ = notes[payload["id"]]
             notes[payload["id"]] = (tenant, owner, payload["text"])
@@ -121,6 +128,8 @@ async def test_policy_is_enforced_through_bound_rest_and_rpc():
     )
 
     async def authenticate(ctx):
+        assert ctx.phase == "SECURITY"
+        events.append("authenticate")
         authorization = ctx["request"].headers.get("authorization", "")
         scheme, _, token = authorization.partition(" ")
         if scheme.lower() != "bearer" or not token:
@@ -157,6 +166,8 @@ async def test_policy_is_enforced_through_bound_rest_and_rpc():
     published_digest = digest
 
     def load_policy(operation, ctx, principal):
+        assert ctx.phase == "SECURITY"
+        events.append("policy")
         engine = PlatformPolicyDecisionEngine(
             actions=(
                 ActionDefinition(action, "note"),
@@ -178,8 +189,10 @@ async def test_policy_is_enforced_through_bound_rest_and_rpc():
         editor = bearer("editor-key")
         assert (await client.get("/proof/health")).json() == {"ready": True}
         assert (await client.post("/proof/edit", json=mine, headers=editor)).status_code == 503
+        assert events == []
         OperationAuthorizationAdapter("proof", authenticate, resource, load_policy).install(app)
         assert (await client.post("/proof/edit", json=mine)).status_code == 401
+        assert events == ["authenticate"]
         assert (await client.post("/proof/edit", json=mine, headers=bearer("wrong-audience"))).status_code == 401
         assert (await client.post("/proof/edit", json=mine, headers=bearer("same-id-service"))).status_code == 403
         assert (await client.post("/proof/edit", json=mine, headers=bearer("list-key"))).status_code == 403
@@ -187,8 +200,12 @@ async def test_policy_is_enforced_through_bound_rest_and_rpc():
         foreign = {"id": "foreign-note", "text": "denied"}
         assert (await client.post("/proof/edit", json=foreign, headers=editor)).status_code == 403
         assert notes == initial_notes
+        assert "dependency" not in events
+        assert "handler" not in events
+        events.clear()
         assert (await client.post("/proof/edit", json=mine, headers=editor)).is_success
         assert notes["alice-note"] == ("team", "alice", "saved")
+        assert events == ["authenticate", "policy", "dependency", "handler"]
         assert (await client.get("/proof/owned?owner=bob", headers=editor)).json() == ["alice-note"]
         assert (await client.post("/proof/publish", headers=editor)).status_code == 403
         assert (await client.post("/proof/publish", headers=bearer("step-up-key"))).json() == {"published": True}
@@ -198,8 +215,12 @@ async def test_policy_is_enforced_through_bound_rest_and_rpc():
                 "jsonrpc": "2.0", "id": 1, "method": "Note.edit", "params": payload,
             })).json()
 
+        events.clear()
         assert "error" in await rpc(other)
+        assert events == ["authenticate", "policy"]
+        events.clear()
         assert (await rpc(mine))["result"] == {"saved": "alice-note"}
+        assert events == ["authenticate", "policy", "dependency", "handler"]
         grants[0] = replace(grants[0], revoked_at=datetime.now(timezone.utc))
         assert (await client.post("/proof/edit", json=mine, headers=editor)).status_code == 403
         assert "error" in await rpc(mine)

@@ -1,0 +1,3 @@
+from tba_bases_authentication_context import AcrEvaluatorBase
+
+assert callable(AcrEvaluatorBase)

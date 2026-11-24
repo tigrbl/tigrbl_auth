@@ -1,0 +1,3 @@
+from tba_contracts_proof_of_possession import ConfirmationKeyBinding
+
+assert callable(ConfirmationKeyBinding)

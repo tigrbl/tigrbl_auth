@@ -1,0 +1,3 @@
+from tba_provider_digital_credential_status import InMemoryCredentialStatusProvider
+
+assert callable(InMemoryCredentialStatusProvider)

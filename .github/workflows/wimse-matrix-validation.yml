@@ -1,8 +1,7 @@
 name: TbA WIMSE matrix validation
 
 on:
-  pull_request:
-    paths: ['pkgs/120-tests/**', '.github/workflows/wimse-matrix-validation.yml']
+  workflow_call:
   push:
     branches: [master, 'fix/tba-public-account-registration-recovery']
     paths: ['pkgs/120-tests/**', '.github/workflows/wimse-matrix-validation.yml']
@@ -13,7 +12,7 @@ permissions:
 
 jobs:
   validate:
-    runs-on: ubuntu-latest
+    runs-on: ${{ (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/docs/readme-standards-20261119' || (github.event_name == 'pull_request' && github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository)) && fromJSON('["sad-lewin","shortlived","testing","trusted-public-ci","Linux","X64"]') || 'ubuntu-24.04' }}
     steps:
       - uses: actions/checkout@v6
       - name: Read interop revision
