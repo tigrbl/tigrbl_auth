@@ -1,0 +1,31 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1238"
+number: 1238
+slug: "mfa-enrollment-and-step-up-runtime"
+title: "MFA Enrollment and Step-Up Runtime"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Define transactional factor enrollment, replacement, and freshness checks."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  Bind each pending enrollment to its account, scope, factor, and purpose. Expire pending attempts. A successful factor-specific proof authorizes an atomic transition that consumes the attempt and activates the factor. Keep an existing factor available until replacement commits. Cancelled, failed, expired, or consumed attempts leave active factors as they were. Persist attempt and proof replay state with the transaction.
+
+  Password and TOTP providers verify their factor proofs. Passkey registration and assertion use the configured RP ID, permitted origins, challenge, and user-verification requirements. Preserve the replay checks of each verifier. The lifecycle records the verified proof and time, then evaluates the host's required freshness and factor policy. Return typed outcomes for completed, challenge required, rejected, and expired. The application chooses the required assurance, presentation, recovery, and remembered-device policy.
+
+  Governed features: feat:mfa-enrollment-lifecycle, feat:mfa-step-up-assurance, feat:credential-passkey-webauthn, feat:f07-webauthn.
+
+  ## Passkey composition scope
+
+  The candidate runtime adoption and acceptance are tracked by feat:passkey-ceremony-lifecycle.
+
+spec_kind: "normative"
+adr_ids:
+  - "adr:1142"
+  - "adr:1073"
+  - "adr:1047"
