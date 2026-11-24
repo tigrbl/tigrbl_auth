@@ -1,11 +1,14 @@
-# @tba/ui-app-connections
+# @tbauth/ui-app-connections
+
+React controls for selecting a person or bot and reviewing the scopes an app
+has requested. The application supplies the verified request and its branding.
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">
 <a href="https://github.com/tigrbl/tigrbl_auth#readme"><img src="https://raw.githubusercontent.com/tigrbl/tigrbl_auth/master/docs/assets/tba-brand.png" alt="TBA · Tigrbl Auth" width="240"></a>
 </p>
 <p align="center">
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-app-connections/package.json"><img alt="Checkout: 0.4.0-dev.1" src="https://img.shields.io/badge/Checkout-0.4.0--dev.1-1f6feb"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-app-connections/package.json"><img alt="Checkout: 0.4.0-dev.2" src="https://img.shields.io/badge/Checkout-0.4.0--dev.2-1f6feb"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-app-connections/package.json"><img alt="Node: &gt;=22" src="https://img.shields.io/badge/Node-%3E%3D22-3776ab"></a>
 <a href="LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/License-Apache--2.0-525252"></a>
 <a href="NOTICE"><img alt="Notice: attribution" src="https://img.shields.io/badge/Notice-attribution-525252"></a>
@@ -13,8 +16,8 @@
 </p>
 <p align="center">
 <a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/105-ui/tba-ui-app-connections"><img alt="Downloads: source checkout" src="https://img.shields.io/badge/Downloads-source%20checkout-0969da"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-app-connections/package.json"><img alt="Direct dependencies: 0" src="https://img.shields.io/badge/Direct%20dependencies-0-0969da"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-app-connections/README.md"><img alt="README hits for @tba/ui-app-connections" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-app-connections/README.md.svg?label=hits"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-app-connections/package.json"><img alt="Direct dependencies: 1" src="https://img.shields.io/badge/Direct%20dependencies-1-0969da"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-app-connections/README.md"><img alt="README hits for @tbauth/ui-app-connections" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-app-connections/README.md.svg?label=hits"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"><img alt="SSOT: governed" src="https://img.shields.io/badge/SSOT-governed-2f6f4e"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-app-connections/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
 </p>
@@ -29,11 +32,11 @@ sign-in, and OAuth navigation.
 
 ## When to use it
 
-Choose `@tba/ui-app-connections` for this responsibility: React controls for TbA app consent and owned bot permissions. Its `105-ui` placement keeps browser-facing interface composition separate from establishing backend authorization or durable secret storage.
+Choose `@tbauth/ui-app-connections` for this responsibility: React controls for TbA app consent and owned bot permissions. Its `105-ui` placement keeps browser-facing interface composition separate from establishing backend authorization or durable secret storage.
 
 ## Installation
 
-Install `@tba/ui-app-connections` from this checkout; registry publication is separate from this source-only workflow:
+Install `@tbauth/ui-app-connections` from this checkout; registry publication is separate from this source-only workflow:
 
 ```bash
 npm --prefix pkgs/105-ui/tba-ui-app-connections install
@@ -43,7 +46,7 @@ Use the package's declared npm scripts from the repository root.
 
 ## Quick start
 
-Install `@tba/ui-app-connections` from this checkout; registry publication is separate from this source-only workflow:
+Install `@tbauth/ui-app-connections` from this checkout; registry publication is separate from this source-only workflow:
 
 ```bash
 npm --prefix pkgs/105-ui/tba-ui-app-connections install
@@ -53,7 +56,7 @@ Use the package's declared npm scripts from the repository root.
 
 ## Usage
 
-Use the checked-in `@tba/ui-app-connections` package through its declared npm scripts:
+Use the checked-in `@tbauth/ui-app-connections` package through its declared npm scripts:
 
 ```bash
 npm --prefix pkgs/105-ui/tba-ui-app-connections run build
@@ -61,9 +64,16 @@ npm --prefix pkgs/105-ui/tba-ui-app-connections run build
 
 React controls for TbA app consent and owned bot permissions. The manifest is the authority for available scripts and entry points.
 
+`ConsentIdentityControls` combines the existing picker and permission matrix
+into a controlled component. Pass the approved request data from
+`@tbauth/client-app-connections` or an equivalent API service. Initialize the
+selection with `defaultConsentScopes` and keep approval, denial, and callback
+navigation in the host. On identity changes, the component removes selected
+scopes that the new identity cannot approve.
+
 ## Package Boundary
 
-`@tba/ui-app-connections` belongs to `105-ui` and owns browser-facing interface composition: React controls for TbA app consent and owned bot permissions.
+`@tbauth/ui-app-connections` belongs to `105-ui` and owns browser-facing interface composition: React controls for TbA app consent and owned bot permissions.
 
 Its implementation surface is the [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-app-connections/package.json).
 
@@ -71,29 +81,30 @@ Keep establishing backend authorization or durable secret storage in their ownin
 
 ## Injected dependencies
 
-The [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-app-connections/package.json) for `@tba/ui-app-connections` does not declare an explicit service-constructor or keyword-only factory hook in the inspected source. Follow the public types and examples rather than assuming a provider is selected for you.
+The [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-app-connections/package.json) for `@tbauth/ui-app-connections` does not declare an explicit service-constructor or keyword-only factory hook in the inspected source. Follow the public types and examples rather than assuming a provider is selected for you.
 
 Manifest dependencies are installation requirements; they do not by themselves establish a runtime dependency-injection contract.
 
 ## Operations and readiness
 
-`@tba/ui-app-connections` exposes browser-facing interface composition. Inspect the [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-app-connections/package.json) for the exported types and composition surface.
+`@tbauth/ui-app-connections` exposes browser-facing interface composition. Inspect the [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-app-connections/package.json) for the exported types and composition surface.
 
 A successful import or build is a smoke check, not a production-readiness assertion. Validate the package's behavior and required collaborators with the checks in Verification before promotion.
 
 ## Protocol consumers
 
-No active layer-50 manifest declares a direct runtime dependency on `@tba/ui-app-connections`. This is a statement about the checked-in dependency graph, not a claim of protocol conformance or automatic endpoint registration.
+No active layer-50 manifest declares a direct runtime dependency on `@tbauth/ui-app-connections`. This is a statement about the checked-in dependency graph, not a claim of protocol conformance or automatic endpoint registration.
 
 ## Non-goals
 
-`@tba/ui-app-connections` does not take ownership of establishing backend authorization or durable secret storage.
+`@tbauth/ui-app-connections` does not take ownership of establishing backend authorization or durable secret storage.
 
 Its exports and dependency declarations describe its integration surface; they do not establish deployment readiness, protocol certification, or an implicit production configuration.
 
 ## Related Packages
 
-`@tba/ui-app-connections` declares no local runtime dependency and has no direct consumer in the active manifest graph. Browse the [105-ui layer](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/105-ui) for adjacent package responsibilities; adjacency does not imply a dependency.
+`@tbauth/client-app-connections` supplies the shared consent and permission types.
+`@tbauth/ui-app-connections` supplies the React controls for those types.
 
 ## Project Links
 
@@ -106,7 +117,7 @@ Its exports and dependency declarations describe its integration surface; they d
 
 ## Governance
 
-`@tba/ui-app-connections` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `105-ui` ownership, public imports, declared dependencies, examples, and release metadata aligned.
+`@tbauth/ui-app-connections` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `105-ui` ownership, public imports, declared dependencies, examples, and release metadata aligned.
 
 Changes must pass the [README standards gate](https://github.com/tigrbl/tigrbl_auth/blob/master/.github/workflows/readme-standards.yml), package checks, and the evidence requirements relevant to the changed behavior. Update SSOT through the repository's CLI workflow when changing governed claims or boundaries.
 
@@ -119,4 +130,4 @@ uv run --no-project python scripts/verify_readme_standards.py
 uv run --no-project python scripts/verify_package_standards.py
 ```
 
-These checks validate documentation structure, metadata, and branding for `@tba/ui-app-connections`. Behavioral and integration assertions require the package's own tests and their recorded evidence.
+These checks validate documentation structure, metadata, and branding for `@tbauth/ui-app-connections`. Behavioral and integration assertions require the package's own tests and their recorded evidence.
