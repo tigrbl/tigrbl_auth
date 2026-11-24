@@ -73,7 +73,7 @@ Its exports and dependency declarations describe its integration surface; they d
 
 ### Prerequisites
 
-Python `>=3.10,<3.16` is required. The [manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-oauth/pyproject.toml) declares runtime dependencies including `pydantic`, `tba-protocol-gnap`, `tba-contracts-identity`, `tba-capability-token-introspection`, `tba-capability-token-issuance`, `tba-capability-token-revocation`, `tba-capability-authorization-request-staging`, `tba-capability-client-registration`, `tba-primitives-identity`, `tba-provider-identity-jose`, `tba-contracts-security-trust`, `tba-provider-security-proof-pkce`. Read the example’s inputs and service requirements before execution.
+Python `>=3.10,<3.16` is required. The [manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-oauth/pyproject.toml) declares runtime dependencies including `pydantic`, `tba-contracts-identity`, `tba-capability-token-introspection`, `tba-capability-token-issuance`, `tba-capability-token-revocation`, `tba-capability-authorization-request-staging`, `tba-capability-client-registration`, `tba-primitives-identity`, `tba-provider-identity-jose`, `tba-contracts-security-trust`, `tba-provider-security-proof-pkce`. Read the example’s inputs and service requirements before execution.
 
 ### Installation
 
@@ -145,6 +145,10 @@ The example demonstrates the documented `tba-protocol-oauth` source boundary or 
 ---
 
 ## Usage
+
+GNAP consumers can install `tba-protocol-gnap` separately and import
+`GnapRequest` or `parse_gnap_request` from `tba_protocol_gnap`. Update callers of
+the former `tba_protocol_oauth.standards.gnap` import to use that path.
 
 ### Dynamic client registration scope ceilings
 

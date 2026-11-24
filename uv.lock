@@ -8524,7 +8524,6 @@ dependencies = [
     { name = "tba-contracts-identity" },
     { name = "tba-contracts-security-trust" },
     { name = "tba-primitives-identity" },
-    { name = "tba-protocol-gnap" },
     { name = "tba-provider-identity-jose" },
     { name = "tba-provider-security-proof-pkce" },
 ]
@@ -8552,7 +8551,6 @@ requires-dist = [
     { name = "tba-contracts-identity", specifier = "==0.4.0.dev3" },
     { name = "tba-contracts-security-trust", specifier = "==0.1.1.dev1" },
     { name = "tba-primitives-identity", specifier = "==0.4.0.dev3" },
-    { name = "tba-protocol-gnap", specifier = "==0.4.0.dev3" },
     { name = "tba-provider-identity-jose", specifier = "==0.4.0.dev3" },
     { name = "tba-provider-security-proof-pkce", specifier = "==0.1.1.dev1" },
 ]
