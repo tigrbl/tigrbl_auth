@@ -24,7 +24,7 @@ jobs:
           uv run --no-project --with pytest==9.0.3 pytest --noconftest
           pkgs/120-tests/tba-tests-release/tests/unit/test_oauth_gnap_distribution_boundary.py
   quality:
-    uses: tigrbl/tigrbl_auth/.github/workflows/_quality.yml@c48235311f1a4ec1b81543f3838c981943b1dc0e
+    uses: tigrbl/tigrbl_auth/.github/workflows/_quality.yml@12ec516cfdd82546de4ce504e7672ab5062deac9
     permissions:
       actions: read
       contents: read
@@ -46,4 +46,4 @@ jobs:
   wimse-matrix-validation:
     uses: tigrbl/tigrbl_auth/.github/workflows/wimse-matrix-validation.yml@c48235311f1a4ec1b81543f3838c981943b1dc0e
   readme-standards:
-    uses: tigrbl/tigrbl_auth/.github/workflows/readme-standards.yml@c48235311f1a4ec1b81543f3838c981943b1dc0e
+    uses: tigrbl/tigrbl_auth/.github/workflows/readme-standards.yml@12ec516cfdd82546de4ce504e7672ab5062deac9

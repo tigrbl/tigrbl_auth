@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1142"
+number: 1142
+slug: "authenticator-lifecycle-ownership"
+title: "Authenticator verification and lifecycle ownership"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Assign reusable enrollment and step-up transitions to a TBA lifecycle runtime."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  Apply ADR-1047, ADR-1073, ADR-1074, and ADR-1134. Keep password and TOTP proof verification in their authenticator providers. Reuse the WebAuthn protocol, router, storage, and durability packages for passkey ceremonies. Compose the MFA challenge capability with runtime handlers for enrollment and step-up. The runtime owns factor lifecycle transitions and assures the verified authentication context.
+
+  The host supplies scope, policy, credential storage and transaction adapters, factor configuration, and presentation. Keep recovery policy, required factors, and remembered-device policy configurable. Independently qualify the lifecycle with durable storage, real factor verification, and a synthetic hosted browser fixture.
+
+  Governed features: feat:mfa-enrollment-lifecycle, feat:mfa-step-up-assurance, feat:credential-passkey-webauthn, feat:f07-webauthn.
+
+  ## Passkey composition scope
+
+  The candidate runtime adoption and acceptance are tracked by feat:passkey-ceremony-lifecycle.

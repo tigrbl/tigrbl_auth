@@ -61,12 +61,8 @@ jobs:
         run: uv run python scripts/generate_claim_registries.py --verify
       - name: Verify current-state truth chain
         shell: bash
-        run: |
-          if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
-            uv run python scripts/verify_truth_chain.py --mode current-state --use-recorded-date
-          else
-            uv run python scripts/verify_truth_chain.py --mode current-state
-          fi
+        # The recorded date is snapshot metadata. The verifier recomputes the current evidence and readiness.
+        run: uv run python scripts/verify_truth_chain.py --mode current-state --use-recorded-date
       - name: Verify the package index
         shell: bash
         run: |
