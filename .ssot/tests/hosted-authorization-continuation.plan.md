@@ -6,12 +6,12 @@ Governed by spc:1239.
 
 ## T0
 
-Verify resume, restart, and unavailable decisions for bound, expired, replayed, mismatched, and unreadable transactions.
+Test resume, restart and unavailable for valid, expired, mismatched and consumed requests. Preserve issuer, client, exact redirect, state, nonce and PKCE when applicable.
 
 ## T1
 
-Persist and consume a validated authorization request through verification and first enrollment. Verify only one caller resumes and the provider retains the client and exact redirect binding.
+Use durable transaction adapters through email verification and first MFA enrollment. Concurrent attempts produce at most one resume.
 
 ## T2
 
-Use a synthetic relying party and browser to start authorization and finish verification and first enrollment. Observe the original callback in a valid transaction and exercise a registered restart after expiry.
+Use a synthetic relying party and installed packages to resume the original callback after first enrollment, and verify a separately registered restart after expiry.

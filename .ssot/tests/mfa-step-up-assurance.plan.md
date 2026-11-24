@@ -6,12 +6,12 @@ Governed by spc:1238.
 
 ## T0
 
-Verify factor and time-based freshness rules, subject binding, and typed challenge and expiry outcomes.
+Check scope, original subject, requested factor, purpose, and freshness rules for each proof outcome.
 
 ## T1
 
-Apply two fixture policies using real proof and durable replay records. Verify only an eligible proof upgrades the active authentication context.
+Use actual factor verifiers, a durable replay record, and two injected policies. Verify that only a fresh eligible proof upgrades assurance.
 
 ## T2
 
-Use a synthetic hosted provider and relying party to prove policy-driven step-up and preserve the original subject through completion.
+Show the synthetic relying party resumes the same subject at the required assurance.
