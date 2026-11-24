@@ -161,7 +161,7 @@ The following public-entry-point example belongs to `tba-plugin-tigrbl`. Standal
 For operation authorization, declare an `OperationSecurity` action and resource
 type and install `OperationAuthorizationAdapter` on a Tigrbl app with the
 `SECURITY` and `DEPENDENCIES` phases. The adapter registers its decision
-dependency through `app.set_auth(operation_authorizer=...)`.
+dependency through `app.set_auth(authorize=...)`.
 
 Supply credential verification, resource resolution and a policy loader. These
 callbacks run before the operation transaction. For a write governed by mutable

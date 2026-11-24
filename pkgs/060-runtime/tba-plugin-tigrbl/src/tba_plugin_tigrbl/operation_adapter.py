@@ -51,8 +51,13 @@ class OperationAuthorizationAdapter:
         """Register the protected-operation dependency in Tigrbl's SECURITY phase."""
         from tigrbl import HTTPException
 
-        async def authorize(operation: Any, ctx: Any) -> bool:
-            identity = ctx.get("auth_context")
+        async def authorize(
+            _request, _model, _alias, _payload, user, *, ctx=None
+        ) -> bool | None:
+            if ctx is None:
+                return None
+            operation = ctx["operation_security"]
+            identity = user
             if not isinstance(identity, OperationPrincipal):
                 identity = self.authenticate(ctx)
                 if isawaitable(identity):
@@ -96,4 +101,4 @@ class OperationAuthorizationAdapter:
             ctx["operation_principal"] = identity
             return True
 
-        app.set_auth(operation_authorizer=authorize)
+        app.set_auth(authorize=authorize)
