@@ -194,6 +194,10 @@ Use the explicit `tba-protocol-oauth` imports documented below and keep collabor
 
 ## Package Boundary
 
+The OAuth package owns OAuth registration, authorization, and token exchanges.
+Deployments that offer GNAP too compose the standalone package explicitly.
+See the [OAuth and GNAP boundary](../../../architecture/oauth-gnap-protocol-boundary.md).
+
 ### What It Owns
 
 - OAuth authorization and token protocol behavior
