@@ -19,15 +19,15 @@ moves:
   status: completed
   legacy_boundary: legacy_transition
 - source: tba_auth/routers/surface.py
-  target: pkgs/060-runtime/tba-server-identity/src/tba_server_identity/surfaces.py
+  target: pkgs/090-backend-apps/tba-app-backend-core/src/tba_app_backend_core/surfaces/surface_api.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tba_auth/routers/auth_flows.py
-  target: pkgs/060-runtime/tba-server-identity/src/tba_server_identity/login_surface.py
+  target: pkgs/090-backend-apps/tba-app-backend-core/src/tba_app_backend_core/surfaces/login_surface.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tba_auth/routers/authz/oidc.py
-  target: pkgs/060-runtime/tba-server-identity/src/tba_server_identity/authorization_surface.py
+  target: pkgs/090-backend-apps/tba-app-backend-core/src/tba_app_backend_core/surfaces/authorization_surface.py
   status: completed
   legacy_boundary: legacy_transition
 - source: tba_auth/orm
