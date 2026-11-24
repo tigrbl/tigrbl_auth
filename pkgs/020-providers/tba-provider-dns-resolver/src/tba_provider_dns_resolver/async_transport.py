@@ -297,7 +297,7 @@ async def tls_query(
     one_rr_per_rrset=False,
     ignore_trailing=False,
 ) -> Message:
-    context = ssl.create_default_context() if context is None else context
+    context = _socket_transport.tls_client_context(context)
     if certificate_ip is not None:
         _socket_transport._require_verified_context(context)
     return await _stream_query(

@@ -92,7 +92,7 @@ def stream(
         if server_name is None and context is None and certificate_ip is None:
             yield DnsStream(sock, deadline)
         else:
-            tls = ssl.create_default_context() if context is None else context
+            tls = tls_client_context(context)
             if certificate_ip is not None:
                 _require_verified_context(tls)
             sock.settimeout(remaining(deadline))
@@ -100,6 +100,15 @@ def stream(
                 if certificate_ip is not None:
                     _check_tls_peer_ip(secure.getpeercert(), certificate_ip)
                 yield DnsStream(secure, deadline)
+
+
+def tls_client_context(context: ssl.SSLContext | None) -> ssl.SSLContext:
+    if context is None:
+        context = ssl.create_default_context()
+        context.minimum_version = max(context.minimum_version, ssl.TLSVersion.TLSv1_2)
+    elif context.minimum_version < ssl.TLSVersion.TLSv1_2:
+        raise ValueError("DNS-over-TLS requires TLS 1.2 or newer")
+    return context
 
 
 def _require_verified_context(context: ssl.SSLContext) -> None:
