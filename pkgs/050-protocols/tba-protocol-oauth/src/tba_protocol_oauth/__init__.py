@@ -30,7 +30,9 @@ from .protocol import (
     OAuthProtocolService,
     OAuthStateOperations,
     TokenExchangeResult,
+    resolve_client_registration_scopes,
     sha256_thumbprint,
+    validate_client_authorization_scopes,
 )
 from .schemas import (
     AuthorizationCodeGrantForm,
@@ -116,7 +118,9 @@ __all__ = [
     "compose_oauth_claim_set",
     "compose_token_exchange_claim_set",
     "migrate_client",
+    "resolve_client_registration_scopes",
     "select_version",
     "sha256_thumbprint",
     "supports",
+    "validate_client_authorization_scopes",
 ]

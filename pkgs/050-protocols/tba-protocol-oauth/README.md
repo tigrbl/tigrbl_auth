@@ -146,6 +146,19 @@ The example demonstrates the documented `tba-protocol-oauth` source boundary or 
 
 ## Usage
 
+### Dynamic client registration scope ceilings
+
+HTTP adapters can call `resolve_client_registration_scopes` with the raw
+registration `scope` string, or `None` when the field is omitted. Supply the
+server's supported scopes and a default selected by trusted server configuration.
+For example, a read-only profile may default to `("journal:read",)` and an
+editorial profile may default to `("journal:read", "journal:publish")`.
+An explicit scope declaration replaces the default and must be nonempty and
+supported. Return and persist the resolved tuple as the client's scope ceiling.
+Use `validate_client_authorization_scopes` with the persisted ceiling before
+staging consent. A registered scope is eligible to request and does not grant
+access without user approval and the deployment's authorization policy.
+
 ### Common Workflows
 
 <!-- readme-standards:begin example.usage -->
