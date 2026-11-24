@@ -10,6 +10,7 @@
     "pkgs/075-clients/tba-typescript-client-tenant-administration",
     "pkgs/075-clients/tba-typescript-client-platform-administration",
     "pkgs/075-clients/tba-typescript-client-policy-decision",
+    "pkgs/075-clients/tba-typescript-client-app-connections",
     "pkgs/105-ui/tba-ui-administration",
     "pkgs/105-ui/tba-ui-platform-administration",
     "pkgs/105-ui/tba-ui-tenant-administration",
