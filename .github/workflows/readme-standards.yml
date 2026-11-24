@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   readme-standards:
-    runs-on: ${{ (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/docs/readme-standards-20261119' || (github.event_name == 'pull_request' && github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository)) && fromJSON('["self-hosted","Linux","X64","trusted-public-ci"]') || 'ubuntu-24.04' }}
+    runs-on: ${{ (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/docs/readme-standards-20261119' || (github.event_name == 'pull_request' && github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository)) && fromJSON('["sad-lewin","shortlived","testing","trusted-public-ci","Linux","X64"]') || 'ubuntu-24.04' }}
     steps:
       - uses: actions/checkout@v6
       - uses: astral-sh/setup-uv@v6
