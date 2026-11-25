@@ -82,6 +82,21 @@ def header(readme: Path, original: str, root_path: Path | None = None) -> str:
     if meta.get("private"):
         metadata.append(badge("Distribution", "private source", "6e7781", manifest_url))
 
+    if (
+        not python
+        and not meta.get("private")
+        and meta.get("readmeStandards", {}).get("npmPublished")
+    ):
+        package = meta["name"]
+        registry_name = quote(package, safe="@/")
+        metadata.append(
+            image_link(
+                f"npm version for {package}",
+                f"https://img.shields.io/npm/v/{registry_name}",
+                f"https://www.npmjs.com/package/{registry_name}",
+            )
+        )
+
     metrics = []
     if python and (root or publishable):
         package = "tba-auth" if root else meta["name"]

@@ -29,13 +29,13 @@ body: |-
   
   ## Canonical layers
   
-  Implementations MUST use the exact layer ids and meanings recorded by `pkgs/layers.toml`: `000-primitives`, `001-storage`, `002-contracts`, `005-bases`, `010-concrete`, `020-providers`, `030-storage-runtime`, `040-capabilities`, `050-protocols`, `060-runtime`, `070-facade`, `080-routers`, `090-backend-apps`, `100-uix-core`, `105-ui`, `110-examples`, `120-tests`, and `deprecated`.
+  Implementations MUST use the exact layer ids and meanings recorded by `index.toml`: `000-primitives`, `001-storage`, `002-contracts`, `005-bases`, `010-concrete`, `020-providers`, `030-storage-runtime`, `040-capabilities`, `050-protocols`, `060-runtime`, `070-facade`, `080-routers`, `090-backend-apps`, `100-uix-core`, `105-ui`, `110-examples`, `120-tests`, and `deprecated`.
   
   Each Python distribution MUST resolve to exactly one layer from its path. Each JavaScript workspace MUST resolve to its declared JavaScript layer. Root editable sources and the lockfile MUST use the same canonical package paths.
   
   ## Dependency requirements
   
-  Production package dependencies and source imports MUST follow the allowed target-layer rules in `pkgs/layers.toml`. Package-specific exceptions MUST be explicit, test-visible, justified, and removable; a new unlisted upward edge MUST fail closed.
+  Production package dependencies and source imports MUST follow the allowed target-layer rules in `index.toml`. Package-specific exceptions MUST be explicit, test-visible, justified, and removable; a new unlisted upward edge MUST fail closed.
   
   Backend apps MAY depend on routers. Routers MUST NOT depend on backend apps. Product UI packages MAY depend on UIX core. UIX core MUST NOT depend on product UI packages. Examples and tests are terminal: production packages MUST NOT depend on either, and examples MUST NOT depend on tests.
   

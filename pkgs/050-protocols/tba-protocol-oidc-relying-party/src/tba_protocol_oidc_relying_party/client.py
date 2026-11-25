@@ -21,6 +21,71 @@ from .errors import RPError
 from .pkce import PkceVerifier, make_pkce_verifier, pkce_s256_challenge
 from .public_client import check_callback, check_discovery, https_url, token_claims
 
+
+def authorization_options(
+    intent: str = "ordinary", acr_values: str | None = None
+) -> dict[str, str]:
+    """Translate a login intent into controlled authorization parameters."""
+    if intent not in ("ordinary", "interactive", "step_up"):
+        raise RPError("invalid login intent")
+    if intent == "step_up":
+        if (
+            not isinstance(acr_values, str)
+            or not acr_values.split()
+            or len(acr_values) > 512
+        ):
+            raise RPError("step-up requires requested assurance values")
+        return {"prompt": "login", "acr_values": acr_values}
+    if acr_values is not None:
+        raise RPError("requested assurance values require step-up")
+    return {"prompt": "login"} if intent == "interactive" else {}
+
+
+def resolve_end_session_endpoint(
+    metadata: Mapping[str, Any], issuer: str
+) -> str | None:
+    """Resolve an advertised end-session endpoint on the configured issuer origin."""
+    expected = urlparse(https_url(issuer, "issuer"))
+    if "?" in issuer or metadata.get("issuer") != issuer:
+        raise RPError("issuer metadata mismatch")
+    value = metadata.get("end_session_endpoint")
+    if value is None:
+        return None
+    endpoint = https_url(value, "end_session_endpoint")
+    actual = urlparse(endpoint)
+    actual_port = 443 if actual.port is None else actual.port
+    expected_port = 443 if expected.port is None else expected.port
+    if "?" in endpoint or (actual.hostname, actual_port) != (
+        expected.hostname,
+        expected_port,
+    ):
+        raise RPError(
+            "end_session_endpoint must belong to the configured issuer origin"
+        )
+    return endpoint
+
+
+def validate_logout_return(url: str, registered: str, expected_state: str) -> bool:
+    """Validate a return before the host atomically consumes browser-bound state."""
+    if not expected_state or not expected_state.isascii() or len(expected_state) > 512:
+        return False
+    try:
+        actual = urlparse(https_url(url, "logout return"))
+        expected = urlparse(https_url(registered, "post-logout redirect URI"))
+        query = parse_qs(actual.query, keep_blank_values=True, max_num_fields=64)
+        fixed = parse_qs(expected.query, keep_blank_values=True, max_num_fields=64)
+    except (RPError, ValueError):
+        return False
+    state = query.pop("state", [])
+    return (
+        url.partition("?")[0] == registered.partition("?")[0]
+        and query == fixed
+        and len(state) == 1
+        and state[0].isascii()
+        and compare_digest(state[0], expected_state)
+    )
+
+
 JsonGetter = Callable[[str], Awaitable[Mapping[str, Any]]]
 FormPoster = Callable[[str, Mapping[str, str]], Awaitable[Mapping[str, Any]]]
 
@@ -125,8 +190,18 @@ class RelyingParty:
         self.token_store = session_store
 
     def build_authorization_url(
-        self, authorization_endpoint: str
+        self,
+        authorization_endpoint: str,
+        *,
+        intent: str = "ordinary",
+        acr_values: str | None = None,
     ) -> tuple[str, LoginRequest]:
+        options = authorization_options(intent, acr_values)
+        query = parse_qs(urlparse(authorization_endpoint).query, keep_blank_values=True)
+        if options.keys() & query.keys() or (options and "acr_values" in query):
+            raise RPError(
+                "authorization endpoint already contains login intent parameters"
+            )
         login = self.state_store.create(
             redirect_uri=self.config.redirect_uri, scope=self.config.scopes
         )
@@ -139,6 +214,7 @@ class RelyingParty:
             "state": login.state,
             "nonce": login.nonce,
             **pkce.authorization_params(),
+            **options,
         }
         separator = "&" if "?" in authorization_endpoint else "?"
         return f"{authorization_endpoint}{separator}{urlencode(params)}", login
@@ -175,11 +251,19 @@ class RelyingParty:
         return metadata
 
     async def begin_public_login(
-        self, get_json: JsonGetter
+        self,
+        get_json: JsonGetter,
+        *,
+        intent: str = "ordinary",
+        acr_values: str | None = None,
     ) -> tuple[str, LoginRequest]:
         """Discover the issuer and start a public S256 login via the configured state store."""
         metadata = await self._public_metadata(get_json)
-        return self.build_authorization_url(metadata["authorization_endpoint"])
+        return self.build_authorization_url(
+            metadata["authorization_endpoint"],
+            intent=intent,
+            acr_values=acr_values,
+        )
 
     async def complete_public_callback(
         self,
@@ -188,6 +272,7 @@ class RelyingParty:
         expected_state: str,
         get_json: JsonGetter,
         post_form: FormPoster,
+        expected_subject: str | None = None,
     ) -> VerifiedCallback:
         """Redeem a browser-bound callback and save tokens only after ID-token verification.
 
@@ -253,9 +338,15 @@ class RelyingParty:
         if "azp" in claims and claims["azp"] != self.config.client_id:
             raise RPError("ID token authorized party mismatch")
         identity = verify_id_token(
-            id_token, verifier=lambda _: claims, issuer=self.config.issuer,
-            audience=self.config.client_id, nonce=login.nonce, now=int(time()),
+            id_token,
+            verifier=lambda _: claims,
+            issuer=self.config.issuer,
+            audience=self.config.client_id,
+            nonce=login.nonce,
+            now=int(time()),
         )
+        if expected_subject is not None and identity.subject != expected_subject:
+            raise RPError("callback subject does not match the expected account")
         session = RPSession(identity.subject, id_token, access_token, refresh_token)
         self.token_store.save(login.state, session)
         return VerifiedCallback(identity, session)
@@ -284,7 +375,9 @@ class RelyingParty:
         if secret is None:
             raise RPError("confidential token exchange requires a client secret")
         login = self.validate_callback(callback)
-        token_response = dict(self._exchange_confidential(exchange, callback, login, secret))
+        token_response = dict(
+            self._exchange_confidential(exchange, callback, login, secret)
+        )
         session = RPSession(
             subject=token_response.get("sub", ""),
             id_token=token_response["id_token"],
@@ -434,11 +527,20 @@ def verify_id_token(
         if now - int(claims["auth_time"]) > maximum_age:
             raise RPError("ID token authentication is too old")
     audiences = claims.get("aud", ())
-    if not isinstance(audiences, str) and len(tuple(audiences)) > 1 and claims.get("azp") != audience:
+    if (
+        not isinstance(audiences, str)
+        and len(tuple(audiences)) > 1
+        and claims.get("azp") != audience
+    ):
         raise RPError("ID token authorized party mismatch")
     if userinfo is not None and userinfo.get("sub") != claims["sub"]:
         raise RPError("UserInfo subject does not match ID token subject")
-    return VerifiedExternalIdentity(str(claims["sub"]), str(claims["iss"]), claims, dict(userinfo) if userinfo is not None else None)
+    return VerifiedExternalIdentity(
+        str(claims["sub"]),
+        str(claims["iss"]),
+        claims,
+        dict(userinfo) if userinfo is not None else None,
+    )
 
 
 def shared_vector_manifest() -> Mapping[str, str]:
