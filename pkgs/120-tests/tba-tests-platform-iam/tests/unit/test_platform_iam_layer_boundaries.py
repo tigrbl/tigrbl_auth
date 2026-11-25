@@ -9,9 +9,9 @@ sys.path.insert(0, str(ROOT))
 
 
 def test_client_layer_is_canonical_and_not_a_facade_or_uix_layer() -> None:
-    policy = tomllib.loads((ROOT / "pkgs/layers.toml").read_text(encoding="utf-8"))
+    policy = tomllib.loads((ROOT / "index.toml").read_text(encoding="utf-8"))
     layers = {row["id"]: row for row in policy["layers"]}
-    assert layers["075-clients"]["category"] == "client"
+    assert layers["075-clients"]["metadata"]["tba"]["category"] == "client"
     assert layers["075-clients"]["order"] == 75
 
 

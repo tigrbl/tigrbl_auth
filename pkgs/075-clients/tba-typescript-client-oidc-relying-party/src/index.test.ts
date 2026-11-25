@@ -1,3 +1,10 @@
+import { readFileSync } from "node:fs";
+import {
+  authorizationOptions,
+  resolveEndSessionEndpoint,
+  validateLogoutReturn,
+  type LoginIntent,
+} from "./index.js";
 import { describe, expect, it } from "vitest";
 import {
   BrowserMemorySession,
@@ -25,7 +32,7 @@ const config = {
   scopes: ["openid", "profile"],
 };
 
-describe("@tba/client-oidc-relying-party", () => {
+describe("@tbauth/client-oidc-relying-party", () => {
   it("builds browser-safe authorization URLs with PKCE", async () => {
     const login = await createLoginRequest(config);
     const url = await buildAuthorizationUrl(config, "https://issuer.example.test/authorize", login);
@@ -69,9 +76,9 @@ describe("@tba/client-oidc-relying-party", () => {
   });
 
   it("exposes node matrix and npm provenance manifests", () => {
-    expect(nodeVersionMatrix()).toEqual(["@tba/client-oidc-relying-party@node22", "@tba/client-oidc-relying-party@node24", "@tba/client-oidc-relying-party@node26"]);
+    expect(nodeVersionMatrix()).toEqual(["@tbauth/client-oidc-relying-party@node22", "@tbauth/client-oidc-relying-party@node24", "@tbauth/client-oidc-relying-party@node26"]);
     expect(npmProvenanceManifest()).toMatchObject({
-      package: "@tba/client-oidc-relying-party",
+      package: "@tbauth/client-oidc-relying-party",
       workflow: "monorepo-npm-package-release.yml",
       provenance: true,
     });
@@ -103,3 +110,44 @@ describe("@tba/client-oidc-relying-party", () => {
     ).toThrow(/audience/u);
   });
 });
+
+const sessionVectors = JSON.parse(readFileSync(
+  new URL("../../../../tests/fixtures/oidc-rp-session-vectors.json", import.meta.url),
+  "utf-8",
+)) as {
+  intents: { intent: LoginIntent; acrValues?: string; expected?: Record<string, string>; error?: boolean }[];
+  discovery: { endpoint?: string; expected?: string; error?: boolean; metadataIssuer?: string }[];
+  logout: { url: string; registered?: string; accepted: boolean }[];
+};
+
+for (const vector of sessionVectors.intents) {
+  it(`uses shared authorization intent vector ${JSON.stringify(vector)}`, () => {
+    const resolve = () => authorizationOptions(vector.intent, vector.acrValues);
+    if (vector.error) expect(resolve).toThrow();
+    else expect(resolve()).toEqual(vector.expected);
+  });
+}
+
+for (const vector of sessionVectors.logout) {
+  it(`uses shared logout return vector ${vector.url}`, () => {
+    expect(validateLogoutReturn(
+      vector.url, vector.registered ?? "https://rp.example/out", "browser",
+    )).toBe(vector.accepted);
+  });
+}
+
+
+for (const vector of sessionVectors.discovery) {
+  it(`uses shared issuer end-session discovery vector ${JSON.stringify(vector)}`, () => {
+    const issuer = "https://authority.example";
+    const discover = () => resolveEndSessionEndpoint({
+      issuer: vector.metadataIssuer ?? issuer,
+      authorization_endpoint: issuer + "/authorize",
+      token_endpoint: issuer + "/token",
+      jwks_uri: issuer + "/jwks",
+      end_session_endpoint: vector.endpoint,
+    }, issuer);
+    if (vector.error) expect(discover).toThrow();
+    else expect(discover()).toBe(vector.expected);
+  });
+}

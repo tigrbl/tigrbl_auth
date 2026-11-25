@@ -493,6 +493,34 @@
         "providers": []
       },
       "families": [
+        "mcp"
+      ],
+      "implementations": [
+        {
+          "capability_id": "mcp.authorization",
+          "class": "MCPAuthorizationCapability",
+          "operations": [
+            "approve",
+            "authorize_tool",
+            "resolve",
+            "revoke"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-mcp-authorization/src/tba_capability_mcp_authorization/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-mcp-authorization",
+      "protocol_packages": [],
+      "purpose": "coordinate active OAuth grants, account and bot scopes, resource authorization, and owner-bound revocation across MCP resource servers"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
         "authentication"
       ],
       "implementations": [
