@@ -39,7 +39,7 @@ requires = ["setuptools>=77.0.3"]
 build-backend = "setuptools.build_meta"
 
 [dependency-groups]
-dev = ["readme-standards==0.1.1; python_version >= \"3.11\""]
+dev = ["readme-standards==0.1.3; python_version >= \"3.11\""]
 
 [tool.readme_standards]
 policy = "package-guide-v1"
