@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1239"
+number: 1239
+slug: "hosted-authorization-continuation"
+title: "Hosted Authorization Continuation"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Define issuer-bound provider authorization continuation through hosted authentication."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  Create an expiring continuation after the provider validates the issuer, client registration, exact redirect and authorization request. Preserve the validated request data, including state, nonce, and PKCE where present. Bind the continuation to the issuer, registered client, browser transaction, and required authentication context.
+
+  After the host reports the required verification or enrollment outcome, check the bindings and consume an eligible continuation atomically. Return resume with the validated request, restart required for a definitively unusable flow, or unavailable when the runtime cannot resolve or complete the flow safely. Restart destinations come from host-owned registration and policy. Replay, timeout, mismatch, and storage failure cannot resume the old request. The host chooses the page or registered destination.
+
+  Governed features: feat:hosted-authorization-continuation.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1143"
+  - "adr:1117"

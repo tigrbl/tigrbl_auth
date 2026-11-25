@@ -1,0 +1,21 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1143"
+number: 1143
+slug: "provider-authorization-continuation-ownership"
+title: "Provider authorization continuation ownership"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Assign reusable hosted authorization continuation to a TBA provider runtime."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  Apply ADR-1100, ADR-1102, and ADR-1117. The provider runtime stores a validated authorization request and decides whether it may resume after a hosted authentication step. The host owns issuer and client lookup, account policy, the required verification or MFA steps, and selection of registered restart or fallback destinations. Reuse OAuth and OIDC contracts and a transactional continuation store.
+
+  Keep provider continuation and RP callback correlation independently composable. Use a synthetic provider and relying party in acceptance, exercising both resume and restart.
+
+  Governed features: feat:hosted-authorization-continuation.
