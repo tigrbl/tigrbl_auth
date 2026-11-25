@@ -4052,6 +4052,15 @@ ecosystem = "pypi"
 dependencies = ["tba-capability-access-governance", "tba-capability-policy-administration", "tba-capability-policy-assurance", "tba-concrete-authority-graph", "tba-concrete-authorization-policy-rules", "tba-concrete-policy-decision-engine-default", "tba-contracts-identity", "tba-contracts-release", "tba-primitives-identity", "tba-provider-authorization-policy-decision-engine", "tba-provider-security-authorization-provenance-builder"]
 
 [[packages]]
+id = "tba-runtime-hosted-authorization-continuation"
+name = "tba-runtime-hosted-authorization-continuation"
+path = "pkgs/060-runtime/tba-runtime-hosted-authorization-continuation"
+layer = "060-runtime"
+order = 0
+ecosystem = "pypi"
+dependencies = []
+
+[[packages]]
 id = "tba-runtime-identity"
 name = "tba-runtime-identity"
 path = "pkgs/060-runtime/tba-runtime-identity"
@@ -4064,6 +4073,24 @@ dependencies = ["tba-bases-certificate", "tba-capability-protected-envelope", "t
 id = "tba-runtime-identity-authoring"
 name = "tba-runtime-identity-authoring"
 path = "pkgs/060-runtime/tba-runtime-identity-authoring"
+layer = "060-runtime"
+order = 0
+ecosystem = "pypi"
+dependencies = []
+
+[[packages]]
+id = "tba-runtime-mfa-lifecycle"
+name = "tba-runtime-mfa-lifecycle"
+path = "pkgs/060-runtime/tba-runtime-mfa-lifecycle"
+layer = "060-runtime"
+order = 0
+ecosystem = "pypi"
+dependencies = []
+
+[[packages]]
+id = "tba-runtime-oidc-provider-logout"
+name = "tba-runtime-oidc-provider-logout"
+path = "pkgs/060-runtime/tba-runtime-oidc-provider-logout"
 layer = "060-runtime"
 order = 0
 ecosystem = "pypi"
@@ -4103,7 +4130,7 @@ path = "pkgs/060-runtime/tba-server-identity"
 layer = "060-runtime"
 order = 2
 ecosystem = "pypi"
-dependencies = ["tba-capability-account-self-service", "tba-capability-api-key-authentication", "tba-capability-artifact-processing", "tba-capability-authorization-request-staging", "tba-capability-client-registration", "tba-capability-client-secret-authentication", "tba-capability-identity-administration", "tba-capability-password-authentication", "tba-capability-realm-administration", "tba-capability-replay-protection", "tba-capability-service-key-authentication", "tba-capability-tenant-administration", "tba-capability-token-exchange", "tba-capability-token-introspection", "tba-capability-token-issuance", "tba-capability-token-revocation", "tba-certification-release", "tba-contracts-identity", "tba-protocol-gnap", "tba-protocol-oauth", "tba-protocol-oidc", "tba-provider-identity-jose", "tba-provider-replay-memory", "tba-provider-secret-hashing-bcrypt", "tba-runtime-identity", "tba-runtime-identity-storage", "tba-storage-audit", "tba-storage-oauth", "tba-storage-operator", "tba-storage-principals", "tba-storage-tenancy"]
+dependencies = ["tba-capability-account-self-service", "tba-capability-api-key-authentication", "tba-capability-artifact-processing", "tba-capability-authorization-request-staging", "tba-capability-client-registration", "tba-capability-client-secret-authentication", "tba-capability-identity-administration", "tba-capability-password-authentication", "tba-capability-realm-administration", "tba-capability-replay-protection", "tba-capability-service-key-authentication", "tba-capability-tenant-administration", "tba-capability-token-exchange", "tba-capability-token-introspection", "tba-capability-token-issuance", "tba-capability-token-revocation", "tba-certification-release", "tba-contracts-identity", "tba-protocol-gnap", "tba-protocol-oauth", "tba-protocol-oidc", "tba-provider-identity-jose", "tba-provider-replay-memory", "tba-provider-secret-hashing-bcrypt", "tba-runtime-identity", "tba-runtime-identity-storage", "tba-runtime-oidc-provider-logout", "tba-storage-audit", "tba-storage-oauth", "tba-storage-operator", "tba-storage-principals", "tba-storage-tenancy"]
 
 [[packages]]
 id = "tba-plugin-tigrbl"
@@ -4112,7 +4139,7 @@ path = "pkgs/060-runtime/tba-plugin-tigrbl"
 layer = "060-runtime"
 order = 3
 ecosystem = "pypi"
-dependencies = ["tba-runtime-identity", "tba-server-identity"]
+dependencies = ["tba-contracts-authorization", "tba-runtime-identity", "tba-server-identity"]
 
 [[packages]]
 id = "tba-runtime-identity-administration"

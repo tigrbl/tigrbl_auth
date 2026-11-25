@@ -6,12 +6,17 @@ Governed by spc:1133.
 
 ## T0
 
-Run shared request, endpoint selection, and return-state vectors for Python and TypeScript.
+Run shared Python and TypeScript vectors for trusted discovery, session-bound issuer and hint, exact return URI, and return-state binding.
 
 ## T1
 
-Install each RP package against synthetic discovery and end-session endpoints. Verify local cleanup and reject mismatched or repeated return state when used.
+Install each RP package cleanly. Exercise missing provider logout support, state mismatch and replay, and local cleanup versus provider cancellation or failure.
 
 ## T2
 
-Run both installed package fixtures against the same synthetic provider. Compare issuer, request, callback, and local cleanup outcomes.
+Use both installed RP packages against the same repository-owned synthetic provider. Assert equivalent browser outcomes and a fresh subject after sign-out.
+
+## Executable tests
+
+- [Python tests](../../pkgs/120-tests/tba-tests-oidc/tests/unit/test_rp_session_vectors.py)
+- [TypeScript tests](../../pkgs/075-clients/tba-typescript-client-oidc-relying-party/src/index.test.ts)

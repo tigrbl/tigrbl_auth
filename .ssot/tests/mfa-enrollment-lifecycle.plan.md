@@ -6,12 +6,16 @@ Governed by spc:1238.
 
 ## T0
 
-Verify pending, active, cancelled, and expired state transitions, scope and account binding, and the requirement for proof before activation.
+Table-test scope and account binding, proof before activation, expiration, cancellation, replay, and replacement.
 
 ## T1
 
-Compose real TOTP and WebAuthn verifiers with transactional test storage. Verify single activation under concurrent completion and preservation of the active factor when replacement fails.
+Integrate TOTP and WebAuthn verification with transactional storage. Concurrent completion activates one credential and a failed replacement preserves the prior factor.
 
 ## T2
 
-Run a synthetic hosted browser fixture through first enrollment, ensuing challenge, and factor replacement using isolated accounts. Exercise an actual browser passkey ceremony before claiming passkey coverage.
+Complete first enrollment and subsequent verification in the repository-owned browser fixture using synthetic accounts.
+
+## Executable tests
+
+- [Python tests](../../pkgs/120-tests/tba-tests-authentication/tests/unit/test_mfa_enrollment_step_up_runtime.py)
