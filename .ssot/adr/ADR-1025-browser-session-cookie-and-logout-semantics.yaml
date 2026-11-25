@@ -37,3 +37,7 @@ body: |-
   ## Context
   
   The prior checkpoint mounted `/logout` but still relied on a thin browser-session model: the runtime stored raw session identifiers in cookies, session ownership was not domain-owned, cookie rotation was absent, and logout fanout was not planned from registered client metadata. That shape was insufficient for a repository that intends to become certifiably browser-capable and fully observable.
+
+  ## Provider end-session runtime
+
+  ADR-1141 defines the provider-side runtime and its composition boundary. The session and cookie semantics in this record still apply to host adapters. SPEC-1237 governs the provider end-session contract and SPEC-1133 governs relying-party interaction.

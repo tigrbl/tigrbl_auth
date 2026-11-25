@@ -32,7 +32,7 @@
     "build:my-account-uix": "npm run build -w @tba/ui-my-account",
     "build:demo-hub-uix": "npm run build -w @tba/ui-demo-hub",
     "build:public-uix": "npm run build -w @tba/ui-public",
-    "build:rp": "npm run build -w @tba/client-oidc-relying-party",
+    "build:rp": "npm run build -w @tbauth/client-oidc-relying-party",
     "build:uix": "npm run build:uix-core && npm run build:admin-uix && npm run build:platform-admin-uix && npm run build:tenant-admin-uix && npm run build:developer-uix && npm run build:service-admin-uix && npm run build:my-account-uix && npm run build:demo-hub-uix && npm run build:public-uix",
     "test:uix-core": "npm run test -w @tba/ui-primitives",
     "test:admin-uix": "npm run test -w @tba/ui-administration",
@@ -43,7 +43,7 @@
     "test:my-account-uix": "npm run test -w @tba/ui-my-account",
     "test:demo-hub-uix": "npm run test -w @tba/ui-demo-hub",
     "test:public-uix": "npm run test -w @tba/ui-public",
-    "test:rp": "npm run test -w @tba/client-oidc-relying-party",
+    "test:rp": "npm run test -w @tbauth/client-oidc-relying-party",
     "test:uix": "npm run test:uix-core && npm run test:admin-uix && npm run test:platform-admin-uix && npm run test:tenant-admin-uix && npm run test:developer-uix && npm run test:service-admin-uix && npm run test:my-account-uix && npm run test:demo-hub-uix && npm run test:public-uix"
   },
   "dependencies": {
@@ -67,6 +67,7 @@
     "node": ">=22"
   },
   "overrides": {
+    "@babel/core@>=7 <7.29.6": "7.29.6",
     "postcss@>=8 <8.5.23": "8.5.23"
   }
 }

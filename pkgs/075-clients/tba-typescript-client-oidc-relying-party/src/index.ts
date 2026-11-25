@@ -116,11 +116,80 @@ export async function createLoginRequest(config: RPConfiguration): Promise<Login
   };
 }
 
+export type LoginIntent = "ordinary" | "interactive" | "step_up";
+
+export function authorizationOptions(
+  intent: LoginIntent = "ordinary",
+  acrValues?: string,
+): Readonly<Record<string, string>> {
+  if (intent !== "ordinary" && intent !== "interactive" && intent !== "step_up") {
+    throw new RPError("invalid login intent");
+  }
+  if (intent === "step_up") {
+    if (typeof acrValues !== "string" || !acrValues.trim() || acrValues.length > 512) {
+      throw new RPError("step-up requires requested assurance values");
+    }
+    return { prompt: "login", acr_values: acrValues };
+  }
+  if (acrValues !== undefined) throw new RPError("requested assurance values require step-up");
+  return intent === "interactive" ? { prompt: "login" } : {};
+}
+
+export function resolveEndSessionEndpoint(metadata: DiscoveryMetadata, issuer: string): string | undefined {
+  const expected = secureLogoutUrl(issuer);
+  if (issuer.includes("?") || metadata.issuer !== issuer) throw new RPError("issuer metadata mismatch");
+  const endpoint = metadata.end_session_endpoint;
+  if (endpoint === undefined || endpoint === null) return undefined;
+  const actual = secureLogoutUrl(endpoint);
+  if (endpoint.includes("?") || actual.origin !== expected.origin) {
+    throw new RPError("end_session_endpoint must belong to the configured issuer origin");
+  }
+  return endpoint;
+}
+
+function secureLogoutUrl(value: string): URL {
+  try {
+    const authority = /^https:\/\/([^/?#]+)/i.exec(value)?.[1];
+    const url = new URL(value);
+    if (
+      !authority || authority.includes("@") || url.protocol !== "https:" ||
+      /[\x00-\x20\s#\\]/u.test(value)
+    ) throw new RPError("invalid logout URL");
+    return url;
+  } catch {
+    throw new RPError("invalid logout URL");
+  }
+}
+
+export function validateLogoutReturn(url: string, registered: string, expectedState: string): boolean {
+  if (!expectedState || expectedState.length > 512 || /[^\x00-\x7f]/u.test(expectedState)) return false;
+  try {
+    const actual = secureLogoutUrl(url);
+    const expected = secureLogoutUrl(registered);
+    if (url.split("?", 1)[0] !== registered.split("?", 1)[0]) return false;
+    const supplied = actual.searchParams.getAll("state");
+    actual.searchParams.delete("state");
+    const keys = new Set([...actual.searchParams.keys(), ...expected.searchParams.keys()]);
+    return supplied.length === 1 && supplied[0] === expectedState && [...keys].every(
+      (key) => JSON.stringify(actual.searchParams.getAll(key)) === JSON.stringify(expected.searchParams.getAll(key)),
+    );
+  } catch {
+    return false;
+  }
+}
+
 export async function buildAuthorizationUrl(
   config: RPConfiguration,
   authorizationEndpoint: string,
   login?: LoginRequest,
+  intent: LoginIntent = "ordinary",
+  acrValues?: string,
 ): Promise<string> {
+  const options = authorizationOptions(intent, acrValues);
+  const existing = new URL(authorizationEndpoint).searchParams;
+  if (intent !== "ordinary" && (existing.has("prompt") || existing.has("acr_values"))) {
+    throw new RPError("authorization endpoint already contains login intent parameters");
+  }
   const request = login ?? (await createLoginRequest(config));
   const params = new URLSearchParams({
     response_type: "code",
@@ -131,8 +200,10 @@ export async function buildAuthorizationUrl(
     nonce: request.nonce,
     code_challenge: request.codeChallenge,
     code_challenge_method: "S256",
+    ...options,
   });
-  return `${authorizationEndpoint}?${params.toString()}`;
+  const separator = authorizationEndpoint.includes("?") ? "&" : "?";
+  return `${authorizationEndpoint}${separator}${params.toString()}`;
 }
 
 export function parseCallback(url: string): CallbackResult {
@@ -226,13 +297,13 @@ export class BrowserMemorySession {
   }
 }
 
-export function nodeVersionMatrix(packageName = "@tba/client-oidc-relying-party", versions = ["22", "24", "26"]): readonly string[] {
+export function nodeVersionMatrix(packageName = "@tbauth/client-oidc-relying-party", versions = ["22", "24", "26"]): readonly string[] {
   return versions.map((version) => `${packageName}@node${version}`);
 }
 
 export function npmProvenanceManifest(): Readonly<Record<string, string | boolean>> {
   return {
-    package: "@tba/client-oidc-relying-party",
+    package: "@tbauth/client-oidc-relying-party",
     workflow: "monorepo-npm-package-release.yml",
     provenance: true,
     publishConfigAccess: "public",
@@ -246,3 +317,5 @@ export function sharedVectorManifest(): Readonly<Record<string, string>> {
     callbackRequiredParams: "code,state",
   };
 }
+
+export { PublicRelyingParty, type VerifiedCallback } from "./public-client.js";
