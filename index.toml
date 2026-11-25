@@ -4094,7 +4094,7 @@ path = "pkgs/060-runtime/tba-plugin-tigrbl"
 layer = "060-runtime"
 order = 3
 ecosystem = "pypi"
-dependencies = ["tba-runtime-identity", "tba-server-identity"]
+dependencies = ["tba-contracts-authorization", "tba-runtime-identity", "tba-server-identity"]
 
 [[packages]]
 id = "tba-runtime-identity-administration"
