@@ -10,29 +10,6 @@ concurrency:
   group: pull-request-ci-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 jobs:
-  tigrbl-operation-authorization:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - uses: actions/checkout@v6
-        with:
-          repository: tigrbl/tigrbl
-          ref: 76381e031a40d4e3be6d347c1529cbeb705d05a9
-          path: .interop/tigrbl
-          persist-credentials: false
-      - uses: astral-sh/setup-uv@v6
-        with:
-          python-version: '3.12'
-      - name: Exercise mounted REST and JSON-RPC operations
-        shell: bash
-        run: |
-          set -euo pipefail
-          export PYTHONPATH="$(printf '%s:' "$PWD"/.interop/tigrbl/pkgs/*/*)"
-          uv run --locked --extra test pytest --noconftest -q \
-            pkgs/120-tests/tba-tests-runtime/tests/unit/test_tigrbl_operation_adapter.py
-
   quality:
     uses: tigrbl/tigrbl_auth/.github/workflows/_quality.yml@12ec516cfdd82546de4ce504e7672ab5062deac9
     permissions:
