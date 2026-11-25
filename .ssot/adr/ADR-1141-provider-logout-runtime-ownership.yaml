@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1141"
+number: 1141
+slug: "provider-logout-runtime-ownership"
+title: "Provider logout runtime ownership"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Assign reusable OpenID Provider end-session behavior to a TBA runtime."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  Apply ADR-1025, ADR-1074, ADR-1100, ADR-1117, and ADR-1136. Keep the OIDC protocol rules in tba-protocol-oidc and HTTP binding in tba-router-oidc-logout. A provider runtime coordinates request validation, confirmation, browser handoff, scoped revocation, and completion. Reuse compatible session and OIDC storage interfaces before adding adapters.
+
+  The host supplies the trusted issuer and request context, client registrations, session and revocation adapters, and confirmation and signed-out presentation. The relying party owns its local session. A repository-owned acceptance fixture uses synthetic identities, issuer scopes, and clients and can run against installed artifacts.
+
+  Governed features: feat:target-oidc-rp-initiated-logout, feat:oidc-logout-conformance.
+
+  ## Runtime scope
+
+  The candidate runtime adoption and acceptance are tracked by feat:oidc-provider-end-session-runtime.

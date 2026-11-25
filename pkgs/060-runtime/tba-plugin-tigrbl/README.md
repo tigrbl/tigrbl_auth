@@ -158,6 +158,17 @@ The following public-entry-point example belongs to `tba-plugin-tigrbl`. Standal
 
 ### Configuration
 
+For operation authorization, declare an `OperationSecurity` action and resource
+type and install `OperationAuthorizationAdapter` on a Tigrbl app with the
+`SECURITY` and `DEPENDENCIES` phases. The adapter registers its decision
+dependency through `app.set_auth(authorize=...)`.
+
+Supply credential verification, resource resolution and a policy loader. These
+callbacks run before the operation transaction. For a write governed by mutable
+resource state, enforce that condition in the write or within the transaction.
+The adapter accepts only compatible policy catalogs and denies decisions with
+outstanding obligations.
+
 Configure `tba-plugin-tigrbl` through the APIs in [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/060-runtime/tba-plugin-tigrbl/src/tba_plugin_tigrbl/__init__.py); its [manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/060-runtime/tba-plugin-tigrbl/pyproject.toml) describes installation requirements, not an implicit service configuration. No additional package-global configuration contract is inferred from dependencies.
 
 ### Error Handling

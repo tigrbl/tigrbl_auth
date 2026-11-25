@@ -61,12 +61,8 @@ jobs:
         run: uv run python scripts/generate_claim_registries.py --verify
       - name: Verify current-state truth chain
         shell: bash
-        run: |
-          if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
-            uv run python scripts/verify_truth_chain.py --mode current-state --use-recorded-date
-          else
-            uv run python scripts/verify_truth_chain.py --mode current-state
-          fi
+        # The recorded date is snapshot metadata. The verifier recomputes the current evidence and readiness.
+        run: uv run python scripts/verify_truth_chain.py --mode current-state --use-recorded-date
       - name: Verify the package index
         shell: bash
         run: |
@@ -75,6 +71,26 @@ jobs:
       - name: Verify package layer ownership
         shell: bash
         run: uv run python scripts/validate_layer_boundaries.py
+      - name: Run independent identity runtime tests
+        shell: bash
+        run: |
+          uv run --locked --group identity-lifecycle pytest -q \
+            pkgs/120-tests/tba-tests-oidc/tests/unit/test_rp_session_vectors.py \
+            pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_logout_http_binding.py \
+            pkgs/120-tests/tba-tests-browser-session/tests/integration/test_provider_logout_runtime.py \
+            pkgs/120-tests/tba-tests-browser-session/tests/integration/test_hosted_authorization_continuation.py \
+            pkgs/120-tests/tba-tests-authentication/tests/unit/test_mfa_enrollment_step_up_runtime.py \
+            pkgs/120-tests/tba-tests-webauthn/tests/unit/test_webauthn_protocol_delivery.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Run relying-party TypeScript parity tests and build
+        shell: bash
+        run: |
+          npm ci --ignore-scripts
+          npm run test:rp
+          npm run build:rp
       - name: Run devtest lane
         shell: bash
         run: tox -e py311-devtest
