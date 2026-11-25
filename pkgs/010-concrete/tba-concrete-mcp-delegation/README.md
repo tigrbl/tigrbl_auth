@@ -5,7 +5,7 @@
 <p align="center"><strong>tba-concrete-mcp-delegation</strong></p>
 <p align="center">Identity-bound permission decisions for MCP app connections.</p>
 <p align="center">
-<a href="https://pypi.org/project/tba-concrete-mcp-delegation/"><img alt="pypi: tba-concrete-mcp-delegation unpublished" src="https://img.shields.io/static/v1?label=pypi&amp;message=tba-concrete-mcp-delegation%20unpublished&amp;labelColor=1E293B&amp;color=92400E"></a>
+<a href="https://pypi.org/project/tba-concrete-mcp-delegation/"><img alt="pypi: tba-concrete-mcp-delegation" src="https://img.shields.io/pypi/v/tba-concrete-mcp-delegation?labelColor=1E293B&amp;color=1D4ED8"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/pyproject.toml"><img alt="Source version: 0.4.0.dev1" src="https://img.shields.io/static/v1?label=Source%20version&amp;message=0.4.0.dev1&amp;labelColor=1E293B&amp;color=4338CA"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/pyproject.toml"><img alt="Python: &gt;=3.10,&lt;3.16" src="https://img.shields.io/static/v1?label=Python&amp;message=%3E%3D3.10%2C%3C3.16&amp;labelColor=1E293B&amp;color=0F766E"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/pyproject.toml"><img alt="Layer: 010-concrete" src="https://img.shields.io/static/v1?label=Layer&amp;message=010-concrete&amp;labelColor=1E293B&amp;color=6D28D9"></a>
@@ -14,7 +14,7 @@
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/NOTICE"><img alt="Notice: attribution" src="https://img.shields.io/static/v1?label=Notice&amp;message=attribution&amp;labelColor=1E293B&amp;color=86198F"></a>
 </p>
 <p align="center">
-<a href="https://pypi.org/project/tba-concrete-mcp-delegation/"><img alt="pypi downloads: tba-concrete-mcp-delegation: unpublished" src="https://img.shields.io/static/v1?label=pypi%20downloads&amp;message=tba-concrete-mcp-delegation%3A%20unpublished&amp;labelColor=1E293B&amp;color=92400E"></a>
+<a href="https://pypi.org/project/tba-concrete-mcp-delegation/"><img alt="Monthly PyPI downloads: tba-concrete-mcp-delegation" src="https://img.shields.io/pypi/dm/tba-concrete-mcp-delegation?labelColor=1E293B&amp;color=0E7490"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-mcp-delegation/README.md"><img alt="README hits: tba-concrete-mcp-delegation" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/pkgs/010-concrete/tba-concrete-mcp-delegation/README.md.svg?label=README%20hits&amp;labelColor=1E293B&amp;color=0E7490"></a>
 </p>
 <p align="center">
@@ -82,30 +82,24 @@ uv pip install ./pkgs/010-concrete/tba-concrete-mcp-delegation
 #### uv
 
 <!-- readme-standards:begin installation.uv -->
-`tba-concrete-mcp-delegation` is not declared published. From the source checkout:
-
 ```bash
-uv pip install .
+uv add tba-concrete-mcp-delegation
 ```
 <!-- readme-standards:end installation.uv -->
 
 #### pip
 
 <!-- readme-standards:begin installation.pip -->
-`tba-concrete-mcp-delegation` is not declared published. From the source checkout:
-
 ```bash
-python -m pip install .
+python -m pip install tba-concrete-mcp-delegation
 ```
 <!-- readme-standards:end installation.pip -->
 
 #### Poetry
 
 <!-- readme-standards:begin installation.poetry -->
-`tba-concrete-mcp-delegation` is not declared published. From a separate Poetry project, replace the path with your checkout:
-
 ```bash
-poetry add /path/to/tba-concrete-mcp-delegation
+poetry add tba-concrete-mcp-delegation
 ```
 <!-- readme-standards:end installation.poetry -->
 

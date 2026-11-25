@@ -13,6 +13,7 @@ has requested. The application supplies the verified request and its branding.
 <a href="LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/License-Apache--2.0-525252"></a>
 <a href="NOTICE"><img alt="Notice: attribution" src="https://img.shields.io/badge/Notice-attribution-525252"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/105-ui"><img alt="Layer: 105 ui" src="https://img.shields.io/badge/Layer-105%20ui-0a7f5a"></a>
+<a href="https://www.npmjs.com/package/@tbauth/ui-app-connections"><img alt="npm version for @tbauth/ui-app-connections" src="https://img.shields.io/npm/v/@tbauth/ui-app-connections"></a>
 </p>
 <p align="center">
 <a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/105-ui/tba-ui-app-connections"><img alt="Downloads: source checkout" src="https://img.shields.io/badge/Downloads-source%20checkout-0969da"></a>

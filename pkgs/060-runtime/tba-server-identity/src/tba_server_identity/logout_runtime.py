@@ -15,6 +15,7 @@ from tba_protocol_oidc.standards.frontchannel_logout import (
 from tba_protocol_oidc.standards.rp_initiated_logout import (
     validate_logout_request,
 )
+from tba_runtime_oidc_provider_logout import append_logout_state
 from tba_server_identity.security.handler_records import (
     resolve_browser_session_record,
 )
@@ -30,13 +31,6 @@ from tigrbl.runtime.status import HTTPException, status
 from tba_runtime_identity_storage.ops.audit import append_audit_event_async
 from tba_runtime_identity_storage.oidc_persistence import oidc_persistence
 from tba_runtime_identity_storage.session_lifecycle import get_session_async
-
-
-def _append_state(uri: str, state: str | None) -> str:
-    if not state:
-        return uri
-    joiner = "&" if "?" in uri else "?"
-    return f"{uri}{joiner}state={state}"
 
 
 def _query_params(request) -> dict[str, str]:
@@ -298,7 +292,7 @@ async def logout_request(*, request, db):
         "replay_protected": bool(metadata.get("idempotent_replay_protection")),
     }
     if redirect_uri:
-        response = RedirectResponse(_append_state(redirect_uri, params.get("state")))
+        response = RedirectResponse(append_logout_state(redirect_uri, params.get("state")))
     else:
         response = JSONResponse(payload)
     response.headers["x-tba-auth-logout-status"] = str(payload["status"])

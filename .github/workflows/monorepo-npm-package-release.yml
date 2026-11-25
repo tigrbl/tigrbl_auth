@@ -12,7 +12,7 @@ on:
           - all
           - "@tba/ui-administration"
           - "@tba/ui-public"
-          - "@tba/client-oidc-relying-party"
+          - "@tbauth/client-oidc-relying-party"
           - "@tbauth/client-app-connections"
           - "@tbauth/ui-app-connections"
       version:
