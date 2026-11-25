@@ -19,7 +19,17 @@ status_notes:
 references: []
 body: |-
   Defines local logout, RP-initiated logout URL construction, provider logout redirect handling, and session cleanup expectations.
+
+  ## Relying-party contract
+
+  Resolve the end-session endpoint using trusted issuer discovery. Construct the logout request from the active application's verified session context and registered return. When state correlation is used, bind and consume it once with the initiating app session and reject a mismatched return. Apply equivalent behavior in Python and TypeScript and use shared vectors across the installed packages.
+
+  The relying party owns its local cleanup and must distinguish successful local cleanup from provider cancellation or failure. Provider validation, confirmation, scoped revocation, and return authorization are defined in SPEC-1237.
+
+  Governed features: feat:identity-consumer-rp-logout-client-behavior, feat:rp-logout-url-builder.
+
 spec_kind: "normative"
 adr_ids:
   - "adr:1114"
   - "adr:1117"
+  - "adr:1141"
