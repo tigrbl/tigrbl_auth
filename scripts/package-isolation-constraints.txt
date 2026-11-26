@@ -1,2 +1,0 @@
-# The 0.4.5 stable wheel lacks the trace module used by Concrete 0.4.6.dev3.
-tigrbl-typing==0.4.6.dev3
