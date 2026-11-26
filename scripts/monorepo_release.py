@@ -445,7 +445,19 @@ def _install_package_test_harness(python: Path) -> None:
 
 def _install_wheels(python: Path, wheels: list[Path], requirements_file: Path) -> None:
     requirements_file.write_text("".join(f"{wheel.resolve().as_uri()}\n" for wheel in wheels), encoding="utf-8")
-    _run([str(python), "-m", "pip", "install", "-r", str(requirements_file)])
+    constraints = ROOT / "scripts" / "package-isolation-constraints.txt"
+    _run(
+        [
+            str(python),
+            "-m",
+            "pip",
+            "install",
+            "--constraint",
+            str(constraints),
+            "-r",
+            str(requirements_file),
+        ]
+    )
 
 
 def _install_backend_test_harness(python: Path) -> None:

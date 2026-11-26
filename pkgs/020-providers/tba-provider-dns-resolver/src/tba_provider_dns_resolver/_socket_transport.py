@@ -105,7 +105,8 @@ def stream(
 def tls_client_context(context: ssl.SSLContext | None) -> ssl.SSLContext:
     if context is None:
         context = ssl.create_default_context()
-        context.minimum_version = max(context.minimum_version, ssl.TLSVersion.TLSv1_2)
+        if context.minimum_version < ssl.TLSVersion.TLSv1_2:
+            context.minimum_version = ssl.TLSVersion.TLSv1_2
     elif context.minimum_version < ssl.TLSVersion.TLSv1_2:
         raise ValueError("DNS-over-TLS requires TLS 1.2 or newer")
     return context
