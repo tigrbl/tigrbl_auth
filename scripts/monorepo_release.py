@@ -445,7 +445,24 @@ def _install_package_test_harness(python: Path) -> None:
 
 def _install_wheels(python: Path, wheels: list[Path], requirements_file: Path) -> None:
     requirements_file.write_text("".join(f"{wheel.resolve().as_uri()}\n" for wheel in wheels), encoding="utf-8")
-    constraints = ROOT / "scripts" / "package-isolation-constraints.txt"
+    # Keep loosely constrained published components on the same Tigrbl versions
+    # used by the locked workspace.
+    locked = _load_pyproject(ROOT / "uv.lock")["package"]
+    versions: dict[str, str] = {}
+    for package in locked:
+        name = package["name"]
+        if "registry" not in package["source"] or not (
+            name == "tigrbl" or name.startswith("tigrbl-")
+        ):
+            continue
+        version = package["version"]
+        if versions.setdefault(name, version) != version:
+            raise ValueError(f"Multiple locked versions for isolated dependency {name}")
+    constraints = requirements_file.with_suffix(".constraints.txt")
+    constraints.write_text(
+        "".join(f"{name}=={version}\n" for name, version in sorted(versions.items())),
+        encoding="utf-8",
+    )
     _run(
         [
             str(python),
