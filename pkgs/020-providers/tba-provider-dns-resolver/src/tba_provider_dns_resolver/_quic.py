@@ -13,7 +13,7 @@ from dataclasses import replace
 from tba_codec_dns.wire import Message, RecordType, WireError
 
 from ._http3_tls import client_identity, context_trust
-from ._socket_transport import check_response, deadline_after, remaining
+from ._socket_transport import check_response, deadline_after, remaining, routed_client_address
 
 
 class UnexpectedEOF(WireError):
@@ -400,12 +400,7 @@ async def _connect_from(
     family, kind, _, _, peer_address = (
         await loop.getaddrinfo(server, port, family=family, type=socket.SOCK_DGRAM)
     )[0]
-    if local is None:
-        local = (
-            ("::", local_port, 0, 0)
-            if family == socket.AF_INET6
-            else ("0.0.0.0", local_port)
-        )
+    local = routed_client_address(family, peer_address, local_port, local)
 
     connection = _new_connection(
         configuration, validate_peer, session_ticket_handler, token_handler

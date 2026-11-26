@@ -13,7 +13,7 @@ from ._doh import (
     _extend_https,
     _https_response,
 )
-from ._socket_transport import _check_tls_peer_ip
+from ._socket_transport import _check_tls_peer_ip, routed_client_address
 
 
 class _TlsCheckingStream(httpcore.AsyncNetworkStream):
@@ -113,6 +113,7 @@ async def _bound_stream(
         getattr(errno, "WSAEWOULDBLOCK", 10035),
         getattr(errno, "WSAEINPROGRESS", 10036),
     }
+    local = None
     last_error = None
     try:
         with anyio.fail_after(timeout):
@@ -136,15 +137,8 @@ async def _bound_stream(
                 sock = socket.socket(af, kind, proto)
                 try:
                     sock.setblocking(False)
-                    if source is None:
-                        binding = (
-                            ("::", source_port, 0, 0)
-                            if af == socket.AF_INET6
-                            else ("0.0.0.0", source_port)
-                        )
-                    else:
-                        binding = local
-                    sock.bind(binding)
+                    if source is not None or source_port:
+                        sock.bind(routed_client_address(af, address, source_port, local))
                     sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
                     for option in socket_options or ():
                         sock.setsockopt(*option)

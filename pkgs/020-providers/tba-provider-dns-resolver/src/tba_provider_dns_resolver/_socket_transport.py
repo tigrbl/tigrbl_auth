@@ -30,6 +30,18 @@ def remaining(deadline: float | None) -> float | None:
     return delay
 
 
+def routed_client_address(
+    family: int, peer: tuple, port: int, source: tuple | None = None
+) -> tuple:
+    """Use an explicit interface or resolve the route without sending a datagram."""
+    if source is not None and not ipaddress.ip_address(source[0]).is_unspecified:
+        return source
+    with socket.socket(family, socket.SOCK_DGRAM) as probe:
+        probe.connect(peer)
+        local = probe.getsockname()
+    return (local[0], port, *local[2:])
+
+
 class DnsStream:
     def __init__(self, sock: socket.socket, deadline: float | None):
         self.sock = sock
@@ -96,6 +108,14 @@ def stream(
             if certificate_ip is not None:
                 _require_verified_context(tls)
             sock.settimeout(remaining(deadline))
+            # Apply the verified floor at the handshake even when the caller supplied
+            # the context. Preserve the stricter TLS 1.3 policy when requested.
+            if tls.minimum_version == ssl.TLSVersion.TLSv1_3:
+                tls.minimum_version = ssl.TLSVersion.TLSv1_3
+            elif tls.minimum_version == ssl.TLSVersion.TLSv1_2:
+                tls.minimum_version = ssl.TLSVersion.TLSv1_2
+            else:
+                raise ValueError("Unsupported DNS-over-TLS minimum version")
             with tls.wrap_socket(sock, server_hostname=server_name or server) as secure:
                 if certificate_ip is not None:
                     _check_tls_peer_ip(secure.getpeercert(), certificate_ip)
@@ -105,10 +125,7 @@ def stream(
 def tls_client_context(context: ssl.SSLContext | None) -> ssl.SSLContext:
     if context is None:
         context = ssl.create_default_context()
-        system_minimum = context.minimum_version
-        context.minimum_version = ssl.TLSVersion.TLSv1_2
-        if system_minimum > ssl.TLSVersion.TLSv1_2:
-            context.minimum_version = system_minimum
+        context.minimum_version = max(context.minimum_version, ssl.TLSVersion.TLSv1_2)
     elif context.minimum_version < ssl.TLSVersion.TLSv1_2:
         raise ValueError("DNS-over-TLS requires TLS 1.2 or newer")
     return context
