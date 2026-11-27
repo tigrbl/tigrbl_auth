@@ -62,7 +62,7 @@ order = 10
 path = "pkgs/010-concrete"
 order_strategy = "dependency_depth"
 same_layer_dependencies = "ordered"
-allowed_dependency_layers = ["000-primitives", "002-contracts", "005-bases"]
+allowed_dependency_layers = ["000-primitives", "002-contracts", "003-codecs", "005-bases"]
 description = "Implements individual domain behaviors against shared contracts, such as evaluating authentication methods."
 [layers.metadata.tba]
 category = "production"
@@ -73,7 +73,7 @@ order = 20
 path = "pkgs/020-providers"
 order_strategy = "dependency_depth"
 same_layer_dependencies = "ordered"
-allowed_dependency_layers = ["000-primitives", "002-contracts", "005-bases", "010-concrete"]
+allowed_dependency_layers = ["000-primitives", "002-contracts", "003-codecs", "005-bases", "010-concrete"]
 description = "Supplies pluggable algorithms, adapters, and integrations for authentication, cryptography, and external services."
 [layers.metadata.tba]
 category = "production"
@@ -84,7 +84,7 @@ order = 30
 path = "pkgs/030-storage-runtime"
 order_strategy = "dependency_depth"
 same_layer_dependencies = "ordered"
-allowed_dependency_layers = ["000-primitives", "001-storage", "002-contracts", "005-bases", "010-concrete", "020-providers"]
+allowed_dependency_layers = ["000-primitives", "001-storage", "002-contracts", "003-codecs", "005-bases", "010-concrete", "020-providers"]
 description = "Implements repositories and durable operations on top of storage schemas, including persistence for sessions, tokens, and replay state."
 [layers.metadata.tba]
 category = "production"
@@ -245,7 +245,7 @@ order = 120
 path = "pkgs/120-tests"
 order_strategy = "dependency_depth"
 same_layer_dependencies = "ordered"
-allowed_dependency_layers = ["000-primitives", "001-storage", "002-contracts", "005-bases", "010-concrete", "020-providers", "030-storage-runtime", "040-capabilities", "050-protocols", "055-profiles", "060-runtime", "070-facade", "075-clients", "080-routers", "085-middleware", "090-backend-apps", "100-uix-core", "105-ui", "106-ui", "110-examples", "deprecated"]
+allowed_dependency_layers = ["000-primitives", "001-storage", "002-contracts", "003-codecs", "005-bases", "010-concrete", "020-providers", "030-storage-runtime", "040-capabilities", "050-protocols", "055-profiles", "060-runtime", "070-facade", "075-clients", "080-routers", "085-middleware", "090-backend-apps", "100-uix-core", "105-ui", "106-ui", "110-examples", "deprecated"]
 description = "Provides shared testkits, fixtures, test vectors, and suites for conformance, interoperability, and cross-package verification."
 [layers.metadata.tba]
 category = "test"
@@ -261,6 +261,15 @@ allowed_dependency_layers = ["000-primitives", "001-storage", "002-contracts", "
 description = "Contains legacy packages retained for compatibility and migration."
 [layers.metadata.tba]
 category = "deprecated"
+
+[[packages]]
+id = "tba-primitives-dns-name"
+name = "tba-primitives-dns-name"
+path = "pkgs/000-primitives/tba-primitives-dns-name"
+layer = "000-primitives"
+order = 0
+ecosystem = "pypi"
+dependencies = []
 
 [[packages]]
 id = "tba-primitives-identity"
@@ -593,7 +602,7 @@ path = "pkgs/002-contracts/tba-contracts-dns"
 layer = "002-contracts"
 order = 0
 ecosystem = "pypi"
-dependencies = []
+dependencies = ["tba-primitives-dns-name"]
 
 [[packages]]
 id = "tba-contracts-identity-assurance"
@@ -720,6 +729,15 @@ layer = "002-contracts"
 order = 2
 ecosystem = "pypi"
 dependencies = ["tba-contracts-attestation", "tba-contracts-claim", "tba-contracts-did", "tba-contracts-digital-credential", "tba-contracts-identity-assurance", "tba-contracts-public-key-authentication", "tba-contracts-replay", "tba-contracts-security-event", "tba-contracts-security-trust", "tba-contracts-token", "tba-contracts-workload-identity", "tba-primitives-identity"]
+
+[[packages]]
+id = "tba-codec-dns"
+name = "tba-codec-dns"
+path = "pkgs/003-codecs/tba-codec-dns"
+layer = "003-codecs"
+order = 0
+ecosystem = "pypi"
+dependencies = ["tba-primitives-dns-name"]
 
 [[packages]]
 id = "tba-codec-jcs"
@@ -1964,6 +1982,15 @@ ecosystem = "pypi"
 dependencies = ["tba-contracts-identity-document"]
 
 [[packages]]
+id = "tba-concrete-dns-zone"
+name = "tba-concrete-dns-zone"
+path = "pkgs/010-concrete/tba-concrete-dns-zone"
+layer = "010-concrete"
+order = 0
+ecosystem = "pypi"
+dependencies = ["tba-codec-dns", "tba-primitives-dns-name"]
+
+[[packages]]
 id = "tba-concrete-dpop-confirmation-binding"
 name = "tba-concrete-dpop-confirmation-binding"
 path = "pkgs/010-concrete/tba-concrete-dpop-confirmation-binding"
@@ -2675,13 +2702,13 @@ ecosystem = "pypi"
 dependencies = ["tba-contracts-security-trust"]
 
 [[packages]]
-id = "tba-provider-dns-txt"
-name = "tba-provider-dns-txt"
-path = "pkgs/020-providers/tba-provider-dns-txt"
+id = "tba-provider-dns-resolver"
+name = "tba-provider-dns-resolver"
+path = "pkgs/020-providers/tba-provider-dns-resolver"
 layer = "020-providers"
 order = 0
 ecosystem = "pypi"
-dependencies = ["tba-contracts-dns"]
+dependencies = ["tba-codec-dns", "tba-primitives-dns-name"]
 
 [[packages]]
 id = "tba-provider-eat-verifier"
@@ -2997,6 +3024,15 @@ layer = "020-providers"
 order = 1
 ecosystem = "pypi"
 dependencies = ["tba-contracts-security-trust", "tba-provider-certificate-evidence"]
+
+[[packages]]
+id = "tba-provider-dns-txt"
+name = "tba-provider-dns-txt"
+path = "pkgs/020-providers/tba-provider-dns-txt"
+layer = "020-providers"
+order = 1
+ecosystem = "pypi"
+dependencies = ["tba-codec-dns", "tba-contracts-dns", "tba-primitives-dns-name", "tba-provider-dns-resolver"]
 
 [[packages]]
 id = "tba-provider-identity-jose"
@@ -3690,6 +3726,15 @@ layer = "050-protocols"
 order = 0
 ecosystem = "pypi"
 dependencies = ["tba-contracts-dns"]
+
+[[packages]]
+id = "tba-protocol-dns"
+name = "tba-protocol-dns"
+path = "pkgs/050-protocols/tba-protocol-dns"
+layer = "050-protocols"
+order = 0
+ecosystem = "pypi"
+dependencies = ["tba-codec-dns", "tba-concrete-dns-zone", "tba-primitives-dns-name", "tba-provider-dns-resolver"]
 
 [[packages]]
 id = "tba-protocol-gnap"
@@ -4721,6 +4766,15 @@ dependencies = []
 id = "tba-tests-identity"
 name = "tba-tests-identity"
 path = "pkgs/120-tests/tba-tests-identity"
+layer = "120-tests"
+order = 0
+ecosystem = "pypi"
+dependencies = []
+
+[[packages]]
+id = "tba-tests-interop-dns"
+name = "tba-tests-interop-dns"
+path = "pkgs/120-tests/tba-tests-interop-dns"
 layer = "120-tests"
 order = 0
 ecosystem = "pypi"
