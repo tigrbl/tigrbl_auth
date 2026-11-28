@@ -5,7 +5,7 @@ description = "DNS TXT lookup contracts and shared TXT record handling."
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
 license = "Apache-2.0"
-dependencies = ["idna>=3,<4"]
+dependencies = ["tba-primitives-dns-name==0.4.0.dev3"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 classifiers = [
@@ -88,4 +88,4 @@ label = "source and CI"
 url = "https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"
 
 [dependency-groups]
-dev = ["readme-standards==0.1.1; python_version >= \"3.11\""]
+dev = ["readme-standards==0.1.3; python_version >= \"3.11\""]

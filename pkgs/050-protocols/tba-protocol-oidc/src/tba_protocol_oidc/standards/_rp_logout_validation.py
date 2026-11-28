@@ -4,28 +4,21 @@ from __future__ import annotations
 
 import base64
 import json
+from http import HTTPStatus
 from typing import Any, Final
 from tba_primitives_identity.standards import StandardOwner
 from urllib.parse import urlparse
 from uuid import UUID
 
 try:  # dependency-light import path for checkpoint evidence generation
-    from http import HTTPStatus as status
     from tigrbl.runtime.status import HTTPException
 except Exception:  # pragma: no cover - exercised in dependency-light tests
-
-    class _FallbackStatus:
-        HTTP_400_BAD_REQUEST = 400
-        HTTP_401_UNAUTHORIZED = 401
-        HTTP_404_NOT_FOUND = 404
 
     class HTTPException(Exception):
         def __init__(self, status_code: int, detail: Any):
             super().__init__(detail)
             self.status_code = status_code
             self.detail = detail
-
-    status = _FallbackStatus()
 
 STATUS: Final[str] = "rp-initiated-logout-runtime"
 
@@ -96,7 +89,7 @@ def _require_https_if_present(uri: str) -> None:
     parsed = urlparse(uri)
     if parsed.scheme != "https":
         raise HTTPException(
-            status.HTTP_400_BAD_REQUEST, "post_logout_redirect_uri must use https"
+            HTTPStatus.BAD_REQUEST, "post_logout_redirect_uri must use https"
         )
 
 
@@ -110,4 +103,4 @@ def assert_logout_session_active(session_row) -> None:
         "ended",
         "revoked",
     }:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "expired_session"})
+        raise HTTPException(HTTPStatus.BAD_REQUEST, {"error": "expired_session"})

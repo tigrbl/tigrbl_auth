@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Awaitable, Callable
+from inspect import isawaitable
 from typing import Any, TypeAlias
 
 from tigrbl import Depends, Request, TigrblApp, TigrblRouter
@@ -23,7 +24,8 @@ def build_logout_router(
 
     @router.route("/logout", methods=["GET", "POST"], response_model=None)
     async def logout(request: Request, db: object = Depends(get_db)) -> Any:
-        return await logout_request(request=request, db=db)
+        result = logout_request(request=request, db=db)
+        return await result if isawaitable(result) else result
 
     return router
 
