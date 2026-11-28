@@ -146,7 +146,7 @@ label = "source and CI"
 url = "https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"
 [dependency-groups]
 identity-lifecycle = ["tba-runtime-hosted-authorization-continuation", "tba-runtime-mfa-lifecycle[webauthn]", "tba-runtime-oidc-provider-logout"]
-dev = ["pytest>=8.0", "pytest-asyncio>=0.24.0", "pytest-xdist>=3.6.1", "pytest-json-report>=1.5.0", "requests>=2.32.3", "flake8>=7.0", "pytest-timeout>=2.3.1", "ruff>=0.9.9", "pytest-benchmark>=4.0.0", "tox>=4.23.2; python_version >= '3.11'", "filelock>=4.2.1,<5; python_version >= '3.11'", "ssot-registry>=0.2.8", "index-toml==0.3.1", "readme-standards==0.1.3; python_version >= \"3.11\""]
+dev = ["pytest>=8.0", "pytest-asyncio>=0.24.0", "pytest-xdist>=3.6.1", "pytest-json-report>=1.5.0", "requests>=2.32.3", "flake8>=7.0", "pytest-timeout>=2.3.1", "ruff>=0.9.9", "pytest-benchmark>=4.0.0", "tox>=4.23.2; python_version >= '3.11'", "filelock>=4.2.1,<5; python_version >= '3.11'", "ssot-registry>=0.2.8", "index-toml==0.3.2", "readme-standards==0.1.3; python_version >= \"3.11\""]
 
 [tool.setuptools]
 packages = []
