@@ -35,7 +35,7 @@ jobs:
   workload-suites:
     runs-on: ${{ (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/docs/readme-standards-20261119' || (github.event_name == 'pull_request' && github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository)) && fromJSON('["sad-lewin","shortlived","testing","trusted-public-ci","Linux","X64"]') || 'ubuntu-24.04' }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
@@ -54,8 +54,8 @@ jobs:
   jose-interop:
     runs-on: ${{ (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/docs/readme-standards-20261119' || (github.event_name == 'pull_request' && github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository)) && fromJSON('["sad-lewin","shortlived","testing","trusted-public-ci","Linux","X64"]') || 'ubuntu-24.04' }}
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7
         with:
           repository: swarmauri/swarmauri-sdk
           ref: e44091135947f859dd60d249cf20fbffc104effc
@@ -76,7 +76,7 @@ jobs:
       matrix: ${{ steps.matrix.outputs.matrix }}
       count: ${{ steps.matrix.outputs.count }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - uses: astral-sh/setup-uv@v6
@@ -136,7 +136,7 @@ jobs:
         include: ${{ fromJSON(needs.discover-package-matrix.outputs.matrix) }}
     name: Python ${{ matrix.python }} / Batch ${{ matrix.batch }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - id: setup-python
         uses: actions/setup-python@v6
         continue-on-error: true

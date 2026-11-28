@@ -51,7 +51,7 @@ jobs:
       count: ${{ steps.matrix.outputs.count }}
       sha: ${{ steps.revision.outputs.sha }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - name: Configure git identity
@@ -121,7 +121,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: ${{ needs.bump-package-versions.outputs.sha }}
           fetch-depth: 0
@@ -162,7 +162,7 @@ jobs:
       matrix:
         package: ${{ fromJSON(needs.resolve-dispatch-matrix.outputs.matrix) }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: ${{ needs.resolve-dispatch-matrix.outputs.sha }}
       - name: Resolve package metadata at bumped revision
@@ -195,7 +195,7 @@ jobs:
       matrix:
         package: ${{ fromJSON(needs.resolve-dispatch-matrix.outputs.matrix) }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: ${{ needs.resolve-dispatch-matrix.outputs.sha }}
       - name: Resolve package metadata at bumped revision
@@ -227,7 +227,7 @@ jobs:
       matrix:
         package: ${{ fromJSON(needs.resolve-dispatch-matrix.outputs.matrix) }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: ${{ needs.resolve-dispatch-matrix.outputs.sha }}
       - name: Resolve package metadata at bumped revision
@@ -274,7 +274,7 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: astral-sh/setup-uv@v6
         with:
           python-version: "3.12"

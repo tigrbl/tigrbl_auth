@@ -14,11 +14,11 @@ jobs:
   validate:
     runs-on: ${{ (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/docs/readme-standards-20261119' || (github.event_name == 'pull_request' && github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository)) && fromJSON('["sad-lewin","shortlived","testing","trusted-public-ci","Linux","X64"]') || 'ubuntu-24.04' }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Read interop revision
         id: pin
         run: echo "ref=$(cat pkgs/120-tests/tba-tests-interop-wimse-matrix/interop-revision.txt)" >> "$GITHUB_OUTPUT"
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           repository: tigrbl/tba-tests-interop-wimse
           ref: ${{ steps.pin.outputs.ref }}
