@@ -287,7 +287,7 @@ Applications compose routers and runtime services over protocol packages, capabi
 
 **Package catalog**
 
-Start with a representative package below or browse the [full package tree](pkgs/). Each active package has its own README. Active Python distributions and imports use `tba-*` and `tba_*`. UI packages use `@tba/*`. See the [namespace migration guide](docs/packaging/tba-namespace-migration.md) for legacy names and environment variables.
+Start with a representative package below or browse the [full package tree](pkgs/). Each active package has its own README. Active Python distributions and imports use `tba-*` and `tba_*`. UI packages use `@tbauth/*`. See the [namespace migration guide](docs/packaging/tba-namespace-migration.md) for legacy names and environment variables.
 
 | Layer | Start here |
 | --- | --- |
@@ -307,10 +307,10 @@ Start with a representative package below or browse the [full package tree](pkgs
 | 80 · Routers | [tba-router-oauth-protected-resource-metadata](pkgs/080-routers/tba-router-oauth-protected-resource-metadata/README.md) |
 | 85 · Middleware | [tba-middleware-policy-enforcement-asgi](pkgs/085-middleware/tba-middleware-policy-enforcement-asgi/README.md) |
 | 90 · Backend apps | [tba-app-backend-public](pkgs/090-backend-apps/tba-app-backend-public/README.md) |
-| 100 · UI primitives | [@tba/ui-primitives](pkgs/100-uix-core/tba-ui-primitives/README.md) |
-| 104 · Authenticator UIs | [@tba/ui-mfa-authenticator-assurance-console](pkgs/104-authenticator-uis/tba-ui-mfa-authenticator-assurance-console/README.md) |
-| 105 · Product UIs | [@tba/ui-my-account](pkgs/105-ui/tba-ui-my-account/README.md) |
-| 106 · UI prototypes | [@tba/ui-trust-center](pkgs/106-ui/tba-ui-trust-center/README.md) |
+| 100 · UI primitives | [@tbauth/ui-primitives](pkgs/100-uix-core/tba-ui-primitives/README.md) |
+| 104 · Authenticator UIs | [@tbauth/ui-mfa-authenticator-assurance-console](pkgs/104-authenticator-uis/tba-ui-mfa-authenticator-assurance-console/README.md) |
+| 105 · Product UIs | [@tbauth/ui-my-account](pkgs/105-ui/tba-ui-my-account/README.md) |
+| 106 · UI prototypes | [@tbauth/ui-trust-center](pkgs/106-ui/tba-ui-trust-center/README.md) |
 | 110 · Examples | [tba-example-oauth-device-authorization-cli](pkgs/110-examples/tba-example-oauth-device-authorization-cli/README.md) |
 | 120 · Testkits | [tba-tests-identity](pkgs/120-tests/tba-tests-identity/README.md) |
 
@@ -463,7 +463,7 @@ Use these boundaries:
   downstream ASGI app.
 - Keep provenance order: backend capability first, API front door second, UIX
   third. The platform-admin path is `tba-runtime-identity-administration` ->
-  `tba-app-backend-platform-administration` -> `@tba/ui-platform-administration`; apply
+  `tba-app-backend-platform-administration` -> `@tbauth/ui-platform-administration`; apply
   the same pattern to tenant-admin, developer, service-admin, public,
   my-account, and resource-validation surfaces.
 

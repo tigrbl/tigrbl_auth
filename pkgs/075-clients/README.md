@@ -11,11 +11,11 @@ Python packages:
 
 TypeScript packages:
 
-- `@tba/client-oidc-relying-party`
-- `@tba/client-relying-party-session`
-- `@tba/client-policy-decision`
-- `@tba/client-platform-administration`
-- `@tba/client-tenant-administration`
+- `@tbauth/client-oidc-relying-party`
+- `@tbauth/client-relying-party-session`
+- `@tbauth/client-policy-decision`
+- `@tbauth/client-platform-administration`
+- `@tbauth/client-tenant-administration`
 
 ASGI policy enforcement lives in layer 85. Backend applications in layer 90
 compose clients, middleware, and routers.

@@ -1,5 +1,5 @@
 {
-  "name": "@tba/client-tenant-administration",
+  "name": "@tbauth/client-tenant-administration",
   "version": "0.4.0-dev.3",
   "type": "module",
   "license": "Apache-2.0",

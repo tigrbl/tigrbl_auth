@@ -1,6 +1,6 @@
 # Certificate Lifecycle API + Certificate Center UIX Requirements Brief
 
-**Proposed pairing:** `tba-router-certificates` + `@tba/certificate-center-uix`<br>
+**Proposed pairing:** `tba-router-certificates` + `@tbauth/certificate-center-uix`<br>
 **Status:** New product surface; certificate DTOs/bases, mTLS credentials, key lifecycle, rotation policy, storage, and JOSE foundations exist<br>
 **Prepared:** July 11, 2026<br>
 **Proposed router owner:** `pkgs/080-routers/tba-router-certificates`<br>

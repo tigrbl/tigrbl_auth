@@ -1,6 +1,6 @@
 # Authority Attenuation API + Capability Composer UIX Requirements Brief
 
-**Pairing:** `tba-router-authority-attenuation` + `@tba/capability-composer-uix`<br>
+**Pairing:** `tba-router-authority-attenuation` + `@tbauth/capability-composer-uix`<br>
 **Additional opportunity:** Authorization/delegation/sovereignty extension 3<br>
 **Primary buyers:** authorization platform teams, security engineering, workload and agent platforms, API product teams, governance administrators, and high-assurance application owners<br>
 **Status:** proposed product surface; scope coverage, wildcard narrowing, authority closure, monotonicity, least-authority diff, durable proof, and delegation lifecycle foundations exist

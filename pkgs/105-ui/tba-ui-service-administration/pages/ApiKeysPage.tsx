@@ -11,7 +11,7 @@ import {
   ResourceTable,
   ResourceToolbar,
   StatusBadge
-} from "@tba/ui-primitives";
+} from "@tbauth/ui-primitives";
 import { useState } from "react";
 import type { FormEvent } from "react";
 import type { ApiKeyRecord, CreateApiKeyInput, ServiceIdentity, UpdateApiKeyInput } from "../types";

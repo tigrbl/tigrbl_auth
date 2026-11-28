@@ -1,4 +1,4 @@
-import { DataTable, DetailPanel, EmptyState, PageHeader, StatusBadge } from "@tba/ui-primitives";
+import { DataTable, DetailPanel, EmptyState, PageHeader, StatusBadge } from "@tbauth/ui-primitives";
 import type { TokenRecord } from "../types";
 
 export function TokenRecordsPage({ tokenRecords }: { tokenRecords: TokenRecord[] }) {

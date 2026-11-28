@@ -11,7 +11,7 @@ For `tba_auth`, MFA should be treated as an advanced authentication product lane
 - `tba-protocol-oidc` and `tba-provider-identity-jose` for `acr` and `amr` expression in ID/access tokens.
 - `tba-app-backend-public` for user-facing enrollment/challenge/recovery flows.
 - `tba-app-backend-tenant-administration` for tenant MFA policy and user factor reset.
-- `@tba/ui-public` for hosted login, enrollment, challenge, recovery, and profile factor management.
+- `@tbauth/ui-public` for hosted login, enrollment, challenge, recovery, and profile factor management.
 
 ## Current `tba_auth` State
 
@@ -62,8 +62,8 @@ For `tba_auth`, MFA should be treated as an advanced authentication product lane
 | `tba-protocol-oidc` / `tba-provider-identity-jose` | `acr` and `amr` claim rules, OIDC authentication context expression. | Factor enrollment and user support workflows. |
 | `tba-app-backend-public` | Login-time MFA challenge, enrollment prompt, recovery-code challenge, user factor management where safe. | Tenant-wide policy mutation and admin reset authority. |
 | `tba-app-backend-tenant-administration` | Tenant MFA policy, required factors, admin factor reset, user support audit. | End-user factor secret display or challenge responses. |
-| `@tba/ui-public` | Enrollment screens, challenge screens, recovery-code display, factor management, remembered-device prompts. | Tenant policy administration. |
-| `@tba/ui-tenant-administration` | Policy configuration, user factor support/reset, MFA posture reporting. | Hosted-login challenge UX. |
+| `@tbauth/ui-public` | Enrollment screens, challenge screens, recovery-code display, factor management, remembered-device prompts. | Tenant policy administration. |
+| `@tbauth/ui-tenant-administration` | Policy configuration, user factor support/reset, MFA posture reporting. | Hosted-login challenge UX. |
 
 ## Minimum Viable MFA Slice
 

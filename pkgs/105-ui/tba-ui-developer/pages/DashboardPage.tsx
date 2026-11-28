@@ -1,4 +1,4 @@
-import { DetailPanel, MetricCard, PageHeader, StatusBadge } from "@tba/ui-primitives";
+import { DetailPanel, MetricCard, PageHeader, StatusBadge } from "@tbauth/ui-primitives";
 import type { ClientRegistration, DeveloperApplication, DeveloperSession, IssuerMetadata } from "../types";
 
 export function DashboardPage({

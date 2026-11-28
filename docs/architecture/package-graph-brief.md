@@ -37,9 +37,9 @@ This brief grounds the architecture image in the live package inventory in this 
 
 ### UI and browser packages
 
-- `@tba/ui-public`: public end-user UI built against generated OpenAPI and OIDC discovery surfaces.
-- `@tba/ui-administration`: admin UI built against generated OpenRPC admin/control-plane surfaces.
-- `@tba/client-oidc-relying-party`: browser-safe TypeScript relying-party SDK.
+- `@tbauth/ui-public`: public end-user UI built against generated OpenAPI and OIDC discovery surfaces.
+- `@tbauth/ui-administration`: admin UI built against generated OpenRPC admin/control-plane surfaces.
+- `@tbauth/client-oidc-relying-party`: browser-safe TypeScript relying-party SDK.
 
 ## Production block model
 
@@ -71,8 +71,8 @@ This brief grounds the architecture image in the live package inventory in this 
 
 ## High-level flow edges
 
-1. Public users and consumer apps enter through `@tba/ui-public`, `@tba/client-oidc-relying-party`, `tba-protocol-oidc-relying-party`, or the example CLI.
-2. Administrative operators enter through `@tba/ui-administration` and `tba-operator-identity`.
+1. Public users and consumer apps enter through `@tbauth/ui-public`, `@tbauth/client-oidc-relying-party`, `tba-protocol-oidc-relying-party`, or the example CLI.
+2. Administrative operators enter through `@tbauth/ui-administration` and `tba-operator-identity`.
 3. Those clients call the `tba-server-identity` public REST or admin RPC surfaces.
 4. The server delegates protocol and domain work to OAuth, OIDC, admin, credentials, policy, principals, JOSE, and contracts packages.
 5. Domain logic persists and reads state through `tba-storage-core`.

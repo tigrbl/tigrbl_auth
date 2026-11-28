@@ -1,5 +1,5 @@
 import { BACKEND_APP_BASE_URL, backendAppUrl } from "./backendSurface";
-import { PlatformAdminClient as PlatformIamClient } from "@tba/client-platform-administration";
+import { PlatformAdminClient as PlatformIamClient } from "@tbauth/client-platform-administration";
 import type { AdminSession, CreateIdentityInput, CreateRealmInput, CreateTenantInput, Identity, Realm, Tenant, UpdateIdentityInput, UpdateRealmInput, UpdateTenantInput } from "../types";
 
 type Fetcher = typeof fetch;

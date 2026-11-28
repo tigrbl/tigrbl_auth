@@ -1,4 +1,4 @@
-import { DetailPanel, EmptyState, JsonViewer, PageHeader } from "@tba/ui-primitives";
+import { DetailPanel, EmptyState, JsonViewer, PageHeader } from "@tbauth/ui-primitives";
 import type { DeveloperApplication, IssuerMetadata } from "../types";
 
 export function OAuthFlowTesterPage({ application, metadata }: { application: DeveloperApplication | null; metadata: IssuerMetadata | null }) {

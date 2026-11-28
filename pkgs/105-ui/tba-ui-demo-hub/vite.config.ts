@@ -7,8 +7,8 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: [
-      { find: "@tba/ui-primitives/styles.css", replacement: path.resolve(process.cwd(), "../../100-uix-core/tba-ui-primitives/src/styles/core.css") },
-      { find: "@tba/ui-primitives", replacement: path.resolve(process.cwd(), "../../100-uix-core/tba-ui-primitives/index.ts") }
+      { find: "@tbauth/ui-primitives/styles.css", replacement: path.resolve(process.cwd(), "../../100-uix-core/tba-ui-primitives/src/styles/core.css") },
+      { find: "@tbauth/ui-primitives", replacement: path.resolve(process.cwd(), "../../100-uix-core/tba-ui-primitives/index.ts") }
     ]
   },
   server: {

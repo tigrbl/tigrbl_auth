@@ -1,4 +1,4 @@
-# @tba/ui-administration
+# @tbauth/ui-administration
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">
@@ -14,7 +14,7 @@
 <p align="center">
 <a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/105-ui/tba-ui-administration"><img alt="Downloads: source checkout" src="https://img.shields.io/badge/Downloads-source%20checkout-0969da"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-administration/package.json"><img alt="Direct dependencies: 6" src="https://img.shields.io/badge/Direct%20dependencies-6-0969da"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-administration/README.md"><img alt="README hits for @tba/ui-administration" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-administration/README.md.svg?label=hits"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-administration/README.md"><img alt="README hits for @tbauth/ui-administration" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-administration/README.md.svg?label=hits"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"><img alt="SSOT: governed" src="https://img.shields.io/badge/SSOT-governed-2f6f4e"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-administration/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
 </p>
@@ -33,7 +33,7 @@ No admin API key is embedded into built assets. Local development may provide a 
 
 ## AEO Summary
 
-- Package: `@tba/ui-administration`
+- Package: `@tbauth/ui-administration`
 - Layer: `105-ui`
 - Responsibility: Administrative UIX package for TBA identity operations.
 - Public surface: [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-administration/package.json).
@@ -41,11 +41,11 @@ No admin API key is embedded into built assets. Local development may provide a 
 
 ## When to use it
 
-Choose `@tba/ui-administration` for this responsibility: Administrative UIX package for TBA identity operations. Its `105-ui` placement keeps browser-facing interface composition separate from establishing backend authorization or durable secret storage.
+Choose `@tbauth/ui-administration` for this responsibility: Administrative UIX package for TBA identity operations. Its `105-ui` placement keeps browser-facing interface composition separate from establishing backend authorization or durable secret storage.
 
 ## Installation
 
-Install `@tba/ui-administration` from this checkout; registry publication is separate from this source-only workflow:
+Install `@tbauth/ui-administration` from this checkout; registry publication is separate from this source-only workflow:
 
 ```bash
 npm --prefix pkgs/105-ui/tba-ui-administration install
@@ -59,14 +59,14 @@ Use Node 22 or newer and run these commands from the repository root.
 
 ```bash
 npm ci --no-audit --no-fund
-npm run build -w @tba/ui-administration
+npm run build -w @tbauth/ui-administration
 ```
 
 Expect a Vite build with `dist/index.html` in this package.
 
 ## Usage
 
-Use the checked-in `@tba/ui-administration` package through its declared npm scripts:
+Use the checked-in `@tbauth/ui-administration` package through its declared npm scripts:
 
 ```bash
 npm --prefix pkgs/105-ui/tba-ui-administration run dev
@@ -76,7 +76,7 @@ Administrative UIX package for TBA identity operations. The manifest is the auth
 
 ## Package Boundary
 
-`@tba/ui-administration` belongs to `105-ui` and owns browser-facing interface composition: Administrative UIX package for TBA identity operations.
+`@tbauth/ui-administration` belongs to `105-ui` and owns browser-facing interface composition: Administrative UIX package for TBA identity operations.
 
 Its implementation surface is the [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-administration/package.json).
 
@@ -84,29 +84,29 @@ Keep establishing backend authorization or durable secret storage in their ownin
 
 ## Injected dependencies
 
-The [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-administration/package.json) for `@tba/ui-administration` does not declare an explicit service-constructor or keyword-only factory hook in the inspected source. Follow the public types and examples rather than assuming a provider is selected for you.
+The [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-administration/package.json) for `@tbauth/ui-administration` does not declare an explicit service-constructor or keyword-only factory hook in the inspected source. Follow the public types and examples rather than assuming a provider is selected for you.
 
 Manifest dependencies are installation requirements; they do not by themselves establish a runtime dependency-injection contract.
 
 ## Operations and readiness
 
-`@tba/ui-administration` exposes browser-facing interface composition. Inspect the [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-administration/package.json) for the exported types and composition surface.
+`@tbauth/ui-administration` exposes browser-facing interface composition. Inspect the [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-administration/package.json) for the exported types and composition surface.
 
 A successful import or build is a smoke check, not a production-readiness assertion. Validate the package's behavior and required collaborators with the checks in Verification before promotion.
 
 ## Protocol consumers
 
-No active layer-50 manifest declares a direct runtime dependency on `@tba/ui-administration`. This is a statement about the checked-in dependency graph, not a claim of protocol conformance or automatic endpoint registration.
+No active layer-50 manifest declares a direct runtime dependency on `@tbauth/ui-administration`. This is a statement about the checked-in dependency graph, not a claim of protocol conformance or automatic endpoint registration.
 
 ## Non-goals
 
-`@tba/ui-administration` does not take ownership of establishing backend authorization or durable secret storage.
+`@tbauth/ui-administration` does not take ownership of establishing backend authorization or durable secret storage.
 
 Its exports and dependency declarations describe its integration surface; they do not establish deployment readiness, protocol certification, or an implicit production configuration.
 
 ## Related Packages
 
-`@tba/ui-administration` declares no local runtime dependency and has no direct consumer in the active manifest graph. Browse the [105-ui layer](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/105-ui) for adjacent package responsibilities; adjacency does not imply a dependency.
+`@tbauth/ui-administration` declares no local runtime dependency and has no direct consumer in the active manifest graph. Browse the [105-ui layer](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/105-ui) for adjacent package responsibilities; adjacency does not imply a dependency.
 
 ## Project Links
 
@@ -119,7 +119,7 @@ Its exports and dependency declarations describe its integration surface; they d
 
 ## Governance
 
-`@tba/ui-administration` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `105-ui` ownership, public imports, declared dependencies, examples, and release metadata aligned.
+`@tbauth/ui-administration` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `105-ui` ownership, public imports, declared dependencies, examples, and release metadata aligned.
 
 Changes must pass the [README standards gate](https://github.com/tigrbl/tigrbl_auth/blob/master/.github/workflows/readme-standards.yml), package checks, and the evidence requirements relevant to the changed behavior. Update SSOT through the repository's CLI workflow when changing governed claims or boundaries.
 

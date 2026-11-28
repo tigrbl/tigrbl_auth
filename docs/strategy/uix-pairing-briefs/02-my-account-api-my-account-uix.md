@@ -1,6 +1,6 @@
 # My Account API + UIX Requirements Brief
 
-**Pairing:** `tba-app-backend-my-account` + `@tba/ui-my-account`<br>
+**Pairing:** `tba-app-backend-my-account` + `@tbauth/ui-my-account`<br>
 **Status:** Delivery brief<br>
 **Prepared:** July 11, 2026<br>
 **Backend app owner:** `pkgs/090-backend-apps/tba-app-backend-my-account`<br>
@@ -161,7 +161,7 @@ Every page must cover initial, loading, empty, partial-data, validation-error, m
 6. Detect and label the current session using contracted evidence rather than assumptions based on list order.
 7. Add boundary tests proving all mutations remain under `/account/*` and forbidden paths cannot be requested.
 8. Add deterministic tests for identifier encoding, expired sessions, stale resources, repeated revocation, and partial list failures.
-9. Use shared `@tba/ui-primitives` shells, forms, tables, confirmation dialogs, problem details, copy controls, and responsive record views.
+9. Use shared `@tbauth/ui-primitives` shells, forms, tables, confirmation dialogs, problem details, copy controls, and responsive record views.
 
 ## 8. UIX Designer Instructions
 

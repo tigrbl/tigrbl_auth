@@ -10,8 +10,8 @@ on:
         type: choice
         options:
           - all
-          - "@tba/ui-administration"
-          - "@tba/ui-public"
+          - "@tbauth/ui-administration"
+          - "@tbauth/ui-public"
           - "@tbauth/client-oidc-relying-party"
           - "@tbauth/client-app-connections"
           - "@tbauth/ui-app-connections"

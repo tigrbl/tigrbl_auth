@@ -1,5 +1,5 @@
 {
-  "name": "@tba/ui-my-account",
+  "name": "@tbauth/ui-my-account",
   "version": "0.4.0-dev.2",
   "description": "End-user account self-service UIX package for TBA.",
   "license": "Apache-2.0",
@@ -29,7 +29,7 @@
     "test": "vitest run --no-cache"
   },
   "dependencies": {
-    "@tba/ui-primitives": "file:../../100-uix-core/tba-ui-primitives",
+    "@tbauth/ui-primitives": "file:../../100-uix-core/tba-ui-primitives",
     "@vitejs/plugin-react": "^5.0.0",
     "vite": "^6.2.0",
     "typescript": "~5.8.2",

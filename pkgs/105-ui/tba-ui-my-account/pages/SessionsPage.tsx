@@ -1,4 +1,4 @@
-import { ConfirmDialog, DetailPanel, InlineMutationResult, MetricCard, PageHeader, ResourceTable, StatusBadge, Toast } from "@tba/ui-primitives";
+import { ConfirmDialog, DetailPanel, InlineMutationResult, MetricCard, PageHeader, ResourceTable, StatusBadge, Toast } from "@tbauth/ui-primitives";
 import { useState } from "react";
 import type { AccountSession } from "../types";
 

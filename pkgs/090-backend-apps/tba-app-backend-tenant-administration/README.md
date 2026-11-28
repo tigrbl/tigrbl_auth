@@ -318,7 +318,7 @@ Work from the `pkgs/090-backend-apps/tba-app-backend-tenant-administration` chec
 | Property | Value |
 | --- | --- |
 | Product surface | `tenant-admin-app` |
-| Intended UIX | `@tba/ui-tenant-administration` |
+| Intended UIX | `@tbauth/ui-tenant-administration` |
 | Exposes | Tenant identities, clients, consents, sessions, tenant keys/JWKS, tenant-local audit |
 | Excludes | Platform tenant creation/deletion and cross-tenant authority assignment |
 

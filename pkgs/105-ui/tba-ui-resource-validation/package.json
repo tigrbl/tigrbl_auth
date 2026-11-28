@@ -1,5 +1,5 @@
 {
-  "name": "@tba/ui-resource-validation",
+  "name": "@tbauth/ui-resource-validation",
   "private": true,
   "version": "0.0.0",
   "description": "Source prototype for Resource Validation UIX.",

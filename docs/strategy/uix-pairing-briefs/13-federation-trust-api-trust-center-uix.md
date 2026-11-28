@@ -1,6 +1,6 @@
 # Federation and Trust API + Trust Center UIX Requirements Brief
 
-**Proposed pairing:** `tba-router-federation-trust` + `@tba/ui-trust-center`<br>
+**Proposed pairing:** `tba-router-federation-trust` + `@tbauth/ui-trust-center`<br>
 **Status:** New product surface; relevant contracts, providers, graphs, discovery, JOSE, storage, and tenant authority foundations exist<br>
 **Prepared:** July 11, 2026<br>
 **Proposed router owner:** `pkgs/080-routers/tba-router-federation-trust`<br>

@@ -15,7 +15,7 @@ def test_typescript_rp_t0_package_scaffold_and_workspace_membership() -> None:
     manifest = json.loads((PACKAGE_DIR / "package.json").read_text(encoding="utf-8"))
 
     assert "pkgs/075-clients/tba-typescript-client-oidc-relying-party" in root_manifest["workspaces"]
-    assert manifest["name"] == "@tba/client-oidc-relying-party"
+    assert manifest["name"] == "@tbauth/client-oidc-relying-party"
     assert manifest["type"] == "module"
     assert manifest["exports"]["."]["import"] == "./dist/index.js"
     assert manifest["exports"]["."]["types"] == "./dist/index.d.ts"
@@ -30,7 +30,7 @@ def test_typescript_rp_t1_node_matrix_workflow_includes_package() -> None:
     text = (ROOT / ".github" / "workflows" / "package-node-matrix.yml").read_text(encoding="utf-8")
     on = workflow.get("on") or workflow.get(True)
 
-    assert "@tba/client-oidc-relying-party" in on["workflow_dispatch"]["inputs"]["package"]["options"]
+    assert "@tbauth/client-oidc-relying-party" in on["workflow_dispatch"]["inputs"]["package"]["options"]
     assert '"pkgs/075-clients/tba-typescript-client-oidc-relying-party"' in text
     assert 'npm run test -w ${manifest.name}' in text
     assert 'npm run build -w ${manifest.name}' in text
@@ -40,7 +40,7 @@ def test_typescript_rp_t2_npm_release_workflow_uses_provenance() -> None:
     workflow_text = (ROOT / ".github" / "workflows" / "monorepo-npm-package-release.yml").read_text(encoding="utf-8")
     manifest = json.loads((PACKAGE_DIR / "package.json").read_text(encoding="utf-8"))
 
-    assert "@tba/client-oidc-relying-party" in workflow_text
+    assert "@tbauth/client-oidc-relying-party" in workflow_text
     assert '"pkgs/075-clients/tba-typescript-client-oidc-relying-party"' in workflow_text
     assert "cobycloud/actions/actions/npm-publish@" in workflow_text
     assert "cobycloud/actions/actions/npm-publish@main" not in workflow_text

@@ -22,7 +22,7 @@ class TenantAdminBackendAppContract:
 
 TENANT_ADMIN_BACKEND_APP_CONTRACT = TenantAdminBackendAppContract(
     product_surface="tenant-admin-app",
-    intended_uix="@tba/ui-tenant-administration",
+    intended_uix="@tbauth/ui-tenant-administration",
     admin_resources=(
         "User",
         "Client",

@@ -320,7 +320,7 @@ Work from the `pkgs/090-backend-apps/tba-app-backend-developer` checkout. Synchr
 | Property | Value |
 | --- | --- |
 | Product surface | `developer-app` |
-| Intended UIX | `@tba/ui-developer` |
+| Intended UIX | `@tbauth/ui-developer` |
 | Exposes | Dynamic client registration, client management, client metadata, JWKS/discovery helpers |
 | Excludes | Tenant lifecycle operations, platform authority assignment, service identity administration |
 

@@ -1,6 +1,6 @@
 # Demo Hub + All Product API Surfaces Requirements Brief
 
-**Pairing:** `@tba/ui-demo-hub` + all seven product APIs/UIX<br>
+**Pairing:** `@tbauth/ui-demo-hub` + all seven product APIs/UIX<br>
 **Status:** Cross-surface orchestration brief; not a new aggregate API<br>
 **Prepared:** July 11, 2026<br>
 **UIX owner:** `pkgs/105-ui/tba-ui-demo-hub`<br>
@@ -37,13 +37,13 @@ Demo Hub covers:
 
 | Surface | API | UIX |
 |---|---|---|
-| Public identity | `tba-app-backend-public` | `@tba/ui-public` |
-| My Account | `tba-app-backend-my-account` | `@tba/ui-my-account` |
-| Platform Admin | `tba-app-backend-platform-administration` | `@tba/ui-platform-administration` |
-| Tenant Admin | `tba-app-backend-tenant-administration` | `@tba/ui-tenant-administration` |
-| Developer | `tba-app-backend-developer` | `@tba/ui-developer` |
-| Service Admin | `tba-app-backend-service-administration` | `@tba/ui-service-administration` |
-| Resource Validation | `tba-app-backend-resource-validation` | proposed `@tba/ui-resource-validation` |
+| Public identity | `tba-app-backend-public` | `@tbauth/ui-public` |
+| My Account | `tba-app-backend-my-account` | `@tbauth/ui-my-account` |
+| Platform Admin | `tba-app-backend-platform-administration` | `@tbauth/ui-platform-administration` |
+| Tenant Admin | `tba-app-backend-tenant-administration` | `@tbauth/ui-tenant-administration` |
+| Developer | `tba-app-backend-developer` | `@tbauth/ui-developer` |
+| Service Admin | `tba-app-backend-service-administration` | `@tbauth/ui-service-administration` |
+| Resource Validation | `tba-app-backend-resource-validation` | proposed `@tbauth/ui-resource-validation` |
 
 Demo Hub must preserve each surface’s authentication, authorization, path allowlist, and data ownership. It may deep-link across surfaces; it must not call a product API directly from the browser with shared administrator secrets.
 

@@ -1,6 +1,6 @@
 # Credential Wallet API + Wallet UIX/SDK Requirements Brief
 
-**Proposed pairing:** `tba-router-wallet` + `@tba/wallet-uix` + wallet SDKs<br>
+**Proposed pairing:** `tba-router-wallet` + `@tbauth/wallet-uix` + wallet SDKs<br>
 **Status:** New product surface; no wallet contracts, custody model, credential store, OpenID4VC client, or presentation UIX currently exists<br>
 **Prepared:** July 11, 2026<br>
 **Proposed router owner:** conditional on custody decision; hosted services under `pkgs/080-routers/tba-router-wallet`<br>

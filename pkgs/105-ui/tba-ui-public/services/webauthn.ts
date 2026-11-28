@@ -1,2 +1,2 @@
-export { authenticateWithPublicKeyCredential } from "@tba/ui-primitives";
-export type { AuthenticationIdentity, WebAuthnResult } from "@tba/ui-primitives";
+export { authenticateWithPublicKeyCredential } from "@tbauth/ui-primitives";
+export type { AuthenticationIdentity, WebAuthnResult } from "@tbauth/ui-primitives";

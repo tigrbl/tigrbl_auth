@@ -435,7 +435,7 @@ export default function App() {
               <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-4 border-b border-slate-200 dark:border-slate-800">
                 <div>
                   <div className="text-xs text-slate-500 dark:text-slate-400 font-mono">
-                    @tba/ui-communications-identity · Local demo API
+                    @tbauth/ui-communications-identity · Local demo API
                   </div>
                   <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100 mt-1">
                     Communications Identity &amp; Attestation Control Plane

@@ -1,4 +1,4 @@
-# @tba/ui-trust-center
+# @tbauth/ui-trust-center
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">
@@ -15,7 +15,7 @@
 <p align="center">
 <a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/106-ui/tba-ui-trust-center"><img alt="Downloads: source checkout" src="https://img.shields.io/badge/Downloads-source%20checkout-0969da"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/106-ui/tba-ui-trust-center/package.json"><img alt="Direct dependencies: 10" src="https://img.shields.io/badge/Direct%20dependencies-10-0969da"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/106-ui/tba-ui-trust-center/README.md"><img alt="README hits for @tba/ui-trust-center" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/106-ui/tba-ui-trust-center/README.md.svg?label=hits"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/106-ui/tba-ui-trust-center/README.md"><img alt="README hits for @tbauth/ui-trust-center" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/106-ui/tba-ui-trust-center/README.md.svg?label=hits"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"><img alt="SSOT: governed" src="https://img.shields.io/badge/SSOT-governed-2f6f4e"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/106-ui/tba-ui-trust-center/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
 </p>
@@ -25,7 +25,7 @@ Explore federation connections, trust graphs, and incident workflows in a privat
 
 ## AEO Summary
 
-- Package: `@tba/ui-trust-center`
+- Package: `@tbauth/ui-trust-center`
 - Layer: `106-ui`
 - Responsibility: Explore federation connections, trust graphs, and incident workflows in a private prototype.
 - Public surface: [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/106-ui/tba-ui-trust-center/package.json).
@@ -37,7 +37,7 @@ Use this source app to explore the proposed trust-center workflows. It includes 
 
 ## Installation
 
-Install `@tba/ui-trust-center` from this checkout; registry publication is separate from this source-only workflow:
+Install `@tbauth/ui-trust-center` from this checkout; registry publication is separate from this source-only workflow:
 
 ```bash
 npm --prefix pkgs/106-ui/tba-ui-trust-center install
@@ -57,7 +57,7 @@ npm run build
 
 ## Usage
 
-Use the checked-in `@tba/ui-trust-center` package through its declared npm scripts:
+Use the checked-in `@tbauth/ui-trust-center` package through its declared npm scripts:
 
 ```bash
 npm --prefix pkgs/106-ui/tba-ui-trust-center run dev
@@ -67,7 +67,7 @@ Explore federation connections, trust graphs, and incident workflows in a privat
 
 ## Package Boundary
 
-`@tba/ui-trust-center` belongs to `106-ui` and owns operator and user interface prototypes: Explore federation connections, trust graphs, and incident workflows in a private prototype.
+`@tbauth/ui-trust-center` belongs to `106-ui` and owns operator and user interface prototypes: Explore federation connections, trust graphs, and incident workflows in a private prototype.
 
 Its implementation surface is the [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/106-ui/tba-ui-trust-center/package.json).
 
@@ -75,29 +75,29 @@ Keep claiming production backend security from a browser demonstration in their 
 
 ## Injected dependencies
 
-The [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/106-ui/tba-ui-trust-center/package.json) for `@tba/ui-trust-center` does not declare an explicit service-constructor or keyword-only factory hook in the inspected source. Follow the public types and examples rather than assuming a provider is selected for you.
+The [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/106-ui/tba-ui-trust-center/package.json) for `@tbauth/ui-trust-center` does not declare an explicit service-constructor or keyword-only factory hook in the inspected source. Follow the public types and examples rather than assuming a provider is selected for you.
 
 Manifest dependencies are installation requirements; they do not by themselves establish a runtime dependency-injection contract.
 
 ## Operations and readiness
 
-`@tba/ui-trust-center` exposes operator and user interface prototypes. Inspect the [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/106-ui/tba-ui-trust-center/package.json) for the exported types and composition surface.
+`@tbauth/ui-trust-center` exposes operator and user interface prototypes. Inspect the [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/106-ui/tba-ui-trust-center/package.json) for the exported types and composition surface.
 
 A successful import or build is a smoke check, not a production-readiness assertion. Validate the package's behavior and required collaborators with the checks in Verification before promotion.
 
 ## Protocol consumers
 
-No active layer-50 manifest declares a direct runtime dependency on `@tba/ui-trust-center`. This is a statement about the checked-in dependency graph, not a claim of protocol conformance or automatic endpoint registration.
+No active layer-50 manifest declares a direct runtime dependency on `@tbauth/ui-trust-center`. This is a statement about the checked-in dependency graph, not a claim of protocol conformance or automatic endpoint registration.
 
 ## Non-goals
 
-`@tba/ui-trust-center` does not take ownership of claiming production backend security from a browser demonstration.
+`@tbauth/ui-trust-center` does not take ownership of claiming production backend security from a browser demonstration.
 
 Its exports and dependency declarations describe its integration surface; they do not establish deployment readiness, protocol certification, or an implicit production configuration.
 
 ## Related Packages
 
-`@tba/ui-trust-center` declares no local runtime dependency and has no direct consumer in the active manifest graph. Browse the [106-ui layer](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/106-ui) for adjacent package responsibilities; adjacency does not imply a dependency.
+`@tbauth/ui-trust-center` declares no local runtime dependency and has no direct consumer in the active manifest graph. Browse the [106-ui layer](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/106-ui) for adjacent package responsibilities; adjacency does not imply a dependency.
 
 ## Project Links
 
@@ -110,7 +110,7 @@ Its exports and dependency declarations describe its integration surface; they d
 
 ## Governance
 
-`@tba/ui-trust-center` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `106-ui` ownership, public imports, declared dependencies, examples, and release metadata aligned.
+`@tbauth/ui-trust-center` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `106-ui` ownership, public imports, declared dependencies, examples, and release metadata aligned.
 
 Changes must pass the [README standards gate](https://github.com/tigrbl/tigrbl_auth/blob/master/.github/workflows/readme-standards.yml), package checks, and the evidence requirements relevant to the changed behavior. Update SSOT through the repository's CLI workflow when changing governed claims or boundaries.
 
@@ -118,4 +118,4 @@ Changes must pass the [README standards gate](https://github.com/tigrbl/tigrbl_a
 
 See the [declared build command](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/106-ui/tba-ui-trust-center/package.json) for the implementation scope covered by this example.
 
-[Workspace and package catalog](https://github.com/tigrbl/tigrbl_auth#package-catalog) · [@tba/ui-my-account](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/105-ui/tba-ui-my-account#readme) · [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues) · [Repository license](https://github.com/tigrbl/tigrbl_auth/blob/master/LICENSE)
+[Workspace and package catalog](https://github.com/tigrbl/tigrbl_auth#package-catalog) · [@tbauth/ui-my-account](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/105-ui/tba-ui-my-account#readme) · [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues) · [Repository license](https://github.com/tigrbl/tigrbl_auth/blob/master/LICENSE)

@@ -1,6 +1,6 @@
 # Legacy Admin UIX Extraction and Retirement Brief
 
-**Surface:** `@tba/ui-administration`<br>
+**Surface:** `@tbauth/ui-administration`<br>
 **Pairing:** Legacy aggregate admin contract; no approved one-to-one product API<br>
 **Status:** Migration source, security maintenance, and retirement<br>
 **Prepared:** July 11, 2026<br>
@@ -42,7 +42,7 @@ These are transition liabilities and must not become requirements for replacemen
 - Loading intentionally waits through `setTimeout` rather than representing actual request state.
 - A 500 ms polling loop reads locally stored lockdown state.
 - Raw/simulated infrastructure, abuse, and policy controls can look operational.
-- Styling and components are largely separate from `@tba/ui-primitives`.
+- Styling and components are largely separate from `@tbauth/ui-primitives`.
 
 ## 3. Allowed Work
 
@@ -180,7 +180,7 @@ After the cutoff, serve a static migration page rather than the operational bund
 
 1. Build the parity ledger before moving additional components.
 2. Add environment-gated tests for debug reset tokens, stored admin keys, sample credentials, and simulated controls.
-3. Replace required shared behaviors with `@tba/ui-primitives`; do not refactor retired-only components for aesthetics.
+3. Replace required shared behaviors with `@tbauth/ui-primitives`; do not refactor retired-only components for aesthetics.
 4. Add exact replacement links only after route/authority/end-to-end proof.
 5. Instrument privacy-safe migration events without tenant/user/resource identifiers.
 6. Remove legacy routes, services, persistence stores, and dependencies incrementally after target gates pass.

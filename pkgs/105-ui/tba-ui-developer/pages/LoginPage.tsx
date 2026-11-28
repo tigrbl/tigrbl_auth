@@ -1,4 +1,4 @@
-import { Card, FormError, FormField, ResourceForm, SubmitButton } from "@tba/ui-primitives";
+import { Card, FormError, FormField, ResourceForm, SubmitButton } from "@tbauth/ui-primitives";
 import { useState } from "react";
 import type { FormEvent } from "react";
 
