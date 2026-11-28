@@ -4,9 +4,11 @@ from __future__ import annotations
 
 from typing import Any, Literal
 
-from pydantic import BaseModel, EmailStr, Field, constr
+from pydantic import BaseModel, Field, constr
 
 from tba_primitives_identity.typing import StrUUID
+
+from .contact_email import ContactEmail
 
 
 class TokenPair(BaseModel):
@@ -63,7 +65,7 @@ class DynamicClientRegistrationIn(BaseModel):
     client_name: str | None = None
     client_uri: str | None = None
     jwks_uri: str | None = None
-    contacts: list[EmailStr] | None = None
+    contacts: list[ContactEmail] | None = None
     software_id: str | None = None
     software_version: str | None = None
     post_logout_redirect_uris: list[str] | None = None
@@ -95,7 +97,7 @@ class DynamicClientRegistrationOut(BaseModel):
     client_name: str | None = None
     client_uri: str | None = None
     jwks_uri: str | None = None
-    contacts: list[EmailStr] | None = None
+    contacts: list[ContactEmail] | None = None
     software_id: str | None = None
     software_version: str | None = None
     post_logout_redirect_uris: list[str] | None = None
@@ -126,7 +128,7 @@ class DynamicClientRegistrationManagementIn(BaseModel):
     client_name: str | None = None
     client_uri: str | None = None
     jwks_uri: str | None = None
-    contacts: list[EmailStr] | None = None
+    contacts: list[ContactEmail] | None = None
     software_id: str | None = None
     software_version: str | None = None
     post_logout_redirect_uris: list[str] | None = None

@@ -1,0 +1,28 @@
+TBA MCP authorization capability contract test
+TBA source baseline f4b5bef74, Python 3.12.13 on Windows, source dependencies from the same worktree
+Command: uv run --no-project -- <pytest-runtime-python> -m pytest -vv --noconftest -c pkgs/040-capabilities/tba-capability-mcp-authorization/pyproject.toml -p no:cacheprovider pkgs/040-capabilities/tba-capability-mcp-authorization/tests pkgs/040-capabilities/tba-capability-mcp-authorization/docs/readme/test_examples.py
+
+============================= test session starts =============================
+configfile: pyproject.toml
+collecting ... collected 18 items
+
+pkgs\040-capabilities\tba-capability-mcp-authorization\tests\test_capability.py::test_consent_checks_live_account_and_selected_bot[connection0] PASSED [  5%]
+pkgs\040-capabilities\tba-capability-mcp-authorization\tests\test_capability.py::test_consent_checks_live_account_and_selected_bot[connection1] PASSED [ 11%]
+pkgs\040-capabilities\tba-capability-mcp-authorization\tests\test_capability.py::test_direct_connection_and_tool_policy_use_current_owner_scopes[connection0] PASSED [ 16%]
+pkgs\040-capabilities\tba-capability-mcp-authorization\tests\test_capability.py::test_direct_connection_and_tool_policy_use_current_owner_scopes[connection1] PASSED [ 22%]
+pkgs\040-capabilities\tba-capability-mcp-authorization\tests\test_capability.py::test_bot_changes_and_owner_revocation_are_applied_on_the_next_use[connection0] PASSED [ 27%]
+pkgs\040-capabilities\tba-capability-mcp-authorization\tests\test_capability.py::test_bot_changes_and_owner_revocation_are_applied_on_the_next_use[connection1] PASSED [ 33%]
+pkgs\040-capabilities\tba-capability-mcp-authorization\tests\test_capability.py::test_a_differently_bound_grant_is_rejected[connection0-grant_id] PASSED [ 38%]
+pkgs\040-capabilities\tba-capability-mcp-authorization\tests\test_capability.py::test_a_differently_bound_grant_is_rejected[connection0-tenant_id] PASSED [ 44%]
+pkgs\040-capabilities\tba-capability-mcp-authorization\tests\test_capability.py::test_a_differently_bound_grant_is_rejected[connection0-client_id] PASSED [ 50%]
+pkgs\040-capabilities\tba-capability-mcp-authorization\tests\test_capability.py::test_a_differently_bound_grant_is_rejected[connection0-resource] PASSED [ 55%]
+pkgs\040-capabilities\tba-capability-mcp-authorization\tests\test_capability.py::test_a_differently_bound_grant_is_rejected[connection1-grant_id] PASSED [ 61%]
+pkgs\040-capabilities\tba-capability-mcp-authorization\tests\test_capability.py::test_a_differently_bound_grant_is_rejected[connection1-tenant_id] PASSED [ 66%]
+pkgs\040-capabilities\tba-capability-mcp-authorization\tests\test_capability.py::test_a_differently_bound_grant_is_rejected[connection1-client_id] PASSED [ 72%]
+pkgs\040-capabilities\tba-capability-mcp-authorization\tests\test_capability.py::test_a_differently_bound_grant_is_rejected[connection1-resource] PASSED [ 77%]
+pkgs\040-capabilities\tba-capability-mcp-authorization\tests\test_capability.py::test_expired_grant_cannot_be_resolved[connection0] PASSED [ 83%]
+pkgs\040-capabilities\tba-capability-mcp-authorization\tests\test_capability.py::test_expired_grant_cannot_be_resolved[connection1] PASSED [ 88%]
+pkgs\040-capabilities\tba-capability-mcp-authorization\docs\readme\test_examples.py::test_readme_example[quick_start.py] PASSED [ 94%]
+pkgs\040-capabilities\tba-capability-mcp-authorization\docs\readme\test_examples.py::test_readme_example[usage.py] PASSED [100%]
+
+============================= 18 passed in 0.33s ==============================

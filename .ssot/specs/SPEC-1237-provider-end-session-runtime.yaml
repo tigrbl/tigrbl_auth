@@ -1,0 +1,33 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1237"
+number: 1237
+slug: "provider-end-session-runtime"
+title: "Provider End-Session Runtime"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Define provider processing for an RP-initiated OIDC logout request."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  Publish the end-session endpoint through OIDC discovery when the composed handler is available. Accept query parameters on GET and form parameters on POST. Resolve registrations and browser sessions within the trusted issuer. Verify any ID-token hint under that issuer, reconcile client identifiers, and bind any selected session to the client and identity in scope. Apply the standard current or recent session rules to a verified hint, including expiry handling. Request explicit confirmation when the hint is absent or fails to identify the current session as required by the standard.
+
+  Bind confirmation and any same-site browser handoff to the validated request and issuer. Expire and consume any handoff once. Call the revocation adapter only for the resolved session. Handle repeated completion idempotently and keep the session independent of unrelated issuer scopes. Give callers distinct outcomes for confirmation required, completed, cancelled, rejected, and unavailable. If revocation fails, report failure without reporting logout success.
+
+  Use an external return only for the exact registered post-logout URI of the resolved client, after establishing that the request is eligible for that return. Echo opaque state on an eligible return. Use the host response for a local signed-out page. After successful logout the host clears the scoped session cookie and any scoped continuation state.
+
+  Governed features: feat:target-oidc-rp-initiated-logout, feat:oidc-logout-conformance.
+
+  ## Runtime scope
+
+  The candidate runtime adoption and acceptance are tracked by feat:oidc-provider-end-session-runtime.
+
+spec_kind: "normative"
+adr_ids:
+  - "adr:1141"
+  - "adr:1025"
+  - "adr:1117"
