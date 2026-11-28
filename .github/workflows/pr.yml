@@ -29,6 +29,6 @@ jobs:
   package-python-matrix:
     uses: tigrbl/tigrbl_auth/.github/workflows/package-python-matrix.yml@69b0c49b8bc9f55e1a391b97c2f2aef7915bf3f5
   package-node-matrix:
-    uses: tigrbl/tigrbl_auth/.github/workflows/package-node-matrix.yml@c48235311f1a4ec1b81543f3838c981943b1dc0e
+    uses: tigrbl/tigrbl_auth/.github/workflows/package-node-matrix.yml@423de04a36e7c8ce2a4d991c12b2e11ba3a989ff
   readme-standards:
     uses: tigrbl/tigrbl_auth/.github/workflows/readme-standards.yml@12ec516cfdd82546de4ce504e7672ab5062deac9
