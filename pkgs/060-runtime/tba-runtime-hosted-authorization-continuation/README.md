@@ -146,7 +146,7 @@ Map expected storage outages to `ContinuationUnavailable`. The runtime returns a
 
 ### Best Practices
 
-Consult the current client registration at resume. Safely restart at a host-owned destination.
+Consult the current client registration at resume. Safely restart at a host-owned destination. For shared issuers, pass the host-resolved tenant ID when creating the request and again when inspecting or resuming it. A positive recovery window lets a bound browser receive only the current client identifier for a fresh sign-in. Retain unconsumed records for the configured window.
 
 ---
 

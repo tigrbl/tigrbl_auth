@@ -6,7 +6,7 @@ Governed by spc:1239.
 
 ## T0
 
-Test resume, restart and unavailable for valid, expired, mismatched and consumed requests. Preserve issuer, client, exact redirect, state, nonce and PKCE when applicable.
+Test resume, restart and unavailable for valid, expired, mismatched and consumed requests. Preserve issuer, client, exact redirect, state, nonce and PKCE when applicable. Verify isolation between tenants sharing an issuer and client, and verify that a restart hint expires at the configured recovery boundary.
 
 ## T1
 
