@@ -15,6 +15,8 @@ checks. The pytest option `--certification-lane` selects the evidence lane.
 | --- | --- |
 | `tba-tests-wimse` | WIMSE identifiers, WIC certificate profiles, mTLS peer authentication, WIT, and WPT |
 | `tba-tests-spiffe` | SPIFFE providers and SVID profiles, including the separately marked CWT extension module |
+| `tba-tests-dns` | DNS names, record codecs, resolver and transports, zones, and the TXT adapter |
+| `tba-tests-interop-dns` | BIND and MIT Kerberos GSS-TSIG verification using production wheels |
 | `tba-tests-workload-composition` | Workload protocol boundaries, specification ownership and runtime composition |
 | `tba-tests-storage` | Storage components, migration portability, persistence durability, and table ownership and operations |
 | `tba-tests-authorization` | Authorization invariants, policy evaluation and replay, delegation, and DID and workload policy contracts |
