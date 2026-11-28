@@ -17,7 +17,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 license = "Apache-2.0"
-dependencies = ["pydantic>=2.12.5,<3", "tigrbl==0.4.5.dev8", "tba-auth==0.4.0.dev3", "tba-app-backend-core==0.4.0.dev3", "tba-router-administration-gate==0.4.0.dev3", "tba-contracts-identity==0.4.0.dev3", "tba-server-identity==0.4.0.dev3"]
+dependencies = ["pydantic>=2.12.5,<3", "tigrbl==0.4.6.dev4", "tba-auth==0.4.0.dev3", "tba-app-backend-core==0.4.0.dev3", "tba-router-administration-gate==0.4.0.dev3", "tba-contracts-identity==0.4.0.dev3", "tba-server-identity==0.4.0.dev3"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 
