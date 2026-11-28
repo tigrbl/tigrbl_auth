@@ -27,7 +27,7 @@ jobs:
       python-version: '3.11'
       artifact-name: generated-contracts
   package-python-matrix:
-    uses: tigrbl/tigrbl_auth/.github/workflows/package-python-matrix.yml@69b0c49b8bc9f55e1a391b97c2f2aef7915bf3f5
+    uses: tigrbl/tigrbl_auth/.github/workflows/package-python-matrix.yml@cb617f3d67775709f14078fce2d7d8a9ce62c82b
   package-node-matrix:
     uses: tigrbl/tigrbl_auth/.github/workflows/package-node-matrix.yml@423de04a36e7c8ce2a4d991c12b2e11ba3a989ff
   readme-standards:
