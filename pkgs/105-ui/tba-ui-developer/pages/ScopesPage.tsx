@@ -1,4 +1,4 @@
-import { DataTable, DetailPanel, EmptyState, PageHeader, StatusBadge } from "@tba/ui-primitives";
+import { DataTable, DetailPanel, EmptyState, PageHeader, StatusBadge } from "@tbauth/ui-primitives";
 import type { DeveloperApplication, IssuerMetadata } from "../types";
 
 export function ScopesPage({ applications, metadata }: { applications: DeveloperApplication[]; metadata: IssuerMetadata | null }) {

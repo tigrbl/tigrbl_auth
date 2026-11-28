@@ -331,7 +331,7 @@ The backend app owns HTTP schemas and routes only. Tenant, realm, and identity
 administration are invoked through request-scoped layer-40 capabilities composed
 by `tba-server-identity`; durable table operations and secret hashing remain
 in the layer-60 runtime adapters and their lower-layer providers.
-| Intended UIX | `@tba/ui-platform-administration` |
+| Intended UIX | `@tbauth/ui-platform-administration` |
 | Exposes | Tenant lifecycle, platform authority assignment, admin identity lookup, audit/session/profile RPC |
 | Excludes | Public login/consent pages, tenant self-service-only workflows, developer app registration surface |
 

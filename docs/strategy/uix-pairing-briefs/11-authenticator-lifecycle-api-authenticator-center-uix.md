@@ -1,6 +1,6 @@
 # Authenticator Lifecycle API + Authenticator Center UIX Requirements Brief
 
-**Proposed pairing:** `tba-router-authenticators` + `@tba/ui-authenticator-center-uix`<br>
+**Proposed pairing:** `tba-router-authenticators` + `@tbauth/ui-authenticator-center-uix`<br>
 **Status:** New product surface; existing provider and contract foundations<br>
 **Prepared:** July 11, 2026<br>
 **Proposed router owner:** `pkgs/080-routers/tba-router-authenticators`<br>

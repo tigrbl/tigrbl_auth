@@ -48,7 +48,6 @@ required_repository_controls:
     dependabot_updates: true
 
 repository_enforced_files:
-  codeowners: .github/CODEOWNERS
   reusable_workflows:
     - .github/workflows/_quality.yml
     - .github/workflows/_contracts.yml

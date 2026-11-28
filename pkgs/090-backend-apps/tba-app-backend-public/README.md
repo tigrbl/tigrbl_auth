@@ -47,7 +47,7 @@ Expose the public TBA OAuth and OpenID Connect API and login surface.
 
 ### When to Use
 
-Use `tba_app_backend_public:app` for ASGI serving or `build_app` for explicit composition. The public backend pairs with `@tba/ui-public`. It assembles discovery, authorization, and token routes from the protocol and runtime packages. Tenant and platform administration use separate backends.
+Use `tba_app_backend_public:app` for ASGI serving or `build_app` for explicit composition. The public backend pairs with `@tbauth/ui-public`. It assembles discovery, authorization, and token routes from the protocol and runtime packages. Tenant and platform administration use separate backends.
 
 ### Features
 

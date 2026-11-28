@@ -90,7 +90,7 @@ def test_my_account_contract_matches_product_surface_registry() -> None:
 
     assert PRODUCT_SURFACE == "my-account-app"
     assert MY_ACCOUNT_BACKEND_APP_CONTRACT.product_surface == PRODUCT_SURFACE
-    assert MY_ACCOUNT_BACKEND_APP_CONTRACT.intended_uix == "@tba/ui-my-account"
+    assert MY_ACCOUNT_BACKEND_APP_CONTRACT.intended_uix == "@tbauth/ui-my-account"
     assert deployment.plugin_mode == "public-only"
     assert deployment.surface_enabled("public-rest")
     assert not deployment.surface_enabled("admin-rest")

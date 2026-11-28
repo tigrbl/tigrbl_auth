@@ -21,7 +21,7 @@ class MyAccountBackendAppContract:
 
 MY_ACCOUNT_BACKEND_APP_CONTRACT = MyAccountBackendAppContract(
     product_surface="my-account-app",
-    intended_uix="@tba/ui-my-account",
+    intended_uix="@tbauth/ui-my-account",
     baseline_capabilities=(
         "account-profile",
         "account-sessions",

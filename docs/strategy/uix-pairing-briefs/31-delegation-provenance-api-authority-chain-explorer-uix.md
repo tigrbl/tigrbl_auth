@@ -1,6 +1,6 @@
 # Delegation Provenance API + Authority Chain Explorer UIX Requirements Brief
 
-**Pairing:** `tba-router-delegation-provenance` + `@tba/authority-chain-explorer-uix`<br>
+**Pairing:** `tba-router-delegation-provenance` + `@tbauth/authority-chain-explorer-uix`<br>
 **Additional opportunity:** Authorization/delegation/sovereignty extension 2<br>
 **Primary buyers:** security engineering, IAM platform teams, application owners, workload and agent platform teams, auditors, and incident response<br>
 **Status:** proposed product surface; durable delegation grants, scopes, proofs, edges, token links, authority graphs, attenuation, and runtime lineage already exist

@@ -1,6 +1,6 @@
 # Service Admin API + UIX Requirements Brief
 
-**Pairing:** `tba-app-backend-service-administration` + `@tba/ui-service-administration`<br>
+**Pairing:** `tba-app-backend-service-administration` + `@tbauth/ui-service-administration`<br>
 **Status:** Delivery brief<br>
 **Prepared:** July 11, 2026<br>
 **Backend app owner:** `pkgs/090-backend-apps/tba-app-backend-service-administration`<br>

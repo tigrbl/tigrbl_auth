@@ -1,5 +1,5 @@
 {
-  "name": "@tba/ui-directory-provisioning-scim",
+  "name": "@tbauth/ui-directory-provisioning-scim",
   "private": true,
   "version": "0.0.0",
   "type": "module",

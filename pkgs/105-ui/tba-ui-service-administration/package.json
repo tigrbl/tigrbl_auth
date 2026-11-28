@@ -1,5 +1,5 @@
 {
-  "name": "@tba/ui-service-administration",
+  "name": "@tbauth/ui-service-administration",
   "version": "0.3.5",
   "description": "Service identity and workload administration UIX for TBA.",
   "license": "Apache-2.0",
@@ -28,7 +28,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@tba/ui-primitives": "file:../../100-uix-core/tba-ui-primitives",
+    "@tbauth/ui-primitives": "file:../../100-uix-core/tba-ui-primitives",
     "@vitejs/plugin-react": "^5.0.0",
     "vite": "^6.2.0",
     "typescript": "~5.8.2",
@@ -39,7 +39,7 @@
     "@types/node": "^22.14.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
-    "vitest": "^4.1.12"
+    "vitest": "4.1.12"
   },
   "engines": {
     "node": ">=22"

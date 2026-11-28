@@ -1,6 +1,6 @@
 # Credential Verifier API + Verification Console UIX Requirements Brief
 
-**Proposed pairing:** `tba-router-credential-verifier` + `@tba/credential-verifier-uix`<br>
+**Proposed pairing:** `tba-router-credential-verifier` + `@tbauth/credential-verifier-uix`<br>
 **Status:** New product surface; planned verification-result/boundary work and reusable trust, JOSE, policy, status, audit, and API foundations exist<br>
 **Prepared:** July 11, 2026<br>
 **Proposed router owner:** `pkgs/080-routers/tba-router-credential-verifier`<br>

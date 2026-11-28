@@ -1,5 +1,5 @@
 {
-  "name": "@tba/ui-voice-biometric-authenticator",
+  "name": "@tbauth/ui-voice-biometric-authenticator",
   "private": true,
   "version": "0.0.0",
   "type": "module",

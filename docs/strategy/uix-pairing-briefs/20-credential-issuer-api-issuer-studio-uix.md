@@ -1,6 +1,6 @@
 # Credential Issuer API + Issuer Studio UIX Requirements Brief
 
-**Proposed pairing:** `tba-router-credential-issuer` + `@tba/credential-issuer-uix`<br>
+**Proposed pairing:** `tba-router-credential-issuer` + `@tbauth/credential-issuer-uix`<br>
 **Status:** New product surface; OAuth/OIDC, JOSE, credentials, policy, attestation, status, storage, and issuer foundations are reusable, but digital credential issuance is absent<br>
 **Prepared:** July 11, 2026<br>
 **Proposed router owner:** `pkgs/080-routers/tba-router-credential-issuer`<br>

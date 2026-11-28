@@ -1,4 +1,4 @@
-import { registerPublicKeyCredential } from "@tba/ui-primitives";
+import { registerPublicKeyCredential } from "@tbauth/ui-primitives";
 
 export { registerPublicKeyCredential };
 

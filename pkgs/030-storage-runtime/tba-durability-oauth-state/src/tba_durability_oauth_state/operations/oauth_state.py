@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 import datetime as dt
+import inspect
 from collections.abc import Mapping
 from datetime import timezone
 from typing import Any
+from uuid import UUID
 
 from tigrbl import (
     create_table_record,
@@ -17,9 +19,10 @@ from tigrbl import (
 )
 
 
-async def _registration_aggregate(db: Any, client_id: Any) -> dict[str, Any] | None:
+async def _registration_aggregate(db: Any, client_id: UUID | str) -> dict[str, Any] | None:
     from tba_storage_oauth.tables import Client, ClientRegistration
 
+    client_id = UUID(str(client_id))
     client = await first_table_record(Client, db, {"id": client_id})
     registration = await first_table_record(
         ClientRegistration,
@@ -38,7 +41,8 @@ async def create_client_registration(ctx: Mapping[str, Any]) -> dict[str, Any]:
 
     db = database_from_context(ctx)
     payload = dict(payload_from_context(ctx))
-    client_id = payload["client_id"]
+    client_id = UUID(str(payload["client_id"]))
+    tenant_id = UUID(str(payload["tenant_id"]))
     if await _registration_aggregate(db, client_id) is not None:
         raise ValueError("client registration already exists")
     client = await create_table_record(
@@ -46,7 +50,7 @@ async def create_client_registration(ctx: Mapping[str, Any]) -> dict[str, Any]:
         db,
         {
             "id": client_id,
-            "tenant_id": payload["tenant_id"],
+            "tenant_id": tenant_id,
             "client_secret_hash": payload["client_secret_hash"],
             "redirect_uris": " ".join(payload["redirect_uris"]),
             "grant_types": " ".join(
@@ -59,8 +63,8 @@ async def create_client_registration(ctx: Mapping[str, Any]) -> dict[str, Any]:
         ClientRegistration,
         db,
         {
-            "client_id": field_value(client, "id"),
-            "tenant_id": payload["tenant_id"],
+            "client_id": client_id,
+            "tenant_id": tenant_id,
             "registration_metadata": dict(payload.get("metadata") or {}),
             "contacts": list(payload.get("contacts") or ()),
             "software_id": payload.get("software_id"),
@@ -156,6 +160,34 @@ async def persist_authorization_code(ctx: Mapping[str, Any]) -> Any:
         database_from_context(ctx),
         payload_from_context(ctx),
     )
+
+
+async def consume_authorization_code(ctx: Mapping[str, Any]) -> bool:
+    """Remove one validated, unexpired code within the caller's transaction.
+
+    The caller validates the OAuth request and PKCE before calling this operation
+    and keeps the transaction open through token creation.
+    """
+    from tba_storage_oauth.tables import AuthCode
+
+    table = AuthCode.__table__
+    payload = payload_from_context(ctx)
+    statement = (
+        table.delete()
+        .where(
+            table.c.id == payload["code_id"],
+            table.c.tenant_id == payload["tenant_id"],
+            table.c.client_id == payload["client_id"],
+            table.c.redirect_uri == payload["redirect_uri"],
+            table.c.code_challenge == payload["code_challenge"],
+            table.c.expires_at > dt.datetime.now(timezone.utc),
+        )
+        .returning(table.c.id)
+    )
+    result = database_from_context(ctx).execute(statement)
+    if inspect.isawaitable(result):
+        result = await result
+    return result.scalar_one_or_none() is not None
 
 
 async def persist_pushed_authorization_request(ctx: Mapping[str, Any]) -> Any:
@@ -269,6 +301,7 @@ async def is_token_hash_revoked(ctx: Mapping[str, Any]) -> bool:
 
 
 __all__ = [
+    "consume_authorization_code",
     "create_client_registration",
     "disable_client_registration",
     "is_token_hash_revoked",

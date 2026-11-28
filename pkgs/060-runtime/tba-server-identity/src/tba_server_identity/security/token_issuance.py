@@ -19,15 +19,17 @@ from tba_contracts_identity.tokens import (
 from tba_primitives_identity.digests import token_hash
 from tba_primitives_identity.errors import (
     InvalidRefreshTokenError,
+    InvalidTokenError,
     RefreshTokenReuseError,
 )
 from tba_runtime_identity_storage.ops.audit import append_audit_event_record
 from tigrbl import field_value
 from tba_runtime_identity_storage.ops.oauth_state import (
+    is_token_hash_revoked,
     record_revoked_token_hash,
 )
 from tba_runtime_identity_storage.ops.tokens import (
-    mark_refresh_token_rotated,
+    claim_refresh_token_rotation,
     persist_issued_token,
     read_token_record,
     revoke_refresh_token_family,
@@ -68,7 +70,9 @@ def _audience_allows(stored: str | list[str] | None, requested: str | None) -> b
     return requested in stored
 
 
-async def _decode_issued_claims(coder: TokenCoder, token: str) -> dict[str, Any]:
+async def _decode_token_claims(
+    coder: TokenCoder, token: str, **kwargs: Any
+) -> dict[str, Any]:
     decode = coder.async_decode
     try:
         parameters = inspect.signature(decode).parameters
@@ -78,7 +82,6 @@ async def _decode_issued_claims(coder: TokenCoder, token: str) -> dict[str, Any]
         parameter.kind is inspect.Parameter.VAR_KEYWORD
         for parameter in parameters.values()
     )
-    kwargs: dict[str, object] = {"verify_exp": False}
     if supports_revocation_switch:
         kwargs["verify_revocation"] = False
     return dict(await decode(token, **kwargs))
@@ -91,7 +94,11 @@ def build_token_issuance_capability(
 ) -> TokenIssuanceCapability:
     """Bind cryptography and durable aliases to one request-scoped session."""
 
-    async def issue(request: TokenPairIssueRequest) -> IssuedTokenPair:
+    async def issue(
+        request: TokenPairIssueRequest,
+        *,
+        rotation: Mapping[str, Any] | None = None,
+    ) -> IssuedTokenPair:
         claims = dict(request.extra_claims)
         if request.scope:
             claims["scope"] = request.scope
@@ -108,13 +115,25 @@ def build_token_issuance_capability(
             persist_token=False,
             **claims,
         )
-        access_claims = await _decode_issued_claims(token_coder, access_token)
-        refresh_claims = await _decode_issued_claims(token_coder, refresh_token)
+        access_claims = await _decode_token_claims(
+            token_coder, access_token, verify_exp=False
+        )
+        refresh_claims = await _decode_token_claims(
+            token_coder, refresh_token, verify_exp=False
+        )
         for issued_claims in (access_claims, refresh_claims):
             issued_claims["client_id"] = request.client_id
             for name in ("authorization_trace", "delegation_provenance"):
                 if name in request.extra_claims:
                     issued_claims[name] = deepcopy(request.extra_claims[name])
+
+        if rotation is not None and not await claim_refresh_token_rotation(
+            {
+                "payload": {**rotation, "successor_hash": token_hash(refresh_token)},
+                "db": db,
+            }
+        ):
+            raise InvalidRefreshTokenError("refresh token is no longer active")
 
         family_id = request.refresh_family_id or str(uuid4())
         parent_hash = (
@@ -205,13 +224,17 @@ def build_token_issuance_capability(
         ):
             raise InvalidRefreshTokenError("refresh token is inactive")
 
-        claims = dict(
-            await token_coder.async_decode(
+        if await is_token_hash_revoked({"payload": {"token_hash": digest}, "db": db}):
+            raise InvalidRefreshTokenError("refresh token is revoked")
+        try:
+            claims = await _decode_token_claims(
+                token_coder,
                 request.refresh_token,
                 verify_exp=True,
                 cert_thumbprint=request.certificate_thumbprint,
             )
-        )
+        except InvalidTokenError as exc:
+            raise InvalidRefreshTokenError("refresh token verification failed") from exc
         if claims.get("typ") != "refresh":
             raise InvalidRefreshTokenError("presented token is not a refresh token")
         token_client_id = str(claims.get("client_id") or record_client_id or "")
@@ -246,7 +269,7 @@ def build_token_issuance_capability(
         next_issuer = str(preserved.pop("iss", None) or claims.get("iss") or "")
         confirmation = claims.get("cnf")
 
-        result = await issue(
+        return await issue(
             TokenPairIssueRequest(
                 subject=str(claims.get("sub") or field_value(record, "subject") or ""),
                 tenant_id=str(
@@ -266,23 +289,14 @@ def build_token_issuance_capability(
                 refresh_parent_token=request.refresh_token,
                 token_type=request.token_type,
                 extra_claims=preserved,
-            )
+            ),
+            rotation={
+                "token_hash": digest,
+                "tenant_id": field_value(record, "tenant_id"),
+                "client_id": field_value(record, "client_id"),
+                "refresh_family_id": field_value(record, "refresh_family_id"),
+            },
         )
-        await mark_refresh_token_rotated(
-            {
-                "payload": {
-                    "token_hash": digest,
-                    "successor_hash": (
-                        token_hash(result.refresh_token)
-                        if result.refresh_token
-                        else None
-                    ),
-                    "reason": "refresh_rotated",
-                },
-                "db": db,
-            }
-        )
-        return result
 
     async def audit(event: Mapping[str, object]) -> None:
         details = event.get("details")

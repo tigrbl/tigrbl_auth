@@ -1,0 +1,38 @@
+TBA durable OAuth authorization-code consumption
+Source baseline f4b5bef74. Python 3.12.13 with in-checkout TBA packages, bound protocol settings, and SQLite.
+import glob, sys
+sys.path[0:0] = glob.glob("pkgs/[0-9][0-9][0-9]-*/*/src")
+from tba_contracts_identity.protocol_configuration import bind_protocol_settings
+from tba_runtime_identity.settings import settings
+bind_protocol_settings(settings)
+import pytest
+raise SystemExit(pytest.main([
+    "-q", "--disable-warnings", "--noconftest", "-c", "pyproject.toml",
+    "-o", "addopts=", "-p", "pytest_asyncio.plugin", "-p", "no:cacheprovider",
+    "pkgs/120-tests/tba-tests-oauth/tests/unit/test_authorization_code_durability.py",
+    "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_authorization_code_token_claims.py",
+    "pkgs/120-tests/tba-tests-oauth/tests/unit/test_fapi_runtime_profile.py",
+    "pkgs/120-tests/tba-tests-oauth/tests/unit/test_oauth_state_table_ops_boundary.py::test_oauth_runtime_specs_expose_expected_custom_operations",
+]))
+
+
+pkgs/120-tests/tba-tests-oauth/tests/unit/test_authorization_code_durability.py::test_authorization_code_can_be_consumed_only_once_across_transactions PASSED [  5%]
+pkgs/120-tests/tba-tests-oauth/tests/unit/test_authorization_code_durability.py::test_code_stays_available_after_mismatched_binding[tenant_id-value0] PASSED [ 11%]
+pkgs/120-tests/tba-tests-oauth/tests/unit/test_authorization_code_durability.py::test_code_stays_available_after_mismatched_binding[client_id-value1] PASSED [ 16%]
+pkgs/120-tests/tba-tests-oauth/tests/unit/test_authorization_code_durability.py::test_code_stays_available_after_mismatched_binding[redirect_uri-https://client.example/other] PASSED [ 22%]
+pkgs/120-tests/tba-tests-oauth/tests/unit/test_authorization_code_durability.py::test_code_stays_available_after_mismatched_binding[code_challenge-another-challenge] PASSED [ 27%]
+pkgs/120-tests/tba-tests-oauth/tests/unit/test_authorization_code_durability.py::test_expired_code_is_not_consumed PASSED [ 33%]
+pkgs/120-tests/tba-tests-oauth/tests/unit/test_authorization_code_durability.py::test_rollback_after_consumption_preserves_code PASSED [ 38%]
+pkgs/120-tests/tba-tests-oauth/tests/unit/test_authorization_code_durability.py::test_consumption_accepts_an_async_database_connection PASSED [ 44%]
+pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_authorization_code_token_claims.py::test_authorization_code_exchange_mints_session_bound_id_token_claims[True] PASSED [ 50%]
+pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_authorization_code_token_claims.py::test_authorization_code_exchange_mints_session_bound_id_token_claims[False] PASSED [ 55%]
+pkgs/120-tests/tba-tests-oauth/tests/unit/test_fapi_runtime_profile.py::test_fapi_discovery_and_resource_metadata_are_profile_specific PASSED [ 61%]
+pkgs/120-tests/tba-tests-oauth/tests/unit/test_fapi_runtime_profile.py::test_fapi_authorization_policy_rejects_non_minimal_front_channel_and_requires_pkce PASSED [ 66%]
+pkgs/120-tests/tba-tests-oauth/tests/unit/test_fapi_runtime_profile.py::test_fapi_par_requires_redirect_uri_and_client_auth PASSED [ 72%]
+pkgs/120-tests/tba-tests-oauth/tests/unit/test_fapi_runtime_profile.py::test_fapi_registration_rejects_shared_secret_auth PASSED [ 77%]
+pkgs/120-tests/tba-tests-oauth/tests/unit/test_fapi_runtime_profile.py::test_fapi_token_request_rejects_shared_secret_auth PASSED [ 83%]
+pkgs/120-tests/tba-tests-oauth/tests/unit/test_fapi_runtime_profile.py::test_fapi_private_key_jwt_uses_issuer_as_assertion_audience PASSED [ 88%]
+pkgs/120-tests/tba-tests-oauth/tests/unit/test_fapi_runtime_profile.py::test_fapi_authorization_code_requires_sender_key_continuity PASSED [ 94%]
+pkgs/120-tests/tba-tests-oauth/tests/unit/test_oauth_state_table_ops_boundary.py::test_oauth_runtime_specs_expose_expected_custom_operations PASSED [100%]
+
+============================= 18 passed in 8.32s ==============================

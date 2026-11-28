@@ -1,4 +1,4 @@
-import { Button, DetailPanel, EmptyState, JsonViewer, PageHeader, StatusBadge } from "@tba/ui-primitives";
+import { Button, DetailPanel, EmptyState, JsonViewer, PageHeader, StatusBadge } from "@tbauth/ui-primitives";
 import type { Tenant } from "../types";
 
 export function KeyRotationPage({ selectedTenant, tenants }: { selectedTenant: Tenant | null; tenants: Tenant[] }) {

@@ -1,5 +1,5 @@
 {
-  "name": "@tba/ui-mfa-authenticator-assurance-console",
+  "name": "@tbauth/ui-mfa-authenticator-assurance-console",
   "private": true,
   "version": "0.0.0",
   "type": "module",

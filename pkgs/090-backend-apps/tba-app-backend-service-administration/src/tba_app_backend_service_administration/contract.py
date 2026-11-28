@@ -23,7 +23,7 @@ class ServiceAdminBackendAppContract:
 
 SERVICE_ADMIN_BACKEND_APP_CONTRACT = ServiceAdminBackendAppContract(
     product_surface="service-admin-app",
-    intended_uix="@tba/ui-service-administration",
+    intended_uix="@tbauth/ui-service-administration",
     public_capabilities=(
         "introspection",
         "openid-configuration",

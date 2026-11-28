@@ -1,4 +1,4 @@
-import { DataTable, DetailPanel, MetricCard, PageHeader, StatusBadge } from "@tba/ui-primitives";
+import { DataTable, DetailPanel, MetricCard, PageHeader, StatusBadge } from "@tbauth/ui-primitives";
 import type { AdminSession, Identity, Tenant } from "../types";
 
 export function DashboardPage({ identities, session, tenants }: { identities: Identity[]; session: AdminSession | null; tenants: Tenant[] }) {

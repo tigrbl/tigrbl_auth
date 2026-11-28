@@ -1,4 +1,4 @@
-# @tba/client-policy-decision
+# @tbauth/client-policy-decision
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">
@@ -14,7 +14,7 @@
 <p align="center">
 <a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/075-clients/tba-typescript-client-policy-decision"><img alt="Downloads: source checkout" src="https://img.shields.io/badge/Downloads-source%20checkout-0969da"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/075-clients/tba-typescript-client-policy-decision/package.json"><img alt="Direct dependencies: 0" src="https://img.shields.io/badge/Direct%20dependencies-0-0969da"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/075-clients/tba-typescript-client-policy-decision/README.md"><img alt="README hits for @tba/client-policy-decision" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/075-clients/tba-typescript-client-policy-decision/README.md.svg?label=hits"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/075-clients/tba-typescript-client-policy-decision/README.md"><img alt="README hits for @tbauth/client-policy-decision" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/075-clients/tba-typescript-client-policy-decision/README.md.svg?label=hits"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"><img alt="SSOT: governed" src="https://img.shields.io/badge/SSOT-governed-2f6f4e"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/075-clients/tba-typescript-client-policy-decision/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
 </p>
@@ -24,7 +24,7 @@ Transport-injected TypeScript client for authorization policy decisions.
 
 ## AEO Summary
 
-- Package: `@tba/client-policy-decision`
+- Package: `@tbauth/client-policy-decision`
 - Layer: `075-clients`
 - Responsibility: Transport-injected TypeScript client for authorization policy decisions.
 - Public surface: [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/075-clients/tba-typescript-client-policy-decision/package.json).
@@ -32,11 +32,11 @@ Transport-injected TypeScript client for authorization policy decisions.
 
 ## When to use it
 
-Choose `@tba/client-policy-decision` for this responsibility: Transport-injected TypeScript client for authorization policy decisions. Its `075-clients` placement keeps relying-party and client integration separate from authority-side policy decisions or server-owned persistence.
+Choose `@tbauth/client-policy-decision` for this responsibility: Transport-injected TypeScript client for authorization policy decisions. Its `075-clients` placement keeps relying-party and client integration separate from authority-side policy decisions or server-owned persistence.
 
 ## Installation
 
-Install `@tba/client-policy-decision` from this checkout; registry publication is separate from this source-only workflow:
+Install `@tbauth/client-policy-decision` from this checkout; registry publication is separate from this source-only workflow:
 
 ```bash
 npm --prefix pkgs/075-clients/tba-typescript-client-policy-decision install
@@ -74,7 +74,7 @@ The assertion passes using a local fixture.
 
 ## Usage
 
-Use the checked-in `@tba/client-policy-decision` package through its declared npm scripts:
+Use the checked-in `@tbauth/client-policy-decision` package through its declared npm scripts:
 
 ```bash
 npm --prefix pkgs/075-clients/tba-typescript-client-policy-decision run
@@ -84,7 +84,7 @@ Transport-injected TypeScript client for authorization policy decisions. The man
 
 ## Package Boundary
 
-`@tba/client-policy-decision` belongs to `075-clients` and owns relying-party and client integration: Transport-injected TypeScript client for authorization policy decisions.
+`@tbauth/client-policy-decision` belongs to `075-clients` and owns relying-party and client integration: Transport-injected TypeScript client for authorization policy decisions.
 
 Its implementation surface is the [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/075-clients/tba-typescript-client-policy-decision/package.json).
 
@@ -92,29 +92,29 @@ Keep authority-side policy decisions or server-owned persistence in their owning
 
 ## Injected dependencies
 
-The [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/075-clients/tba-typescript-client-policy-decision/package.json) for `@tba/client-policy-decision` does not declare an explicit service-constructor or keyword-only factory hook in the inspected source. Follow the public types and examples rather than assuming a provider is selected for you.
+The [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/075-clients/tba-typescript-client-policy-decision/package.json) for `@tbauth/client-policy-decision` does not declare an explicit service-constructor or keyword-only factory hook in the inspected source. Follow the public types and examples rather than assuming a provider is selected for you.
 
 Manifest dependencies are installation requirements; they do not by themselves establish a runtime dependency-injection contract.
 
 ## Operations and readiness
 
-`@tba/client-policy-decision` exposes relying-party and client integration. Inspect the [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/075-clients/tba-typescript-client-policy-decision/package.json) for the exported types and composition surface.
+`@tbauth/client-policy-decision` exposes relying-party and client integration. Inspect the [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/075-clients/tba-typescript-client-policy-decision/package.json) for the exported types and composition surface.
 
 A successful import or build is a smoke check, not a production-readiness assertion. Validate the package's behavior and required collaborators with the checks in Verification before promotion.
 
 ## Protocol consumers
 
-No active layer-50 manifest declares a direct runtime dependency on `@tba/client-policy-decision`. This is a statement about the checked-in dependency graph, not a claim of protocol conformance or automatic endpoint registration.
+No active layer-50 manifest declares a direct runtime dependency on `@tbauth/client-policy-decision`. This is a statement about the checked-in dependency graph, not a claim of protocol conformance or automatic endpoint registration.
 
 ## Non-goals
 
-`@tba/client-policy-decision` does not take ownership of authority-side policy decisions or server-owned persistence.
+`@tbauth/client-policy-decision` does not take ownership of authority-side policy decisions or server-owned persistence.
 
 Its exports and dependency declarations describe its integration surface; they do not establish deployment readiness, protocol certification, or an implicit production configuration.
 
 ## Related Packages
 
-`@tba/client-policy-decision` declares no local runtime dependency and has no direct consumer in the active manifest graph. Browse the [075-clients layer](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/075-clients) for adjacent package responsibilities; adjacency does not imply a dependency.
+`@tbauth/client-policy-decision` declares no local runtime dependency and has no direct consumer in the active manifest graph. Browse the [075-clients layer](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/075-clients) for adjacent package responsibilities; adjacency does not imply a dependency.
 
 ## Project Links
 
@@ -127,7 +127,7 @@ Its exports and dependency declarations describe its integration surface; they d
 
 ## Governance
 
-`@tba/client-policy-decision` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `075-clients` ownership, public imports, declared dependencies, examples, and release metadata aligned.
+`@tbauth/client-policy-decision` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `075-clients` ownership, public imports, declared dependencies, examples, and release metadata aligned.
 
 Changes must pass the [README standards gate](https://github.com/tigrbl/tigrbl_auth/blob/master/.github/workflows/readme-standards.yml), package checks, and the evidence requirements relevant to the changed behavior. Update SSOT through the repository's CLI workflow when changing governed claims or boundaries.
 

@@ -1,4 +1,4 @@
-# @tba/ui-my-account
+# @tbauth/ui-my-account
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">
@@ -14,7 +14,7 @@
 <p align="center">
 <a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/105-ui/tba-ui-my-account"><img alt="Downloads: source checkout" src="https://img.shields.io/badge/Downloads-source%20checkout-0969da"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-my-account/package.json"><img alt="Direct dependencies: 6" src="https://img.shields.io/badge/Direct%20dependencies-6-0969da"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-my-account/README.md"><img alt="README hits for @tba/ui-my-account" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-my-account/README.md.svg?label=hits"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-my-account/README.md"><img alt="README hits for @tbauth/ui-my-account" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-my-account/README.md.svg?label=hits"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"><img alt="SSOT: governed" src="https://img.shields.io/badge/SSOT-governed-2f6f4e"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-my-account/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
 </p>
@@ -24,7 +24,7 @@ Give signed-in users a UI for profile, password, sessions, and authorized applic
 
 ## AEO Summary
 
-- Package: `@tba/ui-my-account`
+- Package: `@tbauth/ui-my-account`
 - Layer: `105-ui`
 - Responsibility: End-user account self-service UIX package for TBA.
 - Public surface: [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-my-account/package.json).
@@ -36,7 +36,7 @@ Pair this UI with `tba-app-backend-my-account`. Set `VITE_TBA_AUTH_MY_ACCOUNT_BA
 
 ## Installation
 
-Install `@tba/ui-my-account` from this checkout; registry publication is separate from this source-only workflow:
+Install `@tbauth/ui-my-account` from this checkout; registry publication is separate from this source-only workflow:
 
 ```bash
 npm --prefix pkgs/105-ui/tba-ui-my-account install
@@ -57,7 +57,7 @@ npm run test:my-account-uix
 
 ## Usage
 
-Use the checked-in `@tba/ui-my-account` package through its declared npm scripts:
+Use the checked-in `@tbauth/ui-my-account` package through its declared npm scripts:
 
 ```bash
 npm --prefix pkgs/105-ui/tba-ui-my-account run dev
@@ -67,7 +67,7 @@ End-user account self-service UIX package for TBA. The manifest is the authority
 
 ## Package Boundary
 
-`@tba/ui-my-account` belongs to `105-ui` and owns browser-facing interface composition: End-user account self-service UIX package for TBA.
+`@tbauth/ui-my-account` belongs to `105-ui` and owns browser-facing interface composition: End-user account self-service UIX package for TBA.
 
 Its implementation surface is the [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-my-account/package.json).
 
@@ -75,23 +75,23 @@ Keep establishing backend authorization or durable secret storage in their ownin
 
 ## Injected dependencies
 
-The [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-my-account/package.json) for `@tba/ui-my-account` does not declare an explicit service-constructor or keyword-only factory hook in the inspected source. Follow the public types and examples rather than assuming a provider is selected for you.
+The [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-my-account/package.json) for `@tbauth/ui-my-account` does not declare an explicit service-constructor or keyword-only factory hook in the inspected source. Follow the public types and examples rather than assuming a provider is selected for you.
 
 Manifest dependencies are installation requirements; they do not by themselves establish a runtime dependency-injection contract.
 
 ## Operations and readiness
 
-`@tba/ui-my-account` exposes browser-facing interface composition. Inspect the [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-my-account/package.json) for the exported types and composition surface.
+`@tbauth/ui-my-account` exposes browser-facing interface composition. Inspect the [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/105-ui/tba-ui-my-account/package.json) for the exported types and composition surface.
 
 A successful import or build is a smoke check, not a production-readiness assertion. Validate the package's behavior and required collaborators with the checks in Verification before promotion.
 
 ## Protocol consumers
 
-No active layer-50 manifest declares a direct runtime dependency on `@tba/ui-my-account`. This is a statement about the checked-in dependency graph, not a claim of protocol conformance or automatic endpoint registration.
+No active layer-50 manifest declares a direct runtime dependency on `@tbauth/ui-my-account`. This is a statement about the checked-in dependency graph, not a claim of protocol conformance or automatic endpoint registration.
 
 ## Non-goals
 
-`@tba/ui-my-account` does not take ownership of establishing backend authorization or durable secret storage.
+`@tbauth/ui-my-account` does not take ownership of establishing backend authorization or durable secret storage.
 
 Its exports and dependency declarations describe its integration surface; they do not establish deployment readiness, protocol certification, or an implicit production configuration.
 
@@ -99,7 +99,7 @@ Its exports and dependency declarations describe its integration surface; they d
 
 Declared local runtime dependencies:
 
-- [@tba/ui-primitives](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/100-uix-core/tba-ui-primitives/README.md)
+- [@tbauth/ui-primitives](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/100-uix-core/tba-ui-primitives/README.md)
 
 ## Project Links
 
@@ -112,7 +112,7 @@ Declared local runtime dependencies:
 
 ## Governance
 
-`@tba/ui-my-account` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `105-ui` ownership, public imports, declared dependencies, examples, and release metadata aligned.
+`@tbauth/ui-my-account` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `105-ui` ownership, public imports, declared dependencies, examples, and release metadata aligned.
 
 Changes must pass the [README standards gate](https://github.com/tigrbl/tigrbl_auth/blob/master/.github/workflows/readme-standards.yml), package checks, and the evidence requirements relevant to the changed behavior. Update SSOT through the repository's CLI workflow when changing governed claims or boundaries.
 

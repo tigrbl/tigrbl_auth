@@ -292,7 +292,7 @@ This source version of `tba-capability-account-self-service` declares Python `>=
 
 See the [related repository tests](https://github.com/tigrbl/tigrbl_auth/blob/master/tests/unit/test_account_self_service_capability.py) for the implementation scope covered by this example.
 
-[Workspace and package catalog](https://github.com/tigrbl/tigrbl_auth#package-catalog) · [@tba/ui-my-account](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/105-ui/tba-ui-my-account#readme) · [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues) · [Repository license](https://github.com/tigrbl/tigrbl_auth/blob/master/LICENSE)
+[Workspace and package catalog](https://github.com/tigrbl/tigrbl_auth#package-catalog) · [@tbauth/ui-my-account](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/105-ui/tba-ui-my-account#readme) · [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues) · [Repository license](https://github.com/tigrbl/tigrbl_auth/blob/master/LICENSE)
 
 ### Certification Status
 

@@ -1,6 +1,6 @@
 # Trust Registry API + Trust Registry UIX Requirements Brief
 
-**Pairing:** `tba-router-trust-registry` + `@tba/trust-registry-uix`<br>
+**Pairing:** `tba-router-trust-registry` + `@tbauth/trust-registry-uix`<br>
 **Opportunity-map item:** 17<br>
 **Primary buyers:** ecosystem operators, governments, healthcare exchanges, education consortia, supply-chain networks, and open-finance programs<br>
 **Status:** proposed shared governance surface; federation, credential, certificate, attestation, policy, and residency foundations exist

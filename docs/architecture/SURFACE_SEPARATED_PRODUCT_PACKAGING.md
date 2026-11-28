@@ -17,12 +17,12 @@ This slice packages TBA as separate API front doors and separate UIX apps while 
 
 | UIX app | NPM package | API package | Required base URL variable | Role |
 | --- | --- | --- | --- | --- |
-| `pkgs/105-ui/tba-ui-public` | `@tba/ui-public` | `tba-app-backend-public` | `VITE_TBA_AUTH_PUBLIC_BASE_URL` | Public login, registration, logout, recovery, consent |
-| `pkgs/105-ui/tba-ui-platform-administration` | `@tba/ui-platform-administration` | `tba-app-backend-platform-administration` | `VITE_TBA_AUTH_PLATFORM_ADMIN_BACKEND_APP_BASE_URL` | Platform tenant lifecycle and authority assignment |
-| `pkgs/105-ui/tba-ui-tenant-administration` | `@tba/ui-tenant-administration` | `tba-app-backend-tenant-administration` | `VITE_TBA_AUTH_TENANT_ADMIN_BACKEND_APP_BASE_URL` | Tenant identity, admin, JWKS, and local policy operations |
-| `pkgs/105-ui/tba-ui-developer` | `@tba/ui-developer` | `tba-app-backend-developer` | `VITE_TBA_AUTH_DEVELOPER_BACKEND_APP_BASE_URL` | OIDC/OAuth app registration and client metadata |
-| `pkgs/105-ui/tba-ui-service-administration` | `@tba/ui-service-administration` | `tba-app-backend-service-administration` | `VITE_TBA_AUTH_SERVICE_ADMIN_BACKEND_APP_BASE_URL` | Machine identity, service keys, API keys, workload credentials |
-| `pkgs/105-ui/tba-ui-administration` | `@tba/ui-administration` | Legacy mixed admin surface | Existing admin UIX config | Temporary extraction source until parity is proven |
+| `pkgs/105-ui/tba-ui-public` | `@tbauth/ui-public` | `tba-app-backend-public` | `VITE_TBA_AUTH_PUBLIC_BASE_URL` | Public login, registration, logout, recovery, consent |
+| `pkgs/105-ui/tba-ui-platform-administration` | `@tbauth/ui-platform-administration` | `tba-app-backend-platform-administration` | `VITE_TBA_AUTH_PLATFORM_ADMIN_BACKEND_APP_BASE_URL` | Platform tenant lifecycle and authority assignment |
+| `pkgs/105-ui/tba-ui-tenant-administration` | `@tbauth/ui-tenant-administration` | `tba-app-backend-tenant-administration` | `VITE_TBA_AUTH_TENANT_ADMIN_BACKEND_APP_BASE_URL` | Tenant identity, admin, JWKS, and local policy operations |
+| `pkgs/105-ui/tba-ui-developer` | `@tbauth/ui-developer` | `tba-app-backend-developer` | `VITE_TBA_AUTH_DEVELOPER_BACKEND_APP_BASE_URL` | OIDC/OAuth app registration and client metadata |
+| `pkgs/105-ui/tba-ui-service-administration` | `@tbauth/ui-service-administration` | `tba-app-backend-service-administration` | `VITE_TBA_AUTH_SERVICE_ADMIN_BACKEND_APP_BASE_URL` | Machine identity, service keys, API keys, workload credentials |
+| `pkgs/105-ui/tba-ui-administration` | `@tbauth/ui-administration` | Legacy mixed admin surface | Existing admin UIX config | Temporary extraction source until parity is proven |
 
 ## Runtime Enforcement
 

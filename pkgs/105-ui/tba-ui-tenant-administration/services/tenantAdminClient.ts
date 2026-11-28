@@ -1,5 +1,5 @@
 import { BACKEND_APP_BASE_URL, backendAppUrl } from "./backendSurface";
-import { TenantAdminClient as TenantIamClient } from "@tba/client-tenant-administration";
+import { TenantAdminClient as TenantIamClient } from "@tbauth/client-tenant-administration";
 import type {
   CreateTenantClientInput,
   CreateTenantIdentityInput,

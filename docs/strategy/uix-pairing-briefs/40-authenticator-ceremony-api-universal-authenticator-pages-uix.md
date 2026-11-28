@@ -53,7 +53,7 @@ Relevant foundations already exist:
 - My Account security and session pages;
 - Developer client-credential pages;
 - Service Admin API-key and service-key pages;
-- shared `@tba/ui-primitives` components and tokens.
+- shared `@tbauth/ui-primitives` components and tokens.
 
 The shipped UI is incomplete and inconsistent:
 
@@ -309,7 +309,7 @@ On refresh or browser restoration, fetch the ceremony by ID and render the serve
 
 ## 7. Shared component requirements
 
-Build these in `@tba/ui-primitives`, with typed props and no provider business logic.
+Build these in `@tbauth/ui-primitives`, with typed props and no provider business logic.
 
 ### Catalog and inventory
 
@@ -683,7 +683,7 @@ Require:
 
 ## 12. Canonical design system
 
-Use `@tba/ui-primitives` as the canonical system.
+Use `@tbauth/ui-primitives` as the canonical system.
 
 ### Token direction
 

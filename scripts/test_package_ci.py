@@ -56,10 +56,10 @@ class PackageMatrixSelectionTest(unittest.TestCase):
             "package-lock.json": lock,
             f"{ui}/package.json": {"name": "@tbauth/ui-app-connections"},
             f"{consumer}/package.json": {
-                "name": "@tba/ui-test-consumer",
+                "name": "@tbauth/ui-test-consumer",
                 "devDependencies": {"@tbauth/ui-app-connections": "file:../tba-ui-app-connections"},
             },
-            f"{unrelated}/package.json": {"name": "@tba/test-client"},
+            f"{unrelated}/package.json": {"name": "@tbauth/test-client"},
         }.items():
             self.write(path, json.dumps(content))
 
@@ -70,7 +70,7 @@ class PackageMatrixSelectionTest(unittest.TestCase):
         paths = {"package.json", "package-lock.json", f"{ui}/package.json"}
         with patch.object(package_ci, "git", side_effect=lambda _, ref: base_files[ref]):
             selected = package_ci.node_selection("base", paths)
-            self.assertEqual({package["name"] for package in selected}, {"@tbauth/ui-app-connections", "@tba/ui-test-consumer"})
+            self.assertEqual({package["name"] for package in selected}, {"@tbauth/ui-app-connections", "@tbauth/ui-test-consumer"})
             lock["packages"]["node_modules/react"] = {"version": "19.2.0"}
             self.write("package-lock.json", json.dumps(lock))
             self.assertEqual(len(package_ci.node_selection("base", paths)), 3)

@@ -78,10 +78,13 @@ class _SyntheticProvider:
     restart = "https://relying.test/fresh-sign-in"
     browser = "secret-browser-transaction"
 
-    def __init__(self, tmp_path):
+    def __init__(self, tmp_path, *, tenant_id=None, recovery_window=timedelta()):
         self.clock = _Clock()
+        self.tenant_id = tenant_id
         self.store = _SqliteContinuations(tmp_path / "continuation.db")
-        self.runtime = HostedAuthorizationContinuation(self.store, clock=self.clock)
+        self.runtime = HostedAuthorizationContinuation(
+            self.store, clock=self.clock, recovery_window=recovery_window
+        )
         self.parameters = {
             "client_id": self.client,
             "redirect_uri": self.callback,
@@ -93,7 +96,7 @@ class _SyntheticProvider:
             "code_challenge": "original-pkce",
         }
         self.request = ValidatedAuthorizationRequest.from_parameters(
-            self.issuer, self.parameters
+            self.issuer, self.parameters, tenant_id=self.tenant_id
         )
         self.active_registration = self.callback
 
@@ -113,6 +116,7 @@ class _SyntheticProvider:
         arguments = {
             "issuer": self.issuer,
             "client_id": self.client,
+            "tenant_id": self.tenant_id,
             "browser_transaction_id": self.browser,
             "registration_is_current": (
                 lambda request: request.redirect_uri == self.active_registration
@@ -188,6 +192,43 @@ def test_expired_or_changed_registration_restarts_at_host_owned_destination(tmp_
     assert provider.resume(changed.flow_id, evidence=proof).reason is (
         ContinuationReason.REGISTRATION_CHANGED
     )
+
+
+def test_same_issuer_and_client_cannot_resume_another_tenant(tmp_path):
+    provider = _SyntheticProvider(tmp_path, tenant_id="tenant-a")
+    record = provider.start()
+    proof = provider.evidence("email_verified", "otp")
+
+    for tenant_id in (None, "tenant-b"):
+        result = provider.resume(record.flow_id, evidence=proof, tenant_id=tenant_id)
+        assert result.status is ContinuationStatus.RESTART_REQUIRED
+        assert result.request is None
+        assert result.restart_client_id is None
+
+    assert provider.resume(record.flow_id, evidence=proof).status is (
+        ContinuationStatus.RESUME
+    )
+
+
+def test_expired_recovery_returns_only_current_client_for_bounded_window(tmp_path):
+    window = timedelta(minutes=2)
+    provider = _SyntheticProvider(tmp_path, tenant_id="tenant-a", recovery_window=window)
+    record = provider.start()
+    provider.clock.now = record.expires_at
+
+    result = provider.resume(record.flow_id)
+    assert result.status is ContinuationStatus.RESTART_REQUIRED
+    assert result.request is None
+    assert result.restart_client_id == provider.client
+    assert provider.store.get(record.flow_id) is not None
+    for scope in ({"tenant_id": "tenant-b"}, {"browser_transaction_id": "different"}):
+        assert provider.resume(record.flow_id, **scope).restart_client_id is None
+
+    provider.active_registration = None
+    assert provider.resume(record.flow_id).restart_client_id is None
+    provider.active_registration = provider.callback
+    provider.clock.now = record.expires_at + window
+    assert provider.resume(record.flow_id).restart_client_id is None
 
 
 def test_storage_unavailability_does_not_emit_or_consume_request(tmp_path, monkeypatch):

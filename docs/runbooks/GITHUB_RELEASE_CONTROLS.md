@@ -62,7 +62,6 @@ Enable these repository features in GitHub:
 
 ## Repository-owned governance files
 
-- `/.github/CODEOWNERS`
 - `/.github/dependabot.yml`
 - `/.github/codeql/codeql-config.yml`
 - `/.github/workflows/*.yml`

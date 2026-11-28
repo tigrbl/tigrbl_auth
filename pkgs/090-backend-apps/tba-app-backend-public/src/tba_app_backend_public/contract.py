@@ -22,7 +22,7 @@ class PublicBackendAppContract:
 
 PUBLIC_BACKEND_APP_CONTRACT = PublicBackendAppContract(
     product_surface="public-app",
-    intended_uix="@tba/ui-public",
+    intended_uix="@tbauth/ui-public",
     baseline_capabilities=(
         "login",
         "authorize",

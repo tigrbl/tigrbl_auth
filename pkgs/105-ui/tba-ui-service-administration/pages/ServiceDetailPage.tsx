@@ -1,4 +1,4 @@
-import { DataTable, DetailPanel, EmptyState, JsonViewer, PageHeader, StatusBadge } from "@tba/ui-primitives";
+import { DataTable, DetailPanel, EmptyState, JsonViewer, PageHeader, StatusBadge } from "@tbauth/ui-primitives";
 import type { ApiKeyRecord, ServiceIdentity, ServiceKey } from "../types";
 
 export function ServiceDetailPage({ apiKeys, service, serviceKeys }: { apiKeys: ApiKeyRecord[]; service: ServiceIdentity | null; serviceKeys: ServiceKey[] }) {

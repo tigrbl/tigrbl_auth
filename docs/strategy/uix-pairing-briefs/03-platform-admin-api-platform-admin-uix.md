@@ -1,6 +1,6 @@
 # Platform Admin API + UIX Requirements Brief
 
-**Pairing:** `tba-app-backend-platform-administration` + `@tba/ui-platform-administration`<br>
+**Pairing:** `tba-app-backend-platform-administration` + `@tbauth/ui-platform-administration`<br>
 **Status:** Delivery brief<br>
 **Prepared:** July 11, 2026<br>
 **Backend app owner:** `pkgs/090-backend-apps/tba-app-backend-platform-administration`<br>
