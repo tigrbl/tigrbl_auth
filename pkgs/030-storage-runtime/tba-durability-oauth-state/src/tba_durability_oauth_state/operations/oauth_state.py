@@ -7,6 +7,7 @@ import inspect
 from collections.abc import Mapping
 from datetime import timezone
 from typing import Any
+from uuid import UUID
 
 from tigrbl import (
     create_table_record,
@@ -18,9 +19,10 @@ from tigrbl import (
 )
 
 
-async def _registration_aggregate(db: Any, client_id: Any) -> dict[str, Any] | None:
+async def _registration_aggregate(db: Any, client_id: UUID | str) -> dict[str, Any] | None:
     from tba_storage_oauth.tables import Client, ClientRegistration
 
+    client_id = UUID(str(client_id))
     client = await first_table_record(Client, db, {"id": client_id})
     registration = await first_table_record(
         ClientRegistration,
@@ -39,7 +41,8 @@ async def create_client_registration(ctx: Mapping[str, Any]) -> dict[str, Any]:
 
     db = database_from_context(ctx)
     payload = dict(payload_from_context(ctx))
-    client_id = payload["client_id"]
+    client_id = UUID(str(payload["client_id"]))
+    tenant_id = UUID(str(payload["tenant_id"]))
     if await _registration_aggregate(db, client_id) is not None:
         raise ValueError("client registration already exists")
     client = await create_table_record(
@@ -47,7 +50,7 @@ async def create_client_registration(ctx: Mapping[str, Any]) -> dict[str, Any]:
         db,
         {
             "id": client_id,
-            "tenant_id": payload["tenant_id"],
+            "tenant_id": tenant_id,
             "client_secret_hash": payload["client_secret_hash"],
             "redirect_uris": " ".join(payload["redirect_uris"]),
             "grant_types": " ".join(
@@ -60,8 +63,8 @@ async def create_client_registration(ctx: Mapping[str, Any]) -> dict[str, Any]:
         ClientRegistration,
         db,
         {
-            "client_id": field_value(client, "id"),
-            "tenant_id": payload["tenant_id"],
+            "client_id": client_id,
+            "tenant_id": tenant_id,
             "registration_metadata": dict(payload.get("metadata") or {}),
             "contacts": list(payload.get("contacts") or ()),
             "software_id": payload.get("software_id"),

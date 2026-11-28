@@ -281,7 +281,7 @@ async def update_registered_client(
 ) -> dict[str, object]:
     record, bearer = await _require_registration_access(request, db, client_id)
     current = dict(record.metadata)
-    tenant = await read_record(Tenant, db, record.tenant_id)
+    tenant = await read_record(Tenant, db, UUID(str(record.tenant_id)))
     current.setdefault("tenant_slug", tenant.slug if tenant is not None else "public")
     current.setdefault("redirect_uris", list(record.redirect_uris))
     current.setdefault("grant_types", list(record.grant_types))
