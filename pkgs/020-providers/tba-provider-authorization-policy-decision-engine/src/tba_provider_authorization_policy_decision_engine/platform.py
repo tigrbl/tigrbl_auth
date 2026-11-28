@@ -15,7 +15,7 @@ from tba_contracts_authorization import (
 class PlatformPolicyDecisionEngine:
     def __init__(self, *, actions: Iterable[ActionDefinition], roles: Iterable[RoleDefinition] = (), grants: Iterable[RoleGrant] = (), policy_version: str = "unpublished", clock: Callable[[], datetime] | None = None) -> None:
         self._actions = {item.key: item for item in actions}
-        self._roles = {item.role_id: item for item in roles}
+        self._roles = {(item.tenant_id, item.role_id): item for item in roles}
         self._grants = tuple(grants)
         self._policy_version = policy_version
         self._clock = clock or (lambda: datetime.now(timezone.utc))
@@ -45,13 +45,21 @@ class PlatformPolicyDecisionEngine:
         if request.principal.attributes.get("status") == "suspended":
             return self._deny("principal_suspended")
         now = self._clock()
-        applicable = [g for g in self._grants if g.principal.principal_id == request.principal.principal_id and g.tenant_id == request.resource.tenant_id and g.resource.resource_type == request.resource.resource_type and g.resource.resource_id in (request.resource.resource_id, "*")]
+        applicable = [
+            grant for grant in self._grants
+            if grant.principal.principal_id == request.principal.principal_id
+            and grant.principal.principal_type == request.principal.principal_type
+            and grant.principal.tenant_id == request.principal.tenant_id
+            and grant.tenant_id == grant.resource.tenant_id == request.resource.tenant_id
+            and grant.resource.resource_type == request.resource.resource_type
+            and grant.resource.resource_id in (request.resource.resource_id, "*")
+        ]
         expired = [g for g in applicable if g.expires_at and g.expires_at <= now]
         revoked = [g for g in applicable if g.revoked_at is not None]
         active = [g for g in applicable if g.revoked_at is None and (not g.valid_from or g.valid_from <= now) and (not g.expires_at or g.expires_at > now)]
         matches: list[tuple[RoleGrant, RoleDefinition]] = []
         for grant in active:
-            role = self._roles.get(grant.role_id)
+            role = self._roles.get((grant.tenant_id, grant.role_id))
             if not role or request.action not in role.actions:
                 continue
             facts = {**request.principal.attributes, **request.resource.attributes, **request.environment}

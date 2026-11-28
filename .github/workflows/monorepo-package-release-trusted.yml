@@ -20,6 +20,11 @@ on:
         description: Optional exact version to set before release. Overrides bump_type.
         required: false
         default: ""
+      project_scoped:
+        description: Use the pypi-<package> Trusted Publisher environment for one package.
+        required: false
+        default: false
+        type: boolean
       force:
         description: Replace existing package tags.
         required: false
@@ -46,6 +51,16 @@ jobs:
       count: ${{ steps.matrix.outputs.count }}
       sha: ${{ steps.revision.outputs.sha }}
     steps:
+      - name: Validate project-scoped release selection
+        if: ${{ inputs.project_scoped }}
+        shell: bash
+        env:
+          RELEASE_PACKAGE: ${{ inputs.package }}
+        run: |
+          if [[ "$RELEASE_PACKAGE" == "all" || ! "$RELEASE_PACKAGE" =~ ^[a-z0-9][a-z0-9-]*$ ]]; then
+            echo "::error::Project-scoped publishing requires one named Python package."
+            exit 1
+          fi
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
@@ -181,7 +196,8 @@ jobs:
       - resolve-dispatch-matrix
       - build-dispatch-package
     runs-on: ubuntu-latest
-    environment: pypi
+    environment:
+      name: ${{ inputs.project_scoped && format('pypi-{0}', inputs.package) || 'pypi' }}
     permissions:
       contents: read
       id-token: write
