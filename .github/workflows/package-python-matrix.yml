@@ -32,43 +32,67 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  workload-suites:
+  workspace-tests:
     runs-on: ${{ (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/docs/readme-standards-20261119' || (github.event_name == 'pull_request' && github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository)) && fromJSON('["sad-lewin","shortlived","testing","trusted-public-ci","Linux","X64"]') || 'ubuntu-24.04' }}
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/setup-python@v6
+      - name: Read WIMSE test fixture revision
+        id: wimse-fixture
+        shell: bash
+        run: |
+          set -euo pipefail
+          ref="$(cat pkgs/120-tests/tba-tests-interop-wimse-matrix/interop-revision.txt)"
+          [[ "$ref" =~ ^[0-9a-f]{40}$ ]]
+          printf 'ref=%s\n' "$ref" >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@v7
         with:
-          python-version: '3.12'
-      - name: Install uv
-        run: python -m pip install uv
-      - name: Run Layer 120 workload suites
-        run: >-
-          uv run --locked --extra test pytest
-          pkgs/120-tests/tba-tests-wimse/tests
-          pkgs/120-tests/tba-tests-spiffe/tests
-          pkgs/120-tests/tba-tests-workload-composition/tests
-          pkgs/120-tests/tba-tests-storage/tests
-          pkgs/120-tests/tba-tests-authorization/tests
-          pkgs/120-tests/tba-tests-workload-credential-conformance/tests
-
-  jose-interop:
-    runs-on: ${{ (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/docs/readme-standards-20261119' || (github.event_name == 'pull_request' && github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository)) && fromJSON('["sad-lewin","shortlived","testing","trusted-public-ci","Linux","X64"]') || 'ubuntu-24.04' }}
-    steps:
-      - uses: actions/checkout@v7
+          repository: tigrbl/tba-tests-interop-wimse
+          ref: ${{ steps.wimse-fixture.outputs.ref }}
+          path: .tmp/wimse-interop
+          persist-credentials: false
       - uses: actions/checkout@v7
         with:
           repository: swarmauri/swarmauri-sdk
           ref: e44091135947f859dd60d249cf20fbffc104effc
-          path: .interop/swarmauri-sdk
+          path: .tmp/swarmauri-sdk
+          persist-credentials: false
       - uses: astral-sh/setup-uv@v6
         with:
           python-version: '3.12'
-      - name: Run bidirectional compact JWE interoperability
+      - name: Build the pinned WIMSE test fixture
+        shell: bash
+        run: |
+          set -euo pipefail
+          package="$GITHUB_WORKSPACE/.tmp/wimse-interop/pkgs/tba-tests-interop-wimse"
+          uv build --project "$package" --wheel --out-dir "$RUNNER_TEMP/wimse-wheel"
+          wheels=("$RUNNER_TEMP/wimse-wheel/"*.whl)
+          if [[ "${#wheels[@]}" != 1 || ! -f "${wheels[0]}" ]]; then
+            echo "Expected exactly one WIMSE fixture wheel" >&2
+            exit 1
+          fi
+          {
+            printf 'TBA_WIMSE_INTEROP_PACKAGE=%s\n' "$package"
+            printf 'TBA_WIMSE_INTEROP_WHEEL=%s\n' "${wheels[0]}"
+          } >> "$GITHUB_ENV"
+      - name: Run workspace pytest suites
+        shell: bash
         env:
-          SWARMAURI_SDK_ROOT: ${{ github.workspace }}/.interop/swarmauri-sdk
-        run: >-
-          uv run --locked --extra test pytest
-          --tba-suite tba-tests-interop-jose --jose-interop-mode source
+          SWARMAURI_SDK_ROOT: ${{ github.workspace }}/.tmp/swarmauri-sdk
+        run: |
+          set -euo pipefail
+          # The pinned WIMSE fixture imports this legacy testkit.
+          export PYTHONPATH="$GITHUB_WORKSPACE/pkgs/deprecated/tba-testkit-workload-credential-conformance/src${PYTHONPATH:+:$PYTHONPATH}"
+          uv run --locked --extra test --with grpcio --with protobuf pytest \
+            --jose-interop-mode source \
+            pkgs/120-tests/tba-tests-wimse/tests \
+            pkgs/120-tests/tba-tests-spiffe/tests \
+            pkgs/120-tests/tba-tests-workload-composition/tests \
+            pkgs/120-tests/tba-tests-storage/tests \
+            pkgs/120-tests/tba-tests-authorization/tests \
+            pkgs/120-tests/tba-tests-workload-credential-conformance/tests \
+            pkgs/120-tests/tba-tests-interop-wimse-matrix/tests \
+            pkgs/120-tests/tba-tests-interop-jose/src/tba_tests_interop_jose/tests \
+            pkgs/120-tests/tba-tests-release/tests/unit/test_oauth_gnap_distribution_boundary.py
 
   discover-package-matrix:
     runs-on: ${{ (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/docs/readme-standards-20261119' || (github.event_name == 'pull_request' && github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository)) && fromJSON('["sad-lewin","shortlived","testing","trusted-public-ci","Linux","X64"]') || 'ubuntu-24.04' }}
