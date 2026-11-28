@@ -1,0 +1,80 @@
+name: reusable contracts
+
+on:
+  workflow_call:
+    inputs:
+      python-version:
+        required: false
+        type: string
+        default: '3.11'
+      artifact-name:
+        required: false
+        type: string
+        default: generated-contracts
+      attest:
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  build-contracts:
+    uses: ./.github/workflows/_contract-build.yml
+    permissions:
+      contents: read
+    with:
+      python-version: ${{ inputs.python-version }}
+      artifact-name: ${{ inputs.artifact-name }}
+
+  attest-contracts:
+    if: ${{ inputs.attest }}
+    needs: build-contracts
+    runs-on: ubuntu-latest
+    permissions:
+      attestations: write
+      artifact-metadata: write
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: ${{ inputs.artifact-name }}
+          path: contracts
+      - name: Attest generated contracts and manifests
+        uses: actions/attest-build-provenance@v4
+        with:
+          subject-name: ${{ github.event.repository.name }}-contracts
+          subject-path: |
+            contracts/specs/openapi/**/*.json
+            contracts/specs/openrpc/**/*.json
+            contracts/specs/discovery/**/*.json
+            contracts/compliance/claims/*.yaml
+            contracts/compliance/evidence/*.yaml
+
+  verify-contract-attestations:
+    if: ${{ inputs.attest }}
+    needs: attest-contracts
+    runs-on: ubuntu-latest
+    permissions:
+      attestations: read
+      artifact-metadata: read
+      contents: read
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: ${{ inputs.artifact-name }}
+          path: contracts
+      - name: Verify contract attestations
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          {
+            find contracts/specs/openapi contracts/specs/openrpc contracts/specs/discovery -type f -name '*.json'
+            find contracts/compliance/claims contracts/compliance/evidence -type f -name '*.yaml'
+          } | sort | while IFS= read -r subject; do
+            gh attestation verify "$subject" --repo "$GITHUB_REPOSITORY"
+          done

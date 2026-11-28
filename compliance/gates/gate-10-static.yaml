@@ -5,7 +5,7 @@ checks:
 - no_direct_fastapi_starlette_scripts
 - pyproject_no_fastapi_starlette_dependency
 - no_release_path_framework_fallbacks
-- no_non_public_tigrbl_runtime_imports
+- no_non_public_tba_runtime_imports
 - claims_lint_clean
 - legacy_label_corrections_present
 - feature_surface_modularity_verifier_clean

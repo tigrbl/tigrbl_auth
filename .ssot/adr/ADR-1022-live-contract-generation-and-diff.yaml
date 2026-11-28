@@ -1,0 +1,36 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1022"
+number: 1022
+slug: "live-contract-generation-and-diff"
+title: "Live contract generation and diff"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Authoritative machine-readable contracts MUST be generated from live runtime"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+  
+  Authoritative machine-readable contracts MUST be generated from live runtime
+  resolution and validated against the same resolved deployment semantics.
+  
+  This decision applies not only to OpenAPI and OpenRPC, but also to discovery
+  metadata, JWKS-facing publication semantics, and protected-resource metadata
+  when those artifacts are presented as authoritative.
+  
+  Preserved snapshots, fixtures, or profile examples MAY exist for testing and
+  documentation, but they MUST be labeled as non-authoritative unless they are
+  regenerated from the same runtime-resolution path.
+  
+  ## Consequences
+  
+  Runtime-derived artifact parity becomes a governed requirement:
+  
+  - live metadata and preserved authoritative artifacts must agree;
+  - stale preserved projections fail truthfulness posture; and
+  - fixture-only artifacts must not be confused with current runtime truth.

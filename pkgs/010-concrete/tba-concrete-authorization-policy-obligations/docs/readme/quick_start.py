@@ -1,0 +1,3 @@
+from tba_concrete_authorization_policy_obligations import NoopObligationHandler
+
+assert callable(NoopObligationHandler)

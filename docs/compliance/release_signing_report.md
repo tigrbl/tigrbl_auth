@@ -4,12 +4,13 @@
 
 ## Summary
 
-- profile_count: `4`
-- signed_bundle_count: `4`
+- profile_count: `5`
+- signed_bundle_count: `5`
 
 ## Details
 
-- {'profile': 'baseline', 'bundle_dir': 'dist/release-bundles/0.3.0.dev1/baseline', 'signed': 'signed-ed25519-attested', 'verified': True, 'signing_key_id': 'ed25519:3075886a4b2cb8ab583c45e4'}
-- {'profile': 'production', 'bundle_dir': 'dist/release-bundles/0.3.0.dev1/production', 'signed': 'signed-ed25519-attested', 'verified': True, 'signing_key_id': 'ed25519:3075886a4b2cb8ab583c45e4'}
-- {'profile': 'hardening', 'bundle_dir': 'dist/release-bundles/0.3.0.dev1/hardening', 'signed': 'signed-ed25519-attested', 'verified': True, 'signing_key_id': 'ed25519:3075886a4b2cb8ab583c45e4'}
-- {'profile': 'peer-claim', 'bundle_dir': 'dist/release-bundles/0.3.0.dev1/peer-claim', 'signed': 'signed-ed25519-attested', 'verified': True, 'signing_key_id': 'ed25519:3075886a4b2cb8ab583c45e4'}
+- {'profile': 'baseline', 'bundle_dir': 'dist/release-bundles/0.4.0.dev2/baseline', 'signed': 'signed-ed25519-attested', 'verified': True, 'signing_key_id': 'ed25519:95c00f72646c7c2da15747a2'}
+- {'profile': 'production', 'bundle_dir': 'dist/release-bundles/0.4.0.dev2/production', 'signed': 'signed-ed25519-attested', 'verified': True, 'signing_key_id': 'ed25519:95c00f72646c7c2da15747a2'}
+- {'profile': 'hardening', 'bundle_dir': 'dist/release-bundles/0.4.0.dev2/hardening', 'signed': 'signed-ed25519-attested', 'verified': True, 'signing_key_id': 'ed25519:95c00f72646c7c2da15747a2'}
+- {'profile': 'fapi2-security', 'bundle_dir': 'dist/release-bundles/0.4.0.dev2/fapi2-security', 'signed': 'signed-ed25519-attested', 'verified': True, 'signing_key_id': 'ed25519:95c00f72646c7c2da15747a2'}
+- {'profile': 'peer-claim', 'bundle_dir': 'dist/release-bundles/0.4.0.dev2/peer-claim', 'signed': 'signed-ed25519-attested', 'verified': True, 'signing_key_id': 'ed25519:95c00f72646c7c2da15747a2'}

@@ -260,7 +260,7 @@ def stage(output_root: Path) -> dict[str, Any]:
         out_dir.mkdir(parents=True, exist_ok=True)
         scenario_ids = [str(item) for item in profile.get('scenario_ids', []) or []]
         peer_name = counterpart.get('title', counterpart.get('id'))
-        image_ref = f"ghcr.io/tigrbl-auth/peer-fixtures/{counterpart['id']}:2026-03-25"
+        image_ref = f"ghcr.io/tba-auth/peer-fixtures/{counterpart['id']}:2026-03-25"
         image_digest = digest_for(counterpart['id'], version, 'peer-fixture')
         manifest = {
             'schema_version': 1,
@@ -278,7 +278,7 @@ def stage(output_root: Path) -> dict[str, Any]:
             },
             'independence_attestation': {
                 'attestation_class': 'repository-fixture-nonindependent',
-                'attesting_organization': 'tigrbl_auth checkpoint fixture generator',
+                'attesting_organization': 'tba_auth checkpoint fixture generator',
                 'attesting_contact': 'repository-local-fixture@invalid.example',
                 'attestation_timestamp': now(),
                 'counterpart_identified': True,

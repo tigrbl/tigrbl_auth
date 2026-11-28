@@ -1,3 +1,5 @@
 # Tier 4 Preserved Bundles
 
-This directory is reserved for **preserved independent external Tier 4 bundles** that qualify for current release truth. Repository-local fixtures and staged examples are archived under `compliance/evidence/tier4/fixtures/`.
+This directory stores the normalized **preserved external Tier 4 bundles** for the declared peer-profile set.
+
+Only bundles that pass the independent-external validation rules qualify for current release truth and Tier 4 promotion. Bundles normalized from repository-staged fixtures, self-attested roots, or incomplete external submissions remain preserved here for fail-closed accounting and audit review, but they do not count toward strict independent claims.

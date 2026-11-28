@@ -3,7 +3,7 @@
   "summary": {
     "profile_count": 16,
     "candidate_profile_count": 16,
-    "external_bundle_count": 0,
+    "external_bundle_count": 16,
     "promoted_target_count": 0,
     "retained_target_count": 48,
     "tier4_claims_present": false,
@@ -11,9 +11,10 @@
     "supported_peer_profile_count": 16,
     "required_external_bundle_count": 16,
     "valid_external_bundle_count": 0,
-    "invalid_external_bundle_count": 0,
-    "missing_external_bundle_count": 16,
-    "profiles_missing_external_bundles": [
+    "invalid_external_bundle_count": 16,
+    "missing_external_bundle_count": 0,
+    "profiles_missing_external_bundles": [],
+    "profiles_with_invalid_external_bundles": [
       "assertion-client",
       "browser",
       "client-mgmt",
@@ -31,7 +32,6 @@
       "runner-uvicorn",
       "spa"
     ],
-    "profiles_with_invalid_external_bundles": [],
     "strict_independent_claims_ready": false
   },
   "details": [
@@ -49,9 +49,15 @@
         "RFC 7009"
       ],
       "candidate_dir": "compliance/evidence/tier4/candidates/assertion-client",
-      "external_bundle_dir": null,
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/assertion-client--assertion-client-harness",
       "promotable_targets": [],
-      "validation_failures": []
+      "validation_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "browser",
@@ -69,9 +75,15 @@
         "OIDC UserInfo"
       ],
       "candidate_dir": "compliance/evidence/tier4/candidates/browser",
-      "external_bundle_dir": null,
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/browser--browser-rp",
       "promotable_targets": [],
-      "validation_failures": []
+      "validation_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "client-mgmt",
@@ -82,9 +94,15 @@
         "RFC 7592"
       ],
       "candidate_dir": "compliance/evidence/tier4/candidates/client-mgmt",
-      "external_bundle_dir": null,
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/client-mgmt--client-mgmt-harness",
       "promotable_targets": [],
-      "validation_failures": []
+      "validation_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "device",
@@ -94,9 +112,15 @@
         "RFC 8628"
       ],
       "candidate_dir": "compliance/evidence/tier4/candidates/device",
-      "external_bundle_dir": null,
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/device--device-client",
       "promotable_targets": [],
-      "validation_failures": []
+      "validation_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "dpop",
@@ -107,9 +131,15 @@
         "RFC 9700"
       ],
       "candidate_dir": "compliance/evidence/tier4/candidates/dpop",
-      "external_bundle_dir": null,
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/dpop--dpop-client",
       "promotable_targets": [],
-      "validation_failures": []
+      "validation_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "gateway",
@@ -125,9 +155,15 @@
         "OIDC Discovery 1.0"
       ],
       "candidate_dir": "compliance/evidence/tier4/candidates/gateway",
-      "external_bundle_dir": null,
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/gateway--gateway-peer",
       "promotable_targets": [],
-      "validation_failures": []
+      "validation_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "mtls",
@@ -138,9 +174,15 @@
         "RFC 9700"
       ],
       "candidate_dir": "compliance/evidence/tier4/candidates/mtls",
-      "external_bundle_dir": null,
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/mtls--mtls-peer",
       "promotable_targets": [],
-      "validation_failures": []
+      "validation_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "native",
@@ -153,9 +195,15 @@
         "RFC 9207"
       ],
       "candidate_dir": "compliance/evidence/tier4/candidates/native",
-      "external_bundle_dir": null,
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/native--native-client",
       "promotable_targets": [],
-      "validation_failures": []
+      "validation_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "ops-cli",
@@ -171,9 +219,15 @@
         "Release bundle and signature verification"
       ],
       "candidate_dir": "compliance/evidence/tier4/candidates/ops-cli",
-      "external_bundle_dir": null,
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/ops-cli--ops-cli-harness",
       "promotable_targets": [],
-      "validation_failures": []
+      "validation_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "par-jar-rar",
@@ -186,9 +240,15 @@
         "RFC 8707"
       ],
       "candidate_dir": "compliance/evidence/tier4/candidates/par-jar-rar",
-      "external_bundle_dir": null,
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/par-jar-rar--par-jar-rar-client",
       "promotable_targets": [],
-      "validation_failures": []
+      "validation_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "resource-server",
@@ -204,9 +264,15 @@
         "RFC 9700"
       ],
       "candidate_dir": "compliance/evidence/tier4/candidates/resource-server",
-      "external_bundle_dir": null,
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/resource-server--resource-server",
       "promotable_targets": [],
-      "validation_failures": []
+      "validation_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "rp-session-logout",
@@ -220,9 +286,15 @@
         "OIDC Back-Channel Logout"
       ],
       "candidate_dir": "compliance/evidence/tier4/candidates/rp-session-logout",
-      "external_bundle_dir": null,
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/rp-session-logout--rp-session-logout-rp",
       "promotable_targets": [],
-      "validation_failures": []
+      "validation_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "runner-hypercorn",
@@ -233,9 +305,15 @@
         "Runner profile: Hypercorn"
       ],
       "candidate_dir": "compliance/evidence/tier4/candidates/runner-hypercorn",
-      "external_bundle_dir": null,
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/runner-hypercorn--hypercorn-runner",
       "promotable_targets": [],
-      "validation_failures": []
+      "validation_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "runner-tigrcorn",
@@ -246,9 +324,15 @@
         "Runner profile: Tigrcorn"
       ],
       "candidate_dir": "compliance/evidence/tier4/candidates/runner-tigrcorn",
-      "external_bundle_dir": null,
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/runner-tigrcorn--tigrcorn-runner",
       "promotable_targets": [],
-      "validation_failures": []
+      "validation_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "runner-uvicorn",
@@ -259,9 +343,15 @@
         "Runner profile: Uvicorn"
       ],
       "candidate_dir": "compliance/evidence/tier4/candidates/runner-uvicorn",
-      "external_bundle_dir": null,
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/runner-uvicorn--uvicorn-runner",
       "promotable_targets": [],
-      "validation_failures": []
+      "validation_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "spa",
@@ -274,9 +364,15 @@
         "OIDC Discovery 1.0"
       ],
       "candidate_dir": "compliance/evidence/tier4/candidates/spa",
-      "external_bundle_dir": null,
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/spa--spa-rp",
       "promotable_targets": [],
-      "validation_failures": []
+      "validation_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     }
   ]
 }

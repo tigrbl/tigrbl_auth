@@ -1,0 +1,3 @@
+from tba_provider_attestation_reference import InMemoryReferenceMaterialProvider
+
+assert callable(InMemoryReferenceMaterialProvider)

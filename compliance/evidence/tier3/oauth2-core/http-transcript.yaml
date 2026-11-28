@@ -1,6 +1,6 @@
 capture_mode: contract-derived-snapshot
 profile: baseline
-source_contract: specs/openapi/profiles/baseline/tigrbl_auth.public.openapi.json
+source_contract: specs/openapi/profiles/baseline/tba_auth.public.openapi.json
 paths:
 - path: /authorize
   operations:

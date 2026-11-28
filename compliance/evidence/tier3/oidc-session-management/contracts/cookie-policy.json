@@ -1,7 +1,7 @@
 {
   "label": "RFC 6265",
   "title": "HTTP State Management Mechanism",
-  "runtime_status": "phase-7-browser-session-runtime",
+  "runtime_status": "browser-session-runtime",
   "public_surface": [
     "/login",
     "/authorize",

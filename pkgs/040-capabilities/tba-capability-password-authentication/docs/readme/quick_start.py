@@ -1,0 +1,3 @@
+from tba_capability_password_authentication import PasswordAuthenticationCapability
+
+assert callable(PasswordAuthenticationCapability)

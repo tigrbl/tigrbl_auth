@@ -1,0 +1,3 @@
+from tba_bases_trust import IssuerTrustResolverBase
+
+assert callable(IssuerTrustResolverBase)

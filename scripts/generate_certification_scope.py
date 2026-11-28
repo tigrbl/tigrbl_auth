@@ -21,7 +21,7 @@ BUCKET_ORDER = (
 
 REQUIRED_SCOPE_FREEZE_PROHIBITED_EXPANSIONS = (
     "RFC 7800",
-    "RFC 7952",
+    "RFC 8417",
     "RFC 8291",
     "RFC 8812",
     "RFC 8932",
@@ -118,11 +118,11 @@ def build_scope(repo_root: Path) -> dict[str, Any]:
         for profile in PROFILE_NAMES
     }
     openapi_contracts = {
-        profile: json.loads((repo_root / f"specs/openapi/profiles/{profile}/tigrbl_auth.public.openapi.json").read_text(encoding="utf-8"))
+        profile: json.loads((repo_root / f"specs/openapi/profiles/{profile}/tba_auth.public.openapi.json").read_text(encoding="utf-8"))
         for profile in PROFILE_NAMES
     }
     openrpc_contracts = {
-        profile: json.loads((repo_root / f"specs/openrpc/profiles/{profile}/tigrbl_auth.admin.openrpc.json").read_text(encoding="utf-8"))
+        profile: json.loads((repo_root / f"specs/openrpc/profiles/{profile}/tba_auth.admin.openrpc.json").read_text(encoding="utf-8"))
         for profile in PROFILE_NAMES
     }
 
@@ -207,7 +207,7 @@ def build_scope(repo_root: Path) -> dict[str, Any]:
             "id": target.get("id"),
             "family": target.get("family"),
             "scope_bucket": bucket,
-            "phase": target.get("phase"),
+            "delivery_track": target.get("delivery_track"),
             "minimum_claim_tier": target.get("minimum_claim_tier"),
             "first_claimable_profile": first_profile(target.get("profiles")),
             "claim": claim,
@@ -283,8 +283,8 @@ def build_scope(repo_root: Path) -> dict[str, Any]:
 
     return {
         "schema_version": 1,
-        "package": "tigrbl_auth",
-        "phase": declared.get("claim_set", {}).get("phase", "P0"),
+        "package": "tba_auth",
+        "delivery_track": declared.get("claim_set", {}).get("delivery_track", "foundation-boundary"),
         "authoritative": True,
         "repository_tier": declared.get("claim_set", {}).get("current_repository_tier", 0),
         "authoritative_sources": {
@@ -300,9 +300,9 @@ def build_scope(repo_root: Path) -> dict[str, Any]:
             "effective_claims": [f"compliance/claims/effective-target-claims.{profile}.yaml" for profile in PROFILE_NAMES],
             "effective_evidence": [f"compliance/evidence/effective-release-evidence.{profile}.yaml" for profile in PROFILE_NAMES],
             "contracts": [
-                f"specs/openapi/profiles/{profile}/tigrbl_auth.public.openapi.json" for profile in PROFILE_NAMES
+                f"specs/openapi/profiles/{profile}/tba_auth.public.openapi.json" for profile in PROFILE_NAMES
             ] + [
-                f"specs/openrpc/profiles/{profile}/tigrbl_auth.admin.openrpc.json" for profile in PROFILE_NAMES
+                f"specs/openrpc/profiles/{profile}/tba_auth.admin.openrpc.json" for profile in PROFILE_NAMES
             ],
             "mappings": [
                 "compliance/mappings/target-to-module.yaml",
@@ -346,7 +346,7 @@ def write_boundary_docs(repo_root: Path, scope: dict[str, Any]) -> None:
     boundary_lines = warning_banner + [
         "# Certification Boundary",
         "",
-        "This document declares the authoritative certification boundary for the current `tigrbl_auth` checkpoint.",
+        "This document declares the authoritative certification boundary for the current `tba_auth` checkpoint.",
         "",
         "## Authority",
         "",

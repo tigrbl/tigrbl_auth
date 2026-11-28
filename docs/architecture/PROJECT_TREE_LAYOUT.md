@@ -21,8 +21,9 @@ docs/{adr,architecture,standards,compliance,runbooks}
 compliance/{targets,mappings,claims,evidence,gates,waivers}
 specs/{openapi,openrpc,jsonschema}
 scripts/
-tests/{unit,integration,conformance,interop,negative,security,e2e,perf,examples}
-tigrbl_auth/{plugin,gateway,api,tables,ops,services,standards,security,config,adapters,schemas,migrations,cli}
+tests/{unit,integration,conformance,negative,security,e2e,perf,examples}
+pkgs/120-tests/{tba-tests-governance-release-certification,tba-tests-release,tba-tests-architecture}/tests
+tba_auth/{plugin,gateway,api,tables,ops,services,standards,security,config,adapters,schemas,migrations,cli}
 ```
 
 Legacy paths remain in the repository only as `legacy_transition` artifacts until they are fully replaced.

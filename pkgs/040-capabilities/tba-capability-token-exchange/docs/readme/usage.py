@@ -1,0 +1,3 @@
+from tba_capability_token_exchange import TokenExchangeCapability
+
+assert callable(TokenExchangeCapability)

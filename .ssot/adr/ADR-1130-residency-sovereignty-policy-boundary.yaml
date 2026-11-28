@@ -1,0 +1,21 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1130"
+number: 1130
+slug: "residency-sovereignty-policy-boundary"
+title: "Residency sovereignty policy boundary"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Decision: Residency and sovereignty are authorization-policy concerns attached to tenant and realm data boundaries, not OAuth/OIDC protocol semantics. Target: RFC 6973 Privacy Considerations for Internet Protocols at https://www.rfc-editor.org/rfc/rfc6973.html. Consequences: runtime policy records declare tenant residency zones, allowed processing regions, restricted transfer regions, and sovereign controls; evaluation must return structured decisions and fail closed when the processing region, tenant, or realm violates the declared boundary."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define policy-owned residency and sovereignty enforcement semantics."
+    at: "2026-06-17T10:49:37Z"
+references: []
+body: |-
+  Decision: Residency and sovereignty are authorization-policy concerns attached to tenant and realm data boundaries, not OAuth/OIDC protocol semantics. Target: RFC 6973 Privacy Considerations for Internet Protocols at https://www.rfc-editor.org/rfc/rfc6973.html. Consequences: runtime policy records declare tenant residency zones, allowed processing regions, restricted transfer regions, and sovereign controls; evaluation must return structured decisions and fail closed when the processing region, tenant, or realm violates the declared boundary.

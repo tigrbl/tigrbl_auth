@@ -1,0 +1,378 @@
+{
+  "schema_version": 1,
+  "artifact": "target_cell_ssot_entity_matrix",
+  "authority": [
+    ".ssot/registry.json",
+    ".ssot/adr",
+    ".ssot/specs"
+  ],
+  "notes": {
+    "cell_contents": "strongest direct or adjacent current ADR, SPEC, and feature entities",
+    "none": "no direct current SSOT entity was found for that exact cell"
+  },
+  "surfaces": [
+    "admin_api",
+    "public_api",
+    "admin_uix",
+    "public_uix"
+  ],
+  "rows": [
+    {
+      "target": "RFC 9110 HTTP Semantics",
+      "admin_api": ["spc:1060", "spc:1061", "feat:secure-default-baseline-admin-gate", "feat:runtime-profile-configuration-contract"],
+      "public_api": ["spc:1034-1043", "spc:1060", "spc:1061", "feat:runtime-profile-configuration-contract"],
+      "admin_uix": ["adr:1038", "adr:1040", "spc:1055", "spc:1057", "feat:uix-admin-console-shell"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "RFC 9112 HTTP/1.1",
+      "admin_api": ["none"],
+      "public_api": ["none"],
+      "admin_uix": ["none"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "RFC 9113 HTTP/2",
+      "admin_api": ["feat:cli-flag-hypercorn-http2"],
+      "public_api": ["feat:cli-flag-hypercorn-http2"],
+      "admin_uix": ["none"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "RFC 9114 HTTP/3",
+      "admin_api": ["none"],
+      "public_api": ["none"],
+      "admin_uix": ["none"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "RFC 9000 QUIC",
+      "admin_api": ["none"],
+      "public_api": ["none"],
+      "admin_uix": ["none"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "RFC 8446 TLS 1.3",
+      "admin_api": ["spc:1060", "spc:1061", "feat:secure-default-baseline-admin-gate"],
+      "public_api": ["spc:1034-1043", "spc:1060", "spc:1061"],
+      "admin_uix": ["adr:1040", "spc:1055", "feat:uix-admin-auth-session"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "OpenAPI 3.1",
+      "admin_api": ["adr:1006", "spc:1060", "spc:1061", "spc:1063", "spc:1065", "feat:target-openapi-3-1-3-2-compatible-public-contract", "feat:openapi-contract-always-valid", "feat:openapi-runtime-payload-deferred-to-tigrbl", "feat:admin-gate-does-not-mutate-openapi-json"],
+      "public_api": ["adr:1006", "spc:1034-1043", "spc:1061", "spc:1063", "spc:1065", "feat:target-openapi-3-1-3-2-compatible-public-contract", "feat:openapi-contract-always-valid", "feat:openapi-runtime-payload-deferred-to-tigrbl"],
+      "admin_uix": ["spc:1056", "feat:uix-enterprise-readiness-dashboard", "feat:uix-redacted-config-viewer"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "JSON Schema 2020-12",
+      "admin_api": ["spc:1063", "spc:1065"],
+      "public_api": ["spc:1034-1043", "spc:1063", "spc:1065"],
+      "admin_uix": ["none"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "RFC 9457 Problem Details",
+      "admin_api": ["spc:1060", "spc:1061"],
+      "public_api": ["spc:1034-1043", "spc:1060", "spc:1061"],
+      "admin_uix": ["adr:1040", "spc:1055", "spc:1057", "feat:uix-admin-console-shell"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "JSON-RPC 2.0",
+      "admin_api": ["spc:1060", "spc:1061", "feat:cli-flag-rpc", "feat:secure-default-baseline-admin-gate"],
+      "public_api": ["spc:1060", "feat:cli-flag-rpc"],
+      "admin_uix": ["adr:1039", "spc:1057", "spc:1058", "spc:1059"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "OpenRPC",
+      "admin_api": ["adr:1006", "spc:1024", "spc:1044-1049", "spc:1064", "spc:1065", "feat:target-openrpc-1-4-x-admin-control-plane-contract", "feat:openrpc-contract-always-valid", "feat:openrpc-runtime-payload-deferred-to-tigrbl", "feat:admin-gate-does-not-mutate-openrpc-json"],
+      "public_api": ["adr:1006", "spc:1064", "spc:1065"],
+      "admin_uix": ["adr:1039", "spc:1055", "spc:1056", "spc:1057", "spc:1058", "spc:1059", "feat:uix-admin-console-shell"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "RFC 6749 OAuth 2.0",
+      "admin_api": ["feat:target-rfc-6749", "feat:flag-enable-rfc6749"],
+      "public_api": ["feat:target-rfc-6749", "feat:flag-enable-rfc6749", "spc:1034-1043"],
+      "admin_uix": ["spc:1055", "spc:1056", "feat:uix-admin-auth-session"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "RFC 6750 Bearer Tokens",
+      "admin_api": ["feat:target-rfc-6750", "feat:flag-enable-rfc6750", "feat:flag-enable-rfc6750-form", "feat:flag-enable-rfc6750-query"],
+      "public_api": ["feat:target-rfc-6750", "feat:flag-enable-rfc6750", "feat:flag-enable-rfc6750-form", "feat:flag-enable-rfc6750-query", "spc:1034-1043"],
+      "admin_uix": ["spc:1055", "spc:1057", "feat:uix-admin-auth-session", "feat:uix-token-admin-view"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "RFC 9700 OAuth Security BCP",
+      "admin_api": ["feat:target-rfc-9700", "feat:flag-enable-rfc9700"],
+      "public_api": ["feat:target-rfc-9700", "feat:flag-enable-rfc9700", "spc:1034", "spc:1035"],
+      "admin_uix": ["adr:1040", "spc:1055"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "RFC 7009 Token Revocation",
+      "admin_api": ["feat:target-rfc-7009", "feat:route-revoke", "feat:flag-enable-rfc7009"],
+      "public_api": ["feat:target-rfc-7009", "feat:route-revoke", "feat:flag-enable-rfc7009", "spc:1039-1043"],
+      "admin_uix": ["spc:1057", "spc:1058", "feat:uix-token-admin-view", "feat:uix-safe-mutation-revoke-token", "feat:uix-safe-mutation-revoke-session", "feat:uix-safe-mutation-revoke-consent"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "RFC 7662 Token Introspection",
+      "admin_api": ["feat:target-rfc-7662", "feat:route-introspect", "feat:flag-enable-rfc7662"],
+      "public_api": ["feat:target-rfc-7662", "feat:route-introspect", "feat:flag-enable-rfc7662", "spc:1039-1043"],
+      "admin_uix": ["spc:1056", "spc:1057", "feat:uix-token-admin-view"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "RFC 8414 OAuth Metadata",
+      "admin_api": ["feat:target-rfc-8414", "feat:route-well-known-oauth-authorization-server", "feat:flag-enable-rfc8414"],
+      "public_api": ["feat:target-rfc-8414", "feat:route-well-known-oauth-authorization-server", "feat:flag-enable-rfc8414", "spc:1034-1043"],
+      "admin_uix": ["spc:1056", "feat:uix-enterprise-readiness-dashboard", "feat:uix-redacted-config-viewer"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "RFC 9207 Issuer Identification",
+      "admin_api": ["feat:target-rfc-9207", "feat:flag-enable-rfc9207"],
+      "public_api": ["feat:target-rfc-9207", "feat:flag-enable-rfc9207", "spc:1034-1043"],
+      "admin_uix": ["spc:1056", "feat:uix-enterprise-readiness-dashboard", "feat:uix-redacted-config-viewer"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "RFC 8705 OAuth mTLS",
+      "admin_api": ["feat:target-rfc-8705", "feat:slice-mtls", "feat:flag-enable-rfc8705", "feat:cli-flag-enable-mtls"],
+      "public_api": ["feat:target-rfc-8705", "feat:slice-mtls", "feat:flag-enable-rfc8705", "spc:1034", "spc:1039", "spc:1040", "spc:1042", "spc:1043"],
+      "admin_uix": ["adr:1040", "spc:1055", "spc:1056"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "RFC 9449 DPoP",
+      "admin_api": ["feat:target-rfc-9449", "feat:slice-dpop", "feat:flag-enable-rfc9449"],
+      "public_api": ["feat:target-rfc-9449", "feat:slice-dpop", "feat:flag-enable-rfc9449", "spc:1036", "spc:1037", "spc:1042", "spc:1043"],
+      "admin_uix": ["adr:1040", "spc:1055", "spc:1056"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "RFC 7515 JWS",
+      "admin_api": ["feat:target-rfc-7515", "feat:flag-enable-rfc7515"],
+      "public_api": ["feat:target-rfc-7515", "feat:flag-enable-rfc7515"],
+      "admin_uix": ["none"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "RFC 7516 JWE",
+      "admin_api": ["feat:target-rfc-7516", "feat:flag-enable-rfc7516"],
+      "public_api": ["feat:target-rfc-7516", "feat:flag-enable-rfc7516"],
+      "admin_uix": ["none"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "RFC 7517 JWK / JWKS",
+      "admin_api": ["spc:1002", "spc:1005", "spc:1009", "spc:1013", "spc:1017", "feat:target-rfc-7517", "feat:target-key-lifecycle-and-jwks-publication", "feat:route-well-known-jwks-json", "feat:rpc-jwks-show", "feat:cli-verb-keys-publish-jwks", "feat:cli-verb-keys-generate"],
+      "public_api": ["spc:1002", "spc:1005", "spc:1009", "spc:1013", "spc:1017", "feat:target-rfc-7517", "feat:route-well-known-jwks-json"],
+      "admin_uix": ["spc:1057", "spc:1058", "feat:uix-keys-jwks-admin-view", "feat:uix-safe-mutation-publish-jwks", "feat:uix-safe-mutation-rotate-key"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "RFC 7518 JWA",
+      "admin_api": ["feat:target-rfc-7518", "feat:flag-enable-rfc7518"],
+      "public_api": ["feat:target-rfc-7518", "feat:flag-enable-rfc7518"],
+      "admin_uix": ["spc:1057", "spc:1058", "feat:uix-keys-jwks-admin-view", "feat:uix-safe-mutation-rotate-key"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "RFC 7519 JWT",
+      "admin_api": ["feat:target-rfc-7519", "feat:flag-enable-rfc7519"],
+      "public_api": ["feat:target-rfc-7519", "feat:flag-enable-rfc7519"],
+      "admin_uix": ["spc:1057", "spc:1059", "feat:uix-token-admin-view", "feat:uix-policy-simulation"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "RFC 9068 JWT Access Token Profile",
+      "admin_api": ["feat:target-rfc-9068", "feat:flag-enable-rfc9068"],
+      "public_api": ["feat:target-rfc-9068", "feat:flag-enable-rfc9068"],
+      "admin_uix": ["spc:1057", "feat:uix-token-admin-view"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "RFC 7591 Dynamic Client Registration",
+      "admin_api": ["feat:target-rfc-7591", "feat:flag-enable-rfc7591"],
+      "public_api": ["feat:target-rfc-7591", "feat:flag-enable-rfc7591", "spc:1034-1043"],
+      "admin_uix": ["spc:1057", "spc:1058", "feat:uix-client-admin-view", "feat:uix-safe-mutation-update-client-registration"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "RFC 7592 Client Registration Management",
+      "admin_api": ["feat:target-rfc-7592", "feat:flag-enable-rfc7592"],
+      "public_api": ["feat:target-rfc-7592", "feat:flag-enable-rfc7592"],
+      "admin_uix": ["spc:1057", "spc:1058", "feat:uix-client-admin-view", "feat:uix-safe-mutation-update-client-registration"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "OIDC Discovery 1.0",
+      "admin_api": ["feat:target-oidc-discovery-1-0"],
+      "public_api": ["feat:target-oidc-discovery-1-0", "spc:1034-1043"],
+      "admin_uix": ["spc:1056", "feat:uix-enterprise-readiness-dashboard", "feat:uix-redacted-config-viewer"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "OIDC Dynamic Client Registration 1.0",
+      "admin_api": ["feat:target-rfc-7591", "feat:target-rfc-7592"],
+      "public_api": ["feat:target-rfc-7591", "feat:target-rfc-7592"],
+      "admin_uix": ["spc:1057", "spc:1058", "feat:uix-client-admin-view", "feat:uix-safe-mutation-update-client-registration"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "RFC 7643 SCIM Core Schema",
+      "admin_api": ["adr:1052", "spc:1068", "spc:1072", "feat:f33-scim-provisioning"],
+      "public_api": ["none"],
+      "admin_uix": ["adr:1052", "spc:1072"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "RFC 7644 SCIM Protocol",
+      "admin_api": ["adr:1052", "spc:1068", "spc:1072", "feat:f33-scim-provisioning"],
+      "public_api": ["none"],
+      "admin_uix": ["adr:1052", "spc:1072"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "OIDC RP-Initiated Logout 1.0",
+      "admin_api": ["feat:target-oidc-rp-initiated-logout", "feat:route-logout"],
+      "public_api": ["feat:target-oidc-rp-initiated-logout", "feat:route-logout", "spc:1034", "spc:1036", "spc:1037", "spc:1039", "spc:1040"],
+      "admin_uix": ["spc:1055", "spc:1057", "feat:uix-admin-auth-session", "feat:uix-session-admin-view"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "OIDC Front-Channel Logout 1.0",
+      "admin_api": ["feat:target-oidc-front-channel-logout"],
+      "public_api": ["feat:target-oidc-front-channel-logout", "spc:1034", "spc:1036", "spc:1037"],
+      "admin_uix": ["spc:1055", "spc:1057", "feat:uix-admin-auth-session", "feat:uix-session-admin-view"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "OIDC Back-Channel Logout 1.0",
+      "admin_api": ["feat:target-oidc-back-channel-logout"],
+      "public_api": ["feat:target-oidc-back-channel-logout", "spc:1034", "spc:1036", "spc:1037"],
+      "admin_uix": ["spc:1055", "spc:1057", "feat:uix-admin-auth-session", "feat:uix-session-admin-view"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "NIST SP 800-53",
+      "admin_api": ["adr:1051", "adr:1052", "spc:1070", "spc:1071", "spc:1072"],
+      "public_api": ["adr:1051", "spc:1070", "spc:1071"],
+      "admin_uix": ["adr:1040", "adr:1051", "adr:1052"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "NIST SP 800-63",
+      "admin_api": ["spc:1066", "spc:1067", "feat:target-nist-sp-800-63b-4-profile", "feat:target-nist-sp-800-63c-4-profile", "feat:profile-nist-sp-800-63b-4", "feat:profile-nist-sp-800-63c-4"],
+      "public_api": ["spc:1066", "spc:1067", "feat:target-nist-sp-800-63b-4-profile", "feat:target-nist-sp-800-63c-4-profile"],
+      "admin_uix": ["adr:1051", "adr:1052"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "NIST SP 800-218 SSDF",
+      "admin_api": ["none"],
+      "public_api": ["none"],
+      "admin_uix": ["none"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "SLSA",
+      "admin_api": ["none"],
+      "public_api": ["none"],
+      "admin_uix": ["none"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "in-toto",
+      "admin_api": ["none"],
+      "public_api": ["none"],
+      "admin_uix": ["none"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "Sigstore",
+      "admin_api": ["none"],
+      "public_api": ["none"],
+      "admin_uix": ["none"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "SPDX",
+      "admin_api": ["none"],
+      "public_api": ["none"],
+      "admin_uix": ["none"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "CycloneDX",
+      "admin_api": ["none"],
+      "public_api": ["none"],
+      "admin_uix": ["none"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "Admin API Profile Spec",
+      "admin_api": ["spc:1060", "spc:1061", "spc:1064", "feat:target-openrpc-1-4-x-admin-control-plane-contract", "feat:secure-default-baseline-admin-gate", "feat:runtime-profile-configuration-contract"],
+      "public_api": ["none"],
+      "admin_uix": ["adr:1038", "spc:1055", "spc:1057", "spc:1058", "spc:1059", "feat:uix-admin-console-shell", "feat:uix-admin-auth-session", "feat:uix-tenant-profile-selector", "feat:uix-enterprise-readiness-dashboard", "feat:uix-redacted-config-viewer", "feat:uix-tenant-admin-view", "feat:uix-client-admin-view", "feat:uix-identity-admin-view", "feat:uix-session-admin-view", "feat:uix-token-admin-view", "feat:uix-consent-admin-view", "feat:uix-audit-admin-view", "feat:uix-keys-jwks-admin-view", "feat:uix-profile-certification-view", "feat:uix-rbac-administration", "feat:uix-abac-administration", "feat:uix-policy-simulation"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "Deployment Profile Spec",
+      "admin_api": ["spc:1061", "feat:runtime-profile-configuration-contract", "feat:profile-baseline-development"],
+      "public_api": ["spc:1061", "feat:runtime-profile-configuration-contract", "feat:profile-baseline-development"],
+      "admin_uix": ["spc:1055", "spc:1056", "feat:uix-admin-console-shell", "feat:uix-enterprise-readiness-dashboard", "feat:uix-redacted-config-viewer", "feat:uix-tenant-profile-selector"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "Tenant Isolation Spec",
+      "admin_api": ["none"],
+      "public_api": ["none"],
+      "admin_uix": ["spc:1055", "spc:1057", "feat:uix-tenant-profile-selector", "feat:uix-tenant-admin-view"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "Policy Administration Spec",
+      "admin_api": ["spc:1059", "spc:1070"],
+      "public_api": ["none"],
+      "admin_uix": ["spc:1059", "feat:uix-rbac-administration", "feat:uix-abac-administration", "feat:uix-policy-simulation"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "Key Lifecycle Spec",
+      "admin_api": ["spc:1002", "spc:1005", "spc:1009", "spc:1013", "spc:1017", "feat:target-key-lifecycle-and-jwks-publication"],
+      "public_api": ["spc:1002", "spc:1005", "spc:1009", "spc:1013", "spc:1017", "feat:target-key-lifecycle-and-jwks-publication"],
+      "admin_uix": ["spc:1057", "spc:1058", "feat:uix-keys-jwks-admin-view", "feat:uix-safe-mutation-rotate-key", "feat:uix-safe-mutation-publish-jwks"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "Audit Event Schema",
+      "admin_api": ["feat:rpc-audit-list", "feat:rpc-audit-export"],
+      "public_api": ["none"],
+      "admin_uix": ["adr:1040", "spc:1057", "feat:uix-audit-admin-view"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "Client Policy Spec",
+      "admin_api": ["none"],
+      "public_api": ["none"],
+      "admin_uix": ["spc:1057", "spc:1058", "feat:uix-client-admin-view", "feat:uix-safe-mutation-update-client-registration", "feat:uix-safe-mutation-toggle-client"],
+      "public_uix": ["none"]
+    },
+    {
+      "target": "Resource Contract Spec",
+      "admin_api": ["adr:1006", "spc:1061", "spc:1064", "spc:1065", "feat:target-openrpc-1-4-x-admin-control-plane-contract", "feat:openrpc-contract-always-valid", "feat:openrpc-runtime-payload-deferred-to-tigrbl"],
+      "public_api": ["adr:1006", "spc:1034-1043", "spc:1063", "spc:1065", "feat:target-openapi-3-1-3-2-compatible-public-contract", "feat:openapi-contract-always-valid"],
+      "admin_uix": ["adr:1039", "spc:1057", "feat:uix-tenant-admin-view", "feat:uix-client-admin-view", "feat:uix-identity-admin-view", "feat:uix-session-admin-view", "feat:uix-token-admin-view", "feat:uix-consent-admin-view", "feat:uix-audit-admin-view", "feat:uix-keys-jwks-admin-view", "feat:uix-profile-certification-view"],
+      "public_uix": ["none"]
+    }
+  ]
+}

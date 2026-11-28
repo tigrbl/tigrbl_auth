@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from tigrbl_auth.cli.metadata import (
+from tba_auth.cli.metadata import (
     build_cli_conformance_snapshot,
     build_cli_contract_manifest,
     render_cli_conformance_markdown,

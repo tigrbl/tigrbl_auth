@@ -31,6 +31,6 @@ This directory declares the certification boundary.
 A target bucket, public surface, modularity plane, or partial-consumption
 profile is not certifiable unless it is declared here and mapped under
 `compliance/mappings/`.
-- `boundary-certification-plan.yaml` — phase-specific certification objective, deliverables, and blockers
-- `certification_scope.yaml` — authoritative Phase 0 certification scope and reconciliation manifest
+- `boundary-certification-plan.yaml` — track-specific certification objective, deliverables, and blockers
+- `certification_scope.yaml` — authoritative boundary-lock checkpoint certification scope and reconciliation manifest
 - `out-of-scope-baseline.yaml` — explicit out-of-scope capability list for baseline claims hygiene

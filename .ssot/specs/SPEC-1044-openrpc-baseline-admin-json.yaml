@@ -1,0 +1,47 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1044"
+number: 1044
+slug: "openrpc-baseline-admin-json"
+title: "Repo spec: specs/openrpc/profiles/baseline/tba_auth.admin.openrpc.json"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "{"
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "chronology-neutral-openrpc-metadata"
+    at: "2026-04-28T14:09:59Z"
+references: []
+body: |-
+  {
+    "openrpc": "1.4.2",
+    "info": {
+      "title": "tba_auth admin/control-plane",
+      "version": "0.3.4",
+      "description": "Generated admin/control-plane contract derived from implementation-backed RPC registration and filtered by the effective deployment boundary."
+    },
+    "servers": [
+      {
+        "name": "admin-rpc",
+        "url": "https://authn.example.com/rpc"
+      }
+    ],
+    "methods": [],
+    "x-tba-auth": {
+      "profile": "baseline",
+      "plugin_mode": "public-only",
+      "runtime_style": "standalone",
+      "surface_sets": [
+        "public-rest"
+      ],
+      "strict_boundary_enforcement": true,
+      "generation_mode": "implementation-backed-rpc-registry"
+    }
+  }
+spec_kind: "local-policy"
+adr_ids: []

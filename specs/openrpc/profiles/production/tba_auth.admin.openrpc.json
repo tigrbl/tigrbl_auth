@@ -1,0 +1,20 @@
+{
+  "openrpc": "1.4.2",
+  "info": {
+    "title": "tba_auth admin/control-plane",
+    "version": "0.4.0.dev2",
+    "description": "Deprecated empty OpenRPC compatibility artifact. TBA identity APIs are REST/OpenAPI only."
+  },
+  "servers": [],
+  "methods": [],
+  "x-tba-auth": {
+    "profile": "production",
+    "plugin_mode": "public-only",
+    "runtime_style": "standalone",
+    "surface_sets": [
+      "public-rest"
+    ],
+    "strict_boundary_enforcement": true,
+    "generation_mode": "rest-only-no-rpc"
+  }
+}

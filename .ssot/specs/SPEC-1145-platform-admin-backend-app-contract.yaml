@@ -1,0 +1,47 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1145"
+number: 1145
+slug: "platform-admin-backend-app-contract"
+title: "Platform Admin Backend App Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The platform-admin API MUST expose only platform control-plane capabilities for cross-tenant administration."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-05-25T05:01:18Z"
+    note: "Draft contract for platform-admin API completion."
+    status: "draft"
+  -
+    at: "2026-05-27T16:58:50Z"
+    note: "Linked to spc:1176 for canonical identity storage table and persistence ownership where this API exposes table-backed behavior."
+    status: "draft"
+  -
+    at: "2026-06-01T09:52:57Z"
+    note: "Platform-admin now owns Realm lifecycle via /admin/realm and Realm-scoped tenant assignment via /admin/realm/{realm_id}/tenant."
+    status: "draft"
+  -
+    status: "draft"
+    note: "Replace platform operator access wording with administrator/support/break-glass controls."
+    at: "2026-06-22T07:21:52Z"
+references: []
+body: |-
+  ## Requirements
+  
+  The platform-admin API MUST expose only platform control-plane capabilities for cross-tenant administration.
+  
+  It MUST include tenant lifecycle operations, platform authority assignment, platform administrator and support/break-glass controls, and platform audit read/export workflows.
+  
+  It MUST exclude public end-user authentication pages, tenant self-service-only workflows, developer-only OIDC/OAuth app management, service-only machine identity workflows, and resource-validation-only surfaces.
+  
+  The API MUST use the `platform-admin-app` product surface and MUST fail closed when a route, resource, or JSON-RPC method is not assigned to that surface.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1078"
+  - "adr:1120"
+  - "adr:1076"
+  - "adr:1132"

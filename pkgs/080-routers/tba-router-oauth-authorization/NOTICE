@@ -1,0 +1,10 @@
+Tigrbl Auth (TBA)
+
+Project: https://github.com/tigrbl/tigrbl_auth
+Attribution: Jacob Stewart and the Tigrbl Auth contributors.
+
+Distributed under the Apache License, Version 2.0.
+See the accompanying LICENSE file for the license terms.
+
+Distribution: tba-router-oauth-authorization
+Source: https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/080-routers/tba-router-oauth-authorization

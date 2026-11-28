@@ -16,5 +16,5 @@ its effective claims, contracts, and evidence manifests.
 - `decision-to-check.yaml` — boundary decision to machine-checkable enforcement mapping
 - `decision-to-gate.yaml` — boundary decision to release-gate mapping
 
-- `test_classification.yaml` — canonical Phase 9 test taxonomy and category manifest
+- `test_classification.yaml` — canonical test-plane checkpoint test taxonomy and category manifest
 - `target-to-test.yaml` — in-scope target to classified test mapping

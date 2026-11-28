@@ -1,0 +1,3 @@
+import tba_provider_authenticator_totp_local
+
+print(tba_provider_authenticator_totp_local.__name__)

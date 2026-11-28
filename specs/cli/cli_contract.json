@@ -4,9 +4,9 @@
       "aliases": [],
       "description": "Resolve deployment, materialize a runner-qualified runtime plan, validate the selected profile, and optionally launch runtime.",
       "examples": [
-        "tigrbl-auth serve --server uvicorn --check",
-        "tigrbl-auth serve --server hypercorn --host 0.0.0.0 --port 8443",
-        "tigrbl-auth serve --server tigrcorn --dry-run --format yaml"
+        "tba-auth serve --server uvicorn --check",
+        "tba-auth serve --server hypercorn --host 0.0.0.0 --port 8443",
+        "tba-auth serve --server tigrcorn --dry-run --format yaml"
       ],
       "exit_codes": [
         {
@@ -60,7 +60,6 @@
         "tigrcorn_mode"
       ],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -125,7 +124,6 @@
         "scope"
       ],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -188,7 +186,6 @@
         "name"
       ],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -234,7 +231,6 @@
       "family": "contracts",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -282,7 +278,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -343,7 +338,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -405,7 +399,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -466,7 +459,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -512,7 +504,6 @@
       "family": "governance",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -559,7 +550,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -619,7 +609,6 @@
             "repo_root"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -680,7 +669,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -727,7 +715,6 @@
       "family": "evidence",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -775,7 +762,6 @@
             "bundle_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -836,7 +822,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -897,7 +882,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -958,7 +942,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -1023,7 +1006,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -1044,287 +1026,6 @@
           "help": "Materialize peer execution manifests.",
           "include_global": true,
           "name": "peer-execute",
-          "output": {
-            "description": "Collection output for list/status operations.",
-            "fields": [
-              "command",
-              "resource",
-              "items",
-              "total",
-              "offset",
-              "limit"
-            ],
-            "media_types": [
-              "json",
-              "yaml",
-              "text"
-            ],
-            "name": "resource-collection"
-          }
-        }
-      ]
-    },
-    {
-      "aliases": [],
-      "description": "Architecture decision record operators.",
-      "examples": [],
-      "exit_codes": [],
-      "family": "governance",
-      "flags": [],
-      "global_flags": [
-        "config",
-        "env_file",
-        "profile",
-        "tenant",
-        "issuer",
-        "surface_set",
-        "slice",
-        "extension",
-        "plugin_mode",
-        "runtime_style",
-        "strict",
-        "no_strict",
-        "format",
-        "output",
-        "verbose",
-        "trace"
-      ],
-      "handler": null,
-      "help": "List, inspect, create, and index ADRs.",
-      "include_global": true,
-      "name": "adr",
-      "output": null,
-      "verbs": [
-        {
-          "aliases": [],
-          "description": "List ADRs and their titles.",
-          "examples": [],
-          "exit_codes": [
-            {
-              "code": 0,
-              "meaning": "Operation completed successfully."
-            },
-            {
-              "code": 1,
-              "meaning": "Operation failed or verification did not pass."
-            },
-            {
-              "code": 2,
-              "meaning": "CLI argument or contract validation failed before execution."
-            }
-          ],
-          "family": "governance",
-          "flags": [
-            "repo_root"
-          ],
-          "global_flags": [
-            "config",
-            "env_file",
-            "profile",
-            "tenant",
-            "issuer",
-            "surface_set",
-            "slice",
-            "extension",
-            "plugin_mode",
-            "runtime_style",
-            "strict",
-            "no_strict",
-            "format",
-            "output",
-            "verbose",
-            "trace"
-          ],
-          "handler": "adr.list",
-          "help": "List ADRs.",
-          "include_global": true,
-          "name": "list",
-          "output": {
-            "description": "Collection output for list/status operations.",
-            "fields": [
-              "command",
-              "resource",
-              "items",
-              "total",
-              "offset",
-              "limit"
-            ],
-            "media_types": [
-              "json",
-              "yaml",
-              "text"
-            ],
-            "name": "resource-collection"
-          }
-        },
-        {
-          "aliases": [],
-          "description": "Render a selected ADR.",
-          "examples": [],
-          "exit_codes": [
-            {
-              "code": 0,
-              "meaning": "Operation completed successfully."
-            },
-            {
-              "code": 1,
-              "meaning": "Operation failed or verification did not pass."
-            },
-            {
-              "code": 2,
-              "meaning": "CLI argument or contract validation failed before execution."
-            }
-          ],
-          "family": "governance",
-          "flags": [
-            "repo_root",
-            "id"
-          ],
-          "global_flags": [
-            "config",
-            "env_file",
-            "profile",
-            "tenant",
-            "issuer",
-            "surface_set",
-            "slice",
-            "extension",
-            "plugin_mode",
-            "runtime_style",
-            "strict",
-            "no_strict",
-            "format",
-            "output",
-            "verbose",
-            "trace"
-          ],
-          "handler": "adr.show",
-          "help": "Show a single ADR.",
-          "include_global": true,
-          "name": "show",
-          "output": {
-            "description": "Single operator resource record with state and metadata.",
-            "fields": [
-              "command",
-              "resource",
-              "record",
-              "state_path"
-            ],
-            "media_types": [
-              "json",
-              "yaml",
-              "text"
-            ],
-            "name": "resource-record"
-          }
-        },
-        {
-          "aliases": [],
-          "description": "Create a new ADR markdown document from a template.",
-          "examples": [],
-          "exit_codes": [
-            {
-              "code": 0,
-              "meaning": "Operation completed successfully."
-            },
-            {
-              "code": 1,
-              "meaning": "Operation failed or verification did not pass."
-            },
-            {
-              "code": 2,
-              "meaning": "CLI argument or contract validation failed before execution."
-            }
-          ],
-          "family": "governance",
-          "flags": [
-            "repo_root",
-            "id",
-            "title"
-          ],
-          "global_flags": [
-            "config",
-            "env_file",
-            "profile",
-            "tenant",
-            "issuer",
-            "surface_set",
-            "slice",
-            "extension",
-            "plugin_mode",
-            "runtime_style",
-            "strict",
-            "no_strict",
-            "format",
-            "output",
-            "verbose",
-            "trace"
-          ],
-          "handler": "adr.new",
-          "help": "Create a new ADR template.",
-          "include_global": true,
-          "name": "new",
-          "output": {
-            "description": "Single operator resource record with state and metadata.",
-            "fields": [
-              "command",
-              "resource",
-              "record",
-              "state_path"
-            ],
-            "media_types": [
-              "json",
-              "yaml",
-              "text"
-            ],
-            "name": "resource-record"
-          }
-        },
-        {
-          "aliases": [],
-          "description": "Generate the ADR index markdown and JSON summaries.",
-          "examples": [],
-          "exit_codes": [
-            {
-              "code": 0,
-              "meaning": "Operation completed successfully."
-            },
-            {
-              "code": 1,
-              "meaning": "Operation failed or verification did not pass."
-            },
-            {
-              "code": 2,
-              "meaning": "CLI argument or contract validation failed before execution."
-            }
-          ],
-          "family": "governance",
-          "flags": [
-            "repo_root",
-            "report_dir"
-          ],
-          "global_flags": [
-            "config",
-            "env_file",
-            "profile",
-            "tenant",
-            "issuer",
-            "surface_set",
-            "slice",
-            "extension",
-            "plugin_mode",
-            "runtime_style",
-            "strict",
-            "no_strict",
-            "format",
-            "output",
-            "verbose",
-            "trace"
-          ],
-          "handler": "adr.index",
-          "help": "Generate the ADR index.",
-          "include_global": true,
-          "name": "index",
           "output": {
             "description": "Collection output for list/status operations.",
             "fields": [
@@ -1369,7 +1070,6 @@
         "report_dir"
       ],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -1415,7 +1115,6 @@
       "family": "operator",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -1466,7 +1165,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -1533,7 +1231,6 @@
             "bundle_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -1555,7 +1252,7 @@
           "include_global": true,
           "name": "manifest",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -1602,7 +1299,6 @@
             "timeout"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -1624,7 +1320,7 @@
           "include_global": true,
           "name": "apply",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -1663,7 +1359,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -1704,13 +1399,12 @@
     },
     {
       "aliases": [],
-      "description": "Migration-chain status, planning, application, and verification operators.",
+      "description": "Migration-chain status, planning, application, and verification workflows.",
       "examples": [],
       "exit_codes": [],
       "family": "operator",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -1761,7 +1455,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -1827,7 +1520,6 @@
             "repo_root"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -1849,7 +1541,7 @@
           "include_global": true,
           "name": "plan",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -1895,7 +1587,6 @@
             "timeout"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -1917,7 +1608,7 @@
           "include_global": true,
           "name": "apply",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -1956,7 +1647,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -1997,13 +1687,12 @@
     },
     {
       "aliases": [],
-      "description": "Release automation and recertification operators.",
+      "description": "Release automation and recertification workflows.",
       "examples": [],
       "exit_codes": [],
       "family": "release",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -2051,7 +1740,6 @@
             "artifact"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2112,7 +1800,6 @@
             "signing_key"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2172,7 +1859,6 @@
             "bundle_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2232,7 +1918,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2292,7 +1977,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2333,13 +2017,12 @@
     },
     {
       "aliases": [],
-      "description": "Stateful durable operator-plane tenant lifecycle operators.",
+      "description": "Storage-backed tenant lifecycle administration commands.",
       "examples": [],
       "exit_codes": [],
       "family": "admin",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -2364,7 +2047,7 @@
       "verbs": [
         {
           "aliases": [],
-          "description": "Create a durable operator-plane tenant record.",
+          "description": "Create a storage-backed tenant record.",
           "examples": [],
           "exit_codes": [
             {
@@ -2397,7 +2080,6 @@
             "timeout"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2419,7 +2101,7 @@
           "include_global": true,
           "name": "create",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -2436,7 +2118,7 @@
         },
         {
           "aliases": [],
-          "description": "Update a durable operator-plane tenant record.",
+          "description": "Update a storage-backed tenant record.",
           "examples": [],
           "exit_codes": [
             {
@@ -2469,7 +2151,6 @@
             "timeout"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2491,7 +2172,7 @@
           "include_global": true,
           "name": "update",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -2508,7 +2189,7 @@
         },
         {
           "aliases": [],
-          "description": "Delete a durable operator-plane tenant record.",
+          "description": "Delete a storage-backed tenant record.",
           "examples": [],
           "exit_codes": [
             {
@@ -2536,7 +2217,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2558,7 +2238,7 @@
           "include_global": true,
           "name": "delete",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -2575,7 +2255,7 @@
         },
         {
           "aliases": [],
-          "description": "Return a single durable operator-plane tenant record.",
+          "description": "Return a single storage-backed tenant record.",
           "examples": [],
           "exit_codes": [
             {
@@ -2597,7 +2277,6 @@
             "id"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2619,7 +2298,7 @@
           "include_global": true,
           "name": "get",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -2636,7 +2315,7 @@
         },
         {
           "aliases": [],
-          "description": "List durable operator-plane tenant records.",
+          "description": "List storage-backed tenant records.",
           "examples": [],
           "exit_codes": [
             {
@@ -2662,7 +2341,6 @@
             "status_filter"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2731,7 +2409,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2753,7 +2430,7 @@
           "include_global": true,
           "name": "enable",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -2798,7 +2475,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2820,7 +2496,7 @@
           "include_global": true,
           "name": "disable",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -2839,13 +2515,12 @@
     },
     {
       "aliases": [],
-      "description": "Stateful durable operator-plane client lifecycle operators.",
+      "description": "Storage-backed client lifecycle administration commands.",
       "examples": [],
       "exit_codes": [],
       "family": "admin",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -2870,7 +2545,7 @@
       "verbs": [
         {
           "aliases": [],
-          "description": "Create a durable operator-plane client record.",
+          "description": "Create a storage-backed client record.",
           "examples": [],
           "exit_codes": [
             {
@@ -2903,7 +2578,6 @@
             "timeout"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2925,7 +2599,7 @@
           "include_global": true,
           "name": "create",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -2942,7 +2616,7 @@
         },
         {
           "aliases": [],
-          "description": "Update a durable operator-plane client record.",
+          "description": "Update a storage-backed client record.",
           "examples": [],
           "exit_codes": [
             {
@@ -2975,7 +2649,6 @@
             "timeout"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2997,7 +2670,7 @@
           "include_global": true,
           "name": "update",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -3014,7 +2687,7 @@
         },
         {
           "aliases": [],
-          "description": "Delete a durable operator-plane client record.",
+          "description": "Delete a storage-backed client record.",
           "examples": [],
           "exit_codes": [
             {
@@ -3042,7 +2715,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3064,7 +2736,7 @@
           "include_global": true,
           "name": "delete",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -3081,7 +2753,7 @@
         },
         {
           "aliases": [],
-          "description": "Return a single durable operator-plane client record.",
+          "description": "Return a single storage-backed client record.",
           "examples": [],
           "exit_codes": [
             {
@@ -3103,7 +2775,6 @@
             "id"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3125,7 +2796,7 @@
           "include_global": true,
           "name": "get",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -3142,7 +2813,7 @@
         },
         {
           "aliases": [],
-          "description": "List durable operator-plane client records.",
+          "description": "List storage-backed client records.",
           "examples": [],
           "exit_codes": [
             {
@@ -3168,7 +2839,6 @@
             "status_filter"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3209,7 +2879,7 @@
         },
         {
           "aliases": [],
-          "description": "Rotate durable operator-plane client secret material.",
+          "description": "Rotate storage-backed client secret material.",
           "examples": [],
           "exit_codes": [
             {
@@ -3237,7 +2907,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3259,7 +2928,7 @@
           "include_global": true,
           "name": "rotate-secret",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -3304,7 +2973,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3326,7 +2994,7 @@
           "include_global": true,
           "name": "enable",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -3371,7 +3039,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3393,7 +3060,7 @@
           "include_global": true,
           "name": "disable",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -3412,13 +3079,12 @@
     },
     {
       "aliases": [],
-      "description": "Stateful durable operator-plane identity lifecycle operators.",
+      "description": "Storage-backed identity lifecycle administration commands.",
       "examples": [],
       "exit_codes": [],
       "family": "admin",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -3443,7 +3109,7 @@
       "verbs": [
         {
           "aliases": [],
-          "description": "Create a durable operator-plane identity record.",
+          "description": "Create a storage-backed identity record.",
           "examples": [],
           "exit_codes": [
             {
@@ -3476,7 +3142,6 @@
             "timeout"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3498,7 +3163,7 @@
           "include_global": true,
           "name": "create",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -3515,7 +3180,7 @@
         },
         {
           "aliases": [],
-          "description": "Update a durable operator-plane identity record.",
+          "description": "Update a storage-backed identity record.",
           "examples": [],
           "exit_codes": [
             {
@@ -3548,7 +3213,6 @@
             "timeout"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3570,7 +3234,7 @@
           "include_global": true,
           "name": "update",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -3587,7 +3251,7 @@
         },
         {
           "aliases": [],
-          "description": "Delete a durable operator-plane identity record.",
+          "description": "Delete a storage-backed identity record.",
           "examples": [],
           "exit_codes": [
             {
@@ -3615,7 +3279,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3637,7 +3300,7 @@
           "include_global": true,
           "name": "delete",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -3654,7 +3317,7 @@
         },
         {
           "aliases": [],
-          "description": "Return a single durable operator-plane identity record.",
+          "description": "Return a single storage-backed identity record.",
           "examples": [],
           "exit_codes": [
             {
@@ -3676,7 +3339,6 @@
             "id"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3698,7 +3360,7 @@
           "include_global": true,
           "name": "get",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -3715,7 +3377,7 @@
         },
         {
           "aliases": [],
-          "description": "List durable operator-plane identity records.",
+          "description": "List storage-backed identity records.",
           "examples": [],
           "exit_codes": [
             {
@@ -3741,7 +3403,6 @@
             "status_filter"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3782,7 +3443,7 @@
         },
         {
           "aliases": [],
-          "description": "Set or rotate a durable operator-plane identity password hash.",
+          "description": "Set or rotate a storage-backed identity password hash.",
           "examples": [],
           "exit_codes": [
             {
@@ -3812,7 +3473,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3834,7 +3494,7 @@
           "include_global": true,
           "name": "set-password",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -3879,7 +3539,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3901,7 +3560,7 @@
           "include_global": true,
           "name": "lock",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -3946,7 +3605,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3968,7 +3626,7 @@
           "include_global": true,
           "name": "unlock",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -3987,13 +3645,12 @@
     },
     {
       "aliases": [],
-      "description": "Stateful durable operator-plane flow lifecycle operators.",
+      "description": "Storage-backed flow lifecycle administration commands.",
       "examples": [],
       "exit_codes": [],
       "family": "admin",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -4018,7 +3675,7 @@
       "verbs": [
         {
           "aliases": [],
-          "description": "Create a durable operator-plane flow record.",
+          "description": "Create a storage-backed flow record.",
           "examples": [],
           "exit_codes": [
             {
@@ -4051,7 +3708,6 @@
             "timeout"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4073,7 +3729,7 @@
           "include_global": true,
           "name": "create",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -4090,7 +3746,7 @@
         },
         {
           "aliases": [],
-          "description": "Update a durable operator-plane flow record.",
+          "description": "Update a storage-backed flow record.",
           "examples": [],
           "exit_codes": [
             {
@@ -4123,7 +3779,6 @@
             "timeout"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4145,7 +3800,7 @@
           "include_global": true,
           "name": "update",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -4162,7 +3817,7 @@
         },
         {
           "aliases": [],
-          "description": "Delete a durable operator-plane flow record.",
+          "description": "Delete a storage-backed flow record.",
           "examples": [],
           "exit_codes": [
             {
@@ -4190,7 +3845,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4212,7 +3866,7 @@
           "include_global": true,
           "name": "delete",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -4229,7 +3883,7 @@
         },
         {
           "aliases": [],
-          "description": "Return a single durable operator-plane flow record.",
+          "description": "Return a single storage-backed flow record.",
           "examples": [],
           "exit_codes": [
             {
@@ -4251,7 +3905,6 @@
             "id"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4273,7 +3926,7 @@
           "include_global": true,
           "name": "get",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -4290,7 +3943,7 @@
         },
         {
           "aliases": [],
-          "description": "List durable operator-plane flow records.",
+          "description": "List storage-backed flow records.",
           "examples": [],
           "exit_codes": [
             {
@@ -4316,7 +3969,6 @@
             "status_filter"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4385,7 +4037,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4407,7 +4058,7 @@
           "include_global": true,
           "name": "enable",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -4452,7 +4103,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4474,7 +4124,7 @@
           "include_global": true,
           "name": "disable",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -4493,13 +4143,12 @@
     },
     {
       "aliases": [],
-      "description": "Stateful durable operator-plane session control operators.",
+      "description": "Storage-backed session administration commands.",
       "examples": [],
       "exit_codes": [],
       "family": "admin",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -4524,7 +4173,7 @@
       "verbs": [
         {
           "aliases": [],
-          "description": "Return a single durable operator-plane session record.",
+          "description": "Return a single storage-backed session record.",
           "examples": [],
           "exit_codes": [
             {
@@ -4546,7 +4195,6 @@
             "id"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4568,7 +4216,7 @@
           "include_global": true,
           "name": "get",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -4585,7 +4233,7 @@
         },
         {
           "aliases": [],
-          "description": "List durable operator-plane session records.",
+          "description": "List storage-backed session records.",
           "examples": [],
           "exit_codes": [
             {
@@ -4611,7 +4259,6 @@
             "status_filter"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4652,7 +4299,7 @@
         },
         {
           "aliases": [],
-          "description": "Mark a durable operator-plane session revoked.",
+          "description": "Mark a storage-backed session revoked.",
           "examples": [],
           "exit_codes": [
             {
@@ -4680,7 +4327,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4702,7 +4348,7 @@
           "include_global": true,
           "name": "revoke",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -4719,7 +4365,7 @@
         },
         {
           "aliases": [],
-          "description": "Mark all durable operator-plane sessions revoked.",
+          "description": "Mark all storage-backed sessions revoked.",
           "examples": [],
           "exit_codes": [
             {
@@ -4748,7 +4394,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4770,7 +4415,7 @@
           "include_global": true,
           "name": "revoke-all",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -4789,13 +4434,12 @@
     },
     {
       "aliases": [],
-      "description": "Stateful durable operator-plane token control operators.",
+      "description": "Storage-backed token administration commands.",
       "examples": [],
       "exit_codes": [],
       "family": "admin",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -4820,7 +4464,7 @@
       "verbs": [
         {
           "aliases": [],
-          "description": "Return a single durable operator-plane token record.",
+          "description": "Return a single storage-backed token record.",
           "examples": [],
           "exit_codes": [
             {
@@ -4842,7 +4486,6 @@
             "id"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4864,7 +4507,7 @@
           "include_global": true,
           "name": "get",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -4881,7 +4524,7 @@
         },
         {
           "aliases": [],
-          "description": "List durable operator-plane token records.",
+          "description": "List storage-backed token records.",
           "examples": [],
           "exit_codes": [
             {
@@ -4907,7 +4550,6 @@
             "status_filter"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4970,7 +4612,6 @@
             "id"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4992,7 +4633,7 @@
           "include_global": true,
           "name": "introspect",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -5009,7 +4650,7 @@
         },
         {
           "aliases": [],
-          "description": "Mark a durable operator-plane token revoked.",
+          "description": "Mark a storage-backed token revoked.",
           "examples": [],
           "exit_codes": [
             {
@@ -5037,7 +4678,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5059,7 +4699,7 @@
           "include_global": true,
           "name": "revoke",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -5076,7 +4716,7 @@
         },
         {
           "aliases": [],
-          "description": "Create a derived durable operator-plane token exchange record.",
+          "description": "Create a derived storage-backed token exchange record.",
           "examples": [],
           "exit_codes": [
             {
@@ -5106,7 +4746,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5128,7 +4767,7 @@
           "include_global": true,
           "name": "exchange",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -5147,13 +4786,12 @@
     },
     {
       "aliases": [],
-      "description": "Stateful durable operator-plane key lifecycle and JWKS publication operators.",
+      "description": "Storage-backed key lifecycle and JWKS publication commands.",
       "examples": [],
       "exit_codes": [],
       "family": "admin",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -5178,7 +4816,7 @@
       "verbs": [
         {
           "aliases": [],
-          "description": "Generate durable operator-plane key metadata and optional JWKS publication.",
+          "description": "Generate storage-backed key metadata and optional JWKS publication.",
           "examples": [],
           "exit_codes": [
             {
@@ -5214,7 +4852,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5236,7 +4873,7 @@
           "include_global": true,
           "name": "generate",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -5253,7 +4890,7 @@
         },
         {
           "aliases": [],
-          "description": "Import durable operator-plane key metadata from a JSON or YAML file.",
+          "description": "Import storage-backed key metadata from a JSON or YAML file.",
           "examples": [],
           "exit_codes": [
             {
@@ -5285,7 +4922,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5307,7 +4943,7 @@
           "include_global": true,
           "name": "import",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -5324,7 +4960,7 @@
         },
         {
           "aliases": [],
-          "description": "Export durable operator-plane key metadata to a JSON or YAML file.",
+          "description": "Export storage-backed key metadata to a JSON or YAML file.",
           "examples": [],
           "exit_codes": [
             {
@@ -5351,7 +4987,6 @@
             "checksum"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5373,7 +5008,7 @@
           "include_global": true,
           "name": "export",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -5426,7 +5061,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5448,7 +5082,7 @@
           "include_global": true,
           "name": "rotate",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -5465,7 +5099,7 @@
         },
         {
           "aliases": [],
-          "description": "Mark a durable operator-plane key retired.",
+          "description": "Mark a storage-backed key retired.",
           "examples": [],
           "exit_codes": [
             {
@@ -5494,7 +5128,6 @@
             "publish"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5516,7 +5149,7 @@
           "include_global": true,
           "name": "retire",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -5533,7 +5166,7 @@
         },
         {
           "aliases": [],
-          "description": "Publish the current durable operator-plane JWKS document.",
+          "description": "Publish the current storage-backed JWKS document.",
           "examples": [],
           "exit_codes": [
             {
@@ -5559,7 +5192,6 @@
             "checksum"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5581,7 +5213,7 @@
           "include_global": true,
           "name": "publish-jwks",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -5598,7 +5230,7 @@
         },
         {
           "aliases": [],
-          "description": "Return a single durable operator-plane key record.",
+          "description": "Return a single storage-backed key record.",
           "examples": [],
           "exit_codes": [
             {
@@ -5620,7 +5252,6 @@
             "id"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5642,7 +5273,7 @@
           "include_global": true,
           "name": "get",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -5659,7 +5290,7 @@
         },
         {
           "aliases": [],
-          "description": "List durable operator-plane key records.",
+          "description": "List storage-backed key records.",
           "examples": [],
           "exit_codes": [
             {
@@ -5685,7 +5316,6 @@
             "status_filter"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5726,7 +5356,7 @@
         },
         {
           "aliases": [],
-          "description": "Delete a durable operator-plane key record.",
+          "description": "Delete a storage-backed key record.",
           "examples": [],
           "exit_codes": [
             {
@@ -5754,7 +5384,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5776,7 +5405,7 @@
           "include_global": true,
           "name": "delete",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -5795,13 +5424,12 @@
     },
     {
       "aliases": [],
-      "description": "Discovery and metadata operators bound to repository snapshots.",
+      "description": "Discovery and metadata workflows bound to repository snapshots.",
       "examples": [],
       "exit_codes": [],
       "family": "admin",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -5847,7 +5475,6 @@
             "repo_root"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5869,7 +5496,7 @@
           "include_global": true,
           "name": "show",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -5908,7 +5535,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5977,7 +5603,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5999,7 +5624,7 @@
           "include_global": true,
           "name": "publish",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -6039,7 +5664,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -6061,7 +5685,7 @@
           "include_global": true,
           "name": "diff",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -6080,13 +5704,12 @@
     },
     {
       "aliases": [],
-      "description": "Import durable operator-plane state from portable artifacts.",
+      "description": "Import storage-backed identity state from portable artifacts.",
       "examples": [],
       "exit_codes": [],
       "family": "admin",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -6136,7 +5759,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -6175,7 +5797,7 @@
         },
         {
           "aliases": [],
-          "description": "Import durable operator-plane state from a portable artifact.",
+          "description": "Import storage-backed identity state from a portable artifact.",
           "examples": [],
           "exit_codes": [
             {
@@ -6207,7 +5829,6 @@
             "timeout"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -6229,7 +5850,7 @@
           "include_global": true,
           "name": "run",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -6246,7 +5867,7 @@
         },
         {
           "aliases": [],
-          "description": "Show the last durable operator-plane import status.",
+          "description": "Show the last storage-backed import status.",
           "examples": [],
           "exit_codes": [
             {
@@ -6267,7 +5888,6 @@
             "repo_root"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -6289,7 +5909,7 @@
           "include_global": true,
           "name": "status",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -6308,13 +5928,12 @@
     },
     {
       "aliases": [],
-      "description": "Export durable operator-plane state into portable artifacts.",
+      "description": "Export storage-backed identity state into portable artifacts.",
       "examples": [],
       "exit_codes": [],
       "family": "admin",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -6339,7 +5958,7 @@
       "verbs": [
         {
           "aliases": [],
-          "description": "Validate export configuration and current operator state.",
+          "description": "Validate export configuration and current storage-backed identity state.",
           "examples": [],
           "exit_codes": [
             {
@@ -6366,7 +5985,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -6405,7 +6023,7 @@
         },
         {
           "aliases": [],
-          "description": "Export durable operator-plane state to a portable artifact.",
+          "description": "Export storage-backed identity state to a portable artifact.",
           "examples": [],
           "exit_codes": [
             {
@@ -6439,7 +6057,6 @@
             "timeout"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -6461,7 +6078,7 @@
           "include_global": true,
           "name": "run",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -6478,7 +6095,7 @@
         },
         {
           "aliases": [],
-          "description": "Show the last durable operator-plane export status.",
+          "description": "Show the last storage-backed export status.",
           "examples": [],
           "exit_codes": [
             {
@@ -6499,7 +6116,6 @@
             "repo_root"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -6521,7 +6137,7 @@
           "include_global": true,
           "name": "status",
           "output": {
-            "description": "Single operator resource record with state and metadata.",
+            "description": "Single storage-backed resource record with metadata.",
             "fields": [
               "command",
               "resource",
@@ -6653,16 +6269,6 @@
       "help": "Color policy for terminal output.",
       "key": "color"
     },
-    "config": {
-      "default": null,
-      "family": "global",
-      "flags": [
-        "--config"
-      ],
-      "group": "global",
-      "help": "Path to the runtime/configuration file.",
-      "key": "config"
-    },
     "cookies": {
       "action": "BooleanOptionalAction",
       "default": true,
@@ -6770,9 +6376,7 @@
     "extension": {
       "action": "append",
       "choices": [
-        "a2a-adapter",
         "dns-privacy",
-        "mcp-adapter",
         "set",
         "webauthn-passkeys",
         "webpush"
@@ -7035,7 +6639,7 @@
         "--log-level"
       ],
       "group": "serve",
-      "help": "Operator log level for serve plans.",
+      "help": "Log level for serve plans.",
       "key": "log_level"
     },
     "metrics": {
@@ -7149,19 +6753,13 @@
       "type": "int"
     },
     "profile": {
-      "choices": [
-        "baseline",
-        "production",
-        "hardening",
-        "peer-claim"
-      ],
       "default": "baseline",
       "family": "global",
       "flags": [
         "--profile"
       ],
       "group": "global",
-      "help": "Effective standards/compliance profile.",
+      "help": "Runtime profile reference: packaged profile id or external YAML profile path.",
       "key": "profile"
     },
     "proxy_headers": {
@@ -7396,9 +6994,16 @@
     "surface_set": {
       "action": "append",
       "choices": [
-        "admin-rpc",
+        "admin-rest",
+        "developer-app",
         "diagnostics",
-        "public-rest"
+        "my-account-app",
+        "platform-admin-app",
+        "public-app",
+        "public-rest",
+        "resource-validation-app",
+        "service-admin-app",
+        "tenant-admin-app"
       ],
       "default": [],
       "family": "global",
@@ -7416,7 +7021,7 @@
         "--tenant"
       ],
       "group": "global",
-      "help": "Tenant identifier for multi-tenant operators.",
+      "help": "Tenant identifier for multi-tenant commands.",
       "key": "tenant"
     },
     "tier": {
@@ -7492,7 +7097,7 @@
         "--trace"
       ],
       "group": "global",
-      "help": "Emit trace-oriented operator details.",
+      "help": "Emit trace-oriented execution details.",
       "key": "trace"
     },
     "uds": {
@@ -7574,7 +7179,7 @@
         "-v"
       ],
       "group": "global",
-      "help": "Increase operator verbosity; may be repeated.",
+      "help": "Increase CLI verbosity; may be repeated.",
       "key": "verbose"
     },
     "wait": {
@@ -7609,18 +7214,8 @@
       "key": "yes"
     }
   },
-  "generated_from": "tigrbl_auth.cli.metadata",
+  "generated_from": "tba_cli_identity.cli.metadata",
   "global_flags": [
-    {
-      "default": null,
-      "family": "global",
-      "flags": [
-        "--config"
-      ],
-      "group": "global",
-      "help": "Path to the runtime/configuration file.",
-      "key": "config"
-    },
     {
       "default": null,
       "family": "global",
@@ -7632,19 +7227,13 @@
       "key": "env_file"
     },
     {
-      "choices": [
-        "baseline",
-        "production",
-        "hardening",
-        "peer-claim"
-      ],
       "default": "baseline",
       "family": "global",
       "flags": [
         "--profile"
       ],
       "group": "global",
-      "help": "Effective standards/compliance profile.",
+      "help": "Runtime profile reference: packaged profile id or external YAML profile path.",
       "key": "profile"
     },
     {
@@ -7654,7 +7243,7 @@
         "--tenant"
       ],
       "group": "global",
-      "help": "Tenant identifier for multi-tenant operators.",
+      "help": "Tenant identifier for multi-tenant commands.",
       "key": "tenant"
     },
     {
@@ -7670,9 +7259,16 @@
     {
       "action": "append",
       "choices": [
-        "admin-rpc",
+        "admin-rest",
+        "developer-app",
         "diagnostics",
-        "public-rest"
+        "my-account-app",
+        "platform-admin-app",
+        "public-app",
+        "public-rest",
+        "resource-validation-app",
+        "service-admin-app",
+        "tenant-admin-app"
       ],
       "default": [],
       "family": "global",
@@ -7706,9 +7302,7 @@
     {
       "action": "append",
       "choices": [
-        "a2a-adapter",
         "dns-privacy",
-        "mcp-adapter",
         "set",
         "webauthn-passkeys",
         "webpush"
@@ -7807,7 +7401,7 @@
         "-v"
       ],
       "group": "global",
-      "help": "Increase operator verbosity; may be repeated.",
+      "help": "Increase CLI verbosity; may be repeated.",
       "key": "verbose"
     },
     {
@@ -7817,29 +7411,29 @@
         "--trace"
       ],
       "group": "global",
-      "help": "Emit trace-oriented operator details.",
+      "help": "Emit trace-oriented execution details.",
       "key": "trace"
     }
   ],
-  "package": "tigrbl_auth",
+  "package": "tba_auth",
   "schema_version": 1,
   "summary": {
-    "command_count": 21,
+    "command_count": 20,
     "direct_command_count": 4,
     "family_command_counts": {
       "admin": 10,
       "contracts": 1,
       "evidence": 1,
-      "governance": 5,
+      "governance": 4,
       "operator": 2,
       "release": 1,
       "runtime": 1
     },
     "family_count": 7,
-    "flag_count": 88,
-    "global_flag_count": 16,
-    "nested_command_count": 17,
+    "flag_count": 87,
+    "global_flag_count": 15,
+    "nested_command_count": 16,
     "resource_command_count": 10,
-    "verb_count": 87
+    "verb_count": 83
   }
 }

@@ -1,0 +1,17 @@
+from tba_bases_claim import ClaimBase
+from tba_primitives_identity import ClaimType, ClaimValueType
+
+
+class SalutationClaim(ClaimBase):
+    claim_name = "salutation"
+    default_claim_type = ClaimType.IDENTITY
+    default_value_type = ClaimValueType.STRING
+    default_standards = ("OpenID Identity Assurance 1.0",)
+
+    @classmethod
+    def validate_value(cls, value):
+        if not isinstance(value, str) or not value:
+            raise ValueError("salutation must be a non-empty string")
+
+
+__all__ = ["SalutationClaim"]

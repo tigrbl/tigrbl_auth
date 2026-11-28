@@ -1,0 +1,180 @@
+.container {
+  @apply space-y-10;
+}
+
+.header {
+  @apply flex justify-between items-end;
+}
+
+.title {
+  @apply text-4xl font-extrabold leading-tight;
+  letter-spacing: -2px;
+}
+
+.subtitle {
+  @apply text-lg mt-2 font-medium;
+  color: var(--text-secondary);
+}
+
+.primaryButton {
+  padding: 10px 20px;
+  border: 1px solid var(--stroke-etched);
+  background: var(--stroke-etched);
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.primaryButton:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--accent-neural);
+}
+
+.statsGrid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6;
+}
+
+.statCard {
+  @apply p-6 border transition-all;
+  background: var(--bg-parian);
+  border-color: var(--stroke-milled);
+  box-shadow: var(--shadow-milled);
+}
+
+.statCard:hover {
+  border-color: var(--stroke-etched);
+  transform: translateY(-4px);
+}
+
+.statHeader {
+  @apply flex items-center justify-between mb-4;
+}
+
+.statLabel {
+  @apply text-[10px] font-bold uppercase tracking-widest;
+  color: var(--text-secondary);
+}
+
+.statIcon {
+  color: var(--stroke-etched);
+}
+
+.statValue {
+  @apply text-3xl font-mono font-bold tracking-tighter;
+}
+
+.statDeltaRow {
+  @apply mt-4 flex items-center space-x-2 text-[10px] font-bold;
+}
+
+.statDeltaPositive {
+  @apply text-emerald-600;
+}
+
+.statDeltaNegative {
+  color: var(--accent-arterial);
+}
+
+.statDeltaBaseline {
+  color: var(--stroke-milled);
+}
+
+.chartGrid {
+  @apply grid grid-cols-1 lg:grid-cols-3 gap-8;
+}
+
+.chartCard {
+  @apply relative overflow-hidden p-8;
+  background: #fff;
+  border: 1px solid var(--stroke-etched);
+  box-shadow: var(--shadow-milled);
+}
+
+.chartHeader {
+  @apply flex items-center justify-between mb-8;
+}
+
+.chartTitle {
+  @apply text-lg font-bold tracking-tight uppercase;
+}
+
+.chartLegend {
+  @apply flex space-x-2 items-center;
+}
+
+.legendDot {
+  @apply w-3 h-3;
+  background: var(--stroke-etched);
+}
+
+.legendText {
+  @apply text-[10px] font-bold uppercase;
+}
+
+.chartBody {
+  @apply h-72;
+}
+
+.securityCard {
+  @apply p-8;
+  background: var(--bg-parian-deep);
+  border: 1px solid var(--stroke-etched);
+  box-shadow: var(--shadow-milled);
+}
+
+.securityTitle {
+  @apply text-lg font-bold mb-6 tracking-tight uppercase;
+}
+
+.securityList {
+  @apply space-y-4;
+}
+
+.alertItem {
+  @apply p-4 transition-colors relative;
+  background: #fff;
+  border: 1px solid var(--stroke-milled);
+}
+
+.alertItem:hover {
+  border-color: var(--stroke-etched);
+}
+
+.alertBar {
+  @apply absolute left-0 top-0 bottom-0 w-1;
+}
+
+.alertBarHigh {
+  background: var(--accent-arterial);
+}
+
+.alertBarMedium {
+  @apply bg-amber-400;
+}
+
+.alertMessage {
+  @apply text-xs font-bold leading-tight uppercase mb-1;
+}
+
+.alertTime {
+  @apply text-[9px] font-mono;
+  color: var(--text-secondary);
+}
+
+.securityButton {
+  @apply w-full mt-8 py-3 text-[10px] font-bold uppercase transition-all;
+  border: 1px solid var(--stroke-etched);
+}
+
+.securityButton:hover {
+  background: var(--stroke-etched);
+  color: #fff;
+}

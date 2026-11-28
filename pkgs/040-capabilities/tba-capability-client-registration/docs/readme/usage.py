@@ -1,0 +1,3 @@
+from tba_capability_client_registration import ClientRegistrationCapability
+
+assert callable(ClientRegistrationCapability)

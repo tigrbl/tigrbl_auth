@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1117"
+number: 1117
+slug: "hosted-login-is-provider-side"
+title: "Hosted Login Is Provider-Side"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Decision: white-label hosted login belongs to provider OIDC/server/public UI surfaces, not RP packages."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "RP and resource-server maturity wave proposal."
+    at: "2026-05-23T05:44:01Z"
+references: []
+body: |-
+  Decision: white-label hosted login belongs to provider OIDC/server/public UI surfaces, not RP packages.
+  
+  Rationale: the RP initiates and consumes login; the identity provider hosts authentication UX, tenant branding, and login page rendering.
+  
+  Consequences: provider-side login branding is governed separately from RP SDK work, even though RP flows redirect users to that hosted login.

@@ -5,7 +5,7 @@
 ## Summary
 
 - repository_tier: `3`
-- phase: `P10`
+- delivery track: `tier3-evidence`
 - authoritative_scope_manifest: `compliance/targets/certification_scope.yaml`
 - document_authority_manifest: `compliance/targets/document-authority.yaml`
 - certification_bundle_current_state_doc_only: `True`
@@ -80,7 +80,7 @@
 - operator_plane_repo_mutation_dependency: `False`
 - operator_plane_tenancy_enforced: `True`
 - operator_plane_database_present: `True`
-- operator_plane_state_root: `/root/.local/state/tigrbl_auth/operator-plane/tigrbl_auth_phase13_certification_target_freeze_reconciled_2026-03-24-fd7da9822f4ba19c`
+- operator_plane_state_root: `/root/.local/state/tba_auth/operator-plane/tba_auth_capability_certification_target_freeze_reconciled_2026-03-24-fd7da9822f4ba19c`
 - operator_plane_portability_schema_version: `3`
 - pyproject_requires_python: `>=3.10,<3.13`
 - serve_runtime_launcher_present: `True`

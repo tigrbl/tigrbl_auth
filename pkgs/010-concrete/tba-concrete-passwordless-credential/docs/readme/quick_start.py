@@ -1,0 +1,3 @@
+from tba_concrete_passwordless_credential import PasswordlessCredential
+
+assert callable(PasswordlessCredential)

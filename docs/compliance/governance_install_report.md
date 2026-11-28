@@ -4,7 +4,7 @@
 - Strict: `True`
 - Passed: `True`
 - Required directories: `7`
-- Required files: `67`
+- Required files: `74`
 
 ## Result
 

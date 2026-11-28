@@ -1,0 +1,23 @@
+{
+  "report_count": 3,
+  "passed": 52,
+  "collected": 52,
+  "all_passed": true,
+  "reports": [
+    {
+      "path": "dist/test-reports/non-rfc-oidc-contracts-py313.json",
+      "passed": 22,
+      "collected": 22
+    },
+    {
+      "path": "dist/test-reports/non-rfc-surface-cli-py313.json",
+      "passed": 9,
+      "collected": 9
+    },
+    {
+      "path": "dist/test-reports/non-rfc-operator-runtime-py313.json",
+      "passed": 21,
+      "collected": 21
+    }
+  ]
+}

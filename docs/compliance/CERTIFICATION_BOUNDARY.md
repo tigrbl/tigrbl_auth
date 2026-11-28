@@ -2,7 +2,7 @@
 
 # Certification Boundary
 
-This document declares the authoritative certification boundary for the current `tigrbl_auth` checkpoint.
+This document declares the authoritative certification boundary for the current `tba_auth` checkpoint.
 
 ## Authority
 
@@ -20,7 +20,7 @@ This document declares the authoritative certification boundary for the current 
 - Retained targets: `48`
 - Retained RFC targets: `30`
 - Retained non-RFC targets: `18`
-- Deferred / excluded targets tracked: `13`
+- Deferred / excluded targets tracked: `27`
 - No target-count drift during closeout: `True`
 - Separate scope-expansion program required for wider claims: `True`
 
@@ -28,12 +28,12 @@ This document declares the authoritative certification boundary for the current 
 
 ### baseline-certifiable-now
 
-- Count: `13`
+- Count: `15`
 - Meaning: Baseline certification candidate set. This is a scope bucket, not a Tier 3 or Tier 4 promotion.
 
 ### production-completion-required
 
-- Count: `15`
+- Count: `13`
 - Meaning: In-scope production RFC/OIDC targets that still require route, persistence, runtime, or evidence completion.
 
 ### hardening-completion-required

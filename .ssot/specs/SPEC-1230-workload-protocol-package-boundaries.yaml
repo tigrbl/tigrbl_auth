@@ -1,0 +1,36 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1230"
+number: 1230
+slug: "workload-protocol-package-boundaries"
+title: "Workload protocol independence and specification ownership"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "For each standalone capability, document the supported role, package subset, and required dependencies. Test the required local package dependency closure. Verify that the selected distributions install and perform their advertised behavior in an isolated environment without the other protocol packages or SPIRE services. Compositions MUST declare all selected adapters and protocol dependencies."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Package independence
+  For each standalone capability, document the supported role, package subset, and required dependencies. Test the required local package dependency closure. Verify that the selected distributions install and perform their advertised behavior in an isolated environment without the other protocol packages or SPIRE services. Compositions MUST declare all selected adapters and protocol dependencies.
+  
+  ## SPIFFE package subsets
+  The shared tba-concrete-svid implementation provides format-independent SVID behavior. Standalone X.509-SVID and JWT-SVID compose it with tba-concrete-certificate-x509 or tba-concrete-jwt through their format-specific concretes and the SPIFFE SVID protocol package. Record dependency and runtime evidence for each standalone format. SPEC-1231 defines the profile requirements. The optional WIT-SVID composition declares its WIMSE WIT dependency and has its own evidence under SPEC-1232.
+  
+  ## WIMSE package subsets
+  The native WIC and mTLS path composes tba-concrete-certificate-x509, tba-concrete-wic, tba-protocol-workload-wimse-identifier, tba-profile-workload-credential-wimse-wic, and tba-profile-workload-authentication-wimse-mtls with the selected certificate providers. SPEC-1233 through SPEC-1235 govern this path. The native WIT and WPT path composes tba-concrete-wit, tba-concrete-wpt, the WIMSE identifier protocol, and the WIMSE WIT and WPT profiles with the selected verification capabilities under SPEC-1236. Require separate clean-install and runtime evidence for each native path without SPIFFE packages or SPIRE services.
+  
+  ## Specification ownership
+  Record the exact upstream revision for every protocol capability. Link its requirements to the package that enforces them and to the tests that exercise them. An explicit composition MUST identify the protocol rules that govern each step.
+  
+  ## SSOT verification
+  Track package independence and protocol behavior as separate features with linked tests and evidence. A dependency test establishes the declared package boundary. Isolated runtime tests establish the behavior of the selected package subset. Protocol conformance requires test evidence against the pinned specification. A SPIRE interoperability claim requires a run against a named SPIRE release and recorded configuration. Record the package versions, roles, and applicable specification revisions in the evidence.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1137"
+  - "adr:1138"
+  - "adr:1139"
+  - "adr:1140"

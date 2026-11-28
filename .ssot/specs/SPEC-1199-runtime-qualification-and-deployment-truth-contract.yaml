@@ -1,0 +1,28 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1199"
+number: 1199
+slug: "runtime-qualification-and-deployment-truth-contract"
+title: "Runtime Qualification and Deployment Truth Contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Runtime qualification MUST prove deployed runtime, dependency, configuration, capability, and artifact hashes match qualified release evidence."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-06-01T10:40:06Z"
+    note: "Accepted for strategic security certification concern planning."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Linked to strategic security certification concerns ADR."
+    at: "2026-06-01T10:41:08Z"
+references: []
+body: |-
+  Runtime qualification MUST prove deployed runtime, dependency, configuration, capability, and artifact hashes match qualified release evidence.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1090"

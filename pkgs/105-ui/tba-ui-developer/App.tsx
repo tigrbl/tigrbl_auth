@@ -1,0 +1,117 @@
+import { AppShell, AuthProvider, AuthShell, RequireAuth, Toast, describeSession } from "@tba/ui-primitives";
+import "@tba/ui-primitives/styles.css";
+import { useEffect, useState } from "react";
+import { useDeveloperPortal } from "./hooks/useDeveloperPortal";
+import { ApplicationDetailPage } from "./pages/ApplicationDetailPage";
+import { ApplicationsPage } from "./pages/ApplicationsPage";
+import { ClientCredentialsPage } from "./pages/ClientCredentialsPage";
+import { ClientMetadataPage } from "./pages/ClientMetadataPage";
+import { DashboardPage } from "./pages/DashboardPage";
+import { DiscoveryPage } from "./pages/DiscoveryPage";
+import { LoginPage } from "./pages/LoginPage";
+import { OAuthFlowTesterPage } from "./pages/OAuthFlowTesterPage";
+import { RedirectUrisPage } from "./pages/RedirectUrisPage";
+import { ScopesPage } from "./pages/ScopesPage";
+import { BACKEND_APP_BASE_URL, BACKEND_APP } from "./services/backendSurface";
+
+const navigation = [
+  { href: "#/dashboard", label: "Dashboard" },
+  { href: "#/apps", label: "Applications" },
+  { href: "#/app-detail", label: "App Detail" },
+  { href: "#/metadata", label: "Client Metadata" },
+  { href: "#/redirects", label: "Redirect URIs" },
+  { href: "#/credentials", label: "Credentials" },
+  { href: "#/scopes", label: "Scopes" },
+  { href: "#/oauth-test", label: "OAuth Tester" },
+  { href: "#/discovery", label: "Discovery" }
+];
+
+export default function App() {
+  const [currentHash, setCurrentHash] = useState(window.location.hash || "#/dashboard");
+  const developer = useDeveloperPortal();
+
+  useEffect(() => {
+    const onHashChange = () => setCurrentHash(window.location.hash || "#/dashboard");
+    window.addEventListener("hashchange", onHashChange);
+    if (!window.location.hash || window.location.hash === "#/") {
+      window.location.hash = "#/dashboard";
+    }
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
+
+  const authValue = {
+    loading: developer.loading,
+    logout: developer.logout,
+    refresh: developer.refresh,
+    session: developer.session
+      ? {
+          authenticated: developer.session.authenticated,
+          email: developer.session.email,
+          permissions: developer.session.roles,
+          subject: developer.session.developer_id,
+          tenantId: developer.session.tenant_id,
+          username: developer.session.username
+        }
+      : null
+  };
+
+  const selectedApplication = developer.applications[0] ?? null;
+  const selectedRegistration = developer.registrations[0] ?? null;
+
+  return (
+    <AuthProvider value={authValue}>
+      {!developer.session?.authenticated ? (
+        <AuthShell
+          backendApp={BACKEND_APP}
+          subtitle="Continue with your developer and tenant context to manage applications, redirect URIs, scopes, credentials, and issuer metadata."
+          title="Developer Portal"
+        >
+          <LoginPage error={developer.error} onLogin={developer.login} />
+        </AuthShell>
+      ) : (
+        <AppShell
+          activeHref={currentHash}
+          backendAppBaseUrl={BACKEND_APP_BASE_URL}
+          navigation={navigation}
+          onLogout={() => developer.logout()}
+          backendApp={BACKEND_APP}
+          sessionLabel={describeSession(authValue.session)}
+          title="Developer Portal"
+        >
+          <RequireAuth>
+            {developer.error && <div style={{ marginBottom: "16px" }}><Toast message={developer.error} tone="danger" /></div>}
+            {currentHash.startsWith("#/apps") && (
+              <ApplicationsPage
+                applications={developer.applications}
+                registrations={developer.registrations}
+                onCreate={developer.registerClient}
+                onDeleteApplication={developer.deleteApplication}
+                onDeleteRegistration={developer.deleteClientRegistration}
+                onUpdateApplication={developer.updateApplication}
+                onUpdateRegistration={developer.updateClientRegistration}
+              />
+            )}
+            {currentHash.startsWith("#/app-detail") && <ApplicationDetailPage application={selectedApplication} registration={selectedRegistration} />}
+            {currentHash.startsWith("#/metadata") && (
+              <ClientMetadataPage
+                registrations={developer.registrations}
+                onDelete={developer.deleteClientRegistration}
+                onUpdate={developer.updateClientRegistration}
+              />
+            )}
+            {currentHash.startsWith("#/redirects") && (
+              <RedirectUrisPage registrations={developer.registrations} onUpdate={developer.updateClientRegistration} />
+            )}
+            {currentHash.startsWith("#/credentials") && <ClientCredentialsPage application={selectedApplication} registration={selectedRegistration} />}
+            {currentHash.startsWith("#/scopes") && <ScopesPage applications={developer.applications} metadata={developer.metadata} />}
+            {currentHash.startsWith("#/oauth-test") && <OAuthFlowTesterPage application={selectedApplication} metadata={developer.metadata} />}
+            {currentHash.startsWith("#/discovery") && <DiscoveryPage metadata={developer.metadata} />}
+            {(currentHash.startsWith("#/dashboard") || !navigation.some((item) => currentHash.startsWith(item.href))) && (
+              <DashboardPage applications={developer.applications} metadata={developer.metadata} registrations={developer.registrations} session={developer.session} />
+            )}
+          </RequireAuth>
+        </AppShell>
+      )}
+    </AuthProvider>
+  );
+}

@@ -1,0 +1,179 @@
+name: package-python-matrix
+
+on:
+  workflow_call:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+    inputs:
+      package:
+        description: Package name to test, or all.
+        required: false
+        default: all
+      python-version:
+        description: Optional single Python version to test.
+        required: false
+        default: all
+        type: choice
+        options:
+          - all
+          - "3.10"
+          - "3.11"
+          - "3.12"
+          - "3.13"
+          - "3.14"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: package-python-matrix-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  workload-suites:
+    runs-on: ${{ (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/docs/readme-standards-20261119' || (github.event_name == 'pull_request' && github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository)) && fromJSON('["sad-lewin","shortlived","testing","trusted-public-ci","Linux","X64"]') || 'ubuntu-24.04' }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install uv
+        run: python -m pip install uv
+      - name: Run Layer 120 workload suites
+        run: >-
+          uv run --locked --extra test pytest
+          pkgs/120-tests/tba-tests-wimse/tests
+          pkgs/120-tests/tba-tests-spiffe/tests
+          pkgs/120-tests/tba-tests-workload-composition/tests
+          pkgs/120-tests/tba-tests-storage/tests
+          pkgs/120-tests/tba-tests-authorization/tests
+          pkgs/120-tests/tba-tests-workload-credential-conformance/tests
+
+  jose-interop:
+    runs-on: ${{ (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/docs/readme-standards-20261119' || (github.event_name == 'pull_request' && github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository)) && fromJSON('["sad-lewin","shortlived","testing","trusted-public-ci","Linux","X64"]') || 'ubuntu-24.04' }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6
+        with:
+          repository: swarmauri/swarmauri-sdk
+          ref: e44091135947f859dd60d249cf20fbffc104effc
+          path: .interop/swarmauri-sdk
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.12'
+      - name: Run bidirectional compact JWE interoperability
+        env:
+          SWARMAURI_SDK_ROOT: ${{ github.workspace }}/.interop/swarmauri-sdk
+        run: >-
+          uv run --locked --extra test pytest
+          --tba-suite tba-tests-interop-jose --jose-interop-mode source
+
+  discover-package-matrix:
+    runs-on: ${{ (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/docs/readme-standards-20261119' || (github.event_name == 'pull_request' && github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository)) && fromJSON('["sad-lewin","shortlived","testing","trusted-public-ci","Linux","X64"]') || 'ubuntu-24.04' }}
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+      count: ${{ steps.matrix.outputs.count }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+      - name: Install Python for the shared metadata action
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install Node for the discovery and metadata actions
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - name: Discover split Python packages
+        uses: cobycloud/actions/actions/monorepo-discover@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
+        with:
+          package-globs: pkgs/*
+          ecosystem: python
+      - name: Validate split package metadata
+        uses: cobycloud/actions/actions/package-metadata@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
+        with:
+          manifest-globs: |
+            pkgs/*/*/pyproject.toml
+          require-description: "true"
+          require-license: "true"
+          require-readme: "true"
+          require-url: "false"
+          report-json: reports/package-metadata.json
+          report-md: reports/package-metadata.md
+      - name: Build package x Python matrix
+        id: matrix
+        env:
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          CI_PACKAGE: ${{ inputs.package || 'all' }}
+          CI_VERSION: ${{ inputs['python-version'] || 'all' }}
+        run: >-
+          uv run --no-project python scripts/package_ci.py python
+          --base "$PR_BASE" --package "$CI_PACKAGE" --version "$CI_VERSION"
+          --plan "$RUNNER_TEMP/package-test-plan.json"
+      - name: Verify affected package selection
+        run: uv run --no-project python scripts/test_package_ci.py
+      - name: Upload package test plan
+        if: ${{ steps.matrix.outputs.count != '0' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: package-test-plan
+          path: ${{ runner.temp }}/package-test-plan.json
+          if-no-files-found: error
+
+  isolated-package-tests:
+    needs: discover-package-matrix
+    if: ${{ needs.discover-package-matrix.outputs.count != '0' }}
+    runs-on: ${{ (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/docs/readme-standards-20261119' || (github.event_name == 'pull_request' && github.event.pull_request.number == 109 && github.event.pull_request.head.repo.full_name == github.repository)) && fromJSON('["sad-lewin","shortlived","testing","trusted-public-ci","Linux","X64"]') || 'ubuntu-24.04' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.discover-package-matrix.outputs.matrix) }}
+    name: Python ${{ matrix.python }} / Batch ${{ matrix.batch }}
+    steps:
+      - uses: actions/checkout@v6
+      - id: setup-python
+        uses: actions/setup-python@v6
+        continue-on-error: true
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Retry Python setup
+        if: steps.setup-python.outcome == 'failure'
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install package test toolchain
+        shell: bash
+        run: python -m pip install --upgrade pip uv tomli
+      - uses: actions/download-artifact@v8
+        with:
+          name: package-test-plan
+          path: ${{ runner.temp }}
+      - name: Build and test each package in isolation
+        shell: bash
+        env:
+          PACKAGE_BATCH: ${{ matrix.batch }}
+          PYTHON_VERSION: ${{ matrix.python }}
+        run: |
+          set -euo pipefail
+          plan="$RUNNER_TEMP/package-test-plan.json"
+          jq -er --argjson batch "$PACKAGE_BATCH" \
+            '.[$batch][] | [.name, .path, .cell_id] | @tsv' "$plan" |
+          (
+            result=0
+            while IFS=$'\t' read -r package path cell_id; do
+              printf '%s\n' "::group::$package / Python $PYTHON_VERSION"
+              if ! python -m uv build --project "$path" --out-dir "dist/$cell_id" ||
+                 ! python scripts/monorepo_release.py isolated-test \
+                   --package "$package" --python-version "$PYTHON_VERSION" --dist-dir "dist/$cell_id"; then
+                result=1
+              fi
+              printf '%s\n' '::endgroup::'
+            done
+            exit "$result"
+          )

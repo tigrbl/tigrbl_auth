@@ -1,0 +1,37 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1164"
+number: 1164
+slug: "service-admin-audit-and-authorization-contract"
+title: "Service Admin Audit and Authorization Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs service-admin authorization and audit behavior for service-admin API operations."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Defines service-admin authorization and audit requirements."
+    at: "2026-05-25T05:23:00Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs service-admin authorization and audit behavior for service-admin API operations.
+  
+  ## Requirements
+  
+  Service-admin API MUST bind each operation to an actor, tenant namespace, service/resource/workload ownership context, trust-domain context where applicable, and effective service-admin authority. Mutations and sensitive reads MUST evaluate authorization before disclosure or state change.
+  
+  Service-admin operations MUST emit audit events that identify actor, tenant, service/resource/workload target, credential or token target where applicable, operation, authorization decision, request time, result, and failure reason where applicable.
+  
+  ## Verification
+  
+  Verification MUST prove service-admin operations enforce ownership and trust-domain boundaries, deny cross-surface operations, produce audit records for allowed and denied sensitive operations, and prevent cross-tenant audit visibility.
+spec_kind: "governance"
+adr_ids:
+  - "adr:1081"
+  - "adr:1076"

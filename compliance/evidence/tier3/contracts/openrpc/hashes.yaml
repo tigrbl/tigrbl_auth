@@ -1,6 +1,6 @@
 sha256:
   README.md: 7ab73c9047c03563189c4f8eb4eaf495e7886d137756fca9983ceca80a3bf0bd
-  contracts/tigrbl_auth.admin.openrpc.json: 3274ca7ff464a78b2802eb6c8a6c56ef4749e8ff759a86e43d26ced5ecff60b7
+  contracts/tba_auth.admin.openrpc.json: 3274ca7ff464a78b2802eb6c8a6c56ef4749e8ff759a86e43d26ced5ecff60b7
   docs/compliance/certification_state_report.json: ff16debac6dc2a44ddd025499ce1316bff1d77cf39728427211659aaf1ee9902
   docs/compliance/certification_state_report.md: de62a0f31690648875e42aeb80cc0b9e73ebf380f0cf3676a4b1284e735b9fbd
   docs/compliance/claims_lint_report.json: 1424866c339d7b3a34a996e2345ad1547768bbd2ed790ae00af41241b17c737c

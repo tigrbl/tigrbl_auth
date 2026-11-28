@@ -1,161 +1,153 @@
-name: tigrbl_auth certify artifacts dispatch
+name: Certify and commit workspace artifacts
 
 on:
   workflow_dispatch:
     inputs:
       bump:
-        description: "Version bump strategy"
+        description: Workspace version bump strategy
         required: true
         type: choice
         default: dev
-        options:
-          - dev
-          - patch
-          - minor
-          - major
+        options: [dev, patch, minor, major]
       commit_message:
-        description: "Commit message override"
-        required: false
+        description: Optional commit message
         type: string
 
+concurrency:
+  group: certify-artifacts-${{ github.ref }}
+  cancel-in-progress: false
+
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  certify-and-commit:
+  prepare:
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:16
-        env:
-          POSTGRES_DB: tigrbl_auth_ci
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd "pg_isready -U postgres -d tigrbl_auth_ci"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-    env:
-      POSTGRES_URL: postgresql://postgres:postgres@127.0.0.1:5432/tigrbl_auth_ci
+    outputs:
+      version: ${{ steps.version.outputs.version }}
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v6
+      - name: Prepare the Python toolchain
+        uses: cobycloud/actions/actions/python-uv@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           python-version: '3.11'
-
-      - name: Install toolchain
-        run: python -m pip install --upgrade pip tox uv
-
-      - name: Increment pyproject.toml version
-        id: bump
+          install-command: uv lock --check
+          run-command: ''
+      - name: Select workspace version
+        id: version
+        shell: bash
         env:
-          BUMP_KIND: ${{ github.event.inputs.bump }}
+          BUMP_KIND: ${{ inputs.bump }}
         run: |
           python - <<'PY'
-          from pathlib import Path
           import os
           import re
+          import tomllib
+          from pathlib import Path
 
-          pyproject = Path("pyproject.toml")
-          text = pyproject.read_text(encoding="utf-8")
-          m = re.search(r'^version\s*=\s*"([^"]+)"\s*$', text, flags=re.MULTILINE)
-          if not m:
-              raise SystemExit("version field not found in pyproject.toml")
-
-          old = m.group(1)
-          bump = os.environ.get("BUMP_KIND", "dev").strip()
-
-          dev_match = re.fullmatch(r"(\d+)\.(\d+)\.(\d+)\.dev(\d+)", old)
-          semver_match = re.fullmatch(r"(\d+)\.(\d+)\.(\d+)", old)
-
-          def emit(major: int, minor: int, patch: int, *, dev: int | None = None) -> str:
-              if dev is None:
-                  return f"{major}.{minor}.{patch}"
-              return f"{major}.{minor}.{patch}.dev{dev}"
-
-          if bump == "dev":
-              if dev_match:
-                  major, minor, patch, dev = map(int, dev_match.groups())
-                  new = emit(major, minor, patch, dev=dev + 1)
-              elif semver_match:
-                  major, minor, patch = map(int, semver_match.groups())
-                  new = emit(major, minor, patch, dev=1)
-              else:
-                  raise SystemExit(f"Unsupported version format for dev bump: {old}")
-          elif bump in {"patch", "minor", "major"}:
-              base = dev_match.groups()[:3] if dev_match else semver_match.groups() if semver_match else None
-              if base is None:
-                  raise SystemExit(f"Unsupported version format for semver bump: {old}")
-              major, minor, patch = map(int, base)
-              if bump == "patch":
-                  patch += 1
-              elif bump == "minor":
-                  minor += 1
-                  patch = 0
-              else:
-                  major += 1
-                  minor = 0
-                  patch = 0
-              new = emit(major, minor, patch, dev=1)
-          else:
-              raise SystemExit(f"Unsupported bump kind: {bump}")
-
-          pyproject.write_text(text[:m.start(1)] + new + text[m.end(1):], encoding="utf-8")
-
-          out = Path(os.environ["GITHUB_OUTPUT"])
-          with out.open("a", encoding="utf-8") as fh:
-              fh.write(f"old={old}\n")
-              fh.write(f"new={new}\n")
-          print(f"Bumped version: {old} -> {new}")
+          current = tomllib.loads(Path("pyproject.toml").read_text(encoding="utf-8"))["project"]["version"]
+          match = re.fullmatch(r"(\d+)\.(\d+)\.(\d+)(?:\.dev(\d+))?", current)
+          if match is None:
+              raise SystemExit(f"Unsupported workspace version: {current}")
+          major, minor, patch = (int(part) for part in match.groups()[:3])
+          match os.environ["BUMP_KIND"]:
+              case "dev":
+                  dev = int(match[4] or 0) + 1
+              case "patch":
+                  patch, dev = patch + 1, 1
+              case "minor":
+                  minor, patch, dev = minor + 1, 0, 1
+              case "major":
+                  major, minor, patch, dev = major + 1, 0, 0, 1
+              case _:
+                  raise SystemExit("Unsupported bump strategy")
+          with Path(os.environ["GITHUB_OUTPUT"]).open("a", encoding="utf-8") as output:
+              print(f"version={major}.{minor}.{patch}.dev{dev}", file=output)
           PY
+      - name: Apply workspace version
+        uses: cobycloud/actions/actions/version-bump@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
+        with:
+          version: ${{ steps.version.outputs.version }}
+          package-json-files: ''
+          cargo-files: ''
+      - name: Refresh workspace lock
+        run: uv lock
+      - name: Upload workspace metadata for certification
+        uses: actions/upload-artifact@v7
+        with:
+          name: certify-workspace-version
+          path: |
+            pyproject.toml
+            uv.lock
+          if-no-files-found: error
 
-      - name: Run certification aggregation and artifact generation
-        run: tox -e py311-final-certification
+  certify:
+    needs: prepare
+    uses: ./.github/workflows/_certification-matrix.yml
+    with:
+      workspace-version-artifact: certify-workspace-version
 
-      - name: Materialize artifacts/certify payload
+  commit:
+    needs: [prepare, certify]
+    if: github.ref_type == 'branch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/download-artifact@v8
+        with:
+          name: certify-workspace-version
+          path: .
+      - uses: actions/download-artifact@v8
+        with:
+          name: compliance-artifacts-py311-final-certification
+          path: .artifacts/certify-final
+      - name: Collect certification outputs
+        shell: bash
         run: |
           set -euo pipefail
-          rm -rf artifacts/certify
-          mkdir -p artifacts/certify
-
-          copy_if_exists() {
-            local src="$1"
-            local dst="$2"
-            if [ -e "$src" ]; then
-              mkdir -p "$(dirname "$dst")"
-              cp -R "$src" "$dst"
+          source=.artifacts/certify-final
+          target=artifacts/certify
+          test -d "$source/docs/compliance"
+          test -d "$source/dist/validated-runs"
+          rm -rf -- "$target"
+          for dir in docs/compliance dist/validated-runs dist/install-substrate \
+              dist/runtime-smoke dist/migration-portability dist/test-reports; do
+            if [[ -d "$source/$dir" ]]; then
+              mkdir -p "$target/$(dirname "$dir")"
+              cp -R -- "$source/$dir" "$target/$dir"
             fi
-          }
-
-          copy_if_exists "docs/compliance" "artifacts/certify/docs/compliance"
-          copy_if_exists "dist/validated-runs" "artifacts/certify/dist/validated-runs"
-          copy_if_exists "dist/install-substrate" "artifacts/certify/dist/install-substrate"
-          copy_if_exists "dist/runtime-smoke" "artifacts/certify/dist/runtime-smoke"
-          copy_if_exists "dist/migration-portability" "artifacts/certify/dist/migration-portability"
-          copy_if_exists "dist/test-reports" "artifacts/certify/dist/test-reports"
-
-      - name: Commit and push generated artifacts
+          done
+          # The repository ignores generated dist directories, including nested copies.
+          git add -f -- "$target"
+      - name: Commit version and certification outputs
+        if: inputs.commit_message == ''
+        uses: cobycloud/actions/actions/git-commit-generated@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
+        with:
+          paths: |
+            pyproject.toml
+            uv.lock
+            artifacts/certify
+          commit-message: 'chore(certify): bump workspace to ${{ needs.prepare.outputs.version }} and refresh certification artifacts'
+      # The shared action interpolates its message into shell source. Treat the override as data.
+      - name: Commit with the supplied message
+        if: inputs.commit_message != ''
+        shell: bash
         env:
-          NEW_VERSION: ${{ steps.bump.outputs.new }}
-          CUSTOM_COMMIT_MESSAGE: ${{ github.event.inputs.commit_message }}
+          COMMIT_MESSAGE: ${{ inputs.commit_message }}
         run: |
           set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git add pyproject.toml artifacts/certify
-
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
-            exit 0
+          git add -- pyproject.toml uv.lock artifacts/certify
+          if ! git diff --cached --quiet; then
+            git -c user.name='github-actions[bot]' \
+              -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+              commit -m "$COMMIT_MESSAGE"
           fi
-
-          msg="${CUSTOM_COMMIT_MESSAGE:-chore(certify): bump version to ${NEW_VERSION} and refresh certify artifacts}"
-          git commit -m "$msg"
-          git push origin "HEAD:${GITHUB_REF_NAME}"
+      - name: Push certification commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$(git rev-parse HEAD)" != "$GITHUB_SHA" ]]; then
+            git push origin "HEAD:refs/heads/$GITHUB_REF_NAME"
+          fi

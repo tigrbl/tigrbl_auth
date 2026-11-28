@@ -1,9 +1,9 @@
 schema_version: 1
-package: tigrbl_auth
+package: tba_auth
 profiles:
   baseline:
     description: Minimum interoperable OAuth 2.0 / OIDC / JOSE server profile.
-    phase: P1
+    delivery_track: baseline-interoperability
     minimum_claim_tier: 2
     claimable: true
     scope: core
@@ -25,7 +25,7 @@ profiles:
   production:
     description: Production-ready authn/z profile with lifecycle, browser, and registration
       surfaces.
-    phase: P2
+    delivery_track: production-readiness
     minimum_claim_tier: 3
     claimable: true
     scope: core
@@ -48,7 +48,7 @@ profiles:
   hardening:
     description: Advanced hardening and interop profile for sender-constrained tokens
       and hardened request channels.
-    phase: P3
+    delivery_track: hardening-interop
     minimum_claim_tier: 3
     claimable: true
     scope: core
@@ -75,10 +75,38 @@ profiles:
     runtime_styles:
     - plugin
     - standalone
+  fapi2-security:
+    description: FAPI 2.0 security profile with hardened request channels, sender-constrained
+      tokens, and issuer-aware authorization responses.
+    delivery_track: hardening-interop
+    minimum_claim_tier: 3
+    claimable: true
+    scope: core
+    target_sets:
+    - rfc-targets
+    - oidc-targets
+    - openapi-targets
+    - openrpc-targets
+    excludes:
+    - extension-targets
+    - alignment-targets
+    surface_sets:
+    - public-rest
+    - admin-rpc
+    - diagnostics
+    protocol_slices:
+    - par
+    - jar
+    - rar
+    - dpop
+    - mtls
+    runtime_styles:
+    - plugin
+    - standalone
   peer-claim:
     description: Independent peer-supported promotion profile for fully evidenced
       targets.
-    phase: P3
+    delivery_track: hardening-interop
     minimum_claim_tier: 4
     claimable: true
     scope: core
@@ -105,3 +133,172 @@ profiles:
     runtime_styles:
     - plugin
     - standalone
+  fapi2-message-signing:
+    description: External tracked profile for FAPI 2.0 Message Signing.
+    delivery_track: hardening-interop
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - FAPI 2.0 Message Signing profile
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []
+  smart-app-launch:
+    description: External tracked profile for SMART App Launch.
+    delivery_track: hardening-interop
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - SMART App Launch profile
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []
+  smart-backend-services:
+    description: External tracked profile for SMART Backend Services.
+    delivery_track: hardening-interop
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - SMART Backend Services profile
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []
+  fast-udap-security:
+    description: External tracked profile for FAST Security and UDAP Security IG.
+    delivery_track: hardening-interop
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - FAST / UDAP Security profile
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []
+  ihe-iua:
+    description: External tracked profile for IHE Internet User Authorization.
+    delivery_track: hardening-interop
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - IHE IUA profile
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []
+  nist-sp-800-63b-4:
+    description: External tracked profile for NIST SP 800-63B-4.
+    delivery_track: hardening-interop
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - NIST SP 800-63B-4 profile
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []
+  nist-sp-800-63c-4:
+    description: External tracked profile for NIST SP 800-63C-4.
+    delivery_track: hardening-interop
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - NIST SP 800-63C-4 profile
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []
+  camara-security-interoperability:
+    description: External tracked profile for CAMARA Security and Interoperability.
+    delivery_track: hardening-interop
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - CAMARA Security and Interoperability profile
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []
+  fdx-csdf-security-model:
+    description: External tracked profile for the FDX CSDF Security Model and Profile.
+    delivery_track: hardening-interop
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - FDX CSDF Security Model and Profile
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []
+  gnap-core-rs:
+    description: External tracked profile for GNAP Core and Resource Server.
+    delivery_track: hardening-interop
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - GNAP Core + Resource Server profile
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []
+  oauth-2-1:
+    description: External tracked profile for OAuth 2.1.
+    delivery_track: hardening-interop
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - OAuth 2.1 alignment profile
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []
+  webauthn-passkey-oauth-patterns:
+    description: External tracked profile for WebAuthn and passkey-bound OAuth patterns.
+    delivery_track: hardening-interop
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - WebAuthn and passkey-bound OAuth patterns
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []
+  confidential-spa-pattern:
+    description: External tracked profile for confidential SPA security pattern.
+    delivery_track: hardening-interop
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - Confidential SPA profile pattern
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []

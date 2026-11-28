@@ -1,0 +1,3 @@
+from tba_bases_token_introspection import VerificationKeyResolverBase
+
+assert callable(VerificationKeyResolverBase)

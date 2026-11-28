@@ -1,0 +1,3 @@
+from tba_durability_key_material import ensure_key_enabled
+
+assert callable(ensure_key_enabled)

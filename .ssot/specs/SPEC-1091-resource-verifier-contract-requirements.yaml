@@ -1,0 +1,67 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1091"
+number: 1091
+slug: "resource-verifier-contract-requirements"
+title: "Resource verifier contract requirements"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification defines first-class verifier-grade resource contracts for protected-resource behavior in `tba_auth`."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-05-25T02:56:48Z"
+    note: "Added resource-validation API surface requirements."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Linked verifier contract to the read-only resource-validation API decision."
+    at: "2026-05-25T05:30:01Z"
+references: []
+body: |-
+  ## Overview
+  
+  This specification defines first-class verifier-grade resource contracts for protected-resource behavior in `tba_auth`.
+  
+  ## Contract Model
+  
+  A resource verifier contract MUST define verifier identity/version, accepted
+  issuer set, accepted audience or resource indicators, accepted token classes,
+  sender-constraint requirements, replay/freshness expectations, JWKS cache
+  freshness expectations, revocation visibility expectations, replay-registry
+  visibility expectations, required claims/proof material, and
+  introspection-caller policy.
+  
+  ## Runtime Requirements
+  
+  Protected-resource behavior MUST fail closed when issuer, audience, sender-constraint, or required-claim expectations are not satisfied.
+
+  Protected-resource behavior MUST also fail closed when verifier state is too
+  stale to satisfy its declared freshness policy, when revocation or replay
+  visibility requirements are not met, or when the verifier cannot determine
+  whether a token remains valid under the declared resource contract.
+  
+  Resource validation metadata exposed by TBA SHOULD be available through the resource-validation API surface. That surface MUST expose only validation metadata and validation endpoints such as JWKS, tenant JWKS, discovery, protected-resource metadata, and introspection where enabled. It MUST NOT expose human login, client registration, admin resources, diagnostics, or JSON-RPC.
+  
+  ## Projection Rules
+  
+  RFC 9728 protected-resource metadata MUST be derived from the resource verifier contract. Runtime verifier behavior MUST use the same contract source and MUST NOT advertise broader acceptance or weaker proof requirements than runtime enforcement implements.
+
+  Metadata projections MUST NOT omit freshness or convergence requirements that
+  materially change verifier behavior. Runtime and metadata views MUST agree on
+  the conditions under which a verifier may continue, retry, or fail closed.
+  
+  ## Verification
+  
+  Verification MUST prove metadata and runtime behavior agree on accepted
+  issuers, audience expectations, proof requirements, verifier-state freshness,
+  revocation visibility, introspection-caller policy, failure semantics, and
+  resource-validation API surface exclusions.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1067"
+  - "adr:1120"
+  - "adr:1082"

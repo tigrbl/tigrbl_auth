@@ -12,30 +12,30 @@ All clean-room certification installs are now modeled with the same profile voca
 
 ### Base
 
-- install: `pip install -c constraints/base.txt .`
-- purpose: prove fresh-checkout install, `import tigrbl_auth`, and `python scripts/generate_state_reports.py`
+- install: `pip install .`
+- purpose: prove fresh-checkout install, `import tba_auth`, and `python scripts/generate_state_reports.py`
 - note: the base dependency set now includes `aiosqlite==0.22.1` so the default local runtime/report smoke path works in a clean room
 
 ### SQLite + Uvicorn
 
-- install: `pip install -c constraints/base.txt -c constraints/runner-uvicorn.txt '.[sqlite,uvicorn]'`
+- install: `pip install '.[sqlite,uvicorn]'`
 - tox: `tox -e py311-sqlite-uvicorn`
 
 ### PostgreSQL + Hypercorn
 
-- install: `pip install -c constraints/base.txt -c constraints/runner-hypercorn.txt '.[postgres,hypercorn]'`
+- install: `pip install '.[postgres,hypercorn]'`
 - tox: `tox -e py311-postgres-hypercorn`
-- requires: reachable PostgreSQL DSN, defaulted in CI to `postgresql://postgres:postgres@127.0.0.1:5432/tigrbl_auth_ci`
+- requires: reachable PostgreSQL DSN, defaulted in CI to `postgresql://postgres:postgres@127.0.0.1:5432/tba_auth_ci`
 
 ### Tigrcorn
 
-- install: `pip install -c constraints/base.txt -c constraints/runner-tigrcorn.txt '.[tigrcorn]'`
+- install: `pip install '.[tigrcorn]'`
 - tox: `tox -e py311-tigrcorn` or `tox -e py312-tigrcorn`
-- support note: Tigrcorn is only included in the clean-room matrix on Python `3.11` and `3.12`; the aggregate `servers` extra also includes Tigrcorn on those interpreters
+- support note: Tigrcorn is only included in the clean-room matrix on Python `3.11`, `3.12`, `3.13`, and `3.14`; the aggregate `servers` extra also includes Tigrcorn on those interpreters
 
 ### Dev/test
 
-- install: `pip install -c constraints/base.txt -c constraints/test.txt -c constraints/runner-uvicorn.txt '.[test,sqlite,uvicorn]'`
+- install: `pip install '.[test,sqlite,uvicorn]'`
 - tox: `tox -e py311-devtest`
 - smoke guarantee: `pytest --help` is executed so plugin loading failures break the profile
 
@@ -49,7 +49,7 @@ All clean-room certification installs are now modeled with the same profile voca
 The clean-room matrix now performs real runtime validation in supported environments, not just metadata inspection. For each kept runner profile the matrix executes:
 
 - `python scripts/clean_room_profile_smoke.py --runner <runner> --require-runner-installed --probe-surfaces --require-surface-probes`
-- `tigrbl-auth serve --check --server <runner> --format json --output dist/runtime-smoke/<profile>-serve-check.json`
+- `tba-auth serve --check --server <runner> --format json --output dist/runtime-smoke/<profile>-serve-check.json`
 - `python scripts/generate_state_reports.py`
 
 The release-gate tox environment runs the same serve-check and HTTP-surface probes for `uvicorn`, `hypercorn`, and `tigrcorn` so the generated `docs/compliance/runtime_profile_report.json` can be built from executable checks in a supported interpreter environment.
@@ -60,4 +60,4 @@ Every certification tox template now runs `python -I -m pip check` and `python s
 
 ## Certification lane install profiles
 
-The certification lane tox environments are now explicitly modeled as install profiles in `constraints/dependency-lock.json`: `test-core`, `test-integration`, `test-conformance`, `test-security-negative`, `test-interop`, `test-extension`, `migration-portability`, and `final-certification`.
+The certification lane tox environments are explicitly modeled as install profiles in the install-substrate profile registry, with dependency declarations maintained in `pyproject.toml` and resolver state preserved in `uv.lock`: `test-core`, `test-integration`, `test-conformance`, `test-security-negative`, `test-interop`, `test-extension`, `migration-portability`, and `final-certification`.

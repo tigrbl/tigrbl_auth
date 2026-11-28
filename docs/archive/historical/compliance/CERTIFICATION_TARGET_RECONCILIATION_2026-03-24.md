@@ -48,4 +48,4 @@
 
 ## Note
 
-Historical phase artifacts may still contain earlier values. The files above are the authoritative current-state set for this checkpoint.
+Historical artifacts may still contain earlier values. The files above are the authoritative current-state set for this checkpoint.

@@ -1,0 +1,26 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1218"
+number: 1218
+slug: "rfc7636-rp-pkce-s256-contract"
+title: "RFC 7636 RP PKCE S256 contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Scope: RP PKCE support targets RFC 7636 Proof Key for Code Exchange at https://www.rfc-editor.org/rfc/rfc7636.html. Requirements: RP packages expose a PkceVerifier model that generates 43-128 character verifier strings from the RFC 7636 unreserved character set, renders S256 code_challenge values, and returns authorization parameters with code_challenge_method=S256. RP authorization URL construction MUST bind the verifier to state and nonce and include client_id, redirect_uri, scope, state, nonce, code_challenge, and code_challenge_method. Verification: T0 import tests, T1 positive construction tests, and T2 malformed verifier/replay/fail-closed tests are required before concrete PKCE features are marked implemented."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define executable RP PKCE verifier and authorization URL requirements."
+    at: "2026-06-17T10:24:07Z"
+references: []
+body: |-
+  Scope: RP PKCE support targets RFC 7636 Proof Key for Code Exchange at https://www.rfc-editor.org/rfc/rfc7636.html. Requirements: RP packages expose a PkceVerifier model that generates 43-128 character verifier strings from the RFC 7636 unreserved character set, renders S256 code_challenge values, and returns authorization parameters with code_challenge_method=S256. RP authorization URL construction MUST bind the verifier to state and nonce and include client_id, redirect_uri, scope, state, nonce, code_challenge, and code_challenge_method. Verification: T0 import tests, T1 positive construction tests, and T2 malformed verifier/replay/fail-closed tests are required before concrete PKCE features are marked implemented.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1128"
+  - "adr:1114"
+  - "adr:1115"

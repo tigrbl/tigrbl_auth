@@ -1,0 +1,3 @@
+from tba_provider_trust_anchor import ProfiledTrustAnchorProvider
+
+assert callable(ProfiledTrustAnchorProvider)

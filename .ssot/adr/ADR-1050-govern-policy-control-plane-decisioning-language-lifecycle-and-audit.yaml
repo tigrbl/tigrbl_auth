@@ -1,0 +1,86 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1050"
+number: 1050
+slug: "govern-policy-control-plane-decisioning-language-lifecycle-and-audit"
+title: "Govern policy control-plane decisioning, language, lifecycle, and audit"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "`tba_auth` MUST govern policy decisioning, policy language, policy"
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-06-07T04:38:40Z"
+    note: "Extended by adr:1122: policy control-plane lifecycle includes invariant evaluation, determinism replay, and decision stability checks."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Authorization mutation semantics now include DelegationGrant lifecycle transitions from spc:1213: revoke, expire, replace, dependent chain collapse, token-link invalidation, and refresh denial."
+    at: "2026-06-14T11:51:04Z"
+references: []
+body: |-
+  ## Decision
+  
+  `tba_auth` MUST govern policy decisioning, policy language, policy
+  versioning, policy simulation, policy audit, authorization mutation
+  semantics, and access decision APIs as a policy control-plane boundary.
+  
+  ## Current Implementation Status
+  
+  - F16 Policy engine: partial.
+  - F17 Policy language: absent.
+  - F18 Policy versioning: absent.
+  - F19 Policy simulation: partial.
+  - F20 Policy audit: partial.
+  - F21 Access decision API: absent.
+  - Authorization mutation semantics: absent.
+  
+  ## Impacted Features
+  
+  - F16 Policy engine.
+  - F17 Policy language.
+  - F18 Policy versioning.
+  - F19 Policy simulation.
+  - F20 Policy audit.
+  - F21 Access decision API.
+  - Authorization mutation semantics.
+  
+  ## Standards / Specs
+  
+  - XACML 3.0.
+  - OPA/Rego.
+  - Cedar.
+  - CEL.
+  - XACML PDP/PEP architecture.
+  - OPA decision API.
+  - Envoy external authorization API.
+  - NIST SP 800-53 audit and configuration controls.
+  - ISO/IEC 27001 logging, audit, and change management controls.
+  
+  ## Required Future Capability
+  
+  Future implementation MUST provide durable policies, authoring language
+  semantics, version lifecycle, deterministic decision APIs, simulation inputs
+  and outputs, decision/audit trails, authorization mutation handling,
+  invalidation propagation rules, tests, and evidence.
+  
+  Mutation handling MUST define, at minimum:
+  
+  - which authority changes invalidate active access tokens;
+  - when refresh tokens MUST fail or be rotated out;
+  - when delegation chains collapse or become non-transitive;
+  - how replay or reuse evidence alters effective authority; and
+  - which audit and evidence records are required after mutation.
+  
+  ## Out of Scope
+  
+  This ADR does not choose a final policy language, implement a PDP, or expose an access decision API.
+  
+  ## Operational Consequences
+  
+  Generic audit logging and UIX policy simulation helpers MUST remain classified
+  as partial until policy-specific lifecycle, mutation, decisioning, and audit
+  evidence exists.

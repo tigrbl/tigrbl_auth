@@ -1,0 +1,59 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1226"
+number: 1226
+slug: "authentication-context-vocabulary-registry-contract"
+title: "Authentication context vocabulary registry contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs authentication context vocabulary, storage ownership, adaptive access evaluation, and OIDC/OAuth projection for ACR, AMR, AAL, and phishing-resistant semantics."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define table-owned ACR, AMR, and authenticator property vocabulary."
+    at: "2026-06-27T05:39:02Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs authentication context vocabulary, storage ownership, adaptive access evaluation, and OIDC/OAuth projection for ACR, AMR, AAL, and phishing-resistant semantics.
+  
+  ## Requirements
+  
+  Storage MUST own durable vocabulary tables for authentication context classes, authentication method references, and authenticator/session properties. Implementations may compose those tables with an in-memory engine, but the table API remains the canonical registry surface.
+  
+  The initial authentication context class seed set MUST include `aal1`, `aal2`, and `aal3` with NIST SP 800-63B provenance and ordering metadata sufficient for required-versus-achieved comparison.
+  
+  The authentication method reference seed set MUST be sourced from the suite's canonical standards package for AMR vocabulary, including RFC8176-derived values used by OIDC projection.
+  
+  `phishing-resistant` MUST be modeled as a property or requirement attached to authenticators, authentication events, sessions, or policy requirements. It MUST NOT be inserted into the authentication context class table as if it were an AAL.
+  
+  Adaptive access MUST compare required authentication context against achieved session context using registered ACR/AAL, AMR, and property values. If required context is not satisfied, the result MUST request step-up rather than silently downgrading or inventing local labels.
+  
+  OIDC and OAuth protocol packages MAY emit `acr` and `amr` claims, but only by projecting validated vocabulary values. Protocol packages MUST NOT define independent AAL, AMR, or phishing-resistant registries.
+  
+  Higher-layer capability, concrete, runtime, and facade packages MUST NOT own local duplicate AAL/AMR/property registries.
+  
+  ## Proposed Storage Shape
+  
+  The implementation tranche should introduce tables equivalent to:
+  
+  - `AuthenticationContextClass` for ACR/AAL values such as `aal1`, `aal2`, and `aal3`.
+  - `AuthenticationMethodReference` for AMR values.
+  - `AuthenticatorProperty` or an equivalent property/requirement table for values such as `phishing-resistant`.
+  - child/link tables for authenticator, authentication-event, session, or policy requirement relationships where durable state requires them.
+  
+  ## Verification
+  
+  Verification MUST include SSOT boundary checks, storage seed checks, adaptive access required-versus-achieved checks, and protocol projection checks for `acr` and `amr`.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1134"
+  - "adr:1004"
+  - "adr:1016"
+  - "adr:1121"
+  - "adr:1133"

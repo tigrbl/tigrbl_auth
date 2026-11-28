@@ -1,15 +1,15 @@
 # Install Substrate Report
 
-- Generated at: `20260331T165741Z`
+- Generated at: `20260805T071605Z`
 - Passed: `True`
 - Static manifest passed: `True`
 - Profile: `base`
 - Profile identity: `base@py312`
 - Environment identity present: `True`
-- Current Python: `3.12.12`
+- Current Python: `3.12.13`
 - Current Python supported: `True`
 - Expected supported Python versions: `3.10, 3.11, 3.12`
-- Detected supported Python binaries: `3` / `3`
+- Detected supported Python binaries: `1` / `3`
 - Certification tox envs declared: `33`
 - Runtime matrix envs declared: `14`
 - Test lane envs declared: `15`
@@ -17,6 +17,10 @@
 - Tox templates with install probe: `14` / `14`
 - Current profile import probe passed: `True`
 - Runtime surface probe passed: `True`
+
+## Warnings
+
+- The current container does not provide supported interpreter binaries for: 3.10, 3.11.
 
 ## Current environment import probe
 
@@ -28,6 +32,7 @@
 - `swarmauri_signing_jws` (swarmauri_signing_jws) → passed=`True` message=`import ok`
 - `swarmauri_signing_ed25519` (swarmauri_signing_ed25519) → passed=`True` message=`import ok`
 - `swarmauri_signing_dpop` (swarmauri_signing_dpop) → passed=`True` message=`import ok`
+- `pqcrypto` (pqcrypto) → passed=`True` message=`import ok`
 - `swarmauri_crypto_jwe` (swarmauri_crypto_jwe) → passed=`True` message=`import ok`
 - `swarmauri_crypto_paramiko` (swarmauri_crypto_paramiko) → passed=`True` message=`import ok`
 - `swarmauri_keyprovider_file` (swarmauri_keyprovider_file) → passed=`True` message=`import ok`
@@ -44,16 +49,17 @@
 
 ## Runtime import surfaces
 
-- `tigrbl_auth.api.app` → passed=`True` message=`import surface resolvable`
-- `tigrbl_auth.app` → passed=`True` message=`import surface resolvable`
-- `tigrbl_auth.plugin` → passed=`True` message=`import surface resolvable`
-- `tigrbl_auth.gateway` → passed=`True` message=`import surface resolvable`
+- `tba_server_identity.composition.app` → passed=`True` message=`import surface resolvable`
+- `tba_app_backend_core` → passed=`True` message=`import surface resolvable`
+- `tba_app_backend_public` → passed=`True` message=`import surface resolvable`
+- `tba_auth.plugin` → passed=`True` message=`import surface resolvable`
+- `tba_auth.gateway` → passed=`True` message=`import surface resolvable`
 
 ## Detected supported interpreters
 
-- `3.10` → available=`True` path=`/root/.pyenv/shims/python3.10`
-- `3.11` → available=`True` path=`/root/.pyenv/shims/python3.11`
-- `3.12` → available=`True` path=`/root/.pyenv/versions/3.12.12/bin/python3.12`
+- `3.10` → available=`False` path=`None`
+- `3.11` → available=`False` path=`None`
+- `3.12` → available=`True` path=`<repo>/.venv/Scripts/python.exe`
 
 ## Workflow coverage
 

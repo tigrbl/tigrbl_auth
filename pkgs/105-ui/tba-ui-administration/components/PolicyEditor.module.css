@@ -1,0 +1,254 @@
+.container {
+  @apply space-y-8 h-full flex flex-col;
+}
+
+.header {
+  @apply flex justify-between items-end shrink-0;
+}
+
+.title {
+  @apply text-4xl font-extrabold leading-tight;
+  letter-spacing: -2px;
+}
+
+.subtitle {
+  @apply text-lg mt-2 font-medium;
+  color: var(--text-secondary);
+}
+
+.headerActions {
+  @apply flex space-x-4;
+}
+
+.buttonBase {
+  padding: 10px 20px;
+  border: 1px solid var(--stroke-etched);
+  background: var(--bg-parian);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.buttonBase:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.buttonDanger {
+  color: var(--accent-arterial);
+}
+
+.buttonPrimary {
+  background: var(--stroke-etched);
+  color: #fff;
+}
+
+.buttonBase:hover:not(:disabled) {
+  background: var(--stroke-etched);
+  color: #fff;
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--accent-neural);
+}
+
+.layout {
+  @apply grid grid-cols-1 lg:grid-cols-12 gap-8 flex-1 overflow-hidden min-h-0;
+}
+
+.listPanel {
+  @apply lg:col-span-4 flex flex-col min-h-0;
+  background: var(--bg-parian-deep);
+  border: 1px solid var(--stroke-etched);
+  box-shadow: var(--shadow-milled);
+}
+
+.listHeader {
+  @apply p-5 flex items-center justify-between;
+  border-bottom: 1px solid var(--stroke-etched);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.listTitle {
+  @apply font-bold text-[10px] uppercase tracking-[2px];
+}
+
+.listAddButton {
+  @apply text-[10px] font-bold underline;
+}
+
+.listBody {
+  @apply flex-1 overflow-y-auto p-4 space-y-2;
+}
+
+.listBody::-webkit-scrollbar {
+  display: none;
+}
+
+.listBody {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.policyButton {
+  @apply w-full text-left p-4 border transition-all;
+}
+
+.policyButtonActive {
+  background: #fff;
+  border-color: var(--stroke-etched);
+  box-shadow: var(--shadow-milled);
+}
+
+.policyButtonInactive {
+  background: var(--bg-parian);
+  border-color: transparent;
+}
+
+.policyButtonInactive:hover {
+  border-color: rgba(26, 26, 26, 0.2);
+}
+
+.policyButtonHeader {
+  @apply flex items-center justify-between mb-2;
+}
+
+.policyName {
+  @apply font-bold text-sm uppercase truncate;
+}
+
+.policyType {
+  @apply text-[8px] font-bold px-1 py-0.5 border uppercase;
+  border-color: var(--stroke-etched);
+}
+
+.policyMeta {
+  @apply flex justify-between items-center text-[9px] font-bold uppercase;
+  opacity: 0.5;
+}
+
+.policyStatusActive {
+  color: var(--accent-neural);
+}
+
+.policyStatusDraft {
+  @apply text-amber-600;
+}
+
+.emptyState {
+  @apply py-20 text-center;
+  opacity: 0.3;
+}
+
+.emptyTitle {
+  @apply text-[10px] mt-2 font-bold uppercase tracking-widest;
+}
+
+.editorPanel {
+  @apply lg:col-span-8 flex flex-col relative min-h-0;
+  background: #fff;
+  border: 1px solid var(--stroke-etched);
+  box-shadow: var(--shadow-milled);
+}
+
+.editorHeader {
+  @apply p-4 flex items-center justify-between z-10 shrink-0;
+  border-bottom: 1px solid var(--stroke-etched);
+  background: var(--bg-parian);
+}
+
+.editorInfo {
+  @apply flex items-center space-x-3;
+}
+
+.editorIcon {
+  @apply p-2 border;
+  border-color: var(--stroke-etched);
+}
+
+.editorTitle {
+  @apply font-bold text-xs uppercase tracking-widest;
+}
+
+.editorMeta {
+  @apply text-[8px] font-mono;
+  color: var(--text-secondary);
+}
+
+.editorBody {
+  @apply flex-1 relative p-0 overflow-hidden;
+  background: var(--stroke-etched);
+}
+
+.editorTextarea {
+  @apply w-full h-full p-10 font-mono text-sm resize-none outline-none leading-relaxed;
+  background: var(--stroke-etched);
+  color: #00ffcc;
+}
+
+.editorTextarea::selection {
+  background: rgba(0, 255, 204, 0.3);
+}
+
+.aiBar {
+  @apply absolute bottom-6 left-6 right-6 flex space-x-2;
+}
+
+.aiInputWrapper {
+  @apply relative flex-1;
+}
+
+.aiInput {
+  @apply w-full px-6 py-4 text-[10px] font-mono outline-none transition-all;
+  background: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+.aiInput:focus {
+  border-color: #00ffcc;
+}
+
+.aiUnderline {
+  @apply absolute inset-x-0 bottom-0 h-[1px] transition-transform duration-500;
+  background: #00ffcc;
+  transform: scaleX(0);
+}
+
+.aiInputWrapper:focus-within .aiUnderline {
+  transform: scaleX(1);
+}
+
+.aiButton {
+  @apply px-6 py-4 text-[10px] font-bold uppercase tracking-widest transition-all;
+  background: #00ffcc;
+  color: var(--stroke-etched);
+}
+
+.aiButton:hover {
+  filter: brightness(1.1);
+}
+
+.editorEmpty {
+  @apply flex-1 flex flex-col items-center justify-center p-20 text-center;
+  color: var(--text-secondary);
+  opacity: 0.4;
+}
+
+.editorEmptyIcon {
+  @apply w-12 h-12 mb-6;
+}
+
+.editorEmptyTitle {
+  @apply text-sm font-bold uppercase tracking-[2px] mb-2;
+}
+
+.editorEmptyText {
+  @apply text-[10px];
+}

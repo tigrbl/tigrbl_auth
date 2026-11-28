@@ -8,7 +8,7 @@
 
 ## Purpose
 
-Phase 12 replaces digest-only and HMAC checkpoint signing with asymmetric, externally verifiable release attestations.
+runtime-foundation checkpoint2 replaces digest-only and HMAC checkpoint signing with asymmetric, externally verifiable release attestations.
 
 ## What is signed
 
@@ -46,10 +46,10 @@ Each signed bundle contains:
 
 Preferred CI inputs:
 
-- `TIGRBL_AUTH_RELEASE_SIGNING_KEY_FILE` — path to an Ed25519 private-key PEM
-- `TIGRBL_AUTH_RELEASE_SIGNING_KEY_PEM` — inline Ed25519 private-key PEM
-- `TIGRBL_AUTH_RELEASE_SIGNING_KEY` — file path, PEM, or inline secret used to derive a deterministic Ed25519 key
-- `TIGRBL_AUTH_RELEASE_SIGNER_ID` — signer identity label included in the attestation payload
+- `TBA_AUTH_RELEASE_SIGNING_KEY_FILE` — path to an Ed25519 private-key PEM
+- `TBA_AUTH_RELEASE_SIGNING_KEY_PEM` — inline Ed25519 private-key PEM
+- `TBA_AUTH_RELEASE_SIGNING_KEY` — file path, PEM, or inline secret used to derive a deterministic Ed25519 key
+- `TBA_AUTH_RELEASE_SIGNER_ID` — signer identity label included in the attestation payload
 
 If no key material is supplied, the tooling generates an ephemeral checkpoint signing key and writes only the public verification material into the release bundle.
 
@@ -72,7 +72,7 @@ If no key material is supplied, the tooling generates an ephemeral checkpoint si
 
 ## CI integration
 
-The Phase 12 gate is installed as `gate-60-release-signing` and is executed as part of the release-gate pipeline.
+The runtime-foundation checkpoint2 gate is installed as `gate-60-release-signing` and is executed as part of the release-gate pipeline.
 
 The release-bundle workflow now:
 

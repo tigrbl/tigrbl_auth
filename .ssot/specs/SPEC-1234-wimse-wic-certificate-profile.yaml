@@ -1,0 +1,27 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1234"
+number: 1234
+slug: "wimse-wic-certificate-profile"
+title: "WIMSE WIC certificate profile"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-creds-03#section-6.1"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Normative target
+  https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-creds-03#section-6.1
+  
+  ## Requirements
+  The layer-10 WIC concrete MUST compose the reusable X.509 certificate object with a workload identifier. The WIC profile MUST obtain the workload identifier from the certificate's URI SAN and enforce exactly one URI SAN carrying a workload identifier. Apply the WIMSE identifier rules to that value. Other permitted SAN types retain their own certificate semantics. The profile result identifies the certificate and workload identifier for the selected verifier.
+  
+  ## Verification
+  Use X.509 fixtures with a native wimse identifier, an allowed DNS SAN, a missing workload identifier, multiple workload identifiers, and invalid identifier syntax. Check consistency between the parsed certificate and WIC value. Peer authentication has separate evidence.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1140"

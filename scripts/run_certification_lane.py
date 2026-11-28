@@ -7,6 +7,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 
 def _default_report_path(lane: str) -> Path:
@@ -16,6 +18,18 @@ def _default_report_path(lane: str) -> Path:
     else:
         stem = f"test-{lane}-py{sys.version_info.major}{sys.version_info.minor}"
     return ROOT / "dist" / "test-reports" / f"{stem}.json"
+
+
+def _prepare_lane_artifacts(lane: str) -> None:
+    if lane != "interop":
+        return
+    from scripts.materialize_tier4_peer_evidence import (
+        load_counterparts,
+        load_peer_profiles,
+        materialize_external_handoff_templates,
+    )
+
+    materialize_external_handoff_templates(load_peer_profiles(), load_counterparts())
 
 
 def main() -> int:
@@ -31,6 +45,18 @@ def main() -> int:
     pytest_args = list(args.pytest_args)
     if pytest_args[:1] == ["--"]:
         pytest_args = pytest_args[1:]
+
+    _prepare_lane_artifacts(args.lane)
+
+    install_env = dict(os.environ)
+    install_env.setdefault("TBA_AUTH_INSTALL_PROFILE", f"test-{args.lane}")
+    install_cmd = [
+        sys.executable,
+        str(ROOT / "scripts" / "verify_clean_room_install_substrate.py"),
+        "--profile",
+        f"test-{args.lane}",
+    ]
+    subprocess.run(install_cmd, cwd=str(ROOT), env=install_env, check=False)
 
     pytest_cmd = [
         sys.executable,

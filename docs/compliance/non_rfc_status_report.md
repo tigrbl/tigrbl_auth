@@ -8,23 +8,20 @@
 - non_rfc_family_count: `4`
 - non_rfc_targets_with_scope_discrepancies: `0`
 - non_rfc_targets_internally_backed_now: `18`
-- focus_py313_report_count: `3`
-- focus_py313_passed_tests: `52`
-- focus_py313_collected_tests: `52`
-- focus_py313_all_passed: `True`
-- supported_py311_lane_count_green: `5`
-- validated_runtime_matrix_green: `False`
+- focus_py313_report_count: `0`
+- focus_py313_passed_tests: `0`
+- focus_py313_collected_tests: `0`
+- focus_py313_all_passed: `False`
+- supported_py311_lane_count_green: `0`
+- validated_runtime_matrix_green: `True`
 - validated_in_scope_test_lanes_green: `False`
-- migration_portability_passed: `False`
+- migration_portability_passed: `True`
 - fully_certifiable_now: `False`
 - strict_independent_claims_ready: `False`
 - certifiably_fully_non_rfc_spec_compliant_now: `False`
 
 ## Focus verification artifacts
 
-- `dist/test-reports/step8-non-rfc-oidc-contracts-py313.json`: `22` / `22` passed
-- `dist/test-reports/step8-non-rfc-surface-cli-py313.json`: `9` / `9` passed
-- `dist/test-reports/step8-non-rfc-operator-runtime-py313.json`: `21` / `21` passed
 
 ## Family summaries
 
@@ -77,4 +74,4 @@
 
 ## Detail artifact
 
-- JSON: `docs/compliance/non_rfc_status_report.json`
+- JSON: `docs\compliance\non_rfc_status_report.json`

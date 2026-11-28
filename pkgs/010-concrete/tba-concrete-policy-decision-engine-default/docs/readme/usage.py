@@ -1,0 +1,3 @@
+from tba_concrete_policy_decision_engine_default import AdminPolicy
+
+assert callable(AdminPolicy)

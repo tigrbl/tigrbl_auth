@@ -6,6 +6,6 @@
 
 - mapping_path: `compliance/mappings/test_classification.yaml`
 - category_count: `8`
-- classified_test_count: `189`
-- discovered_test_count: `189`
+- classified_test_count: `350`
+- discovered_test_count: `350`
 - target_count: `48`

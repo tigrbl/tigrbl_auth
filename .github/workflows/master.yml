@@ -1,0 +1,54 @@
+name: master
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: master-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    uses: ./.github/workflows/_quality.yml
+    permissions:
+      actions: read
+      contents: read
+      pull-requests: read
+      security-events: write
+    with:
+      python-version: '3.11'
+      run-dependency-review: false
+      run-codeql: true
+
+  contracts:
+    needs: quality
+    uses: ./.github/workflows/_contracts.yml
+    permissions:
+      attestations: write
+      artifact-metadata: write
+      contents: read
+      id-token: write
+    with:
+      python-version: '3.11'
+      artifact-name: generated-contracts
+      attest: true
+
+  certification-matrix:
+    needs: contracts
+    uses: ./.github/workflows/_certification-matrix.yml
+    permissions:
+      contents: read
+
+  evidence:
+    needs: certification-matrix
+    uses: ./.github/workflows/_evidence.yml
+    permissions:
+      contents: read
+    with:
+      python-version: '3.11'
+      artifact-name: compliance-evidence

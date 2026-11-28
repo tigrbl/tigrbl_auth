@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1174"
+number: 1174
+slug: "public-registration-and-recovery-contract"
+title: "Public Registration and Recovery Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The public registration and recovery contract defines registration, email verification, forgot-password, reset-password, and account recovery support through the public API. The contract requires safe public error disclosure, anti-enumeration behavior, tenant-aware branding/configuration support, and no exposure of admin, tenant lifecycle, developer, service-admin, diagnostics, or RPC surfaces."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Draft contract for public API registration and account recovery decomposition."
+    at: "2026-05-26T12:25:47Z"
+references: []
+body: |-
+  The public registration and recovery contract defines registration, email verification, forgot-password, reset-password, and account recovery support through the public API. The contract requires safe public error disclosure, anti-enumeration behavior, tenant-aware branding/configuration support, and no exposure of admin, tenant lifecycle, developer, service-admin, diagnostics, or RPC surfaces.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1083"
+  - "adr:1120"

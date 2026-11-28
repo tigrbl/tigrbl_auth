@@ -1,0 +1,28 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1213"
+number: 1213
+slug: "delegation-grant-lifecycle-contract"
+title: "DelegationGrant lifecycle contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "DelegationGrant lifecycle MUST be a persisted authorization lifecycle contract. Storage MUST represent grant identity, tenant and realm, delegator subject, delegate subject, delegate type, status, parent grant, source authority reference, policy version, provenance reference, effective and expiration times, revocation metadata, normalized scopes, attenuation proofs, durable graph edges, token linkage, and lifecycle audit events. Lifecycle services MUST support create, activate, replace, revoke, expire, list, inspect, and evaluate operations. Revocation, expiry, replacement, and chain collapse MUST invalidate dependent refresh, verifier, cache, and token-link state within the authorization freshness contract. OAuth/OIDC token exchange MAY consume active grants and emit protocol artifacts but MUST NOT become the canonical grant store."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted as the target contract for persisted delegation-grant lifecycle; implementation rows remain absent or partial until evidence exists."
+    at: "2026-06-14T11:50:52Z"
+references: []
+body: |-
+  DelegationGrant lifecycle MUST be a persisted authorization lifecycle contract. Storage MUST represent grant identity, tenant and realm, delegator subject, delegate subject, delegate type, status, parent grant, source authority reference, policy version, provenance reference, effective and expiration times, revocation metadata, normalized scopes, attenuation proofs, durable graph edges, token linkage, and lifecycle audit events. Lifecycle services MUST support create, activate, replace, revoke, expire, list, inspect, and evaluate operations. Revocation, expiry, replacement, and chain collapse MUST invalidate dependent refresh, verifier, cache, and token-link state within the authorization freshness contract. OAuth/OIDC token exchange MAY consume active grants and emit protocol artifacts but MUST NOT become the canonical grant store.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1124"
+  - "adr:1050"
+  - "adr:1052"
+  - "adr:1068"
+  - "adr:1123"

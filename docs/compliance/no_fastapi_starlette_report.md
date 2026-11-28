@@ -1,7 +1,7 @@
 # No FastAPI / Starlette Import and Metadata Report
 
 - Scope: `runtime package, tests, scripts, and packaging metadata`
-- Runtime root: `tigrbl_auth`
+- Runtime root: `tba_auth`
 - Tests root: `tests`
 - Scripts root: `scripts`
 - Metadata file: `pyproject.toml`

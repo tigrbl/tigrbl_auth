@@ -25,7 +25,7 @@ peer_identity:
   peer_version: 2026.03.25+fixture
   peer_operator: checkpoint-staged-external-root
 peer_runtime:
-  image_ref: ghcr.io/tigrbl-auth/peer-fixtures/tigrcorn-runner:2026-03-25
+  image_ref: ghcr.io/tba-auth/peer-fixtures/tigrcorn-runner:2026-03-25
   image_digest: sha256:84c4e193aa625892dcad3f356ff63316ab64ec84fcf49b370c219fdda014452e
   execution_style: black-box-http
 independence_attestation:

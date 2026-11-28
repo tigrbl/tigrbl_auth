@@ -14,7 +14,7 @@
 
 # Project Tree Migration Runbook
 
-1. Run `tigrbl-auth verify --scope project-tree-layout`.
-2. Run `tigrbl-auth verify --scope migration-plan`.
+1. Run `tba-auth verify --scope project-tree-layout`.
+2. Run `tba-auth verify --scope migration-plan`.
 3. Confirm boundary enforcement and wrapper hygiene remain green.
 4. Only then promote moved files from `legacy_transition` to `certified_core`.

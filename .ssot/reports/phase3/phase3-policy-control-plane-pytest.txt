@@ -1,0 +1,16 @@
+﻿
+tests/unit/test_policy_control_plane_phase3.py::test_service_identities_support_tenant_scoped_authentication_and_revocation 
+------------------------------- live log setup --------------------------------
+2026-05-05 17:58:24 [INFO] Loaded 64 runtime atoms
+PASSED                                                                   [ 10%]
+tests/unit/test_policy_control_plane_phase3.py::test_rbac_supports_inheritance_tenant_scoping_and_fine_grained_denies PASSED [ 20%]
+tests/unit/test_policy_control_plane_phase3.py::test_policy_engine_supports_abac_dynamic_conditions_simulation_and_audit PASSED [ 30%]
+tests/unit/test_policy_control_plane_phase3.py::test_delegated_administration_controls_tenant_visibility_and_client_exposure PASSED [ 40%]
+tests/unit/test_policy_control_plane_phase3.py::test_compliance_report_summarizes_cross_plane_policy_state PASSED [ 50%]
+tests/uix/test_rbac_admin.py::test_rbac_administration_supports_roles_permissions_and_assignments PASSED [ 60%]
+tests/uix/test_rbac_admin.py::test_rbac_administration_surfaces_denials PASSED [ 70%]
+tests/uix/test_abac_admin.py::test_abac_administration_supports_policies_and_attributes PASSED [ 80%]
+tests/uix/test_abac_admin.py::test_abac_administration_surfaces_denials PASSED [ 90%]
+tests/uix/test_policy_simulation.py::test_policy_simulation_returns_allow_deny_and_explanations PASSED [100%]
+
+============================= 10 passed in 1.35s ==============================

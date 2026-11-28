@@ -1,0 +1,28 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1192"
+number: 1192
+slug: "runtime-capability-truth-contract"
+title: "Runtime Capability Truth Contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Published capabilities and metadata MUST derive from runtime truth and SSOT evidence rather than unsupported static advertisement."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-06-01T10:39:56Z"
+    note: "Accepted for strategic security certification concern planning."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Linked to strategic security certification concerns ADR."
+    at: "2026-06-01T10:40:57Z"
+references: []
+body: |-
+  Published capabilities and metadata MUST derive from runtime truth and SSOT evidence rather than unsupported static advertisement.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1090"

@@ -1,0 +1,3 @@
+from tba_provider_security_proof_pkce import PkceProofProvider
+
+assert callable(PkceProofProvider)

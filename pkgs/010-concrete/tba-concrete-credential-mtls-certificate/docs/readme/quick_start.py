@@ -1,0 +1,3 @@
+from tba_concrete_credential_mtls_certificate import MtlsCertificateCredential
+
+assert callable(MtlsCertificateCredential)

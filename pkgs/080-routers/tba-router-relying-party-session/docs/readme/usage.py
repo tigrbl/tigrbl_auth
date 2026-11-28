@@ -1,0 +1,3 @@
+from tba_router_relying_party_session import require_csrf
+
+assert callable(require_csrf)

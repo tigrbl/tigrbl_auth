@@ -4,7 +4,7 @@
   "probe_environment": "local unsupported verification venv built from published pins with --ignore-requires-python",
   "application_probe": {
     "passed": true,
-    "app_factory": "tigrbl_auth.api.app.build_app",
+    "app_factory": "tba_auth.api.app.build_app",
     "message": "Application factory materialized successfully with 7 active routes and 23 active targets."
   },
   "application_type": "TigrblApp",

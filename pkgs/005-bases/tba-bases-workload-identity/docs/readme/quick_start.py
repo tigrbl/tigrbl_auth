@@ -1,0 +1,3 @@
+from tba_bases_workload_identity import WorkloadReferenceResolverBase
+
+assert callable(WorkloadReferenceResolverBase)

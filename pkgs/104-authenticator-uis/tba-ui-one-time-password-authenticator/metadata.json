@@ -1,0 +1,6 @@
+{
+  "name": "One-Time Password Authenticator UIX",
+  "description": "An interactive, high-fidelity first-party OTP/TOTP product covering enrollment, verification, step-up authentication, administration, policy simulation, and audit logging.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,20 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1138"
+number: 1138
+slug: "workload-protocol-specification-ownership"
+title: "WIMSE first for WIMSE and SPIFFE first for SPIFFE"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Each protocol capability follows the requirements of the specification and revision it claims to implement. WIMSE capabilities follow the applicable WIMSE drafts. SPIFFE capabilities follow the applicable SPIFFE specifications. When a profile incorporates another specification, it applies its own requirements together with the requirements it incorporates."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+  Each protocol capability follows the requirements of the specification and revision it claims to implement. WIMSE capabilities follow the applicable WIMSE drafts. SPIFFE capabilities follow the applicable SPIFFE specifications. When a profile incorporates another specification, it applies its own requirements together with the requirements it incorporates.
+  
+  Shared primitives MAY serve both protocols. The package exposing a protocol capability owns its protocol-specific rules, including identifier interpretation, credential validation, trust selection, and proof binding. Downstream compositions MUST preserve those rules when combining capabilities.

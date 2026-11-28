@@ -1,15 +1,15 @@
-$ /opt/pyvenv/bin/python -m pytest --noconftest -q tests/unit/test_phase7_session_logout_cluster_b.py tests/conformance/production/test_oidc_session_management.py tests/conformance/production/test_oidc_rp_initiated_logout.py tests/negative/test_cookie_and_logout_abuse_cases.py
+$ /opt/pyvenv/bin/python -m pytest --noconftest -q tests/unit/test_session_logout_cluster_b.py tests/conformance/production/test_oidc_session_management.py tests/conformance/production/test_oidc_rp_initiated_logout.py tests/negative/test_cookie_and_logout_abuse_cases.py
 
 STDOUT:
 
-tests/unit/test_phase7_session_logout_cluster_b.py::test_session_state_validation_accepts_matching_client_origin_and_salt PASSED [  4%]
-tests/unit/test_phase7_session_logout_cluster_b.py::test_session_state_validation_rejects_origin_mismatch PASSED [  9%]
-tests/unit/test_phase7_session_logout_cluster_b.py::test_validate_session_state_for_client_uses_session_salt PASSED [ 14%]
-tests/unit/test_phase7_session_logout_cluster_b.py::test_session_management_description_is_truthful_about_iframe_claims PASSED [ 19%]
-tests/unit/test_phase7_session_logout_cluster_b.py::test_validate_post_logout_redirect_uri_accepts_registered_uri PASSED [ 23%]
-tests/unit/test_phase7_session_logout_cluster_b.py::test_validate_id_token_hint_rejects_sid_mismatch PASSED [ 28%]
-tests/unit/test_phase7_session_logout_cluster_b.py::test_validate_logout_request_rejects_cross_client_misuse PASSED [ 33%]
-tests/unit/test_phase7_session_logout_cluster_b.py::test_build_logout_plan_reuses_existing_record_and_marks_replay PASSED [ 38%]
+tests/unit/test_session_logout_cluster_b.py::test_session_state_validation_accepts_matching_client_origin_and_salt PASSED [  4%]
+tests/unit/test_session_logout_cluster_b.py::test_session_state_validation_rejects_origin_mismatch PASSED [  9%]
+tests/unit/test_session_logout_cluster_b.py::test_validate_session_state_for_client_uses_session_salt PASSED [ 14%]
+tests/unit/test_session_logout_cluster_b.py::test_session_management_description_is_truthful_about_iframe_claims PASSED [ 19%]
+tests/unit/test_session_logout_cluster_b.py::test_validate_post_logout_redirect_uri_accepts_registered_uri PASSED [ 23%]
+tests/unit/test_session_logout_cluster_b.py::test_validate_id_token_hint_rejects_sid_mismatch PASSED [ 28%]
+tests/unit/test_session_logout_cluster_b.py::test_validate_logout_request_rejects_cross_client_misuse PASSED [ 33%]
+tests/unit/test_session_logout_cluster_b.py::test_build_logout_plan_reuses_existing_record_and_marks_replay PASSED [ 38%]
 tests/conformance/production/test_oidc_session_management.py::test_session_state_depends_on_client_redirect_and_salt PASSED [ 42%]
 tests/conformance/production/test_oidc_session_management.py::test_session_state_validation_is_origin_bound PASSED [ 47%]
 tests/conformance/production/test_oidc_session_management.py::test_session_management_description_remains_truthful_about_current_claims PASSED [ 52%]

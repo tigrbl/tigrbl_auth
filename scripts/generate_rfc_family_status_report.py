@@ -6,6 +6,11 @@ from typing import Any
 
 import yaml
 
+if __package__:
+    from ._surface_checks import infer_test_category as infer_category
+else:
+    from _surface_checks import infer_test_category as infer_category
+
 ROOT = Path(__file__).resolve().parents[1]
 REPORT_DIR = ROOT / 'docs' / 'compliance'
 
@@ -29,25 +34,6 @@ CATEGORY_TO_LANE = {
 
 def load_yaml(path: Path) -> Any:
     return yaml.safe_load(path.read_text(encoding='utf-8'))
-
-
-def infer_category(rel: str) -> str | None:
-    rel = rel.replace('\\', '/')
-    prefixes = {
-        'tests/unit/': 'unit',
-        'tests/integration/': 'integration',
-        'tests/runtime/': 'integration',
-        'tests/conformance/': 'conformance',
-        'tests/interop/': 'interop',
-        'tests/security/': 'security',
-        'tests/negative/': 'negative',
-        'tests/e2e/': 'e2e',
-        'tests/perf/': 'perf',
-    }
-    for prefix, category in prefixes.items():
-        if rel.startswith(prefix):
-            return category
-    return None
 
 
 def main() -> int:
@@ -88,7 +74,7 @@ def main() -> int:
         row = {
             'label': label,
             'title': str(item.get('title')),
-            'phase': str(item.get('phase')),
+            'delivery_track': str(item.get('delivery_track')),
             'profiles': list(item.get('profiles', [])),
             'scope_bucket': str(scope_item.get('scope_bucket', 'unknown')),
             'modules': modules,
@@ -130,25 +116,33 @@ def main() -> int:
             'targets_missing_conformance': [row['label'] for row in rows if not row['has_conformance_coverage']],
         })
 
+    runtime_matrix_green = bool(validated.get('summary', {}).get('runtime_matrix_green', False))
+    in_scope_test_lanes_green = bool(validated.get('summary', {}).get('in_scope_test_lanes_green', False))
+    migration_portability_passed = bool(validated.get('summary', {}).get('migration_portability_passed', False))
+
+    failures = []
+    if not runtime_matrix_green:
+        failures.append('Supported runtime-matrix evidence is still incomplete.')
+    if not in_scope_test_lanes_green:
+        failures.append('Supported in-scope certification lane evidence is still incomplete.')
+    if not migration_portability_passed:
+        failures.append('Migration portability evidence is still incomplete for both SQLite and PostgreSQL.')
+
     payload = {
         'passed': False,
         'summary': {
             'rfc_target_count': len(target_rows),
             'rfc_family_count': len(family_summaries),
             'supported_py311_lane_count_green': len(py311_passed_lanes),
-            'validated_runtime_matrix_green': bool(validated.get('summary', {}).get('runtime_matrix_green', False)),
-            'validated_in_scope_test_lanes_green': bool(validated.get('summary', {}).get('in_scope_test_lanes_green', False)),
-            'migration_portability_passed': bool(validated.get('summary', {}).get('migration_portability_passed', False)),
+            'validated_runtime_matrix_green': runtime_matrix_green,
+            'validated_in_scope_test_lanes_green': in_scope_test_lanes_green,
+            'migration_portability_passed': migration_portability_passed,
             'fully_rfc_compliant_now': bool(cert_state.get('fully_rfc_compliant_now', False)),
             'rfc_targets_with_scope_discrepancies': sum(1 for row in target_rows if row['discrepancies']),
             'rfc_targets_with_conformance_coverage': sum(1 for row in target_rows if row['has_conformance_coverage']),
             'rfc_targets_with_peer_profile_mapping': sum(1 for row in target_rows if row['peer_profiles']),
         },
-        'failures': [
-            'Supported runtime-matrix evidence is still incomplete.',
-            'Supported in-scope certification lane evidence is still incomplete.',
-            'Migration portability evidence is still incomplete for both SQLite and PostgreSQL.',
-        ],
+        'failures': failures,
         'warnings': sorted(dict.fromkeys(overall_gaps)),
         'details': {
             'py311_supported_green_lanes': sorted(py311_passed_lanes),
@@ -191,7 +185,7 @@ def main() -> int:
     lines.extend(['', '## Global blockers outside the RFC mapping layer', ''])
     lines.extend([
         '- supported runtime-matrix execution is still incomplete',
-        '- supported certification-lane execution is still incomplete across Python 3.10 and 3.12',
+        '- supported certification-lane execution is still incomplete across Python 3.10 / 3.11 / 3.12 / 3.13 / 3.14',
         '- migration portability is still incomplete for PostgreSQL and unsupported for certification in this container',
         '- Tier 3 rebuild-from-validated-runs and Tier 4 external peer bundles are still incomplete',
         '',

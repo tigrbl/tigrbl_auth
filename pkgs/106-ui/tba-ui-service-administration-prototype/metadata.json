@@ -1,0 +1,6 @@
+{
+  "name": "TigrBl Service Admin Console",
+  "description": "Workload identity control plane for managing service principals, service keys, API keys, token inspection, protected-resource metadata, validation testing, and workload audit context.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

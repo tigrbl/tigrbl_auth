@@ -1,0 +1,3 @@
+from tba_capability_token_issuance import TokenIssuanceCapability
+
+assert callable(TokenIssuanceCapability)

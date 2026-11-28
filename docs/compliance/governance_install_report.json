@@ -4,7 +4,7 @@
   "passed": true,
   "summary": {
     "required_directory_count": 7,
-    "required_file_count": 67,
+    "required_file_count": 74,
     "missing_directory_count": 0,
     "missing_file_count": 0,
     "missing_adr_coverage_count": 0

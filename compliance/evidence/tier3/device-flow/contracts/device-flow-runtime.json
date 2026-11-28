@@ -1,7 +1,7 @@
 {
   "label": "RFC 8628",
   "title": "OAuth 2.0 Device Authorization Grant",
-  "runtime_status": "phase-8-persistence-backed-device-flow",
+  "runtime_status": "persistence-backed-device-flow-runtime",
   "public_surface": [
     "/device_authorization",
     "/token"

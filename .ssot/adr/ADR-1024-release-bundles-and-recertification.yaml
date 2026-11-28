@@ -1,0 +1,43 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1024"
+number: 1024
+slug: "release-bundles-and-recertification"
+title: "Release bundles and recertification"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Release bundles SHALL contain claims, evidence, contracts, ADR material, and"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+  
+  Release bundles SHALL contain claims, evidence, contracts, ADR material, and
+  peer references derived from current governed inputs. Recertification SHALL
+  continue to track standards-boundary, runtime-resolution, and verifier-evidence
+  changes.
+  
+  Stronger certification wording is blocked when runtime-truth artifacts drift
+  from preserved release artifacts or when independent verifier evidence has not
+  been promoted for the claimed surface.
+  
+  ## State model
+  
+  - `checkpoint`: truthful progress snapshot that may retain open blockers;
+  - `candidate`: pre-release state with validated current bundle inputs;
+  - `final certified release`: state allowed only when gates, runtime truth, and
+    independent proof are aligned.
+  
+  ## Blocking conditions
+  
+  Final certified release remains blocked when any of the following hold:
+  
+  - authoritative runtime artifacts drift from preserved release artifacts;
+  - validated runtime-matrix truth is incomplete;
+  - migration portability truth is incomplete;
+  - non-independent peer fixtures are used in place of independent verifier
+    evidence.

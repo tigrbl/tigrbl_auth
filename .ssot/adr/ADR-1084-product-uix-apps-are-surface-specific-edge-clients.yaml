@@ -1,0 +1,21 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1084"
+number: 1084
+slug: "product-uix-apps-are-surface-specific-edge-clients"
+title: "Product UIX Apps Are Surface-Specific Edge Clients"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Product UIX apps are separately deployable edge clients. Each product UIX must declare one paired API surface and must not call another product API, admin surface, RPC endpoint, diagnostics endpoint, system endpoint, or tenant lifecycle path outside its authority. The legacy admin-uix remains only as an extraction source until parity is proven."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted for product UIX composition and client-boundary planning."
+    at: "2026-05-26T12:18:10Z"
+references: []
+body: |-
+  Product UIX apps are separately deployable edge clients. Each product UIX must declare one paired API surface and must not call another product API, admin surface, RPC endpoint, diagnostics endpoint, system endpoint, or tenant lifecycle path outside its authority. The legacy admin-uix remains only as an extraction source until parity is proven.

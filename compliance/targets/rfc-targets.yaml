@@ -1,12 +1,12 @@
 schema_version: 1
-package: tigrbl_auth
+package: tba_auth
 target_family: rfc
 scope: core
 targets:
 - id: oauth2.core
   label: RFC 6749
   title: OAuth 2.0 Authorization Framework
-  phase: P1
+  delivery_track: baseline-interoperability
   minimum_claim_tier: 2
   profiles:
   - baseline
@@ -14,15 +14,15 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/rfc6749.py
-  - tigrbl_auth/standards/oauth2/rfc6749_token.py
+  - tba_auth/standards/oauth2/rfc6749.py
+  - tba_auth/standards/oauth2/rfc6749_token.py
   endpoints:
   - /authorize
   - /token
 - id: oauth2.bearer
   label: RFC 6750
   title: OAuth 2.0 Bearer Token Usage
-  phase: P1
+  delivery_track: baseline-interoperability
   minimum_claim_tier: 2
   profiles:
   - baseline
@@ -30,7 +30,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/rfc6750.py
+  - tba_auth/standards/oauth2/rfc6750.py
   endpoints:
   - /token
   - /userinfo
@@ -38,7 +38,7 @@ targets:
 - id: oauth2.pkce
   label: RFC 7636
   title: Proof Key for Code Exchange by OAuth Public Clients
-  phase: P1
+  delivery_track: baseline-interoperability
   minimum_claim_tier: 2
   profiles:
   - baseline
@@ -46,14 +46,14 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/rfc7636_pkce.py
+  - tba_auth/standards/oauth2/rfc7636_pkce.py
   endpoints:
   - /authorize
   - /token
 - id: oauth2.metadata
   label: RFC 8414
   title: OAuth 2.0 Authorization Server Metadata
-  phase: P1
+  delivery_track: baseline-interoperability
   minimum_claim_tier: 2
   profiles:
   - baseline
@@ -61,14 +61,14 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/rfc8414.py
-  - tigrbl_auth/standards/oauth2/rfc8414_metadata.py
+  - tba_auth/standards/oauth2/rfc8414.py
+  - tba_auth/standards/oauth2/rfc8414_metadata.py
   endpoints:
   - /.well-known/oauth-authorization-server
 - id: http.well-known
   label: RFC 8615
   title: Well-Known Uniform Resource Identifiers (URIs)
-  phase: P1
+  delivery_track: baseline-interoperability
   minimum_claim_tier: 2
   profiles:
   - baseline
@@ -76,7 +76,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/http/well_known.py
+  - tba_auth/standards/http/well_known.py
   endpoints:
   - /.well-known/openid-configuration
   - /.well-known/oauth-authorization-server
@@ -85,7 +85,7 @@ targets:
 - id: jose.jws
   label: RFC 7515
   title: JSON Web Signature (JWS)
-  phase: P1
+  delivery_track: baseline-interoperability
   minimum_claim_tier: 2
   profiles:
   - baseline
@@ -93,11 +93,11 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/jose/rfc7515.py
+  - tba_auth/standards/jose/rfc7515.py
 - id: jose.jwe
   label: RFC 7516
   title: JSON Web Encryption (JWE)
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   profiles:
   - baseline
@@ -105,11 +105,11 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/jose/rfc7516.py
+  - tba_auth/standards/jose/rfc7516.py
 - id: jose.jwk
   label: RFC 7517
   title: JSON Web Key (JWK)
-  phase: P1
+  delivery_track: baseline-interoperability
   minimum_claim_tier: 2
   profiles:
   - baseline
@@ -117,11 +117,11 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/jose/rfc7517.py
+  - tba_auth/standards/jose/rfc7517.py
 - id: jose.jwa
   label: RFC 7518
   title: JSON Web Algorithms (JWA)
-  phase: P1
+  delivery_track: baseline-interoperability
   minimum_claim_tier: 2
   profiles:
   - baseline
@@ -129,11 +129,11 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/jose/rfc7518.py
+  - tba_auth/standards/jose/rfc7518.py
 - id: jose.jwt
   label: RFC 7519
   title: JSON Web Token (JWT)
-  phase: P1
+  delivery_track: baseline-interoperability
   minimum_claim_tier: 2
   profiles:
   - baseline
@@ -141,231 +141,232 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/jose/rfc7519.py
+  - tba_auth/standards/jose/rfc7519.py
 - id: oauth2.revocation
   label: RFC 7009
   title: OAuth 2.0 Token Revocation
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   profiles:
   - production
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/revocation.py
+  - tba_auth/standards/oauth2/revocation.py
   endpoints:
   - /revoke
 - id: oauth2.dynamic-registration
   label: RFC 7591
   title: OAuth 2.0 Dynamic Client Registration Protocol
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   profiles:
   - production
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/dynamic_client_registration.py
+  - tba_auth/standards/oauth2/dynamic_client_registration.py
   endpoints:
   - /register
 - id: oauth2.registration-management
   label: RFC 7592
   title: OAuth 2.0 Dynamic Client Registration Management Protocol
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   profiles:
   - production
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/client_registration_management.py
+  - tba_auth/standards/oauth2/client_registration_management.py
 - id: oauth2.introspection
   label: RFC 7662
   title: OAuth 2.0 Token Introspection
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   profiles:
   - production
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/introspection.py
+  - tba_auth/standards/oauth2/introspection.py
   endpoints:
   - /introspect
 - id: oauth2.native-apps
   label: RFC 8252
   title: OAuth 2.0 for Native Apps
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   profiles:
   - production
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/native_apps.py
+  - tba_auth/standards/oauth2/native_apps.py
 - id: oauth2.device
   label: RFC 8628
   title: OAuth 2.0 Device Authorization Grant
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   profiles:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/device_authorization.py
+  - tba_auth/standards/oauth2/device_authorization.py
   endpoints:
   - /device_authorization
 - id: oauth2.token-exchange
   label: RFC 8693
   title: OAuth 2.0 Token Exchange
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   profiles:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/token_exchange.py
+  - tba_auth/standards/oauth2/token_exchange.py
   endpoints:
   - /token/exchange
 - id: oauth2.mtls
   label: RFC 8705
   title: OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   profiles:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/mtls.py
+  - tba_auth/standards/oauth2/mtls.py
 - id: oauth2.resource-indicators
   label: RFC 8707
   title: Resource Indicators for OAuth 2.0
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   profiles:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/resource_indicators.py
+  - tba_auth/standards/oauth2/resource_indicators.py
 - id: oauth2.jwt-access-tokens
   label: RFC 9068
   title: JSON Web Token (JWT) Profile for OAuth 2.0 Access Tokens
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   profiles:
   - production
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/jwt_access_tokens.py
+  - tba_auth/standards/oauth2/jwt_access_tokens.py
 - id: oauth2.jar
   label: RFC 9101
   title: OAuth 2.0 JWT-Secured Authorization Request (JAR)
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   profiles:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/jar.py
+  - tba_auth/standards/oauth2/jar.py
 - id: oauth2.par
   label: RFC 9126
   title: OAuth 2.0 Pushed Authorization Requests
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   profiles:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/par.py
+  - tba_auth/standards/oauth2/par.py
   endpoints:
   - /par
 - id: oauth2.issuer-identification
   label: RFC 9207
   title: OAuth 2.0 Authorization Server Issuer Identification
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   profiles:
   - production
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/issuer_identification.py
+  - tba_auth/standards/oauth2/issuer_identification.py
 - id: oauth2.rar
   label: RFC 9396
   title: OAuth 2.0 Rich Authorization Requests
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   profiles:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/rar.py
+  - tba_auth/standards/oauth2/rar.py
 - id: oauth2.dpop
   label: RFC 9449
   title: OAuth 2.0 Demonstrating Proof-of-Possession at the Application Layer (DPoP)
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   profiles:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/dpop.py
+  - tba_auth/standards/oauth2/dpop.py
 - id: http.cookies
   label: RFC 6265
   title: HTTP State Management Mechanism
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   profiles:
+  - baseline
   - production
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/http/cookies.py
+  - tba_auth/standards/http/cookies.py
 - id: oauth2.jwt-bearer-assertions
   label: RFC 7521
   title: Assertion Framework for OAuth 2.0 Client Authentication and Authorization
     Grants
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   profiles:
   - production
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/assertion_framework.py
+  - tba_auth/standards/oauth2/assertion_framework.py
 - id: oauth2.jwt-client-auth
   label: RFC 7523
   title: JSON Web Token (JWT) Profile for OAuth 2.0 Client Authentication and Authorization
     Grants
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   profiles:
   - production
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/jwt_client_auth.py
+  - tba_auth/standards/oauth2/jwt_client_auth.py
 - id: oauth2.protected-resource-metadata
   label: RFC 9728
   title: OAuth 2.0 Protected Resource Metadata
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   profiles:
   - production
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/rfc9728.py
+  - tba_auth/standards/oauth2/rfc9728.py
   endpoints:
   - /.well-known/oauth-protected-resource
 - id: oauth2.security-bcp
   label: RFC 9700
   title: Best Current Practice for OAuth 2.0 Security
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   profiles:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/rfc9700.py
+  - tba_auth/standards/oauth2/rfc9700.py

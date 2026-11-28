@@ -1,0 +1,26 @@
+import asyncio
+
+import pytest_asyncio
+
+from tba_app_backend_public import app
+from tba_app_backend_core.surfaces import PublicRouter
+from tba_protocol_oauth.standards.authorization_server_metadata import JWKS_PATH
+
+
+@pytest_asyncio.fixture()
+async def openapi_spec() -> dict:
+    """Generate an OpenAPI specification after initializing the API surface."""
+    init = PublicRouter.initialize()
+    if asyncio.iscoroutine(init):
+        await init
+    return app.openapi()
+
+
+def test_openapi_includes_openid_configuration(openapi_spec: dict) -> None:
+    """Ensure the discovery document is documented in OpenAPI."""
+    assert "/.well-known/openid-configuration" in openapi_spec["paths"]
+
+
+def test_openapi_includes_jwks(openapi_spec: dict) -> None:
+    """Ensure the JWKS endpoint is documented in OpenAPI."""
+    assert JWKS_PATH in openapi_spec["paths"]

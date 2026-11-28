@@ -1,0 +1,21 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1142"
+number: 1142
+slug: "node-ci-publish-contract"
+title: "Node CI And NPM Publish Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines Node version matrix tests, npm package isolation, npm provenance, and publishing requirements for browser/client packages."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  Defines Node version matrix tests, npm package isolation, npm provenance, and publishing requirements for browser/client packages.
+spec_kind: "operational"
+adr_ids:
+  - "adr:1077"
+  - "adr:1071"

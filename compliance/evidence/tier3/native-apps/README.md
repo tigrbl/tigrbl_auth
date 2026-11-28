@@ -23,4 +23,4 @@ Runtime native redirect validation with loopback/private-use scheme policy and h
 
 ## Honest note
 
-This bundle preserves targeted phase-6 evidence for the selected production targets. It does not claim full-boundary certification and it does not replace the still-missing Tier 4 peer-validation work.
+This bundle preserves targeted runtime-hardening evidence for the selected production targets. It does not claim full-boundary certification and it does not replace the still-missing Tier 4 peer-validation work.

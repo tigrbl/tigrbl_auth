@@ -9,9 +9,9 @@ required_targets:
 - ASGI 3 application package
 - 'Runner profile: Uvicorn'
 required_artifacts:
-- tigrbl_auth/api/app.py
-- tigrbl_auth/gateway.py
-- tests/runtime/test_runner_uvicorn.py
+- tba_auth/api/app.py
+- tba_auth/gateway.py
+- pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_uvicorn.py
 required_peer_artifacts:
 - http-transcript.yaml
 - result.yaml

@@ -1,0 +1,3 @@
+from tba_concrete_verifiable_presentation import VerifiablePresentation
+
+assert callable(VerifiablePresentation)

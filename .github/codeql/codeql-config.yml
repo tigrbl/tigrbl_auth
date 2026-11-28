@@ -1,0 +1,8 @@
+name: tba_auth-codeql
+paths:
+  - pkgs
+  - scripts
+paths-ignore:
+  - docs
+  - dist
+  - tests

@@ -1,0 +1,21 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1129"
+number: 1129
+slug: "jose-algorithm-certification-policy-boundary"
+title: "JOSE algorithm certification policy boundary"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Decision: Certification policy owns strict JOSE algorithm readiness decisions separately from legacy discovery compatibility. Target: RFC 7518 JSON Web Algorithms at https://www.rfc-editor.org/rfc/rfc7518.html and RFC 8725 JWT Best Current Practices at https://www.rfc-editor.org/rfc/rfc8725.html. Consequences: strict certification policy reports PQC readiness, warns on classical ECDSA algorithms, and refuses RSA-family signing algorithms without removing legacy baseline support from general JWA discovery tests."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define certification-owned algorithm readiness, warning, and refusal semantics."
+    at: "2026-06-17T10:34:45Z"
+references: []
+body: |-
+  Decision: Certification policy owns strict JOSE algorithm readiness decisions separately from legacy discovery compatibility. Target: RFC 7518 JSON Web Algorithms at https://www.rfc-editor.org/rfc/rfc7518.html and RFC 8725 JWT Best Current Practices at https://www.rfc-editor.org/rfc/rfc8725.html. Consequences: strict certification policy reports PQC readiness, warns on classical ECDSA algorithms, and refuses RSA-family signing algorithms without removing legacy baseline support from general JWA discovery tests.

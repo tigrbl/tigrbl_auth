@@ -1,8 +1,0 @@
-{
-  "documents": {
-    "jwks.json": "09289cc431db29a45961b6b4967d13c0e361d3ff4a99c238db9a764e42236716",
-    "oauth-authorization-server.json": "96f92750813e6fdf01cb07d901bbb31eee10b4d518023dc7d0bcc7edd9f1fb3a",
-    "openid-configuration.json": "96f92750813e6fdf01cb07d901bbb31eee10b4d518023dc7d0bcc7edd9f1fb3a"
-  },
-  "profile": "baseline"
-}

@@ -1,0 +1,112 @@
+[project]
+name = "tba-storage-core"
+version = "0.4.0.dev5"
+description = "Tigrbl and SQLAlchemy identity tables, ORM models, migrations, persistence helpers, and table-owned operations for IAM runtimes."
+readme = "README.md"
+requires-python = ">=3.10,<3.16"
+license = "Apache-2.0"
+keywords = [
+    "tigrbl",
+    "identity",
+    "storage",
+    "sqlalchemy",
+    "tba-tables",
+    "migrations",
+    "database",
+    "iam",
+    "persistence",
+    "table-operations",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Typing :: Typed",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Security",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
+]
+dependencies = ["tigrbl==0.4.5.dev8", "tigrbl-core==0.4.5.dev6", "tba-primitives-identity==0.4.0.dev3", "tba-contracts-security-trust==0.1.1.dev1", "tigrbl-migrations>=0.4.5.dev4", "tba-storage-access-governance==0.4.0.dev3", "tba-storage-attestation==0.4.0.dev3", "tba-storage-audit==0.4.0.dev3", "tba-storage-authentication==0.4.0.dev3", "tba-storage-authority-graph==0.4.0.dev3", "tba-storage-authorization-policy==0.4.0.dev3", "tba-storage-certificate==0.4.0.dev3", "tba-storage-claims==0.4.0.dev3", "tba-storage-consent==0.4.0.dev3", "tba-storage-delegation==0.4.0.dev3", "tba-storage-did==0.4.0.dev3", "tba-storage-digital-credential==0.4.0.dev3", "tba-storage-federation==0.4.0.dev3", "tba-storage-principals==0.4.0.dev3", "tba-storage-gnap==0.4.0.dev3", "tba-storage-key-material==0.4.0.dev4", "tba-storage-oauth==0.4.0.dev3", "tba-storage-oidc==0.4.0.dev3", "tba-storage-operator==0.4.0.dev3", "tba-storage-presentation==0.4.0.dev3", "tba-storage-release-governance==0.4.0.dev3", "tba-storage-replay-protection==0.4.0.dev3", "tba-storage-residency==0.4.0.dev3", "tba-storage-scim==0.4.0.dev3", "tba-storage-security-event==0.4.0.dev3", "tba-storage-token==0.4.0.dev3", "tba-storage-tenancy==0.4.0.dev3", "tba-storage-trust-federation-graph==0.4.0.dev3", "tba-storage-webauthn==0.4.0.dev3", "tba-storage-workload-identity==0.4.0.dev3"]
+license-files = ["LICENSE", "NOTICE"]
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/001-storage/tba-storage-core#readme"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/001-storage/tba-storage-core"
+SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
+PyPI = "https://pypi.org/project/tba-storage-core/"
+Documentation = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/001-storage/tba-storage-core#readme"
+Issues = "https://github.com/tigrbl/tigrbl_auth/issues"
+
+[[project.authors]]
+name = "Jacob Stewart"
+email = "jacob@swarmauri.com"
+[build-system]
+requires = ["poetry-core>=2.2.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tba_storage_core", from = "src" }]
+include = [
+    "src/tba_storage_core/storage.toml",
+    "src/tba_storage_core/storage.lock.toml",
+]
+
+[tool.readme_standards]
+policy = "package-guide-v1"
+readme = "README.md"
+brand = "tigrbl-auth"
+brand_catalog = "../../../tools/readme/brands.toml"
+repository = "https://github.com/tigrbl/tigrbl_auth"
+ref = "master"
+package_path = "pkgs/001-storage/tba-storage-core"
+layer = "001-storage"
+lifecycle = "active"
+license_file = "LICENSE"
+notice_file = "NOTICE"
+
+[tool.readme_standards.distributions.pypi]
+name = "tba-storage-core"
+published = true
+
+[tool.readme_standards.examples.quick_start]
+source = "docs/readme/quick_start.py"
+test = "docs/readme/test_examples.py"
+language = "python"
+expected_exit_code = 0
+
+[tool.readme_standards.examples.usage]
+source = "docs/readme/usage.py"
+test = "docs/readme/test_examples.py"
+language = "python"
+expected_exit_code = 0
+
+[tool.readme_standards.statuses.readme]
+label = "CI gate"
+url = "https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"
+
+[tool.readme_standards.statuses.tests]
+label = "example source"
+url = "https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/001-storage/tba-storage-core/docs/readme/test_examples.py"
+
+[tool.readme_standards.statuses.certification]
+label = "not certified"
+url = "https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/001-storage/tba-storage-core/README.md#certification-status"
+
+[tool.readme_standards.statuses.governance]
+label = "repository policy"
+url = "https://github.com/tigrbl/tigrbl_auth/blob/master/tools/readme/POLICY.md"
+
+[tool.readme_standards.statuses.evidence]
+label = "source and CI"
+url = "https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"
+
+[dependency-groups]
+dev = ["readme-standards==0.1.3; python_version >= \"3.11\""]

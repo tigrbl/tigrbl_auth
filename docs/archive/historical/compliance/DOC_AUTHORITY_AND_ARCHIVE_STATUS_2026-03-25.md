@@ -10,7 +10,7 @@
 
 - current authoritative docs are declared explicitly in `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md`
 - historical reference/planning docs are preserved under `docs/archive/historical/`
-- non-authoritative checkpoint and phase notes are banner-marked in place where retained outside the archive tree
+- non-authoritative checkpoint and notes are banner-marked in place where retained outside the archive tree
 - certification bundles now copy only generated current-state docs and certification artifacts from the authority manifest
 
 ## Current rule

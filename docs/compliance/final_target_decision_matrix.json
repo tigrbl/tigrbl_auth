@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "package": "tigrbl_auth",
-  "phase": "P13",
+  "package": "tba_auth",
+  "delivery_track": "independent-peer-evidence",
   "fully_certifiable_now": false,
   "fully_rfc_compliant_now": false,
   "release_gates_passed": false,
@@ -15,32 +15,46 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/rfc6749.py",
-        "tigrbl_auth/standards/oauth2/rfc6749_token.py"
+        "tba_auth/standards/oauth2/rfc6749.py",
+        "tba_auth/standards/oauth2/rfc6749_token.py"
       ],
       "exposed_surface": "current: /authorize, /token; target: /authorize, /token",
       "persistence_artifact": [
-        "tigrbl_auth/tables/auth_code.py",
-        "tigrbl_auth/tables/token_record.py",
-        "tigrbl_auth/tables/auth_session.py"
+        "tba_auth/tables/auth_code.py",
+        "tba_auth/tables/token_record.py",
+        "tba_auth/tables/auth_session.py"
       ],
       "test_evidence": {
         "classes": "integration, conformance, interop",
         "paths": [
-          "tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py",
-          "tests/conformance/baseline/test_rfc6749_token_endpoint.py",
-          "tests/integration/test_auth_flows.py",
-          "tests/integration/test_authorization_code_flow.py",
-          "tests/integration/test_profile_surface_and_contract_alignment.py",
-          "tests/interop/test_peer_counterpart_catalog.py",
-          "tests/interop/test_peer_matrix_artifacts.py",
-          "tests/interop/test_tier4_promotion_fail_closed.py"
+          "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_token_endpoint.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/oauth2-core/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): browser, spa"
+      "peer_evidence": "validated preserved bundle present: browser, spa",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 6750",
@@ -50,26 +64,40 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/rfc6750.py"
+        "tba_auth/standards/oauth2/rfc6750.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/tables/token_record.py"
       ],
       "test_evidence": {
         "classes": "integration, conformance, interop",
         "paths": [
-          "tests/conformance/baseline/test_rfc6750_bearer_token.py",
-          "tests/integration/test_auth_flows.py",
-          "tests/interop/test_peer_counterpart_catalog.py",
-          "tests/interop/test_peer_matrix_artifacts.py",
-          "tests/interop/test_tier4_promotion_fail_closed.py"
+          "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6750_bearer_token.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/bearer/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): resource-server, gateway"
+      "peer_evidence": "validated preserved bundle present: resource-server, gateway",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 7636",
@@ -79,27 +107,41 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/rfc7636_pkce.py"
+        "tba_auth/standards/oauth2/rfc7636_pkce.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
-        "tigrbl_auth/tables/auth_code.py"
+        "tba_auth/tables/auth_code.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, interop",
         "paths": [
-          "tests/conformance/baseline/test_rfc7636_pkce.py",
-          "tests/integration/test_authorization_code_flow.py",
-          "tests/unit/test_auth_code_exchange_pkce.py",
-          "tests/interop/test_peer_counterpart_catalog.py",
-          "tests/interop/test_peer_matrix_artifacts.py",
-          "tests/interop/test_tier4_promotion_fail_closed.py"
+          "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc7636_pkce.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/integration/test_authorization_code_flow.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/unit/test_auth_code_exchange_pkce.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/pkce/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): browser, spa, native"
+      "peer_evidence": "validated preserved bundle present: browser, spa, native",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 8414",
@@ -109,8 +151,8 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/rfc8414.py",
-        "tigrbl_auth/standards/oauth2/rfc8414_metadata.py"
+        "tba_auth/standards/oauth2/rfc8414.py",
+        "tba_auth/standards/oauth2/rfc8414_metadata.py"
       ],
       "exposed_surface": "current: /.well-known/oauth-authorization-server; target: /.well-known/oauth-authorization-server",
       "persistence_artifact": [
@@ -119,14 +161,28 @@
       "test_evidence": {
         "classes": "integration, conformance",
         "paths": [
-          "tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py",
-          "tests/integration/test_rfc8414_metadata.py"
+          "pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/discovery/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): browser, gateway"
+      "peer_evidence": "validated preserved bundle present: browser, gateway",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 8615",
@@ -136,7 +192,7 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/http/well_known.py"
+        "tba_auth/standards/http/well_known.py"
       ],
       "exposed_surface": "current: /.well-known/openid-configuration, /.well-known/oauth-authorization-server, /.well-known/jwks.json, /.well-known/oauth-protected-resource; target: /.well-known/openid-configuration, /.well-known/oauth-authorization-server, /.well-known/jwks.json, /.well-known/oauth-protected-resource",
       "persistence_artifact": [
@@ -145,14 +201,28 @@
       "test_evidence": {
         "classes": "unit, integration",
         "paths": [
-          "tests/integration/test_profile_surface_and_contract_alignment.py",
-          "tests/unit/test_well_known_endpoints_behavior.py"
+          "pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/unit/test_well_known_endpoints_behavior.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/well-known/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): browser, gateway"
+      "peer_evidence": "validated preserved bundle present: browser, gateway",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 7515",
@@ -162,24 +232,38 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/jose/rfc7515.py"
+        "tba_auth/standards/jose/rfc7515.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
-        "tigrbl_auth/tables/service_key.py",
-        "tigrbl_auth/tables/key_rotation_event.py"
+        "tba_auth/tables/service_key.py",
+        "tba_auth/tables/key_rotation_event.py"
       ],
       "test_evidence": {
         "classes": "unit, conformance",
         "paths": [
-          "tests/conformance/baseline/test_rfc7515_jws.py",
-          "tests/unit/test_rfc7515_jws.py"
+          "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7515_jws.py",
+          "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7515_jws.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/jose/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): assertion-client"
+      "peer_evidence": "validated preserved bundle present: assertion-client",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 7516",
@@ -189,26 +273,40 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/jose/rfc7516.py",
-        "tigrbl_auth/standards/oidc/id_token.py",
-        "tigrbl_auth/standards/oidc/discovery_metadata.py"
+        "tba_auth/standards/jose/rfc7516.py",
+        "tba_auth/standards/oidc/id_token.py",
+        "tba_auth/standards/oidc/discovery_metadata.py"
       ],
       "exposed_surface": "current: \u2205; target: \u2205 [runtime-integrated-encrypted-id-token-profile]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/service_key.py",
-        "tigrbl_auth/tables/key_rotation_event.py"
+        "tba_auth/tables/service_key.py",
+        "tba_auth/tables/key_rotation_event.py"
       ],
       "test_evidence": {
         "classes": "unit",
         "paths": [
-          "tests/unit/test_rfc7516_jwe.py",
-          "tests/unit/test_oidc_id_token_encryption.py"
+          "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7516_jwe.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/unit/test_oidc_id_token_encryption.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/jwe/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): browser, native"
+      "peer_evidence": "validated preserved bundle present: browser, native",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 7517",
@@ -218,24 +316,38 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/jose/rfc7517.py"
+        "tba_auth/standards/jose/rfc7517.py"
       ],
       "exposed_surface": "current: /.well-known/jwks.json; target: /.well-known/jwks.json",
       "persistence_artifact": [
-        "tigrbl_auth/tables/service_key.py",
-        "tigrbl_auth/tables/key_rotation_event.py"
+        "tba_auth/tables/service_key.py",
+        "tba_auth/tables/key_rotation_event.py"
       ],
       "test_evidence": {
         "classes": "unit, conformance",
         "paths": [
-          "tests/conformance/baseline/test_rfc7517_jwk.py",
-          "tests/unit/test_jwks_rotation.py"
+          "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7517_jwk.py",
+          "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/jwks/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): gateway, assertion-client"
+      "peer_evidence": "validated preserved bundle present: gateway, assertion-client",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 7518",
@@ -245,24 +357,38 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/jose/rfc7518.py"
+        "tba_auth/standards/jose/rfc7518.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
-        "tigrbl_auth/tables/service_key.py",
-        "tigrbl_auth/tables/key_rotation_event.py"
+        "tba_auth/tables/service_key.py",
+        "tba_auth/tables/key_rotation_event.py"
       ],
       "test_evidence": {
         "classes": "unit, conformance",
         "paths": [
-          "tests/conformance/baseline/test_rfc7518_jwa.py",
-          "tests/unit/test_rfc7518_jwa.py"
+          "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7518_jwa.py",
+          "pkgs/120-tests/tba-tests-jose/tests/unit/test_rfc7518_jwa.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/jose/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): assertion-client"
+      "peer_evidence": "validated preserved bundle present: assertion-client",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 7519",
@@ -272,23 +398,37 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/jose/rfc7519.py"
+        "tba_auth/standards/jose/rfc7519.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/tables/token_record.py"
       ],
       "test_evidence": {
         "classes": "unit, conformance",
         "paths": [
-          "tests/conformance/baseline/test_rfc7519_jwt.py",
-          "tests/unit/test_jwtoken.py"
+          "pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7519_jwt.py",
+          "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwtoken.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/jwt/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): assertion-client"
+      "peer_evidence": "validated preserved bundle present: assertion-client",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 7009",
@@ -298,32 +438,46 @@
       "claim_tier": 3,
       "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/revocation.py",
-        "tigrbl_auth/api/rest/routers/revoke.py",
-        "tigrbl_auth/ops/revoke.py",
-        "tigrbl_auth/services/persistence.py",
-        "tigrbl_auth/tables/revoked_token.py",
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/standards/oauth2/revocation.py",
+        "tba_auth/api/rest/routers/revoke.py",
+        "tba_auth/ops/revoke.py",
+        "tba_auth/services/persistence.py",
+        "tba_auth/tables/revoked_token.py",
+        "tba_auth/tables/token_record.py"
       ],
       "exposed_surface": "current: /revoke; target: /revoke [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/revoked_token.py",
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/tables/revoked_token.py",
+        "tba_auth/tables/token_record.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance",
         "paths": [
-          "tests/conformance/production/test_rfc7009_token_revocation.py",
-          "tests/integration/test_full_workflow.py",
-          "tests/integration/test_migration_upgrade_downgrade_safety.py",
-          "tests/integration/test_persistence_lifecycle_durability.py",
-          "tests/unit/test_phase3_public_route_contracts.py"
+          "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py",
+          "pkgs/120-tests/tba-tests-administration/tests/integration/test_full_workflow.py",
+          "pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py",
+          "pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/revocation/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): assertion-client"
+      "peer_evidence": "validated preserved bundle present: assertion-client",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 7591",
@@ -333,31 +487,45 @@
       "claim_tier": 3,
       "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/dynamic_client_registration.py",
-        "tigrbl_auth/api/rest/routers/register.py",
-        "tigrbl_auth/ops/register.py",
-        "tigrbl_auth/tables/client_registration.py",
-        "tigrbl_auth/services/persistence.py"
+        "tba_auth/standards/oauth2/dynamic_client_registration.py",
+        "tba_auth/api/rest/routers/register.py",
+        "tba_auth/ops/register.py",
+        "tba_auth/tables/client_registration.py",
+        "tba_auth/services/persistence.py"
       ],
       "exposed_surface": "current: /register; target: /register [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/client.py",
-        "tigrbl_auth/tables/client_registration.py"
+        "tba_auth/tables/client.py",
+        "tba_auth/tables/client_registration.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance",
         "paths": [
-          "tests/conformance/production/test_rfc7591_dynamic_client_registration.py",
-          "tests/integration/test_persistence_lifecycle_durability.py",
-          "tests/integration/test_profile_surface_and_contract_alignment.py",
-          "tests/unit/test_phase3_public_route_contracts.py",
-          "tests/unit/test_rfc7591_client_registration_endpoint.py"
+          "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7591_dynamic_client_registration.py",
+          "pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7591_client_registration_endpoint.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/client-registration/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): client-mgmt"
+      "peer_evidence": "validated preserved bundle present: client-mgmt",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 7592",
@@ -367,33 +535,47 @@
       "claim_tier": 3,
       "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/client_registration_management.py",
-        "tigrbl_auth/tables/client_registration.py",
-        "tigrbl_auth/services/persistence.py",
-        "tigrbl_auth/api/rest/routers/register.py",
-        "tigrbl_auth/ops/register.py",
-        "tigrbl_auth/api/rpc/methods/client_registration.py",
-        "tigrbl_auth/api/rpc/schemas/client_registration.py"
+        "tba_auth/standards/oauth2/client_registration_management.py",
+        "tba_auth/tables/client_registration.py",
+        "tba_auth/services/persistence.py",
+        "tba_auth/api/rest/routers/register.py",
+        "tba_auth/ops/register.py",
+        "tba_auth/api/rpc/methods/client_registration.py",
+        "tba_auth/api/rpc/schemas/client_registration.py"
       ],
       "exposed_surface": "current: /register/{client_id}; target: /register/{client_id} [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/client.py",
-        "tigrbl_auth/tables/client_registration.py"
+        "tba_auth/tables/client.py",
+        "tba_auth/tables/client_registration.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance",
         "paths": [
-          "tests/unit/test_phase8_hardening_cluster_a.py",
-          "tests/conformance/hardening/test_rfc7592_client_registration_management.py",
-          "tests/integration/test_profile_surface_and_contract_alignment.py",
-          "tests/unit/test_phase7_advanced_surface_contracts.py",
-          "tests/unit/test_rfc7592_client_management_endpoint.py"
+          "pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc7592_client_registration_management.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_advanced_surface_contracts.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7592_client_management_endpoint.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/client-registration-management/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): client-mgmt"
+      "peer_evidence": "validated preserved bundle present: client-mgmt",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 7662",
@@ -403,29 +585,43 @@
       "claim_tier": 3,
       "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/introspection.py",
-        "tigrbl_auth/services/persistence.py",
-        "tigrbl_auth/tables/token_record.py",
-        "tigrbl_auth/tables/revoked_token.py"
+        "tba_auth/standards/oauth2/introspection.py",
+        "tba_auth/services/persistence.py",
+        "tba_auth/tables/token_record.py",
+        "tba_auth/tables/revoked_token.py"
       ],
       "exposed_surface": "current: /introspect; target: /introspect [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/tables/token_record.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance",
         "paths": [
-          "tests/conformance/production/test_rfc7662_introspection.py",
-          "tests/integration/test_migration_upgrade_downgrade_safety.py",
-          "tests/integration/test_persistence_lifecycle_durability.py",
-          "tests/integration/test_rfc7662.py",
-          "tests/unit/test_phase3_public_route_contracts.py"
+          "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7662_introspection.py",
+          "pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py",
+          "pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc7662.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/introspection/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): resource-server"
+      "peer_evidence": "validated preserved bundle present: resource-server",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 8252",
@@ -435,31 +631,45 @@
       "claim_tier": 3,
       "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/native_apps.py",
-        "tigrbl_auth/tables/client.py",
-        "tigrbl_auth/ops/authorize.py",
-        "tigrbl_auth/ops/register.py",
-        "tigrbl_auth/ops/token.py"
+        "tba_auth/standards/oauth2/native_apps.py",
+        "tba_auth/tables/client.py",
+        "tba_auth/ops/authorize.py",
+        "tba_auth/ops/register.py",
+        "tba_auth/ops/token.py"
       ],
       "exposed_surface": "current: /authorize, /token, /register, /register/{client_id}; target: /authorize, /token, /register, /register/{client_id} [runtime-validated-native-app-profile]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/client.py",
-        "tigrbl_auth/tables/client_registration.py"
+        "tba_auth/tables/client.py",
+        "tba_auth/tables/client_registration.py"
       ],
       "test_evidence": {
         "classes": "unit, conformance, interop",
         "paths": [
-          "tests/unit/test_rfc8252_native_app_redirects.py",
-          "tests/conformance/production/test_rfc8252_native_apps.py",
-          "tests/interop/test_peer_counterpart_catalog.py",
-          "tests/interop/test_peer_matrix_artifacts.py",
-          "tests/interop/test_tier4_promotion_fail_closed.py"
+          "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc8252_native_app_redirects.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc8252_native_apps.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/native-apps/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): native"
+      "peer_evidence": "validated preserved bundle present: native",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 8628",
@@ -469,36 +679,50 @@
       "claim_tier": 3,
       "profile": "hardening",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/device_authorization.py",
-        "tigrbl_auth/api/rest/routers/device_authorization.py",
-        "tigrbl_auth/ops/device_authorization.py",
-        "tigrbl_auth/tables/device_code.py",
-        "tigrbl_auth/ops/token.py",
-        "tigrbl_auth/services/persistence.py"
+        "tba_auth/standards/oauth2/device_authorization.py",
+        "tba_auth/api/rest/routers/device_authorization.py",
+        "tba_auth/ops/device_authorization.py",
+        "tba_auth/tables/device_code.py",
+        "tba_auth/ops/token.py",
+        "tba_auth/services/persistence.py"
       ],
       "exposed_surface": "current: /device_authorization; target: /device_authorization [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/device_code.py",
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/tables/device_code.py",
+        "tba_auth/tables/token_record.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, interop",
         "paths": [
-          "tests/unit/test_phase8_hardening_cluster_a.py",
-          "tests/conformance/hardening/test_rfc8628_device_authorization.py",
-          "tests/integration/test_device_code_flow.py",
-          "tests/integration/test_profile_surface_and_contract_alignment.py",
-          "tests/integration/test_rfc8628.py",
-          "tests/unit/test_phase3_public_route_contracts.py",
-          "tests/interop/test_peer_counterpart_catalog.py",
-          "tests/interop/test_peer_matrix_artifacts.py",
-          "tests/interop/test_tier4_promotion_fail_closed.py"
+          "pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8628_device_authorization.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/integration/test_device_code_flow.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8628.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/device-flow/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): device"
+      "peer_evidence": "validated preserved bundle present: device",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 8693",
@@ -508,35 +732,49 @@
       "claim_tier": 3,
       "profile": "hardening",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/token_exchange.py",
-        "tigrbl_auth/ops/token.py",
-        "tigrbl_auth/services/token_service.py",
-        "tigrbl_auth/services/persistence.py",
-        "tigrbl_auth/api/rpc/methods/token.py",
-        "tigrbl_auth/api/rpc/schemas/token.py"
+        "tba_auth/standards/oauth2/token_exchange.py",
+        "tba_auth/ops/token.py",
+        "tba_auth/services/token_service.py",
+        "tba_auth/services/persistence.py",
+        "tba_auth/api/rpc/methods/token.py",
+        "tba_auth/api/rpc/schemas/token.py"
       ],
       "exposed_surface": "current: /token/exchange; target: /token/exchange [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/tables/token_record.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, interop",
         "paths": [
-          "tests/unit/test_phase8_hardening_cluster_a.py",
-          "tests/conformance/hardening/test_rfc8693_token_exchange.py",
-          "tests/integration/test_profile_surface_and_contract_alignment.py",
-          "tests/integration/test_rfc8693_token_exchange_endpoint.py",
-          "tests/integration/test_token_exchange_flow.py",
-          "tests/unit/test_phase3_public_route_contracts.py",
-          "tests/interop/test_peer_counterpart_catalog.py",
-          "tests/interop/test_peer_matrix_artifacts.py",
-          "tests/interop/test_tier4_promotion_fail_closed.py"
+          "pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8693_token_exchange.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8693_token_exchange_endpoint.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/integration/test_token_exchange_flow.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/token-exchange/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): resource-server"
+      "peer_evidence": "validated preserved bundle present: resource-server",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 8705",
@@ -546,38 +784,54 @@
       "claim_tier": 3,
       "profile": "hardening",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/mtls.py",
-        "tigrbl_auth/standards/oauth2/rfc9700.py",
-        "tigrbl_auth/ops/token.py",
-        "tigrbl_auth/standards/oauth2/token_exchange.py",
-        "tigrbl_auth/services/token_service.py",
-        "tigrbl_auth/ops/register.py",
-        "tigrbl_auth/api/rest/schemas.py",
-        "tigrbl_auth/standards/oidc/discovery_metadata.py",
-        "tigrbl_auth/security/auth.py",
-        "tigrbl_auth/security/deps.py"
+        "tba_auth/standards/oauth2/mtls.py",
+        "tba_auth/standards/oauth2/rfc9700.py",
+        "tba_auth/ops/token.py",
+        "tba_auth/standards/oauth2/token_exchange.py",
+        "tba_auth/services/token_service.py",
+        "tba_auth/ops/register.py",
+        "tba_auth/api/rest/schemas.py",
+        "tba_auth/standards/oidc/discovery_metadata.py",
+        "tba_auth/security/auth.py",
+        "tba_auth/security/deps.py"
       ],
       "exposed_surface": "current: /token, /token/exchange; target: /token, /token/exchange [runtime-enforced-sender-constraint]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/token_record.py",
-        "tigrbl_auth/tables/client.py"
+        "tba_auth/tables/token_record.py",
+        "tba_auth/tables/client.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, interop",
         "paths": [
-          "tests/conformance/hardening/test_rfc8705_mtls.py",
-          "tests/integration/test_profile_surface_and_contract_alignment.py",
-          "tests/unit/test_phase7_advanced_surface_contracts.py",
-          "tests/interop/test_peer_counterpart_catalog.py",
-          "tests/interop/test_peer_matrix_artifacts.py",
-          "tests/interop/test_tier4_promotion_fail_closed.py",
-          "tests/unit/test_phase10_hardening_cluster_c.py"
+          "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8705_mtls.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_advanced_surface_contracts.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/mtls/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): mtls"
+      "peer_evidence": "validated preserved bundle present: mtls",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 8707",
@@ -587,33 +841,47 @@
       "claim_tier": 3,
       "profile": "hardening",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/resource_indicators.py",
-        "tigrbl_auth/ops/authorize.py",
-        "tigrbl_auth/ops/token.py",
-        "tigrbl_auth/ops/device_authorization.py",
-        "tigrbl_auth/ops/par.py",
-        "tigrbl_auth/standards/oauth2/token_exchange.py",
-        "tigrbl_auth/services/token_service.py"
+        "tba_auth/standards/oauth2/resource_indicators.py",
+        "tba_auth/ops/authorize.py",
+        "tba_auth/ops/token.py",
+        "tba_auth/ops/device_authorization.py",
+        "tba_auth/ops/par.py",
+        "tba_auth/standards/oauth2/token_exchange.py",
+        "tba_auth/services/token_service.py"
       ],
       "exposed_surface": "current: /authorize, /token, /device_authorization, /par, /token/exchange; target: /authorize, /token, /device_authorization, /par, /token/exchange [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/pushed_authorization_request.py",
-        "tigrbl_auth/tables/auth_code.py",
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/tables/pushed_authorization_request.py",
+        "tba_auth/tables/auth_code.py",
+        "tba_auth/tables/token_record.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance",
         "paths": [
-          "tests/unit/test_phase8_hardening_cluster_a.py",
-          "tests/conformance/hardening/test_rfc8707_resource_indicators.py",
-          "tests/integration/test_profile_surface_and_contract_alignment.py",
-          "tests/unit/test_phase7_advanced_surface_contracts.py"
+          "pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_a.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8707_resource_indicators.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_advanced_surface_contracts.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/resource-indicators/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): resource-server, par-jar-rar"
+      "peer_evidence": "validated preserved bundle present: resource-server, par-jar-rar",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 9068",
@@ -623,31 +891,45 @@
       "claim_tier": 3,
       "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/jwt_access_tokens.py",
-        "tigrbl_auth/services/token_service.py",
-        "tigrbl_auth/ops/login.py",
-        "tigrbl_auth/ops/token.py",
-        "tigrbl_auth/standards/oauth2/token_exchange.py"
+        "tba_auth/standards/oauth2/jwt_access_tokens.py",
+        "tba_auth/services/token_service.py",
+        "tba_auth/ops/login.py",
+        "tba_auth/ops/token.py",
+        "tba_auth/standards/oauth2/token_exchange.py"
       ],
       "exposed_surface": "current: /login, /token, /token/exchange; target: /login, /token, /token/exchange [mounted-jwt-access-token-profile]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/tables/token_record.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, interop",
         "paths": [
-          "tests/conformance/production/test_rfc9068_jwt_profile.py",
-          "tests/integration/test_profile_surface_and_contract_alignment.py",
-          "tests/unit/test_phase7_advanced_surface_contracts.py",
-          "tests/interop/test_peer_counterpart_catalog.py",
-          "tests/interop/test_peer_matrix_artifacts.py",
-          "tests/interop/test_tier4_promotion_fail_closed.py"
+          "pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_advanced_surface_contracts.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/jwt-access-token-profile/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): resource-server"
+      "peer_evidence": "validated preserved bundle present: resource-server",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 9101",
@@ -657,32 +939,46 @@
       "claim_tier": 3,
       "profile": "hardening",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/jar.py",
-        "tigrbl_auth/ops/authorize.py",
-        "tigrbl_auth/ops/par.py",
-        "tigrbl_auth/cli/artifacts.py"
+        "tba_auth/standards/oauth2/jar.py",
+        "tba_auth/ops/authorize.py",
+        "tba_auth/ops/par.py",
+        "tba_auth/cli/artifacts.py"
       ],
       "exposed_surface": "current: /authorize, /par; target: /authorize, /par [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/pushed_authorization_request.py",
-        "tigrbl_auth/tables/auth_code.py"
+        "tba_auth/tables/pushed_authorization_request.py",
+        "tba_auth/tables/auth_code.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, interop",
         "paths": [
-          "tests/conformance/hardening/test_rfc9101_jar.py",
-          "tests/integration/test_profile_surface_and_contract_alignment.py",
-          "tests/unit/test_phase7_advanced_surface_contracts.py",
-          "tests/interop/test_peer_counterpart_catalog.py",
-          "tests/interop/test_peer_matrix_artifacts.py",
-          "tests/interop/test_tier4_promotion_fail_closed.py",
-          "tests/unit/test_phase9_hardening_cluster_b.py"
+          "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9101_jar.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_advanced_surface_contracts.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/jar/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): par-jar-rar"
+      "peer_evidence": "validated preserved bundle present: par-jar-rar",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 9126",
@@ -692,32 +988,46 @@
       "claim_tier": 3,
       "profile": "hardening",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/par.py",
-        "tigrbl_auth/api/rest/routers/par.py",
-        "tigrbl_auth/ops/par.py",
-        "tigrbl_auth/ops/authorize.py",
-        "tigrbl_auth/tables/pushed_authorization_request.py"
+        "tba_auth/standards/oauth2/par.py",
+        "tba_auth/api/rest/routers/par.py",
+        "tba_auth/ops/par.py",
+        "tba_auth/ops/authorize.py",
+        "tba_auth/tables/pushed_authorization_request.py"
       ],
       "exposed_surface": "current: /par; target: /par [mounted-normalized-request-surface]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/pushed_authorization_request.py"
+        "tba_auth/tables/pushed_authorization_request.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, interop",
         "paths": [
-          "tests/conformance/hardening/test_rfc9126_par.py",
-          "tests/integration/test_profile_surface_and_contract_alignment.py",
-          "tests/unit/test_phase3_public_route_contracts.py",
-          "tests/interop/test_peer_counterpart_catalog.py",
-          "tests/interop/test_peer_matrix_artifacts.py",
-          "tests/interop/test_tier4_promotion_fail_closed.py",
-          "tests/unit/test_phase9_hardening_cluster_b.py"
+          "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9126_par.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/par/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): par-jar-rar"
+      "peer_evidence": "validated preserved bundle present: par-jar-rar",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 9207",
@@ -727,31 +1037,45 @@
       "claim_tier": 3,
       "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/issuer_identification.py",
-        "tigrbl_auth/config/deployment.py",
-        "tigrbl_auth/ops/authorize.py",
-        "tigrbl_auth/standards/oidc/discovery_metadata.py",
-        "tigrbl_auth/cli/artifacts.py"
+        "tba_auth/standards/oauth2/issuer_identification.py",
+        "tba_auth/config/deployment.py",
+        "tba_auth/ops/authorize.py",
+        "tba_auth/standards/oidc/discovery_metadata.py",
+        "tba_auth/cli/artifacts.py"
       ],
       "exposed_surface": "current: /authorize, /.well-known/openid-configuration; target: /authorize, /.well-known/openid-configuration [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/auth_code.py",
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/tables/auth_code.py",
+        "tba_auth/tables/token_record.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance",
         "paths": [
-          "tests/conformance/hardening/test_rfc9207_issuer_identification.py",
-          "tests/integration/test_profile_surface_and_contract_alignment.py",
-          "tests/unit/test_phase6_profile_discovery_runtime.py",
-          "tests/unit/test_rfc9207_issuer_identification.py",
-          "tests/unit/test_phase9_hardening_cluster_b.py"
+          "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9207_issuer_identification.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_profile_discovery_runtime.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9207_issuer_identification.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/issuer-identification/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): browser, native"
+      "peer_evidence": "validated preserved bundle present: browser, native",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 9396",
@@ -761,32 +1085,46 @@
       "claim_tier": 3,
       "profile": "hardening",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/rar.py",
-        "tigrbl_auth/ops/authorize.py",
-        "tigrbl_auth/ops/par.py",
-        "tigrbl_auth/cli/artifacts.py"
+        "tba_auth/standards/oauth2/rar.py",
+        "tba_auth/ops/authorize.py",
+        "tba_auth/ops/par.py",
+        "tba_auth/cli/artifacts.py"
       ],
       "exposed_surface": "current: /authorize, /par; target: /authorize, /par [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/pushed_authorization_request.py",
-        "tigrbl_auth/tables/auth_code.py"
+        "tba_auth/tables/pushed_authorization_request.py",
+        "tba_auth/tables/auth_code.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, interop",
         "paths": [
-          "tests/conformance/hardening/test_rfc9396_rar.py",
-          "tests/integration/test_profile_surface_and_contract_alignment.py",
-          "tests/unit/test_phase7_advanced_surface_contracts.py",
-          "tests/interop/test_peer_counterpart_catalog.py",
-          "tests/interop/test_peer_matrix_artifacts.py",
-          "tests/interop/test_tier4_promotion_fail_closed.py",
-          "tests/unit/test_phase9_hardening_cluster_b.py"
+          "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9396_rar.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_advanced_surface_contracts.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_cluster_b.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/rar/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): par-jar-rar"
+      "peer_evidence": "validated preserved bundle present: par-jar-rar",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 9449",
@@ -796,67 +1134,97 @@
       "claim_tier": 3,
       "profile": "hardening",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/dpop.py",
-        "tigrbl_auth/standards/oauth2/rfc9700.py",
-        "tigrbl_auth/ops/token.py",
-        "tigrbl_auth/standards/oauth2/token_exchange.py",
-        "tigrbl_auth/security/auth.py",
-        "tigrbl_auth/security/deps.py"
+        "tba_auth/standards/oauth2/dpop.py",
+        "tba_auth/standards/oauth2/rfc9700.py",
+        "tba_auth/ops/token.py",
+        "tba_auth/standards/oauth2/token_exchange.py",
+        "tba_auth/security/auth.py",
+        "tba_auth/security/deps.py"
       ],
       "exposed_surface": "current: /token, /token/exchange; target: /token, /token/exchange [runtime-enforced-dpop]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/tables/token_record.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, interop",
         "paths": [
-          "tests/conformance/hardening/test_rfc9449_dpop.py",
-          "tests/integration/test_profile_surface_and_contract_alignment.py",
-          "tests/unit/test_phase7_advanced_surface_contracts.py",
-          "tests/interop/test_peer_counterpart_catalog.py",
-          "tests/interop/test_peer_matrix_artifacts.py",
-          "tests/interop/test_tier4_promotion_fail_closed.py",
-          "tests/unit/test_phase10_hardening_cluster_c.py"
+          "pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc9449_dpop.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_advanced_surface_contracts.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/dpop/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): dpop"
+      "peer_evidence": "validated preserved bundle present: dpop",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 6265",
       "status": "complete-but-not-independently-peer-certified",
-      "scope_bucket": "production-completion-required",
+      "scope_bucket": "baseline-certifiable-now",
       "claim_status": "evidenced-release-gated",
       "claim_tier": 3,
-      "profile": "production",
+      "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/http/cookies.py",
-        "tigrbl_auth/standards/oidc/session_mgmt.py",
-        "tigrbl_auth/ops/login.py",
-        "tigrbl_auth/ops/authorize.py",
-        "tigrbl_auth/ops/logout.py",
-        "tigrbl_auth/tables/auth_session.py"
+        "tba_auth/standards/http/cookies.py",
+        "tba_auth/standards/oidc/session_mgmt.py",
+        "tba_auth/ops/login.py",
+        "tba_auth/ops/authorize.py",
+        "tba_auth/ops/logout.py",
+        "tba_auth/tables/auth_session.py"
       ],
       "exposed_surface": "current: /login, /authorize, /logout; target: /login, /authorize, /logout [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/auth_session.py",
-        "tigrbl_auth/tables/logout_state.py"
+        "tba_auth/tables/auth_session.py",
+        "tba_auth/tables/logout_state.py"
       ],
       "test_evidence": {
         "classes": "integration, conformance, negative",
         "paths": [
-          "tests/conformance/production/test_rfc6265_cookies.py",
-          "tests/integration/test_migration_upgrade_downgrade_safety.py",
-          "tests/integration/test_persistence_lifecycle_durability.py",
-          "tests/negative/test_cookie_and_logout_abuse_cases.py"
+          "pkgs/120-tests/tba-tests-browser-session/tests/conformance/production/test_rfc6265_cookies.py",
+          "pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py",
+          "pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/cookies/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): rp-session-logout"
+      "peer_evidence": "validated preserved bundle present: rp-session-logout",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 7521",
@@ -866,25 +1234,39 @@
       "claim_tier": 3,
       "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/assertion_framework.py",
-        "tigrbl_auth/ops/token.py",
-        "tigrbl_auth/cli/artifacts.py"
+        "tba_auth/standards/oauth2/assertion_framework.py",
+        "tba_auth/ops/token.py",
+        "tba_auth/cli/artifacts.py"
       ],
       "exposed_surface": "current: /token; target: /token [runtime-integrated-token-endpoint]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/client.py",
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/tables/client.py",
+        "tba_auth/tables/token_record.py"
       ],
       "test_evidence": {
         "classes": "unit",
         "paths": [
-          "tests/unit/test_rfc7521_assertion_framework.py"
+          "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7521_assertion_framework.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/assertion-framework/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): assertion-client"
+      "peer_evidence": "validated preserved bundle present: assertion-client",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 7523",
@@ -894,27 +1276,41 @@
       "claim_tier": 3,
       "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/jwt_client_auth.py",
-        "tigrbl_auth/ops/token.py",
-        "tigrbl_auth/ops/register.py",
-        "tigrbl_auth/standards/oidc/discovery_metadata.py",
-        "tigrbl_auth/cli/artifacts.py"
+        "tba_auth/standards/oauth2/jwt_client_auth.py",
+        "tba_auth/ops/token.py",
+        "tba_auth/ops/register.py",
+        "tba_auth/standards/oidc/discovery_metadata.py",
+        "tba_auth/cli/artifacts.py"
       ],
       "exposed_surface": "current: /token, /register, /register/{client_id}; target: /token, /register, /register/{client_id} [runtime-integrated-token-endpoint-and-registration-metadata]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/client.py",
-        "tigrbl_auth/tables/token_record.py"
+        "tba_auth/tables/client.py",
+        "tba_auth/tables/token_record.py"
       ],
       "test_evidence": {
         "classes": "unit",
         "paths": [
-          "tests/unit/test_rfc7523_jwt_profile.py"
+          "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7523_jwt_profile.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/jwt-client-auth/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): assertion-client"
+      "peer_evidence": "validated preserved bundle present: assertion-client",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 9728",
@@ -924,28 +1320,42 @@
       "claim_tier": 3,
       "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/rfc9728.py"
+        "tba_auth/standards/oauth2/rfc9728.py"
       ],
       "exposed_surface": "current: /.well-known/oauth-protected-resource; target: /.well-known/oauth-protected-resource",
       "persistence_artifact": [
-        "tigrbl_auth/tables/service.py",
-        "tigrbl_auth/tables/service_key.py"
+        "tba_auth/tables/service.py",
+        "tba_auth/tables/service_key.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, interop",
         "paths": [
-          "tests/integration/test_profile_surface_and_contract_alignment.py",
-          "tests/integration/test_rfc8414_metadata.py",
-          "tests/unit/test_rfc9728_metadata_checkpoint.py",
-          "tests/interop/test_peer_counterpart_catalog.py",
-          "tests/interop/test_peer_matrix_artifacts.py",
-          "tests/interop/test_tier4_promotion_fail_closed.py"
+          "pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/protected-resource-metadata/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): resource-server, gateway"
+      "peer_evidence": "validated preserved bundle present: resource-server, gateway",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 9700",
@@ -955,34 +1365,50 @@
       "claim_tier": 3,
       "profile": "hardening",
       "implemented_module": [
-        "tigrbl_auth/standards/oauth2/rfc9700.py",
-        "tigrbl_auth/ops/authorize.py",
-        "tigrbl_auth/ops/token.py",
-        "tigrbl_auth/standards/oidc/discovery.py",
-        "tigrbl_auth/standards/oidc/discovery_metadata.py",
-        "tigrbl_auth/cli/artifacts.py",
-        "tigrbl_auth/security/auth.py",
-        "tigrbl_auth/security/deps.py"
+        "tba_auth/standards/oauth2/rfc9700.py",
+        "tba_auth/ops/authorize.py",
+        "tba_auth/ops/token.py",
+        "tba_auth/standards/oidc/discovery.py",
+        "tba_auth/standards/oidc/discovery_metadata.py",
+        "tba_auth/cli/artifacts.py",
+        "tba_auth/security/auth.py",
+        "tba_auth/security/deps.py"
       ],
       "exposed_surface": "current: /authorize, /token, /.well-known/openid-configuration; target: /authorize, /token, /.well-known/openid-configuration [implemented-core-runtime-enforcement]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/token_record.py",
-        "tigrbl_auth/tables/client.py"
+        "tba_auth/tables/token_record.py",
+        "tba_auth/tables/client.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, negative",
         "paths": [
-          "tests/integration/test_profile_surface_and_contract_alignment.py",
-          "tests/negative/test_phase6_hardening_runtime_enforcement.py",
-          "tests/unit/test_phase6_profile_discovery_runtime.py",
-          "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
-          "tests/unit/test_phase10_hardening_cluster_c.py"
+          "pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/negative/test_hardening_runtime_enforcement.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_profile_discovery_runtime.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/security-bcp/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): gateway, resource-server, dpop, mtls"
+      "peer_evidence": "validated preserved bundle present: gateway, resource-server, dpop, mtls",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "OIDC Core 1.0",
@@ -992,30 +1418,45 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/oidc/core.py",
-        "tigrbl_auth/standards/oidc/id_token.py"
+        "tba_auth/standards/oidc/core.py",
+        "tba_auth/standards/oidc/id_token.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
-        "tigrbl_auth/tables/auth_session.py",
-        "tigrbl_auth/tables/auth_code.py",
-        "tigrbl_auth/tables/token_record.py",
-        "tigrbl_auth/tables/user.py",
-        "tigrbl_auth/tables/consent.py"
+        "tba_auth/tables/auth_session.py",
+        "tba_auth/tables/auth_code.py",
+        "tba_auth/tables/token_record.py",
+        "tba_auth/tables/user.py",
+        "tba_auth/tables/consent.py"
       ],
       "test_evidence": {
         "classes": "integration, conformance",
         "paths": [
-          "tests/conformance/baseline/test_oidc_id_token.py",
-          "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
-          "tests/integration/test_authorization_response_types.py",
-          "tests/integration/test_oidc_endpoints.py"
+          "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_oidc_id_token.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/integration/test_oauth_access_token_response.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_id_token_nonce_response.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-core/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): browser, spa"
+      "peer_evidence": "validated preserved bundle present: browser, spa",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "OIDC Discovery 1.0",
@@ -1025,7 +1466,7 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/oidc/discovery.py"
+        "tba_auth/standards/oidc/discovery.py"
       ],
       "exposed_surface": "current: /.well-known/openid-configuration; target: /.well-known/openid-configuration",
       "persistence_artifact": [
@@ -1034,19 +1475,36 @@
       "test_evidence": {
         "classes": "integration, conformance, interop",
         "paths": [
-          "tests/conformance/baseline/test_openid_configuration.py",
-          "tests/integration/test_oidc_endpoints.py",
-          "tests/integration/test_profile_surface_and_contract_alignment.py",
-          "tests/integration/test_rfc8414_metadata.py",
-          "tests/interop/test_peer_counterpart_catalog.py",
-          "tests/interop/test_peer_matrix_artifacts.py",
-          "tests/interop/test_tier4_promotion_fail_closed.py"
+          "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_configuration.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/integration/test_rfc8414_metadata.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_counterpart_catalog.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_matrix_artifacts.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_tier4_promotion_fail_closed.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/discovery/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): browser, gateway, spa"
+      "peer_evidence": "validated preserved bundle present: browser, gateway, spa",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "feat:target-oidc-discovery-1-0"
+        ],
+        "public_api": [
+          "feat:target-oidc-discovery-1-0",
+          "spc:1034-1043"
+        ],
+        "admin_uix": [
+          "spc:1056",
+          "feat:uix-enterprise-readiness-dashboard",
+          "feat:uix-redacted-config-viewer"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "OIDC UserInfo",
@@ -1056,63 +1514,91 @@
       "claim_tier": 3,
       "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/standards/oidc/userinfo.py"
+        "tba_auth/standards/oidc/userinfo.py"
       ],
       "exposed_surface": "current: /userinfo; target: /userinfo [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/user.py",
-        "tigrbl_auth/tables/token_record.py",
-        "tigrbl_auth/tables/auth_session.py"
+        "tba_auth/tables/user.py",
+        "tba_auth/tables/token_record.py",
+        "tba_auth/tables/auth_session.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance",
         "paths": [
-          "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
-          "tests/integration/test_oidc_endpoints.py",
-          "tests/unit/test_openid_userinfo_endpoint.py"
+          "pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/unit/test_openid_userinfo_endpoint.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-userinfo/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): browser"
+      "peer_evidence": "validated preserved bundle present: browser",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "OIDC Session Management",
       "status": "complete-but-not-independently-peer-certified",
-      "scope_bucket": "production-completion-required",
+      "scope_bucket": "baseline-certifiable-now",
       "claim_status": "evidenced-release-gated",
       "claim_tier": 3,
-      "profile": "production",
+      "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/standards/oidc/session_mgmt.py",
-        "tigrbl_auth/standards/http/cookies.py",
-        "tigrbl_auth/ops/login.py",
-        "tigrbl_auth/ops/authorize.py",
-        "tigrbl_auth/ops/logout.py",
-        "tigrbl_auth/tables/auth_session.py",
-        "tigrbl_auth/tables/auth_code.py",
-        "tigrbl_auth/services/persistence.py"
+        "tba_auth/standards/oidc/session_mgmt.py",
+        "tba_auth/standards/http/cookies.py",
+        "tba_auth/ops/login.py",
+        "tba_auth/ops/authorize.py",
+        "tba_auth/ops/logout.py",
+        "tba_auth/tables/auth_session.py",
+        "tba_auth/tables/auth_code.py",
+        "tba_auth/services/persistence.py"
       ],
       "exposed_surface": "current: /login, /authorize, /logout; target: /login, /authorize, /logout [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/auth_session.py",
-        "tigrbl_auth/tables/logout_state.py"
+        "tba_auth/tables/auth_session.py",
+        "tba_auth/tables/logout_state.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, negative",
         "paths": [
-          "tests/conformance/production/test_oidc_session_management.py",
-          "tests/integration/test_migration_upgrade_downgrade_safety.py",
-          "tests/integration/test_persistence_lifecycle_durability.py",
-          "tests/negative/test_cookie_and_logout_abuse_cases.py",
-          "tests/unit/test_phase7_session_logout_cluster_b.py"
+          "pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py",
+          "pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py",
+          "pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-session-management/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): rp-session-logout"
+      "peer_evidence": "validated preserved bundle present: rp-session-logout",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "OIDC RP-Initiated Logout",
@@ -1122,32 +1608,46 @@
       "claim_tier": 3,
       "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/standards/oidc/rp_initiated_logout.py",
-        "tigrbl_auth/api/rest/routers/logout.py",
-        "tigrbl_auth/ops/logout.py",
-        "tigrbl_auth/tables/logout_state.py",
-        "tigrbl_auth/tables/client_registration.py",
-        "tigrbl_auth/services/persistence.py"
+        "tba_auth/standards/oidc/rp_initiated_logout.py",
+        "tba_auth/api/rest/routers/logout.py",
+        "tba_auth/ops/logout.py",
+        "tba_auth/tables/logout_state.py",
+        "tba_auth/tables/client_registration.py",
+        "tba_auth/services/persistence.py"
       ],
       "exposed_surface": "current: /logout; target: /logout [mounted]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/logout_state.py",
-        "tigrbl_auth/tables/auth_session.py"
+        "tba_auth/tables/logout_state.py",
+        "tba_auth/tables/auth_session.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, negative",
         "paths": [
-          "tests/conformance/production/test_oidc_rp_initiated_logout.py",
-          "tests/integration/test_migration_upgrade_downgrade_safety.py",
-          "tests/integration/test_persistence_lifecycle_durability.py",
-          "tests/negative/test_cookie_and_logout_abuse_cases.py",
-          "tests/unit/test_phase7_session_logout_cluster_b.py"
+          "pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py",
+          "pkgs/120-tests/tba-tests-storage/tests/integration/test_migration_upgrade_downgrade_safety.py",
+          "pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-rp-initiated-logout/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): rp-session-logout"
+      "peer_evidence": "validated preserved bundle present: rp-session-logout",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "OIDC Front-Channel Logout",
@@ -1157,34 +1657,50 @@
       "claim_tier": 3,
       "profile": "hardening",
       "implemented_module": [
-        "tigrbl_auth/standards/oidc/frontchannel_logout.py",
-        "tigrbl_auth/standards/oidc/rp_initiated_logout.py",
-        "tigrbl_auth/ops/logout.py",
-        "tigrbl_auth/tables/logout_state.py",
-        "tigrbl_auth/tables/client_registration.py",
-        "tigrbl_auth/services/persistence.py",
-        "tigrbl_auth/api/rest/shared.py",
-        "tigrbl_auth/standards/oidc/discovery_metadata.py",
-        "tigrbl_auth/cli/artifacts.py"
+        "tba_auth/standards/oidc/frontchannel_logout.py",
+        "tba_auth/standards/oidc/rp_initiated_logout.py",
+        "tba_auth/ops/logout.py",
+        "tba_auth/tables/logout_state.py",
+        "tba_auth/tables/client_registration.py",
+        "tba_auth/services/persistence.py",
+        "tba_auth/api/rest/shared.py",
+        "tba_auth/standards/oidc/discovery_metadata.py",
+        "tba_auth/cli/artifacts.py"
       ],
       "exposed_surface": "current: /logout; target: /logout [fanout-planned-on-mounted-logout-route]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/logout_state.py",
-        "tigrbl_auth/tables/auth_session.py"
+        "tba_auth/tables/logout_state.py",
+        "tba_auth/tables/auth_session.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, negative",
         "paths": [
-          "tests/conformance/hardening/test_oidc_frontchannel_logout.py",
-          "tests/integration/test_persistence_lifecycle_durability.py",
-          "tests/negative/test_cookie_and_logout_abuse_cases.py",
-          "tests/unit/test_phase10_hardening_cluster_c.py"
+          "pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_frontchannel_logout.py",
+          "pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-frontchannel-logout/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): rp-session-logout"
+      "peer_evidence": "validated preserved bundle present: rp-session-logout",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "OIDC Back-Channel Logout",
@@ -1194,45 +1710,61 @@
       "claim_tier": 3,
       "profile": "hardening",
       "implemented_module": [
-        "tigrbl_auth/standards/oidc/backchannel_logout.py",
-        "tigrbl_auth/standards/oidc/rp_initiated_logout.py",
-        "tigrbl_auth/ops/logout.py",
-        "tigrbl_auth/tables/logout_state.py",
-        "tigrbl_auth/tables/client_registration.py",
-        "tigrbl_auth/services/persistence.py",
-        "tigrbl_auth/api/rest/shared.py",
-        "tigrbl_auth/standards/oidc/discovery_metadata.py",
-        "tigrbl_auth/cli/artifacts.py"
+        "tba_auth/standards/oidc/backchannel_logout.py",
+        "tba_auth/standards/oidc/rp_initiated_logout.py",
+        "tba_auth/ops/logout.py",
+        "tba_auth/tables/logout_state.py",
+        "tba_auth/tables/client_registration.py",
+        "tba_auth/services/persistence.py",
+        "tba_auth/api/rest/shared.py",
+        "tba_auth/standards/oidc/discovery_metadata.py",
+        "tba_auth/cli/artifacts.py"
       ],
       "exposed_surface": "current: /logout; target: /logout [fanout-planned-on-mounted-logout-route]",
       "persistence_artifact": [
-        "tigrbl_auth/tables/logout_state.py",
-        "tigrbl_auth/tables/auth_session.py"
+        "tba_auth/tables/logout_state.py",
+        "tba_auth/tables/auth_session.py"
       ],
       "test_evidence": {
         "classes": "unit, integration, conformance, negative",
         "paths": [
-          "tests/conformance/hardening/test_oidc_backchannel_logout.py",
-          "tests/integration/test_persistence_lifecycle_durability.py",
-          "tests/negative/test_cookie_and_logout_abuse_cases.py",
-          "tests/unit/test_phase10_hardening_cluster_c.py"
+          "pkgs/120-tests/tba-tests-oidc/tests/conformance/hardening/test_oidc_backchannel_logout.py",
+          "pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/unit/test_hardening_sender_constraints.py",
+          "pkgs/120-tests/tba-tests-oidc/tests/unit/test_hardening_logout.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_hardening_discovery_contract.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-backchannel-logout/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): rp-session-logout"
+      "peer_evidence": "validated preserved bundle present: rp-session-logout",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "OpenAPI 3.1 / 3.2 compatible public contract",
       "status": "complete-but-not-independently-peer-certified",
       "scope_bucket": "baseline-certifiable-now",
-      "claim_status": "evidenced-release-gated",
+      "claim_status": "generated-live-from-deployment-metadata",
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/api/rest",
-        "tigrbl_auth/api/surfaces.py"
+        "tba_auth/api/rest",
+        "tba_auth/api/surfaces.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
@@ -1241,32 +1773,46 @@
       "test_evidence": {
         "classes": "unit, integration, e2e",
         "paths": [
-          "tests/e2e/test_release_gate_catalog.py",
-          "tests/integration/test_profile_surface_and_contract_alignment.py",
-          "tests/unit/test_contract_generation_live.py"
+          "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/contracts/openapi/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): ops-cli"
+      "peer_evidence": "validated preserved bundle present: ops-cli",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "OpenRPC 1.4.x admin/control-plane contract",
       "status": "complete-but-not-independently-peer-certified",
       "scope_bucket": "production-completion-required",
-      "claim_status": "evidenced-release-gated",
+      "claim_status": "implementation-backed-generated-from-rpc-registry",
       "claim_tier": 3,
-      "profile": "baseline",
+      "profile": "production",
       "implemented_module": [
-        "tigrbl_auth/api/rpc/__init__.py",
-        "tigrbl_auth/api/rpc/registry.py",
-        "tigrbl_auth/api/rpc/methods",
-        "tigrbl_auth/api/rpc/schemas",
-        "tigrbl_auth/api/surfaces.py",
-        "tigrbl_auth/cli/artifacts.py",
-        "tigrbl_auth/cli/reports.py",
-        "tigrbl_auth/config/deployment.py"
+        "tba_auth/api/rpc/__init__.py",
+        "tba_auth/api/rpc/registry.py",
+        "tba_auth/api/rpc/methods",
+        "tba_auth/api/rpc/schemas",
+        "tba_auth/api/surfaces.py",
+        "tba_auth/cli/artifacts.py",
+        "tba_auth/cli/reports.py",
+        "tba_auth/config/deployment.py"
       ],
       "exposed_surface": "current: /rpc; target: /rpc [implementation-backed]",
       "persistence_artifact": [
@@ -1275,15 +1821,29 @@
       "test_evidence": {
         "classes": "unit, e2e",
         "paths": [
-          "tests/e2e/test_release_gate_catalog.py",
-          "tests/unit/test_contract_generation_live.py",
-          "tests/unit/test_rpc_registry_live.py"
+          "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_contract_generation_live.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_rpc_registry_live.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/contracts/openrpc/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): ops-cli"
+      "peer_evidence": "validated preserved bundle present: ops-cli",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "ASGI 3 application package",
@@ -1293,17 +1853,17 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/api/app.py",
-        "tigrbl_auth/app.py",
-        "tigrbl_auth/plugin.py",
-        "tigrbl_auth/gateway.py",
-        "tigrbl_auth/config/deployment.py",
-        "tigrbl_auth/runtime/__init__.py",
-        "tigrbl_auth/runtime/types.py",
-        "tigrbl_auth/runtime/base.py",
-        "tigrbl_auth/runtime/plan.py",
-        "tigrbl_auth/runtime/registry.py",
-        "tigrbl_auth/cli/runtime.py"
+        "tba_auth/api/app.py",
+        "tba_auth/app.py",
+        "tba_auth/plugin.py",
+        "tba_auth/gateway.py",
+        "tba_auth/config/deployment.py",
+        "tba_auth/runtime/__init__.py",
+        "tba_auth/runtime/types.py",
+        "tba_auth/runtime/base.py",
+        "tba_auth/runtime/plan.py",
+        "tba_auth/runtime/registry.py",
+        "tba_auth/cli/runtime.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
@@ -1312,19 +1872,33 @@
       "test_evidence": {
         "classes": "unit, integration, conformance",
         "paths": [
-          "tests/integration/test_profile_surface_and_contract_alignment.py",
-          "tests/unit/test_deployment_resolver.py",
-          "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-          "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
-          "tests/unit/test_phase3_runtime_launcher.py",
-          "tests/runtime/test_runner_invariance.py",
-          "tests/conformance/operator/test_cli_serve_runtime.py"
+          "pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_deployment_resolver.py",
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/unit/test_claim_boundary_rebaseline.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/asgi-application/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): runner-uvicorn, runner-hypercorn, runner-tigrcorn"
+      "peer_evidence": "validated preserved bundle present: runner-uvicorn, runner-hypercorn, runner-tigrcorn",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "Runner profile: Uvicorn",
@@ -1334,15 +1908,15 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/api/app.py",
-        "tigrbl_auth/gateway.py",
-        "tigrbl_auth/cli/handlers.py",
-        "tigrbl_auth/config/deployment.py",
-        "tigrbl_auth/runtime/registry.py",
-        "tigrbl_auth/runtime/plan.py",
-        "tigrbl_auth/runtime/uvicorn.py",
-        "tigrbl_auth/cli/runtime.py",
-        "tigrbl_auth/cli/reports.py"
+        "tba_auth/api/app.py",
+        "tba_auth/gateway.py",
+        "tba_auth/cli/handlers.py",
+        "tba_auth/config/deployment.py",
+        "tba_auth/runtime/registry.py",
+        "tba_auth/runtime/plan.py",
+        "tba_auth/runtime/uvicorn.py",
+        "tba_auth/cli/runtime.py",
+        "tba_auth/cli/reports.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
@@ -1351,19 +1925,33 @@
       "test_evidence": {
         "classes": "unit, integration, conformance",
         "paths": [
-          "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-          "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
-          "tests/unit/test_runtime_cfg.py",
-          "tests/unit/test_phase3_runtime_launcher.py",
-          "tests/runtime/test_runner_uvicorn.py",
-          "tests/runtime/test_runner_invariance.py",
-          "tests/conformance/operator/test_cli_serve_runtime.py"
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/unit/test_claim_boundary_rebaseline.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_uvicorn.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/runner-uvicorn/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): runner-uvicorn"
+      "peer_evidence": "validated preserved bundle present: runner-uvicorn",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "Runner profile: Hypercorn",
@@ -1373,15 +1961,15 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/api/app.py",
-        "tigrbl_auth/gateway.py",
-        "tigrbl_auth/cli/handlers.py",
-        "tigrbl_auth/config/deployment.py",
-        "tigrbl_auth/runtime/registry.py",
-        "tigrbl_auth/runtime/plan.py",
-        "tigrbl_auth/runtime/hypercorn.py",
-        "tigrbl_auth/cli/runtime.py",
-        "tigrbl_auth/cli/reports.py"
+        "tba_auth/api/app.py",
+        "tba_auth/gateway.py",
+        "tba_auth/cli/handlers.py",
+        "tba_auth/config/deployment.py",
+        "tba_auth/runtime/registry.py",
+        "tba_auth/runtime/plan.py",
+        "tba_auth/runtime/hypercorn.py",
+        "tba_auth/cli/runtime.py",
+        "tba_auth/cli/reports.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
@@ -1390,19 +1978,33 @@
       "test_evidence": {
         "classes": "unit, integration, conformance",
         "paths": [
-          "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-          "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
-          "tests/unit/test_runtime_cfg.py",
-          "tests/unit/test_phase3_runtime_launcher.py",
-          "tests/runtime/test_runner_hypercorn.py",
-          "tests/runtime/test_runner_invariance.py",
-          "tests/conformance/operator/test_cli_serve_runtime.py"
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/unit/test_claim_boundary_rebaseline.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_hypercorn.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/runner-hypercorn/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): runner-hypercorn"
+      "peer_evidence": "validated preserved bundle present: runner-hypercorn",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "Runner profile: Tigrcorn",
@@ -1412,15 +2014,15 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/api/app.py",
-        "tigrbl_auth/gateway.py",
-        "tigrbl_auth/cli/handlers.py",
-        "tigrbl_auth/config/deployment.py",
-        "tigrbl_auth/runtime/registry.py",
-        "tigrbl_auth/runtime/plan.py",
-        "tigrbl_auth/runtime/tigrcorn.py",
-        "tigrbl_auth/cli/runtime.py",
-        "tigrbl_auth/cli/reports.py"
+        "tba_auth/api/app.py",
+        "tba_auth/gateway.py",
+        "tba_auth/cli/handlers.py",
+        "tba_auth/config/deployment.py",
+        "tba_auth/runtime/registry.py",
+        "tba_auth/runtime/plan.py",
+        "tba_auth/runtime/tigrcorn.py",
+        "tba_auth/cli/runtime.py",
+        "tba_auth/cli/reports.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
@@ -1429,19 +2031,33 @@
       "test_evidence": {
         "classes": "unit, integration, conformance",
         "paths": [
-          "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-          "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
-          "tests/unit/test_runtime_cfg.py",
-          "tests/unit/test_phase3_runtime_launcher.py",
-          "tests/runtime/test_runner_tigrcorn.py",
-          "tests/runtime/test_runner_invariance.py",
-          "tests/conformance/operator/test_cli_serve_runtime.py"
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/unit/test_claim_boundary_rebaseline.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runner_adapter_runtime_layer.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_cfg.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_tigrcorn.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/runner-tigrcorn/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): runner-tigrcorn"
+      "peer_evidence": "validated preserved bundle present: runner-tigrcorn",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "CLI operator surface",
@@ -1451,16 +2067,16 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/cli/main.py",
-        "tigrbl_auth/cli/metadata.py",
-        "tigrbl_auth/cli/handlers.py",
-        "tigrbl_auth/cli/runtime.py",
-        "tigrbl_auth/cli/reports.py",
-        "tigrbl_auth/services/operator_service.py",
-        "tigrbl_auth/services/audit_service.py",
-        "tigrbl_auth/services/client_service.py",
-        "tigrbl_auth/services/identity_service.py",
-        "tigrbl_auth/services/session_service.py"
+        "tba_auth/cli/main.py",
+        "tba_auth/cli/metadata.py",
+        "tba_auth/cli/handlers.py",
+        "tba_auth/cli/runtime.py",
+        "tba_auth/cli/reports.py",
+        "tba_auth/services/operator_service.py",
+        "tba_auth/services/audit_service.py",
+        "tba_auth/services/client_service.py",
+        "tba_auth/services/identity_service.py",
+        "tba_auth/services/session_service.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
@@ -1469,22 +2085,36 @@
       "test_evidence": {
         "classes": "unit, conformance",
         "paths": [
-          "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-          "tests/unit/test_cli_surface_checkpoint.py",
-          "tests/unit/test_phase3_runtime_launcher.py",
-          "tests/unit/test_phase4_cli_contract.py",
-          "tests/unit/test_phase5_operator_service_layer.py",
-          "tests/conformance/operator/test_cli_serve_runtime.py",
-          "tests/conformance/operator/test_cli_resource_lifecycle.py",
-          "tests/conformance/operator/test_cli_keys_lifecycle.py",
-          "tests/conformance/operator/test_cli_import_export.py",
-          "tests/conformance/operator/test_cli_bootstrap_migrate.py"
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/unit/test_claim_boundary_rebaseline.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_surface_checkpoint.py",
+          "pkgs/120-tests/tba-tests-runtime/tests/unit/test_runtime_launcher.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/cli-operator-surface/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): ops-cli"
+      "peer_evidence": "validated preserved bundle present: ops-cli",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "Bootstrap and migration lifecycle",
@@ -1494,11 +2124,11 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/cli/main.py",
-        "tigrbl_auth/cli/metadata.py",
-        "tigrbl_auth/cli/handlers.py",
-        "tigrbl_auth/cli/project_tree.py",
-        "tigrbl_auth/services/persistence.py"
+        "tba_auth/cli/main.py",
+        "tba_auth/cli/metadata.py",
+        "tba_auth/cli/handlers.py",
+        "tba_auth/cli/project_tree.py",
+        "tba_auth/services/persistence.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
@@ -1507,16 +2137,30 @@
       "test_evidence": {
         "classes": "unit, conformance, e2e",
         "paths": [
-          "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-          "tests/e2e/test_release_gate_catalog.py",
-          "tests/unit/test_phase4_cli_contract.py",
-          "tests/conformance/operator/test_cli_bootstrap_migrate.py"
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/unit/test_claim_boundary_rebaseline.py",
+          "pkgs/120-tests/tba-tests-release/tests/e2e/test_release_gate_catalog.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/bootstrap-migration/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): ops-cli"
+      "peer_evidence": "validated preserved bundle present: ops-cli",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "Key lifecycle and JWKS publication",
@@ -1526,12 +2170,12 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/cli/metadata.py",
-        "tigrbl_auth/cli/handlers.py",
-        "tigrbl_auth/api/rpc/methods/keys.py",
-        "tigrbl_auth/standards/jose/rfc7517.py",
-        "tigrbl_auth/services/key_management.py",
-        "tigrbl_auth/services/operator_service.py"
+        "tba_auth/cli/metadata.py",
+        "tba_auth/cli/handlers.py",
+        "tba_auth/api/rpc/methods/keys.py",
+        "tba_auth/standards/jose/rfc7517.py",
+        "tba_auth/services/key_management.py",
+        "tba_auth/services/operator_service.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
@@ -1540,18 +2184,32 @@
       "test_evidence": {
         "classes": "unit, conformance",
         "paths": [
-          "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-          "tests/unit/test_jwks_rotation.py",
-          "tests/unit/test_rpc_registry_live.py",
-          "tests/unit/test_phase4_cli_contract.py",
-          "tests/unit/test_phase5_operator_service_layer.py",
-          "tests/conformance/operator/test_cli_keys_lifecycle.py"
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/unit/test_claim_boundary_rebaseline.py",
+          "pkgs/120-tests/tba-tests-jose/tests/unit/test_jwks_rotation.py",
+          "pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_rpc_registry_live.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/key-lifecycle-jwks/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): ops-cli"
+      "peer_evidence": "validated preserved bundle present: ops-cli",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "Import/export portability",
@@ -1561,10 +2219,10 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/cli/metadata.py",
-        "tigrbl_auth/cli/handlers.py",
-        "tigrbl_auth/services/import_export_service.py",
-        "tigrbl_auth/services/operator_service.py"
+        "tba_auth/cli/metadata.py",
+        "tba_auth/cli/handlers.py",
+        "tba_auth/services/import_export_service.py",
+        "tba_auth/services/operator_service.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
@@ -1573,16 +2231,30 @@
       "test_evidence": {
         "classes": "unit, conformance",
         "paths": [
-          "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-          "tests/unit/test_phase4_cli_contract.py",
-          "tests/unit/test_phase5_operator_service_layer.py",
-          "tests/conformance/operator/test_cli_import_export.py"
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/unit/test_claim_boundary_rebaseline.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_cli_contract.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/unit/test_operator_service_layer.py",
+          "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/import-export-portability/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): ops-cli"
+      "peer_evidence": "validated preserved bundle present: ops-cli",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "Release bundle and signature verification",
@@ -1592,9 +2264,9 @@
       "claim_tier": 3,
       "profile": "baseline",
       "implemented_module": [
-        "tigrbl_auth/cli/reports.py",
-        "tigrbl_auth/cli/handlers.py",
-        "tigrbl_auth/cli/artifacts.py"
+        "tba_auth/cli/reports.py",
+        "tba_auth/cli/handlers.py",
+        "tba_auth/cli/artifacts.py"
       ],
       "exposed_surface": "\u2205",
       "persistence_artifact": [
@@ -1603,16 +2275,30 @@
       "test_evidence": {
         "classes": "unit, security",
         "paths": [
-          "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-          "tests/security/test_release_bundle_signing.py",
-          "tests/unit/test_phase1_published_dependency_model.py",
-          "tests/security/test_phase12_sender_constraint_replay.py"
+          "pkgs/120-tests/tba-tests-governance-release-certification/tests/unit/test_claim_boundary_rebaseline.py",
+          "pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py",
+          "pkgs/120-tests/tba-tests-release/tests/unit/test_published_dependency_model.py",
+          "pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py"
         ]
       },
       "evidence_refs": [
         "compliance/evidence/tier3/release-bundle-signing/"
       ],
-      "peer_evidence": "none preserved; candidate profile(s): ops-cli"
+      "peer_evidence": "validated preserved bundle present: ops-cli",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     }
   ],
   "partition": {
@@ -1670,7 +2356,7 @@
     "partial_deferred": [],
     "out_of_scope": [
       "RFC 7800",
-      "RFC 7952",
+      "RFC 8417",
       "RFC 8291",
       "RFC 8812",
       "RFC 8932",
@@ -1691,17 +2377,45 @@
       "kind": "extension-quarantine",
       "reason": "Optional hardening extension not yet promoted into the certified core boundary.",
       "implemented_module": [
-        "tigrbl_auth/standards/jose/rfc7800.py"
-      ]
+        "tba_auth/standards/jose/rfc7800.py"
+      ],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
-      "target": "RFC 7952",
+      "target": "RFC 8417",
       "status": "out-of-scope",
       "kind": "extension-quarantine",
       "reason": "Outside the default OAuth 2.0 / OIDC auth-server certification boundary.",
       "implemented_module": [
-        "tigrbl_auth/extensions/rfc7952.py"
-      ]
+        "pkgs/050-protocols/tba-protocol-security-event-set/src/tba_protocol_security_event_set/__init__.py"
+      ],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 8291",
@@ -1709,8 +2423,22 @@
       "kind": "extension-quarantine",
       "reason": "Web Push is not part of the certified auth-core boundary.",
       "implemented_module": [
-        "tigrbl_auth/extensions/rfc8291.py"
-      ]
+        "tba_auth/extensions/rfc8291.py"
+      ],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 8812",
@@ -1718,8 +2446,22 @@
       "kind": "extension-quarantine",
       "reason": "WebAuthn is extension work and not part of the default certified boundary.",
       "implemented_module": [
-        "tigrbl_auth/extensions/rfc8812.py"
-      ]
+        "tba_auth/extensions/rfc8812.py"
+      ],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 8932",
@@ -1727,64 +2469,190 @@
       "kind": "extension-quarantine",
       "reason": "RFC 8932 is not an OAuth/OIDC auth-core target and remains quarantined from certification claims.",
       "implemented_module": [
-        "tigrbl_auth/extensions/rfc8932.py"
-      ]
+        "tba_auth/extensions/rfc8932.py"
+      ],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "OAuth 2.1 alignment profile",
       "status": "out-of-scope",
       "kind": "alignment-only",
       "reason": "Track draft-era alignment only. Do not emit as a final RFC compliance claim.",
-      "implemented_module": []
+      "implemented_module": [],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "SAML IdP/SP",
       "status": "out-of-scope",
       "kind": "out-of-scope-baseline",
       "reason": "explicitly excluded from the default certification boundary",
-      "implemented_module": []
+      "implemented_module": [],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "LDAP/AD federation",
       "status": "out-of-scope",
       "kind": "out-of-scope-baseline",
       "reason": "explicitly excluded from the default certification boundary",
-      "implemented_module": []
+      "implemented_module": [],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "SCIM",
       "status": "out-of-scope",
       "kind": "out-of-scope-baseline",
       "reason": "explicitly excluded from the default certification boundary",
-      "implemented_module": []
+      "implemented_module": [],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "full authorization-policy platform",
       "status": "out-of-scope",
       "kind": "out-of-scope-baseline",
       "reason": "explicitly excluded from the default certification boundary",
-      "implemented_module": []
+      "implemented_module": [],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "Supabase-style data-plane authorization",
       "status": "out-of-scope",
       "kind": "out-of-scope-baseline",
       "reason": "explicitly excluded from the default certification boundary",
-      "implemented_module": []
+      "implemented_module": [],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "framework-local auth subsystem",
       "status": "out-of-scope",
       "kind": "out-of-scope-baseline",
       "reason": "explicitly excluded from the default certification boundary",
-      "implemented_module": []
+      "implemented_module": [],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "Keycloak-scale federation breadth",
       "status": "out-of-scope",
       "kind": "out-of-scope-baseline",
       "reason": "explicitly excluded from the default certification boundary",
-      "implemented_module": []
+      "implemented_module": [],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     }
   ],
   "validated_execution_artifact_count": 0,
@@ -1792,5 +2660,6 @@
   "in_scope_test_lanes_green": false,
   "migration_portability_passed": false,
   "tier3_evidence_rebuilt_from_validated_runs": false,
-  "tier4_bundle_promotion_complete": false
+  "tier4_bundle_promotion_complete": false,
+  "ssot_entity_matrix_companion": "docs/compliance/target_cell_ssot_entity_matrix.json"
 }

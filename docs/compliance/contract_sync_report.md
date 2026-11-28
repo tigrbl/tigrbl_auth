@@ -5,5 +5,5 @@
 ## Summary
 
 - profile_count: `3`
-- active_openapi_path_count: `6`
-- active_openrpc_method_count: `35`
+- active_openapi_path_count: `25`
+- active_openrpc_method_count: `0`

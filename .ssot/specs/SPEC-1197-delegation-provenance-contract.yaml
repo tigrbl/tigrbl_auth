@@ -1,0 +1,37 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1197"
+number: 1197
+slug: "delegation-provenance-contract"
+title: "Delegation Provenance Contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Delegation provenance MUST track original subject, current actor, attenuation, proof chain, delegation depth, and token/introspection mapping."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-06-01T10:40:03Z"
+    note: "Accepted for strategic security certification concern planning."
+    status: "accepted"
+  -
+    at: "2026-06-01T10:41:05Z"
+    note: "Linked to strategic security certification concerns ADR."
+    status: "accepted"
+  -
+    at: "2026-06-07T04:39:49Z"
+    note: "Extended by spc:1208 for delegation attenuation proof requirements."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Delegation provenance now requires DelegationGrant id, grant proof id, authorization trace id, token hash links, actor-subject binding, and exchange-mode mapping from spc:1213."
+    at: "2026-06-14T11:52:13Z"
+references: []
+body: |-
+  Delegation provenance MUST track original subject, current actor, attenuation, proof chain, delegation depth, and token/introspection mapping.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1090"
+  - "adr:1124"

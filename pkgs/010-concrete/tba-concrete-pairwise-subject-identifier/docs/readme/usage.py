@@ -1,0 +1,3 @@
+from tba_concrete_pairwise_subject_identifier import PairwiseSubjectIdentifierStrategy
+
+assert callable(PairwiseSubjectIdentifierStrategy)

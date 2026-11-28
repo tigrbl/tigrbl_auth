@@ -1,0 +1,3 @@
+from tba_runtime_authorization_policy import ABACAdministrator
+
+assert callable(ABACAdministrator)

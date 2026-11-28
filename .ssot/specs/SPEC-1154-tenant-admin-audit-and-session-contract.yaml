@@ -1,0 +1,37 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1154"
+number: 1154
+slug: "tenant-admin-audit-and-session-contract"
+title: "Tenant Admin Audit and Session Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs tenant-admin sessions, operation authorization, and tenant-scoped audit evidence."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Defines tenant admin session, authorization, and audit evidence requirements."
+    at: "2026-05-25T05:09:45Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs tenant-admin sessions, operation authorization, and tenant-scoped audit evidence.
+  
+  ## Requirements
+  
+  Tenant admin session start MUST bind the actor, tenant namespace, effective role, and authorization context. Tenant admin operations MUST evaluate tenant-scoped authorization before mutation or disclosure.
+  
+  Tenant admin operations MUST emit audit events that identify actor, tenant, operation, target resource, authorization decision, request time, result, and failure reason where applicable.
+  
+  ## Verification
+  
+  Verification MUST prove sessions are tenant-bound, unauthorized operations fail closed, audit records are produced for allowed and denied sensitive operations, and tenant admins cannot inspect audit data for another tenant.
+spec_kind: "governance"
+adr_ids:
+  - "adr:1079"
+  - "adr:1076"

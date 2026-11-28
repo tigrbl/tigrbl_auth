@@ -1,0 +1,27 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1079"
+number: 1079
+slug: "tenant-admin-tenant-scoped-self-service-authority"
+title: "Tenant Admin Owns Tenant-Scoped Self-Service Authority"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Tenant-admin API is the delegated tenant-scoped control plane for tenant self-service administration. It owns tenant-scoped identities, tenant administrators, tenant keys and JWKS, tenant-local clients, tenant-local policy and configuration, sessions, consent, and tenant audit visibility."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted for tenant-admin API product completion planning."
+    at: "2026-05-25T05:08:32Z"
+references: []
+body: |-
+  ## Decision
+  
+  Tenant-admin API is the delegated tenant-scoped control plane for tenant self-service administration. It owns tenant-scoped identities, tenant administrators, tenant keys and JWKS, tenant-local clients, tenant-local policy and configuration, sessions, consent, and tenant audit visibility.
+  
+  ## Consequences
+  
+  Tenant-admin API MUST NOT create, delete, suspend, or restore tenants and MUST NOT grant cross-tenant or platform-wide authority. Those workflows remain platform-admin responsibilities. Tenant-admin API deployments MUST enforce tenant isolation and fail closed for cross-tenant or platform lifecycle operations.

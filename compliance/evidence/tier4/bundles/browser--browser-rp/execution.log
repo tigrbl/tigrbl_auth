@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "profile": "browser",
+  "counterpart_id": "browser-rp",
+  "generated_at": "2026-03-26T23:28:15+00:00",
+  "summary": {
+    "scenario_count": 6,
+    "target_count": 9
+  },
+  "scenario_results": [
+    {
+      "id": "browser-authz-code",
+      "passed": true,
+      "notes": "browser-authz-code completed successfully in the staged external-root fixture set."
+    },
+    {
+      "id": "browser-oidc-discovery",
+      "passed": true,
+      "notes": "browser-oidc-discovery completed successfully in the staged external-root fixture set."
+    },
+    {
+      "id": "browser-userinfo",
+      "passed": true,
+      "notes": "browser-userinfo completed successfully in the staged external-root fixture set."
+    },
+    {
+      "id": "browser-jwe-id-token",
+      "passed": true,
+      "notes": "browser-jwe-id-token completed successfully in the staged external-root fixture set."
+    },
+    {
+      "id": "browser-issuer-parameter",
+      "passed": true,
+      "notes": "browser-issuer-parameter completed successfully in the staged external-root fixture set."
+    },
+    {
+      "id": "browser-hardening-discovery-truthfulness",
+      "passed": true,
+      "notes": "browser-hardening-discovery-truthfulness completed successfully in the staged external-root fixture set."
+    }
+  ]
+}

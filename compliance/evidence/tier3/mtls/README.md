@@ -1,8 +1,8 @@
 # Tier 3 evidence
 
 - Target: `RFC 8705`
-- Checkpoint phase: `Phase 10`
+- Checkpoint label: `Tier 3 evidence checkpoint`
 - Status: `evidenced-release-gated`
 - Summary: Tier 3 evidence for mTLS client authentication and certificate-bound access-token/runtime validation.
-- Checkpoint report: `docs/compliance/PHASE10_HARDENING_TARGET_CLUSTER_C.md`
-- Targeted test output: `docs/compliance/phase10_targeted_test_output.txt`
+- Checkpoint report: `docs/compliance/capability_HARDENING_TARGET_CLUSTER_C.md`
+- Targeted test output: `docs/compliance/capability_targeted_test_output.txt`

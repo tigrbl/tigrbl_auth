@@ -1,0 +1,3 @@
+from tba_contracts_attestation import AttestationEvidence
+
+assert callable(AttestationEvidence)

@@ -1,0 +1,367 @@
+# tba-concrete-eat
+
+<!-- readme-standards:begin branding -->
+<p align="center"><a href="https://github.com/tigrbl/tigrbl_auth"><img src="https://raw.githubusercontent.com/tigrbl/tigrbl_auth/master/docs/assets/tba-brand.png" alt="TBA · Tigrbl Auth" width="300"></a></p>
+<p align="center"><strong>tba-concrete-eat</strong></p>
+<p align="center">Concrete eat value types for Tigrbl Auth.</p>
+<p align="center">
+<a href="https://pypi.org/project/tba-concrete-eat/"><img alt="pypi: tba-concrete-eat" src="https://img.shields.io/pypi/v/tba-concrete-eat?labelColor=1E293B&amp;color=1D4ED8"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/pyproject.toml"><img alt="Source version: 0.4.0.dev3" src="https://img.shields.io/static/v1?label=Source%20version&amp;message=0.4.0.dev3&amp;labelColor=1E293B&amp;color=4338CA"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/pyproject.toml"><img alt="Python: &gt;=3.10,&lt;3.16" src="https://img.shields.io/static/v1?label=Python&amp;message=%3E%3D3.10%2C%3C3.16&amp;labelColor=1E293B&amp;color=0F766E"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/pyproject.toml"><img alt="Layer: 010-concrete" src="https://img.shields.io/static/v1?label=Layer&amp;message=010-concrete&amp;labelColor=1E293B&amp;color=6D28D9"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/README.md#lifecycle-and-migration"><img alt="Lifecycle: active" src="https://img.shields.io/static/v1?label=Lifecycle&amp;message=active&amp;labelColor=1E293B&amp;color=166534"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/static/v1?label=License&amp;message=Apache-2.0&amp;labelColor=1E293B&amp;color=86198F"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/NOTICE"><img alt="Notice: attribution" src="https://img.shields.io/static/v1?label=Notice&amp;message=attribution&amp;labelColor=1E293B&amp;color=86198F"></a>
+</p>
+<p align="center">
+<a href="https://pypi.org/project/tba-concrete-eat/"><img alt="Monthly PyPI downloads: tba-concrete-eat" src="https://img.shields.io/pypi/dm/tba-concrete-eat?labelColor=1E293B&amp;color=0E7490"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/README.md"><img alt="README hits: tba-concrete-eat" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/pkgs/010-concrete/tba-concrete-eat/README.md.svg?label=README%20hits&amp;labelColor=1E293B&amp;color=0E7490"></a>
+</p>
+<p align="center">
+<a href="https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"><img alt="README standards: CI gate" src="https://img.shields.io/static/v1?label=README%20standards&amp;message=CI%20gate&amp;labelColor=1E293B&amp;color=1D4ED8"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/docs/readme/test_examples.py"><img alt="Tests: example source" src="https://img.shields.io/static/v1?label=Tests&amp;message=example%20source&amp;labelColor=1E293B&amp;color=0F766E"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/README.md#certification-status"><img alt="Certification: not certified" src="https://img.shields.io/static/v1?label=Certification&amp;message=not%20certified&amp;labelColor=1E293B&amp;color=92400E"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/tools/readme/POLICY.md"><img alt="Governance: repository policy" src="https://img.shields.io/static/v1?label=Governance&amp;message=repository%20policy&amp;labelColor=1E293B&amp;color=4338CA"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml"><img alt="Evidence: source and CI" src="https://img.shields.io/static/v1?label=Evidence&amp;message=source%20and%20CI&amp;labelColor=1E293B&amp;color=6D28D9"></a>
+</p>
+<p align="center"><a href="#overview">Overview</a> · <a href="#installation">Installation</a> · <a href="#quick-start">Quick Start</a> · <a href="#usage">Usage</a> · <a href="#public-api-and-import-surfaces">API</a> · <a href="#contributing">Contributing</a> · <a href="#governance">Governance</a> · <a href="#license">License</a></p>
+<!-- readme-standards:end branding -->
+
+---
+
+## Overview
+
+### Summary
+
+Owns deterministic concrete value semantics.
+
+- Package: `tba-concrete-eat`
+- Layer: `010-concrete`
+- Responsibility: Concrete eat value types for Tigrbl Auth.
+- Public surface: [public entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/src/tba_concrete_eat/__init__.py).
+- Distribution: Python package on PyPI.
+
+### Why This Package
+
+`tba-concrete-eat` isolates this responsibility: Concrete eat value types for Tigrbl Auth. Its [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/src/tba_concrete_eat/claims.py) exposes `DetachedEatBundle`, `EAT_MEDIA_TYPES`, `EAT_NONCE_CLAIM`, `EAT_PROFILE_CLAIM`, `EatClaimSetPayload`, `EatEncoding`, `EatEvidence`, `EatProfile`, `EatSubmodule`, `RFC_REVISION`, `parse_detached_bundle`, `parse_eat`, `parse_eat_claims`, `parse_submodules`, `validate_eat_claims`, allowing consumers to select this package without treating adjacent packages as part of its public contract.
+
+### When to Use
+
+Choose `tba-concrete-eat` for this responsibility: Concrete eat value types for Tigrbl Auth. Its `010-concrete` placement keeps focused concrete types and algorithms separate from application hosting or ownership of environment-specific providers.
+
+### Features
+
+- `EatEncoding`: declared in src/tba_concrete_eat/claims.py
+- `EatClaimSetPayload`: declared in src/tba_concrete_eat/claims.py
+- `DetachedEatBundle`: declared in src/tba_concrete_eat/evidence.py
+- `EatProfile`: declared in src/tba_concrete_eat/profiles.py
+- `EatSubmodule`: declared in src/tba_concrete_eat/submodules.py
+
+### Non-Goals
+
+Higher-layer orchestration, lower-layer persistence, and protocol behavior outside this package's declared layer are not owned here.
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+Python `>=3.10,<3.16` is required. The [manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/pyproject.toml) declares runtime dependencies including `tba-primitives-identity`, `tba-contracts-identity`, `tba-concrete-eat-evidence`, `tba-concrete-claim-eat-profile`, `tba-concrete-claim-eat-nonce`, `tba-concrete-claim-ueid`, `tba-concrete-claim-eat-submodules`, `tba-concrete-claim-issued-at`. Read the example’s inputs and service requirements before execution.
+
+### Installation
+
+Install the selected PyPI release of `tba-concrete-eat`:
+
+```bash
+uv pip install tba-concrete-eat
+```
+
+To work on the current checkout before a prepared release is published:
+
+```bash
+uv pip install ./pkgs/010-concrete/tba-concrete-eat
+```
+
+#### uv
+
+<!-- readme-standards:begin installation.uv -->
+```bash
+uv add tba-concrete-eat
+```
+<!-- readme-standards:end installation.uv -->
+
+#### pip
+
+<!-- readme-standards:begin installation.pip -->
+```bash
+python -m pip install tba-concrete-eat
+```
+<!-- readme-standards:end installation.pip -->
+
+#### Poetry
+
+<!-- readme-standards:begin installation.poetry -->
+```bash
+poetry add tba-concrete-eat
+```
+<!-- readme-standards:end installation.poetry -->
+
+### Quick Start
+
+With [uv](https://docs.astral.sh/uv/) available, save the example as `quickstart.py`. This isolated Python 3.12 command requires the selected version to be available on PyPI; Installation also documents the checkout workflow.
+
+
+```bash
+uv run --isolated --no-project --python 3.12 --with "tba-concrete-eat==0.4.0.dev3" python quickstart.py
+```
+
+The import and assertion succeed when the DetachedEatBundle entry point is available.
+
+#### Example
+
+<!-- readme-standards:begin example.quick-start -->
+Source: [docs/readme/quick_start.py](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/docs/readme/quick_start.py).
+
+```python
+from tba_concrete_eat import DetachedEatBundle
+
+assert callable(DetachedEatBundle)
+```
+<!-- readme-standards:end example.quick-start -->
+
+#### Expected Result
+
+The example demonstrates the documented `tba-concrete-eat` source boundary or workflow. Complete its required configuration first. README CI checks the maintained source’s syntax and declarations; it does not claim that external services or the application workflow were exercised.
+
+---
+
+## Usage
+
+### Common Workflows
+
+<!-- readme-standards:begin example.usage -->
+Source: [docs/readme/usage.py](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/docs/readme/usage.py).
+
+```python
+from tba_concrete_eat import DetachedEatBundle
+
+assert callable(DetachedEatBundle)
+```
+<!-- readme-standards:end example.usage -->
+
+The following public-entry-point example belongs to `tba-concrete-eat`. Concrete eat value types for Tigrbl Auth. Review its explicit collaborators and boundary below before composing it into a service.
+
+### Configuration
+
+Configure `tba-concrete-eat` through the APIs in [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/src/tba_concrete_eat/claims.py); its [manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/pyproject.toml) describes installation requirements, not an implicit service configuration. No additional package-global configuration contract is inferred from dependencies.
+
+### Error Handling
+
+The inspected `tba-concrete-eat` source raises `ValueError`. Handle these at the calling boundary and consult the implementation for the triggering conditions.
+
+### Best Practices
+
+Use the explicit `tba-concrete-eat` imports documented below and keep collaborator configuration with the caller. Run the package’s relevant tests after changing `DetachedEatBundle`, `EAT_MEDIA_TYPES`, `EAT_NONCE_CLAIM`, `EAT_PROFILE_CLAIM`, `EatClaimSetPayload`, `EatEncoding`, `EatEvidence`, `EatProfile`, `EatSubmodule`, `RFC_REVISION`, `parse_detached_bundle`, `parse_eat`, `parse_eat_claims`, `parse_submodules`, `validate_eat_claims`; an import or successful installation alone does not establish its runtime guarantees.
+
+---
+
+## Package Boundary
+
+### What It Owns
+
+`tba-concrete-eat` belongs to `010-concrete` and owns focused concrete types and algorithms: Concrete eat value types for Tigrbl Auth.
+
+Its implementation surface is the [public entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/src/tba_concrete_eat/__init__.py). Public exports include `DetachedEatBundle`, `EAT_MEDIA_TYPES`, `EAT_NONCE_CLAIM`, `EAT_PROFILE_CLAIM`, `EatClaimSetPayload`, `EatEncoding`, `EatEvidence`, `EatProfile`, `EatSubmodule`, `RFC_REVISION`, `parse_detached_bundle`, `parse_eat`.
+
+Keep application hosting or ownership of environment-specific providers in their owning packages. The [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml) records layer placement and local dependency edges.
+
+### Public API and Import Surfaces
+
+Import namespace: `tba_concrete_eat`.
+
+Source-declared exports or types: `DetachedEatBundle`, `EAT_MEDIA_TYPES`, `EAT_NONCE_CLAIM`, `EAT_PROFILE_CLAIM`, `EatClaimSetPayload`, `EatEncoding`, `EatEvidence`, `EatProfile`, `EatSubmodule`, `RFC_REVISION`, `parse_detached_bundle`, `parse_eat`, `parse_eat_claims`, `parse_submodules`, `validate_eat_claims`.
+
+Inspect [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/src/tba_concrete_eat/claims.py) for exact signatures; this inventory does not designate every internal module as stable.
+
+### Entry Points
+
+<!-- readme-standards:begin entry-points -->
+This package declares no command-line, GUI, or plugin entry points in its manifest.
+<!-- readme-standards:end entry-points -->
+
+### Injected Dependencies
+
+Explicit construction inputs and collaborators for `tba-concrete-eat`:
+
+- `parse_eat` construction inputs: `protected_token`. [Definition](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/src/tba_concrete_eat/validation.py).
+
+Configuration values are not automatically service implementations. Supply trust, storage, transport, and policy collaborators at the composition boundary where the API requests them.
+
+### Protocol Consumers
+
+The following layer-50 manifests directly depend on `tba-concrete-eat`:
+
+- [tba-protocol-attestation-eat](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-attestation-eat/README.md)
+
+Other direct consumers include [tba-provider-eat-verifier](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-eat-verifier/README.md).
+
+### Extensions
+
+For `tba-concrete-eat`, use the source-declared public interfaces (`DetachedEatBundle`, `EAT_MEDIA_TYPES`, `EAT_NONCE_CLAIM`, `EAT_PROFILE_CLAIM`, `EatClaimSetPayload`, `EatEncoding`, `EatEvidence`, `EatProfile`, `EatSubmodule`, `RFC_REVISION`, `parse_detached_bundle`, `parse_eat`, `parse_eat_claims`, `parse_submodules`, `validate_eat_claims`) when composing or extending behavior. Its entry-point section below is authoritative for registered plugins; no additional extension loader is inferred from the package name.
+
+---
+
+## Operations and Readiness
+
+### Operational Requirements
+
+`tba-concrete-eat` exposes focused concrete types and algorithms. Public operations found in its source:
+
+- `parse_eat_claims` — [source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/src/tba_concrete_eat/claims.py).
+- `parse_detached_bundle` — [source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/src/tba_concrete_eat/evidence.py).
+- `parse_submodules` — [source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/src/tba_concrete_eat/submodules.py).
+- `validate_eat_claims` — [source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/src/tba_concrete_eat/validation.py).
+- `parse_eat` — [source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/src/tba_concrete_eat/validation.py).
+
+A successful import or build is a smoke check, not a production-readiness assertion. Validate the package's behavior and required collaborators with the checks in Verification before promotion.
+
+### Health and Observability
+
+This README does not establish a standalone health endpoint for `tba-concrete-eat`. Observe the concrete caller’s results, exceptions, and existing test reports. An application that embeds this package must define its own health and telemetry contract.
+
+### Security and Resource Limits
+
+Apply the input, credential, and resource constraints implemented in [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/src/tba_concrete_eat/claims.py). The `tba-concrete-eat` README gate is a documentation check, not a security review or a substitute for the implementation’s limits and caller authorization.
+
+### Compatibility
+
+This source version of `tba-concrete-eat` declares Python `>=3.10,<3.16`. Consult its dependency constraints before upgrading. Source-version and registry-version badges have separate meanings; this migration makes no additional platform or interoperability certification claim.
+
+---
+
+## Verification
+
+### Tests
+
+A prior published-version quick start informed this example. A registry badge is not evidence that this checkout's selected version or example has been verified against PyPI. See the [public package entry point](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/src/tba_concrete_eat/__init__.py).
+
+### Certification Status
+
+No external certification is asserted for `tba-concrete-eat` by this documentation migration. README conformance, example syntax, runtime tests, and protocol or security certification are distinct evidence scopes.
+
+### Evidence
+
+The [README standards CI](https://github.com/tigrbl/tigrbl_auth/actions/workflows/readme-standards.yml) records mechanical documentation results for its tested commit. The [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/src/tba_concrete_eat/claims.py) and example sources support the package-boundary description; external runtime behavior requires its own test evidence.
+
+---
+
+## FAQ
+
+### Why
+
+**Why select this package?** `tba-concrete-eat` provides concrete eat value types for Tigrbl Auth; use its own API boundary rather than assuming neighboring packages are bundled or configured automatically.
+
+### How
+
+**How do I start?** Install or synchronize the environment under Getting Started, follow the maintained example for `tba-concrete-eat`, and consult [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/src/tba_concrete_eat/claims.py) for the exact types and signatures involved.
+
+### When
+
+**When should I validate an upgrade?** Recheck `tba-concrete-eat` whenever its source version, declared collaborators, configuration, or caller changes. Run relevant behavioral tests in addition to the README gate before promotion.
+
+---
+
+## Documentation and Related Packages
+
+### More Documentation
+
+The [repository contribution guide](https://github.com/tigrbl/tigrbl_auth/blob/master/CONTRIBUTING.md), [package source](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/src/tba_concrete_eat/claims.py), and [manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/pyproject.toml) provide the supporting context for `tba-concrete-eat`. The [README policy](https://github.com/groupsum/readme-standards/blob/master/docs/outline.md) defines the common document structure.
+
+### Related Packages
+
+Declared local runtime dependencies:
+
+- [tba-concrete-claim-eat-nonce](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-claim-eat-nonce/README.md)
+- [tba-concrete-claim-eat-profile](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-claim-eat-profile/README.md)
+- [tba-concrete-claim-eat-submodules](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-claim-eat-submodules/README.md)
+- [tba-concrete-claim-issued-at](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-claim-issued-at/README.md)
+- [tba-concrete-claim-ueid](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-claim-ueid/README.md)
+- [tba-concrete-eat-evidence](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat-evidence/README.md)
+- [tba-contracts-identity](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/002-contracts/tba-contracts-identity/README.md)
+- [tba-primitives-identity](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/000-primitives/tba-primitives-identity/README.md)
+
+Direct downstream consumers:
+
+- [tba-protocol-attestation-eat](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-attestation-eat/README.md)
+- [tba-provider-eat-verifier](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/020-providers/tba-provider-eat-verifier/README.md)
+
+### Project Links
+
+<!-- readme-standards:begin project-links -->
+- [Documentation](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/010-concrete/tba-concrete-eat#readme)
+- [Homepage](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/010-concrete/tba-concrete-eat#readme)
+- [Issues](https://github.com/tigrbl/tigrbl_auth/issues)
+- [PyPI](https://pypi.org/project/tba-concrete-eat/)
+- [Repository](https://github.com/tigrbl/tigrbl_auth)
+- [Source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/010-concrete/tba-concrete-eat)
+- [pypi: tba-concrete-eat](https://pypi.org/project/tba-concrete-eat/)
+<!-- readme-standards:end project-links -->
+
+- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/010-concrete/tba-concrete-eat)
+- [Package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/pyproject.toml)
+- [LICENSE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/LICENSE) and [NOTICE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/NOTICE)
+- [Report an issue](https://github.com/tigrbl/tigrbl_auth/issues)
+- [Package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml)
+- [Canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
+- [PyPI project](https://pypi.org/project/tba-concrete-eat/)
+
+---
+
+## Contributing
+
+### How to Contribute
+
+Follow the [contribution guide](https://github.com/tigrbl/tigrbl_auth/blob/master/CONTRIBUTING.md) and include a focused example or regression for changes to `tba-concrete-eat`. Keep package behavior, its documented boundary, and its tests aligned.
+
+### Development Setup
+
+Work from the `pkgs/010-concrete/tba-concrete-eat` checkout. Synchronize its declared development environment with uv, then run the relevant package tests and `python -m pytest docs/readme/test_examples.py`. The repository’s dedicated README job installs `readme-standards==0.1.3` without resolving unrelated runtime packages.
+
+### Notes for Maintainers
+
+Edit authored prose directly in this `tba-concrete-eat` README. Update source examples in `docs/readme/`, then run `readme-standards render --root . --write` from the package directory and review the diff. Required headings and generated blocks come from package-guide-v1.
+
+---
+
+## Governance
+
+### Ownership and Decision Making
+
+Changes to `tba-concrete-eat` follow the maintainer review process of [tigrbl/tigrbl_auth](https://github.com/tigrbl/tigrbl_auth) and its contribution guide. Author attribution remains in the [manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/pyproject.toml); this README does not assign new publishing or administrative authority.
+
+### Standards and Policies
+
+`tba-concrete-eat` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `010-concrete` ownership, public imports, declared dependencies, examples, and release metadata aligned.
+
+Changes must pass the [README standards gate](https://github.com/tigrbl/tigrbl_auth/blob/master/.github/workflows/readme-standards.yml), package checks, and the evidence requirements relevant to the changed behavior. Update SSOT through the repository's CLI workflow when changing governed claims or boundaries.
+
+### Lifecycle and Migration
+
+The `tba-concrete-eat` source version is `0.4.0.dev3`. This change standardizes documentation and adds a development-only gate; it does not publish a new runtime version or declare a previously unpublished package released. Preserve explicit deprecation and replacement instructions where present.
+
+---
+
+## License and Attribution
+
+### License
+
+<!-- readme-standards:begin license -->
+Licensed under `Apache-2.0`. See [LICENSE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/LICENSE).
+<!-- readme-standards:end license -->
+
+### Notices
+
+<!-- readme-standards:begin notices -->
+See [NOTICE](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/010-concrete/tba-concrete-eat/NOTICE) for attribution.
+<!-- readme-standards:end notices -->

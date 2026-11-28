@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1128"
+number: 1128
+slug: "rp-callback-validation-contract"
+title: "RP Callback Validation Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines callback parsing, error handling, state/nonce validation, issuer/audience/redirect validation, callback expiry, and replay rejection."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "RP/resource-server/provider-login maturity wave proposal."
+    at: "2026-05-23T05:44:08Z"
+references: []
+body: |-
+  Defines callback parsing, error handling, state/nonce validation, issuer/audience/redirect validation, callback expiry, and replay rejection.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1114"
+  - "adr:1119"

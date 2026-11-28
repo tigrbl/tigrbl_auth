@@ -1,0 +1,6 @@
+{
+  "name": "Face Biometric Authenticator and AMR Evidence Manager",
+  "description": "Interactive first-party face authenticator, native capture simulator, liveness verification, AMR evidence audit trail, and biometric lifecycle management platform.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

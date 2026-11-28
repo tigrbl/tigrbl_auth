@@ -1,0 +1,3 @@
+from tba_contracts_identity import ContractProjection
+
+assert callable(ContractProjection)

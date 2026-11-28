@@ -14,7 +14,7 @@ Evidence is required for claim promotion beyond Tier 1.
 
 A missing evidence bundle is a certification failure, not a documentation gap.
 
-## Phase 13 additions
+## runtime-foundation checkpoint3 additions
 
 - `peer_profiles/` — peer profile manifests bound to retained targets, runtime profiles, scenarios, and contract snapshots
 - `peer_counterparts/` — external counterpart catalog used for Tier 4 bundle normalization and strict independence requirements

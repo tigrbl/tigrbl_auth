@@ -1,0 +1,3 @@
+from tba_app_backend_developer import DeveloperBackendAppContract
+
+assert callable(DeveloperBackendAppContract)

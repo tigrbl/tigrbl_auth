@@ -1,0 +1,34 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1032"
+number: 1032
+slug: "ssot-projection-contract-and-precedence"
+title: "SSOT projection contract and precedence"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "SSOT-authored governance content is canonical; compliance docs outside `.ssot/` are projections or compatibility manifests."
+supersedes: []
+superseded_by: []
+status_notes: []
+references:
+  - "adr:0609"
+  - "adr:1031"
+body: |-
+  - Status: accepted
+  - Date: 2026-04-20
+  - Decision: `.ssot/registry.json`, repo-local ADRs under `.ssot/adr/`, and repo-local specs under `.ssot/specs/` are the canonical governance and release-truth sources for this repository.
+  - Consequences:
+    - compliance documents outside `.ssot/` are projections, mirrors, or compatibility manifests;
+    - projections MUST agree with SSOT-authored authority content;
+    - when a projection conflicts with SSOT, SSOT wins and the projection is stale or invalid;
+    - compatibility manifests may mirror scope and bundle-selection policy, but they SHALL NOT independently redefine what is authoritative.
+
+  The projection contract is:
+  - `docs/compliance/truth_chain.*` projects current repository truth from SSOT authority inputs;
+  - `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.*` projects the active current-doc set derived from SSOT authority policy;
+  - `compliance/targets/document-authority.yaml` is a compatibility projection manifest used by existing tooling and bundle assembly;
+  - none of those artifacts may override canonical decisions authored under `.ssot/`.
+
+  Projection consumers MUST treat disagreement as a fail-closed governance condition. A downstream report, release bundle, or status summary that cannot be derived consistently from SSOT authority inputs SHALL be considered invalid until regenerated or corrected.

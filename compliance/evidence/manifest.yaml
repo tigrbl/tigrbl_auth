@@ -1,5 +1,5 @@
 schema_version: 1
-package: tigrbl_auth
+package: tba_auth
 state:
   governance_plane_initialized: true
   preserved_tier3_bundles:
@@ -23,7 +23,23 @@ state:
   - compliance/evidence/tier3/contracts/openrpc
   - dist/evidence-bundles/baseline/tier3
   - dist/evidence-bundles/production/tier3
-  preserved_tier4_bundles: []
+  preserved_tier4_bundles:
+  - compliance/evidence/tier4/bundles/assertion-client--assertion-client-harness
+  - compliance/evidence/tier4/bundles/browser--browser-rp
+  - compliance/evidence/tier4/bundles/client-mgmt--client-mgmt-harness
+  - compliance/evidence/tier4/bundles/device--device-client
+  - compliance/evidence/tier4/bundles/dpop--dpop-client
+  - compliance/evidence/tier4/bundles/gateway--gateway-peer
+  - compliance/evidence/tier4/bundles/mtls--mtls-peer
+  - compliance/evidence/tier4/bundles/native--native-client
+  - compliance/evidence/tier4/bundles/ops-cli--ops-cli-harness
+  - compliance/evidence/tier4/bundles/par-jar-rar--par-jar-rar-client
+  - compliance/evidence/tier4/bundles/resource-server--resource-server
+  - compliance/evidence/tier4/bundles/rp-session-logout--rp-session-logout-rp
+  - compliance/evidence/tier4/bundles/runner-hypercorn--hypercorn-runner
+  - compliance/evidence/tier4/bundles/runner-tigrcorn--tigrcorn-runner
+  - compliance/evidence/tier4/bundles/runner-uvicorn--uvicorn-runner
+  - compliance/evidence/tier4/bundles/spa--spa-rp
   tier4_candidate_layouts:
   - compliance/evidence/tier4/candidates/assertion-client
   - compliance/evidence/tier4/candidates/browser
@@ -48,17 +64,33 @@ state:
   - dist/release-bundles/0.3.2.dev14/peer-claim
   signed_release_profile_count: 4
   release_attestation_algorithm: Ed25519
-  phase_13_release_decision_complete: true
+  release_decision_complete: true
   release_decision_record: docs/compliance/RELEASE_DECISION_RECORD.md
   retained_boundary_tier3_complete: true
   strict_independent_claims_ready: false
   tier4_profile_catalog_count: 16
   valid_preserved_tier4_bundles: []
-  invalid_preserved_tier4_bundles: []
-  tier4_external_bundle_count: 0
+  invalid_preserved_tier4_bundles:
+  - compliance/evidence/tier4/bundles/assertion-client--assertion-client-harness
+  - compliance/evidence/tier4/bundles/browser--browser-rp
+  - compliance/evidence/tier4/bundles/client-mgmt--client-mgmt-harness
+  - compliance/evidence/tier4/bundles/device--device-client
+  - compliance/evidence/tier4/bundles/dpop--dpop-client
+  - compliance/evidence/tier4/bundles/gateway--gateway-peer
+  - compliance/evidence/tier4/bundles/mtls--mtls-peer
+  - compliance/evidence/tier4/bundles/native--native-client
+  - compliance/evidence/tier4/bundles/ops-cli--ops-cli-harness
+  - compliance/evidence/tier4/bundles/par-jar-rar--par-jar-rar-client
+  - compliance/evidence/tier4/bundles/resource-server--resource-server
+  - compliance/evidence/tier4/bundles/rp-session-logout--rp-session-logout-rp
+  - compliance/evidence/tier4/bundles/runner-hypercorn--hypercorn-runner
+  - compliance/evidence/tier4/bundles/runner-tigrcorn--tigrcorn-runner
+  - compliance/evidence/tier4/bundles/runner-uvicorn--uvicorn-runner
+  - compliance/evidence/tier4/bundles/spa--spa-rp
+  tier4_external_bundle_count: 16
   tier4_valid_external_bundle_count: 0
-  tier4_invalid_external_bundle_count: 0
-  tier4_missing_external_bundle_count: 16
+  tier4_invalid_external_bundle_count: 16
+  tier4_missing_external_bundle_count: 0
 paths:
   tier3_root: compliance/evidence/tier3
   tier4_root: compliance/evidence/tier4
@@ -120,11 +152,15 @@ promoted_target_subsets:
   - OpenRPC 1.4.x admin/control-plane contract
   tier4: []
 notes:
-- Phase 10 promotes the full baseline target bucket and a selected production subset
+- The retained baseline target bucket and selected production subset are promoted
   to Tier 3 using preserved gate, mapping, and contract bundles.
 - Full-boundary Tier 3 promotion is still incomplete.
 - Tier 4 peer bundles remain absent.
-- Phase 13 installs the independent peer program, full retained target-to-peer mapping,
-  counterpart catalog, candidate bundle layouts, and fail-closed Tier 4 promotion
-  logic. No targets are promoted to Tier 4 in this checkpoint because preserved qualifying
-  independent external artifacts were not supplied.
+- The independent peer program installs full retained target-to-peer mapping, counterpart
+  catalog, candidate bundle layouts, and fail-closed Tier 4 promotion logic. No targets
+  are promoted to Tier 4 in this checkpoint because preserved qualifying independent
+  external artifacts were not supplied.
+- runtime-foundation checkpoint3 installs the independent peer program, full retained
+  target-to-peer mapping, counterpart catalog, candidate bundle layouts, and fail-closed
+  Tier 4 promotion logic. No targets are promoted to Tier 4 in this checkpoint because
+  preserved qualifying independent external artifacts were not supplied.

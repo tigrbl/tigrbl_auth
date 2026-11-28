@@ -1,0 +1,3 @@
+from tba_provider_attestation_packed import PackedAttestationVerifier
+
+assert callable(PackedAttestationVerifier)

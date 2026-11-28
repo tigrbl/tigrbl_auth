@@ -1,0 +1,290 @@
+.container {
+  @apply space-y-10;
+  animation: fade-in 0.5s ease-in;
+}
+
+.header {
+  @apply flex justify-between items-end;
+}
+
+.title {
+  @apply text-4xl font-extrabold leading-tight;
+  letter-spacing: -2px;
+}
+
+.subtitle {
+  @apply text-lg mt-2 font-medium;
+  color: var(--text-secondary);
+}
+
+.primaryButton {
+  padding: 10px 20px;
+  border: 1px solid var(--stroke-etched);
+  background: var(--stroke-etched);
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.primaryButton:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--accent-neural);
+}
+
+.layoutGrid {
+  @apply grid grid-cols-1 lg:grid-cols-12 gap-10;
+}
+
+.profilesPanel {
+  @apply lg:col-span-7 p-10;
+  background: #fff;
+  border: 1px solid var(--stroke-etched);
+  box-shadow: var(--shadow-milled);
+}
+
+.panelHeader {
+  @apply flex items-center justify-between mb-10;
+}
+
+.panelTitle {
+  @apply text-xs font-bold uppercase tracking-[2px];
+}
+
+.panelStatus {
+  @apply text-[10px] font-mono;
+  color: var(--text-secondary);
+}
+
+.profileList {
+  @apply space-y-10;
+}
+
+.profileGroup {
+  @apply relative;
+}
+
+.profileHeader {
+  @apply flex items-center justify-between mb-4;
+}
+
+.profileInfo {
+  @apply flex items-center space-x-4;
+}
+
+.profileSwatch {
+  @apply w-2 h-8;
+}
+
+.profileLabel {
+  @apply font-bold text-lg uppercase leading-none;
+  letter-spacing: -0.01em;
+}
+
+.profileId {
+  @apply text-[9px] font-mono mt-1 uppercase tracking-widest;
+  opacity: 0.5;
+}
+
+.profileStats {
+  @apply text-right;
+}
+
+.profileValue {
+  @apply text-xl font-mono font-bold;
+}
+
+.profileValueLabel {
+  @apply text-[9px] font-bold uppercase;
+  opacity: 0.5;
+}
+
+.profileCard {
+  @apply space-y-6 p-6 transition-all;
+  background: var(--bg-parian);
+  border: 1px solid var(--stroke-milled);
+}
+
+.profileGroup:hover .profileCard {
+  border-color: var(--stroke-etched);
+}
+
+.progressTrack {
+  @apply relative h-2 w-full overflow-hidden;
+  background: var(--bg-parian-deep);
+}
+
+.progressBar {
+  @apply absolute h-full transition-all duration-1000 ease-out;
+}
+
+.sliderGrid {
+  @apply grid grid-cols-2 gap-8;
+}
+
+.sliderBlock {
+  @apply space-y-2;
+}
+
+.sliderHeader {
+  @apply flex justify-between items-center;
+}
+
+.sliderLabel {
+  @apply text-[10px] font-bold uppercase tracking-widest;
+  color: var(--text-secondary);
+}
+
+.sliderValue {
+  @apply text-[10px] font-mono font-bold;
+}
+
+.sliderInput {
+  @apply w-full h-1 rounded-lg appearance-none cursor-pointer;
+  background: var(--stroke-milled);
+  accent-color: var(--stroke-etched);
+}
+
+.rulesPanel {
+  @apply lg:col-span-5 space-y-8;
+}
+
+.rulesCard {
+  @apply p-10;
+  background: var(--bg-parian-deep);
+  border: 1px solid var(--stroke-etched);
+  box-shadow: var(--shadow-milled);
+}
+
+.rulesTitle {
+  @apply text-xs font-bold uppercase tracking-[2px] mb-10;
+}
+
+.rulesList {
+  @apply space-y-4;
+}
+
+.ruleItem {
+  @apply flex items-center justify-between p-6 transition-all cursor-pointer;
+  border: 1px solid transparent;
+}
+
+.ruleItemActive {
+  background: #fff;
+  border-color: var(--stroke-etched);
+  box-shadow: var(--shadow-milled);
+}
+
+.ruleItemInactive {
+  background: var(--bg-parian);
+}
+
+.ruleItemInactive:hover {
+  border-color: rgba(26, 26, 26, 0.2);
+}
+
+.ruleBody {
+  @apply flex-1 pr-6;
+}
+
+.ruleTitle {
+  @apply text-sm font-bold uppercase transition-colors;
+  letter-spacing: -0.01em;
+}
+
+.ruleTitleActive {
+  color: var(--stroke-etched);
+}
+
+.ruleTitleInactive {
+  color: var(--text-secondary);
+}
+
+.ruleDesc {
+  @apply text-[10px] mt-1 italic;
+  color: var(--text-secondary);
+}
+
+.ruleToggle {
+  @apply shrink-0 w-12 h-6 border flex items-center p-1 transition-all;
+  border-color: var(--stroke-etched);
+}
+
+.ruleToggleActive {
+  background: var(--stroke-etched);
+  justify-content: flex-end;
+}
+
+.ruleToggleInactive {
+  background: var(--stroke-milled);
+  justify-content: flex-start;
+}
+
+.ruleToggleDot {
+  @apply w-3 h-3;
+}
+
+.ruleToggleDotActive {
+  background: #00ffcc;
+}
+
+.ruleToggleDotInactive {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.engineCard {
+  margin-top: 2.5rem;
+  padding: 1.5rem;
+  border: 1px dashed rgba(26, 26, 26, 0.3);
+  background: rgba(255, 255, 255, 0.3);
+  text-align: center;
+}
+
+.engineTitle {
+  @apply text-[9px] font-bold uppercase mb-4;
+  color: var(--text-secondary);
+}
+
+.engineStatus {
+  @apply flex items-center justify-center space-x-2;
+}
+
+.enginePing {
+  width: 0.375rem;
+  height: 0.375rem;
+  background: #00ffcc;
+  animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+  border-radius: 999px;
+}
+
+.engineText {
+  @apply text-[10px] font-bold uppercase tracking-[2px];
+}
+
+@keyframes ping {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

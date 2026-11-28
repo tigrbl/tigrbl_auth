@@ -1,0 +1,21 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1127"
+number: 1127
+slug: "rfc9449-dpop-proof-binding-boundary"
+title: "RFC 9449 DPoP proof-binding boundary"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Decision: DPoP proof-of-possession support is owned by protocol OAuth for proof parsing, credentials for DPoP key credential facts, and resource-server consumers for protected API binding validation. Target: RFC 9449 Demonstrating Proof of Possession (DPoP) at https://www.rfc-editor.org/rfc/rfc9449.html plus JWT cnf usage from RFC 7800 at https://www.rfc-editor.org/rfc/rfc7800.html. Consequences: concrete DPoP credential and validator features require executable T0/T1/T2 proof before implemented status; verifier checks must fail closed when DPoP is required and cnf.jkt or presented proof material is absent or mismatched."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define DPoP credential and resource-server proof-binding ownership for concrete package rows."
+    at: "2026-06-17T10:09:21Z"
+references: []
+body: |-
+  Decision: DPoP proof-of-possession support is owned by protocol OAuth for proof parsing, credentials for DPoP key credential facts, and resource-server consumers for protected API binding validation. Target: RFC 9449 Demonstrating Proof of Possession (DPoP) at https://www.rfc-editor.org/rfc/rfc9449.html plus JWT cnf usage from RFC 7800 at https://www.rfc-editor.org/rfc/rfc7800.html. Consequences: concrete DPoP credential and validator features require executable T0/T1/T2 proof before implemented status; verifier checks must fail closed when DPoP is required and cnf.jkt or presented proof material is absent or mismatched.

@@ -11,6 +11,8 @@ from typing import Any
 
 import yaml
 
+from tba_operator_identity.repo_truth import evaluate_tier4_bundle, package_version
+
 ROOT = Path(__file__).resolve().parents[1]
 PEER_PROFILE_DIR = ROOT / 'compliance' / 'evidence' / 'peer_profiles'
 COUNTERPART_DIR = ROOT / 'compliance' / 'evidence' / 'peer_counterparts'
@@ -18,6 +20,11 @@ TIER4_ROOT = ROOT / 'compliance' / 'evidence' / 'tier4'
 CANDIDATE_ROOT = TIER4_ROOT / 'candidates'
 BUNDLE_ROOT = TIER4_ROOT / 'bundles'
 DIST_TIER4_ROOT = ROOT / 'dist' / 'evidence-bundles' / 'peer-claim' / 'tier4'
+HANDOFF_ROOT = ROOT / 'dist' / 'tier4-external-handoff'
+
+
+def relpath(path: Path) -> str:
+    return path.relative_to(ROOT).as_posix()
 
 NON_INDEPENDENT_EVIDENCE_SOURCES = {
     'staged-external-root-fixture',
@@ -78,14 +85,8 @@ def sha256_file(path: Path) -> str:
 
 
 def repo_version() -> str:
-    pyproject = ROOT / 'pyproject.toml'
-    if not pyproject.exists():
-        return '0.0.0-checkpoint'
-    for line in pyproject.read_text(encoding='utf-8').splitlines():
-        stripped = line.strip()
-        if stripped.startswith('version') and '=' in stripped:
-            return stripped.split('=', 1)[1].strip().strip('"')
-    return '0.0.0-checkpoint'
+    version = package_version(ROOT)
+    return version or '0.0.0-checkpoint'
 
 
 def listify(value: Any) -> list[str]:
@@ -179,12 +180,12 @@ def canonical_contract_snapshots() -> dict[str, list[str]]:
     profile_paths: dict[str, list[str]] = {}
     for label in ('baseline', 'production', 'hardening', 'peer-claim'):
         candidates = [
-            ROOT / 'specs' / 'openapi' / 'profiles' / label / 'tigrbl_auth.public.openapi.json',
-            ROOT / 'specs' / 'openrpc' / 'profiles' / label / 'tigrbl_auth.admin.openrpc.json',
+            ROOT / 'specs' / 'openapi' / 'profiles' / label / 'tba_auth.public.openapi.json',
+            ROOT / 'specs' / 'openrpc' / 'profiles' / label / 'tba_auth.admin.openrpc.json',
             ROOT / 'compliance' / 'claims' / f'effective-target-claims.{label}.yaml',
             ROOT / 'compliance' / 'evidence' / f'effective-release-evidence.{label}.yaml',
         ]
-        profile_paths[label] = [str(path.relative_to(ROOT)) for path in candidates if path.exists()]
+        profile_paths[label] = [relpath(path) for path in candidates if path.exists()]
     return profile_paths
 
 
@@ -256,11 +257,146 @@ def ensure_candidate_layout(
     write_text(candidate_dir / 'reproduction.md', reproduction)
     return {
         'profile': profile_id,
-        'candidate_dir': str(candidate_dir.relative_to(ROOT)),
+        'candidate_dir': relpath(candidate_dir),
         'required_targets': required_targets,
         'runtime_profile': profile.get('preferred_runtime_profile', 'hardening'),
         'counterpart_id': counterpart.get('id'),
     }
+
+
+def materialize_external_handoff_templates(
+    peer_profiles: dict[str, dict[str, Any]],
+    counterparts: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    if HANDOFF_ROOT.exists():
+        shutil.rmtree(HANDOFF_ROOT)
+    HANDOFF_ROOT.mkdir(parents=True, exist_ok=True)
+
+    manifest_profiles: list[dict[str, Any]] = []
+    for profile_id, profile in sorted(peer_profiles.items()):
+        counterpart_id = str(profile.get('counterpart_id', '')).strip()
+        counterpart = counterparts[counterpart_id]
+        profile_root = HANDOFF_ROOT / profile_id
+        placeholders_root = profile_root / 'required-artifact-placeholders'
+        placeholders_root.mkdir(parents=True, exist_ok=True)
+
+        scenario_results = [
+            {
+                'id': scenario_id,
+                'passed': False,
+                'evidence': [],
+                'notes': 'Fill with externally generated result evidence.',
+            }
+            for scenario_id in listify(profile.get('scenario_ids'))
+        ]
+        write_yaml(
+            profile_root / 'manifest.template.yaml',
+            {
+                'schema_version': 1,
+                'profile': profile_id,
+                'counterpart_id': counterpart_id,
+                'evidence_source': 'Fill with independent external source name.',
+                'source_revision': 'Fill with immutable source revision.',
+                'peer_identity': {
+                    'peer_operator': 'Fill with independent organization or operator.',
+                    **{
+                        field: f'Fill with {field}.'
+                        for field in listify(counterpart.get('required_identity_fields'))
+                    },
+                },
+                'peer_runtime': {
+                    'execution_style': counterpart.get('execution_style'),
+                    **{
+                        field: f'Fill with {field}.'
+                        for field in listify(counterpart.get('required_container_fields'))
+                    },
+                },
+                'independence_attestation': {
+                    'attestation_class': counterpart.get('attestation_class_required'),
+                    'attesting_organization': 'Fill with attesting organization.',
+                    'attesting_contact': 'Fill with attesting contact.',
+                    'attestation_timestamp': 'Fill with RFC 3339 timestamp.',
+                    'counterpart_identified': True,
+                    'reproduction_preserved': True,
+                    'package_team_member': False,
+                    'repository_fixture_generated': False,
+                },
+                'reproduction': 'Fill with reproduction summary or include reproduction.md.',
+            },
+        )
+        write_yaml(
+            profile_root / 'result.template.yaml',
+            {
+                'schema_version': 1,
+                'profile': profile_id,
+                'counterpart_id': counterpart_id,
+                'passed': False,
+                'scenario_results': scenario_results,
+            },
+        )
+        write_text(
+            profile_root / 'reproduction.template.md',
+            '\n'.join(
+                [
+                    '# External Reproduction',
+                    '',
+                    f'- Peer profile: `{profile_id}`',
+                    f'- Counterpart: `{counterpart_id}`',
+                    f'- Runtime profile: `{profile.get("preferred_runtime_profile", "hardening")}`',
+                    '',
+                    'Record exact commands, container image digests, endpoint URLs, timestamps, and transcript locations used by the independent peer harness.',
+                ]
+            ),
+        )
+        write_text(
+            profile_root / 'CHECKLIST.md',
+            '\n'.join(
+                [
+                    '# External Handoff Checklist',
+                    '',
+                    '- Complete `manifest.yaml` from `manifest.template.yaml`.',
+                    '- Complete `result.yaml` from `result.template.yaml` with one result per required scenario.',
+                    '- Provide `reproduction.md` with exact independent execution instructions.',
+                    '- Replace every file under `required-artifact-placeholders/` with externally generated evidence.',
+                    '- Preserve immutable peer runtime metadata, including image digest where a container is used.',
+                ]
+            ),
+        )
+
+        for artifact in listify(counterpart.get('required_artifacts')):
+            artifact_name = artifact.rstrip('/').replace('\\', '/')
+            if not artifact_name:
+                continue
+            placeholder_path = placeholders_root / f'{artifact_name.replace("/", "__")}.placeholder.txt'
+            write_text(
+                placeholder_path,
+                f'Provide independent external artifact `{artifact_name}` for profile `{profile_id}`.',
+            )
+
+        manifest_profiles.append(
+            {
+                'profile': profile_id,
+                'counterpart_id': counterpart_id,
+                'template_dir': relpath(profile_root),
+                'required_artifacts': listify(counterpart.get('required_artifacts')),
+                'scenario_ids': listify(profile.get('scenario_ids')),
+            }
+        )
+
+    write_json(
+        HANDOFF_ROOT / 'external-root-template.json',
+        {
+            'schema_version': 1,
+            'template_kind': 'tier4-external-peer-handoff',
+            'profile_count': len(manifest_profiles),
+            'profiles': manifest_profiles,
+        },
+    )
+    write_text(
+        HANDOFF_ROOT / 'README.md',
+        'This tree is a fill-in package for independent external Tier 4 peer evidence. It is not itself qualifying peer evidence.',
+    )
+    return manifest_profiles
 
 
 def _load_external_result(ext_dir: Path) -> dict[str, Any] | None:
@@ -456,11 +592,33 @@ def materialize_external_bundle(
     copy_tree(bundle_dir, dist_dir)
     return {
         'profile': profile_id,
-        'bundle_dir': str(bundle_dir.relative_to(ROOT)),
-        'dist_bundle_dir': str(dist_dir.relative_to(ROOT)),
+        'bundle_dir': relpath(bundle_dir),
+        'dist_bundle_dir': relpath(dist_dir),
         'passed': passed,
         'promotable_targets': listify(profile.get('required_targets')) if passed else [],
         'validation_failures': validation_failures,
+    }
+
+
+def load_preserved_bundle_status(
+    profile_id: str,
+    counterpart_id: str,
+    profile: dict[str, Any],
+) -> dict[str, Any] | None:
+    bundle_id = f'{profile_id}--{counterpart_id}'
+    bundle_dir = BUNDLE_ROOT / bundle_id
+    manifest_path = bundle_dir / 'manifest.yaml'
+    if not manifest_path.exists():
+        return None
+    manifest = load_yaml(manifest_path) or {}
+    passed, failures, _details = evaluate_tier4_bundle(bundle_dir, manifest)
+    return {
+        'profile': profile_id,
+        'bundle_dir': relpath(bundle_dir),
+        'dist_bundle_dir': None,
+        'passed': passed,
+        'promotable_targets': listify(profile.get('required_targets')) if passed else [],
+        'validation_failures': failures,
     }
 
 
@@ -468,7 +626,7 @@ def update_claims(promoted_targets: set[str], retained_targets: list[str]) -> di
     claims_doc = load_claims()
     claim_set = claims_doc.setdefault('claim_set', {})
     full_boundary_promoted = bool(retained_targets) and set(retained_targets) <= promoted_targets
-    claim_set['phase'] = 'P13'
+    claim_set['delivery_track'] = 'independent-peer-evidence'
     claim_set['current_repository_tier'] = 4 if full_boundary_promoted else 3
     for claim in claim_set.get('claims', []):
         target = str(claim.get('target'))
@@ -487,10 +645,10 @@ def update_repository_state(promoted_targets: set[str], peer_matrix: list[dict[s
     state = state_doc.setdefault('repository_state', {})
     full_boundary_promoted = bool(retained_targets) and set(retained_targets) <= promoted_targets
     bundle_stats = summarize_peer_matrix(peer_matrix)
-    state['phase_13_independent_peer_program_extended_complete'] = True
-    state['phase_13_target_to_peer_mapping_complete'] = True
-    state['phase_13_peer_counterpart_catalog_complete'] = True
-    state['phase_13_peer_schema_and_tooling_extended'] = True
+    state['independent_peer_program_extended_complete'] = True
+    state['target_to_peer_mapping_complete'] = True
+    state['peer_counterpart_catalog_complete'] = True
+    state['peer_schema_and_tooling_extended'] = True
     state['tier4_candidate_bundle_layouts_present'] = True
     state['tier4_external_bundle_count'] = bundle_stats['preserved_bundle_count']
     state['tier4_valid_external_bundle_count'] = bundle_stats['valid_external_bundle_count']
@@ -537,13 +695,13 @@ def update_evidence_manifest(
     paths['tier4_bundle_root'] = 'compliance/evidence/tier4/bundles'
     promoted = doc.setdefault('promoted_target_subsets', {})
     promoted['tier4'] = sorted(promoted_targets)
-    notes = [note for note in list(doc.get('notes', [])) if not str(note).startswith('Phase 13 installs the independent peer program')]
+    notes = [note for note in list(doc.get('notes', [])) if not str(note).startswith('runtime-foundation checkpoint3 installs the independent peer program')]
     if promoted_targets and set(retained_targets) <= promoted_targets:
-        notes.append('Phase 13 installs the independent peer program and preserves validated external Tier 4 bundles for the full retained boundary.')
+        notes.append('runtime-foundation checkpoint3 installs the independent peer program and preserves validated external Tier 4 bundles for the full retained boundary.')
     elif promoted_targets:
-        notes.append('Phase 13 installs the independent peer program and preserves validated external Tier 4 bundles for a subset of retained targets. Package-level strict independent claims remain blocked until the full retained boundary is promoted.')
+        notes.append('runtime-foundation checkpoint3 installs the independent peer program and preserves validated external Tier 4 bundles for a subset of retained targets. Package-level strict independent claims remain blocked until the full retained boundary is promoted.')
     else:
-        notes.append('Phase 13 installs the independent peer program, full retained target-to-peer mapping, counterpart catalog, candidate bundle layouts, and fail-closed Tier 4 promotion logic. No targets are promoted to Tier 4 in this checkpoint because preserved qualifying independent external artifacts were not supplied.')
+        notes.append('runtime-foundation checkpoint3 installs the independent peer program, full retained target-to-peer mapping, counterpart catalog, candidate bundle layouts, and fail-closed Tier 4 promotion logic. No targets are promoted to Tier 4 in this checkpoint because preserved qualifying independent external artifacts were not supplied.')
     doc['notes'] = notes
     write_yaml(manifest_path, doc)
     return doc
@@ -560,7 +718,7 @@ def write_peer_profile_execution_reports(peer_profiles: dict[str, dict[str, Any]
         'retained_target_count': len(retained_targets),
         'mapped_retained_target_count': len(target_coverage(peer_profiles)),
         'retained_target_coverage_complete': True,
-        'external_artifact_root': str(external_root.relative_to(ROOT)) if external_root else None,
+        'external_artifact_root': relpath(external_root) if external_root else None,
     }
     payload = {'passed': True, 'failures': [], 'warnings': [], 'summary': summary, 'details': sorted(peer_profiles)}
     write_json(ROOT / 'docs' / 'compliance' / 'peer_profile_execution_report.json', payload)
@@ -635,7 +793,7 @@ def write_peer_matrix_reports(peer_matrix: list[dict[str, Any]], promoted_target
         write_text(report_dir / 'TIER4_PROMOTION_MATRIX.md', '# Tier 4 Promotion Matrix\n\n' + promo_body)
 
 
-def write_phase13_docs(promoted_targets: set[str], peer_matrix: list[dict[str, Any]], preserved_bundle_count: int, retained_targets: list[str], external_root: Path | None) -> None:
+def write_peer_program_docs(promoted_targets: set[str], peer_matrix: list[dict[str, Any]], preserved_bundle_count: int, retained_targets: list[str], external_root: Path | None) -> None:
     report_dir = ROOT / 'docs' / 'archive' / 'historical' / 'compliance'
     report_dir.mkdir(parents=True, exist_ok=True)
     full_boundary_promoted = bool(retained_targets) and set(retained_targets) <= promoted_targets
@@ -651,9 +809,9 @@ def write_phase13_docs(promoted_targets: set[str], peer_matrix: list[dict[str, A
             'Repository-staged fixture roots remain useful for fail-closed pipeline exercises, but they are explicitly rejected for Tier 4 promotion and package-level strict independent claims remain blocked until real external bundles are preserved and validated.'
         )
     lines = [
-        '# Phase 13 Independent Peer Program and Strict Public Claims',
+        '# runtime-foundation checkpoint3 Independent Peer Program and Strict Public Claims',
         '',
-        'This checkpoint extends the independent peer program for `tigrbl_auth`, installs full retained target-to-peer coverage, and preserves Tier 4 bundle normalization logic that fails closed when external artifacts are absent, incomplete, self-attested, or repository-staged.',
+        'This checkpoint extends the independent peer program for `tba_auth`, installs full retained target-to-peer coverage, and preserves Tier 4 bundle normalization logic that fails closed when external artifacts are absent, incomplete, self-attested, or repository-staged.',
         '',
         '## Implemented in this checkpoint',
         '',
@@ -672,7 +830,7 @@ def write_phase13_docs(promoted_targets: set[str], peer_matrix: list[dict[str, A
         f'- invalid or non-qualifying preserved bundles: `{bundle_stats["invalid_external_bundle_count"]}`',
         f'- promoted Tier 4 targets: `{len(promoted_targets)}`',
         f'- retained boundary fully promoted to Tier 4: `{full_boundary_promoted}`',
-        f'- external artifact root used for this checkpoint: `{str(external_root.relative_to(ROOT)) if external_root else None}`',
+        f'- external artifact root used for this checkpoint: `{relpath(external_root) if external_root else None}`',
         '',
         '## Current provenance note',
         '',
@@ -683,7 +841,7 @@ def write_phase13_docs(promoted_targets: set[str], peer_matrix: list[dict[str, A
     ]
     for row in peer_matrix:
         lines.append(f"- `{row['profile']}` -> counterpart `{row['counterpart_id']}` -> targets `{', '.join(row['required_targets'])}`")
-    write_text(report_dir / 'PHASE13_INDEPENDENT_PEER_PROGRAM.md', '\n'.join(lines))
+    write_text(report_dir / 'INDEPENDENT_PEER_PROGRAM.md', '\n'.join(lines))
 
     runbook = (
         '# External Interop and Tier 4 Promotion\n\n'
@@ -699,10 +857,10 @@ def write_phase13_docs(promoted_targets: set[str], peer_matrix: list[dict[str, A
     write_text(ROOT / 'docs' / 'runbooks' / 'EXTERNAL_INTEROP_AND_TIER4_PROMOTION.md', runbook)
 
 
-def write_phase13_materialization_report(promoted_targets: set[str], preserved_bundle_count: int, retained_targets: list[str], external_root: Path | None, profile_count: int) -> None:
+def write_peer_materialization_report(promoted_targets: set[str], preserved_bundle_count: int, retained_targets: list[str], external_root: Path | None, profile_count: int) -> None:
     payload = {
         'passed': True,
-        'external_root': str(external_root.relative_to(ROOT)) if external_root else None,
+        'external_root': relpath(external_root) if external_root else None,
         'preserved_bundle_count': preserved_bundle_count,
         'candidate_profile_count': profile_count,
         'promoted_target_count': len(promoted_targets),
@@ -711,14 +869,14 @@ def write_phase13_materialization_report(promoted_targets: set[str], preserved_b
         'missing_retained_target_coverage': [],
         'retained_boundary_promoted': bool(retained_targets) and set(retained_targets) <= promoted_targets,
     }
-    write_json(ROOT / 'docs' / 'archive' / 'historical' / 'compliance' / 'phase13_peer_materialization_report.json', payload)
-    lines = ['# Phase 13 Peer Materialization Report', '', f"- passed: `{payload['passed']}`", '', '## Summary', '']
+    write_json(ROOT / 'docs' / 'archive' / 'historical' / 'compliance' / 'independent_peer_materialization_report.json', payload)
+    lines = ['# runtime-foundation checkpoint3 Peer Materialization Report', '', f"- passed: `{payload['passed']}`", '', '## Summary', '']
     for key in ('external_root', 'preserved_bundle_count', 'candidate_profile_count', 'promoted_target_count', 'retained_target_count', 'retained_boundary_promoted'):
         lines.append(f"- {key}: `{payload[key]}`")
     lines.extend(['', '## Promoted targets', ''])
     for target in sorted(promoted_targets):
         lines.append(f'- `{target}`')
-    write_text(ROOT / 'docs' / 'archive' / 'historical' / 'compliance' / 'phase13_peer_materialization_report.md', '\n'.join(lines))
+    write_text(ROOT / 'docs' / 'archive' / 'historical' / 'compliance' / 'independent_peer_materialization_report.md', '\n'.join(lines))
 
 
 def write_evidence_peer_readiness_report(promoted_targets: set[str], preserved_bundle_count: int, claims_doc: dict[str, Any]) -> None:
@@ -951,7 +1109,7 @@ def write_status_doc(promoted_targets: set[str], retained_targets: list[str], pr
         '',
         '## Summary',
         '',
-        f'- external artifact root: `{str(external_root.relative_to(ROOT)) if external_root else None}`',
+        f'- external artifact root: `{relpath(external_root) if external_root else None}`',
         f'- peer profile count: `{len(load_peer_profiles())}`',
         f"- preserved external bundle count: `{bundle_summary.get('external_bundle_count', preserved_bundle_count)}`",
         f"- valid independent external bundle count: `{bundle_summary.get('valid_external_bundle_count', 0)}`",
@@ -984,7 +1142,7 @@ def write_status_doc(promoted_targets: set[str], retained_targets: list[str], pr
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description='Materialize Phase 13 independent peer-program artifacts.')
+    parser = argparse.ArgumentParser(description='Materialize runtime-foundation checkpoint3 independent peer-program artifacts.')
     parser.add_argument('--external-root', type=Path, default=None, help='Optional root containing externally generated peer artifacts by profile id.')
     parser.add_argument('--no-promote', action='store_true', help='Do not promote claims even when valid external bundles are present.')
     parser.add_argument('--require-full-boundary', action='store_true', help='Return a non-zero exit status unless the full retained boundary is covered by valid independent external bundles.')
@@ -998,8 +1156,9 @@ def main(argv: list[str] | None = None) -> int:
     contract_paths = canonical_contract_snapshots()
 
     if external_root is not None:
-        os.environ['TIGRBL_AUTH_PEER_ARTIFACTS_ROOT'] = str(external_root)
+        os.environ['TBA_AUTH_PEER_ARTIFACTS_ROOT'] = str(external_root)
 
+    materialize_external_handoff_templates(peer_profiles, counterparts)
     write_peer_profile_execution_reports(peer_profiles, external_root, retained_targets)
 
     peer_matrix: list[dict[str, Any]] = []
@@ -1029,17 +1188,19 @@ def main(argv: list[str] | None = None) -> int:
         }
         if external_root is not None:
             bundle = materialize_external_bundle(profile_id, profile, counterpart, external_root, target_tests)
-            if bundle is not None:
-                row['external_bundle_dir'] = bundle['bundle_dir']
-                row['promotable_targets'] = bundle['promotable_targets']
-                row['validation_failures'] = bundle.get('validation_failures', [])
-                preserved_bundles.append(bundle['bundle_dir'])
-                if bundle.get('passed'):
-                    valid_preserved_bundles.append(bundle['bundle_dir'])
-                    if not args.no_promote:
-                        promoted_targets.update(bundle['promotable_targets'])
-                else:
-                    invalid_preserved_bundles.append(bundle['bundle_dir'])
+        else:
+            bundle = load_preserved_bundle_status(profile_id, counterpart_id, profile)
+        if bundle is not None:
+            row['external_bundle_dir'] = bundle['bundle_dir']
+            row['promotable_targets'] = bundle['promotable_targets']
+            row['validation_failures'] = bundle.get('validation_failures', [])
+            preserved_bundles.append(bundle['bundle_dir'])
+            if bundle.get('passed'):
+                valid_preserved_bundles.append(bundle['bundle_dir'])
+                if not args.no_promote:
+                    promoted_targets.update(bundle['promotable_targets'])
+            else:
+                invalid_preserved_bundles.append(bundle['bundle_dir'])
         peer_matrix.append(row)
 
     claims_doc = update_claims(promoted_targets, retained_targets)
@@ -1054,8 +1215,8 @@ def main(argv: list[str] | None = None) -> int:
         len(peer_profiles),
     )
     write_peer_matrix_reports(peer_matrix, promoted_targets, retained_targets)
-    write_phase13_docs(promoted_targets, peer_matrix, len(preserved_bundles), retained_targets, external_root)
-    write_phase13_materialization_report(promoted_targets, len(preserved_bundles), retained_targets, external_root, len(peer_profiles))
+    write_peer_program_docs(promoted_targets, peer_matrix, len(preserved_bundles), retained_targets, external_root)
+    write_peer_materialization_report(promoted_targets, len(preserved_bundles), retained_targets, external_root, len(peer_profiles))
     write_evidence_peer_readiness_report(promoted_targets, len(preserved_bundles), claims_doc)
     update_current_and_certification_state_reports(promoted_targets, retained_targets, len(preserved_bundles))
     update_release_gate_report(promoted_targets, retained_targets)
@@ -1066,7 +1227,7 @@ def main(argv: list[str] | None = None) -> int:
     full_boundary_promoted = bool(retained_targets) and set(retained_targets) <= promoted_targets
     payload = {
         'passed': not missing_coverage and (full_boundary_promoted if args.require_full_boundary else True),
-        'external_root': str(external_root.relative_to(ROOT)) if external_root else None,
+        'external_root': relpath(external_root) if external_root else None,
         'preserved_bundle_count': len(preserved_bundles),
         'valid_external_bundle_count': len(valid_preserved_bundles),
         'invalid_external_bundle_count': len(invalid_preserved_bundles),
@@ -1078,7 +1239,7 @@ def main(argv: list[str] | None = None) -> int:
         'retained_boundary_promoted': full_boundary_promoted,
         'require_full_boundary': bool(args.require_full_boundary),
     }
-    write_json(ROOT / 'docs' / 'archive' / 'historical' / 'compliance' / 'phase13_peer_materialization_report.json', payload)
+    write_json(ROOT / 'docs' / 'archive' / 'historical' / 'compliance' / 'independent_peer_materialization_report.json', payload)
     if args.require_full_boundary and not full_boundary_promoted:
         return 1
     if missing_coverage:

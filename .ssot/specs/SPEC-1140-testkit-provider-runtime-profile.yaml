@@ -1,0 +1,20 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1140"
+number: 1140
+slug: "testkit-provider-runtime-profile"
+title: "Testkit Provider Runtime Profile"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines seeded provider runtime profiles, fixtures, fakes, vectors, and cross-cutting integration harness duties."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  Defines seeded provider runtime profiles, fixtures, fakes, vectors, and cross-cutting integration harness duties.
+spec_kind: "operational"
+adr_ids:
+  - "adr:1075"

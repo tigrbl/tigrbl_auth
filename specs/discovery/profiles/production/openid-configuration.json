@@ -43,6 +43,7 @@
   "grant_types_supported": [
     "authorization_code",
     "client_credentials",
+    "refresh_token",
     "password",
     "urn:ietf:params:oauth:grant-type:jwt-bearer"
   ],
@@ -73,5 +74,35 @@
     "private_key_jwt"
   ],
   "end_session_endpoint": "https://authn.example.com/logout",
-  "protected_resource_metadata": "https://authn.example.com/.well-known/oauth-protected-resource"
+  "protected_resource_metadata": "https://authn.example.com/.well-known/oauth-protected-resource",
+  "tba_auth_capabilities": [
+    "account-consents",
+    "account-credentials",
+    "account-profile",
+    "account-sessions",
+    "attestation-appraisal",
+    "authorize",
+    "authzen-evaluation",
+    "gnap-transaction",
+    "introspection",
+    "jwks",
+    "login",
+    "logout",
+    "oauth-authorization-server-metadata",
+    "oauth-protected-resource-metadata",
+    "oid4vci-credential",
+    "oid4vp-verification",
+    "openid-configuration",
+    "realm-jwks",
+    "realm-openid-configuration",
+    "register",
+    "register-management",
+    "revoke",
+    "set-receiver",
+    "standards-manifest",
+    "tenant-jwks",
+    "tenant-openid-configuration",
+    "token",
+    "userinfo"
+  ]
 }

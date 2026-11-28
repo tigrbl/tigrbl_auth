@@ -1,0 +1,23 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1139"
+number: 1139
+slug: "spiffe-svid-package-ownership"
+title: "Shared SPIFFE SVID implementation and credential profiles"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The shared layer-10 tba-concrete-svid package owns the common SVID value and format-independent SPIFFE identity invariants. The workload identity contracts own the interfaces and format vocabulary. The shared SVID package must be usable without importing an X.509, JWT, or WIT carrier package or requiring SPIRE."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+  The shared layer-10 tba-concrete-svid package owns the common SVID value and format-independent SPIFFE identity invariants. The workload identity contracts own the interfaces and format vocabulary. The shared SVID package must be usable without importing an X.509, JWT, or WIT carrier package or requiring SPIRE.
+  
+  The format-specific concretes compose the shared SVID value with their respective carrier. X.509-SVID uses tba-concrete-certificate-x509, JWT-SVID uses tba-concrete-jwt, and WIT-SVID uses tba-concrete-wit. The X.509 value is reusable by any certificate profile. SPIFFE rules stay in the SPIFFE protocol or profile package. WIT-SVID is an explicitly selected SPIFFE profile over WIMSE WIT.
+  
+  ## Assurance
+  Record each supported role and its upstream revision separately. SPIRE integration is optional and requires its own named-peer evidence. This decision applies ADR-1137 and ADR-1138.

@@ -1,7 +1,7 @@
 sha256:
   README.md: 17681e11bcb535eb500a03b89a9ca052e70c173315023689f3fecdd696e4dc30
   contracts/openid-configuration.json: 2b92af42d5b74dedaa362c0c491ed02c563c30cf62b99d63cf606e00d43dca71
-  contracts/tigrbl_auth.public.openapi.json: 4bc2c693e05cee326cfd20aef881e83e1d989df81527500606f658ace6dcc1aa
+  contracts/tba_auth.public.openapi.json: 4bc2c693e05cee326cfd20aef881e83e1d989df81527500606f658ace6dcc1aa
   docs/compliance/certification_state_report.json: ff16debac6dc2a44ddd025499ce1316bff1d77cf39728427211659aaf1ee9902
   docs/compliance/certification_state_report.md: de62a0f31690648875e42aeb80cc0b9e73ebf380f0cf3676a4b1284e735b9fbd
   docs/compliance/claims_lint_report.json: 1424866c339d7b3a34a996e2345ad1547768bbd2ed790ae00af41241b17c737c

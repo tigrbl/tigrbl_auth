@@ -1,0 +1,38 @@
+version: 1
+layer: 002-contracts
+rules:
+  ownership: one-canonical-package-per-semantic-family
+  ports: capability-shaped-not-storage-shaped
+  protocol_wire_models: 050-protocols
+  durability: 01-storage-and-030-storage-runtime
+  implementations: 05-bases-10-concrete-020-providers
+families:
+  foundational:
+    claim: tba-contracts-claim
+    replay: tba-contracts-replay
+    token: tba-contracts-token
+  identity_security:
+    identity: tba-contracts-identity
+    administration: tba-administration-contracts
+    authorization: tba-contracts-authorization
+    audit: tba-audit-contracts
+    delegation: tba-delegation-contracts
+    governance: tba-governance-contracts
+    identity_assurance: tba-contracts-identity-assurance
+    did: tba-contracts-did
+    workload_identity: tba-contracts-workload-identity
+    public_key_authentication: tba-contracts-public-key-authentication
+    digital_credential: tba-contracts-digital-credential
+    attestation: tba-contracts-attestation
+    security_event: tba-contracts-security-event
+  artifact_and_trust:
+    key: tba-key-contracts
+    certificate: tba-certificate-contracts
+    trust: tba-trust-contracts
+    protected_artifact: tba-protected-artifact-contracts
+  release:
+    release_assurance: tba-contracts-release
+compatibility_aggregates:
+  tba-contracts-security-trust:
+    status: transitional
+    removal_condition: key-certificate-trust-and-artifact-families-extracted

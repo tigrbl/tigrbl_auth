@@ -1,7 +1,7 @@
 {
   "scope": "runtime package, tests, scripts, and packaging metadata",
   "root": {
-    "runtime": "tigrbl_auth",
+    "runtime": "tba_auth",
     "tests": "tests",
     "scripts": "scripts",
     "metadata": "pyproject.toml"

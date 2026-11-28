@@ -29,6 +29,14 @@ The release path is organized into these planes:
 - `cli/` for operator and certification UX,
 - `plugin.py` and `gateway.py` for Tigrbl-native composition.
 
+Package prefixes follow the same single-concern rule:
+
+- `tba-identity-*` owns neutral identity records and operational support,
+- `tba-authn-*` owns credential proof and authentication lifecycle,
+- `tba-authorization-*` owns authority, policy, grants, permissions, decisions, and enforcement,
+- `tba-*-protocol` owns OAuth/OIDC/RP wire behavior,
+- `tba-auth*` owns composed products and front doors.
+
 ## Consequences
 
 - downstream extension work can be quarantined cleanly,

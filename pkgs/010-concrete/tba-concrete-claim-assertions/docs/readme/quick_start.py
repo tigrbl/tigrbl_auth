@@ -1,0 +1,3 @@
+from tba_concrete_claim_assertions import AssertionsClaim
+
+assert callable(AssertionsClaim)

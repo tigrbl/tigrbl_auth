@@ -1,0 +1,54 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1132"
+number: 1132
+slug: "public-exported-surfaces-are-not-operator-workflows"
+title: "Public exported surfaces are not operator workflows"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Public exported surfaces are first-class downstream contracts. They are not an operator plane, an operator role model, an operator state model, or an operator action family."
+supersedes:
+  - "adr:1027"
+  - "adr:1103"
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Correct operator vocabulary drift: public downstream exports are not an operator plane, role, state model, or action family."
+    at: "2026-06-22T07:20:40Z"
+  -
+    status: "accepted"
+    note: "Superseded by ADR-1132: public exported surfaces are downstream API contracts, not operator workflows."
+    at: "2026-06-22T07:25:15Z"
+references: []
+body: |-
+  ## Decision
+  
+  Public exported surfaces are first-class downstream contracts. They are not an operator plane, an operator role model, an operator state model, or an operator action family.
+  
+  The phrase `public operator surface` is retired for this repository because it conflated two separate ideas:
+  
+  - exported objects, commands, modules, routes, UIX packages, and contracts that downstream users are expected to consume as public API;
+  - operational maintenance workflows and internal state used to bootstrap, inspect, migrate, repair, certify, or release the system.
+  
+  New SSOT text MUST use `public exported surface`, `first-class exported surface`, `public command surface`, `public API surface`, or a product-specific surface name when the intended meaning is downstream consumption of exported objects.
+  
+  The term `operator` MUST NOT be used to introduce a distinct authority class, role, state model, store, action style, package layer, or request-path dependency. When a document needs to describe a person or system consuming exported objects, it should say `downstream consumer`, `integrator`, `administrator`, `support user`, or the specific product persona.
+  
+  Administration concepts remain Administrator/control-plane concepts. Durable persistence remains owned by storage tables and table-owned operations. Protocol, server, runtime, facade, API, UIX, and command modules may expose or adapt behavior, but they are not canonical owners for durable table behavior.
+  
+  ## Rationale
+  
+  Prior SSOT language used `operator` to mean public exported command/API surfaces. That wording drifted into a false architecture: operator-specific state, operator-specific actions, and operator-only authority classes. The intended rule was narrower: public exports are certification-relevant because downstream consumers depend on them.
+  
+  ## Consequences
+  
+  ADRs and SPECs that made `operator` a workflow/package/state boundary are superseded by this decision.
+  
+  Draft platform-admin contracts must describe platform administrators, support/break-glass controls, and audited control-plane workflows without creating `platform operator` as a separate authority class.
+  
+  Generated or historical documents may retain old wording only when explicitly marked non-authoritative or derived from upstream SSOT-origin policy.
+  
+  Boundary tests should reject new repo-local SSOT wording that reintroduces `operator-style`, `operator action`, `operator state`, or `operator surface` as canonical design language outside explicit historical exceptions.

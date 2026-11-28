@@ -7,11 +7,11 @@ targets:
     status: evidenced-release-gated
     profile: production
   modules:
-  - tigrbl_auth/standards/oidc/userinfo.py
+  - tba_auth/standards/oidc/userinfo.py
   tests:
-  - tests/conformance/baseline/test_openid_userinfo_endpoint.py
-  - tests/integration/test_oidc_endpoints.py
-  - tests/unit/test_openid_userinfo_endpoint.py
+  - pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_userinfo_endpoint.py
+  - pkgs/120-tests/tba-tests-oidc/tests/integration/test_oidc_endpoints.py
+  - pkgs/120-tests/tba-tests-oidc/tests/unit/test_openid_userinfo_endpoint.py
   endpoint_mapping:
     current:
     - /userinfo
@@ -49,7 +49,7 @@ reports:
 - docs/compliance/certification_state_report.json
 - docs/compliance/certification_state_report.md
 contracts:
-- specs/openapi/profiles/production/tigrbl_auth.public.openapi.json
+- specs/openapi/profiles/production/tba_auth.public.openapi.json
 - specs/discovery/profiles/production/openid-configuration.json
 scenario_ids:
 - oidc-userinfo

@@ -1,0 +1,6 @@
+{
+  "name": "Hardware-Secured Key AMR Workbench",
+  "description": "Comprehensive UIX for human, client, and workload hardware-secured key (hwk) authentication, enrollment, policy administration, and diagnostics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

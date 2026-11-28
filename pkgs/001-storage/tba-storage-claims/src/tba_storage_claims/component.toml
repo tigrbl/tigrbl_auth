@@ -1,0 +1,46 @@
+manifest_version = "1.0.0"
+
+[component]
+id = "tigrbl.identity.storage.claims"
+distribution = "tba-storage-claims"
+import_root = "tba_storage_claims"
+
+[schema]
+contract = "1.0.0"
+migration_head = "6b5acf6a-8d14-51f3-af78-0534d36dac44"
+migrations_package = "tba_storage_claims.migrations.versions"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.claims:table:claim_definitions"
+kind = "table"
+physical_name = "authn.claim_definitions"
+model = "tba_storage_claims.tables:ClaimDefinition"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.claims:table:claim_source_bindings"
+kind = "table"
+physical_name = "authn.claim_source_bindings"
+model = "tba_storage_claims.tables:ClaimSourceBinding"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.claims:table:claim_release_policies"
+kind = "table"
+physical_name = "authn.claim_release_policies"
+model = "tba_storage_claims.tables:ClaimReleasePolicy"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.claims:table:claim_provenance_records"
+kind = "table"
+physical_name = "authn.claim_provenance_records"
+model = "tba_storage_claims.tables:ClaimProvenanceRecord"
+
+[[schema.objects]]
+id = "tigrbl.identity.storage.claims:table:claim_snapshots"
+kind = "table"
+physical_name = "authn.claim_snapshots"
+model = "tba_storage_claims.tables:ClaimSnapshot"
+
+[[schema.requires]]
+component = "tigrbl.identity.storage.tenancy"
+contract = ">=1.0.0,<2.0.0"
+minimum_revision = "69854e73-52d3-53ec-9542-6737159e42d6"

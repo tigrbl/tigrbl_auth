@@ -1,19 +1,19 @@
 targets:
 - Import/export portability
 modules:
-- tigrbl_auth/cli/metadata.py
-- tigrbl_auth/cli/handlers.py
-- tigrbl_auth/services/import_export_service.py
-- tigrbl_auth/services/operator_service.py
+- tba_auth/cli/metadata.py
+- tba_auth/cli/handlers.py
+- tba_auth/services/import_export_service.py
+- tba_auth/services/operator_service.py
 tests:
-- tests/conformance/operator/test_cli_import_export.py
+- pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py
 contracts:
-- contracts/cli_contract.json
+- contracts\cli_contract.json
 reports:
-- reports/current_state_report.json
-- reports/current_state_report.md
-- reports/certification_state_report.json
-- reports/certification_state_report.md
-- reports/release_gate_report.json
-- reports/release_gate_report.md
-- reports/phase12_targeted_test_output.txt
+- reports\current_state_report.json
+- reports\current_state_report.md
+- reports\certification_state_report.json
+- reports\certification_state_report.md
+- reports\release_gate_report.json
+- reports\release_gate_report.md
+- reports\retained-boundary-runtime-operator-test-output.txt

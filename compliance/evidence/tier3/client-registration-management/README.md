@@ -23,4 +23,4 @@ Bearer-authenticated read/update/delete registration management with durable cli
 
 ## Honest note
 
-This bundle preserves targeted phase-8 evidence for the selected hardening targets. It does not claim full-boundary certification and it does not replace the still-missing Tier 4 peer-validation work.
+This bundle preserves targeted capability-wiring evidence for the selected hardening targets. It does not claim full-boundary certification and it does not replace the still-missing Tier 4 peer-validation work.

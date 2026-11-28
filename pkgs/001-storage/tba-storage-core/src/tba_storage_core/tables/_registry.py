@@ -1,0 +1,200 @@
+"""Compatibility projection of independently owned storage components."""
+# ruff: noqa: F401,F403
+
+from tba_primitives_identity.orm import RestOltpTable
+from tba_storage_tenancy.tables import Realm, Tenant
+from tba_storage_principals.tables import User, Principal, SubjectAlias, ServiceIdentity, MachineIdentity
+from tba_storage_authentication.tables import Credential, CredentialApiKey, CredentialServiceKey, CredentialAuditEvent, CredentialClientSecret, CredentialDpopKey, CredentialMfaFactor, CredentialMtlsCertificate, CredentialPassword, CredentialRecoveryCode, AuthenticationChallenge
+from tba_storage_oauth.tables import Client, ClientRegistration, AuthorizationServer, AuthSession, AuthCode, DeviceCode, RevokedToken, PushedAuthorizationRequest
+from tba_storage_oidc.tables import LogoutState, BackchannelLogoutReplay
+from tba_storage_token.tables import TokenRecord, ProtectedArtifactReference, PossessionProofReplay
+from tba_storage_consent.tables import Consent
+from tba_storage_delegation.tables import DelegationGrant, DelegationGrantScope, DelegationGrantProof, DelegationGrantEdge, DelegationGrantTokenLink
+from tba_storage_key_material.tables import CryptoKey, CryptoKeyVersion, PrincipalKeyBinding, KeyEnvelope, KeyAttestationEvidence, KeyRotationEvent, KeyRotationPolicy
+from tba_storage_authorization_policy.tables import TenantMembership, Role, AttributePolicy, PolicyCondition, Policy, PolicyVersion, PolicySet, PolicySetMember, PolicyTarget, DelegatedAdminScope, AuthorizationInvariant, InvariantEvaluation, InvariantViolation, AuthorizationResourceType, AuthorizationAction, AuthorizationGroup, AuthorizationGroupMembership, RolePermission, RoleGrant, PolicyApproval, PolicyPublication
+from tba_storage_access_governance.tables import Entitlement, EntitlementAssignment, AccessReviewCampaign, AccessReviewItem, AccessReviewDecision
+from tba_storage_residency.tables import ResidencyZone, TenantResidency
+from tba_storage_audit.tables import AuditEvent
+from tba_storage_federation.tables import ProviderArtifact, IdentityProvider, Federation, FederatedSession
+from tba_storage_digital_credential.tables import CredentialIssuer, CredentialConfiguration, WalletRegistration, WalletInstance, WalletAttestation, WalletKeyBinding, CredentialOffer, CredentialIssuanceTransaction, CredentialDeferredTransaction, CredentialNotification, CredentialStatusList, CredentialStatusEntry, CredentialStatusPublication
+from tba_storage_presentation.tables import VerifierRegistration, PresentationTransaction, PresentationConsent, PresentationReplay
+from tba_storage_attestation.tables import AttestationEvidence, AttestationResult, AttestationReferenceManifest, AttestationReferenceValue, AttestationEndorsement, AttestationAppraisalPolicy
+from tba_storage_workload_identity.tables import WorkloadIdentity, SvidRecord, SpiffeTrustBundle, TrustDomainFederation, WorkloadReferenceBinding, WorkloadCredentialEntitlement
+from tba_storage_security_event.tables import SecurityEvent, SecurityEventSubscription, SecurityEventDelivery, SecurityEventReplay
+from tba_storage_replay_protection.tables import ReplayReservation, DpopReplay, DpopNonce
+from tba_storage_did.tables import DidDocument, DidDocumentVersion, DidVerificationMethod, DidService, DidResolutionCache
+from tba_storage_gnap.tables import GnapGrant, GnapContinuation, GnapClientInstance, GnapInteraction
+from tba_storage_certificate.tables import CertificateRecord, TrustAnchor, CertificateStatusSnapshot
+from tba_storage_claims.tables import ClaimDefinition, ClaimSourceBinding, ClaimReleasePolicy, ClaimProvenanceRecord, ClaimSnapshot
+from tba_storage_webauthn.tables import CredentialWebAuthnPasskey, WebAuthnAttestationRecord, WebAuthnCeremony, WebAuthnRelyingParty
+from tba_storage_authority_graph.tables import AuthorityDerivationGraph, AuthorityDerivationGraphNode, AuthorityDerivationGraphEdge
+from tba_storage_trust_federation_graph.tables import TrustFederationGraph, TrustFederationGraphNode, TrustFederationGraphEdge
+from tba_storage_scim.tables import ScimSchemaRecord, ScimUserRecord, ScimGroupRecord, ScimPatchEvent
+from tba_storage_release_governance.tables import SDKPackageRecord, PluginDescriptorRecord, PluginLifecycleEventRecord, ReleaseCapabilityRecord, ReleaseAuthorizationState, RuntimeQualificationRecord, ReleaseSecurityPosture, ReleasePosture, ReleaseAttestationEvent, ControlCorrectnessReport, AuthzVerificationReport, ResourceServerContract
+from tba_storage_operator.tables import OperatorMetadata, OperatorRecord, OperatorTransaction, OperatorAuditEvent, OperatorActivity
+from tba_storage_oauth.tables.client import _CLIENT_ID_RE
+from tba_storage_delegation.tables.delegation_grant import DelegationGrantRecord
+
+_TABLE_MODELS = (
+    Realm,
+    Tenant,
+    User,
+    Principal,
+    SubjectAlias,
+    ServiceIdentity,
+    MachineIdentity,
+    Credential,
+    CredentialApiKey,
+    CredentialServiceKey,
+    CredentialAuditEvent,
+    CredentialClientSecret,
+    CredentialDpopKey,
+    CredentialMfaFactor,
+    CredentialMtlsCertificate,
+    CredentialPassword,
+    CredentialRecoveryCode,
+    AuthenticationChallenge,
+    Client,
+    ClientRegistration,
+    AuthorizationServer,
+    AuthSession,
+    AuthCode,
+    DeviceCode,
+    RevokedToken,
+    PushedAuthorizationRequest,
+    LogoutState,
+    BackchannelLogoutReplay,
+    TokenRecord,
+    ProtectedArtifactReference,
+    PossessionProofReplay,
+    Consent,
+    DelegationGrant,
+    DelegationGrantScope,
+    DelegationGrantProof,
+    DelegationGrantEdge,
+    DelegationGrantTokenLink,
+    CryptoKey,
+    CryptoKeyVersion,
+    PrincipalKeyBinding,
+    KeyEnvelope,
+    KeyAttestationEvidence,
+    KeyRotationEvent,
+    KeyRotationPolicy,
+    TenantMembership,
+    Role,
+    AttributePolicy,
+    PolicyCondition,
+    Policy,
+    PolicyVersion,
+    PolicySet,
+    PolicySetMember,
+    PolicyTarget,
+    DelegatedAdminScope,
+    AuthorizationInvariant,
+    InvariantEvaluation,
+    InvariantViolation,
+    AuthorizationResourceType,
+    AuthorizationAction,
+    AuthorizationGroup,
+    AuthorizationGroupMembership,
+    RolePermission,
+    RoleGrant,
+    PolicyApproval,
+    PolicyPublication,
+    Entitlement,
+    EntitlementAssignment,
+    AccessReviewCampaign,
+    AccessReviewItem,
+    AccessReviewDecision,
+    ResidencyZone,
+    TenantResidency,
+    AuditEvent,
+    ProviderArtifact,
+    IdentityProvider,
+    Federation,
+    FederatedSession,
+    CredentialIssuer,
+    CredentialConfiguration,
+    WalletRegistration,
+    WalletInstance,
+    WalletAttestation,
+    WalletKeyBinding,
+    CredentialOffer,
+    CredentialIssuanceTransaction,
+    CredentialDeferredTransaction,
+    CredentialNotification,
+    CredentialStatusList,
+    CredentialStatusEntry,
+    CredentialStatusPublication,
+    VerifierRegistration,
+    PresentationTransaction,
+    PresentationConsent,
+    PresentationReplay,
+    AttestationEvidence,
+    AttestationResult,
+    AttestationReferenceManifest,
+    AttestationReferenceValue,
+    AttestationEndorsement,
+    AttestationAppraisalPolicy,
+    WorkloadIdentity,
+    SvidRecord,
+    SpiffeTrustBundle,
+    TrustDomainFederation,
+    WorkloadReferenceBinding,
+    WorkloadCredentialEntitlement,
+    SecurityEvent,
+    SecurityEventSubscription,
+    SecurityEventDelivery,
+    SecurityEventReplay,
+    ReplayReservation,
+    DpopReplay,
+    DpopNonce,
+    DidDocument,
+    DidDocumentVersion,
+    DidVerificationMethod,
+    DidService,
+    DidResolutionCache,
+    GnapGrant,
+    GnapContinuation,
+    GnapClientInstance,
+    GnapInteraction,
+    CertificateRecord,
+    TrustAnchor,
+    CertificateStatusSnapshot,
+    ClaimDefinition,
+    ClaimSourceBinding,
+    ClaimReleasePolicy,
+    ClaimProvenanceRecord,
+    ClaimSnapshot,
+    CredentialWebAuthnPasskey,
+    WebAuthnAttestationRecord,
+    WebAuthnCeremony,
+    WebAuthnRelyingParty,
+    AuthorityDerivationGraph,
+    AuthorityDerivationGraphNode,
+    AuthorityDerivationGraphEdge,
+    TrustFederationGraph,
+    TrustFederationGraphNode,
+    TrustFederationGraphEdge,
+    ScimSchemaRecord,
+    ScimUserRecord,
+    ScimGroupRecord,
+    ScimPatchEvent,
+    SDKPackageRecord,
+    PluginDescriptorRecord,
+    PluginLifecycleEventRecord,
+    ReleaseCapabilityRecord,
+    ReleaseAuthorizationState,
+    RuntimeQualificationRecord,
+    ReleaseSecurityPosture,
+    ReleasePosture,
+    ReleaseAttestationEvent,
+    ControlCorrectnessReport,
+    AuthzVerificationReport,
+    ResourceServerContract,
+    OperatorMetadata,
+    OperatorRecord,
+    OperatorTransaction,
+    OperatorAuditEvent,
+    OperatorActivity,
+)

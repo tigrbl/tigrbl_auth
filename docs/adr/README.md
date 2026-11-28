@@ -6,7 +6,7 @@
 
 # Architecture Decision Records
 
-This directory contains the governing ADR set for `tigrbl_auth`.
+This directory contains the governing ADR set for `tba_auth`.
 
 ## Purpose
 

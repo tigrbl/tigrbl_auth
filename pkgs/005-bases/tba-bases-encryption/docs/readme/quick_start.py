@@ -1,0 +1,3 @@
+from tba_bases_encryption import EncryptionProviderBase
+
+assert callable(EncryptionProviderBase)

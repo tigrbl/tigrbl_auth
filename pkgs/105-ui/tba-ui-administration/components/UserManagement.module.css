@@ -1,0 +1,249 @@
+.container {
+  @apply space-y-10;
+}
+
+.header {
+  @apply flex justify-between items-end;
+}
+
+.title {
+  @apply text-4xl font-extrabold leading-tight;
+  letter-spacing: -2px;
+}
+
+.subtitle {
+  @apply text-lg mt-2 font-medium;
+  color: var(--text-secondary);
+}
+
+.headerActions {
+  @apply flex space-x-4;
+}
+
+.buttonBase {
+  padding: 10px 20px;
+  border: 1px solid var(--stroke-etched);
+  background: var(--bg-parian);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.buttonBase:hover {
+  background: var(--stroke-etched);
+  color: #fff;
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--accent-neural);
+}
+
+.buttonPrimary {
+  background: var(--stroke-etched);
+  color: #fff;
+}
+
+.tableCard {
+  background: #fff;
+  border: 1px solid var(--stroke-etched);
+  box-shadow: var(--shadow-milled);
+  overflow: hidden;
+}
+
+.table {
+  @apply w-full text-left;
+}
+
+.tableHeaderRow {
+  background: var(--bg-parian-deep);
+  border-bottom: 1px solid var(--stroke-etched);
+}
+
+.tableHeaderCell {
+  @apply px-8 py-4 text-[10px] font-bold uppercase tracking-widest;
+}
+
+.tableHeaderCellRight {
+  text-align: right;
+}
+
+.tableBody {
+  border-top: 1px solid var(--stroke-milled);
+}
+
+.tableRow {
+  transition: background 0.2s ease;
+}
+
+.tableRow:hover {
+  background: var(--bg-parian);
+}
+
+.tableCell {
+  @apply px-8 py-6;
+}
+
+.tableCellRight {
+  text-align: right;
+}
+
+.userInfo {
+  @apply flex items-center space-x-5;
+}
+
+.userAvatar {
+  @apply w-12 h-12 flex items-center justify-center font-bold text-lg transition-all;
+  background: var(--bg-parian-deep);
+  border: 1px solid var(--stroke-etched);
+}
+
+.tableRow:hover .userAvatar {
+  background: var(--stroke-etched);
+  color: #fff;
+}
+
+.userName {
+  @apply text-sm font-bold;
+  letter-spacing: -0.01em;
+}
+
+.userEmail {
+  @apply text-[10px] font-mono;
+  color: var(--text-secondary);
+}
+
+.statusButton {
+  @apply text-[10px] font-bold px-2 py-1 border uppercase transition-all;
+  border-color: var(--stroke-etched);
+}
+
+.statusButton:hover {
+  transform: scale(1.05);
+}
+
+.statusButton:active {
+  transform: scale(0.95);
+}
+
+.statusActive {
+  background: rgba(0, 255, 204, 0.2);
+  color: var(--stroke-etched);
+}
+
+.statusSuspended {
+  background: rgba(255, 45, 0, 0.1);
+  color: var(--accent-arterial);
+}
+
+.statusPending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.rolesList {
+  @apply flex flex-wrap gap-2;
+}
+
+.roleBadge {
+  @apply text-[9px] font-bold border px-2 py-0.5 uppercase tracking-tighter;
+  border-color: var(--stroke-milled);
+}
+
+.lastLogin {
+  @apply text-[10px] font-mono;
+  color: var(--text-secondary);
+}
+
+.rowActions {
+  @apply flex items-center justify-end space-x-2 transition-opacity;
+  opacity: 0;
+}
+
+.tableRow:hover .rowActions {
+  opacity: 1;
+}
+
+.rowActionButton {
+  @apply p-2 border transition-all;
+  border-color: var(--stroke-milled);
+}
+
+.rowActionButton:hover {
+  border-color: var(--stroke-etched);
+}
+
+.rowActionDelete {
+  color: var(--accent-arterial);
+}
+
+.rowActionDelete:hover {
+  border-color: var(--accent-arterial);
+}
+
+.modalOverlay {
+  @apply fixed inset-0 flex items-center justify-center z-[100] p-4;
+  background: rgba(26, 26, 26, 0.4);
+  backdrop-filter: blur(6px);
+}
+
+.modal {
+  @apply w-full max-w-md p-10 shadow-2xl;
+  background: var(--bg-parian);
+  border: 1px solid var(--stroke-etched);
+}
+
+.modalTitle {
+  @apply text-2xl font-extrabold mb-8 uppercase;
+  letter-spacing: -0.02em;
+}
+
+.modalBody {
+  @apply space-y-6;
+}
+
+.formLabel {
+  @apply block text-[10px] font-bold uppercase tracking-widest mb-2;
+}
+
+.formInput {
+  @apply w-full px-4 py-3 border outline-none font-medium;
+  background: #fff;
+  border-color: var(--stroke-milled);
+}
+
+.formInput:focus {
+  border-color: var(--stroke-etched);
+}
+
+.formSelect {
+  @apply w-full px-4 py-3 border outline-none font-medium uppercase;
+  background: #fff;
+  border-color: var(--stroke-milled);
+}
+
+.modalActions {
+  @apply pt-8 flex space-x-4;
+}
+
+.modalButton {
+  @apply flex-1 py-3 text-[10px] font-bold uppercase transition-all;
+  border: 1px solid var(--stroke-etched);
+}
+
+.modalButtonCancel:hover {
+  background: var(--bg-parian-deep);
+}
+
+.modalButtonPrimary {
+  background: var(--stroke-etched);
+  color: #fff;
+}
+
+.modalButtonPrimary:hover {
+  background: #000;
+}

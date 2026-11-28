@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "profile": "par-jar-rar",
+  "counterpart_id": "par-jar-rar-client",
+  "generated_at": "2026-03-26T23:28:15+00:00",
+  "summary": {
+    "scenario_count": 4,
+    "target_count": 4
+  },
+  "scenario_results": [
+    {
+      "id": "par-submit",
+      "passed": true,
+      "notes": "par-submit completed successfully in the staged external-root fixture set."
+    },
+    {
+      "id": "jar-authorize",
+      "passed": true,
+      "notes": "jar-authorize completed successfully in the staged external-root fixture set."
+    },
+    {
+      "id": "rar-authorize",
+      "passed": true,
+      "notes": "rar-authorize completed successfully in the staged external-root fixture set."
+    },
+    {
+      "id": "rar-resource-binding",
+      "passed": true,
+      "notes": "rar-resource-binding completed successfully in the staged external-root fixture set."
+    }
+  ]
+}

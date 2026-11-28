@@ -4,6 +4,6 @@
 
 ## Summary
 
-- in_scope_target_count: `39`
-- classified_test_count: `138`
-- discovered_test_count: `138`
+- in_scope_target_count: `48`
+- classified_test_count: `187`
+- discovered_test_count: `187`

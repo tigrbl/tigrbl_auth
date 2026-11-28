@@ -1,0 +1,37 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1152"
+number: 1152
+slug: "tenant-key-and-jwks-administration-contract"
+title: "Tenant Key and JWKS Administration Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs tenant-owned signing key and JWKS administration through the tenant-admin API."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Defines tenant-owned key lifecycle and JWKS administration requirements."
+    at: "2026-05-25T05:09:29Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs tenant-owned signing key and JWKS administration through the tenant-admin API.
+  
+  ## Requirements
+  
+  Tenant admins MAY seed, create, update, rotate, retire, delete, list, and publish tenant keys only for their authorized tenant namespace. Tenant JWKS publication MUST expose only active and policy-visible tenant keys and MUST prevent cross-tenant key leakage.
+  
+  Key mutation workflows MUST record audit events and preserve enough lifecycle metadata for rotation visibility and safe retirement.
+  
+  ## Verification
+  
+  Verification MUST prove tenant key CRUD, JWKS publication, rotation visibility, cross-tenant leakage prevention, and tenant audit recording.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1079"
+  - "adr:1064"

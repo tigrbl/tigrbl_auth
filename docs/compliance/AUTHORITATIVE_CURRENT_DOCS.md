@@ -1,23 +1,25 @@
 # Authoritative current docs
 
-These are the current certification and release truth artifacts for this repository state.
+This file is a compatibility projection of the current certification and release-facing docs derived from the SSOT authority spec.
 
-- authority_manifest: `compliance/targets/document-authority.yaml`
+- authority_spec: `.ssot/specs/SPEC-1052-ssot-document-authority.yaml`
+- projection_manifest: `compliance/targets/document-authority.yaml`
+- authority_note: `.ssot/` is authoritative; this file is not.
 
-## Authoritative current docs
+## Canonical SSOT roots
+
+- `.ssot/registry.json`
+- `.ssot/adr`
+- `.ssot/specs`
+
+## Current release-facing docs
 
 - `CERTIFICATION_STATUS.md`
 - `CURRENT_STATE.md`
 - `README.md`
-- `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md`
-- `docs/compliance/BOUNDARY_FREEZE_DECISION_2026-03-26.md`
-- `docs/compliance/CLEAN_ROOM_EXECUTOR_AND_EVIDENCE_CHECKPOINT_2026-03-27.md`
 - `docs/compliance/FINAL_RELEASE_STATUS_2026-03-25.md`
-- `docs/compliance/PEER_MATRIX_REPORT.md`
 - `docs/compliance/README.md`
 - `docs/compliance/RELEASE_DECISION_RECORD.md`
-- `docs/compliance/STEP12_FINAL_CERTIFICATION_AGGREGATION_CHECKPOINT_2026-03-27.md`
-- `docs/compliance/TIER4_PROMOTION_MATRIX.md`
 - `docs/compliance/certification_state_report.md`
 - `docs/compliance/current_state_report.md`
 - `docs/compliance/final_release_gate_report.md`
@@ -25,6 +27,7 @@ These are the current certification and release truth artifacts for this reposit
 - `docs/compliance/release_gate_report.md`
 - `docs/compliance/release_signing_report.md`
 - `docs/compliance/runtime_profile_report.md`
+- `docs/compliance/truth_chain.md`
 - `docs/compliance/validated_execution_report.md`
 - `docs/reference/CLI_SURFACE.md`
 - `docs/reference/DISCOVERY_PROFILE_SNAPSHOTS.md`
@@ -50,9 +53,11 @@ These are the current certification and release truth artifacts for this reposit
 
 - `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.json`
 - `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md`
+- `docs/compliance/truth_chain.json`
+- `docs/compliance/truth_chain.md`
 - `docs/compliance/current_state_report.json`
-- `docs/compliance/install_substrate_report.json`
 - `docs/compliance/current_state_report.md`
+- `docs/compliance/install_substrate_report.json`
 - `docs/compliance/install_substrate_report.md`
 - `docs/compliance/certification_state_report.json`
 - `docs/compliance/certification_state_report.md`
@@ -68,7 +73,6 @@ These are the current certification and release truth artifacts for this reposit
 - `docs/compliance/release_signing_report.md`
 - `docs/compliance/FINAL_RELEASE_STATUS_2026-03-25.json`
 - `docs/compliance/FINAL_RELEASE_STATUS_2026-03-25.md`
-- `docs/compliance/CLEAN_ROOM_EXECUTOR_AND_EVIDENCE_CHECKPOINT_2026-03-27.md`
 
 ## Supporting current non-doc artifacts
 
@@ -79,3 +83,4 @@ These are the current certification and release truth artifacts for this reposit
 
 - archive_root: `docs/archive/historical`
 - policy: Historical and archived docs are non-authoritative and excluded from the certification bundle documentation scope.
+- projection_policy: `.ssot/` remains authoritative; this manifest is informational compatibility output.

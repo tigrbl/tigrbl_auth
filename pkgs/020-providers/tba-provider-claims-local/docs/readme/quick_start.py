@@ -1,0 +1,3 @@
+from tba_provider_claims_local import LocalClaimsProvider
+
+assert callable(LocalClaimsProvider)

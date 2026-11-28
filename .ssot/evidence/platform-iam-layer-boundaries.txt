@@ -1,0 +1,1 @@
+PASSED 2026-08-18. Canonical layer 75, package index, Python/Node workspace ownership, router/backend direction, UI boundaries, and focused platform-IAM structure passed. Repository architecture selection: 28 passed. Focused platform-IAM selection: 26 passed. scripts/validate_layer_boundaries.py: passed.

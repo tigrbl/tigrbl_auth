@@ -1,0 +1,28 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1204"
+number: 1204
+slug: "future-standards-nonblocking-roadmap"
+title: "Future Standards Nonblocking Roadmap"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "VC/OIDC4VC, OIDC4VCI, OID4VP, SIOPv2, HAIP, Authz API 1.0, OIDC 1.1, RISC/CAEP/SET/SSE are valid future standards but are not blockers for current maturity."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-06-01T10:40:14Z"
+    note: "Accepted for strategic security certification concern planning."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Linked to strategic security certification concerns ADR."
+    at: "2026-06-01T10:41:14Z"
+references: []
+body: |-
+  VC/OIDC4VC, OIDC4VCI, OID4VP, SIOPv2, HAIP, Authz API 1.0, OIDC 1.1, RISC/CAEP/SET/SSE are valid future standards but are not blockers for current maturity.
+spec_kind: "governance"
+adr_ids:
+  - "adr:1090"

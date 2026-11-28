@@ -1,0 +1,66 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1104"
+number: 1104
+slug: "policy-boundary"
+title: "Policy boundary"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs `tigrbl-identity-policy`."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define policy package decisioning and trace contracts."
+    at: "2026-05-18T08:20:31Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs `tigrbl-identity-policy`.
+  
+  ## First-Class Objects
+  
+  The package MUST define:
+  
+  - `Policy`
+  - `PolicyRequest`
+  - `PolicyContext`
+  - `PolicyDecision`
+  - `RbacPolicy`
+  - `AbacPolicy`
+  - `ScopePolicy`
+  - `TenantIsolationPolicy`
+  - `DelegatedAdminPolicy`
+  - `ClientExposurePolicy`
+  - `CredentialUsePolicy`
+  - `AuthorizationTrace`
+  - `PolicyVersion`
+  - `PolicyRegistry`
+  - `AuditPolicy`
+  
+  ## Requirements
+  
+  Policy MUST own deterministic authorization decision contracts.
+  
+  Policy MAY consume principal refs, credential verification facts, scopes,
+  claims, tenant context, resource context, and request context.
+  
+  Policy MUST NOT verify credentials, sign tokens, parse OAuth grants, mount
+  routes, open DB sessions, or own server/runtime wiring.
+  
+  Policy decisions MUST be auditable and reproducible from explicit inputs where
+  feasible.
+  
+  ## Verification
+  
+  Verification MUST prove RBAC, ABAC, scope, tenant isolation, delegated admin,
+  client exposure, and credential-use decisions can be evaluated without
+  importing server, runtime, or storage packages.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1050"
+  - "adr:1099"

@@ -1,0 +1,3 @@
+from tba_concrete_x509_svid_credential import X509SvidCredential
+
+assert callable(X509SvidCredential)

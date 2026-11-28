@@ -1,0 +1,17 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1075"
+number: 1075
+slug: "testkit-cross-cutting-runtime-profile"
+title: "Testkit Owns Cross Cutting Runtime Profiles"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Assign seeded provider, RP, and resource-server integration profiles, fixtures, vectors, and harnesses to the testkit package."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  Assign seeded provider, RP, and resource-server integration profiles, fixtures, vectors, and harnesses to the testkit package.

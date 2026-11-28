@@ -1,0 +1,3 @@
+from tba_provider_security_oidc_federation import StaticOidcFederationProvider
+
+assert callable(StaticOidcFederationProvider)

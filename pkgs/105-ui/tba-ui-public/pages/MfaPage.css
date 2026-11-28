@@ -1,0 +1,128 @@
+.mfa-page {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: var(--color-slate-50);
+}
+
+.mfa-shell {
+  display: flex;
+  width: 100%;
+  max-width: 28rem;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.mfa-heading {
+  text-align: center;
+}
+
+.mfa-icon-shell {
+  display: flex;
+  width: 4rem;
+  height: 4rem;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  border-radius: 1rem;
+  background: var(--color-indigo-100);
+  color: var(--color-indigo-600);
+}
+
+.mfa-icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.mfa-title {
+  margin: 0;
+  color: var(--color-slate-900);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.mfa-subtitle {
+  margin: 0.5rem 0 0;
+  color: var(--color-slate-500);
+  font-size: 0.875rem;
+}
+
+.mfa-card {
+  padding: 2rem;
+}
+
+.mfa-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.mfa-error {
+  padding: 0.75rem;
+  border: 1px solid var(--color-red-200);
+  border-radius: 0.75rem;
+  background: var(--color-red-50);
+  color: var(--color-red-600);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.mfa-code-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.mfa-code-input {
+  width: 3rem;
+  height: 3.5rem;
+  border: 1px solid var(--color-slate-200);
+  border-radius: 0.75rem;
+  outline: none;
+  background: var(--color-slate-50);
+  color: var(--color-slate-900);
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.mfa-code-input:focus {
+  box-shadow: 0 0 0 2px var(--color-indigo-600);
+}
+
+.mfa-submit {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: var(--color-indigo-600);
+  color: var(--color-white);
+  font-weight: 700;
+  box-shadow: 0 10px 15px -3px rgb(15 23 42 / 0.1);
+}
+
+.mfa-submit:hover {
+  background: var(--color-indigo-700);
+}
+
+.mfa-submit:disabled {
+  opacity: 0.5;
+}
+
+.mfa-help {
+  margin: 0;
+  color: var(--color-slate-400);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.mfa-resend {
+  color: var(--color-indigo-600);
+  font-weight: 700;
+}
+
+.mfa-resend:hover {
+  text-decoration: underline;
+}

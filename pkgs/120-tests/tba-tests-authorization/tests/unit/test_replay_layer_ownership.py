@@ -1,0 +1,92 @@
+from __future__ import annotations
+
+import asyncio
+from datetime import datetime, timedelta, timezone
+
+from tba_protocol_oauth import CAPABILITY_REQUIREMENTS as OAUTH_REQUIREMENTS
+from tba_protocol_oid4vp import CAPABILITY_REQUIREMENTS as OID4VP_REQUIREMENTS
+from tba_protocol_oidc import CAPABILITY_REQUIREMENTS as OIDC_REQUIREMENTS
+from tba_contracts_identity.replay import ReplayKey, ReplayReservationRequest
+from tba_storage_core.tables import ReplayReservation
+from tba_runtime_identity_storage import (
+    DURABLE_REPLAY_DESCRIPTOR,
+    ReplayReservationRuntimeSpec,
+)
+from tba_provider_replay_memory import MemoryReplayProvider
+from tba_capability_replay_protection import ReplayProtectionCapability
+from tba_protocol_security_event_set import CAPABILITY_REQUIREMENTS as SET_REQUIREMENTS
+
+
+def _request(value: str = "same") -> ReplayReservationRequest:
+    return ReplayReservationRequest(
+        ReplayKey("set:event-jti", value, issuer="https://issuer.example"),
+        datetime.now(timezone.utc) + timedelta(minutes=5),
+    )
+
+
+def test_layer_01_owns_protocol_neutral_durable_replay_state():
+    assert ReplayReservation.__tablename__ == "replay_reservations"
+    assert ReplayReservation.__table__.c.key_digest.unique is True
+
+
+def test_durable_replay_store_descriptor_is_operationally_explicit():
+    descriptor = DURABLE_REPLAY_DESCRIPTOR
+    assert descriptor.atomic_reservation is True
+    assert descriptor.namespaces
+    assert descriptor.tenant_isolation
+    assert descriptor.expiry
+    assert descriptor.retention
+    assert descriptor.purge
+    assert descriptor.audit
+    assert descriptor.availability
+
+
+def test_durable_replay_is_exposed_as_a_table_operation():
+    operation = next(
+        item
+        for item in ReplayReservationRuntimeSpec.ops
+        if item.alias == "check_and_reserve"
+    )
+    assert ReplayReservationRuntimeSpec.model is ReplayReservation
+    assert operation.tx_scope == "read_write"
+    assert operation.bindings == ()
+    assert operation.handler is operation.core
+
+
+def test_memory_provider_atomically_rejects_concurrent_duplicates():
+    async def scenario():
+        provider = MemoryReplayProvider()
+        results = await asyncio.gather(
+            *(provider.check_and_reserve(_request()) for _ in range(20))
+        )
+        assert sum(result.accepted for result in results) == 1
+        assert sum(result.duplicate for result in results) == 19
+
+    asyncio.run(scenario())
+
+
+def test_layer_40_capability_reports_provider_identity_and_persistence():
+    capability = ReplayProtectionCapability(
+        MemoryReplayProvider(), namespaces=("set:event-jti",)
+    )
+    report = capability.capability_report()
+    assert report["capability_id"] == "security.replay-protection"
+    assert report["operations"] == ("check_and_reserve",)
+    assert report["provider_id"] == "replay:memory"
+    assert report["persistence"] == "ephemeral-process-local"
+    assert "guarantees" not in report
+    assert "limitations" not in report
+
+
+def test_layer_50_maps_wire_requirements_to_replay_capability():
+    requirements = SET_REQUIREMENTS + OAUTH_REQUIREMENTS + OIDC_REQUIREMENTS + OID4VP_REQUIREMENTS
+    replay_requirements = tuple(
+        item
+        for item in requirements
+        if item.capability_id == "security.replay-protection"
+    )
+    assert {item.protocol for item in replay_requirements} == {
+        "set", "oauth-dpop", "oidc-backchannel-logout", "oid4vp"
+    }
+    assert all(item.operation == "check_and_reserve" for item in replay_requirements)
+    assert all(item.normalized_namespace for item in replay_requirements)

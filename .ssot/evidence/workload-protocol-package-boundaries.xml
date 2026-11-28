@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuites name="pytest tests">
+  <testsuite name="pytest" errors="0" failures="0" skipped="0" tests="3">
+    <testcase classname="tests.unit.test_workload_protocol_composition" name="test_standalone_workload_protocol_dependency_closure[standalone-wimse]" />
+    <testcase classname="tests.unit.test_workload_protocol_composition" name="test_standalone_workload_protocol_dependency_closure[standalone-spiffe]" />
+    <testcase classname="tests.unit.test_workload_protocol_composition" name="test_wit_svid_declares_both_protocol_dependencies" />
+  </testsuite>
+</testsuites>

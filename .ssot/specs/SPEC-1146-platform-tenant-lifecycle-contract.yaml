@@ -1,0 +1,35 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1146"
+number: 1146
+slug: "platform-tenant-lifecycle-contract"
+title: "Platform Tenant Lifecycle Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Tenant lifecycle MUST support create, read, update, suspend, restore, and guarded delete operations."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Draft contract for platform-owned tenant lifecycle."
+    at: "2026-05-25T05:01:25Z"
+references: []
+body: |-
+  ## Requirements
+  
+  Tenant lifecycle MUST support create, read, update, suspend, restore, and guarded delete operations.
+  
+  Create MUST establish tenant identity, canonical slug, display metadata, lifecycle state, initial owner assignment hook, and audit event emission.
+  
+  Update MUST enforce slug uniqueness, lifecycle-state constraints, and immutable identity boundaries.
+  
+  Suspend and restore MUST be explicit state transitions and MUST NOT physically delete tenant data.
+  
+  Delete MUST be guarded by policy, must reject default/system tenants, and must emit durable audit evidence.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1078"
+  - "adr:1120"

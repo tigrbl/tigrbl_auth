@@ -1,0 +1,36 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1134"
+number: 1134
+slug: "resource-server-contract"
+title: "Resource Server Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines protected API access-token validation, issuer/audience/scope checks, JWKS cache, introspection fallback, DPoP validation, mTLS binding validation, and protected-resource metadata responsibilities."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-05-23T05:44:15Z"
+    note: "RP/resource-server/provider-login maturity wave proposal."
+    status: "draft"
+  -
+    at: "2026-05-25T02:56:49Z"
+    note: "Bound resource-server validation to resource-validation API surface."
+    status: "draft"
+  -
+    status: "draft"
+    note: "Linked resource-server contract to the resource-validation API front door."
+    at: "2026-05-25T05:30:06Z"
+references: []
+body: |-
+  Defines protected API access-token validation, issuer/audience/scope checks, JWKS cache, introspection fallback, DPoP validation, mTLS binding validation, and protected-resource metadata responsibilities.
+  
+  Resource servers consume the resource-validation API for validation metadata and introspection where configured. Resource servers MUST NOT require admin, developer, tenant-admin, service-admin, or public human login surfaces to validate protected requests.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1118"
+  - "adr:1120"
+  - "adr:1082"

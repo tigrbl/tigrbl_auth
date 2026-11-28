@@ -1,6 +1,0 @@
-{
-  "scenario_id": "rar-resource-binding",
-  "iss": "fixture-client",
-  "aud": "https://authn.example.com",
-  "response_type": "code"
-}

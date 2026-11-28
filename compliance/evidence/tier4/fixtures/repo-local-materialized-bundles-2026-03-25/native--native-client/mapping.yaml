@@ -23,9 +23,9 @@ target_to_tests:
   RFC 9207:
   - tests/conformance/hardening/test_rfc9207_issuer_identification.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/unit/test_phase6_profile_discovery_runtime.py
+  - tests/unit/test_profile_discovery_runtime.py
   - tests/unit/test_rfc9207_issuer_identification.py
-  - tests/unit/test_phase9_hardening_cluster_b.py
+  - tests/unit/test_hardening_cluster_b.py
 required_artifacts:
 - tests/conformance/production/test_rfc8252_native_apps.py
 - tests/unit/test_oidc_id_token_encryption.py

@@ -1,31 +1,31 @@
 targets:
 - CLI operator surface
 modules:
-- tigrbl_auth/cli/main.py
-- tigrbl_auth/cli/metadata.py
-- tigrbl_auth/cli/handlers.py
-- tigrbl_auth/cli/runtime.py
-- tigrbl_auth/cli/reports.py
-- tigrbl_auth/services/operator_service.py
-- tigrbl_auth/services/audit_service.py
-- tigrbl_auth/services/client_service.py
-- tigrbl_auth/services/identity_service.py
-- tigrbl_auth/services/session_service.py
+- tba_auth/cli/main.py
+- tba_auth/cli/metadata.py
+- tba_auth/cli/handlers.py
+- tba_auth/cli/runtime.py
+- tba_auth/cli/reports.py
+- tba_auth/services/operator_service.py
+- tba_auth/services/audit_service.py
+- tba_auth/services/client_service.py
+- tba_auth/services/identity_service.py
+- tba_auth/services/session_service.py
 tests:
-- tests/conformance/operator/test_cli_resource_lifecycle.py
-- tests/conformance/operator/test_cli_serve_runtime.py
-- tests/interop/test_operator_profile_catalog_completeness.py
+- pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py
+- pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py
+- pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_operator_profile_catalog_completeness.py
 contracts:
-- contracts/cli_contract.json
-- contracts/CLI_SURFACE.md
-- contracts/tigrbl_auth.admin.openrpc.json
+- contracts\cli_contract.json
+- contracts\CLI_SURFACE.md
+- contracts\tba_auth.admin.openrpc.json
 reports:
-- reports/current_state_report.json
-- reports/current_state_report.md
-- reports/certification_state_report.json
-- reports/certification_state_report.md
-- reports/release_gate_report.json
-- reports/release_gate_report.md
-- reports/cli_conformance_snapshot.json
-- reports/cli_conformance_snapshot.md
-- reports/phase12_targeted_test_output.txt
+- reports\current_state_report.json
+- reports\current_state_report.md
+- reports\certification_state_report.json
+- reports\certification_state_report.md
+- reports\release_gate_report.json
+- reports\release_gate_report.md
+- reports\cli_conformance_snapshot.json
+- reports\cli_conformance_snapshot.md
+- reports\retained-boundary-runtime-operator-test-output.txt

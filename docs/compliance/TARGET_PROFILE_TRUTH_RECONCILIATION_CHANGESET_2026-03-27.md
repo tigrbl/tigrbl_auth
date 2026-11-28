@@ -25,16 +25,16 @@ No new certification evidence was collected in this changeset. The purpose of th
 - `compliance/claims/declared-target-claims.yaml`
 - `compliance/targets/public-operator-surface.yaml`
 - `compliance/claims/repository-state.yaml`
-- `tigrbl_auth/cli/claims.py`
-- `tigrbl_auth/cli/feature_surface.py`
+- `tba_auth/cli/claims.py`
+- `tba_auth/cli/feature_surface.py`
 - `scripts/generate_certification_scope.py`
 - `scripts/generate_release_decision_record.py`
 - `scripts/materialize_tier4_peer_evidence.py`
-- `tests/unit/test_phase13_truthfulness_alignment.py`
+- `tests/unit/test_truthfulness_alignment.py`
 - `README.md`
 - `docs/reference/PUBLIC_ROUTE_SURFACE.md`
 - `docs/compliance/README.md`
-- `docs/compliance/STEP12_FINAL_CERTIFICATION_AGGREGATION_CHECKPOINT_2026-03-27.md`
+- `docs/compliance/FINAL_CERTIFICATION_AGGREGATION_CHECKPOINT_2026-03-27.md`
 - regenerated current-state and scope reports under `docs/compliance/`
 
 ## Validation executed in this checkpoint
@@ -46,7 +46,7 @@ No new certification evidence was collected in this changeset. The purpose of th
 - `python -c "from scripts.materialize_tier4_peer_evidence import update_final_target_decision_matrix; update_final_target_decision_matrix()"`
 - `python scripts/generate_release_decision_record.py`
 - `python scripts/generate_package_review_gap_analysis.py`
-- `pytest -q tests/unit/test_phase13_truthfulness_alignment.py`
+- `pytest -q tests/unit/test_truthfulness_alignment.py`
 - strict claims lint
 - strict feature-surface/modularity lint
 

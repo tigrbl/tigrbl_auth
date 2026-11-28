@@ -1,0 +1,67 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1111"
+number: 1111
+slug: "operator-workflow-boundary"
+title: "Operator workflow boundary"
+status: "superseded"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs `tba-operator-identity`."
+supersedes: []
+superseded_by:
+  - "spc:1223"
+status_notes:
+  -
+    at: "2026-05-18T08:20:38Z"
+    note: "Define operator workflow package ownership."
+    status: "accepted"
+  -
+    at: "2026-06-22T07:25:15Z"
+    note: "Superseded by SPEC-1223: public exported surfaces replace operator workflow terminology."
+    status: "superseded"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs `tba-operator-identity`.
+  
+  ## First-Class Objects
+  
+  The package MUST define:
+  
+  - `OperatorCommand`
+  - `BootstrapCommand`
+  - `MigrateCommand`
+  - `ImportCommand`
+  - `ExportCommand`
+  - `KeyRotationCommand`
+  - `ClientCommand`
+  - `ServiceCommand`
+  - `TenantCommand`
+  - `ProfileInspectCommand`
+  - `ClaimsLintCommand`
+  - `ReleaseGateCommand`
+  - `EvidenceBundleCommand`
+  - `CertificationReportCommand`
+  - `OperatorReport`
+  
+  ## Requirements
+  
+  Operator owns CLI and operator workflows. Operator MUST remain outside the
+  request path and MUST NOT be required for serving OAuth/OIDC/admin requests.
+  
+  Server and runtime MUST NOT import operator.
+  
+  Operator MUST NOT import testkit for production commands. If conformance
+  commands need harnesses, those commands MUST be explicitly non-production or
+  moved to a separate conformance package.
+  
+  ## Verification
+  
+  Verification MUST prove request-path packages do not import operator and
+  operator commands can run against server/runtime manifests where applicable.
+spec_kind: "operational"
+adr_ids:
+  - "adr:1103"

@@ -1,0 +1,8 @@
+{
+  "name": "Voice Biometric Authenticator",
+  "description": "Enterprise-grade first-party voice biometric enrollment, liveness detection, verification, and lifecycle management console with real-time waveform capture and diagnostics.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

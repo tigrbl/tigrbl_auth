@@ -1,0 +1,47 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1056"
+number: 1056
+slug: "admin-api-boundary"
+title: "Admin API Boundary"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Status: proposed"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+  
+  Status: proposed
+  Date: 2026-05-04
+  
+  `tba_auth` MUST define the admin API as a privileged governed boundary.
+  The boundary includes authenticated and authorized control-plane operations,
+  administrative resource management, administrative policy operations, and
+  implementation-backed admin contract publication.
+  
+  The admin API boundary MUST also declare:
+  
+  - its runtime-plane class;
+  - allowed exposure topology;
+  - authentication and authorization guarantees;
+  - metadata visibility limits; and
+  - any mixed-mode downgrade rules when co-hosted with public surfaces.
+  
+  ## Rationale
+  
+  The repository already exposes admin contracts and control-plane behavior, but
+  a path- or gate-protected endpoint inside the same runtime image is not the
+  same thing as a hard-isolated privileged plane.
+  
+  ## Scope
+  
+  In scope: OpenRPC-backed admin behavior, authenticated admin operations,
+  administrative resource and policy actions, and plane-class governance.
+  
+  Out of scope: public OAuth/OIDC routes, public browser UX, and CLI-only
+  behaviors that are not part of the admin API itself.

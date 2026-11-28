@@ -1,6 +1,4 @@
 webauthn-passkeys: extension_quarantine
-a2a-adapter: extension_quarantine
-mcp-adapter: extension_quarantine
 set: extension_quarantine
 webpush: extension_quarantine
 dns-privacy: extension_quarantine

@@ -1,0 +1,21 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1086"
+number: 1086
+slug: "management-api-product-with-deployable-surface-slices"
+title: "Management API is one product with deployable surface slices"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Decision: Frame platform-admin, tenant-admin, developer, and service-admin as scoped deployable slices of a broader Management API product unless a future accepted ADR promotes one slice into an independently marketed product. Context: adr:1120 governs surface-separated API front doors for deployment and product filtering, but competitor research shows management capabilities are typically grouped under one management/admin API with resource groups. Consequences: packages may remain separate deployable front doors, while docs, specs, and matrices should identify the shared Management API product and then name platform, tenant, developer, and service/workload resource groups."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Draft product-boundary proposal to reconcile surface-separated packages with competitor management API patterns."
+    at: "2026-05-27T22:24:13Z"
+references: []
+body: |-
+  Decision: Frame platform-admin, tenant-admin, developer, and service-admin as scoped deployable slices of a broader Management API product unless a future accepted ADR promotes one slice into an independently marketed product. Context: adr:1120 governs surface-separated API front doors for deployment and product filtering, but competitor research shows management capabilities are typically grouped under one management/admin API with resource groups. Consequences: packages may remain separate deployable front doors, while docs, specs, and matrices should identify the shared Management API product and then name platform, tenant, developer, and service/workload resource groups.

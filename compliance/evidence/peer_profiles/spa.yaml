@@ -8,9 +8,9 @@ required_targets:
 - OIDC Core 1.0
 - OIDC Discovery 1.0
 required_artifacts:
-- tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py
-- tests/conformance/baseline/test_rfc7636_pkce.py
-- tests/conformance/baseline/test_openid_configuration.py
+- pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py
+- pkgs/120-tests/tba-tests-oauth/tests/conformance/baseline/test_rfc7636_pkce.py
+- pkgs/120-tests/tba-tests-oidc/tests/conformance/baseline/test_openid_configuration.py
 scenario_ids:
 - spa-authz-code-pkce
 - spa-discovery

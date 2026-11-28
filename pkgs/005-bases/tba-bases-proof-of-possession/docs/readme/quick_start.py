@@ -1,0 +1,3 @@
+from tba_bases_proof_of_possession import PossessionProofIssuerBase
+
+assert callable(PossessionProofIssuerBase)

@@ -7,17 +7,17 @@ targets:
     status: evidenced-release-gated
     profile: production
   modules:
-  - tigrbl_auth/standards/oauth2/dynamic_client_registration.py
-  - tigrbl_auth/api/rest/routers/register.py
-  - tigrbl_auth/ops/register.py
-  - tigrbl_auth/tables/client_registration.py
-  - tigrbl_auth/services/persistence.py
+  - tba_auth/standards/oauth2/dynamic_client_registration.py
+  - tba_auth/api/rest/routers/register.py
+  - tba_auth/ops/register.py
+  - tba_auth/tables/client_registration.py
+  - tba_auth/services/persistence.py
   tests:
-  - tests/conformance/production/test_rfc7591_dynamic_client_registration.py
-  - tests/integration/test_persistence_lifecycle_durability.py
-  - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/unit/test_phase3_public_route_contracts.py
-  - tests/unit/test_rfc7591_client_registration_endpoint.py
+  - pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7591_dynamic_client_registration.py
+  - pkgs/120-tests/tba-tests-storage/tests/integration/test_persistence_lifecycle_durability.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/integration/test_profile_surface_and_contract_alignment.py
+  - pkgs/120-tests/tba-tests-api-contracts/tests/unit/test_public_route_contracts.py
+  - pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7591_client_registration_endpoint.py
   endpoint_mapping:
     current:
     - /register
@@ -55,7 +55,7 @@ reports:
 - docs/compliance/certification_state_report.json
 - docs/compliance/certification_state_report.md
 contracts:
-- specs/openapi/profiles/production/tigrbl_auth.public.openapi.json
+- specs/openapi/profiles/production/tba_auth.public.openapi.json
 - specs/discovery/profiles/production/openid-configuration.json
 scenario_ids:
 - rfc-7591

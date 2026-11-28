@@ -1,0 +1,37 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1023"
+number: 1023
+slug: "evidence-bundles-and-peer-profiles"
+title: "Evidence bundles and peer profiles"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Tier 3 bundles, Tier 4 peer manifests, and related release-facing evidence"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+  
+  Tier 3 bundles, Tier 4 peer manifests, and related release-facing evidence
+  remain machine-generated from governed inputs. However, the repository MUST
+  distinguish:
+  
+  - repo-generated or repo-staged peer bundles; and
+  - independently qualifying verifier evidence.
+  
+  Repo-staged peer fixtures are useful, but they do not by themselves satisfy
+  the stronger certification wording associated with independent verifier-grade
+  interoperability.
+  
+  ## Consequences
+  
+  Evidence readiness remains observable and reproducible, but promotion language
+  MUST stay fail-closed when:
+  
+  - independent peer execution has not been established;
+  - a resource-server profile has only self-generated peer artifacts; or
+  - retained fixtures are being mistaken for independent proof.

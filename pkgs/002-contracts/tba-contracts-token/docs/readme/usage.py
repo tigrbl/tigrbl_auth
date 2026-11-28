@@ -1,0 +1,3 @@
+from tba_contracts_token import InvalidRefreshTokenError
+
+assert callable(InvalidRefreshTokenError)

@@ -1,0 +1,3 @@
+from tba_capability_delegated_access_negotiation import GrantNegotiationCapability
+
+assert callable(GrantNegotiationCapability)

@@ -1,0 +1,3 @@
+from tba_provider_did_controller import DidControllerResult
+
+assert callable(DidControllerResult)

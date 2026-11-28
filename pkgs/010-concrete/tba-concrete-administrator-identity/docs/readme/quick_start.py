@@ -1,0 +1,3 @@
+from tba_concrete_administrator_identity import AdminIdentity
+
+assert callable(AdminIdentity)

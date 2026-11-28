@@ -1,0 +1,24 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1205"
+number: 1205
+slug: "authorization-correctness-property-contract"
+title: "Authorization correctness property contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines the common shape for authorization safety, liveness, isolation, determinism, minimality, referential integrity, and control-plane correctness properties. A property must name its trigger or invariant, affected authority graph nodes, verification method, expected evidence, and failure disposition."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted as a formal authorization correctness planning contract."
+    at: "2026-06-07T04:39:24Z"
+references: []
+body: |-
+  Defines the common shape for authorization safety, liveness, isolation, determinism, minimality, referential integrity, and control-plane correctness properties. A property must name its trigger or invariant, affected authority graph nodes, verification method, expected evidence, and failure disposition.
+spec_kind: "governance"
+adr_ids:
+  - "adr:1122"

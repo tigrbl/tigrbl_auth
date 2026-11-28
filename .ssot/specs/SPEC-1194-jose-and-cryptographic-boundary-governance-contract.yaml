@@ -1,0 +1,28 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1194"
+number: 1194
+slug: "jose-and-cryptographic-boundary-governance-contract"
+title: "JOSE and Cryptographic Boundary Governance Contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "JOSE handling and cryptographic boundary governance MUST reject unsafe keys and algorithms and prove realm, tenant, signing, rotation, and compromise scopes."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-06-01T10:39:59Z"
+    note: "Accepted for strategic security certification concern planning."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Linked to strategic security certification concerns ADR."
+    at: "2026-06-01T10:41:01Z"
+references: []
+body: |-
+  JOSE handling and cryptographic boundary governance MUST reject unsafe keys and algorithms and prove realm, tenant, signing, rotation, and compromise scopes.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1090"

@@ -1,0 +1,59 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1011"
+number: 1011
+slug: "independent-peer-claims"
+title: "Independent peer claims are a separate certification boundary"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "> [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+  
+  > [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports.
+  
+  > **Historical / non-authoritative** — This document is retained for planning, provenance, or operator guidance only.
+  > Do **not** use it to determine the current certification state, executable surface, or release readiness.
+  > Use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md`, `CURRENT_STATE.md`, and `CERTIFICATION_STATUS.md` instead.
+  
+  # Independent peer claims are a separate certification boundary
+  
+  - Status: Accepted
+  - Date: 2026-03-19
+  - Supersedes: none
+  
+  Tier 4 claims require all of the following:
+  - a Tier 3 evidence bundle
+  - an identified peer or interop profile
+  - preserved peer artifacts
+  - reproducible execution instructions
+  - explicit promotion approval captured in the compliance plane
+  
+  Peer claims are additive. They do not relax Tier 3 evidence requirements.
+
+  Promotion-qualifying preserved peer evidence MUST satisfy all of the following:
+  - the peer operator is operationally independent from the repository authoring environment;
+  - the evidence source is independent from repository-fixture or checkpoint-staged material;
+  - the attestation class is explicitly allowed for Tier 4 promotion;
+  - the preserved bundle status is promotion-qualifying;
+  - the bundle manifest passes validation without unresolved evidence errors.
+
+  The following definitions apply:
+  - an **independent peer operator** is a peer executor, reviewer, or interoperability environment that is not a repository fixture, not a checkpoint-staged internal surrogate, and not controlled as part of the same release-materialization workflow;
+  - an **independent evidence source** is evidence produced from that independent operator context, with preserved reproduction material and without reliance on repository-owned fixture assertions as the certifying basis;
+  - an **allowed attestation class** is a class explicitly designated for Tier 4 promotion by the compliance plane; repository-fixture and other explicitly non-independent classes are not allowed for promotion;
+  - a **non-promotion-qualifying preserved bundle** is a bundle that may be retained for traceability, rehearsal, or gap analysis but SHALL NOT support public independent wording, Tier 4 promotion, or final certified-release claims.
+
+  `repository-fixture-nonindependent` evidence and similarly non-independent preserved bundles MAY be retained for historical provenance and operator diagnostics, but they SHALL remain below Tier 4 and SHALL NOT be treated as independent peer support.
+  
+  ## Context
+  
+  Independent peer claims require a stricter standard than internally generated
+  reports. They must be reproducible and attributable to external interop or peer
+  review material.

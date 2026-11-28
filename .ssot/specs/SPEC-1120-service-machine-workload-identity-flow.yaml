@@ -1,0 +1,62 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1120"
+number: 1120
+slug: "service-machine-workload-identity-flow"
+title: "Service machine workload identity flow"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs service, machine, workload, and device identity flows."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-05-18T08:32:00Z"
+    note: "Define service, machine, workload, and device identity flow ownership."
+    status: "accepted"
+  -
+    at: "2026-05-25T02:56:45Z"
+    note: "Bound machine identity workflows to service-admin product surface."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Linked service machine workload identity flow to service-admin API decision."
+    at: "2026-05-25T05:23:06Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs service, machine, workload, and device identity flows.
+  
+  ## Requirements
+  
+  Non-human identities MUST NOT be modeled as users. Tenant admins or authorized operators MAY create non-human principals according to policy.
+  
+  Service, machine, workload, API-key, and service-key administration SHOULD be exposed through the service-admin API and service-admin UIX. Credentials MUST be issued, bound, rotated, revoked, and audited according to credential lifecycle rules.
+
+  Non-human authority MUST be represented through explicit grant and binding
+  semantics in addition to credentials. A service or workload credential alone
+  MUST NOT imply unlimited downstream access. Effective authority MUST be
+  bounded by tenant, trust domain, audience or resource server, scope,
+  permission, lifecycle state, and any declared delegation provenance.
+
+  Grant lifecycle MUST define issuance, expiry, suspension, revocation,
+  replacement, and verifier handoff expectations for non-human flows.
+  
+  JWT assertion, mTLS, token exchange, and DPoP usage MUST align with their governing protocol requirements where used. Resource servers MUST validate issued tokens and proof binding before accepting non-human requests.
+  
+  ## Verification
+  
+  Verification MUST prove service credential lifecycle, grant lifecycle,
+  service-admin API exposure, JWT assertion flow, mTLS binding flow, DPoP
+  binding flow, workload trust-domain denial, cross-tenant denial, token
+  issuance, bounded-authority enforcement, and downstream verifier
+  enforcement.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1046"
+  - "adr:1109"
+  - "adr:1120"
+  - "adr:1081"

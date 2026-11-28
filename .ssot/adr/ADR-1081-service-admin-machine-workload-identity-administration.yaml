@@ -1,0 +1,27 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1081"
+number: 1081
+slug: "service-admin-machine-workload-identity-administration"
+title: "Service Admin API Owns Machine and Workload Identity Administration"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Service-admin API is the delegated control plane for service, machine, workload, API-key, service-key, token inspection, and validation-metadata administration."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted for service-admin API product completion planning."
+    at: "2026-05-25T05:22:08Z"
+references: []
+body: |-
+  ## Decision
+  
+  Service-admin API is the delegated control plane for service, machine, workload, API-key, service-key, token inspection, and validation-metadata administration.
+  
+  ## Consequences
+  
+  Service-admin API MUST NOT expose platform tenant lifecycle, cross-tenant authority assignment, tenant-admin human identity administration, developer app catalog management, or public human login and consent flows. Service-admin API deployments MUST enforce tenant and resource ownership before service identity, credential, token inspection, or validation metadata operations and fail closed for cross-surface operations.

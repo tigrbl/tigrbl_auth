@@ -12,7 +12,7 @@
 
 # Production-Grade Operator Control-Plane Status — 2026-03-24
 
-## Result of Step 6
+## Result of Item 6
 
 The repository now selects the stronger production-grade operator/control-plane interpretation inside the retained 48-target certification boundary.
 

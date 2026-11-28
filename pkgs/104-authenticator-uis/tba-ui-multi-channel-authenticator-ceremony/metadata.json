@@ -1,0 +1,6 @@
+{
+  "name": "Multi-Channel Authentication Ceremony",
+  "description": "Interactive demonstration and orchestration panel of first-party multi-channel authentication (MCA) ceremony, evidence gathering, policy editing, and provider health.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

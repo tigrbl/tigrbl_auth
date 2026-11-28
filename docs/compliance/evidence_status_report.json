@@ -4,7 +4,7 @@
   "warnings": [],
   "summary": {
     "profile": "baseline",
-    "target_bundle_count": 22,
+    "target_bundle_count": 24,
     "missing_ref_count": 0,
     "peer_profile_count": 16,
     "peer_execution_count": 16

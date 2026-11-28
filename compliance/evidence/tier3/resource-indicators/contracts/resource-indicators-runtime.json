@@ -1,7 +1,7 @@
 {
   "label": "RFC 8707",
   "title": "Resource Indicators for OAuth 2.0",
-  "runtime_status": "phase-8-resource-bound-runtime",
+  "runtime_status": "resource-bound-runtime",
   "public_surface": [
     "/authorize",
     "/token",

@@ -1,0 +1,127 @@
+.nav {
+  background: var(--bg-parian-deep);
+  border-right: 1px solid var(--stroke-etched);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 0;
+  overflow-y: auto;
+}
+
+.nav::-webkit-scrollbar {
+  display: none;
+}
+
+.nav {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.sectionTitle {
+  @apply text-[10px] font-bold uppercase tracking-[2px] mb-4;
+  color: var(--text-secondary);
+  padding: 0 2rem;
+}
+
+.sectionList {
+  @apply space-y-1;
+}
+
+.menuButton {
+  @apply w-full flex items-center space-x-3 transition-all duration-300 relative;
+  padding: 0.625rem 2rem;
+}
+
+.menuButtonActive {
+  background: var(--bg-parian);
+  color: var(--stroke-etched);
+  font-weight: 700;
+  border-left: 4px solid var(--stroke-etched);
+}
+
+.menuButtonActiveAdmin {
+  background: var(--bg-parian);
+  color: var(--accent-arterial);
+  font-weight: 700;
+  border-left: 4px solid var(--accent-arterial);
+}
+
+.menuButtonInactive {
+  color: var(--text-secondary);
+}
+
+.menuButtonInactive:hover {
+  background: rgba(0, 0, 0, 0.05);
+  padding-left: 2.5rem;
+}
+
+.menuLabel {
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.adminSectionTitle {
+  @apply text-[10px] font-bold uppercase tracking-[2px] mb-4;
+  color: var(--accent-arterial);
+  padding: 0 2rem;
+}
+
+.footer {
+  margin-top: auto;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid rgba(26, 26, 26, 0.1);
+}
+
+.profileCard {
+  padding: 0.75rem;
+  background: #fff;
+  border: 1px solid var(--stroke-etched);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  box-shadow: var(--shadow-milled);
+  transition: transform 0.3s ease;
+}
+
+.profileCard:hover {
+  transform: scale(1.05);
+}
+
+.profileBadge {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.profileBadgeAdmin {
+  background: var(--accent-arterial);
+}
+
+.profileBadgeDefault {
+  background: var(--stroke-etched);
+}
+
+.profileDetails {
+  flex: 1;
+  min-width: 0;
+}
+
+.profileName {
+  @apply text-[10px] font-bold truncate;
+}
+
+.profileMeta {
+  @apply text-[9px] uppercase;
+  color: var(--text-secondary);
+}

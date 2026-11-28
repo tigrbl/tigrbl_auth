@@ -15,6 +15,13 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
+from tba_operator_identity.repo_truth import (
+    has_install_matrix_workflow,
+    has_release_gate_workflow,
+    workflow_paths,
+    workflow_role_paths,
+)
+
 DOCS_DIR = REPO_ROOT / "docs" / "compliance"
 MD_OUT = DOCS_DIR / "PACKAGE_REVIEW_GAP_ANALYSIS.md"
 JSON_OUT = DOCS_DIR / "PACKAGE_REVIEW_GAP_ANALYSIS.json"
@@ -28,6 +35,7 @@ WORKSPACE_IMPORTS = (
     "swarmauri_signing_jws",
     "swarmauri_signing_ed25519",
     "swarmauri_signing_dpop",
+    "pqcrypto",
     "swarmauri_crypto_jwe",
     "swarmauri_crypto_paramiko",
     "swarmauri_keyprovider_file",
@@ -61,8 +69,8 @@ def build_review() -> dict[str, Any]:
 
     return {
         "schema_version": 1,
-        "package": matrix.get("package", "tigrbl_auth"),
-        "phase": matrix.get("phase", "unknown"),
+        "package": matrix.get("package", "tba_auth"),
+        "delivery_lifecycle": matrix.get("delivery_lifecycle", matrix.get("delivery_track", "unknown")),
         "version": pyproject.get("project", {}).get("version", "0.0.0"),
         "summary": {
             "fully_certifiable_now": bool(cert.get("summary", {}).get("fully_certifiable_now", False)),
@@ -81,8 +89,9 @@ def build_review() -> dict[str, Any]:
         "clean_room_matrix": {
             "implemented": bool(current.get("summary", {}).get("clean_room_matrix_implemented", False)),
             "tox_manifest": "tox.ini",
-            "install_workflow": ".github/workflows/ci-install-profiles.yml",
-            "release_gate_workflow": ".github/workflows/ci-release-gates.yml",
+            "install_workflow": next(iter(workflow_role_paths(REPO_ROOT, "install-matrix")), None) if has_install_matrix_workflow(REPO_ROOT) else None,
+            "release_gate_workflow": next(iter(workflow_role_paths(REPO_ROOT, "release-gates")), None) if has_release_gate_workflow(REPO_ROOT) else None,
+            "recognized_workflows": workflow_paths(REPO_ROOT),
             "tigrcorn_pin_committed": bool(current.get("summary", {}).get("tigrcorn_pin_committed", False)),
             "executed_in_this_container": bool(current.get("summary", {}).get("clean_room_matrix_executed_in_this_container", False)),
         },
@@ -110,7 +119,7 @@ def build_review() -> dict[str, Any]:
             "pytest_local_bootstrap": "Runtime and test generation still depend on external packages that may be missing in isolated containers.",
         },
         "required_changes_for_full_certification": [
-            "Preserve validated clean-room runtime matrix results across Python 3.10, 3.11, and 3.12.",
+            "Preserve validated clean-room runtime matrix results across Python 3.10, 3.11, 3.12, 3.13, and 3.14.",
             "Preserve validated in-scope certification lane execution results and carry them into the validated execution manifest.",
             "Preserve SQLite and PostgreSQL migration portability validation for upgrade → downgrade → reapply.",
             "Rebuild Tier 3 evidence from validated runs before claiming the final certification release.",
@@ -126,7 +135,7 @@ def render_markdown(review: dict[str, Any]) -> str:
     append("")
     append(f"- package: `{review['package']}`")
     append(f"- version: `{review['version']}`")
-    append(f"- phase: `{review['phase']}`")
+    append(f"- delivery lifecycle: `{review['delivery_lifecycle']}`")
     append(f"- fully certifiable now: `{review['summary']['fully_certifiable_now']}`")
     append(f"- fully RFC compliant now: `{review['summary']['fully_rfc_compliant_now']}`")
     append(f"- release gates passed: `{review['summary']['release_gates_passed']}`")
