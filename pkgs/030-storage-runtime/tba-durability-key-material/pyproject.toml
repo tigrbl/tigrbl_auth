@@ -17,7 +17,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 license = "Apache-2.0"
-dependencies = ["tigrbl==0.4.5.dev8", "tigrbl==0.4.5.dev8", "tba-contracts-security-trust==0.1.1.dev1", "tba-storage-key-material==0.4.0.dev4"]
+dependencies = ["tigrbl==0.4.6.dev4", "tigrbl==0.4.6.dev4", "tba-contracts-security-trust==0.1.1.dev1", "tba-storage-key-material==0.4.0.dev4"]
 license-files = ["LICENSE", "NOTICE"]
 keywords = ["tigrbl", "tba", "identity"]
 
