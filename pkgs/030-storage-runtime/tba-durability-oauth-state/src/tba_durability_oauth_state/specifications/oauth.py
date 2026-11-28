@@ -5,6 +5,7 @@ from tba_storage_oauth.tables import AuthCode, ClientRegistration, DeviceCode, P
 from tigrbl import deriveTableSpec
 from tigrbl import makeOp
 from tba_durability_oauth_state.operations.oauth_state import (
+    consume_authorization_code,
     create_client_registration,
     disable_client_registration,
     is_token_hash_revoked,
@@ -32,6 +33,16 @@ AuthCodeRuntimeSpec = deriveTableSpec(
             tx_scope="read_write",
             alias="authorize",
             handler=persist_authorization_code,
+        ),
+        makeOp(
+            extra={"owner_layer": "030-storage-runtime"},
+            expose_routes=False,
+            expose_rpc=False,
+            expose_method=True,
+            tx_scope="read_write",
+            persist="skip",
+            alias="consume_authorization_code",
+            handler=consume_authorization_code,
         ),
     ),
 )

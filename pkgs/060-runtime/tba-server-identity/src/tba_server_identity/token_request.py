@@ -27,7 +27,6 @@ from .token_runtime import (
     authenticate_client_assertion,
     authenticate_mtls_client,
     base64,
-    delete_handler_record,
     dpop_proof_from_request,
     enforce_grant_type,
     issue_token_pair_records,
@@ -52,6 +51,7 @@ from tba_runtime_identity_storage.dpop_state import (
 )
 from tba_capability_client_secret_authentication import ClientSecretAuthenticationCapability
 from tba_runtime_identity_storage.ops.clients import lookup_client
+from tba_runtime_identity_storage.ops.oauth_state import consume_authorization_code
 
 from .security.token_issuance import build_rfc6749_token_endpoint_service
 from .token_device_grant import handle_device_code_grant
@@ -385,7 +385,7 @@ async def token_request(*, request, db):
         issue_pair=_issue_pair,
         jwt_kwargs=_jwt_kwargs,
         read_record=read_handler_record,
-        delete_record=delete_handler_record,
+        consume_code=consume_authorization_code,
         authenticate_password_fn=authenticate_password,
         mint_id_token_fn=mint_id_token,
         validate_assertion_fn=validate_assertion_grant_request,

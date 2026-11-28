@@ -195,7 +195,7 @@ def test_oauth_runtime_specs_expose_expected_custom_operations() -> None:
         )
     }
     assert operations == {
-        "AuthCode": {"authorize"},
+        "AuthCode": {"authorize", "consume_authorization_code"},
         "ClientRegistration": {
             "disable_registration",
             "get_registration",
