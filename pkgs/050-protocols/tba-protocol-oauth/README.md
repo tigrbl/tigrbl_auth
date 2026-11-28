@@ -73,7 +73,7 @@ Its exports and dependency declarations describe its integration surface; they d
 
 ### Prerequisites
 
-Python `>=3.10,<3.16` is required. The [manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-oauth/pyproject.toml) declares runtime dependencies including `pydantic`, `tba-protocol-gnap`, `tba-contracts-identity`, `tba-capability-token-introspection`, `tba-capability-token-issuance`, `tba-capability-token-revocation`, `tba-capability-authorization-request-staging`, `tba-capability-client-registration`, `tba-primitives-identity`, `tba-provider-identity-jose`, `tba-contracts-security-trust`, `tba-provider-security-proof-pkce`. Read the example’s inputs and service requirements before execution.
+Python `>=3.10,<3.16` is required. The [manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/050-protocols/tba-protocol-oauth/pyproject.toml) declares runtime dependencies including `pydantic`, `tba-contracts-identity`, `tba-capability-token-introspection`, `tba-capability-token-issuance`, `tba-capability-token-revocation`, `tba-capability-authorization-request-staging`, `tba-capability-client-registration`, `tba-primitives-identity`, `tba-provider-identity-jose`, `tba-contracts-security-trust`, `tba-provider-security-proof-pkce`. Read the example’s inputs and service requirements before execution.
 
 ### Installation
 
@@ -146,6 +146,21 @@ The example demonstrates the documented `tba-protocol-oauth` source boundary or 
 
 ## Usage
 
+GNAP consumers can install `tba-protocol-gnap` separately and import
+`GnapRequest` or `parse_gnap_request` from `tba_protocol_gnap`. Update callers of
+the former `tba_protocol_oauth.standards.gnap` import to use that path.
+
+HTTP adapters can call `resolve_client_registration_scopes` with the raw
+registration `scope` string, or `None` when the field is omitted. Supply the
+server's supported scopes and a default selected by trusted server configuration.
+For example, a read-only profile may default to `("journal:read",)` and an
+editorial profile may default to `("journal:read", "journal:publish")`.
+An explicit scope declaration replaces the default and must be nonempty and
+supported. Return and persist the resolved tuple as the client's scope ceiling.
+Use `validate_client_authorization_scopes` with the persisted ceiling before
+staging consent. A registered scope is eligible to request and does not grant
+access without user approval and the deployment's authorization policy.
+
 ### Common Workflows
 
 <!-- readme-standards:begin example.usage -->
@@ -176,6 +191,10 @@ Use the explicit `tba-protocol-oauth` imports documented below and keep collabor
 ---
 
 ## Package Boundary
+
+The OAuth package owns OAuth registration, authorization, and token exchanges.
+Deployments that offer GNAP too compose the standalone package explicitly.
+See the [OAuth and GNAP boundary](../../../architecture/oauth-gnap-protocol-boundary.md).
 
 ### What It Owns
 

@@ -1,6 +1,6 @@
 # Resource Validation API + UIX Requirements Brief
 
-**Pairing:** `tba-app-backend-resource-validation` + proposed `@tba/ui-resource-validation`<br>
+**Pairing:** `tba-app-backend-resource-validation` + proposed `@tbauth/ui-resource-validation`<br>
 **Status:** New UIX required; API exists<br>
 **Prepared:** July 11, 2026<br>
 **Backend app owner:** `pkgs/090-backend-apps/tba-app-backend-resource-validation`<br>
@@ -198,7 +198,7 @@ Every fixture must state expected stage/result and be resettable.
 
 ## 8. Frontend Engineering Instructions
 
-1. Scaffold `pkgs/105-ui/tba-ui-resource-validation` using `@tba/ui-primitives` and a single resource-validation base URL.
+1. Scaffold `pkgs/105-ui/tba-ui-resource-validation` using `@tbauth/ui-primitives` and a single resource-validation base URL.
 2. Implement strict endpoint/method allowlists matching `RESOURCE_VALIDATION_BACKEND_APP_CONTRACT`.
 3. Separate static metadata mode from authenticated introspection mode at routing, capability, and deployment layers.
 4. Use a server-mediated session for confidential introspection authentication; never ship credentials to the browser.

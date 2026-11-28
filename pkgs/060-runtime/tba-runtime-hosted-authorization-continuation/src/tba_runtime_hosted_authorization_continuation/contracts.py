@@ -22,10 +22,13 @@ class ValidatedAuthorizationRequest:
     client_id: str
     redirect_uri: str
     parameters: tuple[tuple[str, str], ...] = field(repr=False)
+    tenant_id: str | None = None
 
     def __post_init__(self) -> None:
         if not self.issuer or not self.client_id or not self.redirect_uri:
             raise ValueError("issuer, client_id and redirect_uri are required")
+        if self.tenant_id == "":
+            raise ValueError("tenant ID must be nonempty when supplied")
         snapshot = tuple((key, value) for key, value in self.parameters)
         if any(
             not isinstance(key, str) or not isinstance(value, str)
@@ -46,13 +49,14 @@ class ValidatedAuthorizationRequest:
 
     @classmethod
     def from_parameters(
-        cls, issuer: str, parameters: Mapping[str, str]
+        cls, issuer: str, parameters: Mapping[str, str], *, tenant_id: str | None = None
     ) -> ValidatedAuthorizationRequest:
         return cls(
             issuer,
             parameters.get("client_id", ""),
             parameters.get("redirect_uri", ""),
             tuple(parameters.items()),
+            tenant_id=tenant_id,
         )
 
 
@@ -109,6 +113,7 @@ class ContinuationResult:
     status: ContinuationStatus
     request: ValidatedAuthorizationRequest | None = None
     reason: ContinuationReason | None = None
+    restart_client_id: str | None = None
 
 
 class ContinuationUnavailable(RuntimeError):
@@ -122,7 +127,7 @@ class ContinuationStore(Protocol):
         """Insert a new record, rejecting duplicate flow IDs."""
 
     def get(self, flow_id: str, /) -> ContinuationRecord | None:
-        """Return an unconsumed record, or None for unknown or consumed IDs."""
+        """Return an unconsumed record, including expired records retained for recovery."""
 
     def consume(self, record: ContinuationRecord, /, *, now: datetime) -> bool:
         """Atomically consume the matching unexpired record once.

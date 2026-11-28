@@ -96,13 +96,13 @@ def _patch_token_handler_records(
             return registration
         return None
 
-    async def _delete_handler_record(model, db, ident):
-        return None
+    async def _consume_authorization_code(_ctx):
+        return True
 
     monkeypatch.setattr(token_ops, "read_handler_record", _read_handler_record)
     monkeypatch.setattr(token_ops._runtime, "read_handler_record", _read_handler_record)
     monkeypatch.setattr(token_ops._runtime, "first_handler_record", _first_handler_record)
-    monkeypatch.setattr(token_ops, "delete_handler_record", _delete_handler_record)
+    monkeypatch.setattr(token_ops, "consume_authorization_code", _consume_authorization_code)
 
 
 class _SenderConstraint:

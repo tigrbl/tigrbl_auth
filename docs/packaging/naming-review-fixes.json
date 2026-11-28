@@ -92,71 +92,71 @@
   },
   {
     "registry": "npm",
-    "old_name": "@tba/ui-face-biometric-authenticator-and-amr-evidence-manager",
-    "new_name": "@tba/ui-face-biometric-authentication-evidence",
+    "old_name": "@tbauth/ui-face-biometric-authenticator-and-amr-evidence-manager",
+    "new_name": "@tbauth/ui-face-biometric-authentication-evidence",
     "old_path": "pkgs/104-authenticator-uis/tba-ui-face-biometric-authenticator-and-amr-evidence-manager",
     "new_path": "pkgs/104-authenticator-uis/tba-ui-face-biometric-authentication-evidence"
   },
   {
     "registry": "npm",
-    "old_name": "@tba/ui-admin",
-    "new_name": "@tba/ui-administration",
+    "old_name": "@tbauth/ui-admin",
+    "new_name": "@tbauth/ui-administration",
     "old_path": "pkgs/105-ui/tba-ui-admin",
     "new_path": "pkgs/105-ui/tba-ui-administration"
   },
   {
     "registry": "npm",
-    "old_name": "@tba/ui-platform-admin",
-    "new_name": "@tba/ui-platform-administration",
+    "old_name": "@tbauth/ui-platform-admin",
+    "new_name": "@tbauth/ui-platform-administration",
     "old_path": "pkgs/105-ui/tba-ui-platform-admin",
     "new_path": "pkgs/105-ui/tba-ui-platform-administration"
   },
   {
     "registry": "npm",
-    "old_name": "@tba/ui-service-admin",
-    "new_name": "@tba/ui-service-administration",
+    "old_name": "@tbauth/ui-service-admin",
+    "new_name": "@tbauth/ui-service-administration",
     "old_path": "pkgs/105-ui/tba-ui-service-admin",
     "new_path": "pkgs/105-ui/tba-ui-service-administration"
   },
   {
     "registry": "npm",
-    "old_name": "@tba/ui-tenant-admin",
-    "new_name": "@tba/ui-tenant-administration",
+    "old_name": "@tbauth/ui-tenant-admin",
+    "new_name": "@tbauth/ui-tenant-administration",
     "old_path": "pkgs/105-ui/tba-ui-tenant-admin",
     "new_path": "pkgs/105-ui/tba-ui-tenant-administration"
   },
   {
     "registry": "npm",
-    "old_name": "@tba/ui-provisioning-and-directory-api-directory-and-scim-center",
-    "new_name": "@tba/ui-directory-provisioning-scim",
+    "old_name": "@tbauth/ui-provisioning-and-directory-api-directory-and-scim-center",
+    "new_name": "@tbauth/ui-directory-provisioning-scim",
     "old_path": "pkgs/106-ui/tba-ui-provisioning-and-directory-api-directory-and-scim-center",
     "new_path": "pkgs/106-ui/tba-ui-directory-provisioning-scim"
   },
   {
     "registry": "npm",
-    "old_name": "@tba/ui-public-identity-api-uix-requirements",
-    "new_name": "@tba/ui-public-identity",
+    "old_name": "@tbauth/ui-public-identity-api-uix-requirements",
+    "new_name": "@tbauth/ui-public-identity",
     "old_path": "pkgs/106-ui/tba-ui-public-identity-api-uix-requirements",
     "new_path": "pkgs/106-ui/tba-ui-public-identity"
   },
   {
     "registry": "npm",
-    "old_name": "@tba/ui-service-admin-api-uix-requirements-brief",
-    "new_name": "@tba/ui-service-administration-prototype",
+    "old_name": "@tbauth/ui-service-admin-api-uix-requirements-brief",
+    "new_name": "@tbauth/ui-service-administration-prototype",
     "old_path": "pkgs/106-ui/tba-ui-service-admin-api-uix-requirements-brief",
     "new_path": "pkgs/106-ui/tba-ui-service-administration-prototype"
   },
   {
     "registry": "npm",
-    "old_name": "@tba/client-platform-admin",
-    "new_name": "@tba/client-platform-administration",
+    "old_name": "@tbauth/client-platform-admin",
+    "new_name": "@tbauth/client-platform-administration",
     "old_path": "pkgs/075-clients/tba-typescript-client-platform-admin",
     "new_path": "pkgs/075-clients/tba-typescript-client-platform-administration"
   },
   {
     "registry": "npm",
-    "old_name": "@tba/client-tenant-admin",
-    "new_name": "@tba/client-tenant-administration",
+    "old_name": "@tbauth/client-tenant-admin",
+    "new_name": "@tbauth/client-tenant-administration",
     "old_path": "pkgs/075-clients/tba-typescript-client-tenant-admin",
     "new_path": "pkgs/075-clients/tba-typescript-client-tenant-administration"
   }

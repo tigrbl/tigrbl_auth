@@ -4,6 +4,10 @@ from pathlib import Path
 import shutil
 import sys
 import pytest
+
+if sys.version_info < (3, 11):
+    pytest.skip("readme-standards requires Python 3.11+", allow_module_level=True)
+
 from readme_standards.document import parse
 from readme_standards.policy import SECTIONS
 

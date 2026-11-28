@@ -1,4 +1,4 @@
-import { DetailPanel, EmptyState, JsonViewer, PageHeader } from "@tba/ui-primitives";
+import { DetailPanel, EmptyState, JsonViewer, PageHeader } from "@tbauth/ui-primitives";
 import type { IssuerMetadata } from "../types";
 
 export function DiscoveryPage({ metadata }: { metadata: IssuerMetadata | null }) {

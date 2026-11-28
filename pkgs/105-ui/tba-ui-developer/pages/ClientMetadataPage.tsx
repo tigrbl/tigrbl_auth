@@ -8,7 +8,7 @@ import {
   PageHeader,
   ResourceForm,
   ResourceTable
-} from "@tba/ui-primitives";
+} from "@tbauth/ui-primitives";
 import { useState } from "react";
 import type { FormEvent } from "react";
 import type { ClientRegistration, UpdateClientRegistrationInput } from "../types";

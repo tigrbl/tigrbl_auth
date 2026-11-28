@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 from contextlib import asynccontextmanager
 from http import HTTPStatus
 from pathlib import Path
@@ -376,7 +377,8 @@ async def test_profile_openapi_includes_all_active_contract_routes(
     assert response.status_code == HTTPStatus.OK, response.text
     payload = response.json()
     paths = set(payload.get("paths", {}))
-    assert set(deployment.active_contract_routes).issubset(paths)
+    missing = set(deployment.active_contract_routes) - paths
+    assert not missing, sorted(missing)
 
 
 @pytest.mark.asyncio
@@ -388,7 +390,7 @@ async def test_profile_documented_endpoints_behave_as_expected(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     tenant = await _create_tenant(db_session, f"profile-{profile}")
-    assert get_record(Path.cwd(), "tenant", tenant.slug) is None
+    assert await asyncio.to_thread(get_record, Path.cwd(), "tenant", tenant.slug) is None
     username = f"{profile}-user"
     password = "TestPassword123!"
     await _seed_user(db_session, tenant, username, password)
@@ -404,3 +406,24 @@ async def test_profile_documented_endpoints_behave_as_expected(
             username,
             password,
         )
+
+
+@pytest.mark.asyncio
+async def test_hardening_mounts_and_executes_rfc9126_par_carrier(
+    tmp_path,
+    db_session,
+    monkeypatch,
+) -> None:
+    async with _profile_client(
+        "hardening",
+        tmp_path,
+        db_session,
+        monkeypatch,
+    ) as (client, deployment):
+        openapi = (await client.get("/openapi.json")).json()
+        response = await client.post("/par", data={})
+
+    assert deployment.flag_enabled("enable_rfc9126")
+    assert "/par" in openapi["paths"]
+    assert response.status_code == HTTPStatus.BAD_REQUEST
+    assert "client_id parameter required" in response.text

@@ -11,7 +11,7 @@ import {
   ResourceTable,
   ResourceToolbar,
   StatusBadge
-} from "@tba/ui-primitives";
+} from "@tbauth/ui-primitives";
 import { useMemo, useState } from "react";
 import type { FormEvent } from "react";
 import { ShortId } from "../components/ShortId";

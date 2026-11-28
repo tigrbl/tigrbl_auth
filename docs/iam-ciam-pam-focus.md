@@ -46,7 +46,7 @@ The key point: IAM, CIAM, and PAM are product categories, not single protocols. 
 | `tba_auth` surface | IAM | CIAM | PAM | IGA | NHI/workload | Developer platform |
 | --- | --- | --- | --- | --- | --- | --- |
 | `tba-app-backend-public` | Partial | Strong | No | No | Token issuance only | Strong |
-| `@tba/ui-public` | Partial | Strong | No | No | No | Strong for app login testing |
+| `@tbauth/ui-public` | Partial | Strong | No | No | No | Strong for app login testing |
 | `tba-app-backend-platform-administration` | Strong platform control | Partial | Privileged admin basis only | Partial | Partial | No |
 | `tba-app-backend-tenant-administration` | Strong tenant control | Strong for tenant-owned customer/user admin | Privileged admin basis only | Partial | Partial | Partial |
 | `tba-app-backend-developer` | Partial | Strong for app integration | No | No | M2M client setup partial | Strong |

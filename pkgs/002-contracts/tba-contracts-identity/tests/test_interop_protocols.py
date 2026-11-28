@@ -1,4 +1,4 @@
-from tba_protocol_oauth.standards.gnap import parse_gnap_request
+from tba_protocol_gnap import parse_gnap_request
 from tba_protocol_oidc.standards.set_delivery import SetPollRequest, SetPushRequest
 from tba_contracts_identity.decentralized import Did
 from tba_contracts_identity.policy_interop import XacmlDecision, xacml_to_authzen

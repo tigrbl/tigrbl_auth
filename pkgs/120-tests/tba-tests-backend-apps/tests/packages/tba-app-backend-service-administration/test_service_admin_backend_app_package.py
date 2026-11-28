@@ -38,7 +38,7 @@ def test_service_admin_contract_matches_product_surface_registry() -> None:
 
     assert PRODUCT_SURFACE == "service-admin-app"
     assert SERVICE_ADMIN_BACKEND_APP_CONTRACT.product_surface == PRODUCT_SURFACE
-    assert SERVICE_ADMIN_BACKEND_APP_CONTRACT.intended_uix == "@tba/ui-service-administration"
+    assert SERVICE_ADMIN_BACKEND_APP_CONTRACT.intended_uix == "@tbauth/ui-service-administration"
     assert deployment.plugin_mode == "mixed"
     assert deployment.surface_enabled("public-rest")
     assert deployment.surface_enabled("admin-rest")

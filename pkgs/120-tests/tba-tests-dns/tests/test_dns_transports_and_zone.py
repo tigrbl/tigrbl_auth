@@ -581,6 +581,7 @@ def test_verified_dns_over_https(dns_tls_identity, post, signed, bound, sync_que
 
     cert_file, key_file = dns_tls_identity
     server_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+    server_context.minimum_version = ssl.TLSVersion.TLSv1_2
     server_context.load_cert_chain(cert_file, key_file)
     client_context = ssl.create_default_context(cafile=cert_file)
     query = Message(43, 0x0100, (Question.from_text("example.", "A"),))
@@ -675,6 +676,7 @@ def test_borrowed_https_session_reuses_tls_connection(dns_tls_identity, backend)
 
     cert_file, key_file = dns_tls_identity
     server_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+    server_context.minimum_version = ssl.TLSVersion.TLSv1_2
     server_context.load_cert_chain(cert_file, key_file)
     trust = ssl.create_default_context(cafile=cert_file)
     endpoints = []

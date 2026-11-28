@@ -1,5 +1,5 @@
-import { AppShell, AuthProvider, AuthShell, RequireAuth, Toast, describeSession } from "@tba/ui-primitives";
-import "@tba/ui-primitives/styles.css";
+import { AppShell, AuthProvider, AuthShell, RequireAuth, Toast, describeSession } from "@tbauth/ui-primitives";
+import "@tbauth/ui-primitives/styles.css";
 import { useEffect, useState } from "react";
 import { useTenantAdmin } from "./hooks/useTenantAdmin";
 import { AuditPage } from "./pages/AuditPage";

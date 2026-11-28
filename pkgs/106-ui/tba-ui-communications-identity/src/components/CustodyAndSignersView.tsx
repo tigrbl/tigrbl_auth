@@ -396,7 +396,7 @@ export const CustodyAndSignersView: React.FC<CustodyAndSignersViewProps> = ({
           </h2>
           <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
             Pairing: <span className="font-mono">tba-router-communications-identity</span> +{' '}
-            <span className="font-mono">@tba/communications-identity-uix</span> orchestrating Certificate Center, Trust Registry, JOSE, Attestation Center, and Security Signals.
+            <span className="font-mono">@tbauth/communications-identity-uix</span> orchestrating Certificate Center, Trust Registry, JOSE, Attestation Center, and Security Signals.
           </p>
         </div>
         <div className="divide-y divide-slate-200 dark:divide-slate-800">

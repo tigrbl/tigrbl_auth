@@ -33,7 +33,7 @@ def test_npm_manifests_and_local_dependencies_use_tba():
         if "node_modules" in path.parts:
             continue
         manifest = json.loads(path.read_text(encoding="utf-8"))
-        assert manifest["name"].startswith("@tba/"), path
+        assert manifest["name"].startswith("@tbauth/"), path
         for group in ("dependencies", "devDependencies", "peerDependencies"):
             assert not any(name.startswith("@tigrbl" + "-auth/") for name in manifest.get(group, {})), path
             for name, requirement in manifest.get(group, {}).items():
@@ -122,7 +122,7 @@ def test_approved_role_first_matrix_matches_live_packages():
         if row["current_layer"] == "070-facade":
             assert name == row["current_name"]
         else:
-            stem = name.removeprefix("@tba/").removeprefix("tba-")
+            stem = name.removeprefix("@tbauth/").removeprefix("tba-")
             role, separator, subject = stem.partition("-")
             assert role in roles and separator and subject, name
     live = set()
@@ -147,7 +147,7 @@ def test_implementation_names_use_unambiguous_vocabulary():
             seen.add((registry, name))
             if "070-facade" in path.parts:
                 continue
-            stem = name.removeprefix("@tba/").removeprefix("tba-")
+            stem = name.removeprefix("@tbauth/").removeprefix("tba-")
             role, _, subject = stem.partition("-")
             tokens = subject.split("-")
             assert not forbidden.intersection(tokens), name

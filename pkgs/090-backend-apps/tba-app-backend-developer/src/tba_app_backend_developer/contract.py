@@ -23,7 +23,7 @@ class DeveloperBackendAppContract:
 
 DEVELOPER_BACKEND_APP_CONTRACT = DeveloperBackendAppContract(
     product_surface="developer-app",
-    intended_uix="@tba/ui-developer",
+    intended_uix="@tbauth/ui-developer",
     public_capabilities=(
         "register",
         "register-management",

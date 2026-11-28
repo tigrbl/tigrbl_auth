@@ -1,4 +1,4 @@
-# @tba/ui-face-biometric-authentication-evidence
+# @tbauth/ui-face-biometric-authentication-evidence
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">
@@ -15,7 +15,7 @@
 <p align="center">
 <a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/104-authenticator-uis/tba-ui-face-biometric-authentication-evidence"><img alt="Downloads: source checkout" src="https://img.shields.io/badge/Downloads-source%20checkout-0969da"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-face-biometric-authentication-evidence/package.json"><img alt="Direct dependencies: 10" src="https://img.shields.io/badge/Direct%20dependencies-10-0969da"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-face-biometric-authentication-evidence/README.md"><img alt="README hits for @tba/ui-face-biometric-authentication-evidence" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-face-biometric-authentication-evidence/README.md.svg?label=hits"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-face-biometric-authentication-evidence/README.md"><img alt="README hits for @tbauth/ui-face-biometric-authentication-evidence" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-face-biometric-authentication-evidence/README.md.svg?label=hits"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"><img alt="SSOT: governed" src="https://img.shields.io/badge/SSOT-governed-2f6f4e"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-face-biometric-authentication-evidence/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
 </p>
@@ -25,7 +25,7 @@ Source prototype for Face Biometric Authenticator and AMR Evidence Manager.
 
 ## AEO Summary
 
-- Package: `@tba/ui-face-biometric-authentication-evidence`
+- Package: `@tbauth/ui-face-biometric-authentication-evidence`
 - Layer: `104-authenticator-uis`
 - Responsibility: Source prototype for Face Biometric Authenticator and AMR Evidence Manager.
 - Public surface: [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-face-biometric-authentication-evidence/package.json).
@@ -33,11 +33,11 @@ Source prototype for Face Biometric Authenticator and AMR Evidence Manager.
 
 ## When to use it
 
-Choose `@tba/ui-face-biometric-authentication-evidence` for this responsibility: Source prototype for Face Biometric Authenticator and AMR Evidence Manager. Its `104-authenticator-uis` placement keeps authenticator-facing UI integration separate from replacing server-side verification and authorization.
+Choose `@tbauth/ui-face-biometric-authentication-evidence` for this responsibility: Source prototype for Face Biometric Authenticator and AMR Evidence Manager. Its `104-authenticator-uis` placement keeps authenticator-facing UI integration separate from replacing server-side verification and authorization.
 
 ## Installation
 
-Install `@tba/ui-face-biometric-authentication-evidence` from this checkout; registry publication is separate from this source-only workflow:
+Install `@tbauth/ui-face-biometric-authentication-evidence` from this checkout; registry publication is separate from this source-only workflow:
 
 ```bash
 npm --prefix pkgs/104-authenticator-uis/tba-ui-face-biometric-authentication-evidence install
@@ -59,7 +59,7 @@ Expect `dist/index.html` and bundled assets.
 
 ## Usage
 
-Use the checked-in `@tba/ui-face-biometric-authentication-evidence` package through its declared npm scripts:
+Use the checked-in `@tbauth/ui-face-biometric-authentication-evidence` package through its declared npm scripts:
 
 ```bash
 npm --prefix pkgs/104-authenticator-uis/tba-ui-face-biometric-authentication-evidence run dev
@@ -69,7 +69,7 @@ Source prototype for Face Biometric Authenticator and AMR Evidence Manager. The 
 
 ## Package Boundary
 
-`@tba/ui-face-biometric-authentication-evidence` belongs to `104-authenticator-uis` and owns authenticator-facing UI integration: Source prototype for Face Biometric Authenticator and AMR Evidence Manager.
+`@tbauth/ui-face-biometric-authentication-evidence` belongs to `104-authenticator-uis` and owns authenticator-facing UI integration: Source prototype for Face Biometric Authenticator and AMR Evidence Manager.
 
 Its implementation surface is the [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-face-biometric-authentication-evidence/package.json).
 
@@ -77,29 +77,29 @@ Keep replacing server-side verification and authorization in their owning packag
 
 ## Injected dependencies
 
-The [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-face-biometric-authentication-evidence/package.json) for `@tba/ui-face-biometric-authentication-evidence` does not declare an explicit service-constructor or keyword-only factory hook in the inspected source. Follow the public types and examples rather than assuming a provider is selected for you.
+The [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-face-biometric-authentication-evidence/package.json) for `@tbauth/ui-face-biometric-authentication-evidence` does not declare an explicit service-constructor or keyword-only factory hook in the inspected source. Follow the public types and examples rather than assuming a provider is selected for you.
 
 Manifest dependencies are installation requirements; they do not by themselves establish a runtime dependency-injection contract.
 
 ## Operations and readiness
 
-`@tba/ui-face-biometric-authentication-evidence` exposes authenticator-facing UI integration. Inspect the [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-face-biometric-authentication-evidence/package.json) for the exported types and composition surface.
+`@tbauth/ui-face-biometric-authentication-evidence` exposes authenticator-facing UI integration. Inspect the [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-face-biometric-authentication-evidence/package.json) for the exported types and composition surface.
 
 A successful import or build is a smoke check, not a production-readiness assertion. Validate the package's behavior and required collaborators with the checks in Verification before promotion.
 
 ## Protocol consumers
 
-No active layer-50 manifest declares a direct runtime dependency on `@tba/ui-face-biometric-authentication-evidence`. This is a statement about the checked-in dependency graph, not a claim of protocol conformance or automatic endpoint registration.
+No active layer-50 manifest declares a direct runtime dependency on `@tbauth/ui-face-biometric-authentication-evidence`. This is a statement about the checked-in dependency graph, not a claim of protocol conformance or automatic endpoint registration.
 
 ## Non-goals
 
-`@tba/ui-face-biometric-authentication-evidence` does not take ownership of replacing server-side verification and authorization.
+`@tbauth/ui-face-biometric-authentication-evidence` does not take ownership of replacing server-side verification and authorization.
 
 Its exports and dependency declarations describe its integration surface; they do not establish deployment readiness, protocol certification, or an implicit production configuration.
 
 ## Related Packages
 
-`@tba/ui-face-biometric-authentication-evidence` declares no local runtime dependency and has no direct consumer in the active manifest graph. Browse the [104-authenticator-uis layer](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/104-authenticator-uis) for adjacent package responsibilities; adjacency does not imply a dependency.
+`@tbauth/ui-face-biometric-authentication-evidence` declares no local runtime dependency and has no direct consumer in the active manifest graph. Browse the [104-authenticator-uis layer](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/104-authenticator-uis) for adjacent package responsibilities; adjacency does not imply a dependency.
 
 ## Project Links
 
@@ -112,7 +112,7 @@ Its exports and dependency declarations describe its integration surface; they d
 
 ## Governance
 
-`@tba/ui-face-biometric-authentication-evidence` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `104-authenticator-uis` ownership, public imports, declared dependencies, examples, and release metadata aligned.
+`@tbauth/ui-face-biometric-authentication-evidence` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `104-authenticator-uis` ownership, public imports, declared dependencies, examples, and release metadata aligned.
 
 Changes must pass the [README standards gate](https://github.com/tigrbl/tigrbl_auth/blob/master/.github/workflows/readme-standards.yml), package checks, and the evidence requirements relevant to the changed behavior. Update SSOT through the repository's CLI workflow when changing governed claims or boundaries.
 

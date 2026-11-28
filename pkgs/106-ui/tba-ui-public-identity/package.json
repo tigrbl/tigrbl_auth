@@ -1,5 +1,5 @@
 {
-  "name": "@tba/ui-public-identity",
+  "name": "@tbauth/ui-public-identity",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -50,6 +50,7 @@
     "url": "https://github.com/tigrbl/tigrbl_auth/issues"
   },
   "overrides": {
-    "qs@>=6 <6.16.1": "6.16.1"
+    "qs@>=6 <6.16.1": "6.16.1",
+    "postcss@>=8 <8.5.23": "8.5.23"
   }
 }

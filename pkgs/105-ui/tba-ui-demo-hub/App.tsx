@@ -1,5 +1,5 @@
-import { AppShell, Button, Card, DetailPanel, MetricCard, PageHeader, StatusBadge, Toast } from "@tba/ui-primitives";
-import "@tba/ui-primitives/styles.css";
+import { AppShell, Button, Card, DetailPanel, MetricCard, PageHeader, StatusBadge, Toast } from "@tbauth/ui-primitives";
+import "@tbauth/ui-primitives/styles.css";
 import { useEffect, useState } from "react";
 import { demoFixtures, getSurfaceForStep, journeySteps, type JourneyStep } from "./demoState";
 import { BACKEND_APP } from "./defaults";

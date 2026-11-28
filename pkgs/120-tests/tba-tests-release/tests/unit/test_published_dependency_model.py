@@ -82,7 +82,7 @@ def test_pyproject_uses_published_pins_and_extras():
     runtime_extras = _load_package_pyproject("tba-runtime-identity")["project"][
         "optional-dependencies"
     ]
-    assert runtime_extras["uvicorn"] == ["uvicorn[standard]==0.41.0"]
+    assert runtime_extras["uvicorn"] == ["uvicorn[standard]==0.46.0"]
     assert runtime_extras["hypercorn"] == ["hypercorn==0.18.0"]
     assert runtime_extras["tigrcorn"] == ["tigrcorn==0.3.8; python_version >= '3.11'"]
     assert "tigrcorn==0.3.8; python_version >= '3.11'" in runtime_extras["servers"]

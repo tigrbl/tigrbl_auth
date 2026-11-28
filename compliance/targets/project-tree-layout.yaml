@@ -17,7 +17,7 @@ project_tree:
   - specs/openrpc
   - specs/jsonschema
   - scripts
-  - tests/unit
+  - pkgs/120-tests/tba-tests-architecture/tests/unit
   - tests/integration
   - tests/conformance
   - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop
@@ -25,7 +25,7 @@ project_tree:
   - tests/security
   - tests/e2e
   - tests/perf
-  - tests/examples
+  - pkgs/120-tests/tba-tests-examples/tests/examples
   - pkgs/000-primitives
   - pkgs/001-storage
   - pkgs/002-contracts
@@ -43,7 +43,7 @@ project_tree:
   - uv.lock
   - pkgs/060-runtime/tba-server-identity/src/tba_server_identity/app.py
   - pkgs/060-runtime/tba-server-identity/src/tba_server_identity/gateway.py
-  - pkgs/060-runtime/tba-server-identity/src/tba_server_identity/surfaces.py
+  - pkgs/090-backend-apps/tba-app-backend-core/src/tba_app_backend_core/surfaces/surface_api.py
   - pkgs/060-runtime/tba-cli-identity/src/tba_cli_identity/cli
   - pkgs/070-facade/tba-auth/src/tba_auth/__init__.py
   - docs/architecture/PROJECT_TREE_LAYOUT.md

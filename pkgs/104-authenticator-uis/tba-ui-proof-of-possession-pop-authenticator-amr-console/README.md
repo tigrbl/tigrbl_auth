@@ -1,4 +1,4 @@
-# @tba/ui-proof-of-possession-pop-authenticator-amr-console
+# @tbauth/ui-proof-of-possession-pop-authenticator-amr-console
 
 <!-- BEGIN TBA README HEADER -->
 <p align="center">
@@ -15,7 +15,7 @@
 <p align="center">
 <a href="https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/104-authenticator-uis/tba-ui-proof-of-possession-pop-authenticator-amr-console"><img alt="Downloads: source checkout" src="https://img.shields.io/badge/Downloads-source%20checkout-0969da"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-proof-of-possession-pop-authenticator-amr-console/package.json"><img alt="Direct dependencies: 10" src="https://img.shields.io/badge/Direct%20dependencies-10-0969da"></a>
-<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-proof-of-possession-pop-authenticator-amr-console/README.md"><img alt="README hits for @tba/ui-proof-of-possession-pop-authenticator-amr-console" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-proof-of-possession-pop-authenticator-amr-console/README.md.svg?label=hits"></a>
+<a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-proof-of-possession-pop-authenticator-amr-console/README.md"><img alt="README hits for @tbauth/ui-proof-of-possession-pop-authenticator-amr-console" src="https://hits.sh/github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-proof-of-possession-pop-authenticator-amr-console/README.md.svg?label=hits"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"><img alt="SSOT: governed" src="https://img.shields.io/badge/SSOT-governed-2f6f4e"></a>
 <a href="https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-proof-of-possession-pop-authenticator-amr-console/README.md#verification"><img alt="Evidence: verification" src="https://img.shields.io/badge/Evidence-verification-8250df"></a>
 </p>
@@ -25,7 +25,7 @@ Source prototype for Proof of Possession (PoP) AMR Console.
 
 ## AEO Summary
 
-- Package: `@tba/ui-proof-of-possession-pop-authenticator-amr-console`
+- Package: `@tbauth/ui-proof-of-possession-pop-authenticator-amr-console`
 - Layer: `104-authenticator-uis`
 - Responsibility: Source prototype for Proof of Possession (PoP) AMR Console.
 - Public surface: [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-proof-of-possession-pop-authenticator-amr-console/package.json).
@@ -33,11 +33,11 @@ Source prototype for Proof of Possession (PoP) AMR Console.
 
 ## When to use it
 
-Choose `@tba/ui-proof-of-possession-pop-authenticator-amr-console` for this responsibility: Source prototype for Proof of Possession (PoP) AMR Console. Its `104-authenticator-uis` placement keeps authenticator-facing UI integration separate from replacing server-side verification and authorization.
+Choose `@tbauth/ui-proof-of-possession-pop-authenticator-amr-console` for this responsibility: Source prototype for Proof of Possession (PoP) AMR Console. Its `104-authenticator-uis` placement keeps authenticator-facing UI integration separate from replacing server-side verification and authorization.
 
 ## Installation
 
-Install `@tba/ui-proof-of-possession-pop-authenticator-amr-console` from this checkout; registry publication is separate from this source-only workflow:
+Install `@tbauth/ui-proof-of-possession-pop-authenticator-amr-console` from this checkout; registry publication is separate from this source-only workflow:
 
 ```bash
 npm --prefix pkgs/104-authenticator-uis/tba-ui-proof-of-possession-pop-authenticator-amr-console install
@@ -59,7 +59,7 @@ Expect `dist/index.html` and bundled assets.
 
 ## Usage
 
-Use the checked-in `@tba/ui-proof-of-possession-pop-authenticator-amr-console` package through its declared npm scripts:
+Use the checked-in `@tbauth/ui-proof-of-possession-pop-authenticator-amr-console` package through its declared npm scripts:
 
 ```bash
 npm --prefix pkgs/104-authenticator-uis/tba-ui-proof-of-possession-pop-authenticator-amr-console run dev
@@ -69,7 +69,7 @@ Source prototype for Proof of Possession (PoP) AMR Console. The manifest is the 
 
 ## Package Boundary
 
-`@tba/ui-proof-of-possession-pop-authenticator-amr-console` belongs to `104-authenticator-uis` and owns authenticator-facing UI integration: Source prototype for Proof of Possession (PoP) AMR Console.
+`@tbauth/ui-proof-of-possession-pop-authenticator-amr-console` belongs to `104-authenticator-uis` and owns authenticator-facing UI integration: Source prototype for Proof of Possession (PoP) AMR Console.
 
 Its implementation surface is the [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-proof-of-possession-pop-authenticator-amr-console/package.json).
 
@@ -77,29 +77,29 @@ Keep replacing server-side verification and authorization in their owning packag
 
 ## Injected dependencies
 
-The [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-proof-of-possession-pop-authenticator-amr-console/package.json) for `@tba/ui-proof-of-possession-pop-authenticator-amr-console` does not declare an explicit service-constructor or keyword-only factory hook in the inspected source. Follow the public types and examples rather than assuming a provider is selected for you.
+The [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-proof-of-possession-pop-authenticator-amr-console/package.json) for `@tbauth/ui-proof-of-possession-pop-authenticator-amr-console` does not declare an explicit service-constructor or keyword-only factory hook in the inspected source. Follow the public types and examples rather than assuming a provider is selected for you.
 
 Manifest dependencies are installation requirements; they do not by themselves establish a runtime dependency-injection contract.
 
 ## Operations and readiness
 
-`@tba/ui-proof-of-possession-pop-authenticator-amr-console` exposes authenticator-facing UI integration. Inspect the [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-proof-of-possession-pop-authenticator-amr-console/package.json) for the exported types and composition surface.
+`@tbauth/ui-proof-of-possession-pop-authenticator-amr-console` exposes authenticator-facing UI integration. Inspect the [package manifest](https://github.com/tigrbl/tigrbl_auth/blob/master/pkgs/104-authenticator-uis/tba-ui-proof-of-possession-pop-authenticator-amr-console/package.json) for the exported types and composition surface.
 
 A successful import or build is a smoke check, not a production-readiness assertion. Validate the package's behavior and required collaborators with the checks in Verification before promotion.
 
 ## Protocol consumers
 
-No active layer-50 manifest declares a direct runtime dependency on `@tba/ui-proof-of-possession-pop-authenticator-amr-console`. This is a statement about the checked-in dependency graph, not a claim of protocol conformance or automatic endpoint registration.
+No active layer-50 manifest declares a direct runtime dependency on `@tbauth/ui-proof-of-possession-pop-authenticator-amr-console`. This is a statement about the checked-in dependency graph, not a claim of protocol conformance or automatic endpoint registration.
 
 ## Non-goals
 
-`@tba/ui-proof-of-possession-pop-authenticator-amr-console` does not take ownership of replacing server-side verification and authorization.
+`@tbauth/ui-proof-of-possession-pop-authenticator-amr-console` does not take ownership of replacing server-side verification and authorization.
 
 Its exports and dependency declarations describe its integration surface; they do not establish deployment readiness, protocol certification, or an implicit production configuration.
 
 ## Related Packages
 
-`@tba/ui-proof-of-possession-pop-authenticator-amr-console` declares no local runtime dependency and has no direct consumer in the active manifest graph. Browse the [104-authenticator-uis layer](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/104-authenticator-uis) for adjacent package responsibilities; adjacency does not imply a dependency.
+`@tbauth/ui-proof-of-possession-pop-authenticator-amr-console` declares no local runtime dependency and has no direct consumer in the active manifest graph. Browse the [104-authenticator-uis layer](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/104-authenticator-uis) for adjacent package responsibilities; adjacency does not imply a dependency.
 
 ## Project Links
 
@@ -112,7 +112,7 @@ Its exports and dependency declarations describe its integration surface; they d
 
 ## Governance
 
-`@tba/ui-proof-of-possession-pop-authenticator-amr-console` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `104-authenticator-uis` ownership, public imports, declared dependencies, examples, and release metadata aligned.
+`@tbauth/ui-proof-of-possession-pop-authenticator-amr-console` follows the [canonical SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json) and [package index](https://github.com/tigrbl/tigrbl_auth/blob/master/index.toml). Keep its `104-authenticator-uis` ownership, public imports, declared dependencies, examples, and release metadata aligned.
 
 Changes must pass the [README standards gate](https://github.com/tigrbl/tigrbl_auth/blob/master/.github/workflows/readme-standards.yml), package checks, and the evidence requirements relevant to the changed behavior. Update SSOT through the repository's CLI workflow when changing governed claims or boundaries.
 

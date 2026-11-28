@@ -1,6 +1,6 @@
 # Attestation API + Attestation Center UIX Requirements Brief
 
-**Proposed pairing:** `tba-router-attestation` + `@tba/attestation-center-uix`<br>
+**Proposed pairing:** `tba-router-attestation` + `@tbauth/attestation-center-uix`<br>
 **Status:** New product surface; key-attestation contracts/runtime/storage and adjacent evidence foundations exist<br>
 **Prepared:** July 11, 2026<br>
 **Proposed router owner:** `pkgs/080-routers/tba-router-attestation`<br>

@@ -5,6 +5,8 @@ from pathlib import Path
 
 import pytest
 
+from scripts.run_migration_portability import COMPONENT_ADOPTION_REVISION, seed_legacy_schema
+
 from tba_auth.migrations import apply_all_async, column_names_async, downgrade_one_async, expected_table_names, verify_schema_async
 
 
@@ -14,7 +16,6 @@ REVISION_0007 = "0007_browser_session_cookie_and_auth_code_linkage"
 REVISION_0008 = "0008_refresh_token_family_state"
 REVISION_0009 = "0009_admin_identity_bootstrap_and_password_recovery"
 REVISION_0010 = "0010_realm_namespace_tables"
-REVISION_0019 = "0019_federation_and_invariant_tables"
 REVISION_0006 = "0006_key_rotation_and_audit_tables"
 SESSION_COLUMNS = {"session_state_salt", "cookie_secret_hash", "cookie_issued_at", "cookie_rotated_at"}
 AUTH_CODE_COLUMNS = {"session_id"}
@@ -71,9 +72,8 @@ async def test_migration_chain_produces_expected_schema_on_sqlite_and_postgres(r
 
 async def test_downgrade_then_reapply_is_schema_safe_on_sqlite_and_postgres(runtime_engine_factory, postgres_database_url, tmp_path):
     for backend, database_url in _backend_matrix(tmp_path):
-        async with runtime_engine_factory(database_url):
-            first = await apply_all_async()
-            assert first.passed is True, backend
+        async with runtime_engine_factory(database_url) as engine:
+            await seed_legacy_schema(engine.provider)
             await _assert_upgrade_state()
 
             downgraded_newer_revisions: list[str] = []
@@ -105,11 +105,5 @@ async def test_downgrade_then_reapply_is_schema_safe_on_sqlite_and_postgres(runt
             reapplied = await apply_all_async()
             assert reapplied.passed is True, backend
             await _assert_upgrade_state()
-            assert REVISION_0019 in set(first.applied) | set(first.pending_before) | {REVISION_0019}
-            assert downgraded_latest in set(first.applied) | set(first.pending_before) | {downgraded_latest}
             assert REVISION_0010 in downgraded_newer_revisions
-            assert downgraded_realm_namespace in set(first.applied) | set(first.pending_before) | {downgraded_realm_namespace}
-            assert downgraded_admin_identity in set(first.applied) | set(first.pending_before) | {downgraded_admin_identity}
-            assert downgraded in set(first.applied) | set(first.pending_before) | {downgraded}
-            assert downgraded_browser_session in set(first.applied) | set(first.pending_before) | {downgraded_browser_session}
-            assert downgraded in set(reapplied.applied) | set(reapplied.pending_before) | {downgraded}
+            assert COMPONENT_ADOPTION_REVISION in reapplied.applied

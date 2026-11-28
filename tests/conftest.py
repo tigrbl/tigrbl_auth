@@ -7,7 +7,6 @@ import os
 import shutil
 import sys
 import time
-import types
 from contextlib import asynccontextmanager
 from importlib.util import find_spec
 from pathlib import Path
@@ -48,22 +47,10 @@ def _isolate_protocol_settings_binding():
     bind_protocol_settings(_protocol_test_settings)
 
 
-if sys.version_info < (3, 11) and "tomllib" not in sys.modules:
-    _tomllib = types.ModuleType("tomllib")
+if sys.version_info < (3, 11):
+    import tomli
 
-    class TOMLDecodeError(ValueError):
-        pass
-
-    def _loads(_source: str | bytes, /, *_args: Any, **_kwargs: Any) -> dict[str, Any]:
-        return {}
-
-    def _load(fp: Any, /, *_args: Any, **_kwargs: Any) -> dict[str, Any]:
-        return _loads(fp.read())
-
-    _tomllib.TOMLDecodeError = TOMLDecodeError
-    _tomllib.loads = _loads
-    _tomllib.load = _load
-    sys.modules["tomllib"] = _tomllib
+    sys.modules.setdefault("tomllib", tomli)
 
 
 class _MockDataFactory:

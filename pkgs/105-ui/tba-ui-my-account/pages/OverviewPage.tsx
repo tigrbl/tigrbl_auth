@@ -1,4 +1,4 @@
-import { Card, DetailPanel, MetricCard, PageHeader, StatusBadge } from "@tba/ui-primitives";
+import { Card, DetailPanel, MetricCard, PageHeader, StatusBadge } from "@tbauth/ui-primitives";
 import type { AccountProfile, AccountSession, AuthorizedApp, Consent } from "../types";
 
 export function OverviewPage({

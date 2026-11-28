@@ -1,5 +1,5 @@
 {
-  "name": "@tba/ui-proof-of-possession-pop-authenticator-amr-console",
+  "name": "@tbauth/ui-proof-of-possession-pop-authenticator-amr-console",
   "private": true,
   "version": "0.0.0",
   "type": "module",

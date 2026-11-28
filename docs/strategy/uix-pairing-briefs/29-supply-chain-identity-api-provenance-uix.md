@@ -1,6 +1,6 @@
 # Supply-Chain Identity API + Provenance UIX Requirements Brief
 
-**Pairing:** `tba-router-supply-chain-identity` + `@tba/provenance-uix`<br>
+**Pairing:** `tba-router-supply-chain-identity` + `@tbauth/provenance-uix`<br>
 **Opportunity-map item:** 19<br>
 **Primary buyers:** software vendors, DevSecOps teams, regulated engineering organizations, AI/ML platforms, industrial firmware producers, and artifact consumers<br>
 **Status:** proposed product surface; internal identity, attestation, signing, policy, and release-evidence foundations exist, while SLSA/in-toto/Sigstore product support is currently absent

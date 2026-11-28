@@ -320,7 +320,7 @@ Work from the `pkgs/090-backend-apps/tba-app-backend-service-administration` che
 | Property | Value |
 | --- | --- |
 | Product surface | `service-admin-app` |
-| Intended UIX | `@tba/ui-service-administration` |
+| Intended UIX | `@tbauth/ui-service-administration` |
 | Exposes | Services, service keys, API keys, token/audit inspection, validation metadata |
 | Excludes | Tenant lifecycle operations, public human login/consent pages, developer app catalog management |
 

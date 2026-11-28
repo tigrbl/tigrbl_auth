@@ -186,6 +186,10 @@ Use the explicit `tba-protocol-gnap` imports documented below and keep collabora
 
 ## Package Boundary
 
+The GNAP package owns the RFC 9635 grant negotiation interface. Deployments that
+offer both GNAP and OAuth compose the packages explicitly and can share neutral
+identity contracts. See the [OAuth and GNAP boundary](../../../architecture/oauth-gnap-protocol-boundary.md).
+
 ### What It Owns
 
 `tba-protocol-gnap` belongs to `050-protocols` and owns protocol semantics and projections: Versioned RFC 9635 Grant Negotiation and Authorization Protocol mapping.

@@ -61,7 +61,7 @@ jobs:
             echo "::error::Project-scoped publishing requires one named Python package."
             exit 1
           fi
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - name: Configure git identity
@@ -131,7 +131,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: ${{ needs.bump-package-versions.outputs.sha }}
           fetch-depth: 0
@@ -172,7 +172,7 @@ jobs:
       matrix:
         package: ${{ fromJSON(needs.resolve-dispatch-matrix.outputs.matrix) }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: ${{ needs.resolve-dispatch-matrix.outputs.sha }}
       - name: Resolve package metadata at bumped revision
@@ -206,7 +206,7 @@ jobs:
       matrix:
         package: ${{ fromJSON(needs.resolve-dispatch-matrix.outputs.matrix) }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: ${{ needs.resolve-dispatch-matrix.outputs.sha }}
       - name: Resolve package metadata at bumped revision
@@ -238,7 +238,7 @@ jobs:
       matrix:
         package: ${{ fromJSON(needs.resolve-dispatch-matrix.outputs.matrix) }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: ${{ needs.resolve-dispatch-matrix.outputs.sha }}
       - name: Resolve package metadata at bumped revision

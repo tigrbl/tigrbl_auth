@@ -38,7 +38,7 @@ def test_developer_contract_matches_product_surface_registry() -> None:
 
     assert PRODUCT_SURFACE == "developer-app"
     assert DEVELOPER_BACKEND_APP_CONTRACT.product_surface == PRODUCT_SURFACE
-    assert DEVELOPER_BACKEND_APP_CONTRACT.intended_uix == "@tba/ui-developer"
+    assert DEVELOPER_BACKEND_APP_CONTRACT.intended_uix == "@tbauth/ui-developer"
     assert deployment.plugin_mode == "mixed"
     assert deployment.surface_enabled("public-rest")
     assert deployment.surface_enabled("admin-rest")

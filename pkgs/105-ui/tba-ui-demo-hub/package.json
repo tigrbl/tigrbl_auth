@@ -1,5 +1,5 @@
 {
-  "name": "@tba/ui-demo-hub",
+  "name": "@tbauth/ui-demo-hub",
   "version": "0.4.0-dev.2",
   "description": "Demo hub UIX showing TBA product surfaces as one identity system.",
   "license": "Apache-2.0",
@@ -29,7 +29,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@tba/ui-primitives": "file:../../100-uix-core/tba-ui-primitives",
+    "@tbauth/ui-primitives": "file:../../100-uix-core/tba-ui-primitives",
     "@vitejs/plugin-react": "^5.0.0",
     "vite": "^6.2.0",
     "typescript": "~5.8.2",
@@ -40,7 +40,7 @@
     "@types/node": "^22.14.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
-    "vitest": "^4.1.12"
+    "vitest": "4.1.12"
   },
   "engines": {
     "node": ">=22"
