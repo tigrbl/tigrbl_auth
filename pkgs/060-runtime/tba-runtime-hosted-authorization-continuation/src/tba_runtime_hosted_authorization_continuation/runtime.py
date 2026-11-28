@@ -31,7 +31,11 @@ class HostedAuthorizationContinuation:
         store: ContinuationStore,
         *,
         clock: Callable[[], datetime] | None = None,
+        recovery_window: timedelta = timedelta(),
     ) -> None:
+        if recovery_window < timedelta():
+            raise ValueError("recovery window must be nonnegative")
+        self._recovery_window = recovery_window
         self._store = store
         self._clock = clock or (lambda: datetime.now(timezone.utc))
 
@@ -62,6 +66,31 @@ class HostedAuthorizationContinuation:
         self._store.create(record)
         return record
 
+    def _lookup(
+        self,
+        flow_id: str,
+        *,
+        issuer: str,
+        browser_transaction_id: str,
+        client_id: str,
+        tenant_id: str | None,
+    ) -> ContinuationRecord | None:
+        if not flow_id or not browser_transaction_id:
+            return None
+        record = self._store.get(flow_id)
+        if (
+            record is None
+            or record.flow_id != flow_id
+            or record.request.issuer != issuer
+            or record.request.client_id != client_id
+            or getattr(record.request, "tenant_id", None) != tenant_id
+            or not secrets.compare_digest(
+                record.browser_digest, _browser_digest(browser_transaction_id)
+            )
+        ):
+            return None
+        return record
+
     def inspect(
         self,
         flow_id: str,
@@ -69,23 +98,32 @@ class HostedAuthorizationContinuation:
         issuer: str,
         browser_transaction_id: str,
         client_id: str,
+        tenant_id: str | None = None,
     ) -> ContinuationRecord | None:
         """Read a pending flow for policy/UI decisions without consuming it."""
-        if not flow_id or not browser_transaction_id:
-            return None
-        record = self._store.get(flow_id)
-        if (
-            record is None
-            or record.flow_id != flow_id
-            or self._now() >= record.expires_at
-            or record.request.issuer != issuer
-            or record.request.client_id != client_id
-            or not secrets.compare_digest(
-                record.browser_digest, _browser_digest(browser_transaction_id)
-            )
-        ):
+        record = self._lookup(
+            flow_id,
+            issuer=issuer,
+            browser_transaction_id=browser_transaction_id,
+            client_id=client_id,
+            tenant_id=tenant_id,
+        )
+        if record is None or self._now() >= record.expires_at:
             return None
         return record
+
+    def _expired_result(
+        self, record: ContinuationRecord, now: datetime
+    ) -> ContinuationResult:
+        return ContinuationResult(
+            ContinuationStatus.RESTART_REQUIRED,
+            reason=ContinuationReason.INVALID_FLOW,
+            restart_client_id=(
+                record.request.client_id
+                if now - record.expires_at < self._recovery_window
+                else None
+            ),
+        )
 
     def resume(
         self,
@@ -96,19 +134,24 @@ class HostedAuthorizationContinuation:
         client_id: str,
         evidence: AuthenticationEvidence | None,
         registration_is_current: Callable[[ValidatedAuthorizationRequest], bool],
+        tenant_id: str | None = None,
     ) -> ContinuationResult:
         try:
-            record = self.inspect(
+            record = self._lookup(
                 flow_id,
                 issuer=issuer,
                 browser_transaction_id=browser_transaction_id,
                 client_id=client_id,
+                tenant_id=tenant_id,
             )
             if record is None:
                 return ContinuationResult(
                     ContinuationStatus.RESTART_REQUIRED,
                     reason=ContinuationReason.INVALID_FLOW,
                 )
+            now = self._now()
+            if now - record.expires_at >= self._recovery_window:
+                return self._expired_result(record, now)
             if not registration_is_current(record.request):
                 return ContinuationResult(
                     ContinuationStatus.RESTART_REQUIRED,
@@ -116,6 +159,8 @@ class HostedAuthorizationContinuation:
                 )
             requirements = record.requirements
             now = self._now()
+            if now >= record.expires_at:
+                return self._expired_result(record, now)
             if (
                 evidence is None
                 or not evidence.subject
@@ -135,7 +180,9 @@ class HostedAuthorizationContinuation:
                     reason=ContinuationReason.AUTHENTICATION_REQUIRED,
                 )
             now = self._now()
-            if now >= record.expires_at or not self._store.consume(record, now=now):
+            if now >= record.expires_at:
+                return self._expired_result(record, now)
+            if not self._store.consume(record, now=now):
                 return ContinuationResult(
                     ContinuationStatus.RESTART_REQUIRED,
                     reason=ContinuationReason.INVALID_FLOW,
