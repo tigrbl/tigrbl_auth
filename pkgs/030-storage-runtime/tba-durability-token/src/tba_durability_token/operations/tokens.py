@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import datetime as dt
+import inspect
 import uuid
 from collections.abc import Mapping
 from typing import Any
@@ -158,6 +159,48 @@ async def read_token_record(ctx: Mapping[str, Any]) -> Any:
     )
 
 
+async def claim_refresh_token_rotation(ctx: Mapping[str, Any]) -> bool:
+    """Rotate one validated refresh record inside the caller's issuance transaction.
+
+    A false result leaves token persistence to the caller's failure path. The
+    caller must persist both successor records in this same transaction.
+    """
+    from tba_storage_token.tables import TokenRecord
+
+    payload = payload_from_context(ctx)
+    table = TokenRecord.__table__
+    now = utc_now()
+    statement = (
+        table.update()
+        .where(
+            table.c.token_hash == payload["token_hash"],
+            table.c.token_kind == "refresh",
+            table.c.active.is_(True),
+            table.c.revoked_at.is_(None),
+            table.c.used_at.is_(None),
+            table.c.refresh_successor_hash.is_(None)
+            | (table.c.refresh_successor_hash == ""),
+            table.c.expires_at.is_(None) | (table.c.expires_at > now),
+            table.c.tenant_id == payload["tenant_id"],
+            table.c.client_id == payload["client_id"],
+            table.c.refresh_family_id == payload["refresh_family_id"],
+        )
+        .values(
+            active=False,
+            token_status="rotated",
+            updated_at=now,
+            used_at=now,
+            refresh_successor_hash=payload["successor_hash"],
+            revoked_reason="refresh_rotated",
+        )
+        .returning(table.c.id)
+    )
+    result = database_from_context(ctx).execute(statement)
+    if inspect.isawaitable(result):
+        result = await result
+    return result.scalar_one_or_none() is not None
+
+
 async def mark_refresh_token_rotated(ctx: Mapping[str, Any]) -> Any:
     from tba_storage_token.tables import TokenRecord
 
@@ -284,6 +327,7 @@ async def introspect_token_record(ctx: Mapping[str, Any]) -> dict[str, Any]:
 
 
 __all__ = [
+    "claim_refresh_token_rotation",
     "introspect_token_record",
     "mark_refresh_token_rotated",
     "persist_issued_token",

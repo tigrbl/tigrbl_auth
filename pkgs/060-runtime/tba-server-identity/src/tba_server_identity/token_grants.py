@@ -36,6 +36,14 @@ from .token_runtime import (
 )
 
 
+async def _commit_refresh(db) -> None:
+    commit = getattr(db, "commit", None)
+    if callable(commit):
+        result = commit()
+        if inspect.isawaitable(result):
+            await result
+
+
 async def dispatch_token_grant(
     *,
     grant_type,
@@ -284,11 +292,14 @@ async def dispatch_token_grant(
                 )
             )
         except (RefreshTokenReuseError, InvalidRefreshTokenError) as exc:
+            if isinstance(exc, RefreshTokenReuseError):
+                await _commit_refresh(db)
             return _json_error(
                 "invalid_grant",
                 status_code=status.HTTP_400_BAD_REQUEST,
                 description=str(exc),
             )
+        await _commit_refresh(db)
         return _token_pair_payload(
             issued.access_token,
             issued.refresh_token,
