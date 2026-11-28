@@ -45,7 +45,7 @@ Derived artifacts now generated from the same metadata source:
 
 ## What changed
 
-- refactored `tigrbl_auth/cli/metadata.py` into a canonical command/verb/flag/output/exit-code contract model
+- refactored `tba_auth/cli/metadata.py` into a canonical command/verb/flag/output/exit-code contract model
 - regenerated argparse parser, markdown CLI docs, help snapshots, and machine-readable CLI contract artifacts from that metadata
 - expanded operator/admin families from list/show-only to explicit lifecycle verb families
 - added repository-backed checkpoint handlers for operator/admin resources so the certified CLI boundary is no longer catalog-only

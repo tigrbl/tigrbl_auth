@@ -1,5 +1,5 @@
 schema_version: 1
-package: tigrbl_auth
+package: tba_auth
 target_family: rfc
 scope: core
 targets:
@@ -14,8 +14,8 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/rfc6749.py
-  - tigrbl_auth/standards/oauth2/rfc6749_token.py
+  - tba_auth/standards/oauth2/rfc6749.py
+  - tba_auth/standards/oauth2/rfc6749_token.py
   endpoints:
   - /authorize
   - /token
@@ -30,7 +30,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/rfc6750.py
+  - tba_auth/standards/oauth2/rfc6750.py
   endpoints:
   - /token
   - /userinfo
@@ -46,7 +46,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/rfc7636_pkce.py
+  - tba_auth/standards/oauth2/rfc7636_pkce.py
   endpoints:
   - /authorize
   - /token
@@ -61,8 +61,8 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/rfc8414.py
-  - tigrbl_auth/standards/oauth2/rfc8414_metadata.py
+  - tba_auth/standards/oauth2/rfc8414.py
+  - tba_auth/standards/oauth2/rfc8414_metadata.py
   endpoints:
   - /.well-known/oauth-authorization-server
 - id: http.well-known
@@ -76,7 +76,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/http/well_known.py
+  - tba_auth/standards/http/well_known.py
   endpoints:
   - /.well-known/openid-configuration
   - /.well-known/oauth-authorization-server
@@ -93,7 +93,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/jose/rfc7515.py
+  - tba_auth/standards/jose/rfc7515.py
 - id: jose.jwe
   label: RFC 7516
   title: JSON Web Encryption (JWE)
@@ -105,7 +105,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/jose/rfc7516.py
+  - tba_auth/standards/jose/rfc7516.py
 - id: jose.jwk
   label: RFC 7517
   title: JSON Web Key (JWK)
@@ -117,7 +117,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/jose/rfc7517.py
+  - tba_auth/standards/jose/rfc7517.py
 - id: jose.jwa
   label: RFC 7518
   title: JSON Web Algorithms (JWA)
@@ -129,7 +129,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/jose/rfc7518.py
+  - tba_auth/standards/jose/rfc7518.py
 - id: jose.jwt
   label: RFC 7519
   title: JSON Web Token (JWT)
@@ -141,7 +141,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/jose/rfc7519.py
+  - tba_auth/standards/jose/rfc7519.py
 - id: oauth2.revocation
   label: RFC 7009
   title: OAuth 2.0 Token Revocation
@@ -152,7 +152,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/revocation.py
+  - tba_auth/standards/oauth2/revocation.py
   endpoints:
   - /revoke
 - id: oauth2.dynamic-registration
@@ -165,7 +165,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/dynamic_client_registration.py
+  - tba_auth/standards/oauth2/dynamic_client_registration.py
   endpoints:
   - /register
 - id: oauth2.registration-management
@@ -178,7 +178,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/client_registration_management.py
+  - tba_auth/standards/oauth2/client_registration_management.py
 - id: oauth2.introspection
   label: RFC 7662
   title: OAuth 2.0 Token Introspection
@@ -189,7 +189,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/introspection.py
+  - tba_auth/standards/oauth2/introspection.py
   endpoints:
   - /introspect
 - id: oauth2.native-apps
@@ -202,7 +202,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/native_apps.py
+  - tba_auth/standards/oauth2/native_apps.py
 - id: oauth2.device
   label: RFC 8628
   title: OAuth 2.0 Device Authorization Grant
@@ -212,7 +212,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/device_authorization.py
+  - tba_auth/standards/oauth2/device_authorization.py
   endpoints:
   - /device_authorization
 - id: oauth2.token-exchange
@@ -224,7 +224,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/token_exchange.py
+  - tba_auth/standards/oauth2/token_exchange.py
   endpoints:
   - /token/exchange
 - id: oauth2.mtls
@@ -236,7 +236,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/mtls.py
+  - tba_auth/standards/oauth2/mtls.py
 - id: oauth2.resource-indicators
   label: RFC 8707
   title: Resource Indicators for OAuth 2.0
@@ -246,7 +246,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/resource_indicators.py
+  - tba_auth/standards/oauth2/resource_indicators.py
 - id: oauth2.jwt-access-tokens
   label: RFC 9068
   title: JSON Web Token (JWT) Profile for OAuth 2.0 Access Tokens
@@ -257,7 +257,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/jwt_access_tokens.py
+  - tba_auth/standards/oauth2/jwt_access_tokens.py
 - id: oauth2.jar
   label: RFC 9101
   title: OAuth 2.0 JWT-Secured Authorization Request (JAR)
@@ -267,7 +267,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/jar.py
+  - tba_auth/standards/oauth2/jar.py
 - id: oauth2.par
   label: RFC 9126
   title: OAuth 2.0 Pushed Authorization Requests
@@ -277,7 +277,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/par.py
+  - tba_auth/standards/oauth2/par.py
   endpoints:
   - /par
 - id: oauth2.issuer-identification
@@ -290,7 +290,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/issuer_identification.py
+  - tba_auth/standards/oauth2/issuer_identification.py
 - id: oauth2.rar
   label: RFC 9396
   title: OAuth 2.0 Rich Authorization Requests
@@ -300,7 +300,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/rar.py
+  - tba_auth/standards/oauth2/rar.py
 - id: oauth2.dpop
   label: RFC 9449
   title: OAuth 2.0 Demonstrating Proof-of-Possession at the Application Layer (DPoP)
@@ -310,7 +310,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/dpop.py
+  - tba_auth/standards/oauth2/dpop.py
 - id: http.cookies
   label: RFC 6265
   title: HTTP State Management Mechanism
@@ -322,7 +322,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/http/cookies.py
+  - tba_auth/standards/http/cookies.py
 - id: oauth2.jwt-bearer-assertions
   label: RFC 7521
   title: Assertion Framework for OAuth 2.0 Client Authentication and Authorization
@@ -334,7 +334,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/assertion_framework.py
+  - tba_auth/standards/oauth2/assertion_framework.py
 - id: oauth2.jwt-client-auth
   label: RFC 7523
   title: JSON Web Token (JWT) Profile for OAuth 2.0 Client Authentication and Authorization
@@ -346,7 +346,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/jwt_client_auth.py
+  - tba_auth/standards/oauth2/jwt_client_auth.py
 - id: oauth2.protected-resource-metadata
   label: RFC 9728
   title: OAuth 2.0 Protected Resource Metadata
@@ -357,7 +357,7 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/rfc9728.py
+  - tba_auth/standards/oauth2/rfc9728.py
   endpoints:
   - /.well-known/oauth-protected-resource
 - id: oauth2.security-bcp
@@ -369,4 +369,4 @@ targets:
   - hardening
   - peer-claim
   modules:
-  - tigrbl_auth/standards/oauth2/rfc9700.py
+  - tba_auth/standards/oauth2/rfc9700.py

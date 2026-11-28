@@ -1,0 +1,28 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1201"
+number: 1201
+slug: "authorization-budget-contract"
+title: "Authorization Budget Contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Authorization budgets are a later roadmap concern for max request, duration, cost, record, and workload limits."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-06-01T10:40:09Z"
+    note: "Accepted for strategic security certification concern planning."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Linked to strategic security certification concerns ADR."
+    at: "2026-06-01T10:41:10Z"
+references: []
+body: |-
+  Authorization budgets are a later roadmap concern for max request, duration, cost, record, and workload limits.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1090"

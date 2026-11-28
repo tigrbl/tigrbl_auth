@@ -19,7 +19,7 @@ body: |-
   Status: proposed
   Date: 2026-05-04
   
-  `tigrbl_auth` MUST define the administrator UIX as a first-class governed boundary. The admin UIX boundary includes console shell access, authenticated admin entry, readiness and configuration views, administrative resource views, policy administration workflows, and safe mutation workflows. The admin UIX boundary MUST remain separate from the public UIX boundary and MUST NOT become a generic container for backend-only or secret-bearing internals.
+  `tba_auth` MUST define the administrator UIX as a first-class governed boundary. The admin UIX boundary includes console shell access, authenticated admin entry, readiness and configuration views, administrative resource views, policy administration workflows, and safe mutation workflows. The admin UIX boundary MUST remain separate from the public UIX boundary and MUST NOT become a generic container for backend-only or secret-bearing internals.
   
   ## Rationale
   

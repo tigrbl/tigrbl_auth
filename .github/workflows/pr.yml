@@ -1,19 +1,17 @@
+# Reusable CI policy is pinned to a reviewed immutable revision.
+# The checkout still tests the pull-request merge revision.
+# Update these pins when changing workflow definitions.
 name: pr
-
 on:
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
-
 permissions:
   contents: read
-
 concurrency:
-  group: pr-${{ github.event.pull_request.number }}
+  group: pull-request-ci-${{ github.event.pull_request.number }}
   cancel-in-progress: true
-
 jobs:
   quality:
-    uses: ./.github/workflows/_quality.yml
+    uses: tigrbl/tigrbl_auth/.github/workflows/_quality.yml@12ec516cfdd82546de4ce504e7672ab5062deac9
     permissions:
       actions: read
       contents: read
@@ -23,14 +21,16 @@ jobs:
       python-version: '3.11'
       run-dependency-review: true
       run-codeql: true
-
-  contracts:
-    uses: ./.github/workflows/_contracts.yml
-    permissions:
-      attestations: write
-      contents: read
-      id-token: write
+  contract-build:
+    uses: tigrbl/tigrbl_auth/.github/workflows/_contract-build.yml@c48235311f1a4ec1b81543f3838c981943b1dc0e
     with:
       python-version: '3.11'
       artifact-name: generated-contracts
-      attest: false
+  package-python-matrix:
+    uses: tigrbl/tigrbl_auth/.github/workflows/package-python-matrix.yml@c48235311f1a4ec1b81543f3838c981943b1dc0e
+  package-node-matrix:
+    uses: tigrbl/tigrbl_auth/.github/workflows/package-node-matrix.yml@c48235311f1a4ec1b81543f3838c981943b1dc0e
+  wimse-matrix-validation:
+    uses: tigrbl/tigrbl_auth/.github/workflows/wimse-matrix-validation.yml@c48235311f1a4ec1b81543f3838c981943b1dc0e
+  readme-standards:
+    uses: tigrbl/tigrbl_auth/.github/workflows/readme-standards.yml@12ec516cfdd82546de4ce504e7672ab5062deac9

@@ -49,11 +49,11 @@ The repository already declared the supported certification matrix in `tox.ini` 
 - HTTP surface probe counts
 - serve-check artifact linkage and SHA for runner-qualified profiles
 
-The fail-closed logic now lives in `tigrbl_auth/cli/certification_evidence.py` and is consumed by:
+The fail-closed logic now lives in `tba_auth/cli/certification_evidence.py` and is consumed by:
 
 - `scripts/record_validated_run.py`
-- `tigrbl_auth/cli/runtime.py`
-- `tigrbl_auth/cli/reports.py`
+- `tba_auth/cli/runtime.py`
+- `tba_auth/cli/reports.py`
 
 ### 3. Test-lane manifests now require identity + install evidence + pytest proof
 
@@ -110,10 +110,10 @@ Because of that, this checkpoint can tighten the evidence model, reports, tests,
 
 ## Files changed in this checkpoint
 
-- `tigrbl_auth/cli/certification_evidence.py`
-- `tigrbl_auth/cli/runtime.py`
-- `tigrbl_auth/cli/reports.py`
-- `tigrbl_auth/cli/install_substrate.py`
+- `tba_auth/cli/certification_evidence.py`
+- `tba_auth/cli/runtime.py`
+- `tba_auth/cli/reports.py`
+- `tba_auth/cli/install_substrate.py`
 - `scripts/clean_room_profile_smoke.py`
 - `scripts/record_validated_run.py`
 - `scripts/run_migration_portability.py`

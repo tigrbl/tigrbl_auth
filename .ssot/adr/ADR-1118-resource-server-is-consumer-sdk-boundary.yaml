@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1118"
+number: 1118
+slug: "resource-server-is-consumer-sdk-boundary"
+title: "Resource Server Is A Consumer SDK Boundary"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Decision: tigrbl-identity-resource-server validates access tokens and protected-resource authorization metadata for APIs; it does not issue tokens or host login."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "RP and resource-server maturity wave proposal."
+    at: "2026-05-23T05:44:02Z"
+references: []
+body: |-
+  Decision: tigrbl-identity-resource-server validates access tokens and protected-resource authorization metadata for APIs; it does not issue tokens or host login.
+  
+  Rationale: protected APIs need lightweight verifier tooling that is separate from the identity provider and RP login clients.
+  
+  Consequences: resource-server SDK work focuses on token validation, JWKS cache, introspection fallback, audience/scope checks, and proof-binding validation.

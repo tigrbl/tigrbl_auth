@@ -20,7 +20,7 @@ The decisive blockers are not primarily missing source files for the retained bo
 
 This review also identified two truthfulness/alignment issues that were fixed directly in this checkpoint update:
 
-1. `tigrbl_auth/config/settings.py` defaulted `enable_rfc9700` to `False` while `tigrbl_auth/config/deployment.py` defaulted the same capability to `True`. That caused a settings-driven hardening deployment to disagree with the deployment resolver's own default model.
+1. `tba_auth/config/settings.py` defaulted `enable_rfc9700` to `False` while `tba_auth/config/deployment.py` defaulted the same capability to `True`. That caused a settings-driven hardening deployment to disagree with the deployment resolver's own default model.
 2. `compliance/claims/repository-state.yaml` still said `release_gate_passed_for_final_decision: true` even though the release-gate reports are currently red.
 
 ## What is complete now
@@ -201,8 +201,8 @@ These items were not primarily missing code-paths; they were **claim-boundary mi
 
 Files most directly involved in those discrepancies include:
 
-- `tigrbl_auth/config/feature_flags.py`
-- `tigrbl_auth/config/deployment.py`
+- `tba_auth/config/feature_flags.py`
+- `tba_auth/config/deployment.py`
 - `compliance/targets/rfc-targets.yaml`
 - `docs/compliance/TARGET_REALITY_MATRIX.md`
 - `docs/compliance/rfc_family_status_report.md`
@@ -222,13 +222,13 @@ Files most directly involved in those discrepancies include:
 
 These modules are not necessarily missing implementation, but they sit directly on the remaining certification blockers:
 
-- `tigrbl_auth/config/feature_flags.py` — profile/claim alignment decisions
-- `tigrbl_auth/config/deployment.py` — effective target activation and route/flag truth
-- `tigrbl_auth/config/settings.py` — runtime default truthfulness
-- `tigrbl_auth/runtime/*.py` — supported runner claim boundary and serve-check execution model
-- `tigrbl_auth/cli/runtime.py` — runtime inventory and readiness reporting
-- `tigrbl_auth/cli/reports.py` — state-report aggregation and final certification truth surfaces
-- `tigrbl_auth/migrations/**` and `scripts/run_migration_portability.py` — portability validation closure
+- `tba_auth/config/feature_flags.py` — profile/claim alignment decisions
+- `tba_auth/config/deployment.py` — effective target activation and route/flag truth
+- `tba_auth/config/settings.py` — runtime default truthfulness
+- `tba_auth/runtime/*.py` — supported runner claim boundary and serve-check execution model
+- `tba_auth/cli/runtime.py` — runtime inventory and readiness reporting
+- `tba_auth/cli/reports.py` — state-report aggregation and final certification truth surfaces
+- `tba_auth/migrations/**` and `scripts/run_migration_portability.py` — portability validation closure
 - `scripts/record_validated_run.py` — preservation of validated matrix evidence
 - `scripts/materialize_tier4_peer_evidence.py` — Tier 4 bundle promotion mechanics
 
@@ -236,9 +236,9 @@ These modules are not necessarily missing implementation, but they sit directly 
 
 This review checkpoint applies the following concrete fixes:
 
-1. `tigrbl_auth/config/settings.py`
+1. `tba_auth/config/settings.py`
    - changed `enable_rfc9700` default from environment-false to environment-true by default;
-   - this now matches `tigrbl_auth/config/deployment.py` and eliminates a hardening-profile truth mismatch.
+   - this now matches `tba_auth/config/deployment.py` and eliminates a hardening-profile truth mismatch.
 
 2. `compliance/claims/repository-state.yaml`
    - changed `release_gate_passed_for_final_decision` from `true` to `false`;

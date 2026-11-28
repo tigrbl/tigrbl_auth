@@ -1,0 +1,49 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1118"
+number: 1118
+slug: "app-registration-and-client-ownership"
+title: "App registration and client ownership"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs tenant app registration and app-owned client ownership."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-05-18T08:31:58Z"
+    note: "Define app registration and app-owned client ownership."
+    status: "accepted"
+  -
+    at: "2026-05-25T02:56:44Z"
+    note: "Bound app registration workflows to developer product surface."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Linked app registration and client ownership to developer API self-service decision."
+    at: "2026-05-25T05:17:15Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs tenant app registration and app-owned client ownership.
+  
+  ## Requirements
+  
+  Tenant admins or authorized app owners MAY create and manage apps. An app MAY own multiple OAuth/OIDC clients. Each app-owned client MUST define redirect URI policy, allowed grant types, allowed scopes, consent policy, public/confidential posture, and credential posture.
+  
+  Developer self-service for app and client registration SHOULD be exposed through the developer API and developer UIX. Dynamic client registration MAY create direct clients for compatibility, but app-owned clients are the target tenant self-service model.
+  
+  Apps MAY own services and resource servers when those actors are part of the same product/application boundary.
+  
+  ## Verification
+  
+  Verification MUST prove app creation, app-owned client creation, redirect URI policy enforcement, consent policy attachment, app owner authority checks, developer API exposure, and compatibility for direct client registration.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1106"
+  - "adr:1110"
+  - "adr:1120"
+  - "adr:1080"

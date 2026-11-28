@@ -1,0 +1,58 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1225"
+number: 1225
+slug: "current-identity-package-suite-boundary"
+title: "Current identity package suite boundary"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs the canonical package-layer index, dependency direction, workspace-source consistency, active-path hygiene, and exported-surface ownership for `tba_auth`."
+supersedes:
+  - "spc:1099"
+superseded_by: []
+status_notes:
+  -
+    at: "2026-06-22T07:42:04Z"
+    note: "Define current package-suite layers without a public operator surface category."
+    status: "accepted"
+  -
+    at: "2026-06-22T07:50:45Z"
+    note: "Supersedes SPEC-1099 first-wave package suite boundary wording."
+    status: "accepted"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs the canonical package-layer index, dependency direction, workspace-source consistency, active-path hygiene, and exported-surface ownership for `tba_auth`.
+  
+  ## Canonical layers
+  
+  Implementations MUST use the exact layer ids and meanings recorded by `index.toml`: `000-primitives`, `001-storage`, `002-contracts`, `005-bases`, `010-concrete`, `020-providers`, `030-storage-runtime`, `040-capabilities`, `050-protocols`, `060-runtime`, `070-facade`, `080-routers`, `090-backend-apps`, `100-uix-core`, `105-ui`, `110-examples`, `120-tests`, and `deprecated`.
+  
+  Each Python distribution MUST resolve to exactly one layer from its path. Each JavaScript workspace MUST resolve to its declared JavaScript layer. Root editable sources and the lockfile MUST use the same canonical package paths.
+  
+  ## Dependency requirements
+  
+  Production package dependencies and source imports MUST follow the allowed target-layer rules in `index.toml`. Package-specific exceptions MUST be explicit, test-visible, justified, and removable; a new unlisted upward edge MUST fail closed.
+  
+  Backend apps MAY depend on routers. Routers MUST NOT depend on backend apps. Product UI packages MAY depend on UIX core. UIX core MUST NOT depend on product UI packages. Examples and tests are terminal: production packages MUST NOT depend on either, and examples MUST NOT depend on tests.
+  
+  Layer 30 MUST express durable table behavior with `make`, `define`, `derive`, hooks, and factory aliases over layer-01 owners rather than introducing a parallel repository abstraction. Layer 40 packages MUST expose reportable capability operations. Layer 50 packages MUST own protocol/specification version history, versioned feature selection, backwards-compatibility rules, and migration paths where available.
+  
+  Layer 60 and layer 70 MUST NOT own or import layer-80 router implementations. HTTP route composition belongs to layer 90. Layer 80 owns carrier mapping only and MUST delegate semantic operations to lower layers.
+  
+  ## Active path hygiene
+  
+  Active source, tests, docs, workflows, manifests, reports, and workspace configuration MUST NOT reference retired layer names or moved package paths. Historical migration artifacts may retain old paths only when explicitly classified as history.
+  
+  ## Verification
+  
+  Verification MUST include the canonical layer-index test, universal Python manifest/import validation, router/backend-app direction checks, UIX-core/product-UI direction checks, terminal example/test checks, editable workspace-source consistency checks, and active path-hygiene checks. T2 claims require fail-closed negative cases for forbidden and undeclared dependency edges.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1133"
+  - "adr:1132"
+  - "adr:1101"
+  - "adr:1136"

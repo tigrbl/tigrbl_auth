@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuites name="pytest tests">
+  <testsuite name="pytest" errors="0" failures="0" skipped="0" tests="60">
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_certificate_and_wic_profile" file="tests\unit\test_native_workload_credentials.py" line="151" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_native_identifier_contract[wimse://user@example.org/w]" file="tests\unit\test_native_workload_credentials.py" line="169" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_native_identifier_contract[wimse://example.org:1/w]" file="tests\unit\test_native_workload_credentials.py" line="169" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_native_identifier_contract[wimse://example.org/w?]" file="tests\unit\test_native_workload_credentials.py" line="169" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_native_identifier_contract[spiffe://example.org/w]" file="tests\unit\test_native_workload_credentials.py" line="169" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_native_identifier_contract[wimse://example.org/w/../other]" file="tests\unit\test_native_workload_credentials.py" line="169" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_native_identifier_contract[wimse://example.org/w/%2e%2E/other]" file="tests\unit\test_native_workload_credentials.py" line="169" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_spiffe_signed_certificate_and_jwt" file="tests\unit\test_native_workload_credentials.py" line="189" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_wimse_signed_wit_and_http_proof" file="tests\unit\test_native_workload_credentials.py" line="217" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_spiffe_signed_wit_svid_and_proof" file="tests\unit\test_native_workload_credentials.py" line="261" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_peer_identity_from_real_mutual_tls[wimse://example.org/workload]" file="tests\unit\test_native_workload_credentials.py" line="316" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_peer_identity_from_real_mutual_tls[spiffe://example.org/workload]" file="tests\unit\test_native_workload_credentials.py" line="316" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_shared_svid_identity_and_x509_carrier" file="tests\unit\test_native_workload_credentials.py" line="381" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_wit_issuer_rotation_and_validity" file="tests\unit\test_native_workload_credentials.py" line="414" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_wic_peer_configuration_and_wrong_anchor" file="tests\unit\test_native_workload_credentials.py" line="431" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_shared_wimse_identifier_in_signed_token_and_certificate" file="tests\unit\test_native_workload_credentials.py" line="470" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_spiffe_jwt_key_rotation" file="tests\unit\test_native_workload_credentials.py" line="488" />
+    <testcase classname="tests.unit.test_workload_protocol_assurance" name="test_t0_specification_ownership" file="tests\unit\test_workload_protocol_assurance.py" line="177">
+      <properties>
+        <property name="requirement_test_mapping" value="{&quot;SPIFFE ID and SVID profile checks&quot;: [&quot;tba-protocol-workload-spiffe-svid&quot;, &quot;5d15e3ee8782e205048d1f206fbf944e075f7bae&quot;, &quot;exercise_spiffe&quot;], &quot;WIT confirmation and audience&quot;: [&quot;tba-profile-workload-credential-wimse-wit&quot;, &quot;draft-ietf-wimse-workload-creds-03&quot;, &quot;exercise_wimse&quot;], &quot;WPT WIT binding&quot;: [&quot;tba-profile-workload-proof-wimse-wpt&quot;, &quot;draft-ietf-wimse-wpt-02&quot;, &quot;exercise_wimse&quot;]}" />
+      </properties>
+    </testcase>
+    <testcase classname="tests.unit.test_workload_protocol_assurance" name="test_t1_specification_ownership[exercise_wimse]" file="tests\unit\test_workload_protocol_assurance.py" line="221" />
+    <testcase classname="tests.unit.test_workload_protocol_assurance" name="test_t1_specification_ownership[exercise_spiffe]" file="tests\unit\test_workload_protocol_assurance.py" line="221" />
+    <testcase classname="tests.unit.test_workload_protocol_assurance" name="test_t1_package_independence[exercise_wimse-excluded0]" file="tests\unit\test_workload_protocol_assurance.py" line="226" />
+    <testcase classname="tests.unit.test_workload_protocol_assurance" name="test_t1_package_independence[exercise_spiffe-excluded1]" file="tests\unit\test_workload_protocol_assurance.py" line="226" />
+    <testcase classname="tests.unit.test_workload_protocol_assurance" name="test_t2_package_independence[wimse]" file="tests\unit\test_workload_protocol_assurance.py" line="357">
+      <properties>
+        <property name="wheel_inventory" value="{&quot;cffi&quot;: &quot;2.1.1&quot;, &quot;cryptography&quot;: &quot;46.0.6&quot;, &quot;pycparser&quot;: &quot;3.0&quot;, &quot;tba-bases-protected-envelope&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-jwe&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-jws&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-jwt&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-wit&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-contracts-protected-envelope&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-primitives-identity&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-profile-workload-credential-wimse-wit&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-profile-workload-proof-wimse-wpt&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-protocol-workload-wimse-identifier&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-provider-jose-cryptography&quot;: &quot;0.4.0.dev2&quot;}" />
+        <property name="entry_point_check" value="exercise_wimse" />
+      </properties>
+    </testcase>
+    <testcase classname="tests.unit.test_workload_protocol_assurance" name="test_t2_package_independence[wic]" file="tests\unit\test_workload_protocol_assurance.py" line="357">
+      <properties>
+        <property name="wheel_inventory" value="{&quot;cffi&quot;: &quot;2.1.1&quot;, &quot;cryptography&quot;: &quot;46.0.6&quot;, &quot;pycparser&quot;: &quot;3.0&quot;, &quot;tba-concrete-certificate-x509&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-wic&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-contracts-security-trust&quot;: &quot;0.1.0&quot;, &quot;tba-profile-workload-authentication-wimse-mtls&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-profile-workload-credential-wimse-wic&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-protocol-workload-wimse-identifier&quot;: &quot;0.4.0.dev2&quot;}" />
+        <property name="entry_point_check" value="exercise_wic" />
+      </properties>
+    </testcase>
+    <testcase classname="tests.unit.test_workload_protocol_assurance" name="test_t2_package_independence[spiffe]" file="tests\unit\test_workload_protocol_assurance.py" line="357">
+      <properties>
+        <property name="wheel_inventory" value="{&quot;cffi&quot;: &quot;2.1.1&quot;, &quot;cryptography&quot;: &quot;46.0.6&quot;, &quot;pycparser&quot;: &quot;3.0&quot;, &quot;tba-bases-digital-credential&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-bases-protected-envelope&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-certificate-x509&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-jwe&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-jws&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-jwt&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-jwt-svid-credential&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-svid&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-x509-svid-credential&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-contracts-digital-credential&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-contracts-protected-envelope&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-contracts-security-trust&quot;: &quot;0.1.0&quot;, &quot;tba-contracts-workload-identity&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-primitives-identity&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-protocol-workload-spiffe-svid&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-provider-jose-cryptography&quot;: &quot;0.4.0.dev2&quot;}" />
+        <property name="entry_point_check" value="exercise_spiffe" />
+      </properties>
+    </testcase>
+    <testcase classname="tests.unit.test_workload_protocol_assurance" name="test_t2_specification_ownership" file="tests\unit\test_workload_protocol_assurance.py" line="378">
+      <properties>
+        <property name="wheel_inventory" value="{&quot;cffi&quot;: &quot;2.1.1&quot;, &quot;cryptography&quot;: &quot;46.0.6&quot;, &quot;pycparser&quot;: &quot;3.0&quot;, &quot;tba-bases-digital-credential&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-bases-protected-envelope&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-bases-workload-identity&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-certificate-x509&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-jwe&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-jws&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-jwt&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-jwt-svid-credential&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-svid&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-concrete-x509-svid-credential&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-contracts-digital-credential&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-contracts-protected-envelope&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-contracts-security-trust&quot;: &quot;0.1.0&quot;, &quot;tba-contracts-workload-identity&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-primitives-identity&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-protocol-workload-spiffe-svid&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-provider-jose-cryptography&quot;: &quot;0.4.0.dev2&quot;, &quot;tba-provider-spiffe-bundle&quot;: &quot;0.4.0.dev3&quot;, &quot;tba-provider-spiffe-workload-api&quot;: &quot;0.4.0.dev2&quot;}" />
+        <property name="spiffe_specification_revision" value="5d15e3ee8782e205048d1f206fbf944e075f7bae" />
+        <property name="entry_point_check" value="exercise_spiffe + exercise_spiffe_providers" />
+      </properties>
+    </testcase>
+    <testcase classname="tests.unit.test_workload_protocol_composition" name="test_standalone_workload_protocol_dependency_closure[standalone-wimse]" file="tests\unit\test_workload_protocol_composition.py" line="29" />
+    <testcase classname="tests.unit.test_workload_protocol_composition" name="test_standalone_workload_protocol_dependency_closure[standalone-spiffe]" file="tests\unit\test_workload_protocol_composition.py" line="29" />
+    <testcase classname="tests.unit.test_workload_protocol_composition" name="test_wit_svid_declares_both_protocol_dependencies" file="tests\unit\test_workload_protocol_composition.py" line="70" />
+    <testcase classname="tests.unit.test_workload_identity_runtime_composition" name="test_experimental_and_incubating_profiles_default_off" file="tests\unit\test_workload_identity_runtime_composition.py" line="5" />
+    <testcase classname="tests.unit.test_workload_identity_runtime_composition" name="test_wit_svid_requires_wit_wpt_and_exact_revisions" file="tests\unit\test_workload_identity_runtime_composition.py" line="9" />
+    <testcase classname="tests.unit.test_workload_identity_runtime_composition" name="test_broker_fails_closed_without_endpoint_and_authorization" file="tests\unit\test_workload_identity_runtime_composition.py" line="14" />
+    <testcase classname="tests.unit.test_spiffe_svid_profiles" name="test_spiffe_id_and_stable_svid_profiles" file="tests\unit\test_spiffe_svid_profiles.py" line="3" />
+    <testcase classname="tests.unit.test_spiffe_svid_profiles" name="test_stable_svid_profiles_reject_wit_semantics_and_bad_names" file="tests\unit\test_spiffe_svid_profiles.py" line="8" />
+    <testcase classname="tests.unit.test_wit_and_cwt_svid_profiles" name="test_wit_svid_is_incubating_and_requires_pop[ES256]" file="tests\unit\test_wit_and_cwt_svid_profiles.py" line="32" />
+    <testcase classname="tests.unit.test_wit_and_cwt_svid_profiles" name="test_wit_svid_is_incubating_and_requires_pop[RS256]" file="tests\unit\test_wit_and_cwt_svid_profiles.py" line="32" />
+    <testcase classname="tests.unit.test_wit_and_cwt_svid_profiles" name="test_wit_svid_is_incubating_and_requires_pop[PS512]" file="tests\unit\test_wit_and_cwt_svid_profiles.py" line="32" />
+    <testcase classname="tests.unit.test_wit_and_cwt_svid_profiles" name="test_wit_svid_rejects_invalid_claims[overrides0-public confirmation JWK]" file="tests\unit\test_wit_and_cwt_svid_profiles.py" line="41" />
+    <testcase classname="tests.unit.test_wit_and_cwt_svid_profiles" name="test_wit_svid_rejects_invalid_claims[overrides1-algorithm]" file="tests\unit\test_wit_and_cwt_svid_profiles.py" line="41" />
+    <testcase classname="tests.unit.test_wit_and_cwt_svid_profiles" name="test_wit_svid_rejects_invalid_claims[overrides2-public confirmation JWK]" file="tests\unit\test_wit_and_cwt_svid_profiles.py" line="41" />
+    <testcase classname="tests.unit.test_wit_and_cwt_svid_profiles" name="test_wit_svid_rejects_invalid_claims[overrides3-does not match]" file="tests\unit\test_wit_and_cwt_svid_profiles.py" line="41" />
+    <testcase classname="tests.unit.test_wit_and_cwt_svid_profiles" name="test_wit_svid_rejects_invalid_claims[overrides4-expired]" file="tests\unit\test_wit_and_cwt_svid_profiles.py" line="41" />
+    <testcase classname="tests.unit.test_wit_and_cwt_svid_profiles" name="test_wit_svid_rejects_invalid_claims[overrides5-NumericDate]" file="tests\unit\test_wit_and_cwt_svid_profiles.py" line="41" />
+    <testcase classname="tests.unit.test_wit_and_cwt_svid_profiles" name="test_wit_svid_rejects_invalid_claims[overrides6-not yet valid]" file="tests\unit\test_wit_and_cwt_svid_profiles.py" line="41" />
+    <testcase classname="tests.unit.test_wit_and_cwt_svid_profiles" name="test_wit_svid_rejects_invalid_claims[overrides7-must not contain aud]" file="tests\unit\test_wit_and_cwt_svid_profiles.py" line="41" />
+    <testcase classname="tests.unit.test_wit_and_cwt_svid_profiles" name="test_wit_svid_rejects_unlisted_header_algorithm" file="tests\unit\test_wit_and_cwt_svid_profiles.py" line="62" />
+    <testcase classname="tests.unit.test_wit_and_cwt_svid_profiles" name="test_cwt_svid_is_explicitly_non_spiffe_experimental_extension" file="tests\unit\test_wit_and_cwt_svid_profiles.py" line="70" />
+    <testcase classname="tests.unit.test_wimse_wit_wpt_profiles" name="test_wit_and_wpt_are_distinct_revision_pinned_artifacts" file="tests\unit\test_wimse_wit_wpt_profiles.py" line="4" />
+    <testcase classname="tests.unit.test_wimse_wit_wpt_profiles" name="test_wit_cannot_be_bearer_and_wpt_must_bind_exact_wit" file="tests\unit\test_wimse_wit_wpt_profiles.py" line="10" />
+    <testcase classname="tests.unit.test_standalone_identity_credential_artifacts" name="test_oidc_id_token_is_a_standalone_token_object" file="tests\unit\test_standalone_identity_credential_artifacts.py" line="28" />
+    <testcase classname="tests.unit.test_standalone_identity_credential_artifacts" name="test_did_document_is_an_identity_document_not_a_credential" file="tests\unit\test_standalone_identity_credential_artifacts.py" line="35" />
+    <testcase classname="tests.unit.test_standalone_identity_credential_artifacts" name="test_vc_jose_and_vc_cose_are_separate_credential_formats" file="tests\unit\test_standalone_identity_credential_artifacts.py" line="42" />
+    <testcase classname="tests.unit.test_standalone_identity_credential_artifacts" name="test_wit_wit_svid_and_wpt_remain_distinct_objects" file="tests\unit\test_standalone_identity_credential_artifacts.py" line="51" />
+    <testcase classname="tests.unit.test_standalone_identity_credential_artifacts" name="test_each_svid_format_has_a_standalone_credential_class" file="tests\unit\test_standalone_identity_credential_artifacts.py" line="60" />
+    <testcase classname="tests.unit.test_standalone_identity_credential_artifacts" name="test_cwt_svid_is_explicitly_an_extension_not_an_official_svid_alias" file="tests\unit\test_standalone_identity_credential_artifacts.py" line="71" />
+    <testcase classname="tests.unit.test_svid_did_concrete" name="test_spiffe_id_is_identity_while_jwt_svid_is_credential_claim_structure" file="tests\unit\test_svid_did_concrete.py" line="17" />
+    <testcase classname="tests.unit.test_svid_did_concrete" name="test_x509_svid_structure_requires_one_spiffe_uri_san_and_leaf_usage" file="tests\unit\test_svid_did_concrete.py" line="26" />
+    <testcase classname="tests.unit.test_svid_did_concrete" name="test_workload_selectors_normalize_deterministically" file="tests\unit\test_svid_did_concrete.py" line="35" />
+    <testcase classname="tests.unit.test_svid_did_concrete" name="test_did_document_parsing_validation_and_dereferencing" file="tests\unit\test_svid_did_concrete.py" line="46" />
+    <testcase classname="tests.unit.test_svid_did_concrete" name="test_did_document_rejects_unknown_relationship_reference" file="tests\unit\test_svid_did_concrete.py" line="77" />
+  </testsuite>
+</testsuites>

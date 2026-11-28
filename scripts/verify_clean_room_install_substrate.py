@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from tigrbl_auth.cli.install_substrate import PROFILE_TOGGLES, write_install_substrate_report
+from tba_auth.cli.install_substrate import PROFILE_TOGGLES, write_install_substrate_report
 
 
 def main() -> int:
@@ -18,7 +18,7 @@ def main() -> int:
         "--profile",
         default=None,
         choices=sorted(PROFILE_TOGGLES),
-        help="Install profile to probe in the current environment. Defaults to TIGRBL_AUTH_INSTALL_PROFILE or 'base'.",
+        help="Install profile to probe in the current environment. Defaults to TBA_AUTH_INSTALL_PROFILE or 'base'.",
     )
     parser.add_argument(
         "--report-dir",
@@ -49,7 +49,7 @@ def main() -> int:
 
     import os
 
-    profile = args.profile or os.environ.get("TIGRBL_AUTH_INSTALL_PROFILE", "base")
+    profile = args.profile or os.environ.get("TBA_AUTH_INSTALL_PROFILE", "base")
 
     payload = write_install_substrate_report(
         ROOT,

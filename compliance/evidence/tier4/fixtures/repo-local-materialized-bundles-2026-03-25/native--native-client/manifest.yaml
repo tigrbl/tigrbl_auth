@@ -31,7 +31,7 @@ peer_identity:
   peer_version: 2026.03.25+fixture
   peer_operator: checkpoint-staged-external-root
 peer_runtime:
-  image_ref: ghcr.io/tigrbl-auth/peer-fixtures/native-client:2026-03-25
+  image_ref: ghcr.io/tba-auth/peer-fixtures/native-client:2026-03-25
   image_digest: sha256:6967d15bf9436dfa59776778454309b4bbbbef7ac91ce0f5a8d67c6171f910cc
   execution_style: black-box-cli
 independence_attestation:

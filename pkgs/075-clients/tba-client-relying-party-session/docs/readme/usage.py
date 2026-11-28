@@ -1,0 +1,3 @@
+from tba_client_relying_party_session import RelyingPartySessionClient
+
+assert callable(RelyingPartySessionClient)

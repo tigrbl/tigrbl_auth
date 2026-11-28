@@ -1,0 +1,37 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1157"
+number: 1157
+slug: "developer-oauth-client-management-contract"
+title: "Developer OAuth Client Management Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs developer self-service OAuth/OIDC client management."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Defines developer-owned OAuth/OIDC client management requirements."
+    at: "2026-05-25T05:16:51Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs developer self-service OAuth/OIDC client management.
+  
+  ## Requirements
+  
+  Authorized developers MAY register, inspect, update, rotate, disable, enable, and delete OAuth/OIDC clients only within their authorized tenant and app ownership boundary. Client management MUST cover redirect URIs, post-logout redirect URIs, grant types, response types, scopes, token endpoint auth methods, client secrets, client JWKS, and metadata where supported.
+  
+  Runtime behavior MUST align with dynamic client registration and client registration management contracts where those endpoints are enabled.
+  
+  ## Verification
+  
+  Verification MUST prove client registration and management operations enforce tenant/app ownership, validate metadata, protect secrets, support configured auth methods, and fail closed for unauthorized client mutation.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1080"
+  - "adr:1106"

@@ -4,7 +4,6 @@ import json
 from pathlib import Path
 from typing import Any
 
-import yaml
 
 from _surface_checks import categorized_tests, target_test_mappings, target_index
 

@@ -10,8 +10,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from tigrbl_auth.cli.artifacts import deployment_from_options
-from tigrbl_auth.cli.reports import execute_peer_profiles
+from tba_auth.cli.artifacts import deployment_from_options
+from tba_auth.cli.reports import execute_peer_profiles
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -31,7 +31,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     args = parser.parse_args(argv)
     if args.external_root is not None:
-        os.environ["TIGRBL_AUTH_PEER_ARTIFACTS_ROOT"] = str(args.external_root.resolve())
+        os.environ["TBA_AUTH_PEER_ARTIFACTS_ROOT"] = str(args.external_root.resolve())
     payload = execute_peer_profiles(ROOT, deployment_from_options(profile=args.profile), execution_mode=args.execution_mode)
     print(json.dumps(payload, indent=2))
     return 0 if payload["passed"] else 1

@@ -1,5 +1,5 @@
 schema_version: 1
-package: tigrbl_auth
+package: tba_auth
 profile_label: peer-claim
 effective_deployment:
   profile: peer-claim
@@ -21,7 +21,6 @@ effective_deployment:
   surfaces:
     surface_public_enabled: true
     surface_admin_enabled: false
-    surface_rpc_enabled: false
     surface_diagnostics_enabled: false
     surface_operator_enabled: true
     surface_plugin_mode: public-only
@@ -70,17 +69,23 @@ effective_deployment:
     surface_public_enabled: true
     surface_admin_enabled: false
     surface_operator_enabled: true
-    surface_rpc_enabled: false
     surface_diagnostics_enabled: false
     surface_plugin_mode: public-only
     oauth21_alignment_mode: tracked
     enable_rfc7800: false
-    enable_rfc7952: false
+    enable_rfc8417: false
     enable_rfc8291: false
     enable_rfc8812: false
     enable_rfc8932: false
     enable_rfc8523: false
   active_capabilities:
+  - oid4vci-credential
+  - oid4vp-verification
+  - authzen-evaluation
+  - gnap-transaction
+  - set-receiver
+  - attestation-appraisal
+  - standards-manifest
   - login
   - authorize
   - token
@@ -92,14 +97,27 @@ effective_deployment:
   - logout
   - device-authorization
   - par
+  - account-profile
+  - account-sessions
+  - account-consents
+  - account-credentials
   - token-exchange
   - openid-configuration
   - tenant-openid-configuration
+  - realm-openid-configuration
   - oauth-authorization-server-metadata
   - oauth-protected-resource-metadata
   - jwks
   - tenant-jwks
+  - realm-jwks
   active_routes:
+  - /credential
+  - /presentation/verify
+  - /access/v1/evaluation
+  - /gnap/tx
+  - /security-events/receive
+  - /attestations/appraise
+  - /standards
   - /login
   - /authorize
   - /token
@@ -111,14 +129,31 @@ effective_deployment:
   - /logout
   - /device_authorization
   - /par
+  - /account/profile
+  - /account/sessions
+  - /account/sessions/{session_id}
+  - /account/consents
+  - /account/consents/{consent_id}
+  - /account/authorized-apps
+  - /account/authorized-apps/{client_id}
+  - /account/password/change
   - /token/exchange
   - /.well-known/openid-configuration
   - /tenants/{tenant_slug}/.well-known/openid-configuration
+  - /realms/{realm_slug}/.well-known/openid-configuration
   - /.well-known/oauth-authorization-server
   - /.well-known/oauth-protected-resource
   - /.well-known/jwks.json
   - /tenants/{tenant_slug}/.well-known/jwks.json
+  - /realms/{realm_slug}/.well-known/jwks.json
   active_contract_routes:
+  - /credential
+  - /presentation/verify
+  - /access/v1/evaluation
+  - /gnap/tx
+  - /security-events/receive
+  - /attestations/appraise
+  - /standards
   - /login
   - /authorize
   - /token
@@ -130,13 +165,23 @@ effective_deployment:
   - /logout
   - /device_authorization
   - /par
+  - /account/profile
+  - /account/sessions
+  - /account/sessions/{session_id}
+  - /account/consents
+  - /account/consents/{consent_id}
+  - /account/authorized-apps
+  - /account/authorized-apps/{client_id}
+  - /account/password/change
   - /token/exchange
   - /.well-known/openid-configuration
   - /tenants/{tenant_slug}/.well-known/openid-configuration
+  - /realms/{realm_slug}/.well-known/openid-configuration
   - /.well-known/oauth-authorization-server
   - /.well-known/oauth-protected-resource
   - /.well-known/jwks.json
   - /tenants/{tenant_slug}/.well-known/jwks.json
+  - /realms/{realm_slug}/.well-known/jwks.json
   active_discovery_routes:
   - /userinfo
   - /introspect
@@ -147,10 +192,12 @@ effective_deployment:
   - /par
   - /.well-known/openid-configuration
   - /tenants/{tenant_slug}/.well-known/openid-configuration
+  - /realms/{realm_slug}/.well-known/openid-configuration
   - /.well-known/oauth-authorization-server
   - /.well-known/oauth-protected-resource
   - /.well-known/jwks.json
   - /tenants/{tenant_slug}/.well-known/jwks.json
+  - /realms/{realm_slug}/.well-known/jwks.json
   active_targets:
   - RFC 6749
   - RFC 6750
@@ -198,7 +245,10 @@ effective_deployment:
   - Key lifecycle and JWKS publication
   - Import/export portability
   - Release bundle and signature verification
-  active_openrpc_methods: []
+  product_surface: null
+  allowed_admin_resources: []
+  required_table_resources: []
+  allowed_admin_rest_groups: []
   profile_source:
     kind: packaged-profile-id
     profile_id: peer-claim
@@ -270,10 +320,18 @@ bundle_manifest:
     tier: 3
     refs:
     - compliance/evidence/tier3/discovery/
+  - target: OIDC Session Management
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/oidc-session-management/
   - target: OpenAPI 3.1 / 3.2 compatible public contract
     tier: 3
     refs:
     - compliance/evidence/tier3/contracts/openapi/
+  - target: RFC 6265
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/cookies/
   - target: RFC 6749
     tier: 3
     refs:
@@ -334,18 +392,10 @@ bundle_manifest:
     tier: 3
     refs:
     - compliance/evidence/tier3/oidc-rp-initiated-logout/
-  - target: OIDC Session Management
-    tier: 3
-    refs:
-    - compliance/evidence/tier3/oidc-session-management/
   - target: OIDC UserInfo
     tier: 3
     refs:
     - compliance/evidence/tier3/oidc-userinfo/
-  - target: RFC 6265
-    tier: 3
-    refs:
-    - compliance/evidence/tier3/cookies/
   - target: RFC 7009
     tier: 3
     refs:

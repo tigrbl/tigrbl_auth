@@ -1,0 +1,3 @@
+from tba_bases_attestation import EvidenceVerifierBase
+
+assert callable(EvidenceVerifierBase)

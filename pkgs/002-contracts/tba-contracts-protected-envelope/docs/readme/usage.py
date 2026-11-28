@@ -1,0 +1,3 @@
+from tba_contracts_protected_envelope import EnvelopeProtectionRequest
+
+assert callable(EnvelopeProtectionRequest)

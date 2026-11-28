@@ -1,0 +1,6 @@
+{
+  "name": "SMS Authenticator Portal",
+  "description": "Comprehensive SMS authentication, phone enrollment lifecycle, security policies, multi-provider routing, abuse prevention, and diagnostics console.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

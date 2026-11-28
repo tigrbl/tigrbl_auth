@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Add cross-plane policy ownership rule for governance-owned policy truth."
     at: "2026-05-13T11:02:36Z"
+    note: "Add cross-plane policy ownership rule for governance-owned policy truth."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Plane modularity now fixes the DelegationGrant boundary: policy defines authorization semantics, identity-storage persists canonical grants, and OAuth/OIDC only consumes grants and emits protocol artifacts."
+    at: "2026-06-14T11:51:22Z"
 references: []
 body: |-
   ## Decision
@@ -36,7 +40,7 @@ body: |-
   Each plane owns one authoritative concern. Authorization surfaces own
   permission evaluation and enforcement. Administration surfaces own privileged
   operational workflows and safe mutations. Governance surfaces own durable
-  policy truth, version lifecycle, approval rules, audit requirements, and
+    policy truth, version lifecycle, approval rules, audit requirements, and
   published effective-policy projections. Runtime protocol surfaces may consume
   published effective policy, but they MUST NOT mutate governance policy.
   
@@ -54,7 +58,7 @@ body: |-
   diagnostics plane have separate runtime trust envelopes.
   
   Key rotation illustrates the cross-plane boundary. A key rotation operation is
-  an administrative or operator workflow, while the durable rule that defines
+  an administrative workflow, while the durable rule that defines
   cadence, approval, emergency triggers, overlap windows, retirement windows,
   publication requirements, and evidence obligations is governance policy.
   

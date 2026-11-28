@@ -1,0 +1,1 @@
+from tba_primitives_dns_name.names import normalize_domain as normalize_domain

@@ -1,0 +1,6 @@
+{
+  "name": "Software-Secured Key AMR Manager",
+  "description": "Complete web, SDK, and CLI workflow for software-secured cryptographic keys with evidence-driven AMR (swk) verification.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

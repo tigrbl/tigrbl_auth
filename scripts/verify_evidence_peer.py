@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from tigrbl_auth.cli.boundary import run_evidence_peer_check
+from tba_auth.cli.boundary import run_evidence_peer_check
 
 
 if __name__ == "__main__":

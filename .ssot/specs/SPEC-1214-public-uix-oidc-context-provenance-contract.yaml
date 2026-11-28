@@ -1,0 +1,22 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1214"
+number: 1214
+slug: "public-uix-oidc-context-provenance-contract"
+title: "Public UIX OIDC Context Provenance Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines the public UIX profile OIDC context projection. The UIX must label each displayed value by source, distinguish ID token claims from access-token metadata and UserInfo claims, preserve the deployed issuer value, display UserInfo email/name/email_verified when returned, and redact tokens or secrets. The projection is not an authentication source of truth; backend token validation and UserInfo production remain provider-owned."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  Defines the public UIX profile OIDC context projection. The UIX must label each displayed value by source, distinguish ID token claims from access-token metadata and UserInfo claims, preserve the deployed issuer value, display UserInfo email/name/email_verified when returned, and redact tokens or secrets. The projection is not an authentication source of truth; backend token validation and UserInfo production remain provider-owned.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1125"
+  - "adr:1083"
+  - "adr:1059"

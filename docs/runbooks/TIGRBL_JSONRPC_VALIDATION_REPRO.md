@@ -17,13 +17,13 @@ clients.
 ## Repro
 
 The smallest standalone repro is
-`docs/runbooks/tigrbl_jsonrpc_minimal_repro.py`. It can be copied into an empty
+`docs/runbooks/tba_jsonrpc_minimal_repro.py`. It can be copied into an empty
 scratch directory and run with only published dependencies:
 
 ```powershell
 python -m venv .venv
 .venv\Scripts\python -m pip install "tigrbl==0.3.15" "sqlalchemy[asyncio]" aiosqlite httpx
-.venv\Scripts\python tigrbl_jsonrpc_minimal_repro.py
+.venv\Scripts\python tba_jsonrpc_minimal_repro.py
 ```
 
 On POSIX shells:
@@ -31,7 +31,7 @@ On POSIX shells:
 ```bash
 python -m venv .venv
 .venv/bin/python -m pip install "tigrbl==0.3.15" "sqlalchemy[asyncio]" aiosqlite httpx
-.venv/bin/python tigrbl_jsonrpc_minimal_repro.py
+.venv/bin/python tba_jsonrpc_minimal_repro.py
 ```
 
 The script defines one model:

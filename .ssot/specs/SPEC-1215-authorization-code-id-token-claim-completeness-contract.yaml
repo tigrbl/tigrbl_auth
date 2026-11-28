@@ -1,0 +1,23 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1215"
+number: 1215
+slug: "authorization-code-id-token-claim-completeness-contract"
+title: "Authorization-Code ID Token Claim Completeness Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines the provider-side OIDC authorization-code plus PKCE ID token claim contract. Tokens minted after an authorize request must bind to the deployed issuer and client audience, preserve subject identity, issue iat and exp, carry supplied nonce when present, include session/authentication correlation claims when the active profile enables them, and avoid substituting package labels for issuer URLs. Tests must distinguish required OIDC Core claims from profile-dependent optional claims."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  Defines the provider-side OIDC authorization-code plus PKCE ID token claim contract. Tokens minted after an authorize request must bind to the deployed issuer and client audience, preserve subject identity, issue iat and exp, carry supplied nonce when present, include session/authentication correlation claims when the active profile enables them, and avoid substituting package labels for issuer URLs. Tests must distinguish required OIDC Core claims from profile-dependent optional claims.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1125"
+  - "adr:1091"
+  - "adr:1083"
+  - "adr:1025"

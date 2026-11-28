@@ -1,0 +1,3 @@
+from tba_concrete_capability_default import DefaultCapability
+
+assert callable(DefaultCapability)

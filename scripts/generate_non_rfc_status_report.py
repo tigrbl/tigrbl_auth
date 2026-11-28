@@ -6,6 +6,11 @@ from typing import Any
 
 import yaml
 
+if __package__:
+    from ._surface_checks import infer_test_category as infer_category
+else:
+    from _surface_checks import infer_test_category as infer_category
+
 ROOT = Path(__file__).resolve().parents[1]
 REPORT_DIR = ROOT / 'docs' / 'compliance'
 TEST_REPORT_DIR = ROOT / 'dist' / 'test-reports'
@@ -84,25 +89,6 @@ def load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding='utf-8'))
 
 
-def infer_category(rel: str) -> str | None:
-    rel = rel.replace('\\', '/')
-    prefixes = {
-        'tests/unit/': 'unit',
-        'tests/integration/': 'integration',
-        'tests/runtime/': 'integration',
-        'tests/conformance/': 'conformance',
-        'tests/interop/': 'interop',
-        'tests/security/': 'security',
-        'tests/negative/': 'negative',
-        'tests/e2e/': 'e2e',
-        'tests/perf/': 'perf',
-    }
-    for prefix, category in prefixes.items():
-        if rel.startswith(prefix):
-            return category
-    return None
-
-
 def focus_test_summary() -> dict[str, Any]:
     reports: list[dict[str, Any]] = []
     total_passed = 0
@@ -172,7 +158,7 @@ def main() -> int:
             for profile in ('baseline', 'production', 'hardening')
         }
         openrpc_artifacts_present = {
-            profile: bool((ROOT / 'specs' / 'openrpc' / 'profiles' / profile / 'tigrbl_auth.admin.openrpc.json').exists())
+            profile: bool((ROOT / 'specs' / 'openrpc' / 'profiles' / profile / 'tba_auth.admin.openrpc.json').exists())
             for profile in ('baseline', 'production', 'hardening')
         }
         row = {

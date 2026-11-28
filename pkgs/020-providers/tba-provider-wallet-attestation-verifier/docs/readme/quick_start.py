@@ -1,0 +1,3 @@
+from tba_provider_wallet_attestation_verifier import ProfiledWalletAttestationVerifier
+
+assert callable(ProfiledWalletAttestationVerifier)

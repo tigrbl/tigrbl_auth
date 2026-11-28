@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "Fresh tigrbl_auth installs MUST expose the public OAuth/OIDC surface only. Generated table CRUD, generated JSON-RPC, and diagnostics are control-plane surfaces and MUST NOT be installed by the baseline/default posture without explicit operator opt-in."
+summary: "Fresh tba_auth installs MUST expose the public OAuth/OIDC surface only. Generated table CRUD, generated JSON-RPC, and diagnostics are control-plane surfaces and MUST NOT be installed by the baseline/default posture without explicit operator opt-in."
 supersedes: []
 superseded_by: []
 status_notes: []
@@ -16,9 +16,9 @@ references: []
 body: |-
   ## Decision
   
-  Fresh tigrbl_auth installs MUST expose the public OAuth/OIDC surface only. Generated table CRUD, generated JSON-RPC, and diagnostics are control-plane surfaces and MUST NOT be installed by the baseline/default posture without explicit operator opt-in.
+  Fresh tba_auth installs MUST expose the public OAuth/OIDC surface only. Generated table CRUD, generated JSON-RPC, and diagnostics are control-plane surfaces and MUST NOT be installed by the baseline/default posture without explicit operator opt-in.
   
-  When admin, RPC, or diagnostics surfaces are explicitly enabled, tigrbl_auth MUST require an authenticated administrator identity and session before allowing access to generated control-plane REST, generated JSON-RPC, or diagnostics endpoints.
+  When admin, RPC, or diagnostics surfaces are explicitly enabled, tba_auth MUST require an authenticated administrator identity and session before allowing access to generated control-plane REST, generated JSON-RPC, or diagnostics endpoints.
   
   The local baseline MUST support bootstrap of at least one superuser administrator identity for first-run control-plane access. Bootstrap credentials MUST flow into a forced password-change and ongoing administrator credential lifecycle rather than relying on a long-lived local admin API key.
   

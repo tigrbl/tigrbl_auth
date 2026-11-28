@@ -1,0 +1,64 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1117"
+number: 1117
+slug: "tenant-membership-and-authority-model"
+title: "Tenant membership and authority model"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs tenant membership and authority semantics."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define tenant membership and authority semantics."
+    at: "2026-05-18T08:31:57Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs tenant membership and authority semantics.
+  
+  ## First-Class Objects
+  
+  The model MUST define:
+  
+  - `Account`
+  - `UserPrincipal`
+  - `TenantMembership`
+  - `TenantRole`
+  - `DeploymentSuperuserAuthority`
+  - `TenantAdminAuthority`
+  - `TenantOwnerAuthority`
+  - `AppOwnerAuthority`
+  - `DeveloperAuthority`
+  - `MemberAuthority`
+  - `Invitation`
+  - `MembershipAuditEvent`
+  
+  ## Requirements
+  
+  A user/account MAY belong to multiple tenants through memberships.
+  
+  Tenant roles and authorities MUST be membership-scoped unless explicitly
+  deployment-scoped.
+  
+  Deployment superuser authority MUST NOT imply ordinary tenant membership
+  unless explicitly granted or policy allows break-glass behavior.
+  
+  Tenant owner/admin/developer/member authority MUST be evaluated by policy.
+  
+  Membership changes MUST produce audit events.
+  
+  ## Verification
+  
+  Verification MUST prove membership creation, invitation acceptance, role
+  assignment, role removal, cross-tenant denial, deployment-superuser
+  separation, and audit event creation.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1107"
+  - "adr:1110"

@@ -1,0 +1,3 @@
+from tba_concrete_verifiable_credential import VerifiableCredential
+
+assert callable(VerifiableCredential)

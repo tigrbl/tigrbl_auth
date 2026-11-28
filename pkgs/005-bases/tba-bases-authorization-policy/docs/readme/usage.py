@@ -1,0 +1,3 @@
+from tba_bases_authorization_policy import ScopeMatcherBase
+
+assert callable(ScopeMatcherBase)

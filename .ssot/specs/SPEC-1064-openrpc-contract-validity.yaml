@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification defines the validity contract for generated OpenRPC output in `tigrbl_auth`."
+summary: "This specification defines the validity contract for generated OpenRPC output in `tba_auth`."
 supersedes: []
 superseded_by: []
 status_notes: []
@@ -16,7 +16,7 @@ references: []
 body: |-
   ## Overview
   
-  This specification defines the validity contract for generated OpenRPC output in `tigrbl_auth`.
+  This specification defines the validity contract for generated OpenRPC output in `tba_auth`.
   
   Decision source: `adr:1044`.
   
@@ -35,7 +35,7 @@ body: |-
   - be JSON-serializable,
   - declare an OpenRPC 1.x version,
   - include non-empty `info.title` and `info.version`,
-  - include `x-tigrbl-auth.profile` matching the resolved deployment profile,
+  - include `x-tba-auth.profile` matching the resolved deployment profile,
   - include a method inventory aligned with the implementation-backed RPC registry for the resolved deployment,
   - include zero methods rather than malformed methods when the control-plane RPC surface is hidden,
   - include schema components for active methods when admin RPC is enabled,
@@ -48,7 +48,7 @@ body: |-
   
   If the endpoint is hidden, the generated OpenRPC artifact must still satisfy this specification through the builder and committed artifact paths.
   
-  If the endpoint is exposed, the HTTP payload must satisfy the same validity requirements without downstream mutation by `tigrbl_auth`.
+  If the endpoint is exposed, the HTTP payload must satisfy the same validity requirements without downstream mutation by `tba_auth`.
   
   ## Verification
   

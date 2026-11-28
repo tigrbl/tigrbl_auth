@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1124"
+number: 1124
+slug: "rp-shared-protocol-contract"
+title: "RP Shared Protocol Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines shared RP models and invariants across Python and TypeScript: relying party, configuration, login request, authorization URL, callback input/result, token set, RP session, userinfo, and logout semantics."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "RP/resource-server/provider-login maturity wave proposal."
+    at: "2026-05-23T05:44:04Z"
+references: []
+body: |-
+  Defines shared RP models and invariants across Python and TypeScript: relying party, configuration, login request, authorization URL, callback input/result, token set, RP session, userinfo, and logout semantics.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1113"
+  - "adr:1114"

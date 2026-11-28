@@ -77,7 +77,7 @@ Generated: 2026-04-28T03:07:00Z
 - Added `tests/unit/test_certification_gap_inventory.py` to keep the inventory aligned with live registry counts, proof-chain gaps, and capability-scoped delivery track naming.
 - Added SSOT feature, claim, test, and evidence rows for `feat:certification-gap-inventory`, `clm:certification-gap-inventory-current`, `tst:tests-unit-test-certification-gap-inventory-py`, and `evd:ssot-reports-certification-gap-inventory-json`.
 - Certified the new gap inventory claim after `claim evaluate` and `evidence verify` passed through the SSOT CLI.
-- Declared `tigrbl_auth/profiles/*.yaml` as package data in `pyproject.toml` so runtime profiles remain package resources after build/install.
+- Declared `tba_auth/profiles/*.yaml` as package data in `pyproject.toml` so runtime profiles remain package resources after build/install.
 - Added `tests/unit/test_runtime_profile_configuration.py::test_runtime_profile_yaml_files_are_included_in_build_config` to guard the packaged profile-resource contract.
 - Added SSOT test and evidence rows for `tst:runtime-profile-build-config-includes-yaml` and `evd:ssot-reports-development-runtime-profile-build-config-passed-json`.
 - Verified the runtime-profile and registry-integrity slice locally with `9 passed`, then revalidated SSOT successfully.

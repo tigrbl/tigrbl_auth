@@ -1,36 +1,34 @@
 {
-  "generated_at": "20260513T121956Z",
+  "generated_at": "20260719T075620Z",
   "deployment_profile": "baseline",
   "report_mode": "validated-runs",
-  "validated_artifact_source": "dist/validated-runs/collected-artifact-downloads.json",
+  "validated_artifact_source": null,
   "application_probe": {
     "passed": false,
-    "app_factory": "tigrbl_auth.api.app.build_app",
-    "message": "Validated runtime manifests are missing or failing for the base application-factory environments: base@py3.13, base@py3.14",
+    "app_factory": "unbound",
+    "message": "Validated runtime manifests are missing or failing for the base application-factory environments: base@py3.10, base@py3.11, base@py3.12",
     "error_type": "ValidatedRuntimeEvidenceMissing"
   },
   "surface_probe": {
-    "executed": true,
+    "executed": false,
     "passed": false,
-    "message": "Validated runtime manifests are missing or failing for the base surface-probe environments: base@py3.13, base@py3.14",
-    "endpoint_count": 4,
-    "passed_count": 4,
+    "message": "Validated runtime manifests are missing or failing for the base surface-probe environments: base@py3.10, base@py3.11, base@py3.12",
+    "endpoint_count": 0,
+    "passed_count": 0,
     "failed_count": 0,
     "probes": []
   },
   "summary": {
     "runner_count": 3,
     "ready_count": 0,
-    "missing_count": 0,
-    "invalid_count": 3,
-    "application_hash_invariant": true,
+    "missing_count": 3,
+    "invalid_count": 0,
+    "application_hash_invariant": false,
     "pyproject_requires_python": ">=3.10,<3.15",
     "supported_python_versions": [
       "3.10",
       "3.11",
-      "3.12",
-      "3.13",
-      "3.14"
+      "3.12"
     ],
     "placeholder_supported_runner_count": 0,
     "placeholder_supported_runner_names": [],
@@ -43,27 +41,27 @@
     "declared_ci_install_probe_complete": true,
     "execution_probes_enabled": true,
     "surface_probe_passed": false,
-    "surface_probe_endpoint_count": 4,
-    "surface_probe_passed_count": 4,
+    "surface_probe_endpoint_count": 0,
+    "surface_probe_passed_count": 0,
     "surface_probe_failed_count": 0,
     "serve_check_passed_count": 0,
     "execution_probe_complete": false,
     "source_mode": "validated-runs",
-    "required_runtime_cell_count": 24,
-    "validated_runtime_cell_count": 14,
-    "validated_runtime_cell_passed_count": 14,
+    "required_runtime_cell_count": 14,
+    "validated_runtime_cell_count": 0,
+    "validated_runtime_cell_passed_count": 0,
     "validated_runtime_matrix_green": false,
-    "validated_runtime_identity_ready_count": 14,
-    "validated_runtime_install_evidence_ready_count": 14,
-    "validated_download_collection_present": true
+    "validated_runtime_identity_ready_count": 0,
+    "validated_runtime_install_evidence_ready_count": 0,
+    "validated_download_collection_present": false
   },
   "profiles": [
     {
       "name": "hypercorn",
       "display_name": "Hypercorn",
-      "status": "invalid",
+      "status": "missing",
       "installed": false,
-      "available_module": "hypercorn",
+      "available_module": null,
       "capabilities": [
         {
           "name": "http",
@@ -181,18 +179,19 @@
           "code": "validated-manifest-missing",
           "message": "Validated runtime manifests are missing for one or more required matrix cells.",
           "identities": [
-            "postgres-hypercorn@py3.13",
-            "postgres-hypercorn@py3.14"
+            "postgres-hypercorn@py3.10",
+            "postgres-hypercorn@py3.11",
+            "postgres-hypercorn@py3.12"
           ]
         }
       ],
-      "application_hash": "94ff35858020cf36177bd9360fd7beab6db5c60789f5d158634ed280a213563a",
-      "runtime_hash": "35925b0496557677b588a9c938c97eb1b76791fb7c3e3624d13c874748f8f98e",
+      "application_hash": null,
+      "runtime_hash": null,
       "serve_check": {
-        "executed": true,
+        "executed": false,
         "passed": false,
-        "command": "tigrbl-auth serve --check --server hypercorn --format json",
-        "message": "Validated runtime manifests are missing or failing serve-check evidence for required cells: postgres-hypercorn@py3.13, postgres-hypercorn@py3.14",
+        "command": "tba-auth serve --check --server hypercorn --format json",
+        "message": "Validated runtime manifests are missing or failing serve-check evidence for required cells: postgres-hypercorn@py3.10, postgres-hypercorn@py3.11, postgres-hypercorn@py3.12",
         "exit_code": null
       },
       "validated_matrix": {
@@ -200,27 +199,18 @@
         "expected_identities": [
           "postgres-hypercorn@py3.10",
           "postgres-hypercorn@py3.11",
-          "postgres-hypercorn@py3.12",
-          "postgres-hypercorn@py3.13",
-          "postgres-hypercorn@py3.14"
-        ],
-        "present_identities": [
-          "postgres-hypercorn@py3.10",
-          "postgres-hypercorn@py3.11",
           "postgres-hypercorn@py3.12"
         ],
-        "passed_identities": [
-          "postgres-hypercorn@py3.10",
-          "postgres-hypercorn@py3.11",
-          "postgres-hypercorn@py3.12"
-        ],
+        "present_identities": [],
+        "passed_identities": [],
         "missing_identities": [
-          "postgres-hypercorn@py3.13",
-          "postgres-hypercorn@py3.14"
+          "postgres-hypercorn@py3.10",
+          "postgres-hypercorn@py3.11",
+          "postgres-hypercorn@py3.12"
         ],
         "failed_identities": [],
-        "identity_ready_count": 3,
-        "install_evidence_ready_count": 3,
+        "identity_ready_count": 0,
+        "install_evidence_ready_count": 0,
         "failure_reasons": {}
       },
       "required_extra": "hypercorn",
@@ -228,36 +218,22 @@
       "supported_python_versions": [
         "3.10",
         "3.11",
-        "3.12",
-        "3.13",
-        "3.14"
+        "3.12"
       ],
       "pyproject_extra_present": true,
       "pyproject_extra_values": [
         "hypercorn==0.18.0"
       ],
       "aggregate_runner_extra_present": true,
-      "constraints": [
-        "constraints/base.txt",
-        "constraints/runner-hypercorn.txt"
-      ],
-      "constraints_present": [
-        "constraints/base.txt",
-        "constraints/runner-hypercorn.txt"
-      ],
       "tox_envs": [
         "py310-postgres-hypercorn",
         "py311-postgres-hypercorn",
-        "py312-postgres-hypercorn",
-        "py313-postgres-hypercorn",
-        "py314-postgres-hypercorn"
+        "py312-postgres-hypercorn"
       ],
       "tox_envs_present": [
         "py310-postgres-hypercorn",
         "py311-postgres-hypercorn",
-        "py312-postgres-hypercorn",
-        "py313-postgres-hypercorn",
-        "py314-postgres-hypercorn"
+        "py312-postgres-hypercorn"
       ],
       "ci_install_job": "postgres-hypercorn",
       "ci_install_job_present": true,
@@ -268,9 +244,9 @@
     {
       "name": "tigrcorn",
       "display_name": "Tigrcorn",
-      "status": "invalid",
+      "status": "missing",
       "installed": false,
-      "available_module": "tigrcorn",
+      "available_module": null,
       "capabilities": [
         {
           "name": "http",
@@ -393,77 +369,55 @@
           "code": "validated-manifest-missing",
           "message": "Validated runtime manifests are missing for one or more required matrix cells.",
           "identities": [
-            "tigrcorn@py3.13",
-            "tigrcorn@py3.14"
+            "tigrcorn@py3.11",
+            "tigrcorn@py3.12"
           ]
         }
       ],
-      "application_hash": "94ff35858020cf36177bd9360fd7beab6db5c60789f5d158634ed280a213563a",
-      "runtime_hash": "b0fa1827abd4a8320769358430854a5c16fa16751d6e149b25bcad460661c4b2",
+      "application_hash": null,
+      "runtime_hash": null,
       "serve_check": {
-        "executed": true,
+        "executed": false,
         "passed": false,
-        "command": "tigrbl-auth serve --check --server tigrcorn --format json",
-        "message": "Validated runtime manifests are missing or failing serve-check evidence for required cells: tigrcorn@py3.13, tigrcorn@py3.14",
+        "command": "tba-auth serve --check --server tigrcorn --format json",
+        "message": "Validated runtime manifests are missing or failing serve-check evidence for required cells: tigrcorn@py3.11, tigrcorn@py3.12",
         "exit_code": null
       },
       "validated_matrix": {
         "matrix_profile": "tigrcorn",
         "expected_identities": [
           "tigrcorn@py3.11",
-          "tigrcorn@py3.12",
-          "tigrcorn@py3.13",
-          "tigrcorn@py3.14"
-        ],
-        "present_identities": [
-          "tigrcorn@py3.11",
           "tigrcorn@py3.12"
         ],
-        "passed_identities": [
-          "tigrcorn@py3.11",
-          "tigrcorn@py3.12"
-        ],
+        "present_identities": [],
+        "passed_identities": [],
         "missing_identities": [
-          "tigrcorn@py3.13",
-          "tigrcorn@py3.14"
+          "tigrcorn@py3.11",
+          "tigrcorn@py3.12"
         ],
         "failed_identities": [],
-        "identity_ready_count": 2,
-        "install_evidence_ready_count": 2,
+        "identity_ready_count": 0,
+        "install_evidence_ready_count": 0,
         "failure_reasons": {}
       },
       "required_extra": "tigrcorn",
       "profile_name": "tigrcorn",
       "supported_python_versions": [
         "3.11",
-        "3.12",
-        "3.13",
-        "3.14"
+        "3.12"
       ],
       "pyproject_extra_present": true,
       "pyproject_extra_values": [
         "tigrcorn==0.3.8; python_version >= '3.11'"
       ],
       "aggregate_runner_extra_present": true,
-      "constraints": [
-        "constraints/base.txt",
-        "constraints/runner-tigrcorn.txt"
-      ],
-      "constraints_present": [
-        "constraints/base.txt",
-        "constraints/runner-tigrcorn.txt"
-      ],
       "tox_envs": [
         "py311-tigrcorn",
-        "py312-tigrcorn",
-        "py313-tigrcorn",
-        "py314-tigrcorn"
+        "py312-tigrcorn"
       ],
       "tox_envs_present": [
         "py311-tigrcorn",
-        "py312-tigrcorn",
-        "py313-tigrcorn",
-        "py314-tigrcorn"
+        "py312-tigrcorn"
       ],
       "ci_install_job": "tigrcorn",
       "ci_install_job_present": true,
@@ -474,7 +428,7 @@
     {
       "name": "uvicorn",
       "display_name": "Uvicorn",
-      "status": "invalid",
+      "status": "missing",
       "installed": false,
       "available_module": "uvicorn",
       "capabilities": [
@@ -625,18 +579,19 @@
           "code": "validated-manifest-missing",
           "message": "Validated runtime manifests are missing for one or more required matrix cells.",
           "identities": [
-            "sqlite-uvicorn@py3.13",
-            "sqlite-uvicorn@py3.14"
+            "sqlite-uvicorn@py3.10",
+            "sqlite-uvicorn@py3.11",
+            "sqlite-uvicorn@py3.12"
           ]
         }
       ],
-      "application_hash": "94ff35858020cf36177bd9360fd7beab6db5c60789f5d158634ed280a213563a",
-      "runtime_hash": "62f140728e40ca038f1c34ec0a982246263aae0441c91c55b8e194b2870e84c4",
+      "application_hash": null,
+      "runtime_hash": null,
       "serve_check": {
-        "executed": true,
+        "executed": false,
         "passed": false,
-        "command": "tigrbl-auth serve --check --server uvicorn --format json",
-        "message": "Validated runtime manifests are missing or failing serve-check evidence for required cells: sqlite-uvicorn@py3.13, sqlite-uvicorn@py3.14",
+        "command": "tba-auth serve --check --server uvicorn --format json",
+        "message": "Validated runtime manifests are missing or failing serve-check evidence for required cells: sqlite-uvicorn@py3.10, sqlite-uvicorn@py3.11, sqlite-uvicorn@py3.12",
         "exit_code": null
       },
       "validated_matrix": {
@@ -644,27 +599,18 @@
         "expected_identities": [
           "sqlite-uvicorn@py3.10",
           "sqlite-uvicorn@py3.11",
-          "sqlite-uvicorn@py3.12",
-          "sqlite-uvicorn@py3.13",
-          "sqlite-uvicorn@py3.14"
-        ],
-        "present_identities": [
-          "sqlite-uvicorn@py3.10",
-          "sqlite-uvicorn@py3.11",
           "sqlite-uvicorn@py3.12"
         ],
-        "passed_identities": [
-          "sqlite-uvicorn@py3.10",
-          "sqlite-uvicorn@py3.11",
-          "sqlite-uvicorn@py3.12"
-        ],
+        "present_identities": [],
+        "passed_identities": [],
         "missing_identities": [
-          "sqlite-uvicorn@py3.13",
-          "sqlite-uvicorn@py3.14"
+          "sqlite-uvicorn@py3.10",
+          "sqlite-uvicorn@py3.11",
+          "sqlite-uvicorn@py3.12"
         ],
         "failed_identities": [],
-        "identity_ready_count": 3,
-        "install_evidence_ready_count": 3,
+        "identity_ready_count": 0,
+        "install_evidence_ready_count": 0,
         "failure_reasons": {}
       },
       "required_extra": "uvicorn",
@@ -672,36 +618,22 @@
       "supported_python_versions": [
         "3.10",
         "3.11",
-        "3.12",
-        "3.13",
-        "3.14"
+        "3.12"
       ],
       "pyproject_extra_present": true,
       "pyproject_extra_values": [
         "uvicorn[standard]==0.41.0"
       ],
       "aggregate_runner_extra_present": true,
-      "constraints": [
-        "constraints/base.txt",
-        "constraints/runner-uvicorn.txt"
-      ],
-      "constraints_present": [
-        "constraints/base.txt",
-        "constraints/runner-uvicorn.txt"
-      ],
       "tox_envs": [
         "py310-sqlite-uvicorn",
         "py311-sqlite-uvicorn",
-        "py312-sqlite-uvicorn",
-        "py313-sqlite-uvicorn",
-        "py314-sqlite-uvicorn"
+        "py312-sqlite-uvicorn"
       ],
       "tox_envs_present": [
         "py310-sqlite-uvicorn",
         "py311-sqlite-uvicorn",
-        "py312-sqlite-uvicorn",
-        "py313-sqlite-uvicorn",
-        "py314-sqlite-uvicorn"
+        "py312-sqlite-uvicorn"
       ],
       "ci_install_job": "sqlite-uvicorn",
       "ci_install_job_present": true,

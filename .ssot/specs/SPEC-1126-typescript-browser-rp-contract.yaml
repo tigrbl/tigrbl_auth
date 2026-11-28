@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1126"
+number: 1126
+slug: "typescript-browser-rp-contract"
+title: "TypeScript Browser RP Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines browser/public-client behavior for @tigrbl/identity-rp, including PKCE-only login, no client secret support, browser-safe state/nonce handling, and constrained storage policy."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "RP/resource-server/provider-login maturity wave proposal."
+    at: "2026-05-23T05:44:06Z"
+references: []
+body: |-
+  Defines browser/public-client behavior for @tigrbl/identity-rp, including PKCE-only login, no client secret support, browser-safe state/nonce handling, and constrained storage policy.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1113"
+  - "adr:1115"

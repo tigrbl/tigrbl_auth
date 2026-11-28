@@ -1,5 +1,5 @@
 schema_version: 1
-package: tigrbl_auth
+package: tba_auth
 plan:
   delivery_track: tree-layout-and-migration
   objective: Make the strict certified-core boundary machine-checkable and release-gated

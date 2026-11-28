@@ -20,20 +20,20 @@ This checkpoint implements the requested operator-service checkpoint work to mov
 
 Added or completed the following service modules:
 
-- `tigrbl_auth/services/_operator_store.py`
-- `tigrbl_auth/services/operator_service.py`
-- `tigrbl_auth/services/audit_service.py`
-- `tigrbl_auth/services/client_service.py`
-- `tigrbl_auth/services/identity_service.py`
-- `tigrbl_auth/services/session_service.py`
-- `tigrbl_auth/services/discovery_service.py`
-- `tigrbl_auth/services/import_export_service.py`
-- `tigrbl_auth/services/key_management.py` (lazy runtime imports + operator wrappers)
-- `tigrbl_auth/services/token_service.py` (lazy runtime imports + operator wrappers)
+- `tba_auth/services/_operator_store.py`
+- `tba_auth/services/operator_service.py`
+- `tba_auth/services/audit_service.py`
+- `tba_auth/services/client_service.py`
+- `tba_auth/services/identity_service.py`
+- `tba_auth/services/session_service.py`
+- `tba_auth/services/discovery_service.py`
+- `tba_auth/services/import_export_service.py`
+- `tba_auth/services/key_management.py` (lazy runtime imports + operator wrappers)
+- `tba_auth/services/token_service.py` (lazy runtime imports + operator wrappers)
 
 ## CLI/operator changes
 
-- `tigrbl_auth/cli/handlers.py` now routes resource lifecycle verbs through the shared service layer.
+- `tba_auth/cli/handlers.py` now routes resource lifecycle verbs through the shared service layer.
 - tenant/client/identity/flow/session/token/keys/discovery/import/export handlers now use service-backed semantics.
 - operator transactions and audit rows are written under `dist/operator-state/`.
 - key lifecycle and JWKS publication use the shared key/operator services.
@@ -42,27 +42,27 @@ Added or completed the following service modules:
 
 Updated RPC method modules to use the same operator services rather than separate ad hoc/durable-path logic:
 
-- `tigrbl_auth/api/rpc/methods/client_registration.py`
-- `tigrbl_auth/api/rpc/methods/session.py`
-- `tigrbl_auth/api/rpc/methods/token.py`
-- `tigrbl_auth/api/rpc/methods/keys.py`
-- `tigrbl_auth/api/rpc/methods/governance.py` (discovery)
+- `tba_auth/api/rpc/methods/client_registration.py`
+- `tba_auth/api/rpc/methods/session.py`
+- `tba_auth/api/rpc/methods/token.py`
+- `tba_auth/api/rpc/methods/keys.py`
+- `tba_auth/api/rpc/methods/governance.py` (discovery)
 
 ## REST surface observation hooks
 
 Updated routers to emit operator/audit observations:
 
-- `tigrbl_auth/api/rest/routers/register.py`
-- `tigrbl_auth/api/rest/routers/logout.py`
-- `tigrbl_auth/api/rest/routers/token.py`
-- `tigrbl_auth/api/rest/routers/par.py`
-- `tigrbl_auth/api/rest/routers/device_authorization.py`
+- `tba_auth/api/rest/routers/register.py`
+- `tba_auth/api/rest/routers/logout.py`
+- `tba_auth/api/rest/routers/token.py`
+- `tba_auth/api/rest/routers/par.py`
+- `tba_auth/api/rest/routers/device_authorization.py`
 
 These hooks record checkpoint-grade parity artifacts for token issuance, logout, PAR, device authorization, and registration workflows.
 
 ## Repository truthfulness and import safety
 
-- `tigrbl_auth/services/__init__.py` was reduced to a non-eager package stub so lightweight operator modules can import without forcing the full runtime dependency set.
+- `tba_auth/services/__init__.py` was reduced to a non-eager package stub so lightweight operator modules can import without forcing the full runtime dependency set.
 - `key_management.py` and `token_service.py` now defer runtime-only framework imports until those runtime paths are actually used.
 
 ## Test and mapping updates

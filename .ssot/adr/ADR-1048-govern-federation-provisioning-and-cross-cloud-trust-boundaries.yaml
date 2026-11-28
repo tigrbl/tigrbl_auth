@@ -16,7 +16,7 @@ references: []
 body: |-
   ## Decision
 
-  `tigrbl_auth` MUST govern enterprise SSO, federation, SCIM provisioning, trust federation graphs, and cross-cloud identity as trust-plane capabilities distinct from baseline OIDC provider behavior.
+  `tba_auth` MUST govern enterprise SSO, federation, SCIM provisioning, trust federation graphs, and cross-cloud identity as trust-plane capabilities distinct from baseline OIDC provider behavior.
 
   ## Current Implementation Status
 

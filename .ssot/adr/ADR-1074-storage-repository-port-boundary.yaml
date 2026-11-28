@@ -1,0 +1,17 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1074"
+number: 1074
+slug: "storage-repository-port-boundary"
+title: "Storage Exposes Repository Ports"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Require protocol, admin, server, and runtime packages to depend on repository contracts instead of direct table or SQLAlchemy details."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  Require protocol, admin, server, and runtime packages to depend on repository contracts instead of direct table or SQLAlchemy details.

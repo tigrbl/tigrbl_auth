@@ -1,0 +1,3 @@
+from tba_concrete_claim_cwt_confirmation import CwtConfirmationClaim
+
+assert callable(CwtConfirmationClaim)

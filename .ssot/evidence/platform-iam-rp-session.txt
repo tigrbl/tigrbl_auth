@@ -1,0 +1,1 @@
+PASSED 2026-08-18. Three RP integration tests passed: expiring one-time login transaction, injected signature verification with OIDC claim and UserInfo subject checks, encrypted refresh-token storage, and compare-and-swap refresh rotation.

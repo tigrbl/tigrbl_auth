@@ -2,7 +2,7 @@
 
 # Certification Boundary
 
-This document declares the authoritative certification boundary for the current `tigrbl_auth` checkpoint.
+This document declares the authoritative certification boundary for the current `tba_auth` checkpoint.
 
 ## Authority
 
@@ -20,7 +20,7 @@ This document declares the authoritative certification boundary for the current 
 - Retained targets: `48`
 - Retained RFC targets: `30`
 - Retained non-RFC targets: `18`
-- Deferred / excluded targets tracked: `25`
+- Deferred / excluded targets tracked: `27`
 - No target-count drift during closeout: `True`
 - Separate scope-expansion program required for wider claims: `True`
 

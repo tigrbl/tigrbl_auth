@@ -1,0 +1,26 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1217"
+number: 1217
+slug: "rfc9449-dpop-proof-binding-contract"
+title: "RFC 9449 DPoP proof-binding contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Scope: DPoP support targets RFC 9449 Demonstrating Proof of Possession at https://www.rfc-editor.org/rfc/rfc9449.html and JWT confirmation claim handling from RFC 7800 at https://www.rfc-editor.org/rfc/rfc7800.html. Requirements: credentials expose DpopKeyCredential carrying principal id, JWK thumbprint, public JWK metadata, lifecycle status, and cnf.jkt rendering; resource-server consumers expose DpopValidator and ProofBindingValidator paths that compare token cnf.jkt to presented DPoP key thumbprint when DPoP is required. Exclusions: this SPEC does not move OAuth proof JWT construction or nonce/replay ownership out of the OAuth protocol package. Verification: T0 import tests, T1 positive binding tests, and T2 fail-closed negative tests are required before concrete DPoP features are marked implemented."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define concrete DPoP key credential and resource-server binding validation requirements."
+    at: "2026-06-17T10:09:31Z"
+references: []
+body: |-
+  Scope: DPoP support targets RFC 9449 Demonstrating Proof of Possession at https://www.rfc-editor.org/rfc/rfc9449.html and JWT confirmation claim handling from RFC 7800 at https://www.rfc-editor.org/rfc/rfc7800.html. Requirements: credentials expose DpopKeyCredential carrying principal id, JWK thumbprint, public JWK metadata, lifecycle status, and cnf.jkt rendering; resource-server consumers expose DpopValidator and ProofBindingValidator paths that compare token cnf.jkt to presented DPoP key thumbprint when DPoP is required. Exclusions: this SPEC does not move OAuth proof JWT construction or nonce/replay ownership out of the OAuth protocol package. Verification: T0 import tests, T1 positive binding tests, and T2 fail-closed negative tests are required before concrete DPoP features are marked implemented.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1127"
+  - "adr:1100"
+  - "adr:1109"

@@ -1,0 +1,3 @@
+from tba_bases_jose import JoseEnvelopeIssuerBase
+
+assert callable(JoseEnvelopeIssuerBase)

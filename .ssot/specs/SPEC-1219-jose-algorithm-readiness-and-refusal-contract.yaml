@@ -1,0 +1,24 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1219"
+number: 1219
+slug: "jose-algorithm-readiness-and-refusal-contract"
+title: "JOSE algorithm readiness and refusal contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Scope: Strict certification policy targets RFC 7518 at https://www.rfc-editor.org/rfc/rfc7518.html and RFC 8725 at https://www.rfc-editor.org/rfc/rfc8725.html. Requirements: policy reports allowed algorithms, refused algorithms, ECDSA classical-cryptography warnings, and PQC readiness state; RSA-family RS*/PS* signing algorithms are refused in strict certification policy; legacy JWA discovery may remain compatible and is not the certification gate. Verification: T0 export tests, T1 readiness/report tests, and T2 fail-closed refusal tests are required before implemented status."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define strict certification policy for PQC readiness, ECDSA warnings, and RSA refusal."
+    at: "2026-06-17T10:34:56Z"
+references: []
+body: |-
+  Scope: Strict certification policy targets RFC 7518 at https://www.rfc-editor.org/rfc/rfc7518.html and RFC 8725 at https://www.rfc-editor.org/rfc/rfc8725.html. Requirements: policy reports allowed algorithms, refused algorithms, ECDSA classical-cryptography warnings, and PQC readiness state; RSA-family RS*/PS* signing algorithms are refused in strict certification policy; legacy JWA discovery may remain compatible and is not the certification gate. Verification: T0 export tests, T1 readiness/report tests, and T2 fail-closed refusal tests are required before implemented status.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1129"

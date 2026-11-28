@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification defines how `tigrbl_auth` treats JCS authority, successor standards, and obsolete JSON RFC references."
+summary: "This specification defines how `tba_auth` treats JCS authority, successor standards, and obsolete JSON RFC references."
 supersedes: []
 superseded_by: []
 status_notes: []
@@ -19,7 +19,7 @@ references:
 body: |-
   ## Overview
   
-  This specification defines how `tigrbl_auth` treats JCS authority, successor standards, and obsolete JSON RFC references.
+  This specification defines how `tba_auth` treats JCS authority, successor standards, and obsolete JSON RFC references.
   
   ## Current Authority
   

@@ -3,7 +3,7 @@ kind: "spec"
 id: "spc:1035"
 number: 1035
 slug: "openapi-hardening-public-compact-yaml"
-title: "Repo spec: specs/openapi/profiles/hardening/tigrbl_auth.public.yaml"
+title: "Repo spec: specs/openapi/profiles/hardening/tba_auth.public.yaml"
 status: "draft"
 origin: "repo-local"
 decision_date: null
@@ -16,7 +16,7 @@ references: []
 body: |-
   openapi: 3.1.0
   info:
-    title: tigrbl_auth public auth server
+    title: tba_auth public auth server
     version: 0.3.2.dev13
     description: Generated public contract filtered by the effective deployment boundary.
   servers:
@@ -103,7 +103,7 @@ body: |-
       openIdConnect:
         type: openIdConnect
         openIdConnectUrl: https://authn.example.com/.well-known/openid-configuration
-  x-tigrbl-auth:
+  x-tba-auth:
     profile: hardening
     plugin_mode: mixed
     runtime_style: standalone

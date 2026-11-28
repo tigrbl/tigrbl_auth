@@ -1,0 +1,40 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1224"
+number: 1224
+slug: "platform-support-break-glass-access-contract"
+title: "Platform Support and Break-Glass Access Contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Platform support and break-glass access MUST be distinct from platform owner and platform administrator authority."
+supersedes:
+  - "spc:1148"
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Replace the platform operator access draft with support and break-glass terminology."
+    at: "2026-06-22T07:21:52Z"
+  -
+    status: "accepted"
+    note: "Superseded by SPEC-1224: support and break-glass controls replace platform operator access terminology."
+    at: "2026-06-22T07:25:15Z"
+references: []
+body: |-
+  ## Requirements
+  
+  Platform support and break-glass access MUST be distinct from platform owner and platform administrator authority.
+  
+  Support users MAY inspect approved operational views and run explicitly delegated recovery workflows.
+  
+  Support users MUST NOT receive default tenant ownership, tenant-local administrative authority, developer app ownership, or service identity ownership unless a separate authority grant exists.
+  
+  Break-glass workflows MUST require explicit reason capture, audit event emission, environment guardrails, and bounded authority.
+  
+  These workflows MUST NOT create or imply a separate operator role, operator action family, or operator state model.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1078"
+  - "adr:1132"

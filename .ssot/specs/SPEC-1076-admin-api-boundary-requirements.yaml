@@ -8,7 +8,7 @@ status: "draft"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "The admin API boundary MUST define the authenticated and authorized control-plane API surface for `tigrbl_auth`."
+summary: "The admin API boundary MUST define the authenticated and authorized control-plane API surface for `tba_auth`."
 supersedes: []
 superseded_by: []
 status_notes: []
@@ -17,7 +17,7 @@ body: |-
   ## Requirements
 
   The admin API boundary MUST define the authenticated and authorized
-  control-plane API surface for `tigrbl_auth`.
+  control-plane API surface for `tba_auth`.
 
   Required in-scope capabilities:
   - implementation-backed admin contract publication

@@ -1,0 +1,3 @@
+from tba_durability_trust_federation_graph import TrustFederationGraphTable
+
+assert callable(TrustFederationGraphTable)

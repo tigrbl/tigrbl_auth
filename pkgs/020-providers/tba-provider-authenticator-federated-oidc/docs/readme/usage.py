@@ -1,0 +1,3 @@
+from tba_provider_authenticator_federated_oidc import FederatedOidcAuthenticator
+
+assert callable(FederatedOidcAuthenticator)

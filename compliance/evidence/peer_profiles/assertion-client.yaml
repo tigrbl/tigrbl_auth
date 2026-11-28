@@ -11,13 +11,13 @@ required_targets:
 - RFC 7523
 - RFC 7009
 required_artifacts:
-- tests/conformance/baseline/test_rfc7515_jws.py
-- tests/conformance/baseline/test_rfc7517_jwk.py
-- tests/conformance/baseline/test_rfc7518_jwa.py
-- tests/conformance/baseline/test_rfc7519_jwt.py
-- tests/unit/test_rfc7521_assertion_framework.py
-- tests/unit/test_rfc7523_jwt_profile.py
-- tests/conformance/production/test_rfc7009_token_revocation.py
+- pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7515_jws.py
+- pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7517_jwk.py
+- pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7518_jwa.py
+- pkgs/120-tests/tba-tests-jose/tests/conformance/baseline/test_rfc7519_jwt.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7521_assertion_framework.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc7523_jwt_profile.py
+- pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7009_token_revocation.py
 scenario_ids:
 - jwt-client-auth
 - assertion-grant

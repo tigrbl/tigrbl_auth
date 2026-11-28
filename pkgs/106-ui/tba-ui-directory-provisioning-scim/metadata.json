@@ -1,0 +1,6 @@
+{
+  "name": "Tigrbl Directory & SCIM Center",
+  "description": "Enterprise directory and SCIM 2.0 provisioning administration center with built-in API sandboxing, mapping studio, and sync activity dashboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

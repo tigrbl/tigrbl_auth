@@ -8,20 +8,24 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification defines durable delegation lineage requirements for token exchange and related authorization flows."
+summary: "This specification defines durable delegation lineage requirements for token"
 supersedes: []
 superseded_by: []
 status_notes:
   -
+    at: "2026-06-07T04:39:41Z"
+    note: "Extended by spc:1208 for delegation attenuation proofs over existing delegation graph and token-exchange provenance."
     status: "accepted"
-    note: "Accept durable delegation-lineage requirements for token exchange and related flows."
-    at: "2026-05-12T00:00:00Z"
+  -
+    status: "accepted"
+    note: "Delegation graph requirements now include DelegationGrant lifecycle nodes, scope rows, proof rows, parent-child grant edges, and token-link references from spc:1213."
+    at: "2026-06-14T11:51:58Z"
 references: []
 body: |-
   ## Overview
   
   This specification defines durable delegation lineage requirements for token
-  exchange and related authorization flows in `tigrbl_auth`.
+  exchange and related authorization flows in `tba_auth`.
   
   ## Decision Source
   
@@ -57,3 +61,4 @@ body: |-
 spec_kind: "normative"
 adr_ids:
   - "adr:1068"
+  - "adr:1124"

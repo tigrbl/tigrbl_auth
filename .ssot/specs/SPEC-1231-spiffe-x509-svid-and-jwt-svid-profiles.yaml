@@ -1,0 +1,27 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1231"
+number: 1231
+slug: "spiffe-x509-svid-and-jwt-svid-profiles"
+title: "SPIFFE X.509-SVID and JWT-SVID profiles"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Pin the SPIFFE-ID, X509-SVID, and JWT-SVID specifications to commit 5d15e3ee8782e205048d1f206fbf944e075f7bae in https://github.com/spiffe/spiffe. Specify verifier behavior first. Issuer behavior requires its own role-specific evidence."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Normative targets
+  Pin the SPIFFE-ID, X509-SVID, and JWT-SVID specifications to commit 5d15e3ee8782e205048d1f206fbf944e075f7bae in https://github.com/spiffe/spiffe. Specify verifier behavior first. Issuer behavior requires its own role-specific evidence.
+  
+  ## Requirements
+  Both credential concretes MUST compose the shared SVID value and retain their carrier-specific rules. X.509-SVID MUST extract the SPIFFE identity from exactly one URI SAN, apply the SPIFFE leaf and key-usage rules, and verify the certificate path against the SPIFFE trust domain's configured anchors when used for authentication. JWT-SVID MUST verify the issuer signature against the appropriate SPIFFE trust bundle, validate the SPIFFE subject, enforce the expected audience and lifetime, and apply the JWT-SVID presentation rules.
+  
+  ## Verification
+  Keep separate X.509-SVID and JWT-SVID cases for valid credentials, wrong identity or trust domain, wrong signing key or trust anchor, and invalid lifetime. Test X.509 URI SAN cardinality and leaf constraints, and JWT audience rejection. Use signed fixtures for verification claims and record package, role, revision, and outcomes.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1139"

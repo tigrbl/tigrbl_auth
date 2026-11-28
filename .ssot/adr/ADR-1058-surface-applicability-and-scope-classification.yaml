@@ -19,7 +19,7 @@ body: |-
   Status: proposed
   Date: 2026-05-04
   
-  `tigrbl_auth` MUST use a normative applicability and scope classification model for governed surfaces and targets. The authoritative model MUST distinguish implemented, planned, not-applicable, out-of-scope, and adjacent-but-non-authoritative states. Informative reports MAY summarize those states, but they MUST NOT invent ambiguous empty-state semantics.
+  `tba_auth` MUST use a normative applicability and scope classification model for governed surfaces and targets. The authoritative model MUST distinguish implemented, planned, not-applicable, out-of-scope, and adjacent-but-non-authoritative states. Informative reports MAY summarize those states, but they MUST NOT invent ambiguous empty-state semantics.
   
   ## Rationale
   

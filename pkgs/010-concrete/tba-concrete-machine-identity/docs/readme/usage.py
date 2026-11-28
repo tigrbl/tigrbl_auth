@@ -1,0 +1,3 @@
+from tba_concrete_machine_identity import MachineIdentity
+
+assert callable(MachineIdentity)

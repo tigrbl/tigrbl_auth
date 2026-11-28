@@ -1,0 +1,75 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1114"
+number: 1114
+slug: "resource-server-package-boundary"
+title: "Resource server package boundary"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs `tigrbl-identity-resource-server`."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define resource-server package verifier ownership."
+    at: "2026-05-18T08:31:54Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs `tigrbl-identity-resource-server`.
+  
+  ## First-Class Objects
+  
+  The package MUST define:
+  
+  - `ResourceServer`
+  - `ResourceMetadata`
+  - `ResourceIdentifier`
+  - `Audience`
+  - `ScopeRequirement`
+  - `PermissionRequirement`
+  - `TokenValidator`
+  - `AccessTokenClaims`
+  - `JwksCache`
+  - `IntrospectionClient`
+  - `ProofBindingValidator`
+  - `DpopValidator`
+  - `MtlsBindingValidator`
+  - `ResourceAuthorizationRequest`
+  - `ResourceAuthorizationResult`
+  - `VerifierTrustPolicy`
+  
+  ## Requirements
+  
+  Resource-server owns downstream protected API validation behavior.
+  
+  It MUST validate access tokens, issuer/audience constraints, tenant
+  trust-domain expectations, resource indicators, scopes, permissions, DPoP
+  proof binding, and mTLS certificate binding where enabled.
+  
+  It MAY use JWKS and introspection. It MUST NOT own OAuth token issuance, OIDC
+  ID token emission, server app composition, runtime execution, or admin
+  mutation workflows.
+  
+  ## Dependency Rules
+  
+  Resource-server MAY import `core`, `contracts`, `principals`,
+  `credentials`, `jose`, `policy`, `oauth`, and selected `oidc` metadata
+  contracts.
+  
+  Provider-side server/runtime packages MUST NOT import resource-server.
+  
+  ## Verification
+  
+  Verification MUST include token validation, JWKS cache behavior,
+  introspection fallback, audience/resource checks, scope/permission checks,
+  tenant trust-domain rejection, DPoP proof checks, mTLS binding checks, and
+  provider-side import isolation.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1105"
+  - "adr:1108"

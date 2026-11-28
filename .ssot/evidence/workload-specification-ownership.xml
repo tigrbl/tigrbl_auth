@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuites name="pytest tests">
+  <testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1">
+    <testcase classname="tests.unit.test_workload_protocol_assurance" name="test_expanded_protocol_specification_ownership" />
+  </testsuite>
+</testsuites>

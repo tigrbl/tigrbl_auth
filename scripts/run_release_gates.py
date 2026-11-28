@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from tigrbl_auth.cli.reports import run_release_gates
+from tba_auth.cli.reports import run_release_gates
 
 
 def main() -> int:

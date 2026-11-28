@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1129"
+number: 1129
+slug: "rp-discovery-and-jwks-consumption-contract"
+title: "RP Discovery And JWKS Consumption Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines OIDC discovery fetch, cache, issuer validation, metadata validation, JWKS fetch/cache, key selection, and refresh behavior."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "RP/resource-server/provider-login maturity wave proposal."
+    at: "2026-05-23T05:44:09Z"
+references: []
+body: |-
+  Defines OIDC discovery fetch, cache, issuer validation, metadata validation, JWKS fetch/cache, key selection, and refresh behavior.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1114"
+  - "adr:1119"

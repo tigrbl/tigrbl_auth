@@ -4,10 +4,10 @@
   "warnings": [],
   "summary": {
     "schema_version": 1,
-    "fingerprint": "d4d3ecdb05cc20224b6cd742945f1a158a5f206aca2e1547773a92980a1fb857",
-    "previous_fingerprint": "d4d3ecdb05cc20224b6cd742945f1a158a5f206aca2e1547773a92980a1fb857",
+    "fingerprint": "d6f3e8e3e920786d1a5ac91cbf1421031060bae59e932998a12f9d461fe782b2",
+    "previous_fingerprint": "d6f3e8e3e920786d1a5ac91cbf1421031060bae59e932998a12f9d461fe782b2",
     "changed_since_last_run": false,
-    "version": "0.3.4",
+    "version": "0.4.0.dev2",
     "watched_dependency_artifact_count": 14
   }
 }

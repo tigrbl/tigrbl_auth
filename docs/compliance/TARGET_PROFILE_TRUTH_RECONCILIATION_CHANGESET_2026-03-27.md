@@ -25,8 +25,8 @@ No new certification evidence was collected in this changeset. The purpose of th
 - `compliance/claims/declared-target-claims.yaml`
 - `compliance/targets/public-operator-surface.yaml`
 - `compliance/claims/repository-state.yaml`
-- `tigrbl_auth/cli/claims.py`
-- `tigrbl_auth/cli/feature_surface.py`
+- `tba_auth/cli/claims.py`
+- `tba_auth/cli/feature_surface.py`
 - `scripts/generate_certification_scope.py`
 - `scripts/generate_release_decision_record.py`
 - `scripts/materialize_tier4_peer_evidence.py`

@@ -1,0 +1,17 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1072"
+number: 1072
+slug: "principal-aggregate-ownership"
+title: "Principals Own Human And Nonhuman Subjects"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Assign durable subject taxonomy ownership to the principals package, including users, admins, owners, applications, services, machines, workloads, and devices."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  Assign durable subject taxonomy ownership to the principals package, including users, admins, owners, applications, services, machines, workloads, and devices.

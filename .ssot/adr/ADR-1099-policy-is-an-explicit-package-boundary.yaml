@@ -1,0 +1,62 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1099"
+number: 1099
+slug: "policy-is-an-explicit-package-boundary"
+title: "Policy is an explicit package boundary"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Create `tigrbl-identity-policy` as the explicit owner of authorization"
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Create a policy package to prevent authorization logic from leaking into protocol and server packages."
+    at: "2026-05-18T08:13:03Z"
+references: []
+body: |-
+  ## Decision
+  
+  Create `tigrbl-identity-policy` as the explicit owner of authorization
+  decision objects and policy evaluation contracts.
+  
+  The package owns:
+  
+  - `Policy`
+  - `PolicyRequest`
+  - `PolicyContext`
+  - `PolicyDecision`
+  - `RbacPolicy`
+  - `AbacPolicy`
+  - `ScopePolicy`
+  - `TenantIsolationPolicy`
+  - `DelegatedAdminPolicy`
+  - `ClientExposurePolicy`
+  - `CredentialUsePolicy`
+  - `AuthorizationTrace`
+  - `PolicyVersion`
+  - `PolicyRegistry`
+  - `AuditPolicy`
+  
+  ## Context
+  
+  The current system includes RBAC, ABAC, delegated administration, tenant
+  isolation, client exposure control, scope checks, service identity
+  authorization, audit, and provenance behavior.
+  
+  If policy is not its own boundary, authorization decisions will leak into
+  OAuth, OIDC, admin, server, and principals code.
+  
+  ## Constraints
+  
+  Policy consumes principal refs, credential facts, scopes, context, and claims.
+  Policy MUST NOT verify passwords, parse OAuth grants, sign tokens, mount
+  routes, or open DB sessions.
+  
+  ## Consequences
+  
+  Authorization remains reusable across admin APIs, OAuth token issuance,
+  resource verification, runtime surfaces, and operator checks.

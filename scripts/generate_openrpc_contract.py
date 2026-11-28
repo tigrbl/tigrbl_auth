@@ -7,8 +7,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from tigrbl_auth.cli.artifacts import deployment_from_options, write_openrpc_contract
-from tigrbl_auth.config.deployment import VALID_PROFILES
+from tba_auth.cli.artifacts import deployment_from_options, write_openrpc_contract
+from tba_auth.config.deployment import VALID_PROFILES
 
 
 def main() -> int:

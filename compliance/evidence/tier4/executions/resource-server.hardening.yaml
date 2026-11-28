@@ -14,12 +14,12 @@ required_targets:
 - RFC 9728
 - RFC 9700
 required_artifacts:
-- tests/conformance/production/test_rfc7662_introspection.py
-- tests/conformance/production/test_rfc9068_jwt_profile.py
-- tests/conformance/hardening/test_rfc8693_token_exchange.py
-- tests/conformance/hardening/test_rfc8707_resource_indicators.py
-- tests/unit/test_rfc9728_metadata_checkpoint.py
-- tests/security/test_sender_constraint_replay.py
+- pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc7662_introspection.py
+- pkgs/120-tests/tba-tests-oauth/tests/conformance/production/test_rfc9068_jwt_profile.py
+- pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8693_token_exchange.py
+- pkgs/120-tests/tba-tests-oauth/tests/conformance/hardening/test_rfc8707_resource_indicators.py
+- pkgs/120-tests/tba-tests-oauth/tests/unit/test_rfc9728_metadata_checkpoint.py
+- pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py
 required_peer_artifacts:
 - http-transcript.yaml
 - resource-response.log

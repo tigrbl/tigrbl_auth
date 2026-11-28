@@ -1,0 +1,3 @@
+from tba_capability_policy_administration import PolicyAdministrationCapability
+
+assert callable(PolicyAdministrationCapability)

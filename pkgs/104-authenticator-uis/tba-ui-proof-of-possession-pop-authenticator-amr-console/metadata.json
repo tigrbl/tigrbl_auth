@@ -1,0 +1,8 @@
+{
+  "name": "Proof of Possession (PoP) AMR Console",
+  "description": "An interactive management, simulation, and validation console for PoP authentication profiles including DPoP, mTLS, and private_key_jwt.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

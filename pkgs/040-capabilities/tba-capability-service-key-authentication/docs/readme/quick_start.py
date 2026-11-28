@@ -1,0 +1,3 @@
+from tba_capability_service_key_authentication import ServiceKeyAuthenticationCapability
+
+assert callable(ServiceKeyAuthenticationCapability)

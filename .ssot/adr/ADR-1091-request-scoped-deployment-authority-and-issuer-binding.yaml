@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "`tigrbl_auth` already governs packaged profiles, external profile references,"
+summary: "`tba_auth` already governs packaged profiles, external profile references,"
 supersedes: []
 superseded_by: []
 status_notes: []
@@ -16,7 +16,7 @@ references: []
 body: |-
   ## Context
   
-  `tigrbl_auth` already governs packaged profiles, external profile references,
+  `tba_auth` already governs packaged profiles, external profile references,
   and resolver precedence. The remaining risk is not profile selection; it is
   live runtime drift when individual request handlers, token issuers, discovery
   publishers, or diagnostics surfaces bypass the active resolved deployment and

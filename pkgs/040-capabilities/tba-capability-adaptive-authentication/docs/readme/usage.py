@@ -1,0 +1,3 @@
+from tba_capability_adaptive_authentication import AdaptiveAuthenticationCapability
+
+assert callable(AdaptiveAuthenticationCapability)

@@ -1,0 +1,37 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1151"
+number: 1151
+slug: "tenant-identity-administration-contract"
+title: "Tenant Identity Administration Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs tenant-scoped identity and tenant administrator management."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Defines tenant-scoped principal and tenant-admin identity operations."
+    at: "2026-05-25T05:08:54Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs tenant-scoped identity and tenant administrator management.
+  
+  ## Requirements
+  
+  Tenant admins MAY list, inspect, invite, create, update, lock, unlock, and credential tenant principals only within their authorized tenant namespace. Tenant admin delegation MUST be scoped to the tenant and MUST NOT imply platform authority.
+  
+  Credential issuance and reset workflows MUST validate tenant ownership, enforce policy, avoid secret disclosure, and record tenant audit events.
+  
+  ## Verification
+  
+  Verification MUST prove allowed tenant identity mutations work, cross-tenant identity mutations fail closed, platform authority is not granted, and audit records are emitted.
+spec_kind: "operational"
+adr_ids:
+  - "adr:1079"
+  - "adr:1110"

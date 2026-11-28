@@ -1,0 +1,59 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1122"
+number: 1122
+slug: "consumer-integration-flow"
+title: "Consumer integration flow"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs the end-to-end consumer integration flow."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define governed end-to-end consumer integration flow."
+    at: "2026-05-18T08:32:02Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs the end-to-end consumer integration flow.
+  
+  ## Flow
+  
+  The governed flow is:
+  
+  1. Platform owner or superuser bootstraps the deployment.
+  2. A tenant is created.
+  3. A tenant admin creates an app.
+  4. The app creates one or more OAuth/OIDC clients.
+  5. The consuming app uses `tigrbl-identity-rp` to initiate login.
+  6. The identity server authenticates the user and issues tokens for the app
+     client.
+  7. The consuming app handles callback, validates ID token, and obtains
+     UserInfo where needed.
+  8. The consuming app calls its protected API.
+  9. The protected API uses `tigrbl-identity-resource-server` to validate access
+     token, tenant, audience, resource, scope, permission, and proof binding.
+  
+  ## Requirements
+  
+  Contracts MUST cover provider metadata, client metadata, RP configuration,
+  resource metadata, and verifier policy.
+  
+  Testkit MUST provide fake IdP, fake OAuth client, fake resource server, token
+  fixtures, and end-to-end harnesses.
+  
+  Provider-side server/runtime packages MUST NOT import RP or resource-server.
+  
+  ## Verification
+  
+  Verification MUST prove app/client setup, login initiation, callback handling,
+  token validation, UserInfo access, protected API validation, and import
+  isolation.
+spec_kind: "operational"
+adr_ids:
+  - "adr:1111"

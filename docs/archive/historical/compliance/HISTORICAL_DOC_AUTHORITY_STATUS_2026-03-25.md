@@ -23,11 +23,11 @@ This note summarizes the Item 10 historical-drift cleanup and documentation-auth
 ## Archived legacy references that previously drove stale-ref noise
 
 - `docs/archive/historical/reference/RFC_FEATURE_FAMILY_IMPLEMENTATION.md`
-- `docs/archive/historical/reference/tigrbl_auth_cli_flag_examples.md`
-- `docs/archive/historical/reference/tigrbl_auth_cli_flags.md`
-- `docs/archive/historical/reference/tigrbl_auth_full_module_tree.md`
-- `docs/archive/historical/reference/tigrbl_auth_project_tree_current_to_target.md`
-- `docs/archive/historical/reference/tigrbl_auth_unified_canonical_reference.md`
+- `docs/archive/historical/reference/tba_cli_flag_examples.md`
+- `docs/archive/historical/reference/tba_cli_flags.md`
+- `docs/archive/historical/reference/tba_full_module_tree.md`
+- `docs/archive/historical/reference/tba_project_tree_current_to_target.md`
+- `docs/archive/historical/reference/tba_unified_canonical_reference.md`
 
 ## Archived historical reference set
 
@@ -36,18 +36,18 @@ This note summarizes the Item 10 historical-drift cleanup and documentation-auth
 - `docs/archive/historical/reference/PERSISTENCE_MODEL.md`
 - `docs/archive/historical/reference/README.md`
 - `docs/archive/historical/reference/RFC_FEATURE_FAMILY_IMPLEMENTATION.md`
-- `docs/archive/historical/reference/tigrbl_auth_authnz_matrices.md`
-- `docs/archive/historical/reference/tigrbl_auth_cli_competitor_and_master_surface.md`
-- `docs/archive/historical/reference/tigrbl_auth_cli_flag_examples.md`
-- `docs/archive/historical/reference/tigrbl_auth_cli_flags.md`
-- `docs/archive/historical/reference/tigrbl_auth_full_module_tree.md`
-- `docs/archive/historical/reference/tigrbl_auth_implementation_plan.md`
-- `docs/archive/historical/reference/tigrbl_auth_project_tree_current_to_target.md`
-- `docs/archive/historical/reference/tigrbl_auth_recommended_serve_flags.md`
-- `docs/archive/historical/reference/tigrbl_auth_serve_flags_expanded.md`
-- `docs/archive/historical/reference/tigrbl_auth_standards_compliance_matrix_v2.md`
-- `docs/archive/historical/reference/tigrbl_auth_unified_canonical_reference.md`
-- `docs/archive/historical/reference/tigrbl_auth_usage_examples.md`
+- `docs/archive/historical/reference/tba_authnz_matrices.md`
+- `docs/archive/historical/reference/tba_cli_competitor_and_master_surface.md`
+- `docs/archive/historical/reference/tba_cli_flag_examples.md`
+- `docs/archive/historical/reference/tba_cli_flags.md`
+- `docs/archive/historical/reference/tba_full_module_tree.md`
+- `docs/archive/historical/reference/tba_implementation_plan.md`
+- `docs/archive/historical/reference/tba_project_tree_current_to_target.md`
+- `docs/archive/historical/reference/tba_recommended_serve_flags.md`
+- `docs/archive/historical/reference/tba_serve_flags_expanded.md`
+- `docs/archive/historical/reference/tba_standards_compliance_matrix_v2.md`
+- `docs/archive/historical/reference/tba_unified_canonical_reference.md`
+- `docs/archive/historical/reference/tba_usage_examples.md`
 
 ## Release-bundle documentation scope
 

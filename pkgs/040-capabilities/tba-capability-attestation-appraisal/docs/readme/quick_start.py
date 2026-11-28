@@ -1,0 +1,3 @@
+from tba_capability_attestation_appraisal import AttestationAppraisalCapability
+
+assert callable(AttestationAppraisalCapability)

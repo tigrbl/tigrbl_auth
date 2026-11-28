@@ -1,0 +1,98 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1116"
+number: 1116
+slug: "tenant-app-client-resource-model"
+title: "Tenant app client resource model"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs the platform object model used by the identity"
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define platform object cardinality for tenant apps, clients, resource servers, users, and credentials."
+    at: "2026-05-18T08:31:56Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs the platform object model used by the identity
+  package suite.
+  
+  ## Object Cardinality
+  
+  The target object model is:
+  
+  ```text
+  Deployment
+    1 -> many Tenants
+  
+  Tenant
+    1 -> many Users / Memberships
+    1 -> many Apps
+    1 -> many Services
+    1 -> many Resource Servers / APIs
+    1 -> many Policies
+    1 -> many Credentials
+  
+  App
+    belongs to 1 Tenant
+    1 -> many OAuth/OIDC Clients
+    0 -> many Services
+    0 -> many Resource Servers / APIs
+  
+  OAuth/OIDC Client
+    belongs to 1 App, or directly to 1 Tenant for compatibility
+    1 -> many redirect URIs
+    0 -> many client credentials
+    acts as a relying party when doing OIDC login
+  
+  Resource Server / API
+    belongs to 1 Tenant, optionally 1 App
+    1 -> many audiences / resources / scopes / permissions
+    validates access tokens issued by the server
+  
+  Service
+    belongs to 1 Tenant, optionally 1 App
+    0 -> many service credentials
+    may use 0 -> many OAuth clients for protocol flows
+  
+  User
+    target: global account 1 -> many TenantMemberships
+  
+  TenantMembership
+    joins User to Tenant
+    carries tenant roles and entitlements
+  
+  Credential
+    belongs to 1 Principal
+  
+  Authority / Role / Entitlement
+    assigned to 1 Principal
+    scoped to deployment, tenant, app, service, client, or resource
+  ```
+  
+  ## Requirements
+  
+  Apps, OAuth clients, and resource servers MUST remain distinct.
+  
+  Direct tenant-owned clients MAY remain for compatibility, but the target model
+  SHOULD attach clients to apps.
+  
+  The model MUST support one human account belonging to multiple tenants through
+  tenant memberships.
+  
+  ## Verification
+  
+  Verification MUST prove object creation, ownership lookup, tenant isolation,
+  compatibility for direct tenant clients, and failure on cross-tenant ownership
+  violations.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1106"
+  - "adr:1107"
+  - "adr:1108"

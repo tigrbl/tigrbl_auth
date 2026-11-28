@@ -16,15 +16,15 @@ The retained probe target set for this target is:
 
 Primary owner areas for this checkpoint:
 
-- `tigrbl_auth/api/surfaces.py`
-- `tigrbl_auth/api/rest/*`
-- `tigrbl_auth/standards/oidc/discovery.py`
-- `tigrbl_auth/standards/oidc/discovery_metadata.py`
-- `tigrbl_auth/standards/oauth2/rfc8414.py`
-- `tigrbl_auth/standards/oauth2/rfc8414_metadata.py`
-- `tigrbl_auth/standards/oauth2/rfc9728.py`
-- `tigrbl_auth/standards/http/well_known.py`
-- `tigrbl_auth/standards/jose/rfc7517.py`
+- `tba_auth/api/surfaces.py`
+- `tba_auth/api/rest/*`
+- `tba_auth/standards/oidc/discovery.py`
+- `tba_auth/standards/oidc/discovery_metadata.py`
+- `tba_auth/standards/oauth2/rfc8414.py`
+- `tba_auth/standards/oauth2/rfc8414_metadata.py`
+- `tba_auth/standards/oauth2/rfc9728.py`
+- `tba_auth/standards/http/well_known.py`
+- `tba_auth/standards/jose/rfc7517.py`
 
 ## What was fixed
 
@@ -48,7 +48,7 @@ Result:
 
 `scripts/clean_room_profile_smoke.py` previously called `resolve_deployment()` without passing the configured settings object, which forced the probe to behave as the default baseline profile even when environment overrides were supplied.
 
-This checkpoint changes the smoke script to resolve deployment from `tigrbl_auth.config.settings.settings`, so profile-specific execution now works as intended.
+This checkpoint changes the smoke script to resolve deployment from `tba_auth.config.settings.settings`, so profile-specific execution now works as intended.
 
 Result:
 
@@ -58,7 +58,7 @@ Result:
 
 ### 3. Public REST shared helpers no longer trigger an import-time circular dependency
 
-`tigrbl_auth/api/rest/shared.py` eagerly constructed `JWTCoder.default()` at import time. During production-profile materialization that import path fed back into RFC 7662 introspection support, which forced `tigrbl_auth.standards.oauth2.introspection` into its dependency-light fallback router.
+`tba_auth/api/rest/shared.py` eagerly constructed `JWTCoder.default()` at import time. During production-profile materialization that import path fed back into RFC 7662 introspection support, which forced `tba_auth.standards.oauth2.introspection` into its dependency-light fallback router.
 
 That fallback router emitted route objects without the public `name` attribute expected by published `tigrbl==0.3.15`, which caused production app materialization to fail before the HTTP probes could run.
 
@@ -81,7 +81,7 @@ Because this container only provides Python `3.13.5`, the probes ran in an **uns
 Command shape:
 
 ```bash
-TIGRBL_AUTH_MATRIX_PROFILE=baseline \
+TBA_AUTH_MATRIX_PROFILE=baseline \
 python scripts/clean_room_profile_smoke.py --probe-surfaces --require-surface-probes
 ```
 
@@ -105,8 +105,8 @@ Artifact preserved at:
 Command shape:
 
 ```bash
-TIGRBL_AUTH_PROFILE=production \
-TIGRBL_AUTH_MATRIX_PROFILE=production \
+TBA_AUTH_PROFILE=production \
+TBA_AUTH_MATRIX_PROFILE=production \
 python scripts/clean_room_profile_smoke.py --probe-surfaces --require-surface-probes
 ```
 
@@ -166,10 +166,10 @@ That criterion is **engineering-complete in this checkpoint for local dependency
 
 ## Files changed by this checkpoint
 
-- `tigrbl_auth/api/app.py`
-- `tigrbl_auth/api/rest/shared.py`
-- `tigrbl_auth/plugin.py`
-- `tigrbl_auth/cli/runtime.py`
+- `tba_auth/api/app.py`
+- `tba_auth/api/rest/shared.py`
+- `tba_auth/plugin.py`
+- `tba_auth/cli/runtime.py`
 - `scripts/clean_room_profile_smoke.py`
 - `tests/unit/test_app_factory_materialization.py`
 - `tests/unit/test_runtime_validation_matrix.py`

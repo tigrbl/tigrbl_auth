@@ -27,24 +27,24 @@ This checkpoint addressed the retained non-RFC standards/specs track:
 
 ### Runtime and OIDC compatibility repairs
 
-- `tigrbl_auth/runtime/base.py`
+- `tba_auth/runtime/base.py`
   - `LazyASGIApplication` now proxies attribute access so runtime consumers and tests can use `app.router`, `app.state`, and similar members safely after lazy materialization.
-- `tigrbl_auth/config/deployment.py`
+- `tba_auth/config/deployment.py`
   - added `deployment_from_app(...)` and `deployment_from_request(...)` so route inclusion and handler metadata follow the materialized deployment instead of silently re-resolving global baseline settings.
-- `tigrbl_auth/standards/oidc/discovery.py`
-- `tigrbl_auth/standards/oauth2/rfc8414.py`
-- `tigrbl_auth/standards/oauth2/rfc9728.py`
-- `tigrbl_auth/standards/oidc/userinfo.py`
+- `tba_auth/standards/oidc/discovery.py`
+- `tba_auth/standards/oauth2/rfc8414.py`
+- `tba_auth/standards/oauth2/rfc9728.py`
+- `tba_auth/standards/oidc/userinfo.py`
   - switched handler/include logic to app/request deployment resolution.
-- `tigrbl_auth/app.py`
+- `tba_auth/app.py`
   - package-level `app` now defaults to **production** when the ambient configured profile is still baseline.
-- `tigrbl_auth/oidc_id_token.py`
+- `tba_auth/oidc_id_token.py`
   - compatibility facade now mirrors mutable provider/cache state expected by legacy fixtures when the canonical runtime implementation is available.
-- `tigrbl_auth/standards/oidc/backchannel_logout.py`
+- `tba_auth/standards/oidc/backchannel_logout.py`
   - checkpoint logout-token minting stays self-contained so validation does not require initialized token-record tables.
-- `tigrbl_auth/oidc_userinfo.py`
+- `tba_auth/oidc_userinfo.py`
   - aligned legacy compatibility surface with the deployment-aware/runtime-patchable UserInfo behavior.
-- `tigrbl_auth/__init__.py`
+- `tba_auth/__init__.py`
   - installs `HTTPStatus.HTTP_<code>_<NAME>` aliases used by the repository’s compatibility surface and tests.
 
 ### Target / contract truth alignment
@@ -55,7 +55,7 @@ This checkpoint addressed the retained non-RFC standards/specs track:
   - `compliance/claims/effective-target-claims.*.yaml`
   - `compliance/evidence/effective-release-evidence.*.yaml`
   - `specs/openapi/profiles/*/openapi.json`
-  - `specs/openrpc/profiles/*/tigrbl_auth.admin.openrpc.json`
+  - `specs/openrpc/profiles/*/tba_auth.admin.openrpc.json`
   - `specs/discovery/profiles/*/*.json`
   - `docs/reference/CLI_SURFACE.md`
   - `docs/compliance/cli_conformance_snapshot.*`

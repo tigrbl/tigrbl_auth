@@ -11,7 +11,7 @@
 
 ## Context
 
-`tigrbl_auth` needs two explicit flag surfaces: environment-backed standards and
+`tba_auth` needs two explicit flag surfaces: environment-backed standards and
 surface flags inside the runtime, and operator-facing CLI flags for serving,
 governance, and control-plane administration. Without a governed registry,
 downstream partial feature adoption becomes ambiguous and non-certifiable.

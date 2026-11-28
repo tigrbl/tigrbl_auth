@@ -21,7 +21,7 @@ body: |-
   ## Overview
   
   This specification defines the governance-plane requirements for key rotation
-  policy in `tigrbl_auth`.
+  policy in `tba_auth`.
   
   ## Decision Source
   

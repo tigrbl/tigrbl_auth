@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1125"
+number: 1125
+slug: "python-server-rp-contract"
+title: "Python Server RP Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines confidential web-app RP behavior for tigrbl-identity-rp, including server callback routes, authenticated code exchange, secure cookies, refresh-token handling, and token stores."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "RP/resource-server/provider-login maturity wave proposal."
+    at: "2026-05-23T05:44:05Z"
+references: []
+body: |-
+  Defines confidential web-app RP behavior for tigrbl-identity-rp, including server callback routes, authenticated code exchange, secure cookies, refresh-token handling, and token stores.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1113"
+  - "adr:1116"

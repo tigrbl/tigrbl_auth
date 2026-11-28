@@ -1,0 +1,49 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1121"
+number: 1121
+slug: "canonical-identity-storage-and-compat-facades"
+title: "Canonical identity storage and compatibility facades"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "`tba-storage-core` is the canonical owner for identity persistence symbols: table classes, table-owned domain operations, ORM imports, migrations, engine/session helpers, and persistence lifecycle helpers."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-05-27T16:57:57Z"
+    note: "Accepted storage canonicalization contract with permanent tba_auth compatibility facades."
+    status: "accepted"
+  -
+    at: "2026-06-01T09:52:44Z"
+    note: "Realm is now part of canonical identity storage ownership: tba_storage_core owns the Realm table and tba_auth facades preserve compatibility."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Storage table modules own durable table-specific operations; protocol, server, route, runtime, operator, and facade modules are adapters for persisted table behavior."
+    at: "2026-06-18T16:03:51Z"
+references: []
+body: |-
+  ## Decision
+  
+  `tba-storage-core` is the canonical owner for identity persistence symbols: table classes, table-owned domain operations, ORM imports, migrations, engine/session helpers, and persistence lifecycle helpers.
+  
+  All storage-table-specific behavior that mutates, reads, or derives durable table state MUST be implemented directly on, or explicitly exported from, the owning `tba_storage_core.tables.<table>` module. Protocol, server, REST router, runtime, operator, and facade modules may adapt transport or standards inputs, but they MUST delegate persisted table behavior to the storage table owner.
+  
+  `tba_auth.tables`, `tba_auth.db`, and selected `tba_auth.services.*` compatibility surfaces may remain as facades where intentionally retained. They re-export or delegate to canonical storage symbols and MUST preserve object identity for table symbols. Legacy ORM facade ownership is not required.
+  
+  Frontdoor API packages compose product routes and product filters only. They MUST NOT define, fork, shadow, or canonically own identity table classes or storage-table domain operations.
+  
+  ## Context
+  
+  The identity package split introduced a dedicated storage package while legacy callers still imported table and persistence symbols through `tba_auth`. The compatibility surface is product ergonomics, not canonical ownership.
+  
+  Recent cleanup removed the duplicate root-level `tba_auth` package and narrowed the facade package under `pkgs/tba-auth`. During that cleanup, several durable operations were identified in protocol, server, REST, and persistence-helper modules even though their primary behavior belongs to storage tables such as `AuthSession`, `Consent`, `TokenRecord`, `RevokedToken`, `DeviceCode`, `PushedAuthorizationRequest`, `Client`, and `ClientRegistration`.
+  
+  ## Consequences
+  
+  Storage owns migrations, runtime table resources, canonical table symbols, and table-owned domain operations. Compatibility facades remain only where explicitly retained. Product frontdoors and protocol packages consume table-owned operations and continue to fail closed by product-surface configuration.
+  
+  Implementation work MUST migrate durable behavior from protocol/server/router helper modules into table-owned operation surfaces, leaving those modules as adapters.

@@ -1,0 +1,3 @@
+from tba_bases_identity_document import IdentityDocumentResolverBase
+
+assert callable(IdentityDocumentResolverBase)

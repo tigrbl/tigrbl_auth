@@ -1,7 +1,7 @@
 sha256:
   contracts\cli_contract.json: 9bb0c32aafa83f9f84591519f128deb95d1b8a04d324fd2bc5b5ad93b2ef0f4f
   contracts\CLI_SURFACE.md: fd5fce73dcf7b1570a3655c43d1e5cb2d845c7afeaba2eb4ccc487ccb511ff01
-  contracts\tigrbl_auth.admin.openrpc.json: f1148f03f77f9df2538ccdecfc6879011ae5b1f5e9377458e28c1369b4e3c0cf
+  contracts\tba_auth.admin.openrpc.json: f1148f03f77f9df2538ccdecfc6879011ae5b1f5e9377458e28c1369b4e3c0cf
   environment.yaml: 316255ea74ecebd71f6196419f0f9d0e2083ab8fbfc20b52186fcc93f427f6b0
   execution.log: 5d14d8bc53c8d345a8c0c4f90dee2efbaa5bf9c95c65cc6b368ddedcee4f5fce
   manifest.yaml: 217d2034123ab11aac3aa8374740e7428f00e42d819ede6733506481b27d3e95

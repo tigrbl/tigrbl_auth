@@ -1,0 +1,201 @@
+import { useCallback, useEffect, useState } from "react";
+import { platformAdminClient } from "../services/platformAdminClient";
+import type { AdminSession, CreateIdentityInput, CreateRealmInput, CreateTenantInput, Identity, Realm, Tenant, UpdateIdentityInput, UpdateRealmInput, UpdateTenantInput } from "../types";
+
+export function usePlatformAdmin() {
+  const [session, setSession] = useState<AdminSession | null>(null);
+  const [realms, setRealms] = useState<Realm[]>([]);
+  const [tenants, setTenants] = useState<Tenant[]>([]);
+  const [identities, setIdentities] = useState<Identity[]>([]);
+  const [selectedTenantId, setSelectedTenantId] = useState("");
+  const [selectedRealmId, setSelectedRealmId] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const loadTenants = useCallback(async () => {
+    const rows = await platformAdminClient.tenants();
+    setTenants(rows);
+    setSelectedTenantId((current) => current || rows[0]?.id || "");
+    return rows;
+  }, []);
+
+  const loadRealms = useCallback(async () => {
+    const rows = await platformAdminClient.realms();
+    setRealms(rows);
+    setSelectedRealmId((current) => current || rows[0]?.id || "");
+    return rows;
+  }, []);
+
+  const loadSession = useCallback(async () => {
+    try {
+      const nextSession = await platformAdminClient.session();
+      setSession(nextSession);
+      return nextSession;
+    } catch {
+      setSession(null);
+      return null;
+    }
+  }, []);
+
+  const refresh = useCallback(async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const nextSession = await loadSession();
+      if (nextSession?.authenticated) {
+        await loadRealms();
+        await loadTenants();
+      }
+    } catch (nextError) {
+      setError(nextError instanceof Error ? nextError.message : "Unable to load platform console.");
+    } finally {
+      setLoading(false);
+    }
+  }, [loadRealms, loadSession, loadTenants]);
+
+  useEffect(() => {
+    void refresh();
+  }, [refresh]);
+
+  useEffect(() => {
+    if (!selectedTenantId || !session?.authenticated) {
+      setIdentities([]);
+      return;
+    }
+    let cancelled = false;
+    platformAdminClient
+      .identities(selectedTenantId)
+      .then((rows) => {
+        if (!cancelled) {
+          setIdentities(rows);
+        }
+      })
+      .catch((nextError) => {
+        if (!cancelled) {
+          const message = nextError instanceof Error ? nextError.message : "";
+          if (message === "No runtime operation matched request.") {
+            setIdentities([]);
+            return;
+          }
+          setError(message || "Unable to load identities.");
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedTenantId, session?.authenticated]);
+
+  async function login(identifier: string, password: string) {
+    setError("");
+    const nextSession = await platformAdminClient.login(identifier, password);
+    setSession(nextSession);
+    await loadRealms();
+    await loadTenants();
+  }
+
+  async function logout() {
+    await platformAdminClient.logout();
+    setSession(null);
+    setRealms([]);
+    setTenants([]);
+    setIdentities([]);
+  }
+
+  async function createTenant(payload: CreateTenantInput) {
+    const tenant = await platformAdminClient.createTenant({
+      ...payload,
+      realm_id: payload.realm_id || selectedRealmId || undefined
+    });
+    await loadTenants();
+    setSelectedTenantId(tenant.id);
+  }
+
+  async function createRealm(payload: CreateRealmInput) {
+    const realm = await platformAdminClient.createRealm(payload);
+    await loadRealms();
+    setSelectedRealmId(realm.id);
+  }
+
+  async function updateRealm(realmId: string, payload: UpdateRealmInput) {
+    await platformAdminClient.updateRealm(realmId, payload);
+    await loadRealms();
+  }
+
+  async function deleteRealm(realmId: string) {
+    await platformAdminClient.deleteRealm(realmId);
+    const rows = await loadRealms();
+    if (selectedRealmId === realmId) {
+      setSelectedRealmId(rows[0]?.id || "");
+    }
+  }
+
+  async function updateTenant(tenantId: string, payload: UpdateTenantInput) {
+    await platformAdminClient.updateTenant(tenantId, payload);
+    await loadTenants();
+  }
+
+  async function enableTenant(tenantId: string) {
+    await platformAdminClient.enableTenant(tenantId);
+    await loadTenants();
+  }
+
+  async function disableTenant(tenantId: string) {
+    await platformAdminClient.disableTenant(tenantId);
+    await loadTenants();
+  }
+
+  async function deleteTenant(tenantId: string) {
+    await platformAdminClient.deleteTenant(tenantId);
+    const rows = await loadTenants();
+    if (selectedTenantId === tenantId) {
+      setSelectedTenantId(rows[0]?.id || "");
+    }
+  }
+
+  async function createIdentity(payload: CreateIdentityInput) {
+    await platformAdminClient.createIdentity(payload);
+    setIdentities(await platformAdminClient.identities(payload.tenant_id));
+  }
+
+  async function updateIdentity(identityId: string, payload: UpdateIdentityInput) {
+    const identity = await platformAdminClient.updateIdentity(identityId, payload);
+    const tenantId = identity.tenant_id || selectedTenantId;
+    if (tenantId) {
+      setIdentities(await platformAdminClient.identities(tenantId));
+    }
+  }
+
+  async function deleteIdentity(identityId: string) {
+    await platformAdminClient.deleteIdentity(identityId);
+    if (selectedTenantId) {
+      setIdentities(await platformAdminClient.identities(selectedTenantId));
+    }
+  }
+
+  return {
+    createIdentity,
+    createRealm,
+    createTenant,
+    deleteIdentity,
+    deleteRealm,
+    deleteTenant,
+    disableTenant,
+    enableTenant,
+    error,
+    identities,
+    loading,
+    login,
+    logout,
+    refresh,
+    realms,
+    selectedRealmId,
+    selectedTenantId,
+    session,
+    setSelectedRealmId,
+    setSelectedTenantId,
+    tenants,
+    updateIdentity,
+    updateRealm,
+    updateTenant
+  };
+}

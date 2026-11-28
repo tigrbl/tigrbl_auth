@@ -28,6 +28,7 @@ enable_oidc_discovery:
 - profile:hardening
 - profile:peer-claim
 - profile:production
+- route:realms-realm-slug-well-known-openid-configuration
 - route:tenants-tenant-slug-well-known-openid-configuration
 - route:well-known-openid-configuration
 - target:oidc-discovery-1-0
@@ -116,6 +117,7 @@ enable_rfc7517:
 - profile:hardening
 - profile:peer-claim
 - profile:production
+- route:realms-realm-slug-well-known-jwks-json
 - route:tenants-tenant-slug-well-known-jwks-json
 - route:well-known-jwks-json
 - target:rfc-7517
@@ -183,9 +185,6 @@ enable_rfc7662:
 - target:rfc-7662
 enable_rfc7800:
 - flag:enable_rfc7800
-enable_rfc7952:
-- extension:set
-- flag:enable_rfc7952
 enable_rfc8252:
 - flag:enable_rfc8252
 - profile:fapi2-security
@@ -205,6 +204,9 @@ enable_rfc8414:
 - profile:production
 - route:well-known-oauth-authorization-server
 - target:rfc-8414
+enable_rfc8417:
+- extension:set
+- flag:enable_rfc8417
 enable_rfc8523:
 - flag:enable_rfc8523
 enable_rfc8615:
@@ -214,6 +216,8 @@ enable_rfc8615:
 - profile:hardening
 - profile:peer-claim
 - profile:production
+- route:realms-realm-slug-well-known-jwks-json
+- route:realms-realm-slug-well-known-openid-configuration
 - route:tenants-tenant-slug-well-known-jwks-json
 - route:tenants-tenant-slug-well-known-openid-configuration
 - route:well-known-jwks-json
@@ -253,6 +257,12 @@ enable_rfc8707:
 enable_rfc8812:
 - extension:webauthn-passkeys
 - flag:enable_rfc8812
+enable_webauthn:
+- extension:webauthn-passkeys
+enable_fido2_server_profile:
+- extension:webauthn-passkeys
+enable_fido_metadata_service:
+- extension:webauthn-passkeys
 enable_rfc8932:
 - extension:dns-privacy
 - flag:enable_rfc8932
@@ -345,7 +355,6 @@ strict_boundary_enforcement:
 - flag:strict_boundary_enforcement
 surface_admin_enabled:
 - flag:surface_admin_enabled
-- target:openrpc-1-4-x-admin-control-plane-contract
 surface_diagnostics_enabled:
 - flag:surface_diagnostics_enabled
 surface_operator_enabled:
@@ -392,6 +401,3 @@ surface_public_enabled:
 - target:rfc-9449
 - target:rfc-9700
 - target:rfc-9728
-surface_rpc_enabled:
-- flag:surface_rpc_enabled
-- target:openrpc-1-4-x-admin-control-plane-contract

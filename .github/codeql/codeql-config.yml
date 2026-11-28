@@ -1,6 +1,6 @@
-name: tigrbl_auth-codeql
+name: tba_auth-codeql
 paths:
-  - tigrbl_auth
+  - pkgs
   - scripts
 paths-ignore:
   - docs

@@ -1,0 +1,56 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1111"
+number: 1111
+slug: "consumer-integration-flow-is-a-governed-platform-contract"
+title: "Consumer integration flow is a governed platform contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The identity suite SHALL govern the consumer integration flow as a platform"
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define the consumer integration flow as a governed platform contract."
+    at: "2026-05-18T08:26:43Z"
+references: []
+body: |-
+  ## Decision
+  
+  The identity suite SHALL govern the consumer integration flow as a platform
+  contract.
+  
+  The desired product flow is:
+  
+  1. Platform owner or superuser bootstraps the deployment.
+  2. Deployment creates one or more tenants.
+  3. Tenant admins create apps.
+  4. Each app creates one or more OAuth/OIDC clients.
+  5. End users log into tenant apps using the identity server as OAuth/OIDC
+     provider.
+  6. The app uses `tigrbl-identity-rp` to initiate login and handle callback
+     and token validation.
+  7. The app's APIs use `tigrbl-identity-resource-server` to validate access
+     tokens and enforce authorization.
+  
+  ## Context
+  
+  The current provider-side package split is not enough to describe how
+  consuming apps and APIs integrate with the identity suite.
+  
+  The package-boundary proposal explicitly includes RP and resource-server
+  packages to support downstream app developers.
+  
+  ## Consequences
+  
+  Contracts must cover provider metadata, client registration, RP login
+  integration, token validation, protected resource metadata, and
+  resource-server policy enforcement.
+  
+  Testkit must include fake IdPs, fake OAuth clients, fake resource servers, and
+  end-to-end integration harnesses.
+  
+  Server/runtime packages remain provider-side and do not import consumer SDKs.

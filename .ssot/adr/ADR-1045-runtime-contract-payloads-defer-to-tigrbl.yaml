@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "tigrbl_auth runtime wrappers MUST defer live OpenAPI and OpenRPC payload generation to tigrbl rather than mutating those payloads downstream."
+summary: "tba_auth runtime wrappers MUST defer live OpenAPI and OpenRPC payload generation to tigrbl rather than mutating those payloads downstream."
 supersedes: []
 superseded_by: []
 status_notes: []
@@ -16,21 +16,21 @@ references: []
 body: |-
   ## Decision
 
-  `tigrbl_auth` MUST treat `tigrbl` as the authoritative runtime source for live `/openapi.json` and `/openrpc.json` payloads.
+  `tba_auth` MUST treat `tigrbl` as the authoritative runtime source for live `/openapi.json` and `/openrpc.json` payloads.
 
   Specifically:
 
-  - `tigrbl_auth/security/admin_gate.py` SHALL NOT mutate live OpenAPI payloads,
-  - `tigrbl_auth/security/admin_gate.py` SHALL NOT mutate live OpenRPC payloads,
+  - `tba_auth/security/admin_gate.py` SHALL NOT mutate live OpenAPI payloads,
+  - `tba_auth/security/admin_gate.py` SHALL NOT mutate live OpenRPC payloads,
   - route filtering, schema dialect behavior, and contract-surface metadata in those runtime payloads MUST be deferred upstream to `tigrbl`,
-  - `tigrbl_auth` MAY still govern committed contract artifacts and builder outputs through its own contract-generation surfaces,
-  - runtime wrappers in `tigrbl_auth` MUST preserve upstream contract payloads byte-for-byte at the JSON-object level.
+  - `tba_auth` MAY still govern committed contract artifacts and builder outputs through its own contract-generation surfaces,
+  - runtime wrappers in `tba_auth` MUST preserve upstream contract payloads byte-for-byte at the JSON-object level.
 
   ## Rationale
 
-  Runtime contract mutation inside `tigrbl_auth` creates a split authority:
+  Runtime contract mutation inside `tba_auth` creates a split authority:
 
-  - committed and builder-generated artifacts come from `tigrbl_auth`,
+  - committed and builder-generated artifacts come from `tba_auth`,
   - live runtime payloads are modified again at response time,
   - consumers then observe behavior that is not owned by the upstream runtime contract generator.
 
@@ -47,7 +47,7 @@ body: |-
 
   ## Non-Deferred Responsibilities
 
-  This decision does not remove `tigrbl_auth` responsibility for:
+  This decision does not remove `tba_auth` responsibility for:
 
   - admin access control for protected business endpoints,
   - builder-generated contract artifacts committed under `specs/`,

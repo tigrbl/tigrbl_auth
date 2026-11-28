@@ -1,0 +1,145 @@
+version: 1
+layer: 020-providers
+rules:
+  ownership: one-replaceable-environment-implementation-per-package
+  implements: layer-02-port-or-layer-05-base
+  allowed_dependencies:
+  - 000-primitives
+  - 002-contracts
+  - 003-codecs
+  - 005-bases
+  - 010-concrete
+  - approved-20-provider-collaborators
+  forbidden_dependencies:
+  - 001-storage
+  - 030-storage-runtime
+  - 040-capabilities
+  - 050-protocols
+  - 060-runtime
+  - 070-facade
+  - 080-routers
+  deterministic_behavior: 010-concrete
+  durability: 01-storage-and-030-storage-runtime
+  orchestration: 040-capabilities
+  protocol_versions: 050-protocols
+  runtime_mounting: 060-runtime
+  http_surfaces: 080-routers
+canonical_providers:
+  authenticators:
+  - tba-provider-authenticator-api-key-local
+  - tba-provider-authenticator-client-secret-local
+  - tba-provider-authenticator-dpop-proof
+  - tba-provider-authenticator-federated-oidc
+  - tba-provider-authenticator-mtls-client-cert
+  - tba-provider-authenticator-otp-local
+  - tba-provider-authenticator-password-local
+  - tba-provider-authenticator-recovery-code-local
+  - tba-provider-authenticator-remote-introspection
+  - tba-provider-authenticator-service-key-local
+  - tba-provider-authenticator-session-local
+  - tba-provider-authenticator-totp-local
+  attestation:
+  - tba-provider-attestation-appraiser
+  - tba-provider-attestation-packed
+  - tba-provider-attestation-reference
+  - tba-provider-attestation-tpm
+  - tba-provider-attestation-u2f
+  - tba-provider-corim-reference-memory
+  - tba-provider-eat-verifier
+  - tba-provider-fido-metadata-service
+  - tba-provider-key-attestation-verifier
+  - tba-provider-platform-attestation
+  - tba-provider-wallet-attestation-verifier
+  credentials_and_claims:
+  - tba-provider-digital-credential-status
+  - tba-provider-digital-credential-trust
+  - tba-provider-claims-local
+  cryptography_and_trust:
+  - tba-provider-certificate-path-validator
+  - tba-provider-certificate-status
+  - tba-provider-secret-hashing-bcrypt
+  - tba-provider-cose-cryptography
+  - tba-provider-jose-cryptography
+  - tba-provider-jose-swarmauri
+  - tba-provider-security-signing-pqc
+  - tba-provider-trust-anchor
+  policy:
+  - tba-provider-authorization-policy-decision-engine
+  remote_and_resolution:
+  - tba-provider-did-resolver
+  - tba-provider-dns-resolver
+  - tba-provider-dns-txt
+  - tba-provider-security-oidc-federation
+  - tba-provider-token-introspection
+  - tba-provider-security-token-jwks-cache
+  - tba-provider-security-webfinger
+  - tba-provider-spiffe-bundle
+  - tba-provider-spiffe-workload-api
+  explicitly_ephemeral:
+  - tba-provider-access-governance-memory
+  - tba-provider-replay-memory
+  protocol_artifact_composition:
+  - tba-provider-mdoc-issuer
+  - tba-provider-mdoc-verifier
+  - tba-provider-set-receiver
+  - tba-provider-set-transmitter
+compatibility_or_migration_packages:
+  tigrbl-authn-credentials:
+    target: tba-credentials
+    target_layer: 070-facade
+  tba-provider-authorization-resource-server-verifier:
+    target: tba-capability-protected-resource-authorization
+    target_layer: 040-capabilities
+  tba-provider-did-controller:
+    target: did-controller-capability
+    target_layer: 040-capabilities
+  tba-provider-authentication-anomaly-detector:
+    target: anomaly-rules-tables-ops-and-capability
+    target_layer: 10-01-30-40
+  tba-provider-identity-administration-relationship-graph:
+    target: relationship-graph-tables-ops-and-capability
+    target_layer: 10-01-30-40
+  tba-provider-identity-jose:
+    target: tba-concrete-jose-plus-tba-provider-jose-swarmauri-plus-tba-capability-key-administration-plus-tba-protocol-security-jose
+    target_layer: 10-20-50
+  tba-provider-security-cose:
+    target: tba-concrete-cose-plus-tba-provider-cose-cryptography
+    target_layer: 10-20
+  tba-provider-authentication-context-acr-basic:
+    target: tba-concrete-acr-evaluator-basic
+    target_layer: 010-concrete
+  tba-provider-authentication-context-amr-basic:
+    target: tba-concrete-amr-evaluator-basic
+    target_layer: 010-concrete
+  tba-provider-security-authorization-provenance-builder:
+    target: tba-concrete-authorization-provenance
+    target_layer: 010-concrete
+  tba-provider-security-certificate-mtls:
+    target: tba-concrete-mtls-confirmation-binding
+    target_layer: 010-concrete
+  tba-provider-security-dpop-cnf-binding-validator:
+    target: tba-concrete-dpop-confirmation-binding
+    target_layer: 010-concrete
+  tba-provider-security-mtls-cnf-binding-validator:
+    target: tba-concrete-mtls-confirmation-binding
+    target_layer: 010-concrete
+  tba-provider-security-proof-dpop:
+    target: tba-concrete-dpop-confirmation-binding
+    target_layer: 010-concrete
+  tba-provider-security-proof-pkce:
+    target: tba-concrete-pkce
+    target_layer: 010-concrete
+  tba-provider-security-subject-pairwise:
+    target: tba-concrete-pairwise-subject-identifier
+    target_layer: 010-concrete
+canonical_deterministic_extractions:
+- tba-concrete-dns-zone
+- tba-concrete-acr-evaluator-basic
+- tba-concrete-amr-evaluator-basic
+- tba-concrete-authorization-provenance
+- tba-concrete-cose
+- tba-concrete-dpop-confirmation-binding
+- tba-concrete-mtls-confirmation-binding
+- tba-concrete-pairwise-subject-identifier
+- tba-concrete-pkce
+- tba-concrete-policy-decision-engine-default

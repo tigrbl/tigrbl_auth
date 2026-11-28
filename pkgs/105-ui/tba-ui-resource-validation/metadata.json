@@ -1,0 +1,6 @@
+{
+  "name": "Resource Validation UIX",
+  "description": "Developer and operator workbench for understanding and testing protected-API token validation without exposing sensitive key material.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

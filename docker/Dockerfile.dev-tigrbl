@@ -1,0 +1,29 @@
+# syntax=docker/dockerfile:1.4
+
+FROM python:3.12-slim
+
+RUN apt-get update && \
+    apt-get install --yes --no-install-recommends build-essential curl gcc pkg-config && \
+    pip install --no-cache-dir uv && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+COPY . .
+
+RUN uv sync --frozen --extra tigrcorn --no-dev
+
+EXPOSE 8000
+
+ENV \
+    TBA_AUTH_INSTALL_PROFILE="tigrcorn" \
+    PG_HOST="" \
+    PG_PORT="5432" \
+    PG_DB="" \
+    PG_USER="" \
+    PG_PASS="" \
+    REDIS_HOST="" \
+    REDIS_PASSWORD="" \
+    UV_PROJECT_ENVIRONMENT="/app/.venv"
+
+CMD ["/app/.venv/bin/tba-auth", "serve", "--server", "tigrcorn", "--profile", "production", "--host", "0.0.0.0", "--port", "8000", "--proxy-headers", "--no-require-tls"]

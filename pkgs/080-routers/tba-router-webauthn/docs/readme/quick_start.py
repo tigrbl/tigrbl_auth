@@ -1,0 +1,3 @@
+from tba_router_webauthn import build_webauthn_router
+
+assert callable(build_webauthn_router)

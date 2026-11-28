@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuites name="pytest tests">
+  <testsuite name="pytest" errors="0" failures="0" skipped="0" tests="20">
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_certificate_and_wic_profile" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_native_identifier_contract[wimse://user@example.org/w]" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_native_identifier_contract[wimse://example.org:1/w]" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_native_identifier_contract[wimse://example.org/w?]" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_native_identifier_contract[spiffe://example.org/w]" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_native_identifier_contract[wimse://example.org/w/../other]" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_native_identifier_contract[wimse://example.org/w/%2e%2E/other]" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_spiffe_signed_certificate_and_jwt" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_wimse_signed_wit_and_http_proof" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_spiffe_signed_wit_svid_and_proof" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_peer_identity_from_real_mutual_tls[wimse://example.org/workload]" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_peer_identity_from_real_mutual_tls[spiffe://example.org/workload]" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_shared_svid_identity_and_x509_carrier" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_wit_issuer_rotation_and_validity" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_wic_peer_configuration_and_wrong_anchor" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_shared_wimse_identifier_in_signed_token_and_certificate" />
+    <testcase classname="tests.unit.test_native_workload_credentials" name="test_spiffe_jwt_key_rotation" />
+    <testcase classname="tests.unit.test_workload_identity_runtime_composition" name="test_experimental_and_incubating_profiles_default_off" />
+    <testcase classname="tests.unit.test_workload_identity_runtime_composition" name="test_wit_svid_requires_wit_wpt_and_exact_revisions" />
+    <testcase classname="tests.unit.test_workload_identity_runtime_composition" name="test_broker_fails_closed_without_endpoint_and_authorization" />
+  </testsuite>
+</testsuites>

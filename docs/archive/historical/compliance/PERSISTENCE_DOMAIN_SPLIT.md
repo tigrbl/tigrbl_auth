@@ -21,20 +21,20 @@ artifacts for the in-scope authorization lifecycle.
 The repository now includes durable persistence models for the previously
 missing or incomplete lifecycle domains:
 
-- token status and introspection backing via `tigrbl_auth/tables/token_record.py`
-- revocation registry via `tigrbl_auth/tables/revoked_token.py`
-- consent state via `tigrbl_auth/tables/consent.py`
-- audit events via `tigrbl_auth/tables/audit_event.py`
-- browser/server session lifecycle via `tigrbl_auth/tables/auth_session.py`
-- logout propagation state via `tigrbl_auth/tables/logout_state.py`
-- client registration metadata via `tigrbl_auth/tables/client_registration.py`
-- device authorization lifecycle timestamps via `tigrbl_auth/tables/device_code.py`
+- token status and introspection backing via `tba_auth/tables/token_record.py`
+- revocation registry via `tba_auth/tables/revoked_token.py`
+- consent state via `tba_auth/tables/consent.py`
+- audit events via `tba_auth/tables/audit_event.py`
+- browser/server session lifecycle via `tba_auth/tables/auth_session.py`
+- logout propagation state via `tba_auth/tables/logout_state.py`
+- client registration metadata via `tba_auth/tables/client_registration.py`
+- device authorization lifecycle timestamps via `tba_auth/tables/device_code.py`
 - pushed authorization request lifecycle timestamps via
-  `tigrbl_auth/tables/pushed_authorization_request.py`
+  `tba_auth/tables/pushed_authorization_request.py`
 
 The checkpoint also adds a repository-owned persistence service:
 
-- `tigrbl_auth/services/persistence.py`
+- `tba_auth/services/persistence.py`
 
 That service now owns the durable helpers for:
 
@@ -51,32 +51,32 @@ That service now owns the durable helpers for:
 The following runtime surfaces no longer depend on process-memory-only token
 state for the authoritative implementation path:
 
-- `tigrbl_auth/standards/oauth2/introspection.py`
-- `tigrbl_auth/standards/oauth2/revocation.py`
-- `tigrbl_auth/rfc/rfc7662.py`
-- `tigrbl_auth/rfc/rfc7009.py`
+- `tba_auth/standards/oauth2/introspection.py`
+- `tba_auth/standards/oauth2/revocation.py`
+- `tba_auth/rfc/rfc7662.py`
+- `tba_auth/rfc/rfc7009.py`
 
 Session/logout owner modules now have durable helper behavior rather than being
 pure owner placeholders:
 
-- `tigrbl_auth/standards/oidc/session_mgmt.py`
-- `tigrbl_auth/standards/oidc/rp_initiated_logout.py`
-- `tigrbl_auth/standards/oidc/frontchannel_logout.py`
-- `tigrbl_auth/standards/oidc/backchannel_logout.py`
+- `tba_auth/standards/oidc/session_mgmt.py`
+- `tba_auth/standards/oidc/rp_initiated_logout.py`
+- `tba_auth/standards/oidc/frontchannel_logout.py`
+- `tba_auth/standards/oidc/backchannel_logout.py`
 
 Lifecycle startup now applies repository-owned migrations before surface
 initialization:
 
-- `tigrbl_auth/api/lifecycle.py`
+- `tba_auth/api/lifecycle.py`
 
 ## Migration model changes
 
 The old structured-ledger placeholder migration chain has been replaced by
 executable migration modules backed by actual SQLAlchemy table metadata:
 
-- `tigrbl_auth/migrations/helpers.py`
-- `tigrbl_auth/migrations/runtime.py`
-- `tigrbl_auth/migrations/versions/0001_*.py` through `0006_*.py`
+- `tba_auth/migrations/helpers.py`
+- `tba_auth/migrations/runtime.py`
+- `tba_auth/migrations/versions/0001_*.py` through `0006_*.py`
 - `scripts/verify_persistence_migrations.py`
 
 Each migration version now creates or drops real tables, and the migration
@@ -121,7 +121,7 @@ package, open database providers, or run the release-gate pipeline end to end.
 What **was** verified here:
 
 - static repository edits completed successfully
-- Python syntax compilation of `tigrbl_auth/**/*.py` and `scripts/**/*.py`
+- Python syntax compilation of `tba_auth/**/*.py` and `scripts/**/*.py`
   completed without errors
 
 What remains to be verified by downstream execution:

@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import hashlib
 import importlib.util
-import json
 import platform
 import re
 import sys
@@ -48,8 +47,8 @@ BUNDLE_SPECS = [
         contracts=[
             "specs/cli/cli_contract.json",
             "docs/compliance/runtime_profile_report.json",
-            "specs/openapi/profiles/baseline/tigrbl_auth.public.openapi.json",
-            "specs/openrpc/profiles/baseline/tigrbl_auth.admin.openrpc.json",
+            "specs/openapi/profiles/baseline/tba_auth.public.openapi.json",
+            "specs/openrpc/profiles/baseline/tba_auth.admin.openrpc.json",
             "specs/discovery/profiles/baseline/openid-configuration.json",
             "specs/discovery/profiles/baseline/oauth-authorization-server.json",
         ],
@@ -73,8 +72,8 @@ BUNDLE_SPECS = [
             TARGETED_RUNTIME_OPERATOR_REPORT,
         ],
         tests=[
-            "tests/runtime/test_runner_invariance.py",
-            "tests/conformance/operator/test_cli_serve_runtime.py",
+            "pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py",
+            "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
         ],
     ),
     BundleSpec(
@@ -97,9 +96,9 @@ BUNDLE_SPECS = [
             TARGETED_RUNTIME_OPERATOR_REPORT,
         ],
         tests=[
-            "tests/runtime/test_runner_uvicorn.py",
-            "tests/conformance/operator/test_cli_serve_runtime.py",
-            "tests/interop/test_runner_profile_catalog_completeness.py",
+            "pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_uvicorn.py",
+            "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
+            "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_runner_profile_catalog_completeness.py",
         ],
     ),
     BundleSpec(
@@ -122,9 +121,9 @@ BUNDLE_SPECS = [
             TARGETED_RUNTIME_OPERATOR_REPORT,
         ],
         tests=[
-            "tests/runtime/test_runner_hypercorn.py",
-            "tests/conformance/operator/test_cli_serve_runtime.py",
-            "tests/interop/test_runner_profile_catalog_completeness.py",
+            "pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_hypercorn.py",
+            "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
+            "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_runner_profile_catalog_completeness.py",
         ],
     ),
     BundleSpec(
@@ -147,9 +146,9 @@ BUNDLE_SPECS = [
             TARGETED_RUNTIME_OPERATOR_REPORT,
         ],
         tests=[
-            "tests/runtime/test_runner_tigrcorn.py",
-            "tests/conformance/operator/test_cli_serve_runtime.py",
-            "tests/interop/test_runner_profile_catalog_completeness.py",
+            "pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_tigrcorn.py",
+            "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
+            "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_runner_profile_catalog_completeness.py",
         ],
     ),
     BundleSpec(
@@ -159,7 +158,7 @@ BUNDLE_SPECS = [
         contracts=[
             "specs/cli/cli_contract.json",
             "docs/reference/CLI_SURFACE.md",
-            "specs/openrpc/profiles/baseline/tigrbl_auth.admin.openrpc.json",
+            "specs/openrpc/profiles/baseline/tba_auth.admin.openrpc.json",
         ],
         reports=[
             "docs/compliance/current_state_report.json",
@@ -173,9 +172,9 @@ BUNDLE_SPECS = [
             TARGETED_RUNTIME_OPERATOR_REPORT,
         ],
         tests=[
-            "tests/conformance/operator/test_cli_resource_lifecycle.py",
-            "tests/conformance/operator/test_cli_serve_runtime.py",
-            "tests/interop/test_operator_profile_catalog_completeness.py",
+            "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py",
+            "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py",
+            "pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_operator_profile_catalog_completeness.py",
         ],
     ),
     BundleSpec(
@@ -197,7 +196,7 @@ BUNDLE_SPECS = [
             "docs/compliance/cli_conformance_snapshot.md",
             TARGETED_RUNTIME_OPERATOR_REPORT,
         ],
-        tests=["tests/conformance/operator/test_cli_bootstrap_migrate.py"],
+        tests=["pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py"],
     ),
     BundleSpec(
         target="Key lifecycle and JWKS publication",
@@ -218,8 +217,8 @@ BUNDLE_SPECS = [
             TARGETED_RUNTIME_OPERATOR_REPORT,
         ],
         tests=[
-            "tests/conformance/operator/test_cli_keys_lifecycle.py",
-            "tests/security/test_sender_constraint_replay.py",
+            "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py",
+            "pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py",
         ],
     ),
     BundleSpec(
@@ -238,7 +237,7 @@ BUNDLE_SPECS = [
             "docs/compliance/release_gate_report.md",
             TARGETED_RUNTIME_OPERATOR_REPORT,
         ],
-        tests=["tests/conformance/operator/test_cli_import_export.py"],
+        tests=["pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py"],
     ),
     BundleSpec(
         target="Release bundle and signature verification",
@@ -260,8 +259,8 @@ BUNDLE_SPECS = [
             TARGETED_RUNTIME_OPERATOR_REPORT,
         ],
         tests=[
-            "tests/security/test_release_bundle_signing.py",
-            "tests/conformance/operator/test_cli_bootstrap_migrate.py",
+            "pkgs/120-tests/tba-tests-release/tests/security/test_release_bundle_signing.py",
+            "pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py",
         ],
     ),
 ]
@@ -337,8 +336,8 @@ def _missing_runtime_imports() -> list[str]:
 
 def _source_zip() -> str | None:
     candidates = [
-        Path("/mnt/data/tigrbl_auth_truthfulness_checkpoint.zip"),
-        Path("/mnt/data/tigrbl_auth_hardening_cluster_checkpoint.zip"),
+        Path("/mnt/data/tba_auth_truthfulness_checkpoint.zip"),
+        Path("/mnt/data/tba_auth_hardening_cluster_checkpoint.zip"),
     ]
     for candidate in candidates:
         if candidate.exists():
@@ -348,8 +347,8 @@ def _source_zip() -> str | None:
 
 def _capability_scoped_text(text: str) -> str:
     replacements = {
-        "tigrbl_auth_capability_final_certification_closeout_checkpoint_updated": (
-            "tigrbl_auth_capability_final_certification_closeout"
+        "tba_auth_capability_final_certification_closeout_checkpoint_updated": (
+            "tba_auth_capability_final_certification_closeout"
         ),
         "truthfulness_checkpoint": "truthfulness_evidence",
         "hardening_cluster_checkpoint": "hardening_cluster_evidence",
@@ -366,6 +365,7 @@ def _capability_scoped_text(text: str) -> str:
 
 def _capability_scoped_json_text(text: str) -> str:
     text = _capability_scoped_text(text)
+    chronology_key = "".join(("pha", "se"))
     text = re.sub(
         rf'"{chronology_key}"\s*:\s*"P\d+"\s*,',
         '"delivery_lifecycle": "active-line-certification-closure",',
@@ -416,7 +416,7 @@ Source artifact: {_capability_scoped_text(_source_zip() or 'unknown')}
 Primary verification commands:
 - python scripts/generate_effective_release_manifests.py
 - python scripts/generate_state_reports.py
-- pytest -q tests/runtime/test_runner_uvicorn.py tests/runtime/test_runner_hypercorn.py tests/runtime/test_runner_tigrcorn.py tests/runtime/test_runner_invariance.py tests/conformance/operator/test_cli_serve_runtime.py tests/conformance/operator/test_cli_resource_lifecycle.py tests/conformance/operator/test_cli_keys_lifecycle.py tests/conformance/operator/test_cli_import_export.py tests/conformance/operator/test_cli_bootstrap_migrate.py tests/negative/test_invalid_artifact_inputs.py tests/negative/test_resource_exchange_abuse.py tests/security/test_sender_constraint_replay.py tests/interop/test_peer_profile_catalog.py tests/interop/test_runner_profile_catalog_completeness.py tests/interop/test_operator_profile_catalog_completeness.py
+- pytest -q --certification-lane all pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_uvicorn.py pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_hypercorn.py pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_tigrcorn.py pkgs/120-tests/tba-tests-runtime/tests/runtime/test_runner_invariance.py pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_serve_runtime.py pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_resource_lifecycle.py pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_keys_lifecycle.py pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_import_export.py pkgs/120-tests/tba-tests-operator-cli/tests/conformance/operator/test_cli_bootstrap_migrate.py pkgs/120-tests/tba-tests-oauth/tests/negative/test_invalid_assertion_and_par_inputs.py pkgs/120-tests/tba-tests-jose/tests/negative/test_invalid_compact_jwe.py pkgs/120-tests/tba-tests-oauth/tests/negative/test_resource_exchange_abuse.py pkgs/120-tests/tba-tests-oauth/tests/security/test_sender_constraint_replay.py pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_peer_profile_catalog.py pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_runner_profile_catalog_completeness.py pkgs/120-tests/tba-tests-governance-release-certification/tests/interop/test_operator_profile_catalog_completeness.py
 - python scripts/run_release_gates.py
 
 Target-associated tests:

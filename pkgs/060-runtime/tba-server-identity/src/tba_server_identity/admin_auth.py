@@ -1,0 +1,307 @@
+"""Admin-auth HTTP models and routes backed by durable identity operations."""
+
+from __future__ import annotations
+
+from typing import Any
+
+from pydantic import BaseModel, Field, constr
+from tigrbl import (
+    Depends,
+    JSONResponse,
+    RedirectResponse,
+    Request,
+    Response,
+    TigrblRouter,
+)
+from tigrbl.runtime.status import HTTPException, status
+
+from tba_runtime_identity_storage.engine import get_db
+from tba_storage_core.tables import User
+from tigrbl import (
+    read_record,
+    update_record,
+)
+from tba_provider_secret_hashing_bcrypt import BcryptSecretHasher
+
+
+ADMIN_AUTH_TAGS = ["Admin Auth"]
+_password = constr(min_length=8, max_length=256)
+
+
+class CredsIn(BaseModel):
+    identifier: constr(strip_whitespace=True, min_length=3, max_length=120)
+    password: _password
+
+
+class AdminPasswordResetRequestIn(BaseModel):
+    identifier: constr(strip_whitespace=True, min_length=3, max_length=120)
+
+
+class AdminPasswordResetCompleteIn(BaseModel):
+    token: constr(strip_whitespace=True, min_length=16, max_length=256)
+    password: _password
+
+
+class AdminPasswordChangeIn(BaseModel):
+    current_password: _password
+    new_password: _password
+
+
+class AdminSessionOut(BaseModel):
+    authenticated: bool
+    session_id: str | None = None
+    user_id: str | None = None
+    tenant_id: str | None = None
+    username: str | None = None
+    email: str | None = None
+    is_admin: bool = False
+    is_superuser: bool = False
+    must_change_password: bool = False
+    roles: list[str] = Field(default_factory=list)
+    debug_reset_token: str | None = None
+
+
+admin_api = admin_router = TigrblRouter()
+
+
+def _admin_session_payload(
+    user: User | None,
+    *,
+    session_id: str | None = None,
+    debug_reset_token: str | None = None,
+) -> AdminSessionOut:
+    return AdminSessionOut(
+        authenticated=user is not None,
+        session_id=session_id,
+        user_id=str(user.id) if user is not None else None,
+        tenant_id=str(user.tenant_id) if user is not None else None,
+        username=getattr(user, "username", None) if user is not None else None,
+        email=getattr(user, "email", None) if user is not None else None,
+        is_admin=bool(getattr(user, "is_admin", False)) if user is not None else False,
+        is_superuser=bool(getattr(user, "is_superuser", False))
+        if user is not None
+        else False,
+        must_change_password=bool(getattr(user, "must_change_password", False))
+        if user is not None
+        else False,
+        roles=list(getattr(user, "roles", ()) if user is not None else ()),
+        debug_reset_token=debug_reset_token,
+    )
+
+
+async def _find_user_by_identifier(db: Any, identifier: str) -> User | None:
+    from tba_runtime_identity_storage.ops.identities import (
+        lookup_identity_by_identifier,
+    )
+
+    return await lookup_identity_by_identifier(
+        {"payload": {"identifier": identifier}, "db": db}
+    )
+
+
+async def _resolve_admin_session_and_user(
+    request: Request,
+    db: Any,
+    *,
+    allow_password_change_required: bool = False,
+) -> tuple[Any, User]:
+    from tba_server_identity.admin_bootstrap import resolve_admin_user_from_request
+    from tba_runtime_identity.deployment import deployment_from_request
+    from tba_runtime_identity.settings import settings
+    from tba_server_identity.security.handler_records import (
+        resolve_browser_session_record,
+    )
+
+    session_row = await resolve_browser_session_record(
+        db,
+        request,
+        deployment=deployment_from_request(request, settings),
+    )
+    user = await resolve_admin_user_from_request(
+        request,
+        db=db,
+        allow_password_change_required=allow_password_change_required,
+    )
+    if session_row is None or user is None:
+        raise HTTPException(
+            status.HTTP_401_UNAUTHORIZED, "authenticated admin session required"
+        )
+    return session_row, user
+
+
+@admin_api.route(
+    "/admin/auth/login",
+    methods=["POST"],
+    response_model=AdminSessionOut,
+    tags=ADMIN_AUTH_TAGS,
+)
+async def admin_login(
+    request: Request, creds: CredsIn | None = None, db: Any = Depends(get_db)
+) -> Response:
+    from tba_server_identity.admin_bootstrap import user_is_admin
+    from tba_server_identity.login_runtime import login_user
+
+    if creds is None:
+        creds = CredsIn.model_validate(await request.json() or {})
+    row = await _find_user_by_identifier(db, creds.identifier)
+    if row is None or not user_is_admin(row):
+        raise HTTPException(
+            status.HTTP_403_FORBIDDEN, "administrator authorization required"
+        )
+    login_response = await login_user(
+        request=request, db=db, identifier=creds.identifier, password=creds.password
+    )
+    response = JSONResponse(_admin_session_payload(row, session_id=None).model_dump())
+    set_cookie = login_response.headers.get("set-cookie")
+    if set_cookie:
+        response.headers["set-cookie"] = set_cookie
+    return response
+
+
+@admin_api.route("/admin/auth/login", methods=["GET"], tags=ADMIN_AUTH_TAGS)
+async def admin_login_browser_redirect() -> Response:
+    return RedirectResponse(url="/", status_code=status.HTTP_307_TEMPORARY_REDIRECT)
+
+
+@admin_api.route(
+    "/admin/auth/session",
+    methods=["GET"],
+    response_model=AdminSessionOut,
+    tags=ADMIN_AUTH_TAGS,
+)
+async def admin_session(request: Request, db: Any = Depends(get_db)) -> AdminSessionOut:
+    session_row, user = await _resolve_admin_session_and_user(
+        request,
+        db,
+        allow_password_change_required=True,
+    )
+    return _admin_session_payload(user, session_id=str(session_row.id))
+
+
+@admin_api.route(
+    "/admin/auth/logout",
+    methods=["POST"],
+    response_model=AdminSessionOut,
+    tags=ADMIN_AUTH_TAGS,
+)
+async def admin_logout() -> Response:
+    from tba_runtime_identity.http_standards.cookies import clear_session_cookie
+
+    response = JSONResponse(AdminSessionOut(authenticated=False).model_dump())
+    clear_session_cookie(response)
+    return response
+
+
+@admin_api.route(
+    "/admin/auth/forgot-password",
+    methods=["POST"],
+    response_model=AdminSessionOut,
+    tags=ADMIN_AUTH_TAGS,
+)
+async def admin_forgot_password(
+    request: Request,
+    payload: AdminPasswordResetRequestIn | None = None,
+    db: Any = Depends(get_db),
+) -> AdminSessionOut:
+    from tba_server_identity.admin_bootstrap import (
+        issue_password_reset_token,
+        user_is_admin,
+    )
+    from tba_runtime_identity.settings import settings
+
+    if payload is None:
+        payload = AdminPasswordResetRequestIn.model_validate(await request.json() or {})
+    row = await _find_user_by_identifier(db, payload.identifier)
+    debug_token = None
+    if row is not None and user_is_admin(row):
+        debug_token = await issue_password_reset_token(user=row, db=db)
+        if not settings.admin_password_reset_debug_disclosure:
+            debug_token = None
+    return _admin_session_payload(None, debug_reset_token=debug_token)
+
+
+@admin_api.route(
+    "/admin/auth/reset-password",
+    methods=["POST"],
+    response_model=AdminSessionOut,
+    tags=ADMIN_AUTH_TAGS,
+)
+async def admin_reset_password(
+    request: Request,
+    payload: AdminPasswordResetCompleteIn | None = None,
+    db: Any = Depends(get_db),
+) -> Response:
+    from tba_server_identity.admin_bootstrap import consume_password_reset_token
+    from tba_runtime_identity.http_standards.cookies import clear_session_cookie
+
+    if payload is None:
+        payload = AdminPasswordResetCompleteIn.model_validate(
+            await request.json() or {}
+        )
+    user = await consume_password_reset_token(
+        token=payload.token, new_password=payload.password, db=db
+    )
+    if user is None:
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST, "invalid or expired reset token"
+        )
+    response = JSONResponse(_admin_session_payload(None).model_dump())
+    clear_session_cookie(response)
+    return response
+
+
+@admin_api.route(
+    "/admin/auth/change-password",
+    methods=["POST"],
+    response_model=AdminSessionOut,
+    tags=ADMIN_AUTH_TAGS,
+)
+async def admin_change_password(
+    request: Request,
+    payload: AdminPasswordChangeIn | None = None,
+    db: Any = Depends(get_db),
+) -> AdminSessionOut:
+    if payload is None:
+        payload = AdminPasswordChangeIn.model_validate(await request.json() or {})
+    session_row, user = await _resolve_admin_session_and_user(
+        request,
+        db,
+        allow_password_change_required=True,
+    )
+    hasher = BcryptSecretHasher()
+    verification = hasher.verify_secret(payload.current_password, user.password_hash)
+    if not verification.verified:
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, "invalid current password")
+    row = await read_record(User, db, user.id)
+    if row is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "user not found")
+    row = await update_record(
+        User,
+        db,
+        row.id,
+        {
+            "password_hash": hasher.hash_secret(payload.new_password).encoded,
+            "must_change_password": False,
+            "password_reset_token_hash": None,
+            "password_reset_expires_at": None,
+        },
+    )
+    return _admin_session_payload(row, session_id=str(session_row.id))
+
+
+__all__ = [
+    "AdminPasswordChangeIn",
+    "AdminPasswordResetCompleteIn",
+    "AdminPasswordResetRequestIn",
+    "AdminSessionOut",
+    "CredsIn",
+    "admin_api",
+    "admin_router",
+    "admin_change_password",
+    "admin_forgot_password",
+    "admin_login",
+    "admin_login_browser_redirect",
+    "admin_logout",
+    "admin_reset_password",
+    "admin_session",
+]

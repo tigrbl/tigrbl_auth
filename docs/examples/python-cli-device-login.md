@@ -1,4 +1,4 @@
-# Python CLI Device Login Against `tigrbl_auth`
+# Python CLI Device Login Against `tba_auth`
 
 This repository exposes the server-side pieces needed for RFC 8628 device authorization:
 
@@ -6,7 +6,7 @@ This repository exposes the server-side pieces needed for RFC 8628 device author
 - `POST /token` with `grant_type=urn:ietf:params:oauth:grant-type:device_code`
 - discovery metadata at `/.well-known/oauth-authorization-server`
 
-The sample consumer package under `examples/acme_notes_cli/` shows how a different Python package can expose a `login` command and use that flow for CLI authentication.
+The sample consumer package under `pkgs/110-examples/tba-example-oauth-device-authorization-cli/` shows how a different Python package can expose a `login` command and use that flow for CLI authentication.
 
 ## What the consumer package does
 
@@ -22,16 +22,19 @@ The sample consumer package under `examples/acme_notes_cli/` shows how a differe
 ## Consumer package shape
 
 ```text
-examples/acme_notes_cli/
+pkgs/110-examples/tba-example-oauth-device-authorization-cli/
   pyproject.toml
-  src/acme_notes_cli/main.py
-  src/acme_notes_cli/device_login.py
+  src/oauth_device_authorization_cli_example/main.py
+  src/oauth_device_authorization_cli_example/device_login.py
 ```
 
 ## Example `login` command
 
+The package registers the `oauth-device-login` console script (`oauth-device-login --help` lists the
+`login` subcommand):
+
 ```bash
-acme-notes login \
+oauth-device-login login \
   --issuer https://authn.example.com \
   --client-id 7b7075b1-9d4b-4f7f-93a0-cf2994df44d9 \
   --scope "openid profile email"
@@ -45,7 +48,7 @@ The consumer package only needs:
 - a pre-registered client ID
 - an HTTP client
 
-It does not need to import `tigrbl_auth` directly in production. It only talks to:
+It does not need to import `tba_auth` directly in production. It only talks to:
 
 - `GET /.well-known/oauth-authorization-server`
 - `POST /device_authorization`

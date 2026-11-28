@@ -1,4 +1,4 @@
-schema_version: "0.1.0"
+schema_version: "0.4.0"
 kind: "spec"
 id: "spc:1070"
 number: 1070
@@ -8,21 +8,25 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification defines normative requirements for policy control-plane decisioning, language, lifecycle, simulation, audit, and decision APIs in `tigrbl_auth`."
+summary: "This specification defines normative requirements for policy control-plane"
 supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Defines policy control-plane requirements for less-than-implemented features."
     at: "2026-04-30T18:40:50Z"
+    note: "Defines policy control-plane requirements for less-than-implemented features."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Extended by spc:1205 and spc:1212 for formal policy correctness, invariant evaluation, determinism, and decision stability."
+    at: "2026-06-07T04:39:38Z"
 references: []
 body: |-
   ## Overview
   
   This specification defines normative requirements for policy control-plane
   decisioning, language, lifecycle, simulation, audit, and decision APIs in
-  `tigrbl_auth`.
+  `tba_auth`.
   
   ## Decision Source
   
@@ -61,6 +65,18 @@ body: |-
   actor identity, tenant, timestamp, and correlation identifiers before `F20`
   can be considered implemented.
   
+  Authorization mutation handling MUST define mutation classes, invalidation
+  effects, propagation expectations, and required audit evidence before policy
+  control-plane authority can be considered complete. The runtime MUST define,
+  at minimum, the consequences of policy version changes, authority revocation,
+  delegation revocation, replay or reuse detection, and resource-bound grant
+  mutation on already-issued credentials or tokens.
+  
+  Authorization mutation handling MUST fail closed when the effective
+  invalidation result is ambiguous, when the relevant mutation lineage cannot be
+  reconstructed, or when downstream revocation obligations cannot be
+  determined.
+  
   The access decision API MUST define request shape, response shape, error
   semantics, explainability, idempotency expectations, and authorization around
   decision invocation before `F21` can be considered implemented.
@@ -86,11 +102,15 @@ body: |-
   issuance and exchange flows. Those obligations are governed by dedicated
   runtime protocol specifications.
   
+  This specification also does not define a final bounded-authority model for
+  workload grants. That contract belongs to the workload and resource-server
+  runtime specifications.
+  
   ## Verification
   
   Verification MUST prove deterministic evaluation, policy version immutability,
-  simulation correctness, rollback behavior, API contract validity, tenant
-  isolation, and audit evidence.
+  simulation correctness, rollback behavior, mutation-to-invalidation
+  correctness, API contract validity, tenant isolation, and audit evidence.
   
   ## Traceability
   

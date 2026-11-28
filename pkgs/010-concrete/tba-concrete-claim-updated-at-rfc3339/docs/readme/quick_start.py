@@ -1,0 +1,3 @@
+from tba_concrete_claim_updated_at_rfc3339 import UpdatedAtRfc3339Claim
+
+assert callable(UpdatedAtRfc3339Claim)

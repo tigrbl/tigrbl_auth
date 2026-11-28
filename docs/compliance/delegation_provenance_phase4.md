@@ -7,19 +7,19 @@
 
 ## Runtime delivery
 
-- Added deterministic delegation-lineage artifact construction in `tigrbl_auth/services/authorization_provenance.py`.
-- Runtime RFC 8693 issuance in `tigrbl_auth/standards/oauth2/token_exchange.py` now:
+- Added deterministic delegation-lineage artifact construction in `tba_auth/services/authorization_provenance.py`.
+- Runtime RFC 8693 issuance in `tba_auth/standards/oauth2/token_exchange.py` now:
   - derives a delegation provenance artifact from subject token, actor token, effective audience/resource, and sender-constraint mode
   - persists the artifact with the issued access-token record
   - emits lineage identifiers into durable audit events
-- Operator token-exchange persistence in `tigrbl_auth/services/operator_service.py` now records the same lineage artifact in the operator-plane token record.
+- Operator token-exchange persistence in `tba_auth/services/operator_service.py` now records the same lineage artifact in the operator-plane token record.
 
 ## Verification
 
 Executed with a repo-local uv cache:
 
 ```powershell
-$env:UV_CACHE_DIR='E:\swarmauri_github\tigrbl_auth\.tmp\uv-cache'
+$env:UV_CACHE_DIR='E:\swarmauri_github\tba_auth\.tmp\uv-cache'
 uv run pytest tests\unit\test_authorization_provenance.py tests\unit\test_hardening_cluster_a.py tests\integration\test_persistence_lifecycle_durability.py tests\integration\test_auth_flows.py tests\negative\test_resource_exchange_abuse.py -k "provenance or lineage or token_exchange or refresh_token or exchange"
 ```
 

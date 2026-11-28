@@ -1,0 +1,37 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1163"
+number: 1163
+slug: "service-token-inspection-and-validation-metadata-contract"
+title: "Service Token Inspection and Validation Metadata Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs token inspection and validation metadata helpers exposed to service-admin workflows."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Defines service-admin token inspection and validation metadata boundaries."
+    at: "2026-05-25T05:22:46Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs token inspection and validation metadata helpers exposed to service-admin workflows.
+  
+  ## Requirements
+  
+  Service-admin API MAY expose token introspection, token inspection RPC methods, protected-resource metadata, issuer discovery metadata, tenant discovery metadata, and JWKS helpers needed to validate machine and service identity behavior. These helpers MUST NOT expose token issuance, human login, consent, authorization pages, developer app catalog management, tenant lifecycle, diagnostics, private key material, or unrelated admin resources.
+  
+  Metadata helper responses MUST be consistent with the effective product surface and must not imply that disabled runtime flows are available.
+  
+  ## Verification
+  
+  Verification MUST prove service validation metadata helpers and token inspection methods are present where configured, forbidden surfaces are absent, and private or cross-tenant material is not leaked.
+spec_kind: "operational"
+adr_ids:
+  - "adr:1081"
+  - "adr:1120"

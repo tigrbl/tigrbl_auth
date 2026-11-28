@@ -1,0 +1,70 @@
+version: 1
+layer: 005-bases
+rules:
+  ownership: one-canonical-package-per-behavioral-family
+  contracts: inherit-layer-02-contracts-or-ports
+  models: do-not-redeclare-layer-02-models
+  protocol_wire_models: 050-protocols
+  durability: 01-storage-and-030-storage-runtime
+  deterministic_completion: 010-concrete
+  environment_completion: 020-providers
+  network_and_storage_io: forbidden
+families:
+  foundational:
+    capability: tba-bases-capability
+    claim: tba-bases-claim
+    identity: tba-bases-identity
+    authentication_credential: tba-bases-authentication-credential
+    authenticator: tba-bases-authenticator
+    token: tba-bases-token
+    replay: tba-bases-replay
+  identity_security:
+    authentication_context: tba-bases-authentication-context
+    identity_assurance: tba-bases-identity-assurance
+    public_key_authentication: tba-bases-public-key-authentication
+    did: tba-bases-did
+    workload_identity: tba-bases-workload-identity
+    digital_credential: tba-bases-digital-credential
+    attestation: tba-bases-attestation
+    security_event: tba-bases-security-event
+  artifact_and_trust:
+    protected_artifact: tba-bases-protected-artifact
+    certificate: tba-bases-certificate
+    trust: tba-bases-trust
+    key: tba-bases-key
+    signing: tba-bases-signing
+    encryption: tba-bases-encryption
+    proof_of_possession: tba-bases-proof-of-possession
+    token_introspection: tba-bases-token-introspection
+  mechanisms:
+    jose: tba-bases-jose
+    cose: tba-bases-cose
+compatibility_aggregates:
+  tba-bases-identity-claims:
+    canonical: tba-bases-claim
+  tba-bases-identity-model:
+    canonical:
+      - tba-bases-identity
+      - tba-bases-authentication-credential
+      - tba-primitives-identity
+  tba-bases-identity-authenticator:
+    canonical: tba-bases-authenticator
+  tba-bases-public-key-authenticator:
+    canonical: tba-bases-public-key-authentication
+  tba-bases-security-artifact:
+    canonical: tba-bases-protected-artifact
+  tba-bases-security-trust-domain:
+    canonical:
+      - tba-bases-certificate
+      - tba-bases-did
+      - tba-bases-encryption
+      - tba-bases-key
+      - tba-bases-proof-of-possession
+      - tba-bases-signing
+      - tba-bases-token-introspection
+      - tba-bases-trust
+      - tba-bases-workload-identity
+pending_extraction:
+  authorization: tba-authorization-bases
+  delegation: tba-delegation-bases
+  release_assurance: tba-release-assurance-bases

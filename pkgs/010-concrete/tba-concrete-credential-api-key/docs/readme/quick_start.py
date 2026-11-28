@@ -1,0 +1,3 @@
+from tba_concrete_credential_api_key import ApiKeyCredential
+
+assert callable(ApiKeyCredential)

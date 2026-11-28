@@ -8,15 +8,15 @@ This checkpoint addresses the App factory materialization closeout task:
 
 The retained target for this target is the application factory at:
 
-- `tigrbl_auth.api.app.build_app`
+- `tba_auth.api.app.build_app`
 
 with focus files:
 
-- `tigrbl_auth/api/app.py`
-- `tigrbl_auth/app.py`
-- `tigrbl_auth/plugin.py`
-- `tigrbl_auth/gateway.py`
-- `tigrbl_auth/config/deployment.py`
+- `tba_auth/api/app.py`
+- `tba_auth/app.py`
+- `tba_auth/plugin.py`
+- `tba_auth/gateway.py`
+- `tba_auth/config/deployment.py`
 
 ## What was fixed
 
@@ -53,7 +53,7 @@ The pinned published runtime exposes:
 - `tigrbl.TigrblApi`
 - `tigrbl.core.crud.params.Header`
 
-This checkpoint updates `tigrbl_auth/framework.py` to stay on the published Tigrbl public surface while preserving the package's existing router-facing call sites.
+This checkpoint updates `tba_auth/framework.py` to stay on the published Tigrbl public surface while preserving the package's existing router-facing call sites.
 
 ### 3. `build_app()` now materializes against the published runtime surface
 
@@ -113,12 +113,12 @@ That criterion is **not yet certifiably satisfied** in this checkpoint because:
 
 ## Files changed by this checkpoint
 
-- `tigrbl_auth/framework.py`
-- `tigrbl_auth/api/app.py`
-- `tigrbl_auth/cli/install_substrate.py`
-- `constraints/base.txt`
+- `tba_auth/framework.py`
+- `tba_auth/api/app.py`
+- `tba_auth/cli/install_substrate.py`
+- `pyproject.toml`
+- `uv.lock`
 - `constraints/runner-uvicorn.txt`
-- `constraints/dependency-lock.json`
 - `tests/unit/test_published_dependency_model.py`
 - `tests/unit/test_app_factory_materialization.py`
 - generated current-state/compliance reports under `docs/compliance/`

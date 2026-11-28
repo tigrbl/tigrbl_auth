@@ -1,0 +1,3 @@
+from tba_concrete_public_subject_identifier import PublicSubjectIdentifierStrategy
+
+assert callable(PublicSubjectIdentifierStrategy)

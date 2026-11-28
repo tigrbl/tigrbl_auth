@@ -1,0 +1,3 @@
+from tba_bases_security_provenance import ProvenanceArtifactBuilderBase
+
+assert callable(ProvenanceArtifactBuilderBase)

@@ -10,7 +10,7 @@
 Accepted
 
 ## Decision
-`tigrbl_auth` shall support both plugin installation into an existing Tigrbl
+`tba_auth` shall support both plugin installation into an existing Tigrbl
 application and standalone gateway assembly. Both composition styles must
 respect the same profile, surface, slice, and boundary rules.
 

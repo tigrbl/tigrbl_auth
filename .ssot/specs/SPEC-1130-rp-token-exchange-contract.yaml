@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1130"
+number: 1130
+slug: "rp-token-exchange-contract"
+title: "RP Token Exchange Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines public-client PKCE token exchange and confidential-client authenticated token exchange, including error handling and accepted client-authentication boundaries."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "RP/resource-server/provider-login maturity wave proposal."
+    at: "2026-05-23T05:44:10Z"
+references: []
+body: |-
+  Defines public-client PKCE token exchange and confidential-client authenticated token exchange, including error handling and accepted client-authentication boundaries.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1115"
+  - "adr:1116"

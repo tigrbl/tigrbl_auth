@@ -1,0 +1,3 @@
+from tba_concrete_trust_federation_graph import WorkloadIdentityLike
+
+assert callable(WorkloadIdentityLike)

@@ -1,0 +1,11 @@
+# tst:identity-model-dpop-key-credential-planned
+
+Status: planned
+
+Feature: feat:identity-model-dpop-key-credential
+Claim: clm:identity-model-dpop-key-credential-t2
+Evidence: evd:identity-model-dpop-key-credential-planning-record
+Object: DpopKeyCredential
+Specs: spc:1103, spc:1120
+
+This planned identity-model test must be replaced by executable representation, ownership, tenant-isolation, lifecycle, and package-boundary checks before promotion beyond planning status.

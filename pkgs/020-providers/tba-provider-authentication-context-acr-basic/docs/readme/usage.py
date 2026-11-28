@@ -1,0 +1,3 @@
+from tba_provider_authentication_context_acr_basic import BasicAcrEvaluator
+
+assert callable(BasicAcrEvaluator)

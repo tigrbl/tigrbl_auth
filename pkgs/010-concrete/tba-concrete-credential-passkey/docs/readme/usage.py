@@ -1,0 +1,3 @@
+from tba_concrete_credential_passkey import PasskeyCredential
+
+assert callable(PasskeyCredential)

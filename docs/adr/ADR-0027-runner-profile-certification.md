@@ -8,7 +8,7 @@
 
 - Status: accepted
 - Date: 2026-03-22
-- Decision: `tigrbl_auth` is certified as an **ASGI 3 application package**, not as a single bundled HTTP server. Runtime claims are made per supported runner profile.
+- Decision: `tba_auth` is certified as an **ASGI 3 application package**, not as a single bundled HTTP server. Runtime claims are made per supported runner profile.
 - Consequences:
   - runner-backed serving claims MUST be profile-qualified rather than collapsed into one undifferentiated server claim;
   - `Uvicorn`, `Hypercorn`, and `Tigrcorn` are separate runtime profiles for certification and peer evidence;

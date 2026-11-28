@@ -19,7 +19,7 @@ body: |-
   Status: proposed
   Date: 2026-05-04
   
-  `tigrbl_auth` MUST define a first-class public end-user UIX boundary. The public UIX boundary includes login, logout, registration, session continuation, and any in-scope end-user consent or recovery surfaces. The public UIX boundary MUST remain distinct from admin UIX and from backend-only API behavior.
+  `tba_auth` MUST define a first-class public end-user UIX boundary. The public UIX boundary includes login, logout, registration, session continuation, and any in-scope end-user consent or recovery surfaces. The public UIX boundary MUST remain distinct from admin UIX and from backend-only API behavior.
   
   ## Rationale
   

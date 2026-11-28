@@ -1,0 +1,3 @@
+from tba_provider_certificate_status import SnapshotCertificateStatusProvider
+
+assert callable(SnapshotCertificateStatusProvider)

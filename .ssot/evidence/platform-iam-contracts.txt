@@ -1,0 +1,1 @@
+PASSED 2026-08-18. Four contract tests verified actor/resource/action/authentication context, normalized keys, invalid time-window rejection, typed decision effects, reasons, lineage, obligations, missing facts, and timestamps.

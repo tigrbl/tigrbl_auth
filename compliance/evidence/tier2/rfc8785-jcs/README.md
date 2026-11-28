@@ -1,8 +1,8 @@
 # RFC 8785 JCS evidence
 
 Evidence for `feat:target-rfc-8785` and `feat:jcs-canonical-json` is the
-passing pytest conformance suite at
-`tests/conformance/backlog/test_rfc8785_jcs.py`.
+pytest conformance suite for `tba-codec-jcs` at
+`pkgs/120-tests/tba-tests-wire-codecs/tests/conformance/backlog/test_rfc8785_jcs.py`.
 
 Verified command:
 

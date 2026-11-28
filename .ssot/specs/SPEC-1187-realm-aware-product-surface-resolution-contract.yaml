@@ -1,0 +1,29 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1187"
+number: 1187
+slug: "realm-aware-product-surface-resolution-contract"
+title: "Realm-Aware Product Surface Resolution Contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Public, resource-validation, platform-admin, tenant-admin, developer, service-admin, and my-account API surfaces MUST preserve product filtering while resolving realm context. Public and validation metadata MUST expose realm discovery and realm JWKS paths. UIX surfaces MAY display realm context, but only platform-admin UIX may mutate realms in this slice."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-06-01T09:48:17Z"
+    note: "Accepted for realm-aware frontdoor API behavior."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Realm-aware product surfaces must preserve realm isolation and include issuer-confusion negative testing."
+    at: "2026-06-01T10:41:21Z"
+references: []
+body: |-
+  Public, resource-validation, platform-admin, tenant-admin, developer, service-admin, and my-account API surfaces MUST preserve product filtering while resolving realm context. Public and validation metadata MUST expose realm discovery and realm JWKS paths. UIX surfaces MAY display realm context, but only platform-admin UIX may mutate realms in this slice.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1089"
+  - "adr:1120"

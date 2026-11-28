@@ -1,0 +1,1 @@
+PASSED 2026-08-18. Four focused migration tests and 37 storage-component tests passed. Proof includes additive normalized tables, fail-closed legacy role normalization, 31 ordered migrations, 161 owned tables, repeatable fresh install, frozen-monolith equivalence, legacy adoption, deployment-lock verification, and certified component heads.

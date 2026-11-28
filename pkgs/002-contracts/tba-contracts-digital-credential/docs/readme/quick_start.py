@@ -1,0 +1,3 @@
+from tba_contracts_digital_credential import CredentialConfiguration
+
+assert callable(CredentialConfiguration)

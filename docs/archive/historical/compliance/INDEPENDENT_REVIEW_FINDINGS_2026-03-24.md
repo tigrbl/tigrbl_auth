@@ -20,7 +20,7 @@ This document records a fresh repository review of the independent peer checkpoi
 
 ## Executive summary
 
-`tigrbl_auth` is **not yet certifiably fully featured** and **not yet certifiably fully RFC compliant under a strict independent-claims standard**.
+`tba_auth` is **not yet certifiably fully featured** and **not yet certifiably fully RFC compliant under a strict independent-claims standard**.
 
 The repository's internal governance artifacts still support a stronger, narrower statement:
 
@@ -30,20 +30,20 @@ The repository's internal governance artifacts still support a stronger, narrowe
 
 ## Corrective changes applied in this review
 
-1. Restored a dependency-light top-level helper export surface in `tigrbl_auth/__init__.py` for commonly referenced RFC helpers and selected module exports.
+1. Restored a dependency-light top-level helper export surface in `tba_auth/__init__.py` for commonly referenced RFC helpers and selected module exports.
 2. Added dependency-light compatibility behavior for legacy helper modules and facades that previously failed immediately when the full runtime stack was absent:
-   - `tigrbl_auth/rfc/rfc7515.py`
-   - `tigrbl_auth/rfc/rfc8628.py`
-   - `tigrbl_auth/rfc/rfc8932.py`
-   - `tigrbl_auth/rfc/rfc9101.py`
-   - `tigrbl_auth/rfc/rfc9396.py`
-   - `tigrbl_auth/rfc/rfc7662.py`
-   - `tigrbl_auth/standards/oauth2/introspection.py`
-   - `tigrbl_auth/standards/jose/rfc7515.py`
-   - `tigrbl_auth/standards/jose/rfc7517.py`
-   - `tigrbl_auth/standards/jose/rfc7518.py`
+   - `tba_auth/rfc/rfc7515.py`
+   - `tba_auth/rfc/rfc8628.py`
+   - `tba_auth/rfc/rfc8932.py`
+   - `tba_auth/rfc/rfc9101.py`
+   - `tba_auth/rfc/rfc9396.py`
+   - `tba_auth/rfc/rfc7662.py`
+   - `tba_auth/standards/oauth2/introspection.py`
+   - `tba_auth/standards/jose/rfc7515.py`
+   - `tba_auth/standards/jose/rfc7517.py`
+   - `tba_auth/standards/jose/rfc7518.py`
 3. Tightened pytest collection hygiene in `pyproject.toml` by switching to `--import-mode=importlib`, adding `pythonpath = ["."]`, and excluding cache directories from recursive discovery.
-4. Updated `tigrbl_auth/runtime_cfg.py` so reloading the compatibility facade refreshes the canonical settings module, allowing environment-driven helper tests to reflect current environment values.
+4. Updated `tba_auth/runtime_cfg.py` so reloading the compatibility facade refreshes the canonical settings module, allowing environment-driven helper tests to reflect current environment values.
 5. Corrected stale documentation that still said `serve` could not launch runtime.
 6. Removed checked-in cache directories from the checkpoint output package.
 
@@ -87,7 +87,7 @@ A broad `pytest -q` pass in this container still fails during collection with **
 - `swarmauri_signing_jws`
 - `bcrypt`
 
-Those failures are concentrated in runtime-heavy modules such as `tigrbl_auth/framework.py`, `tigrbl_auth/security/*`, `tigrbl_auth/orm/*`, `tigrbl_auth/tables/*`, `tigrbl_auth/jwtoken.py`, runtime endpoint modules, migration runtime paths, and full application/integration tests.
+Those failures are concentrated in runtime-heavy modules such as `tba_auth/framework.py`, `tba_auth/security/*`, `tba_auth/orm/*`, `tba_auth/tables/*`, `tba_auth/jwtoken.py`, runtime endpoint modules, migration runtime paths, and full application/integration tests.
 
 ## What is complete
 
@@ -171,9 +171,9 @@ The repository's own package review artifacts still mark the following retained 
 
 ### Operational / production-grade gaps
 
-- `tigrbl_auth/services/operator_service.py` explicitly describes the operator service as **checkpoint-grade** and uses repository-backed JSON state under `dist/operator-state/` rather than a live integrated control-plane datastore.
-- `tigrbl_auth/services/import_export_service.py` remains a thin wrapper over the same checkpoint operator-state model.
-- `tigrbl_auth/migrations/versions/0007_browser_session_cookie_and_auth_code_linkage.py` has a downgrade that intentionally returns `None`, leaving that migration effectively forward-only in checkpoint tooling.
+- `tba_auth/services/operator_service.py` explicitly describes the operator service as **checkpoint-grade** and uses repository-backed JSON state under `dist/operator-state/` rather than a live integrated control-plane datastore.
+- `tba_auth/services/import_export_service.py` remains a thin wrapper over the same checkpoint operator-state model.
+- `tba_auth/migrations/versions/0007_browser_session_cookie_and_auth_code_linkage.py` has a downgrade that intentionally returns `None`, leaving that migration effectively forward-only in checkpoint tooling.
 
 ### Documentation / repo hygiene gaps found in this review
 
@@ -193,21 +193,21 @@ The repository's own package review artifacts still mark the following retained 
 - `pyproject.toml` (support boundary remains `<3.13` and external runtime dependencies are still required)
 - `docs/runbooks/INSTALLATION_PROFILES.md`
 - `docs/runbooks/CLEAN_CHECKOUT_REPRO.md`
-- `tigrbl_auth/framework.py`
-- `tigrbl_auth/api/app.py` and the full app factory path
-- `tigrbl_auth/security/*`
-- `tigrbl_auth/orm/*`
-- `tigrbl_auth/tables/*`
-- `tigrbl_auth/runtime/*` runner adapters when their backing packages or Tigrbl runtime imports are unavailable
+- `tba_auth/framework.py`
+- `tba_auth/api/app.py` and the full app factory path
+- `tba_auth/security/*`
+- `tba_auth/orm/*`
+- `tba_auth/tables/*`
+- `tba_auth/runtime/*` runner adapters when their backing packages or Tigrbl runtime imports are unavailable
 - migration/runtime paths that depend on SQLAlchemy being present
 
 ### Production-grade feature maturity blockers
 
-- `tigrbl_auth/services/operator_service.py`
-- `tigrbl_auth/services/_operator_store.py`
-- `tigrbl_auth/services/import_export_service.py`
-- `tigrbl_auth/api/rpc/methods/*` that front repository-backed operator state rather than a live control plane
-- `tigrbl_auth/migrations/versions/0007_browser_session_cookie_and_auth_code_linkage.py`
+- `tba_auth/services/operator_service.py`
+- `tba_auth/services/_operator_store.py`
+- `tba_auth/services/import_export_service.py`
+- `tba_auth/api/rpc/methods/*` that front repository-backed operator state rather than a live control plane
+- `tba_auth/migrations/versions/0007_browser_session_cookie_and_auth_code_linkage.py`
 
 ## Public operator surface status
 

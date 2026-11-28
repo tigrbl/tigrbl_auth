@@ -1,5 +1,5 @@
 schema_version: 1
-package: tigrbl_auth
+package: tba_auth
 project_tree:
   required_directories:
   - docs/adr
@@ -20,63 +20,67 @@ project_tree:
   - tests/unit
   - tests/integration
   - tests/conformance
-  - tests/interop
+  - pkgs/120-tests/tba-tests-governance-release-certification/tests/interop
   - tests/negative
   - tests/security
   - tests/e2e
   - tests/perf
   - tests/examples
-  - tigrbl_auth/api
-  - tigrbl_auth/tables
-  - tigrbl_auth/ops
-  - tigrbl_auth/services
-  - tigrbl_auth/standards
-  - tigrbl_auth/security
-  - tigrbl_auth/config
-  - tigrbl_auth/adapters
-  - tigrbl_auth/schemas
-  - tigrbl_auth/migrations
-  - tigrbl_auth/cli
+  - pkgs/000-primitives
+  - pkgs/001-storage
+  - pkgs/002-contracts
+  - pkgs/005-bases
+  - pkgs/010-concrete
+  - pkgs/020-providers
+  - pkgs/030-storage-runtime
+  - pkgs/040-capabilities
+  - pkgs/050-protocols
+  - pkgs/060-runtime
+  - pkgs/070-facade
+  - pkgs/080-routers
   required_files:
-  - tigrbl_auth/plugin.py
-  - tigrbl_auth/gateway.py
-  - tigrbl_auth/api/app.py
-  - tigrbl_auth/api/surfaces.py
+  - pyproject.toml
+  - uv.lock
+  - pkgs/060-runtime/tba-server-identity/src/tba_server_identity/app.py
+  - pkgs/060-runtime/tba-server-identity/src/tba_server_identity/gateway.py
+  - pkgs/060-runtime/tba-server-identity/src/tba_server_identity/surfaces.py
+  - pkgs/060-runtime/tba-cli-identity/src/tba_cli_identity/cli
+  - pkgs/070-facade/tba-auth/src/tba_auth/__init__.py
   - docs/architecture/PROJECT_TREE_LAYOUT.md
   - docs/architecture/MIGRATION_MOVE_PLAN.md
   - compliance/mappings/current-to-target-paths.yaml
   - compliance/targets/project-tree-layout.yaml
   runtime_planes:
     api:
-      path: tigrbl_auth/api
+      path: pkgs/080-routers
       ownership: transport
     tables:
-      path: tigrbl_auth/tables
+      path: pkgs/001-storage
       ownership: persistence
     ops:
-      path: tigrbl_auth/ops
+      path: pkgs/030-storage-runtime
       ownership: transaction orchestration
     services:
-      path: tigrbl_auth/services
-      ownership: reusable domain services
+      path: pkgs/040-capabilities
+      ownership: mountable and reportable capabilities
     standards:
-      path: tigrbl_auth/standards
-      ownership: protocol behavior
+      path: pkgs/050-protocols
+      ownership: versioned protocol behavior and capability mapping
     security:
-      path: tigrbl_auth/security
-      ownership: cross-cutting hardening
+      path: pkgs/020-providers
+      ownership: environment-backed providers and cross-cutting hardening
     config:
-      path: tigrbl_auth/config
+      path: pkgs/060-runtime
       ownership: profile and feature resolution
     adapters:
-      path: tigrbl_auth/adapters
-      ownership: integration seams
+      path: pkgs/060-runtime
+      ownership: composition and integration seams
     cli:
-      path: tigrbl_auth/cli
+      path: pkgs/060-runtime/tba-cli-identity
       ownership: operator and certification UX
     plugin:
-      path: tigrbl_auth/plugin.py
-      ownership: installable composition
+      path: pkgs/070-facade
+      ownership: stable public facade
     gateway:
-      path: tigrbl_auth/gateway.py
+      path: pkgs/060-runtime/tba-server-identity/src/tba_server_identity/gateway.py
       ownership: standalone composition

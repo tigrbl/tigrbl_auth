@@ -7,9 +7,10 @@ required:
 - compliance/targets
 - compliance/waivers
 - docs/adr
-- tigrbl_auth/api
-- tigrbl_auth/security
-- tigrbl_auth/standards
+- pkgs/080-routers
+- pkgs/090-backend-apps
+- tba_auth/security
+- tba_auth/standards
 checks:
 - boundary_manifests_present
 - governance_directories_present

@@ -1,0 +1,63 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1107"
+number: 1107
+slug: "users-evolve-toward-global-accounts-with-tenant-memberships"
+title: "Users evolve toward global accounts with tenant memberships"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The target identity model SHALL separate human account identity from"
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Set global account plus tenant membership as the target human identity model."
+    at: "2026-05-18T08:26:39Z"
+references: []
+body: |-
+  ## Decision
+  
+  The target identity model SHALL separate human account identity from
+  tenant-scoped membership.
+  
+  The target model is:
+  
+  ```text
+  Account / User
+    -> TenantMembership
+        -> Tenant
+        -> roles / entitlements inside that tenant
+  ```
+  
+  The current tenant-bound `User` shape MAY remain during migration, but new
+  package boundaries SHALL model tenant authority through `TenantMembership`.
+  
+  ## Context
+  
+  The current repo's `User` model is tenant-bound.
+  
+  For a platform where one human can belong to multiple tenants, tenant-bound
+  users duplicate the human identity record and blur account lifecycle,
+  authentication factors, recovery, and cross-tenant memberships.
+  
+  The package-boundary proposal calls out a cleaner target model: a global
+  account plus tenant memberships.
+  
+  ## Consequences
+  
+  `principals` owns `UserPrincipal` / account semantics and
+  `TenantMembership`.
+  
+  `policy` owns tenant-scoped authority evaluation.
+  
+  `admin` owns lifecycle operations for memberships, invitations, tenant admins,
+  owners, developers, and members.
+  
+  `credentials` binds authentication material to the global user/account
+  principal rather than duplicating credentials per tenant unless policy
+  requires tenant-specific credentials.
+  
+  Migration must preserve compatibility with existing tenant-bound user rows.

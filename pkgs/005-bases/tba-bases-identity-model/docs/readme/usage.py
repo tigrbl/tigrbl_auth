@@ -1,0 +1,3 @@
+from tba_bases_identity_model import ArtifactVerifierBase
+
+assert callable(ArtifactVerifierBase)

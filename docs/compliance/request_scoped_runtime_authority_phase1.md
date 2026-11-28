@@ -4,24 +4,24 @@ This checkpoint captures the first runtime implementation slice for `feat:reques
 
 Implemented paths:
 
-- `tigrbl_auth/ops/authorize.py`
-- `tigrbl_auth/ops/device_authorization.py`
-- `tigrbl_auth/ops/logout.py`
-- `tigrbl_auth/ops/par.py`
-- `tigrbl_auth/ops/register.py`
-- `tigrbl_auth/standards/oidc/rp_initiated_logout.py`
-- `tigrbl_auth/standards/oidc/session_mgmt.py`
+- `tba_auth/ops/authorize.py`
+- `tba_auth/ops/device_authorization.py`
+- `tba_auth/ops/logout.py`
+- `tba_auth/ops/par.py`
+- `tba_auth/ops/register.py`
+- `tba_auth/standards/oidc/rp_initiated_logout.py`
+- `tba_auth/standards/oidc/session_mgmt.py`
 
 Coverage added:
 
-- `tests/unit/test_request_scoped_runtime_authority.py`
+- `pkgs/120-tests/tba-tests-runtime/tests/unit/test_request_scoped_runtime_authority.py`
 
 Validated commands:
 
 ```text
-uv run pytest tests/unit/test_request_scoped_runtime_authority.py
-uv run pytest tests/unit/test_request_scoped_runtime_authority.py tests/unit/test_session_logout_cluster_b.py tests/negative/test_cookie_and_logout_abuse_cases.py tests/conformance/production/test_oidc_session_management.py tests/conformance/production/test_oidc_rp_initiated_logout.py
-uv run pytest tests/integration/test_auth_flows.py -k "register_client_success or logout_post_clears_session_cookie"
+uv run pytest pkgs/120-tests/tba-tests-runtime/tests/unit/test_request_scoped_runtime_authority.py
+uv run pytest pkgs/120-tests/tba-tests-runtime/tests/unit/test_request_scoped_runtime_authority.py pkgs/120-tests/tba-tests-oidc/tests/unit/test_session_logout_cluster_b.py pkgs/120-tests/tba-tests-oidc/tests/negative/test_cookie_and_logout_abuse_cases.py pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_session_management.py pkgs/120-tests/tba-tests-oidc/tests/conformance/production/test_oidc_rp_initiated_logout.py
+uv run pytest pkgs/120-tests/tba-tests-oauth/tests/integration/test_auth_flows.py -k "register_client_success or logout_post_clears_session_cookie"
 ```
 
 Observed result:

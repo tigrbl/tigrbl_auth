@@ -16,7 +16,7 @@ references: []
 body: |-
   ## Decision
 
-  `tigrbl_auth` MUST govern non-human, device, and workload identity as explicit identity-plane boundaries until each feature has a durable lifecycle, operator surface, runtime enforcement model, tests, claims, and evidence.
+  `tba_auth` MUST govern non-human, device, and workload identity as explicit identity-plane boundaries until each feature has a durable lifecycle, operator surface, runtime enforcement model, tests, claims, and evidence.
 
   Partial model-only support is not sufficient to classify these features as implemented.
 

@@ -1,0 +1,37 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1153"
+number: 1153
+slug: "tenant-local-policy-and-configuration-contract"
+title: "Tenant Local Policy and Configuration Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs tenant-local policy and configuration workflows exposed by the tenant-admin API."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Defines tenant-local policy and configuration mutation boundaries."
+    at: "2026-05-25T05:09:37Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs tenant-local policy and configuration workflows exposed by the tenant-admin API.
+  
+  ## Requirements
+  
+  Tenant admins MAY manage policy and configuration values that affect only their authorized tenant namespace. Tenant-local policy MUST NOT override platform guardrails, issuer-wide safety requirements, release governance, or cross-tenant authority rules.
+  
+  Policy/configuration mutations MUST be validated, tenant-scoped, auditable, and fail closed when the effective policy source is ambiguous or platform-owned.
+  
+  ## Verification
+  
+  Verification MUST prove tenant-local updates affect only the owning tenant, cannot relax platform-owned controls, and produce authorization and audit evidence.
+spec_kind: "local-policy"
+adr_ids:
+  - "adr:1079"
+  - "adr:1016"

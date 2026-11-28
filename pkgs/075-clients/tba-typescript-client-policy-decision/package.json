@@ -1,0 +1,28 @@
+{
+  "name": "@tba/client-policy-decision",
+  "version": "0.4.0-dev.3",
+  "type": "module",
+  "license": "Apache-2.0",
+  "exports": "./src/index.ts",
+  "files": [
+    "src",
+    "package.json",
+    "LICENSE",
+    "NOTICE",
+    "README.md"
+  ],
+  "description": "Transport-injected TypeScript client for authorization policy decisions.",
+  "author": {
+    "name": "Jacob Stewart",
+    "email": "jacob@swarmauri.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tigrbl/tigrbl_auth.git",
+    "directory": "pkgs/075-clients/tba-typescript-client-policy-decision"
+  },
+  "homepage": "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/075-clients/tba-typescript-client-policy-decision#readme",
+  "bugs": {
+    "url": "https://github.com/tigrbl/tigrbl_auth/issues"
+  }
+}

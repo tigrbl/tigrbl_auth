@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from tigrbl_auth.cli.certification_evidence import (
+from tba_auth.cli.certification_evidence import (
     current_environment_identity,
     lane_identity,
     migration_identity,
@@ -115,7 +115,7 @@ def _pytest_summary(report: dict[str, Any]) -> dict[str, int]:
 
 
 def _out_root() -> Path:
-    path = Path(os.environ.get("TIGRBL_AUTH_VALIDATED_RUN_ROOT", str(ROOT / "dist" / "validated-runs")))
+    path = Path(os.environ.get("TBA_AUTH_VALIDATED_RUN_ROOT", str(ROOT / "dist" / "validated-runs")))
     path.mkdir(parents=True, exist_ok=True)
     return path
 
@@ -135,7 +135,7 @@ def _base_payload(kind: str) -> dict[str, Any]:
         "generated_at": datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ"),
         "python_version": python_version,
         "tox_env": os.environ.get("TOX_ENV_NAME"),
-        "matrix_profile": os.environ.get("TIGRBL_AUTH_MATRIX_PROFILE"),
+        "matrix_profile": os.environ.get("TBA_AUTH_MATRIX_PROFILE"),
         "repository_version": _current_version(),
         "validated_run_root": _relative(_out_root()),
     }
@@ -208,7 +208,7 @@ def _serve_check_candidates(matrix_profile: str | None, runner: str | None) -> l
 
 
 def _default_install_profile(*, matrix_profile: str | None = None, lane: str | None = None) -> str:
-    explicit = str(os.environ.get("TIGRBL_AUTH_INSTALL_PROFILE") or "").strip()
+    explicit = str(os.environ.get("TBA_AUTH_INSTALL_PROFILE") or "").strip()
     if explicit:
         return explicit
     if lane:
@@ -256,7 +256,7 @@ def _cmd_runtime_profile(args: argparse.Namespace) -> int:
     payload = _base_payload("runtime-profile")
     runtime_report_path = ROOT / "docs" / "compliance" / "runtime_profile_report.json"
     runtime_report = _read_json(runtime_report_path)
-    runner = args.runner or os.environ.get("TIGRBL_AUTH_RUNNER") or None
+    runner = args.runner or os.environ.get("TBA_AUTH_RUNNER") or None
     matrix_profile = str(payload.get("matrix_profile") or "unknown")
     install_profile = _default_install_profile(matrix_profile=matrix_profile)
 
@@ -321,7 +321,7 @@ def _cmd_runtime_profile(args: argparse.Namespace) -> int:
 
 def _cmd_test_lane(args: argparse.Namespace) -> int:
     payload = _base_payload("test-lane")
-    lane = args.lane or os.environ.get("TIGRBL_AUTH_TEST_LANE") or "unknown"
+    lane = args.lane or os.environ.get("TBA_AUTH_TEST_LANE") or "unknown"
     install_profile = _default_install_profile(lane=lane)
     report_path = Path(args.report).resolve() if args.report else None
     report = _read_json(report_path)

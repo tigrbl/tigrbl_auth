@@ -1,6 +1,6 @@
 # CLI Surface
 
-> Generated from `tigrbl_auth.cli.metadata`; argparse help, CLI docs, contract artifacts, and conformance snapshots derive from the same metadata source.
+> Generated from `tba_auth.cli.metadata`; argparse help, CLI docs, contract artifacts, and conformance snapshots derive from the same metadata source.
 
 ## Global flags
 
@@ -68,9 +68,9 @@ Resolve deployment, materialize a runner-qualified runtime plan, validate the se
   - `1` — Operation failed or verification did not pass.
   - `2` — CLI argument or contract validation failed before execution.
 - Examples:
-  - `tigrbl-auth serve --server uvicorn --check`
-  - `tigrbl-auth serve --server hypercorn --host 0.0.0.0 --port 8443`
-  - `tigrbl-auth serve --server tigrcorn --dry-run --format yaml`
+  - `tba-auth serve --server uvicorn --check`
+  - `tba-auth serve --server hypercorn --host 0.0.0.0 --port 8443`
+  - `tba-auth serve --server tigrcorn --dry-run --format yaml`
 
 ## Governance and certification
 

@@ -1,0 +1,48 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1121"
+number: 1121
+slug: "tenant-self-service-administration-flow"
+title: "Tenant self-service administration flow"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs tenant self-service administration."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-05-18T08:32:01Z"
+    note: "Define tenant-admin self-service workflow requirements."
+    status: "accepted"
+  -
+    at: "2026-05-25T02:56:46Z"
+    note: "Bound tenant self-service to tenant-admin product surface."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Linked tenant self-service flow to tenant-admin authority decision."
+    at: "2026-05-25T05:10:46Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs tenant self-service administration.
+  
+  ## Requirements
+  
+  Tenant admins MAY manage tenant-scoped resources allowed by policy and MUST NOT gain deployment-wide authority by default.
+  
+  Routine tenant self-service SHOULD be exposed through the tenant-admin API and tenant-admin UIX. Platform tenant creation, deletion, suspension, and cross-tenant authority assignment remain platform-admin responsibilities.
+  
+  Tenant self-service operations MUST be safe mutations with authorization, tenant isolation, validation, idempotency where required, and audit records.
+  
+  ## Verification
+  
+  Verification MUST prove tenant admin can perform allowed operations, cannot cross tenant boundaries, cannot perform deployment-superuser operations, cannot perform platform tenant lifecycle operations, and produces audit events.
+spec_kind: "operational"
+adr_ids:
+  - "adr:1110"
+  - "adr:1120"
+  - "adr:1079"

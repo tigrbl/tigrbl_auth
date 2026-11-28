@@ -1,104 +1,99 @@
 {
-  "generated_at": "20260513T121950Z",
-  "passed": false,
+  "generated_at": "20260805T071605Z",
+  "passed": true,
   "summary": {
     "static_manifest_passed": true,
-    "passed": false,
+    "passed": true,
     "profile": "base",
     "current_profile_identity": "base@py312",
     "environment_identity_present": true,
-    "current_python": "3.12.5",
+    "current_python": "3.12.13",
     "current_python_supported": true,
     "expected_supported_python_versions": [
       "3.10",
       "3.11",
-      "3.12",
-      "3.13",
-      "3.14"
+      "3.12"
     ],
-    "expected_supported_python_count": 5,
-    "detected_supported_python_count": 2,
-    "declared_runtime_matrix_env_count": 24,
-    "declared_test_lane_env_count": 25,
-    "declared_certification_tox_env_count": 53,
-    "tox_env_count": 53,
+    "expected_supported_python_count": 3,
+    "detected_supported_python_count": 1,
+    "declared_runtime_matrix_env_count": 14,
+    "declared_test_lane_env_count": 15,
+    "declared_certification_tox_env_count": 33,
+    "tox_env_count": 33,
     "tox_envs_with_pip_check_count": 14,
     "tox_envs_with_install_probe_count": 14,
     "tox_section_template_count": 14,
     "tox_envs_declare_pip_check": true,
     "tox_envs_declare_install_probe": true,
     "workspace_sources_present": false,
+    "workspace_sources_declared": true,
+    "first_party_workspace_source_count": 443,
+    "forbidden_workspace_source_count": 0,
     "forbidden_dependency_reference_count": 0,
-    "base_dependency_count": 22,
-    "base_exact_pinned_dependency_count": 22,
-    "dependency_lock_manifest_present": true,
-    "dependency_lock_install_profile_count": 14,
+    "base_dependency_count": 468,
+    "base_exact_pinned_dependency_count": 468,
+    "dependency_source": "pyproject.toml",
+    "native_uv_lock_present": true,
+    "install_profile_count": 14,
     "install_profiles_workflow_present": true,
     "release_gates_workflow_present": true,
-    "install_profiles_runtime_env_present_count": 24,
-    "release_gates_runtime_env_present_count": 24,
-    "release_gates_test_lane_env_present_count": 25,
+    "install_profiles_runtime_env_present_count": 14,
+    "release_gates_runtime_env_present_count": 14,
+    "release_gates_test_lane_env_present_count": 15,
     "release_gates_extra_env_present_count": 2,
     "install_profiles_artifact_upload_present": true,
     "release_gates_artifact_upload_present": true,
-    "current_profile_expected_module_count": 21,
-    "current_profile_import_probe_passed_count": 21,
+    "current_profile_expected_module_count": 22,
+    "current_profile_import_probe_passed_count": 22,
     "current_profile_import_probe_failed_count": 0,
     "current_profile_import_probe_passed": true,
-    "runtime_surface_probe_count": 4,
+    "runtime_surface_probe_count": 5,
     "runtime_surface_probe_failed_count": 0,
     "runtime_surface_probe_passed": true
   },
-  "failures": [
-    "The current environment does not provide the full supported interpreter matrix required for clean-room certification."
-  ],
+  "failures": [],
   "warnings": [
-    "The current container does not provide supported interpreter binaries for: 3.11, 3.13, 3.14.",
-    "Pinned tigrbl==0.4.0 declares Requires-Python >=3.10,<3.14, blocking Python 3.14.",
-    "Pinned Swarmauri core/base/standard/JWT/JWS/Ed25519/DPoP/JWE/Paramiko/keyprovider packages declare Requires-Python >=3.10,<3.13, blocking Python 3.13 and 3.14."
+    "The current container does not provide supported interpreter binaries for: 3.10, 3.11."
   ],
   "detected_supported_pythons": [
     {
       "version": "3.10",
-      "available": true,
-      "path": "py -3.10",
-      "source": "py-launcher"
+      "available": false,
+      "path": null,
+      "source": null
     },
     {
       "version": "3.11",
       "available": false,
       "path": null,
-      "source": "py-launcher",
-      "message": "No suitable Python runtime found\nPass --list (-0) to see all detected environments on your machine\nor set environment variable PYLAUNCHER_ALLOW_INSTALL to use winget\nor open the Microsoft Store to the requested version."
+      "source": null
     },
     {
       "version": "3.12",
       "available": true,
       "path": "<repo>/.venv/Scripts/python.exe",
       "source": "current-interpreter"
-    },
-    {
-      "version": "3.13",
-      "available": false,
-      "path": null,
-      "source": "py-launcher",
-      "message": "No suitable Python runtime found\nPass --list (-0) to see all detected environments on your machine\nor set environment variable PYLAUNCHER_ALLOW_INSTALL to use winget\nor open the Microsoft Store to the requested version."
-    },
-    {
-      "version": "3.14",
-      "available": false,
-      "path": null,
-      "source": "py-launcher",
-      "message": "No suitable Python runtime found\nPass --list (-0) to see all detected environments on your machine\nor set environment variable PYLAUNCHER_ALLOW_INSTALL to use winget\nor open the Microsoft Store to the requested version."
     }
   ],
   "dependency_manifest": {
-    "requires_python": ">=3.10,<3.15",
+    "requires_python": ">=3.10,<3.13",
     "dependencies": [
-      "tigrbl==0.4.0",
+      "tigrbl==0.4.5.dev4",
+      "tigrbl-atoms==0.4.5.dev4",
+      "tigrbl-base==0.4.5.dev4",
+      "tigrbl-canon==0.4.5.dev4",
+      "tigrbl-concrete==0.4.5.dev4",
+      "tigrbl-core==0.4.5.dev4",
+      "tigrbl-kernel==0.4.5.dev4",
+      "tigrbl-ops-olap==0.4.5.dev4",
+      "tigrbl-ops-oltp==0.4.5.dev4",
+      "tigrbl-ops-realtime==0.4.5.dev4",
+      "tigrbl-orm==0.4.5.dev4",
+      "tigrbl-runtime==0.4.5.dev4",
+      "tigrbl-typing==0.4.5.dev4",
       "swarmauri_core==0.10.0",
-      "swarmauri_base==0.9.2",
-      "swarmauri_standard==0.9.2",
+      "swarmauri_base==0.10.0",
+      "swarmauri_standard==0.10.0",
       "swarmauri_tokens_jwt==0.3.0.dev31",
       "swarmauri_signing_jws==0.3.0.dev31",
       "swarmauri_signing_ed25519==0.2.0.dev32",
@@ -107,7 +102,7 @@
       "swarmauri_crypto_paramiko==0.4.0.dev5",
       "swarmauri_keyprovider_file==0.2.0",
       "swarmauri_keyprovider_local==0.2.0",
-      "python-multipart==0.0.22",
+      "python-multipart==0.0.27",
       "sqlalchemy[asyncio]==2.0.49",
       "pydantic[email]==2.12.5",
       "pydantic-settings==2.13.1",
@@ -116,6 +111,440 @@
       "bcrypt==5.0.0",
       "httpx==0.28.1",
       "aiosqlite==0.22.1",
+      "tba-contracts-identity==0.4.0.dev2",
+      "tba-contracts-identity-assurance==0.4.0.dev2",
+      "tba-contracts-token==0.4.0.dev2",
+      "tba-contracts-attestation==0.4.0.dev2",
+      "tba-contracts-claim==0.4.0.dev2",
+      "tba-contracts-did==0.4.0.dev2",
+      "tba-contracts-digital-credential==0.4.0.dev2",
+      "tba-contracts-public-key-authentication==0.4.0.dev2",
+      "tba-contracts-replay==0.4.0.dev2",
+      "tba-contracts-security-event==0.4.0.dev2",
+      "tba-contracts-workload-identity==0.4.0.dev2",
+      "tba-contracts-identity-document==0.4.0.dev2",
+      "tba-contracts-protected-envelope==0.4.0.dev2",
+      "tba-contracts-proof-of-possession==0.4.0.dev2",
+      "tba-concrete-authorization-policy-rules==0.4.0.dev2",
+      "tba-concrete-authorization-policy-combiner-default==0.4.0.dev2",
+      "tba-concrete-authorization-policy-evaluators-default==0.4.0.dev2",
+      "tba-concrete-authorization-policy-attributes-mapping==0.4.0.dev2",
+      "tba-concrete-authorization-policy-obligations==0.4.0.dev2",
+      "tba-concrete-policy-decision-engine-default==0.4.0.dev2",
+      "tba-concrete-cose==0.4.0.dev2",
+      "tba-concrete-jws==0.4.0.dev2",
+      "tba-concrete-jwe==0.4.0.dev2",
+      "tba-concrete-jwt==0.4.0.dev2",
+      "tba-concrete-cwt==0.4.0.dev2",
+      "tba-concrete-oidc-id-token==0.4.0.dev2",
+      "tba-concrete-did-document==0.4.0.dev2",
+      "tba-concrete-vc-jose-credential==0.4.0.dev2",
+      "tba-concrete-vc-cose-credential==0.4.0.dev2",
+      "tba-concrete-wit==0.4.0.dev2",
+      "tba-concrete-wit-svid-credential==0.4.0.dev2",
+      "tba-concrete-wpt==0.4.0.dev2",
+      "tba-concrete-x509-svid-credential==0.4.0.dev2",
+      "tba-concrete-jwt-svid-credential==0.4.0.dev2",
+      "tba-concrete-cwt-svid-extension-credential==0.4.0.dev2",
+      "tba-provider-security-authorization-provenance-builder==0.1.0",
+      "tigrbl-identity-identities-concrete==0.4.0.dev2",
+      "tigrbl-identity-credentials-concrete==0.4.0.dev2",
+      "tba-concrete-user-identity==0.4.0.dev2",
+      "tba-concrete-administrator-identity==0.4.0.dev2",
+      "tba-concrete-service-identity==0.4.0.dev2",
+      "tba-concrete-client-identity==0.4.0.dev2",
+      "tba-concrete-machine-identity==0.4.0.dev2",
+      "tba-concrete-workload-identity==0.4.0.dev2",
+      "tba-concrete-device-identity==0.4.0.dev2",
+      "tba-concrete-credential-password==0.4.0.dev2",
+      "tba-concrete-credential-password-reset==0.4.0.dev2",
+      "tba-concrete-credential-api-key==0.4.0.dev2",
+      "tba-concrete-credential-service-key==0.4.0.dev2",
+      "tba-concrete-credential-client-secret==0.4.0.dev2",
+      "tba-concrete-credential-mfa==0.4.0.dev2",
+      "tba-concrete-credential-passkey==0.4.0.dev2",
+      "tba-concrete-service-credential==0.4.0.dev2",
+      "tba-concrete-webauthn-credential==0.4.0.dev2",
+      "tba-concrete-passwordless-credential==0.4.0.dev2",
+      "tba-concrete-mfa-factor==0.4.0.dev2",
+      "tba-concrete-credential-mtls-certificate==0.4.0.dev2",
+      "tba-concrete-credential-dpop-key==0.4.0.dev2",
+      "tigrbl-sd-jwt-vc-concrete==0.4.0.dev2",
+      "tba-concrete-sd-jwt-vc-credential==0.4.0.dev2",
+      "tba-concrete-mdoc-credential==0.4.0.dev2",
+      "tba-concrete-verifiable-credential==0.4.0.dev2",
+      "tba-concrete-verifiable-presentation==0.4.0.dev2",
+      "tba-concrete-eat-evidence==0.4.0.dev2",
+      "tba-concrete-jose==0.4.0.dev2",
+      "tba-concrete-sd-jwt==0.4.0.dev2",
+      "tba-concrete-svid==0.4.0.dev2",
+      "tba-concrete-did==0.4.0.dev2",
+      "tba-concrete-mdoc==0.4.0.dev2",
+      "tigrbl-vcdm-concrete==0.4.0.dev2",
+      "tba-concrete-eat==0.4.0.dev2",
+      "tba-concrete-corim==0.4.0.dev2",
+      "tba-contracts-security-key-rotation-policy==0.1.0",
+      "tigrbl-identity-admin-advanced-authenticator-registry==0.4.0.dev2",
+      "tba-provider-authentication-anomaly-detector==0.4.0.dev2",
+      "tba-provider-access-governance-memory==0.4.0.dev2",
+      "tba-provider-policy-administration-memory==0.4.0.dev2",
+      "tigrbl-account-self-service==0.4.0.dev2",
+      "tba-capability-account-self-service==0.4.0.dev2",
+      "tba-capability-administrative-resource==0.4.0.dev2",
+      "tba-capability-identity-administration==0.4.0.dev2",
+      "tba-capability-operator-administration==0.4.0.dev2",
+      "tba-capability-realm-administration==0.4.0.dev2",
+      "tba-capability-tenant-administration==0.4.0.dev2",
+      "tigrbl-identity-admin-control-plane==0.4.0.dev2",
+      "tigrbl-identity-admin-federation-registry==0.4.0.dev2",
+      "tigrbl-identity-admin-policy-registry==0.4.0.dev2",
+      "tba-provider-identity-administration-relationship-graph==0.4.0.dev2",
+      "tba-durability-identity-administration-trust-federation-graph==0.4.0.dev2",
+      "tba-concrete-trust-federation-graph==0.4.0.dev2",
+      "tigrbl-auth-protocol-oidc-backchannel-replay-store==0.4.0.dev2",
+      "tba-concrete-set==0.4.0.dev2",
+      "tba-bases-identity-claims==0.4.0.dev2",
+      "tba-bases-claim==0.4.0.dev2",
+      "tba-bases-identity==0.4.0.dev2",
+      "tba-bases-authentication-credential==0.4.0.dev2",
+      "tba-bases-authenticator==0.1.0",
+      "tba-bases-public-key-authentication==0.4.0.dev2",
+      "tba-bases-did==0.4.0.dev2",
+      "tba-bases-workload-identity==0.4.0.dev2",
+      "tba-bases-certificate==0.4.0.dev2",
+      "tba-bases-trust==0.4.0.dev2",
+      "tba-bases-protected-artifact==0.4.0.dev2",
+      "tba-bases-signing==0.4.0.dev2",
+      "tba-bases-key==0.4.0.dev2",
+      "tba-bases-encryption==0.4.0.dev2",
+      "tba-bases-proof-of-possession==0.4.0.dev2",
+      "tba-bases-identity-document==0.4.0.dev2",
+      "tba-bases-protected-envelope==0.4.0.dev2",
+      "tba-bases-token-introspection==0.4.0.dev2",
+      "tba-bases-digital-credential==0.4.0.dev2",
+      "tba-bases-attestation==0.4.0.dev2",
+      "tba-bases-cose==0.4.0.dev2",
+      "tba-bases-security-event==0.4.0.dev2",
+      "tba-bases-token==0.4.0.dev2",
+      "tba-bases-capability==0.4.0.dev2",
+      "tba-bases-replay==0.4.0.dev2",
+      "tba-bases-authentication-assurance==0.4.0.dev2",
+      "tba-bases-authentication-context==0.4.0.dev2",
+      "tba-bases-identity-assurance==0.4.0.dev2",
+      "tba-bases-security-artifact==0.4.0.dev2",
+      "tba-concrete-claim-issuer==0.4.0.dev2",
+      "tba-concrete-claim-subject==0.4.0.dev2",
+      "tba-concrete-claim-audience==0.4.0.dev2",
+      "tba-concrete-claim-expiration==0.4.0.dev2",
+      "tba-concrete-claim-not-before==0.4.0.dev2",
+      "tba-concrete-claim-issued-at==0.4.0.dev2",
+      "tba-concrete-claim-jwt-id==0.4.0.dev2",
+      "tba-protocol-jwt==0.4.0.dev2",
+      "tba-concrete-claim-authentication-time==0.4.0.dev2",
+      "tba-concrete-claim-nonce==0.4.0.dev2",
+      "tba-concrete-claim-authentication-context==0.4.0.dev2",
+      "tba-concrete-claim-authentication-methods==0.4.0.dev2",
+      "tba-concrete-claim-authorized-party==0.4.0.dev2",
+      "tba-concrete-claim-confirmation==0.4.0.dev2",
+      "tba-concrete-claim-cwt-confirmation==0.4.0.dev2",
+      "tba-concrete-claim-workload-token-hash==0.4.0.dev2",
+      "tba-concrete-claim-transaction-token-hash==0.4.0.dev2",
+      "tba-concrete-claim-other-token-hashes==0.4.0.dev2",
+      "tba-concrete-claim-scope==0.4.0.dev2",
+      "tba-concrete-claim-client-id==0.4.0.dev2",
+      "tba-concrete-claim-verified-claims==0.4.0.dev2",
+      "tba-concrete-claim-place-of-birth==0.4.0.dev2",
+      "tba-concrete-claim-nationalities==0.4.0.dev2",
+      "tba-concrete-claim-birth-family-name==0.4.0.dev2",
+      "tba-concrete-claim-birth-given-name==0.4.0.dev2",
+      "tba-concrete-claim-birth-middle-name==0.4.0.dev2",
+      "tba-concrete-claim-salutation==0.4.0.dev2",
+      "tba-concrete-claim-title==0.4.0.dev2",
+      "tba-concrete-claim-msisdn==0.4.0.dev2",
+      "tba-concrete-claim-also-known-as==0.4.0.dev2",
+      "tba-concrete-claim-address-country-code==0.4.0.dev2",
+      "tba-concrete-claim-credential-type==0.4.0.dev2",
+      "tba-concrete-claim-credential-status==0.4.0.dev2",
+      "tba-concrete-claim-security-events==0.4.0.dev2",
+      "tba-concrete-claim-transaction-id==0.4.0.dev2",
+      "tba-concrete-claim-eat-profile==0.4.0.dev2",
+      "tba-concrete-claim-http-method==0.4.0.dev2",
+      "tba-concrete-claim-http-uri==0.4.0.dev2",
+      "tba-concrete-claim-access-token-hash==0.4.0.dev2",
+      "tba-concrete-claim-access-token-digest==0.4.0.dev2",
+      "tba-concrete-claim-sd-hash==0.4.0.dev2",
+      "tba-concrete-claim-eat-nonce==0.4.0.dev2",
+      "tba-concrete-claim-ueid==0.4.0.dev2",
+      "tba-concrete-claim-eat-submodules==0.4.0.dev2",
+      "tba-concrete-claim-actor==0.4.0.dev2",
+      "tba-concrete-claim-may-act==0.4.0.dev2",
+      "tba-concrete-claim-name==0.4.0.dev2",
+      "tba-concrete-claim-given-name==0.4.0.dev2",
+      "tba-concrete-claim-family-name==0.4.0.dev2",
+      "tba-concrete-claim-middle-name==0.4.0.dev2",
+      "tba-concrete-claim-nickname==0.4.0.dev2",
+      "tba-concrete-claim-preferred-username==0.4.0.dev2",
+      "tba-concrete-claim-profile-uri==0.4.0.dev2",
+      "tba-concrete-claim-picture-uri==0.4.0.dev2",
+      "tba-concrete-claim-website-uri==0.4.0.dev2",
+      "tba-concrete-claim-email==0.4.0.dev2",
+      "tba-concrete-claim-email-verified==0.4.0.dev2",
+      "tba-concrete-claim-gender==0.4.0.dev2",
+      "tba-concrete-claim-birthdate==0.4.0.dev2",
+      "tba-concrete-claim-zoneinfo==0.4.0.dev2",
+      "tba-concrete-claim-locale==0.4.0.dev2",
+      "tba-concrete-claim-phone-number==0.4.0.dev2",
+      "tba-concrete-claim-phone-number-verified==0.4.0.dev2",
+      "tba-concrete-claim-address==0.4.0.dev2",
+      "tba-concrete-claim-updated-at==0.4.0.dev2",
+      "tba-concrete-claim-subject-identifiers==0.4.0.dev2",
+      "tba-concrete-claim-assertions==0.4.0.dev2",
+      "tba-concrete-claim-updated-at-rfc3339==0.4.0.dev2",
+      "tba-concrete-claim-authorization-code-hash==0.4.0.dev2",
+      "tba-concrete-claim-state-hash==0.4.0.dev2",
+      "tba-concrete-claim-session-id==0.4.0.dev2",
+      "tba-concrete-claim-cwt-issuer==0.4.0.dev2",
+      "tba-concrete-claim-cwt-subject==0.4.0.dev2",
+      "tba-concrete-claim-cwt-audience==0.4.0.dev2",
+      "tba-concrete-claim-cwt-expiration==0.4.0.dev2",
+      "tba-concrete-claim-cwt-not-before==0.4.0.dev2",
+      "tba-concrete-claim-cwt-issued-at==0.4.0.dev2",
+      "tba-concrete-claim-cwt-id==0.4.0.dev2",
+      "tba-protocol-cwt==0.4.0.dev2",
+      "tba-protocol-workload-spiffe-svid==0.4.0.dev2",
+      "tba-example-workload-credential-profiles==0.4.0.dev2",
+      "tba-testkit-workload-credential-conformance==0.4.0.dev2",
+      "tba-protocol-workload-spiffe-broker-api==0.4.0.dev2",
+      "tba-protocol-workload-spiffe-workload-api==0.4.0.dev2",
+      "tba-profile-workload-credential-cwt-svid-extension==0.4.0.dev2",
+      "tba-profile-workload-credential-spiffe-wit-svid==0.4.0.dev2",
+      "tba-profile-workload-proof-wimse-wpt==0.4.0.dev2",
+      "tba-profile-workload-credential-wimse-wit==0.4.0.dev2",
+      "tba-protocol-gnap==0.4.0.dev2",
+      "tba-profile-haip==0.4.0.dev2",
+      "tba-profile-fido2-server==0.4.0.dev2",
+      "tba-protocol-security-event-set==0.4.0.dev2",
+      "tba-protocol-attestation-eat==0.4.0.dev2",
+      "tba-protocol-attestation-corim==0.4.0.dev2",
+      "tba-profile-credential-sd-jwt-vc==0.4.0.dev2",
+      "tba-profile-credential-vc-jose-cose==0.4.0.dev2",
+      "tba-protocol-credential-iso-mdoc==0.4.0.dev2",
+      "tba-protocol-credential-w3c-vcdm==0.4.0.dev2",
+      "tba-concrete-authorization-scope-set-matcher==0.4.0.dev2",
+      "tba-concrete-public-subject-identifier==0.4.0.dev2",
+      "tba-concrete-pairwise-subject-identifier==0.4.0.dev2",
+      "tba-concrete-acr-evaluator-basic==0.4.0.dev2",
+      "tba-concrete-amr-evaluator-basic==0.4.0.dev2",
+      "tba-concrete-authorization-provenance==0.4.0.dev2",
+      "tba-concrete-dpop-confirmation-binding==0.4.0.dev2",
+      "tba-concrete-mtls-confirmation-binding==0.4.0.dev2",
+      "tba-concrete-pkce==0.4.0.dev2",
+      "tba-concrete-identity-assurance==0.4.0.dev2",
+      "tba-concrete-capability==0.4.0.dev2",
+      "tba-concrete-capability-default==0.4.0.dev2",
+      "tba-capability-access-governance==0.4.0.dev2",
+      "tba-capability-adaptive-authentication==0.4.0.dev2",
+      "tigrbl-advanced-authentication-capability==0.4.0.dev2",
+      "tba-capability-mfa-challenge==0.4.0.dev2",
+      "tba-capability-key-administration==0.4.0.dev2",
+      "tba-capability-policy-administration==0.4.0.dev2",
+      "tba-capability-policy-assurance==0.4.0.dev2",
+      "tba-durability-authorization-policy-authority-derivation-graph==0.4.0.dev2",
+      "tba-concrete-authority-graph==0.4.0.dev2",
+      "tba-provider-authorization-policy-decision-engine==0.4.0.dev2",
+      "tigrbl-authz-policy-invariant-registry==0.4.0.dev2",
+      "tba-contracts-release==0.1.0",
+      "tba-certification-release==0.4.0.dev2",
+      "tba-contracts-security-trust==0.1.0",
+      "tba-bases-security-trust-domain==0.1.0",
+      "tba-bases-security-provenance==0.1.0",
+      "tba-bases-authorization-policy==0.4.0.dev2",
+      "tba-bases-identity-model==0.4.0.dev2",
+      "tba-bases-jose==0.4.0.dev2",
+      "tba-bases-resource-server==0.4.0.dev2",
+      "tba-provider-security-certificate-mtls==0.1.0",
+      "tba-provider-security-dpop-cnf-binding-validator==0.1.0",
+      "tba-provider-security-mtls-cnf-binding-validator==0.1.0",
+      "tba-provider-security-proof-dpop==0.1.0",
+      "tba-provider-security-proof-pkce==0.1.0",
+      "tba-provider-authentication-context-acr-basic==0.1.0",
+      "tba-provider-authentication-context-amr-basic==0.1.0",
+      "tba-provider-claims-local==0.1.0",
+      "tba-provider-security-subject-pairwise==0.1.0",
+      "tba-provider-security-webfinger==0.1.0",
+      "tba-provider-security-oidc-federation==0.1.0",
+      "tigrbl-security-sender-constraint-validator==0.1.0",
+      "tba-provider-security-signing-pqc==0.1.0",
+      "tba-provider-cose-cryptography==0.4.0.dev2",
+      "tba-provider-jose-swarmauri==0.4.0.dev2",
+      "tba-provider-token-introspection==0.1.0",
+      "tba-provider-security-token-jwks-cache==0.1.0",
+      "tba-bases-identity-authenticator==0.1.0",
+      "tba-bases-public-key-authenticator==0.4.0.dev2",
+      "tba-provider-authenticator-password-local==0.1.0",
+      "tba-provider-authenticator-api-key-local==0.1.0",
+      "tba-provider-authenticator-service-key-local==0.1.0",
+      "tba-provider-authenticator-client-secret-local==0.1.0",
+      "tba-provider-secret-hashing-bcrypt==0.1.0",
+      "tba-provider-authenticator-session-local==0.1.0",
+      "tba-provider-authenticator-otp-local==0.1.0",
+      "tba-provider-authenticator-recovery-code-local==0.1.0",
+      "tba-provider-authenticator-mtls-client-cert==0.1.0",
+      "tba-provider-authenticator-dpop-proof==0.1.0",
+      "tba-provider-authenticator-remote-introspection==0.1.0",
+      "tba-provider-authenticator-federated-oidc==0.1.0",
+      "tba-provider-authorization-resource-server-verifier==0.4.0.dev2",
+      "tba-auth==0.4.0.dev2",
+      "tba-protocol-oauth==0.4.0.dev2",
+      "tba-profile-oauth-jwt-access-token==0.4.0.dev2",
+      "tba-protocol-oidc==0.4.0.dev2",
+      "tba-protocol-webauthn==0.4.0.dev2",
+      "tba-protocol-security-jose==0.4.0.dev2",
+      "tba-protocol-identity-did-core==0.4.0.dev2",
+      "tba-protocol-security-cose==0.4.0.dev2",
+      "tba-protocol-security-jws==0.4.0.dev2",
+      "tba-protocol-security-jwe==0.4.0.dev2",
+      "tba-protocol-oid4vci==0.4.0.dev2",
+      "tba-protocol-oid4vp==0.4.0.dev2",
+      "tba-protocol-authzen==0.4.0.dev2",
+      "tba-protocol-oidc-relying-party==0.4.0.dev2",
+      "tigrbl-authn-credentials==0.4.0.dev2",
+      "tigrbl-digital-credential-issuance==0.4.0.dev2",
+      "tba-capability-digital-credential-issuance==0.4.0.dev2",
+      "tigrbl-digital-credential-presentation==0.4.0.dev2",
+      "tba-capability-digital-credential-presentation==0.4.0.dev2",
+      "tigrbl-grant-negotiation-capability==0.4.0.dev2",
+      "tba-capability-delegated-access-negotiation==0.4.0.dev2",
+      "tigrbl-attestation-appraisal==0.4.0.dev2",
+      "tba-capability-attestation-appraisal==0.4.0.dev2",
+      "tigrbl-security-events==0.4.0.dev2",
+      "tba-capability-security-event-delivery==0.4.0.dev2",
+      "tigrbl-workload-identity==0.4.0.dev2",
+      "tba-capability-workload-identity==0.4.0.dev2",
+      "tba-capability-identity-document==0.4.0.dev2",
+      "tba-capability-protected-envelope==0.4.0.dev2",
+      "tba-capability-possession-proof==0.4.0.dev2",
+      "tba-capability-workload-credential-brokering==0.4.0.dev2",
+      "tigrbl-authz-policy-admin-gate==0.4.0.dev2",
+      "tba-router-administration-gate==0.4.0.dev2",
+      "tba-runtime-authorization-policy==0.4.0.dev2",
+      "tba-plugin-tigrbl==0.4.0.dev2",
+      "tba-protocol-oauth-protected-resource==0.4.0.dev2",
+      "tba-cli-identity==0.4.0.dev2",
+      "tba-testkit-identity==0.4.0.dev2",
+      "tba-runtime-identity-administration==0.4.0.dev2",
+      "tba-runtime-identity-authoring==0.4.0.dev2",
+      "tba-primitives-identity==0.4.0.dev2",
+      "tigrbl-identity-credentials==0.4.0.dev2",
+      "tba-provider-identity-jose==0.4.0.dev2",
+      "tba-provider-jose-cryptography==0.4.0.dev2",
+      "tigrbl-digital-credential-issuer-local==0.4.0.dev2",
+      "tba-provider-digital-credential-status==0.4.0.dev2",
+      "tba-provider-digital-credential-trust==0.4.0.dev2",
+      "tigrbl-digital-presentation-verifier==0.4.0.dev2",
+      "tba-provider-eat-verifier==0.4.0.dev2",
+      "tba-provider-attestation-reference==0.4.0.dev2",
+      "tba-provider-attestation-appraiser==0.4.0.dev2",
+      "tigrbl-corim-store-provider==0.4.0.dev2",
+      "tba-provider-corim-reference-memory==0.4.0.dev2",
+      "tba-provider-spiffe-workload-api==0.4.0.dev2",
+      "tba-provider-spiffe-bundle==0.4.0.dev2",
+      "tigrbl-svid-verifier-provider==0.4.0.dev2",
+      "tba-provider-did-resolver==0.4.0.dev2",
+      "tba-provider-did-controller==0.4.0.dev2",
+      "tba-provider-trust-anchor==0.4.0.dev2",
+      "tba-provider-certificate-status==0.4.0.dev2",
+      "tba-provider-certificate-path-validator==0.4.0.dev2",
+      "tba-provider-security-cose==0.4.0.dev2",
+      "tba-provider-attestation-packed==0.4.0.dev2",
+      "tba-provider-attestation-u2f==0.4.0.dev2",
+      "tba-provider-attestation-tpm==0.4.0.dev2",
+      "tba-provider-fido-metadata-service==0.4.0.dev2",
+      "tba-provider-mdoc-issuer==0.4.0.dev2",
+      "tba-provider-mdoc-verifier==0.4.0.dev2",
+      "tigrbl-security-event-replay-store==0.4.0.dev2",
+      "tba-provider-replay-memory==0.4.0.dev2",
+      "tba-capability-replay-protection==0.4.0.dev2",
+      "tba-capability-token-introspection==0.4.0.dev2",
+      "tba-capability-token-issuance==0.4.0.dev2",
+      "tba-capability-public-key-registration==0.4.0.dev2",
+      "tba-capability-public-key-authentication==0.4.0.dev2",
+      "tba-capability-public-key-credential-management==0.4.0.dev2",
+      "tba-capability-authenticator-attestation==0.4.0.dev2",
+      "tba-capability-token-exchange==0.4.0.dev2",
+      "tba-capability-token-revocation==0.4.0.dev2",
+      "tba-capability-api-key-authentication==0.4.0.dev2",
+      "tba-capability-client-secret-authentication==0.4.0.dev2",
+      "tba-capability-password-authentication==0.4.0.dev2",
+      "tba-capability-service-key-authentication==0.4.0.dev2",
+      "tigrbl-principal-authentication==0.4.0.dev2",
+      "tba-capability-policy-evaluation==0.4.0.dev2",
+      "tigrbl-protocol-artifact-processing==0.4.0.dev2",
+      "tba-capability-artifact-processing==0.4.0.dev2",
+      "tigrbl-pushed-authorization-capability==0.4.0.dev2",
+      "tba-capability-authorization-request-staging==0.4.0.dev2",
+      "tba-capability-protected-resource-authorization==0.4.0.dev2",
+      "tba-capability-client-registration==0.4.0.dev2",
+      "tba-router-oauth-authorization==0.4.0.dev2",
+      "tba-router-oauth-device-authorization==0.4.0.dev2",
+      "tba-router-oauth-token-exchange==0.4.0.dev2",
+      "tba-router-oidc-userinfo==0.4.0.dev2",
+      "tba-router-oidc-logout==0.4.0.dev2",
+      "tba-router-oidc-discovery==0.4.0.dev2",
+      "tba-router-oauth-authorization-server-metadata==0.4.0.dev2",
+      "tba-router-oauth-protected-resource-metadata==0.4.0.dev2",
+      "tba-router-resource-validation-metadata==0.4.0.dev2",
+      "tba-router-session-login==0.4.0.dev2",
+      "tba-router-webauthn==0.4.0.dev2",
+      "tba-router-oauth-introspection==0.4.0.dev2",
+      "tba-router-oauth-revocation==0.4.0.dev2",
+      "tba-router-oauth-pushed-authorization-request==0.4.0.dev2",
+      "tba-router-oauth-registration==0.4.0.dev2",
+      "tba-router-oauth-token==0.4.0.dev2",
+      "tba-app-backend-core==0.4.0.dev2",
+      "tba-app-backend-developer==0.4.0.dev2",
+      "tba-app-backend-my-account==0.4.0.dev2",
+      "tba-app-backend-platform-administration==0.4.0.dev2",
+      "tba-app-backend-public==0.4.0.dev2",
+      "tba-app-backend-resource-validation==0.4.0.dev2",
+      "tba-app-backend-service-administration==0.4.0.dev2",
+      "tba-app-backend-tenant-administration==0.4.0.dev2",
+      "tba-provider-set-transmitter==0.4.0.dev2",
+      "tba-provider-set-receiver==0.4.0.dev2",
+      "tba-provider-wallet-attestation-verifier==0.4.0.dev2",
+      "tba-provider-key-attestation-verifier==0.4.0.dev2",
+      "tba-provider-platform-attestation==0.4.0.dev2",
+      "tigrbl-identity-oauth==0.4.0.dev2",
+      "tigrbl-identity-oidc==0.4.0.dev2",
+      "tba-concrete-identity-principals==0.4.0.dev2",
+      "tba-operator-identity==0.4.0.dev2",
+      "tigrbl-identity-policy==0.4.0.dev2",
+      "tigrbl-identity-resource-server==0.4.0.dev2",
+      "tigrbl-identity-rp==0.4.0.dev2",
+      "tba-runtime-identity==0.4.0.dev2",
+      "tba-server-identity==0.4.0.dev2",
+      "tba-storage-core==0.4.0.dev2",
+      "tba-runtime-identity-storage==0.4.0.dev2",
+      "tba-durability-identity==0.4.0.dev2",
+      "tba-durability-session==0.4.0.dev2",
+      "tba-durability-consent==0.4.0.dev2",
+      "tba-durability-token==0.4.0.dev2",
+      "tba-durability-oauth-state==0.4.0.dev2",
+      "tba-durability-oidc-state==0.4.0.dev2",
+      "tba-durability-delegation==0.4.0.dev2",
+      "tba-durability-authorization-policy==0.4.0.dev2",
+      "tba-durability-digital-credential==0.4.0.dev2",
+      "tba-durability-presentation==0.4.0.dev2",
+      "tba-durability-attestation==0.4.0.dev2",
+      "tba-durability-security-event==0.4.0.dev2",
+      "tba-durability-workload-identity==0.4.0.dev2",
+      "tba-durability-replay-protection==0.4.0.dev2",
+      "tba-durability-webauthn==0.4.0.dev2",
+      "tba-durability-gnap-state==0.4.0.dev2",
+      "tba-durability-audit==0.4.0.dev2",
+      "tba-durability-key-material==0.4.0.dev2",
+      "tba-durability-authority-graph==0.4.0.dev2",
+      "tba-durability-trust-federation-graph==0.4.0.dev2",
       "tomli==2.4.0; python_version<'3.11'"
     ],
     "optional_dependencies": {
@@ -126,7 +555,11 @@
         "pytest-timeout==2.3.1",
         "pytest-benchmark==5.2.3",
         "pytest-asyncio==1.3.0",
-        "requests==2.33.1"
+        "requests==2.33.1",
+        "ssot-registry==0.2.17"
+      ],
+      "examples": [
+        "tba-example-oauth-device-authorization-cli==0.1.0"
       ],
       "postgres": [
         "asyncpg==0.31.0",
@@ -135,6 +568,33 @@
       "sqlite": [
         "aiosqlite==0.22.1"
       ],
+      "uvicorn": [
+        "tba-runtime-identity[uvicorn]==0.4.0.dev2"
+      ],
+      "hypercorn": [
+        "tba-runtime-identity[hypercorn]==0.4.0.dev2"
+      ],
+      "tigrcorn": [
+        "tba-runtime-identity[tigrcorn]==0.4.0.dev2"
+      ],
+      "servers": [
+        "tba-runtime-identity[servers]==0.4.0.dev2"
+      ]
+    },
+    "workspace_sources_present": false,
+    "workspace_sources_declared": true,
+    "first_party_workspace_source_count": 443,
+    "forbidden_workspace_source_count": 0,
+    "forbidden_workspace_sources": {},
+    "forbidden_dependency_references": [],
+    "exact_pinned_dependency_count": 468,
+    "dependency_count": 468
+  },
+  "extras_consistency": {
+    "passed": true,
+    "mismatches": [],
+    "runtime_pyproject": "pkgs/060-runtime/tba-runtime-identity/pyproject.toml",
+    "runtime_runner_extras": {
       "uvicorn": [
         "uvicorn[standard]==0.41.0"
       ],
@@ -150,89 +610,187 @@
         "tigrcorn==0.3.8; python_version>='3.11'"
       ]
     },
-    "workspace_sources_present": false,
-    "forbidden_dependency_references": [],
-    "exact_pinned_dependency_count": 22,
-    "dependency_count": 22
-  },
-  "constraints_consistency": {
-    "passed": true,
-    "mismatches": [],
-    "illegal_constraint_extras": {
-      "base": [],
-      "test": [],
-      "uvicorn": [],
-      "hypercorn": [],
-      "tigrcorn": []
+    "workspace_runner_extras": {
+      "uvicorn": [
+        "tba-runtime-identity[uvicorn]==0.4.0.dev2"
+      ],
+      "hypercorn": [
+        "tba-runtime-identity[hypercorn]==0.4.0.dev2"
+      ],
+      "tigrcorn": [
+        "tba-runtime-identity[tigrcorn]==0.4.0.dev2"
+      ],
+      "servers": [
+        "tba-runtime-identity[servers]==0.4.0.dev2"
+      ]
     },
-    "base_count": 22,
-    "test_count": 7,
-    "uvicorn_count": 1,
-    "hypercorn_count": 1,
-    "tigrcorn_count": 1
+    "profile_extra_coverage": {
+      "base": {
+        "extras": [],
+        "missing_extras": [],
+        "passed": true
+      },
+      "sqlite-uvicorn": {
+        "extras": [
+          "sqlite",
+          "uvicorn"
+        ],
+        "missing_extras": [],
+        "passed": true
+      },
+      "postgres-hypercorn": {
+        "extras": [
+          "postgres",
+          "hypercorn"
+        ],
+        "missing_extras": [],
+        "passed": true
+      },
+      "tigrcorn": {
+        "extras": [
+          "tigrcorn"
+        ],
+        "missing_extras": [],
+        "passed": true
+      },
+      "devtest": {
+        "extras": [
+          "test",
+          "sqlite",
+          "uvicorn"
+        ],
+        "missing_extras": [],
+        "passed": true
+      },
+      "release-gates": {
+        "extras": [
+          "test",
+          "sqlite",
+          "postgres",
+          "servers"
+        ],
+        "missing_extras": [],
+        "passed": true
+      },
+      "test-core": {
+        "extras": [
+          "test"
+        ],
+        "missing_extras": [],
+        "passed": true
+      },
+      "test-integration": {
+        "extras": [
+          "test",
+          "sqlite",
+          "postgres",
+          "servers"
+        ],
+        "missing_extras": [],
+        "passed": true
+      },
+      "test-conformance": {
+        "extras": [
+          "test",
+          "sqlite",
+          "postgres",
+          "servers"
+        ],
+        "missing_extras": [],
+        "passed": true
+      },
+      "test-security-negative": {
+        "extras": [
+          "test",
+          "sqlite",
+          "postgres",
+          "servers"
+        ],
+        "missing_extras": [],
+        "passed": true
+      },
+      "test-interop": {
+        "extras": [
+          "test",
+          "servers"
+        ],
+        "missing_extras": [],
+        "passed": true
+      },
+      "test-extension": {
+        "extras": [
+          "test",
+          "sqlite",
+          "postgres",
+          "servers"
+        ],
+        "missing_extras": [],
+        "passed": true
+      },
+      "migration-portability": {
+        "extras": [
+          "test",
+          "sqlite",
+          "postgres",
+          "servers"
+        ],
+        "missing_extras": [],
+        "passed": true
+      },
+      "final-certification": {
+        "extras": [
+          "test",
+          "sqlite",
+          "postgres",
+          "servers"
+        ],
+        "missing_extras": [],
+        "passed": true
+      }
+    }
   },
-  "dependency_lock_consistency": {
+  "uv_lock_consistency": {
     "passed": true,
     "failures": [],
-    "python_support_blockers": [
-      "Pinned tigrbl==0.4.0 declares Requires-Python >=3.10,<3.14, blocking Python 3.14.",
-      "Pinned Swarmauri core/base/standard/JWT/JWS/Ed25519/DPoP/JWE/Paramiko/keyprovider packages declare Requires-Python >=3.10,<3.13, blocking Python 3.13 and 3.14."
-    ],
+    "python_support_blockers": [],
     "missing_profiles": [],
-    "install_profile_count": 14
+    "install_profile_count": 14,
+    "dependencies_source": "pyproject.toml",
+    "lockfile": "uv.lock",
+    "uv_lock_present": true
   },
   "tox": {
     "envlist": [
       "py310-base",
       "py311-base",
       "py312-base",
-      "py313-base",
-      "py314-base",
       "py310-sqlite-uvicorn",
       "py311-sqlite-uvicorn",
       "py312-sqlite-uvicorn",
-      "py313-sqlite-uvicorn",
-      "py314-sqlite-uvicorn",
       "py310-postgres-hypercorn",
       "py311-postgres-hypercorn",
       "py312-postgres-hypercorn",
-      "py313-postgres-hypercorn",
-      "py314-postgres-hypercorn",
       "py311-tigrcorn",
       "py312-tigrcorn",
-      "py313-tigrcorn",
-      "py314-tigrcorn",
       "py310-devtest",
       "py311-devtest",
       "py312-devtest",
-      "py313-devtest",
-      "py314-devtest",
       "py311-gates",
       "py310-test-core",
       "py311-test-core",
       "py312-test-core",
-      "py313-test-core",
-      "py314-test-core",
       "py310-test-integration",
       "py311-test-integration",
       "py312-test-integration",
-      "py313-test-integration",
-      "py314-test-integration",
       "py310-test-conformance",
       "py311-test-conformance",
       "py312-test-conformance",
-      "py313-test-conformance",
-      "py314-test-conformance",
       "py310-test-security-negative",
       "py311-test-security-negative",
       "py312-test-security-negative",
-      "py313-test-security-negative",
-      "py314-test-security-negative",
       "py310-test-interop",
       "py311-test-interop",
       "py312-test-interop",
-      "py313-test-interop",
-      "py314-test-interop",
       "py311-test-extension",
       "py311-migration-portability",
       "py311-final-certification"
@@ -243,98 +801,98 @@
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
-      "[testenv:py{310,311,312,313,314}-sqlite-uvicorn]": {
+      "[testenv:py{310,311,312}-sqlite-uvicorn]": {
         "profile": "sqlite-uvicorn",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
-      "[testenv:py{310,311,312,313,314}-postgres-hypercorn]": {
+      "[testenv:py{310,311,312}-postgres-hypercorn]": {
         "profile": "postgres-hypercorn",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
-      "[testenv:py{311,312,313,314}-tigrcorn]": {
+      "[testenv:py{311,312}-tigrcorn]": {
         "profile": "tigrcorn",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
-      "[testenv:py{310,311,312,313,314}-devtest]": {
+      "[testenv:py{310,311,312}-devtest]": {
         "profile": "devtest",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
       "[testenv:py311-gates]": {
         "profile": "release-gates",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
-      "[testenv:py{310,311,312,313,314}-test-core]": {
+      "[testenv:py{310,311,312}-test-core]": {
         "profile": "test-core",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
-      "[testenv:py{310,311,312,313,314}-test-integration]": {
+      "[testenv:py{310,311,312}-test-integration]": {
         "profile": "test-integration",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
-      "[testenv:py{310,311,312,313,314}-test-conformance]": {
+      "[testenv:py{310,311,312}-test-conformance]": {
         "profile": "test-conformance",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
-      "[testenv:py{310,311,312,313,314}-test-security-negative]": {
+      "[testenv:py{310,311,312}-test-security-negative]": {
         "profile": "test-security-negative",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
-      "[testenv:py{310,311,312,313,314}-test-interop]": {
+      "[testenv:py{310,311,312}-test-interop]": {
         "profile": "test-interop",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
       "[testenv:py311-test-extension]": {
         "profile": "test-extension",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
       "[testenv:py311-migration-portability]": {
         "profile": "migration-portability",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
       "[testenv:py311-final-certification]": {
         "profile": "final-certification",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       }
     },
     "pip_check_ok_count": 14,
@@ -347,11 +905,11 @@
     "release_gates_workflow_present": true,
     "install_profiles_artifact_upload_present": true,
     "release_gates_artifact_upload_present": true,
-    "install_profiles_runtime_env_present_count": 24,
+    "install_profiles_runtime_env_present_count": 14,
     "install_profiles_runtime_env_missing": [],
-    "release_gates_runtime_env_present_count": 24,
+    "release_gates_runtime_env_present_count": 14,
     "release_gates_runtime_env_missing": [],
-    "release_gates_test_lane_env_present_count": 25,
+    "release_gates_test_lane_env_present_count": 15,
     "release_gates_test_lane_env_missing": [],
     "release_gates_extra_env_present_count": 2,
     "release_gates_extra_env_missing": [],
@@ -360,9 +918,6 @@
   },
   "profiles": {
     "base": {
-      "constraints": [
-        "constraints/base.txt"
-      ],
       "extras": [],
       "expected_modules": [
         "tigrbl",
@@ -373,6 +928,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -389,10 +945,6 @@
       ]
     },
     "sqlite-uvicorn": {
-      "constraints": [
-        "constraints/base.txt",
-        "constraints/runner-uvicorn.txt"
-      ],
       "extras": [
         "sqlite",
         "uvicorn"
@@ -406,6 +958,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -423,10 +976,6 @@
       ]
     },
     "postgres-hypercorn": {
-      "constraints": [
-        "constraints/base.txt",
-        "constraints/runner-hypercorn.txt"
-      ],
       "extras": [
         "postgres",
         "hypercorn"
@@ -440,6 +989,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -458,10 +1008,6 @@
       ]
     },
     "tigrcorn": {
-      "constraints": [
-        "constraints/base.txt",
-        "constraints/runner-tigrcorn.txt"
-      ],
       "extras": [
         "tigrcorn"
       ],
@@ -474,6 +1020,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -491,11 +1038,6 @@
       ]
     },
     "devtest": {
-      "constraints": [
-        "constraints/base.txt",
-        "constraints/test.txt",
-        "constraints/runner-uvicorn.txt"
-      ],
       "extras": [
         "test",
         "sqlite",
@@ -510,6 +1052,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -533,13 +1076,6 @@
       ]
     },
     "release-gates": {
-      "constraints": [
-        "constraints/base.txt",
-        "constraints/test.txt",
-        "constraints/runner-uvicorn.txt",
-        "constraints/runner-hypercorn.txt",
-        "constraints/runner-tigrcorn.txt"
-      ],
       "extras": [
         "test",
         "sqlite",
@@ -555,6 +1091,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -581,10 +1118,6 @@
       ]
     },
     "test-core": {
-      "constraints": [
-        "constraints/base.txt",
-        "constraints/test.txt"
-      ],
       "extras": [
         "test"
       ],
@@ -597,6 +1130,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -619,13 +1153,6 @@
       ]
     },
     "test-integration": {
-      "constraints": [
-        "constraints/base.txt",
-        "constraints/test.txt",
-        "constraints/runner-uvicorn.txt",
-        "constraints/runner-hypercorn.txt",
-        "constraints/runner-tigrcorn.txt"
-      ],
       "extras": [
         "test",
         "sqlite",
@@ -641,6 +1168,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -667,13 +1195,6 @@
       ]
     },
     "test-conformance": {
-      "constraints": [
-        "constraints/base.txt",
-        "constraints/test.txt",
-        "constraints/runner-uvicorn.txt",
-        "constraints/runner-hypercorn.txt",
-        "constraints/runner-tigrcorn.txt"
-      ],
       "extras": [
         "test",
         "sqlite",
@@ -689,6 +1210,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -715,13 +1237,6 @@
       ]
     },
     "test-security-negative": {
-      "constraints": [
-        "constraints/base.txt",
-        "constraints/test.txt",
-        "constraints/runner-uvicorn.txt",
-        "constraints/runner-hypercorn.txt",
-        "constraints/runner-tigrcorn.txt"
-      ],
       "extras": [
         "test",
         "sqlite",
@@ -737,6 +1252,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -763,13 +1279,6 @@
       ]
     },
     "test-interop": {
-      "constraints": [
-        "constraints/base.txt",
-        "constraints/test.txt",
-        "constraints/runner-uvicorn.txt",
-        "constraints/runner-hypercorn.txt",
-        "constraints/runner-tigrcorn.txt"
-      ],
       "extras": [
         "test",
         "servers"
@@ -783,6 +1292,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -808,13 +1318,6 @@
       ]
     },
     "test-extension": {
-      "constraints": [
-        "constraints/base.txt",
-        "constraints/test.txt",
-        "constraints/runner-uvicorn.txt",
-        "constraints/runner-hypercorn.txt",
-        "constraints/runner-tigrcorn.txt"
-      ],
       "extras": [
         "test",
         "sqlite",
@@ -830,6 +1333,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -856,13 +1360,6 @@
       ]
     },
     "migration-portability": {
-      "constraints": [
-        "constraints/base.txt",
-        "constraints/test.txt",
-        "constraints/runner-uvicorn.txt",
-        "constraints/runner-hypercorn.txt",
-        "constraints/runner-tigrcorn.txt"
-      ],
       "extras": [
         "test",
         "sqlite",
@@ -878,6 +1375,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -904,13 +1402,6 @@
       ]
     },
     "final-certification": {
-      "constraints": [
-        "constraints/base.txt",
-        "constraints/test.txt",
-        "constraints/runner-uvicorn.txt",
-        "constraints/runner-hypercorn.txt",
-        "constraints/runner-tigrcorn.txt"
-      ],
       "extras": [
         "test",
         "sqlite",
@@ -926,6 +1417,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -955,17 +1447,17 @@
   "identity": "base@py312",
   "environment_identity": {
     "python_version": "3.12",
-    "python_full_version": "3.12.5",
+    "python_full_version": "3.12.13",
     "python_tag": "py312",
     "implementation": "CPython",
-    "implementation_version": "3.12.5",
+    "implementation_version": "3.12.13",
     "executable": ".venv/Scripts/python.exe",
-    "platform": "Windows-10-10.0.19045-SP0",
+    "platform": "Windows-11-10.0.26200-SP0",
     "platform_system": "Windows",
-    "platform_release": "10",
-    "platform_version": "10.0.19045",
+    "platform_release": "11",
+    "platform_version": "10.0.26200",
     "machine": "AMD64",
-    "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
+    "processor": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
     "tox_env": null,
     "matrix_profile": null,
     "install_profile": "base",
@@ -977,24 +1469,24 @@
     "identity": "base@py312",
     "environment_identity": {
       "python_version": "3.12",
-      "python_full_version": "3.12.5",
+      "python_full_version": "3.12.13",
       "python_tag": "py312",
       "implementation": "CPython",
-      "implementation_version": "3.12.5",
+      "implementation_version": "3.12.13",
       "executable": ".venv/Scripts/python.exe",
-      "platform": "Windows-10-10.0.19045-SP0",
+      "platform": "Windows-11-10.0.26200-SP0",
       "platform_system": "Windows",
-      "platform_release": "10",
-      "platform_version": "10.0.19045",
+      "platform_release": "11",
+      "platform_version": "10.0.26200",
       "machine": "AMD64",
-      "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
+      "processor": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
       "tox_env": null,
       "matrix_profile": null,
       "install_profile": "base",
       "test_lane": null,
       "runner": null
     },
-    "python": "3.12.5",
+    "python": "3.12.13",
     "python_supported": true,
     "module_results": [
       {
@@ -1056,6 +1548,14 @@
       {
         "module": "swarmauri_signing_dpop",
         "package": "swarmauri_signing_dpop",
+        "passed": true,
+        "category": "runtime",
+        "message": "import ok",
+        "error_type": null
+      },
+      {
+        "module": "pqcrypto",
+        "package": "pqcrypto",
         "passed": true,
         "category": "runtime",
         "message": "import ok",
@@ -1168,22 +1668,27 @@
     ],
     "runtime_surface_results": [
       {
-        "module": "tigrbl_auth.api.app",
+        "module": "tba_server_identity.composition.app",
         "passed": true,
         "message": "import surface resolvable"
       },
       {
-        "module": "tigrbl_auth.app",
+        "module": "tba_app_backend_core",
         "passed": true,
         "message": "import surface resolvable"
       },
       {
-        "module": "tigrbl_auth.plugin",
+        "module": "tba_app_backend_public",
         "passed": true,
         "message": "import surface resolvable"
       },
       {
-        "module": "tigrbl_auth.gateway",
+        "module": "tba_auth.plugin",
+        "passed": true,
+        "message": "import surface resolvable"
+      },
+      {
+        "module": "tba_auth.gateway",
         "passed": true,
         "message": "import surface resolvable"
       }

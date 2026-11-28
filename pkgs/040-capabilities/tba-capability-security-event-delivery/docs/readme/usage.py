@@ -1,0 +1,3 @@
+from tba_capability_security_event_delivery import SecurityEventsCapability
+
+assert callable(SecurityEventsCapability)

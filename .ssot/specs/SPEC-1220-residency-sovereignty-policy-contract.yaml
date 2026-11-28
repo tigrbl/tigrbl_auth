@@ -1,0 +1,24 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1220"
+number: 1220
+slug: "residency-sovereignty-policy-contract"
+title: "Residency sovereignty policy contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Scope: Residency and sovereignty policy targets RFC 6973 privacy considerations at https://www.rfc-editor.org/rfc/rfc6973.html. Requirements: runtime policy records must identify tenant id, optional realm, residency zone, allowed processing regions, restricted transfer regions, and sovereign controls. Evaluation must produce structured decisions for allowed and denied access. Assertion helpers must fail closed for tenant mismatch, realm mismatch, missing allowed regions, restricted transfer regions, or processing outside the declared residency boundary. Verification requires T0 import coverage, T1 manifest and allowed-decision coverage, and T2 negative fail-closed coverage."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define runtime policy contract for tenant residency and sovereignty evaluation."
+    at: "2026-06-17T10:49:45Z"
+references: []
+body: |-
+  Scope: Residency and sovereignty policy targets RFC 6973 privacy considerations at https://www.rfc-editor.org/rfc/rfc6973.html. Requirements: runtime policy records must identify tenant id, optional realm, residency zone, allowed processing regions, restricted transfer regions, and sovereign controls. Evaluation must produce structured decisions for allowed and denied access. Assertion helpers must fail closed for tenant mismatch, realm mismatch, missing allowed regions, restricted transfer regions, or processing outside the declared residency boundary. Verification requires T0 import coverage, T1 manifest and allowed-decision coverage, and T2 negative fail-closed coverage.
+spec_kind: "local-policy"
+adr_ids:
+  - "adr:1130"

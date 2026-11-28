@@ -3,7 +3,7 @@ kind: "spec"
 id: "spc:1045"
 number: 1045
 slug: "openrpc-fapi2-security-admin-json"
-title: "Repo spec: specs/openrpc/profiles/fapi2-security/tigrbl_auth.admin.openrpc.json"
+title: "Repo spec: specs/openrpc/profiles/fapi2-security/tba_auth.admin.openrpc.json"
 status: "draft"
 origin: "repo-local"
 decision_date: null
@@ -21,7 +21,7 @@ body: |-
   {
     "openrpc": "1.4.2",
     "info": {
-      "title": "tigrbl_auth admin/control-plane",
+      "title": "tba_auth admin/control-plane",
       "version": "0.3.4",
       "description": "Generated admin/control-plane contract derived from implementation-backed RPC registration and filtered by the effective deployment boundary."
     },
@@ -32,7 +32,7 @@ body: |-
       }
     ],
     "methods": [],
-    "x-tigrbl-auth": {
+    "x-tba-auth": {
       "profile": "fapi2-security",
       "plugin_mode": "public-only",
       "runtime_style": "standalone",

@@ -1,0 +1,3 @@
+from tba_router_oauth_pushed_authorization_request import PushedAuthorizationAuthorizer
+
+assert callable(PushedAuthorizationAuthorizer)

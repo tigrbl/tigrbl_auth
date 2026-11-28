@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "The runtime profile configuration contract defines the human-readable packaged profile files that `tigrbl_auth` loads to resolve deployment posture."
+summary: "The runtime profile configuration contract defines the human-readable packaged profile files that `tba_auth` loads to resolve deployment posture."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -21,14 +21,14 @@ body: |-
   ## Overview
 
   The runtime profile configuration contract defines the human-readable packaged
-  profile files that `tigrbl_auth` loads to resolve deployment posture.
+  profile files that `tba_auth` loads to resolve deployment posture.
 
   Decision source: `adr:1042`.
 
   ## Scope
 
   This specification applies to packaged runtime profile configuration files
-  under `tigrbl_auth/profiles/*.yaml`, the profile loader, and the deployment
+  under `tba_auth/profiles/*.yaml`, the profile loader, and the deployment
   resolver that produces the effective runtime deployment.
 
   This specification does not replace SSOT profile entities. SSOT remains the
@@ -37,7 +37,7 @@ body: |-
 
   ## Profile File Location
 
-  - Runtime profile files MUST live under `tigrbl_auth/profiles/`.
+  - Runtime profile files MUST live under `tba_auth/profiles/`.
   - Each runtime profile file MUST be included in source distributions and wheel
     distributions.
   - Each packaged runtime profile file MUST be loadable without network access.

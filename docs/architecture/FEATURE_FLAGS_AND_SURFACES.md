@@ -34,7 +34,7 @@ publication, discovery publication, and contract generation.
 
 The authoritative public surface is now declared once in:
 
-- `tigrbl_auth/config/surfaces.py:PUBLIC_CAPABILITIES`
+- `tba_auth/config/surfaces.py:PUBLIC_CAPABILITIES`
 
 Each capability record owns:
 
@@ -48,8 +48,8 @@ Each capability record owns:
 
 That registry is consumed by:
 
-- `tigrbl_auth/config/deployment.py` to derive `active_capabilities` and `active_routes`
-- `tigrbl_auth/api/surfaces.py` to mount routers and standards-owned publishers
+- `tba_auth/config/deployment.py` to derive `active_capabilities` and `active_routes`
+- `tba_auth/api/surfaces.py` to mount routers and standards-owned publishers
 - OpenAPI/discovery snapshot generation
 - capability-wiring checkpoint target/module/route/contract/test/evidence cross-check scripts
 

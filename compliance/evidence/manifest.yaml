@@ -1,5 +1,5 @@
 schema_version: 1
-package: tigrbl_auth
+package: tba_auth
 state:
   governance_plane_initialized: true
   preserved_tier3_bundles:

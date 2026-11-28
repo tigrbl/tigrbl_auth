@@ -20,10 +20,10 @@ registration.
 
 ## Completed in this checkpoint
 
-- implemented `tigrbl_auth/api/rpc/__init__.py` as the public entrypoint for the implementation-backed RPC plane
-- added `tigrbl_auth/api/rpc/registry.py` to own method registration, filtering, and invocation helpers
-- implemented executable method modules in `tigrbl_auth/api/rpc/methods/`
-- implemented request/response schema modules in `tigrbl_auth/api/rpc/schemas/`
+- implemented `tba_auth/api/rpc/__init__.py` as the public entrypoint for the implementation-backed RPC plane
+- added `tba_auth/api/rpc/registry.py` to own method registration, filtering, and invocation helpers
+- implemented executable method modules in `tba_auth/api/rpc/methods/`
+- implemented request/response schema modules in `tba_auth/api/rpc/schemas/`
 - replaced detached OpenRPC generation with contract generation derived from `iter_active_rpc_methods(deployment)`
 - added method-level owner metadata, required flags, surface-set metadata, and provenance into the OpenRPC artifact
 - strengthened contract validation so committed OpenRPC artifacts must match the implementation-backed registry exactly

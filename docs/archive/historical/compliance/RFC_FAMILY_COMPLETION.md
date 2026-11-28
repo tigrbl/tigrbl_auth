@@ -53,17 +53,17 @@ Completed in the active release path:
 
 ## Key files changed in this checkpoint
 
-- `tigrbl_auth/ops/register.py`
-- `tigrbl_auth/api/rest/routers/register.py`
-- `tigrbl_auth/ops/authorize.py`
-- `tigrbl_auth/ops/par.py`
-- `tigrbl_auth/ops/device_authorization.py`
-- `tigrbl_auth/ops/token.py`
-- `tigrbl_auth/ops/login.py`
-- `tigrbl_auth/standards/oauth2/token_exchange.py`
-- `tigrbl_auth/services/token_service.py`
-- `tigrbl_auth/standards/oauth2/rfc9700.py`
-- `tigrbl_auth/cli/artifacts.py`
+- `tba_auth/ops/register.py`
+- `tba_auth/api/rest/routers/register.py`
+- `tba_auth/ops/authorize.py`
+- `tba_auth/ops/par.py`
+- `tba_auth/ops/device_authorization.py`
+- `tba_auth/ops/token.py`
+- `tba_auth/ops/login.py`
+- `tba_auth/standards/oauth2/token_exchange.py`
+- `tba_auth/services/token_service.py`
+- `tba_auth/standards/oauth2/rfc9700.py`
+- `tba_auth/cli/artifacts.py`
 - `compliance/mappings/target-to-module.yaml`
 - `compliance/mappings/target-to-endpoint.yaml`
 - `compliance/mappings/target-to-test.yaml`

@@ -1,0 +1,132 @@
+from __future__ import annotations
+
+import ast
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[5]
+CONTRACTS_ROOT = (
+    ROOT
+    / "pkgs"
+    / "002-contracts"
+    / "tba-contracts-identity"
+    / "src"
+    / "tba_contracts_identity"
+)
+CONCRETE_ROOTS = (
+    ROOT
+    / "pkgs"
+    / "deprecated"
+    / "tigrbl-identity-identities-concrete"
+    / "src"
+    / "tigrbl_identity_identities_concrete",
+    ROOT
+    / "pkgs"
+    / "deprecated"
+    / "tigrbl-identity-credentials-concrete"
+    / "src"
+    / "tigrbl_identity_credentials_concrete",
+)
+
+
+def _imports(path: Path) -> set[str]:
+    tree = ast.parse(path.read_text(encoding="utf-8"))
+    roots: set[str] = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            roots.update(alias.name.split(".")[0] for alias in node.names)
+        elif isinstance(node, ast.ImportFrom) and node.level == 0 and node.module:
+            roots.add(node.module.split(".")[0])
+    return roots
+
+
+def test_contracts_do_not_own_concrete_identity_or_credential_variants() -> None:
+    import tba_contracts_identity as contracts
+
+    concrete_names = {
+        "ApiKeyCredential",
+        "DeviceIdentity",
+        "DpopKeyCredential",
+        "MachineIdentity",
+        "MfaFactor",
+        "MtlsCertificateCredential",
+        "PasswordlessCredential",
+        "ServiceCredential",
+        "ServiceIdentity",
+        "WebAuthnCredential",
+        "WorkloadIdentity",
+    }
+
+    assert not (concrete_names & set(dir(contracts)))
+    assert not (CONTRACTS_ROOT / "credentials" / "services.py").exists()
+    assert not (CONTRACTS_ROOT / "credentials" / "webauthn.py").exists()
+    assert not (CONTRACTS_ROOT / "credentials" / "passwordless.py").exists()
+    assert not (CONTRACTS_ROOT / "credentials" / "factors.py").exists()
+    assert not (CONTRACTS_ROOT / "principals" / "services.py").exists()
+    assert not (CONTRACTS_ROOT / "principals" / "workloads.py").exists()
+    assert not (CONTRACTS_ROOT / "principals" / "devices.py").exists()
+
+
+def test_concrete_variants_subclass_contract_dataclasses() -> None:
+    import tigrbl_identity_credentials_concrete as credential_concrete
+    import tigrbl_identity_identities_concrete as identity_concrete
+    import tba_contracts_identity as contracts
+
+    for name in (
+        "AdminIdentity",
+        "ClientIdentity",
+        "DeviceIdentity",
+        "MachineIdentity",
+        "ServiceIdentity",
+        "UserIdentity",
+        "WorkloadIdentity",
+    ):
+        assert issubclass(getattr(identity_concrete, name), contracts.Identity), name
+
+    for name in (
+        "ApiKeyCredential",
+        "ClientSecretCredential",
+        "DpopKeyCredential",
+        "MfaCredential",
+        "MfaFactor",
+        "MtlsCertificateCredential",
+        "PasskeyCredential",
+        "PasswordCredential",
+        "PasswordResetCredential",
+        "PasswordlessCredential",
+        "ServiceCredential",
+        "ServiceKeyCredential",
+        "WebAuthnCredential",
+    ):
+        assert issubclass(getattr(credential_concrete, name), contracts.Credential), (
+            name
+        )
+
+
+def test_concrete_layer_only_imports_lower_contract_surfaces() -> None:
+    # These two broad packages are temporary compatibility facades. Canonical
+    # standalone identity and credential packages remain strict layer-10 leaves.
+    compatibility_roots = {root.name for root in CONCRETE_ROOTS}
+    allowed = {
+        "__future__",
+        "dataclasses",
+        "datetime",
+        "typing",
+        "uuid",
+        "tba_contracts_identity",
+        "tba_bases_identity_model",
+    }
+
+    offenders = {
+        str(path.relative_to(ROOT)): sorted(
+            name for name in _imports(path) - allowed if not name.endswith("_concrete")
+        )
+        for root in CONCRETE_ROOTS
+        if root.name not in compatibility_roots
+        for path in root.rglob("*.py")
+        if any(
+            name for name in _imports(path) - allowed if not name.endswith("_concrete")
+        )
+    }
+
+    assert offenders == {}

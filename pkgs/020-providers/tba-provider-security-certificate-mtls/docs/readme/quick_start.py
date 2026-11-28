@@ -1,0 +1,3 @@
+from tba_provider_security_certificate_mtls import MtlsBindingValidator
+
+assert callable(MtlsBindingValidator)

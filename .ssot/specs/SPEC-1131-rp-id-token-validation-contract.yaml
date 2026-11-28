@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1131"
+number: 1131
+slug: "rp-id-token-validation-contract"
+title: "RP ID Token Validation Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines ID token signature, issuer, audience, nonce, expiry, algorithm, time-skew, and claim validation for Python and TypeScript RP implementations."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "RP/resource-server/provider-login maturity wave proposal."
+    at: "2026-05-23T05:44:12Z"
+references: []
+body: |-
+  Defines ID token signature, issuer, audience, nonce, expiry, algorithm, time-skew, and claim validation for Python and TypeScript RP implementations.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1114"
+  - "adr:1119"

@@ -1,0 +1,3 @@
+from tba_provider_authenticator_otp_local import OtpLocalAuthenticator
+
+assert callable(OtpLocalAuthenticator)

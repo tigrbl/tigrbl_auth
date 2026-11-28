@@ -7,8 +7,10 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from tigrbl_auth.cli.artifacts import deployment_from_options, write_discovery_artifacts
-from tigrbl_auth.config.deployment import VALID_PROFILES
+from tba_auth.cli.artifacts import deployment_from_options, write_discovery_artifacts
+from tba_auth.config.deployment import VALID_PROFILES
+from tba_contracts_identity.protocol_configuration import bind_protocol_settings
+from tba_runtime_identity.settings import settings
 
 
 PROFILES = VALID_PROFILES
@@ -31,7 +33,7 @@ def write_discovery_reference(repo_root: Path) -> None:
             "",
             "## Notes",
             "",
-            "- snapshot files are generated from `tigrbl_auth.cli.artifacts.write_discovery_artifacts` using executable deployment metadata",
+            "- snapshot files are generated from `tba_auth.cli.artifacts.write_discovery_artifacts` using executable deployment metadata",
             "- JWKS snapshots intentionally omit live signing material and record only a deterministic public-artifact shape",
             "- current authoritative CLI/runtime/discovery docs are those listed in `docs/reference/README.md`",
             "",
@@ -42,6 +44,7 @@ def write_discovery_reference(repo_root: Path) -> None:
 
 
 def main() -> int:
+    bind_protocol_settings(settings)
     for profile_name in PROFILES:
         deployment = deployment_from_options(profile=profile_name)
         write_discovery_artifacts(ROOT, deployment, profile_label=profile_name)

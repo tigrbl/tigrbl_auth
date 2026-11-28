@@ -19,7 +19,7 @@ body: |-
   Status: proposed
   Date: 2026-05-04
   
-  `tigrbl_auth` MUST define a governed supply-chain and provenance boundary for release and certification work. That boundary MUST describe how SSDF, SLSA, in-toto, Sigstore, SPDX, and CycloneDX map to required artifacts, generated projections, release-gate obligations, and disclosure expectations.
+  `tba_auth` MUST define a governed supply-chain and provenance boundary for release and certification work. That boundary MUST describe how SSDF, SLSA, in-toto, Sigstore, SPDX, and CycloneDX map to required artifacts, generated projections, release-gate obligations, and disclosure expectations.
   
   ## Rationale
   

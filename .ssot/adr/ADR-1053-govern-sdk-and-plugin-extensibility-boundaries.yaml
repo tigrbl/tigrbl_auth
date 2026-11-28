@@ -16,7 +16,7 @@ references: []
 body: |-
   ## Decision
 
-  `tigrbl_auth` MUST govern SDK ecosystem and plugin extensibility as developer/operator capabilities with stable contracts, lifecycle expectations, and compatibility evidence.
+  `tba_auth` MUST govern SDK ecosystem and plugin extensibility as developer/operator capabilities with stable contracts, lifecycle expectations, and compatibility evidence.
 
   ## Current Implementation Status
 
@@ -48,4 +48,4 @@ body: |-
 
   ## Operational Consequences
 
-  The existing Python helpers and `TigrblAuthPlugin` installation surface remain partial implementation evidence until broader SDK and plugin lifecycle guarantees exist.
+  The existing Python helpers and `TbaPlugin` installation surface remain partial implementation evidence until broader SDK and plugin lifecycle guarantees exist.

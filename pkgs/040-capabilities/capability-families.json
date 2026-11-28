@@ -1,0 +1,1140 @@
+{
+  "capabilities": [
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": [
+          "tba-provider-access-governance-memory"
+        ]
+      },
+      "families": [
+        "access"
+      ],
+      "implementations": [
+        {
+          "capability_id": "access.governance",
+          "class": "AccessGovernanceCapability",
+          "operations": [
+            "manage_entitlements",
+            "run_access_review"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-access-governance/src/tba_capability_access_governance/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-access-governance",
+      "protocol_packages": [],
+      "purpose": "coordinate entitlement management, provisioning, and access reviews"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "account"
+      ],
+      "implementations": [
+        {
+          "capability_id": "account.self-service",
+          "class": "AccountSelfServiceCapability",
+          "operations": [],
+          "source": "pkgs/040-capabilities/tba-capability-account-self-service/src/tba_capability_account_self_service/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-account-self-service",
+      "protocol_packages": [],
+      "purpose": "coordinate authenticated profile, password, session, and consent lifecycle"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "authentication"
+      ],
+      "implementations": [
+        {
+          "capability_id": "authentication.adaptive",
+          "class": "AdaptiveAuthenticationCapability",
+          "operations": [
+            "evaluate_adaptive_context"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-adaptive-authentication/src/tba_capability_adaptive_authentication/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-adaptive-authentication",
+      "protocol_packages": [],
+      "purpose": "coordinate a normalized adaptive-authentication decision"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "administrative-resource"
+      ],
+      "implementations": [
+        {
+          "capability_id": "administrative-resource.lifecycle",
+          "class": "AdministrativeResourceCapability",
+          "operations": [],
+          "source": "pkgs/040-capabilities/tba-capability-administrative-resource/src/tba_capability_administrative_resource/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-administrative-resource",
+      "protocol_packages": [],
+      "purpose": "coordinate generic administrative-resource lifecycle operations"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": [
+          "tba-provider-authenticator-api-key-local"
+        ]
+      },
+      "families": [
+        "principal"
+      ],
+      "implementations": [
+        {
+          "capability_id": "principal.authentication.api-key",
+          "class": "ApiKeyAuthenticationCapability",
+          "operations": [
+            "authenticate_api_key"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-api-key-authentication/src/tba_capability_api_key_authentication/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-api-key-authentication",
+      "protocol_packages": [],
+      "purpose": "coordinate user API-key verification with durable credential operations"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "artifact"
+      ],
+      "implementations": [
+        {
+          "capability_id": "artifact.processing",
+          "class": "ProtocolArtifactProcessingCapability",
+          "operations": [],
+          "source": "pkgs/040-capabilities/tba-capability-artifact-processing/src/tba_capability_artifact_processing/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-artifact-processing",
+      "protocol_packages": [],
+      "purpose": "coordinate protocol-neutral artifact decoding, validation, encoding, and error normalization through replaceable processors"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "attestation"
+      ],
+      "implementations": [
+        {
+          "capability_id": "attestation.appraisal",
+          "class": "AttestationAppraisalCapability",
+          "operations": [
+            "appraise",
+            "record_result",
+            "resolve_reference_material",
+            "verify_evidence"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-attestation-appraisal/src/tba_capability_attestation_appraisal/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-attestation-appraisal",
+      "protocol_packages": [],
+      "purpose": "coordinate evidence appraisal and result recording"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "authenticator"
+      ],
+      "implementations": [
+        {
+          "capability_id": "authenticator.attestation",
+          "class": "AuthenticatorAttestationCapability",
+          "operations": [
+            "appraise_authenticator_attestation",
+            "reappraise_registered_authenticator",
+            "resolve_authenticator_metadata"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-authenticator-attestation/src/tba_capability_authenticator_attestation/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-authenticator-attestation",
+      "protocol_packages": [],
+      "purpose": "coordinate attestation format verification, metadata resolution, trust appraisal, and reappraisal"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "oauth"
+      ],
+      "implementations": [
+        {
+          "capability_id": "oauth.pushed-authorization",
+          "class": "PushedAuthorizationCapability",
+          "operations": [
+            "push_authorization_request",
+            "record_audit_event"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-authorization-request-staging/src/tba_capability_authorization_request_staging/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-authorization-request-staging",
+      "protocol_packages": [
+        "tba-protocol-oauth"
+      ],
+      "purpose": "coordinate durable pushed-request creation with optional audit recording"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "client"
+      ],
+      "implementations": [
+        {
+          "capability_id": "client.registration",
+          "class": "ClientRegistrationCapability",
+          "operations": [
+            "disable_registration",
+            "get_registration",
+            "record_audit_event",
+            "register_client",
+            "update_registration"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-client-registration/src/tba_capability_client_registration/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-client-registration",
+      "protocol_packages": [
+        "tba-protocol-oauth"
+      ],
+      "purpose": "coordinate client and registration metadata lifecycle with optional audit recording"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": [
+          "tba-provider-authenticator-client-secret-local"
+        ]
+      },
+      "families": [
+        "principal"
+      ],
+      "implementations": [
+        {
+          "capability_id": "principal.authentication.client-secret",
+          "class": "ClientSecretAuthenticationCapability",
+          "operations": [
+            "authenticate_client_secret",
+            "verify_client_record"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-client-secret-authentication/src/tba_capability_client_secret_authentication/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-client-secret-authentication",
+      "protocol_packages": [],
+      "purpose": "coordinate client-secret verification with client lookup"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "communications"
+      ],
+      "implementations": [
+        {
+          "capability_id": "communications.identity",
+          "class": "CommunicationsIdentityCapability",
+          "operations": [
+            "assess_domain_onboarding",
+            "recheck_domain"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-communications-identity/src/tba_capability_communications_identity/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-communications-identity",
+      "protocol_packages": [],
+      "purpose": "Compose domain assessment and recheck with injected protocol checks and audit writing."
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "grant"
+      ],
+      "implementations": [
+        {
+          "capability_id": "grant.negotiation",
+          "class": "GrantNegotiationCapability",
+          "operations": [
+            "continue_grant",
+            "request_grant",
+            "rotate_access_token"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-delegated-access-negotiation/src/tba_capability_delegated_access_negotiation/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-delegated-access-negotiation",
+      "protocol_packages": [
+        "tba-protocol-gnap"
+      ],
+      "purpose": "coordinate negotiated grant requests, continuation, and token rotation"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "digital-credential"
+      ],
+      "implementations": [
+        {
+          "capability_id": "digital-credential.issuance",
+          "class": "DigitalCredentialIssuanceCapability",
+          "operations": [
+            "create_offer",
+            "issue",
+            "record_issuance",
+            "register_configuration",
+            "verify_wallet_attestation"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-digital-credential-issuance/src/tba_capability_digital_credential_issuance/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-digital-credential-issuance",
+      "protocol_packages": [
+        "tba-protocol-oid4vci"
+      ],
+      "purpose": "coordinate credential configuration, wallet trust, offers, and issuance"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "digital-credential"
+      ],
+      "implementations": [
+        {
+          "capability_id": "digital-credential.presentation",
+          "class": "DigitalCredentialPresentationCapability",
+          "operations": [
+            "check_consent",
+            "present",
+            "record_result",
+            "record_transaction",
+            "reserve_replay",
+            "verify_presentation"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-digital-credential-presentation/src/tba_capability_digital_credential_presentation/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-digital-credential-presentation",
+      "protocol_packages": [
+        "tba-protocol-oid4vp"
+      ],
+      "purpose": "coordinate holder consent, replay defense, and presentation verification"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "identity-admin"
+      ],
+      "implementations": [
+        {
+          "capability_id": "identity-admin.identities",
+          "class": "IdentityAdministrationCapability",
+          "operations": [],
+          "source": "pkgs/040-capabilities/tba-capability-identity-administration/src/tba_capability_identity_administration/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-identity-administration",
+      "protocol_packages": [],
+      "purpose": "coordinate identity lifecycle administration"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "identity-document"
+      ],
+      "implementations": [
+        {
+          "capability_id": "identity-document.processing",
+          "class": "IdentityDocumentCapability",
+          "operations": [
+            "publish_identity_document",
+            "resolve_identity_document",
+            "verify_identity_document"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-identity-document/src/tba_capability_identity_document/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-identity-document",
+      "protocol_packages": [],
+      "purpose": "coordinate identity-document parsing, resolution, and verification through injected implementations"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "key"
+      ],
+      "implementations": [
+        {
+          "capability_id": "key.administration",
+          "class": "KeyAdministrationCapability",
+          "operations": [
+            "publish",
+            "rotate"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-key-administration/src/tba_capability_key_administration/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-key-administration",
+      "protocol_packages": [],
+      "purpose": "coordinate key rotation and publication through injected implementations"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "mcp"
+      ],
+      "implementations": [
+        {
+          "capability_id": "mcp.authorization",
+          "class": "MCPAuthorizationCapability",
+          "operations": [
+            "approve",
+            "authorize_tool",
+            "resolve",
+            "revoke"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-mcp-authorization/src/tba_capability_mcp_authorization/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-mcp-authorization",
+      "protocol_packages": [],
+      "purpose": "coordinate active OAuth grants, account and bot scopes, resource authorization, and owner-bound revocation across MCP resource servers"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "authentication"
+      ],
+      "implementations": [
+        {
+          "capability_id": "authentication.mfa-challenge",
+          "class": "MfaChallengeCapability",
+          "operations": [
+            "begin_mfa_challenge",
+            "complete_mfa_challenge"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-mfa-challenge/src/tba_capability_mfa_challenge/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-mfa-challenge",
+      "protocol_packages": [],
+      "purpose": "coordinate begin and complete operations for an MFA challenge"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "identity-admin"
+      ],
+      "implementations": [
+        {
+          "capability_id": "identity-admin.operator",
+          "class": "OperatorAdministrationCapability",
+          "operations": [],
+          "source": "pkgs/040-capabilities/tba-capability-operator-administration/src/tba_capability_operator_administration/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-operator-administration",
+      "protocol_packages": [],
+      "purpose": "coordinate policy-gated operator administration"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": [
+          "tba-provider-authenticator-password-local"
+        ]
+      },
+      "families": [
+        "principal"
+      ],
+      "implementations": [
+        {
+          "capability_id": "principal.authentication.password",
+          "class": "PasswordAuthenticationCapability",
+          "operations": [
+            "authenticate_password"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-password-authentication/src/tba_capability_password_authentication/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-password-authentication",
+      "protocol_packages": [],
+      "purpose": "coordinate password verification with identity lookup"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [
+          "tba-durability-authorization-policy",
+          "tba-provider-policy-administration-memory"
+        ],
+        "providers": []
+      },
+      "families": [
+        "policy"
+      ],
+      "implementations": [
+        {
+          "capability_id": "policy.administration",
+          "class": "PolicyAdministrationCapability",
+          "operations": [
+            "administer",
+            "simulate"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-policy-administration/src/tba_capability_policy_administration/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-policy-administration",
+      "protocol_packages": [],
+      "purpose": "coordinate RBAC, ABAC, delegated-administration, and policy simulation operations"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [
+          "tba-durability-authorization-policy"
+        ],
+        "providers": []
+      },
+      "families": [
+        "policy"
+      ],
+      "implementations": [
+        {
+          "capability_id": "policy.assurance",
+          "class": "PolicyAssuranceCapability",
+          "operations": [
+            "evaluate",
+            "report"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-policy-assurance/src/tba_capability_policy_assurance/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-policy-assurance",
+      "protocol_packages": [],
+      "purpose": "coordinate authorization invariants, replay checks, and assurance reporting"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "policy"
+      ],
+      "implementations": [
+        {
+          "capability_id": "policy.evaluation",
+          "class": "PolicyEvaluationCapability",
+          "operations": [
+            "describe",
+            "evaluate",
+            "evaluate_many",
+            "search_entities"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-policy-evaluation/src/tba_capability_policy_evaluation/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-policy-evaluation",
+      "protocol_packages": [
+        "tba-protocol-authzen"
+      ],
+      "purpose": "coordinate normalized policy evaluation, batch evaluation, entity search, and service description"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "possession-proof"
+      ],
+      "implementations": [
+        {
+          "capability_id": "possession-proof.processing",
+          "class": "PossessionProofCapability",
+          "operations": [
+            "evaluate_proof_context",
+            "issue_possession_proof",
+            "resolve_confirmation_key",
+            "verify_possession_proof"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-possession-proof/src/tba_capability_possession_proof/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-possession-proof",
+      "protocol_packages": [],
+      "purpose": "coordinate proof verification with replay acceptance and holder-binding evaluation"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "protected-envelope"
+      ],
+      "implementations": [
+        {
+          "capability_id": "protected-envelope.processing",
+          "class": "ProtectedEnvelopeCapability",
+          "operations": [
+            "protect_envelope",
+            "verify_envelope"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-protected-envelope/src/tba_capability_protected_envelope/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-protected-envelope",
+      "protocol_packages": [],
+      "purpose": "coordinate protected-envelope issuance and verification through injected cryptographic implementations"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "protected-resource"
+      ],
+      "implementations": [
+        {
+          "capability_id": "protected-resource.authorization",
+          "class": "ProtectedResourceAuthorizationCapability",
+          "operations": [
+            "verify_claims",
+            "verify_token"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-protected-resource-authorization/src/tba_capability_protected_resource_authorization/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-protected-resource-authorization",
+      "protocol_packages": [
+        "tba-protocol-oauth-protected-resource"
+      ],
+      "purpose": "coordinate normalized protected-resource token and claims authorization"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "credential"
+      ],
+      "implementations": [
+        {
+          "capability_id": "credential.public-key.authentication",
+          "class": "PublicKeyAuthenticationCapability",
+          "operations": [
+            "begin_public_key_authentication",
+            "complete_public_key_authentication"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-public-key-authentication/src/tba_capability_public_key_authentication/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-public-key-authentication",
+      "protocol_packages": [
+        "tba-protocol-webauthn"
+      ],
+      "purpose": "coordinate durable ceremony consumption, credential resolution, assertion verification, and session evidence"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "credential"
+      ],
+      "implementations": [
+        {
+          "capability_id": "credential.public-key.management",
+          "class": "PublicKeyCredentialManagementCapability",
+          "operations": [
+            "list_public_key_credentials",
+            "rename_public_key_credential",
+            "revoke_public_key_credential"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-public-key-credential-management/src/tba_capability_public_key_credential_management/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-public-key-credential-management",
+      "protocol_packages": [],
+      "purpose": "coordinate authenticated listing, naming, and revocation of registered public-key credentials"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "credential"
+      ],
+      "implementations": [
+        {
+          "capability_id": "credential.public-key.registration",
+          "class": "PublicKeyRegistrationCapability",
+          "operations": [
+            "begin_public_key_registration",
+            "complete_public_key_registration"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-public-key-registration/src/tba_capability_public_key_registration/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-public-key-registration",
+      "protocol_packages": [
+        "tba-protocol-webauthn"
+      ],
+      "purpose": "coordinate durable ceremony reservation, attestation verification, credential insertion, and audit evidence"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "identity-admin"
+      ],
+      "implementations": [
+        {
+          "capability_id": "identity-admin.realms",
+          "class": "RealmAdministrationCapability",
+          "operations": [],
+          "source": "pkgs/040-capabilities/tba-capability-realm-administration/src/tba_capability_realm_administration/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-realm-administration",
+      "protocol_packages": [],
+      "purpose": "coordinate realm lifecycle administration"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [],
+      "implementations": [
+        {
+          "capability_id": "",
+          "class": "ReplayProtectionCapability",
+          "operations": [
+            "check_and_reserve"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-replay-protection/src/tba_capability_replay_protection/__init__.py",
+          "version": ""
+        }
+      ],
+      "package": "tba-capability-replay-protection",
+      "protocol_packages": [],
+      "purpose": "coordinate normalized replay reservations across protocol mappings, durable repositories, and replaceable providers"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "security-events"
+      ],
+      "implementations": [
+        {
+          "capability_id": "security-events.delivery",
+          "class": "SecurityEventsCapability",
+          "operations": [
+            "receive",
+            "record_delivery",
+            "record_event",
+            "reserve_replay",
+            "resolve_subscription",
+            "transmit"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-security-event-delivery/src/tba_capability_security_event_delivery/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-security-event-delivery",
+      "protocol_packages": [],
+      "purpose": "coordinate security-event transmission, receipt, and recording"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [
+          "tba-capability-api-key-authentication"
+        ],
+        "durability": [],
+        "providers": [
+          "tba-provider-authenticator-service-key-local"
+        ]
+      },
+      "families": [
+        "principal"
+      ],
+      "implementations": [
+        {
+          "capability_id": "principal.authentication.service-key",
+          "class": "ServiceKeyAuthenticationCapability",
+          "operations": [
+            "authenticate_service_key"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-service-key-authentication/src/tba_capability_service_key_authentication/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-service-key-authentication",
+      "protocol_packages": [],
+      "purpose": "coordinate service-key verification with durable credential operations"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "identity-admin"
+      ],
+      "implementations": [
+        {
+          "capability_id": "identity-admin.tenants",
+          "class": "TenantAdministrationCapability",
+          "operations": [],
+          "source": "pkgs/040-capabilities/tba-capability-tenant-administration/src/tba_capability_tenant_administration/capability.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-tenant-administration",
+      "protocol_packages": [],
+      "purpose": "coordinate tenant lifecycle administration"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "token"
+      ],
+      "implementations": [
+        {
+          "capability_id": "token.exchange",
+          "class": "TokenExchangeCapability",
+          "operations": [
+            "exchange_token"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-token-exchange/src/tba_capability_token_exchange/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-token-exchange",
+      "protocol_packages": [],
+      "purpose": "coordinate normalized security-token exchange across verification, issuance, durable lineage, and audit operations"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "token"
+      ],
+      "implementations": [
+        {
+          "capability_id": "token.introspection",
+          "class": "TokenIntrospectionCapability",
+          "operations": [
+            "introspect_token"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-token-introspection/src/tba_capability_token_introspection/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-token-introspection",
+      "protocol_packages": [
+        "tba-protocol-oauth"
+      ],
+      "purpose": "coordinate protocol-neutral token-state lookup and profile validation"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "token"
+      ],
+      "implementations": [
+        {
+          "capability_id": "token.issuance",
+          "class": "TokenIssuanceCapability",
+          "operations": [
+            "issue_token_pair",
+            "record_audit_event",
+            "redeem_refresh_token"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-token-issuance/src/tba_capability_token_issuance/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-token-issuance",
+      "protocol_packages": [
+        "tba-protocol-oauth"
+      ],
+      "purpose": "coordinate token-pair issuance and refresh rotation across signing and durable lifecycle operations"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "token"
+      ],
+      "implementations": [
+        {
+          "capability_id": "token.revocation",
+          "class": "TokenRevocationCapability",
+          "operations": [
+            "record_audit_event",
+            "revoke_token"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-token-revocation/src/tba_capability_token_revocation/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-token-revocation",
+      "protocol_packages": [
+        "tba-protocol-oauth"
+      ],
+      "purpose": "coordinate durable token revocation with optional audit recording"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "workload-credential"
+      ],
+      "implementations": [
+        {
+          "capability_id": "workload-credential.brokering",
+          "class": "WorkloadCredentialBrokeringCapability",
+          "operations": [
+            "authorize_delegated_credential_access",
+            "obtain_delegated_workload_credentials",
+            "resolve_delegated_workload_trust",
+            "resolve_workload_reference",
+            "watch_delegated_workload_credentials"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-workload-credential-brokering/src/tba_capability_workload_credential_brokering/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-workload-credential-brokering",
+      "protocol_packages": [],
+      "purpose": "coordinate delegated workload reference resolution, authorization, credential delivery, and trust material"
+    },
+    {
+      "compatibility_aggregator": false,
+      "dependencies": {
+        "capabilities": [],
+        "durability": [],
+        "providers": []
+      },
+      "families": [
+        "workload-identity"
+      ],
+      "implementations": [
+        {
+          "capability_id": "workload-identity.credentials",
+          "class": "WorkloadIdentityCapability",
+          "operations": [
+            "obtain_workload_credential",
+            "refresh_workload_credentials",
+            "resolve_workload_trust",
+            "verify_workload_credential"
+          ],
+          "source": "pkgs/040-capabilities/tba-capability-workload-identity/src/tba_capability_workload_identity/__init__.py",
+          "version": "1.0"
+        }
+      ],
+      "package": "tba-capability-workload-identity",
+      "protocol_packages": [],
+      "purpose": "coordinate workload credential retrieval and identity verification"
+    }
+  ],
+  "schema_version": 1
+}

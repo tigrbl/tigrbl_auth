@@ -16,7 +16,7 @@ references: []
 body: |-
   ## Decision
 
-  `tigrbl_auth` MUST treat generated contract artifacts as first-class deployment outputs independent of route exposure.
+  `tba_auth` MUST treat generated contract artifacts as first-class deployment outputs independent of route exposure.
 
   Specifically:
 

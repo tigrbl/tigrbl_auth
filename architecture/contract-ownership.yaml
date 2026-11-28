@@ -1,0 +1,55 @@
+version: 1
+layer: 002-contracts
+owners:
+  Did:
+    canonical: tba_contracts_did.identifiers.Did
+    compatibility: [tba_contracts_identity.did.identifiers.Did, tba_contracts_identity.decentralized.Did]
+  DidResolutionResult:
+    canonical: tba_contracts_did.resolution.DidResolutionResult
+    compatibility: [tba_contracts_identity.did.resolution.DidResolutionResult, tba_contracts_identity.decentralized.DidResolutionResult]
+  SpiffeId:
+    canonical: tba_contracts_workload_identity.spiffe.SpiffeId
+    compatibility: [tba_contracts_identity.workloads.spiffe.SpiffeId, tba_contracts_identity.workload_identity.SpiffeId]
+  Svid:
+    canonical: tba_contracts_workload_identity.svid.Svid
+    compatibility: [tba_contracts_identity.workloads.svid.Svid, tba_contracts_identity.workload_identity.Svid]
+  SvidFormat:
+    canonical: tba_contracts_workload_identity.svid.SvidFormat
+    compatibility: [tba_contracts_identity.workloads.svid.SvidFormat, tba_contracts_identity.workload_identity.SvidFormat]
+  SpiffeTrustDomain:
+    canonical: tba_contracts_workload_identity.spiffe.TrustDomain
+    compatibility: [tba_contracts_identity.workloads.spiffe.TrustDomain]
+  AdaptiveTrustDomain:
+    canonical: tba_contracts_identity.adaptive_access.AdaptiveTrustDomain
+  XacmlDecisionValue:
+    canonical: tba_contracts_identity.policy.xacml_mapping.XacmlDecisionValue
+  XacmlDecisionResult:
+    canonical: tba_contracts_identity.policy.xacml_mapping.XacmlDecisionResult
+  CredentialVerificationError:
+    canonical: tba_contracts_identity.credentials.errors.CredentialVerificationError
+  PublicKeyCredentialVerificationError:
+    canonical: tba_contracts_public_key_authentication.errors.PublicKeyCredentialVerificationError
+    compatibility: [tba_contracts_identity.public_key_authentication.errors.PublicKeyCredentialVerificationError]
+  AttestationEvidence:
+    canonical: tba_contracts_attestation.AttestationEvidence
+    compatibility: [tba_contracts_identity.attestation.AttestationEvidence]
+  KeyAttestationEvidence:
+    canonical: tba_contracts_security_trust.KeyAttestationEvidence
+  DigitalCredential:
+    canonical: tba_contracts_digital_credential.artifacts.DigitalCredential
+    compatibility: [tba_contracts_identity.digital_credentials.artifacts.DigitalCredential]
+  Claim:
+    canonical: tba_contracts_claim.Claim
+    compatibility: [tba_contracts_identity.claims.Claim]
+  SecurityEvent:
+    canonical: tba_contracts_security_event.SecurityEvent
+    compatibility: [tba_contracts_identity.security_events.SecurityEvent]
+  VerifiedClaims:
+    canonical: tba_contracts_identity_assurance.VerifiedClaims
+    compatibility: [tba_contracts_identity.assurance.VerifiedClaims]
+  IdentityAssuranceRequest:
+    canonical: tba_contracts_identity_assurance.IdentityAssuranceRequest
+    compatibility: [tba_contracts_identity.oidc.identity_assurance.IdentityAssuranceRequest]
+  ReplayReservationPort:
+    canonical: tba_contracts_replay.ReplayReservationPort
+    compatibility: [tba_contracts_identity.replay.reservations.ReplayReservationPort]

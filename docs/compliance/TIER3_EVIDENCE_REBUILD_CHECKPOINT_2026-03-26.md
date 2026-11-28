@@ -63,8 +63,8 @@ The repository still lacks enough preserved supported-matrix evidence to support
 
 - `scripts/collect_validated_artifact_downloads.py`
 - `scripts/record_validated_run.py`
-- `tigrbl_auth/cli/runtime.py`
-- `tigrbl_auth/cli/reports.py`
+- `tba_auth/cli/runtime.py`
+- `tba_auth/cli/reports.py`
 - `.github/workflows/ci-release-gates.yml`
 - `tox.ini`
 - `tests/unit/test_tier3_validated_rebuild.py`

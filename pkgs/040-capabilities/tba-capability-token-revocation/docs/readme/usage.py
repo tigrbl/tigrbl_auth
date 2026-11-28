@@ -1,0 +1,3 @@
+from tba_capability_token_revocation import TokenRevocationCapability
+
+assert callable(TokenRevocationCapability)

@@ -1,0 +1,149 @@
+# Package Layer Ownership
+
+The numbered package directories declare semantic ownership. They are not
+release phases and a package does not need to exist in every layer.
+
+## Canonical responsibilities
+
+| Layer | Responsibility | Must not own |
+| --- | --- | --- |
+| `000-primitives` | dependency-light values and deterministic utilities | domain implementations or integrations |
+| `001-storage` | storage schemas and persistence primitives | application workflows |
+| `002-contracts` | protocols, ports, enums, and transport-neutral contract values | concrete implementations |
+| `005-bases` | reusable abstract bases and mixins implementing contract structure, including `CapabilityBase` | deployable provider behavior |
+| `010-concrete` | first concrete domain implementations, including ordered generic capability implementations | external integrations or application workflows |
+| `020-providers` | concrete providers, algorithms, adapters, factories, and integrations | multi-provider application workflows |
+| `030-storage-runtime` | composed repositories, persistence services, and storage-backed runtimes | protocol or product composition |
+| `040-capabilities` | complete multi-component application use cases | single implementations, integrations, persistence, protocols, or app construction |
+| `050-protocols` | OAuth, OIDC, credential, attestation, and event protocol behavior | process construction |
+| `060-runtime` | dependency injection, process construction, runners, and runtime lifecycle | product API policy |
+| `070-facade` | compatibility and ergonomic suite entry point | canonical lower-layer behavior |
+| `075-clients` | independently versioned Python and TypeScript remote SDKs plus consumer-side enforcement adapters | server composition, storage, routers, backend apps, facades, or UI screens |
+| `080-routers` | reusable Tigrbl routers that close over one or more related tables, operations, schemas, and hooks | deployable backend application composition |
+| `090-backend-apps` | deployable backend applications composed from routers plus app-wide tables, operations, hooks, policy, configuration, and lifecycle | lower-layer implementation truth or router behavior duplicated inside an app |
+| `100-uix-core` | browser-safe reusable UIX components and client utilities | product-specific screens or Python runtime behavior |
+| `105-ui` | product-specific user interfaces and browser applications | backend implementation truth |
+| `110-examples` | runnable consumer applications demonstrating supported public surfaces | canonical implementation logic or test-only dependencies |
+| `120-tests` | shared fixtures, fakes, vectors, conformance harnesses, and cross-layer verification packages | production runtime behavior |
+
+## Terminal verification and demonstration layers
+
+`120-tests` and `110-examples` are terminal consumers rather than production
+dependency layers. Production packages may not depend on either layer. Example
+packages may compose any supported public production surface, but may not rely
+on test-only helpers. Shared test infrastructure belongs in `120-tests`; unit
+tests that verify one package may remain co-located with that package, and the
+repository-wide `tests/` tree remains the workspace verification harness.
+
+## Layer 40 decision rule
+
+Layer 40 is optional and deliberately sparse. A package belongs there only if
+removing it would eliminate a complete use case that coordinates multiple
+layer-20 providers and/or layer-30 storage runtimes.
+
+Every layer-40 capability follows this ordered inheritance chain:
+
+```text
+02 ICapability -> 05 CapabilityBase -> 10 Capability -> 40 specialization
+```
+
+`CapabilityDefinition` owns only the stable capability ID and contract version.
+`CapabilityOperation` is the single source for an operation's target, required
+status, and delegation status. `CapabilityState` reports the mounted instance's
+current readiness, health, status, and diagnostic details.
+
+`Capability` is the neutral generic implementation. It supplies explicit
+definition, operation-registry, attribute, live-state, call, delegated-subcall,
+context, and reporting machinery without selecting providers or applying
+implicit settings. `DefaultCapability` is an optional layer-10 subclass whose
+only default is a documented ready/healthy state. A layer-40 capability may
+inherit either layer-10 generic, but never inherits layers 02 or 05 directly.
+
+A layer-40 package may:
+
+- express workflows using layer-02 contract values and ports;
+- coordinate concrete layer-10 values, layer-20 providers, and layer-30 runtimes;
+- enforce ordering, consent, replay, transaction, compensation, audit, and
+  fail-closed workflow rules;
+- return a complete application outcome.
+
+A layer-40 package may not:
+
+- inherit from or implement a type owned below layer 10;
+- import layer-00 primitive internals or layer-01 storage implementations;
+- inherit from layer-05 bases;
+- own a single provider, algorithm, adapter, factory, or integration;
+- access database tables or sessions directly;
+- construct providers or processes;
+- implement protocol transport or API routing.
+
+Provider construction and external integration belong to layer 20. Composed
+storage behavior belongs to layer 30. Whole-process dependency injection and
+application construction belong to layer 60.
+
+## Registered capabilities
+
+The authoritative registry is `CAPABILITY_PURPOSES` in
+`scripts/validate_layer_boundaries.py`. The current layer-40 packages are:
+
+| Package | Complete use case |
+| --- | --- |
+| `tigrbl-attestation-appraisal` | coordinate evidence appraisal and result recording |
+| `tigrbl-digital-credential-issuance` | coordinate configuration, wallet trust, offers, and issuance |
+| `tigrbl-digital-credential-presentation` | coordinate consent, replay defense, and verification |
+| `tigrbl-identity-admin-control-plane` | coordinate administrative resource lifecycle use cases |
+| `tigrbl-security-events` | coordinate event transmission, receipt, and recording |
+| `tigrbl-workload-identity` | coordinate workload credential retrieval and identity verification |
+
+Adding a layer-40 package requires adding its multi-component use-case purpose
+to the registry. The boundary validator rejects unregistered packages and stale
+registrations.
+
+## Continuous enforcement
+
+Run:
+
+```shell
+python scripts/validate_layer_boundaries.py
+pytest -q pkgs/120-tests/tba-tests-architecture/tests/unit/test_layer_40_capability_boundary.py
+```
+
+The validator checks live package metadata and Python ASTs. It rejects:
+
+- prohibited layer-40 manifest dependencies;
+- prohibited imports, including type-checking and function-local imports;
+- direct inheritance from layers 00, 01, 02, or 05;
+- layer-40 packages without a layer-10.1 or layer-10.2 dependency and base;
+- unregistered layer-40 packages;
+- stale capability registrations.
+
+The general package-layer tests continue to verify that every package resides
+in exactly one declared filesystem layer and that frontend workspaces remain
+outside the Python dependency graph.
+
+## Router and backend-application direction
+
+Layer 80 packages use the `tba-router-*` distribution family. A router
+is a reusable, mountable HTTP carrier. Its closure may be deliberately small:
+one operation, one table, an operation and a table, or a related set of
+operations, tables, schemas, and local hooks. A router does not construct a
+deployable product application.
+
+Layer 90 backend packages use the `tba-app-backend-*` distribution
+family. A backend app closes over all routers and all app-wide tables,
+operations, hooks, policy, settings, startup, shutdown, and middleware needed
+to run one product surface. It may implement local routers when a route is
+specific to that app and has no reusable layer-80 identity.
+
+The dependency direction is one-way:
+
+```text
+090-backend-apps -> 080-routers
+105-ui -> 075-clients -> 002-contracts / 050-protocols
+```
+
+Routers may never declare or import backend-app packages. The layer-boundary
+validator enforces both manifest dependencies and Python source imports.
+Server packages do not depend on layer 75. Clients are a peer delivery layer,
+not a facade: they consume stable wire contracts and remain independently
+usable without importing product UIX or server implementations.

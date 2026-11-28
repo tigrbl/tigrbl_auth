@@ -1,0 +1,59 @@
+"""Clock primitives shared by identity packages."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from datetime import datetime, timezone
+from typing import Protocol
+
+UTC = timezone.utc
+
+
+class Clock(Protocol):
+    def now(self) -> datetime:
+        """Return an aware UTC timestamp."""
+
+
+@dataclass(frozen=True, slots=True)
+class SystemClock:
+    def now(self) -> datetime:
+        return datetime.now(UTC)
+
+
+@dataclass(frozen=True, slots=True)
+class FrozenClock:
+    value: datetime
+
+    def now(self) -> datetime:
+        if self.value.tzinfo is None:
+            return self.value.replace(tzinfo=UTC)
+        return self.value.astimezone(UTC)
+
+
+def unix_seconds(clock: Clock | None = None) -> int:
+    active = clock or SystemClock()
+    return int(active.now().timestamp())
+
+
+def utc_now(clock: Clock | None = None) -> datetime:
+    active = clock or SystemClock()
+    return active.now().astimezone(UTC)
+
+
+def utc_now_iso(clock: Clock | None = None) -> str:
+    return utc_now(clock).isoformat()
+
+
+def parse_time(value: str) -> datetime:
+    return datetime.fromisoformat(value.replace("Z", "+00:00"))
+
+
+__all__ = [
+    "Clock",
+    "FrozenClock",
+    "SystemClock",
+    "parse_time",
+    "unix_seconds",
+    "utc_now",
+    "utc_now_iso",
+]

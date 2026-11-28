@@ -3,7 +3,7 @@ kind: "spec"
 id: "spc:1028"
 number: 1028
 slug: "openapi-baseline-public-full-yaml"
-title: "Repo spec: specs/openapi/profiles/baseline/tigrbl_auth.public.openapi.yaml"
+title: "Repo spec: specs/openapi/profiles/baseline/tba_auth.public.openapi.yaml"
 status: "draft"
 origin: "repo-local"
 decision_date: null
@@ -16,7 +16,7 @@ references: []
 body: |-
   openapi: 3.1.0
   info:
-    title: tigrbl_auth public auth server
+    title: tba_auth public auth server
     version: 0.3.4
     description: Generated public contract filtered by the effective deployment boundary.
   servers:
@@ -679,7 +679,7 @@ body: |-
       GenericResult:
         type: object
         additionalProperties: true
-  x-tigrbl-auth:
+  x-tba-auth:
     profile: baseline
     plugin_mode: mixed
     runtime_style: standalone

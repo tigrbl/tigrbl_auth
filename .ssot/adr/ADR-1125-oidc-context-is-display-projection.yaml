@@ -1,0 +1,21 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1125"
+number: 1125
+slug: "oidc-context-is-display-projection"
+title: "OIDC context is display projection"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Decision: the public UIX OIDC context panel is a presentation projection over verified provider outputs, not an authentication source of truth. The provider backend owns token minting, UserInfo responses, issuer binding, nonce/session/auth-time claims, and session cookies. Public UIX owns clear display provenance, source labels for ID token, access token, and UserInfo fields, safe redaction, and deterministic routing after callback. Downstream BMVP demos consume this provider-side contract rather than implementing a parallel auth protocol."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted to govern BMVP/public-uix demo gaps around OIDC context display, UserInfo visibility, and first-login callback behavior."
+    at: "2026-06-16T20:47:33Z"
+references: []
+body: |-
+  Decision: the public UIX OIDC context panel is a presentation projection over verified provider outputs, not an authentication source of truth. The provider backend owns token minting, UserInfo responses, issuer binding, nonce/session/auth-time claims, and session cookies. Public UIX owns clear display provenance, source labels for ID token, access token, and UserInfo fields, safe redaction, and deterministic routing after callback. Downstream BMVP demos consume this provider-side contract rather than implementing a parallel auth protocol.

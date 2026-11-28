@@ -1,0 +1,3 @@
+from tba_concrete_webauthn_credential import WebAuthnCredential
+
+assert callable(WebAuthnCredential)

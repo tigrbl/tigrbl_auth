@@ -1,0 +1,3 @@
+from tba_contracts_identity_assurance import AssuranceEvidence
+
+assert callable(AssuranceEvidence)

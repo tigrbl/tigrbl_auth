@@ -1,0 +1,3 @@
+from tba_provider_corim_reference_memory import CorimReferenceMemoryProvider
+
+assert callable(CorimReferenceMemoryProvider)

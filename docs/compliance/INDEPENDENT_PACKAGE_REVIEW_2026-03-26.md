@@ -2,7 +2,7 @@
 
 ## Verdict
 
-`tigrbl_auth` is **not certifiably fully featured** and **not certifiably fully RFC/spec compliant** in this checkpoint.
+`tba_auth` is **not certifiably fully featured** and **not certifiably fully RFC/spec compliant** in this checkpoint.
 
 The retained implementation boundary is materially present at Tier 3 for **48 targets**, but final certification is still blocked by missing validated execution evidence and missing preserved independent Tier 4 peer bundles.
 
@@ -78,14 +78,14 @@ The retained implementation boundary is materially present at Tier 3 for **48 ta
 
 ## Additional repository drift fixed in this checkpoint update
 
-- Regenerated CLI reference and conformance artifacts so `docs/reference/CLI_SURFACE.md`, `docs/compliance/cli_conformance_snapshot.*`, and the generated contract artifacts are back in sync with `tigrbl_auth.cli.metadata`.
+- Regenerated CLI reference and conformance artifacts so `docs/reference/CLI_SURFACE.md`, `docs/compliance/cli_conformance_snapshot.*`, and the generated contract artifacts are back in sync with `tba_auth.cli.metadata`.
 - Restored dependency-provenance artifact enumeration so runbooks are included in `_dependency_artifact_paths()` and release/dependency manifests expose the expected install-profile documentation.
 - Added compatibility fields to `docs/compliance/peer_matrix_report.json` and its generator so existing downstream consumers can read both the canonical and compatibility key names.
 - Corrected a stale unit assertion in `tests/unit/test_cli_contract.py` so the test checks the current report semantics instead of expecting a non-gap message inside `open_gaps`.
 
 ## Files updated in this checkpoint
 
-- `tigrbl_auth/cli/reports.py`
+- `tba_auth/cli/reports.py`
 - `scripts/materialize_tier4_peer_evidence.py`
 - `tests/unit/test_cli_contract.py`
 - `docs/reference/CLI_SURFACE.md`
@@ -115,11 +115,11 @@ The retained implementation boundary is materially present at Tier 3 for **48 ta
 
 These modules are not necessarily functionally broken, but they are the main owners of the remaining blocked certification lanes:
 
-- `tigrbl_auth/api/app.py` and `tigrbl_auth/gateway.py` — final runtime certification is blocked until the real `tigrbl` runtime dependency stack is present and the app-factory probe passes in the clean-room matrix.
-- `tigrbl_auth/cli/runtime.py` and `tigrbl_auth/runtime/*` — runner profiles are declared and smoke-tested, but final kept-runner readiness is still not preserved as validated execution evidence across the supported interpreter/profile matrix.
-- `tigrbl_auth/cli/reports.py` — now structurally consistent, but final truth remains negative until validated execution artifacts exist.
+- `tba_auth/api/app.py` and `tba_auth/gateway.py` — final runtime certification is blocked until the real `tigrbl` runtime dependency stack is present and the app-factory probe passes in the clean-room matrix.
+- `tba_auth/cli/runtime.py` and `tba_auth/runtime/*` — runner profiles are declared and smoke-tested, but final kept-runner readiness is still not preserved as validated execution evidence across the supported interpreter/profile matrix.
+- `tba_auth/cli/reports.py` — now structurally consistent, but final truth remains negative until validated execution artifacts exist.
 - `scripts/materialize_tier4_peer_evidence.py` — now emits compatibility-aware peer-matrix reports, but final Tier 4 promotion still depends on real external preserved bundles.
-- `tigrbl_auth/migrations/*` and migration validation workflows — portability is not certifiable until upgrade → downgrade → reapply is preserved for both SQLite and PostgreSQL.
+- `tba_auth/migrations/*` and migration validation workflows — portability is not certifiable until upgrade → downgrade → reapply is preserved for both SQLite and PostgreSQL.
 
 ## Current measurable state
 

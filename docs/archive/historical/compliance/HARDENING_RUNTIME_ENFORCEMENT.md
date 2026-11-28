@@ -18,8 +18,8 @@ Convert hardening posture from declarative policy into executable runtime behavi
 
 ## Completed in this checkpoint
 
-- enforced RFC 9700-aligned authorization-request policy in `tigrbl_auth/ops/authorize.py`
-- enforced runtime grant-type policy in `tigrbl_auth/ops/token.py`
+- enforced RFC 9700-aligned authorization-request policy in `tba_auth/ops/authorize.py`
+- enforced runtime grant-type policy in `tba_auth/ops/token.py`
 - disabled the password grant in hardening and peer-claim profiles
 - disabled implicit and hybrid response types in hardening and peer-claim profiles
 - made PAR mandatory in hardening and peer-claim profiles when RFC 9126 is active

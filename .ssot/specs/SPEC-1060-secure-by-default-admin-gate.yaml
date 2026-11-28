@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "The secure-by-default admin gate defines the baseline tigrbl_auth deployment posture and the administrator identity-and-session contract used when generated admin surfaces are enabled."
+summary: "The secure-by-default admin gate defines the baseline tba_auth deployment posture and the administrator identity-and-session contract used when generated admin surfaces are enabled."
 supersedes: []
 superseded_by: []
 status_notes: []
@@ -16,7 +16,7 @@ references: []
 body: |-
   ## Overview
   
-  The secure-by-default admin gate defines the baseline tigrbl_auth deployment posture and the administrator identity-and-session contract used when generated admin surfaces are enabled.
+  The secure-by-default admin gate defines the baseline tba_auth deployment posture and the administrator identity-and-session contract used when generated admin surfaces are enabled.
   
   Decision source: `adr:1041`.
   Feature owner: `feat:secure-default-baseline-admin-gate`.

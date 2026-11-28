@@ -18,14 +18,14 @@ Authorization Server metadata in the target tree, and generates the first real
 OpenAPI public contract.
 
 Completed in this checkpoint:
-- baseline OAuth2 modules promoted into `tigrbl_auth/standards/oauth2/*`
-- baseline OIDC modules promoted into `tigrbl_auth/standards/oidc/*`
-- baseline JOSE modules promoted into `tigrbl_auth/standards/jose/*`
+- baseline OAuth2 modules promoted into `tba_auth/standards/oauth2/*`
+- baseline OIDC modules promoted into `tba_auth/standards/oidc/*`
+- baseline JOSE modules promoted into `tba_auth/standards/jose/*`
 - finalized release-path `/authorize`, `/token`, `/userinfo`, discovery, JWKS,
   and authorization-server metadata surfaces under the target tree
 - enforced PKCE, redirect URI, state / nonce / issuer baseline behavior in the
   release-path authorize and token flows
-- generated `specs/openapi/tigrbl_auth.public.openapi.json`
+- generated `specs/openapi/tba_auth.public.openapi.json`
 - initialized `tests/conformance/baseline/` with migrated baseline tests
 
 Honest status:

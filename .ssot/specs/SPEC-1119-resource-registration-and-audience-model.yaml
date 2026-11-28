@@ -1,0 +1,61 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1119"
+number: 1119
+slug: "resource-registration-and-audience-model"
+title: "Resource registration and audience model"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs resource server registration and audience modeling."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define resource registration, audience, and verifier trust semantics."
+    at: "2026-05-18T08:31:59Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs resource server registration and audience modeling.
+  
+  ## First-Class Objects
+  
+  The model MUST define:
+  
+  - `ResourceRegistration`
+  - `ResourceServer`
+  - `ResourceIdentifier`
+  - `Audience`
+  - `Scope`
+  - `Permission`
+  - `ResourceIndicator`
+  - `ProtectedResourceMetadata`
+  - `VerifierTrustPolicy`
+  - `TenantTrustDomainBinding`
+  
+  ## Requirements
+  
+  Resource servers MUST define accepted issuers, accepted audiences, JWKS or
+  introspection trust configuration, tenant trust-domain expectations, scopes,
+  permissions, and proof-binding requirements where enabled.
+  
+  Resource indicators MUST align with RFC 8707 behavior where used.
+  
+  Protected resource metadata MUST align with RFC 9728 where exposed.
+  
+  Resource authorization MUST fail closed for unknown issuer, unknown audience,
+  cross-tenant token acceptance, missing required scope/permission, and failed
+  proof binding.
+  
+  ## Verification
+  
+  Verification MUST prove audience validation, resource indicator handling,
+  protected resource metadata publication, scope/permission enforcement,
+  cross-tenant rejection, and proof-binding rejection.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1108"

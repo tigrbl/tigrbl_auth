@@ -1,0 +1,6 @@
+{
+  "name": "Retina AMR Verifier",
+  "description": "First-party Retina AMR Enrollment, Verification, Consent, and Administration Suite",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

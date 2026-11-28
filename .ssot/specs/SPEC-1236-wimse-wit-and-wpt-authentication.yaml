@@ -1,0 +1,41 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1236"
+number: 1236
+slug: "wimse-wit-and-wpt-authentication"
+title: "WIMSE WIT and WPT authentication"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-creds-03"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Normative targets
+  https://datatracker.ietf.org/doc/html/draft-ietf-wimse-workload-creds-03
+  https://datatracker.ietf.org/doc/html/draft-ietf-wimse-wpt-02
+  
+  ## Sender
+  The WIT issuer MUST sign a compact JWT with a configured asymmetric trust-domain key and bind the workload identity to a public confirmation JWK. The workload MUST sign a short-lived WPT with that confirmation key, bind the exact serialized WIT with SHA-256, set the target HTTP URI without query or fragment as audience, and generate a fresh proof ID. The workload presents the WIT in Workload-Identity-Token and the WPT using the WPT authorization scheme.
+  
+  ## Receiver
+  The WIT profile MUST validate the workload identifier, credential type, confirmation key, issuer signature, and validity using trust anchors configured for the subject trust domain. The WPT profile MUST enforce HTTP presentation, proof signature and algorithm binding, audience, lifetime, and exact WIT hash. The verifier MUST atomically reject a repeated proof ID scoped to its workload identity while the proof remains valid. The WIT and WPT packages MUST remain independently composable.
+  
+  ## Verification
+  T3 exercises both roles with Tigrbl Auth release-candidate packages over HTTP using configured trust and the real replay provider. Cover wrong domain anchors, issuer and proof keys, proof bound to a different WIT, wrong audience, expiry, and replay. Native verification runs without SPIFFE, SPIRE, or Cred.
+  
+  ## WIT issuer application
+  tba-app-backend-wit-issuance MUST compose the native issuance router and token service with explicit signer, workload authentication, enrollment resolution, and confirmation-key authorization. No caller-supplied workload subject may override enrollment.
+  ## WPT issuance API
+  The WPT profile MUST expose issue_wpt for compact JWT issuance and WptProofIssuer implementing PossessionProofIssuerPort. Both MUST use the configured workload key, create a fresh proof ID, bind the exact WIT and any supplied token digests, and cap expiry at the WIT expiry and configured short lifetime. The carrier-neutral issuer MUST reject a conflicting audience, credential digest or unsupported method binding. present_wit MUST reuse the same issuance implementation.
+  ## Delegated verification
+  tba-router-wpt-verification and tba-app-backend-wpt-verifier MUST expose POST /wpt/verify for authenticated, explicitly authorized recipient services. The deployment MUST fix audience, trust keys and required token bindings. The caller MUST NOT replace those policies. The existing bound_token_headers selector MUST bind listed headers only when present. A separate required_token_headers policy MUST enforce presence and binding for the remote verifier. The API MUST preserve original token-header multiplicity, reject invalid or duplicate bound tokens, and require configured bindings even if absent from both the request and proof. Replay state MUST be atomically reserved once after successful cryptographic and context validation, and shared across verifier replicas. Success returns only valid, subject, audience, proof_id and expires_at with caching disabled. Verification consumes replay state; it is not a non-consuming inspection or resource-authorization decision.
+  ## Runtime composition
+  Existing verifier-only composition MUST remain usable. If any of wpt_signer, wpt_wit or wpt_workload_key_reference is supplied, all three MUST be present before constructing wimse_wpt_issuer. Sender-only use of the profile API MUST remain possible without constructing a backend app.
+  Receiver negative controls for expired WITs MUST explicitly construct the invalid wire proof below the production issuance API. Production issue_wpt and present_wit MUST continue to reject expired WITs; the receiver test MUST independently observe an HTTP refusal for the credential validity period.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1140"

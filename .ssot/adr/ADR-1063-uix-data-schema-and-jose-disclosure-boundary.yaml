@@ -19,7 +19,7 @@ body: |-
   Status: proposed
   Date: 2026-05-04
   
-  `tigrbl_auth` MUST define explicit UIX disclosure rules for schema-driven and JOSE-related artifacts. Admin UIX and public UIX MUST distinguish what may be rendered, what must be redacted, what may be explained without disclosure, and what remains implementation-only for JSON Schema, JWS, JWE, JWT, and JWKS-adjacent concerns.
+  `tba_auth` MUST define explicit UIX disclosure rules for schema-driven and JOSE-related artifacts. Admin UIX and public UIX MUST distinguish what may be rendered, what must be redacted, what may be explained without disclosure, and what remains implementation-only for JSON Schema, JWS, JWE, JWT, and JWKS-adjacent concerns.
   
   ## Rationale
   

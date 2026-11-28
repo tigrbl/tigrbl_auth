@@ -1,0 +1,61 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1108"
+number: 1108
+slug: "resource-servers-are-distinct-from-clients-and-apps"
+title: "Resource servers are distinct from clients and apps"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "`ResourceServer` SHALL be a distinct identity/platform object."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Distinguish protected APIs/resource servers from OAuth clients and tenant apps."
+    at: "2026-05-18T08:26:40Z"
+references: []
+body: |-
+  ## Decision
+  
+  `ResourceServer` SHALL be a distinct identity/platform object.
+  
+  A resource server belongs to a tenant and MAY belong to an app. It owns or
+  references:
+  
+  - resource identifiers;
+  - audiences;
+  - scopes;
+  - permissions;
+  - protected resource metadata;
+  - verifier trust expectations;
+  - proof-binding requirements;
+  - tenant trust-domain binding.
+  
+  Resource servers are not OAuth clients. Apps may contain both clients and
+  resource servers, but the concepts remain distinct.
+  
+  ## Context
+  
+  OAuth clients request tokens. Resource servers validate tokens and enforce
+  access to protected APIs.
+  
+  The package-boundary proposal adds `tigrbl-identity-resource-server` for
+  downstream protected API validation. That package needs a governed object
+  model for resources, audiences, scopes, permissions, and verifier policy.
+  
+  ## Consequences
+  
+  `principals` owns the resource-server actor shape where it is represented as
+  an identity/platform object.
+  
+  `resource-server` owns verifier behavior.
+  
+  `oauth` owns resource indicator and token semantics.
+  
+  `policy` owns scope, permission, tenant, proof-binding, and resource
+  authorization decisions.
+  
+  `admin` owns resource registration and management workflows.

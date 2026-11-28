@@ -33,10 +33,10 @@ Net reduction in non-certified wrapper/shim modules: **41**.
 The remaining four wrapper modules are all extension-quarantine wrappers and are
 outside the certified-core boundary:
 
-- `tigrbl_auth/extensions/rfc7952.py`
-- `tigrbl_auth/extensions/rfc8291.py`
-- `tigrbl_auth/extensions/rfc8812.py`
-- `tigrbl_auth/extensions/rfc8932.py`
+- `tba_auth/extensions/rfc7952.py`
+- `tba_auth/extensions/rfc8291.py`
+- `tba_auth/extensions/rfc8812.py`
+- `tba_auth/extensions/rfc8932.py`
 
 ## What was removed from the wrapper population
 
@@ -80,25 +80,25 @@ longer proxy into the flat legacy RFC tree:
 - `rfc9449_dpop.py`
 
 These modules may still exist as compatibility surfaces, but they are no longer
-counted as thin wrappers and they no longer forward into `tigrbl_auth/rfc/*`.
+counted as thin wrappers and they no longer forward into `tba_auth/rfc/*`.
 
 ### Secondary JOSE shims eliminated
 
 The following modules were rewritten as real standards-tree implementations and
 promoted into the certified core:
 
-- `tigrbl_auth/standards/jose/rfc7520.py`
-- `tigrbl_auth/standards/jose/rfc7638.py`
-- `tigrbl_auth/standards/jose/rfc8037.py`
-- `tigrbl_auth/standards/jose/rfc8176.py`
-- `tigrbl_auth/standards/jose/rfc8725.py`
+- `tba_auth/standards/jose/rfc7520.py`
+- `tba_auth/standards/jose/rfc7638.py`
+- `tba_auth/standards/jose/rfc8037.py`
+- `tba_auth/standards/jose/rfc8176.py`
+- `tba_auth/standards/jose/rfc8725.py`
 
 ### In-scope owner-module aggregation fixed
 
 `OIDC Core 1.0` had an in-scope owner module that was still a star-import
 aggregator:
 
-- `tigrbl_auth/standards/oidc/core.py`
+- `tba_auth/standards/oidc/core.py`
 
 That module is now a named aggregator with explicit exports and no longer trips
 wrapper hygiene.
@@ -109,14 +109,14 @@ The wrapper hygiene gate now checks more than certified-core wrapper count.
 It also fails when any of the following conditions are true:
 
 - an in-scope owner module is still a thin wrapper
-- a standards-tree module still imports `tigrbl_auth.rfc/*`
+- a standards-tree module still imports `tba_auth.rfc/*`
 - a release-path or entrypoint module still imports a legacy compatibility root
-  (`tigrbl_auth.rfc`, `backends`, `db`, `runtime_cfg`, `orm`)
+  (`tba_auth.rfc`, `backends`, `db`, `runtime_cfg`, `orm`)
 
 This stricter posture is enforced by:
 
 - `scripts/verify_wrapper_hygiene.py`
-- `tigrbl_auth/cli/boundary.py`
+- `tba_auth/cli/boundary.py`
 
 ## Current interpretation
 

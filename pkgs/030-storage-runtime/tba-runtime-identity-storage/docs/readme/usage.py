@@ -1,0 +1,3 @@
+from tba_runtime_identity_storage import initializeIdentityRuntimeTables
+
+assert callable(initializeIdentityRuntimeTables)

@@ -6,5 +6,5 @@ targets:
 profile: production
 status: evidenced-release-gated
 capture_mode: dependency-light preserved evidence
-source_checkpoint_zip: /mnt/data/tigrbl_auth_capability_capability_operator_service_layer_checkpoint.zip
+source_checkpoint_zip: /mnt/data/tba_auth_capability_capability_operator_service_layer_checkpoint.zip
 evidence_dir: compliance/evidence/tier3/jwt-client-auth

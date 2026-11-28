@@ -6,8 +6,8 @@ required_targets:
 - ASGI 3 application package
 - 'Runner profile: Uvicorn'
 required_artifacts:
-- tigrbl_auth/api/app.py
-- tigrbl_auth/gateway.py
+- tba_auth/api/app.py
+- tba_auth/gateway.py
 - tests/runtime/test_runner_uvicorn.py
 scenario_ids:
 - runner-launch

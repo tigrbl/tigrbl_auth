@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1132"
+number: 1132
+slug: "rp-session-and-token-storage-contract"
+title: "RP Session And Token Storage Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines browser-safe session storage rules and server-side session/token-store rules, including refresh-token handling and forbidden browser persistence defaults."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "RP/resource-server/provider-login maturity wave proposal."
+    at: "2026-05-23T05:44:13Z"
+references: []
+body: |-
+  Defines browser-safe session storage rules and server-side session/token-store rules, including refresh-token handling and forbidden browser persistence defaults.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1115"
+  - "adr:1116"

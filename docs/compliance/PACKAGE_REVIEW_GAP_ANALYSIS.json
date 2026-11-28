@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "package": "tigrbl_auth",
+  "package": "tba_auth",
   "delivery_lifecycle": "independent-peer-evidence",
   "version": "0.3.4",
   "summary": {

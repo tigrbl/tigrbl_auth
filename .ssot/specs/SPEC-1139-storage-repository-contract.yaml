@@ -1,0 +1,20 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1139"
+number: 1139
+slug: "storage-repository-contract"
+title: "Storage Repository Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines repository ports, transaction boundaries, migration ownership, database portability, and dependency restrictions."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  Defines repository ports, transaction boundaries, migration ownership, database portability, and dependency restrictions.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1074"

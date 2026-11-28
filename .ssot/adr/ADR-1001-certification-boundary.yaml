@@ -1,4 +1,4 @@
-schema_version: "0.1.0"
+schema_version: "0.4.0"
 kind: "adr"
 id: "adr:1001"
 number: 1001
@@ -11,7 +11,11 @@ tags: []
 summary: "> [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports."
 supersedes: []
 superseded_by: []
-status_notes: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Strategic security concerns may become independent release gates as their runtime contracts and proof suites mature."
+    at: "2026-06-01T10:41:17Z"
 references: []
 body: |-
   ## Decision

@@ -1,0 +1,6 @@
+{
+  "name": "Authenticator Center",
+  "description": "Authenticator Lifecycle API and Center UIX dashboard for enrolling, managing, and auditing human authenticators.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

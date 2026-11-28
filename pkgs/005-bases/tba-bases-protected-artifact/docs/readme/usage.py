@@ -1,0 +1,3 @@
+from tba_bases_protected_artifact import SecurityArtifactCodecBase
+
+assert callable(SecurityArtifactCodecBase)

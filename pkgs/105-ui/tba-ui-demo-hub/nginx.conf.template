@@ -1,0 +1,39 @@
+server {
+  listen 80;
+  server_name _;
+
+  root /usr/share/nginx/html;
+  index index.html;
+
+  location /api/public/ {
+    proxy_pass http://host.docker.internal:8013/;
+  }
+
+  location /api/resource-validation/ {
+    proxy_pass http://host.docker.internal:8014/;
+  }
+
+  location /api/platform-admin/ {
+    proxy_pass http://host.docker.internal:8015/;
+  }
+
+  location /api/tenant-admin/ {
+    proxy_pass http://host.docker.internal:8016/;
+  }
+
+  location /api/developer/ {
+    proxy_pass http://host.docker.internal:8017/;
+  }
+
+  location /api/service-admin/ {
+    proxy_pass http://host.docker.internal:8018/;
+  }
+
+  location /api/my-account/ {
+    proxy_pass http://host.docker.internal:8019/;
+  }
+
+  location / {
+    try_files $uri /index.html;
+  }
+}

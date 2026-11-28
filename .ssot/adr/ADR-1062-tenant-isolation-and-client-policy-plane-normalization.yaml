@@ -11,7 +11,11 @@ tags: []
 summary: "Status: proposed"
 supersedes: []
 superseded_by: []
-status_notes: []
+status_notes:
+  -
+    status: "draft"
+    note: "Extended by adr:1122: tenant and client policy normalization must support explicit isolation invariants."
+    at: "2026-06-07T04:38:41Z"
 references: []
 body: |-
   ## Decision
@@ -19,7 +23,7 @@ body: |-
   Status: proposed
   Date: 2026-05-04
   
-  `tigrbl_auth` MUST normalize tenant isolation and client policy semantics
+  `tba_auth` MUST normalize tenant isolation and client policy semantics
   across admin API, public API, admin UIX, and any in-scope public UIX surfaces.
   The repository MUST distinguish administrative visibility, public-facing
   exposure, mutation authority, and tenant/client scoping rules per surface.

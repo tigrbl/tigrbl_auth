@@ -1,0 +1,3 @@
+import tba_app_backend_wic_ca
+
+print(tba_app_backend_wic_ca.__name__)

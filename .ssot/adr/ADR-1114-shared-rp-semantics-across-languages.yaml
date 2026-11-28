@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1114"
+number: 1114
+slug: "shared-rp-semantics-across-languages"
+title: "Shared RP Semantics Across Languages"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Decision: Python and TypeScript RP packages must implement the same governed semantics for discovery, PKCE, state, nonce, callback validation, token validation, userinfo, and logout."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "RP and resource-server maturity wave proposal."
+    at: "2026-05-23T05:43:57Z"
+references: []
+body: |-
+  Decision: Python and TypeScript RP packages must implement the same governed semantics for discovery, PKCE, state, nonce, callback validation, token validation, userinfo, and logout.
+  
+  Rationale: relying-party behavior must be predictable across application stacks. Cross-language parity prevents drift between browser and server integrations.
+  
+  Consequences: shared vectors are required for overlapping behavior, and package-specific tests must point back to the same RP contract specs.

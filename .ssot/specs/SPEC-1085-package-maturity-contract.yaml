@@ -1,0 +1,21 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1085"
+number: 1085
+slug: "package-maturity-contract"
+title: "Package Maturity Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines L0-L4 package maturity, required evidence, and promotion/demotion rules for every split identity package."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  Defines L0-L4 package maturity, required evidence, and promotion/demotion rules for every split identity package.
+spec_kind: "governance"
+adr_ids:
+  - "adr:1070"
+  - "adr:1071"

@@ -1,0 +1,3 @@
+from tba_capability_identity_document import IdentityDocumentCapability
+
+assert callable(IdentityDocumentCapability)
