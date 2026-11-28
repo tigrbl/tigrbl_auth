@@ -3773,6 +3773,15 @@ ecosystem = "pypi"
 dependencies = ["tba-concrete-claim-audience", "tba-concrete-claim-expiration", "tba-concrete-claim-issued-at", "tba-concrete-claim-issuer", "tba-concrete-claim-jwt-id", "tba-concrete-claim-not-before", "tba-concrete-claim-subject", "tba-concrete-jwt", "tba-contracts-identity", "tba-contracts-protected-envelope"]
 
 [[packages]]
+id = "tba-protocol-oauth"
+name = "tba-protocol-oauth"
+path = "pkgs/050-protocols/tba-protocol-oauth"
+layer = "050-protocols"
+order = 0
+ecosystem = "pypi"
+dependencies = ["tba-capability-authorization-request-staging", "tba-capability-client-registration", "tba-capability-token-introspection", "tba-capability-token-issuance", "tba-capability-token-revocation", "tba-concrete-authorization-scope-set-matcher", "tba-concrete-claim-access-token-digest", "tba-concrete-claim-actor", "tba-concrete-claim-client-id", "tba-concrete-claim-confirmation", "tba-concrete-claim-http-method", "tba-concrete-claim-http-uri", "tba-concrete-claim-issued-at", "tba-concrete-claim-jwt-id", "tba-concrete-claim-may-act", "tba-concrete-claim-nonce", "tba-concrete-claim-scope", "tba-contracts-identity", "tba-contracts-security-trust", "tba-primitives-identity", "tba-provider-identity-jose", "tba-provider-security-proof-pkce"]
+
+[[packages]]
 id = "tba-protocol-oid4vci"
 name = "tba-protocol-oid4vci"
 path = "pkgs/050-protocols/tba-protocol-oid4vci"
@@ -3899,20 +3908,11 @@ ecosystem = "pypi"
 dependencies = ["tba-codec-jcs", "tba-codec-multibase", "tba-contracts-replay"]
 
 [[packages]]
-id = "tba-protocol-oauth"
-name = "tba-protocol-oauth"
-path = "pkgs/050-protocols/tba-protocol-oauth"
-layer = "050-protocols"
-order = 1
-ecosystem = "pypi"
-dependencies = ["tba-capability-authorization-request-staging", "tba-capability-client-registration", "tba-capability-token-introspection", "tba-capability-token-issuance", "tba-capability-token-revocation", "tba-concrete-authorization-scope-set-matcher", "tba-concrete-claim-access-token-digest", "tba-concrete-claim-actor", "tba-concrete-claim-client-id", "tba-concrete-claim-confirmation", "tba-concrete-claim-http-method", "tba-concrete-claim-http-uri", "tba-concrete-claim-issued-at", "tba-concrete-claim-jwt-id", "tba-concrete-claim-may-act", "tba-concrete-claim-nonce", "tba-concrete-claim-scope", "tba-contracts-identity", "tba-contracts-security-trust", "tba-primitives-identity", "tba-protocol-gnap", "tba-provider-identity-jose", "tba-provider-security-proof-pkce"]
-
-[[packages]]
 id = "tba-protocol-oauth-protected-resource"
 name = "tba-protocol-oauth-protected-resource"
 path = "pkgs/050-protocols/tba-protocol-oauth-protected-resource"
 layer = "050-protocols"
-order = 2
+order = 1
 ecosystem = "pypi"
 dependencies = ["tba-capability-protected-resource-authorization", "tba-contracts-identity", "tba-contracts-security-trust", "tba-protocol-jwt", "tba-protocol-oauth", "tba-provider-authorization-resource-server-verifier", "tba-provider-security-dpop-cnf-binding-validator", "tba-provider-security-mtls-cnf-binding-validator"]
 
@@ -3921,7 +3921,7 @@ id = "tba-protocol-oidc"
 name = "tba-protocol-oidc"
 path = "pkgs/050-protocols/tba-protocol-oidc"
 layer = "050-protocols"
-order = 2
+order = 1
 ecosystem = "pypi"
 dependencies = ["tba-concrete-claim-access-token-hash", "tba-concrete-claim-address", "tba-concrete-claim-address-country-code", "tba-concrete-claim-also-known-as", "tba-concrete-claim-authentication-context", "tba-concrete-claim-authentication-methods", "tba-concrete-claim-authentication-time", "tba-concrete-claim-authorization-code-hash", "tba-concrete-claim-authorized-party", "tba-concrete-claim-birth-family-name", "tba-concrete-claim-birth-given-name", "tba-concrete-claim-birth-middle-name", "tba-concrete-claim-birthdate", "tba-concrete-claim-email", "tba-concrete-claim-email-verified", "tba-concrete-claim-family-name", "tba-concrete-claim-gender", "tba-concrete-claim-given-name", "tba-concrete-claim-locale", "tba-concrete-claim-middle-name", "tba-concrete-claim-msisdn", "tba-concrete-claim-name", "tba-concrete-claim-nationalities", "tba-concrete-claim-nickname", "tba-concrete-claim-nonce", "tba-concrete-claim-phone-number", "tba-concrete-claim-phone-number-verified", "tba-concrete-claim-picture-uri", "tba-concrete-claim-place-of-birth", "tba-concrete-claim-preferred-username", "tba-concrete-claim-profile-uri", "tba-concrete-claim-salutation", "tba-concrete-claim-session-id", "tba-concrete-claim-state-hash", "tba-concrete-claim-title", "tba-concrete-claim-transaction-id", "tba-concrete-claim-updated-at", "tba-concrete-claim-verified-claims", "tba-concrete-claim-website-uri", "tba-concrete-claim-zoneinfo", "tba-concrete-identity-assurance", "tba-concrete-pairwise-subject-identifier", "tba-concrete-public-subject-identifier", "tba-contracts-identity", "tba-primitives-identity", "tba-protocol-oauth", "tba-provider-claims-local", "tba-provider-identity-jose"]
 
@@ -3930,7 +3930,7 @@ id = "tba-protocol-oidc-relying-party"
 name = "tba-protocol-oidc-relying-party"
 path = "pkgs/050-protocols/tba-protocol-oidc-relying-party"
 layer = "050-protocols"
-order = 3
+order = 2
 ecosystem = "pypi"
 dependencies = ["tba-concrete-claim-audience", "tba-concrete-claim-authentication-context", "tba-concrete-claim-authentication-methods", "tba-concrete-claim-authentication-time", "tba-concrete-claim-authorized-party", "tba-concrete-claim-expiration", "tba-concrete-claim-issued-at", "tba-concrete-claim-issuer", "tba-concrete-claim-nonce", "tba-concrete-claim-subject", "tba-concrete-jws", "tba-contracts-identity", "tba-protocol-oidc", "tba-provider-jose-cryptography", "tba-provider-security-proof-pkce"]
 

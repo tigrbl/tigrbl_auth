@@ -34,6 +34,35 @@ def _normalize_scope(scopes: Iterable[str]) -> tuple[str, ...]:
     return tuple(sorted({scope.strip() for scope in scopes if scope and scope.strip()}))
 
 
+def resolve_client_registration_scopes(
+    scope: str | None,
+    *,
+    supported_scopes: Iterable[str],
+    default_scopes: Iterable[str],
+) -> tuple[str, ...]:
+    """Resolve the scope ceiling from client metadata and a server-selected default."""
+    supported = set(supported_scopes)
+    defaults = _normalize_scope(default_scopes)
+    if set(defaults) - supported:
+        raise ValueError("Default registration scopes must be supported by the server.")
+
+    allowed = defaults if scope is None else _normalize_scope(scope.split())
+    if not allowed or set(allowed) - supported:
+        raise OAuthError(
+            "invalid_client_metadata", "Registration scopes must be nonempty and supported."
+        )
+    return allowed
+
+
+def validate_client_authorization_scopes(
+    scopes: Iterable[str], registered_scopes: Iterable[str]
+) -> None:
+    """Require a nonempty request within the persisted client scope ceiling."""
+    requested = set(scopes)
+    if not requested or requested - set(registered_scopes):
+        raise OAuthError("invalid_scope", "requested scopes are not allowed for client")
+
+
 @dataclass(frozen=True, slots=True)
 class OAuthStateOperations:
     persist_client: Callable[[OAuthClient], None]
@@ -256,11 +285,7 @@ class OAuthProtocolService:
 
     @staticmethod
     def _require_scopes(client: OAuthClient, scopes: tuple[str, ...]) -> None:
-        allowed = set(client.allowed_scopes)
-        if not scopes or not set(scopes).issubset(allowed):
-            raise OAuthError(
-                "invalid_scope", "requested scopes are not allowed for client"
-            )
+        validate_client_authorization_scopes(scopes, client.allowed_scopes)
 
 
 def sha256_thumbprint(value: str) -> str:
@@ -278,5 +303,7 @@ __all__ = [
     "OAuthProtocolService",
     "OAuthStateOperations",
     "TokenExchangeResult",
+    "resolve_client_registration_scopes",
     "sha256_thumbprint",
+    "validate_client_authorization_scopes",
 ]

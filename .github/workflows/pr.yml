@@ -10,6 +10,19 @@ concurrency:
   group: pull-request-ci-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 jobs:
+  oauth-gnap-boundary:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.12'
+      - name: Check OAuth and GNAP package boundaries
+        run: >-
+          uv run --no-project --with pytest==9.0.3 pytest --noconftest
+          pkgs/120-tests/tba-tests-release/tests/unit/test_oauth_gnap_distribution_boundary.py
   quality:
     uses: tigrbl/tigrbl_auth/.github/workflows/_quality.yml@12ec516cfdd82546de4ce504e7672ab5062deac9
     permissions:
