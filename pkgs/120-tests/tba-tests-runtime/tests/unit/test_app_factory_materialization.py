@@ -21,11 +21,11 @@ def test_runtime_package_owns_runner_extras() -> None:
     manifest = tomllib.loads(runtime_pyproject.read_text(encoding="utf-8"))
     extras = manifest["project"]["optional-dependencies"]
 
-    assert extras["uvicorn"] == ["uvicorn[standard]==0.41.0"]
+    assert extras["uvicorn"] == ["uvicorn[standard]==0.46.0"]
     assert extras["hypercorn"] == ["hypercorn==0.18.0"]
     assert extras["tigrcorn"] == ["tigrcorn==0.3.8; python_version >= '3.11'"]
     assert set(extras["servers"]) == {
-        "uvicorn[standard]==0.41.0",
+        "uvicorn[standard]==0.46.0",
         "hypercorn==0.18.0",
         "tigrcorn==0.3.8; python_version >= '3.11'",
     }
@@ -56,7 +56,7 @@ def test_install_substrate_report_tracks_extras_consistency() -> None:
     payload = build_install_substrate_report(ROOT, execute_import_probes=False)
     assert payload["extras_consistency"]["passed"] is True
     assert payload["extras_consistency"]["workspace_runner_extras"]["uvicorn"] == [
-        "tba-runtime-identity[uvicorn]==0.4.0.dev2"
+        "tba-runtime-identity[uvicorn]==0.4.0.dev4"
     ]
 
 

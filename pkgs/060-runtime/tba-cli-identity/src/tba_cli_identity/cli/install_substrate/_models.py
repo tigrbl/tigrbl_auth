@@ -18,11 +18,11 @@ def _extras_consistency(repo_root: Path, dependency_manifest: dict[str, Any]) ->
         for name, values in (runtime_project.get("optional-dependencies") or {}).items()
     }
     expected_runtime_runner_extras = {
-        "uvicorn": [_normalize_requirement("uvicorn[standard]==0.41.0")],
+        "uvicorn": [_normalize_requirement("uvicorn[standard]==0.46.0")],
         "hypercorn": [_normalize_requirement("hypercorn==0.18.0")],
         "tigrcorn": [_normalize_requirement("tigrcorn==0.3.8; python_version >= '3.11'")],
         "servers": [
-            _normalize_requirement("uvicorn[standard]==0.41.0"),
+            _normalize_requirement("uvicorn[standard]==0.46.0"),
             _normalize_requirement("hypercorn==0.18.0"),
             _normalize_requirement("tigrcorn==0.3.8; python_version >= '3.11'"),
         ],
