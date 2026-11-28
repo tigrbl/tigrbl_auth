@@ -15,6 +15,7 @@ PYTHON_LAYER_FOLDERS = {
     "primitives": "000-primitives",
     "storage": "001-storage",
     "contracts": "002-contracts",
+    "codecs": "003-codecs",
     "bases": "005-bases",
     "concrete": "010-concrete",
     "providers": "020-providers",
@@ -58,6 +59,16 @@ REQUIRED_PROTOCOL_MODULES = {
     "schemas.py",
     "versions.py",
 }
+
+DNS_PROTOCOL_MODULES = {
+    "ddr.py",
+    "dnssec.py",
+    "gss_tsig.py",
+    "update.py",
+    "xfr.py",
+    "zonemd.py",
+}
+
 
 FRONTEND_WORKSPACES = {
     ROOT / "pkgs" / "100-uix-core" / "tba-ui-primitives",
@@ -193,9 +204,14 @@ def test_protocol_packages_own_complete_versioned_specification_surfaces() -> No
                 f"found {len(package_roots)}"
             )
             continue
+        required_modules = (
+            DNS_PROTOCOL_MODULES
+            if package_dir.name == "tba-protocol-dns"
+            else REQUIRED_PROTOCOL_MODULES
+        )
         missing = sorted(
             module
-            for module in REQUIRED_PROTOCOL_MODULES
+            for module in required_modules
             if not (package_roots[0] / module).is_file()
         )
         if missing:

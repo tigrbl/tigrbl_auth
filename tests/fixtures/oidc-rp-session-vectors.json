@@ -1,0 +1,29 @@
+{
+  "intents": [
+    {"intent": "ordinary", "expected": {}},
+    {"intent": "interactive", "expected": {"prompt": "login"}},
+    {"intent": "step_up", "acrValues": "urn:example:mfa", "expected": {"prompt": "login", "acr_values": "urn:example:mfa"}},
+    {"intent": "step_up", "error": true},
+    {"intent": "ordinary", "acrValues": "urn:example:mfa", "error": true}
+  ],
+  "discovery": [
+    {"endpoint": "https://authority.example/end-session", "expected": "https://authority.example/end-session"},
+    {"endpoint": "https://other.example/end-session", "error": true},
+    {"endpoint": "https://authority.example/end-session?state=fixed", "error": true},
+    {"endpoint": "https://authority.example:0/end-session", "error": true},
+    {"endpoint": "https://@authority.example/end-session", "error": true},
+    {"endpoint": "https:///authority.example/end-session", "error": true},
+    {},
+    {"metadataIssuer": "https://other.example", "error": true}
+  ],
+  "logout": [
+    {"url": "https://rp.example/out?state=browser", "accepted": true},
+    {"url": "https://rp.example/out?state=another", "accepted": false},
+    {"url": "https://rp.example/out?state=browser&state=browser", "accepted": false},
+    {"url": "https://rp.example/out?state=browser&result=done", "accepted": false},
+    {"url": "https://rp.example/out/?state=browser", "accepted": false},
+    {"url": "https://rp.example/out#x?state=browser", "accepted": false},
+    {"url": "https://rp.example:443/out?state=browser", "accepted": false},
+    {"url": "https://rp.example/out?state=browser&lang=en", "registered": "https://rp.example/out?lang=en", "accepted": true}
+  ]
+}
