@@ -79,11 +79,23 @@ def _load_module(path: Path):
 
 
 def iter_migration_modules() -> list[Any]:
-    return [
+    modules = [
         _load_module(path)
         for path in sorted(VERSIONS_DIR.glob("*.py"))
         if path.name != "__init__.py"
     ]
+    by_parent = {module.down_revision: module for module in modules}
+    if len(by_parent) != len(modules):
+        raise ValueError("Legacy migrations must not branch")
+    ordered = []
+    parent = None
+    while parent in by_parent:
+        module = by_parent.pop(parent)
+        ordered.append(module)
+        parent = module.revision
+    if by_parent or len({module.revision for module in ordered}) != len(ordered):
+        raise ValueError("Legacy migrations must form a single revision chain")
+    return ordered
 
 
 def expected_table_names() -> list[str]:

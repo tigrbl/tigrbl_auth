@@ -20,7 +20,7 @@ if str(ROOT) not in sys.path:
 
 from tba_auth.cli.certification_evidence import current_environment_identity
 
-REVISION_0007 = "0007_browser_session_cookie_and_auth_code_linkage"
+COMPONENT_ADOPTION_REVISION = "0038_adopt_component_ownership"
 SESSION_COLUMNS = {"session_state_salt", "cookie_secret_hash", "cookie_issued_at", "cookie_rotated_at"}
 AUTH_CODE_COLUMNS = {"session_id"}
 TOKEN_RECORD_COLUMNS = {"refresh_family_id", "refresh_parent_hash", "refresh_successor_hash", "used_at", "reuse_detected_at"}
@@ -65,6 +65,8 @@ def _revision_inventory() -> list[dict[str, Any]]:
 
     inventory: list[dict[str, Any]] = []
     for module in iter_migration_modules():
+        if module.revision == COMPONENT_ADOPTION_REVISION:
+            break
         inventory.append(
             {
                 "revision": getattr(module, "revision", None),
@@ -77,11 +79,10 @@ def _revision_inventory() -> list[dict[str, Any]]:
 
 
 async def _applied_revision_snapshot(revision_order: list[str]) -> list[str]:
-    from tba_app_backend_core.surfaces import surface_api
     from tba_auth.migrations.helpers import applied_revisions
-    from tba_auth.runtime.engine_resolver import resolve_api_provider
+    from tba_runtime_identity.engine_resolver import resolve_default_provider
 
-    provider = resolve_api_provider(surface_api)
+    provider = resolve_default_provider()
     if provider is None:
         return []
     raw_engine, _ = provider.ensure()
@@ -95,6 +96,35 @@ async def _applied_revision_snapshot(revision_order: list[str]) -> list[str]:
     return [revision for revision in revision_order if revision in set(applied)]
 
 
+async def seed_legacy_schema(provider: Any) -> None:
+    """Upgrade an empty certification database to the last reversible revision."""
+    from tba_runtime_identity_storage.migrations.runtime import (
+        _bootstrap_sqlite_schema,
+        _ensure_sqlite_attachment_on_connection,
+        iter_migration_modules,
+    )
+    from tba_storage_core.migrations.helpers import mark_revision
+
+    raw_engine, _ = provider.ensure()
+    attachments = _bootstrap_sqlite_schema(raw_engine)
+
+    def upgrade_legacy(connection: Any) -> None:
+        _ensure_sqlite_attachment_on_connection(connection, attachments)
+        for module in iter_migration_modules():
+            if module.revision == COMPONENT_ADOPTION_REVISION:
+                break
+            module.upgrade(connection)
+            mark_revision(connection, module.revision)
+
+    begin = raw_engine.begin()
+    if hasattr(begin, "__aenter__"):
+        async with begin as connection:
+            await connection.run_sync(upgrade_legacy)
+    else:
+        with begin as connection:
+            upgrade_legacy(connection)
+
+
 async def _exercise_backend(
     backend: str,
     database_url: str,
@@ -106,10 +136,8 @@ async def _exercise_backend(
     downgrade_target_revision: str | None,
 ) -> dict[str, Any]:
     from tigrbl.engine import Engine, EngineSpec
-    from tba_auth.app import app
-    from tba_app_backend_core.surfaces import surface_api
-    from tba_auth.migrations import apply_all_async, downgrade_one_async
-    from tba_auth.runtime.engine_resolver import register_api_provider, resolve_api_provider
+    from tba_runtime_identity.engine_resolver import resolve_default_provider, set_default_provider
+    from tba_runtime_identity_storage.migrations.runtime import apply_all_async, downgrade_one_async
 
     backend_dir = artifact_dir / backend
     backend_dir.mkdir(parents=True, exist_ok=True)
@@ -119,12 +147,8 @@ async def _exercise_backend(
         spec = EngineSpec.from_any(database_url)
         engine = Engine(spec)
         provider = engine.provider
-        original_surface = resolve_api_provider(surface_api)
-        original_app = resolve_api_provider(app)
-        register_api_provider(surface_api, provider)
-        register_api_provider(app, provider)
-        setattr(surface_api, "_ddl_executed", False)
-        await surface_api.initialize()
+        original_provider = resolve_default_provider()
+        set_default_provider(provider)
         try:
             yield provider
         finally:
@@ -143,9 +167,7 @@ async def _exercise_backend(
             dispose_result = raw_engine.dispose()
             if inspect.isawaitable(dispose_result):
                 await dispose_result
-            register_api_provider(surface_api, original_surface or provider)
-            register_api_provider(app, original_app or provider)
-            setattr(surface_api, "_ddl_executed", False)
+            set_default_provider(original_provider)
 
     result: dict[str, Any] = {
         "backend": backend,
@@ -171,14 +193,14 @@ async def _exercise_backend(
     }
 
     try:
-        async with runtime_context():
-            upgrade = await apply_all_async()
+        async with runtime_context() as provider:
+            await seed_legacy_schema(provider)
             upgrade_schema = await _schema_snapshot()
             upgrade_columns = await _column_snapshot()
             upgrade_applied = await _applied_revision_snapshot(revision_order)
             head_revision_after_upgrade = upgrade_applied[-1] if upgrade_applied else None
             upgrade_payload = {
-                "result": asdict(upgrade),
+                "result": {"applied": upgrade_applied, "passed": upgrade_schema["passed"]},
                 "schema": upgrade_schema,
                 "columns": upgrade_columns,
                 "revision_inventory": revision_inventory,
@@ -188,11 +210,11 @@ async def _exercise_backend(
             }
             _write_json(backend_dir / "upgrade.json", upgrade_payload)
             result["artifacts"]["upgrade"] = str((backend_dir / "upgrade.json").relative_to(ROOT))
-            result["upgrade_pending_before"] = list(upgrade.pending_before)
+            result["upgrade_pending_before"] = revision_order
             result["upgrade_applied_revisions"] = upgrade_applied
             result["head_revision_after_upgrade"] = head_revision_after_upgrade
             result["upgrade_passed"] = bool(
-                upgrade.passed
+                upgrade_schema["passed"]
                 and SESSION_COLUMNS <= set(upgrade_columns["sessions"])
                 and AUTH_CODE_COLUMNS <= set(upgrade_columns["auth_codes"])
                 and TOKEN_RECORD_COLUMNS <= set(upgrade_columns["token_records"])
@@ -262,6 +284,7 @@ async def _exercise_backend(
                 and TOKEN_RECORD_COLUMNS <= set(reapply_columns["token_records"])
                 and bool(reapply_schema.get("passed", False))
                 and head_revision_after_reapply == expected_head_revision
+                and COMPONENT_ADOPTION_REVISION in reapply.applied
             )
 
             result["passed"] = bool(result["upgrade_passed"] and result["downgrade_passed"] and result["reapply_passed"])
